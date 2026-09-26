@@ -132,11 +132,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The default value to use in GetValue() if it cannot obtain a value.
         /// </devdoc>
-        [
-            DefaultValue(null),
-            WebCategory("Parameter"),
-            WebSysDescription(SR.Parameter_DefaultValue),
-        ]
+        [DefaultValue(null), WebCategory("Parameter"), WebSysDescription(SR.Parameter_DefaultValue)]
         public string DefaultValue
         {
             get

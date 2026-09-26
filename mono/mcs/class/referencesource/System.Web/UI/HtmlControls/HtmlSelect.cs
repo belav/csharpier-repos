@@ -263,10 +263,7 @@ namespace System.Web.UI.HtmlControls
         ///       Gets the list of option items in an <see langword='HtmlSelect'/> control.
         ///    </para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ListItemCollection Items
         {
             get

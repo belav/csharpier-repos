@@ -698,8 +698,7 @@ public interface IBottom : ILeft, IRight
                         .WithArguments("IBottom.M()", "ILeft.M()"),
                     // (14,9): warning CS0108: 'IRight.M' hides inherited member 'ITop.M()'. Use the new keyword if hiding was intended.
                     //     int M { get; set; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("IRight.M", "ITop.M()")
+                    Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("IRight.M", "ITop.M()")
                 );
         }
 
@@ -741,12 +740,10 @@ public interface IBottom : ILeft, IRight
                         .WithArguments("IBottom.M()", "ILeft.M"),
                     // (9,9): warning CS0108: 'ILeft.M' hides inherited member 'ITop.M()'. Use the new keyword if hiding was intended.
                     //     int M { get; set; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("ILeft.M", "ITop.M()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("ILeft.M", "ITop.M()"),
                     // (14,9): warning CS0108: 'IRight.M' hides inherited member 'ITop.M()'. Use the new keyword if hiding was intended.
                     //     int M { get; set; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("IRight.M", "ITop.M()")
+                    Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("IRight.M", "ITop.M()")
                 );
         }
 
@@ -789,8 +786,7 @@ public interface IBottom : ILeft, IRight
                         .WithArguments("IRight.M()", "ITop.M"),
                     // (9,10): warning CS0108: 'ILeft.M()' hides inherited member 'ITop.M'. Use the new keyword if hiding was intended.
                     //     void M();
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("ILeft.M()", "ITop.M"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("ILeft.M()", "ITop.M"),
                     // (19,10): warning CS0108: 'IBottom.M()' hides inherited member 'ILeft.M()'. Use the new keyword if hiding was intended.
                     //     void M();
                     Diagnostic(ErrorCode.WRN_NewRequired, "M")
@@ -833,16 +829,14 @@ public interface IBottom : ILeft, IRight
                 .VerifyDiagnostics(
                     // (14,9): warning CS0108: 'IRight.M' hides inherited member 'ITop.M'. Use the new keyword if hiding was intended.
                     //     int M { get; set; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("IRight.M", "ITop.M"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("IRight.M", "ITop.M"),
                     // (19,10): warning CS0108: 'IBottom.M()' hides inherited member 'ILeft.M()'. Use the new keyword if hiding was intended.
                     //     void M();
                     Diagnostic(ErrorCode.WRN_NewRequired, "M")
                         .WithArguments("IBottom.M()", "ILeft.M()"),
                     // (9,10): warning CS0108: 'ILeft.M()' hides inherited member 'ITop.M'. Use the new keyword if hiding was intended.
                     //     void M();
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("ILeft.M()", "ITop.M")
+                    Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("ILeft.M()", "ITop.M")
                 );
         }
 
@@ -878,8 +872,7 @@ public interface Derived2 : Base
                 Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("Derived2.M", "Base.M"),
                 // (10,11): warning CS0108: 'Derived1.M()' hides inherited member 'Base.M()'. Use the new keyword if hiding was intended.
                 //      void M();
-                Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                    .WithArguments("Derived1.M()", "Base.M()")
+                Diagnostic(ErrorCode.WRN_NewRequired, "M").WithArguments("Derived1.M()", "Base.M()")
             );
 
             var global = comp.GlobalNamespace;

@@ -1159,8 +1159,7 @@ class Driver
                         .WithLocation(19, 26),
                     // (20,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
                     //         fixed (int* innerPtr1 = &structLocal.F) { } // 6, 7
-                    Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&structLocal.F")
-                        .WithLocation(20, 33),
+                    Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&structLocal.F").WithLocation(20, 33),
                     // (20,34): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
                     //         fixed (int* innerPtr1 = &structLocal.F) { } // 6, 7
                     Diagnostic(ErrorCode.WRN_AddressOfInAsync, "structLocal.F")
@@ -1181,8 +1180,7 @@ class Driver
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&local").WithLocation(16, 33),
                     // (20,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
                     //         fixed (int* innerPtr1 = &structLocal.F) { } // 6, 7
-                    Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&structLocal.F")
-                        .WithLocation(20, 33)
+                    Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&structLocal.F").WithLocation(20, 33)
                 );
         }
 

@@ -4567,8 +4567,7 @@ unsafe class C
             comp.VerifyDiagnostics(
                 // (6,20): error CS8521: Pattern-matching is not permitted for pointer types.
                 //         _ = ptr is { } _;
-                Diagnostic(ErrorCode.ERR_PointerTypeInPatternMatching, "{ } _")
-                    .WithLocation(6, 20)
+                Diagnostic(ErrorCode.ERR_PointerTypeInPatternMatching, "{ } _").WithLocation(6, 20)
             );
 
             var syntaxTree = comp.SyntaxTrees[0];
@@ -4830,9 +4829,7 @@ class E<T> where T : struct {}
                     .WithLocation(6, 27),
                 // (6,30): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //     void M1(delegate*<C*, S> ptr) {}
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "ptr")
-                    .WithArguments("C")
-                    .WithLocation(6, 30),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "ptr").WithArguments("C").WithLocation(6, 30),
                 // (8,32): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
                 //     void M3<T>(delegate*<D<T>> ptr) {}
                 Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "ptr")
@@ -5394,9 +5391,7 @@ unsafe class C
             comp.VerifyDiagnostics(
                 // (6,38): error CS1003: Syntax error, ',' expected
                 //         delegate*<void> ptr = new () => {};
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(6, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(6, 38),
                 // (6,41): error CS1002: ; expected
                 //         delegate*<void> ptr = new () => {};
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(6, 41),

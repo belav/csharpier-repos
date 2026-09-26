@@ -164,11 +164,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The method to execute when Delete() is called.
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Data"),
-            WebSysDescription(SR.ObjectDataSource_DeleteMethod),
-        ]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.ObjectDataSource_DeleteMethod)]
         public string DeleteMethod
         {
             get { return GetView().DeleteMethod; }
@@ -260,11 +256,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The method to execute when Insert() is called.
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Data"),
-            WebSysDescription(SR.ObjectDataSource_InsertMethod),
-        ]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.ObjectDataSource_InsertMethod)]
         public string InsertMethod
         {
             get { return GetView().InsertMethod; }
@@ -337,11 +329,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The method to execute when Select() is called.
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Data"),
-            WebSysDescription(SR.ObjectDataSource_SelectMethod),
-        ]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.ObjectDataSource_SelectMethod)]
         public string SelectMethod
         {
             get { return GetView().SelectMethod; }
@@ -426,11 +414,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The method to execute when Update() is called.
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Data"),
-            WebSysDescription(SR.ObjectDataSource_UpdateMethod),
-        ]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.ObjectDataSource_UpdateMethod)]
         public string UpdateMethod
         {
             get { return GetView().UpdateMethod; }

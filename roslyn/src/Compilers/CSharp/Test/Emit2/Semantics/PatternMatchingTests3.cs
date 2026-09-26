@@ -3119,9 +3119,7 @@ class C
             compilation.VerifyDiagnostics(
                 // (5,6): error CS1525: Invalid expression term '|'
                 //     {
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
-                    .WithArguments("|")
-                    .WithLocation(5, 6),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "").WithArguments("|").WithLocation(5, 6),
                 // (6,18): error CS1525: Invalid expression term '||'
                 //         | 3 => 3,
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
@@ -7051,17 +7049,13 @@ public class C {
             compilation.VerifyDiagnostics(
                 // (6,18): error CS1003: Syntax error, ',' expected
                 //                 2=>2,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(6, 18),
                 // (6,18): error CS8504: Pattern missing
                 //                 2=>2,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(6, 18),
                 // (13,18): error CS1003: Syntax error, ',' expected
                 //                 2=>2,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(13, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(13, 18),
                 // (13,18): error CS8504: Pattern missing
                 //                 2=>2,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(13, 18)

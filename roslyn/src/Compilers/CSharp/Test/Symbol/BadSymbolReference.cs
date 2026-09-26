@@ -732,48 +732,37 @@ public interface CL3_I1 : CL2_I1
             {
                 // (2,23): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 // public class CL3_C1 : CL2_C1
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (9,19): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 //     public static CL2_C1 Test2()
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (14,12): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 //     public CL2_C1 Test3()
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (22,19): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 //     public static CL2_C1 Test1()
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (37,19): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 //     public static CL2_C1 Test3()
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (27,12): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 //     public CL2_C1 x;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (76,23): error CS0246: The type or namespace name 'CL2_I1' could not be found (are you missing a using directive or an assembly reference?)
                 // public class CL3_C3 : CL2_I1, CL2_I2
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I1")
-                    .WithArguments("CL2_I1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I1").WithArguments("CL2_I1"),
                 // (76,31): error CS0246: The type or namespace name 'CL2_I2' could not be found (are you missing a using directive or an assembly reference?)
                 // public class CL3_C3 : CL2_I1, CL2_I2
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I2")
-                    .WithArguments("CL2_I2"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I2").WithArguments("CL2_I2"),
                 // (87,29): error CS0246: The type or namespace name 'CL2_C1' could not be found (are you missing a using directive or an assembly reference?)
                 // public delegate void CL3_D1(CL2_C1 x);
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1")
-                    .WithArguments("CL2_C1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_C1").WithArguments("CL2_C1"),
                 // (89,23): error CS0246: The type or namespace name 'CL2_I1' could not be found (are you missing a using directive or an assembly reference?)
                 // public struct CL3_S1: CL2_I1
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I1")
-                    .WithArguments("CL2_I1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I1").WithArguments("CL2_I1"),
                 // (92,27): error CS0246: The type or namespace name 'CL2_I1' could not be found (are you missing a using directive or an assembly reference?)
                 // public interface CL3_I1 : CL2_I1
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I1")
-                    .WithArguments("CL2_I1"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CL2_I1").WithArguments("CL2_I1"),
             };
 
             cl3BadCompilation2.VerifyDiagnostics(errors3);

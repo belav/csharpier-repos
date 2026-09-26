@@ -585,9 +585,7 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file class D { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D")
-                .WithArguments("C.D")
-                .WithLocation(6, 16),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16),
             // 0.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file class D { } // 1
             Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16)
@@ -675,9 +673,7 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(6,15): error CS9054: File-local type 'C.E' must be defined in a top level type; 'C.E' is a nested type.
             //     file enum E { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "E")
-                .WithArguments("C.E")
-                .WithLocation(6, 15),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15),
             // 0.cs(6,15): error CS9054: File-local type 'C.E' must be defined in a top level type; 'C.E' is a nested type.
             //     file enum E { } // 1
             Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15)
@@ -803,9 +799,7 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(6,24): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file delegate void D(); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D")
-                .WithArguments("C.D")
-                .WithLocation(6, 24),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24),
             // 0.cs(6,24): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file delegate void D(); // 1
             Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24)
@@ -4831,9 +4825,7 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,19): error CS9054: File-local type 'C1' must be defined in a top level type; 'C1' is a nested type.
             // static file class C1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C1")
-                .WithArguments("C1")
-                .WithLocation(5, 19),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C1").WithArguments("C1").WithLocation(5, 19),
             // (7,24): error CS1109: Extension methods must be defined in a top level static class; C1 is a nested class
             //     public static void M(this string s) { }
             Diagnostic(ErrorCode.ERR_ExtensionMethodsDecl, "M")
@@ -5490,9 +5482,7 @@ public partial class C
         comp1.VerifyDiagnostics(
             // file1.cs(5,9): error CS0103: The name 'C1' does not exist in the current context
             //         C1.M1();
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "C1")
-                .WithArguments("C1")
-                .WithLocation(5, 9)
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "C1").WithArguments("C1").WithLocation(5, 9)
         );
         var retargeted = comp1.GetMember<NamedTypeSymbol>("C1");
         Assert.IsType<RetargetingNamedTypeSymbol>(retargeted);

@@ -147,25 +147,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(1, 19),
                 // (1,19): error CS1003: Syntax error, ',' expected
                 // void F(ref scoped int b, in scoped int c, out scoped int d) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(1, 19),
                 // (1,36): error CS1001: Identifier expected
                 // void F(ref scoped int b, in scoped int c, out scoped int d) { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(1, 36),
                 // (1,36): error CS1003: Syntax error, ',' expected
                 // void F(ref scoped int b, in scoped int c, out scoped int d) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(1, 36),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(1, 36),
                 // (1,54): error CS1001: Identifier expected
                 // void F(ref scoped int b, in scoped int c, out scoped int d) { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(1, 54),
                 // (1,54): error CS1003: Syntax error, ',' expected
                 // void F(ref scoped int b, in scoped int c, out scoped int d) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(1, 54)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(1, 54)
             );
 
             N(SyntaxKind.MethodDeclaration);
@@ -511,9 +505,7 @@ ref @scoped F4() { }";
                 TestOptions.Regular11,
                 // (1,22): error CS1003: Syntax error, ',' expected
                 // void F(scoped scoped ref int i) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(1, 22)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 22)
             );
 
             N(SyntaxKind.MethodDeclaration);
@@ -869,9 +861,7 @@ ref @scoped F4() { }";
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "ref").WithLocation(1, 19),
                 // (1,19): error CS1003: Syntax error, ',' expected
                 // void F(out scoped ref int a) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 19)
             );
 
             N(SyntaxKind.MethodDeclaration);
@@ -3046,9 +3036,7 @@ scoped scoped var b;
                 TestOptions.Regular11,
                 // (1,15): error CS1003: Syntax error, ',' expected
                 // scoped scoped int a;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(1, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(1, 15),
                 // (2,19): error CS1003: Syntax error, ',' expected
                 // scoped scoped var b;
                 Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(2, 19)
@@ -3204,9 +3192,7 @@ scoped scoped ref R z = ref x;
                 Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 17),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // scoped scoped ref R z = ref x;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 15)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 15)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -6204,9 +6190,7 @@ M(out ref scoped int b);
                     .WithLocation(2, 7),
                 // (2,18): error CS1003: Syntax error, ',' expected
                 // M(out ref scoped int b);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 18),
                 // (2,18): error CS1525: Invalid expression term 'int'
                 // M(out ref scoped int b);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -6657,9 +6641,7 @@ M(out @scoped int a);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // M(out @scoped int a);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 15),
                 // (2,15): error CS1525: Invalid expression term 'int'
                 // M(out @scoped int a);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -6794,9 +6776,7 @@ M(out @scoped ref int b);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // M(out @scoped ref int b);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 15),
                 // (2,19): error CS1525: Invalid expression term 'int'
                 // M(out @scoped ref int b);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -6933,9 +6913,7 @@ M(out @scoped ref readonly int a);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // M(out @scoped ref readonly int a);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 15),
                 // (2,19): error CS1525: Invalid expression term 'readonly'
                 // M(out @scoped ref readonly int a);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
@@ -7611,9 +7589,7 @@ M(out scoped scoped int a);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,21): error CS1003: Syntax error, ',' expected
                 // M(out scoped scoped int a);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 21),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 21),
                 // (2,21): error CS1525: Invalid expression term 'int'
                 // M(out scoped scoped int a);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -7841,9 +7817,7 @@ M(scoped int a);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,10): error CS1003: Syntax error, ',' expected
                 // M(scoped int a);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 10),
                 // (2,10): error CS1525: Invalid expression term 'int'
                 // M(scoped int a);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -7917,9 +7891,7 @@ M(scoped ref int a);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,10): error CS1003: Syntax error, ',' expected
                 // M(scoped ref int a);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 10),
                 // (2,14): error CS1525: Invalid expression term 'int'
                 // M(scoped ref int a);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -8139,9 +8111,7 @@ M(scoped ref S a);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,10): error CS1003: Syntax error, ',' expected
                 // M(scoped ref S a);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 10),
                 // (2,16): error CS1003: Syntax error, ',' expected
                 // M(scoped ref S a);
                 Diagnostic(ErrorCode.ERR_SyntaxError, "a").WithArguments(",").WithLocation(2, 16)
@@ -8717,9 +8687,7 @@ for (ref scoped int b;;);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(2, 17),
                 // (2,17): error CS1003: Syntax error, ',' expected
                 // for (ref scoped int b;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 17)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 17)
             );
 
             N(SyntaxKind.ForStatement);
@@ -8858,9 +8826,7 @@ for (ref readonly scoped int c;;);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(2, 26),
                 // (2,26): error CS1003: Syntax error, ',' expected
                 // for (ref readonly scoped int c;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 26)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 26)
             );
 
             N(SyntaxKind.ForStatement);
@@ -9001,9 +8967,7 @@ for (@scoped int a;;);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,14): error CS1003: Syntax error, ',' expected
                 // for (@scoped int a;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 14),
                 // (2,14): error CS1525: Invalid expression term 'int'
                 // for (@scoped int a;;);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -9102,9 +9066,7 @@ for (@scoped ref int b;;);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,14): error CS1003: Syntax error, ',' expected
                 // for (@scoped ref int b;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 14),
                 // (2,14): error CS1525: Invalid expression term 'ref'
                 // for (@scoped ref int b;;);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref int")
@@ -9213,9 +9175,7 @@ for (@scoped ref readonly int a;;);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,14): error CS1003: Syntax error, ',' expected
                 // for (@scoped ref readonly int a;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 14),
                 // (2,14): error CS1525: Invalid expression term 'ref'
                 // for (@scoped ref readonly int a;;);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
@@ -9233,9 +9193,7 @@ for (@scoped ref readonly int a;;);
                     .WithLocation(2, 18),
                 // (2,27): error CS1003: Syntax error, ',' expected
                 // for (@scoped ref readonly int a;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 27),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 27),
                 // (2,27): error CS1525: Invalid expression term 'int'
                 // for (@scoped ref readonly int a;;);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -9775,9 +9733,7 @@ for (scoped scoped int a;;);
                 TestOptions.Regular.WithLanguageVersion(langVersion),
                 // (2,20): error CS1003: Syntax error, ',' expected
                 // for (scoped scoped int a;;);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 20)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 20)
             );
 
             N(SyntaxKind.ForStatement);
@@ -11703,9 +11659,7 @@ readonly scoped record struct C();
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(1, 17),
                 // (1,17): error CS1003: Syntax error, '(' expected
                 // delegate scoped int A();
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments("(")
-                    .WithLocation(1, 17),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments("(").WithLocation(1, 17),
                 // (1,22): error CS1003: Syntax error, ',' expected
                 // delegate scoped int A();
                 Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(",").WithLocation(1, 22),
@@ -11823,9 +11777,7 @@ readonly scoped record struct C();
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(1, 21),
                 // (1,21): error CS1003: Syntax error, '(' expected
                 // delegate ref scoped int B();
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments("(")
-                    .WithLocation(1, 21),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments("(").WithLocation(1, 21),
                 // (1,26): error CS1003: Syntax error, ',' expected
                 // delegate ref scoped int B();
                 Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(",").WithLocation(1, 26),
@@ -14223,9 +14175,7 @@ ref struct R2
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(4, 18),
                 // (4,18): error CS1003: Syntax error, '[' expected
                 //     fixed scoped int F3[2];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments("[")
-                    .WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments("[").WithLocation(4, 18),
                 // (4,18): error CS1525: Invalid expression term 'int'
                 //     fixed scoped int F3[2];
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -14233,9 +14183,7 @@ ref struct R2
                     .WithLocation(4, 18),
                 // (4,22): error CS1003: Syntax error, ',' expected
                 //     fixed scoped int F3[2];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "F3")
-                    .WithArguments(",")
-                    .WithLocation(4, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "F3").WithArguments(",").WithLocation(4, 22),
                 // (4,27): error CS1003: Syntax error, ',' expected
                 //     fixed scoped int F3[2];
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 27),
@@ -14341,9 +14289,7 @@ ref struct R2
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "ref").WithLocation(4, 18),
                 // (4,18): error CS1003: Syntax error, '[' expected
                 //     fixed scoped ref int F3[2];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments("[")
-                    .WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments("[").WithLocation(4, 18),
                 // (4,18): error CS1525: Invalid expression term 'ref'
                 //     fixed scoped ref int F3[2];
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref int")
@@ -14356,9 +14302,7 @@ ref struct R2
                     .WithLocation(4, 22),
                 // (4,26): error CS1003: Syntax error, ',' expected
                 //     fixed scoped ref int F3[2];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "F3")
-                    .WithArguments(",")
-                    .WithLocation(4, 26),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "F3").WithArguments(",").WithLocation(4, 26),
                 // (4,31): error CS1003: Syntax error, ',' expected
                 //     fixed scoped ref int F3[2];
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 31),
@@ -15083,9 +15027,7 @@ fixed (scoped int* a = b);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(2, 15),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // fixed (scoped int* a = b);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(2, 15)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(2, 15)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -15133,9 +15075,7 @@ fixed (scoped ref int* a = b);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "ref").WithLocation(2, 15),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // fixed (scoped ref int* a = b);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 15)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 15)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -15183,9 +15123,7 @@ fixed (scoped ref readonly int* a = b);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "ref").WithLocation(2, 15),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // fixed (scoped ref readonly int* a = b);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 15)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 15)
             );
 
             N(SyntaxKind.CompilationUnit);

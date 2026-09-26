@@ -693,9 +693,7 @@ namespace System.Web.UI.Design.MobileControls
             )
             {
                 // if the filter name is legal
-                ((DeviceFilterTreeNode)e.Node)
-                    .DeviceFilter
-                    .Name = e.Label;
+                ((DeviceFilterTreeNode)e.Node).DeviceFilter.Name = e.Label;
                 return;
             }
             // if the filter name was duplicate or not legal

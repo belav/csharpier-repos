@@ -6447,8 +6447,7 @@ class Test
                     .WithArguments("Bar", "Goo"),
                 // (38,21): error CS0077: The as operator must be used with a reference type or nullable type ('Bar' is a non-nullable value type)
                 //         object a2 = 1 as Bar;
-                Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "1 as Bar")
-                    .WithArguments("Bar"),
+                Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "1 as Bar").WithArguments("Bar"),
                 // (39,21): error CS0039: Cannot convert type 'Bar' to 'Goo2' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object a3 = numeral as Goo2;
                 Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo2")
@@ -7374,8 +7373,7 @@ class op_UnsignedRightShift
                         .WithArguments("op_Division"),
                     // (40,29): error CS0542: 'op_Modulus': member names cannot be the same as their enclosing type
                     // 	public static int operator % (op_Modulus c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%")
-                        .WithArguments("op_Modulus"),
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%").WithArguments("op_Modulus"),
                     // (44,29): error CS0542: 'op_ExclusiveOr': member names cannot be the same as their enclosing type
                     // 	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "^")

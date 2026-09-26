@@ -237,9 +237,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     // Set field offset even if the attribute specifies an invalid value, so that
                     // post-validation knows that the attribute is applied and reports better errors.
-                    arguments
-                        .GetOrCreateData<FieldWellKnownAttributeData>()
-                        .SetFieldOffset(offset);
+                    arguments.GetOrCreateData<FieldWellKnownAttributeData>().SetFieldOffset(offset);
                 }
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.MarshalAsAttribute))

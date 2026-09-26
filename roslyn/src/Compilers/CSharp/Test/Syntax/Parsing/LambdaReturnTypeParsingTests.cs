@@ -220,9 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 TestOptions.Regular9,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // T x => y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T")
-                    .WithArguments("x")
-                    .WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T").WithArguments("x").WithLocation(1, 1)
             );
             verify();
 
@@ -231,9 +229,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // T x => y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T")
-                    .WithArguments("x")
-                    .WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T").WithArguments("x").WithLocation(1, 1)
             );
             verify();
 
@@ -255,9 +251,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 source,
                 // (1,1): error CS1073: Unexpected token 'F'
                 // T F() => default
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T")
-                    .WithArguments("F")
-                    .WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T").WithArguments("F").WithLocation(1, 1)
             );
 
             N(SyntaxKind.IdentifierName);
@@ -1554,9 +1548,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 1),
                 // (1,5): error CS1525: Invalid expression term '?'
                 // int*? () => x : y
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
-                    .WithArguments("?")
-                    .WithLocation(1, 5)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?").WithArguments("?").WithLocation(1, 5)
             );
 
             N(SyntaxKind.ConditionalExpression);
@@ -4375,9 +4367,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 source,
                 // (1,24): error CS1003: Syntax error, ',' expected
                 // x switch { int () => 0 => 1 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(1, 24),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 24),
                 // (1,24): error CS8504: Pattern missing
                 // x switch { int () => 0 => 1 }
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(1, 24)
@@ -4516,9 +4506,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 12),
                 // (1,32): error CS1003: Syntax error, ',' expected
                 // x switch { static T? () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(1, 32),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 32),
                 // (1,32): error CS8504: Pattern missing
                 // x switch { static T? () => { } => 1 }
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(1, 32)
@@ -5373,9 +5361,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     parseOptions,
                     // (1,7): error CS1003: Syntax error, ',' expected
                     // F(var x => x)
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "x")
-                        .WithArguments(",")
-                        .WithLocation(1, 7)
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 7)
                 );
 
                 N(SyntaxKind.InvocationExpression);

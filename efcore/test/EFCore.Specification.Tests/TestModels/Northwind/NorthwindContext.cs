@@ -93,9 +93,7 @@ public class NorthwindContext : PoolableDbContext
         // Called explicitly from filter test fixtures. Code is here
         // so we can capture TenantPrefix in filter exprs (simulates OnModelCreating).
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasQueryFilter(c => c.CompanyName.StartsWith(TenantPrefix));
+        modelBuilder.Entity<Customer>().HasQueryFilter(c => c.CompanyName.StartsWith(TenantPrefix));
         modelBuilder
             .Entity<Order>()
             .HasQueryFilter(o => o.Customer != null && o.Customer.CompanyName != null);

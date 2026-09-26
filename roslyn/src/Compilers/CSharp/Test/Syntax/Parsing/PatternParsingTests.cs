@@ -2776,9 +2776,7 @@ case KeyValuePair<String, DateTime>[] pairs2:
                 TestOptions.RegularWithoutRecursivePatterns,
                 // (1,13): error CS1003: Syntax error, '=>' expected
                 // 1 switch { a?b:c => d }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "?")
-                    .WithArguments("=>")
-                    .WithLocation(1, 13),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "?").WithArguments("=>").WithLocation(1, 13),
                 // (1,13): error CS1525: Invalid expression term '?'
                 // 1 switch { a?b:c => d }
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
@@ -7019,9 +7017,7 @@ switch (e)
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 12),
                 // (1,12): error CS1003: Syntax error, '=>' expected
                 // 1 switch { , }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
-                    .WithArguments("=>")
-                    .WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>").WithLocation(1, 12),
                 // (1,12): error CS1525: Invalid expression term ','
                 // 1 switch { , }
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
@@ -7257,9 +7253,7 @@ switch (e)
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 19),
                 // (1,19): error CS1003: Syntax error, '=>' expected
                 // e switch { 1 => 2,, }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
-                    .WithArguments("=>")
-                    .WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>").WithLocation(1, 19),
                 // (1,19): error CS1525: Invalid expression term ','
                 // e switch { 1 => 2,, }
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
@@ -8225,9 +8219,7 @@ switch (e)
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 12),
                 // (1,12): error CS1003: Syntax error, '=>' expected
                 // (e switch {,)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
-                    .WithArguments("=>")
-                    .WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>").WithLocation(1, 12),
                 // (1,12): error CS1525: Invalid expression term ','
                 // (e switch {,)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
@@ -8281,9 +8273,7 @@ switch (e)
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, '=>' expected
                 // e switch {,
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
-                    .WithArguments("=>")
-                    .WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>").WithLocation(1, 11),
                 // (1,11): error CS1525: Invalid expression term ','
                 // e switch {,
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
@@ -8550,9 +8540,7 @@ switch (e)
                 "o is {} + d",
                 // (1,9): error CS1073: Unexpected token '+'
                 // o is {} + d
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+")
-                    .WithArguments("+")
-                    .WithLocation(1, 9)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+").WithArguments("+").WithLocation(1, 9)
             );
             N(SyntaxKind.AddExpression);
             {
@@ -9265,17 +9253,13 @@ switch (e)
                     .WithLocation(2, 9),
                 // (2,13): error CS1003: Syntax error, ',' expected
                 //     < 0 < 0 => 0,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(2, 13),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(2, 13),
                 // (2,13): error CS8504: Pattern missing
                 //     < 0 < 0 => 0,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(2, 13),
                 // (3,10): error CS1003: Syntax error, '=>' expected
                 //     == 4 < 4 => 4,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "<")
-                    .WithArguments("=>")
-                    .WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "<").WithArguments("=>").WithLocation(3, 10),
                 // (3,10): error CS1525: Invalid expression term '<'
                 //     == 4 < 4 => 4,
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
@@ -9283,17 +9267,13 @@ switch (e)
                     .WithLocation(3, 10),
                 // (3,14): error CS1003: Syntax error, ',' expected
                 //     == 4 < 4 => 4,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(3, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(3, 14),
                 // (3,14): error CS8504: Pattern missing
                 //     == 4 < 4 => 4,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(3, 14),
                 // (4,10): error CS1003: Syntax error, '=>' expected
                 //     != 5 < 5 => 5,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "<")
-                    .WithArguments("=>")
-                    .WithLocation(4, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "<").WithArguments("=>").WithLocation(4, 10),
                 // (4,10): error CS1525: Invalid expression term '<'
                 //     != 5 < 5 => 5,
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
@@ -9301,9 +9281,7 @@ switch (e)
                     .WithLocation(4, 10),
                 // (4,14): error CS1003: Syntax error, ',' expected
                 //     != 5 < 5 => 5,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(4, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(4, 14),
                 // (4,14): error CS8504: Pattern missing
                 //     != 5 < 5 => 5,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(4, 14)

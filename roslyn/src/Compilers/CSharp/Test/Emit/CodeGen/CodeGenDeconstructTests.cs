@@ -8505,8 +8505,7 @@ class Program
             compilation.VerifyDiagnostics(
                 // (6,34): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         foreach ((M(out var x1), args is var x2, _) in new[] { (1, 2, 3) })
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "args is var x2")
-                    .WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "args is var x2").WithLocation(6, 34),
                 // (6,34): error CS0029: Cannot implicitly convert type 'int' to 'bool'
                 //         foreach ((M(out var x1), args is var x2, _) in new[] { (1, 2, 3) })
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "args is var x2")

@@ -14718,8 +14718,7 @@ public class X
                 .Verify(
                     // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //             var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(87, 13),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
                     // (29,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //         using (var d,e(Dummy(true is var x4, x4)))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
@@ -15189,8 +15188,7 @@ public unsafe class X
                 .Verify(
                     // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //             var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(87, 13),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
                     // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //         fixed (int* p,e(Dummy(true is var x4 && x4)))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
@@ -16173,8 +16171,7 @@ public class X
                         .WithLocation(69, 12),
                     // (70,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                     //         int[x10] _15;
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x10]")
-                        .WithLocation(70, 12),
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x10]").WithLocation(70, 12),
                     // (75,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                     //         int[true is var x11, x11] x11;
                     Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x11, x11]")

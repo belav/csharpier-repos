@@ -1034,9 +1034,7 @@ F(true);";
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L").WithLocation(5, 1),
                 // (3,17): error CS0159: No such label 'L' within the scope of the goto statement
                 //     if (b) goto L;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "L")
-                    .WithArguments("L")
-                    .WithLocation(3, 17)
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "L").WithArguments("L").WithLocation(3, 17)
             );
         }
 
@@ -1058,9 +1056,7 @@ goto L;";
             compilation.VerifyDiagnostics(
                 // (6,6): error CS0159: No such label 'L' within the scope of the goto statement
                 // goto L;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "L")
-                    .WithArguments("L")
-                    .WithLocation(6, 6),
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "L").WithArguments("L").WithLocation(6, 6),
                 // (3,1): warning CS0164: This label has not been referenced
                 // L:
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L").WithLocation(3, 1)

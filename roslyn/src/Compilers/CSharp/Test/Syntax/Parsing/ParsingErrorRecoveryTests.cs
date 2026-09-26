@@ -4021,8 +4021,7 @@ class C
                     Diagnostic(ErrorCode.ERR_FixedMustInit, "v").WithLocation(1, 30),
                     // (1,31): warning CS0642: Possible mistaken empty statement
                     // class c { void m() { fixed(t v; } }
-                    Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";")
-                        .WithLocation(1, 31)
+                    Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";").WithLocation(1, 31)
                 );
         }
 
@@ -5685,9 +5684,7 @@ class C
             file.Errors()
                 .Verify(
                     // error CS1525: Invalid expression term ';'
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm)
-                        .WithArguments(";")
-                        .WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm).WithArguments(";").WithLocation(1, 1),
                     // error CS1026: ) expected
                     Diagnostic(ErrorCode.ERR_CloseParenExpected).WithLocation(1, 1)
                 );

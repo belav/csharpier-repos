@@ -1956,9 +1956,7 @@ class X
         csCompilation.VerifyEmitDiagnostics(
             // (6,28): error CS0021: Cannot apply indexing with [] to an expression of type 'Test1'
             //         _ = new Test1() is [0];
-            Diagnostic(ErrorCode.ERR_BadIndexLHS, "[0]")
-                .WithArguments("Test1")
-                .WithLocation(6, 28),
+            Diagnostic(ErrorCode.ERR_BadIndexLHS, "[0]").WithArguments("Test1").WithLocation(6, 28),
             // (7,13): error CS0021: Cannot apply indexing with [] to an expression of type 'Test1'
             //         _ = new Test1()[0];
             Diagnostic(ErrorCode.ERR_BadIndexLHS, "new Test1()[0]")
@@ -3252,14 +3250,10 @@ class X
         compilation.VerifyEmitDiagnostics(
             // (20,13): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
             //         _ = t[^1]; // 1
-            Diagnostic(ErrorCode.ERR_BadIndexLHS, "t[^1]")
-                .WithArguments("T")
-                .WithLocation(20, 13),
+            Diagnostic(ErrorCode.ERR_BadIndexLHS, "t[^1]").WithArguments("T").WithLocation(20, 13),
             // (26,13): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
             //         _ = t[^1]; // 2
-            Diagnostic(ErrorCode.ERR_BadIndexLHS, "t[^1]")
-                .WithArguments("T")
-                .WithLocation(26, 13),
+            Diagnostic(ErrorCode.ERR_BadIndexLHS, "t[^1]").WithArguments("T").WithLocation(26, 13),
             // (30,13): error CS8518: An expression of type 'T' can never match the provided pattern.
             //         _ = t is { Count: -1 }; // 3
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "t is { Count: -1 }")
@@ -3649,22 +3643,16 @@ class X
                 .WithLocation(13, 13),
             // (13,26): error CS8780: A variable may not be declared within a 'not' or 'or' pattern.
             //         if (a is [not {} y, .. not {} z] x)
-            Diagnostic(ErrorCode.ERR_DesignatorBeneathPatternCombinator, "y")
-                .WithLocation(13, 26),
+            Diagnostic(ErrorCode.ERR_DesignatorBeneathPatternCombinator, "y").WithLocation(13, 26),
             // (13,39): error CS8780: A variable may not be declared within a 'not' or 'or' pattern.
             //         if (a is [not {} y, .. not {} z] x)
-            Diagnostic(ErrorCode.ERR_DesignatorBeneathPatternCombinator, "z")
-                .WithLocation(13, 39),
+            Diagnostic(ErrorCode.ERR_DesignatorBeneathPatternCombinator, "z").WithLocation(13, 39),
             // (16,19): error CS0165: Use of unassigned local variable 'x'
             //              _ = (x, y, z); // 2
-            Diagnostic(ErrorCode.ERR_UseDefViolation, "x")
-                .WithArguments("x")
-                .WithLocation(16, 19),
+            Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x").WithLocation(16, 19),
             // (16,22): error CS0165: Use of unassigned local variable 'y'
             //              _ = (x, y, z); // 2
-            Diagnostic(ErrorCode.ERR_UseDefViolation, "y")
-                .WithArguments("y")
-                .WithLocation(16, 22),
+            Diagnostic(ErrorCode.ERR_UseDefViolation, "y").WithArguments("y").WithLocation(16, 22),
             // (16,25): error CS0165: Use of unassigned local variable 'z'
             //              _ = (x, y, z); // 2
             Diagnostic(ErrorCode.ERR_UseDefViolation, "z").WithArguments("z").WithLocation(16, 25)
@@ -7737,8 +7725,7 @@ class C
         comp.VerifyEmitDiagnostics(
             // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
             //             case [var unreachable]:
-            Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[var unreachable]")
-                .WithLocation(10, 18),
+            Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[var unreachable]").WithLocation(10, 18),
             // (17,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
             //             case [var unreachable]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[var unreachable]").WithLocation(17, 18)
@@ -8381,8 +8368,7 @@ class Derived : Base, I2
                 .WithLocation(73, 18),
             // (85,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
             //             case [Derived(1, _) s]: // 9
-            Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived(1, _) s]")
-                .WithLocation(85, 18),
+            Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived(1, _) s]").WithLocation(85, 18),
             // (95,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
             //             case [Derived { F3: (1, _) } s]: // 10
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived { F3: (1, _) } s]")
@@ -10405,9 +10391,7 @@ if ((b is [var z] and z) is [true])
                 .WithLocation(4, 27),
             // (4,27): error CS0021: Cannot apply indexing with [] to an expression of type 'bool'
             // if (a is [var x] and x is [1])
-            Diagnostic(ErrorCode.ERR_BadIndexLHS, "[1]")
-                .WithArguments("bool")
-                .WithLocation(4, 27),
+            Diagnostic(ErrorCode.ERR_BadIndexLHS, "[1]").WithArguments("bool").WithLocation(4, 27),
             // (8,23): error CS0029: Cannot implicitly convert type 'int' to 'int[]'
             // if ((a is [var y] and y) is .. 1)
             Diagnostic(ErrorCode.ERR_NoImplicitConv, "y")
@@ -10415,9 +10399,7 @@ if ((b is [var z] and z) is [true])
                 .WithLocation(8, 23),
             // (8,29): error CS0021: Cannot apply indexing with [] to an expression of type 'bool'
             // if ((a is [var y] and y) is .. 1)
-            Diagnostic(ErrorCode.ERR_BadIndexLHS, ".. 1")
-                .WithArguments("bool")
-                .WithLocation(8, 29),
+            Diagnostic(ErrorCode.ERR_BadIndexLHS, ".. 1").WithArguments("bool").WithLocation(8, 29),
             // (13,23): error CS0029: Cannot implicitly convert type 'bool' to 'bool[]'
             // if ((b is [var z] and z) is [true])
             Diagnostic(ErrorCode.ERR_NoImplicitConv, "z")

@@ -923,9 +923,7 @@ class C
             comp.VerifyDiagnostics(
                 // (7,9): error CS0177: The out parameter 'x' must be assigned to before control leaves the current method
                 //         x = ref y;
-                Diagnostic(ErrorCode.ERR_ParamUnassigned, "x")
-                    .WithArguments("x")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_ParamUnassigned, "x").WithArguments("x").WithLocation(7, 9)
             );
         }
 
@@ -4230,8 +4228,7 @@ class Program
                 .VerifyDiagnostics(
                     // (8,20): error CS8900: The argument to a by reference return or assignment must be an assignable variable or a property or call that returns by reference
                     //         return ref this[0];
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "this[0]")
-                        .WithLocation(8, 20)
+                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "this[0]").WithLocation(8, 20)
                 );
         }
 
@@ -5145,8 +5142,7 @@ public class C
                 .VerifyDiagnostics(
                     // (6,9): error CS8373: The left-hand side of a ref assignment must be a ref variable.
                     //         array[0] = ref value;
-                    Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "array[0]")
-                        .WithLocation(6, 9)
+                    Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "array[0]").WithLocation(6, 9)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -5341,8 +5337,7 @@ public unsafe class C
                 .VerifyDiagnostics(
                     // (6,9): error CS8373: The left-hand side of a ref assignment must be a ref variable.
                     //         d.member = ref value;
-                    Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "d.member")
-                        .WithLocation(6, 9)
+                    Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "d.member").WithLocation(6, 9)
                 );
 
             var tree = compilation.SyntaxTrees.Single();

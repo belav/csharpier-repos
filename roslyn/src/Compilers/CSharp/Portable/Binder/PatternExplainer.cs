@@ -75,9 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             when distance(w.WhenTrue) is var trueDist2
                                 && distance(w.WhenFalse) is var falseDist2 =>
                         // add nodeCount to the distance if we need to flag that the path requires failure of a when clause
-                        (
-                            trueDist2 <= falseDist2
-                        )
+                        (trueDist2 <= falseDist2)
                             ? (1 + trueDist2, w.WhenTrue)
                             : (
                                 1 + (falseDist2 < nodeCount ? nodeCount : 0) + falseDist2,

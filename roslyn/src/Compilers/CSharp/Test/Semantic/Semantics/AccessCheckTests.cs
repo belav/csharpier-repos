@@ -139,8 +139,7 @@ class C
                     .WithArguments("C.N1.N4.n4_pub", "0"),
                 // (8,24): warning CS0414: The field 'C.c_priv' is assigned but its value is never used
                 //     static private int c_priv;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv")
-                    .WithArguments("C.c_priv")
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv").WithArguments("C.c_priv")
             );
         }
 
@@ -225,8 +224,7 @@ class C
             c.VerifyDiagnostics(
                 // (8,24): warning CS0414: The field 'C.c_priv' is assigned but its value is never used
                 //     static private int c_priv;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv")
-                    .WithArguments("C.c_priv"),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv").WithArguments("C.c_priv"),
                 // (17,28): warning CS0414: The field 'C.N1.n1_priv' is assigned but its value is never used
                 //         static private int n1_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "n1_priv")
@@ -352,8 +350,7 @@ class E: D
                     .WithArguments("C.N4.n4_pub", "0"),
                 // (8,24): warning CS0414: The field 'C.c_priv' is assigned but its value is never used
                 //     static private int c_priv;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv")
-                    .WithArguments("C.c_priv"),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv").WithArguments("C.c_priv"),
                 // (41,24): warning CS0414: The field 'D.n1_priv' is assigned but its value is never used
                 //     static private int n1_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "n1_priv")
@@ -1385,9 +1382,7 @@ internal abstract class B3 : A
             );
             compilation3.VerifyDiagnostics(
                 // (6,12): error CS0122: 'A.M()' is inaccessible due to its protection level
-                Diagnostic(ErrorCode.ERR_BadAccess, "M")
-                    .WithArguments("A.M()")
-                    .WithLocation(6, 12),
+                Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("A.M()").WithLocation(6, 12),
                 // (8,16): error CS0122: 'A.P' is inaccessible due to its protection level
                 Diagnostic(ErrorCode.ERR_BadAccess, "P").WithArguments("A.P").WithLocation(8, 16),
                 // (9,12): error CS0122: 'A.P' is inaccessible due to its protection level

@@ -5280,8 +5280,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs = DefaultParse(new[] { currentDrive + @":a.cs", "b.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
                 // error CS2021: File name 'D:a.cs' is contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments(currentDrive + ":a.cs")
+                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(currentDrive + ":a.cs")
             );
 
             Assert.Null(parsedArgs.CompilationName);
@@ -8313,9 +8312,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             DefaultParse(new[] { "/publicsign", "/keyfile:", "a.cs" }, WorkingDirectory)
                 .Errors.Verify(
                     // error CS2005: Missing file specification for 'keyfile' option
-                    Diagnostic(ErrorCode.ERR_NoFileSpec)
-                        .WithArguments("keyfile")
-                        .WithLocation(1, 1)
+                    Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("keyfile").WithLocation(1, 1)
                 );
         }
 
@@ -8326,9 +8323,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             DefaultParse(new[] { "/publicsign", "/keyfile:\"\"", "a.cs" }, WorkingDirectory)
                 .Errors.Verify(
                     // error CS2005: Missing file specification for 'keyfile' option
-                    Diagnostic(ErrorCode.ERR_NoFileSpec)
-                        .WithArguments("keyfile")
-                        .WithLocation(1, 1)
+                    Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("keyfile").WithLocation(1, 1)
                 );
         }
 

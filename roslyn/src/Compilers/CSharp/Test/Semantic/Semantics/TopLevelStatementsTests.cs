@@ -1105,9 +1105,7 @@ string a = ""2"";
                     .WithLocation(2, 8),
                 // (3,8): error CS0128: A local variable or function named 'a' is already defined in this scope
                 // string a = "2";
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "a")
-                    .WithArguments("a")
-                    .WithLocation(3, 8),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "a").WithArguments("a").WithLocation(3, 8),
                 // (3,8): warning CS0219: The variable 'a' is assigned but its value is never used
                 // string a = "2";
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
@@ -1368,9 +1366,7 @@ System.Console.Write(x);
             comp.VerifyDiagnostics(
                 // (4,5): error CS0128: A local variable or function named 'x' is already defined in this scope
                 // int x = 1;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x")
-                    .WithArguments("x")
-                    .WithLocation(4, 5),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x").WithArguments("x").WithLocation(4, 5),
                 // (4,5): warning CS0219: The variable 'x' is assigned but its value is never used
                 // int x = 1;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x")
@@ -8284,9 +8280,7 @@ class MyAttribute : System.Attribute
                 Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias A;").WithLocation(2, 1),
                 // (2,14): error CS0430: The extern alias 'A' was not specified in a /reference option
                 // extern alias A;
-                Diagnostic(ErrorCode.ERR_BadExternAlias, "A")
-                    .WithArguments("A")
-                    .WithLocation(2, 14)
+                Diagnostic(ErrorCode.ERR_BadExternAlias, "A").WithArguments("A").WithLocation(2, 14)
             );
         }
 
@@ -8717,9 +8711,7 @@ class A
             comp.VerifyDiagnostics(
                 // (2,17): error CS0122: 'A.M()' is inaccessible due to its protection level
                 // var x = new A().M();
-                Diagnostic(ErrorCode.ERR_BadAccess, "M")
-                    .WithArguments("A.M()")
-                    .WithLocation(2, 17),
+                Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("A.M()").WithLocation(2, 17),
                 // (8,9): error CS8801: Cannot use local variable or local function 'x' declared in a top-level statement in this context.
                 //         x = null;
                 Diagnostic(

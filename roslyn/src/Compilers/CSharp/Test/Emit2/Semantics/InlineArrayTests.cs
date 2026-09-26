@@ -9096,8 +9096,7 @@ public struct Buffer10<T>
                 .VerifyDiagnostics(
                     // (22,14): warning CS9181: Inline array indexer will not be used for element access expression.
                     //     public T this[int i]
-                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this")
-                        .WithLocation(22, 14)
+                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this").WithLocation(22, 14)
                 );
 
             verifier.VerifyIL(
@@ -17722,8 +17721,7 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "y").WithLocation(17, 17),
                 // (22,24): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         foreach(string b in GetC(s2).F)
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "b")
-                    .WithLocation(22, 24)
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "b").WithLocation(22, 24)
             );
         }
 
@@ -20670,8 +20668,7 @@ public struct Buffer10<T>
                 .VerifyDiagnostics(
                     // (27,14): warning CS9181: Inline array indexer will not be used for element access expression.
                     //     public T this[int i]
-                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this")
-                        .WithLocation(27, 14)
+                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this").WithLocation(27, 14)
                 );
 
             verifier.VerifyIL(
@@ -20813,8 +20810,7 @@ public struct Buffer10<T>
                 .VerifyDiagnostics(
                     // (27,14): warning CS9181: Inline array indexer will not be used for element access expression.
                     //     public T this[int i]
-                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this")
-                        .WithLocation(27, 14)
+                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this").WithLocation(27, 14)
                 );
 
             verifier.VerifyIL(
@@ -20907,8 +20903,7 @@ public struct Buffer10<T>
                         .WithLocation(27, 14),
                     // (34,29): warning CS9182: Inline array 'Slice' method will not be used for element access expression.
                     //     public System.Span<int> Slice(int start, int length) => throw null;
-                    Diagnostic(ErrorCode.WRN_InlineArraySliceNotUsed, "Slice")
-                        .WithLocation(34, 29)
+                    Diagnostic(ErrorCode.WRN_InlineArraySliceNotUsed, "Slice").WithLocation(34, 29)
                 );
 
             verifier.VerifyIL(
@@ -25492,8 +25487,7 @@ struct Buffer4
                 .VerifyDiagnostics(
                     // (7,12): warning CS9181: Inline array indexer will not be used for element access expression.
                     //     string this[int i] => "int";
-                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this")
-                        .WithLocation(7, 12)
+                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this").WithLocation(7, 12)
                 );
         }
 
@@ -25526,8 +25520,7 @@ struct Buffer4
                 .VerifyDiagnostics(
                     // (7,12): warning CS9181: Inline array indexer will not be used for element access expression.
                     //     string this[System.Index i] => "index";
-                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this")
-                        .WithLocation(7, 12)
+                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this").WithLocation(7, 12)
                 );
         }
 
@@ -25560,8 +25553,7 @@ struct Buffer4
                 .VerifyDiagnostics(
                     // (7,12): warning CS9181: Inline array indexer will not be used for element access expression.
                     //     string this[System.Range i] => "range";
-                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this")
-                        .WithLocation(7, 12)
+                    Diagnostic(ErrorCode.WRN_InlineArrayIndexerNotUsed, "this").WithLocation(7, 12)
                 );
         }
 

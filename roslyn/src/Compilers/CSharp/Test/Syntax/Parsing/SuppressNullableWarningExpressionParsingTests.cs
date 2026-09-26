@@ -178,9 +178,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 TestOptions.Regular8,
                 // (1,8): error CS1525: Invalid expression term '='
                 // o = o!==null
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
-                    .WithArguments("=")
-                    .WithLocation(1, 8)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(1, 8)
             );
             N(SyntaxKind.SimpleAssignmentExpression);
             {

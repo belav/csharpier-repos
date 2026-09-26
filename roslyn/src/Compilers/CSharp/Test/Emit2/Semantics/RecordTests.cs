@@ -2280,8 +2280,7 @@ record C(int X)
                 Diagnostic(ErrorCode.ERR_InvalidWithReceiverType, "Main()").WithLocation(7, 13),
                 // (8,13): error CS8716: There is no target type for the default literal.
                 //         _ = default with { };
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(8, 13),
                 // (9,13): error CS8802: The receiver of a `with` expression must have a valid non-void type.
                 //         _ = null with { };
                 Diagnostic(ErrorCode.ERR_InvalidWithReceiverType, "null").WithLocation(9, 13)
@@ -2909,9 +2908,7 @@ record C(int X)
             comp.VerifyDiagnostics(
                 // (12,13): error CS8858: The receiver type 'B' is not a valid record type.
                 //         b = b with { Y = 2 };
-                Diagnostic(ErrorCode.ERR_CannotClone, "b")
-                    .WithArguments("B")
-                    .WithLocation(12, 13),
+                Diagnostic(ErrorCode.ERR_CannotClone, "b").WithArguments("B").WithLocation(12, 13),
                 // (12,22): error CS0117: 'B' does not contain a definition for 'Y'
                 //         b = b with { Y = 2 };
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "Y")
@@ -5249,9 +5246,7 @@ class Program
             comp4.VerifyEmitDiagnostics(
                 // (7,18): error CS8858: The receiver type 'C' is not a valid record type.
                 //         var c2 = c1 with { X = 11 };
-                Diagnostic(ErrorCode.ERR_CannotClone, "c1")
-                    .WithArguments("C")
-                    .WithLocation(7, 18),
+                Diagnostic(ErrorCode.ERR_CannotClone, "c1").WithArguments("C").WithLocation(7, 18),
                 // (7,18): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "c1")
@@ -5283,9 +5278,7 @@ class Program
             comp5.VerifyEmitDiagnostics(
                 // (7,18): error CS8858: The receiver type 'C' is not a valid record type.
                 //         var c2 = c1 with { X = 11 };
-                Diagnostic(ErrorCode.ERR_CannotClone, "c1")
-                    .WithArguments("C")
-                    .WithLocation(7, 18),
+                Diagnostic(ErrorCode.ERR_CannotClone, "c1").WithArguments("C").WithLocation(7, 18),
                 // (7,18): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "c1")
@@ -11334,8 +11327,7 @@ record B(string? X)
                     .WithLocation(10, 21),
                 // (11,18): warning CS8602: Dereference of a possibly null reference.
                 //         (b1 with { X = null }).ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }")
-                    .WithLocation(11, 18)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }").WithLocation(11, 18)
             );
         }
 
@@ -11369,8 +11361,7 @@ record B(string? X)
                     .WithLocation(13, 21),
                 // (14,18): warning CS8602: Dereference of a possibly null reference.
                 //         (b1 with { X = null }).ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }")
-                    .WithLocation(14, 18)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }").WithLocation(14, 18)
             );
         }
 
@@ -30123,8 +30114,7 @@ record B : A<int>, IEquatable<B>;
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(1, 1),
                 // (2,8): error CS0518: Predefined type 'System.IEquatable`1' is not defined or imported
                 // record A<T> : IEquatable<A<T>>;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
@@ -31581,8 +31571,7 @@ record C<T>([property: NotNull] T? P1, T? P2) where T : class
             comp.VerifyEmitDiagnostics(
                 // (10,15): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         T y = P2;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "P2")
-                    .WithLocation(10, 15)
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "P2").WithLocation(10, 15)
             );
         }
 

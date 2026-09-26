@@ -3159,9 +3159,7 @@ internal class C
             cComp.VerifyDiagnostics(
                 // (6,9): error CS0122: 'B.M()' is inaccessible due to its protection level
                 //         b.M()();
-                Diagnostic(ErrorCode.ERR_BadAccess, "b.M")
-                    .WithArguments("B.M()")
-                    .WithLocation(6, 9)
+                Diagnostic(ErrorCode.ERR_BadAccess, "b.M").WithArguments("B.M()").WithLocation(6, 9)
             );
         }
 
@@ -4624,8 +4622,7 @@ unsafe class C
             comp.VerifyDiagnostics(
                 // (8,41): error CS1944: An expression tree may not contain an unsafe pointer operation
                 //         Expression<Action> a = () => M2(ptr);
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPointerOp, "ptr")
-                    .WithLocation(8, 41)
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPointerOp, "ptr").WithLocation(8, 41)
             );
         }
 
@@ -13779,8 +13776,7 @@ unsafe
             comp.VerifyDiagnostics(
                 // (8,16): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         => ref ptr(ref i);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "ptr(ref i)")
-                    .WithLocation(8, 16)
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "ptr(ref i)").WithLocation(8, 16)
             );
         }
 

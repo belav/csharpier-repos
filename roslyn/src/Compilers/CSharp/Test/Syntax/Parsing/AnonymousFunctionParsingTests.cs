@@ -1013,8 +1013,7 @@ public class C
                         .WithLocation(1, 22),
                     // (1,29): error CS1510: A ref or out value must be an assignable variable
                     // class C { void M() { M1(ref static x => x); } }
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "static x => x")
-                        .WithLocation(1, 29)
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "static x => x").WithLocation(1, 29)
                 );
             CreateCompilation(testInMethod, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
@@ -1030,8 +1029,7 @@ public class C
                         .WithLocation(1, 29),
                     // (1,29): error CS1510: A ref or out value must be an assignable variable
                     // class C { void M() { M1(ref static x => x); } }
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "static x => x")
-                        .WithLocation(1, 29)
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "static x => x").WithLocation(1, 29)
                 );
 
             UsingStatement(test);

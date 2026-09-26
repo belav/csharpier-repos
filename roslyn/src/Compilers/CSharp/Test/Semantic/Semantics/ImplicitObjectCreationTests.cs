@@ -1525,8 +1525,7 @@ class C
                     .WithLocation(8, 22),
                 // (8,22): error CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (C _, C _) = new();
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "new()")
-                    .WithLocation(8, 22)
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "new()").WithLocation(8, 22)
             );
         }
 
@@ -5770,8 +5769,7 @@ public class C
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new()").WithLocation(6, 43),
                 // (10,43): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     public void M2([DefaultParameterValue(new object())] object o)
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new object()")
-                    .WithLocation(10, 43)
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new object()").WithLocation(10, 43)
             );
         }
 

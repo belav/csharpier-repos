@@ -2917,8 +2917,7 @@ class Test
             compilation.VerifyDiagnostics(
                 // (12,38): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     public static async Task<string> SendMessageAsync<T>(object response)
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "SendMessageAsync")
-                    .WithLocation(12, 38)
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "SendMessageAsync").WithLocation(12, 38)
             );
             var comp = CompileAndVerify(
                 compilation,
@@ -3507,9 +3506,7 @@ static class Ex
             compilation.VerifyDiagnostics(
                 // (10,15): error CS1003: Syntax error, ':' expected
                 //         var q = 3;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=")
-                    .WithArguments(":")
-                    .WithLocation(10, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments(":").WithLocation(10, 15),
                 // (10,15): error CS1525: Invalid expression term '='
                 //         var q = 3;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")

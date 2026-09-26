@@ -545,12 +545,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             return new[]
             {
                 // string is not technically "TryParsable", but it's the special case.
-                new object[]
-                {
-                    (Action<HttpContext, string>)Store,
-                    "plain string",
-                    "plain string",
-                },
+                new object[] { (Action<HttpContext, string>)Store, "plain string", "plain string" },
                 new object[] { (Action<HttpContext, int>)Store, "-42", -42 },
                 new object[] { (Action<HttpContext, uint>)Store, "42", 42U },
                 new object[] { (Action<HttpContext, bool>)Store, "true", true },
@@ -3536,8 +3531,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_DoesNotAddDelegateAttributes_AsMetadata()
     {
         // Arrange
-        var @delegate = [Attribute1, Attribute2]
-        () => { };
+        var @delegate = [Attribute1, Attribute2] () => { };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);

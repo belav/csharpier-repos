@@ -425,12 +425,10 @@ public enum E
             comp.VerifyDiagnostics(
                 // (2,13): error CS0518: Predefined type 'System.Enum' is not defined or imported
                 // public enum E
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
-                    .WithArguments("System.Enum"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E").WithArguments("System.Enum"),
                 // (2,13): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 // public enum E
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
-                    .WithArguments("System.Int32")
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E").WithArguments("System.Int32")
             );
 
             var sourceAssembly = (SourceAssemblySymbol)comp.Assembly;
@@ -471,8 +469,7 @@ public enum E : short
             comp.VerifyDiagnostics(
                 // (2,13): error CS0518: Predefined type 'System.Enum' is not defined or imported
                 // public enum E : short
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
-                    .WithArguments("System.Enum"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E").WithArguments("System.Enum"),
                 // (2,17): error CS0518: Predefined type 'System.Int16' is not defined or imported
                 // public enum E : short
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "short")
@@ -822,8 +819,7 @@ public class C<T> where T : int
                     .WithArguments("System.Int32"),
                 // (2,16): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 // public class C<T> where T : int
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
-                    .WithArguments("System.Int32"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T").WithArguments("System.Int32"),
                 // (2,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // public class C<T> where T : int
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C").WithArguments("object", "0")

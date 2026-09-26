@@ -1286,8 +1286,7 @@ public interface I {}";
             );
             c.VerifyDiagnostics(
                 // error CS1760: Assemblies 'Lib' and 'Lib' refer to the same metadata but only one is a linked reference (specified using /link option); consider removing one of the references.
-                Diagnostic(ErrorCode.ERR_AssemblySpecifiedForLinkAndRef)
-                    .WithArguments("Lib", "Lib")
+                Diagnostic(ErrorCode.ERR_AssemblySpecifiedForLinkAndRef).WithArguments("Lib", "Lib")
             );
         }
 

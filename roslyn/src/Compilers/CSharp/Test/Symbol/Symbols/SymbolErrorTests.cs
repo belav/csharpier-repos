@@ -2106,12 +2106,10 @@ class C : I
                 .VerifyDiagnostics(
                     // (6,19): error CS0102: The type 'NS.C' already contains a definition for 'I'
                     //         interface I<T, U> { }
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "I")
-                        .WithArguments("NS.C", "I"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "I").WithArguments("NS.C", "I"),
                     // (9,23): error CS0102: The type 'NS.C' already contains a definition for 'S'
                     //         public struct S { }
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "S")
-                        .WithArguments("NS.C", "S"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "S").WithArguments("NS.C", "S"),
                     // (14,11): error CS0102: The type 'NS.S<X>' already contains a definition for 'x'
                     //         C x;
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x")
@@ -3663,8 +3661,7 @@ public class A4 : Attribute
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "s"),
                     // (3,19): warning CS0414: The field 'MyClass.s' is assigned but its value is never used
                     //     static string s = "Test";
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "s")
-                        .WithArguments("MyClass.s")
+                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "s").WithArguments("MyClass.s")
                 );
         }
 
@@ -3779,8 +3776,7 @@ namespace System
                 .VerifyDiagnostics(
                     // (8,21): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     //             var x = stackalloc int[10];    // ERROR
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[10]")
-                        .WithLocation(8, 21)
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[10]").WithLocation(8, 21)
                 );
         }
 
@@ -5460,8 +5456,7 @@ namespace N
             CreateCompilation(text)
                 .VerifyDiagnostics(
                     // (3,16): error CS0274: Cannot specify accessibility modifiers for both accessors of the property or indexer 'C.P'
-                    Diagnostic(ErrorCode.ERR_DuplicatePropertyAccessMods, "P")
-                        .WithArguments("C.P"),
+                    Diagnostic(ErrorCode.ERR_DuplicatePropertyAccessMods, "P").WithArguments("C.P"),
                     // (4,21): error CS0274: Cannot specify accessibility modifiers for both accessors of the property or indexer 'C.Q'
                     Diagnostic(ErrorCode.ERR_DuplicatePropertyAccessMods, "Q").WithArguments("C.Q")
                 );
@@ -5906,8 +5901,7 @@ static class S
             {
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(1, 1),
                 // (7,15): error CS0306: The type 'int*' may not be used as a type argument
                 //         new C<int*>();
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "int*")
@@ -7060,8 +7054,7 @@ abstract class B2 : IB
                     .WithArguments("x", "NS.C.I"),
                 // (13,15): warning CS0169: The field 'NS.Test.field' is never used
                 //         C.I.x field; // CS0426
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "field")
-                    .WithArguments("NS.Test.field")
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("NS.Test.field")
             );
 
             var ns = comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
@@ -9429,8 +9422,7 @@ public class CF3<T>
                 Diagnostic(ErrorCode.ERR_ForwardedTypeConflictsWithDeclaration)
                     .WithArguments("ns.CF2"),
                 // error CS8006: Forwarded type 'CF1' conflicts with type declared in primary module of this assembly.
-                Diagnostic(ErrorCode.ERR_ForwardedTypeConflictsWithDeclaration)
-                    .WithArguments("CF1")
+                Diagnostic(ErrorCode.ERR_ForwardedTypeConflictsWithDeclaration).WithArguments("CF1")
             );
 
             compilation = CreateCompilation(
@@ -11840,8 +11832,7 @@ struct S6<T>
             comp.VerifyDiagnostics(
                 // (5,16): error CS0525: Interfaces cannot contain instance fields
                 //         string field1;
-                Diagnostic(ErrorCode.ERR_InterfacesCantContainFields, "field1")
-                    .WithLocation(5, 16),
+                Diagnostic(ErrorCode.ERR_InterfacesCantContainFields, "field1").WithLocation(5, 16),
                 // (6,21): error CS8652: The feature 'default interface implementation' is not available in C# 7. Please use language version 8.0 or greater.
                 //         const ulong field2 = 0;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "field2")
@@ -11849,8 +11840,7 @@ struct S6<T>
                     .WithLocation(6, 21),
                 // (7,21): error CS0525: Interfaces cannot contain instance fields
                 //         public IGoo field3;
-                Diagnostic(ErrorCode.ERR_InterfacesCantContainFields, "field3")
-                    .WithLocation(7, 21)
+                Diagnostic(ErrorCode.ERR_InterfacesCantContainFields, "field3").WithLocation(7, 21)
             );
 
             var ns = comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
@@ -15265,12 +15255,10 @@ public class A4 : Attribute
                 .VerifyDiagnostics(
                     // (6,5): error CS0655: 'P' is not a valid named attribute argument because it is not a valid attribute parameter type
                     // [A1(P = null)]                                    // Dev11 error
-                    Diagnostic(ErrorCode.ERR_BadNamedAttributeArgumentType, "P")
-                        .WithArguments("P"),
+                    Diagnostic(ErrorCode.ERR_BadNamedAttributeArgumentType, "P").WithArguments("P"),
                     // (13,5): error CS0655: 'P' is not a valid named attribute argument because it is not a valid attribute parameter type
                     // [A2(P = null)]                                    // Dev11 ok (bug)
-                    Diagnostic(ErrorCode.ERR_BadNamedAttributeArgumentType, "P")
-                        .WithArguments("P")
+                    Diagnostic(ErrorCode.ERR_BadNamedAttributeArgumentType, "P").WithArguments("P")
                 );
         }
 
@@ -15478,12 +15466,10 @@ public class A4 : Attribute
                         .WithArguments("NS.S1<T, V>.field"),
                     // (7,26): error CS0666: 'NS.S1<T, V>.P': new protected member declared in struct
                     //         protected object P { get { return null; } } // Dev10 no error
-                    Diagnostic(ErrorCode.ERR_ProtectedInStruct, "P")
-                        .WithArguments("NS.S1<T, V>.P"),
+                    Diagnostic(ErrorCode.ERR_ProtectedInStruct, "P").WithArguments("NS.S1<T, V>.P"),
                     // (8,39): error CS0666: 'NS.S1<T, V>.E': new protected member declared in struct
                     //         protected event System.Action E;
-                    Diagnostic(ErrorCode.ERR_ProtectedInStruct, "E")
-                        .WithArguments("NS.S1<T, V>.E"),
+                    Diagnostic(ErrorCode.ERR_ProtectedInStruct, "E").WithArguments("NS.S1<T, V>.E"),
                     // (6,33): error CS0666: 'NS.S1<T, V>.M(T, V)': new protected member declared in struct
                     //         protected internal void M(T t, V v) { }
                     Diagnostic(ErrorCode.ERR_ProtectedInStruct, "M")
@@ -15510,8 +15496,7 @@ public class A4 : Attribute
                         .WithArguments("NS.S1<T, V>.field", ""),
                     // (8,39): warning CS0067: The event 'NS.S1<T, V>.E' is never used
                     //         protected event System.Action E;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
-                        .WithArguments("NS.S1<T, V>.E"),
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("NS.S1<T, V>.E"),
                     // (15,43): warning CS0067: The event 'NS.S1<T, V>.S2.E' is never used
                     //             protected event System.Action E;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
@@ -15757,8 +15742,7 @@ class TestClass
                 .VerifyDiagnostics(
                     // (5,5): error CS0669: A class with the ComImport attribute cannot have a user-defined constructor
                     //     TestClass()   // CS0669, delete constructor to resolve
-                    Diagnostic(ErrorCode.ERR_ComImportWithUserCtor, "TestClass")
-                        .WithLocation(5, 5)
+                    Diagnostic(ErrorCode.ERR_ComImportWithUserCtor, "TestClass").WithLocation(5, 5)
                 );
         }
 
@@ -15966,8 +15950,7 @@ class C5<T> where T : I
                 .VerifyDiagnostics(
                     // (3,35): error CS0678: 'TestClass.i': a field cannot be both volatile and readonly
                     //     private readonly volatile int i;   // CS0678
-                    Diagnostic(ErrorCode.ERR_VolatileAndReadonly, "i")
-                        .WithArguments("TestClass.i"),
+                    Diagnostic(ErrorCode.ERR_VolatileAndReadonly, "i").WithArguments("TestClass.i"),
                     // (3,35): warning CS0169: The field 'TestClass.i' is never used
                     //     private readonly volatile int i;   // CS0678
                     Diagnostic(ErrorCode.WRN_UnreferencedField, "i").WithArguments("TestClass.i")
@@ -16869,8 +16852,7 @@ static class C
                     // (6,9): error CS07: Cannot declare a variable of static type 'C'
                     Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "C").WithArguments("C"),
                     // (6,15): error CS0712: Cannot create an instance of the static class 'C'
-                    Diagnostic(ErrorCode.ERR_InstantiatingStaticClass, "new C()")
-                        .WithArguments("C")
+                    Diagnostic(ErrorCode.ERR_InstantiatingStaticClass, "new C()").WithArguments("C")
                 );
         }
 
@@ -19442,8 +19424,7 @@ namespace NS
                     .WithLocation(14, 11),
                 // (15,5): hidden CS8019: Unnecessary using directive.
                 //     using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
-                    .WithLocation(15, 5),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(15, 5),
                 // (14,5): hidden CS8019: Unnecessary using directive.
                 //     using ns = namespace2;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using ns = namespace2;")
@@ -19492,8 +19473,7 @@ using X = ABC.X<int>;";
             CreateCompilation(text, references: new[] { ref1 })
                 .VerifyDiagnostics(
                     // error CS1542: 'NoMsCorLibRef.mod' cannot be added to this assembly because it already is an assembly
-                    Diagnostic(ErrorCode.ERR_AddModuleAssembly)
-                        .WithArguments(@"NoMsCorLibRef.mod"),
+                    Diagnostic(ErrorCode.ERR_AddModuleAssembly).WithArguments(@"NoMsCorLibRef.mod"),
                     // (1,20): error CS0246: The type or namespace name 'IGoo' could not be found (are you missing a using directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IGoo").WithArguments("IGoo")
                 );
@@ -20586,8 +20566,7 @@ using System.Runtime.CompilerServices;
             comp.VerifyDiagnostics(
                 // (4,33): error CS1736: Default parameter value for 'Para1' must be a compile-time constant
                 //     public void Goo(int Para1 = Age)
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Age")
-                    .WithArguments("Para1"),
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Age").WithArguments("Para1"),
                 // (3,16): warning CS0169: The field 'A.Age' is never used
                 //     static int Age;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "Age").WithArguments("A.Age")
@@ -21607,16 +21586,13 @@ namespace N1
                 .VerifyDiagnostics(
                     // (5,9): error CS8050: Only auto-implemented properties can have initializers.
                     //     int I { get { throw null; } set {  } } = 1;
-                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "I")
-                        .WithLocation(5, 9),
+                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "I").WithLocation(5, 9),
                     // (6,16): error CS8050: Only auto-implemented properties can have initializers.
                     //     static int S { get { throw null; } set {  } } = 1;
-                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "S")
-                        .WithLocation(6, 16),
+                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "S").WithLocation(6, 16),
                     // (7,19): error CS8050: Only auto-implemented properties can have initializers.
                     //     protected int P { get { throw null; } set {  } } = 1;
-                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "P")
-                        .WithLocation(7, 19)
+                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "P").WithLocation(7, 19)
                 );
         }
 
@@ -22050,44 +22026,34 @@ class B : A
                 .VerifyDiagnostics(
                     // (36,23): warning CS0108: 'B.SM1' hides inherited member 'A.SM1()'. Use the new keyword if hiding was intended.
                     //     public static int SM1 { get; set; } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SM1")
-                        .WithArguments("B.SM1", "A.SM1()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SM1").WithArguments("B.SM1", "A.SM1()"),
                     // (37,16): warning CS0108: 'B.SM2' hides inherited member 'A.SM2()'. Use the new keyword if hiding was intended.
                     //     public int SM2 { get; set; } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SM2")
-                        .WithArguments("B.SM2", "A.SM2()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SM2").WithArguments("B.SM2", "A.SM2()"),
                     // (38,39): warning CS0108: 'B.SM3' hides inherited member 'A.SM3()'. Use the new keyword if hiding was intended.
                     //     public static event System.Action SM3; //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SM3")
-                        .WithArguments("B.SM3", "A.SM3()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SM3").WithArguments("B.SM3", "A.SM3()"),
                     // (39,32): warning CS0108: 'B.SM4' hides inherited member 'A.SM4()'. Use the new keyword if hiding was intended.
                     //     public event System.Action SM4{ add { } remove { } } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SM4")
-                        .WithArguments("B.SM4", "A.SM4()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SM4").WithArguments("B.SM4", "A.SM4()"),
                     // (41,23): warning CS0108: 'B.IM1' hides inherited member 'A.IM1()'. Use the new keyword if hiding was intended.
                     //     public static int IM1 { get; set; } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IM1")
-                        .WithArguments("B.IM1", "A.IM1()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IM1").WithArguments("B.IM1", "A.IM1()"),
                     // (42,16): warning CS0108: 'B.IM2' hides inherited member 'A.IM2()'. Use the new keyword if hiding was intended.
                     //     public int IM2 { get; set; } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IM2")
-                        .WithArguments("B.IM2", "A.IM2()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IM2").WithArguments("B.IM2", "A.IM2()"),
                     // (43,39): warning CS0108: 'B.IM3' hides inherited member 'A.IM3()'. Use the new keyword if hiding was intended.
                     //     public static event System.Action IM3; //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IM3")
-                        .WithArguments("B.IM3", "A.IM3()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IM3").WithArguments("B.IM3", "A.IM3()"),
                     // (44,32): warning CS0108: 'B.IM4' hides inherited member 'A.IM4()'. Use the new keyword if hiding was intended.
                     //     public event System.Action IM4{ add { } remove { } } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IM4")
-                        .WithArguments("B.IM4", "A.IM4()"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IM4").WithArguments("B.IM4", "A.IM4()"),
                     // (46,24): warning CS0108: 'B.SP1()' hides inherited member 'A.SP1'. Use the new keyword if hiding was intended.
                     //     public static void SP1() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SP1")
-                        .WithArguments("B.SP1()", "A.SP1"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SP1").WithArguments("B.SP1()", "A.SP1"),
                     // (47,17): warning CS0108: 'B.SP2()' hides inherited member 'A.SP2'. Use the new keyword if hiding was intended.
                     //     public void SP2() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SP2")
-                        .WithArguments("B.SP2()", "A.SP2"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SP2").WithArguments("B.SP2()", "A.SP2"),
                     // (48,39): warning CS0108: 'B.SP3' hides inherited member 'A.SP3'. Use the new keyword if hiding was intended.
                     //     public static event System.Action SP3; //CS0108
                     Diagnostic(ErrorCode.WRN_NewRequired, "SP3").WithArguments("B.SP3", "A.SP3"),
@@ -22096,12 +22062,10 @@ class B : A
                     Diagnostic(ErrorCode.WRN_NewRequired, "SP4").WithArguments("B.SP4", "A.SP4"),
                     // (51,24): warning CS0108: 'B.IP1()' hides inherited member 'A.IP1'. Use the new keyword if hiding was intended.
                     //     public static void IP1() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IP1")
-                        .WithArguments("B.IP1()", "A.IP1"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IP1").WithArguments("B.IP1()", "A.IP1"),
                     // (52,17): warning CS0108: 'B.IP2()' hides inherited member 'A.IP2'. Use the new keyword if hiding was intended.
                     //     public void IP2() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IP2")
-                        .WithArguments("B.IP2()", "A.IP2"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IP2").WithArguments("B.IP2()", "A.IP2"),
                     // (53,39): warning CS0108: 'B.IP3' hides inherited member 'A.IP3'. Use the new keyword if hiding was intended.
                     //     public static event System.Action IP3; //CS0108
                     Diagnostic(ErrorCode.WRN_NewRequired, "IP3").WithArguments("B.IP3", "A.IP3"),
@@ -22110,12 +22074,10 @@ class B : A
                     Diagnostic(ErrorCode.WRN_NewRequired, "IP4").WithArguments("B.IP4", "A.IP4"),
                     // (56,24): warning CS0108: 'B.SE1()' hides inherited member 'A.SE1'. Use the new keyword if hiding was intended.
                     //     public static void SE1() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SE1")
-                        .WithArguments("B.SE1()", "A.SE1"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SE1").WithArguments("B.SE1()", "A.SE1"),
                     // (57,17): warning CS0108: 'B.SE2()' hides inherited member 'A.SE2'. Use the new keyword if hiding was intended.
                     //     public void SE2() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "SE2")
-                        .WithArguments("B.SE2()", "A.SE2"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "SE2").WithArguments("B.SE2()", "A.SE2"),
                     // (58,23): warning CS0108: 'B.SE3' hides inherited member 'A.SE3'. Use the new keyword if hiding was intended.
                     //     public static int SE3 { get; set; } //CS0108
                     Diagnostic(ErrorCode.WRN_NewRequired, "SE3").WithArguments("B.SE3", "A.SE3"),
@@ -22124,12 +22086,10 @@ class B : A
                     Diagnostic(ErrorCode.WRN_NewRequired, "SE4").WithArguments("B.SE4", "A.SE4"),
                     // (61,24): warning CS0108: 'B.IE1()' hides inherited member 'A.IE1'. Use the new keyword if hiding was intended.
                     //     public static void IE1() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IE1")
-                        .WithArguments("B.IE1()", "A.IE1"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IE1").WithArguments("B.IE1()", "A.IE1"),
                     // (62,17): warning CS0108: 'B.IE2()' hides inherited member 'A.IE2'. Use the new keyword if hiding was intended.
                     //     public void IE2() { } //CS0108
-                    Diagnostic(ErrorCode.WRN_NewRequired, "IE2")
-                        .WithArguments("B.IE2()", "A.IE2"),
+                    Diagnostic(ErrorCode.WRN_NewRequired, "IE2").WithArguments("B.IE2()", "A.IE2"),
                     // (63,23): warning CS0108: 'B.IE3' hides inherited member 'A.IE3'. Use the new keyword if hiding was intended.
                     //     public static int IE3 { get; set; } //CS0108
                     Diagnostic(ErrorCode.WRN_NewRequired, "IE3").WithArguments("B.IE3", "A.IE3"),
@@ -22561,8 +22521,7 @@ namespace SA
                     ),
                 // (10,22): warning CS0414: The field 'SA.Test.var' is assigned but its value is never used
                 //         CSFields.FFF var = null;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "var")
-                    .WithArguments("SA.Test.var")
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "var").WithArguments("SA.Test.var")
             );
 
             var ns = comp.SourceModule.GlobalNamespace.GetMembers("SA").Single() as NamespaceSymbol;
@@ -22964,8 +22923,7 @@ namespace SA
                     ),
                 // (10,19): warning CS0414: The field 'SA.Test.app' is assigned but its value is never used
                 //         AppCS.App app = null;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "app")
-                    .WithArguments("SA.Test.app")
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "app").WithArguments("SA.Test.app")
             );
 
             var ns = comp.SourceModule.GlobalNamespace.GetMembers("SA").Single() as NamespaceSymbol;
@@ -23279,8 +23237,7 @@ sealed class D : C
                 .VerifyDiagnostics(
                     // (13,21): warning CS0628: 'D.Nested': new protected member declared in sealed type
                     //     protected class Nested {} // CS0628
-                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "Nested")
-                        .WithArguments("D.Nested"),
+                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "Nested").WithArguments("D.Nested"),
                     // (11,28): warning CS0628: 'D.Q': new protected member declared in sealed type
                     //     protected internal int Q { get { return 0; } } // CS0628
                     Diagnostic(ErrorCode.WRN_ProtectedInSealed, "Q").WithArguments("D.Q"),
@@ -23379,8 +23336,7 @@ class Test3 : Test2
                 .VerifyDiagnostics(
                     // (1,7): warning CS0659: 'Test' overrides Object.Equals(object o) but does not override Object.GetHashCode()
                     // class Test
-                    Diagnostic(ErrorCode.WRN_EqualsWithoutGetHashCode, "Test")
-                        .WithArguments("Test")
+                    Diagnostic(ErrorCode.WRN_EqualsWithoutGetHashCode, "Test").WithArguments("Test")
                 );
         }
 
@@ -23936,8 +23892,7 @@ class C : I
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "index")
                     .WithArguments("index"),
                 // (10,24): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
-                    .WithArguments("c"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c").WithArguments("c"),
                 // (10,38): warning CS1066: The default value specified for parameter 'd' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "d").WithArguments("d")
             );
@@ -23958,12 +23913,10 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,33): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     public static C operator!(C c = null) { return c; }
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
-                    .WithArguments("c"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c").WithArguments("c"),
                 // (5,43): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     public static implicit operator int(C c = null) { return 0; }
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
-                    .WithArguments("c")
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c").WithArguments("c")
             );
         }
 
@@ -24580,8 +24533,7 @@ class C
                 .VerifyDiagnostics(
                     // (4,7): warning CS3019: CLS compliance checking will not be performed on 'C' because it is not visible from outside this assembly
                     // class C
-                    Diagnostic(ErrorCode.WRN_CLS_MeaninglessOnPrivateType, "C")
-                        .WithArguments("C"),
+                    Diagnostic(ErrorCode.WRN_CLS_MeaninglessOnPrivateType, "C").WithArguments("C"),
                     // (7,10): warning CS3019: CLS compliance checking will not be performed on 'C.Test()' because it is not visible from outside this assembly
                     //     void Test()
                     Diagnostic(ErrorCode.WRN_CLS_MeaninglessOnPrivateType, "Test")
@@ -24930,11 +24882,9 @@ namespace NS
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "set")
                         .WithArguments("C", "set_P"),
                     // (8,12): error CS0102: The type 'C' already contains a definition for 'set_Q'
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "Q")
-                        .WithArguments("C", "set_Q"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "Q").WithArguments("C", "set_Q"),
                     // (9,12): error CS0102: The type 'C' already contains a definition for 'get_R'
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "R")
-                        .WithArguments("C", "get_R"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "R").WithArguments("C", "get_R"),
                     // (9,16): error CS0102: The type 'C' already contains a definition for 'set_R'
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "set")
                         .WithArguments("C", "set_R"),
@@ -25225,8 +25175,7 @@ class A<T>
                 .VerifyDiagnostics(
                     // (72): error CS0102: The type 'C' already contains a definition for 'add_E'
                     //     public event System.Action E;
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "E")
-                        .WithArguments("C", "add_E"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "E").WithArguments("C", "add_E"),
                     // (72): error CS0102: The type 'C' already contains a definition for 'remove_E'
                     //     public event System.Action E;
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "E")
@@ -25237,8 +25186,7 @@ class A<T>
                         .WithArguments("C", "remove_F"),
                     // (9,25): error CS0102: The type 'C' already contains a definition for 'add_G'
                     //     event System.Action G;
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "G")
-                        .WithArguments("C", "add_G"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "G").WithArguments("C", "add_G"),
                     // (9,25): error CS0102: The type 'C' already contains a definition for 'remove_G'
                     //     event System.Action G;
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "G")
@@ -25316,8 +25264,7 @@ class B2 : A2
                         .WithArguments("I", "Item"),
                     // (10,12): error CS0102: The type 'S' already contains a definition for 'P'
                     //     object this[object index] { get { return null; } }
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "this")
-                        .WithArguments("S", "P"),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "this").WithArguments("S", "P"),
                     // (18,12): error CS0102: The type 'A' already contains a definition for 'get_Item'
                     //     object this[int x, int y] { set { } }
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "this")
@@ -25959,20 +25906,16 @@ internal class InternalClass : PublicClass
                         .WithArguments("InternalClass.F", "System.Action<PublicClass.Protected>"),
                     // (9,51): warning CS0067: The event 'PublicClass.A' is never used
                     //     public event System.Action<InternalInterface> A;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "A")
-                        .WithArguments("PublicClass.A"),
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "A").WithArguments("PublicClass.A"),
                     // (10,47): warning CS0067: The event 'PublicClass.B' is never used
                     //     public event System.Action<InternalClass> B;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "B")
-                        .WithArguments("PublicClass.B"),
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "B").WithArguments("PublicClass.B"),
                     // (11,45): warning CS0067: The event 'PublicClass.C' is never used
                     //     internal event System.Action<Protected> C;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "C")
-                        .WithArguments("PublicClass.C"),
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "C").WithArguments("PublicClass.C"),
                     // (13,35): warning CS0067: The event 'PublicClass.D' is never used
                     //     public event InternalDelegate D;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "D")
-                        .WithArguments("PublicClass.D"),
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "D").WithArguments("PublicClass.D"),
                     // (18,43): warning CS0067: The event 'InternalClass.F' is never used
                     //     public event System.Action<Protected> F;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "F")

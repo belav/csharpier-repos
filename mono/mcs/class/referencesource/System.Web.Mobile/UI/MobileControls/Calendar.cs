@@ -201,10 +201,7 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.SelectionChanged"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.Calendar_OnSelectionChanged)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.Calendar_OnSelectionChanged)]
         public event EventHandler SelectionChanged
         {
             add { Events.AddHandler(EventSelectionChanged, value); }

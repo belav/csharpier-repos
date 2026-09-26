@@ -133,11 +133,7 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>Gets and sets the masterPageFile of this control.</para>
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Behavior"),
-            WebSysDescription(SR.MasterPage_MasterPageFile)
-        ]
+        [DefaultValue(""), WebCategory("Behavior"), WebSysDescription(SR.MasterPage_MasterPageFile)]
         public string MasterPageFile
         {
             get { return VirtualPath.GetVirtualPathString(_masterPageFile); }

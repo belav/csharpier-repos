@@ -388,20 +388,7 @@ class C
             {
                 // to     sb  b  s  us i ui  l ul  c  f  d  m
                 // from
-                /* sb */{
-                    ID,
-                    XN,
-                    IN,
-                    XN,
-                    IN,
-                    XN,
-                    IN,
-                    XN,
-                    XN,
-                    IN,
-                    IN,
-                    IN,
-                },
+                /* sb */{ ID, XN, IN, XN, IN, XN, IN, XN, XN, IN, IN, IN },
                 /*  b */{ XN, ID, IN, IN, IN, IN, IN, IN, XN, IN, IN, IN },
                 /*  s */{ XN, XN, ID, XN, IN, XN, IN, XN, XN, IN, IN, IN },
                 /* us */{ XN, XN, XN, ID, IN, IN, IN, IN, XN, IN, IN, IN },

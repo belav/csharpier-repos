@@ -428,12 +428,7 @@ namespace Mono.Unix.Native
         private static readonly string[][] fopen_modes = new string[][]
         {
             //                                         Read                       Write ReadWrite
-            /*    FileMode.CreateNew: */new string[]
-            {
-                "Can't Read+Create",
-                "wb",
-                "w+b",
-            },
+            /*    FileMode.CreateNew: */new string[] { "Can't Read+Create", "wb", "w+b" },
             /*       FileMode.Create: */new string[] { "Can't Read+Create", "wb", "w+b" },
             /*         FileMode.Open: */new string[] { "rb", "wb", "r+b" },
             /* FileMode.OpenOrCreate: */new string[] { "rb", "wb", "r+b" },

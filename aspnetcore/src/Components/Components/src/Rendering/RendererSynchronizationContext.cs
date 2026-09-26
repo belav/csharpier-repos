@@ -198,10 +198,7 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
 
         // We have to block. That's the contract of Send - we don't expect this to be used
         // in many scenarios in Components.
-        antecedent
-            .ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing)
-            .GetAwaiter()
-            .GetResult();
+        antecedent.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing).GetAwaiter().GetResult();
 
         InvokeWithThisAsCurrentSyncCtxThenSetResult(completion, d.Invoke, state); // Allocates, but using this method should be rare
     }

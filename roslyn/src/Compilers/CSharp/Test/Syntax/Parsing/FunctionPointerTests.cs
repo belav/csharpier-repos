@@ -149,9 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                     .WithLocation(1, 21),
                 // (1,21): error CS1003: Syntax error, ',' expected
                 // delegate* unmanaged[void]<void> ptr;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "void")
-                    .WithArguments(",")
-                    .WithLocation(1, 21)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "void").WithArguments(",").WithLocation(1, 21)
             );
 
             N(SyntaxKind.LocalDeclarationStatement);
@@ -1236,9 +1234,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 options: TestOptions.Regular9,
                 // (1,28): error CS1003: Syntax error, '<' expected
                 // delegate* unmanaged[cdecl] ptr;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ptr")
-                    .WithArguments("<")
-                    .WithLocation(1, 28)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ptr").WithArguments("<").WithLocation(1, 28)
             );
             N(SyntaxKind.LocalDeclarationStatement);
             {
@@ -3290,9 +3286,7 @@ o switch
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "void").WithLocation(1, 10),
                 // (1,10): error CS1003: Syntax error, ',' expected
                 // delegate*void> ptr;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "void")
-                    .WithArguments(",")
-                    .WithLocation(1, 10)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "void").WithArguments(",").WithLocation(1, 10)
             );
             N(SyntaxKind.LocalDeclarationStatement);
             {
@@ -3341,9 +3335,7 @@ o switch
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "void").WithLocation(1, 28),
                 // (1,28): error CS1003: Syntax error, ',' expected
                 // delegate* unmanaged[cdecl] void> ptr;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "void")
-                    .WithArguments(",")
-                    .WithLocation(1, 28)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "void").WithArguments(",").WithLocation(1, 28)
             );
             N(SyntaxKind.LocalDeclarationStatement);
             {

@@ -855,8 +855,7 @@ class C
                         .WithLocation(18, 9),
                     // (24,9): error CS0191: A readonly field cannot be assigned to (except in the constructor of the class in which the field is defined or a variable initializer))
                     //         instance_readonly = 123;
-                    Diagnostic(ErrorCode.ERR_AssgReadonly, "instance_readonly")
-                        .WithLocation(24, 9),
+                    Diagnostic(ErrorCode.ERR_AssgReadonly, "instance_readonly").WithLocation(24, 9),
                     // (31,18): error CS0029: Cannot implicitly convert type 'void' to 'int'
                     //         int m1 = M();
                     Diagnostic(ErrorCode.ERR_NoImplicitConv, "M()")

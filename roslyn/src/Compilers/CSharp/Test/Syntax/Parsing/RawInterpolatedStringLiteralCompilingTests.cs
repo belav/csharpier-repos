@@ -583,9 +583,7 @@ System.Console.Write(
             Diagnostic(ErrorCode.ERR_UnterminatedRawString, "l").WithLocation(3, 11),
             // (4,6): error CS0103: The name 'hi' does not exist in the current context
             //     <hi/>
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "hi")
-                .WithArguments("hi")
-                .WithLocation(4, 6),
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "hi").WithArguments("hi").WithLocation(4, 6),
             // (4,9): error CS1525: Invalid expression term '>'
             //     <hi/>
             Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(4, 9),
@@ -615,9 +613,7 @@ System.Console.Write(
             Diagnostic(ErrorCode.ERR_UnterminatedRawString, "l").WithLocation(3, 20),
             // (4,6): error CS0103: The name 'hi' does not exist in the current context
             //     <hi/>
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "hi")
-                .WithArguments("hi")
-                .WithLocation(4, 6),
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "hi").WithArguments("hi").WithLocation(4, 6),
             // (4,9): error CS1525: Invalid expression term '>'
             //     <hi/>
             Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(4, 9),
@@ -804,14 +800,10 @@ $""""""
             Diagnostic(ErrorCode.ERR_InvalidExprTerm, "#").WithArguments("").WithLocation(5, 1),
             // (5,1): error CS1056: Unexpected character '#'
             // #if DEBUG
-            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "")
-                .WithArguments("#")
-                .WithLocation(5, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments("#").WithLocation(5, 1),
             // (7,1): error CS1056: Unexpected character '#'
             // #endif
-            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "")
-                .WithArguments("#")
-                .WithLocation(7, 1)
+            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments("#").WithLocation(7, 1)
         );
     }
 
@@ -839,14 +831,10 @@ $""""""
             Diagnostic(ErrorCode.ERR_InvalidExprTerm, "#").WithArguments("").WithLocation(5, 1),
             // (5,1): error CS1056: Unexpected character '#'
             // #if DEBUG
-            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "")
-                .WithArguments("#")
-                .WithLocation(5, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments("#").WithLocation(5, 1),
             // (7,1): error CS1056: Unexpected character '#'
             // #endif
-            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "")
-                .WithArguments("#")
-                .WithLocation(7, 1)
+            Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments("#").WithLocation(7, 1)
         );
     }
 

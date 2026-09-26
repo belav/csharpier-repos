@@ -73,9 +73,7 @@ public class QueryFilterFuncletizationContext : DbContext
         SetDependentFilter(modelBuilder, this);
 
         // Inline
-        modelBuilder
-            .Entity<DbContextStaticMemberFilter>()
-            .HasQueryFilter(e => e.UserId != AdminId);
+        modelBuilder.Entity<DbContextStaticMemberFilter>().HasQueryFilter(e => e.UserId != AdminId);
         modelBuilder
             .Entity<StaticMemberFilter>()
             .HasQueryFilter(b => b.IsEnabled == StaticMemberFilter.DefaultEnabled);

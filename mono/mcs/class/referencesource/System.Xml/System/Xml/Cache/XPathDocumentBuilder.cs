@@ -293,8 +293,7 @@ namespace MS.Internal.Xml.Cache
                         }
 
                         // Set collapsed node text
-                        this.pageParent[this.idxParent]
-                            .SetCollapsedValue(this.textBldr.ReadText());
+                        this.pageParent[this.idxParent].SetCollapsedValue(this.textBldr.ReadText());
                         break;
 
                     case TextBlockType.SignificantWhitespace:

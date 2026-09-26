@@ -1162,8 +1162,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,21): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x = new (int, int)(1, 2);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(6, 21),
                 // (9,17): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         x = new (int, int)();
                 Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(9, 17)
@@ -1238,8 +1237,7 @@ class C
                     .WithLocation(12, 22),
                 // (12,55): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x2 = new (int a, (int b, int c) d)(1, new (int, int)(2, 3)) { a = 5, d = {b = 6, c = 7}};
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(12, 55)
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(12, 55)
             );
         }
 
@@ -1282,20 +1280,16 @@ class C
                     .WithLocation(6, 22),
                 // (9,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x1 = new (int, int)(1, 2, 3);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(9, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(9, 22),
                 // (12,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x2 = new (int, int)(1, "2");
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(12, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(12, 22),
                 // (15,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x3 = new (int, int)(1);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(15, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(15, 22),
                 // (18,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x4 = new (int, int)(1, 1) {a = 1, Item3 = 2} ;
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(18, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(18, 22),
                 // (18,40): error CS0117: '(int, int)' does not contain a definition for 'a'
                 //         var x4 = new (int, int)(1, 1) {a = 1, Item3 = 2} ;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "a")
@@ -4591,19 +4585,13 @@ class C2
             compilation.VerifyDiagnostics(
                 // (12,27): error CS0122: 'C.e' is inaccessible due to its protection level
                 //         var y = (instance?.e, (instance.e, instance2.M(), checked(instance.e), default(int)));
-                Diagnostic(ErrorCode.ERR_BadAccess, ".e")
-                    .WithArguments("C.e")
-                    .WithLocation(12, 27),
+                Diagnostic(ErrorCode.ERR_BadAccess, ".e").WithArguments("C.e").WithLocation(12, 27),
                 // (12,41): error CS0122: 'C.e' is inaccessible due to its protection level
                 //         var y = (instance?.e, (instance.e, instance2.M(), checked(instance.e), default(int)));
-                Diagnostic(ErrorCode.ERR_BadAccess, "e")
-                    .WithArguments("C.e")
-                    .WithLocation(12, 41),
+                Diagnostic(ErrorCode.ERR_BadAccess, "e").WithArguments("C.e").WithLocation(12, 41),
                 // (12,76): error CS0122: 'C.e' is inaccessible due to its protection level
                 //         var y = (instance?.e, (instance.e, instance2.M(), checked(instance.e), default(int)));
-                Diagnostic(ErrorCode.ERR_BadAccess, "e")
-                    .WithArguments("C.e")
-                    .WithLocation(12, 76),
+                Diagnostic(ErrorCode.ERR_BadAccess, "e").WithArguments("C.e").WithLocation(12, 76),
                 // (4,17): warning CS0414: The field 'C.e' is assigned but its value is never used
                 //     private int e = 5;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "e").WithArguments("C.e")
@@ -17849,8 +17837,7 @@ class C
                     .WithLocation(7, 49),
                 // (7,41): error CS8081: Expression does not have a name.
                 //         System.Console.WriteLine(nameof((int a, int b)));
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "(int a, int b)")
-                    .WithLocation(7, 41)
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "(int a, int b)").WithLocation(7, 41)
             );
         }
 
@@ -20642,9 +20629,7 @@ class TestAttribute : System.Attribute
                     .WithLocation(14, 20),
                 // (19,16): error CS8129: Type of the tuple element cannot be inferred from '<null>'.
                 //         await (null, "6");
-                Diagnostic(ErrorCode.Unknown, "null")
-                    .WithArguments("<null>")
-                    .WithLocation(19, 16),
+                Diagnostic(ErrorCode.Unknown, "null").WithArguments("<null>").WithLocation(19, 16),
                 // (20,9): error CS1061: '(int, string)' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter' accepting a first argument of type '(int, string)' could be found (are you missing a using directive or an assembly reference?)
                 //         await (7, "7");
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, @"await (7, ""7"")")
@@ -20692,9 +20677,7 @@ class TestAttribute : System.Attribute
                     .WithLocation(36, 14),
                 // (41,28): error CS8129: Type of the tuple element cannot be inferred from '<null>'.
                 //         var x = (16, (16 , null));
-                Diagnostic(ErrorCode.Unknown, "null")
-                    .WithArguments("<null>")
-                    .WithLocation(41, 28),
+                Diagnostic(ErrorCode.Unknown, "null").WithArguments("<null>").WithLocation(41, 28),
                 // (44,17): error CS8330: Cannot implicitly convert tuple expression to 'TypedReference'
                 //         var u = __refvalue((17, null), (int, string));
                 Diagnostic(ErrorCode.Unknown, "__refvalue((17, null), (int, string))")
@@ -26440,9 +26423,7 @@ public class C2
             comp.VerifyDiagnostics(
                 // (11,9): error CS0122: 'C2.C3' is inaccessible due to its protection level
                 //     (C2.C3, int) M() { throw new System.Exception(); }
-                Diagnostic(ErrorCode.ERR_BadAccess, "C3")
-                    .WithArguments("C2.C3")
-                    .WithLocation(11, 9)
+                Diagnostic(ErrorCode.ERR_BadAccess, "C3").WithArguments("C2.C3").WithLocation(11, 9)
             );
         }
 

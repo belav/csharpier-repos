@@ -847,9 +847,7 @@ class C
                 Diagnostic(ErrorCode.ERR_ValueExpected, "").WithLocation(10, 25),
                 // (11,27): error CS1003: Syntax error, ',' expected
                 //     object a1 = new int[1 1 ,,];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "1")
-                    .WithArguments(",")
-                    .WithLocation(11, 27),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "1").WithArguments(",").WithLocation(11, 27),
                 // (11,30): error CS0443: Syntax error; value expected
                 //     object a1 = new int[1 1 ,,];
                 Diagnostic(ErrorCode.ERR_ValueExpected, "").WithLocation(11, 30),

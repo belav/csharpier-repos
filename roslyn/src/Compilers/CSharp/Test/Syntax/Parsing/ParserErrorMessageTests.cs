@@ -653,8 +653,7 @@ public class MyClass {
                 .VerifyDiagnostics(
                     // (3,24): error CS0231: A params parameter must be the last parameter in a parameter list
                     //     public void MyMeth(params int[] values, int i) {}
-                    Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] values")
-                        .WithLocation(3, 24)
+                    Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] values").WithLocation(3, 24)
                 );
         }
 
@@ -830,8 +829,7 @@ public class MyClass
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "m").WithLocation(8, 20),
                     // (9,13): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                     //         byte[13,5] b;
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[13,5]")
-                        .WithLocation(9, 13),
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[13,5]").WithLocation(9, 13),
                     // (9,20): warning CS0168: The variable 'b' is declared but never used
                     //         byte[13,5] b;
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "b")
@@ -878,8 +876,7 @@ public class MyClass
                         .WithLocation(15, 23),
                     // (16,16): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                     //     static byte[13,5] b;
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[13,5]")
-                        .WithLocation(16, 16),
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[13,5]").WithLocation(16, 16),
                     // (16,23): warning CS0169: The field 'MyClass.b' is never used
                     //     static byte[13,5] b;
                     Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
@@ -896,8 +893,7 @@ public class MyClass
                         .WithLocation(17, 27),
                     // (18,13): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                     //     static E[,50] e;
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[,50]")
-                        .WithLocation(18, 13),
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[,50]").WithLocation(18, 13),
                     // (18,14): error CS0443: Syntax error; value expected
                     //     static E[,50] e;
                     Diagnostic(ErrorCode.ERR_ValueExpected, "").WithLocation(18, 14),
@@ -1099,8 +1095,7 @@ abstract class B : A, I
                     Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "T").WithLocation(15, 32),
                     // (17,46): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     internal override void M2<T>() where T : new() { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "new()")
-                        .WithLocation(17, 46),
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "new()").WithLocation(17, 46),
                     // (18,55): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     internal override abstract void M3<U>() where U : A;
                     Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "A").WithLocation(18, 55),
@@ -1491,8 +1486,7 @@ public class C
                         .WithLocation(7, 23),
                     // (7,23): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                     //         var t = new { s.ToString() = 1 };
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "s.ToString()")
-                        .WithLocation(7, 23)
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "s.ToString()").WithLocation(7, 23)
                 );
         }
 
@@ -3324,8 +3318,7 @@ class A
                     .WithLocation(4, 23),
                 // (4,23): error CS1019: Overloadable unary operator expected
                 //     public static int explicit operator ()
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit")
-                    .WithLocation(4, 23),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit").WithLocation(4, 23),
                 // (4,32): error CS1003: Syntax error, '(' expected
                 //     public static int explicit operator ()
                 Diagnostic(ErrorCode.ERR_SyntaxError, "operator")
@@ -3457,8 +3450,7 @@ class A
                     .WithLocation(4, 23),
                 // (4,23): error CS1019: Overloadable unary operator expected
                 //     public static int explicit operator ()
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit")
-                    .WithLocation(4, 23),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit").WithLocation(4, 23),
                 // (4,32): error CS1003: Syntax error, '(' expected
                 //     public static int explicit operator ()
                 Diagnostic(ErrorCode.ERR_SyntaxError, "operator")
@@ -3981,48 +3973,42 @@ public static class GenExtensions<X>
                         .WithArguments("out", "this"),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (16,33): error CS8328:  The parameter modifier 'out' cannot be used with 'this'
                     //     public static void Foo(this out X x) {}
                     Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
                         .WithArguments("out", "this"),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (18,36): error CS8328:  The parameter modifier 'out' cannot be used with 'this'
                     //     public static void Foo<T>(this out T t) {}
                     Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
                         .WithArguments("out", "this"),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (19,36): error CS8328:  The parameter modifier 'out' cannot be used with 'this'
                     //     public static void Foo<T>(this out X x) {}
                     Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
                         .WithArguments("out", "this"),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (21,40): error CS8328:  The parameter modifier 'out' cannot be used with 'this'
                     //     public static void Foo<T,U,V>(this out U u) {}
                     Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
                         .WithArguments("out", "this"),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (15,33): error CS8328:  The parameter modifier 'out' cannot be used with 'this'
                     //     public static void Foo(this out int i) {}
                     Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
                         .WithArguments("out", "this"),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21)
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21)
                 );
         }
 
@@ -4064,43 +4050,37 @@ public static class GenExtensions<X>
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(22, 40),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (16,33): error CS1104: A parameter array cannot be used with 'this' modifier on an extension method
                     //     public static void Goo(this params X[] xArr) {}
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(16, 33),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (18,36): error CS1104: A parameter array cannot be used with 'this' modifier on an extension method
                     //     public static void Goo<T>(this params T[] tArr) {}
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(18, 36),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (19,36): error CS1104: A parameter array cannot be used with 'this' modifier on an extension method
                     //     public static void Goo<T>(this params X[] xArr) {}
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(19, 36),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (21,40): error CS1104: A parameter array cannot be used with 'this' modifier on an extension method
                     //     public static void Goo<T,U,V>(this params U[] uArr) {}
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(21, 40),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (15,33): error CS1104: A parameter array cannot be used with 'this' modifier on an extension method
                     //     public static void Goo(this params int[] iArr) {}
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(15, 33),
                     // (12,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X>
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(12, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(12, 21),
                     // (10,40): error CS1104: A parameter array cannot be used with 'this' modifier on an extension method
                     //     public static void Goo<T,U,V>(this params U[] uArr) {}
                     Diagnostic(ErrorCode.ERR_BadParamModThis, "params").WithLocation(10, 40),
@@ -5524,8 +5504,7 @@ public class MainClass
                     .WithLocation(3, 23),
                 // (3,23): error CS1019: Overloadable unary operator expected
                 //     public static int implicit operator (goo f) { return 6; }    // Error
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit")
-                    .WithLocation(3, 23),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit").WithLocation(3, 23),
                 // (3,32): error CS1003: Syntax error, '(' expected
                 //     public static int implicit operator (goo f) { return 6; }    // Error
                 Diagnostic(ErrorCode.ERR_SyntaxError, "operator")
@@ -5649,8 +5628,7 @@ public class MainClass
                     .WithLocation(3, 23),
                 // (3,23): error CS1019: Overloadable unary operator expected
                 //     public static int implicit operator (goo f) { return 6; }    // Error
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit")
-                    .WithLocation(3, 23),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit").WithLocation(3, 23),
                 // (3,32): error CS1003: Syntax error, '(' expected
                 //     public static int implicit operator (goo f) { return 6; }    // Error
                 Diagnostic(ErrorCode.ERR_SyntaxError, "operator")
@@ -6039,8 +6017,7 @@ public class Test
                 .Verify(
                     // (17,9): error CS1609: Modifiers cannot be placed on event accessor declarations
                     //         private add{}
-                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "private")
-                        .WithLocation(17, 9),
+                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "private").WithLocation(17, 9),
                     // (18,9): error CS1609: Modifiers cannot be placed on event accessor declarations
                     //         public remove{}
                     Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "public").WithLocation(18, 9)

@@ -18070,8 +18070,7 @@ class Test
             compilation1.VerifyDiagnostics(
                 // (8,13): error CS8926: A static virtual or abstract interface member can be accessed only on a type parameter.
                 //         _ = P01;
-                Diagnostic(ErrorCode.ERR_BadAbstractStaticMemberAccess, "P01")
-                    .WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_BadAbstractStaticMemberAccess, "P01").WithLocation(8, 13),
                 // (14,13): error CS0176: Member 'I1.P01' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         _ = this.P01;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "this.P01")
@@ -21116,8 +21115,7 @@ class Test
             compilation1.VerifyDiagnostics(
                 // (8,31): error CS8926: A static virtual or abstract interface member can be accessed only on a type parameter.
                 //         _ = new System.Action(M01);
-                Diagnostic(ErrorCode.ERR_BadAbstractStaticMemberAccess, "M01")
-                    .WithLocation(8, 31),
+                Diagnostic(ErrorCode.ERR_BadAbstractStaticMemberAccess, "M01").WithLocation(8, 31),
                 // (14,31): error CS0176: Member 'I1.M01()' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         _ = new System.Action(this.M01);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "this.M01")
@@ -25795,12 +25793,10 @@ interface I14 : I1
                         .WithLocation(12, 17 + checkedKeyword.Length),
                     // (12,17): error CS0562: The parameter of a unary operator must be the containing type
                     //     I1 operator +(I1 x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(12, 17 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(12, 17 + checkedKeyword.Length),
                     // (17,24): error CS0562: The parameter of a unary operator must be the containing type
                     //     static I1 operator +(I1 x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(17, 24 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(17, 24 + checkedKeyword.Length),
                     // (22,20): error CS8930: Explicit implementation of a user-defined operator 'I5.operator +(I1)' must be declared static
                     //     I1 I1.operator +(I1 x) => default;
                     Diagnostic(ErrorCode.ERR_ExplicitImplementationOfOperatorsMustBeStatic, op)
@@ -25822,8 +25818,7 @@ interface I14 : I1
                         .WithLocation(42, 16 + checkedKeyword.Length),
                     // (42,16): error CS0562: The parameter of a unary operator must be the containing type
                     //     T operator +(T x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(42, 16 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(42, 16 + checkedKeyword.Length),
                     // (47,23): error CS0562: The parameter of a unary operator must be the containing type
                     //     static T operator +(T x) => default;
                     Diagnostic(badSignatureError, op).WithLocation(47, 23 + checkedKeyword.Length)
@@ -26067,12 +26062,10 @@ interface I14 : I1
                         .WithLocation(12, 17 + checkedKeyword.Length),
                     // (12,17): error CS0562: The parameter of a unary operator must be the containing type
                     //     I1 operator +(I1 x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(12, 17 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(12, 17 + checkedKeyword.Length),
                     // (17,24): error CS0562: The parameter of a unary operator must be the containing type
                     //     static I1 operator +(I1 x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(17, 24 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(17, 24 + checkedKeyword.Length),
                     // (22,20): error CS8930: Explicit implementation of a user-defined operator 'I5.operator +(I1)' must be declared static
                     //     I1 I1.operator +(I1 x) => default;
                     Diagnostic(ErrorCode.ERR_ExplicitImplementationOfOperatorsMustBeStatic, op)
@@ -26094,12 +26087,10 @@ interface I14 : I1
                         .WithLocation(42, 16 + checkedKeyword.Length),
                     // (42,16): error CS0562: The parameter of a unary operator must be the containing type
                     //     T operator +(T x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(42, 16 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(42, 16 + checkedKeyword.Length),
                     // (47,23): error CS0562: The parameter of a unary operator must be the containing type
                     //     static T operator +(T x) => default;
-                    Diagnostic(badSignatureError, op)
-                        .WithLocation(47, 23 + checkedKeyword.Length),
+                    Diagnostic(badSignatureError, op).WithLocation(47, 23 + checkedKeyword.Length),
                     // (62,39): error CS0106: The modifier 'virtual' is not valid for this item
                     //     virtual  static T I11<T>.operator +(T x);
                     Diagnostic(ErrorCode.ERR_BadMemberFlag, op)
@@ -43912,9 +43903,7 @@ class Test<T> where T : I1<T>
                 .Verify(
                     // (8,16): error CS0030: Cannot convert type 'I1<T>' to 'int'
                     //         return (int)x;
-                    Diagnostic(error, cast + "x")
-                        .WithArguments("I1<T>", "int")
-                        .WithLocation(8, 16),
+                    Diagnostic(error, cast + "x").WithArguments("I1<T>", "int").WithLocation(8, 16),
                     // (13,16): error CS0030: Cannot convert type 'I1<T>' to 'int'
                     //         return (int)y;
                     Diagnostic(error, cast + "y")

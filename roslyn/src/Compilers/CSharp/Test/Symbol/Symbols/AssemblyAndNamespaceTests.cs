@@ -680,8 +680,7 @@ namespace B;";
                 .VerifyDiagnostics(
                     // (3,15): error CS8908: Source file can not contain both file-scoped and normal namespace declarations.
                     //     namespace B;
-                    Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B")
-                        .WithLocation(3, 15)
+                    Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B").WithLocation(3, 15)
                 );
         }
 
@@ -701,8 +700,7 @@ namespace B
                 .VerifyDiagnostics(
                     // (2,11): error CS8908: error CS8908: Source file can not contain both file-scoped and normal namespace declarations.
                     // namespace B
-                    Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B")
-                        .WithLocation(2, 11)
+                    Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B").WithLocation(2, 11)
                 );
         }
 
@@ -833,8 +831,7 @@ System.Console.WriteLine();";
                 .VerifyDiagnostics(
                     // (3,16): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // System.Console.WriteLine();
-                    Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "WriteLine")
-                        .WithLocation(3, 16),
+                    Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "WriteLine").WithLocation(3, 16),
                     // (3,26): error CS8124: Tuple must contain at least two elements.
                     // System.Console.WriteLine();
                     Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(3, 26),

@@ -349,8 +349,7 @@ class Test<T>
                         .WithLocation(47, 20),
                     // (49,20): error CS8082: Sub-expression cannot be used in an argument to nameof.
                     //         s = nameof(a[4].Equals);
-                    Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "a[4]")
-                        .WithLocation(49, 20)
+                    Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "a[4]").WithLocation(49, 20)
                 );
         }
 
@@ -834,8 +833,7 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (13,20): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //         Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension")
-                    .WithLocation(13, 20)
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension").WithLocation(13, 20)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
@@ -886,8 +884,7 @@ namespace N1
             compilation.VerifyDiagnostics(
                 // (22,28): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //                 Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension")
-                    .WithLocation(22, 28)
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension").WithLocation(22, 28)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
@@ -1024,8 +1021,7 @@ namespace N1
             compilation.VerifyDiagnostics(
                 // (21,28): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //                 Use(nameof(A.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "A.Extension")
-                    .WithLocation(21, 28)
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "A.Extension").WithLocation(21, 28)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);

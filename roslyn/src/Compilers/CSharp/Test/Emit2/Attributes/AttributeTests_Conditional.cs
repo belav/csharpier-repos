@@ -764,8 +764,7 @@ class Bar
                     Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "M").WithArguments("M", "string"),
                     // (7,18): error CS1955: Non-invocable member 'Goo.M' cannot be used like a method.
                     // [Conditional(Goo.M())]
-                    Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "M")
-                        .WithArguments("Goo.M"),
+                    Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "M").WithArguments("Goo.M"),
                     // (8,14): error CS1503: Argument 1: cannot convert from 'method group' to 'string'
                     // [Conditional(Bar.M)]
                     Diagnostic(ErrorCode.ERR_BadArgType, "Bar.M")

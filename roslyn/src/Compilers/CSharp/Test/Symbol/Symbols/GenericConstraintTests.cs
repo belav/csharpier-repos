@@ -2706,8 +2706,7 @@ class D<T> where T : B
                 .VerifyDiagnostics(
                     // (23,15): error CS1061: 'X' does not contain a definition for 'H' and no extension method 'H' accepting a first argument of type 'X' could be found (are you missing a using directive or an assembly reference?)
                     //         o = x.H;
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "H")
-                        .WithArguments("X", "H"),
+                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "H").WithArguments("X", "H"),
                     // (3,21): warning CS0649: Field 'A.F' is never assigned to, and will always have its default value null
                     //     internal object F;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
@@ -2802,8 +2801,7 @@ class B : A<S, C>
                 .VerifyDiagnostics(
                     // (17,12): error CS1061: 'U1' does not contain a definition for 'F' and no extension method 'F' accepting a first argument of type 'U1' could be found (are you missing a using directive or an assembly reference?)
                     //         u1.F = u2.F;
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "F")
-                        .WithArguments("U1", "F"),
+                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "F").WithArguments("U1", "F"),
                     // (3,21): warning CS0649: Field 'S.F' is never assigned to, and will always have its default value null
                     //     internal object F;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
@@ -4058,8 +4056,7 @@ partial class C
                         .WithLocation(14, 9),
                     // (16,18): error CS0756: A partial method may not have multiple defining declarations
                     //     partial void M<T1, T2>(T1 t1, T2 t2)
-                    Diagnostic(ErrorCode.ERR_PartialMethodOnlyOneLatent, "M")
-                        .WithLocation(16, 18),
+                    Diagnostic(ErrorCode.ERR_PartialMethodOnlyOneLatent, "M").WithLocation(16, 18),
                     // (16,18): error CS0111: Type 'C' already defines a member called 'M' with the same parameter types
                     //     partial void M<T1, T2>(T1 t1, T2 t2)
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "M")
@@ -4298,9 +4295,7 @@ class P
                     .WithLocation(13, 17),
                 // (13,17): error CS0648: '' is a type not supported by the language
                 //         new A().M<A>();
-                Diagnostic(ErrorCode.ERR_BogusType, "M<A>")
-                    .WithArguments("")
-                    .WithLocation(13, 17),
+                Diagnostic(ErrorCode.ERR_BogusType, "M<A>").WithArguments("").WithLocation(13, 17),
                 // (15,13): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
                 //         ((I<A>)new C()).M<A>();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "A")
@@ -4418,8 +4413,7 @@ class P
             compilation1.VerifyDiagnostics(
                 // (10,31): error CS0648: 'IT<T>.ITU2<U>' is a type not supported by the language
                 //         o = typeof(IT<object>.ITU2<object>); // CS0648
-                Diagnostic(ErrorCode.ERR_BogusType, "ITU2<object>")
-                    .WithArguments("IT<T>.ITU2<U>"),
+                Diagnostic(ErrorCode.ERR_BogusType, "ITU2<object>").WithArguments("IT<T>.ITU2<U>"),
                 // (11,34): error CS0648: 'IT<T>.IT.IAI' is a type not supported by the language
                 //         o = typeof(IT<object>.IT.IAI); // CS0648
                 Diagnostic(ErrorCode.ERR_BogusType, "IAI").WithArguments("IT<T>.IT.IAI"),

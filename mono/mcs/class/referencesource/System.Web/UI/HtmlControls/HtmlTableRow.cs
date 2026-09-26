@@ -61,10 +61,7 @@ namespace System.Web.UI.HtmlControls
         ///    <see langword='HtmlTableRow'/> control.
         ///    </para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual HtmlTableCellCollection Cells
         {
             get

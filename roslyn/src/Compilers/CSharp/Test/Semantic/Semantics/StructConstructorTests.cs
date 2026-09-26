@@ -268,9 +268,7 @@ System.MissingMethodException"
             {
                 // (7,17): error CS0122: 'S.S()' is inaccessible due to its protection level
                 //         _ = new S();
-                Diagnostic(ErrorCode.ERR_BadAccess, "S")
-                    .WithArguments("S.S()")
-                    .WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_BadAccess, "S").WithArguments("S.S()").WithLocation(7, 17),
                 // (8,13): error CS0310: 'S' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Program.CreateNew<T>()'
                 //         _ = CreateNew<S>();
                 Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "CreateNew<S>")
@@ -3842,8 +3840,7 @@ struct S3
                     .WithLocation(21, 12),
                 // (21,24): warning CS8601: Possible null reference assignment.
                 //     public S3() { F3 = GetValue(); }
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "GetValue()")
-                    .WithLocation(21, 24)
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "GetValue()").WithLocation(21, 24)
             );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular11);
@@ -3865,8 +3862,7 @@ struct S3
                     .WithLocation(21, 12),
                 // (21,24): warning CS8601: Possible null reference assignment.
                 //     public S3() { F3 = GetValue(); }
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "GetValue()")
-                    .WithLocation(21, 24)
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "GetValue()").WithLocation(21, 24)
             );
         }
 

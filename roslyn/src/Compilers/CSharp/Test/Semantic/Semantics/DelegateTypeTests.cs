@@ -5742,9 +5742,7 @@ class B
                     .WithLocation(10, 16),
                 // (10,16): error CS0648: '' is a type not supported by the language
                 //         Report(A.F1);
-                Diagnostic(ErrorCode.ERR_BogusType, "A.F1")
-                    .WithArguments("")
-                    .WithLocation(10, 16),
+                Diagnostic(ErrorCode.ERR_BogusType, "A.F1").WithArguments("").WithLocation(10, 16),
                 // (11,16): error CS0570: 'A.F2()' is not supported by the language
                 //         Report(A.F2);
                 Diagnostic(ErrorCode.ERR_BindToBogus, "A.F2")
@@ -6805,8 +6803,7 @@ class Program
                     .WithLocation(19, 15),
                 // (22,26): error CS8030: Anonymous function converted to a void returning delegate cannot return a value
                 //         FA(delegate () { return 0; });
-                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return")
-                    .WithLocation(22, 26),
+                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return").WithLocation(22, 26),
                 // (23,12): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
                 //         FB(delegate () { });
                 Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
@@ -12540,8 +12537,7 @@ class Program
                     .WithLocation(5, 22),
                 // (5,28): error CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (var x1, var y1) = Main;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "Main")
-                    .WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "Main").WithLocation(5, 28),
                 // (6,14): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         var (x2, y2) = () => { };
                 Diagnostic(
@@ -16705,8 +16701,7 @@ static class Extensions
             comp.VerifyDiagnostics(
                 // (8,24): error CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (type, name) = Main;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "Main")
-                    .WithLocation(8, 24),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "Main").WithLocation(8, 24),
                 // (10,24): error CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (type, name) = (ref int x) => x;
                 Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "(ref int x) => x")
@@ -22761,9 +22756,7 @@ class Program
             comp.VerifyDiagnostics(
                 // (7,14): error CS1525: Invalid expression term '}'
                 //         () =>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
-                    .WithArguments("}")
-                    .WithLocation(7, 14)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "").WithArguments("}").WithLocation(7, 14)
             );
 
             var tree = comp.SyntaxTrees.Single();

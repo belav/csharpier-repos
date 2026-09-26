@@ -159,10 +159,7 @@ namespace MonoTests.System.Runtime.Serialization
 public class CheckLoginResponse
 {
     // Fields
-    [
-        MessageBodyMember(Namespace = "http://tempuri.org/", Order = 0),
-        XmlElement(IsNullable = true)
-    ]
+    [MessageBodyMember(Namespace = "http://tempuri.org/", Order = 0), XmlElement(IsNullable = true)]
     public PlayerActiveUser playeractiveuser;
 
     // Methods

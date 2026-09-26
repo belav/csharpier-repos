@@ -4531,8 +4531,7 @@ delegate void D<U, V>(U u, V v);
                 Diagnostic(ErrorCode.WRN_DuplicateParamTag, includeElement).WithArguments("v"),
                 // (10,5): warning CS1710: XML comment has a duplicate typeparam tag for 'U'
                 // /// <include file='f59a2ef50b4d.xml' path='root/*'/>
-                Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement)
-                    .WithArguments("U"),
+                Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("U"),
                 // (10,5): warning CS1710: XML comment has a duplicate typeparam tag for 'V'
                 // /// <include file='f59a2ef50b4d.xml' path='root/*'/>
                 Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("V")
@@ -5399,8 +5398,7 @@ class Generic<T>
 
                 // (31,29): warning CS0067: The event 'Generic<T>.C.E' is never used
                 //         event System.Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
-                    .WithArguments("Generic<T>.C.E"),
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Generic<T>.C.E"),
                 // (30,13): warning CS0169: The field 'Generic<T>.C.f' is never used
                 //         int f;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "f").WithArguments("Generic<T>.C.f"),
@@ -7321,8 +7319,7 @@ namespace Demo
                 comp,
                 // (4,18): warning CS1591: Missing XML comment for publicly visible type or member 'Demo.Example'
                 //     public class Example
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Example")
-                    .WithArguments("Demo.Example")
+                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Example").WithArguments("Demo.Example")
             );
             var expected = @"
 <?xml version=""1.0""?>
@@ -7550,16 +7547,14 @@ class C
                 comp,
                 // (2,5): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
-                    .WithArguments("T"),
+                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("T"),
                 // (2,5): warning CS1711: XML comment has a typeparam tag for 'TComparator', but there is no type parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
                     .WithArguments("TComparator"),
                 // (2,5): warning CS1572: XML comment has a param tag for 'array', but there is no parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement)
-                    .WithArguments("array"),
+                Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("array"),
                 // (2,5): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("value")

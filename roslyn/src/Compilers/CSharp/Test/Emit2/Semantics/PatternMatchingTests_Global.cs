@@ -902,8 +902,7 @@ class H
                     Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
                     // (11,1): error CS7020: Cannot use 'yield' in top-level script code
                     // yield return H.Dummy((41 is int x4),
-                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
-                        .WithLocation(11, 1),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
                     // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4);
                     Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
@@ -1072,8 +1071,7 @@ class H
                     Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
                     // (11,1): error CS7020: Cannot use 'yield' in top-level script code
                     // yield return H.Dummy((41 is var x4),
-                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
-                        .WithLocation(11, 1),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
                     // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4);
                     Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
@@ -8400,8 +8398,7 @@ for (
                 compilation.VerifyDiagnostics(
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && true is var x6)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -8521,8 +8518,7 @@ for (
                         .WithLocation(20, 27),
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && true is var x6)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -8767,8 +8763,7 @@ foreach (var x15 in
                 compilation.VerifyDiagnostics(
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && true is var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -8896,8 +8891,7 @@ foreach (var x15 in
                         .WithLocation(15, 37),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && true is var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -10231,8 +10225,7 @@ using (Dummy(1 is var x14,
                 compilation.VerifyDiagnostics(
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (18,14): error CS0841: Cannot use local variable 'x6' before it is declared
                     // using (Dummy(x6 && true is var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -10383,8 +10376,7 @@ using (Dummy(1 is var x14,
                         .WithLocation(51, 14),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
                     //     var y12 = 12;
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")

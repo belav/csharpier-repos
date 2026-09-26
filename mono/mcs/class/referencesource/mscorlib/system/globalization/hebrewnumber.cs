@@ -342,19 +342,7 @@ namespace System.Globalization
         static readonly HS[][] NumberPasingState =
         {
             // 400            300/200         100             90~10           8~1      6,       7,       9,          '           "
-            /* 0 */new HS[]
-            {
-                HS.S400,
-                HS.X00,
-                HS.X00,
-                HS.X0,
-                HS.X,
-                HS.X,
-                HS.X,
-                HS.S9,
-                HS._err,
-                HS._err,
-            },
+            /* 0 */new HS[] { HS.S400, HS.X00, HS.X00, HS.X0, HS.X, HS.X, HS.X, HS.S9, HS._err, HS._err },
             /* 1: S400 */new HS[]
             {
                 HS.S400_400,

@@ -6332,12 +6332,10 @@ public class C
             comp.VerifyDiagnostics(
                 // (8,15): error CS1510: A ref or out value must be an assignable variable
                 //         M(ref (1, 2) == (3, 4), out (1, 2) == (3, 4));
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)")
-                    .WithLocation(8, 15),
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)").WithLocation(8, 15),
                 // (8,37): error CS1510: A ref or out value must be an assignable variable
                 //         M(ref (1, 2) == (3, 4), out (1, 2) == (3, 4));
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)")
-                    .WithLocation(8, 37)
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)").WithLocation(8, 37)
             );
         }
 

@@ -952,36 +952,28 @@ class C
                 .VerifyDiagnostics(
                     // (15,14): error CS0019: Operator '==' cannot be applied to operands of type 'T' and 'C'
                     //         x = (t == c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "t == c")
-                        .WithArguments("==", "T", "C"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "t == c").WithArguments("==", "T", "C"),
                     // (21,14): error CS0019: Operator '==' cannot be applied to operands of type 'U' and 'C'
                     //         x = (u == c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "u == c")
-                        .WithArguments("==", "U", "C"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "u == c").WithArguments("==", "U", "C"),
                     // (27,14): error CS0019: Operator '==' cannot be applied to operands of type 'A' and 'C'
                     //         x = (a == c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "a == c")
-                        .WithArguments("==", "A", "C"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "a == c").WithArguments("==", "A", "C"),
                     // (33,14): error CS0019: Operator '==' cannot be applied to operands of type 'B' and 'C'
                     //         x = (b == c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "b == c")
-                        .WithArguments("==", "B", "C"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "b == c").WithArguments("==", "B", "C"),
                     // (35,14): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'T'
                     //         x = (c == t);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == t")
-                        .WithArguments("==", "C", "T"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == t").WithArguments("==", "C", "T"),
                     // (36,14): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'U'
                     //         x = (c == u);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == u")
-                        .WithArguments("==", "C", "U"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == u").WithArguments("==", "C", "U"),
                     // (37,14): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'A'
                     //         x = (c == a);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == a")
-                        .WithArguments("==", "C", "A"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == a").WithArguments("==", "C", "A"),
                     // (38,14): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'B'
                     //         x = (c == b);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == b")
-                        .WithArguments("==", "C", "B"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c == b").WithArguments("==", "C", "B"),
                     // (11,14): warning CS1718: Comparison made to same variable; did you mean to compare something else?
                     //         x = (t == t);
                     Diagnostic(ErrorCode.WRN_ComparisonToSelf, "t == t"),
@@ -2052,8 +2044,7 @@ namespace x
                 .VerifyDiagnostics(
                     // (8,20): error CS0030: Cannot convert type 'int' to 'x.iii'
                     //             return (iii)0;   // CS0030
-                    Diagnostic(ErrorCode.ERR_NoExplicitConv, "(iii)0")
-                        .WithArguments("int", "x.iii")
+                    Diagnostic(ErrorCode.ERR_NoExplicitConv, "(iii)0").WithArguments("int", "x.iii")
                 );
         }
 
@@ -3905,8 +3896,7 @@ class C
                         .WithArguments("C.Property"),
                     // (17,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.Method()'
                     //             Method();
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "Method")
-                        .WithArguments("C.Method()"),
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "Method").WithArguments("C.Method()"),
                     // (22,25): error CS0120: An object reference is required for the non-static field, method, or property 'C.field'
                     //             object f1 = field;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "field").WithArguments("C.field"),
@@ -3916,12 +3906,10 @@ class C
                         .WithArguments("C.Property"),
                     // (24,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.Method()'
                     //             Method();
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "Method")
-                        .WithArguments("C.Method()"),
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "Method").WithArguments("C.Method()"),
                     // (26,25): error CS0120: An object reference is required for the non-static field, method, or property 'C.D.field2'
                     //             object f2 = field2;
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "field2")
-                        .WithArguments("C.D.field2"),
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "field2").WithArguments("C.D.field2"),
                     // (27,25): error CS0120: An object reference is required for the non-static field, method, or property 'C.D.Property2'
                     //             object p2 = Property2;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "Property2")
@@ -4648,8 +4636,7 @@ namespace MyNamespace
                     Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "i + 1").WithLocation(9, 10),
                     // (10,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                     //         "string" = null;
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, @"""string""")
-                        .WithLocation(10, 9),
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, @"""string""").WithLocation(10, 9),
                     // (11,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                     //         null = new object();
                     Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "null").WithLocation(11, 9),
@@ -5184,8 +5171,7 @@ class Xyzzy
             comp.VerifyDiagnostics(
                 // (21,9): error CS0104: 'var' is an ambiguous reference between 'A.var' and 'B.var'
                 //         var x = M(); // 8.5.1 When the local-variable-type is specified as var and no type named var is in scope, ...
-                Diagnostic(ErrorCode.ERR_AmbigContext, "var")
-                    .WithArguments("var", "A.var", "B.var")
+                Diagnostic(ErrorCode.ERR_AmbigContext, "var").WithArguments("var", "A.var", "B.var")
             );
         }
 
@@ -6200,8 +6186,7 @@ class C
                     Diagnostic(ErrorCode.ERR_BadFinallyLeave, "return"),
                     // (3,16): warning CS0649: Field 'C.F' is never assigned to, and will always have its default value 0
                     //     static int F;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
-                        .WithArguments("C.F", "0")
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F").WithArguments("C.F", "0")
                 );
         }
 
@@ -6980,8 +6965,7 @@ class Program
                 .VerifyDiagnostics(
                     // (10,19): warning CS7095: Filter expression is a constant 'true', consider removing the filter
                     //         catch when (true) { }
-                    Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "(1+1)==2")
-                        .WithLocation(10, 21)
+                    Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "(1+1)==2").WithLocation(10, 21)
                 );
         }
 
@@ -8017,15 +8001,13 @@ class C { }
                 .VerifyDiagnostics(
                     // (7,25): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'S[]' and 'int'
                     //         foreach (S x in true ? x : 1) // Dev10: CS0173 ONLY
-                    Diagnostic(ErrorCode.ERR_InvalidQM, "true ? x : 1")
-                        .WithArguments("S[]", "int"),
+                    Diagnostic(ErrorCode.ERR_InvalidQM, "true ? x : 1").WithArguments("S[]", "int"),
                     // (7,20): error CS0136: A local or parameter named 'x' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //         foreach (S x in true ? x : 1) // Dev10: CS0173 ONLY
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x").WithArguments("x"),
                     // (11,25): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'int' and 'C[]'
                     //         foreach (C c in false ? 1 : y) // Dev10: CS0173 ONLY
-                    Diagnostic(ErrorCode.ERR_InvalidQM, "false ? 1 : y")
-                        .WithArguments("int", "C[]")
+                    Diagnostic(ErrorCode.ERR_InvalidQM, "false ? 1 : y").WithArguments("int", "C[]")
                 );
         }
 
@@ -8546,8 +8528,7 @@ struct S
                 .VerifyDiagnostics(
                     // (10,18): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
                     //         var b1 = this.F is Action;
-                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "this.F is Action")
-                        .WithLocation(10, 18),
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "this.F is Action").WithLocation(10, 18),
                     // (10,18): error CS0188: The 'this' object cannot be used before all of its fields have been assigned. Consider updating to language version '11.0' to auto-default the unassigned fields.
                     //         var b1 = this.F is Action;
                     Diagnostic(ErrorCode.ERR_UseDefViolationThisUnsupportedVersion, "this")
@@ -8562,8 +8543,7 @@ struct S
                 .VerifyDiagnostics(
                     // (10,18): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
                     //         var b1 = this.F is Action;
-                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "this.F is Action")
-                        .WithLocation(10, 18)
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "this.F is Action").WithLocation(10, 18)
                 );
         }
 
@@ -9518,8 +9498,7 @@ class A
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "(a) => a").WithLocation(6, 9),
                     // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         (a, b) => { };
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "(a, b) => { }")
-                        .WithLocation(7, 9),
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "(a, b) => { }").WithLocation(7, 9),
                     // (9,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         x + y; x == 1;
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "x + y").WithLocation(9, 9),
@@ -10855,8 +10834,7 @@ class MyClass
                     Diagnostic(ErrorCode.ERR_NegativeArraySize, "-3").WithLocation(6, 33),
                     // (7,34): error CS0248: Cannot create an array with a negative size
                     //         int[] myArray2 = new int[-5000000000]; // slightly different code path for long array sizes
-                    Diagnostic(ErrorCode.ERR_NegativeArraySize, "-5000000000")
-                        .WithLocation(7, 34),
+                    Diagnostic(ErrorCode.ERR_NegativeArraySize, "-5000000000").WithLocation(7, 34),
                     // (9,35): error CS0248: Cannot create an array with a negative size
                     //         var myArray4 = new object[-2, 1, -1] {{{null}},{{null}}};
                     Diagnostic(ErrorCode.ERR_NegativeArraySize, "-2").WithLocation(9, 35),
@@ -10937,8 +10915,7 @@ class FixedTest
                 .VerifyDiagnostics(
                     // (20,23): error CS9385: The given expression cannot be used in a fixed statement
                     //       fixed (int* p = (int*)&pt.x)   // CS0254
-                    Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "(int*)&pt.x")
-                        .WithLocation(20, 23)
+                    Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "(int*)&pt.x").WithLocation(20, 23)
                 );
         }
 
@@ -14692,8 +14669,7 @@ var v = M();
                 .VerifyDiagnostics(
                     // (5,9): error CS8917: The delegate type could not be inferred.
                     // var d = s => -1;
-                    Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "s => -1")
-                        .WithLocation(5, 9),
+                    Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "s => -1").WithLocation(5, 9),
                     // (7,5): error CS0815: Cannot assign <null> to an implicitly-typed variable
                     // var p = null;
                     Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue, "p = null")
@@ -15671,8 +15647,7 @@ namespace TestNamespace
                         .WithLocation(11, 38),
                     // (12,22): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
                     //             Del d1 = () => { } as Del;      // CS0837
-                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "() => { } as Del")
-                        .WithLocation(12, 22),
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "() => { } as Del").WithLocation(12, 22),
                     // (12,32): warning CS8848: Operator 'as' cannot be used here due to precedence. Use parentheses to disambiguate.
                     //             Del d1 = () => { } as Del;      // CS0837
                     Diagnostic(ErrorCode.WRN_PrecedenceInversion, "as")
@@ -15705,8 +15680,7 @@ namespace TestNamespace
                         .WithLocation(11, 38),
                     // (12,22): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
                     //             Del d1 = () => { } as Del;      // CS0837
-                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "() => { } as Del")
-                        .WithLocation(12, 22),
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "() => { } as Del").WithLocation(12, 22),
                     // (12,32): warning CS8848: Operator 'as' cannot be used here due to precedence. Use parentheses to disambiguate.
                     //             Del d1 = () => { } as Del;      // CS0837
                     Diagnostic(ErrorCode.WRN_PrecedenceInversion, "as")
@@ -15827,8 +15801,7 @@ class C
                 .VerifyDiagnostics(
                     // (18,25): error CS0841: Cannot use local variable 'b' before it is declared
                     //             Derived d = b as Derived;
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b")
-                        .WithArguments("b"),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b").WithArguments("b"),
                     // (19,18): error CS0136: A local or parameter named 'b' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //             Base b = null;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "b").WithArguments("b"),
@@ -16501,19 +16474,16 @@ class C
                 .VerifyDiagnostics(
                     // (7,11): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         ++local;
-                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "local")
-                        .WithLocation(7, 11),
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "local").WithLocation(7, 11),
                     // (8,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         local++;
                     Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "local").WithLocation(8, 9),
                     // (9,11): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         --field;
-                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "field")
-                        .WithLocation(9, 11),
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "field").WithLocation(9, 11),
                     // (10,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         field--;
-                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "field")
-                        .WithLocation(10, 9),
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "field").WithLocation(10, 9),
                     // (11,12): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         ++(local + 3);
                     Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "local + 3")
@@ -16530,12 +16500,10 @@ class C
                     Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "2").WithLocation(14, 9),
                     // (17,10): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         (d + 1)++;
-                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "d + 1")
-                        .WithLocation(17, 10),
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "d + 1").WithLocation(17, 10),
                     // (18,12): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         --(d + 1);
-                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "d + 1")
-                        .WithLocation(18, 12),
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "d + 1").WithLocation(18, 12),
                     // (19,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
                     //         d++++;
                     Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "d++").WithLocation(19, 9)
@@ -23397,8 +23365,7 @@ class MyClass
                 .VerifyDiagnostics(
                     // (5,29): warning CS0067: The event 'MyClass.evt' is never used
                     //     public event MyDelegate evt;   // CS0067
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "evt")
-                        .WithArguments("MyClass.evt")
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "evt").WithArguments("MyClass.evt")
                 );
         }
 
@@ -24445,20 +24412,17 @@ class Program
                 .VerifyDiagnostics(
                     // (34,27): warning CS0252: Possible unintended reference comparison; to get a value comparison, cast the left hand side to type 'Symbol'
                     //         Console.WriteLine(a1 == a2);
-                    Diagnostic(ErrorCode.WRN_BadRefCompareLeft, "a1 == a2")
-                        .WithArguments("Symbol"),
+                    Diagnostic(ErrorCode.WRN_BadRefCompareLeft, "a1 == a2").WithArguments("Symbol"),
                     // (35,27): warning CS0252: Possible unintended reference comparison; to get a value comparison, cast the left hand side to type 'Symbol'
                     //         Console.WriteLine(a1 != a2);
-                    Diagnostic(ErrorCode.WRN_BadRefCompareLeft, "a1 != a2")
-                        .WithArguments("Symbol"),
+                    Diagnostic(ErrorCode.WRN_BadRefCompareLeft, "a1 != a2").WithArguments("Symbol"),
                     // (36,27): warning CS0253: Possible unintended reference comparison; to get a value comparison, cast the right hand side to type 'Symbol'
                     //         Console.WriteLine(a2 == a1);
                     Diagnostic(ErrorCode.WRN_BadRefCompareRight, "a2 == a1")
                         .WithArguments("Symbol"),
                     // (37,27): warning CS0253: Possible unintended reference comparison; to get a value comparison, cast the right hand side to type 'Symbol'
                     //         Console.WriteLine(a2 != a1);
-                    Diagnostic(ErrorCode.WRN_BadRefCompareRight, "a2 != a1")
-                        .WithArguments("Symbol")
+                    Diagnostic(ErrorCode.WRN_BadRefCompareRight, "a2 != a1").WithArguments("Symbol")
                 );
         }
 
@@ -24774,8 +24738,7 @@ public class MyClass
                 .VerifyDiagnostics(
                     // (7,14): warning CS1591: Missing XML comment for publicly visible type or member 'MyClass'
                     // public class MyClass
-                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "MyClass")
-                        .WithArguments("MyClass"),
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "MyClass").WithArguments("MyClass"),
                     // (9,19): warning CS0419: Ambiguous reference in cref attribute: 'I.F'. Assuming 'I.F()', but could have also matched other overloads including 'I.F(int)'.
                     //    /// <see cref="I.F"/>
                     Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "I.F")
@@ -25626,8 +25589,7 @@ ffff"
                     Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "null > null").WithArguments("int?"),
                     // (150,11): warning CS0464: Comparing with null of type 'int?' always produces 'false'
                     //         W(null >= null);            // CS0464
-                    Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "null >= null")
-                        .WithArguments("int?"),
+                    Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "null >= null").WithArguments("int?"),
                     // (151,11): warning CS0464: Comparing with null of type 'int?' always produces 'false'
                     //         W(null < null);             // CS0464
                     Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "null < null").WithArguments("int?"),
@@ -26657,8 +26619,7 @@ public class MyClass
                 .VerifyDiagnostics(
                     // (7,15): warning CS1571: XML comment has a duplicate param tag for 'Int1'
                     //    /// <param name='Int1'>Used to indicate status.</param> // CS1571
-                    Diagnostic(ErrorCode.WRN_DuplicateParamTag, "name='Int1'")
-                        .WithArguments("Int1")
+                    Diagnostic(ErrorCode.WRN_DuplicateParamTag, "name='Int1'").WithArguments("Int1")
                 );
         }
 
@@ -26763,8 +26724,7 @@ public class MyClass
                 .VerifyDiagnostics(
                     // (2,20): warning CS1580: Invalid type for parameter 'i' in XML comment cref attribute: 'Test(i)'
                     // /// <seealso cref="Test(i)"/>   // CS1580
-                    Diagnostic(ErrorCode.WRN_BadXMLRefParamType, "i")
-                        .WithArguments("i", "Test(i)"),
+                    Diagnostic(ErrorCode.WRN_BadXMLRefParamType, "i").WithArguments("i", "Test(i)"),
                     // (2,20): warning CS1574: XML comment has cref attribute 'Test(i)' that could not be resolved
                     // /// <seealso cref="Test(i)"/>   // CS1580
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "Test(i)").WithArguments("Test(i)")
@@ -26967,8 +26927,7 @@ public class Test
                 .VerifyDiagnostics(
                     // (6,23): warning CS1591: Missing XML comment for publicly visible type or member 'Test.Main()'
                     //    public static void Main()   // CS1591
-                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "Main")
-                        .WithArguments("Test.Main()")
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "Main").WithArguments("Test.Main()")
                 );
         }
 
@@ -27209,10 +27168,7 @@ class S
         //                );
         //        }
 
-        [
-            Fact(),
-            WorkItem(530384, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530384")
-        ]
+        [Fact(), WorkItem(530384, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530384")]
         public void CS1709WRN_EmptyFileName()
         {
             var text =
@@ -28251,16 +28207,14 @@ public class Program
                         .WithLocation(19, 47),
                     // (20,43): error CS0206: A non ref-returning property or indexer may not be used as an out or ref value
                     //         var z8 = new Func<string, string>(ref Program.BarP);
-                    Diagnostic(ErrorCode.ERR_RefProperty, "ref Program.BarP")
-                        .WithLocation(20, 43),
+                    Diagnostic(ErrorCode.ERR_RefProperty, "ref Program.BarP").WithLocation(20, 43),
                     // (21,47): error CS1510: A ref or out argument must be an assignable variable
                     //         var z9 = new Func<string, string>(ref Program.Goo<string>(x => x));
                     Diagnostic(ErrorCode.ERR_RefLvalueExpected, "Program.Goo<string>(x => x)")
                         .WithLocation(21, 47),
                     // (23,48): error CS1510: A ref or out value must be an assignable variable
                     //         var z11 = new Func<string, string>(ref new(x => x));
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "new(x => x)")
-                        .WithLocation(23, 48)
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "new(x => x)").WithLocation(23, 48)
                 );
 
             CreateCompilation(source, parseOptions: TestOptions.Regular.WithStrictFeature())
@@ -28302,8 +28256,7 @@ public class Program
                         .WithLocation(22, 48),
                     // (23,48): error CS1510: A ref or out value must be an assignable variable
                     //         var z11 = new Func<string, string>(ref new(x => x));
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "new(x => x)")
-                        .WithLocation(23, 48)
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "new(x => x)").WithLocation(23, 48)
                 );
         }
 
@@ -28562,8 +28515,7 @@ class Program
                         .WithLocation(21, 14),
                     // (23,14): error CS8389: Omitting the type argument is not allowed in the current context
                     //         Test(this.f<>);
-                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.f<>")
-                        .WithLocation(23, 14),
+                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.f<>").WithLocation(23, 14),
                     // (23,19): error CS0307: The field 'Program.f' cannot be used with type arguments
                     //         Test(this.f<>);
                     Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "f<>")
@@ -28571,8 +28523,7 @@ class Program
                         .WithLocation(23, 19),
                     // (24,14): error CS8389: Omitting the type argument is not allowed in the current context
                     //         Test(this.P<>);
-                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.P<>")
-                        .WithLocation(24, 14),
+                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.P<>").WithLocation(24, 14),
                     // (24,19): error CS0307: The property 'Program.P' cannot be used with type arguments
                     //         Test(this.P<>);
                     Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "P<>")
@@ -28580,8 +28531,7 @@ class Program
                         .WithLocation(24, 19),
                     // (25,14): error CS8389: Omitting the type argument is not allowed in the current context
                     //         Test(this.M<>());
-                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.M<>")
-                        .WithLocation(25, 14),
+                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.M<>").WithLocation(25, 14),
                     // (25,19): error CS0308: The non-generic method 'Program.M()' cannot be used with type arguments
                     //         Test(this.M<>());
                     Diagnostic(ErrorCode.ERR_HasNoTypeVars, "M<>")
@@ -28594,8 +28544,7 @@ class Program
                         .WithLocation(29, 13),
                     // (30,13): error CS8389: Omitting the type argument is not allowed in the current context
                     //         m = this.M<>;
-                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.M<>")
-                        .WithLocation(30, 13),
+                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.M<>").WithLocation(30, 13),
                     // (30,18): error CS0308: The non-generic method 'Program.M()' cannot be used with type arguments
                     //         m = this.M<>;
                     Diagnostic(ErrorCode.ERR_HasNoTypeVars, "M<>")
@@ -28762,8 +28711,7 @@ class Program
                         .WithLocation(9, 14),
                     // (10,14): error CS8389: Omitting the type argument is not allowed in the current context
                     //         Test(this.E<>);
-                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.E<>")
-                        .WithLocation(10, 14),
+                    Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "this.E<>").WithLocation(10, 14),
                     // (10,19): error CS0307: The event 'Program.E' cannot be used with type arguments
                     //         Test(this.E<>);
                     Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "E<>")
@@ -29402,8 +29350,7 @@ class Program
                 .VerifyDiagnostics(
                     // (25,15): error CS0122: 'Program.M<A.B>(I<A.B>)' is inaccessible due to its protection level
                     //         D d = M;
-                    Diagnostic(ErrorCode.ERR_BadAccess, "M")
-                        .WithArguments("Program.M<A.B>(I<A.B>)")
+                    Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("Program.M<A.B>(I<A.B>)")
                 );
         }
 

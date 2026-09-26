@@ -1418,10 +1418,7 @@ namespace System.Web.Services.Description
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [
-            XmlElement("input", typeof(OperationInput)),
-            XmlElement("output", typeof(OperationOutput))
-        ]
+        [XmlElement("input", typeof(OperationInput)), XmlElement("output", typeof(OperationOutput))]
         public OperationMessageCollection Messages
         {
             get

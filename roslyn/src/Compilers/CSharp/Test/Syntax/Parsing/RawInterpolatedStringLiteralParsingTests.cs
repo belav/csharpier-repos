@@ -287,8 +287,7 @@ class C
             .VerifyDiagnostics(
                 // (6,22): error CS9005: Not enough closing braces for raw string literal
                 //         var v = $$"""{{{0}""";
-                Diagnostic(ErrorCode.ERR_NotEnoughCloseBracesForRawString, "{")
-                    .WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_NotEnoughCloseBracesForRawString, "{").WithLocation(6, 22)
             );
     }
 

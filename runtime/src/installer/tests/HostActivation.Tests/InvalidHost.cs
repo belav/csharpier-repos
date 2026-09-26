@@ -45,9 +45,7 @@ namespace HostActivation.Tests
             else
             {
                 // Some Unix flavors filter exit code to ubyte.
-                (exitCode & 0xFF)
-                    .Should()
-                    .Be(AppHostExeNotBoundFailure & 0xFF);
+                (exitCode & 0xFF).Should().Be(AppHostExeNotBoundFailure & 0xFF);
             }
         }
 
@@ -117,9 +115,7 @@ namespace HostActivation.Tests
             else
             {
                 // Some Unix flavors filter exit code to ubyte.
-                (exitCode & 0xFF)
-                    .Should()
-                    .Be(EntryPointFailure & 0xFF);
+                (exitCode & 0xFF).Should().Be(EntryPointFailure & 0xFF);
             }
         }
 

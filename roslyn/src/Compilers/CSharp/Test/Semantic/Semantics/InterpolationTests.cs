@@ -18080,8 +18080,7 @@ public ref struct CustomHandler
             {
                 // (17,20): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         return ref $"{s}";
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, expression)
-                    .WithLocation(17, 20),
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, expression).WithLocation(17, 20),
             };
 
             var comp = CreateCompilation(
@@ -19050,8 +19049,7 @@ class Program
             comp.VerifyDiagnostics(
                 // (13,16): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         return $"{1}";
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, @"$""{1}""")
-                    .WithLocation(13, 16),
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, @"$""{1}""").WithLocation(13, 16),
                 // (13,16): error CS8347: Cannot use a result of 'CustomHandler.CustomHandler(int, int, in int)' in this context because it may expose variables referenced by parameter 'i' outside of their declaration scope
                 //         return $"{1}";
                 Diagnostic(ErrorCode.ERR_EscapeCall, @"$""{1}""")
@@ -19397,9 +19395,7 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,16): error CS8352: Cannot use variable 'r' in this context because it may expose referenced variables outside of their declaration scope
                 //         return r
-                Diagnostic(ErrorCode.ERR_EscapeVariable, "r")
-                    .WithArguments("r")
-                    .WithLocation(8, 16)
+                Diagnostic(ErrorCode.ERR_EscapeVariable, "r").WithArguments("r").WithLocation(8, 16)
             );
         }
 
@@ -22558,8 +22554,7 @@ class C
                         .WithLocation(5, 15),
                     // (6,19): error CS1510: A ref or out value must be an assignable variable
                     //         ByVal(ref "");
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral)
-                        .WithLocation(6, 19),
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral).WithLocation(6, 19),
                     // (7,18): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //         ByVal(in "");
                     Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, stringLiteral)
@@ -22599,8 +22594,7 @@ class C
                         .WithLocation(5, 15),
                     // (6,19): error CS1510: A ref or out value must be an assignable variable
                     //         ByRef(ref "");
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral)
-                        .WithLocation(6, 19),
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral).WithLocation(6, 19),
                     // (7,18): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //         ByRef(in "");
                     Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, stringLiteral)
@@ -22640,8 +22634,7 @@ class C
                         .WithLocation(5, 14),
                     // (6,18): error CS1510: A ref or out value must be an assignable variable
                     //         ByIn(ref "");
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral)
-                        .WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral).WithLocation(6, 18),
                     // (7,17): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //         ByIn(in "");
                     Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, stringLiteral)
@@ -22682,8 +22675,7 @@ class C
                         .WithLocation(5, 15),
                     // (6,19): error CS1510: A ref or out value must be an assignable variable
                     //         ByOut(ref "");
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral)
-                        .WithLocation(6, 19),
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, stringLiteral).WithLocation(6, 19),
                     // (7,18): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //         ByOut(in "");
                     Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, stringLiteral)

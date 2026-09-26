@@ -7171,8 +7171,7 @@ public class Program
                 .VerifyDiagnostics(
                     // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
                     //         abstract ref add => throw null;
-                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract")
-                        .WithLocation(6, 9),
+                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(6, 9),
                     // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
                     //         abstract ref remove => throw null;
                     Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(7, 9)
@@ -7474,8 +7473,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -7513,8 +7511,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
 
             N(SyntaxKind.LocalFunctionStatement);
@@ -7555,8 +7552,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (2,29): error CS8989: The 'parameter null-checking' feature is not supported.
                 //                 /*comment1*/!/*comment2*/) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(2, 29)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(2, 29)
             );
 
             N(SyntaxKind.LocalFunctionStatement);
@@ -7596,8 +7592,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!! = null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -7643,8 +7638,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -7842,8 +7836,7 @@ class C<T> where T : struct? {}
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "!").WithLocation(1, 19),
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(__arglist[]!!= null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8007,8 +8000,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,20): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name !!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 20)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 20)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8054,8 +8046,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8101,8 +8092,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!= null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8148,8 +8138,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8195,8 +8184,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name! !=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8243,8 +8231,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,20): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name !!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 20)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 20)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8290,8 +8277,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name! ! =null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8338,8 +8324,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,20): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name ! !=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 20)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 20)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8386,8 +8371,7 @@ class C<T> where T : struct? {}
                 options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!= null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19)
             );
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8499,8 +8483,7 @@ class C
                 options: TestOptions.RegularPreview,
                 // (4,27): error CS8989: The 'parameter null-checking' feature is not supported.
                 //     public void M(string x!!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(4, 27)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(4, 27)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -8554,8 +8537,7 @@ class C
                 options: TestOptions.RegularPreview,
                 // (4,22): error CS8989: The 'parameter null-checking' feature is not supported.
                 //     public C(string x!!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(4, 22)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(4, 22)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -8608,8 +8590,7 @@ class Box
                 options: TestOptions.RegularPreview,
                 // (4,39): error CS8989: The 'parameter null-checking' feature is not supported.
                 //     public static int operator+ (Box b!!, Box c)
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(4, 39)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(4, 39)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -8693,8 +8674,7 @@ Del d = delegate(int k!!) { /* ... */ };",
                     .WithLocation(3, 1),
                 // (3,23): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Del d = delegate(int k!!) { /* ... */ };
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(3, 23)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(3, 23)
             );
             N(SyntaxKind.CompilationUnit);
             {

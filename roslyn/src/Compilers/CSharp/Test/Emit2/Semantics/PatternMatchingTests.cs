@@ -4019,8 +4019,7 @@ unsafe struct S
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "o.Equals is()").WithLocation(7, 17),
                     // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
                     //             if (object.Equals is()) {}
-                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "object.Equals is()")
-                        .WithLocation(8, 17)
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "object.Equals is()").WithLocation(8, 17)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -4105,8 +4104,7 @@ public class Vec
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "Main is 2").WithLocation(7, 13),
                     // (8,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
                     //         if (delegate {} is 3) {}
-                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "delegate {} is 3")
-                        .WithLocation(8, 13),
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "delegate {} is 3").WithLocation(8, 13),
                     // (8,25): warning CS8848: Operator 'is' cannot be used here due to precedence. Use parentheses to disambiguate.
                     //         if (delegate {} is 3) {}
                     Diagnostic(ErrorCode.WRN_PrecedenceInversion, "is")
@@ -5056,14 +5054,10 @@ unsafe public class Typ
                     .WithLocation(13, 31),
                 // (5,42): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('var')
                 //     public static void Main(int* a, var* c, Typ* e)
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
-                    .WithArguments("var")
-                    .WithLocation(5, 42),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "c").WithArguments("var").WithLocation(5, 42),
                 // (5,50): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Typ')
                 //     public static void Main(int* a, var* c, Typ* e)
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "e")
-                    .WithArguments("Typ")
-                    .WithLocation(5, 50),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "e").WithArguments("Typ").WithLocation(5, 50),
                 // (8,27): error CS0103: The name 'b' does not exist in the current context
                 //             if (a is int* b) {}
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "b")
@@ -5854,8 +5848,7 @@ class Derived : Base
                 .VerifyDiagnostics(
                     // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case TDerived td:
-                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "TDerived td")
-                        .WithLocation(12, 18)
+                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "TDerived td").WithLocation(12, 18)
                 );
         }
 

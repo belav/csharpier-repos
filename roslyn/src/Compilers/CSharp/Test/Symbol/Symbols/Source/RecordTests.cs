@@ -1451,8 +1451,7 @@ data struct S2(int X, int Y);";
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(5, 6),
                 // (2,1): error CS8805: Program using top-level statements must be an executable.
                 // data class C1 { }
-                Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "data ")
-                    .WithLocation(2, 1),
+                Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "data ").WithLocation(2, 1),
                 // (2,1): error CS0246: The type or namespace name 'data' could not be found (are you missing a using directive or an assembly reference?)
                 // data class C1 { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "data")

@@ -1163,8 +1163,7 @@ public class DynamicEnumerable
             CreateCompilationWithMscorlib40AndSystemCore(text)
                 .VerifyDiagnostics(
                     // (6,27): error CS0117: 'dynamic' does not contain a definition for 'Current'
-                    Diagnostic(ErrorCode.ERR_NoSuchMember, "e")
-                        .WithArguments("dynamic", "Current"),
+                    Diagnostic(ErrorCode.ERR_NoSuchMember, "e").WithArguments("dynamic", "Current"),
                     // (6,27): error CS0202: foreach requires that the return type 'dynamic' of 'DynamicEnumerable.GetEnumerator()' must have a suitable public MoveNext method and public Current property
                     Diagnostic(ErrorCode.ERR_BadGetEnumerator, "e")
                         .WithArguments("dynamic", "DynamicEnumerable.GetEnumerator()")
@@ -1299,8 +1298,7 @@ class C
 
                     // (7,9): error CS0030: Cannot convert type '?' to 'int'
                     //         foreach (int element in array)
-                    Diagnostic(ErrorCode.ERR_NoExplicitConv, "foreach")
-                        .WithArguments("?", "int")
+                    Diagnostic(ErrorCode.ERR_NoExplicitConv, "foreach").WithArguments("?", "int")
                 );
         }
 

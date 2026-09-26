@@ -731,8 +731,7 @@ class C
                 Diagnostic(ErrorCode.ERR_ThisInBadContext, "this").WithLocation(6, 19),
                 // (7,19): error CS9190: 'readonly' modifier must be specified after 'ref'.
                 //         delegate*<readonly ref string, void> p3,
-                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
-                    .WithLocation(7, 19),
+                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly").WithLocation(7, 19),
                 // (8,22): error CS8328:  The parameter modifier 'out' cannot be used with 'in'
                 //         delegate*<in out string, void> p4,
                 Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
@@ -1689,9 +1688,7 @@ class E
             comp.VerifyDiagnostics(
                 // (10,21): error CS0122: 'C.D' is inaccessible due to its protection level
                 //         delegate*<C.D> d;
-                Diagnostic(ErrorCode.ERR_BadAccess, "D")
-                    .WithArguments("C.D")
-                    .WithLocation(10, 21),
+                Diagnostic(ErrorCode.ERR_BadAccess, "D").WithArguments("C.D").WithLocation(10, 21),
                 // (10,24): warning CS0168: The variable 'd' is declared but never used
                 //         delegate*<C.D> d;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "d")

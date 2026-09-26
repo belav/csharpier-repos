@@ -388,9 +388,7 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 10),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 //
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(5, 1)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -426,9 +424,7 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 16),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 //
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(5, 1)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -558,9 +554,7 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 22),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 //
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(5, 1)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -642,9 +636,7 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 28),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 //
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(5, 1)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -889,9 +881,7 @@ class C
 }",
                 // (4,19): error CS1534: Overloaded binary operator '+' takes two parameters
                 //     async operator+
-                Diagnostic(ErrorCode.ERR_BadBinOpArgs, "+")
-                    .WithArguments("+")
-                    .WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_BadBinOpArgs, "+").WithArguments("+").WithLocation(4, 19),
                 // (4,20): error CS1003: Syntax error, '(' expected
                 //     async operator+
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("(").WithLocation(4, 20),

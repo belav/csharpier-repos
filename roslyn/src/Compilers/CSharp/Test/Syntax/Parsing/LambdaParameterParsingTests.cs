@@ -47,9 +47,7 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
                 // (4,41): error CS1002: ; expected
                 //           System.Func<int, int> f = (out
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 41),
@@ -161,9 +159,7 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -286,9 +282,7 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C c
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -418,9 +412,7 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C c
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -550,9 +542,7 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C c,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C c,
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -828,8 +818,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func1 = x!! => x + "1";
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 31)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -892,8 +881,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, bool> func1 = (x!!, y) => x == y;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 32)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -971,8 +959,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,26): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = (x!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 26)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 26)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1032,8 +1019,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,25): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = x!!=>x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 25)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 25)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1088,8 +1074,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,30): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = (int x!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 30)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 30)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1153,8 +1138,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, int> func1 = (int x!!, int y) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 35)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1236,8 +1220,7 @@ class C {
                     .WithLocation(1, 35),
                 // (1,44): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, int> func1 = (int x!!, int y!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 44)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 44)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1371,8 +1354,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,26): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = (_!!) => 42;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 26)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 26)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1432,8 +1414,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = x!=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 31)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1491,8 +1472,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func1 = x !=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 32)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1718,8 +1698,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func5 = x !!=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 32)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1838,8 +1817,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func7 = x!! => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 31)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1896,8 +1874,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func8 = x! !=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 31)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -1955,8 +1932,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func9 = x! ! => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 31)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -4524,8 +4500,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 32)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32)
             );
 
             N(SyntaxKind.FieldDeclaration);
@@ -4597,8 +4572,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (y, x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 35)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35)
             );
 
             N(SyntaxKind.FieldDeclaration);
@@ -4675,8 +4649,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,39): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 39)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 39)
             );
 
             N(SyntaxKind.FieldDeclaration);
@@ -4752,8 +4725,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,49): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string y, string x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 49)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 49)
             );
 
             N(SyntaxKind.FieldDeclaration);
@@ -4926,8 +4898,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = x! ! => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 31)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -4985,8 +4956,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 32)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -5049,8 +5019,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (y, x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 35)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -5118,8 +5087,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,39): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 39)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 39)
             );
             N(SyntaxKind.FieldDeclaration);
             {
@@ -5186,8 +5154,7 @@ class C {
                 options: TestOptions.RegularPreview,
                 // (1,49): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string y, string x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
-                    .WithLocation(1, 49)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 49)
             );
             N(SyntaxKind.FieldDeclaration);
             {

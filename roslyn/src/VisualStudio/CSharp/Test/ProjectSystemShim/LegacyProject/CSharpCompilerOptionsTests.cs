@@ -84,10 +84,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         ////    }
         ////}
 
-        [
-            WpfFact,
-            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1092636")
-        ]
+        [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1092636")]
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1040247")]
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1048368")]
         public void ProjectSettingsOptionAddAndRemove()

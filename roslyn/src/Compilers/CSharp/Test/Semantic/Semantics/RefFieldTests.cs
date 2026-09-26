@@ -814,9 +814,7 @@ class Program
             comp.VerifyEmitDiagnostics(
                 // (7,29): error CS0570: 'S.F' is not supported by the language
                 //         Console.WriteLine(s.F[1]);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F")
-                    .WithArguments("S.F")
-                    .WithLocation(7, 29)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F").WithArguments("S.F").WithLocation(7, 29)
             );
         }
 
@@ -988,9 +986,7 @@ class C
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C*").WithLocation(16, 9),
                 // (16,12): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         C* c) // 4, 5
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
-                    .WithArguments("C")
-                    .WithLocation(16, 12),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "c").WithArguments("C").WithLocation(16, 12),
                 // (22,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         S2* s2, // 6
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "s2")
@@ -1031,9 +1027,7 @@ unsafe class C
             comp.VerifyEmitDiagnostics(
                 // (14,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //     S2* M2() => (S2*)null; // 1
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "M2")
-                    .WithArguments("S2")
-                    .WithLocation(14, 9),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "M2").WithArguments("S2").WithLocation(14, 9),
                 // (14,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //     S2* M2() => (S2*)null; // 1
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
@@ -1041,14 +1035,10 @@ unsafe class C
                     .WithLocation(14, 18),
                 // (15,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //     C* M3() => (C*)null; // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "M3")
-                    .WithArguments("C")
-                    .WithLocation(15, 8),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "M3").WithArguments("C").WithLocation(15, 8),
                 // (15,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //     C* M3() => (C*)null; // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(15, 17)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(15, 17)
             );
         }
 
@@ -1214,9 +1204,7 @@ class C
                     .WithLocation(27, 27),
                 // (31,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         fixed (C* x3 = &Prop3) { } // 3
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(31, 16),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(31, 16),
                 // (31,24): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         fixed (C* x3 = &Prop3) { } // 3
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&Prop3")
@@ -1359,9 +1347,7 @@ class C
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C*").WithLocation(17, 14),
                 // (17,14): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         _ = (C*)p; // 3
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(17, 14),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(17, 14),
                 // (17,17): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = (C*)p; // 3
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "p").WithLocation(17, 17),
@@ -1372,9 +1358,7 @@ class C
                     .WithLocation(23, 14),
                 // (24,14): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         _ = (C*)p; // 5
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(24, 14)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(24, 14)
             );
         }
 
@@ -1429,9 +1413,7 @@ class C
                     .WithLocation(19, 23),
                 // (23,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         return sizeof(C*); // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(23, 23),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(23, 23),
                 // (27,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         return sizeof(S2); // 3
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "sizeof(S2)")
@@ -1513,9 +1495,7 @@ class C
                     .WithLocation(19, 23),
                 // (23,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         return typeof(C*); // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(23, 23)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(23, 23)
             );
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
             verifier.VerifyIL(
@@ -1655,9 +1635,7 @@ unsafe class C2
             comp.VerifyEmitDiagnostics(
                 // (11,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         var x = &s; // 1
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
-                    .WithArguments("S2")
-                    .WithLocation(11, 17)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s").WithArguments("S2").WithLocation(11, 17)
             );
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
             verifier.VerifyIL(
@@ -1702,9 +1680,7 @@ unsafe class C2
             comp.VerifyEmitDiagnostics(
                 // (13,25): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         return (IntPtr*)&s; // 1
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
-                    .WithArguments("S2")
-                    .WithLocation(13, 25)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s").WithArguments("S2").WithLocation(13, 25)
             );
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
             verifier.VerifyIL(
@@ -1801,9 +1777,7 @@ unsafe class C
             comp.VerifyEmitDiagnostics(
                 // (19,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         return (&s)->F1; // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
-                    .WithArguments("S2")
-                    .WithLocation(19, 17)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s").WithArguments("S2").WithLocation(19, 17)
             );
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
             verifier.VerifyIL(
@@ -1856,9 +1830,7 @@ unsafe class C
             comp.VerifyEmitDiagnostics(
                 // (19,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         return (&s)[0]; // 1
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
-                    .WithArguments("S2")
-                    .WithLocation(19, 17)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s").WithArguments("S2").WithLocation(19, 17)
             );
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
             verifier.VerifyIL(
@@ -1923,9 +1895,7 @@ class C
                     .WithLocation(16, 29),
                 // (17,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('C')
                 //         var x3 = stackalloc C[0]; // 2
-                Diagnostic(ErrorCode.ERR_ManagedAddr, "C")
-                    .WithArguments("C")
-                    .WithLocation(17, 29),
+                Diagnostic(ErrorCode.ERR_ManagedAddr, "C").WithArguments("C").WithLocation(17, 29),
                 // (20,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         S2* y2 = stackalloc S2[0]; // 3
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
@@ -1938,9 +1908,7 @@ class C
                     .WithLocation(20, 29),
                 // (21,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         C* y3 = stackalloc C[0]; // 4
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(21, 9),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(21, 9),
                 // (21,28): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('C')
                 //         C* y3 = stackalloc C[0]; // 4
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "C").WithArguments("C").WithLocation(21, 28)
@@ -2013,9 +1981,7 @@ class C
                     .WithLocation(20, 18),
                 // (24,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         C* y3 = stackalloc[] { new C() }; // 4
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(24, 9),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(24, 9),
                 // (24,17): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('C')
                 //         C* y3 = stackalloc[] { new C() }; // 4
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { new C() }")
@@ -2071,9 +2037,7 @@ class C
                     .WithLocation(16, 29),
                 // (17,29): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         var x3 = stackalloc C*[0]; // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(17, 29),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(17, 29),
                 // (20,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         S2** y2 = stackalloc S2*[0]; // 3
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
@@ -2086,14 +2050,10 @@ class C
                     .WithLocation(20, 30),
                 // (21,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         C** y3 = stackalloc C*[0]; // 4
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(21, 9),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(21, 9),
                 // (21,29): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         C** y3 = stackalloc C*[0]; // 4
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(21, 29)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(21, 29)
             );
         }
 
@@ -2148,9 +2108,7 @@ class C
                     .WithLocation(16, 19),
                 // (17,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
                 //         var s3 = (C*)null; // 2
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*")
-                    .WithArguments("C")
-                    .WithLocation(17, 19),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "C*").WithArguments("C").WithLocation(17, 19),
                 // (24,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         S2** y2 = stackalloc[] { s2 }; // 3
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
@@ -2445,9 +2403,7 @@ class Program
             comp.VerifyEmitDiagnostics(
                 // (7,29): error CS0570: 'A.F' is not supported by the language
                 //         Console.WriteLine(a.F);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F")
-                    .WithArguments("A.F")
-                    .WithLocation(7, 29)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F").WithArguments("A.F").WithLocation(7, 29)
             );
         }
 
@@ -2484,9 +2440,7 @@ class Program
             comp.VerifyEmitDiagnostics(
                 // (7,29): error CS0570: 'A.F' is not supported by the language
                 //         Console.WriteLine(a.F);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F")
-                    .WithArguments("A.F")
-                    .WithLocation(7, 29)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F").WithArguments("A.F").WithLocation(7, 29)
             );
         }
 
@@ -3180,9 +3134,7 @@ class Program
             comp.VerifyEmitDiagnostics(
                 // (6,12): error CS0570: 'R2.F' is not supported by the language
                 //         r2.F = ref r1;
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F")
-                    .WithArguments("R2.F")
-                    .WithLocation(6, 12)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F").WithArguments("R2.F").WithLocation(6, 12)
             );
         }
 
@@ -12762,9 +12714,7 @@ public static class A
                     .WithLocation(7, 9),
                 // (7,25): error CS8352: Cannot use variable 'y' in this context because it may expose referenced variables outside of their declaration scope
                 //         A.F2(ref x, ref y);
-                Diagnostic(ErrorCode.ERR_EscapeVariable, "y")
-                    .WithArguments("y")
-                    .WithLocation(7, 25)
+                Diagnostic(ErrorCode.ERR_EscapeVariable, "y").WithArguments("y").WithLocation(7, 25)
             );
 
             verify(comp, useUpdatedEscapeRules: true);
@@ -15462,8 +15412,7 @@ class Program
                 Diagnostic(ErrorCode.ERR_ScopedDiscard, "scoped").WithLocation(13, 16),
                 // (13,23): error CS8388: An out variable cannot be declared as a ref local
                 //         M1(out scoped ref var _);
-                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var")
-                    .WithLocation(13, 23),
+                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var").WithLocation(13, 23),
                 // (14,16): error CS9061: The 'scoped' modifier cannot be used with discard.
                 //         M1(out scoped ref readonly R _);
                 Diagnostic(ErrorCode.ERR_ScopedDiscard, "scoped").WithLocation(14, 16),
@@ -15490,8 +15439,7 @@ class Program
                     .WithLocation(17, 16),
                 // (17,23): error CS8388: An out variable cannot be declared as a ref local
                 //         M1(out scoped ref var r21);
-                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var")
-                    .WithLocation(17, 23),
+                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var").WithLocation(17, 23),
                 // (18,16): error CS8936: Feature 'ref fields' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //         M1(out scoped ref readonly var r51);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "scoped")
@@ -15544,8 +15492,7 @@ class Program
                 Diagnostic(ErrorCode.ERR_ScopedDiscard, "scoped").WithLocation(13, 16),
                 // (13,23): error CS8388: An out variable cannot be declared as a ref local
                 //         M1(out scoped ref var _);
-                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var")
-                    .WithLocation(13, 23),
+                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var").WithLocation(13, 23),
                 // (14,16): error CS9061: The 'scoped' modifier cannot be used with discard.
                 //         M1(out scoped ref readonly R _);
                 Diagnostic(ErrorCode.ERR_ScopedDiscard, "scoped").WithLocation(14, 16),
@@ -15562,8 +15509,7 @@ class Program
                     .WithLocation(15, 23),
                 // (17,23): error CS8388: An out variable cannot be declared as a ref local
                 //         M1(out scoped ref var r21);
-                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var")
-                    .WithLocation(17, 23),
+                Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref var").WithLocation(17, 23),
                 // (18,23): error CS8388: An out variable cannot be declared as a ref local
                 //         M1(out scoped ref readonly var r51);
                 Diagnostic(ErrorCode.ERR_OutVariableCannotBeByRef, "ref readonly var")
@@ -15980,9 +15926,7 @@ ref struct R { }
                     .WithLocation(2, 8),
                 // (2,15): error CS1003: Syntax error, ',' expected
                 // scoped scoped ref R z = ref x;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(2, 15)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(2, 15)
             );
         }
 
@@ -16888,9 +16832,7 @@ class Program
                     .WithLocation(6, 38),
                 // (7,9): error CS0165: Use of unassigned local variable 'b'
                 //         b++;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "b")
-                    .WithArguments("b")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "b").WithArguments("b").WithLocation(7, 9)
             );
         }
 
@@ -17654,8 +17596,7 @@ class Program
                 Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "var").WithLocation(7, 21),
                 // (10,21): error CS9048: The 'scoped' modifier can be used for refs and ref struct values only.
                 //         for (scoped S<int> y4 = new S<int>(), y5 = new S<int>();;) break;
-                Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "S<int>")
-                    .WithLocation(10, 21),
+                Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "S<int>").WithLocation(10, 21),
                 // (10,21): error CS9048: The 'scoped' modifier can be used for refs and ref struct values only.
                 //         for (scoped S<int> y4 = new S<int>(), y5 = new S<int>();;) break;
                 Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "S<int>").WithLocation(10, 21)
@@ -19628,12 +19569,10 @@ class Program
                     .WithLocation(13, 29),
                 // (13,38): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         Expression<D3> e3 = (ref int x, scoped ref int y) => ref x;
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x")
-                    .WithLocation(13, 38),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x").WithLocation(13, 38),
                 // (13,56): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         Expression<D3> e3 = (ref int x, scoped ref int y) => ref x;
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y")
-                    .WithLocation(13, 56),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y").WithLocation(13, 56),
                 // (14,29): error CS8986: The 'scoped' modifier of parameter 'y' doesn't match target 'Expression<D4>'.
                 //         Expression<D4> e4 = (ref int x, ref int y) => ref x; // 2
                 Diagnostic(
@@ -19651,12 +19590,10 @@ class Program
                     .WithLocation(14, 29),
                 // (14,38): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         Expression<D4> e4 = (ref int x, ref int y) => ref x; // 2
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x")
-                    .WithLocation(14, 38),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x").WithLocation(14, 38),
                 // (14,49): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         Expression<D4> e4 = (ref int x, ref int y) => ref x; // 2
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y")
-                    .WithLocation(14, 49),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y").WithLocation(14, 49),
                 // (18,38): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'R'.
                 //         var e1 = (Expression<D1>)((R x, scoped R y) => x);
                 Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "x")
@@ -19704,12 +19641,10 @@ class Program
                     .WithLocation(20, 35),
                 // (20,44): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         var e3 = (Expression<D3>)((ref int x, scoped ref int y) => ref x);
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x")
-                    .WithLocation(20, 44),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x").WithLocation(20, 44),
                 // (20,62): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         var e3 = (Expression<D3>)((ref int x, scoped ref int y) => ref x);
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y")
-                    .WithLocation(20, 62),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y").WithLocation(20, 62),
                 // (21,18): error CS8986: The 'scoped' modifier of parameter 'y' doesn't match target 'Expression<D4>'.
                 //         var e4 = (Expression<D4>)((ref int x, ref int y) => ref x); // 4
                 Diagnostic(
@@ -19727,8 +19662,7 @@ class Program
                     .WithLocation(21, 35),
                 // (21,44): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         var e4 = (Expression<D4>)((ref int x, ref int y) => ref x); // 4
-                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x")
-                    .WithLocation(21, 44),
+                Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "x").WithLocation(21, 44),
                 // (21,55): error CS1951: An expression tree lambda may not contain a ref, in or out parameter
                 //         var e4 = (Expression<D4>)((ref int x, ref int y) => ref x); // 4
                 Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "y").WithLocation(21, 55)
@@ -22156,8 +22090,7 @@ class Program
                 Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "var").WithLocation(9, 16),
                 // (11,16): error CS9048: The 'scoped' modifier can be used for refs and ref struct values only.
                 //         scoped S<int> y4 = new S<int>(), y5 = new S<int>(); // 3
-                Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "S<int>")
-                    .WithLocation(11, 16),
+                Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "S<int>").WithLocation(11, 16),
                 // (11,16): error CS9048: The 'scoped' modifier can be used for refs and ref struct values only.
                 //         scoped S<int> y4 = new S<int>(), y5 = new S<int>(); // 3
                 Diagnostic(ErrorCode.ERR_ScopedRefAndRefStructOnly, "S<int>").WithLocation(11, 16)
@@ -24959,8 +24892,7 @@ ref struct R
             comp.VerifyDiagnostics(
                 // (2,31): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
                 // var r = new R() { field = ref var() };
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var()")
-                    .WithLocation(2, 31),
+                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var()").WithLocation(2, 31),
                 // (2,31): error CS0103: The name 'var' does not exist in the current context
                 // var r = new R() { field = ref var() };
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
@@ -25262,8 +25194,7 @@ interface I
             comp.VerifyDiagnostics(
                 // (12,20): error CS0525: Interfaces cannot contain instance fields
                 //     public ref int field;
-                Diagnostic(ErrorCode.ERR_InterfacesCantContainFields, "field")
-                    .WithLocation(12, 20),
+                Diagnostic(ErrorCode.ERR_InterfacesCantContainFields, "field").WithLocation(12, 20),
                 // (12,20): error CS9059: A ref field can only be declared in a ref struct.
                 //     public ref int field;
                 Diagnostic(ErrorCode.ERR_RefFieldInNonRefStruct, "field").WithLocation(12, 20)
@@ -25379,8 +25310,7 @@ ref struct R
                 Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "Property").WithLocation(3, 19),
                 // (6,1): error CS8373: The left-hand side of a ref assignment must be a ref variable.
                 // r2.Property = ref x; // 2
-                Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "r2.Property")
-                    .WithLocation(6, 1)
+                Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "r2.Property").WithLocation(6, 1)
             );
         }
 
@@ -25442,8 +25372,7 @@ public ref struct C
                 Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "[0]").WithLocation(7, 35),
                 // (15,9): error CS8373: The left-hand side of a ref assignment must be a ref variable.
                 //         c2.array[0] = ref x; // 2
-                Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "c2.array[0]")
-                    .WithLocation(15, 9)
+                Diagnostic(ErrorCode.ERR_RefLocalOrParamExpected, "c2.array[0]").WithLocation(15, 9)
             );
         }
 
@@ -32224,8 +32153,7 @@ public class A
                 .VerifyDiagnostics(
                     // 0.cs(6,35): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //     public ref int Value() => ref s1.S2.Value;
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "s1.S2")
-                        .WithLocation(6, 35),
+                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "s1.S2").WithLocation(6, 35),
                     // 0.cs(11,16): warning CS0649: Field 'S1.s2' is never assigned to, and will always have its default value
                     //     private S2 s2;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "s2")
@@ -32389,8 +32317,7 @@ public class A
                 .VerifyDiagnostics(
                     // 0.cs(6,40): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //     public ref int Value(int i) => ref s1[i].Value;
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "s1[i]")
-                        .WithLocation(6, 40),
+                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "s1[i]").WithLocation(6, 40),
                     // 0.cs(11,16): warning CS0649: Field 'S1.s2' is never assigned to, and will always have its default value
                     //     private S2 s2;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "s2")

@@ -509,8 +509,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 .VerifyDiagnostics(
                     // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
                     // namespace ns { global using ns1; }
-                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global")
-                        .WithLocation(1, 16),
+                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global").WithLocation(1, 16),
                     // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
                     // namespace ns { global using ns1; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
@@ -668,8 +667,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 .VerifyDiagnostics(
                     // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
                     // namespace ns { global using static ns1; }
-                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global")
-                        .WithLocation(1, 16),
+                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global").WithLocation(1, 16),
                     // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
                     // namespace ns { global using static ns1; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
@@ -854,8 +852,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 .VerifyDiagnostics(
                     // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
                     // namespace ns { global using alias = ns1; }
-                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global")
-                        .WithLocation(1, 16),
+                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global").WithLocation(1, 16),
                     // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
                     // namespace ns { global using alias = ns1; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
@@ -928,8 +925,7 @@ global using ns1;
                 TestOptions.RegularPreview,
                 // (3,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
                 // global using ns1;
-                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;")
-                    .WithLocation(3, 1)
+                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;").WithLocation(3, 1)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -1000,8 +996,7 @@ namespace ns2
                 TestOptions.RegularPreview,
                 // (5,5): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
                 //     global using ns1;
-                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;")
-                    .WithLocation(5, 5)
+                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;").WithLocation(5, 5)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -1220,8 +1215,7 @@ global using ns1;
                 TestOptions.RegularPreview,
                 // (3,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
                 // global using ns1;
-                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;")
-                    .WithLocation(3, 1)
+                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;").WithLocation(3, 1)
             );
 
             N(SyntaxKind.CompilationUnit);

@@ -1044,14 +1044,12 @@ class D
             submission.VerifyDiagnostics(
                 // (1,7): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
                 // using Unknown;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
-                    .WithArguments("Unknown")
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown")
             );
 
             submission.VerifyEmitDiagnostics(
                 // (1,7): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
-                    .WithArguments("Unknown")
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown")
             );
         }
 

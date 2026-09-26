@@ -445,9 +445,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 Type t = null;
                 Type noValue = Type.GetTypeFromHandle(t.TypeHandle); // Returns empty value set (throws at runtime)
                 // No warning - since there's no method on input
-                noValue
-                    .GetRuntimeMethod("NoMethod", new Type[] { })
-                    .MakeGenericMethod(unknownType);
+                noValue.GetRuntimeMethod("NoMethod", new Type[] { }).MakeGenericMethod(unknownType);
             }
 
             static void TestWithEmptyInputNoSuchMethod(Type unknownType)

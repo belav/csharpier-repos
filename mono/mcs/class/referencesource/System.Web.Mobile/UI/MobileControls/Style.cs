@@ -516,10 +516,7 @@ namespace System.Web.UI.MobileControls
         // persistence behavior, they're referenced from FontInfo.cs.
         //
 
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal String FontName
         {
             get { return (String)this[FontNameKey]; }

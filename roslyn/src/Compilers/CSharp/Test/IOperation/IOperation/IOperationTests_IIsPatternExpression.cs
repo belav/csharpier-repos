@@ -1591,9 +1591,7 @@ class C
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(6, 40),
                 // (6,42): error CS1003: Syntax error, ',' expected
                 //         b = /*<bind>*/o is C1 { Prop[1]: var x }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "var")
-                    .WithArguments(",")
-                    .WithLocation(6, 42)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "var").WithArguments(",").WithLocation(6, 42)
             );
 
             var expectedOperationTree =
@@ -2781,9 +2779,7 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (
             {
                 // (8,31): error CS0021: Cannot apply indexing with [] to an expression of type 'X'
                 //         _ = /*<bind>*/this is []/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("X")
-                    .WithLocation(8, 31),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("X").WithLocation(8, 31),
             };
 
             var comp = CreateCompilationWithIndex(source);

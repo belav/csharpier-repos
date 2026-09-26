@@ -412,9 +412,7 @@ public struct Struct
                     .WithLocation(4, 12),
                 // (7,9): warning CS8887: Use of unassigned local variable 's'
                 //         s.ToString();
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "s")
-                    .WithArguments("s")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.WRN_UseDefViolation, "s").WithArguments("s").WithLocation(7, 9)
             );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -429,9 +427,7 @@ public struct Struct
             verifier.VerifyDiagnostics(
                 // (7,9): warning CS8887: Use of unassigned local variable 's'
                 //         s.ToString();
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "s")
-                    .WithArguments("s")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.WRN_UseDefViolation, "s").WithArguments("s").WithLocation(7, 9)
             );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -452,9 +448,7 @@ public struct Struct
                     .WithLocation(4, 12),
                 // (7,9): warning CS8887: Use of unassigned local variable 's'
                 //         s.ToString();
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "s")
-                    .WithArguments("s")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.WRN_UseDefViolation, "s").WithArguments("s").WithLocation(7, 9)
             );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }

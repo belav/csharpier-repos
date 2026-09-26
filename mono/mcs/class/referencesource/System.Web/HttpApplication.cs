@@ -205,10 +205,7 @@ namespace System.Web
         ///          pipeline-module exposed objects.
         ///       </para>
         ///    </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public HttpContext Context
         {
             get { return (_context != null) ? _context : _initContext; }
@@ -2247,10 +2244,7 @@ namespace System.Web
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ISite Site
         {
             get { return _site; }

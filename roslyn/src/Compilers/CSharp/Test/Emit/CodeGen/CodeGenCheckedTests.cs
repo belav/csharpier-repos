@@ -2501,12 +2501,10 @@ class M
             comp.VerifyDiagnostics(
                 // (6,25): error CS0463: Evaluation of the decimal constant expression failed
                 //         var r = checked(decimal.MaxValue + 1);
-                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1")
-                    .WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1").WithLocation(6, 25),
                 // (10,18): error CS0463: Evaluation of the decimal constant expression failed
                 //         var r1 = decimal.MaxValue + 1;
-                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1")
-                    .WithLocation(10, 18)
+                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1").WithLocation(10, 18)
             );
         }
 

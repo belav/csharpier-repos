@@ -1573,9 +1573,7 @@ class C
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(6, 42),
                 // (6,42): error CS1003: Syntax error, ',' expected
                 //         delegate*<void> ptr = &static () => { };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(6, 42),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(6, 42),
                 // (6,45): error CS1002: ; expected
                 //         delegate*<void> ptr = &static () => { };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(6, 45)
@@ -1632,8 +1630,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,32): error CS0211: Cannot take the address of the given expression
                 //         delegate*<void> ptr = &static delegate() { };
-                Diagnostic(ErrorCode.ERR_InvalidAddrOp, "static delegate() { }")
-                    .WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_InvalidAddrOp, "static delegate() { }").WithLocation(6, 32)
             );
         }
 
@@ -1767,8 +1764,7 @@ class C
                     .WithLocation(17, 25),
                 // (20,33): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         a = ref b ? ref a : ref () => { };
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "() => { }")
-                    .WithLocation(20, 33),
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "() => { }").WithLocation(20, 33),
                 // (21,33): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         a = ref b ? ref a : ref static () => { };
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "static () => { }")

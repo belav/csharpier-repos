@@ -606,8 +606,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,16): error CS8716: There is no target type for the default literal.
                 //         using (default)
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 16)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 16)
             );
 
             var tree = comp.SyntaxTrees.First();
@@ -655,8 +654,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,24): error CS8716: There is no target type for the default literal.
                 //         using (var x = default)
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 24),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 24),
                 // (10,20): error CS0815: Cannot assign <null> to an implicitly-typed variable
                 //         using (var x = null) { }
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue, "x = null")
@@ -706,8 +704,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,23): error CS8716: There is no target type for the default literal.
                 //         using var x = default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 23),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 23),
                 // (7,19): error CS0815: Cannot assign <null> to an implicitly-typed variable
                 //         using var y = null;
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue, "y = null")
@@ -752,8 +749,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,15): error CS8716: There is no target type for the default literal.
                 //         await default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 15)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 15)
             );
         }
 
@@ -859,8 +855,7 @@ class C<T>
             comp.VerifyDiagnostics(
                 // (6,17): error CS8716: There is no target type for the default literal.
                 //         var x = default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 17),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 17),
                 // (7,13): error CS0815: Cannot assign <null> to an implicitly-typed variable
                 //         var y = null;
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue, "y = null")
@@ -907,20 +902,16 @@ class C<T>
             comp.VerifyDiagnostics(
                 // (6,18): error CS8716: There is no target type for the default literal.
                 //         var a = +default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 18),
                 // (7,18): error CS8716: There is no target type for the default literal.
                 //         var b = -default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 18),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 18),
                 // (8,18): error CS8716: There is no target type for the default literal.
                 //         var c = ~default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(8, 18),
                 // (9,18): error CS8716: There is no target type for the default literal.
                 //         var d = !default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(9, 18)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(9, 18)
             );
         }
 
@@ -1162,19 +1153,16 @@ class C
             comp.VerifyDiagnostics(
                 // (6,9): error CS8716: There is no target type for the default literal.
                 //         default.ToString();
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 9),
                 // (7,9): error CS8716: There is no target type for the default literal.
                 //         default[0].ToString();
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 9),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 9),
                 // (8,37): error CS8081: Expression does not have a name.
                 //         System.Console.Write(nameof(default));
                 Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "default").WithLocation(8, 37),
                 // (9,15): error CS8716: There is no target type for the default literal.
                 //         throw default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(9, 15),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(9, 15),
                 // (13,9): warning CS1720: Expression will always cause a System.NullReferenceException because the default value of 'C' is null
                 //         default(C).ToString();
                 Diagnostic(ErrorCode.WRN_DotOnDefault, "default(C).ToString")
@@ -1191,8 +1179,7 @@ class C
                     .WithLocation(6, 9),
                 // (6,9): error CS8716: There is no target type for the default literal.
                 //         default.ToString();
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 9),
                 // (7,9): error CS8107: Feature 'default literal' is not available in C# 7.0. Please use language version 7.1 or greater.
                 //         default[0].ToString();
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "default")
@@ -1200,8 +1187,7 @@ class C
                     .WithLocation(7, 9),
                 // (7,9): error CS8716: There is no target type for the default literal.
                 //         default[0].ToString();
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 9),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 9),
                 // (8,37): error CS8107: Feature 'default literal' is not available in C# 7.0. Please use language version 7.1 or greater.
                 //         System.Console.Write(nameof(default));
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "default")
@@ -1217,8 +1203,7 @@ class C
                     .WithLocation(9, 15),
                 // (9,15): error CS8716: There is no target type for the default literal.
                 //         throw default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(9, 15),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(9, 15),
                 // (13,9): warning CS1720: Expression will always cause a System.NullReferenceException because the default value of 'C' is null
                 //         default(C).ToString();
                 Diagnostic(ErrorCode.WRN_DotOnDefault, "default(C).ToString")
@@ -1270,14 +1255,10 @@ class C
             comp.VerifyDiagnostics(
                 // (6,15): error CS0283: The type 'T' cannot be declared const
                 //         const T x = default(T);
-                Diagnostic(ErrorCode.ERR_BadConstType, "T")
-                    .WithArguments("T")
-                    .WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_BadConstType, "T").WithArguments("T").WithLocation(6, 15),
                 // (7,15): error CS0283: The type 'T' cannot be declared const
                 //         const T y = (T)default;
-                Diagnostic(ErrorCode.ERR_BadConstType, "T")
-                    .WithArguments("T")
-                    .WithLocation(7, 15),
+                Diagnostic(ErrorCode.ERR_BadConstType, "T").WithArguments("T").WithLocation(7, 15),
                 // (8,26): error CS0133: The expression being assigned to 'z' must be constant
                 //         const object z = (T)default;
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "(T)default")
@@ -1307,14 +1288,10 @@ class C
             comp.VerifyDiagnostics(
                 // (7,15): error CS0283: The type 'S' cannot be declared const
                 //         const S x = default(S);
-                Diagnostic(ErrorCode.ERR_BadConstType, "S")
-                    .WithArguments("S")
-                    .WithLocation(7, 15),
+                Diagnostic(ErrorCode.ERR_BadConstType, "S").WithArguments("S").WithLocation(7, 15),
                 // (8,15): error CS0283: The type 'S' cannot be declared const
                 //         const S y = (S)default;
-                Diagnostic(ErrorCode.ERR_BadConstType, "S")
-                    .WithArguments("S")
-                    .WithLocation(8, 15),
+                Diagnostic(ErrorCode.ERR_BadConstType, "S").WithArguments("S").WithLocation(8, 15),
                 // (9,26): error CS0133: The expression being assigned to 'z' must be constant
                 //         const object z = (S)default;
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "(S)default")
@@ -1419,8 +1396,7 @@ class C
                 Diagnostic(ErrorCode.ERR_TypeExpected, ")").WithLocation(14, 17),
                 // (6,17): error CS8716: There is no target type for the default literal.
                 //         switch (default)
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 17),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 17),
                 // (11,15): error CS8716: There is no target type for the default literal.
                 //         lock (default)
                 Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
@@ -2621,8 +2597,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,14): error CS8716: There is no target type for the default literal.
                 //         if (!default)
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 14)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 14)
             );
 
             var tree = comp.SyntaxTrees.First();
@@ -2798,12 +2773,10 @@ class C
             comp.VerifyDiagnostics(
                 // (6,18): error CS8716: There is no target type for the default literal.
                 //         var p = *default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 18),
                 // (7,17): error CS8716: There is no target type for the default literal.
                 //         var q = default->F;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 17)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 17)
             );
         }
 
@@ -3289,8 +3262,7 @@ class C
             comp.VerifyDiagnostics(
                 // (7,14): error CS8716: There is no target type for the default literal.
                 //         d.M2(default);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 14)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 14)
             );
         }
 
@@ -3439,8 +3411,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,27): error CS8716: There is no target type for the default literal.
                 //         foreach (int x in default) { }
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 27),
                 // (7,27): error CS0186: Use of null is not valid in this context
                 //         foreach (int x in null) { }
                 Diagnostic(ErrorCode.ERR_NullNotValid, "null").WithLocation(7, 27)
@@ -3468,8 +3439,7 @@ static class C
             compilation.VerifyDiagnostics(
                 // (6,27): error CS8716: There is no target type for the default literal.
                 //         var q = from x in default select x;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 27),
                 // (7,43): error CS1942: The type of the expression in the select clause is incorrect.  Type inference failed in the call to 'Select'.
                 //         var p = from x in new int[] { 1 } select default;
                 Diagnostic(ErrorCode.ERR_QueryTypeInferenceFailed, "select")
@@ -3552,8 +3522,7 @@ class C
             comp.VerifyDiagnostics(
                 // (6,15): error CS8716: There is no target type for the default literal.
                 //         throw default;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 15)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 15)
             );
         }
 
@@ -3580,16 +3549,13 @@ class C
             comp.VerifyDiagnostics(
                 // (6,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default as long);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 30),
                 // (7,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default as T);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 30),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 30),
                 // (8,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default as TClass);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(8, 30)
             );
         }
 
@@ -3609,12 +3575,10 @@ class C
             comp.VerifyDiagnostics(
                 // (6,33): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write($"{default as C == null} {default as string == null}");
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 33),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 33),
                 // (6,56): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write($"{default as C == null} {default as string == null}");
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 56)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 56)
             );
         }
 
@@ -3639,8 +3603,7 @@ static class C
             comp.VerifyDiagnostics(
                 // (6,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default is C);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 30)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 30)
             );
         }
 
@@ -3668,23 +3631,19 @@ class C
             comp.VerifyDiagnostics(
                 // (6,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default is long);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 30),
                 // (7,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default is string);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(7, 30),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(7, 30),
                 // (8,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default is default);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(8, 30),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(8, 30),
                 // (8,41): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         System.Console.Write(default is default);
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(8, 41),
                 // (9,30): error CS8716: There is no target type for the default literal.
                 //         System.Console.Write(default is T);
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(9, 30)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(9, 30)
             );
         }
 
@@ -3782,8 +3741,7 @@ class Program
             comp.VerifyDiagnostics(
                 // (6,47): error CS8716: There is no target type for the default literal.
                 //     Expression<Func<object>> testExpr = () => default ?? "hello";
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 47)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 47)
             );
         }
 

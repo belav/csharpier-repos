@@ -21,10 +21,7 @@ using System.IO;
 //    * outputDirectory   - This should be somewhere under the obj folder for the project and is where generated tests are written
 //    * testListFileName  - This should likewise be somewhere under the obj folder and is where the list of generated tests is written
 
-(
-    string templateFileName,
-    Dictionary<string, string> templateData
-)[] Vector64Inputs = new[]
+(string templateFileName, Dictionary<string, string> templateData)[] Vector64Inputs = new[]
 {
     (
         "VectorUnaryOpTest.template",

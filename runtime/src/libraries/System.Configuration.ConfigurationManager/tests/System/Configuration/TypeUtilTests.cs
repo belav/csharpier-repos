@@ -38,10 +38,7 @@ namespace System.ConfigurationTests
                 typeof(BlockingCollection<>)
             ),
             // System.Collections.Specialized, previously System
-            InlineData(
-                "System.Collections.Specialized.HybridDictionary",
-                typeof(HybridDictionary)
-            ),
+            InlineData("System.Collections.Specialized.HybridDictionary", typeof(HybridDictionary)),
             InlineData("System.Collections.Specialized.ListDictionary", typeof(ListDictionary)),
             InlineData("System.Collections.Specialized.StringDictionary", typeof(StringDictionary)),
             InlineData(

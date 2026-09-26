@@ -201,10 +201,7 @@ namespace System.ComponentModel
         ///       .
         ///    </para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IContainer Container
         {
             get

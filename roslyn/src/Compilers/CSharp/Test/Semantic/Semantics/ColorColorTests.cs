@@ -84,8 +84,7 @@ class F
                 "void E.M(System.Int32 x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -227,8 +226,7 @@ class F
                 "System.Int32 E.P { get; set; }",
                 // (9,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -263,8 +261,7 @@ class F
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F").WithArguments("E.F", "0"),
                 // (9,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -299,8 +296,7 @@ class F
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("E.Event"),
                 // (9,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -368,8 +364,7 @@ class F
                 "C.Inner",
                 // (12,14): warning CS0649: Field 'F.C' is never assigned to, and will always have its default value null
                 //     public C C;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C")
-                    .WithArguments("F.C", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C").WithArguments("F.C", "null")
             );
         }
 
@@ -402,8 +397,7 @@ class F
                 "void E.M(System.Int32 x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -436,8 +430,7 @@ class F
                 "void E.M<System.Int32>(System.Int32 x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -470,8 +463,7 @@ class F
                 "void E.M<System.Boolean>(System.Boolean x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -508,8 +500,7 @@ class F
                 "void E.M(System.Int32 x)",
                 // (14,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 
@@ -546,8 +537,7 @@ class F
                 "void E.M(System.Int32 x)",
                 // (14,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
-                    .WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
             );
         }
 

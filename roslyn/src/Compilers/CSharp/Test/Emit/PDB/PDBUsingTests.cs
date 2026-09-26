@@ -2767,8 +2767,7 @@ class C
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using B;").WithLocation(3, 1),
                 // (4,1): hidden CS8019: Unnecessary using directive.
                 // using X = C.D;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = C.D;")
-                    .WithLocation(4, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = C.D;").WithLocation(4, 1),
                 // (6,1): hidden CS8019: Unnecessary using directive.
                 // using Z = F<int>;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Z = F<int>;")

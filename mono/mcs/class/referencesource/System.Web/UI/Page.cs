@@ -1076,11 +1076,7 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>Gets and sets the masterPageFile of this Page.</para>
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Behavior"),
-            WebSysDescription(SR.MasterPage_MasterPageFile)
-        ]
+        [DefaultValue(""), WebCategory("Behavior"), WebSysDescription(SR.MasterPage_MasterPageFile)]
         public virtual string MasterPageFile
         {
             get { return VirtualPath.GetVirtualPathString(_masterPageFile); }
@@ -1898,10 +1894,7 @@ namespace System.Web.UI
         ///    <para>Gets a value indicating whether the page is being loaded in response to a
         ///       client postback, or if it is being loaded and accessed for the first time.</para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsPostBack
         {
             get

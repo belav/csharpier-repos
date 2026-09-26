@@ -777,12 +777,10 @@ public class C {
                 Diagnostic(ErrorCode.ERR_RefLvalueExpected, "arr[0..2]").WithLocation(32, 27),
                 // (33,14): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         M(in arr[0..2]);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "arr[0..2]")
-                    .WithLocation(33, 14),
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "arr[0..2]").WithLocation(33, 14),
                 // (35,20): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         return ref arr[0..2];
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "arr[0..2]")
-                    .WithLocation(35, 20)
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "arr[0..2]").WithLocation(35, 20)
             );
         }
 

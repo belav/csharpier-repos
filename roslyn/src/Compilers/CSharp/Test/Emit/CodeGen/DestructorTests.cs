@@ -598,8 +598,7 @@ class C
                 Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
                 // (14,20): warning CS0169: The field 'C.Finalize' is never used
                 //     private string Finalize;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Finalize")
-                    .WithArguments("C.Finalize")
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Finalize").WithArguments("C.Finalize")
             );
         }
 

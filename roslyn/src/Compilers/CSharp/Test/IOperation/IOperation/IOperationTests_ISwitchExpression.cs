@@ -362,8 +362,7 @@ class X
             {
                 // file.cs(7,29): error CS8506: No best type was found for the switch expression.
                 //         var z = /*<bind>*/x switch { 1 => 2, _ => "Z" }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
-                    .WithLocation(7, 29),
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(7, 29),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -403,9 +402,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExp
             {
                 // file.cs(7,43): error CS1003: Syntax error, '=>' expected
                 //         y = /*<bind>*/x switch { _ /*=>*/ 5 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "5")
-                    .WithArguments("=>")
-                    .WithLocation(7, 43),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "5").WithArguments("=>").WithLocation(7, 43),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
