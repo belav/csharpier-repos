@@ -1039,13 +1039,13 @@ namespace ILLink.RoslynAnalyzer.Tests
         internal static IReadOnlyList<object?> GetArguments(Diagnostic diagnostic)
         {
             return (IReadOnlyList<object?>?)
-                    diagnostic
-                        .GetType()
-                        .GetProperty(
-                            "Arguments",
-                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                        )
-                        ?.GetValue(diagnostic)
+                diagnostic
+                    .GetType()
+                    .GetProperty(
+                        "Arguments",
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
+                    ?.GetValue(diagnostic)
                 ?? Array.Empty<object>();
         }
     }

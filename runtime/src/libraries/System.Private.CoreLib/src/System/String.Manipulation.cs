@@ -1278,12 +1278,12 @@ namespace System
             // performed, so as an optimization we'll return the original string.
 
             return ReplaceCore(
-                    this,
-                    oldValue.AsSpan(),
-                    newValue.AsSpan(),
-                    ci ?? CultureInfo.CurrentCulture.CompareInfo,
-                    options
-                ) ?? this;
+                this,
+                oldValue.AsSpan(),
+                newValue.AsSpan(),
+                ci ?? CultureInfo.CurrentCulture.CompareInfo,
+                options
+            ) ?? this;
         }
 
         private static string? ReplaceCore(

@@ -324,11 +324,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             definitionItem.Properties.TryGetValue(DefinitionItem.RQNameKey2, out var rqName2);
 
             return await GetExternalNavigationLocationForSpecificSymbolAsync(
-                        definitionItem,
-                        rqName1,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false)
+                    definitionItem,
+                    rqName1,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
                 ?? await GetExternalNavigationLocationForSpecificSymbolAsync(
                         definitionItem,
                         rqName2,

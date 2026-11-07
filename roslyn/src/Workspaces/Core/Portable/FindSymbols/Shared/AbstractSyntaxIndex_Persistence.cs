@@ -59,14 +59,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // This does mean we have to potentially do two reads here.  However, that is cheap, and still nicer than
             // trying to produce the index again in the common case where we don't have to.
             return await LoadAsync(
-                        storageService,
-                        documentKey,
-                        textChecksum,
-                        stringTable,
-                        read,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false)
+                    storageService,
+                    documentKey,
+                    textChecksum,
+                    stringTable,
+                    read,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
                 ?? await LoadAsync(
                         storageService,
                         documentKey,

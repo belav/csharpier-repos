@@ -1345,11 +1345,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Debug.Assert(namedTypeSymbol.IsDefinition);
 
             return _embeddedTypesManagerOpt?.EmbedTypeIfNeedTo(
-                    namedTypeSymbol,
-                    fromImplements,
-                    syntaxNodeOpt,
-                    diagnostics
-                ) ?? namedTypeSymbol.GetCciAdapter();
+                namedTypeSymbol,
+                fromImplements,
+                syntaxNodeOpt,
+                diagnostics
+            ) ?? namedTypeSymbol.GetCciAdapter();
         }
 
         private object GetCciAdapter(Symbol symbol)
@@ -1500,10 +1500,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             }
 
             return _embeddedTypesManagerOpt?.EmbedFieldIfNeedTo(
-                    fieldSymbol.GetCciAdapter(),
-                    syntaxNodeOpt,
-                    diagnostics
-                )
+                fieldSymbol.GetCciAdapter(),
+                syntaxNodeOpt,
+                diagnostics
+            )
                 ?? fieldSymbol.GetCciAdapter();
         }
 

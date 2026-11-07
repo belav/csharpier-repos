@@ -349,7 +349,7 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (CacheControlHeaderValue)
-                    CacheControlHeaderParser.Parser.ParseValue(input, null, ref index)
+                CacheControlHeaderParser.Parser.ParseValue(input, null, ref index)
                 ?? new CacheControlHeaderValue();
         }
 

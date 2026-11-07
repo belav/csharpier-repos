@@ -329,8 +329,8 @@ namespace System.Text
             // Otherwise, the code below will throw exception when trying to call
             // EncodingTable.GetCodePageFromName().
             return FilterDisallowedEncodings(
-                    EncodingProvider.GetEncodingFromProvider(name, encoderFallback, decoderFallback)
-                )
+                EncodingProvider.GetEncodingFromProvider(name, encoderFallback, decoderFallback)
+            )
                 ?? GetEncoding(
                     EncodingTable.GetCodePageFromName(name),
                     encoderFallback,

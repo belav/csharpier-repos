@@ -146,10 +146,10 @@ namespace System.Text.Json.Serialization.Metadata
 
                 var newInstance = new DefaultJsonTypeInfoResolver(mutable: false);
                 return Interlocked.CompareExchange(
-                        ref s_defaultInstance,
-                        newInstance,
-                        comparand: null
-                    ) ?? newInstance;
+                    ref s_defaultInstance,
+                    newInstance,
+                    comparand: null
+                ) ?? newInstance;
             }
         }
 

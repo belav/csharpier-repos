@@ -291,11 +291,11 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     "sqlParameterExpression is not null"
                 );
                 return TranslatePrimitiveCollection(
-                        sqlParameterExpression,
-                        property: null,
-                        char.ToLowerInvariant(sqlParameterExpression.Name.First(c => c != '_'))
-                            .ToString()
-                    ) ?? base.VisitExtension(extensionExpression);
+                    sqlParameterExpression,
+                    property: null,
+                    char.ToLowerInvariant(sqlParameterExpression.Name.First(c => c != '_'))
+                        .ToString()
+                ) ?? base.VisitExtension(extensionExpression);
 
             case JsonQueryExpression jsonQueryExpression:
                 return TransformJsonQueryToTable(jsonQueryExpression)
@@ -333,9 +333,9 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     case nameof(RelationalQueryableExtensions.ExecuteUpdate)
                         when genericMethod == RelationalQueryableExtensions.ExecuteUpdateMethodInfo:
                         return TranslateExecuteUpdate(
-                                shapedQueryExpression,
-                                methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
-                            )
+                            shapedQueryExpression,
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        )
                             ?? throw new InvalidOperationException(
                                 RelationalStrings.NonQueryTranslationFailedWithDetails(
                                     methodCallExpression.Print(),

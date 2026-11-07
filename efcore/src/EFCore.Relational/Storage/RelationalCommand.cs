@@ -107,16 +107,16 @@ public class RelationalCommand : IRelationalCommand
                     : command.ExecuteNonQuery();
 
                 return logger?.CommandNonQueryExecuted(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        nonQueryResult,
-                        startTime,
-                        stopwatch.Elapsed,
-                        parameterObject.CommandSource
-                    ) ?? nonQueryResult;
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    nonQueryResult,
+                    startTime,
+                    stopwatch.Elapsed,
+                    parameterObject.CommandSource
+                ) ?? nonQueryResult;
             }
             else
             {
@@ -343,16 +343,16 @@ public class RelationalCommand : IRelationalCommand
                     : command.ExecuteScalar();
 
                 return logger?.CommandScalarExecuted(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        result,
-                        startTime,
-                        stopwatch.Elapsed,
-                        parameterObject.CommandSource
-                    ) ?? result;
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    result,
+                    startTime,
+                    stopwatch.Elapsed,
+                    parameterObject.CommandSource
+                ) ?? result;
             }
             else
             {

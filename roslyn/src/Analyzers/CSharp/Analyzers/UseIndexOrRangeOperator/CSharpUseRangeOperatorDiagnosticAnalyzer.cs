@@ -183,11 +183,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 return null;
 
             return AnalyzeTwoArgumentSubtractionInvocation(
-                    invocation,
-                    infoCache,
-                    invocationSyntax,
-                    targetMethod
-                )
+                invocation,
+                infoCache,
+                invocationSyntax,
+                targetMethod
+            )
                 ?? AnalyzeTwoArgumentFromStartOrToEndInvocation(
                     invocation,
                     infoCache,

@@ -346,11 +346,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 case MethodKind.PropertyGet:
                 case MethodKind.PropertySet:
                     return method.AssociatedSymbol?.GetDocumentationComment(
-                            compilation,
-                            expandIncludes: true,
-                            expandInheritdoc: true,
-                            cancellationToken: cancellationToken
-                        ) ?? DocumentationComment.Empty;
+                        compilation,
+                        expandIncludes: true,
+                        expandInheritdoc: true,
+                        cancellationToken: cancellationToken
+                    ) ?? DocumentationComment.Empty;
                 default:
                     return method.GetDocumentationComment(
                         compilation,

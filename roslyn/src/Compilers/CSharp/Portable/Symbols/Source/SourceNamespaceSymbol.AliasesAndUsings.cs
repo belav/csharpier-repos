@@ -717,10 +717,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 return GetUsingsAndDiagnostics(
-                        declaringSymbol,
-                        declarationSyntax,
-                        basesBeingResolved
-                    ).UsingAliasesMap
+                    declaringSymbol,
+                    declarationSyntax,
+                    basesBeingResolved
+                ).UsingAliasesMap
                     ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
             }
 
@@ -731,13 +731,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 return (
-                        _lazyGlobalUsings
-                        ?? GetGlobalUsingsAndDiagnostics(
-                            declaringSymbol,
-                            (CSharpSyntaxNode)declarationSyntax.GetSyntax(),
-                            basesBeingResolved
-                        )
-                    ).UsingAliasesMap
+                    _lazyGlobalUsings
+                    ?? GetGlobalUsingsAndDiagnostics(
+                        declaringSymbol,
+                        (CSharpSyntaxNode)declarationSyntax.GetSyntax(),
+                        basesBeingResolved
+                    )
+                ).UsingAliasesMap
                     ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
             }
 

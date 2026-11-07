@@ -97,10 +97,10 @@ namespace System.Reflection.TypeLoading
 
             RoModule newModule = LoadModule(moduleName, afi.ContainsMetadata);
             return Interlocked.CompareExchange(
-                    ref _loadedModules[loadedModulesIndex],
-                    newModule,
-                    null
-                ) ?? newModule;
+                ref _loadedModules[loadedModulesIndex],
+                newModule,
+                null
+            ) ?? newModule;
         }
 
         internal RoModule[] ComputeRoModules(bool getResourceModules)

@@ -29,9 +29,9 @@ namespace Microsoft.CodeAnalysis
             if (_targetResourceId != null)
             {
                 return CodeAnalysisResources.ResourceManager.GetString(
-                        _targetResourceId,
-                        formatProvider as System.Globalization.CultureInfo
-                    ) ?? string.Empty;
+                    _targetResourceId,
+                    formatProvider as System.Globalization.CultureInfo
+                ) ?? string.Empty;
             }
 
             return string.Empty;

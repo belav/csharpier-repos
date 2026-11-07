@@ -318,9 +318,9 @@ namespace Microsoft.CodeAnalysis
             }
 
             return resolver.NormalizePath(
-                    mappedSpan.Path,
-                    baseFilePath: mappedSpan.HasMappedPath ? FilePath : null
-                ) ?? mappedSpan.Path;
+                mappedSpan.Path,
+                baseFilePath: mappedSpan.HasMappedPath ? FilePath : null
+            ) ?? mappedSpan.Path;
         }
 
         /// <summary>

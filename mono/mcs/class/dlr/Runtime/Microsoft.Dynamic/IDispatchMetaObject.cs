@@ -236,8 +236,8 @@ namespace Microsoft.Scripting
             ContractUtils.RequiresNotNull(binder, "binder");
 
             return
-                // 1. Check for simple property put
-                TryPropertyPut(binder, value)
+            // 1. Check for simple property put
+            TryPropertyPut(binder, value)
                 ??
                 // 2. Check for event handler hookup where the put is dropped
                 TryEventHandlerNoop(binder, value)

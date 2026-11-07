@@ -38,12 +38,12 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
         )
         {
             return await _organizeService
-                    .OrganizeNamespacesAsync(
-                        document,
-                        options.PlaceSystemNamespaceFirst,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false)
+                .OrganizeNamespacesAsync(
+                    document,
+                    options.PlaceSystemNamespaceFirst,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
                 ?? document;
         }
 

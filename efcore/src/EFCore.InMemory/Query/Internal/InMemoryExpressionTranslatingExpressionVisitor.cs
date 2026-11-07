@@ -811,10 +811,10 @@ public class InMemoryExpressionTranslatingExpressionVisitor : ExpressionVisitor
         if (methodCallExpression.TryGetEFPropertyArguments(out var source, out var propertyName))
         {
             return TryBindMember(
-                    Visit(source),
-                    MemberIdentity.Create(propertyName),
-                    methodCallExpression.Type
-                )
+                Visit(source),
+                MemberIdentity.Create(propertyName),
+                methodCallExpression.Type
+            )
                 ?? throw new InvalidOperationException(
                     CoreStrings.QueryUnableToTranslateEFProperty(methodCallExpression.Print())
                 );
@@ -824,10 +824,10 @@ public class InMemoryExpressionTranslatingExpressionVisitor : ExpressionVisitor
         if (methodCallExpression.TryGetIndexerArguments(_model, out source, out propertyName))
         {
             return TryBindMember(
-                    Visit(source),
-                    MemberIdentity.Create(propertyName),
-                    methodCallExpression.Type
-                ) ?? QueryCompilationContext.NotTranslatedExpression;
+                Visit(source),
+                MemberIdentity.Create(propertyName),
+                methodCallExpression.Type
+            ) ?? QueryCompilationContext.NotTranslatedExpression;
         }
 
         // Subquery case

@@ -279,8 +279,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             if (_service != null)
             {
                 return await _service
-                        .GetRenameInfoAsync(document, position, cancellationToken)
-                        .ConfigureAwait(false)
+                    .GetRenameInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false)
                     ?? AbstractEditorInlineRenameService.DefaultFailureInfo;
             }
 

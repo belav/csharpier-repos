@@ -348,11 +348,11 @@ namespace Microsoft.Interop
             // If the type doesn't have custom attributes that dictate marshalling,
             // then consider the type itself.
             return GetMarshallingInfoForType(
-                    type,
-                    indirectionDepth,
-                    useSiteAttributes,
-                    GetMarshallingInfo
-                ) ?? NoMarshallingInfo.Instance;
+                type,
+                indirectionDepth,
+                useSiteAttributes,
+                GetMarshallingInfo
+            ) ?? NoMarshallingInfo.Instance;
         }
 
         private MarshallingInfo? GetMarshallingInfoForAttribute(

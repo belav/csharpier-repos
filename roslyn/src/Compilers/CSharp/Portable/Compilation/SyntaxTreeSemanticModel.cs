@@ -1144,8 +1144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // between no '#nullable' directives and '#nullable restore' - it returns null in both cases. Since we fallback to the
             // directives in the original syntax tree, we're not handling '#nullable restore' correctly in the speculative text.
             return ((CSharpSyntaxTree)speculativeSyntax.SyntaxTree).IsNullableAnalysisEnabled(
-                    speculativeSyntax.Span
-                )
+                speculativeSyntax.Span
+            )
                 ?? Compilation.IsNullableAnalysisEnabledIn(
                     (CSharpSyntaxTree)SyntaxTree,
                     new TextSpan(position, 0)

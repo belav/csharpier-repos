@@ -840,12 +840,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 // Otherwise, just generate a normal constructor that assigns any provided
                 // parameters into fields.
                 return await GenerateThisOrBaseDelegatingConstructorAsync(
-                            document,
-                            withFields,
-                            withProperties,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false)
+                        document,
+                        withFields,
+                        withProperties,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                     ?? await GenerateMemberDelegatingConstructorAsync(
                             document,
                             withFields,

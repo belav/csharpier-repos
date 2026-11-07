@@ -34,10 +34,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // Using the speculation analyzer can be slow.  Check for common cases first before
             // trying the expensive path.
             return CanReplaceWithDefaultLiteralFast(
-                    defaultExpression,
-                    semanticModel,
-                    cancellationToken
-                )
+                defaultExpression,
+                semanticModel,
+                cancellationToken
+            )
                 ?? CanReplaceWithDefaultLiteralSlow(
                     defaultExpression,
                     semanticModel,

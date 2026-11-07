@@ -57,11 +57,11 @@ namespace System.Web.Mvc
         public virtual IDictionary<string, string> GetKeysFromPrefix(string prefix)
         {
             return (
-                    from provider in this
-                    let result = GetKeysFromPrefixFromProvider(provider, prefix)
-                    where result != null && result.Any()
-                    select result
-                ).FirstOrDefault() ?? new Dictionary<string, string>();
+                from provider in this
+                let result = GetKeysFromPrefixFromProvider(provider, prefix)
+                where result != null && result.Any()
+                select result
+            ).FirstOrDefault() ?? new Dictionary<string, string>();
         }
 
         internal static ValueProviderResult GetValueFromProvider(

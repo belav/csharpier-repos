@@ -65,9 +65,9 @@ public partial class NavigationExpandingExpressionVisitor
         {
             var innerExpression = Visit(memberExpression.Expression);
             return TryExpandNavigation(
-                    innerExpression,
-                    MemberIdentity.Create(memberExpression.Member)
-                ) ?? memberExpression.Update(innerExpression);
+                innerExpression,
+                MemberIdentity.Create(memberExpression.Member)
+            ) ?? memberExpression.Update(innerExpression);
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)

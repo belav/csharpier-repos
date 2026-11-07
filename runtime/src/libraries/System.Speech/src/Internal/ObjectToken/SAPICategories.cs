@@ -19,9 +19,9 @@ namespace System.Speech.Internal.ObjectTokens
             // Try first to get the preferred token for the current user
             // If failed try to get it for the local machine
             return DefaultToken(
-                    @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech\" + category,
-                    _defaultTokenIdValueName
-                ) ?? DefaultToken(SpeechRegistryKey + category, _defaultTokenIdValueName);
+                @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech\" + category,
+                _defaultTokenIdValueName
+            ) ?? DefaultToken(SpeechRegistryKey + category, _defaultTokenIdValueName);
         }
 
         /// <summary>

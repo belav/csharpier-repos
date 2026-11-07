@@ -244,8 +244,8 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
     {
         var type = compilation.RelationalDatabaseFacadeExtensionsType();
         return type?.GetMembers("ExecuteSqlRaw")
-                .Where(s => s is IMethodSymbol)
-                .Cast<IMethodSymbol>()
+            .Where(s => s is IMethodSymbol)
+            .Cast<IMethodSymbol>()
             ?? Array.Empty<IMethodSymbol>();
     }
 
@@ -253,8 +253,8 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
     {
         var type = compilation.RelationalDatabaseFacadeExtensionsType();
         return type?.GetMembers("ExecuteSqlRawAsync")
-                .Where(s => s is IMethodSymbol)
-                .Cast<IMethodSymbol>()
+            .Where(s => s is IMethodSymbol)
+            .Cast<IMethodSymbol>()
             ?? Array.Empty<IMethodSymbol>();
     }
 

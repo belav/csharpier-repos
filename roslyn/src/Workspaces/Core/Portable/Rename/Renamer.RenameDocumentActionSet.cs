@@ -154,8 +154,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 // this issue.
                 var project = solution.GetRequiredProject(_documentId.ProjectId);
                 return project.Documents.FirstOrDefault(d =>
-                        d.Name == _documentName && d.Folders.SequenceEqual(_documentFolders)
-                    )
+                    d.Name == _documentName && d.Folders.SequenceEqual(_documentFolders)
+                )
                     ?? throw new InvalidOperationException(
                         WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
                     );

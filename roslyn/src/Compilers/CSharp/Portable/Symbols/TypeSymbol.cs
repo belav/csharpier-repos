@@ -90,10 +90,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         comparer: SymbolEqualityComparer.ConsiderEverything
                     );
                     return Interlocked.CompareExchange(
-                            ref _implementationForInterfaceMemberMap,
-                            map,
-                            null
-                        ) ?? map;
+                        ref _implementationForInterfaceMemberMap,
+                        map,
+                        null
+                    ) ?? map;
                 }
             }
 
