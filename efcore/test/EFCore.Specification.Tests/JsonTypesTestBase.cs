@@ -3981,8 +3981,8 @@ public abstract class JsonTypesTestBase
         using var stream = new MemoryStream();
         using var writer = new Utf8JsonWriter(stream);
 
-        var jsonReaderWriter =
-            property.GetJsonValueReaderWriter() ?? property.GetTypeMapping().JsonValueReaderWriter!;
+        var jsonReaderWriter = property.GetJsonValueReaderWriter()
+            ?? property.GetTypeMapping().JsonValueReaderWriter!;
 
         var toString = value == null ? null : jsonReaderWriter.ToJsonString(value);
         var fromString =

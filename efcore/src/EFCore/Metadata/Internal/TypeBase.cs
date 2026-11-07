@@ -451,8 +451,7 @@ public abstract class TypeBase
 
         if (memberInfo != null)
         {
-            propertyType =
-                ValidateClrMember(name, memberInfo, typeConfigurationSource != null)
+            propertyType = ValidateClrMember(name, memberInfo, typeConfigurationSource != null)
                 ?? propertyType;
 
             if (memberInfo.DeclaringType?.IsAssignableFrom(ClrType) != true)

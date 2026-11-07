@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             SyntaxNode? inlineExpression
         )
         {
-            var subtractFrom =
-                inlineExpression?.WithoutLeadingTrivia() ?? generator.IdentifierName("length");
+            var subtractFrom = inlineExpression?.WithoutLeadingTrivia()
+                ?? generator.IdentifierName("length");
             return (ExpressionSyntax)
                 generator.SubtractExpression(subtractFrom, generator.LiteralExpression(1));
         }

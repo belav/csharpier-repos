@@ -34,8 +34,7 @@ public static class SqliteNetTopologySuiteDbContextOptionsBuilderExtensions
         var infrastructure = (IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder;
 #pragma warning disable EF1001 // Internal EF Core API usage.
         // #20566
-        var sqliteExtension =
-            coreOptionsBuilder.Options.FindExtension<SqliteOptionsExtension>()
+        var sqliteExtension = coreOptionsBuilder.Options.FindExtension<SqliteOptionsExtension>()
             ?? new SqliteOptionsExtension();
         var ntsExtension =
             coreOptionsBuilder.Options.FindExtension<SqliteNetTopologySuiteOptionsExtension>()

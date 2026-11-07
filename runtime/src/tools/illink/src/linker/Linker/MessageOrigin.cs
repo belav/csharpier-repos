@@ -150,14 +150,13 @@ namespace Mono.Linker
             {
                 var thisMember = Provider as IMemberDefinition;
                 var otherMember = other.Provider as IMemberDefinition;
-                TypeDefinition? thisTypeDef =
-                    (Provider as TypeDefinition) ?? (Provider as IMemberDefinition)?.DeclaringType;
-                TypeDefinition? otherTypeDef =
-                    (other.Provider as TypeDefinition)
+                TypeDefinition? thisTypeDef = (Provider as TypeDefinition)
+                    ?? (Provider as IMemberDefinition)?.DeclaringType;
+                TypeDefinition? otherTypeDef = (other.Provider as TypeDefinition)
                     ?? (other.Provider as IMemberDefinition)?.DeclaringType;
                 var thisAssembly = thisTypeDef?.Module.Assembly ?? Provider as AssemblyDefinition;
-                var otherAssembly =
-                    otherTypeDef?.Module.Assembly ?? other.Provider as AssemblyDefinition;
+                var otherAssembly = otherTypeDef?.Module.Assembly
+                    ?? other.Provider as AssemblyDefinition;
                 int result = (
                     thisAssembly?.Name.Name,
                     thisTypeDef?.Name,

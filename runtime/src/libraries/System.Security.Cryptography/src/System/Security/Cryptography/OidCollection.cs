@@ -47,8 +47,8 @@ namespace System.Security.Cryptography
             get
             {
                 // If we were passed the friendly name, retrieve the value String.
-                string? oidValue =
-                    OidLookup.ToOid(oid, OidGroup.All, fallBackToAllGroups: false) ?? oid;
+                string? oidValue = OidLookup.ToOid(oid, OidGroup.All, fallBackToAllGroups: false)
+                    ?? oid;
                 for (int i = 0; i < _count; i++)
                 {
                     Oid entry = _oids[i];

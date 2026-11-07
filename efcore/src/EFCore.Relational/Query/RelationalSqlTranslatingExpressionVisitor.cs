@@ -1676,11 +1676,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     return propertyAccess;
                 }
 
-                var table =
-                    entityType
-                        .GetViewOrTableMappings()
-                        .SingleOrDefault(e => e.IsSplitEntityTypePrincipal ?? true)
-                        ?.Table
+                var table = entityType
+                    .GetViewOrTableMappings()
+                    .SingleOrDefault(e => e.IsSplitEntityTypePrincipal ?? true)
+                    ?.Table
                     ?? entityType.GetDefaultMappings().Single().Table;
                 if (!table.IsOptional(entityType))
                 {
@@ -2353,8 +2352,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                         != RelationalAnnotationNames.TpcMappingStrategy
                 )
                 {
-                    var table =
-                        nullComparedEntityType.GetViewOrTableMappings().SingleOrDefault()?.Table
+                    var table = nullComparedEntityType
+                        .GetViewOrTableMappings()
+                        .SingleOrDefault()
+                        ?.Table
                         ?? nullComparedEntityType.GetDefaultMappings().Single().Table;
                     if (table.IsOptional(nullComparedEntityType))
                     {

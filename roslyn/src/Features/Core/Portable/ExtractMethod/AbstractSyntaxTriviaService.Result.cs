@@ -329,13 +329,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             )
             {
                 triviaMap.TryGetValue(tokenPair.PreviousToken, out var previousTriviaPair);
-                var trailingTrivia =
-                    previousTriviaPair.TrailingTrivia
+                var trailingTrivia = previousTriviaPair.TrailingTrivia
                     ?? SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
 
                 triviaMap.TryGetValue(tokenPair.NextToken, out var nextTriviaPair);
-                var leadingTrivia =
-                    nextTriviaPair.LeadingTrivia
+                var leadingTrivia = nextTriviaPair.LeadingTrivia
                     ?? SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
 
                 return tokenPair

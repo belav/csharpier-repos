@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
                 return false;
 
             var cancellationToken = CancellationToken.None;
-            var textChangeOpt =
-                TryGenerateInitialEmptyRawString(caret.Value, cancellationToken)
+            var textChangeOpt = TryGenerateInitialEmptyRawString(caret.Value, cancellationToken)
                 ?? TryGrowInitialEmptyRawString(caret.Value, cancellationToken)
                 ?? TryGrowRawStringDelimeters(caret.Value, cancellationToken);
 

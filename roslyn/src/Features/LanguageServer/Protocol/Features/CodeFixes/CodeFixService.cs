@@ -220,8 +220,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             // If the error diagnostics task happens to complete with a non-null result before
             // the other diagnostics task, we can cancel the other task.
-            var collection =
-                await errorFixTask.ConfigureAwait(false)
+            var collection = await errorFixTask.ConfigureAwait(false)
                 ?? await otherFixTask.ConfigureAwait(false);
             linkedTokenSource.Cancel();
 
@@ -1169,8 +1168,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     : (FixAllContext.DiagnosticProvider)
                         new FixAllDiagnosticProvider(_diagnosticService, diagnosticIds);
 
-                var codeFixProvider =
-                    (fixer as CodeFixProvider)
+                var codeFixProvider = (fixer as CodeFixProvider)
                     ?? new WrapperCodeFixProvider(
                         (IConfigurationFixProvider)fixer,
                         diagnostics.Select(d => d.Id)

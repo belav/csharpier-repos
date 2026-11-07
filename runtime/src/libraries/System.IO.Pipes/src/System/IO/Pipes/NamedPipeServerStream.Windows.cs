@@ -434,9 +434,10 @@ namespace System.IO.Pipes
             CheckConnectOperationsServerWithHandle();
             Debug.Assert(IsAsync);
 
-            ConnectionValueTaskSource? vts =
-                Interlocked.Exchange(ref _reusableConnectionValueTaskSource, null)
-                ?? new ConnectionValueTaskSource(this);
+            ConnectionValueTaskSource? vts = Interlocked.Exchange(
+                ref _reusableConnectionValueTaskSource,
+                null
+            ) ?? new ConnectionValueTaskSource(this);
             try
             {
                 vts.PrepareForOperation();

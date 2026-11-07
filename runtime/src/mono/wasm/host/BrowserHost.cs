@@ -229,9 +229,10 @@ internal sealed class BrowserHost
         {
             // If we don't have main assembly name, try to find static web assets manifest by search in the directory.
 
-            var staticWebAssetsPath =
-                FindFirstFileWithExtension(appPath, staticWebAssetsV2Extension)
-                ?? FindFirstFileWithExtension(appPath, staticWebAssetsV1Extension);
+            var staticWebAssetsPath = FindFirstFileWithExtension(
+                appPath,
+                staticWebAssetsV2Extension
+            ) ?? FindFirstFileWithExtension(appPath, staticWebAssetsV1Extension);
 
             if (staticWebAssetsPath != null)
                 devServerOptions = CreateDevServerOptions(

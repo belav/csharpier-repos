@@ -340,8 +340,7 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             return;
         }
 
-        var columnType =
-            operation.ColumnType
+        var columnType = operation.ColumnType
             ?? GetColumnType(operation.Schema, operation.Table, operation.Name, operation, model);
 
         var narrowed = false;
@@ -353,8 +352,7 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                 throw new InvalidOperationException(SqlServerStrings.AlterIdentityColumn);
             }
 
-            var oldType =
-                operation.OldColumn.ColumnType
+            var oldType = operation.OldColumn.ColumnType
                 ?? GetColumnType(
                     operation.Schema,
                     operation.Table,
@@ -423,15 +421,14 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                     "operation.DefaultValue is not null"
                 );
 
-                var typeMapping =
-                    (
-                        columnType != null
-                            ? Dependencies.TypeMappingSource.FindMapping(
-                                operation.DefaultValue.GetType(),
-                                columnType
-                            )
-                            : null
-                    ) ?? Dependencies.TypeMappingSource.GetMappingForValue(operation.DefaultValue);
+                var typeMapping = (
+                    columnType != null
+                        ? Dependencies.TypeMappingSource.FindMapping(
+                            operation.DefaultValue.GetType(),
+                            columnType
+                        )
+                        : null
+                ) ?? Dependencies.TypeMappingSource.GetMappingForValue(operation.DefaultValue);
 
                 defaultValueSql = typeMapping.GenerateSqlLiteral(operation.DefaultValue);
             }
@@ -1827,8 +1824,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             return;
         }
 
-        var columnType =
-            operation.ColumnType ?? GetColumnType(schema, table, name, operation, model)!;
+        var columnType = operation.ColumnType
+            ?? GetColumnType(schema, table, name, operation, model)!;
         builder
             .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(name))
             .Append(" ")

@@ -37,8 +37,8 @@ public class PartialTagHelper : TagHelper
     public PartialTagHelper(ICompositeViewEngine viewEngine, IViewBufferScope viewBufferScope)
     {
         _viewEngine = viewEngine ?? throw new ArgumentNullException(nameof(viewEngine));
-        _viewBufferScope =
-            viewBufferScope ?? throw new ArgumentNullException(nameof(viewBufferScope));
+        _viewBufferScope = viewBufferScope
+            ?? throw new ArgumentNullException(nameof(viewBufferScope));
     }
 
     /// <summary>

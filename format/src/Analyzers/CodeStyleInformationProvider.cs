@@ -14,8 +14,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 {
     internal class CodeStyleInformationProvider : IAnalyzerInformationProvider
     {
-        private static readonly string s_executingPath =
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+        private static readonly string s_executingPath = Path.GetDirectoryName(
+            Assembly.GetExecutingAssembly().Location
+        ) ?? string.Empty;
 
         private readonly string _featuresPath = Path.Combine(
             s_executingPath,
@@ -37,8 +38,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ILogger logger
         )
         {
-            var analyzerService =
-                workspace.Services.GetService<IAnalyzerService>()
+            var analyzerService = workspace.Services.GetService<IAnalyzerService>()
                 ?? throw new NotSupportedException();
             var analyzerAssemblyLoader = analyzerService.GetLoader();
             var references = new[]

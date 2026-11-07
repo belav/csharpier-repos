@@ -2330,12 +2330,11 @@ namespace System.Configuration
                                     }
                                 }
 
-                                factoryRecord =
-                                    parentFactoryRecord?.CloneSectionGroup(
-                                        typeName,
-                                        xmlUtil.Filename,
-                                        lineNumber
-                                    )
+                                factoryRecord = parentFactoryRecord?.CloneSectionGroup(
+                                    typeName,
+                                    xmlUtil.Filename,
+                                    lineNumber
+                                )
                                     ?? new FactoryRecord(
                                         configKey,
                                         parentConfigKey,
@@ -2568,8 +2567,10 @@ namespace System.Configuration
                                 // Note - Clone will propagate the IsFromTrustedConfigRecord bit,
                                 // which is what we want - if this record is a duplicate of an ancestor,
                                 // the ancestor may be from a trusted config record.
-                                factoryRecord =
-                                    parentFactoryRecord?.CloneSection(xmlUtil.Filename, lineNumber)
+                                factoryRecord = parentFactoryRecord?.CloneSection(
+                                    xmlUtil.Filename,
+                                    lineNumber
+                                )
                                     ?? new FactoryRecord(
                                         configKey,
                                         parentConfigKey,

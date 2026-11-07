@@ -251,8 +251,7 @@ internal sealed class GenericWebHostBuilder : WebHostBuilderBase, ISupportsStart
             if (object.ReferenceEquals(_startupObject, startupFactory))
             {
                 var webHostBuilderContext = GetWebHostBuilderContext(context);
-                var instance =
-                    startupFactory(webHostBuilderContext)
+                var instance = startupFactory(webHostBuilderContext)
                     ?? throw new InvalidOperationException(
                         "The specified factory returned null startup instance."
                     );

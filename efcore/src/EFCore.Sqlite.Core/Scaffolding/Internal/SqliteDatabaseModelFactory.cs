@@ -965,8 +965,7 @@ ORDER BY "seqno"
         while (reader.Read())
         {
             var columnName = reader.GetString(0);
-            var column =
-                table.Columns.FirstOrDefault(c => c.Name == columnName)
+            var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                 ?? table.Columns.FirstOrDefault(c =>
                     c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                 );
@@ -999,8 +998,7 @@ WHERE "pk" = 1
         }
 
         var columnName = reader.GetString(0);
-        var column =
-            table.Columns.FirstOrDefault(c => c.Name == columnName)
+        var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
             ?? table.Columns.FirstOrDefault(c =>
                 c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
             );
@@ -1062,8 +1060,7 @@ ORDER BY "seqno"
                 while (reader2.Read())
                 {
                     var columnName = reader2.GetString(0);
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == columnName)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                         );
@@ -1122,8 +1119,7 @@ ORDER BY "seqno"
                 while (reader2.Read())
                 {
                     var name = reader2.GetString(0);
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == name)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == name)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(name, StringComparison.Ordinal)
                         );
@@ -1162,8 +1158,7 @@ ORDER BY "id"
             var id = reader1.GetInt64(0);
             var principalTableName = reader1.GetString(1);
             var onDelete = reader1.GetString(2);
-            var principalTable =
-                tables.FirstOrDefault(t => t.Name == principalTableName)
+            var principalTable = tables.FirstOrDefault(t => t.Name == principalTableName)
                 ?? tables.FirstOrDefault(t =>
                     t.Name.Equals(principalTableName, StringComparison.OrdinalIgnoreCase)
                 );
@@ -1213,8 +1208,7 @@ ORDER BY "seq"
                 while (reader2.Read())
                 {
                     var columnName = reader2.GetString(1);
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == columnName)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                         );
@@ -1224,10 +1218,9 @@ ORDER BY "seq"
                     DatabaseColumn? principalColumn = null;
                     if (principalColumnName != null)
                     {
-                        principalColumn =
-                            foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
-                                c.Name == principalColumnName
-                            )
+                        principalColumn = foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
+                            c.Name == principalColumnName
+                        )
                             ?? foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
                                 c.Name.Equals(
                                     principalColumnName,

@@ -624,8 +624,8 @@ namespace System.ServiceModel.Channels
             {
                 lock (ThisLock)
                 {
-                    this.completionException =
-                        this.completionException ?? buffer.CompletionException;
+                    this.completionException = this.completionException
+                        ?? buffer.CompletionException;
                     Fx.Assert(count < size, "The queue is already full.");
                     int tail = (this.head + this.count) % size;
                     Slot s = this.buffers[tail];

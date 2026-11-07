@@ -109,8 +109,8 @@ namespace Owin
             ServicesContainer services = configuration.Services;
             Contract.Assert(services != null);
 
-            IHostBufferPolicySelector bufferPolicySelector =
-                services.GetHostBufferPolicySelector() ?? _defaultBufferPolicySelector;
+            IHostBufferPolicySelector bufferPolicySelector = services.GetHostBufferPolicySelector()
+                ?? _defaultBufferPolicySelector;
             IExceptionLogger exceptionLogger = ExceptionServices.GetLogger(services);
             IExceptionHandler exceptionHandler = ExceptionServices.GetHandler(services);
 

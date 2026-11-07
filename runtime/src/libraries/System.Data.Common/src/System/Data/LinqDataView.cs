@@ -40,8 +40,8 @@ namespace System.Data
             : base(table)
         {
             Debug.Assert(table != null, "null DataTable");
-            this.sortExpressionBuilder =
-                sortExpressionBuilder ?? new SortExpressionBuilder<DataRow>();
+            this.sortExpressionBuilder = sortExpressionBuilder
+                ?? new SortExpressionBuilder<DataRow>();
         }
 
         /// <summary>

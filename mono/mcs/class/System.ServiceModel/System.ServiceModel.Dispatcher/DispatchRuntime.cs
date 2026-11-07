@@ -57,8 +57,7 @@ namespace System.ServiceModel.Dispatcher
         internal DispatchRuntime(EndpointDispatcher dispatcher, ClientRuntime callbackClientRuntime)
         {
             EndpointDispatcher = dispatcher;
-            CallbackClientRuntime =
-                callbackClientRuntime
+            CallbackClientRuntime = callbackClientRuntime
                 ?? new ClientRuntime(
                     EndpointDispatcher.ContractName,
                     EndpointDispatcher.ContractNamespace,

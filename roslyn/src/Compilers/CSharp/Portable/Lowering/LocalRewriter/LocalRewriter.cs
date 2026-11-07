@@ -195,8 +195,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     loweredStatement = spilledStatement;
                 }
 
-                codeCoverageSpans =
-                    codeCoverageInstrumenter?.DynamicAnalysisSpans
+                codeCoverageSpans = codeCoverageInstrumenter?.DynamicAnalysisSpans
                     ?? ImmutableArray<SourceSpan>.Empty;
 #if DEBUG
                 LocalRewritingValidator.Validate(loweredStatement);

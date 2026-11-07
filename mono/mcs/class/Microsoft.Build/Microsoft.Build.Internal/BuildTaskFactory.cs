@@ -63,8 +63,7 @@ namespace Microsoft.Build.Internal
         )
         {
             Func<BuildTaskDatabase.TaskDescription, bool> fn = t => t.IsMatch(name);
-            var td =
-                per_project_database.Tasks.FirstOrDefault(fn)
+            var td = per_project_database.Tasks.FirstOrDefault(fn)
                 ?? built_in_database.Tasks.FirstOrDefault(fn);
             if (td == null)
                 throw new InvalidOperationException(

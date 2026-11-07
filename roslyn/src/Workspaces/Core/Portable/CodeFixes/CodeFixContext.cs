@@ -220,8 +220,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             _document = document ?? throw new ArgumentNullException(nameof(document));
             _span = span;
             _diagnostics = diagnostics;
-            _registerCodeFix =
-                registerCodeFix ?? throw new ArgumentNullException(nameof(registerCodeFix));
+            _registerCodeFix = registerCodeFix
+                ?? throw new ArgumentNullException(nameof(registerCodeFix));
             Options = options;
             _cancellationToken = cancellationToken;
         }

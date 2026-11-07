@@ -263,8 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 {
                     // move to the end of the last statement of the first accessor
                     var firstAccessor = propertyDeclaration.AccessorList.Accessors[0];
-                    var firstAccessorStatement =
-                        (SyntaxNode?)firstAccessor.Body?.Statements.LastOrDefault()
+                    var firstAccessorStatement = (SyntaxNode?)
+                        firstAccessor.Body?.Statements.LastOrDefault()
                         ?? firstAccessor.ExpressionBody!.Expression;
                     return firstAccessorStatement.GetLocation().SourceSpan.End;
                 }

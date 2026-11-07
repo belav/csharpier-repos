@@ -229,8 +229,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .ConfigureAwait(false);
 
                 // If we have one in that tree, use it
-                preferredLocation =
-                    symbol.Locations.FirstOrDefault(l => l.SourceTree == syntaxTree)
+                preferredLocation = symbol.Locations.FirstOrDefault(l => l.SourceTree == syntaxTree)
                     ?? preferredLocation;
             }
 

@@ -821,8 +821,7 @@ namespace ILLink.Shared.TrimAnalysis
                     {
                         EcmaGenericParameter genericParameter = (EcmaGenericParameter)
                             ecmaType.Instantiation[genericParameterIndex];
-                        genericParameter =
-                            (attrs?[genericParameterIndex] as EcmaGenericParameter)
+                        genericParameter = (attrs?[genericParameterIndex] as EcmaGenericParameter)
                             ?? genericParameter;
                         GenericParameter genericParameterDef = reader.GetGenericParameter(
                             genericParameter.Handle

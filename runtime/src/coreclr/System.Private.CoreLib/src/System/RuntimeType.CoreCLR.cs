@@ -1534,8 +1534,8 @@ namespace System
                             // We only need to examine the setter if a getter doesn't exist.
                             // It is not logical for the getter to be virtual but not the setter.
 
-                            MethodInfo? associateMethod =
-                                propertyInfo.GetGetMethod() ?? propertyInfo.GetSetMethod();
+                            MethodInfo? associateMethod = propertyInfo.GetGetMethod()
+                                ?? propertyInfo.GetSetMethod();
                             if (associateMethod != null)
                             {
                                 int slot = RuntimeMethodHandle.GetSlot(

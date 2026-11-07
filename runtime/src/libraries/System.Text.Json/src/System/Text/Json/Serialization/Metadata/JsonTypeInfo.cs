@@ -1213,8 +1213,7 @@ namespace System.Text.Json.Serialization.Metadata
 
             // Override global UnmappedMemberHandling configuration
             // if type specifies an extension data property.
-            EffectiveUnmappedMemberHandling =
-                UnmappedMemberHandling
+            EffectiveUnmappedMemberHandling = UnmappedMemberHandling
                 ?? (
                     ExtensionDataProperty is null
                         ? Options.UnmappedMemberHandling
@@ -1229,8 +1228,8 @@ namespace System.Text.Json.Serialization.Metadata
             Debug.Assert(PropertyCache is not null);
             Debug.Assert(ParameterCache is null);
 
-            JsonParameterInfoValues[] jsonParameters =
-                ParameterInfoValues ?? Array.Empty<JsonParameterInfoValues>();
+            JsonParameterInfoValues[] jsonParameters = ParameterInfoValues
+                ?? Array.Empty<JsonParameterInfoValues>();
             var parameterCache = new JsonPropertyDictionary<JsonParameterInfo>(
                 Options.PropertyNameCaseInsensitive,
                 jsonParameters.Length

@@ -37,12 +37,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                 // already in the file (like a class) and we don't want it to move to
                 // the using.
                 var firstToken = root.GetFirstToken();
-                var endOfLine =
-                    root.DescendantTrivia()
-                        .FirstOrNull(
-                            (trivia, syntaxFacts) => syntaxFacts.IsEndOfLineTrivia(trivia),
-                            syntaxFacts
-                        )
+                var endOfLine = root.DescendantTrivia()
+                    .FirstOrNull(
+                        (trivia, syntaxFacts) => syntaxFacts.IsEndOfLineTrivia(trivia),
+                        syntaxFacts
+                    )
                     ?? syntaxFacts.ElasticCarriageReturnLineFeed;
 
                 // Remove the leading directives from the first token.

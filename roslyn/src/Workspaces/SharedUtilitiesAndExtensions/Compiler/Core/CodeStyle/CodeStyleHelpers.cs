@@ -287,8 +287,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         )
         {
             Debug.Assert(s_unusedExpressionAssignmentPreferenceMap.ContainsValue(option.Value));
-            var value =
-                s_unusedExpressionAssignmentPreferenceMap.GetKeyOrDefault(option.Value)
+            var value = s_unusedExpressionAssignmentPreferenceMap.GetKeyOrDefault(option.Value)
                 ?? s_unusedExpressionAssignmentPreferenceMap.GetKeyOrDefault(defaultValue.Value);
             return $"{value}{GetEditorConfigStringNotificationPart(option, defaultValue)}";
         }

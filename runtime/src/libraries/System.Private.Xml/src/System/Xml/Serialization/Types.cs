@@ -1358,8 +1358,7 @@ namespace System.Xml.Serialization
                 );
             }
 
-            TypeDesc typeDesc =
-                (TypeDesc?)s_primitiveTypes[type]
+            TypeDesc typeDesc = (TypeDesc?)s_primitiveTypes[type]
                 ?? (TypeDesc?)_typeDescs[type]
                 ?? ImportTypeDesc(type, source, directReference);
 

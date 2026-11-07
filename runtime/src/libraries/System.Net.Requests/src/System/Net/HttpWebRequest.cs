@@ -136,8 +136,7 @@ namespace System.Net
                 CheckCertificateRevocationList = ServicePointManager.CheckCertificateRevocationList;
                 Credentials = webRequest._credentials;
                 Proxy = webRequest._proxy;
-                ServerCertificateValidationCallback =
-                    webRequest.ServerCertificateValidationCallback
+                ServerCertificateValidationCallback = webRequest.ServerCertificateValidationCallback
                     ?? ServicePointManager.ServerCertificateValidationCallback;
                 ClientCertificates = webRequest._clientCertificates;
                 CookieContainer = webRequest._cookieContainer;

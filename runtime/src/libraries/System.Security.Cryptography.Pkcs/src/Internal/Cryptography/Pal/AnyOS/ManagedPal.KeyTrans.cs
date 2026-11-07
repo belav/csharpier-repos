@@ -166,8 +166,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 );
             }
 
-            RSAEncryptionPadding padding =
-                recipient.RSAEncryptionPadding ?? RSAEncryptionPadding.Pkcs1;
+            RSAEncryptionPadding padding = recipient.RSAEncryptionPadding
+                ?? RSAEncryptionPadding.Pkcs1;
 
             if (padding == RSAEncryptionPadding.Pkcs1)
             {

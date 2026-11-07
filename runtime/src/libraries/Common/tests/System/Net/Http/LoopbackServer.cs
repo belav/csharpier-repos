@@ -598,8 +598,7 @@ namespace System.Net.Test.Common
                     SslServerAuthenticationOptions sslOptions = new SslServerAuthenticationOptions()
                     {
                         EnabledSslProtocols = httpOptions.SslProtocols,
-                        ServerCertificateContext =
-                            httpOptions.CertificateContext
+                        ServerCertificateContext = httpOptions.CertificateContext
                             ?? SslStreamCertificateContext.Create(
                                 Configuration.Certificates.GetServerCertificate(),
                                 null
@@ -612,8 +611,7 @@ namespace System.Net.Test.Common
                         .ConfigureAwait(false);
 #else
                     using (
-                        X509Certificate2 cert =
-                            httpOptions.Certificate
+                        X509Certificate2 cert = httpOptions.Certificate
                             ?? Configuration.Certificates.GetServerCertificate()
                     )
                     {

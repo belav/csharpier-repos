@@ -101,8 +101,7 @@ public class CosmosTypeMappingSource : TypeMappingSource
         if (clrType.IsArray)
         {
             var elementMappingInfo = new TypeMappingInfo(elementType);
-            var elementMapping =
-                FindPrimitiveMapping(elementMappingInfo)
+            var elementMapping = FindPrimitiveMapping(elementMappingInfo)
                 ?? FindCollectionMapping(elementMappingInfo);
             return elementMapping == null
                 ? null
@@ -125,8 +124,7 @@ public class CosmosTypeMappingSource : TypeMappingSource
             )
             {
                 var elementMappingInfo = new TypeMappingInfo(elementType);
-                var elementMapping =
-                    FindPrimitiveMapping(elementMappingInfo)
+                var elementMapping = FindPrimitiveMapping(elementMappingInfo)
                     ?? FindCollectionMapping(elementMappingInfo);
                 return elementMapping == null
                     ? null
@@ -151,8 +149,7 @@ public class CosmosTypeMappingSource : TypeMappingSource
 
                 elementType = genericArguments[1];
                 var elementMappingInfo = new TypeMappingInfo(elementType);
-                var elementMapping =
-                    FindPrimitiveMapping(elementMappingInfo)
+                var elementMapping = FindPrimitiveMapping(elementMappingInfo)
                     ?? FindCollectionMapping(elementMappingInfo);
                 return elementMapping == null
                     ? null

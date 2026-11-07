@@ -72,19 +72,13 @@ namespace Microsoft.Data.Sqlite
                 Type? storageFolderType = null;
                 try
                 {
-                    appDataType =
-                        Type.GetType(
-                            "Windows.Storage.ApplicationData, Windows, ContentType=WindowsRuntime"
-                        )
-                        ?? Type.GetType(
-                            "Windows.Storage.ApplicationData, Microsoft.Windows.SDK.NET"
-                        );
+                    appDataType = Type.GetType(
+                        "Windows.Storage.ApplicationData, Windows, ContentType=WindowsRuntime"
+                    ) ?? Type.GetType("Windows.Storage.ApplicationData, Microsoft.Windows.SDK.NET");
 
-                    storageFolderType =
-                        Type.GetType(
-                            "Windows.Storage.StorageFolder, Windows, ContentType=WindowsRuntime"
-                        )
-                        ?? Type.GetType("Windows.Storage.StorageFolder, Microsoft.Windows.SDK.NET");
+                    storageFolderType = Type.GetType(
+                        "Windows.Storage.StorageFolder, Windows, ContentType=WindowsRuntime"
+                    ) ?? Type.GetType("Windows.Storage.StorageFolder, Microsoft.Windows.SDK.NET");
                 }
                 catch (FileLoadException)
                 {

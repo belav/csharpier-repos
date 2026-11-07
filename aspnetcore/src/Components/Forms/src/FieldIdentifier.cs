@@ -136,8 +136,7 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
                         // of type Func<object, object> so we can cheaply map from "something" to "something.Member".
                         var modelLambda = Expression.Lambda(memberExpression.Expression);
                         var modelLambdaCompiled = (Func<object?>)modelLambda.Compile();
-                        var result =
-                            modelLambdaCompiled()
+                        var result = modelLambdaCompiled()
                             ?? throw new ArgumentException(
                                 "The provided expression must evaluate to a non-null value."
                             );
@@ -180,8 +179,7 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         switch (member.Expression)
         {
             case ConstantExpression model:
-                value =
-                    model.Value
+                value = model.Value
                     ?? throw new ArgumentException(
                         "The provided expression must evaluate to a non-null value."
                     );

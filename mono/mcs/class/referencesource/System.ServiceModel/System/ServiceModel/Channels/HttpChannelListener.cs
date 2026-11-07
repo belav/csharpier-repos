@@ -155,8 +155,8 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            this.httpMessageSettings =
-                context.BindingParameters.Find<HttpMessageSettings>() ?? new HttpMessageSettings();
+            this.httpMessageSettings = context.BindingParameters.Find<HttpMessageSettings>()
+                ?? new HttpMessageSettings();
 
             if (
                 this.httpMessageSettings.HttpMessagesSupported

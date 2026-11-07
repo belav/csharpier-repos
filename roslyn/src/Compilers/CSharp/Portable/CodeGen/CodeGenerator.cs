@@ -152,8 +152,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             var sourceMethod = method as SourceMemberMethodSymbol;
             (BlockSyntax blockBody, ArrowExpressionClauseSyntax expressionBody) =
                 sourceMethod?.Bodies ?? default;
-            _methodBodySyntaxOpt =
-                (SyntaxNode)blockBody ?? expressionBody ?? sourceMethod?.SyntaxNode;
+            _methodBodySyntaxOpt = (SyntaxNode)blockBody
+                ?? expressionBody
+                ?? sourceMethod?.SyntaxNode;
         }
 
         private bool IsDebugPlus()

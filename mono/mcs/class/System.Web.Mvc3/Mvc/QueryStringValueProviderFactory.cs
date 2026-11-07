@@ -16,8 +16,7 @@
             UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor
         )
         {
-            _unvalidatedValuesAccessor =
-                unvalidatedValuesAccessor
+            _unvalidatedValuesAccessor = unvalidatedValuesAccessor
                 ?? (
                     cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated())
                 );

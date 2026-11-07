@@ -552,8 +552,7 @@ public static class DotNetDispatcher
                     continue;
                 }
 
-                var identifier =
-                    method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier
+                var identifier = method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier
                     ?? method.Name!;
                 var parameterTypes = GetParameterTypes(method);
 
@@ -609,8 +608,7 @@ public static class DotNetDispatcher
                     continue;
                 }
 
-                var identifier =
-                    method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier
+                var identifier = method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier
                     ?? method.Name;
                 var parameterTypes = GetParameterTypes(method);
 

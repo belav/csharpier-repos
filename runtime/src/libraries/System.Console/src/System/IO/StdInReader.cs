@@ -230,8 +230,8 @@ namespace System.IO
                                 && top > 0
                             )
                             {
-                                s_clearToEol ??=
-                                    ConsolePal.TerminalFormatStringsInstance.ClrEol ?? string.Empty;
+                                s_clearToEol ??= ConsolePal.TerminalFormatStringsInstance.ClrEol
+                                    ?? string.Empty;
 
                                 // Move to end of previous line
                                 ConsolePal.SetTerminalCursorPosition(

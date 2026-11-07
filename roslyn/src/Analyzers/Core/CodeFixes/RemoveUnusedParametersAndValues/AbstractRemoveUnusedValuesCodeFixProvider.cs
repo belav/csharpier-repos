@@ -1285,9 +1285,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 root = await document
                     .GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
-                memberDeclaration =
-                    syntaxFacts.GetContainingMemberDeclaration(root, memberDeclaration.SpanStart)
-                    ?? root;
+                memberDeclaration = syntaxFacts.GetContainingMemberDeclaration(
+                    root,
+                    memberDeclaration.SpanStart
+                ) ?? root;
             }
 
             async Task<bool> TryRemoveUnusedLocalAsync(

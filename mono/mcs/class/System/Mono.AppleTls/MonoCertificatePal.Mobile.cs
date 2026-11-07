@@ -171,8 +171,7 @@ namespace Mono.AppleTls
         {
             if (certificate == null || certificate.IsInvalid)
                 throw new ObjectDisposedException(nameof(certificate));
-            var identity =
-                FindIdentity(cert => MonoCertificatePal.Equals(certificate, cert))
+            var identity = FindIdentity(cert => MonoCertificatePal.Equals(certificate, cert))
                 ?? new SafeSecIdentityHandle();
             if (!throwOnError || identity.IsInvalid)
                 return identity;

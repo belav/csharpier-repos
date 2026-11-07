@@ -26,8 +26,7 @@ namespace Internal.TypeSystem
             _systemModule = systemModule;
 
             // initialize interfaces
-            _arrayRuntimeInterfaces =
-                _systemModule.GetType("System", "Array")?.RuntimeInterfaces
+            _arrayRuntimeInterfaces = _systemModule.GetType("System", "Array")?.RuntimeInterfaces
                 ?? Array.Empty<DefType>();
 
             _genericRuntimeInterfaces = new MetadataType[s_genericRuntimeInterfacesNames.Length];

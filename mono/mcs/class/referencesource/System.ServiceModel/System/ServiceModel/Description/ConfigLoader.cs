@@ -939,8 +939,8 @@ namespace System.ServiceModel.Description
             );
             ServiceEndpoint retval = null;
 
-            string endpointConfiguration =
-                channelEndpointElement.EndpointConfiguration ?? String.Empty;
+            string endpointConfiguration = channelEndpointElement.EndpointConfiguration
+                ?? String.Empty;
 
             // We are looking for a specific instance, not the default.
             bool configuredEndpointFound = false;
@@ -1205,8 +1205,8 @@ namespace System.ServiceModel.Description
             );
             ServiceEndpoint retval = null;
 
-            string endpointConfiguration =
-                serviceEndpointElement.EndpointConfiguration ?? String.Empty;
+            string endpointConfiguration = serviceEndpointElement.EndpointConfiguration
+                ?? String.Empty;
 
             // We are looking for a specific instance, not the default.
             bool configuredEndpointFound = false;

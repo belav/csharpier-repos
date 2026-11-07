@@ -162,8 +162,8 @@ public abstract class BadDataJsonDeserializationTestBase
         );
         var property = context.Model.FindEntityType(typeof(TEntity))!.GetProperty(propertyName);
 
-        var jsonReaderWriter =
-            property.GetJsonValueReaderWriter() ?? property.GetTypeMapping().JsonValueReaderWriter!;
+        var jsonReaderWriter = property.GetJsonValueReaderWriter()
+            ?? property.GetTypeMapping().JsonValueReaderWriter!;
 
         var buffer = Encoding.UTF8.GetBytes(json);
         var readerManager = new Utf8JsonReaderManager(new JsonReaderData(buffer), null);

@@ -773,8 +773,8 @@ namespace Microsoft.CodeAnalysis
                             }
 
                             // record that this key is now a duplicate
-                            ArrayBuilder<string> configList =
-                                duplicateValue.configPaths ?? ArrayBuilder<string>.GetInstance();
+                            ArrayBuilder<string> configList = duplicateValue.configPaths
+                                ?? ArrayBuilder<string>.GetInstance();
                             configList.Add(configPath);
                             duplicateDict[key] = (globalLevel, configList);
 

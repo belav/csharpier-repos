@@ -38,8 +38,8 @@ namespace System.Web.Mvc
                 );
             }
 
-            IControllerFactory controllerFactory =
-                _controllerFactory ?? ControllerBuilder.Current.GetControllerFactory();
+            IControllerFactory controllerFactory = _controllerFactory
+                ?? ControllerBuilder.Current.GetControllerFactory();
             return controllerFactory.GetControllerSessionBehavior(requestContext, controllerName);
         }
 

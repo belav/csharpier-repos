@@ -3022,8 +3022,8 @@ namespace System.Web.UI.WebControls
                     );
                 }
 
-                ITemplate sideBarTemplate =
-                    Owner.SideBarTemplate ?? Owner.CreateDefaultSideBarTemplate();
+                ITemplate sideBarTemplate = Owner.SideBarTemplate
+                    ?? Owner.CreateDefaultSideBarTemplate();
 
                 ReplacePlaceholderWithTemplateInstance(
                     layoutContainer,
@@ -3404,8 +3404,8 @@ namespace System.Web.UI.WebControls
                 outerTable.Controls.Add(outerRow);
 
                 // Use the existing sideBarTableCell if possible.
-                TableCell outerLeftCell =
-                    Owner._sideBarTableCell ?? CreateControlHierarchy_CreateSideBarTableCell();
+                TableCell outerLeftCell = Owner._sideBarTableCell
+                    ?? CreateControlHierarchy_CreateSideBarTableCell();
                 outerRow.Controls.Add(outerLeftCell);
 
                 Owner._sideBarTableCell = outerLeftCell;

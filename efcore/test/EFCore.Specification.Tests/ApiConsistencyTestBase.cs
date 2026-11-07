@@ -1780,49 +1780,41 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 var extensionTypeTuple = extensionTypePair.Value;
                 var (mutableType, conventionType, conventionBuilderType, runtimeType) =
                     MetadataTypes[type];
-                var readOnlyMethods =
-                    extensionTypeTuple
-                        .ReadonlyExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                        .Where(m =>
-                            !IsObsolete(m) && m.GetParameters().First().ParameterType == type
-                        )
-                        .ToArray()
+                var readOnlyMethods = extensionTypeTuple
+                    .ReadonlyExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Where(m => !IsObsolete(m) && m.GetParameters().First().ParameterType == type)
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var mutableMethods =
-                    extensionTypeTuple
-                        .MutableExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                        .Where(m =>
-                            !IsObsolete(m) && m.GetParameters().First().ParameterType == mutableType
-                        )
-                        .ToArray()
+                var mutableMethods = extensionTypeTuple
+                    .MutableExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Where(m =>
+                        !IsObsolete(m) && m.GetParameters().First().ParameterType == mutableType
+                    )
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var conventionMethods =
-                    extensionTypeTuple
-                        .ConventionExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                        .Where(m =>
-                            !IsObsolete(m)
-                            && m.GetParameters().First().ParameterType == conventionType
-                        )
-                        .ToArray()
+                var conventionMethods = extensionTypeTuple
+                    .ConventionExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Where(m =>
+                        !IsObsolete(m) && m.GetParameters().First().ParameterType == conventionType
+                    )
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var conventionBuilderMethods =
-                    extensionTypeTuple
-                        .ConventionBuilderExtensions?.GetMethods(
-                            BindingFlags.Public | BindingFlags.Static
-                        )
-                        .Where(m =>
-                            !IsObsolete(m)
-                            && m.GetParameters().First().ParameterType == conventionBuilderType
-                        )
-                        .ToArray()
+                var conventionBuilderMethods = extensionTypeTuple
+                    .ConventionBuilderExtensions?.GetMethods(
+                        BindingFlags.Public | BindingFlags.Static
+                    )
+                    .Where(m =>
+                        !IsObsolete(m)
+                        && m.GetParameters().First().ParameterType == conventionBuilderType
+                    )
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var runtimeMethods =
-                    extensionTypeTuple
-                        .RuntimeExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                        .Where(m =>
-                            !IsObsolete(m) && m.GetParameters().First().ParameterType == runtimeType
-                        )
-                        .ToArray()
+                var runtimeMethods = extensionTypeTuple
+                    .RuntimeExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Where(m =>
+                        !IsObsolete(m) && m.GetParameters().First().ParameterType == runtimeType
+                    )
+                    .ToArray()
                     ?? new MethodInfo[0];
                 MetadataMethods.Add(
                     (
@@ -1845,32 +1837,30 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
         {
             foreach (var typeTuple in types)
             {
-                var readOnlyMethods =
-                    typeTuple.Key.GetMethods(PublicInstance).Where(m => !IsObsolete(m)).ToArray()
+                var readOnlyMethods = typeTuple
+                    .Key.GetMethods(PublicInstance)
+                    .Where(m => !IsObsolete(m))
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var mutableMethods =
-                    typeTuple
-                        .Value.Mutable.GetMethods(PublicInstance)
-                        .Where(m => !IsObsolete(m))
-                        .ToArray()
+                var mutableMethods = typeTuple
+                    .Value.Mutable.GetMethods(PublicInstance)
+                    .Where(m => !IsObsolete(m))
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var conventionMethods =
-                    typeTuple
-                        .Value.Convention.GetMethods(PublicInstance)
-                        .Where(m => !IsObsolete(m))
-                        .ToArray()
+                var conventionMethods = typeTuple
+                    .Value.Convention.GetMethods(PublicInstance)
+                    .Where(m => !IsObsolete(m))
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var conventionBuilderMethods =
-                    typeTuple
-                        .Value.ConventionBuilder?.GetMethods(PublicInstance)
-                        .Where(m => !IsObsolete(m))
-                        .ToArray()
+                var conventionBuilderMethods = typeTuple
+                    .Value.ConventionBuilder?.GetMethods(PublicInstance)
+                    .Where(m => !IsObsolete(m))
+                    .ToArray()
                     ?? new MethodInfo[0];
-                var runtimeMethods =
-                    typeTuple
-                        .Value.Runtime?.GetMethods(PublicInstance)
-                        .Where(m => !IsObsolete(m))
-                        .ToArray()
+                var runtimeMethods = typeTuple
+                    .Value.Runtime?.GetMethods(PublicInstance)
+                    .Where(m => !IsObsolete(m))
+                    .ToArray()
                     ?? new MethodInfo[0];
                 MetadataMethods.Add(
                     (

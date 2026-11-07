@@ -2871,8 +2871,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var narrowedTypeCandidates = ArrayBuilder<TypeSymbol>.GetInstance(2);
                 collectCandidates(left, narrowedTypeCandidates);
                 collectCandidates(right, narrowedTypeCandidates);
-                var narrowedType =
-                    leastSpecificType(node, narrowedTypeCandidates, diagnostics) ?? inputType;
+                var narrowedType = leastSpecificType(node, narrowedTypeCandidates, diagnostics)
+                    ?? inputType;
                 narrowedTypeCandidates.Free();
 
                 return new BoundBinaryPattern(
@@ -2913,8 +2913,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     for (int i = 1, n = candidates.Count; i < n; i++)
                     {
                         TypeSymbol candidate = candidates[i];
-                        bestSoFar =
-                            lessSpecificCandidate(bestSoFar, candidate, ref useSiteInfo)
+                        bestSoFar = lessSpecificCandidate(bestSoFar, candidate, ref useSiteInfo)
                             ?? bestSoFar;
                     }
                     // second pass: check that it is no more specific than any candidate.

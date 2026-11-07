@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.Syntax
             {
                 this.Position = position;
                 this.GeneralWarningOption = general;
-                this.SpecificWarningOption =
-                    specific ?? ImmutableDictionary.Create<string, TWarningState>();
+                this.SpecificWarningOption = specific
+                    ?? ImmutableDictionary.Create<string, TWarningState>();
             }
 
             public int CompareTo(WarningStateMapEntry other)

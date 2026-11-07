@@ -33,12 +33,10 @@ namespace Microsoft.Win32.SystemEventsTests
                 }
 
                 // locate the hwnd used by SystemEvents in this domain
-                var windowClassNameField =
-                    typeof(SystemEvents).GetField(
-                        "s_className",
-                        System.Reflection.BindingFlags.Static
-                            | System.Reflection.BindingFlags.NonPublic
-                    )
+                var windowClassNameField = typeof(SystemEvents).GetField(
+                    "s_className",
+                    System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic
+                )
                     ?? // corefx
                     typeof(SystemEvents).GetField(
                         "className",
@@ -57,11 +55,10 @@ namespace Microsoft.Win32.SystemEventsTests
         internal static void WaitForSystemEventsWindow()
         {
             // wait for the window to be created
-            var windowReadyField =
-                typeof(SystemEvents).GetField(
-                    "s_eventWindowReady",
-                    System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic
-                )
+            var windowReadyField = typeof(SystemEvents).GetField(
+                "s_eventWindowReady",
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic
+            )
                 ?? // corefx
                 typeof(SystemEvents).GetField(
                     "eventWindowReady",

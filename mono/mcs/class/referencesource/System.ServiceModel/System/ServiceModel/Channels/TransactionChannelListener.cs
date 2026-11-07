@@ -519,8 +519,7 @@ namespace System.ServiceModel.Channels
             }
             catch (FaultException fault)
             {
-                string faultAction =
-                    fault.Action
+                string faultAction = fault.Action
                     ?? innerContext.RequestMessage.Version.Addressing.DefaultFaultAction;
                 Message reply = Message.CreateMessage(
                     innerContext.RequestMessage.Version,

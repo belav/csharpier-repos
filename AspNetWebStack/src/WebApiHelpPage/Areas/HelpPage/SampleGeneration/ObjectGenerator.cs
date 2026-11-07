@@ -301,10 +301,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             }
 
             object result = Activator.CreateInstance(dictionaryType);
-            MethodInfo addMethod =
-                dictionaryType.GetMethod("Add") ?? dictionaryType.GetMethod("TryAdd");
-            MethodInfo containsMethod =
-                dictionaryType.GetMethod("Contains") ?? dictionaryType.GetMethod("ContainsKey");
+            MethodInfo addMethod = dictionaryType.GetMethod("Add")
+                ?? dictionaryType.GetMethod("TryAdd");
+            MethodInfo containsMethod = dictionaryType.GetMethod("Contains")
+                ?? dictionaryType.GetMethod("ContainsKey");
             ObjectGenerator objectGenerator = new ObjectGenerator();
             for (int i = 0; i < size; i++)
             {

@@ -2951,8 +2951,8 @@ namespace System.Net.Sockets
                         }
                         else
                         {
-                            SafeFileHandle fileHandle =
-                                fileHandles[i] ?? e.FileStream!.SafeFileHandle;
+                            SafeFileHandle fileHandle = fileHandles[i]
+                                ?? e.FileStream!.SafeFileHandle;
                             long fsLength = RandomAccess.GetLength(fileHandle);
 
                             if (e.Count > fsLength - e.OffsetLong)

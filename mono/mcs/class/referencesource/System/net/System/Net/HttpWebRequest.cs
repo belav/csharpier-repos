@@ -6323,8 +6323,9 @@ namespace System.Net
 
             // Accept-Encoding is not a restricted header, so it should not be cleaned up by ClearRequestForResubmit(),
             // nor overriden here.  Only add gzip or deflate if they are requested and not already present.
-            string acceptEncodingValues =
-                _HttpRequestHeaders.Get(HttpKnownHeaderNames.AcceptEncoding) ?? String.Empty;
+            string acceptEncodingValues = _HttpRequestHeaders.Get(
+                HttpKnownHeaderNames.AcceptEncoding
+            ) ?? String.Empty;
             if (
                 (AutomaticDecompression & DecompressionMethods.GZip) != 0
                 && acceptEncodingValues.IndexOf(GZipHeader, StringComparison.OrdinalIgnoreCase) < 0
@@ -6391,8 +6392,8 @@ namespace System.Net
             {
                 // "upgrade" is not a protected token in Connection header.
                 // Add this token if this is a websocket request and it's not already present.
-                string connectionValues =
-                    _HttpRequestHeaders.Get(HttpKnownHeaderNames.Connection) ?? String.Empty;
+                string connectionValues = _HttpRequestHeaders.Get(HttpKnownHeaderNames.Connection)
+                    ?? String.Empty;
                 if (
                     connectionValues.IndexOf(
                         HttpKnownHeaderNames.Upgrade,

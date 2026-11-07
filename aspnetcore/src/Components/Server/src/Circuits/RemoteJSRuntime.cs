@@ -43,8 +43,8 @@ internal partial class RemoteJSRuntime : JSRuntime
     )
     {
         _options = circuitOptions.Value;
-        _maximumIncomingBytes =
-            componentHubOptions.Value.MaximumReceiveMessageSize ?? long.MaxValue;
+        _maximumIncomingBytes = componentHubOptions.Value.MaximumReceiveMessageSize
+            ?? long.MaxValue;
         _logger = logger;
         DefaultAsyncTimeout = _options.JSInteropDefaultCallTimeout;
         ElementReferenceContext = new WebElementReferenceContext(this);

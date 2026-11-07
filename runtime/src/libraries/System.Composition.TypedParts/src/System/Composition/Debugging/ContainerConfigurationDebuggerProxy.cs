@@ -55,8 +55,8 @@ namespace System.Composition.Debugging
                 return;
 
             var types = _configuration.DebugGetRegisteredTypes();
-            var defaultAttributeContext =
-                _configuration.DebugGetDefaultAttributeContext() ?? new DirectAttributeContext();
+            var defaultAttributeContext = _configuration.DebugGetDefaultAttributeContext()
+                ?? new DirectAttributeContext();
             var discovered = new List<DiscoveredPart>();
             var ignored = new List<Type>();
 

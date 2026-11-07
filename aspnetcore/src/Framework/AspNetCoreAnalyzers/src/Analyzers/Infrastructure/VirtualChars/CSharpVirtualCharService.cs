@@ -250,10 +250,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
         // Use the parent multi-line expression to determine what whitespace to remove from the start of each line.
         var parentSourceText = parentExpression.SyntaxTree.GetText();
-        var indentationLength =
-            parentSourceText
-                .Lines.GetLineFromPosition(parentExpression.Span.End)
-                .GetFirstNonWhitespaceOffset()
+        var indentationLength = parentSourceText
+            .Lines.GetLineFromPosition(parentExpression.Span.End)
+            .GetFirstNonWhitespaceOffset()
             ?? 0;
 
         // Create a source-text view over the token.  This makes it very easy to treat the token as a set of lines

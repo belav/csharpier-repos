@@ -18,8 +18,7 @@ public class JsonResultWithNewtonsoftJsonTest
         MvcTestFixture<BasicWebSite.StartupWithNewtonsoftJson> fixture
     )
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(b =>
                 b.UseStartup<BasicWebSite.StartupWithNewtonsoftJson>()
             );

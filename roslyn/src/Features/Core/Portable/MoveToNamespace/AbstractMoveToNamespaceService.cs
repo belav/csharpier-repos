@@ -409,8 +409,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                 .SingleOrDefault();
 
             // The type might be declared in global namespace
-            syntaxNode ??=
-                container.FirstAncestorOrSelf<TNamespaceDeclarationSyntax>() ?? syntaxRoot;
+            syntaxNode ??= container.FirstAncestorOrSelf<TNamespaceDeclarationSyntax>()
+                ?? syntaxRoot;
 
             return await MoveItemsInNamespaceAsync(
                     mergedDocument,

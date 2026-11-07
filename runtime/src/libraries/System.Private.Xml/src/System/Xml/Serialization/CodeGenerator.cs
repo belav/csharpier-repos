@@ -613,8 +613,8 @@ namespace System.Xml.Serialization
                 memberType = property.PropertyType;
                 if (property != null)
                 {
-                    MethodInfo? getMethod =
-                        property.GetMethod ?? GetPropertyMethodFromBaseType(property, true);
+                    MethodInfo? getMethod = property.GetMethod
+                        ?? GetPropertyMethodFromBaseType(property, true);
 
                     System.Diagnostics.Debug.Assert(getMethod != null);
                     Call(getMethod);
@@ -647,8 +647,8 @@ namespace System.Xml.Serialization
                 memberType = property.PropertyType;
                 if (property != null)
                 {
-                    MethodInfo? getMethod =
-                        property.GetMethod ?? GetPropertyMethodFromBaseType(property, true);
+                    MethodInfo? getMethod = property.GetMethod
+                        ?? GetPropertyMethodFromBaseType(property, true);
 
                     System.Diagnostics.Debug.Assert(getMethod != null);
                     Call(getMethod);
@@ -682,8 +682,8 @@ namespace System.Xml.Serialization
                 PropertyInfo property = (PropertyInfo)memberInfo;
                 if (property != null)
                 {
-                    MethodInfo? setMethod =
-                        property.SetMethod ?? GetPropertyMethodFromBaseType(property, false);
+                    MethodInfo? setMethod = property.SetMethod
+                        ?? GetPropertyMethodFromBaseType(property, false);
 
                     System.Diagnostics.Debug.Assert(setMethod != null);
                     Call(setMethod);

@@ -73,8 +73,8 @@ public class QueryCompilationContext
         Dependencies = dependencies;
         IsAsync = async;
         QueryTrackingBehavior = dependencies.QueryTrackingBehavior;
-        IsBuffering =
-            ExecutionStrategy.Current?.RetriesOnFailure ?? dependencies.IsRetryingExecutionStrategy;
+        IsBuffering = ExecutionStrategy.Current?.RetriesOnFailure
+            ?? dependencies.IsRetryingExecutionStrategy;
         Model = dependencies.Model;
         ContextOptions = dependencies.ContextOptions;
         ContextType = dependencies.ContextType;

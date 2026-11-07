@@ -1387,8 +1387,11 @@ namespace System.ServiceModel.Description
                 // Using [WSDL Binding W3C Candidate Recommendation 29 May 2006] Section 4.4.4
                 // Using [Metadata W3C Working Draft 13 16 May 2007] Section 4.4.4
 
-                string ns =
-                    wsdlOperationMessage.Operation.PortType.ServiceDescription.TargetNamespace
+                string ns = wsdlOperationMessage
+                    .Operation
+                    .PortType
+                    .ServiceDescription
+                    .TargetNamespace
                     ?? string.Empty;
                 string portTypeName = wsdlOperationMessage.Operation.PortType.Name;
                 XmlName operationMessageName = WsdlNamingHelper.GetOperationMessageName(
@@ -2437,8 +2440,8 @@ namespace System.ServiceModel.Description
                 WsdlNS.OperationBinding wsdlOperationBinding = ((WsdlNS.OperationBinding)item);
                 localName = "binding";
                 nameValue = wsdlOperationBinding.Binding.Name;
-                wsdlNs =
-                    wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace ?? String.Empty;
+                wsdlNs = wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace
+                    ?? String.Empty;
                 rest = string.Format(
                     CultureInfo.InvariantCulture,
                     xPathNamedItemSubFormatString,
@@ -2452,8 +2455,8 @@ namespace System.ServiceModel.Description
                 WsdlNS.OperationBinding wsdlOperationBinding = (
                     (WsdlNS.MessageBinding)item
                 ).OperationBinding;
-                wsdlNs =
-                    wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace ?? String.Empty;
+                wsdlNs = wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace
+                    ?? String.Empty;
                 nameValue = wsdlOperationBinding.Binding.Name;
                 string messageName = item.Name;
 

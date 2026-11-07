@@ -29,8 +29,8 @@ namespace System.CommandLine.Hosting
         {
             Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            ApplicationLifetime =
-                applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
+            ApplicationLifetime = applicationLifetime
+                ?? throw new ArgumentNullException(nameof(applicationLifetime));
 
             Logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger(
                 "Microsoft.Hosting.Lifetime"

@@ -664,9 +664,11 @@ namespace System.Threading
                 if (registrations is null)
                 {
                     registrations = new Registrations(this);
-                    registrations =
-                        Interlocked.CompareExchange(ref _registrations, registrations, null)
-                        ?? registrations;
+                    registrations = Interlocked.CompareExchange(
+                        ref _registrations,
+                        registrations,
+                        null
+                    ) ?? registrations;
                 }
 
                 // If it looks like there's a node in the freelist we could grab, grab the lock and try to get, configure,

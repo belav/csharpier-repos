@@ -166,8 +166,7 @@ public class TemplateBinder
         }
 
         constraints = constraintList?.ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
-        parameterTransformers =
-            parameterTransformerList?.ToArray()
+        parameterTransformers = parameterTransformerList?.ToArray()
             ?? Array.Empty<(string, IOutboundParameterTransformer)>();
     }
 
@@ -533,10 +532,12 @@ public class TemplateBinder
     {
         var context = _pool.Get();
 
-        context.AppendTrailingSlash =
-            options?.AppendTrailingSlash ?? globalOptions.AppendTrailingSlash ?? false;
-        context.LowercaseQueryStrings =
-            options?.LowercaseQueryStrings ?? globalOptions.LowercaseQueryStrings ?? false;
+        context.AppendTrailingSlash = options?.AppendTrailingSlash
+            ?? globalOptions.AppendTrailingSlash
+            ?? false;
+        context.LowercaseQueryStrings = options?.LowercaseQueryStrings
+            ?? globalOptions.LowercaseQueryStrings
+            ?? false;
         context.LowercaseUrls = options?.LowercaseUrls ?? globalOptions.LowercaseUrls ?? false;
 
         try

@@ -727,8 +727,9 @@ namespace Microsoft.Extensions.Options.Generators
                     var validationAttr = new ValidationAttributeInfo(attributeFullQualifiedName);
                     validationAttrs.Add(validationAttr);
 
-                    ImmutableArray<IParameterSymbol> parameters =
-                        attribute.AttributeConstructor?.Parameters
+                    ImmutableArray<IParameterSymbol> parameters = attribute
+                        .AttributeConstructor
+                        ?.Parameters
                         ?? ImmutableArray<IParameterSymbol>.Empty;
                     bool lastParameterDeclaredWithParamsKeyword =
                         parameters.Length > 0 && parameters[parameters.Length - 1].IsParams;
@@ -927,8 +928,9 @@ namespace Microsoft.Extensions.Options.Generators
             ref string attributeFullQualifiedName
         )
         {
-            ImmutableArray<IParameterSymbol> constructorParameters =
-                attribute.AttributeConstructor?.Parameters
+            ImmutableArray<IParameterSymbol> constructorParameters = attribute
+                .AttributeConstructor
+                ?.Parameters
                 ?? ImmutableArray<IParameterSymbol>.Empty;
             if (
                 constructorParameters.Length == 1
@@ -958,8 +960,9 @@ namespace Microsoft.Extensions.Options.Generators
             ref string attributeFullQualifiedName
         )
         {
-            ImmutableArray<IParameterSymbol> constructorParameters =
-                attribute.AttributeConstructor?.Parameters
+            ImmutableArray<IParameterSymbol> constructorParameters = attribute
+                .AttributeConstructor
+                ?.Parameters
                 ?? ImmutableArray<IParameterSymbol>.Empty;
             ITypeSymbol? argumentType = null;
             bool hasTimeSpanType = false;

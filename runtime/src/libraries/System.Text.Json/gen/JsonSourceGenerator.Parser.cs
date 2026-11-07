@@ -763,8 +763,8 @@ namespace System.Text.Json.SourceGeneration
                 }
 
                 var typeRef = new TypeRef(type);
-                string typeInfoPropertyName =
-                    typeToGenerate.TypeInfoPropertyName ?? GetTypeInfoPropertyName(type);
+                string typeInfoPropertyName = typeToGenerate.TypeInfoPropertyName
+                    ?? GetTypeInfoPropertyName(type);
 
                 if (classType is ClassType.TypeUnsupportedBySourceGen)
                 {
@@ -791,8 +791,7 @@ namespace System.Text.Json.SourceGeneration
                 {
                     TypeRef = typeRef,
                     TypeInfoPropertyName = typeInfoPropertyName,
-                    GenerationMode =
-                        typeToGenerate.Mode
+                    GenerationMode = typeToGenerate.Mode
                         ?? options?.GenerationMode
                         ?? JsonSourceGenerationMode.Default,
                     ClassType = classType,
@@ -802,15 +801,12 @@ namespace System.Text.Json.SourceGeneration
                     UnmappedMemberHandling = unmappedMemberHandling,
                     PreferredPropertyObjectCreationHandling =
                         preferredPropertyObjectCreationHandling,
-                    PropertyGenSpecs =
-                        propertySpecs?.ToImmutableEquatableArray()
+                    PropertyGenSpecs = propertySpecs?.ToImmutableEquatableArray()
                         ?? ImmutableEquatableArray<PropertyGenerationSpec>.Empty,
                     FastPathPropertyIndices = fastPathPropertyIndices?.ToImmutableEquatableArray(),
-                    PropertyInitializerSpecs =
-                        propertyInitializerSpecs?.ToImmutableEquatableArray()
+                    PropertyInitializerSpecs = propertyInitializerSpecs?.ToImmutableEquatableArray()
                         ?? ImmutableEquatableArray<PropertyInitializerGenerationSpec>.Empty,
-                    CtorParamGenSpecs =
-                        ctorParamSpecs?.ToImmutableEquatableArray()
+                    CtorParamGenSpecs = ctorParamSpecs?.ToImmutableEquatableArray()
                         ?? ImmutableEquatableArray<ParameterGenerationSpec>.Empty,
                     CollectionType = collectionType,
                     CollectionKeyType = collectionKeyType,
@@ -1935,8 +1931,8 @@ namespace System.Text.Json.SourceGeneration
                                 ParameterType = property.PropertyType,
                                 MatchesConstructorParameter =
                                     matchingConstructorParameter is not null,
-                                ParameterIndex =
-                                    matchingConstructorParameter?.ParameterIndex ?? paramCount++,
+                                ParameterIndex = matchingConstructorParameter?.ParameterIndex
+                                    ?? paramCount++,
                             };
 
                             (propertyInitializers ??= new()).Add(propertyInitializer);
@@ -2243,8 +2239,9 @@ namespace System.Text.Json.SourceGeneration
                     return true;
                 }
 
-                deserializationCtor =
-                    ctorWithAttribute ?? publicParameterlessCtor ?? lonePublicCtor;
+                deserializationCtor = ctorWithAttribute
+                    ?? publicParameterlessCtor
+                    ?? lonePublicCtor;
                 return true;
             }
 

@@ -544,8 +544,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         private void UpdateRunAnalyzers()
         {
             // Property RunAnalyzers overrides RunAnalyzersDuringLiveAnalysis, and default when both properties are not set is 'true'.
-            var runAnalyzers =
-                _runAnalyzersPropertyValue ?? _runAnalyzersDuringLiveAnalysisPropertyValue ?? true;
+            var runAnalyzers = _runAnalyzersPropertyValue
+                ?? _runAnalyzersDuringLiveAnalysisPropertyValue
+                ?? true;
             ChangeProjectProperty(ref _runAnalyzers, runAnalyzers, s =>
                 s.WithRunAnalyzers(Id, runAnalyzers)
             );

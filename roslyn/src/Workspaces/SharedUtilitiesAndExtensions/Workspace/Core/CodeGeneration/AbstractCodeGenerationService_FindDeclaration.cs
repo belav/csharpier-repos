@@ -266,8 +266,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             // Generate into any declaration we can find.
             availableIndices = null;
-            declaration =
-                fallbackDeclaration
+            declaration = fallbackDeclaration
                 ?? await SelectFirstOrDefaultAsync(declarations, node => true, cancellationToken)
                     .ConfigureAwait(false);
 

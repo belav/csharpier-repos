@@ -120,8 +120,8 @@ public class WsFederationOptions : RemoteAuthenticationOptions
         get { return _securityTokenHandlers; }
         set
         {
-            _securityTokenHandlers =
-                value ?? throw new ArgumentNullException(nameof(SecurityTokenHandlers));
+            _securityTokenHandlers = value
+                ?? throw new ArgumentNullException(nameof(SecurityTokenHandlers));
         }
     }
 
@@ -144,8 +144,8 @@ public class WsFederationOptions : RemoteAuthenticationOptions
         get { return _tokenValidationParameters; }
         set
         {
-            _tokenValidationParameters =
-                value ?? throw new ArgumentNullException(nameof(TokenValidationParameters));
+            _tokenValidationParameters = value
+                ?? throw new ArgumentNullException(nameof(TokenValidationParameters));
         }
     }
 

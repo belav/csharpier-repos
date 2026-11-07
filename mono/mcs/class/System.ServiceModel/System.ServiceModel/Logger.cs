@@ -81,8 +81,7 @@ namespace System.ServiceModel
 
         static Logger()
         {
-            var env =
-                Environment.GetEnvironmentVariable("MOON_WCF_TRACE")
+            var env = Environment.GetEnvironmentVariable("MOON_WCF_TRACE")
                 ?? Environment.GetEnvironmentVariable("MONO_WCF_TRACE");
 
             switch (env)

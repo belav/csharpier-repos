@@ -16,7 +16,7 @@ internal sealed class SemanticEditDescription(
 {
     public readonly SemanticEditKind Kind = kind;
     public readonly Func<Compilation, ISymbol> SymbolProvider = symbolProvider;
-    public readonly Func<Compilation, ISymbol> NewSymbolProvider =
-        newSymbolProvider ?? symbolProvider;
+    public readonly Func<Compilation, ISymbol> NewSymbolProvider = newSymbolProvider
+        ?? symbolProvider;
     public readonly bool PreserveLocalVariables = preserveLocalVariables;
 }

@@ -448,13 +448,12 @@ namespace BuildValidator
                 return ImmutableArray<SourceLinkEntry>.Empty;
             }
 
-            var documents =
-                JsonConvert
-                    .DeserializeAnonymousType(
-                        Encoding.UTF8.GetString(sourceLinkUtf8),
-                        new { documents = (Dictionary<string, string>?)null }
-                    )
-                    ?.documents
+            var documents = JsonConvert
+                .DeserializeAnonymousType(
+                    Encoding.UTF8.GetString(sourceLinkUtf8),
+                    new { documents = (Dictionary<string, string>?)null }
+                )
+                ?.documents
                 ?? throw new InvalidOperationException("Failed to deserialize source links.");
 
             var sourceLinks = documents.Select(makeSourceLink).ToImmutableArray();

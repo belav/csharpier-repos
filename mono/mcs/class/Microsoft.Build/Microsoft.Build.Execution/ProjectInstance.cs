@@ -194,8 +194,7 @@ namespace Microsoft.Build.Execution
                     );
             foreach (var p in global_properties)
                 this.properties[p.Key] = new ProjectPropertyInstance(p.Key, false, p.Value);
-            var tools =
-                projects.GetToolset(tools_version)
+            var tools = projects.GetToolset(tools_version)
                 ?? projects.GetToolset(projects.DefaultToolsVersion);
             foreach (var p in projects.GetReservedProperties(tools, this, xml))
                 this.properties[p.Name] = p;

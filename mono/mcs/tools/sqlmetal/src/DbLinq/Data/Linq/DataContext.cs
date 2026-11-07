@@ -321,8 +321,7 @@ namespace DbLinq.Data.Linq
 
             string connectionString = databaseContext.Connection.ConnectionString;
             _VendorProvider = ObjectFactory.Get<IVendorProvider>();
-            Vendor =
-                vendor
+            Vendor = vendor
                 ?? (connectionString != null ? GetVendor(ref connectionString) : null)
                 ??
 #if MOBILE
@@ -694,8 +693,7 @@ namespace DbLinq.Data.Linq
             if (identityKey == null) // if we don't have an entitykey here, it means that the entity has no PK
                 return entity;
             // even
-            var registeredEntityTrack =
-                CurrentTransactionEntities.FindByIdentity(identityKey)
+            var registeredEntityTrack = CurrentTransactionEntities.FindByIdentity(identityKey)
                 ?? AllTrackedEntities.FindByIdentity(identityKey);
             if (registeredEntityTrack != null)
                 return registeredEntityTrack.Entity;
@@ -725,8 +723,7 @@ namespace DbLinq.Data.Linq
                 return entity;
 
             // try to find an already registered entity and return it
-            var registeredEntityTrack =
-                CurrentTransactionEntities.FindByIdentity(identityKey)
+            var registeredEntityTrack = CurrentTransactionEntities.FindByIdentity(identityKey)
                 ?? AllTrackedEntities.FindByIdentity(identityKey);
             if (registeredEntityTrack != null)
                 return registeredEntityTrack.Entity;

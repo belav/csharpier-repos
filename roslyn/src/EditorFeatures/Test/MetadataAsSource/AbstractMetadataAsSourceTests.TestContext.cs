@@ -345,8 +345,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
                 foreach (var source in metadataSources)
                 {
-                    var commonReferencesAttributeName =
-                        metadataCommonReferences ?? "CommonReferences";
+                    var commonReferencesAttributeName = metadataCommonReferences
+                        ?? "CommonReferences";
                     var metadataLanguage = DeduceLanguageString(source);
                     var metadataLanguageVersionAttribute = metadataLanguageVersion is null
                         ? ""

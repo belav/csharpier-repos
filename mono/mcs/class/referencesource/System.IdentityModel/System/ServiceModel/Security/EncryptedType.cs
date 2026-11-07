@@ -154,12 +154,12 @@ namespace System.ServiceModel.Security
             ValidateReadState();
             reader.MoveToStartElement(OpeningElementName, NamespaceUri);
             this.encoding = reader.GetAttribute(EncodingAttribute, null);
-            this.id =
-                reader.GetAttribute(XD.XmlEncryptionDictionary.Id, null)
+            this.id = reader.GetAttribute(XD.XmlEncryptionDictionary.Id, null)
                 ?? SecurityUniqueId.Create().Value;
-            this.wsuId =
-                reader.GetAttribute(XD.XmlEncryptionDictionary.Id, XD.UtilityDictionary.Namespace)
-                ?? SecurityUniqueId.Create().Value;
+            this.wsuId = reader.GetAttribute(
+                XD.XmlEncryptionDictionary.Id,
+                XD.UtilityDictionary.Namespace
+            ) ?? SecurityUniqueId.Create().Value;
             this.mimeType = reader.GetAttribute(MimeTypeAttribute, null);
             this.type = reader.GetAttribute(TypeAttribute, null);
             ReadAdditionalAttributes(reader);

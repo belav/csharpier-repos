@@ -75,11 +75,10 @@ namespace System.Reflection.Emit.Tests
             );
             methodBuilder.SetImplementationFlags(MethodImplAttributes.NoInlining);
 
-            MethodInfo method =
-                typeof(ILGeneratorEmit4).GetMethod(
-                    nameof(ILGeneratorEmit4.Int32Sum),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                ) ?? throw new InvalidOperationException("method is null");
+            MethodInfo method = typeof(ILGeneratorEmit4).GetMethod(
+                nameof(ILGeneratorEmit4.Int32Sum),
+                BindingFlags.NonPublic | BindingFlags.Static
+            ) ?? throw new InvalidOperationException("method is null");
             IntPtr funcPtr = method.MethodHandle.GetFunctionPointer();
 
             ILGenerator il = methodBuilder.GetILGenerator();

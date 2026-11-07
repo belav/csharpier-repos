@@ -34,8 +34,10 @@ namespace System.Text.RegularExpressions.Tests
 
             static string Normalize(string code)
             {
-                string versionString =
-                    typeof(Generator.RegexGenerator).Assembly.GetName().Version?.ToString() ?? "";
+                string versionString = typeof(Generator.RegexGenerator)
+                    .Assembly.GetName()
+                    .Version?.ToString()
+                    ?? "";
 
                 var input = new StringReader(code);
                 var output = new StringBuilder();

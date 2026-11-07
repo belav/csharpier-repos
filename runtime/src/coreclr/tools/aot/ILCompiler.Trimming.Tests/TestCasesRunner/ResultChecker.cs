@@ -410,8 +410,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                                 }
                                             }
 
-                                            string actualOriginString =
-                                                actualOrigin.ToString() ?? "";
+                                            string actualOriginString = actualOrigin.ToString()
+                                                ?? "";
                                             if (
                                                 !actualOriginString.EndsWith(
                                                     expectedOrigin,

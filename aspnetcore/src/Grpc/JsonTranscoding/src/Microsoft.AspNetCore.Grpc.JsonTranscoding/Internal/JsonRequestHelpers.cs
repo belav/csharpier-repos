@@ -109,8 +109,7 @@ internal static class JsonRequestHelpers
             response.ContentType = MediaType.ReplaceEncoding("application/json", encoding);
         }
 
-        var e =
-            GetStatusDetails(trailers)
+        var e = GetStatusDetails(trailers)
             ?? new Google.Rpc.Status { Message = status.Detail, Code = (int)status.StatusCode };
 
         await WriteResponseMessage(response, encoding, e, options, CancellationToken.None);

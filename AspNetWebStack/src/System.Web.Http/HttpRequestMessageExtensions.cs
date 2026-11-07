@@ -1004,8 +1004,8 @@ namespace System.Net.Http
                 queryStringData = formData.GetJQueryNameValuePairs().ToArray();
                 request.Properties[HttpPropertyKeys.RequestQueryNameValuePairsKey] =
                     queryStringData;
-                request.Properties[HttpPropertyKeys.CachedRequestQueryKey] =
-                    uri.Query ?? String.Empty;
+                request.Properties[HttpPropertyKeys.CachedRequestQueryKey] = uri.Query
+                    ?? String.Empty;
             }
 
             return queryStringData;

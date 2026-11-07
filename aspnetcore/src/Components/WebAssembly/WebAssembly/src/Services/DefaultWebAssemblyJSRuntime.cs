@@ -151,11 +151,10 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
                 );
             }
 
-            var componentType =
-                Instance._rootComponentCache.GetRootComponent(
-                    operation.Marker!.Value.Assembly!,
-                    operation.Marker.Value.TypeName!
-                )
+            var componentType = Instance._rootComponentCache.GetRootComponent(
+                operation.Marker!.Value.Assembly!,
+                operation.Marker.Value.TypeName!
+            )
                 ?? throw new InvalidOperationException(
                     $"Root component type '{operation.Marker.Value.TypeName}' could not be found in the assembly '{operation.Marker.Value.Assembly}'."
                 );

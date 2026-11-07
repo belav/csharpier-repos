@@ -26,8 +26,8 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
     {
         get => _invalidModelStateResponseFactory;
         set =>
-            _invalidModelStateResponseFactory =
-                value ?? throw new ArgumentNullException(nameof(value));
+            _invalidModelStateResponseFactory = value
+                ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>

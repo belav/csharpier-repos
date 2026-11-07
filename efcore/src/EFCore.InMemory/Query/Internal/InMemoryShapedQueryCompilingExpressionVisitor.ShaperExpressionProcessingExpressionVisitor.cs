@@ -230,8 +230,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                 {
                     var navigation = collectionResultShaperExpression.Navigation;
                     var collectionAccessor = navigation?.GetCollectionAccessor();
-                    var collectionType =
-                        collectionAccessor?.CollectionType ?? collectionResultShaperExpression.Type;
+                    var collectionType = collectionAccessor?.CollectionType
+                        ?? collectionResultShaperExpression.Type;
                     var elementType = collectionResultShaperExpression.ElementType;
                     var shaperLambda = new ShaperExpressionProcessingExpressionVisitor(
                         _inMemoryShapedQueryCompilingExpressionVisitor,

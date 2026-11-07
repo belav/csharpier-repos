@@ -199,8 +199,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             {
                 var genericName = token.GetAncestor<GenericNameSyntax>();
                 if (genericName != null)
-                    symbol =
-                        semanticModel.GetSymbolInfo(genericName, cancellationToken).Symbol
+                    symbol = semanticModel.GetSymbolInfo(genericName, cancellationToken).Symbol
                         ?? semanticModel.GetTypeInfo(genericName, cancellationToken).Type;
             }
             else if (token.Parent is NullableTypeSyntax && token.IsKind(SyntaxKind.QuestionToken))

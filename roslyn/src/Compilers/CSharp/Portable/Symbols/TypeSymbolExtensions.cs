@@ -830,8 +830,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             while (true)
             {
-                TypeSymbol current =
-                    type
+                TypeSymbol current = type
                     ?? (
                         useDefaultType
                             ? typeWithAnnotationsOpt.DefaultType

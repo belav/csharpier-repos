@@ -516,8 +516,8 @@ namespace System.ServiceModel.Security
             //
             // UseKeyTokenResolver is empty if null.
             //
-            SecurityTokenResolver useKeyResolver =
-                _useKeyTokenResolver ?? EmptySecurityTokenResolver.Instance;
+            SecurityTokenResolver useKeyResolver = _useKeyTokenResolver
+                ?? EmptySecurityTokenResolver.Instance;
 
             return new WSTrustSerializationContext(
                 _securityTokenHandlerCollectionManager,

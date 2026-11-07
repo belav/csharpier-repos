@@ -29,8 +29,7 @@ namespace System.Composition
         /// <param name="sharingBoundaryNames">Boundaries implemented by the created ExportLifetimeContext{T}s.</param>
         public SharingBoundaryAttribute(params string[] sharingBoundaryNames)
         {
-            _sharingBoundaryNames =
-                sharingBoundaryNames
+            _sharingBoundaryNames = sharingBoundaryNames
                 ?? throw new ArgumentNullException(nameof(sharingBoundaryNames));
         }
 

@@ -551,11 +551,9 @@ namespace Microsoft.CodeAnalysis
                 && propertyMapOpt.TryGetValue(reference, out MergedAliases? mergedProperties)
             )
             {
-                aliasesOpt =
-                    mergedProperties.AliasesOpt?.ToImmutableAndFree()
+                aliasesOpt = mergedProperties.AliasesOpt?.ToImmutableAndFree()
                     ?? default(ImmutableArray<string>);
-                recursiveAliasesOpt =
-                    mergedProperties.RecursiveAliasesOpt?.ToImmutableAndFree()
+                recursiveAliasesOpt = mergedProperties.RecursiveAliasesOpt?.ToImmutableAndFree()
                     ?? default(ImmutableArray<string>);
 
                 if (mergedProperties.MergedReferencesOpt is object)

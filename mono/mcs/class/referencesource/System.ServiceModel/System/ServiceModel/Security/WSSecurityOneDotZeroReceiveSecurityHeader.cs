@@ -279,10 +279,10 @@ namespace System.ServiceModel.Security
         )
         {
             SignatureTargetIdManager idManager = this.StandardsManager.IdManager;
-            MessagePartSpecification encryptionParts =
-                this.RequiredEncryptionParts ?? MessagePartSpecification.NoParts;
-            MessagePartSpecification signatureParts =
-                this.RequiredSignatureParts ?? MessagePartSpecification.NoParts;
+            MessagePartSpecification encryptionParts = this.RequiredEncryptionParts
+                ?? MessagePartSpecification.NoParts;
+            MessagePartSpecification signatureParts = this.RequiredSignatureParts
+                ?? MessagePartSpecification.NoParts;
 
             bool checkForTokensAtHeaders = hasAtLeastOneSupportingTokenExpectedToBeSigned;
             bool doSoapAttributeChecks = !signatureParts.IsBodyIncluded;

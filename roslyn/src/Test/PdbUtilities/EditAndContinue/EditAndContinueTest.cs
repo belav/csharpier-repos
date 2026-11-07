@@ -204,8 +204,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         Debug.Assert(oldSymbol != null);
                         Debug.Assert(newSymbol != null);
 
-                        syntaxMap =
-                            syntaxMapFromMarkers ?? GetEquivalentNodesMap(newSymbol, oldSymbol);
+                        syntaxMap = syntaxMapFromMarkers
+                            ?? GetEquivalentNodesMap(newSymbol, oldSymbol);
                     }
                     else
                     {

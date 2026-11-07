@@ -34,8 +34,8 @@ public class PageApplicationModel
         IReadOnlyList<object> handlerAttributes
     )
     {
-        ActionDescriptor =
-            actionDescriptor ?? throw new ArgumentNullException(nameof(actionDescriptor));
+        ActionDescriptor = actionDescriptor
+            ?? throw new ArgumentNullException(nameof(actionDescriptor));
         DeclaredModelType = declaredModelType;
         HandlerType = handlerType;
 

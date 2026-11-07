@@ -363,8 +363,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var selectedSymbol =
-                semanticModel.GetSymbolInfo(selectedNode, cancellationToken).Symbol
+            var selectedSymbol = semanticModel.GetSymbolInfo(selectedNode, cancellationToken).Symbol
                 ?? semanticModel.GetDeclaredSymbol(selectedNode, cancellationToken);
 
             if (selectedSymbol is null)

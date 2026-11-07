@@ -914,8 +914,7 @@ namespace System.Net
                 if (extendedProtectionSelector != null)
                 {
                     // Cache the results of extendedProtectionSelector (if any)
-                    extendedProtectionPolicy =
-                        extendedProtectionSelector(httpContext.Request)
+                    extendedProtectionPolicy = extendedProtectionSelector(httpContext.Request)
                         ?? new ExtendedProtectionPolicy(PolicyEnforcement.Never);
                     httpContext.ExtendedProtectionPolicy = extendedProtectionPolicy;
                 }

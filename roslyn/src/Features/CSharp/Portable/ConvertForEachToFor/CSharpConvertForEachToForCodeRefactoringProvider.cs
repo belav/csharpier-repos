@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
                 cancellationToken
             );
 
-            var typeSymbol =
-                foreachInfo.ExplicitCastInterface
+            var typeSymbol = foreachInfo.ExplicitCastInterface
                 ?? model.GetTypeInfo(foreachCollectionExpression, cancellationToken).Type
                 ?? model.Compilation.GetSpecialType(SpecialType.System_Object);
 

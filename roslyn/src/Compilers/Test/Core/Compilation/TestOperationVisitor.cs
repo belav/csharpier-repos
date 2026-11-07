@@ -1677,8 +1677,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Assert.NotNull(operation.MatchedType);
             }
 
-            var designation =
-                (operation.Syntax as CSharp.Syntax.DeclarationPatternSyntax)?.Designation
+            var designation = (
+                operation.Syntax as CSharp.Syntax.DeclarationPatternSyntax
+            )?.Designation
                 ?? (operation.Syntax as CSharp.Syntax.VarPatternSyntax)?.Designation
                 ?? (operation.Syntax as CSharp.Syntax.VariableDesignationSyntax);
             if (designation.IsKind(CSharp.SyntaxKind.SingleVariableDesignation))

@@ -190,8 +190,7 @@ namespace System.Data.Linq.SqlClient
                             this.Eval(bo.Right),
                             Globalization.CultureInfo.InvariantCulture
                         );
-                        bo =
-                            this.MakeCompareTo(call.Object, call.Arguments[0], bo.NodeType, iValue)
+                        bo = this.MakeCompareTo(call.Object, call.Arguments[0], bo.NodeType, iValue)
                             ?? bo;
                     }
                     else if (IsCompareMethod(call))
@@ -200,13 +199,12 @@ namespace System.Data.Linq.SqlClient
                             this.Eval(bo.Right),
                             Globalization.CultureInfo.InvariantCulture
                         );
-                        bo =
-                            this.MakeCompareTo(
-                                call.Arguments[0],
-                                call.Arguments[1],
-                                bo.NodeType,
-                                iValue
-                            ) ?? bo;
+                        bo = this.MakeCompareTo(
+                            call.Arguments[0],
+                            call.Arguments[1],
+                            bo.NodeType,
+                            iValue
+                        ) ?? bo;
                     }
                 }
                 else if (IsVbCompareStringEqualsValue(bo))
@@ -227,19 +225,17 @@ namespace System.Data.Linq.SqlClient
                             strValue.IsClientSpecified,
                             strValue.SourceExpression
                         );
-                        bo =
-                            this.MakeCompareTo(call.Arguments[0], emptyStr, bo.NodeType, iValue)
+                        bo = this.MakeCompareTo(call.Arguments[0], emptyStr, bo.NodeType, iValue)
                             ?? bo;
                     }
                     else
                     {
-                        bo =
-                            this.MakeCompareTo(
-                                call.Arguments[0],
-                                call.Arguments[1],
-                                bo.NodeType,
-                                iValue
-                            ) ?? bo;
+                        bo = this.MakeCompareTo(
+                            call.Arguments[0],
+                            call.Arguments[1],
+                            bo.NodeType,
+                            iValue
+                        ) ?? bo;
                     }
                 }
                 return base.VisitBinaryOperator(bo);

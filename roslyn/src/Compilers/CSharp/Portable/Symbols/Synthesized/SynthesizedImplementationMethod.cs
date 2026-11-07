@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             //it does not make sense to add methods to substituted types
             Debug.Assert(implementingType.IsDefinition);
 
-            _name =
-                name
+            _name = name
                 ?? ExplicitInterfaceHelpers.GetMemberName(
                     interfaceMethod.Name,
                     interfaceMethod.ContainingType,

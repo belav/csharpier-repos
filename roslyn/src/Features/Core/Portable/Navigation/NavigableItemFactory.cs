@@ -55,11 +55,9 @@ namespace Microsoft.CodeAnalysis.Navigation
                 where doc != null
                 group c by doc.IsGeneratedCode(cancellationToken);
 
-            var generatedSourceLocations =
-                candidateLocationGroups.SingleOrDefault(g => g.Key)
+            var generatedSourceLocations = candidateLocationGroups.SingleOrDefault(g => g.Key)
                 ?? SpecializedCollections.EmptyEnumerable<Location>();
-            var nonGeneratedSourceLocations =
-                candidateLocationGroups.SingleOrDefault(g => !g.Key)
+            var nonGeneratedSourceLocations = candidateLocationGroups.SingleOrDefault(g => !g.Key)
                 ?? SpecializedCollections.EmptyEnumerable<Location>();
 
             return nonGeneratedSourceLocations.Any()

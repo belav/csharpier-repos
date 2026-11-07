@@ -902,13 +902,12 @@ namespace System.Runtime.Serialization
                 && SupportsGenericTypeReference
             )
             {
-                Type? type =
-                    _dataContractSet.GetReferencedType(
-                        GenericDictionaryName,
-                        GenericDictionaryContract,
-                        out DataContract? _,
-                        out object[]? _
-                    ) ?? typeof(Dictionary<,>);
+                Type? type = _dataContractSet.GetReferencedType(
+                    GenericDictionaryName,
+                    GenericDictionaryContract,
+                    out DataContract? _,
+                    out object[]? _
+                ) ?? typeof(Dictionary<,>);
 
                 // ItemContract - aka BaseContract - is never null for CollectionDataContract
                 DataContract? itemContract = collectionContract.BaseContract!.As(

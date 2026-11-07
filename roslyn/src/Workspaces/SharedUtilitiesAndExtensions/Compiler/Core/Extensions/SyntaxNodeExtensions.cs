@@ -533,9 +533,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     {
                         if (nodesToReplace.TryGetValue(span, out var currentNode))
                         {
-                            var original =
-                                (SyntaxNode?)
-                                    retryAnnotations.GetAnnotations(currentNode).SingleOrDefault()
+                            var original = (SyntaxNode?)
+                                retryAnnotations.GetAnnotations(currentNode).SingleOrDefault()
                                 ?? currentNode;
                             var newNode = await computeReplacementNodeAsync!(
                                 original,
@@ -547,9 +546,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         }
                         else if (tokensToReplace.TryGetValue(span, out var currentToken))
                         {
-                            var original =
-                                (SyntaxToken?)
-                                    retryAnnotations.GetAnnotations(currentToken).SingleOrDefault()
+                            var original = (SyntaxToken?)
+                                retryAnnotations.GetAnnotations(currentToken).SingleOrDefault()
                                 ?? currentToken;
                             var newToken = await computeReplacementTokenAsync!(
                                 original,
@@ -561,9 +559,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         }
                         else if (triviaToReplace.TryGetValue(span, out var currentTrivia))
                         {
-                            var original =
-                                (SyntaxTrivia?)
-                                    retryAnnotations.GetAnnotations(currentTrivia).SingleOrDefault()
+                            var original = (SyntaxTrivia?)
+                                retryAnnotations.GetAnnotations(currentTrivia).SingleOrDefault()
                                 ?? currentTrivia;
                             var newTrivia = await computeReplacementTriviaAsync!(
                                 original,

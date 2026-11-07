@@ -39,10 +39,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     .ConfigureAwait(false);
                 if (client != null)
                 {
-                    var projectIds =
-                        projects
-                            ?.Where(p => RemoteSupportedLanguages.IsSupported(p.Language))
-                            .SelectAsArray(p => p.Id)
+                    var projectIds = projects
+                        ?.Where(p => RemoteSupportedLanguages.IsSupported(p.Language))
+                        .SelectAsArray(p => p.Id)
                         ?? default;
 
                     var result = await client

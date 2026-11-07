@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // but are not up-to-date. These documents do not have impact on the analysis unless we read semantic information
                 // from the project compilation. When reading such information we need to be aware of its potential incompleteness
                 // and consult the compiler output binary (see https://github.com/dotnet/roslyn/issues/51261).
-                var oldProject =
-                    oldDocument?.Project ?? oldSolution.GetRequiredProject(newDocument.Project.Id);
+                var oldProject = oldDocument?.Project
+                    ?? oldSolution.GetRequiredProject(newDocument.Project.Id);
 
                 AsyncLazy<DocumentAnalysisResults> lazyResults;
 

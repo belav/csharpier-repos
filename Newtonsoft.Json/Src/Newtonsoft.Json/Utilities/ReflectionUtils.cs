@@ -1217,8 +1217,9 @@ namespace Newtonsoft.Json.Utilities
                     }
                     else
                     {
-                        Type subTypePropertyDeclaringType =
-                            subTypeProperty.GetBaseDefinition()?.DeclaringType
+                        Type subTypePropertyDeclaringType = subTypeProperty
+                            .GetBaseDefinition()
+                            ?.DeclaringType
                             ?? subTypeProperty.DeclaringType!;
 
                         int index = initialProperties.IndexOf(p =>

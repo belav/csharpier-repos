@@ -93,8 +93,8 @@ namespace HttpStress
                     ko.Limits.Http2.MaxStreamsPerConnection =
                         configuration.ServerMaxConcurrentStreams
                         ?? ko.Limits.Http2.MaxStreamsPerConnection;
-                    ko.Limits.Http2.MaxFrameSize =
-                        configuration.ServerMaxFrameSize ?? ko.Limits.Http2.MaxFrameSize;
+                    ko.Limits.Http2.MaxFrameSize = configuration.ServerMaxFrameSize
+                        ?? ko.Limits.Http2.MaxFrameSize;
                     ko.Limits.Http2.InitialConnectionWindowSize =
                         configuration.ServerInitialConnectionWindowSize
                         ?? ko.Limits.Http2.InitialConnectionWindowSize;

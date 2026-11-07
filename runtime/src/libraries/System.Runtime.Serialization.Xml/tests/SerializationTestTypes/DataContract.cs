@@ -1887,8 +1887,7 @@ namespace SerializationTestTypes
                     }
                 }
 
-                this.ItemName =
-                    itemName
+                this.ItemName = itemName
                     ?? DataContract
                         .GetStableName(DataContract.UnwrapNullableType(ItemType), true)
                         .Name;

@@ -402,8 +402,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DebugId methodId = _analysis.GetTopLevelMethodId();
                 DebugId closureId = _analysis.GetClosureId(syntax, closureDebugInfo);
 
-                var containingMethod =
-                    scope.ContainingFunctionOpt?.OriginalMethodSymbol ?? _topLevelMethod;
+                var containingMethod = scope.ContainingFunctionOpt?.OriginalMethodSymbol
+                    ?? _topLevelMethod;
                 if ((object)_substitutedSourceMethod != null && containingMethod == _topLevelMethod)
                 {
                     containingMethod = _substitutedSourceMethod;
@@ -1748,8 +1748,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (syntax is LocalFunctionStatementSyntax localFunction)
             {
-                lambdaOrLambdaBodySyntax =
-                    (SyntaxNode)localFunction.Body ?? localFunction.ExpressionBody?.Expression;
+                lambdaOrLambdaBodySyntax = (SyntaxNode)localFunction.Body
+                    ?? localFunction.ExpressionBody?.Expression;
 
                 if (lambdaOrLambdaBodySyntax is null)
                 {
@@ -1887,9 +1887,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _framePointers.TryGetValue(translatedLambdaContainer, out _innermostFramePointer);
             }
 
-            _currentTypeParameters =
-                containerAsFrame?.TypeParameters.Concat(synthesizedMethod.TypeParameters)
-                ?? synthesizedMethod.TypeParameters;
+            _currentTypeParameters = containerAsFrame?.TypeParameters.Concat(
+                synthesizedMethod.TypeParameters
+            ) ?? synthesizedMethod.TypeParameters;
             _currentLambdaBodyTypeMap = synthesizedMethod.TypeMap;
 
             if (node.Body is BoundBlock block)

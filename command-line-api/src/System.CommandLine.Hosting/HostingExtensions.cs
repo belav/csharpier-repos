@@ -54,8 +54,7 @@ namespace System.CommandLine.Hosting
             return optionsBuilder.Configure<IServiceProvider>(
                 (opts, serviceProvider) =>
                 {
-                    var modelBinder =
-                        serviceProvider.GetService<ModelBinder<TOptions>>()
+                    var modelBinder = serviceProvider.GetService<ModelBinder<TOptions>>()
                         ?? new ModelBinder<TOptions>();
                     var bindingContext = serviceProvider.GetRequiredService<BindingContext>();
                     modelBinder.UpdateInstance(opts, bindingContext);

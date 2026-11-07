@@ -89,8 +89,7 @@ internal sealed class TerminalFormatStrings
         KeypadXmit = db.GetString(TermInfo.WellKnownStrings.KeypadXmit);
         Foreground = db.GetString(TermInfo.WellKnownStrings.SetAnsiForeground);
         Background = db.GetString(TermInfo.WellKnownStrings.SetAnsiBackground);
-        Reset =
-            db.GetString(TermInfo.WellKnownStrings.OrigPairs)
+        Reset = db.GetString(TermInfo.WellKnownStrings.OrigPairs)
             ?? db.GetString(TermInfo.WellKnownStrings.OrigColors);
         Bell = db.GetString(TermInfo.WellKnownStrings.Bell);
         Clear = db.GetString(TermInfo.WellKnownStrings.Clear);

@@ -58,8 +58,7 @@ internal class TestConnection : ConnectionContext, IConnectionInherentKeepAliveF
         _onDispose = onDispose ?? (() => Task.CompletedTask);
         _hasInherentKeepAlive = hasInherentKeepAlive;
 
-        var options =
-            pipeOptions
+        var options = pipeOptions
             ?? new PipeOptions(
                 readerScheduler: PipeScheduler.Inline,
                 writerScheduler: PipeScheduler.Inline,

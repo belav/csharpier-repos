@@ -325,8 +325,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 return true;
             }
 
-            var modifierTokens =
-                context?.PrecedingModifiers
+            var modifierTokens = context?.PrecedingModifiers
                 ?? syntaxTree.GetPrecedingModifiers(position, cancellationToken);
             if (modifierTokens.IsEmpty())
                 return false;
@@ -691,8 +690,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 return false;
             }
 
-            var modifierTokens =
-                context?.PrecedingModifiers
+            var modifierTokens = context?.PrecedingModifiers
                 ?? syntaxTree.GetPrecedingModifiers(position, cancellationToken);
             if (modifierTokens.IsEmpty())
                 return false;

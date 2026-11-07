@@ -302,8 +302,8 @@ namespace System.DirectoryServices.Protocols
         {
             get => (DirectoryAttribute)List[index];
             set =>
-                List[index] =
-                    value ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
+                List[index] = value
+                    ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
         }
 
         public int Add(DirectoryAttribute attribute)
@@ -384,8 +384,8 @@ namespace System.DirectoryServices.Protocols
         {
             get => (DirectoryAttributeModification)List[index];
             set =>
-                List[index] =
-                    value ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
+                List[index] = value
+                    ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
         }
 
         public int Add(DirectoryAttributeModification attribute)

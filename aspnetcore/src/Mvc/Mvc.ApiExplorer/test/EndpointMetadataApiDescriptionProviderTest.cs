@@ -1620,8 +1620,8 @@ public class EndpointMetadataApiDescriptionProviderTest
     {
         public TestEndpointRouteBuilder(IApplicationBuilder applicationBuilder)
         {
-            ApplicationBuilder =
-                applicationBuilder ?? throw new ArgumentNullException(nameof(applicationBuilder));
+            ApplicationBuilder = applicationBuilder
+                ?? throw new ArgumentNullException(nameof(applicationBuilder));
             DataSources = new List<EndpointDataSource>();
         }
 

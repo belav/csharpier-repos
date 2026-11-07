@@ -1061,8 +1061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // This might be different from ContainingType.DefaultMarshallingCharSet. If the charset is not specified on module
             // ContainingType.DefaultMarshallingCharSet would be Ansi (the class is emitted with "Ansi" charset metadata flag)
             // while the charset in P/Invoke metadata should be "None".
-            CharSet charSet =
-                this.GetEffectiveDefaultMarshallingCharSet() ?? Cci.Constants.CharSet_None;
+            CharSet charSet = this.GetEffectiveDefaultMarshallingCharSet()
+                ?? Cci.Constants.CharSet_None;
 
             string? importName = null;
             bool preserveSig = true;

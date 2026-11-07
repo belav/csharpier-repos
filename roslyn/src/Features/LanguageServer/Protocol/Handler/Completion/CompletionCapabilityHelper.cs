@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(
                     CommitCharactersPropertyName
                 ) == true;
-            SupportedItemKinds =
-                _completionSetting?.CompletionItemKind?.ValueSet?.ToSet()
+            SupportedItemKinds = _completionSetting?.CompletionItemKind?.ValueSet?.ToSet()
                 ?? SpecializedCollections.EmptySet<CompletionItemKind>();
 
             // internal VS LSP

@@ -218,13 +218,12 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
             var configurationSource = annotation.GetConfigurationSource();
             if (configurationSource.Overrides(minimalConfigurationSource))
             {
-                builder =
-                    builder.HasAnnotation(
-                        annotation.Name,
-                        annotation.Value,
-                        configurationSource,
-                        canOverrideSameSource: true
-                    ) ?? builder;
+                builder = builder.HasAnnotation(
+                    annotation.Name,
+                    annotation.Value,
+                    configurationSource,
+                    canOverrideSameSource: true
+                ) ?? builder;
             }
         }
 

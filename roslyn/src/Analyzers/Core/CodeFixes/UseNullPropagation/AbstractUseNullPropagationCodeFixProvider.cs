@@ -190,14 +190,13 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                     return conditionalExpression;
                 }
 
-                var newNode =
-                    CreateConditionalAccessExpression(
-                        syntaxFacts,
-                        generator,
-                        whenPartIsNullable,
-                        currentWhenPartToCheck,
-                        match
-                    ) ?? conditionalExpression;
+                var newNode = CreateConditionalAccessExpression(
+                    syntaxFacts,
+                    generator,
+                    whenPartIsNullable,
+                    currentWhenPartToCheck,
+                    match
+                ) ?? conditionalExpression;
 
                 newNode = newNode.WithTriviaFrom(conditionalExpression);
                 return newNode;

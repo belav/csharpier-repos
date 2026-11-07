@@ -223,10 +223,9 @@ internal class CommandLineApplication
         }
         else
         {
-            option =
-                command.Options.SingleOrDefault(opt =>
-                    string.Equals(opt.ShortName, optionName, StringComparison.Ordinal)
-                )
+            option = command.Options.SingleOrDefault(opt =>
+                string.Equals(opt.ShortName, optionName, StringComparison.Ordinal)
+            )
                 ?? command.Options.SingleOrDefault(opt =>
                     string.Equals(opt.SymbolName, optionName, StringComparison.Ordinal)
                 );

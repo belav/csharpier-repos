@@ -340,8 +340,7 @@ namespace System.Net.Http
             // Stop sending requests to this connection.
             _pool.InvalidateHttp3Connection(this);
 
-            long connectionResetErrorCode =
-                (abortException as HttpProtocolException)?.ErrorCode
+            long connectionResetErrorCode = (abortException as HttpProtocolException)?.ErrorCode
                 ?? (long)Http3ErrorCode.InternalError;
 
             lock (SyncObj)

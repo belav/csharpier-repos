@@ -75,8 +75,7 @@ namespace Mono.Linker.Steps
         {
             // We are using DisableReflectionAttribute which is not exact match but it's quite
             // close to what we need and it already exists in the BCL
-            MethodReference ctor =
-                Context.MarkedKnownMembers.DisablePrivateReflectionAttributeCtor
+            MethodReference ctor = Context.MarkedKnownMembers.DisablePrivateReflectionAttributeCtor
                 ?? throw new InvalidOperationException();
             ctor = Assembly.MainModule.ImportReference(ctor);
 

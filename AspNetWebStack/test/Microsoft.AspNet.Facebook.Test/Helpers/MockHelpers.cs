@@ -89,8 +89,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
                 config.AppId = client.AppId ?? "DefaultAppId";
                 config.AppSecret = client.AppSecret ?? "DefaultAppSecret";
             }
-            config.PermissionService =
-                permissionService ?? new DefaultFacebookPermissionService(config);
+            config.PermissionService = permissionService
+                ?? new DefaultFacebookPermissionService(config);
             return config;
         }
 
@@ -115,8 +115,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
         )
         {
             var client = new Mock<IFacebookPermissionService>();
-            permissionsStatusToReturn =
-                permissionsStatusToReturn ?? new PermissionsStatus(apiResult: null);
+            permissionsStatusToReturn = permissionsStatusToReturn
+                ?? new PermissionsStatus(apiResult: null);
 
             client
                 .Setup(p => p.GetUserPermissions(It.IsAny<string>(), It.IsAny<string>()))

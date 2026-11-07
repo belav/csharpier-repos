@@ -448,8 +448,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
         private bool CanGenerateIntoContainer(State state, CancellationToken cancellationToken)
         {
-            var destination =
-                state.Expression.GetAncestor<TTypeDeclarationSyntax>() ?? state.Document.Root;
+            var destination = state.Expression.GetAncestor<TTypeDeclarationSyntax>()
+                ?? state.Document.Root;
             if (!destination.OverlapsHiddenPosition(cancellationToken))
             {
                 return true;

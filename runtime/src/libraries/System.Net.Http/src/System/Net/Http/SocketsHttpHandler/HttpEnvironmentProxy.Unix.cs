@@ -24,14 +24,12 @@ namespace System.Net.Http
                 httpProxy = GetUriFromString(Environment.GetEnvironmentVariable(EnvHttpProxyUC));
             }
 
-            Uri? httpsProxy =
-                GetUriFromString(Environment.GetEnvironmentVariable(EnvHttpsProxyLC))
+            Uri? httpsProxy = GetUriFromString(Environment.GetEnvironmentVariable(EnvHttpsProxyLC))
                 ?? GetUriFromString(Environment.GetEnvironmentVariable(EnvHttpsProxyUC));
 
             if (httpProxy == null || httpsProxy == null)
             {
-                Uri? allProxy =
-                    GetUriFromString(Environment.GetEnvironmentVariable(EnvAllProxyLC))
+                Uri? allProxy = GetUriFromString(Environment.GetEnvironmentVariable(EnvAllProxyLC))
                     ?? GetUriFromString(Environment.GetEnvironmentVariable(EnvAllProxyUC));
 
                 httpProxy ??= allProxy;
@@ -46,8 +44,7 @@ namespace System.Net.Http
                 return false;
             }
 
-            string? noProxy =
-                Environment.GetEnvironmentVariable(EnvNoProxyLC)
+            string? noProxy = Environment.GetEnvironmentVariable(EnvNoProxyLC)
                 ?? Environment.GetEnvironmentVariable(EnvNoProxyUC);
             proxy = new HttpEnvironmentProxy(httpProxy, httpsProxy, noProxy);
 

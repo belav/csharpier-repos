@@ -99,8 +99,8 @@ namespace System.Web.DynamicData
                 var displayColumn = _displayColumn;
                 if (displayColumn == null)
                 {
-                    displayColumn =
-                        GetDisplayColumnFromMetadata() ?? GetDisplayColumnFromHeuristic();
+                    displayColumn = GetDisplayColumnFromMetadata()
+                        ?? GetDisplayColumnFromHeuristic();
                     _displayColumn = displayColumn;
                 }
 

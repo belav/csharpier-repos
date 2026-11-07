@@ -186,8 +186,7 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
             return new ComplexPropertyEntry(InternalEntry, complexProperty);
         }
 
-        var navigation =
-            (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
+        var navigation = (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
             ?? InternalEntry.EntityType.FindSkipNavigation(propertyName);
         if (navigation != null)
         {
@@ -244,8 +243,7 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     {
         Check.NotEmpty(propertyName, nameof(propertyName));
 
-        var navigation =
-            (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
+        var navigation = (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
             ?? InternalEntry.EntityType.FindSkipNavigation(propertyName);
 
         if (navigation != null)

@@ -293,9 +293,9 @@ internal sealed partial class HttpConnectionDispatcher
                     if (connection.UseStatefulReconnect && isReconnect)
                     {
                         // Should call this after the transport has started, otherwise we'll be writing to a Pipe that isn't being read from
-                        reconnectTask =
-                            connection.NotifyOnReconnect?.Invoke(connection.Transport.Output)
-                            ?? Task.CompletedTask;
+                        reconnectTask = connection.NotifyOnReconnect?.Invoke(
+                            connection.Transport.Output
+                        ) ?? Task.CompletedTask;
                     }
                     break;
                 case HttpTransportType.LongPolling:
@@ -829,8 +829,10 @@ internal sealed partial class HttpConnectionDispatcher
 
         if (authenticateResultFeature is not null)
         {
-            connection.AuthenticationExpiration =
-                authenticateResultFeature.AuthenticateResult?.Properties?.ExpiresUtc
+            connection.AuthenticationExpiration = authenticateResultFeature
+                .AuthenticateResult
+                ?.Properties
+                ?.ExpiresUtc
                 ?? DateTimeOffset.MaxValue;
         }
     }

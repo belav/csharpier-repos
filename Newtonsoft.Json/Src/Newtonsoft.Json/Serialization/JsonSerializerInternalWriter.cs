@@ -180,8 +180,7 @@ namespace Newtonsoft.Json.Serialization
 
             MiscellaneousUtils.Assert(valueContract != null);
 
-            JsonConverter? converter =
-                member?.Converter
+            JsonConverter? converter = member?.Converter
                 ?? containerProperty?.ItemConverter
                 ?? containerContract?.ItemConverter
                 ?? valueContract.Converter
@@ -850,8 +849,9 @@ namespace Newtonsoft.Json.Serialization
                     if (memberValue == null)
                     {
                         JsonObjectContract? objectContract = contract as JsonObjectContract;
-                        Required resolvedRequired =
-                            property._required ?? objectContract?.ItemRequired ?? Required.Default;
+                        Required resolvedRequired = property._required
+                            ?? objectContract?.ItemRequired
+                            ?? Required.Default;
                         if (resolvedRequired == Required.Always)
                         {
                             throw JsonSerializationException.Create(
@@ -900,8 +900,12 @@ namespace Newtonsoft.Json.Serialization
         {
             writer.WriteStartObject();
 
-            bool isReference =
-                ResolveIsReference(contract, member, collectionContract, containerProperty)
+            bool isReference = ResolveIsReference(
+                contract,
+                member,
+                collectionContract,
+                containerProperty
+            )
                 ?? HasFlag(
                     Serializer._preserveReferencesHandling,
                     PreserveReferencesHandling.Objects
@@ -1118,8 +1122,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 try
                 {
-                    JsonContract? valueContract =
-                        contract.FinalItemContract ?? GetContractSafe(value);
+                    JsonContract? valueContract = contract.FinalItemContract
+                        ?? GetContractSafe(value);
 
                     if (ShouldWriteReference(value, null, valueContract, contract, member))
                     {
@@ -1250,8 +1254,8 @@ namespace Newtonsoft.Json.Serialization
 
                     try
                     {
-                        JsonContract? valueContract =
-                            contract.FinalItemContract ?? GetContractSafe(value);
+                        JsonContract? valueContract = contract.FinalItemContract
+                            ?? GetContractSafe(value);
 
                         if (ShouldWriteReference(value, null, valueContract, contract, member))
                         {
@@ -1318,12 +1322,12 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? containerProperty
         )
         {
-            bool isReference =
-                ResolveIsReference(contract, member, containerContract, containerProperty)
-                ?? HasFlag(
-                    Serializer._preserveReferencesHandling,
-                    PreserveReferencesHandling.Arrays
-                );
+            bool isReference = ResolveIsReference(
+                contract,
+                member,
+                containerContract,
+                containerProperty
+            ) ?? HasFlag(Serializer._preserveReferencesHandling, PreserveReferencesHandling.Arrays);
             // don't make readonly fields that aren't creator parameters the referenced value because they can't be deserialized to
             isReference = (
                 isReference
@@ -1641,8 +1645,7 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? containerProperty
         )
         {
-            TypeNameHandling resolvedTypeNameHandling =
-                member?.TypeNameHandling
+            TypeNameHandling resolvedTypeNameHandling = member?.TypeNameHandling
                 ?? containerProperty?.ItemTypeNameHandling
                 ?? containerContract?.ItemTypeNameHandling
                 ?? Serializer._typeNameHandling;
@@ -1754,8 +1757,8 @@ namespace Newtonsoft.Json.Serialization
                     try
                     {
                         object value = entry.Value;
-                        JsonContract? valueContract =
-                            contract.FinalItemContract ?? GetContractSafe(value);
+                        JsonContract? valueContract = contract.FinalItemContract
+                            ?? GetContractSafe(value);
 
                         if (ShouldWriteReference(value, null, valueContract, contract, member))
                         {

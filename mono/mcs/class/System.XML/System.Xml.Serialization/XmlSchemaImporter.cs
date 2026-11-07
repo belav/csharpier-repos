@@ -466,8 +466,8 @@ namespace System.Xml.Serialization
             bool baseTypeCanBeIndirect
         )
         {
-            XmlSchemaType stype =
-                (XmlSchemaType)schemas.Find(typeName, typeof(XmlSchemaComplexType))
+            XmlSchemaType stype = (XmlSchemaType)
+                schemas.Find(typeName, typeof(XmlSchemaComplexType))
                 ?? (XmlSchemaType)schemas.Find(typeName, typeof(XmlSchemaSimpleType));
             return ImportTypeCommon(typeName, typeName, stype, true);
         }

@@ -289,8 +289,7 @@ public class MigrationsOperations
         var assemblyName = _assembly.GetName();
         var options = services.GetRequiredService<IDbContextOptions>();
         var contextType = services.GetRequiredService<ICurrentDbContext>().Context.GetType();
-        var migrationsAssemblyName =
-            RelationalOptionsExtension.Extract(options).MigrationsAssembly
+        var migrationsAssemblyName = RelationalOptionsExtension.Extract(options).MigrationsAssembly
             ?? contextType.Assembly.GetName().Name;
         if (
             assemblyName.Name != migrationsAssemblyName

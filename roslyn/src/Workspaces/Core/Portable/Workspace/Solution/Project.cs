@@ -320,8 +320,7 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken = default
         )
         {
-            var document =
-                GetDocument(documentId)
+            var document = GetDocument(documentId)
                 ?? GetAdditionalDocument(documentId)
                 ?? GetAnalyzerConfigDocument(documentId);
             if (document != null)

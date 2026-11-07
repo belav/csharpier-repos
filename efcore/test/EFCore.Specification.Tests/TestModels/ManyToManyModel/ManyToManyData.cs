@@ -1563,10 +1563,10 @@ public class ManyToManyData : ISetSource
         EntityTwo right
     ) => CreateInstance(context?.Set<Dictionary<string, object>>("EntityTwoEntityTwo"), (e, p) =>
         {
-            e["SelfSkipSharedLeftId"] =
-                context?.Entry(left).Property(e => e.Id).CurrentValue ?? left.Id;
-            e["SelfSkipSharedRightId"] =
-                context?.Entry(right).Property(e => e.Id).CurrentValue ?? right.Id;
+            e["SelfSkipSharedLeftId"] = context?.Entry(left).Property(e => e.Id).CurrentValue
+                ?? left.Id;
+            e["SelfSkipSharedRightId"] = context?.Entry(right).Property(e => e.Id).CurrentValue
+                ?? right.Id;
         });
 
     private Dictionary<string, object>[] CreateJoinTwoToCompositeKeyShareds(
@@ -1621,10 +1621,13 @@ public class ManyToManyData : ISetSource
             context?.Set<Dictionary<string, object>>("EntityCompositeKeyEntityTwo"),
             (e, p) =>
             {
-                e["TwoSkipSharedId"] =
-                    context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
-                e["CompositeKeySkipSharedKey1"] =
-                    context?.Entry(composite).Property(e => e.Key1).CurrentValue ?? composite.Key1;
+                e["TwoSkipSharedId"] = context?.Entry(two).Property(e => e.Id).CurrentValue
+                    ?? two.Id;
+                e["CompositeKeySkipSharedKey1"] = context
+                    ?.Entry(composite)
+                    .Property(e => e.Key1)
+                    .CurrentValue
+                    ?? composite.Key1;
                 e["CompositeKeySkipSharedKey2"] = composite.Key2;
                 e["CompositeKeySkipSharedKey3"] = composite.Key3;
             }
@@ -1670,10 +1673,10 @@ public class ManyToManyData : ISetSource
         EntityRoot root
     ) => CreateInstance(context?.Set<Dictionary<string, object>>("EntityRootEntityThree"), (e, p) =>
         {
-            e["ThreeSkipSharedId"] =
-                context?.Entry(three).Property(e => e.Id).CurrentValue ?? three.Id;
-            e["RootSkipSharedId"] =
-                context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
+            e["ThreeSkipSharedId"] = context?.Entry(three).Property(e => e.Id).CurrentValue
+                ?? three.Id;
+            e["RootSkipSharedId"] = context?.Entry(root).Property(e => e.Id).CurrentValue
+                ?? root.Id;
         });
 
     private Dictionary<string, object>[] CreateEntityRootEntityBranches(ManyToManyContext context)
@@ -1705,10 +1708,10 @@ public class ManyToManyData : ISetSource
     ) =>
         CreateInstance(context?.Set<Dictionary<string, object>>("EntityBranchEntityRoot"), (e, p) =>
         {
-            e["BranchSkipSharedId"] =
-                context?.Entry(branch).Property(e => e.Id).CurrentValue ?? branch.Id;
-            e["RootSkipSharedId"] =
-                context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
+            e["BranchSkipSharedId"] = context?.Entry(branch).Property(e => e.Id).CurrentValue
+                ?? branch.Id;
+            e["RootSkipSharedId"] = context?.Entry(root).Property(e => e.Id).CurrentValue
+                ?? root.Id;
         });
 
     private Dictionary<string, object>[] CreateJoinCompositeKeyToRootShareds(
@@ -1766,10 +1769,13 @@ public class ManyToManyData : ISetSource
             context?.Set<Dictionary<string, object>>("EntityCompositeKeyEntityRoot"),
             (e, p) =>
             {
-                e["RootSkipSharedId"] =
-                    context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
-                e["CompositeKeySkipSharedKey1"] =
-                    context?.Entry(composite).Property(e => e.Key1).CurrentValue ?? composite.Key1;
+                e["RootSkipSharedId"] = context?.Entry(root).Property(e => e.Id).CurrentValue
+                    ?? root.Id;
+                e["CompositeKeySkipSharedKey1"] = context
+                    ?.Entry(composite)
+                    .Property(e => e.Key1)
+                    .CurrentValue
+                    ?? composite.Key1;
                 e["CompositeKeySkipSharedKey2"] = composite.Key2;
                 e["CompositeKeySkipSharedKey3"] = composite.Key3;
             }
@@ -3019,10 +3025,10 @@ public class ManyToManyData : ISetSource
         UnidirectionalEntityRoot branch
     ) => CreateInstance(context?.Set<UnidirectionalJoinOneToBranch>(), (e, p) =>
         {
-            e.UnidirectionalEntityOneId =
-                context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
-            e.UnidirectionalEntityBranchId =
-                context?.Entry(branch).Property(e => e.Id).CurrentValue ?? branch.Id;
+            e.UnidirectionalEntityOneId = context?.Entry(one).Property(e => e.Id).CurrentValue
+                ?? one.Id;
+            e.UnidirectionalEntityBranchId = context?.Entry(branch).Property(e => e.Id).CurrentValue
+                ?? branch.Id;
         });
 
     private UnidirectionalJoinOneToThreePayloadFull[] CreateUnidirectionalJoinOneToThreePayloadFulls(
@@ -5073,10 +5079,13 @@ public class ManyToManyData : ISetSource
             ),
             (e, p) =>
             {
-                e["UnidirectionalEntityOneId"] =
-                    context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
-                e["TwoSkipSharedId"] =
-                    context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
+                e["UnidirectionalEntityOneId"] = context
+                    ?.Entry(one)
+                    .Property(e => e.Id)
+                    .CurrentValue
+                    ?? one.Id;
+                e["TwoSkipSharedId"] = context?.Entry(two).Property(e => e.Id).CurrentValue
+                    ?? two.Id;
             }
         );
 
@@ -5531,10 +5540,13 @@ public class ManyToManyData : ISetSource
             ),
             (e, p) =>
             {
-                e["UnidirectionalEntityTwoId"] =
-                    context?.Entry(left).Property(e => e.Id).CurrentValue ?? left.Id;
-                e["SelfSkipSharedRightId"] =
-                    context?.Entry(right).Property(e => e.Id).CurrentValue ?? right.Id;
+                e["UnidirectionalEntityTwoId"] = context
+                    ?.Entry(left)
+                    .Property(e => e.Id)
+                    .CurrentValue
+                    ?? left.Id;
+                e["SelfSkipSharedRightId"] = context?.Entry(right).Property(e => e.Id).CurrentValue
+                    ?? right.Id;
             }
         );
 
@@ -5736,10 +5748,13 @@ public class ManyToManyData : ISetSource
             ),
             (e, p) =>
             {
-                e["TwoSkipSharedId"] =
-                    context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
-                e["UnidirectionalEntityCompositeKeyKey1"] =
-                    context?.Entry(composite).Property(e => e.Key1).CurrentValue ?? composite.Key1;
+                e["TwoSkipSharedId"] = context?.Entry(two).Property(e => e.Id).CurrentValue
+                    ?? two.Id;
+                e["UnidirectionalEntityCompositeKeyKey1"] = context
+                    ?.Entry(composite)
+                    .Property(e => e.Key1)
+                    .CurrentValue
+                    ?? composite.Key1;
                 e["UnidirectionalEntityCompositeKeyKey2"] = composite.Key2;
                 e["UnidirectionalEntityCompositeKeyKey3"] = composite.Key3;
             }
@@ -5908,10 +5923,13 @@ public class ManyToManyData : ISetSource
             ),
             (e, p) =>
             {
-                e["ThreeSkipSharedId"] =
-                    context?.Entry(three).Property(e => e.Id).CurrentValue ?? three.Id;
-                e["UnidirectionalEntityRootId"] =
-                    context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
+                e["ThreeSkipSharedId"] = context?.Entry(three).Property(e => e.Id).CurrentValue
+                    ?? three.Id;
+                e["UnidirectionalEntityRootId"] = context
+                    ?.Entry(root)
+                    .Property(e => e.Id)
+                    .CurrentValue
+                    ?? root.Id;
             }
         );
 
@@ -6009,10 +6027,13 @@ public class ManyToManyData : ISetSource
             ),
             (e, p) =>
             {
-                e["BranchSkipSharedId"] =
-                    context?.Entry(branch).Property(e => e.Id).CurrentValue ?? branch.Id;
-                e["UnidirectionalEntityRootId"] =
-                    context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
+                e["BranchSkipSharedId"] = context?.Entry(branch).Property(e => e.Id).CurrentValue
+                    ?? branch.Id;
+                e["UnidirectionalEntityRootId"] = context
+                    ?.Entry(root)
+                    .Property(e => e.Id)
+                    .CurrentValue
+                    ?? root.Id;
             }
         );
 
@@ -6229,10 +6250,13 @@ public class ManyToManyData : ISetSource
             ),
             (e, p) =>
             {
-                e["RootSkipSharedId"] =
-                    context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
-                e["UnidirectionalEntityCompositeKeyKey1"] =
-                    context?.Entry(composite).Property(e => e.Key1).CurrentValue ?? composite.Key1;
+                e["RootSkipSharedId"] = context?.Entry(root).Property(e => e.Id).CurrentValue
+                    ?? root.Id;
+                e["UnidirectionalEntityCompositeKeyKey1"] = context
+                    ?.Entry(composite)
+                    .Property(e => e.Key1)
+                    .CurrentValue
+                    ?? composite.Key1;
                 e["UnidirectionalEntityCompositeKeyKey2"] = composite.Key2;
                 e["UnidirectionalEntityCompositeKeyKey3"] = composite.Key3;
             }

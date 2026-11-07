@@ -952,9 +952,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 [NotNullWhen(true)] out ITypeSymbol? elementType
             )
             {
-                INamedTypeSymbol? candidate =
-                    GetInterface(type, _typeSymbols.GenericIDictionary_Unbound)
-                    ?? GetInterface(type, _typeSymbols.IReadOnlyDictionary_Unbound);
+                INamedTypeSymbol? candidate = GetInterface(
+                    type,
+                    _typeSymbols.GenericIDictionary_Unbound
+                ) ?? GetInterface(type, _typeSymbols.IReadOnlyDictionary_Unbound);
 
                 if (candidate is not null)
                 {

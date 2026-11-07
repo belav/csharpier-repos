@@ -118,11 +118,10 @@ namespace RunTests
             var buildNumber = Environment.GetEnvironmentVariable("BUILD_BUILDNUMBER") ?? "0";
             var helixWorkItems = workItems.Select(workItem => MakeHelixWorkItemProject(workItem));
 
-            var globalJson =
-                JsonConvert.DeserializeAnonymousType(
-                    File.ReadAllText(getGlobalJsonPath()),
-                    new { sdk = new { version = "" } }
-                ) ?? throw new InvalidOperationException("Failed to deserialize global.json.");
+            var globalJson = JsonConvert.DeserializeAnonymousType(
+                File.ReadAllText(getGlobalJsonPath()),
+                new { sdk = new { version = "" } }
+            ) ?? throw new InvalidOperationException("Failed to deserialize global.json.");
 
             var project =
                 @"

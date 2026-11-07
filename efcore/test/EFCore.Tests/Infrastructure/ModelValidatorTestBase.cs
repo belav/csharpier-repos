@@ -30,8 +30,7 @@ public abstract class ModelValidatorTestBase
         for (var i = 0; i < propertyCount; i++)
         {
             var propertyName = "P" + (startingPropertyIndex + i);
-            keyProperties[i] =
-                entityType.FindProperty(propertyName)
+            keyProperties[i] = entityType.FindProperty(propertyName)
                 ?? entityType.AddProperty(propertyName, typeof(int?));
             keyProperties[i].IsNullable = false;
         }

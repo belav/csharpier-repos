@@ -107,8 +107,8 @@ namespace Microsoft.Data.Sqlite
 
         public virtual string GetName(int ordinal)
         {
-            var name =
-                _columnNameCache?[ordinal] ?? sqlite3_column_name(Handle, ordinal).utf8_to_string();
+            var name = _columnNameCache?[ordinal]
+                ?? sqlite3_column_name(Handle, ordinal).utf8_to_string();
             if (name == null && (ordinal < 0 || ordinal >= FieldCount))
             {
                 // NB: Message is provided by the framework

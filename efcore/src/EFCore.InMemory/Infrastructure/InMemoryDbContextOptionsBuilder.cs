@@ -53,8 +53,7 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public virtual InMemoryDbContextOptionsBuilder EnableNullChecks(bool nullChecksEnabled = true)
     {
-        var extension =
-            OptionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
+        var extension = OptionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
             ?? new InMemoryOptionsExtension();
 
         extension = extension.WithNullabilityCheckEnabled(nullChecksEnabled);

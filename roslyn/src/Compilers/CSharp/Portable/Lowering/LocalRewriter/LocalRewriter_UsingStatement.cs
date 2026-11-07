@@ -608,8 +608,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // await local.DisposeAsync()
                     _sawAwaitInExceptionHandler = true;
 
-                    TypeSymbol awaitExpressionType =
-                        awaitOpt.GetResult?.ReturnType ?? _compilation.DynamicType;
+                    TypeSymbol awaitExpressionType = awaitOpt.GetResult?.ReturnType
+                        ?? _compilation.DynamicType;
                     disposeCall = RewriteAwaitExpression(
                         resourceSyntax,
                         disposeCall,

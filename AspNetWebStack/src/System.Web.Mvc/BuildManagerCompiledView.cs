@@ -43,8 +43,7 @@ namespace System.Web.Mvc
 
             ViewPath = viewPath;
 
-            ViewPageActivator =
-                viewPageActivator
+            ViewPageActivator = viewPageActivator
                 ?? new BuildManagerViewEngine.DefaultViewPageActivator(dependencyResolver);
         }
 

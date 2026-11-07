@@ -82,8 +82,8 @@ namespace Microsoft.Interop
                     nameToContextCache[iface.ThisInterfaceKey] = diagnostic;
                     return diagnostic;
                 }
-                DiagnosticOr<ComInterfaceContext> baseContext =
-                    baseCachedValue ?? baseReturnedValue;
+                DiagnosticOr<ComInterfaceContext> baseContext = baseCachedValue
+                    ?? baseReturnedValue;
                 Debug.Assert(baseContext.HasValue);
                 var ctx = DiagnosticOr<ComInterfaceContext>.From(
                     new ComInterfaceContext(iface, baseContext.Value, iface.Options)

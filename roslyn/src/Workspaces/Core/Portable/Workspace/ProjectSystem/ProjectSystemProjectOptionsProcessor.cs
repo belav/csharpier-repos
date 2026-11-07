@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
         private void UpdateProjectOptions_NoLock()
         {
-            var effectiveRuleSetPath =
-                ExplicitRuleSetFilePath ?? _commandLineArgumentsForCommandLine.RuleSetPath;
+            var effectiveRuleSetPath = ExplicitRuleSetFilePath
+                ?? _commandLineArgumentsForCommandLine.RuleSetPath;
 
             if (_ruleSetFile?.Target.Value.FilePath != effectiveRuleSetPath)
             {
@@ -236,8 +236,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
             // For managed projects, AssemblyName has to be non-null, but the command line we get might be a partial command line
             // and not contain the existing value. Only update if we have one.
-            _project.AssemblyName =
-                _commandLineArgumentsForCommandLine.CompilationName ?? _project.AssemblyName;
+            _project.AssemblyName = _commandLineArgumentsForCommandLine.CompilationName
+                ?? _project.AssemblyName;
             _project.CompilationOptions = compilationOptions;
 
             var fullOutputFilePath =
@@ -251,8 +251,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     )
                     : _commandLineArgumentsForCommandLine.OutputFileName;
 
-            _project.CompilationOutputAssemblyFilePath =
-                fullOutputFilePath ?? _project.CompilationOutputAssemblyFilePath;
+            _project.CompilationOutputAssemblyFilePath = fullOutputFilePath
+                ?? _project.CompilationOutputAssemblyFilePath;
             _project.ParseOptions = parseOptions;
             _project.ChecksumAlgorithm = _commandLineArgumentsForCommandLine.ChecksumAlgorithm;
         }

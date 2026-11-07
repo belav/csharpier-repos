@@ -1202,8 +1202,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var resolver = Options.SourceReferenceResolver;
                 foreach (var tree in SyntaxTrees)
                 {
-                    var path =
-                        resolver?.NormalizePath(tree.FilePath, baseFilePath: null) ?? tree.FilePath;
+                    var path = resolver?.NormalizePath(tree.FilePath, baseFilePath: null)
+                        ?? tree.FilePath;
                     builder[path] = builder.ContainsKey(path)
                         ? builder[path].Add(tree)
                         : OneOrMany.Create(tree);
@@ -2918,9 +2918,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (binderFactories == null)
             {
                 binderFactories = new WeakReference<BinderFactory>[this.SyntaxTrees.Length];
-                binderFactories =
-                    Interlocked.CompareExchange(ref cachedBinderFactories, binderFactories, null)
-                    ?? binderFactories;
+                binderFactories = Interlocked.CompareExchange(
+                    ref cachedBinderFactories,
+                    binderFactories,
+                    null
+                ) ?? binderFactories;
             }
 
             BinderFactory? previousFactory;
@@ -3808,8 +3810,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _needsGeneratedAttributes_IsFrozen = true;
             }
 
-            var result =
-                _lazyDeclarationDiagnostics?.AsEnumerable() ?? Enumerable.Empty<Diagnostic>();
+            var result = _lazyDeclarationDiagnostics?.AsEnumerable()
+                ?? Enumerable.Empty<Diagnostic>();
 
             if (locationFilterOpt != null)
             {
@@ -3984,8 +3986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void AppendDefaultVersionResource(Stream resourceStream)
         {
             var sourceAssembly = SourceAssembly;
-            string fileVersion =
-                sourceAssembly.FileVersion ?? sourceAssembly.Identity.Version.ToString();
+            string fileVersion = sourceAssembly.FileVersion
+                ?? sourceAssembly.Identity.Version.ToString();
 
             Win32ResourceConversions.AppendVersionToResourceStream(
                 resourceStream,

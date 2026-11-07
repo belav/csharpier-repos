@@ -935,8 +935,7 @@ namespace System.Threading.Tasks
             )
                 : base(taskBody, needsLock: true, dop, scheduler, cancellationToken, body)
             {
-                Enumerator =
-                    source.GetEnumerator()
+                Enumerator = source.GetEnumerator()
                     ?? throw new InvalidOperationException(SR.Parallel_ForEach_NullEnumerator);
             }
 
@@ -965,8 +964,7 @@ namespace System.Threading.Tasks
             )
                 : base(taskBody, needsLock: true, dop, scheduler, cancellationToken, body)
             {
-                Enumerator =
-                    source.GetAsyncEnumerator(Cancellation.Token)
+                Enumerator = source.GetAsyncEnumerator(Cancellation.Token)
                     ?? throw new InvalidOperationException(SR.Parallel_ForEach_NullEnumerator);
             }
 

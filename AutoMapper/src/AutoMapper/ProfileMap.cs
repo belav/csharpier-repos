@@ -20,28 +20,36 @@ public class ProfileMap
     {
         var globalProfile = (IProfileConfiguration)configuration;
         Name = profile.ProfileName;
-        AllowNullCollections =
-            profile.AllowNullCollections ?? configuration?.AllowNullCollections ?? false;
-        AllowNullDestinationValues =
-            profile.AllowNullDestinationValues ?? configuration?.AllowNullDestinationValues ?? true;
-        EnableNullPropagationForQueryMapping =
-            profile.EnableNullPropagationForQueryMapping
+        AllowNullCollections = profile.AllowNullCollections
+            ?? configuration?.AllowNullCollections
+            ?? false;
+        AllowNullDestinationValues = profile.AllowNullDestinationValues
+            ?? configuration?.AllowNullDestinationValues
+            ?? true;
+        EnableNullPropagationForQueryMapping = profile.EnableNullPropagationForQueryMapping
             ?? configuration?.EnableNullPropagationForQueryMapping
             ?? false;
-        ConstructorMappingEnabled =
-            profile.ConstructorMappingEnabled ?? globalProfile?.ConstructorMappingEnabled ?? true;
-        MethodMappingEnabled =
-            profile.MethodMappingEnabled ?? globalProfile?.MethodMappingEnabled ?? true;
-        FieldMappingEnabled =
-            profile.FieldMappingEnabled ?? globalProfile?.FieldMappingEnabled ?? true;
-        ShouldMapField =
-            profile.ShouldMapField ?? configuration?.ShouldMapField ?? (p => p.IsPublic);
-        ShouldMapProperty =
-            profile.ShouldMapProperty ?? configuration?.ShouldMapProperty ?? (p => p.IsPublic());
-        ShouldMapMethod =
-            profile.ShouldMapMethod ?? configuration?.ShouldMapMethod ?? (p => !p.IsSpecialName);
-        ShouldUseConstructor =
-            profile.ShouldUseConstructor ?? configuration?.ShouldUseConstructor ?? (c => true);
+        ConstructorMappingEnabled = profile.ConstructorMappingEnabled
+            ?? globalProfile?.ConstructorMappingEnabled
+            ?? true;
+        MethodMappingEnabled = profile.MethodMappingEnabled
+            ?? globalProfile?.MethodMappingEnabled
+            ?? true;
+        FieldMappingEnabled = profile.FieldMappingEnabled
+            ?? globalProfile?.FieldMappingEnabled
+            ?? true;
+        ShouldMapField = profile.ShouldMapField
+            ?? configuration?.ShouldMapField
+            ?? (p => p.IsPublic);
+        ShouldMapProperty = profile.ShouldMapProperty
+            ?? configuration?.ShouldMapProperty
+            ?? (p => p.IsPublic());
+        ShouldMapMethod = profile.ShouldMapMethod
+            ?? configuration?.ShouldMapMethod
+            ?? (p => !p.IsSpecialName);
+        ShouldUseConstructor = profile.ShouldUseConstructor
+            ?? configuration?.ShouldUseConstructor
+            ?? (c => true);
         ValueTransformers = profile
             .ValueTransformers.Concat(configuration?.ValueTransformers)
             .ToArray();

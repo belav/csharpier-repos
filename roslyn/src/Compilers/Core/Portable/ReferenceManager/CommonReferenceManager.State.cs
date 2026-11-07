@@ -220,8 +220,8 @@ namespace Microsoft.CodeAnalysis
 
             this.SimpleAssemblyName = simpleAssemblyName;
             this.IdentityComparer = identityComparer;
-            this.ObservedMetadata =
-                observedMetadata ?? new Dictionary<MetadataReference, MetadataOrDiagnostic>();
+            this.ObservedMetadata = observedMetadata
+                ?? new Dictionary<MetadataReference, MetadataOrDiagnostic>();
         }
 
         internal ImmutableArray<Diagnostic> Diagnostics
@@ -626,8 +626,7 @@ namespace Microsoft.CodeAnalysis
                             || versionPattern.Revision == ushort.MaxValue
                     );
 
-                    lazyBuilder =
-                        lazyBuilder
+                    lazyBuilder = lazyBuilder
                         ?? ImmutableDictionary.CreateBuilder<AssemblyIdentity, AssemblyIdentity>();
 
                     var sourceIdentity = symbolIdentity.WithVersion(versionPattern);

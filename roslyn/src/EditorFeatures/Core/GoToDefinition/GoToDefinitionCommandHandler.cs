@@ -88,8 +88,9 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
             // If there's a selection, use the starting point of the selection as the invocation point. Otherwise, just
             // pick wherever the caret is exactly at.
-            var caretPos =
-                args.TextView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer).FirstOrNull()?.Start
+            var caretPos = args.TextView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer)
+                .FirstOrNull()
+                ?.Start
                 ?? args.TextView.GetCaretPoint(subjectBuffer);
 
             if (!caretPos.HasValue)

@@ -23,8 +23,7 @@ namespace Microsoft.Extensions.Configuration
         {
             ThrowHelper.ThrowIfNull(source);
 
-            _config =
-                source.Configuration
+            _config = source.Configuration
                 ?? throw new ArgumentException(
                     SR.Format(SR.InvalidNullArgument, "source.Configuration"),
                     nameof(source)

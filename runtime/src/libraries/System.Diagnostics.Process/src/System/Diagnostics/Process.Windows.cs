@@ -697,8 +697,8 @@ namespace System.Diagnostics
                         }
 
                         fixed (
-                            char* passwordInClearTextPtr =
-                                startInfo.PasswordInClearText ?? string.Empty
+                            char* passwordInClearTextPtr = startInfo.PasswordInClearText
+                                ?? string.Empty
                         )
                         fixed (char* environmentBlockPtr = environmentBlock)
                         fixed (
@@ -807,8 +807,7 @@ namespace System.Diagnostics
 
             if (startInfo.RedirectStandardInput)
             {
-                Encoding enc =
-                    startInfo.StandardInputEncoding
+                Encoding enc = startInfo.StandardInputEncoding
                     ?? GetEncoding((int)Interop.Kernel32.GetConsoleCP());
                 _standardInput = new StreamWriter(
                     new FileStream(parentInputPipeHandle!, FileAccess.Write, 4096, false),
@@ -819,8 +818,7 @@ namespace System.Diagnostics
             }
             if (startInfo.RedirectStandardOutput)
             {
-                Encoding enc =
-                    startInfo.StandardOutputEncoding
+                Encoding enc = startInfo.StandardOutputEncoding
                     ?? GetEncoding((int)Interop.Kernel32.GetConsoleOutputCP());
                 _standardOutput = new StreamReader(
                     new FileStream(parentOutputPipeHandle!, FileAccess.Read, 4096, false),
@@ -831,8 +829,7 @@ namespace System.Diagnostics
             }
             if (startInfo.RedirectStandardError)
             {
-                Encoding enc =
-                    startInfo.StandardErrorEncoding
+                Encoding enc = startInfo.StandardErrorEncoding
                     ?? GetEncoding((int)Interop.Kernel32.GetConsoleOutputCP());
                 _standardError = new StreamReader(
                     new FileStream(parentErrorPipeHandle!, FileAccess.Read, 4096, false),

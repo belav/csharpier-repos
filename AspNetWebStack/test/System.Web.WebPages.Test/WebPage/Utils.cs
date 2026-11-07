@@ -42,8 +42,7 @@ namespace System.Web.WebPages.Test
         )
         {
             items = items ?? new Hashtable();
-            request =
-                request
+            request = request
                 ?? CreateTestRequest("default.cshtml", "http://localhost/default.cshtml").Object;
 
             if (response == null)

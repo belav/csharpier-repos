@@ -2707,8 +2707,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                var returnType =
-                    GetCommonTypeOrReturnType(methods)
+                var returnType = GetCommonTypeOrReturnType(methods)
                     ?? new ExtendedErrorTypeSymbol(
                         this.Compilation,
                         string.Empty,

@@ -182,8 +182,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     // Serialization object boundary.
                     for (int i = 0; i < memberTypes.Length; i++)
                     {
-                        Type type =
-                            memberTypes[i]
+                        Type type = memberTypes[i]
                             ?? (
                                 memberData[i] != null
                                     ? GetType(memberData[i]!)

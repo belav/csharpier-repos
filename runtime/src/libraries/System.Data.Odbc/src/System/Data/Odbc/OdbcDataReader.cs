@@ -432,13 +432,12 @@ namespace System.Data.Odbc
             if (null != _dataCache)
             {
                 DbSchemaInfo info = _dataCache.GetSchema(i);
-                return info._name ??=
-                    GetColAttributeStr(
-                        i,
-                        ODBC32.SQL_DESC.NAME,
-                        ODBC32.SQL_COLUMN.NAME,
-                        ODBC32.HANDLER.THROW
-                    ) ?? "";
+                return info._name ??= GetColAttributeStr(
+                    i,
+                    ODBC32.SQL_DESC.NAME,
+                    ODBC32.SQL_COLUMN.NAME,
+                    ODBC32.HANDLER.THROW
+                ) ?? "";
             }
             throw ADP.DataReaderNoData();
         }

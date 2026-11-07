@@ -5248,8 +5248,7 @@ namespace System.Data.Services.Client
                     BatchStream batchStream = null;
                     try
                     {
-                        batchStream =
-                            this.responseBatchStream
+                        batchStream = this.responseBatchStream
                             ?? new BatchStream(
                                 this.httpWebResponseStream,
                                 boundary,

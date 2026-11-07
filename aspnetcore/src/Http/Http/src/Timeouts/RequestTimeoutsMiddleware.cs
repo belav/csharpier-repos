@@ -131,8 +131,8 @@ internal sealed class RequestTimeoutsMiddleware
 
                 context.Response.Clear();
 
-                context.Response.StatusCode =
-                    selectedPolicy?.TimeoutStatusCode ?? StatusCodes.Status504GatewayTimeout;
+                context.Response.StatusCode = selectedPolicy?.TimeoutStatusCode
+                    ?? StatusCodes.Status504GatewayTimeout;
 
                 if (selectedPolicy?.WriteTimeoutResponse is not null)
                 {

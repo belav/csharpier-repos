@@ -516,8 +516,7 @@ public class NavigationFixer : INavigationFixer
 
             foreach (var foreignKey in containingForeignKeys)
             {
-                var newPrincipalEntry =
-                    stateManager.FindPrincipal(entry, foreignKey)
+                var newPrincipalEntry = stateManager.FindPrincipal(entry, foreignKey)
                     ?? stateManager.FindPrincipalUsingPreStoreGeneratedValues(entry, foreignKey);
                 var oldPrincipalEntry = stateManager.FindPrincipalUsingRelationshipSnapshot(
                     entry,

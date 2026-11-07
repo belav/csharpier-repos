@@ -136,8 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol eventType = eventSymbol.Type;
 
-            BoundExpression delegateCreationArgument =
-                boundTemp ?? rewrittenReceiverOpt ?? _factory.Type(eventType);
+            BoundExpression delegateCreationArgument = boundTemp
+                ?? rewrittenReceiverOpt
+                ?? _factory.Type(eventType);
 
             BoundDelegateCreationExpression removeDelegate = new BoundDelegateCreationExpression(
                 syntax: syntax,

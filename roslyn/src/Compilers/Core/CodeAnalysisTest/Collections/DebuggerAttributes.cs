@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             // Create an instance of the proxy type, and make sure we can access all of the instance properties
             // on the type without exception
-            object proxyInstance =
-                Activator.CreateInstance(proxyType, obj) ?? throw ExceptionUtilities.Unreachable();
+            object proxyInstance = Activator.CreateInstance(proxyType, obj)
+                ?? throw ExceptionUtilities.Unreachable();
             IEnumerable<PropertyInfo> properties = GetDebuggerVisibleProperties(proxyType);
             return new DebuggerAttributeInfo(proxyInstance, properties);
         }
@@ -164,8 +164,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var cad = attrs[0];
 
             // Get the text of the DebuggerDisplayAttribute
-            string attrText =
-                (string?)cad.ConstructorArguments[0].Value
+            string attrText = (string?)cad.ConstructorArguments[0].Value
                 ?? throw new InvalidOperationException("Expected a non-null text");
 
             var segments = attrText.Split(new[] { '{', '}' });

@@ -29,13 +29,13 @@ public class ModelBindingCommandHandler : BindingHandler
         object? invocationTarget
     )
     {
-        _handlerMethodInfo =
-            handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
+        _handlerMethodInfo = handlerMethodInfo
+            ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
         _invocationTargetBinder = _handlerMethodInfo.IsStatic
             ? null
             : new ModelBinder(_handlerMethodInfo.ReflectedType!);
-        _methodDescriptor =
-            methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+        _methodDescriptor = methodDescriptor
+            ?? throw new ArgumentNullException(nameof(methodDescriptor));
         _invocationTarget = invocationTarget;
     }
 
@@ -50,10 +50,10 @@ public class ModelBindingCommandHandler : BindingHandler
         IMethodDescriptor methodDescriptor
     )
     {
-        _handlerDelegate =
-            handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
-        _methodDescriptor =
-            methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+        _handlerDelegate = handlerDelegate
+            ?? throw new ArgumentNullException(nameof(handlerDelegate));
+        _methodDescriptor = methodDescriptor
+            ?? throw new ArgumentNullException(nameof(methodDescriptor));
     }
 
     /// <summary>
@@ -81,8 +81,8 @@ public class ModelBindingCommandHandler : BindingHandler
         object? result;
         if (_handlerDelegate is null)
         {
-            var invocationTarget =
-                _invocationTarget ?? bindingContext.GetService(_handlerMethodInfo!.ReflectedType!);
+            var invocationTarget = _invocationTarget
+                ?? bindingContext.GetService(_handlerMethodInfo!.ReflectedType!);
             if (invocationTarget is { })
             {
                 _invocationTargetBinder?.UpdateInstance(invocationTarget, bindingContext);
@@ -106,8 +106,8 @@ public class ModelBindingCommandHandler : BindingHandler
     /// <param name="argument">The argument whose parsed result will be the source of the bound value.</param>
     public void BindParameter(ParameterInfo param, CliArgument argument)
     {
-        var _ =
-            argument ?? throw new InvalidOperationException("You must specify an argument to bind");
+        var _ = argument
+            ?? throw new InvalidOperationException("You must specify an argument to bind");
         BindValueSource(param, new SpecificSymbolValueSource(argument));
     }
 

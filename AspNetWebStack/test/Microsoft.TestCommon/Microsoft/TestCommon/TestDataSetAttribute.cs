@@ -203,8 +203,7 @@ namespace Microsoft.TestCommon
             object propertyValue = GetTestDataPropertyValue(declaringType, propertyName);
 
             // box the dataset items if the property is not a RefTypeTestData
-            IEnumerable<object> value =
-                (propertyValue as IEnumerable<object>)
+            IEnumerable<object> value = (propertyValue as IEnumerable<object>)
                 ?? (propertyValue as IEnumerable).Cast<object>();
             if (value == null)
             {

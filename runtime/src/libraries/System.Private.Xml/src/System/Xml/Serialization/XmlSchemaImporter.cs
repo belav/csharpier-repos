@@ -1145,8 +1145,8 @@ namespace System.Xml.Serialization
                         break;
                     typeDescs[i] = ((ElementAccessor)enumerator.Current).Mapping!.TypeDesc!;
                 }
-                member.TypeDesc =
-                    TypeDesc.FindCommonBaseTypeDesc(typeDescs) ?? Scope.GetTypeDesc(typeof(object));
+                member.TypeDesc = TypeDesc.FindCommonBaseTypeDesc(typeDescs)
+                    ?? Scope.GetTypeDesc(typeof(object));
             }
 
             if (groupRepeats)

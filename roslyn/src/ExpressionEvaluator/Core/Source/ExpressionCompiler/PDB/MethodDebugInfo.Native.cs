@@ -424,11 +424,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 }
             }
 
-            importRecordGroups =
-                importRecordGroupBuilder?.ToImmutableAndFree()
+            importRecordGroups = importRecordGroupBuilder?.ToImmutableAndFree()
                 ?? ImmutableArray<ImmutableArray<ImportRecord>>.Empty;
-            externAliasRecords =
-                externAliasRecordBuilder?.ToImmutableAndFree()
+            externAliasRecords = externAliasRecordBuilder?.ToImmutableAndFree()
                 ?? ImmutableArray<ExternAliasRecord>.Empty;
         }
 

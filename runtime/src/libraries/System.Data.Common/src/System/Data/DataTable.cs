@@ -2252,8 +2252,8 @@ namespace System.Data
                     {
                         if (_dataSet != null)
                         {
-                            string realNamespace =
-                                value ?? GetInheritedNamespace(new List<DataTable>());
+                            string realNamespace = value
+                                ?? GetInheritedNamespace(new List<DataTable>());
                             if (realNamespace != Namespace)
                             {
                                 // do this extra check only if the namespace is really going to change

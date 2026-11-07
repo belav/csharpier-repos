@@ -5297,8 +5297,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         || (value.Type!.Equals(iDisposable) && disposeArguments.IsDefaultOrEmpty)
                 );
 
-                var method =
-                    disposeMethod
+                var method = disposeMethod
                     ?? (
                         isAsynchronous
                             ? (IMethodSymbol?)

@@ -134,8 +134,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 }
 
                 // At this point, the node has to go at the beginning of the comment
-                var nodeAfterNewParamNode =
-                    paramNodes.FirstOrDefault() ?? newDocComment.ChildNodes().First();
+                var nodeAfterNewParamNode = paramNodes.FirstOrDefault()
+                    ?? newDocComment.ChildNodes().First();
 
                 // Adjust for doc comment marker before the node
                 var paramNodeSiblings = nodeAfterNewParamNode

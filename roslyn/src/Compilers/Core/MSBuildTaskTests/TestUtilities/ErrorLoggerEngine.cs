@@ -24,28 +24,24 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             // Use the formatting from Microsoft.Build.Shared.EventArgsFormatting.
             var assembly = Assembly.LoadFrom("Microsoft.Build.dll");
-            var formattingClass =
-                assembly.GetType("Microsoft.Build.Shared.EventArgsFormatting")
+            var formattingClass = assembly.GetType("Microsoft.Build.Shared.EventArgsFormatting")
                 ?? throw new Exception("Could not find EventArgsFormatting type");
-            _formatErrorMethod =
-                formattingClass.GetMethod(
-                    "FormatEventMessage",
-                    BindingFlags.Static | BindingFlags.NonPublic,
-                    null,
-                    CallingConventions.Any,
-                    new Type[] { typeof(BuildErrorEventArgs) },
-                    null
-                ) ?? throw new Exception("Could not find FormatEventMessage(BuildErrorEventArgs).");
-            _formatWarningMethod =
-                formattingClass.GetMethod(
-                    "FormatEventMessage",
-                    BindingFlags.Static | BindingFlags.NonPublic,
-                    null,
-                    CallingConventions.Any,
-                    new Type[] { typeof(BuildWarningEventArgs) },
-                    null
-                )
-                ?? throw new Exception("Could not find FormatEventMessage(BuildWarningEventArgs).");
+            _formatErrorMethod = formattingClass.GetMethod(
+                "FormatEventMessage",
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                CallingConventions.Any,
+                new Type[] { typeof(BuildErrorEventArgs) },
+                null
+            ) ?? throw new Exception("Could not find FormatEventMessage(BuildErrorEventArgs).");
+            _formatWarningMethod = formattingClass.GetMethod(
+                "FormatEventMessage",
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                CallingConventions.Any,
+                new Type[] { typeof(BuildWarningEventArgs) },
+                null
+            ) ?? throw new Exception("Could not find FormatEventMessage(BuildWarningEventArgs).");
         }
 
         internal string Log

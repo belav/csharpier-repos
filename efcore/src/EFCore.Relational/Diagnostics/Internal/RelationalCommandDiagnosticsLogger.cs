@@ -50,8 +50,8 @@ public class RelationalCommandDiagnosticsLogger
             interceptors
         )
     {
-        var coreOptionsExtension =
-            contextOptions.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptionsExtension = contextOptions.FindExtension<CoreOptionsExtension>()
+            ?? new CoreOptionsExtension();
 
         _loggingCacheTime = coreOptionsExtension.LoggingCacheTime;
     }

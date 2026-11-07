@@ -71,8 +71,7 @@
             string labelText = null
         )
         {
-            string resolvedLabelText =
-                labelText
+            string resolvedLabelText = labelText
                 ?? metadata.DisplayName
                 ?? metadata.PropertyName
                 ?? htmlFieldName.Split('.').Last();

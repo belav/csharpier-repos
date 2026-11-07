@@ -395,8 +395,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     : recordKeyword.WithLeadingTrivia(typeDeclaration.Keyword.LeadingTrivia);
 
             // use the trailing trivia of the last item before the constructor parameter list as the param list trivia
-            var constructorTrivia =
-                typeDeclaration.TypeParameterList?.GetTrailingTrivia()
+            var constructorTrivia = typeDeclaration.TypeParameterList?.GetTrailingTrivia()
                 ?? typeDeclaration.Identifier.TrailingTrivia;
 
             // delete IEquatable if it's explicit because it is implicit on records
@@ -763,8 +762,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // if the class one isn't found, then we find the first property with a doc comment
             // this variable doubles as a flag to see if we need to generate doc comments at all, as
             // if it is still null, we found no meaningful doc comments anywhere
-            var exteriorTrivia =
-                GetExteriorTrivia(typeDeclaration)
+            var exteriorTrivia = GetExteriorTrivia(typeDeclaration)
                 ?? propertyResults
                     .Where(result => !result.IsInherited)
                     .Select(result => GetExteriorTrivia(result.Declaration!))

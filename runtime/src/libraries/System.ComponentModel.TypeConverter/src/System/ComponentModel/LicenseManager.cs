@@ -292,8 +292,7 @@ namespace System.ComponentModel
                 if (attr != null)
                 {
                     Type providerType = attr.LicenseProvider!;
-                    provider =
-                        GetCachedProviderInstance(providerType)
+                    provider = GetCachedProviderInstance(providerType)
                         ?? (LicenseProvider)Activator.CreateInstance(providerType)!;
                 }
 

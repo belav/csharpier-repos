@@ -402,8 +402,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var attributeLists = unboundLambda.ParameterAttributes(p);
                 var name = unboundLambda.ParameterName(p);
                 var location = unboundLambda.ParameterLocation(p);
-                var isParams =
-                    paramSyntax?.Modifiers.Any(static m => m.IsKind(SyntaxKind.ParamsKeyword))
+                var isParams = paramSyntax?.Modifiers.Any(static m =>
+                    m.IsKind(SyntaxKind.ParamsKeyword)
+                )
                     ?? false;
 
                 var parameter = new LambdaParameterSymbol(

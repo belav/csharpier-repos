@@ -131,8 +131,7 @@ namespace System.ServiceModel.Dispatcher
             this.binding_name = bindingName;
             // IChannelListener is often a ChannelListenerBase
             // which implements IDefaultCommunicationTimeouts.
-            this.timeouts =
-                timeouts
+            this.timeouts = timeouts
                 ?? listener as IDefaultCommunicationTimeouts
                 ?? DefaultCommunicationTimeouts.Instance;
             endpoints = new EndpointDispatcherCollection(this);
@@ -463,8 +462,7 @@ namespace System.ServiceModel.Dispatcher
         void SetupChannelAcceptor()
         {
             var l = owner.Listener;
-            channel_acceptor =
-                CreateAcceptor<IReplyChannel>(l)
+            channel_acceptor = CreateAcceptor<IReplyChannel>(l)
                 ?? CreateAcceptor<IReplySessionChannel>(l)
                 ?? CreateAcceptor<IInputChannel>(l)
                 ?? CreateAcceptor<IInputSessionChannel>(l)
@@ -790,8 +788,7 @@ namespace System.ServiceModel.Dispatcher
                 eh.ProvideFault(ex, owner.MessageVersion, ref res);
             if (res == null)
             {
-                var conv =
-                    ch.GetProperty<FaultConverter>()
+                var conv = ch.GetProperty<FaultConverter>()
                     ?? FaultConverter.GetDefaultFaultConverter(owner.MessageVersion);
                 if (!conv.TryCreateFaultMessage(ex, out res))
                     res = Message.CreateMessage(

@@ -165,10 +165,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 .ConfigureAwait(false);
 
             // Cross-language symbols will show as metadata, so map it to source if possible.
-            symbol =
-                await SymbolFinder
-                    .FindSourceDefinitionAsync(symbol, document.Project.Solution, cancellationToken)
-                    .ConfigureAwait(false)
+            symbol = await SymbolFinder
+                .FindSourceDefinitionAsync(symbol, document.Project.Solution, cancellationToken)
+                .ConfigureAwait(false)
                 ?? symbol;
 
             if (symbol == null)

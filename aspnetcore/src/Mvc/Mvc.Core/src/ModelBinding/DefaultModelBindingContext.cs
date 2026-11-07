@@ -200,8 +200,8 @@ public class DefaultModelBindingContext : ModelBindingContext
 
         var binderModelName = bindingInfo?.BinderModelName ?? metadata.BinderModelName;
         var bindingSource = bindingInfo?.BindingSource ?? metadata.BindingSource;
-        var propertyFilterProvider =
-            bindingInfo?.PropertyFilterProvider ?? metadata.PropertyFilterProvider;
+        var propertyFilterProvider = bindingInfo?.PropertyFilterProvider
+            ?? metadata.PropertyFilterProvider;
 
         var bindingContext = new DefaultModelBindingContext()
         {

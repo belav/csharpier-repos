@@ -98,8 +98,7 @@ public class ProjectionBuilder : IProjectionBuilder
     )
     {
         var instanceParameter = Parameter(request.SourceType, "dto" + request.SourceType.Name);
-        var typeMap =
-            _configuration.ResolveTypeMap(request.SourceType, request.DestinationType)
+        var typeMap = _configuration.ResolveTypeMap(request.SourceType, request.DestinationType)
             ?? throw TypeMap.MissingMapException(request.SourceType, request.DestinationType);
         var projection = CreateProjectionCore(request, instanceParameter, typeMap, letPropertyMaps);
         return letPropertyMaps.Count > 0

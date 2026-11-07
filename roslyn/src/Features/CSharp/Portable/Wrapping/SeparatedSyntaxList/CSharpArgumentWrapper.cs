@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             {
                 // If we have something like  Foo(...)  or  this.Foo(...)  allow anywhere in the Foo(...)
                 // section.
-                var expr =
-                    (declaration as InvocationExpressionSyntax)?.Expression
+                var expr = (declaration as InvocationExpressionSyntax)?.Expression
                     ?? ((ElementAccessExpressionSyntax)declaration).Expression;
                 var name = TryGetInvokedName(expr);
 

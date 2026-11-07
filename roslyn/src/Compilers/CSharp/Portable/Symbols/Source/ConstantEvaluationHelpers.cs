@@ -183,8 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             while (graph.Count > 0)
             {
                 // Get the set of fields in the graph that have no dependencies.
-                var search =
-                    ((IEnumerable<SourceFieldSymbolWithSyntaxReference>)lastUpdated) ?? graph.Keys;
+                var search = ((IEnumerable<SourceFieldSymbolWithSyntaxReference>)lastUpdated)
+                    ?? graph.Keys;
                 var set = ArrayBuilder<SourceFieldSymbolWithSyntaxReference>.GetInstance();
                 foreach (var field in search)
                 {

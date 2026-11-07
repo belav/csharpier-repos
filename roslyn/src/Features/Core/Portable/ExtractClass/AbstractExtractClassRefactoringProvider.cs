@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
                 return;
             }
 
-            var optionsService =
-                _optionsService ?? solution.Services.GetService<IExtractClassOptionsService>();
+            var optionsService = _optionsService
+                ?? solution.Services.GetService<IExtractClassOptionsService>();
             if (optionsService is null)
             {
                 return;

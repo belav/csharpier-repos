@@ -340,8 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         isChecked
                     );
 
-            memberName =
-                memberName
+            memberName = memberName
                 ?? OperatorFacts.UnaryOperatorNameFromSyntaxKindIfAny(
                     operatorTokenKind,
                     isChecked: isChecked

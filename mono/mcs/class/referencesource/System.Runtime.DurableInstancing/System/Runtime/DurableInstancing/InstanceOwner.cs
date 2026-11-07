@@ -354,8 +354,8 @@ namespace System.Runtime.DurableInstancing
                     }
                     finally
                     {
-                        marker.Reason =
-                            reason ?? new OperationCanceledException(SRCore.HandleFreed);
+                        marker.Reason = reason
+                            ?? new OperationCanceledException(SRCore.HandleFreed);
                         marker.NotifyMarkerComplete(false);
 
                         if (handlesPendingResolution == null)

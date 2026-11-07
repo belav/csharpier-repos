@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor
     )
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
-        private readonly IList<SolutionPreviewItem> _previews =
-            previews ?? SpecializedCollections.EmptyList<SolutionPreviewItem>();
+        private readonly IList<SolutionPreviewItem> _previews = previews
+            ?? SpecializedCollections.EmptyList<SolutionPreviewItem>();
         public readonly SolutionChangeSummary? ChangeSummary = changeSummary;
 
         public SolutionPreviewResult(

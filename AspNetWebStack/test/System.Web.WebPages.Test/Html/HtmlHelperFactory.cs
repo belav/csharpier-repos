@@ -15,8 +15,8 @@ namespace System.Web.WebPages.Test
         {
             modelStateDictionary = modelStateDictionary ?? new ModelStateDictionary();
             var httpContext = new Mock<HttpContextBase>();
-            validationHelper =
-                validationHelper ?? new ValidationHelper(httpContext.Object, modelStateDictionary);
+            validationHelper = validationHelper
+                ?? new ValidationHelper(httpContext.Object, modelStateDictionary);
             return new HtmlHelper(modelStateDictionary, validationHelper);
         }
     }

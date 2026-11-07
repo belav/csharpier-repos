@@ -55,12 +55,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
                 .GetValueTextAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var diffService =
-                _differenceSelectorService.GetTextDifferencingService(
-                    oldDocument
-                        .Project.Services.GetService<IContentTypeLanguageService>()
-                        .GetDefaultContentType()
-                ) ?? _differenceSelectorService.DefaultTextDifferencingService;
+            var diffService = _differenceSelectorService.GetTextDifferencingService(
+                oldDocument
+                    .Project.Services.GetService<IContentTypeLanguageService>()
+                    .GetDefaultContentType()
+            ) ?? _differenceSelectorService.DefaultTextDifferencingService;
 
             var differenceOptions = GetDifferenceOptions(preferredDifferenceType);
 

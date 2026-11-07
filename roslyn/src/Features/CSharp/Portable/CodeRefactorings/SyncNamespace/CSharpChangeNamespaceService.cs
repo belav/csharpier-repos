@@ -269,8 +269,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             {
                 // If new namespace is "", then name will be declared in global namespace.
                 // We will replace qualified reference with simple name qualified with alias (global if it's not alias qualified)
-                var aliasNode =
-                    aliasQualifier?.ToIdentifierName()
+                var aliasNode = aliasQualifier?.ToIdentifierName()
                     ?? SyntaxFactory.IdentifierName(SyntaxFactory.Token(SyntaxKind.GlobalKeyword));
                 newNode = SyntaxFactory.AliasQualifiedName(aliasNode, nameNode.WithoutTrivia());
                 return true;

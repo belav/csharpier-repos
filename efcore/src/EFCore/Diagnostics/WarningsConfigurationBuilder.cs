@@ -155,8 +155,7 @@ public class WarningsConfigurationBuilder
         Func<WarningsConfiguration, WarningsConfiguration> withFunc
     )
     {
-        var coreOptionsExtension =
-            _optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+        var coreOptionsExtension = _optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
             ?? new CoreOptionsExtension();
 
         ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(

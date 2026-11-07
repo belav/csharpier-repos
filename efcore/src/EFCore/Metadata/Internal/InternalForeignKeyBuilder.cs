@@ -1378,11 +1378,10 @@ public class InternalForeignKeyBuilder
             );
 
             Metadata.SetIsOwnership(true, configurationSource);
-            newRelationshipBuilder =
-                newRelationshipBuilder.OnDelete(
-                    DeleteBehavior.Cascade,
-                    ConfigurationSource.Convention
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.OnDelete(
+                DeleteBehavior.Cascade,
+                ConfigurationSource.Convention
+            ) ?? newRelationshipBuilder;
 
             foreach (var invertedOwnership in invertedOwnerships)
             {
@@ -3005,21 +3004,19 @@ public class InternalForeignKeyBuilder
 
         if (resetToPrincipal || resetToDependent)
         {
-            newRelationshipBuilder =
-                newRelationshipBuilder.HasNavigations(
-                    resetToPrincipal ? MemberIdentity.None : null,
-                    resetToDependent ? MemberIdentity.None : null,
-                    configurationSource
-                ) ?? newRelationshipBuilder;
-        }
-
-        newRelationshipBuilder =
-            newRelationshipBuilder.HasEntityTypes(
-                principalEntityTypeBuilder.Metadata,
-                dependentEntityTypeBuilder.Metadata,
-                principalEndConfigurationSource,
+            newRelationshipBuilder = newRelationshipBuilder.HasNavigations(
+                resetToPrincipal ? MemberIdentity.None : null,
+                resetToDependent ? MemberIdentity.None : null,
                 configurationSource
             ) ?? newRelationshipBuilder;
+        }
+
+        newRelationshipBuilder = newRelationshipBuilder.HasEntityTypes(
+            principalEntityTypeBuilder.Metadata,
+            dependentEntityTypeBuilder.Metadata,
+            principalEndConfigurationSource,
+            configurationSource
+        ) ?? newRelationshipBuilder;
 
         dependentProperties = oldNameDependentProperties ?? dependentProperties;
         if (dependentProperties != null || principalProperties != null)
@@ -3177,9 +3174,10 @@ public class InternalForeignKeyBuilder
                 );
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.IsUnique(isUnique.Value, isUniqueConfigurationSource)
-                ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.IsUnique(
+                isUnique.Value,
+                isUniqueConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
         else if (
             !oldRelationshipInverted
@@ -3187,9 +3185,10 @@ public class InternalForeignKeyBuilder
             && !newRelationshipBuilder.Metadata.GetIsUniqueConfigurationSource().HasValue
         )
         {
-            newRelationshipBuilder =
-                newRelationshipBuilder.IsUnique(Metadata.IsUnique, isUniqueConfigurationSource)
-                ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.IsUnique(
+                Metadata.IsUnique,
+                isUniqueConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
 
         if (isRequired.HasValue)
@@ -3202,9 +3201,10 @@ public class InternalForeignKeyBuilder
                 );
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.IsRequired(isRequired.Value, isRequiredConfigurationSource)
-                ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.IsRequired(
+                isRequired.Value,
+                isRequiredConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
         else
         {
@@ -3215,11 +3215,10 @@ public class InternalForeignKeyBuilder
                     && !newRelationshipBuilder.Metadata.GetIsRequiredConfigurationSource().HasValue
                 )
                 {
-                    newRelationshipBuilder =
-                        newRelationshipBuilder.IsRequired(
-                            Metadata.IsRequired,
-                            isRequiredConfigurationSource
-                        ) ?? newRelationshipBuilder;
+                    newRelationshipBuilder = newRelationshipBuilder.IsRequired(
+                        Metadata.IsRequired,
+                        isRequiredConfigurationSource
+                    ) ?? newRelationshipBuilder;
                 }
             }
             else
@@ -3233,11 +3232,10 @@ public class InternalForeignKeyBuilder
                     && !newRelationshipBuilder.Metadata.GetIsRequiredConfigurationSource().HasValue
                 )
                 {
-                    newRelationshipBuilder =
-                        newRelationshipBuilder.IsRequired(
-                            Metadata.IsRequiredDependent,
-                            isRequiredDependentConfigurationSource
-                        ) ?? newRelationshipBuilder;
+                    newRelationshipBuilder = newRelationshipBuilder.IsRequired(
+                        Metadata.IsRequiredDependent,
+                        isRequiredDependentConfigurationSource
+                    ) ?? newRelationshipBuilder;
                 }
             }
         }
@@ -3252,11 +3250,10 @@ public class InternalForeignKeyBuilder
                 );
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.IsRequiredDependent(
-                    isRequiredDependent.Value,
-                    isRequiredDependentConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.IsRequiredDependent(
+                isRequiredDependent.Value,
+                isRequiredDependentConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
         else
         {
@@ -3270,11 +3267,10 @@ public class InternalForeignKeyBuilder
                         .HasValue
                 )
                 {
-                    newRelationshipBuilder =
-                        newRelationshipBuilder.IsRequiredDependent(
-                            Metadata.IsRequiredDependent,
-                            isRequiredDependentConfigurationSource
-                        ) ?? newRelationshipBuilder;
+                    newRelationshipBuilder = newRelationshipBuilder.IsRequiredDependent(
+                        Metadata.IsRequiredDependent,
+                        isRequiredDependentConfigurationSource
+                    ) ?? newRelationshipBuilder;
                 }
             }
             else
@@ -3287,11 +3283,10 @@ public class InternalForeignKeyBuilder
                         .HasValue
                 )
                 {
-                    newRelationshipBuilder =
-                        newRelationshipBuilder.IsRequiredDependent(
-                            Metadata.IsRequired,
-                            isRequiredConfigurationSource
-                        ) ?? newRelationshipBuilder;
+                    newRelationshipBuilder = newRelationshipBuilder.IsRequiredDependent(
+                        Metadata.IsRequired,
+                        isRequiredConfigurationSource
+                    ) ?? newRelationshipBuilder;
                 }
             }
         }
@@ -3306,11 +3301,10 @@ public class InternalForeignKeyBuilder
                 );
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.OnDelete(
-                    deleteBehavior.Value,
-                    deleteBehaviorConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.OnDelete(
+                deleteBehavior.Value,
+                deleteBehaviorConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
         else if (
             !oldRelationshipInverted
@@ -3319,11 +3313,10 @@ public class InternalForeignKeyBuilder
             && !newRelationshipBuilder.Metadata.GetDeleteBehaviorConfigurationSource().HasValue
         )
         {
-            newRelationshipBuilder =
-                newRelationshipBuilder.OnDelete(
-                    Metadata.DeleteBehavior,
-                    deleteBehaviorConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.OnDelete(
+                Metadata.DeleteBehavior,
+                deleteBehaviorConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
 
         if (navigationToPrincipal != null)
@@ -3335,12 +3328,11 @@ public class InternalForeignKeyBuilder
                     navigationToPrincipalConfigurationSource.Max(oldToPrincipalConfigurationSource);
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.HasNavigations(
-                    navigationToPrincipal,
-                    navigationToDependent: null,
-                    navigationToPrincipalConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.HasNavigations(
+                navigationToPrincipal,
+                navigationToDependent: null,
+                navigationToPrincipalConfigurationSource
+            ) ?? newRelationshipBuilder;
 
             if (
                 oldNavigationToPrincipal != null
@@ -3364,12 +3356,11 @@ public class InternalForeignKeyBuilder
             )
         )
         {
-            newRelationshipBuilder =
-                newRelationshipBuilder.HasNavigations(
-                    oldNavigationToPrincipal.CreateMemberIdentity(),
-                    navigationToDependent: null,
-                    oldToPrincipalConfigurationSource!.Value
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.HasNavigations(
+                oldNavigationToPrincipal.CreateMemberIdentity(),
+                navigationToDependent: null,
+                oldToPrincipalConfigurationSource!.Value
+            ) ?? newRelationshipBuilder;
 
             if (newRelationshipBuilder.Metadata.DependentToPrincipal != null)
             {
@@ -3389,12 +3380,11 @@ public class InternalForeignKeyBuilder
                     navigationToDependentConfigurationSource.Max(oldToDependentConfigurationSource);
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.HasNavigations(
-                    navigationToPrincipal: null,
-                    navigationToDependent,
-                    navigationToDependentConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.HasNavigations(
+                navigationToPrincipal: null,
+                navigationToDependent,
+                navigationToDependentConfigurationSource
+            ) ?? newRelationshipBuilder;
 
             if (
                 oldNavigationToDependent != null
@@ -3418,12 +3408,11 @@ public class InternalForeignKeyBuilder
             )
         )
         {
-            newRelationshipBuilder =
-                newRelationshipBuilder.HasNavigations(
-                    navigationToPrincipal: null,
-                    oldNavigationToDependent.CreateMemberIdentity(),
-                    oldToDependentConfigurationSource!.Value
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.HasNavigations(
+                navigationToPrincipal: null,
+                oldNavigationToDependent.CreateMemberIdentity(),
+                oldToDependentConfigurationSource!.Value
+            ) ?? newRelationshipBuilder;
 
             if (newRelationshipBuilder.Metadata.PrincipalToDependent != null)
             {
@@ -3444,22 +3433,20 @@ public class InternalForeignKeyBuilder
                 );
             }
 
-            newRelationshipBuilder =
-                newRelationshipBuilder.IsOwnership(
-                    isOwnership.Value,
-                    isOwnershipConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.IsOwnership(
+                isOwnership.Value,
+                isOwnershipConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
         else if (
             !oldRelationshipInverted
             && Metadata.GetIsOwnershipConfigurationSource() is { } getIsOwnershipConfigurationSource
         )
         {
-            newRelationshipBuilder =
-                newRelationshipBuilder.IsOwnership(
-                    Metadata.IsOwnership,
-                    getIsOwnershipConfigurationSource
-                ) ?? newRelationshipBuilder;
+            newRelationshipBuilder = newRelationshipBuilder.IsOwnership(
+                Metadata.IsOwnership,
+                getIsOwnershipConfigurationSource
+            ) ?? newRelationshipBuilder;
         }
 
         if (referencingSkipNavigations != null)
@@ -4731,11 +4718,10 @@ public class InternalForeignKeyBuilder
         }
         else
         {
-            principalProperties =
-                principalEntityTypeBuilder.GetActualProperties(
-                    Metadata.PrincipalKey.Properties,
-                    configurationSource
-                ) ?? new List<Property>();
+            principalProperties = principalEntityTypeBuilder.GetActualProperties(
+                Metadata.PrincipalKey.Properties,
+                configurationSource
+            ) ?? new List<Property>();
         }
 
         if (
@@ -4752,11 +4738,10 @@ public class InternalForeignKeyBuilder
         }
         else
         {
-            dependentProperties =
-                dependentEntityTypeBuilder.GetActualProperties(
-                    Metadata.Properties,
-                    configurationSource
-                ) ?? new List<Property>();
+            dependentProperties = dependentEntityTypeBuilder.GetActualProperties(
+                Metadata.Properties,
+                configurationSource
+            ) ?? new List<Property>();
         }
 
         if (dependentProperties.Count != 0)

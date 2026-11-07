@@ -114,8 +114,7 @@ namespace BinderTracingTests
             string baseAssemblyDirectory
         )
         {
-            string baseDirectory =
-                baseAssemblyDirectory
+            string baseDirectory = baseAssemblyDirectory
                 ?? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (!string.IsNullOrEmpty(culture))
                 baseDirectory = Path.Combine(baseDirectory, culture);

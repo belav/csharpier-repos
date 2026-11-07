@@ -5339,14 +5339,13 @@ public class CustomHandler
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             var descendentNodes = tree.GetRoot().DescendantNodes();
-            var interpolatedString =
-                (ExpressionSyntax)
-                    descendentNodes
-                        .OfType<BinaryExpressionSyntax>()
-                        .Where(b =>
-                            b.DescendantNodes().OfType<InterpolatedStringExpressionSyntax>().Any()
-                        )
-                        .FirstOrDefault()
+            var interpolatedString = (ExpressionSyntax)
+                descendentNodes
+                    .OfType<BinaryExpressionSyntax>()
+                    .Where(b =>
+                        b.DescendantNodes().OfType<InterpolatedStringExpressionSyntax>().Any()
+                    )
+                    .FirstOrDefault()
                 ?? descendentNodes.OfType<InterpolatedStringExpressionSyntax>().Single();
             var semanticInfo = model.GetSemanticInfoSummary(interpolatedString);
 

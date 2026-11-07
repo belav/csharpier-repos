@@ -38,8 +38,8 @@ public class ObjectVisitor
     )
     {
         _path = path;
-        _contractResolver =
-            contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+        _contractResolver = contractResolver
+            ?? throw new ArgumentNullException(nameof(contractResolver));
         _adapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
     }
 

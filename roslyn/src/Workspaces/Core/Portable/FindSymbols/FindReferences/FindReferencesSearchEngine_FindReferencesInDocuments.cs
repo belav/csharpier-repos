@@ -171,8 +171,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     foreach (var token in tokens)
                     {
-                        var parent =
-                            state.SyntaxFacts.TryGetBindableParent(token)
+                        var parent = state.SyntaxFacts.TryGetBindableParent(token)
                             ?? token.GetRequiredParent();
                         var symbolInfo = state.Cache.GetSymbolInfo(parent, cancellationToken);
 

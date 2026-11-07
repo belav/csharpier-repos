@@ -30,8 +30,8 @@ internal sealed partial class EndpointMiddleware
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _next = next ?? throw new ArgumentNullException(nameof(next));
-        _routeOptions =
-            routeOptions?.Value ?? throw new ArgumentNullException(nameof(routeOptions));
+        _routeOptions = routeOptions?.Value
+            ?? throw new ArgumentNullException(nameof(routeOptions));
     }
 
     public Task Invoke(HttpContext httpContext)

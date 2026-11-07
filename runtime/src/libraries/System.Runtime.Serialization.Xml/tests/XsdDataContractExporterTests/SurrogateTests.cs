@@ -652,8 +652,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 get
                 {
-                    friends =
-                        friends
+                    friends = friends
                         ?? new ExporterTypesTests.CollectionWithoutParameterlessCtor<NonSerializablePerson>(
                             2
                         );
@@ -682,8 +681,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 get
                 {
-                    friends =
-                        friends
+                    friends = friends
                         ?? new ExporterTypesTests.CollectionWithoutParameterlessCtor<NonSerializablePersonDC>(
                             2
                         );

@@ -2271,10 +2271,9 @@ typedef struct {
 
             if (Environment.Is64BitProcess)
             {
-                key =
-                    Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
-                        @"SOFTWARE\Wow6432Node" + subKey
-                    )
+                key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+                    @"SOFTWARE\Wow6432Node" + subKey
+                )
                     ?? Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
                         @"SOFTWARE\Wow6432Node" + subKey
                     );
@@ -2282,8 +2281,7 @@ typedef struct {
 
             if (key == null)
             {
-                key =
-                    Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE" + subKey)
+                key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE" + subKey)
                     ?? Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE" + subKey);
             }
 

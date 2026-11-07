@@ -536,8 +536,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this PropertySymbol property
         )
         {
-            var annotations =
-                property.GetOwnOrInheritedGetMethod()?.ReturnTypeFlowAnalysisAnnotations
+            var annotations = property
+                .GetOwnOrInheritedGetMethod()
+                ?.ReturnTypeFlowAnalysisAnnotations
                 ?? FlowAnalysisAnnotations.None;
             if (
                 property.GetOwnOrInheritedSetMethod()?.Parameters.Last().FlowAnalysisAnnotations is

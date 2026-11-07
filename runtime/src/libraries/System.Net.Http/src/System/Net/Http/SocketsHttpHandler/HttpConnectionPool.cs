@@ -2108,8 +2108,7 @@ namespace System.Net.Http
                         );
                     }
 
-                    stream =
-                        await streamTask.ConfigureAwait(false)
+                    stream = await streamTask.ConfigureAwait(false)
                         ?? throw new HttpRequestException(SR.net_http_null_from_connect_callback);
                 }
                 else

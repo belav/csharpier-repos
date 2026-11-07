@@ -94,8 +94,7 @@ namespace System.CommandLine
         {
             get => _output ??= Console.Out;
             set =>
-                _output =
-                    value
+                _output = value
                     ?? throw new ArgumentNullException(
                         nameof(value),
                         "Use TextWriter.Null to disable the output"
@@ -111,8 +110,7 @@ namespace System.CommandLine
         {
             get => _error ??= Console.Error;
             set =>
-                _error =
-                    value
+                _error = value
                     ?? throw new ArgumentNullException(
                         nameof(value),
                         "Use TextWriter.Null to disable the output"

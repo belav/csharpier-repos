@@ -1991,8 +1991,7 @@ namespace Mono.CSharp
             // We achieve that by introducing alias-context which redirect any local
             // namespace or type resolve calls to parent namespace
             //
-            resolved =
-                NamespaceExpression.ResolveAsTypeOrNamespace(new AliasContext(ctx), false)
+            resolved = NamespaceExpression.ResolveAsTypeOrNamespace(new AliasContext(ctx), false)
                 ?? new TypeExpression(InternalType.ErrorType, NamespaceExpression.Location);
         }
     }

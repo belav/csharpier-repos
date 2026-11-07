@@ -337,8 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 return null;
             }
 
-            var container =
-                (SyntaxNode)typeDecl ?? eventHookupExpression.GetAncestor<CompilationUnitSyntax>();
+            var container = (SyntaxNode)typeDecl
+                ?? eventHookupExpression.GetAncestor<CompilationUnitSyntax>();
 
             var codeGenerator =
                 document.Document.GetRequiredLanguageService<ICodeGenerationService>();

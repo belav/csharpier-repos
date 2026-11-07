@@ -119,8 +119,7 @@ namespace System.Runtime.Serialization
         {
             Debug.Assert(_serializationSurrogateProvider != null);
 
-            DataContract dataContract =
-                surrogateDataContract
+            DataContract dataContract = surrogateDataContract
                 ?? GetDataContract(
                     DataContractSurrogateCaller.GetDataContractType(
                         _serializationSurrogateProvider,

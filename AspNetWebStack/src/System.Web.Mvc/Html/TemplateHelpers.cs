@@ -222,8 +222,8 @@ namespace System.Web.Mvc.Html
             }
 
             // We don't want to search for Nullable<T>, we want to search for T (which should handle both T and Nullable<T>)
-            Type fieldType =
-                Nullable.GetUnderlyingType(metadata.RealModelType) ?? metadata.RealModelType;
+            Type fieldType = Nullable.GetUnderlyingType(metadata.RealModelType)
+                ?? metadata.RealModelType;
 
             // TODO: Make better string names for generic types
             yield return fieldType.Name;

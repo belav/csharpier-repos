@@ -21,8 +21,9 @@ namespace System.Management.Tests
 
         // Use the environment variable below to do manual runs against remote boxes: just ensure that the credentials running the tests have
         // rights to query the box (use wbemtest tool to validate).
-        private static readonly string s_targetMachine =
-            Environment.GetEnvironmentVariable("WmiTestTargetMachine") ?? Environment.MachineName;
+        private static readonly string s_targetMachine = Environment.GetEnvironmentVariable(
+            "WmiTestTargetMachine"
+        ) ?? Environment.MachineName;
         private static readonly object[][] s_scopeRoots = new[]
         {
             new[] { $@"\\{s_targetMachine}\" },

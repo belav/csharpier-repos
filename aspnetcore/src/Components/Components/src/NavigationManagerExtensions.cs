@@ -802,8 +802,8 @@ public static class NavigationManagerExtensions
         Type parameterValueType
     )
     {
-        var underlyingParameterValueType =
-            Nullable.GetUnderlyingType(parameterValueType) ?? parameterValueType;
+        var underlyingParameterValueType = Nullable.GetUnderlyingType(parameterValueType)
+            ?? parameterValueType;
 
         if (!_queryParameterFormatters.TryGetValue(underlyingParameterValueType, out var formatter))
         {

@@ -102,11 +102,10 @@ internal sealed class ExportProviderBuilder
         //         TypeIdentityName: Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api.IPythiaSignatureHelpProviderImplementation
         //     but found 0.
         //         part definition Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider
-        var erroredParts =
-            configuration
-                .CompositionErrors.FirstOrDefault()
-                ?.SelectMany(error => error.Parts)
-                .Select(part => part.Definition.Type.Name)
+        var erroredParts = configuration
+            .CompositionErrors.FirstOrDefault()
+            ?.SelectMany(error => error.Parts)
+            .Select(part => part.Definition.Type.Name)
             ?? Enumerable.Empty<string>();
         var expectedErroredParts = new string[] { "PythiaSignatureHelpProvider" };
         if (

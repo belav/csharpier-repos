@@ -499,8 +499,8 @@ public class SignInManager<TUser>
         if (UserManager.SupportsUserLockout && lockoutOnFailure)
         {
             // If lockout is requested, increment access failed count which might lock out the user
-            var incrementLockoutResult =
-                await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
+            var incrementLockoutResult = await UserManager.AccessFailedAsync(user)
+                ?? IdentityResult.Success;
             if (!incrementLockoutResult.Succeeded)
             {
                 // Return the same failure we do when resetting the lockout fails after a correct password.
@@ -676,8 +676,8 @@ public class SignInManager<TUser>
         // If the token is incorrect, record the failure which also may cause the user to be locked out
         if (UserManager.SupportsUserLockout)
         {
-            var incrementLockoutResult =
-                await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
+            var incrementLockoutResult = await UserManager.AccessFailedAsync(user)
+                ?? IdentityResult.Success;
             if (!incrementLockoutResult.Succeeded)
             {
                 // Return the same failure we do when resetting the lockout fails after a correct two factor code.
@@ -729,8 +729,8 @@ public class SignInManager<TUser>
         // If the token is incorrect, record the failure which also may cause the user to be locked out
         if (UserManager.SupportsUserLockout)
         {
-            var incrementLockoutResult =
-                await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
+            var incrementLockoutResult = await UserManager.AccessFailedAsync(user)
+                ?? IdentityResult.Success;
             if (!incrementLockoutResult.Succeeded)
             {
                 // Return the same failure we do when resetting the lockout fails after a correct two factor code.
@@ -847,18 +847,16 @@ public class SignInManager<TUser>
             }
         }
 
-        var providerKey =
-            auth.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
+        var providerKey = auth.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
             ?? auth.Principal.FindFirstValue("sub");
         if (providerKey == null || provider == null)
         {
             return null;
         }
 
-        var providerDisplayName =
-            (await GetExternalAuthenticationSchemesAsync())
-                .FirstOrDefault(p => p.Name == provider)
-                ?.DisplayName
+        var providerDisplayName = (await GetExternalAuthenticationSchemesAsync())
+            .FirstOrDefault(p => p.Name == provider)
+            ?.DisplayName
             ?? provider;
         return new ExternalLoginInfo(auth.Principal, provider, providerKey, providerDisplayName)
         {
@@ -1113,8 +1111,8 @@ public class SignInManager<TUser>
         if (UserManager.SupportsUserLockout)
         {
             // The IdentityResult should not be null according to the annotations, but our own tests return null and I'm trying to limit breakages.
-            var result =
-                await UserManager.ResetAccessFailedCountAsync(user) ?? IdentityResult.Success;
+            var result = await UserManager.ResetAccessFailedCountAsync(user)
+                ?? IdentityResult.Success;
 
             if (!result.Succeeded)
             {

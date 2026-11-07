@@ -277,8 +277,8 @@ namespace System.Tests
             {
                 AppDomain.CurrentDomain.ApplyPolicy("");
             });
-            string entryAssembly =
-                Assembly.GetEntryAssembly()?.FullName ?? Assembly.GetExecutingAssembly().FullName;
+            string entryAssembly = Assembly.GetEntryAssembly()?.FullName
+                ?? Assembly.GetExecutingAssembly().FullName;
             Assert.Equal(AppDomain.CurrentDomain.ApplyPolicy(entryAssembly), entryAssembly);
         }
 

@@ -645,8 +645,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         SecurityTokenHandlerCollection CreateBootstrapTokenHandlerCollection()
         {
-            SecurityTokenHandlerCollection tokenHandlerCollection =
-                this.ContainingCollection
+            SecurityTokenHandlerCollection tokenHandlerCollection = this.ContainingCollection
                 ?? SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
             return tokenHandlerCollection;
         }

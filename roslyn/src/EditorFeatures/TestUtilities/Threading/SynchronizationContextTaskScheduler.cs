@@ -20,8 +20,7 @@ namespace Roslyn.Test.Utilities
         internal SynchronizationContextTaskScheduler(SynchronizationContext synchronizationContext)
         {
             _postCallback = new SendOrPostCallback(PostCallback);
-            _synchronizationContext =
-                synchronizationContext
+            _synchronizationContext = synchronizationContext
                 ?? throw new ArgumentNullException(nameof(synchronizationContext));
         }
 

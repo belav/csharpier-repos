@@ -1499,8 +1499,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private MemberSemanticModel GetOrAddModel(CSharpSyntaxNode node)
         {
-            var createMemberModelFunction =
-                _createMemberModelFunction ?? (_createMemberModelFunction = this.CreateMemberModel);
+            var createMemberModelFunction = _createMemberModelFunction
+                ?? (_createMemberModelFunction = this.CreateMemberModel);
 
             return GetOrAddModel(node, createMemberModelFunction);
         }

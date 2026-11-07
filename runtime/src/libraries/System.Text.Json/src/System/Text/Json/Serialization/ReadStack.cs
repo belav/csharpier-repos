@@ -134,8 +134,7 @@ namespace System.Text.Json
                 }
                 else
                 {
-                    JsonTypeInfo jsonTypeInfo =
-                        Current.JsonPropertyInfo?.JsonTypeInfo
+                    JsonTypeInfo jsonTypeInfo = Current.JsonPropertyInfo?.JsonTypeInfo
                         ?? Current.CtorArgumentState!.JsonParameterInfo!.JsonTypeInfo;
                     JsonNumberHandling? numberHandling = Current.NumberHandling;
 
@@ -147,8 +146,8 @@ namespace System.Text.Json
                     Current.JsonTypeInfo = jsonTypeInfo;
                     Current.JsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
                     // Allow number handling on property to win over handling on type.
-                    Current.NumberHandling =
-                        numberHandling ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
+                    Current.NumberHandling = numberHandling
+                        ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
                     Current.CanContainMetadata =
                         PreserveReferences
                         || jsonTypeInfo.PolymorphicTypeResolver?.UsesTypeDiscriminators == true;
@@ -390,8 +389,7 @@ namespace System.Text.Json
                     else
                     {
                         // Attempt to get the JSON property name from the JsonPropertyInfo or JsonParameterInfo.
-                        utf8PropertyName =
-                            frame.JsonPropertyInfo?.NameAsUtf8Bytes
+                        utf8PropertyName = frame.JsonPropertyInfo?.NameAsUtf8Bytes
                             ?? frame.CtorArgumentState?.JsonParameterInfo?.NameAsUtf8Bytes;
                     }
                 }

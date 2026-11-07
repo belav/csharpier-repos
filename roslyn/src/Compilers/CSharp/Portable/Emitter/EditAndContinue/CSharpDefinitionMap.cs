@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         EmitBaseline baseline
     ) : DefinitionMap(edits, baseline)
     {
-        private readonly CSharpSymbolMatcher _sourceToPrevious =
-            previousSourceToCurrentSource ?? sourceToMetadata;
+        private readonly CSharpSymbolMatcher _sourceToPrevious = previousSourceToCurrentSource
+            ?? sourceToMetadata;
 
         public override SymbolMatcher SourceToMetadataSymbolMatcher => sourceToMetadata;
         public override SymbolMatcher SourceToPreviousSymbolMatcher => _sourceToPrevious;

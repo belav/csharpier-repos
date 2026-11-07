@@ -650,8 +650,8 @@ namespace System.Text.Json
             {
                 VerifyMutable();
                 _referenceHandler = value;
-                ReferenceHandlingStrategy =
-                    value?.HandlingStrategy ?? ReferenceHandlingStrategy.None;
+                ReferenceHandlingStrategy = value?.HandlingStrategy
+                    ?? ReferenceHandlingStrategy.None;
             }
         }
 

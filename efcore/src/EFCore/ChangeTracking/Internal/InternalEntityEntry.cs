@@ -575,8 +575,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             List<IServiceProperty>? dependentServices = null;
             foreach (var serviceProperty in EntityType.GetServiceProperties())
             {
-                var service =
-                    this[serviceProperty]
+                var service = this[serviceProperty]
                     ?? serviceProperty.ParameterBinding.ServiceDelegate(
                         new MaterializationContext(ValueBuffer.Empty, Context),
                         EntityType,
@@ -2277,8 +2276,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         else
         {
             // ReSharper disable once AssignNullToNotNullAttribute
-            var property =
-                entityType.FindProperty(propertyName)
+            var property = entityType.FindProperty(propertyName)
                 ?? entityType.FindNavigation(propertyName)
                 ?? (IPropertyBase?)entityType.FindSkipNavigation(propertyName);
 

@@ -441,8 +441,7 @@ public static class IdentityApiEndpointRouteBuilderExtensions
                     {
                         SharedKey = key,
                         RecoveryCodes = recoveryCodes,
-                        RecoveryCodesLeft =
-                            recoveryCodes?.Length
+                        RecoveryCodesLeft = recoveryCodes?.Length
                             ?? await userManager.CountRecoveryCodesAsync(user),
                         IsTwoFactorEnabled = await userManager.GetTwoFactorEnabledAsync(user),
                         IsMachineRemembered = await signInManager.IsTwoFactorClientRememberedAsync(
@@ -565,8 +564,11 @@ public static class IdentityApiEndpointRouteBuilderExtensions
                 routeValues.Add("changedEmail", email);
             }
 
-            var confirmEmailUrl =
-                linkGenerator.GetUriByName(context, confirmEmailEndpointName, routeValues)
+            var confirmEmailUrl = linkGenerator.GetUriByName(
+                context,
+                confirmEmailEndpointName,
+                routeValues
+            )
                 ?? throw new NotSupportedException(
                     $"Could not find endpoint named '{confirmEmailEndpointName}'."
                 );
@@ -625,8 +627,7 @@ public static class IdentityApiEndpointRouteBuilderExtensions
     {
         return new()
         {
-            Email =
-                await userManager.GetEmailAsync(user)
+            Email = await userManager.GetEmailAsync(user)
                 ?? throw new NotSupportedException("Users must have an email."),
             IsEmailConfirmed = await userManager.IsEmailConfirmedAsync(user),
         };

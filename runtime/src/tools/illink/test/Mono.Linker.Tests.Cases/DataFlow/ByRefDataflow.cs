@@ -366,8 +366,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestNullCoalescingAssignmentComplex(bool b = true)
             {
-                (b ? ref _publicMethodsField : ref _publicPropertiesField) ??=
-                    GetUnknownType() ?? GetTypeWithPublicConstructors();
+                (b ? ref _publicMethodsField : ref _publicPropertiesField) ??= GetUnknownType()
+                    ?? GetTypeWithPublicConstructors();
             }
 
             [Kept]

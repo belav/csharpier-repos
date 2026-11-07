@@ -142,11 +142,11 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             // Now see if we have any other anonymous types (with a different shape) in the containing member.
             // If so, offer to fix those up as well.
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingMember =
-                anonymousNode.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
-                    (node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node),
-                    syntaxFacts
-                ) ?? anonymousNode;
+            var containingMember = anonymousNode.FirstAncestorOrSelf<
+                SyntaxNode,
+                ISyntaxFactsService
+            >((node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node), syntaxFacts)
+                ?? anonymousNode;
 
             var childCreationNodes = containingMember
                 .DescendantNodesAndSelf()

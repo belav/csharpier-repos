@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         internal UnitTestingIncrementalAnalyzerProviderMetadataWrapper(
             IncrementalAnalyzerProviderMetadata underlyingObject
         ) =>
-            UnderlyingObject =
-                underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
+            UnderlyingObject = underlyingObject
+                ?? throw new ArgumentNullException(nameof(underlyingObject));
 
         internal IncrementalAnalyzerProviderMetadata UnderlyingObject { get; }
     }

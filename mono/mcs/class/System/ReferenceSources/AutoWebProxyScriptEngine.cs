@@ -51,8 +51,7 @@ namespace System.Net
 
         WebProxyData ReadEnvVariables()
         {
-            string address =
-                Environment.GetEnvironmentVariable("http_proxy")
+            string address = Environment.GetEnvironmentVariable("http_proxy")
                 ?? Environment.GetEnvironmentVariable("HTTP_PROXY");
 
             if (address != null)
@@ -83,8 +82,7 @@ namespace System.Net
 
                     bool bBypassOnLocal = false;
                     ArrayList al = new ArrayList();
-                    string bypass =
-                        Environment.GetEnvironmentVariable("no_proxy")
+                    string bypass = Environment.GetEnvironmentVariable("no_proxy")
                         ?? Environment.GetEnvironmentVariable("NO_PROXY");
 
                     if (bypass != null)

@@ -92,8 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 _textView = cursorDocument.GetTextView();
                 _subjectBuffer = cursorDocument.GetTextBuffer();
 
-                var cursorPosition =
-                    cursorDocument.CursorPosition
+                var cursorPosition = cursorDocument.CursorPosition
                     ?? cursorDocument.SelectedSpans.First(ss => ss.IsEmpty).Start;
                 _textView.Caret.MoveTo(
                     new SnapshotPoint(_subjectBuffer.CurrentSnapshot, cursorPosition)

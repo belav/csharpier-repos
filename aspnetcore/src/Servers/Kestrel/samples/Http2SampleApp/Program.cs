@@ -26,8 +26,8 @@ public class Program
                     .ConfigureKestrel(
                         (context, options) =>
                         {
-                            var basePort =
-                                context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
+                            var basePort = context.Configuration.GetValue<int?>("BASE_PORT")
+                                ?? 5000;
 
                             // Http/1.1 endpoint for comparison
                             options.ListenAnyIP(basePort, listenOptions =>

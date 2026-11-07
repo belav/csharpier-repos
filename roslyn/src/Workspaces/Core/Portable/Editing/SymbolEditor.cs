@@ -389,8 +389,7 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             var sourceTree = location.SourceTree;
 
-            var doc =
-                _currentSolution.GetDocument(sourceTree)
+            var doc = _currentSolution.GetDocument(sourceTree)
                 ?? _originalSolution.GetDocument(sourceTree);
             if (doc != null)
             {

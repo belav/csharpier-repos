@@ -295,8 +295,7 @@ namespace System.ServiceModel.Activities
                 if (targetFault.DetailType == faultType)
                 {
                     string name = NamingHelper.TypeName(faultType) + TypeLoader.FaultSuffix;
-                    string action =
-                        overridingAction
+                    string action = overridingAction
                         ?? NamingHelper.GetMessageAction(targetOperation, false) + name;
 
                     if (targetFault.Action != action)

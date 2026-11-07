@@ -1335,8 +1335,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             );
 
             syntaxMap = null;
-            var activeStatementIndices =
-                oldMemberBody?.GetOverlappingActiveStatements(oldActiveStatements)?.ToArray() ?? [];
+            var activeStatementIndices = oldMemberBody
+                ?.GetOverlappingActiveStatements(oldActiveStatements)
+                ?.ToArray()
+                ?? [];
 
             if (isMemberReplaced && !activeStatementIndices.IsEmpty())
             {
@@ -1494,10 +1496,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     ref lazyActiveOrMatchedLambdas
                 );
 
-                var oldStateMachineInfo =
-                    oldMemberBody?.GetStateMachineInfo() ?? StateMachineInfo.None;
-                var newStateMachineInfo =
-                    newMemberBody?.GetStateMachineInfo() ?? StateMachineInfo.None;
+                var oldStateMachineInfo = oldMemberBody?.GetStateMachineInfo()
+                    ?? StateMachineInfo.None;
+                var newStateMachineInfo = newMemberBody?.GetStateMachineInfo()
+                    ?? StateMachineInfo.None;
 
                 ReportStateMachineBodyUpdateRudeEdits(
                     diagnosticContext,
@@ -2056,9 +2058,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             if (activeOrMatchedLambdas.TryGetValue(oldLambdaBody, out var info))
             {
                 // Lambda may be matched but not be active.
-                activeNodesInLambdaBody =
-                    info.ActiveNodeIndices?.Select(i => memberBodyActiveNodes[i])
-                    ?? Array.Empty<ActiveNode>();
+                activeNodesInLambdaBody = info.ActiveNodeIndices?.Select(i =>
+                    memberBodyActiveNodes[i]
+                ) ?? Array.Empty<ActiveNode>();
             }
             else
             {
@@ -3395,8 +3397,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 var newModel = await newDocument
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var oldCompilation =
-                    oldModel?.Compilation
+                var oldCompilation = oldModel?.Compilation
                     ?? await oldProject
                         .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);

@@ -1269,8 +1269,7 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal];";
                 foreach (var dataRecord in primaryKeyGroup)
                 {
                     var columnName = dataRecord.GetValueOrDefault<string>("column_name");
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == columnName)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                         );
@@ -1305,8 +1304,7 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal];";
                 foreach (var dataRecord in uniqueConstraintGroup)
                 {
                     var columnName = dataRecord.GetValueOrDefault<string>("column_name");
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == columnName)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                         );
@@ -1365,8 +1363,7 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal];";
                         continue;
                     }
 
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == columnName)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                         );
@@ -1463,10 +1460,9 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id];
                     onDeleteAction!
                 );
 
-                var principalTable =
-                    tables.FirstOrDefault(t =>
-                        t.Schema == principalTableSchema && t.Name == principalTableName
-                    )
+                var principalTable = tables.FirstOrDefault(t =>
+                    t.Schema == principalTableSchema && t.Name == principalTableName
+                )
                     ?? tables.FirstOrDefault(t =>
                         t.Schema?.Equals(principalTableSchema, StringComparison.OrdinalIgnoreCase)
                             == true
@@ -1497,8 +1493,7 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id];
                 foreach (var dataRecord in foreignKeyGroup)
                 {
                     var columnName = dataRecord.GetValueOrDefault<string>("column_name");
-                    var column =
-                        table.Columns.FirstOrDefault(c => c.Name == columnName)
+                    var column = table.Columns.FirstOrDefault(c => c.Name == columnName)
                         ?? table.Columns.FirstOrDefault(c =>
                             c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                         );
@@ -1507,10 +1502,9 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id];
                     var principalColumnName = dataRecord.GetValueOrDefault<string>(
                         "referenced_column_name"
                     );
-                    var principalColumn =
-                        foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
-                            c.Name == principalColumnName
-                        )
+                    var principalColumn = foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
+                        c.Name == principalColumnName
+                    )
                         ?? foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
                             c.Name.Equals(principalColumnName, StringComparison.OrdinalIgnoreCase)
                         );

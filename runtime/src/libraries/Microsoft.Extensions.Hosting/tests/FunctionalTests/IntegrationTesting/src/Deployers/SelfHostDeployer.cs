@@ -95,8 +95,7 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     // Core+Standalone always publishes. This must be Clr+Standalone or Core+Portable.
                     // Run from the pre-built bin/{config}/{tfm} directory.
                     Version version = Environment.Version;
-                    var targetFramework =
-                        DeploymentParameters.TargetFramework
+                    var targetFramework = DeploymentParameters.TargetFramework
                         ?? (
                             DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
                                 ? "net462"

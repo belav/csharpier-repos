@@ -559,8 +559,7 @@ namespace System.Diagnostics
                 serviceParentKey = Registry.LocalMachine.OpenSubKey(ServicePath, true);
 
                 string categoryPerfKeyName = $"{categoryName}\\Performance";
-                serviceKey =
-                    serviceParentKey.OpenSubKey(categoryPerfKeyName, writable: true)
+                serviceKey = serviceParentKey.OpenSubKey(categoryPerfKeyName, writable: true)
                     ?? serviceParentKey.CreateSubKey(categoryPerfKeyName);
 
                 serviceKey.SetValue("Open", "OpenPerformanceData");
@@ -581,8 +580,7 @@ namespace System.Diagnostics
                 }
 
                 string categoryLinkageKeyName = $"{categoryName}\\Linkage";
-                linkageKey =
-                    serviceParentKey.OpenSubKey(categoryLinkageKeyName, writable: true)
+                linkageKey = serviceParentKey.OpenSubKey(categoryLinkageKeyName, writable: true)
                     ?? serviceParentKey.CreateSubKey(categoryLinkageKeyName);
 
                 linkageKey.SetValue("Export", new string[] { categoryName });
@@ -697,8 +695,7 @@ namespace System.Diagnostics
             RegistryKey baseKey = null;
             categoryType = PerformanceCounterCategoryType.Unknown;
 
-            Hashtable table =
-                _customCategoryTable
+            Hashtable table = _customCategoryTable
                 ?? Interlocked.CompareExchange(
                     ref _customCategoryTable,
                     new Hashtable(StringComparer.OrdinalIgnoreCase),

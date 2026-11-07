@@ -109,8 +109,7 @@ namespace System.Web.WebPages.Html
             if (modelState != null)
             {
                 modelValue = ConvertTo(modelState.Value, typeof(string)) as string;
-                isChecked =
-                    isChecked
+                isChecked = isChecked
                     ?? String.Equals(modelValue, valueString, StringComparison.OrdinalIgnoreCase);
             }
 

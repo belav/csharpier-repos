@@ -179,10 +179,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _refactorNotifyServices = refactorNotifyServices;
             _asyncListener = asyncListener;
-            _triggerView =
-                textBufferAssociatedViewService
-                    .GetAssociatedTextViews(triggerSpan.Snapshot.TextBuffer)
-                    .FirstOrDefault(v => v.HasAggregateFocus)
+            _triggerView = textBufferAssociatedViewService
+                .GetAssociatedTextViews(triggerSpan.Snapshot.TextBuffer)
+                .FirstOrDefault(v => v.HasAggregateFocus)
                 ?? textBufferAssociatedViewService
                     .GetAssociatedTextViews(triggerSpan.Snapshot.TextBuffer)
                     .First();

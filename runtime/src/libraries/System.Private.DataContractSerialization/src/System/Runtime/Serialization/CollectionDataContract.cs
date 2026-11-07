@@ -627,8 +627,7 @@ namespace System.Runtime.Serialization.DataContracts
                         : new XmlDictionary(3);
                     Name = dictionary.Add(XmlName.Name);
                     Namespace = dictionary.Add(XmlName.Namespace);
-                    _itemName =
-                        itemName
+                    _itemName = itemName
                         ?? DataContract.GetXmlName(DataContract.UnwrapNullableType(itemType)).Name;
                     _collectionItemName = dictionary.Add(_itemName);
                     if (isDictionary)
@@ -1853,8 +1852,8 @@ namespace System.Runtime.Serialization.DataContracts
             if (t != null)
             {
                 addMethod = t.GetMethod(Globals.AddMethodName) ?? addMethod;
-                getEnumeratorMethod =
-                    t.GetMethod(Globals.GetEnumeratorMethodName) ?? getEnumeratorMethod;
+                getEnumeratorMethod = t.GetMethod(Globals.GetEnumeratorMethodName)
+                    ?? getEnumeratorMethod;
             }
         }
 
@@ -1939,13 +1938,12 @@ namespace System.Runtime.Serialization.DataContracts
                     || !Globals.TypeOfIEnumerator.IsAssignableFrom(getEnumeratorMethod.ReturnType)
                 )
                 {
-                    Type? ienumerableInterface =
-                        interfaceType
-                            .GetInterfaces()
-                            .Where(t =>
-                                t.FullName!.StartsWith("System.Collections.Generic.IEnumerable")
-                            )
-                            .FirstOrDefault()
+                    Type? ienumerableInterface = interfaceType
+                        .GetInterfaces()
+                        .Where(t =>
+                            t.FullName!.StartsWith("System.Collections.Generic.IEnumerable")
+                        )
+                        .FirstOrDefault()
                         ?? Globals.TypeOfIEnumerable;
                     getEnumeratorMethod = GetIEnumerableGetEnumeratorMethod(
                         type,

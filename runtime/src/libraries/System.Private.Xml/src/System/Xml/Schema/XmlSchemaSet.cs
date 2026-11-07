@@ -214,8 +214,7 @@ namespace System.Xml.Schema
             lock (InternalSyncObject)
             {
                 //Check if schema from url has already been added
-                XmlResolver tempResolver =
-                    _readerSettings.GetXmlResolver()
+                XmlResolver tempResolver = _readerSettings.GetXmlResolver()
                     ?? XmlReaderSettings.GetDefaultPermissiveResolver();
                 Uri tempSchemaUri = tempResolver.ResolveUri(null, schemaUri);
                 if (IsSchemaLoaded(tempSchemaUri, targetNamespace, out schema))

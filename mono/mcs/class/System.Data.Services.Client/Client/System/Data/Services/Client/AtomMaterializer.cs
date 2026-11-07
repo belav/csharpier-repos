@@ -961,8 +961,8 @@ namespace System.Data.Services.Client
                             "parser.DataKind == AtomDataKind.Custom -- otherwise AtomMaterializer.Read switch is missing a case"
                         );
 
-                        Type underlyingExpectedType =
-                            Nullable.GetUnderlyingType(this.expectedType) ?? this.expectedType;
+                        Type underlyingExpectedType = Nullable.GetUnderlyingType(this.expectedType)
+                            ?? this.expectedType;
                         ClientType targetType = ClientType.Create(underlyingExpectedType);
                         if (ClientConvert.IsKnownType(underlyingExpectedType))
                         {

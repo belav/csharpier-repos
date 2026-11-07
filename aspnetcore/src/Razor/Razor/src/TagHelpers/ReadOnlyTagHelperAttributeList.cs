@@ -129,8 +129,7 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
                 matchedAttributes.Add(attribute);
             }
         }
-        attributes =
-            matchedAttributes
+        attributes = matchedAttributes
             ?? (IReadOnlyList<TagHelperAttribute>)Array.Empty<TagHelperAttribute>();
 
         return matchedAttributes != null;

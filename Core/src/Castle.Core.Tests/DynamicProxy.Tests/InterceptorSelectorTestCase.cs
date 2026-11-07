@@ -637,12 +637,11 @@ namespace Castle.DynamicProxy.Tests
             // This item is obfuscated and can not be translated.
             if (interceptors_Do == null)
             {
-                interceptors_Do =
-                    __selector.SelectInterceptors(
-                        TypeUtil.GetTypeOrNull(__target),
-                        token_Do,
-                        __interceptors
-                    ) ?? new IInterceptor[0];
+                interceptors_Do = __selector.SelectInterceptors(
+                    TypeUtil.GetTypeOrNull(__target),
+                    token_Do,
+                    __interceptors
+                ) ?? new IInterceptor[0];
             }
             var objArray = new object[0];
             var @do = new ISimpleInterface_Do(__target, this, interceptors_Do, token_Do, objArray);

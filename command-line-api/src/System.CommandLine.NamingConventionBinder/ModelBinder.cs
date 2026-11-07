@@ -21,8 +21,8 @@ public class ModelBinder
 
     internal ModelBinder(IValueDescriptor valueDescriptor)
     {
-        ValueDescriptor =
-            valueDescriptor ?? throw new ArgumentNullException(nameof(valueDescriptor));
+        ValueDescriptor = valueDescriptor
+            ?? throw new ArgumentNullException(nameof(valueDescriptor));
         ModelDescriptor = ModelDescriptor.FromType(valueDescriptor.ValueType);
     }
 

@@ -67,10 +67,9 @@ public class TestClass
         static DotNetSdkTestBase()
         {
             s_dotnetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
-            s_dotnetSdkVersion =
-                typeof(DotNetSdkTests)
-                    .Assembly.GetCustomAttribute<DotNetSdkVersionAttribute>()
-                    ?.Version
+            s_dotnetSdkVersion = typeof(DotNetSdkTests)
+                .Assembly.GetCustomAttribute<DotNetSdkVersionAttribute>()
+                ?.Version
                 ?? throw new InvalidOperationException(
                     $"Couldn't find {nameof(DotNetSdkVersionAttribute)}"
                 );
@@ -169,8 +168,8 @@ public class TestClass
             Debug.Assert(s_dotnetInstallDir is object);
 
             DotNetPath = Path.Combine(s_dotnetInstallDir, s_dotnetExeName);
-            var testBinDirectory =
-                Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location) ?? string.Empty;
+            var testBinDirectory = Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location)
+                ?? string.Empty;
             var sdksDir = Path.Combine(s_dotnetSdkPath ?? string.Empty, "Sdks");
 
             TestOutputHelper = testOutputHelper;

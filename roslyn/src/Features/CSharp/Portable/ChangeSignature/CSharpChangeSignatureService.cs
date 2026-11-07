@@ -250,8 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var lastAttributes = matchingNode
                 .ChildNodes()
                 .LastOrDefault(n => n is AttributeListSyntax);
-            var start =
-                lastAttributes?.GetLastToken().GetNextToken().SpanStart ?? matchingNode.SpanStart;
+            var start = lastAttributes?.GetLastToken().GetNextToken().SpanStart
+                ?? matchingNode.SpanStart;
 
             if (position < start)
             {
@@ -1173,14 +1173,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
                 if (convertedType != null)
                 {
-                    convertedType =
-                        await SymbolFinder
-                            .FindSourceDefinitionAsync(
-                                convertedType,
-                                document.Project.Solution,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false)
+                    convertedType = await SymbolFinder
+                        .FindSourceDefinitionAsync(
+                            convertedType,
+                            document.Project.Solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
                         ?? convertedType;
                 }
 

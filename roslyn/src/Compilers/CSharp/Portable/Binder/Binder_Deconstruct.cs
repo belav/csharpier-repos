@@ -131,8 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 withDiagnostics: true,
                 withDependencies: diagnostics.AccumulatesDependencies
             );
-            BoundExpression boundRight =
-                rightPlaceholder
+            BoundExpression boundRight = rightPlaceholder
                 ?? BindValue(right, deconstructionDiagnostics, BindValueKind.RValue);
 
             boundRight = FixTupleLiteral(

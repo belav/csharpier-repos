@@ -363,9 +363,10 @@ public class ActionSelectorBenchmark
             var isMatch = true;
             foreach (var kvp in action.RouteValues)
             {
-                var routeValue =
-                    Convert.ToString(routeValues[kvp.Key], CultureInfo.InvariantCulture)
-                    ?? string.Empty;
+                var routeValue = Convert.ToString(
+                    routeValues[kvp.Key],
+                    CultureInfo.InvariantCulture
+                ) ?? string.Empty;
                 if (string.IsNullOrEmpty(kvp.Value) && string.IsNullOrEmpty(routeValue))
                 {
                     // Match

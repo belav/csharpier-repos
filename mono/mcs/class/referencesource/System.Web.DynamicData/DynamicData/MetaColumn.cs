@@ -634,8 +634,8 @@ namespace System.Web.DynamicData
                 Attributes = Column.BuildAttributeCollection();
 
                 DisplayAttribute = Attributes.FirstOrDefault<DisplayAttribute>();
-                DataTypeAttribute =
-                    Attributes.FirstOrDefault<DataTypeAttribute>() ?? GetDefaultDataTypeAttribute();
+                DataTypeAttribute = Attributes.FirstOrDefault<DataTypeAttribute>()
+                    ?? GetDefaultDataTypeAttribute();
                 DescriptionAttribute = Attributes.FirstOrDefault<DescriptionAttribute>();
                 DefaultValueAttribute = Attributes.FirstOrDefault<DefaultValueAttribute>();
                 DisplayNameAttribute = Attributes.FirstOrDefault<DisplayNameAttribute>();
@@ -655,8 +655,7 @@ namespace System.Web.DynamicData
                     false
                 );
 
-                var displayFormatAttribute =
-                    Attributes.FirstOrDefault<DisplayFormatAttribute>()
+                var displayFormatAttribute = Attributes.FirstOrDefault<DisplayFormatAttribute>()
                     ?? (DataTypeAttribute != null ? DataTypeAttribute.DisplayFormat : null);
 
                 ApplyFormatInEditMode = displayFormatAttribute.GetPropertyValue(
@@ -774,13 +773,12 @@ namespace System.Web.DynamicData
                     !String.IsNullOrEmpty(presentationLayerPropertyAccessor(a))
                 );
 
-                T uiHintAttribute =
-                    presentationLayerSpecified.FirstOrDefault(a =>
-                        presentationLayerPropertyAccessor(a).ToLower(CultureInfo.InvariantCulture)
-                            == "webforms"
-                        || presentationLayerPropertyAccessor(a)
-                            .ToLower(CultureInfo.InvariantCulture) == "mvc"
-                    ) ?? presentationLayerNotSpecified.FirstOrDefault();
+                T uiHintAttribute = presentationLayerSpecified.FirstOrDefault(a =>
+                    presentationLayerPropertyAccessor(a).ToLower(CultureInfo.InvariantCulture)
+                        == "webforms"
+                    || presentationLayerPropertyAccessor(a).ToLower(CultureInfo.InvariantCulture)
+                        == "mvc"
+                ) ?? presentationLayerNotSpecified.FirstOrDefault();
 
                 return uiHintAttribute.GetPropertyValue(hintPropertyAccessor);
             }

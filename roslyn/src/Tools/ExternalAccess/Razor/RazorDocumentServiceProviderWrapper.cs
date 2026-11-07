@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             IRazorDocumentServiceProvider innerDocumentServiceProvider
         )
         {
-            _innerDocumentServiceProvider =
-                innerDocumentServiceProvider
+            _innerDocumentServiceProvider = innerDocumentServiceProvider
                 ?? throw new ArgumentNullException(nameof(innerDocumentServiceProvider));
         }
 

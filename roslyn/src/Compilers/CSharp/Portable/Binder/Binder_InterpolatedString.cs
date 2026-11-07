@@ -964,15 +964,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // https://github.com/dotnet/roslyn/issues/54396 Instead of inspecting errors, we should be capturing the results of overload
                     // resolution and attempting to determine which method considered was the best to report errors for.
 
-                    var nonOutConstructorHasArityError =
-                        nonOutConstructorDiagnostics
-                            .DiagnosticBag?.AsEnumerableWithoutResolution()
-                            .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
+                    var nonOutConstructorHasArityError = nonOutConstructorDiagnostics
+                        .DiagnosticBag?.AsEnumerableWithoutResolution()
+                        .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
                         ?? false;
-                    var outConstructorHasArityError =
-                        outConstructorDiagnostics
-                            .DiagnosticBag?.AsEnumerableWithoutResolution()
-                            .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
+                    var outConstructorHasArityError = outConstructorDiagnostics
+                        .DiagnosticBag?.AsEnumerableWithoutResolution()
+                        .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
                         ?? false;
 
                     switch ((nonOutConstructorHasArityError, outConstructorHasArityError))

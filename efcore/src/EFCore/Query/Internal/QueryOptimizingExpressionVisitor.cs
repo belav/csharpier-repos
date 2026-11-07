@@ -514,8 +514,7 @@ public class QueryOptimizingExpressionVisitor : ExpressionVisitor
                         visitedMemberExpression
                     );
 
-                    nonNullExpression =
-                        TryOptimizeMemberAccessOverConditional(nonNullExpression)
+                    nonNullExpression = TryOptimizeMemberAccessOverConditional(nonNullExpression)
                         ?? nonNullExpression;
                     if (!nonNullExpression.Type.IsNullableType())
                     {

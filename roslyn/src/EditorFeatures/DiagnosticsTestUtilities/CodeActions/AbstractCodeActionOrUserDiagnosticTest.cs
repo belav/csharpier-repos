@@ -1044,8 +1044,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     newSolution
                 );
 
-                var documentId =
-                    projectDifferences.GetChangedDocuments().FirstOrDefault()
+                var documentId = projectDifferences.GetChangedDocuments().FirstOrDefault()
                     ?? projectDifferences.GetAddedDocuments().FirstOrDefault();
                 Assert.NotNull(documentId);
                 document = newSolution.GetDocument(documentId);

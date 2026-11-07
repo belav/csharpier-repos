@@ -302,8 +302,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 callSiteChain.CheckCircularDependency(serviceIdentifier);
 
-                ServiceCallSite? callSite =
-                    TryCreateExact(serviceIdentifier, callSiteChain)
+                ServiceCallSite? callSite = TryCreateExact(serviceIdentifier, callSiteChain)
                     ?? TryCreateOpenGeneric(serviceIdentifier, callSiteChain)
                     ?? TryCreateEnumerable(serviceIdentifier, callSiteChain);
 

@@ -233,8 +233,8 @@ namespace ILCompiler
                     }
 
                     Debug.Assert(!processAllAssemblies);
-                    ModuleDesc? assembly =
-                        assemblyToProcess ?? _context.ResolveAssembly(name!, false);
+                    ModuleDesc? assembly = assemblyToProcess
+                        ?? _context.ResolveAssembly(name!, false);
 
                     if (assembly == null)
                     {

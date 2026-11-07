@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorSpanMappingServiceWrapper(IRazorSpanMappingService razorSpanMappingService)
         {
-            _razorSpanMappingService =
-                razorSpanMappingService
+            _razorSpanMappingService = razorSpanMappingService
                 ?? throw new ArgumentNullException(nameof(razorSpanMappingService));
         }
 

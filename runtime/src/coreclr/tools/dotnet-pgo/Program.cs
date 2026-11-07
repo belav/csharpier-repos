@@ -1122,12 +1122,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             static double GetLikelihoodOfMostPopularType(PgoSchemaElem se)
             {
-                int count =
-                    ((TypeSystemEntityOrUnknown[])se.DataObject)
-                        .GroupBy(d => d.GetHashCode())
-                        .OrderByDescending(d => d.Count())
-                        .FirstOrDefault(d => d.FirstOrDefault().AsType != null)
-                        ?.Count()
+                int count = ((TypeSystemEntityOrUnknown[])se.DataObject)
+                    .GroupBy(d => d.GetHashCode())
+                    .OrderByDescending(d => d.Count())
+                    .FirstOrDefault(d => d.FirstOrDefault().AsType != null)
+                    ?.Count()
                     ?? 0;
                 return count * 100.0 / se.DataObject.Length;
             }

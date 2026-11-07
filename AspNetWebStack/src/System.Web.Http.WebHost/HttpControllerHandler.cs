@@ -116,8 +116,8 @@ namespace System.Web.Http.WebHost
 
         internal async Task ProcessRequestAsyncCore(HttpContextBase contextBase)
         {
-            HttpRequestMessage request =
-                contextBase.GetHttpRequestMessage() ?? ConvertRequest(contextBase);
+            HttpRequestMessage request = contextBase.GetHttpRequestMessage()
+                ?? ConvertRequest(contextBase);
 
             // Add route data
             request.SetRouteData(_routeData);

@@ -34,8 +34,8 @@ namespace System.Net.Mail
             _host = domain;
             _userName = userName;
             _displayName = displayName;
-            _displayNameEncoding =
-                displayNameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
+            _displayNameEncoding = displayNameEncoding
+                ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
 
             Debug.Assert(_host != null, "host was null in internal constructor");
 

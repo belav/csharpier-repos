@@ -52,8 +52,7 @@ public class JsonTypesRelationalTestBase : JsonTypesTestBase
         Assert.Same(element.FindTypeMapping(), element.FindRelationalTypeMapping());
         Assert.Equal(FacetValue(RelationalAnnotationNames.IsFixedLength), element.IsFixedLength());
 
-        var expectedStoreType =
-            FacetValue(RelationalAnnotationNames.StoreType)
+        var expectedStoreType = FacetValue(RelationalAnnotationNames.StoreType)
             ?? element.FindRelationalTypeMapping()!.StoreType;
 
         Assert.Equal(expectedStoreType, element.GetStoreType());

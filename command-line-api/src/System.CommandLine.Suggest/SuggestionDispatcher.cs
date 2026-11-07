@@ -20,8 +20,7 @@ namespace System.CommandLine.Suggest
             ISuggestionStore suggestionStore = null
         )
         {
-            _suggestionRegistration =
-                suggestionRegistration
+            _suggestionRegistration = suggestionRegistration
                 ?? throw new ArgumentNullException(nameof(suggestionRegistration));
 
             _suggestionStore = suggestionStore ?? new SuggestionStore();

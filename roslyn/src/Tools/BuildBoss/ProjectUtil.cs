@@ -116,8 +116,9 @@ namespace BuildBoss
             {
                 // Make sure to check for references that exist only for ordering purposes.  They don't count as
                 // actual references.
-                var referenceOutputAssemblyValue =
-                    r.Element(Namespace.GetName("ReferenceOutputAssembly"))?.Value
+                var referenceOutputAssemblyValue = r.Element(
+                    Namespace.GetName("ReferenceOutputAssembly")
+                )?.Value
                     ?? r.Attribute(XName.Get("ReferenceOutputAssembly"))?.Value;
                 if (referenceOutputAssemblyValue != null)
                 {
@@ -165,8 +166,9 @@ namespace BuildBoss
 
         internal PackageReference GetPackageReference(XElement element)
         {
-            var name =
-                element.Attribute("Include")?.Value ?? element.Attribute("Update")?.Value ?? "";
+            var name = element.Attribute("Include")?.Value
+                ?? element.Attribute("Update")?.Value
+                ?? "";
             var version = element.Attribute("Version");
             if (version != null)
             {

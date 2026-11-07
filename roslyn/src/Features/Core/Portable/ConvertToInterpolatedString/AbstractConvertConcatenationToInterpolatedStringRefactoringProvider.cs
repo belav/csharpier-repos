@@ -186,8 +186,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
             if (currentContentIsStringOrCharacterLiteral)
             {
                 var text = piece.GetFirstToken().Text;
-                var value =
-                    piece.GetFirstToken().Value?.ToString() ?? piece.GetFirstToken().ValueText;
+                var value = piece.GetFirstToken().Value?.ToString()
+                    ?? piece.GetFirstToken().ValueText;
                 var textWithEscapedBraces = text.Replace("{", "{{").Replace("}", "}}");
                 var valueTextWithEscapedBraces = value.Replace("{", "{{").Replace("}", "}}");
                 var textWithoutQuotes = GetTextWithoutQuotes(

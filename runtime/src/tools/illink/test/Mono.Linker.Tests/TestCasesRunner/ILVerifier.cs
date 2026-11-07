@@ -46,8 +46,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             );
             _verifier.SetSystemModuleName(new AssemblyName("mscorlib"));
 
-            var allResults =
-                _verifier.Verify(Resolve(assemblyName)) ?? Enumerable.Empty<VerificationResult>();
+            var allResults = _verifier.Verify(Resolve(assemblyName))
+                ?? Enumerable.Empty<VerificationResult>();
 
             Results = allResults.Where(r =>
                 r.Code

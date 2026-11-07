@@ -51,8 +51,8 @@ namespace System
             // which doesn't consider the sync ctx flown with an ExecutionContext, avoiding
             // sync ctx reference identity issues where the sync ctx for one thread could be Current on another.
             // If there is no current context, we use a default instance targeting the ThreadPool.
-            m_synchronizationContext =
-                SynchronizationContext.CurrentNoFlow ?? ProgressStatics.DefaultContext;
+            m_synchronizationContext = SynchronizationContext.CurrentNoFlow
+                ?? ProgressStatics.DefaultContext;
             Contract.Assert(m_synchronizationContext != null);
             m_invokeHandlers = new SendOrPostCallback(InvokeHandlers);
         }

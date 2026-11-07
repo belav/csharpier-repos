@@ -3853,8 +3853,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var symbol = symbolEvent.Symbol;
 
-            var semanticModel =
-                symbolEvent.SemanticModelWithCachedBoundNodes
+            var semanticModel = symbolEvent.SemanticModelWithCachedBoundNodes
                 ?? GetOrCreateSemanticModel(decl.SyntaxTree, symbolEvent.Compilation);
 
             var declarationAnalysisData = ComputeDeclarationAnalysisData(
@@ -4308,8 +4307,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     // Compute the topmost node representing the syntax declaration for the member that needs to be skipped.
                     var declarationNodeToSkip = declInNode.DeclaredNode;
-                    var declaredSymbolOfDeclInNode =
-                        declInNode.DeclaredSymbol
+                    var declaredSymbolOfDeclInNode = declInNode.DeclaredSymbol
                         ?? semanticModel.GetDeclaredSymbol(
                             declInNode.DeclaredNode,
                             cancellationToken

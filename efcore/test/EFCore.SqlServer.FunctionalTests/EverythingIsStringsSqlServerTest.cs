@@ -314,8 +314,7 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
                 var baseName = isAnsi ? "varchar" : "nvarchar";
                 var maxSize = isAnsi ? 8000 : 4000;
 
-                var size =
-                    mappingInfo.Size
+                var size = mappingInfo.Size
                     ?? (
                         mappingInfo.IsKeyOrIndex
                             ? isAnsi

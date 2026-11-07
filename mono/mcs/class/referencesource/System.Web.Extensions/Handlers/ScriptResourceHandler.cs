@@ -402,8 +402,7 @@ namespace System.Web.Handlers
                     Throw404(ex);
                 }
 
-                fileReader =
-                    fileReader
+                fileReader = fileReader
                     ?? new VirtualFileReader(
                         delegate(string virtualPath, out Encoding encoding)
                         {

@@ -92,8 +92,7 @@ namespace Microsoft.Build.Execution
             try
             {
                 var engine = new BuildEngine4(this);
-                string toolsVersion =
-                    request.ExplicitlySpecifiedToolsVersion
+                string toolsVersion = request.ExplicitlySpecifiedToolsVersion
                     ?? request.ProjectInstance.ToolsVersion
                     ?? BuildManager.OngoingBuildParameters.DefaultToolsVersion;
                 var outputs = new Dictionary<string, string>();

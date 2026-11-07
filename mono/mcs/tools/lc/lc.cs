@@ -280,11 +280,10 @@ namespace LC
             Object[] lData = new Object[2];
             lData[0] = cryptoKey;
             Hashtable lNewTable = new Hashtable();
-            FieldInfo fi =
-                typeof(DesigntimeLicenseContext).GetField(
-                    "savedLicenseKeys",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+            FieldInfo fi = typeof(DesigntimeLicenseContext).GetField(
+                "savedLicenseKeys",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )
                 ?? typeof(DesigntimeLicenseContext).GetField(
                     "keys",
                     BindingFlags.NonPublic | BindingFlags.Instance

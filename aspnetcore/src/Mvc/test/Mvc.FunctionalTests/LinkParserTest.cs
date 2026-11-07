@@ -13,8 +13,7 @@ public class LinkParserTest : IClassFixture<MvcTestFixture<RoutingWebSite.Startu
 {
     public LinkParserTest(MvcTestFixture<RoutingWebSite.StartupForLinkGenerator> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }

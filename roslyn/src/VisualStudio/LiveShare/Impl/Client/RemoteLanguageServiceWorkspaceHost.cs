@@ -75,8 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                 remoteProjectInfoProvider,
                 nameof(remoteProjectInfoProvider)
             );
-            _serviceProvider =
-                serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _serviceProvider = serviceProvider
+                ?? throw new ArgumentNullException(nameof(serviceProvider));
             _threadingContext = Requires.NotNull(threadingContext, nameof(threadingContext));
         }
 

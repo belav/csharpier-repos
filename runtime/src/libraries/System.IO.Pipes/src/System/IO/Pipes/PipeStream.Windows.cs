@@ -400,9 +400,10 @@ namespace System.IO.Pipes
         {
             Debug.Assert(_isAsync);
 
-            ReadWriteValueTaskSource vts =
-                Interlocked.Exchange(ref _reusableReadValueTaskSource, null)
-                ?? new ReadWriteValueTaskSource(this, isWrite: false);
+            ReadWriteValueTaskSource vts = Interlocked.Exchange(
+                ref _reusableReadValueTaskSource,
+                null
+            ) ?? new ReadWriteValueTaskSource(this, isWrite: false);
             try
             {
                 vts.PrepareForOperation(buffer);
@@ -497,9 +498,10 @@ namespace System.IO.Pipes
         {
             Debug.Assert(_isAsync);
 
-            ReadWriteValueTaskSource vts =
-                Interlocked.Exchange(ref _reusableWriteValueTaskSource, null)
-                ?? new ReadWriteValueTaskSource(this, isWrite: true);
+            ReadWriteValueTaskSource vts = Interlocked.Exchange(
+                ref _reusableWriteValueTaskSource,
+                null
+            ) ?? new ReadWriteValueTaskSource(this, isWrite: true);
             try
             {
                 vts.PrepareForOperation(buffer);

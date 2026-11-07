@@ -47,8 +47,7 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
             parameters.WithCoreParameters(
                 parameters.CoreParameters with
                 {
-                    ProviderValueComparer =
-                        parameters.CoreParameters.ProviderValueComparer
+                    ProviderValueComparer = parameters.CoreParameters.ProviderValueComparer
                         ?? (
                             RuntimeFeature.IsDynamicCodeSupported
                                 ? CreateProviderValueComparer(

@@ -91,8 +91,8 @@ public class KestrelConfigurationLoader
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
 
-        EndpointConfigurations[name] =
-            configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+        EndpointConfigurations[name] = configureOptions
+            ?? throw new ArgumentNullException(nameof(configureOptions));
         return this;
     }
 

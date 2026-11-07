@@ -76,8 +76,7 @@ public class Program
             })
             .AddIdentityCookies();
 
-        var connectionString =
-            builder.Configuration.GetConnectionString("DefaultConnection")
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException(
                 "Connection string 'DefaultConnection' not found."
             );

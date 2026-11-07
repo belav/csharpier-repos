@@ -65,8 +65,8 @@ namespace System.Net.Http
                 if (String.IsNullOrEmpty(contentDisposition.FileName))
                 {
                     // Extract name from Content-Disposition header. We know from earlier that the header is present.
-                    string formFieldName =
-                        FormattingUtilities.UnquoteToken(contentDisposition.Name) ?? String.Empty;
+                    string formFieldName = FormattingUtilities.UnquoteToken(contentDisposition.Name)
+                        ?? String.Empty;
 
                     // Read the contents as string data and add to form data
                     cancellationToken.ThrowIfCancellationRequested();

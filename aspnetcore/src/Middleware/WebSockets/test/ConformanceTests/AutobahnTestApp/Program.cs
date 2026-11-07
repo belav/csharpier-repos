@@ -44,8 +44,7 @@ public class Program
             else
             {
                 // Also check "server.urls" for back-compat.
-                var urls =
-                    webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey)
+                var urls = webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey)
                     ?? webHostBuilder.GetSetting("server.urls");
                 webHostBuilder.UseSetting(WebHostDefaults.ServerUrlsKey, string.Empty);
 

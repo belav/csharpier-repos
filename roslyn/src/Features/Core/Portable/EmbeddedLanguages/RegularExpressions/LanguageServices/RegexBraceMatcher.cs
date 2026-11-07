@@ -157,8 +157,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 else
                 {
                     var token = child.Token;
-                    var trivia =
-                        TryGetTrivia(token.LeadingTrivia, ch)
+                    var trivia = TryGetTrivia(token.LeadingTrivia, ch)
                         ?? TryGetTrivia(token.TrailingTrivia, ch);
 
                     if (trivia != null)

@@ -1872,8 +1872,7 @@ namespace System.Net.Http
                 public override void CopyTo(Stream destination, int bufferSize)
                 {
                     ValidateCopyToArguments(destination, bufferSize);
-                    Http2Stream http2Stream =
-                        _http2Stream
+                    Http2Stream http2Stream = _http2Stream
                         ?? throw ExceptionDispatchInfo.SetCurrentStackTrace(
                             new ObjectDisposedException(nameof(Http2ReadStream))
                         );

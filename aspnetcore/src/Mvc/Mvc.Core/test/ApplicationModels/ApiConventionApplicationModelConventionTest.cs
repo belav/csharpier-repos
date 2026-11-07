@@ -172,8 +172,7 @@ public class ApiConventionApplicationModelConventionTest
     )
     {
         actionAttributes = actionAttributes ?? Array.Empty<object>();
-        controllerAttributes =
-            controllerAttributes
+        controllerAttributes = controllerAttributes
             ?? new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         var controllerModel = new ControllerModel(

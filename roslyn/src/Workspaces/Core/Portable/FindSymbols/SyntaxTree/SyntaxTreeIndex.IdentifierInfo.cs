@@ -15,10 +15,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             BloomFilter escapedIdentifierFilter
         )
         {
-            private readonly BloomFilter _identifierFilter =
-                identifierFilter ?? throw new ArgumentNullException(nameof(identifierFilter));
-            private readonly BloomFilter _escapedIdentifierFilter =
-                escapedIdentifierFilter
+            private readonly BloomFilter _identifierFilter = identifierFilter
+                ?? throw new ArgumentNullException(nameof(identifierFilter));
+            private readonly BloomFilter _escapedIdentifierFilter = escapedIdentifierFilter
                 ?? throw new ArgumentNullException(nameof(escapedIdentifierFilter));
 
             /// <summary>

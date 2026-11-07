@@ -701,8 +701,8 @@ namespace System.Data.Objects.ELinq
         {
             EntityUtil.CheckArgumentNull(parameterReference, "parameterReference");
             EntityUtil.CheckArgumentNull(funcletizedExpression, "funcletizedExpression");
-            _compiledQueryParameters =
-                compiledQueryParameters ?? Enumerable.Empty<ParameterExpression>();
+            _compiledQueryParameters = compiledQueryParameters
+                ?? Enumerable.Empty<ParameterExpression>();
             _parameterReference = parameterReference;
             _type = funcletizedExpression.Type;
             _funcletizedExpression = funcletizedExpression;

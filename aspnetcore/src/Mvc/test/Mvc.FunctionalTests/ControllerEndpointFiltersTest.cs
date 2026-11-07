@@ -17,8 +17,7 @@ public class ControllerEndpointFiltersTest
 {
     public ControllerEndpointFiltersTest(MvcTestFixture<StartupForEndpointFilters> fixture)
     {
-        Factory =
-            fixture.Factories.FirstOrDefault()
+        Factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 

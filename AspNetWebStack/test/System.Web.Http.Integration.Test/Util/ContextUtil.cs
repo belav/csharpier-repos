@@ -73,10 +73,10 @@ namespace System.Web.Http
             HttpActionDescriptor actionDescriptor = null
         )
         {
-            HttpControllerContext context =
-                controllerContext ?? ContextUtil.CreateControllerContext();
-            HttpActionDescriptor descriptor =
-                actionDescriptor ?? new Mock<HttpActionDescriptor>() { CallBase = true }.Object;
+            HttpControllerContext context = controllerContext
+                ?? ContextUtil.CreateControllerContext();
+            HttpActionDescriptor descriptor = actionDescriptor
+                ?? new Mock<HttpActionDescriptor>() { CallBase = true }.Object;
 
             if (descriptor.Configuration == null)
             {

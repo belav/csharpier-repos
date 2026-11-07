@@ -221,8 +221,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadOptionalAkGraph(context);
 
@@ -592,8 +592,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadOptionalAkGraph(context);
 
@@ -827,8 +827,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadOptionalAkGraph(context);
 
@@ -919,10 +919,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = LoadOptionalAkGraph(context);
 
@@ -1040,10 +1040,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = context.Set<Root>().Include(e => e.OptionalSingleAk).Single(IsTheRoot);
 
@@ -1141,10 +1141,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadOptionalAkGraph(context),
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var removed = root.OptionalSingleAk;
 
@@ -1321,8 +1321,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadRequiredAkGraph(context);
 
@@ -1682,8 +1682,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadRequiredNonPkAkGraph(context);
 
@@ -1858,8 +1858,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadRequiredAkGraph(context);
 
@@ -2018,8 +2018,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadRequiredNonPkAkGraph(context);
 
@@ -2272,8 +2272,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadRequiredAkGraph(context);
 
@@ -2515,8 +2515,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 root = LoadRequiredNonPkAkGraph(context);
 
@@ -2597,10 +2597,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = LoadRequiredAkGraph(context);
 
@@ -2729,10 +2729,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = LoadRequiredNonPkAkGraph(context);
 
@@ -2838,10 +2838,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = context.Set<Root>().Include(e => e.RequiredSingleAk).Single(IsTheRoot);
 
@@ -2922,10 +2922,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = context
                     .Set<Root>()
@@ -3013,10 +3013,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadRequiredAkGraph(context),
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var removed = root.RequiredSingleAk;
 
@@ -3143,10 +3143,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadRequiredNonPkAkGraph(context),
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var removed = root.RequiredNonPkSingleAk;
 
@@ -3238,10 +3238,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = LoadRequiredAkGraph(context);
 
@@ -3386,10 +3386,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var root = LoadRequiredNonPkAkGraph(context);
 

@@ -43,8 +43,7 @@ namespace Internal.Cryptography.Pal.AnyOS
         {
             Debug.Assert(certificate != null);
 
-            X509Extension extension =
-                certificate.Extensions[Oids.SubjectKeyIdentifier]
+            X509Extension extension = certificate.Extensions[Oids.SubjectKeyIdentifier]
                 ?? new X509SubjectKeyIdentifierExtension( // Construct the value from the public key info.
                     certificate.PublicKey,
                     X509SubjectKeyIdentifierHashAlgorithm.CapiSha1,

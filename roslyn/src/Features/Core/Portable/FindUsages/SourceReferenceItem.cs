@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             SourceSpan = sourceSpan;
             SymbolUsageInfo = symbolUsageInfo;
             IsWrittenTo = isWrittenTo;
-            AdditionalProperties =
-                additionalProperties ?? ImmutableDictionary<string, string>.Empty;
+            AdditionalProperties = additionalProperties
+                ?? ImmutableDictionary<string, string>.Empty;
         }
 
         // Used by F#

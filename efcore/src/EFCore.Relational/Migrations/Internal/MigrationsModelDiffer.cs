@@ -1434,8 +1434,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         columnOperation.IsFixedLength = column.IsFixedLength;
         columnOperation.IsRowVersion = column.IsRowVersion;
         columnOperation.IsNullable = isNullable;
-        columnOperation.DefaultValue =
-            defaultValue
+        columnOperation.DefaultValue = defaultValue
             ?? (inline || isNullable ? null : GetDefaultValue(columnOperation.ClrType));
         columnOperation.DefaultValueSql = column.DefaultValueSql;
         columnOperation.ComputedColumnSql = column.ComputedColumnSql;

@@ -320,8 +320,8 @@ namespace Microsoft.CodeAnalysis
             this.SyntaxTreeOptionsProvider = syntaxTreeOptionsProvider;
             this.MetadataReferenceResolver = metadataReferenceResolver;
             this.StrongNameProvider = strongNameProvider;
-            this.AssemblyIdentityComparer =
-                assemblyIdentityComparer ?? AssemblyIdentityComparer.Default;
+            this.AssemblyIdentityComparer = assemblyIdentityComparer
+                ?? AssemblyIdentityComparer.Default;
             this.MetadataImportOptions = metadataImportOptions;
             this.ReferencesSupersedeLowerVersions = referencesSupersedeLowerVersions;
             this.PublicSign = publicSign;

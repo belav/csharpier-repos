@@ -162,8 +162,7 @@ namespace Microsoft.CodeAnalysis.Serialization
                 }
             }
 
-            specificDiagnosticOptions =
-                specificDiagnosticOptionsList
+            specificDiagnosticOptions = specificDiagnosticOptionsList
                 ?? SpecializedCollections.EmptyEnumerable<KeyValuePair<string, ReportDiagnostic>>();
 
             concurrentBuild = reader.ReadBoolean();
@@ -229,8 +228,7 @@ namespace Microsoft.CodeAnalysis.Serialization
                 }
             }
 
-            features =
-                featuresList
+            features = featuresList
                 ?? SpecializedCollections.EmptyEnumerable<KeyValuePair<string, string>>();
         }
     }

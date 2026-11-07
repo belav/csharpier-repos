@@ -110,8 +110,8 @@ namespace System.Threading
                 UserUnregisterWaitHandle = waitObject?.SafeWaitHandle;
                 UserUnregisterWaitHandle?.DangerousAddRef(ref needToRollBackRefCountOnException);
 
-                UserUnregisterWaitHandleValue =
-                    UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
+                UserUnregisterWaitHandleValue = UserUnregisterWaitHandle?.DangerousGetHandle()
+                    ?? IntPtr.Zero;
 
                 if (_unregistered)
                 {

@@ -57,8 +57,8 @@ namespace System.ServiceModel.Dispatcher
             contract_name = name;
             contract_ns = ns;
 #if !MOBILE
-            CallbackDispatchRuntime =
-                (DispatchRuntime)callbackDispatchRuntime ?? new DispatchRuntime(null, this);
+            CallbackDispatchRuntime = (DispatchRuntime)callbackDispatchRuntime
+                ?? new DispatchRuntime(null, this);
 #endif
         }
 

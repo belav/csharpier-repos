@@ -27,8 +27,7 @@ namespace ILLink.RoslynAnalyzer
                 {
                     return false;
                 }
-                currentType =
-                    (INamespaceOrTypeSymbol?)currentType.ContainingType
+                currentType = (INamespaceOrTypeSymbol?)currentType.ContainingType
                     ?? currentType.ContainingNamespace;
                 roSpan = roSpan.Slice(0, dot > 0 ? dot : 0);
             }

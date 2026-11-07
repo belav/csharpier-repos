@@ -543,8 +543,8 @@ namespace System.Web.Helpers
             _elementType = GetElementType(source);
             if (_columnNames == null)
             {
-                _columnNames =
-                    columnNames ?? GetDefaultColumnNames(source, elementType: _elementType);
+                _columnNames = columnNames
+                    ?? GetDefaultColumnNames(source, elementType: _elementType);
             }
 
             if (!autoSortAndPage)

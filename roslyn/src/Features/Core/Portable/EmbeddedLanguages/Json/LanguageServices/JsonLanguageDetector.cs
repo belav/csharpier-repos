@@ -166,12 +166,11 @@ internal sealed class JsonLanguageDetector(
                         symbol.ContainingType.Name == nameof(JsonDocument)
                             ? JsonOptions.Strict
                             : default;
-                    options |=
-                        GetOptionsFromSiblingArgument(
-                            argumentNode,
-                            semanticModel,
-                            cancellationToken
-                        ) ?? default;
+                    options |= GetOptionsFromSiblingArgument(
+                        argumentNode,
+                        semanticModel,
+                        cancellationToken
+                    ) ?? default;
                     return true;
                 }
             }

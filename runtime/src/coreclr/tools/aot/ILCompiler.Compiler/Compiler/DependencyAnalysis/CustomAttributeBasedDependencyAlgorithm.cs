@@ -217,13 +217,12 @@ namespace ILCompiler.DependencyAnalysis
                     );
 
                     // Make a new list in case we need to abort.
-                    var caDependencies =
-                        factory.MetadataManager.GetDependenciesForCustomAttribute(
-                            factory,
-                            constructor,
-                            decodedValue,
-                            parent
-                        ) ?? new DependencyList();
+                    var caDependencies = factory.MetadataManager.GetDependenciesForCustomAttribute(
+                        factory,
+                        constructor,
+                        decodedValue,
+                        parent
+                    ) ?? new DependencyList();
 
                     caDependencies.Add(
                         factory.ReflectedMethod(

@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis
 
             DiagnosticInfo = diagnosticInfo;
             PrimaryDependency = primaryDependency;
-            SecondaryDependencies =
-                secondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty;
+            SecondaryDependencies = secondaryDependencies
+                ?? ImmutableHashSet<TAssemblySymbol>.Empty;
         }
 
         public bool IsEmpty =>
@@ -561,8 +561,8 @@ namespace Microsoft.CodeAnalysis
             UseSiteInfo<TAssemblySymbol> useSiteInfo
         )
         {
-            var secondaryDependencies =
-                useSiteInfo.SecondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty;
+            var secondaryDependencies = useSiteInfo.SecondaryDependencies
+                ?? ImmutableHashSet<TAssemblySymbol>.Empty;
             Debug.Assert(
                 primaryDependency is object
                     || (useSiteInfo.PrimaryDependency is null && secondaryDependencies.IsEmpty)

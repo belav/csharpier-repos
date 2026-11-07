@@ -75,8 +75,8 @@ namespace System.Reflection.PortableExecutable
             _nativeResourcesOpt = nativeResources;
             _strongNameSignatureSize = strongNameSignatureSize;
             _entryPointOpt = entryPoint;
-            _debugDirectoryBuilderOpt =
-                debugDirectoryBuilder ?? CreateDefaultDebugDirectoryBuilder();
+            _debugDirectoryBuilderOpt = debugDirectoryBuilder
+                ?? CreateDefaultDebugDirectoryBuilder();
             _corFlags = flags;
 
             _peDirectoriesBuilder = new PEDirectoriesBuilder();

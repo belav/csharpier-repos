@@ -24,8 +24,7 @@ namespace Roslyn.Test.Utilities.CoreClr
         public SimpleAssemblyLoadContext(string name, string? probingPath = null)
             : base(name, isCollectible: false)
         {
-            _probingPath =
-                probingPath
+            _probingPath = probingPath
                 ?? Path.GetDirectoryName(typeof(SimpleAssemblyLoadContext).Assembly.Location)!;
         }
 

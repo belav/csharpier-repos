@@ -392,8 +392,7 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
                 var isFixedLength = mappingInfo.IsFixedLength == true;
                 var maxSize = isAnsi ? 8000 : 4000;
 
-                var size =
-                    mappingInfo.Size
+                var size = mappingInfo.Size
                     ?? (
                         mappingInfo.IsKeyOrIndex
                             ? isAnsi

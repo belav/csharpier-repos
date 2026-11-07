@@ -40,8 +40,7 @@
 
             ViewPath = viewPath;
 
-            _viewPageActivator =
-                viewPageActivator
+            _viewPageActivator = viewPageActivator
                 ?? new BuildManagerViewEngine.DefaultViewPageActivator(dependencyResolver);
         }
 

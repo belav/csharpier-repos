@@ -297,12 +297,11 @@ namespace System.Web.Hosting
                     UnregisterObject,
                     WriteUnhandledException
                 );
-                scheduler =
-                    Interlocked.CompareExchange(
-                        ref _backgroundWorkScheduler,
-                        newlyCreatedScheduler,
-                        null
-                    ) ?? newlyCreatedScheduler;
+                scheduler = Interlocked.CompareExchange(
+                    ref _backgroundWorkScheduler,
+                    newlyCreatedScheduler,
+                    null
+                ) ?? newlyCreatedScheduler;
                 if (scheduler == newlyCreatedScheduler)
                 {
                     RegisterObject(scheduler); // Only call RegisterObject if we just created the "winning" one

@@ -43,8 +43,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 : null;
             Assert.True(embeddedPdbReader == null ^ portablePdbReader == null);
 
-            var pdbReader =
-                embeddedPdbReader ?? portablePdbReader ?? throw ExceptionUtilities.Unreachable();
+            var pdbReader = embeddedPdbReader
+                ?? portablePdbReader
+                ?? throw ExceptionUtilities.Unreachable();
             var factory = LoggerFactory.Create(configure => { });
             var logger = factory.CreateLogger("RoundTripVerification");
             var optionsReader = new CompilationOptionsReader(logger, pdbReader, peReader);
@@ -136,8 +137,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             MetadataReader rebuildPdbReader;
             if (rebuildPdbStream is null)
             {
-                rebuildPdbReader =
-                    rebuildReader.GetEmbeddedPdbMetadataReader()
+                rebuildPdbReader = rebuildReader.GetEmbeddedPdbMetadataReader()
                     ?? throw new InvalidOperationException();
                 rebuildPdbBytes = new ReadOnlySpan<byte>(
                     rebuildPdbReader.MetadataPointer,

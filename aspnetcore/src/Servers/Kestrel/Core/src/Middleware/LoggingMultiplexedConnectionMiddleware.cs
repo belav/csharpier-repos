@@ -19,8 +19,8 @@ internal sealed class LoggingMultiplexedConnectionMiddleware
         ILogger logger
     )
     {
-        _multiplexedNext =
-            multiplexedNext ?? throw new ArgumentNullException(nameof(multiplexedNext));
+        _multiplexedNext = multiplexedNext
+            ?? throw new ArgumentNullException(nameof(multiplexedNext));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 

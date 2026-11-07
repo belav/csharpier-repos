@@ -357,9 +357,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         && position >= switchExpression.OpenBraceToken.Span.End
                         && position <= switchExpression.CloseBraceToken.Span.Start:
                     // This can occur if the cursor is on a separator. Find the nearest switch arm.
-                    switchArm =
-                        switchExpression.Arms.LastOrDefault(arm => position >= arm.FullSpan.Start)
-                        ?? switchExpression.Arms.First();
+                    switchArm = switchExpression.Arms.LastOrDefault(arm =>
+                        position >= arm.FullSpan.Start
+                    ) ?? switchExpression.Arms.First();
                     return createSpanForSwitchArm(switchArm);
 
                 case SyntaxKind.WhenClause:

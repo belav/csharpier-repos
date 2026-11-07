@@ -154,8 +154,8 @@ namespace System.Web.WebPages.Html
             var modelState = ModelState[name];
             if (modelState != null)
             {
-                value =
-                    value ?? Convert.ToString(ModelState[name].Value, CultureInfo.CurrentCulture);
+                value = value
+                    ?? Convert.ToString(ModelState[name].Value, CultureInfo.CurrentCulture);
             }
             tagBuilder.InnerHtml = Encode(value);
 

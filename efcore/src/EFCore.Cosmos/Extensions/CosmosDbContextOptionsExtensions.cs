@@ -73,8 +73,7 @@ public static class CosmosDbContextOptionsExtensions
         Check.NotEmpty(accountKey, nameof(accountKey));
         Check.NotEmpty(databaseName, nameof(databaseName));
 
-        var extension =
-            optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
             ?? new CosmosOptionsExtension();
 
         extension = extension
@@ -146,8 +145,7 @@ public static class CosmosDbContextOptionsExtensions
         Check.NotNull(tokenCredential, nameof(tokenCredential));
         Check.NotEmpty(databaseName, nameof(databaseName));
 
-        var extension =
-            optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
             ?? new CosmosOptionsExtension();
 
         extension = extension
@@ -213,8 +211,7 @@ public static class CosmosDbContextOptionsExtensions
         Check.NotNull(connectionString, nameof(connectionString));
         Check.NotNull(databaseName, nameof(databaseName));
 
-        var extension =
-            optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
             ?? new CosmosOptionsExtension();
 
         extension = extension.WithConnectionString(connectionString).WithDatabaseName(databaseName);

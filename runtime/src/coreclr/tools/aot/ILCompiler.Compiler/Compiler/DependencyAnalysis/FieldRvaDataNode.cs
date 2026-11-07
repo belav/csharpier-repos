@@ -36,8 +36,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
-            int fieldTypePack =
-                (_field.FieldType as MetadataType)?.GetClassLayout().PackingSize ?? 1;
+            int fieldTypePack = (_field.FieldType as MetadataType)?.GetClassLayout().PackingSize
+                ?? 1;
             byte[] data = relocsOnly ? Array.Empty<byte>() : _field.GetFieldRvaData();
             return new ObjectData(
                 data,

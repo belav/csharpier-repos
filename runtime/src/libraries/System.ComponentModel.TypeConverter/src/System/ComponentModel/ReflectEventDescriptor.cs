@@ -108,8 +108,7 @@ namespace System.ComponentModel
                 "eventInfo.ReflectedType is used below, but only componentClass is annotated with DynamicallyAccessedMembers. Ensure ReflectedType is in componentClass's hierarchy."
             );
 
-            _componentClass =
-                componentClass
+            _componentClass = componentClass
                 ?? throw new ArgumentException(
                     SR.Format(SR.InvalidNullArgument, nameof(componentClass))
                 );

@@ -416,8 +416,9 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         ArgumentNullException.ThrowIfNull(viewContext);
         ArgumentNullException.ThrowIfNull(modelExplorer);
 
-        var resolvedLabelText =
-            labelText ?? modelExplorer.Metadata.DisplayName ?? modelExplorer.Metadata.PropertyName;
+        var resolvedLabelText = labelText
+            ?? modelExplorer.Metadata.DisplayName
+            ?? modelExplorer.Metadata.PropertyName;
         if (resolvedLabelText == null && expression != null)
         {
             var index = expression.LastIndexOf('.');
@@ -630,8 +631,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
             selectList = GetSelectListItems(viewContext, expression);
         }
 
-        modelExplorer =
-            modelExplorer
+        modelExplorer = modelExplorer
             ?? ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 viewContext.ViewData,
@@ -846,8 +846,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         ModelError modelError = null;
         if (modelErrors != null && modelErrors.Count != 0)
         {
-            modelError =
-                modelErrors.FirstOrDefault(m => !string.IsNullOrEmpty(m.ErrorMessage))
+            modelError = modelErrors.FirstOrDefault(m => !string.IsNullOrEmpty(m.ErrorMessage))
                 ?? modelErrors[0];
         }
 
@@ -880,8 +879,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         }
         else if (modelError != null)
         {
-            modelExplorer =
-                modelExplorer
+            modelExplorer = modelExplorer
                 ?? ExpressionMetadataProvider.FromStringExpression(
                     expression,
                     viewContext.ViewData,
@@ -1073,8 +1071,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
             rawValues = new[] { rawValue };
         }
 
-        modelExplorer =
-            modelExplorer
+        modelExplorer = modelExplorer
             ?? ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 viewContext.ViewData,
@@ -1099,8 +1096,8 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         foreach (var value in rawValues)
         {
             // Add original or converted string.
-            var stringValue =
-                (value as string) ?? Convert.ToString(value, CultureInfo.CurrentCulture);
+            var stringValue = (value as string)
+                ?? Convert.ToString(value, CultureInfo.CurrentCulture);
 
             // Do not add simple names of enum properties here because whitespace isn't relevant for their binding.
             // Will add matching names just below.
@@ -1482,8 +1479,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         string expression
     )
     {
-        modelExplorer =
-            modelExplorer
+        modelExplorer = modelExplorer
             ?? ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 viewData,
@@ -1511,8 +1507,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         string expression
     )
     {
-        modelExplorer =
-            modelExplorer
+        modelExplorer = modelExplorer
             ?? ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 viewData,
@@ -1565,8 +1560,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         string expression
     )
     {
-        modelExplorer =
-            modelExplorer
+        modelExplorer = modelExplorer
             ?? ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 viewContext.ViewData,

@@ -228,16 +228,15 @@ internal partial class InlineCompletionsHandler
             .ConfigureAwait(false);
 
         var spanToFormat = TextSpan.FromBounds(textChange.Span.Start, snippetEndPosition);
-        var formattingChanges =
-            Formatter
-                .GetFormattedTextChanges(
-                    root,
-                    spanToFormat,
-                    originalDocument.Project.Solution.Services,
-                    formattingOptions,
-                    cancellationToken: cancellationToken
-                )
-                ?.ToImmutableArray()
+        var formattingChanges = Formatter
+            .GetFormattedTextChanges(
+                root,
+                spanToFormat,
+                originalDocument.Project.Solution.Services,
+                formattingOptions,
+                cancellationToken: cancellationToken
+            )
+            ?.ToImmutableArray()
             ?? ImmutableArray<TextChange>.Empty;
 
         var formattedText = documentWithSnippetText.WithChanges(formattingChanges);

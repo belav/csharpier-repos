@@ -143,8 +143,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                 _ => throw ExceptionUtilities.UnexpectedValue(fieldOrProperty),
             };
 
-            var preferredTypeDeclaration =
-                siblingSyntax?.GetAncestorOrThis<TypeDeclarationSyntax>() ?? typeDeclaration;
+            var preferredTypeDeclaration = siblingSyntax?.GetAncestorOrThis<TypeDeclarationSyntax>()
+                ?? typeDeclaration;
 
             var editingDocument = solution.GetRequiredDocument(preferredTypeDeclaration.SyntaxTree);
             var editor = await solutionEditor

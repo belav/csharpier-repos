@@ -771,8 +771,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     }
                     else
                     {
-                        object? var =
-                            pr._varValue
+                        object? var = pr._varValue
                             ?? Converter.FromString(pr._value, objectPr._arrayElementTypeCode);
                         if (objectPr._objectA != null)
                         {

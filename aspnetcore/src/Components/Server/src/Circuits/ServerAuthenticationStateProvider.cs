@@ -24,8 +24,7 @@ public class ServerAuthenticationStateProvider
     /// <inheritdoc />
     public void SetAuthenticationState(Task<AuthenticationState> authenticationStateTask)
     {
-        _authenticationStateTask =
-            authenticationStateTask
+        _authenticationStateTask = authenticationStateTask
             ?? throw new ArgumentNullException(nameof(authenticationStateTask));
         NotifyAuthenticationStateChanged(_authenticationStateTask);
     }

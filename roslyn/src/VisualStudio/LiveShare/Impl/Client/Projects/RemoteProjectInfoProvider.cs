@@ -31,8 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
         public RemoteProjectInfoProvider(
             [ImportMany] IEnumerable<IRemoteProjectInfoProvider> remoteProjectInfoProviders
         ) =>
-            _remoteProjectInfoProviders =
-                remoteProjectInfoProviders
+            _remoteProjectInfoProviders = remoteProjectInfoProviders
                 ?? throw new ArgumentNullException(nameof(remoteProjectInfoProviders));
 
         public async Task<IReadOnlyCollection<ProjectInfo>> GetRemoteProjectInfosAsync(

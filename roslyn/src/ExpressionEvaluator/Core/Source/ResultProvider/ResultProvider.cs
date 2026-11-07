@@ -1183,8 +1183,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string display;
             if (value.HasExceptionThrown())
             {
-                display =
-                    result.DisplayValue
+                display = result.DisplayValue
                     ?? value.GetExceptionMessage(
                         inspectionContext,
                         result.FullNameWithoutFormatSpecifiers ?? result.Name
@@ -1199,8 +1198,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 display = value.GetValueString(inspectionContext, Formatter.NoFormatSpecifiers);
             }
 
-            var typeName =
-                displayType
+            var typeName = displayType
                 ?? GetTypeName(
                     inspectionContext,
                     value,
@@ -1404,12 +1402,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             IDkmClrFullNameProvider fullNameProvider
         )
         {
-            var typeName =
-                fullNameProvider.GetClrTypeName(
-                    inspectionContext,
-                    typeDeclaringMember.ClrType,
-                    typeDeclaringMember.Info
-                )
+            var typeName = fullNameProvider.GetClrTypeName(
+                inspectionContext,
+                typeDeclaringMember.ClrType,
+                typeDeclaringMember.Info
+            )
                 ?? inspectionContext.GetTypeName(
                     typeDeclaringMember.ClrType,
                     typeDeclaringMember.Info,

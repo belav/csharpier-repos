@@ -113,8 +113,8 @@ namespace System.Activities.DynamicUpdate
 
         private static string GetMessage(ActivityBlockingUpdate blockingActivity)
         {
-            object activity =
-                (object)blockingActivity.Activity ?? blockingActivity.UpdatedActivityId;
+            object activity = (object)blockingActivity.Activity
+                ?? blockingActivity.UpdatedActivityId;
             if (activity != null)
             {
                 return SR.ActivityBlockingUpdate(activity, blockingActivity.Reason);

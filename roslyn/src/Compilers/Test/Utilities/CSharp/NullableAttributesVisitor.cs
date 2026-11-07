@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public override void VisitNamedType(NamedTypeSymbol type)
         {
             var previousContext = _nullableContext;
-            _nullableContext =
-                GetNullableContextAttribute(type.GetAttributes()) ?? _nullableContext;
+            _nullableContext = GetNullableContextAttribute(type.GetAttributes())
+                ?? _nullableContext;
 
             base.VisitNamedType(type);
 
@@ -46,8 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public override void VisitMethod(MethodSymbol method)
         {
             var previousContext = _nullableContext;
-            _nullableContext =
-                GetNullableContextAttribute(method.GetAttributes()) ?? _nullableContext;
+            _nullableContext = GetNullableContextAttribute(method.GetAttributes())
+                ?? _nullableContext;
 
             base.VisitMethod(method);
 

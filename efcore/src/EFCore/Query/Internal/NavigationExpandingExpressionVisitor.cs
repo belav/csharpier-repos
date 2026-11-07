@@ -2936,8 +2936,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 }
             }
 
-            var navigation =
-                (INavigationBase?)entityType.FindNavigation(propertyName)
+            var navigation = (INavigationBase?)entityType.FindNavigation(propertyName)
                 ?? entityType.FindSkipNavigation(propertyName);
 
             if (navigation != null)

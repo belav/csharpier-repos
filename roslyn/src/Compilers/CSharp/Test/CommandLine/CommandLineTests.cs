@@ -23030,8 +23030,8 @@ public class Generator : ISourceGenerator
                 expectedCount == 2 ? srcDirectory.CreateFile(additionalFilePath2) : null;
 
             string path1 = additionalFile1.Path;
-            string path2 =
-                additionalFile2?.Path ?? Path.Combine(srcDirectory.Path, additionalFilePath2);
+            string path2 = additionalFile2?.Path
+                ?? Path.Combine(srcDirectory.Path, additionalFilePath2);
 
             int count = 0;
             var generator = new PipelineCallbackGenerator(ctx =>

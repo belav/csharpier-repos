@@ -193,8 +193,8 @@ namespace System.Net.Http
             }
             else
             {
-                encoding =
-                    GetEncodingFromBuffer(buf, buf_length, ref preambleLength) ?? Encoding.UTF8;
+                encoding = GetEncodingFromBuffer(buf, buf_length, ref preambleLength)
+                    ?? Encoding.UTF8;
             }
 
             return encoding.GetString(buf, preambleLength, buf_length - preambleLength);

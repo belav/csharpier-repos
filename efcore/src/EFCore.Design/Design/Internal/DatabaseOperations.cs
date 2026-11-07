@@ -88,8 +88,9 @@ public class DatabaseOperations
         var scaffolder = scope.ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
         var finalModelNamespace = modelNamespace ?? GetNamespaceFromOutputPath(outputDir);
-        var finalContextNamespace =
-            contextNamespace ?? modelNamespace ?? GetNamespaceFromOutputPath(outputContextDir);
+        var finalContextNamespace = contextNamespace
+            ?? modelNamespace
+            ?? GetNamespaceFromOutputPath(outputContextDir);
 
         var scaffoldedModel = scaffolder.ScaffoldModel(
             connectionString,

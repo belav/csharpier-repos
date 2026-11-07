@@ -51,8 +51,8 @@ namespace System.IdentityModel.Tokens
 
             this.internalTokenReference = internalTokenReference;
             this.externalTokenReference = externalTokenReference;
-            this.authorizationPolicies =
-                authorizationPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
+            this.authorizationPolicies = authorizationPolicies
+                ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
         }
 
         public override string Id

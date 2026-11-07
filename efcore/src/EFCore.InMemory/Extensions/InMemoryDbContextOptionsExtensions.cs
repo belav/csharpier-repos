@@ -136,8 +136,7 @@ public static class InMemoryDbContextOptionsExtensions
         Check.NotNull(optionsBuilder, nameof(optionsBuilder));
         Check.NotEmpty(databaseName, nameof(databaseName));
 
-        var extension =
-            optionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
             ?? new InMemoryOptionsExtension();
 
         extension = extension.WithStoreName(databaseName);
@@ -161,8 +160,7 @@ public static class InMemoryDbContextOptionsExtensions
     private static void ConfigureWarnings(DbContextOptionsBuilder optionsBuilder)
     {
         // Set warnings defaults
-        var coreOptionsExtension =
-            optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+        var coreOptionsExtension = optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
             ?? new CoreOptionsExtension();
 
         coreOptionsExtension = coreOptionsExtension.WithWarningsConfiguration(

@@ -13,8 +13,7 @@ public class LinkGeneratorTest
 {
     public LinkGeneratorTest(MvcTestFixture<RoutingWebSite.StartupForLinkGenerator> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }

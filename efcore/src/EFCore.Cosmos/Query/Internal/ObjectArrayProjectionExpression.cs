@@ -43,8 +43,7 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
 
         Navigation = navigation;
         AccessExpression = accessExpression;
-        InnerProjection =
-            innerProjection
+        InnerProjection = innerProjection
             ?? new EntityProjectionExpression(
                 targetType,
                 new RootReferenceExpression(targetType, "")

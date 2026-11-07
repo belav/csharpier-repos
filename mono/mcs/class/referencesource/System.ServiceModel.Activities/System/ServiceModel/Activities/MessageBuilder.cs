@@ -169,8 +169,8 @@ namespace System.ServiceModel.Activities
             Type messageContractType
         )
         {
-            string action =
-                overridingAction ?? NamingHelper.GetMessageAction(operation, isResponse);
+            string action = overridingAction
+                ?? NamingHelper.GetMessageAction(operation, isResponse);
 
             //
 
@@ -192,8 +192,8 @@ namespace System.ServiceModel.Activities
             string overridingAction
         )
         {
-            string action =
-                overridingAction ?? NamingHelper.GetMessageAction(operation, isResponse);
+            string action = overridingAction
+                ?? NamingHelper.GetMessageAction(operation, isResponse);
             MessageDescription result = new MessageDescription(action, direction);
 
             // Clear message wrapper
@@ -365,8 +365,8 @@ namespace System.ServiceModel.Activities
         )
         {
             string name = NamingHelper.TypeName(faultType) + TypeLoader.FaultSuffix;
-            string action =
-                overridingAction ?? NamingHelper.GetMessageAction(operation, false) + name;
+            string action = overridingAction
+                ?? NamingHelper.GetMessageAction(operation, false) + name;
             FaultDescription result = new FaultDescription(action)
             {
                 Namespace = operation.DeclaringContract.Namespace,

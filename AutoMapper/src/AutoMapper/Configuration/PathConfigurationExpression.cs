@@ -55,8 +55,7 @@ public class PathConfigurationExpression<TSource, TDestination, TMember>
 
     public void MapFromUntyped(LambdaExpression sourceExpression)
     {
-        _sourceExpression =
-            sourceExpression
+        _sourceExpression = sourceExpression
             ?? throw new ArgumentNullException(
                 nameof(sourceExpression),
                 $"{nameof(sourceExpression)} may not be null when mapping {DestinationMember.Name} from {typeof(TSource)} to {typeof(TDestination)}."

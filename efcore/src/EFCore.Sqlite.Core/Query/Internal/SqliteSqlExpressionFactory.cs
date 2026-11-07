@@ -126,8 +126,7 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
     /// </summary>
     public virtual GlobExpression Glob(SqlExpression match, SqlExpression pattern)
     {
-        var inferredTypeMapping =
-            ExpressionExtensions.InferTypeMapping(match, pattern)
+        var inferredTypeMapping = ExpressionExtensions.InferTypeMapping(match, pattern)
             ?? Dependencies.TypeMappingSource.FindMapping(match.Type, Dependencies.Model);
 
         match = ApplyTypeMapping(match, inferredTypeMapping);
@@ -144,8 +143,7 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
     /// </summary>
     public virtual RegexpExpression Regexp(SqlExpression match, SqlExpression pattern)
     {
-        var inferredTypeMapping =
-            ExpressionExtensions.InferTypeMapping(match, pattern)
+        var inferredTypeMapping = ExpressionExtensions.InferTypeMapping(match, pattern)
             ?? Dependencies.TypeMappingSource.FindMapping(match.Type, Dependencies.Model);
 
         match = ApplyTypeMapping(match, inferredTypeMapping);
@@ -176,8 +174,10 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
 
     private SqlExpression ApplyTypeMappingOnGlob(GlobExpression globExpression)
     {
-        var inferredTypeMapping =
-            ExpressionExtensions.InferTypeMapping(globExpression.Match, globExpression.Pattern)
+        var inferredTypeMapping = ExpressionExtensions.InferTypeMapping(
+            globExpression.Match,
+            globExpression.Pattern
+        )
             ?? Dependencies.TypeMappingSource.FindMapping(
                 globExpression.Match.Type,
                 Dependencies.Model
@@ -196,8 +196,10 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
 
     private SqlExpression? ApplyTypeMappingOnRegexp(RegexpExpression regexpExpression)
     {
-        var inferredTypeMapping =
-            ExpressionExtensions.InferTypeMapping(regexpExpression.Match, regexpExpression.Pattern)
+        var inferredTypeMapping = ExpressionExtensions.InferTypeMapping(
+            regexpExpression.Match,
+            regexpExpression.Pattern
+        )
             ?? Dependencies.TypeMappingSource.FindMapping(
                 regexpExpression.Match.Type,
                 Dependencies.Model

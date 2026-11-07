@@ -52,8 +52,8 @@ public class Startup
                     .UseKestrel(
                         (context, options) =>
                         {
-                            var basePort =
-                                context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
+                            var basePort = context.Configuration.GetValue<int?>("BASE_PORT")
+                                ?? 5000;
 
                             options.Listen(IPAddress.Loopback, basePort, listenOptions =>
                             {

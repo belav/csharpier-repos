@@ -1114,8 +1114,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var removed = context.Set<Optional1>().OrderBy(e => e.Id).First();
                 var child = context
@@ -1578,10 +1578,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming =
-                    cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming =
-                    deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming
+                    ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming
+                    ?? CascadeTiming.Never;
 
                 var parent = context.Set<ParentAsAChild>().Include(p => p.ChildAsAParent).Single();
 

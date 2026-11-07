@@ -26,8 +26,7 @@ public class HtmlGenerationTest
         MvcEncodedTestFixture<HtmlGenerationWebSite.Startup> encodedFixture
     )
     {
-        Factory =
-            fixture.Factories.FirstOrDefault()
+        Factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
 
         Client = fixture.CreateDefaultClient();

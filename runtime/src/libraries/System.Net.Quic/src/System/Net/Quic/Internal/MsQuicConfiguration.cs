@@ -110,8 +110,7 @@ internal static class MsQuicConfiguration
             intermediates = authenticationOptions.ServerCertificateContext.IntermediateCertificates;
         }
 
-        certificate ??=
-            authenticationOptions.ServerCertificate
+        certificate ??= authenticationOptions.ServerCertificate
             ?? authenticationOptions.ServerCertificateSelectionCallback?.Invoke(
                 authenticationOptions,
                 targetHost

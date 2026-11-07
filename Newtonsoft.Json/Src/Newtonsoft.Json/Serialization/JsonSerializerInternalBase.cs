@@ -87,8 +87,7 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty property
         )
         {
-            NullValueHandling resolvedNullValueHandling =
-                property.NullValueHandling
+            NullValueHandling resolvedNullValueHandling = property.NullValueHandling
                 ?? containerContract?.ItemNullValueHandling
                 ?? Serializer._nullValueHandling;
 

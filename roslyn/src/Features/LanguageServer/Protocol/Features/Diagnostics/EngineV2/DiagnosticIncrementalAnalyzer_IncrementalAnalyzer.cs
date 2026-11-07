@@ -316,8 +316,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (analyzedStateSetsBuilder.Count > 0)
                 {
-                    var oldResult =
-                        result.OldResult
+                    var oldResult = result.OldResult
                         ?? ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult>.Empty;
                     RaiseProjectDiagnosticsIfNeeded(
                         project,

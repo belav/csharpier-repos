@@ -15,8 +15,7 @@ namespace System.CommandLine.Suggest
             params ISuggestionRegistration[] suggestionRegistration
         )
         {
-            _suggestionRegistrations =
-                suggestionRegistration
+            _suggestionRegistrations = suggestionRegistration
                 ?? throw new ArgumentNullException(nameof(suggestionRegistration));
         }
 

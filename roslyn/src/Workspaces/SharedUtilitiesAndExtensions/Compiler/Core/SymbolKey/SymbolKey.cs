@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis
         internal const int FormatVersion = 7;
 
         [DataMember(Order = 0)]
-        private readonly string _symbolKeyData =
-            data ?? throw new ArgumentNullException(nameof(data));
+        private readonly string _symbolKeyData = data
+            ?? throw new ArgumentNullException(nameof(data));
 
         /// <summary>
         /// Constructs a new <see cref="SymbolKey"/> representing the provided <paramref name="symbol"/>.

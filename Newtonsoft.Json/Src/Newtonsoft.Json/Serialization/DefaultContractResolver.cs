@@ -988,17 +988,16 @@ namespace Newtonsoft.Json.Serialization
 
                 property._required = property._required ?? matchingMemberProperty._required;
                 property.IsReference = property.IsReference ?? matchingMemberProperty.IsReference;
-                property.NullValueHandling =
-                    property.NullValueHandling ?? matchingMemberProperty.NullValueHandling;
-                property.DefaultValueHandling =
-                    property.DefaultValueHandling ?? matchingMemberProperty.DefaultValueHandling;
-                property.ReferenceLoopHandling =
-                    property.ReferenceLoopHandling ?? matchingMemberProperty.ReferenceLoopHandling;
-                property.ObjectCreationHandling =
-                    property.ObjectCreationHandling
+                property.NullValueHandling = property.NullValueHandling
+                    ?? matchingMemberProperty.NullValueHandling;
+                property.DefaultValueHandling = property.DefaultValueHandling
+                    ?? matchingMemberProperty.DefaultValueHandling;
+                property.ReferenceLoopHandling = property.ReferenceLoopHandling
+                    ?? matchingMemberProperty.ReferenceLoopHandling;
+                property.ObjectCreationHandling = property.ObjectCreationHandling
                     ?? matchingMemberProperty.ObjectCreationHandling;
-                property.TypeNameHandling =
-                    property.TypeNameHandling ?? matchingMemberProperty.TypeNameHandling;
+                property.TypeNameHandling = property.TypeNameHandling
+                    ?? matchingMemberProperty.TypeNameHandling;
             }
 
             return property;

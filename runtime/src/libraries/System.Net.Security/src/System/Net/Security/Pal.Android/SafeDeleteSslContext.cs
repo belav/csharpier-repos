@@ -42,8 +42,7 @@ namespace System.Net
         public SafeDeleteSslContext(SslAuthenticationOptions authOptions)
             : base(IntPtr.Zero)
         {
-            SslStreamProxy =
-                authOptions.SslStreamProxy
+            SslStreamProxy = authOptions.SslStreamProxy
                 ?? throw new ArgumentNullException(nameof(authOptions.SslStreamProxy));
 
             try

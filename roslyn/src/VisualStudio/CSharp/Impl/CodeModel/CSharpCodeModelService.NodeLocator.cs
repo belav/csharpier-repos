@@ -217,8 +217,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 )
                 {
                     var lineAfterOpenBrace = text.Lines[openBraceLine.LineNumber + 1];
-                    var firstNonWhitespaceOffset =
-                        lineAfterOpenBrace.GetFirstNonWhitespaceOffset() ?? -1;
+                    var firstNonWhitespaceOffset = lineAfterOpenBrace.GetFirstNonWhitespaceOffset()
+                        ?? -1;
 
                     // If the line contains any text, we return the start of the first non-whitespace character.
                     if (firstNonWhitespaceOffset >= 0)

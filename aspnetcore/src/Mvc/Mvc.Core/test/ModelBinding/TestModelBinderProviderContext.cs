@@ -27,8 +27,7 @@ public class TestModelBinderProviderContext : ModelBinderProviderContext
     {
         Metadata = CachedMetadataProvider.GetMetadataForType(modelType);
         MetadataProvider = CachedMetadataProvider;
-        _bindingInfo =
-            bindingInfo
+        _bindingInfo = bindingInfo
             ?? new BindingInfo
             {
                 BinderModelName = Metadata.BinderModelName,

@@ -42,11 +42,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
             RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace
         )
         {
-            _roslynLspClientServiceFactory =
-                roslynLspClientServiceFactory
+            _roslynLspClientServiceFactory = roslynLspClientServiceFactory
                 ?? throw new ArgumentNullException(nameof(roslynLspClientServiceFactory));
-            _remoteLanguageServiceWorkspace =
-                remoteLanguageServiceWorkspace
+            _remoteLanguageServiceWorkspace = remoteLanguageServiceWorkspace
                 ?? throw new ArgumentNullException(nameof(RemoteLanguageServiceWorkspace));
         }
 

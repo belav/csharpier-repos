@@ -36,8 +36,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         ILoggerFactory? loggerFactory = null
     )
     {
-        _globalMSBuildProperties =
-            globalMSBuildProperties ?? ImmutableDictionary<string, string>.Empty;
+        _globalMSBuildProperties = globalMSBuildProperties
+            ?? ImmutableDictionary<string, string>.Empty;
         _binaryLogPath = binaryLogPath;
         _loggerFactory = loggerFactory;
         _logger = loggerFactory?.CreateLogger<BuildHostProcessManager>();

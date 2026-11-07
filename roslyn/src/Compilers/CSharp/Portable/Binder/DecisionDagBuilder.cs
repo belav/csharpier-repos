@@ -1781,8 +1781,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 // We check test.Equals(other) to handle "bad" constant values
                                 bool sameTest = test.Equals(other);
-                                trueTestPermitsTrueOther =
-                                    whenTrueValues?.Any(relation, value) ?? true;
+                                trueTestPermitsTrueOther = whenTrueValues?.Any(relation, value)
+                                    ?? true;
                                 trueTestImpliesTrueOther =
                                     sameTest
                                     || trueTestPermitsTrueOther

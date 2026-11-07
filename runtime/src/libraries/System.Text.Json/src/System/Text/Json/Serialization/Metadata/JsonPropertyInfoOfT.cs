@@ -155,10 +155,9 @@ namespace System.Text.Json.Serialization.Metadata
         {
             Debug.Assert(jsonTypeInfo is JsonTypeInfo<T>);
 
-            JsonConverter<T> converter =
-                Options
-                    .ExpandConverterFactory(CustomConverter, PropertyType) // Expand any property-level custom converters.
-                    ?.CreateCastingConverter<T>() // Cast to JsonConverter<T>, potentially with wrapping.
+            JsonConverter<T> converter = Options
+                .ExpandConverterFactory(CustomConverter, PropertyType) // Expand any property-level custom converters.
+                ?.CreateCastingConverter<T>() // Cast to JsonConverter<T>, potentially with wrapping.
                 ?? ((JsonTypeInfo<T>)jsonTypeInfo).EffectiveConverter; // Fall back to the effective converter for the type.
 
             _effectiveConverter = converter;

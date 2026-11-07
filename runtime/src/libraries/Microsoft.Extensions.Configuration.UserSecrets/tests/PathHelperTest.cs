@@ -16,8 +16,7 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
             var userSecretsId = "abcxyz123";
             var actualSecretPath = PathHelper.GetSecretsPathFromSecretsId(userSecretsId);
 
-            var root =
-                Environment.GetEnvironmentVariable("APPDATA")
+            var root = Environment.GetEnvironmentVariable("APPDATA")
                 ?? // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
                 Environment.GetEnvironmentVariable("HOME"); // On Mac/Linux it goes to ~/.microsoft/usersecrets/
 

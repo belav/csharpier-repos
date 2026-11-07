@@ -140,8 +140,8 @@ namespace System.Web.Mvc.Routing
             defaults = Copy(Defaults) ?? new RouteValueDictionary();
 #endif
             TRouteDictionaryConcrete constraints = Copy(Constraints);
-            TRouteDictionaryConcrete dataTokens =
-                Copy(DataTokens) ?? new TRouteDictionaryConcrete();
+            TRouteDictionaryConcrete dataTokens = Copy(DataTokens)
+                ?? new TRouteDictionaryConcrete();
 
             dataTokens[RouteDataTokenKeys.Actions] = _actions;
 

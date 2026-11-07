@@ -32,8 +32,8 @@ public sealed class ValidationProblemDetailsConverter : JsonConverter
             return null;
         }
 
-        var problemDetails =
-            (ValidationProblemDetails?)existingValue ?? new ValidationProblemDetails();
+        var problemDetails = (ValidationProblemDetails?)existingValue
+            ?? new ValidationProblemDetails();
         annotatedProblemDetails.CopyTo(problemDetails);
 
         return problemDetails;

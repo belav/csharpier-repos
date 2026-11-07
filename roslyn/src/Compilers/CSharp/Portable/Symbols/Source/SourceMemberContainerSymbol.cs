@@ -3730,8 +3730,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 DeclaredMembersAndInitializers declaredMembers
             )
             {
-                var nonTypeMembers =
-                    NonTypeMembers?.ToImmutableAndFree() ?? declaredMembers.NonTypeMembers;
+                var nonTypeMembers = NonTypeMembers?.ToImmutableAndFree()
+                    ?? declaredMembers.NonTypeMembers;
 
                 var instanceInitializers = InstanceInitializersForPositionalMembers is null
                     ? declaredMembers.InstanceInitializers
@@ -4791,9 +4791,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool getNotSet
         )
         {
-            var locationFrom =
-                (Symbol)(getNotSet ? propertySymbol.GetMethod : propertySymbol.SetMethod)
-                ?? propertySymbol;
+            var locationFrom = (Symbol)(
+                getNotSet ? propertySymbol.GetMethod : propertySymbol.SetMethod
+            ) ?? propertySymbol;
             return locationFrom.GetFirstLocation();
         }
 
@@ -4802,9 +4802,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         private static Location GetAccessorOrEventLocation(EventSymbol propertySymbol, bool isAdder)
         {
-            var locationFrom =
-                (Symbol?)(isAdder ? propertySymbol.AddMethod : propertySymbol.RemoveMethod)
-                ?? propertySymbol;
+            var locationFrom = (Symbol?)(
+                isAdder ? propertySymbol.AddMethod : propertySymbol.RemoveMethod
+            ) ?? propertySymbol;
             return locationFrom.GetFirstLocation();
         }
 

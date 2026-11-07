@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         private readonly struct LiteralInfo(BloomFilter literalsFilter)
         {
-            private readonly BloomFilter _literalsFilter =
-                literalsFilter ?? throw new ArgumentNullException(nameof(literalsFilter));
+            private readonly BloomFilter _literalsFilter = literalsFilter
+                ?? throw new ArgumentNullException(nameof(literalsFilter));
 
             /// <summary>
             /// Returns true when the identifier is probably (but not guaranteed) to be within the

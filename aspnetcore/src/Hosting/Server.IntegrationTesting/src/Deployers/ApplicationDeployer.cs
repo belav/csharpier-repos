@@ -89,8 +89,7 @@ public abstract class ApplicationDeployer : IDisposable
 
     protected void DotnetPublish(string publishRoot = null)
     {
-        var publisher =
-            DeploymentParameters.ApplicationPublisher
+        var publisher = DeploymentParameters.ApplicationPublisher
             ?? new ApplicationPublisher(DeploymentParameters.ApplicationPath);
         _publishedApplication = publisher
             .Publish(DeploymentParameters, Logger)

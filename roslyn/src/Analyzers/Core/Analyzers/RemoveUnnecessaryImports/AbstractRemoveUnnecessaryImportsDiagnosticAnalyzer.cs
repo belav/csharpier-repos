@@ -226,8 +226,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 }
                 else
                 {
-                    var lastToken =
-                        TryGetLastToken(previous.Value.node) ?? previous.Value.node.GetLastToken();
+                    var lastToken = TryGetLastToken(previous.Value.node)
+                        ?? previous.Value.node.GetLastToken();
                     if (lastToken.GetNextToken(includeDirectives: true) == node.GetFirstToken())
                     {
                         // Expand the span

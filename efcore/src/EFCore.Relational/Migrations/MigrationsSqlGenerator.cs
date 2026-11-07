@@ -1601,8 +1601,8 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
             return;
         }
 
-        var columnType =
-            operation.ColumnType ?? GetColumnType(schema, table, name, operation, model)!;
+        var columnType = operation.ColumnType
+            ?? GetColumnType(schema, table, name, operation, model)!;
         builder
             .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(name))
             .Append(" ")
@@ -1715,15 +1715,11 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         }
         else if (defaultValue != null)
         {
-            var typeMapping =
-                (
-                    columnType != null
-                        ? Dependencies.TypeMappingSource.FindMapping(
-                            defaultValue.GetType(),
-                            columnType
-                        )
-                        : null
-                ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
+            var typeMapping = (
+                columnType != null
+                    ? Dependencies.TypeMappingSource.FindMapping(defaultValue.GetType(), columnType)
+                    : null
+            ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
             builder.Append(" DEFAULT ").Append(typeMapping.GenerateSqlLiteral(defaultValue));
         }

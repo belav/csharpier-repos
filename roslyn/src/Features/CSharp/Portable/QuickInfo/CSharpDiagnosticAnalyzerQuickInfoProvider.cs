@@ -192,8 +192,7 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             params TextSpan[] relatedSpans
         )
         {
-            var description =
-                descriptor.Title.ToStringOrNull()
+            var description = descriptor.Title.ToStringOrNull()
                 ?? descriptor.Description.ToStringOrNull()
                 ?? descriptor.MessageFormat.ToStringOrNull()
                 ?? descriptor.Id;

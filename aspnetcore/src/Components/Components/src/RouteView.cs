@@ -85,10 +85,9 @@ public class RouteView : IComponent
     )]
     protected virtual void Render(RenderTreeBuilder builder)
     {
-        var pageLayoutType =
-            _layoutAttributeCache.GetOrAdd(RouteData.PageType, static type =>
-                type.GetCustomAttribute<LayoutAttribute>()?.LayoutType
-            ) ?? DefaultLayout;
+        var pageLayoutType = _layoutAttributeCache.GetOrAdd(RouteData.PageType, static type =>
+            type.GetCustomAttribute<LayoutAttribute>()?.LayoutType
+        ) ?? DefaultLayout;
 
         builder.OpenComponent<LayoutView>(0);
         builder.AddComponentParameter(1, nameof(LayoutView.Layout), pageLayoutType);

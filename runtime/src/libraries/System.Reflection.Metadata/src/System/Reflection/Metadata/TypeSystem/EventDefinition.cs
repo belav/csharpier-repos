@@ -85,8 +85,8 @@ namespace System.Reflection.Metadata
                 }
             }
 
-            var otherAccessors =
-                other?.ToImmutable() ?? ImmutableArray<MethodDefinitionHandle>.Empty;
+            var otherAccessors = other?.ToImmutable()
+                ?? ImmutableArray<MethodDefinitionHandle>.Empty;
             return new EventAccessors(adder, remover, fire, otherAccessors);
         }
     }

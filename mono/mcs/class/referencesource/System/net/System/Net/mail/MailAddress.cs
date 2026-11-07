@@ -74,8 +74,8 @@ namespace System.Net.Mail
                 );
             }
 
-            this.displayNameEncoding =
-                displayNameEncoding ?? Encoding.GetEncoding(MimeBasePart.defaultCharSet);
+            this.displayNameEncoding = displayNameEncoding
+                ?? Encoding.GetEncoding(MimeBasePart.defaultCharSet);
             this.displayName = displayName ?? string.Empty;
 
             // Check for bounding quotes

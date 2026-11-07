@@ -127,13 +127,12 @@ namespace Microsoft.CodeAnalysis.Storage
             // some sort of issue (like DB corruption).  We'll then try to delete the DB and can
             // try to create it again.  If we can't create it the second time, then there's nothing
             // we can do and we have to store things in memory.
-            var result =
-                await TryCreatePersistentStorageAsync(
-                        solutionKey,
-                        workingFolderPath,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false)
+            var result = await TryCreatePersistentStorageAsync(
+                    solutionKey,
+                    workingFolderPath,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
                 ?? await TryCreatePersistentStorageAsync(
                         solutionKey,
                         workingFolderPath,

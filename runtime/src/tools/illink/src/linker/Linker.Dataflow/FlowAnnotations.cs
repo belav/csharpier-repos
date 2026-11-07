@@ -575,8 +575,7 @@ namespace ILLink.Shared.TrimAnalysis
                     genericParameterIndex++
                 )
                 {
-                    var provider =
-                        attrs?[genericParameterIndex]
+                    var provider = attrs?[genericParameterIndex]
                         ?? type.GenericParameters[genericParameterIndex];
                     var annotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(
                         type,

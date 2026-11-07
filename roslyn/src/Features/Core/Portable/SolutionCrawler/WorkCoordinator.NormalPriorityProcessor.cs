@@ -355,8 +355,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 )
                             )
                             {
-                                var textDocument =
-                                    solution.GetTextDocument(documentId)
+                                var textDocument = solution.GetTextDocument(documentId)
                                     ?? await solution
                                         .GetSourceGeneratedDocumentAsync(
                                             documentId,

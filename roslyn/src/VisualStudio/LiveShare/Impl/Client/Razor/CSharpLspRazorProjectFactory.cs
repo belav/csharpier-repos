@@ -46,8 +46,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
         public CSharpLspRazorProjectFactory(
             RemoteLanguageServiceWorkspaceHost remoteLanguageServiceWorkspaceHost
         ) =>
-            _remoteLanguageServiceWorkspaceHost =
-                remoteLanguageServiceWorkspaceHost
+            _remoteLanguageServiceWorkspaceHost = remoteLanguageServiceWorkspaceHost
                 ?? throw new ArgumentNullException(nameof(remoteLanguageServiceWorkspaceHost));
     }
 }

@@ -19,8 +19,8 @@ public class CoreSingletonOptions : ICoreSingletonOptions
     /// </summary>
     public virtual void Initialize(IDbContextOptions options)
     {
-        var coreOptions =
-            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptions = options.FindExtension<CoreOptionsExtension>()
+            ?? new CoreOptionsExtension();
 
         AreDetailedErrorsEnabled = coreOptions.DetailedErrorsEnabled;
         AreThreadSafetyChecksEnabled = coreOptions.ThreadSafetyChecksEnabled;
@@ -35,8 +35,8 @@ public class CoreSingletonOptions : ICoreSingletonOptions
     /// </summary>
     public virtual void Validate(IDbContextOptions options)
     {
-        var coreOptions =
-            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptions = options.FindExtension<CoreOptionsExtension>()
+            ?? new CoreOptionsExtension();
 
         if (AreDetailedErrorsEnabled != coreOptions.DetailedErrorsEnabled)
         {

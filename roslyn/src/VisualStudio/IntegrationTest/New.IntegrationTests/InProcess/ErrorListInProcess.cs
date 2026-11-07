@@ -157,8 +157,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         private static string GetMessage(ITableEntryHandle item)
         {
             var source = item.GetBuildTool();
-            var document =
-                Path.GetFileName(item.GetPath() ?? item.GetDocumentName()) ?? "<unknown>";
+            var document = Path.GetFileName(item.GetPath() ?? item.GetDocumentName())
+                ?? "<unknown>";
             var line = item.GetLine() ?? -1;
             var column = item.GetColumn() ?? -1;
             var errorCode = item.GetErrorCode() ?? "<unknown>";

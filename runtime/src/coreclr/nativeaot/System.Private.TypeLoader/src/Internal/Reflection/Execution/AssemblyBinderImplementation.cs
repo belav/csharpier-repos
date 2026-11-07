@@ -145,8 +145,7 @@ namespace Internal.Reflection.Execution
 
             if (!foundMatch)
             {
-                exception =
-                    preferredException
+                exception = preferredException
                     ?? new FileNotFoundException(
                         SR.Format(SR.FileNotFound_AssemblyNotFound, refName.FullName)
                     );

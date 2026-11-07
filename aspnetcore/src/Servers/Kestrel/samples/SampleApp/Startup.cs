@@ -88,8 +88,8 @@ public class Startup
                                 ShowConfig(context.Configuration);
                             }
 
-                            var basePort =
-                                context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
+                            var basePort = context.Configuration.GetValue<int?>("BASE_PORT")
+                                ?? 5000;
 
                             options.ConfigureHttpsDefaults(httpsOptions =>
                             {

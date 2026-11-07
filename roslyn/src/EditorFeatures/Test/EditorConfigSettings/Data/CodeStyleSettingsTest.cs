@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
             private readonly IDictionary<string, string> _dictionary;
 
             public TestAnalyzerConfigOptions((string, string)[]? options = null) =>
-                _dictionary =
-                    options?.ToDictionary(x => x.Item1, x => x.Item2)
+                _dictionary = options?.ToDictionary(x => x.Item1, x => x.Item2)
                     ?? new Dictionary<string, string>();
 
             public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>

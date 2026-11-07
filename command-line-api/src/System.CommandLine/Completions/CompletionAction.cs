@@ -26,8 +26,10 @@ internal sealed class CompletionAction : SynchronousCliAction
             ? int.Parse(parsedValues)
             : rawInput?.Length ?? 0;
 
-        var commandLineToComplete =
-            parseResult.Tokens.LastOrDefault(t => t.Type != CliTokenType.Directive)?.Value ?? "";
+        var commandLineToComplete = parseResult
+            .Tokens.LastOrDefault(t => t.Type != CliTokenType.Directive)
+            ?.Value
+            ?? "";
 
         var completionParseResult = parseResult.RootCommandResult.Command.Parse(
             commandLineToComplete,

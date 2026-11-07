@@ -716,8 +716,7 @@ namespace System.ServiceModel.MonoInternal
                     resb.CreateMessage(),
                     runtime.MaxFaultSize
                 );
-                var conv =
-                    OperationChannel.GetProperty<FaultConverter>()
+                var conv = OperationChannel.GetProperty<FaultConverter>()
                     ?? FaultConverter.GetDefaultFaultConverter(res.Version);
                 Exception ex;
                 if (!conv.TryCreateException(resb.CreateMessage(), fault, out ex))

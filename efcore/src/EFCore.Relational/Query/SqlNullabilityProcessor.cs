@@ -1038,8 +1038,8 @@ public class SqlNullabilityProcessor
                 // caching.
                 DoNotCache();
                 var typeMapping = inExpression.ValuesParameter.TypeMapping;
-                var values =
-                    (IEnumerable?)ParameterValues[valuesParameter.Name] ?? Array.Empty<object>();
+                var values = (IEnumerable?)ParameterValues[valuesParameter.Name]
+                    ?? Array.Empty<object>();
 
                 processedValues = new List<SqlExpression>();
 

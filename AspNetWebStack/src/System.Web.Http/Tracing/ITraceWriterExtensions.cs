@@ -872,8 +872,8 @@ namespace System.Web.Http.Tracing
             Action<TraceRecord> errorTrace
         )
         {
-            TraceLevel traceLevel =
-                TraceWriterExceptionMapper.GetMappedTraceLevel(exception) ?? TraceLevel.Error;
+            TraceLevel traceLevel = TraceWriterExceptionMapper.GetMappedTraceLevel(exception)
+                ?? TraceLevel.Error;
             traceWriter.Trace(request, category, traceLevel, (traceRecord) =>
             {
                 traceRecord.Kind = TraceKind.End;

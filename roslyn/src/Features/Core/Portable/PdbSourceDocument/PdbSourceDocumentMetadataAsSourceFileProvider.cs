@@ -348,15 +348,14 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // have to make sure to look it up again.
             var navigateDocument = navigateProject.GetDocument(navigateLocation.SourceTree);
             Contract.ThrowIfNull(navigateDocument);
-            var sourceDescription =
-                sourceFileInfos
-                    .FirstOrDefault(sfi =>
-                        sfi!.FilePath?.Equals(
-                            navigateDocument.FilePath,
-                            StringComparison.OrdinalIgnoreCase
-                        ) ?? false
-                    )
-                    ?.SourceDescription
+            var sourceDescription = sourceFileInfos
+                .FirstOrDefault(sfi =>
+                    sfi!.FilePath?.Equals(
+                        navigateDocument.FilePath,
+                        StringComparison.OrdinalIgnoreCase
+                    ) ?? false
+                )
+                ?.SourceDescription
                 ?? FeaturesResources.from_metadata;
 
             var documentName = string.Format("{0} [{1}]", navigateDocument.Name, sourceDescription);

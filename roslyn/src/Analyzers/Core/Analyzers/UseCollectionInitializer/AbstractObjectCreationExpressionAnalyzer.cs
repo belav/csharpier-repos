@@ -107,14 +107,13 @@ internal abstract class AbstractObjectCreationExpressionAnalyzer<
         var statement = rootExpression.FirstAncestorOrSelf<TStatementSyntax>()!;
         if (statement != null)
         {
-            var result =
-                TryInitializeVariableDeclarationCase(
-                    semanticModel,
-                    syntaxFacts,
-                    rootExpression,
-                    statement,
-                    cancellationToken
-                )
+            var result = TryInitializeVariableDeclarationCase(
+                semanticModel,
+                syntaxFacts,
+                rootExpression,
+                statement,
+                cancellationToken
+            )
                 ?? TryInitializeAssignmentCase(
                     semanticModel,
                     syntaxFacts,

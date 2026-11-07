@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
             public override object GetOptions(CancellationToken cancellationToken)
             {
-                var service =
-                    _service._pickMembersService_forTesting
+                var service = _service._pickMembersService_forTesting
                     ?? _document.Project.Solution.Services.GetRequiredService<IPickMembersService>();
 
                 return service.PickMembers(

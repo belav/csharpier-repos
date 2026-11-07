@@ -55,8 +55,8 @@ public sealed class FileBufferingWriteStream : Stream
 
         _memoryThreshold = memoryThreshold;
         _bufferLimit = bufferLimit;
-        _tempFileDirectoryAccessor =
-            tempFileDirectoryAccessor ?? AspNetCoreTempDirectory.TempDirectoryFactory;
+        _tempFileDirectoryAccessor = tempFileDirectoryAccessor
+            ?? AspNetCoreTempDirectory.TempDirectoryFactory;
         PagedByteBuffer = new PagedByteBuffer(ArrayPool<byte>.Shared);
     }
 

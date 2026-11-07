@@ -268,8 +268,8 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected =
-                    Volatile.Read(ref _isStdInRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected = Volatile.Read(ref _isStdInRedirected)
+                    ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
@@ -287,8 +287,8 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected =
-                    Volatile.Read(ref _isStdOutRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected = Volatile.Read(ref _isStdOutRedirected)
+                    ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
@@ -306,8 +306,8 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected =
-                    Volatile.Read(ref _isStdErrRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected = Volatile.Read(ref _isStdErrRedirected)
+                    ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()

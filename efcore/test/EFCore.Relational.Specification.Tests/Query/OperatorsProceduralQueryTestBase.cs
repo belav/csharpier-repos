@@ -319,8 +319,7 @@ public abstract class OperatorsProceduralQueryTestBase : NonSharedModelTestBase
             .ToList();
 
         var currentDepth = 0;
-        var currentResultType =
-            startingResultType
+        var currentResultType = startingResultType
             ?? distinctTypesWithNesting[random.Next(distinctTypesWithNesting.Count)];
 
         var testExpression = MainLoop(

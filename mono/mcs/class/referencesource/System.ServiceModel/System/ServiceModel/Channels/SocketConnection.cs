@@ -752,8 +752,8 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    remoteIPEndpoint =
-                        this.remoteEndpoint ?? (IPEndPoint)this.socket.RemoteEndPoint;
+                    remoteIPEndpoint = this.remoteEndpoint
+                        ?? (IPEndPoint)this.socket.RemoteEndPoint;
                     localIPEndpoint = (IPEndPoint)this.socket.LocalEndPoint;
                 }
                 catch (Exception exception)

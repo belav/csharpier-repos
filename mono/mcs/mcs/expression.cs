@@ -3982,25 +3982,23 @@ namespace Mono.CSharp
             {
                 if (left != null)
                 {
-                    b.left =
-                        Convert.UserDefinedConversion(
-                            ec,
-                            b.left,
-                            left,
-                            Convert.UserConversionRestriction.ImplicitOnly,
-                            b.loc
-                        ) ?? EmptyCast.Create(b.left, left);
+                    b.left = Convert.UserDefinedConversion(
+                        ec,
+                        b.left,
+                        left,
+                        Convert.UserConversionRestriction.ImplicitOnly,
+                        b.loc
+                    ) ?? EmptyCast.Create(b.left, left);
                 }
                 else if (right != null)
                 {
-                    b.right =
-                        Convert.UserDefinedConversion(
-                            ec,
-                            b.right,
-                            right,
-                            Convert.UserConversionRestriction.ImplicitOnly,
-                            b.loc
-                        ) ?? EmptyCast.Create(b.right, right);
+                    b.right = Convert.UserDefinedConversion(
+                        ec,
+                        b.right,
+                        right,
+                        Convert.UserConversionRestriction.ImplicitOnly,
+                        b.loc
+                    ) ?? EmptyCast.Create(b.right, right);
                 }
 
                 TypeSpec r_type = ReturnType;

@@ -166,14 +166,13 @@ namespace System.Linq.Expressions
             ArgumentNullException.ThrowIfNull(fieldName);
 
             // bind to public names first
-            FieldInfo? fi =
-                expression.Type.GetField(
-                    fieldName,
-                    BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                )
+            FieldInfo? fi = expression.Type.GetField(
+                fieldName,
+                BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.IgnoreCase
+                    | BindingFlags.FlattenHierarchy
+            )
                 ?? expression.Type.GetField(
                     fieldName,
                     BindingFlags.Instance
@@ -209,15 +208,14 @@ namespace System.Linq.Expressions
             ArgumentNullException.ThrowIfNull(fieldName);
 
             // bind to public names first
-            FieldInfo? fi =
-                type.GetField(
-                    fieldName,
-                    BindingFlags.Static
-                        | BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                )
+            FieldInfo? fi = type.GetField(
+                fieldName,
+                BindingFlags.Static
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.IgnoreCase
+                    | BindingFlags.FlattenHierarchy
+            )
                 ?? type.GetField(
                     fieldName,
                     BindingFlags.Static
@@ -250,14 +248,13 @@ namespace System.Linq.Expressions
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             ArgumentNullException.ThrowIfNull(propertyName);
             // bind to public names first
-            PropertyInfo? pi =
-                expression.Type.GetProperty(
-                    propertyName,
-                    BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                )
+            PropertyInfo? pi = expression.Type.GetProperty(
+                propertyName,
+                BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.IgnoreCase
+                    | BindingFlags.FlattenHierarchy
+            )
                 ?? expression.Type.GetProperty(
                     propertyName,
                     BindingFlags.Instance
@@ -296,15 +293,14 @@ namespace System.Linq.Expressions
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(propertyName);
             // bind to public names first
-            PropertyInfo? pi =
-                type.GetProperty(
-                    propertyName,
-                    BindingFlags.Instance
-                        | BindingFlags.Static
-                        | BindingFlags.Public
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                )
+            PropertyInfo? pi = type.GetProperty(
+                propertyName,
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.IgnoreCase
+                    | BindingFlags.FlattenHierarchy
+            )
                 ?? type.GetProperty(
                     propertyName,
                     BindingFlags.Static

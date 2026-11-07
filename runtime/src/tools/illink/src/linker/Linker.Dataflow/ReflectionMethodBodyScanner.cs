@@ -497,8 +497,7 @@ namespace Mono.Linker.Dataflow
             // didn't set the return value (and the method has a return value), we will set it to be an
             // unknown value with the return type of the method.
             bool returnsVoid = calledMethod.ReturnsVoid();
-            methodReturnValue =
-                maybeMethodReturnValue
+            methodReturnValue = maybeMethodReturnValue
                 ?? (returnsVoid ? MultiValueLattice.Top : annotatedMethodReturnValue);
 
             // Validate that the return value has the correct annotations as per the method return value annotations

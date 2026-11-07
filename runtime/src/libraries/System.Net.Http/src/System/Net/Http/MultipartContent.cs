@@ -322,8 +322,7 @@ namespace System.Net.Http
                     Stream readStream;
                     if (async)
                     {
-                        readStream =
-                            nestedContent.TryReadAsStream()
+                        readStream = nestedContent.TryReadAsStream()
                             ?? await nestedContent
                                 .ReadAsStreamAsync(cancellationToken)
                                 .ConfigureAwait(false);
@@ -382,9 +381,10 @@ namespace System.Net.Http
                 KeyValuePair<string, HeaderStringValues> headerPair in content.Headers.NonValidated
             )
             {
-                Encoding headerValueEncoding =
-                    HeaderEncodingSelector?.Invoke(headerPair.Key, content)
-                    ?? HttpRuleParser.DefaultHttpEncoding;
+                Encoding headerValueEncoding = HeaderEncodingSelector?.Invoke(
+                    headerPair.Key,
+                    content
+                ) ?? HttpRuleParser.DefaultHttpEncoding;
 
                 WriteToStream(stream, headerPair.Key);
                 WriteToStream(stream, ": ");
@@ -454,9 +454,10 @@ namespace System.Net.Http
                 {
                     currentLength += headerPair.Key.Length + ColonSpaceLength;
 
-                    Encoding headerValueEncoding =
-                        HeaderEncodingSelector?.Invoke(headerPair.Key, content)
-                        ?? HttpRuleParser.DefaultHttpEncoding;
+                    Encoding headerValueEncoding = HeaderEncodingSelector?.Invoke(
+                        headerPair.Key,
+                        content
+                    ) ?? HttpRuleParser.DefaultHttpEncoding;
 
                     int valueCount = 0;
                     foreach (string value in headerPair.Value)

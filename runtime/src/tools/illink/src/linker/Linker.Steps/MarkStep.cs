@@ -1383,8 +1383,8 @@ namespace Mono.Linker.Steps
             TypeDefinition? td;
             if (args.Count >= 2 && args[1].Value is string typeName)
             {
-                AssemblyDefinition assemblyDef =
-                    assembly ?? ((MemberReference)context).Module.Assembly;
+                AssemblyDefinition assemblyDef = assembly
+                    ?? ((MemberReference)context).Module.Assembly;
                 td = Context.TryResolve(assemblyDef, typeName);
 
                 if (td == null)
@@ -4803,8 +4803,7 @@ namespace Mono.Linker.Steps
                 reason,
                 ScopeStack.CurrentScope.Origin
             );
-            Context.MarkedKnownMembers.NotSupportedExceptionCtorString =
-                nseCtor
+            Context.MarkedKnownMembers.NotSupportedExceptionCtorString = nseCtor
                 ?? throw new LinkerFatalErrorException(
                     MessageContainer.CreateErrorMessage(
                         null,
@@ -4825,8 +4824,7 @@ namespace Mono.Linker.Steps
                 reason,
                 ScopeStack.CurrentScope.Origin
             );
-            Context.MarkedKnownMembers.ObjectCtor =
-                objectCtor
+            Context.MarkedKnownMembers.ObjectCtor = objectCtor
                 ?? throw new LinkerFatalErrorException(
                     MessageContainer.CreateErrorMessage(
                         null,
@@ -4870,8 +4868,7 @@ namespace Mono.Linker.Steps
                     ),
                     ScopeStack.CurrentScope.Origin
                 );
-                Context.MarkedKnownMembers.DisablePrivateReflectionAttributeCtor =
-                    ctor
+                Context.MarkedKnownMembers.DisablePrivateReflectionAttributeCtor = ctor
                     ?? throw new LinkerFatalErrorException(
                         MessageContainer.CreateErrorMessage(
                             null,

@@ -41,8 +41,10 @@ namespace Microsoft.CodeAnalysis
                     ? contextualSymbol
                     : null;
 
-                var contextualProperties =
-                    contextualSymbol?.GetMembers().OfType<IPropertySymbol>().ToImmutableArray()
+                var contextualProperties = contextualSymbol
+                    ?.GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .ToImmutableArray()
                     ?? ImmutableArray<IPropertySymbol>.Empty;
 
                 using var propertyTypes = reader.ReadSymbolKeyArray<INamedTypeSymbol, ITypeSymbol>(

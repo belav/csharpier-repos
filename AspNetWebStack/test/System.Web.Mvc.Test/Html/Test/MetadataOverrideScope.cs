@@ -144,8 +144,7 @@ namespace System.Web.Mvc.Html.Test
             }
             else if (annotationsMetadata != null)
             {
-                var provider =
-                    (_oldMetadataProvider as DataAnnotationsModelMetadataProvider)
+                var provider = (_oldMetadataProvider as DataAnnotationsModelMetadataProvider)
                     ?? AnnotationsProvider;
                 clonedMetadata = new DataAnnotationsModelMetadata(
                     provider,

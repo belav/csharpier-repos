@@ -61,8 +61,8 @@ namespace System.CommandLine.Hosting
         )
         {
             var argsRemaining = parseResult.UnmatchedTokens;
-            var hostBuilder =
-                _hostBuilderFactory?.Invoke(argsRemaining.ToArray()) ?? new HostBuilder();
+            var hostBuilder = _hostBuilderFactory?.Invoke(argsRemaining.ToArray())
+                ?? new HostBuilder();
             hostBuilder.Properties[typeof(ParseResult)] = parseResult;
 
             if (

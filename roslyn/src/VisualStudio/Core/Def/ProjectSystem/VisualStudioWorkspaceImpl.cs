@@ -447,8 +447,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             bool CanApplyChange(DocumentId documentId)
             {
-                var document =
-                    newSolution.GetDocument(documentId) ?? currentSolution.GetDocument(documentId);
+                var document = newSolution.GetDocument(documentId)
+                    ?? currentSolution.GetDocument(documentId);
                 if (document == null)
                 {
                     // we can have null if documentId is for additional files
@@ -916,8 +916,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             var documentTrackingService =
                 this.Services.GetRequiredService<IDocumentTrackingService>();
-            var documentId =
-                documentTrackingService.TryGetActiveDocument()
+            var documentId = documentTrackingService.TryGetActiveDocument()
                 ?? documentTrackingService.GetVisibleDocuments().FirstOrDefault();
             if (documentId != null)
             {

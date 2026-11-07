@@ -39,8 +39,8 @@ internal class TestHistoryManager
         var projectUri = options.ProjectUri ?? GetEnvironmentVariable("SYSTEM_COLLECTIONURI");
 
         // Id of the pipeline to get test history from.
-        var pipelineDefinitionIdStr =
-            options.PipelineDefinitionId ?? GetEnvironmentVariable("SYSTEM_DEFINITIONID");
+        var pipelineDefinitionIdStr = options.PipelineDefinitionId
+            ?? GetEnvironmentVariable("SYSTEM_DEFINITIONID");
 
         // The phase name is used to filter the tests on the last passing build to only those that apply to the currently running phase.
         //   Note here that 'phaseName' corresponds to the 'jobName' defined in our pipeline yaml file and the job name env var is not correct.
@@ -48,8 +48,7 @@ internal class TestHistoryManager
         var phaseName = options.PhaseName ?? GetEnvironmentVariable("SYSTEM_PHASENAME");
 
         // We use the target branch of the current build to lookup the last successful build for the same branch.
-        var targetBranch =
-            options.TargetBranchName
+        var targetBranch = options.TargetBranchName
             ?? GetEnvironmentVariable("SYSTEM_PULLREQUEST_TARGETBRANCH")
             ?? GetEnvironmentVariable("BUILD_SOURCEBRANCHNAME");
         if (

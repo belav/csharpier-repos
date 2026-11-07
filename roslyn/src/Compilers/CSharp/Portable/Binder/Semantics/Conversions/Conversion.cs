@@ -1085,8 +1085,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                var conversionResult =
-                    (_uncommonData as MethodUncommonData)?._conversionResult
+                var conversionResult = (_uncommonData as MethodUncommonData)?._conversionResult
                     ?? default(UserDefinedConversionResult);
 
                 switch (conversionResult.Kind)

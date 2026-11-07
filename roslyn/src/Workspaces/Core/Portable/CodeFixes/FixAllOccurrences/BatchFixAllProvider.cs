@@ -227,9 +227,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             );
 
                             // Wait for the all the code actions to be reported for this diagnostic.
-                            var registerTask =
-                                fixAllContext.CodeFixProvider.RegisterCodeFixesAsync(context)
-                                ?? Task.CompletedTask;
+                            var registerTask = fixAllContext.CodeFixProvider.RegisterCodeFixesAsync(
+                                context
+                            ) ?? Task.CompletedTask;
                             await registerTask.ConfigureAwait(false);
 
                             // Now, process each code action and find out all the document changes caused by it.

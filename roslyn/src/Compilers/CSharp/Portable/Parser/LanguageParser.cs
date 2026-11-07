@@ -8363,8 +8363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         while (true)
                         {
-                            lastTokenOfType =
-                                TryEatToken(SyntaxKind.IdentifierToken) ?? lastTokenOfType;
+                            lastTokenOfType = TryEatToken(SyntaxKind.IdentifierToken)
+                                ?? lastTokenOfType;
 
                             if (skipBadFunctionPointerTokens() == PostSkipAction.Abort)
                             {
@@ -8375,8 +8375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             lastTokenOfType = EatToken();
                         }
 
-                        lastTokenOfType =
-                            TryEatToken(SyntaxKind.CloseBracketToken) ?? lastTokenOfType;
+                        lastTokenOfType = TryEatToken(SyntaxKind.CloseBracketToken)
+                            ?? lastTokenOfType;
                     }
                     finally
                     {

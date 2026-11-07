@@ -768,8 +768,7 @@ namespace System.Xml.Serialization
                 return;
 
             // Collectible types should be in the same collectible context
-            var baseALC =
-                AssemblyLoadContext.GetLoadContext(assembly)
+            var baseALC = AssemblyLoadContext.GetLoadContext(assembly)
                 ?? AssemblyLoadContext.CurrentContextualReflectionContext;
             if (typeALC != baseALC)
                 throw new InvalidOperationException(

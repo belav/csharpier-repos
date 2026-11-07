@@ -1158,8 +1158,7 @@ namespace Mono.Linker
 
             if (typeof(IStep).IsAssignableFrom(stepType))
             {
-                var customStep =
-                    (IStep?)Activator.CreateInstance(stepType)
+                var customStep = (IStep?)Activator.CreateInstance(stepType)
                     ?? throw new InvalidOperationException();
                 if (targetName == null)
                 {
@@ -1184,8 +1183,7 @@ namespace Mono.Linker
 
             if (typeof(IMarkHandler).IsAssignableFrom(stepType))
             {
-                var customStep =
-                    (IMarkHandler?)Activator.CreateInstance(stepType)
+                var customStep = (IMarkHandler?)Activator.CreateInstance(stepType)
                     ?? throw new InvalidOperationException();
                 if (targetName == null)
                 {

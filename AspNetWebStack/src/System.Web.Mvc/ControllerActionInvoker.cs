@@ -87,8 +87,7 @@ namespace System.Web.Mvc
                 return new EmptyResult();
             }
 
-            ActionResult actionResult =
-                (actionReturnValue as ActionResult)
+            ActionResult actionResult = (actionReturnValue as ActionResult)
                 ?? new ContentResult
                 {
                     Content = Convert.ToString(actionReturnValue, CultureInfo.InvariantCulture),
@@ -237,8 +236,8 @@ namespace System.Web.Mvc
             Type parameterType = parameterDescriptor.ParameterType;
             IModelBinder binder = GetModelBinder(parameterDescriptor);
             IValueProvider valueProvider = controllerContext.Controller.ValueProvider;
-            string parameterName =
-                parameterDescriptor.BindingInfo.Prefix ?? parameterDescriptor.ParameterName;
+            string parameterName = parameterDescriptor.BindingInfo.Prefix
+                ?? parameterDescriptor.ParameterName;
             Predicate<string> propertyFilter = GetPropertyFilter(parameterDescriptor);
 
             // finally, call into the binder

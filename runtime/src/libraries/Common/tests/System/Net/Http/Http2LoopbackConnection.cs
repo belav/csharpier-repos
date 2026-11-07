@@ -80,8 +80,8 @@ namespace System.Net.Test.Common
                 );
 
                 using (
-                    X509Certificate2 cert =
-                        httpOptions.Certificate ?? Configuration.Certificates.GetServerCertificate()
+                    X509Certificate2 cert = httpOptions.Certificate
+                        ?? Configuration.Certificates.GetServerCertificate()
                 )
                 {
 #if !NETFRAMEWORK

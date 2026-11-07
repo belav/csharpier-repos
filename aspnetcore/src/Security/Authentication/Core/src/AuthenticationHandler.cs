@@ -224,8 +224,9 @@ public abstract class AuthenticationHandler<TOptions> : IAuthenticationHandler
     /// <returns>The forwarded scheme or <see langword="null"/>.</returns>
     protected virtual string? ResolveTarget(string? scheme)
     {
-        var target =
-            scheme ?? Options.ForwardDefaultSelector?.Invoke(Context) ?? Options.ForwardDefault;
+        var target = scheme
+            ?? Options.ForwardDefaultSelector?.Invoke(Context)
+            ?? Options.ForwardDefault;
 
         // Prevent self targetting
         return string.Equals(target, Scheme.Name, StringComparison.Ordinal) ? null : target;

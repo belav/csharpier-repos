@@ -265,8 +265,8 @@ public class RelationalModelValidator : ModelValidator
         var storedProcedures = new Dictionary<StoreObjectIdentifier, List<IEntityType>>();
         foreach (var entityType in model.GetEntityTypes())
         {
-            var mappingStrategy =
-                entityType.GetMappingStrategy() ?? RelationalAnnotationNames.TphMappingStrategy;
+            var mappingStrategy = entityType.GetMappingStrategy()
+                ?? RelationalAnnotationNames.TphMappingStrategy;
 
             var sprocCount = 0;
             var deleteStoredProcedure = entityType.GetDeleteStoredProcedure();
@@ -1704,8 +1704,8 @@ public class RelationalModelValidator : ModelValidator
 
         var typeMapping = property.GetRelationalTypeMapping();
         var duplicateTypeMapping = duplicateProperty.GetRelationalTypeMapping();
-        var currentProviderType =
-            typeMapping.Converter?.ProviderClrType.UnwrapNullableType() ?? typeMapping.ClrType;
+        var currentProviderType = typeMapping.Converter?.ProviderClrType.UnwrapNullableType()
+            ?? typeMapping.ClrType;
         var previousProviderType =
             duplicateTypeMapping.Converter?.ProviderClrType.UnwrapNullableType()
             ?? duplicateTypeMapping.ClrType;
@@ -2204,8 +2204,7 @@ public class RelationalModelValidator : ModelValidator
             if (mappingStrategy != null)
             {
                 ValidateMappingStrategy(entityType, mappingStrategy);
-                var storeObject =
-                    entityType.GetSchemaQualifiedTableName()
+                var storeObject = entityType.GetSchemaQualifiedTableName()
                     ?? entityType.GetSchemaQualifiedViewName()
                     ?? entityType.GetFunctionName()
                     ?? entityType.GetSqlQuery()
@@ -3151,8 +3150,7 @@ public class RelationalModelValidator : ModelValidator
             foreach (var jsonEntityType in mappedTypes.Where(x => x.IsMappedToJson()))
             {
                 var ownership = jsonEntityType.FindOwnership()!;
-                var ownerTableOrViewName =
-                    ownership.PrincipalEntityType.GetViewName()
+                var ownerTableOrViewName = ownership.PrincipalEntityType.GetViewName()
                     ?? ownership.PrincipalEntityType.GetTableName();
                 if (table.Name != ownerTableOrViewName)
                 {
@@ -3269,8 +3267,7 @@ public class RelationalModelValidator : ModelValidator
             }
 
             var ownership = jsonEntityType.FindOwnership()!;
-            var ownerTableOrViewName =
-                ownership.PrincipalEntityType.GetViewName()
+            var ownerTableOrViewName = ownership.PrincipalEntityType.GetViewName()
                 ?? ownership.PrincipalEntityType.GetTableName();
             if (viewName != ownerTableOrViewName)
             {

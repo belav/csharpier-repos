@@ -23,8 +23,8 @@ internal sealed class StaticContentProvider
     {
         _fileProvider = fileProvider ?? throw new ArgumentNullException(nameof(fileProvider));
         _appBaseUri = appBaseUri ?? throw new ArgumentNullException(nameof(appBaseUri));
-        _hostPageRelativePath =
-            hostPageRelativePath ?? throw new ArgumentNullException(nameof(hostPageRelativePath));
+        _hostPageRelativePath = hostPageRelativePath
+            ?? throw new ArgumentNullException(nameof(hostPageRelativePath));
     }
 
     public bool TryGetResponseContent(

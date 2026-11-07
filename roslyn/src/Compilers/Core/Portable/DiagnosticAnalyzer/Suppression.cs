@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private Suppression(SuppressionDescriptor descriptor, Diagnostic suppressedDiagnostic)
         {
             Descriptor = descriptor ?? throw new ArgumentNullException(nameof(descriptor));
-            SuppressedDiagnostic =
-                suppressedDiagnostic
+            SuppressedDiagnostic = suppressedDiagnostic
                 ?? throw new ArgumentNullException(nameof(suppressedDiagnostic));
             Debug.Assert(suppressedDiagnostic.ProgrammaticSuppressionInfo == null);
 

@@ -576,8 +576,7 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                     {
                         // Note that for stored procedures we always need to send all parameters, regardless of whether the property
                         // actually changed.
-                        writeValue =
-                            columnPropagator?.TryPropagate(columnMapping, entry)
+                        writeValue = columnPropagator?.TryPropagate(columnMapping, entry)
                             ?? (
                                 entry.EntityState == EntityState.Added
                                 || entry.EntityState == EntityState.Deleted
@@ -996,8 +995,7 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
         else
         {
             var jsonValueReaderWriter = mapping.JsonValueReaderWriter;
-            value =
-                jsonValueReaderWriter?.ToJsonString(value)[1..^1] // The JSON string contains enclosing quotes, remove these.
+            value = jsonValueReaderWriter?.ToJsonString(value)[1..^1] // The JSON string contains enclosing quotes, remove these.
                 ?? (mapping.Converter == null ? value : mapping.Converter.ConvertToProvider(value));
 
             parameters = parameters with { Value = value };

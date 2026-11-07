@@ -43,8 +43,7 @@ public class FakeCommandExecutor
 
         _executeScalarAsync = executeScalarAsync ?? ((c, ct) => Task.FromResult<object>(null));
 
-        _executeReaderAsync =
-            executeReaderAsync
+        _executeReaderAsync = executeReaderAsync
             ?? ((c, ct, b) => Task.FromResult<DbDataReader>(new FakeDbDataReader()));
     }
 

@@ -29,8 +29,8 @@ namespace System.Data.Common.Utils.Boolean
 
         internal Converter(BoolExpr<T_Identifier> expr, ConversionContext<T_Identifier> context)
         {
-            _context =
-                context ?? IdentifierService<T_Identifier>.Instance.CreateConversionContext();
+            _context = context
+                ?? IdentifierService<T_Identifier>.Instance.CreateConversionContext();
             _vertex = ToDecisionDiagramConverter<T_Identifier>.TranslateToRobdd(expr, _context);
         }
 

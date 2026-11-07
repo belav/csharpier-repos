@@ -53,8 +53,7 @@ namespace Microsoft.CodeAnalysis
                 _severity = severity;
                 _warningLevel = warningLevel;
                 _location = location ?? Location.None;
-                _additionalLocations =
-                    additionalLocations?.ToImmutableArray()
+                _additionalLocations = additionalLocations?.ToImmutableArray()
                     ?? SpecializedCollections.EmptyReadOnlyList<Location>();
                 _messageArgs = messageArgs ?? Array.Empty<object?>();
                 _properties = properties ?? ImmutableDictionary<string, string?>.Empty;
