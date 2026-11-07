@@ -30,7 +30,8 @@ namespace System.Net.Http.Headers
     // - HttpGeneralHeaders:
     //   - Property TransferEncoding: has three values "gzip", "custom", and "chunked"
     //   - Property TransferEncodingChunked: is set to "true".
-    public sealed class HttpHeaderValueCollection<T> : ICollection<T> where T : class
+    public sealed class HttpHeaderValueCollection<T> : ICollection<T>
+        where T : class
     {
         private readonly HeaderDescriptor _descriptor;
         private readonly HttpHeaders _store;
@@ -135,8 +136,9 @@ namespace System.Net.Http.Headers
         public IEnumerator<T> GetEnumerator()
         {
             object? storeValue = _store.GetParsedAndInvalidValues(_descriptor);
-            return storeValue is null || storeValue is HttpHeaders.InvalidValue ?
-                ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator() : // use singleton empty array enumerator
+            return storeValue is null || storeValue is HttpHeaders.InvalidValue
+                ? ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator()
+                : // use singleton empty array enumerator
                 Iterate(storeValue);
 
             static IEnumerator<T> Iterate(object storeValue)

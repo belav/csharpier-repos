@@ -14,23 +14,27 @@ namespace System.ServiceModel
         Ntlm,
         Windows,
         Certificate,
-        InheritedFromHost
+        InheritedFromHost,
     }
 
     static class HttpClientCredentialTypeHelper
     {
         internal static bool IsDefined(HttpClientCredentialType value)
         {
-            return (value == HttpClientCredentialType.None ||
-                value == HttpClientCredentialType.Basic ||
-                value == HttpClientCredentialType.Digest ||
-                value == HttpClientCredentialType.Ntlm ||
-                value == HttpClientCredentialType.Windows ||
-                value == HttpClientCredentialType.Certificate ||
-                value == HttpClientCredentialType.InheritedFromHost);
+            return (
+                value == HttpClientCredentialType.None
+                || value == HttpClientCredentialType.Basic
+                || value == HttpClientCredentialType.Digest
+                || value == HttpClientCredentialType.Ntlm
+                || value == HttpClientCredentialType.Windows
+                || value == HttpClientCredentialType.Certificate
+                || value == HttpClientCredentialType.InheritedFromHost
+            );
         }
 
-        internal static AuthenticationSchemes MapToAuthenticationScheme(HttpClientCredentialType clientCredentialType)
+        internal static AuthenticationSchemes MapToAuthenticationScheme(
+            HttpClientCredentialType clientCredentialType
+        )
         {
             AuthenticationSchemes result;
             switch (clientCredentialType)
@@ -57,12 +61,16 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported client credential type");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             return result;
         }
 
-        internal static HttpClientCredentialType MapToClientCredentialType(AuthenticationSchemes authenticationSchemes)
+        internal static HttpClientCredentialType MapToClientCredentialType(
+            AuthenticationSchemes authenticationSchemes
+        )
         {
             HttpClientCredentialType result;
             switch (authenticationSchemes)
@@ -84,7 +92,9 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported client AuthenticationScheme");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             return result;
         }

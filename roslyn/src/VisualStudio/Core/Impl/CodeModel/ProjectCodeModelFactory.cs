@@ -29,9 +29,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
     [Export(typeof(IProjectCodeModelFactory))]
     [Export(typeof(ProjectCodeModelFactory))]
-    internal sealed class ProjectCodeModelFactory : ForegroundThreadAffinitizedObject, IProjectCodeModelFactory
+    internal sealed class ProjectCodeModelFactory
+        : ForegroundThreadAffinitizedObject,
+            IProjectCodeModelFactory
     {
-        private readonly ConcurrentDictionary<ProjectId, ProjectCodeModel> _projectCodeModels = new ConcurrentDictionary<ProjectId, ProjectCodeModel>();
+        private readonly ConcurrentDictionary<ProjectId, ProjectCodeModel> _projectCodeModels =
+            new ConcurrentDictionary<ProjectId, ProjectCodeModel>();
 
         private readonly VisualStudioWorkspace _visualStudioWorkspace;
         private readonly IServiceProvider _serviceProvider;
@@ -48,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
             IGlobalOptionService globalOptions,
             IThreadingContext threadingContext,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
             : base(threadingContext, assertIsForeground: false)
         {
             _visualStudioWorkspace = visualStudioWorkspace;
@@ -68,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // single document down to one notification.
                 EqualityComparer<DocumentId>.Default,
                 Listener,
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
 
             _visualStudioWorkspace.WorkspaceChanged += OnWorkspaceChanged;
         }
@@ -76,23 +81,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         internal IAsynchronousOperationListener Listener { get; }
 
         private async ValueTask ProcessNextDocumentBatchAsync(
-            ImmutableSegmentedList<DocumentId> documentIds, CancellationToken cancellationToken)
+            ImmutableSegmentedList<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        )
         {
             // This logic preserves the previous behavior we had with IForegroundNotificationService.
-            // Specifically, we don't run on the UI thread for more than 15ms at a time.  And once we 
+            // Specifically, we don't run on the UI thread for more than 15ms at a time.  And once we
             // have, we wait 50ms before continuing.  These constants are just what we defined from
             // legacy, and otherwise have no special meaning.
             const int MaxTimeSlice = 15;
             var delayBetweenProcessing = DelayTimeSpan.NearImmediate;
 
-            Debug.Assert(!_threadingContext.JoinableTaskContext.IsOnMainThread, "The following context switch is not expected to cause runtime overhead.");
+            Debug.Assert(
+                !_threadingContext.JoinableTaskContext.IsOnMainThread,
+                "The following context switch is not expected to cause runtime overhead."
+            );
             await TaskScheduler.Default;
 
             // Ensure MEF services used by the code model are initially obtained on a background thread.
             // This code avoids allocations where possible.
             // https://github.com/dotnet/roslyn/issues/54159
             string? previousLanguage = null;
-            foreach (var (_, projectState) in _visualStudioWorkspace.CurrentSolution.State.ProjectStates)
+            foreach (
+                var (_, projectState) in _visualStudioWorkspace.CurrentSolution.State.ProjectStates
+            )
             {
                 if (projectState.Language == previousLanguage)
                 {
@@ -117,7 +129,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // of waiting time, and there's no user input that should take precedence.
                 if (stopwatch.Elapsed.Ticks > MaxTimeSlice || IsInputPending())
                 {
-                    await this.Listener.Delay(delayBetweenProcessing, cancellationToken).ConfigureAwait(true);
+                    await this
+                        .Listener.Delay(delayBetweenProcessing, cancellationToken)
+                        .ConfigureAwait(true);
                     stopwatch = SharedStopwatch.StartNew();
                 }
             }
@@ -138,7 +152,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 if (filename == null)
                     return;
 
-                if (!projectCodeModel.TryGetCachedFileCodeModel(filename, out var fileCodeModelHandle))
+                if (
+                    !projectCodeModel.TryGetCachedFileCodeModel(
+                        filename,
+                        out var fileCodeModelHandle
+                    )
+                )
                     return;
 
                 var codeModel = fileCodeModelHandle.Object;
@@ -187,12 +206,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
         }
 
-        public IProjectCodeModel CreateProjectCodeModel(ProjectId id, ICodeModelInstanceFactory codeModelInstanceFactory)
+        public IProjectCodeModel CreateProjectCodeModel(
+            ProjectId id,
+            ICodeModelInstanceFactory codeModelInstanceFactory
+        )
         {
-            var projectCodeModel = new ProjectCodeModel(_threadingContext, id, codeModelInstanceFactory, _visualStudioWorkspace, _serviceProvider, this);
+            var projectCodeModel = new ProjectCodeModel(
+                _threadingContext,
+                id,
+                codeModelInstanceFactory,
+                _visualStudioWorkspace,
+                _serviceProvider,
+                this
+            );
             if (!_projectCodeModels.TryAdd(id, projectCodeModel))
             {
-                throw new InvalidOperationException($"A {nameof(IProjectCodeModel)} has already been created for project with ID {id}");
+                throw new InvalidOperationException(
+                    $"A {nameof(IProjectCodeModel)} has already been created for project with ID {id}"
+                );
             }
 
             return projectCodeModel;
@@ -202,17 +233,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         {
             if (!_projectCodeModels.TryGetValue(id, out var projectCodeModel))
             {
-                throw new InvalidOperationException($"No {nameof(ProjectCodeModel)} exists for project with ID {id}");
+                throw new InvalidOperationException(
+                    $"No {nameof(ProjectCodeModel)} exists for project with ID {id}"
+                );
             }
 
             return projectCodeModel;
         }
 
-        public IEnumerable<ProjectCodeModel> GetAllProjectCodeModels()
-            => _projectCodeModels.Values;
+        public IEnumerable<ProjectCodeModel> GetAllProjectCodeModels() => _projectCodeModels.Values;
 
-        internal void OnProjectClosed(ProjectId projectId)
-            => _projectCodeModels.TryRemove(projectId, out _);
+        internal void OnProjectClosed(ProjectId projectId) =>
+            _projectCodeModels.TryRemove(projectId, out _);
 
         public ProjectCodeModel TryGetProjectCodeModel(ProjectId id)
         {
@@ -220,11 +252,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return projectCodeModel;
         }
 
-        public EnvDTE.FileCodeModel GetOrCreateFileCodeModel(ProjectId id, string filePath)
-            => GetProjectCodeModel(id).GetOrCreateFileCodeModel(filePath).Handle;
+        public EnvDTE.FileCodeModel GetOrCreateFileCodeModel(ProjectId id, string filePath) =>
+            GetProjectCodeModel(id).GetOrCreateFileCodeModel(filePath).Handle;
 
-        public EnvDTE.FileCodeModel CreateFileCodeModel(SourceGeneratedDocument sourceGeneratedDocument)
-            => GetProjectCodeModel(sourceGeneratedDocument.Project.Id).CreateFileCodeModel(sourceGeneratedDocument);
+        public EnvDTE.FileCodeModel CreateFileCodeModel(
+            SourceGeneratedDocument sourceGeneratedDocument
+        ) =>
+            GetProjectCodeModel(sourceGeneratedDocument.Project.Id)
+                .CreateFileCodeModel(sourceGeneratedDocument);
 
         public void ScheduleDeferredCleanupTask(Action<CancellationToken> a)
         {
@@ -232,7 +267,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 await _threadingContext.JoinableTaskFactory.StartOnIdle(
                     () => a(cancellationToken),
-                    VsTaskRunContext.UIThreadNormalPriority);
+                    VsTaskRunContext.UIThreadNormalPriority
+                );
             });
         }
     }

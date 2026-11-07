@@ -60,15 +60,12 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     [SupportedOSPlatform("browser")]
     public static void EndInvokeJS(string argsJson)
     {
-        WebAssemblyCallQueue.Schedule(
-            argsJson,
-            static argsJson =>
-            {
-                // This is not expected to throw, as it takes care of converting any unhandled user code
-                // exceptions into a failure on the Task that was returned when calling InvokeAsync.
-                DotNetDispatcher.EndInvokeJS(Instance, argsJson);
-            }
-        );
+        WebAssemblyCallQueue.Schedule(argsJson, static argsJson =>
+        {
+            // This is not expected to throw, as it takes care of converting any unhandled user code
+            // exceptions into a failure on the Task that was returned when calling InvokeAsync.
+            DotNetDispatcher.EndInvokeJS(Instance, argsJson);
+        });
     }
 
     [JSExport]
@@ -102,15 +99,12 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
             dotNetObjectId,
             callId
         );
-        WebAssemblyCallQueue.Schedule(
-            (callInfo, argsJson),
-            static state =>
-            {
-                // This is not expected to throw, as it takes care of converting any unhandled user code
-                // exceptions into a failure on the JS Promise object.
-                DotNetDispatcher.BeginInvokeDotNet(Instance, state.callInfo, state.argsJson);
-            }
-        );
+        WebAssemblyCallQueue.Schedule((callInfo, argsJson), static state =>
+        {
+            // This is not expected to throw, as it takes care of converting any unhandled user code
+            // exceptions into a failure on the JS Promise object.
+            DotNetDispatcher.BeginInvokeDotNet(Instance, state.callInfo, state.argsJson);
+        });
     }
 
     [SupportedOSPlatform("browser")]

@@ -1,28 +1,31 @@
 using System;
 
-[assembly:CLSCompliant(true)]
+[assembly: CLSCompliant(true)]
 
-namespace System {
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal sealed class MonoTODOAttribute : Attribute {
+namespace System
+{
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal sealed class MonoTODOAttribute : Attribute
+    {
+        string comment;
 
-		string comment;
-		
-		public MonoTODOAttribute ()
-		{
-		}
-	}
-
+        public MonoTODOAttribute() { }
+    }
 }
 
 namespace System.Web
 {
-	public partial class HttpBrowserCapabilities {
-
-		[MonoTODO] public Version A {
-			get { throw new Exception (); }
-		}
-	}
+    public partial class HttpBrowserCapabilities
+    {
+        [MonoTODO]
+        public Version A
+        {
+            get { throw new Exception(); }
+        }
+    }
 }
 
-class Test { public static void Main () { } }
+class Test
+{
+    public static void Main() { }
+}

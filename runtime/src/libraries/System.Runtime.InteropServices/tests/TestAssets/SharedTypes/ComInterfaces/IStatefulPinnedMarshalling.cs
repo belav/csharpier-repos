@@ -22,10 +22,24 @@ namespace SharedTypes.ComInterfaces
     [GeneratedComClass]
     internal partial class StatefulPinnedMarshalling : IStatefulPinnedMarshalling
     {
-        public void Method(StatefulPinnedType param) { param.I = 100; }
-        public void MethodIn(in StatefulPinnedType param) { param.I = 101; }
-        public void MethodOut(out StatefulPinnedType param) => param = new StatefulPinnedType() { I = 102 };
-        public void MethodRef(ref StatefulPinnedType param) { param = new StatefulPinnedType() { I = 103 }; }
+        public void Method(StatefulPinnedType param)
+        {
+            param.I = 100;
+        }
+
+        public void MethodIn(in StatefulPinnedType param)
+        {
+            param.I = 101;
+        }
+
+        public void MethodOut(out StatefulPinnedType param) =>
+            param = new StatefulPinnedType() { I = 102 };
+
+        public void MethodRef(ref StatefulPinnedType param)
+        {
+            param = new StatefulPinnedType() { I = 103 };
+        }
+
         public StatefulPinnedType Return() => new StatefulPinnedType() { I = 104 };
     }
 
@@ -40,18 +54,44 @@ namespace SharedTypes.ComInterfaces
         public int I;
     }
 
-    [CustomMarshaller(typeof(StatefulPinnedType), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
-    [CustomMarshaller(typeof(StatefulPinnedType), MarshalMode.UnmanagedToManagedOut, typeof(UnmanagedToManagedOut))]
-    [CustomMarshaller(typeof(StatefulPinnedType), MarshalMode.UnmanagedToManagedIn, typeof(UnmanagedToManagedIn))]
-    [CustomMarshaller(typeof(StatefulPinnedType), MarshalMode.ManagedToUnmanagedOut, typeof(ManagedToUnmanagedOut))]
-    [CustomMarshaller(typeof(StatefulPinnedType), MarshalMode.ManagedToUnmanagedRef, typeof(ManagedToUnmanagedRef))]
-    [CustomMarshaller(typeof(StatefulPinnedType), MarshalMode.UnmanagedToManagedRef, typeof(UnmanagedToManagedRef))]
-    internal unsafe static class StatefulPinnedTypeMarshaller
+    [CustomMarshaller(
+        typeof(StatefulPinnedType),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanagedIn)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulPinnedType),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(UnmanagedToManagedOut)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulPinnedType),
+        MarshalMode.UnmanagedToManagedIn,
+        typeof(UnmanagedToManagedIn)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulPinnedType),
+        MarshalMode.ManagedToUnmanagedOut,
+        typeof(ManagedToUnmanagedOut)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulPinnedType),
+        MarshalMode.ManagedToUnmanagedRef,
+        typeof(ManagedToUnmanagedRef)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulPinnedType),
+        MarshalMode.UnmanagedToManagedRef,
+        typeof(UnmanagedToManagedRef)
+    )]
+    internal static unsafe class StatefulPinnedTypeMarshaller
     {
         public ref struct ManagedToUnmanagedIn
         {
             static bool s_mustPin;
+
             public static void DisableNonPinnedPath() => s_mustPin = true;
+
             public static void EnableNonPinnedPath() => s_mustPin = false;
 
             StatefulPinnedType _managed;
@@ -91,7 +131,9 @@ namespace SharedTypes.ComInterfaces
                 }
 
                 if (s_mustPin)
-                    throw new InvalidOperationException("Expected to pin, but is instead converting with default ToUnmanaged.");
+                    throw new InvalidOperationException(
+                        "Expected to pin, but is instead converting with default ToUnmanaged."
+                    );
 
                 _ptr = Marshal.AllocHGlobal(sizeof(StatefulPinnedNative));
                 *(StatefulPinnedNative*)_ptr = new StatefulPinnedNative() { I = _managed.I };
@@ -142,6 +184,7 @@ namespace SharedTypes.ComInterfaces
         {
             StatefulPinnedNative* _unmanaged;
             bool _hasUnmanaged;
+
             public void FromUnmanaged(StatefulPinnedNative* unmanaged)
             {
                 _unmanaged = unmanaged;
@@ -155,9 +198,7 @@ namespace SharedTypes.ComInterfaces
                 return new StatefulPinnedType() { I = _unmanaged->I };
             }
 
-            public void Free()
-            {
-            }
+            public void Free() { }
         }
 
         public struct UnmanagedToManagedOut
@@ -181,16 +222,14 @@ namespace SharedTypes.ComInterfaces
                 return (StatefulPinnedNative*)_ptr;
             }
 
-            public void Free()
-            {
-            }
+            public void Free() { }
         }
-
 
         public struct ManagedToUnmanagedRef
         {
             StatefulPinnedNative* _unmanaged;
             bool _hasUnmanaged;
+
             public void FromUnmanaged(StatefulPinnedNative* unmanaged)
             {
                 _unmanaged = unmanaged;
@@ -237,10 +276,12 @@ namespace SharedTypes.ComInterfaces
                 }
             }
         }
+
         public struct UnmanagedToManagedRef
         {
             StatefulPinnedNative* _unmanaged;
             bool _hasUnmanaged;
+
             public void FromUnmanaged(StatefulPinnedNative* unmanaged)
             {
                 _unmanaged = unmanaged;

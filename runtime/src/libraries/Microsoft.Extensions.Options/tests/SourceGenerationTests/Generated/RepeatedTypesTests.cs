@@ -12,15 +12,9 @@ public class RepeatedTypesTests
     [Fact]
     public void Invalid()
     {
-        var thirdModel = new ThirdModel
-        {
-            P5 = "1234",
-        };
+        var thirdModel = new ThirdModel { P5 = "1234" };
 
-        var secondModel = new SecondModel
-        {
-            P4 = thirdModel,
-        };
+        var secondModel = new SecondModel { P4 = thirdModel };
 
         var firstModel = new FirstModel
         {
@@ -38,15 +32,9 @@ public class RepeatedTypesTests
     [Fact]
     public void Valid()
     {
-        var thirdModel = new ThirdModel
-        {
-            P5 = "12345",
-        };
+        var thirdModel = new ThirdModel { P5 = "12345" };
 
-        var secondModel = new SecondModel
-        {
-            P4 = thirdModel,
-        };
+        var secondModel = new SecondModel { P4 = thirdModel };
 
         var firstModel = new FirstModel
         {
@@ -56,6 +44,9 @@ public class RepeatedTypesTests
         };
 
         var validator = new FirstValidator();
-        Assert.Equal(ValidateOptionsResult.Success, validator.Validate("RepeatedTypes", firstModel));
+        Assert.Equal(
+            ValidateOptionsResult.Success,
+            validator.Validate("RepeatedTypes", firstModel)
+        );
     }
 }

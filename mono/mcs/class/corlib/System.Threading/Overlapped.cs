@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,130 +37,130 @@ using System.Security.Permissions;
 
 namespace System.Threading
 {
-	[ComVisible (true)]
-	public class Overlapped
-	{
-		IAsyncResult ares;
-		int offsetL;
-		int offsetH;
-		int evt;
-		IntPtr evt_ptr;
+    [ComVisible(true)]
+    public class Overlapped
+    {
+        IAsyncResult ares;
+        int offsetL;
+        int offsetH;
+        int evt;
+        IntPtr evt_ptr;
 
-		public Overlapped ()
-		{
-		}
+        public Overlapped() { }
 
-		[Obsolete ("Not 64bit compatible.  Please use the constructor that takes IntPtr for the event handle")]
-		public Overlapped(int offsetLo, int offsetHi, int hEvent, IAsyncResult ar)
-		{
-			offsetL = offsetLo;
-			offsetH = offsetHi;
-			evt = hEvent;
-			ares = ar;
-		}
+        [Obsolete(
+            "Not 64bit compatible.  Please use the constructor that takes IntPtr for the event handle"
+        )]
+        public Overlapped(int offsetLo, int offsetHi, int hEvent, IAsyncResult ar)
+        {
+            offsetL = offsetLo;
+            offsetH = offsetHi;
+            evt = hEvent;
+            ares = ar;
+        }
 
-		public Overlapped (int offsetLo, int offsetHi, IntPtr hEvent,
-				   IAsyncResult ar)
-		{
-			offsetL = offsetLo;
-			offsetH = offsetHi;
-			evt_ptr = hEvent;
-			ares = ar;
-		}
+        public Overlapped(int offsetLo, int offsetHi, IntPtr hEvent, IAsyncResult ar)
+        {
+            offsetL = offsetLo;
+            offsetH = offsetHi;
+            evt_ptr = hEvent;
+            ares = ar;
+        }
 
-		[CLSCompliant(false)]
-		unsafe public static void Free (NativeOverlapped *nativeOverlappedPtr)
-		{
-			if ((IntPtr) nativeOverlappedPtr == IntPtr.Zero)
-				throw new ArgumentNullException ("nativeOverlappedPtr");
+        [CLSCompliant(false)]
+        public static unsafe void Free(NativeOverlapped* nativeOverlappedPtr)
+        {
+            if ((IntPtr)nativeOverlappedPtr == IntPtr.Zero)
+                throw new ArgumentNullException("nativeOverlappedPtr");
 
-			Marshal.FreeHGlobal ((IntPtr) nativeOverlappedPtr);
-		}
+            Marshal.FreeHGlobal((IntPtr)nativeOverlappedPtr);
+        }
 
-		[CLSCompliant(false)]
-		unsafe public static Overlapped Unpack (NativeOverlapped *nativeOverlappedPtr)
-		{
-			if ((IntPtr) nativeOverlappedPtr == IntPtr.Zero)
-				throw new ArgumentNullException ("nativeOverlappedPtr");
+        [CLSCompliant(false)]
+        public static unsafe Overlapped Unpack(NativeOverlapped* nativeOverlappedPtr)
+        {
+            if ((IntPtr)nativeOverlappedPtr == IntPtr.Zero)
+                throw new ArgumentNullException("nativeOverlappedPtr");
 
-			Overlapped result = new Overlapped ();
-			result.offsetL = nativeOverlappedPtr->OffsetLow;
-			result.offsetH = nativeOverlappedPtr->OffsetHigh;
-			result.evt = (int)nativeOverlappedPtr->EventHandle;
-			return result;
-		}
+            Overlapped result = new Overlapped();
+            result.offsetL = nativeOverlappedPtr->OffsetLow;
+            result.offsetH = nativeOverlappedPtr->OffsetHigh;
+            result.evt = (int)nativeOverlappedPtr->EventHandle;
+            return result;
+        }
 
-		[CLSCompliant(false)]
-		[Obsolete ("Use Pack(iocb, userData) instead")]
-		[MonoTODO ("Security - we need to propagate the call stack")]
-		unsafe public NativeOverlapped *Pack (IOCompletionCallback iocb)
-		{
-			NativeOverlapped *result = (NativeOverlapped *) Marshal.AllocHGlobal (Marshal.SizeOf (typeof (NativeOverlapped)));
-			result->OffsetLow = offsetL;
-			result->OffsetHigh = offsetH;
-			result->EventHandle = (IntPtr)evt;
-			return result;
-		}
+        [CLSCompliant(false)]
+        [Obsolete("Use Pack(iocb, userData) instead")]
+        [MonoTODO("Security - we need to propagate the call stack")]
+        public unsafe NativeOverlapped* Pack(IOCompletionCallback iocb)
+        {
+            NativeOverlapped* result = (NativeOverlapped*)
+                Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NativeOverlapped)));
+            result->OffsetLow = offsetL;
+            result->OffsetHigh = offsetH;
+            result->EventHandle = (IntPtr)evt;
+            return result;
+        }
 
-		[CLSCompliant (false)]
-		[ComVisible (false)]
-		[MonoTODO ("handle userData")]
-		unsafe public NativeOverlapped *Pack (IOCompletionCallback iocb, object userData)
-		{
-			NativeOverlapped *result = (NativeOverlapped *) Marshal.AllocHGlobal (Marshal.SizeOf(typeof(NativeOverlapped)));
-			result->OffsetLow = offsetL;
-			result->OffsetHigh = offsetH;
-			result->EventHandle = evt_ptr;
-			return(result);
-		}
-		
-		[CLSCompliant(false)]
-		[Obsolete ("Use UnsafePack(iocb, userData) instead")]
-		[SecurityPermission (SecurityAction.Demand, ControlEvidence=true, ControlPolicy=true)]
-		unsafe public NativeOverlapped *UnsafePack (IOCompletionCallback iocb)
-		{
-			// no need to propagate the call stack in the unsafe version
-			return Pack (iocb);
-		}
+        [CLSCompliant(false)]
+        [ComVisible(false)]
+        [MonoTODO("handle userData")]
+        public unsafe NativeOverlapped* Pack(IOCompletionCallback iocb, object userData)
+        {
+            NativeOverlapped* result = (NativeOverlapped*)
+                Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NativeOverlapped)));
+            result->OffsetLow = offsetL;
+            result->OffsetHigh = offsetH;
+            result->EventHandle = evt_ptr;
+            return (result);
+        }
 
-		[ComVisible (false)]
-		[CLSCompliant (false)]
-		unsafe public NativeOverlapped *UnsafePack (IOCompletionCallback iocb, object userData)
-		{
-			return Pack (iocb, userData);
-		}
+        [CLSCompliant(false)]
+        [Obsolete("Use UnsafePack(iocb, userData) instead")]
+        [SecurityPermission(SecurityAction.Demand, ControlEvidence = true, ControlPolicy = true)]
+        public unsafe NativeOverlapped* UnsafePack(IOCompletionCallback iocb)
+        {
+            // no need to propagate the call stack in the unsafe version
+            return Pack(iocb);
+        }
 
-		public IAsyncResult AsyncResult {
-			get { return ares; }
-			set { ares = value; }
-		}
+        [ComVisible(false)]
+        [CLSCompliant(false)]
+        public unsafe NativeOverlapped* UnsafePack(IOCompletionCallback iocb, object userData)
+        {
+            return Pack(iocb, userData);
+        }
 
-		[Obsolete ("Not 64bit compatible.  Use EventHandleIntPtr instead.")]
-		public int EventHandle {
-			get { return evt; }
-			set { evt = value; }
-		}
+        public IAsyncResult AsyncResult
+        {
+            get { return ares; }
+            set { ares = value; }
+        }
 
-		[ComVisible (false)]
-		public IntPtr EventHandleIntPtr 
-		{
-			get{
-				return(evt_ptr);
-			}
-			set{
-				evt_ptr = value;
-			}
-		}
+        [Obsolete("Not 64bit compatible.  Use EventHandleIntPtr instead.")]
+        public int EventHandle
+        {
+            get { return evt; }
+            set { evt = value; }
+        }
 
-		public int OffsetHigh {
-			get { return offsetH; }
-			set { offsetH = value; }
-		}
+        [ComVisible(false)]
+        public IntPtr EventHandleIntPtr
+        {
+            get { return (evt_ptr); }
+            set { evt_ptr = value; }
+        }
 
-		public int OffsetLow {
-			get { return offsetL; }
-			set { offsetL = value; }
-		}
-	}
+        public int OffsetHigh
+        {
+            get { return offsetH; }
+            set { offsetH = value; }
+        }
+
+        public int OffsetLow
+        {
+            get { return offsetL; }
+            set { offsetL = value; }
+        }
+    }
 }
-

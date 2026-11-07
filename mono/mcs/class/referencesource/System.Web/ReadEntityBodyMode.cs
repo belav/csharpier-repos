@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ReadEntityBodyMode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,13 +10,15 @@
  * Copyright (c) 2010 Microsoft Corporation
  */
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
-    
-    public enum ReadEntityBodyMode {
+
+    public enum ReadEntityBodyMode
+    {
         None,
         Classic, // BinaryRead, Form, Files, InputStream
         Bufferless, // GetBufferlessInputStream
-        Buffered // GetBufferedInputStream
+        Buffered, // GetBufferedInputStream
     }
 }

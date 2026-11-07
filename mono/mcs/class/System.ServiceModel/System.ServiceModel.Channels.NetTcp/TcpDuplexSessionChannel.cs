@@ -1,10 +1,10 @@
-﻿// 
+﻿//
 // TcpDuplexSessionChannel.cs
-// 
-// Author: 
+//
+// Author:
 //	Marcos Cobena (marcoscobena@gmail.com)
 //	Atsushi Enomoto  <atsushi@ximian.com>
-// 
+//
 // Copyright 2007 Marcos Cobena (http://www.youcannoteatbits.org/)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,201 +43,251 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels.NetTcp
 {
-	internal class TcpDuplexSessionChannel : DuplexChannelBase, IDuplexSessionChannel
-	{
-		class TcpDuplexSession : DuplexSessionBase
-		{
-			TcpDuplexSessionChannel owner;
+    internal class TcpDuplexSessionChannel : DuplexChannelBase, IDuplexSessionChannel
+    {
+        class TcpDuplexSession : DuplexSessionBase
+        {
+            TcpDuplexSessionChannel owner;
 
-			internal TcpDuplexSession (TcpDuplexSessionChannel owner)
-			{
-				this.owner = owner;
-			}
+            internal TcpDuplexSession(TcpDuplexSessionChannel owner)
+            {
+                this.owner = owner;
+            }
 
-			public override TimeSpan DefaultCloseTimeout {
-				get { return owner.DefaultCloseTimeout; }
-			}
+            public override TimeSpan DefaultCloseTimeout
+            {
+                get { return owner.DefaultCloseTimeout; }
+            }
 
-			public override void Close (TimeSpan timeout)
-			{
-				owner.DiscardSession ();
-			}
-		}
+            public override void Close(TimeSpan timeout)
+            {
+                owner.DiscardSession();
+            }
+        }
 
-		TcpChannelInfo info;
-		TcpClient client;
-		bool is_service_side;
-		TcpBinaryFrameManager frame;
-		TcpDuplexSession session; // do not use this directly. Use Session instead.
-		EndpointAddress counterpart_address;
-		
-		public TcpDuplexSessionChannel (ChannelFactoryBase factory, TcpChannelInfo info, EndpointAddress address, Uri via)
-			: base (factory, address, via)
-		{
-			is_service_side = false;
-			this.info = info;
+        TcpChannelInfo info;
+        TcpClient client;
+        bool is_service_side;
+        TcpBinaryFrameManager frame;
+        TcpDuplexSession session; // do not use this directly. Use Session instead.
+        EndpointAddress counterpart_address;
 
-			// make sure to acquire TcpClient here.
-			int explicitPort = Via.Port;
-			client = new TcpClient (Via.Host, explicitPort <= 0 ? TcpTransportBindingElement.DefaultPort : explicitPort);
-			counterpart_address = GetEndpointAddressFromTcpClient (client);
-		}
-		
-		public TcpDuplexSessionChannel (ChannelListenerBase listener, TcpChannelInfo info, TcpClient client)
-			: base (listener)
-		{
-			is_service_side = true;
-			this.client = client;
-			this.info = info;
-			counterpart_address = GetEndpointAddressFromTcpClient (client);
-		}
+        public TcpDuplexSessionChannel(
+            ChannelFactoryBase factory,
+            TcpChannelInfo info,
+            EndpointAddress address,
+            Uri via
+        )
+            : base(factory, address, via)
+        {
+            is_service_side = false;
+            this.info = info;
 
-		EndpointAddress GetEndpointAddressFromTcpClient (TcpClient client)
-		{
-			IPEndPoint ep = (IPEndPoint) client.Client.RemoteEndPoint;
-			return new EndpointAddress (new Uri ("net.tcp://" + ep));
-		}
+            // make sure to acquire TcpClient here.
+            int explicitPort = Via.Port;
+            client = new TcpClient(
+                Via.Host,
+                explicitPort <= 0 ? TcpTransportBindingElement.DefaultPort : explicitPort
+            );
+            counterpart_address = GetEndpointAddressFromTcpClient(client);
+        }
 
-		public MessageEncoder Encoder {
-			get { return info.MessageEncoder; }
-		}
+        public TcpDuplexSessionChannel(
+            ChannelListenerBase listener,
+            TcpChannelInfo info,
+            TcpClient client
+        )
+            : base(listener)
+        {
+            is_service_side = true;
+            this.client = client;
+            this.info = info;
+            counterpart_address = GetEndpointAddressFromTcpClient(client);
+        }
 
-		public override EndpointAddress RemoteAddress {
-			get { return base.RemoteAddress ?? counterpart_address; }
-		}
+        EndpointAddress GetEndpointAddressFromTcpClient(TcpClient client)
+        {
+            IPEndPoint ep = (IPEndPoint)client.Client.RemoteEndPoint;
+            return new EndpointAddress(new Uri("net.tcp://" + ep));
+        }
 
-		public override EndpointAddress LocalAddress {
-			get { return base.LocalAddress ?? counterpart_address; }
-		}
+        public MessageEncoder Encoder
+        {
+            get { return info.MessageEncoder; }
+        }
 
-		public IDuplexSession Session {
-			get {
-				if (session == null)
-					session = new TcpDuplexSession (this);
-				return session;
-			}
-		}
+        public override EndpointAddress RemoteAddress
+        {
+            get { return base.RemoteAddress ?? counterpart_address; }
+        }
 
-		internal TcpClient TcpClient {
-			get { return client; }
-		}
+        public override EndpointAddress LocalAddress
+        {
+            get { return base.LocalAddress ?? counterpart_address; }
+        }
 
-		void DiscardSession ()
-		{
-			if (client.Connected)
-				frame.WriteEndRecord ();
-			session = null;
-		}
+        public IDuplexSession Session
+        {
+            get
+            {
+                if (session == null)
+                    session = new TcpDuplexSession(this);
+                return session;
+            }
+        }
 
-		public override void Send (Message message)
-		{
-			Send (message, DefaultSendTimeout);
-		}
-		
-		public override void Send (Message message, TimeSpan timeout)
-		{
-			ThrowIfDisposedOrNotOpen ();
+        internal TcpClient TcpClient
+        {
+            get { return client; }
+        }
 
-			if (timeout <= TimeSpan.Zero)
-				throw new ArgumentException (String.Format ("Timeout value must be positive value. It was {0}", timeout));
+        void DiscardSession()
+        {
+            if (client.Connected)
+                frame.WriteEndRecord();
+            session = null;
+        }
 
-			if (!is_service_side) {
-				if (message.Headers.To == null)
-					message.Headers.To = RemoteAddress.Uri;
-			}
+        public override void Send(Message message)
+        {
+            Send(message, DefaultSendTimeout);
+        }
 
-			client.SendTimeout = (int) timeout.TotalMilliseconds;
+        public override void Send(Message message, TimeSpan timeout)
+        {
+            ThrowIfDisposedOrNotOpen();
 
-			Logger.LogMessage (MessageLogSourceKind.TransportSend, ref message, info.BindingElement.MaxReceivedMessageSize);
+            if (timeout <= TimeSpan.Zero)
+                throw new ArgumentException(
+                    String.Format("Timeout value must be positive value. It was {0}", timeout)
+                );
 
-			frame.WriteSizedMessage (message);
-		}
-		
-		public override bool TryReceive (TimeSpan timeout, out Message message)
-		{
-			ThrowIfDisposedOrNotOpen ();
+            if (!is_service_side)
+            {
+                if (message.Headers.To == null)
+                    message.Headers.To = RemoteAddress.Uri;
+            }
 
-			// FIXME: there seems to be some pipeline or channel-
-			// recycling issues, which could be mostly workarounded 
-			// by delaying input receiver.
-			// This place is not ideal, but it covers both loops in
-			// ChannelDispatcher and DuplexClientRuntimeChannel.
-			Thread.Sleep (50);
+            client.SendTimeout = (int)timeout.TotalMilliseconds;
 
-			if (timeout <= TimeSpan.Zero)
-				throw new ArgumentException (String.Format ("Timeout value must be positive value. It was {0}", timeout));
-			client.ReceiveTimeout = (int) timeout.TotalMilliseconds;
+            Logger.LogMessage(
+                MessageLogSourceKind.TransportSend,
+                ref message,
+                info.BindingElement.MaxReceivedMessageSize
+            );
 
-			message = frame.ReadSizedMessage ();
-			// FIXME: this may not be precise, but connection might be reused for some weird socket state transition (that's what happens). So as a workaround, avoid closing the session by sending EndRecord from this channel at OnClose().
-			if (message == null) {
-				session = null;
-				return false;
-			}
+            frame.WriteSizedMessage(message);
+        }
 
-			Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref message, info.BindingElement.MaxReceivedMessageSize);
+        public override bool TryReceive(TimeSpan timeout, out Message message)
+        {
+            ThrowIfDisposedOrNotOpen();
 
-			return true;
-		}
-		
-		public override bool WaitForMessage (TimeSpan timeout)
-		{
-			ThrowIfDisposedOrNotOpen ();
+            // FIXME: there seems to be some pipeline or channel-
+            // recycling issues, which could be mostly workarounded
+            // by delaying input receiver.
+            // This place is not ideal, but it covers both loops in
+            // ChannelDispatcher and DuplexClientRuntimeChannel.
+            Thread.Sleep(50);
 
-			if (client.Available > 0)
-				return true;
+            if (timeout <= TimeSpan.Zero)
+                throw new ArgumentException(
+                    String.Format("Timeout value must be positive value. It was {0}", timeout)
+                );
+            client.ReceiveTimeout = (int)timeout.TotalMilliseconds;
 
-			DateTime start = DateTime.UtcNow;
-			do {
-				Thread.Sleep (50);
-				if (client.Available > 0)
-					return true;
-			} while (DateTime.UtcNow - start < timeout);
-			return false;
-		}
-		
-		// CommunicationObject
-		
-		[MonoTODO]
-		protected override void OnAbort ()
-		{
-			if (session != null)
-				session.Close (TimeSpan.FromTicks (0));
+            message = frame.ReadSizedMessage();
+            // FIXME: this may not be precise, but connection might be reused for some weird socket state transition (that's what happens). So as a workaround, avoid closing the session by sending EndRecord from this channel at OnClose().
+            if (message == null)
+            {
+                session = null;
+                return false;
+            }
 
-			if (client != null)
-				client.Close ();
-		}
+            Logger.LogMessage(
+                MessageLogSourceKind.TransportReceive,
+                ref message,
+                info.BindingElement.MaxReceivedMessageSize
+            );
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			if (session != null)
-				session.Close (timeout);
+            return true;
+        }
 
-			if (client != null)
-				client.Close ();
-		}
-		
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			if (! is_service_side) {
-				NetworkStream ns = client.GetStream ();
-				frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.DuplexMode, ns, is_service_side) {
-					Encoder = this.Encoder,
-					Via = this.Via };
-				frame.ProcessPreambleInitiator ();
-				frame.ProcessPreambleAckInitiator ();
-				session = new TcpDuplexSession (this); // make sure to shutdown the session once it has initiated one.
-			} else {
-				// server side
-				Stream s = client.GetStream ();
+        public override bool WaitForMessage(TimeSpan timeout)
+        {
+            ThrowIfDisposedOrNotOpen();
 
-				frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.DuplexMode, s, is_service_side) { Encoder = this.Encoder };
+            if (client.Available > 0)
+                return true;
 
-				// FIXME: use retrieved record properties in the request processing.
+            DateTime start = DateTime.UtcNow;
+            do
+            {
+                Thread.Sleep(50);
+                if (client.Available > 0)
+                    return true;
+            } while (DateTime.UtcNow - start < timeout);
+            return false;
+        }
 
-				frame.ProcessPreambleRecipient ();
-				frame.ProcessPreambleAckRecipient ();
-			}
-		}
-	}
+        // CommunicationObject
+
+        [MonoTODO]
+        protected override void OnAbort()
+        {
+            if (session != null)
+                session.Close(TimeSpan.FromTicks(0));
+
+            if (client != null)
+                client.Close();
+        }
+
+        protected override void OnClose(TimeSpan timeout)
+        {
+            if (session != null)
+                session.Close(timeout);
+
+            if (client != null)
+                client.Close();
+        }
+
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            if (!is_service_side)
+            {
+                NetworkStream ns = client.GetStream();
+                frame = new TcpBinaryFrameManager(
+                    TcpBinaryFrameManager.DuplexMode,
+                    ns,
+                    is_service_side
+                )
+                {
+                    Encoder = this.Encoder,
+                    Via = this.Via,
+                };
+                frame.ProcessPreambleInitiator();
+                frame.ProcessPreambleAckInitiator();
+                session = new TcpDuplexSession(this); // make sure to shutdown the session once it has initiated one.
+            }
+            else
+            {
+                // server side
+                Stream s = client.GetStream();
+
+                frame = new TcpBinaryFrameManager(
+                    TcpBinaryFrameManager.DuplexMode,
+                    s,
+                    is_service_side
+                )
+                {
+                    Encoder = this.Encoder,
+                };
+
+                // FIXME: use retrieved record properties in the request processing.
+
+                frame.ProcessPreambleRecipient();
+                frame.ProcessPreambleAckRecipient();
+            }
+        }
+    }
 }

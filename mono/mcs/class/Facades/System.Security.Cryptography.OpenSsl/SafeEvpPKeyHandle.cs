@@ -28,23 +28,24 @@
 
 namespace System.Security.Cryptography
 {
-	public sealed class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
-	{
-		public SafeEvpPKeyHandle (IntPtr handle, bool ownsHandle) 
-			: base (handle, ownsHandle)
-		{
-		}
+    public sealed class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
+    {
+        public SafeEvpPKeyHandle(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle) { }
 
-		public override bool IsInvalid { get { throw new NotImplementedException (); } }
+        public override bool IsInvalid
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public SafeEvpPKeyHandle DuplicateHandle ()
-		{
-			throw new NotImplementedException ();
-		}
+        public SafeEvpPKeyHandle DuplicateHandle()
+        {
+            throw new NotImplementedException();
+        }
 
-		protected override bool ReleaseHandle ()
-		{
-			return true;
-		}
-	}
+        protected override bool ReleaseHandle()
+        {
+            return true;
+        }
+    }
 }

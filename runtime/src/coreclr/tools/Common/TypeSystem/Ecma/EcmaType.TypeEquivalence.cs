@@ -9,7 +9,7 @@ namespace Internal.TypeSystem.Ecma
 {
     public partial class EcmaType
     {
-        private  TypeIdentifierData _data;
+        private TypeIdentifierData _data;
 
         private TypeIdentifierData ComputeTypeIdentifierFromGuids()
         {
@@ -17,16 +17,25 @@ namespace Internal.TypeSystem.Ecma
             if (IsInterface && _typeDefinition.Attributes.HasFlag(TypeAttributes.Import))
             {
                 // ComImport interfaces get scope from their GUID
-                guidAttribute = this.GetDecodedCustomAttribute("System.Runtime.InteropServices", "GuidAttribute");
+                guidAttribute = this.GetDecodedCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "GuidAttribute"
+                );
             }
             else
             {
                 // other equivalent types get it from the declaring assembly
-                var attributeHandle = this.MetadataReader.GetCustomAttributeHandle(MetadataReader.GetAssemblyDefinition().GetCustomAttributes(), "System.Runtime.InteropServices", "GuidAttribute");
+                var attributeHandle = this.MetadataReader.GetCustomAttributeHandle(
+                    MetadataReader.GetAssemblyDefinition().GetCustomAttributes(),
+                    "System.Runtime.InteropServices",
+                    "GuidAttribute"
+                );
                 if (attributeHandle.IsNil)
                     return null;
 
-                guidAttribute = this.MetadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(this.EcmaModule));
+                guidAttribute = this
+                    .MetadataReader.GetCustomAttribute(attributeHandle)
+                    .DecodeValue(new CustomAttributeTypeProvider(this.EcmaModule));
             }
 
             if (!guidAttribute.HasValue)
@@ -35,7 +44,10 @@ namespace Internal.TypeSystem.Ecma
             if (guidAttribute.Value.FixedArguments.Length < 1)
                 return null;
 
-            if (guidAttribute.Value.FixedArguments[0].Type != Context.GetWellKnownType(WellKnownType.String))
+            if (
+                guidAttribute.Value.FixedArguments[0].Type
+                != Context.GetWellKnownType(WellKnownType.String)
+            )
                 return null;
 
             string scope = (string)guidAttribute.Value.FixedArguments[0].Value;
@@ -52,7 +64,10 @@ namespace Internal.TypeSystem.Ecma
                 return null;
 
             // Check for type identifier attribute
-            var typeIdentifierAttribute = this.GetDecodedCustomAttribute("System.Runtime.InteropServices", "TypeIdentifierAttribute");
+            var typeIdentifierAttribute = this.GetDecodedCustomAttribute(
+                "System.Runtime.InteropServices",
+                "TypeIdentifierAttribute"
+            );
             if (typeIdentifierAttribute.HasValue)
             {
                 // If the type has a type identifier attribute it is always considered to be type equivalent
@@ -62,13 +77,22 @@ namespace Internal.TypeSystem.Ecma
                 if (typeIdentifierAttribute.Value.FixedArguments.Length != 2)
                     return null;
 
-                if (typeIdentifierAttribute.Value.FixedArguments[0].Type != Context.GetWellKnownType(WellKnownType.String))
+                if (
+                    typeIdentifierAttribute.Value.FixedArguments[0].Type
+                    != Context.GetWellKnownType(WellKnownType.String)
+                )
                     return null;
 
-                if (typeIdentifierAttribute.Value.FixedArguments[1].Type != Context.GetWellKnownType(WellKnownType.String))
+                if (
+                    typeIdentifierAttribute.Value.FixedArguments[1].Type
+                    != Context.GetWellKnownType(WellKnownType.String)
+                )
                     return null;
 
-                _data = new TypeIdentifierData((string)typeIdentifierAttribute.Value.FixedArguments[0].Value, (string)typeIdentifierAttribute.Value.FixedArguments[1].Value);
+                _data = new TypeIdentifierData(
+                    (string)typeIdentifierAttribute.Value.FixedArguments[0].Value,
+                    (string)typeIdentifierAttribute.Value.FixedArguments[1].Value
+                );
                 return _data;
             }
             else
@@ -77,7 +101,16 @@ namespace Internal.TypeSystem.Ecma
                 if (Context.SupportsCOMInterop)
                 {
                     // 1. Type is within assembly marked with ImportedFromTypeLibAttribute or PrimaryInteropAssemblyAttribute
-                    if (this.HasCustomAttribute("System.Runtime.InteropServices", "ImportedFromTypeLibAttribute") || this.HasCustomAttribute("System.Runtime.InteropServices", "PrimaryInteropAssemblyAttribute"))
+                    if (
+                        this.HasCustomAttribute(
+                            "System.Runtime.InteropServices",
+                            "ImportedFromTypeLibAttribute"
+                        )
+                        || this.HasCustomAttribute(
+                            "System.Runtime.InteropServices",
+                            "PrimaryInteropAssemblyAttribute"
+                        )
+                    )
                     {
                         // This type has a TypeIdentifier attribute if it has an appropriate shape to be considered type equivalent
                     }
@@ -113,25 +146,22 @@ namespace Internal.TypeSystem.Ecma
 
         public override bool IsWindowsRuntime
         {
-            get
-            {
-                return _typeDefinition.Attributes.HasFlag(TypeAttributes.WindowsRuntime);
-            }
+            get { return _typeDefinition.Attributes.HasFlag(TypeAttributes.WindowsRuntime); }
         }
 
         public override bool IsComImport
         {
-            get
-            {
-                return _typeDefinition.Attributes.HasFlag(TypeAttributes.Import);
-            }
+            get { return _typeDefinition.Attributes.HasFlag(TypeAttributes.Import); }
         }
 
         public override bool IsComEventInterface
         {
             get
             {
-                return HasCustomAttribute("System.Runtime.InteropServices", "ComEventInterfaceAttribute");
+                return HasCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "ComEventInterfaceAttribute"
+                );
             }
         }
     }

@@ -33,5 +33,5 @@ public enum LoadOptions
     ///         the default. For entities that are not tracked, this option can be significantly slower.
     ///     </para>
     /// </summary>
-    ForceIdentityResolution = 1
+    ForceIdentityResolution = 1,
 }

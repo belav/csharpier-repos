@@ -11,7 +11,7 @@ namespace System.CommandLine.Help
     /// <summary>
     /// Formats output to be shown to users to describe how to use a command line tool.
     /// </summary>
-    public partial class HelpBuilder 
+    public partial class HelpBuilder
     {
         private const string Indent = "  ";
 
@@ -64,10 +64,12 @@ namespace System.CommandLine.Help
         /// <param name="firstColumnText">A delegate to display the first help column (typically name and usage information).</param>
         /// <param name="secondColumnText">A delegate to display second help column (typically the description).</param>
         /// <param name="defaultValue">A delegate to display the default value for the symbol.</param>
-        public void CustomizeSymbol(CliSymbol symbol,
+        public void CustomizeSymbol(
+            CliSymbol symbol,
             Func<HelpContext, string?>? firstColumnText = null,
             Func<HelpContext, string?>? secondColumnText = null,
-            Func<HelpContext, string?>? defaultValue = null)
+            Func<HelpContext, string?>? defaultValue = null
+        )
         {
             if (symbol is null)
             {
@@ -76,7 +78,11 @@ namespace System.CommandLine.Help
 
             _customizationsBySymbol ??= new();
 
-            _customizationsBySymbol[symbol] = new Customization(firstColumnText, secondColumnText, defaultValue);
+            _customizationsBySymbol[symbol] = new Customization(
+                firstColumnText,
+                secondColumnText,
+                defaultValue
+            );
         }
 
         /// <summary>
@@ -86,7 +92,9 @@ namespace System.CommandLine.Help
         /// A delegate that returns the sections in the order in which they should be written.<br/>
         /// The section delegate should return false if the section is empty, true otherwise.
         /// </param>
-        public void CustomizeLayout(Func<HelpContext, IEnumerable<Func<HelpContext, bool>>> getLayout)
+        public void CustomizeLayout(
+            Func<HelpContext, IEnumerable<Func<HelpContext, bool>>> getLayout
+        )
         {
             _getLayout = getLayout ?? throw new ArgumentNullException(nameof(getLayout));
         }
@@ -99,16 +107,17 @@ namespace System.CommandLine.Help
             {
                 bool displayOptionTitle = false;
 
-                IEnumerable<CliCommand> parentCommands =
-                    command
-                        .RecurseWhileNotNull(c => c.Parents.OfType<CliCommand>().FirstOrDefault())
-                        .Reverse();
+                IEnumerable<CliCommand> parentCommands = command
+                    .RecurseWhileNotNull(c => c.Parents.OfType<CliCommand>().FirstOrDefault())
+                    .Reverse();
 
                 foreach (var parentCommand in parentCommands)
                 {
                     if (!displayOptionTitle)
                     {
-                        displayOptionTitle = parentCommand.HasOptions && parentCommand.Options.Any(x => x.Recursive && !x.Hidden);
+                        displayOptionTitle =
+                            parentCommand.HasOptions
+                            && parentCommand.Options.Any(x => x.Recursive && !x.Hidden);
                     }
 
                     yield return parentCommand.Name;
@@ -119,15 +128,18 @@ namespace System.CommandLine.Help
                     }
                 }
 
-                var hasCommandWithHelp = command.HasSubcommands && command.Subcommands.Any(x => !x.Hidden);
+                var hasCommandWithHelp =
+                    command.HasSubcommands && command.Subcommands.Any(x => !x.Hidden);
 
                 if (hasCommandWithHelp)
                 {
                     yield return LocalizationResources.HelpUsageCommand();
                 }
 
-                displayOptionTitle = displayOptionTitle || (command.HasOptions && command.Options.Any(x => !x.Hidden));
-                
+                displayOptionTitle =
+                    displayOptionTitle
+                    || (command.HasOptions && command.Options.Any(x => !x.Hidden));
+
                 if (displayOptionTitle)
                 {
                     yield return LocalizationResources.HelpUsageOptions();
@@ -140,7 +152,10 @@ namespace System.CommandLine.Help
             }
         }
 
-        private IEnumerable<TwoColumnHelpRow> GetCommandArgumentRows(CliCommand command, HelpContext context) =>
+        private IEnumerable<TwoColumnHelpRow> GetCommandArgumentRows(
+            CliCommand command,
+            HelpContext context
+        ) =>
             command
                 .RecurseWhileNotNull(c => c.Parents.OfType<CliCommand>().FirstOrDefault())
                 .Reverse()
@@ -150,7 +165,10 @@ namespace System.CommandLine.Help
 
         private bool WriteSubcommands(HelpContext context)
         {
-            var subcommands = context.Command.Subcommands.Where(x => !x.Hidden).Select(x => GetTwoColumnRow(x, context)).ToArray();
+            var subcommands = context
+                .Command.Subcommands.Where(x => !x.Hidden)
+                .Select(x => GetTwoColumnRow(x, context))
+                .ToArray();
             if (subcommands.Length > 0)
             {
                 WriteHeading(LocalizationResources.HelpCommandsTitle(), null, context.Output);
@@ -164,8 +182,11 @@ namespace System.CommandLine.Help
         {
             if (!context.Command.TreatUnmatchedTokensAsErrors)
             {
-                WriteHeading(LocalizationResources.HelpAdditionalArgumentsTitle(),
-                             LocalizationResources.HelpAdditionalArgumentsDescription(), context.Output);
+                WriteHeading(
+                    LocalizationResources.HelpAdditionalArgumentsTitle(),
+                    LocalizationResources.HelpAdditionalArgumentsDescription(),
+                    context.Output
+                );
                 return true;
             }
             return false;
@@ -211,16 +232,26 @@ namespace System.CommandLine.Help
                 int firstColumnMaxWidth = windowWidth / 2 - Indent.Length;
                 if (firstColumnWidth > firstColumnMaxWidth)
                 {
-                    firstColumnWidth = items.SelectMany(x => WrapText(x.FirstColumnText, firstColumnMaxWidth).Select(x => x.Length)).Max();
+                    firstColumnWidth = items
+                        .SelectMany(x =>
+                            WrapText(x.FirstColumnText, firstColumnMaxWidth).Select(x => x.Length)
+                        )
+                        .Max();
                 }
                 secondColumnWidth = windowWidth - firstColumnWidth - Indent.Length - Indent.Length;
             }
-            
+
             for (var i = 0; i < items.Count; i++)
             {
                 var helpItem = items[i];
-                IEnumerable<string> firstColumnParts = WrapText(helpItem.FirstColumnText, firstColumnWidth);
-                IEnumerable<string> secondColumnParts = WrapText(helpItem.SecondColumnText, secondColumnWidth);
+                IEnumerable<string> firstColumnParts = WrapText(
+                    helpItem.FirstColumnText,
+                    firstColumnWidth
+                );
+                IEnumerable<string> secondColumnParts = WrapText(
+                    helpItem.SecondColumnText,
+                    secondColumnWidth
+                );
 
                 foreach (var (first, second) in ZipWithEmpty(firstColumnParts, secondColumnParts))
                 {
@@ -241,11 +272,15 @@ namespace System.CommandLine.Help
                 }
             }
 
-            static IEnumerable<(string, string)> ZipWithEmpty(IEnumerable<string> first, IEnumerable<string> second)
+            static IEnumerable<(string, string)> ZipWithEmpty(
+                IEnumerable<string> first,
+                IEnumerable<string> second
+            )
             {
                 using var enum1 = first.GetEnumerator();
                 using var enum2 = second.GetEnumerator();
-                bool hasFirst = false, hasSecond = false;
+                bool hasFirst = false,
+                    hasSecond = false;
                 while ((hasFirst = enum1.MoveNext()) | (hasSecond = enum2.MoveNext()))
                 {
                     yield return (hasFirst ? enum1.Current : "", hasSecond ? enum2.Current : "");
@@ -267,17 +302,14 @@ namespace System.CommandLine.Help
                     continue;
                 }
 
-                var arityIndicator =
-                    argument.Arity.MaximumNumberOfValues > 1
-                        ? "..."
-                        : "";
+                var arityIndicator = argument.Arity.MaximumNumberOfValues > 1 ? "..." : "";
 
                 var isOptional = IsOptional(argument);
 
                 if (isOptional)
                 {
                     sb.Append($"[<{argument.Name}>{arityIndicator}");
-                    (end ??= new ()).Add(']');
+                    (end ??= new()).Add(']');
                 }
                 else
                 {
@@ -302,9 +334,8 @@ namespace System.CommandLine.Help
             }
 
             return sb.ToString();
-            
-            bool IsOptional(CliArgument argument) =>
-                argument.Arity.MinimumNumberOfValues == 0;
+
+            bool IsOptional(CliArgument argument) => argument.Arity.MinimumNumberOfValues == 0;
         }
 
         private IEnumerable<Func<HelpContext, bool>> GetLayout(HelpContext context)
@@ -335,7 +366,7 @@ namespace System.CommandLine.Help
                 else
                 {
                     //Long item, wrap it based on the width
-                    for (int i = 0; i < part.Length;)
+                    for (int i = 0; i < part.Length; )
                     {
                         if (part.Length - i < maxWidth)
                         {
@@ -370,9 +401,7 @@ namespace System.CommandLine.Help
         /// </summary>
         /// <param name="symbol">The symbol to get a help item for.</param>
         /// <param name="context">The help context.</param>
-        public TwoColumnHelpRow GetTwoColumnRow(
-            CliSymbol symbol,
-            HelpContext context)
+        public TwoColumnHelpRow GetTwoColumnRow(CliSymbol symbol, HelpContext context)
         {
             if (symbol is null)
             {
@@ -396,25 +425,32 @@ namespace System.CommandLine.Help
             }
             else
             {
-                throw new NotSupportedException($"Symbol type {symbol.GetType()} is not supported.");
+                throw new NotSupportedException(
+                    $"Symbol type {symbol.GetType()} is not supported."
+                );
             }
 
             TwoColumnHelpRow GetOptionOrCommandRow()
             {
-                var firstColumnText = customization?.GetFirstColumn?.Invoke(context) 
-                    ?? (symbol is CliOption option
+                var firstColumnText =
+                    customization?.GetFirstColumn?.Invoke(context)
+                    ?? (
+                        symbol is CliOption option
                             ? Default.GetOptionUsageLabel(option)
-                            : Default.GetCommandUsageLabel((CliCommand)symbol));
+                            : Default.GetCommandUsageLabel((CliCommand)symbol)
+                    );
 
                 var customizedSymbolDescription = customization?.GetSecondColumn?.Invoke(context);
 
-                var symbolDescription = customizedSymbolDescription ?? symbol.Description ?? string.Empty;
+                var symbolDescription =
+                    customizedSymbolDescription ?? symbol.Description ?? string.Empty;
 
                 //in case symbol description is customized, do not output default value
                 //default value output is not customizable for identifier symbols
-                var defaultValueDescription = customizedSymbolDescription == null
-                    ? GetSymbolDefaultValue(symbol)
-                    : string.Empty;
+                var defaultValueDescription =
+                    customizedSymbolDescription == null
+                        ? GetSymbolDefaultValue(symbol)
+                        : string.Empty;
 
                 var secondColumnText = $"{symbolDescription} {defaultValueDescription}".Trim();
 
@@ -424,15 +460,16 @@ namespace System.CommandLine.Help
             TwoColumnHelpRow GetCommandArgumentRow(CliArgument argument)
             {
                 var firstColumnText =
-                    customization?.GetFirstColumn?.Invoke(context) ?? Default.GetArgumentUsageLabel(argument);
+                    customization?.GetFirstColumn?.Invoke(context)
+                    ?? Default.GetArgumentUsageLabel(argument);
 
                 var argumentDescription =
-                    customization?.GetSecondColumn?.Invoke(context) ?? Default.GetArgumentDescription(argument);
+                    customization?.GetSecondColumn?.Invoke(context)
+                    ?? Default.GetArgumentDescription(argument);
 
-                var defaultValueDescription =
-                    argument.HasDefaultValue
-                        ? $"[{GetArgumentDefaultValue(context.Command, argument, true, context)}]"
-                        : "";
+                var defaultValueDescription = argument.HasDefaultValue
+                    ? $"[{GetArgumentDefaultValue(context.Command, argument, true, context)}]"
+                    : "";
 
                 var secondColumnText = $"{argumentDescription} {defaultValueDescription}".Trim();
 
@@ -442,13 +479,17 @@ namespace System.CommandLine.Help
             string GetSymbolDefaultValue(CliSymbol symbol)
             {
                 IList<CliArgument> arguments = symbol.Arguments();
-                var defaultArguments = arguments.Where(x => !x.Hidden && x.HasDefaultValue).ToArray();
+                var defaultArguments = arguments
+                    .Where(x => !x.Hidden && x.HasDefaultValue)
+                    .ToArray();
 
-                if (defaultArguments.Length == 0) return "";
+                if (defaultArguments.Length == 0)
+                    return "";
 
                 var isSingleArgument = defaultArguments.Length == 1;
-                var argumentDefaultValues = defaultArguments
-                    .Select(argument => GetArgumentDefaultValue(symbol, argument, isSingleArgument, context));
+                var argumentDefaultValues = defaultArguments.Select(argument =>
+                    GetArgumentDefaultValue(symbol, argument, isSingleArgument, context)
+                );
                 return $"[{string.Join(", ", argumentDefaultValues)}]";
             }
         }
@@ -457,23 +498,28 @@ namespace System.CommandLine.Help
             CliSymbol parent,
             CliArgument argument,
             bool displayArgumentName,
-            HelpContext context)
+            HelpContext context
+        )
         {
-            string label = displayArgumentName 
-                              ? LocalizationResources.HelpArgumentDefaultValueLabel() 
-                              : argument.Name;
+            string label = displayArgumentName
+                ? LocalizationResources.HelpArgumentDefaultValueLabel()
+                : argument.Name;
 
             string? displayedDefaultValue = null;
 
             if (_customizationsBySymbol is not null)
             {
-                if (_customizationsBySymbol.TryGetValue(parent, out var customization) &&
-                    customization.GetDefaultValue?.Invoke(context) is { } parentDefaultValue)
+                if (
+                    _customizationsBySymbol.TryGetValue(parent, out var customization)
+                    && customization.GetDefaultValue?.Invoke(context) is { } parentDefaultValue
+                )
                 {
                     displayedDefaultValue = parentDefaultValue;
                 }
-                else if (_customizationsBySymbol.TryGetValue(argument, out customization) &&
-                         customization.GetDefaultValue?.Invoke(context) is { } ownDefaultValue)
+                else if (
+                    _customizationsBySymbol.TryGetValue(argument, out customization)
+                    && customization.GetDefaultValue?.Invoke(context) is { } ownDefaultValue
+                )
                 {
                     displayedDefaultValue = ownDefaultValue;
                 }
@@ -494,7 +540,8 @@ namespace System.CommandLine.Help
             public Customization(
                 Func<HelpContext, string?>? getFirstColumn,
                 Func<HelpContext, string?>? getSecondColumn,
-                Func<HelpContext, string?>? getDefaultValue)
+                Func<HelpContext, string?>? getDefaultValue
+            )
             {
                 GetFirstColumn = getFirstColumn;
                 GetSecondColumn = getSecondColumn;

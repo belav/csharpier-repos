@@ -10,7 +10,7 @@ public class ReleaseBuildOnlyTheoryAttribute : TheoryAttribute
     public ReleaseBuildOnlyTheoryAttribute()
     {
 #if DEBUG
-            Skip = "This test runs only on Release builds.";
+        Skip = "This test runs only on Release builds.";
 #endif
     }
 }

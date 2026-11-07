@@ -5,8 +5,8 @@
 namespace System.Activities.XamlIntegration
 {
     using System;
-    using System.Xaml;
     using System.Runtime;
+    using System.Xaml;
 
     static class XamlWriterExtensions
     {
@@ -14,24 +14,42 @@ namespace System.Activities.XamlIntegration
         {
             if (lineInfo != null)
             {
-                IXamlLineInfoConsumer consumer = targetWriter as IXamlLineInfoConsumer;            
-                Fx.Assert(consumer != null && consumer.ShouldProvideLineInfo, "Should only call this function to write into a XamlNodeQueue.Writer, which is always IXamlLineInfoConsumer");
-                consumer.SetLineInfo(lineInfo.LineNumber, lineInfo.LinePosition);                
+                IXamlLineInfoConsumer consumer = targetWriter as IXamlLineInfoConsumer;
+                Fx.Assert(
+                    consumer != null && consumer.ShouldProvideLineInfo,
+                    "Should only call this function to write into a XamlNodeQueue.Writer, which is always IXamlLineInfoConsumer"
+                );
+                consumer.SetLineInfo(lineInfo.LineNumber, lineInfo.LinePosition);
             }
         }
 
-        public static void PropagateLineInfo(XamlWriter targetWriter, int lineNumber, int linePosition)
+        public static void PropagateLineInfo(
+            XamlWriter targetWriter,
+            int lineNumber,
+            int linePosition
+        )
         {
             IXamlLineInfoConsumer consumer = targetWriter as IXamlLineInfoConsumer;
-            Fx.Assert(consumer != null && consumer.ShouldProvideLineInfo, "Should only call this function to write into a XamlNodeQueue.Writer, which is always IXamlLineInfoConsumer");
+            Fx.Assert(
+                consumer != null && consumer.ShouldProvideLineInfo,
+                "Should only call this function to write into a XamlNodeQueue.Writer, which is always IXamlLineInfoConsumer"
+            );
             consumer.SetLineInfo(lineNumber, linePosition);
         }
-        
+
         // This method is a workaround for TFS bug #788190, since XamlReader.ReadSubtree() should (but doesn't) preserve IXamlLineInfo on the subreader
-        public static void Transform(XamlReader reader, XamlWriter writer, IXamlLineInfo readerLineInfo, bool closeWriter)
+        public static void Transform(
+            XamlReader reader,
+            XamlWriter writer,
+            IXamlLineInfo readerLineInfo,
+            bool closeWriter
+        )
         {
             IXamlLineInfoConsumer consumer = writer as IXamlLineInfoConsumer;
-            Fx.Assert(consumer != null && consumer.ShouldProvideLineInfo, "Should only call this function to write into a XamlNodeQueue.Writer, which is always IXamlLineInfoConsumer");
+            Fx.Assert(
+                consumer != null && consumer.ShouldProvideLineInfo,
+                "Should only call this function to write into a XamlNodeQueue.Writer, which is always IXamlLineInfoConsumer"
+            );
             bool shouldPassLineNumberInfo = false;
             if (readerLineInfo != null)
             {
@@ -42,7 +60,7 @@ namespace System.Activities.XamlIntegration
             {
                 if (shouldPassLineNumberInfo)
                 {
-                    consumer.SetLineInfo(readerLineInfo.LineNumber, readerLineInfo.LinePosition);                    
+                    consumer.SetLineInfo(readerLineInfo.LineNumber, readerLineInfo.LinePosition);
                 }
                 writer.WriteNode(reader);
             }
@@ -52,13 +70,17 @@ namespace System.Activities.XamlIntegration
                 writer.Close();
             }
         }
-        
-        public static void WriteNode(this XamlWriter writer, XamlReader reader, IXamlLineInfo lineInfo) 
+
+        public static void WriteNode(
+            this XamlWriter writer,
+            XamlReader reader,
+            IXamlLineInfo lineInfo
+        )
         {
             PropagateLineInfo(writer, lineInfo);
             writer.WriteNode(reader);
         }
-                
+
         public static void WriteEndMember(this XamlWriter writer, IXamlLineInfo lineInfo)
         {
             PropagateLineInfo(writer, lineInfo);
@@ -77,25 +99,42 @@ namespace System.Activities.XamlIntegration
             writer.WriteGetObject();
         }
 
-        public static void WriteNamespace(this XamlWriter writer, NamespaceDeclaration namespaceDeclaration, IXamlLineInfo lineInfo)
+        public static void WriteNamespace(
+            this XamlWriter writer,
+            NamespaceDeclaration namespaceDeclaration,
+            IXamlLineInfo lineInfo
+        )
         {
             PropagateLineInfo(writer, lineInfo);
             writer.WriteNamespace(namespaceDeclaration);
         }
 
-        public static void WriteStartMember(this XamlWriter writer, XamlMember xamlMember, IXamlLineInfo lineInfo)
+        public static void WriteStartMember(
+            this XamlWriter writer,
+            XamlMember xamlMember,
+            IXamlLineInfo lineInfo
+        )
         {
             PropagateLineInfo(writer, lineInfo);
             writer.WriteStartMember(xamlMember);
         }
 
-        public static void WriteStartMember(this XamlWriter writer, XamlMember xamlMember, int lineNumber, int linePosition)
+        public static void WriteStartMember(
+            this XamlWriter writer,
+            XamlMember xamlMember,
+            int lineNumber,
+            int linePosition
+        )
         {
             PropagateLineInfo(writer, lineNumber, linePosition);
             writer.WriteStartMember(xamlMember);
         }
 
-        public static void WriteStartObject(this XamlWriter writer, XamlType type, IXamlLineInfo lineInfo)
+        public static void WriteStartObject(
+            this XamlWriter writer,
+            XamlType type,
+            IXamlLineInfo lineInfo
+        )
         {
             PropagateLineInfo(writer, lineInfo);
             writer.WriteStartObject(type);

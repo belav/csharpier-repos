@@ -36,16 +36,20 @@ namespace RunTests
         }
 
         /// <summary>
-        /// Return the list of processes which are direct children of the provided <paramref name="process"/> 
+        /// Return the list of processes which are direct children of the provided <paramref name="process"/>
         /// instance.
         /// </summary>
         /// <remarks>
         /// This is a best effort API.  It can be thwarted by process instances starting / stopping during
         /// the building of this list.
         /// </remarks>
-        internal static List<Process> GetProcessChildren(Process process) => GetProcessChildrenCore(process, Process.GetProcesses());
+        internal static List<Process> GetProcessChildren(Process process) =>
+            GetProcessChildrenCore(process, Process.GetProcesses());
 
-        private static List<Process> GetProcessChildrenCore(Process parentProcess, IEnumerable<Process> processes)
+        private static List<Process> GetProcessChildrenCore(
+            Process parentProcess,
+            IEnumerable<Process> processes
+        )
         {
             var list = new List<Process>();
             foreach (var process in processes)
@@ -61,7 +65,7 @@ namespace RunTests
         }
 
         /// <summary>
-        /// Return the list of processes which are direct or indirect children of the provided <paramref name="process"/> 
+        /// Return the list of processes which are direct or indirect children of the provided <paramref name="process"/>
         /// instance.
         /// </summary>
         /// <remarks>

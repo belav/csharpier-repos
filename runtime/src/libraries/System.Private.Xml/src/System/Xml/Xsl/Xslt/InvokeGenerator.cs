@@ -26,11 +26,12 @@ namespace System.Xml.Xsl.Xslt
 
         private QilList? _formalArgs;
         private QilList? _invokeArgs;
-        private int _curArg;     // this.Clone() depends on this value
+        private int _curArg; // this.Clone() depends on this value
 
         private readonly XsltQilFactory _fac;
 
-        public InvokeGenerator(XsltQilFactory f, bool debug) : base(f.BaseFactory)
+        public InvokeGenerator(XsltQilFactory f, bool debug)
+            : base(f.BaseFactory)
         {
             _debug = debug;
             _fac = f;
@@ -57,8 +58,14 @@ namespace System.Xml.Xsl.Xslt
                     {
                         if (formalArg.Name!.NamespaceUri == XmlReservedNs.NsXslDebug)
                         {
-                            Debug.Assert(formalArg.Name.LocalName == "namespaces", "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs()");
-                            Debug.Assert(formalArg.DefaultValue != null, "PrecompileProtoTemplatesHeaders() set it");
+                            Debug.Assert(
+                                formalArg.Name.LocalName == "namespaces",
+                                "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs()"
+                            );
+                            Debug.Assert(
+                                formalArg.DefaultValue != null,
+                                "PrecompileProtoTemplatesHeaders() set it"
+                            );
                             invokeArg = Clone(formalArg.DefaultValue);
                         }
                         else
@@ -68,7 +75,10 @@ namespace System.Xml.Xsl.Xslt
                     }
                     else
                     {
-                        Debug.Assert(formalArg.Name!.NamespaceUri != XmlReservedNs.NsXslDebug, "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs(). We don't have $namespaces in !debug.");
+                        Debug.Assert(
+                            formalArg.Name!.NamespaceUri != XmlReservedNs.NsXslDebug,
+                            "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs(). We don't have $namespaces in !debug."
+                        );
                         invokeArg = Clone(formalArg.DefaultValue!);
                     }
                 }
@@ -83,7 +93,10 @@ namespace System.Xml.Xsl.Xslt
                 if (!invokeType.IsSubtypeOf(formalType))
                 {
                     // This may occur only if inferred type of invokeArg is XslFlags.None
-                    Debug.Assert(invokeType == T.ItemS, "Actual argument type is not a subtype of formal argument type");
+                    Debug.Assert(
+                        invokeType == T.ItemS,
+                        "Actual argument type is not a subtype of formal argument type"
+                    );
                     invokeArg = _fac.TypeAssert(invokeArg, formalType);
                 }
 

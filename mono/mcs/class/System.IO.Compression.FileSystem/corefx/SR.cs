@@ -4,6 +4,8 @@
 
 partial class SR
 {
-	public const string IO_DirectoryNameWithData = "Zip entry name ends in directory separator character but contains data.";
-	public const string IO_ExtractingResultsInOutside = "Extracting Zip entry would have resulted in a file outside the specified destination directory.";
+    public const string IO_DirectoryNameWithData =
+        "Zip entry name ends in directory separator character but contains data.";
+    public const string IO_ExtractingResultsInOutside =
+        "Extracting Zip entry would have resulted in a file outside the specified destination directory.";
 }

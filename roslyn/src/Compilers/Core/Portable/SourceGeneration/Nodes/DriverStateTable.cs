@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly StateTableStore _tables;
 
-        internal static DriverStateTable Empty { get; } = new DriverStateTable(StateTableStore.Empty);
+        internal static DriverStateTable Empty { get; } =
+            new DriverStateTable(StateTableStore.Empty);
 
         private DriverStateTable(StateTableStore tables)
         {
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis
 
         public sealed class Builder
         {
-            private readonly StateTableStore.Builder _stateTableBuilder = new StateTableStore.Builder();
+            private readonly StateTableStore.Builder _stateTableBuilder =
+                new StateTableStore.Builder();
             private readonly DriverStateTable _previousTable;
             private readonly CancellationToken _cancellationToken;
 
@@ -36,7 +38,12 @@ namespace Microsoft.CodeAnalysis
 
             internal SyntaxStore.Builder SyntaxStore { get; }
 
-            public Builder(Compilation compilation, GeneratorDriverState driverState, SyntaxStore.Builder syntaxStore, CancellationToken cancellationToken = default)
+            public Builder(
+                Compilation compilation,
+                GeneratorDriverState driverState,
+                SyntaxStore.Builder syntaxStore,
+                CancellationToken cancellationToken = default
+            )
             {
                 Compilation = compilation;
                 DriverState = driverState;
@@ -45,7 +52,9 @@ namespace Microsoft.CodeAnalysis
                 SyntaxStore = syntaxStore;
             }
 
-            public NodeStateTable<T> GetLatestStateTableForNode<T>(IIncrementalGeneratorNode<T> source)
+            public NodeStateTable<T> GetLatestStateTableForNode<T>(
+                IIncrementalGeneratorNode<T> source
+            )
             {
                 // if we've already evaluated a node during this build, we can just return the existing result
                 if (_stateTableBuilder.TryGetTable(source, out var table))
@@ -63,10 +72,19 @@ namespace Microsoft.CodeAnalysis
             }
 
             public NodeStateTable<T>.Builder CreateTableBuilder<T>(
-                NodeStateTable<T>? previousTable, string? stepName, IEqualityComparer<T>? equalityComparer, int? tableCapacity = null)
+                NodeStateTable<T>? previousTable,
+                string? stepName,
+                IEqualityComparer<T>? equalityComparer,
+                int? tableCapacity = null
+            )
             {
                 previousTable ??= NodeStateTable<T>.Empty;
-                return previousTable.ToBuilder(stepName, DriverState.TrackIncrementalSteps, equalityComparer, tableCapacity);
+                return previousTable.ToBuilder(
+                    stepName,
+                    DriverState.TrackIncrementalSteps,
+                    equalityComparer,
+                    tableCapacity
+                );
             }
 
             public DriverStateTable ToImmutable()

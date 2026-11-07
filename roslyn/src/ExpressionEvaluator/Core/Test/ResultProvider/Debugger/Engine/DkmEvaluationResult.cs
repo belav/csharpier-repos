@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             string FullName,
             DkmEvaluationResultFlags Flags,
             string Type,
-            DkmDataItem DataItem)
+            DkmDataItem DataItem
+        )
         {
             this.InspectionContext = InspectionContext;
             this.StackFrame = StackFrame;
@@ -45,21 +46,37 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             }
         }
 
-        public void GetChildren(DkmWorkList workList, int initialRequestSize, DkmInspectionContext inspectionContext, DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine)
+        public void GetChildren(
+            DkmWorkList workList,
+            int initialRequestSize,
+            DkmInspectionContext inspectionContext,
+            DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine
+        )
         {
             InspectionContext.InspectionSession.InvokeResultProvider(
                 this,
                 MethodId.GetChildren,
                 r =>
                 {
-                    r.GetChildren(this, workList, initialRequestSize, inspectionContext, completionRoutine);
+                    r.GetChildren(
+                        this,
+                        workList,
+                        initialRequestSize,
+                        inspectionContext,
+                        completionRoutine
+                    );
                     return (object)null;
-                });
+                }
+            );
         }
 
         public string GetUnderlyingString()
         {
-            return InspectionContext.InspectionSession.InvokeResultProvider(this, MethodId.GetUnderlyingString, r => r.GetUnderlyingString(this));
+            return InspectionContext.InspectionSession.InvokeResultProvider(
+                this,
+                MethodId.GetUnderlyingString,
+                r => r.GetUnderlyingString(this)
+            );
         }
     }
 }

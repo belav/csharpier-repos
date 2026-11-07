@@ -6,7 +6,6 @@ using System.Net.Security;
 using System.Net.Test.Common;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -18,17 +17,38 @@ namespace System.Net.Http.Functional.Tests
         internal const string NegotiateAuthHeader = "WWW-Authenticate: Negotiate";
         internal const string UserHeaderName = "X-User";
 
-        internal static Task HandleNtlmAuthenticationRequest(LoopbackServer.Connection connection, bool closeConnection = true)
+        internal static Task HandleNtlmAuthenticationRequest(
+            LoopbackServer.Connection connection,
+            bool closeConnection = true
+        )
         {
-            return HandleAuthenticationRequest(connection, useNtlm: true, useNegotiate: false, closeConnection);
+            return HandleAuthenticationRequest(
+                connection,
+                useNtlm: true,
+                useNegotiate: false,
+                closeConnection
+            );
         }
 
-        internal static Task HandleNegotiateAuthenticationRequest(LoopbackServer.Connection connection, bool closeConnection = true)
+        internal static Task HandleNegotiateAuthenticationRequest(
+            LoopbackServer.Connection connection,
+            bool closeConnection = true
+        )
         {
-            return HandleAuthenticationRequest(connection, useNtlm: false, useNegotiate: true, closeConnection);
+            return HandleAuthenticationRequest(
+                connection,
+                useNtlm: false,
+                useNegotiate: true,
+                closeConnection
+            );
         }
 
-        internal static async Task HandleAuthenticationRequest(LoopbackServer.Connection connection, bool useNtlm, bool useNegotiate, bool closeConnection)
+        internal static async Task HandleAuthenticationRequest(
+            LoopbackServer.Connection connection,
+            bool useNtlm,
+            bool useNegotiate,
+            bool closeConnection
+        )
         {
             HttpRequestData request = await connection.ReadRequestDataAsync();
             NegotiateAuthentication authContext = null;
@@ -57,7 +77,9 @@ namespace System.Net.Http.Functional.Tests
                     authHeader += NegotiateAuthHeader + "\r\n";
                 }
 
-                await connection.SendResponseAsync(HttpStatusCode.Unauthorized, authHeader).ConfigureAwait(false);
+                await connection
+                    .SendResponseAsync(HttpStatusCode.Unauthorized, authHeader)
+                    .ConfigureAwait(false);
                 connection.CompleteRequestProcessing();
 
                 // Read next requests and fall-back to loop bellow to process it.
@@ -81,20 +103,28 @@ namespace System.Net.Http.Functional.Tests
                 // Should be type and base64 encoded blob
                 Assert.Equal(2, tokens.Length);
 
-                authContext ??= new NegotiateAuthentication(new NegotiateAuthenticationServerOptions { Package = tokens[0] });
+                authContext ??= new NegotiateAuthentication(
+                    new NegotiateAuthenticationServerOptions { Package = tokens[0] }
+                );
 
-                byte[]? outBlob = authContext.GetOutgoingBlob(Convert.FromBase64String(tokens[1]), out statusCode);
+                byte[]? outBlob = authContext.GetOutgoingBlob(
+                    Convert.FromBase64String(tokens[1]),
+                    out statusCode
+                );
 
-                if (outBlob != null && statusCode == NegotiateAuthenticationStatusCode.ContinueNeeded)
+                if (
+                    outBlob != null
+                    && statusCode == NegotiateAuthenticationStatusCode.ContinueNeeded
+                )
                 {
-                    authHeader = $"WWW-Authenticate: {tokens[0]} {Convert.ToBase64String(outBlob)}\r\n";
+                    authHeader =
+                        $"WWW-Authenticate: {tokens[0]} {Convert.ToBase64String(outBlob)}\r\n";
                     await connection.SendResponseAsync(HttpStatusCode.Unauthorized, authHeader);
                     connection.CompleteRequestProcessing();
 
                     request = await connection.ReadRequestDataAsync();
                 }
-            }
-            while (statusCode == NegotiateAuthenticationStatusCode.ContinueNeeded);
+            } while (statusCode == NegotiateAuthenticationStatusCode.ContinueNeeded);
 
             if (statusCode == NegotiateAuthenticationStatusCode.Completed)
             {
@@ -112,11 +142,19 @@ namespace System.Net.Http.Functional.Tests
             }
             else
             {
-                await connection.SendResponseAsync(HttpStatusCode.Forbidden, "Connection: close\r\n", "boo");
+                await connection.SendResponseAsync(
+                    HttpStatusCode.Forbidden,
+                    "Connection: close\r\n",
+                    "boo"
+                );
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         [InlineData(true)]
         [InlineData(false)]
         [PlatformSpecific(TestPlatforms.Windows)]
@@ -133,18 +171,25 @@ namespace System.Net.Http.Functional.Tests
                     {
                         HttpResponseMessage response = await client.SendAsync(requestMessage);
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                        _output.WriteLine($"Authenticated as {response.Headers.GetValues(NtAuthTests.UserHeaderName).First()}");
+                        _output.WriteLine(
+                            $"Authenticated as {response.Headers.GetValues(NtAuthTests.UserHeaderName).First()}"
+                        );
                         Assert.Equal("foo", await response.Content.ReadAsStringAsync());
                     }
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(async connection =>
-                    {
-                        Task t = useNtlm ? HandleNtlmAuthenticationRequest(connection) : HandleNegotiateAuthenticationRequest(connection);
-                        await t;
-                    }).ConfigureAwait(false);
-                });
+                    await server
+                        .AcceptConnectionAsync(async connection =>
+                        {
+                            Task t = useNtlm
+                                ? HandleNtlmAuthenticationRequest(connection)
+                                : HandleNegotiateAuthenticationRequest(connection);
+                            await t;
+                        })
+                        .ConfigureAwait(false);
+                }
+            );
         }
     }
 }

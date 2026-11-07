@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
     /// </summary>
     internal class CompletionListCache : ResolveCache<CacheEntry>
     {
-        public CompletionListCache() : base(maxCacheSize: 3)
-        {
-        }
+        public CompletionListCache()
+            : base(maxCacheSize: 3) { }
 
-        public record CacheEntry(LSP.TextDocumentIdentifier TextDocument, CompletionList CompletionList);
+        public record CacheEntry(
+            LSP.TextDocumentIdentifier TextDocument,
+            CompletionList CompletionList
+        );
     }
 }

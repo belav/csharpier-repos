@@ -142,7 +142,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool EndTryAccept(IAsyncResult result, out IChannelBinder channelBinder)
         {
-            ErrorHandlingCompletedAsyncResult handlerResult = result as ErrorHandlingCompletedAsyncResult;
+            ErrorHandlingCompletedAsyncResult handlerResult =
+                result as ErrorHandlingCompletedAsyncResult;
             if (handlerResult != null)
             {
                 channelBinder = null;
@@ -277,18 +278,18 @@ namespace System.ServiceModel.Dispatcher
 
         class ErrorHandlingCompletedAsyncResult : CompletedAsyncResult<bool>
         {
-            internal ErrorHandlingCompletedAsyncResult(bool data, AsyncCallback callback, object state)
-                : base(data, callback, state)
-            {
-            }
+            internal ErrorHandlingCompletedAsyncResult(
+                bool data,
+                AsyncCallback callback,
+                object state
+            )
+                : base(data, callback, state) { }
         }
 
         class WaitCompletedAsyncResult : CompletedAsyncResult
         {
             internal WaitCompletedAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
         }
     }
 }

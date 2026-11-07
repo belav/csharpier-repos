@@ -36,7 +36,10 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
     /// classifiers to be available.  The first service though that returns results for a string will 'win' and no
     /// other services will contribute.
     /// </summary>
-    private readonly ImmutableDictionary<string, ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>>> _identifierToServices;
+    private readonly ImmutableDictionary<
+        string,
+        ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>>
+    > _identifierToServices;
 
     /// <summary>
     /// Information about the embedded language.
@@ -52,15 +55,24 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
         string languageName,
         EmbeddedLanguageInfo info,
         ISyntaxKinds syntaxKinds,
-        IEnumerable<Lazy<TService, EmbeddedLanguageMetadata>> allServices)
+        IEnumerable<Lazy<TService, EmbeddedLanguageMetadata>> allServices
+    )
     {
         // Order the feature providers to respect the [Order] annotations.
-        var orderedFeatureProviders = ExtensionOrderer.Order(allServices).Where(c => c.Metadata.Languages.Contains(languageName)).ToImmutableArray();
+        var orderedFeatureProviders = ExtensionOrderer
+            .Order(allServices)
+            .Where(c => c.Metadata.Languages.Contains(languageName))
+            .ToImmutableArray();
 
         // Grab out the services that handle unannotated literals and APIs.
-        _legacyServices = orderedFeatureProviders.WhereAsArray(c => c.Metadata.SupportsUnannotatedAPIs);
+        _legacyServices = orderedFeatureProviders.WhereAsArray(c =>
+            c.Metadata.SupportsUnannotatedAPIs
+        );
 
-        using var _ = PooledDictionary<string, ArrayBuilder<Lazy<TService, EmbeddedLanguageMetadata>>>.GetInstance(out var map);
+        using var _ = PooledDictionary<
+            string,
+            ArrayBuilder<Lazy<TService, EmbeddedLanguageMetadata>>
+        >.GetInstance(out var map);
 
         foreach (var featureProvider in orderedFeatureProviders)
         {
@@ -72,11 +84,18 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
             services.RemoveDuplicates();
 
         this._identifierToServices = map.ToImmutableDictionary(
-            kvp => kvp.Key, kvp => kvp.Value.ToImmutableAndFree(), StringComparer.OrdinalIgnoreCase);
+            kvp => kvp.Key,
+            kvp => kvp.Value.ToImmutableAndFree(),
+            StringComparer.OrdinalIgnoreCase
+        );
 
         Info = info;
         var languageIdentifiers = _identifierToServices.Keys.ToImmutableArray();
-        _detector = new EmbeddedLanguageDetector(info, languageIdentifiers, GetCommentDetector(languageIdentifiers));
+        _detector = new EmbeddedLanguageDetector(
+            info,
+            languageIdentifiers,
+            GetCommentDetector(languageIdentifiers)
+        );
 
         SyntaxTokenKinds.Add(syntaxKinds.CharacterLiteralToken);
         SyntaxTokenKinds.Add(syntaxKinds.StringLiteralToken);
@@ -89,17 +108,34 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
         SyntaxTokenKinds.AddIfNotNull(syntaxKinds.Utf8MultiLineRawStringLiteralToken);
     }
 
-    private static EmbeddedLanguageCommentDetector GetCommentDetector(ImmutableArray<string> languageIdentifiers)
+    private static EmbeddedLanguageCommentDetector GetCommentDetector(
+        ImmutableArray<string> languageIdentifiers
+    )
     {
         // Well known language detectors we can cache.
 
-        if (languageIdentifiers.SetEquals(JsonLanguageDetector.LanguageIdentifiers, StringComparer.OrdinalIgnoreCase))
+        if (
+            languageIdentifiers.SetEquals(
+                JsonLanguageDetector.LanguageIdentifiers,
+                StringComparer.OrdinalIgnoreCase
+            )
+        )
             return JsonLanguageDetector.CommentDetector;
 
-        if (languageIdentifiers.SetEquals(RegexLanguageDetector.LanguageIdentifiers, StringComparer.OrdinalIgnoreCase))
+        if (
+            languageIdentifiers.SetEquals(
+                RegexLanguageDetector.LanguageIdentifiers,
+                StringComparer.OrdinalIgnoreCase
+            )
+        )
             return RegexLanguageDetector.CommentDetector;
 
-        if (languageIdentifiers.SetEquals(DateAndTimeLanguageDetector.LanguageIdentifiers, StringComparer.OrdinalIgnoreCase))
+        if (
+            languageIdentifiers.SetEquals(
+                DateAndTimeLanguageDetector.LanguageIdentifiers,
+                StringComparer.OrdinalIgnoreCase
+            )
+        )
             return DateAndTimeLanguageDetector.CommentDetector;
 
         return new EmbeddedLanguageCommentDetector(languageIdentifiers);
@@ -108,12 +144,20 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
     protected ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>> GetServices(
         SemanticModel semanticModel,
         SyntaxToken token,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // First, see if this is a string annotated with either a comment or [StringSyntax] attribute. If
         // so, delegate to the first feature provider we have registered for whatever language ID we find.
-        if (this._detector.IsEmbeddedLanguageToken(token, semanticModel, cancellationToken, out var identifier, out _) &&
-            _identifierToServices.TryGetValue(identifier, out var services))
+        if (
+            this._detector.IsEmbeddedLanguageToken(
+                token,
+                semanticModel,
+                cancellationToken,
+                out var identifier,
+                out _
+            ) && _identifierToServices.TryGetValue(identifier, out var services)
+        )
         {
             Contract.ThrowIfTrue(services.IsDefaultOrEmpty);
             return services;

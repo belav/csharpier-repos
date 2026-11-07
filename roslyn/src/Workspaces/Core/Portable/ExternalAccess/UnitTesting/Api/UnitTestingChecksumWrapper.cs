@@ -8,6 +8,6 @@ internal readonly struct UnitTestingChecksumWrapper(Checksum underlyingObject)
 {
     private Checksum UnderlyingObject { get; } = underlyingObject;
 
-    public bool IsEqualTo(UnitTestingChecksumWrapper other)
-        => other.UnderlyingObject == UnderlyingObject;
+    public bool IsEqualTo(UnitTestingChecksumWrapper other) =>
+        other.UnderlyingObject == UnderlyingObject;
 }

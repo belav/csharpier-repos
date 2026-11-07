@@ -56,15 +56,12 @@ public class DelegateOutOfProcTests : LoggedTest
         Assert.Equal("Hello from delegatee", responseString);
 
         DelegationRule destination = default;
-        using var delegator = Utilities.CreateHttpServer(
-            out var delegatorAddress,
-            httpContext =>
-            {
-                var delegateFeature = httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
-                delegateFeature.DelegateRequest(destination);
-                return Task.CompletedTask;
-            }
-        );
+        using var delegator = Utilities.CreateHttpServer(out var delegatorAddress, httpContext =>
+        {
+            var delegateFeature = httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+            delegateFeature.DelegateRequest(destination);
+            return Task.CompletedTask;
+        });
 
         var delegationProperty = delegator.Features.Get<IServerDelegationFeature>();
         using (

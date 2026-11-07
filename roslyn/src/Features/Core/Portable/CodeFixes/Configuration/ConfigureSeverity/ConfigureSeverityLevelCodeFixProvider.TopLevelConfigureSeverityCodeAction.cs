@@ -11,8 +11,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
 {
     internal sealed partial class ConfigureSeverityLevelCodeFixProvider : IConfigurationFixProvider
     {
-        private sealed class TopLevelConfigureSeverityCodeAction(Diagnostic diagnostic, ImmutableArray<CodeAction> nestedActions) : AbstractConfigurationActionWithNestedActions(nestedActions, string.Format(FeaturesResources.Configure_0_severity, diagnostic.Id))
-        {
-        }
+        private sealed class TopLevelConfigureSeverityCodeAction(
+            Diagnostic diagnostic,
+            ImmutableArray<CodeAction> nestedActions
+        )
+            : AbstractConfigurationActionWithNestedActions(
+                nestedActions,
+                string.Format(FeaturesResources.Configure_0_severity, diagnostic.Id)
+            ) { }
     }
 }

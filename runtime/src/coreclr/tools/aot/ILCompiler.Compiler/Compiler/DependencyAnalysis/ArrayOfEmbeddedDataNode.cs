@@ -20,7 +20,8 @@ namespace ILCompiler.DependencyAnalysis
 
         int INodeWithSize.Size => _size.Value;
 
-        public ArrayOfEmbeddedDataNode(string mangledName, IComparer<TEmbedded> nodeSorter) : base(mangledName)
+        public ArrayOfEmbeddedDataNode(string mangledName, IComparer<TEmbedded> nodeSorter)
+            : base(mangledName)
         {
             _sorter = nodeSorter;
         }
@@ -36,18 +37,25 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override string GetName(NodeFactory factory) => $"Region {this.GetMangledName(factory.NameMangler)}";
+        protected override string GetName(NodeFactory factory) =>
+            $"Region {this.GetMangledName(factory.NameMangler)}";
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
         public override bool IsShareable => false;
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected IEnumerable<TEmbedded> NodesList =>  _nestedNodesList;
+        protected IEnumerable<TEmbedded> NodesList => _nestedNodesList;
         private TEmbedded _nextElementToEncode;
         public TEmbedded NextElementToEncode => _nextElementToEncode;
 
-        protected virtual void GetElementDataForNodes(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        protected virtual void GetElementDataForNodes(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             int index = 0;
             _nextElementToEncode = null;

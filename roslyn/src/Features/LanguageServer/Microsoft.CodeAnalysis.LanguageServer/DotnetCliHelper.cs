@@ -33,9 +33,16 @@ internal sealed class DotnetCliHelper
     /// from the project directory (in order to respect any global.json that might be present)
     /// which will output the correct SDK path.
     /// </summary>
-    private async Task<string> GetDotnetSdkFolderFromDotnetExecutableAsync(string projectOutputDirectory, CancellationToken cancellationToken)
+    private async Task<string> GetDotnetSdkFolderFromDotnetExecutableAsync(
+        string projectOutputDirectory,
+        CancellationToken cancellationToken
+    )
     {
-        using var process = Run(["--info"], workingDirectory: projectOutputDirectory, shouldLocalizeOutput: false);
+        using var process = Run(
+            ["--info"],
+            workingDirectory: projectOutputDirectory,
+            shouldLocalizeOutput: false
+        );
 
         string? dotnetSdkFolderPath = null;
         process.OutputDataReceived += (_, e) =>
@@ -62,7 +69,9 @@ internal sealed class DotnetCliHelper
         if (process.ExitCode != 0 || dotnetSdkFolderPath == null)
         {
             _logger.LogError(errorOutput.ToString());
-            throw new InvalidOperationException("Failed to get dotnet SDK folder from dotnet --info");
+            throw new InvalidOperationException(
+                "Failed to get dotnet SDK folder from dotnet --info"
+            );
         }
 
         return dotnetSdkFolderPath;
@@ -70,7 +79,9 @@ internal sealed class DotnetCliHelper
 
     public Process Run(string[] arguments, string? workingDirectory, bool shouldLocalizeOutput)
     {
-        _logger.LogDebug($"Running dotnet CLI command at {_dotnetExecutablePath.Value} in directory {workingDirectory} with arguments {arguments}");
+        _logger.LogDebug(
+            $"Running dotnet CLI command at {_dotnetExecutablePath.Value} in directory {workingDirectory} with arguments {arguments}"
+        );
 
         var startInfo = new ProcessStartInfo(_dotnetExecutablePath.Value)
         {
@@ -104,15 +115,27 @@ internal sealed class DotnetCliHelper
         startInfo.Environment.Remove("MSBuildExtensionsPath");
 
         var process = Process.Start(startInfo);
-        Contract.ThrowIfNull(process, $"Unable to start dotnet CLI at {_dotnetExecutablePath.Value} with arguments {arguments} in directory {workingDirectory}");
+        Contract.ThrowIfNull(
+            process,
+            $"Unable to start dotnet CLI at {_dotnetExecutablePath.Value} with arguments {arguments} in directory {workingDirectory}"
+        );
         return process;
     }
 
-    public async Task<string> GetVsTestConsolePathAsync(string projectOutputDirectory, CancellationToken cancellationToken)
+    public async Task<string> GetVsTestConsolePathAsync(
+        string projectOutputDirectory,
+        CancellationToken cancellationToken
+    )
     {
-        var dotnetSdkFolder = await GetDotnetSdkFolderFromDotnetExecutableAsync(projectOutputDirectory, cancellationToken);
+        var dotnetSdkFolder = await GetDotnetSdkFolderFromDotnetExecutableAsync(
+            projectOutputDirectory,
+            cancellationToken
+        );
         var vstestConsole = Path.Combine(dotnetSdkFolder, "vstest.console.dll");
-        Contract.ThrowIfFalse(File.Exists(vstestConsole), $"VSTestConsole was not found at {vstestConsole}");
+        Contract.ThrowIfFalse(
+            File.Exists(vstestConsole),
+            $"VSTestConsole was not found at {vstestConsole}"
+        );
         _logger.LogDebug($"Using vstest console at {vstestConsole}");
         return vstestConsole;
     }
@@ -125,9 +148,7 @@ internal sealed class DotnetCliHelper
     /// <returns></returns>
     internal string GetDotNetPathOrDefault()
     {
-        var (fileName, sep) = PlatformInformation.IsWindows
-            ? ("dotnet.exe", ';')
-            : ("dotnet", ':');
+        var (fileName, sep) = PlatformInformation.IsWindows ? ("dotnet.exe", ';') : ("dotnet", ':');
 
         var path = Environment.GetEnvironmentVariable("PATH") ?? "";
         foreach (var item in path.Split(sep, StringSplitOptions.RemoveEmptyEntries))

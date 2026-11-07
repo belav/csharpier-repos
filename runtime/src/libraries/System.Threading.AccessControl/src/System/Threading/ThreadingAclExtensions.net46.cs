@@ -13,7 +13,10 @@ namespace System.Threading
             return handle.GetAccessControl();
         }
 
-        public static void SetAccessControl(this EventWaitHandle handle, EventWaitHandleSecurity eventSecurity)
+        public static void SetAccessControl(
+            this EventWaitHandle handle,
+            EventWaitHandleSecurity eventSecurity
+        )
         {
             handle.SetAccessControl(eventSecurity);
         }
@@ -33,7 +36,10 @@ namespace System.Threading
             return semaphore.GetAccessControl();
         }
 
-        public static void SetAccessControl(this Semaphore semaphore, SemaphoreSecurity semaphoreSecurity)
+        public static void SetAccessControl(
+            this Semaphore semaphore,
+            SemaphoreSecurity semaphoreSecurity
+        )
         {
             semaphore.SetAccessControl(semaphoreSecurity);
         }

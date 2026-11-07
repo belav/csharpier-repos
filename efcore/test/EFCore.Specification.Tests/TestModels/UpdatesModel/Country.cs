@@ -11,5 +11,5 @@ public enum Country
     Czechia,
     Montenegro,
     Serbia,
-    Eswatini
+    Eswatini,
 }

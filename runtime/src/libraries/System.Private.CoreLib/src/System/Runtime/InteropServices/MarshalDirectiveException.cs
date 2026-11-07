@@ -11,7 +11,9 @@ namespace System.Runtime.InteropServices
     /// The exception that is thrown by the marshaler when it encounters a <see cref="MarshalAsAttribute" /> it does not support.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MarshalDirectiveException : SystemException
     {
         public MarshalDirectiveException()
@@ -32,10 +34,13 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected MarshalDirectiveException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected MarshalDirectiveException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -11,17 +11,29 @@ namespace System.Web.Http.Owin
     public static class OwinExceptionCatchBlocks
     {
         private static readonly ExceptionContextCatchBlock _httpMessageHandlerAdapterBufferContent =
-            new ExceptionContextCatchBlock(typeof(HttpMessageHandlerAdapter).Name + ".BufferContent",
-                isTopLevel: true, callsHandler: true);
+            new ExceptionContextCatchBlock(
+                typeof(HttpMessageHandlerAdapter).Name + ".BufferContent",
+                isTopLevel: true,
+                callsHandler: true
+            );
         private static readonly ExceptionContextCatchBlock _httpMessageHandlerAdapterBufferError =
-            new ExceptionContextCatchBlock(typeof(HttpMessageHandlerAdapter).Name + ".BufferError", isTopLevel: true,
-                callsHandler: false);
+            new ExceptionContextCatchBlock(
+                typeof(HttpMessageHandlerAdapter).Name + ".BufferError",
+                isTopLevel: true,
+                callsHandler: false
+            );
         private static readonly ExceptionContextCatchBlock _httpMessageHandlerAdapterComputeContentLength =
-            new ExceptionContextCatchBlock(typeof(HttpMessageHandlerAdapter).Name + ".ComputeContentLength",
-                isTopLevel: true, callsHandler: false);
+            new ExceptionContextCatchBlock(
+                typeof(HttpMessageHandlerAdapter).Name + ".ComputeContentLength",
+                isTopLevel: true,
+                callsHandler: false
+            );
         private static readonly ExceptionContextCatchBlock _httpMessageHandlerAdapterStreamContent =
-            new ExceptionContextCatchBlock(typeof(HttpMessageHandlerAdapter).Name + ".StreamContent",
-                isTopLevel: true, callsHandler: false);
+            new ExceptionContextCatchBlock(
+                typeof(HttpMessageHandlerAdapter).Name + ".StreamContent",
+                isTopLevel: true,
+                callsHandler: false
+            );
 
         /// <summary>Gets the catch block in <see cref="HttpMessageHandlerAdapter"/>.BufferContent.</summary>
         /// <remarks>
@@ -30,10 +42,7 @@ namespace System.Web.Http.Owin
         /// </remarks>
         public static ExceptionContextCatchBlock HttpMessageHandlerAdapterBufferContent
         {
-            get
-            {
-                return _httpMessageHandlerAdapterBufferContent;
-            }
+            get { return _httpMessageHandlerAdapterBufferContent; }
         }
 
         /// <summary>Gets the catch block in <see cref="HttpMessageHandlerAdapter"/>.BufferError.</summary>
@@ -43,10 +52,7 @@ namespace System.Web.Http.Owin
         /// </remarks>
         public static ExceptionContextCatchBlock HttpMessageHandlerAdapterBufferError
         {
-            get
-            {
-                return _httpMessageHandlerAdapterBufferError;
-            }
+            get { return _httpMessageHandlerAdapterBufferError; }
         }
 
         /// <summary>Gets the catch block in <see cref="HttpMessageHandlerAdapter"/>.ComputeContentLength.</summary>
@@ -55,10 +61,7 @@ namespace System.Web.Http.Owin
         /// </remarks>
         public static ExceptionContextCatchBlock HttpMessageHandlerAdapterComputeContentLength
         {
-            get
-            {
-                return _httpMessageHandlerAdapterComputeContentLength;
-            }
+            get { return _httpMessageHandlerAdapterComputeContentLength; }
         }
 
         /// <summary>Gets the catch block in <see cref="HttpMessageHandlerAdapter"/>.StreamContent.</summary>
@@ -68,10 +71,7 @@ namespace System.Web.Http.Owin
         /// </remarks>
         public static ExceptionContextCatchBlock HttpMessageHandlerAdapterStreamContent
         {
-            get
-            {
-                return _httpMessageHandlerAdapterStreamContent;
-            }
+            get { return _httpMessageHandlerAdapterStreamContent; }
         }
     }
 }

@@ -33,16 +33,23 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
-        internal abstract class CommonEmbeddedProperty : CommonEmbeddedMember<TPropertySymbol>, Cci.IPropertyDefinition
+        internal abstract class CommonEmbeddedProperty
+            : CommonEmbeddedMember<TPropertySymbol>,
+                Cci.IPropertyDefinition
         {
             private readonly ImmutableArray<TEmbeddedParameter> _parameters;
             private readonly TEmbeddedMethod _getter;
             private readonly TEmbeddedMethod _setter;
 
-            protected CommonEmbeddedProperty(TPropertySymbol underlyingProperty, TEmbeddedMethod getter, TEmbeddedMethod setter) :
-                base(underlyingProperty)
+            protected CommonEmbeddedProperty(
+                TPropertySymbol underlyingProperty,
+                TEmbeddedMethod getter,
+                TEmbeddedMethod setter
+            )
+                : base(underlyingProperty)
             {
                 Debug.Assert(getter != null || setter != null);
 
@@ -53,10 +60,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             internal override TEmbeddedTypesManager TypeManager
             {
-                get
-                {
-                    return AnAccessor.TypeManager;
-                }
+                get { return AnAccessor.TypeManager; }
             }
 
             protected abstract ImmutableArray<TEmbeddedParameter> GetParameters();
@@ -69,10 +73,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             public TPropertySymbol UnderlyingProperty
             {
-                get
-                {
-                    return this.UnderlyingSymbol;
-                }
+                get { return this.UnderlyingSymbol; }
             }
 
             Cci.IMethodReference Cci.IPropertyDefinition.Getter
@@ -85,7 +86,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 get { return _setter; }
             }
 
-            IEnumerable<Cci.IMethodReference> Cci.IPropertyDefinition.GetAccessors(EmitContext context)
+            IEnumerable<Cci.IMethodReference> Cci.IPropertyDefinition.GetAccessors(
+                EmitContext context
+            )
             {
                 if (_getter != null)
                 {
@@ -115,10 +118,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             bool Cci.IPropertyDefinition.IsSpecialName
             {
-                get
-                {
-                    return IsSpecialName;
-                }
+                get { return IsSpecialName; }
             }
 
             ImmutableArray<Cci.IParameterDefinition> Cci.IPropertyDefinition.Parameters
@@ -128,10 +128,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.CallingConvention Cci.ISignature.CallingConvention
             {
-                get
-                {
-                    return UnderlyingPropertySignature.CallingConvention;
-                }
+                get { return UnderlyingPropertySignature.CallingConvention; }
             }
 
             ushort Cci.ISignature.ParameterCount
@@ -139,33 +136,26 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 get { return (ushort)_parameters.Length; }
             }
 
-            ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(EmitContext context)
+            ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
+                EmitContext context
+            )
             {
                 return StaticCast<Cci.IParameterTypeInformation>.From(_parameters);
             }
 
             ImmutableArray<Cci.ICustomModifier> Cci.ISignature.ReturnValueCustomModifiers
             {
-                get
-                {
-                    return UnderlyingPropertySignature.ReturnValueCustomModifiers;
-                }
+                get { return UnderlyingPropertySignature.ReturnValueCustomModifiers; }
             }
 
             ImmutableArray<Cci.ICustomModifier> Cci.ISignature.RefCustomModifiers
             {
-                get
-                {
-                    return UnderlyingPropertySignature.RefCustomModifiers;
-                }
+                get { return UnderlyingPropertySignature.RefCustomModifiers; }
             }
 
             bool Cci.ISignature.ReturnValueIsByRef
             {
-                get
-                {
-                    return UnderlyingPropertySignature.ReturnValueIsByRef;
-                }
+                get { return UnderlyingPropertySignature.ReturnValueIsByRef; }
             }
 
             Cci.ITypeReference Cci.ISignature.GetType(EmitContext context)
@@ -175,10 +165,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             protected TEmbeddedMethod AnAccessor
             {
-                get
-                {
-                    return _getter ?? _setter;
-                }
+                get { return _getter ?? _setter; }
             }
 
             Cci.ITypeDefinition Cci.ITypeDefinitionMember.ContainingTypeDefinition
@@ -188,10 +175,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.TypeMemberVisibility Cci.ITypeDefinitionMember.Visibility
             {
-                get
-                {
-                    return Visibility;
-                }
+                get { return Visibility; }
             }
 
             Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
@@ -211,10 +195,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             string Cci.INamedEntity.Name
             {
-                get
-                {
-                    return Name;
-                }
+                get { return Name; }
             }
         }
     }

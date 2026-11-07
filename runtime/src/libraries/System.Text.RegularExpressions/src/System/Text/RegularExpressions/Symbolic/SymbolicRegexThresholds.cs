@@ -37,7 +37,8 @@ namespace System.Text.RegularExpressions.Symbolic
         internal const int DefaultSymbolicRegexSafeSizeThreshold = 1000;
 
         ///<summary>The environment variable name for a value overriding the default value <see cref="DefaultSymbolicRegexSafeSizeThreshold"/></summary>
-        internal const string SymbolicRegexSafeSizeThreshold_ConfigKeyName = "REGEX_NONBACKTRACKING_MAX_AUTOMATA_SIZE";
+        internal const string SymbolicRegexSafeSizeThreshold_ConfigKeyName =
+            "REGEX_NONBACKTRACKING_MAX_AUTOMATA_SIZE";
 
         /// <summary>
         /// Gets the value of the environment variable whose name is
@@ -52,11 +53,13 @@ namespace System.Text.RegularExpressions.Symbolic
         /// </remarks>
         internal static int GetSymbolicRegexSafeSizeThreshold()
         {
-            object? safeSizeThreshold = AppContext.GetData(SymbolicRegexSafeSizeThreshold_ConfigKeyName);
+            object? safeSizeThreshold = AppContext.GetData(
+                SymbolicRegexSafeSizeThreshold_ConfigKeyName
+            );
 
-            return (safeSizeThreshold is not int safeSizeThresholdInt || safeSizeThresholdInt <= 0) ?
-                DefaultSymbolicRegexSafeSizeThreshold :
-                safeSizeThresholdInt;
+            return (safeSizeThreshold is not int safeSizeThresholdInt || safeSizeThresholdInt <= 0)
+                ? DefaultSymbolicRegexSafeSizeThreshold
+                : safeSizeThresholdInt;
         }
     }
 }

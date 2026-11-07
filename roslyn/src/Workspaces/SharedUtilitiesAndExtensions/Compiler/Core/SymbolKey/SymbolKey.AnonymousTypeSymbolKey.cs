@@ -32,39 +32,56 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, INamedTypeSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                INamedTypeSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
-                contextualSymbol = contextualSymbol is { IsAnonymousType: true } ? contextualSymbol : null;
+                contextualSymbol = contextualSymbol is { IsAnonymousType: true }
+                    ? contextualSymbol
+                    : null;
 
-                var contextualProperties = contextualSymbol?.GetMembers().OfType<IPropertySymbol>().ToImmutableArray() ?? ImmutableArray<IPropertySymbol>.Empty;
+                var contextualProperties =
+                    contextualSymbol?.GetMembers().OfType<IPropertySymbol>().ToImmutableArray()
+                    ?? ImmutableArray<IPropertySymbol>.Empty;
 
                 using var propertyTypes = reader.ReadSymbolKeyArray<INamedTypeSymbol, ITypeSymbol>(
                     contextualSymbol,
-                    getContextualSymbol: (contextualSymbol, i) => SafeGet(contextualProperties, i)?.Type,
-                    out var propertyTypesFailureReason);
+                    getContextualSymbol: (contextualSymbol, i) =>
+                        SafeGet(contextualProperties, i)?.Type,
+                    out var propertyTypesFailureReason
+                );
 
                 using var propertyNames = reader.ReadStringArray();
                 using var propertyIsReadOnly = reader.ReadBooleanArray();
 
-                var propertyLocations = ReadPropertyLocations(reader, out var propertyLocationsFailureReason);
+                var propertyLocations = ReadPropertyLocations(
+                    reader,
+                    out var propertyLocationsFailureReason
+                );
 
                 if (propertyTypesFailureReason != null)
                 {
-                    failureReason = $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyTypes)} failed -> {propertyTypesFailureReason})";
+                    failureReason =
+                        $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyTypes)} failed -> {propertyTypesFailureReason})";
                     return default;
                 }
 
                 if (propertyLocationsFailureReason != null)
                 {
-                    failureReason = $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyLocations)} failed -> {propertyLocationsFailureReason})";
+                    failureReason =
+                        $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyLocations)} failed -> {propertyLocationsFailureReason})";
                     return default;
                 }
 
                 if (!propertyTypes.IsDefault)
                 {
                     var anonymousType = reader.Compilation.CreateAnonymousTypeSymbol(
-                        propertyTypes.ToImmutable(), propertyNames.ToImmutable()!,
-                        propertyIsReadOnly.ToImmutable(), propertyLocations);
+                        propertyTypes.ToImmutable(),
+                        propertyNames.ToImmutable()!,
+                        propertyIsReadOnly.ToImmutable(),
+                        propertyLocations
+                    );
                     failureReason = null;
                     return new SymbolKeyResolution(anonymousType);
                 }
@@ -73,7 +90,10 @@ namespace Microsoft.CodeAnalysis
                 return new SymbolKeyResolution(reader.Compilation.ObjectType);
             }
 
-            private static ImmutableArray<Location> ReadPropertyLocations(SymbolKeyReader reader, out string? failureReason)
+            private static ImmutableArray<Location> ReadPropertyLocations(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 using var propertyLocations = reader.ReadLocationArray(out failureReason);
                 if (failureReason != null)

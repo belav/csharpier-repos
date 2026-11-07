@@ -15,7 +15,9 @@ namespace System.Web.Mvc.Test
         public void BinderProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasSingleModelBinderAttribute").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasSingleModelBinderAttribute")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -29,20 +31,28 @@ namespace System.Web.Mvc.Test
         public void BinderPropertyThrowsIfMultipleBinderAttributesFound()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasMultipleModelBinderAttributes").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasMultipleModelBinderAttributes")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { IModelBinder binder = bindingInfo.Binder; },
-                "The parameter 'p1' on method 'Void ParameterHasMultipleModelBinderAttributes(System.Object)' contains multiple attributes that inherit from CustomModelBinderAttribute.");
+                delegate
+                {
+                    IModelBinder binder = bindingInfo.Binder;
+                },
+                "The parameter 'p1' on method 'Void ParameterHasMultipleModelBinderAttributes(System.Object)' contains multiple attributes that inherit from CustomModelBinderAttribute."
+            );
         }
 
         [Fact]
         public void ExcludeProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasBindAttribute").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasBindAttribute")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -61,7 +71,9 @@ namespace System.Web.Mvc.Test
         public void ExcludePropertyReturnsEmptyArrayIfNoBindAttributeSpecified()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasNoBindAttributes").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasNoBindAttributes")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -76,7 +88,9 @@ namespace System.Web.Mvc.Test
         public void IncludeProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasBindAttribute").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasBindAttribute")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -95,7 +109,9 @@ namespace System.Web.Mvc.Test
         public void IncludePropertyReturnsEmptyArrayIfNoBindAttributeSpecified()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasNoBindAttributes").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasNoBindAttributes")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -110,7 +126,9 @@ namespace System.Web.Mvc.Test
         public void PrefixProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasBindAttribute").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasBindAttribute")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -124,7 +142,9 @@ namespace System.Web.Mvc.Test
         public void PrefixPropertyReturnsNullIfNoBindAttributeSpecified()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasNoBindAttributes").GetParameters()[0];
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasNoBindAttributes")
+                .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
             // Act
@@ -137,21 +157,23 @@ namespace System.Web.Mvc.Test
         private class MyController : Controller
         {
             public void ParameterHasBindAttribute(
-                [Bind(Prefix = "some prefix", Include = "incl_a, incl_b", Exclude = "excl_a, excl_b")] object p1)
-            {
-            }
+                [Bind(
+                    Prefix = "some prefix",
+                    Include = "incl_a, incl_b",
+                    Exclude = "excl_a, excl_b"
+                )]
+                    object p1
+            ) { }
 
-            public void ParameterHasNoBindAttributes(object p1)
-            {
-            }
+            public void ParameterHasNoBindAttributes(object p1) { }
 
-            public void ParameterHasSingleModelBinderAttribute([ModelBinder(typeof(MyModelBinder))] object p1)
-            {
-            }
+            public void ParameterHasSingleModelBinderAttribute(
+                [ModelBinder(typeof(MyModelBinder))] object p1
+            ) { }
 
-            public void ParameterHasMultipleModelBinderAttributes([MyCustomModelBinder, MyCustomModelBinder] object p1)
-            {
-            }
+            public void ParameterHasMultipleModelBinderAttributes(
+                [MyCustomModelBinder, MyCustomModelBinder] object p1
+            ) { }
         }
 
         [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = true, Inherited = true)]
@@ -165,7 +187,10 @@ namespace System.Web.Mvc.Test
 
         private class MyModelBinder : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

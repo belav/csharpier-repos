@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector4;
 using Xunit;
+using Point = System.Numerics.Vector4;
 
 namespace VectorMathTests
 {
     public class Program
     {
         static Point a;
+
         [Fact]
         public static int TestEntryPoint()
         {

@@ -19,9 +19,9 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
     internal readonly struct ManagedActiveStatementUpdate(
         ManagedModuleMethodId method,
         int ilOffset,
-        SourceSpan newSpan)
+        SourceSpan newSpan
+    )
     {
-
         /// <summary>
         /// Method ID. It has the token for the method that contains the active statement
         /// and the version when the change was made.

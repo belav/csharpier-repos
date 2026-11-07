@@ -4,24 +4,24 @@ using System;
 
 class MainClass
 {
-	static int called;
+    static int called;
 
-	public static double[] GetTempBuffer ()
-	{
-		++called;
-		return new double[4];
-	}
+    public static double[] GetTempBuffer()
+    {
+        ++called;
+        return new double[4];
+    }
 
-	public static int Main ()
-	{
-		unsafe {
-			fixed (double* dummy = GetTempBuffer()) {
-			}
-		}
+    public static int Main()
+    {
+        unsafe
+        {
+            fixed (double* dummy = GetTempBuffer()) { }
+        }
 
-		if (called != 1)
-			return 1;
+        if (called != 1)
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,412 +29,456 @@
 
 using System.Collections;
 using System.Globalization;
-using System.Text;
-
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
+using System.Text;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class RegistryPermission
+        : CodeAccessPermission,
+            IUnrestrictedPermission,
+            IBuiltInPermission
+    {
+        private const int version = 1;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class RegistryPermission
-		: CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission {
+        private PermissionState _state;
 
-		private const int version = 1;
+        //		private RegistryPermissionAccess _access;
+        private ArrayList createList;
+        private ArrayList readList;
+        private ArrayList writeList;
 
-		private PermissionState _state;
-//		private RegistryPermissionAccess _access;
-		private ArrayList createList;
-		private ArrayList readList;
-		private ArrayList writeList;
-//		private AccessControlActions _control;
-		// Constructors
+        //		private AccessControlActions _control;
+        // Constructors
 
-		public RegistryPermission (PermissionState state)
-		{
-			_state = CheckPermissionState (state, true);
-			createList = new ArrayList ();
-			readList = new ArrayList ();
-			writeList = new ArrayList ();
-		}
+        public RegistryPermission(PermissionState state)
+        {
+            _state = CheckPermissionState(state, true);
+            createList = new ArrayList();
+            readList = new ArrayList();
+            writeList = new ArrayList();
+        }
 
-		public RegistryPermission (RegistryPermissionAccess access, string pathList)
-		{
-			_state = PermissionState.None;
-			createList = new ArrayList ();
-			readList = new ArrayList ();
-			writeList = new ArrayList ();
-			AddPathList (access, pathList);
-		}
-		public RegistryPermission (RegistryPermissionAccess access, AccessControlActions control, string pathList)
-		{
-			if (!Enum.IsDefined (typeof (AccessControlActions), control)) {
-				string msg = String.Format (Locale.GetText ("Invalid enum {0}"), control);
-				throw new ArgumentException (msg, "AccessControlActions");
-			}
-			_state = PermissionState.None;
-			AddPathList (access, control, pathList);
-		}
+        public RegistryPermission(RegistryPermissionAccess access, string pathList)
+        {
+            _state = PermissionState.None;
+            createList = new ArrayList();
+            readList = new ArrayList();
+            writeList = new ArrayList();
+            AddPathList(access, pathList);
+        }
 
-		// Properties
+        public RegistryPermission(
+            RegistryPermissionAccess access,
+            AccessControlActions control,
+            string pathList
+        )
+        {
+            if (!Enum.IsDefined(typeof(AccessControlActions), control))
+            {
+                string msg = String.Format(Locale.GetText("Invalid enum {0}"), control);
+                throw new ArgumentException(msg, "AccessControlActions");
+            }
+            _state = PermissionState.None;
+            AddPathList(access, control, pathList);
+        }
 
-		// Methods
+        // Properties
 
-		public void AddPathList (RegistryPermissionAccess access, string pathList) 
-		{
-			if (pathList == null)
-				throw new ArgumentNullException ("pathList");
+        // Methods
 
-			switch (access) {
-				case RegistryPermissionAccess.AllAccess:
-					AddWithUnionKey (createList, pathList);
-					AddWithUnionKey (readList, pathList);
-					AddWithUnionKey (writeList, pathList);
-					break;
-				case RegistryPermissionAccess.NoAccess:
-					// ??? unit tests doesn't show removal using NoAccess ???
-					break;
-				case RegistryPermissionAccess.Create:
-					AddWithUnionKey (createList, pathList);
-					break;
-				case RegistryPermissionAccess.Read:
-					AddWithUnionKey (readList, pathList);
-					break;
-				case RegistryPermissionAccess.Write:
-					AddWithUnionKey (writeList, pathList);
-					break;
-				default:
-					ThrowInvalidFlag (access, false);
-					break;
-			}
-		}
-		[MonoTODO ("(2.0) Access Control isn't implemented")]
-		public void AddPathList (RegistryPermissionAccess access, AccessControlActions control, string pathList) 
-		{
-			throw new NotImplementedException ();
-		}
-		public string GetPathList (RegistryPermissionAccess access)
-		{
-			switch (access) {
-				case RegistryPermissionAccess.AllAccess:
-				case RegistryPermissionAccess.NoAccess:
-					ThrowInvalidFlag (access, true);
-					break;
-				case RegistryPermissionAccess.Create:
-					return GetPathList (createList);
-				case RegistryPermissionAccess.Read:
-					return GetPathList (readList);
-				case RegistryPermissionAccess.Write:
-					return GetPathList (writeList);
-				default:
-					ThrowInvalidFlag (access, false);
-					break;
-			}
-			return null; // never reached
-		}
+        public void AddPathList(RegistryPermissionAccess access, string pathList)
+        {
+            if (pathList == null)
+                throw new ArgumentNullException("pathList");
 
-		public void SetPathList (RegistryPermissionAccess access, string pathList)
-		{
-			if (pathList == null)
-				throw new ArgumentNullException ("pathList");
+            switch (access)
+            {
+                case RegistryPermissionAccess.AllAccess:
+                    AddWithUnionKey(createList, pathList);
+                    AddWithUnionKey(readList, pathList);
+                    AddWithUnionKey(writeList, pathList);
+                    break;
+                case RegistryPermissionAccess.NoAccess:
+                    // ??? unit tests doesn't show removal using NoAccess ???
+                    break;
+                case RegistryPermissionAccess.Create:
+                    AddWithUnionKey(createList, pathList);
+                    break;
+                case RegistryPermissionAccess.Read:
+                    AddWithUnionKey(readList, pathList);
+                    break;
+                case RegistryPermissionAccess.Write:
+                    AddWithUnionKey(writeList, pathList);
+                    break;
+                default:
+                    ThrowInvalidFlag(access, false);
+                    break;
+            }
+        }
 
-			string[] paths;
-			switch (access) {
-				case RegistryPermissionAccess.AllAccess:
-					createList.Clear ();
-					readList.Clear ();
-					writeList.Clear ();
-					paths = pathList.Split (';');
-					foreach (string path in paths) {
-						createList.Add (path);
-						readList.Add (path);
-						writeList.Add (path);
-					}
-					break;
-				case RegistryPermissionAccess.NoAccess:
-					// ??? unit tests doesn't show removal using NoAccess ???
-					break;
-				case RegistryPermissionAccess.Create:
-					createList.Clear ();
-					paths = pathList.Split (';');
-					foreach (string path in paths) {
-						createList.Add (path);
-					}
-					break;
-				case RegistryPermissionAccess.Read:
-					readList.Clear ();
-					paths = pathList.Split (';');
-					foreach (string path in paths) {
-						readList.Add (path);
-					}
-					break;
-				case RegistryPermissionAccess.Write:
-					writeList.Clear ();
-					paths = pathList.Split (';');
-					foreach (string path in paths) {
-						writeList.Add (path);
-					}
-					break;
-				default:
-					ThrowInvalidFlag (access, false);
-					break;
-			}
-		}
+        [MonoTODO("(2.0) Access Control isn't implemented")]
+        public void AddPathList(
+            RegistryPermissionAccess access,
+            AccessControlActions control,
+            string pathList
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override IPermission Copy () 
-		{
-			RegistryPermission rp = new RegistryPermission (_state);
+        public string GetPathList(RegistryPermissionAccess access)
+        {
+            switch (access)
+            {
+                case RegistryPermissionAccess.AllAccess:
+                case RegistryPermissionAccess.NoAccess:
+                    ThrowInvalidFlag(access, true);
+                    break;
+                case RegistryPermissionAccess.Create:
+                    return GetPathList(createList);
+                case RegistryPermissionAccess.Read:
+                    return GetPathList(readList);
+                case RegistryPermissionAccess.Write:
+                    return GetPathList(writeList);
+                default:
+                    ThrowInvalidFlag(access, false);
+                    break;
+            }
+            return null; // never reached
+        }
 
-			string path = GetPathList (RegistryPermissionAccess.Create);
-			if (path != null)
-				rp.SetPathList (RegistryPermissionAccess.Create, path);
+        public void SetPathList(RegistryPermissionAccess access, string pathList)
+        {
+            if (pathList == null)
+                throw new ArgumentNullException("pathList");
 
-			path = GetPathList (RegistryPermissionAccess.Read);
-			if (path != null)
-				rp.SetPathList (RegistryPermissionAccess.Read, path);
+            string[] paths;
+            switch (access)
+            {
+                case RegistryPermissionAccess.AllAccess:
+                    createList.Clear();
+                    readList.Clear();
+                    writeList.Clear();
+                    paths = pathList.Split(';');
+                    foreach (string path in paths)
+                    {
+                        createList.Add(path);
+                        readList.Add(path);
+                        writeList.Add(path);
+                    }
+                    break;
+                case RegistryPermissionAccess.NoAccess:
+                    // ??? unit tests doesn't show removal using NoAccess ???
+                    break;
+                case RegistryPermissionAccess.Create:
+                    createList.Clear();
+                    paths = pathList.Split(';');
+                    foreach (string path in paths)
+                    {
+                        createList.Add(path);
+                    }
+                    break;
+                case RegistryPermissionAccess.Read:
+                    readList.Clear();
+                    paths = pathList.Split(';');
+                    foreach (string path in paths)
+                    {
+                        readList.Add(path);
+                    }
+                    break;
+                case RegistryPermissionAccess.Write:
+                    writeList.Clear();
+                    paths = pathList.Split(';');
+                    foreach (string path in paths)
+                    {
+                        writeList.Add(path);
+                    }
+                    break;
+                default:
+                    ThrowInvalidFlag(access, false);
+                    break;
+            }
+        }
 
-			path = GetPathList (RegistryPermissionAccess.Write);
-			if (path != null)
-				rp.SetPathList (RegistryPermissionAccess.Write, path);
-			return rp;
-		}
+        public override IPermission Copy()
+        {
+            RegistryPermission rp = new RegistryPermission(_state);
 
-		public override void FromXml (SecurityElement esd) 
-		{
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (esd, "esd", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+            string path = GetPathList(RegistryPermissionAccess.Create);
+            if (path != null)
+                rp.SetPathList(RegistryPermissionAccess.Create, path);
 
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (esd, "esd", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+            path = GetPathList(RegistryPermissionAccess.Read);
+            if (path != null)
+                rp.SetPathList(RegistryPermissionAccess.Read, path);
 
-			if (IsUnrestricted (esd))
-				_state = PermissionState.Unrestricted;
+            path = GetPathList(RegistryPermissionAccess.Write);
+            if (path != null)
+                rp.SetPathList(RegistryPermissionAccess.Write, path);
+            return rp;
+        }
 
-			string create = esd.Attribute ("Create");
-			if ((create != null) && (create.Length > 0))
-				SetPathList (RegistryPermissionAccess.Create, create);
+        public override void FromXml(SecurityElement esd)
+        {
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(esd, "esd", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-			string read = esd.Attribute ("Read");
-			if ((read != null) && (read.Length > 0))
-				SetPathList (RegistryPermissionAccess.Read, read);
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(esd, "esd", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-			string write = esd.Attribute ("Write");
-			if ((write != null) && (write.Length > 0))
-				SetPathList (RegistryPermissionAccess.Write, write);
-		}
+            if (IsUnrestricted(esd))
+                _state = PermissionState.Unrestricted;
 
-		public override IPermission Intersect (IPermission target) 
-		{
-			RegistryPermission rp = Cast (target);
-			if (rp == null)
-				return null;
+            string create = esd.Attribute("Create");
+            if ((create != null) && (create.Length > 0))
+                SetPathList(RegistryPermissionAccess.Create, create);
 
-			if (IsUnrestricted ())
-				return rp.Copy ();
-			if (rp.IsUnrestricted ())
-				return Copy ();
+            string read = esd.Attribute("Read");
+            if ((read != null) && (read.Length > 0))
+                SetPathList(RegistryPermissionAccess.Read, read);
 
-			RegistryPermission result = new RegistryPermission (PermissionState.None);
+            string write = esd.Attribute("Write");
+            if ((write != null) && (write.Length > 0))
+                SetPathList(RegistryPermissionAccess.Write, write);
+        }
 
-			IntersectKeys (createList, rp.createList, result.createList);
-			IntersectKeys (readList, rp.readList, result.readList);
-			IntersectKeys (writeList, rp.writeList, result.writeList);
+        public override IPermission Intersect(IPermission target)
+        {
+            RegistryPermission rp = Cast(target);
+            if (rp == null)
+                return null;
 
-			return (result.IsEmpty () ? null : result);
-		}
+            if (IsUnrestricted())
+                return rp.Copy();
+            if (rp.IsUnrestricted())
+                return Copy();
 
-		public override bool IsSubsetOf (IPermission target) 
-		{
-			RegistryPermission rp = Cast (target);
-			if (rp == null) 
-				return false;
-			if (rp.IsEmpty ())
-				return IsEmpty ();
+            RegistryPermission result = new RegistryPermission(PermissionState.None);
 
-			if (IsUnrestricted ())
-				return rp.IsUnrestricted ();
-			else if (rp.IsUnrestricted ())
-				return true;
+            IntersectKeys(createList, rp.createList, result.createList);
+            IntersectKeys(readList, rp.readList, result.readList);
+            IntersectKeys(writeList, rp.writeList, result.writeList);
 
-			if (!KeyIsSubsetOf (createList, rp.createList))
-				return false;
-			if (!KeyIsSubsetOf (readList, rp.readList))
-				return false;
-			if (!KeyIsSubsetOf (writeList, rp.writeList))
-				return false;
+            return (result.IsEmpty() ? null : result);
+        }
 
-			return true;
-		}
+        public override bool IsSubsetOf(IPermission target)
+        {
+            RegistryPermission rp = Cast(target);
+            if (rp == null)
+                return false;
+            if (rp.IsEmpty())
+                return IsEmpty();
 
-		public bool IsUnrestricted () 
-		{
-			return (_state == PermissionState.Unrestricted);
-		}
+            if (IsUnrestricted())
+                return rp.IsUnrestricted();
+            else if (rp.IsUnrestricted())
+                return true;
 
-		public override SecurityElement ToXml () 
-		{
-			SecurityElement se = Element (version);
+            if (!KeyIsSubsetOf(createList, rp.createList))
+                return false;
+            if (!KeyIsSubsetOf(readList, rp.readList))
+                return false;
+            if (!KeyIsSubsetOf(writeList, rp.writeList))
+                return false;
 
-			if (_state == PermissionState.Unrestricted) {
-				se.AddAttribute ("Unrestricted", "true");
-			}
-			else {
-				string path = GetPathList (RegistryPermissionAccess.Create);
-				if (path != null)
-					se.AddAttribute ("Create", path);
-				path = GetPathList (RegistryPermissionAccess.Read);
-				if (path != null)
-					se.AddAttribute ("Read", path);
-				path = GetPathList (RegistryPermissionAccess.Write);
-				if (path != null)
-					se.AddAttribute ("Write", path);
-			}
-			return se;
-		}
+            return true;
+        }
 
-		public override IPermission Union (IPermission other)
-		{
-			RegistryPermission rp = Cast (other);
-			if (rp == null)
-				return Copy ();
+        public bool IsUnrestricted()
+        {
+            return (_state == PermissionState.Unrestricted);
+        }
 
-			if (IsUnrestricted () || rp.IsUnrestricted ())
-				return new RegistryPermission (PermissionState.Unrestricted);
+        public override SecurityElement ToXml()
+        {
+            SecurityElement se = Element(version);
 
-			if (IsEmpty () && rp.IsEmpty ())
-				return null;
+            if (_state == PermissionState.Unrestricted)
+            {
+                se.AddAttribute("Unrestricted", "true");
+            }
+            else
+            {
+                string path = GetPathList(RegistryPermissionAccess.Create);
+                if (path != null)
+                    se.AddAttribute("Create", path);
+                path = GetPathList(RegistryPermissionAccess.Read);
+                if (path != null)
+                    se.AddAttribute("Read", path);
+                path = GetPathList(RegistryPermissionAccess.Write);
+                if (path != null)
+                    se.AddAttribute("Write", path);
+            }
+            return se;
+        }
 
-			RegistryPermission result = (RegistryPermission) Copy ();
-			string path = rp.GetPathList (RegistryPermissionAccess.Create);
-			if (path != null) 
-				result.AddPathList (RegistryPermissionAccess.Create, path);
-			path = rp.GetPathList (RegistryPermissionAccess.Read);
-			if (path != null) 
-				result.AddPathList (RegistryPermissionAccess.Read, path);
-			path = rp.GetPathList (RegistryPermissionAccess.Write);
-			if (path != null)
-				result.AddPathList (RegistryPermissionAccess.Write, path);
-			return result;
-		}
+        public override IPermission Union(IPermission other)
+        {
+            RegistryPermission rp = Cast(other);
+            if (rp == null)
+                return Copy();
 
-		// IBuiltInPermission
-		int IBuiltInPermission.GetTokenIndex ()
-		{
-			return (int) BuiltInToken.Registry;
-		}
+            if (IsUnrestricted() || rp.IsUnrestricted())
+                return new RegistryPermission(PermissionState.Unrestricted);
 
-		// helpers
+            if (IsEmpty() && rp.IsEmpty())
+                return null;
 
-		private bool IsEmpty ()
-		{
-			return ((_state == PermissionState.None) && (createList.Count == 0) &&
-				(readList.Count == 0) && (writeList.Count == 0));
-		}
+            RegistryPermission result = (RegistryPermission)Copy();
+            string path = rp.GetPathList(RegistryPermissionAccess.Create);
+            if (path != null)
+                result.AddPathList(RegistryPermissionAccess.Create, path);
+            path = rp.GetPathList(RegistryPermissionAccess.Read);
+            if (path != null)
+                result.AddPathList(RegistryPermissionAccess.Read, path);
+            path = rp.GetPathList(RegistryPermissionAccess.Write);
+            if (path != null)
+                result.AddPathList(RegistryPermissionAccess.Write, path);
+            return result;
+        }
 
-		private RegistryPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
+        // IBuiltInPermission
+        int IBuiltInPermission.GetTokenIndex()
+        {
+            return (int)BuiltInToken.Registry;
+        }
 
-			RegistryPermission rp = (target as RegistryPermission);
-			if (rp == null) {
-				ThrowInvalidPermission (target, typeof (RegistryPermission));
-			}
+        // helpers
 
-			return rp;
-		}
+        private bool IsEmpty()
+        {
+            return (
+                (_state == PermissionState.None)
+                && (createList.Count == 0)
+                && (readList.Count == 0)
+                && (writeList.Count == 0)
+            );
+        }
 
-		internal void ThrowInvalidFlag (RegistryPermissionAccess flag, bool context) 
-		{
-			string msg = null;
-			if (context)
-				msg = Locale.GetText ("Unknown flag '{0}'.");
-			else
-				msg = Locale.GetText ("Invalid flag '{0}' in this context.");
-			throw new ArgumentException (String.Format (msg, flag), "flag");
-		}
+        private RegistryPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		private string GetPathList (ArrayList list)
-		{
-			if (IsUnrestricted ())
-				return String.Empty;
-			if (list.Count == 0)
-				return String.Empty;
-			StringBuilder sb = new StringBuilder ();
-			foreach (string path in list) {
-				sb.Append (path);
-				sb.Append (";");
-			}
+            RegistryPermission rp = (target as RegistryPermission);
+            if (rp == null)
+            {
+                ThrowInvalidPermission(target, typeof(RegistryPermission));
+            }
 
-			string result = sb.ToString ();
-			// remove last ';'
-			int n = result.Length;
-			if (n > 0)
-				return result.Substring (0, n - 1);
-			return String.Empty;
-		}
+            return rp;
+        }
 
-		internal bool KeyIsSubsetOf (IList local, IList target)
-		{
-			bool result = false;
-			foreach (string l in local) {
-				foreach (string t in target) {
-					if (l.StartsWith (t)) {
-						result = true;
-						break;
-					}
-				}
-				if (!result)
-					return false;
-			}
-			return true;
-		}
+        internal void ThrowInvalidFlag(RegistryPermissionAccess flag, bool context)
+        {
+            string msg = null;
+            if (context)
+                msg = Locale.GetText("Unknown flag '{0}'.");
+            else
+                msg = Locale.GetText("Invalid flag '{0}' in this context.");
+            throw new ArgumentException(String.Format(msg, flag), "flag");
+        }
 
-		internal void AddWithUnionKey (IList list, string pathList)
-		{
-			string[] paths = pathList.Split (';');
-			foreach (string path in paths) {
-				int len = list.Count;
-				if (len == 0) {
-					list.Add (path);
-				}
-				else {
-					for (int i=0; i < len; i++) {
-						string s = (string) list [i];
-						if (s.StartsWith (path)) {
-							// replace (with reduced version)
-							list [i] = path;
-						}
-						else if (path.StartsWith (s)) {
-							// no need to add
-						}
-						else {
-							list.Add (path);
-						}
-					}
-				}
-			}
-		}
+        private string GetPathList(ArrayList list)
+        {
+            if (IsUnrestricted())
+                return String.Empty;
+            if (list.Count == 0)
+                return String.Empty;
+            StringBuilder sb = new StringBuilder();
+            foreach (string path in list)
+            {
+                sb.Append(path);
+                sb.Append(";");
+            }
 
-		internal void IntersectKeys (IList local, IList target, IList result)
-		{
-			foreach (string l in local) {
-				foreach (string t in target) {
-					if (t.Length > l.Length) {
-						if (t.StartsWith (l))
-							result.Add (t);
-					}
-					else {
-						if (l.StartsWith (t))
-							result.Add (l);
-					}
-				}
-			}
-		}
-	}
+            string result = sb.ToString();
+            // remove last ';'
+            int n = result.Length;
+            if (n > 0)
+                return result.Substring(0, n - 1);
+            return String.Empty;
+        }
+
+        internal bool KeyIsSubsetOf(IList local, IList target)
+        {
+            bool result = false;
+            foreach (string l in local)
+            {
+                foreach (string t in target)
+                {
+                    if (l.StartsWith(t))
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+                if (!result)
+                    return false;
+            }
+            return true;
+        }
+
+        internal void AddWithUnionKey(IList list, string pathList)
+        {
+            string[] paths = pathList.Split(';');
+            foreach (string path in paths)
+            {
+                int len = list.Count;
+                if (len == 0)
+                {
+                    list.Add(path);
+                }
+                else
+                {
+                    for (int i = 0; i < len; i++)
+                    {
+                        string s = (string)list[i];
+                        if (s.StartsWith(path))
+                        {
+                            // replace (with reduced version)
+                            list[i] = path;
+                        }
+                        else if (path.StartsWith(s))
+                        {
+                            // no need to add
+                        }
+                        else
+                        {
+                            list.Add(path);
+                        }
+                    }
+                }
+            }
+        }
+
+        internal void IntersectKeys(IList local, IList target, IList result)
+        {
+            foreach (string l in local)
+            {
+                foreach (string t in target)
+                {
+                    if (t.Length > l.Length)
+                    {
+                        if (t.StartsWith(l))
+                            result.Add(t);
+                    }
+                    else
+                    {
+                        if (l.StartsWith(t))
+                            result.Add(l);
+                    }
+                }
+            }
+        }
+    }
 }

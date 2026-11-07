@@ -17,7 +17,11 @@ namespace System.Text.Json.Serialization
         // AggressiveInlining used since this method is on a hot path and short. The optionally called
         // method DoSingleValueReadWithReadAhead is not inlined.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool SingleValueReadWithReadAhead(bool requiresReadAhead, ref Utf8JsonReader reader, scoped ref ReadStack state)
+        internal static bool SingleValueReadWithReadAhead(
+            bool requiresReadAhead,
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             bool readAhead = requiresReadAhead && state.ReadAhead;
             if (!readAhead)

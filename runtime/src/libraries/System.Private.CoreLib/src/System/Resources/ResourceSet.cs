@@ -21,7 +21,7 @@ namespace System.Resources
         protected IResourceReader? Reader; // The field is protected for .NET Framework compatibility
 
         private Dictionary<object, object?>? _table;
-        private Dictionary<string, object?>? _caseInsensitiveTable;  // For case-insensitive lookups.
+        private Dictionary<string, object?>? _caseInsensitiveTable; // For case-insensitive lookups.
 
         protected ResourceSet()
         {
@@ -32,9 +32,7 @@ namespace System.Resources
 
         // For RuntimeResourceSet, ignore the Table parameter - it's a wasted
         // allocation.
-        internal ResourceSet(bool _)
-        {
-        }
+        internal ResourceSet(bool _) { }
 
         // Creates a ResourceSet using the system default ResourceReader
         // implementation.  Use this constructor to open & read from a file
@@ -108,7 +106,10 @@ namespace System.Resources
         // GetDefaultReader and GetDefaultWriter.
         public virtual Type GetDefaultWriter()
         {
-            return Type.GetType("System.Resources.ResourceWriter, System.Resources.Writer", throwOnError: true)!;
+            return Type.GetType(
+                "System.Resources.ResourceWriter, System.Resources.Writer",
+                throwOnError: true
+            )!;
         }
 
         public virtual IDictionaryEnumerator GetEnumerator()
@@ -123,11 +124,11 @@ namespace System.Resources
 
         private IDictionaryEnumerator GetEnumeratorHelper()
         {
-            Dictionary<object, object?>? table = _table;  // Avoid a race with Dispose
+            Dictionary<object, object?>? table = _table; // Avoid a race with Dispose
             if (table == null)
                 throw new ObjectDisposedException(null, SR.ObjectDisposed_ResourceSet);
 
-             // Use IDictionary.GetEnumerator() for backward compatibility. Callers expect the enumerator to return DictionaryEntry instances.
+            // Use IDictionary.GetEnumerator() for backward compatibility. Callers expect the enumerator to return DictionaryEntry instances.
             return ((IDictionary)table).GetEnumerator();
         }
 
@@ -142,7 +143,9 @@ namespace System.Resources
             if (obj is null)
                 return null;
 
-            throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ResourceNotString_Name, name));
+            throw new InvalidOperationException(
+                SR.Format(SR.InvalidOperation_ResourceNotString_Name, name)
+            );
         }
 
         public virtual string? GetString(string name, bool ignoreCase)
@@ -153,7 +156,9 @@ namespace System.Resources
                 return s;
 
             if (obj is not null)
-                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ResourceNotString_Name, name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_ResourceNotString_Name, name)
+                );
 
             if (!ignoreCase)
                 return null;
@@ -166,7 +171,9 @@ namespace System.Resources
             if (obj is null)
                 return null;
 
-            throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ResourceNotString_Name, name));
+            throw new InvalidOperationException(
+                SR.Format(SR.InvalidOperation_ResourceNotString_Name, name)
+            );
         }
 
         // Look up an object value for a resource given its name.
@@ -203,7 +210,7 @@ namespace System.Resources
         {
             ArgumentNullException.ThrowIfNull(name);
 
-            Dictionary<object, object?>? copyOfTable = _table;  // Avoid a race with Dispose
+            Dictionary<object, object?>? copyOfTable = _table; // Avoid a race with Dispose
 
             if (copyOfTable == null)
                 throw new ObjectDisposedException(null, SR.ObjectDisposed_ResourceSet);
@@ -214,15 +221,18 @@ namespace System.Resources
 
         private object? GetCaseInsensitiveObjectInternal(string name)
         {
-            Dictionary<object, object?>? copyOfTable = _table;  // Avoid a race with Dispose
+            Dictionary<object, object?>? copyOfTable = _table; // Avoid a race with Dispose
 
             if (copyOfTable == null)
                 throw new ObjectDisposedException(null, SR.ObjectDisposed_ResourceSet);
 
-            Dictionary<string, object?>? caseTable = _caseInsensitiveTable;  // Avoid a race condition with Close
+            Dictionary<string, object?>? caseTable = _caseInsensitiveTable; // Avoid a race condition with Close
             if (caseTable == null)
             {
-                caseTable = new Dictionary<string, object?>(copyOfTable.Count, StringComparer.OrdinalIgnoreCase);
+                caseTable = new Dictionary<string, object?>(
+                    copyOfTable.Count,
+                    StringComparer.OrdinalIgnoreCase
+                );
                 foreach (var item in copyOfTable)
                 {
                     if (item.Key is not string s)

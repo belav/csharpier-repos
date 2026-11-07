@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,25 +33,23 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.SymbolStore
 {
-	[ComVisible (true)]
-	public class SymLanguageType
-	{
-		// Constructors
-		public SymLanguageType ()
-		{
-		}
+    [ComVisible(true)]
+    public class SymLanguageType
+    {
+        // Constructors
+        public SymLanguageType() { }
 
-		// Fields
-		public static readonly Guid Basic;
-		public static readonly Guid C;
-		public static readonly Guid Cobol;
-		public static readonly Guid CPlusPlus;
-		public static readonly Guid CSharp;
-		public static readonly Guid ILAssembly;
-		public static readonly Guid Java;
-		public static readonly Guid JScript;
-		public static readonly Guid MCPlusPlus;
-		public static readonly Guid Pascal;
-		public static readonly Guid SMC;
-	}
+        // Fields
+        public static readonly Guid Basic;
+        public static readonly Guid C;
+        public static readonly Guid Cobol;
+        public static readonly Guid CPlusPlus;
+        public static readonly Guid CSharp;
+        public static readonly Guid ILAssembly;
+        public static readonly Guid Java;
+        public static readonly Guid JScript;
+        public static readonly Guid MCPlusPlus;
+        public static readonly Guid Pascal;
+        public static readonly Guid SMC;
+    }
 }

@@ -17,9 +17,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Document document,
             TextSpan span,
             bool includeSuppressedDiagnostics = false,
-            bool includeNonLocalDocumentDiagnostics = false)
+            bool includeNonLocalDocumentDiagnostics = false
+        )
         {
-            var testDriver = new TestDiagnosticAnalyzerDriver(workspace, includeSuppressedDiagnostics, includeNonLocalDocumentDiagnostics);
+            var testDriver = new TestDiagnosticAnalyzerDriver(
+                workspace,
+                includeSuppressedDiagnostics,
+                includeNonLocalDocumentDiagnostics
+            );
             return await testDriver.GetAllDiagnosticsAsync(document, span);
         }
 
@@ -28,9 +33,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Document document,
             TextSpan span,
             bool includeSuppressedDiagnostics = false,
-            bool includeNonLocalDocumentDiagnostics = false)
+            bool includeNonLocalDocumentDiagnostics = false
+        )
         {
-            var testDriver = new TestDiagnosticAnalyzerDriver(workspace, includeSuppressedDiagnostics, includeNonLocalDocumentDiagnostics);
+            var testDriver = new TestDiagnosticAnalyzerDriver(
+                workspace,
+                includeSuppressedDiagnostics,
+                includeNonLocalDocumentDiagnostics
+            );
             return await testDriver.GetDocumentDiagnosticsAsync(document, span);
         }
 
@@ -38,9 +48,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Workspace workspace,
             Project project,
             bool includeSuppressedDiagnostics = false,
-            bool includeNonLocalDocumentDiagnostics = false)
+            bool includeNonLocalDocumentDiagnostics = false
+        )
         {
-            var testDriver = new TestDiagnosticAnalyzerDriver(workspace, includeSuppressedDiagnostics, includeNonLocalDocumentDiagnostics);
+            var testDriver = new TestDiagnosticAnalyzerDriver(
+                workspace,
+                includeSuppressedDiagnostics,
+                includeNonLocalDocumentDiagnostics
+            );
             return await testDriver.GetProjectDiagnosticsAsync(project);
         }
     }

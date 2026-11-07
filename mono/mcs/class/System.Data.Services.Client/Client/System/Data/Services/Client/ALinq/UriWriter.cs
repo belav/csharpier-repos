@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -29,11 +28,11 @@ namespace System.Data.Services.Client
         private readonly DataServiceContext context;
 
         private readonly StringBuilder uriBuilder;
-        
+
         private Version uriVersion;
 
         private ResourceSetExpression leafResourceSet;
-        
+
         private UriWriter(DataServiceContext context)
         {
             Debug.Assert(context != null, "context != null");
@@ -42,12 +41,21 @@ namespace System.Data.Services.Client
             this.uriVersion = Util.DataServiceVersion1;
         }
 
-        internal static void Translate(DataServiceContext context, bool addTrailingParens, Expression e, out Uri uri, out Version version)
+        internal static void Translate(
+            DataServiceContext context,
+            bool addTrailingParens,
+            Expression e,
+            out Uri uri,
+            out Version version
+        )
         {
             var writer = new UriWriter(context);
             writer.leafResourceSet = addTrailingParens ? (e as ResourceSetExpression) : null;
             writer.Visit(e);
-            uri = Util.CreateUri(context.BaseUriWithSlash, Util.CreateUri(writer.uriBuilder.ToString(), UriKind.Relative));
+            uri = Util.CreateUri(
+                context.BaseUriWithSlash,
+                Util.CreateUri(writer.uriBuilder.ToString(), UriKind.Relative)
+            );
             version = writer.uriVersion;
         }
 
@@ -63,7 +71,9 @@ namespace System.Data.Services.Client
 
         internal override Expression VisitBinary(BinaryExpression b)
         {
-            throw new NotSupportedException(Strings.ALinq_BinaryNotSupported(b.NodeType.ToString()));
+            throw new NotSupportedException(
+                Strings.ALinq_BinaryNotSupported(b.NodeType.ToString())
+            );
         }
 
         internal override Expression VisitConstant(ConstantExpression c)
@@ -121,24 +131,32 @@ namespace System.Data.Services.Client
             throw new NotSupportedException(Strings.ALinq_InvocationNotSupported);
         }
 
-        internal override Expression VisitNavigationPropertySingletonExpression(NavigationPropertySingletonExpression npse)
+        internal override Expression VisitNavigationPropertySingletonExpression(
+            NavigationPropertySingletonExpression npse
+        )
         {
             this.Visit(npse.Source);
-            this.uriBuilder.Append(UriHelper.FORWARDSLASH).Append(this.ExpressionToString(npse.MemberExpression));
+            this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                .Append(this.ExpressionToString(npse.MemberExpression));
             this.VisitQueryOptions(npse);
             return npse;
         }
 
         internal override Expression VisitResourceSetExpression(ResourceSetExpression rse)
         {
-            if ((ResourceExpressionType)rse.NodeType == ResourceExpressionType.ResourceNavigationProperty)
+            if (
+                (ResourceExpressionType)rse.NodeType
+                == ResourceExpressionType.ResourceNavigationProperty
+            )
             {
                 this.Visit(rse.Source);
-                this.uriBuilder.Append(UriHelper.FORWARDSLASH).Append(this.ExpressionToString(rse.MemberExpression));
+                this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                    .Append(this.ExpressionToString(rse.MemberExpression));
             }
             else
             {
-                this.uriBuilder.Append(UriHelper.FORWARDSLASH).Append((string)((ConstantExpression)rse.MemberExpression).Value);
+                this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                    .Append((string)((ConstantExpression)rse.MemberExpression).Value);
             }
 
             if (rse.KeyPredicate != null)
@@ -146,7 +164,9 @@ namespace System.Data.Services.Client
                 this.uriBuilder.Append(UriHelper.LEFTPAREN);
                 if (rse.KeyPredicate.Count == 1)
                 {
-                    this.uriBuilder.Append(this.ExpressionToString(rse.KeyPredicate.Values.First()));
+                    this.uriBuilder.Append(
+                        this.ExpressionToString(rse.KeyPredicate.Values.First())
+                    );
                 }
                 else
                 {
@@ -175,7 +195,9 @@ namespace System.Data.Services.Client
 
             if (rse.CountOption == CountOption.ValueOnly)
             {
-                this.uriBuilder.Append(UriHelper.FORWARDSLASH).Append(UriHelper.DOLLARSIGN).Append(UriHelper.COUNT);
+                this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                    .Append(UriHelper.DOLLARSIGN)
+                    .Append(UriHelper.COUNT);
                 this.EnsureMinimumVersion(2, 0);
             }
 
@@ -377,7 +399,9 @@ namespace System.Data.Services.Client
             this.EnsureMinimumVersion(2, 0);
         }
 
-        internal void VisitCustomQueryOptions(Dictionary<ConstantExpression, ConstantExpression> options)
+        internal void VisitCustomQueryOptions(
+            Dictionary<ConstantExpression, ConstantExpression> options
+        )
         {
             List<ConstantExpression> keys = options.Keys.ToList();
             List<ConstantExpression> values = options.Values.ToList();
@@ -389,7 +413,14 @@ namespace System.Data.Services.Client
                 this.uriBuilder.Append(UriHelper.EQUALSSIGN);
                 this.uriBuilder.Append(values[ii].Value);
 
-                if (keys[ii].Value.ToString().Equals(UriHelper.DOLLARSIGN + UriHelper.OPTIONCOUNT, StringComparison.OrdinalIgnoreCase))
+                if (
+                    keys[ii]
+                        .Value.ToString()
+                        .Equals(
+                            UriHelper.DOLLARSIGN + UriHelper.OPTIONCOUNT,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
                 {
                     this.EnsureMinimumVersion(2, 0);
                 }
@@ -410,8 +441,10 @@ namespace System.Data.Services.Client
 
         private void EnsureMinimumVersion(int major, int minor)
         {
-            if (major > this.uriVersion.Major ||
-                (major == this.uriVersion.Major && minor > this.uriVersion.Minor))
+            if (
+                major > this.uriVersion.Major
+                || (major == this.uriVersion.Major && minor > this.uriVersion.Minor)
+            )
             {
                 this.uriVersion = new Version(major, minor);
             }

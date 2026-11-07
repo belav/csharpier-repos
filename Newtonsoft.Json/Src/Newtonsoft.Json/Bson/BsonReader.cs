@@ -26,11 +26,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.IO;
+using System.Text;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Linq;
 
 #nullable disable
 
@@ -39,7 +39,9 @@ namespace Newtonsoft.Json.Bson
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to serialized BSON data.
     /// </summary>
-    [Obsolete("BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
+    [Obsolete(
+        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details."
+    )]
     public class BsonReader : JsonReader
     {
         private const int MaxCharBytesSize = 128;
@@ -72,7 +74,7 @@ namespace Newtonsoft.Json.Bson
             CodeWScopeCode = 5,
             CodeWScopeScope = 6,
             CodeWScopeScopeObject = 7,
-            CodeWScopeScopeEnd = 8
+            CodeWScopeScopeEnd = 8,
         }
 
         private class ContainerContext
@@ -127,18 +129,14 @@ namespace Newtonsoft.Json.Bson
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the BSON data to read.</param>
         public BsonReader(Stream stream)
-            : this(stream, false, DateTimeKind.Local)
-        {
-        }
+            : this(stream, false, DateTimeKind.Local) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BsonReader"/> class.
         /// </summary>
         /// <param name="reader">The <see cref="BinaryReader"/> containing the BSON data to read.</param>
         public BsonReader(BinaryReader reader)
-            : this(reader, false, DateTimeKind.Local)
-        {
-        }
+            : this(reader, false, DateTimeKind.Local) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BsonReader"/> class.
@@ -146,7 +144,11 @@ namespace Newtonsoft.Json.Bson
         /// <param name="stream">The <see cref="Stream"/> containing the BSON data to read.</param>
         /// <param name="readRootValueAsArray">if set to <c>true</c> the root object will be read as a JSON array.</param>
         /// <param name="dateTimeKindHandling">The <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from BSON.</param>
-        public BsonReader(Stream stream, bool readRootValueAsArray, DateTimeKind dateTimeKindHandling)
+        public BsonReader(
+            Stream stream,
+            bool readRootValueAsArray,
+            DateTimeKind dateTimeKindHandling
+        )
         {
             ValidationUtils.ArgumentNotNull(stream, nameof(stream));
             _reader = new BinaryReader(stream);
@@ -161,7 +163,11 @@ namespace Newtonsoft.Json.Bson
         /// <param name="reader">The <see cref="BinaryReader"/> containing the BSON data to read.</param>
         /// <param name="readRootValueAsArray">if set to <c>true</c> the root object will be read as a JSON array.</param>
         /// <param name="dateTimeKindHandling">The <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from BSON.</param>
-        public BsonReader(BinaryReader reader, bool readRootValueAsArray, DateTimeKind dateTimeKindHandling)
+        public BsonReader(
+            BinaryReader reader,
+            bool readRootValueAsArray,
+            DateTimeKind dateTimeKindHandling
+        )
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
             _reader = reader;
@@ -207,7 +213,13 @@ namespace Newtonsoft.Json.Bson
                         success = ReadCodeWScope();
                         break;
                     default:
-                        throw JsonReaderException.Create(this, "Unexpected state: {0}".FormatWith(CultureInfo.InvariantCulture, _bsonReaderState));
+                        throw JsonReaderException.Create(
+                            this,
+                            "Unexpected state: {0}".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                _bsonReaderState
+                            )
+                        );
                 }
 
                 if (!success)
@@ -316,7 +328,10 @@ namespace Newtonsoft.Json.Bson
                     }
                     else
                     {
-                        throw JsonReaderException.Create(this, "Unexpected state when reading BSON reference: " + _bsonReaderState);
+                        throw JsonReaderException.Create(
+                            this,
+                            "Unexpected state when reading BSON reference: " + _bsonReaderState
+                        );
                     }
                 }
                 case State.PostValue:
@@ -335,11 +350,17 @@ namespace Newtonsoft.Json.Bson
                     }
                     else
                     {
-                        throw JsonReaderException.Create(this, "Unexpected state when reading BSON reference: " + _bsonReaderState);
+                        throw JsonReaderException.Create(
+                            this,
+                            "Unexpected state when reading BSON reference: " + _bsonReaderState
+                        );
                     }
                 }
                 default:
-                    throw JsonReaderException.Create(this, "Unexpected state when reading BSON reference: " + CurrentState);
+                    throw JsonReaderException.Create(
+                        this,
+                        "Unexpected state when reading BSON reference: " + CurrentState
+                    );
             }
         }
 
@@ -349,7 +370,8 @@ namespace Newtonsoft.Json.Bson
             {
                 case State.Start:
                 {
-                    JsonToken token = (!_readRootValueAsArray) ? JsonToken.StartObject : JsonToken.StartArray;
+                    JsonToken token =
+                        (!_readRootValueAsArray) ? JsonToken.StartObject : JsonToken.StartArray;
                     BsonType type = (!_readRootValueAsArray) ? BsonType.Object : BsonType.Array;
 
                     SetToken(token);
@@ -400,7 +422,10 @@ namespace Newtonsoft.Json.Bson
                     {
                         if (ReadByte() != 0)
                         {
-                            throw JsonReaderException.Create(this, "Unexpected end of object byte value.");
+                            throw JsonReaderException.Create(
+                                this,
+                                "Unexpected end of object byte value."
+                            );
                         }
 
                         PopContext();
@@ -409,13 +434,19 @@ namespace Newtonsoft.Json.Bson
                             MovePosition(context.Length);
                         }
 
-                        JsonToken endToken = (context.Type == BsonType.Object) ? JsonToken.EndObject : JsonToken.EndArray;
+                        JsonToken endToken =
+                            (context.Type == BsonType.Object)
+                                ? JsonToken.EndObject
+                                : JsonToken.EndArray;
                         SetToken(endToken);
                         return true;
                     }
                     else
                     {
-                        throw JsonReaderException.Create(this, "Read past end of current container context.");
+                        throw JsonReaderException.Create(
+                            this,
+                            "Read past end of current container context."
+                        );
                     }
                 case State.ConstructorStart:
                     break;
@@ -466,7 +497,10 @@ namespace Newtonsoft.Json.Bson
 
                     if (_floatParseHandling == FloatParseHandling.Decimal)
                     {
-                        SetToken(JsonToken.Float, Convert.ToDecimal(d, CultureInfo.InvariantCulture));
+                        SetToken(
+                            JsonToken.Float,
+                            Convert.ToDecimal(d, CultureInfo.InvariantCulture)
+                        );
                     }
                     else
                     {
@@ -499,9 +533,8 @@ namespace Newtonsoft.Json.Bson
                     BsonBinaryType binaryType;
                     byte[] data = ReadBinary(out binaryType);
 
-                    object value = (binaryType != BsonBinaryType.Uuid)
-                        ? data
-                        : (object)new Guid(data);
+                    object value =
+                        (binaryType != BsonBinaryType.Uuid) ? data : (object)new Guid(data);
 
                     SetToken(JsonToken.Bytes, value);
                     break;
@@ -565,7 +598,10 @@ namespace Newtonsoft.Json.Bson
                     SetToken(JsonToken.Integer, ReadInt64());
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(type), "Unexpected BsonType value: " + type);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(type),
+                        "Unexpected BsonType value: " + type
+                    );
             }
         }
 
@@ -620,7 +656,13 @@ namespace Newtonsoft.Json.Bson
                     // calculate the index of the end of the last full character in the buffer
                     int lastFullCharStop = GetLastFullCharStop(count - 1);
 
-                    int charCount = Encoding.UTF8.GetChars(_byteBuffer, 0, lastFullCharStop + 1, _charBuffer, 0);
+                    int charCount = Encoding.UTF8.GetChars(
+                        _byteBuffer,
+                        0,
+                        lastFullCharStop + 1,
+                        _charBuffer,
+                        0
+                    );
 
                     if (builder == null)
                     {
@@ -679,9 +721,10 @@ namespace Newtonsoft.Json.Bson
             int offset = 0;
             do
             {
-                int count = ((length - totalBytesRead) > MaxCharBytesSize - offset)
-                    ? MaxCharBytesSize - offset
-                    : length - totalBytesRead;
+                int count =
+                    ((length - totalBytesRead) > MaxCharBytesSize - offset)
+                        ? MaxCharBytesSize - offset
+                        : length - totalBytesRead;
 
                 int byteCount = _reader.Read(_byteBuffer, offset, count);
 
@@ -700,7 +743,13 @@ namespace Newtonsoft.Json.Bson
                 {
                     // pref optimization to avoid reading into a string builder
                     // first iteration and all bytes read then return string directly
-                    int charCount = Encoding.UTF8.GetChars(_byteBuffer, 0, byteCount, _charBuffer, 0);
+                    int charCount = Encoding.UTF8.GetChars(
+                        _byteBuffer,
+                        0,
+                        byteCount,
+                        _charBuffer,
+                        0
+                    );
                     return new string(_charBuffer, 0, charCount);
                 }
                 else
@@ -712,7 +761,13 @@ namespace Newtonsoft.Json.Bson
                         builder = new StringBuilder(length);
                     }
 
-                    int charCount = Encoding.UTF8.GetChars(_byteBuffer, 0, lastFullCharStop + 1, _charBuffer, 0);
+                    int charCount = Encoding.UTF8.GetChars(
+                        _byteBuffer,
+                        0,
+                        lastFullCharStop + 1,
+                        _charBuffer,
+                        0
+                    );
                     builder.Append(_charBuffer, 0, charCount);
 
                     if (lastFullCharStop < byteCount - 1)

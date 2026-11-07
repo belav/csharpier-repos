@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when there is an invalid attempt to access a method.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MethodAccessException : MemberAccessException
     {
         public MethodAccessException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_METHODACCESS;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected MethodAccessException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected MethodAccessException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

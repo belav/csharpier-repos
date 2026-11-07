@@ -3,22 +3,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.DirectoryServices;
+using System.Net;
+using System.Text;
 
 #endregion
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryGroupQuery : IDirectoryOperation
+    internal sealed class DirectoryGroupQuery : IDirectoryOperation
     {
-        public DirectoryGroupQuery()
-        {
-        }
+        public DirectoryGroupQuery() { }
 
-        public void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response)
+        public void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        )
         {
             if (response == null)
                 throw new ArgumentNullException("response");
@@ -35,7 +37,13 @@ namespace System.Workflow.Activities
                 {
                     foreach (String value in entry.Properties["objectClass"])
                     {
-                        if (String.Compare(value, ActiveDirectoryRoleFactory.Configuration.Group, StringComparison.Ordinal) == 0)
+                        if (
+                            String.Compare(
+                                value,
+                                ActiveDirectoryRoleFactory.Configuration.Group,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
                             isGroup = true;
                             break;
@@ -44,9 +52,18 @@ namespace System.Workflow.Activities
 
                     if (isGroup)
                     {
-                        if (Contains(entry.Properties.PropertyNames, ActiveDirectoryRoleFactory.Configuration.Member))
+                        if (
+                            Contains(
+                                entry.Properties.PropertyNames,
+                                ActiveDirectoryRoleFactory.Configuration.Member
+                            )
+                        )
                         {
-                            foreach (String propValue in entry.Properties[ActiveDirectoryRoleFactory.Configuration.Member])
+                            foreach (
+                                String propValue in entry.Properties[
+                                    ActiveDirectoryRoleFactory.Configuration.Member
+                                ]
+                            )
                             {
                                 entries.Push(new DirectoryEntry(BuildUri(propValue)));
                             }
@@ -84,5 +101,4 @@ namespace System.Workflow.Activities
             return sb.ToString();
         }
     }
-
 }

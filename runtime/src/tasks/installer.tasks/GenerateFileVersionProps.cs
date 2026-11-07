@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Build.Construction;
-using Microsoft.Build.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.Build.Construction;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
@@ -41,8 +41,10 @@ namespace Microsoft.DotNet.Build.Tasks
 
         public override bool Execute()
         {
-            var fileVersions = new Dictionary<string, FileVersionData>(StringComparer.OrdinalIgnoreCase);
-            foreach(var file in Files)
+            var fileVersions = new Dictionary<string, FileVersionData>(
+                StringComparer.OrdinalIgnoreCase
+            );
+            foreach (var file in Files)
             {
                 var targetPath = file.GetMetadata("TargetPath");
 
@@ -51,7 +53,10 @@ namespace Microsoft.DotNet.Build.Tasks
                     continue;
                 }
 
-                if (file.GetMetadata("IsSymbolFile").Equals("true", StringComparison.OrdinalIgnoreCase))
+                if (
+                    file.GetMetadata("IsSymbolFile")
+                        .Equals("true", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     continue;
                 }
@@ -81,8 +86,7 @@ namespace Microsoft.DotNet.Build.Tasks
                         }
                     }
 
-                    if (current.FileVersion != null && 
-                        existing.FileVersion != null)
+                    if (current.FileVersion != null && existing.FileVersion != null)
                     {
                         if (current.FileVersion > existing.FileVersion)
                         {
@@ -104,8 +108,9 @@ namespace Microsoft.DotNet.Build.Tasks
             {
                 var versionlessFiles = fileVersions
                     .Where(p =>
-                        p.Key.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) ||
-                        p.Key.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
+                        p.Key.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
+                        || p.Key.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                    )
                     .Where(p => (p.Value.FileVersion ?? ZeroVersion) == ZeroVersion)
                     .Select(p => p.Value.File.ItemSpec)
                     .ToArray();
@@ -113,8 +118,9 @@ namespace Microsoft.DotNet.Build.Tasks
                 if (versionlessFiles.Any())
                 {
                     Log.LogError(
-                        $"Missing FileVersion in {versionlessFiles.Length} shared framework files:" +
-                        string.Concat(versionlessFiles.Select(f => Environment.NewLine + f)));
+                        $"Missing FileVersion in {versionlessFiles.Length} shared framework files:"
+                            + string.Concat(versionlessFiles.Select(f => Environment.NewLine + f))
+                    );
                 }
             }
 
@@ -126,10 +132,14 @@ namespace Microsoft.DotNet.Build.Tasks
                 props = ProjectRootElement.Create();
                 var itemGroup = props.AddItemGroup();
                 // set the platform manifest when the platform is not being published as part of the app
-                itemGroup.Condition = "'$(RuntimeIdentifier)' == '' or '$(SelfContained)' != 'true'";
+                itemGroup.Condition =
+                    "'$(RuntimeIdentifier)' == '' or '$(SelfContained)' != 'true'";
 
                 var manifestFileName = Path.GetFileName(PlatformManifestFile);
-                itemGroup.AddItem(PlatformManifestsItem, $"$(MSBuildThisFileDirectory){manifestFileName}");
+                itemGroup.AddItem(
+                    PlatformManifestsItem,
+                    $"$(MSBuildThisFileDirectory){manifestFileName}"
+                );
             }
 
             Directory.CreateDirectory(Path.GetDirectoryName(PlatformManifestFile));
@@ -170,13 +180,14 @@ namespace Microsoft.DotNet.Build.Tasks
                 {
                     AssemblyVersion = FileUtilities.GetAssemblyName(filePath)?.Version,
                     FileVersion = FileUtilities.GetFileVersion(filePath),
-                    File = file
+                    File = file,
                 };
             }
             else
             {
                 // allow for the item to specify version directly
-                Version assemblyVersion, fileVersion;
+                Version assemblyVersion,
+                    fileVersion;
 
                 Version.TryParse(file.GetMetadata("AssemblyVersion"), out assemblyVersion);
                 Version.TryParse(file.GetMetadata("FileVersion"), out fileVersion);
@@ -192,7 +203,7 @@ namespace Microsoft.DotNet.Build.Tasks
                 {
                     AssemblyVersion = assemblyVersion,
                     FileVersion = fileVersion,
-                    File = file
+                    File = file,
                 };
             }
         }

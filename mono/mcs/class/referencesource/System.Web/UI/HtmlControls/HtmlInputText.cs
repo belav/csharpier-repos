@@ -10,42 +10,38 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-    using System.ComponentModel;
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlInputText'/>
-///       class defines the methods, properties, and events for the HtmlInputText server
-///       control. This class allows programmatic access to the HTML &lt;input type=
-///       text&gt;
-///       and &lt;input type=
-///       password&gt; elements on the server.
-///    </para>
-/// </devdoc>
-    [
-    DefaultEvent("ServerChange"),
-    SupportsEventValidation,
-    ValidationProperty("Value"),
-    ]
-    public class HtmlInputText : HtmlInputControl, IPostBackDataHandler {
-
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlInputText'/>
+    ///       class defines the methods, properties, and events for the HtmlInputText server
+    ///       control. This class allows programmatic access to the HTML &lt;input type=
+    ///       text&gt;
+    ///       and &lt;input type=
+    ///       password&gt; elements on the server.
+    ///    </para>
+    /// </devdoc>
+    [DefaultEvent("ServerChange"), SupportsEventValidation, ValidationProperty("Value")]
+    public class HtmlInputText : HtmlInputControl, IPostBackDataHandler
+    {
         private static readonly object EventServerChange = new object();
 
         /*
          * Creates an intrinsic Html INPUT type=text control.
          */
 
-        public HtmlInputText() : base("text") {
-        }
+        public HtmlInputText()
+            : base("text") { }
 
         /*
          * Creates an intrinsic Html INPUT type=text control.
@@ -53,8 +49,8 @@ namespace System.Web.UI.HtmlControls {
 
         /// <devdoc>
         /// </devdoc>
-        public HtmlInputText(string type) : base(type) {
-        }
+        public HtmlInputText(string type)
+            : base(type) { }
 
         /*
          * The property for the maximum characters allowed.
@@ -67,22 +63,21 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int MaxLength {
-            get {
+        public int MaxLength
+        {
+            get
+            {
                 string s = (string)ViewState["maxlength"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-
-            set {
-                Attributes["maxlength"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["maxlength"] = MapIntegerAttributeToString(value); }
         }
 
-        // 
+        //
 
         /*
          * The property for the width of the TextBox in characters.
@@ -94,18 +89,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(-1),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(-1),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int Size {
-            get {
+        public int Size
+        {
+            get
+            {
                 string s = Attributes["size"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-            set {
-                Attributes["size"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["size"] = MapIntegerAttributeToString(value); }
         }
 
         /*
@@ -118,28 +113,21 @@ namespace System.Web.UI.HtmlControls {
         ///       contents of a text box.
         ///    </para>
         /// </devdoc>
-        public override string Value {
-            get {
+        public override string Value
+        {
+            get
+            {
                 string s = Attributes["value"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["value"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["value"] = MapStringAttributeToString(value); }
         }
 
-
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.HtmlInputText_ServerChange)
-        ]
-        public event EventHandler ServerChange {
-            add {
-                Events.AddHandler(EventServerChange, value);
-            }
-            remove {
-                Events.RemoveHandler(EventServerChange, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.HtmlInputText_ServerChange)]
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(EventServerChange, value); }
+            remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
         /*
@@ -148,9 +136,11 @@ namespace System.Web.UI.HtmlControls {
 
         /// <devdoc>
         /// </devdoc>
-        protected virtual void OnServerChange(EventArgs e) {
+        protected virtual void OnServerChange(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventServerChange];
-            if (handler != null) handler(this, e);
+            if (handler != null)
+                handler(this, e);
         }
 
         /*
@@ -160,26 +150,33 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             bool disabled = Disabled;
-            if (!disabled && Page != null) {
+            if (!disabled && Page != null)
+            {
                 Page.RegisterEnabledControl(this);
             }
 
             // if no change handler, no need to save posted property unless we are disabled;
             // VSWhidbey 419040: We should never save password value in ViewState
-            if ((!disabled && Events[EventServerChange] == null) ||
-                Type.Equals("password", StringComparison.OrdinalIgnoreCase)) {
+            if (
+                (!disabled && Events[EventServerChange] == null)
+                || Type.Equals("password", StringComparison.OrdinalIgnoreCase)
+            )
+            {
                 ViewState.SetItemDirty("value", false);
             }
         }
 
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             base.RenderAttributes(writer);
 
-            if (Page != null) {
+            if (Page != null)
+            {
                 Page.ClientScript.RegisterForEventValidation(RenderedNameAttribute);
             }
         }
@@ -192,19 +189,24 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        bool IPostBackDataHandler.LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
             return LoadPostData(postDataKey, postCollection);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
             string current = Value;
             string inputString = postCollection.GetValues(postDataKey)[0];
 
-            if (!current.Equals(inputString)) {
+            if (!current.Equals(inputString))
+            {
                 ValidateEvent(postDataKey);
 
                 Value = inputString;
@@ -222,15 +224,16 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RaisePostDataChangedEvent() {
+        protected virtual void RaisePostDataChangedEvent()
+        {
             OnServerChange(EventArgs.Empty);
         }
     }

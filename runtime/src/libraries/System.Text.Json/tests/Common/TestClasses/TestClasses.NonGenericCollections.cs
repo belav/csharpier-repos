@@ -18,15 +18,15 @@ namespace System.Text.Json.Serialization.Tests
         public QueueWrapper MyQueueWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyIListWrapper"" : [""Hello""]," +
-            @"""MyIDictionaryWrapper"" : {""key"" : ""value""}," +
-            @"""MyHashtableWrapper"" : {""key"" : ""value""}," +
-            @"""MyArrayListWrapper"" : [""Hello""]," +
-            @"""MySortedListWrapper"" : {""key"" : ""value""}," +
-            @"""MyStackWrapper"" : [""Hello""]," +
-            @"""MyQueueWrapper"" : [""Hello""]" +
-            @"}";
+            @"{"
+            + @"""MyIListWrapper"" : [""Hello""],"
+            + @"""MyIDictionaryWrapper"" : {""key"" : ""value""},"
+            + @"""MyHashtableWrapper"" : {""key"" : ""value""},"
+            + @"""MyArrayListWrapper"" : [""Hello""],"
+            + @"""MySortedListWrapper"" : {""key"" : ""value""},"
+            + @"""MyStackWrapper"" : [""Hello""],"
+            + @"""MyQueueWrapper"" : [""Hello""]"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -34,7 +34,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             MyIListWrapper = new WrapperForIList() { "Hello" };
             MyIDictionaryWrapper = new WrapperForIDictionary() { { "key", "value" } };
-            MyHashtableWrapper = new HashtableWrapper(new List<KeyValuePair<string, object>> { new KeyValuePair<string, object>("key", "value" ) });
+            MyHashtableWrapper = new HashtableWrapper(
+                new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("key", "value"),
+                }
+            );
             MyArrayListWrapper = new ArrayListWrapper() { "Hello" };
             MySortedListWrapper = new SortedListWrapper() { { "key", "value" } };
             MyStackWrapper = new StackWrapper();
@@ -61,9 +66,7 @@ namespace System.Text.Json.Serialization.Tests
         public WrapperForIEnumerable MyIEnumerableWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyIEnumerableWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyIEnumerableWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -79,9 +82,7 @@ namespace System.Text.Json.Serialization.Tests
         public WrapperForICollection MyICollectionWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyICollectionWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyICollectionWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -96,10 +97,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public StackWrapper MyStackWrapper { get; set; }
 
-        public static readonly string s_json =
-            @"{" +
-            @"""MyStackWrapper"" : [""Hello""]" +
-            @"}";
+        public static readonly string s_json = @"{" + @"""MyStackWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -114,10 +112,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public QueueWrapper MyQueueWrapper { get; set; }
 
-        public static readonly string s_json =
-            @"{" +
-            @"""MyQueueWrapper"" : [""Hello""]" +
-            @"}";
+        public static readonly string s_json = @"{" + @"""MyQueueWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -228,7 +223,11 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        public object this[int index] { get => ((IList)_list)[index]; set => ((IList)_list)[index] = value; }
+        public object this[int index]
+        {
+            get => ((IList)_list)[index];
+            set => ((IList)_list)[index] = value;
+        }
 
         public bool IsFixedSize => ((IList)_list).IsFixedSize;
 
@@ -290,6 +289,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         private WrapperForIListPrivateConstructor() { }
     }
+
     public class WrapperForIListInternalConstructor : WrapperForIList
     {
         internal WrapperForIListInternalConstructor() { }
@@ -304,7 +304,11 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
 
-        public object this[object key] { get => ((IDictionary)_dictionary)[key]; set => ((IDictionary)_dictionary)[key] = value; }
+        public object this[object key]
+        {
+            get => ((IDictionary)_dictionary)[key];
+            set => ((IDictionary)_dictionary)[key] = value;
+        }
 
         public bool IsFixedSize => ((IDictionary)_dictionary).IsFixedSize;
 
@@ -432,7 +436,6 @@ namespace System.Text.Json.Serialization.Tests
     }
 
     public interface IDerivedIList : IList { }
-
 
     public struct StructWrapperForIList : IList
     {
@@ -624,10 +627,7 @@ namespace System.Text.Json.Serialization.Tests
         public StructWrapperForIDictionary Dictionary { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""List"" : [""Hello""]," +
-            @"""Dictionary"" : {""key1"" : ""value1""}" +
-            @"}";
+            @"{" + @"""List"" : [""Hello""]," + @"""Dictionary"" : {""key1"" : ""value1""}" + @"}";
 
         public void Initialize()
         {
@@ -650,10 +650,7 @@ namespace System.Text.Json.Serialization.Tests
         public StructWrapperForIDictionary? Dictionary { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""List"" : [""Hello""]," +
-            @"""Dictionary"" : {""key1"" : ""value1""}" +
-            @"}";
+            @"{" + @"""List"" : [""Hello""]," + @"""Dictionary"" : {""key1"" : ""value1""}" + @"}";
 
         public void Initialize()
         {

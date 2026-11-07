@@ -29,122 +29,134 @@
 using System.IO;
 using System.Text;
 
-namespace System.Net {
-	public sealed class HttpListenerResponse : IDisposable
-	{
-		const string EXCEPTION_MESSAGE = "System.Net.HttpListenerResponse is not supported on the current platform.";
+namespace System.Net
+{
+    public sealed class HttpListenerResponse : IDisposable
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.HttpListenerResponse is not supported on the current platform.";
 
-		HttpListenerResponse ()
-		{
-		}
+        HttpListenerResponse() { }
 
-		public Encoding ContentEncoding {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public Encoding ContentEncoding
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public long ContentLength64 {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public long ContentLength64
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string ContentType {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string ContentType
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public CookieCollection Cookies {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public CookieCollection Cookies
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public WebHeaderCollection Headers {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public WebHeaderCollection Headers
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public bool KeepAlive {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public bool KeepAlive
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public Stream OutputStream {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public Stream OutputStream
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public Version ProtocolVersion {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public Version ProtocolVersion
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string RedirectLocation {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string RedirectLocation
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public bool SendChunked {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public bool SendChunked
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public int StatusCode {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public int StatusCode
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string StatusDescription {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string StatusDescription
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		void IDisposable.Dispose ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        void IDisposable.Dispose()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Abort ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Abort()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void AddHeader (string name, string value)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void AddHeader(string name, string value)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void AppendCookie (Cookie cookie)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void AppendCookie(Cookie cookie)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void AppendHeader (string name, string value)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void AppendHeader(string name, string value)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Close ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Close()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Close (byte [] responseEntity, bool willBlock)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Close(byte[] responseEntity, bool willBlock)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void CopyFrom (HttpListenerResponse templateResponse)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void CopyFrom(HttpListenerResponse templateResponse)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Redirect (string url)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Redirect(string url)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void SetCookie (Cookie cookie)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+        public void SetCookie(Cookie cookie)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+    }
 }

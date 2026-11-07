@@ -6,13 +6,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class NullKeysSqliteTest : NullKeysTestBase<NullKeysSqliteTest.NullKeysSqliteFixture>
 {
     public NullKeysSqliteTest(NullKeysSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class NullKeysSqliteFixture : NullKeysFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

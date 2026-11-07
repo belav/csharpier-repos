@@ -31,14 +31,23 @@ internal partial class SymbolTreeInfo
         Checksum checksum,
         Func<Checksum, ValueTask<SymbolTreeInfo>> createAsync,
         string keySuffix,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         using (Logger.LogBlock(FunctionId.SymbolTreeInfo_TryLoadOrCreate, cancellationToken))
         {
             // Ok, we can use persistence.  First try to load from the persistence service. The data in the
             // persistence store must match the checksum passed in.
 
-            var read = await LoadAsync(services, solutionKey, checksum, checksumMustMatch: true, keySuffix, cancellationToken).ConfigureAwait(false);
+            var read = await LoadAsync(
+                    services,
+                    solutionKey,
+                    checksum,
+                    checksumMustMatch: true,
+                    keySuffix,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (read != null)
             {
                 // If we were able to read something in, it's checksum better
@@ -59,7 +68,9 @@ internal partial class SymbolTreeInfo
 
             var persistentStorageService = services.GetPersistentStorageService();
 
-            var storage = await persistentStorageService.GetStorageAsync(solutionKey, cancellationToken).ConfigureAwait(false);
+            var storage = await persistentStorageService
+                .GetStorageAsync(solutionKey, cancellationToken)
+                .ConfigureAwait(false);
             await using var _ = storage.ConfigureAwait(false);
 
             using (var stream = SerializableBytes.CreateWritableStream())
@@ -72,7 +83,9 @@ internal partial class SymbolTreeInfo
                 stream.Position = 0;
 
                 var key = PrefixSymbolTreeInfo + keySuffix;
-                await storage.WriteStreamAsync(key, stream, checksum, cancellationToken).ConfigureAwait(false);
+                await storage
+                    .WriteStreamAsync(key, stream, checksum, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return result;
@@ -85,21 +98,26 @@ internal partial class SymbolTreeInfo
         Checksum checksum,
         bool checksumMustMatch,
         string keySuffix,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var persistentStorageService = services.GetPersistentStorageService();
 
-        var storage = await persistentStorageService.GetStorageAsync(solutionKey, cancellationToken).ConfigureAwait(false);
+        var storage = await persistentStorageService
+            .GetStorageAsync(solutionKey, cancellationToken)
+            .ConfigureAwait(false);
         await using var _ = storage.ConfigureAwait(false);
 
         // Get the unique key to identify our data.
         var key = PrefixSymbolTreeInfo + keySuffix;
 
         // If the checksum doesn't need to match, then we can pass in 'null' here allowing any result to be found.
-        using var stream = await storage.ReadStreamAsync(key, checksumMustMatch ? checksum : null, cancellationToken).ConfigureAwait(false);
+        using var stream = await storage
+            .ReadStreamAsync(key, checksumMustMatch ? checksum : null, cancellationToken)
+            .ConfigureAwait(false);
         using var reader = ObjectReader.TryGetReader(stream, cancellationToken: cancellationToken);
 
-        // We have some previously persisted data.  Attempt to read it back.  
+        // We have some previously persisted data.  Attempt to read it back.
         // If we're able to, and the version of the persisted data matches
         // our version, then we can reuse this instance.
         return TryReadSymbolTreeInfo(reader, checksum);
@@ -190,8 +208,7 @@ internal partial class SymbolTreeInfo
         }
     }
 
-    private static SymbolTreeInfo? TryReadSymbolTreeInfo(
-        ObjectReader reader, Checksum checksum)
+    private static SymbolTreeInfo? TryReadSymbolTreeInfo(ObjectReader reader, Checksum checksum)
     {
         if (reader == null)
             return null;
@@ -247,7 +264,10 @@ internal partial class SymbolTreeInfo
                         var containerName = reader.ReadString();
                         var name = reader.ReadString();
 
-                        receiverTypeNameToExtensionMethodMap.Add(typeName, new ExtensionMethodInfo(containerName, name));
+                        receiverTypeNameToExtensionMethodMap.Add(
+                            typeName,
+                            new ExtensionMethodInfo(containerName, name)
+                        );
                     }
                 }
             }
@@ -256,12 +276,15 @@ internal partial class SymbolTreeInfo
             // mean someone tweaked the data in the database), and we can just regenerate it from the information
             // stored in 'nodes' anyways.
             var spellCheckerPersisted = reader.ReadBoolean();
-            var spellChecker = spellCheckerPersisted
-                ? SpellChecker.TryReadFrom(reader)
-                : null;
+            var spellChecker = spellCheckerPersisted ? SpellChecker.TryReadFrom(reader) : null;
 
             return new SymbolTreeInfo(
-                checksum, nodes.ToImmutableAndClear(), spellChecker, inheritanceMap, receiverTypeNameToExtensionMethodMap);
+                checksum,
+                nodes.ToImmutableAndClear(),
+                spellChecker,
+                inheritanceMap,
+                receiverTypeNameToExtensionMethodMap
+            );
         }
         catch
         {
@@ -273,7 +296,7 @@ internal partial class SymbolTreeInfo
 
     internal readonly partial struct TestAccessor
     {
-        public static SymbolTreeInfo? ReadSymbolTreeInfo(ObjectReader reader, Checksum checksum)
-            => TryReadSymbolTreeInfo(reader, checksum);
+        public static SymbolTreeInfo? ReadSymbolTreeInfo(ObjectReader reader, Checksum checksum) =>
+            TryReadSymbolTreeInfo(reader, checksum);
     }
 }

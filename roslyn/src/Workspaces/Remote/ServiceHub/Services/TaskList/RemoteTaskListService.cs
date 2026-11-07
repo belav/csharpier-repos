@@ -16,24 +16,39 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         internal sealed class Factory : FactoryBase<IRemoteTaskListService>
         {
-            protected override IRemoteTaskListService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteTaskListService(arguments);
+            protected override IRemoteTaskListService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteTaskListService(arguments);
         }
 
         public RemoteTaskListService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         public ValueTask<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(
-            Checksum solutionChecksum, DocumentId documentId, ImmutableArray<TaskListItemDescriptor> descriptors, CancellationToken cancellationToken)
+            Checksum solutionChecksum,
+            DocumentId documentId,
+            ImmutableArray<TaskListItemDescriptor> descriptors,
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(solutionChecksum, async solution =>
-            {
-                var document = await solution.GetRequiredDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
-                var service = document.GetRequiredLanguageService<ITaskListService>();
-                return await service.GetTaskListItemsAsync(document, descriptors, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+            return RunServiceAsync(
+                solutionChecksum,
+                async solution =>
+                {
+                    var document = await solution
+                        .GetRequiredDocumentAsync(
+                            documentId,
+                            includeSourceGenerated: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    var service = document.GetRequiredLanguageService<ITaskListService>();
+                    return await service
+                        .GetTaskListItemsAsync(document, descriptors, cancellationToken)
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

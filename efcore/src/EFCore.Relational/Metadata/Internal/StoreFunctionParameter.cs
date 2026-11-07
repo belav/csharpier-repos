@@ -17,9 +17,7 @@ public class StoreFunctionParameter : Annotatable, IStoreFunctionParameter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public StoreFunctionParameter(
-        StoreFunction function,
-        IRuntimeDbFunctionParameter parameter)
+    public StoreFunctionParameter(StoreFunction function, IRuntimeDbFunctionParameter parameter)
     {
         Function = function;
         Name = parameter.Name;
@@ -42,8 +40,7 @@ public class StoreFunctionParameter : Annotatable, IStoreFunctionParameter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Function.IsReadOnly;
+    public override bool IsReadOnly => Function.IsReadOnly;
 
     /// <inheritdoc />
     public virtual string Name { get; }
@@ -65,8 +62,8 @@ public class StoreFunctionParameter : Annotatable, IStoreFunctionParameter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoreFunctionParameter)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoreFunctionParameter)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
     IStoreFunction IStoreFunctionParameter.Function

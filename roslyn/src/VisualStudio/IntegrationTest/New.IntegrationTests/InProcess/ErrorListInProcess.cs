@@ -20,17 +20,31 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     [TestService]
     internal partial class ErrorListInProcess
     {
-        public Task ShowErrorListAsync(CancellationToken cancellationToken)
-            => ShowErrorListAsync(ErrorSource.Build | ErrorSource.Other, minimumSeverity: __VSERRORCATEGORY.EC_WARNING, cancellationToken);
+        public Task ShowErrorListAsync(CancellationToken cancellationToken) =>
+            ShowErrorListAsync(
+                ErrorSource.Build | ErrorSource.Other,
+                minimumSeverity: __VSERRORCATEGORY.EC_WARNING,
+                cancellationToken
+            );
 
-        public Task ShowBuildErrorsAsync(CancellationToken cancellationToken)
-            => ShowErrorListAsync(ErrorSource.Build, minimumSeverity: __VSERRORCATEGORY.EC_WARNING, cancellationToken);
+        public Task ShowBuildErrorsAsync(CancellationToken cancellationToken) =>
+            ShowErrorListAsync(
+                ErrorSource.Build,
+                minimumSeverity: __VSERRORCATEGORY.EC_WARNING,
+                cancellationToken
+            );
 
-        public async Task ShowErrorListAsync(ErrorSource errorSource, __VSERRORCATEGORY minimumSeverity, CancellationToken cancellationToken)
+        public async Task ShowErrorListAsync(
+            ErrorSource errorSource,
+            __VSERRORCATEGORY minimumSeverity,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(cancellationToken);
+            var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(
+                cancellationToken
+            );
             ((IVsErrorList)errorList).BringToFront();
             errorList.AreBuildErrorSourceEntriesShown = errorSource.HasFlag(ErrorSource.Build);
             errorList.AreOtherErrorSourceEntriesShown = errorSource.HasFlag(ErrorSource.Other);
@@ -39,30 +53,54 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             errorList.AreMessagesShown = minimumSeverity >= __VSERRORCATEGORY.EC_MESSAGE;
         }
 
-        public Task<ImmutableArray<string>> GetErrorsAsync(CancellationToken cancellationToken)
-            => GetErrorsAsync(ErrorSource.Build | ErrorSource.Other, minimumSeverity: __VSERRORCATEGORY.EC_WARNING, cancellationToken);
+        public Task<ImmutableArray<string>> GetErrorsAsync(CancellationToken cancellationToken) =>
+            GetErrorsAsync(
+                ErrorSource.Build | ErrorSource.Other,
+                minimumSeverity: __VSERRORCATEGORY.EC_WARNING,
+                cancellationToken
+            );
 
-        public Task<ImmutableArray<string>> GetBuildErrorsAsync(CancellationToken cancellationToken)
-            => GetErrorsAsync(ErrorSource.Build, minimumSeverity: __VSERRORCATEGORY.EC_WARNING, cancellationToken);
+        public Task<ImmutableArray<string>> GetBuildErrorsAsync(
+            CancellationToken cancellationToken
+        ) =>
+            GetErrorsAsync(
+                ErrorSource.Build,
+                minimumSeverity: __VSERRORCATEGORY.EC_WARNING,
+                cancellationToken
+            );
 
-        public async Task<ImmutableArray<string>> GetErrorsAsync(ErrorSource errorSource, __VSERRORCATEGORY minimumSeverity, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<string>> GetErrorsAsync(
+            ErrorSource errorSource,
+            __VSERRORCATEGORY minimumSeverity,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var errorItems = await GetErrorItemsAsync(errorSource, minimumSeverity, cancellationToken);
+            var errorItems = await GetErrorItemsAsync(
+                errorSource,
+                minimumSeverity,
+                cancellationToken
+            );
             var list = errorItems.Select(GetMessage).ToList();
 
-            return list
-                .OrderBy(x => x, StringComparer.OrdinalIgnoreCase)
+            return list.OrderBy(x => x, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(x => x, StringComparer.Ordinal)
                 .ToImmutableArray();
         }
 
-        public async Task<string> NavigateToErrorListItemAsync(int item, bool isPreview, bool shouldActivate, CancellationToken cancellationToken)
+        public async Task<string> NavigateToErrorListItemAsync(
+            int item,
+            bool isPreview,
+            bool shouldActivate,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(cancellationToken);
+            var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(
+                cancellationToken
+            );
             ErrorSource errorSource = 0;
             if (errorList.AreBuildErrorSourceEntriesShown)
                 errorSource |= ErrorSource.Build;
@@ -71,9 +109,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 errorSource |= ErrorSource.Other;
 
             var minimumSeverity =
-                errorList.AreMessagesShown ? __VSERRORCATEGORY.EC_MESSAGE :
-                errorList.AreWarningsShown ? __VSERRORCATEGORY.EC_WARNING :
-                __VSERRORCATEGORY.EC_ERROR;
+                errorList.AreMessagesShown ? __VSERRORCATEGORY.EC_MESSAGE
+                : errorList.AreWarningsShown ? __VSERRORCATEGORY.EC_WARNING
+                : __VSERRORCATEGORY.EC_ERROR;
 
             var items = await GetErrorItemsAsync(errorSource, minimumSeverity, cancellationToken);
 
@@ -81,22 +119,32 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return GetMessage(items[item]);
         }
 
-        private async Task<ImmutableArray<ITableEntryHandle>> GetErrorItemsAsync(ErrorSource errorSource, __VSERRORCATEGORY minimumSeverity, CancellationToken cancellationToken)
+        private async Task<ImmutableArray<ITableEntryHandle>> GetErrorItemsAsync(
+            ErrorSource errorSource,
+            __VSERRORCATEGORY minimumSeverity,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(cancellationToken);
-            var args = await errorList.TableControl.ForceUpdateAsync().WithCancellation(cancellationToken);
-            return args.AllEntries
-                .Where(item =>
+            var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(
+                cancellationToken
+            );
+            var args = await errorList
+                .TableControl.ForceUpdateAsync()
+                .WithCancellation(cancellationToken);
+            return args
+                .AllEntries.Where(item =>
                 {
                     if (item.GetCategory() > minimumSeverity)
                     {
                         return false;
                     }
 
-                    if (item.GetErrorSource() is not { } itemErrorSource
-                        || !errorSource.HasFlag(itemErrorSource))
+                    if (
+                        item.GetErrorSource() is not { } itemErrorSource
+                        || !errorSource.HasFlag(itemErrorSource)
+                    )
                     {
                         return false;
                     }
@@ -109,7 +157,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         private static string GetMessage(ITableEntryHandle item)
         {
             var source = item.GetBuildTool();
-            var document = Path.GetFileName(item.GetPath() ?? item.GetDocumentName()) ?? "<unknown>";
+            var document =
+                Path.GetFileName(item.GetPath() ?? item.GetDocumentName()) ?? "<unknown>";
             var line = item.GetLine() ?? -1;
             var column = item.GetColumn() ?? -1;
             var errorCode = item.GetErrorCode() ?? "<unknown>";
@@ -122,7 +171,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 var unknown => unknown.ToString(),
             };
 
-            var message = $"({source}) {document}({line + 1}, {column + 1}): {severity} {errorCode}: {text}";
+            var message =
+                $"({source}) {document}({line + 1}, {column + 1}): {severity} {errorCode}: {text}";
             return message;
         }
     }

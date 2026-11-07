@@ -19,7 +19,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
 {
-    internal abstract class AbstractAssignOutParametersCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractAssignOutParametersCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         private const string CS0177 = nameof(CS0177); // The out parameter 'x' must be assigned to before control leaves the current method
 
@@ -30,12 +31,16 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
         {
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var (container, location) = GetContainer(root, context.Span);
             if (container != null)
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var dataFlow = semanticModel.AnalyzeDataFlow(location);
                 if (dataFlow.Succeeded)
                 {
@@ -44,9 +49,17 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             }
         }
 
-        protected abstract void TryRegisterFix(CodeFixContext context, Document document, SyntaxNode container, SyntaxNode location);
+        protected abstract void TryRegisterFix(
+            CodeFixContext context,
+            Document document,
+            SyntaxNode container,
+            SyntaxNode location
+        );
 
-        private static (SyntaxNode container, SyntaxNode exprOrStatement) GetContainer(SyntaxNode root, TextSpan span)
+        private static (SyntaxNode container, SyntaxNode exprOrStatement) GetContainer(
+            SyntaxNode root,
+            TextSpan span
+        )
         {
             var location = root.FindNode(span);
             if (IsValidLocation(location))
@@ -92,17 +105,33 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             return null;
         }
 
-        private static async Task<MultiDictionary<SyntaxNode, (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol>)>> GetUnassignedParametersAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken)
+        private static async Task<
+            MultiDictionary<
+                SyntaxNode,
+                (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol>)
+            >
+        > GetUnassignedParametersAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var containersAndLocations =
-                diagnostics.SelectAsArray(d => GetContainer(root, d.Location.SourceSpan))
-                           .WhereAsArray(t => t.container != null);
+            var containersAndLocations = diagnostics
+                .SelectAsArray(d => GetContainer(root, d.Location.SourceSpan))
+                .WhereAsArray(t => t.container != null);
 
-            var result = new MultiDictionary<SyntaxNode, (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol>)>();
+            var result =
+                new MultiDictionary<
+                    SyntaxNode,
+                    (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol>)
+                >();
             foreach (var group in containersAndLocations.GroupBy(t => t.container))
             {
                 var container = group.Key;
@@ -110,8 +139,10 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 var parameterList = container.GetParameterList();
                 Contract.ThrowIfNull(parameterList);
 
-                var outParameters = parameterList.Parameters
-                    .Select(p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken))
+                var outParameters = parameterList
+                    .Parameters.Select(p =>
+                        semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
+                    )
                     .Where(p => p.RefKind == RefKind.Out)
                     .ToImmutableArray();
 
@@ -119,8 +150,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 foreach (var exprOrStatement in distinctExprsOrStatements)
                 {
                     var dataFlow = semanticModel.AnalyzeDataFlow(exprOrStatement);
-                    var unassignedParameters = outParameters.WhereAsArray(
-                        p => !dataFlow.DefinitelyAssignedOnExit.Contains(p));
+                    var unassignedParameters = outParameters.WhereAsArray(p =>
+                        !dataFlow.DefinitelyAssignedOnExit.Contains(p)
+                    );
 
                     if (unassignedParameters.Length > 0)
                     {
@@ -133,34 +165,65 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
         }
 
         protected sealed override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var unassignedParameters = await GetUnassignedParametersAsync(
-                document, diagnostics, cancellationToken).ConfigureAwait(false);
+                    document,
+                    diagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            foreach (var container in unassignedParameters.Keys.OrderByDescending(n => n.Span.Start))
+            foreach (
+                var container in unassignedParameters.Keys.OrderByDescending(n => n.Span.Start)
+            )
             {
                 AssignOutParameters(
-                    editor, container, unassignedParameters[container], cancellationToken);
+                    editor,
+                    container,
+                    unassignedParameters[container],
+                    cancellationToken
+                );
             }
         }
 
         protected abstract void AssignOutParameters(
-            SyntaxEditor editor, SyntaxNode container,
-            MultiDictionary<SyntaxNode, (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)>.ValueSet values,
-            CancellationToken cancellationToken);
+            SyntaxEditor editor,
+            SyntaxNode container,
+            MultiDictionary<
+                SyntaxNode,
+                (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)
+            >.ValueSet values,
+            CancellationToken cancellationToken
+        );
 
         protected static ImmutableArray<SyntaxNode> GenerateAssignmentStatements(
-            SyntaxGenerator generator, ImmutableArray<IParameterSymbol> unassignedParameters)
+            SyntaxGenerator generator,
+            ImmutableArray<IParameterSymbol> unassignedParameters
+        )
         {
             var result = ArrayBuilder<SyntaxNode>.GetInstance();
 
             foreach (var parameter in unassignedParameters)
             {
-                result.Add(generator.ExpressionStatement(generator.AssignmentStatement(
-                    generator.IdentifierName(parameter.Name),
-                    ExpressionGenerator.GenerateExpression(generator, parameter.Type, value: null, canUseFieldReference: false))));
+                result.Add(
+                    generator.ExpressionStatement(
+                        generator.AssignmentStatement(
+                            generator.IdentifierName(parameter.Name),
+                            ExpressionGenerator.GenerateExpression(
+                                generator,
+                                parameter.Type,
+                                value: null,
+                                canUseFieldReference: false
+                            )
+                        )
+                    )
+                );
             }
 
             return result.ToImmutableAndFree();

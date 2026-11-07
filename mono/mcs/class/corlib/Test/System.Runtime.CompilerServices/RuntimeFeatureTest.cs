@@ -26,56 +26,63 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {
     [TestFixture]
     public class RuntimeFeatureTest
     {
-        readonly Dictionary<string, bool> ExpectedFeatures = new Dictionary<string, bool> {
-            {"PortablePdb", true},
-            {"DefaultImplementationsOfInterfaces", true}
+        readonly Dictionary<string, bool> ExpectedFeatures = new Dictionary<string, bool>
+        {
+            { "PortablePdb", true },
+            { "DefaultImplementationsOfInterfaces", true },
         };
 
         [Test]
-        public void PortablePdbSupported ()
+        public void PortablePdbSupported()
         {
-            Assert.IsTrue (RuntimeFeature.IsSupported (RuntimeFeature.PortablePdb));
+            Assert.IsTrue(RuntimeFeature.IsSupported(RuntimeFeature.PortablePdb));
         }
 
         [Test]
-        public void DefaultImplementationsOfInterfacesSupported ()
+        public void DefaultImplementationsOfInterfacesSupported()
         {
-            Assert.IsTrue (RuntimeFeature.IsSupported (RuntimeFeature.DefaultImplementationsOfInterfaces));
+            Assert.IsTrue(
+                RuntimeFeature.IsSupported(RuntimeFeature.DefaultImplementationsOfInterfaces)
+            );
         }
 
         [Test]
-        public void NonExistingFeatureNotSupported ()
+        public void NonExistingFeatureNotSupported()
         {
-            Assert.IsFalse (RuntimeFeature.IsSupported ("foo"));
+            Assert.IsFalse(RuntimeFeature.IsSupported("foo"));
         }
 
         [Test]
-        public void NoNewFeaturesAdded ()
+        public void NoNewFeaturesAdded()
         {
-            var t = typeof (RuntimeFeature);
-            var features = from field in t.GetFields()
-                where field.FieldType == typeof (string)
-                let value = field.GetValue (null)
-                select new KeyValuePair<string, bool> (
+            var t = typeof(RuntimeFeature);
+            var features =
+                from field in t.GetFields()
+                where field.FieldType == typeof(string)
+                let value = field.GetValue(null)
+                select new KeyValuePair<string, bool>(
                     field.Name,
-                    RuntimeFeature.IsSupported ((string)value)
+                    RuntimeFeature.IsSupported((string)value)
                 );
 
             if (features.Count() == 0)
-                Assert.Inconclusive ("No features found, this can happen when running the linker.");
+                Assert.Inconclusive("No features found, this can happen when running the linker.");
 
-            CollectionAssert.AreEquivalent (ExpectedFeatures, features.ToDictionary (k => k.Key, v => v.Value));
+            CollectionAssert.AreEquivalent(
+                ExpectedFeatures,
+                features.ToDictionary(k => k.Key, v => v.Value)
+            );
         }
     }
 }

@@ -20,14 +20,18 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             NamingRule namingRule,
             NamingStyle[] allStyles,
             NamingStyleSettingsUpdater settingsUpdater,
-            string? fileName = null)
+            string? fileName = null
+        )
         {
             Style = namingRule.NamingStyle;
             _allStyles = allStyles;
             Type = namingRule.SymbolSpecification;
             Severity = namingRule.EnforcementLevel;
             _settingsUpdater = settingsUpdater;
-            Location = new SettingLocation(fileName is null ? LocationKind.VisualStudio : LocationKind.EditorConfig, fileName);
+            Location = new SettingLocation(
+                fileName is null ? LocationKind.VisualStudio : LocationKind.EditorConfig,
+                fileName
+            );
         }
 
         private NamingStyleSetting()
@@ -44,7 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 Style = namingStyleOption.NamingScheme.AsNamingStyle(),
                 Type = namingStyleOption.ApplicableSymbolInfo.AsSymbolSpecification(),
                 Severity = namingStyleOption.Severity,
-                Location = new SettingLocation(LocationKind.EditorConfig, namingStyleOption.Section.FilePath)
+                Location = new SettingLocation(
+                    LocationKind.EditorConfig,
+                    namingStyleOption.Section.FilePath
+                ),
             };
         }
 

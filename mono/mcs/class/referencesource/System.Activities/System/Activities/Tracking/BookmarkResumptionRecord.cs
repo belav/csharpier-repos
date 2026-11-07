@@ -6,8 +6,8 @@ namespace System.Activities.Tracking
 {
     using System;
     using System.Globalization;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -18,7 +18,12 @@ namespace System.Activities.Tracking
         object payload;
         ActivityInfo owner;
 
-        internal BookmarkResumptionRecord(Guid instanceId, Bookmark bookmark, ActivityInstance ownerInstance, object payload)
+        internal BookmarkResumptionRecord(
+            Guid instanceId,
+            Bookmark bookmark,
+            ActivityInstance ownerInstance,
+            object payload
+        )
             : base(instanceId)
         {
             if (bookmark.Scope != null)
@@ -35,7 +40,13 @@ namespace System.Activities.Tracking
             this.Payload = payload;
         }
 
-        public BookmarkResumptionRecord(Guid instanceId, long recordNumber, Guid bookmarkScope, string bookmarkName, ActivityInfo owner)
+        public BookmarkResumptionRecord(
+            Guid instanceId,
+            long recordNumber,
+            Guid bookmarkScope,
+            string bookmarkName,
+            ActivityInfo owner
+        )
             : base(instanceId, recordNumber)
         {
             if (owner == null)
@@ -54,31 +65,19 @@ namespace System.Activities.Tracking
             this.BookmarkScope = record.BookmarkScope;
             this.Owner = record.Owner;
             this.BookmarkName = record.BookmarkName;
-            this.Payload = record.Payload;           
+            this.Payload = record.Payload;
         }
-        
+
         public Guid BookmarkScope
         {
-            get
-            {
-                return bookmarkScope;
-            }
-            private set
-            {
-                this.bookmarkScope = value;
-            }
+            get { return bookmarkScope; }
+            private set { this.bookmarkScope = value; }
         }
-        
+
         public string BookmarkName
         {
-            get
-            {
-                return this.bookmarkName;
-            }
-            private set
-            {
-                this.bookmarkName = value;
-            }
+            get { return this.bookmarkName; }
+            private set { this.bookmarkName = value; }
         }
 
         public object Payload
@@ -86,17 +85,11 @@ namespace System.Activities.Tracking
             get { return this.payload; }
             internal set { this.payload = value; }
         }
-        
+
         public ActivityInfo Owner
         {
-            get
-            {
-                return this.owner;
-            }
-            private set
-            {
-                this.owner = value;
-            }
+            get { return this.owner; }
+            private set { this.owner = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "BookmarkScope")]
@@ -134,12 +127,14 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
+            return string.Format(
+                CultureInfo.CurrentCulture,
                 "BookmarkResumptionRecord {{ {0}, BookmarkName = {1}, BookmarkScope = {2}, OwnerActivity {{ {3} }} }}",
                 base.ToString(),
                 this.BookmarkName ?? "<null>",
                 this.BookmarkScope,
-                this.Owner.ToString());
+                this.Owner.ToString()
+            );
         }
     }
 }

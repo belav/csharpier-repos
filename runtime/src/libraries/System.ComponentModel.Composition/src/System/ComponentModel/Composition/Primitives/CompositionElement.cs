@@ -13,7 +13,10 @@ namespace System.ComponentModel.Composition.Primitives
         private readonly string _displayName;
         private readonly ICompositionElement? _origin;
         private readonly object? _underlyingObject;
-        private static readonly ICompositionElement UnknownOrigin = new CompositionElement(SR.CompositionElement_UnknownOrigin, (ICompositionElement?)null);
+        private static readonly ICompositionElement UnknownOrigin = new CompositionElement(
+            SR.CompositionElement_UnknownOrigin,
+            (ICompositionElement?)null
+        );
 
         public CompositionElement(object underlyingObject)
             : this(underlyingObject.ToString(), UnknownOrigin)

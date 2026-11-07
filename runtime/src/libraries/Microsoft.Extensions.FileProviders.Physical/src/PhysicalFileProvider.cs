@@ -24,7 +24,10 @@ namespace Microsoft.Extensions.FileProviders
     {
         private const string PollingEnvironmentKey = "DOTNET_USE_POLLING_FILE_WATCHER";
         private static readonly char[] _pathSeparators = new[]
-            {Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar};
+        {
+            Path.DirectorySeparatorChar,
+            Path.AltDirectorySeparatorChar,
+        };
 
         private readonly ExclusionFilters _filters;
 
@@ -42,9 +45,7 @@ namespace Microsoft.Extensions.FileProviders
         /// </summary>
         /// <param name="root">The root directory. This should be an absolute path.</param>
         public PhysicalFileProvider(string root)
-            : this(root, ExclusionFilters.Sensitive)
-        {
-        }
+            : this(root, ExclusionFilters.Sensitive) { }
 
         /// <summary>
         /// Initializes a new instance of a PhysicalFileProvider at the given root directory.
@@ -102,7 +103,12 @@ namespace Microsoft.Extensions.FileProviders
             {
                 if (_fileWatcher != null)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.CannotModifyWhenFileWatcherInitialized, nameof(UsePollingFileWatcher)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.CannotModifyWhenFileWatcherInitialized,
+                            nameof(UsePollingFileWatcher)
+                        )
+                    );
                 }
                 _usePollingFileWatcher = value;
             }
@@ -134,7 +140,6 @@ namespace Microsoft.Extensions.FileProviders
 
                 return _useActivePolling.Value;
             }
-
             set => _useActivePolling = value;
         }
 
@@ -146,7 +151,8 @@ namespace Microsoft.Extensions.FileProviders
                     ref _fileWatcher,
                     ref _fileWatcherInitialized,
                     ref _fileWatcherLock,
-                    _fileWatcherFactory)!;
+                    _fileWatcherFactory
+                )!;
             }
             set
             {
@@ -164,7 +170,11 @@ namespace Microsoft.Extensions.FileProviders
             FileSystemWatcher? watcher;
 #if NETCOREAPP
             //  For browser/iOS/tvOS we will proactively fallback to polling since FileSystemWatcher is not supported.
-            if (OperatingSystem.IsBrowser() || (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst()) || OperatingSystem.IsTvOS())
+            if (
+                OperatingSystem.IsBrowser()
+                || (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst())
+                || OperatingSystem.IsTvOS()
+            )
             {
                 UsePollingFileWatcher = true;
                 UseActivePolling = true;
@@ -174,7 +184,8 @@ namespace Microsoft.Extensions.FileProviders
 #endif
             {
                 // When UsePollingFileWatcher & UseActivePolling are set, we won't use a FileSystemWatcher.
-                watcher = UsePollingFileWatcher && UseActivePolling ? null : new FileSystemWatcher(root);
+                watcher =
+                    UsePollingFileWatcher && UseActivePolling ? null : new FileSystemWatcher(root);
             }
 
             return new PhysicalFilesWatcher(root, watcher, UsePollingFileWatcher, _filters)
@@ -188,8 +199,9 @@ namespace Microsoft.Extensions.FileProviders
         private void ReadPollingEnvironmentVariables()
         {
             string? environmentValue = Environment.GetEnvironmentVariable(PollingEnvironmentKey);
-            bool pollForChanges = string.Equals(environmentValue, "1", StringComparison.Ordinal) ||
-                string.Equals(environmentValue, "true", StringComparison.OrdinalIgnoreCase);
+            bool pollForChanges =
+                string.Equals(environmentValue, "1", StringComparison.Ordinal)
+                || string.Equals(environmentValue, "true", StringComparison.OrdinalIgnoreCase);
 
             _usePollingFileWatcher = pollForChanges;
             _useActivePolling = pollForChanges;
@@ -326,12 +338,8 @@ namespace Microsoft.Extensions.FileProviders
 
                 return new PhysicalDirectoryContents(fullPath, _filters);
             }
-            catch (DirectoryNotFoundException)
-            {
-            }
-            catch (IOException)
-            {
-            }
+            catch (DirectoryNotFoundException) { }
+            catch (IOException) { }
             return NotFoundDirectoryContents.Singleton;
         }
 

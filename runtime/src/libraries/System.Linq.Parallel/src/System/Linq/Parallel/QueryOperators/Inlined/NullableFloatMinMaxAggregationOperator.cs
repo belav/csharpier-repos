@@ -22,7 +22,8 @@ namespace System.Linq.Parallel
     ///     Min({ 5.0, NaN }) == 5.0!  We impose a total ordering so that NaN is smaller than
     ///     everything, including -infinity, which is consistent with Comparer_T.
     /// </summary>
-    internal sealed class NullableFloatMinMaxAggregationOperator : InlinedAggregationOperator<float?, float?, float?>
+    internal sealed class NullableFloatMinMaxAggregationOperator
+        : InlinedAggregationOperator<float?, float?, float?>
     {
         private readonly int _sign; // The sign (-1 for min, 1 for max).
 
@@ -30,7 +31,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal NullableFloatMinMaxAggregationOperator(IEnumerable<float?> child, int sign) : base(child)
+        internal NullableFloatMinMaxAggregationOperator(IEnumerable<float?> child, int sign)
+            : base(child)
         {
             Debug.Assert(sign == -1 || sign == 1, "invalid sign");
             _sign = sign;
@@ -50,7 +52,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<float?> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<float?> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Just return null right away for empty results.
                 if (!enumerator.MoveNext())
@@ -66,8 +73,13 @@ namespace System.Linq.Parallel
                     while (enumerator.MoveNext())
                     {
                         float? current = enumerator.Current;
-                        if (current == null) continue;
-                        if (best == null || current < best || float.IsNaN(current.GetValueOrDefault()))
+                        if (current == null)
+                            continue;
+                        if (
+                            best == null
+                            || current < best
+                            || float.IsNaN(current.GetValueOrDefault())
+                        )
                         {
                             best = current;
                         }
@@ -78,7 +90,8 @@ namespace System.Linq.Parallel
                     while (enumerator.MoveNext())
                     {
                         float? current = enumerator.Current;
-                        if (current == null) continue;
+                        if (current == null)
+                            continue;
                         if (best == null || current > best || float.IsNaN(best.GetValueOrDefault()))
                         {
                             best = current;
@@ -95,9 +108,19 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<float?, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<float?, TKey> source, object? sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<float?, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new NullableFloatMinMaxAggregationOperatorEnumerator<TKey>(source, index, _sign, cancellationToken);
+            return new NullableFloatMinMaxAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                _sign,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -105,7 +128,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class NullableFloatMinMaxAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<float?>
+        private sealed class NullableFloatMinMaxAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<float?>
         {
             private readonly QueryOperatorEnumerator<float?, TKey> _source; // The source data.
             private readonly int _sign; // The sign for comparisons (-1 means min, 1 means max).
@@ -114,9 +138,13 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal NullableFloatMinMaxAggregationOperatorEnumerator(QueryOperatorEnumerator<float?, TKey> source, int partitionIndex, int sign,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal NullableFloatMinMaxAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<float?, TKey> source,
+                int partitionIndex,
+                int sign,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;
@@ -146,8 +174,13 @@ namespace System.Linq.Parallel
                             if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                                 _cancellationToken.ThrowIfCancellationRequested();
 
-                            if (elem == null) continue;
-                            if (currentElement == null || elem < currentElement || float.IsNaN(elem.GetValueOrDefault()))
+                            if (elem == null)
+                                continue;
+                            if (
+                                currentElement == null
+                                || elem < currentElement
+                                || float.IsNaN(elem.GetValueOrDefault())
+                            )
                             {
                                 currentElement = elem;
                             }
@@ -161,8 +194,13 @@ namespace System.Linq.Parallel
                             if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                                 _cancellationToken.ThrowIfCancellationRequested();
 
-                            if (elem == null) continue;
-                            if (currentElement == null || elem > currentElement || float.IsNaN(currentElement.GetValueOrDefault()))
+                            if (elem == null)
+                                continue;
+                            if (
+                                currentElement == null
+                                || elem > currentElement
+                                || float.IsNaN(currentElement.GetValueOrDefault())
+                            )
                             {
                                 currentElement = elem;
                             }

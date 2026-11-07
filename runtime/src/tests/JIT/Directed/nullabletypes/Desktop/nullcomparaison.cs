@@ -1,10 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
-
 
 internal class NullableTest1
 {
@@ -13,7 +12,8 @@ internal class NullableTest1
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -40,8 +40,6 @@ internal class NullableTest1
     }
 }
 
-
-
 internal class NullableTest2
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -49,7 +47,8 @@ internal class NullableTest2
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -76,8 +75,6 @@ internal class NullableTest2
     }
 }
 
-
-
 internal class NullableTest3
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -85,7 +82,8 @@ internal class NullableTest3
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -112,8 +110,6 @@ internal class NullableTest3
     }
 }
 
-
-
 internal class NullableTest4
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -121,7 +117,8 @@ internal class NullableTest4
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -148,8 +145,6 @@ internal class NullableTest4
     }
 }
 
-
-
 internal class NullableTest5
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -157,7 +152,8 @@ internal class NullableTest5
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -184,8 +180,6 @@ internal class NullableTest5
     }
 }
 
-
-
 internal class NullableTest6
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -193,7 +187,8 @@ internal class NullableTest6
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -220,8 +215,6 @@ internal class NullableTest6
     }
 }
 
-
-
 internal class NullableTest7
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -229,7 +222,8 @@ internal class NullableTest7
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -256,8 +250,6 @@ internal class NullableTest7
     }
 }
 
-
-
 internal class NullableTest8
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -265,7 +257,8 @@ internal class NullableTest8
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -292,8 +285,6 @@ internal class NullableTest8
     }
 }
 
-
-
 internal class NullableTest9
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -301,7 +292,8 @@ internal class NullableTest9
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -328,8 +320,6 @@ internal class NullableTest9
     }
 }
 
-
-
 internal class NullableTest10
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -337,7 +327,8 @@ internal class NullableTest10
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -364,8 +355,6 @@ internal class NullableTest10
     }
 }
 
-
-
 internal class NullableTest11
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -373,7 +362,8 @@ internal class NullableTest11
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -400,8 +390,6 @@ internal class NullableTest11
     }
 }
 
-
-
 internal class NullableTest12
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -409,7 +397,8 @@ internal class NullableTest12
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -436,8 +425,6 @@ internal class NullableTest12
     }
 }
 
-
-
 internal class NullableTest13
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -445,7 +432,8 @@ internal class NullableTest13
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -472,8 +460,6 @@ internal class NullableTest13
     }
 }
 
-
-
 internal class NullableTest14
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -481,7 +467,8 @@ internal class NullableTest14
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -508,8 +495,6 @@ internal class NullableTest14
     }
 }
 
-
-
 internal class NullableTest15
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -517,7 +502,8 @@ internal class NullableTest15
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -544,8 +530,6 @@ internal class NullableTest15
     }
 }
 
-
-
 internal class NullableTest16
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -553,7 +537,8 @@ internal class NullableTest16
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -580,8 +565,6 @@ internal class NullableTest16
     }
 }
 
-
-
 internal class NullableTest17
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -589,7 +572,8 @@ internal class NullableTest17
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -616,8 +600,6 @@ internal class NullableTest17
     }
 }
 
-
-
 internal class NullableTest18
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -625,7 +607,8 @@ internal class NullableTest18
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -652,8 +635,6 @@ internal class NullableTest18
     }
 }
 
-
-
 internal class NullableTest19
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -661,7 +642,8 @@ internal class NullableTest19
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -688,8 +670,6 @@ internal class NullableTest19
     }
 }
 
-
-
 internal class NullableTest20
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -697,7 +677,8 @@ internal class NullableTest20
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -724,8 +705,6 @@ internal class NullableTest20
     }
 }
 
-
-
 internal class NullableTest21
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -733,7 +712,8 @@ internal class NullableTest21
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -760,8 +740,6 @@ internal class NullableTest21
     }
 }
 
-
-
 internal class NullableTest22
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -769,7 +747,8 @@ internal class NullableTest22
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -796,8 +775,6 @@ internal class NullableTest22
     }
 }
 
-
-
 internal class NullableTest23
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -805,7 +782,8 @@ internal class NullableTest23
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -832,8 +810,6 @@ internal class NullableTest23
     }
 }
 
-
-
 internal class NullableTest24
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -841,7 +817,8 @@ internal class NullableTest24
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -868,8 +845,6 @@ internal class NullableTest24
     }
 }
 
-
-
 internal class NullableTest25
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -877,7 +852,8 @@ internal class NullableTest25
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -904,8 +880,6 @@ internal class NullableTest25
     }
 }
 
-
-
 internal class NullableTest26
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -913,7 +887,8 @@ internal class NullableTest26
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -940,8 +915,6 @@ internal class NullableTest26
     }
 }
 
-
-
 internal class NullableTest27
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -949,7 +922,8 @@ internal class NullableTest27
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -976,8 +950,6 @@ internal class NullableTest27
     }
 }
 
-
-
 internal class NullableTest28
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -985,7 +957,8 @@ internal class NullableTest28
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1012,8 +985,6 @@ internal class NullableTest28
     }
 }
 
-
-
 internal class NullableTest29
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1021,7 +992,8 @@ internal class NullableTest29
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1048,8 +1020,6 @@ internal class NullableTest29
     }
 }
 
-
-
 internal class NullableTest30
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1057,7 +1027,8 @@ internal class NullableTest30
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1084,8 +1055,6 @@ internal class NullableTest30
     }
 }
 
-
-
 internal class NullableTest31
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1093,7 +1062,8 @@ internal class NullableTest31
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1120,8 +1090,6 @@ internal class NullableTest31
     }
 }
 
-
-
 internal class NullableTest32
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1129,7 +1097,8 @@ internal class NullableTest32
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1156,8 +1125,6 @@ internal class NullableTest32
     }
 }
 
-
-
 internal class NullableTest33
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1165,7 +1132,8 @@ internal class NullableTest33
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1192,8 +1160,6 @@ internal class NullableTest33
     }
 }
 
-
-
 internal class NullableTest34
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1201,7 +1167,8 @@ internal class NullableTest34
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1228,8 +1195,6 @@ internal class NullableTest34
     }
 }
 
-
-
 internal class NullableTest37
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1237,7 +1202,8 @@ internal class NullableTest37
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1264,8 +1230,6 @@ internal class NullableTest37
     }
 }
 
-
-
 internal class NullableTest38
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1273,7 +1237,8 @@ internal class NullableTest38
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1300,8 +1265,6 @@ internal class NullableTest38
     }
 }
 
-
-
 internal class NullableTest39
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1309,7 +1272,8 @@ internal class NullableTest39
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1336,8 +1300,6 @@ internal class NullableTest39
     }
 }
 
-
-
 internal class NullableTest40
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1345,7 +1307,8 @@ internal class NullableTest40
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1372,8 +1335,6 @@ internal class NullableTest40
     }
 }
 
-
-
 internal class NullableTest41
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1381,7 +1342,8 @@ internal class NullableTest41
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1408,8 +1370,6 @@ internal class NullableTest41
     }
 }
 
-
-
 internal class NullableTest42
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1417,7 +1377,8 @@ internal class NullableTest42
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1444,8 +1405,6 @@ internal class NullableTest42
     }
 }
 
-
-
 internal class NullableTest43
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1453,7 +1412,8 @@ internal class NullableTest43
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1480,8 +1440,6 @@ internal class NullableTest43
     }
 }
 
-
-
 internal class NullableTest44
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1489,7 +1447,8 @@ internal class NullableTest44
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1516,8 +1475,6 @@ internal class NullableTest44
     }
 }
 
-
-
 internal class NullableTest45
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1525,7 +1482,8 @@ internal class NullableTest45
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -1551,8 +1509,6 @@ internal class NullableTest45
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 public class Test_nullcomparaison
 {
@@ -1615,4 +1571,3 @@ public class Test_nullcomparaison
         return 100;
     }
 }
-

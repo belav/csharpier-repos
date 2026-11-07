@@ -8,9 +8,7 @@ namespace System.CommandLine.Invocation;
 /// </summary>
 public abstract class CliAction
 {
-    private protected CliAction()
-    {
-    }
+    private protected CliAction() { }
 
     /// <summary>
     /// Indicates that the action terminates a command line invocation, and later actions are skipped.

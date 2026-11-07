@@ -5,20 +5,21 @@ using System.Collections;
 
 namespace TestConfigSection
 {
-	class Test
-	{
-		public static int Main (string[] args)
-		{
-			Hashtable testCustomSection = (Hashtable)System.Configuration.ConfigurationManager.GetSection ("TestCustomSection");
-			string proxyServer = (string)testCustomSection["ProxyServer"];
+    class Test
+    {
+        public static int Main(string[] args)
+        {
+            Hashtable testCustomSection = (Hashtable)
+                System.Configuration.ConfigurationManager.GetSection("TestCustomSection");
+            string proxyServer = (string)testCustomSection["ProxyServer"];
 
-			if (proxyServer == null)
-				throw new Exception("Custom section value is null");
+            if (proxyServer == null)
+                throw new Exception("Custom section value is null");
 
-			if (proxyServer != "server.example.com")
-				throw new Exception("Custom section value is incorrect");
+            if (proxyServer != "server.example.com")
+                throw new Exception("Custom section value is incorrect");
 
-			return 0;
-		}
-	}
+            return 0;
+        }
+    }
 }

@@ -13,10 +13,7 @@ namespace Internal.TypeSystem
         public int Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -29,7 +26,10 @@ namespace Internal.TypeSystem
         public void AddFlags(int flagsToAdd)
         {
             var originalFlags = _value;
-            while (Interlocked.CompareExchange(ref _value, originalFlags | flagsToAdd, originalFlags) != originalFlags)
+            while (
+                Interlocked.CompareExchange(ref _value, originalFlags | flagsToAdd, originalFlags)
+                != originalFlags
+            )
             {
                 originalFlags = _value;
             }

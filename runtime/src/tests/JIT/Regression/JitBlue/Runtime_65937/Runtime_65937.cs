@@ -24,22 +24,43 @@ public unsafe class Runtime_65937
         const int MAP_ANONYMOUS = 0x20;
         const int PAGE_SIZE = 0x1000;
 
-        byte* pages = (byte*)mmap(null, 2 * PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+        byte* pages = (byte*)mmap(
+            null,
+            2 * PAGE_SIZE,
+            PROT_READ | PROT_WRITE,
+            MAP_PRIVATE | MAP_ANONYMOUS,
+            -1,
+            0
+        );
 
         if (pages == (byte*)-1)
         {
-            Console.WriteLine("Failed to allocate two pages, errno is {0}, giving up on the test", Marshal.GetLastSystemError());
+            Console.WriteLine(
+                "Failed to allocate two pages, errno is {0}, giving up on the test",
+                Marshal.GetLastSystemError()
+            );
             return;
         }
 
         if (mprotect(pages + PAGE_SIZE, PAGE_SIZE, PROT_NONE) != 0)
         {
-            Console.WriteLine("Failed to protect the second page, errno is {0}, giving up on the test", Marshal.GetLastSystemError());
+            Console.WriteLine(
+                "Failed to protect the second page, errno is {0}, giving up on the test",
+                Marshal.GetLastSystemError()
+            );
             munmap(pages, 2 * PAGE_SIZE);
             return;
         }
 
-        CallWithStkArg(0, 0, 0, 0, 0, 0, *(StructWithNineBytes*)(pages + PAGE_SIZE - sizeof(StructWithNineBytes)));
+        CallWithStkArg(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            *(StructWithNineBytes*)(pages + PAGE_SIZE - sizeof(StructWithNineBytes))
+        );
 
         munmap(pages, 2 * PAGE_SIZE);
     }
@@ -58,10 +79,25 @@ public unsafe class Runtime_65937
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void CallWithStkArg(int a, int b, int c, int d, int e, int f, StructWithNineBytes stkArg) { }
+    private static void CallWithStkArg(
+        int a,
+        int b,
+        int c,
+        int d,
+        int e,
+        int f,
+        StructWithNineBytes stkArg
+    ) { }
 
     [DllImport("libc")]
-    private static extern void* mmap(void* addr, nuint length, int prot, int flags, int fd, nuint offset);
+    private static extern void* mmap(
+        void* addr,
+        nuint length,
+        int prot,
+        int flags,
+        int fd,
+        nuint offset
+    );
 
     [DllImport("libc")]
     private static extern int mprotect(void* addr, nuint len, int prot);

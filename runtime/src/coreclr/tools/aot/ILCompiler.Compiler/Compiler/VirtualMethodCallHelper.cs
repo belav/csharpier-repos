@@ -3,27 +3,46 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using Internal.TypeSystem;
 using ILCompiler.DependencyAnalysis;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {
     public static class VirtualMethodSlotHelper
     {
-        public static int GetDefaultInterfaceMethodSlot(NodeFactory factory, MethodDesc method, TypeDesc implType, DefType interfaceOnDefinition, bool countDictionarySlots = true)
+        public static int GetDefaultInterfaceMethodSlot(
+            NodeFactory factory,
+            MethodDesc method,
+            TypeDesc implType,
+            DefType interfaceOnDefinition,
+            bool countDictionarySlots = true
+        )
         {
-            Debug.Assert(method.GetTypicalMethodDefinition().OwningType == interfaceOnDefinition.GetTypeDefinition());
+            Debug.Assert(
+                method.GetTypicalMethodDefinition().OwningType
+                    == interfaceOnDefinition.GetTypeDefinition()
+            );
 
             SealedVTableNode sealedVTable = factory.SealedVTable(implType);
 
             // Ensure the sealed vtable is built before computing the slot
-            sealedVTable.BuildSealedVTableSlots(factory, relocsOnly: false /* GetVirtualMethodSlot is called in the final emission phase */);
+            sealedVTable.BuildSealedVTableSlots(
+                factory,
+                relocsOnly: false /* GetVirtualMethodSlot is called in the final emission phase */
+            );
 
-            int sealedVTableSlot = sealedVTable.ComputeDefaultInterfaceMethodSlot(method, interfaceOnDefinition);
+            int sealedVTableSlot = sealedVTable.ComputeDefaultInterfaceMethodSlot(
+                method,
+                interfaceOnDefinition
+            );
             if (sealedVTableSlot == -1)
                 return -1;
 
-            int numVTableSlots = GetNumberOfSlotsInCurrentType(factory, implType, countDictionarySlots);
+            int numVTableSlots = GetNumberOfSlotsInCurrentType(
+                factory,
+                implType,
+                countDictionarySlots
+            );
 
             return numVTableSlots + sealedVTableSlot;
         }
@@ -32,7 +51,12 @@ namespace ILCompiler
         /// Given a virtual method decl, return its VTable slot if the method is used on its containing type.
         /// Return -1 if the virtual method is not used.
         /// </summary>
-        public static int GetVirtualMethodSlot(NodeFactory factory, MethodDesc method, TypeDesc implType, bool countDictionarySlots = true)
+        public static int GetVirtualMethodSlot(
+            NodeFactory factory,
+            MethodDesc method,
+            TypeDesc implType,
+            bool countDictionarySlots = true
+        )
         {
             if (method.CanMethodBeInSealedVTable())
             {
@@ -46,13 +70,20 @@ namespace ILCompiler
                 SealedVTableNode sealedVTable = factory.SealedVTable(implType);
 
                 // Ensure the sealed vtable is built before computing the slot
-                sealedVTable.BuildSealedVTableSlots(factory, relocsOnly: false /* GetVirtualMethodSlot is called in the final emission phase */);
+                sealedVTable.BuildSealedVTableSlots(
+                    factory,
+                    relocsOnly: false /* GetVirtualMethodSlot is called in the final emission phase */
+                );
 
                 int sealedVTableSlot = sealedVTable.ComputeSealedVTableSlot(method);
                 if (sealedVTableSlot == -1)
                     return -1;
 
-                int numVTableSlots = GetNumberOfSlotsInCurrentType(factory, implType, countDictionarySlots);
+                int numVTableSlots = GetNumberOfSlotsInCurrentType(
+                    factory,
+                    implType,
+                    countDictionarySlots
+                );
 
                 return numVTableSlots + sealedVTableSlot;
             }
@@ -89,7 +120,11 @@ namespace ILCompiler
             }
         }
 
-        private static int GetNumberOfSlotsInCurrentType(NodeFactory factory, TypeDesc implType, bool countDictionarySlots)
+        private static int GetNumberOfSlotsInCurrentType(
+            NodeFactory factory,
+            TypeDesc implType,
+            bool countDictionarySlots
+        )
         {
             if (implType.IsInterface)
             {
@@ -118,12 +153,18 @@ namespace ILCompiler
             return numVTableSlots;
         }
 
-        private static int GetNumberOfBaseSlots(NodeFactory factory, TypeDesc owningType, bool countDictionarySlots)
+        private static int GetNumberOfBaseSlots(
+            NodeFactory factory,
+            TypeDesc owningType,
+            bool countDictionarySlots
+        )
         {
             int baseSlots = 0;
 
             TypeDesc baseType = owningType.BaseType;
-            TypeDesc templateBaseType = owningType.ConvertToCanonForm(CanonicalFormKind.Specific).BaseType;
+            TypeDesc templateBaseType = owningType
+                .ConvertToCanonForm(CanonicalFormKind.Specific)
+                .BaseType;
 
             while (baseType != null)
             {
@@ -156,7 +197,12 @@ namespace ILCompiler
 
                 // For types that have a generic dictionary, the introduced virtual method slots are
                 // prefixed with a pointer to the generic dictionary.
-                if ((baseType.HasGenericDictionarySlot() || templateBaseType.HasGenericDictionarySlot()) && countDictionarySlots)
+                if (
+                    (
+                        baseType.HasGenericDictionarySlot()
+                        || templateBaseType.HasGenericDictionarySlot()
+                    ) && countDictionarySlots
+                )
                     baseSlots++;
 
                 IReadOnlyList<MethodDesc> baseVirtualSlots = factory.VTable(baseType).Slots;
@@ -196,8 +242,11 @@ namespace ILCompiler
             if (type.IsInterface)
                 return type.HasInstantiation;
 
-            return type.HasInstantiation &&
-                (type.ConvertToCanonForm(CanonicalFormKind.Specific) != type || type.IsCanonicalSubtype(CanonicalFormKind.Any));
+            return type.HasInstantiation
+                && (
+                    type.ConvertToCanonForm(CanonicalFormKind.Specific) != type
+                    || type.IsCanonicalSubtype(CanonicalFormKind.Any)
+                );
         }
     }
 }

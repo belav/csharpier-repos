@@ -18,7 +18,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         //[Variation(Desc = "v1 - Count on empty collection", Priority = 1)]
         [Fact]

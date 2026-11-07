@@ -3,16 +3,16 @@ using System.Reflection;
 
 class X
 {
-	public static int Main ()
-	{
-		if (GetTypeHelper ("Mono.Runtime").FullName != "Mono.Runtime")
-			return 1;
+    public static int Main()
+    {
+        if (GetTypeHelper("Mono.Runtime").FullName != "Mono.Runtime")
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 
-	static Type GetTypeHelper (string name)
-	{
-		return Type.GetType (name, true);
-	}	
+    static Type GetTypeHelper(string name)
+    {
+        return Type.GetType(name, true);
+    }
 }

@@ -38,14 +38,22 @@ namespace System.Security.Cryptography.Tests
 
             theKey.Dispose();
             Assert.ThrowsAny<ObjectDisposedException>(() =>
-                propInfo.GetValue(theKey, BindingFlags.DoNotWrapExceptions, null, null, null));
+                propInfo.GetValue(theKey, BindingFlags.DoNotWrapExceptions, null, null, null)
+            );
         }
 
         public static IEnumerable<object[]> AllPublicProperties()
         {
-            foreach (PropertyInfo pi in typeof(CngKey).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            foreach (
+                PropertyInfo pi in typeof(CngKey).GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                )
+            )
             {
-                if (pi.GetMethod is not null && !typeof(SafeHandle).IsAssignableFrom(pi.PropertyType))
+                if (
+                    pi.GetMethod is not null
+                    && !typeof(SafeHandle).IsAssignableFrom(pi.PropertyType)
+                )
                 {
                     yield return new[] { pi.Name };
                 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,52 +33,56 @@ using System.Reflection;
 
 namespace System.Data.Linq
 {
-	public sealed class MemberChangeConflict
-	{
-		internal MemberChangeConflict ()
-		{
-		}
+    public sealed class MemberChangeConflict
+    {
+        internal MemberChangeConflict() { }
 
-		[MonoTODO]
-		public object CurrentValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public object CurrentValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public object DatabaseValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public object DatabaseValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public bool IsModified {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool IsModified
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public bool IsResolved {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool IsResolved
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public MemberInfo Member {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public MemberInfo Member
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public object OriginalValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public object OriginalValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public void Resolve (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Resolve(object value)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void Resolve (RefreshMode refreshMode)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void Resolve(RefreshMode refreshMode)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -50,7 +50,8 @@ public sealed record RelationalModelDependencies
     public RelationalModelDependencies(
         IRowKeyValueFactoryFactory rowKeyValueFactoryFactory,
         IRowForeignKeyValueFactoryFactory foreignKeyRowValueFactorySource,
-        IRowIndexValueFactoryFactory rowIndexValueFactoryFactory)
+        IRowIndexValueFactoryFactory rowIndexValueFactoryFactory
+    )
     {
         RowKeyValueFactoryFactory = rowKeyValueFactoryFactory;
         RowForeignKeyValueFactoryFactory = foreignKeyRowValueFactorySource;

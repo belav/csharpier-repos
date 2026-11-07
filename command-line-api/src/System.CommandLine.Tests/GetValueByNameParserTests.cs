@@ -1,8 +1,8 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests;
@@ -18,11 +18,8 @@ public class GetValueByNameTests
             new CliCommand("inner1")
             {
                 new CliArgument<int>("arg"),
-                new CliCommand("inner2")
-                {
-                    new CliArgument<int>("arg"),
-                }
-            }
+                new CliCommand("inner2") { new CliArgument<int>("arg") },
+            },
         };
 
         ParseResult parseResult = command.Parse("1 inner1 2 inner2 3");
@@ -39,11 +36,8 @@ public class GetValueByNameTests
             new CliCommand("inner1")
             {
                 new CliOption<int>("--integer", "-i"),
-                new CliCommand("inner2")
-                {
-                    new CliOption<int>("--integer", "-i")
-                }
-            }
+                new CliCommand("inner2") { new CliOption<int>("--integer", "-i") },
+            },
         };
 
         ParseResult parseResult = command.Parse("-i 1 inner1 --integer 2 inner2 -i 3");
@@ -54,10 +48,7 @@ public class GetValueByNameTests
     [Fact]
     public void When_option_is_not_provided_then_default_value_is_returned()
     {
-        CliRootCommand command = new()
-        {
-            new CliOption<int>("--integer", "-i")
-        };
+        CliRootCommand command = new() { new CliOption<int>("--integer", "-i") };
 
         ParseResult parseResult = command.Parse("");
 
@@ -69,10 +60,7 @@ public class GetValueByNameTests
     {
         CliRootCommand command = new()
         {
-            new CliOption<int>("--integer", "-i")
-            {
-                DefaultValueFactory = _ => 123
-            }
+            new CliOption<int>("--integer", "-i") { DefaultValueFactory = _ => 123 },
         };
 
         ParseResult parseResult = command.Parse("");
@@ -85,10 +73,7 @@ public class GetValueByNameTests
     {
         CliRootCommand command = new()
         {
-            new CliArgument<int>("arg")
-            {
-                Arity = ArgumentArity.ZeroOrOne
-            }
+            new CliArgument<int>("arg") { Arity = ArgumentArity.ZeroOrOne },
         };
 
         ParseResult parseResult = command.Parse("");
@@ -104,10 +89,10 @@ public class GetValueByNameTests
             new CliArgument<int>("arg")
             {
                 Arity = ArgumentArity.ZeroOrOne,
-                DefaultValueFactory = _ => 123
-            }
+                DefaultValueFactory = _ => 123,
+            },
         };
-        
+
         ParseResult parseResult = command.Parse("");
 
         parseResult.GetValue<int>("arg").Should().Be(123);
@@ -116,13 +101,7 @@ public class GetValueByNameTests
     [Fact]
     public void When_required_option_value_is_not_provided_then_an_exception_is_thrown()
     {
-        CliRootCommand command = new()
-        {
-            new CliOption<int>("--required")
-            {
-                Required = true
-            }
-        };
+        CliRootCommand command = new() { new CliOption<int>("--required") { Required = true } };
 
         ParseResult parseResult = command.Parse("");
 
@@ -131,7 +110,9 @@ public class GetValueByNameTests
         getRequired
             .Should()
             .Throw<InvalidOperationException>()
-            .Where(ex => ex.Message == LocalizationResources.RequiredOptionWasNotProvided("--required"));
+            .Where(ex =>
+                ex.Message == LocalizationResources.RequiredOptionWasNotProvided("--required")
+            );
     }
 
     [Fact]
@@ -139,10 +120,7 @@ public class GetValueByNameTests
     {
         CliRootCommand command = new()
         {
-            new CliArgument<int>("required")
-            {
-                Arity = ArgumentArity.ExactlyOne
-            }
+            new CliArgument<int>("required") { Arity = ArgumentArity.ExactlyOne },
         };
 
         ParseResult parseResult = command.Parse("");
@@ -152,14 +130,19 @@ public class GetValueByNameTests
         getRequired
             .Should()
             .Throw<InvalidOperationException>()
-            .Where(ex => ex.Message == LocalizationResources.RequiredArgumentMissing(parseResult.GetResult(command.Arguments[0])));
+            .Where(ex =>
+                ex.Message
+                == LocalizationResources.RequiredArgumentMissing(
+                    parseResult.GetResult(command.Arguments[0])
+                )
+            );
     }
 
     [Fact]
     public void When_non_existing_name_is_used_then_exception_is_thrown()
     {
         const string nonExistingName = "nonExisting";
-        CliCommand command = new ("noSymbols");
+        CliCommand command = new("noSymbols");
         ParseResult parseResult = command.Parse("");
 
         Action getRequired = () => parseResult.GetValue<int>(nonExistingName);
@@ -177,11 +160,8 @@ public class GetValueByNameTests
 
         CliRootCommand command = new()
         {
-            new CliArgument<int>(sameName)
-            {
-                Arity = ArgumentArity.ZeroOrOne
-            },
-            new CliOption<int>(sameName)
+            new CliArgument<int>(sameName) { Arity = ArgumentArity.ZeroOrOne },
+            new CliOption<int>(sameName),
         };
 
         ParseResult parseResult = command.Parse("");
@@ -191,7 +171,10 @@ public class GetValueByNameTests
         getConflicted
             .Should()
             .Throw<InvalidOperationException>()
-            .Where(ex => ex.Message == $"Command {command.Name} has more than one child named \"{sameName}\".");
+            .Where(ex =>
+                ex.Message
+                == $"Command {command.Name} has more than one child named \"{sameName}\"."
+            );
     }
 
     [Fact]
@@ -202,10 +185,7 @@ public class GetValueByNameTests
         CliCommand command = new("outer")
         {
             new CliArgument<int>(sameName),
-            new CliCommand("inner")
-            {
-                new CliOption<int>(sameName)
-            }
+            new CliCommand("inner") { new CliOption<int>(sameName) },
         };
 
         ParseResult parseResult = command.Parse($"outer 123 inner {sameName} 456");
@@ -222,17 +202,11 @@ public class GetValueByNameTests
 
         CliCommand command = new("outer")
         {
-            new CliArgument<int>(sameName)
-            {
-                DefaultValueFactory = _ => 123
-            },
+            new CliArgument<int>(sameName) { DefaultValueFactory = _ => 123 },
             new CliCommand("inner")
             {
-                new CliOption<int>(sameName)
-                {
-                    DefaultValueFactory = _ => 456
-                }
-            }
+                new CliOption<int>(sameName) { DefaultValueFactory = _ => 456 },
+            },
         };
 
         ParseResult parseResult = command.Parse("outer inner 456");
@@ -245,10 +219,7 @@ public class GetValueByNameTests
     [Fact]
     public void T_can_be_cast_to_nullable_of_T()
     {
-        CliRootCommand command = new()
-        {
-            new CliArgument<int>("name")
-        };
+        CliRootCommand command = new() { new CliArgument<int>("name") };
 
         ParseResult parseResult = command.Parse("123");
 
@@ -258,14 +229,14 @@ public class GetValueByNameTests
     [Fact]
     public void Array_of_T_can_be_cast_to_IEnumerable_of_T()
     {
-        CliRootCommand command = new()
-        {
-            new CliArgument<int[]>("name")
-        };
+        CliRootCommand command = new() { new CliArgument<int[]>("name") };
 
         ParseResult parseResult = command.Parse("1 2 3");
 
-        parseResult.GetValue<IEnumerable<int>>("name").Should().BeEquivalentTo(new int[] { 1, 2, 3 });
+        parseResult
+            .GetValue<IEnumerable<int>>("name")
+            .Should()
+            .BeEquivalentTo(new int[] { 1, 2, 3 });
     }
 
     [Fact]
@@ -273,10 +244,7 @@ public class GetValueByNameTests
     {
         const string Name = "name";
 
-        CliRootCommand command = new()
-        {
-            new CliArgument<int>(Name)
-        };
+        CliRootCommand command = new() { new CliArgument<int>(Name) };
 
         ParseResult parseResult = command.Parse("123");
 
@@ -284,20 +252,14 @@ public class GetValueByNameTests
         Assert(() => parseResult.GetValue<int[]>(Name));
         Assert(() => parseResult.GetValue<string>(Name));
 
-        static void Assert(Action invalidCast)
-            => invalidCast.Should().Throw<InvalidCastException>();
+        static void Assert(Action invalidCast) =>
+            invalidCast.Should().Throw<InvalidCastException>();
     }
 
     [Fact]
     public void Parse_errors_have_precedence_over_type_mismatch()
     {
-        CliRootCommand command = new()
-        {
-            new CliOption<int>("--required")
-            {
-                Required = true
-            }
-        };
+        CliRootCommand command = new() { new CliOption<int>("--required") { Required = true } };
 
         ParseResult parseResult = command.Parse("");
 
@@ -306,7 +268,9 @@ public class GetValueByNameTests
         getRequiredWithTypeMismatch
             .Should()
             .Throw<InvalidOperationException>()
-            .Where(ex => ex.Message == LocalizationResources.RequiredOptionWasNotProvided("--required"));
+            .Where(ex =>
+                ex.Message == LocalizationResources.RequiredOptionWasNotProvided("--required")
+            );
     }
 
     [Fact]
@@ -315,11 +279,7 @@ public class GetValueByNameTests
         var cmd = new CliRootCommand
         {
             new CliCommand("subcommand"),
-
-            new CliOption<string>("--opt")
-            {
-                Recursive = true
-            }
+            new CliOption<string>("--opt") { Recursive = true },
         };
 
         var result = cmd.Parse("subcommand --opt hello");

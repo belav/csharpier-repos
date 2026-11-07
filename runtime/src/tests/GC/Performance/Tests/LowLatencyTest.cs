@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Collections;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Xml;
-using System.Runtime;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Xml;
 
 namespace GCTest
 {
@@ -18,6 +18,7 @@ namespace GCTest
     {
         private static int loid = 0; // to give a "unique" identifier
         private static Stopwatch s_stopWatch = new Stopwatch();
+
         public static void Usage()
         {
             Console.WriteLine("Usage");
@@ -61,7 +62,6 @@ namespace GCTest
             test.DoTest(iters, gcMode);
         }
 
-
         private void LoadData(int count)
         {
             loid++;
@@ -69,7 +69,10 @@ namespace GCTest
             byte[] aBuffer = null;
             long maxElapsed = 0;
 
-            string clunieFile = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "clunie_small.xml");
+            string clunieFile = Path.Combine(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                "clunie_small.xml"
+            );
             using (StreamReader reader = new StreamReader(clunieFile))
             {
                 aBuffer = new byte[reader.BaseStream.Length];
@@ -101,7 +104,6 @@ namespace GCTest
 
                 Console.WriteLine("Maximum of {0}: {1}", count, maxElapsed);
             }
-
         }
 
         public void DoTest(int count, GCLatencyMode gcMode)
@@ -119,6 +121,5 @@ namespace GCTest
                 GCSettings.LatencyMode = oldMode;
             }
         }
-
     }
 }

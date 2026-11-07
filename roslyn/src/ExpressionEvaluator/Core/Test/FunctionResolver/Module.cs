@@ -50,7 +50,6 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return new MetadataReader(block.Pointer, block.Length);
         }
 
-        void IDisposable.Dispose()
-            => _reader?.Dispose();
+        void IDisposable.Dispose() => _reader?.Dispose();
     }
 }

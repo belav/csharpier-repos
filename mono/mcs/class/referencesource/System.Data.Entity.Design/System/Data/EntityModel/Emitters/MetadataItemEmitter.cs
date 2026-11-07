@@ -6,12 +6,12 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------using System;
+using System.CodeDom;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.CodeDom;
 using System.Reflection;
+using System.Text;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -20,7 +20,7 @@ namespace System.Data.EntityModel.Emitters
         private MetadataItem _item;
 
         protected MetadataItemEmitter(ClientApiGenerator generator, MetadataItem item)
-            :base(generator)
+            : base(generator)
         {
             Debug.Assert(item != null, "item is null");
             _item = item;
@@ -36,7 +36,7 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         protected abstract void Validate();
 
-        #region Operations for Getting Accessibility 
+        #region Operations for Getting Accessibility
 
         private const string CodeGenerationValueAccessibilityInternal = "Internal";
         private const string CodeGenerationValueAccessibilityProtected = "Protected";
@@ -81,6 +81,7 @@ namespace System.Data.EntityModel.Emitters
         {
             return GetAccessibilityValue(item, XmlConstants.GetterAccess);
         }
+
         protected static MemberAttributes GetEntityTypeAccessibility(EntityType item)
         {
             return GetAccessibilityValue(item, XmlConstants.TypeAccess);
@@ -88,11 +89,13 @@ namespace System.Data.EntityModel.Emitters
 
         protected static int GetAccessibilityRank(MemberAttributes accessibility)
         {
-            Debug.Assert(accessibility == MemberAttributes.Private ||
-                         accessibility == MemberAttributes.Public ||
-                         accessibility == MemberAttributes.Assembly ||
-                         accessibility == MemberAttributes.Family,
-                         "this method is intended to deal with only single access attributes");
+            Debug.Assert(
+                accessibility == MemberAttributes.Private
+                    || accessibility == MemberAttributes.Public
+                    || accessibility == MemberAttributes.Assembly
+                    || accessibility == MemberAttributes.Family,
+                "this method is intended to deal with only single access attributes"
+            );
             switch (accessibility)
             {
                 case MemberAttributes.Public:
@@ -102,7 +105,10 @@ namespace System.Data.EntityModel.Emitters
                 case MemberAttributes.Family:
                     return 2;
                 default:
-                    Debug.Assert(accessibility == MemberAttributes.Private, "did a new type get added?");
+                    Debug.Assert(
+                        accessibility == MemberAttributes.Private,
+                        "did a new type get added?"
+                    );
                     return 3;
             }
         }
@@ -111,7 +117,13 @@ namespace System.Data.EntityModel.Emitters
         {
             TypeAttributes accessibilty = TypeAttributes.Public;
             MetadataProperty metadataProperty;
-            if (item.MetadataProperties.TryGetValue(Utils.GetFullyQualifiedCodeGenerationAttributeName(XmlConstants.TypeAccess), false, out metadataProperty))
+            if (
+                item.MetadataProperties.TryGetValue(
+                    Utils.GetFullyQualifiedCodeGenerationAttributeName(XmlConstants.TypeAccess),
+                    false,
+                    out metadataProperty
+                )
+            )
             {
                 accessibilty = GetCodeAccessibilityTypeAttribute(metadataProperty.Value.ToString());
             }
@@ -124,9 +136,17 @@ namespace System.Data.EntityModel.Emitters
         {
             MemberAttributes accessibilty = MemberAttributes.Public;
             MetadataProperty metadataProperty;
-            if (item.MetadataProperties.TryGetValue(Utils.GetFullyQualifiedCodeGenerationAttributeName(attribute), false, out metadataProperty))
+            if (
+                item.MetadataProperties.TryGetValue(
+                    Utils.GetFullyQualifiedCodeGenerationAttributeName(attribute),
+                    false,
+                    out metadataProperty
+                )
+            )
             {
-                accessibilty = GetCodeAccessibilityMemberAttribute(metadataProperty.Value.ToString());
+                accessibilty = GetCodeAccessibilityMemberAttribute(
+                    metadataProperty.Value.ToString()
+                );
             }
             return accessibilty;
         }
@@ -145,17 +165,23 @@ namespace System.Data.EntityModel.Emitters
                     return MemberAttributes.Family;
 
                 default:
-                    Debug.Assert(accessibility == CodeGenerationValueAccessibilityPublic, "found an accessibility other than " + CodeGenerationValueAccessibilityPublic);
+                    Debug.Assert(
+                        accessibility == CodeGenerationValueAccessibilityPublic,
+                        "found an accessibility other than "
+                            + CodeGenerationValueAccessibilityPublic
+                    );
                     return MemberAttributes.Public;
             }
         }
 
         /// <summary>
-        /// Given a MemberAttribute, returns a string representation used in CSDL. 
+        /// Given a MemberAttribute, returns a string representation used in CSDL.
         /// For e.g: MemebrAttribtue.Family is Protected in our csdl, (protected in C#, Family in VB)
         /// Inverse of the method above (GetCodeAccessibilityMemberAttribute)
         /// </summary>
-        protected static string GetAccessibilityCsdlStringFromMemberAttribute(MemberAttributes attribute)
+        protected static string GetAccessibilityCsdlStringFromMemberAttribute(
+            MemberAttributes attribute
+        )
         {
             switch (attribute)
             {
@@ -167,12 +193,18 @@ namespace System.Data.EntityModel.Emitters
                     return CodeGenerationValueAccessibilityProtected;
 
                 default:
-                    Debug.Assert(attribute == MemberAttributes.Public, "found MemberAttribute other than " + CodeGenerationValueAccessibilityPublic);
+                    Debug.Assert(
+                        attribute == MemberAttributes.Public,
+                        "found MemberAttribute other than " + CodeGenerationValueAccessibilityPublic
+                    );
                     return CodeGenerationValueAccessibilityPublic;
             }
         }
 
-        private static bool IsLeftMoreAccessableThanRight(MemberAttributes left, MemberAttributes right)
+        private static bool IsLeftMoreAccessableThanRight(
+            MemberAttributes left,
+            MemberAttributes right
+        )
         {
             return GetAccessibilityRank(left) < GetAccessibilityRank(right);
         }
@@ -180,13 +212,19 @@ namespace System.Data.EntityModel.Emitters
         private static TypeAttributes GetCodeAccessibilityTypeAttribute(string accessibility)
         {
             Debug.Assert(accessibility != null, "why does accessibility == null?");
-            if (accessibility == CodeGenerationValueAccessibilityInternal || accessibility == CodeGenerationValueAccessibilityProtected)
+            if (
+                accessibility == CodeGenerationValueAccessibilityInternal
+                || accessibility == CodeGenerationValueAccessibilityProtected
+            )
             {
                 return TypeAttributes.NotPublic;
             }
             else
             {
-                Debug.Assert(accessibility == CodeGenerationValueAccessibilityPublic, "found an accessibility other than " + CodeGenerationValueAccessibilityPublic);
+                Debug.Assert(
+                    accessibility == CodeGenerationValueAccessibilityPublic,
+                    "found an accessibility other than " + CodeGenerationValueAccessibilityPublic
+                );
                 return TypeAttributes.Public;
             }
         }

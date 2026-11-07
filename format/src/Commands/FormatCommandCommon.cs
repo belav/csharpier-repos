@@ -23,18 +23,34 @@ namespace Microsoft.CodeAnalysis.Tools
         internal const int UnableToLocateMSBuildExitCode = 3;
         internal const int UnableToLocateDotNetCliExitCode = 4;
 
-        private static string[] VerbosityLevels => new[] { "q", "quiet", "m", "minimal", "n", "normal", "d", "detailed", "diag", "diagnostic" };
+        private static string[] VerbosityLevels =>
+            new[]
+            {
+                "q",
+                "quiet",
+                "m",
+                "minimal",
+                "n",
+                "normal",
+                "d",
+                "detailed",
+                "diag",
+                "diagnostic",
+            };
         private static string[] SeverityLevels => new[] { "info", "warn", "error" };
 
-        public static readonly CliArgument<string> SlnOrProjectArgument = new CliArgument<string>(Resources.SolutionOrProjectArgumentName)
+        public static readonly CliArgument<string> SlnOrProjectArgument = new CliArgument<string>(
+            Resources.SolutionOrProjectArgumentName
+        )
         {
             Description = Resources.SolutionOrProjectArgumentDescription,
-            Arity = ArgumentArity.ZeroOrOne
+            Arity = ArgumentArity.ZeroOrOne,
         }.DefaultToCurrentDirectory();
 
         internal static readonly CliOption<bool> FolderOption = new("--folder")
         {
-            Description = Resources.Whether_to_treat_the_workspace_argument_as_a_simple_folder_of_files,
+            Description =
+                Resources.Whether_to_treat_the_workspace_argument_as_a_simple_folder_of_files,
         };
         internal static readonly CliOption<bool> NoRestoreOption = new("--no-restore")
         {
@@ -42,55 +58,73 @@ namespace Microsoft.CodeAnalysis.Tools
         };
         internal static readonly CliOption<bool> VerifyNoChanges = new("--verify-no-changes")
         {
-            Description = Resources.Verify_no_formatting_changes_would_be_performed_Terminates_with_a_non_zero_exit_code_if_any_files_would_have_been_formatted,
+            Description =
+                Resources.Verify_no_formatting_changes_would_be_performed_Terminates_with_a_non_zero_exit_code_if_any_files_would_have_been_formatted,
         };
         internal static readonly CliOption<string[]> DiagnosticsOption = new("--diagnostics")
         {
             AllowMultipleArgumentsPerToken = true,
             DefaultValueFactory = _ => Array.Empty<string>(),
-            Description = Resources.A_space_separated_list_of_diagnostic_ids_to_use_as_a_filter_when_fixing_code_style_or_3rd_party_issues,
+            Description =
+                Resources.A_space_separated_list_of_diagnostic_ids_to_use_as_a_filter_when_fixing_code_style_or_3rd_party_issues,
         };
-        internal static readonly CliOption<string[]> ExcludeDiagnosticsOption = new("--exclude-diagnostics")
+        internal static readonly CliOption<string[]> ExcludeDiagnosticsOption = new(
+            "--exclude-diagnostics"
+        )
         {
             AllowMultipleArgumentsPerToken = true,
             DefaultValueFactory = _ => Array.Empty<string>(),
-            Description = Resources.A_space_separated_list_of_diagnostic_ids_to_ignore_when_fixing_code_style_or_3rd_party_issues,
+            Description =
+                Resources.A_space_separated_list_of_diagnostic_ids_to_ignore_when_fixing_code_style_or_3rd_party_issues,
         };
-        internal static readonly CliOption<string> SeverityOption = new CliOption<string>("--severity")
+        internal static readonly CliOption<string> SeverityOption = new CliOption<string>(
+            "--severity"
+        )
         {
-            Description = Resources.The_severity_of_diagnostics_to_fix_Allowed_values_are_info_warn_and_error,
+            Description =
+                Resources.The_severity_of_diagnostics_to_fix_Allowed_values_are_info_warn_and_error,
         };
         internal static readonly CliOption<string[]> IncludeOption = new("--include")
         {
             AllowMultipleArgumentsPerToken = true,
             DefaultValueFactory = _ => Array.Empty<string>(),
-            Description = Resources.A_list_of_relative_file_or_folder_paths_to_include_in_formatting_All_files_are_formatted_if_empty,
+            Description =
+                Resources.A_list_of_relative_file_or_folder_paths_to_include_in_formatting_All_files_are_formatted_if_empty,
         };
         internal static readonly CliOption<string[]> ExcludeOption = new("--exclude")
         {
             AllowMultipleArgumentsPerToken = true,
             DefaultValueFactory = _ => Array.Empty<string>(),
-            Description = Resources.A_list_of_relative_file_or_folder_paths_to_exclude_from_formatting,
+            Description =
+                Resources.A_list_of_relative_file_or_folder_paths_to_exclude_from_formatting,
         };
         internal static readonly CliOption<bool> IncludeGeneratedOption = new("--include-generated")
         {
             Description = Resources.Format_files_generated_by_the_SDK,
         };
-        internal static readonly CliOption<string> VerbosityOption = new CliOption<string>("--verbosity", "-v")
+        internal static readonly CliOption<string> VerbosityOption = new CliOption<string>(
+            "--verbosity",
+            "-v"
+        )
         {
-            Description = Resources.Set_the_verbosity_level_Allowed_values_are_quiet_minimal_normal_detailed_and_diagnostic,
+            Description =
+                Resources.Set_the_verbosity_level_Allowed_values_are_quiet_minimal_normal_detailed_and_diagnostic,
         };
-        internal static readonly CliOption<string> BinarylogOption = new CliOption<string>("--binarylog")
+        internal static readonly CliOption<string> BinarylogOption = new CliOption<string>(
+            "--binarylog"
+        )
         {
             HelpName = "binary-log-path",
             Arity = ArgumentArity.ZeroOrOne,
-            Description = Resources.Log_all_project_or_solution_load_information_to_a_binary_log_file,
+            Description =
+                Resources.Log_all_project_or_solution_load_information_to_a_binary_log_file,
         };
         internal static readonly CliOption<string> ReportOption = new CliOption<string>("--report")
         {
             HelpName = "report-path",
             Arity = ArgumentArity.ZeroOrOne,
-            Description = Resources.Accepts_a_file_path_which_if_provided_will_produce_a_json_report_in_the_given_directory,
+            Description =
+                Resources.Accepts_a_file_path_which_if_provided_will_produce_a_json_report_in_the_given_directory,
         };
 
         static FormatCommandCommon()
@@ -101,7 +135,11 @@ namespace Microsoft.CodeAnalysis.Tools
             ReportOption.AcceptLegalFilePathsOnly();
         }
 
-        internal static async Task<int> FormatAsync(FormatOptions formatOptions, ILogger<Program> logger, CancellationToken cancellationToken)
+        internal static async Task<int> FormatAsync(
+            FormatOptions formatOptions,
+            ILogger<Program> logger,
+            CancellationToken cancellationToken
+        )
         {
             if (formatOptions.WorkspaceType != WorkspaceType.Folder)
             {
@@ -110,7 +148,9 @@ namespace Microsoft.CodeAnalysis.Tools
 
                 if (!TryGetDotNetCliVersion(out var dotnetVersion))
                 {
-                    logger.LogError(Resources.Unable_to_locate_dotnet_CLI_Ensure_that_it_is_on_the_PATH);
+                    logger.LogError(
+                        Resources.Unable_to_locate_dotnet_CLI_Ensure_that_it_is_on_the_PATH
+                    );
                     return UnableToLocateDotNetCliExitCode;
                 }
 
@@ -118,18 +158,23 @@ namespace Microsoft.CodeAnalysis.Tools
 
                 if (!TryLoadMSBuild(out var msBuildPath))
                 {
-                    logger.LogError(Resources.Unable_to_locate_MSBuild_Ensure_the_NET_SDK_was_installed_with_the_official_installer);
+                    logger.LogError(
+                        Resources.Unable_to_locate_MSBuild_Ensure_the_NET_SDK_was_installed_with_the_official_installer
+                    );
                     return UnableToLocateMSBuildExitCode;
                 }
 
                 logger.LogTrace(Resources.Using_msbuildexe_located_in_0, msBuildPath);
             }
 
-            var formatResult = await CodeFormatter.FormatWorkspaceAsync(
-                formatOptions,
-                logger,
-                cancellationToken,
-                binaryLogPath: formatOptions.BinaryLogPath).ConfigureAwait(false);
+            var formatResult = await CodeFormatter
+                .FormatWorkspaceAsync(
+                    formatOptions,
+                    logger,
+                    cancellationToken,
+                    binaryLogPath: formatOptions.BinaryLogPath
+                )
+                .ConfigureAwait(false);
             return formatResult.GetExitCode(formatOptions.ChangesAreErrors);
         }
 
@@ -152,10 +197,17 @@ namespace Microsoft.CodeAnalysis.Tools
             return arg;
         }
 
-        public static ILogger<Program> SetupLogging(this IConsole console, LogLevel minimalLogLevel, LogLevel minimalErrorLevel)
+        public static ILogger<Program> SetupLogging(
+            this IConsole console,
+            LogLevel minimalLogLevel,
+            LogLevel minimalErrorLevel
+        )
         {
-            var loggerFactory = new LoggerFactory()
-                .AddSimpleConsole(console, minimalLogLevel, minimalErrorLevel);
+            var loggerFactory = new LoggerFactory().AddSimpleConsole(
+                console,
+                minimalLogLevel,
+                minimalErrorLevel
+            );
             var logger = loggerFactory.CreateLogger<Program>();
             return logger;
         }
@@ -170,10 +222,15 @@ namespace Microsoft.CodeAnalysis.Tools
             return formatResult.FilesFormatted == 0 ? 0 : CheckFailedExitCode;
         }
 
-        public static FormatOptions ParseVerbosityOption(this ParseResult parseResult, FormatOptions formatOptions)
+        public static FormatOptions ParseVerbosityOption(
+            this ParseResult parseResult,
+            FormatOptions formatOptions
+        )
         {
-            if (parseResult.GetResult(VerbosityOption) is not null &&
-                parseResult.GetValue(VerbosityOption) is string { Length: > 0 } verbosity)
+            if (
+                parseResult.GetResult(VerbosityOption) is not null
+                && parseResult.GetValue(VerbosityOption) is string { Length: > 0 } verbosity
+            )
             {
                 formatOptions = formatOptions with { LogLevel = GetLogLevel(verbosity) };
             }
@@ -185,7 +242,11 @@ namespace Microsoft.CodeAnalysis.Tools
             return formatOptions;
         }
 
-        public static FormatOptions ParseCommonOptions(this ParseResult parseResult, FormatOptions formatOptions, ILogger logger)
+        public static FormatOptions ParseCommonOptions(
+            this ParseResult parseResult,
+            FormatOptions formatOptions,
+            ILogger logger
+        )
         {
             if (parseResult.GetResult(NoRestoreOption) is not null)
             {
@@ -203,12 +264,18 @@ namespace Microsoft.CodeAnalysis.Tools
                 formatOptions = formatOptions with { IncludeGeneratedFiles = true };
             }
 
-            if (parseResult.GetResult(IncludeOption) is not null || parseResult.GetResult(ExcludeOption) is not null)
+            if (
+                parseResult.GetResult(IncludeOption) is not null
+                || parseResult.GetResult(ExcludeOption) is not null
+            )
             {
                 var fileToInclude = parseResult.GetValue(IncludeOption) ?? Array.Empty<string>();
                 var fileToExclude = parseResult.GetValue(ExcludeOption) ?? Array.Empty<string>();
                 HandleStandardInput(logger, ref fileToInclude, ref fileToExclude);
-                formatOptions = formatOptions with { FileMatcher = SourceFileMatcher.CreateMatcher(fileToInclude, fileToExclude) };
+                formatOptions = formatOptions with
+                {
+                    FileMatcher = SourceFileMatcher.CreateMatcher(fileToInclude, fileToExclude),
+                };
             }
 
             if (parseResult.GetResult(ReportOption) is not null)
@@ -227,15 +294,25 @@ namespace Microsoft.CodeAnalysis.Tools
 
                 if (parseResult.GetValue(BinarylogOption) is string { Length: > 0 } binaryLogPath)
                 {
-                    formatOptions = Path.GetExtension(binaryLogPath)?.Equals(".binlog") == false
-                        ? (formatOptions with { BinaryLogPath = Path.ChangeExtension(binaryLogPath, ".binlog") })
-                        : (formatOptions with { BinaryLogPath = binaryLogPath });
+                    formatOptions =
+                        Path.GetExtension(binaryLogPath)?.Equals(".binlog") == false
+                            ? (
+                                formatOptions with
+                                {
+                                    BinaryLogPath = Path.ChangeExtension(binaryLogPath, ".binlog"),
+                                }
+                            )
+                            : (formatOptions with { BinaryLogPath = binaryLogPath });
                 }
             }
 
             return formatOptions;
 
-            static void HandleStandardInput(ILogger logger, ref string[] include, ref string[] exclude)
+            static void HandleStandardInput(
+                ILogger logger,
+                ref string[] include,
+                ref string[] exclude
+            )
             {
                 string[] standardInputKeywords = { "/dev/stdin", "-" };
                 const int CheckFailedExitCode = 2;
@@ -317,11 +394,19 @@ namespace Microsoft.CodeAnalysis.Tools
             };
         }
 
-        public static FormatOptions ParseWorkspaceOptions(this ParseResult parseResult, FormatOptions formatOptions)
+        public static FormatOptions ParseWorkspaceOptions(
+            this ParseResult parseResult,
+            FormatOptions formatOptions
+        )
         {
             var currentDirectory = Environment.CurrentDirectory;
 
-            if (parseResult.GetValue<string>(SlnOrProjectArgument) is string { Length: > 0 } slnOrProject)
+            if (
+                parseResult.GetValue<string>(SlnOrProjectArgument) is string
+                {
+                    Length: > 0
+                } slnOrProject
+            )
             {
                 if (parseResult.GetResult(FolderOption) is not null)
                 {
@@ -330,9 +415,15 @@ namespace Microsoft.CodeAnalysis.Tools
                     return formatOptions;
                 }
 
-                var (isSolution, workspaceFilePath) = MSBuildWorkspaceFinder.FindWorkspace(currentDirectory, slnOrProject);
+                var (isSolution, workspaceFilePath) = MSBuildWorkspaceFinder.FindWorkspace(
+                    currentDirectory,
+                    slnOrProject
+                );
                 formatOptions = formatOptions with { WorkspaceFilePath = workspaceFilePath };
-                formatOptions = formatOptions with { WorkspaceType = isSolution ? WorkspaceType.Solution : WorkspaceType.Project };
+                formatOptions = formatOptions with
+                {
+                    WorkspaceType = isSolution ? WorkspaceType.Solution : WorkspaceType.Project,
+                };
 
                 // To ensure we get the version of MSBuild packaged with the dotnet SDK used by the
                 // workspace, use its directory as our working directory which will take into account
@@ -347,24 +438,31 @@ namespace Microsoft.CodeAnalysis.Tools
             return formatOptions;
         }
 
-        private static string EnsureTrailingSlash(string path)
-            => !string.IsNullOrEmpty(path) &&
-               path[^1] != Path.DirectorySeparatorChar
+        private static string EnsureTrailingSlash(string path) =>
+            !string.IsNullOrEmpty(path) && path[^1] != Path.DirectorySeparatorChar
                 ? path + Path.DirectorySeparatorChar
                 : path;
 
         internal static string? GetVersion()
         {
-            return Assembly.GetExecutingAssembly()
+            return Assembly
+                .GetExecutingAssembly()
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
         }
 
-        internal static bool TryGetDotNetCliVersion([NotNullWhen(returnValue: true)] out string? dotnetVersion)
+        internal static bool TryGetDotNetCliVersion(
+            [NotNullWhen(returnValue: true)] out string? dotnetVersion
+        )
         {
             try
             {
-                var processInfo = ProcessRunner.CreateProcess("dotnet", "--version", captureOutput: true, displayWindow: false);
+                var processInfo = ProcessRunner.CreateProcess(
+                    "dotnet",
+                    "--version",
+                    captureOutput: true,
+                    displayWindow: false
+                );
                 var versionResult = processInfo.Result.GetAwaiter().GetResult();
 
                 dotnetVersion = versionResult.OutputLines[0].Trim();
@@ -377,12 +475,15 @@ namespace Microsoft.CodeAnalysis.Tools
             }
         }
 
-        internal static bool TryLoadMSBuild([NotNullWhen(returnValue: true)] out string? msBuildPath)
+        internal static bool TryLoadMSBuild(
+            [NotNullWhen(returnValue: true)] out string? msBuildPath
+        )
         {
             try
             {
                 // Get the global.json pinned SDK or latest instance.
-                var msBuildInstance = Build.Locator.MSBuildLocator.QueryVisualStudioInstances()
+                var msBuildInstance = Build
+                    .Locator.MSBuildLocator.QueryVisualStudioInstances()
                     .Where(instance => instance.Version.Major >= 6)
                     .FirstOrDefault();
                 if (msBuildInstance is null)

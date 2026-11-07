@@ -194,9 +194,8 @@ public class PolicyEvaluatorTests
         Assert.False(result.Challenged);
         Assert.True(result.Forbidden);
         Assert.NotNull(result.AuthorizationFailure);
-        Assert.Contains(
-            result.AuthorizationFailure.FailedRequirements,
-            requirement => requirement is DummyRequirement
+        Assert.Contains(result.AuthorizationFailure.FailedRequirements, requirement =>
+            requirement is DummyRequirement
         );
     }
 

@@ -1,20 +1,20 @@
 #region HEADER
 using System;
-using System.Threading;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using Test_NUnit_PostgreSql;
 #endregion
 
 namespace Test_NUnit
 {
-#region HEADER
+    #region HEADER
     /// <summary>
-    /// when a problem crops up in NUnit, you can convert the project from DLL into EXE, 
+    /// when a problem crops up in NUnit, you can convert the project from DLL into EXE,
     /// and debug into the offending method.
     /// </summary>
-#endregion
+    #endregion
     class Program2
     {
         static void Main()

@@ -32,16 +32,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             return $"{Imports.GetDebuggerDisplay()} ^ {ParentOpt?.GetHashCode() ?? 0}";
         }
 
-        ImmutableArray<Cci.UsedNamespaceOrType> Cci.IImportScope.GetUsedNamespaces(EmitContext context)
+        ImmutableArray<Cci.UsedNamespaceOrType> Cci.IImportScope.GetUsedNamespaces(
+            EmitContext context
+        )
         {
-            bool result = ((Emit.PEModuleBuilder)context.Module).TryGetTranslatedImports(this, out ImmutableArray<Cci.UsedNamespaceOrType> imports);
+            bool result = ((Emit.PEModuleBuilder)context.Module).TryGetTranslatedImports(
+                this,
+                out ImmutableArray<Cci.UsedNamespaceOrType> imports
+            );
             // The imports should have been translated during code gen.
             Debug.Assert(result);
             Debug.Assert(!imports.IsDefault);
             return imports;
         }
 
-        public Cci.IImportScope Translate(Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
+        public Cci.IImportScope Translate(
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        )
         {
             for (var scope = this; scope != null; scope = scope.ParentOpt)
             {
@@ -50,13 +58,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
                 }
 
-                moduleBuilder.GetOrAddTranslatedImports(scope, scope.TranslateImports(moduleBuilder, diagnostics));
+                moduleBuilder.GetOrAddTranslatedImports(
+                    scope,
+                    scope.TranslateImports(moduleBuilder, diagnostics)
+                );
             }
 
             return this;
         }
 
-        private ImmutableArray<Cci.UsedNamespaceOrType> TranslateImports(Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
+        private ImmutableArray<Cci.UsedNamespaceOrType> TranslateImports(
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        )
         {
             var usedNamespaces = ArrayBuilder<Cci.UsedNamespaceOrType>.GetInstance();
 
@@ -81,12 +95,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var ns = (NamespaceSymbol)namespaceOrType;
                         var assemblyRef = TryGetAssemblyScope(ns, moduleBuilder, diagnostics);
-                        usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateNamespace(ns.GetCciAdapter(), assemblyRef));
+                        usedNamespaces.Add(
+                            Cci.UsedNamespaceOrType.CreateNamespace(ns.GetCciAdapter(), assemblyRef)
+                        );
                     }
                     else if (!namespaceOrType.ContainingAssembly.IsLinked)
                     {
                         // We skip alias imports of embedded types to be consistent with imports of aliased embedded types and with VB.
-                        var typeRef = GetTypeReference((TypeSymbol)namespaceOrType, nsOrType.UsingDirective, moduleBuilder, diagnostics);
+                        var typeRef = GetTypeReference(
+                            (TypeSymbol)namespaceOrType,
+                            nsOrType.UsingDirective,
+                            moduleBuilder,
+                            diagnostics
+                        );
                         usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateType(typeRef));
                     }
                 }
@@ -111,14 +132,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var ns = (NamespaceSymbol)target;
                         var assemblyRef = TryGetAssemblyScope(ns, moduleBuilder, diagnostics);
-                        usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateNamespace(ns.GetCciAdapter(), assemblyRef, alias));
+                        usedNamespaces.Add(
+                            Cci.UsedNamespaceOrType.CreateNamespace(
+                                ns.GetCciAdapter(),
+                                assemblyRef,
+                                alias
+                            )
+                        );
                     }
-                    else if (target is NamedTypeSymbol { ContainingAssembly.IsLinked: false } or not NamedTypeSymbol)
+                    else if (
+                        target
+                        is NamedTypeSymbol { ContainingAssembly.IsLinked: false }
+                            or not NamedTypeSymbol
+                    )
                     {
                         // We skip alias imports of embedded types to avoid breaking existing code that imports types
                         // that can't be embedded but doesn't use them anywhere else in the code.  Note, this is only
                         // done for named types.  Other sorts of type symbols (arrays, etc.) are allowed through.
-                        var typeRef = GetTypeReference((TypeSymbol)target, syntax, moduleBuilder, diagnostics);
+                        var typeRef = GetTypeReference(
+                            (TypeSymbol)target,
+                            syntax,
+                            moduleBuilder,
+                            diagnostics
+                        );
                         usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateType(typeRef, alias));
                     }
                 }
@@ -129,17 +165,31 @@ namespace Microsoft.CodeAnalysis.CSharp
             return usedNamespaces.ToImmutableAndFree();
         }
 
-        private static Cci.ITypeReference GetTypeReference(TypeSymbol type, SyntaxNode syntaxNode, Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
+        private static Cci.ITypeReference GetTypeReference(
+            TypeSymbol type,
+            SyntaxNode syntaxNode,
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        )
         {
             return moduleBuilder.Translate(type, syntaxNode, diagnostics);
         }
 
-        private static Cci.IAssemblyReference TryGetAssemblyScope(NamespaceSymbol @namespace, Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
+        private static Cci.IAssemblyReference TryGetAssemblyScope(
+            NamespaceSymbol @namespace,
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        )
         {
             AssemblySymbol containingAssembly = @namespace.ContainingAssembly;
-            if ((object)containingAssembly != null && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly)
+            if (
+                (object)containingAssembly != null
+                && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly
+            )
             {
-                var referenceManager = ((CSharpCompilation)moduleBuilder.CommonCompilation).GetBoundReferenceManager();
+                var referenceManager = (
+                    (CSharpCompilation)moduleBuilder.CommonCompilation
+                ).GetBoundReferenceManager();
 
                 for (int i = 0; i < referenceManager.ReferencedAssemblies.Length; i++)
                 {

@@ -17,6 +17,6 @@ namespace Internal.Runtime
         CachePointerIsInterfaceRelativePointer = 0x3,
         CachePointerMask = 0x3,
         CachePointerMaskShift = 0x2,
-        MaxVTableOffsetPlusOne = 0x1000
+        MaxVTableOffsetPlusOne = 0x1000,
     }
 }

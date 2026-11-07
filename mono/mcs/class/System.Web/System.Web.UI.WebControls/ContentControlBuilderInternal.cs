@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,22 +34,28 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.WebControls
 {
-	internal class ContentBuilderInternal: TemplateBuilder
-	{
-		string placeHolderID;
-		
-		public override void Init (TemplateParser parser, ControlBuilder parentBuilder, Type type,
-					   string tagName, string ID, IDictionary attribs)
-		{
-			base.Init (parser, parentBuilder, type, tagName, ID, attribs);
-			placeHolderID = attribs ["ContentPlaceHolderID"] as string;
-			if (String.IsNullOrEmpty (placeHolderID))
-				throw new HttpException ("Missing required 'ContentPlaceHolderID' attribute");
-		}
-		
-		public string ContentPlaceHolderID {
-			get { return placeHolderID; }
-		}
-	}
-}
+    internal class ContentBuilderInternal : TemplateBuilder
+    {
+        string placeHolderID;
 
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            string tagName,
+            string ID,
+            IDictionary attribs
+        )
+        {
+            base.Init(parser, parentBuilder, type, tagName, ID, attribs);
+            placeHolderID = attribs["ContentPlaceHolderID"] as string;
+            if (String.IsNullOrEmpty(placeHolderID))
+                throw new HttpException("Missing required 'ContentPlaceHolderID' attribute");
+        }
+
+        public string ContentPlaceHolderID
+        {
+            get { return placeHolderID; }
+        }
+    }
+}

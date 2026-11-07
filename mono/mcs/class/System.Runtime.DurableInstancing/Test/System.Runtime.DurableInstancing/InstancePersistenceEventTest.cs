@@ -13,21 +13,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.DurableInstancing
 {
-	[TestFixture]
-	public class InstancePersistenceEventTest
-	{
-		[Test]
-		public void Value ()
-		{
-			Assert.IsNotNull (FooEvent.Value, "#1");
-		}
-		
-		class FooEvent : InstancePersistenceEvent<FooEvent>
-		{
-			public FooEvent ()
-				: base (XName.Get ("foo"))
-			{
-			}
-		}
-	}
+    [TestFixture]
+    public class InstancePersistenceEventTest
+    {
+        [Test]
+        public void Value()
+        {
+            Assert.IsNotNull(FooEvent.Value, "#1");
+        }
+
+        class FooEvent : InstancePersistenceEvent<FooEvent>
+        {
+            public FooEvent()
+                : base(XName.Get("foo")) { }
+        }
+    }
 }

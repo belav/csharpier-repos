@@ -21,7 +21,6 @@ public class InputValidation
         InputValidationTest test = new InputValidationTest(server, nonConcurrent);
 
         return test.Run();
-
     }
 
     static bool DetectInitialMode()
@@ -35,7 +34,6 @@ public class InputValidation
         {
             Console.Write("Workstation ");
         }
-
 
         if (initialMode == GCLatencyMode.Batch)
         {
@@ -56,15 +54,28 @@ public class InputValidation
 
     class InputValidationTest
     {
-
-        public List<GCLatencyMode> totalInputs = new List<GCLatencyMode>(new GCLatencyMode[] { GCLatencyMode.Batch, GCLatencyMode.Interactive, GCLatencyMode.LowLatency, GCLatencyMode.SustainedLowLatency });
+        public List<GCLatencyMode> totalInputs = new List<GCLatencyMode>(
+            new GCLatencyMode[]
+            {
+                GCLatencyMode.Batch,
+                GCLatencyMode.Interactive,
+                GCLatencyMode.LowLatency,
+                GCLatencyMode.SustainedLowLatency,
+            }
+        );
         public List<GCLatencyMode> validInputs = new List<GCLatencyMode>();
         public List<GCLatencyMode> invalidInputs = new List<GCLatencyMode>();
-        public List<GCLatencyMode> outOfRangeInputs = new List<GCLatencyMode>(new GCLatencyMode[] { (GCLatencyMode)(GCLatencyMode.Batch - 1), (GCLatencyMode)(GCLatencyMode.SustainedLowLatency + 1) });
+        public List<GCLatencyMode> outOfRangeInputs = new List<GCLatencyMode>(
+            new GCLatencyMode[]
+            {
+                (GCLatencyMode)(GCLatencyMode.Batch - 1),
+                (GCLatencyMode)(GCLatencyMode.SustainedLowLatency + 1),
+            }
+        );
 
         public InputValidationTest(bool server, bool nonconcurrent)
         {
-            //set the valid inputs and invalid inputs 
+            //set the valid inputs and invalid inputs
             if (server)
             {
                 invalidInputs.Add(GCLatencyMode.LowLatency);
@@ -103,7 +114,10 @@ public class InputValidation
                 {
                     Console.WriteLine("Setting latency mode to {0}", outOfRangeInputs[i]);
                     GCSettings.LatencyMode = outOfRangeInputs[i];
-                    Console.WriteLine("Should not have been able to set latency mode to {0}", invalidInputs[i]);
+                    Console.WriteLine(
+                        "Should not have been able to set latency mode to {0}",
+                        invalidInputs[i]
+                    );
                     errorCount++;
                 }
                 catch (ArgumentOutOfRangeException)
@@ -120,7 +134,10 @@ public class InputValidation
 
                 if (GCSettings.LatencyMode != initialMode)
                 {
-                    Console.WriteLine("Latency mode should not have changed to {0}", GCSettings.LatencyMode);
+                    Console.WriteLine(
+                        "Latency mode should not have changed to {0}",
+                        GCSettings.LatencyMode
+                    );
                     errorCount++;
                 }
                 GCSettings.LatencyMode = initialMode;
@@ -134,13 +151,6 @@ public class InputValidation
             }
             Console.WriteLine("Test Passed");
             return 100;
-
         }
-
     }
-
 }
-
-
-
-

@@ -15,18 +15,14 @@ namespace System.CommandLine.Rendering
                 throw new ArgumentNullException(nameof(console));
             }
 
-            if (console is ITerminal terminal &&
-                !terminal.IsOutputRedirected)
+            if (console is ITerminal terminal && !terminal.IsOutputRedirected)
             {
-                if (terminal is IRenderable renderable &&
-                    renderable.OutputMode != OutputMode.Auto)
+                if (terminal is IRenderable renderable && renderable.OutputMode != OutputMode.Auto)
                 {
-                     return renderable.OutputMode;
+                    return renderable.OutputMode;
                 }
 
-                return terminal is VirtualTerminal
-                           ? OutputMode.Ansi
-                           : OutputMode.NonAnsi;
+                return terminal is VirtualTerminal ? OutputMode.Ansi : OutputMode.NonAnsi;
             }
             else
             {
@@ -35,14 +31,15 @@ namespace System.CommandLine.Rendering
         }
 
         public static void Append(
-            this IConsole console, 
-            View view, 
-            OutputMode outputMode = OutputMode.Auto)
+            this IConsole console,
+            View view,
+            OutputMode outputMode = OutputMode.Auto
+        )
         {
             var renderer = new ConsoleRenderer(console, outputMode);
-            
+
             view.Render(renderer, Region.Scrolling);
-            
+
             console.Out.WriteLine();
         }
     }

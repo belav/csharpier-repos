@@ -4,7 +4,8 @@
     {
         public Registration(string executablePath)
         {
-            ExecutablePath = executablePath ?? throw new ArgumentNullException(nameof(executablePath));
+            ExecutablePath =
+                executablePath ?? throw new ArgumentNullException(nameof(executablePath));
         }
 
         public string ExecutablePath { get; }

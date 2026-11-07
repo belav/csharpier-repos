@@ -54,11 +54,23 @@ namespace System.Web.Helpers.Claims.Test
 
         private sealed class MyClaimType : IClaimType1, IClaimType2
         {
-            string IClaimType1.ClaimType { get { return "my-claim-type-1"; } }
-            string IClaimType1.Value { get { return "my-claim-value-1"; } }
+            string IClaimType1.ClaimType
+            {
+                get { return "my-claim-type-1"; }
+            }
+            string IClaimType1.Value
+            {
+                get { return "my-claim-value-1"; }
+            }
 
-            string IClaimType2.Type { get { return "my-claim-type-2"; } }
-            string IClaimType2.Value { get { return "my-claim-value-2"; } }
+            string IClaimType2.Type
+            {
+                get { return "my-claim-type-2"; }
+            }
+            string IClaimType2.Value
+            {
+                get { return "my-claim-value-2"; }
+            }
         }
     }
 }

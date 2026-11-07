@@ -50,17 +50,14 @@ public static class JsonPatchExtensions
         ArgumentNullException.ThrowIfNull(objectToApplyTo);
         ArgumentNullException.ThrowIfNull(modelState);
 
-        patchDoc.ApplyTo(
-            objectToApplyTo,
-            jsonPatchError =>
-            {
-                var affectedObjectName = jsonPatchError.AffectedObject.GetType().Name;
-                var key = string.IsNullOrEmpty(prefix)
-                    ? affectedObjectName
-                    : prefix + "." + affectedObjectName;
+        patchDoc.ApplyTo(objectToApplyTo, jsonPatchError =>
+        {
+            var affectedObjectName = jsonPatchError.AffectedObject.GetType().Name;
+            var key = string.IsNullOrEmpty(prefix)
+                ? affectedObjectName
+                : prefix + "." + affectedObjectName;
 
-                modelState.TryAddModelError(key, jsonPatchError.ErrorMessage);
-            }
-        );
+            modelState.TryAddModelError(key, jsonPatchError.ErrorMessage);
+        });
     }
 }

@@ -8,11 +8,9 @@ using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Reflection.Augments;
 using Internal.Runtime.Augments;
 using Internal.Runtime.CompilerServices;
-
 using CorElementType = System.Reflection.CorElementType;
 using EETypeElementType = Internal.Runtime.EETypeElementType;
 
@@ -29,35 +27,44 @@ namespace System
             return enumType.TypeHandle.ToEETypePtr().ElementType switch
             {
                 EETypeElementType.SByte or EETypeElementType.Byte => GetEnumInfo<byte>(enumType),
-                EETypeElementType.Int16 or EETypeElementType.UInt16 => GetEnumInfo<ushort>(enumType),
+                EETypeElementType.Int16 or EETypeElementType.UInt16 => GetEnumInfo<ushort>(
+                    enumType
+                ),
                 EETypeElementType.Int32 or EETypeElementType.UInt32 => GetEnumInfo<uint>(enumType),
                 EETypeElementType.Int64 or EETypeElementType.UInt64 => GetEnumInfo<ulong>(enumType),
                 _ => throw new NotSupportedException(),
             };
         }
 
-        internal static EnumInfo<TStorage> GetEnumInfo<TStorage>(RuntimeType enumType, bool getNames = true)
+        internal static EnumInfo<TStorage> GetEnumInfo<TStorage>(
+            RuntimeType enumType,
+            bool getNames = true
+        )
             where TStorage : struct, INumber<TStorage>
         {
             Debug.Assert(enumType != null);
             Debug.Assert(enumType.IsEnum);
             Debug.Assert(
-                typeof(TStorage) == typeof(byte) ||
-                typeof(TStorage) == typeof(ushort) ||
-                typeof(TStorage) == typeof(uint) ||
-                typeof(TStorage) == typeof(ulong));
+                typeof(TStorage) == typeof(byte)
+                    || typeof(TStorage) == typeof(ushort)
+                    || typeof(TStorage) == typeof(uint)
+                    || typeof(TStorage) == typeof(ulong)
+            );
 
-            return (EnumInfo<TStorage>)ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo(enumType,
-                static (underlyingType, names, valuesAsObject, isFlags) =>
-                {
-                    // Only after we've sorted, create the underlying array.
-                    var values = new TStorage[valuesAsObject.Length];
-                    for (int i = 0; i < valuesAsObject.Length; i++)
+            return (EnumInfo<TStorage>)
+                ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo(
+                    enumType,
+                    static (underlyingType, names, valuesAsObject, isFlags) =>
                     {
-                        values[i] = (TStorage)valuesAsObject[i];
+                        // Only after we've sorted, create the underlying array.
+                        var values = new TStorage[valuesAsObject.Length];
+                        for (int i = 0; i < valuesAsObject.Length; i++)
+                        {
+                            values[i] = (TStorage)valuesAsObject[i];
+                        }
+                        return new EnumInfo<TStorage>(underlyingType, values, names, isFlags);
                     }
-                    return new EnumInfo<TStorage>(underlyingType, values, names, isFlags);
-            });
+                );
         }
 #pragma warning restore
 

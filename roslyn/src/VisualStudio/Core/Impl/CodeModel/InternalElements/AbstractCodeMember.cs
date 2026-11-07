@@ -22,22 +22,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         internal AbstractCodeMember(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
-        protected SyntaxNode GetContainingTypeNode()
-            => LookupNode().Ancestors().Where(CodeModelService.IsType).FirstOrDefault();
+        protected SyntaxNode GetContainingTypeNode() =>
+            LookupNode().Ancestors().Where(CodeModelService.IsType).FirstOrDefault();
 
         public override object Parent
         {
@@ -60,19 +58,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = LookupNode();
                 return CodeModelService.GetAccess(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateAccess, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateAccess, value); }
         }
 
         public EnvDTE.CodeElements Attributes
         {
-            get
-            {
-                return AttributeCollection.Create(this.State, this);
-            }
+            get { return AttributeCollection.Create(this.State, this); }
         }
 
         public string Comment
@@ -82,11 +73,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetComment(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateComment, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateComment, value); }
         }
 
         public string DocComment
@@ -96,11 +83,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetDocComment(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateDocComment, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateDocComment, value); }
         }
 
         public bool IsGeneric
@@ -119,11 +102,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetIsShared(node, LookupSymbol());
             }
-
-            set
-            {
-                UpdateNodeAndReacquireNodeKey(FileCodeModel.UpdateIsShared, value);
-            }
+            set { UpdateNodeAndReacquireNodeKey(FileCodeModel.UpdateIsShared, value); }
         }
 
         public bool MustImplement
@@ -133,11 +112,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetMustImplement(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateMustImplement, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateMustImplement, value); }
         }
 
         public EnvDTE80.vsCMOverrideKind OverrideKind
@@ -147,15 +122,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetOverrideKind(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateOverrideKind, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateOverrideKind, value); }
         }
 
-        internal virtual ImmutableArray<SyntaxNode> GetParameters()
-            => throw Exceptions.ThrowEFail();
+        internal virtual ImmutableArray<SyntaxNode> GetParameters() =>
+            throw Exceptions.ThrowEFail();
 
         public EnvDTE.CodeElements Parameters
         {
@@ -190,11 +161,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
 
-                codeElement ??= ComAggregate.TryGetManagedObject<AbstractCodeElement>(this.Parameters.Item(element));
+                codeElement ??= ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                    this.Parameters.Item(element)
+                );
 
                 if (codeElement == null)
                 {
-                    throw new ArgumentException(ServicesVSResources.Element_is_not_valid, nameof(element));
+                    throw new ArgumentException(
+                        ServicesVSResources.Element_is_not_valid,
+                        nameof(element)
+                    );
                 }
 
                 codeElement.Delete();

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
         TMemberDeclarationSyntax,
         TNameSyntax,
         TQualifiedNameSyntax,
-        TIdentifierNameSyntax> : IDeclaredSymbolInfoFactoryService
+        TIdentifierNameSyntax
+    > : IDeclaredSymbolInfoFactoryService
         where TCompilationUnitSyntax : SyntaxNode
         where TUsingDirectiveSyntax : SyntaxNode
         where TNamespaceDeclarationSyntax : TMemberDeclarationSyntax
@@ -33,47 +34,91 @@ namespace Microsoft.CodeAnalysis.LanguageService
         where TQualifiedNameSyntax : TNameSyntax
         where TIdentifierNameSyntax : TNameSyntax
     {
-        private static readonly ObjectPool<List<Dictionary<string, string>>> s_aliasMapListPool
-            = SharedPools.Default<List<Dictionary<string, string>>>();
+        private static readonly ObjectPool<List<Dictionary<string, string>>> s_aliasMapListPool =
+            SharedPools.Default<List<Dictionary<string, string>>>();
 
-        // Note: these names are stored case insensitively.  That way the alias mapping works 
+        // Note: these names are stored case insensitively.  That way the alias mapping works
         // properly for VB.  It will mean that our inheritance maps may store more links in them
         // for C#.  However, that's ok.  It will be rare in practice, and all it means is that
-        // we'll end up examining slightly more types (likely 0) when doing operations like 
+        // we'll end up examining slightly more types (likely 0) when doing operations like
         // Find all references.
-        private static readonly ObjectPool<Dictionary<string, string>> s_aliasMapPool
-            = SharedPools.StringIgnoreCaseDictionary<string>();
+        private static readonly ObjectPool<Dictionary<string, string>> s_aliasMapPool =
+            SharedPools.StringIgnoreCaseDictionary<string>();
 
-        protected AbstractDeclaredSymbolInfoFactoryService()
-        {
-        }
+        protected AbstractDeclaredSymbolInfoFactoryService() { }
 
-        protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(TCompilationUnitSyntax node);
-        protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(TNamespaceDeclarationSyntax node);
-        protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(TTypeDeclarationSyntax node);
-        protected abstract IEnumerable<TMemberDeclarationSyntax> GetChildren(TEnumDeclarationSyntax node);
+        protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
+            TCompilationUnitSyntax node
+        );
+        protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
+            TNamespaceDeclarationSyntax node
+        );
+        protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
+            TTypeDeclarationSyntax node
+        );
+        protected abstract IEnumerable<TMemberDeclarationSyntax> GetChildren(
+            TEnumDeclarationSyntax node
+        );
 
-        protected abstract SyntaxList<TUsingDirectiveSyntax> GetUsingAliases(TCompilationUnitSyntax node);
-        protected abstract SyntaxList<TUsingDirectiveSyntax> GetUsingAliases(TNamespaceDeclarationSyntax node);
+        protected abstract SyntaxList<TUsingDirectiveSyntax> GetUsingAliases(
+            TCompilationUnitSyntax node
+        );
+        protected abstract SyntaxList<TUsingDirectiveSyntax> GetUsingAliases(
+            TNamespaceDeclarationSyntax node
+        );
 
         protected abstract TNameSyntax GetName(TNamespaceDeclarationSyntax node);
         protected abstract TNameSyntax GetLeft(TQualifiedNameSyntax node);
         protected abstract TNameSyntax GetRight(TQualifiedNameSyntax node);
         protected abstract SyntaxToken GetIdentifier(TIdentifierNameSyntax node);
 
-        protected abstract string GetContainerDisplayName(TMemberDeclarationSyntax namespaceDeclaration);
-        protected abstract string GetFullyQualifiedContainerName(TMemberDeclarationSyntax memberDeclaration, string rootNamespace);
+        protected abstract string GetContainerDisplayName(
+            TMemberDeclarationSyntax namespaceDeclaration
+        );
+        protected abstract string GetFullyQualifiedContainerName(
+            TMemberDeclarationSyntax memberDeclaration,
+            string rootNamespace
+        );
 
         protected abstract DeclaredSymbolInfo? GetTypeDeclarationInfo(
-            SyntaxNode container, TTypeDeclarationSyntax typeDeclaration, StringTable stringTable, string containerDisplayName, string fullyQualifiedContainerName);
+            SyntaxNode container,
+            TTypeDeclarationSyntax typeDeclaration,
+            StringTable stringTable,
+            string containerDisplayName,
+            string fullyQualifiedContainerName
+        );
         protected abstract DeclaredSymbolInfo GetEnumDeclarationInfo(
-            SyntaxNode container, TEnumDeclarationSyntax enumDeclaration, StringTable stringTable, string containerDisplayName, string fullyQualifiedContainerName);
+            SyntaxNode container,
+            TEnumDeclarationSyntax enumDeclaration,
+            StringTable stringTable,
+            string containerDisplayName,
+            string fullyQualifiedContainerName
+        );
         protected abstract void AddMemberDeclarationInfos(
-            SyntaxNode container, TMemberDeclarationSyntax memberDeclaration, StringTable stringTable, ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos, string containerDisplayName, string fullyQualifiedContainerName);
+            SyntaxNode container,
+            TMemberDeclarationSyntax memberDeclaration,
+            StringTable stringTable,
+            ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos,
+            string containerDisplayName,
+            string fullyQualifiedContainerName
+        );
         protected abstract void AddLocalFunctionInfos(
-            TMemberDeclarationSyntax memberDeclaration, StringTable stringTable, ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos, string containerDisplayName, string fullyQualifiedContainerName, CancellationToken cancellationToken);
+            TMemberDeclarationSyntax memberDeclaration,
+            StringTable stringTable,
+            ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos,
+            string containerDisplayName,
+            string fullyQualifiedContainerName,
+            CancellationToken cancellationToken
+        );
         protected abstract void AddSynthesizedDeclaredSymbolInfos(
-            SyntaxNode container, TMemberDeclarationSyntax memberDeclaration, StringTable stringTable, ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos, string containerDisplayName, string fullyQualifiedContainerName, CancellationToken cancellationToken);
+            SyntaxNode container,
+            TMemberDeclarationSyntax memberDeclaration,
+            StringTable stringTable,
+            ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos,
+            string containerDisplayName,
+            string fullyQualifiedContainerName,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get the name of the target type of specified extension method declaration. The node provided must be an
@@ -82,11 +127,14 @@ namespace Microsoft.CodeAnalysis.LanguageService
         /// "complex" method (as described at <see cref="TopLevelSyntaxTreeIndex.ExtensionMethodInfo"/>).
         /// </summary>
         protected abstract string GetReceiverTypeName(TMethodDeclarationSyntax node);
-        protected abstract bool TryGetAliasesFromUsingDirective(TUsingDirectiveSyntax node, out ImmutableArray<(string aliasName, string name)> aliases);
+        protected abstract bool TryGetAliasesFromUsingDirective(
+            TUsingDirectiveSyntax node,
+            out ImmutableArray<(string aliasName, string name)> aliases
+        );
         protected abstract string GetRootNamespace(CompilationOptions compilationOptions);
 
-        protected static List<Dictionary<string, string>> AllocateAliasMapList()
-            => s_aliasMapListPool.Allocate();
+        protected static List<Dictionary<string, string>> AllocateAliasMapList() =>
+            s_aliasMapListPool.Allocate();
 
         // We do not differentiate arrays of different kinds for simplicity.
         // e.g. int[], int[][], int[,], etc. are all represented as int[] in the index.
@@ -114,7 +162,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 return ValueTupleName;
             }
             // A ValueTuple can have up to 8 type parameters.
-            return ValueTupleName + ArityUtilities.GetMetadataAritySuffix(elementCount > 8 ? 8 : elementCount);
+            return ValueTupleName
+                + ArityUtilities.GetMetadataAritySuffix(elementCount > 8 ? 8 : elementCount);
         }
 
         protected static void FreeAliasMapList(List<Dictionary<string, string>> list)
@@ -138,8 +187,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
             }
         }
 
-        protected static Dictionary<string, string> AllocateAliasMap()
-            => s_aliasMapPool.Allocate();
+        protected static Dictionary<string, string> AllocateAliasMap() => s_aliasMapPool.Allocate();
 
         protected static void Intern(StringTable stringTable, ArrayBuilder<string> builder)
         {
@@ -154,7 +202,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             SyntaxNode root,
             ArrayBuilder<DeclaredSymbolInfo> declaredSymbolInfos,
             Dictionary<string, ArrayBuilder<int>> extensionMethodInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stringTable = SyntaxTreeIndex.GetStringTable(project);
             var rootNamespace = this.GetRootNamespace(project.CompilationOptions!);
@@ -168,7 +217,18 @@ namespace Microsoft.CodeAnalysis.LanguageService
             }
 
             foreach (var child in GetChildren((TCompilationUnitSyntax)root))
-                AddDeclaredSymbolInfos(root, child, stringTable, rootNamespace, declaredSymbolInfos, aliases, extensionMethodInfo, "", "", cancellationToken);
+                AddDeclaredSymbolInfos(
+                    root,
+                    child,
+                    stringTable,
+                    rootNamespace,
+                    declaredSymbolInfos,
+                    aliases,
+                    extensionMethodInfo,
+                    "",
+                    "",
+                    cancellationToken
+                );
         }
 
         private void AddDeclaredSymbolInfos(
@@ -181,13 +241,17 @@ namespace Microsoft.CodeAnalysis.LanguageService
             Dictionary<string, ArrayBuilder<int>> extensionMethodInfo,
             string containerDisplayName,
             string fullyQualifiedContainerName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (memberDeclaration is TNamespaceDeclarationSyntax namespaceDeclaration)
             {
-                AddNamespaceDeclaredSymbolInfos(GetName(namespaceDeclaration), fullyQualifiedContainerName);
+                AddNamespaceDeclaredSymbolInfos(
+                    GetName(namespaceDeclaration),
+                    fullyQualifiedContainerName
+                );
 
                 var innerContainerDisplayName = GetContainerDisplayName(memberDeclaration);
 
@@ -197,12 +261,24 @@ namespace Microsoft.CodeAnalysis.LanguageService
                         AddAliases(aliases, current);
                 }
 
-                var innerFullyQualifiedContainerName = GetFullyQualifiedContainerName(memberDeclaration, rootNamespace);
+                var innerFullyQualifiedContainerName = GetFullyQualifiedContainerName(
+                    memberDeclaration,
+                    rootNamespace
+                );
                 foreach (var child in GetChildren(namespaceDeclaration))
                 {
                     AddDeclaredSymbolInfos(
-                        memberDeclaration, child, stringTable, rootNamespace, declaredSymbolInfos, aliases, extensionMethodInfo,
-                        innerContainerDisplayName, innerFullyQualifiedContainerName, cancellationToken);
+                        memberDeclaration,
+                        child,
+                        stringTable,
+                        rootNamespace,
+                        declaredSymbolInfos,
+                        aliases,
+                        extensionMethodInfo,
+                        innerContainerDisplayName,
+                        innerFullyQualifiedContainerName,
+                        cancellationToken
+                    );
                 }
             }
             else if (memberDeclaration is TTypeDeclarationSyntax typeDeclaration)
@@ -210,15 +286,21 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 var innerContainerDisplayName = GetContainerDisplayName(memberDeclaration);
 
                 // Add the item for the type itself:
-                declaredSymbolInfos.AddIfNotNull(GetTypeDeclarationInfo(
-                    container,
-                    typeDeclaration,
-                    stringTable,
-                    containerDisplayName,
-                    fullyQualifiedContainerName));
+                declaredSymbolInfos.AddIfNotNull(
+                    GetTypeDeclarationInfo(
+                        container,
+                        typeDeclaration,
+                        stringTable,
+                        containerDisplayName,
+                        fullyQualifiedContainerName
+                    )
+                );
 
                 // Then any synthesized members in that type (for example, synthesized properties in a record):
-                var innerFullyQualifiedContainerName = GetFullyQualifiedContainerName(memberDeclaration, rootNamespace);
+                var innerFullyQualifiedContainerName = GetFullyQualifiedContainerName(
+                    memberDeclaration,
+                    rootNamespace
+                );
                 AddSynthesizedDeclaredSymbolInfos(
                     container,
                     memberDeclaration,
@@ -226,14 +308,24 @@ namespace Microsoft.CodeAnalysis.LanguageService
                     declaredSymbolInfos,
                     innerContainerDisplayName,
                     innerFullyQualifiedContainerName,
-                    cancellationToken);
+                    cancellationToken
+                );
 
                 // Then recurse into the children and add those.
                 foreach (var child in GetChildren(typeDeclaration))
                 {
                     AddDeclaredSymbolInfos(
-                        memberDeclaration, child, stringTable, rootNamespace, declaredSymbolInfos, aliases, extensionMethodInfo,
-                        innerContainerDisplayName, innerFullyQualifiedContainerName, cancellationToken);
+                        memberDeclaration,
+                        child,
+                        stringTable,
+                        rootNamespace,
+                        declaredSymbolInfos,
+                        aliases,
+                        extensionMethodInfo,
+                        innerContainerDisplayName,
+                        innerFullyQualifiedContainerName,
+                        cancellationToken
+                    );
                 }
             }
             else if (memberDeclaration is TEnumDeclarationSyntax enumDeclaration)
@@ -241,20 +333,35 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 var innerContainerDisplayName = GetContainerDisplayName(memberDeclaration);
 
                 // Add the item for the type itself:
-                declaredSymbolInfos.Add(GetEnumDeclarationInfo(
-                    container,
-                    enumDeclaration,
-                    stringTable,
-                    containerDisplayName,
-                    fullyQualifiedContainerName));
+                declaredSymbolInfos.Add(
+                    GetEnumDeclarationInfo(
+                        container,
+                        enumDeclaration,
+                        stringTable,
+                        containerDisplayName,
+                        fullyQualifiedContainerName
+                    )
+                );
 
                 // Then recurse into the children and add those.
-                var innerFullyQualifiedContainerName = GetFullyQualifiedContainerName(memberDeclaration, rootNamespace);
+                var innerFullyQualifiedContainerName = GetFullyQualifiedContainerName(
+                    memberDeclaration,
+                    rootNamespace
+                );
                 foreach (var child in GetChildren(enumDeclaration))
                 {
                     AddDeclaredSymbolInfos(
-                        memberDeclaration, child, stringTable, rootNamespace, declaredSymbolInfos, aliases, extensionMethodInfo,
-                        innerContainerDisplayName, innerFullyQualifiedContainerName, cancellationToken);
+                        memberDeclaration,
+                        child,
+                        stringTable,
+                        rootNamespace,
+                        declaredSymbolInfos,
+                        aliases,
+                        extensionMethodInfo,
+                        innerContainerDisplayName,
+                        innerFullyQualifiedContainerName,
+                        cancellationToken
+                    );
                 }
             }
             else
@@ -267,13 +374,16 @@ namespace Microsoft.CodeAnalysis.LanguageService
                     stringTable,
                     declaredSymbolInfos,
                     containerDisplayName,
-                    fullyQualifiedContainerName);
+                    fullyQualifiedContainerName
+                );
 
                 // If the AddSingle call added an item, and that item was an extension method, then go and add the
-                // information about this extension method to our 
-                if (declaredSymbolInfos.Count != count &&
-                    declaredSymbolInfos.Last().Kind == DeclaredSymbolInfoKind.ExtensionMethod &&
-                    memberDeclaration is TMethodDeclarationSyntax methodDeclaration)
+                // information about this extension method to our
+                if (
+                    declaredSymbolInfos.Count != count
+                    && declaredSymbolInfos.Last().Kind == DeclaredSymbolInfoKind.ExtensionMethod
+                    && memberDeclaration is TMethodDeclarationSyntax methodDeclaration
+                )
                 {
                     AddExtensionMethodInfo(methodDeclaration);
                 }
@@ -284,37 +394,50 @@ namespace Microsoft.CodeAnalysis.LanguageService
                     declaredSymbolInfos,
                     containerDisplayName,
                     fullyQualifiedContainerName,
-                    cancellationToken);
+                    cancellationToken
+                );
             }
 
             return;
 
             // Returns the new fully-qualified-container-name built from fullyQualifiedContainerName
             // with all the pieces of 'name' added to the end of it.
-            string AddNamespaceDeclaredSymbolInfos(TNameSyntax name, string fullyQualifiedContainerName)
+            string AddNamespaceDeclaredSymbolInfos(
+                TNameSyntax name,
+                string fullyQualifiedContainerName
+            )
             {
                 if (name is TQualifiedNameSyntax qualifiedName)
                 {
                     // Recurse down the left side of the qualified name.  Build up the new fully qualified
                     // parent name for when going down the right side.
-                    var parentQualifiedContainerName = AddNamespaceDeclaredSymbolInfos(GetLeft(qualifiedName), fullyQualifiedContainerName);
-                    return AddNamespaceDeclaredSymbolInfos(GetRight(qualifiedName), parentQualifiedContainerName);
+                    var parentQualifiedContainerName = AddNamespaceDeclaredSymbolInfos(
+                        GetLeft(qualifiedName),
+                        fullyQualifiedContainerName
+                    );
+                    return AddNamespaceDeclaredSymbolInfos(
+                        GetRight(qualifiedName),
+                        parentQualifiedContainerName
+                    );
                 }
                 else if (name is TIdentifierNameSyntax nameSyntax)
                 {
                     var namespaceName = GetIdentifier(nameSyntax).ValueText;
-                    declaredSymbolInfos.Add(DeclaredSymbolInfo.Create(
-                        stringTable,
-                        namespaceName,
-                        nameSuffix: null,
-                        containerDisplayName: null,
-                        fullyQualifiedContainerName,
-                        isPartial: true,
-                        hasAttributes: false,
-                        DeclaredSymbolInfoKind.Namespace,
-                        Accessibility.Public,
-                        nameSyntax.Span,
-                        inheritanceNames: ImmutableArray<string>.Empty));
+                    declaredSymbolInfos.Add(
+                        DeclaredSymbolInfo.Create(
+                            stringTable,
+                            namespaceName,
+                            nameSuffix: null,
+                            containerDisplayName: null,
+                            fullyQualifiedContainerName,
+                            isPartial: true,
+                            hasAttributes: false,
+                            DeclaredSymbolInfoKind.Namespace,
+                            Accessibility.Public,
+                            nameSyntax.Span,
+                            inheritanceNames: ImmutableArray<string>.Empty
+                        )
+                    );
 
                     return string.IsNullOrEmpty(fullyQualifiedContainerName)
                         ? namespaceName
@@ -358,7 +481,10 @@ namespace Microsoft.CodeAnalysis.LanguageService
             }
         }
 
-        private static void AddAliases(Dictionary<string, string?> allAliases, ImmutableArray<(string aliasName, string name)> aliases)
+        private static void AddAliases(
+            Dictionary<string, string?> allAliases,
+            ImmutableArray<(string aliasName, string name)> aliases
+        )
         {
             foreach (var (aliasName, name) in aliases)
             {

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Runtime_66269
 {
     [Fact]
@@ -17,4 +18,3 @@ public class Runtime_66269
         return arg1;
     }
 }
-

@@ -97,8 +97,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     return s_empty;
                 }
 
-                if (name!.Length == 8 && name[0] == '.' &&
-                    name[1] == 'm' && name[2] == 'v' && name[3] == 'i' && name[4] == 'd' && name[5] == '\0')
+                if (
+                    name!.Length == 8
+                    && name[0] == '.'
+                    && name[1] == 'm'
+                    && name[2] == 'v'
+                    && name[3] == 'i'
+                    && name[4] == 'd'
+                    && name[5] == '\0'
+                )
                 {
                     // Section: VirtualSize (4)
                     if (!ReadUInt32(reader, out uint virtualSize) || virtualSize != 16)

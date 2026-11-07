@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
+using ILCompiler.DependencyAnalysis.ReadyToRun;
 using Internal.JitInterface;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis.ReadyToRun;
 
 namespace ILCompiler.DependencyAnalysis
 {
@@ -18,7 +16,13 @@ namespace ILCompiler.DependencyAnalysis
         public readonly bool IsPrecodeImportRequired;
         public readonly bool IsJumpableImportRequired;
 
-        public TypeAndMethod(TypeDesc type, MethodWithToken method, bool isInstantiatingStub, bool isPrecodeImportRequired, bool isJumpableImportRequired)
+        public TypeAndMethod(
+            TypeDesc type,
+            MethodWithToken method,
+            bool isInstantiatingStub,
+            bool isPrecodeImportRequired,
+            bool isJumpableImportRequired
+        )
         {
             Type = type;
             Method = method;
@@ -29,11 +33,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public bool Equals(TypeAndMethod other)
         {
-            return Type == other.Type &&
-                   Method.Equals(other.Method) &&
-                   IsInstantiatingStub == other.IsInstantiatingStub &&
-                   IsPrecodeImportRequired == other.IsPrecodeImportRequired &&
-                   IsJumpableImportRequired == other.IsJumpableImportRequired;
+            return Type == other.Type
+                && Method.Equals(other.Method)
+                && IsInstantiatingStub == other.IsInstantiatingStub
+                && IsPrecodeImportRequired == other.IsPrecodeImportRequired
+                && IsJumpableImportRequired == other.IsJumpableImportRequired;
         }
 
         public override bool Equals(object obj)
@@ -43,11 +47,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int GetHashCode()
         {
-            return (Type?.GetHashCode() ?? 0) ^
-                unchecked(Method.GetHashCode() * 31) ^
-                (IsInstantiatingStub ? 0x40000000 : 0) ^
-                (IsPrecodeImportRequired ? 0x20000000 : 0) ^
-                (IsJumpableImportRequired ? 0x10000000 : 0);
+            return (Type?.GetHashCode() ?? 0)
+                ^ unchecked(Method.GetHashCode() * 31)
+                ^ (IsInstantiatingStub ? 0x40000000 : 0)
+                ^ (IsPrecodeImportRequired ? 0x20000000 : 0)
+                ^ (IsJumpableImportRequired ? 0x10000000 : 0);
         }
     }
 }

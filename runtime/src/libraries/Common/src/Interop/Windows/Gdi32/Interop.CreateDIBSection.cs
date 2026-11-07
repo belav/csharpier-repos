@@ -16,6 +16,12 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hdc, ref BITMAPINFO_FLAT bmi, int iUsage, ref IntPtr ppvBits, IntPtr hSection, int dwOffset);
+            HandleRef hdc,
+            ref BITMAPINFO_FLAT bmi,
+            int iUsage,
+            ref IntPtr ppvBits,
+            IntPtr hSection,
+            int dwOffset
+        );
     }
 }

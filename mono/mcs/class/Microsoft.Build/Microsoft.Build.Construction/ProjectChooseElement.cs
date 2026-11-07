@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,42 +35,57 @@ using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("ProjectChooseElement (#Children={Count} "
-                                                      + "HasOtherwise={OtherwiseElement != null})")]
-        public class ProjectChooseElement : ProjectElementContainer
+    [System.Diagnostics.DebuggerDisplayAttribute(
+        "ProjectChooseElement (#Children={Count} " + "HasOtherwise={OtherwiseElement != null})"
+    )]
+    public class ProjectChooseElement : ProjectElementContainer
+    {
+        internal ProjectChooseElement(ProjectRootElement containingProject)
         {
-                internal ProjectChooseElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-                public override string Condition { get { return null; } set { throw new InvalidOperationException(
-                        "Can not set Condition."); } }
-                public ProjectOtherwiseElement OtherwiseElement {
-                        get { return LastChild as ProjectOtherwiseElement; }
-                }
-                public ICollection<ProjectWhenElement> WhenElements {
-                        get { return new CollectionFromEnumerable<ProjectWhenElement> (
-                                new FilteredEnumerable<ProjectWhenElement> (Children)); }
-                }
-                internal override string XmlName {
-                        get { return "Choose"; }
-                }
-                internal override ProjectElement LoadChildElement (XmlReader reader)
-                {
-                        var name = reader.LocalName;
-                        switch (name) {
-                        case "Otherwise":
-                                var other = ContainingProject.CreateOtherwiseElement ();
-                                AppendChild (other);
-                                return other;
-                        case "When":
-                                var when = ContainingProject.CreateWhenElement (null);
-                                PrependChild (when);
-                                return when;
-                        default:
-                                throw new InvalidProjectFileException (string.Format (
-                                        "Child \"{0}\" is not a known node type.", name));
-                        }
-                }
+            ContainingProject = containingProject;
         }
+
+        public override string Condition
+        {
+            get { return null; }
+            set { throw new InvalidOperationException("Can not set Condition."); }
+        }
+        public ProjectOtherwiseElement OtherwiseElement
+        {
+            get { return LastChild as ProjectOtherwiseElement; }
+        }
+        public ICollection<ProjectWhenElement> WhenElements
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectWhenElement>(
+                    new FilteredEnumerable<ProjectWhenElement>(Children)
+                );
+            }
+        }
+        internal override string XmlName
+        {
+            get { return "Choose"; }
+        }
+
+        internal override ProjectElement LoadChildElement(XmlReader reader)
+        {
+            var name = reader.LocalName;
+            switch (name)
+            {
+                case "Otherwise":
+                    var other = ContainingProject.CreateOtherwiseElement();
+                    AppendChild(other);
+                    return other;
+                case "When":
+                    var when = ContainingProject.CreateWhenElement(null);
+                    PrependChild(when);
+                    return when;
+                default:
+                    throw new InvalidProjectFileException(
+                        string.Format("Child \"{0}\" is not a known node type.", name)
+                    );
+            }
+        }
+    }
 }

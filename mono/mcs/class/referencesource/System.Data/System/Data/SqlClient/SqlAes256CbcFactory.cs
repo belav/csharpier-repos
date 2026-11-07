@@ -22,7 +22,12 @@ namespace System.Data.SqlClient
         /// Factory classes caches the SqlAeadAes256CbcHmac256EncryptionKey objects to avoid computation of the derived keys
         /// </summary>
         private readonly ConcurrentDictionary<string, SqlAes256CbcAlgorithm> _encryptionAlgorithms =
-            new ConcurrentDictionary<string, SqlAes256CbcAlgorithm>(concurrencyLevel: 4 * Environment.ProcessorCount /* default value in ConcurrentDictionary*/, capacity: 2);
+            new ConcurrentDictionary<string, SqlAes256CbcAlgorithm>(
+                concurrencyLevel: 4
+                    * Environment.ProcessorCount /* default value in ConcurrentDictionary*/
+                ,
+                capacity: 2
+            );
 
         /// <summary>
         /// Creates an instance of SqlAes256CbcAlgorithm class with a given key
@@ -31,19 +36,36 @@ namespace System.Data.SqlClient
         /// <param name="encryptionType">Encryption Type. Expected values are either Determinitic or Randomized.</param>
         /// <param name="encryptionAlgorithm">Encryption Algorithm.</param>
         /// <returns></returns>
-        internal override SqlClientEncryptionAlgorithm Create(SqlClientSymmetricKey encryptionKey, SqlClientEncryptionType encryptionType, string encryptionAlgorithm)
+        internal override SqlClientEncryptionAlgorithm Create(
+            SqlClientSymmetricKey encryptionKey,
+            SqlClientEncryptionType encryptionType,
+            string encryptionAlgorithm
+        )
         {
             // Callers should have validated the encryption algorithm and the encryption key
             Debug.Assert(encryptionKey != null);
-            Debug.Assert(string.Equals(encryptionAlgorithm, SqlAes256CbcAlgorithm.AlgorithmName, StringComparison.OrdinalIgnoreCase) == true);
+            Debug.Assert(
+                string.Equals(
+                    encryptionAlgorithm,
+                    SqlAes256CbcAlgorithm.AlgorithmName,
+                    StringComparison.OrdinalIgnoreCase
+                ) == true
+            );
 
             // Validate encryption type
-            if (!((encryptionType == SqlClientEncryptionType.Deterministic) || (encryptionType == SqlClientEncryptionType.Randomized)))
+            if (
+                !(
+                    (encryptionType == SqlClientEncryptionType.Deterministic)
+                    || (encryptionType == SqlClientEncryptionType.Randomized)
+                )
+            )
             {
-                throw SQL.InvalidEncryptionType(SqlAes256CbcAlgorithm.AlgorithmName,
-                                                encryptionType,
-                                                SqlClientEncryptionType.Deterministic,
-                                                SqlClientEncryptionType.Randomized);
+                throw SQL.InvalidEncryptionType(
+                    SqlAes256CbcAlgorithm.AlgorithmName,
+                    encryptionType,
+                    SqlClientEncryptionType.Deterministic,
+                    SqlClientEncryptionType.Randomized
+                );
             }
 
             // Get the cached encryption algorithm if one exists or create a new one, add it to cache and use it
@@ -51,7 +73,10 @@ namespace System.Data.SqlClient
             // For now, we only have one version. In future, we may need to parse the algorithm names to derive the version byte.
             const byte algorithmVersion = 0x1;
 
-            StringBuilder algorithmKeyBuilder = new StringBuilder(Convert.ToBase64String(encryptionKey.RootKey), SqlSecurityUtility.GetBase64LengthFromByteLength(encryptionKey.RootKey.Length) + 4/*separators, type and version*/);
+            StringBuilder algorithmKeyBuilder = new StringBuilder(
+                Convert.ToBase64String(encryptionKey.RootKey),
+                SqlSecurityUtility.GetBase64LengthFromByteLength(encryptionKey.RootKey.Length) + 4 /*separators, type and version*/
+            );
 
 #if DEBUG
             int capacity = algorithmKeyBuilder.Capacity;
@@ -71,8 +96,16 @@ namespace System.Data.SqlClient
             SqlAes256CbcAlgorithm aesAlgorithm;
             if (!_encryptionAlgorithms.TryGetValue(algorithmKey, out aesAlgorithm))
             {
-                SqlAeadAes256CbcHmac256EncryptionKey encryptedKey = new SqlAeadAes256CbcHmac256EncryptionKey(encryptionKey.RootKey, SqlAes256CbcAlgorithm.AlgorithmName);
-                aesAlgorithm = new SqlAes256CbcAlgorithm(encryptedKey, encryptionType, algorithmVersion);
+                SqlAeadAes256CbcHmac256EncryptionKey encryptedKey =
+                    new SqlAeadAes256CbcHmac256EncryptionKey(
+                        encryptionKey.RootKey,
+                        SqlAes256CbcAlgorithm.AlgorithmName
+                    );
+                aesAlgorithm = new SqlAes256CbcAlgorithm(
+                    encryptedKey,
+                    encryptionType,
+                    algorithmVersion
+                );
 
                 // In case multiple threads reach here at the same time, the first one adds the value
                 // the second one will be a no-op, the allocated memory will be claimed by Garbage Collector.

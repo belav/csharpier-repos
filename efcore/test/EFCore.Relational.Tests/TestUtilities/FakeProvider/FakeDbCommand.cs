@@ -9,13 +9,9 @@ public class FakeDbCommand : DbCommand
 {
     private readonly FakeCommandExecutor _commandExecutor;
 
-    public FakeDbCommand()
-    {
-    }
+    public FakeDbCommand() { }
 
-    public FakeDbCommand(
-        FakeDbConnection connection,
-        FakeCommandExecutor commandExecutor)
+    public FakeDbCommand(FakeDbConnection connection, FakeCommandExecutor commandExecutor)
     {
         DbConnection = connection;
         _commandExecutor = commandExecutor;
@@ -25,8 +21,7 @@ public class FakeDbCommand : DbCommand
 
     protected override DbTransaction DbTransaction { get; set; }
 
-    public override void Cancel()
-        => throw new NotImplementedException();
+    public override void Cancel() => throw new NotImplementedException();
 
     public override string CommandText { get; set; }
 
@@ -36,14 +31,12 @@ public class FakeDbCommand : DbCommand
 
     public override CommandType CommandType { get; set; }
 
-    protected override DbParameter CreateDbParameter()
-        => new FakeDbParameter();
+    protected override DbParameter CreateDbParameter() => new FakeDbParameter();
 
-    protected override DbParameterCollection DbParameterCollection { get; }
-        = new FakeDbParameterCollection();
+    protected override DbParameterCollection DbParameterCollection { get; } =
+        new FakeDbParameterCollection();
 
-    public override void Prepare()
-        => throw new NotImplementedException();
+    public override void Prepare() => throw new NotImplementedException();
 
     public override int ExecuteNonQuery()
     {
@@ -80,7 +73,10 @@ public class FakeDbCommand : DbCommand
         return _commandExecutor.ExecuteScalarAsync(this, cancellationToken);
     }
 
-    protected override Task<DbDataReader> ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+    protected override Task<DbDataReader> ExecuteDbDataReaderAsync(
+        CommandBehavior behavior,
+        CancellationToken cancellationToken
+    )
     {
         AssertTransaction();
 
@@ -117,14 +113,21 @@ public class FakeDbCommand : DbCommand
         {
             Check.DebugAssert(
                 ((FakeDbConnection)DbConnection).ActiveTransaction == null,
-                "((FakeDbConnection)DbConnection).ActiveTransaction is null");
+                "((FakeDbConnection)DbConnection).ActiveTransaction is null"
+            );
         }
         else
         {
             var transaction = (FakeDbTransaction)Transaction;
 
-            Check.DebugAssert(transaction.Connection == Connection, "transaction.Connection != Connection");
-            Check.DebugAssert(transaction.DisposeCount == 0, $"transaction.DisposeCount is {transaction.DisposeCount}");
+            Check.DebugAssert(
+                transaction.Connection == Connection,
+                "transaction.Connection != Connection"
+            );
+            Check.DebugAssert(
+                transaction.DisposeCount == 0,
+                $"transaction.DisposeCount is {transaction.DisposeCount}"
+            );
         }
     }
 }

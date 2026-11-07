@@ -32,7 +32,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
         "'{0:yyyy-MM-ddTHH:mm:ss.ffffK}'",
         "'{0:yyyy-MM-ddTHH:mm:ss.fffffK}'",
         "'{0:yyyy-MM-ddTHH:mm:ss.ffffffK}'",
-        "'{0:yyyy-MM-ddTHH:mm:ss.fffffffK}'"
+        "'{0:yyyy-MM-ddTHH:mm:ss.fffffffK}'",
     };
 
     /// <summary>
@@ -53,16 +53,20 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
         string storeType,
         DbType? dbType = System.Data.DbType.DateTime2,
         SqlDbType? sqlDbType = null,
-        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+    )
         : this(
             new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(DateTime), jsonValueReaderWriter: JsonDateTimeReaderWriter.Instance),
+                new CoreTypeMappingParameters(
+                    typeof(DateTime),
+                    jsonValueReaderWriter: JsonDateTimeReaderWriter.Instance
+                ),
                 storeType,
                 storeTypePostfix,
-                dbType),
-            sqlDbType)
-    {
-    }
+                dbType
+            ),
+            sqlDbType
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,7 +74,10 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected SqlServerDateTimeTypeMapping(RelationalTypeMappingParameters parameters, SqlDbType? sqlDbType)
+    protected SqlServerDateTimeTypeMapping(
+        RelationalTypeMappingParameters parameters,
+        SqlDbType? sqlDbType
+    )
         : base(parameters)
     {
         _sqlDbType = sqlDbType;
@@ -82,8 +89,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SqlDbType? SqlType
-        => _sqlDbType;
+    public virtual SqlDbType? SqlType => _sqlDbType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,8 +111,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
             ((SqlParameter)parameter).SqlDbType = SqlDbType.Date;
         }
 
-        if (Size.HasValue
-            && Size.Value != -1)
+        if (Size.HasValue && Size.Value != -1)
         {
             parameter.Size = Size.Value;
         }
@@ -124,8 +129,8 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerDateTimeTypeMapping(parameters, _sqlDbType);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerDateTimeTypeMapping(parameters, _sqlDbType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -133,12 +138,12 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => StoreType switch
+    protected override string SqlLiteralFormatString =>
+        StoreType switch
         {
             "date" => DateFormatConst,
             "datetime" => DateTimeFormatConst,
             "smalldatetime" => SmallDateTimeFormatConst,
-            _ => _dateTime2Formats[Precision is >= 0 and <= 7 ? Precision.Value : 7]
+            _ => _dateTime2Formats[Precision is >= 0 and <= 7 ? Precision.Value : 7],
         };
 }

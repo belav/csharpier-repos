@@ -7,7 +7,8 @@ namespace System.Configuration
 {
     public class ProtectedConfigurationProviderCollection : ProviderCollection
     {
-        public new ProtectedConfigurationProvider this[string name] => (ProtectedConfigurationProvider)base[name];
+        public new ProtectedConfigurationProvider this[string name] =>
+            (ProtectedConfigurationProvider)base[name];
 
         public override void Add(ProviderBase provider)
         {
@@ -19,8 +20,12 @@ namespace System.Configuration
             if (!(provider is ProtectedConfigurationProvider))
             {
                 throw new ArgumentException(
-                    SR.Format(SR.Config_provider_must_implement_type,
-                        typeof(ProtectedConfigurationProvider).ToString()), nameof(provider));
+                    SR.Format(
+                        SR.Config_provider_must_implement_type,
+                        typeof(ProtectedConfigurationProvider).ToString()
+                    ),
+                    nameof(provider)
+                );
             }
 
             base.Add(provider);

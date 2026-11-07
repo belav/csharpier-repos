@@ -13,19 +13,27 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal static class AnalyzerExceptionDescriptionBuilder
     {
         // Description separator
-        private static readonly string s_separator = Environment.NewLine + "-----" + Environment.NewLine;
+        private static readonly string s_separator =
+            Environment.NewLine + "-----" + Environment.NewLine;
 
         public static string CreateDiagnosticDescription(this Exception exception)
         {
             if (exception is AggregateException aggregateException)
             {
                 var flattened = aggregateException.Flatten();
-                return string.Join(s_separator, flattened.InnerExceptions.Select(e => GetExceptionMessage(e)));
+                return string.Join(
+                    s_separator,
+                    flattened.InnerExceptions.Select(e => GetExceptionMessage(e))
+                );
             }
 
             if (exception != null)
             {
-                return string.Join(s_separator, GetExceptionMessage(exception), CreateDiagnosticDescription(exception.InnerException));
+                return string.Join(
+                    s_separator,
+                    GetExceptionMessage(exception),
+                    CreateDiagnosticDescription(exception.InnerException)
+                );
             }
 
             return string.Empty;

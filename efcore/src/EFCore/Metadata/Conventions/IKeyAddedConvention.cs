@@ -16,5 +16,8 @@ public interface IKeyAddedConvention : IConvention
     /// </summary>
     /// <param name="keyBuilder">The builder for the key.</param>
     /// <param name="context">Additional information associated with convention execution.</param>
-    void ProcessKeyAdded(IConventionKeyBuilder keyBuilder, IConventionContext<IConventionKeyBuilder> context);
+    void ProcessKeyAdded(
+        IConventionKeyBuilder keyBuilder,
+        IConventionContext<IConventionKeyBuilder> context
+    );
 }

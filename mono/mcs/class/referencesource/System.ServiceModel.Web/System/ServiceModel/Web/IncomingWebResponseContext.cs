@@ -15,6 +15,7 @@ namespace System.ServiceModel.Web
     public class IncomingWebResponseContext
     {
         OperationContext operationContext;
+
         internal IncomingWebResponseContext(OperationContext operationContext)
         {
             Fx.Assert(operationContext != null, "operationContext is null");
@@ -22,38 +23,64 @@ namespace System.ServiceModel.Web
         }
 
         public long ContentLength
-        { get { return long.Parse(EnsureMessageProperty().Headers[HttpResponseHeader.ContentLength], CultureInfo.InvariantCulture); } }
+        {
+            get
+            {
+                return long.Parse(
+                    EnsureMessageProperty().Headers[HttpResponseHeader.ContentLength],
+                    CultureInfo.InvariantCulture
+                );
+            }
+        }
 
         public string ContentType
-        { get { return EnsureMessageProperty().Headers[HttpResponseHeader.ContentType]; } }
+        {
+            get { return EnsureMessageProperty().Headers[HttpResponseHeader.ContentType]; }
+        }
 
         public string ETag
-        { get { return EnsureMessageProperty().Headers[HttpResponseHeader.ETag]; } }
+        {
+            get { return EnsureMessageProperty().Headers[HttpResponseHeader.ETag]; }
+        }
 
         public WebHeaderCollection Headers
-        { get { return EnsureMessageProperty().Headers; } }
+        {
+            get { return EnsureMessageProperty().Headers; }
+        }
 
         public string Location
-        { get { return EnsureMessageProperty().Headers[HttpResponseHeader.Location]; } }
+        {
+            get { return EnsureMessageProperty().Headers[HttpResponseHeader.Location]; }
+        }
 
         public HttpStatusCode StatusCode
-        { get { return this.EnsureMessageProperty().StatusCode; } }
+        {
+            get { return this.EnsureMessageProperty().StatusCode; }
+        }
 
         public string StatusDescription
-        { get { return this.EnsureMessageProperty().StatusDescription; } }
+        {
+            get { return this.EnsureMessageProperty().StatusDescription; }
+        }
 
         HttpResponseMessageProperty MessageProperty
-        { get
+        {
+            get
             {
                 if (operationContext.IncomingMessageProperties == null)
                 {
                     return null;
                 }
-                if (!operationContext.IncomingMessageProperties.ContainsKey(HttpResponseMessageProperty.Name))
+                if (
+                    !operationContext.IncomingMessageProperties.ContainsKey(
+                        HttpResponseMessageProperty.Name
+                    )
+                )
                 {
                     return null;
                 }
-                return operationContext.IncomingMessageProperties[HttpResponseMessageProperty.Name] as HttpResponseMessageProperty;
+                return operationContext.IncomingMessageProperties[HttpResponseMessageProperty.Name]
+                    as HttpResponseMessageProperty;
             }
         }
 
@@ -61,8 +88,14 @@ namespace System.ServiceModel.Web
         {
             if (this.MessageProperty == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.HttpContextNoIncomingMessageProperty, typeof(HttpResponseMessageProperty).Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.HttpContextNoIncomingMessageProperty,
+                            typeof(HttpResponseMessageProperty).Name
+                        )
+                    )
+                );
             }
             return this.MessageProperty;
         }

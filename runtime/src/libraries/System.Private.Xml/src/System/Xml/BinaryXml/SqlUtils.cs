@@ -25,17 +25,14 @@ namespace System.Xml
 
         public bool IsPositive
         {
-            get
-            {
-                return (m_bSign == 0);
-            }
+            get { return (m_bSign == 0); }
         }
 
-        private const byte s_NUMERIC_MAX_PRECISION = 38;            // Maximum precision of numeric
-        private const byte s_maxPrecision = s_NUMERIC_MAX_PRECISION;  // max SS precision
+        private const byte s_NUMERIC_MAX_PRECISION = 38; // Maximum precision of numeric
+        private const byte s_maxPrecision = s_NUMERIC_MAX_PRECISION; // max SS precision
 
         private const int s_cNumeMax = 4;
-        internal const ulong x_llMax = long.MaxValue;   // Max of Int64
+        internal const ulong x_llMax = long.MaxValue; // Max of Int64
 
         public BinXmlSqlDecimal(byte[] data, int offset, bool trim)
         {
@@ -69,18 +66,19 @@ namespace System.Xml
             }
         }
 
-        private static uint UIntFromByteArray(byte[] data, int offset)
-            => BinaryPrimitives.ReadUInt32LittleEndian(data.AsSpan(offset));
+        private static uint UIntFromByteArray(byte[] data, int offset) =>
+            BinaryPrimitives.ReadUInt32LittleEndian(data.AsSpan(offset));
 
         // Multi-precision one super-digit divide in place.
         // U = U / D,
         // R = U % D
         // Length of U can decrease
-        private static void MpDiv1(uint[] rgulU,      // InOut| U
-                                   ref int ciulU,      // InOut| # of digits in U
-                                   uint iulD,       // In    | D
-                                   out uint iulR        // Out    | R
-                                   )
+        private static void MpDiv1(
+            uint[] rgulU, // InOut| U
+            ref int ciulU, // InOut| # of digits in U
+            uint iulD, // In    | D
+            out uint iulR // Out    | R
+        )
         {
             Debug.Assert(rgulU.Length == s_cNumeMax);
 
@@ -97,7 +95,7 @@ namespace System.Xml
                 idU--;
                 dwlAccum = (((ulong)ulCarry) << 32) + (ulong)(rgulU[idU]);
                 rgulU[idU] = (uint)(dwlAccum / ulD);
-                ulCarry = (uint)(dwlAccum - (ulong)rgulU[idU] * ulD);  // (ULONG) (dwlAccum % iulD)
+                ulCarry = (uint)(dwlAccum - (ulong)rgulU[idU] * ulD); // (ULONG) (dwlAccum % iulD)
             }
 
             iulR = ulCarry;
@@ -105,9 +103,10 @@ namespace System.Xml
         }
 
         // Normalize multi-precision number - remove leading zeroes
-        private static void MpNormalize(uint[] rgulU,      // In   | Number
-                                        ref int ciulU       // InOut| # of digits
-                                        )
+        private static void MpNormalize(
+            uint[] rgulU, // In   | Number
+            ref int ciulU // InOut| # of digits
+        )
         {
             while (ciulU > 1 && rgulU[ciulU - 1] == 0)
                 ciulU--;
@@ -121,13 +120,54 @@ namespace System.Xml
         //    20-28          3
         //    29-38          4
         private static ReadOnlySpan<byte> RgCLenFromPrec =>
-        [
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
-        ];
+            [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+            ];
 
         private static byte CLenFromPrec(byte bPrec)
         {
-            Debug.Assert(bPrec <= s_maxPrecision && bPrec > 0, "bPrec <= MaxPrecision && bPrec > 0", "Invalid numeric precision");
+            Debug.Assert(
+                bPrec <= s_maxPrecision && bPrec > 0,
+                "bPrec <= MaxPrecision && bPrec > 0",
+                "Invalid numeric precision"
+            );
             return RgCLenFromPrec[bPrec - 1];
         }
 
@@ -189,9 +229,9 @@ namespace System.Xml
             // Make local copy of data to avoid modifying input.
             uint[] rgulNumeric = new uint[4] { m_data1, m_data2, m_data3, m_data4 };
             int culLen = m_bLen;
-            Span<char> pszTmp = stackalloc char[s_NUMERIC_MAX_PRECISION + 1];   //Local Character buffer to hold
-                                                                     //the decimal digits, from the
-                                                                     //lowest significant to highest significant
+            Span<char> pszTmp = stackalloc char[s_NUMERIC_MAX_PRECISION + 1]; //Local Character buffer to hold
+            //the decimal digits, from the
+            //lowest significant to highest significant
 
             int iDigits = 0; //Number of significant digits
             uint ulRem; //Remainder of a division by x_ulBase10, i.e.,least significant digit
@@ -241,17 +281,24 @@ namespace System.Xml
             return new string(szResult);
         }
 
-
         // Is this RE numeric valid?
         [System.Diagnostics.Conditional("DEBUG")]
         private void AssertValid()
         {
             // Scale,Prec in range
-            Debug.Assert(m_bScale <= s_NUMERIC_MAX_PRECISION, "m_bScale <= NUMERIC_MAX_PRECISION", "In AssertValid");
+            Debug.Assert(
+                m_bScale <= s_NUMERIC_MAX_PRECISION,
+                "m_bScale <= NUMERIC_MAX_PRECISION",
+                "In AssertValid"
+            );
             Debug.Assert(m_bScale <= m_bPrec, "m_bScale <= m_bPrec", "In AssertValid");
             Debug.Assert(m_bScale >= 0, "m_bScale >= 0", "In AssertValid");
             Debug.Assert(m_bPrec > 0, "m_bPrec > 0", "In AssertValid");
-            Debug.Assert(CLenFromPrec(m_bPrec) >= m_bLen, "CLenFromPrec(m_bPrec) >= m_bLen", "In AssertValid");
+            Debug.Assert(
+                CLenFromPrec(m_bPrec) >= m_bLen,
+                "CLenFromPrec(m_bPrec) >= m_bLen",
+                "In AssertValid"
+            );
             Debug.Assert(m_bLen <= s_cNumeMax, "m_bLen <= x_cNumeMax", "In AssertValid");
 
             uint[] rglData = new uint[4] { m_data1, m_data2, m_data3, m_data4 };
@@ -272,8 +319,15 @@ namespace System.Xml
     {
         private readonly long _data;
 
-        public BinXmlSqlMoney(int v) { _data = v; }
-        public BinXmlSqlMoney(long v) { _data = v; }
+        public BinXmlSqlMoney(int v)
+        {
+            _data = v;
+        }
+
+        public BinXmlSqlMoney(long v)
+        {
+            _data = v;
+        }
 
         public decimal ToDecimal()
         {
@@ -307,16 +361,7 @@ namespace System.Xml
         private const int MaxFractionDigits = 7;
 
         internal static ReadOnlySpan<int> KatmaiTimeScaleMultiplicator =>
-        [
-            10000000,
-            1000000,
-            100000,
-            10000,
-            1000,
-            100,
-            10,
-            1,
-        ];
+            [10000000, 1000000, 100000, 10000, 1000, 100, 10, 1];
 
         private static void Write2Dig(StringBuilder sb, int val)
         {
@@ -324,6 +369,7 @@ namespace System.Xml
             sb.Append((char)('0' + (val / 10)));
             sb.Append((char)('0' + (val % 10)));
         }
+
         private static void Write4DigNeg(StringBuilder sb, int val)
         {
             Debug.Assert(val > -10000 && val < 10000);
@@ -372,7 +418,13 @@ namespace System.Xml
             }
         }
 
-        private static void WriteTimeFullPrecision(StringBuilder sb, int hr, int min, int sec, int fraction)
+        private static void WriteTimeFullPrecision(
+            StringBuilder sb,
+            int hr,
+            int min,
+            int sec,
+            int fraction
+        )
         {
             Write2Dig(sb, hr);
             sb.Append(':');
@@ -425,7 +477,16 @@ namespace System.Xml
             }
         }
 
-        private static void BreakDownXsdDateTime(long val, out int yr, out int mnth, out int day, out int hr, out int min, out int sec, out int ms)
+        private static void BreakDownXsdDateTime(
+            long val,
+            out int yr,
+            out int mnth,
+            out int day,
+            out int hr,
+            out int min,
+            out int sec,
+            out int ms
+        )
         {
             if (val < 0)
                 goto Error;
@@ -446,11 +507,19 @@ namespace System.Xml
             if (yr < -9999 || yr > 9999)
                 goto Error;
             return;
-Error:
+            Error:
             throw new XmlException(SR.SqlTypes_ArithOverflow, (string?)null);
         }
 
-        private static void BreakDownXsdDate(long val, out int yr, out int mnth, out int day, out bool negTimeZone, out int hr, out int min)
+        private static void BreakDownXsdDate(
+            long val,
+            out int yr,
+            out int mnth,
+            out int day,
+            out bool negTimeZone,
+            out int hr,
+            out int min
+        )
         {
             if (val < 0)
                 goto Error;
@@ -471,11 +540,17 @@ Error:
             if (yr < -9999 || yr > 9999)
                 goto Error;
             return;
-Error:
+            Error:
             throw new XmlException(SR.SqlTypes_ArithOverflow, (string?)null);
         }
 
-        private static void BreakDownXsdTime(long val, out int hr, out int min, out int sec, out int ms)
+        private static void BreakDownXsdTime(
+            long val,
+            out int hr,
+            out int min,
+            out int sec,
+            out int ms
+        )
         {
             if (val < 0)
                 goto Error;
@@ -489,7 +564,7 @@ Error:
             if (0 > hr || hr > 23)
                 goto Error;
             return;
-Error:
+            Error:
             throw new XmlException(SR.SqlTypes_ArithOverflow, (string?)null);
         }
 
@@ -510,6 +585,7 @@ Error:
             sb.Append('Z');
             return sb.ToString();
         }
+
         public static DateTime XsdDateTimeToDateTime(long val)
         {
             int yr;
@@ -537,6 +613,7 @@ Error:
             WriteTimeZone(sb, negTimeZ, hr, min);
             return sb.ToString();
         }
+
         public static DateTime XsdDateToDateTime(long val)
         {
             int yr;
@@ -564,6 +641,7 @@ Error:
             sb.Append('Z');
             return sb.ToString();
         }
+
         public static DateTime XsdTimeToDateTime(long val)
         {
             int hr;
@@ -577,16 +655,23 @@ Error:
         public static string SqlDateTimeToString(int dateticks, uint timeticks)
         {
             DateTime dateTime = SqlDateTimeToDateTime(dateticks, timeticks);
-            string format = (dateTime.Millisecond != 0) ? "yyyy/MM/dd\\THH:mm:ss.ffff" : "yyyy/MM/dd\\THH:mm:ss";
+            string format =
+                (dateTime.Millisecond != 0)
+                    ? "yyyy/MM/dd\\THH:mm:ss.ffff"
+                    : "yyyy/MM/dd\\THH:mm:ss";
             return dateTime.ToString(format, CultureInfo.InvariantCulture);
         }
+
         public static DateTime SqlDateTimeToDateTime(int dateticks, uint timeticks)
         {
             DateTime SQLBaseDate = new DateTime(1900, 1, 1);
             //long millisecond = (long)(((ulong)timeticks * 20 + (ulong)3) / (ulong)6);
             long millisecond = (long)(timeticks / s_SQLTicksPerMillisecond + 0.5);
-            return SQLBaseDate.Add(new TimeSpan(dateticks * TimeSpan.TicksPerDay +
-                                                  millisecond * TimeSpan.TicksPerMillisecond));
+            return SQLBaseDate.Add(
+                new TimeSpan(
+                    dateticks * TimeSpan.TicksPerDay + millisecond * TimeSpan.TicksPerMillisecond
+                )
+            );
         }
 
         // Number of (100ns) ticks per time unit
@@ -595,12 +680,12 @@ Error:
         internal const int SQLTicksPerMinute = SQLTicksPerSecond * 60;
         internal const int SQLTicksPerHour = SQLTicksPerMinute * 60;
 
-
         public static string SqlSmallDateTimeToString(short dateticks, ushort timeticks)
         {
             DateTime dateTime = SqlSmallDateTimeToDateTime(dateticks, timeticks);
             return dateTime.ToString("yyyy/MM/dd\\THH:mm:ss", CultureInfo.InvariantCulture);
         }
+
         public static DateTime SqlSmallDateTimeToDateTime(short dateticks, ushort timeticks)
         {
             return SqlDateTimeToDateTime((int)dateticks, (uint)(timeticks * SQLTicksPerMinute));
@@ -654,14 +739,20 @@ Error:
             return XsdKatmaiDateTimeOffsetToDateTimeOffset(data, offset);
         }
 
-        public static DateTimeOffset XsdKatmaiDateTimeOffsetToDateTimeOffset(byte[] data, int offset)
+        public static DateTimeOffset XsdKatmaiDateTimeOffsetToDateTimeOffset(
+            byte[] data,
+            int offset
+        )
         {
             // Katmai SQL type "DATETIMEOFFSET"
             long timeTicks = GetKatmaiTimeTicks(data, ref offset);
             long dateTicks = GetKatmaiDateTicks(data, ref offset);
             long zoneTicks = GetKatmaiTimeZoneTicks(data, offset);
             // The DATETIMEOFFSET values are serialized in UTC, but DateTimeOffset takes adjusted time -> we need to add zoneTicks
-            DateTimeOffset dto = new DateTimeOffset(dateTicks + timeTicks + zoneTicks, new TimeSpan(zoneTicks));
+            DateTimeOffset dto = new DateTimeOffset(
+                dateTicks + timeTicks + zoneTicks,
+                new TimeSpan(zoneTicks)
+            );
             return dto;
         }
 
@@ -772,12 +863,18 @@ Error:
 
         private static int GetFractions(DateTime dt)
         {
-            return (int)(dt.Ticks - new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second).Ticks);
+            return (int)(
+                dt.Ticks
+                - new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second).Ticks
+            );
         }
 
         private static int GetFractions(DateTimeOffset dt)
         {
-            return (int)(dt.Ticks - new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second).Ticks);
+            return (int)(
+                dt.Ticks
+                - new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second).Ticks
+            );
         }
     }
 }

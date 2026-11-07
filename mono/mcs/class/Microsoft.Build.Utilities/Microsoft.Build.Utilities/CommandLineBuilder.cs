@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections;
 using System.Text;
@@ -34,341 +33,366 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities
 {
-	public class CommandLineBuilder
-	{
-		StringBuilder commandLine;
-		static char [] chars;
-	
-		static CommandLineBuilder ()
-		{
-			chars = new char [] {' ', '\t', '\n', '\u000b', '\u000c', '\'', '\"', ';'};
-		}
-		
-		public CommandLineBuilder ()
-		{
-			commandLine = new StringBuilder ();
-		}
-		
-		public void AppendFileNameIfNotNull (string fileName)
-		{
-			if (fileName == null)
-				return;
-			
-			VerifyThrowNoEmbeddedDoubleQuotes (null, fileName);
-			AppendSpaceIfNotEmpty ();
-			AppendFileNameWithQuoting (fileName);
-		}
-		
-		public void AppendFileNameIfNotNull (ITaskItem fileItem)
-		{
-			if (fileItem == null)
-				return;
-			
-			string filename = fileItem.ToString ();
-			VerifyThrowNoEmbeddedDoubleQuotes (null, filename);
-			AppendSpaceIfNotEmpty ();
-			AppendFileNameWithQuoting (filename);
-		}
-		
-		public void AppendFileNamesIfNotNull (string[] fileNames,
-						      string delimiter)
-		{
-			if (delimiter == null)
-				throw new ArgumentNullException (null, "Parameter \"delimiter\" cannot be null.");
-		
-			if (fileNames == null)
-				return;
-			
-			bool appendDelimiter = false;
-			AppendSpaceIfNotEmpty ();
-			for (int i = 0; i < fileNames.Length; i++) {
-				string filename = fileNames [i];
-				if (filename == null)
-					continue;
-				VerifyThrowNoEmbeddedDoubleQuotes (null, filename);
-				if (appendDelimiter) {
-					commandLine.Append (delimiter);
-					AppendFileNameWithQuoting (filename);
-				} else {
-					AppendFileNameWithQuoting (filename);
-					appendDelimiter = true;
-				}
-			}
-		}
-		
-		public void AppendFileNamesIfNotNull (ITaskItem[] fileItems,
-						      string delimiter)
-		{
-			if (delimiter == null)
-				throw new ArgumentNullException (null, "Parameter \"delimiter\" cannot be null.");
-		
-			if (fileItems == null)
-				return;
-			
-			bool appendDelimiter = false;
-			AppendSpaceIfNotEmpty ();
-			for (int i = 0; i < fileItems.Length; i++) {
-				string filename = fileItems [i].ToString ();
-				if (fileItems [i] == null)
-					continue;
+    public class CommandLineBuilder
+    {
+        StringBuilder commandLine;
+        static char[] chars;
 
-				VerifyThrowNoEmbeddedDoubleQuotes (null, filename);
-				if (appendDelimiter) {
-					commandLine.Append (delimiter);
-					AppendFileNameWithQuoting (filename);
-				} else {
-					AppendFileNameWithQuoting (filename);
-					appendDelimiter = true;
-				}
-			}
-		}
-		
-		protected void AppendFileNameWithQuoting (string fileName)
-		{
-			if (fileName == null)
-				return;
+        static CommandLineBuilder()
+        {
+            chars = new char[] { ' ', '\t', '\n', '\u000b', '\u000c', '\'', '\"', ';' };
+        }
 
-			if (IsQuotingRequired (fileName))
-				commandLine.AppendFormat ("\"{0}\"",fileName);
-			else
-				commandLine.Append (fileName);
-		}
-		
-		protected void AppendSpaceIfNotEmpty ()
-		{
-			if (commandLine.Length != 0)
-				commandLine.Append (' ');
-		}
-		
-		public void AppendSwitch (string switchName)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
+        public CommandLineBuilder()
+        {
+            commandLine = new StringBuilder();
+        }
 
-			AppendSpaceIfNotEmpty ();
-			commandLine.Append (switchName);
-		}
-		
-		public void AppendSwitchIfNotNull (string switchName,
-						   string parameter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (parameter == null)
-				return;
+        public void AppendFileNameIfNotNull(string fileName)
+        {
+            if (fileName == null)
+                return;
 
-			VerifyThrowNoEmbeddedDoubleQuotes (switchName, parameter);
-			AppendSpaceIfNotEmpty ();
-			commandLine.Append (switchName);
-			AppendTextWithQuoting (parameter);
-		}
-		
-		public void AppendSwitchIfNotNull (string switchName,
-						   ITaskItem parameter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (parameter == null)
-				return;
-			
-			string value = parameter.ToString ();
-			VerifyThrowNoEmbeddedDoubleQuotes (switchName, value);
-			AppendSpaceIfNotEmpty ();
-			commandLine.Append (switchName);
-			AppendTextWithQuoting (value);
-		}
-		
-		public void AppendSwitchIfNotNull (string switchName,
-						   string[] parameters,
-						   string delimiter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (delimiter == null)
-				throw new ArgumentNullException (null, "Parameter \"delimiter\" cannot be null.");
+            VerifyThrowNoEmbeddedDoubleQuotes(null, fileName);
+            AppendSpaceIfNotEmpty();
+            AppendFileNameWithQuoting(fileName);
+        }
 
-			if (parameters == null)
-				return;
-			
-			AppendSpaceIfNotEmpty ();
-			commandLine.AppendFormat ("{0}",switchName);
-			bool appendDelimiter = false;
-			for (int i = 0; i < parameters.Length; i++) {
-				string value = parameters [i];
-				if (value == null)
-					continue;
+        public void AppendFileNameIfNotNull(ITaskItem fileItem)
+        {
+            if (fileItem == null)
+                return;
 
-				VerifyThrowNoEmbeddedDoubleQuotes (switchName, value);
-				if (appendDelimiter) {
-					commandLine.Append (delimiter);
-					AppendTextWithQuoting (value);
-				} else {
-					AppendTextWithQuoting (value);
-					appendDelimiter = true;
-				}
-			}
-		}
-		
-		public void AppendSwitchIfNotNull (string switchName,
-						   ITaskItem[] parameters,
-						   string delimiter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (delimiter == null)
-				throw new ArgumentNullException (null, "Parameter \"delimiter\" cannot be null.");
+            string filename = fileItem.ToString();
+            VerifyThrowNoEmbeddedDoubleQuotes(null, filename);
+            AppendSpaceIfNotEmpty();
+            AppendFileNameWithQuoting(filename);
+        }
 
-			if (parameters == null)
-				return;
-			
-			AppendSpaceIfNotEmpty ();
-			commandLine.AppendFormat ("{0}",switchName);
-			bool appendDelimiter = false;
-			for (int i = 0; i < parameters.Length; i++) {
-				string value = parameters [i].ToString ();
-				if (value == null)
-					continue;
+        public void AppendFileNamesIfNotNull(string[] fileNames, string delimiter)
+        {
+            if (delimiter == null)
+                throw new ArgumentNullException(null, "Parameter \"delimiter\" cannot be null.");
 
-				VerifyThrowNoEmbeddedDoubleQuotes (switchName, value);
-				if (appendDelimiter) {
-					commandLine.Append (delimiter);
-					AppendTextWithQuoting (value);
-				} else {
-					AppendTextWithQuoting (value);
-					appendDelimiter = true;
-				}
-			}
-		}
-		
-		public void AppendSwitchUnquotedIfNotNull (string switchName,
-							   string parameter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (parameter == null)
-				return;
-			
-			AppendSpaceIfNotEmpty ();
-			commandLine.AppendFormat ("{0}{1}", switchName, parameter);
-		}
+            if (fileNames == null)
+                return;
 
-		public void AppendSwitchUnquotedIfNotNull (string switchName,
-							   ITaskItem parameter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (parameter == null)
-				return;
-			
-			AppendSpaceIfNotEmpty ();
-			commandLine.AppendFormat ("{0}{1}", switchName, parameter.ItemSpec);
-		}
+            bool appendDelimiter = false;
+            AppendSpaceIfNotEmpty();
+            for (int i = 0; i < fileNames.Length; i++)
+            {
+                string filename = fileNames[i];
+                if (filename == null)
+                    continue;
+                VerifyThrowNoEmbeddedDoubleQuotes(null, filename);
+                if (appendDelimiter)
+                {
+                    commandLine.Append(delimiter);
+                    AppendFileNameWithQuoting(filename);
+                }
+                else
+                {
+                    AppendFileNameWithQuoting(filename);
+                    appendDelimiter = true;
+                }
+            }
+        }
 
-		public void AppendSwitchUnquotedIfNotNull (string switchName,
-							   string[] parameters,
-							   string delimiter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (delimiter == null)
-				throw new ArgumentNullException (null, "Parameter \"delimiter\" cannot be null.");
+        public void AppendFileNamesIfNotNull(ITaskItem[] fileItems, string delimiter)
+        {
+            if (delimiter == null)
+                throw new ArgumentNullException(null, "Parameter \"delimiter\" cannot be null.");
 
-			if (parameters == null)
-				return;
-			
-			AppendSpaceIfNotEmpty ();
-			commandLine.AppendFormat ("{0}",switchName);
-			bool appendDelimiter = false;
-			for (int i = 0; i < parameters.Length; i++) {
-				if (parameters [i] == null)
-					continue; 
-				if (appendDelimiter) {
-					commandLine.Append (delimiter);
-					commandLine.Append (parameters [i]);
-				} else {
-					commandLine.Append (parameters [i]);
-					appendDelimiter = true;
-				}
-			}
-		}
+            if (fileItems == null)
+                return;
 
-		public void AppendSwitchUnquotedIfNotNull (string switchName,
-							   ITaskItem[] parameters,
-							   string delimiter)
-		{
-			if (switchName == null)
-				throw new ArgumentNullException (null, "Parameter \"switchName\" cannot be null.");
-		
-			if (delimiter == null)
-				throw new ArgumentNullException (null, "Parameter \"delimiter\" cannot be null.");
+            bool appendDelimiter = false;
+            AppendSpaceIfNotEmpty();
+            for (int i = 0; i < fileItems.Length; i++)
+            {
+                string filename = fileItems[i].ToString();
+                if (fileItems[i] == null)
+                    continue;
 
-			if (parameters == null)
-				return;
-			
-			AppendSpaceIfNotEmpty ();
-			commandLine.AppendFormat ("{0}",switchName);
-			bool appendDelimiter = false;
-			for (int i = 0; i < parameters.Length; i++) {
-				if (parameters [i] == null)
-					continue;
-				if (appendDelimiter) {
-					commandLine.Append (delimiter);
-					commandLine.Append (parameters [i].ToString ());
-				} else {
-					commandLine.Append (parameters [i].ToString ());
-					appendDelimiter = true;
-				}
-			}
-		}
+                VerifyThrowNoEmbeddedDoubleQuotes(null, filename);
+                if (appendDelimiter)
+                {
+                    commandLine.Append(delimiter);
+                    AppendFileNameWithQuoting(filename);
+                }
+                else
+                {
+                    AppendFileNameWithQuoting(filename);
+                    appendDelimiter = true;
+                }
+            }
+        }
 
-		public
-		void AppendTextUnquoted (string textToAppend)
-		{
-			commandLine.Append (textToAppend);
-		}
-		
-		protected void AppendTextWithQuoting (string textToAppend)
-		{
-			if (textToAppend == null)
-				return;
+        protected void AppendFileNameWithQuoting(string fileName)
+        {
+            if (fileName == null)
+                return;
 
-			if (IsQuotingRequired (textToAppend))
-				commandLine.AppendFormat ("\"{0}\"",textToAppend);
-			else
-				commandLine.Append (textToAppend);
-		}
-		
-		protected virtual bool IsQuotingRequired (string parameter)
-		{
-			return parameter != null && parameter.IndexOfAny (chars) >= 0;
-		}
-		
-		protected virtual void VerifyThrowNoEmbeddedDoubleQuotes (string switchName,
-									 string parameter)
-		{
-			if (parameter != null && parameter.IndexOf ('"') >= 0)
-				throw new ArgumentException (
-					String.Format ("Illegal quote passed to the command line switch named \"{0}\". The value was [{1}].",
-						switchName, parameter));
-		}
-		
-		public override string ToString ()
-		{
-			return commandLine.ToString ();
-		}
-		
-		protected StringBuilder CommandLine {
-			get {
-				return commandLine;
-			}
-		}
-	}
+            if (IsQuotingRequired(fileName))
+                commandLine.AppendFormat("\"{0}\"", fileName);
+            else
+                commandLine.Append(fileName);
+        }
+
+        protected void AppendSpaceIfNotEmpty()
+        {
+            if (commandLine.Length != 0)
+                commandLine.Append(' ');
+        }
+
+        public void AppendSwitch(string switchName)
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            AppendSpaceIfNotEmpty();
+            commandLine.Append(switchName);
+        }
+
+        public void AppendSwitchIfNotNull(string switchName, string parameter)
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (parameter == null)
+                return;
+
+            VerifyThrowNoEmbeddedDoubleQuotes(switchName, parameter);
+            AppendSpaceIfNotEmpty();
+            commandLine.Append(switchName);
+            AppendTextWithQuoting(parameter);
+        }
+
+        public void AppendSwitchIfNotNull(string switchName, ITaskItem parameter)
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (parameter == null)
+                return;
+
+            string value = parameter.ToString();
+            VerifyThrowNoEmbeddedDoubleQuotes(switchName, value);
+            AppendSpaceIfNotEmpty();
+            commandLine.Append(switchName);
+            AppendTextWithQuoting(value);
+        }
+
+        public void AppendSwitchIfNotNull(string switchName, string[] parameters, string delimiter)
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (delimiter == null)
+                throw new ArgumentNullException(null, "Parameter \"delimiter\" cannot be null.");
+
+            if (parameters == null)
+                return;
+
+            AppendSpaceIfNotEmpty();
+            commandLine.AppendFormat("{0}", switchName);
+            bool appendDelimiter = false;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                string value = parameters[i];
+                if (value == null)
+                    continue;
+
+                VerifyThrowNoEmbeddedDoubleQuotes(switchName, value);
+                if (appendDelimiter)
+                {
+                    commandLine.Append(delimiter);
+                    AppendTextWithQuoting(value);
+                }
+                else
+                {
+                    AppendTextWithQuoting(value);
+                    appendDelimiter = true;
+                }
+            }
+        }
+
+        public void AppendSwitchIfNotNull(
+            string switchName,
+            ITaskItem[] parameters,
+            string delimiter
+        )
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (delimiter == null)
+                throw new ArgumentNullException(null, "Parameter \"delimiter\" cannot be null.");
+
+            if (parameters == null)
+                return;
+
+            AppendSpaceIfNotEmpty();
+            commandLine.AppendFormat("{0}", switchName);
+            bool appendDelimiter = false;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                string value = parameters[i].ToString();
+                if (value == null)
+                    continue;
+
+                VerifyThrowNoEmbeddedDoubleQuotes(switchName, value);
+                if (appendDelimiter)
+                {
+                    commandLine.Append(delimiter);
+                    AppendTextWithQuoting(value);
+                }
+                else
+                {
+                    AppendTextWithQuoting(value);
+                    appendDelimiter = true;
+                }
+            }
+        }
+
+        public void AppendSwitchUnquotedIfNotNull(string switchName, string parameter)
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (parameter == null)
+                return;
+
+            AppendSpaceIfNotEmpty();
+            commandLine.AppendFormat("{0}{1}", switchName, parameter);
+        }
+
+        public void AppendSwitchUnquotedIfNotNull(string switchName, ITaskItem parameter)
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (parameter == null)
+                return;
+
+            AppendSpaceIfNotEmpty();
+            commandLine.AppendFormat("{0}{1}", switchName, parameter.ItemSpec);
+        }
+
+        public void AppendSwitchUnquotedIfNotNull(
+            string switchName,
+            string[] parameters,
+            string delimiter
+        )
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (delimiter == null)
+                throw new ArgumentNullException(null, "Parameter \"delimiter\" cannot be null.");
+
+            if (parameters == null)
+                return;
+
+            AppendSpaceIfNotEmpty();
+            commandLine.AppendFormat("{0}", switchName);
+            bool appendDelimiter = false;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                if (parameters[i] == null)
+                    continue;
+                if (appendDelimiter)
+                {
+                    commandLine.Append(delimiter);
+                    commandLine.Append(parameters[i]);
+                }
+                else
+                {
+                    commandLine.Append(parameters[i]);
+                    appendDelimiter = true;
+                }
+            }
+        }
+
+        public void AppendSwitchUnquotedIfNotNull(
+            string switchName,
+            ITaskItem[] parameters,
+            string delimiter
+        )
+        {
+            if (switchName == null)
+                throw new ArgumentNullException(null, "Parameter \"switchName\" cannot be null.");
+
+            if (delimiter == null)
+                throw new ArgumentNullException(null, "Parameter \"delimiter\" cannot be null.");
+
+            if (parameters == null)
+                return;
+
+            AppendSpaceIfNotEmpty();
+            commandLine.AppendFormat("{0}", switchName);
+            bool appendDelimiter = false;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                if (parameters[i] == null)
+                    continue;
+                if (appendDelimiter)
+                {
+                    commandLine.Append(delimiter);
+                    commandLine.Append(parameters[i].ToString());
+                }
+                else
+                {
+                    commandLine.Append(parameters[i].ToString());
+                    appendDelimiter = true;
+                }
+            }
+        }
+
+        public void AppendTextUnquoted(string textToAppend)
+        {
+            commandLine.Append(textToAppend);
+        }
+
+        protected void AppendTextWithQuoting(string textToAppend)
+        {
+            if (textToAppend == null)
+                return;
+
+            if (IsQuotingRequired(textToAppend))
+                commandLine.AppendFormat("\"{0}\"", textToAppend);
+            else
+                commandLine.Append(textToAppend);
+        }
+
+        protected virtual bool IsQuotingRequired(string parameter)
+        {
+            return parameter != null && parameter.IndexOfAny(chars) >= 0;
+        }
+
+        protected virtual void VerifyThrowNoEmbeddedDoubleQuotes(
+            string switchName,
+            string parameter
+        )
+        {
+            if (parameter != null && parameter.IndexOf('"') >= 0)
+                throw new ArgumentException(
+                    String.Format(
+                        "Illegal quote passed to the command line switch named \"{0}\". The value was [{1}].",
+                        switchName,
+                        parameter
+                    )
+                );
+        }
+
+        public override string ToString()
+        {
+            return commandLine.ToString();
+        }
+
+        protected StringBuilder CommandLine
+        {
+            get { return commandLine; }
+        }
+    }
 }
-

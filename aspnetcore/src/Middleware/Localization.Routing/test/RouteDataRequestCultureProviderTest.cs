@@ -38,39 +38,36 @@ public class RouteDataRequestCultureProviderTest
                     {
                         app.UseRouter(routes =>
                         {
-                            routes.MapMiddlewareRoute(
-                                routeTemplate,
-                                fork =>
+                            routes.MapMiddlewareRoute(routeTemplate, fork =>
+                            {
+                                var options = new RequestLocalizationOptions
                                 {
-                                    var options = new RequestLocalizationOptions
+                                    DefaultRequestCulture = new RequestCulture("en-US"),
+                                    SupportedCultures = new List<CultureInfo>
                                     {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA"),
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-YE"),
-                                        },
-                                    };
-                                    options.RequestCultureProviders = new[]
+                                        new CultureInfo("ar-SA"),
+                                    },
+                                    SupportedUICultures = new List<CultureInfo>
                                     {
-                                        new RouteDataRequestCultureProvider() { Options = options },
-                                    };
-                                    fork.UseRequestLocalization(options);
+                                        new CultureInfo("ar-YE"),
+                                    },
+                                };
+                                options.RequestCultureProviders = new[]
+                                {
+                                    new RouteDataRequestCultureProvider() { Options = options },
+                                };
+                                fork.UseRequestLocalization(options);
 
-                                    fork.Run(context =>
-                                    {
-                                        var requestCultureFeature =
-                                            context.Features.Get<IRequestCultureFeature>();
-                                        var requestCulture = requestCultureFeature.RequestCulture;
-                                        return context.Response.WriteAsync(
-                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                        );
-                                    });
-                                }
-                            );
+                                fork.Run(context =>
+                                {
+                                    var requestCultureFeature =
+                                        context.Features.Get<IRequestCultureFeature>();
+                                    var requestCulture = requestCultureFeature.RequestCulture;
+                                    return context.Response.WriteAsync(
+                                        $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                    );
+                                });
+                            });
                         });
                     })
                     .ConfigureServices(services =>
@@ -161,45 +158,42 @@ public class RouteDataRequestCultureProviderTest
                     {
                         app.UseRouter(routes =>
                         {
-                            routes.MapMiddlewareRoute(
-                                routeTemplate,
-                                fork =>
+                            routes.MapMiddlewareRoute(routeTemplate, fork =>
+                            {
+                                var options = new RequestLocalizationOptions
                                 {
-                                    var options = new RequestLocalizationOptions
+                                    DefaultRequestCulture = new RequestCulture("en-US"),
+                                    SupportedCultures = new List<CultureInfo>
                                     {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA"),
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-YE"),
-                                        },
-                                    };
-                                    options.RequestCultureProviders = new[]
+                                        new CultureInfo("ar-SA"),
+                                    },
+                                    SupportedUICultures = new List<CultureInfo>
                                     {
-                                        new RouteDataRequestCultureProvider()
-                                        {
-                                            Options = options,
-                                            RouteDataStringKey = "c",
-                                            UIRouteDataStringKey = "uic",
-                                        },
-                                    };
-                                    fork.UseRequestLocalization(options);
+                                        new CultureInfo("ar-YE"),
+                                    },
+                                };
+                                options.RequestCultureProviders = new[]
+                                {
+                                    new RouteDataRequestCultureProvider()
+                                    {
+                                        Options = options,
+                                        RouteDataStringKey = "c",
+                                        UIRouteDataStringKey = "uic",
+                                    },
+                                };
+                                fork.UseRequestLocalization(options);
 
-                                    fork.Run(context =>
-                                    {
-                                        var requestCultureFeature =
-                                            context.Features.Get<IRequestCultureFeature>();
-                                        var requestCulture = requestCultureFeature.RequestCulture;
+                                fork.Run(context =>
+                                {
+                                    var requestCultureFeature =
+                                        context.Features.Get<IRequestCultureFeature>();
+                                    var requestCulture = requestCultureFeature.RequestCulture;
 
-                                        return context.Response.WriteAsync(
-                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                        );
-                                    });
-                                }
-                            );
+                                    return context.Response.WriteAsync(
+                                        $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                    );
+                                });
+                            });
                         });
                     })
                     .ConfigureServices(services =>

@@ -49,9 +49,7 @@ namespace System.Linq.Expressions
             return Expression.ListBind(Member, initializers!);
         }
 
-        internal override void ValidateAsDefinedHere(int index)
-        {
-        }
+        internal override void ValidateAsDefinedHere(int index) { }
     }
 
     public partial class Expression
@@ -64,7 +62,10 @@ namespace System.Linq.Expressions
         /// <paramref name="member"/> is null. -or-One or more elements of <paramref name="initializers"/> is null.</exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="member"/> does not represent a field or property.-or-The <see cref="FieldInfo.FieldType"/> or <see cref="PropertyInfo.PropertyType"/> of the field or property that <paramref name="member"/> represents does not implement <see cref="Collections.IEnumerable"/>.</exception>
-        public static MemberListBinding ListBind(MemberInfo member, params ElementInit[] initializers)
+        public static MemberListBinding ListBind(
+            MemberInfo member,
+            params ElementInit[] initializers
+        )
         {
             return ListBind(member, (IEnumerable<ElementInit>)initializers);
         }
@@ -77,7 +78,10 @@ namespace System.Linq.Expressions
         /// <paramref name="member"/> is null. -or-One or more elements of <paramref name="initializers"/> is null.</exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="member"/> does not represent a field or property.-or-The <see cref="FieldInfo.FieldType"/> or <see cref="PropertyInfo.PropertyType"/> of the field or property that <paramref name="member"/> represents does not implement <see cref="Collections.IEnumerable"/>.</exception>
-        public static MemberListBinding ListBind(MemberInfo member, IEnumerable<ElementInit> initializers)
+        public static MemberListBinding ListBind(
+            MemberInfo member,
+            IEnumerable<ElementInit> initializers
+        )
         {
             ArgumentNullException.ThrowIfNull(member);
             ArgumentNullException.ThrowIfNull(initializers);
@@ -97,7 +101,10 @@ namespace System.Linq.Expressions
         /// <exception cref="ArgumentException">
         /// <paramref name="propertyAccessor"/> does not represent a property accessor method.-or-The <see cref="PropertyInfo.PropertyType"/> of the property that the method represented by <paramref name="propertyAccessor"/> accesses does not implement <see cref="IEnumerable"/>.</exception>
         [RequiresUnreferencedCode(PropertyFromAccessorRequiresUnreferencedCode)]
-        public static MemberListBinding ListBind(MethodInfo propertyAccessor, params ElementInit[] initializers)
+        public static MemberListBinding ListBind(
+            MethodInfo propertyAccessor,
+            params ElementInit[] initializers
+        )
         {
             return ListBind(propertyAccessor, (IEnumerable<ElementInit>)initializers);
         }
@@ -111,14 +118,21 @@ namespace System.Linq.Expressions
         /// <exception cref="ArgumentException">
         /// <paramref name="propertyAccessor"/> does not represent a property accessor method.-or-The <see cref="PropertyInfo.PropertyType"/> of the property that the method represented by <paramref name="propertyAccessor"/> accesses does not implement <see cref="IEnumerable"/>.</exception>
         [RequiresUnreferencedCode(PropertyFromAccessorRequiresUnreferencedCode)]
-        public static MemberListBinding ListBind(MethodInfo propertyAccessor, IEnumerable<ElementInit> initializers)
+        public static MemberListBinding ListBind(
+            MethodInfo propertyAccessor,
+            IEnumerable<ElementInit> initializers
+        )
         {
             ArgumentNullException.ThrowIfNull(propertyAccessor);
             ArgumentNullException.ThrowIfNull(initializers);
             return ListBind(GetProperty(propertyAccessor, nameof(propertyAccessor)), initializers);
         }
 
-        private static void ValidateListInitArgs(Type listType, ReadOnlyCollection<ElementInit> initializers, string listTypeParamName)
+        private static void ValidateListInitArgs(
+            Type listType,
+            ReadOnlyCollection<ElementInit> initializers,
+            string listTypeParamName
+        )
         {
             if (!typeof(IEnumerable).IsAssignableFrom(listType))
             {

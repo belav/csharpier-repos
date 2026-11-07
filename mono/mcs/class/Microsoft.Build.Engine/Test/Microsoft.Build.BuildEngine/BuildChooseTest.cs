@@ -30,17 +30,20 @@ using System.Collections;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class BuildChooseTest {
-
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class BuildChooseTest
+    {
         [Test]
-        public void TestEmptyWhen () {
+        public void TestEmptyWhen()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
@@ -56,23 +59,25 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             //Assert.AreEqual (1, project.ItemGroups.Count, "A1");
-            Assert.AreEqual (0, project.PropertyGroups.Count, "A2");
-            Assert.AreEqual (1, project.EvaluatedItems.Count, "A3");
-            Assert.AreEqual (1, project.EvaluatedItemsIgnoringCondition.Count, "A4");
+            Assert.AreEqual(0, project.PropertyGroups.Count, "A2");
+            Assert.AreEqual(1, project.EvaluatedItems.Count, "A3");
+            Assert.AreEqual(1, project.EvaluatedItemsIgnoringCondition.Count, "A4");
         }
 
         [Test]
-        public void TestFalseWhen () {
+        public void TestFalseWhen()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'False'"">
@@ -84,23 +89,25 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             //Assert.AreEqual (1, project.ItemGroups.Count, "A1");
-            Assert.AreEqual (0, project.PropertyGroups.Count, "A2");
-            Assert.AreEqual (0, project.EvaluatedItems.Count, "A3");
-            Assert.AreEqual (0, project.EvaluatedItemsIgnoringCondition.Count, "A4");
+            Assert.AreEqual(0, project.PropertyGroups.Count, "A2");
+            Assert.AreEqual(0, project.EvaluatedItems.Count, "A3");
+            Assert.AreEqual(0, project.EvaluatedItemsIgnoringCondition.Count, "A4");
         }
 
         [Test]
-        public void TestMultipleTrueWhen () {
+        public void TestMultipleTrueWhen()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
@@ -117,25 +124,26 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             //Assert.AreEqual (2, project.ItemGroups.Count, "A1");
-            Assert.AreEqual (0, project.PropertyGroups.Count, "A2");
-            Assert.AreEqual (1, project.EvaluatedItems.Count, "A3");
-            Assert.AreEqual ("A", project.EvaluatedItems[0].Name, "A4");
-            Assert.AreEqual (1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
+            Assert.AreEqual(0, project.PropertyGroups.Count, "A2");
+            Assert.AreEqual(1, project.EvaluatedItems.Count, "A3");
+            Assert.AreEqual("A", project.EvaluatedItems[0].Name, "A4");
+            Assert.AreEqual(1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
         }
 
         [Test]
-        public void TestMultipleFalseWhen () {
+        public void TestMultipleFalseWhen()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'False'"">
@@ -152,25 +160,27 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             //Assert.AreEqual (2, project.ItemGroups.Count, "A1");
-            Assert.AreEqual (0, project.PropertyGroups.Count, "A2");
-            Assert.AreEqual (0, project.EvaluatedItems.Count, "A3");
-            Assert.AreEqual (0, project.EvaluatedItemsIgnoringCondition.Count, "A4");
+            Assert.AreEqual(0, project.PropertyGroups.Count, "A2");
+            Assert.AreEqual(0, project.EvaluatedItems.Count, "A3");
+            Assert.AreEqual(0, project.EvaluatedItemsIgnoringCondition.Count, "A4");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidProjectFileException))]
-        public void TestMissingWhen () {
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestMissingWhen()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             // a <Choose> requires at least one <When>
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <Otherwise>
@@ -182,20 +192,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidProjectFileException))]
-        public void TestMissingConditionWhen () {
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestMissingConditionWhen()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             // a <When> requires a Condition
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When>
@@ -207,18 +219,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
         }
 
         [Test]
-        public void TestWhenOtherwise1 () {
+        public void TestWhenOtherwise1()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
@@ -235,24 +249,26 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             //Assert.AreEqual (2, project.ItemGroups.Count, "A1");
-            Assert.AreEqual (0, project.PropertyGroups.Count, "A2");
-            Assert.AreEqual (1, project.EvaluatedItems.Count, "A3");
-            Assert.AreEqual ("A", project.EvaluatedItems[0].Name, "A4");
-            Assert.AreEqual (1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
+            Assert.AreEqual(0, project.PropertyGroups.Count, "A2");
+            Assert.AreEqual(1, project.EvaluatedItems.Count, "A3");
+            Assert.AreEqual("A", project.EvaluatedItems[0].Name, "A4");
+            Assert.AreEqual(1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
         }
 
         [Test]
-        public void TestWhenOtherwise2 () {
+        public void TestWhenOtherwise2()
+        {
             Engine engine;
             Project project;
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
-            string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'False'"">
@@ -269,21 +285,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             //Assert.AreEqual (2, project.ItemGroups.Count, "A1");
-            Assert.AreEqual (0, project.PropertyGroups.Count, "A2");
-            Assert.AreEqual (1, project.EvaluatedItems.Count, "A3");
-            Assert.AreEqual ("B", project.EvaluatedItems[0].Name, "A4");
-            Assert.AreEqual (1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
+            Assert.AreEqual(0, project.PropertyGroups.Count, "A2");
+            Assert.AreEqual(1, project.EvaluatedItems.Count, "A3");
+            Assert.AreEqual("B", project.EvaluatedItems[0].Name, "A4");
+            Assert.AreEqual(1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
         }
-		
-		[Test]
-        public void ChooseWhenPropertyGroup () {
-            
-			string documentString = @"
+
+        [Test]
+        public void ChooseWhenPropertyGroup()
+        {
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
@@ -300,17 +317,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			Engine engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-			
-			Assert.AreEqual ("Bar", project.GetEvaluatedProperty ("Foo"), "A1");
+            Engine engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+
+            Assert.AreEqual("Bar", project.GetEvaluatedProperty("Foo"), "A1");
         }
-		
-		[Test]
-        public void ChooseOtherwisePropertyGroup () {
-            
-			string documentString = @"
+
+        [Test]
+        public void ChooseOtherwisePropertyGroup()
+        {
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'dummy'"">
@@ -327,17 +345,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			Engine engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-			
-			Assert.AreEqual ("Baz", project.GetEvaluatedProperty ("Foo"), "A1");
+            Engine engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+
+            Assert.AreEqual("Baz", project.GetEvaluatedProperty("Foo"), "A1");
         }
-		
-		[Test]
-        public void NestedChooseInOtherwise () {
-            
-			string documentString = @"
+
+        [Test]
+        public void NestedChooseInOtherwise()
+        {
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'dummy'"">
@@ -363,18 +382,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			Engine engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-			
-			Assert.AreEqual ("Baz", project.GetEvaluatedProperty ("Foo"), "A1");
+            Engine engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+
+            Assert.AreEqual("Baz", project.GetEvaluatedProperty("Foo"), "A1");
         }
-		
-		
-		[Test]
-		public void UndefinedPropertyInExistsCondition()
-		{
-			string documentString = @"
+
+        [Test]
+        public void UndefinedPropertyInExistsCondition()
+        {
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<PropertyGroup>
 						<Foo>Bar</Foo>
@@ -398,17 +417,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			Engine engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-			
-			Assert.AreEqual ("no", project.GetEvaluatedProperty ("Exists"), "A1");
-		}
+            Engine engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		[Test]
-		public void EmptyExistsCondition()
-		{
-			string documentString = @"
+            Assert.AreEqual("no", project.GetEvaluatedProperty("Exists"), "A1");
+        }
+
+        [Test]
+        public void EmptyExistsCondition()
+        {
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Choose>
 						<When Condition=""Exists('$(UndefinedProperty)')"">
@@ -425,20 +445,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			Engine engine = new Engine (Consts.BinPath);
-			Project project = engine.CreateNewProject ();
-			//assign a real filename to be used as base path for the Exists
-			project.FullFileName = typeof (BuildChooseTest).Assembly.Location;
+            Engine engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            //assign a real filename to be used as base path for the Exists
+            project.FullFileName = typeof(BuildChooseTest).Assembly.Location;
 
-			project.LoadXml (documentString);
+            project.LoadXml(documentString);
 
-			Assert.AreEqual ("no", project.GetEvaluatedProperty ("Exists"), "A1");
-		}
-        
+            Assert.AreEqual("no", project.GetEvaluatedProperty("Exists"), "A1");
+        }
+
         [Test]
-        public void EvaluationOrder ()
+        public void EvaluationOrder()
         {
-            string documentString = @"
+            string documentString =
+                @"
                         <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                             <Choose>
                                 <When Condition=""true"">
@@ -459,10 +480,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </Project>
                     ";
 
-            Engine engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            Assert.AreEqual ("Bar", project.GetEvaluatedProperty ("Test"));
+            Engine engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.AreEqual("Bar", project.GetEvaluatedProperty("Test"));
         }
-	}
+    }
 }

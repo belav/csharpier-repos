@@ -37,7 +37,10 @@ namespace System.Web.Http.Owin
             IOwinResponse response = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => OwinResponseExtensions.DisableBuffering(response), "response");
+            Assert.ThrowsArgumentNull(
+                () => OwinResponseExtensions.DisableBuffering(response),
+                "response"
+            );
         }
 
         [Fact]
@@ -55,8 +58,13 @@ namespace System.Web.Http.Owin
         public void DisableBuffering_IfServerDisableResponseBufferingIsAbsent_DoesNotThrow()
         {
             // Arrange
-            Mock<IDictionary<string, object>> environmentMock = new Mock<IDictionary<string,object>>(MockBehavior.Strict);
-            IDictionary<string, object> environment = CreateStubEnvironment(null, hasDisableBufferingAction: false);
+            Mock<IDictionary<string, object>> environmentMock = new Mock<
+                IDictionary<string, object>
+            >(MockBehavior.Strict);
+            IDictionary<string, object> environment = CreateStubEnvironment(
+                null,
+                hasDisableBufferingAction: false
+            );
             IOwinResponse response = CreateStubResponse(environment);
 
             // Act & Assert
@@ -75,15 +83,25 @@ namespace System.Web.Http.Owin
             Assert.DoesNotThrow(() => response.DisableBuffering());
         }
 
-        private static IDictionary<string, object> CreateStubEnvironment(object disableBufferingAction)
+        private static IDictionary<string, object> CreateStubEnvironment(
+            object disableBufferingAction
+        )
         {
             return CreateStubEnvironment(disableBufferingAction, hasDisableBufferingAction: true);
         }
 
-        private static IDictionary<string, object> CreateStubEnvironment(object disableBufferingAction, bool hasDisableBufferingAction)
+        private static IDictionary<string, object> CreateStubEnvironment(
+            object disableBufferingAction,
+            bool hasDisableBufferingAction
+        )
         {
-            Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
-            mock.Setup(d => d.TryGetValue("server.DisableResponseBuffering", out disableBufferingAction)).Returns(hasDisableBufferingAction);
+            Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>(
+                MockBehavior.Strict
+            );
+            mock.Setup(d =>
+                    d.TryGetValue("server.DisableResponseBuffering", out disableBufferingAction)
+                )
+                .Returns(hasDisableBufferingAction);
             return mock.Object;
         }
 

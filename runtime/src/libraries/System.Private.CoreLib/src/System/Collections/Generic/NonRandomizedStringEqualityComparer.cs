@@ -13,15 +13,21 @@ namespace System.Collections.Generic
     // randomized string hashing.
     [Serializable] // Required for compatibility with .NET Core 2.0 as we exposed the NonRandomizedStringEqualityComparer inside the serialization blob
     // Needs to be public to support binary serialization compatibility
-    public class NonRandomizedStringEqualityComparer : IEqualityComparer<string?>, IInternalStringEqualityComparer, ISerializable
+    public class NonRandomizedStringEqualityComparer
+        : IEqualityComparer<string?>,
+            IInternalStringEqualityComparer,
+            ISerializable
     {
         // Dictionary<...>.Comparer and similar methods need to return the original IEqualityComparer
         // that was passed in to the ctor. The caller chooses one of these singletons so that the
         // GetUnderlyingEqualityComparer method can return the correct value.
 
-        private static readonly NonRandomizedStringEqualityComparer WrappedAroundDefaultComparer = new OrdinalComparer(EqualityComparer<string?>.Default);
-        private static readonly NonRandomizedStringEqualityComparer WrappedAroundStringComparerOrdinal = new OrdinalComparer(StringComparer.Ordinal);
-        private static readonly NonRandomizedStringEqualityComparer WrappedAroundStringComparerOrdinalIgnoreCase = new OrdinalIgnoreCaseComparer(StringComparer.OrdinalIgnoreCase);
+        private static readonly NonRandomizedStringEqualityComparer WrappedAroundDefaultComparer =
+            new OrdinalComparer(EqualityComparer<string?>.Default);
+        private static readonly NonRandomizedStringEqualityComparer WrappedAroundStringComparerOrdinal =
+            new OrdinalComparer(StringComparer.Ordinal);
+        private static readonly NonRandomizedStringEqualityComparer WrappedAroundStringComparerOrdinalIgnoreCase =
+            new OrdinalIgnoreCaseComparer(StringComparer.OrdinalIgnoreCase);
 
         private readonly IEqualityComparer<string?> _underlyingComparer;
 
@@ -32,12 +38,17 @@ namespace System.Collections.Generic
         }
 
         // This is used by the serialization engine.
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected NonRandomizedStringEqualityComparer(SerializationInfo information, StreamingContext context)
-            : this(EqualityComparer<string?>.Default)
-        {
-        }
+        protected NonRandomizedStringEqualityComparer(
+            SerializationInfo information,
+            StreamingContext context
+        )
+            : this(EqualityComparer<string?>.Default) { }
 
         public virtual bool Equals(string? x, string? y)
         {
@@ -62,7 +73,8 @@ namespace System.Collections.Generic
 
         // Gets the comparer that should be returned back to the caller when querying the
         // ICollection.Comparer property. Also used for serialization purposes.
-        public virtual IEqualityComparer<string?> GetUnderlyingEqualityComparer() => _underlyingComparer;
+        public virtual IEqualityComparer<string?> GetUnderlyingEqualityComparer() =>
+            _underlyingComparer;
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -76,38 +88,43 @@ namespace System.Collections.Generic
         private sealed class OrdinalComparer : NonRandomizedStringEqualityComparer
         {
             internal OrdinalComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer)
-            {
-            }
+                : base(wrappedComparer) { }
 
             public override bool Equals(string? x, string? y) => string.Equals(x, y);
 
             public override int GetHashCode(string? obj)
             {
-                Debug.Assert(obj != null, "This implementation is only called from first-party collection types that guarantee non-null parameters.");
+                Debug.Assert(
+                    obj != null,
+                    "This implementation is only called from first-party collection types that guarantee non-null parameters."
+                );
                 return obj.GetNonRandomizedHashCode();
             }
-
         }
 
         private sealed class OrdinalIgnoreCaseComparer : NonRandomizedStringEqualityComparer
         {
             internal OrdinalIgnoreCaseComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer)
-            {
-            }
+                : base(wrappedComparer) { }
 
-            public override bool Equals(string? x, string? y) => string.EqualsOrdinalIgnoreCase(x, y);
+            public override bool Equals(string? x, string? y) =>
+                string.EqualsOrdinalIgnoreCase(x, y);
 
             public override int GetHashCode(string? obj)
             {
-                Debug.Assert(obj != null, "This implementation is only called from first-party collection types that guarantee non-null parameters.");
+                Debug.Assert(
+                    obj != null,
+                    "This implementation is only called from first-party collection types that guarantee non-null parameters."
+                );
                 return obj.GetNonRandomizedHashCodeOrdinalIgnoreCase();
             }
 
             internal override RandomizedStringEqualityComparer GetRandomizedEqualityComparer()
             {
-                return RandomizedStringEqualityComparer.Create(_underlyingComparer, ignoreCase: true);
+                return RandomizedStringEqualityComparer.Create(
+                    _underlyingComparer,
+                    ignoreCase: true
+                );
             }
         }
 

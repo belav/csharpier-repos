@@ -1,32 +1,31 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Xunit;
 
 public class Test
 {
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr Marshal_In([In]UIntPtr uintPtr);
+    private static extern UIntPtr Marshal_In([In] UIntPtr uintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr Marshal_InOut([In, Out]UIntPtr uintPtr);
+    private static extern UIntPtr Marshal_InOut([In, Out] UIntPtr uintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr Marshal_Out([Out]UIntPtr uintPtr);
+    private static extern UIntPtr Marshal_Out([Out] UIntPtr uintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr MarshalPointer_In([In]ref UIntPtr puintPtr);
+    private static extern UIntPtr MarshalPointer_In([In] ref UIntPtr puintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
     private static extern UIntPtr MarshalPointer_InOut(ref UIntPtr puintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
     private static extern UIntPtr MarshalPointer_Out(out UIntPtr puintPtr);
-
 
     [Fact]
     public static void TestEntryPoint()

@@ -11,15 +11,13 @@ namespace System.Web.Http.ApiExplorer
         }
 
         [Route("attribute/mixed")]
-        public string Post([FromBody]string values)
+        public string Post([FromBody] string values)
         {
             return values;
         }
 
         [HttpDelete]
-        public void RemoveItem(int id)
-        {
-        }
+        public void RemoveItem(int id) { }
     }
 
     public class AttributedController : ApiController
@@ -97,9 +95,7 @@ namespace System.Web.Http.ApiExplorer
     public class PrefixedController : ApiController
     {
         // Should not be reachable be our routes since there's no route attribute.
-        public void Post()
-        {
-        }
+        public void Post() { }
 
         [Route("")]
         public string Get()

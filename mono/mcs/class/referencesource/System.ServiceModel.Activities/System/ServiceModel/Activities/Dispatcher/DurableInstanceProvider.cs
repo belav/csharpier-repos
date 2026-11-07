@@ -18,7 +18,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             this.serviceHost = serviceHost;
         }
 
-        //Dummy Instance stuffed onto InstanceContext        
+        //Dummy Instance stuffed onto InstanceContext
         object Instance
         {
             get
@@ -41,9 +41,6 @@ namespace System.ServiceModel.Activities.Dispatcher
             return this.Instance;
         }
 
-        public void ReleaseInstance(InstanceContext instanceContext, object instance)
-        {
-
-        }                
+        public void ReleaseInstance(InstanceContext instanceContext, object instance) { }
     }
 }

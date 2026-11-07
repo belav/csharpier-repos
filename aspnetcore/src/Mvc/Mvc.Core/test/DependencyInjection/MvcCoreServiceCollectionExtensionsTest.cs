@@ -120,9 +120,8 @@ public class MvcCoreServiceCollectionExtensionsTest
         // SingleRegistrationServiceTypes_AreNotRegistered_MultipleTimes already checks that no other
         // ApplicationPartManager (but manager) is registered.
         Assert.Same(manager, builder.PartManager);
-        Assert.Contains(
-            manager.FeatureProviders,
-            provider => provider is ControllerFeatureProvider
+        Assert.Contains(manager.FeatureProviders, provider =>
+            provider is ControllerFeatureProvider
         );
     }
 
@@ -143,9 +142,8 @@ public class MvcCoreServiceCollectionExtensionsTest
 
         // Assert
         Assert.Same(manager, builder.PartManager);
-        Assert.Contains(
-            manager.FeatureProviders,
-            provider => provider is ControllerFeatureProvider
+        Assert.Contains(manager.FeatureProviders, provider =>
+            provider is ControllerFeatureProvider
         );
     }
 
@@ -164,9 +162,8 @@ public class MvcCoreServiceCollectionExtensionsTest
         // Assert
         Assert.NotNull(builder.PartManager);
         Assert.Empty(builder.PartManager.ApplicationParts);
-        Assert.Contains(
-            builder.PartManager.FeatureProviders,
-            provider => provider is ControllerFeatureProvider
+        Assert.Contains(builder.PartManager.FeatureProviders, provider =>
+            provider is ControllerFeatureProvider
         );
 
         environment.VerifyAll();
@@ -191,9 +188,8 @@ public class MvcCoreServiceCollectionExtensionsTest
         // Assert
         Assert.NotNull(builder.PartManager);
         Assert.Empty(builder.PartManager.ApplicationParts);
-        Assert.Contains(
-            builder.PartManager.FeatureProviders,
-            provider => provider is ControllerFeatureProvider
+        Assert.Contains(builder.PartManager.FeatureProviders, provider =>
+            provider is ControllerFeatureProvider
         );
 
         environment.VerifyAll();
@@ -215,13 +211,11 @@ public class MvcCoreServiceCollectionExtensionsTest
 
         // Assert
         Assert.NotNull(builder.PartManager);
-        Assert.Contains(
-            builder.PartManager.ApplicationParts,
-            part => string.Equals(assemblyName.Name, part.Name, StringComparison.Ordinal)
+        Assert.Contains(builder.PartManager.ApplicationParts, part =>
+            string.Equals(assemblyName.Name, part.Name, StringComparison.Ordinal)
         );
-        Assert.Contains(
-            builder.PartManager.FeatureProviders,
-            provider => provider is ControllerFeatureProvider
+        Assert.Contains(builder.PartManager.FeatureProviders, provider =>
+            provider is ControllerFeatureProvider
         );
 
         environment.VerifyAll();

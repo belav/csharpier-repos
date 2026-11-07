@@ -38,7 +38,8 @@ public class ResourceUpdaterTests
         var peBuilder = new ManagedPEBuilder(
             PEHeaderBuilder.CreateExecutableHeader(),
             new MetadataRootBuilder(new MetadataBuilder()),
-            ilStream: new BlobBuilder());
+            ilStream: new BlobBuilder()
+        );
         var peImageBuilder = new BlobBuilder();
         peBuilder.Serialize(peImageBuilder);
         var tempFile = new TempFile();
@@ -183,11 +184,27 @@ public class ResourceUpdaterTests
         tempFile.Stream.Seek(0, SeekOrigin.Begin);
 
         using (var modified = new PEReader(tempFile.Stream, PEStreamOptions.LeaveOpen))
-        using (var assembly = new PEReader(File.Open(Assembly.GetExecutingAssembly().Location, FileMode.Open, FileAccess.Read, FileShare.Read)))
+        using (
+            var assembly = new PEReader(
+                File.Open(
+                    Assembly.GetExecutingAssembly().Location,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                )
+            )
+        )
         {
             var modifiedReader = new ResourceData(modified);
             var assemblyReader = new ResourceData(assembly);
-            foreach ((object nameObj, object typeObj, ushort language, byte[] data) in assemblyReader.GetAllResources())
+            foreach (
+                (
+                    object nameObj,
+                    object typeObj,
+                    ushort language,
+                    byte[] data
+                ) in assemblyReader.GetAllResources()
+            )
             {
                 byte[]? found;
                 switch (nameObj, typeObj)

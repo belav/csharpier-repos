@@ -24,13 +24,15 @@ namespace Microsoft.Extensions.Http.Logging
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
 
             // Act
             serviceCollection
                 .AddHttpClient("test")
                 .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler())
-                .RedactLoggedHeaders(new[] { "Authorization", "X-Sensitive", });
+                .RedactLoggedHeaders(new[] { "Authorization", "X-Sensitive" });
 
             // Assert
             var services = serviceCollection.BuildServiceProvider();
@@ -39,59 +41,79 @@ namespace Microsoft.Extensions.Http.Logging
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
             request.Headers.Authorization = new AuthenticationHeaderValue("fake", "secret value");
-            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true, };
+            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
             await client.SendAsync(request);
 
             var messages = sink.Writes.ToArray();
 
-            var message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Request Headers:
+            var message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Request Headers:
 Authorization: *
 Cache-Control: no-cache
-"), message.Message);
+"
+                ),
+                message.Message
+            );
 
-            message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Request Headers:
+            message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Request Headers:
 Authorization: *
 Cache-Control: no-cache
-"), message.Message);
+"
+                ),
+                message.Message
+            );
 
-            message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Response Headers:
+            message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Response Headers:
 X-Sensitive: *
 Y-Non-Sensitive: innocuous value
-"), message.Message);
+"
+                ),
+                message.Message
+            );
 
-            message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Response Headers:
+            message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Response Headers:
 X-Sensitive: *
 Y-Non-Sensitive: innocuous value
-"), message.Message);
+"
+                ),
+                message.Message
+            );
         }
 
         [Fact]
@@ -102,7 +124,9 @@ Y-Non-Sensitive: innocuous value
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
 
             // Act
             serviceCollection
@@ -120,64 +144,87 @@ Y-Non-Sensitive: innocuous value
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
             request.Headers.Authorization = new AuthenticationHeaderValue("fake", "secret value");
-            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true, };
+            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
             await client.SendAsync(request);
 
             var messages = sink.Writes.ToArray();
 
-            var message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Request Headers:
+            var message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Request Headers:
 Authorization: *
 Cache-Control: no-cache
-"), message.Message);
+"
+                ),
+                message.Message
+            );
 
-            message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Request Headers:
+            message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Request Headers:
 Authorization: *
 Cache-Control: no-cache
-"), message.Message);
+"
+                ),
+                message.Message
+            );
 
-            message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Response Headers:
+            message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Response Headers:
 X-Sensitive: *
 Y-Non-Sensitive: innocuous value
-"), message.Message);
+"
+                ),
+                message.Message
+            );
 
-            message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-            }));
-            Assert.StartsWith(LineEndingsHelper.Normalize(
-@"Response Headers:
+            message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
+            );
+            Assert.StartsWith(
+                LineEndingsHelper.Normalize(
+                    @"Response Headers:
 X-Sensitive: *
 Y-Non-Sensitive: innocuous value
-"), message.Message);
+"
+                ),
+                message.Message
+            );
         }
 
         private class TestMessageHandler : HttpClientHandler
         {
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 var response = new HttpResponseMessage();
                 response.Headers.Add("X-Sensitive", "secret value");

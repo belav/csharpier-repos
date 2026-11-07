@@ -41,20 +41,22 @@ namespace System.Web.Http.ModelBinding
         public void BindModel_SuccessfulBind_RunsValidationAndReturnsModel()
         {
             // Arrange
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(GetHttpControllerContext());
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                GetHttpControllerContext()
+            );
             bool validationCalled = false;
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 //ModelState = executionContext.Controller.ViewData.ModelState,
                 //PropertyFilter = _ => true,
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "someName", "dummyValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "someName", "dummyValue" } },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -68,9 +70,13 @@ namespace System.Web.Http.ModelBinding
                         Assert.Same(bindingContext.ValueProvider, mbc.ValueProvider);
 
                         mbc.Model = 42;
-                        mbc.ValidationNode.Validating += delegate { validationCalled = true; };
+                        mbc.ValidationNode.Validating += delegate
+                        {
+                            validationCalled = true;
+                        };
                         return true;
-                    });
+                    }
+                );
 
             //binderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, false /* suppressPrefixCheck */);
             IModelBinder shimBinder = new CompositeModelBinder(mockIntBinder.Object);
@@ -89,7 +95,9 @@ namespace System.Web.Http.ModelBinding
         public void BindModel_SuccessfulBind_ComplexTypeFallback_RunsValidationAndReturnsModel()
         {
             // Arrange
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(GetHttpControllerContext());
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                GetHttpControllerContext()
+            );
 
             bool validationCalled = false;
             List<int> expectedModel = new List<int> { 1, 2, 3, 4, 5 };
@@ -97,14 +105,14 @@ namespace System.Web.Http.ModelBinding
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(List<int>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(List<int>)
+                ),
                 ModelName = "someName",
                 //ModelState = executionContext.Controller.ViewData.ModelState,
                 //PropertyFilter = _ => true,
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "someOtherName", "dummyValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "someOtherName", "dummyValue" } },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -123,9 +131,13 @@ namespace System.Web.Http.ModelBinding
                         Assert.Same(bindingContext.ValueProvider, mbc.ValueProvider);
 
                         mbc.Model = expectedModel;
-                        mbc.ValidationNode.Validating += delegate { validationCalled = true; };
+                        mbc.ValidationNode.Validating += delegate
+                        {
+                            validationCalled = true;
+                        };
                         return true;
-                    });
+                    }
+                );
 
             //binderProviders.RegisterBinderForType(typeof(List<int>), mockIntBinder.Object, false /* suppressPrefixCheck */);
             IModelBinder shimBinder = new CompositeModelBinder(mockIntBinder.Object);
@@ -144,16 +156,24 @@ namespace System.Web.Http.ModelBinding
         public void BindModel_UnsuccessfulBind_BinderFails_ReturnsNull()
         {
             // Arrange
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(GetHttpControllerContext());
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                GetHttpControllerContext()
+            );
             Mock<IModelBinder> mockListBinder = new Mock<IModelBinder>();
-            mockListBinder.Setup(o => o.BindModel(actionContext, It.IsAny<ModelBindingContext>())).Returns(false).Verifiable();
+            mockListBinder
+                .Setup(o => o.BindModel(actionContext, It.IsAny<ModelBindingContext>()))
+                .Returns(false)
+                .Verifiable();
 
             IModelBinder shimBinder = (IModelBinder)mockListBinder.Object;
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = false,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(List<int>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(List<int>)
+                ),
                 //ModelState = executionContext.Controller.ViewData.ModelState
             };
 
@@ -171,20 +191,32 @@ namespace System.Web.Http.ModelBinding
         public void BindModel_UnsuccessfulBind_SimpleTypeNoFallback_ReturnsNull()
         {
             // Arrange
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(GetHttpControllerContext());
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                GetHttpControllerContext()
+            );
             Mock<ModelBinderProvider> mockBinderProvider = new Mock<ModelBinderProvider>();
-            mockBinderProvider.Setup(o => o.GetBinder(It.IsAny<HttpConfiguration>(), It.IsAny<Type>())).Returns((IModelBinder)null).Verifiable();
+            mockBinderProvider
+                .Setup(o => o.GetBinder(It.IsAny<HttpConfiguration>(), It.IsAny<Type>()))
+                .Returns((IModelBinder)null)
+                .Verifiable();
             List<ModelBinderProvider> binderProviders = new List<ModelBinderProvider>()
             {
-                mockBinderProvider.Object
+                mockBinderProvider.Object,
             };
-            CompositeModelBinderProvider shimBinderProvider = new CompositeModelBinderProvider(binderProviders);
-            CompositeModelBinder shimBinder = new CompositeModelBinder(shimBinderProvider.GetBinder(null, null));
+            CompositeModelBinderProvider shimBinderProvider = new CompositeModelBinderProvider(
+                binderProviders
+            );
+            CompositeModelBinder shimBinder = new CompositeModelBinder(
+                shimBinderProvider.GetBinder(null, null)
+            );
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 //ModelState = executionContext.Controller.ViewData.ModelState
             };
 
@@ -196,7 +228,10 @@ namespace System.Web.Http.ModelBinding
             Assert.Null(bindingContext.Model);
             Assert.True(bindingContext.ModelState.IsValid);
             mockBinderProvider.Verify();
-            mockBinderProvider.Verify(o => o.GetBinder(It.IsAny<HttpConfiguration>(), It.IsAny<Type>()), Times.AtMostOnce());
+            mockBinderProvider.Verify(
+                o => o.GetBinder(It.IsAny<HttpConfiguration>(), It.IsAny<Type>()),
+                Times.AtMostOnce()
+            );
         }
 
         private static HttpControllerContext GetHttpControllerContext()
@@ -204,9 +239,7 @@ namespace System.Web.Http.ModelBinding
             return ContextUtil.CreateControllerContext();
         }
 
-        private class SimpleController : ApiController
-        {
-        }
+        private class SimpleController : ApiController { }
 
         private class SimpleModel
         {
@@ -219,9 +252,7 @@ namespace System.Web.Http.ModelBinding
             private readonly CultureInfo _culture;
 
             public SimpleValueProvider()
-                : this(null)
-            {
-            }
+                : this(null) { }
 
             public SimpleValueProvider(CultureInfo culture)
                 : base(StringComparer.OrdinalIgnoreCase)
@@ -268,7 +299,11 @@ namespace System.Web.Http.ModelBinding
                 object rawValue;
                 if (TryGetValue(key, out rawValue))
                 {
-                    return new ValueProviderResult(rawValue, Convert.ToString(rawValue, _culture), _culture);
+                    return new ValueProviderResult(
+                        rawValue,
+                        Convert.ToString(rawValue, _culture),
+                        _culture
+                    );
                 }
                 else
                 {

@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -21,16 +20,21 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
     // requires minimized browser or browser tab out of focus, browser can't be headless
     // requires --enable-features=IntensiveWakeUpThrottling:grace_period_seconds/1 chromeDriver flags
     // doesn't work with --disable-background-timer-throttling
-    [TestCaseOrderer("System.Net.WebSockets.Client.Wasm.Tests.AlphabeticalOrderer", "System.Net.WebSockets.Client.Wasm.Tests")]
+    [TestCaseOrderer(
+        "System.Net.WebSockets.Client.Wasm.Tests.AlphabeticalOrderer",
+        "System.Net.WebSockets.Client.Wasm.Tests"
+    )]
     public class BrowserTimerThrottlingTest : ClientWebSocketTestBase
     {
-        public static bool IsBrowser => RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"));
+        public static bool IsBrowser =>
+            RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"));
         const double moreThanLightThrottlingThreshold = 1900;
         const double detectLightThrottlingThreshold = 900;
         const double webSocketMessageFrequency = 45000;
         const double fastTimeoutFrequency = 100;
 
-        public BrowserTimerThrottlingTest(ITestOutputHelper output) : base(output) { }
+        public BrowserTimerThrottlingTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(PlatformDetection.IsBrowser))]
         [OuterLoop] // involves long delay
@@ -74,11 +78,21 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
                 };
 
                 // test it for 10 minutes
-                try { await Task.Delay(10 * 60 * 1000, cts.Token); } catch (Exception) { }
+                try
+                {
+                    await Task.Delay(10 * 60 * 1000, cts.Token);
+                }
+                catch (Exception) { }
                 timer.Close();
             }
-            Assert.True(maxDelayMs > detectLightThrottlingThreshold, "Expect that it throttled lightly " + maxDelayMs);
-            Assert.True(maxDelayMs > moreThanLightThrottlingThreshold, "Expect that it was heavily throttled " + maxDelayMs);
+            Assert.True(
+                maxDelayMs > detectLightThrottlingThreshold,
+                "Expect that it throttled lightly " + maxDelayMs
+            );
+            Assert.True(
+                maxDelayMs > moreThanLightThrottlingThreshold,
+                "Expect that it was heavily throttled " + maxDelayMs
+            );
         }
 
         [ConditionalFact(nameof(WebSocketsSupported), nameof(PlatformDetection.IsBrowser))]
@@ -90,7 +104,13 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
             DateTime start = DateTime.Now;
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            using (ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(Test.Common.Configuration.WebSockets.RemoteEchoServer, TimeOutMilliseconds, _output))
+            using (
+                ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
+                    Test.Common.Configuration.WebSockets.RemoteEchoServer,
+                    TimeOutMilliseconds,
+                    _output
+                )
+            )
             {
                 await SendAndReceive(cws, "test");
                 using (var timer = new Timers.Timer(fastTimeoutFrequency))
@@ -132,32 +152,52 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
                     };
 
                     // test it for 10 minutes
-                    try { await Task.Delay(10 * 60 * 1000, cts.Token); } catch (Exception) { }
+                    try
+                    {
+                        await Task.Delay(10 * 60 * 1000, cts.Token);
+                    }
+                    catch (Exception) { }
                     timer.Close();
                 }
-                await cws.CloseAsync(WebSocketCloseStatus.NormalClosure, "WebSocketKeepsDotnetTimersOnlyLightlyThrottled", CancellationToken.None);
+                await cws.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "WebSocketKeepsDotnetTimersOnlyLightlyThrottled",
+                    CancellationToken.None
+                );
             }
-            Assert.True(maxDelayMs > detectLightThrottlingThreshold, "Expect that it throttled lightly " + maxDelayMs);
-            Assert.True(maxDelayMs < moreThanLightThrottlingThreshold, "Expect that it wasn't heavily throttled " + maxDelayMs);
+            Assert.True(
+                maxDelayMs > detectLightThrottlingThreshold,
+                "Expect that it throttled lightly " + maxDelayMs
+            );
+            Assert.True(
+                maxDelayMs < moreThanLightThrottlingThreshold,
+                "Expect that it wasn't heavily throttled " + maxDelayMs
+            );
         }
 
-        private async static Task SendAndReceive(ClientWebSocket cws, string message)
+        private static async Task SendAndReceive(ClientWebSocket cws, string message)
         {
             try
             {
                 byte[] buffer = Encoding.UTF8.GetBytes(message);
-                await cws.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                await cws.SendAsync(
+                    new ArraySegment<byte>(buffer),
+                    WebSocketMessageType.Text,
+                    true,
+                    CancellationToken.None
+                );
 
                 var receiveBuffer = new byte[100];
                 var receiveSegment = new ArraySegment<byte>(receiveBuffer);
-                WebSocketReceiveResult recvRet = await cws.ReceiveAsync(receiveSegment, CancellationToken.None);
+                WebSocketReceiveResult recvRet = await cws.ReceiveAsync(
+                    receiveSegment,
+                    CancellationToken.None
+                );
 #if DEBUG
                 Console.WriteLine("SendAndReceive");
 #endif
             }
-            catch (OperationCanceledException)
-            {
-            }
+            catch (OperationCanceledException) { }
 #if DEBUG
             catch (Exception ex)
             {
@@ -171,10 +211,16 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
     public class AlphabeticalOrderer : ITestCaseOrderer
     {
         public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases)
-                where TTestCase : ITestCase
+            where TTestCase : ITestCase
         {
             List<TTestCase> result = testCases.ToList();
-            result.Sort((x, y) => StringComparer.Ordinal.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
+            result.Sort(
+                (x, y) =>
+                    StringComparer.Ordinal.Compare(
+                        x.TestMethod.Method.Name,
+                        y.TestMethod.Method.Name
+                    )
+            );
             return result;
         }
     }

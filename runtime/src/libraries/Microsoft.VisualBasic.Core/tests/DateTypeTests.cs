@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.VisualBasic.Tests;
 using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic.Tests;
 using Xunit;
 
 namespace Microsoft.VisualBasic.CompilerServices.Tests
@@ -38,7 +38,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void FromString(string value, DateTime expected)
         {
             Assert.Equal(expected, DateType.FromString(value));
-            Assert.Equal(expected, DateType.FromString(value, System.Globalization.CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateType.FromString(value, System.Globalization.CultureInfo.InvariantCulture)
+            );
         }
 
         // The following conversions are not supported.

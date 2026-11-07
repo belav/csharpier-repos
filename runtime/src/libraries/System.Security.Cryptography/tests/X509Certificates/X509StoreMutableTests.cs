@@ -13,17 +13,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddToStoreTwice()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 store.Add(cert);
-                Assert.True(IsCertInStore(certOnly, store), "PfxData certificate was found after add");
+                Assert.True(
+                    IsCertInStore(certOnly, store),
+                    "PfxData certificate was found after add"
+                );
 
                 // No exception for duplicate item.
                 store.Add(cert);
@@ -37,22 +49,40 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddPrivateAfterPublic()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 store.Add(certOnly);
-                Assert.True(IsCertInStore(certOnly, store), "PfxData certificate was found after add");
-                Assert.False(StoreHasPrivateKey(store, certOnly), "Store has a private key for PfxData after public-only add");
+                Assert.True(
+                    IsCertInStore(certOnly, store),
+                    "PfxData certificate was found after add"
+                );
+                Assert.False(
+                    StoreHasPrivateKey(store, certOnly),
+                    "Store has a private key for PfxData after public-only add"
+                );
 
                 // Add the private key
                 store.Add(cert);
-                Assert.True(StoreHasPrivateKey(store, certOnly), "Store has a private key for PfxData after PFX add");
+                Assert.True(
+                    StoreHasPrivateKey(store, certOnly),
+                    "Store has a private key for PfxData after PFX add"
+                );
 
                 // Cleanup
                 store.Remove(certOnly);
@@ -63,23 +93,41 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddPublicAfterPrivate()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 // Add the private key
                 store.Add(cert);
-                Assert.True(IsCertInStore(certOnly, store), "PfxData certificate was found after add");
-                Assert.True(StoreHasPrivateKey(store, certOnly), "Store has a private key for PfxData after PFX add");
+                Assert.True(
+                    IsCertInStore(certOnly, store),
+                    "PfxData certificate was found after add"
+                );
+                Assert.True(
+                    StoreHasPrivateKey(store, certOnly),
+                    "Store has a private key for PfxData after PFX add"
+                );
 
                 // Add the public key with no private key
                 store.Add(certOnly);
-                Assert.True(StoreHasPrivateKey(store, certOnly), "Store has a private key for PfxData after public-only add");
+                Assert.True(
+                    StoreHasPrivateKey(store, certOnly),
+                    "Store has a private key for PfxData after public-only add"
+                );
 
                 // Cleanup
                 store.Remove(certOnly);
@@ -92,7 +140,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void VerifyRemove(bool withPrivateKey)
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var certWithPrivateKey = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var certWithPrivateKey = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(certWithPrivateKey.RawData))
             {
                 X509Certificate2 cert = withPrivateKey ? certWithPrivateKey : certOnly;
@@ -100,13 +154,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 // Defensive removal.  Sort of circular, but it's the best we can do.
                 store.Remove(cert);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 store.Add(cert);
                 Assert.True(IsCertInStore(cert, store), "PfxData certificate was found after add");
 
                 store.Remove(cert);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found after remove");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found after remove"
+                );
             }
         }
 
@@ -114,26 +174,44 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void RemovePublicDeletesPrivateKey()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(cert);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 // Add the private key
                 store.Add(cert);
                 Assert.True(IsCertInStore(cert, store), "PfxData certificate was found after add");
 
                 store.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found after remove");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found after remove"
+                );
 
                 // Add back the public key only
                 store.Add(certOnly);
-                Assert.True(IsCertInStore(cert, store), "PfxData certificate was found after public-only add");
-                Assert.False(StoreHasPrivateKey(store, cert), "Store has a private key for cert after public-only add");
+                Assert.True(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found after public-only add"
+                );
+                Assert.False(
+                    StoreHasPrivateKey(store, cert),
+                    "Store has a private key for cert after public-only add"
+                );
 
                 // Cleanup
                 store.Remove(certOnly);

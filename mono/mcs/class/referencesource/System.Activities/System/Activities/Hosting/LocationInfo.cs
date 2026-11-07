@@ -5,9 +5,9 @@
 namespace System.Activities.Hosting
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
     using System.Xml.Linq;
 
     [DataContract]
@@ -23,42 +23,24 @@ namespace System.Activities.Hosting
             this.Name = name;
             this.OwnerDisplayName = ownerDisplayName;
             this.Value = value;
-        }        
+        }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-            private set
-            {
-                this.name = value;
-            }
+            get { return this.name; }
+            private set { this.name = value; }
         }
-        
+
         public string OwnerDisplayName
         {
-            get
-            {
-                return this.ownerDisplayName;
-            }
-            private set
-            {
-                this.ownerDisplayName = value;
-            }
+            get { return this.ownerDisplayName; }
+            private set { this.ownerDisplayName = value; }
         }
-        
+
         public object Value
         {
-            get
-            {
-                return this.value;
-            }
-            private set
-            {
-                this.value = value;
-            }
+            get { return this.value; }
+            private set { this.value = value; }
         }
 
         [DataMember(Name = "Name")]

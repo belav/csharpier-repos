@@ -4,19 +4,19 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Microsoft.CodeAnalysis.ErrorReporting;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
+using Microsoft.CodeAnalysis.ErrorReporting;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 {
@@ -35,9 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             {
                 return JsonSerializer.Serialize(this, typeof(StringCopyPasteData));
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
-            {
-            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
 
             return null;
         }
@@ -49,15 +47,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
             try
             {
-                var value = JsonSerializer.Deserialize(JsonDocument.Parse(json), typeof(StringCopyPasteData));
+                var value = JsonSerializer.Deserialize(
+                    JsonDocument.Parse(json),
+                    typeof(StringCopyPasteData)
+                );
                 if (value is null)
                     return null;
 
                 return (StringCopyPasteData)value;
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
-            {
-            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
 
             return null;
         }
@@ -68,16 +67,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         /// expression that has been copied.  "interpreted" in this context means the actual value of the content that
         /// was selected, with things like escape characters embedded as the actual characters they represent.
         /// </summary>
-        public static StringCopyPasteData? TryCreate(IVirtualCharLanguageService virtualCharService, ExpressionSyntax stringExpression, TextSpan selectionSpan)
-            => stringExpression switch
+        public static StringCopyPasteData? TryCreate(
+            IVirtualCharLanguageService virtualCharService,
+            ExpressionSyntax stringExpression,
+            TextSpan selectionSpan
+        ) =>
+            stringExpression switch
             {
-                LiteralExpressionSyntax literal => TryCreateForLiteral(virtualCharService, literal, selectionSpan),
-                InterpolatedStringExpressionSyntax interpolatedString => TryCreateForInterpolatedString(virtualCharService, interpolatedString, selectionSpan),
+                LiteralExpressionSyntax literal => TryCreateForLiteral(
+                    virtualCharService,
+                    literal,
+                    selectionSpan
+                ),
+                InterpolatedStringExpressionSyntax interpolatedString =>
+                    TryCreateForInterpolatedString(
+                        virtualCharService,
+                        interpolatedString,
+                        selectionSpan
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(stringExpression.Kind()),
             };
 
-        private static StringCopyPasteData? TryCreateForLiteral(IVirtualCharLanguageService virtualCharService, LiteralExpressionSyntax literal, TextSpan span)
-            => TryGetContentForSpan(virtualCharService, literal.Token, span, out var content)
+        private static StringCopyPasteData? TryCreateForLiteral(
+            IVirtualCharLanguageService virtualCharService,
+            LiteralExpressionSyntax literal,
+            TextSpan span
+        ) =>
+            TryGetContentForSpan(virtualCharService, literal.Token, span, out var content)
                 ? new StringCopyPasteData(ImmutableArray.Create(content))
                 : null;
 
@@ -91,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             IVirtualCharLanguageService virtualCharService,
             SyntaxToken token,
             TextSpan selectionSpan,
-            [NotNullWhen(true)] out string? normalizedText)
+            [NotNullWhen(true)] out string? normalizedText
+        )
         {
             normalizedText = null;
 
@@ -101,8 +118,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 return false;
 
             // Then find the start/end of the token's characters that overlap with the selection span.
-            var firstOverlappingChar = virtualChars.FirstOrNull(vc => vc.Span.OverlapsWith(selectionSpan));
-            var lastOverlappingChar = virtualChars.LastOrNull(vc => vc.Span.OverlapsWith(selectionSpan));
+            var firstOverlappingChar = virtualChars.FirstOrNull(vc =>
+                vc.Span.OverlapsWith(selectionSpan)
+            );
+            var lastOverlappingChar = virtualChars.LastOrNull(vc =>
+                vc.Span.OverlapsWith(selectionSpan)
+            );
 
             if (firstOverlappingChar is null || lastOverlappingChar is null)
                 return false;
@@ -118,7 +139,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             var lastCharIndexInclusive = virtualChars.IndexOf(lastOverlappingChar.Value);
 
             // Grab that subsequence of characters and get the final interpreted string for it.
-            var subsequence = virtualChars.GetSubSequence(TextSpan.FromBounds(firstCharIndexInclusive, lastCharIndexInclusive + 1));
+            var subsequence = virtualChars.GetSubSequence(
+                TextSpan.FromBounds(firstCharIndexInclusive, lastCharIndexInclusive + 1)
+            );
             normalizedText = subsequence.CreateString();
             return true;
         }
@@ -127,9 +150,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             IVirtualCharLanguageService virtualCharService,
             SyntaxToken token,
             TextSpan selectionSpan,
-            out StringCopyPasteContent content)
+            out StringCopyPasteContent content
+        )
         {
-            if (!TryGetNormalizedStringForSpan(virtualCharService, token, selectionSpan, out var text))
+            if (
+                !TryGetNormalizedStringForSpan(
+                    virtualCharService,
+                    token,
+                    selectionSpan,
+                    out var text
+                )
+            )
             {
                 content = default;
                 return false;
@@ -144,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         private static StringCopyPasteData? TryCreateForInterpolatedString(
             IVirtualCharLanguageService virtualCharService,
             InterpolatedStringExpressionSyntax interpolatedString,
-            TextSpan selectionSpan)
+            TextSpan selectionSpan
+        )
         {
             using var _ = ArrayBuilder<StringCopyPasteContent>.GetInstance(out var result);
 
@@ -164,22 +196,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                         // string we have (normal, verbatim, raw).  So grab the token for it and determine it's actual
                         // interpreted value so we can paste it properly at the destination side.
                         var formatClause = (string?)null;
-                        if (interpolation.FormatClause != null &&
-                            !TryGetNormalizedStringForSpan(virtualCharService, interpolation.FormatClause.FormatStringToken, selectionSpan, out formatClause))
+                        if (
+                            interpolation.FormatClause != null
+                            && !TryGetNormalizedStringForSpan(
+                                virtualCharService,
+                                interpolation.FormatClause.FormatStringToken,
+                                selectionSpan,
+                                out formatClause
+                            )
+                        )
                         {
                             return null;
                         }
 
                         // Can grab the expression and alignment-clause as is.  That's just normal C# code, and will
                         // remain the same no matter what we past into.
-                        result.Add(StringCopyPasteContent.ForInterpolation(
-                            interpolation.Expression.ToFullString(),
-                            interpolation.AlignmentClause?.ToFullString(),
-                            formatClause));
+                        result.Add(
+                            StringCopyPasteContent.ForInterpolation(
+                                interpolation.Expression.ToFullString(),
+                                interpolation.AlignmentClause?.ToFullString(),
+                                formatClause
+                            )
+                        );
                     }
                     else if (interpolatedContent is InterpolatedStringTextSyntax stringText)
                     {
-                        if (!TryGetContentForSpan(virtualCharService, stringText.TextToken, selectionSpan, out var content))
+                        if (
+                            !TryGetContentForSpan(
+                                virtualCharService,
+                                stringText.TextToken,
+                                selectionSpan,
+                                out var content
+                            )
+                        )
                             return null;
 
                         result.Add(content);

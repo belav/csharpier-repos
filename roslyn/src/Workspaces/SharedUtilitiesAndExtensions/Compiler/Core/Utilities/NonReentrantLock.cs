@@ -5,7 +5,6 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
-
 #if WORKSPACE
 using Microsoft.CodeAnalysis.Internal.Log;
 #endif
@@ -57,13 +56,14 @@ namespace Roslyn.Utilities
         /// saves an allocation but a client may not safely further use this instance in a call to
         /// Monitor.Enter/Exit or in a "lock" statement.
         /// </param>
-        public NonReentrantLock(bool useThisInstanceForSynchronization = false)
-            => _syncLock = useThisInstanceForSynchronization ? this : new object();
+        public NonReentrantLock(bool useThisInstanceForSynchronization = false) =>
+            _syncLock = useThisInstanceForSynchronization ? this : new object();
 
         /// <summary>
         /// Shared factory for use in lazy initialization.
         /// </summary>
-        public static readonly Func<NonReentrantLock> Factory = () => new NonReentrantLock(useThisInstanceForSynchronization: true);
+        public static readonly Func<NonReentrantLock> Factory = () =>
+            new NonReentrantLock(useThisInstanceForSynchronization: true);
 
         /// <summary>
         /// Blocks the current thread until it can enter the <see cref="NonReentrantLock"/>, while observing a
@@ -101,7 +101,11 @@ namespace Roslyn.Utilities
                     }
                 }
 
-                cancellationTokenRegistration = cancellationToken.Register(s_cancellationTokenCanceledEventHandler, _syncLock, useSynchronizationContext: false);
+                cancellationTokenRegistration = cancellationToken.Register(
+                    s_cancellationTokenCanceledEventHandler,
+                    _syncLock,
+                    useSynchronizationContext: false
+                );
             }
 
             using (cancellationTokenRegistration)
@@ -122,7 +126,12 @@ namespace Roslyn.Utilities
                         // If cancelled, we throw. Trying to wait could lead to deadlock.
                         cancellationToken.ThrowIfCancellationRequested();
 #if WORKSPACE
-                        using (Logger.LogBlock(FunctionId.Misc_NonReentrantLock_BlockingWait, cancellationToken))
+                        using (
+                            Logger.LogBlock(
+                                FunctionId.Misc_NonReentrantLock_BlockingWait,
+                                cancellationToken
+                            )
+                        )
 #endif
                         {
                             // Another thread holds the lock. Wait until we get awoken either
@@ -161,25 +170,20 @@ namespace Roslyn.Utilities
         /// Determine if the lock is currently held by the calling thread.
         /// </summary>
         /// <returns>True if the lock is currently held by the calling thread.</returns>
-        public bool LockHeldByMe()
-            => this.IsOwnedByMe;
+        public bool LockHeldByMe() => this.IsOwnedByMe;
 
         /// <summary>
         /// Throw an exception if the lock is not held by the calling thread.
         /// </summary>
         /// <exception cref="InvalidOperationException">The lock is not currently held by the calling thread.</exception>
-        public void AssertHasLock()
-            => Contract.ThrowIfFalse(LockHeldByMe());
+        public void AssertHasLock() => Contract.ThrowIfFalse(LockHeldByMe());
 
         /// <summary>
         /// Checks if the lock is currently held.
         /// </summary>
         private bool IsLocked
         {
-            get
-            {
-                return _owningThreadId != 0;
-            }
+            get { return _owningThreadId != 0; }
         }
 
         /// <summary>
@@ -187,10 +191,7 @@ namespace Roslyn.Utilities
         /// </summary>
         private bool IsOwnedByMe
         {
-            get
-            {
-                return _owningThreadId == Environment.CurrentManagedThreadId;
-            }
+            get { return _owningThreadId == Environment.CurrentManagedThreadId; }
         }
 
         /// <summary>
@@ -215,7 +216,8 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Action object passed to a cancellation token registration.
         /// </summary>
-        private static readonly Action<object?> s_cancellationTokenCanceledEventHandler = CancellationTokenCanceledEventHandler;
+        private static readonly Action<object?> s_cancellationTokenCanceledEventHandler =
+            CancellationTokenCanceledEventHandler;
 
         /// <summary>
         /// Callback executed when a cancellation token is canceled during a Wait.
@@ -242,8 +244,7 @@ namespace Roslyn.Utilities
         /// </summary>
         public readonly struct SemaphoreDisposer(NonReentrantLock semaphore) : IDisposable
         {
-            public void Dispose()
-                => semaphore.Release();
+            public void Dispose() => semaphore.Release();
         }
     }
 }

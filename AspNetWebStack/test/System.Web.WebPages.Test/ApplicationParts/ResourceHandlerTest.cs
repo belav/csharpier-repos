@@ -44,8 +44,10 @@ namespace System.Web.WebPages.Test
             var resourceHandler = new ResourceHandler(applicationPart, "does-not-exist");
 
             // Act and Assert
-            Assert.Throws<HttpException>(() => resourceHandler.ProcessRequest(response.Object),
-                                                  "The resource file \"does-not-exist\" could not be found.");
+            Assert.Throws<HttpException>(
+                () => resourceHandler.ProcessRequest(response.Object),
+                "The resource file \"does-not-exist\" could not be found."
+            );
         }
 
         private static IResourceAssembly BuildAssembly(string name = "my-assembly")
@@ -54,9 +56,13 @@ namespace System.Web.WebPages.Test
             assembly.SetupGet(c => c.Name).Returns("my-assembly");
 
             byte[] content = Encoding.Default.GetBytes(_fileContent);
-            assembly.Setup(c => c.GetManifestResourceStream("my-assembly.bar.foo.jpg")).Returns(new MemoryStream(content));
+            assembly
+                .Setup(c => c.GetManifestResourceStream("my-assembly.bar.foo.jpg"))
+                .Returns(new MemoryStream(content));
 
-            assembly.Setup(c => c.GetManifestResourceNames()).Returns(new[] { "my-assembly.bar.foo.jpg" });
+            assembly
+                .Setup(c => c.GetManifestResourceNames())
+                .Returns(new[] { "my-assembly.bar.foo.jpg" });
 
             return assembly.Object;
         }

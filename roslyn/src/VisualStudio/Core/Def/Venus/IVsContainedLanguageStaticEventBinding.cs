@@ -19,39 +19,136 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
     [ComImport, Guid("22FF7776-2C9A-48C4-809F-39E5184CC32D"), ComConversionLoss, InterfaceType(1)]
     internal interface IVsContainedLanguageStaticEventBinding
     {
-        [PreserveSig, MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        [
+            PreserveSig,
+            MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)
+        ]
         int GetStaticEventBindingsForObject(
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszClassName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszObjectName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszClassName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszObjectName,
             out int pcMembers,
             IntPtr ppbstrEventNames,
             IntPtr ppbstrDisplayNames,
-            IntPtr ppbstrMemberIDs);
+            IntPtr ppbstrMemberIDs
+        );
 
-        [PreserveSig, MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        [
+            PreserveSig,
+            MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)
+        ]
         int RemoveStaticEventBinding(
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszClassName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszUniqueMemberID,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszObjectName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszNameOfEvent);
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszClassName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszUniqueMemberID,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszObjectName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszNameOfEvent
+        );
 
-        [PreserveSig, MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        [
+            PreserveSig,
+            MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)
+        ]
         int AddStaticEventBinding(
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszClassName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszUniqueMemberID,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszObjectName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszNameOfEvent);
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszClassName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszUniqueMemberID,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszObjectName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszNameOfEvent
+        );
 
-        [PreserveSig, MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        [
+            PreserveSig,
+            MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)
+        ]
         int EnsureStaticEventHandler(
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszClassName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszObjectTypeName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszObjectName,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszNameOfEvent,
-            [In, ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"), MarshalAs(UnmanagedType.LPWStr)] string pszEventHandlerName,
-            [In, ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSITEMID")] uint itemidInsertionPoint,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszClassName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszObjectTypeName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszObjectName,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszNameOfEvent,
+            [
+                In,
+                ComAliasName("Microsoft.VisualStudio.OLE.Interop.LPCWSTR"),
+                MarshalAs(UnmanagedType.LPWStr)
+            ]
+                string pszEventHandlerName,
+            [In, ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSITEMID")]
+                uint itemidInsertionPoint,
             [MarshalAs(UnmanagedType.BStr)] out string pbstrUniqueMemberID,
             [MarshalAs(UnmanagedType.BStr)] out string pbstrEventBody,
-            [Out, ComAliasName("Microsoft.VisualStudio.TextManager.Interop.TextSpan"), MarshalAs(UnmanagedType.LPArray)] TextSpan[] pSpanInsertionPoint);
+            [
+                Out,
+                ComAliasName("Microsoft.VisualStudio.TextManager.Interop.TextSpan"),
+                MarshalAs(UnmanagedType.LPArray)
+            ]
+                TextSpan[] pSpanInsertionPoint
+        );
     }
 }

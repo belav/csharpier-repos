@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,167 +36,175 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DataPagerFieldCollection : StateManagedCollection
-	{
-		enum KnownTypeIndexes
-		{
-			NextPreviousPagerField = 0,
-			NumericPagerField = 1,
-			TemplatePagerField = 2
-		}
-		
-		static readonly Type[] knownTypes = {
-			typeof (NextPreviousPagerField),
-			typeof (NumericPagerField),
-			typeof (TemplatePagerField)
-		};
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class DataPagerFieldCollection : StateManagedCollection
+    {
+        enum KnownTypeIndexes
+        {
+            NextPreviousPagerField = 0,
+            NumericPagerField = 1,
+            TemplatePagerField = 2,
+        }
 
-		static readonly object FieldsChangedEvent = new object ();
-		
-		IList list;
-		DataPager owner;
-		EventHandlerList events;
+        static readonly Type[] knownTypes =
+        {
+            typeof(NextPreviousPagerField),
+            typeof(NumericPagerField),
+            typeof(TemplatePagerField),
+        };
 
-		public event EventHandler FieldsChanged {
-			add { AddEventHandler (FieldsChangedEvent, value); }
-			remove { RemoveEventHandler (FieldsChangedEvent, value); }
-		}
-		
-		public DataPagerFieldCollection (DataPager dataPager)
-		{
-			list = (IList)this;
-			owner = dataPager;
-		}
+        static readonly object FieldsChangedEvent = new object();
 
-		public void Add (DataPagerField field)
-		{
-			list.Add (field);
-		}
+        IList list;
+        DataPager owner;
+        EventHandlerList events;
 
-		public DataPagerFieldCollection CloneFields (DataPager pager)
-		{
-			throw new NotImplementedException ();
-		}
+        public event EventHandler FieldsChanged
+        {
+            add { AddEventHandler(FieldsChangedEvent, value); }
+            remove { RemoveEventHandler(FieldsChangedEvent, value); }
+        }
 
-		public bool Contains (DataPagerField field)
-		{
-			return list.Contains (field);
-		}
+        public DataPagerFieldCollection(DataPager dataPager)
+        {
+            list = (IList)this;
+            owner = dataPager;
+        }
 
-		public void CopyTo (DataPagerField[] array, int index)
-		{
-		}
+        public void Add(DataPagerField field)
+        {
+            list.Add(field);
+        }
 
-		protected override object CreateKnownType (int index)
-		{
-			if (!Enum.IsDefined (typeof (KnownTypeIndexes), index))
-				throw new ArgumentOutOfRangeException ("index");
+        public DataPagerFieldCollection CloneFields(DataPager pager)
+        {
+            throw new NotImplementedException();
+        }
 
-			return Activator.CreateInstance (knownTypes [index]);
-		}
-		
-		protected override Type[] GetKnownTypes ()
-		{
-			return knownTypes;
-		}
+        public bool Contains(DataPagerField field)
+        {
+            return list.Contains(field);
+        }
 
-		public int IndexOf (DataPagerField field)
-		{
-			return list.IndexOf (field);
-		}
+        public void CopyTo(DataPagerField[] array, int index) { }
 
-		public void Insert (int index, DataPagerField field)
-		{
-			list.Insert (index, field);
-		}
+        protected override object CreateKnownType(int index)
+        {
+            if (!Enum.IsDefined(typeof(KnownTypeIndexes), index))
+                throw new ArgumentOutOfRangeException("index");
 
-		protected override void OnClearComplete ()
-		{
-			base.OnClearComplete ();
-			InvokeEvent (FieldsChangedEvent, EventArgs.Empty);
-		}
+            return Activator.CreateInstance(knownTypes[index]);
+        }
 
-		protected override void OnInsertComplete (int index, object value)
-		{
-			base.OnInsertComplete (index, value);
-			DataPagerField field = value as DataPagerField;
-			if (field == null)
-				return;
-			
-			field.SetDataPager (owner);
-			field.FieldChanged += new EventHandler (FieldHasChanged);
-			InvokeEvent (FieldsChangedEvent, EventArgs.Empty);
-		}
+        protected override Type[] GetKnownTypes()
+        {
+            return knownTypes;
+        }
 
-		protected override void OnRemoveComplete (int index, object value)
-		{
-			base.OnRemoveComplete (index, value);
-			DataPagerField field = value as DataPagerField;
-			if (field == null)
-				return;
+        public int IndexOf(DataPagerField field)
+        {
+            return list.IndexOf(field);
+        }
 
-			field.SetDataPager (null);
-			field.FieldChanged -= new EventHandler (FieldHasChanged);
-			InvokeEvent (FieldsChangedEvent, EventArgs.Empty);
-		}
+        public void Insert(int index, DataPagerField field)
+        {
+            list.Insert(index, field);
+        }
 
-		protected override void OnValidate (object o)
-		{
-			base.OnValidate (o);
-			DataPagerField field = o as DataPagerField;
-			if (field == null)
-				throw new ArgumentException ("is not an instance of the DataPagerField class or of one of its derived classes.", "o");
-		}
+        protected override void OnClearComplete()
+        {
+            base.OnClearComplete();
+            InvokeEvent(FieldsChangedEvent, EventArgs.Empty);
+        }
 
-		public void Remove (DataPagerField field)
-		{
-			list.Remove (field);
-		}
+        protected override void OnInsertComplete(int index, object value)
+        {
+            base.OnInsertComplete(index, value);
+            DataPagerField field = value as DataPagerField;
+            if (field == null)
+                return;
 
-		public void RemoveAt (int index)
-		{
-			list.RemoveAt (index);
-		}
+            field.SetDataPager(owner);
+            field.FieldChanged += new EventHandler(FieldHasChanged);
+            InvokeEvent(FieldsChangedEvent, EventArgs.Empty);
+        }
 
-		protected override void SetDirtyObject (object o)
-		{
-		}
+        protected override void OnRemoveComplete(int index, object value)
+        {
+            base.OnRemoveComplete(index, value);
+            DataPagerField field = value as DataPagerField;
+            if (field == null)
+                return;
 
-		[BrowsableAttribute(false)]
-		public DataPagerField this [int index] {
-			get { return list [index] as DataPagerField; }
-		}
+            field.SetDataPager(null);
+            field.FieldChanged -= new EventHandler(FieldHasChanged);
+            InvokeEvent(FieldsChangedEvent, EventArgs.Empty);
+        }
 
-		void FieldHasChanged (object sender, EventArgs args)
-		{
-			InvokeEvent (FieldsChangedEvent, EventArgs.Empty);
-		}
+        protected override void OnValidate(object o)
+        {
+            base.OnValidate(o);
+            DataPagerField field = o as DataPagerField;
+            if (field == null)
+                throw new ArgumentException(
+                    "is not an instance of the DataPagerField class or of one of its derived classes.",
+                    "o"
+                );
+        }
 
-		void AddEventHandler (object key, EventHandler handler)
-		{
-			if (events == null)
-				events = new EventHandlerList ();
-			events.AddHandler (key, handler);
-		}
+        public void Remove(DataPagerField field)
+        {
+            list.Remove(field);
+        }
 
-		void RemoveEventHandler (object key, EventHandler handler)
-		{
-			if (events == null)
-				return;
-			events.RemoveHandler (key, handler);
-		}
+        public void RemoveAt(int index)
+        {
+            list.RemoveAt(index);
+        }
 
-		void InvokeEvent (object key, EventArgs args)
-		{
-			if (events == null)
-				return;
+        protected override void SetDirtyObject(object o) { }
 
-			EventHandler eh = events [key] as EventHandler;
-			if (eh == null)
-				return;
-			eh (this, args);
-		}
-	}
+        [BrowsableAttribute(false)]
+        public DataPagerField this[int index]
+        {
+            get { return list[index] as DataPagerField; }
+        }
+
+        void FieldHasChanged(object sender, EventArgs args)
+        {
+            InvokeEvent(FieldsChangedEvent, EventArgs.Empty);
+        }
+
+        void AddEventHandler(object key, EventHandler handler)
+        {
+            if (events == null)
+                events = new EventHandlerList();
+            events.AddHandler(key, handler);
+        }
+
+        void RemoveEventHandler(object key, EventHandler handler)
+        {
+            if (events == null)
+                return;
+            events.RemoveHandler(key, handler);
+        }
+
+        void InvokeEvent(object key, EventArgs args)
+        {
+            if (events == null)
+                return;
+
+            EventHandler eh = events[key] as EventHandler;
+            if (eh == null)
+                return;
+            eh(this, args);
+        }
+    }
 }

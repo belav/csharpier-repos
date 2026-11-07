@@ -15,7 +15,12 @@ namespace RunTests
 {
     internal sealed class ProcessTestExecutor
     {
-        public static string BuildRspFileContents(WorkItemInfo workItem, Options options, string xmlResultsFilePath, string? htmlResultsFilePath)
+        public static string BuildRspFileContents(
+            WorkItemInfo workItem,
+            Options options,
+            string xmlResultsFilePath,
+            string? htmlResultsFilePath
+        )
         {
             var fileContentsBuilder = new StringBuilder();
 
@@ -50,14 +55,19 @@ namespace RunTests
             // Helix timeout is 15 minutes as helix jobs fully timeout in 30minutes.  So in order to capture dumps we need the timeout
             // to be 2x shorter than the expected test run time (15min) in case only the last test hangs.
             var timeout = options.UseHelix ? "15minutes" : "25minutes";
-            fileContentsBuilder.AppendLine($"/Blame:{blameOption};TestTimeout={timeout};DumpType=full");
+            fileContentsBuilder.AppendLine(
+                $"/Blame:{blameOption};TestTimeout={timeout};DumpType=full"
+            );
 
             // Specifies the results directory - this is where dumps from the blame options will get published.
             fileContentsBuilder.AppendLine($"/ResultsDirectory:{options.TestResultsDirectory}");
 
             // Build the filter string
             var filterStringBuilder = new StringBuilder();
-            var filters = workItem.Filters.Values.SelectMany(filter => filter).Where(filter => !string.IsNullOrEmpty(filter.FullyQualifiedName)).ToImmutableArray();
+            var filters = workItem
+                .Filters.Values.SelectMany(filter => filter)
+                .Where(filter => !string.IsNullOrEmpty(filter.FullyQualifiedName))
+                .ToImmutableArray();
 
             if (filters.Length > 0 || !string.IsNullOrWhiteSpace(options.TestFilter))
             {
@@ -96,24 +106,45 @@ namespace RunTests
         {
             var dotnetDir = Path.GetDirectoryName(dotnetPath)!;
             var sdkDir = Path.Combine(dotnetDir, "sdk");
-            var vsTestConsolePath = Directory.EnumerateFiles(sdkDir, "vstest.console.dll", SearchOption.AllDirectories).Last();
+            var vsTestConsolePath = Directory
+                .EnumerateFiles(sdkDir, "vstest.console.dll", SearchOption.AllDirectories)
+                .Last();
             return vsTestConsolePath;
         }
 
-        public static string GetResultsFilePath(WorkItemInfo workItemInfo, Options options, string suffix = "xml")
+        public static string GetResultsFilePath(
+            WorkItemInfo workItemInfo,
+            Options options,
+            string suffix = "xml"
+        )
         {
-            var fileName = $"WorkItem_{workItemInfo.PartitionIndex}_{options.Architecture}_test_results.{suffix}";
+            var fileName =
+                $"WorkItem_{workItemInfo.PartitionIndex}_{options.Architecture}_test_results.{suffix}";
             return Path.Combine(options.TestResultsDirectory, fileName);
         }
 
-        public async Task<TestResult> RunTestAsync(WorkItemInfo workItemInfo, Options options, CancellationToken cancellationToken)
+        public async Task<TestResult> RunTestAsync(
+            WorkItemInfo workItemInfo,
+            Options options,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 var resultsFilePath = GetResultsFilePath(workItemInfo, options);
-                var htmlResultsFilePath = options.IncludeHtml ? GetResultsFilePath(workItemInfo, options, "html") : null;
-                var rspFileContents = BuildRspFileContents(workItemInfo, options, resultsFilePath, htmlResultsFilePath);
-                var rspFilePath = Path.Combine(getRspDirectory(), $"vstest_{workItemInfo.PartitionIndex}.rsp");
+                var htmlResultsFilePath = options.IncludeHtml
+                    ? GetResultsFilePath(workItemInfo, options, "html")
+                    : null;
+                var rspFileContents = BuildRspFileContents(
+                    workItemInfo,
+                    options,
+                    resultsFilePath,
+                    htmlResultsFilePath
+                );
+                var rspFilePath = Path.Combine(
+                    getRspDirectory(),
+                    $"vstest_{workItemInfo.PartitionIndex}.rsp"
+                );
                 File.WriteAllText(rspFilePath, rspFileContents);
 
                 var vsTestConsolePath = GetVsTestConsolePath(options.DotnetFilePath);
@@ -140,15 +171,21 @@ namespace RunTests
                         commandLineArguments,
                         displayWindow: false,
                         captureOutput: true,
-                        environmentVariables: environmentVariables),
+                        environmentVariables: environmentVariables
+                    ),
                     lowPriority: false,
-                    cancellationToken: cancellationToken);
-                Logger.Log($"Create xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName}");
+                    cancellationToken: cancellationToken
+                );
+                Logger.Log(
+                    $"Create xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName}"
+                );
 
                 var xunitProcessResult = await dotnetProcessInfo.Result;
                 var span = DateTime.UtcNow - start;
 
-                Logger.Log($"Exit xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName} with code {xunitProcessResult.ExitCode}");
+                Logger.Log(
+                    $"Exit xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName} with code {xunitProcessResult.ExitCode}"
+                );
                 processResultList.Add(xunitProcessResult);
 
                 if (xunitProcessResult.ExitCode != 0)
@@ -176,9 +213,13 @@ namespace RunTests
                     }
                 }
 
-                Logger.Log($"Command line {workItemInfo.DisplayName} completed in {span.TotalSeconds} seconds: {options.DotnetFilePath} {commandLineArguments}");
-                var standardOutput = string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
-                var errorOutput = string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
+                Logger.Log(
+                    $"Command line {workItemInfo.DisplayName} completed in {span.TotalSeconds} seconds: {options.DotnetFilePath} {commandLineArguments}"
+                );
+                var standardOutput =
+                    string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
+                var errorOutput =
+                    string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
 
                 var testResultInfo = new TestResultInfo(
                     exitCode: xunitProcessResult.ExitCode,
@@ -186,13 +227,15 @@ namespace RunTests
                     htmlResultsFilePath: htmlResultsFilePath,
                     elapsed: span,
                     standardOutput: standardOutput,
-                    errorOutput: errorOutput);
+                    errorOutput: errorOutput
+                );
 
                 return new TestResult(
                     workItemInfo,
                     testResultInfo,
                     commandLineArguments,
-                    processResults: ImmutableArray.CreateRange(processResultList));
+                    processResults: ImmutableArray.CreateRange(processResultList)
+                );
 
                 string getRspDirectory()
                 {
@@ -202,14 +245,21 @@ namespace RunTests
                         return Directory.GetCurrentDirectory();
                     }
 
-                    var dirPath = Path.Combine(options.ArtifactsDirectory, "tmp", options.Configuration, "vstest-rsp");
+                    var dirPath = Path.Combine(
+                        options.ArtifactsDirectory,
+                        "tmp",
+                        options.Configuration,
+                        "vstest-rsp"
+                    );
                     Directory.CreateDirectory(dirPath);
                     return dirPath;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Unable to run {workItemInfo.DisplayName} with {options.DotnetFilePath}. {ex}");
+                throw new Exception(
+                    $"Unable to run {workItemInfo.DisplayName} with {options.DotnetFilePath}. {ex}"
+                );
             }
         }
     }

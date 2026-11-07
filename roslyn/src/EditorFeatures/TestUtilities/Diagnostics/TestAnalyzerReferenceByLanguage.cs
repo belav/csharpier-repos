@@ -11,9 +11,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal class TestAnalyzerReferenceByLanguage : AnalyzerReference
     {
-        private readonly IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> _analyzersMap;
+        private readonly IReadOnlyDictionary<
+            string,
+            ImmutableArray<DiagnosticAnalyzer>
+        > _analyzersMap;
 
-        public TestAnalyzerReferenceByLanguage(IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzersMap, string? fullPath = null)
+        public TestAnalyzerReferenceByLanguage(
+            IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzersMap,
+            string? fullPath = null
+        )
         {
             _analyzersMap = analyzersMap;
             FullPath = fullPath;
@@ -23,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public override string Display => nameof(TestAnalyzerReferenceByLanguage);
         public override object Id => Display;
 
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages()
-            => _analyzersMap.SelectManyAsArray(kvp => kvp.Value);
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+            _analyzersMap.SelectManyAsArray(kvp => kvp.Value);
 
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language)
         {
@@ -36,11 +42,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return ImmutableArray<DiagnosticAnalyzer>.Empty;
         }
 
-        public TestAnalyzerReferenceByLanguage WithAdditionalAnalyzers(string language, IEnumerable<DiagnosticAnalyzer> analyzers)
+        public TestAnalyzerReferenceByLanguage WithAdditionalAnalyzers(
+            string language,
+            IEnumerable<DiagnosticAnalyzer> analyzers
+        )
         {
             var newAnalyzersMap = ImmutableDictionary.CreateRange(
-                _analyzersMap.Select(kvp => new KeyValuePair<string, ImmutableArray<DiagnosticAnalyzer>>(
-                    kvp.Key, kvp.Key == language ? kvp.Value.AddRange(analyzers) : kvp.Value)));
+                _analyzersMap.Select(kvp => new KeyValuePair<
+                    string,
+                    ImmutableArray<DiagnosticAnalyzer>
+                >(kvp.Key, kvp.Key == language ? kvp.Value.AddRange(analyzers) : kvp.Value))
+            );
             return new(newAnalyzersMap);
         }
     }

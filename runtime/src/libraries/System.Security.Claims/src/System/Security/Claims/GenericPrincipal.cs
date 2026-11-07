@@ -52,7 +52,16 @@ namespace System.Security.Principal
                 {
                     if (!string.IsNullOrWhiteSpace(role))
                     {
-                        roleClaims.Add(new Claim(claimsIdentity.RoleClaimType, role, ClaimValueTypes.String, ClaimsIdentity.DefaultIssuer, ClaimsIdentity.DefaultIssuer, claimsIdentity));
+                        roleClaims.Add(
+                            new Claim(
+                                claimsIdentity.RoleClaimType,
+                                role,
+                                ClaimValueTypes.String,
+                                ClaimsIdentity.DefaultIssuer,
+                                ClaimsIdentity.DefaultIssuer,
+                                claimsIdentity
+                            )
+                        );
                     }
                 }
 
@@ -83,6 +92,7 @@ namespace System.Security.Principal
         }
 
         // This is called by AppDomain.GetThreadPrincipal() via reflection.
-        private static GenericPrincipal GetDefaultInstance() => new GenericPrincipal(new GenericIdentity(string.Empty), new string[] { string.Empty });
+        private static GenericPrincipal GetDefaultInstance() =>
+            new GenericPrincipal(new GenericIdentity(string.Empty), new string[] { string.Empty });
     }
 }

@@ -18,7 +18,11 @@ namespace System.Runtime.CompilerServices
             // Positive values mean the first array, negative means the second
             private readonly int[] _indexes;
 
-            internal MergedRuntimeVariables(IRuntimeVariables first, IRuntimeVariables second, int[] indexes)
+            internal MergedRuntimeVariables(
+                IRuntimeVariables first,
+                IRuntimeVariables second,
+                int[] indexes
+            )
             {
                 _first = first;
                 _second = second;

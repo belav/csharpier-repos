@@ -3,5 +3,9 @@
 
 namespace System.Web.Mvc.Async
 {
-    internal delegate IAsyncResult BeginInvokeDelegate<TState>(AsyncCallback callback, object callbackState, TState invokeState);
+    internal delegate IAsyncResult BeginInvokeDelegate<TState>(
+        AsyncCallback callback,
+        object callbackState,
+        TState invokeState
+    );
 }

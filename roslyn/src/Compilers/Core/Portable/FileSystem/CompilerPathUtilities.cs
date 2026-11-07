@@ -17,7 +17,10 @@ namespace Roslyn.Utilities
 
             if (!PathUtilities.IsAbsolute(path))
             {
-                throw new ArgumentException(Microsoft.CodeAnalysis.CodeAnalysisResources.AbsolutePathExpected, argumentName);
+                throw new ArgumentException(
+                    Microsoft.CodeAnalysis.CodeAnalysisResources.AbsolutePathExpected,
+                    argumentName
+                );
             }
         }
     }

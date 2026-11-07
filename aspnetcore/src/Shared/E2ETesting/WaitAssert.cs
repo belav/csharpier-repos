@@ -97,14 +97,10 @@ public static class WaitAssert
             timeout
         );
 
-    public static void Click(this IWebDriver driver, By selector) =>
-        WaitAssertCore(
-            driver,
-            () =>
-            {
-                driver.FindElement(selector).Click();
-            }
-        );
+    public static void Click(this IWebDriver driver, By selector) => WaitAssertCore(driver, () =>
+        {
+            driver.FindElement(selector).Click();
+        });
 
     private static void WaitAssertCore(
         IWebDriver driver,

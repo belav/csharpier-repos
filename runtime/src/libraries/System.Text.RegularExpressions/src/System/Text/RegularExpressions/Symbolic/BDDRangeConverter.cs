@@ -14,7 +14,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>
         /// Cache for all range conversions. Having this cache is required to avoid exponential running time.
         /// </summary>
-        private readonly Dictionary<BDD, (uint, uint)[]> _rangeCache = new Dictionary<BDD, (uint, uint)[]>();
+        private readonly Dictionary<BDD, (uint, uint)[]> _rangeCache =
+            new Dictionary<BDD, (uint, uint)[]>();
 
         private BDDRangeConverter() { }
 
@@ -111,7 +112,11 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
                     else //1-case is neither full nor empty
                     {
-                        (uint, uint)[] ranges1 = LiftRanges(b, b - set.One.Ordinal - 1, ToRangesFromOrdinal(set.One));
+                        (uint, uint)[] ranges1 = LiftRanges(
+                            b,
+                            b - set.One.Ordinal - 1,
+                            ToRangesFromOrdinal(set.One)
+                        );
                         ranges = new (uint, uint)[ranges1.Length];
                         for (int i = 0; i < ranges1.Length; i++)
                         {
@@ -129,7 +134,11 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
                     else
                     {
-                        (uint, uint)[] rangesR = LiftRanges(b, b - set.One.Ordinal - 1, ToRangesFromOrdinal(set.One));
+                        (uint, uint)[] rangesR = LiftRanges(
+                            b,
+                            b - set.One.Ordinal - 1,
+                            ToRangesFromOrdinal(set.One)
+                        );
                         (uint, uint) range = rangesR[0];
                         if (range.Item1 == 0)
                         {
@@ -155,14 +164,17 @@ namespace System.Text.RegularExpressions.Symbolic
                 else
                 {
                     #region 0-case is neither full nor empty
-                    (uint, uint)[] rangesL = LiftRanges(b, b - set.Zero.Ordinal - 1, ToRangesFromOrdinal(set.Zero));
+                    (uint, uint)[] rangesL = LiftRanges(
+                        b,
+                        b - set.Zero.Ordinal - 1,
+                        ToRangesFromOrdinal(set.Zero)
+                    );
                     (uint, uint) last = rangesL[rangesL.Length - 1];
 
                     if (set.One.IsEmpty)
                     {
                         ranges = rangesL;
                     }
-
                     else if (set.One.IsFull)
                     {
                         var ranges1 = new List<(uint, uint)>();
@@ -201,7 +213,10 @@ namespace System.Text.RegularExpressions.Symbolic
                             ranges[rangesL.Length - 1] = (last.Item1, first.Item2 | mask);
                             for (int i = 1; i < rangesR.Length; i++)
                             {
-                                ranges[rangesL.Length - 1 + i] = (rangesR[i].Item1 | mask, rangesR[i].Item2 | mask);
+                                ranges[rangesL.Length - 1 + i] = (
+                                    rangesR[i].Item1 | mask,
+                                    rangesR[i].Item2 | mask
+                                );
                             }
                         }
                         else
@@ -214,10 +229,12 @@ namespace System.Text.RegularExpressions.Symbolic
 
                             for (int i = 0; i < rangesR.Length; i++)
                             {
-                                ranges[rangesL.Length + i] = (rangesR[i].Item1 | mask, rangesR[i].Item2 | mask);
+                                ranges[rangesL.Length + i] = (
+                                    rangesR[i].Item1 | mask,
+                                    rangesR[i].Item2 | mask
+                                );
                             }
                         }
-
                     }
                     #endregion
                 }

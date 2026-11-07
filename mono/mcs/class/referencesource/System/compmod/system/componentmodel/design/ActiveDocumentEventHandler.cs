@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="ActiveDocumentEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Security.Permissions;
-
 
     /// <devdoc>
     /// <para>Represents the method that will handle the <see cref='System.ComponentModel.Design.IDesignerEventService.ActiveDesignerChanged'/>

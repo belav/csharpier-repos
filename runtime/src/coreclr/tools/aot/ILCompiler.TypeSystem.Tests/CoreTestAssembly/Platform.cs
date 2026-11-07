@@ -25,39 +25,63 @@ namespace System
             return 0;
         }
 
-        public virtual string ToString() { return null; }
-
-        ~Object()
+        public virtual string ToString()
         {
+            return null;
         }
+
+        ~Object() { }
     }
 
     public struct Void { }
+
     public struct Boolean { }
+
     public struct Char { }
+
     public struct SByte { }
+
     public struct Byte { }
+
     public struct Int16 { }
+
     public struct UInt16 { }
+
     public struct Int32 { }
+
     public struct UInt32 { }
+
     public struct Int64 { }
+
     public struct UInt64 { }
+
     public struct IntPtr { }
+
     public struct UIntPtr { }
+
     public struct Single { }
+
     public struct Double { }
+
     public abstract class ValueType { }
+
     public abstract class Enum : ValueType { }
-    public struct Nullable<T> where T : struct { }
+
+    public struct Nullable<T>
+        where T : struct { }
 
     public sealed class String { }
+
     public abstract class Array : System.Collections.IList { }
+
     public abstract class Delegate { }
+
     public abstract class MulticastDelegate : Delegate { }
 
     public struct RuntimeTypeHandle { }
+
     public struct RuntimeMethodHandle { }
+
     public struct RuntimeFieldHandle { }
 
     public class Type
@@ -66,9 +90,11 @@ namespace System
     }
 
     public class Attribute { }
+
     public class AttributeUsageAttribute : Attribute
     {
         public AttributeUsageAttribute(AttributeTargets targets) { }
+
         public bool AllowMultiple { get; set; }
         public bool Inherited { get; set; }
     }
@@ -91,7 +117,6 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Int128
     {
-
         private readonly ulong _lower;
         private readonly ulong _upper;
     }
@@ -100,7 +125,6 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct UInt128
     {
-
         private readonly ulong _lower;
         private readonly ulong _upper;
     }
@@ -142,7 +166,10 @@ namespace System.Runtime.InteropServices
             _val = layoutKind;
         }
 
-        public LayoutKind Value { get { return _val; } }
+        public LayoutKind Value
+        {
+            get { return _val; }
+        }
         public int Pack;
         public int Size;
     }
@@ -150,16 +177,22 @@ namespace System.Runtime.InteropServices
     public sealed class FieldOffsetAttribute : Attribute
     {
         private int _val;
+
         public FieldOffsetAttribute(int offset)
         {
             _val = offset;
         }
-        public int Value { get { return _val; } }
+
+        public int Value
+        {
+            get { return _val; }
+        }
     }
 
     public sealed class TypeIdentifierAttribute : Attribute
     {
         public TypeIdentifierAttribute() { }
+
         public TypeIdentifierAttribute(string scope, string identifier)
         {
             Scope = scope;
@@ -209,16 +242,15 @@ namespace System.Runtime.InteropServices
         Error = 45,
         IInspectable = 46,
         HString = 47,
-        LPUTF8Str = 48
+        LPUTF8Str = 48,
     }
+
     public sealed class MarshalAsAttribute : Attribute
     {
         public MarshalAsAttribute(UnmanagedType unmanagedType) { }
     }
 
-    public sealed class ComImportAttribute : Attribute
-    {
-    }
+    public sealed class ComImportAttribute : Attribute { }
 
     public sealed class ComEventInterfaceAttribute : Attribute
     {
@@ -233,24 +265,24 @@ namespace System.Runtime.InteropServices
 
 namespace System.Runtime.CompilerServices
 {
-    public sealed class IsByRefLikeAttribute : Attribute
-    {
-    }
+    public sealed class IsByRefLikeAttribute : Attribute { }
 
     public class CallConvCdecl { }
+
     public class CallConvStdcall { }
+
     public class CallConvSuppressGCTransition { }
 
     public static class RuntimeFeature
     {
         public const string ByRefFields = nameof(ByRefFields);
-        public const string UnmanagedSignatureCallingConvention = nameof(UnmanagedSignatureCallingConvention);
+        public const string UnmanagedSignatureCallingConvention = nameof(
+            UnmanagedSignatureCallingConvention
+        );
         public const string VirtualStaticsInInterfaces = nameof(VirtualStaticsInInterfaces);
     }
 
-    internal sealed class IntrinsicAttribute : Attribute
-    {
-    }
+    internal sealed class IntrinsicAttribute : Attribute { }
 }
 
 namespace System.Runtime.Intrinsics

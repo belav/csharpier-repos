@@ -29,13 +29,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<IPragmaBasedCodeAction> pragmaActions,
                 ImmutableArray<Diagnostic> pragmaDiagnostics,
                 FixAllState fixAllState,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 return CodeAction.Create(
                     ((CodeAction)pragmaActions[0]).Title,
                     createChangedDocument: ct =>
-                        BatchPragmaFixesAsync(suppressionFixProvider, document, pragmaActions, pragmaDiagnostics, fixAllState.CodeActionOptionsProvider, cancellationToken),
-                    equivalenceKey: fixAllState.CodeActionEquivalenceKey);
+                        BatchPragmaFixesAsync(
+                            suppressionFixProvider,
+                            document,
+                            pragmaActions,
+                            pragmaDiagnostics,
+                            fixAllState.CodeActionOptionsProvider,
+                            cancellationToken
+                        ),
+                    equivalenceKey: fixAllState.CodeActionEquivalenceKey
+                );
             }
 
             private static async Task<Document> BatchPragmaFixesAsync(
@@ -44,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<IPragmaBasedCodeAction> pragmaActions,
                 ImmutableArray<Diagnostic> diagnostics,
                 CodeActionOptionsProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // We apply all the pragma suppression fixes sequentially.
                 // At every application, we track the updated locations for remaining diagnostics in the document.
@@ -60,14 +70,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     var originalpragmaAction = pragmaActions[i];
                     var diagnostic = diagnostics[i];
                     // Get the diagnostic span for the diagnostic in latest document snapshot.
-                    if (!currentDiagnosticSpans.TryGetValue(diagnostic, out var currentDiagnosticSpan))
+                    if (
+                        !currentDiagnosticSpans.TryGetValue(
+                            diagnostic,
+                            out var currentDiagnosticSpan
+                        )
+                    )
                     {
                         // Diagnostic whose location conflicts with a prior fix.
                         continue;
                     }
 
                     // Compute and apply pragma suppression fix.
-                    var currentTree = await currentDocument.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                    var currentTree = await currentDocument
+                        .GetSyntaxTreeAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var currentLocation = Location.Create(currentTree, currentDiagnosticSpan);
                     diagnostic = Diagnostic.Create(
                         id: diagnostic.Id,
@@ -84,32 +101,65 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         additionalLocations: diagnostic.AdditionalLocations,
                         customTags: diagnostic.Descriptor.CustomTags,
                         properties: diagnostic.Properties,
-                        isSuppressed: diagnostic.IsSuppressed);
+                        isSuppressed: diagnostic.IsSuppressed
+                    );
 
-                    var newSuppressionFixes = await suppressionFixProvider.GetFixesAsync(currentDocument, currentDiagnosticSpan, SpecializedCollections.SingletonEnumerable(diagnostic), fallbackOptions, cancellationToken).ConfigureAwait(false);
+                    var newSuppressionFixes = await suppressionFixProvider
+                        .GetFixesAsync(
+                            currentDocument,
+                            currentDiagnosticSpan,
+                            SpecializedCollections.SingletonEnumerable(diagnostic),
+                            fallbackOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     var newSuppressionFix = newSuppressionFixes.SingleOrDefault();
                     if (newSuppressionFix != null)
                     {
-                        var newPragmaAction = newSuppressionFix.Action as IPragmaBasedCodeAction ??
-                            newSuppressionFix.Action.NestedCodeActions.OfType<IPragmaBasedCodeAction>().SingleOrDefault();
+                        var newPragmaAction =
+                            newSuppressionFix.Action as IPragmaBasedCodeAction
+                            ?? newSuppressionFix
+                                .Action.NestedCodeActions.OfType<IPragmaBasedCodeAction>()
+                                .SingleOrDefault();
                         if (newPragmaAction != null)
                         {
                             // Get the text changes with pragma suppression add/removals.
                             // Note: We do it one token at a time to ensure we get single text change in the new document, otherwise UpdateDiagnosticSpans won't function as expected.
                             // Update the diagnostics spans based on the text changes.
-                            var startTokenChanges = await GetTextChangesAsync(newPragmaAction, currentDocument,
-                                includeStartTokenChange: true, includeEndTokenChange: false, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var startTokenChanges = await GetTextChangesAsync(
+                                    newPragmaAction,
+                                    currentDocument,
+                                    includeStartTokenChange: true,
+                                    includeEndTokenChange: false,
+                                    cancellationToken: cancellationToken
+                                )
+                                .ConfigureAwait(false);
 
-                            var endTokenChanges = await GetTextChangesAsync(newPragmaAction, currentDocument,
-                                includeStartTokenChange: false, includeEndTokenChange: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var endTokenChanges = await GetTextChangesAsync(
+                                    newPragmaAction,
+                                    currentDocument,
+                                    includeStartTokenChange: false,
+                                    includeEndTokenChange: true,
+                                    cancellationToken: cancellationToken
+                                )
+                                .ConfigureAwait(false);
 
-                            var currentText = await currentDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-                            var orderedChanges = startTokenChanges.Concat(endTokenChanges).OrderBy(change => change.Span).Distinct();
+                            var currentText = await currentDocument
+                                .GetValueTextAsync(cancellationToken)
+                                .ConfigureAwait(false);
+                            var orderedChanges = startTokenChanges
+                                .Concat(endTokenChanges)
+                                .OrderBy(change => change.Span)
+                                .Distinct();
                             var newText = currentText.WithChanges(orderedChanges);
                             currentDocument = currentDocument.WithText(newText);
 
                             // Update the diagnostics spans based on the text changes.
-                            UpdateDiagnosticSpans(diagnostics, currentDiagnosticSpans, orderedChanges);
+                            UpdateDiagnosticSpans(
+                                diagnostics,
+                                currentDiagnosticSpans,
+                                orderedChanges
+                            );
                         }
                     }
                 }
@@ -122,17 +172,33 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Document currentDocument,
                 bool includeStartTokenChange,
                 bool includeEndTokenChange,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                var newDocument = await pragmaAction.GetChangedDocumentAsync(includeStartTokenChange, includeEndTokenChange, cancellationToken).ConfigureAwait(false);
-                return await newDocument.GetTextChangesAsync(currentDocument, cancellationToken).ConfigureAwait(false);
+                var newDocument = await pragmaAction
+                    .GetChangedDocumentAsync(
+                        includeStartTokenChange,
+                        includeEndTokenChange,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                return await newDocument
+                    .GetTextChangesAsync(currentDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            private static void UpdateDiagnosticSpans(ImmutableArray<Diagnostic> diagnostics, Dictionary<Diagnostic, TextSpan> currentDiagnosticSpans, IEnumerable<TextChange> textChanges)
+            private static void UpdateDiagnosticSpans(
+                ImmutableArray<Diagnostic> diagnostics,
+                Dictionary<Diagnostic, TextSpan> currentDiagnosticSpans,
+                IEnumerable<TextChange> textChanges
+            )
             {
-                static bool IsPriorSpan(TextSpan span, TextChange textChange) => span.End <= textChange.Span.Start;
-                static bool IsFollowingSpan(TextSpan span, TextChange textChange) => span.Start >= textChange.Span.End;
-                static bool IsEnclosingSpan(TextSpan span, TextChange textChange) => span.Contains(textChange.Span);
+                static bool IsPriorSpan(TextSpan span, TextChange textChange) =>
+                    span.End <= textChange.Span.Start;
+                static bool IsFollowingSpan(TextSpan span, TextChange textChange) =>
+                    span.Start >= textChange.Span.End;
+                static bool IsEnclosingSpan(TextSpan span, TextChange textChange) =>
+                    span.Contains(textChange.Span);
 
                 foreach (var diagnostic in diagnostics)
                 {

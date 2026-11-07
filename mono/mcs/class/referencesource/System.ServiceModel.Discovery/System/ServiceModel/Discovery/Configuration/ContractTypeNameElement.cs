@@ -11,12 +11,10 @@ namespace System.ServiceModel.Discovery.Configuration
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class ContractTypeNameElement : ConfigurationElement
-    {        
+    {
         ConfigurationPropertyCollection properties;
 
-        public ContractTypeNameElement()
-        { 
-        }
+        public ContractTypeNameElement() { }
 
         public ContractTypeNameElement(string name, string ns)
         {
@@ -24,34 +22,31 @@ namespace System.ServiceModel.Discovery.Configuration
             this.Namespace = ns;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Namespace, DefaultValue = NamingHelper.DefaultNamespace, Options = ConfigurationPropertyOptions.IsKey)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule, Justification = "Validator not requiered")]
+        [ConfigurationProperty(
+            ConfigurationStrings.Namespace,
+            DefaultValue = NamingHelper.DefaultNamespace,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
+            Justification = "Validator not requiered"
+        )]
         public string Namespace
         {
-            get
-            {
-                return (string)base[ConfigurationStrings.Namespace];
-            }
-
-            set
-            {
-                base[ConfigurationStrings.Namespace] = value;
-            }
+            get { return (string)base[ConfigurationStrings.Namespace]; }
+            set { base[ConfigurationStrings.Namespace] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string Name
         {
-            get
-            {
-                return (string)base[ConfigurationStrings.Name];
-            }
-
-            set
-            {
-                base[ConfigurationStrings.Name] = value;
-            }
+            get { return (string)base[ConfigurationStrings.Name]; }
+            set { base[ConfigurationStrings.Name] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -60,26 +55,31 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Namespace,
-                        typeof(string),
-                        NamingHelper.DefaultNamespace,
-                        null,
-                        null,
-                        System.Configuration.ConfigurationPropertyOptions.IsKey));
+                            ConfigurationStrings.Namespace,
+                            typeof(string),
+                            NamingHelper.DefaultNamespace,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.IsKey
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Name,
-                        typeof(string),
-                        null,
-                        null,
-                        new StringValidator(1),
-                        System.Configuration.ConfigurationPropertyOptions.IsKey | 
-                        System.Configuration.ConfigurationPropertyOptions.IsRequired));
+                            ConfigurationStrings.Name,
+                            typeof(string),
+                            null,
+                            null,
+                            new StringValidator(1),
+                            System.Configuration.ConfigurationPropertyOptions.IsKey
+                                | System.Configuration.ConfigurationPropertyOptions.IsRequired
+                        )
+                    );
 
                     this.properties = properties;
                 }

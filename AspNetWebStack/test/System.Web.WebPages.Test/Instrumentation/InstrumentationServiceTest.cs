@@ -55,7 +55,14 @@ namespace System.Web.WebPages.Test.Instrumentation
             AssertContext("Foo.cshtml", mockWriter, 42, 24, false, listener2.EndContextCalls[0]);
         }
 
-        private void AssertContext(string virtualPath, TextWriter writer, int startPosition, int length, bool isLiteral, dynamic context)
+        private void AssertContext(
+            string virtualPath,
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral,
+            dynamic context
+        )
         {
             PageExecutionContextAdapter ctx = new PageExecutionContextAdapter(context);
             Assert.Equal(virtualPath, ctx.VirtualPath);
@@ -71,7 +78,9 @@ namespace System.Web.WebPages.Test.Instrumentation
             service.ExecutionListeners = new List<dynamic>(listeners);
             InstrumentationService inst = new InstrumentationService();
             inst.IsAvailable = true;
-            inst.ExtractInstrumentationService = _ => new PageInstrumentationServiceAdapter(service);
+            inst.ExtractInstrumentationService = _ => new PageInstrumentationServiceAdapter(
+                service
+            );
             inst.CreateContext = CreateExpandoContext;
             return inst;
         }
@@ -81,12 +90,30 @@ namespace System.Web.WebPages.Test.Instrumentation
             dynamic listener = new ExpandoObject();
             listener.BeginContextCalls = new List<dynamic>();
             listener.EndContextCalls = new List<dynamic>();
-            listener.BeginContext = (Action<dynamic>)(d => { listener.BeginContextCalls.Add(d); });
-            listener.EndContext = (Action<dynamic>)(d => { listener.EndContextCalls.Add(d); });
+            listener.BeginContext =
+                (Action<dynamic>)(
+                    d =>
+                    {
+                        listener.BeginContextCalls.Add(d);
+                    }
+                );
+            listener.EndContext =
+                (Action<dynamic>)(
+                    d =>
+                    {
+                        listener.EndContextCalls.Add(d);
+                    }
+                );
             return listener;
         }
 
-        private PageExecutionContextAdapter CreateExpandoContext(string virtualPath, TextWriter writer, int startPosition, int length, bool isLiteral)
+        private PageExecutionContextAdapter CreateExpandoContext(
+            string virtualPath,
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             dynamic ctx = new ExpandoObject();
             ctx.VirtualPath = virtualPath;

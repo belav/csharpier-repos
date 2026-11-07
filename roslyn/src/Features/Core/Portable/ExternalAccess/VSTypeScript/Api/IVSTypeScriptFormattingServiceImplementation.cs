@@ -12,10 +12,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     internal readonly record struct VSTypeScriptIndentationOptions(
         bool UseSpaces,
         int TabSize,
-        int IndentSize);
+        int IndentSize
+    );
 
     internal interface IVSTypeScriptFormattingServiceImplementation
     {
-        Task<Document> FormatAsync(Document document, IEnumerable<TextSpan>? spans, VSTypeScriptIndentationOptions options, CancellationToken cancellationToken);
+        Task<Document> FormatAsync(
+            Document document,
+            IEnumerable<TextSpan>? spans,
+            VSTypeScriptIndentationOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -21,13 +21,9 @@ public class SqlServerHierarchyIdValueConverter : ValueConverter<HierarchyId?, S
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerHierarchyIdValueConverter()
-        : base(h => ToProvider(h), b => FromProvider(b))
-    {
-    }
+        : base(h => ToProvider(h), b => FromProvider(b)) { }
 
-    private static SqlHierarchyId ToProvider(HierarchyId? value)
-        => (SqlHierarchyId)value;
+    private static SqlHierarchyId ToProvider(HierarchyId? value) => (SqlHierarchyId)value;
 
-    private static HierarchyId? FromProvider(SqlHierarchyId value)
-        => (HierarchyId?)value;
+    private static HierarchyId? FromProvider(SqlHierarchyId value) => (HierarchyId?)value;
 }

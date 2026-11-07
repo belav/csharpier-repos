@@ -8,13 +8,15 @@
 
 using System.CodeDom.Compiler;
 
-namespace System.Xml.Xsl {
-    public sealed class XsltSettings {
+namespace System.Xml.Xsl
+{
+    public sealed class XsltSettings
+    {
         private bool enableDocumentFunction;
         private bool enableScript;
         private bool checkOnly;
         private bool includeDebugInformation;
-        private int  warningLevel = -1;     // -1 means not set
+        private int warningLevel = -1; // -1 means not set
         private bool treatWarningsAsErrors;
 #if !DISABLE_XSLT_COMPILER
         private TempFileCollection tempFiles;
@@ -22,52 +24,62 @@ namespace System.Xml.Xsl {
 
         public XsltSettings() { }
 
-        public XsltSettings(bool enableDocumentFunction, bool enableScript) {
+        public XsltSettings(bool enableDocumentFunction, bool enableScript)
+        {
             this.enableDocumentFunction = enableDocumentFunction;
-            this.enableScript           = enableScript;
+            this.enableScript = enableScript;
         }
 
-        public static XsltSettings Default {
+        public static XsltSettings Default
+        {
             get { return new XsltSettings(false, false); }
         }
 
-        public static XsltSettings TrustedXslt {
+        public static XsltSettings TrustedXslt
+        {
             get { return new XsltSettings(true, true); }
         }
 
-        public bool EnableDocumentFunction {
-            get { return enableDocumentFunction;  }
+        public bool EnableDocumentFunction
+        {
+            get { return enableDocumentFunction; }
             set { enableDocumentFunction = value; }
         }
 
-        public bool EnableScript {
-            get { return enableScript;  }
+        public bool EnableScript
+        {
+            get { return enableScript; }
             set { enableScript = value; }
         }
 
-        internal bool CheckOnly {
-            get { return checkOnly;  }
+        internal bool CheckOnly
+        {
+            get { return checkOnly; }
             set { checkOnly = value; }
         }
 
-        internal bool IncludeDebugInformation {
-            get { return includeDebugInformation;  }
+        internal bool IncludeDebugInformation
+        {
+            get { return includeDebugInformation; }
             set { includeDebugInformation = value; }
         }
 
-        internal int WarningLevel {
-            get { return warningLevel;  }
+        internal int WarningLevel
+        {
+            get { return warningLevel; }
             set { warningLevel = value; }
         }
 
-        internal bool TreatWarningsAsErrors {
-            get { return treatWarningsAsErrors;  }
+        internal bool TreatWarningsAsErrors
+        {
+            get { return treatWarningsAsErrors; }
             set { treatWarningsAsErrors = value; }
         }
 
 #if !DISABLE_XSLT_COMPILER
-        internal TempFileCollection TempFiles {
-            get { return tempFiles;  }
+        internal TempFileCollection TempFiles
+        {
+            get { return tempFiles; }
             set { tempFiles = value; }
         }
 #endif

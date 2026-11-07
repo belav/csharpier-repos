@@ -28,8 +28,7 @@ public abstract class InterceptorAggregator<TInterceptor> : IInterceptorAggregat
     /// <summary>
     ///     The interceptor type.
     /// </summary>
-    public virtual Type InterceptorType
-        => typeof(TInterceptor);
+    public virtual Type InterceptorType => typeof(TInterceptor);
 
     /// <summary>
     ///     Resolves a single <see cref="IInterceptor" /> /> from all those registered on

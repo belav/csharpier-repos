@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                             return true;
                         },
                         Logger,
-                        cancellationToken: default);
+                        cancellationToken: default
+                    );
                     Assert.True(response is CompletedBuildResponse);
                 }
             }
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         return false;
                     },
                     Logger,
-                    cancellationToken: default);
+                    cancellationToken: default
+                );
                 Assert.True(response is CompletedBuildResponse);
             }
 
@@ -87,7 +89,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         }
 
         /// <summary>
-        /// Simulate the case where the server process crashes or hangs on startup 
+        /// Simulate the case where the server process crashes or hangs on startup
         /// and make sure the client properly fails
         /// </summary>
         [Fact]
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     return true;
                 },
                 Logger,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.True(response is CannotConnectResponse);
             Assert.True(ran);
         }
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         return false;
                     },
                     Logger,
-                    cancellationToken: default);
+                    cancellationToken: default
+                );
                 Assert.True(response is CannotConnectResponse);
             }
 

@@ -33,6 +33,5 @@ namespace System.ComponentModel.Composition
             var part = PartFactory.Create();
             part.Activate();
         }
-
     }
 }

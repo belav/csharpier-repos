@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
     public class ConvertRegularStringToRawString_FixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertStringToRawStringCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertStringToRawStringCodeRefactoringProvider();
 
         [Fact]
         public async Task FixAllInDocument_SingleLine()
@@ -105,625 +107,634 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 select x2";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument_MultiLine()
         {
             await TestInRegularAndScriptAsync(
-            """
-            class C
-            {
-                void M()
+                """
+                class C
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                    var multiLine1 = {|FixAllInDocument:|}"goo\r\nbar";
-                    var multiLine2 = @"goo
-            bar";
+                        var multiLine1 = {|FixAllInDocument:|}"goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
 
-                    var multiLineWithoutLeadingWhitespace1 = @"
-            from x in y
-            where x > 0
-            select x";
-                    var multiLineWithoutLeadingWhitespace2 = @"
-            from x2 in y2
-            where x2 > 0
-            select x2";
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
+
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
                 }
-
-                void M2()
+                """,
+                """"
+                class C
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                    var multiLine1 = "goo\r\nbar";
-                    var multiLine2 = @"goo
-            bar";
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
 
-                    var multiLineWithoutLeadingWhitespace1 = @"
-            from x in y
-            where x > 0
-            select x";
-                    var multiLineWithoutLeadingWhitespace2 = @"
-            from x2 in y2
-            where x2 > 0
-            select x2";
+                        var multiLineWithoutLeadingWhitespace1 = """
+
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
+
+                        var multiLineWithoutLeadingWhitespace1 = """
+
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
+                    }
                 }
-            }
-            """,
-            """"
-            class C
-            {
-                void M()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-
-                    var multiLine1 = """
-                        goo
-                        bar
-                        """;
-                    var multiLine2 = """
-                        goo
-                        bar
-                        """;
-
-                    var multiLineWithoutLeadingWhitespace1 = """
-
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
-                    var multiLineWithoutLeadingWhitespace2 = """
-
-                        from x2 in y2
-                        where x2 > 0
-                        select x2
-                        """;
-                }
-
-                void M2()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-
-                    var multiLine1 = """
-                        goo
-                        bar
-                        """;
-                    var multiLine2 = """
-                        goo
-                        bar
-                        """;
-
-                    var multiLineWithoutLeadingWhitespace1 = """
-
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
-                    var multiLineWithoutLeadingWhitespace2 = """
-
-                        from x2 in y2
-                        where x2 > 0
-                        select x2
-                        """;
-                }
-            }
-            """");
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument_MultiLineWithoutLeadingWhitespace()
         {
             await TestInRegularAndScriptAsync(
-            """
-            class C
-            {
-                void M()
+                """
+                class C
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                    var multiLine1 = "goo\r\nbar";
-                    var multiLine2 = @"goo
-            bar";
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
 
-                    var multiLineWithoutLeadingWhitespace1 = {|FixAllInDocument:|}@"
-            from x in y
-            where x > 0
-            select x";
-                    var multiLineWithoutLeadingWhitespace2 = @"
-            from x2 in y2
-            where x2 > 0
-            select x2";
+                        var multiLineWithoutLeadingWhitespace1 = {|FixAllInDocument:|}@"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
+
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
                 }
-
-                void M2()
+                """,
+                """"
+                class C
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                    var multiLine1 = "goo\r\nbar";
-                    var multiLine2 = @"goo
-            bar";
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
 
-                    var multiLineWithoutLeadingWhitespace1 = @"
-            from x in y
-            where x > 0
-            select x";
-                    var multiLineWithoutLeadingWhitespace2 = @"
-            from x2 in y2
-            where x2 > 0
-            select x2";
+                        var multiLineWithoutLeadingWhitespace1 = """
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
+
+                        var multiLineWithoutLeadingWhitespace1 = """
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
+                    }
                 }
-            }
-            """,
-            """"
-            class C
-            {
-                void M()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-
-                    var multiLine1 = """
-                        goo
-                        bar
-                        """;
-                    var multiLine2 = """
-                        goo
-                        bar
-                        """;
-
-                    var multiLineWithoutLeadingWhitespace1 = """
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
-                    var multiLineWithoutLeadingWhitespace2 = """
-                        from x2 in y2
-                        where x2 > 0
-                        select x2
-                        """;
-                }
-
-                void M2()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-
-                    var multiLine1 = """
-                        goo
-                        bar
-                        """;
-                    var multiLine2 = """
-                        goo
-                        bar
-                        """;
-
-                    var multiLineWithoutLeadingWhitespace1 = """
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
-                    var multiLineWithoutLeadingWhitespace2 = """
-                        from x2 in y2
-                        where x2 > 0
-                        select x2
-                        """;
-                }
-            }
-            """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task FixAllInProject()
         {
             await TestInRegularAndScriptAsync(
-            """
-            <Workspace>
-                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document>
-            class Program1
-            {
-                void M1()
+                """
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
                 {
-                    var singleLine1 = {|FixAllInProject:|}"a";
-                    var singleLine2 = @"goo""bar";
+                    void M1()
+                    {
+                        var singleLine1 = {|FixAllInProject:|}"a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                    <Document>
-            class Program2
-            {
-                void M2()
+                        </Document>
+                        <Document>
+                class Program2
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                    <Document>
-            class Program3
-            {
-                void M3()
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-            </Workspace>
-            """,
-            """"
-            <Workspace>
-                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document>
-            class Program1
-            {
-                void M1()
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
+                """"
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M1()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
-                    </Document>
-                    <Document>
-            class Program2
-            {
-                void M2()
+                        </Document>
+                        <Document>
+                class Program2
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M2()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                    <Document>
-            class Program3
-            {
-                void M3()
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-            </Workspace>
-            """");
+                        </Document>
+                    </Project>
+                </Workspace>
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInSolution()
         {
             await TestInRegularAndScriptAsync(
-            """
-            <Workspace>
-                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document>
-            class Program1
-            {
-                void M1()
+                """
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
                 {
-                    var singleLine1 = {|FixAllInSolution:|}"a";
-                    var singleLine2 = @"goo""bar";
+                    void M1()
+                    {
+                        var singleLine1 = {|FixAllInSolution:|}"a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                    <Document>
-            class Program2
-            {
-                void M2()
+                        </Document>
+                        <Document>
+                class Program2
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                    <Document>
-            class Program3
-            {
-                void M3()
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-            </Workspace>
-            """,
-            """"
-            <Workspace>
-                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document>
-            class Program1
-            {
-                void M1()
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
+                """"
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M1()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
-                    </Document>
-                    <Document>
-            class Program2
-            {
-                void M2()
+                        </Document>
+                        <Document>
+                class Program2
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M2()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                    <Document>
-            class Program3
-            {
-                void M3()
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M3()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-            </Workspace>
-            """");
+                        </Document>
+                    </Project>
+                </Workspace>
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingMember()
         {
             await TestInRegularAndScriptAsync(
-            """
-            class C
-            {
-                void M()
+                """
+                class C
                 {
-                    var singleLine1 = {|FixAllInContainingMember:|}"a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = {|FixAllInContainingMember:|}"a";
+                        var singleLine2 = @"goo""bar";
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
 
-                void M2()
+                class C2
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
+                """,
+                """"
+                class C
+                {
+                    void M()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
 
-            class C2
-            {
-                void M()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-            """,
-            """"
-            class C
-            {
-                void M()
-                {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
 
-                void M2()
+                class C2
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-
-            class C2
-            {
-                void M()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-            """");
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingType()
         {
             await TestInRegularAndScriptAsync(
-            """
-            partial class C
-            {
-                void M()
+                """
+                partial class C
                 {
-                    var singleLine1 = {|FixAllInContainingType:|}"a";
-                    var singleLine2 = @"goo""bar";
+                    void M()
+                    {
+                        var singleLine1 = {|FixAllInContainingType:|}"a";
+                        var singleLine2 = @"goo""bar";
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
 
-                void M2()
+                class C2
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-
-            class C2
-            {
-                void M()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-
-            partial class C
-            {
-                void M3()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-            """,
-            """"
-            partial class C
-            {
-                void M()
-                {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
 
-                void M2()
+                partial class C
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
+                """,
+                """"
+                partial class C
+                {
+                    void M()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
 
-            class C2
-            {
-                void M()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M2()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
 
-            partial class C
-            {
-                void M3()
+                class C2
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-            """");
+
+                partial class C
+                {
+                    void M3()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
+                }
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingType_AcrossFiles()
         {
             await TestInRegularAndScriptAsync(
-            """
-            <Workspace>
-                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document>
-            partial class Program1
-            {
-                void M1()
+                """
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                partial class Program1
                 {
-                    var singleLine1 = {|FixAllInContainingType:|}"a";
-                    var singleLine2 = @"goo""bar";
+                    void M1()
+                    {
+                        var singleLine1 = {|FixAllInContainingType:|}"a";
+                        var singleLine2 = @"goo""bar";
+                    }
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                        </Document>
+                        <Document>
+                partial class Program1
+                {
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
 
-                void M2()
+                class Program2
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                    <Document>
-            partial class Program1
-            {
-                void M3()
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
+                """"
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                partial class Program1
+                {
+                    void M1()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
 
-            class Program2
-            {
-                void M2()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
+                    void M2()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
-            }
-                    </Document>
-                </Project>
-                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                    <Document>
-            class Program3
-            {
-                void M3()
+                        </Document>
+                        <Document>
+                partial class Program1
                 {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-                    </Document>
-                </Project>
-            </Workspace>
-            """,
-            """"
-            <Workspace>
-                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document>
-            partial class Program1
-            {
-                void M1()
-                {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M3()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
                 }
 
-                void M2()
+                class Program2
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-                    </Document>
-                    <Document>
-            partial class Program1
-            {
-                void M3()
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
                 {
-                    var singleLine1 = """a""";
-                    var singleLine2 = """goo"bar""";
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
                 }
-            }
-
-            class Program2
-            {
-                void M2()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-                    </Document>
-                </Project>
-                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                    <Document>
-            class Program3
-            {
-                void M3()
-                {
-                    var singleLine1 = "a";
-                    var singleLine2 = @"goo""bar";
-                }
-            }
-                    </Document>
-                </Project>
-            </Workspace>
-            """");
+                        </Document>
+                    </Project>
+                </Workspace>
+                """"
+            );
         }
 
         [Fact]
@@ -763,7 +774,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
@@ -801,7 +813,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
@@ -843,7 +856,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
@@ -883,7 +898,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
@@ -927,7 +944,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
@@ -969,7 +988,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
     }
 }

@@ -15,11 +15,11 @@ namespace System.ServiceModel.Syndication
         private bool _preserveAttributeExtensions = true;
         private bool _preserveElementExtensions = true;
 
-        public Atom10ItemFormatter() : this(typeof(SyndicationItem))
-        {
-        }
+        public Atom10ItemFormatter()
+            : this(typeof(SyndicationItem)) { }
 
-        public Atom10ItemFormatter(Type itemTypeToCreate) : base()
+        public Atom10ItemFormatter(Type itemTypeToCreate)
+            : base()
         {
             if (itemTypeToCreate is null)
             {
@@ -28,13 +28,21 @@ namespace System.ServiceModel.Syndication
 
             if (!typeof(SyndicationItem).IsAssignableFrom(itemTypeToCreate))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidObjectTypePassed, nameof(itemTypeToCreate), nameof(SyndicationItem)), nameof(itemTypeToCreate));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.InvalidObjectTypePassed,
+                        nameof(itemTypeToCreate),
+                        nameof(SyndicationItem)
+                    ),
+                    nameof(itemTypeToCreate)
+                );
             }
 
             ItemType = itemTypeToCreate;
         }
 
-        public Atom10ItemFormatter(SyndicationItem itemToWrite) : base(itemToWrite)
+        public Atom10ItemFormatter(SyndicationItem itemToWrite)
+            : base(itemToWrite)
         {
             ItemType = itemToWrite.GetType();
         }
@@ -99,7 +107,9 @@ namespace System.ServiceModel.Syndication
         {
             if (!CanRead(reader))
             {
-                throw new XmlException(SR.Format(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI));
+                throw new XmlException(
+                    SR.Format(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
+                );
             }
 
             ReadItem(reader);
@@ -138,15 +148,14 @@ namespace System.ServiceModel.Syndication
     }
 
     [XmlRoot(ElementName = Atom10Constants.EntryTag, Namespace = Atom10Constants.Atom10Namespace)]
-    public class Atom10ItemFormatter<TSyndicationItem> : Atom10ItemFormatter where TSyndicationItem : SyndicationItem, new()
+    public class Atom10ItemFormatter<TSyndicationItem> : Atom10ItemFormatter
+        where TSyndicationItem : SyndicationItem, new()
     {
-        public Atom10ItemFormatter() : base(typeof(TSyndicationItem))
-        {
-        }
+        public Atom10ItemFormatter()
+            : base(typeof(TSyndicationItem)) { }
 
-        public Atom10ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite)
-        {
-        }
+        public Atom10ItemFormatter(TSyndicationItem itemToWrite)
+            : base(itemToWrite) { }
 
         protected override SyndicationItem CreateItemInstance() => new TSyndicationItem();
     }

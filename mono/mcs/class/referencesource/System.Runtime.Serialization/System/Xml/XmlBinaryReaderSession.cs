@@ -5,9 +5,9 @@ using StringHandle = System.Int64;
 
 namespace System.Xml
 {
-    using System.Xml;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using System.Xml;
 
     public class XmlBinaryReaderSession : IXmlDictionary
     {
@@ -16,19 +16,23 @@ namespace System.Xml
         XmlDictionaryString[] strings;
         Dictionary<int, XmlDictionaryString> stringDict;
 
-        public XmlBinaryReaderSession()
-        {
-        }
+        public XmlBinaryReaderSession() { }
 
         public XmlDictionaryString Add(int id, string value)
         {
             if (id < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(SR.GetString(SR.XmlInvalidID)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(SR.GetString(SR.XmlInvalidID))
+                );
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "value"
+                );
             XmlDictionaryString xmlString;
             if (TryLookup(id, out xmlString))
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.XmlIDDefined)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.XmlIDDefined))
+                );
 
             xmlString = new XmlDictionaryString(this, value, id);
             if (id >= MaxArrayEntries)
@@ -46,7 +50,9 @@ namespace System.Xml
                 }
                 else if (id >= strings.Length)
                 {
-                    XmlDictionaryString[] newStrings = new XmlDictionaryString[Math.Min(Math.Max(id + 1, strings.Length * 2), MaxArrayEntries)];
+                    XmlDictionaryString[] newStrings = new XmlDictionaryString[
+                        Math.Min(Math.Max(id + 1, strings.Length * 2), MaxArrayEntries)
+                    ];
                     Array.Copy(strings, newStrings, strings.Length);
                     strings = newStrings;
                 }
@@ -74,7 +80,9 @@ namespace System.Xml
         public bool TryLookup(string value, out XmlDictionaryString result)
         {
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "value"
+                );
 
             if (strings != null)
             {
@@ -108,7 +116,9 @@ namespace System.Xml
         public bool TryLookup(XmlDictionaryString value, out XmlDictionaryString result)
         {
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("value")
+                );
             if (value.Dictionary != this)
             {
                 result = null;

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -12,44 +11,66 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_EntityTagOverload_MatchExpectation()
         {
-            RetryConditionHeaderValue retryCondition = new RetryConditionHeaderValue(new TimeSpan(0, 0, 3));
+            RetryConditionHeaderValue retryCondition = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 3)
+            );
             Assert.Equal(new TimeSpan(0, 0, 3), retryCondition.Delta);
             Assert.Null(retryCondition.Date);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new RetryConditionHeaderValue(new TimeSpan(1234567, 0, 0)); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RetryConditionHeaderValue(new TimeSpan(1234567, 0, 0));
+            });
         }
 
         [Fact]
         public void Ctor_DateOverload_MatchExpectation()
         {
             RetryConditionHeaderValue retryCondition = new RetryConditionHeaderValue(
-                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
             Assert.Null(retryCondition.Delta);
-            Assert.Equal(new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero), retryCondition.Date);
+            Assert.Equal(
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero),
+                retryCondition.Date
+            );
         }
 
         [Fact]
         public void ToString_UseDifferentRetryConditions_AllSerializedCorrectly()
         {
-            RetryConditionHeaderValue retryCondition = new RetryConditionHeaderValue(new TimeSpan(0, 0, 50000000));
+            RetryConditionHeaderValue retryCondition = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 50000000)
+            );
             Assert.Equal("50000000", retryCondition.ToString());
 
-            retryCondition = new RetryConditionHeaderValue(new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            retryCondition = new RetryConditionHeaderValue(
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
             Assert.Equal("Thu, 15 Jul 2010 12:33:57 GMT", retryCondition.ToString());
         }
 
         [Fact]
         public void GetHashCode_UseSameAndDifferentRetryConditions_SameOrDifferentHashCodes()
         {
-            RetryConditionHeaderValue retryCondition1 = new RetryConditionHeaderValue(new TimeSpan(0, 0, 1000000));
-            RetryConditionHeaderValue retryCondition2 = new RetryConditionHeaderValue(new TimeSpan(0, 0, 1000000));
+            RetryConditionHeaderValue retryCondition1 = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 1000000)
+            );
+            RetryConditionHeaderValue retryCondition2 = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 1000000)
+            );
             RetryConditionHeaderValue retryCondition3 = new RetryConditionHeaderValue(
-                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
             RetryConditionHeaderValue retryCondition4 = new RetryConditionHeaderValue(
-                new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero));
+                new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero)
+            );
             RetryConditionHeaderValue retryCondition5 = new RetryConditionHeaderValue(
-                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
-            RetryConditionHeaderValue retryCondition6 = new RetryConditionHeaderValue(new TimeSpan(0, 0, 2000000));
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
+            RetryConditionHeaderValue retryCondition6 = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 2000000)
+            );
 
             Assert.Equal(retryCondition1.GetHashCode(), retryCondition2.GetHashCode());
             Assert.NotEqual(retryCondition1.GetHashCode(), retryCondition3.GetHashCode());
@@ -61,15 +82,24 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Equals_UseSameAndDifferentRetrys_EqualOrNotEqualNoExceptions()
         {
-            RetryConditionHeaderValue retryCondition1 = new RetryConditionHeaderValue(new TimeSpan(0, 0, 1000000));
-            RetryConditionHeaderValue retryCondition2 = new RetryConditionHeaderValue(new TimeSpan(0, 0, 1000000));
+            RetryConditionHeaderValue retryCondition1 = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 1000000)
+            );
+            RetryConditionHeaderValue retryCondition2 = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 1000000)
+            );
             RetryConditionHeaderValue retryCondition3 = new RetryConditionHeaderValue(
-                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
             RetryConditionHeaderValue retryCondition4 = new RetryConditionHeaderValue(
-                new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero));
+                new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero)
+            );
             RetryConditionHeaderValue retryCondition5 = new RetryConditionHeaderValue(
-                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
-            RetryConditionHeaderValue retryCondition6 = new RetryConditionHeaderValue(new TimeSpan(0, 0, 2000000));
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
+            RetryConditionHeaderValue retryCondition6 = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 2000000)
+            );
 
             Assert.False(retryCondition1.Equals(null), "delta vs. <null>");
             Assert.True(retryCondition1.Equals(retryCondition2), "delta vs. delta");
@@ -83,13 +113,18 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
-            RetryConditionHeaderValue source = new RetryConditionHeaderValue(new TimeSpan(0, 0, 123456789));
-            RetryConditionHeaderValue clone = (RetryConditionHeaderValue)((ICloneable)source).Clone();
+            RetryConditionHeaderValue source = new RetryConditionHeaderValue(
+                new TimeSpan(0, 0, 123456789)
+            );
+            RetryConditionHeaderValue clone = (RetryConditionHeaderValue)
+                ((ICloneable)source).Clone();
 
             Assert.Equal(source.Delta, clone.Delta);
             Assert.Null(clone.Date);
 
-            source = new RetryConditionHeaderValue(new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            source = new RetryConditionHeaderValue(
+                new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+            );
             clone = (RetryConditionHeaderValue)((ICloneable)source).Clone();
 
             Assert.Null(clone.Delta);
@@ -150,9 +185,16 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Parse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            CheckValidParse("  123456789 ", new RetryConditionHeaderValue(new TimeSpan(0, 0, 123456789)));
-            CheckValidParse("  Sun, 06 Nov 1994 08:49:37 GMT ",
-                new RetryConditionHeaderValue(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)));
+            CheckValidParse(
+                "  123456789 ",
+                new RetryConditionHeaderValue(new TimeSpan(0, 0, 123456789))
+            );
+            CheckValidParse(
+                "  Sun, 06 Nov 1994 08:49:37 GMT ",
+                new RetryConditionHeaderValue(
+                    new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                )
+            );
         }
 
         [Fact]
@@ -179,25 +221,39 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { RetryConditionHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                RetryConditionHeaderValue.Parse(input);
+            });
 
-            Assert.False(RetryConditionHeaderValue.TryParse(input, out RetryConditionHeaderValue result));
+            Assert.False(
+                RetryConditionHeaderValue.TryParse(input, out RetryConditionHeaderValue result)
+            );
             Assert.Null(result);
         }
 
-        private static void CallGetRetryConditionLength(string input, int startIndex, int expectedLength,
-            out RetryConditionHeaderValue result)
+        private static void CallGetRetryConditionLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            out RetryConditionHeaderValue result
+        )
         {
             object temp = null;
-            Assert.Equal(expectedLength, RetryConditionHeaderValue.GetRetryConditionLength(input, startIndex,
-                out temp));
+            Assert.Equal(
+                expectedLength,
+                RetryConditionHeaderValue.GetRetryConditionLength(input, startIndex, out temp)
+            );
             result = temp as RetryConditionHeaderValue;
         }
 
         private static void CheckInvalidGetRetryConditionLength(string input, int startIndex)
         {
             object result = null;
-            Assert.Equal(0, RetryConditionHeaderValue.GetRetryConditionLength(input, startIndex, out result));
+            Assert.Equal(
+                0,
+                RetryConditionHeaderValue.GetRetryConditionLength(input, startIndex, out result)
+            );
             Assert.Null(result);
         }
         #endregion

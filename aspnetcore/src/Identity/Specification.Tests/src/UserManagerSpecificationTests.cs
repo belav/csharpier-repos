@@ -1712,15 +1712,12 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     [Fact]
     public async Task CanChangeEmailWithDifferentTokenProvider()
     {
-        var manager = CreateManager(
-            context: null,
-            services: null,
-            configureServices: s =>
-                s.Configure<IdentityOptions>(o =>
-                    o.Tokens.ProviderMap["NewProvider2"] = new TokenProviderDescriptor(
-                        typeof(EmailTokenProvider<TUser>)
-                    )
+        var manager = CreateManager(context: null, services: null, configureServices: s =>
+            s.Configure<IdentityOptions>(o =>
+                o.Tokens.ProviderMap["NewProvider2"] = new TokenProviderDescriptor(
+                    typeof(EmailTokenProvider<TUser>)
                 )
+            )
         );
         manager.Options.Tokens.ChangeEmailTokenProvider = "NewProvider2";
         var user = CreateTestUser("foouser");
@@ -1878,20 +1875,20 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         var error = $"No IUserTwoFactorTokenProvider<{nameof(TUser)}> named 'bogus' is registered.";
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.GenerateTwoFactorTokenAsync(user, "bogus")
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.GenerateTwoFactorTokenAsync(user, "bogus")
         );
         Assert.Equal(error, ex.Message);
-        ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.VerifyTwoFactorTokenAsync(user, "bogus", "bogus")
+        ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.VerifyTwoFactorTokenAsync(user, "bogus", "bogus")
         );
         Assert.Equal(error, ex.Message);
-        ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.VerifyUserTokenAsync(user, "bogus", "bogus", "bogus")
+        ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.VerifyUserTokenAsync(user, "bogus", "bogus", "bogus")
         );
         Assert.Equal(error, ex.Message);
-        ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.GenerateUserTokenAsync(user, "bogus", "bogus")
+        ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.GenerateUserTokenAsync(user, "bogus", "bogus")
         );
         Assert.Equal(error, ex.Message);
     }

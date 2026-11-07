@@ -11,10 +11,19 @@ namespace System.Reflection.Emit.Tests
         public void Properties()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder methodBuilder = type.DefineMethod("TestMethod", MethodAttributes.Public, typeof(void), new Type[] { typeof(int?) });
+            MethodBuilder methodBuilder = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                typeof(void),
+                new Type[] { typeof(int?) }
+            );
             ILGenerator generator = methodBuilder.GetILGenerator();
             generator.Emit(OpCodes.Ret);
-            ParameterBuilder parameter = methodBuilder.DefineParameter(1, ParameterAttributes.In, "paramName");
+            ParameterBuilder parameter = methodBuilder.DefineParameter(
+                1,
+                ParameterAttributes.In,
+                "paramName"
+            );
 
             Assert.Equal(ParameterAttributes.In, (ParameterAttributes)parameter.Attributes);
             Assert.True(parameter.IsIn);

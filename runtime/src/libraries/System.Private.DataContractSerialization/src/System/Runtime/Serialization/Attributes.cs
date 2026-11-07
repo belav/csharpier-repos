@@ -7,21 +7,23 @@ namespace System.Runtime.Serialization
 {
     internal sealed class Attributes
     {
-        private static readonly XmlDictionaryString[] s_serializationLocalNames = new XmlDictionaryString[]
-        {
-            DictionaryGlobals.IdLocalName,
-            DictionaryGlobals.ArraySizeLocalName,
-            DictionaryGlobals.RefLocalName,
-            DictionaryGlobals.ClrTypeLocalName,
-            DictionaryGlobals.ClrAssemblyLocalName,
-            DictionaryGlobals.ISerializableFactoryTypeLocalName
-        };
+        private static readonly XmlDictionaryString[] s_serializationLocalNames =
+            new XmlDictionaryString[]
+            {
+                DictionaryGlobals.IdLocalName,
+                DictionaryGlobals.ArraySizeLocalName,
+                DictionaryGlobals.RefLocalName,
+                DictionaryGlobals.ClrTypeLocalName,
+                DictionaryGlobals.ClrAssemblyLocalName,
+                DictionaryGlobals.ISerializableFactoryTypeLocalName,
+            };
 
-        private static readonly XmlDictionaryString[] s_schemaInstanceLocalNames = new XmlDictionaryString[]
-        {
-            DictionaryGlobals.XsiNilLocalName,
-            DictionaryGlobals.XsiTypeLocalName
-        };
+        private static readonly XmlDictionaryString[] s_schemaInstanceLocalNames =
+            new XmlDictionaryString[]
+            {
+                DictionaryGlobals.XsiNilLocalName,
+                DictionaryGlobals.XsiTypeLocalName,
+            };
 
         internal string Id = null!; // initialized in Reset
         internal string Ref = null!; // initialized in Reset
@@ -43,7 +45,12 @@ namespace System.Runtime.Serialization
 
             while (reader.MoveToNextAttribute())
             {
-                switch (reader.IndexOfLocalName(s_serializationLocalNames, DictionaryGlobals.SerializationNamespace))
+                switch (
+                    reader.IndexOfLocalName(
+                        s_serializationLocalNames,
+                        DictionaryGlobals.SerializationNamespace
+                    )
+                )
                 {
                     case 0:
                         ReadId(reader);
@@ -64,7 +71,12 @@ namespace System.Runtime.Serialization
                         ReadFactoryType(reader);
                         break;
                     default:
-                        switch (reader.IndexOfLocalName(s_schemaInstanceLocalNames, DictionaryGlobals.SchemaInstanceNamespace))
+                        switch (
+                            reader.IndexOfLocalName(
+                                s_schemaInstanceLocalNames,
+                                DictionaryGlobals.SchemaInstanceNamespace
+                            )
+                        )
                         {
                             case 0:
                                 ReadXsiNil(reader);
@@ -105,7 +117,9 @@ namespace System.Runtime.Serialization
             Id = reader.ReadContentAsString();
             if (string.IsNullOrEmpty(Id))
             {
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidXsIdDefinition, Id));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.InvalidXsIdDefinition, Id)
+                );
             }
         }
 
@@ -114,7 +128,9 @@ namespace System.Runtime.Serialization
             Ref = reader.ReadContentAsString();
             if (string.IsNullOrEmpty(Ref))
             {
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidXsRefDefinition, Ref));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.InvalidXsRefDefinition, Ref)
+                );
             }
         }
 
@@ -127,21 +143,35 @@ namespace System.Runtime.Serialization
         {
             ArraySZSize = reader.ReadContentAsInt();
             if (ArraySZSize < 0)
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidSizeDefinition, ArraySZSize));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.InvalidSizeDefinition, ArraySZSize)
+                );
         }
 
         private void ReadXsiType(XmlReaderDelegator reader)
         {
             string xsiTypeString = reader.Value;
             if (xsiTypeString != null && xsiTypeString.Length > 0)
-                XmlObjectSerializerReadContext.ParseQualifiedName(xsiTypeString, reader, out XsiTypeName, out XsiTypeNamespace, out XsiTypePrefix);
+                XmlObjectSerializerReadContext.ParseQualifiedName(
+                    xsiTypeString,
+                    reader,
+                    out XsiTypeName,
+                    out XsiTypeNamespace,
+                    out XsiTypePrefix
+                );
         }
 
         private void ReadFactoryType(XmlReaderDelegator reader)
         {
             string factoryTypeString = reader.Value;
             if (factoryTypeString != null && factoryTypeString.Length > 0)
-                XmlObjectSerializerReadContext.ParseQualifiedName(factoryTypeString, reader, out FactoryTypeName, out FactoryTypeNamespace, out FactoryTypePrefix);
+                XmlObjectSerializerReadContext.ParseQualifiedName(
+                    factoryTypeString,
+                    reader,
+                    out FactoryTypeName,
+                    out FactoryTypeNamespace,
+                    out FactoryTypePrefix
+                );
         }
     }
 }

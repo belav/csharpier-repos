@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Contains common arguments to Symbol.EarlyDecodeWellKnownAttribute method in both the language compilers.
     /// </summary>
-    internal struct EarlyDecodeWellKnownAttributeArguments<TEarlyBinder, TNamedTypeSymbol, TAttributeSyntax, TAttributeLocation>
+    internal struct EarlyDecodeWellKnownAttributeArguments<
+        TEarlyBinder,
+        TNamedTypeSymbol,
+        TAttributeSyntax,
+        TAttributeLocation
+    >
         where TNamedTypeSymbol : INamedTypeSymbolInternal
         where TAttributeSyntax : SyntaxNode
     {
@@ -29,7 +34,8 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// This method must be called only when some decoded data will be stored into it subsequently.
         /// </remarks>
-        public T GetOrCreateData<T>() where T : EarlyWellKnownAttributeData, new()
+        public T GetOrCreateData<T>()
+            where T : EarlyWellKnownAttributeData, new()
         {
             if (_lazyDecodeData == null)
             {

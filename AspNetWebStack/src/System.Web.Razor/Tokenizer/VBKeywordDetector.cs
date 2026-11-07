@@ -8,7 +8,10 @@ namespace System.Web.Razor.Tokenizer
 {
     internal static class VBKeywordDetector
     {
-        private static readonly Dictionary<string, VBKeyword> _keywords = new Dictionary<string, VBKeyword>(StringComparer.OrdinalIgnoreCase)
+        private static readonly Dictionary<string, VBKeyword> _keywords = new Dictionary<
+            string,
+            VBKeyword
+        >(StringComparer.OrdinalIgnoreCase)
         {
             { "addhandler", VBKeyword.AddHandler },
             { "andalso", VBKeyword.AndAlso },
@@ -161,7 +164,7 @@ namespace System.Web.Razor.Tokenizer
             { "uinteger", VBKeyword.UInteger },
             { "variant", VBKeyword.Variant },
             { "widening", VBKeyword.Widening },
-            { "xor", VBKeyword.Xor }
+            { "xor", VBKeyword.Xor },
         };
 
         public static VBKeyword? GetKeyword(string id)

@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
     internal partial class GlobalUndoServiceFactory
     {
-        private class WorkspaceUndoTransaction : ForegroundThreadAffinitizedObject, IWorkspaceGlobalUndoTransaction
+        private class WorkspaceUndoTransaction
+            : ForegroundThreadAffinitizedObject,
+                IWorkspaceGlobalUndoTransaction
         {
             private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
             private readonly IVsLinkedUndoTransactionManager _undoManager;
@@ -41,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 IVsLinkedUndoTransactionManager undoManager,
                 Workspace workspace,
                 string description,
-                GlobalUndoService service)
+                GlobalUndoService service
+            )
                 : base(threadingContext, assertIsForeground: true)
             {
                 _undoHistoryRegistry = undoHistoryRegistry;
@@ -50,7 +53,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _description = description;
                 _service = service;
 
-                Marshal.ThrowExceptionForHR(_undoManager.OpenLinkedUndo((uint)LinkedTransactionFlags2.mdtGlobal, _description));
+                Marshal.ThrowExceptionForHR(
+                    _undoManager.OpenLinkedUndo(
+                        (uint)LinkedTransactionFlags2.mdtGlobal,
+                        _description
+                    )
+                );
                 _transactionAlive = true;
             }
 

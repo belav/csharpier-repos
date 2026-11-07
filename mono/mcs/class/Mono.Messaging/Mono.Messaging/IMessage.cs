@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,189 +31,108 @@
 using System;
 using System.IO;
 
-namespace Mono.Messaging {
+namespace Mono.Messaging
+{
+    public interface IMessage
+    {
+        AcknowledgeTypes AcknowledgeType { get; set; }
 
-	public interface IMessage {
-	
-		AcknowledgeTypes AcknowledgeType { 
-			get; set; 
-		}
+        Acknowledgment Acknowledgment { get; }
 
-		Acknowledgment Acknowledgment { 
-			get;
-		}
-		
-		IMessageQueue AdministrationQueue { 
-			get; set;
-		}
-		
-		int AppSpecific { 
-			get; set;
-		}
-		
-		DateTime ArrivedTime { 
-			get;
-		}
-		
-		bool AttachSenderId { 
-			get; set;
-		}
-		
-		bool Authenticated {
-			get;
-		}
-		
-		string AuthenticationProviderName {
-			get; set;
-		}
-		
-		CryptographicProviderType AuthenticationProviderType {
-			get; set;
-		}
+        IMessageQueue AdministrationQueue { get; set; }
 
-		Stream BodyStream {
-			get; set;
-		}
+        int AppSpecific { get; set; }
 
-		int BodyType {
-			get; set;
-		}
+        DateTime ArrivedTime { get; }
 
-		Guid ConnectorType {
-			get; set;
-		}
+        bool AttachSenderId { get; set; }
 
-		string CorrelationId {
-			get; set;
-		}
+        bool Authenticated { get; }
 
-		IMessageQueue DestinationQueue {
-			get;
-		}
+        string AuthenticationProviderName { get; set; }
 
-		byte[] DestinationSymmetricKey {
-			get; set;
-		}
+        CryptographicProviderType AuthenticationProviderType { get; set; }
 
-		byte[] DigitalSignature {
-			get; set;
-		}
+        Stream BodyStream { get; set; }
 
-		EncryptionAlgorithm EncryptionAlgorithm {
-			get; set;
-		}
+        int BodyType { get; set; }
 
-		byte[] Extension {
-			get; set;
-		}
+        Guid ConnectorType { get; set; }
 
-		HashAlgorithm HashAlgorithm {
-			get; set;
-		}
+        string CorrelationId { get; set; }
 
-		string Id {
-			get;
-		}
+        IMessageQueue DestinationQueue { get; }
 
-		bool IsFirstInTransaction {
-			get;
-		}
+        byte[] DestinationSymmetricKey { get; set; }
 
-		bool IsLastInTransaction {
-			get;
-		}
+        byte[] DigitalSignature { get; set; }
 
-		string Label {
-			get;
-			set;
-		}
+        EncryptionAlgorithm EncryptionAlgorithm { get; set; }
 
-		MessageType MessageType {
-			get;
-		}
+        byte[] Extension { get; set; }
 
-		MessagePriority Priority {
-			get; set;
-		}
+        HashAlgorithm HashAlgorithm { get; set; }
 
-		bool Recoverable {
-			get; set;
-		}
+        string Id { get; }
 
-		IMessageQueue ResponseQueue {
-			get; set;
-		}
+        bool IsFirstInTransaction { get; }
 
-		byte[] SenderCertificate {
-			get; set;
-		}
+        bool IsLastInTransaction { get; }
 
-		byte[] SenderId {
-			get;
-		}
+        string Label { get; set; }
 
-		long SenderVersion {
-			get;
-		}
+        MessageType MessageType { get; }
 
-		DateTime SentTime {
-			get;
-		}
+        MessagePriority Priority { get; set; }
 
-		string SourceMachine {
-			get;
-		}
+        bool Recoverable { get; set; }
 
-		TimeSpan TimeToBeReceived {
-			get; set;
-		}
+        IMessageQueue ResponseQueue { get; set; }
 
-		TimeSpan TimeToReachQueue {
-			get; set;
-		}
+        byte[] SenderCertificate { get; set; }
 
-		string TransactionId {
-			get;
-		}
+        byte[] SenderId { get; }
 
-		IMessageQueue TransactionStatusQueue {
-			get; set;
-		}
+        long SenderVersion { get; }
 
-		bool UseAuthentication {
-			get; set;
-		}
+        DateTime SentTime { get; }
 
-		bool UseDeadLetterQueue {
-			get; set;
-		}
+        string SourceMachine { get; }
 
-		bool UseEncryption {
-			get; set;
-		}
+        TimeSpan TimeToBeReceived { get; set; }
 
-		bool UseJournalQueue {
-			get; set;
-		}
+        TimeSpan TimeToReachQueue { get; set; }
 
-		bool UseTracing {
-			get; set;
-		}
-		
-		/// <summary>
-		/// Sets all of the information about a message after is has been
-		/// delivered.  Implementing classes should set the values of the
-		/// appropriate properties in this method call.
-		/// </summary>
-		void SetDeliveryInfo (Acknowledgment acknowledgment,
-                              DateTime arrivedTime,
-                              IMessageQueue destinationQueue,
-							  string id,
-                              MessageType messageType,
-                              byte[] senderId,
-							  long senderVersion,
-		                      DateTime sentTime,
-							  string sourceMachine,
-                              string transactionId);
-	}
+        string TransactionId { get; }
+
+        IMessageQueue TransactionStatusQueue { get; set; }
+
+        bool UseAuthentication { get; set; }
+
+        bool UseDeadLetterQueue { get; set; }
+
+        bool UseEncryption { get; set; }
+
+        bool UseJournalQueue { get; set; }
+
+        bool UseTracing { get; set; }
+
+        /// <summary>
+        /// Sets all of the information about a message after is has been
+        /// delivered.  Implementing classes should set the values of the
+        /// appropriate properties in this method call.
+        /// </summary>
+        void SetDeliveryInfo(
+            Acknowledgment acknowledgment,
+            DateTime arrivedTime,
+            IMessageQueue destinationQueue,
+            string id,
+            MessageType messageType,
+            byte[] senderId,
+            long senderVersion,
+            DateTime sentTime,
+            string sourceMachine,
+            string transactionId
+        );
+    }
 }

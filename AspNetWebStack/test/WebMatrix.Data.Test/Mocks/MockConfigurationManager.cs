@@ -7,7 +7,8 @@ namespace WebMatrix.Data.Test.Mocks
 {
     internal class MockConfigurationManager : IConfigurationManager
     {
-        private Dictionary<string, IConnectionConfiguration> _connectionStrings = new Dictionary<string, IConnectionConfiguration>();
+        private Dictionary<string, IConnectionConfiguration> _connectionStrings =
+            new Dictionary<string, IConnectionConfiguration>();
 
         public MockConfigurationManager()
         {

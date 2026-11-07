@@ -14,14 +14,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         private readonly Symbols.ArrayTypeSymbol _underlying;
         private ITypeSymbol? _lazyElementType;
 
-        public ArrayTypeSymbol(Symbols.ArrayTypeSymbol underlying, CodeAnalysis.NullableAnnotation nullableAnnotation)
+        public ArrayTypeSymbol(
+            Symbols.ArrayTypeSymbol underlying,
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
             : base(nullableAnnotation)
         {
             RoslynDebug.Assert(underlying is object);
             _underlying = underlying;
         }
 
-        protected override ITypeSymbol WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected override ITypeSymbol WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
@@ -30,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         internal override CSharp.Symbol UnderlyingSymbol => _underlying;
         internal override Symbols.TypeSymbol UnderlyingTypeSymbol => _underlying;
-        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol => _underlying;
+        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol =>
+            _underlying;
 
         int IArrayTypeSymbol.Rank => _underlying.Rank;
 
@@ -46,7 +52,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyElementType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyElementType, _underlying.ElementTypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyElementType,
+                        _underlying.ElementTypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyElementType;
@@ -55,17 +65,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         CodeAnalysis.NullableAnnotation IArrayTypeSymbol.ElementNullableAnnotation
         {
-            get
-            {
-                return _underlying.ElementTypeWithAnnotations.ToPublicAnnotation();
-            }
+            get { return _underlying.ElementTypeWithAnnotations.ToPublicAnnotation(); }
         }
 
-        ImmutableArray<CustomModifier> IArrayTypeSymbol.CustomModifiers => _underlying.ElementTypeWithAnnotations.CustomModifiers;
+        ImmutableArray<CustomModifier> IArrayTypeSymbol.CustomModifiers =>
+            _underlying.ElementTypeWithAnnotations.CustomModifiers;
 
         bool IArrayTypeSymbol.Equals(IArrayTypeSymbol? other)
         {
-            return this.Equals(other as ArrayTypeSymbol, CodeAnalysis.SymbolEqualityComparer.Default);
+            return this.Equals(
+                other as ArrayTypeSymbol,
+                CodeAnalysis.SymbolEqualityComparer.Default
+            );
         }
 
         #region ISymbol Members
@@ -81,7 +92,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitArrayType(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitArrayType(this, argument);
         }

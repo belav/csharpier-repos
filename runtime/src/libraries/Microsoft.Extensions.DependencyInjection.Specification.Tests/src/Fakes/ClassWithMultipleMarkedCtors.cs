@@ -6,13 +6,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
     public class ClassWithMultipleMarkedCtors
     {
         [ActivatorUtilitiesConstructor]
-        public ClassWithMultipleMarkedCtors(string data)
-        {
-        }
+        public ClassWithMultipleMarkedCtors(string data) { }
 
         [ActivatorUtilitiesConstructor]
-        public ClassWithMultipleMarkedCtors(IFakeService service, string data)
-        {
-        }
+        public ClassWithMultipleMarkedCtors(IFakeService service, string data) { }
     }
 }

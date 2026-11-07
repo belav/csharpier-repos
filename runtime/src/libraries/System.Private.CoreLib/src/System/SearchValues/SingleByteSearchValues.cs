@@ -19,20 +19,17 @@ namespace System.Buffers
         internal override byte[] GetValues() => new[] { _e0 };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override bool ContainsCore(byte value) =>
-            value == _e0;
+        internal override bool ContainsCore(byte value) => value == _e0;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override int IndexOfAny(ReadOnlySpan<byte> span) =>
-            span.IndexOf(_e0);
+        internal override int IndexOfAny(ReadOnlySpan<byte> span) => span.IndexOf(_e0);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAnyExcept(ReadOnlySpan<byte> span) =>
             span.IndexOfAnyExcept(_e0);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override int LastIndexOfAny(ReadOnlySpan<byte> span) =>
-            span.LastIndexOf(_e0);
+        internal override int LastIndexOfAny(ReadOnlySpan<byte> span) => span.LastIndexOf(_e0);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int LastIndexOfAnyExcept(ReadOnlySpan<byte> span) =>

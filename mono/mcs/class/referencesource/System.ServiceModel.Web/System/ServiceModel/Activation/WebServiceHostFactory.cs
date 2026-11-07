@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Activation
 {
-    using System.Web;
-    using System.Web.Hosting;
     using System.IO;
-    using System.ServiceModel.Web;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Activation;
-    using System.Web.Compilation;
     using System.Reflection;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Web;
+    using System.Web;
+    using System.Web.Compilation;
+    using System.Web.Hosting;
 
     public class WebServiceHostFactory : ServiceHostFactory
     {

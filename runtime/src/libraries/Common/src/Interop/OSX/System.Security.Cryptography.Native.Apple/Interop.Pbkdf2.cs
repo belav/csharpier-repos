@@ -15,7 +15,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> password,
             ReadOnlySpan<byte> salt,
             int iterations,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             fixed (byte* pPassword = password)
             fixed (byte* pSalt = salt)
@@ -31,13 +32,15 @@ internal static partial class Interop
                     iterations,
                     pDestination,
                     destination.Length,
-                    &ccStatus);
+                    &ccStatus
+                );
 
                 if (ret == 0)
                 {
                     throw Interop.AppleCrypto.CreateExceptionForCCError(
                         ccStatus,
-                        Interop.AppleCrypto.CCCryptorStatus);
+                        Interop.AppleCrypto.CCCryptorStatus
+                    );
                 }
 
                 if (ret != 1)
@@ -58,6 +61,7 @@ internal static partial class Interop
             int iterations,
             byte* derivedKey,
             int derivedKeyLen,
-            int* errorCode);
+            int* errorCode
+        );
     }
 }

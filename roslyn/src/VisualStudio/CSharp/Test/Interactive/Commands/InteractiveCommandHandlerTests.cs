@@ -19,19 +19,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
         private const string Caret = "$$";
         private const string ExampleCode1 = @"var x = 1;";
         private const string ExampleCode2 =
-@"var x = 1;
+            @"var x = 1;
 Task.Run(() => { return 1; });";
-        private const string ExampleCode2Line2 =
-@"Task.Run(() => { return 1; });";
+        private const string ExampleCode2Line2 = @"Task.Run(() => { return 1; });";
         private const string ExampleMultiline =
-@"namespace N {
+            @"namespace N {
     void goo() {
         Console.WriteLine(
             $$""LLL"");
     }
 }";
         private const string ExpectedMultilineSelection =
-@"Console.WriteLine(
+            @"Console.WriteLine(
             ""LLL"");";
 
         [WpfFact]
@@ -40,9 +39,11 @@ Task.Run(() => { return 1; });";
             AssertExecuteInInteractive(Caret, new string[0]);
 
             AssertExecuteInInteractive(
-@"var x = 1;
+                @"var x = 1;
 $$
-var y = 2;", new string[0]);
+var y = 2;",
+                new string[0]
+            );
 
             AssertExecuteInInteractive(ExampleCode1 + Caret, ExampleCode1);
             AssertExecuteInInteractive(ExampleCode1.Insert(3, Caret), ExampleCode1);
@@ -54,41 +55,54 @@ var y = 2;", new string[0]);
         public void TestExecuteInInteractiveWithEmptyBuffer()
         {
             AssertExecuteInInteractive(
-@"{|Selection:|}var x = 1;
-{|Selection:$$|}var y = 2;", new string[0]);
+                @"{|Selection:|}var x = 1;
+{|Selection:$$|}var y = 2;",
+                new string[0]
+            );
 
             AssertExecuteInInteractive($@"{{|Selection:{ExampleCode1}$$|}}", ExampleCode1);
 
             AssertExecuteInInteractive($@"{{|Selection:{ExampleCode2}$$|}}", ExampleCode2);
 
             AssertExecuteInInteractive(
-$@"var o = new object[] {{ 1, 2, 3 }};
+                $@"var o = new object[] {{ 1, 2, 3 }};
 Console.WriteLine(o);
 {{|Selection:{ExampleCode2}$$|}}
 
-Console.WriteLine(x);", ExampleCode2);
+Console.WriteLine(x);",
+                ExampleCode2
+            );
         }
 
         [WpfFact]
         public void TestExecuteInInteractiveWithBoxSelection()
         {
-            var expectedBoxSubmissionResult = @"int x;
+            var expectedBoxSubmissionResult =
+                @"int x;
 int y;";
             AssertExecuteInInteractive(
-$@"some text {{|Selection:$$int x;|}} also here
-text some {{|Selection:int y;|}} here also", expectedBoxSubmissionResult);
+                $@"some text {{|Selection:$$int x;|}} also here
+text some {{|Selection:int y;|}} here also",
+                expectedBoxSubmissionResult
+            );
 
             AssertExecuteInInteractive(
-$@"some text {{|Selection:int x;$$|}} also here
-text some {{|Selection:int y;|}} here also", expectedBoxSubmissionResult);
+                $@"some text {{|Selection:int x;$$|}} also here
+text some {{|Selection:int y;|}} here also",
+                expectedBoxSubmissionResult
+            );
 
             AssertExecuteInInteractive(
-$@"some text {{|Selection:int x;|}} also here
-text some {{|Selection:$$int y;|}} here also", expectedBoxSubmissionResult);
+                $@"some text {{|Selection:int x;|}} also here
+text some {{|Selection:$$int y;|}} here also",
+                expectedBoxSubmissionResult
+            );
 
             AssertExecuteInInteractive(
-$@"some text {{|Selection:int x;|}} also here
-text some {{|Selection:int y;$$|}} here also", expectedBoxSubmissionResult);
+                $@"some text {{|Selection:int x;|}} also here
+text some {{|Selection:int y;$$|}} here also",
+                expectedBoxSubmissionResult
+            );
         }
 
         [WpfFact]
@@ -99,30 +113,32 @@ text some {{|Selection:int y;$$|}} here also", expectedBoxSubmissionResult);
             AssertExecuteInInteractive(
                 @"{|Selection:var y = 2;$$|}",
                 "var y = 2;",
-                submissionBuffer: "var x = 1;");
+                submissionBuffer: "var x = 1;"
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/23200")]
         public void TestExecuteInInteractiveWithDefines()
         {
             var exampleWithIfDirective =
-@"#if DEF
+                @"#if DEF
 public void $$Run()
 {
 }
 #endif";
 
-            AssertExecuteInInteractive(exampleWithIfDirective,
-@"public void Run()");
+            AssertExecuteInInteractive(exampleWithIfDirective, @"public void Run()");
 
             var exampleWithDefine =
-$@"#define DEF
+                $@"#define DEF
 {exampleWithIfDirective}";
 
-            AssertExecuteInInteractive(exampleWithDefine,
-@"public void Run()
+            AssertExecuteInInteractive(
+                exampleWithDefine,
+                @"public void Run()
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
@@ -135,12 +151,14 @@ $@"#define DEF
             AssertCopyToInteractive(
                 code: ExampleCode2 + Caret,
                 submissionBuffer: ExampleCode1,
-                expectedBufferText: ExampleCode1 + "\r\n" + ExampleCode2Line2);
+                expectedBufferText: ExampleCode1 + "\r\n" + ExampleCode2Line2
+            );
 
             AssertCopyToInteractive(
                 code: ExampleCode2 + Caret,
                 submissionBuffer: "x = 2;",
-                expectedBufferText: "x = 2;\r\n" + ExampleCode2Line2);
+                expectedBufferText: "x = 2;\r\n" + ExampleCode2Line2
+            );
         }
 
         [WpfFact]
@@ -157,23 +175,39 @@ $@"#define DEF
             AssertCopyToInteractive(
                 $"{{|Selection:{ExampleCode2}$$|}}",
                 $"var x = 1;\r\n{ExampleCode2}",
-                submissionBuffer: "var x = 1;");
+                submissionBuffer: "var x = 1;"
+            );
         }
 
-        private static void AssertCopyToInteractive(string code, string expectedBufferText, string submissionBuffer = null)
+        private static void AssertCopyToInteractive(
+            string code,
+            string expectedBufferText,
+            string submissionBuffer = null
+        )
         {
             using var workspace = InteractiveWindowCommandHandlerTestState.CreateTestState(code);
             PrepareSubmissionBuffer(submissionBuffer, workspace);
             workspace.SendCopyToInteractive();
-            Assert.Equal(expectedBufferText, workspace.WindowCurrentLanguageBuffer.CurrentSnapshot.GetText());
+            Assert.Equal(
+                expectedBufferText,
+                workspace.WindowCurrentLanguageBuffer.CurrentSnapshot.GetText()
+            );
         }
 
-        private static void AssertExecuteInInteractive(string code, string expectedSubmission, string submissionBuffer = null)
+        private static void AssertExecuteInInteractive(
+            string code,
+            string expectedSubmission,
+            string submissionBuffer = null
+        )
         {
             AssertExecuteInInteractive(code, new string[] { expectedSubmission }, submissionBuffer);
         }
 
-        private static void AssertExecuteInInteractive(string code, string[] expectedSubmissions, string submissionBuffer = null)
+        private static void AssertExecuteInInteractive(
+            string code,
+            string[] expectedSubmissions,
+            string submissionBuffer = null
+        )
         {
             var submissions = new List<string>();
             void appendSubmission(object _, string item)
@@ -190,7 +224,10 @@ $@"#define DEF
             AssertEx.Equal(expectedSubmissions, submissions);
         }
 
-        private static void PrepareSubmissionBuffer(string submissionBuffer, InteractiveWindowCommandHandlerTestState workspace)
+        private static void PrepareSubmissionBuffer(
+            string submissionBuffer,
+            InteractiveWindowCommandHandlerTestState workspace
+        )
         {
             if (!string.IsNullOrEmpty(submissionBuffer))
             {

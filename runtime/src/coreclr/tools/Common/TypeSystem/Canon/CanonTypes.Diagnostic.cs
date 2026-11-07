@@ -7,17 +7,11 @@ namespace Internal.TypeSystem
     {
         public override string DiagnosticName
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
         }
         public override string DiagnosticNamespace
         {
-            get
-            {
-                return _Namespace;
-            }
+            get { return _Namespace; }
         }
     }
 
@@ -25,17 +19,11 @@ namespace Internal.TypeSystem
     {
         public override string DiagnosticName
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
         }
         public override string DiagnosticNamespace
         {
-            get
-            {
-                return _Namespace;
-            }
+            get { return _Namespace; }
         }
     }
 }

@@ -61,7 +61,12 @@ namespace System.Text.Json
 
             if (JsonTypeInfo.IsInvalidForSerialization(type))
             {
-                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(nameof(type), type, null, null);
+                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(
+                    nameof(type),
+                    type,
+                    null,
+                    null
+                );
             }
 
             return GetTypeInfoInternal(type, resolveIfMutable: true);
@@ -89,7 +94,12 @@ namespace System.Text.Json
 
             if (JsonTypeInfo.IsInvalidForSerialization(type))
             {
-                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(nameof(type), type, null, null);
+                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(
+                    nameof(type),
+                    type,
+                    null,
+                    null
+                );
             }
 
             typeInfo = GetTypeInfoInternal(type, ensureNotNull: null, resolveIfMutable: true);
@@ -107,10 +117,17 @@ namespace System.Text.Json
             // so use a nullable representation instead to piggy-back on the NotNullIfNotNull attribute.
             bool? ensureNotNull = true,
             bool resolveIfMutable = false,
-            bool fallBackToNearestAncestorType = false)
+            bool fallBackToNearestAncestorType = false
+        )
         {
-            Debug.Assert(!fallBackToNearestAncestorType || IsReadOnly, "ancestor resolution should only be invoked in read-only options.");
-            Debug.Assert(ensureNotNull is null or true, "Explicitly passing false will result in invalid result annotation.");
+            Debug.Assert(
+                !fallBackToNearestAncestorType || IsReadOnly,
+                "ancestor resolution should only be invoked in read-only options."
+            );
+            Debug.Assert(
+                ensureNotNull is null or true,
+                "Explicitly passing false will result in invalid result annotation."
+            );
 
             JsonTypeInfo? typeInfo = null;
 
@@ -135,7 +152,10 @@ namespace System.Text.Json
             return typeInfo;
         }
 
-        internal bool TryGetTypeInfoCached(Type type, [NotNullWhen(true)] out JsonTypeInfo? typeInfo)
+        internal bool TryGetTypeInfoCached(
+            Type type,
+            [NotNullWhen(true)] out JsonTypeInfo? typeInfo
+        )
         {
             if (_cachingContext == null)
             {
@@ -150,19 +170,28 @@ namespace System.Text.Json
         /// Return the TypeInfo for root API calls.
         /// This has an LRU cache that is intended only for public API calls that specify the root type.
         /// </summary>
-        internal JsonTypeInfo GetTypeInfoForRootType(Type type, bool fallBackToNearestAncestorType = false)
+        internal JsonTypeInfo GetTypeInfoForRootType(
+            Type type,
+            bool fallBackToNearestAncestorType = false
+        )
         {
             JsonTypeInfo? jsonTypeInfo = _lastTypeInfo;
 
             if (jsonTypeInfo?.Type != type)
             {
-                _lastTypeInfo = jsonTypeInfo = GetTypeInfoInternal(type, fallBackToNearestAncestorType: fallBackToNearestAncestorType);
+                _lastTypeInfo = jsonTypeInfo = GetTypeInfoInternal(
+                    type,
+                    fallBackToNearestAncestorType: fallBackToNearestAncestorType
+                );
             }
 
             return jsonTypeInfo;
         }
 
-        internal bool TryGetPolymorphicTypeInfoForRootType(object rootValue, [NotNullWhen(true)] out JsonTypeInfo? polymorphicTypeInfo)
+        internal bool TryGetPolymorphicTypeInfoForRootType(
+            object rootValue,
+            [NotNullWhen(true)] out JsonTypeInfo? polymorphicTypeInfo
+        )
         {
             Debug.Assert(rootValue != null);
 
@@ -172,7 +201,10 @@ namespace System.Text.Json
                 // To determine the contract for an object value:
                 // 1. Find the JsonTypeInfo for the runtime type with fallback to the nearest ancestor, if not available.
                 // 2. If the resolved type is deriving from a polymorphic type, use the contract of the polymorphic type instead.
-                polymorphicTypeInfo = GetTypeInfoForRootType(runtimeType, fallBackToNearestAncestorType: true);
+                polymorphicTypeInfo = GetTypeInfoForRootType(
+                    runtimeType,
+                    fallBackToNearestAncestorType: true
+                );
                 if (polymorphicTypeInfo.AncestorPolymorphicType is { } ancestorPolymorphicType)
                 {
                     polymorphicTypeInfo = ancestorPolymorphicType;
@@ -228,11 +260,15 @@ namespace System.Text.Json
 
             public JsonSerializerOptions Options { get; }
             public int HashCode { get; }
+
             // Property only accessed by reflection in testing -- do not remove.
             // If changing please ensure that src/ILLink.Descriptors.LibraryBuild.xml is up-to-date.
             public int Count => _cache.Count;
 
-            public JsonTypeInfo? GetOrAddTypeInfo(Type type, bool fallBackToNearestAncestorType = false)
+            public JsonTypeInfo? GetOrAddTypeInfo(
+                Type type,
+                bool fallBackToNearestAncestorType = false
+            )
             {
                 CacheEntry entry = GetOrAddCacheEntry(type);
                 return fallBackToNearestAncestorType && !entry.HasResult
@@ -286,8 +322,11 @@ namespace System.Text.Json
                 return nearestAncestor?.GetResult();
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-                Justification = "We only need to examine the interface types that are supported by the underlying resolver.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2070:UnrecognizedReflectionPattern",
+                Justification = "We only need to examine the interface types that are supported by the underlying resolver."
+            )]
             private CacheEntry? DetermineNearestAncestor(Type type, CacheEntry entry)
             {
                 // In cases where the underlying TypeInfoResolver returns `null` for a given type,
@@ -346,7 +385,12 @@ namespace System.Text.Json
                             {
                                 // We have found two possible ancestors that are not in subtype relationship.
                                 // This indicates we have encountered a diamond ambiguity -- abort search and record an exception.
-                                NotSupportedException nse = ThrowHelper.GetNotSupportedException_AmbiguousMetadataForType(type, candidateType, interfaceType);
+                                NotSupportedException nse =
+                                    ThrowHelper.GetNotSupportedException_AmbiguousMetadataForType(
+                                        type,
+                                        candidateType,
+                                        interfaceType
+                                    );
                                 candidate = new CacheEntry(ExceptionDispatchInfo.Capture(nse));
                                 break;
                             }
@@ -399,17 +443,28 @@ namespace System.Text.Json
         internal static class TrackedCachingContexts
         {
             private const int MaxTrackedContexts = 64;
-            private static readonly WeakReference<CachingContext>?[] s_trackedContexts = new WeakReference<CachingContext>[MaxTrackedContexts];
+            private static readonly WeakReference<CachingContext>?[] s_trackedContexts =
+                new WeakReference<CachingContext>[MaxTrackedContexts];
             private static readonly EqualityComparer s_optionsComparer = new();
 
             public static CachingContext GetOrCreate(JsonSerializerOptions options)
             {
-                Debug.Assert(options.IsReadOnly, "Cannot create caching contexts for mutable JsonSerializerOptions instances");
+                Debug.Assert(
+                    options.IsReadOnly,
+                    "Cannot create caching contexts for mutable JsonSerializerOptions instances"
+                );
                 Debug.Assert(options._typeInfoResolver != null);
 
                 int hashCode = s_optionsComparer.GetHashCode(options);
 
-                if (TryGetContext(options, hashCode, out int firstUnpopulatedIndex, out CachingContext? result))
+                if (
+                    TryGetContext(
+                        options,
+                        hashCode,
+                        out int firstUnpopulatedIndex,
+                        out CachingContext? result
+                    )
+                )
                 {
                     return result;
                 }
@@ -431,7 +486,9 @@ namespace System.Text.Json
                     if (firstUnpopulatedIndex >= 0)
                     {
                         // Cache has capacity -- store the context in the first available index.
-                        ref WeakReference<CachingContext>? weakRef = ref s_trackedContexts[firstUnpopulatedIndex];
+                        ref WeakReference<CachingContext>? weakRef = ref s_trackedContexts[
+                            firstUnpopulatedIndex
+                        ];
 
                         if (weakRef is null)
                         {
@@ -452,7 +509,8 @@ namespace System.Text.Json
                 JsonSerializerOptions options,
                 int hashCode,
                 out int firstUnpopulatedIndex,
-                [NotNullWhen(true)] out CachingContext? result)
+                [NotNullWhen(true)] out CachingContext? result
+            )
             {
                 WeakReference<CachingContext>?[] trackedContexts = s_trackedContexts;
 
@@ -468,7 +526,10 @@ namespace System.Text.Json
                             firstUnpopulatedIndex = i;
                         }
                     }
-                    else if (hashCode == ctx.HashCode && s_optionsComparer.Equals(options, ctx.Options))
+                    else if (
+                        hashCode == ctx.HashCode
+                        && s_optionsComparer.Equals(options, ctx.Options)
+                    )
                     {
                         result = ctx;
                         return true;
@@ -491,30 +552,33 @@ namespace System.Text.Json
             {
                 Debug.Assert(left != null && right != null);
 
-                return
-                    left._dictionaryKeyPolicy == right._dictionaryKeyPolicy &&
-                    left._jsonPropertyNamingPolicy == right._jsonPropertyNamingPolicy &&
-                    left._readCommentHandling == right._readCommentHandling &&
-                    left._referenceHandler == right._referenceHandler &&
-                    left._encoder == right._encoder &&
-                    left._defaultIgnoreCondition == right._defaultIgnoreCondition &&
-                    left._numberHandling == right._numberHandling &&
-                    left._preferredObjectCreationHandling == right._preferredObjectCreationHandling &&
-                    left._unknownTypeHandling == right._unknownTypeHandling &&
-                    left._unmappedMemberHandling == right._unmappedMemberHandling &&
-                    left._defaultBufferSize == right._defaultBufferSize &&
-                    left._maxDepth == right._maxDepth &&
-                    left._allowTrailingCommas == right._allowTrailingCommas &&
-                    left._ignoreNullValues == right._ignoreNullValues &&
-                    left._ignoreReadOnlyProperties == right._ignoreReadOnlyProperties &&
-                    left._ignoreReadonlyFields == right._ignoreReadonlyFields &&
-                    left._includeFields == right._includeFields &&
-                    left._propertyNameCaseInsensitive == right._propertyNameCaseInsensitive &&
-                    left._writeIndented == right._writeIndented &&
-                    left._typeInfoResolver == right._typeInfoResolver &&
-                    CompareLists(left._converters, right._converters);
+                return left._dictionaryKeyPolicy == right._dictionaryKeyPolicy
+                    && left._jsonPropertyNamingPolicy == right._jsonPropertyNamingPolicy
+                    && left._readCommentHandling == right._readCommentHandling
+                    && left._referenceHandler == right._referenceHandler
+                    && left._encoder == right._encoder
+                    && left._defaultIgnoreCondition == right._defaultIgnoreCondition
+                    && left._numberHandling == right._numberHandling
+                    && left._preferredObjectCreationHandling
+                        == right._preferredObjectCreationHandling
+                    && left._unknownTypeHandling == right._unknownTypeHandling
+                    && left._unmappedMemberHandling == right._unmappedMemberHandling
+                    && left._defaultBufferSize == right._defaultBufferSize
+                    && left._maxDepth == right._maxDepth
+                    && left._allowTrailingCommas == right._allowTrailingCommas
+                    && left._ignoreNullValues == right._ignoreNullValues
+                    && left._ignoreReadOnlyProperties == right._ignoreReadOnlyProperties
+                    && left._ignoreReadonlyFields == right._ignoreReadonlyFields
+                    && left._includeFields == right._includeFields
+                    && left._propertyNameCaseInsensitive == right._propertyNameCaseInsensitive
+                    && left._writeIndented == right._writeIndented
+                    && left._typeInfoResolver == right._typeInfoResolver
+                    && CompareLists(left._converters, right._converters);
 
-                static bool CompareLists<TValue>(ConfigurationList<TValue>? left, ConfigurationList<TValue>? right)
+                static bool CompareLists<TValue>(
+                    ConfigurationList<TValue>? left,
+                    ConfigurationList<TValue>? right
+                )
                     where TValue : class?
                 {
                     // equates null with empty lists
@@ -570,7 +634,10 @@ namespace System.Text.Json
 
                 return hc.ToHashCode();
 
-                static void AddListHashCode<TValue>(ref HashCode hc, ConfigurationList<TValue>? list)
+                static void AddListHashCode<TValue>(
+                    ref HashCode hc,
+                    ConfigurationList<TValue>? list
+                )
                 {
                     // equates null with empty lists
                     if (list is null)
@@ -591,7 +658,10 @@ namespace System.Text.Json
                     }
                     else
                     {
-                        Debug.Assert(!typeof(TValue).IsSealed, "Sealed reference types like string should not use this method.");
+                        Debug.Assert(
+                            !typeof(TValue).IsSealed,
+                            "Sealed reference types like string should not use this method."
+                        );
                         hc.Add(RuntimeHelpers.GetHashCode(value));
                     }
                 }
@@ -604,7 +674,9 @@ namespace System.Text.Json
             private struct HashCode
             {
                 private int _hashCode;
+
                 public void Add<T>(T? value) => _hashCode = (_hashCode, value).GetHashCode();
+
                 public int ToHashCode() => _hashCode;
             }
 #endif

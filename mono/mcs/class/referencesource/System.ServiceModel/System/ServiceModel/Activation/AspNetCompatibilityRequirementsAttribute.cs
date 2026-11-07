@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.ServiceModel.Dispatcher;
 
     // This attribute specifies what the service implementation requires for AspNet Integration mode.
@@ -15,8 +15,10 @@ namespace System.ServiceModel.Activation
     {
         // AppCompat: The default has been changed in 4.5 to Allowed so that fewer people need to change it.
         // For deployment compat purposes, apps targeting 4.0 should behave the same as if 4.5 was not installed.
-        AspNetCompatibilityRequirementsMode requirementsMode = OSEnvironmentHelper.IsApplicationTargeting45 ?
-            AspNetCompatibilityRequirementsMode.Allowed : AspNetCompatibilityRequirementsMode.NotAllowed;
+        AspNetCompatibilityRequirementsMode requirementsMode =
+            OSEnvironmentHelper.IsApplicationTargeting45
+                ? AspNetCompatibilityRequirementsMode.Allowed
+                : AspNetCompatibilityRequirementsMode.NotAllowed;
 
         // NotAllowed: Validates that the service is not running in the AspNetCompatibility mode.
         //
@@ -26,10 +28,7 @@ namespace System.ServiceModel.Activation
         //
         public AspNetCompatibilityRequirementsMode RequirementsMode
         {
-            get
-            {
-                return this.requirementsMode;
-            }
+            get { return this.requirementsMode; }
             set
             {
                 AspNetCompatibilityRequirementsModeHelper.Validate(value);
@@ -37,11 +36,17 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
             {
@@ -51,9 +56,9 @@ namespace System.ServiceModel.Activation
             AspNetEnvironment.Current.ValidateCompatibilityRequirements(RequirementsMode);
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }
-

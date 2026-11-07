@@ -14,7 +14,10 @@ namespace CopyConstructorMarshaler
         [Fact]
         public static int TestEntryPoint()
         {
-            if(Environment.OSVersion.Platform != PlatformID.Win32NT || TestLibrary.Utilities.IsWindows7)
+            if (
+                Environment.OSVersion.Platform != PlatformID.Win32NT
+                || TestLibrary.Utilities.IsWindows7
+            )
             {
                 return 100;
             }

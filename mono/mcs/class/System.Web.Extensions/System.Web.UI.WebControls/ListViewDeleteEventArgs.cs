@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,40 +28,41 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.ComponentModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewDeleteEventArgs : CancelEventArgs
-	{
-		IOrderedDictionary _keys;
-		IOrderedDictionary _values;
-		
-		public ListViewDeleteEventArgs (int itemIndex)
-		{
-			ItemIndex = itemIndex;
-		}
-		
-		public int ItemIndex {
-			get;
-			private set;
-		}
-		
-		public IOrderedDictionary Keys {
-			get {
-				if (_keys == null)
-					_keys = new OrderedDictionary ();
-				return _keys;
-			}
-		}
-		
-		public IOrderedDictionary Values {
-			get {
-				if (_values == null)
-					_values = new OrderedDictionary ();
-				return _values;
-			}
-		}
-	}
+    public class ListViewDeleteEventArgs : CancelEventArgs
+    {
+        IOrderedDictionary _keys;
+        IOrderedDictionary _values;
+
+        public ListViewDeleteEventArgs(int itemIndex)
+        {
+            ItemIndex = itemIndex;
+        }
+
+        public int ItemIndex { get; private set; }
+
+        public IOrderedDictionary Keys
+        {
+            get
+            {
+                if (_keys == null)
+                    _keys = new OrderedDictionary();
+                return _keys;
+            }
+        }
+
+        public IOrderedDictionary Values
+        {
+            get
+            {
+                if (_values == null)
+                    _values = new OrderedDictionary();
+                return _values;
+            }
+        }
+    }
 }

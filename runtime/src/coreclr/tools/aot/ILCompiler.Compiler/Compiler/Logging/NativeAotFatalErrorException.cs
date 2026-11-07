@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using ILCompiler.Logging;
 
 namespace ILCompiler
@@ -20,8 +19,14 @@ namespace ILCompiler
         public NativeAotFatalErrorException(MessageContainer message)
             : base(message.ToString())
         {
-            Debug.Assert(message.Category == MessageCategory.Error, $"'{nameof(NativeAotFatalErrorException)}' ought to be used for errors only");
-            Debug.Assert(message.Code != null && message.Code.Value != 0, $"'{nameof(NativeAotFatalErrorException)}' must have a code that indicates a failure");
+            Debug.Assert(
+                message.Category == MessageCategory.Error,
+                $"'{nameof(NativeAotFatalErrorException)}' ought to be used for errors only"
+            );
+            Debug.Assert(
+                message.Code != null && message.Code.Value != 0,
+                $"'{nameof(NativeAotFatalErrorException)}' must have a code that indicates a failure"
+            );
             MessageContainer = message;
         }
 
@@ -30,8 +35,14 @@ namespace ILCompiler
         public NativeAotFatalErrorException(MessageContainer message, Exception innerException)
             : base(message.ToString(), innerException)
         {
-            Debug.Assert(message.Category == MessageCategory.Error, $"'{nameof(NativeAotFatalErrorException)}' ought to be used for errors only");
-            Debug.Assert(message.Code != null && message.Code.Value != 0, $"'{nameof(NativeAotFatalErrorException)}' must have a code that indicates failure");
+            Debug.Assert(
+                message.Category == MessageCategory.Error,
+                $"'{nameof(NativeAotFatalErrorException)}' ought to be used for errors only"
+            );
+            Debug.Assert(
+                message.Code != null && message.Code.Value != 0,
+                $"'{nameof(NativeAotFatalErrorException)}' must have a code that indicates failure"
+            );
             MessageContainer = message;
         }
     }

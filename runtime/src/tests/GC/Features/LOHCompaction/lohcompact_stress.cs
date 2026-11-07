@@ -3,10 +3,10 @@
 
 using System;
 using System.Diagnostics;
-using System.Threading;
 using System.Runtime;
+using System.Threading;
 
-//This test creates high fragmentation in the large object heap 
+//This test creates high fragmentation in the large object heap
 //LOH fragmentation: up to 80-90%
 //No large objects pinned
 //Max GC heap size = 137MB with default param (100 iterations, 4 threads)
@@ -24,10 +24,14 @@ class PriorityTest
     private int medTime;
     private int youngTime;
 
-
-    public PriorityTest(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
+    public PriorityTest(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    )
     {
         rand = new Random(314159);
         this.oldDataSize = oldDataSize;
@@ -56,11 +60,15 @@ class PriorityTest
     }
 
     // churns data in the heap by replacing byte arrays with new ones
-    void SteadyState(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
+    void SteadyState(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    )
     {
-
         for (int i = 0; i < iterCount; i++)
         {
             byte[] newarray = new byte[meanAllocSize];
@@ -73,14 +81,18 @@ class PriorityTest
             {
                 med[rand.Next(0, med.Length)] = newarray;
             }
-            if ((i % 500) == 0) 
+            if ((i % 500) == 0)
             {
                 Thread.Sleep(10);
             }
             if ((i % (1000 * System.Threading.Thread.CurrentThread.ManagedThreadId)) == 0)
             {
-                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
-                if ((i % 5 == 0) && (System.Runtime.GCSettings.LatencyMode != System.Runtime.GCLatencyMode.Batch))
+                GCSettings.LargeObjectHeapCompactionMode =
+                    GCLargeObjectHeapCompactionMode.CompactOnce;
+                if (
+                    (i % 5 == 0)
+                    && (System.Runtime.GCSettings.LatencyMode != System.Runtime.GCLatencyMode.Batch)
+                )
                     GC.Collect();
             }
         }
@@ -93,22 +105,20 @@ class PriorityTest
         {
             AllocTest(oldDataSize, medDataSize, meanAllocSize);
 
-            SteadyState(oldDataSize, medDataSize,
-                iterCount, meanAllocSize,
-                medTime, youngTime);
+            SteadyState(oldDataSize, medDataSize, iterCount, meanAllocSize, medTime, youngTime);
 
             if (((iteration + 1) % 20) == 0)
-                Console.WriteLine("Thread: {1} Finished iteration {0}", iteration, System.Threading.Thread.CurrentThread.Name);
+                Console.WriteLine(
+                    "Thread: {1} Finished iteration {0}",
+                    iteration,
+                    System.Threading.Thread.CurrentThread.Name
+                );
         }
-
     }
-
 }
-
 
 class ConcurrentRepro
 {
-
     public static void Usage()
     {
         Console.WriteLine("Usage:");
@@ -145,23 +155,19 @@ class ConcurrentRepro
             return parameters;
         }
 
-        // incorrect number of arguments        
+        // incorrect number of arguments
         Usage();
         return null;
     }
 
-
     public static int Main(string[] args)
     {
-
         // parse arguments
         int[] parameters = ParseArgs(args);
         if (parameters == null)
         {
             return 0;
         }
-
-
 
         PriorityTest priorityTest = new PriorityTest(1000000, 5000, parameters[0], 17, 30, 3);
         ThreadStart startDelegate = new ThreadStart(priorityTest.RunTest);
@@ -184,5 +190,3 @@ class ConcurrentRepro
         return 100;
     }
 }
-
-

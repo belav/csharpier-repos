@@ -1,6 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.  
+// See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
 {
     internal static class MemberAndDestinationValidator
     {
-        public static bool IsDestinationValid(Solution solution, INamedTypeSymbol destination, CancellationToken cancellationToken)
+        public static bool IsDestinationValid(
+            Solution solution,
+            INamedTypeSymbol destination,
+            CancellationToken cancellationToken
+        )
         {
             // Make sure destination is class or interface since it could be ErrorTypeSymbol
             if (destination.TypeKind is not TypeKind.Interface and not TypeKind.Class)
@@ -21,8 +25,14 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
 
             // Don't provide any refactoring option if the destination is not in source.
             // If the destination is generated code, also don't provide refactoring since we can't make sure if we won't break it.
-            var isDestinationInSourceAndNotGeneratedCode =
-                destination.Locations.Any(static (location, arg) => location.IsInSource && !arg.solution.GetRequiredDocument(location.SourceTree).IsGeneratedCode(arg.cancellationToken), (solution, cancellationToken));
+            var isDestinationInSourceAndNotGeneratedCode = destination.Locations.Any(
+                static (location, arg) =>
+                    location.IsInSource
+                    && !arg
+                        .solution.GetRequiredDocument(location.SourceTree)
+                        .IsGeneratedCode(arg.cancellationToken),
+                (solution, cancellationToken)
+            );
             return isDestinationInSourceAndNotGeneratedCode;
         }
 
@@ -45,7 +55,9 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
             return member switch
             {
                 IMethodSymbol methodSymbol => methodSymbol.MethodKind == MethodKind.Ordinary,
-                _ => member.IsKind(SymbolKind.Property) || member.IsKind(SymbolKind.Event) || member.IsKind(SymbolKind.Field),
+                _ => member.IsKind(SymbolKind.Property)
+                    || member.IsKind(SymbolKind.Event)
+                    || member.IsKind(SymbolKind.Field),
             };
         }
     }

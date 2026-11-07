@@ -6,18 +6,19 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
     // This interface is already shipped. So no more changes!
-    
-    public interface IDataRecord {
 
-        int FieldCount { get;}
+    public interface IDataRecord
+    {
+        int FieldCount { get; }
 
-        object this [ int i ] { get;}
+        object this[int i] { get; }
 
-        object this [ String name ] { get;}
+        object this[String name] { get; }
 
         String GetName(int i);
 

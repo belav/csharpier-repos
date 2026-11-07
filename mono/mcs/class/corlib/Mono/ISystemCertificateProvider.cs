@@ -29,15 +29,23 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Mono
 {
-	interface ISystemCertificateProvider
-	{
-		X509CertificateImpl Import (byte[] data,
-		                            CertificateImportFlags importFlags = CertificateImportFlags.None);
+    interface ISystemCertificateProvider
+    {
+        X509CertificateImpl Import(
+            byte[] data,
+            CertificateImportFlags importFlags = CertificateImportFlags.None
+        );
 
-		X509CertificateImpl Import (byte[] data, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags,
-					    CertificateImportFlags importFlags = CertificateImportFlags.None);
+        X509CertificateImpl Import(
+            byte[] data,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags,
+            CertificateImportFlags importFlags = CertificateImportFlags.None
+        );
 
-		X509CertificateImpl Import (X509Certificate cert,
-		                            CertificateImportFlags importFlags = CertificateImportFlags.None);
-	}
+        X509CertificateImpl Import(
+            X509Certificate cert,
+            CertificateImportFlags importFlags = CertificateImportFlags.None
+        );
+    }
 }

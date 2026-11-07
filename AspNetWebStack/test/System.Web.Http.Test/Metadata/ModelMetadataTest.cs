@@ -18,8 +18,19 @@ namespace System.Web.Http.Metadata
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => new ModelMetadata(null /* provider */, null /* containerType */, null /* model */, typeof(object), null /* propertyName */),
-                "provider");
+                () =>
+                    new ModelMetadata(
+                        null /* provider */
+                        ,
+                        null /* containerType */
+                        ,
+                        null /* model */
+                        ,
+                        typeof(object),
+                        null /* propertyName */
+                    ),
+                "provider"
+            );
         }
 
         [Fact]
@@ -30,8 +41,19 @@ namespace System.Web.Http.Metadata
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => new ModelMetadata(provider.Object, null /* containerType */, null /* model */, null /* modelType */, null /* propertyName */),
-                "modelType");
+                () =>
+                    new ModelMetadata(
+                        provider.Object,
+                        null /* containerType */
+                        ,
+                        null /* model */
+                        ,
+                        null /* modelType */
+                        ,
+                        null /* propertyName */
+                    ),
+                "modelType"
+            );
         }
 
         // Constructor
@@ -43,7 +65,13 @@ namespace System.Web.Http.Metadata
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act
-            ModelMetadata metadata = new ModelMetadata(provider.Object, typeof(Exception), () => "model", typeof(string), "propertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                typeof(Exception),
+                () => "model",
+                typeof(string),
+                "propertyName"
+            );
 
             // Assert
             Assert.Equal(typeof(Exception), metadata.ContainerType);
@@ -57,9 +85,7 @@ namespace System.Web.Http.Metadata
 
         // IsComplexType
 
-        struct IsComplexTypeModel
-        {
-        }
+        struct IsComplexTypeModel { }
 
         [Fact]
         public void IsComplexTypeTests()
@@ -68,13 +94,51 @@ namespace System.Web.Http.Metadata
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act & Assert
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(Object), null).IsComplexType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(string), null).IsComplexType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(IDisposable), null).IsComplexType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(Nullable<int>), null).IsComplexType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(int), null).IsComplexType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(IsComplexTypeModel), null).IsComplexType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(Nullable<IsComplexTypeModel>), null).IsComplexType);
+            Assert.True(
+                new ModelMetadata(provider.Object, null, null, typeof(Object), null).IsComplexType
+            );
+            Assert.False(
+                new ModelMetadata(provider.Object, null, null, typeof(string), null).IsComplexType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(IDisposable),
+                    null
+                ).IsComplexType
+            );
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<int>),
+                    null
+                ).IsComplexType
+            );
+            Assert.False(
+                new ModelMetadata(provider.Object, null, null, typeof(int), null).IsComplexType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(IsComplexTypeModel),
+                    null
+                ).IsComplexType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<IsComplexTypeModel>),
+                    null
+                ).IsComplexType
+            );
         }
 
         // IsNullableValueType
@@ -86,10 +150,42 @@ namespace System.Web.Http.Metadata
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act & Assert
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(string), null).IsNullableValueType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(IDisposable), null).IsNullableValueType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(Nullable<int>), null).IsNullableValueType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(int), null).IsNullableValueType);
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(string),
+                    null
+                ).IsNullableValueType
+            );
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(IDisposable),
+                    null
+                ).IsNullableValueType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<int>),
+                    null
+                ).IsNullableValueType
+            );
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(int),
+                    null
+                ).IsNullableValueType
+            );
         }
 
         // Properties
@@ -101,8 +197,15 @@ namespace System.Web.Http.Metadata
             Type modelType = typeof(string);
             List<ModelMetadata> propertyMetadata = new List<ModelMetadata>();
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, modelType, null);
-            provider.Setup(p => p.GetMetadataForProperties(null, modelType))
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                modelType,
+                null
+            );
+            provider
+                .Setup(p => p.GetMetadataForProperties(null, modelType))
                 .Returns(propertyMetadata)
                 .Verifiable();
 
@@ -119,7 +222,13 @@ namespace System.Web.Http.Metadata
         { // Dev10 Bug #923263
             // Arrange
             var provider = new DataAnnotationsModelMetadataProvider();
-            var metadata = new ModelMetadata(provider, null, () => new Class1(), typeof(Class1), null);
+            var metadata = new ModelMetadata(
+                provider,
+                null,
+                () => new Class1(),
+                typeof(Class1),
+                null
+            );
 
             // Act
             ModelMetadata[] originalProps = metadata.Properties.ToArray();
@@ -152,7 +261,13 @@ namespace System.Web.Http.Metadata
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), "PropertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                "PropertyName"
+            );
 
             // Act
             string result = metadata.GetDisplayName();
@@ -166,7 +281,13 @@ namespace System.Web.Http.Metadata
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                null
+            );
 
             // Act
             string result = metadata.GetDisplayName();

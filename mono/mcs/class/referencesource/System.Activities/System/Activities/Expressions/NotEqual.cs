@@ -18,19 +18,11 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TLeft> Left
-        {
-            get;
-            set;
-        }
+        public InArgument<TLeft> Left { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TRight> Right
-        {
-            get;
-            set;
-        }
+        public InArgument<TRight> Right { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -39,7 +31,13 @@ namespace System.Activities.Expressions
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!BinaryExpressionHelper.TryGenerateLinqDelegate(ExpressionType.NotEqual, out operationFunction, out validationError))
+                if (
+                    !BinaryExpressionHelper.TryGenerateLinqDelegate(
+                        ExpressionType.NotEqual,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }
@@ -53,6 +51,5 @@ namespace System.Activities.Expressions
             TRight rightValue = this.Right.Get(context);
             return operationFunction(leftValue, rightValue);
         }
-
     }
 }

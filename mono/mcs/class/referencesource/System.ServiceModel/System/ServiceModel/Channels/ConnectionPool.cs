@@ -21,6 +21,7 @@ namespace System.ServiceModel.Channels
         Dictionary<TKey, EndpointConnectionPool> endpointPools;
         int maxCount;
         int openCount;
+
         // need to make sure we prune over a certain number of endpoint pools
         int pruneAccrual;
         const int pruneThreshold = 30;
@@ -44,7 +45,10 @@ namespace System.ServiceModel.Channels
 
         protected abstract void AbortItem(TItem item);
 
-        [Fx.Tag.Throws(typeof(CommunicationException), "A communication exception occurred closing this item")]
+        [Fx.Tag.Throws(
+            typeof(CommunicationException),
+            "A communication exception occurred closing this item"
+        )]
         [Fx.Tag.Throws(typeof(TimeoutException), "Timed out trying to close this item")]
         protected abstract void CloseItem(TItem item, TimeSpan timeout);
         protected abstract void CloseItemAsync(TItem item, TimeSpan timeout);
@@ -164,9 +168,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual void OnClosed()
-        {
-        }
+        protected virtual void OnClosed() { }
 
         void OnClose(TimeSpan timeout)
         {
@@ -181,7 +183,13 @@ namespace System.ServiceModel.Channels
                 {
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.ConnectionPoolCloseException, SR.GetString(SR.TraceCodeConnectionPoolCloseException), this, exception);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.ConnectionPoolCloseException,
+                            SR.GetString(SR.TraceCodeConnectionPoolCloseException),
+                            this,
+                            exception
+                        );
                     }
                 }
                 catch (TimeoutException exception)
@@ -192,7 +200,13 @@ namespace System.ServiceModel.Channels
                     }
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.ConnectionPoolCloseException, SR.GetString(SR.TraceCodeConnectionPoolCloseException), this, exception);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.ConnectionPoolCloseException,
+                            SR.GetString(SR.TraceCodeConnectionPoolCloseException),
+                            this,
+                            exception
+                        );
                     }
                 }
             }
@@ -203,23 +217,46 @@ namespace System.ServiceModel.Channels
         public void AddConnection(TKey key, TItem connection, TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            EndpointConnectionPool endpointPool = GetEndpointPool(key, timeoutHelper.RemainingTime());
+            EndpointConnectionPool endpointPool = GetEndpointPool(
+                key,
+                timeoutHelper.RemainingTime()
+            );
             endpointPool.AddConnection(connection, timeoutHelper.RemainingTime());
         }
 
-        public TItem TakeConnection(EndpointAddress address, Uri via, TimeSpan timeout, out TKey key)
+        public TItem TakeConnection(
+            EndpointAddress address,
+            Uri via,
+            TimeSpan timeout,
+            out TKey key
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             key = this.GetPoolKey(address, via);
-            EndpointConnectionPool endpointPool = GetEndpointPool(key, timeoutHelper.RemainingTime());
+            EndpointConnectionPool endpointPool = GetEndpointPool(
+                key,
+                timeoutHelper.RemainingTime()
+            );
             return endpointPool.TakeConnection(timeoutHelper.RemainingTime());
         }
 
-        public void ReturnConnection(TKey key, TItem connection, bool connectionIsStillGood, TimeSpan timeout)
+        public void ReturnConnection(
+            TKey key,
+            TItem connection,
+            bool connectionIsStillGood,
+            TimeSpan timeout
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            EndpointConnectionPool endpointPool = GetEndpointPool(key, timeoutHelper.RemainingTime());
-            endpointPool.ReturnConnection(connection, connectionIsStillGood, timeoutHelper.RemainingTime());
+            EndpointConnectionPool endpointPool = GetEndpointPool(
+                key,
+                timeoutHelper.RemainingTime()
+            );
+            endpointPool.ReturnConnection(
+                connection,
+                connectionIsStillGood,
+                timeoutHelper.RemainingTime()
+            );
         }
 
         // base class for our collection of Idle connections
@@ -302,7 +339,10 @@ namespace System.ServiceModel.Channels
                 parent.AbortItem(item);
             }
 
-            [Fx.Tag.Throws(typeof(CommunicationException), "A communication exception occurred closing this item")]
+            [Fx.Tag.Throws(
+                typeof(CommunicationException),
+                "A communication exception occurred closing this item"
+            )]
             [Fx.Tag.Throws(typeof(TimeoutException), "Timed out trying to close this item")]
             protected virtual void CloseItem(TItem item, TimeSpan timeout)
             {
@@ -334,7 +374,10 @@ namespace System.ServiceModel.Channels
                 AbortConnections(idleItemsToClose);
             }
 
-            [Fx.Tag.Throws(typeof(CommunicationException), "A communication exception occurred closing this item")]
+            [Fx.Tag.Throws(
+                typeof(CommunicationException),
+                "A communication exception occurred closing this item"
+            )]
             [Fx.Tag.Throws(typeof(TimeoutException), "Timed out trying to close this item")]
             public void Close(TimeSpan timeout)
             {
@@ -383,7 +426,7 @@ namespace System.ServiceModel.Channels
             {
                 List<TItem> itemsToClose = new List<TItem>();
                 bool dummy;
-                for (;;)
+                for (; ; )
                 {
                     TItem item = IdleConnections.Take(out dummy);
                     if (item == null)
@@ -424,9 +467,7 @@ namespace System.ServiceModel.Channels
                 return new PoolIdleConnectionPool(parent.MaxIdleConnectionPoolCount);
             }
 
-            public virtual void Prune(List<TItem> itemsToClose)
-            {
-            }
+            public virtual void Prune(List<TItem> itemsToClose) { }
 
             public TItem TakeConnection(TimeSpan timeout)
             {
@@ -464,7 +505,9 @@ namespace System.ServiceModel.Channels
                 if (itemsToClose != null)
                 {
                     // and only allocate half the timeout passed in for our g----ful shutdowns
-                    TimeoutHelper timeoutHelper = new TimeoutHelper(TimeoutHelper.Divide(timeout, 2));
+                    TimeoutHelper timeoutHelper = new TimeoutHelper(
+                        TimeoutHelper.Divide(timeout, 2)
+                    );
                     for (int i = 0; i < itemsToClose.Count; i++)
                     {
                         CloseIdleConnection(itemsToClose[i], timeoutHelper.RemainingTime());
@@ -475,14 +518,21 @@ namespace System.ServiceModel.Channels
                 {
                     if (item == null && busyConnections != null)
                     {
-                        TD.ConnectionPoolMiss(key != null ? key.ToString() : string.Empty, busyConnections.Count);
+                        TD.ConnectionPoolMiss(
+                            key != null ? key.ToString() : string.Empty,
+                            busyConnections.Count
+                        );
                     }
                 }
 
                 return item;
             }
 
-            public void ReturnConnection(TItem connection, bool connectionIsStillGood, TimeSpan timeout)
+            public void ReturnConnection(
+                TItem connection,
+                bool connectionIsStillGood,
+                TimeSpan timeout
+            )
             {
                 bool closeConnection = false;
                 bool abortConnection = false;
@@ -546,12 +596,9 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected virtual void OnConnectionAborted()
-            {
-            }
+            protected virtual void OnConnectionAborted() { }
 
-            protected class PoolIdleConnectionPool
-                : IdleConnectionPool
+            protected class PoolIdleConnectionPool : IdleConnectionPool
             {
                 Pool<TItem> idleConnections;
                 int maxCount;
@@ -584,19 +631,32 @@ namespace System.ServiceModel.Channels
                     {
                         if (TD.MaxOutboundConnectionsPerEndpointExceededIsEnabled())
                         {
-                            TD.MaxOutboundConnectionsPerEndpointExceeded(SR.GetString(SR.TraceCodeConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached, maxCount));
+                            TD.MaxOutboundConnectionsPerEndpointExceeded(
+                                SR.GetString(
+                                    SR.TraceCodeConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached,
+                                    maxCount
+                                )
+                            );
                         }
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.ConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached,
-                                SR.GetString(SR.TraceCodeConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached, maxCount),
-                                this);
+                                SR.GetString(
+                                    SR.TraceCodeConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached,
+                                    maxCount
+                                ),
+                                this
+                            );
                         }
                     }
                     else if (TD.OutboundConnectionsPerEndpointRatioIsEnabled())
                     {
-                        TD.OutboundConnectionsPerEndpointRatio(this.idleConnections.Count, maxCount);
+                        TD.OutboundConnectionsPerEndpointRatio(
+                            this.idleConnections.Count,
+                            maxCount
+                        );
                     }
 
                     return result;
@@ -608,7 +668,10 @@ namespace System.ServiceModel.Channels
                     TItem ret = this.idleConnections.Take();
                     if (TD.OutboundConnectionsPerEndpointRatioIsEnabled())
                     {
-                        TD.OutboundConnectionsPerEndpointRatio(this.idleConnections.Count, maxCount);
+                        TD.OutboundConnectionsPerEndpointRatio(
+                            this.idleConnections.Count,
+                            maxCount
+                        );
                     }
                     return ret;
                 }
@@ -624,7 +687,10 @@ namespace System.ServiceModel.Channels
         TimeSpan maxOutputDelay;
         string name;
 
-        protected ConnectionPool(IConnectionOrientedTransportChannelFactorySettings settings, TimeSpan leaseTimeout)
+        protected ConnectionPool(
+            IConnectionOrientedTransportChannelFactorySettings settings,
+            TimeSpan leaseTimeout
+        )
             : base(settings.MaxOutboundConnectionsPerEndpoint, settings.IdleTimeout, leaseTimeout)
         {
             this.connectionBufferSize = settings.ConnectionBufferSize;
@@ -652,15 +718,17 @@ namespace System.ServiceModel.Channels
             item.Close(timeout, true);
         }
 
-        public virtual bool IsCompatible(IConnectionOrientedTransportChannelFactorySettings settings)
+        public virtual bool IsCompatible(
+            IConnectionOrientedTransportChannelFactorySettings settings
+        )
         {
             return (
-                (this.name == settings.ConnectionPoolGroupName) &&
-                (this.connectionBufferSize == settings.ConnectionBufferSize) &&
-                (this.MaxIdleConnectionPoolCount == settings.MaxOutboundConnectionsPerEndpoint) &&
-                (this.IdleTimeout == settings.IdleTimeout) &&
-                (this.maxOutputDelay == settings.MaxOutputDelay)
-                );
+                (this.name == settings.ConnectionPoolGroupName)
+                && (this.connectionBufferSize == settings.ConnectionBufferSize)
+                && (this.MaxIdleConnectionPoolCount == settings.MaxOutboundConnectionsPerEndpoint)
+                && (this.IdleTimeout == settings.IdleTimeout)
+                && (this.maxOutputDelay == settings.MaxOutputDelay)
+            );
         }
     }
 
@@ -686,7 +754,11 @@ namespace System.ServiceModel.Channels
 
         EventTraceActivity eventTraceActivity;
 
-        public ConnectionPoolHelper(ConnectionPool connectionPool, IConnectionInitiator connectionInitiator, Uri via)
+        public ConnectionPoolHelper(
+            ConnectionPool connectionPool,
+            IConnectionInitiator connectionInitiator,
+            Uri via
+        )
         {
             this.connectionInitiator = connectionInitiator;
             this.connectionPool = connectionPool;
@@ -710,14 +782,28 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected abstract IConnection AcceptPooledConnection(IConnection connection, ref TimeoutHelper timeoutHelper);
-        protected abstract IAsyncResult BeginAcceptPooledConnection(IConnection connection, ref TimeoutHelper timeoutHelper,
-            AsyncCallback callback, object state);
+        protected abstract IConnection AcceptPooledConnection(
+            IConnection connection,
+            ref TimeoutHelper timeoutHelper
+        );
+        protected abstract IAsyncResult BeginAcceptPooledConnection(
+            IConnection connection,
+            ref TimeoutHelper timeoutHelper,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract IConnection EndAcceptPooledConnection(IAsyncResult result);
 
-        protected abstract TimeoutException CreateNewConnectionTimeoutException(TimeSpan timeout, TimeoutException innerException);
+        protected abstract TimeoutException CreateNewConnectionTimeoutException(
+            TimeSpan timeout,
+            TimeoutException innerException
+        );
 
-        public IAsyncResult BeginEstablishConnection(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginEstablishConnection(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new EstablishConnectionAsyncResult(this, timeout, callback, state);
         }
@@ -729,7 +815,12 @@ namespace System.ServiceModel.Channels
 
         IConnection TakeConnection(TimeSpan timeout)
         {
-            return this.connectionPool.TakeConnection(null, this.via, timeout, out this.connectionKey);
+            return this.connectionPool.TakeConnection(
+                null,
+                this.via,
+                timeout,
+                out this.connectionKey
+            );
         }
 
         public IConnection EstablishConnection(TimeSpan timeout)
@@ -742,8 +833,10 @@ namespace System.ServiceModel.Channels
             EventTraceActivity localEventTraceActivity = this.EventTraceActivity;
             if (TD.EstablishConnectionStartIsEnabled())
             {
-                TD.EstablishConnectionStart(localEventTraceActivity,
-                                            this.via != null ? this.via.AbsoluteUri : string.Empty);
+                TD.EstablishConnectionStart(
+                    localEventTraceActivity,
+                    this.via != null ? this.via.AbsoluteUri : string.Empty
+                );
             }
 
             // first try and use a connection from our pool (and use it if we successfully receive an ACK)
@@ -759,7 +852,10 @@ namespace System.ServiceModel.Channels
                     bool preambleSuccess = false;
                     try
                     {
-                        localUpgradedConnection = AcceptPooledConnection(localRawConnection, ref timeoutHelper);
+                        localUpgradedConnection = AcceptPooledConnection(
+                            localRawConnection,
+                            ref timeoutHelper
+                        );
                         preambleSuccess = true;
                         break;
                     }
@@ -793,11 +889,18 @@ namespace System.ServiceModel.Channels
                                     TraceCode.FailedAcceptFromPool,
                                     SR.GetString(
                                         SR.TraceCodeFailedAcceptFromPool,
-                                        timeoutHelper.RemainingTime()));
+                                        timeoutHelper.RemainingTime()
+                                    )
+                                );
                             }
 
                             // This cannot throw TimeoutException since isConnectionStillGood is false (doesn't attempt a Close).
-                            this.connectionPool.ReturnConnection(connectionKey, localRawConnection, false, TimeSpan.Zero);
+                            this.connectionPool.ReturnConnection(
+                                connectionKey,
+                                localRawConnection,
+                                false,
+                                TimeSpan.Zero
+                            );
                         }
                     }
                 }
@@ -812,16 +915,23 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        localRawConnection = this.connectionInitiator.Connect(this.via, connectTimeout);
+                        localRawConnection = this.connectionInitiator.Connect(
+                            this.via,
+                            connectTimeout
+                        );
                     }
                     catch (TimeoutException e)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateNewConnectionTimeoutException(
-                            connectTimeout, e));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateNewConnectionTimeoutException(connectTimeout, e)
+                        );
                     }
 
                     this.connectionInitiator = null;
-                    localUpgradedConnection = AcceptPooledConnection(localRawConnection, ref timeoutHelper);
+                    localUpgradedConnection = AcceptPooledConnection(
+                        localRawConnection,
+                        ref timeoutHelper
+                    );
                     success = true;
                 }
                 finally
@@ -837,7 +947,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            SnapshotConnection(localUpgradedConnection, localRawConnection, localIsConnectionFromPool);
+            SnapshotConnection(
+                localUpgradedConnection,
+                localRawConnection,
+                localIsConnectionFromPool
+            );
 
             if (TD.EstablishConnectionStopIsEnabled())
             {
@@ -847,7 +961,11 @@ namespace System.ServiceModel.Channels
             return localUpgradedConnection;
         }
 
-        void SnapshotConnection(IConnection upgradedConnection, IConnection rawConnection, bool isConnectionFromPool)
+        void SnapshotConnection(
+            IConnection upgradedConnection,
+            IConnection rawConnection,
+            bool isConnectionFromPool
+        )
         {
             lock (ThisLock)
             {
@@ -858,12 +976,19 @@ namespace System.ServiceModel.Channels
                     // cleanup our pool if necessary
                     if (isConnectionFromPool)
                     {
-                        this.connectionPool.ReturnConnection(this.connectionKey, rawConnection, false, TimeSpan.Zero);
+                        this.connectionPool.ReturnConnection(
+                            this.connectionKey,
+                            rawConnection,
+                            false,
+                            TimeSpan.Zero
+                        );
                     }
 
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new CommunicationObjectAbortedException(
-                        SR.GetString(SR.OperationAbortedDuringConnectionEstablishment, this.via)));
+                            SR.GetString(SR.OperationAbortedDuringConnectionEstablishment, this.via)
+                        )
+                    );
                 }
                 else
                 {
@@ -910,7 +1035,12 @@ namespace System.ServiceModel.Channels
             {
                 if (this.isConnectionFromPool)
                 {
-                    this.connectionPool.ReturnConnection(localConnectionKey, localRawConnection, !abort, timeout);
+                    this.connectionPool.ReturnConnection(
+                        localConnectionKey,
+                        localRawConnection,
+                        !abort,
+                        timeout
+                    );
                 }
                 else
                 {
@@ -920,7 +1050,11 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.connectionPool.AddConnection(localConnectionKey, localRawConnection, timeout);
+                        this.connectionPool.AddConnection(
+                            localConnectionKey,
+                            localRawConnection,
+                            timeout
+                        );
                     }
                 }
             }
@@ -941,11 +1075,17 @@ namespace System.ServiceModel.Channels
             bool cleanupConnection;
             TimeSpan connectTimeout;
             static AsyncCallback onConnect;
-            static AsyncCallback onProcessConnection = Fx.ThunkCallback(new AsyncCallback(OnProcessConnection));
+            static AsyncCallback onProcessConnection = Fx.ThunkCallback(
+                new AsyncCallback(OnProcessConnection)
+            );
             EventTraceActivity eventTraceActivity;
 
-            public EstablishConnectionAsyncResult(ConnectionPoolHelper parent,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            public EstablishConnectionAsyncResult(
+                ConnectionPoolHelper parent,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.parent = parent;
@@ -987,7 +1127,8 @@ namespace System.ServiceModel.Channels
 
             public static IConnection End(IAsyncResult result)
             {
-                EstablishConnectionAsyncResult thisPtr = AsyncResult.End<EstablishConnectionAsyncResult>(result);
+                EstablishConnectionAsyncResult thisPtr =
+                    AsyncResult.End<EstablishConnectionAsyncResult>(result);
 
                 if (TD.EstablishConnectionStopIsEnabled())
                 {
@@ -1092,12 +1233,17 @@ namespace System.ServiceModel.Channels
                     }
 
                     result = parent.connectionInitiator.BeginConnect(
-                         parent.via, this.connectTimeout, onConnect, this);
+                        parent.via,
+                        this.connectTimeout,
+                        onConnect,
+                        this
+                    );
                 }
                 catch (TimeoutException e)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        parent.CreateNewConnectionTimeoutException(connectTimeout, e));
+                        parent.CreateNewConnectionTimeoutException(connectTimeout, e)
+                    );
                 }
 
                 if (!result.CompletedSynchronously)
@@ -1117,7 +1263,8 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException e)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        parent.CreateNewConnectionTimeoutException(connectTimeout, e));
+                        parent.CreateNewConnectionTimeoutException(connectTimeout, e)
+                    );
                 }
 
                 if (ProcessConnection())
@@ -1134,8 +1281,12 @@ namespace System.ServiceModel.Channels
 
             bool ProcessConnection()
             {
-                IAsyncResult result = parent.BeginAcceptPooledConnection(this.rawConnection,
-                    ref timeoutHelper, onProcessConnection, this);
+                IAsyncResult result = parent.BeginAcceptPooledConnection(
+                    this.rawConnection,
+                    ref timeoutHelper,
+                    onProcessConnection,
+                    this
+                );
                 if (!result.CompletedSynchronously)
                 {
                     return false;
@@ -1153,7 +1304,11 @@ namespace System.ServiceModel.Channels
 
             void SnapshotConnection()
             {
-                parent.SnapshotConnection(this.currentConnection, this.rawConnection, !this.newConnection);
+                parent.SnapshotConnection(
+                    this.currentConnection,
+                    this.rawConnection,
+                    !this.newConnection
+                );
             }
 
             void TrackConnection(IConnection connection)
@@ -1184,12 +1339,18 @@ namespace System.ServiceModel.Channels
                                 TraceCode.FailedAcceptFromPool,
                                 SR.GetString(
                                     SR.TraceCodeFailedAcceptFromPool,
-                                    this.timeoutHelper.RemainingTime()));
+                                    this.timeoutHelper.RemainingTime()
+                                )
+                            );
                         }
 
                         // This cannot throw TimeoutException since isConnectionStillGood is false (doesn't attempt a Close).
-                        parent.connectionPool.ReturnConnection(parent.connectionKey, this.rawConnection,
-                            false, timeoutHelper.RemainingTime());
+                        parent.connectionPool.ReturnConnection(
+                            parent.connectionKey,
+                            this.rawConnection,
+                            false,
+                            timeoutHelper.RemainingTime()
+                        );
                         this.currentConnection = null;
                         this.rawConnection = null;
                     }
@@ -1205,7 +1366,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                EstablishConnectionAsyncResult thisPtr = (EstablishConnectionAsyncResult)result.AsyncState;
+                EstablishConnectionAsyncResult thisPtr = (EstablishConnectionAsyncResult)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 bool completeSelf;
@@ -1239,7 +1401,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                EstablishConnectionAsyncResult thisPtr = (EstablishConnectionAsyncResult)result.AsyncState;
+                EstablishConnectionAsyncResult thisPtr = (EstablishConnectionAsyncResult)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 bool completeSelf;
@@ -1258,7 +1421,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (!thisPtr.newConnection) // CommunicationException is ok from our cache
                         {
-                            DiagnosticUtility.TraceHandledException(communicationException, TraceEventType.Information);                            
+                            DiagnosticUtility.TraceHandledException(
+                                communicationException,
+                                TraceEventType.Information
+                            );
                             thisPtr.Cleanup();
                             completeSelf = thisPtr.Begin();
                         }
@@ -1276,7 +1442,10 @@ namespace System.ServiceModel.Channels
                             {
                                 TD.OpenTimeout(timeoutException.Message);
                             }
-                            DiagnosticUtility.TraceHandledException(timeoutException, TraceEventType.Information);                            
+                            DiagnosticUtility.TraceHandledException(
+                                timeoutException,
+                                TraceEventType.Information
+                            );
                             thisPtr.Cleanup();
                             completeSelf = thisPtr.Begin();
                         }
@@ -1313,5 +1482,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-
-

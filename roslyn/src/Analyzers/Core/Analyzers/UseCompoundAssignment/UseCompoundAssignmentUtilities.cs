@@ -17,12 +17,24 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         internal const string Decrement = nameof(Decrement);
 
         public static void GenerateMaps<TSyntaxKind>(
-            ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds,
+            ImmutableArray<(
+                TSyntaxKind exprKind,
+                TSyntaxKind assignmentKind,
+                TSyntaxKind tokenKind
+            )> kinds,
             out ImmutableDictionary<TSyntaxKind, TSyntaxKind> binaryToAssignmentMap,
-            out ImmutableDictionary<TSyntaxKind, TSyntaxKind> assignmentToTokenMap) where TSyntaxKind : struct
+            out ImmutableDictionary<TSyntaxKind, TSyntaxKind> assignmentToTokenMap
+        )
+            where TSyntaxKind : struct
         {
-            var binaryToAssignmentBuilder = ImmutableDictionary.CreateBuilder<TSyntaxKind, TSyntaxKind>();
-            var assignmentToTokenBuilder = ImmutableDictionary.CreateBuilder<TSyntaxKind, TSyntaxKind>();
+            var binaryToAssignmentBuilder = ImmutableDictionary.CreateBuilder<
+                TSyntaxKind,
+                TSyntaxKind
+            >();
+            var assignmentToTokenBuilder = ImmutableDictionary.CreateBuilder<
+                TSyntaxKind,
+                TSyntaxKind
+            >();
 
             foreach (var (exprKind, assignmentKind, tokenKind) in kinds)
             {
@@ -38,14 +50,28 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         }
 
         public static bool IsSideEffectFree(
-            ISyntaxFacts syntaxFacts, SyntaxNode expr, SemanticModel semanticModel, CancellationToken cancellationToken)
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode expr,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
-            return IsSideEffectFreeRecurse(syntaxFacts, expr, semanticModel, isTopLevel: true, cancellationToken);
+            return IsSideEffectFreeRecurse(
+                syntaxFacts,
+                expr,
+                semanticModel,
+                isTopLevel: true,
+                cancellationToken
+            );
         }
 
         private static bool IsSideEffectFreeRecurse(
-            ISyntaxFacts syntaxFacts, SyntaxNode expr, SemanticModel semanticModel,
-            bool isTopLevel, CancellationToken cancellationToken)
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode expr,
+            SemanticModel semanticModel,
+            bool isTopLevel,
+            CancellationToken cancellationToken
+        )
         {
             if (expr == null)
             {
@@ -56,8 +82,7 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             // parameters or fields.  Basically, nothing that can cause arbitrary user code
             // execution when being evaluated by the compiler.
 
-            if (syntaxFacts.IsThisExpression(expr) ||
-                syntaxFacts.IsBaseExpression(expr))
+            if (syntaxFacts.IsThisExpression(expr) || syntaxFacts.IsBaseExpression(expr))
             {
                 // Referencing this/base like  this.a.b.c causes no side effects itself.
                 return true;
@@ -70,26 +95,55 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
 
             if (syntaxFacts.IsParenthesizedExpression(expr))
             {
-                syntaxFacts.GetPartsOfParenthesizedExpression(expr,
-                    out _, out var expression, out _);
+                syntaxFacts.GetPartsOfParenthesizedExpression(
+                    expr,
+                    out _,
+                    out var expression,
+                    out _
+                );
 
-                return IsSideEffectFreeRecurse(syntaxFacts, expression, semanticModel, isTopLevel, cancellationToken);
+                return IsSideEffectFreeRecurse(
+                    syntaxFacts,
+                    expression,
+                    semanticModel,
+                    isTopLevel,
+                    cancellationToken
+                );
             }
 
             if (syntaxFacts.IsSimpleMemberAccessExpression(expr))
             {
-                syntaxFacts.GetPartsOfMemberAccessExpression(expr,
-                    out var subExpr, out _);
-                return IsSideEffectFreeRecurse(syntaxFacts, subExpr, semanticModel, isTopLevel: false, cancellationToken) &&
-                       IsSideEffectFreeSymbol(expr, semanticModel, isTopLevel, cancellationToken);
+                syntaxFacts.GetPartsOfMemberAccessExpression(expr, out var subExpr, out _);
+                return IsSideEffectFreeRecurse(
+                        syntaxFacts,
+                        subExpr,
+                        semanticModel,
+                        isTopLevel: false,
+                        cancellationToken
+                    ) && IsSideEffectFreeSymbol(expr, semanticModel, isTopLevel, cancellationToken);
             }
 
             if (syntaxFacts.IsConditionalAccessExpression(expr))
             {
-                syntaxFacts.GetPartsOfConditionalAccessExpression(expr,
-                    out var expression, out var whenNotNull);
-                return IsSideEffectFreeRecurse(syntaxFacts, expression, semanticModel, isTopLevel: false, cancellationToken) &&
-                       IsSideEffectFreeRecurse(syntaxFacts, whenNotNull, semanticModel, isTopLevel: false, cancellationToken);
+                syntaxFacts.GetPartsOfConditionalAccessExpression(
+                    expr,
+                    out var expression,
+                    out var whenNotNull
+                );
+                return IsSideEffectFreeRecurse(
+                        syntaxFacts,
+                        expression,
+                        semanticModel,
+                        isTopLevel: false,
+                        cancellationToken
+                    )
+                    && IsSideEffectFreeRecurse(
+                        syntaxFacts,
+                        whenNotNull,
+                        semanticModel,
+                        isTopLevel: false,
+                        cancellationToken
+                    );
             }
 
             // Something we don't explicitly handle.  Assume this may have side effects.
@@ -97,11 +151,14 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         }
 
         private static bool IsSideEffectFreeSymbol(
-            SyntaxNode expr, SemanticModel semanticModel, bool isTopLevel, CancellationToken cancellationToken)
+            SyntaxNode expr,
+            SemanticModel semanticModel,
+            bool isTopLevel,
+            CancellationToken cancellationToken
+        )
         {
             var symbolInfo = semanticModel.GetSymbolInfo(expr, cancellationToken);
-            if (symbolInfo.CandidateSymbols.Length > 0 ||
-                symbolInfo.Symbol == null)
+            if (symbolInfo.CandidateSymbols.Length > 0 || symbolInfo.Symbol == null)
             {
                 // couldn't bind successfully, assume that this might have side-effects.
                 return false;

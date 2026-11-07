@@ -8,50 +8,50 @@ using Xunit;
 
 namespace Test_throwoutside_basics
 {
-public class a
-{
-    private static TestUtil.TestLog testLog;
-
-    static a()
+    public class a
     {
-        // Create test writer object to hold expected output
-        System.IO.StringWriter expectedOut = new System.IO.StringWriter();
+        private static TestUtil.TestLog testLog;
 
-        // Write expected output to string writer object
-        expectedOut.WriteLine("In middle method, throwing");
-        expectedOut.WriteLine("Caught");
-        expectedOut.WriteLine("Pass");
-
-        // Create and initialize test log object
-        testLog = new TestUtil.TestLog(expectedOut);
-    }
-
-    public static void MiddleMethod()
-    {
-        Console.WriteLine("In middle method, throwing");
-        throw new Exception();
-    }
-
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        //Start recording
-        testLog.StartRecording();
-
-        try
+        static a()
         {
-            MiddleMethod();
+            // Create test writer object to hold expected output
+            System.IO.StringWriter expectedOut = new System.IO.StringWriter();
+
+            // Write expected output to string writer object
+            expectedOut.WriteLine("In middle method, throwing");
+            expectedOut.WriteLine("Caught");
+            expectedOut.WriteLine("Pass");
+
+            // Create and initialize test log object
+            testLog = new TestUtil.TestLog(expectedOut);
         }
-        catch
+
+        public static void MiddleMethod()
         {
-            Console.WriteLine("Caught");
+            Console.WriteLine("In middle method, throwing");
+            throw new Exception();
         }
-        Console.WriteLine("Pass");
 
-        // stop recoding
-        testLog.StopRecording();
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            //Start recording
+            testLog.StartRecording();
 
-        return testLog.VerifyOutput();
+            try
+            {
+                MiddleMethod();
+            }
+            catch
+            {
+                Console.WriteLine("Caught");
+            }
+            Console.WriteLine("Pass");
+
+            // stop recoding
+            testLog.StopRecording();
+
+            return testLog.VerifyOutput();
+        }
     }
-}
 }

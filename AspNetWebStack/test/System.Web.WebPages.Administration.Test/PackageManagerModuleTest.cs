@@ -18,7 +18,9 @@ namespace System.Web.WebPages.Administration.Test
             bool sourceFileCalled = false;
             var sourceFile = GetPackagesSourceFile();
             sourceFile.Setup(s => s.Exists()).Returns(false);
-            sourceFile.Setup(s => s.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>())).Callback(() => sourceFileCalled = true);
+            sourceFile
+                .Setup(s => s.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>()))
+                .Callback(() => sourceFileCalled = true);
             sourceFile.Setup(c => c.ReadSources()).Callback(() => sourceFileCalled = true);
             ISet<WebPackageSource> set = new HashSet<WebPackageSource>();
 
@@ -69,11 +71,17 @@ namespace System.Web.WebPages.Administration.Test
             // Arrange
             bool writeCalled = false;
             var sourceFile = GetPackagesSourceFile();
-            sourceFile.Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>())).Callback(() => writeCalled = true);
+            sourceFile
+                .Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>()))
+                .Callback(() => writeCalled = true);
             ISet<WebPackageSource> set = new HashSet<WebPackageSource>(GetSources());
 
             // Act
-            bool returnValue = PackageManagerModule.AddPackageSource(sourceFile.Object, set, new WebPackageSource(source: "http://www.microsoft.com/feed3", name: "Feed3"));
+            bool returnValue = PackageManagerModule.AddPackageSource(
+                sourceFile.Object,
+                set,
+                new WebPackageSource(source: "http://www.microsoft.com/feed3", name: "Feed3")
+            );
 
             // Assert
             Assert.Equal(3, set.Count());
@@ -87,11 +95,17 @@ namespace System.Web.WebPages.Administration.Test
             // Arrange
             bool writeCalled = false;
             var sourceFile = GetPackagesSourceFile();
-            sourceFile.Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>())).Callback(() => writeCalled = true);
+            sourceFile
+                .Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>()))
+                .Callback(() => writeCalled = true);
             ISet<WebPackageSource> set = new HashSet<WebPackageSource>(GetSources());
 
             // Act
-            bool returnValue = PackageManagerModule.AddPackageSource(sourceFile.Object, set, new WebPackageSource(source: "http://www.microsoft.com/feed1", name: "Feed1"));
+            bool returnValue = PackageManagerModule.AddPackageSource(
+                sourceFile.Object,
+                set,
+                new WebPackageSource(source: "http://www.microsoft.com/feed1", name: "Feed1")
+            );
 
             // Assert
             Assert.Equal(2, set.Count());
@@ -105,7 +119,9 @@ namespace System.Web.WebPages.Administration.Test
             // Arrange
             bool writeCalled = false;
             var sourceFile = GetPackagesSourceFile();
-            sourceFile.Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>())).Callback(() => writeCalled = true);
+            sourceFile
+                .Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>()))
+                .Callback(() => writeCalled = true);
             ISet<WebPackageSource> set = new HashSet<WebPackageSource>(GetSources());
 
             // Act
@@ -123,7 +139,9 @@ namespace System.Web.WebPages.Administration.Test
             // Arrange
             bool writeCalled = false;
             var sourceFile = GetPackagesSourceFile();
-            sourceFile.Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>())).Callback(() => writeCalled = true);
+            sourceFile
+                .Setup(c => c.WriteSources(It.IsAny<IEnumerable<WebPackageSource>>()))
+                .Callback(() => writeCalled = true);
             ISet<WebPackageSource> set = new HashSet<WebPackageSource>(GetSources());
 
             // Act
@@ -146,7 +164,7 @@ namespace System.Web.WebPages.Administration.Test
             return new[]
             {
                 new WebPackageSource(name: "Feed1", source: "http://www.microsoft.com/feed1"),
-                new WebPackageSource(name: "Feed2", source: "http://www.microsoft.com/feed2")
+                new WebPackageSource(name: "Feed2", source: "http://www.microsoft.com/feed2"),
             };
         }
     }

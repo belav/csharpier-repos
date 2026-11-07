@@ -6,7 +6,13 @@ namespace System.Web.Http.Description
     /// <summary>
     /// This attribute can be used on the controllers and actions to influence the behavior of <see cref="ApiExplorer"/>.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field,
+        AllowMultiple = false
+    )]
     public sealed class ApiExplorerSettingsAttribute : Attribute
     {
         /// <summary>

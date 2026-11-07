@@ -14,16 +14,16 @@ namespace System.Tests
             string input = "test";
             Verify(input, result =>
             {
-            // See Freed, N. and N. Borenstein, RFC2045, Section 6.8 for a description of why this check is necessary.
-            Assert.Equal(3, result.Length);
+                // See Freed, N. and N. Borenstein, RFC2045, Section 6.8 for a description of why this check is necessary.
+                Assert.Equal(3, result.Length);
 
                 uint triplet = (uint)((result[0] << 16) | (result[1] << 8) | result[2]);
                 Assert.Equal<uint>(45, triplet >> 18); // 't'
-            Assert.Equal<uint>(30, (triplet << 14) >> 26); // 'e'
-            Assert.Equal<uint>(44, (triplet << 20) >> 26); // 's'
-            Assert.Equal<uint>(45, (triplet << 26) >> 26); // 't'
+                Assert.Equal<uint>(30, (triplet << 14) >> 26); // 'e'
+                Assert.Equal<uint>(44, (triplet << 20) >> 26); // 's'
+                Assert.Equal<uint>(45, (triplet << 26) >> 26); // 't'
 
-            Assert.Equal(input, Convert.ToBase64String(result));
+                Assert.Equal(input, Convert.ToBase64String(result));
             });
         }
 
@@ -126,7 +126,10 @@ namespace System.Tests
         public static void RoundtripWithWhitespace4()
         {
             string expected = "test";
-            string input = expected.Insert(1, new string(' ', 17)).PadLeft(31, ' ').PadRight(12, ' ');
+            string input = expected
+                .Insert(1, new string(' ', 17))
+                .PadLeft(31, ' ')
+                .PadRight(12, ' ');
             VerifyRoundtrip(input, expected, expectedLengthBytes: 3);
         }
 
@@ -134,7 +137,10 @@ namespace System.Tests
         public static void RoundtripWithWhitespace5()
         {
             string expected = "test";
-            string input = expected.Insert(2, new string('\t', 9)).PadLeft(37, '\t').PadRight(8, '\t');
+            string input = expected
+                .Insert(2, new string('\t', 9))
+                .PadLeft(37, '\t')
+                .PadRight(8, '\t');
             VerifyRoundtrip(input, expected, expectedLengthBytes: 3);
         }
 
@@ -142,7 +148,10 @@ namespace System.Tests
         public static void RoundtripWithWhitespace6()
         {
             string expected = "test";
-            string input = expected.Insert(2, new string('\r', 13)).PadLeft(7, '\r').PadRight(29, '\r');
+            string input = expected
+                .Insert(2, new string('\r', 13))
+                .PadLeft(7, '\r')
+                .PadRight(29, '\r');
             VerifyRoundtrip(input, expected, expectedLengthBytes: 3);
         }
 
@@ -150,7 +159,10 @@ namespace System.Tests
         public static void RoundtripWithWhitespace7()
         {
             string expected = "test";
-            string input = expected.Insert(2, new string('\n', 23)).PadLeft(17, '\n').PadRight(34, '\n');
+            string input = expected
+                .Insert(2, new string('\n', 23))
+                .PadLeft(17, '\n')
+                .PadRight(34, '\n');
             VerifyRoundtrip(input, expected, expectedLengthBytes: 3);
         }
 
@@ -167,8 +179,12 @@ namespace System.Tests
             string input = "test";
             char[] inputChars = input.ToCharArray();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.FromBase64CharArray(inputChars, -1, inputChars.Length));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.FromBase64CharArray(inputChars, inputChars.Length, inputChars.Length));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, -1, inputChars.Length)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, inputChars.Length, inputChars.Length)
+            );
         }
 
         [Fact]
@@ -177,15 +193,23 @@ namespace System.Tests
             string input = "test";
             char[] inputChars = input.ToCharArray();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.FromBase64CharArray(inputChars, 0, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.FromBase64CharArray(inputChars, 0, inputChars.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.FromBase64CharArray(inputChars, 1, inputChars.Length));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, 0, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, 0, inputChars.Length + 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, 1, inputChars.Length)
+            );
         }
 
         [Fact]
         public static void InvalidInput()
         {
-            Assert.Throws<ArgumentNullException>("inArray", () => Convert.FromBase64CharArray(null, 0, 3));
+            Assert.Throws<ArgumentNullException>("inArray", () =>
+                Convert.FromBase64CharArray(null, 0, 3)
+            );
             Assert.Throws<ArgumentNullException>("s", () => Convert.FromBase64String(null));
 
             // Input must be at least 4 characters long
@@ -223,7 +247,19 @@ namespace System.Tests
         [Fact]
         public static void InvalidCharactersInInput()
         {
-            ushort[] invalidChars = { 30122, 62608, 13917, 19498, 2473, 40845, 35988, 2281, 51246, 36372 };
+            ushort[] invalidChars =
+            {
+                30122,
+                62608,
+                13917,
+                19498,
+                2473,
+                40845,
+                35988,
+                2281,
+                51246,
+                36372,
+            };
 
             foreach (char ch in invalidChars)
             {
@@ -233,7 +269,11 @@ namespace System.Tests
             }
         }
 
-        private static void VerifyRoundtrip(string input, string expected = null, int? expectedLengthBytes = null)
+        private static void VerifyRoundtrip(
+            string input,
+            string expected = null,
+            int? expectedLengthBytes = null
+        )
         {
             if (expected == null)
             {
@@ -254,7 +294,9 @@ namespace System.Tests
         private static void VerifyInvalidInput(string input)
         {
             char[] inputChars = input.ToCharArray();
-            Assert.Throws<FormatException>(() => Convert.FromBase64CharArray(inputChars, 0, inputChars.Length));
+            Assert.Throws<FormatException>(() =>
+                Convert.FromBase64CharArray(inputChars, 0, inputChars.Length)
+            );
             Assert.Throws<FormatException>(() => Convert.FromBase64String(input));
         }
 

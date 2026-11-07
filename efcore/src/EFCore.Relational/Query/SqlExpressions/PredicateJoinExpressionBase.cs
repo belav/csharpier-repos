@@ -20,9 +20,7 @@ public abstract class PredicateJoinExpressionBase : JoinExpressionBase
     /// <param name="table">A table source to join with.</param>
     /// <param name="joinPredicate">A predicate to use for the join.</param>
     protected PredicateJoinExpressionBase(TableExpressionBase table, SqlExpression joinPredicate)
-        : this(table, joinPredicate, annotations: null)
-    {
-    }
+        : this(table, joinPredicate, annotations: null) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="PredicateJoinExpressionBase" /> class.
@@ -33,7 +31,8 @@ public abstract class PredicateJoinExpressionBase : JoinExpressionBase
     protected PredicateJoinExpressionBase(
         TableExpressionBase table,
         SqlExpression joinPredicate,
-        IEnumerable<IAnnotation>? annotations)
+        IEnumerable<IAnnotation>? annotations
+    )
         : base(table, annotations)
     {
         JoinPredicate = joinPredicate;
@@ -51,20 +50,24 @@ public abstract class PredicateJoinExpressionBase : JoinExpressionBase
     /// <param name="table">The <see cref="JoinExpressionBase.Table" /> property of the result.</param>
     /// <param name="joinPredicate">The <see cref="PredicateJoinExpressionBase.JoinPredicate" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public abstract PredicateJoinExpressionBase Update(TableExpressionBase table, SqlExpression joinPredicate);
+    public abstract PredicateJoinExpressionBase Update(
+        TableExpressionBase table,
+        SqlExpression joinPredicate
+    );
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is PredicateJoinExpressionBase predicateJoinExpressionBase
-                && Equals(predicateJoinExpressionBase));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is PredicateJoinExpressionBase predicateJoinExpressionBase
+                && Equals(predicateJoinExpressionBase)
+        );
 
-    private bool Equals(PredicateJoinExpressionBase predicateJoinExpressionBase)
-        => base.Equals(predicateJoinExpressionBase)
-            && JoinPredicate.Equals(predicateJoinExpressionBase.JoinPredicate);
+    private bool Equals(PredicateJoinExpressionBase predicateJoinExpressionBase) =>
+        base.Equals(predicateJoinExpressionBase)
+        && JoinPredicate.Equals(predicateJoinExpressionBase.JoinPredicate);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), JoinPredicate);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), JoinPredicate);
 }

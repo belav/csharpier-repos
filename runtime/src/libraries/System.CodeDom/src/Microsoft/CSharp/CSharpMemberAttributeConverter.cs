@@ -9,12 +9,21 @@ namespace Microsoft.CSharp
     {
         private CSharpMemberAttributeConverter() { } // no  need to create an instance; use Default
 
-        public static CSharpMemberAttributeConverter Default { get; } = new CSharpMemberAttributeConverter();
+        public static CSharpMemberAttributeConverter Default { get; } =
+            new CSharpMemberAttributeConverter();
 
-        protected override string[] Names { get; } = new[] { "Public", "Protected", "Protected Internal", "Internal", "Private" };
+        protected override string[] Names { get; } =
+            new[] { "Public", "Protected", "Protected Internal", "Internal", "Private" };
 
         protected override object[] Values { get; } =
-            new object[] { MemberAttributes.Public, MemberAttributes.Family, MemberAttributes.FamilyOrAssembly, MemberAttributes.Assembly, MemberAttributes.Private };
+            new object[]
+            {
+                MemberAttributes.Public,
+                MemberAttributes.Family,
+                MemberAttributes.FamilyOrAssembly,
+                MemberAttributes.Assembly,
+                MemberAttributes.Private,
+            };
 
         protected override object DefaultValue => MemberAttributes.Private;
     }

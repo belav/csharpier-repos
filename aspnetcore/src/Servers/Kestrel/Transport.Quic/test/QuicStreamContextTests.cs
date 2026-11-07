@@ -56,12 +56,10 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
 
         Assert.Equal(1, quicConnectionContext.StreamPool.Count);
 
-        Assert.Contains(
-            TestSink.Writes,
-            m =>
-                m.Message.Contains(
-                    @"shutting down writes because: ""The QUIC transport's send loop completed gracefully.""."
-                )
+        Assert.Contains(TestSink.Writes, m =>
+            m.Message.Contains(
+                @"shutting down writes because: ""The QUIC transport's send loop completed gracefully.""."
+            )
         );
     }
 
@@ -340,8 +338,8 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Receive abort from client.
         var ex = await Assert
-            .ThrowsAsync<ConnectionResetException>(
-                () => serverStream.Transport.Input.ReadAsync().AsTask()
+            .ThrowsAsync<ConnectionResetException>(() =>
+                serverStream.Transport.Input.ReadAsync().AsTask()
             )
             .DefaultTimeout();
 
@@ -443,8 +441,8 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Receive abort from client.
         var ex = await Assert
-            .ThrowsAsync<ConnectionResetException>(
-                () => serverStream.Transport.Input.ReadAsync().AsTask()
+            .ThrowsAsync<ConnectionResetException>(() =>
+                serverStream.Transport.Input.ReadAsync().AsTask()
             )
             .DefaultTimeout();
 
@@ -545,12 +543,10 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
         // Both send and receive loops have exited.
         await quicStreamContext._processingTask.DefaultTimeout();
 
-        Assert.Contains(
-            TestSink.Writes,
-            m =>
-                m.Message.Contains(
-                    @"shutting down writes because: ""The QUIC transport's send loop completed gracefully.""."
-                )
+        Assert.Contains(TestSink.Writes, m =>
+            m.Message.Contains(
+                @"shutting down writes because: ""The QUIC transport's send loop completed gracefully.""."
+            )
         );
     }
 
@@ -603,9 +599,8 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
         // Both send and receive loops have exited.
         await quicStreamContext._processingTask.DefaultTimeout();
 
-        Assert.Contains(
-            TestSink.Writes,
-            m => m.Message.Contains(@"shutting down writes because: ""Test message"".")
+        Assert.Contains(TestSink.Writes, m =>
+            m.Message.Contains(@"shutting down writes because: ""Test message"".")
         );
     }
 

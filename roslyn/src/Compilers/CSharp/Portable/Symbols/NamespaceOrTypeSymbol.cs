@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class NamespaceOrTypeSymbol : Symbol, INamespaceOrTypeSymbolInternal
     {
-        protected static readonly ObjectPool<PooledDictionary<ReadOnlyMemory<char>, object>> s_nameToObjectPool =
-            PooledDictionary<ReadOnlyMemory<char>, object>.CreatePool(ReadOnlyMemoryOfCharComparer.Instance);
+        protected static readonly ObjectPool<
+            PooledDictionary<ReadOnlyMemory<char>, object>
+        > s_nameToObjectPool = PooledDictionary<ReadOnlyMemory<char>, object>.CreatePool(
+            ReadOnlyMemoryOfCharComparer.Instance
+        );
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // Changes to the public interface of this class should remain synchronized with the VB version.
@@ -29,19 +32,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // Only the compiler can create new instances.
-        internal NamespaceOrTypeSymbol()
-        {
-        }
+        internal NamespaceOrTypeSymbol() { }
 
         /// <summary>
         /// Returns true if this symbol is a namespace. If it is not a namespace, it must be a type.
         /// </summary>
         public bool IsNamespace
         {
-            get
-            {
-                return Kind == SymbolKind.Namespace;
-            }
+            get { return Kind == SymbolKind.Namespace; }
         }
 
         /// <summary>
@@ -49,10 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public bool IsType
         {
-            get
-            {
-                return !IsNamespace;
-            }
+            get { return !IsNamespace; }
         }
 
         /// <summary>
@@ -65,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </returns>
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -81,25 +73,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </returns>
         public sealed override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
-        /// Returns true if this symbol has external implementation; i.e., declared with the 
-        /// "extern" modifier. 
+        /// Returns true if this symbol has external implementation; i.e., declared with the
+        /// "extern" modifier.
         /// </summary>
         /// <returns>
         /// Always returns false.
         /// </returns>
         public sealed override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -157,8 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>An ImmutableArray containing all the types that are members of this symbol with the given name.
         /// If this symbol has no type members with this name,
         /// returns an empty ImmutableArray. Never returns null.</returns>
-        public ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name)
-            => GetTypeMembers(name.AsMemory());
+        public ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name) =>
+            GetTypeMembers(name.AsMemory());
 
         /// <summary>
         /// Get all the members of this symbol that are types that have a particular name and arity
@@ -166,16 +152,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>An IEnumerable containing all the types that are members of this symbol with the given name and arity.
         /// If this symbol has no type members with this name and arity,
         /// returns an empty IEnumerable. Never returns null.</returns>
-        public ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity)
-            => GetTypeMembers(name.AsMemory(), arity);
+        public ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity) =>
+            GetTypeMembers(name.AsMemory(), arity);
 
         /// <inheritdoc cref="GetTypeMembers(string)"/>
         public abstract ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name);
 
         /// <inheritdoc cref="GetTypeMembers(string, int)"/>
-        public virtual ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
+        public virtual ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        )
         {
-            // default implementation does a post-filter. We can override this if its a performance burden, but 
+            // default implementation does a post-filter. We can override this if its a performance burden, but
             // experience is that it won't be.
             return GetTypeMembers(name).WhereAsArray(static (t, arity) => t.Arity == arity, arity);
         }
@@ -186,7 +175,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>Null if there is no matching declaration.</returns>
         internal SourceNamedTypeSymbol? GetSourceTypeMember(TypeDeclarationSyntax syntax)
         {
-            return GetSourceTypeMember(syntax.Identifier.ValueText, syntax.Arity, syntax.Kind(), syntax);
+            return GetSourceTypeMember(
+                syntax.Identifier.ValueText,
+                syntax.Arity,
+                syntax.Kind(),
+                syntax
+            );
         }
 
         /// <summary>
@@ -195,7 +189,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>Null if there is no matching declaration.</returns>
         internal SourceNamedTypeSymbol? GetSourceTypeMember(DelegateDeclarationSyntax syntax)
         {
-            return GetSourceTypeMember(syntax.Identifier.ValueText, syntax.Arity, syntax.Kind(), syntax);
+            return GetSourceTypeMember(
+                syntax.Identifier.ValueText,
+                syntax.Arity,
+                syntax.Kind(),
+                syntax
+            );
         }
 
         /// <summary>
@@ -207,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             int arity,
             SyntaxKind kind,
-            CSharpSyntaxNode syntax)
+            CSharpSyntaxNode syntax
+        )
         {
             TypeKind typeKind = kind.ToDeclarationKind().ToTypeKind();
 
@@ -220,11 +220,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         // PERF: Avoid accessing Locations for performance, but assert that the alternative approach is
                         // equivalent.
-                        Debug.Assert(memberT.MergedDeclaration.Declarations.SelectAsArray(decl => decl.NameLocation).SequenceEqual(memberT.Locations));
+                        Debug.Assert(
+                            memberT
+                                .MergedDeclaration.Declarations.SelectAsArray(decl =>
+                                    decl.NameLocation
+                                )
+                                .SequenceEqual(memberT.Locations)
+                        );
                         foreach (var declaration in memberT.MergedDeclaration.Declarations)
                         {
                             var loc = declaration.NameLocation;
-                            if (loc.IsInSource && loc.SourceTree == syntax.SyntaxTree && syntax.Span.Contains(loc.SourceSpan))
+                            if (
+                                loc.IsInSource
+                                && loc.SourceTree == syntax.SyntaxTree
+                                && syntax.Span.Contains(loc.SourceSpan)
+                            )
                             {
                                 return memberT;
                             }
@@ -269,22 +279,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<NamedTypeSymbol> namespaceOrTypeMembers;
             bool isTopLevel = scope.IsNamespace;
 
-            Debug.Assert(!isTopLevel || scope.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat) == emittedTypeName.NamespaceName);
+            Debug.Assert(
+                !isTopLevel
+                    || scope.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat)
+                        == emittedTypeName.NamespaceName
+            );
 
             if (emittedTypeName.IsMangled)
             {
-                Debug.Assert(!emittedTypeName.UnmangledTypeName.Equals(emittedTypeName.TypeName) && emittedTypeName.InferredArity > 0);
+                Debug.Assert(
+                    !emittedTypeName.UnmangledTypeName.Equals(emittedTypeName.TypeName)
+                        && emittedTypeName.InferredArity > 0
+                );
 
-                if (emittedTypeName.ForcedArity == -1 || emittedTypeName.ForcedArity == emittedTypeName.InferredArity)
+                if (
+                    emittedTypeName.ForcedArity == -1
+                    || emittedTypeName.ForcedArity == emittedTypeName.InferredArity
+                )
                 {
                     // Let's handle mangling case first.
-                    namespaceOrTypeMembers = scope.GetTypeMembers(emittedTypeName.UnmangledTypeNameMemory);
+                    namespaceOrTypeMembers = scope.GetTypeMembers(
+                        emittedTypeName.UnmangledTypeNameMemory
+                    );
 
                     foreach (var named in namespaceOrTypeMembers)
                     {
-                        if (emittedTypeName.InferredArity == named.Arity &&
-                            named.MangleName &&
-                            ReadOnlyMemoryOfCharComparer.Equals(named.MetadataName.AsSpan(), emittedTypeName.TypeNameMemory))
+                        if (
+                            emittedTypeName.InferredArity == named.Arity
+                            && named.MangleName
+                            && ReadOnlyMemoryOfCharComparer.Equals(
+                                named.MetadataName.AsSpan(),
+                                emittedTypeName.TypeNameMemory
+                            )
+                        )
                         {
                             if (namedType is not null)
                             {
@@ -299,7 +326,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                Debug.Assert(ReferenceEquals(emittedTypeName.UnmangledTypeName, emittedTypeName.TypeName) && emittedTypeName.InferredArity == 0);
+                Debug.Assert(
+                    ReferenceEquals(emittedTypeName.UnmangledTypeName, emittedTypeName.TypeName)
+                        && emittedTypeName.InferredArity == 0
+                );
             }
 
             // Now try lookup without removing generic arity mangling.
@@ -330,9 +360,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var named in namespaceOrTypeMembers)
             {
-                if (!named.MangleName &&
-                    (forcedArity == -1 || forcedArity == named.Arity) &&
-                    ReadOnlyMemoryOfCharComparer.Equals(named.MetadataName.AsSpan(), emittedTypeName.TypeNameMemory))
+                if (
+                    !named.MangleName
+                    && (forcedArity == -1 || forcedArity == named.Arity)
+                    && ReadOnlyMemoryOfCharComparer.Equals(
+                        named.MetadataName.AsSpan(),
+                        emittedTypeName.TypeNameMemory
+                    )
+                )
                 {
                     if (namedType is not null)
                     {
@@ -344,26 +379,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-Done:
-            if (isTopLevel
-                && (emittedTypeName.ForcedArity == -1 || emittedTypeName.ForcedArity == emittedTypeName.InferredArity)
+            Done:
+            if (
+                isTopLevel
+                && (
+                    emittedTypeName.ForcedArity == -1
+                    || emittedTypeName.ForcedArity == emittedTypeName.InferredArity
+                )
                 // Quick check so we don't have to realize the expensive `UnmangledTypeName` in the common case.
-                && emittedTypeName.TypeNameMemory.Span is [GeneratedNameParser.FileTypeNameStartChar, ..]
+                && emittedTypeName.TypeNameMemory.Span
+                    is [GeneratedNameParser.FileTypeNameStartChar, ..]
                 && GeneratedNameParser.TryParseFileTypeName(
                     emittedTypeName.UnmangledTypeName,
                     out string? displayFileName,
                     out byte[]? checksum,
-                    out string? sourceName))
+                    out string? sourceName
+                )
+            )
             {
                 // also do a lookup for file types from source.
                 namespaceOrTypeMembers = scope.GetTypeMembers(sourceName);
                 foreach (var named in namespaceOrTypeMembers)
                 {
-                    if (named.AssociatedFileIdentifier is FileIdentifier identifier
+                    if (
+                        named.AssociatedFileIdentifier is FileIdentifier identifier
                         && identifier.DisplayFilePath == displayFileName
                         && !identifier.FilePathChecksumOpt.IsDefault
                         && identifier.FilePathChecksumOpt.SequenceEqual(checksum)
-                        && named.Arity == emittedTypeName.InferredArity)
+                        && named.Arity == emittedTypeName.InferredArity
+                    )
                     {
                         if ((object?)namedType != null)
                         {
@@ -384,13 +428,15 @@ Done:
         /// </summary>
         /// <param name="qualifiedName">Sequence of simple plain names.</param>
         /// <returns>
-        /// A set of namespace or type symbols with given qualified name (might comprise of types with multiple generic arities), 
+        /// A set of namespace or type symbols with given qualified name (might comprise of types with multiple generic arities),
         /// or an empty set if the member can't be found (the qualified name is ambiguous or the symbol doesn't exist).
         /// </returns>
         /// <remarks>
         /// "C.D" matches C.D, C{T}.D, C{S,T}.D{U}, etc.
         /// </remarks>
-        internal IEnumerable<NamespaceOrTypeSymbol>? GetNamespaceOrTypeByQualifiedName(IEnumerable<string> qualifiedName)
+        internal IEnumerable<NamespaceOrTypeSymbol>? GetNamespaceOrTypeByQualifiedName(
+            IEnumerable<string> qualifiedName
+        )
         {
             NamespaceOrTypeSymbol namespaceOrType = this;
             IEnumerable<NamespaceOrTypeSymbol>? symbols = null;

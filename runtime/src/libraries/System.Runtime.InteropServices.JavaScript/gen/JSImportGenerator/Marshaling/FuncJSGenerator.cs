@@ -23,34 +23,48 @@ namespace Microsoft.Interop.JavaScript
             _argumentMarshalerTypes = argumentMarshalerTypes;
         }
 
-        public override IEnumerable<ExpressionSyntax> GenerateBind(TypePositionInfo info, StubCodeContext context)
+        public override IEnumerable<ExpressionSyntax> GenerateBind(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             var args = _argumentMarshalerTypes.Select(x => Argument(MarshalerTypeName(x))).ToList();
-            yield return InvocationExpression(MarshalerTypeName(Type), ArgumentList(SeparatedList(args)));
+            yield return InvocationExpression(
+                MarshalerTypeName(Type),
+                ArgumentList(SeparatedList(args))
+            );
         }
 
-        public override IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+        public override IEnumerable<StatementSyntax> Generate(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             string argName = context.GetAdditionalIdentifier(info, "js_arg");
-            var target = info.IsManagedReturnPosition
-                ? Constants.ArgumentReturn
-                : argName;
+            var target = info.IsManagedReturnPosition ? Constants.ArgumentReturn : argName;
 
             var source = info.IsManagedReturnPosition
                 ? Argument(IdentifierName(context.GetIdentifiers(info).native))
                 : _inner.AsArgument(info, context);
 
-            var jsty = (JSFunctionTypeInfo)((JSMarshallingInfo)info.MarshallingAttributeInfo).TypeInfo;
-            var sourceTypes = jsty.ArgsTypeInfo
-                .Select(a => a.Syntax)
-                .ToArray();
+            var jsty = (JSFunctionTypeInfo)
+                ((JSMarshallingInfo)info.MarshallingAttributeInfo).TypeInfo;
+            var sourceTypes = jsty.ArgsTypeInfo.Select(a => a.Syntax).ToArray();
 
-            if (context.CurrentStage == StubCodeContext.Stage.UnmarshalCapture && context.Direction == MarshalDirection.ManagedToUnmanaged && info.IsManagedReturnPosition)
+            if (
+                context.CurrentStage == StubCodeContext.Stage.UnmarshalCapture
+                && context.Direction == MarshalDirection.ManagedToUnmanaged
+                && info.IsManagedReturnPosition
+            )
             {
                 yield return ToManagedMethod(target, source, jsty);
             }
 
-            if (context.CurrentStage == StubCodeContext.Stage.Marshal && context.Direction == MarshalDirection.UnmanagedToManaged && info.IsManagedReturnPosition)
+            if (
+                context.CurrentStage == StubCodeContext.Stage.Marshal
+                && context.Direction == MarshalDirection.UnmanagedToManaged
+                && info.IsManagedReturnPosition
+            )
             {
                 yield return ToJSMethod(target, source, jsty);
             }
@@ -60,18 +74,30 @@ namespace Microsoft.Interop.JavaScript
                 yield return x;
             }
 
-            if (context.CurrentStage == StubCodeContext.Stage.PinnedMarshal && context.Direction == MarshalDirection.ManagedToUnmanaged && !info.IsManagedReturnPosition)
+            if (
+                context.CurrentStage == StubCodeContext.Stage.PinnedMarshal
+                && context.Direction == MarshalDirection.ManagedToUnmanaged
+                && !info.IsManagedReturnPosition
+            )
             {
                 yield return ToJSMethod(target, source, jsty);
             }
 
-            if (context.CurrentStage == StubCodeContext.Stage.Unmarshal && context.Direction == MarshalDirection.UnmanagedToManaged && !info.IsManagedReturnPosition)
+            if (
+                context.CurrentStage == StubCodeContext.Stage.Unmarshal
+                && context.Direction == MarshalDirection.UnmanagedToManaged
+                && !info.IsManagedReturnPosition
+            )
             {
                 yield return ToManagedMethod(target, source, jsty);
             }
         }
 
-        private ExpressionStatementSyntax ToManagedMethod(string target, ArgumentSyntax source, JSFunctionTypeInfo info)
+        private ExpressionStatementSyntax ToManagedMethod(
+            string target,
+            ArgumentSyntax source,
+            JSFunctionTypeInfo info
+        )
         {
             List<ArgumentSyntax> arguments = new List<ArgumentSyntax>();
             arguments.Add(source.WithRefOrOutKeyword(Token(SyntaxKind.OutKeyword)));
@@ -88,12 +114,23 @@ namespace Microsoft.Interop.JavaScript
                 }
             }
 
-            return ExpressionStatement(InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                    IdentifierName(target), GetToManagedMethod(Type)))
-                .WithArgumentList(ArgumentList(SeparatedList(arguments))));
+            return ExpressionStatement(
+                InvocationExpression(
+                        MemberAccessExpression(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            IdentifierName(target),
+                            GetToManagedMethod(Type)
+                        )
+                    )
+                    .WithArgumentList(ArgumentList(SeparatedList(arguments)))
+            );
         }
 
-        private ExpressionStatementSyntax ToJSMethod(string target, ArgumentSyntax source, JSFunctionTypeInfo info)
+        private ExpressionStatementSyntax ToJSMethod(
+            string target,
+            ArgumentSyntax source,
+            JSFunctionTypeInfo info
+        )
         {
             List<ArgumentSyntax> arguments = new List<ArgumentSyntax>();
             arguments.Add(source);
@@ -110,41 +147,130 @@ namespace Microsoft.Interop.JavaScript
                 }
             }
 
-            return ExpressionStatement(InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                    IdentifierName(target), GetToJSMethod(Type)))
-                .WithArgumentList(ArgumentList(SeparatedList(arguments))));
+            return ExpressionStatement(
+                InvocationExpression(
+                        MemberAccessExpression(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            IdentifierName(target),
+                            GetToJSMethod(Type)
+                        )
+                    )
+                    .WithArgumentList(ArgumentList(SeparatedList(arguments)))
+            );
         }
 
+        private static ArgumentSyntax ArgToJS(
+            int i,
+            TypeSyntax sourceType,
+            MarshalerType marshalerType
+        ) =>
+            Argument(
+                ParenthesizedLambdaExpression()
+                    .WithModifiers(TokenList(Token(SyntaxKind.StaticKeyword)))
+                    .WithParameterList(
+                        ParameterList(
+                            SeparatedList(
+                                new[]
+                                {
+                                    Parameter(Identifier("__delegate_arg_arg" + (i + 1)))
+                                        .WithModifiers(TokenList(Token(SyntaxKind.RefKeyword)))
+                                        .WithType(
+                                            IdentifierName(Constants.JSMarshalerArgumentGlobal)
+                                        ),
+                                    Parameter(Identifier("__delegate_arg" + (i + 1)))
+                                        .WithType(sourceType),
+                                }
+                            )
+                        )
+                    )
+                    .WithBlock(
+                        Block(
+                            SingletonList<StatementSyntax>(
+                                ExpressionStatement(
+                                    InvocationExpression(
+                                            MemberAccessExpression(
+                                                SyntaxKind.SimpleMemberAccessExpression,
+                                                IdentifierName("__delegate_arg_arg" + (i + 1)),
+                                                GetToJSMethod(marshalerType)
+                                            )
+                                        )
+                                        .WithArgumentList(
+                                            ArgumentList(
+                                                SeparatedList(
+                                                    new[]
+                                                    {
+                                                        Argument(
+                                                            IdentifierName(
+                                                                "__delegate_arg" + (i + 1)
+                                                            )
+                                                        ),
+                                                    }
+                                                )
+                                            )
+                                        )
+                                )
+                            )
+                        )
+                    )
+            );
 
-        private static ArgumentSyntax ArgToJS(int i, TypeSyntax sourceType, MarshalerType marshalerType) => Argument(ParenthesizedLambdaExpression()
-                            .WithModifiers(TokenList(Token(SyntaxKind.StaticKeyword)))
-                            .WithParameterList(ParameterList(SeparatedList(new[]{
-                        Parameter(Identifier("__delegate_arg_arg"+(i+1)))
-                        .WithModifiers(TokenList(Token(SyntaxKind.RefKeyword)))
-                        .WithType(IdentifierName(Constants.JSMarshalerArgumentGlobal)),
-                        Parameter(Identifier("__delegate_arg"+(i+1)))
-                        .WithType(sourceType)})))
-                            .WithBlock(Block(SingletonList<StatementSyntax>(ExpressionStatement(
-                                InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                IdentifierName("__delegate_arg_arg" + (i + 1)), GetToJSMethod(marshalerType)))
-                                .WithArgumentList(ArgumentList(SeparatedList(new[]{
-                            Argument(IdentifierName("__delegate_arg"+(i+1))),
-                                }))))))));
-
-        private static ArgumentSyntax ArgToManaged(int i, TypeSyntax sourceType, MarshalerType marshalerType) => Argument(ParenthesizedLambdaExpression()
-                            .WithModifiers(TokenList(Token(SyntaxKind.StaticKeyword)))
-                            .WithParameterList(ParameterList(SeparatedList(new[]{
-                        Parameter(Identifier("__delegate_arg_arg"+(i+1)))
-                        .WithModifiers(TokenList(Token(SyntaxKind.RefKeyword)))
-                        .WithType(IdentifierName(Constants.JSMarshalerArgumentGlobal)),
-                        Parameter(Identifier("__delegate_arg"+(i+1)))
-                        .WithModifiers(TokenList(Token(SyntaxKind.OutKeyword)))
-                        .WithType(sourceType)})))
-                            .WithBlock(Block(SingletonList<StatementSyntax>(ExpressionStatement(
-                                InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                IdentifierName("__delegate_arg_arg" + (i + 1)), GetToManagedMethod(marshalerType)))
-                                .WithArgumentList(ArgumentList(SeparatedList(new[]{
-                            Argument(IdentifierName("__delegate_arg"+(i+1))).WithRefOrOutKeyword(Token(SyntaxKind.OutKeyword)),
-                                }))))))));
+        private static ArgumentSyntax ArgToManaged(
+            int i,
+            TypeSyntax sourceType,
+            MarshalerType marshalerType
+        ) =>
+            Argument(
+                ParenthesizedLambdaExpression()
+                    .WithModifiers(TokenList(Token(SyntaxKind.StaticKeyword)))
+                    .WithParameterList(
+                        ParameterList(
+                            SeparatedList(
+                                new[]
+                                {
+                                    Parameter(Identifier("__delegate_arg_arg" + (i + 1)))
+                                        .WithModifiers(TokenList(Token(SyntaxKind.RefKeyword)))
+                                        .WithType(
+                                            IdentifierName(Constants.JSMarshalerArgumentGlobal)
+                                        ),
+                                    Parameter(Identifier("__delegate_arg" + (i + 1)))
+                                        .WithModifiers(TokenList(Token(SyntaxKind.OutKeyword)))
+                                        .WithType(sourceType),
+                                }
+                            )
+                        )
+                    )
+                    .WithBlock(
+                        Block(
+                            SingletonList<StatementSyntax>(
+                                ExpressionStatement(
+                                    InvocationExpression(
+                                            MemberAccessExpression(
+                                                SyntaxKind.SimpleMemberAccessExpression,
+                                                IdentifierName("__delegate_arg_arg" + (i + 1)),
+                                                GetToManagedMethod(marshalerType)
+                                            )
+                                        )
+                                        .WithArgumentList(
+                                            ArgumentList(
+                                                SeparatedList(
+                                                    new[]
+                                                    {
+                                                        Argument(
+                                                                IdentifierName(
+                                                                    "__delegate_arg" + (i + 1)
+                                                                )
+                                                            )
+                                                            .WithRefOrOutKeyword(
+                                                                Token(SyntaxKind.OutKeyword)
+                                                            ),
+                                                    }
+                                                )
+                                            )
+                                        )
+                                )
+                            )
+                        )
+                    )
+            );
     }
 }

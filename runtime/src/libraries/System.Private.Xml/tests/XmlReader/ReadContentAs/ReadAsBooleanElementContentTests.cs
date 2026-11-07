@@ -28,7 +28,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean11()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <?a?><!-- Comment inbetween--><![CDATA[0]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <?a?><!-- Comment inbetween--><![CDATA[0]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal((object)false, reader.ReadElementContentAs(typeof(bool), null));
         }
@@ -45,7 +47,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean13()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <!-- Comment inbetween--><![CDATA[1]]><?a?> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <!-- Comment inbetween--><![CDATA[1]]><?a?> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal((object)true, reader.ReadElementContentAs(typeof(bool), null));
         }
@@ -53,7 +57,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean14()
         {
-            var reader = Utils.CreateFragmentReader("<Root> f<!-- Comment inbetween-->a<?a?>lse<!-- Comment inbetween--> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> f<!-- Comment inbetween-->a<?a?>lse<!-- Comment inbetween--> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal((object)false, reader.ReadElementContentAs(typeof(bool), null));
         }
@@ -61,7 +67,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean15()
         {
-            var reader = Utils.CreateFragmentReader("<Root> t<!-- Comment inbetween-->ru<?a?>e </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> t<!-- Comment inbetween-->ru<?a?>e </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal((object)true, reader.ReadElementContentAs(typeof(bool), null));
         }
@@ -69,7 +77,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean16()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <?a?><!-- Comment inbetween-->0   </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <?a?><!-- Comment inbetween-->0   </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal((object)false, reader.ReadElementContentAs(typeof(bool), null));
         }
@@ -102,7 +112,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean3()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <?a?><!-- Comment inbetween--><![CDATA[0]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <?a?><!-- Comment inbetween--><![CDATA[0]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.False(reader.ReadElementContentAsBoolean());
         }
@@ -110,7 +122,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean4()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <!-- Comment inbetween--><![CDATA[1]]><?a?> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <!-- Comment inbetween--><![CDATA[1]]><?a?> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.True(reader.ReadElementContentAsBoolean());
         }
@@ -118,7 +132,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean5()
         {
-            var reader = Utils.CreateFragmentReader("<Root> f<!-- Comment inbetween-->a<?a?>lse<!-- Comment inbetween--> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> f<!-- Comment inbetween-->a<?a?>lse<!-- Comment inbetween--> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.False(reader.ReadElementContentAsBoolean());
         }
@@ -126,7 +142,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean6()
         {
-            var reader = Utils.CreateFragmentReader("<Root> t<!-- Comment inbetween-->ru<?a?>e </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> t<!-- Comment inbetween-->ru<?a?>e </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.True(reader.ReadElementContentAsBoolean());
         }
@@ -134,7 +152,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsBoolean7()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <?a?><!-- Comment inbetween-->0   </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <?a?><!-- Comment inbetween-->0   </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.False(reader.ReadElementContentAsBoolean());
         }

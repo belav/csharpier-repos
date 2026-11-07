@@ -11,7 +11,10 @@ namespace ComInterfaceGenerator.Tests
 {
     public unsafe partial class PreserveSigTests
     {
-        [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "create_point_provider")]
+        [LibraryImport(
+            NativeExportsNE.NativeExportsNE_Binary,
+            EntryPoint = "create_point_provider"
+        )]
         public static partial void* NewNativeObject();
 
         [Fact]
@@ -19,7 +22,8 @@ namespace ComInterfaceGenerator.Tests
         {
             var ptr = NewNativeObject(); // new_native_object
             var cw = new StrategyBasedComWrappers();
-            var obj = (IPointProvider)cw.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
+            var obj = (IPointProvider)
+                cw.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
 
             var expected = new Point(42, 63);
 

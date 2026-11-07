@@ -41,7 +41,8 @@ namespace System.Formats.Asn1
                 _ruleSet,
                 out int contentOffset,
                 out int contentLength,
-                out _);
+                out _
+            );
 
             return _span.Slice(contentOffset, contentLength);
         }
@@ -75,14 +76,25 @@ namespace System.Formats.Asn1
 
         internal bool TryReadInt32(out int value, Asn1Tag? expectedTag = default)
         {
-            bool ret = AsnDecoder.TryReadInt32(_span, _ruleSet, out value, out int consumed, expectedTag);
+            bool ret = AsnDecoder.TryReadInt32(
+                _span,
+                _ruleSet,
+                out value,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
 
         internal ReadOnlySpan<byte> ReadIntegerBytes(Asn1Tag? expectedTag = default)
         {
-            ReadOnlySpan<byte> ret = AsnDecoder.ReadIntegerBytes(_span, _ruleSet, out int consumed, expectedTag);
+            ReadOnlySpan<byte> ret = AsnDecoder.ReadIntegerBytes(
+                _span,
+                _ruleSet,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
@@ -90,7 +102,8 @@ namespace System.Formats.Asn1
         internal bool TryReadPrimitiveBitString(
             out int unusedBitCount,
             out ReadOnlySpan<byte> value,
-            Asn1Tag? expectedTag = default)
+            Asn1Tag? expectedTag = default
+        )
         {
             bool ret = AsnDecoder.TryReadPrimitiveBitString(
                 _span,
@@ -98,7 +111,8 @@ namespace System.Formats.Asn1
                 out unusedBitCount,
                 out value,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             _span = _span.Slice(consumed);
             return ret;
@@ -111,29 +125,38 @@ namespace System.Formats.Asn1
                 _ruleSet,
                 out unusedBitCount,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             _span = _span.Slice(consumed);
             return ret;
         }
 
-        internal TFlagsEnum ReadNamedBitListValue<TFlagsEnum>(Asn1Tag? expectedTag = default) where TFlagsEnum : Enum
+        internal TFlagsEnum ReadNamedBitListValue<TFlagsEnum>(Asn1Tag? expectedTag = default)
+            where TFlagsEnum : Enum
         {
-            TFlagsEnum ret = AsnDecoder.ReadNamedBitListValue<TFlagsEnum>(_span, _ruleSet, out int consumed, expectedTag);
+            TFlagsEnum ret = AsnDecoder.ReadNamedBitListValue<TFlagsEnum>(
+                _span,
+                _ruleSet,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
 
         internal bool TryReadPrimitiveOctetString(
             out ReadOnlySpan<byte> value,
-            Asn1Tag? expectedTag = default)
+            Asn1Tag? expectedTag = default
+        )
         {
             bool ret = AsnDecoder.TryReadPrimitiveOctetString(
                 _span,
                 _ruleSet,
                 out value,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             _span = _span.Slice(consumed);
             return ret;
@@ -141,11 +164,7 @@ namespace System.Formats.Asn1
 
         internal byte[] ReadOctetString(Asn1Tag? expectedTag = default)
         {
-            byte[] ret = AsnDecoder.ReadOctetString(
-                _span,
-                _ruleSet,
-                out int consumed,
-                expectedTag);
+            byte[] ret = AsnDecoder.ReadOctetString(_span, _ruleSet, out int consumed, expectedTag);
 
             _span = _span.Slice(consumed);
             return ret;
@@ -153,7 +172,12 @@ namespace System.Formats.Asn1
 
         internal string ReadObjectIdentifier(Asn1Tag? expectedTag = default)
         {
-            string ret = AsnDecoder.ReadObjectIdentifier(_span, _ruleSet, out int consumed, expectedTag);
+            string ret = AsnDecoder.ReadObjectIdentifier(
+                _span,
+                _ruleSet,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
@@ -166,14 +190,18 @@ namespace System.Formats.Asn1
                 out int contentOffset,
                 out int contentLength,
                 out int bytesConsumed,
-                expectedTag);
+                expectedTag
+            );
 
             ReadOnlySpan<byte> content = _span.Slice(contentOffset, contentLength);
             _span = _span.Slice(bytesConsumed);
             return new AsnValueReader(content, _ruleSet);
         }
 
-        internal AsnValueReader ReadSetOf(Asn1Tag? expectedTag = default, bool skipSortOrderValidation = false)
+        internal AsnValueReader ReadSetOf(
+            Asn1Tag? expectedTag = default,
+            bool skipSortOrderValidation = false
+        )
         {
             AsnDecoder.ReadSetOf(
                 _span,
@@ -182,7 +210,8 @@ namespace System.Formats.Asn1
                 out int contentLength,
                 out int bytesConsumed,
                 skipSortOrderValidation: skipSortOrderValidation,
-                expectedTag: expectedTag);
+                expectedTag: expectedTag
+            );
 
             ReadOnlySpan<byte> content = _span.Slice(contentOffset, contentLength);
             _span = _span.Slice(bytesConsumed);
@@ -191,28 +220,53 @@ namespace System.Formats.Asn1
 
         internal DateTimeOffset ReadUtcTime(Asn1Tag? expectedTag = default)
         {
-            DateTimeOffset ret = AsnDecoder.ReadUtcTime(_span, _ruleSet, out int consumed, expectedTag: expectedTag);
+            DateTimeOffset ret = AsnDecoder.ReadUtcTime(
+                _span,
+                _ruleSet,
+                out int consumed,
+                expectedTag: expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
 
         internal DateTimeOffset ReadGeneralizedTime(Asn1Tag? expectedTag = default)
         {
-            DateTimeOffset ret = AsnDecoder.ReadGeneralizedTime(_span, _ruleSet, out int consumed, expectedTag);
+            DateTimeOffset ret = AsnDecoder.ReadGeneralizedTime(
+                _span,
+                _ruleSet,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
 
-        internal string ReadCharacterString(UniversalTagNumber encodingType, Asn1Tag? expectedTag = default)
+        internal string ReadCharacterString(
+            UniversalTagNumber encodingType,
+            Asn1Tag? expectedTag = default
+        )
         {
-            string ret = AsnDecoder.ReadCharacterString(_span, _ruleSet, encodingType, out int consumed, expectedTag);
+            string ret = AsnDecoder.ReadCharacterString(
+                _span,
+                _ruleSet,
+                encodingType,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
 
-        internal TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null) where TEnum : Enum
+        internal TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null)
+            where TEnum : Enum
         {
-            TEnum ret = AsnDecoder.ReadEnumeratedValue<TEnum>(_span, _ruleSet, out int consumed, expectedTag);
+            TEnum ret = AsnDecoder.ReadEnumeratedValue<TEnum>(
+                _span,
+                _ruleSet,
+                out int consumed,
+                expectedTag
+            );
             _span = _span.Slice(consumed);
             return ret;
         }
@@ -222,7 +276,8 @@ namespace System.Formats.Asn1
     {
         internal static void WriteEncodedValueForCrypto(
             this AsnWriter writer,
-            ReadOnlySpan<byte> value)
+            ReadOnlySpan<byte> value
+        )
         {
             try
             {
@@ -234,9 +289,7 @@ namespace System.Formats.Asn1
             }
         }
 
-        internal static void WriteObjectIdentifierForCrypto(
-            this AsnWriter writer,
-            string value)
+        internal static void WriteObjectIdentifierForCrypto(this AsnWriter writer, string value)
         {
             try
             {

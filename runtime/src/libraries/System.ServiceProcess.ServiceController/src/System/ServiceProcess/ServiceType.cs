@@ -13,6 +13,6 @@ namespace System.ServiceProcess
         KernelDriver = Interop.Advapi32.ServiceTypeOptions.SERVICE_KERNEL_DRIVER,
         RecognizerDriver = Interop.Advapi32.ServiceTypeOptions.SERVICE_RECOGNIZER_DRIVER,
         Win32OwnProcess = Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
-        Win32ShareProcess = Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_SHARE_PROCESS
+        Win32ShareProcess = Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_SHARE_PROCESS,
     }
 }

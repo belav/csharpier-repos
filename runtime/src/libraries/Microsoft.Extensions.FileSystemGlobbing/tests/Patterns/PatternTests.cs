@@ -52,7 +52,6 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.Patterns
             Assert.Null(pattern);
         }
 
-
         [Theory]
         [InlineData("/abc/", 2, 1, 0, 0)]
         [InlineData("abc/", 2, 1, 0, 0)]
@@ -75,11 +74,13 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.Patterns
         [InlineData("**/*.suffix", 2, 0, 0, 1)]
         [InlineData("**.suffix", 2, 0, 0, 1)]
         [InlineData("ab/**.suffix", 3, 1, 0, 1)]
-        public void BuildRaggedPattern(string sample,
-                             int segmentCount,
-                             int startSegmentsCount,
-                             int containSegmentCount,
-                             int endSegmentCount)
+        public void BuildRaggedPattern(
+            string sample,
+            int segmentCount,
+            int startSegmentsCount,
+            int containSegmentCount,
+            int endSegmentCount
+        )
         {
             var builder = new PatternBuilder();
             var pattern = builder.Build(sample) as IRaggedPattern;

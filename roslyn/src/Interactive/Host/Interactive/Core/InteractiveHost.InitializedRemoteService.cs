@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.Interactive
             public readonly RemoteService? Service;
             public readonly RemoteExecutionResult InitializationResult;
 
-            public InitializedRemoteService(RemoteService service, RemoteExecutionResult initializationResult)
+            public InitializedRemoteService(
+                RemoteService service,
+                RemoteExecutionResult initializationResult
+            )
             {
                 Service = service;
                 InitializationResult = initializationResult;

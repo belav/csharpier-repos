@@ -68,7 +68,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void DifferentNamespacesSameNameAttributes()
         {
-            XAttribute a = new XAttribute("{NamespaceOne}Name", "a"), b = new XAttribute("{NamespaceTwo}Name", "b");
+            XAttribute a = new XAttribute("{NamespaceOne}Name", "a"),
+                b = new XAttribute("{NamespaceTwo}Name", "b");
             Assert.NotSame(a.Name.Namespace, b.Name.Namespace);
             Assert.NotSame(a.Name, b.Name);
         }
@@ -76,7 +77,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void DifferentNamespacesAndNamesElements()
         {
-            XElement a = new XElement("{NameSpaceOne}NameOne"), b = new XElement("{NameSpaceTwo}NameTwo");
+            XElement a = new XElement("{NameSpaceOne}NameOne"),
+                b = new XElement("{NameSpaceTwo}NameTwo");
             Assert.NotSame(a.Name.Namespace, b.Name.Namespace);
             Assert.NotSame(a.Name, b.Name);
         }
@@ -87,8 +89,12 @@ namespace System.Xml.Linq.Tests
             XDocument xDoc = new XDocument(new XElement("Name", new XElement("Name")));
             Assert.Same(
                 (xDoc.Nodes().First() as XElement).Name.Namespace,
-                (xDoc.Nodes().Last() as XElement).Name.Namespace);
-            Assert.Same((xDoc.Nodes().First() as XElement).Name, (xDoc.Nodes().Last() as XElement).Name);
+                (xDoc.Nodes().Last() as XElement).Name.Namespace
+            );
+            Assert.Same(
+                (xDoc.Nodes().First() as XElement).Name,
+                (xDoc.Nodes().Last() as XElement).Name
+            );
         }
 
         [Fact]
@@ -96,7 +102,10 @@ namespace System.Xml.Linq.Tests
         {
             XDocument xDoc1 = new XDocument(new XElement("{Namespace}Name"));
             XDocument xDoc2 = new XDocument(new XElement("{Namespace}Name"));
-            Assert.Same((xDoc1.FirstNode as XElement).Name.Namespace, (xDoc2.FirstNode as XElement).Name.Namespace);
+            Assert.Same(
+                (xDoc1.FirstNode as XElement).Name.Namespace,
+                (xDoc2.FirstNode as XElement).Name.Namespace
+            );
             Assert.Same((xDoc1.FirstNode as XElement).Name, (xDoc2.FirstNode as XElement).Name);
         }
 
@@ -148,7 +157,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void DifferentNameSameHashcodeElements()
         {
-            XElement a = new XElement("A2WVL"), b = new XElement("A2WVK");
+            XElement a = new XElement("A2WVL"),
+                b = new XElement("A2WVK");
             Assert.Same(a.Name.Namespace, b.Name.Namespace);
             Assert.NotSame(a.Name, b.Name);
         }
@@ -165,7 +175,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void DifferentNamespaceAndNameSameHashcodeElements()
         {
-            XElement a = new XElement("{A2WVL}A2WVK"), b = new XElement("{A2WVK}A2WVL");
+            XElement a = new XElement("{A2WVL}A2WVK"),
+                b = new XElement("{A2WVK}A2WVL");
             Assert.NotSame(a.Name.Namespace, b.Name.Namespace);
             Assert.NotSame(a.Name, b.Name);
         }

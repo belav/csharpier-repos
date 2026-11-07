@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,357 +32,401 @@ using System.Xml;
 
 namespace Mono.Xml
 {
-	public class XmlNodeWriter : XmlWriter
-	{
-		public XmlNodeWriter () : this (true)
-		{
-		}
+    public class XmlNodeWriter : XmlWriter
+    {
+        public XmlNodeWriter()
+            : this(true) { }
 
-		// It should be public after some tests are done :-)
-		public XmlNodeWriter (bool isDocumentEntity)
-		{
-			doc = new XmlDocument ();
-			state = XmlNodeType.None;
-			this.isDocumentEntity = isDocumentEntity;
-			if (!isDocumentEntity)
-				current = fragment = doc.CreateDocumentFragment ();
-		}
+        // It should be public after some tests are done :-)
+        public XmlNodeWriter(bool isDocumentEntity)
+        {
+            doc = new XmlDocument();
+            state = XmlNodeType.None;
+            this.isDocumentEntity = isDocumentEntity;
+            if (!isDocumentEntity)
+                current = fragment = doc.CreateDocumentFragment();
+        }
 
-		XmlDocument doc;
-		bool isClosed;
-		// If it is not null, then we are now inside the element.
-		XmlNode current;
-		// If it is not null, then we are now inside the attribute.
-		XmlAttribute attribute;
-		// If it is false, then allow to contain multiple document elements.
-		bool isDocumentEntity;
-		XmlDocumentFragment fragment;
+        XmlDocument doc;
+        bool isClosed;
 
-		// None: started or closed.
-		// XmlDeclaration: after xmldecl. Never allow xmldecl.
-		// DocumentType: after doctype. Never allow xmldecl and doctype.
-		// Element: inside document element.
-		// 
-		XmlNodeType state;
+        // If it is not null, then we are now inside the element.
+        XmlNode current;
 
-		// Properties
-		public XmlNode Document {
-			get { return isDocumentEntity ? (XmlNode)doc : (XmlNode)fragment; }
-		}
+        // If it is not null, then we are now inside the attribute.
+        XmlAttribute attribute;
 
-		public override WriteState WriteState {
-			get {
-				if (isClosed)
-					return WriteState.Closed;
-				if (attribute != null)
-					return WriteState.Attribute;
+        // If it is false, then allow to contain multiple document elements.
+        bool isDocumentEntity;
+        XmlDocumentFragment fragment;
 
-				switch (state) {
-				case XmlNodeType.None:
-					return WriteState.Start;
-				case XmlNodeType.XmlDeclaration:
-					return WriteState.Prolog;
-				case XmlNodeType.DocumentType:
-					return WriteState.Element;
-				default:
-					return WriteState.Content;
-				}
-			}
-		}
+        // None: started or closed.
+        // XmlDeclaration: after xmldecl. Never allow xmldecl.
+        // DocumentType: after doctype. Never allow xmldecl and doctype.
+        // Element: inside document element.
+        //
+        XmlNodeType state;
 
-		public override string XmlLang {
-			get {
-				for (XmlElement n = current as XmlElement; n != null; n = n.ParentNode as XmlElement)
-					if (n.HasAttribute ("xml:lang"))
-						return n.GetAttribute ("xml:lang");
-				return String.Empty;
-			}
-		}
+        // Properties
+        public XmlNode Document
+        {
+            get { return isDocumentEntity ? (XmlNode)doc : (XmlNode)fragment; }
+        }
 
-		public override XmlSpace XmlSpace {
-			get {
-				for (XmlElement n = current as XmlElement; n != null; n = n.ParentNode as XmlElement) {
-					string xs = n.GetAttribute ("xml:space");
-					switch (xs) {
-					case "preserve":
-						return XmlSpace.Preserve;
-					case "default":
-						return XmlSpace.Default;
-					case "":
-						continue;
-					default:
-						throw new InvalidOperationException (String.Format ("Invalid xml:space {0}.", xs));
-					}
-				}
-				return XmlSpace.None;
-			}
-		}
+        public override WriteState WriteState
+        {
+            get
+            {
+                if (isClosed)
+                    return WriteState.Closed;
+                if (attribute != null)
+                    return WriteState.Attribute;
 
-		// Private Methods
+                switch (state)
+                {
+                    case XmlNodeType.None:
+                        return WriteState.Start;
+                    case XmlNodeType.XmlDeclaration:
+                        return WriteState.Prolog;
+                    case XmlNodeType.DocumentType:
+                        return WriteState.Element;
+                    default:
+                        return WriteState.Content;
+                }
+            }
+        }
 
-		private void CheckState ()
-		{
-			if (isClosed)
-				throw new InvalidOperationException ();
+        public override string XmlLang
+        {
+            get
+            {
+                for (
+                    XmlElement n = current as XmlElement;
+                    n != null;
+                    n = n.ParentNode as XmlElement
+                )
+                    if (n.HasAttribute("xml:lang"))
+                        return n.GetAttribute("xml:lang");
+                return String.Empty;
+            }
+        }
 
-		}
+        public override XmlSpace XmlSpace
+        {
+            get
+            {
+                for (
+                    XmlElement n = current as XmlElement;
+                    n != null;
+                    n = n.ParentNode as XmlElement
+                )
+                {
+                    string xs = n.GetAttribute("xml:space");
+                    switch (xs)
+                    {
+                        case "preserve":
+                            return XmlSpace.Preserve;
+                        case "default":
+                            return XmlSpace.Default;
+                        case "":
+                            continue;
+                        default:
+                            throw new InvalidOperationException(
+                                String.Format("Invalid xml:space {0}.", xs)
+                            );
+                    }
+                }
+                return XmlSpace.None;
+            }
+        }
 
-		private void WritePossiblyTopLevelNode (XmlNode n, bool possiblyAttribute)
-		{
-			CheckState ();
-			if (!possiblyAttribute && attribute != null)
-				throw new InvalidOperationException (String.Format ("Current state is not acceptable for {0}.", n.NodeType));
+        // Private Methods
 
-			if (state != XmlNodeType.Element)
-				Document.AppendChild (n);
-			else if (attribute != null)
-				attribute.AppendChild (n);
-			else
-				current.AppendChild (n);
-			if (state == XmlNodeType.None)
-				state = XmlNodeType.XmlDeclaration;
-		}
+        private void CheckState()
+        {
+            if (isClosed)
+                throw new InvalidOperationException();
+        }
 
-		// Public Methods
+        private void WritePossiblyTopLevelNode(XmlNode n, bool possiblyAttribute)
+        {
+            CheckState();
+            if (!possiblyAttribute && attribute != null)
+                throw new InvalidOperationException(
+                    String.Format("Current state is not acceptable for {0}.", n.NodeType)
+                );
 
-		public override void Close ()
-		{
-			CheckState ();
-			isClosed = true;
-		}
+            if (state != XmlNodeType.Element)
+                Document.AppendChild(n);
+            else if (attribute != null)
+                attribute.AppendChild(n);
+            else
+                current.AppendChild(n);
+            if (state == XmlNodeType.None)
+                state = XmlNodeType.XmlDeclaration;
+        }
 
-		public override void Flush ()
-		{
-		}
+        // Public Methods
 
-		public override string LookupPrefix (string ns)
-		{
-			CheckState ();
-			if (current == null)
-				throw new InvalidOperationException ();
-			return current.GetPrefixOfNamespace (ns);
-		}
+        public override void Close()
+        {
+            CheckState();
+            isClosed = true;
+        }
 
-		// StartDocument
+        public override void Flush() { }
 
-		public override void WriteStartDocument ()
-		{
-			WriteStartDocument (null);
-		}
+        public override string LookupPrefix(string ns)
+        {
+            CheckState();
+            if (current == null)
+                throw new InvalidOperationException();
+            return current.GetPrefixOfNamespace(ns);
+        }
 
-		public override void WriteStartDocument (bool standalone)
-		{
-			WriteStartDocument (standalone ? "yes" : "no");
-		}
+        // StartDocument
 
-		private void WriteStartDocument (string sddecl)
-		{
-			CheckState ();
-			if (state != XmlNodeType.None)
-				throw new InvalidOperationException ("Current state is not acceptable for xmldecl.");
+        public override void WriteStartDocument()
+        {
+            WriteStartDocument(null);
+        }
 
-			doc.AppendChild (doc.CreateXmlDeclaration ("1.0", null, sddecl));
-			state = XmlNodeType.XmlDeclaration;
-		}
-		
-		// EndDocument
-		
-		public override void WriteEndDocument ()
-		{
-			CheckState ();
+        public override void WriteStartDocument(bool standalone)
+        {
+            WriteStartDocument(standalone ? "yes" : "no");
+        }
 
-			isClosed = true;
-		}
+        private void WriteStartDocument(string sddecl)
+        {
+            CheckState();
+            if (state != XmlNodeType.None)
+                throw new InvalidOperationException("Current state is not acceptable for xmldecl.");
 
-		// DocumentType
-		public override void WriteDocType (string name, string publicId, string systemId, string internalSubset)
-		{
-			CheckState ();
-			switch (state) {
-			case XmlNodeType.None:
-			case XmlNodeType.XmlDeclaration:
-				doc.AppendChild (doc.CreateDocumentType (name, publicId, systemId, internalSubset));
-				state = XmlNodeType.DocumentType;
-				break;
-			default:
-				throw new InvalidOperationException ("Current state is not acceptable for doctype.");
-			}
-		}
+            doc.AppendChild(doc.CreateXmlDeclaration("1.0", null, sddecl));
+            state = XmlNodeType.XmlDeclaration;
+        }
 
-		// StartElement
+        // EndDocument
 
-		public override void WriteStartElement (string prefix, string name, string ns)
-		{
-			CheckState ();
-			if (isDocumentEntity && state == XmlNodeType.EndElement && doc.DocumentElement != null)
-				throw new InvalidOperationException ("Current state is not acceptable for startElement.");
+        public override void WriteEndDocument()
+        {
+            CheckState();
 
-			XmlElement el = doc.CreateElement (prefix, name, ns);
-			if (current == null) {
-				Document.AppendChild (el);
-				state = XmlNodeType.Element;
-			} else {
-				current.AppendChild (el);
-				state = XmlNodeType.Element;
-			}
+            isClosed = true;
+        }
 
-			current = el;
-		}
+        // DocumentType
+        public override void WriteDocType(
+            string name,
+            string publicId,
+            string systemId,
+            string internalSubset
+        )
+        {
+            CheckState();
+            switch (state)
+            {
+                case XmlNodeType.None:
+                case XmlNodeType.XmlDeclaration:
+                    doc.AppendChild(
+                        doc.CreateDocumentType(name, publicId, systemId, internalSubset)
+                    );
+                    state = XmlNodeType.DocumentType;
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        "Current state is not acceptable for doctype."
+                    );
+            }
+        }
 
-		// EndElement
+        // StartElement
 
-		public override void WriteEndElement ()
-		{
-			WriteEndElementInternal (false);
-		}
-		
-		public override void WriteFullEndElement ()
-		{
-			WriteEndElementInternal (true);
-		}
+        public override void WriteStartElement(string prefix, string name, string ns)
+        {
+            CheckState();
+            if (isDocumentEntity && state == XmlNodeType.EndElement && doc.DocumentElement != null)
+                throw new InvalidOperationException(
+                    "Current state is not acceptable for startElement."
+                );
 
-		private void WriteEndElementInternal (bool forceFull)
-		{
-			CheckState ();
-			if (current == null)
-				throw new InvalidOperationException ("Current state is not acceptable for endElement.");
+            XmlElement el = doc.CreateElement(prefix, name, ns);
+            if (current == null)
+            {
+                Document.AppendChild(el);
+                state = XmlNodeType.Element;
+            }
+            else
+            {
+                current.AppendChild(el);
+                state = XmlNodeType.Element;
+            }
 
-			if (!forceFull && current.FirstChild == null)
-				((XmlElement) current).IsEmpty = true;
+            current = el;
+        }
 
-			if (isDocumentEntity && current.ParentNode == doc)
-				state = XmlNodeType.EndElement;
-			else
-				current = current.ParentNode;
-		}
+        // EndElement
 
-		// StartAttribute
+        public override void WriteEndElement()
+        {
+            WriteEndElementInternal(false);
+        }
 
-		public override void WriteStartAttribute (string prefix, string name, string ns)
-		{
-			CheckState ();
-			if (attribute != null)
-				throw new InvalidOperationException ("There is an open attribute.");
-			if (!(current is XmlElement))
-				throw new InvalidOperationException ("Current state is not acceptable for startAttribute.");
+        public override void WriteFullEndElement()
+        {
+            WriteEndElementInternal(true);
+        }
 
-			attribute = doc.CreateAttribute (prefix, name, ns);
-			((XmlElement)current).SetAttributeNode (attribute);
-		}
+        private void WriteEndElementInternal(bool forceFull)
+        {
+            CheckState();
+            if (current == null)
+                throw new InvalidOperationException(
+                    "Current state is not acceptable for endElement."
+                );
 
-		public override void WriteEndAttribute ()
-		{
-			CheckState ();
-			if (attribute == null)
-				throw new InvalidOperationException ("Current state is not acceptable for startAttribute.");
+            if (!forceFull && current.FirstChild == null)
+                ((XmlElement)current).IsEmpty = true;
 
-			attribute = null;
-		}
+            if (isDocumentEntity && current.ParentNode == doc)
+                state = XmlNodeType.EndElement;
+            else
+                current = current.ParentNode;
+        }
 
-		public override void WriteCData (string data)
-		{
-			CheckState ();
-			if (current == null)
-				throw new InvalidOperationException ("Current state is not acceptable for CDATAsection.");
+        // StartAttribute
 
-			current.AppendChild (doc.CreateCDataSection (data));
-		}
+        public override void WriteStartAttribute(string prefix, string name, string ns)
+        {
+            CheckState();
+            if (attribute != null)
+                throw new InvalidOperationException("There is an open attribute.");
+            if (!(current is XmlElement))
+                throw new InvalidOperationException(
+                    "Current state is not acceptable for startAttribute."
+                );
 
-		public override void WriteComment (string comment)
-		{
-			WritePossiblyTopLevelNode (doc.CreateComment (comment), false);
-		}
+            attribute = doc.CreateAttribute(prefix, name, ns);
+            ((XmlElement)current).SetAttributeNode(attribute);
+        }
 
-		public override void WriteProcessingInstruction (string name, string value)
-		{
-			WritePossiblyTopLevelNode (
-				doc.CreateProcessingInstruction (name, value), false);
-		}
+        public override void WriteEndAttribute()
+        {
+            CheckState();
+            if (attribute == null)
+                throw new InvalidOperationException(
+                    "Current state is not acceptable for startAttribute."
+                );
 
-		public override void WriteEntityRef (string name)
-		{
-			WritePossiblyTopLevelNode (doc.CreateEntityReference (name), true);
-		}
+            attribute = null;
+        }
 
-		public override void WriteCharEntity (char c)
-		{
-			WritePossiblyTopLevelNode (doc.CreateTextNode (new string (new char [] {c}, 0, 1)), true);
-		}
+        public override void WriteCData(string data)
+        {
+            CheckState();
+            if (current == null)
+                throw new InvalidOperationException(
+                    "Current state is not acceptable for CDATAsection."
+                );
 
-		public override void WriteWhitespace (string ws)
-		{
-			WritePossiblyTopLevelNode (doc.CreateWhitespace (ws), true);
-		}
+            current.AppendChild(doc.CreateCDataSection(data));
+        }
 
-		public override void WriteString (string data)
-		{
-			CheckState ();
-			if (current == null)
-				throw new InvalidOperationException ("Current state is not acceptable for Text.");
+        public override void WriteComment(string comment)
+        {
+            WritePossiblyTopLevelNode(doc.CreateComment(comment), false);
+        }
 
-			if (attribute != null)
-				attribute.AppendChild (doc.CreateTextNode (data));
-			else {
-				XmlText last = current.LastChild as XmlText;
-				if (last == null)
-					current.AppendChild(doc.CreateTextNode(data));
-				else 
-					last.AppendData(data);
-			}
-		}
+        public override void WriteProcessingInstruction(string name, string value)
+        {
+            WritePossiblyTopLevelNode(doc.CreateProcessingInstruction(name, value), false);
+        }
 
-		public override void WriteName (string name)
-		{
-			WriteString (name);
-		}
+        public override void WriteEntityRef(string name)
+        {
+            WritePossiblyTopLevelNode(doc.CreateEntityReference(name), true);
+        }
 
-		public override void WriteNmToken (string nmtoken)
-		{
-			WriteString (nmtoken);
-		}
+        public override void WriteCharEntity(char c)
+        {
+            WritePossiblyTopLevelNode(doc.CreateTextNode(new string(new char[] { c }, 0, 1)), true);
+        }
 
-		public override void WriteQualifiedName (string name, string ns)
-		{
-			string prefix = LookupPrefix (ns);
-			if (prefix == null)
-				throw new ArgumentException (String.Format ("Invalid namespace {0}", ns));
-			if (prefix != String.Empty)
-				WriteString (name);
-			else
-				WriteString (prefix + ":" + name);
-		}
+        public override void WriteWhitespace(string ws)
+        {
+            WritePossiblyTopLevelNode(doc.CreateWhitespace(ws), true);
+        }
 
-		public override void WriteChars (char [] chars, int start, int len)
-		{
-			WriteString (new string (chars, start, len));
-		}
+        public override void WriteString(string data)
+        {
+            CheckState();
+            if (current == null)
+                throw new InvalidOperationException("Current state is not acceptable for Text.");
 
-		public override void WriteRaw (string data)
-		{
-			// It never supports raw string.
-			WriteString (data);
-		}
+            if (attribute != null)
+                attribute.AppendChild(doc.CreateTextNode(data));
+            else
+            {
+                XmlText last = current.LastChild as XmlText;
+                if (last == null)
+                    current.AppendChild(doc.CreateTextNode(data));
+                else
+                    last.AppendData(data);
+            }
+        }
 
-		public override void WriteRaw (char [] chars, int start, int len)
-		{
-			// It never supports raw string.
-			WriteChars (chars, start, len);
-		}
+        public override void WriteName(string name)
+        {
+            WriteString(name);
+        }
 
-		public override void WriteBase64 (byte [] data, int start, int len)
-		{
-			// It never supports raw string.
-			WriteString (Convert.ToBase64String (data, start, len));
-		}
-		
-		public override void WriteBinHex (byte [] data, int start, int len)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void WriteNmToken(string nmtoken)
+        {
+            WriteString(nmtoken);
+        }
 
-		public override void WriteSurrogateCharEntity (char c1, char c2)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override void WriteQualifiedName(string name, string ns)
+        {
+            string prefix = LookupPrefix(ns);
+            if (prefix == null)
+                throw new ArgumentException(String.Format("Invalid namespace {0}", ns));
+            if (prefix != String.Empty)
+                WriteString(name);
+            else
+                WriteString(prefix + ":" + name);
+        }
+
+        public override void WriteChars(char[] chars, int start, int len)
+        {
+            WriteString(new string(chars, start, len));
+        }
+
+        public override void WriteRaw(string data)
+        {
+            // It never supports raw string.
+            WriteString(data);
+        }
+
+        public override void WriteRaw(char[] chars, int start, int len)
+        {
+            // It never supports raw string.
+            WriteChars(chars, start, len);
+        }
+
+        public override void WriteBase64(byte[] data, int start, int len)
+        {
+            // It never supports raw string.
+            WriteString(Convert.ToBase64String(data, start, len));
+        }
+
+        public override void WriteBinHex(byte[] data, int start, int len)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void WriteSurrogateCharEntity(char c1, char c2)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

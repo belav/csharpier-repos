@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,29 +26,27 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 using System.Web.Util;
 
-namespace System.Web.SessionState {
+namespace System.Web.SessionState
+{
+    internal class SessionId
+    {
+        internal const int IdLength = 24;
+        const int half_len = IdLength / 2;
+        static RandomNumberGenerator rng = RandomNumberGenerator.Create();
 
-	internal class SessionId {
+        internal static string Create()
+        {
+            byte[] key = new byte[half_len];
 
-		internal const int IdLength = 24;
-		const int half_len = IdLength / 2;
-		static RandomNumberGenerator rng = RandomNumberGenerator.Create ();
-		
-		internal static string Create ()
-		{
-			byte[] key = new byte [half_len];
-
-			lock (rng) {
-				rng.GetBytes (key);
-			}
-			return MachineKeySectionUtils.GetHexString (key);
-		}
-
-	}
-
+            lock (rng)
+            {
+                rng.GetBytes(key);
+            }
+            return MachineKeySectionUtils.GetHexString(key);
+        }
+    }
 }
-

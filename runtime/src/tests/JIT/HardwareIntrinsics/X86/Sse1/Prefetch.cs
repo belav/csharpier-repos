@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse1
@@ -20,7 +20,11 @@ namespace IntelHardwareIntrinsicTest._Sse1
 
             if (Sse.IsSupported)
             {
-                using (TestTable_SingleArray<float> floatTable = new TestTable_SingleArray<float>(new float[4] { 1, -5, 100, 3 }))
+                using (
+                    TestTable_SingleArray<float> floatTable = new TestTable_SingleArray<float>(
+                        new float[4] { 1, -5, 100, 3 }
+                    )
+                )
                 {
                     try
                     {

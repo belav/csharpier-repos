@@ -22,7 +22,8 @@ public class RuntimeRelationalPropertyOverrides : AnnotatableBase, IRelationalPr
         RuntimeProperty property,
         in StoreObjectIdentifier storeObject,
         bool columnNameOverridden,
-        string? columnName)
+        string? columnName
+    )
     {
         Property = property;
         StoreObject = storeObject;
@@ -41,8 +42,10 @@ public class RuntimeRelationalPropertyOverrides : AnnotatableBase, IRelationalPr
     public virtual StoreObjectIdentifier StoreObject { get; }
 
     /// <inheritdoc />
-    public override string ToString()
-        => ((IRelationalPropertyOverrides)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IRelationalPropertyOverrides)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,10 +54,14 @@ public class RuntimeRelationalPropertyOverrides : AnnotatableBase, IRelationalPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IRelationalPropertyOverrides)this).ToDebugString(),
-            () => ((IRelationalPropertyOverrides)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IRelationalPropertyOverrides)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IProperty IRelationalPropertyOverrides.Property

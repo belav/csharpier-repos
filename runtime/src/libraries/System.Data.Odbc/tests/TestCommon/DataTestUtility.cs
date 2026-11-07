@@ -23,7 +23,8 @@ namespace System.Data.Odbc.Tests
         // some providers does not support names (Oracle supports up to 30)
         public static string GetUniqueName(string prefix, string escapeLeft, string escapeRight)
         {
-            string uniqueName = $"{escapeLeft}{prefix}_{DateTime.Now.Ticks:X}_{Guid.NewGuid().ToString().Substring(0, 6)}{escapeRight}";
+            string uniqueName =
+                $"{escapeLeft}{prefix}_{DateTime.Now.Ticks:X}_{Guid.NewGuid().ToString().Substring(0, 6)}{escapeRight}";
             return uniqueName;
         }
 

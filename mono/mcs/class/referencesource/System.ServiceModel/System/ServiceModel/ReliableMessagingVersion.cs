@@ -22,7 +22,14 @@ namespace System.ServiceModel
 
         public static ReliableMessagingVersion Default
         {
-            get { return System.ServiceModel.Channels.ReliableSessionDefaults.ReliableMessagingVersion; }
+            get
+            {
+                return System
+                    .ServiceModel
+                    .Channels
+                    .ReliableSessionDefaults
+                    .ReliableMessagingVersion;
+            }
         }
 
         public static ReliableMessagingVersion WSReliableMessaging11
@@ -57,9 +64,7 @@ namespace System.ServiceModel
         static ReliableMessagingVersion instance = new WSReliableMessaging11Version();
 
         WSReliableMessaging11Version()
-            : base(Wsrm11Strings.Namespace, DXD.Wsrm11Dictionary.Namespace)
-        {
-        }
+            : base(Wsrm11Strings.Namespace, DXD.Wsrm11Dictionary.Namespace) { }
 
         internal static ReliableMessagingVersion Instance
         {
@@ -75,9 +80,7 @@ namespace System.ServiceModel
     class WSReliableMessagingFebruary2005Version : ReliableMessagingVersion
     {
         WSReliableMessagingFebruary2005Version()
-            : base(WsrmFeb2005Strings.Namespace, XD.WsrmFeb2005Dictionary.Namespace)
-        {
-        }
+            : base(WsrmFeb2005Strings.Namespace, XD.WsrmFeb2005Dictionary.Namespace) { }
 
         static ReliableMessagingVersion instance = new WSReliableMessagingFebruary2005Version();
 

@@ -28,7 +28,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogMode))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogNotFoundException))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogPropertySelector))]
-[assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogProviderDisabledException))]
+[assembly: TypeForwardedTo(
+    typeof(System.Diagnostics.Eventing.Reader.EventLogProviderDisabledException)
+)]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogQuery))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogReader))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.Eventing.Reader.EventLogReadingException))]

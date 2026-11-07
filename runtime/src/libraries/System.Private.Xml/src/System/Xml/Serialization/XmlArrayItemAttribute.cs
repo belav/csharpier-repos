@@ -10,7 +10,13 @@ namespace System.Xml.Serialization
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = true
+    )]
     public class XmlArrayItemAttribute : System.Attribute
     {
         private string? _elementName;
@@ -25,9 +31,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlArrayItemAttribute()
-        {
-        }
+        public XmlArrayItemAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -104,7 +108,11 @@ namespace System.Xml.Serialization
         public bool IsNullable
         {
             get { return _nullable; }
-            set { _nullable = value; _nullableSpecified = true; }
+            set
+            {
+                _nullable = value;
+                _nullableSpecified = true;
+            }
         }
 
         internal bool IsNullableSpecified

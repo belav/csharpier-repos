@@ -23,7 +23,13 @@ namespace System.Reflection
             return aname;
         }
 
-        internal unsafe void FillName(MonoAssemblyName* native, string? codeBase, bool addVersion, bool addPublickey, bool defaultToken)
+        internal unsafe void FillName(
+            MonoAssemblyName* native,
+            string? codeBase,
+            bool addVersion,
+            bool addPublickey,
+            bool defaultToken
+        )
         {
             _name = Marshal.PtrToStringUTF8(native->name);
 
@@ -49,7 +55,9 @@ namespace System.Reflection
             _codeBase = codeBase;
 
             if (native->culture != IntPtr.Zero)
-                _cultureInfo = CultureInfo.GetCultureInfo(Marshal.PtrToStringUTF8(native->culture)!);
+                _cultureInfo = CultureInfo.GetCultureInfo(
+                    Marshal.PtrToStringUTF8(native->culture)!
+                );
 
             if (native->public_key != IntPtr.Zero)
             {
@@ -68,7 +76,10 @@ namespace System.Reflection
                 var keyToken = new byte[8];
                 for (int i = 0, j = 0; i < 8; ++i)
                 {
-                    keyToken[i] = (byte)(HexConverter.FromChar(native->public_key_token[j++]) << 4 | HexConverter.FromChar(native->public_key_token[j++]));
+                    keyToken[i] = (byte)(
+                        HexConverter.FromChar(native->public_key_token[j++]) << 4
+                        | HexConverter.FromChar(native->public_key_token[j++])
+                    );
                 }
                 _publicKeyToken = keyToken;
             }
@@ -97,10 +108,9 @@ namespace System.Reflection
                 }
                 else
                 {
-                    size = (uint)(((ptr[0] & 0x1f) << 24) +
-                        (ptr[1] << 16) +
-                        (ptr[2] << 8) +
-                        ptr[3]);
+                    size = (uint)(
+                        ((ptr[0] & 0x1f) << 24) + (ptr[1] << 16) + (ptr[2] << 8) + ptr[3]
+                    );
                     ptr += 4;
                 }
                 out_ptr = (IntPtr)ptr;

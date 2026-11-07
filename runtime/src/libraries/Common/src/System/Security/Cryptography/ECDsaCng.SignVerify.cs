@@ -17,36 +17,57 @@ namespace System.Security.Cryptography
         {
             ArgumentNullException.ThrowIfNull(hash);
 
-            int estimatedSize = GetMaxSignatureSize(DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
+            int estimatedSize = GetMaxSignatureSize(
+                DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+            );
 
             unsafe
             {
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
-                    byte[] signature = keyHandle.SignHash(hash, AsymmetricPaddingMode.None, null, estimatedSize);
+                    byte[] signature = keyHandle.SignHash(
+                        hash,
+                        AsymmetricPaddingMode.None,
+                        null,
+                        estimatedSize
+                    );
                     return signature;
                 }
             }
         }
 
-        public override bool TrySignHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public override bool TrySignHash(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return TrySignHashCore(
                 source,
                 destination,
                 DSASignatureFormat.IeeeP1363FixedFieldConcatenation,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         protected override unsafe bool TrySignHashCore(
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
             {
-                if (!keyHandle.TrySignHash(hash, destination, AsymmetricPaddingMode.None, null, out bytesWritten))
+                if (
+                    !keyHandle.TrySignHash(
+                        hash,
+                        destination,
+                        AsymmetricPaddingMode.None,
+                        null,
+                        out bytesWritten
+                    )
+                )
                 {
                     bytesWritten = 0;
                     return false;
@@ -60,16 +81,20 @@ namespace System.Security.Cryptography
 
             if (signatureFormat != DSASignatureFormat.Rfc3279DerSequence)
             {
-                Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                Debug.Fail(
+                    $"Missing internal implementation handler for signature format {signatureFormat}"
+                );
                 throw new CryptographicException(
                     SR.Cryptography_UnknownSignatureFormat,
-                    signatureFormat.ToString());
+                    signatureFormat.ToString()
+                );
             }
 
             return AsymmetricAlgorithmHelpers.TryConvertIeee1363ToDer(
                 destination.Slice(0, bytesWritten),
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         /// <summary>
@@ -80,7 +105,11 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(hash);
             ArgumentNullException.ThrowIfNull(signature);
 
-            return VerifyHashCore(hash, signature, DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
+            return VerifyHashCore(
+                hash,
+                signature,
+                DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+            );
         }
 
         public override bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature) =>
@@ -89,7 +118,8 @@ namespace System.Security.Cryptography
         protected override bool VerifyHashCore(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             if (signatureFormat != DSASignatureFormat.IeeeP1363FixedFieldConcatenation)
             {

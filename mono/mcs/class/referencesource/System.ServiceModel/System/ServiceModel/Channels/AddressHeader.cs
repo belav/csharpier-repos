@@ -15,9 +15,7 @@ namespace System.ServiceModel.Channels
     {
         ParameterHeader header;
 
-        protected AddressHeader()
-        {
-        }
+        protected AddressHeader() { }
 
         internal bool IsReferenceProperty
         {
@@ -34,30 +32,62 @@ namespace System.ServiceModel.Channels
         public static AddressHeader CreateAddressHeader(object value)
         {
             Type type = GetObjectType(value);
-            return CreateAddressHeader(value, DataContractSerializerDefaults.CreateSerializer(type, int.MaxValue/*maxItems*/));
+            return CreateAddressHeader(
+                value,
+                DataContractSerializerDefaults.CreateSerializer(
+                    type,
+                    int.MaxValue /*maxItems*/
+                )
+            );
         }
 
-        public static AddressHeader CreateAddressHeader(object value, XmlObjectSerializer serializer)
+        public static AddressHeader CreateAddressHeader(
+            object value,
+            XmlObjectSerializer serializer
+        )
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serializer")
+                );
             return new XmlObjectSerializerAddressHeader(value, serializer);
         }
 
         public static AddressHeader CreateAddressHeader(string name, string ns, object value)
         {
-            return CreateAddressHeader(name, ns, value, DataContractSerializerDefaults.CreateSerializer(GetObjectType(value), name, ns, int.MaxValue/*maxItems*/));
+            return CreateAddressHeader(
+                name,
+                ns,
+                value,
+                DataContractSerializerDefaults.CreateSerializer(
+                    GetObjectType(value),
+                    name,
+                    ns,
+                    int.MaxValue /*maxItems*/
+                )
+            );
         }
 
-        internal static AddressHeader CreateAddressHeader(XmlDictionaryString name, XmlDictionaryString ns, object value)
+        internal static AddressHeader CreateAddressHeader(
+            XmlDictionaryString name,
+            XmlDictionaryString ns,
+            object value
+        )
         {
             return new DictionaryAddressHeader(name, ns, value);
         }
 
-        public static AddressHeader CreateAddressHeader(string name, string ns, object value, XmlObjectSerializer serializer)
+        public static AddressHeader CreateAddressHeader(
+            string name,
+            string ns,
+            object value,
+            XmlObjectSerializer serializer
+        )
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serializer")
+                );
             return new XmlObjectSerializerAddressHeader(name, ns, value, serializer);
         }
 
@@ -104,19 +134,30 @@ namespace System.ServiceModel.Channels
 
         public T GetValue<T>()
         {
-            return GetValue<T>(DataContractSerializerDefaults.CreateSerializer(typeof(T), this.Name, this.Namespace, int.MaxValue/*maxItems*/));
+            return GetValue<T>(
+                DataContractSerializerDefaults.CreateSerializer(
+                    typeof(T),
+                    this.Name,
+                    this.Namespace,
+                    int.MaxValue /*maxItems*/
+                )
+            );
         }
 
         public T GetValue<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serializer")
+                );
             using (XmlDictionaryReader reader = GetAddressHeaderReader())
             {
                 if (serializer.IsStartObject(reader))
                     return (T)serializer.ReadObject(reader);
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.ExpectedElementMissing, Name, Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.ExpectedElementMissing, Name, Namespace))
+                    );
             }
         }
 
@@ -134,9 +175,13 @@ namespace System.ServiceModel.Channels
         {
             XmlBuffer buffer = new XmlBuffer(int.MaxValue);
             XmlDictionaryWriter writer = buffer.OpenSection(XmlDictionaryReaderQuotas.Max);
-            // WSAddressingAugust2004 does not write the IsReferenceParameter attribute, 
+            // WSAddressingAugust2004 does not write the IsReferenceParameter attribute,
             // and that's good for a consistent comparable form
-            ParameterHeader.WriteStartHeader(writer, this, AddressingVersion.WSAddressingAugust2004);
+            ParameterHeader.WriteStartHeader(
+                writer,
+                this,
+                AddressingVersion.WSAddressingAugust2004
+            );
             ParameterHeader.WriteHeaderContents(writer, this);
             writer.WriteEndElement();
             buffer.CloseSection();
@@ -166,7 +211,9 @@ namespace System.ServiceModel.Channels
         public void WriteAddressHeader(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
             WriteStartAddressHeader(writer);
             WriteAddressHeaderContents(writer);
             writer.WriteEndElement();
@@ -175,14 +222,18 @@ namespace System.ServiceModel.Channels
         public void WriteStartAddressHeader(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
             OnWriteStartAddressHeader(writer);
         }
 
         public void WriteAddressHeaderContents(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
             OnWriteAddressHeaderContents(writer);
         }
 
@@ -210,29 +261,48 @@ namespace System.ServiceModel.Channels
                 this.parameter = parameter;
             }
 
-            protected override void OnWriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteStartHeader(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 if (messageVersion == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("messageVersion"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("messageVersion")
+                    );
 
                 WriteStartHeader(writer, parameter, messageVersion.Addressing);
             }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 WriteHeaderContents(writer, parameter);
             }
 
-            internal static void WriteStartHeader(XmlDictionaryWriter writer, AddressHeader parameter, AddressingVersion addressingVersion)
+            internal static void WriteStartHeader(
+                XmlDictionaryWriter writer,
+                AddressHeader parameter,
+                AddressingVersion addressingVersion
+            )
             {
                 parameter.WriteStartAddressHeader(writer);
                 if (addressingVersion == AddressingVersion.WSAddressing10)
                 {
-                    writer.WriteAttributeString(XD.AddressingDictionary.IsReferenceParameter, XD.Addressing10Dictionary.Namespace, "true");
+                    writer.WriteAttributeString(
+                        XD.AddressingDictionary.IsReferenceParameter,
+                        XD.Addressing10Dictionary.Namespace,
+                        "true"
+                    );
                 }
             }
 
-            internal static void WriteHeaderContents(XmlDictionaryWriter writer, AddressHeader parameter)
+            internal static void WriteHeaderContents(
+                XmlDictionaryWriter writer,
+                AddressHeader parameter
+            )
             {
                 parameter.WriteAddressHeaderContents(writer);
             }
@@ -245,22 +315,33 @@ namespace System.ServiceModel.Channels
             string name;
             string ns;
 
-            public XmlObjectSerializerAddressHeader(object objectToSerialize, XmlObjectSerializer serializer)
+            public XmlObjectSerializerAddressHeader(
+                object objectToSerialize,
+                XmlObjectSerializer serializer
+            )
             {
                 this.serializer = serializer;
                 this.objectToSerialize = objectToSerialize;
 
-                Type type = (objectToSerialize == null) ? typeof(object) : objectToSerialize.GetType();
+                Type type =
+                    (objectToSerialize == null) ? typeof(object) : objectToSerialize.GetType();
                 XmlQualifiedName rootName = new XsdDataContractExporter().GetRootElementName(type);
                 this.name = rootName.Name;
                 this.ns = rootName.Namespace;
             }
 
-            public XmlObjectSerializerAddressHeader(string name, string ns, object objectToSerialize, XmlObjectSerializer serializer)
+            public XmlObjectSerializerAddressHeader(
+                string name,
+                string ns,
+                object objectToSerialize,
+                XmlObjectSerializer serializer
+            )
             {
                 if ((null == name) || (name.Length == 0))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("name")
+                    );
                 }
 
                 this.serializer = serializer;
@@ -299,8 +380,22 @@ namespace System.ServiceModel.Channels
             XmlDictionaryString name;
             XmlDictionaryString ns;
 
-            public DictionaryAddressHeader(XmlDictionaryString name, XmlDictionaryString ns, object value)
-                : base(name.Value, ns.Value, value, DataContractSerializerDefaults.CreateSerializer(GetObjectType(value), name, ns, int.MaxValue/*maxItems*/))
+            public DictionaryAddressHeader(
+                XmlDictionaryString name,
+                XmlDictionaryString ns,
+                object value
+            )
+                : base(
+                    name.Value,
+                    ns.Value,
+                    value,
+                    DataContractSerializerDefaults.CreateSerializer(
+                        GetObjectType(value),
+                        name,
+                        ns,
+                        int.MaxValue /*maxItems*/
+                    )
+                )
             {
                 this.name = name;
                 this.ns = ns;
@@ -341,7 +436,10 @@ namespace System.ServiceModel.Channels
             this.isReferenceProperty = isReferenceProperty;
         }
 
-        public bool IsReferencePropertyHeader { get { return this.isReferenceProperty; } }
+        public bool IsReferencePropertyHeader
+        {
+            get { return this.isReferenceProperty; }
+        }
 
         public override string Name
         {

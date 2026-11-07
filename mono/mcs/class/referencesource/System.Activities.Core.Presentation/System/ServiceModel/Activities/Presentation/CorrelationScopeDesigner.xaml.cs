@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
+    using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.ComponentModel;
-    using System.Activities.Presentation;
 
-    partial class CorrelationScopeDesigner 
+    partial class CorrelationScopeDesigner
     {
         public CorrelationScopeDesigner()
         {
@@ -19,7 +19,10 @@ namespace System.ServiceModel.Activities.Presentation
         internal static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type type = typeof(CorrelationScope);
-            builder.AddCustomAttributes(type, new DesignerAttribute(typeof(CorrelationScopeDesigner)));
+            builder.AddCustomAttributes(
+                type,
+                new DesignerAttribute(typeof(CorrelationScopeDesigner))
+            );
             builder.AddCustomAttributes(type, type.GetProperty("Body"), BrowsableAttribute.No);
         }
     }

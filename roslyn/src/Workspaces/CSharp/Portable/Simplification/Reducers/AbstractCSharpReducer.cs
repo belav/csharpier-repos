@@ -11,12 +11,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal abstract partial class AbstractCSharpReducer : AbstractReducer
     {
-        protected AbstractCSharpReducer(ObjectPool<IReductionRewriter> pool) : base(pool)
-        {
-        }
+        protected AbstractCSharpReducer(ObjectPool<IReductionRewriter> pool)
+            : base(pool) { }
 
-        public sealed override bool IsApplicable(SimplifierOptions options)
-            => IsApplicable((CSharpSimplifierOptions)options);
+        public sealed override bool IsApplicable(SimplifierOptions options) =>
+            IsApplicable((CSharpSimplifierOptions)options);
 
         protected abstract bool IsApplicable(CSharpSimplifierOptions options);
     }

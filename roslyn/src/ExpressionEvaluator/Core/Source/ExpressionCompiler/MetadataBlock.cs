@@ -44,10 +44,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public bool Equals(MetadataBlock other)
         {
-            return Pointer == other.Pointer &&
-                   Size == other.Size &&
-                   ModuleVersionId == other.ModuleVersionId &&
-                   GenerationId == other.GenerationId;
+            return Pointer == other.Pointer
+                && Size == other.Size
+                && ModuleVersionId == other.ModuleVersionId
+                && GenerationId == other.GenerationId;
         }
 
         public override bool Equals(object obj)
@@ -63,12 +63,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             return Hash.Combine(
                 Hash.Combine(Pointer.GetHashCode(), Size),
-                Hash.Combine(ModuleVersionId.GetHashCode(), GenerationId.GetHashCode()));
+                Hash.Combine(ModuleVersionId.GetHashCode(), GenerationId.GetHashCode())
+            );
         }
 
         private string GetDebuggerDisplay()
         {
-            return string.Format("MetadataBlock {{ Mvid = {{{0}}}, Address = {1}, Size = {2} }}", ModuleVersionId, Pointer, Size);
+            return string.Format(
+                "MetadataBlock {{ Mvid = {{{0}}}, Address = {1}, Size = {2} }}",
+                ModuleVersionId,
+                Pointer,
+                Size
+            );
         }
     }
 }

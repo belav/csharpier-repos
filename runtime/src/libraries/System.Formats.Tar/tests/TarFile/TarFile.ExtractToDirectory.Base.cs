@@ -10,37 +10,42 @@ public abstract class TarFile_ExtractToDirectory_Tests : TarTestsBase
     // TarEntryFormat, TarEntryType, string fileName
     public static IEnumerable<object[]> GetExactRootDirMatchCases()
     {
-        var allValidFormats = new TarEntryFormat[] { TarEntryFormat.V7, TarEntryFormat.Ustar, TarEntryFormat.Pax, TarEntryFormat.Gnu };
+        var allValidFormats = new TarEntryFormat[]
+        {
+            TarEntryFormat.V7,
+            TarEntryFormat.Ustar,
+            TarEntryFormat.Pax,
+            TarEntryFormat.Gnu,
+        };
 
         foreach (TarEntryFormat format in allValidFormats)
         {
             yield return new object[]
             {
-                    format,
-                    TarEntryType.Directory,
-                    "" // Root directory
+                format,
+                TarEntryType.Directory,
+                "", // Root directory
             };
             yield return new object[]
             {
-                    format,
-                    TarEntryType.Directory,
-                    "./" // Slash dot root directory
+                format,
+                TarEntryType.Directory,
+                "./", // Slash dot root directory
             };
+            yield return new object[] { format, TarEntryType.Directory, "directory" };
             yield return new object[]
             {
-                    format,
-                    TarEntryType.Directory,
-                    "directory",
-            };
-            yield return new object[]
-            {
-                    format,
-                    GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format),
-                    "file.txt"
+                format,
+                GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format),
+                "file.txt",
             };
         }
 
-        var formatsThatHandleLongFileNames = new TarEntryFormat[] { TarEntryFormat.Pax, TarEntryFormat.Gnu };
+        var formatsThatHandleLongFileNames = new TarEntryFormat[]
+        {
+            TarEntryFormat.Pax,
+            TarEntryFormat.Gnu,
+        };
         var longFileNames = new string[]
         {
             // Long path with many short segment names  and a filename
@@ -66,7 +71,7 @@ public abstract class TarFile_ExtractToDirectory_Tests : TarTestsBase
             // Long path with single long segment name and a filename
             "veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryverylongfoldername/folder",
             // Long path with single long leaf filename
-            "veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryverylongfoldername"
+            "veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryverylongfoldername",
         };
 
         foreach (TarEntryFormat format in formatsThatHandleLongFileNames)

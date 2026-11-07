@@ -38,7 +38,10 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        public static (Socket client, Socket server) CreateConnectedSocketPair(bool ipv6 = false, bool dualModeClient = false)
+        public static (Socket client, Socket server) CreateConnectedSocketPair(
+            bool ipv6 = false,
+            bool dualModeClient = false
+        )
         {
             IPAddress serverAddress = ipv6 ? IPAddress.IPv6Loopback : IPAddress.Loopback;
 
@@ -47,7 +50,11 @@ namespace System.Net.Sockets.Tests
             // This should prevent 'listener' from accepting DualMode connections of unrelated tests.
             using PortBlocker portBlocker = new PortBlocker(() =>
             {
-                Socket l = new Socket(serverAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                Socket l = new Socket(
+                    serverAddress.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 l.BindToAnonymousPort(serverAddress);
                 return l;
             });
@@ -55,10 +62,16 @@ namespace System.Net.Sockets.Tests
             listener.Listen(1);
 
             IPEndPoint connectTo = (IPEndPoint)listener.LocalEndPoint;
-            if (dualModeClient) connectTo = new IPEndPoint(connectTo.Address.MapToIPv6(), connectTo.Port);
+            if (dualModeClient)
+                connectTo = new IPEndPoint(connectTo.Address.MapToIPv6(), connectTo.Port);
 
-            Socket client = new Socket(connectTo.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            if (dualModeClient) client.DualMode = true;
+            Socket client = new Socket(
+                connectTo.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            if (dualModeClient)
+                client.DualMode = true;
             client.Connect(connectTo);
             Socket server = listener.Accept();
 
@@ -67,13 +80,17 @@ namespace System.Net.Sockets.Tests
 
         // Tries to connect within the provided timeout interval
         // Useful to speed up "can not connect" assertions on Windows
-        public static bool TryConnect(this Socket socket, EndPoint remoteEndpoint, int millisecondsTimeout)
+        public static bool TryConnect(
+            this Socket socket,
+            EndPoint remoteEndpoint,
+            int millisecondsTimeout
+        )
         {
             var mre = new ManualResetEventSlim(false);
             using var sea = new SocketAsyncEventArgs()
             {
                 RemoteEndPoint = remoteEndpoint,
-                UserToken = mre
+                UserToken = mre,
             };
 
             sea.Completed += (s, e) => ((ManualResetEventSlim)e.UserToken).Set();
@@ -112,21 +129,29 @@ namespace System.Net.Sockets.Tests
                 if (MainSocket.LocalEndPoint is not IPEndPoint)
                 {
                     MainSocket.Dispose();
-                    throw new Exception($"{nameof(socketFactory)} is expected create and bind the socket.");
+                    throw new Exception(
+                        $"{nameof(socketFactory)} is expected create and bind the socket."
+                    );
                 }
 
-                IPAddress shadowAddress = MainSocket.AddressFamily == AddressFamily.InterNetwork ?
-                        IPAddress.IPv6Loopback :
-                        IPAddress.Loopback;
+                IPAddress shadowAddress =
+                    MainSocket.AddressFamily == AddressFamily.InterNetwork
+                        ? IPAddress.IPv6Loopback
+                        : IPAddress.Loopback;
                 int port = ((IPEndPoint)MainSocket.LocalEndPoint).Port;
                 IPEndPoint shadowEndPoint = new IPEndPoint(shadowAddress, port);
 
                 try
                 {
-                    _shadowSocket = new Socket(shadowAddress.AddressFamily, MainSocket.SocketType, MainSocket.ProtocolType);
+                    _shadowSocket = new Socket(
+                        shadowAddress.AddressFamily,
+                        MainSocket.SocketType,
+                        MainSocket.ProtocolType
+                    );
                     success = TryBindWithoutReuseAddress(_shadowSocket, shadowEndPoint, out _);
 
-                    if (success) break;
+                    if (success)
+                        break;
                 }
                 catch (SocketException)
                 {
@@ -137,7 +162,9 @@ namespace System.Net.Sockets.Tests
 
             if (!success)
             {
-                throw new Exception($"Failed to create the 'shadow' (port blocker) socket in {MaxAttempts} attempts.");
+                throw new Exception(
+                    $"Failed to create the 'shadow' (port blocker) socket in {MaxAttempts} attempts."
+                );
             }
         }
 
@@ -150,7 +177,11 @@ namespace System.Net.Sockets.Tests
         // Socket.Bind() auto-enables SO_REUSEADDR on Unix to allow Bind() during TIME_WAIT to emulate Windows behavior, see SystemNative_Bind() in 'pal_networking.c'.
         // To prevent other sockets from succesfully binding to the same port port, we need to avoid this logic when binding the shadow socket.
         // This method is doing a custom P/Invoke to bind() on Unix to achieve that.
-        private static unsafe bool TryBindWithoutReuseAddress(Socket socket, IPEndPoint endPoint, out int port)
+        private static unsafe bool TryBindWithoutReuseAddress(
+            Socket socket,
+            IPEndPoint endPoint,
+            out int port
+        )
         {
             if (PlatformDetection.IsWindows)
             {
@@ -206,7 +237,11 @@ namespace System.Net.Sockets.Tests
             static extern int bind(SafeSocketHandle socket, IntPtr socketAddress, uint addrLen);
 
             [Runtime.InteropServices.DllImport("libc", SetLastError = true)]
-            static extern int getsockname(SafeSocketHandle socket, IntPtr socketAddress, IntPtr addrLenPtr);
+            static extern int getsockname(
+                SafeSocketHandle socket,
+                IntPtr socketAddress,
+                IntPtr addrLenPtr
+            );
         }
     }
 }

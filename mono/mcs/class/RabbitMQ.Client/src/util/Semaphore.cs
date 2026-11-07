@@ -58,21 +58,22 @@ using System;
 using System.Collections;
 using System.Threading;
 
-namespace RabbitMQ.Util {
+namespace RabbitMQ.Util
+{
     ///<summary>A classic counting semaphore.</summary>
     ///<remarks>
     /// The .NET framework does not introduce a counting semaphore
     /// until framework release 2.0. Consequently, we implement one
     /// here, for the benefit of .NET 1.1.
     ///</remarks>
-    public class Semaphore {
+    public class Semaphore
+    {
         private int m_count;
 
         ///<summary>Create a Semaphore, with its counter initialized
         ///to 1.</summary>
         public Semaphore()
-            : this(1)
-        {}
+            : this(1) { }
 
         ///<summary>Create a Semaphore, with its counter initialized
         ///to the value passed in.</summary>
@@ -85,13 +86,19 @@ namespace RabbitMQ.Util {
         ///<remarks>
         /// Not interruptable - will retry forever until a resource comes available.
         ///</remarks>
-        public void Wait() {
-            lock (this) {
-                while (true) {
-                    if (m_count > 0) {
+        public void Wait()
+        {
+            lock (this)
+            {
+                while (true)
+                {
+                    if (m_count > 0)
+                    {
                         m_count--;
                         return;
-                    } else {
+                    }
+                    else
+                    {
                         Monitor.Wait(this);
                     }
                 }
@@ -101,12 +108,17 @@ namespace RabbitMQ.Util {
         ///<summary>Acquire a single resource, decrementing the count
         ///by one and returning true, if a resource is available;
         ///otherwise, return false immediately.</summary>
-        public bool TryWait() {
-            lock (this) {
-                if (m_count > 0) {
+        public bool TryWait()
+        {
+            lock (this)
+            {
+                if (m_count > 0)
+                {
                     m_count--;
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
             }
@@ -114,8 +126,10 @@ namespace RabbitMQ.Util {
 
         ///<summary>Release a single resource, incrementing the count
         ///by one.</summary>
-        public void Release() {
-            lock (this) {
+        public void Release()
+        {
+            lock (this)
+            {
                 m_count++;
                 Monitor.Pulse(this);
             }
@@ -127,9 +141,12 @@ namespace RabbitMQ.Util {
         /// you want - usually, using this property is wrong, and
         /// either Wait() or TryWait() is the correct choice.
         ///</remarks>
-        public int Value {
-            get {
-                lock (this) {
+        public int Value
+        {
+            get
+            {
+                lock (this)
+                {
                     return m_count;
                 }
             }

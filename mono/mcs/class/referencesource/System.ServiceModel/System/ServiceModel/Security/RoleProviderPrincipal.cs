@@ -29,7 +29,8 @@ namespace System.ServiceModel.Security
         [MethodImpl(MethodImplOptions.NoInlining)]
         public bool IsInRole(string role)
         {
-            RoleProvider roleProvider = (this.roleProvider as RoleProvider) ?? SystemWebHelper.GetDefaultRoleProvider();
+            RoleProvider roleProvider =
+                (this.roleProvider as RoleProvider) ?? SystemWebHelper.GetDefaultRoleProvider();
             if (roleProvider != null)
             {
                 return roleProvider.IsUserInRole(this.securityContext.PrimaryIdentity.Name, role);

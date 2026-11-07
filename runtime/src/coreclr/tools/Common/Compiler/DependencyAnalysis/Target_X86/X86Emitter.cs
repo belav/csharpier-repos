@@ -21,7 +21,11 @@ namespace ILCompiler.DependencyAnalysis.X86
         {
             if (addrMode.Size == AddrModeSize.Int16)
                 Builder.EmitByte(0x66);
-            EmitIndirInstruction((byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80), 0x7, ref addrMode);
+            EmitIndirInstruction(
+                (byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80),
+                0x7,
+                ref addrMode
+            );
             Builder.EmitByte((byte)immediate);
         }
 
@@ -29,7 +33,11 @@ namespace ILCompiler.DependencyAnalysis.X86
         {
             if (addrMode.Size == AddrModeSize.Int16)
                 Builder.EmitByte(0x66);
-            EmitIndirInstruction((byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80), (byte)0, ref addrMode);
+            EmitIndirInstruction(
+                (byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80),
+                (byte)0,
+                ref addrMode
+            );
             Builder.EmitByte((byte)immediate);
         }
 
@@ -179,8 +187,8 @@ namespace ILCompiler.DependencyAnalysis.X86
                 if (addrMode.BaseReg == Register.None)
                 {
                     emitSibByte = (addrMode.IndexReg != Register.NoIndex);
-                    modRM &= 0x38;    // set Mod bits to 00 and clear out base reg
-                    offsetSize = 4;   // this forces 32-bit displacement
+                    modRM &= 0x38; // set Mod bits to 00 and clear out base reg
+                    offsetSize = 4; // this forces 32-bit displacement
 
                     if (emitSibByte)
                     {
@@ -208,7 +216,13 @@ namespace ILCompiler.DependencyAnalysis.X86
                     modRM = (byte)((modRM & 0xF8) | (int)Register.ESP);
                     Builder.EmitByte(modRM);
                     int indexRegAsInt = (int)(addrMode.IndexReg ?? Register.ESP);
-                    Builder.EmitByte((byte)((addrMode.Scale << 6) + ((indexRegAsInt & 0x07) << 3) + ((int)sibByteBaseRegister & 0x07)));
+                    Builder.EmitByte(
+                        (byte)(
+                            (addrMode.Scale << 6)
+                            + ((indexRegAsInt & 0x07) << 3)
+                            + ((int)sibByteBaseRegister & 0x07)
+                        )
+                    );
                 }
                 EmitImmediate(addrMode.Offset, offsetSize);
             }

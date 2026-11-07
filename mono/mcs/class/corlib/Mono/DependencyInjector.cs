@@ -30,56 +30,65 @@ using System.Runtime.CompilerServices;
 
 namespace Mono
 {
-	static class DependencyInjector
-	{
-		/*
-		 * Allows us to use code from `System.dll` in `mscorlib.dll`.
-		 * 
-		 */
-		internal static ISystemDependencyProvider SystemProvider {
-			get {
-				if (systemDependency != null)
-					return systemDependency;
+    static class DependencyInjector
+    {
+        /*
+         * Allows us to use code from `System.dll` in `mscorlib.dll`.
+         *
+         */
+        internal static ISystemDependencyProvider SystemProvider
+        {
+            get
+            {
+                if (systemDependency != null)
+                    return systemDependency;
 
-				lock (locker) {
-					if (systemDependency != null)
-						return systemDependency;
+                lock (locker)
+                {
+                    if (systemDependency != null)
+                        return systemDependency;
 
-					systemDependency = ReflectionLoad ();
-					if (systemDependency == null)
-						throw new PlatformNotSupportedException ($"Cannot find '{TypeName}' dependency");
+                    systemDependency = ReflectionLoad();
+                    if (systemDependency == null)
+                        throw new PlatformNotSupportedException(
+                            $"Cannot find '{TypeName}' dependency"
+                        );
 
-					return systemDependency;
-				}
-			}
-		}
+                    return systemDependency;
+                }
+            }
+        }
 
-		internal static void Register (ISystemDependencyProvider provider)
-		{
-			lock (locker) {
-				if (systemDependency != null && systemDependency != provider)
-					throw new InvalidOperationException ();
-				systemDependency = provider;
-			}
-		}
+        internal static void Register(ISystemDependencyProvider provider)
+        {
+            lock (locker)
+            {
+                if (systemDependency != null && systemDependency != provider)
+                    throw new InvalidOperationException();
+                systemDependency = provider;
+            }
+        }
 
-		const string TypeName = "Mono.SystemDependencyProvider, System";
+        const string TypeName = "Mono.SystemDependencyProvider, System";
 
-		[PreserveDependency ("get_Instance()", "Mono.SystemDependencyProvider", "System")]
-		static ISystemDependencyProvider ReflectionLoad ()
-		{
-			var type = Type.GetType (TypeName);
-			if (type == null)
-				return null;
+        [PreserveDependency("get_Instance()", "Mono.SystemDependencyProvider", "System")]
+        static ISystemDependencyProvider ReflectionLoad()
+        {
+            var type = Type.GetType(TypeName);
+            if (type == null)
+                return null;
 
-			var prop = type.GetProperty ("Instance", BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
-			if (prop == null)
-				return null;
+            var prop = type.GetProperty(
+                "Instance",
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
+            );
+            if (prop == null)
+                return null;
 
-			return (ISystemDependencyProvider) prop.GetValue (null);
-		}
+            return (ISystemDependencyProvider)prop.GetValue(null);
+        }
 
-		static object locker = new object ();
-		static ISystemDependencyProvider systemDependency;
-	}
+        static object locker = new object();
+        static ISystemDependencyProvider systemDependency;
+    }
 }

@@ -10,11 +10,13 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ProtocolMappingElement : ConfigurationElement
     {
-        public ProtocolMappingElement()
-        {
-        }
+        public ProtocolMappingElement() { }
 
-        public ProtocolMappingElement(string schemeType, string binding, string bindingConfiguration)
+        public ProtocolMappingElement(
+            string schemeType,
+            string binding,
+            string bindingConfiguration
+        )
         {
             if (String.IsNullOrEmpty(schemeType))
             {
@@ -30,7 +32,10 @@ namespace System.ServiceModel.Configuration
             this.BindingConfiguration = bindingConfiguration;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Scheme, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Scheme,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string Scheme
         {
@@ -46,7 +51,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Binding, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Binding,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string Binding
         {
@@ -62,7 +70,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BindingConfiguration, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BindingConfiguration,
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string BindingConfiguration
         {
@@ -79,4 +90,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

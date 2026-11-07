@@ -1,5 +1,3 @@
-[assembly:System.Reflection.AssemblyVersionAttribute ("1.0.1.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]
 
-public class B
-{
-}
+public class B { }

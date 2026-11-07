@@ -6,15 +6,14 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Windows.Forms;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.IO;
     using System.Reflection;
     using System.ServiceModel;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Design;
-
 
     internal class RichListBox : ListBox
     {
@@ -41,13 +40,11 @@ namespace System.Workflow.Activities.Design
             set { editable = value; }
         }
 
-
         public ListItemViewControl SelectedItemViewControl
         {
             get { return activeItemDetailViewControl; }
             set { activeItemDetailViewControl = value; }
         }
-
 
         public IServiceProvider ServiceProvider
         {
@@ -58,17 +55,23 @@ namespace System.Workflow.Activities.Design
         {
             if (editableListItemType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("editableListItemType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "editableListItemType"
+                );
             }
             if (!typeof(object).IsAssignableFrom(editableListItemType))
             {
                 return null;
             }
             Type viewType = null;
-            object[] attribs = editableListItemType.GetCustomAttributes(typeof(ListItemDetailViewAttribute), true);
+            object[] attribs = editableListItemType.GetCustomAttributes(
+                typeof(ListItemDetailViewAttribute),
+                true
+            );
             if ((attribs != null) && (attribs.Length > 0))
             {
-                ListItemDetailViewAttribute viewAttribute = attribs[0] as ListItemDetailViewAttribute;
+                ListItemDetailViewAttribute viewAttribute =
+                    attribs[0] as ListItemDetailViewAttribute;
                 if (viewAttribute != null)
                 {
                     viewType = viewAttribute.ViewType;
@@ -77,19 +80,23 @@ namespace System.Workflow.Activities.Design
             return viewType;
         }
 
-
         public static Type GetItemViewType(Type editableListItemType)
         {
             if (editableListItemType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("editableListItemType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "editableListItemType"
+                );
             }
             if (!typeof(object).IsAssignableFrom(editableListItemType))
             {
                 return null;
             }
             Type viewType = null;
-            object[] attribs = editableListItemType.GetCustomAttributes(typeof(ListItemViewAttribute), true);
+            object[] attribs = editableListItemType.GetCustomAttributes(
+                typeof(ListItemViewAttribute),
+                true
+            );
             if ((attribs != null) && (attribs.Length > 0))
             {
                 ListItemViewAttribute viewAttribute = attribs[0] as ListItemViewAttribute;
@@ -100,7 +107,6 @@ namespace System.Workflow.Activities.Design
             }
             return viewType;
         }
-
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
@@ -129,7 +135,6 @@ namespace System.Workflow.Activities.Design
                         activeItemViewControl.DrawItemState = e.State;
                     }
                 }
-
             }
             listItemRenderer.Item = itemToDraw;
             listItemRenderer.UpdateView();
@@ -138,7 +143,10 @@ namespace System.Workflow.Activities.Design
             listItemRenderer.Top = -2000;
             Bitmap rendererBitmap = GetRendererBitmap(itemToDraw);
             itemLocations[itemToDraw] = e.Bounds.Location;
-            listItemRenderer.DrawToBitmap(rendererBitmap, new Rectangle(new Point(0, 0), listItemRenderer.Size));
+            listItemRenderer.DrawToBitmap(
+                rendererBitmap,
+                new Rectangle(new Point(0, 0), listItemRenderer.Size)
+            );
             e.Graphics.DrawImage(rendererBitmap, e.Bounds.Location);
         }
 
@@ -169,7 +177,6 @@ namespace System.Workflow.Activities.Design
             e.ItemWidth = listItemRenderer.Width;
         }
 
-
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
             try
@@ -183,11 +190,15 @@ namespace System.Workflow.Activities.Design
                 {
                     return;
                 }
-                SelectedItemViewControl = Activator.CreateInstance(GetDetailViewType(selectedItem.GetType())) as ListItemViewControl;
+                SelectedItemViewControl =
+                    Activator.CreateInstance(GetDetailViewType(selectedItem.GetType()))
+                    as ListItemViewControl;
                 SelectedItemViewControl.ServiceProvider = this.serviceProvider;
                 SelectedItemViewControl.Item = selectedItem;
                 SelectedItemViewControl.DrawItemState = DrawItemState.Selected;
-                SelectedItemViewControl.ItemChanged += new EventHandler(SelectedItemDetailViewControlItemChanged);
+                SelectedItemViewControl.ItemChanged += new EventHandler(
+                    SelectedItemDetailViewControlItemChanged
+                );
                 SelectedItemViewControl.UpdateView();
                 if (Editable)
                 {
@@ -197,8 +208,9 @@ namespace System.Workflow.Activities.Design
                     }
                     if (selectedItem != null)
                     {
-
-                        activeItemViewControl = Activator.CreateInstance(GetItemViewType(selectedItem.GetType())) as ListItemViewControl;
+                        activeItemViewControl =
+                            Activator.CreateInstance(GetItemViewType(selectedItem.GetType()))
+                            as ListItemViewControl;
                         if (itemLocations.ContainsKey(selectedItem))
                         {
                             activeItemDetailViewControl.Location = itemLocations[selectedItem];
@@ -213,8 +225,14 @@ namespace System.Workflow.Activities.Design
             }
             catch (Exception exception)
             {
-                DesignerHelpers.ShowMessage(serviceProvider, exception.Message, DR.GetString(DR.WorkflowDesignerTitle), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                DesignerHelpers.ShowMessage(
+                    serviceProvider,
+                    exception.Message,
+                    DR.GetString(DR.WorkflowDesignerTitle),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1
+                );
                 throw;
             }
             base.OnSelectedIndexChanged(e);
@@ -226,7 +244,10 @@ namespace System.Workflow.Activities.Design
 
             if (!listItemViewRenderers.ContainsKey(viewType.Name))
             {
-                listItemViewRenderers.Add(viewType.Name, Activator.CreateInstance(viewType) as ListItemViewControl);
+                listItemViewRenderers.Add(
+                    viewType.Name,
+                    Activator.CreateInstance(viewType) as ListItemViewControl
+                );
             }
             ListItemViewControl listItemRenderer = listItemViewRenderers[viewType.Name];
             return listItemRenderer;
@@ -242,7 +263,10 @@ namespace System.Workflow.Activities.Design
             }
             if (!listItemBitmapCache.ContainsKey(viewType.Name))
             {
-                listItemBitmapCache.Add(viewType.Name, new Bitmap(listItemRenderer.Size.Width, listItemRenderer.Size.Height));
+                listItemBitmapCache.Add(
+                    viewType.Name,
+                    new Bitmap(listItemRenderer.Size.Width, listItemRenderer.Size.Height)
+                );
             }
 
             Bitmap rendererBitmap = listItemBitmapCache[viewType.Name];

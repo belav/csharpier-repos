@@ -5,7 +5,8 @@ using System.Diagnostics;
 
 namespace System.Buffers
 {
-    internal sealed class SearchValuesDebugView<T> where T : IEquatable<T>?
+    internal sealed class SearchValuesDebugView<T>
+        where T : IEquatable<T>?
     {
         private readonly SearchValues<T> _values;
 

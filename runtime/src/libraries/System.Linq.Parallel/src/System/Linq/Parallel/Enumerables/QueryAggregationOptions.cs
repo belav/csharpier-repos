@@ -21,7 +21,7 @@ namespace System.Linq.Parallel
         None = 0,
         Associative = 1,
         Commutative = 2,
-        AssociativeCommutative = (Associative | Commutative) // For convenience.
+        AssociativeCommutative = (Associative | Commutative), // For convenience.
         // If you change the members, make sure you update IsDefinedQueryAggregationOptions() below.
     }
 

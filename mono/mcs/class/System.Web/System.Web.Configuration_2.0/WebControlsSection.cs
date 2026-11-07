@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,46 +33,51 @@ using System.Collections;
 using System.ComponentModel;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class WebControlsSection : ConfigurationSection
+    {
+        static ConfigurationProperty clientScriptsLocationProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static WebControlsSection()
+        {
+            clientScriptsLocationProp = new ConfigurationProperty(
+                "clientScriptsLocation",
+                typeof(string),
+                "/aspnet_client/{0}/{1}/",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class WebControlsSection : ConfigurationSection
-	{
-		static ConfigurationProperty clientScriptsLocationProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(clientScriptsLocationProp);
+        }
 
-		static WebControlsSection ()
-		{
-			clientScriptsLocationProp = new ConfigurationProperty ("clientScriptsLocation", typeof (string), "/aspnet_client/{0}/{1}/",
-									       TypeDescriptor.GetConverter (typeof (string)),
-									       PropertyHelper.NonEmptyStringValidator,
-									       ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
+        protected internal override object GetRuntimeObject()
+        {
+            Hashtable ht = new Hashtable();
 
-			properties.Add (clientScriptsLocationProp);
-		}
+            ht.Add("clientScriptsLocation", ClientScriptsLocation);
 
-		protected internal override object GetRuntimeObject ()
-		{
-			Hashtable ht = new Hashtable ();
+            return ht;
+        }
 
-			ht.Add ("clientScriptsLocation", ClientScriptsLocation);
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "clientScriptsLocation",
+            DefaultValue = "/aspnet_client/{0}/{1}/",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string ClientScriptsLocation
+        {
+            get { return (string)base[clientScriptsLocationProp]; }
+        }
 
-			return ht;
-		}
-
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("clientScriptsLocation", DefaultValue = "/aspnet_client/{0}/{1}/", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string ClientScriptsLocation {
-			get { return (string) base [clientScriptsLocationProp];}
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

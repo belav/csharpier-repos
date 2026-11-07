@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.SqlServer.Server {
-
+namespace Microsoft.SqlServer.Server
+{
     using System.Data.Sql;
     using System.Data.SqlClient;
     using System.Diagnostics;
@@ -30,14 +30,15 @@ namespace Microsoft.SqlServer.Server {
     //
     //  IMPORTANT: Code that uses the DeferedProccess event sink is responsible for ensuring that
     //  these messages ARE processed at some point.
-    internal class SmiEventSink_DeferedProcessing : SmiEventSink_Default {
-        internal SmiEventSink_DeferedProcessing ( SmiEventSink parent ) : base(parent) {
-        }
+    internal class SmiEventSink_DeferedProcessing : SmiEventSink_Default
+    {
+        internal SmiEventSink_DeferedProcessing(SmiEventSink parent)
+            : base(parent) { }
 
-        protected override void DispatchMessages(bool ignoreNonFatalMessages) {
-            // Skip processing messages.  Since messages are sent to parent and calling code will call 
+        protected override void DispatchMessages(bool ignoreNonFatalMessages)
+        {
+            // Skip processing messages.  Since messages are sent to parent and calling code will call
             //  ProcessMessages against parent, messages ARE NOT LOST!
         }
     }
 }
-

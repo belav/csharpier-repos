@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,37 +25,37 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using System.Web.UI.WebControls;
 
-namespace System.Web.UI.Design.WebControls {
+namespace System.Web.UI.Design.WebControls
+{
+    public class CalendarAutoFormatDialog : Form
+    {
+        public CalendarAutoFormatDialog(Calendar calendar)
+        {
+            throw new NotImplementedException();
+        }
 
-	public class CalendarAutoFormatDialog : Form
-	{
-		public CalendarAutoFormatDialog (Calendar calendar)
-		{
-			throw new NotImplementedException ();
-		}
+        protected void OnDelayLoadActions()
+        {
+            throw new NotImplementedException();
+        }
 
-		protected void OnDelayLoadActions ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected void OnActivated(object source, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected void OnActivated (object source, EventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
+        protected void OnOKClicked(object source, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected void OnOKClicked (object source, EventArgs e)
-		{
-			throw new NotImplementedException (); 
-		}
-
-		protected void OnSelChangedScheme (object source, EventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected void OnSelChangedScheme(object source, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

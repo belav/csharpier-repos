@@ -71,44 +71,50 @@ public abstract class SingletonInterceptorsTestBase<TContext>
     public abstract class LibraryContext : PoolableDbContext
     {
         protected LibraryContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>(
-                b =>
-                {
-                    b.Property<string?>("Author");
-                });
+            modelBuilder.Entity<Book>(b =>
+            {
+                b.Property<string?>("Author");
+            });
 
-            modelBuilder.Entity<Pamphlet>(
-                b =>
-                {
-                    b.Property<string?>("Author");
-                });
+            modelBuilder.Entity<Pamphlet>(b =>
+            {
+                b.Property<string?>("Author");
+            });
         }
     }
 
-    public abstract LibraryContext CreateContext(IEnumerable<ISingletonInterceptor> interceptors, bool inject);
+    public abstract LibraryContext CreateContext(
+        IEnumerable<ISingletonInterceptor> interceptors,
+        bool inject
+    );
 
     public abstract class SingletonInterceptorsFixtureBase : SharedStoreFixtureBase<TContext>
     {
-        public virtual DbContextOptions CreateOptions(IEnumerable<ISingletonInterceptor> interceptors, bool inject)
+        public virtual DbContextOptions CreateOptions(
+            IEnumerable<ISingletonInterceptor> interceptors,
+            bool inject
+        )
         {
             var optionsBuilder = inject
                 ? new DbContextOptionsBuilder<DbContext>().UseInternalServiceProvider(
                     InjectInterceptors(new ServiceCollection(), interceptors)
-                        .BuildServiceProvider(validateScopes: true))
+                        .BuildServiceProvider(validateScopes: true)
+                )
                 : new DbContextOptionsBuilder<DbContext>().AddInterceptors(interceptors);
 
-            return AddOptions(TestStore.AddProviderOptions(optionsBuilder)).EnableDetailedErrors().Options;
+            return AddOptions(TestStore.AddProviderOptions(optionsBuilder))
+                .EnableDetailedErrors()
+                .Options;
         }
 
         protected virtual IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        )
         {
             foreach (var interceptor in injectedInterceptors)
             {

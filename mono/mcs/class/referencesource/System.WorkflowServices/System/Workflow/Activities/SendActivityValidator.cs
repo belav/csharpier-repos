@@ -4,43 +4,50 @@
 
 namespace System.Workflow.Activities
 {
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel;
-    using System.ServiceModel;
-    using System.Reflection;
     using System.Collections.Generic;
+    using System.Reflection;
+    using System.ServiceModel;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
 
     class SendActivityValidator : ActivityValidator
     {
-        public override ValidationErrorCollection Validate(
-            ValidationManager manager,
-            object obj)
+        public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
         {
             ValidationErrorCollection validationErrors = base.Validate(manager, obj);
 
             SendActivity sendActivity = obj as SendActivity;
             if (sendActivity == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("obj",
-                    SR2.GetString(SR2.Error_ArgumentTypeInvalid, "obj", typeof(SendActivity)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "obj",
+                    SR2.GetString(SR2.Error_ArgumentTypeInvalid, "obj", typeof(SendActivity))
+                );
             }
 
             ITypeProvider typeProvider = manager.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)
+                    )
+                );
             }
 
             if (sendActivity.ServiceOperationInfo == null)
             {
                 validationErrors.Add(
                     new ValidationError(
-                    SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified,
-                    sendActivity.Name),
-                    WorkflowServicesErrorNumbers.Error_OperationInfoNotSpecified,
-                    false,
-                    "ServiceOperationInfo"));
+                        SR2.GetString(
+                            SR2.Error_ServiceOperationInfoNotSpecified,
+                            sendActivity.Name
+                        ),
+                        WorkflowServicesErrorNumbers.Error_OperationInfoNotSpecified,
+                        false,
+                        "ServiceOperationInfo"
+                    )
+                );
             }
             else
             {
@@ -48,9 +55,10 @@ namespace System.Workflow.Activities
                 //
                 ValidationErrorCollection operationInfoValidationErrors =
                     ValidationHelper.ValidateOperationInfo(
-                    sendActivity,
-                    sendActivity.ServiceOperationInfo,
-                    manager);
+                        sendActivity,
+                        sendActivity.ServiceOperationInfo,
+                        manager
+                    );
 
                 validationErrors.AddRange(operationInfoValidationErrors);
 
@@ -60,14 +68,20 @@ namespace System.Workflow.Activities
                 if (operationInfoValidationErrors.Count == 0)
                 {
                     validationErrors.AddRange(
-                        ValidationHelper.ValidateParameterBindings(sendActivity, sendActivity.ServiceOperationInfo,
-                        sendActivity.ParameterBindings, manager));
+                        ValidationHelper.ValidateParameterBindings(
+                            sendActivity,
+                            sendActivity.ServiceOperationInfo,
+                            sendActivity.ParameterBindings,
+                            manager
+                        )
+                    );
                 }
 
                 // validate the endpoint
                 //
                 validationErrors.AddRange(
-                    ValidationHelper.ValidateChannelToken(sendActivity, manager));
+                    ValidationHelper.ValidateChannelToken(sendActivity, manager)
+                );
             }
 
             return validationErrors;

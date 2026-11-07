@@ -38,12 +38,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(MetadataHelpers.IsValidMetadataIdentifier(highSurrogate));
             Assert.True(MetadataHelpers.IsValidMetadataIdentifier(highSurrogate + lowSurrogate));
             Assert.False(MetadataHelpers.IsValidMetadataIdentifier(lowSurrogate + highSurrogate));
-            Assert.False(MetadataHelpers.IsValidMetadataIdentifier(highSurrogate + "x" + lowSurrogate));
-            Assert.False(MetadataHelpers.IsValidMetadataIdentifier(lowSurrogate + "x" + highSurrogate));
+            Assert.False(
+                MetadataHelpers.IsValidMetadataIdentifier(highSurrogate + "x" + lowSurrogate)
+            );
+            Assert.False(
+                MetadataHelpers.IsValidMetadataIdentifier(lowSurrogate + "x" + highSurrogate)
+            );
             Assert.False(MetadataHelpers.IsValidMetadataIdentifier(highSurrogate + "xxx"));
             Assert.False(MetadataHelpers.IsValidMetadataIdentifier(lowSurrogate + "xxx"));
-            Assert.False(MetadataHelpers.IsValidMetadataIdentifier(lowSurrogate + "\0" + highSurrogate));
-            Assert.False(MetadataHelpers.IsValidMetadataIdentifier(highSurrogate + "\0" + lowSurrogate));
+            Assert.False(
+                MetadataHelpers.IsValidMetadataIdentifier(lowSurrogate + "\0" + highSurrogate)
+            );
+            Assert.False(
+                MetadataHelpers.IsValidMetadataIdentifier(highSurrogate + "\0" + lowSurrogate)
+            );
         }
 
         private enum ArrayKind
@@ -53,7 +61,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             SingleDimensional,
             MultiDimensional,
             JaggedSzArray,
-            Jagged
+            Jagged,
         };
 
         private readonly struct TypeNameConfig
@@ -64,7 +72,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             public readonly ArrayKind ArrayKind;
             public readonly bool AssemblyQualified;
 
-            public TypeNameConfig(int nestingLevel, TypeNameConfig[] genericParamsConfig, int pointerCount, ArrayKind arrayKind, bool assemblyQualified)
+            public TypeNameConfig(
+                int nestingLevel,
+                TypeNameConfig[] genericParamsConfig,
+                int pointerCount,
+                ArrayKind arrayKind,
+                bool assemblyQualified
+            )
             {
                 this.NestingLevel = nestingLevel;
                 this.GenericParamsConfig = genericParamsConfig;
@@ -84,17 +98,38 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     foreach (ArrayKind arrayKind in Enum.GetValues(typeof(ArrayKind)))
                     {
-                        var genericParamsConfigBuilder = ArrayBuilder<TypeNameConfig[]>.GetInstance();
+                        var genericParamsConfigBuilder =
+                            ArrayBuilder<TypeNameConfig[]>.GetInstance();
                         genericParamsConfigBuilder.Add(null);
                         if (typeParamStackDepth < 2)
                         {
-                            genericParamsConfigBuilder.Add(GenerateTypeNameConfigs(typeParamStackDepth + 1));
+                            genericParamsConfigBuilder.Add(
+                                GenerateTypeNameConfigs(typeParamStackDepth + 1)
+                            );
                         }
 
-                        foreach (var genericParamsConfig in genericParamsConfigBuilder.ToImmutableAndFree())
+                        foreach (
+                            var genericParamsConfig in genericParamsConfigBuilder.ToImmutableAndFree()
+                        )
                         {
-                            builder.Add(new TypeNameConfig(nestingLevel, genericParamsConfig, pointerCount, arrayKind, assemblyQualified: true));
-                            builder.Add(new TypeNameConfig(nestingLevel, genericParamsConfig, pointerCount, arrayKind, assemblyQualified: false));
+                            builder.Add(
+                                new TypeNameConfig(
+                                    nestingLevel,
+                                    genericParamsConfig,
+                                    pointerCount,
+                                    arrayKind,
+                                    assemblyQualified: true
+                                )
+                            );
+                            builder.Add(
+                                new TypeNameConfig(
+                                    nestingLevel,
+                                    genericParamsConfig,
+                                    pointerCount,
+                                    arrayKind,
+                                    assemblyQualified: false
+                                )
+                            );
                         }
                     }
                 }
@@ -103,13 +138,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return builder.ToArrayAndFree();
         }
 
-        private static string[] GenerateTypeNamesToDecode(TypeNameConfig[] typeNameConfigs, out MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodeNames)
+        private static string[] GenerateTypeNamesToDecode(
+            TypeNameConfig[] typeNameConfigs,
+            out MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodeNames
+        )
         {
             var pooledStrBuilder = PooledStringBuilder.GetInstance();
             StringBuilder typeNameBuilder = pooledStrBuilder.Builder;
 
             var typeNamesToDecode = new string[typeNameConfigs.Length];
-            expectedDecodeNames = new MetadataHelpers.AssemblyQualifiedTypeName[typeNameConfigs.Length];
+            expectedDecodeNames = new MetadataHelpers.AssemblyQualifiedTypeName[
+                typeNameConfigs.Length
+            ];
 
             for (int index = 0; index < typeNameConfigs.Length; index++)
             {
@@ -136,7 +176,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
                 else
                 {
-                    string[] genericParamsToDecode = GenerateTypeNamesToDecode(typeNameConfig.GenericParamsConfig, out expectedTypeArguments);
+                    string[] genericParamsToDecode = GenerateTypeNamesToDecode(
+                        typeNameConfig.GenericParamsConfig,
+                        out expectedTypeArguments
+                    );
 
                     var genericArityStr = "`" + genericParamsToDecode.Length.ToString();
                     typeNameBuilder.Append(genericArityStr);
@@ -217,7 +260,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
 
                 typeNamesToDecode[index] = typeNameBuilder.ToString();
-                expectedDecodeNames[index] = new MetadataHelpers.AssemblyQualifiedTypeName(expectedTopLevelTypeName, expectedNestedTypes, expectedTypeArguments, expectedPointerCount, expectedArrayRanks, expectedAssemblyName);
+                expectedDecodeNames[index] = new MetadataHelpers.AssemblyQualifiedTypeName(
+                    expectedTopLevelTypeName,
+                    expectedNestedTypes,
+                    expectedTypeArguments,
+                    expectedPointerCount,
+                    expectedArrayRanks,
+                    expectedAssemblyName
+                );
 
                 typeNameBuilder.Clear();
             }
@@ -233,7 +283,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string[] expectedNestedTypes,
             MetadataHelpers.AssemblyQualifiedTypeName[] expectedTypeArguments,
             int expectedPointerCount,
-            int[] expectedArrayRanks)
+            int[] expectedArrayRanks
+        )
         {
             Assert.Equal(expectedTopLevelType, decodedName.TopLevelType);
             Assert.Equal(expectedAssemblyName, decodedName.AssemblyName);
@@ -249,8 +300,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 for (int i = 0; i < decodedTypeArguments.Length; i++)
                 {
                     var expectedTypeArgument = expectedTypeArguments[i];
-                    VerifyDecodedTypeName(decodedTypeArguments[i], expectedTypeArgument.TopLevelType, expectedTypeArgument.AssemblyName,
-                        expectedTypeArgument.NestedTypes, expectedTypeArgument.TypeArguments, expectedTypeArgument.PointerCount, expectedTypeArgument.ArrayRanks);
+                    VerifyDecodedTypeName(
+                        decodedTypeArguments[i],
+                        expectedTypeArgument.TopLevelType,
+                        expectedTypeArgument.AssemblyName,
+                        expectedTypeArgument.NestedTypes,
+                        expectedTypeArgument.TypeArguments,
+                        expectedTypeArgument.PointerCount,
+                        expectedTypeArgument.ArrayRanks
+                    );
                 }
             }
 
@@ -265,21 +323,42 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string[] expectedNestedTypes = null,
             MetadataHelpers.AssemblyQualifiedTypeName[] expectedTypeArguments = null,
             int expectedPointerCount = 0,
-            int[] expectedArrayRanks = null)
+            int[] expectedArrayRanks = null
+        )
         {
-            MetadataHelpers.AssemblyQualifiedTypeName decodedName = MetadataHelpers.DecodeTypeName(nameToDecode);
-            VerifyDecodedTypeName(decodedName, expectedTopLevelType, expectedAssemblyName, expectedNestedTypes, expectedTypeArguments, expectedPointerCount, expectedArrayRanks);
+            MetadataHelpers.AssemblyQualifiedTypeName decodedName = MetadataHelpers.DecodeTypeName(
+                nameToDecode
+            );
+            VerifyDecodedTypeName(
+                decodedName,
+                expectedTopLevelType,
+                expectedAssemblyName,
+                expectedNestedTypes,
+                expectedTypeArguments,
+                expectedPointerCount,
+                expectedArrayRanks
+            );
         }
 
-        private static void DecodeTypeNamesAndVerify(string[] namesToDecode, MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodedNames)
+        private static void DecodeTypeNamesAndVerify(
+            string[] namesToDecode,
+            MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodedNames
+        )
         {
             Assert.Equal(namesToDecode.Length, expectedDecodedNames.Length);
 
             for (int i = 0; i < namesToDecode.Length; i++)
             {
                 var expectedDecodedName = expectedDecodedNames[i];
-                DecodeTypeNameAndVerify(namesToDecode[i], expectedDecodedName.TopLevelType, expectedDecodedName.AssemblyName,
-                    expectedDecodedName.NestedTypes, expectedDecodedName.TypeArguments, expectedDecodedName.PointerCount, expectedDecodedName.ArrayRanks);
+                DecodeTypeNameAndVerify(
+                    namesToDecode[i],
+                    expectedDecodedName.TopLevelType,
+                    expectedDecodedName.AssemblyName,
+                    expectedDecodedName.NestedTypes,
+                    expectedDecodedName.TypeArguments,
+                    expectedDecodedName.PointerCount,
+                    expectedDecodedName.ArrayRanks
+                );
             }
         }
 
@@ -289,7 +368,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             TypeNameConfig[] configsToTest = GenerateTypeNameConfigs(0);
             MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodedNames;
-            string[] namesToDecode = GenerateTypeNamesToDecode(configsToTest, out expectedDecodedNames);
+            string[] namesToDecode = GenerateTypeNamesToDecode(
+                configsToTest,
+                out expectedDecodedNames
+            );
             DecodeTypeNamesAndVerify(namesToDecode, expectedDecodedNames);
         }
 
@@ -297,14 +379,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestDecodeArrayTypeName_Bug15478()
         {
-            DecodeTypeNameAndVerify("System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+            DecodeTypeNameAndVerify(
+                "System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 expectedTopLevelType: "System.Int32",
                 expectedAssemblyName: "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                expectedArrayRanks: new[] { 0 });
-            DecodeTypeNameAndVerify("System.Int32[*], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                expectedArrayRanks: new[] { 0 }
+            );
+            DecodeTypeNameAndVerify(
+                "System.Int32[*], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 expectedTopLevelType: "System.Int32",
                 expectedAssemblyName: "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                expectedArrayRanks: new[] { 1 });
+                expectedArrayRanks: new[] { 1 }
+            );
         }
 
         [WorkItem(546277, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546277")]
@@ -312,52 +398,75 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestDecodeArrayTypeName_Valid()
         {
             // Single-D Array
-            DecodeTypeNameAndVerify("W[]",
+            DecodeTypeNameAndVerify(
+                "W[]",
                 expectedTopLevelType: "W",
-                expectedArrayRanks: new[] { 0 });
+                expectedArrayRanks: new[] { 0 }
+            );
 
             // Multi-D Array
-            DecodeTypeNameAndVerify("W[,]",
+            DecodeTypeNameAndVerify(
+                "W[,]",
                 expectedTopLevelType: "W",
-                expectedArrayRanks: new[] { 2 });
+                expectedArrayRanks: new[] { 2 }
+            );
 
             // Jagged Array
-            DecodeTypeNameAndVerify("W[][,]",
+            DecodeTypeNameAndVerify(
+                "W[][,]",
                 expectedTopLevelType: "W",
-                expectedArrayRanks: new[] { 0, 2 });
+                expectedArrayRanks: new[] { 0, 2 }
+            );
 
             // Generic Type Jagged Array
-            DecodeTypeNameAndVerify("Y`1[W][][,]",
+            DecodeTypeNameAndVerify(
+                "Y`1[W][][,]",
                 expectedTopLevelType: "Y`1",
-                expectedTypeArguments: new[] { new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null) },
-                expectedArrayRanks: new[] { 0, 2 });
+                expectedTypeArguments: new[]
+                {
+                    new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null),
+                },
+                expectedArrayRanks: new[] { 0, 2 }
+            );
 
             // Nested Generic Type Jagged Array with Array type argument
-            DecodeTypeNameAndVerify("Y`1+F[[System.Int32[], mscorlib]][,,][][,]",
+            DecodeTypeNameAndVerify(
+                "Y`1+F[[System.Int32[], mscorlib]][,,][][,]",
                 expectedTopLevelType: "Y`1",
                 expectedNestedTypes: new[] { "F" },
-                expectedTypeArguments: new[] { new MetadataHelpers.AssemblyQualifiedTypeName(
-                                                    "System.Int32",
-                                                    nestedTypes: null,
-                                                    typeArguments: null,
-                                                    pointerCount: 0,
-                                                    arrayRanks: new[] { 0 },
-                                                    assemblyName: "mscorlib") },
-                expectedArrayRanks: new[] { 3, 0, 2 });
+                expectedTypeArguments: new[]
+                {
+                    new MetadataHelpers.AssemblyQualifiedTypeName(
+                        "System.Int32",
+                        nestedTypes: null,
+                        typeArguments: null,
+                        pointerCount: 0,
+                        arrayRanks: new[] { 0 },
+                        assemblyName: "mscorlib"
+                    ),
+                },
+                expectedArrayRanks: new[] { 3, 0, 2 }
+            );
 
             // Nested Generic Type Jagged Array with type arguments from nested type and outer type
-            DecodeTypeNameAndVerify("Y`1+Z`1[[System.Int32[], mscorlib], W][][,]",
+            DecodeTypeNameAndVerify(
+                "Y`1+Z`1[[System.Int32[], mscorlib], W][][,]",
                 expectedTopLevelType: "Y`1",
                 expectedNestedTypes: new[] { "Z`1" },
-                expectedTypeArguments: new[] { new MetadataHelpers.AssemblyQualifiedTypeName(
-                                                    "System.Int32",
-                                                    nestedTypes: null,
-                                                    typeArguments: null,
-                                                    pointerCount: 0,
-                                                    arrayRanks: new[] { 0 },
-                                                    assemblyName: "mscorlib"),
-                                               new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null) },
-                expectedArrayRanks: new[] { 0, 2 });
+                expectedTypeArguments: new[]
+                {
+                    new MetadataHelpers.AssemblyQualifiedTypeName(
+                        "System.Int32",
+                        nestedTypes: null,
+                        typeArguments: null,
+                        pointerCount: 0,
+                        arrayRanks: new[] { 0 },
+                        assemblyName: "mscorlib"
+                    ),
+                    new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null),
+                },
+                expectedArrayRanks: new[] { 0, 2 }
+            );
         }
 
         [WorkItem(546277, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546277")]
@@ -365,34 +474,54 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestDecodeArrayTypeName_Invalid()
         {
             // Error case, array shape before nested type
-            DecodeTypeNameAndVerify("X[]+Y",
+            DecodeTypeNameAndVerify(
+                "X[]+Y",
                 expectedTopLevelType: "X+Y",
                 expectedNestedTypes: null,
-                expectedArrayRanks: new[] { 0 });
+                expectedArrayRanks: new[] { 0 }
+            );
 
             // Error case, array shape before generic type arguments
-            DecodeTypeNameAndVerify("X[]`1[T]",
+            DecodeTypeNameAndVerify(
+                "X[]`1[T]",
                 expectedTopLevelType: "X`1[T]",
                 expectedTypeArguments: null,
-                expectedArrayRanks: new[] { 0 });
+                expectedArrayRanks: new[] { 0 }
+            );
 
             // Error case, invalid array shape
-            DecodeTypeNameAndVerify("X[T]",
+            DecodeTypeNameAndVerify(
+                "X[T]",
                 expectedTopLevelType: "X[T]",
                 expectedTypeArguments: null,
-                expectedArrayRanks: null);
+                expectedArrayRanks: null
+            );
 
-            DecodeTypeNameAndVerify("X[,",
+            DecodeTypeNameAndVerify(
+                "X[,",
                 expectedTopLevelType: "X[,",
                 expectedTypeArguments: null,
-                expectedArrayRanks: null);
+                expectedArrayRanks: null
+            );
 
             // Incomplete type argument assembly name
-            DecodeTypeNameAndVerify("X`1[[T, Assembly",
+            DecodeTypeNameAndVerify(
+                "X`1[[T, Assembly",
                 expectedTopLevelType: "X`1",
                 expectedAssemblyName: null,
-                expectedTypeArguments: new[] { new MetadataHelpers.AssemblyQualifiedTypeName("T", null, null, 0, null, "Assembly") },
-                expectedArrayRanks: null);
+                expectedTypeArguments: new[]
+                {
+                    new MetadataHelpers.AssemblyQualifiedTypeName(
+                        "T",
+                        null,
+                        null,
+                        0,
+                        null,
+                        "Assembly"
+                    ),
+                },
+                expectedArrayRanks: null
+            );
         }
 
         [WorkItem(1140387, "DevDiv")]
@@ -400,24 +529,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestDecodePointerType_Invalid()
         {
             // Error case, star before nested type
-            DecodeTypeNameAndVerify("X*+Y",
+            DecodeTypeNameAndVerify(
+                "X*+Y",
                 expectedTopLevelType: "X+Y",
                 expectedNestedTypes: null,
-                expectedPointerCount: 1);
+                expectedPointerCount: 1
+            );
 
             // Error case, star before generic type arguments
-            DecodeTypeNameAndVerify("X*`1[T]",
+            DecodeTypeNameAndVerify(
+                "X*`1[T]",
                 expectedTopLevelType: "X`1[T]",
                 expectedTypeArguments: null,
-                expectedPointerCount: 1);
+                expectedPointerCount: 1
+            );
 
             // Unsupported case, star after array shape
             // This is supported in the AQN grammar, but not in C# or VB.
-            DecodeTypeNameAndVerify("W[]*",
+            DecodeTypeNameAndVerify(
+                "W[]*",
                 expectedTopLevelType: "W*",
                 expectedTypeArguments: null,
                 expectedPointerCount: 0,
-                expectedArrayRanks: new[] { 0 });
+                expectedArrayRanks: new[] { 0 }
+            );
         }
 
         [Fact, WorkItem(7396, "https://github.com/dotnet/roslyn/issues/7396")]
@@ -427,7 +562,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             foreach (var namespaceName in new[] { "A.", "A.a", "A..", "A.-" })
             {
-                result.Add(new Grouping<string, TypeDefinitionHandle>(namespaceName, new[] { new TypeDefinitionHandle() }));
+                result.Add(
+                    new Grouping<string, TypeDefinitionHandle>(
+                        namespaceName,
+                        new[] { new TypeDefinitionHandle() }
+                    )
+                );
             }
 
             result.Sort(new PEModule.TypesByNamespaceSortComparer(StringComparer.Ordinal));
@@ -438,17 +578,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // The following code is equivalent to code in PENamespaceSymbol.LoadAllMembers
 
             IEnumerable<IGrouping<string, TypeDefinitionHandle>> nestedTypes = null;
-            IEnumerable<KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>> nestedNamespaces = null;
+            IEnumerable<
+                KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
+            > nestedNamespaces = null;
 
             MetadataHelpers.GetInfoForImmediateNamespaceMembers(
                 false,
                 "A".Length,
                 typesByNS,
                 StringComparer.Ordinal,
-                out nestedTypes, out nestedNamespaces);
+                out nestedTypes,
+                out nestedNamespaces
+            );
 
             // We don't expect duplicate keys in nestedNamespaces at this point.
-            Assert.False(nestedNamespaces.GroupBy(pair => pair.Key).Where(g => g.Count() > 1).Any());
+            Assert.False(
+                nestedNamespaces.GroupBy(pair => pair.Key).Where(g => g.Count() > 1).Any()
+            );
 
             var array = nestedNamespaces.ToArray();
             Assert.Equal(3, array.Length);
@@ -467,7 +613,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             foreach (var namespaceName in new[] { ".a", ".b" })
             {
-                result.Add(new Grouping<string, TypeDefinitionHandle>(namespaceName, new[] { new TypeDefinitionHandle() }));
+                result.Add(
+                    new Grouping<string, TypeDefinitionHandle>(
+                        namespaceName,
+                        new[] { new TypeDefinitionHandle() }
+                    )
+                );
             }
 
             result.Sort(new PEModule.TypesByNamespaceSortComparer(StringComparer.Ordinal));
@@ -478,14 +629,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // The following code is equivalent to code in PENamespaceSymbol.LoadAllMembers
 
             IEnumerable<IGrouping<string, TypeDefinitionHandle>> nestedTypes = null;
-            IEnumerable<KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>> nestedNamespaces = null;
+            IEnumerable<
+                KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
+            > nestedNamespaces = null;
 
             MetadataHelpers.GetInfoForImmediateNamespaceMembers(
                 true, // global namespace
                 0, // global namespace
                 typesByNS,
                 StringComparer.Ordinal,
-                out nestedTypes, out nestedNamespaces);
+                out nestedTypes,
+                out nestedNamespaces
+            );
 
             var nestedNS = nestedNamespaces.Single();
 
@@ -497,7 +652,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 nestedNS.Key.Length,
                 nestedNS.Value,
                 StringComparer.Ordinal,
-                out nestedTypes, out nestedNamespaces);
+                out nestedTypes,
+                out nestedNamespaces
+            );
 
             Assert.Equal(2, nestedNamespaces.Count());
             Assert.Equal("a", nestedNamespaces.ElementAt(0).Key);

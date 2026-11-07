@@ -26,57 +26,101 @@ namespace System.Xml.Xsl.Runtime
         // ToAtomicValue
         //-----------------------------------------------
 
-        public static XmlAtomicValue StringToAtomicValue(string value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue StringToAtomicValue(
+            string value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue DecimalToAtomicValue(decimal value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue DecimalToAtomicValue(
+            decimal value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue Int64ToAtomicValue(long value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue Int64ToAtomicValue(
+            long value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue Int32ToAtomicValue(int value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue Int32ToAtomicValue(
+            int value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue BooleanToAtomicValue(bool value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue BooleanToAtomicValue(
+            bool value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue DoubleToAtomicValue(double value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue DoubleToAtomicValue(
+            double value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue SingleToAtomicValue(float value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue SingleToAtomicValue(
+            float value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue DateTimeToAtomicValue(DateTime value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue DateTimeToAtomicValue(
+            DateTime value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue XmlQualifiedNameToAtomicValue(XmlQualifiedName value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue XmlQualifiedNameToAtomicValue(
+            XmlQualifiedName value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue TimeSpanToAtomicValue(TimeSpan value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue TimeSpanToAtomicValue(
+            TimeSpan value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
-        public static XmlAtomicValue BytesToAtomicValue(byte[] value, int index, XmlQueryRuntime runtime)
+        public static XmlAtomicValue BytesToAtomicValue(
+            byte[] value,
+            int index,
+            XmlQueryRuntime runtime
+        )
         {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }

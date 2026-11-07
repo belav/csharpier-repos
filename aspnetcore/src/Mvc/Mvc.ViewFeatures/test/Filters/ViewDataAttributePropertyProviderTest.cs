@@ -28,14 +28,11 @@ public class ViewDataAttributePropertyProviderTest
         var result = ViewDataAttributePropertyProvider.GetViewDataProperties(type);
 
         // Assert
-        Assert.Collection(
-            result.OrderBy(p => p.Key),
-            property =>
-            {
-                Assert.Equal(nameof(BaseController.BaseProperty), property.PropertyInfo.Name);
-                Assert.Equal(nameof(BaseController.BaseProperty), property.Key);
-            }
-        );
+        Assert.Collection(result.OrderBy(p => p.Key), property =>
+        {
+            Assert.Equal(nameof(BaseController.BaseProperty), property.PropertyInfo.Name);
+            Assert.Equal(nameof(BaseController.BaseProperty), property.Key);
+        });
     }
 
     [Fact]
@@ -67,17 +64,11 @@ public class ViewDataAttributePropertyProviderTest
         var result = ViewDataAttributePropertyProvider.GetViewDataProperties(type);
 
         // Assert
-        Assert.Collection(
-            result.OrderBy(p => p.Key),
-            property =>
-            {
-                Assert.Equal(
-                    nameof(PropertyWithKeyController.Different),
-                    property.PropertyInfo.Name
-                );
-                Assert.Equal("Test", property.Key);
-            }
-        );
+        Assert.Collection(result.OrderBy(p => p.Key), property =>
+        {
+            Assert.Equal(nameof(PropertyWithKeyController.Different), property.PropertyInfo.Name);
+            Assert.Equal("Test", property.Key);
+        });
     }
 
     public class TestController_NoViewDataProperties

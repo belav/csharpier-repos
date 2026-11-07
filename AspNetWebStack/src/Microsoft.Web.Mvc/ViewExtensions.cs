@@ -24,8 +24,16 @@ namespace Microsoft.Web.Mvc
             helper.RenderAction(actionName, routeValues);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static void RenderAction<TController>(this HtmlHelper helper, Expression<Action<TController>> action) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static void RenderAction<TController>(
+            this HtmlHelper helper,
+            Expression<Action<TController>> action
+        )
+            where TController : Controller
         {
             RouteValueDictionary rvd = ExpressionHelper.GetRouteValuesFromExpression(action);
 

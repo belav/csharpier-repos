@@ -4,6 +4,4 @@
 
 [assembly: System.Reflection.AssemblyCultureAttribute("en-US")]
 
-public class enUS 
-{
-}
+public class enUS { }

@@ -5,17 +5,20 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Configuration;
     using System.Globalization;
+    using System.ServiceModel.Channels;
 
-    [ConfigurationCollection(typeof(CustomBindingElement), AddItemName = ConfigurationStrings.Binding)]
-    public sealed class CustomBindingElementCollection : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>
+    [ConfigurationCollection(
+        typeof(CustomBindingElement),
+        AddItemName = ConfigurationStrings.Binding
+    )]
+    public sealed class CustomBindingElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>
     {
         public CustomBindingElementCollection()
-            : base(ConfigurationStrings.Binding)
-        { }
+            : base(ConfigurationStrings.Binding) { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -28,7 +31,4 @@ namespace System.ServiceModel.Configuration
             return configElementKey.Name;
         }
     }
-
 }
-
-

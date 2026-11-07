@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,31 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	public sealed class ContextInformation
-	{
-		object ctx;
-		Configuration config;
-		
-		internal ContextInformation (Configuration config, object ctx)
-		{
-			this.ctx = ctx;
-			this.config = config;
-		}
-		
-		public object GetSection (string sectionName)
-		{
-			return config.GetSection (sectionName);
-		}
-		
-		public object HostingContext {
-			get { return ctx; }
-		}
+    public sealed class ContextInformation
+    {
+        object ctx;
+        Configuration config;
 
-		[MonoInternalNote ("should this use HostingContext instead?")]
-		public bool IsMachineLevel {
-			get {
-				return config.ConfigPath == "machine";
-			}
-		}
-	}
+        internal ContextInformation(Configuration config, object ctx)
+        {
+            this.ctx = ctx;
+            this.config = config;
+        }
+
+        public object GetSection(string sectionName)
+        {
+            return config.GetSection(sectionName);
+        }
+
+        public object HostingContext
+        {
+            get { return ctx; }
+        }
+
+        [MonoInternalNote("should this use HostingContext instead?")]
+        public bool IsMachineLevel
+        {
+            get { return config.ConfigPath == "machine"; }
+        }
+    }
 }
-

@@ -17,25 +17,44 @@ namespace Microsoft.CodeAnalysis.MSBuild
         {
             public static bool IsSolutionFilterFilename(string filename)
             {
-                return Path.GetExtension(filename).Equals(".slnf", StringComparison.OrdinalIgnoreCase);
+                return Path.GetExtension(filename)
+                    .Equals(".slnf", StringComparison.OrdinalIgnoreCase);
             }
 
-            public static bool TryRead(string filterFilename, PathResolver pathResolver, [NotNullWhen(true)] out string? solutionFilename, out ImmutableHashSet<string> projectFilter)
+            public static bool TryRead(
+                string filterFilename,
+                PathResolver pathResolver,
+                [NotNullWhen(true)] out string? solutionFilename,
+                out ImmutableHashSet<string> projectFilter
+            )
             {
                 try
                 {
                     using var document = JsonDocument.Parse(File.ReadAllText(filterFilename));
                     var solution = document.RootElement.GetProperty("solution");
                     // Convert directory separators to the platform's default, since that is what MSBuild provide us.
-                    var solutionPath = solution.GetProperty("path").GetString()?.Replace('\\', Path.DirectorySeparatorChar);
-                    if (solutionPath is null || Path.GetDirectoryName(filterFilename) is not string baseDirectory)
+                    var solutionPath = solution
+                        .GetProperty("path")
+                        .GetString()
+                        ?.Replace('\\', Path.DirectorySeparatorChar);
+                    if (
+                        solutionPath is null
+                        || Path.GetDirectoryName(filterFilename) is not string baseDirectory
+                    )
                     {
                         solutionFilename = string.Empty;
                         projectFilter = ImmutableHashSet<string>.Empty;
                         return false;
                     }
 
-                    if (!pathResolver.TryGetAbsoluteSolutionPath(solutionPath, baseDirectory, DiagnosticReportingMode.Throw, out solutionFilename))
+                    if (
+                        !pathResolver.TryGetAbsoluteSolutionPath(
+                            solutionPath,
+                            baseDirectory,
+                            DiagnosticReportingMode.Throw,
+                            out solutionFilename
+                        )
+                    )
                     {
                         // TryGetAbsoluteSolutionPath should throw before we get here.
                         solutionFilename = string.Empty;
@@ -53,18 +72,29 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     baseDirectory = Path.GetDirectoryName(solutionFilename)!;
                     RoslynDebug.AssertNotNull(baseDirectory);
 
-                    var filterProjects = ImmutableHashSet.CreateBuilder<string>(StringComparer.OrdinalIgnoreCase);
+                    var filterProjects = ImmutableHashSet.CreateBuilder<string>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                     foreach (var project in solution.GetProperty("projects").EnumerateArray())
                     {
                         // Convert directory separators to the platform's default, since that is what MSBuild provide us.
-                        var projectPath = project.GetString()?.Replace('\\', Path.DirectorySeparatorChar);
+                        var projectPath = project
+                            .GetString()
+                            ?.Replace('\\', Path.DirectorySeparatorChar);
                         if (projectPath is null)
                         {
                             continue;
                         }
 
                         // Fill the filter with the absolute project paths.
-                        if (pathResolver.TryGetAbsoluteProjectPath(projectPath, baseDirectory, DiagnosticReportingMode.Throw, out var absoluteProjectPath))
+                        if (
+                            pathResolver.TryGetAbsoluteProjectPath(
+                                projectPath,
+                                baseDirectory,
+                                DiagnosticReportingMode.Throw,
+                                out var absoluteProjectPath
+                            )
+                        )
                         {
                             filterProjects.Add(absoluteProjectPath);
                         }

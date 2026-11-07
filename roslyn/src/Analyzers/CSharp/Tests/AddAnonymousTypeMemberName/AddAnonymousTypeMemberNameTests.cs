@@ -14,15 +14,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberName
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddAnonymousTypeMemberName)]
-    public class AddAnonymousTypeMemberNameTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class AddAnonymousTypeMemberNameTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddAnonymousTypeMemberNameTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddAnonymousTypeMemberNameCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddAnonymousTypeMemberNameCodeFixProvider());
 
         [Fact]
         public async Task Test1()
@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
                         var v = new { {|Rename:Type|} = this.GetType() };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -69,79 +70,83 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
                         var v = new { Type = 1, {|Rename:Type1|} = this.GetType() };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-            """
-            class C
-            {
-                void M()
+                """
+                class C
                 {
-                    var v = new { {|FixAllInDocument:|}new { this.GetType(), this.ToString() } };
+                    void M()
+                    {
+                        var v = new { {|FixAllInDocument:|}new { this.GetType(), this.ToString() } };
+                    }
                 }
-            }
-            """,
-            """
-            class C
-            {
-                void M()
+                """,
+                """
+                class C
                 {
-                    var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
+                    void M()
+                    {
+                        var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
+                    }
                 }
-            }
-            """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-            """
-            class C
-            {
-                void M()
+                """
+                class C
                 {
-                    var v = new { new { {|FixAllInDocument:|}this.GetType(), this.ToString() } };
+                    void M()
+                    {
+                        var v = new { new { {|FixAllInDocument:|}this.GetType(), this.ToString() } };
+                    }
                 }
-            }
-            """,
-            """
-            class C
-            {
-                void M()
+                """,
+                """
+                class C
                 {
-                    var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
+                    void M()
+                    {
+                        var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
+                    }
                 }
-            }
-            """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScript1Async(
-            """
-            class C
-            {
-                void M()
+                """
+                class C
                 {
-                    var v = new { {|FixAllInDocument:|}new { this.GetType(), this.GetType() } };
+                    void M()
+                    {
+                        var v = new { {|FixAllInDocument:|}new { this.GetType(), this.GetType() } };
+                    }
                 }
-            }
-            """,
-            """
-            class C
-            {
-                void M()
+                """,
+                """
+                class C
                 {
-                    var v = new { Value = new { Type = this.GetType(), Type1 = this.GetType() } };
+                    void M()
+                    {
+                        var v = new { Value = new { Type = this.GetType(), Type1 = this.GetType() } };
+                    }
                 }
-            }
-            """);
+                """
+            );
         }
     }
 }

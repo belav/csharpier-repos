@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -11,9 +11,9 @@
 using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -46,8 +46,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // Check whether the type is "exported to WinRT", i.e. it is declared in a managed .winmd and is decorated
             // with at least one ActivatableAttribute or StaticAttribute.
             if (!(type is RuntimeType) || !type.IsExportedToWindowsRuntime)
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeNotActivatableViaWindowsRuntime", type), "type");
-            
+                throw new ArgumentException(
+                    Environment.GetResourceString(
+                        "Argument_TypeNotActivatableViaWindowsRuntime",
+                        type
+                    ),
+                    "type"
+                );
+
             m_type = type;
         }
 
@@ -70,7 +76,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         }
 
         // Runs the class constructor
-        // Currently only Jupiter use this to run class constructor in order to 
+        // Currently only Jupiter use this to run class constructor in order to
         // initialize DependencyProperty objects and do necessary work
         void IManagedActivationFactory.RunClassConstructor()
         {

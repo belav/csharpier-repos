@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Workflow.Runtime;
+    using System.Diagnostics;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
+    using System.Workflow.Runtime;
 
     class WorkflowDurableInstance : DurableInstance
     {
@@ -17,13 +17,19 @@ namespace System.ServiceModel.Dispatcher
         WorkflowDefinitionContext workflowDefinition;
         WorkflowInstance workflowInstance = null;
 
-        public WorkflowDurableInstance(WorkflowInstanceContextProvider instanceContextProvider, Guid instanceId, WorkflowDefinitionContext workflowDefinition, bool createNew)
-            :
-            base(instanceContextProvider, instanceId)
+        public WorkflowDurableInstance(
+            WorkflowInstanceContextProvider instanceContextProvider,
+            Guid instanceId,
+            WorkflowDefinitionContext workflowDefinition,
+            bool createNew
+        )
+            : base(instanceContextProvider, instanceId)
         {
             if (workflowDefinition == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowDefinition");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowDefinition"
+                );
             }
 
             this.workflowDefinition = workflowDefinition;
@@ -33,14 +39,8 @@ namespace System.ServiceModel.Dispatcher
 
         public WorkflowOperationAsyncResult CurrentOperationInvocation
         {
-            get
-            {
-                return this.currentOperationInvocation;
-            }
-            set
-            {
-                this.currentOperationInvocation = value;
-            }
+            get { return this.currentOperationInvocation; }
+            set { this.currentOperationInvocation = value; }
         }
 
         public WorkflowInstance GetWorkflowInstance(bool canCreateInstance)
@@ -53,16 +53,25 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (canCreateInstance)
                         {
-                            this.workflowInstance = this.workflowDefinition.CreateWorkflow(this.InstanceId);
+                            this.workflowInstance = this.workflowDefinition.CreateWorkflow(
+                                this.InstanceId
+                            );
                             shouldCreateNew = false;
 
                             if (DiagnosticUtility.ShouldTraceInformation)
                             {
-                                string traceText = SR.GetString(SR.TraceCodeWorkflowDurableInstanceActivated, InstanceId);
-                                TraceUtility.TraceEvent(TraceEventType.Information,
-                                    TraceCode.WorkflowDurableInstanceActivated, traceText,
+                                string traceText = SR.GetString(
+                                    SR.TraceCodeWorkflowDurableInstanceActivated,
+                                    InstanceId
+                                );
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
+                                    TraceCode.WorkflowDurableInstanceActivated,
+                                    traceText,
                                     new StringTraceRecord("DurableInstanceDetail", traceText),
-                                    this, null);
+                                    this,
+                                    null
+                                );
                             }
                             using (new WorkflowDispatchContext(true, true))
                             {
@@ -76,22 +85,35 @@ namespace System.ServiceModel.Dispatcher
                             //Inform InstanceLifeTimeManager to clean up record for InstanceId;
                             if (this.instanceContextProvider.InstanceLifeTimeManager != null)
                             {
-                                this.instanceContextProvider.InstanceLifeTimeManager.CleanUp(this.InstanceId);
+                                this.instanceContextProvider.InstanceLifeTimeManager.CleanUp(
+                                    this.InstanceId
+                                );
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FaultException(new DurableDispatcherAddressingFault()));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new FaultException(new DurableDispatcherAddressingFault())
+                            );
                         }
                     }
                     else
                     {
-                        this.workflowInstance = this.workflowDefinition.WorkflowRuntime.GetWorkflow(InstanceId);
+                        this.workflowInstance = this.workflowDefinition.WorkflowRuntime.GetWorkflow(
+                            InstanceId
+                        );
 
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            string traceText = SR.GetString(SR.TraceCodeWorkflowDurableInstanceLoaded, InstanceId);
-                            TraceUtility.TraceEvent(TraceEventType.Information,
-                                TraceCode.WorkflowDurableInstanceLoaded, traceText,
+                            string traceText = SR.GetString(
+                                SR.TraceCodeWorkflowDurableInstanceLoaded,
+                                InstanceId
+                            );
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
+                                TraceCode.WorkflowDurableInstanceLoaded,
+                                traceText,
                                 new StringTraceRecord("DurableInstanceDetail", traceText),
-                                this, null);
+                                this,
+                                null
+                            );
                         }
                     }
                 }

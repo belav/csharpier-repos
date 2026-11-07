@@ -9,7 +9,13 @@ namespace MS.Internal.Xml.XPath
     {
         public Root() { }
 
-        public override AstType Type { get { return AstType.Root; } }
-        public override XPathResultType ReturnType { get { return XPathResultType.NodeSet; } }
+        public override AstType Type
+        {
+            get { return AstType.Root; }
+        }
+        public override XPathResultType ReturnType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
     }
 }

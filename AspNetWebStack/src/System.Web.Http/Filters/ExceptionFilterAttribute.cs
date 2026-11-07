@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace System.Web.Http.Filters
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public abstract class ExceptionFilterAttribute : FilterAttribute, IExceptionFilter
     {
-        public virtual void OnException(HttpActionExecutedContext actionExecutedContext)
-        {
-        }
+        public virtual void OnException(HttpActionExecutedContext actionExecutedContext) { }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is flowed in the task")]
-        public virtual Task OnExceptionAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The exception is flowed in the task"
+        )]
+        public virtual Task OnExceptionAsync(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -28,7 +37,10 @@ namespace System.Web.Http.Filters
             return TaskHelpers.Completed();
         }
 
-        Task IExceptionFilter.ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
+        Task IExceptionFilter.ExecuteExceptionFilterAsync(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        )
         {
             if (actionExecutedContext == null)
             {
@@ -38,7 +50,10 @@ namespace System.Web.Http.Filters
             return ExecuteExceptionFilterAsyncCore(actionExecutedContext, cancellationToken);
         }
 
-        private async Task ExecuteExceptionFilterAsyncCore(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
+        private async Task ExecuteExceptionFilterAsyncCore(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        )
         {
             await OnExceptionAsync(actionExecutedContext, cancellationToken);
         }

@@ -10,20 +10,26 @@ namespace System.ServiceModel.ComIntegration
     using System.Runtime.InteropServices;
     using System.ServiceModel;
 
-    // this is a heavily modified version of the Win32ManifestGenerator found in the CLR    
+    // this is a heavily modified version of the Win32ManifestGenerator found in the CLR
     class ComIntegrationManifestGenerator : MarshalByRefObject
     {
-        internal static void GenerateManifestCollectionFile(Guid[] manifests, String strAssemblyManifestFileName, String assemblyName)
+        internal static void GenerateManifestCollectionFile(
+            Guid[] manifests,
+            String strAssemblyManifestFileName,
+            String assemblyName
+        )
         {
             String title = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
-            String asmTitle = "<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">";
+            String asmTitle =
+                "<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">";
             String asmEnd = "</assembly>";
 
             String path = Path.GetDirectoryName(strAssemblyManifestFileName);
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
+                );
             }
 
             Stream s = null;
@@ -41,13 +47,16 @@ namespace System.ServiceModel.ComIntegration
 
                 for (int i = 0; i < manifests.Length; i++)
                 {
-
                     WriteUTFChars(s, "<dependency>" + Environment.NewLine, 4);
-                    
+
                     WriteUTFChars(s, "<dependentAssembly>" + Environment.NewLine, 8);
                     WriteUTFChars(s, "<assemblyIdentity" + Environment.NewLine, 12);
-                    
-                    WriteUTFChars(s, "name=\"" + manifests[i].ToString() + "\"" + Environment.NewLine, 16);
+
+                    WriteUTFChars(
+                        s,
+                        "name=\"" + manifests[i].ToString() + "\"" + Environment.NewLine,
+                        16
+                    );
                     WriteUTFChars(s, "version=\"1.0.0.0\"/>" + Environment.NewLine, 16);
 
                     WriteUTFChars(s, "</dependentAssembly>" + Environment.NewLine, 8);
@@ -55,7 +64,6 @@ namespace System.ServiceModel.ComIntegration
                 }
 
                 WriteUTFChars(s, asmEnd);
-
             }
             catch (Exception e)
             {
@@ -66,25 +74,36 @@ namespace System.ServiceModel.ComIntegration
 
                 s.Close();
                 File.Delete(strAssemblyManifestFileName);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.ManifestCreationFailed(strAssemblyManifestFileName, e.Message));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    System.ServiceModel.ComIntegration.Error.ManifestCreationFailed(
+                        strAssemblyManifestFileName,
+                        e.Message
+                    )
+                );
             }
 
             s.Close();
         }
 
-        internal static void GenerateWin32ManifestFile(Type[] aTypes, String strAssemblyManifestFileName, String assemblyName)
+        internal static void GenerateWin32ManifestFile(
+            Type[] aTypes,
+            String strAssemblyManifestFileName,
+            String assemblyName
+        )
         {
             String title = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
-            String asmTitle = "<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">";
+            String asmTitle =
+                "<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">";
 
             String path = Path.GetDirectoryName(strAssemblyManifestFileName);
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path));
-                
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
+                );
             }
 
-            Stream s = null;  
+            Stream s = null;
 
             try
             {
@@ -92,13 +111,12 @@ namespace System.ServiceModel.ComIntegration
                 s = File.Create(strAssemblyManifestFileName);
                 WriteUTFChars(s, title + Environment.NewLine);
                 WriteUTFChars(s, asmTitle + Environment.NewLine);
-                
+
                 WriteUTFChars(s, "<assemblyIdentity" + Environment.NewLine, 4);
                 WriteUTFChars(s, "name=\"" + assemblyName + "\"" + Environment.NewLine, 8);
                 WriteUTFChars(s, "version=\"1.0.0.0\"/>" + Environment.NewLine, 8);
 
                 AsmCreateWin32ManifestFile(s, aTypes);
-
             }
             catch (Exception e)
             {
@@ -109,16 +127,21 @@ namespace System.ServiceModel.ComIntegration
 
                 s.Close();
                 File.Delete(strAssemblyManifestFileName);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.ManifestCreationFailed(strAssemblyManifestFileName, e.Message));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    System.ServiceModel.ComIntegration.Error.ManifestCreationFailed(
+                        strAssemblyManifestFileName,
+                        e.Message
+                    )
+                );
             }
 
             s.Close();
         }
 
         static void AsmCreateWin32ManifestFile(Stream s, Type[] aTypes)
-        {            
+        {
             String asmEnd = "</assembly>";
-            
+
             WriteTypes(s, aTypes, 4);
             WriteUTFChars(s, asmEnd);
         }
@@ -131,7 +154,6 @@ namespace System.ServiceModel.ComIntegration
             Assembly asm = Assembly.GetExecutingAssembly();
             string asmver = asm.ImageRuntimeVersion;
 
-
             foreach (Type t in aTypes)
             {
                 // only registrable managed types will show up in the manifest file
@@ -139,8 +161,9 @@ namespace System.ServiceModel.ComIntegration
                 {
                     throw Fx.AssertAndThrow("User defined types must be registrable");
                 }
-                
-                String strClsId = "{" + Marshal.GenerateGuidForType(t).ToString().ToUpperInvariant() + "}";
+
+                String strClsId =
+                    "{" + Marshal.GenerateGuidForType(t).ToString().ToUpperInvariant() + "}";
                 name = t.FullName;
 
                 // this type is a com imported type or Record
@@ -148,15 +171,23 @@ namespace System.ServiceModel.ComIntegration
                 {
                     WriteUTFChars(s, "<clrSurrogate" + Environment.NewLine, offset);
                     // attribute clsid
-                    WriteUTFChars(s, "    clsid=\"" + strClsId + "\"" + Environment.NewLine, offset);    
-                    
+                    WriteUTFChars(
+                        s,
+                        "    clsid=\"" + strClsId + "\"" + Environment.NewLine,
+                        offset
+                    );
+
                     // attribute class
                     WriteUTFChars(s, "    name=\"" + name + "\"" + Environment.NewLine, offset);
                     // clr version
-                    WriteUTFChars(s, "    runtimeVersion=\"" + asmver + "\">" + Environment.NewLine, offset);
+                    WriteUTFChars(
+                        s,
+                        "    runtimeVersion=\"" + asmver + "\">" + Environment.NewLine,
+                        offset
+                    );
 
                     WriteUTFChars(s, "</clrSurrogate>" + Environment.NewLine, offset);
-                }                
+                }
             }
         }
 

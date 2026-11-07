@@ -22,7 +22,10 @@ namespace System.Data.Objects.DataClasses
         RelationshipMultiplicity _sourceRoleMultiplicity;
         RelationshipMultiplicity _targetRoleMultiplicity;
 
-        internal RelationshipFixer(RelationshipMultiplicity sourceRoleMultiplicity, RelationshipMultiplicity targetRoleMultiplicity)
+        internal RelationshipFixer(
+            RelationshipMultiplicity sourceRoleMultiplicity,
+            RelationshipMultiplicity targetRoleMultiplicity
+        )
         {
             _sourceRoleMultiplicity = sourceRoleMultiplicity;
             _targetRoleMultiplicity = targetRoleMultiplicity;
@@ -35,10 +38,17 @@ namespace System.Data.Objects.DataClasses
         /// <param name="navigation">RelationshipNavigation to be set on new RelatedEnd</param>
         /// <param name="relationshipManager">RelationshipManager to use for creating the new end</param>
         /// <returns>Reference to the new collection or reference on the other end of the relationship</returns>
-        RelatedEnd IRelationshipFixer.CreateSourceEnd(RelationshipNavigation navigation, RelationshipManager relationshipManager)
-        {            
-            return relationshipManager.CreateRelatedEnd<TTargetEntity, TSourceEntity>(navigation, _targetRoleMultiplicity, _sourceRoleMultiplicity, /*existingRelatedEnd*/ null);
-        }        
+        RelatedEnd IRelationshipFixer.CreateSourceEnd(
+            RelationshipNavigation navigation,
+            RelationshipManager relationshipManager
+        )
+        {
+            return relationshipManager.CreateRelatedEnd<TTargetEntity, TSourceEntity>(
+                navigation,
+                _targetRoleMultiplicity,
+                _sourceRoleMultiplicity, /*existingRelatedEnd*/
+                null
+            );
+        }
     }
-
 }

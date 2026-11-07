@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -12,9 +13,7 @@ namespace DefaultNamespace
     internal struct ValueCls1
     {
         //internal ValueCls1() {}
-
     }
-
 
     internal class Class1
     {
@@ -24,7 +23,6 @@ namespace DefaultNamespace
         {
             valCls1Array[0] = new ValueCls1();
         }
-
     }
 
     public class Finalize

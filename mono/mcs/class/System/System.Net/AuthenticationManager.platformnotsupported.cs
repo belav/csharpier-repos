@@ -29,49 +29,56 @@ using System.Collections.Specialized;
 
 namespace System.Net
 {
-	public class AuthenticationManager {
-		const string EXCEPTION_MESSAGE = "System.Net.AuthenticationManager is not supported on the current platform.";
+    public class AuthenticationManager
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.AuthenticationManager is not supported on the current platform.";
 
-		private AuthenticationManager ()
-		{
-		}
+        private AuthenticationManager() { }
 
-		public static ICredentialPolicy CredentialPolicy {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static ICredentialPolicy CredentialPolicy
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static StringDictionary CustomTargetNameDictionary {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static StringDictionary CustomTargetNameDictionary
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static IEnumerator RegisteredModules {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static IEnumerator RegisteredModules
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static Authorization Authenticate (string challenge, WebRequest request, ICredentials credentials)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static Authorization Authenticate(
+            string challenge,
+            WebRequest request,
+            ICredentials credentials
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static Authorization PreAuthenticate (WebRequest request, ICredentials credentials)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static Authorization PreAuthenticate(WebRequest request, ICredentials credentials)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static void Register (IAuthenticationModule authenticationModule)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static void Register(IAuthenticationModule authenticationModule)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static void Unregister (IAuthenticationModule authenticationModule)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static void Unregister(IAuthenticationModule authenticationModule)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static void Unregister (string authenticationScheme)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+        public static void Unregister(string authenticationScheme)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+    }
 }

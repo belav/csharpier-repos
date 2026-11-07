@@ -9,6 +9,6 @@ namespace System.ComponentModel.Composition
     {
         Match,
         NoExports,
-        TooManyExports
+        TooManyExports,
     }
 }

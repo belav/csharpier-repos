@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using Xunit;
 using static ExceptionInteropNative;
 
-internal unsafe static class ExceptionInteropNative
+internal static unsafe class ExceptionInteropNative
 {
     [DllImport(nameof(ExceptionInteropNative))]
     public static extern void ThrowException();
@@ -19,7 +19,7 @@ internal unsafe static class ExceptionInteropNative
     public static extern void CallCallback(delegate* unmanaged<void> cb);
 }
 
-public unsafe static class ExceptionInterop
+public static unsafe class ExceptionInterop
 {
     [Fact]
     [PlatformSpecific(TestPlatforms.Windows)]

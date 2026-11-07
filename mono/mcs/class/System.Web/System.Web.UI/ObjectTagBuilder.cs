@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,76 +33,86 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class ObjectTagBuilder : ControlBuilder
-	{
-		string id;
-		string scope;
-		Type type;
-		
-		public ObjectTagBuilder ()
-		{
-			SetTagName ("object");
-		}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class ObjectTagBuilder : ControlBuilder
+    {
+        string id;
+        string scope;
+        Type type;
 
-		public override void AppendLiteralString (string s) 
-		{
-			// Do nothing
-		}
+        public ObjectTagBuilder()
+        {
+            SetTagName("object");
+        }
 
-		public override void AppendSubBuilder (ControlBuilder subBuilder) 
-		{
-			// Do nothing
-		}
- 
-		public override void Init (TemplateParser parser,
-					   ControlBuilder parentBuilder,
-					   Type type,
-					   string tagName,
-					   string id,
-					   IDictionary attribs) 
-		{
-			if (id == null && attribs == null)
-				throw new HttpException ("Missing 'id'.");
-			if (attribs == null)
-				throw new ParseException (parser.Location, "Error in ObjectTag.");
+        public override void AppendLiteralString(string s)
+        {
+            // Do nothing
+        }
 
-			attribs.Remove ("runat");
-			this.id = attribs ["id"] as string;
-			attribs.Remove ("id");
-			if (this.id == null || this.id.Trim () == "")
-				throw new ParseException (parser.Location, "Object tag must have a valid ID.");
+        public override void AppendSubBuilder(ControlBuilder subBuilder)
+        {
+            // Do nothing
+        }
 
-			scope = attribs ["scope"] as string;
-			string className = attribs ["class"] as string;
-			attribs.Remove ("scope");
-			attribs.Remove ("class");
-			if (className == null || className.Trim () == "")
-				throw new ParseException (parser.Location, "Object tag must have 'class' attribute.");
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            string tagName,
+            string id,
+            IDictionary attribs
+        )
+        {
+            if (id == null && attribs == null)
+                throw new HttpException("Missing 'id'.");
+            if (attribs == null)
+                throw new ParseException(parser.Location, "Error in ObjectTag.");
 
-			this.type = parser.LoadType (className);
-			if (this.type == null)
-				throw new ParseException (parser.Location, "Type " + className + " not found.");
+            attribs.Remove("runat");
+            this.id = attribs["id"] as string;
+            attribs.Remove("id");
+            if (this.id == null || this.id.Trim() == "")
+                throw new ParseException(parser.Location, "Object tag must have a valid ID.");
 
-			if (attribs ["progid"] != null || attribs ["classid"] != null)
-				throw new ParseException (parser.Location, "ClassID and ProgID are not supported.");
+            scope = attribs["scope"] as string;
+            string className = attribs["class"] as string;
+            attribs.Remove("scope");
+            attribs.Remove("class");
+            if (className == null || className.Trim() == "")
+                throw new ParseException(
+                    parser.Location,
+                    "Object tag must have 'class' attribute."
+                );
 
-			if (attribs.Count > 0)
-				throw new ParseException (parser.Location, "Unknown attribute");
-		}
+            this.type = parser.LoadType(className);
+            if (this.type == null)
+                throw new ParseException(parser.Location, "Type " + className + " not found.");
 
-		internal Type Type {
-			get { return type; }
-		}
+            if (attribs["progid"] != null || attribs["classid"] != null)
+                throw new ParseException(parser.Location, "ClassID and ProgID are not supported.");
 
-		internal string ObjectID {
-			get { return id; }
-		}
+            if (attribs.Count > 0)
+                throw new ParseException(parser.Location, "Unknown attribute");
+        }
 
-		internal string Scope {
-			get { return scope; }
-		}
-	}
+        internal Type Type
+        {
+            get { return type; }
+        }
+
+        internal string ObjectID
+        {
+            get { return id; }
+        }
+
+        internal string Scope
+        {
+            get { return scope; }
+        }
+    }
 }
-

@@ -1,22 +1,21 @@
-class X {
-	bool ok = false;
-	
-	void Method (X x)
-	{
-	}
+class X
+{
+    bool ok = false;
 
-	void Method (string x)
-	{
-		ok = true;
-	}
+    void Method(X x) { }
 
-	public static int Main ()
-	{
-		X x = new X ();
+    void Method(string x)
+    {
+        ok = true;
+    }
 
-		x.Method ((string) null);
-		if (x.ok)
-			return 0;
-		return 1;
-	}
+    public static int Main()
+    {
+        X x = new X();
+
+        x.Method((string)null);
+        if (x.ok)
+            return 0;
+        return 1;
+    }
 }

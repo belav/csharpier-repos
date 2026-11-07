@@ -30,6 +30,6 @@ namespace System.Text.Json.Serialization
         /// <remarks>
         /// This mode supports only a subset of <see cref="JsonSerializer"/> features.
         /// </remarks>
-        Serialization = 2
+        Serialization = 2,
     }
 }

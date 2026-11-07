@@ -6,9 +6,6 @@
 #if FEATURE_CODEPAGES_FILE // requires BaseCodePageEncooding
 namespace System.Text
 {
-    using System.Text;
-    using System.Globalization;
-
     // EUCJPEncoding
     //
     // EUC-JP Encoding (51932)
@@ -46,25 +43,34 @@ namespace System.Text
     //
 
     using System;
+    using System.Globalization;
+    using System.Text;
 
     [Serializable]
     internal class EUCJPEncoding : DBCSCodePageEncoding
     {
         // This pretends to be CP 932 as far as memory tables are concerned.
-        [System.Security.SecurityCritical]  // auto-generated
-        public EUCJPEncoding() : base(51932, 932)
+        [System.Security.SecurityCritical] // auto-generated
+        public EUCJPEncoding()
+            : base(51932, 932)
         {
             this.m_bUseMlangTypeForSerialization = true;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        protected unsafe override String GetMemorySectionName()
+        [System.Security.SecurityCritical] // auto-generated
+        protected override unsafe String GetMemorySectionName()
         {
             int iUseCodePage = this.bFlagDataTable ? dataTableCodePage : CodePage;
 
-            String strName = String.Format(CultureInfo.InvariantCulture, "CodePage_{0}_{1}_{2}_{3}_{4}_EUCJP",
-                iUseCodePage, this.pCodePage->VersionMajor, this.pCodePage->VersionMinor,
-                this.pCodePage->VersionRevision, this.pCodePage->VersionBuild);
+            String strName = String.Format(
+                CultureInfo.InvariantCulture,
+                "CodePage_{0}_{1}_{2}_{3}_{4}_EUCJP",
+                iUseCodePage,
+                this.pCodePage->VersionMajor,
+                this.pCodePage->VersionMinor,
+                this.pCodePage->VersionRevision,
+                this.pCodePage->VersionBuild
+            );
 
             return strName;
         }
@@ -78,29 +84,29 @@ namespace System.Text
                 // (ported from mlang)
                 if (bytes >= 0xfa40 && bytes <= 0xfc4b)
                 {
-                    if ( bytes >= 0xfa40 && bytes <= 0xfa5b )
+                    if (bytes >= 0xfa40 && bytes <= 0xfa5b)
                     {
-                        if ( bytes <= 0xfa49 )
-                            bytes = bytes - 0x0b51 ;
-                        else if ( bytes >= 0xfa4a && bytes <= 0xfa53 )
-                            bytes = bytes - 0x072f6 ;
-                        else if ( bytes >= 0xfa54 && bytes <= 0xfa57 )
-                            bytes = bytes - 0x0b5b ;
-                        else if ( bytes == 0xfa58 )
-                            bytes = 0x878a ;
-                        else if ( bytes == 0xfa59 )
-                            bytes = 0x8782 ;
-                        else if ( bytes == 0xfa5a )
-                            bytes = 0x8784 ;
-                        else if ( bytes == 0xfa5b )
-                            bytes = 0x879a ;
+                        if (bytes <= 0xfa49)
+                            bytes = bytes - 0x0b51;
+                        else if (bytes >= 0xfa4a && bytes <= 0xfa53)
+                            bytes = bytes - 0x072f6;
+                        else if (bytes >= 0xfa54 && bytes <= 0xfa57)
+                            bytes = bytes - 0x0b5b;
+                        else if (bytes == 0xfa58)
+                            bytes = 0x878a;
+                        else if (bytes == 0xfa59)
+                            bytes = 0x8782;
+                        else if (bytes == 0xfa5a)
+                            bytes = 0x8784;
+                        else if (bytes == 0xfa5b)
+                            bytes = 0x879a;
                     }
-                    else if ( bytes >= 0xfa5c && bytes <= 0xfc4b )
+                    else if (bytes >= 0xfa5c && bytes <= 0xfc4b)
                     {
                         byte tc = unchecked((byte)bytes);
-                        if ( tc < 0x5c )
+                        if (tc < 0x5c)
                             bytes = bytes - 0x0d5f;
-                        else if ( tc >= 0x80 && tc <= 0x9B )
+                        else if (tc >= 0x80 && tc <= 0x9B)
                             bytes = bytes - 0x0d1d;
                         else
                             bytes = bytes - 0x0d1c;
@@ -128,14 +134,18 @@ namespace System.Text
 
                 bytes = ((int)bLead) << 8 | (int)bTrail | 0x8080;
 
-          //      // Don't step on our katakana special hack plane, if katakana space return false.
-            //    if (bytes >= 0x8E00 && bytes <= 0x8EFF)
-              //      return false;
+                //      // Don't step on our katakana special hack plane, if katakana space return false.
+                //    if (bytes >= 0x8E00 && bytes <= 0x8EFF)
+                //      return false;
 
                 // Don't step out of our allocated lead byte area.
                 // All DBCS lead and trail bytes should be >= 0xa1 and <= 0xfe
-                if ((bytes & 0xFF00) < 0xa100 || (bytes & 0xFF00) > 0xfe00 ||
-                    (bytes & 0xFF) < 0xa1 || (bytes & 0xFF) > 0xfe)
+                if (
+                    (bytes & 0xFF00) < 0xa100
+                    || (bytes & 0xFF00) > 0xfe00
+                    || (bytes & 0xFF) < 0xa1
+                    || (bytes & 0xFF) > 0xfe
+                )
                     return false;
 
                 // WARNING: Our funky mapping allows illegal values, which we continue to use
@@ -166,7 +176,7 @@ namespace System.Text
             return true;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected override unsafe void CleanUpEndBytes(char* chars)
         {
             // Need to special case CP 51932

@@ -9,9 +9,12 @@ namespace System.Runtime
     [Fx.Tag.XamlVisible(false)]
     static class WorkflowServiceNamespace
     {
-        const string baseNamespace = "urn:schemas-microsoft-com:System.ServiceModel.Activities/4.0/properties";
+        const string baseNamespace =
+            "urn:schemas-microsoft-com:System.ServiceModel.Activities/4.0/properties";
         static readonly XNamespace workflowServiceNamespace = XNamespace.Get(baseNamespace);
-        static readonly XNamespace endpointsNamespace = XNamespace.Get(baseNamespace + "/endpoints");
+        static readonly XNamespace endpointsNamespace = XNamespace.Get(
+            baseNamespace + "/endpoints"
+        );
 
         static XName controlEndpoint;
         static XName suspendException;
@@ -26,10 +29,7 @@ namespace System.Runtime
 
         public static XNamespace EndpointsPath
         {
-            get
-            {
-                return endpointsNamespace;
-            }
+            get { return endpointsNamespace; }
         }
 
         public static XName ControlEndpoint
@@ -50,7 +50,9 @@ namespace System.Runtime
             {
                 if (messageVersionForReplies == null)
                 {
-                    messageVersionForReplies = workflowServiceNamespace.GetName("MessageVersionForReplies");
+                    messageVersionForReplies = workflowServiceNamespace.GetName(
+                        "MessageVersionForReplies"
+                    );
                 }
                 return messageVersionForReplies;
             }
@@ -62,7 +64,9 @@ namespace System.Runtime
             {
                 if (requestReplyCorrelation == null)
                 {
-                    requestReplyCorrelation = workflowServiceNamespace.GetName("RequestReplyCorrelation");
+                    requestReplyCorrelation = workflowServiceNamespace.GetName(
+                        "RequestReplyCorrelation"
+                    );
                 }
                 return requestReplyCorrelation;
             }
@@ -111,7 +115,9 @@ namespace System.Runtime
             {
                 if (relativeApplicationPath == null)
                 {
-                    relativeApplicationPath = workflowServiceNamespace.GetName("RelativeApplicationPath");
+                    relativeApplicationPath = workflowServiceNamespace.GetName(
+                        "RelativeApplicationPath"
+                    );
                 }
                 return relativeApplicationPath;
             }

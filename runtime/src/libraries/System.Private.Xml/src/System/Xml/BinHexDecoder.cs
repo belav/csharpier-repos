@@ -23,18 +23,12 @@ namespace System.Xml
         //
         internal override int DecodedCount
         {
-            get
-            {
-                return _curIndex - _startIndex;
-            }
+            get { return _curIndex - _startIndex; }
         }
 
         internal override bool IsFull
         {
-            get
-            {
-                return _curIndex == _endIndex;
-            }
+            get { return _curIndex == _endIndex; }
         }
 
         internal override int Decode(char[] chars, int startPos, int len)
@@ -50,9 +44,14 @@ namespace System.Xml
                 return 0;
             }
 
-            Decode(chars.AsSpan(startPos, len), _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
-                ref _hasHalfByteCached, ref _cachedHalfByte,
-                out int charsDecoded, out int bytesDecoded);
+            Decode(
+                chars.AsSpan(startPos, len),
+                _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
+                ref _hasHalfByteCached,
+                ref _cachedHalfByte,
+                out int charsDecoded,
+                out int bytesDecoded
+            );
 
             _curIndex += bytesDecoded;
             return charsDecoded;
@@ -71,9 +70,14 @@ namespace System.Xml
                 return 0;
             }
 
-            Decode(str.AsSpan(startPos, len), _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
-                ref _hasHalfByteCached, ref _cachedHalfByte,
-                out int charsDecoded, out int bytesDecoded);
+            Decode(
+                str.AsSpan(startPos, len),
+                _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
+                ref _hasHalfByteCached,
+                ref _cachedHalfByte,
+                out int charsDecoded,
+                out int bytesDecoded
+            );
 
             _curIndex += bytesDecoded;
             return charsDecoded;
@@ -114,7 +118,14 @@ namespace System.Xml
             bool hasHalfByteCached = false;
             byte cachedHalfByte = 0;
 
-            Decode(chars, bytes, ref hasHalfByteCached, ref cachedHalfByte, out _, out int bytesDecoded);
+            Decode(
+                chars,
+                bytes,
+                ref hasHalfByteCached,
+                ref cachedHalfByte,
+                out _,
+                out int bytesDecoded
+            );
 
             if (hasHalfByteCached && !allowOddChars)
             {
@@ -133,10 +144,14 @@ namespace System.Xml
         // Private methods
         //
 
-        private static void Decode(ReadOnlySpan<char> chars,
-                                   Span<byte> bytes,
-                                   ref bool hasHalfByteCached, ref byte cachedHalfByte,
-                                   out int charsDecoded, out int bytesDecoded)
+        private static void Decode(
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes,
+            ref bool hasHalfByteCached,
+            ref byte cachedHalfByte,
+            out int charsDecoded,
+            out int bytesDecoded
+        )
         {
             int iByte = 0;
             int iChar = 0;

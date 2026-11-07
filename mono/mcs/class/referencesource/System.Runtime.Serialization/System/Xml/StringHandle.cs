@@ -10,7 +10,7 @@ namespace System.Xml
     {
         Type = 0,
         Root = 1,
-        Item = 2
+        Item = 2,
     }
 
     class StringHandle
@@ -20,11 +20,7 @@ namespace System.Xml
         int key;
         int offset;
         int length;
-        static string[] constStrings = {
-                                            "type",
-                                            "root",
-                                            "item"
-                                       };
+        static string[] constStrings = { "type", "root", "item" };
 
         public StringHandle(XmlBufferReader bufferReader)
         {
@@ -86,11 +82,11 @@ namespace System.Xml
                         return false;
                     byte[] buffer = bufferReader.Buffer;
                     int offset = this.offset;
-                    return buffer[offset + 0] == 'x' &&
-                           buffer[offset + 1] == 'm' &&
-                           buffer[offset + 2] == 'l' &&
-                           buffer[offset + 3] == 'n' &&
-                           buffer[offset + 4] == 's';
+                    return buffer[offset + 0] == 'x'
+                        && buffer[offset + 1] == 'm'
+                        && buffer[offset + 2] == 'l'
+                        && buffer[offset + 3] == 'n'
+                        && buffer[offset + 4] == 's';
                 }
                 return Equals2("xmlns");
             }
@@ -154,7 +150,9 @@ namespace System.Xml
             else
             {
                 Fx.Assert(type == StringHandleType.EscapedUTF8, "");
-                byte[] buffer = XmlConverter.ToBytes(bufferReader.GetEscapedString(this.offset, this.length));
+                byte[] buffer = XmlConverter.ToBytes(
+                    bufferReader.GetEscapedString(this.offset, this.length)
+                );
                 offset = 0;
                 length = buffer.Length;
                 return buffer;
@@ -189,8 +187,15 @@ namespace System.Xml
             if (type == StringHandleType.Dictionary)
                 return bufferReader.Equals2(this.key, key2, bufferReader2);
             if (type == StringHandleType.UTF8)
-                return bufferReader.Equals2(this.offset, this.length, bufferReader2.GetDictionaryString(key2).Value);
-            Fx.Assert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+                return bufferReader.Equals2(
+                    this.offset,
+                    this.length,
+                    bufferReader2.GetDictionaryString(key2).Value
+                );
+            Fx.Assert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == bufferReader.GetDictionaryString(key2).Value;
         }
 
@@ -201,7 +206,10 @@ namespace System.Xml
                 return bufferReader.Equals2(this.key, xmlString2);
             if (type == StringHandleType.UTF8)
                 return bufferReader.Equals2(this.offset, this.length, xmlString2.ToUTF8());
-            Fx.Assert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+            Fx.Assert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == xmlString2.Value;
         }
 
@@ -212,7 +220,10 @@ namespace System.Xml
                 return bufferReader.GetDictionaryString(this.key).Value == s2;
             if (type == StringHandleType.UTF8)
                 return bufferReader.Equals2(this.offset, this.length, s2);
-            Fx.Assert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+            Fx.Assert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == s2;
         }
 
@@ -220,10 +231,23 @@ namespace System.Xml
         {
             StringHandleType type = this.type;
             if (type == StringHandleType.Dictionary)
-                return bufferReader2.Equals2(offset2, length2, bufferReader.GetDictionaryString(this.key).Value);
+                return bufferReader2.Equals2(
+                    offset2,
+                    length2,
+                    bufferReader.GetDictionaryString(this.key).Value
+                );
             if (type == StringHandleType.UTF8)
-                return bufferReader.Equals2(this.offset, this.length, bufferReader2, offset2, length2);
-            Fx.Assert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+                return bufferReader.Equals2(
+                    this.offset,
+                    this.length,
+                    bufferReader2,
+                    offset2,
+                    length2
+                );
+            Fx.Assert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == bufferReader.GetString(offset2, length2);
         }
 
@@ -234,36 +258,39 @@ namespace System.Xml
                 return Equals2(s2.key, s2.bufferReader);
             if (type == StringHandleType.UTF8)
                 return Equals2(s2.offset, s2.length, s2.bufferReader);
-            Fx.Assert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+            Fx.Assert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return Equals2(s2.GetString());
         }
 
-        static public bool operator ==(StringHandle s1, XmlDictionaryString xmlString2)
+        public static bool operator ==(StringHandle s1, XmlDictionaryString xmlString2)
         {
             return s1.Equals2(xmlString2);
         }
 
-        static public bool operator !=(StringHandle s1, XmlDictionaryString xmlString2)
+        public static bool operator !=(StringHandle s1, XmlDictionaryString xmlString2)
         {
             return !s1.Equals2(xmlString2);
         }
 
-        static public bool operator ==(StringHandle s1, string s2)
+        public static bool operator ==(StringHandle s1, string s2)
         {
             return s1.Equals2(s2);
         }
 
-        static public bool operator !=(StringHandle s1, string s2)
+        public static bool operator !=(StringHandle s1, string s2)
         {
             return !s1.Equals2(s2);
         }
 
-        static public bool operator ==(StringHandle s1, StringHandle s2)
+        public static bool operator ==(StringHandle s1, StringHandle s2)
         {
             return s1.Equals2(s2);
         }
 
-        static public bool operator !=(StringHandle s1, StringHandle s2)
+        public static bool operator !=(StringHandle s1, StringHandle s2)
         {
             return !s1.Equals2(s2);
         }
@@ -294,7 +321,7 @@ namespace System.Xml
             Dictionary,
             UTF8,
             EscapedUTF8,
-            ConstString
+            ConstString,
         }
     }
 }

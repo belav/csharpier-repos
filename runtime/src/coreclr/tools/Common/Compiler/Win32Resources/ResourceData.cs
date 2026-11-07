@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
 #if !HOST_MODEL
 using ILCompiler.DependencyAnalysis;
 #endif
@@ -34,7 +33,9 @@ namespace ILCompiler.Win32Resources
             DirectoryEntry resourceDirectory = peFile.PEHeaders.PEHeader!.ResourceTableDirectory;
             if (resourceDirectory.Size != 0)
             {
-                BlobReader resourceDataBlob = peFile.GetSectionData(resourceDirectory.RelativeVirtualAddress).GetReader(0, resourceDirectory.Size);
+                BlobReader resourceDataBlob = peFile
+                    .GetSectionData(resourceDirectory.RelativeVirtualAddress)
+                    .GetReader(0, resourceDirectory.Size);
                 ReadResourceData(resourceDataBlob, peFile, null);
             }
         }
@@ -43,15 +44,22 @@ namespace ILCompiler.Win32Resources
         /// Initialize a ResourceData instance from a PE file
         /// </summary>
         /// <param name="ecmaModule"></param>
-        public ResourceData(Internal.TypeSystem.Ecma.EcmaModule ecmaModule, Func<object, object, ushort, bool> resourceFilter = null)
+        public ResourceData(
+            Internal.TypeSystem.Ecma.EcmaModule ecmaModule,
+            Func<object, object, ushort, bool> resourceFilter = null
+        )
         {
-            System.Collections.Immutable.ImmutableArray<byte> ecmaData = ecmaModule.PEReader.GetEntireImage().GetContent();
+            System.Collections.Immutable.ImmutableArray<byte> ecmaData = ecmaModule
+                .PEReader.GetEntireImage()
+                .GetContent();
             PEReader peFile = ecmaModule.PEReader;
 
             DirectoryEntry resourceDirectory = peFile.PEHeaders.PEHeader.ResourceTableDirectory;
             if (resourceDirectory.Size != 0)
             {
-                BlobReader resourceDataBlob = ecmaModule.PEReader.GetSectionData(resourceDirectory.RelativeVirtualAddress).GetReader(0, resourceDirectory.Size);
+                BlobReader resourceDataBlob = ecmaModule
+                    .PEReader.GetSectionData(resourceDirectory.RelativeVirtualAddress)
+                    .GetReader(0, resourceDirectory.Size);
                 ReadResourceData(resourceDataBlob, peFile, resourceFilter);
             }
         }
@@ -92,38 +100,67 @@ namespace ILCompiler.Win32Resources
         /// <summary>
         /// Add or update resource
         /// </summary>
-        public void AddResource(string name, string type, ushort language, byte[] data) => AddResourceInternal(name, type, language, data);
+        public void AddResource(string name, string type, ushort language, byte[] data) =>
+            AddResourceInternal(name, type, language, data);
 
         /// <summary>
         /// Add or update resource
         /// </summary>
-        public void AddResource(string name, ushort type, ushort language, byte[] data) => AddResourceInternal(name, type, language, data);
+        public void AddResource(string name, ushort type, ushort language, byte[] data) =>
+            AddResourceInternal(name, type, language, data);
 
         /// <summary>
         /// Add or update resource
         /// </summary>
-        public void AddResource(ushort name, string type, ushort language, byte[] data) => AddResourceInternal(name, type, language, data);
+        public void AddResource(ushort name, string type, ushort language, byte[] data) =>
+            AddResourceInternal(name, type, language, data);
 
         /// <summary>
         /// Add or update resource
         /// </summary>
-        public void AddResource(ushort name, ushort type, ushort language, byte[] data) => AddResourceInternal(name, type, language, data);
+        public void AddResource(ushort name, ushort type, ushort language, byte[] data) =>
+            AddResourceInternal(name, type, language, data);
 
-        public IEnumerable<(object name, object type, ushort language, byte[] data)> GetAllResources()
+        public IEnumerable<(
+            object name,
+            object type,
+            ushort language,
+            byte[] data
+        )> GetAllResources()
         {
-            return _resTypeHeadID.SelectMany(typeIdPair => SelectResType(typeIdPair.Key, typeIdPair.Value))
-                .Concat(_resTypeHeadName.SelectMany(typeNamePair => SelectResType(typeNamePair.Key, typeNamePair.Value)));
+            return _resTypeHeadID
+                .SelectMany(typeIdPair => SelectResType(typeIdPair.Key, typeIdPair.Value))
+                .Concat(
+                    _resTypeHeadName.SelectMany(typeNamePair =>
+                        SelectResType(typeNamePair.Key, typeNamePair.Value)
+                    )
+                );
 
-            IEnumerable<(object name, object type, ushort language, byte[] data)> SelectResType(object type, ResType resType)
+            IEnumerable<(object name, object type, ushort language, byte[] data)> SelectResType(
+                object type,
+                ResType resType
+            )
             {
-                return resType.NameHeadID.SelectMany(nameIdPair => SelectResName(type, nameIdPair.Key, nameIdPair.Value))
-                    .Concat(resType.NameHeadName.SelectMany(nameNamePair =>
-                        SelectResName(type, nameNamePair.Key, nameNamePair.Value)));
+                return resType
+                    .NameHeadID.SelectMany(nameIdPair =>
+                        SelectResName(type, nameIdPair.Key, nameIdPair.Value)
+                    )
+                    .Concat(
+                        resType.NameHeadName.SelectMany(nameNamePair =>
+                            SelectResName(type, nameNamePair.Key, nameNamePair.Value)
+                        )
+                    );
             }
 
-            IEnumerable<(object name, object type, ushort language, byte[] data)> SelectResName(object type, object name, ResName resType)
+            IEnumerable<(object name, object type, ushort language, byte[] data)> SelectResName(
+                object type,
+                object name,
+                ResName resType
+            )
             {
-                return resType.Languages.Select((lang) => (name, type, lang.Key, lang.Value.DataEntry));
+                return resType.Languages.Select(
+                    (lang) => (name, type, lang.Key, lang.Value.DataEntry)
+                );
             }
         }
 
@@ -146,7 +183,14 @@ namespace ILCompiler.Win32Resources
         /// </summary>
         public void CopyResourcesFrom(ResourceData moduleResources)
         {
-            foreach ((object name, object type, ushort language, byte[] data) in moduleResources.GetAllResources())
+            foreach (
+                (
+                    object name,
+                    object type,
+                    ushort language,
+                    byte[] data
+                ) in moduleResources.GetAllResources()
+            )
                 AddResourceInternal(name, type, language, data);
         }
 
@@ -156,58 +200,114 @@ namespace ILCompiler.Win32Resources
             WriteResources(sectionBase, ref dataBuilder, ref dataBuilder);
         }
 #else
-        public void WriteResources(ISymbolNode nodeAssociatedWithDataBuilder, ref ObjectDataBuilder dataBuilder)
+        public void WriteResources(
+            ISymbolNode nodeAssociatedWithDataBuilder,
+            ref ObjectDataBuilder dataBuilder
+        )
         {
             WriteResources(nodeAssociatedWithDataBuilder, ref dataBuilder, ref dataBuilder);
         }
 #endif
 
 #if HOST_MODEL
-        public void WriteResources(int sectionBase, ref ObjectDataBuilder dataBuilder, ref ObjectDataBuilder contentBuilder)
+        public void WriteResources(
+            int sectionBase,
+            ref ObjectDataBuilder dataBuilder,
+            ref ObjectDataBuilder contentBuilder
+        )
 #else
-        public void WriteResources(ISymbolNode nodeAssociatedWithDataBuilder, ref ObjectDataBuilder dataBuilder, ref ObjectDataBuilder contentBuilder)
+        public void WriteResources(
+            ISymbolNode nodeAssociatedWithDataBuilder,
+            ref ObjectDataBuilder dataBuilder,
+            ref ObjectDataBuilder contentBuilder
+        )
 #endif
         {
             Debug.Assert(dataBuilder.CountBytes == 0);
 
-            SortedDictionary<string, List<ObjectDataBuilder.Reservation>> nameTable = new SortedDictionary<string, List<ObjectDataBuilder.Reservation>>();
+            SortedDictionary<string, List<ObjectDataBuilder.Reservation>> nameTable =
+                new SortedDictionary<string, List<ObjectDataBuilder.Reservation>>();
             Dictionary<ResLanguage, int> dataEntryTable = new Dictionary<ResLanguage, int>();
-            List<Tuple<ResType, ObjectDataBuilder.Reservation>> resTypes = new List<Tuple<ResType, ObjectDataBuilder.Reservation>>();
-            List<Tuple<ResName, ObjectDataBuilder.Reservation>> resNames = new List<Tuple<ResName, ObjectDataBuilder.Reservation>>();
-            List<Tuple<ResLanguage, ObjectDataBuilder.Reservation>> resLanguages = new List<Tuple<ResLanguage, ObjectDataBuilder.Reservation>>();
+            List<Tuple<ResType, ObjectDataBuilder.Reservation>> resTypes =
+                new List<Tuple<ResType, ObjectDataBuilder.Reservation>>();
+            List<Tuple<ResName, ObjectDataBuilder.Reservation>> resNames =
+                new List<Tuple<ResName, ObjectDataBuilder.Reservation>>();
+            List<Tuple<ResLanguage, ObjectDataBuilder.Reservation>> resLanguages =
+                new List<Tuple<ResLanguage, ObjectDataBuilder.Reservation>>();
 
-            IMAGE_RESOURCE_DIRECTORY.Write(ref dataBuilder, checked((ushort)_resTypeHeadName.Count), checked((ushort)_resTypeHeadID.Count));
+            IMAGE_RESOURCE_DIRECTORY.Write(
+                ref dataBuilder,
+                checked((ushort)_resTypeHeadName.Count),
+                checked((ushort)_resTypeHeadID.Count)
+            );
             foreach (KeyValuePair<string, ResType> res in _resTypeHeadName)
             {
-                resTypes.Add(new Tuple<ResType, ObjectDataBuilder.Reservation>(res.Value, IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key, nameTable)));
+                resTypes.Add(
+                    new Tuple<ResType, ObjectDataBuilder.Reservation>(
+                        res.Value,
+                        IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key, nameTable)
+                    )
+                );
             }
             foreach (KeyValuePair<ushort, ResType> res in _resTypeHeadID)
             {
-                resTypes.Add(new Tuple<ResType, ObjectDataBuilder.Reservation>(res.Value, IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key)));
+                resTypes.Add(
+                    new Tuple<ResType, ObjectDataBuilder.Reservation>(
+                        res.Value,
+                        IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key)
+                    )
+                );
             }
 
             foreach (Tuple<ResType, ObjectDataBuilder.Reservation> type in resTypes)
             {
                 dataBuilder.EmitUInt(type.Item2, (uint)dataBuilder.CountBytes | 0x80000000);
-                IMAGE_RESOURCE_DIRECTORY.Write(ref dataBuilder, checked((ushort)type.Item1.NameHeadName.Count), checked((ushort)type.Item1.NameHeadID.Count));
+                IMAGE_RESOURCE_DIRECTORY.Write(
+                    ref dataBuilder,
+                    checked((ushort)type.Item1.NameHeadName.Count),
+                    checked((ushort)type.Item1.NameHeadID.Count)
+                );
 
                 foreach (KeyValuePair<string, ResName> res in type.Item1.NameHeadName)
                 {
-                    resNames.Add(new Tuple<ResName, ObjectDataBuilder.Reservation>(res.Value, IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key, nameTable)));
+                    resNames.Add(
+                        new Tuple<ResName, ObjectDataBuilder.Reservation>(
+                            res.Value,
+                            IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(
+                                ref dataBuilder,
+                                res.Key,
+                                nameTable
+                            )
+                        )
+                    );
                 }
                 foreach (KeyValuePair<ushort, ResName> res in type.Item1.NameHeadID)
                 {
-                    resNames.Add(new Tuple<ResName, ObjectDataBuilder.Reservation>(res.Value, IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key)));
+                    resNames.Add(
+                        new Tuple<ResName, ObjectDataBuilder.Reservation>(
+                            res.Value,
+                            IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key)
+                        )
+                    );
                 }
             }
 
             foreach (Tuple<ResName, ObjectDataBuilder.Reservation> type in resNames)
             {
                 dataBuilder.EmitUInt(type.Item2, (uint)dataBuilder.CountBytes | 0x80000000);
-                IMAGE_RESOURCE_DIRECTORY.Write(ref dataBuilder, 0, checked((ushort)type.Item1.Languages.Count));
+                IMAGE_RESOURCE_DIRECTORY.Write(
+                    ref dataBuilder,
+                    0,
+                    checked((ushort)type.Item1.Languages.Count)
+                );
                 foreach (KeyValuePair<ushort, ResLanguage> res in type.Item1.Languages)
                 {
-                    resLanguages.Add(new Tuple<ResLanguage, ObjectDataBuilder.Reservation>(res.Value, IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key)));
+                    resLanguages.Add(
+                        new Tuple<ResLanguage, ObjectDataBuilder.Reservation>(
+                            res.Value,
+                            IMAGE_RESOURCE_DIRECTORY_ENTRY.Write(ref dataBuilder, res.Key)
+                        )
+                    );
                 }
             }
 
@@ -240,9 +340,19 @@ namespace ILCompiler.Win32Resources
             {
                 dataBuilder.EmitInt(language.Item2, dataBuilder.CountBytes);
 #if HOST_MODEL
-                IMAGE_RESOURCE_DATA_ENTRY.Write(ref dataBuilder, sectionBase, dataEntryTable[language.Item1], language.Item1.DataEntry.Length);
+                IMAGE_RESOURCE_DATA_ENTRY.Write(
+                    ref dataBuilder,
+                    sectionBase,
+                    dataEntryTable[language.Item1],
+                    language.Item1.DataEntry.Length
+                );
 #else
-                IMAGE_RESOURCE_DATA_ENTRY.Write(ref dataBuilder, nodeAssociatedWithDataBuilder, dataEntryTable[language.Item1], language.Item1.DataEntry.Length);
+                IMAGE_RESOURCE_DATA_ENTRY.Write(
+                    ref dataBuilder,
+                    nodeAssociatedWithDataBuilder,
+                    dataEntryTable[language.Item1],
+                    language.Item1.DataEntry.Length
+                );
 #endif
             }
             dataBuilder.PadAlignment(4); // resource data entries are 4 byte aligned

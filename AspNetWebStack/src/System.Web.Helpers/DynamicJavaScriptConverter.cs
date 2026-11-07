@@ -24,12 +24,19 @@ namespace System.Web.Helpers
             }
         }
 
-        public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
+        public override object Deserialize(
+            IDictionary<string, object> dictionary,
+            Type type,
+            JavaScriptSerializer serializer
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
+        public override IDictionary<string, object> Serialize(
+            object obj,
+            JavaScriptSerializer serializer
+        )
         {
             var values = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             var memberNames = DynamicHelper.GetMemberNames(obj);

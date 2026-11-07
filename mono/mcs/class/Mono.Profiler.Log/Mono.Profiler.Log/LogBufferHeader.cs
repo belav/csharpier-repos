@@ -2,45 +2,45 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-namespace Mono.Profiler.Log {
+namespace Mono.Profiler.Log
+{
+    public sealed class LogBufferHeader
+    {
+        const int Id = 0x4d504c01;
 
-	public sealed class LogBufferHeader {
+        public LogStreamHeader StreamHeader { get; }
 
-		const int Id = 0x4d504c01;
+        public int Length { get; }
 
-		public LogStreamHeader StreamHeader { get; }
+        public ulong TimeBase { get; }
 
-		public int Length { get; }
+        public long PointerBase { get; }
 
-		public ulong TimeBase { get; }
+        public long ObjectBase { get; }
 
-		public long PointerBase { get; }
+        public long ThreadId { get; }
 
-		public long ObjectBase { get; }
+        public long MethodBase { get; }
 
-		public long ThreadId { get; }
+        internal ulong CurrentTime { get; set; }
 
-		public long MethodBase { get; }
+        internal long CurrentMethod { get; set; }
 
-		internal ulong CurrentTime { get; set; }
+        internal LogBufferHeader(LogStreamHeader streamHeader, LogReader reader)
+        {
+            StreamHeader = streamHeader;
 
-		internal long CurrentMethod { get; set; }
+            var id = reader.ReadInt32();
 
-		internal LogBufferHeader (LogStreamHeader streamHeader, LogReader reader)
-		{
-			StreamHeader = streamHeader;
+            if (id != Id)
+                throw new LogException($"Invalid buffer header ID (0x{id:X}).");
 
-			var id = reader.ReadInt32 ();
-
-			if (id != Id)
-				throw new LogException ($"Invalid buffer header ID (0x{id:X}).");
-
-			Length = reader.ReadInt32 ();
-			TimeBase = CurrentTime = reader.ReadUInt64 ();
-			PointerBase = reader.ReadInt64 ();
-			ObjectBase = reader.ReadInt64 ();
-			ThreadId = reader.ReadInt64 ();
-			MethodBase = CurrentMethod = reader.ReadInt64 ();
-		}
-	}
+            Length = reader.ReadInt32();
+            TimeBase = CurrentTime = reader.ReadUInt64();
+            PointerBase = reader.ReadInt64();
+            ObjectBase = reader.ReadInt64();
+            ThreadId = reader.ReadInt64();
+            MethodBase = CurrentMethod = reader.ReadInt64();
+        }
+    }
 }

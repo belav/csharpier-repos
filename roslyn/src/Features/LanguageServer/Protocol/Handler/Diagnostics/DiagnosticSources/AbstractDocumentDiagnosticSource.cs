@@ -10,7 +10,8 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
-internal abstract class AbstractDocumentDiagnosticSource<TDocument>(TDocument document) : IDiagnosticSource
+internal abstract class AbstractDocumentDiagnosticSource<TDocument>(TDocument document)
+    : IDiagnosticSource
     where TDocument : TextDocument
 {
     public TDocument Document { get; } = document;
@@ -18,15 +19,24 @@ internal abstract class AbstractDocumentDiagnosticSource<TDocument>(TDocument do
     public abstract bool IsLiveSource();
 
     public abstract Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
-        IDiagnosticAnalyzerService diagnosticAnalyzerService, RequestContext context, CancellationToken cancellationToken);
+        IDiagnosticAnalyzerService diagnosticAnalyzerService,
+        RequestContext context,
+        CancellationToken cancellationToken
+    );
 
     public ProjectOrDocumentId GetId() => new(Document.Id);
+
     public Project GetProject() => Document.Project;
 
-    public TextDocumentIdentifier? GetDocumentIdentifier()
-        => !string.IsNullOrEmpty(Document.FilePath)
-            ? new VSTextDocumentIdentifier { ProjectContext = ProtocolConversions.ProjectToProjectContext(Document.Project), Uri = Document.GetURI() }
+    public TextDocumentIdentifier? GetDocumentIdentifier() =>
+        !string.IsNullOrEmpty(Document.FilePath)
+            ? new VSTextDocumentIdentifier
+            {
+                ProjectContext = ProtocolConversions.ProjectToProjectContext(Document.Project),
+                Uri = Document.GetURI(),
+            }
             : null;
 
-    public string ToDisplayString() => $"{this.GetType().Name}: {Document.FilePath ?? Document.Name} in {Document.Project.Name}";
+    public string ToDisplayString() =>
+        $"{this.GetType().Name}: {Document.FilePath ?? Document.Name} in {Document.Project.Name}";
 }

@@ -36,19 +36,12 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
             }
             else if (descriptor is EnumDescriptor enumDescriptor)
             {
-                return DataContract.ForPrimitive(
-                    type,
-                    DataType.String,
-                    dataFormat: null,
-                    value =>
-                    {
-                        var match = enumDescriptor.Values.SingleOrDefault(v =>
-                            v.Number == (int)value
-                        );
-                        var name = match?.Name ?? value.ToString();
-                        return @"""" + name + @"""";
-                    }
-                );
+                return DataContract.ForPrimitive(type, DataType.String, dataFormat: null, value =>
+                {
+                    var match = enumDescriptor.Values.SingleOrDefault(v => v.Number == (int)value);
+                    var name = match?.Name ?? value.ToString();
+                    return @"""" + name + @"""";
+                });
             }
         }
 

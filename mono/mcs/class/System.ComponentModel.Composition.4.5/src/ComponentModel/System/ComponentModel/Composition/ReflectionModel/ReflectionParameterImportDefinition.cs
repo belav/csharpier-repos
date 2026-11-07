@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Globalization;
-using System.Reflection;
-using Microsoft.Internal;
-using System.ComponentModel.Composition.ReflectionModel;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
+using System.Globalization;
+using System.Reflection;
 using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -18,14 +18,25 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public ReflectionParameterImportDefinition(
             Lazy<ParameterInfo> importingLazyParameter,
-            string contractName, 
+            string contractName,
             string requiredTypeIdentity,
-            IEnumerable<KeyValuePair<string,Type>> requiredMetadata,
-            ImportCardinality cardinality, 
+            IEnumerable<KeyValuePair<string, Type>> requiredMetadata,
+            ImportCardinality cardinality,
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object> metadata,
-            ICompositionElement origin)
-            : base(contractName, requiredTypeIdentity, requiredMetadata, cardinality, false, true, requiredCreationPolicy, metadata, origin)
+            ICompositionElement origin
+        )
+            : base(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                false,
+                true,
+                requiredCreationPolicy,
+                metadata,
+                origin
+            )
         {
             Assumes.NotNull(importingLazyParameter);
 
@@ -34,7 +45,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override ImportingItem ToImportingItem()
         {
-            return new ImportingParameter(this, new ImportType(this.ImportingLazyParameter.GetNotNullValue("parameter").ParameterType, this.Cardinality));
+            return new ImportingParameter(
+                this,
+                new ImportType(
+                    this.ImportingLazyParameter.GetNotNullValue("parameter").ParameterType,
+                    this.Cardinality
+                )
+            );
         }
 
         public Lazy<ParameterInfo> ImportingLazyParameter
@@ -47,10 +64,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ParameterInfo parameter = this.ImportingLazyParameter.GetNotNullValue("parameter");
             return string.Format(
                 CultureInfo.CurrentCulture,
-                "{0} (Parameter=\"{1}\", ContractName=\"{2}\")",  // NOLOC
+                "{0} (Parameter=\"{1}\", ContractName=\"{2}\")", // NOLOC
                 parameter.Member.GetDisplayName(),
-                parameter.Name,                
-                this.ContractName);
+                parameter.Name,
+                this.ContractName
+            );
         }
     }
 }

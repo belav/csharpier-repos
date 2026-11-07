@@ -31,69 +31,70 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Common
 {
-	[TestFixture]
-	public class DataContainerTest : MSSqlTestClient
-	{
-		[SetUp]
-		public void GetReady ()
-		{
-			OpenConnection ();
-			CreateTestSetup (); // create test database & tables
-		}
+    [TestFixture]
+    public class DataContainerTest : MSSqlTestClient
+    {
+        [SetUp]
+        public void GetReady()
+        {
+            OpenConnection();
+            CreateTestSetup(); // create test database & tables
+        }
 
-		[TearDown]
-		public void Clean ()
-		{
-			CleanTestSetup (); // clean test database
-			CloseConnection ();
-		}
+        [TearDown]
+        public void Clean()
+        {
+            CleanTestSetup(); // clean test database
+            CloseConnection();
+        }
 
-		[Test]
-		public void DateTimeTest ()
-		{
-			try {
-				SqlDataAdapter myadapter = new SqlDataAdapter ("select * from datetimetest;", conn);
+        [Test]
+        public void DateTimeTest()
+        {
+            try
+            {
+                SqlDataAdapter myadapter = new SqlDataAdapter("select * from datetimetest;", conn);
 
-				DataTable dt = new DataTable ();
-				myadapter.Fill (dt);
-				Assert.AreEqual (3, dt.Rows.Count, "Row count must be three");
-			} finally {
-				CleanTestSetup ();
-				CloseConnection ();
-			}
-		}
+                DataTable dt = new DataTable();
+                myadapter.Fill(dt);
+                Assert.AreEqual(3, dt.Rows.Count, "Row count must be three");
+            }
+            finally
+            {
+                CleanTestSetup();
+                CloseConnection();
+            }
+        }
 
-		private void CreateTestSetup ()
-		{
-			if (!isConnAlive)
-				return ;
-			// Create test database & tables
-			string createQuery = "DROP TABLE datetimetest;" ;
-			ExecuteQuery (createQuery);
-			createQuery = "CREATE TABLE datetimetest (" +
-					"col_char CHAR(20)," +
-					"col_date DATETIME );";
-			ExecuteQuery (createQuery);
-			createQuery = "INSERT INTO datetimetest VALUES ('one', '4/12/2004 4:59:00');" ;
-			ExecuteQuery (createQuery);
-			createQuery = "INSERT INTO datetimetest VALUES ('two',null);" ;
-			ExecuteQuery (createQuery);
-			createQuery = "INSERT INTO datetimetest (col_char) VALUES ('three');" ;
-			ExecuteQuery (createQuery);
-		}
+        private void CreateTestSetup()
+        {
+            if (!isConnAlive)
+                return;
+            // Create test database & tables
+            string createQuery = "DROP TABLE datetimetest;";
+            ExecuteQuery(createQuery);
+            createQuery =
+                "CREATE TABLE datetimetest (" + "col_char CHAR(20)," + "col_date DATETIME );";
+            ExecuteQuery(createQuery);
+            createQuery = "INSERT INTO datetimetest VALUES ('one', '4/12/2004 4:59:00');";
+            ExecuteQuery(createQuery);
+            createQuery = "INSERT INTO datetimetest VALUES ('two',null);";
+            ExecuteQuery(createQuery);
+            createQuery = "INSERT INTO datetimetest (col_char) VALUES ('three');";
+            ExecuteQuery(createQuery);
+        }
 
-		private void CleanTestSetup ()
-		{
-			if (!isConnAlive)
-				return;
-			// delete test database
-			string dropQuery = "DROP table datetimetest";
-			ExecuteQuery(dropQuery);
-		}
-	}
+        private void CleanTestSetup()
+        {
+            if (!isConnAlive)
+                return;
+            // delete test database
+            string dropQuery = "DROP table datetimetest";
+            ExecuteQuery(dropQuery);
+        }
+    }
 }

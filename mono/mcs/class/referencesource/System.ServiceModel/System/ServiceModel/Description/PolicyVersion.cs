@@ -25,10 +25,22 @@ namespace System.ServiceModel.Description
             this.policyNamespace = policyNamespace;
         }
 
-        public static PolicyVersion Policy12 { get { return policyVersion12; } }
-        public static PolicyVersion Policy15 { get { return policyVersion15; } }
-        public static PolicyVersion Default { get { return policyVersion12; } }
-        public string Namespace { get { return policyNamespace; } }
+        public static PolicyVersion Policy12
+        {
+            get { return policyVersion12; }
+        }
+        public static PolicyVersion Policy15
+        {
+            get { return policyVersion15; }
+        }
+        public static PolicyVersion Default
+        {
+            get { return policyVersion12; }
+        }
+        public string Namespace
+        {
+            get { return policyNamespace; }
+        }
 
         public override string ToString()
         {

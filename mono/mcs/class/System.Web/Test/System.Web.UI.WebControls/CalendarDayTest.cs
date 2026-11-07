@@ -28,45 +28,39 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.UI.WebControls;
-using NUnit.Framework;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Web;
 using System.Web.UI;
-using System.Globalization;
-
+using System.Web.UI.WebControls;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
+    [TestFixture]
+    public class CalendarDayTest
+    {
+        CalendarDay calDay = new CalendarDay(DateTime.Today, true, false, true, false, "10");
 
-	[TestFixture]
-	public class CalendarDayTest {
+        [Test]
+        public void CalendarDay_Constructor()
+        {
+            Assert.AreEqual(DateTime.Today, calDay.Date, "A1");
+            Assert.AreEqual("10", calDay.DayNumberText, "A2");
+            Assert.AreEqual(false, calDay.IsOtherMonth, "A3");
+            Assert.AreEqual(false, calDay.IsSelectable, "A4"); // Default value
+            Assert.AreEqual(true, calDay.IsSelected, "A5");
+            Assert.AreEqual(false, calDay.IsToday, "A6");
+            Assert.AreEqual(true, calDay.IsWeekend, "A7");
+        }
 
-		CalendarDay calDay = new CalendarDay (DateTime.Today, true, false, true, false, "10");
-
-		[Test]
-		public void CalendarDay_Constructor ()
-		{
-			Assert.AreEqual (DateTime.Today, calDay.Date, "A1");
-			Assert.AreEqual ("10", calDay.DayNumberText, "A2");
-			Assert.AreEqual (false, calDay.IsOtherMonth, "A3");
-			Assert.AreEqual (false, calDay.IsSelectable, "A4"); // Default value
-			Assert.AreEqual (true, calDay.IsSelected, "A5");
-			Assert.AreEqual (false, calDay.IsToday, "A6");
-			Assert.AreEqual (true, calDay.IsWeekend, "A7");			
-		}
-
-		[Test]
-		public void IsSelectableProperty ()
-		{
-			calDay.IsSelectable = true;
-			Assert.AreEqual (true, calDay.IsSelectable, "A1");						
-		}
-
-		
-	}
+        [Test]
+        public void IsSelectableProperty()
+        {
+            calDay.IsSelectable = true;
+            Assert.AreEqual(true, calDay.IsSelectable, "A1");
+        }
+    }
 }
-
-

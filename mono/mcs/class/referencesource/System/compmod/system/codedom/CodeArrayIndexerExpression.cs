@@ -1,43 +1,43 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeArrayIndexerExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents an array indexer expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeArrayIndexerExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeArrayIndexerExpression : CodeExpression
+    {
         private CodeExpression targetObject;
         private CodeExpressionCollection indices;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeArrayIndexerExpression() {
-        }
+        public CodeArrayIndexerExpression() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeArrayIndexerExpression(CodeExpression targetObject, params CodeExpression[] indices) {
+        public CodeArrayIndexerExpression(
+            CodeExpression targetObject,
+            params CodeExpression[] indices
+        )
+        {
             this.targetObject = targetObject;
             this.indices = new CodeExpressionCollection();
             this.indices.AddRange(indices);
@@ -46,21 +46,21 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeExpression TargetObject {
-            get {
-                return targetObject;
-            }
-            set {
-                targetObject = value;
-            }
+        public CodeExpression TargetObject
+        {
+            get { return targetObject; }
+            set { targetObject = value; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeExpressionCollection Indices {
-            get {
-                if (indices == null) {
+        public CodeExpressionCollection Indices
+        {
+            get
+            {
+                if (indices == null)
+                {
                     indices = new CodeExpressionCollection();
                 }
                 return indices;

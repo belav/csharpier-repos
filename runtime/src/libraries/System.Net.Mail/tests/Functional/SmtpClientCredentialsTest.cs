@@ -121,11 +121,17 @@ namespace System.Net.Mail.Functional.Tests
             Type smtpTransportType = Type.GetType("System.Net.Mail.SmtpTransport, System.Net.Mail");
 
             var transport = typeof(SmtpClient)
-                .GetField("_transport", BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance)
+                .GetField(
+                    "_transport",
+                    BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance
+                )
                 .GetValue(client);
 
             var transportCredentials = smtpTransportType
-                .GetProperty("Credentials", BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.Instance)
+                .GetProperty(
+                    "Credentials",
+                    BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.Instance
+                )
                 .GetValue(transport);
 
             return (ICredentialsByHost)transportCredentials;

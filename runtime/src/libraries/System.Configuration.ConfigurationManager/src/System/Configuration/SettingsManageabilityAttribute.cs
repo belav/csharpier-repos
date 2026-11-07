@@ -24,10 +24,7 @@ namespace System.Configuration
         /// </summary>
         public SettingsManageability Manageability
         {
-            get
-            {
-                return _manageability;
-            }
+            get { return _manageability; }
         }
     }
 }

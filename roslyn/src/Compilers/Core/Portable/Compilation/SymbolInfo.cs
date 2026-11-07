@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using Roslyn.Utilities;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -46,50 +46,63 @@ namespace Microsoft.CodeAnalysis
         public CandidateReason CandidateReason { get; }
 
         internal SymbolInfo(ISymbol symbol)
-            : this(symbol, ImmutableArray<ISymbol>.Empty, CandidateReason.None)
-        {
-        }
+            : this(symbol, ImmutableArray<ISymbol>.Empty, CandidateReason.None) { }
 
         internal SymbolInfo(ISymbol symbol, CandidateReason reason)
-            : this(symbol, ImmutableArray<ISymbol>.Empty, reason)
-        {
-        }
+            : this(symbol, ImmutableArray<ISymbol>.Empty, reason) { }
 
-        internal SymbolInfo(ImmutableArray<ISymbol> candidateSymbols, CandidateReason candidateReason)
-            : this(symbol: null, candidateSymbols, candidateReason)
-        {
-        }
+        internal SymbolInfo(
+            ImmutableArray<ISymbol> candidateSymbols,
+            CandidateReason candidateReason
+        )
+            : this(symbol: null, candidateSymbols, candidateReason) { }
 
-        private SymbolInfo(ISymbol? symbol, ImmutableArray<ISymbol> candidateSymbols, CandidateReason candidateReason)
+        private SymbolInfo(
+            ISymbol? symbol,
+            ImmutableArray<ISymbol> candidateSymbols,
+            CandidateReason candidateReason
+        )
         {
             this.Symbol = symbol;
             _candidateSymbols = candidateSymbols;
 
 #if DEBUG
             const NamespaceKind NamespaceKindNamespaceGroup = 0;
-            Debug.Assert(symbol is null || symbol.Kind != SymbolKind.Namespace || ((INamespaceSymbol)symbol).NamespaceKind != NamespaceKindNamespaceGroup);
+            Debug.Assert(
+                symbol is null
+                    || symbol.Kind != SymbolKind.Namespace
+                    || ((INamespaceSymbol)symbol).NamespaceKind != NamespaceKindNamespaceGroup
+            );
             foreach (var item in _candidateSymbols)
             {
-                Debug.Assert(item.Kind != SymbolKind.Namespace || ((INamespaceSymbol)item).NamespaceKind != NamespaceKindNamespaceGroup);
+                Debug.Assert(
+                    item.Kind != SymbolKind.Namespace
+                        || ((INamespaceSymbol)item).NamespaceKind != NamespaceKindNamespaceGroup
+                );
             }
 #endif
 
             this.CandidateReason = candidateReason;
         }
 
-        internal ImmutableArray<ISymbol> GetAllSymbols()
-            => this.Symbol == null ? CandidateSymbols : ImmutableArray.Create(this.Symbol);
+        internal ImmutableArray<ISymbol> GetAllSymbols() =>
+            this.Symbol == null ? CandidateSymbols : ImmutableArray.Create(this.Symbol);
 
-        public override bool Equals(object? obj)
-            => obj is SymbolInfo info && Equals(info);
+        public override bool Equals(object? obj) => obj is SymbolInfo info && Equals(info);
 
-        public bool Equals(SymbolInfo other)
-            => this.CandidateReason == other.CandidateReason &&
-               object.Equals(this.Symbol, other.Symbol) &&
-               CandidateSymbols.SequenceEqual(other.CandidateSymbols);
+        public bool Equals(SymbolInfo other) =>
+            this.CandidateReason == other.CandidateReason
+            && object.Equals(this.Symbol, other.Symbol)
+            && CandidateSymbols.SequenceEqual(other.CandidateSymbols);
 
-        public override int GetHashCode()
-            => Hash.Combine(this.Symbol, Hash.Combine(Hash.CombineValues(this.CandidateSymbols, 4), (int)this.CandidateReason));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                this.Symbol,
+                Hash.Combine(
+                    Hash.CombineValues(this.CandidateSymbols, 4),
+                    (int)this.CandidateReason
+                )
+            );
 
         internal bool IsEmpty => this.Symbol == null && this.CandidateSymbols.Length == 0;
     }

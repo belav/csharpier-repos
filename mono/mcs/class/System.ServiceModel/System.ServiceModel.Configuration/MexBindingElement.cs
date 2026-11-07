@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,31 +49,29 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract partial class MexBindingElement<TStandardBinding>
-		 : StandardBindingElement,  IBindingConfigurationElement
-		where TStandardBinding : Binding
-	{
+    public abstract partial class MexBindingElement<TStandardBinding>
+        : StandardBindingElement,
+            IBindingConfigurationElement
+        where TStandardBinding : Binding
+    {
+        protected MexBindingElement(string name)
+            : base(name) { }
 
-		protected MexBindingElement (string name)
-			: base (name) {
-		}
+        // Properties
 
+        protected override Type BindingElementType
+        {
+            get { return typeof(TStandardBinding); }
+        }
 
-		// Properties
-
-		protected override Type BindingElementType {
-			get { return typeof (TStandardBinding); }
-		}
-
-		protected override void OnApplyConfiguration (Binding binding) {
-			throw new NotImplementedException ();
-		}
-	}
-
+        protected override void OnApplyConfiguration(Binding binding)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

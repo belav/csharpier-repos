@@ -18,12 +18,20 @@ namespace System.IO.Pipes.Tests
         [InlineData(TokenImpersonationLevel.Identification)]
         [InlineData(TokenImpersonationLevel.Impersonation)]
         [InlineData(TokenImpersonationLevel.Delegation)]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public async Task RunAsClient_Windows(TokenImpersonationLevel tokenImpersonationLevel)
         {
             string pipeName = PipeStreamConformanceTests.GetUniquePipeName();
             using (var server = new NamedPipeServerStream(pipeName))
-            using (var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.None, tokenImpersonationLevel))
+            using (
+                var client = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    PipeOptions.None,
+                    tokenImpersonationLevel
+                )
+            )
             {
                 Task serverTask = server.WaitForConnectionAsync();
 

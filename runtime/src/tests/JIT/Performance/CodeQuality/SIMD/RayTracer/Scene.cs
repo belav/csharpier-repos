@@ -10,7 +10,12 @@ internal class Scene
     public Light[] Lights;
     public Camera Camera;
 
-    public Scene(SceneObject[] things, Light[] lights, Camera camera) { Things = things; Lights = lights; Camera = camera; }
+    public Scene(SceneObject[] things, Light[] lights, Camera camera)
+    {
+        Things = things;
+        Lights = lights;
+        Camera = camera;
+    }
 
     public IEnumerable<ISect> Intersect(Ray r)
     {
@@ -20,4 +25,3 @@ internal class Scene
         }
     }
 }
-

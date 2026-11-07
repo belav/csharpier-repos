@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
@@ -16,7 +15,11 @@ namespace ILCompiler.Dataflow
         // Returns the members of the type bound by memberTypes. For DynamicallyAccessedMemberTypes.All, this returns all members of the type and its
         // nested types, including interface implementations, plus the same or any base types or implemented interfaces.
         // DynamicallyAccessedMemberTypes.PublicNestedTypes and NonPublicNestedTypes do the same for members of the selected nested types.
-        public static IEnumerable<TypeSystemEntity> GetDynamicallyAccessedMembers(this TypeDesc typeDefinition, DynamicallyAccessedMemberTypes memberTypes, bool declaredOnly = false)
+        public static IEnumerable<TypeSystemEntity> GetDynamicallyAccessedMembers(
+            this TypeDesc typeDefinition,
+            DynamicallyAccessedMemberTypes memberTypes,
+            bool declaredOnly = false
+        )
         {
             if (memberTypes == DynamicallyAccessedMemberTypes.None)
                 yield break;
@@ -34,49 +37,88 @@ namespace ILCompiler.Dataflow
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.NonPublicConstructors))
             {
-                foreach (var c in typeDefinition.GetConstructorsOnType(filter: null, bindingFlags: BindingFlags.NonPublic))
+                foreach (
+                    var c in typeDefinition.GetConstructorsOnType(
+                        filter: null,
+                        bindingFlags: BindingFlags.NonPublic
+                    )
+                )
                     yield return c;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicConstructors))
             {
-                foreach (var c in typeDefinition.GetConstructorsOnType(filter: null, bindingFlags: BindingFlags.Public))
+                foreach (
+                    var c in typeDefinition.GetConstructorsOnType(
+                        filter: null,
+                        bindingFlags: BindingFlags.Public
+                    )
+                )
                     yield return c;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor))
             {
-                foreach (var c in typeDefinition.GetConstructorsOnType(filter: m => m.IsPublic() && !m.HasMetadataParameters()))
+                foreach (
+                    var c in typeDefinition.GetConstructorsOnType(filter: m =>
+                        m.IsPublic() && !m.HasMetadataParameters()
+                    )
+                )
                     yield return c;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.NonPublicMethods))
             {
-                foreach (var m in typeDefinition.GetMethodsOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags))
+                foreach (
+                    var m in typeDefinition.GetMethodsOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags
+                    )
+                )
                     yield return m;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicMethods))
             {
-                foreach (var m in typeDefinition.GetMethodsOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.Public | declaredOnlyFlags))
+                foreach (
+                    var m in typeDefinition.GetMethodsOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.Public | declaredOnlyFlags
+                    )
+                )
                     yield return m;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.NonPublicFields))
             {
-                foreach (var f in typeDefinition.GetFieldsOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags))
+                foreach (
+                    var f in typeDefinition.GetFieldsOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags
+                    )
+                )
                     yield return f;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicFields))
             {
-                foreach (var f in typeDefinition.GetFieldsOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.Public | declaredOnlyFlags))
+                foreach (
+                    var f in typeDefinition.GetFieldsOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.Public | declaredOnlyFlags
+                    )
+                )
                     yield return f;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.NonPublicNestedTypes))
             {
-                foreach (var t in typeDefinition.GetNestedTypesOnType(filter: null, bindingFlags: BindingFlags.NonPublic))
+                foreach (
+                    var t in typeDefinition.GetNestedTypesOnType(
+                        filter: null,
+                        bindingFlags: BindingFlags.NonPublic
+                    )
+                )
                 {
                     yield return t;
                     var members = new List<TypeSystemEntity>();
@@ -88,7 +130,12 @@ namespace ILCompiler.Dataflow
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicNestedTypes))
             {
-                foreach (var t in typeDefinition.GetNestedTypesOnType(filter: null, bindingFlags: BindingFlags.Public))
+                foreach (
+                    var t in typeDefinition.GetNestedTypesOnType(
+                        filter: null,
+                        bindingFlags: BindingFlags.Public
+                    )
+                )
                 {
                     yield return t;
                     var members = new List<TypeSystemEntity>();
@@ -100,30 +147,54 @@ namespace ILCompiler.Dataflow
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.NonPublicProperties))
             {
-                foreach (var p in typeDefinition.GetPropertiesOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags))
+                foreach (
+                    var p in typeDefinition.GetPropertiesOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags
+                    )
+                )
                     yield return p;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicProperties))
             {
-                foreach (var p in typeDefinition.GetPropertiesOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.Public | declaredOnlyFlags))
+                foreach (
+                    var p in typeDefinition.GetPropertiesOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.Public | declaredOnlyFlags
+                    )
+                )
                     yield return p;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.NonPublicEvents))
             {
-                foreach (var e in typeDefinition.GetEventsOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags))
+                foreach (
+                    var e in typeDefinition.GetEventsOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.NonPublic | declaredOnlyFlags
+                    )
+                )
                     yield return e;
             }
 
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicEvents))
             {
-                foreach (var e in typeDefinition.GetEventsOnTypeHierarchy(filter: null, bindingFlags: BindingFlags.Public | declaredOnlyFlags))
+                foreach (
+                    var e in typeDefinition.GetEventsOnTypeHierarchy(
+                        filter: null,
+                        bindingFlags: BindingFlags.Public | declaredOnlyFlags
+                    )
+                )
                     yield return e;
             }
         }
 
-        public static IEnumerable<MethodDesc> GetConstructorsOnType(this TypeDesc type, Func<MethodDesc, bool> filter, BindingFlags? bindingFlags = null)
+        public static IEnumerable<MethodDesc> GetConstructorsOnType(
+            this TypeDesc type,
+            Func<MethodDesc, bool> filter,
+            BindingFlags? bindingFlags = null
+        )
         {
             if (type.IsArray)
             {
@@ -139,23 +210,43 @@ namespace ILCompiler.Dataflow
                 if (filter != null && !filter(method))
                     continue;
 
-                if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Static && !method.Signature.IsStatic)
+                if (
+                    (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                        == BindingFlags.Static
+                    && !method.Signature.IsStatic
+                )
                     continue;
 
-                if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Instance && method.Signature.IsStatic)
+                if (
+                    (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                        == BindingFlags.Instance
+                    && method.Signature.IsStatic
+                )
                     continue;
 
-                if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.Public && !method.IsPublic())
+                if (
+                    (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                        == BindingFlags.Public
+                    && !method.IsPublic()
+                )
                     continue;
 
-                if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.NonPublic && method.IsPublic())
+                if (
+                    (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                        == BindingFlags.NonPublic
+                    && method.IsPublic()
+                )
                     continue;
 
                 yield return method;
             }
         }
 
-        public static IEnumerable<MethodDesc> GetMethodsOnTypeHierarchy(this TypeDesc type, Func<MethodDesc, bool> filter, BindingFlags? bindingFlags = null)
+        public static IEnumerable<MethodDesc> GetMethodsOnTypeHierarchy(
+            this TypeDesc type,
+            Func<MethodDesc, bool> filter,
+            BindingFlags? bindingFlags = null
+        )
         {
             bool onBaseType = false;
 
@@ -185,16 +276,32 @@ namespace ILCompiler.Dataflow
                     if (filter != null && !filter(method))
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Static && !method.Signature.IsStatic)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                            == BindingFlags.Static
+                        && !method.Signature.IsStatic
+                    )
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Instance && method.Signature.IsStatic)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                            == BindingFlags.Instance
+                        && method.Signature.IsStatic
+                    )
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.Public && !method.IsPublic())
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                            == BindingFlags.Public
+                        && !method.IsPublic()
+                    )
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.NonPublic && method.IsPublic())
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                            == BindingFlags.NonPublic
+                        && method.IsPublic()
+                    )
                         continue;
 
                     yield return method;
@@ -208,7 +315,11 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        public static IEnumerable<FieldDesc> GetFieldsOnTypeHierarchy(this TypeDesc type, Func<FieldDesc, bool> filter, BindingFlags? bindingFlags = BindingFlags.Default)
+        public static IEnumerable<FieldDesc> GetFieldsOnTypeHierarchy(
+            this TypeDesc type,
+            Func<FieldDesc, bool> filter,
+            BindingFlags? bindingFlags = BindingFlags.Default
+        )
         {
             bool onBaseType = false;
             while (type != null)
@@ -226,16 +337,32 @@ namespace ILCompiler.Dataflow
                     if (filter != null && !filter(field))
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Static && !field.IsStatic)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                            == BindingFlags.Static
+                        && !field.IsStatic
+                    )
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Instance && field.IsStatic)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                            == BindingFlags.Instance
+                        && field.IsStatic
+                    )
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.Public && !field.IsPublic())
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                            == BindingFlags.Public
+                        && !field.IsPublic()
+                    )
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.NonPublic && field.IsPublic())
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                            == BindingFlags.NonPublic
+                        && field.IsPublic()
+                    )
                         continue;
 
                     yield return field;
@@ -249,7 +376,11 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        public static IEnumerable<MetadataType> GetNestedTypesOnType(this TypeDesc type, Func<MetadataType, bool> filter, BindingFlags? bindingFlags = BindingFlags.Default)
+        public static IEnumerable<MetadataType> GetNestedTypesOnType(
+            this TypeDesc type,
+            Func<MetadataType, bool> filter,
+            BindingFlags? bindingFlags = BindingFlags.Default
+        )
         {
             if (type is not MetadataType mdType)
                 yield break;
@@ -259,13 +390,19 @@ namespace ILCompiler.Dataflow
                 if (filter != null && !filter(nestedType))
                     continue;
 
-                if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.Public)
+                if (
+                    (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                    == BindingFlags.Public
+                )
                 {
                     if (!nestedType.IsNestedPublic())
                         continue;
                 }
 
-                if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.NonPublic)
+                if (
+                    (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                    == BindingFlags.NonPublic
+                )
                 {
                     if (nestedType.IsNestedPublic())
                         continue;
@@ -275,7 +412,11 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        public static IEnumerable<PropertyPseudoDesc> GetPropertiesOnTypeHierarchy(this TypeDesc type, Func<PropertyPseudoDesc, bool> filter, BindingFlags? bindingFlags = BindingFlags.Default)
+        public static IEnumerable<PropertyPseudoDesc> GetPropertiesOnTypeHierarchy(
+            this TypeDesc type,
+            Func<PropertyPseudoDesc, bool> filter,
+            BindingFlags? bindingFlags = BindingFlags.Default
+        )
         {
             bool onBaseType = false;
 
@@ -292,44 +433,70 @@ namespace ILCompiler.Dataflow
                     yield break;
                 }
 
-                foreach (var propertyHandle in ecmaType.MetadataReader.GetTypeDefinition(ecmaType.Handle).GetProperties())
+                foreach (
+                    var propertyHandle in ecmaType
+                        .MetadataReader.GetTypeDefinition(ecmaType.Handle)
+                        .GetProperties()
+                )
                 {
                     var property = new PropertyPseudoDesc(ecmaType, propertyHandle);
 
                     // Ignore private properties on a base type - those are completely ignored by reflection
                     // (anything private on the base type is not visible via the derived type)
                     // Note that properties themselves are not actually private, their accessors are
-                    if (onBaseType &&
-                        (property.GetMethod == null || property.GetMethod.IsPrivate()) &&
-                        (property.SetMethod == null || property.SetMethod.IsPrivate()))
+                    if (
+                        onBaseType
+                        && (property.GetMethod == null || property.GetMethod.IsPrivate())
+                        && (property.SetMethod == null || property.SetMethod.IsPrivate())
+                    )
                         continue;
 
                     if (filter != null && !filter(property))
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Static)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                        == BindingFlags.Static
+                    )
                     {
-                        if ((property.GetMethod != null) && !property.GetMethod.Signature.IsStatic) continue;
-                        if ((property.SetMethod != null) && !property.SetMethod.Signature.IsStatic) continue;
-                    }
-
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Instance)
-                    {
-                        if ((property.GetMethod != null) && property.GetMethod.Signature.IsStatic) continue;
-                        if ((property.SetMethod != null) && property.SetMethod.Signature.IsStatic) continue;
-                    }
-
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.Public)
-                    {
-                        if ((property.GetMethod == null || !property.GetMethod.IsPublic())
-                            && (property.SetMethod == null || !property.SetMethod.IsPublic()))
+                        if ((property.GetMethod != null) && !property.GetMethod.Signature.IsStatic)
+                            continue;
+                        if ((property.SetMethod != null) && !property.SetMethod.Signature.IsStatic)
                             continue;
                     }
 
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.NonPublic)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                        == BindingFlags.Instance
+                    )
                     {
-                        if ((property.GetMethod != null) && property.GetMethod.IsPublic()) continue;
-                        if ((property.SetMethod != null) && property.SetMethod.IsPublic()) continue;
+                        if ((property.GetMethod != null) && property.GetMethod.Signature.IsStatic)
+                            continue;
+                        if ((property.SetMethod != null) && property.SetMethod.Signature.IsStatic)
+                            continue;
+                    }
+
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                        == BindingFlags.Public
+                    )
+                    {
+                        if (
+                            (property.GetMethod == null || !property.GetMethod.IsPublic())
+                            && (property.SetMethod == null || !property.SetMethod.IsPublic())
+                        )
+                            continue;
+                    }
+
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                        == BindingFlags.NonPublic
+                    )
+                    {
+                        if ((property.GetMethod != null) && property.GetMethod.IsPublic())
+                            continue;
+                        if ((property.SetMethod != null) && property.SetMethod.IsPublic())
+                            continue;
                     }
 
                     yield return property;
@@ -343,7 +510,11 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        public static IEnumerable<EventPseudoDesc> GetEventsOnTypeHierarchy(this TypeDesc type, Func<EventPseudoDesc, bool> filter, BindingFlags? bindingFlags = BindingFlags.Default)
+        public static IEnumerable<EventPseudoDesc> GetEventsOnTypeHierarchy(
+            this TypeDesc type,
+            Func<EventPseudoDesc, bool> filter,
+            BindingFlags? bindingFlags = BindingFlags.Default
+        )
         {
             bool onBaseType = false;
 
@@ -360,44 +531,72 @@ namespace ILCompiler.Dataflow
                     yield break;
                 }
 
-                foreach (var eventHandle in ecmaType.MetadataReader.GetTypeDefinition(ecmaType.Handle).GetEvents())
+                foreach (
+                    var eventHandle in ecmaType
+                        .MetadataReader.GetTypeDefinition(ecmaType.Handle)
+                        .GetEvents()
+                )
                 {
                     var @event = new EventPseudoDesc(ecmaType, eventHandle);
 
                     // Ignore private properties on a base type - those are completely ignored by reflection
                     // (anything private on the base type is not visible via the derived type)
                     // Note that properties themselves are not actually private, their accessors are
-                    if (onBaseType &&
-                        (@event.AddMethod == null || @event.AddMethod.IsPrivate()) &&
-                        (@event.RemoveMethod == null || @event.RemoveMethod.IsPrivate()))
+                    if (
+                        onBaseType
+                        && (@event.AddMethod == null || @event.AddMethod.IsPrivate())
+                        && (@event.RemoveMethod == null || @event.RemoveMethod.IsPrivate())
+                    )
                         continue;
 
                     if (filter != null && !filter(@event))
                         continue;
 
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Static)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                        == BindingFlags.Static
+                    )
                     {
-                        if ((@event.AddMethod != null) && !@event.AddMethod.Signature.IsStatic) continue;
-                        if ((@event.RemoveMethod != null) && !@event.RemoveMethod.Signature.IsStatic) continue;
-                    }
-
-                    if ((bindingFlags & (BindingFlags.Instance | BindingFlags.Static)) == BindingFlags.Instance)
-                    {
-                        if ((@event.AddMethod != null) && @event.AddMethod.Signature.IsStatic) continue;
-                        if ((@event.RemoveMethod != null) && @event.RemoveMethod.Signature.IsStatic) continue;
-                    }
-
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.Public)
-                    {
-                        if ((@event.AddMethod == null || !@event.AddMethod.IsPublic())
-                            && (@event.RemoveMethod == null || !@event.RemoveMethod.IsPublic()))
+                        if ((@event.AddMethod != null) && !@event.AddMethod.Signature.IsStatic)
+                            continue;
+                        if (
+                            (@event.RemoveMethod != null) && !@event.RemoveMethod.Signature.IsStatic
+                        )
                             continue;
                     }
 
-                    if ((bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic)) == BindingFlags.NonPublic)
+                    if (
+                        (bindingFlags & (BindingFlags.Instance | BindingFlags.Static))
+                        == BindingFlags.Instance
+                    )
                     {
-                        if ((@event.AddMethod != null) && @event.AddMethod.IsPublic()) continue;
-                        if ((@event.RemoveMethod != null) && @event.RemoveMethod.IsPublic()) continue;
+                        if ((@event.AddMethod != null) && @event.AddMethod.Signature.IsStatic)
+                            continue;
+                        if ((@event.RemoveMethod != null) && @event.RemoveMethod.Signature.IsStatic)
+                            continue;
+                    }
+
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                        == BindingFlags.Public
+                    )
+                    {
+                        if (
+                            (@event.AddMethod == null || !@event.AddMethod.IsPublic())
+                            && (@event.RemoveMethod == null || !@event.RemoveMethod.IsPublic())
+                        )
+                            continue;
+                    }
+
+                    if (
+                        (bindingFlags & (BindingFlags.Public | BindingFlags.NonPublic))
+                        == BindingFlags.NonPublic
+                    )
+                    {
+                        if ((@event.AddMethod != null) && @event.AddMethod.IsPublic())
+                            continue;
+                        if ((@event.RemoveMethod != null) && @event.RemoveMethod.IsPublic())
+                            continue;
                     }
 
                     yield return @event;
@@ -413,7 +612,10 @@ namespace ILCompiler.Dataflow
 
         // declaredOnly will cause this to retrieve interfaces recursively required by the type, but doesn't necessarily
         // include interfaces required by any base types.
-        public static IEnumerable<DefType> GetAllInterfaceImplementations(this TypeDesc type, bool declaredOnly)
+        public static IEnumerable<DefType> GetAllInterfaceImplementations(
+            this TypeDesc type,
+            bool declaredOnly
+        )
         {
             while (type != null)
             {
@@ -422,7 +624,11 @@ namespace ILCompiler.Dataflow
                     yield return i;
 
                     // declaredOnly here doesn't matter since interfaces don't have base types
-                    foreach (DefType innerInterface in i.GetAllInterfaceImplementations(declaredOnly: true))
+                    foreach (
+                        DefType innerInterface in i.GetAllInterfaceImplementations(
+                            declaredOnly: true
+                        )
+                    )
                         yield return innerInterface;
                 }
 
@@ -435,9 +641,18 @@ namespace ILCompiler.Dataflow
 
         // declaredOnly will cause this to retrieve only members of the type, not of its base types. This includes interfaces recursively
         // required by this type (but not members of these interfaces, or interfaces required only by base types).
-        public static void GetAllOnType(this TypeDesc type, bool declaredOnly, List<TypeSystemEntity> members) => GetAllOnType(type, declaredOnly, members, new HashSet<TypeDesc>());
+        public static void GetAllOnType(
+            this TypeDesc type,
+            bool declaredOnly,
+            List<TypeSystemEntity> members
+        ) => GetAllOnType(type, declaredOnly, members, new HashSet<TypeDesc>());
 
-        private static void GetAllOnType(TypeDesc type, bool declaredOnly, List<TypeSystemEntity> members, HashSet<TypeDesc> types)
+        private static void GetAllOnType(
+            TypeDesc type,
+            bool declaredOnly,
+            List<TypeSystemEntity> members,
+            HashSet<TypeDesc> types
+        )
         {
             if (!types.Add(type))
                 return;
@@ -479,10 +694,20 @@ namespace ILCompiler.Dataflow
             foreach (var m in type.GetMethods())
                 members.Add(m);
 
-            foreach (var p in type.GetPropertiesOnTypeHierarchy(filter: null, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly))
+            foreach (
+                var p in type.GetPropertiesOnTypeHierarchy(
+                    filter: null,
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly
+                )
+            )
                 members.Add(p);
 
-            foreach (var e in type.GetEventsOnTypeHierarchy(filter: null, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly))
+            foreach (
+                var e in type.GetEventsOnTypeHierarchy(
+                    filter: null,
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly
+                )
+            )
                 members.Add(e);
         }
 
@@ -506,9 +731,7 @@ namespace ILCompiler.Dataflow
                 {
                     return mdType.ExplicitlyImplementedInterfaces;
                 }
-                catch (TypeSystemException)
-                {
-                }
+                catch (TypeSystemException) { }
             }
             return Array.Empty<DefType>();
         }

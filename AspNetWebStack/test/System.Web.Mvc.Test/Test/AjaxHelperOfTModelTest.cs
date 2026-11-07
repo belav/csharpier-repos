@@ -17,7 +17,10 @@ namespace System.Web.Mvc.Test
             viewDataContainer.Setup(container => container.ViewData).Returns(viewDataDictionary);
 
             // Act
-            AjaxHelper<object> ajaxHelper = new AjaxHelper<object>(new Mock<ViewContext>().Object, viewDataContainer.Object);
+            AjaxHelper<object> ajaxHelper = new AjaxHelper<object>(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object
+            );
             ajaxHelper.ViewData["B"] = 2;
             ajaxHelper.ViewBag.C = 3;
 

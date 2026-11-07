@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         /// </summary>
         /// <param name="sourceText">The <see cref="SourceText"/> for which undo transaction is being registered.</param>
         /// <param name="description">The display string by which the IDE's undo stack UI will subsequently refer to the transaction.</param>
-        ISourceTextUndoTransaction RegisterUndoTransaction(SourceText sourceText, string description);
+        ISourceTextUndoTransaction RegisterUndoTransaction(
+            SourceText sourceText,
+            string description
+        );
 
         /// <summary>
         /// Starts previously registered undo transaction for the supplied <see cref="ITextSnapshot"/> (if any).

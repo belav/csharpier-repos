@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Roslyn.Utilities;
-using System;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression instanceArgument,
             string name,
             ImmutableArray<Symbol> symbols,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             FromClauseSyntax fromClause = null;
             for (SyntaxNode node = queryClause; ; node = node.Parent)
@@ -40,71 +41,129 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(diagnostics);
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
+                diagnostics
+            );
 
             if (instanceArgument.Type.IsDynamic())
             {
                 // CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
                 diagnostics.Add(
-                    new DiagnosticInfoWithSymbols(ErrorCode.ERR_BadDynamicQuery, Array.Empty<object>(), symbols),
-                    new SourceLocation(queryClause));
+                    new DiagnosticInfoWithSymbols(
+                        ErrorCode.ERR_BadDynamicQuery,
+                        Array.Empty<object>(),
+                        symbols
+                    ),
+                    new SourceLocation(queryClause)
+                );
             }
             else if (ImplementsStandardQueryInterface(instanceArgument.Type, name, ref useSiteInfo))
             {
                 // Could not find an implementation of the query pattern for source type '{0}'.  '{1}' not found.  Are you missing required assembly references or a using directive for 'System.Linq'?
-                diagnostics.Add(new DiagnosticInfoWithSymbols(
-                    ErrorCode.ERR_QueryNoProviderStandard,
-                    new object[] { instanceArgument.Type, name },
-                    symbols), new SourceLocation(fromClause != null ? fromClause.Expression : queryClause));
+                diagnostics.Add(
+                    new DiagnosticInfoWithSymbols(
+                        ErrorCode.ERR_QueryNoProviderStandard,
+                        new object[] { instanceArgument.Type, name },
+                        symbols
+                    ),
+                    new SourceLocation(fromClause != null ? fromClause.Expression : queryClause)
+                );
             }
-            else if (fromClause != null && fromClause.Type == null && HasCastToQueryProvider(instanceArgument.Type, ref useSiteInfo))
+            else if (
+                fromClause != null
+                && fromClause.Type == null
+                && HasCastToQueryProvider(instanceArgument.Type, ref useSiteInfo)
+            )
             {
                 // Could not find an implementation of the query pattern for source type '{0}'.  '{1}' not found.  Consider explicitly specifying the type of the range variable '{2}'.
-                diagnostics.Add(new DiagnosticInfoWithSymbols(
-                    ErrorCode.ERR_QueryNoProviderCastable,
-                    new object[] { instanceArgument.Type, name, fromClause.Identifier.ValueText },
-                    symbols), new SourceLocation(fromClause.Expression));
+                diagnostics.Add(
+                    new DiagnosticInfoWithSymbols(
+                        ErrorCode.ERR_QueryNoProviderCastable,
+                        new object[]
+                        {
+                            instanceArgument.Type,
+                            name,
+                            fromClause.Identifier.ValueText,
+                        },
+                        symbols
+                    ),
+                    new SourceLocation(fromClause.Expression)
+                );
             }
             else
             {
                 // Could not find an implementation of the query pattern for source type '{0}'.  '{1}' not found.
-                diagnostics.Add(new DiagnosticInfoWithSymbols(
-                    ErrorCode.ERR_QueryNoProvider,
-                    new object[] { instanceArgument.Type, name },
-                    symbols), new SourceLocation(fromClause != null ? fromClause.Expression : queryClause));
+                diagnostics.Add(
+                    new DiagnosticInfoWithSymbols(
+                        ErrorCode.ERR_QueryNoProvider,
+                        new object[] { instanceArgument.Type, name },
+                        symbols
+                    ),
+                    new SourceLocation(fromClause != null ? fromClause.Expression : queryClause)
+                );
             }
 
             diagnostics.Add(queryClause, useSiteInfo);
         }
 
-        private bool ImplementsStandardQueryInterface(TypeSymbol instanceType, string name, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool ImplementsStandardQueryInterface(
+            TypeSymbol instanceType,
+            string name,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            if (instanceType.TypeKind == TypeKind.Array || name == "Cast" && HasCastToQueryProvider(instanceType, ref useSiteInfo))
+            if (
+                instanceType.TypeKind == TypeKind.Array
+                || name == "Cast" && HasCastToQueryProvider(instanceType, ref useSiteInfo)
+            )
             {
                 return true;
             }
 
             bool nonUnique = false;
             var originalType = instanceType.OriginalDefinition;
-            var ienumerable_t = Compilation.GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
+            var ienumerable_t = Compilation.GetSpecialType(
+                SpecialType.System_Collections_Generic_IEnumerable_T
+            );
             var iqueryable_t = Compilation.GetWellKnownType(WellKnownType.System_Linq_IQueryable_T);
-            bool isIenumerable = TypeSymbol.Equals(originalType, ienumerable_t, TypeCompareKind.ConsiderEverything2) || HasUniqueInterface(instanceType, ienumerable_t, ref nonUnique, ref useSiteInfo);
-            bool isQueryable = TypeSymbol.Equals(originalType, iqueryable_t, TypeCompareKind.ConsiderEverything2) || HasUniqueInterface(instanceType, iqueryable_t, ref nonUnique, ref useSiteInfo);
+            bool isIenumerable =
+                TypeSymbol.Equals(originalType, ienumerable_t, TypeCompareKind.ConsiderEverything2)
+                || HasUniqueInterface(instanceType, ienumerable_t, ref nonUnique, ref useSiteInfo);
+            bool isQueryable =
+                TypeSymbol.Equals(originalType, iqueryable_t, TypeCompareKind.ConsiderEverything2)
+                || HasUniqueInterface(instanceType, iqueryable_t, ref nonUnique, ref useSiteInfo);
             return isIenumerable != isQueryable && !nonUnique;
         }
 
-        private static bool HasUniqueInterface(TypeSymbol instanceType, NamedTypeSymbol interfaceType, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private static bool HasUniqueInterface(
+            TypeSymbol instanceType,
+            NamedTypeSymbol interfaceType,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             bool nonUnique = false;
             return HasUniqueInterface(instanceType, interfaceType, ref nonUnique, ref useSiteInfo);
         }
 
-        private static bool HasUniqueInterface(TypeSymbol instanceType, NamedTypeSymbol interfaceType, ref bool nonUnique, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private static bool HasUniqueInterface(
+            TypeSymbol instanceType,
+            NamedTypeSymbol interfaceType,
+            ref bool nonUnique,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             TypeSymbol candidate = null;
-            foreach (var i in instanceType.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo))
+            foreach (
+                var i in instanceType.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
+            )
             {
-                if (TypeSymbol.Equals(i.OriginalDefinition, interfaceType, TypeCompareKind.ConsiderEverything2))
+                if (
+                    TypeSymbol.Equals(
+                        i.OriginalDefinition,
+                        interfaceType,
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                )
                 {
                     if ((object)candidate == null)
                     {
@@ -121,13 +180,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             return (object)candidate != null;
         }
 
-        private bool HasCastToQueryProvider(TypeSymbol instanceType, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool HasCastToQueryProvider(
+            TypeSymbol instanceType,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             var originalType = instanceType.OriginalDefinition;
-            var ienumerable = Compilation.GetSpecialType(SpecialType.System_Collections_IEnumerable);
+            var ienumerable = Compilation.GetSpecialType(
+                SpecialType.System_Collections_IEnumerable
+            );
             var iqueryable = Compilation.GetWellKnownType(WellKnownType.System_Linq_IQueryable);
-            bool isIenumerable = TypeSymbol.Equals(originalType, ienumerable, TypeCompareKind.ConsiderEverything2) || HasUniqueInterface(instanceType, ienumerable, ref useSiteInfo);
-            bool isQueryable = TypeSymbol.Equals(originalType, iqueryable, TypeCompareKind.ConsiderEverything2) || HasUniqueInterface(instanceType, iqueryable, ref useSiteInfo);
+            bool isIenumerable =
+                TypeSymbol.Equals(originalType, ienumerable, TypeCompareKind.ConsiderEverything2)
+                || HasUniqueInterface(instanceType, ienumerable, ref useSiteInfo);
+            bool isQueryable =
+                TypeSymbol.Equals(originalType, iqueryable, TypeCompareKind.ConsiderEverything2)
+                || HasUniqueInterface(instanceType, iqueryable, ref useSiteInfo);
             return isIenumerable != isQueryable;
         }
 
@@ -138,7 +206,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (parent.Kind() == SyntaxKind.JoinClause)
                 {
                     var join = (JoinClauseSyntax)parent;
-                    if (join.LeftExpression.Span.Contains(node.Span) && join.Identifier.ValueText == node.Identifier.ValueText) return true;
+                    if (
+                        join.LeftExpression.Span.Contains(node.Span)
+                        && join.Identifier.ValueText == node.Identifier.ValueText
+                    )
+                        return true;
                 }
             }
 
@@ -154,14 +226,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (parent.Kind() == SyntaxKind.JoinClause)
                 {
                     var join = (JoinClauseSyntax)parent;
-                    if (join.RightExpression.Span.Contains(node.Span)) return true;
+                    if (join.RightExpression.Span.Contains(node.Span))
+                        return true;
                 }
             }
 
             return false;
         }
 
-        internal static void ReportQueryInferenceFailed(CSharpSyntaxNode queryClause, string methodName, BoundExpression receiver, AnalyzedArguments arguments, ImmutableArray<Symbol> symbols, BindingDiagnosticBag diagnostics)
+        internal static void ReportQueryInferenceFailed(
+            CSharpSyntaxNode queryClause,
+            string methodName,
+            BoundExpression receiver,
+            AnalyzedArguments arguments,
+            ImmutableArray<Symbol> symbols,
+            BindingDiagnosticBag diagnostics
+        )
         {
             string clauseKind = null;
             bool multiple = false;
@@ -190,11 +270,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                     clauseKind = SyntaxFacts.GetText(SyntaxKind.IntoKeyword);
                     break;
                 case SyntaxKind.GroupClause:
-                    clauseKind = SyntaxFacts.GetText(SyntaxKind.GroupKeyword) + " " + SyntaxFacts.GetText(SyntaxKind.ByKeyword);
+                    clauseKind =
+                        SyntaxFacts.GetText(SyntaxKind.GroupKeyword)
+                        + " "
+                        + SyntaxFacts.GetText(SyntaxKind.ByKeyword);
                     multiple = true;
                     break;
                 case SyntaxKind.FromClause:
-                    if (ReportQueryInferenceFailedSelectMany((FromClauseSyntax)queryClause, methodName, receiver, arguments, symbols, diagnostics))
+                    if (
+                        ReportQueryInferenceFailedSelectMany(
+                            (FromClauseSyntax)queryClause,
+                            methodName,
+                            receiver,
+                            arguments,
+                            symbols,
+                            diagnostics
+                        )
+                    )
                     {
                         return;
                     }
@@ -204,13 +296,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                     throw ExceptionUtilities.UnexpectedValue(queryClause.Kind());
             }
 
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                multiple ? ErrorCode.ERR_QueryTypeInferenceFailedMulti : ErrorCode.ERR_QueryTypeInferenceFailed,
-                new object[] { clauseKind, methodName },
-                symbols), queryClause.GetFirstToken().GetLocation());
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    multiple
+                        ? ErrorCode.ERR_QueryTypeInferenceFailedMulti
+                        : ErrorCode.ERR_QueryTypeInferenceFailed,
+                    new object[] { clauseKind, methodName },
+                    symbols
+                ),
+                queryClause.GetFirstToken().GetLocation()
+            );
         }
 
-        private static bool ReportQueryInferenceFailedSelectMany(FromClauseSyntax fromClause, string methodName, BoundExpression receiver, AnalyzedArguments arguments, ImmutableArray<Symbol> symbols, BindingDiagnosticBag diagnostics)
+        private static bool ReportQueryInferenceFailedSelectMany(
+            FromClauseSyntax fromClause,
+            string methodName,
+            BoundExpression receiver,
+            AnalyzedArguments arguments,
+            ImmutableArray<Symbol> symbols,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(methodName == "SelectMany");
 
@@ -236,10 +341,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             TypeSymbol receiverType = receiver?.Type;
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                ErrorCode.ERR_QueryTypeInferenceFailedSelectMany,
-                new object[] { type, receiverType, methodName },
-                symbols), fromClause.Expression.Location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    ErrorCode.ERR_QueryTypeInferenceFailedSelectMany,
+                    new object[] { type, receiverType, methodName },
+                    symbols
+                ),
+                fromClause.Expression.Location
+            );
             return true;
         }
     }

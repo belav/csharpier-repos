@@ -24,8 +24,11 @@ namespace System.Web.Http
             Mock<IConnectionManager> mockConnectionManager = new Mock<IConnectionManager>();
             IHubContext context = new Mock<IHubContext>().Object;
             mockConnectionManager.Setup(mock => mock.GetHubContext("hub")).Returns(context);
-            Mock<System.Web.Http.Dependencies.IDependencyResolver> mockDependencyResolver = new Mock<Dependencies.IDependencyResolver>();
-            mockDependencyResolver.Setup(mock => mock.GetService(typeof(IConnectionManager))).Returns(mockConnectionManager.Object);
+            Mock<System.Web.Http.Dependencies.IDependencyResolver> mockDependencyResolver =
+                new Mock<Dependencies.IDependencyResolver>();
+            mockDependencyResolver
+                .Setup(mock => mock.GetService(typeof(IConnectionManager)))
+                .Returns(mockConnectionManager.Object);
             controller.Configuration.DependencyResolver = mockDependencyResolver.Object;
 
             Assert.Same(context, controller.GetHubContext());
@@ -33,16 +36,14 @@ namespace System.Web.Http
 
         public class NullHubNameController : HubController
         {
-            public NullHubNameController() : base(null)
-            {
-            }
+            public NullHubNameController()
+                : base(null) { }
         }
 
         public class DefaultContextController : HubController
         {
-            public DefaultContextController(string hubName) : base(hubName)
-            {
-            }
+            public DefaultContextController(string hubName)
+                : base(hubName) { }
 
             public IHubContext GetHubContext()
             {

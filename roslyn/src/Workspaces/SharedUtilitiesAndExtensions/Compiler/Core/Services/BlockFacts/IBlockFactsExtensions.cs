@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.LanguageService
         /// Gets the statement container node for the statement <paramref name="node"/>.
         /// </summary>
         /// <returns>The statement container for <paramref name="node"/>.</returns>
-        public static SyntaxNode? GetStatementContainer(this IBlockFacts blockFacts, SyntaxNode node)
+        public static SyntaxNode? GetStatementContainer(
+            this IBlockFacts blockFacts,
+            SyntaxNode node
+        )
         {
             for (var current = node; current is not null; current = current.Parent)
             {

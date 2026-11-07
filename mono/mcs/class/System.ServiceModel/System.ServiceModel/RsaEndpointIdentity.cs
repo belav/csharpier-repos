@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,28 +32,25 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-
 namespace System.ServiceModel
 {
-	public class RsaEndpointIdentity : EndpointIdentity
-	{
-		RSA rsa;
+    public class RsaEndpointIdentity : EndpointIdentity
+    {
+        RSA rsa;
 
-		public RsaEndpointIdentity (Claim identity)
-		{
-		}
+        public RsaEndpointIdentity(Claim identity) { }
 
-		[MonoTODO]
-		public RsaEndpointIdentity (string publicKey)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public RsaEndpointIdentity(string publicKey)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RsaEndpointIdentity (X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			rsa = (RSA) certificate.PublicKey.Key;
-		}
-	}
+        public RsaEndpointIdentity(X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            rsa = (RSA)certificate.PublicKey.Key;
+        }
+    }
 }

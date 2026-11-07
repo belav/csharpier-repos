@@ -17,7 +17,7 @@ namespace System.Data.Common.QueryCache
     using System.Diagnostics;
     using System.Globalization;
     using System.Text;
-        
+
     /// <summary>
     /// Represents EntityCommand Cache key context
     /// </summary>
@@ -60,15 +60,16 @@ namespace System.Data.Common.QueryCache
 
             // Statement
             _eSqlStatement = entityCommand.CommandText;
-            
+
             // Parameters
             _parametersToken = GetParametersToken(entityCommand);
             _parameterCount = entityCommand.Parameters.Count;
 
             // Hashcode
-            _hashCode = _commandType.GetHashCode() ^
-                        _eSqlStatement.GetHashCode() ^
-                        _parametersToken.GetHashCode();
+            _hashCode =
+                _commandType.GetHashCode()
+                ^ _eSqlStatement.GetHashCode()
+                ^ _parametersToken.GetHashCode();
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace System.Data.Common.QueryCache
         /// </summary>
         /// <param name="otherObject"></param>
         /// <returns></returns>
-        public override bool Equals( object otherObject )
+        public override bool Equals(object otherObject)
         {
             Debug.Assert(null != otherObject, "otherObject must not be null");
             if (typeof(EntityClientCacheKey) != otherObject.GetType())
@@ -86,10 +87,12 @@ namespace System.Data.Common.QueryCache
 
             EntityClientCacheKey otherEntityClientCacheKey = (EntityClientCacheKey)otherObject;
 
-            return (_commandType == otherEntityClientCacheKey._commandType &&
-                    _parameterCount == otherEntityClientCacheKey._parameterCount) &&
-                    Equals(otherEntityClientCacheKey._eSqlStatement, _eSqlStatement) &&
-                    Equals(otherEntityClientCacheKey._parametersToken, _parametersToken);
+            return (
+                    _commandType == otherEntityClientCacheKey._commandType
+                    && _parameterCount == otherEntityClientCacheKey._parameterCount
+                )
+                && Equals(otherEntityClientCacheKey._eSqlStatement, _eSqlStatement)
+                && Equals(otherEntityClientCacheKey._parametersToken, _parametersToken);
         }
 
         /// <summary>
@@ -127,7 +130,10 @@ namespace System.Data.Common.QueryCache
             {
                 // Xml is currently mapped to (unicode, variable-length) string, so the TypeUsage
                 // given to the provider is actually a String TypeUsage.
-                Debug.Assert(TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String), "Update GetTypeUsageToken to return 'Xml' for Xml parameters");
+                Debug.Assert(
+                    TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String),
+                    "Update GetTypeUsageToken to return 'Xml' for Xml parameters"
+                );
                 result = "String";
             }
             else if (TypeSemantics.IsEnumerationType(type))
@@ -139,8 +145,14 @@ namespace System.Data.Common.QueryCache
                 // String/Xml TypeUsages are the only DbType-derived TypeUsages that carry meaningful facets.
                 // Otherwise, the primitive type name is a sufficient token (note that full name is not required
                 // since model types always have the 'Edm' namespace).
-                Debug.Assert(TypeSemantics.IsPrimitiveType(type), "EntityParameter TypeUsage not a primitive type?");
-                Debug.Assert(!TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String), "String TypeUsage not derived from DbType.AnsiString, AnsiString, String, StringFixedLength or Xml?");
+                Debug.Assert(
+                    TypeSemantics.IsPrimitiveType(type),
+                    "EntityParameter TypeUsage not a primitive type?"
+                );
+                Debug.Assert(
+                    !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String),
+                    "String TypeUsage not derived from DbType.AnsiString, AnsiString, String, StringFixedLength or Xml?"
+                );
                 result = type.EdmType.Name;
             }
 
@@ -161,21 +173,30 @@ namespace System.Data.Common.QueryCache
                 //
                 return "@@0";
             }
-            
+
             // Ensure that parameter DbTypes are valid and there are no duplicate names
             Dictionary<string, TypeUsage> paramTypeUsage = entityCommand.GetParameterTypeUsage();
-            Debug.Assert(paramTypeUsage.Count == entityCommand.Parameters.Count, "entityParameter collection and query parameter collection must have the same number of entries");
+            Debug.Assert(
+                paramTypeUsage.Count == entityCommand.Parameters.Count,
+                "entityParameter collection and query parameter collection must have the same number of entries"
+            );
             if (1 == paramTypeUsage.Count)
             {
                 // if its one parameter only, there is no need to use stringbuilder
-                return "@@1:" +
-                    entityCommand.Parameters[0].ParameterName + ":" +
-                    GetTypeUsageToken(paramTypeUsage[entityCommand.Parameters[0].ParameterName]);
+                return "@@1:"
+                    + entityCommand.Parameters[0].ParameterName
+                    + ":"
+                    + GetTypeUsageToken(paramTypeUsage[entityCommand.Parameters[0].ParameterName]);
             }
             else
             {
-                StringBuilder sb = new StringBuilder(entityCommand.Parameters.Count * EstimatedParameterStringSize);
-                Debug.Assert(paramTypeUsage.Count == entityCommand.Parameters.Count, "entityParameter collection and query parameter collection must have the same number of entries");
+                StringBuilder sb = new StringBuilder(
+                    entityCommand.Parameters.Count * EstimatedParameterStringSize
+                );
+                Debug.Assert(
+                    paramTypeUsage.Count == entityCommand.Parameters.Count,
+                    "entityParameter collection and query parameter collection must have the same number of entries"
+                );
                 sb.Append("@@");
                 sb.Append(entityCommand.Parameters.Count);
                 sb.Append(":");
@@ -198,8 +219,15 @@ namespace System.Data.Common.QueryCache
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Join("|", new string[] { Enum.GetName(typeof(CommandType), _commandType), _eSqlStatement, _parametersToken });
+            return String.Join(
+                "|",
+                new string[]
+                {
+                    Enum.GetName(typeof(CommandType), _commandType),
+                    _eSqlStatement,
+                    _parametersToken,
+                }
+            );
         }
-
     }
 }

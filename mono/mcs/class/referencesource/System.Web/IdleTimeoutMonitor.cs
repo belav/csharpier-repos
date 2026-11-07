@@ -1,36 +1,47 @@
 //------------------------------------------------------------------------------
 // <copyright file="RequestTimeoutManager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Request timeout manager -- implements the request timeout mechanism
  */
-namespace System.Web {
-    using System.Threading;
+namespace System.Web
+{
     using System.Collections;
+    using System.Threading;
     using System.Web.Hosting;
     using System.Web.Util;
 
-    internal class IdleTimeoutMonitor {
-
-        private TimeSpan _idleTimeout;  // the timeout value
-        private DateTime _lastEvent;    // idle since this time
+    internal class IdleTimeoutMonitor
+    {
+        private TimeSpan _idleTimeout; // the timeout value
+        private DateTime _lastEvent; // idle since this time
         private Timer _timer;
         private readonly TimeSpan _timerPeriod = new TimeSpan(0, 0, 30); // 30 secs
 
-        internal IdleTimeoutMonitor(TimeSpan timeout) {
+        internal IdleTimeoutMonitor(TimeSpan timeout)
+        {
             _idleTimeout = timeout;
-            _timer = new Timer(new TimerCallback(this.TimerCompletionCallback), null, _timerPeriod, _timerPeriod);
+            _timer = new Timer(
+                new TimerCallback(this.TimerCompletionCallback),
+                null,
+                _timerPeriod,
+                _timerPeriod
+            );
             _lastEvent = DateTime.UtcNow;
         }
 
-        internal void Stop() {
+        internal void Stop()
+        {
             // stop the timer
-            if (_timer != null) {
-                lock (this) {
-                    if (_timer != null) {
+            if (_timer != null)
+            {
+                lock (this)
+                {
+                    if (_timer != null)
+                    {
                         ((IDisposable)_timer).Dispose();
                         _timer = null;
                     }
@@ -38,19 +49,28 @@ namespace System.Web {
             }
         }
 
-        internal DateTime LastEvent { // thread-safe property
-            get {
+        internal DateTime LastEvent
+        { // thread-safe property
+            get
+            {
                 DateTime t;
-                lock (this) { t = _lastEvent; }
+                lock (this)
+                {
+                    t = _lastEvent;
+                }
                 return t;
             }
-
-            set {
-                lock (this) { _lastEvent = value; }
+            set
+            {
+                lock (this)
+                {
+                    _lastEvent = value;
+                }
             }
         }
 
-        private void TimerCompletionCallback(Object state) {
+        private void TimerCompletionCallback(Object state)
+        {
             // user idle timer to trim the free list of app instanced
             HttpApplicationFactory.TrimApplicationInstances();
 
@@ -75,8 +95,10 @@ namespace System.Web {
                 return;
 
             // shutdown
-            HttpRuntime.SetShutdownReason(ApplicationShutdownReason.IdleTimeout, 
-                                          SR.GetString(SR.Hosting_Env_IdleTimeout));
+            HttpRuntime.SetShutdownReason(
+                ApplicationShutdownReason.IdleTimeout,
+                SR.GetString(SR.Hosting_Env_IdleTimeout)
+            );
             HostingEnvironment.InitiateShutdownWithoutDemand();
         }
     }

@@ -9,35 +9,42 @@ using System.Threading;
 
 namespace MonoTests.Features.Serialization
 {
-	[TestFixture]
-	public class AsyncCallTest : TestFixtureBase<AsyncCallTesterContractClient, AsyncCallTester, MonoTests.Features.Contracts.IAsyncCallTesterContract>
-	{
-		bool client_QueryCompleted;
-		string s = string.Empty;
+    [TestFixture]
+    public class AsyncCallTest
+        : TestFixtureBase<
+            AsyncCallTesterContractClient,
+            AsyncCallTester,
+            MonoTests.Features.Contracts.IAsyncCallTesterContract
+        >
+    {
+        bool client_QueryCompleted;
+        string s = string.Empty;
         AutoResetEvent ev;
         Exception err = null;
 
-        public AsyncCallTest()
-        {
-        }
-		[Test]
-		[Category ("NotWorking")]
-		public void TestAsyncCall ()
-		{
-            ev = new AutoResetEvent(false);
-			client_QueryCompleted = false;
+        public AsyncCallTest() { }
 
-			ClientProxy.QueryCompleted += new EventHandler<QueryCompletedEventArgs>(Client_QueryCompleted);
-			ClientProxy.QueryAsync ("heh");
+        [Test]
+        [Category("NotWorking")]
+        public void TestAsyncCall()
+        {
+            ev = new AutoResetEvent(false);
+            client_QueryCompleted = false;
+
+            ClientProxy.QueryCompleted += new EventHandler<QueryCompletedEventArgs>(
+                Client_QueryCompleted
+            );
+            ClientProxy.QueryAsync("heh");
             ev.WaitOne(2000, true);
             Assert.IsTrue(client_QueryCompleted, "async call completed");
             Assert.AreEqual("hehheh", s, "#1");
-            if (err != null) throw err;
-		}
+            if (err != null)
+                throw err;
+        }
 
-		private void Client_QueryCompleted (object sender, QueryCompletedEventArgs e)
-		{
-			client_QueryCompleted = true;
+        private void Client_QueryCompleted(object sender, QueryCompletedEventArgs e)
+        {
+            client_QueryCompleted = true;
             try
             {
                 s = e.Result;
@@ -46,8 +53,8 @@ namespace MonoTests.Features.Serialization
             {
                 err = _e;
             }
-            ev.Set();	
-		}
-	}
+            ev.Set();
+        }
+    }
 }
 #endif

@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------
 
 using System;
+
 namespace System.Data.Mapping
 {
     /// <summary>
@@ -39,4 +40,3 @@ namespace System.Data.Mapping
         #endregion
     }
 }
-

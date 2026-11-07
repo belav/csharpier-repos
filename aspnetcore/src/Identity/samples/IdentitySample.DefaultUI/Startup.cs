@@ -38,9 +38,8 @@ public class Startup
         services.AddDbContext<ApplicationDbContext>(options =>
             options
                 .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                .UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"),
-                    x => x.MigrationsAssembly("IdentitySample.DefaultUI")
+                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x =>
+                    x.MigrationsAssembly("IdentitySample.DefaultUI")
                 )
         );
 

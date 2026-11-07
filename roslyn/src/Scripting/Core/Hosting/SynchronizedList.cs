@@ -23,7 +23,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     return _list[index];
                 }
             }
-
             set
             {
                 lock (_guard)

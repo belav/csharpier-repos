@@ -106,7 +106,10 @@ namespace System.Buffers.Text.Tests
         }
 
         [Theory]
-        [MemberData(nameof(TestData.DateTimeOffsetFormatterTheoryData), MemberType = typeof(TestData))]
+        [MemberData(
+            nameof(TestData.DateTimeOffsetFormatterTheoryData),
+            MemberType = typeof(TestData)
+        )]
         public static void TestFormatterDateTimeOffset(FormatterTestData<DateTimeOffset> testData)
         {
             ValidateFormatter(testData);

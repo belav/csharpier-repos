@@ -30,7 +30,10 @@ namespace System.Activities.Hosting
         // temporary pointer to our parent manager between ctor and Initialize
         WorkflowInstanceExtensionManager extensionManager;
 
-        internal WorkflowInstanceExtensionCollection(Activity workflowDefinition, WorkflowInstanceExtensionManager extensionManager)
+        internal WorkflowInstanceExtensionCollection(
+            Activity workflowDefinition,
+            WorkflowInstanceExtensionManager extensionManager
+        )
         {
             this.extensionManager = extensionManager;
 
@@ -46,14 +49,21 @@ namespace System.Activities.Hosting
             }
             else
             {
-                this.allSingletonExtensions = WorkflowInstanceExtensionManager.EmptySingletonExtensions;
+                this.allSingletonExtensions =
+                    WorkflowInstanceExtensionManager.EmptySingletonExtensions;
             }
 
             // Resolve activity extensions
             Dictionary<Type, WorkflowInstanceExtensionProvider> activityExtensionProviders;
-            Dictionary<Type, WorkflowInstanceExtensionProvider> filteredActivityExtensionProviders = null;
+            Dictionary<Type, WorkflowInstanceExtensionProvider> filteredActivityExtensionProviders =
+                null;
             HashSet<Type> requiredActivityExtensionTypes;
-            if (workflowDefinition.GetActivityExtensionInformation(out activityExtensionProviders, out requiredActivityExtensionTypes))
+            if (
+                workflowDefinition.GetActivityExtensionInformation(
+                    out activityExtensionProviders,
+                    out requiredActivityExtensionTypes
+                )
+            )
             {
                 // a) filter out the extension Types that were already configured by the host. Note that only "primary" extensions are in play here, not
                 // "additional" extensions
@@ -65,25 +75,50 @@ namespace System.Activities.Hosting
 
                 if (activityExtensionProviders != null)
                 {
-                    filteredActivityExtensionProviders = new Dictionary<Type, WorkflowInstanceExtensionProvider>(activityExtensionProviders.Count);
-                    foreach (KeyValuePair<Type, WorkflowInstanceExtensionProvider> keyedActivityExtensionProvider in activityExtensionProviders)
+                    filteredActivityExtensionProviders = new Dictionary<
+                        Type,
+                        WorkflowInstanceExtensionProvider
+                    >(activityExtensionProviders.Count);
+                    foreach (
+                        KeyValuePair<
+                            Type,
+                            WorkflowInstanceExtensionProvider
+                        > keyedActivityExtensionProvider in activityExtensionProviders
+                    )
                     {
                         Type newExtensionProviderType = keyedActivityExtensionProvider.Key;
-                        if (!TypeHelper.ContainsCompatibleType(allExtensionTypes, newExtensionProviderType))
+                        if (
+                            !TypeHelper.ContainsCompatibleType(
+                                allExtensionTypes,
+                                newExtensionProviderType
+                            )
+                        )
                         {
                             // first see if the new provider supersedes any existing ones
                             List<Type> typesToRemove = null;
                             bool skipNewExtensionProvider = false;
-                            foreach (Type existingExtensionProviderType in filteredActivityExtensionProviders.Keys)
+                            foreach (
+                                Type existingExtensionProviderType in filteredActivityExtensionProviders.Keys
+                            )
                             {
                                 // Use AreReferenceTypesCompatible for performance since we know that all of these must be reference types
-                                if (TypeHelper.AreReferenceTypesCompatible(existingExtensionProviderType, newExtensionProviderType))
+                                if (
+                                    TypeHelper.AreReferenceTypesCompatible(
+                                        existingExtensionProviderType,
+                                        newExtensionProviderType
+                                    )
+                                )
                                 {
                                     skipNewExtensionProvider = true;
                                     break;
                                 }
 
-                                if (TypeHelper.AreReferenceTypesCompatible(newExtensionProviderType, existingExtensionProviderType))
+                                if (
+                                    TypeHelper.AreReferenceTypesCompatible(
+                                        newExtensionProviderType,
+                                        existingExtensionProviderType
+                                    )
+                                )
                                 {
                                     if (typesToRemove == null)
                                     {
@@ -105,7 +140,10 @@ namespace System.Activities.Hosting
                             // and add a new extension if necessary
                             if (!skipNewExtensionProvider)
                             {
-                                filteredActivityExtensionProviders.Add(newExtensionProviderType, keyedActivityExtensionProvider.Value);
+                                filteredActivityExtensionProviders.Add(
+                                    newExtensionProviderType,
+                                    keyedActivityExtensionProvider.Value
+                                );
                             }
                         }
                     }
@@ -117,13 +155,20 @@ namespace System.Activities.Hosting
                 }
 
                 // b) Validate that all required extensions will be provided
-                if (requiredActivityExtensionTypes != null && requiredActivityExtensionTypes.Count > 0)
+                if (
+                    requiredActivityExtensionTypes != null
+                    && requiredActivityExtensionTypes.Count > 0
+                )
                 {
                     foreach (Type requiredType in requiredActivityExtensionTypes)
                     {
                         if (!TypeHelper.ContainsCompatibleType(allExtensionTypes, requiredType))
                         {
-                            throw FxTrace.Exception.AsError(new ValidationException(SR.RequiredExtensionTypeNotFound(requiredType.ToString())));
+                            throw FxTrace.Exception.AsError(
+                                new ValidationException(
+                                    SR.RequiredExtensionTypeNotFound(requiredType.ToString())
+                                )
+                            );
                         }
                     }
                 }
@@ -132,21 +177,27 @@ namespace System.Activities.Hosting
             // Finally, if our checks of passed, resolve our delegates
             if (extensionProviderCount > 0)
             {
-                this.instanceExtensions = new List<KeyValuePair<WorkflowInstanceExtensionProvider, object>>(extensionProviderCount);
+                this.instanceExtensions = new List<
+                    KeyValuePair<WorkflowInstanceExtensionProvider, object>
+                >(extensionProviderCount);
 
                 if (extensionManager != null)
                 {
-                    List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>> extensionProviders = extensionManager.ExtensionProviders;
+                    List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>> extensionProviders =
+                        extensionManager.ExtensionProviders;
                     for (int i = 0; i < extensionProviders.Count; i++)
                     {
-                        KeyValuePair<Type, WorkflowInstanceExtensionProvider> extensionProvider = extensionProviders[i];
-                        AddInstanceExtension(extensionProvider.Value); 
+                        KeyValuePair<Type, WorkflowInstanceExtensionProvider> extensionProvider =
+                            extensionProviders[i];
+                        AddInstanceExtension(extensionProvider.Value);
                     }
                 }
 
                 if (filteredActivityExtensionProviders != null)
                 {
-                    foreach (WorkflowInstanceExtensionProvider extensionProvider in filteredActivityExtensionProviders.Values)
+                    foreach (
+                        WorkflowInstanceExtensionProvider extensionProvider in filteredActivityExtensionProviders.Values
+                    )
                     {
                         AddInstanceExtension(extensionProvider);
                     }
@@ -160,58 +211,71 @@ namespace System.Activities.Hosting
             object newExtension = extensionProvider.ProvideValue();
             if (newExtension is SymbolResolver)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SymbolResolverMustBeSingleton));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.SymbolResolverMustBeSingleton)
+                );
             }
 
             // for IWorkflowInstance we key off the type of the value, not the declared type
-            if (!this.shouldSetInstanceForInstanceExtensions && newExtension is IWorkflowInstanceExtension)
+            if (
+                !this.shouldSetInstanceForInstanceExtensions
+                && newExtension is IWorkflowInstanceExtension
+            )
             {
                 this.shouldSetInstanceForInstanceExtensions = true;
             }
-            if (!this.hasTrackingParticipant && extensionProvider.IsMatch<TrackingParticipant>(newExtension))
+            if (
+                !this.hasTrackingParticipant
+                && extensionProvider.IsMatch<TrackingParticipant>(newExtension)
+            )
             {
                 this.hasTrackingParticipant = true;
             }
-            if (!this.hasPersistenceModule && extensionProvider.IsMatch<IPersistencePipelineModule>(newExtension))
+            if (
+                !this.hasPersistenceModule
+                && extensionProvider.IsMatch<IPersistencePipelineModule>(newExtension)
+            )
             {
                 this.hasPersistenceModule = true;
             }
 
-            this.instanceExtensions.Add(new KeyValuePair<WorkflowInstanceExtensionProvider, object>(extensionProvider, newExtension));
+            this.instanceExtensions.Add(
+                new KeyValuePair<WorkflowInstanceExtensionProvider, object>(
+                    extensionProvider,
+                    newExtension
+                )
+            );
 
-            WorkflowInstanceExtensionManager.AddExtensionClosure(newExtension, ref this.additionalInstanceExtensions, ref this.hasTrackingParticipant, ref this.hasPersistenceModule);
+            WorkflowInstanceExtensionManager.AddExtensionClosure(
+                newExtension,
+                ref this.additionalInstanceExtensions,
+                ref this.hasTrackingParticipant,
+                ref this.hasPersistenceModule
+            );
         }
 
         internal bool HasPersistenceModule
         {
-            get
-            {
-                return this.hasPersistenceModule;
-            }
+            get { return this.hasPersistenceModule; }
         }
 
         internal bool HasTrackingParticipant
         {
-            get
-            {
-                return this.hasTrackingParticipant;
-            }
+            get { return this.hasTrackingParticipant; }
         }
 
         public bool HasWorkflowInstanceExtensions
         {
             get
             {
-                return this.workflowInstanceExtensions != null && this.workflowInstanceExtensions.Count > 0;
+                return this.workflowInstanceExtensions != null
+                    && this.workflowInstanceExtensions.Count > 0;
             }
         }
 
         public List<IWorkflowInstanceExtension> WorkflowInstanceExtensions
         {
-            get
-            {
-                return this.workflowInstanceExtensions;
-            }
+            get { return this.workflowInstanceExtensions; }
         }
 
         internal void Initialize()
@@ -235,15 +299,18 @@ namespace System.Activities.Hosting
             {
                 for (int i = 0; i < this.instanceExtensions.Count; i++)
                 {
-                    KeyValuePair<WorkflowInstanceExtensionProvider, object> keyedExtension = this.instanceExtensions[i];
+                    KeyValuePair<WorkflowInstanceExtensionProvider, object> keyedExtension =
+                        this.instanceExtensions[i];
                     // for IWorkflowInstance we key off the type of the value, not the declared type
-                    IWorkflowInstanceExtension workflowInstanceExtension = keyedExtension.Value as IWorkflowInstanceExtension;
+                    IWorkflowInstanceExtension workflowInstanceExtension =
+                        keyedExtension.Value as IWorkflowInstanceExtension;
 
                     if (workflowInstanceExtension != null)
                     {
                         if (this.workflowInstanceExtensions == null)
                         {
-                            this.workflowInstanceExtensions = new List<IWorkflowInstanceExtension>();
+                            this.workflowInstanceExtensions =
+                                new List<IWorkflowInstanceExtension>();
                         }
 
                         this.workflowInstanceExtensions.Add(workflowInstanceExtension);
@@ -302,7 +369,8 @@ namespace System.Activities.Hosting
                 {
                     for (int i = 0; i < this.instanceExtensions.Count; i++)
                     {
-                        KeyValuePair<WorkflowInstanceExtensionProvider, object> keyedExtension = this.instanceExtensions[i];
+                        KeyValuePair<WorkflowInstanceExtensionProvider, object> keyedExtension =
+                            this.instanceExtensions[i];
                         if (keyedExtension.Key.IsMatch<T>(keyedExtension.Value))
                         {
                             result = (T)keyedExtension.Value;
@@ -387,15 +455,19 @@ namespace System.Activities.Hosting
             }
         }
 
-        IEnumerable<T> GetInstanceExtensions<T>(bool useObjectTypeForComparison) where T : class
+        IEnumerable<T> GetInstanceExtensions<T>(bool useObjectTypeForComparison)
+            where T : class
         {
             if (this.instanceExtensions != null)
             {
                 for (int i = 0; i < this.instanceExtensions.Count; i++)
                 {
-                    KeyValuePair<WorkflowInstanceExtensionProvider, object> keyedExtension = this.instanceExtensions[i];
-                    if ((useObjectTypeForComparison && keyedExtension.Value is T)
-                        || keyedExtension.Key.IsMatch<T>(keyedExtension.Value))
+                    KeyValuePair<WorkflowInstanceExtensionProvider, object> keyedExtension =
+                        this.instanceExtensions[i];
+                    if (
+                        (useObjectTypeForComparison && keyedExtension.Value is T)
+                        || keyedExtension.Key.IsMatch<T>(keyedExtension.Value)
+                    )
                     {
                         yield return (T)keyedExtension.Value;
                     }

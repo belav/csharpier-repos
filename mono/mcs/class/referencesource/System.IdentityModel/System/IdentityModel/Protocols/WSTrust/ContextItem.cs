@@ -20,9 +20,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         /// <param name="name">Context item name.</param>
         public ContextItem(Uri name)
-            : this(name, null)
-        {
-        }
+            : this(name, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ContextItem"/>
@@ -30,9 +28,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="name">Context item name.</param>
         /// <param name="value">Context item value. Can be null.</param>
         public ContextItem(Uri name, string value)
-            : this(name, value, null)
-        {
-        }
+            : this(name, value, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ContextItem"/>
@@ -51,12 +47,18 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (!name.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("name", SR.GetString(SR.ID0013));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "name",
+                    SR.GetString(SR.ID0013)
+                );
             }
 
             if ((scope != null) && !scope.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("scope", SR.GetString(SR.ID0013));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "scope",
+                    SR.GetString(SR.ID0013)
+                );
             }
 
             _name = name;
@@ -83,7 +85,10 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if ((value != null) && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
                 _scope = value;
             }

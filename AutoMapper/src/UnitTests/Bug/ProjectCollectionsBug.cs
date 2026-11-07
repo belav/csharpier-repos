@@ -14,6 +14,7 @@
             {
                 BP2 = new HashSet<A>();
             }
+
             public int BP1 { get; set; }
             public ICollection<A> BP2 { get; set; }
         }
@@ -30,6 +31,7 @@
             {
                 BP2 = new HashSet<AEntity>();
             }
+
             public int BP1 { get; set; }
             public ICollection<AEntity> BP2 { get; set; }
         }

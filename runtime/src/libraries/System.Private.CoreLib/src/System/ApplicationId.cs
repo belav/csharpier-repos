@@ -10,7 +10,13 @@ namespace System
     {
         private readonly byte[] _publicKeyToken;
 
-        public ApplicationId(byte[] publicKeyToken, string name, Version version, string? processorArchitecture, string? culture)
+        public ApplicationId(
+            byte[] publicKeyToken,
+            string name,
+            Version version,
+            string? processorArchitecture,
+            string? culture
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
             ArgumentNullException.ThrowIfNull(version);
@@ -33,7 +39,8 @@ namespace System
 
         public byte[] PublicKeyToken => (byte[])_publicKeyToken.Clone();
 
-        public ApplicationId Copy() => new ApplicationId(_publicKeyToken, Name, Version, ProcessorArchitecture, Culture);
+        public ApplicationId Copy() =>
+            new ApplicationId(_publicKeyToken, Name, Version, ProcessorArchitecture, Culture);
 
         public override string ToString()
         {
@@ -54,7 +61,11 @@ namespace System
             if (_publicKeyToken != null)
             {
                 sb.Append(", publicKeyToken=\"");
-                HexConverter.EncodeToUtf16(_publicKeyToken, sb.AppendSpan(2 * _publicKeyToken.Length), HexConverter.Casing.Upper);
+                HexConverter.EncodeToUtf16(
+                    _publicKeyToken,
+                    sb.AppendSpan(2 * _publicKeyToken.Length),
+                    HexConverter.Casing.Upper
+                );
                 sb.Append('"');
             }
 
@@ -69,12 +80,12 @@ namespace System
         }
 
         public override bool Equals([NotNullWhen(true)] object? o) =>
-            o is ApplicationId other &&
-            Equals(Name, other.Name) &&
-            Equals(Version, other.Version) &&
-            Equals(ProcessorArchitecture, other.ProcessorArchitecture) &&
-            Equals(Culture, other.Culture) &&
-            _publicKeyToken.AsSpan().SequenceEqual(other._publicKeyToken);
+            o is ApplicationId other
+            && Equals(Name, other.Name)
+            && Equals(Version, other.Version)
+            && Equals(ProcessorArchitecture, other.ProcessorArchitecture)
+            && Equals(Culture, other.Culture)
+            && _publicKeyToken.AsSpan().SequenceEqual(other._publicKeyToken);
 
         public override int GetHashCode() =>
             // Note: purposely skipping publicKeyToken, processor architecture and culture as they

@@ -4,20 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.Web;
     using System.Web.UI;
 
-    [
-    Bindable(false),
-    ControlBuilderAttribute(typeof(WizardStepControlBuilder)),
-    ToolboxItem(false)
-    ]
-
-    public sealed class WizardStep : WizardStepBase {
-    }
+    [Bindable(false), ControlBuilderAttribute(typeof(WizardStepControlBuilder)), ToolboxItem(false)]
+    public sealed class WizardStep : WizardStepBase { }
 }

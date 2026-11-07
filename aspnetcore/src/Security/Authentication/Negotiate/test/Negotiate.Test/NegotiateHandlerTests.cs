@@ -26,8 +26,8 @@ public class NegotiateHandlerTests
         using var host = await CreateHostAsync();
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => SendAsync(server, "/Anonymous1", connection: null)
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            SendAsync(server, "/Anonymous1", connection: null)
         );
         Assert.Equal(
             "Negotiate authentication requires a server that supports IConnectionItemsFeature like Kestrel.",
@@ -101,8 +101,8 @@ public class NegotiateHandlerTests
         var testConnection = new TestConnection();
         await NtlmStage1Auth(server, testConnection);
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => SendAsync(server, "/404", testConnection)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            SendAsync(server, "/404", testConnection)
         );
         Assert.Equal(
             "An anonymous request was received in between authentication handshake requests.",
@@ -116,8 +116,8 @@ public class NegotiateHandlerTests
         using var host = await CreateHostAsync();
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<TrueException>(
-            () => SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob2")
+        var ex = await Assert.ThrowsAsync<TrueException>(() =>
+            SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob2")
         );
         Assert.Equal("Stage1Complete", ex.UserMessage);
     }
@@ -358,8 +358,8 @@ public class NegotiateHandlerTests
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
 
-        var ex = await Assert.ThrowsAsync<Exception>(
-            () => SendAsync(server, "/404", testConnection, "Negotiate OtherError")
+        var ex = await Assert.ThrowsAsync<Exception>(() =>
+            SendAsync(server, "/404", testConnection, "Negotiate OtherError")
         );
         Assert.Equal("A test other error occurred", ex.Message);
     }
@@ -481,105 +481,79 @@ public class NegotiateHandlerTests
 
     private static void ConfigureEndpoints(IEndpointRouteBuilder builder)
     {
-        builder.Map(
-            "/Anonymous1",
-            context =>
+        builder.Map("/Anonymous1", context =>
+        {
+            Assert.Equal("HTTP/1.1", context.Request.Protocol);
+            Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
+            return Task.CompletedTask;
+        });
+
+        builder.Map("/Anonymous2", context =>
+        {
+            Assert.Equal("HTTP/2", context.Request.Protocol);
+            Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
+            return Task.CompletedTask;
+        });
+
+        builder.Map("/Authenticate", async context =>
+        {
+            if (!context.User.Identity.IsAuthenticated)
             {
-                Assert.Equal("HTTP/1.1", context.Request.Protocol);
-                Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
-                return Task.CompletedTask;
-            }
-        );
-
-        builder.Map(
-            "/Anonymous2",
-            context =>
-            {
-                Assert.Equal("HTTP/2", context.Request.Protocol);
-                Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
-                return Task.CompletedTask;
-            }
-        );
-
-        builder.Map(
-            "/Authenticate",
-            async context =>
-            {
-                if (!context.User.Identity.IsAuthenticated)
-                {
-                    await context.ChallengeAsync();
-                    return;
-                }
-
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                await context.Response.WriteAsync(name);
-            }
-        );
-
-        builder.Map(
-            "/AuthenticateAndRetrieveRBACClaims",
-            async context =>
-            {
-                if (!context.User.Identity.IsAuthenticated)
-                {
-                    await context.ChallengeAsync();
-                    return;
-                }
-
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                Assert.Contains(
-                    context.User.Claims,
-                    claim =>
-                        claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-                        && claim.Value == "CN=Domain Admins,CN=Users,DC=domain,DC=net"
-                );
-                await context.Response.WriteAsync(name);
-            }
-        );
-
-        builder.Map(
-            "/AlreadyAuthenticated",
-            async context =>
-            {
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                Assert.True(context.User.Identity.IsAuthenticated, "Authenticated");
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                await context.Response.WriteAsync(name);
-            }
-        );
-
-        builder.Map(
-            "/Unauthorized",
-            async context =>
-            {
-                // Simulate Authorization failure
-                var result = await context.AuthenticateAsync();
                 await context.ChallengeAsync();
+                return;
             }
-        );
 
-        builder.Map(
-            "/SignIn",
-            context =>
-            {
-                return Assert.ThrowsAsync<InvalidOperationException>(
-                    () => context.SignInAsync(new ClaimsPrincipal())
-                );
-            }
-        );
+            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+            var name = context.User.Identity.Name;
+            Assert.False(string.IsNullOrEmpty(name), "name");
+            await context.Response.WriteAsync(name);
+        });
 
-        builder.Map(
-            "/signOut",
-            context =>
+        builder.Map("/AuthenticateAndRetrieveRBACClaims", async context =>
+        {
+            if (!context.User.Identity.IsAuthenticated)
             {
-                return Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync());
+                await context.ChallengeAsync();
+                return;
             }
-        );
+
+            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+            var name = context.User.Identity.Name;
+            Assert.False(string.IsNullOrEmpty(name), "name");
+            Assert.Contains(context.User.Claims, claim =>
+                claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                && claim.Value == "CN=Domain Admins,CN=Users,DC=domain,DC=net"
+            );
+            await context.Response.WriteAsync(name);
+        });
+
+        builder.Map("/AlreadyAuthenticated", async context =>
+        {
+            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+            Assert.True(context.User.Identity.IsAuthenticated, "Authenticated");
+            var name = context.User.Identity.Name;
+            Assert.False(string.IsNullOrEmpty(name), "name");
+            await context.Response.WriteAsync(name);
+        });
+
+        builder.Map("/Unauthorized", async context =>
+        {
+            // Simulate Authorization failure
+            var result = await context.AuthenticateAsync();
+            await context.ChallengeAsync();
+        });
+
+        builder.Map("/SignIn", context =>
+        {
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.SignInAsync(new ClaimsPrincipal())
+            );
+        });
+
+        builder.Map("/signOut", context =>
+        {
+            return Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync());
+        });
     }
 
     private static Task<HttpContext> SendAsync(

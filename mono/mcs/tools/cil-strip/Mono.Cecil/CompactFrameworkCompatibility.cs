@@ -26,43 +26,34 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if CF_1_0
-namespace System {
+namespace System
+{
+    internal class NotImplementedException : System.Exception
+    {
+        public NotImplementedException(string message)
+            : base(message) { }
 
-	internal class NotImplementedException : System.Exception {
-
-		public NotImplementedException (string message) : base (message)
-		{
-		}
-
-		public NotImplementedException ()
-		{
-		}
-	}
+        public NotImplementedException() { }
+    }
 }
 #endif
 
 #if CF_1_0 || CF_2_0
-namespace System.Security {
+namespace System.Security
+{
+    internal class SecurityElement
+    {
+        public SecurityElement(string tag) { }
 
-	internal class SecurityElement 	{
+        public string Text
+        {
+            get { return string.Empty; }
+            set { }
+        }
 
-		public SecurityElement (string tag)
-		{
-		}
+        public void AddChild(SecurityElement child) { }
 
-		public string Text
-		{
-			get { return string.Empty; }
-			set {}
-		}
-
-		public void AddChild (SecurityElement child)
-		{
-		}
-
-		public void AddAttribute (string name, string value)
-		{
-		}
-	}
+        public void AddAttribute(string name, string value) { }
+    }
 }
 #endif

@@ -16,10 +16,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
 {
     [Trait(Traits.Feature, Traits.Features.SignatureHelp)]
-    public class InitializerExpressionSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+    public class InitializerExpressionSignatureHelpProviderTests
+        : AbstractCSharpSignatureHelpProviderTests
     {
-        internal override Type GetSignatureHelpProviderType()
-            => typeof(InitializerExpressionSignatureHelpProvider);
+        internal override Type GetSignatureHelpProviderType() =>
+            typeof(InitializerExpressionSignatureHelpProvider);
 
         [Fact]
         public async Task WithSingleParamAddMethods()
@@ -37,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void List<int>.Add(int item)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("void List<int>.Add(int item)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -58,7 +61,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -79,7 +87,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -105,7 +118,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -129,7 +147,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -155,9 +178,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Bar.Add(int i)", currentParameterIndex: 0));
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Bar.Add(int i, string s)", currentParameterIndex: 0, isSelected: true));
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Bar.Add(int i, string s, bool b)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("void Bar.Add(int i)", currentParameterIndex: 0)
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Bar.Add(int i, string s)",
+                    currentParameterIndex: 0,
+                    isSelected: true
+                )
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Bar.Add(int i, string s, bool b)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -212,9 +248,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void Bar.Add(int i)", currentParameterIndex: 0));
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s)", currentParameterIndex: 0, isSelected: true));
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s, bool b)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void Bar.Add(int i)",
+                    currentParameterIndex: 0
+                )
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s)",
+                    currentParameterIndex: 0,
+                    isSelected: true
+                )
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s, bool b)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, sourceCodeKind: SourceCodeKind.Regular);
         }

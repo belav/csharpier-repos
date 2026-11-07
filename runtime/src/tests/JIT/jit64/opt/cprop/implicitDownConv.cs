@@ -8,6 +8,7 @@ using Xunit;
 public class Program
 {
     private static int s_result = 100;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -29,4 +30,3 @@ public class Program
         Console.WriteLine("j == " + j);
     }
 }
-

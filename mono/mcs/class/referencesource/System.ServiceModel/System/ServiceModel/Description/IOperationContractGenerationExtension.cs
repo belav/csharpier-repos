@@ -11,5 +11,4 @@ namespace System.ServiceModel.Description
     {
         void GenerateOperation(OperationContractGenerationContext context);
     }
-
 }

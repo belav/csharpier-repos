@@ -10,7 +10,12 @@ namespace System.Tests.Types
 {
     public partial class FunctionPointerCallingConventionTests
     {
-        private const BindingFlags Bindings = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+        private const BindingFlags Bindings =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.DeclaredOnly;
 
         [Theory]
         [InlineData(true)]
@@ -18,8 +23,13 @@ namespace System.Tests.Types
         public static unsafe void ManagedCallingConvention(bool modified)
         {
             Type t = typeof(FunctionPointerHolder).Project();
-            MethodInfo m = t.GetMethod(nameof(FunctionPointerHolder.MethodCallConv_Managed), Bindings);
-            Type fnPtrType = modified ? m.GetParameters()[0].ParameterType : m.GetParameters()[0].GetModifiedParameterType();
+            MethodInfo m = t.GetMethod(
+                nameof(FunctionPointerHolder.MethodCallConv_Managed),
+                Bindings
+            );
+            Type fnPtrType = modified
+                ? m.GetParameters()[0].ParameterType
+                : m.GetParameters()[0].GetModifiedParameterType();
 
             Type[] callConvs = fnPtrType.GetFunctionPointerCallingConventions();
             Assert.Equal(0, callConvs.Length);
@@ -42,17 +52,32 @@ namespace System.Tests.Types
 
             Type fnPtrType = m.GetParameters()[0].ParameterType;
             Assert.True(fnPtrType.IsUnmanagedFunctionPointer);
-            Assert.Equal(0, fnPtrType.GetFunctionPointerReturnType().GetOptionalCustomModifiers().Length);
-            Assert.Equal(0, fnPtrType.GetFunctionPointerReturnType().GetRequiredCustomModifiers().Length);
+            Assert.Equal(
+                0,
+                fnPtrType.GetFunctionPointerReturnType().GetOptionalCustomModifiers().Length
+            );
+            Assert.Equal(
+                0,
+                fnPtrType.GetFunctionPointerReturnType().GetRequiredCustomModifiers().Length
+            );
             Assert.Equal(0, fnPtrType.GetFunctionPointerCallingConventions().Length);
         }
 
         [Theory]
         [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Cdecl), typeof(CallConvCdecl))]
         [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Stdcall), typeof(CallConvStdcall))]
-        [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Thiscall), typeof(CallConvThiscall))]
-        [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Fastcall), typeof(CallConvFastcall))]
-        public static unsafe void UnmanagedCallConv_Param_Modified(string methodName, Type callingConventionRuntime)
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodCallConv_Thiscall),
+            typeof(CallConvThiscall)
+        )]
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodCallConv_Fastcall),
+            typeof(CallConvFastcall)
+        )]
+        public static unsafe void UnmanagedCallConv_Param_Modified(
+            string methodName,
+            Type callingConventionRuntime
+        )
         {
             Type callingConvention = callingConventionRuntime.Project();
             Type t = typeof(FunctionPointerHolder).Project();
@@ -60,8 +85,14 @@ namespace System.Tests.Types
 
             Type fnPtrType = m.GetParameters()[0].GetModifiedParameterType();
             Assert.True(fnPtrType.IsUnmanagedFunctionPointer);
-            Assert.Equal(0, fnPtrType.GetFunctionPointerReturnType().GetOptionalCustomModifiers().Length);
-            Assert.Equal(0, fnPtrType.GetFunctionPointerReturnType().GetRequiredCustomModifiers().Length);
+            Assert.Equal(
+                0,
+                fnPtrType.GetFunctionPointerReturnType().GetOptionalCustomModifiers().Length
+            );
+            Assert.Equal(
+                0,
+                fnPtrType.GetFunctionPointerReturnType().GetRequiredCustomModifiers().Length
+            );
             Type[] callConvs = fnPtrType.GetFunctionPointerCallingConventions();
             Assert.Equal(1, callConvs.Length);
             Assert.Equal(callingConvention, callConvs[0]);
@@ -73,11 +104,21 @@ namespace System.Tests.Types
         {
             Type t = typeof(FunctionPointerHolder).Project();
 
-            MethodInfo m1 = t.GetMethod(nameof(FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions1), Bindings);
+            MethodInfo m1 = t.GetMethod(
+                nameof(
+                    FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions1
+                ),
+                Bindings
+            );
             Type fcnPtr1 = m1.ReturnType;
             Assert.True(fcnPtr1.IsUnmanagedFunctionPointer);
 
-            MethodInfo m2 = t.GetMethod(nameof(FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions2), Bindings);
+            MethodInfo m2 = t.GetMethod(
+                nameof(
+                    FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions2
+                ),
+                Bindings
+            );
             Type fcnPtr2 = m2.ReturnType;
             Assert.True(fcnPtr2.IsUnmanagedFunctionPointer);
 
@@ -92,11 +133,21 @@ namespace System.Tests.Types
         {
             Type t = typeof(FunctionPointerHolder).Project();
 
-            MethodInfo m1 = t.GetMethod(nameof(FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions1), Bindings);
+            MethodInfo m1 = t.GetMethod(
+                nameof(
+                    FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions1
+                ),
+                Bindings
+            );
             Type fcnPtr1 = m1.ReturnParameter.GetModifiedParameterType();
             Assert.True(fcnPtr1.IsUnmanagedFunctionPointer);
 
-            MethodInfo m2 = t.GetMethod(nameof(FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions2), Bindings);
+            MethodInfo m2 = t.GetMethod(
+                nameof(
+                    FunctionPointerHolder.MethodUnmanagedReturnValue_DifferentCallingConventions2
+                ),
+                Bindings
+            );
             Type fcnPtr2 = m2.ReturnParameter.GetModifiedParameterType();
             Assert.True(fcnPtr2.IsUnmanagedFunctionPointer);
 
@@ -128,11 +179,26 @@ namespace System.Tests.Types
         }
 
         [Theory]
-        [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Cdecl_SuppressGCTransition), typeof(CallConvCdecl))]
-        [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Stdcall_SuppressGCTransition), typeof(CallConvStdcall))]
-        [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Thiscall_SuppressGCTransition), typeof(CallConvThiscall))]
-        [InlineData(nameof(FunctionPointerHolder.MethodCallConv_Fastcall_SuppressGCTransition), typeof(CallConvFastcall))]
-        public static unsafe void UnmanagedCallConv_PhysicalModifiers_Modified(string methodName, Type callingConventionRuntime)
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodCallConv_Cdecl_SuppressGCTransition),
+            typeof(CallConvCdecl)
+        )]
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodCallConv_Stdcall_SuppressGCTransition),
+            typeof(CallConvStdcall)
+        )]
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodCallConv_Thiscall_SuppressGCTransition),
+            typeof(CallConvThiscall)
+        )]
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodCallConv_Fastcall_SuppressGCTransition),
+            typeof(CallConvFastcall)
+        )]
+        public static unsafe void UnmanagedCallConv_PhysicalModifiers_Modified(
+            string methodName,
+            Type callingConventionRuntime
+        )
         {
             Type suppressGcTransitionType = typeof(CallConvSuppressGCTransition).Project();
             Type callingConvention = callingConventionRuntime.Project();
@@ -170,31 +236,50 @@ namespace System.Tests.Types
 
         private unsafe partial class FunctionPointerHolder
         {
-            public delegate* unmanaged[Cdecl, MemberFunction]<int> MethodUnmanagedReturnValue_DifferentCallingConventions1() => default;
-            public delegate* unmanaged[Stdcall, MemberFunction]<int> MethodUnmanagedReturnValue_DifferentCallingConventions2() => default;
+            public delegate* unmanaged[Cdecl, MemberFunction]<
+                int> MethodUnmanagedReturnValue_DifferentCallingConventions1() => default;
+
+            public delegate* unmanaged[Stdcall, MemberFunction]<
+                int> MethodUnmanagedReturnValue_DifferentCallingConventions2() => default;
 
 #pragma warning disable 0649
-            public MyGenericClass<delegate*<int, int, int>[]> _genericType;
+            public MyGenericClass<delegate* <int, int, int>[]> _genericType;
 #pragma warning restore 0649
 
             // Methods to verify calling conventions and synthesized modopts.
             // The non-SuppressGCTransition variants are encoded with the CallKind byte.
             // The SuppressGCTransition variants are encoded as modopts (CallKind is "Unmananged").
             public void MethodCallConv_Managed(delegate* managed<ref MyClass, void> f) { }
+
             public void MethodCallConv_Cdecl(delegate* unmanaged[Cdecl]<void> f) { }
-            public void MethodCallConv_Cdecl_SuppressGCTransition(delegate* unmanaged[Cdecl, SuppressGCTransition]<void> f) { }
+
+            public void MethodCallConv_Cdecl_SuppressGCTransition(
+                delegate* unmanaged[Cdecl, SuppressGCTransition]<void> f
+            ) { }
+
             public void MethodCallConv_Stdcall(delegate* unmanaged[Stdcall]<void> f) { }
-            public void MethodCallConv_Stdcall_SuppressGCTransition(delegate* unmanaged[Stdcall, SuppressGCTransition]<void> f) { }
+
+            public void MethodCallConv_Stdcall_SuppressGCTransition(
+                delegate* unmanaged[Stdcall, SuppressGCTransition]<void> f
+            ) { }
+
             public void MethodCallConv_Thiscall(delegate* unmanaged[Thiscall]<void> f) { }
-            public void MethodCallConv_Thiscall_SuppressGCTransition(delegate* unmanaged[Thiscall, SuppressGCTransition]<void> f) { }
+
+            public void MethodCallConv_Thiscall_SuppressGCTransition(
+                delegate* unmanaged[Thiscall, SuppressGCTransition]<void> f
+            ) { }
+
             public void MethodCallConv_Fastcall(delegate* unmanaged[Fastcall]<void> f) { }
-            public void MethodCallConv_Fastcall_SuppressGCTransition(delegate* unmanaged[Fastcall, SuppressGCTransition]<void> f) { }
+
+            public void MethodCallConv_Fastcall_SuppressGCTransition(
+                delegate* unmanaged[Fastcall, SuppressGCTransition]<void> f
+            ) { }
 
             public class MyClass { }
 
             public unsafe class MyGenericClass<T>
             {
-                public delegate*<T, delegate* unmanaged[Cdecl]<void>, void> MyProp { get; }
+                public delegate* <T, delegate* unmanaged[Cdecl]<void>, void> MyProp { get; }
             }
         }
     }

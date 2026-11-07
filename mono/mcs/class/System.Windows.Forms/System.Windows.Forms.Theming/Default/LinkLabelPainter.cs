@@ -28,93 +28,118 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Theming.Default
 {
-	internal class LinkLabelPainter
-	{
-		public LinkLabelPainter ()
-		{
-		}
+    internal class LinkLabelPainter
+    {
+        public LinkLabelPainter() { }
 
-		private Color GetPieceColor (LinkLabel label, LinkLabel.Piece piece, int i)
-		{
-			if (!label.Enabled)
-				return label.DisabledLinkColor;
+        private Color GetPieceColor(LinkLabel label, LinkLabel.Piece piece, int i)
+        {
+            if (!label.Enabled)
+                return label.DisabledLinkColor;
 
-			if (piece.link == null)
-				return label.ForeColor;
+            if (piece.link == null)
+                return label.ForeColor;
 
-			if (!piece.link.Enabled)
-				return label.DisabledLinkColor;
-				
-			if (piece.link.Active)
-				return label.ActiveLinkColor;
-				
-			if ((label.LinkVisited && i == 0) || piece.link.Visited)
-				return label.VisitedLinkColor;
-			
-			return label.LinkColor;
-		}
-		
-		public virtual void Draw (Graphics dc, Rectangle clip_rectangle, LinkLabel label)
-		{
-			Rectangle client_rect = label.PaddingClientRectangle;
+            if (!piece.link.Enabled)
+                return label.DisabledLinkColor;
 
-			label.DrawImage (dc, label.Image, client_rect, label.ImageAlign);
+            if (piece.link.Active)
+                return label.ActiveLinkColor;
 
-			if (label.pieces == null)
-				return;
+            if ((label.LinkVisited && i == 0) || piece.link.Visited)
+                return label.VisitedLinkColor;
 
-			// Paint all text as disabled.
-			if (!label.Enabled) {
-				dc.SetClip (clip_rectangle);
-				ThemeEngine.Current.CPDrawStringDisabled (
-					dc, label.Text, label.Font, label.BackColor, client_rect, label.string_format);
-				return;
-			}
+            return label.LinkColor;
+        }
 
-			Font font, link_font = ThemeEngine.Current.GetLinkFont (label);
-			
-			Region text_region = new Region (new Rectangle());
+        public virtual void Draw(Graphics dc, Rectangle clip_rectangle, LinkLabel label)
+        {
+            Rectangle client_rect = label.PaddingClientRectangle;
 
-			// Draw links.
-			for (int i = 0; i < label.pieces.Length; i ++) {
-				LinkLabel.Piece piece = label.pieces[i];
-				
-				if (piece.link == null) {
-					text_region.Union (piece.region);
-					continue;
-				}
+            label.DrawImage(dc, label.Image, client_rect, label.ImageAlign);
 
-				Color color = GetPieceColor (label, piece, i);
+            if (label.pieces == null)
+                return;
 
-				if ( (label.LinkBehavior == LinkBehavior.AlwaysUnderline) || 
-					 (label.LinkBehavior == LinkBehavior.SystemDefault) ||
-					 ((label.LinkBehavior == LinkBehavior.HoverUnderline) && piece.link.Hovered) )
-					font = link_font;
-				else
-					font = label.Font;
-				
-				dc.Clip = piece.region;
-				dc.Clip.Intersect (clip_rectangle);
-				dc.DrawString (label.Text, font, 
-						ThemeEngine.Current.ResPool.GetSolidBrush (color), 
-						client_rect, label.string_format);
-			
-				// Draw focus rectangle
-				if ((piece.link != null) && piece.link.Focused) {
-					foreach (RectangleF rect in piece.region.GetRegionScans (dc.Transform))
-						ControlPaint.DrawFocusRectangle (dc, Rectangle.Round (rect), label.ForeColor, label.BackColor);
-				}
-			}
-			
-			// Draw normal text (without links).
-			if (!text_region.IsEmpty (dc)) {
-				dc.Clip = text_region;
-				dc.Clip.Intersect (clip_rectangle);
-				if (!dc.Clip.IsEmpty (dc))
-					dc.DrawString(label.Text, label.Font, 
-						ThemeEngine.Current.ResPool.GetSolidBrush(label.ForeColor),
-						client_rect, label.string_format);
-			}
-		}
-	}
+            // Paint all text as disabled.
+            if (!label.Enabled)
+            {
+                dc.SetClip(clip_rectangle);
+                ThemeEngine.Current.CPDrawStringDisabled(
+                    dc,
+                    label.Text,
+                    label.Font,
+                    label.BackColor,
+                    client_rect,
+                    label.string_format
+                );
+                return;
+            }
+
+            Font font,
+                link_font = ThemeEngine.Current.GetLinkFont(label);
+
+            Region text_region = new Region(new Rectangle());
+
+            // Draw links.
+            for (int i = 0; i < label.pieces.Length; i++)
+            {
+                LinkLabel.Piece piece = label.pieces[i];
+
+                if (piece.link == null)
+                {
+                    text_region.Union(piece.region);
+                    continue;
+                }
+
+                Color color = GetPieceColor(label, piece, i);
+
+                if (
+                    (label.LinkBehavior == LinkBehavior.AlwaysUnderline)
+                    || (label.LinkBehavior == LinkBehavior.SystemDefault)
+                    || ((label.LinkBehavior == LinkBehavior.HoverUnderline) && piece.link.Hovered)
+                )
+                    font = link_font;
+                else
+                    font = label.Font;
+
+                dc.Clip = piece.region;
+                dc.Clip.Intersect(clip_rectangle);
+                dc.DrawString(
+                    label.Text,
+                    font,
+                    ThemeEngine.Current.ResPool.GetSolidBrush(color),
+                    client_rect,
+                    label.string_format
+                );
+
+                // Draw focus rectangle
+                if ((piece.link != null) && piece.link.Focused)
+                {
+                    foreach (RectangleF rect in piece.region.GetRegionScans(dc.Transform))
+                        ControlPaint.DrawFocusRectangle(
+                            dc,
+                            Rectangle.Round(rect),
+                            label.ForeColor,
+                            label.BackColor
+                        );
+                }
+            }
+
+            // Draw normal text (without links).
+            if (!text_region.IsEmpty(dc))
+            {
+                dc.Clip = text_region;
+                dc.Clip.Intersect(clip_rectangle);
+                if (!dc.Clip.IsEmpty(dc))
+                    dc.DrawString(
+                        label.Text,
+                        label.Font,
+                        ThemeEngine.Current.ResPool.GetSolidBrush(label.ForeColor),
+                        client_rect,
+                        label.string_format
+                    );
+            }
+        }
+    }
 }

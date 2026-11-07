@@ -7,15 +7,16 @@ using System.Runtime.InteropServices;
 using Xunit;
 
 [StructLayout(LayoutKind.Sequential)]
-class POINT 
+class POINT
 {
     public int x;
     public int y;
+
     public override string ToString() => $"{{{x}, {y}}}";
 }
 
 [StructLayout(LayoutKind.Sequential)]
-class MINMAXINFO 
+class MINMAXINFO
 {
     public POINT ptMinTrackSize = new POINT();
     public POINT ptMaxTrackSize = new POINT();
@@ -36,13 +37,17 @@ public class Test_WPF_3226
     }
 
     [Fact]
-    public unsafe static int TestEntryPoint()
+    public static unsafe int TestEntryPoint()
     {
         MINMAXINFO mmi = new MINMAXINFO();
         IntPtr pmmi = Marshal.AllocHGlobal(Marshal.SizeOf(mmi));
         WmGetMinMaxInfo(pmmi);
-        mmi = (MINMAXINFO) Marshal.PtrToStructure(pmmi, typeof(MINMAXINFO));
-        bool valid =  mmi.ptMinTrackSize.x == 100101 &&  mmi.ptMinTrackSize.y == 102103 &&  mmi.ptMaxTrackSize.x == 200201 && mmi.ptMaxTrackSize.y == 202203;
+        mmi = (MINMAXINFO)Marshal.PtrToStructure(pmmi, typeof(MINMAXINFO));
+        bool valid =
+            mmi.ptMinTrackSize.x == 100101
+            && mmi.ptMinTrackSize.y == 102103
+            && mmi.ptMaxTrackSize.x == 200201
+            && mmi.ptMaxTrackSize.y == 202203;
         if (!valid)
         {
             Console.WriteLine($"Got {mmi.ptMinTrackSize}, expected {{100101, 102103}}");

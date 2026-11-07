@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Debugging
         public readonly byte Version;
         public readonly ImmutableArray<byte> Data;
 
-        public CustomDebugInfoRecord(CustomDebugInfoKind kind, byte version, ImmutableArray<byte> data)
+        public CustomDebugInfoRecord(
+            CustomDebugInfoKind kind,
+            byte version,
+            ImmutableArray<byte> data
+        )
         {
             Kind = kind;
             Version = version;

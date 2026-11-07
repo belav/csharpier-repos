@@ -20,18 +20,39 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal partial class AbstractGenerateMethodService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>
+    internal partial class AbstractGenerateMethodService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax,
+        TInvocationExpressionSyntax
+    >
     {
-        internal new class State : AbstractGenerateParameterizedMemberService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>.State
+        internal new class State
+            : AbstractGenerateParameterizedMemberService<
+                TService,
+                TSimpleNameSyntax,
+                TExpressionSyntax,
+                TInvocationExpressionSyntax
+            >.State
         {
             public static async Task<State> GenerateMethodStateAsync(
                 TService service,
                 SemanticDocument document,
                 SyntaxNode interfaceNode,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State();
-                if (!await state.TryInitializeMethodAsync(service, document, interfaceNode, cancellationToken).ConfigureAwait(false))
+                if (
+                    !await state
+                        .TryInitializeMethodAsync(
+                            service,
+                            document,
+                            interfaceNode,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     return null;
                 }
@@ -43,7 +64,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 TService service,
                 SemanticDocument document,
                 SyntaxNode node,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // Cases that we deal with currently:
                 //
@@ -69,7 +91,14 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
                 else if (service.IsSimpleNameGeneration(node))
                 {
-                    if (!TryInitializeSimpleName(service, document, (TSimpleNameSyntax)node, cancellationToken))
+                    if (
+                        !TryInitializeSimpleName(
+                            service,
+                            document,
+                            (TSimpleNameSyntax)node,
+                            cancellationToken
+                        )
+                    )
                     {
                         return SpecializedTasks.False;
                     }
@@ -82,12 +111,20 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 TService service,
                 SemanticDocument document,
                 SyntaxNode methodDeclaration,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 MethodKind = MethodKind.Ordinary;
-                if (!service.TryInitializeExplicitInterfaceState(
-                    document, methodDeclaration, cancellationToken,
-                    out var identifierToken, out var methodSymbol, out var typeToGenerateIn))
+                if (
+                    !service.TryInitializeExplicitInterfaceState(
+                        document,
+                        methodDeclaration,
+                        cancellationToken,
+                        out var identifierToken,
+                        out var methodSymbol,
+                        out var typeToGenerateIn
+                    )
+                )
                 {
                     return false;
                 }
@@ -102,7 +139,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
                 cancellationToken.ThrowIfCancellationRequested();
                 var semanticModel = document.SemanticModel;
-                ContainingType = semanticModel.GetEnclosingNamedType(methodDeclaration.SpanStart, cancellationToken);
+                ContainingType = semanticModel.GetEnclosingNamedType(
+                    methodDeclaration.SpanStart,
+                    cancellationToken
+                );
                 if (ContainingType == null)
                 {
                     return false;
@@ -121,19 +161,28 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 TService service,
                 SemanticDocument semanticDocument,
                 TSimpleNameSyntax simpleName,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 MethodKind = MethodKind.Ordinary;
                 SimpleNameOpt = simpleName;
-                if (!service.TryInitializeSimpleNameState(
-                        semanticDocument, simpleName, cancellationToken,
-                        out var identifierToken, out var simpleNameOrMemberAccessExpression,
-                        out var invocationExpressionOpt, out var isInConditionalExpression))
+                if (
+                    !service.TryInitializeSimpleNameState(
+                        semanticDocument,
+                        simpleName,
+                        cancellationToken,
+                        out var identifierToken,
+                        out var simpleNameOrMemberAccessExpression,
+                        out var invocationExpressionOpt,
+                        out var isInConditionalExpression
+                    )
+                )
                 {
                     return false;
                 }
 
-                var syntaxFacts = semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts =
+                    semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                 if (syntaxFacts.IsLeftSideOfAnyAssignment(simpleNameOrMemberAccessExpression))
                     return false;
 
@@ -151,7 +200,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 // for C# Script.
                 cancellationToken.ThrowIfCancellationRequested();
                 var semanticModel = semanticDocument.SemanticModel;
-                ContainingType = semanticModel.GetEnclosingNamedType(SimpleNameOpt.SpanStart, cancellationToken);
+                ContainingType = semanticModel.GetEnclosingNamedType(
+                    SimpleNameOpt.SpanStart,
+                    cancellationToken
+                );
                 if (ContainingType == null)
                 {
                     return false;
@@ -163,27 +215,55 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
                 else
                 {
-                    var typeInference = semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
-                    var delegateInvokeMethod = typeInference.InferDelegateType(semanticModel, SimpleNameOrMemberAccessExpression, cancellationToken)?.DelegateInvokeMethod;
+                    var typeInference =
+                        semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+                    var delegateInvokeMethod = typeInference
+                        .InferDelegateType(
+                            semanticModel,
+                            SimpleNameOrMemberAccessExpression,
+                            cancellationToken
+                        )
+                        ?.DelegateInvokeMethod;
                     if (delegateInvokeMethod != null)
                     {
                         // If we inferred Func/Action here, attempt to create better parameter names than the default
                         // 'arg1/arg2/arg3' form that the delegate specifies.
-                        var parameterNames = delegateInvokeMethod.ContainingType is { Name: nameof(Action) or nameof(Func<int>), ContainingNamespace.Name: nameof(System) }
-                            ? GenerateParameterNamesBasedOnParameterTypes(delegateInvokeMethod.Parameters)
+                        var parameterNames = delegateInvokeMethod.ContainingType
+                            is {
+                                Name: nameof(Action) or nameof(Func<int>),
+                                ContainingNamespace.Name: nameof(System)
+                            }
+                            ? GenerateParameterNamesBasedOnParameterTypes(
+                                delegateInvokeMethod.Parameters
+                            )
                             : delegateInvokeMethod.Parameters.SelectAsArray(p => p.Name);
 
-                        SignatureInfo = new MethodSignatureInfo(semanticDocument, this, delegateInvokeMethod, parameterNames);
+                        SignatureInfo = new MethodSignatureInfo(
+                            semanticDocument,
+                            this,
+                            delegateInvokeMethod,
+                            parameterNames
+                        );
                     }
                     else
                     {
                         // We don't have and invocation expression or a delegate, but we may have a special expression without parenthesis.  Lets see
                         // if the type inference service can directly infer the type for our expression.
-                        var expressionType = service.DetermineReturnTypeForSimpleNameOrMemberAccessExpression(typeInference, semanticModel, SimpleNameOrMemberAccessExpression, cancellationToken);
+                        var expressionType =
+                            service.DetermineReturnTypeForSimpleNameOrMemberAccessExpression(
+                                typeInference,
+                                semanticModel,
+                                SimpleNameOrMemberAccessExpression,
+                                cancellationToken
+                            );
                         if (expressionType == null)
                             return false;
 
-                        SignatureInfo = new MethodSignatureInfo(semanticDocument, this, CreateMethodSymbolWithReturnType(expressionType));
+                        SignatureInfo = new MethodSignatureInfo(
+                            semanticDocument,
+                            this,
+                            CreateMethodSymbolWithReturnType(expressionType)
+                        );
                     }
                 }
 
@@ -192,20 +272,30 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // If the name bound with errors, then this is a candidate for generate method.
-                var semanticInfo = semanticModel.GetSymbolInfo(SimpleNameOrMemberAccessExpression, cancellationToken);
-                if (semanticInfo.GetAllSymbols().Any(static s => s.Kind is SymbolKind.Local or SymbolKind.Parameter) &&
-                    !service.AreSpecialOptionsActive(semanticModel))
+                var semanticInfo = semanticModel.GetSymbolInfo(
+                    SimpleNameOrMemberAccessExpression,
+                    cancellationToken
+                );
+                if (
+                    semanticInfo
+                        .GetAllSymbols()
+                        .Any(static s => s.Kind is SymbolKind.Local or SymbolKind.Parameter)
+                    && !service.AreSpecialOptionsActive(semanticModel)
+                )
                 {
                     // if the name bound to something in scope then we don't want to generate the
-                    // method because it will be shadowed by what's in scope. Unless we are in a 
+                    // method because it will be shadowed by what's in scope. Unless we are in a
                     // special state such as Option Strict On where we want to generate fixes even
                     // if we shadow types.
                     return false;
                 }
 
-                // Check if the symbol is on the list of valid symbols for this language. 
+                // Check if the symbol is on the list of valid symbols for this language.
                 cancellationToken.ThrowIfCancellationRequested();
-                if (semanticInfo.Symbol != null && !service.IsValidSymbol(semanticInfo.Symbol, semanticModel))
+                if (
+                    semanticInfo.Symbol != null
+                    && !service.IsValidSymbol(semanticInfo.Symbol, semanticModel)
+                )
                 {
                     return false;
                 }
@@ -214,22 +304,37 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 // to generate a method here.  Determine where the user wants to generate the method
                 // into, and if it's valid then proceed.
                 cancellationToken.ThrowIfCancellationRequested();
-                if (!TryDetermineTypeToGenerateIn(
-                        semanticDocument, ContainingType, SimpleNameOrMemberAccessExpression, cancellationToken,
-                        out var typeToGenerateIn, out var isStatic, out _))
+                if (
+                    !TryDetermineTypeToGenerateIn(
+                        semanticDocument,
+                        ContainingType,
+                        SimpleNameOrMemberAccessExpression,
+                        cancellationToken,
+                        out var typeToGenerateIn,
+                        out var isStatic,
+                        out _
+                    )
+                )
                 {
                     return false;
                 }
 
-                var semanticFacts = semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
-                IsWrittenTo = semanticFacts.IsWrittenTo(semanticModel, InvocationExpressionOpt ?? SimpleNameOrMemberAccessExpression, cancellationToken);
+                var semanticFacts =
+                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                IsWrittenTo = semanticFacts.IsWrittenTo(
+                    semanticModel,
+                    InvocationExpressionOpt ?? SimpleNameOrMemberAccessExpression,
+                    cancellationToken
+                );
                 TypeToGenerateIn = typeToGenerateIn;
                 IsStatic = isStatic;
                 MethodGenerationKind = MethodGenerationKind.Member;
                 return true;
             }
 
-            private static ImmutableArray<string> GenerateParameterNamesBasedOnParameterTypes(ImmutableArray<IParameterSymbol> parameters)
+            private static ImmutableArray<string> GenerateParameterNamesBasedOnParameterTypes(
+                ImmutableArray<IParameterSymbol> parameters
+            )
             {
                 using var _1 = ArrayBuilder<string>.GetInstance(out var names);
                 using var _2 = ArrayBuilder<bool>.GetInstance(out var isFixed);
@@ -237,7 +342,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 foreach (var parameter in parameters)
                 {
                     var typeLocalName = parameter.Type.GetLocalName(fallback: parameter.Name);
-                    names.Add(new ParameterName(typeLocalName, isFixed: false).BestNameForParameter);
+                    names.Add(
+                        new ParameterName(typeLocalName, isFixed: false).BestNameForParameter
+                    );
                     isFixed.Add(false);
                 }
 
@@ -246,7 +353,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             }
 
             private static IMethodSymbol CreateMethodSymbolWithReturnType(
-                ITypeSymbol expressionType)
+                ITypeSymbol expressionType
+            )
             {
                 return CodeGenerationSymbolFactory.CreateMethodSymbol(
                     attributes: ImmutableArray<AttributeData>.Empty,
@@ -257,7 +365,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     explicitInterfaceImplementations: default,
                     name: null,
                     typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
-                    parameters: ImmutableArray<IParameterSymbol>.Empty);
+                    parameters: ImmutableArray<IParameterSymbol>.Empty
+                );
             }
         }
     }

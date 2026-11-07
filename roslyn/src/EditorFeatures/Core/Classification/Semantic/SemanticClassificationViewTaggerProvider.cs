@@ -20,7 +20,14 @@ namespace Microsoft.CodeAnalysis.Classification
         ClassificationTypeMap typeMap,
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider, ClassificationType.Semantic)
-    {
-    }
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider(
+            threadingContext,
+            typeMap,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider,
+            ClassificationType.Semantic
+        ) { }
 }

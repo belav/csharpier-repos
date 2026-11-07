@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.EditorFeatures.Lightup;
 [Obsolete("Class has not been finalized and may change without warning.")]
 internal readonly struct ISmartRenameSessionWrapper : INotifyPropertyChanged, IDisposable
 {
-    internal const string WrappedTypeName = "Microsoft.VisualStudio.Text.Editor.SmartRename.ISmartRenameSession";
+    internal const string WrappedTypeName =
+        "Microsoft.VisualStudio.Text.Editor.SmartRename.ISmartRenameSession";
     private static readonly Type s_wrappedType;
 
     private static readonly Func<object, bool> s_isAvailableAccessor;
@@ -26,7 +27,11 @@ internal readonly struct ISmartRenameSessionWrapper : INotifyPropertyChanged, ID
     private static readonly Func<object, bool> s_statusMessageVisibilityAccessor;
     private static readonly Func<object, IReadOnlyList<string>> s_suggestedNamesAccessor;
 
-    private static readonly Func<object, CancellationToken, Task<IReadOnlyList<string>>> s_getSuggestionsAsync;
+    private static readonly Func<
+        object,
+        CancellationToken,
+        Task<IReadOnlyList<string>>
+    > s_getSuggestionsAsync;
     private static readonly Action<object> s_onCancel;
     private static readonly Action<object, string> s_onSuccess;
 
@@ -34,18 +39,58 @@ internal readonly struct ISmartRenameSessionWrapper : INotifyPropertyChanged, ID
 
     static ISmartRenameSessionWrapper()
     {
-        s_wrappedType = typeof(AggregateFocusInterceptor).Assembly.GetType(WrappedTypeName, throwOnError: false, ignoreCase: false);
+        s_wrappedType = typeof(AggregateFocusInterceptor).Assembly.GetType(
+            WrappedTypeName,
+            throwOnError: false,
+            ignoreCase: false
+        );
 
-        s_isAvailableAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(s_wrappedType, nameof(IsAvailable), false);
-        s_hasSuggestionsAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(s_wrappedType, nameof(HasSuggestions), false);
-        s_isInProgressAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(s_wrappedType, nameof(IsInProgress), false);
-        s_statusMessageAccessor = LightupHelpers.CreatePropertyAccessor<object, string>(s_wrappedType, nameof(StatusMessage), "");
-        s_statusMessageVisibilityAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(s_wrappedType, nameof(StatusMessageVisibility), false);
-        s_suggestedNamesAccessor = LightupHelpers.CreatePropertyAccessor<object, IReadOnlyList<string>>(s_wrappedType, nameof(SuggestedNames), []);
+        s_isAvailableAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(
+            s_wrappedType,
+            nameof(IsAvailable),
+            false
+        );
+        s_hasSuggestionsAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(
+            s_wrappedType,
+            nameof(HasSuggestions),
+            false
+        );
+        s_isInProgressAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(
+            s_wrappedType,
+            nameof(IsInProgress),
+            false
+        );
+        s_statusMessageAccessor = LightupHelpers.CreatePropertyAccessor<object, string>(
+            s_wrappedType,
+            nameof(StatusMessage),
+            ""
+        );
+        s_statusMessageVisibilityAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(
+            s_wrappedType,
+            nameof(StatusMessageVisibility),
+            false
+        );
+        s_suggestedNamesAccessor = LightupHelpers.CreatePropertyAccessor<
+            object,
+            IReadOnlyList<string>
+        >(s_wrappedType, nameof(SuggestedNames), []);
 
-        s_getSuggestionsAsync = LightupHelpers.CreateFunctionAccessor<object, CancellationToken, Task<IReadOnlyList<string>>>(s_wrappedType, nameof(GetSuggestionsAsync), typeof(CancellationToken), SpecializedTasks.EmptyReadOnlyList<string>());
+        s_getSuggestionsAsync = LightupHelpers.CreateFunctionAccessor<
+            object,
+            CancellationToken,
+            Task<IReadOnlyList<string>>
+        >(
+            s_wrappedType,
+            nameof(GetSuggestionsAsync),
+            typeof(CancellationToken),
+            SpecializedTasks.EmptyReadOnlyList<string>()
+        );
         s_onCancel = LightupHelpers.CreateActionAccessor<object>(s_wrappedType, nameof(OnCancel));
-        s_onSuccess = LightupHelpers.CreateActionAccessor<object, string>(s_wrappedType, nameof(OnSuccess), typeof(string));
+        s_onSuccess = LightupHelpers.CreateActionAccessor<object, string>(
+            s_wrappedType,
+            nameof(OnSuccess),
+            typeof(string)
+        );
     }
 
     private ISmartRenameSessionWrapper(object instance)
@@ -75,7 +120,9 @@ internal readonly struct ISmartRenameSessionWrapper : INotifyPropertyChanged, ID
 
         if (!IsInstance(instance))
         {
-            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException(
+                $"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'"
+            );
         }
 
         return new ISmartRenameSessionWrapper(instance);
@@ -86,15 +133,12 @@ internal readonly struct ISmartRenameSessionWrapper : INotifyPropertyChanged, ID
         return instance != null && LightupHelpers.CanWrapObject(instance, s_wrappedType);
     }
 
-    public Task<IReadOnlyList<string>> GetSuggestionsAsync(CancellationToken cancellationToken)
-        => s_getSuggestionsAsync(_instance, cancellationToken);
+    public Task<IReadOnlyList<string>> GetSuggestionsAsync(CancellationToken cancellationToken) =>
+        s_getSuggestionsAsync(_instance, cancellationToken);
 
-    public void OnCancel()
-        => s_onCancel(_instance);
+    public void OnCancel() => s_onCancel(_instance);
 
-    public void OnSuccess(string acceptedName)
-        => s_onSuccess(_instance, acceptedName);
+    public void OnSuccess(string acceptedName) => s_onSuccess(_instance, acceptedName);
 
-    public void Dispose()
-        => ((IDisposable)_instance).Dispose();
+    public void Dispose() => ((IDisposable)_instance).Dispose();
 }

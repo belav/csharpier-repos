@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 public class punning
@@ -15,10 +14,7 @@ public class punning
 
         IntPtr fptr = typeof(A.Class).GetMethod("GetField").MethodHandle.GetFunctionPointer();
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, null);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -28,12 +24,12 @@ public class punning
     {
         Console.WriteLine($"Running {nameof(Via_GetFunctionPointer_Generics)}...");
 
-        IntPtr fptr = typeof(A.Class).GetMethod("GetFieldGeneric").MakeGenericMethod(typeof(object)).MethodHandle.GetFunctionPointer();
+        IntPtr fptr = typeof(A.Class)
+            .GetMethod("GetFieldGeneric")
+            .MakeGenericMethod(typeof(object))
+            .MethodHandle.GetFunctionPointer();
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, null);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -45,10 +41,7 @@ public class punning
 
         IntPtr fptr = B.Class.GetFunctionPointer();
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, null);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -60,10 +53,7 @@ public class punning
 
         IntPtr fptr = B.Class.GetFunctionPointerGeneric();
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, null);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -76,10 +66,7 @@ public class punning
         object inst = new B.Derived();
         IntPtr fptr = B.Class.GetFunctionPointerGeneric(inst);
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, inst);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -91,10 +78,7 @@ public class punning
 
         IntPtr fptr = B.Class.GetFunctionPointer<object>();
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, null);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -107,10 +91,7 @@ public class punning
         object inst = new B.Derived();
         IntPtr fptr = B.Class.GetFunctionPointer<object>(inst);
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, inst);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -123,10 +104,7 @@ public class punning
         object inst = new C.Derived();
         IntPtr fptr = C.Class.GetFunctionPointer(inst);
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, inst);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -139,10 +117,7 @@ public class punning
         object inst = new C.Derived();
         IntPtr fptr = C.Class.GetFunctionPointerGeneric(inst);
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, inst);
         Assert.Equal(b.Field, fieldValue);
     }
@@ -155,10 +130,7 @@ public class punning
         object inst = new C.Derived();
         IntPtr fptr = C.Class.GetFunctionPointer<object>(inst);
         Assert.NotEqual(IntPtr.Zero, fptr);
-        var b = new Caller.Struct<object>()
-        {
-            Field = 0x55
-        };
+        var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, inst);
         Assert.Equal(b.Field, fieldValue);
     }

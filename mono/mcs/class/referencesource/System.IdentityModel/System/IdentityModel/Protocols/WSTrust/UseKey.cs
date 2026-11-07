@@ -23,27 +23,21 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Constructor for extensibility point
         /// </summary>
         public UseKey()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Creates an instance of <see cref="UseKey"/>.
         /// </summary>
         /// <param name="ski">A security key identifier which represents the existing key that should be used. </param>
         public UseKey(SecurityKeyIdentifier ski)
-            : this(ski, null)
-        {
-        }
+            : this(ski, null) { }
 
         /// <summary>
         /// Creates an instance of <see cref="UseKey"/>.
         /// </summary>
         /// <param name="token">A token which represents existing key that should be used.</param>
         public UseKey(SecurityToken token)
-            : this(null, token)
-        {
-        }
+            : this(null, token) { }
 
         /// <summary>
         /// Creates an instance of <see cref="UseKey"/>.

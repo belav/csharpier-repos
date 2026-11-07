@@ -7,17 +7,17 @@ using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Runtime;
-using System.Security.Cryptography;
 using System.Security.Authentication.ExtendedProtection;
+using System.Security.Cryptography;
 using System.ServiceModel.Diagnostics;
 
 namespace System.ServiceModel.Security.Tokens
 {
     /// <summary>
-    /// The ProviderBackedSecurityToken was added for the ChannelBindingToken work for Win7.  
-    /// It is used to delay the resolution of a token until it is needed.  
+    /// The ProviderBackedSecurityToken was added for the ChannelBindingToken work for Win7.
+    /// It is used to delay the resolution of a token until it is needed.
     /// For the CBT, this delay is necessary as the CBT is not available until SecurityAppliedMessage.OnWriteMessage is called.
-    /// The CBT binds a token to the 
+    /// The CBT binds a token to the
     /// </summary>
     internal class ProviderBackedSecurityToken : SecurityToken
     {
@@ -34,13 +34,15 @@ namespace System.ServiceModel.Security.Tokens
         /// Constructor to create an instance of this class.
         /// </summary>
         /// <param name="securityToken">SecurityToken that represents the SecurityTokenElement element.</param>
-        public ProviderBackedSecurityToken( SecurityTokenProvider tokenProvider, TimeSpan timeout )
+        public ProviderBackedSecurityToken(SecurityTokenProvider tokenProvider, TimeSpan timeout)
         {
             _lock = new object();
 
-            if ( tokenProvider == null )
+            if (tokenProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("tokenProvider"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("tokenProvider")
+                );
             }
 
             _tokenProvider = tokenProvider;
@@ -59,29 +61,42 @@ namespace System.ServiceModel.Security.Tokens
 
         void ResolveSecurityToken()
         {
-            if ( _securityToken == null )
+            if (_securityToken == null)
             {
-                lock ( _lock )
+                lock (_lock)
                 {
-                    if ( _securityToken == null )
+                    if (_securityToken == null)
                     {
-                        ClientCredentialsSecurityTokenManager.KerberosSecurityTokenProviderWrapper kerbTokenProvider = _tokenProvider 
-                                                        as ClientCredentialsSecurityTokenManager.KerberosSecurityTokenProviderWrapper;
+                        ClientCredentialsSecurityTokenManager.KerberosSecurityTokenProviderWrapper kerbTokenProvider =
+                            _tokenProvider
+                            as ClientCredentialsSecurityTokenManager.KerberosSecurityTokenProviderWrapper;
                         if (kerbTokenProvider != null)
                         {
-                            _securityToken = kerbTokenProvider.GetToken((new TimeoutHelper(_timeout)).RemainingTime(), _channelBinding);
+                            _securityToken = kerbTokenProvider.GetToken(
+                                (new TimeoutHelper(_timeout)).RemainingTime(),
+                                _channelBinding
+                            );
                         }
                         else
                         {
-                            _securityToken = _tokenProvider.GetToken((new TimeoutHelper(_timeout)).RemainingTime());
+                            _securityToken = _tokenProvider.GetToken(
+                                (new TimeoutHelper(_timeout)).RemainingTime()
+                            );
                         }
                     }
                 }
             }
 
-            if ( _securityToken == null )
+            if (_securityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError( new SecurityTokenException( SR.GetString( SR.SecurityTokenNotResolved, _tokenProvider.GetType().ToString() ) ) );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(
+                            SR.SecurityTokenNotResolved,
+                            _tokenProvider.GetType().ToString()
+                        )
+                    )
+                );
             }
 
             return;
@@ -91,7 +106,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             get
             {
-                if ( _securityToken == null )
+                if (_securityToken == null)
                 {
                     ResolveSecurityToken();
                 }
@@ -104,7 +119,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             get
             {
-                if ( _securityToken == null )
+                if (_securityToken == null)
                 {
                     ResolveSecurityToken();
                 }
@@ -117,20 +132,20 @@ namespace System.ServiceModel.Security.Tokens
         {
             get
             {
-                if ( _securityToken == null )
+                if (_securityToken == null)
                 {
                     ResolveSecurityToken();
                 }
 
                 return _securityToken.SecurityKeys;
-            }   
+            }
         }
 
         public override DateTime ValidFrom
         {
             get
             {
-                if ( _securityToken == null )
+                if (_securityToken == null)
                 {
                     ResolveSecurityToken();
                 }
@@ -143,13 +158,13 @@ namespace System.ServiceModel.Security.Tokens
         {
             get
             {
-                if ( _securityToken == null )
+                if (_securityToken == null)
                 {
                     ResolveSecurityToken();
                 }
 
                 return _securityToken.ValidTo;
-            }   
+            }
         }
     }
 }

@@ -30,57 +30,61 @@ using System.Xml;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine.Various {
-	[TestFixture]
-	public class ProjectElement {
-		// Clones a project by reloading from original.Xml
-		private Project CloneProject (Project original)
-		{
-			Project clone;
-			
-			clone = original.ParentEngine.CreateNewProject ();
-			clone.LoadXml (original.Xml);
+namespace MonoTests.Microsoft.Build.BuildEngine.Various
+{
+    [TestFixture]
+    public class ProjectElement
+    {
+        // Clones a project by reloading from original.Xml
+        private Project CloneProject(Project original)
+        {
+            Project clone;
 
-			return clone;
-		}
+            clone = original.ParentEngine.CreateNewProject();
+            clone.LoadXml(original.Xml);
 
-		[Test]
-		public void TestDefaultTargetsAttribute ()
-		{
-			Engine engine;
-			Project proj;
-			Project cproj;
-			string documentString = @"
+            return clone;
+        }
+
+        [Test]
+        public void TestDefaultTargetsAttribute()
+        {
+            Engine engine;
+            Project proj;
+            Project cproj;
+            string documentString =
+                @"
 			<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" DefaultTargets=""Build;Compile"">
 			</Project>
 			";
-			
-			engine = new Engine (Consts.BinPath);
-			proj = engine.CreateNewProject ();
-			Assert.AreEqual (String.Empty, proj.FullFileName, "A1");
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual (String.Empty, proj.FullFileName, "A2");
-			proj.DefaultTargets = "Build";
-			Assert.AreEqual ("Build", proj.DefaultTargets, "A3");
-			cproj = CloneProject (proj);
-			Assert.AreEqual (proj.DefaultTargets, cproj.DefaultTargets, "A4");
-		}
+            engine = new Engine(Consts.BinPath);
+            proj = engine.CreateNewProject();
+            Assert.AreEqual(String.Empty, proj.FullFileName, "A1");
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestRootElement ()
-		{
-			Engine engine;
-			Project proj;
-			string documentString = @"
+            proj.LoadXml(documentString);
+            Assert.AreEqual(String.Empty, proj.FullFileName, "A2");
+            proj.DefaultTargets = "Build";
+            Assert.AreEqual("Build", proj.DefaultTargets, "A3");
+            cproj = CloneProject(proj);
+            Assert.AreEqual(proj.DefaultTargets, cproj.DefaultTargets, "A4");
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestRootElement()
+        {
+            Engine engine;
+            Project proj;
+            string documentString =
+                @"
 			<something>
 			</something>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			proj = engine.CreateNewProject ();
-			proj.LoadXml (documentString);
-		}
-	}
+            engine = new Engine(Consts.BinPath);
+            proj = engine.CreateNewProject();
+            proj.LoadXml(documentString);
+        }
+    }
 }

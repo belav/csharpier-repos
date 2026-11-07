@@ -9,12 +9,12 @@ namespace System.Threading.ThreadPools.Tests
 {
     public partial class RegisteredWaitTests
     {
-        private const int UnexpectedTimeoutMilliseconds = ThreadTestHelpers.UnexpectedTimeoutMilliseconds;
-        private const int ExpectedTimeoutMilliseconds = ThreadTestHelpers.ExpectedTimeoutMilliseconds;
+        private const int UnexpectedTimeoutMilliseconds =
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds;
+        private const int ExpectedTimeoutMilliseconds =
+            ThreadTestHelpers.ExpectedTimeoutMilliseconds;
 
-        private sealed class InvalidWaitHandle : WaitHandle
-        {
-        }
+        private sealed class InvalidWaitHandle : WaitHandle { }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void QueueRegisterPositiveAndFlowTest()
@@ -29,45 +29,43 @@ namespace System.Threading.ThreadPools.Tests
             Exception backgroundEx = null;
             int backgroundAsyncLocalValue = 0;
 
-            Action<bool, Action> commonBackgroundTest =
-                (isRegisteredWaitCallback, test) =>
+            Action<bool, Action> commonBackgroundTest = (isRegisteredWaitCallback, test) =>
+            {
+                try
                 {
-                    try
+                    if (isRegisteredWaitCallback)
                     {
-                        if (isRegisteredWaitCallback)
-                        {
-                            RegisteredWaitHandle toUnregister = registeredWaitHandle;
-                            registeredWaitHandle = null;
-                            Assert.True(toUnregister.Unregister(threadDone));
-                        }
-                        test();
-                        backgroundAsyncLocalValue = asyncLocal.Value;
+                        RegisteredWaitHandle toUnregister = registeredWaitHandle;
+                        registeredWaitHandle = null;
+                        Assert.True(toUnregister.Unregister(threadDone));
                     }
-                    catch (Exception ex)
-                    {
-                        backgroundEx = ex;
-                    }
-                    finally
-                    {
-                        if (!isRegisteredWaitCallback)
-                        {
-                            threadDone.Set();
-                        }
-                    }
-                };
-            Action<bool> waitForBackgroundWork =
-                isWaitForRegisteredWaitCallback =>
+                    test();
+                    backgroundAsyncLocalValue = asyncLocal.Value;
+                }
+                catch (Exception ex)
                 {
-                    if (isWaitForRegisteredWaitCallback)
+                    backgroundEx = ex;
+                }
+                finally
+                {
+                    if (!isRegisteredWaitCallback)
                     {
-                        registerWaitEvent.Set();
+                        threadDone.Set();
                     }
-                    threadDone.CheckedWait();
-                    if (backgroundEx != null)
-                    {
-                        throw new AggregateException(backgroundEx);
-                    }
-                };
+                }
+            };
+            Action<bool> waitForBackgroundWork = isWaitForRegisteredWaitCallback =>
+            {
+                if (isWaitForRegisteredWaitCallback)
+                {
+                    registerWaitEvent.Set();
+                }
+                threadDone.CheckedWait();
+                if (backgroundEx != null)
+                {
+                    throw new AggregateException(backgroundEx);
+                }
+            };
 
             ThreadPool.QueueUserWorkItem(
                 state =>
@@ -77,7 +75,8 @@ namespace System.Threading.ThreadPools.Tests
                         Assert.Same(obj, state);
                     });
                 },
-                obj);
+                obj
+            );
             waitForBackgroundWork(false);
             Assert.Equal(1, backgroundAsyncLocalValue);
 
@@ -89,59 +88,60 @@ namespace System.Threading.ThreadPools.Tests
                         Assert.Same(obj, state);
                     });
                 },
-                obj);
+                obj
+            );
             waitForBackgroundWork(false);
             Assert.Equal(0, backgroundAsyncLocalValue);
 
-            registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(
-                    registerWaitEvent,
-                    (state, timedOut) =>
+            registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                registerWaitEvent,
+                (state, timedOut) =>
+                {
+                    commonBackgroundTest(true, () =>
                     {
-                        commonBackgroundTest(true, () =>
-                        {
-                            Assert.Same(obj, state);
-                            Assert.False(timedOut);
-                        });
-                    },
-                    obj,
-                    UnexpectedTimeoutMilliseconds,
-                    false);
+                        Assert.Same(obj, state);
+                        Assert.False(timedOut);
+                    });
+                },
+                obj,
+                UnexpectedTimeoutMilliseconds,
+                false
+            );
             waitForBackgroundWork(true);
             Assert.Equal(1, backgroundAsyncLocalValue);
 
-            registeredWaitHandle =
-                ThreadPool.UnsafeRegisterWaitForSingleObject(
-                    registerWaitEvent,
-                    (state, timedOut) =>
+            registeredWaitHandle = ThreadPool.UnsafeRegisterWaitForSingleObject(
+                registerWaitEvent,
+                (state, timedOut) =>
+                {
+                    commonBackgroundTest(true, () =>
                     {
-                        commonBackgroundTest(true, () =>
-                        {
-                            Assert.Same(obj, state);
-                            Assert.False(timedOut);
-                        });
-                    },
-                    obj,
-                    UnexpectedTimeoutMilliseconds,
-                    false);
+                        Assert.Same(obj, state);
+                        Assert.False(timedOut);
+                    });
+                },
+                obj,
+                UnexpectedTimeoutMilliseconds,
+                false
+            );
             waitForBackgroundWork(true);
             Assert.Equal(0, backgroundAsyncLocalValue);
 
             // Validate a repeating waithandle with infinite timeout.
-            registeredWaitHandle =
-                ThreadPool.UnsafeRegisterWaitForSingleObject(
-                    registerWaitEvent,
-                    (state, timedOut) =>
+            registeredWaitHandle = ThreadPool.UnsafeRegisterWaitForSingleObject(
+                registerWaitEvent,
+                (state, timedOut) =>
+                {
+                    commonBackgroundTest(true, () =>
                     {
-                        commonBackgroundTest(true, () =>
-                        {
-                            Assert.Same(obj, state);
-                            Assert.False(timedOut);
-                        });
-                    },
-                    obj,
-                    -1,      // Infinite
-                    false);  // Execute once
+                        Assert.Same(obj, state);
+                        Assert.False(timedOut);
+                    });
+                },
+                obj,
+                -1, // Infinite
+                false
+            ); // Execute once
             waitForBackgroundWork(true);
             Assert.Equal(0, backgroundAsyncLocalValue);
         }
@@ -150,51 +150,126 @@ namespace System.Threading.ThreadPools.Tests
         public static void QueueRegisterNegativeTest()
         {
             Assert.Throws<ArgumentNullException>(() => ThreadPool.QueueUserWorkItem(null));
-            Assert.Throws<ArgumentNullException>(() => ThreadPool.UnsafeQueueUserWorkItem(null, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.UnsafeQueueUserWorkItem(null, null)
+            );
 
             WaitHandle waitHandle = new ManualResetEvent(true);
             WaitOrTimerCallback callback = (state, timedOut) => { };
-            Assert.Throws<ArgumentNullException>(() => ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true));
-            Assert.Throws<ArgumentNullException>(() => ThreadPool.RegisterWaitForSingleObject(waitHandle, null, null, 0, true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsTimeOutInterval", () =>
-                ThreadPool.RegisterWaitForSingleObject(waitHandle, callback, null, -2, true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsTimeOutInterval", () =>
-                ThreadPool.RegisterWaitForSingleObject(waitHandle, callback, null, (long)-2, true));
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.RegisterWaitForSingleObject(waitHandle, null, null, 0, true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "millisecondsTimeOutInterval",
+                () => ThreadPool.RegisterWaitForSingleObject(waitHandle, callback, null, -2, true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "millisecondsTimeOutInterval",
+                () =>
+                    ThreadPool.RegisterWaitForSingleObject(
+                        waitHandle,
+                        callback,
+                        null,
+                        (long)-2,
+                        true
+                    )
+            );
             if (!PlatformDetection.IsNetFramework) // .NET Framework silently overflows the timeout
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsTimeOutInterval", () =>
-                    ThreadPool.RegisterWaitForSingleObject(waitHandle, callback, null, (long)int.MaxValue + 1, true));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "millisecondsTimeOutInterval",
+                    () =>
+                        ThreadPool.RegisterWaitForSingleObject(
+                            waitHandle,
+                            callback,
+                            null,
+                            (long)int.MaxValue + 1,
+                            true
+                        )
+                );
             }
             AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
-                ThreadPool.RegisterWaitForSingleObject(waitHandle, callback, null, TimeSpan.FromMilliseconds(-2), true));
+                ThreadPool.RegisterWaitForSingleObject(
+                    waitHandle,
+                    callback,
+                    null,
+                    TimeSpan.FromMilliseconds(-2),
+                    true
+                )
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
                 ThreadPool.RegisterWaitForSingleObject(
                     waitHandle,
                     callback,
                     null,
                     TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
-                    true));
+                    true
+                )
+            );
 
-            Assert.Throws<ArgumentNullException>(() => ThreadPool.UnsafeRegisterWaitForSingleObject(null, callback, null, 0, true));
-            Assert.Throws<ArgumentNullException>(() => ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, null, null, 0, true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsTimeOutInterval", () =>
-                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, callback, null, -2, true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsTimeOutInterval", () =>
-                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, callback, null, (long)-2, true));
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.UnsafeRegisterWaitForSingleObject(null, callback, null, 0, true)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, null, null, 0, true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "millisecondsTimeOutInterval",
+                () =>
+                    ThreadPool.UnsafeRegisterWaitForSingleObject(
+                        waitHandle,
+                        callback,
+                        null,
+                        -2,
+                        true
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "millisecondsTimeOutInterval",
+                () =>
+                    ThreadPool.UnsafeRegisterWaitForSingleObject(
+                        waitHandle,
+                        callback,
+                        null,
+                        (long)-2,
+                        true
+                    )
+            );
             if (!PlatformDetection.IsNetFramework) // .NET Framework silently overflows the timeout
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsTimeOutInterval", () =>
-                    ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, callback, null, (long)int.MaxValue + 1, true));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "millisecondsTimeOutInterval",
+                    () =>
+                        ThreadPool.UnsafeRegisterWaitForSingleObject(
+                            waitHandle,
+                            callback,
+                            null,
+                            (long)int.MaxValue + 1,
+                            true
+                        )
+                );
             }
             AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
-                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, callback, null, TimeSpan.FromMilliseconds(-2), true));
+                ThreadPool.UnsafeRegisterWaitForSingleObject(
+                    waitHandle,
+                    callback,
+                    null,
+                    TimeSpan.FromMilliseconds(-2),
+                    true
+                )
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
                 ThreadPool.UnsafeRegisterWaitForSingleObject(
                     waitHandle,
                     callback,
                     null,
                     TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
-                    true));
+                    true
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -203,11 +278,17 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             var waitCallbackInvoked = new AutoResetEvent(false);
             bool timedOut = false;
-            ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, timedOut2) =>
-            {
-                timedOut = timedOut2;
-                waitCallbackInvoked.Set();
-            }, null, UnexpectedTimeoutMilliseconds, true);
+            ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, timedOut2) =>
+                {
+                    timedOut = timedOut2;
+                    waitCallbackInvoked.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             waitEvent.Set();
             waitCallbackInvoked.CheckedWait();
@@ -220,11 +301,17 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             var waitCallbackInvoked = new AutoResetEvent(false);
             bool timedOut = false;
-            ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, timedOut2) =>
-            {
-                timedOut = timedOut2;
-                waitCallbackInvoked.Set();
-            }, null, ExpectedTimeoutMilliseconds, true);
+            ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, timedOut2) =>
+                {
+                    timedOut = timedOut2;
+                    waitCallbackInvoked.Set();
+                },
+                null,
+                ExpectedTimeoutMilliseconds,
+                true
+            );
 
             waitCallbackInvoked.CheckedWait();
             Assert.True(timedOut);
@@ -235,10 +322,16 @@ namespace System.Threading.ThreadPools.Tests
         {
             var waitEvent = new AutoResetEvent(false);
             var waitCallbackInvoked = new AutoResetEvent(false);
-            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, __) =>
-            {
-                waitCallbackInvoked.Set();
-            }, null, UnexpectedTimeoutMilliseconds, true);
+            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, __) =>
+                {
+                    waitCallbackInvoked.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             Assert.True(registeredWaitHandle.Unregister(new InvalidWaitHandle())); // blocking unregister
             waitEvent.Set();
@@ -251,10 +344,16 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             var waitUnregistered = new AutoResetEvent(false);
             var waitCallbackInvoked = new AutoResetEvent(false);
-            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, __) =>
-            {
-                waitCallbackInvoked.Set();
-            }, null, UnexpectedTimeoutMilliseconds, true);
+            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, __) =>
+                {
+                    waitCallbackInvoked.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             Assert.True(registeredWaitHandle.Unregister(waitUnregistered));
             waitUnregistered.CheckedWait();
@@ -268,11 +367,17 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             var waitCallbackInvoked = new AutoResetEvent(false);
             bool anyTimedOut = false;
-            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, timedOut) =>
-            {
-                anyTimedOut |= timedOut;
-                waitCallbackInvoked.Set();
-            }, null, UnexpectedTimeoutMilliseconds, true);
+            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, timedOut) =>
+                {
+                    anyTimedOut |= timedOut;
+                    waitCallbackInvoked.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             waitEvent.Set();
             waitCallbackInvoked.CheckedWait();
@@ -287,11 +392,17 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             var waitCallbackInvoked = new AutoResetEvent(false);
             bool anyTimedOut = false;
-            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, timedOut) =>
-            {
-                anyTimedOut |= timedOut;
-                waitCallbackInvoked.Set();
-            }, null, UnexpectedTimeoutMilliseconds, false);
+            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, timedOut) =>
+                {
+                    anyTimedOut |= timedOut;
+                    waitCallbackInvoked.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                false
+            );
 
             for (int i = 0; i < 4; ++i)
             {
@@ -319,16 +430,26 @@ namespace System.Threading.ThreadPools.Tests
             };
 
             // executeOnlyOnce = true, no timeout and no callback invocation
-            var registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent, waitCallback, null, Timeout.Infinite, executeOnlyOnce: true);
+            var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                waitCallback,
+                null,
+                Timeout.Infinite,
+                executeOnlyOnce: true
+            );
             Assert.False(waitCallbackInvoked.WaitOne(ExpectedTimeoutMilliseconds));
             Assert.True(registeredWaitHandle.Unregister(waitUnregistered));
             waitUnregistered.CheckedWait();
             Assert.False(timedOut);
 
             // executeOnlyOnce = true, no timeout with callback invocation
-            registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent, waitCallback, null, Timeout.Infinite, executeOnlyOnce: true);
+            registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                waitCallback,
+                null,
+                Timeout.Infinite,
+                executeOnlyOnce: true
+            );
             waitEvent.Set();
             waitCallbackInvoked.CheckedWait();
             Assert.True(registeredWaitHandle.Unregister(waitUnregistered));
@@ -336,9 +457,13 @@ namespace System.Threading.ThreadPools.Tests
             Assert.False(timedOut);
 
             // executeOnlyOnce = true, with timeout
-            registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(
-                    waitEvent, waitCallback, null, ExpectedTimeoutMilliseconds, executeOnlyOnce: true);
+            registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                waitCallback,
+                null,
+                ExpectedTimeoutMilliseconds,
+                executeOnlyOnce: true
+            );
             waitCallbackInvoked.CheckedWait();
             Assert.False(waitCallbackInvoked.WaitOne(ExpectedTimeoutMilliseconds));
             Assert.True(registeredWaitHandle.Unregister(waitUnregistered));
@@ -347,9 +472,13 @@ namespace System.Threading.ThreadPools.Tests
             timedOut = false;
 
             // executeOnlyOnce = false
-            registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(
-                    waitEvent, waitCallback, null, UnexpectedTimeoutMilliseconds, executeOnlyOnce: false);
+            registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                waitCallback,
+                null,
+                UnexpectedTimeoutMilliseconds,
+                executeOnlyOnce: false
+            );
             Assert.False(waitCallbackInvoked.WaitOne(ExpectedTimeoutMilliseconds));
             Assert.True(registeredWaitHandle.Unregister(waitUnregistered));
             waitUnregistered.CheckedWait();
@@ -363,9 +492,13 @@ namespace System.Threading.ThreadPools.Tests
             WaitOrTimerCallback waitCallback = (_, __) => { };
             for (int i = 0; i < registeredWaitHandles.Length; ++i)
             {
-                registeredWaitHandles[i] =
-                    ThreadPool.RegisterWaitForSingleObject(
-                        new AutoResetEvent(false), waitCallback, null, UnexpectedTimeoutMilliseconds, true);
+                registeredWaitHandles[i] = ThreadPool.RegisterWaitForSingleObject(
+                    new AutoResetEvent(false),
+                    waitCallback,
+                    null,
+                    UnexpectedTimeoutMilliseconds,
+                    true
+                );
             }
             for (int i = 0; i < registeredWaitHandles.Length; ++i)
             {
@@ -379,11 +512,17 @@ namespace System.Threading.ThreadPools.Tests
             object state = new object();
             var waitCallbackInvoked = new AutoResetEvent(false);
             object statePassedToCallback = null;
-            ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(true), (callbackState, _) =>
-            {
-                statePassedToCallback = callbackState;
-                waitCallbackInvoked.Set();
-            }, state, 0, true);
+            ThreadPool.RegisterWaitForSingleObject(
+                new AutoResetEvent(true),
+                (callbackState, _) =>
+                {
+                    statePassedToCallback = callbackState;
+                    waitCallbackInvoked.Set();
+                },
+                state,
+                0,
+                true
+            );
 
             waitCallbackInvoked.CheckedWait();
             Assert.Same(state, statePassedToCallback);
@@ -396,12 +535,18 @@ namespace System.Threading.ThreadPools.Tests
             var waitCallbackProgressMade = new AutoResetEvent(false);
             var completeWaitCallback = new AutoResetEvent(false);
             var waitUnregistered = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, __) =>
-            {
-                waitCallbackProgressMade.Set();
-                completeWaitCallback.WaitOne(UnexpectedTimeoutMilliseconds);
-                waitCallbackProgressMade.Set();
-            }, null, UnexpectedTimeoutMilliseconds, false);
+            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, __) =>
+                {
+                    waitCallbackProgressMade.Set();
+                    completeWaitCallback.WaitOne(UnexpectedTimeoutMilliseconds);
+                    waitCallbackProgressMade.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                false
+            );
 
             waitEvent.Set();
             waitCallbackProgressMade.CheckedWait(); // one callback running
@@ -423,12 +568,18 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             var waitCallbackProgressMade = new AutoResetEvent(false);
             var completeWaitCallback = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, __) =>
-            {
-                waitCallbackProgressMade.Set();
-                completeWaitCallback.WaitOne(UnexpectedTimeoutMilliseconds);
-                waitCallbackProgressMade.Set();
-            }, null, UnexpectedTimeoutMilliseconds, false);
+            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, __) =>
+                {
+                    waitCallbackProgressMade.Set();
+                    completeWaitCallback.WaitOne(UnexpectedTimeoutMilliseconds);
+                    waitCallbackProgressMade.Set();
+                },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                false
+            );
 
             waitEvent.Set();
             waitCallbackProgressMade.CheckedWait(); // one callback running
@@ -436,7 +587,8 @@ namespace System.Threading.ThreadPools.Tests
             waitCallbackProgressMade.CheckedWait(); // two callbacks running
 
             Thread t = ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
-                Assert.True(registeredWaitHandle.Unregister(new InvalidWaitHandle())));
+                Assert.True(registeredWaitHandle.Unregister(new InvalidWaitHandle()))
+            );
             t.IsBackground = true;
             t.Start();
 
@@ -453,13 +605,13 @@ namespace System.Threading.ThreadPools.Tests
         public static void CallingUnregisterOnAutomaticallyUnregisteredHandleReturnsTrue()
         {
             var waitCallbackInvoked = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(
-                    new AutoResetEvent(true),
-                    (_, __) => waitCallbackInvoked.Set(),
-                    null,
-                    UnexpectedTimeoutMilliseconds,
-                    true);
+            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                new AutoResetEvent(true),
+                (_, __) => waitCallbackInvoked.Set(),
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
             waitCallbackInvoked.CheckedWait();
             Thread.Sleep(ExpectedTimeoutMilliseconds); // wait for callback to exit
             Assert.True(registeredWaitHandle.Unregister(null));
@@ -469,8 +621,13 @@ namespace System.Threading.ThreadPools.Tests
         public static void EventSetAfterUnregisterNotObservedOnWaitThread()
         {
             var waitEvent = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, __) => { }, null, UnexpectedTimeoutMilliseconds, true);
+            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                (_, __) => { },
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
             Assert.True(registeredWaitHandle.Unregister(null));
             waitEvent.Set();
             Thread.Sleep(ExpectedTimeoutMilliseconds); // give wait thread a chance to observe the signal
@@ -482,8 +639,13 @@ namespace System.Threading.ThreadPools.Tests
         {
             using (var waitEvent = new AutoResetEvent(false))
             {
-                RegisteredWaitHandle registeredWaitHandle =
-                    ThreadPool.RegisterWaitForSingleObject(waitEvent, (_, __) => { }, null, UnexpectedTimeoutMilliseconds, true);
+                RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                    waitEvent,
+                    (_, __) => { },
+                    null,
+                    UnexpectedTimeoutMilliseconds,
+                    true
+                );
                 Assert.True(registeredWaitHandle.Unregister(null));
             }
         }
@@ -500,18 +662,36 @@ namespace System.Threading.ThreadPools.Tests
             };
 
             var waitEvent = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent, waitCallback, null, UnexpectedTimeoutMilliseconds, true);
+            RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent,
+                waitCallback,
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             var waitEvent2 = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle2 =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent2, waitCallback, null, UnexpectedTimeoutMilliseconds, true);
+            RegisteredWaitHandle registeredWaitHandle2 = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent2,
+                waitCallback,
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             var waitEvent3 = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle3 =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent3, waitCallback, null, UnexpectedTimeoutMilliseconds, true);
+            RegisteredWaitHandle registeredWaitHandle3 = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent3,
+                waitCallback,
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
-            void SetAndUnregister(AutoResetEvent waitEvent, RegisteredWaitHandle registeredWaitHandle)
+            void SetAndUnregister(
+                AutoResetEvent waitEvent,
+                RegisteredWaitHandle registeredWaitHandle
+            )
             {
                 waitEvent.Set();
                 handlePendingRemoval.CheckedWait();
@@ -525,8 +705,13 @@ namespace System.Threading.ThreadPools.Tests
             SetAndUnregister(waitEvent2, registeredWaitHandle2);
 
             var waitEvent4 = new AutoResetEvent(false);
-            RegisteredWaitHandle registeredWaitHandle4 =
-                ThreadPool.RegisterWaitForSingleObject(waitEvent4, waitCallback, null, UnexpectedTimeoutMilliseconds, true);
+            RegisteredWaitHandle registeredWaitHandle4 = ThreadPool.RegisterWaitForSingleObject(
+                waitEvent4,
+                waitCallback,
+                null,
+                UnexpectedTimeoutMilliseconds,
+                true
+            );
 
             SetAndUnregister(waitEvent3, registeredWaitHandle3);
             SetAndUnregister(waitEvent4, registeredWaitHandle4);

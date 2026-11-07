@@ -4,38 +4,36 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
-    internal sealed class WebPartEditorApplyVerb : WebPartActionVerb {
-
+    internal sealed class WebPartEditorApplyVerb : WebPartActionVerb
+    {
         // Properties must look at viewstate directly instead of the property in the base class,
         // so we can distinguish between an unset property and a property set to String.Empty.
-        [
-        WebSysDefaultValue(SR.WebPartEditorApplyVerb_Description)
-        ]
-        public override string Description {
-            get {
+        [WebSysDefaultValue(SR.WebPartEditorApplyVerb_Description)]
+        public override string Description
+        {
+            get
+            {
                 object o = ViewState["Description"];
-                return (o == null) ? SR.GetString(SR.WebPartEditorApplyVerb_Description) : (string)o;
+                return (o == null)
+                    ? SR.GetString(SR.WebPartEditorApplyVerb_Description)
+                    : (string)o;
             }
-            set {
-                ViewState["Description"] = value;
-            }
+            set { ViewState["Description"] = value; }
         }
 
-        [
-        WebSysDefaultValue(SR.WebPartEditorApplyVerb_Text)
-        ]
-        public override string Text {
-            get {
+        [WebSysDefaultValue(SR.WebPartEditorApplyVerb_Text)]
+        public override string Text
+        {
+            get
+            {
                 object o = ViewState["Text"];
                 return (o == null) ? SR.GetString(SR.WebPartEditorApplyVerb_Text) : (string)o;
             }
-            set {
-                ViewState["Text"] = value;
-            }
+            set { ViewState["Text"] = value; }
         }
     }
 }

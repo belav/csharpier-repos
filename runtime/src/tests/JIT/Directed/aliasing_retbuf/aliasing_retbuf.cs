@@ -13,7 +13,12 @@ public unsafe class AliasingRetBuf
     {
         int failures = 0;
 
-        Foo f = new Foo { A = 1, B = 2, C = 3 };
+        Foo f = new Foo
+        {
+            A = 1,
+            B = 2,
+            C = 3,
+        };
         CallPtrPInvoke(&f);
         if (f.A != 2 || f.B != 3 || f.C != 1)
         {
@@ -21,7 +26,12 @@ public unsafe class AliasingRetBuf
             failures |= 1;
         }
 
-        f = new Foo { A = 1, B = 2, C = 3 };
+        f = new Foo
+        {
+            A = 1,
+            B = 2,
+            C = 3,
+        };
         CallRefPInvoke(ref f);
         if (f.A != 2 || f.B != 3 || f.C != 1)
         {
@@ -29,7 +39,12 @@ public unsafe class AliasingRetBuf
             failures |= 2;
         }
 
-        f = new Foo { A = 1, B = 2, C = 3 };
+        f = new Foo
+        {
+            A = 1,
+            B = 2,
+            C = 3,
+        };
         CallStructFieldPInvoke(ref f);
         if (f.A != 2 || f.B != 3 || f.C != 1)
         {
@@ -37,10 +52,19 @@ public unsafe class AliasingRetBuf
             failures |= 4;
         }
 
-        IntPtr lib = NativeLibrary.Load(nameof(AliasingRetBufNative), typeof(AliasingRetBufNative).Assembly, null);
+        IntPtr lib = NativeLibrary.Load(
+            nameof(AliasingRetBufNative),
+            typeof(AliasingRetBufNative).Assembly,
+            null
+        );
         IntPtr export = NativeLibrary.GetExport(lib, "TransposeRetBuf");
 
-        f = new Foo { A = 3, B = 2, C = 1 };
+        f = new Foo
+        {
+            A = 3,
+            B = 2,
+            C = 1,
+        };
         CallPtrFPtr(&f, (delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo>)export);
         if (f.A != 2 || f.B != 1 || f.C != 3)
         {
@@ -48,15 +72,28 @@ public unsafe class AliasingRetBuf
             failures |= 8;
         }
 
-        f = new Foo { A = 3, B = 2, C = 1 };
-        CallStructFieldFPtr(ref f, (delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo>)export);
+        f = new Foo
+        {
+            A = 3,
+            B = 2,
+            C = 1,
+        };
+        CallStructFieldFPtr(
+            ref f,
+            (delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo>)export
+        );
         if (f.A != 2 || f.B != 1 || f.C != 3)
         {
             Console.WriteLine("FAIL: After CallStructFieldFPtr: {0}", f);
             failures |= 16;
         }
 
-        f = new Foo { A = 3, B = 2, C = 1 };
+        f = new Foo
+        {
+            A = 3,
+            B = 2,
+            C = 1,
+        };
         CallRefFPtr(ref f, (delegate* unmanaged[Cdecl, SuppressGCTransition]<ref Foo, Foo>)export);
         if (f.A != 2 || f.B != 1 || f.C != 3)
         {
@@ -93,19 +130,28 @@ public unsafe class AliasingRetBuf
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
-    private static void CallPtrFPtr(Foo* fi, delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo> fptr)
+    private static void CallPtrFPtr(
+        Foo* fi,
+        delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo> fptr
+    )
     {
         *fi = fptr(fi);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
-    private static void CallRefFPtr(ref Foo fi, delegate* unmanaged[Cdecl, SuppressGCTransition]<ref Foo, Foo> fptr)
+    private static void CallRefFPtr(
+        ref Foo fi,
+        delegate* unmanaged[Cdecl, SuppressGCTransition]<ref Foo, Foo> fptr
+    )
     {
         fi = fptr(ref fi);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
-    private static void CallStructFieldFPtr(ref Foo fi, delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo> fptr)
+    private static void CallStructFieldFPtr(
+        ref Foo fi,
+        delegate* unmanaged[Cdecl, SuppressGCTransition]<Foo*, Foo> fptr
+    )
     {
         Fooer fooer = new() { F = fi };
         fooer.F = fi;
@@ -114,6 +160,7 @@ public unsafe class AliasingRetBuf
     }
 
     private record struct Foo(nint A, nint B, nint C);
+
     private struct Fooer
     {
         public Foo F;
@@ -121,12 +168,20 @@ public unsafe class AliasingRetBuf
 
     static class AliasingRetBufNative
     {
-        [DllImport(nameof(AliasingRetBufNative), EntryPoint = "TransposeRetBuf", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(
+            nameof(AliasingRetBufNative),
+            EntryPoint = "TransposeRetBuf",
+            CallingConvention = CallingConvention.Cdecl
+        )]
         [SuppressGCTransition]
-        public static unsafe extern Foo TransposeRetBufPtr(Foo* fi);
+        public static extern unsafe Foo TransposeRetBufPtr(Foo* fi);
 
-        [DllImport(nameof(AliasingRetBufNative), EntryPoint = "TransposeRetBuf", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(
+            nameof(AliasingRetBufNative),
+            EntryPoint = "TransposeRetBuf",
+            CallingConvention = CallingConvention.Cdecl
+        )]
         [SuppressGCTransition]
-        public static unsafe extern Foo TransposeRetBufRef(ref Foo fi);
+        public static extern unsafe Foo TransposeRetBufRef(ref Foo fi);
     }
 }

@@ -25,5 +25,6 @@ public interface ISqlServerSequenceValueGeneratorFactory
         SqlServerSequenceValueGeneratorState generatorState,
         ISqlServerConnection connection,
         IRawSqlCommandBuilder rawSqlCommandBuilder,
-        IRelationalCommandDiagnosticsLogger commandLogger);
+        IRelationalCommandDiagnosticsLogger commandLogger
+    );
 }

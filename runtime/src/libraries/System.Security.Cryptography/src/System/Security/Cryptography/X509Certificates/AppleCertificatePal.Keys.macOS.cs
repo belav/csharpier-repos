@@ -21,12 +21,17 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
+                _identityHandle
+            );
 
             if (publicKey.IsInvalid)
             {
                 // SecCertificateCopyKey returns null for DSA, so fall back to manually building it.
-                publicKey = Interop.AppleCrypto.ImportEphemeralKey(_certData.SubjectPublicKeyInfo, false);
+                publicKey = Interop.AppleCrypto.ImportEphemeralKey(
+                    _certData.SubjectPublicKeyInfo,
+                    false
+                );
             }
 
             return new DSAImplementation.DSASecurityTransforms(publicKey, privateKey);
@@ -60,7 +65,12 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 ECParameters ecParameters = default;
 
-                if (typedKey.TryExportDataKeyParameters(includePrivateParameters: true, ref ecParameters))
+                if (
+                    typedKey.TryExportDataKeyParameters(
+                        includePrivateParameters: true,
+                        ref ecParameters
+                    )
+                )
                 {
                     using (PinAndClear.Track(ecParameters.D!))
                     {
@@ -80,7 +90,12 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             using (PinAndClear.Track(ecPrivateKey))
-            using (SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(ecPrivateKey, true))
+            using (
+                SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(
+                    ecPrivateKey,
+                    true
+                )
+            )
             {
                 return CopyWithPrivateKey(privateSecKey);
             }
@@ -88,14 +103,20 @@ namespace System.Security.Cryptography.X509Certificates
 
         public ICertificatePal CopyWithPrivateKey(ECDiffieHellman privateKey)
         {
-            var typedKey = privateKey as ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms;
+            var typedKey =
+                privateKey as ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms;
             byte[] ecPrivateKey;
 
             if (typedKey != null)
             {
                 ECParameters ecParameters = default;
 
-                if (typedKey.TryExportDataKeyParameters(includePrivateParameters: true, ref ecParameters))
+                if (
+                    typedKey.TryExportDataKeyParameters(
+                        includePrivateParameters: true,
+                        ref ecParameters
+                    )
+                )
                 {
                     using (PinAndClear.Track(ecParameters.D!))
                     {
@@ -115,7 +136,12 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             using (PinAndClear.Track(ecPrivateKey))
-            using (SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(ecPrivateKey, true))
+            using (
+                SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(
+                    ecPrivateKey,
+                    true
+                )
+            )
             {
                 return CopyWithPrivateKey(privateSecKey);
             }
@@ -133,7 +159,12 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rsaPrivateKey = privateKey.ExportRSAPrivateKey();
 
             using (PinAndClear.Track(rsaPrivateKey))
-            using (SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(rsaPrivateKey, true))
+            using (
+                SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(
+                    rsaPrivateKey,
+                    true
+                )
+            )
             {
                 return CopyWithPrivateKey(privateSecKey);
             }
@@ -148,7 +179,9 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
             }
 
-            SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(privateKey);
+            SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(
+                privateKey
+            );
 
             // If we're using a key already in a keychain don't add the certificate to that keychain here,
             // do it in the temporary add/remove in the shim.
@@ -184,7 +217,8 @@ namespace System.Security.Cryptography.X509Certificates
                     SafePasswordHandle.InvalidHandle,
                     cloneKeychain,
                     exportable,
-                    out identityHandle);
+                    out identityHandle
+                );
 
                 Debug.Assert(identityHandle.IsInvalid, "identityHandle should be IsInvalid");
                 identityHandle.Dispose();
@@ -198,7 +232,8 @@ namespace System.Security.Cryptography.X509Certificates
                 SafeSecIdentityHandle identityHandle = Interop.AppleCrypto.X509CopyWithPrivateKey(
                     tempHandle,
                     privateKey,
-                    keychain);
+                    keychain
+                );
 
                 AppleCertificatePal newPal = new AppleCertificatePal(identityHandle);
                 return newPal;

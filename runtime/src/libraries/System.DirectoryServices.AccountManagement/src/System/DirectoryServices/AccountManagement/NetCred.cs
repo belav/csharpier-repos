@@ -54,7 +54,11 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        private unsafe void SplitUsername(string username, ref string parsedUserName, ref string parsedDomainName)
+        private unsafe void SplitUsername(
+            string username,
+            ref string parsedUserName,
+            ref string parsedDomainName
+        )
         {
             // If the user has passed null creds then parsed components should also be null.
             if (username == null)
@@ -70,11 +74,12 @@ namespace System.DirectoryServices.AccountManagement
             fixed (char* splitDomain = new char[Interop.Credui.CRED_MAX_DOMAIN_TARGET_LENGTH])
             {
                 int result = Interop.Credui.CredUIParseUserName(
-                                                     username,
-                                                     splitUsername,
-                                                     Interop.Credui.CRED_MAX_USERNAME_LENGTH,
-                                                     splitDomain,
-                                                     Interop.Credui.CRED_MAX_DOMAIN_TARGET_LENGTH);
+                    username,
+                    splitUsername,
+                    Interop.Credui.CRED_MAX_USERNAME_LENGTH,
+                    splitDomain,
+                    Interop.Credui.CRED_MAX_DOMAIN_TARGET_LENGTH
+                );
 
                 // If CredUiParseUsername fails then username format must have been in a format it does not expect.
                 // Just pass then entire username as the user passed it with a null domain string.

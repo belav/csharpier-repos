@@ -10,13 +10,13 @@ namespace System.Activities.DurableInstancing
     using System.Globalization;
     using System.IO;
     using System.IO.Compression;
+    using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Runtime.Serialization;
-    using System.Linq;
-    using System.Xml.Linq;
     using System.Text;
     using System.Xml;
+    using System.Xml.Linq;
     using System.Xml.Serialization;
 
     static class SerializationUtilities
@@ -33,7 +33,13 @@ namespace System.Activities.DurableInstancing
 
                 foreach (CorrelationKey correlationKey in correlationKeys)
                 {
-                    Buffer.BlockCopy(correlationKey.BinaryData.Array, 0, concatenatedBlob, Convert.ToInt32(insertLocation), Convert.ToInt32(correlationKey.BinaryData.Count));
+                    Buffer.BlockCopy(
+                        correlationKey.BinaryData.Array,
+                        0,
+                        concatenatedBlob,
+                        Convert.ToInt32(insertLocation),
+                        Convert.ToInt32(correlationKey.BinaryData.Count)
+                    );
                     correlationKey.StartPosition = insertLocation;
                     insertLocation += correlationKey.BinaryData.Count;
                 }
@@ -49,7 +55,9 @@ namespace System.Activities.DurableInstancing
                 return DBNull.Value;
             }
 
-            StringBuilder stringBuilder = new StringBuilder(SqlWorkflowInstanceStoreConstants.DefaultStringBuilderCapacity);
+            StringBuilder stringBuilder = new StringBuilder(
+                SqlWorkflowInstanceStoreConstants.DefaultStringBuilderCapacity
+            );
 
             using (XmlWriter xmlWriter = XmlWriter.Create(stringBuilder))
             {
@@ -68,18 +76,20 @@ namespace System.Activities.DurableInstancing
 
         public static bool IsPropertyTypeSqlVariantCompatible(InstanceValue value)
         {
-            if ((value.IsDeletedValue) ||
-                (value.Value == null) ||
-                (value.Value is string && ((string)value.Value).Length <= 4000) ||
-                (value.Value is Guid) ||
-                (value.Value is DateTime) ||
-                (value.Value is int) ||
-                (value.Value is double) ||
-                (value.Value is float) ||
-                (value.Value is long) ||
-                (value.Value is short) ||
-                (value.Value is byte) ||
-                (value.Value is decimal && CanDecimalBeStoredAsSqlVariant((decimal)value.Value)))
+            if (
+                (value.IsDeletedValue)
+                || (value.Value == null)
+                || (value.Value is string && ((string)value.Value).Length <= 4000)
+                || (value.Value is Guid)
+                || (value.Value is DateTime)
+                || (value.Value is int)
+                || (value.Value is double)
+                || (value.Value is float)
+                || (value.Value is long)
+                || (value.Value is short)
+                || (value.Value is byte)
+                || (value.Value is decimal && CanDecimalBeStoredAsSqlVariant((decimal)value.Value))
+            )
             {
                 return true;
             }
@@ -89,14 +99,22 @@ namespace System.Activities.DurableInstancing
             }
         }
 
-        public static Dictionary<XName, InstanceValue> DeserializeMetadataPropertyBag(byte[] serializedMetadataProperties, InstanceEncodingOption instanceEncodingOption)
+        public static Dictionary<XName, InstanceValue> DeserializeMetadataPropertyBag(
+            byte[] serializedMetadataProperties,
+            InstanceEncodingOption instanceEncodingOption
+        )
         {
-            Dictionary<XName, InstanceValue> metadataProperties = new Dictionary<XName, InstanceValue>();
+            Dictionary<XName, InstanceValue> metadataProperties =
+                new Dictionary<XName, InstanceValue>();
 
             if (serializedMetadataProperties != null)
             {
-                IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(instanceEncodingOption);
-                Dictionary<XName, object> propertyBag = serializer.DeserializePropertyBag(serializedMetadataProperties);
+                IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(
+                    instanceEncodingOption
+                );
+                Dictionary<XName, object> propertyBag = serializer.DeserializePropertyBag(
+                    serializedMetadataProperties
+                );
 
                 foreach (KeyValuePair<XName, object> property in propertyBag)
                 {
@@ -107,28 +125,48 @@ namespace System.Activities.DurableInstancing
             return metadataProperties;
         }
 
-        public static ArraySegment<byte> SerializeMetadataPropertyBag(SaveWorkflowCommand saveWorkflowCommand,
-            InstancePersistenceContext context, InstanceEncodingOption instanceEncodingOption)
+        public static ArraySegment<byte> SerializeMetadataPropertyBag(
+            SaveWorkflowCommand saveWorkflowCommand,
+            InstancePersistenceContext context,
+            InstanceEncodingOption instanceEncodingOption
+        )
         {
-            IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(instanceEncodingOption);
+            IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(
+                instanceEncodingOption
+            );
             Dictionary<XName, object> propertyBagToSerialize = new Dictionary<XName, object>();
 
             if (context.InstanceView.InstanceMetadataConsistency == InstanceValueConsistency.None)
             {
-                foreach (KeyValuePair<XName, InstanceValue> metadataProperty in context.InstanceView.InstanceMetadata)
+                foreach (
+                    KeyValuePair<XName, InstanceValue> metadataProperty in context
+                        .InstanceView
+                        .InstanceMetadata
+                )
                 {
                     if ((metadataProperty.Value.Options & InstanceValueOptions.WriteOnly) == 0)
                     {
-                        propertyBagToSerialize.Add(metadataProperty.Key, metadataProperty.Value.Value);
+                        propertyBagToSerialize.Add(
+                            metadataProperty.Key,
+                            metadataProperty.Value.Value
+                        );
                     }
                 }
             }
 
-            foreach (KeyValuePair<XName, InstanceValue> metadataChange in saveWorkflowCommand.InstanceMetadataChanges)
+            foreach (
+                KeyValuePair<
+                    XName,
+                    InstanceValue
+                > metadataChange in saveWorkflowCommand.InstanceMetadataChanges
+            )
             {
                 if (metadataChange.Value.IsDeletedValue)
                 {
-                    if (context.InstanceView.InstanceMetadataConsistency == InstanceValueConsistency.None)
+                    if (
+                        context.InstanceView.InstanceMetadataConsistency
+                        == InstanceValueConsistency.None
+                    )
                     {
                         propertyBagToSerialize.Remove(metadataChange.Key);
                     }
@@ -151,34 +189,58 @@ namespace System.Activities.DurableInstancing
             return new ArraySegment<byte>();
         }
 
-        public static ArraySegment<byte>[] SerializePropertyBag(IDictionary<XName, InstanceValue> properties, InstanceEncodingOption encodingOption)
+        public static ArraySegment<byte>[] SerializePropertyBag(
+            IDictionary<XName, InstanceValue> properties,
+            InstanceEncodingOption encodingOption
+        )
         {
             ArraySegment<byte>[] dataArrays = new ArraySegment<byte>[4];
 
             if (properties.Count > 0)
             {
-                IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(encodingOption);
+                IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(
+                    encodingOption
+                );
                 XmlPropertyBag primitiveProperties = new XmlPropertyBag();
                 XmlPropertyBag primitiveWriteOnlyProperties = new XmlPropertyBag();
                 Dictionary<XName, object> complexProperties = new Dictionary<XName, object>();
-                Dictionary<XName, object> complexWriteOnlyProperties = new Dictionary<XName, object>();
-                Dictionary<XName, object>[] propertyBags = new Dictionary<XName, object>[] { primitiveProperties, complexProperties,
-                    primitiveWriteOnlyProperties, complexWriteOnlyProperties };
+                Dictionary<XName, object> complexWriteOnlyProperties =
+                    new Dictionary<XName, object>();
+                Dictionary<XName, object>[] propertyBags = new Dictionary<XName, object>[]
+                {
+                    primitiveProperties,
+                    complexProperties,
+                    primitiveWriteOnlyProperties,
+                    complexWriteOnlyProperties,
+                };
 
                 foreach (KeyValuePair<XName, InstanceValue> property in properties)
                 {
-                    bool isComplex = (XmlPropertyBag.GetPrimitiveType(property.Value.Value) == PrimitiveType.Unavailable);
-                    bool isWriteOnly = (property.Value.Options & InstanceValueOptions.WriteOnly) == InstanceValueOptions.WriteOnly;
+                    bool isComplex = (
+                        XmlPropertyBag.GetPrimitiveType(property.Value.Value)
+                        == PrimitiveType.Unavailable
+                    );
+                    bool isWriteOnly =
+                        (property.Value.Options & InstanceValueOptions.WriteOnly)
+                        == InstanceValueOptions.WriteOnly;
                     int index = (isWriteOnly ? 2 : 0) + (isComplex ? 1 : 0);
                     propertyBags[index].Add(property.Key, property.Value.Value);
                 }
 
                 // Remove the properties that are already stored as individual columns from the serialized blob
-                primitiveWriteOnlyProperties.Remove(SqlWorkflowInstanceStoreConstants.StatusPropertyName);
-                primitiveWriteOnlyProperties.Remove(SqlWorkflowInstanceStoreConstants.LastUpdatePropertyName);
-                primitiveWriteOnlyProperties.Remove(SqlWorkflowInstanceStoreConstants.PendingTimerExpirationPropertyName);
+                primitiveWriteOnlyProperties.Remove(
+                    SqlWorkflowInstanceStoreConstants.StatusPropertyName
+                );
+                primitiveWriteOnlyProperties.Remove(
+                    SqlWorkflowInstanceStoreConstants.LastUpdatePropertyName
+                );
+                primitiveWriteOnlyProperties.Remove(
+                    SqlWorkflowInstanceStoreConstants.PendingTimerExpirationPropertyName
+                );
 
-                complexWriteOnlyProperties.Remove(SqlWorkflowInstanceStoreConstants.BinaryBlockingBookmarksPropertyName);
+                complexWriteOnlyProperties.Remove(
+                    SqlWorkflowInstanceStoreConstants.BinaryBlockingBookmarksPropertyName
+                );
 
                 for (int i = 0; i < propertyBags.Length; i++)
                 {
@@ -199,7 +261,10 @@ namespace System.Activities.DurableInstancing
             return dataArrays;
         }
 
-        public static ArraySegment<byte> SerializeKeyMetadata(IDictionary<XName, InstanceValue> metadataProperties, InstanceEncodingOption encodingOption)
+        public static ArraySegment<byte> SerializeKeyMetadata(
+            IDictionary<XName, InstanceValue> metadataProperties,
+            InstanceEncodingOption encodingOption
+        )
         {
             if (metadataProperties != null && metadataProperties.Count > 0)
             {
@@ -207,33 +272,48 @@ namespace System.Activities.DurableInstancing
 
                 foreach (KeyValuePair<XName, InstanceValue> property in metadataProperties)
                 {
-                    if ((property.Value.Options & InstanceValueOptions.WriteOnly) != InstanceValueOptions.WriteOnly)
+                    if (
+                        (property.Value.Options & InstanceValueOptions.WriteOnly)
+                        != InstanceValueOptions.WriteOnly
+                    )
                     {
                         propertyBag.Add(property.Key, property.Value.Value);
                     }
                 }
 
-                IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(encodingOption);
+                IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(
+                    encodingOption
+                );
                 return serializer.SerializePropertyBag(propertyBag);
             }
 
             return new ArraySegment<byte>();
         }
 
-        public static Dictionary<XName, InstanceValue> DeserializeKeyMetadata(byte[] serializedKeyMetadata, InstanceEncodingOption encodingOption)
+        public static Dictionary<XName, InstanceValue> DeserializeKeyMetadata(
+            byte[] serializedKeyMetadata,
+            InstanceEncodingOption encodingOption
+        )
         {
             return DeserializeMetadataPropertyBag(serializedKeyMetadata, encodingOption);
         }
 
-        public static Dictionary<XName, InstanceValue> DeserializePropertyBag(byte[] primitiveDataProperties, byte[] complexDataProperties, InstanceEncodingOption encodingOption)
+        public static Dictionary<XName, InstanceValue> DeserializePropertyBag(
+            byte[] primitiveDataProperties,
+            byte[] complexDataProperties,
+            InstanceEncodingOption encodingOption
+        )
         {
-            IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(encodingOption);
+            IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(
+                encodingOption
+            );
             Dictionary<XName, InstanceValue> properties = new Dictionary<XName, InstanceValue>();
             Dictionary<XName, object>[] propertyBags = new Dictionary<XName, object>[2];
 
             if (primitiveDataProperties != null)
             {
-                propertyBags[0] = (Dictionary<XName, object>)serializer.DeserializeValue(primitiveDataProperties);
+                propertyBags[0] =
+                    (Dictionary<XName, object>)serializer.DeserializeValue(primitiveDataProperties);
             }
 
             if (complexDataProperties != null)
@@ -258,7 +338,11 @@ namespace System.Activities.DurableInstancing
         static bool CanDecimalBeStoredAsSqlVariant(decimal value)
         {
             string decimalAsString = value.ToString("G", CultureInfo.InvariantCulture);
-            return ((decimalAsString.Length - decimalAsString.IndexOf(".", StringComparison.Ordinal)) - 1 <= 18);
+            return (
+                (decimalAsString.Length - decimalAsString.IndexOf(".", StringComparison.Ordinal))
+                    - 1
+                <= 18
+            );
         }
 
         static Guid GetIdentityHash(WorkflowIdentity id)
@@ -301,23 +385,45 @@ namespace System.Activities.DurableInstancing
             if (command is CreateWorkflowOwnerWithIdentityCommand)
             {
                 InstanceValue instanceValueIdentityCollection = null;
-                CreateWorkflowOwnerWithIdentityCommand ownerCommand = command as CreateWorkflowOwnerWithIdentityCommand;
+                CreateWorkflowOwnerWithIdentityCommand ownerCommand =
+                    command as CreateWorkflowOwnerWithIdentityCommand;
 
-                if (ownerCommand.InstanceOwnerMetadata.TryGetValue(Workflow45Namespace.DefinitionIdentities, out instanceValueIdentityCollection))
+                if (
+                    ownerCommand.InstanceOwnerMetadata.TryGetValue(
+                        Workflow45Namespace.DefinitionIdentities,
+                        out instanceValueIdentityCollection
+                    )
+                )
                 {
                     if (instanceValueIdentityCollection.Value != null)
                     {
-                        identityCollection = instanceValueIdentityCollection.Value as IList<WorkflowIdentity>;
+                        identityCollection =
+                            instanceValueIdentityCollection.Value as IList<WorkflowIdentity>;
                         if (identityCollection == null)
                         {
-                            string typeName = typeof(IList<>).Name.Replace("`1", "<" + typeof(WorkflowIdentity).Name + ">");
-                            throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.InvalidMetadataValue(Workflow45Namespace.DefinitionIdentities, typeName)));
+                            string typeName = typeof(IList<>).Name.Replace(
+                                "`1",
+                                "<" + typeof(WorkflowIdentity).Name + ">"
+                            );
+                            throw FxTrace.Exception.AsError(
+                                new InstancePersistenceCommandException(
+                                    SR.InvalidMetadataValue(
+                                        Workflow45Namespace.DefinitionIdentities,
+                                        typeName
+                                    )
+                                )
+                            );
                         }
                     }
                 }
 
                 InstanceValue instanceValue = null;
-                if (ownerCommand.InstanceOwnerMetadata.TryGetValue(Workflow45Namespace.DefinitionIdentityFilter, out instanceValue))
+                if (
+                    ownerCommand.InstanceOwnerMetadata.TryGetValue(
+                        Workflow45Namespace.DefinitionIdentityFilter,
+                        out instanceValue
+                    )
+                )
                 {
                     if (instanceValue.Value != null)
                     {
@@ -330,11 +436,20 @@ namespace System.Activities.DurableInstancing
                             workflowIdentityFilter = -1;
                         }
 
-                        if (workflowIdentityFilter != (int)WorkflowIdentityFilter.Exact &&
-                            workflowIdentityFilter != (int)WorkflowIdentityFilter.Any &&
-                            workflowIdentityFilter != (int)WorkflowIdentityFilter.AnyRevision)
+                        if (
+                            workflowIdentityFilter != (int)WorkflowIdentityFilter.Exact
+                            && workflowIdentityFilter != (int)WorkflowIdentityFilter.Any
+                            && workflowIdentityFilter != (int)WorkflowIdentityFilter.AnyRevision
+                        )
                         {
-                            throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.InvalidMetadataValue(Workflow45Namespace.DefinitionIdentityFilter, typeof(WorkflowIdentityFilter).Name)));
+                            throw FxTrace.Exception.AsError(
+                                new InstancePersistenceCommandException(
+                                    SR.InvalidMetadataValue(
+                                        Workflow45Namespace.DefinitionIdentityFilter,
+                                        typeof(WorkflowIdentityFilter).Name
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -343,14 +458,26 @@ namespace System.Activities.DurableInstancing
             {
                 InstanceValue instanceValue = null;
                 SaveWorkflowCommand saveCommand = command as SaveWorkflowCommand;
-                if (saveCommand.InstanceMetadataChanges.TryGetValue(Workflow45Namespace.DefinitionIdentity, out instanceValue))
+                if (
+                    saveCommand.InstanceMetadataChanges.TryGetValue(
+                        Workflow45Namespace.DefinitionIdentity,
+                        out instanceValue
+                    )
+                )
                 {
                     if (!instanceValue.IsDeletedValue && instanceValue.Value != null)
                     {
                         identityCollection = new Collection<WorkflowIdentity>();
                         if (!(instanceValue.Value is WorkflowIdentity))
                         {
-                            throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.InvalidMetadataValue(Workflow45Namespace.DefinitionIdentity, typeof(WorkflowIdentity).Name)));
+                            throw FxTrace.Exception.AsError(
+                                new InstancePersistenceCommandException(
+                                    SR.InvalidMetadataValue(
+                                        Workflow45Namespace.DefinitionIdentity,
+                                        typeof(WorkflowIdentity).Name
+                                    )
+                                )
+                            );
                         }
 
                         identityCollection.Add((WorkflowIdentity)instanceValue.Value);
@@ -384,11 +511,17 @@ namespace System.Activities.DurableInstancing
                 foreach (WorkflowIdentity id in identityCollection)
                 {
                     xmlWriter.WriteStartElement("Identity");
-        
+
                     if (id == null)
                     {
-                        xmlWriter.WriteElementString("DefinitionIdentityHash", Guid.Empty.ToString());
-                        xmlWriter.WriteElementString("DefinitionIdentityAnyRevisionHash", Guid.Empty.ToString());
+                        xmlWriter.WriteElementString(
+                            "DefinitionIdentityHash",
+                            Guid.Empty.ToString()
+                        );
+                        xmlWriter.WriteElementString(
+                            "DefinitionIdentityAnyRevisionHash",
+                            Guid.Empty.ToString()
+                        );
                     }
                     else
                     {
@@ -396,9 +529,12 @@ namespace System.Activities.DurableInstancing
                         idAnyRevisionHash = GetIdentityAnyRevisionFilterHash(id);
 
                         xmlWriter.WriteElementString("DefinitionIdentityHash", idHash.ToString());
-                        xmlWriter.WriteElementString("DefinitionIdentityAnyRevisionHash", idAnyRevisionHash.ToString());
+                        xmlWriter.WriteElementString(
+                            "DefinitionIdentityAnyRevisionHash",
+                            idAnyRevisionHash.ToString()
+                        );
                         xmlWriter.WriteElementString("Name", id.Name);
-                        
+
                         if (id.Package != null)
                         {
                             xmlWriter.WriteElementString("Package", id.Package);
@@ -406,30 +542,44 @@ namespace System.Activities.DurableInstancing
 
                         if (id.Version != null)
                         {
-                            xmlWriter.WriteElementString("Major", id.Version.Major.ToString(CultureInfo.InvariantCulture));
-                            xmlWriter.WriteElementString("Minor", id.Version.Minor.ToString(CultureInfo.InvariantCulture));
+                            xmlWriter.WriteElementString(
+                                "Major",
+                                id.Version.Major.ToString(CultureInfo.InvariantCulture)
+                            );
+                            xmlWriter.WriteElementString(
+                                "Minor",
+                                id.Version.Minor.ToString(CultureInfo.InvariantCulture)
+                            );
                             if (id.Version.Build >= 0)
                             {
-                                xmlWriter.WriteElementString("Build", id.Version.Build.ToString(CultureInfo.InvariantCulture));
+                                xmlWriter.WriteElementString(
+                                    "Build",
+                                    id.Version.Build.ToString(CultureInfo.InvariantCulture)
+                                );
                                 if (id.Version.Revision >= 0)
                                 {
-                                    xmlWriter.WriteElementString("Revision", id.Version.Revision.ToString(CultureInfo.InvariantCulture));
+                                    xmlWriter.WriteElementString(
+                                        "Revision",
+                                        id.Version.Revision.ToString(CultureInfo.InvariantCulture)
+                                    );
                                 }
                             }
                         }
                     }
-        
+
                     xmlWriter.WriteEndElement();
                 }
                 xmlWriter.WriteEndElement();
 
                 // Write the WorkflowIdentityFilter
-                xmlWriter.WriteElementString("WorkflowIdentityFilter", workflowIdentityFilter.ToString(CultureInfo.InvariantCulture));
+                xmlWriter.WriteElementString(
+                    "WorkflowIdentityFilter",
+                    workflowIdentityFilter.ToString(CultureInfo.InvariantCulture)
+                );
 
                 xmlWriter.WriteEndElement();
             }
             return stringBuilder.ToString();
         }
-
     }
 }

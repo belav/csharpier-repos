@@ -21,16 +21,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         private class TypeWithConditional
         {
             [Conditional("TEST_DEFINITION")]
-            public virtual void DoNothing()
-            {
-            }
+            public virtual void DoNothing() { }
         }
 
         private class DerivedTypeWithConditional : TypeWithConditional
         {
-            public override void DoNothing()
-            {
-            }
+            public override void DoNothing() { }
         }
 
         private class TypeWithEvent
@@ -45,25 +41,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private class TypeWithOverloads
         {
-            public void DoNothing(int x, long y)
-            {
-            }
+            public void DoNothing(int x, long y) { }
 
-            public void DoNothing(long x, int y)
-            {
-            }
+            public void DoNothing(long x, int y) { }
         }
 
         // So the static binder can't decide some cases are/are not static at compilation stage
         class StaticAndInstanceSameName
         {
-            public void DoSomething(double d)
-            {
-            }
+            public void DoSomething(double d) { }
 
-            public static void DoSomething(int i)
-            {
-            }
+            public static void DoSomething(int i) { }
         }
 
         private class AmbiguousNumClass
@@ -77,12 +65,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             public static implicit operator decimal(AmbiguousNumClass nc) => nc._num;
         }
 
-        public static T ReturnRef<T>(T item) where T : class
+        public static T ReturnRef<T>(T item)
+            where T : class
         {
             return item;
         }
 
-        public static T ReturnVal<T>(T item) where T : struct
+        public static T ReturnVal<T>(T item)
+            where T : struct
         {
             return item;
         }
@@ -96,15 +86,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private class Constraints
         {
-            public void MustBeConvertible<T>(T arg) where T:IConvertible
-            {
-            }
+            public void MustBeConvertible<T>(T arg)
+                where T : IConvertible { }
 
-            public void MustBeStruct<T>(T arg) where T : struct
-            {
-            }
+            public void MustBeStruct<T>(T arg)
+                where T : struct { }
 
-            public void MustBeDerived<TDerived, TBase>(TDerived d, TBase b) where TDerived : TBase { }
+            public void MustBeDerived<TDerived, TBase>(TDerived d, TBase b)
+                where TDerived : TBase { }
         }
 
         [Fact]
@@ -241,8 +230,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void CastToStatic()
         {
-            CallSite<Func<CallSite, object, object>> site = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.Convert(CSharpBinderFlags.ConvertExplicit, typeof(Binder), GetType()));
+            CallSite<Func<CallSite, object, object>> site = CallSite<
+                Func<CallSite, object, object>
+            >.Create(Binder.Convert(CSharpBinderFlags.ConvertExplicit, typeof(Binder), GetType()));
             Func<CallSite, object, object> targ = site.Target;
             Assert.Throws<RuntimeBinderException>(() => targ(site, "abc"));
         }
@@ -263,7 +253,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             d = 2.0;
             new StaticAndInstanceSameName().DoSomething(d); // No exception
             d = 2;
-            Assert.Throws<RuntimeBinderException>(() => new StaticAndInstanceSameName().DoSomething(d));
+            Assert.Throws<RuntimeBinderException>(() =>
+                new StaticAndInstanceSameName().DoSomething(d)
+            );
         }
 
         [Fact]
@@ -278,13 +270,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void CtorCallOnNoCtorType()
         {
-            CallSite<Func<CallSite, Type, double>> callSite = CallSite<Func<CallSite, Type, double>>.Create(
+            CallSite<Func<CallSite, Type, double>> callSite = CallSite<
+                Func<CallSite, Type, double>
+            >.Create(
                 Binder.InvokeConstructor(
-                    CSharpBinderFlags.InvokeSpecialName, GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }));
+                    CSharpBinderFlags.InvokeSpecialName,
+                    GetType(),
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                )
+            );
             Func<CallSite, Type, double> target = callSite.Target;
             Assert.Throws<RuntimeBinderException>(() => target(callSite, typeof(double)));
         }
@@ -292,32 +286,49 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void NullaryCtorCallOnNoNullaryCtor()
         {
-            CallSite<Func<CallSite, Type, string>> callSite = CallSite<Func<CallSite, Type, string>>.Create(
+            CallSite<Func<CallSite, Type, string>> callSite = CallSite<
+                Func<CallSite, Type, string>
+            >.Create(
                 Binder.InvokeConstructor(
-                    CSharpBinderFlags.InvokeSpecialName, GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }));
+                    CSharpBinderFlags.InvokeSpecialName,
+                    GetType(),
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                )
+            );
             Func<CallSite, Type, string> target = callSite.Target;
-            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(() => target(callSite, typeof(string)));
+            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(() =>
+                target(callSite, typeof(string))
+            );
             Assert.Contains("0", rbe.Message);
         }
 
         [Fact]
         public void QuinaryCtorCallOnNoQuinaryCtor()
         {
-            CallSite<Func<CallSite, Type, object, object, object, object, object, object>> callSite = CallSite<Func<CallSite, Type, object, object, object, object, object, object>>.Create(
-                Binder.InvokeConstructor(CSharpBinderFlags.InvokeSpecialName, GetType(),
-                    new[]{
+            CallSite<
+                Func<CallSite, Type, object, object, object, object, object, object>
+            > callSite = CallSite<
+                Func<CallSite, Type, object, object, object, object, object, object>
+            >.Create(
+                Binder.InvokeConstructor(
+                    CSharpBinderFlags.InvokeSpecialName,
+                    GetType(),
+                    new[]
+                    {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)}));
-            Func<CallSite, Type, object, object, object, object, object, object> target = callSite.Target;
-            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(() => target.Invoke(callSite, typeof(string), null, null, null, null, null));
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                    }
+                )
+            );
+            Func<CallSite, Type, object, object, object, object, object, object> target =
+                callSite.Target;
+            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(() =>
+                target.Invoke(callSite, typeof(string), null, null, null, null, null)
+            );
             Assert.Contains("5", rbe.Message);
         }
 
@@ -379,35 +390,46 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void DuplicateNamedArgument()
         {
-            CallSite<Func<CallSite, object, object, object, object>> site =
-                CallSite<Func<CallSite, object, object, object, object>>.Create(
-                    Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                        CSharpBinderFlags.None, "Equals", null, GetType(),
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x")
-                        }));
+            CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
+                Func<CallSite, object, object, object, object>
+            >.Create(
+                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
+                    CSharpBinderFlags.None,
+                    "Equals",
+                    null,
+                    GetType(),
+                    new[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
+                    }
+                )
+            );
             Func<CallSite, object, object, object, object> target = site.Target;
-            Assert.Throws<RuntimeBinderException>(() => target.Invoke(site, EqualityComparer<int>.Default, 2, 2));
+            Assert.Throws<RuntimeBinderException>(() =>
+                target.Invoke(site, EqualityComparer<int>.Default, 2, 2)
+            );
         }
 
         public static IEnumerable<object[]> WrongArgumentCounts(int correct) =>
-            Enumerable.Range(0, 5).Where(i => i != correct).Select(i => new object[] {i});
+            Enumerable.Range(0, 5).Where(i => i != correct).Select(i => new object[] { i });
 
         [Theory, MemberData(nameof(WrongArgumentCounts), 2)]
         public void BinaryOperatorWrongNumberArguments(int argumentCount)
         {
             CSharpArgumentInfo x = CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null);
             CSharpArgumentInfo y = CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null);
-            CallSiteBinder binder =
-                Binder.BinaryOperation(
-                    CSharpBinderFlags.None, ExpressionType.Add,
-                    GetType(), new[] { x, y });
+            CallSiteBinder binder = Binder.BinaryOperation(
+                CSharpBinderFlags.None,
+                ExpressionType.Add,
+                GetType(),
+                new[] { x, y }
+            );
             LabelTarget target = Expression.Label();
             object[] args = Enumerable.Range(0, argumentCount).Select(i => (object)i).ToArray();
-            ReadOnlyCollection<ParameterExpression> parameters = Enumerable.Range(0, argumentCount)
+            ReadOnlyCollection<ParameterExpression> parameters = Enumerable
+                .Range(0, argumentCount)
                 .Select(_ => Expression.Parameter(typeof(int)))
                 .ToList()
                 .AsReadOnly();
@@ -431,14 +453,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public class Inner
             {
-                public void DoNothing()
-                {
-                }
+                public void DoNothing() { }
             }
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void TryInvokeOrAccessNestedClassAsMember()
         {
             dynamic dFirst = new Outer.Inner();
@@ -447,15 +470,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Throws<RuntimeBinderException>(() => d.Inner<int>());
             Assert.Throws<RuntimeBinderException>(() => d.Inner());
             Assert.Throws<RuntimeBinderException>(() => d.Inner = 2);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int i = d.Inner<int>();
-                });
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int i = d.Inner<int>();
+            });
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void TryInvokeTypeParameterAsMember()
         {
             dynamic d = new List<int>();
@@ -477,14 +502,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public new class Inner
             {
-                public void DoNothing()
-                {
-                }
+                public void DoNothing() { }
             }
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void AccessMethodHiddenByNested()
         {
             dynamic dFirst = new DerivedOuterHidingMethod.Inner();
@@ -497,9 +523,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public class Inner
             {
-                public void DoNothing()
-                {
-                }
+                public void DoNothing() { }
             }
         }
 
@@ -523,8 +547,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             CultureInfo prev = CultureInfo.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             dynamic d = "";
-            RuntimeBinderException e = Assert.Throws<RuntimeBinderException>(() => d.op_Equality("", ""));
-            Assert.Equal("'string.operator ==(string, string)': cannot explicitly call operator or accessor", e.Message);
+            RuntimeBinderException e = Assert.Throws<RuntimeBinderException>(() =>
+                d.op_Equality("", "")
+            );
+            Assert.Equal(
+                "'string.operator ==(string, string)': cannot explicitly call operator or accessor",
+                e.Message
+            );
             Thread.CurrentThread.CurrentCulture = prev;
         }
 
@@ -535,7 +564,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             dynamic d = "";
             RuntimeBinderException e = Assert.Throws<RuntimeBinderException>(() => d.get_Length());
-            Assert.Equal("'string.Length.get': cannot explicitly call operator or accessor", e.Message);
+            Assert.Equal(
+                "'string.Length.get': cannot explicitly call operator or accessor",
+                e.Message
+            );
             Thread.CurrentThread.CurrentCulture = prev;
         }
 
@@ -564,10 +596,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         private sealed class InitOnlyProperty
         {
             public InitOnlyProperty() { }
+
             public InitOnlyProperty(int value)
             {
                 ((dynamic)this).P = value;
             }
+
             public int P { get; init; }
             public int Q
             {

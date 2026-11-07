@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -20,14 +20,17 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 
 #if CLR2
-namespace Microsoft.Scripting.Ast.Compiler {
+namespace Microsoft.Scripting.Ast.Compiler
+{
 #else
-namespace System.Linq.Expressions.Compiler {
+namespace System.Linq.Expressions.Compiler
+{
 #endif
 
-    internal partial class StackSpiller {
-
-        private class TempMaker {
+    internal partial class StackSpiller
+    {
+        private class TempMaker
+        {
             /// <summary>
             /// Current temporary variable
             /// </summary>
@@ -48,17 +51,22 @@ namespace System.Linq.Expressions.Compiler {
             /// </summary>
             private List<ParameterExpression> _temps = new List<ParameterExpression>();
 
-            internal List<ParameterExpression> Temps {
+            internal List<ParameterExpression> Temps
+            {
                 get { return _temps; }
             }
 
-            internal ParameterExpression Temp(Type type) {
+            internal ParameterExpression Temp(Type type)
+            {
                 ParameterExpression temp;
-                if (_freeTemps != null) {
+                if (_freeTemps != null)
+                {
                     // Recycle from the free-list if possible.
-                    for (int i = _freeTemps.Count - 1; i >= 0; i--) {
+                    for (int i = _freeTemps.Count - 1; i >= 0; i--)
+                    {
                         temp = _freeTemps[i];
-                        if (temp.Type == type) {
+                        if (temp.Type == type)
+                        {
                             _freeTemps.RemoveAt(i);
                             return UseTemp(temp);
                         }
@@ -70,64 +78,76 @@ namespace System.Linq.Expressions.Compiler {
                 return UseTemp(temp);
             }
 
-            private ParameterExpression UseTemp(ParameterExpression temp) {
+            private ParameterExpression UseTemp(ParameterExpression temp)
+            {
                 Debug.Assert(_freeTemps == null || !_freeTemps.Contains(temp));
                 Debug.Assert(_usedTemps == null || !_usedTemps.Contains(temp));
 
-                if (_usedTemps == null) {
+                if (_usedTemps == null)
+                {
                     _usedTemps = new Stack<ParameterExpression>();
                 }
                 _usedTemps.Push(temp);
                 return temp;
             }
 
-            private void FreeTemp(ParameterExpression temp) {
+            private void FreeTemp(ParameterExpression temp)
+            {
                 Debug.Assert(_freeTemps == null || !_freeTemps.Contains(temp));
-                if (_freeTemps == null) {
+                if (_freeTemps == null)
+                {
                     _freeTemps = new List<ParameterExpression>();
                 }
                 _freeTemps.Add(temp);
             }
 
-            internal int Mark() {
+            internal int Mark()
+            {
                 return _usedTemps != null ? _usedTemps.Count : 0;
             }
 
-            // Free temporaries created since the last marking. 
+            // Free temporaries created since the last marking.
             // This is a performance optimization to lower the overall number of tempories needed.
-            internal void Free(int mark) {
+            internal void Free(int mark)
+            {
                 // (_usedTemps != null) ==> (mark <= _usedTemps.Count)
                 Debug.Assert(_usedTemps == null || mark <= _usedTemps.Count);
                 // (_usedTemps == null) ==> (mark == 0)
                 Debug.Assert(mark == 0 || _usedTemps != null);
 
-                if (_usedTemps != null) {
-                    while (mark < _usedTemps.Count) {
+                if (_usedTemps != null)
+                {
+                    while (mark < _usedTemps.Count)
+                    {
                         FreeTemp(_usedTemps.Pop());
                     }
                 }
             }
 
             [Conditional("DEBUG")]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-            internal void VerifyTemps() {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic"
+            )]
+            internal void VerifyTemps()
+            {
                 Debug.Assert(_usedTemps == null || _usedTemps.Count == 0);
             }
         }
-
 
         /// <summary>
         /// Rewrites child expressions, spilling them into temps if needed. The
         /// stack starts in the inital state, and after the first subexpression
         /// is added it is change to non-empty. This behavior can be overridden
         /// by setting the stack manually between adds.
-        /// 
-        /// When all children have been added, the caller should rewrite the 
+        ///
+        /// When all children have been added, the caller should rewrite the
         /// node if Rewrite is true. Then, it should call Finish with etiher
         /// the orignal expression or the rewritten expression. Finish will call
         /// Expression.Comma if necessary and return a new Result.
         /// </summary>
-        private class ChildRewriter {
+        private class ChildRewriter
+        {
             private readonly StackSpiller _self;
             private readonly Expression[] _expressions;
             private int _expressionsCount;
@@ -136,16 +156,19 @@ namespace System.Linq.Expressions.Compiler {
             private Stack _stack;
             private bool _done;
 
-            internal ChildRewriter(StackSpiller self, Stack stack, int count) {
+            internal ChildRewriter(StackSpiller self, Stack stack, int count)
+            {
                 _self = self;
                 _stack = stack;
                 _expressions = new Expression[count];
             }
 
-            internal void Add(Expression node) {
+            internal void Add(Expression node)
+            {
                 Debug.Assert(!_done);
 
-                if (node == null) {
+                if (node == null)
+                {
                     _expressions[_expressionsCount++] = null;
                     return;
                 }
@@ -158,29 +181,38 @@ namespace System.Linq.Expressions.Compiler {
                 _expressions[_expressionsCount++] = exp.Node;
             }
 
-            internal void Add(IList<Expression> expressions) {
-                for (int i = 0, count = expressions.Count; i < count; i++) {
+            internal void Add(IList<Expression> expressions)
+            {
+                for (int i = 0, count = expressions.Count; i < count; i++)
+                {
                     Add(expressions[i]);
                 }
             }
 
-            internal void AddArguments(IArgumentProvider expressions) {
-                for (int i = 0, count = expressions.ArgumentCount; i < count; i++) {
+            internal void AddArguments(IArgumentProvider expressions)
+            {
+                for (int i = 0, count = expressions.ArgumentCount; i < count; i++)
+                {
                     Add(expressions.GetArgument(i));
                 }
             }
 
-            private void EnsureDone() {
+            private void EnsureDone()
+            {
                 // done adding arguments, build the comma if necessary
-                if (!_done) {
+                if (!_done)
+                {
                     _done = true;
 
-                    if (_action == RewriteAction.SpillStack) {
+                    if (_action == RewriteAction.SpillStack)
+                    {
                         Expression[] clone = _expressions;
                         int count = clone.Length;
                         List<Expression> comma = new List<Expression>(count + 1);
-                        for (int i = 0; i < count; i++) {
-                            if (clone[i] != null) {
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (clone[i] != null)
+                            {
                                 Expression temp;
                                 clone[i] = _self.ToTemp(clone[i], out temp);
                                 comma.Add(temp);
@@ -192,18 +224,22 @@ namespace System.Linq.Expressions.Compiler {
                 }
             }
 
-            internal bool Rewrite {
+            internal bool Rewrite
+            {
                 get { return _action != RewriteAction.None; }
             }
 
-            internal RewriteAction Action {
+            internal RewriteAction Action
+            {
                 get { return _action; }
             }
 
-            internal Result Finish(Expression expr) {
+            internal Result Finish(Expression expr)
+            {
                 EnsureDone();
 
-                if (_action == RewriteAction.SpillStack) {
+                if (_action == RewriteAction.SpillStack)
+                {
                     Debug.Assert(_comma.Capacity == _comma.Count + 1);
                     _comma.Add(expr);
                     expr = MakeBlock(_comma);
@@ -212,26 +248,33 @@ namespace System.Linq.Expressions.Compiler {
                 return new Result(_action, expr);
             }
 
-            internal Expression this[int index] {
-                get {
+            internal Expression this[int index]
+            {
+                get
+                {
                     EnsureDone();
-                    if (index < 0) {
+                    if (index < 0)
+                    {
                         index += _expressions.Length;
                     }
                     return _expressions[index];
                 }
             }
 
-            internal Expression[] this[int first, int last] {
-                get {
+            internal Expression[] this[int first, int last]
+            {
+                get
+                {
                     EnsureDone();
-                    if (last < 0) {
+                    if (last < 0)
+                    {
                         last += _expressions.Length;
                     }
                     int count = last - first + 1;
                     ContractUtils.RequiresArrayRange(_expressions, first, count, "first", "last");
 
-                    if (count == _expressions.Length) {
+                    if (count == _expressions.Length)
+                    {
                         Debug.Assert(first == 0);
                         // if the entire array is requested just return it so we don't make a new array
                         return _expressions;
@@ -244,22 +287,28 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-
-        private ParameterExpression MakeTemp(Type type) {
+        private ParameterExpression MakeTemp(Type type)
+        {
             return _tm.Temp(type);
         }
 
-        private int Mark() {
+        private int Mark()
+        {
             return _tm.Mark();
         }
 
-        private void Free(int mark) {
+        private void Free(int mark)
+        {
             _tm.Free(mark);
         }
 
         [Conditional("DEBUG")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        private void VerifyTemps() {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic"
+        )]
+        private void VerifyTemps()
+        {
             _tm.VerifyTemps();
         }
 
@@ -268,7 +317,8 @@ namespace System.Linq.Expressions.Compiler {
         ///     save: temp = expression
         ///     return value: temp
         /// </summary>
-        private ParameterExpression ToTemp(Expression expression, out Expression save) {
+        private ParameterExpression ToTemp(Expression expression, out Expression save)
+        {
             ParameterExpression temp = MakeTemp(expression.Type);
             save = Expression.Assign(temp, expression);
             return temp;
@@ -279,7 +329,8 @@ namespace System.Linq.Expressions.Compiler {
         /// This should not be used for rewriting BlockExpression itself, or
         /// anything else that supports jumping.
         /// </summary>
-        private static Expression MakeBlock(params Expression[] expressions) {
+        private static Expression MakeBlock(params Expression[] expressions)
+        {
             return MakeBlock((IList<Expression>)expressions);
         }
 
@@ -288,7 +339,8 @@ namespace System.Linq.Expressions.Compiler {
         /// This should not be used for rewriting BlockExpression itself, or
         /// anything else that supports jumping.
         /// </summary>
-        private static Expression MakeBlock(IList<Expression> expressions) {
+        private static Expression MakeBlock(IList<Expression> expressions)
+        {
             return new SpilledExpressionBlock(expressions);
         }
     }
@@ -297,11 +349,16 @@ namespace System.Linq.Expressions.Compiler {
     /// A special subtype of BlockExpression that indicates to the compiler
     /// that this block is a spilled expression and should not allow jumps in.
     /// </summary>
-    internal sealed class SpilledExpressionBlock : BlockN {
+    internal sealed class SpilledExpressionBlock : BlockN
+    {
         internal SpilledExpressionBlock(IList<Expression> expressions)
-            : base(expressions) {
-        }
-        internal override BlockExpression Rewrite(ReadOnlyCollection<ParameterExpression> variables, Expression[] args) {
+            : base(expressions) { }
+
+        internal override BlockExpression Rewrite(
+            ReadOnlyCollection<ParameterExpression> variables,
+            Expression[] args
+        )
+        {
             throw ContractUtils.Unreachable;
         }
     }

@@ -199,14 +199,11 @@ public class AdaptiveCapacityDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -246,14 +243,11 @@ public class AdaptiveCapacityDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -267,14 +261,11 @@ public class AdaptiveCapacityDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -371,14 +362,11 @@ public class AdaptiveCapacityDictionaryTests
         dict.Add("key", "value");
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -434,14 +422,11 @@ public class AdaptiveCapacityDictionaryTests
         ExceptionAssert.ThrowsArgument(() => dict.Add("key", "value2"), "key", message);
 
         // Assert
-        Assert.Collection(
-            dict.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -461,14 +446,11 @@ public class AdaptiveCapacityDictionaryTests
         ExceptionAssert.ThrowsArgument(() => dict.Add("kEy", "value2"), "key", message);
 
         // Assert
-        Assert.Collection(
-            dict.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -740,14 +722,11 @@ public class AdaptiveCapacityDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -765,14 +744,11 @@ public class AdaptiveCapacityDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -813,14 +789,11 @@ public class AdaptiveCapacityDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -897,14 +870,11 @@ public class AdaptiveCapacityDictionaryTests
         // Assert
         Assert.False(result);
         Assert.Null(removedValue);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 

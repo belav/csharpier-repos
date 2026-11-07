@@ -41,7 +41,11 @@ namespace System.Runtime.Caching
 
             if (memInfo.TotalAvailableMemoryBytes >= memInfo.MemoryLoadBytes)
             {
-                int memoryLoad = (int)((float)memInfo.MemoryLoadBytes * 100.0 / (float)memInfo.TotalAvailableMemoryBytes);
+                int memoryLoad = (int)(
+                    (float)memInfo.MemoryLoadBytes
+                    * 100.0
+                    / (float)memInfo.TotalAvailableMemoryBytes
+                );
                 return Math.Max(1, memoryLoad);
             }
 

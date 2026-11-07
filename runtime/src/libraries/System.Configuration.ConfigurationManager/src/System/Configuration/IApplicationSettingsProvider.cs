@@ -12,7 +12,10 @@ namespace System.Configuration
         /// <summary>
         /// Retrieves the previous value of a given SettingsProperty. This is used in conjunction with Upgrade.
         /// </summary>
-        SettingsPropertyValue GetPreviousVersion(SettingsContext context, SettingsProperty property);
+        SettingsPropertyValue GetPreviousVersion(
+            SettingsContext context,
+            SettingsProperty property
+        );
 
         /// <summary>
         /// Resets all settings to their "default" values.

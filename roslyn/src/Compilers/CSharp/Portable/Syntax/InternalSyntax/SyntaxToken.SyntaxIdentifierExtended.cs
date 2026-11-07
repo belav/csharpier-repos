@@ -15,14 +15,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             protected readonly SyntaxKind contextualKind;
             protected readonly string valueText;
 
-            internal SyntaxIdentifierExtended(SyntaxKind contextualKind, string text, string valueText)
+            internal SyntaxIdentifierExtended(
+                SyntaxKind contextualKind,
+                string text,
+                string valueText
+            )
                 : base(text)
             {
                 this.contextualKind = contextualKind;
                 this.valueText = valueText;
             }
 
-            internal SyntaxIdentifierExtended(SyntaxKind contextualKind, string text, string valueText, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+            internal SyntaxIdentifierExtended(
+                SyntaxKind contextualKind,
+                string text,
+                string valueText,
+                DiagnosticInfo[] diagnostics,
+                SyntaxAnnotation[] annotations
+            )
                 : base(text, diagnostics, annotations)
             {
                 this.contextualKind = contextualKind;
@@ -46,22 +56,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new SyntaxIdentifierWithTrivia(this.contextualKind, this.TextField, this.valueText, trivia, null, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxIdentifierWithTrivia(
+                    this.contextualKind,
+                    this.TextField,
+                    this.valueText,
+                    trivia,
+                    null,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new SyntaxIdentifierWithTrivia(this.contextualKind, this.TextField, this.valueText, null, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxIdentifierWithTrivia(
+                    this.contextualKind,
+                    this.TextField,
+                    this.valueText,
+                    null,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
             {
-                return new SyntaxIdentifierExtended(this.contextualKind, this.TextField, this.valueText, diagnostics, this.GetAnnotations());
+                return new SyntaxIdentifierExtended(
+                    this.contextualKind,
+                    this.TextField,
+                    this.valueText,
+                    diagnostics,
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new SyntaxIdentifierExtended(this.contextualKind, this.TextField, this.valueText, this.GetDiagnostics(), annotations);
+                return new SyntaxIdentifierExtended(
+                    this.contextualKind,
+                    this.TextField,
+                    this.valueText,
+                    this.GetDiagnostics(),
+                    annotations
+                );
             }
         }
     }

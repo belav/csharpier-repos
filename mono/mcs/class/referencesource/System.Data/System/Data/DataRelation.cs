@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataRelation.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 // <owner current="true" primary="false">Microsoft</owner>
 // <owner current="false" primary="false">Microsoft</owner>
@@ -25,13 +25,14 @@ additional notes:
 We decided to enforce the rule 1 just if Xml being persisted
 ******************************************************************************************************/
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Data.Common;
-    using System.Collections.Generic;
 
     /// <devdoc>
     ///    <para>
@@ -39,16 +40,20 @@ namespace System.Data {
     ///    </para>
     /// </devdoc>
     [
-    DefaultProperty("RelationName"),
-    Editor("Microsoft.VSDesigner.Data.Design.DataRelationEditor, " + AssemblyRef.MicrosoftVSDesigner, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing),
-    TypeConverter(typeof(RelationshipConverter)),
+        DefaultProperty("RelationName"),
+        Editor(
+            "Microsoft.VSDesigner.Data.Design.DataRelationEditor, "
+                + AssemblyRef.MicrosoftVSDesigner,
+            "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+        ),
+        TypeConverter(typeof(RelationshipConverter)),
     ]
-    public class DataRelation {
-
+    public class DataRelation
+    {
         // properties
-        private DataSet dataSet    = null;
+        private DataSet dataSet = null;
         internal PropertyCollection extendedProperties = null;
-        internal string relationName   = "";
+        internal string relationName = "";
 
         // events
         private PropertyChangedEventHandler onPropertyChangingDelegate = null;
@@ -64,9 +69,9 @@ namespace System.Data {
         internal string[] childColumnNames = null;
         internal string parentTableName = null;
         internal string childTableName = null;
-        internal string parentTableNamespace= null;
+        internal string parentTableNamespace = null;
         internal string childTableNamespace = null;
-        
+
         /// <devdoc>
         /// this stores whether the  child element appears beneath the parent in the XML persised files.
         /// </devdoc>
@@ -81,7 +86,9 @@ namespace System.Data {
         private bool _checkMultipleNested = true;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(ref _objectTypeCount);
+        private readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref _objectTypeCount
+        );
 
         /// <devdoc>
         ///    <para>
@@ -90,8 +97,7 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         public DataRelation(string relationName, DataColumn parentColumn, DataColumn childColumn)
-        : this(relationName, parentColumn, childColumn, true) {
-        }
+            : this(relationName, parentColumn, childColumn, true) { }
 
         /// <devdoc>
         ///    <para>
@@ -99,11 +105,22 @@ namespace System.Data {
         ///       value to create constraints.
         ///    </para>
         /// </devdoc>
-        public DataRelation(string relationName, DataColumn parentColumn, DataColumn childColumn, bool createConstraints) {
-            Bid.Trace("<ds.DataRelation.DataRelation|API> %d#, relationName='%ls', parentColumn=%d, childColumn=%d, createConstraints=%d{bool}\n",
-                            ObjectID, relationName, (parentColumn != null) ? parentColumn.ObjectID : 0, (childColumn != null) ? childColumn.ObjectID : 0,
-                            createConstraints);
-            
+        public DataRelation(
+            string relationName,
+            DataColumn parentColumn,
+            DataColumn childColumn,
+            bool createConstraints
+        )
+        {
+            Bid.Trace(
+                "<ds.DataRelation.DataRelation|API> %d#, relationName='%ls', parentColumn=%d, childColumn=%d, createConstraints=%d{bool}\n",
+                ObjectID,
+                relationName,
+                (parentColumn != null) ? parentColumn.ObjectID : 0,
+                (childColumn != null) ? childColumn.ObjectID : 0,
+                createConstraints
+            );
+
             DataColumn[] parentColumns = new DataColumn[1];
             parentColumns[0] = parentColumn;
             DataColumn[] childColumns = new DataColumn[1];
@@ -117,9 +134,12 @@ namespace System.Data {
         ///       and matched arrays of parent and child columns.
         ///    </para>
         /// </devdoc>
-        public DataRelation(string relationName, DataColumn[] parentColumns, DataColumn[] childColumns)
-        : this(relationName, parentColumns, childColumns, true) {
-        }
+        public DataRelation(
+            string relationName,
+            DataColumn[] parentColumns,
+            DataColumn[] childColumns
+        )
+            : this(relationName, parentColumns, childColumns, true) { }
 
         /// <devdoc>
         ///    <para>
@@ -127,7 +147,13 @@ namespace System.Data {
         ///       and child columns, and value to create constraints.
         ///    </para>
         /// </devdoc>
-        public DataRelation(string relationName, DataColumn[] parentColumns, DataColumn[] childColumns, bool createConstraints) {
+        public DataRelation(
+            string relationName,
+            DataColumn[] parentColumns,
+            DataColumn[] childColumns,
+            bool createConstraints
+        )
+        {
             Create(relationName, parentColumns, childColumns, createConstraints);
         }
 
@@ -136,20 +162,38 @@ namespace System.Data {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [Browsable(false)]
-        public DataRelation(string relationName, string parentTableName, string childTableName, string[] parentColumnNames, string[] childColumnNames, bool nested) {
-            this.relationName = relationName;            
+        public DataRelation(
+            string relationName,
+            string parentTableName,
+            string childTableName,
+            string[] parentColumnNames,
+            string[] childColumnNames,
+            bool nested
+        )
+        {
+            this.relationName = relationName;
             this.parentColumnNames = parentColumnNames;
             this.childColumnNames = childColumnNames;
             this.parentTableName = parentTableName;
             this.childTableName = childTableName;
             this.nested = nested;
-            // DataRelation(relationName, parentTableName, null, childTableName, null, parentColumnNames, childColumnNames, nested) 
+            // DataRelation(relationName, parentTableName, null, childTableName, null, parentColumnNames, childColumnNames, nested)
         }
 
         [Browsable(false)]
         // Design time constructor
-        public DataRelation(string relationName, string parentTableName, string parentTableNamespace, string childTableName, string childTableNamespace, string[] parentColumnNames, string[] childColumnNames, bool nested) {
-            this.relationName = relationName;            
+        public DataRelation(
+            string relationName,
+            string parentTableName,
+            string parentTableNamespace,
+            string childTableName,
+            string childTableNamespace,
+            string[] parentColumnNames,
+            string[] childColumnNames,
+            bool nested
+        )
+        {
+            this.relationName = relationName;
             this.parentColumnNames = parentColumnNames;
             this.childColumnNames = childColumnNames;
             this.parentTableName = parentTableName;
@@ -158,25 +202,29 @@ namespace System.Data {
             this.childTableNamespace = childTableNamespace;
             this.nested = nested;
         }
-            
+
         /// <devdoc>
         ///    <para>
         ///       Gets the child columns of this relation.
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataRelationChildColumnsDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataRelationChildColumnsDescr)
         ]
-        public virtual DataColumn[] ChildColumns {
-            get {
+        public virtual DataColumn[] ChildColumns
+        {
+            get
+            {
                 CheckStateForProperty();
                 return childKey.ToArray();
             }
         }
 
-        internal DataColumn[] ChildColumnsReference {
-            get {
+        internal DataColumn[] ChildColumnsReference
+        {
+            get
+            {
                 CheckStateForProperty();
                 return childKey.ColumnsReference;
             }
@@ -185,8 +233,10 @@ namespace System.Data {
         /// <devdoc>
         /// The internal Key object for the child table.
         /// </devdoc>
-        internal DataKey ChildKey {
-            get {
+        internal DataKey ChildKey
+        {
+            get
+            {
                 CheckStateForProperty();
                 return childKey;
             }
@@ -197,8 +247,10 @@ namespace System.Data {
         ///       Gets the child table of this relation.
         ///    </para>
         /// </devdoc>
-        public virtual DataTable ChildTable {
-            get {
+        public virtual DataTable ChildTable
+        {
+            get
+            {
                 CheckStateForProperty();
                 return childKey.Table;
             }
@@ -210,27 +262,29 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        public virtual DataSet DataSet {
-            get {
+        public virtual DataSet DataSet
+        {
+            get
+            {
                 CheckStateForProperty();
                 return dataSet;
             }
         }
 
-        internal string[] ParentColumnNames {
-            get {
-                return parentKey.GetColumnNames();
-            }
+        internal string[] ParentColumnNames
+        {
+            get { return parentKey.GetColumnNames(); }
         }
 
-        internal string[] ChildColumnNames {
-            get {
-                return childKey.GetColumnNames();
-            }
+        internal string[] ChildColumnNames
+        {
+            get { return childKey.GetColumnNames(); }
         }
 
-        private static bool IsKeyNull(object[] values) {
-            for (int i = 0; i < values.Length; i++) {
+        private static bool IsKeyNull(object[] values)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
                 if (!DataStorage.IsObjectNull(values[i]))
                     return false;
             }
@@ -241,71 +295,129 @@ namespace System.Data {
         /// <devdoc>
         /// Gets the child rows for the parent row across the relation using the version given
         /// </devdoc>
-        internal static DataRow[] GetChildRows(DataKey parentKey, DataKey childKey, DataRow parentRow, DataRowVersion version) {
+        internal static DataRow[] GetChildRows(
+            DataKey parentKey,
+            DataKey childKey,
+            DataRow parentRow,
+            DataRowVersion version
+        )
+        {
             object[] values = parentRow.GetKeyValues(parentKey, version);
-            if (IsKeyNull(values)) {
+            if (IsKeyNull(values))
+            {
                 return childKey.Table.NewRowArray(0);
             }
 
-            Index index = childKey.GetSortIndex((version == DataRowVersion.Original) ? DataViewRowState.OriginalRows : DataViewRowState.CurrentRows);
+            Index index = childKey.GetSortIndex(
+                (version == DataRowVersion.Original)
+                    ? DataViewRowState.OriginalRows
+                    : DataViewRowState.CurrentRows
+            );
             return index.GetRows(values);
         }
 
         /// <devdoc>
         /// Gets the parent rows for the given child row across the relation using the version given
         /// </devdoc>
-        internal static DataRow[] GetParentRows(DataKey parentKey, DataKey childKey, DataRow childRow, DataRowVersion version) {
+        internal static DataRow[] GetParentRows(
+            DataKey parentKey,
+            DataKey childKey,
+            DataRow childRow,
+            DataRowVersion version
+        )
+        {
             object[] values = childRow.GetKeyValues(childKey, version);
-            if (IsKeyNull(values)) {
+            if (IsKeyNull(values))
+            {
                 return parentKey.Table.NewRowArray(0);
             }
 
-            Index index = parentKey.GetSortIndex((version == DataRowVersion.Original) ? DataViewRowState.OriginalRows : DataViewRowState.CurrentRows);
+            Index index = parentKey.GetSortIndex(
+                (version == DataRowVersion.Original)
+                    ? DataViewRowState.OriginalRows
+                    : DataViewRowState.CurrentRows
+            );
             return index.GetRows(values);
         }
 
-        internal static DataRow GetParentRow(DataKey parentKey, DataKey childKey, DataRow childRow, DataRowVersion version) {
-            if (!childRow.HasVersion((version == DataRowVersion.Original) ? DataRowVersion.Original : DataRowVersion.Current))
+        internal static DataRow GetParentRow(
+            DataKey parentKey,
+            DataKey childKey,
+            DataRow childRow,
+            DataRowVersion version
+        )
+        {
+            if (
+                !childRow.HasVersion(
+                    (version == DataRowVersion.Original)
+                        ? DataRowVersion.Original
+                        : DataRowVersion.Current
+                )
+            )
                 if (childRow.tempRecord == -1)
                     return null;
 
             object[] values = childRow.GetKeyValues(childKey, version);
-            if (IsKeyNull(values)) {
+            if (IsKeyNull(values))
+            {
                 return null;
             }
 
-            Index index = parentKey.GetSortIndex((version == DataRowVersion.Original) ? DataViewRowState.OriginalRows : DataViewRowState.CurrentRows);
+            Index index = parentKey.GetSortIndex(
+                (version == DataRowVersion.Original)
+                    ? DataViewRowState.OriginalRows
+                    : DataViewRowState.CurrentRows
+            );
             Range range = index.FindRecords(values);
-            if (range.IsNull) {
+            if (range.IsNull)
+            {
                 return null;
             }
 
-            if (range.Count > 1) {
+            if (range.Count > 1)
+            {
                 throw ExceptionBuilder.MultipleParents();
             }
             return parentKey.Table.recordManager[index.GetRecord(range.Min)];
         }
 
-
         /// <devdoc>
         /// Internally sets the DataSet pointer.
         /// </devdoc>
-        internal void SetDataSet(DataSet dataSet) {
-            if (this.dataSet != dataSet) {
+        internal void SetDataSet(DataSet dataSet)
+        {
+            if (this.dataSet != dataSet)
+            {
                 this.dataSet = dataSet;
             }
         }
 
-        internal void SetParentRowRecords(DataRow childRow, DataRow parentRow) {
+        internal void SetParentRowRecords(DataRow childRow, DataRow parentRow)
+        {
             object[] parentKeyValues = parentRow.GetKeyValues(ParentKey);
-            if (childRow.tempRecord != -1) {
-                ChildTable.recordManager.SetKeyValues(childRow.tempRecord, ChildKey, parentKeyValues);
+            if (childRow.tempRecord != -1)
+            {
+                ChildTable.recordManager.SetKeyValues(
+                    childRow.tempRecord,
+                    ChildKey,
+                    parentKeyValues
+                );
             }
-            if (childRow.newRecord != -1) {
-                ChildTable.recordManager.SetKeyValues(childRow.newRecord, ChildKey, parentKeyValues);
+            if (childRow.newRecord != -1)
+            {
+                ChildTable.recordManager.SetKeyValues(
+                    childRow.newRecord,
+                    ChildKey,
+                    parentKeyValues
+                );
             }
-            if (childRow.oldRecord != -1) {
-                ChildTable.recordManager.SetKeyValues(childRow.oldRecord, ChildKey, parentKeyValues);
+            if (childRow.oldRecord != -1)
+            {
+                ChildTable.recordManager.SetKeyValues(
+                    childRow.oldRecord,
+                    ChildKey,
+                    parentKeyValues
+                );
             }
         }
 
@@ -315,27 +427,30 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataRelationParentColumnsDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataRelationParentColumnsDescr)
         ]
-        public virtual DataColumn[] ParentColumns {
-            get {
+        public virtual DataColumn[] ParentColumns
+        {
+            get
+            {
                 CheckStateForProperty();
                 return parentKey.ToArray();
             }
         }
 
-        internal DataColumn[] ParentColumnsReference {
-            get {
-                return parentKey.ColumnsReference;
-            }
+        internal DataColumn[] ParentColumnsReference
+        {
+            get { return parentKey.ColumnsReference; }
         }
 
         /// <devdoc>
         /// The internal constraint object for the parent table.
         /// </devdoc>
-        internal DataKey ParentKey {
-            get {
+        internal DataKey ParentKey
+        {
+            get
+            {
                 CheckStateForProperty();
                 return parentKey;
             }
@@ -346,8 +461,10 @@ namespace System.Data {
         ///       Gets the parent table of this relation.
         ///    </para>
         /// </devdoc>
-        public virtual DataTable ParentTable {
-            get {
+        public virtual DataTable ParentTable
+        {
+            get
+            {
                 CheckStateForProperty();
                 return parentKey.Table;
             }
@@ -361,25 +478,38 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        DefaultValue(""),
-        ResDescriptionAttribute(Res.DataRelationRelationNameDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            DefaultValue(""),
+            ResDescriptionAttribute(Res.DataRelationRelationNameDescr)
         ]
-        public virtual string RelationName {
-            get {
+        public virtual string RelationName
+        {
+            get
+            {
                 CheckStateForProperty();
                 return relationName;
             }
-            set {
+            set
+            {
                 IntPtr hscp;
-                Bid.ScopeEnter(out hscp, "<ds.DataRelation.set_RelationName|API> %d#, '%ls'\n", ObjectID, value);
-                try {
+                Bid.ScopeEnter(
+                    out hscp,
+                    "<ds.DataRelation.set_RelationName|API> %d#, '%ls'\n",
+                    ObjectID,
+                    value
+                );
+                try
+                {
                     if (value == null)
                         value = "";
 
-                    CultureInfo locale = (dataSet != null ? dataSet.Locale : CultureInfo.CurrentCulture);
-                    if (String.Compare(relationName, value, true, locale) != 0) {
-                        if (dataSet != null) {
+                    CultureInfo locale = (
+                        dataSet != null ? dataSet.Locale : CultureInfo.CurrentCulture
+                    );
+                    if (String.Compare(relationName, value, true, locale) != 0)
+                    {
+                        if (dataSet != null)
+                        {
                             if (value.Length == 0)
                                 throw ExceptionBuilder.NoRelationName();
                             dataSet.Relations.RegisterName(value);
@@ -387,34 +517,69 @@ namespace System.Data {
                                 dataSet.Relations.UnregisterName(relationName);
                         }
                         this.relationName = value;
-                        ((DataRelationCollection.DataTableRelationCollection)(ParentTable.ChildRelations)).OnRelationPropertyChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this));
-                        ((DataRelationCollection.DataTableRelationCollection)(ChildTable.ParentRelations)).OnRelationPropertyChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this));
+                        (
+                            (DataRelationCollection.DataTableRelationCollection)(
+                                ParentTable.ChildRelations
+                            )
+                        ).OnRelationPropertyChanged(
+                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                        );
+                        (
+                            (DataRelationCollection.DataTableRelationCollection)(
+                                ChildTable.ParentRelations
+                            )
+                        ).OnRelationPropertyChanged(
+                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                        );
                     }
-                    else if (String.Compare(relationName, value, false, locale) != 0) {
+                    else if (String.Compare(relationName, value, false, locale) != 0)
+                    {
                         relationName = value;
-                        ((DataRelationCollection.DataTableRelationCollection)(ParentTable.ChildRelations)).OnRelationPropertyChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this));
-                        ((DataRelationCollection.DataTableRelationCollection)(ChildTable.ParentRelations)).OnRelationPropertyChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this));
+                        (
+                            (DataRelationCollection.DataTableRelationCollection)(
+                                ParentTable.ChildRelations
+                            )
+                        ).OnRelationPropertyChanged(
+                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                        );
+                        (
+                            (DataRelationCollection.DataTableRelationCollection)(
+                                ChildTable.ParentRelations
+                            )
+                        ).OnRelationPropertyChanged(
+                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                        );
                     }
                 }
-                finally{
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
         }
-        internal void CheckNamespaceValidityForNestedRelations(string ns) {
-            foreach(DataRelation rel in ChildTable.ParentRelations) {
-                if (rel == this || rel.Nested) {
-                    if (rel.ParentTable.Namespace != ns) {
+
+        internal void CheckNamespaceValidityForNestedRelations(string ns)
+        {
+            foreach (DataRelation rel in ChildTable.ParentRelations)
+            {
+                if (rel == this || rel.Nested)
+                {
+                    if (rel.ParentTable.Namespace != ns)
+                    {
                         throw ExceptionBuilder.InValidNestedRelation(ChildTable.TableName);
                     }
                 }
             }
         }
 
-        internal void CheckNestedRelations() {
+        internal void CheckNestedRelations()
+        {
             Bid.Trace("<ds.DataRelation.CheckNestedRelations|INFO> %d#\n", ObjectID);
-            
-            Debug.Assert(DataSet == null || ! nested, "this relation supposed to be not in dataset or not nested");
+
+            Debug.Assert(
+                DataSet == null || !nested,
+                "this relation supposed to be not in dataset or not nested"
+            );
             // 1. There is no other relation (R) that has this.ChildTable as R.ChildTable
             //  This is not valid for Whidbey anymore so the code has been removed
 
@@ -423,29 +588,42 @@ namespace System.Data {
             int numTables = ParentTable.DataSet.Tables.Count;
 #endif
             DataTable dt = ParentTable;
-            
-            if (ChildTable == ParentTable){
-                if (String.Compare(ChildTable.TableName, ChildTable.DataSet.DataSetName, true, ChildTable.DataSet.Locale) == 0)  
-                   throw ExceptionBuilder.SelfnestedDatasetConflictingName(ChildTable.TableName);
+
+            if (ChildTable == ParentTable)
+            {
+                if (
+                    String.Compare(
+                        ChildTable.TableName,
+                        ChildTable.DataSet.DataSetName,
+                        true,
+                        ChildTable.DataSet.Locale
+                    ) == 0
+                )
+                    throw ExceptionBuilder.SelfnestedDatasetConflictingName(ChildTable.TableName);
                 return; //allow self join tables.
             }
 
             List<DataTable> list = new List<DataTable>();
             list.Add(ChildTable);
-            
+
             // We have already checked for nested relaion UP
-            for(int i = 0; i < list.Count; ++i) {
+            for (int i = 0; i < list.Count; ++i)
+            {
                 DataRelation[] relations = list[i].NestedParentRelations;
-                foreach(DataRelation rel in relations) {
-                    if (rel.ParentTable == ChildTable && rel.ChildTable != ChildTable) {
+                foreach (DataRelation rel in relations)
+                {
+                    if (rel.ParentTable == ChildTable && rel.ChildTable != ChildTable)
+                    {
                         throw ExceptionBuilder.LoopInNestedRelations(ChildTable.TableName);
                     }
-                    if (!list.Contains (rel.ParentTable)) { // check for self nested
+                    if (!list.Contains(rel.ParentTable))
+                    { // check for self nested
                         list.Add(rel.ParentTable);
                     }
                 }
             }
         }
+
         /********************
           The Namespace of a table nested inside multiple parents can be
           1. Explicitly specified
@@ -460,94 +638,173 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        DefaultValue(false),
-        ResDescriptionAttribute(Res.DataRelationNested)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            DefaultValue(false),
+            ResDescriptionAttribute(Res.DataRelationNested)
         ]
-        public virtual bool Nested {
-            get {
+        public virtual bool Nested
+        {
+            get
+            {
                 CheckStateForProperty();
                 return nested;
             }
-            set {
+            set
+            {
                 IntPtr hscp;
-                Bid.ScopeEnter(out hscp, "<ds.DataRelation.set_Nested|API> %d#, %d{bool}\n", ObjectID, value); 
-                try {                
-                    if (nested != value) {
-                        if (dataSet != null) {
-                            if (value) {
-                                if (ChildTable.IsNamespaceInherited()) { // if not added to collection, don't do this check
+                Bid.ScopeEnter(
+                    out hscp,
+                    "<ds.DataRelation.set_Nested|API> %d#, %d{bool}\n",
+                    ObjectID,
+                    value
+                );
+                try
+                {
+                    if (nested != value)
+                    {
+                        if (dataSet != null)
+                        {
+                            if (value)
+                            {
+                                if (ChildTable.IsNamespaceInherited())
+                                { // if not added to collection, don't do this check
                                     CheckNamespaceValidityForNestedRelations(ParentTable.Namespace);
                                 }
-                                Debug.Assert(ChildTable != null, "On a DataSet, but not on Table. Bad state");
-                                ForeignKeyConstraint constraint = ChildTable.Constraints.FindForeignKeyConstraint(ChildKey.ColumnsReference, ParentKey.ColumnsReference);
-                                if (constraint != null) {
+                                Debug.Assert(
+                                    ChildTable != null,
+                                    "On a DataSet, but not on Table. Bad state"
+                                );
+                                ForeignKeyConstraint constraint =
+                                    ChildTable.Constraints.FindForeignKeyConstraint(
+                                        ChildKey.ColumnsReference,
+                                        ParentKey.ColumnsReference
+                                    );
+                                if (constraint != null)
+                                {
                                     constraint.CheckConstraint();
                                 }
                                 ValidateMultipleNestedRelations();
                             }
                         }
-                        if (!value && (parentKey.ColumnsReference[0].ColumnMapping == MappingType.Hidden))
+                        if (
+                            !value
+                            && (parentKey.ColumnsReference[0].ColumnMapping == MappingType.Hidden)
+                        )
                             throw ExceptionBuilder.RelationNestedReadOnly();
 
-                        if (value) {
-                          this.ParentTable.Columns.RegisterColumnName(this.ChildTable.TableName, null);
-                        } else {
-                          this.ParentTable.Columns.UnregisterName(this.ChildTable.TableName);
+                        if (value)
+                        {
+                            this.ParentTable.Columns.RegisterColumnName(
+                                this.ChildTable.TableName,
+                                null
+                            );
+                        }
+                        else
+                        {
+                            this.ParentTable.Columns.UnregisterName(this.ChildTable.TableName);
                         }
                         RaisePropertyChanging("Nested");
 
-                        if(value) {
+                        if (value)
+                        {
                             CheckNestedRelations();
                             if (this.DataSet != null)
-                                if (ParentTable == ChildTable) {
-                                    foreach(DataRow row in ChildTable.Rows)
+                                if (ParentTable == ChildTable)
+                                {
+                                    foreach (DataRow row in ChildTable.Rows)
                                         row.CheckForLoops(this);
 
-                                    if (ChildTable.DataSet != null && ( String.Compare(ChildTable.TableName, ChildTable.DataSet.DataSetName, true, ChildTable.DataSet.Locale) == 0) )
-                                        throw ExceptionBuilder.DatasetConflictingName(dataSet.DataSetName);                                    
+                                    if (
+                                        ChildTable.DataSet != null
+                                        && (
+                                            String.Compare(
+                                                ChildTable.TableName,
+                                                ChildTable.DataSet.DataSetName,
+                                                true,
+                                                ChildTable.DataSet.Locale
+                                            ) == 0
+                                        )
+                                    )
+                                        throw ExceptionBuilder.DatasetConflictingName(
+                                            dataSet.DataSetName
+                                        );
                                     ChildTable.fNestedInDataset = false;
                                 }
-                                else {
-                                        foreach(DataRow row in ChildTable.Rows)
-                                            row.GetParentRow(this);
+                                else
+                                {
+                                    foreach (DataRow row in ChildTable.Rows)
+                                        row.GetParentRow(this);
                                 }
-                            
+
                             this.ParentTable.ElementColumnCount++;
                         }
-                        else {
+                        else
+                        {
                             this.ParentTable.ElementColumnCount--;
                         }
 
                         this.nested = value;
                         ChildTable.CacheNestedParent();
-                        if (value) {
-                            if (ADP.IsEmpty(ChildTable.Namespace) && ((ChildTable.NestedParentsCount > 1) || 
-                                ((ChildTable.NestedParentsCount > 0) && ! (ChildTable.DataSet.Relations.Contains(this.RelationName))))) {
+                        if (value)
+                        {
+                            if (
+                                ADP.IsEmpty(ChildTable.Namespace)
+                                && (
+                                    (ChildTable.NestedParentsCount > 1)
+                                    || (
+                                        (ChildTable.NestedParentsCount > 0)
+                                        && !(
+                                            ChildTable.DataSet.Relations.Contains(this.RelationName)
+                                        )
+                                    )
+                                )
+                            )
+                            {
                                 string parentNs = null;
-                                foreach(DataRelation rel in ChildTable.ParentRelations) {
-                                    if (rel.Nested) {
-                                        if (null == parentNs) {
+                                foreach (DataRelation rel in ChildTable.ParentRelations)
+                                {
+                                    if (rel.Nested)
+                                    {
+                                        if (null == parentNs)
+                                        {
                                             parentNs = rel.ParentTable.Namespace;
                                         }
-                                        else {
-                                            if (String.Compare(parentNs, rel.ParentTable.Namespace, StringComparison.Ordinal) != 0) {
+                                        else
+                                        {
+                                            if (
+                                                String.Compare(
+                                                    parentNs,
+                                                    rel.ParentTable.Namespace,
+                                                    StringComparison.Ordinal
+                                                ) != 0
+                                            )
+                                            {
                                                 this.nested = false;
-                                                throw ExceptionBuilder.InvalidParentNamespaceinNestedRelation(ChildTable.TableName); 
+                                                throw ExceptionBuilder.InvalidParentNamespaceinNestedRelation(
+                                                    ChildTable.TableName
+                                                );
                                             }
                                         }
                                     }
                                 }
                                 // if not already in memory , form == unqualified
-                                if (CheckMultipleNested && ChildTable.tableNamespace != null && ChildTable.tableNamespace.Length == 0) {
-                                    throw ExceptionBuilder.TableCantBeNestedInTwoTables(ChildTable.TableName);
+                                if (
+                                    CheckMultipleNested
+                                    && ChildTable.tableNamespace != null
+                                    && ChildTable.tableNamespace.Length == 0
+                                )
+                                {
+                                    throw ExceptionBuilder.TableCantBeNestedInTwoTables(
+                                        ChildTable.TableName
+                                    );
                                 }
                                 ChildTable.tableNamespace = null; // if we dont throw, then let it inherit the Namespace
                             }
                         }
                     }
                 }
-                finally{
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
@@ -558,26 +815,33 @@ namespace System.Data {
         ///       Gets the constraint which ensures values in a column are unique.
         ///    </para>
         /// </devdoc>
-        public virtual UniqueConstraint ParentKeyConstraint {
-            get {
+        public virtual UniqueConstraint ParentKeyConstraint
+        {
+            get
+            {
                 CheckStateForProperty();
                 return parentKeyConstraint;
             }
         }
 
-        internal void SetParentKeyConstraint(UniqueConstraint value) {
-            Debug.Assert(parentKeyConstraint == null || value == null, "ParentKeyConstraint should not have been set already.");
+        internal void SetParentKeyConstraint(UniqueConstraint value)
+        {
+            Debug.Assert(
+                parentKeyConstraint == null || value == null,
+                "ParentKeyConstraint should not have been set already."
+            );
             parentKeyConstraint = value;
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Gets the <see cref='System.Data.ForeignKeyConstraint'/> for the relation.
         ///    </para>
         /// </devdoc>
-        public virtual ForeignKeyConstraint ChildKeyConstraint {
-            get {
+        public virtual ForeignKeyConstraint ChildKeyConstraint
+        {
+            get
+            {
                 CheckStateForProperty();
                 return childKeyConstraint;
             }
@@ -587,61 +851,83 @@ namespace System.Data {
         ///    <para>Gets the collection of custom user information.</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data), 
-        Browsable(false),
-        ResDescriptionAttribute(Res.ExtendedPropertiesDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            Browsable(false),
+            ResDescriptionAttribute(Res.ExtendedPropertiesDescr)
         ]
-        public PropertyCollection ExtendedProperties {
-            get {
-                if (extendedProperties == null) {
+        public PropertyCollection ExtendedProperties
+        {
+            get
+            {
+                if (extendedProperties == null)
+                {
                     extendedProperties = new PropertyCollection();
                 }
                 return extendedProperties;
             }
         }
 
-        internal bool CheckMultipleNested {
-            get {
-                return _checkMultipleNested;
-            }
-            set {
-                _checkMultipleNested = value;
-            }
+        internal bool CheckMultipleNested
+        {
+            get { return _checkMultipleNested; }
+            set { _checkMultipleNested = value; }
         }
-        
-        internal void SetChildKeyConstraint(ForeignKeyConstraint value) {
-            Debug.Assert(childKeyConstraint == null || value == null, "ChildKeyConstraint should not have been set already.");
+
+        internal void SetChildKeyConstraint(ForeignKeyConstraint value)
+        {
+            Debug.Assert(
+                childKeyConstraint == null || value == null,
+                "ChildKeyConstraint should not have been set already."
+            );
             childKeyConstraint = value;
         }
 
-        internal event PropertyChangedEventHandler PropertyChanging {
-            add {
-                onPropertyChangingDelegate += value; 
-            }
-            remove {
-                onPropertyChangingDelegate -= value;
-            }
+        internal event PropertyChangedEventHandler PropertyChanging
+        {
+            add { onPropertyChangingDelegate += value; }
+            remove { onPropertyChangingDelegate -= value; }
         }
+
         // If we're not in a dataSet relations collection, we need to verify on every property get that we're
         // still a good relation object.
-        internal void CheckState() {
-            if (dataSet == null) {
+        internal void CheckState()
+        {
+            if (dataSet == null)
+            {
                 parentKey.CheckState();
                 childKey.CheckState();
 
-                if (parentKey.Table.DataSet != childKey.Table.DataSet) {
+                if (parentKey.Table.DataSet != childKey.Table.DataSet)
+                {
                     throw ExceptionBuilder.RelationDataSetMismatch();
                 }
 
-                if (childKey.ColumnsEqual(parentKey)) {
+                if (childKey.ColumnsEqual(parentKey))
+                {
                     throw ExceptionBuilder.KeyColumnsIdentical();
                 }
 
-                for (int i = 0; i < parentKey.ColumnsReference.Length; i++) {
-                    if ((parentKey.ColumnsReference[i].DataType != childKey.ColumnsReference[i].DataType) ||
-                        ((parentKey.ColumnsReference[i].DataType ==  typeof(DateTime)) && 
-                        (parentKey.ColumnsReference[i].DateTimeMode != childKey.ColumnsReference[i].DateTimeMode) &&
-                        ((parentKey.ColumnsReference[i].DateTimeMode & childKey.ColumnsReference[i].DateTimeMode) != DataSetDateTime.Unspecified)))
+                for (int i = 0; i < parentKey.ColumnsReference.Length; i++)
+                {
+                    if (
+                        (
+                            parentKey.ColumnsReference[i].DataType
+                            != childKey.ColumnsReference[i].DataType
+                        )
+                        || (
+                            (parentKey.ColumnsReference[i].DataType == typeof(DateTime))
+                            && (
+                                parentKey.ColumnsReference[i].DateTimeMode
+                                != childKey.ColumnsReference[i].DateTimeMode
+                            )
+                            && (
+                                (
+                                    parentKey.ColumnsReference[i].DateTimeMode
+                                    & childKey.ColumnsReference[i].DateTimeMode
+                                ) != DataSetDateTime.Unspecified
+                            )
+                        )
+                    )
                         // alow unspecified and unspecifiedlocal
                         throw ExceptionBuilder.ColumnsTypeMismatch();
                 }
@@ -652,32 +938,52 @@ namespace System.Data {
         ///    <para>Checks to ensure the DataRelation is a valid object, even if it doesn't
         ///       belong to a <see cref='System.Data.DataSet'/>.</para>
         /// </devdoc>
-        protected void CheckStateForProperty() {
-            try {
+        protected void CheckStateForProperty()
+        {
+            try
+            {
                 CheckState();
             }
-            catch (Exception e) {
-                // 
-                if (ADP.IsCatchableExceptionType(e)) {
-                    throw ExceptionBuilder.BadObjectPropertyAccess(e.Message);            
+            catch (Exception e)
+            {
+                //
+                if (ADP.IsCatchableExceptionType(e))
+                {
+                    throw ExceptionBuilder.BadObjectPropertyAccess(e.Message);
                 }
                 throw;
             }
         }
 
-        private void Create(string relationName, DataColumn[] parentColumns, DataColumn[] childColumns, bool createConstraints) {
+        private void Create(
+            string relationName,
+            DataColumn[] parentColumns,
+            DataColumn[] childColumns,
+            bool createConstraints
+        )
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataRelation.Create|INFO> %d#, relationName='%ls', createConstraints=%d{bool}\n",
-                               ObjectID, relationName, createConstraints);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataRelation.Create|INFO> %d#, relationName='%ls', createConstraints=%d{bool}\n",
+                ObjectID,
+                relationName,
+                createConstraints
+            );
+            try
+            {
                 this.parentKey = new DataKey(parentColumns, true);
                 this.childKey = new DataKey(childColumns, true);
 
                 if (parentColumns.Length != childColumns.Length)
                     throw ExceptionBuilder.KeyLengthMismatch();
 
-                for(int i = 0; i < parentColumns.Length; i++){
-                    if ((parentColumns[i].Table.DataSet == null) || (childColumns[i].Table.DataSet == null))
+                for (int i = 0; i < parentColumns.Length; i++)
+                {
+                    if (
+                        (parentColumns[i].Table.DataSet == null)
+                        || (childColumns[i].Table.DataSet == null)
+                    )
                         throw ExceptionBuilder.ParentOrChildColumnsDoNotHaveDataSet();
                 }
 
@@ -686,15 +992,20 @@ namespace System.Data {
                 this.relationName = (relationName == null ? "" : relationName);
                 this.createConstraints = createConstraints;
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
+        internal DataRelation Clone(DataSet destination)
+        {
+            Bid.Trace(
+                "<ds.DataRelation.Clone|INFO> %d#, destination=%d\n",
+                ObjectID,
+                (destination != null) ? destination.ObjectID : 0
+            );
 
-        internal DataRelation Clone(DataSet destination) {
-            Bid.Trace("<ds.DataRelation.Clone|INFO> %d#, destination=%d\n", ObjectID, (destination != null) ? destination.ObjectID : 0);
-            
             DataTable parent = destination.Tables[ParentTable.TableName, ParentTable.Namespace];
             DataTable child = destination.Tables[ChildTable.TableName, ChildTable.Namespace];
             int keyLength = parentKey.ColumnsReference.Length;
@@ -702,7 +1013,8 @@ namespace System.Data {
             DataColumn[] parentColumns = new DataColumn[keyLength];
             DataColumn[] childColumns = new DataColumn[keyLength];
 
-            for (int i = 0; i < keyLength; i++) {
+            for (int i = 0; i < keyLength; i++)
+            {
                 parentColumns[i] = parent.Columns[ParentKey.ColumnsReference[i].ColumnName];
                 childColumns[i] = child.Columns[ChildKey.ColumnsReference[i].ColumnName];
             }
@@ -711,92 +1023,110 @@ namespace System.Data {
 
             clone.CheckMultipleNested = false; // disable the check  in clone as it is already created
             clone.Nested = this.Nested;
-            clone.CheckMultipleNested = true; // enable the check 
+            clone.CheckMultipleNested = true; // enable the check
 
             // ...Extended Properties
-            if (this.extendedProperties != null) {
-                foreach(Object key in this.extendedProperties.Keys) {
-                    clone.ExtendedProperties[key]=this.extendedProperties[key];
+            if (this.extendedProperties != null)
+            {
+                foreach (Object key in this.extendedProperties.Keys)
+                {
+                    clone.ExtendedProperties[key] = this.extendedProperties[key];
                 }
             }
             return clone;
         }
 
-        protected internal void OnPropertyChanging(PropertyChangedEventArgs pcevent) {
-            if (onPropertyChangingDelegate != null) {
+        protected internal void OnPropertyChanging(PropertyChangedEventArgs pcevent)
+        {
+            if (onPropertyChangingDelegate != null)
+            {
                 Bid.Trace("<ds.DataRelation.OnPropertyChanging|INFO> %d#\n", ObjectID);
                 onPropertyChangingDelegate(this, pcevent);
             }
         }
-        
-        protected internal void RaisePropertyChanging(string name) {
+
+        protected internal void RaisePropertyChanging(string name)
+        {
             OnPropertyChanging(new PropertyChangedEventArgs(name));
         }
 
         /// <devdoc>
         /// </devdoc>
-        public override string ToString() {
+        public override string ToString()
+        {
             return RelationName;
         }
 
-        internal void ValidateMultipleNestedRelations() {
+        internal void ValidateMultipleNestedRelations()
+        {
             // find all nested relations that this child table has
-            // if this relation is the only relation it has, then fine, 
+            // if this relation is the only relation it has, then fine,
             // otherwise check if all relations are created from XSD, without using Key/KeyRef
             // check all keys to see autogenerated
 
-            if (!this.Nested || !CheckMultipleNested) // no need for this verification 
+            if (!this.Nested || !CheckMultipleNested) // no need for this verification
                 return;
 
-            if (0 <  ChildTable.NestedParentRelations.Length) {
+            if (0 < ChildTable.NestedParentRelations.Length)
+            {
                 DataColumn[] childCols = ChildColumns;
-                if (childCols.Length != 1 || !IsAutoGenerated(childCols[0])) {
+                if (childCols.Length != 1 || !IsAutoGenerated(childCols[0]))
+                {
                     throw ExceptionBuilder.TableCantBeNestedInTwoTables(ChildTable.TableName);
                 }
-                
-                if (!XmlTreeGen.AutoGenerated(this)) {
+
+                if (!XmlTreeGen.AutoGenerated(this))
+                {
                     throw ExceptionBuilder.TableCantBeNestedInTwoTables(ChildTable.TableName);
                 }
-                
-                foreach (Constraint cs in ChildTable.Constraints) {
-                    if (cs is ForeignKeyConstraint) {
-                        ForeignKeyConstraint fk = (ForeignKeyConstraint) cs;
-                        if (!XmlTreeGen.AutoGenerated(fk, true)) {
-                            throw ExceptionBuilder.TableCantBeNestedInTwoTables(ChildTable.TableName);
+
+                foreach (Constraint cs in ChildTable.Constraints)
+                {
+                    if (cs is ForeignKeyConstraint)
+                    {
+                        ForeignKeyConstraint fk = (ForeignKeyConstraint)cs;
+                        if (!XmlTreeGen.AutoGenerated(fk, true))
+                        {
+                            throw ExceptionBuilder.TableCantBeNestedInTwoTables(
+                                ChildTable.TableName
+                            );
                         }
                     }
-                    else {
-                        UniqueConstraint unique = (UniqueConstraint) cs;
-                        if (!XmlTreeGen.AutoGenerated(unique)) {
-                            throw ExceptionBuilder.TableCantBeNestedInTwoTables(ChildTable.TableName);
+                    else
+                    {
+                        UniqueConstraint unique = (UniqueConstraint)cs;
+                        if (!XmlTreeGen.AutoGenerated(unique))
+                        {
+                            throw ExceptionBuilder.TableCantBeNestedInTwoTables(
+                                ChildTable.TableName
+                            );
                         }
                     }
                 }
-                
             }
         }
 
-        private bool IsAutoGenerated(DataColumn col) {
+        private bool IsAutoGenerated(DataColumn col)
+        {
             if (col.ColumnMapping != MappingType.Hidden)
                 return false;
             if (col.DataType != typeof(int))
                 return false;
-            string generatedname = col.Table.TableName+"_Id";
+            string generatedname = col.Table.TableName + "_Id";
 
-            if ((col.ColumnName == generatedname) || (col.ColumnName == generatedname+"_0"))
+            if ((col.ColumnName == generatedname) || (col.ColumnName == generatedname + "_0"))
                 return true;
 
-            generatedname = this.ParentColumnsReference[0].Table.TableName+"_Id";
-            if ((col.ColumnName == generatedname) || (col.ColumnName == generatedname+"_0"))
+            generatedname = this.ParentColumnsReference[0].Table.TableName + "_Id";
+            if ((col.ColumnName == generatedname) || (col.ColumnName == generatedname + "_0"))
                 return true;
 
             return false;
         }
 
-        internal int ObjectID {
-            get {
-                return _objectID;
-            }
+        internal int ObjectID
+        {
+            get { return _objectID; }
         }
     }
 }

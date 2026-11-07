@@ -16,7 +16,8 @@ namespace Microsoft.AspNet.Facebook
     public class FacebookConfiguration
     {
         private const string FacebookAppBaseUrl = "https://apps.facebook.com";
-        private readonly ConcurrentDictionary<object, object> _properties = new ConcurrentDictionary<object, object>();
+        private readonly ConcurrentDictionary<object, object> _properties =
+            new ConcurrentDictionary<object, object>();
         private string _appUrl;
         private string _authorizationRedirectPath;
         private string _cannotCreateCookieRedirectPath;
@@ -37,16 +38,13 @@ namespace Microsoft.AspNet.Facebook
         public string AppNamespace { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL path that the <see cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will 
+        /// Gets or sets the URL path that the <see cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will
         /// redirect to when the user did not grant the required permissions. If value is not set it will result in a redirection
         /// to Facebook's home page.
         /// </summary>
         public string AuthorizationRedirectPath
         {
-            get
-            {
-                return _authorizationRedirectPath;
-            }
+            get { return _authorizationRedirectPath; }
             set
             {
                 EnsureRedirectPath(value, "AuthorizationRedirectPath");
@@ -55,16 +53,13 @@ namespace Microsoft.AspNet.Facebook
         }
 
         /// <summary>
-        /// Gets or sets the URL path that the <see cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will 
-        /// redirect to when the we determine that we are unable to create cookies. If value is not set it will result in a 
+        /// Gets or sets the URL path that the <see cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will
+        /// redirect to when the we determine that we are unable to create cookies. If value is not set it will result in a
         /// redirection to Facebook's home page.
         /// </summary>
         public string CannotCreateCookieRedirectPath
         {
-            get
-            {
-                return _cannotCreateCookieRedirectPath;
-            }
+            get { return _cannotCreateCookieRedirectPath; }
             set
             {
                 EnsureRedirectPath(value, "CannotCreateCookieRedirectPath");
@@ -76,7 +71,11 @@ namespace Microsoft.AspNet.Facebook
         /// <summary>
         /// Gets or sets the absolute URL for the Facebook App.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "We prefer strings because this is read from appSettings")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings",
+            Justification = "We prefer strings because this is read from appSettings"
+        )]
         public string AppUrl
         {
             get
@@ -87,10 +86,7 @@ namespace Microsoft.AspNet.Facebook
                 }
                 return _appUrl;
             }
-            set
-            {
-                _appUrl = value;
-            }
+            set { _appUrl = value; }
         }
 
         /// <summary>
@@ -127,26 +123,35 @@ namespace Microsoft.AspNet.Facebook
             AppId = ConfigurationManager.AppSettings[FacebookAppSettingKeys.AppId];
             if (String.IsNullOrEmpty(AppId))
             {
-                throw new InvalidOperationException(String.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.AppSettingIsRequired,
-                    FacebookAppSettingKeys.AppId));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.AppSettingIsRequired,
+                        FacebookAppSettingKeys.AppId
+                    )
+                );
             }
 
             AppSecret = ConfigurationManager.AppSettings[FacebookAppSettingKeys.AppSecret];
             if (String.IsNullOrEmpty(AppSecret))
             {
-                throw new InvalidOperationException(String.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.AppSettingIsRequired,
-                    FacebookAppSettingKeys.AppSecret));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.AppSettingIsRequired,
+                        FacebookAppSettingKeys.AppSecret
+                    )
+                );
             }
 
             AppNamespace = ConfigurationManager.AppSettings[FacebookAppSettingKeys.AppNamespace];
             AppUrl = ConfigurationManager.AppSettings[FacebookAppSettingKeys.AppUrl];
-            AuthorizationRedirectPath = ConfigurationManager.AppSettings[FacebookAppSettingKeys.AuthorizationRedirectPath];
-            CannotCreateCookieRedirectPath = 
-                ConfigurationManager.AppSettings[FacebookAppSettingKeys.CannotCreateCookiesRedirectPath];
+            AuthorizationRedirectPath = ConfigurationManager.AppSettings[
+                FacebookAppSettingKeys.AuthorizationRedirectPath
+            ];
+            CannotCreateCookieRedirectPath = ConfigurationManager.AppSettings[
+                FacebookAppSettingKeys.CannotCreateCookiesRedirectPath
+            ];
         }
 
         private static void EnsureRedirectPath(string value, string redirectParameterName)
@@ -158,8 +163,10 @@ namespace Microsoft.AspNet.Facebook
                     String.Format(
                         CultureInfo.CurrentCulture,
                         Resources.InvalidRedirectPath,
-                        redirectParameterName),
-                    "value");
+                        redirectParameterName
+                    ),
+                    "value"
+                );
             }
         }
 
@@ -169,7 +176,8 @@ namespace Microsoft.AspNet.Facebook
                 CultureInfo.InvariantCulture,
                 "{0}/{1}",
                 FacebookAppBaseUrl,
-                String.IsNullOrEmpty(AppNamespace) ? AppId : AppNamespace);
+                String.IsNullOrEmpty(AppNamespace) ? AppId : AppNamespace
+            );
         }
     }
 }

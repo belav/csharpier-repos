@@ -23,7 +23,8 @@ namespace System.Reflection.Internal
                 // Make sure the current thread isn't aborted in between acquiring the pointer and assigning the fields.
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try
-                { /* intentionally left blank */ }
+                { /* intentionally left blank */
+                }
                 finally
 #endif
                 {
@@ -43,7 +44,8 @@ namespace System.Reflection.Internal
                 // Safe buffer only frees the underlying resource if its ref count drops to zero, so we have to make sure it does.
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try
-                { /* intentionally left blank */ }
+                { /* intentionally left blank */
+                }
                 finally
 #endif
                 {
@@ -60,13 +62,19 @@ namespace System.Reflection.Internal
         private readonly DisposableData _data;
         private readonly int _size;
 
-        internal unsafe MemoryMappedFileBlock(IDisposable accessor, SafeBuffer safeBuffer, long offset, int size)
+        internal unsafe MemoryMappedFileBlock(
+            IDisposable accessor,
+            SafeBuffer safeBuffer,
+            long offset,
+            int size
+        )
         {
             _data = new DisposableData(accessor, safeBuffer, offset);
             _size = size;
         }
 
         public override void Dispose() => _data.Dispose();
+
         public override byte* Pointer => _data.Pointer;
         public override int Size => _size;
     }

@@ -15,7 +15,13 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertToAsync), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertToAsync
+        ),
+        Shared
+    ]
     internal class CSharpConvertToAsyncMethodCodeFixProvider : AbstractConvertToAsyncCodeFixProvider
     {
         /// <summary>
@@ -25,54 +31,74 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToAsyncMethodCodeFixProvider()
-        {
-        }
+        public CSharpConvertToAsyncMethodCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS4008);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS4008);
 
         protected override async Task<string> GetDescriptionAsync(
             Diagnostic diagnostic,
             SyntaxNode node,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var methodNode = await GetMethodDeclarationAsync(node, semanticModel, cancellationToken).ConfigureAwait(false);
+            var methodNode = await GetMethodDeclarationAsync(node, semanticModel, cancellationToken)
+                .ConfigureAwait(false);
 
             // We only call GetDescription when we already know that we succeeded (so it's safe to
             // assume we have a methodNode here).
-            return string.Format(CSharpCodeFixesResources.Make_0_return_Task_instead_of_void, methodNode!.WithBody(null));
+            return string.Format(
+                CSharpCodeFixesResources.Make_0_return_Task_instead_of_void,
+                methodNode!.WithBody(null)
+            );
         }
 
         protected override async Task<Tuple<SyntaxTree, SyntaxNode>?> GetRootInOtherSyntaxTreeAsync(
             SyntaxNode node,
             SemanticModel semanticModel,
             Diagnostic diagnostic,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var methodDeclaration = await GetMethodDeclarationAsync(node, semanticModel, cancellationToken).ConfigureAwait(false);
+            var methodDeclaration = await GetMethodDeclarationAsync(
+                    node,
+                    semanticModel,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (methodDeclaration == null)
             {
                 return null;
             }
 
-            var oldRoot = await methodDeclaration.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-            var newRoot = oldRoot.ReplaceNode(methodDeclaration, ConvertToAsyncFunction(methodDeclaration));
+            var oldRoot = await methodDeclaration
+                .SyntaxTree.GetRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newRoot = oldRoot.ReplaceNode(
+                methodDeclaration,
+                ConvertToAsyncFunction(methodDeclaration)
+            );
             return Tuple.Create(oldRoot.SyntaxTree, newRoot);
         }
 
         private static async Task<MethodDeclarationSyntax?> GetMethodDeclarationAsync(
             SyntaxNode node,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var invocationExpression = node.ChildNodes().FirstOrDefault(n => n.IsKind(SyntaxKind.InvocationExpression));
+            var invocationExpression = node.ChildNodes()
+                .FirstOrDefault(n => n.IsKind(SyntaxKind.InvocationExpression));
             if (invocationExpression == null)
             {
                 return null;
             }
 
-            if (semanticModel.GetSymbolInfo(invocationExpression, cancellationToken).Symbol is not IMethodSymbol methodSymbol)
+            if (
+                semanticModel.GetSymbolInfo(invocationExpression, cancellationToken).Symbol
+                is not IMethodSymbol methodSymbol
+            )
             {
                 return null;
             }
@@ -83,7 +109,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
                 return null;
             }
 
-            if ((await methodReference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false)) is not MethodDeclarationSyntax methodDeclaration)
+            if (
+                (await methodReference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false))
+                is not MethodDeclarationSyntax methodDeclaration
+            )
             {
                 return null;
             }
@@ -96,11 +125,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
             return methodDeclaration;
         }
 
-        private static MethodDeclarationSyntax ConvertToAsyncFunction(MethodDeclarationSyntax methodDeclaration)
+        private static MethodDeclarationSyntax ConvertToAsyncFunction(
+            MethodDeclarationSyntax methodDeclaration
+        )
         {
             return methodDeclaration.WithReturnType(
-                SyntaxFactory.ParseTypeName("Task")
-                    .WithTriviaFrom(methodDeclaration));
+                SyntaxFactory.ParseTypeName("Task").WithTriviaFrom(methodDeclaration)
+            );
         }
     }
 }

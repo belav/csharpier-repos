@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Func<SyntaxNode, SyntaxNode?>? syntaxMap,
             SyntaxTree? syntaxMapTree,
             SymbolKey? partialType,
-            SymbolKey? deletedSymbolContainer)
+            SymbolKey? deletedSymbolContainer
+        )
         {
             Debug.Assert(kind == SemanticEditKind.Delete || deletedSymbolContainer == null);
             Debug.Assert(partialType == null || syntaxMap is null == syntaxMapTree is null);
@@ -29,17 +30,54 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             DeletedSymbolContainer = deletedSymbolContainer;
         }
 
-        public static SemanticEditInfo CreateInsert(SymbolKey symbol, SymbolKey? partialType)
-            => new(SemanticEditKind.Insert, symbol, syntaxMap: null, syntaxMapTree: null, partialType, deletedSymbolContainer: null);
+        public static SemanticEditInfo CreateInsert(SymbolKey symbol, SymbolKey? partialType) =>
+            new(
+                SemanticEditKind.Insert,
+                symbol,
+                syntaxMap: null,
+                syntaxMapTree: null,
+                partialType,
+                deletedSymbolContainer: null
+            );
 
-        public static SemanticEditInfo CreateUpdate(SymbolKey symbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap, SyntaxTree? syntaxMapTree, SymbolKey? partialType)
-            => new(SemanticEditKind.Update, symbol, syntaxMap, syntaxMapTree, partialType, deletedSymbolContainer: null);
+        public static SemanticEditInfo CreateUpdate(
+            SymbolKey symbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap,
+            SyntaxTree? syntaxMapTree,
+            SymbolKey? partialType
+        ) =>
+            new(
+                SemanticEditKind.Update,
+                symbol,
+                syntaxMap,
+                syntaxMapTree,
+                partialType,
+                deletedSymbolContainer: null
+            );
 
-        public static SemanticEditInfo CreateReplace(SymbolKey symbol, SymbolKey? partialType)
-            => new(SemanticEditKind.Replace, symbol, syntaxMap: null, syntaxMapTree: null, partialType, deletedSymbolContainer: null);
+        public static SemanticEditInfo CreateReplace(SymbolKey symbol, SymbolKey? partialType) =>
+            new(
+                SemanticEditKind.Replace,
+                symbol,
+                syntaxMap: null,
+                syntaxMapTree: null,
+                partialType,
+                deletedSymbolContainer: null
+            );
 
-        public static SemanticEditInfo CreateDelete(SymbolKey symbol, SymbolKey deletedSymbolContainer, SymbolKey? partialType)
-            => new(SemanticEditKind.Delete, symbol, syntaxMap: null, syntaxMapTree: null, partialType, deletedSymbolContainer);
+        public static SemanticEditInfo CreateDelete(
+            SymbolKey symbol,
+            SymbolKey deletedSymbolContainer,
+            SymbolKey? partialType
+        ) =>
+            new(
+                SemanticEditKind.Delete,
+                symbol,
+                syntaxMap: null,
+                syntaxMapTree: null,
+                partialType,
+                deletedSymbolContainer
+            );
 
         /// <summary>
         /// <see cref="SemanticEditKind.Insert"/> or <see cref="SemanticEditKind.Update"/> or <see cref="SemanticEditKind.Delete"/>.
@@ -50,7 +88,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// If <see cref="Kind"/> is <see cref="SemanticEditKind.Insert"/> represents the inserted symbol in the new compilation.
         /// If <see cref="Kind"/> is <see cref="SemanticEditKind.Update"/> represents the updated symbol in both compilations.
         /// If <see cref="Kind"/> is <see cref="SemanticEditKind.Delete"/> represents the deleted symbol in the old compilation.
-        /// 
+        ///
         /// We use <see cref="SymbolKey"/> to represent the symbol rather then <see cref="ISymbol"/>,
         /// since different semantic edits might have been calculated against different solution snapshot and thus symbols are not directly comparable.
         /// When the edits are processed we map the <see cref="SymbolKey"/> to the current compilation.
@@ -59,7 +97,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// If <see cref="Kind"/> is <see cref="SemanticEditKind.Delete"/> represents the containing symbol in the new compilation.
-        /// 
+        ///
         /// We use <see cref="SymbolKey"/> to represent the symbol rather then <see cref="ISymbol"/>,
         /// since different semantic edits might have been calculated against different solution snapshot and thus symbols are not directly comparable.
         /// When the edits are processed we map the <see cref="SymbolKey"/> to the current compilation.
@@ -79,7 +117,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// Specified if the edit needs to be merged with other edits of the same <see cref="PartialType"/>.
-        /// 
+        ///
         /// If specified, the <see cref="SyntaxMap"/> is either null or incomplete: it only provides mapping of the changed members of a single partial type declaration.
         /// </summary>
         public SymbolKey? PartialType { get; }

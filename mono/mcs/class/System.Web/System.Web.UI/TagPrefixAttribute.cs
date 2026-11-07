@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,35 +28,39 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+    public sealed class TagPrefixAttribute : Attribute
+    {
+        string namespaceName;
+        string tagPrefix;
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple=true)]
-	public sealed class TagPrefixAttribute : Attribute
-	{
-		string namespaceName;
-		string tagPrefix;
-		
-		public TagPrefixAttribute (string namespaceName,
-					   string tagPrefix)
-		{
-			if ((namespaceName == null) || (namespaceName.Length == 0))
-				throw new ArgumentNullException ("namespaceName");
-			if ((tagPrefix == null) || (tagPrefix.Length == 0))
-				throw new ArgumentNullException ("tagPrefix");
+        public TagPrefixAttribute(string namespaceName, string tagPrefix)
+        {
+            if ((namespaceName == null) || (namespaceName.Length == 0))
+                throw new ArgumentNullException("namespaceName");
+            if ((tagPrefix == null) || (tagPrefix.Length == 0))
+                throw new ArgumentNullException("tagPrefix");
 
-			this.namespaceName = namespaceName;
-			this.tagPrefix = tagPrefix;
-		}
+            this.namespaceName = namespaceName;
+            this.tagPrefix = tagPrefix;
+        }
 
-		public string NamespaceName {
-			get { return namespaceName; }
-		}
+        public string NamespaceName
+        {
+            get { return namespaceName; }
+        }
 
-		public string TagPrefix {
-			get { return tagPrefix; }
-		}
-	}
+        public string TagPrefix
+        {
+            get { return tagPrefix; }
+        }
+    }
 }

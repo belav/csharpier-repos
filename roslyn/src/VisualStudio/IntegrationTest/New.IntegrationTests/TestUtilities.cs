@@ -11,7 +11,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {
     public class TestUtilities
     {
-        public static void ThrowIfExpectedItemNotFound<TCollection>(IEnumerable<TCollection> actual, IEnumerable<TCollection> expected)
+        public static void ThrowIfExpectedItemNotFound<TCollection>(
+            IEnumerable<TCollection> actual,
+            IEnumerable<TCollection> expected
+        )
             where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
@@ -37,7 +40,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
         }
 
-        public static void ThrowIfExpectedItemNotFoundInOrder<TCollection>(IEnumerable<TCollection> actual, IEnumerable<TCollection> expected)
+        public static void ThrowIfExpectedItemNotFoundInOrder<TCollection>(
+            IEnumerable<TCollection> actual,
+            IEnumerable<TCollection> expected
+        )
             where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;

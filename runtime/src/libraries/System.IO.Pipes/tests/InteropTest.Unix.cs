@@ -36,8 +36,25 @@ namespace System.IO.Pipes.Tests
 
         // @todo: These are called by some Windows-specific tests. Those tests should really be split out into
         // partial classes and included only in Windows builds.
-        internal static bool CancelIoEx(SafeHandle handle) { throw new Exception("Should not call on Unix."); }
-        internal static bool TryGetImpersonationUserName(SafePipeHandle handle, out string impersonationUserName) { throw new Exception("Should not call on Unix."); }
-        internal static bool TryGetNumberOfServerInstances(SafePipeHandle handle, out uint numberOfServerInstances) { throw new Exception("Should not call on Unix."); }
+        internal static bool CancelIoEx(SafeHandle handle)
+        {
+            throw new Exception("Should not call on Unix.");
+        }
+
+        internal static bool TryGetImpersonationUserName(
+            SafePipeHandle handle,
+            out string impersonationUserName
+        )
+        {
+            throw new Exception("Should not call on Unix.");
+        }
+
+        internal static bool TryGetNumberOfServerInstances(
+            SafePipeHandle handle,
+            out uint numberOfServerInstances
+        )
+        {
+            throw new Exception("Should not call on Unix.");
+        }
     }
 }

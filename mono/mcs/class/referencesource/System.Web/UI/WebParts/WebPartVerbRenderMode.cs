@@ -3,15 +3,15 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
     /// <devdoc>
     /// Specifies how to render the WebPartVerbs.
     /// </devdoc>
-    public enum WebPartVerbRenderMode {
-
+    public enum WebPartVerbRenderMode
+    {
         /// <devdoc>
         /// Render the WebPartVerbs in a popup menu in the WebPart TitleBar.
         /// </devdoc>

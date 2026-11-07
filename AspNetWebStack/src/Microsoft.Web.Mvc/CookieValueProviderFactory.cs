@@ -15,7 +15,9 @@ namespace Microsoft.Web.Mvc
         {
             HttpCookieCollection cookies = controllerContext.HttpContext.Request.Cookies;
 
-            Dictionary<string, string> backingStore = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, string> backingStore = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
             for (int i = 0; i < cookies.Count; i++)
             {
                 HttpCookie cookie = cookies[i];

@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.Runtime;
     using System.ServiceModel;
     using System.Transactions;
-    using System.Runtime;
 
     internal class MsmqReceiveContextLockManager : IDisposable
     {
@@ -23,7 +23,10 @@ namespace System.ServiceModel.Channels
 
         object internalStateLock = new object();
 
-        public MsmqReceiveContextLockManager(MsmqReceiveContextSettings receiveContextSettings, MsmqQueue queue)
+        public MsmqReceiveContextLockManager(
+            MsmqReceiveContextSettings receiveContextSettings,
+            MsmqQueue queue
+        )
         {
             Fx.Assert(queue is ILockingQueue, "Queue must be ILockingQueue");
 
@@ -32,23 +35,29 @@ namespace System.ServiceModel.Channels
             this.receiveContextSettings = receiveContextSettings;
             this.messageExpiryMap = new Dictionary<long, MsmqReceiveContext>();
             this.transMessages = new Dictionary<Guid, List<MsmqReceiveContext>>();
-            transactionCompletedHandler = new TransactionCompletedEventHandler(OnTransactionCompleted);
+            transactionCompletedHandler = new TransactionCompletedEventHandler(
+                OnTransactionCompleted
+            );
 
-            this.messageExpiryTimer = new IOThreadTimer(new Action<object>(CleanupExpiredLocks), null, false);
+            this.messageExpiryTimer = new IOThreadTimer(
+                new Action<object>(CleanupExpiredLocks),
+                null,
+                false
+            );
             this.messageExpiryTimer.Set(messageTimeoutInterval);
         }
 
         public MsmqQueue Queue
         {
-            get
-            {
-                return queue;
-            }
+            get { return queue; }
         }
 
         public MsmqReceiveContext CreateMsmqReceiveContext(long lookupId)
         {
-            DateTime expiryTime = TimeoutHelper.Add(DateTime.UtcNow, receiveContextSettings.ValidityDuration);
+            DateTime expiryTime = TimeoutHelper.Add(
+                DateTime.UtcNow,
+                receiveContextSettings.ValidityDuration
+            );
 
             MsmqReceiveContext receiveContext = new MsmqReceiveContext(lookupId, expiryTime, this);
             receiveContext.Faulted += new EventHandler(OnReceiveContextFaulted);
@@ -59,12 +68,12 @@ namespace System.ServiceModel.Channels
             return receiveContext;
         }
 
-        // tx aborts can ---- with DeleteMessage but this ---- is harmless because 
+        // tx aborts can ---- with DeleteMessage but this ---- is harmless because
         //  - internal state changes are protected via the internalStateLock
         //  - we do not have an ordering requirement between DeleteMessage and a tx abort
         //
         // tx commits cannot ---- with DeleteMessage as the ReceiveContext state machine does not allow
-        // DeleteMessage calls if the tx holding this lock committed 
+        // DeleteMessage calls if the tx holding this lock committed
         public void DeleteMessage(MsmqReceiveContext receiveContext, TimeSpan timeout)
         {
             TimeoutHelper helper = new TimeoutHelper(timeout);
@@ -75,12 +84,17 @@ namespace System.ServiceModel.Channels
                 // validity expired exception if the lookup id is not in the map.
                 if (this.messageExpiryMap.ContainsKey(lookupId))
                 {
-                    Fx.Assert(ReceiveContextExists(receiveContext), "Mismatch between the receive context object stored in the map and the object passed to the method");
+                    Fx.Assert(
+                        ReceiveContextExists(receiveContext),
+                        "Mismatch between the receive context object stored in the map and the object passed to the method"
+                    );
                     MsmqReceiveContext entry = this.messageExpiryMap[lookupId];
                     if (DateTime.UtcNow > entry.ExpiryTime)
                     {
                         entry.MarkContextExpired();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
+                        );
                     }
                     else
                     {
@@ -89,12 +103,27 @@ namespace System.ServiceModel.Channels
                         if (Transaction.Current != null)
                         {
                             List<MsmqReceiveContext> transMsgs;
-                            if (!this.transMessages.TryGetValue(Transaction.Current.TransactionInformation.DistributedIdentifier, out transMsgs))
+                            if (
+                                !this.transMessages.TryGetValue(
+                                    Transaction
+                                        .Current
+                                        .TransactionInformation
+                                        .DistributedIdentifier,
+                                    out transMsgs
+                                )
+                            )
                             {
                                 transMsgs = new List<MsmqReceiveContext>();
-                                this.transMessages.Add(Transaction.Current.TransactionInformation.DistributedIdentifier, transMsgs);
+                                this.transMessages.Add(
+                                    Transaction
+                                        .Current
+                                        .TransactionInformation
+                                        .DistributedIdentifier,
+                                    transMsgs
+                                );
                                 // only need to attach the tx complete handler once per transaction
-                                Transaction.Current.TransactionCompleted += this.transactionCompletedHandler;
+                                Transaction.Current.TransactionCompleted +=
+                                    this.transactionCompletedHandler;
                             }
                             transMsgs.Add(entry);
                         }
@@ -107,17 +136,19 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     // it was cleaned up by the expiry timer
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
+                    );
                 }
             }
         }
 
-        // tx aborts can ---- with UnlockMessage but this ---- is harmless because 
+        // tx aborts can ---- with UnlockMessage but this ---- is harmless because
         //  - internal state changes are protected via the internalStateLock
         //  - we do not have an ordering requirement between UnlockMessage and a tx abort
         //
         // tx commits cannot ---- with UnlockMessage as the ReceiveContext state machine does not allow
-        // UnlockMessage calls if the tx holding this lock committed 
+        // UnlockMessage calls if the tx holding this lock committed
         public void UnlockMessage(MsmqReceiveContext receiveContext, TimeSpan timeout)
         {
             TimeoutHelper helper = new TimeoutHelper(timeout);
@@ -156,7 +187,12 @@ namespace System.ServiceModel.Channels
                 if (e.Transaction.TransactionInformation.Status == TransactionStatus.Committed)
                 {
                     List<MsmqReceiveContext> toRemove;
-                    if (this.transMessages.TryGetValue(e.Transaction.TransactionInformation.DistributedIdentifier, out toRemove))
+                    if (
+                        this.transMessages.TryGetValue(
+                            e.Transaction.TransactionInformation.DistributedIdentifier,
+                            out toRemove
+                        )
+                    )
                     {
                         foreach (MsmqReceiveContext entry in toRemove)
                         {
@@ -165,7 +201,9 @@ namespace System.ServiceModel.Channels
                     }
                 }
                 // on abort the messages stay locked, we just remove the transaction info from our collection
-                this.transMessages.Remove(e.Transaction.TransactionInformation.DistributedIdentifier);
+                this.transMessages.Remove(
+                    e.Transaction.TransactionInformation.DistributedIdentifier
+                );
             }
         }
 
@@ -187,7 +225,9 @@ namespace System.ServiceModel.Channels
                 List<MsmqReceiveContext> expiredLockList = new List<MsmqReceiveContext>();
                 try
                 {
-                    foreach (KeyValuePair<long, MsmqReceiveContext> msgEntry in this.messageExpiryMap)
+                    foreach (
+                        KeyValuePair<long, MsmqReceiveContext> msgEntry in this.messageExpiryMap
+                    )
                     {
                         if (DateTime.UtcNow > msgEntry.Value.ExpiryTime)
                         {

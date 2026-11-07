@@ -36,7 +36,12 @@ namespace System.Diagnostics
             for (int i = 0; i < processInfos.Length; i++)
             {
                 ProcessInfo processInfo = processInfos[i];
-                processes[i] = new Process(machineName, isRemoteMachine, processInfo.ProcessId, processInfo);
+                processes[i] = new Process(
+                    machineName,
+                    isRemoteMachine,
+                    processInfo.ProcessId,
+                    processInfo
+                );
             }
 
             return processes;
@@ -44,7 +49,12 @@ namespace System.Diagnostics
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
-        public static Process? Start(string fileName, string userName, SecureString password, string domain)
+        public static Process? Start(
+            string fileName,
+            string userName,
+            SecureString password,
+            string domain
+        )
         {
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
             startInfo.UserName = userName;
@@ -56,7 +66,13 @@ namespace System.Diagnostics
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
-        public static Process? Start(string fileName, string arguments, string userName, SecureString password, string domain)
+        public static Process? Start(
+            string fileName,
+            string arguments,
+            string userName,
+            SecureString password,
+            string domain
+        )
         {
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName, arguments);
             startInfo.UserName = userName;
@@ -72,7 +88,10 @@ namespace System.Diagnostics
         /// </summary>
         public static void EnterDebugMode()
         {
-            SetPrivilege(Interop.Advapi32.SeDebugPrivilege, (int)Interop.Advapi32.SEPrivileges.SE_PRIVILEGE_ENABLED);
+            SetPrivilege(
+                Interop.Advapi32.SeDebugPrivilege,
+                (int)Interop.Advapi32.SEPrivileges.SE_PRIVILEGE_ENABLED
+            );
         }
 
         /// <summary>
@@ -90,7 +109,13 @@ namespace System.Diagnostics
         [SupportedOSPlatform("maccatalyst")]
         public void Kill()
         {
-            using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_TERMINATE | Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION, throwIfExited: false))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.PROCESS_TERMINATE
+                        | Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
+                    throwIfExited: false
+                )
+            )
             {
                 // If the process has exited, the handle is invalid.
                 if (handle.IsInvalid)
@@ -102,8 +127,11 @@ namespace System.Diagnostics
                     var exception = new Win32Exception();
 
                     // Don't throw if the process has exited.
-                    if (exception.NativeErrorCode == Interop.Errors.ERROR_ACCESS_DENIED &&
-                        Interop.Kernel32.GetExitCodeProcess(handle, out int localExitCode) && localExitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE)
+                    if (
+                        exception.NativeErrorCode == Interop.Errors.ERROR_ACCESS_DENIED
+                        && Interop.Kernel32.GetExitCodeProcess(handle, out int localExitCode)
+                        && localExitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE
+                    )
                     {
                         return;
                     }
@@ -138,13 +166,23 @@ namespace System.Diagnostics
                 {
                     if (!_watchingForExit)
                     {
-                        Debug.Assert(Associated, "Process.EnsureWatchingForExit called with no associated process");
+                        Debug.Assert(
+                            Associated,
+                            "Process.EnsureWatchingForExit called with no associated process"
+                        );
                         _watchingForExit = true;
                         try
                         {
-                            _waitHandle = new Interop.Kernel32.ProcessWaitHandle(GetOrOpenProcessHandle());
-                            _registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(_waitHandle,
-                                new WaitOrTimerCallback(CompletionCallback), _waitHandle, -1, true);
+                            _waitHandle = new Interop.Kernel32.ProcessWaitHandle(
+                                GetOrOpenProcessHandle()
+                            );
+                            _registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                                _waitHandle,
+                                new WaitOrTimerCallback(CompletionCallback),
+                                _waitHandle,
+                                -1,
+                                true
+                            );
                         }
                         catch
                         {
@@ -168,7 +206,10 @@ namespace System.Diagnostics
                 if (handle.IsInvalid)
                     return true;
 
-                using (Interop.Kernel32.ProcessWaitHandle processWaitHandle = new Interop.Kernel32.ProcessWaitHandle(handle))
+                using (
+                    Interop.Kernel32.ProcessWaitHandle processWaitHandle =
+                        new Interop.Kernel32.ProcessWaitHandle(handle)
+                )
                 {
                     return _signaled = processWaitHandle.WaitOne(milliseconds);
                 }
@@ -202,8 +243,13 @@ namespace System.Diagnostics
         /// <summary>Checks whether the process has exited and updates state accordingly.</summary>
         private void UpdateHasExited()
         {
-            using (SafeProcessHandle handle = GetProcessHandle(
-                Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION | Interop.Advapi32.ProcessOptions.SYNCHRONIZE, false))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION
+                        | Interop.Advapi32.ProcessOptions.SYNCHRONIZE,
+                    false
+                )
+            )
             {
                 if (handle.IsInvalid)
                 {
@@ -274,7 +320,11 @@ namespace System.Diagnostics
         {
             get
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                    )
+                )
                 {
                     bool disabled;
                     if (!Interop.Kernel32.GetProcessPriorityBoost(handle, out disabled))
@@ -286,7 +336,11 @@ namespace System.Diagnostics
             }
             set
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION
+                    )
+                )
                 {
                     if (!Interop.Kernel32.SetProcessPriorityBoost(handle, !value))
                         throw new Win32Exception();
@@ -301,7 +355,11 @@ namespace System.Diagnostics
         {
             get
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                    )
+                )
                 {
                     int value = Interop.Kernel32.GetPriorityClass(handle);
                     if (value == 0)
@@ -313,7 +371,11 @@ namespace System.Diagnostics
             }
             set
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION
+                    )
+                )
                 {
                     if (!Interop.Kernel32.SetPriorityClass(handle, (int)value))
                         throw new Win32Exception();
@@ -328,17 +390,32 @@ namespace System.Diagnostics
         {
             get
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                    )
+                )
                 {
-                    IntPtr processAffinity, systemAffinity;
-                    if (!Interop.Kernel32.GetProcessAffinityMask(handle, out processAffinity, out systemAffinity))
+                    IntPtr processAffinity,
+                        systemAffinity;
+                    if (
+                        !Interop.Kernel32.GetProcessAffinityMask(
+                            handle,
+                            out processAffinity,
+                            out systemAffinity
+                        )
+                    )
                         throw new Win32Exception();
                     return processAffinity;
                 }
             }
             set
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION
+                    )
+                )
                 {
                     if (!Interop.Kernel32.SetProcessAffinityMask(handle, value))
                         throw new Win32Exception();
@@ -358,10 +435,21 @@ namespace System.Diagnostics
         /// <summary>Get the minimum and maximum working set limits.</summary>
         private void GetWorkingSetLimits(out IntPtr minWorkingSet, out IntPtr maxWorkingSet)
         {
-            using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                )
+            )
             {
                 int ignoredFlags;
-                if (!Interop.Kernel32.GetProcessWorkingSetSizeEx(handle, out minWorkingSet, out maxWorkingSet, out ignoredFlags))
+                if (
+                    !Interop.Kernel32.GetProcessWorkingSetSizeEx(
+                        handle,
+                        out minWorkingSet,
+                        out maxWorkingSet,
+                        out ignoredFlags
+                    )
+                )
                     throw new Win32Exception();
             }
         }
@@ -371,13 +459,31 @@ namespace System.Diagnostics
         /// <param name="newMax">The new maximum working set limit, or null not to change it.</param>
         /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
         /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
-        private void SetWorkingSetLimitsCore(IntPtr? newMin, IntPtr? newMax, out IntPtr resultingMin, out IntPtr resultingMax)
+        private void SetWorkingSetLimitsCore(
+            IntPtr? newMin,
+            IntPtr? newMax,
+            out IntPtr resultingMin,
+            out IntPtr resultingMax
+        )
         {
-            using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION | Interop.Advapi32.ProcessOptions.PROCESS_SET_QUOTA))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                        | Interop.Advapi32.ProcessOptions.PROCESS_SET_QUOTA
+                )
+            )
             {
-                IntPtr min, max;
+                IntPtr min,
+                    max;
                 int ignoredFlags;
-                if (!Interop.Kernel32.GetProcessWorkingSetSizeEx(handle, out min, out max, out ignoredFlags))
+                if (
+                    !Interop.Kernel32.GetProcessWorkingSetSizeEx(
+                        handle,
+                        out min,
+                        out max,
+                        out ignoredFlags
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }
@@ -412,7 +518,14 @@ namespace System.Diagnostics
                 }
 
                 // The value may be rounded/changed by the OS, so go get it
-                if (!Interop.Kernel32.GetProcessWorkingSetSizeEx(handle, out min, out max, out ignoredFlags))
+                if (
+                    !Interop.Kernel32.GetProcessWorkingSetSizeEx(
+                        handle,
+                        out min,
+                        out max,
+                        out ignoredFlags
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }
@@ -459,7 +572,11 @@ namespace System.Diagnostics
                     startupInfo.cb = sizeof(Interop.Kernel32.STARTUPINFO);
 
                     // set up the streams
-                    if (startInfo.RedirectStandardInput || startInfo.RedirectStandardOutput || startInfo.RedirectStandardError)
+                    if (
+                        startInfo.RedirectStandardInput
+                        || startInfo.RedirectStandardOutput
+                        || startInfo.RedirectStandardError
+                    )
                     {
                         if (startInfo.RedirectStandardInput)
                         {
@@ -467,16 +584,30 @@ namespace System.Diagnostics
                         }
                         else
                         {
-                            childInputPipeHandle = new SafeFileHandle(Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_INPUT_HANDLE), false);
+                            childInputPipeHandle = new SafeFileHandle(
+                                Interop.Kernel32.GetStdHandle(
+                                    Interop.Kernel32.HandleTypes.STD_INPUT_HANDLE
+                                ),
+                                false
+                            );
                         }
 
                         if (startInfo.RedirectStandardOutput)
                         {
-                            CreatePipe(out parentOutputPipeHandle, out childOutputPipeHandle, false);
+                            CreatePipe(
+                                out parentOutputPipeHandle,
+                                out childOutputPipeHandle,
+                                false
+                            );
                         }
                         else
                         {
-                            childOutputPipeHandle = new SafeFileHandle(Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_OUTPUT_HANDLE), false);
+                            childOutputPipeHandle = new SafeFileHandle(
+                                Interop.Kernel32.GetStdHandle(
+                                    Interop.Kernel32.HandleTypes.STD_OUTPUT_HANDLE
+                                ),
+                                false
+                            );
                         }
 
                         if (startInfo.RedirectStandardError)
@@ -485,32 +616,51 @@ namespace System.Diagnostics
                         }
                         else
                         {
-                            childErrorPipeHandle = new SafeFileHandle(Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_ERROR_HANDLE), false);
+                            childErrorPipeHandle = new SafeFileHandle(
+                                Interop.Kernel32.GetStdHandle(
+                                    Interop.Kernel32.HandleTypes.STD_ERROR_HANDLE
+                                ),
+                                false
+                            );
                         }
 
                         startupInfo.hStdInput = childInputPipeHandle.DangerousGetHandle();
                         startupInfo.hStdOutput = childOutputPipeHandle.DangerousGetHandle();
                         startupInfo.hStdError = childErrorPipeHandle.DangerousGetHandle();
 
-                        startupInfo.dwFlags = Interop.Advapi32.StartupInfoOptions.STARTF_USESTDHANDLES;
+                        startupInfo.dwFlags = Interop
+                            .Advapi32
+                            .StartupInfoOptions
+                            .STARTF_USESTDHANDLES;
                     }
 
                     if (startInfo.WindowStyle != ProcessWindowStyle.Normal)
                     {
-                        startupInfo.wShowWindow = (short)GetShowWindowFromWindowStyle(startInfo.WindowStyle);
-                        startupInfo.dwFlags |= Interop.Advapi32.StartupInfoOptions.STARTF_USESHOWWINDOW;
+                        startupInfo.wShowWindow = (short)GetShowWindowFromWindowStyle(
+                            startInfo.WindowStyle
+                        );
+                        startupInfo.dwFlags |= Interop
+                            .Advapi32
+                            .StartupInfoOptions
+                            .STARTF_USESHOWWINDOW;
                     }
 
                     // set up the creation flags parameter
                     int creationFlags = 0;
-                    if (startInfo.CreateNoWindow) creationFlags |= Interop.Advapi32.StartupInfoOptions.CREATE_NO_WINDOW;
+                    if (startInfo.CreateNoWindow)
+                        creationFlags |= Interop.Advapi32.StartupInfoOptions.CREATE_NO_WINDOW;
 
                     // set up the environment block parameter
                     string? environmentBlock = null;
                     if (startInfo._environmentVariables != null)
                     {
-                        creationFlags |= Interop.Advapi32.StartupInfoOptions.CREATE_UNICODE_ENVIRONMENT;
-                        environmentBlock = GetEnvironmentVariablesBlock(startInfo._environmentVariables!);
+                        creationFlags |= Interop
+                            .Advapi32
+                            .StartupInfoOptions
+                            .CREATE_UNICODE_ENVIRONMENT;
+                        environmentBlock = GetEnvironmentVariablesBlock(
+                            startInfo._environmentVariables!
+                        );
                     }
 
                     string? workingDirectory = startInfo.WorkingDirectory;
@@ -532,7 +682,10 @@ namespace System.Diagnostics
                         Interop.Advapi32.LogonFlags logonFlags = (Interop.Advapi32.LogonFlags)0;
                         if (startInfo.LoadUserProfile && startInfo.UseCredentialsForNetworkingOnly)
                         {
-                            throw new ArgumentException(SR.CantEnableConflictingLogonFlags, nameof(startInfo));
+                            throw new ArgumentException(
+                                SR.CantEnableConflictingLogonFlags,
+                                nameof(startInfo)
+                            );
                         }
                         else if (startInfo.LoadUserProfile)
                         {
@@ -543,27 +696,38 @@ namespace System.Diagnostics
                             logonFlags = Interop.Advapi32.LogonFlags.LOGON_NETCREDENTIALS_ONLY;
                         }
 
-                        fixed (char* passwordInClearTextPtr = startInfo.PasswordInClearText ?? string.Empty)
+                        fixed (
+                            char* passwordInClearTextPtr =
+                                startInfo.PasswordInClearText ?? string.Empty
+                        )
                         fixed (char* environmentBlockPtr = environmentBlock)
-                        fixed (char* commandLinePtr = &commandLine.GetPinnableReference(terminate: true))
+                        fixed (
+                            char* commandLinePtr = &commandLine.GetPinnableReference(
+                                terminate: true
+                            )
+                        )
                         {
-                            IntPtr passwordPtr = (startInfo.Password != null) ?
-                                Marshal.SecureStringToGlobalAllocUnicode(startInfo.Password) : IntPtr.Zero;
+                            IntPtr passwordPtr =
+                                (startInfo.Password != null)
+                                    ? Marshal.SecureStringToGlobalAllocUnicode(startInfo.Password)
+                                    : IntPtr.Zero;
 
                             try
                             {
                                 retVal = Interop.Advapi32.CreateProcessWithLogonW(
                                     startInfo.UserName,
                                     startInfo.Domain,
-                                    (passwordPtr != IntPtr.Zero) ? passwordPtr : (IntPtr)passwordInClearTextPtr,
+                                    (passwordPtr != IntPtr.Zero)
+                                        ? passwordPtr
+                                        : (IntPtr)passwordInClearTextPtr,
                                     logonFlags,
-                                    null,            // we don't need this since all the info is in commandLine
+                                    null, // we don't need this since all the info is in commandLine
                                     commandLinePtr,
                                     creationFlags,
                                     (IntPtr)environmentBlockPtr,
                                     workingDirectory,
-                                    ref startupInfo,        // pointer to STARTUPINFO
-                                    ref processInfo         // pointer to PROCESS_INFORMATION
+                                    ref startupInfo, // pointer to STARTUPINFO
+                                    ref processInfo // pointer to PROCESS_INFORMATION
                                 );
                                 if (!retVal)
                                     errorCode = Marshal.GetLastWin32Error();
@@ -578,37 +742,51 @@ namespace System.Diagnostics
                     else
                     {
                         fixed (char* environmentBlockPtr = environmentBlock)
-                        fixed (char* commandLinePtr = &commandLine.GetPinnableReference(terminate: true))
+                        fixed (
+                            char* commandLinePtr = &commandLine.GetPinnableReference(
+                                terminate: true
+                            )
+                        )
                         {
                             retVal = Interop.Kernel32.CreateProcess(
-                                null,                // we don't need this since all the info is in commandLine
-                                commandLinePtr,      // pointer to the command line string
+                                null, // we don't need this since all the info is in commandLine
+                                commandLinePtr, // pointer to the command line string
                                 ref unused_SecAttrs, // address to process security attributes, we don't need to inherit the handle
                                 ref unused_SecAttrs, // address to thread security attributes.
-                                true,                // handle inheritance flag
-                                creationFlags,       // creation flags
+                                true, // handle inheritance flag
+                                creationFlags, // creation flags
                                 (IntPtr)environmentBlockPtr, // pointer to new environment block
-                                workingDirectory,    // pointer to current directory name
-                                ref startupInfo,     // pointer to STARTUPINFO
-                                ref processInfo      // pointer to PROCESS_INFORMATION
+                                workingDirectory, // pointer to current directory name
+                                ref startupInfo, // pointer to STARTUPINFO
+                                ref processInfo // pointer to PROCESS_INFORMATION
                             );
                             if (!retVal)
                                 errorCode = Marshal.GetLastWin32Error();
                         }
                     }
 
-                    if (processInfo.hProcess != IntPtr.Zero && processInfo.hProcess != new IntPtr(-1))
+                    if (
+                        processInfo.hProcess != IntPtr.Zero
+                        && processInfo.hProcess != new IntPtr(-1)
+                    )
                         Marshal.InitHandle(procSH, processInfo.hProcess);
                     if (processInfo.hThread != IntPtr.Zero && processInfo.hThread != new IntPtr(-1))
                         Interop.Kernel32.CloseHandle(processInfo.hThread);
 
                     if (!retVal)
                     {
-                        string nativeErrorMessage = errorCode == Interop.Errors.ERROR_BAD_EXE_FORMAT || errorCode == Interop.Errors.ERROR_EXE_MACHINE_TYPE_MISMATCH
-                            ? SR.InvalidApplication
-                            : GetErrorMessage(errorCode);
+                        string nativeErrorMessage =
+                            errorCode == Interop.Errors.ERROR_BAD_EXE_FORMAT
+                            || errorCode == Interop.Errors.ERROR_EXE_MACHINE_TYPE_MISMATCH
+                                ? SR.InvalidApplication
+                                : GetErrorMessage(errorCode);
 
-                        throw CreateExceptionForErrorStartingProcess(nativeErrorMessage, errorCode, startInfo.FileName, workingDirectory);
+                        throw CreateExceptionForErrorStartingProcess(
+                            nativeErrorMessage,
+                            errorCode,
+                            startInfo.FileName,
+                            workingDirectory
+                        );
                     }
                 }
                 catch
@@ -629,19 +807,39 @@ namespace System.Diagnostics
 
             if (startInfo.RedirectStandardInput)
             {
-                Encoding enc = startInfo.StandardInputEncoding ?? GetEncoding((int)Interop.Kernel32.GetConsoleCP());
-                _standardInput = new StreamWriter(new FileStream(parentInputPipeHandle!, FileAccess.Write, 4096, false), enc, 4096);
+                Encoding enc =
+                    startInfo.StandardInputEncoding
+                    ?? GetEncoding((int)Interop.Kernel32.GetConsoleCP());
+                _standardInput = new StreamWriter(
+                    new FileStream(parentInputPipeHandle!, FileAccess.Write, 4096, false),
+                    enc,
+                    4096
+                );
                 _standardInput.AutoFlush = true;
             }
             if (startInfo.RedirectStandardOutput)
             {
-                Encoding enc = startInfo.StandardOutputEncoding ?? GetEncoding((int)Interop.Kernel32.GetConsoleOutputCP());
-                _standardOutput = new StreamReader(new FileStream(parentOutputPipeHandle!, FileAccess.Read, 4096, false), enc, true, 4096);
+                Encoding enc =
+                    startInfo.StandardOutputEncoding
+                    ?? GetEncoding((int)Interop.Kernel32.GetConsoleOutputCP());
+                _standardOutput = new StreamReader(
+                    new FileStream(parentOutputPipeHandle!, FileAccess.Read, 4096, false),
+                    enc,
+                    true,
+                    4096
+                );
             }
             if (startInfo.RedirectStandardError)
             {
-                Encoding enc = startInfo.StandardErrorEncoding ?? GetEncoding((int)Interop.Kernel32.GetConsoleOutputCP());
-                _standardError = new StreamReader(new FileStream(parentErrorPipeHandle!, FileAccess.Read, 4096, false), enc, true, 4096);
+                Encoding enc =
+                    startInfo.StandardErrorEncoding
+                    ?? GetEncoding((int)Interop.Kernel32.GetConsoleOutputCP());
+                _standardError = new StreamReader(
+                    new FileStream(parentErrorPipeHandle!, FileAccess.Read, 4096, false),
+                    enc,
+                    true,
+                    4096
+                );
             }
 
             commandLine.Dispose();
@@ -665,7 +863,10 @@ namespace System.Diagnostics
 
         private bool _signaled;
 
-        private static void BuildCommandLine(ProcessStartInfo startInfo, ref ValueStringBuilder commandLine)
+        private static void BuildCommandLine(
+            ProcessStartInfo startInfo,
+            ref ValueStringBuilder commandLine
+        )
         {
             // Construct a StringBuilder with the appropriate command line
             // to pass to CreateProcess.  If the filename isn't already
@@ -673,7 +874,8 @@ namespace System.Diagnostics
             // problems (it specifies exactly which part of the string
             // is the file to execute).
             ReadOnlySpan<char> fileName = startInfo.FileName.AsSpan().Trim();
-            bool fileNameIsQuoted = fileName.Length > 0 && fileName[0] == '\"' && fileName[fileName.Length - 1] == '\"';
+            bool fileNameIsQuoted =
+                fileName.Length > 0 && fileName[0] == '\"' && fileName[fileName.Length - 1] == '\"';
             if (!fileNameIsQuoted)
             {
                 commandLine.Append('"');
@@ -692,17 +894,30 @@ namespace System.Diagnostics
         /// <summary>Gets timing information for the current process.</summary>
         private ProcessThreadTimes GetProcessTimes()
         {
-            using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION, false))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
+                    false
+                )
+            )
             {
                 if (handle.IsInvalid)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.ProcessHasExited, _processId.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.ProcessHasExited, _processId.ToString())
+                    );
                 }
 
                 ProcessThreadTimes processTimes = new ProcessThreadTimes();
-                if (!Interop.Kernel32.GetProcessTimes(handle,
-                    out processTimes._create, out processTimes._exit,
-                    out processTimes._kernel, out processTimes._user))
+                if (
+                    !Interop.Kernel32.GetProcessTimes(
+                        handle,
+                        out processTimes._create,
+                        out processTimes._exit,
+                        out processTimes._kernel,
+                        out processTimes._user
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }
@@ -720,12 +935,24 @@ namespace System.Diagnostics
             {
                 // get the process token so we can adjust the privilege on it.  We DO need to
                 // close the token when we're done with it.
-                if (!Interop.Advapi32.OpenProcessToken(Interop.Kernel32.GetCurrentProcess(), Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES, out hToken))
+                if (
+                    !Interop.Advapi32.OpenProcessToken(
+                        Interop.Kernel32.GetCurrentProcess(),
+                        Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
+                        out hToken
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }
 
-                if (!Interop.Advapi32.LookupPrivilegeValue(null, privilegeName, out Interop.Advapi32.LUID luid))
+                if (
+                    !Interop.Advapi32.LookupPrivilegeValue(
+                        null,
+                        privilegeName,
+                        out Interop.Advapi32.LUID luid
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }
@@ -765,13 +992,18 @@ namespace System.Diagnostics
                     // Since haveProcessHandle is true, we know we have the process handle
                     // open with at least SYNCHRONIZE access, so we can wait on it with
                     // zero timeout to see if the process has exited.
-                    using (Interop.Kernel32.ProcessWaitHandle waitHandle = new Interop.Kernel32.ProcessWaitHandle(_processHandle!))
+                    using (
+                        Interop.Kernel32.ProcessWaitHandle waitHandle =
+                            new Interop.Kernel32.ProcessWaitHandle(_processHandle!)
+                    )
                     {
                         if (waitHandle.WaitOne(0))
                         {
-                            throw new InvalidOperationException(_haveProcessId ?
-                                SR.Format(SR.ProcessHasExited, _processId.ToString()) :
-                                SR.ProcessHasExitedNoId);
+                            throw new InvalidOperationException(
+                                _haveProcessId
+                                    ? SR.Format(SR.ProcessHasExited, _processId.ToString())
+                                    : SR.ProcessHasExitedNoId
+                            );
                         }
                     }
                 }
@@ -779,26 +1011,51 @@ namespace System.Diagnostics
                 // If we dispose of our contained handle we'll be in a bad state. .NET Framework dealt with this
                 // by doing a try..finally around every usage of GetProcessHandle and only disposed if
                 // it wasn't our handle.
-                return new SafeProcessHandle(_processHandle!.DangerousGetHandle(), ownsHandle: false);
+                return new SafeProcessHandle(
+                    _processHandle!.DangerousGetHandle(),
+                    ownsHandle: false
+                );
             }
             else
             {
                 EnsureState(State.HaveId | State.IsLocal);
-                SafeProcessHandle handle = ProcessManager.OpenProcess(_processId, access, throwIfExited);
-                if (throwIfExited && (access & Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION) != 0)
+                SafeProcessHandle handle = ProcessManager.OpenProcess(
+                    _processId,
+                    access,
+                    throwIfExited
+                );
+                if (
+                    throwIfExited
+                    && (access & Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION) != 0
+                )
                 {
-                    if (Interop.Kernel32.GetExitCodeProcess(handle, out _exitCode) && _exitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE)
+                    if (
+                        Interop.Kernel32.GetExitCodeProcess(handle, out _exitCode)
+                        && _exitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE
+                    )
                     {
-                        throw new InvalidOperationException(SR.Format(SR.ProcessHasExited, _processId.ToString()));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.ProcessHasExited, _processId.ToString())
+                        );
                     }
                 }
                 return handle;
             }
         }
 
-        private static void CreatePipeWithSecurityAttributes(out SafeFileHandle hReadPipe, out SafeFileHandle hWritePipe, ref Interop.Kernel32.SECURITY_ATTRIBUTES lpPipeAttributes, int nSize)
+        private static void CreatePipeWithSecurityAttributes(
+            out SafeFileHandle hReadPipe,
+            out SafeFileHandle hWritePipe,
+            ref Interop.Kernel32.SECURITY_ATTRIBUTES lpPipeAttributes,
+            int nSize
+        )
         {
-            bool ret = Interop.Kernel32.CreatePipe(out hReadPipe, out hWritePipe, ref lpPipeAttributes, nSize);
+            bool ret = Interop.Kernel32.CreatePipe(
+                out hReadPipe,
+                out hWritePipe,
+                ref lpPipeAttributes,
+                nSize
+            );
             if (!ret || hReadPipe.IsInvalid || hWritePipe.IsInvalid)
             {
                 throw new Win32Exception();
@@ -812,7 +1069,11 @@ namespace System.Diagnostics
         // methods such as WriteLine as well as native CRT functions like printf) which are making an
         // assumption that the console standard handles (obtained via GetStdHandle()) are opened
         // for synchronous I/O and hence they can work fine with ReadFile/WriteFile synchronously!
-        private static void CreatePipe(out SafeFileHandle parentHandle, out SafeFileHandle childHandle, bool parentInputs)
+        private static void CreatePipe(
+            out SafeFileHandle parentHandle,
+            out SafeFileHandle childHandle,
+            bool parentInputs
+        )
         {
             Interop.Kernel32.SECURITY_ATTRIBUTES securityAttributesParent = default;
             securityAttributesParent.bInheritHandle = Interop.BOOL.TRUE;
@@ -822,14 +1083,21 @@ namespace System.Diagnostics
             {
                 if (parentInputs)
                 {
-                    CreatePipeWithSecurityAttributes(out childHandle, out hTmp, ref securityAttributesParent, 0);
+                    CreatePipeWithSecurityAttributes(
+                        out childHandle,
+                        out hTmp,
+                        ref securityAttributesParent,
+                        0
+                    );
                 }
                 else
                 {
-                    CreatePipeWithSecurityAttributes(out hTmp,
-                                                          out childHandle,
-                                                          ref securityAttributesParent,
-                                                          0);
+                    CreatePipeWithSecurityAttributes(
+                        out hTmp,
+                        out childHandle,
+                        ref securityAttributesParent,
+                        0
+                    );
                 }
                 // Duplicate the parent handle to be non-inheritable so that the child process
                 // doesn't have access. This is done for correctness sake, exact reason is unclear.
@@ -837,13 +1105,17 @@ namespace System.Diagnostics
                 // closing the parent end of the pipe and there by getting into a blocking situation
                 // as parent will not be draining the pipe at the other end anymore.
                 IntPtr currentProcHandle = Interop.Kernel32.GetCurrentProcess();
-                if (!Interop.Kernel32.DuplicateHandle(currentProcHandle,
-                                                     hTmp,
-                                                     currentProcHandle,
-                                                     out parentHandle,
-                                                     0,
-                                                     false,
-                                                     Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS))
+                if (
+                    !Interop.Kernel32.DuplicateHandle(
+                        currentProcHandle,
+                        hTmp,
+                        currentProcHandle,
+                        out parentHandle,
+                        0,
+                        false,
+                        Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }

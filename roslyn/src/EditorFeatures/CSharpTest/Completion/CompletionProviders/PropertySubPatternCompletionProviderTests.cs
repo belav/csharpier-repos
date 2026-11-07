@@ -16,14 +16,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class PropertySubpatternCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(PropertySubpatternCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(PropertySubpatternCompletionProvider);
 
         [Fact]
         public async Task PropertiesInRecursivePattern()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -43,8 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithPositional()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     public int P1 { get; set; }
@@ -64,8 +62,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithPositional_UsingStaticType()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     public int P1 { get; set; }
@@ -85,8 +82,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithEscapedKeyword()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int @new { get; set; }
@@ -105,8 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WriteOnlyProperties()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { set => throw null; }
@@ -123,8 +118,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithDerivedType()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     void M()
@@ -145,8 +139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithOtherType()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     void M(Other other)
@@ -167,8 +160,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithDerivedType_WithInaccessibleMembers()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     void M()
@@ -188,8 +180,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_WithDerivedType_WithPrivateMember()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     private int P1 { get; set; }
@@ -209,8 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_UseStaticTypeFromIs()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -230,8 +220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InSwitchStatement()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -254,8 +243,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_UseStaticTypeFromSwitchStatement()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -278,8 +266,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InSwitchExpression()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -298,8 +285,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_NestedInProperty()
         {
-            var markup =
-                """
+            var markup = """
                 public class Nested
                 {
                     public int P3 { get; set; }
@@ -325,8 +311,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_NestedInField()
         {
-            var markup =
-                """
+            var markup = """
                 public class Nested
                 {
                     public int P3 { get; set; }
@@ -352,8 +337,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_Nested_WithFields()
         {
-            var markup =
-                """
+            var markup = """
                 public class Nested
                 {
                     public int F3;
@@ -379,8 +363,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_Nested_WithMissingProperty()
         {
-            var markup =
-                """
+            var markup = """
                 public class Nested
                 {
                     public int P3 { get; set; }
@@ -403,8 +386,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_NoType()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -422,8 +404,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_MissingAfterColon()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -441,8 +422,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_SecondProperty()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -462,8 +442,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_PositionalInFirstProperty()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public D P1 { get; set; }
@@ -484,8 +463,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_PositionalInFirstProperty_AfterComma()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public D P1 { get; set; }
@@ -506,8 +484,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_PositionalInFirstProperty_AfterCommaAndBeforeParen()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public D P1 { get; set; }
@@ -528,8 +505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InPositional_Incomplete()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     public int P1 { get; set; }
@@ -548,8 +524,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InPositional_Incomplete_WithoutClosingBrace()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     public int P1 { get; set; }
@@ -568,8 +543,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InPositional_Incomplete_WithTwoTypes()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     void M()
@@ -590,8 +564,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InPositional_Complete_BeforeComma()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     public int P1 { get; set; }
@@ -610,8 +583,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_InPositional_Complete_AfterComma()
         {
-            var markup =
-                """
+            var markup = """
                 public class Program
                 {
                     public int P1 { get; set; }
@@ -630,8 +602,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_NoPropertyLeft()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     public int P1 { get; set; }
@@ -649,8 +620,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task PropertiesInRecursivePattern_NotForEditorUnbrowsable()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -672,8 +642,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33250")]
         public async Task StaticProperties_NotSuggested()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     void M()
@@ -688,8 +657,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33250")]
         public async Task StaticFields_NotSuggested()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     static int x = 42;
@@ -706,8 +674,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33250")]
         public async Task ConstFields_NotSuggested()
         {
-            var markup =
-                """
+            var markup = """
                 class Program
                 {
                     void M()

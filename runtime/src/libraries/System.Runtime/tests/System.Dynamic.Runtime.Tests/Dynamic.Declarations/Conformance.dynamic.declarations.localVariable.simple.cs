@@ -22,8 +22,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration002.declaration002
 {
     public class Test
@@ -45,8 +43,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration004.declaration004
 {
@@ -71,8 +67,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration005.declaration005
 {
     public class Test
@@ -96,8 +90,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration006.declaration006
 {
     public class Test
@@ -119,8 +111,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration007.declaration007
 {
@@ -144,8 +134,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration008.declaration008
 {
     public class Test
@@ -168,8 +156,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration009.declaration009
 {
     public class Test
@@ -178,7 +164,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         {
             First,
             Second,
-            Third
+            Third,
         }
 
         [Fact]
@@ -199,8 +185,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration010.declaration010
 {
     public class Test
@@ -218,12 +202,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 
         public static int MainMethod(string[] args)
         {
-            MyStruct s = new MyStruct()
-            {
-                myStr = "dynamic"
-            }
-
-            ;
+            MyStruct s = new MyStruct() { myStr = "dynamic" };
             dynamic d = s;
             if (((MyStruct)d).myStr != "dynamic")
                 return 1;
@@ -232,8 +211,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration011.declaration011
 {
@@ -252,12 +229,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 
         public static int MainMethod(string[] args)
         {
-            MyStruct? s = new MyStruct()
-            {
-                myStr = "dynamic"
-            }
-
-            ;
+            MyStruct? s = new MyStruct() { myStr = "dynamic" };
             dynamic d = s;
             if (((MyStruct)d).myStr != "dynamic")
                 return 1;
@@ -266,8 +238,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration012.declaration012
 {
@@ -286,12 +256,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 
         public static int MainMethod(string[] args)
         {
-            MyClass s = new MyClass()
-            {
-                myStr = "dynamic"
-            }
-
-            ;
+            MyClass s = new MyClass() { myStr = "dynamic" };
             dynamic d = s;
             if (((MyClass)d).myStr != "dynamic")
                 return 1;
@@ -300,8 +265,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.declaration013.declaration013
 {
@@ -323,8 +286,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVariable.simple.errordeclaration001.errordeclaration001
 {

@@ -7,7 +7,5 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
     /// <summary>
     /// No actual options for DateAndTime. But we use this to fit into the common pattern of embedded languages.
     /// </summary>
-    internal enum DateAndTimeOptions
-    {
-    }
+    internal enum DateAndTimeOptions { }
 }

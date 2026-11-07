@@ -2,10 +2,12 @@
 using System.Security.Permissions;
 using System.Web.UI;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     [ParseChildren(true)]
     [PersistChildren(false)]
-    public class EntityTemplate : Control {
+    public class EntityTemplate : Control
+    {
         [Browsable(false)]
         [DefaultValue(null)]
         [PersistenceMode(PersistenceMode.InnerProperty)]

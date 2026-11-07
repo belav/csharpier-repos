@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,48 +34,47 @@ using System.Net.Sockets;
 namespace Mono.Unix
 {
 #pragma warning disable 649
-	internal struct PeerCredData {
-		public int pid;
-		public int uid;
-		public int gid;
-	}
+    internal struct PeerCredData
+    {
+        public int pid;
+        public int uid;
+        public int gid;
+    }
 #pragma warning restore 649
 
-	public class PeerCred
-	{
-		/* Make sure this doesn't clash with anything in
-		 * SocketOptionName, and keep it synchronised with the
-		 * runtime
-		 */
-		private const int so_peercred=10001;
-		private PeerCredData data;
-		
-		public PeerCred (Socket sock) {
-			if (sock.AddressFamily != AddressFamily.Unix) {
-				throw new ArgumentException ("Only Unix sockets are supported", "sock");
-			}
+    public class PeerCred
+    {
+        /* Make sure this doesn't clash with anything in
+         * SocketOptionName, and keep it synchronised with the
+         * runtime
+         */
+        private const int so_peercred = 10001;
+        private PeerCredData data;
 
-			data = (PeerCredData)
-				sock.GetSocketOption (SocketOptionLevel.Socket, (SocketOptionName)so_peercred);
-		}
-		
-		public int ProcessID {
-			get {
-				return(data.pid);
-			}
-		}
+        public PeerCred(Socket sock)
+        {
+            if (sock.AddressFamily != AddressFamily.Unix)
+            {
+                throw new ArgumentException("Only Unix sockets are supported", "sock");
+            }
 
-		public int UserID {
-			get {
-				return(data.uid);
-			}
-		}
+            data = (PeerCredData)
+                sock.GetSocketOption(SocketOptionLevel.Socket, (SocketOptionName)so_peercred);
+        }
 
-		public int GroupID {
-			get {
-				return(data.gid);
-			}
-		}
-	}
+        public int ProcessID
+        {
+            get { return (data.pid); }
+        }
+
+        public int UserID
+        {
+            get { return (data.uid); }
+        }
+
+        public int GroupID
+        {
+            get { return (data.gid); }
+        }
+    }
 }
-

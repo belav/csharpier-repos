@@ -12,7 +12,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class Int32Converter : JsonConverter<int>
         {
-            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.String)
                 {
@@ -30,7 +34,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteNumberValue(value);
             }

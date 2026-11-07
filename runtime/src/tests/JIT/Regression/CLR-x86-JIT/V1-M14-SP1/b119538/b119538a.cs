@@ -3,9 +3,8 @@
 //
 
 using Xunit;
-class A
-{
-}
+
+class A { }
 
 public class B
 {

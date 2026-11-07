@@ -10,15 +10,19 @@ namespace System.Web.WebPages
     /// This is a wrapper around Dictionary so that using PageData[key] returns null
     /// if the key is not found, instead of throwing an exception.
     /// </summary>
-    // This is a generic type because C# does not allow implementing an interface 
+    // This is a generic type because C# does not allow implementing an interface
     // involving dynamic types (implementing IDictionary<object, dynamic> causes
-    // a compile error 
+    // a compile error
     // http://blogs.msdn.com/cburrows/archive/2009/02/04/c-dynamic-part-vii.aspx).
     internal class PageDataDictionary<TValue> : IDictionary<object, TValue>
     {
-        private IDictionary<object, TValue> _data = new Dictionary<object, TValue>(new PageDataComparer());
+        private IDictionary<object, TValue> _data = new Dictionary<object, TValue>(
+            new PageDataComparer()
+        );
 
-        private IDictionary<string, TValue> _stringDictionary = new Dictionary<string, TValue>(StringComparer.OrdinalIgnoreCase);
+        private IDictionary<string, TValue> _stringDictionary = new Dictionary<string, TValue>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private IList<TValue> _indexedValues = new List<TValue>();
 
@@ -104,9 +108,8 @@ namespace System.Web.WebPages
                 TryGetValue(key, out v);
                 return v;
             }
-
             // Note that this affects and updates the string dictionary and indexed list
-            // only for existing keys found in these collections. 
+            // only for existing keys found in these collections.
             // Otherwise, the key/value goes into the _data dictionary.
             set
             {
@@ -263,7 +266,10 @@ namespace System.Web.WebPages
 
         // Creates a new PageData dictionary using only the original items from the pageData (excluding the string dictionary and indexed list),
         // and adding the parameters.
-        internal static IDictionary<object, dynamic> CreatePageDataFromParameters(IDictionary<object, dynamic> previousPageData, params object[] data)
+        internal static IDictionary<object, dynamic> CreatePageDataFromParameters(
+            IDictionary<object, dynamic> previousPageData,
+            params object[] data
+        )
         {
             var oldPageData = previousPageData as PageDataDictionary<dynamic>;
 

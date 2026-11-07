@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,146 +27,173 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System {
+namespace MonoCasTests.System
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class BadImageFormatExceptionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class BadImageFormatExceptionCas {
+        [Test]
+        public void NoRestriction()
+        {
+            BadImageFormatException fle = new BadImageFormatException(
+                "message",
+                "filename",
+                new BadImageFormatException("inner message", "inner filename")
+            );
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+            Assert.AreEqual("message", fle.Message, "Message");
+            Assert.AreEqual("filename", fle.FileName, "FileName");
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            Assert.IsNotNull(fle.ToString(), "ToString");
+        }
 
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void FullRestriction()
+        {
+            BadImageFormatException fle = new BadImageFormatException(
+                "message",
+                "filename",
+                new BadImageFormatException("inner message", "inner filename")
+            );
 
-		[Test]
-		public void NoRestriction ()
-		{
-			BadImageFormatException fle = new BadImageFormatException ("message", "filename",
-				new BadImageFormatException ("inner message", "inner filename"));
+            Assert.AreEqual("message", fle.Message, "Message");
+            Assert.AreEqual("filename", fle.FileName, "FileName");
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            // ToString doesn't work in this case and strangely throws a BadImageFormatException
+            Assert.IsNotNull(fle.ToString(), "ToString");
+        }
 
-			Assert.AreEqual ("message", fle.Message, "Message");
-			Assert.AreEqual ("filename", fle.FileName, "FileName");
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			Assert.IsNotNull (fle.ToString (), "ToString");
-		}
+        [Test]
+        [SecurityPermission(
+            SecurityAction.PermitOnly,
+            ControlEvidence = true,
+            ControlPolicy = true
+        )]
+        public void GetFusionLog_Pass()
+        {
+            BadImageFormatException fle = new BadImageFormatException("message", "filename");
+            Assert.AreEqual("message", fle.Message, "Message");
+            Assert.AreEqual("filename", fle.FileName, "FileName");
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            // note: ToString doesn't work in this case
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void FullRestriction ()
-		{
-			BadImageFormatException fle = new BadImageFormatException ("message", "filename",
-				new BadImageFormatException ("inner message", "inner filename"));
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlEvidence = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetFusionLog_Fail_ControlEvidence()
+        {
+            BadImageFormatException fle = new BadImageFormatException();
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+        }
 
-			Assert.AreEqual ("message", fle.Message, "Message");
-			Assert.AreEqual ("filename", fle.FileName, "FileName");
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			// ToString doesn't work in this case and strangely throws a BadImageFormatException
-			Assert.IsNotNull (fle.ToString (), "ToString");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetFusionLog_Fail_ControlPolicy()
+        {
+            BadImageFormatException fle = new BadImageFormatException();
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            // we don't have to throw the exception to have FusionLog
+            // informations restricted (even if there could be no
+            // data in this state).
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlEvidence = true, ControlPolicy = true)]
-		public void GetFusionLog_Pass ()
-		{
-			BadImageFormatException fle = new BadImageFormatException ("message", "filename");
-			Assert.AreEqual ("message", fle.Message, "Message");
-			Assert.AreEqual ("filename", fle.FileName, "FileName");
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			// note: ToString doesn't work in this case
-		}
+        [Test]
+        public void Throw_NoRestriction()
+        {
+            try
+            {
+                throw new BadImageFormatException(
+                    "message",
+                    "filename",
+                    new BadImageFormatException("inner message", "inner filename")
+                );
+            }
+            catch (BadImageFormatException fle)
+            {
+                Assert.AreEqual("message", fle.Message, "Message");
+                Assert.AreEqual("filename", fle.FileName, "FileName");
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+                Assert.IsNotNull(fle.ToString(), "ToString");
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetFusionLog_Fail_ControlEvidence ()
-		{
-			BadImageFormatException fle = new BadImageFormatException ();
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Throw_FullRestriction()
+        {
+            try
+            {
+                throw new BadImageFormatException(
+                    "message",
+                    "filename",
+                    new BadImageFormatException("inner message", "inner filename")
+                );
+            }
+            catch (BadImageFormatException fle)
+            {
+                Assert.AreEqual("message", fle.Message, "Message");
+                Assert.AreEqual("filename", fle.FileName, "FileName");
+                // both FusionLog and ToString doesn't work in this case
+                // but strangely we get a BadImageFormatException
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+                Assert.IsNotNull(fle.ToString(), "ToString");
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetFusionLog_Fail_ControlPolicy ()
-		{
-			BadImageFormatException fle = new BadImageFormatException ();
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			// we don't have to throw the exception to have FusionLog
-			// informations restricted (even if there could be no
-			// data in this state).
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlEvidence = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Throw_GetFusionLog_Fail_ControlEvidence()
+        {
+            try
+            {
+                throw new BadImageFormatException(
+                    "message",
+                    "filename",
+                    new BadImageFormatException("inner message", "inner filename")
+                );
+            }
+            catch (BadImageFormatException fle)
+            {
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+            }
+        }
 
-
-		[Test]
-		public void Throw_NoRestriction ()
-		{
-			try {
-				throw new BadImageFormatException ("message", "filename",
-					new BadImageFormatException ("inner message", "inner filename"));
-			}
-			catch (BadImageFormatException fle) {
-				Assert.AreEqual ("message", fle.Message, "Message");
-				Assert.AreEqual ("filename", fle.FileName, "FileName");
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-				Assert.IsNotNull (fle.ToString (), "ToString");
-			}
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Throw_FullRestriction ()
-		{
-			try {
-				throw new BadImageFormatException ("message", "filename",
-					new BadImageFormatException ("inner message", "inner filename"));
-			}
-			catch (BadImageFormatException fle) {
-				Assert.AreEqual ("message", fle.Message, "Message");
-				Assert.AreEqual ("filename", fle.FileName, "FileName");
-				// both FusionLog and ToString doesn't work in this case
-				// but strangely we get a BadImageFormatException
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-				Assert.IsNotNull (fle.ToString (), "ToString");
-			}
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Throw_GetFusionLog_Fail_ControlEvidence ()
-		{
-			try {
-				throw new BadImageFormatException ("message", "filename",
-					new BadImageFormatException ("inner message", "inner filename"));
-			}
-			catch (BadImageFormatException fle) {
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-			}
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Throw_GetFusionLog_Fail_ControlPolicy ()
-		{
-			try {
-				throw new BadImageFormatException ("message", "filename",
-					new BadImageFormatException ("inner message", "inner filename"));
-			}
-			catch (BadImageFormatException fle) {
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-			}
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Throw_GetFusionLog_Fail_ControlPolicy()
+        {
+            try
+            {
+                throw new BadImageFormatException(
+                    "message",
+                    "filename",
+                    new BadImageFormatException("inner message", "inner filename")
+                );
+            }
+            catch (BadImageFormatException fle)
+            {
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
 //
-// HttpCookieCollectionCas.cs 
+// HttpCookieCollectionCas.cs
 //	- CAS unit tests for System.Web.HttpCookieCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,49 +27,49 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HttpCookieCollectionCas : AspNetHostingMinimal
+    {
+        private HttpCookie biscuit;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpCookieCollectionCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            biscuit = new HttpCookie(null);
+        }
 
-		private HttpCookie biscuit;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            HttpCookieCollection jar = new HttpCookieCollection();
+            jar.Add(biscuit);
+            jar.CopyTo(new object[1], 0);
+            Assert.IsNull(jar.GetKey(0), "GetKey");
+            jar.Remove("chocolat");
+            jar.Set(biscuit);
+            Assert.IsNotNull(jar.Get(0), "Get(int)");
+            Assert.IsNull(jar.Get("chocolat"), "Get(string)");
+            Assert.IsNotNull(jar[0], "this[int]");
+            Assert.IsNull(jar["chocolat"], "this[string]");
+            Assert.AreEqual(1, jar.AllKeys.Length, "AllKeys");
+            jar.Clear();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			biscuit = new HttpCookie (null);
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HttpCookieCollection jar = new HttpCookieCollection ();
-			jar.Add (biscuit);
-			jar.CopyTo (new object[1], 0);
-			Assert.IsNull (jar.GetKey (0), "GetKey");
-			jar.Remove ("chocolat");
-			jar.Set (biscuit);
-			Assert.IsNotNull (jar.Get (0), "Get(int)");
-			Assert.IsNull (jar.Get ("chocolat"), "Get(string)");
-			Assert.IsNotNull (jar[0], "this[int]");
-			Assert.IsNull (jar["chocolat"], "this[string]");
-			Assert.AreEqual (1, jar.AllKeys.Length, "AllKeys");
-			jar.Clear ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (HttpCookieCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HttpCookieCollection); }
+        }
+    }
 }

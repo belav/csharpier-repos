@@ -6,8 +6,8 @@
 
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public struct S<T>

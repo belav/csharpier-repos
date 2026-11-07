@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
-using Internal.TypeSystem.Ecma;
-using Internal.TypeSystem;
-using Internal.JitInterface;
 using System.Reflection.Metadata;
+using Internal.JitInterface;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
@@ -21,7 +20,9 @@ namespace ILCompiler
         public ReadyToRunVisibilityRootProvider(EcmaModule module)
         {
             _module = module;
-            _instructionSetSupport = ((ReadyToRunCompilerContext)module.Context).InstructionSetSupport;
+            _instructionSetSupport = (
+                (ReadyToRunCompilerContext)module.Context
+            ).InstructionSetSupport;
         }
 
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
@@ -36,18 +37,37 @@ namespace ILCompiler
                         continue;
                 }
 
-                RootMethods(typeWithMethods, "Library module method", rootProvider, ((EcmaAssembly)_module.Assembly).HasAssemblyCustomAttribute("System.Runtime.CompilerServices", "InternalsVisibleToAttribute"));
+                RootMethods(
+                    typeWithMethods,
+                    "Library module method",
+                    rootProvider,
+                    ((EcmaAssembly)_module.Assembly).HasAssemblyCustomAttribute(
+                        "System.Runtime.CompilerServices",
+                        "InternalsVisibleToAttribute"
+                    )
+                );
             }
 
             if (_module.EntryPoint is not null)
             {
-                rootProvider.AddCompilationRoot(_module.EntryPoint, rootMinimalDependencies: false, $"{_module.Assembly.GetName()} Main Method");
+                rootProvider.AddCompilationRoot(
+                    _module.EntryPoint,
+                    rootMinimalDependencies: false,
+                    $"{_module.Assembly.GetName()} Main Method"
+                );
             }
         }
 
-        private void RootMethods(MetadataType type, string reason, IRootingServiceProvider rootProvider, bool anyInternalsVisibleTo)
+        private void RootMethods(
+            MetadataType type,
+            string reason,
+            IRootingServiceProvider rootProvider,
+            bool anyInternalsVisibleTo
+        )
         {
-            MethodImplRecord[] methodImplRecords = GetAllMethodImplRecordsForType((EcmaType)type.GetTypeDefinition());
+            MethodImplRecord[] methodImplRecords = GetAllMethodImplRecordsForType(
+                (EcmaType)type.GetTypeDefinition()
+            );
             foreach (MethodDesc method in type.GetAllMethods())
             {
                 // Skip methods with no IL
@@ -59,9 +79,12 @@ namespace ILCompiler
 
                 // If the method is not visible outside the assembly, then do not root the method.
                 // It will be rooted by any callers that require it and do not inline it.
-                if (!method.IsStaticConstructor
+                if (
+                    !method.IsStaticConstructor
                     && method.GetTypicalMethodDefinition() is EcmaMethod ecma
-                    && !ecma.GetEffectiveVisibility().IsExposedOutsideOfThisAssembly(anyInternalsVisibleTo))
+                    && !ecma.GetEffectiveVisibility()
+                        .IsExposedOutsideOfThisAssembly(anyInternalsVisibleTo)
+                )
                 {
                     // If a method itself is not visible outside the assembly, but it implements a method that is,
                     // we want to root it as it could be called from outside the assembly.
@@ -75,8 +98,10 @@ namespace ILCompiler
                         if (record.Body == ecma)
                         {
                             anyMethodImplRecordsForMethod = true;
-                            implementsOrOverridesVisibleMethod = record.Decl.GetTypicalMethodDefinition() is EcmaMethod decl
-                                && decl.GetEffectiveVisibility().IsExposedOutsideOfThisAssembly(anyInternalsVisibleTo);
+                            implementsOrOverridesVisibleMethod =
+                                record.Decl.GetTypicalMethodDefinition() is EcmaMethod decl
+                                && decl.GetEffectiveVisibility()
+                                    .IsExposedOutsideOfThisAssembly(anyInternalsVisibleTo);
                             if (implementsOrOverridesVisibleMethod)
                             {
                                 break;
@@ -107,7 +132,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(_instructionSetSupport, method))
                     {
                         ReadyToRunLibraryRootProvider.CheckCanGenerateMethod(methodToRoot);
-                        rootProvider.AddCompilationRoot(methodToRoot, rootMinimalDependencies: false, reason: reason);
+                        rootProvider.AddCompilationRoot(
+                            methodToRoot,
+                            rootMinimalDependencies: false,
+                            reason: reason
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -127,12 +156,16 @@ namespace ILCompiler
 
             foreach (var methodImplHandle in definition.GetMethodImplementations())
             {
-                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(methodImplHandle);
+                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(
+                    methodImplHandle
+                );
 
-                records.Add(new MethodImplRecord(
-                    _module.GetMethod(methodImpl.MethodDeclaration),
-                   _module.GetMethod(methodImpl.MethodBody)
-                ));
+                records.Add(
+                    new MethodImplRecord(
+                        _module.GetMethod(methodImpl.MethodDeclaration),
+                        _module.GetMethod(methodImpl.MethodBody)
+                    )
+                );
             }
             return records.ToArray();
         }
@@ -151,11 +184,19 @@ namespace ILCompiler
         {
             EcmaAssembly assembly = (EcmaAssembly)module.Assembly;
 
-            foreach (var assemblyMetadata in assembly.GetDecodedCustomAttributes("System.Reflection", "AssemblyMetadataAttribute"))
+            foreach (
+                var assemblyMetadata in assembly.GetDecodedCustomAttributes(
+                    "System.Reflection",
+                    "AssemblyMetadataAttribute"
+                )
+            )
             {
                 if ((string)assemblyMetadata.FixedArguments[0].Value == "IsTrimmable")
                 {
-                    return bool.TryParse((string)assemblyMetadata.FixedArguments[1].Value, out bool isTrimmable) && isTrimmable;
+                    return bool.TryParse(
+                            (string)assemblyMetadata.FixedArguments[1].Value,
+                            out bool isTrimmable
+                        ) && isTrimmable;
                 }
             }
             return false;

@@ -26,6 +26,6 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         /// <summary>
         /// Indicates <see cref="Meter"/> instances created via Dependency Injection with <see cref="IMeterFactory.Create(MeterOptions)"/>.
         /// </summary>
-        Local
+        Local,
     }
 }

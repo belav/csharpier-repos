@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class MthdImpl
 {
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

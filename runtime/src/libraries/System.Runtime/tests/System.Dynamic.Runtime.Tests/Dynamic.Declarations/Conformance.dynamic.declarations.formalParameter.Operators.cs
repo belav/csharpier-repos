@@ -10,14 +10,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         public class MyClass
         {
             public int Field;
+
             public static MyClass operator +(dynamic d, MyClass x)
             {
-                return new MyClass()
-                {
-                    Field = 3
-                }
-
-                ;
+                return new MyClass() { Field = 3 };
             }
         }
 
@@ -30,12 +26,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         public static int MainMethod(string[] args)
         {
             dynamic mc = 3;
-            MyClass x = new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            MyClass x = new MyClass() { Field = 4 };
             MyClass m = mc + x;
             if (m.Field == 3)
                 return 0;
@@ -45,8 +36,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Operators.binary002.binary002
 {
     public class Test
@@ -54,14 +43,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         public class MyClass
         {
             public int Field;
+
             public static MyClass operator &(MyClass x, dynamic d)
             {
-                return new MyClass()
-                {
-                    Field = 3
-                }
-
-                ;
+                return new MyClass() { Field = 3 };
             }
         }
 
@@ -83,8 +68,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Operators.binary003.binary003
 {
@@ -157,8 +140,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Operators.binary004.binary004
 {
     public class Test
@@ -197,8 +178,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Operators.binary005.binary005
 {

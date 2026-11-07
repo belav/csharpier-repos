@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 "SyntaxTreeOptionsProvider",
                 "ReportSuppressedDiagnostics",
                 "WarningLevel",
-                "XmlReferenceResolver");
+                "XmlReferenceResolver"
+            );
         }
     }
 }

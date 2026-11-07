@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Test.Utilities;
-using System;
-using System.Linq;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         public void HasNameQualifier()
         {
             var source =
-@"class C { }
+                @"class C { }
 namespace N
 {
     class C { }
@@ -78,19 +78,48 @@ namespace NB
                 "NA.NB.NB",
             };
             HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("C"), "");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("N.C"), "N");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("N.NA.C"), "N.NA");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("N.NA.NB.C"), "N.NA.NB");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("NA.C"), "NA");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("NA.NA.C"), "NA.NA");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("NA.NB.C"), "NA.NB");
-            HasNameQualifierCore(namespaceNames, compilation.GetMember<NamedTypeSymbol>("NB.C"), "NB");
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("N.C"),
+                "N"
+            );
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("N.NA.C"),
+                "N.NA"
+            );
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("N.NA.NB.C"),
+                "N.NA.NB"
+            );
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("NA.C"),
+                "NA"
+            );
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("NA.NA.C"),
+                "NA.NA"
+            );
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("NA.NB.C"),
+                "NA.NB"
+            );
+            HasNameQualifierCore(
+                namespaceNames,
+                compilation.GetMember<NamedTypeSymbol>("NB.C"),
+                "NB"
+            );
         }
 
         [Fact]
         public void VisitType_AnonymousDelegate()
         {
-            var source = @"
+            var source =
+                @"
 void F<T>(T t)
 {
     var f = (ref T x) => 0;
@@ -98,7 +127,10 @@ void F<T>(T t)
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var tree = compilation.SyntaxTrees.Single();
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().First(id => id.Identifier.Text == "var");
+            var identifier = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(id => id.Identifier.Text == "var");
             var model = compilation.GetSemanticModel(tree);
             var anonymousType = model.GetSymbolInfo(identifier).Symbol.GetSymbol<TypeSymbol>();
 
@@ -108,7 +140,8 @@ void F<T>(T t)
         [Fact]
         public void VisitType_AnonymousDelegateWithAnonymousClass()
         {
-            var source = @"
+            var source =
+                @"
 void F<T>(T t)
 {
     var f = (ref int x) => new { t };
@@ -116,7 +149,10 @@ void F<T>(T t)
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var tree = compilation.SyntaxTrees.Single();
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().First(id => id.Identifier.Text == "var");
+            var identifier = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(id => id.Identifier.Text == "var");
             var model = compilation.GetSemanticModel(tree);
             var anonymousType = model.GetSymbolInfo(identifier).Symbol.GetSymbol<TypeSymbol>();
 
@@ -126,7 +162,8 @@ void F<T>(T t)
         [Fact]
         public void VisitType_AnonymousClass()
         {
-            var source = @"
+            var source =
+                @"
 void F<T>(T t)
 {
     var f = new { t };
@@ -134,7 +171,10 @@ void F<T>(T t)
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var tree = compilation.SyntaxTrees.Single();
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().First(id => id.Identifier.Text == "var");
+            var identifier = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(id => id.Identifier.Text == "var");
             var model = compilation.GetSemanticModel(tree);
             var anonymousType = model.GetSymbolInfo(identifier).Symbol.GetSymbol<TypeSymbol>();
 
@@ -144,7 +184,8 @@ void F<T>(T t)
         [Fact]
         public void VisitType_AnonymousClassWithAnonymousDelegate()
         {
-            var source = @"
+            var source =
+                @"
 void F<T>(T t)
 {
     var f = (ref int x) => t;
@@ -153,7 +194,10 @@ void F<T>(T t)
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var tree = compilation.SyntaxTrees.Single();
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(id => id.Identifier.Text == "var");
+            var identifier = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Last(id => id.Identifier.Text == "var");
             var model = compilation.GetSemanticModel(tree);
             var anonymousType = model.GetSymbolInfo(identifier).Symbol.GetSymbol<TypeSymbol>();
 
@@ -163,7 +207,8 @@ void F<T>(T t)
         [Fact]
         public void VisitType_CustomModifiers()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit C1`1<T>
     extends System.Object
 {
@@ -230,7 +275,8 @@ void F<T>(T t)
 } // end of class C3`1
 ";
 
-            var source = @"
+            var source =
+                @"
 class Test
 {
     static void Main()
@@ -245,27 +291,45 @@ class Test
     }
 }
 ";
-            var compilation = CreateCompilationWithIL(source, ilSource, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithIL(
+                source,
+                ilSource,
+                options: TestOptions.ReleaseExe
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
-            var method = model.GetSymbolInfo(tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "Method").Single()).Symbol.GetSymbol<MethodSymbol>();
+            var method = model
+                .GetSymbolInfo(
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<IdentifierNameSyntax>()
+                        .Where(id => id.Identifier.ValueText == "Method")
+                        .Single()
+                )
+                .Symbol.GetSymbol<MethodSymbol>();
 
-            AssertEx.Equal("System.String C1<System.Int32 modopt(C2<G>)>.Method()", method.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.String C1<System.Int32 modopt(C2<G>)>.Method()",
+                method.ToTestDisplayString()
+            );
 
             var typeParameters = PooledHashSet<TypeParameterSymbol>.GetInstance();
             try
             {
-                method.ContainingType.VisitType(static (typeSymbol, typeParameters, _) =>
-                {
-                    if (typeSymbol is TypeParameterSymbol typeParameter)
+                method.ContainingType.VisitType(
+                    static (typeSymbol, typeParameters, _) =>
                     {
-                        typeParameters.Add(typeParameter);
-                    }
+                        if (typeSymbol is TypeParameterSymbol typeParameter)
+                        {
+                            typeParameters.Add(typeParameter);
+                        }
 
-                    return false;
-                },
-                typeParameters, visitCustomModifiers: true);
+                        return false;
+                    },
+                    typeParameters,
+                    visitCustomModifiers: true
+                );
 
                 var typeParameter = typeParameters.Single();
                 Assert.Equal("G", typeParameter.Name);
@@ -277,7 +341,11 @@ class Test
             }
         }
 
-        private void HasNameQualifierCore(string[] namespaceNames, NamedTypeSymbol type, string expectedName)
+        private void HasNameQualifierCore(
+            string[] namespaceNames,
+            NamedTypeSymbol type,
+            string expectedName
+        )
         {
             Assert.True(Array.IndexOf(namespaceNames, expectedName) >= 0);
             foreach (var namespaceName in namespaceNames)

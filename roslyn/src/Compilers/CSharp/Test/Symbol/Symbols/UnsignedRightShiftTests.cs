@@ -70,58 +70,180 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [InlineData("ulong", "int", "ulong.MaxValue", "ulong", "ulong")]
         [InlineData("ulong", "byte", "ulong.MaxValue", "ulong", "ulong")]
         [InlineData("ulong", "ushort", "ulong.MaxValue", "ulong", "ulong")]
-        [InlineData("nint", "char", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint", "nuint")]
-        [InlineData("nint", "sbyte", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint", "nuint")]
-        [InlineData("nint", "short", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint", "nuint")]
-        [InlineData("nint", "int", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint", "nuint")]
-        [InlineData("nint", "byte", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint", "nuint")]
-        [InlineData("nint", "ushort", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint", "nuint")]
-        [InlineData("nuint", "char", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint", "nuint")]
-        [InlineData("nuint", "sbyte", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint", "nuint")]
-        [InlineData("nuint", "short", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint", "nuint")]
-        [InlineData("nuint", "int", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint", "nuint")]
-        [InlineData("nuint", "byte", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint", "nuint")]
-        [InlineData("nuint", "ushort", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint", "nuint")]
-        public void BuiltIn_01(string left, string right, string leftValue, string result, string unsignedResult)
+        [InlineData(
+            "nint",
+            "char",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint",
+            "nuint"
+        )]
+        [InlineData(
+            "nint",
+            "sbyte",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint",
+            "nuint"
+        )]
+        [InlineData(
+            "nint",
+            "short",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint",
+            "nuint"
+        )]
+        [InlineData(
+            "nint",
+            "int",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint",
+            "nuint"
+        )]
+        [InlineData(
+            "nint",
+            "byte",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint",
+            "nuint"
+        )]
+        [InlineData(
+            "nint",
+            "ushort",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "char",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "sbyte",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "short",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "int",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "byte",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "ushort",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint",
+            "nuint"
+        )]
+        public void BuiltIn_01(
+            string left,
+            string right,
+            string leftValue,
+            string result,
+            string unsignedResult
+        )
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        var x = (" + left + @")" + leftValue + @";
-        var y = (" + right + @")1;
+        var x = ("
+                + left
+                + @")"
+                + leftValue
+                + @";
+        var y = ("
+                + right
+                + @")1;
         var z1 = x >>> y;
         var z2 = x >> y;
 
-        if (z1 == unchecked((" + result + @")(((" + unsignedResult + @")(" + result + @")x) >> y))) System.Console.WriteLine(""Passed 1"");
+        if (z1 == unchecked(("
+                + result
+                + @")((("
+                + unsignedResult
+                + @")("
+                + result
+                + @")x) >> y))) System.Console.WriteLine(""Passed 1"");
 
         if (x > 0 ? z1 == z2 : z1 != z2) System.Console.WriteLine(""Passed 2"");
 
-        if (z1.GetType() == z2.GetType() && z1.GetType() == typeof(" + result + @")) System.Console.WriteLine(""Passed 3"");
+        if (z1.GetType() == z2.GetType() && z1.GetType() == typeof("
+                + result
+                + @")) System.Console.WriteLine(""Passed 3"");
     }
 
-    " + result + @" Test1(" + left + @" x, " + right + @" y) => x >>> y; 
-    " + result + @" Test2(" + left + @" x, " + right + @" y) => x >> y; 
+    "
+                + result
+                + @" Test1("
+                + left
+                + @" x, "
+                + right
+                + @" y) => x >>> y; 
+    "
+                + result
+                + @" Test2("
+                + left
+                + @" x, "
+                + right
+                + @" y) => x >> y; 
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 Passed 1
 Passed 2
 Passed 3
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("shr.un", "shr").Replace("shr", "shr.un"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("shr.un", "shr").Replace("shr", "shr.un")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression).First();
-            var shift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.RightShiftExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression)
+                .First();
+            var shift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.RightShiftExpression)
+                .First();
 
             Assert.Equal("x >>> y", unsignedShift.ToString());
             Assert.Equal("x >> y", shift.ToString());
@@ -364,38 +486,55 @@ Passed 3
         public void BuiltIn_02(string left, string right)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + left + @" x = default;
-        " + right + @" y = default;
+        "
+                + left
+                + @" x = default;
+        "
+                + right
+                + @" y = default;
         var z1 = x >> y;
         var z2 = x >>> y;
     }
 }
 ";
             var expected = new[]
-                {
+            {
                 // (8,18): error CS0019: Operator '>>' cannot be applied to operands of type 'object' and 'object'
                 //         var z1 = x >> y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >> y").WithArguments(">>", left, right).WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >> y")
+                    .WithArguments(">>", left, right)
+                    .WithLocation(8, 18),
                 // (9,18): error CS0019: Operator '>>>' cannot be applied to operands of type 'object' and 'object'
                 //         var z2 = x >>> y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y").WithArguments(">>>", left, right).WithLocation(9, 18)
-                };
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y")
+                    .WithArguments(">>>", left, right)
+                    .WithLocation(9, 18),
+            };
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.Regular10);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyEmitDiagnostics(expected);
         }
 
@@ -472,30 +611,53 @@ class C
         [InlineData("nint", "int", "0", "nint")]
         [InlineData("nint", "byte", "0", "nint")]
         [InlineData("nint", "ushort", "0", "nint")]
-        public void BuiltIn_ConstantFolding_01(string left, string right, string leftValue, string result)
+        public void BuiltIn_ConstantFolding_01(
+            string left,
+            string right,
+            string leftValue,
+            string result
+        )
         {
-
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        const " + left + @" x = (" + left + @")(" + leftValue + @");
-        const " + result + @" y = x >>> (" + right + @")1;
+        const "
+                + left
+                + @" x = ("
+                + left
+                + @")("
+                + leftValue
+                + @");
+        const "
+                + result
+                + @" y = x >>> ("
+                + right
+                + @")1;
         var z1 = x;
-        var z2 = z1 >>> (" + right + @")1;
+        var z2 = z1 >>> ("
+                + right
+                + @")1;
 
         if (y == z2) System.Console.WriteLine(""Passed 1"");
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            CompileAndVerify(compilation1, expectedOutput: @"
+            CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 Passed 1
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Theory]
@@ -504,28 +666,34 @@ Passed 1
         [InlineData("-100")]
         public void BuiltIn_ConstantFolding_02(string leftValue)
         {
-
             var source1 =
-@"
+                @"
 #pragma warning disable CS0219 // The variable 'y' is assigned but its value is never used
 
 class C
 {
     static void Main()
     {
-        const nint x = (nint)(" + leftValue + @");
+        const nint x = (nint)("
+                + leftValue
+                + @");
         const nint y = x >>> 1;
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyDiagnostics(
                 // (9,24): error CS0133: The expression being assigned to 'y' must be constant
                 //         const nint y = x >>> 1;
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "x >>> 1").WithArguments("y").WithLocation(9, 24)
-                );
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "x >>> 1")
+                    .WithArguments("y")
+                    .WithLocation(9, 24)
+            );
         }
 
         [Theory]
@@ -594,37 +762,64 @@ class C
         [InlineData("nuint", "short", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
         [InlineData("nuint", "int", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
         [InlineData("nuint", "byte", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
-        [InlineData("nuint", "ushort", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
+        [InlineData(
+            "nuint",
+            "ushort",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)"
+        )]
         public void BuiltIn_CompoundAssignment_01(string left, string right, string leftValue)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        var x = (" + left + @")" + leftValue + @";
-        var y = (" + right + @")1;
+        var x = ("
+                + left
+                + @")"
+                + leftValue
+                + @";
+        var y = ("
+                + right
+                + @")1;
         var z1 = x;
         z1 >>>= y;
 
-        if (z1 == (" + left + @")(x >>> y)) System.Console.WriteLine(""Passed 1"");
+        if (z1 == ("
+                + left
+                + @")(x >>> y)) System.Console.WriteLine(""Passed 1"");
 
         z1 >>= y;
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            CompileAndVerify(compilation1, expectedOutput: @"
+            CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 Passed 1
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression).First();
-            var shift = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.RightShiftAssignmentExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression)
+                .First();
+            var shift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.RightShiftAssignmentExpression)
+                .First();
 
             Assert.Equal("z1 >>>= y", unsignedShift.ToString());
             Assert.Equal("z1 >>= y", shift.ToString());
@@ -867,38 +1062,55 @@ Passed 1
         public void BuiltIn_CompoundAssignment_02(string left, string right)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + left + @" x = default;
-        " + right + @" y = default;
+        "
+                + left
+                + @" x = default;
+        "
+                + right
+                + @" y = default;
         x >>= y;
         x >>>= y;
     }
 }
 ";
             var expected = new[]
-                {
+            {
                 // (8,9): error CS0019: Operator '>>=' cannot be applied to operands of type 'double' and 'char'
                 //         x >>= y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>= y").WithArguments(">>=", left, right).WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>= y")
+                    .WithArguments(">>=", left, right)
+                    .WithLocation(8, 9),
                 // (9,9): error CS0019: Operator '>>>=' cannot be applied to operands of type 'double' and 'char'
                 //         x >>>= y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= y").WithArguments(">>>=", left, right).WithLocation(9, 9)
-                };
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= y")
+                    .WithArguments(">>>=", left, right)
+                    .WithLocation(9, 9),
+            };
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular10);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyEmitDiagnostics(expected);
         }
 
@@ -906,7 +1118,7 @@ class C
         public void BuiltIn_CompoundAssignment_CollectionInitializerElement()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -919,24 +1131,29 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyEmitDiagnostics(
                 // (8,13): error CS0747: Invalid initializer member declarator
                 //             x >>= 1,
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1")
+                    .WithLocation(8, 13),
                 // (9,13): error CS0747: Invalid initializer member declarator
-                //             x >>>= 1 
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1").WithLocation(9, 13)
-                );
+                //             x >>>= 1
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
         public void BuiltIn_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -945,20 +1162,25 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (6,86): error CS7053: An expression tree may not contain '>>>'
-                //         System.Linq.Expressions.Expression<System.Func<int, int, int>> e = (x, y) => x >>> y; 
-                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y").WithArguments(">>>").WithLocation(6, 86)
-                );
+                //         System.Linq.Expressions.Expression<System.Func<int, int, int>> e = (x, y) => x >>> y;
+                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y")
+                    .WithArguments(">>>")
+                    .WithLocation(6, 86)
+            );
         }
 
         [Fact]
         public void BuiltIn_CompoundAssignment_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -967,20 +1189,24 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (6,86): error CS0832: An expression tree may not contain an assignment operator
                 //         System.Linq.Expressions.Expression<System.Func<int, int, int>> e = (x, y) => x >>>= y;
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y").WithLocation(6, 86)
-                );
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y")
+                    .WithLocation(6, 86)
+            );
         }
 
         [Fact]
         public void BuiltIn_Dynamic_01()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main(dynamic x, int y)
@@ -992,28 +1218,43 @@ class C
 }
 ";
             var expected = new[]
-                {
+            {
                 // (6,13): error CS0019: Operator '>>>' cannot be applied to operands of type 'dynamic' and 'int'
-                //         _ = x >>> y;        
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y").WithArguments(">>>", "dynamic", "int").WithLocation(6, 13),
+                //         _ = x >>> y;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y")
+                    .WithArguments(">>>", "dynamic", "int")
+                    .WithLocation(6, 13),
                 // (7,13): error CS0019: Operator '>>>' cannot be applied to operands of type 'int' and 'dynamic'
-                //         _ = y >>> x;        
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "y >>> x").WithArguments(">>>", "int", "dynamic").WithLocation(7, 13),
+                //         _ = y >>> x;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "y >>> x")
+                    .WithArguments(">>>", "int", "dynamic")
+                    .WithLocation(7, 13),
                 // (8,13): error CS0019: Operator '>>>' cannot be applied to operands of type 'dynamic' and 'dynamic'
-                //         _ = x >>> x;        
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> x").WithArguments(">>>", "dynamic", "dynamic").WithLocation(8, 13)
-                };
+                //         _ = x >>> x;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> x")
+                    .WithArguments(">>>", "dynamic", "dynamic")
+                    .WithLocation(8, 13),
+            };
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular10);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyEmitDiagnostics(expected);
         }
 
@@ -1021,7 +1262,7 @@ class C
         public void BuiltIn_CompoundAssignment_Dynamic_01()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main(dynamic x, int y)
@@ -1033,28 +1274,43 @@ class C
 }
 ";
             var expected = new[]
-                {
+            {
                 // (6,9): error CS0019: Operator '>>>=' cannot be applied to operands of type 'dynamic' and 'int'
-                //         x >>>= y;        
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= y").WithArguments(">>>=", "dynamic", "int").WithLocation(6, 9),
+                //         x >>>= y;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= y")
+                    .WithArguments(">>>=", "dynamic", "int")
+                    .WithLocation(6, 9),
                 // (7,9): error CS0019: Operator '>>>=' cannot be applied to operands of type 'int' and 'dynamic'
-                //         y >>>= x;        
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "y >>>= x").WithArguments(">>>=", "int", "dynamic").WithLocation(7, 9),
+                //         y >>>= x;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "y >>>= x")
+                    .WithArguments(">>>=", "int", "dynamic")
+                    .WithLocation(7, 9),
                 // (8,9): error CS0019: Operator '>>>=' cannot be applied to operands of type 'dynamic' and 'dynamic'
-                //         x >>>= x;        
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= x").WithArguments(">>>=", "dynamic", "dynamic").WithLocation(8, 9)
-                };
+                //         x >>>= x;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= x")
+                    .WithArguments(">>>=", "dynamic", "dynamic")
+                    .WithLocation(8, 9),
+            };
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular10);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyEmitDiagnostics(expected);
         }
 
@@ -1113,18 +1369,78 @@ class C
         [InlineData("ulong", "int", "ulong.MaxValue", "ulong")]
         [InlineData("ulong", "byte", "ulong.MaxValue", "ulong")]
         [InlineData("ulong", "ushort", "ulong.MaxValue", "ulong")]
-        [InlineData("nint", "char", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint")]
-        [InlineData("nint", "sbyte", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint")]
-        [InlineData("nint", "short", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint")]
-        [InlineData("nint", "int", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint")]
-        [InlineData("nint", "byte", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint")]
-        [InlineData("nint", "ushort", "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)", "nint")]
-        [InlineData("nuint", "char", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint")]
-        [InlineData("nuint", "sbyte", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint")]
-        [InlineData("nuint", "short", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint")]
-        [InlineData("nuint", "int", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint")]
-        [InlineData("nuint", "byte", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint")]
-        [InlineData("nuint", "ushort", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)", "nuint")]
+        [InlineData(
+            "nint",
+            "char",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint"
+        )]
+        [InlineData(
+            "nint",
+            "sbyte",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint"
+        )]
+        [InlineData(
+            "nint",
+            "short",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint"
+        )]
+        [InlineData(
+            "nint",
+            "int",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint"
+        )]
+        [InlineData(
+            "nint",
+            "byte",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint"
+        )]
+        [InlineData(
+            "nint",
+            "ushort",
+            "(System.IntPtr.Size == 4 ? int.MinValue : long.MinValue)",
+            "nint"
+        )]
+        [InlineData(
+            "nuint",
+            "char",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "sbyte",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "short",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "int",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "byte",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint"
+        )]
+        [InlineData(
+            "nuint",
+            "ushort",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)",
+            "nuint"
+        )]
         public void BuiltIn_Lifted_01(string left, string right, string leftValue, string result)
         {
             var nullableLeft = left + "?";
@@ -1132,49 +1448,87 @@ class C
             var nullableResult = result + "?";
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        var x = (" + nullableLeft + @")" + leftValue + @";
-        var y = (" + nullableRight + @")1;
+        var x = ("
+                + nullableLeft
+                + @")"
+                + leftValue
+                + @";
+        var y = ("
+                + nullableRight
+                + @")1;
         var z1 = x >>> y;
         var z2 = x >> y;
 
         if (z1 == (x.Value >>> y.Value)) System.Console.WriteLine(""Passed 1"");
 
-        if (GetType(z1) == GetType(z2) && GetType(z1) == typeof(" + nullableResult + @")) System.Console.WriteLine(""Passed 2"");
+        if (GetType(z1) == GetType(z2) && GetType(z1) == typeof("
+                + nullableResult
+                + @")) System.Console.WriteLine(""Passed 2"");
 
         if (Test1(x, null) == null) System.Console.WriteLine(""Passed 3"");
         if (Test1(null, y) == null) System.Console.WriteLine(""Passed 4"");
         if (Test1(null, null) == null) System.Console.WriteLine(""Passed 5"");
     }
 
-    static " + nullableResult + @" Test1(" + nullableLeft + @" x, " + nullableRight + @" y) => x >>> y; 
-    static " + nullableResult + @" Test2(" + nullableLeft + @" x, " + nullableRight + @" y) => x >> y; 
+    static "
+                + nullableResult
+                + @" Test1("
+                + nullableLeft
+                + @" x, "
+                + nullableRight
+                + @" y) => x >>> y; 
+    static "
+                + nullableResult
+                + @" Test2("
+                + nullableLeft
+                + @" x, "
+                + nullableRight
+                + @" y) => x >> y; 
 
     static System.Type GetType<T>(T x) => typeof(T);
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 Passed 1
 Passed 2
 Passed 3
 Passed 4
 Passed 5
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("shr.un", "shr").Replace("shr", "shr.un"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("shr.un", "shr").Replace("shr", "shr.un")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression).First();
-            var shift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.RightShiftExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression)
+                .First();
+            var shift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.RightShiftExpression)
+                .First();
 
             Assert.Equal("x >>> y", unsignedShift.ToString());
             Assert.Equal("x >> y", shift.ToString());
@@ -1420,38 +1774,55 @@ Passed 5
             var nullableRight = NullableIfPossible(right);
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + nullableLeft + @" x = default;
-        " + nullableRight + @" y = default;
+        "
+                + nullableLeft
+                + @" x = default;
+        "
+                + nullableRight
+                + @" y = default;
         var z1 = x >> y;
         var z2 = x >>> y;
     }
 }
 ";
             var expected = new[]
-                {
+            {
                 // (8,18): error CS0019: Operator '>>' cannot be applied to operands of type 'object' and 'object'
                 //         var z1 = x >> y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >> y").WithArguments(">>", nullableLeft, nullableRight).WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >> y")
+                    .WithArguments(">>", nullableLeft, nullableRight)
+                    .WithLocation(8, 18),
                 // (9,18): error CS0019: Operator '>>>' cannot be applied to operands of type 'object' and 'object'
                 //         var z2 = x >>> y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y").WithArguments(">>>", nullableLeft, nullableRight).WithLocation(9, 18)
-                };
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y")
+                    .WithArguments(">>>", nullableLeft, nullableRight)
+                    .WithLocation(9, 18),
+            };
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular10);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyEmitDiagnostics(expected);
         }
 
@@ -1534,24 +1905,40 @@ class C
         [InlineData("nuint", "short", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
         [InlineData("nuint", "int", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
         [InlineData("nuint", "byte", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
-        [InlineData("nuint", "ushort", "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)")]
-        public void BuiltIn_Lifted_CompoundAssignment_01(string left, string right, string leftValue)
+        [InlineData(
+            "nuint",
+            "ushort",
+            "(System.IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue)"
+        )]
+        public void BuiltIn_Lifted_CompoundAssignment_01(
+            string left,
+            string right,
+            string leftValue
+        )
         {
             var nullableLeft = left + "?";
             var nullableRight = right + "?";
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        var x = (" + nullableLeft + @")" + leftValue + @";
-        var y = (" + nullableRight + @")1;
+        var x = ("
+                + nullableLeft
+                + @")"
+                + leftValue
+                + @";
+        var y = ("
+                + nullableRight
+                + @")1;
         var z1 = x;
         z1 >>>= y;
 
-        if (z1 == (" + left + @")(x.Value >>> y.Value)) System.Console.WriteLine(""Passed 1"");
+        if (z1 == ("
+                + left
+                + @")(x.Value >>> y.Value)) System.Console.WriteLine(""Passed 1"");
 
         z1 >>= y;
 
@@ -1569,20 +1956,35 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            CompileAndVerify(compilation1, expectedOutput: @"
+            CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 Passed 1
 Passed 2
 Passed 3
 Passed 4
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression).First();
-            var shift = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.RightShiftAssignmentExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression)
+                .First();
+            var shift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.RightShiftAssignmentExpression)
+                .First();
 
             Assert.Equal("z1 >>>= y", unsignedShift.ToString());
             Assert.Equal("z1 >>= y", shift.ToString());
@@ -1828,38 +2230,55 @@ Passed 4
             var nullableRight = NullableIfPossible(right);
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + nullableLeft + @" x = default;
-        " + nullableRight + @" y = default;
+        "
+                + nullableLeft
+                + @" x = default;
+        "
+                + nullableRight
+                + @" y = default;
         x >>= y;
         x >>>= y;
     }
 }
 ";
             var expected = new[]
-                {
+            {
                 // (8,9): error CS0019: Operator '>>=' cannot be applied to operands of type 'double' and 'char'
                 //         x >>= y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>= y").WithArguments(">>=", nullableLeft, nullableRight).WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>= y")
+                    .WithArguments(">>=", nullableLeft, nullableRight)
+                    .WithLocation(8, 9),
                 // (9,9): error CS0019: Operator '>>>=' cannot be applied to operands of type 'double' and 'char'
                 //         x >>>= y;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= y").WithArguments(">>>=", nullableLeft, nullableRight).WithLocation(9, 9)
-                };
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>>= y")
+                    .WithArguments(">>>=", nullableLeft, nullableRight)
+                    .WithLocation(9, 9),
+            };
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular10);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyEmitDiagnostics(expected);
 
-            compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyEmitDiagnostics(expected);
         }
 
@@ -1867,7 +2286,7 @@ class C
         public void BuiltIn_CompoundAssignment_CollectionInitializerElement_Lifted()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -1880,24 +2299,29 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyEmitDiagnostics(
                 // (8,13): error CS0747: Invalid initializer member declarator
                 //             x >>= 1,
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1")
+                    .WithLocation(8, 13),
                 // (9,13): error CS0747: Invalid initializer member declarator
-                //             x >>>= 1 
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1").WithLocation(9, 13)
-                );
+                //             x >>>= 1
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
         public void BuiltIn_Lifted_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -1906,20 +2330,25 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (6,89): error CS7053: An expression tree may not contain '>>>'
-                //         System.Linq.Expressions.Expression<System.Func<int?, int?, int?>> e = (x, y) => x >>> y; 
-                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y").WithArguments(">>>").WithLocation(6, 89)
-                );
+                //         System.Linq.Expressions.Expression<System.Func<int?, int?, int?>> e = (x, y) => x >>> y;
+                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y")
+                    .WithArguments(">>>")
+                    .WithLocation(6, 89)
+            );
         }
 
         [Fact]
         public void BuiltIn_Lifted_CompoundAssignment_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -1928,19 +2357,24 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (6,89): error CS0832: An expression tree may not contain an assignment operator
-                //         System.Linq.Expressions.Expression<System.Func<int?, int?, int?>> e = (x, y) => x >>>= y; 
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y").WithLocation(6, 89)
-                );
+                //         System.Linq.Expressions.Expression<System.Func<int?, int?, int?>> e = (x, y) => x >>>= y;
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y")
+                    .WithLocation(6, 89)
+            );
         }
 
         [Fact]
         public void UserDefined_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -1958,7 +2392,7 @@ public class C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -1970,43 +2404,77 @@ class C
     static C1 Test2(C1 x, int y) => x >> y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @">>>").VerifyDiagnostics();
+            var verifier = CompileAndVerify(compilation1, expectedOutput: @">>>")
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("op_RightShift", "op_UnsignedRightShift"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("op_RightShift", "op_UnsignedRightShift")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression)
+                .First();
 
             Assert.Equal("x >>> y", unsignedShift.ToString());
-            Assert.Equal("C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)", model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)",
+                model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString()
+            );
 
-            Assert.Equal(MethodKind.UserDefinedOperator, compilation1.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind);
+            Assert.Equal(
+                MethodKind.UserDefinedOperator,
+                compilation1.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind
+            );
 
-            var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation0 = CreateCompilation(
+                source0,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugExe, references: new[] { compilation0.ToMetadataReference() },
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                references: new[] { compilation0.ToMetadataReference() },
+                parseOptions: TestOptions.RegularPreview
+            );
 
             CompileAndVerify(compilation2, expectedOutput: @">>>").VerifyDiagnostics();
-            Assert.Equal(MethodKind.UserDefinedOperator, compilation2.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind);
+            Assert.Equal(
+                MethodKind.UserDefinedOperator,
+                compilation2.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind
+            );
 
-            var compilation3 = CreateCompilation(source1, options: TestOptions.DebugExe, references: new[] { compilation0.EmitToImageReference() },
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation3 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                references: new[] { compilation0.EmitToImageReference() },
+                parseOptions: TestOptions.RegularPreview
+            );
 
             CompileAndVerify(compilation3, expectedOutput: @">>>").VerifyDiagnostics();
-            Assert.Equal(MethodKind.UserDefinedOperator, compilation3.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind);
+            Assert.Equal(
+                MethodKind.UserDefinedOperator,
+                compilation3.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind
+            );
         }
 
         [Fact]
         public void UserDefined_02()
         {
-            // The IL is equivalent to: 
+            // The IL is equivalent to:
             // public class C1
             // {
             //     public static C1 operator >>>(C1 x, int y)
@@ -2016,7 +2484,8 @@ class C
             //     }
             // }
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit C1
     extends [mscorlib]System.Object
 {
@@ -2047,7 +2516,7 @@ class C
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -2059,20 +2528,27 @@ class C
 }
 ";
 
-            var compilation1 = CreateCompilationWithIL(source1, ilSource, options: TestOptions.DebugExe,
-                                                       parseOptions: TestOptions.RegularPreview);
-            // This code was previously allowed. We are accepting this source breaking change. 
+            var compilation1 = CreateCompilationWithIL(
+                source1,
+                ilSource,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
+            // This code was previously allowed. We are accepting this source breaking change.
             compilation1.VerifyDiagnostics(
                 // (9,40): error CS0571: 'C1.operator >>>(C1, int)': cannot explicitly call operator or accessor
-                //     static C1 Test1(C1 x, int y) => C1.op_UnsignedRightShift(x, y); 
-                Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, "op_UnsignedRightShift").WithArguments("C1.operator >>>(C1, int)").WithLocation(9, 40)
-                );
+                //     static C1 Test1(C1 x, int y) => C1.op_UnsignedRightShift(x, y);
+                Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, "op_UnsignedRightShift")
+                    .WithArguments("C1.operator >>>(C1, int)")
+                    .WithLocation(9, 40)
+            );
         }
 
         [Fact]
         public void UserDefined_03()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void operator >>>(C1 x, int y)
@@ -2126,8 +2602,11 @@ public class C4
 }
 ";
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyDiagnostics(
                 // (4,33): error CS0590: User-defined operators cannot return void
@@ -2142,13 +2621,14 @@ public class C4
                 // (22,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
                 //     public static C2 operator >>(C1 x, int y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, ">>").WithLocation(22, 31)
-                );
+            );
         }
 
         [Fact]
         public void UserDefined_04()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2176,23 +2656,31 @@ public class C2
 }
 ";
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyDiagnostics(
                 // (9,22): error CS0111: Type 'C1' already defines a member called 'op_UnsignedRightShift' with the same parameter types
                 //     public static C1 op_UnsignedRightShift(C1 x, int y)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_UnsignedRightShift").WithArguments("op_UnsignedRightShift", "C1").WithLocation(9, 22),
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_UnsignedRightShift")
+                    .WithArguments("op_UnsignedRightShift", "C1")
+                    .WithLocation(9, 22),
                 // (22,31): error CS0111: Type 'C2' already defines a member called 'op_UnsignedRightShift' with the same parameter types
                 //     public static C2 operator >>>(C2 x, int y)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, ">>>").WithArguments("op_UnsignedRightShift", "C2").WithLocation(22, 31)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, ">>>")
+                    .WithArguments("op_UnsignedRightShift", "C2")
+                    .WithLocation(22, 31)
+            );
         }
 
         [Fact]
         public void UserDefined_05()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1? x, int? y)
@@ -2210,7 +2698,7 @@ public struct C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -2222,43 +2710,78 @@ class C
     static C1 Test2(C1? x, int? y) => x >> y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @">>>").VerifyDiagnostics();
+            var verifier = CompileAndVerify(compilation1, expectedOutput: @">>>")
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("op_RightShift", "op_UnsignedRightShift"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("op_RightShift", "op_UnsignedRightShift")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression)
+                .First();
 
             Assert.Equal("x >>> y", unsignedShift.ToString());
-            Assert.Equal("C1 C1.op_UnsignedRightShift(C1? x, System.Int32? y)", model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C1 C1.op_UnsignedRightShift(C1? x, System.Int32? y)",
+                model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString()
+            );
 
-            Assert.Equal(MethodKind.UserDefinedOperator, compilation1.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind);
+            Assert.Equal(
+                MethodKind.UserDefinedOperator,
+                compilation1.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind
+            );
 
-            var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation0 = CreateCompilation(
+                source0,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugExe, references: new[] { compilation0.ToMetadataReference() },
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                references: new[] { compilation0.ToMetadataReference() },
+                parseOptions: TestOptions.RegularPreview
+            );
 
             CompileAndVerify(compilation2, expectedOutput: @">>>").VerifyDiagnostics();
-            Assert.Equal(MethodKind.UserDefinedOperator, compilation2.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind);
+            Assert.Equal(
+                MethodKind.UserDefinedOperator,
+                compilation2.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind
+            );
 
-            var compilation3 = CreateCompilation(source1, options: TestOptions.DebugExe, references: new[] { compilation0.EmitToImageReference() },
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation3 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                references: new[] { compilation0.EmitToImageReference() },
+                parseOptions: TestOptions.RegularPreview
+            );
 
             CompileAndVerify(compilation3, expectedOutput: @">>>").VerifyDiagnostics();
-            Assert.Equal(MethodKind.UserDefinedOperator, compilation3.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind);
+            Assert.Equal(
+                MethodKind.UserDefinedOperator,
+                compilation3.GetMember<MethodSymbol>("C1.op_UnsignedRightShift").MethodKind
+            );
         }
 
         [Fact]
         public void UserDefined_06()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C1
 {
     public static C1 op_UnsignedRightShift(C1 x, int y)
@@ -2269,7 +2792,7 @@ public class C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static C1 Test1(C1 x, int y) => x >>> y; 
@@ -2277,28 +2800,40 @@ class C
 ";
             var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll);
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { compilation0.ToMetadataReference() },
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                references: new[] { compilation0.ToMetadataReference() },
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation2.VerifyDiagnostics(
                 // (4,37): error CS0019: Operator '>>>' cannot be applied to operands of type 'C1' and 'int'
-                //     static C1 Test1(C1 x, int y) => x >>> y; 
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y").WithArguments(">>>", "C1", "int").WithLocation(4, 37)
-                );
+                //     static C1 Test1(C1 x, int y) => x >>> y;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y")
+                    .WithArguments(">>>", "C1", "int")
+                    .WithLocation(4, 37)
+            );
 
-            var compilation3 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { compilation0.EmitToImageReference() },
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation3 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                references: new[] { compilation0.EmitToImageReference() },
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation3.VerifyDiagnostics(
                 // (4,37): error CS0019: Operator '>>>' cannot be applied to operands of type 'C1' and 'int'
-                //     static C1 Test1(C1 x, int y) => x >>> y; 
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y").WithArguments(">>>", "C1", "int").WithLocation(4, 37)
-                );
+                //     static C1 Test1(C1 x, int y) => x >>> y;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x >>> y")
+                    .WithArguments(">>>", "C1", "int")
+                    .WithLocation(4, 37)
+            );
         }
 
         [Fact]
         public void UserDefined_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2315,19 +2850,25 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (14,84): error CS7053: An expression tree may not contain '>>>'
-                //         System.Linq.Expressions.Expression<System.Func<C1, int, C1>> e = (x, y) => x >>> y; 
-                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y").WithArguments(">>>").WithLocation(14, 84)
-                );
+                //         System.Linq.Expressions.Expression<System.Func<C1, int, C1>> e = (x, y) => x >>> y;
+                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y")
+                    .WithArguments(">>>")
+                    .WithLocation(14, 84)
+            );
         }
 
         [Fact]
         public void UserDefined_CompountAssignment_01()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public int F;
@@ -2364,27 +2905,41 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @"Passed 1").VerifyDiagnostics();
+            var verifier = CompileAndVerify(compilation1, expectedOutput: @"Passed 1")
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("op_RightShift", "op_UnsignedRightShift"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("op_RightShift", "op_UnsignedRightShift")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression)
+                .First();
 
             Assert.Equal("x >>>= y", unsignedShift.ToString());
-            Assert.Equal("C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)", model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)",
+                model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void UserDefined_CompoundAssignment_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2401,20 +2956,24 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (14,84): error CS0832: An expression tree may not contain an assignment operator
                 //         System.Linq.Expressions.Expression<System.Func<C1, int, C1>> e = (x, y) => x >>>= y;
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y").WithLocation(14, 84)
-                );
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y")
+                    .WithLocation(14, 84)
+            );
         }
 
         [Fact]
         public void UserDefined_CompoundAssignment_CollectionInitializerElement()
         {
             var source1 =
-@"
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2440,23 +2999,29 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyEmitDiagnostics(
                 // (21,13): error CS0747: Invalid initializer member declarator
                 //             x >>= 1,
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1").WithLocation(21, 13),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1")
+                    .WithLocation(21, 13),
                 // (22,13): error CS0747: Invalid initializer member declarator
-                //             x >>>= 1 
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1").WithLocation(22, 13)
-                );
+                //             x >>>= 1
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1")
+                    .WithLocation(22, 13)
+            );
         }
 
         [Fact]
         public void UserDefined_Lifted_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2474,7 +3039,7 @@ public struct C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
@@ -2492,33 +3057,50 @@ class C
     static C1? Test2(C1? x, int? y) => x >> y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 >>>
 Passed 1
 Passed 2
 Passed 3
 Passed 4
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("op_RightShift", "op_UnsignedRightShift"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("op_RightShift", "op_UnsignedRightShift")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftExpression)
+                .First();
 
             Assert.Equal("x >>> y", unsignedShift.ToString());
-            Assert.Equal("C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)", model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)",
+                model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void UserDefined_Lifted_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2535,19 +3117,25 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (14,87): error CS7053: An expression tree may not contain '>>>'
-                //         System.Linq.Expressions.Expression<System.Func<C1?, int?, C1?>> e = (x, y) => x >>> y; 
-                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y").WithArguments(">>>").WithLocation(14, 87)
-                );
+                //         System.Linq.Expressions.Expression<System.Func<C1?, int?, C1?>> e = (x, y) => x >>> y;
+                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "x >>> y")
+                    .WithArguments(">>>")
+                    .WithLocation(14, 87)
+            );
         }
 
         [Fact]
         public void UserDefined_Lifted_CompountAssignment_01()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public struct C1
 {
     public int F;
@@ -2590,32 +3178,49 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            var verifier = CompileAndVerify(compilation1, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    compilation1,
+                    expectedOutput: @"
 Passed 1
 Passed 2
 Passed 3
 Passed 4
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             string actualIL = verifier.VisualizeIL("C.Test2");
-            verifier.VerifyIL("C.Test1", actualIL.Replace("op_RightShift", "op_UnsignedRightShift"));
+            verifier.VerifyIL(
+                "C.Test1",
+                actualIL.Replace("op_RightShift", "op_UnsignedRightShift")
+            );
 
             var tree = compilation1.SyntaxTrees.Single();
             var model = compilation1.GetSemanticModel(tree);
-            var unsignedShift = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression).First();
+            var unsignedShift = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(e => e.Kind() == SyntaxKind.UnsignedRightShiftAssignmentExpression)
+                .First();
 
             Assert.Equal("x >>>= y", unsignedShift.ToString());
-            Assert.Equal("C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)", model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C1 C1.op_UnsignedRightShift(C1 x, System.Int32 y)",
+                model.GetSymbolInfo(unsignedShift).Symbol.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void UserDefined_Lifted_CompoundAssignment_ExpressionTree_01()
         {
             var source1 =
-@"
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2632,20 +3237,24 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyEmitDiagnostics(
                 // (14,87): error CS0832: An expression tree may not contain an assignment operator
-                //         System.Linq.Expressions.Expression<System.Func<C1?, int?, C1?>> e = (x, y) => x >>>= y; 
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y").WithLocation(14, 87)
-                );
+                //         System.Linq.Expressions.Expression<System.Func<C1?, int?, C1?>> e = (x, y) => x >>>= y;
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x >>>= y")
+                    .WithLocation(14, 87)
+            );
         }
 
         [Fact]
         public void UserDefined_Lifted_CompoundAssignment_CollectionInitializerElement()
         {
             var source1 =
-@"
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -2671,23 +3280,29 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
             compilation1.VerifyEmitDiagnostics(
                 // (21,13): error CS0747: Invalid initializer member declarator
                 //             x >>= 1,
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1").WithLocation(21, 13),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>= 1")
+                    .WithLocation(21, 13),
                 // (22,13): error CS0747: Invalid initializer member declarator
-                //             x >>>= 1 
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1").WithLocation(22, 13)
-                );
+                //             x >>>= 1
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "x >>>= 1")
+                    .WithLocation(22, 13)
+            );
         }
 
         [Fact]
         public void CRef_NoParameters_01()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>""/>.
 /// </summary>
@@ -2699,37 +3314,76 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace.GetTypeMember("C").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind != MethodKind.Constructor).First();
+            var expectedSymbol = compilation
+                .SourceModule.GlobalNamespace.GetTypeMember("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m => m.MethodKind != MethodKind.Constructor)
+                .First();
             var actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedSymbol, actualSymbol);
 
-            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.Regular10.WithDocumentationMode(DocumentationMode.Diagnose));
+            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.Regular10.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>'
                 // /// See <see cref="operator >>>"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator >>>").WithArguments("operator >>>").WithLocation(3, 20),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator >>>")
+                    .WithArguments("operator >>>")
+                    .WithLocation(3, 20),
                 // (3,29): warning CS1658: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator >>>"/>.
-                Diagnostic(ErrorCode.WRN_ErrorOverride, ">>>").WithArguments("Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.", "8936").WithLocation(3, 29),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, ">>>")
+                    .WithArguments(
+                        "Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.",
+                        "8936"
+                    )
+                    .WithLocation(3, 29),
                 // (7,30): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //     public static C operator >>>(C c, int y)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>").WithArguments("unsigned right shift", "11.0").WithLocation(7, 30)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(7, 30)
+            );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace.GetTypeMember("C").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind != MethodKind.Constructor).First();
+            expectedSymbol = compilation
+                .SourceModule.GlobalNamespace.GetTypeMember("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m => m.MethodKind != MethodKind.Constructor)
+                .First();
             actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedSymbol, actualSymbol);
 
-            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.Regular11.WithDocumentationMode(DocumentationMode.Diagnose));
+            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.Regular11.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace.GetTypeMember("C").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind != MethodKind.Constructor).First();
+            expectedSymbol = compilation
+                .SourceModule.GlobalNamespace.GetTypeMember("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m => m.MethodKind != MethodKind.Constructor)
+                .First();
             actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedSymbol, actualSymbol);
         }
@@ -2737,7 +3391,8 @@ class C
         [Fact]
         public void CRef_NoParameters_02()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>""/>.
 /// </summary>
@@ -2749,13 +3404,21 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>>' that could not be resolved
                 // /// See <see cref="operator >>>"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>").WithArguments("operator >>>").WithLocation(3, 20)
-                };
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>")
+                    .WithArguments("operator >>>")
+                    .WithLocation(3, 20),
+            };
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
@@ -2766,7 +3429,8 @@ class C
         [Fact]
         public void CRef_NoParameters_03()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>""/>.
 /// </summary>
@@ -2778,13 +3442,21 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>' that could not be resolved
                 // /// See <see cref="operator >>"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>").WithArguments("operator >>").WithLocation(3, 20)
-                };
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>")
+                    .WithArguments("operator >>")
+                    .WithLocation(3, 20),
+            };
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
@@ -2795,7 +3467,8 @@ class C
         [Fact]
         public void CRef_NoParameters_04()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>=""/>.
 /// </summary>
@@ -2808,29 +3481,43 @@ class C
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>='
                 // /// See <see cref="operator >>>="/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator").WithArguments("operator >>>=").WithLocation(3, 20),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator")
+                    .WithArguments("operator >>>=")
+                    .WithLocation(3, 20),
                 // (3,28): warning CS1658: Overloadable operator expected. See also error CS1037.
                 // /// See <see cref="operator >>>="/>.
-                Diagnostic(ErrorCode.WRN_ErrorOverride, " >>>").WithArguments("Overloadable operator expected", "1037").WithLocation(3, 28)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, " >>>")
+                    .WithArguments("Overloadable operator expected", "1037")
+                    .WithLocation(3, 28)
+            );
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation,
+            var actualSymbol = CrefTests.GetReferencedSymbol(
+                crefSyntax,
+                compilation,
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator' that could not be resolved
                 // /// See <see cref="operator >>>="/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator").WithArguments("operator").WithLocation(3, 20)
-                );
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator")
+                    .WithArguments("operator")
+                    .WithLocation(3, 20)
+            );
             Assert.Null(actualSymbol);
         }
 
         [Fact]
         public void CRef_OneParameter_01()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>(C)""/>.
 /// </summary>
@@ -2842,13 +3529,21 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>>(C)' that could not be resolved
                 // /// See <see cref="operator >>>(C)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>(C)").WithArguments("operator >>>(C)").WithLocation(3, 20)
-                };
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>(C)")
+                    .WithArguments("operator >>>(C)")
+                    .WithLocation(3, 20),
+            };
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
@@ -2859,7 +3554,8 @@ class C
         [Fact]
         public void CRef_TwoParameters_01()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>(C, int)""/>.
 /// </summary>
@@ -2871,37 +3567,76 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace.GetTypeMember("C").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind != MethodKind.Constructor).First();
+            var expectedSymbol = compilation
+                .SourceModule.GlobalNamespace.GetTypeMember("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m => m.MethodKind != MethodKind.Constructor)
+                .First();
             var actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedSymbol, actualSymbol);
 
-            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.Regular10.WithDocumentationMode(DocumentationMode.Diagnose));
+            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.Regular10.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>(C, int)'
                 // /// See <see cref="operator >>>(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator >>>(C, int)").WithArguments("operator >>>(C, int)").WithLocation(3, 20),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator >>>(C, int)")
+                    .WithArguments("operator >>>(C, int)")
+                    .WithLocation(3, 20),
                 // (3,29): warning CS1658: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator >>>(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_ErrorOverride, ">>>").WithArguments("Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.", "8936").WithLocation(3, 29),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, ">>>")
+                    .WithArguments(
+                        "Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.",
+                        "8936"
+                    )
+                    .WithLocation(3, 29),
                 // (7,30): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //     public static C operator >>>(C c, int y)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>").WithArguments("unsigned right shift", "11.0").WithLocation(7, 30)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(7, 30)
+            );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace.GetTypeMember("C").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind != MethodKind.Constructor).First();
+            expectedSymbol = compilation
+                .SourceModule.GlobalNamespace.GetTypeMember("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m => m.MethodKind != MethodKind.Constructor)
+                .First();
             actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedSymbol, actualSymbol);
 
-            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.Regular11.WithDocumentationMode(DocumentationMode.Diagnose));
+            compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.Regular11.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace.GetTypeMember("C").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind != MethodKind.Constructor).First();
+            expectedSymbol = compilation
+                .SourceModule.GlobalNamespace.GetTypeMember("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m => m.MethodKind != MethodKind.Constructor)
+                .First();
             actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedSymbol, actualSymbol);
         }
@@ -2909,7 +3644,8 @@ class C
         [Fact]
         public void CRef_TwoParameters_02()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>(C, int)""/>.
 /// </summary>
@@ -2921,13 +3657,21 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>>(C, int)' that could not be resolved
                 // /// See <see cref="operator >>>(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>(C, int)").WithArguments("operator >>>(C, int)").WithLocation(3, 20)
-                };
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>(C, int)")
+                    .WithArguments("operator >>>(C, int)")
+                    .WithLocation(3, 20),
+            };
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
@@ -2938,7 +3682,8 @@ class C
         [Fact]
         public void CRef_TwoParameters_03()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>(C, int)""/>.
 /// </summary>
@@ -2950,13 +3695,21 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>(C, int)' that could not be resolved
                 // /// See <see cref="operator >>(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>(C, int)").WithArguments("operator >>(C, int)").WithLocation(3, 20)
-                };
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>(C, int)")
+                    .WithArguments("operator >>(C, int)")
+                    .WithLocation(3, 20),
+            };
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
@@ -2967,7 +3720,8 @@ class C
         [Fact]
         public void CRef_TwoParameters_04()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>=(C, int)""/>.
 /// </summary>
@@ -2980,29 +3734,43 @@ class C
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>=(C, int)'
                 // /// See <see cref="operator >>>=(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator >>>=(C, int)").WithArguments("operator >>>=(C, int)").WithLocation(3, 20),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator >>>=(C, int)")
+                    .WithArguments("operator >>>=(C, int)")
+                    .WithLocation(3, 20),
                 // (3,28): warning CS1658: Overloadable operator expected. See also error CS1037.
                 // /// See <see cref="operator >>>=(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_ErrorOverride, " >>>").WithArguments("Overloadable operator expected", "1037").WithLocation(3, 28)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, " >>>")
+                    .WithArguments("Overloadable operator expected", "1037")
+                    .WithLocation(3, 28)
+            );
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var actualSymbol = CrefTests.GetReferencedSymbol(crefSyntax, compilation,
+            var actualSymbol = CrefTests.GetReferencedSymbol(
+                crefSyntax,
+                compilation,
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>>=(C, int)' that could not be resolved
                 // /// See <see cref="operator >>>=(C, int)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>=(C, int)").WithArguments("operator >>>=(C, int)").WithLocation(3, 20)
-                );
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>=(C, int)")
+                    .WithArguments("operator >>>=(C, int)")
+                    .WithLocation(3, 20)
+            );
             Assert.Null(actualSymbol);
         }
 
         [Fact]
         public void CRef_ThreeParameter_01()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// See <see cref=""operator >>>(C, int, object)""/>.
 /// </summary>
@@ -3014,13 +3782,21 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (3,20): warning CS1574: XML comment has cref attribute 'operator >>>(C, int, object)' that could not be resolved
                 // /// See <see cref="operator >>>(C, int, object)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>(C, int, object)").WithArguments("operator >>>(C, int, object)").WithLocation(3, 20)
-                };
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "operator >>>(C, int, object)")
+                    .WithArguments("operator >>>(C, int, object)")
+                    .WithLocation(3, 20),
+            };
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                    DocumentationMode.Diagnose
+                )
+            );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
@@ -3098,27 +3874,39 @@ class C
         public void BuiltIn_LangVersion_01(string left, string right)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + left + @" x = default;
-        " + right + @" y = default;
+        "
+                + left
+                + @" x = default;
+        "
+                + right
+                + @" y = default;
         _ = x >>> y;
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (8,13): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //         _ = x >>> y;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y").WithArguments("unsigned right shift", "11.0").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(8, 13)
+            );
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular11);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular11
+            );
             compilation2.VerifyDiagnostics();
         }
 
@@ -3192,27 +3980,39 @@ class C
         public void BuiltIn_CompoundAssignment_LangVersion_01(string left, string right)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + left + @" x = default;
-        " + right + @" y = default;
+        "
+                + left
+                + @" x = default;
+        "
+                + right
+                + @" y = default;
         x >>>= y;
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (8,9): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //         x >>>= y;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y").WithArguments("unsigned right shift", "11.0").WithLocation(8, 9)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(8, 9)
+            );
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular11);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular11
+            );
             compilation2.VerifyDiagnostics();
         }
 
@@ -3286,27 +4086,39 @@ class C
         public void BuiltIn_Lifted_LangVersion_01(string left, string right)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + left + @"? x = default;
-        " + right + @"? y = default;
+        "
+                + left
+                + @"? x = default;
+        "
+                + right
+                + @"? y = default;
         _ = x >>> y;
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (8,13): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //         _ = x >>> y;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y").WithArguments("unsigned right shift", "11.0").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(8, 13)
+            );
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular11);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular11
+            );
             compilation2.VerifyDiagnostics();
         }
 
@@ -3380,34 +4192,47 @@ class C
         public void BuiltIn_Lifted_CompoundAssignment_LangVersion_01(string left, string right)
         {
             var source1 =
-@"
+                @"
 class C
 {
     static void Main()
     {
-        " + left + @"? x = default;
-        " + right + @"? y = default;
+        "
+                + left
+                + @"? x = default;
+        "
+                + right
+                + @"? y = default;
         x >>>= y;
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (8,9): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //         x >>>= y;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y").WithArguments("unsigned right shift", "11.0").WithLocation(8, 9)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(8, 9)
+            );
 
-            var compilation2 = CreateCompilation(source1, options: TestOptions.DebugExe,
-                                                 parseOptions: TestOptions.Regular11);
+            var compilation2 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular11
+            );
             compilation2.VerifyDiagnostics();
         }
 
         [Fact]
         public void UserDefined_LangVersion_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -3419,39 +4244,66 @@ public class C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static C1 Test1(C1 x, int y) => x >>> y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (4,31): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //     public static C1 operator >>>(C1 x, int y)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>").WithArguments("unsigned right shift", "11.0").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(4, 31)
+            );
 
-            compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyDiagnostics();
 
-            var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation0 = CreateCompilation(
+                source0,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            foreach (var reference in new[] { compilation0.ToMetadataReference(), compilation0.EmitToImageReference() })
+            foreach (
+                var reference in new[]
+                {
+                    compilation0.ToMetadataReference(),
+                    compilation0.EmitToImageReference(),
+                }
+            )
             {
-                var compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                     parseOptions: TestOptions.Regular10);
+                var compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular10
+                );
                 compilation2.VerifyDiagnostics(
                     // (4,37): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
-                    //     static C1 Test1(C1 x, int y) => x >>> y; 
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y").WithArguments("unsigned right shift", "11.0").WithLocation(4, 37)
-                    );
+                    //     static C1 Test1(C1 x, int y) => x >>> y;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y")
+                        .WithArguments("unsigned right shift", "11.0")
+                        .WithLocation(4, 37)
+                );
 
-                compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                 parseOptions: TestOptions.Regular11);
+                compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular11
+                );
                 compilation2.VerifyDiagnostics();
             }
         }
@@ -3459,7 +4311,8 @@ class C
         [Fact]
         public void UserDefined_CompountAssignment_LangVersion_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -3471,39 +4324,66 @@ public class C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static C1 Test1(C1 x, int y) => x >>>= y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (4,31): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //     public static C1 operator >>>(C1 x, int y)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>").WithArguments("unsigned right shift", "11.0").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(4, 31)
+            );
 
-            compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyDiagnostics();
 
-            var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation0 = CreateCompilation(
+                source0,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            foreach (var reference in new[] { compilation0.ToMetadataReference(), compilation0.EmitToImageReference() })
+            foreach (
+                var reference in new[]
+                {
+                    compilation0.ToMetadataReference(),
+                    compilation0.EmitToImageReference(),
+                }
+            )
             {
-                var compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                     parseOptions: TestOptions.Regular10);
+                var compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular10
+                );
                 compilation2.VerifyDiagnostics(
                     // (4,37): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
-                    //     static C1 Test1(C1 x, int y) => x >>>= y; 
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y").WithArguments("unsigned right shift", "11.0").WithLocation(4, 37)
-                    );
+                    //     static C1 Test1(C1 x, int y) => x >>>= y;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y")
+                        .WithArguments("unsigned right shift", "11.0")
+                        .WithLocation(4, 37)
+                );
 
-                compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                 parseOptions: TestOptions.Regular11);
+                compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular11
+                );
                 compilation2.VerifyDiagnostics();
             }
         }
@@ -3511,7 +4391,8 @@ class C
         [Fact]
         public void UserDefined_Lifted_LangVersion_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -3523,39 +4404,66 @@ public struct C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static C1? Test1(C1? x, int? y) => x >>> y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (4,31): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //     public static C1 operator >>>(C1 x, int y)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>").WithArguments("unsigned right shift", "11.0").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(4, 31)
+            );
 
-            compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyDiagnostics();
 
-            var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation0 = CreateCompilation(
+                source0,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            foreach (var reference in new[] { compilation0.ToMetadataReference(), compilation0.EmitToImageReference() })
+            foreach (
+                var reference in new[]
+                {
+                    compilation0.ToMetadataReference(),
+                    compilation0.EmitToImageReference(),
+                }
+            )
             {
-                var compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                     parseOptions: TestOptions.Regular10);
+                var compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular10
+                );
                 compilation2.VerifyDiagnostics(
                     // (4,40): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
-                    //     static C1? Test1(C1? x, int? y) => x >>> y; 
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y").WithArguments("unsigned right shift", "11.0").WithLocation(4, 40)
-                    );
+                    //     static C1? Test1(C1? x, int? y) => x >>> y;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>> y")
+                        .WithArguments("unsigned right shift", "11.0")
+                        .WithLocation(4, 40)
+                );
 
-                compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                 parseOptions: TestOptions.Regular11);
+                compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular11
+                );
                 compilation2.VerifyDiagnostics();
             }
         }
@@ -3563,7 +4471,8 @@ class C
         [Fact]
         public void UserDefined_Lifted_CompountAssignment_LangVersion_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public struct C1
 {
     public static C1 operator >>>(C1 x, int y)
@@ -3575,39 +4484,66 @@ public struct C1
 ";
 
             var source1 =
-@"
+                @"
 class C
 {
     static C1? Test1(C1? x, int? y) => x >>>= y; 
 }
 ";
-            var compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.Regular10);
+            var compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular10
+            );
             compilation1.VerifyDiagnostics(
                 // (4,31): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
                 //     public static C1 operator >>>(C1 x, int y)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>").WithArguments("unsigned right shift", "11.0").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
+                    .WithArguments("unsigned right shift", "11.0")
+                    .WithLocation(4, 31)
+            );
 
-            compilation1 = CreateCompilation(source0 + source1, options: TestOptions.DebugDll,
-                                             parseOptions: TestOptions.Regular11);
+            compilation1 = CreateCompilation(
+                source0 + source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular11
+            );
             compilation1.VerifyDiagnostics();
 
-            var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation0 = CreateCompilation(
+                source0,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
 
-            foreach (var reference in new[] { compilation0.ToMetadataReference(), compilation0.EmitToImageReference() })
+            foreach (
+                var reference in new[]
+                {
+                    compilation0.ToMetadataReference(),
+                    compilation0.EmitToImageReference(),
+                }
+            )
             {
-                var compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                     parseOptions: TestOptions.Regular10);
+                var compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular10
+                );
                 compilation2.VerifyDiagnostics(
                     // (4,40): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
-                    //     static C1? Test1(C1? x, int? y) => x >>>= y; 
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y").WithArguments("unsigned right shift", "11.0").WithLocation(4, 40)
-                    );
+                    //     static C1? Test1(C1? x, int? y) => x >>>= y;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x >>>= y")
+                        .WithArguments("unsigned right shift", "11.0")
+                        .WithLocation(4, 40)
+                );
 
-                compilation2 = CreateCompilation(source1, options: TestOptions.DebugDll, references: new[] { reference },
-                                                 parseOptions: TestOptions.Regular11);
+                compilation2 = CreateCompilation(
+                    source1,
+                    options: TestOptions.DebugDll,
+                    references: new[] { reference },
+                    parseOptions: TestOptions.Regular11
+                );
                 compilation2.VerifyDiagnostics();
             }
         }
@@ -3615,7 +4551,8 @@ class C
         [Fact]
         public void TestGenericArgWithGreaterThan_05()
         {
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     void M()
@@ -3626,40 +4563,58 @@ class C
     }
 }
 ";
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll,
-                                                 parseOptions: TestOptions.RegularPreview);
+            var compilation1 = CreateCompilation(
+                source1,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             compilation1.VerifyDiagnostics(
                 // (6,21): error CS0103: The name 'ImmutableDictionary' does not exist in the current context
                 //         var added = ImmutableDictionary<T<(S a, U b)>>>
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "ImmutableDictionary").WithArguments("ImmutableDictionary").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "ImmutableDictionary")
+                    .WithArguments("ImmutableDictionary")
+                    .WithLocation(6, 21),
                 // (6,41): error CS0103: The name 'T' does not exist in the current context
                 //         var added = ImmutableDictionary<T<(S a, U b)>>>
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "T").WithArguments("T").WithLocation(6, 41),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "T")
+                    .WithArguments("T")
+                    .WithLocation(6, 41),
                 // (6,44): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
                 //         var added = ImmutableDictionary<T<(S a, U b)>>>
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(6, 44),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(6, 44),
                 // (6,44): error CS8185: A declaration is not allowed in this context.
                 //         var added = ImmutableDictionary<T<(S a, U b)>>>
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "S a").WithLocation(6, 44),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "S a")
+                    .WithLocation(6, 44),
                 // (6,49): error CS0246: The type or namespace name 'U' could not be found (are you missing a using directive or an assembly reference?)
                 //         var added = ImmutableDictionary<T<(S a, U b)>>>
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "U").WithArguments("U").WithLocation(6, 49),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "U")
+                    .WithArguments("U")
+                    .WithLocation(6, 49),
                 // (6,49): error CS8185: A declaration is not allowed in this context.
                 //         var added = ImmutableDictionary<T<(S a, U b)>>>
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "U b").WithLocation(6, 49),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "U b")
+                    .WithLocation(6, 49),
                 // (8,9): error CS0103: The name 'ProjectChange' does not exist in the current context
                 //         ProjectChange = projectChange;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "ProjectChange").WithArguments("ProjectChange").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "ProjectChange")
+                    .WithArguments("ProjectChange")
+                    .WithLocation(8, 9),
                 // (8,25): error CS0103: The name 'projectChange' does not exist in the current context
                 //         ProjectChange = projectChange;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "projectChange").WithArguments("projectChange").WithLocation(8, 25)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "projectChange")
+                    .WithArguments("projectChange")
+                    .WithLocation(8, 25)
+            );
         }
 
         [Fact]
         public void CanBeValidAttributeArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -3687,7 +4642,11 @@ class Test
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: @"150150", parseOptions: TestOptions.Regular11);
+            CompileAndVerify(
+                source,
+                expectedOutput: @"150150",
+                parseOptions: TestOptions.Regular11
+            );
         }
     }
 }

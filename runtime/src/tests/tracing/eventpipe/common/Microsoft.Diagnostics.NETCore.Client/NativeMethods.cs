@@ -18,6 +18,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
             IntPtr lpBytesRead,
             IntPtr lpTotalBytesAvail,
             IntPtr lpBytesLeftThisMessage
-            );
+        );
     }
 }

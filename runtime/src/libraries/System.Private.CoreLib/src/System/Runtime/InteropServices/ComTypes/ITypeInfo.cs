@@ -16,7 +16,7 @@ namespace System.Runtime.InteropServices.ComTypes
         TKIND_COCLASS = TKIND_DISPATCH + 1,
         TKIND_ALIAS = TKIND_COCLASS + 1,
         TKIND_UNION = TKIND_ALIAS + 1,
-        TKIND_MAX = TKIND_UNION + 1
+        TKIND_MAX = TKIND_UNION + 1,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -37,7 +37,7 @@ namespace System.Runtime.InteropServices.ComTypes
         TYPEFLAG_FREPLACEABLE = 0x800,
         TYPEFLAG_FDISPATCHABLE = 0x1000,
         TYPEFLAG_FREVERSEBIND = 0x2000,
-        TYPEFLAG_FPROXY = 0x4000
+        TYPEFLAG_FPROXY = 0x4000,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -82,18 +82,18 @@ namespace System.Runtime.InteropServices.ComTypes
     [StructLayout(LayoutKind.Sequential)]
     public struct FUNCDESC
     {
-        public int memid;                   // MEMBERID memid;
-        public IntPtr lprgscode;            // /* [size_is(cScodes)] */ SCODE RPC_FAR *lprgscode;
-        public IntPtr lprgelemdescParam;    // /* [size_is(cParams)] */ ELEMDESC __RPC_FAR *lprgelemdescParam;
-        public FUNCKIND funckind;           // FUNCKIND funckind;
-        public INVOKEKIND invkind;          // INVOKEKIND invkind;
-        public CALLCONV callconv;           // CALLCONV callconv;
-        public short cParams;               // short cParams;
-        public short cParamsOpt;            // short cParamsOpt;
-        public short oVft;                  // short oVft;
-        public short cScodes;               // short cScodes;
-        public ELEMDESC elemdescFunc;       // ELEMDESC elemdescFunc;
-        public short wFuncFlags;            // WORD wFuncFlags;
+        public int memid; // MEMBERID memid;
+        public IntPtr lprgscode; // /* [size_is(cScodes)] */ SCODE RPC_FAR *lprgscode;
+        public IntPtr lprgelemdescParam; // /* [size_is(cParams)] */ ELEMDESC __RPC_FAR *lprgelemdescParam;
+        public FUNCKIND funckind; // FUNCKIND funckind;
+        public INVOKEKIND invkind; // INVOKEKIND invkind;
+        public CALLCONV callconv; // CALLCONV callconv;
+        public short cParams; // short cParams;
+        public short cParamsOpt; // short cParamsOpt;
+        public short oVft; // short oVft;
+        public short cScodes; // short cScodes;
+        public ELEMDESC elemdescFunc; // ELEMDESC elemdescFunc;
+        public short wFuncFlags; // WORD wFuncFlags;
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -104,7 +104,7 @@ namespace System.Runtime.InteropServices.ComTypes
         IDLFLAG_FIN = PARAMFLAG.PARAMFLAG_FIN,
         IDLFLAG_FOUT = PARAMFLAG.PARAMFLAG_FOUT,
         IDLFLAG_FLCID = PARAMFLAG.PARAMFLAG_FLCID,
-        IDLFLAG_FRETVAL = PARAMFLAG.PARAMFLAG_FRETVAL
+        IDLFLAG_FRETVAL = PARAMFLAG.PARAMFLAG_FRETVAL,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -126,7 +126,7 @@ namespace System.Runtime.InteropServices.ComTypes
         PARAMFLAG_FRETVAL = 0x8,
         PARAMFLAG_FOPT = 0x10,
         PARAMFLAG_FHASDEFAULT = 0x20,
-        PARAMFLAG_FHASCUSTDATA = 0x40
+        PARAMFLAG_FHASCUSTDATA = 0x40,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -156,9 +156,11 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [FieldOffset(0)]
             public IDLDESC idldesc;
+
             [FieldOffset(0)]
             public PARAMDESC paramdesc;
         }
+
         public DESCUNION desc;
     }
 
@@ -168,7 +170,7 @@ namespace System.Runtime.InteropServices.ComTypes
         VAR_PERINSTANCE = 0x0,
         VAR_STATIC = 0x1,
         VAR_CONST = 0x2,
-        VAR_DISPATCH = 0x3
+        VAR_DISPATCH = 0x3,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -183,6 +185,7 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [FieldOffset(0)]
             public int oInst;
+
             [FieldOffset(0)]
             public IntPtr lpvarValue;
         }
@@ -210,9 +213,15 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         public short wCode;
         public short wReserved;
-        [MarshalAs(UnmanagedType.BStr)] public string bstrSource;
-        [MarshalAs(UnmanagedType.BStr)] public string bstrDescription;
-        [MarshalAs(UnmanagedType.BStr)] public string bstrHelpFile;
+
+        [MarshalAs(UnmanagedType.BStr)]
+        public string bstrSource;
+
+        [MarshalAs(UnmanagedType.BStr)]
+        public string bstrDescription;
+
+        [MarshalAs(UnmanagedType.BStr)]
+        public string bstrHelpFile;
         public int dwHelpContext;
         public IntPtr pvReserved;
         public IntPtr pfnDeferredFillIn;
@@ -226,7 +235,7 @@ namespace System.Runtime.InteropServices.ComTypes
         FUNC_PUREVIRTUAL = 1,
         FUNC_NONVIRTUAL = 2,
         FUNC_STATIC = 3,
-        FUNC_DISPATCH = 4
+        FUNC_DISPATCH = 4,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -236,7 +245,7 @@ namespace System.Runtime.InteropServices.ComTypes
         INVOKE_FUNC = 0x1,
         INVOKE_PROPERTYGET = 0x2,
         INVOKE_PROPERTYPUT = 0x4,
-        INVOKE_PROPERTYPUTREF = 0x8
+        INVOKE_PROPERTYPUTREF = 0x8,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -251,7 +260,7 @@ namespace System.Runtime.InteropServices.ComTypes
         CC_SYSCALL = 6,
         CC_MPWCDECL = 7,
         CC_MPWPASCAL = 8,
-        CC_MAX = 9
+        CC_MAX = 9,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -270,7 +279,7 @@ namespace System.Runtime.InteropServices.ComTypes
         FUNCFLAG_FUIDEFAULT = 0x200,
         FUNCFLAG_FNONBROWSABLE = 0x400,
         FUNCFLAG_FREPLACEABLE = 0x800,
-        FUNCFLAG_FIMMEDIATEBIND = 0x1000
+        FUNCFLAG_FIMMEDIATEBIND = 0x1000,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -289,7 +298,7 @@ namespace System.Runtime.InteropServices.ComTypes
         VARFLAG_FUIDEFAULT = 0x200,
         VARFLAG_FNONBROWSABLE = 0x400,
         VARFLAG_FREPLACEABLE = 0x800,
-        VARFLAG_FIMMEDIATEBIND = 0x1000
+        VARFLAG_FIMMEDIATEBIND = 0x1000,
     }
 
     [Guid("00020401-0000-0000-C000-000000000046")]
@@ -302,22 +311,66 @@ namespace System.Runtime.InteropServices.ComTypes
         void GetTypeComp(out ITypeComp ppTComp);
         void GetFuncDesc(int index, out IntPtr ppFuncDesc);
         void GetVarDesc(int index, out IntPtr ppVarDesc);
-        void GetNames(int memid, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2), Out] string[] rgBstrNames, int cMaxNames, out int pcNames);
+        void GetNames(
+            int memid,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2), Out] string[] rgBstrNames,
+            int cMaxNames,
+            out int pcNames
+        );
         void GetRefTypeOfImplType(int index, out int href);
         void GetImplTypeFlags(int index, out IMPLTYPEFLAGS pImplTypeFlags);
-        void GetIDsOfNames([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1), In] string[] rgszNames, int cNames, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] int[] pMemId);
-        void Invoke([MarshalAs(UnmanagedType.IUnknown)] object pvInstance, int memid, short wFlags, ref DISPPARAMS pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, out int puArgErr);
-        void GetDocumentation(int index, out string strName, out string strDocString, out int dwHelpContext, out string strHelpFile);
-        void GetDllEntry(int memid, INVOKEKIND invKind, IntPtr pBstrDllName, IntPtr pBstrName, IntPtr pwOrdinal);
+        void GetIDsOfNames(
+            [
+                MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 1
+                ),
+                In
+            ]
+                string[] rgszNames,
+            int cNames,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] int[] pMemId
+        );
+        void Invoke(
+            [MarshalAs(UnmanagedType.IUnknown)] object pvInstance,
+            int memid,
+            short wFlags,
+            ref DISPPARAMS pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            out int puArgErr
+        );
+        void GetDocumentation(
+            int index,
+            out string strName,
+            out string strDocString,
+            out int dwHelpContext,
+            out string strHelpFile
+        );
+        void GetDllEntry(
+            int memid,
+            INVOKEKIND invKind,
+            IntPtr pBstrDllName,
+            IntPtr pBstrName,
+            IntPtr pwOrdinal
+        );
         void GetRefTypeInfo(int hRef, out ITypeInfo ppTI);
         void AddressOfMember(int memid, INVOKEKIND invKind, out IntPtr ppv);
-        void CreateInstance([MarshalAs(UnmanagedType.IUnknown)] object? pUnkOuter, [In] ref Guid riid, [MarshalAs(UnmanagedType.IUnknown), Out] out object ppvObj);
+        void CreateInstance(
+            [MarshalAs(UnmanagedType.IUnknown)] object? pUnkOuter,
+            [In] ref Guid riid,
+            [MarshalAs(UnmanagedType.IUnknown), Out] out object ppvObj
+        );
         void GetMops(int memid, out string? pBstrMops);
         void GetContainingTypeLib(out ITypeLib ppTLB, out int pIndex);
+
         [PreserveSig]
         void ReleaseTypeAttr(IntPtr pTypeAttr);
+
         [PreserveSig]
         void ReleaseFuncDesc(IntPtr pFuncDesc);
+
         [PreserveSig]
         void ReleaseVarDesc(IntPtr pVarDesc);
     }

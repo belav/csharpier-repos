@@ -12,18 +12,22 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         private readonly struct IdentifierInfo(
             BloomFilter identifierFilter,
-            BloomFilter escapedIdentifierFilter)
+            BloomFilter escapedIdentifierFilter
+        )
         {
-            private readonly BloomFilter _identifierFilter = identifierFilter ?? throw new ArgumentNullException(nameof(identifierFilter));
-            private readonly BloomFilter _escapedIdentifierFilter = escapedIdentifierFilter ?? throw new ArgumentNullException(nameof(escapedIdentifierFilter));
+            private readonly BloomFilter _identifierFilter =
+                identifierFilter ?? throw new ArgumentNullException(nameof(identifierFilter));
+            private readonly BloomFilter _escapedIdentifierFilter =
+                escapedIdentifierFilter
+                ?? throw new ArgumentNullException(nameof(escapedIdentifierFilter));
 
             /// <summary>
             /// Returns true when the identifier is probably (but not guaranteed) to be within the
             /// syntax tree.  Returns false when the identifier is guaranteed to not be within the
             /// syntax tree.
             /// </summary>
-            public bool ProbablyContainsIdentifier(string identifier)
-                => _identifierFilter.ProbablyContains(identifier);
+            public bool ProbablyContainsIdentifier(string identifier) =>
+                _identifierFilter.ProbablyContains(identifier);
 
             /// <summary>
             /// Returns true when the identifier is probably (but not guaranteed) escaped within the
@@ -34,8 +38,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             /// mechanisms found in the language ("\uXXXX" or "@XXXX" in C# or "[XXXX]" in Visual
             /// Basic).
             /// </summary>
-            public bool ProbablyContainsEscapedIdentifier(string identifier)
-                => _escapedIdentifierFilter.ProbablyContains(identifier);
+            public bool ProbablyContainsEscapedIdentifier(string identifier) =>
+                _escapedIdentifierFilter.ProbablyContains(identifier);
 
             public void WriteTo(ObjectWriter writer)
             {
@@ -52,9 +56,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new IdentifierInfo(identifierFilter, escapedIdentifierFilter);
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return null;
             }

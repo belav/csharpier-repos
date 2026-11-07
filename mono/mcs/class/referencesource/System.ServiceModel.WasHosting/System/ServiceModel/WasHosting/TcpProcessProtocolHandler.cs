@@ -8,13 +8,14 @@ namespace System.ServiceModel.WasHosting
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUninstantiatedInternalClasses,
-        Justification = "Instantiated by ASP.NET")]
+    [SuppressMessage(
+        FxCop.Category.Performance,
+        FxCop.Rule.AvoidUninstantiatedInternalClasses,
+        Justification = "Instantiated by ASP.NET"
+    )]
     class TcpProcessProtocolHandler : BaseProcessProtocolHandler
     {
         public TcpProcessProtocolHandler()
-            : base(Uri.UriSchemeNetTcp)
-        { }
+            : base(Uri.UriSchemeNetTcp) { }
     }
 }
-

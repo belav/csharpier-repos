@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -25,16 +25,13 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.Build.Framework
 {
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[Guid ("9049A481-D0E9-414f-8F92-D4F67A0359A6")]
-	[ComVisible (true)]
-	public interface ITaskHost {
-	}
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("9049A481-D0E9-414f-8F92-D4F67A0359A6")]
+    [ComVisible(true)]
+    public interface ITaskHost { }
 }
-

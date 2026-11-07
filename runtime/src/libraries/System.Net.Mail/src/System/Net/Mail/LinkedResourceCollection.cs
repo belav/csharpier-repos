@@ -9,8 +9,8 @@ namespace System.Net.Mail
     public sealed class LinkedResourceCollection : Collection<LinkedResource>, IDisposable
     {
         private bool _disposed;
-        internal LinkedResourceCollection()
-        { }
+
+        internal LinkedResourceCollection() { }
 
         public void Dispose()
         {

@@ -17,24 +17,30 @@ namespace Microsoft.CodeAnalysis.Options
     [ExportWorkspaceService(typeof(ILegacyGlobalOptionsWorkspaceService)), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class LegacyGlobalOptionsWorkspaceService(IGlobalOptionService globalOptions) : ILegacyGlobalOptionsWorkspaceService
+    internal sealed class LegacyGlobalOptionsWorkspaceService(IGlobalOptionService globalOptions)
+        : ILegacyGlobalOptionsWorkspaceService
     {
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
         private static readonly Option2<bool> s_generateOverridesOption = new(
-            "dotnet_generate_overrides_for_all_members", defaultValue: true);
+            "dotnet_generate_overrides_for_all_members",
+            defaultValue: true
+        );
 
         private static readonly PerLanguageOption2<bool> s_generateOperators = new(
             "dotnet_generate_equality_operators",
-            defaultValue: false);
+            defaultValue: false
+        );
 
         private static readonly PerLanguageOption2<bool> s_implementIEquatable = new(
             "dotnet_generate_iequatable_implementation",
-            defaultValue: false);
+            defaultValue: false
+        );
 
         internal static readonly PerLanguageOption2<bool> s_addNullChecks = new(
             "dotnet_generate_constructor_parameter_null_checks",
-            defaultValue: false);
+            defaultValue: false
+        );
 
         public bool GenerateOverrides
         {
@@ -42,28 +48,35 @@ namespace Microsoft.CodeAnalysis.Options
             set => _globalOptions.SetGlobalOption(s_generateOverridesOption, value);
         }
 
-        public bool RazorUseTabs
-            => _globalOptions.GetOption(RazorLineFormattingOptionsStorage.UseTabs);
+        public bool RazorUseTabs =>
+            _globalOptions.GetOption(RazorLineFormattingOptionsStorage.UseTabs);
 
-        public int RazorTabSize
-            => _globalOptions.GetOption(RazorLineFormattingOptionsStorage.TabSize);
+        public int RazorTabSize =>
+            _globalOptions.GetOption(RazorLineFormattingOptionsStorage.TabSize);
 
-        public bool GetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(string language)
-            => _globalOptions.GetOption(s_implementIEquatable, language);
+        public bool GetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(string language) =>
+            _globalOptions.GetOption(s_implementIEquatable, language);
 
-        public void SetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(string language, bool value)
-            => _globalOptions.SetGlobalOption(s_generateOperators, language, value);
+        public void SetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(
+            string language,
+            bool value
+        ) => _globalOptions.SetGlobalOption(s_generateOperators, language, value);
 
-        public bool GetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(string language)
-            => _globalOptions.GetOption(s_implementIEquatable, language);
+        public bool GetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(
+            string language
+        ) => _globalOptions.GetOption(s_implementIEquatable, language);
 
-        public void SetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(string language, bool value)
-            => _globalOptions.SetGlobalOption(s_implementIEquatable, language, value);
+        public void SetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(
+            string language,
+            bool value
+        ) => _globalOptions.SetGlobalOption(s_implementIEquatable, language, value);
 
-        public bool GetGenerateConstructorFromMembersOptionsAddNullChecks(string language)
-            => _globalOptions.GetOption(s_addNullChecks, language);
+        public bool GetGenerateConstructorFromMembersOptionsAddNullChecks(string language) =>
+            _globalOptions.GetOption(s_addNullChecks, language);
 
-        public void SetGenerateConstructorFromMembersOptionsAddNullChecks(string language, bool value)
-            => _globalOptions.SetGlobalOption(s_addNullChecks, language, value);
+        public void SetGenerateConstructorFromMembersOptionsAddNullChecks(
+            string language,
+            bool value
+        ) => _globalOptions.SetGlobalOption(s_addNullChecks, language, value);
     }
 }

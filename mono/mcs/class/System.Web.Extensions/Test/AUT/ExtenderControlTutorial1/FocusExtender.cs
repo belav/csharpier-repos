@@ -1,13 +1,13 @@
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Collections.Generic;
 
 namespace Samples.CS
 {
@@ -36,10 +36,13 @@ namespace Samples.CS
 
             return new ScriptReference[] { reference };
         }
-        
+
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl)
         {
-            ScriptBehaviorDescriptor descriptor = new ScriptBehaviorDescriptor("Samples.FocusBehavior", targetControl.ClientID);
+            ScriptBehaviorDescriptor descriptor = new ScriptBehaviorDescriptor(
+                "Samples.FocusBehavior",
+                targetControl.ClientID
+            );
             descriptor.AddProperty("highlightCssClass", this.HighlightCssClass);
             descriptor.AddProperty("nohighlightCssClass", this.NoHighlightCssClass);
 

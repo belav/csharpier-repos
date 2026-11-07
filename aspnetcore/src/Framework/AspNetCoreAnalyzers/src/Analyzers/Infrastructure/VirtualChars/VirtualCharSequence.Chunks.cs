@@ -52,24 +52,20 @@ internal partial struct VirtualCharSequence
             {
                 return null;
             }
-            var index = BinarySearch(
-                _array,
-                position,
-                static (ch, position) =>
+            var index = BinarySearch(_array, position, static (ch, position) =>
+            {
+                if (position < ch.Span.Start)
                 {
-                    if (position < ch.Span.Start)
-                    {
-                        return 1;
-                    }
-
-                    if (position >= ch.Span.End)
-                    {
-                        return -1;
-                    }
-
-                    return 0;
+                    return 1;
                 }
-            );
+
+                if (position >= ch.Span.End)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
             Debug.Assert(index >= 0);
             return _array[index];
         }

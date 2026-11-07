@@ -10,19 +10,13 @@ namespace System.IdentityModel.Tokens
     public class X509ThumbprintKeyIdentifierClause : BinaryKeyIdentifierClause
     {
         public X509ThumbprintKeyIdentifierClause(X509Certificate2 certificate)
-            : this(GetHash(certificate), false)
-        {
-        }
+            : this(GetHash(certificate), false) { }
 
         public X509ThumbprintKeyIdentifierClause(byte[] thumbprint)
-            : this(thumbprint, true)
-        {
-        }
+            : this(thumbprint, true) { }
 
         internal X509ThumbprintKeyIdentifierClause(byte[] thumbprint, bool cloneBuffer)
-            : base(null, thumbprint, cloneBuffer)
-        {
-        }
+            : base(null, thumbprint, cloneBuffer) { }
 
         static byte[] GetHash(X509Certificate2 certificate)
         {
@@ -47,7 +41,11 @@ namespace System.IdentityModel.Tokens
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "X509ThumbprintKeyIdentifierClause(Hash = 0x{0})", ToHexString());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "X509ThumbprintKeyIdentifierClause(Hash = 0x{0})",
+                ToHexString()
+            );
         }
     }
 }

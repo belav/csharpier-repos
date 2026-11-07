@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     internal class MemberFilter
     {
         public virtual bool Include(StackFrame frame) => Include(frame.GetMethod());
+
         public virtual bool Include(MemberInfo member) => true;
     }
 }

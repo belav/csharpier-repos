@@ -21,14 +21,15 @@ public class Program
     {
         bool warmup = new Foo().IsValid;
         CatchIgnore(() =>
-        CatchRethrow(() =>
-        {
-            IFoo[] foos = {new Foo(), null};
-            foreach (var foo in foos)
+            CatchRethrow(() =>
             {
-                bool check = foo.IsValid;
-            }
-        }));
+                IFoo[] foos = { new Foo(), null };
+                foreach (var foo in foos)
+                {
+                    bool check = foo.IsValid;
+                }
+            })
+        );
     }
 
     public static void CatchRethrow(Action action)

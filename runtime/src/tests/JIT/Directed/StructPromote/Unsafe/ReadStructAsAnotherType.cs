@@ -6,15 +6,14 @@
 // Especially if the struct was casted by 'Unsafe.As` from a promoted type
 // and the promoted type had another field on the same offset but with a different type/size.
 
+using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System;
 using Xunit;
 
 public class TestAssignFieldsBetweenPromotedNotPromotedStructs
 {
-
     struct PrimitiveStruct // a struct of single field of scalar types aligned at their natural boundary.
     {
         public long pointerSizedField;
@@ -31,14 +30,15 @@ public class TestAssignFieldsBetweenPromotedNotPromotedStructs
     {
         [FieldOffset(0)]
         public PrimitiveStruct notPromotedField;
+
         [FieldOffset(0)]
         public NonPrimitiveStruct anotherOverlappingStruct;
 
         [FieldOffset(8)]
         public long anotherField;
 
-
-        public static ref PromotedStruct AsPromotedStructSize20(ref NotPromotedStruct d) => ref Unsafe.As<NotPromotedStruct, PromotedStruct>(ref d);
+        public static ref PromotedStruct AsPromotedStructSize20(ref NotPromotedStruct d) =>
+            ref Unsafe.As<NotPromotedStruct, PromotedStruct>(ref d);
     }
 
     [StructLayout(LayoutKind.Explicit)]
@@ -46,11 +46,12 @@ public class TestAssignFieldsBetweenPromotedNotPromotedStructs
     {
         [FieldOffset(0)]
         public PrimitiveStruct promotedField;
+
         [FieldOffset(8)]
         public long anotherField;
 
-
-        public static ref NotPromotedStruct AsNotPromotedStruct(ref PromotedStruct d) => ref Unsafe.As<PromotedStruct, NotPromotedStruct>(ref d);
+        public static ref NotPromotedStruct AsNotPromotedStruct(ref PromotedStruct d) =>
+            ref Unsafe.As<PromotedStruct, NotPromotedStruct>(ref d);
     }
 
     // Some simple tests that check that lcl variables
@@ -76,4 +77,3 @@ public class TestAssignFieldsBetweenPromotedNotPromotedStructs
         Debug.Assert(c.anotherOverlappingStruct.b == 0x5);
     }
 }
-

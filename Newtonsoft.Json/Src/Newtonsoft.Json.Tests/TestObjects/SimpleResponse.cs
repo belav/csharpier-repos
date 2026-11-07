@@ -31,9 +31,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public string Message { get; set; }
         public object Data { get; set; }
 
-        protected SimpleResponse()
-        {
-        }
+        protected SimpleResponse() { }
 
         protected SimpleResponse(string message)
         {

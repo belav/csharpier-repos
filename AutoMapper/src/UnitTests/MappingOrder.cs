@@ -13,9 +13,7 @@ public class When_specifying_a_mapping_order_for_base_members : AutoMapperSpecBa
         public string Two { get; set; }
     }
 
-    class SourceChild : Source
-    {
-    }
+    class SourceChild : Source { }
 
     class Destination
     {
@@ -26,10 +24,7 @@ public class When_specifying_a_mapping_order_for_base_members : AutoMapperSpecBa
 
         public string One
         {
-            get
-            {
-                return this.one;
-            }
+            get { return this.one; }
             set
             {
                 this.one = value;
@@ -49,15 +44,16 @@ public class When_specifying_a_mapping_order_for_base_members : AutoMapperSpecBa
         _destination.Two.ShouldBe("first");
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>()
-            .Include<SourceChild, Destination>()
-            .ForMember(dest => dest.One, opt => opt.SetMappingOrder(600))
-            .ForMember(dest => dest.Two, opt => opt.SetMappingOrder(-500));
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .Include<SourceChild, Destination>()
+                .ForMember(dest => dest.One, opt => opt.SetMappingOrder(600))
+                .ForMember(dest => dest.Two, opt => opt.SetMappingOrder(-500));
 
-        cfg.CreateMap<SourceChild, Destination>();
-    });
+            cfg.CreateMap<SourceChild, Destination>();
+        });
 }
 
 public class When_specifying_a_mapping_order : AutoMapperSpecBase
@@ -92,12 +88,13 @@ public class When_specifying_a_mapping_order : AutoMapperSpecBase
         public int Value2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>()
-            .ForMember(d => d.Value1, opt => opt.SetMappingOrder(2))
-            .ForMember(d => d.Value2, opt => opt.SetMappingOrder(1));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.Value1, opt => opt.SetMappingOrder(2))
+                .ForMember(d => d.Value2, opt => opt.SetMappingOrder(1));
+        });
 
     protected override void Because_of()
     {
@@ -111,28 +108,38 @@ public class When_specifying_a_mapping_order : AutoMapperSpecBase
         _result.Value1.ShouldBe(25);
     }
 }
+
 public class NullMappingOrderComesFirst : AutoMapperSpecBase
 {
     public class Source
     {
         private int _startValue;
+
         public int GetValue1()
         {
             _startValue += 5;
             return _startValue;
         }
+
         public int GetValue2()
         {
             _startValue += 5;
             return _startValue;
         }
     }
+
     public class Destination
     {
         public int Value1 { get; set; }
         public int Value2 { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Destination>().ForMember(d => d.Value1, opt => opt.SetMappingOrder(0)));
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.Value1, opt => opt.SetMappingOrder(0))
+        );
+
     [Fact]
     public void Should_perform_the_mapping_in_the_order_specified()
     {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,22 +30,25 @@ using System.Xml;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public interface ISecurityContextSecurityTokenCache
-	{
-		void AddContext (SecurityContextSecurityToken token);
+    public interface ISecurityContextSecurityTokenCache
+    {
+        void AddContext(SecurityContextSecurityToken token);
 
-		void ClearContexts ();
+        void ClearContexts();
 
-		Collection<SecurityContextSecurityToken> GetAllContexts (UniqueId contextId);
+        Collection<SecurityContextSecurityToken> GetAllContexts(UniqueId contextId);
 
-		SecurityContextSecurityToken GetContext (UniqueId contextId, UniqueId generation);
+        SecurityContextSecurityToken GetContext(UniqueId contextId, UniqueId generation);
 
-		void RemoveAllContexts (UniqueId contextId);
+        void RemoveAllContexts(UniqueId contextId);
 
-		void RemoveContext (UniqueId contextId, UniqueId generation);
+        void RemoveContext(UniqueId contextId, UniqueId generation);
 
-		bool TryAddContext (SecurityContextSecurityToken token);
+        bool TryAddContext(SecurityContextSecurityToken token);
 
-		void UpdateContextCachingTime (SecurityContextSecurityToken context, DateTime expirationTime);
-	}
+        void UpdateContextCachingTime(
+            SecurityContextSecurityToken context,
+            DateTime expirationTime
+        );
+    }
 }

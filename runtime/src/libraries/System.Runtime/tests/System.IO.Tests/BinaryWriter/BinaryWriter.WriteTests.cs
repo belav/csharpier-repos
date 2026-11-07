@@ -12,9 +12,9 @@ namespace System.IO.Tests
         public void BinaryWriter_WriteBoolTest()
         {
             // [] Write a series of booleans to a stream
-            using(Stream mstr = CreateStream())
-            using(BinaryWriter dw2 = new BinaryWriter(mstr))
-            using(BinaryReader dr2 = new BinaryReader(mstr))
+            using (Stream mstr = CreateStream())
+            using (BinaryWriter dw2 = new BinaryWriter(mstr))
+            using (BinaryReader dr2 = new BinaryReader(mstr))
             {
                 dw2.Write(false);
                 dw2.Write(false);
@@ -29,10 +29,10 @@ namespace System.IO.Tests
 
                 Assert.False(dr2.ReadBoolean()); //false
                 Assert.False(dr2.ReadBoolean()); //false
-                Assert.True(dr2.ReadBoolean());  //true
+                Assert.True(dr2.ReadBoolean()); //true
                 Assert.False(dr2.ReadBoolean()); //false
-                Assert.True(dr2.ReadBoolean());  //true
-                Assert.Equal(5, dr2.ReadInt32());  //5
+                Assert.True(dr2.ReadBoolean()); //true
+                Assert.Equal(5, dr2.ReadInt32()); //5
                 Assert.Equal(0, dr2.ReadInt32()); //0
             }
         }
@@ -40,9 +40,20 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteSingleTest()
         {
-            float[] sglArr = new float[] {
-                float.MinValue, float.MaxValue, float.Epsilon, float.PositiveInfinity, float.NegativeInfinity, new float(),
-                0, (float)(-1E20), (float)(-3.5E-20), (float)(1.4E-10), (float)10000.2, (float)2.3E30
+            float[] sglArr = new float[]
+            {
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.PositiveInfinity,
+                float.NegativeInfinity,
+                new float(),
+                0,
+                (float)(-1E20),
+                (float)(-3.5E-20),
+                (float)(1.4E-10),
+                (float)10000.2,
+                (float)2.3E30,
             };
 
             WriteTest(sglArr, (bw, s) => bw.Write(s), (br) => br.ReadSingle());
@@ -51,10 +62,21 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteDecimalTest()
         {
-            decimal[] decArr = new decimal[] {
-                decimal.One, decimal.Zero, decimal.MinusOne, decimal.MinValue, decimal.MaxValue,
-                new decimal(-1000.5), new decimal(-10.0E-40), new decimal(3.4E-40898), new decimal(3.4E-28),
-                new decimal(3.4E+28), new decimal(0.45), new decimal(5.55), new decimal(3.4899E23)
+            decimal[] decArr = new decimal[]
+            {
+                decimal.One,
+                decimal.Zero,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+                new decimal(-1000.5),
+                new decimal(-10.0E-40),
+                new decimal(3.4E-40898),
+                new decimal(3.4E-28),
+                new decimal(3.4E+28),
+                new decimal(0.45),
+                new decimal(5.55),
+                new decimal(3.4899E23),
             };
 
             WriteTest(decArr, (bw, s) => bw.Write(s), (br) => br.ReadDecimal());
@@ -63,9 +85,20 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteDoubleTest()
         {
-            double[] dblArr = new double[] {
-                double.NegativeInfinity, double.PositiveInfinity, double.Epsilon, double.MinValue, double.MaxValue,
-                -3E59, -1000.5, -1E-40, 3.4E-37, 0.45, 5.55, 3.4899E233
+            double[] dblArr = new double[]
+            {
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.Epsilon,
+                double.MinValue,
+                double.MaxValue,
+                -3E59,
+                -1000.5,
+                -1E-40,
+                3.4E-37,
+                0.45,
+                5.55,
+                3.4899E233,
             };
 
             WriteTest(dblArr, (bw, s) => bw.Write(s), (br) => br.ReadDouble());
@@ -74,9 +107,15 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteHalfTest()
         {
-            Half[] hlfArr = new Half[] {
-                Half.NegativeInfinity, Half.PositiveInfinity, Half.Epsilon, Half.MinValue, Half.MaxValue,
-                (Half)0.45, (Half)5.55
+            Half[] hlfArr = new Half[]
+            {
+                Half.NegativeInfinity,
+                Half.PositiveInfinity,
+                Half.Epsilon,
+                Half.MinValue,
+                Half.MaxValue,
+                (Half)0.45,
+                (Half)5.55,
             };
 
             WriteTest(hlfArr, (bw, s) => bw.Write(s), (br) => br.ReadHalf());
@@ -85,7 +124,16 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteInt16Test()
         {
-            short[] i16Arr = new short[] { short.MinValue, short.MaxValue, 0, -10000, 10000, -50, 50 };
+            short[] i16Arr = new short[]
+            {
+                short.MinValue,
+                short.MaxValue,
+                0,
+                -10000,
+                10000,
+                -50,
+                50,
+            };
 
             WriteTest(i16Arr, (bw, s) => bw.Write(s), (br) => br.ReadInt16());
         }
@@ -103,11 +151,23 @@ namespace System.IO.Tests
         {
             int[] i32arr = new int[]
             {
-                int.MinValue, int.MaxValue, 0, -10000, 10000, -50, 50,
-                unchecked((int)uint.MinValue), unchecked((int)uint.MaxValue), unchecked((int)(uint.MaxValue - 100))
+                int.MinValue,
+                int.MaxValue,
+                0,
+                -10000,
+                10000,
+                -50,
+                50,
+                unchecked((int)uint.MinValue),
+                unchecked((int)uint.MaxValue),
+                unchecked((int)(uint.MaxValue - 100)),
             };
 
-            WriteTest(i32arr, (bw, s) => bw.Write7BitEncodedInt(s), (br) => br.Read7BitEncodedInt());
+            WriteTest(
+                i32arr,
+                (bw, s) => bw.Write7BitEncodedInt(s),
+                (br) => br.Read7BitEncodedInt()
+            );
         }
 
         [Fact]
@@ -123,17 +183,38 @@ namespace System.IO.Tests
         {
             long[] i64arr = new long[]
             {
-                long.MinValue, long.MaxValue, 0, -10000, 10000, -50, 50,
-                unchecked((long)ulong.MinValue), unchecked((long)ulong.MaxValue), unchecked((long)(ulong.MaxValue - 100))
+                long.MinValue,
+                long.MaxValue,
+                0,
+                -10000,
+                10000,
+                -50,
+                50,
+                unchecked((long)ulong.MinValue),
+                unchecked((long)ulong.MaxValue),
+                unchecked((long)(ulong.MaxValue - 100)),
             };
 
-            WriteTest(i64arr, (bw, s) => bw.Write7BitEncodedInt64(s), (br) => br.Read7BitEncodedInt64());
+            WriteTest(
+                i64arr,
+                (bw, s) => bw.Write7BitEncodedInt64(s),
+                (br) => br.Read7BitEncodedInt64()
+            );
         }
 
         [Fact]
         public void BinaryWriter_WriteUInt16Test()
         {
-            ushort[] ui16Arr = new ushort[] { ushort.MinValue, ushort.MaxValue, 0, 100, 1000, 10000, ushort.MaxValue - 100 };
+            ushort[] ui16Arr = new ushort[]
+            {
+                ushort.MinValue,
+                ushort.MaxValue,
+                0,
+                100,
+                1000,
+                10000,
+                ushort.MaxValue - 100,
+            };
 
             WriteTest(ui16Arr, (bw, s) => bw.Write(s), (br) => br.ReadUInt16());
         }
@@ -141,7 +222,16 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteUInt32Test()
         {
-            uint[] ui32Arr = new uint[] { uint.MinValue, uint.MaxValue, 0, 100, 1000, 10000, uint.MaxValue - 100 };
+            uint[] ui32Arr = new uint[]
+            {
+                uint.MinValue,
+                uint.MaxValue,
+                0,
+                100,
+                1000,
+                10000,
+                uint.MaxValue - 100,
+            };
 
             WriteTest(ui32Arr, (bw, s) => bw.Write(s), (br) => br.ReadUInt32());
         }
@@ -149,7 +239,16 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteUInt64Test()
         {
-            ulong[] ui64Arr = new ulong[] { ulong.MinValue, ulong.MaxValue, 0, 100, 1000, 10000, ulong.MaxValue - 100 };
+            ulong[] ui64Arr = new ulong[]
+            {
+                ulong.MinValue,
+                ulong.MaxValue,
+                0,
+                100,
+                1000,
+                10000,
+                ulong.MaxValue - 100,
+            };
 
             WriteTest(ui64Arr, (bw, s) => bw.Write(s), (br) => br.ReadUInt64());
         }
@@ -163,10 +262,19 @@ namespace System.IO.Tests
                 sb.Append("abc");
             str1 = sb.ToString();
 
-            string[] strArr = new string[] {
-                "ABC", "\t\t\n\n\n\0\r\r\v\v\t\0\rHello", "This is a normal string", "12345667789!@#$%^&&())_+_)@#",
-                "ABSDAFJPIRUETROPEWTGRUOGHJDOLJHLDHWEROTYIETYWsdifhsiudyoweurscnkjhdfusiyugjlskdjfoiwueriye", "     ",
-                "\0\0\0\t\t\tHey\"\"", "\u0022\u0011", str1, string.Empty };
+            string[] strArr = new string[]
+            {
+                "ABC",
+                "\t\t\n\n\n\0\r\r\v\v\t\0\rHello",
+                "This is a normal string",
+                "12345667789!@#$%^&&())_+_)@#",
+                "ABSDAFJPIRUETROPEWTGRUOGHJDOLJHLDHWEROTYIETYWsdifhsiudyoweurscnkjhdfusiyugjlskdjfoiwueriye",
+                "     ",
+                "\0\0\0\t\t\tHey\"\"",
+                "\u0022\u0011",
+                str1,
+                string.Empty,
+            };
 
             WriteTest(strArr, (bw, s) => bw.Write(s), (br) => br.ReadString());
         }
@@ -186,7 +294,11 @@ namespace System.IO.Tests
             return new MemoryStream();
         }
 
-        private void WriteTest<T>(T[] testElements, Action<BinaryWriter, T> write, Func<BinaryReader, T> read)
+        private void WriteTest<T>(
+            T[] testElements,
+            Action<BinaryWriter, T> write,
+            Func<BinaryReader, T> read
+        )
         {
             using (Stream memStream = CreateStream())
             using (BinaryWriter writer = new BinaryWriter(memStream))

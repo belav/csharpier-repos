@@ -62,9 +62,13 @@ namespace System.Web.Cors
         {
             get
             {
-                return Origin != null &&
-                    AccessControlRequestMethod != null &&
-                    String.Equals(HttpMethod, CorsConstants.PreflightHttpMethod, StringComparison.OrdinalIgnoreCase);
+                return Origin != null
+                    && AccessControlRequestMethod != null
+                    && String.Equals(
+                        HttpMethod,
+                        CorsConstants.PreflightHttpMethod,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
         }
 

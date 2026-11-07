@@ -24,11 +24,28 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             // Use the formatting from Microsoft.Build.Shared.EventArgsFormatting.
             var assembly = Assembly.LoadFrom("Microsoft.Build.dll");
-            var formattingClass = assembly.GetType("Microsoft.Build.Shared.EventArgsFormatting") ?? throw new Exception("Could not find EventArgsFormatting type");
-            _formatErrorMethod = formattingClass.GetMethod("FormatEventMessage", BindingFlags.Static | BindingFlags.NonPublic, null, CallingConventions.Any,
-                new Type[] { typeof(BuildErrorEventArgs) }, null) ?? throw new Exception("Could not find FormatEventMessage(BuildErrorEventArgs).");
-            _formatWarningMethod = formattingClass.GetMethod("FormatEventMessage", BindingFlags.Static | BindingFlags.NonPublic, null, CallingConventions.Any,
-                new Type[] { typeof(BuildWarningEventArgs) }, null) ?? throw new Exception("Could not find FormatEventMessage(BuildWarningEventArgs).");
+            var formattingClass =
+                assembly.GetType("Microsoft.Build.Shared.EventArgsFormatting")
+                ?? throw new Exception("Could not find EventArgsFormatting type");
+            _formatErrorMethod =
+                formattingClass.GetMethod(
+                    "FormatEventMessage",
+                    BindingFlags.Static | BindingFlags.NonPublic,
+                    null,
+                    CallingConventions.Any,
+                    new Type[] { typeof(BuildErrorEventArgs) },
+                    null
+                ) ?? throw new Exception("Could not find FormatEventMessage(BuildErrorEventArgs).");
+            _formatWarningMethod =
+                formattingClass.GetMethod(
+                    "FormatEventMessage",
+                    BindingFlags.Static | BindingFlags.NonPublic,
+                    null,
+                    CallingConventions.Any,
+                    new Type[] { typeof(BuildWarningEventArgs) },
+                    null
+                )
+                ?? throw new Exception("Could not find FormatEventMessage(BuildWarningEventArgs).");
         }
 
         internal string Log
@@ -49,21 +66,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             _log.AppendLine();
         }
 
-        public void LogCustomEvent(CustomBuildEventArgs eventArgs)
-        {
-        }
+        public void LogCustomEvent(CustomBuildEventArgs eventArgs) { }
 
-        public void LogMessageEvent(BuildMessageEventArgs eventArgs)
-        {
-        }
+        public void LogMessageEvent(BuildMessageEventArgs eventArgs) { }
 
         public string ProjectFileOfTaskNode => "";
         public int ColumnNumberOfTaskNode => 0;
         public int LineNumberOfTaskNode => 0;
         public bool ContinueOnError => true;
 
-        public bool BuildProjectFile(string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs)
-            => throw new NotImplementedException();
-
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        ) => throw new NotImplementedException();
     }
 }

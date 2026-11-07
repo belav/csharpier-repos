@@ -4,8 +4,8 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime;
     using System.Xaml;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
     // This class is modal. The following properties are set in different modes:
     //                 Type  TextValue   Value   ArrayContents
-    // x:Null 
+    // x:Null
     // x:Array          x                             x
     // Known Value      x        x         x
     // Unknown Value    x        x
@@ -32,7 +32,10 @@ namespace Microsoft.Build.Tasks.Xaml
             ValidateType(type);
             if (textValue == null && type.UnderlyingType.IsValueType)
             {
-                throw FxTrace.Exception.Argument("value", SR.AttributeValueNotNullable(type.UnderlyingType));
+                throw FxTrace.Exception.Argument(
+                    "value",
+                    SR.AttributeValueNotNullable(type.UnderlyingType)
+                );
             }
 
             this.Type = type;
@@ -48,11 +51,17 @@ namespace Microsoft.Build.Tasks.Xaml
             ValidateType(type);
             if (value == null && type.UnderlyingType.IsValueType)
             {
-                throw FxTrace.Exception.Argument("value", SR.AttributeValueNotNullable(type.UnderlyingType));
+                throw FxTrace.Exception.Argument(
+                    "value",
+                    SR.AttributeValueNotNullable(type.UnderlyingType)
+                );
             }
             if (value != null && !type.UnderlyingType.IsAssignableFrom(value.GetType()))
             {
-                throw FxTrace.Exception.Argument("value", SR.AttributeValueNotAssignableToType(value.GetType(), type.UnderlyingType));
+                throw FxTrace.Exception.Argument(
+                    "value",
+                    SR.AttributeValueNotAssignableToType(value.GetType(), type.UnderlyingType)
+                );
             }
 
             this.Type = type;
@@ -61,7 +70,9 @@ namespace Microsoft.Build.Tasks.Xaml
                 if (type.UnderlyingType.IsArray)
                 {
                     Array array = (Array)value;
-                    XamlType elementType = type.SchemaContext.GetXamlType(type.UnderlyingType.GetElementType());
+                    XamlType elementType = type.SchemaContext.GetXamlType(
+                        type.UnderlyingType.GetElementType()
+                    );
                     this.arrayContents = new List<AttributeParameterData>();
                     foreach (object item in array)
                     {
@@ -77,7 +88,10 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public AttributeParameterData(XamlType type, IEnumerable<AttributeParameterData> arrayContents)
+        public AttributeParameterData(
+            XamlType type,
+            IEnumerable<AttributeParameterData> arrayContents
+        )
         {
             ValidateType(type);
             if (!type.UnderlyingType.IsArray)
@@ -100,30 +114,15 @@ namespace Microsoft.Build.Tasks.Xaml
             IsArray = false;
         }
 
-        public string TextValue 
-        { 
-            get;
-            internal set; 
-        }
+        public string TextValue { get; internal set; }
 
-        public object Value
-        {
-            get;
-            internal set;
-        }
-        
-        public XamlType Type 
-        { 
-            get; 
-            internal set;
-        }
+        public object Value { get; internal set; }
+
+        public XamlType Type { get; internal set; }
 
         public ReadOnlyCollection<AttributeParameterData> ArrayContents
         {
-            get
-            {
-                return this.arrayContents == null ? null : this.arrayContents.AsReadOnly();
-            }
+            get { return this.arrayContents == null ? null : this.arrayContents.AsReadOnly(); }
         }
 
         internal void AddArrayContentsEntry(AttributeParameterData arrayContentsEntry)
@@ -136,7 +135,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 this.arrayContents.Add(arrayContentsEntry);
             }
-        }      
+        }
 
         internal bool IsArray { get; set; }
 
@@ -148,11 +147,17 @@ namespace Microsoft.Build.Tasks.Xaml
             }
             if (type.IsUnknown)
             {
-                throw FxTrace.Exception.Argument("type", SR.AttributeParameterTypeUnknownNoErrNum(type));
+                throw FxTrace.Exception.Argument(
+                    "type",
+                    SR.AttributeParameterTypeUnknownNoErrNum(type)
+                );
             }
             if (!AttributeData.IsSupportedParameterType(type.UnderlyingType))
             {
-                throw FxTrace.Exception.Argument("type", SR.AttributeParamTypeNotSupportedNoErrNum(type));
+                throw FxTrace.Exception.Argument(
+                    "type",
+                    SR.AttributeParamTypeNotSupportedNoErrNum(type)
+                );
             }
         }
     }

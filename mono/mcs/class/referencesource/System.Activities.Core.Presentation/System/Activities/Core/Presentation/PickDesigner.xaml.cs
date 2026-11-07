@@ -18,7 +18,10 @@ namespace System.Activities.Core.Presentation
 
     partial class PickDesigner
     {
-        public static readonly RoutedCommand CreateBranchCommand = new RoutedCommand("CreateBranchCommand", typeof(PickDesigner));
+        public static readonly RoutedCommand CreateBranchCommand = new RoutedCommand(
+            "CreateBranchCommand",
+            typeof(PickDesigner)
+        );
         WorkflowItemsPresenter branchesPresenter;
 
         public PickDesigner()
@@ -31,8 +34,15 @@ namespace System.Activities.Core.Presentation
             Type type = typeof(System.Activities.Statements.Pick);
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(PickDesigner)));
             builder.AddCustomAttributes(type, type.GetProperty("Branches"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, type.GetProperty("Branches"), new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false });
-            builder.AddCustomAttributes(type, new FeatureAttribute(typeof(PickValidationErrorSourceLocatorFeature)));
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Branches"),
+                new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false }
+            );
+            builder.AddCustomAttributes(
+                type,
+                new FeatureAttribute(typeof(PickValidationErrorSourceLocatorFeature))
+            );
         }
 
         void OnBranchesPresenterLoaded(object sender, RoutedEventArgs e)
@@ -50,7 +60,12 @@ namespace System.Activities.Core.Presentation
             if (!e.Handled)
             {
                 // Simulate a PickBranch being drop onto the Branches WIsP.
-                object instance = DragDropHelper.GetDroppedObjectInstance(this.branchesPresenter, this.Context, typeof(PickBranch), null);
+                object instance = DragDropHelper.GetDroppedObjectInstance(
+                    this.branchesPresenter,
+                    this.Context,
+                    typeof(PickBranch),
+                    null
+                );
                 if (instance != null)
                 {
                     this.ModelItem.Properties["Branches"].Collection.Add(instance);

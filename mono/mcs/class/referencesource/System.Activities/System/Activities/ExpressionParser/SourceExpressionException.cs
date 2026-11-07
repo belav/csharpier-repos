@@ -18,19 +18,13 @@ namespace System.Activities.ExpressionParser
         CompilerError[] errors;
 
         public SourceExpressionException()
-            : base(SR.CompilerError)
-        {
-        }
+            : base(SR.CompilerError) { }
 
         public SourceExpressionException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SourceExpressionException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public SourceExpressionException(string message, CompilerErrorCollection errors)
             : base(message)
@@ -72,7 +66,9 @@ namespace System.Activities.ExpressionParser
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are overriding a critical method in the base class.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are overriding a critical method in the base class."
+        )]
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

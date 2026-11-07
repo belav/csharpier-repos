@@ -6,5 +6,5 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 public enum AmmunitionType
 {
     Cartridge = 1,
-    Shell = 2
+    Shell = 2,
 }

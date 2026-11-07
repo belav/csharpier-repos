@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
     {
         private protected override ICodeFormatter Formatter => new FinalNewlineFormatter();
 
-        private Dictionary<string, string> EditorConfig => new Dictionary<string, string>()
-        {
-            ["insert_final_newline"] = "true",
-            ["end_of_line"] = "lf",
-        };
+        private Dictionary<string, string> EditorConfig =>
+            new Dictionary<string, string>()
+            {
+                ["insert_final_newline"] = "true",
+                ["end_of_line"] = "lf",
+            };
 
         public FormattedFilesTests(ITestOutputHelper output)
         {
@@ -56,11 +57,19 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             var text = SourceText.From(testCode, Encoding.UTF8);
             TestState.Sources.Add(text);
 
-            var (workspace, solution) = await GetSolutionAsync(TestState.Sources.ToArray(), TestState.AdditionalFiles.ToArray(), TestState.AdditionalReferences.ToArray(), EditorConfig);
+            var (workspace, solution) = await GetSolutionAsync(
+                TestState.Sources.ToArray(),
+                TestState.AdditionalFiles.ToArray(),
+                TestState.AdditionalReferences.ToArray(),
+                EditorConfig
+            );
             var project = solution.Projects.Single();
             var document = project.Documents.Single();
 
-            var fileMatcher = SourceFileMatcher.CreateMatcher(new[] { document.FilePath }, exclude: Array.Empty<string>());
+            var fileMatcher = SourceFileMatcher.CreateMatcher(
+                new[] { document.FilePath },
+                exclude: Array.Empty<string>()
+            );
             var formatOptions = new FormatOptions(
                 WorkspaceFilePath: project.FilePath,
                 WorkspaceType: WorkspaceType.Folder,
@@ -76,12 +85,21 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
                 fileMatcher,
                 ReportPath: string.Empty,
                 IncludeGeneratedFiles: false,
-                BinaryLogPath: null);
+                BinaryLogPath: null
+            );
 
             var pathsToFormat = GetOnlyFileToFormat(solution);
 
             var formattedFiles = new List<FormattedFile>();
-            await Formatter.FormatAsync(workspace, solution, pathsToFormat, formatOptions, new TestLogger(), formattedFiles, default);
+            await Formatter.FormatAsync(
+                workspace,
+                solution,
+                pathsToFormat,
+                formatOptions,
+                new TestLogger(),
+                formattedFiles,
+                default
+            );
 
             return formattedFiles;
         }

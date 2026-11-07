@@ -29,24 +29,33 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public InvalidModelStateResult(ModelStateDictionary modelState, bool includeErrorDetail,
-            IContentNegotiator contentNegotiator, HttpRequestMessage request,
-            IEnumerable<MediaTypeFormatter> formatters)
-            : this(modelState, new ExceptionResult.DirectDependencyProvider(includeErrorDetail, contentNegotiator,
-                request, formatters))
-        {
-        }
+        public InvalidModelStateResult(
+            ModelStateDictionary modelState,
+            bool includeErrorDetail,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                modelState,
+                new ExceptionResult.DirectDependencyProvider(
+                    includeErrorDetail,
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>Initializes a new instance of the <see cref="InvalidModelStateResult"/> class.</summary>
         /// <param name="modelState">The model state to include in the error.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public InvalidModelStateResult(ModelStateDictionary modelState, ApiController controller)
-            : this(modelState, new ExceptionResult.ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(modelState, new ExceptionResult.ApiControllerDependencyProvider(controller)) { }
 
-        private InvalidModelStateResult(ModelStateDictionary modelState,
-            ExceptionResult.IDependencyProvider dependencies)
+        private InvalidModelStateResult(
+            ModelStateDictionary modelState,
+            ExceptionResult.IDependencyProvider dependencies
+        )
         {
             if (modelState == null)
             {
@@ -98,8 +107,13 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             HttpError error = new HttpError(_modelState, _dependencies.IncludeErrorDetail);
-            return NegotiatedContentResult<HttpError>.Execute(HttpStatusCode.BadRequest, error,
-                _dependencies.ContentNegotiator, _dependencies.Request, _dependencies.Formatters);
+            return NegotiatedContentResult<HttpError>.Execute(
+                HttpStatusCode.BadRequest,
+                error,
+                _dependencies.ContentNegotiator,
+                _dependencies.Request,
+                _dependencies.Formatters
+            );
         }
     }
 }

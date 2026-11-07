@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,17 +21,15 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
-
-using DbLinq.Vendor.Implementation;
-
+using System.Linq;
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
+using DbLinq.Vendor.Implementation;
 
 namespace DbLinq.SqlServer
 {
@@ -45,8 +43,14 @@ namespace DbLinq.SqlServer
             return new SqlServerExpressionTranslator();
         }
 
-        protected override char SafeNameStartQuote { get { return '['; } }
-        protected override char SafeNameEndQuote { get { return ']'; } }
+        protected override char SafeNameStartQuote
+        {
+            get { return '['; }
+        }
+        protected override char SafeNameEndQuote
+        {
+            get { return ']'; }
+        }
 
         /// <summary>
         /// Returns a table alias
@@ -81,7 +85,7 @@ namespace DbLinq.SqlServer
 
         public override SqlStatement GetLiteral(DateTime literal)
         {
-            return "'" + literal.ToString("o").Substring(0,23) + "'";
+            return "'" + literal.ToString("o").Substring(0, 23) + "'";
         }
 
         public override string GetParameterName(string nameBase)
@@ -97,18 +101,27 @@ namespace DbLinq.SqlServer
                 var selectBuilder = new SqlStatementBuilder(select);
                 var remaining = select[0].Sql.Substring(trimSelect.Length);
                 selectBuilder.Parts[0] = new SqlLiteralPart(remaining);
-                return SqlStatement.Format("SELECT TOP ({0}) {1}", limit, selectBuilder.ToSqlStatement());
+                return SqlStatement.Format(
+                    "SELECT TOP ({0}) {1}",
+                    limit,
+                    selectBuilder.ToSqlStatement()
+                );
             }
             throw new ArgumentException("S0051: Unknown select format");
         }
 
-        public override SqlStatement GetLiteralLimit(SqlStatement select, SqlStatement limit, SqlStatement offset, SqlStatement offsetAndLimit)
+        public override SqlStatement GetLiteralLimit(
+            SqlStatement select,
+            SqlStatement limit,
+            SqlStatement offset,
+            SqlStatement offsetAndLimit
+        )
         {
-            var from    = "FROM ";
+            var from = "FROM ";
             var orderBy = "ORDER BY ";
             var selectK = "SELECT ";
-            int fromIdx     = select[0].Sql.IndexOf(from);
-            int orderByIdx  = select[0].Sql.IndexOf(orderBy);
+            int fromIdx = select[0].Sql.IndexOf(from);
+            int orderByIdx = select[0].Sql.IndexOf(orderBy);
 
             if (fromIdx < 0)
                 throw new ArgumentException("S0051: Unknown select format: " + select[0].Sql);
@@ -122,43 +135,59 @@ namespace DbLinq.SqlServer
             }
             else
             {
-                orderByClause = "ORDER BY " + select[0].Sql.Substring(selectK.Length, fromIdx - selectK.Length);
+                orderByClause =
+                    "ORDER BY " + select[0].Sql.Substring(selectK.Length, fromIdx - selectK.Length);
                 sourceClause = select[0].Sql.Substring(fromIdx);
             }
 
             var selectFieldsClause = select[0].Sql.Substring(0, fromIdx);
 
             return SqlStatement.Format(
-                "SELECT *{0}" +
-                "FROM ({0}" +
-                "    {1},{0}" +
-                "    ROW_NUMBER() OVER({2}) AS [__ROW_NUMBER]{0}" +
-                "    {3}" +
-                "    ) AS [t0]{0}" +
-                "WHERE [__ROW_NUMBER] BETWEEN {4}+1 AND {4}+{5}{0}" +
-                "ORDER BY [__ROW_NUMBER]",
-                NewLine, selectFieldsClause, orderByClause, sourceClause, offset, limit);
+                "SELECT *{0}"
+                    + "FROM ({0}"
+                    + "    {1},{0}"
+                    + "    ROW_NUMBER() OVER({2}) AS [__ROW_NUMBER]{0}"
+                    + "    {3}"
+                    + "    ) AS [t0]{0}"
+                    + "WHERE [__ROW_NUMBER] BETWEEN {4}+1 AND {4}+{5}{0}"
+                    + "ORDER BY [__ROW_NUMBER]",
+                NewLine,
+                selectFieldsClause,
+                orderByClause,
+                sourceClause,
+                offset,
+                limit
+            );
         }
 
         protected override SqlStatement GetLiteralDateDiff(SqlStatement dateA, SqlStatement dateB)
         {
-            return SqlStatement.Format("(CONVERT(BigInt,DATEDIFF(DAY, {0}, {1}))) * 86400000 +" //diffierence in milliseconds regards days
-                     + "DATEDIFF(MILLISECOND, "
-
-                                // (DateA-DateB) in days +DateB = difference in time
-                                + @"DATEADD(DAY, 
+            return SqlStatement.Format(
+                "(CONVERT(BigInt,DATEDIFF(DAY, {0}, {1}))) * 86400000 +" //diffierence in milliseconds regards days
+                    + "DATEDIFF(MILLISECOND, "
+                    // (DateA-DateB) in days +DateB = difference in time
+                    + @"DATEADD(DAY, 
                                       DATEDIFF(DAY, {0}, {1})
                                       ,{0})"
-
-                                + ",{1})", dateB, dateA);
+                    + ",{1})",
+                dateB,
+                dateA
+            );
 
             //this trick is needed in sqlserver since DATEDIFF(MILLISECONDS,{0},{1}) usually crhases in the database engine due an overflow:
             //System.Data.SqlClient.SqlException : Difference of two datetime columns caused overflow at runtime.
         }
 
-        protected override SqlStatement GetLiteralDateTimePart(SqlStatement dateExpression, SpecialExpressionType operationType)
+        protected override SqlStatement GetLiteralDateTimePart(
+            SqlStatement dateExpression,
+            SpecialExpressionType operationType
+        )
         {
-            return SqlStatement.Format("DATEPART({0},{1})", operationType.ToString().ToUpper(), dateExpression);
+            return SqlStatement.Format(
+                "DATEPART({0},{1})",
+                operationType.ToString().ToUpper(),
+                dateExpression
+            );
         }
 
         protected override SqlStatement GetLiteralMathPow(SqlStatement p, SqlStatement p_2)
@@ -181,13 +210,20 @@ namespace DbLinq.SqlServer
             return SqlStatement.Format("LEN({0})", a);
         }
 
-        protected override SqlStatement GetLiteralSubString(SqlStatement baseString, SqlStatement startIndex, SqlStatement count)
+        protected override SqlStatement GetLiteralSubString(
+            SqlStatement baseString,
+            SqlStatement startIndex,
+            SqlStatement count
+        )
         {
             //in standard sql base string index is 1 instead 0
             return SqlStatement.Format("SUBSTRING({0}, {1}, {2})", baseString, startIndex, count);
         }
 
-        protected override SqlStatement GetLiteralSubString(SqlStatement baseString, SqlStatement startIndex)
+        protected override SqlStatement GetLiteralSubString(
+            SqlStatement baseString,
+            SqlStatement startIndex
+        )
         {
             return GetLiteralSubString(baseString, startIndex, GetLiteralStringLength(baseString));
         }
@@ -199,7 +235,11 @@ namespace DbLinq.SqlServer
 
         protected override SqlStatement GetLiteralStringConcat(SqlStatement a, SqlStatement b)
         {
-            return SqlStatement.Format("{0} + {1}", a.Replace("sql_variant", "varchar", false), b.Replace("sql_variant", "varchar", false));
+            return SqlStatement.Format(
+                "{0} + {1}",
+                a.Replace("sql_variant", "varchar", false),
+                b.Replace("sql_variant", "varchar", false)
+            );
         }
 
         protected override SqlStatement GetLiteralStringToLower(SqlStatement a)
@@ -212,48 +252,66 @@ namespace DbLinq.SqlServer
             return SqlStatement.Format("UPPER({0})", a);
         }
 
-        protected override SqlStatement GetLiteralStringIndexOf(SqlStatement baseString, SqlStatement searchString)
+        protected override SqlStatement GetLiteralStringIndexOf(
+            SqlStatement baseString,
+            SqlStatement searchString
+        )
         {
-            return GetLiteralSubtract(SqlStatement.Format("CHARINDEX({0},{1})", searchString, baseString), "1");
+            return GetLiteralSubtract(
+                SqlStatement.Format("CHARINDEX({0},{1})", searchString, baseString),
+                "1"
+            );
         }
 
-        protected override SqlStatement GetLiteralStringIndexOf(SqlStatement baseString, SqlStatement searchString, SqlStatement startIndex)
+        protected override SqlStatement GetLiteralStringIndexOf(
+            SqlStatement baseString,
+            SqlStatement searchString,
+            SqlStatement startIndex
+        )
         {
-            return GetLiteralSubtract(SqlStatement.Format("CHARINDEX({0},{1},{2})", searchString, baseString, startIndex), "1");
+            return GetLiteralSubtract(
+                SqlStatement.Format("CHARINDEX({0},{1},{2})", searchString, baseString, startIndex),
+                "1"
+            );
         }
 
-        protected override SqlStatement GetLiteralStringIndexOf(SqlStatement baseString, SqlStatement searchString, SqlStatement startIndex, SqlStatement count)
+        protected override SqlStatement GetLiteralStringIndexOf(
+            SqlStatement baseString,
+            SqlStatement searchString,
+            SqlStatement startIndex,
+            SqlStatement count
+        )
         {
-            return GetLiteralSubtract(SqlStatement.Format("CHARINDEX({0},{1},{2})", searchString, GetLiteralSubString(baseString, "1", GetLiteralStringConcat(count, startIndex)), startIndex), "1");
+            return GetLiteralSubtract(
+                SqlStatement.Format(
+                    "CHARINDEX({0},{1},{2})",
+                    searchString,
+                    GetLiteralSubString(baseString, "1", GetLiteralStringConcat(count, startIndex)),
+                    startIndex
+                ),
+                "1"
+            );
         }
 
         //http://msdn.microsoft.com/en-us/library/4e5xt97a(VS.71).aspx
         public static readonly Dictionary<Type, string> typeMapping = new Dictionary<Type, string>
         {
-            {typeof(int),"int"},
-            {typeof(uint),"int"},
-
-            {typeof(long),"bigint"},
-            {typeof(ulong),"bigint"},
-
-            {typeof(float),"float"}, //TODO: could be float or real. check ranges.
-            {typeof(double),"float"}, //TODO: could be float or real. check ranges.
-            
-            {typeof(decimal),"numeric"},
-
-            {typeof(short),"tinyint"},
-            {typeof(ushort),"tinyint"},
-
-            {typeof(bool),"bit"},
-
+            { typeof(int), "int" },
+            { typeof(uint), "int" },
+            { typeof(long), "bigint" },
+            { typeof(ulong), "bigint" },
+            { typeof(float), "float" }, //TODO: could be float or real. check ranges.
+            { typeof(double), "float" }, //TODO: could be float or real. check ranges.
+            { typeof(decimal), "numeric" },
+            { typeof(short), "tinyint" },
+            { typeof(ushort), "tinyint" },
+            { typeof(bool), "bit" },
             // trunk? They could be: varchar, char,nchar, ntext,text... it should be the most flexible string type. TODO: check wich of them is better.
-            {typeof(string),"varchar"}, 
-            {typeof(char[]),"varchar"},
-
-            {typeof(char),"char"},
-
-            {typeof(DateTime),"datetime"},
-            {typeof(Guid),"uniqueidentifier"}
+            { typeof(string), "varchar" },
+            { typeof(char[]), "varchar" },
+            { typeof(char), "char" },
+            { typeof(DateTime), "datetime" },
+            { typeof(Guid), "uniqueidentifier" },
 
             // there are more types: timestamps, images ... TODO: check what is the official behaviour
         };

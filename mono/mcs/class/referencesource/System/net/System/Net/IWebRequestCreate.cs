@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
     using System;
 
     //
@@ -17,7 +18,8 @@ namespace System.Net {
     ///       instances for a registered scheme.
     ///    </para>
     /// </devdoc>
-    public interface IWebRequestCreate {
+    public interface IWebRequestCreate
+    {
         /// <devdoc>
         ///    <para>
         ///       Creates a <see cref='System.Net.WebRequest'/>
@@ -25,7 +27,5 @@ namespace System.Net {
         ///    </para>
         /// </devdoc>
         WebRequest Create(Uri uri);
-
     } // interface IWebRequestCreate
-
 } // namespace System.Net

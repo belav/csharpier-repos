@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,25 +31,23 @@ using System.Security.Principal;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class QuotaControl : DirectoryControl
-	{
-		public QuotaControl ()
-			: base (null, null, false, false)
-		{
-		}
+    public class QuotaControl : DirectoryControl
+    {
+        public QuotaControl()
+            : base(null, null, false, false) { }
 
-		public QuotaControl (SecurityIdentifier querySid)
-			: this ()
-		{
-			QuerySid = querySid;
-		}
+        public QuotaControl(SecurityIdentifier querySid)
+            : this()
+        {
+            QuerySid = querySid;
+        }
 
-		public SecurityIdentifier QuerySid { get; set; }
+        public SecurityIdentifier QuerySid { get; set; }
 
-		[MonoTODO]
-		public override byte [] GetValue ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override byte[] GetValue()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

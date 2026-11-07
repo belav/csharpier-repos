@@ -7,9 +7,9 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
@@ -27,7 +27,8 @@ namespace System.Data.Entity.Design
         private CodeTypeReference _baseType;
         private List<Type> _additionalInterfaces = new List<Type>();
         private List<CodeTypeMember> _additionalMembers = new List<CodeTypeMember>();
-        private List<CodeAttributeDeclaration> _additionalAttributes = new List<CodeAttributeDeclaration>();
+        private List<CodeAttributeDeclaration> _additionalAttributes =
+            new List<CodeAttributeDeclaration>();
 
         #endregion
 
@@ -36,9 +37,7 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TypeGeneratedEventArgs()
-        {
-        }
+        public TypeGeneratedEventArgs() { }
 
         /// <summary>
         /// Constructor
@@ -57,10 +56,7 @@ namespace System.Data.Entity.Design
 
         public GlobalItem TypeSource
         {
-            get
-            {
-                return this._typeSource;
-            }
+            get { return this._typeSource; }
         }
 
         /// <summary>
@@ -68,14 +64,8 @@ namespace System.Data.Entity.Design
         /// </summary>
         public CodeTypeReference BaseType
         {
-            get
-            {
-                return this._baseType;
-            }
-            set
-            {
-                this._baseType = value;
-            }
+            get { return this._baseType; }
+            set { this._baseType = value; }
         }
 
         /// <summary>
@@ -83,10 +73,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public List<Type> AdditionalInterfaces
         {
-            get
-            {
-                return this._additionalInterfaces;
-            }
+            get { return this._additionalInterfaces; }
         }
 
         /// <summary>
@@ -94,10 +81,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public List<CodeTypeMember> AdditionalMembers
         {
-            get
-            {
-                return this._additionalMembers;
-            }
+            get { return this._additionalMembers; }
         }
 
         /// <summary>
@@ -105,10 +89,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public List<CodeAttributeDeclaration> AdditionalAttributes
         {
-            get
-            {
-                return this._additionalAttributes;
-            }
+            get { return this._additionalAttributes; }
         }
 
         #endregion

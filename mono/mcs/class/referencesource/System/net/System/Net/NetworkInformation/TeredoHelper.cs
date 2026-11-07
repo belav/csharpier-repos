@@ -5,11 +5,10 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
 
-
 namespace System.Net.NetworkInformation
 {
     // This class wraps the native API NotifyStableUnicastIpAddressTable.  The native function's behavior is:
-    // 
+    //
     // 1. If the address table is already stable, it returns ERROR_SUCCESS and a Mib table handle that we must free.
     //    The passed-in callback will never be called, and the cancelHandle is set to NULL.
     //
@@ -32,7 +31,7 @@ namespace System.Net.NetworkInformation
         // contents and impendingAppDomainUnload.
         private static List<TeredoHelper> pendingNotifications;
 
-        // Flag that gets set when an AppDomain unload is imminent.  When this is set, no more calls to 
+        // Flag that gets set when an AppDomain unload is imminent.  When this is set, no more calls to
         // NotifyStableUnicastIpAddressTable are allowed.
         private static bool impendingAppDomainUnload;
 
@@ -63,10 +62,15 @@ namespace System.Net.NetworkInformation
 
         // Returns true if the address table is already stable.  Otherwise, calls callback when it becomes stable.
         // 'Unsafe' because it does not flow ExecutionContext to the callback.
-        public static bool UnsafeNotifyStableUnicastIpAddressTable(Action<object> callback, object state)
+        public static bool UnsafeNotifyStableUnicastIpAddressTable(
+            Action<object> callback,
+            object state
+        )
         {
-            GlobalLog.Assert(callback != null, 
-                "UnsafeNotifyStableUnicastIpAddressTable called without specifying callback!");
+            GlobalLog.Assert(
+                callback != null,
+                "UnsafeNotifyStableUnicastIpAddressTable called without specifying callback!"
+            );
 
             TeredoHelper helper = new TeredoHelper(callback, state);
 
@@ -75,16 +79,21 @@ namespace System.Net.NetworkInformation
 
             lock (pendingNotifications)
             {
-                // If OnAppDomainUnload gets the lock first, tell our caller that we'll finish async.  Their AppDomain 
-                // is about to go down anyways.  If we do, hold the lock until we've added helper to the 
+                // If OnAppDomainUnload gets the lock first, tell our caller that we'll finish async.  Their AppDomain
+                // is about to go down anyways.  If we do, hold the lock until we've added helper to the
                 // pendingNotifications list (if we're going to complete asynchronously).
                 if (impendingAppDomainUnload)
                 {
                     return false;
                 }
 
-                err = UnsafeNetInfoNativeMethods.NotifyStableUnicastIpAddressTable(AddressFamily.Unspecified,
-                    out table, helper.onStabilizedDelegate, IntPtr.Zero, out helper.cancelHandle);
+                err = UnsafeNetInfoNativeMethods.NotifyStableUnicastIpAddressTable(
+                    AddressFamily.Unspecified,
+                    out table,
+                    helper.onStabilizedDelegate,
+                    IntPtr.Zero,
+                    out helper.cancelHandle
+                );
 
                 if (table != null)
                 {
@@ -93,8 +102,10 @@ namespace System.Net.NetworkInformation
 
                 if (err == UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING)
                 {
-                    GlobalLog.Assert(!helper.cancelHandle.IsInvalid,
-                        "CancelHandle invalid despite returning ERROR_IO_PENDING");
+                    GlobalLog.Assert(
+                        !helper.cancelHandle.IsInvalid,
+                        "CancelHandle invalid despite returning ERROR_IO_PENDING"
+                    );
 
                     // Async completion: add us to the pendingNotifications list so we'll be canceled in the
                     // event of an AppDomain unload.
@@ -114,7 +125,7 @@ namespace System.Net.NetworkInformation
         private static void OnAppDomainUnload(object sender, EventArgs args)
         {
             // We need to ensure that we won't get any callbacks from iphlpapi after the AppDomain goes down.
-            // Set impendingAppDomainUnload to ensure that no new calls to NotifyStableUnicastIpAddressTable are 
+            // Set impendingAppDomainUnload to ensure that no new calls to NotifyStableUnicastIpAddressTable are
             // made, then cancel any in-progress notifications by closing their cancelHandles.
             //
             // We intentionally leave all of the canceled TeredoHelpers in the list.  impendingAppDomainUnload
@@ -123,11 +134,13 @@ namespace System.Net.NetworkInformation
             lock (pendingNotifications)
             {
                 impendingAppDomainUnload = true;
-                
+
                 foreach (TeredoHelper helper in pendingNotifications)
                 {
-                    GlobalLog.Assert(helper.cancelHandle != null && !helper.cancelHandle.IsInvalid,
-                        "Invalid cancelHandle in pendingNotifications!");
+                    GlobalLog.Assert(
+                        helper.cancelHandle != null && !helper.cancelHandle.IsInvalid,
+                        "Invalid cancelHandle in pendingNotifications!"
+                    );
 
                     helper.cancelHandle.Dispose();
                 }
@@ -136,7 +149,10 @@ namespace System.Net.NetworkInformation
 
         private void RunCallback(object o)
         {
-            GlobalLog.Assert(runCallbackCalled, "RunCallback called without setting runCallbackCalled!");
+            GlobalLog.Assert(
+                runCallbackCalled,
+                "RunCallback called without setting runCallbackCalled!"
+            );
 
             // If OnAppDomainUnload beats us to the lock, do nothing: the AppDomain is going down soon anyways.
             // Otherwise, wait until the call to CancelMibChangeNotify2 is done before giving it up.
@@ -149,14 +165,18 @@ namespace System.Net.NetworkInformation
 
 #if DEBUG
                 bool successfullyRemoved = pendingNotifications.Remove(this);
-                GlobalLog.Assert(successfullyRemoved, 
-                    "RunCallback for a TeredoHelper which is not in pendingNotifications!");
+                GlobalLog.Assert(
+                    successfullyRemoved,
+                    "RunCallback for a TeredoHelper which is not in pendingNotifications!"
+                );
 #else
                 pendingNotifications.Remove(this);
 #endif
 
-                GlobalLog.Assert(cancelHandle != null && !cancelHandle.IsInvalid,
-                    "Invalid cancelHandle in RunCallback");
+                GlobalLog.Assert(
+                    cancelHandle != null && !cancelHandle.IsInvalid,
+                    "Invalid cancelHandle in RunCallback"
+                );
 
                 cancelHandle.Dispose();
             }
@@ -175,7 +195,7 @@ namespace System.Net.NetworkInformation
         {
             UnsafeNetInfoNativeMethods.FreeMibTable(table);
 
-            // Lock the TeredoHelper instance to ensure that only the first call to OnStabilized will get to call 
+            // Lock the TeredoHelper instance to ensure that only the first call to OnStabilized will get to call
             // RunCallback.  This is the only place that TeredoHelpers get locked, as individual instances are not
             // exposed to higher layers, so there's no chance for deadlock.
             if (!runCallbackCalled)

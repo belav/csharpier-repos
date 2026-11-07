@@ -12,11 +12,14 @@ namespace System.Activities.DurableInstancing
 
     sealed class DeleteWorkflowOwnerAsyncResult : WorkflowOwnerAsyncResult
     {
-        static string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[DeleteLockOwner]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[DeleteLockOwner]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
         long surrogateLockOwnerId;
 
-        public DeleteWorkflowOwnerAsyncResult
-            (
+        public DeleteWorkflowOwnerAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -25,16 +28,22 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
-        {
-        }
+        )
+            : base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
+        { }
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
             base.GenerateSqlCommand(sqlCommand);
             this.surrogateLockOwnerId = base.StoreLock.SurrogateLockOwnerId;
-            sqlCommand.Parameters.Add(new SqlParameter { ParameterName = "@surrogateLockOwnerId", SqlDbType = SqlDbType.BigInt, Value = this.surrogateLockOwnerId });
+            sqlCommand.Parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@surrogateLockOwnerId",
+                    SqlDbType = SqlDbType.BigInt,
+                    Value = this.surrogateLockOwnerId,
+                }
+            );
         }
 
         protected override string GetSqlCommandText()
@@ -51,7 +60,10 @@ namespace System.Activities.DurableInstancing
         {
             Exception exception = null;
 
-            exception = StoreUtilities.CheckRemainingResultSetForErrors(base.InstancePersistenceCommand.Name, reader);
+            exception = StoreUtilities.CheckRemainingResultSetForErrors(
+                base.InstancePersistenceCommand.Name,
+                reader
+            );
 
             if (exception == null)
             {

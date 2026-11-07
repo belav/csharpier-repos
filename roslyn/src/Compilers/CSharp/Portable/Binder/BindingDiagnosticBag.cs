@@ -14,21 +14,57 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed class BindingDiagnosticBag : BindingDiagnosticBag<AssemblySymbol>
     {
-        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithBoth = new ObjectPool<BindingDiagnosticBag>(() => new BindingDiagnosticBag(s_poolWithBoth!, new DiagnosticBag(), new HashSet<AssemblySymbol>()));
-        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithDiagnosticsOnly = new ObjectPool<BindingDiagnosticBag>(() => new BindingDiagnosticBag(s_poolWithDiagnosticsOnly!, new DiagnosticBag(), dependenciesBag: null));
-        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithDependenciesOnly = new ObjectPool<BindingDiagnosticBag>(() => new BindingDiagnosticBag(s_poolWithDependenciesOnly!, diagnosticBag: null, new HashSet<AssemblySymbol>()));
-        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithConcurrent = new ObjectPool<BindingDiagnosticBag>(() => new BindingDiagnosticBag(s_poolWithConcurrent!, new DiagnosticBag(), new Roslyn.Utilities.ConcurrentSet<AssemblySymbol>()));
+        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithBoth =
+            new ObjectPool<BindingDiagnosticBag>(() =>
+                new BindingDiagnosticBag(
+                    s_poolWithBoth!,
+                    new DiagnosticBag(),
+                    new HashSet<AssemblySymbol>()
+                )
+            );
+        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithDiagnosticsOnly =
+            new ObjectPool<BindingDiagnosticBag>(() =>
+                new BindingDiagnosticBag(
+                    s_poolWithDiagnosticsOnly!,
+                    new DiagnosticBag(),
+                    dependenciesBag: null
+                )
+            );
+        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithDependenciesOnly =
+            new ObjectPool<BindingDiagnosticBag>(() =>
+                new BindingDiagnosticBag(
+                    s_poolWithDependenciesOnly!,
+                    diagnosticBag: null,
+                    new HashSet<AssemblySymbol>()
+                )
+            );
+        private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithConcurrent =
+            new ObjectPool<BindingDiagnosticBag>(() =>
+                new BindingDiagnosticBag(
+                    s_poolWithConcurrent!,
+                    new DiagnosticBag(),
+                    new Roslyn.Utilities.ConcurrentSet<AssemblySymbol>()
+                )
+            );
 
-        public static readonly BindingDiagnosticBag Discarded = new BindingDiagnosticBag(null, null);
+        public static readonly BindingDiagnosticBag Discarded = new BindingDiagnosticBag(
+            null,
+            null
+        );
 
         private readonly ObjectPool<BindingDiagnosticBag>? _pool;
 
-        private BindingDiagnosticBag(DiagnosticBag? diagnosticBag, ICollection<AssemblySymbol>? dependenciesBag)
-            : base(diagnosticBag, dependenciesBag)
-        {
-        }
+        private BindingDiagnosticBag(
+            DiagnosticBag? diagnosticBag,
+            ICollection<AssemblySymbol>? dependenciesBag
+        )
+            : base(diagnosticBag, dependenciesBag) { }
 
-        private BindingDiagnosticBag(ObjectPool<BindingDiagnosticBag> pool, DiagnosticBag? diagnosticBag, ICollection<AssemblySymbol>? dependenciesBag)
+        private BindingDiagnosticBag(
+            ObjectPool<BindingDiagnosticBag> pool,
+            DiagnosticBag? diagnosticBag,
+            ICollection<AssemblySymbol>? dependenciesBag
+        )
             : base(diagnosticBag, dependenciesBag)
         {
             _pool = pool;
@@ -39,7 +75,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return s_poolWithBoth.Allocate();
         }
 
-        internal static BindingDiagnosticBag GetInstance(bool withDiagnostics, bool withDependencies)
+        internal static BindingDiagnosticBag GetInstance(
+            bool withDiagnostics,
+            bool withDependencies
+        )
         {
             if (withDiagnostics)
             {
@@ -104,10 +143,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ReportUseSite(symbol, static token => token.GetLocation(), token);
         }
 
-        internal bool ReportUseSite(Symbol? symbol, Location location)
-            => ReportUseSite(symbol, static location => location, location);
+        internal bool ReportUseSite(Symbol? symbol, Location location) =>
+            ReportUseSite(symbol, static location => location, location);
 
-        internal bool ReportUseSite<TData>(Symbol? symbol, Func<TData, Location> getLocation, TData data)
+        internal bool ReportUseSite<TData>(
+            Symbol? symbol,
+            Func<TData, Location> getLocation,
+            TData data
+        )
         {
             if (symbol is object)
             {
@@ -148,7 +191,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected override bool ReportUseSiteDiagnostic(DiagnosticInfo diagnosticInfo, DiagnosticBag diagnosticBag, Location location)
+        protected override bool ReportUseSiteDiagnostic(
+            DiagnosticInfo diagnosticInfo,
+            DiagnosticBag diagnosticBag,
+            Location location
+        )
         {
             return Symbol.ReportUseSiteDiagnostic(diagnosticInfo, diagnosticBag, location);
         }
@@ -160,11 +207,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return info;
         }
 
-        internal CSDiagnosticInfo Add(ErrorCode code, SyntaxNode syntax, params object[] args)
-            => Add(code, syntax.Location, args);
+        internal CSDiagnosticInfo Add(ErrorCode code, SyntaxNode syntax, params object[] args) =>
+            Add(code, syntax.Location, args);
 
-        internal CSDiagnosticInfo Add(ErrorCode code, SyntaxToken syntax, params object[] args)
-            => Add(code, syntax.GetLocation()!, args);
+        internal CSDiagnosticInfo Add(ErrorCode code, SyntaxToken syntax, params object[] args) =>
+            Add(code, syntax.GetLocation()!, args);
 
         internal CSDiagnosticInfo Add(ErrorCode code, Location location, params object[] args)
         {
@@ -173,7 +220,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return info;
         }
 
-        internal CSDiagnosticInfo Add(ErrorCode code, Location location, ImmutableArray<Symbol> symbols, params object[] args)
+        internal CSDiagnosticInfo Add(
+            ErrorCode code,
+            Location location,
+            ImmutableArray<Symbol> symbols,
+            params object[] args
+        )
         {
             var info = new CSDiagnosticInfo(code, args, symbols, ImmutableArray<Location>.Empty);
             Add(info, location);

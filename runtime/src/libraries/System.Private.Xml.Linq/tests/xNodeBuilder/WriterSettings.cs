@@ -21,16 +21,51 @@ namespace CoreXml.Test.XLinq
                     XDocument d = new XDocument();
                     XmlWriter w = d.CreateWriter();
 
-                    TestLog.Compare(w.Settings.Encoding is UTF8Encoding, "Incorrect default value of Encoding");
-                    TestLog.Equals(w.Settings.OmitXmlDeclaration, false, "Incorrect default value of OmitXmlDeclaration");
-                    TestLog.Equals(w.Settings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value of NewLineHandling");
-                    TestLog.Equals(w.Settings.NewLineChars, Environment.NewLine, "Incorrect default value of NewLineChars");
+                    TestLog.Compare(
+                        w.Settings.Encoding is UTF8Encoding,
+                        "Incorrect default value of Encoding"
+                    );
+                    TestLog.Equals(
+                        w.Settings.OmitXmlDeclaration,
+                        false,
+                        "Incorrect default value of OmitXmlDeclaration"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Incorrect default value of NewLineHandling"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineChars,
+                        Environment.NewLine,
+                        "Incorrect default value of NewLineChars"
+                    );
                     TestLog.Equals(w.Settings.Indent, false, "Incorrect default value of Indent");
-                    TestLog.Equals(w.Settings.IndentChars, "  ", "Incorrect default value of IndentChars");
-                    TestLog.Equals(w.Settings.NewLineOnAttributes, false, "Incorrect default value of NewLineOnAttributes");
-                    TestLog.Equals(w.Settings.CloseOutput, false, "Incorrect default value of CloseOutput");
-                    TestLog.Equals(w.Settings.CheckCharacters, true, "Incorrect default value of CheckCharacters");
-                    TestLog.Equals(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Incorrect default value of ConformanceLevel");
+                    TestLog.Equals(
+                        w.Settings.IndentChars,
+                        "  ",
+                        "Incorrect default value of IndentChars"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineOnAttributes,
+                        false,
+                        "Incorrect default value of NewLineOnAttributes"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CloseOutput,
+                        false,
+                        "Incorrect default value of CloseOutput"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CheckCharacters,
+                        true,
+                        "Incorrect default value of CheckCharacters"
+                    );
+                    TestLog.Equals(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Incorrect default value of ConformanceLevel"
+                    );
                     w.Dispose();
                 }
 
@@ -40,16 +75,51 @@ namespace CoreXml.Test.XLinq
                     XElement d = new XElement("a");
                     XmlWriter w = d.CreateWriter();
 
-                    TestLog.Compare(w.Settings.Encoding is UTF8Encoding, "Incorrect default value of Encoding");
-                    TestLog.Equals(w.Settings.OmitXmlDeclaration, false, "Incorrect default value of OmitXmlDeclaration");
-                    TestLog.Equals(w.Settings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value of NewLineHandling");
-                    TestLog.Equals(w.Settings.NewLineChars, Environment.NewLine, "Incorrect default value of NewLineChars");
+                    TestLog.Compare(
+                        w.Settings.Encoding is UTF8Encoding,
+                        "Incorrect default value of Encoding"
+                    );
+                    TestLog.Equals(
+                        w.Settings.OmitXmlDeclaration,
+                        false,
+                        "Incorrect default value of OmitXmlDeclaration"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Incorrect default value of NewLineHandling"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineChars,
+                        Environment.NewLine,
+                        "Incorrect default value of NewLineChars"
+                    );
                     TestLog.Equals(w.Settings.Indent, false, "Incorrect default value of Indent");
-                    TestLog.Equals(w.Settings.IndentChars, "  ", "Incorrect default value of IndentChars");
-                    TestLog.Equals(w.Settings.NewLineOnAttributes, false, "Incorrect default value of NewLineOnAttributes");
-                    TestLog.Equals(w.Settings.CloseOutput, false, "Incorrect default value of CloseOutput");
-                    TestLog.Equals(w.Settings.CheckCharacters, true, "Incorrect default value of CheckCharacters");
-                    TestLog.Equals(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Incorrect default value of ConformanceLevel");
+                    TestLog.Equals(
+                        w.Settings.IndentChars,
+                        "  ",
+                        "Incorrect default value of IndentChars"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineOnAttributes,
+                        false,
+                        "Incorrect default value of NewLineOnAttributes"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CloseOutput,
+                        false,
+                        "Incorrect default value of CloseOutput"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CheckCharacters,
+                        true,
+                        "Incorrect default value of CheckCharacters"
+                    );
+                    TestLog.Equals(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Incorrect default value of ConformanceLevel"
+                    );
                     w.Dispose();
                 }
 
@@ -59,16 +129,51 @@ namespace CoreXml.Test.XLinq
                     XDocument d = new XDocument();
                     XmlWriter w = d.CreateWriter();
                     w.Dispose();
-                    TestLog.Compare(w.Settings.Encoding is UTF8Encoding, "Incorrect default value of Encoding");
-                    TestLog.Equals(w.Settings.OmitXmlDeclaration, false, "Incorrect default value of OmitXmlDeclaration");
-                    TestLog.Equals(w.Settings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value of NewLineHandling");
-                    TestLog.Equals(w.Settings.NewLineChars, Environment.NewLine, "Incorrect default value of NewLineChars");
+                    TestLog.Compare(
+                        w.Settings.Encoding is UTF8Encoding,
+                        "Incorrect default value of Encoding"
+                    );
+                    TestLog.Equals(
+                        w.Settings.OmitXmlDeclaration,
+                        false,
+                        "Incorrect default value of OmitXmlDeclaration"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Incorrect default value of NewLineHandling"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineChars,
+                        Environment.NewLine,
+                        "Incorrect default value of NewLineChars"
+                    );
                     TestLog.Equals(w.Settings.Indent, false, "Incorrect default value of Indent");
-                    TestLog.Equals(w.Settings.IndentChars, "  ", "Incorrect default value of IndentChars");
-                    TestLog.Equals(w.Settings.NewLineOnAttributes, false, "Incorrect default value of NewLineOnAttributes");
-                    TestLog.Equals(w.Settings.CloseOutput, false, "Incorrect default value of CloseOutput");
-                    TestLog.Equals(w.Settings.CheckCharacters, true, "Incorrect default value of CheckCharacters");
-                    TestLog.Equals(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Incorrect default value of ConformanceLevel");
+                    TestLog.Equals(
+                        w.Settings.IndentChars,
+                        "  ",
+                        "Incorrect default value of IndentChars"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineOnAttributes,
+                        false,
+                        "Incorrect default value of NewLineOnAttributes"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CloseOutput,
+                        false,
+                        "Incorrect default value of CloseOutput"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CheckCharacters,
+                        true,
+                        "Incorrect default value of CheckCharacters"
+                    );
+                    TestLog.Equals(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Incorrect default value of ConformanceLevel"
+                    );
                 }
 
                 //[Variation(Desc = "XElement: Settings after Close()", Priority = 1)]
@@ -77,16 +182,51 @@ namespace CoreXml.Test.XLinq
                     XElement d = new XElement("a");
                     XmlWriter w = d.CreateWriter();
                     w.Dispose();
-                    TestLog.Compare(w.Settings.Encoding is UTF8Encoding, "Incorrect default value of Encoding");
-                    TestLog.Equals(w.Settings.OmitXmlDeclaration, false, "Incorrect default value of OmitXmlDeclaration");
-                    TestLog.Equals(w.Settings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value of NewLineHandling");
-                    TestLog.Equals(w.Settings.NewLineChars, Environment.NewLine, "Incorrect default value of NewLineChars");
+                    TestLog.Compare(
+                        w.Settings.Encoding is UTF8Encoding,
+                        "Incorrect default value of Encoding"
+                    );
+                    TestLog.Equals(
+                        w.Settings.OmitXmlDeclaration,
+                        false,
+                        "Incorrect default value of OmitXmlDeclaration"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Incorrect default value of NewLineHandling"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineChars,
+                        Environment.NewLine,
+                        "Incorrect default value of NewLineChars"
+                    );
                     TestLog.Equals(w.Settings.Indent, false, "Incorrect default value of Indent");
-                    TestLog.Equals(w.Settings.IndentChars, "  ", "Incorrect default value of IndentChars");
-                    TestLog.Equals(w.Settings.NewLineOnAttributes, false, "Incorrect default value of NewLineOnAttributes");
-                    TestLog.Equals(w.Settings.CloseOutput, false, "Incorrect default value of CloseOutput");
-                    TestLog.Equals(w.Settings.CheckCharacters, true, "Incorrect default value of CheckCharacters");
-                    TestLog.Equals(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Incorrect default value of ConformanceLevel");
+                    TestLog.Equals(
+                        w.Settings.IndentChars,
+                        "  ",
+                        "Incorrect default value of IndentChars"
+                    );
+                    TestLog.Equals(
+                        w.Settings.NewLineOnAttributes,
+                        false,
+                        "Incorrect default value of NewLineOnAttributes"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CloseOutput,
+                        false,
+                        "Incorrect default value of CloseOutput"
+                    );
+                    TestLog.Equals(
+                        w.Settings.CheckCharacters,
+                        true,
+                        "Incorrect default value of CheckCharacters"
+                    );
+                    TestLog.Equals(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Incorrect default value of ConformanceLevel"
+                    );
                 }
             }
         }

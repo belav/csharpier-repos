@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
-using System.Text;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Xunit;
 
 struct vc
@@ -13,7 +12,13 @@ struct vc
     public int x;
     public int y;
     public int z;
-    public vc (int xx, int yy, int zz) { x = xx; y = yy; z = zz; }
+
+    public vc(int xx, int yy, int zz)
+    {
+        x = xx;
+        y = yy;
+        z = zz;
+    }
 }
 
 public class child
@@ -31,11 +36,9 @@ public class child
             return Fail;
     }
 
-    [MethodImplAttribute(MethodImplOptions.NoInlining)] 
+    [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int mul1(int a, int b)
     {
-        return a*b;
+        return a * b;
     }
-    
 }
-

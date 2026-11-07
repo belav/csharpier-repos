@@ -1,25 +1,15 @@
 class B : B2.IB
 {
-	public interface IA
-	{
-	}
-	
-	public static void Main ()
-	{
-	}
+    public interface IA { }
+
+    public static void Main() { }
 }
 
 class B2 : A
 {
-	public interface IB
-	{
-	}
+    public interface IB { }
 }
 
-class A : G<int>
-{
-}
+class A : G<int> { }
 
-class G<T>
-{
-}
+class G<T> { }

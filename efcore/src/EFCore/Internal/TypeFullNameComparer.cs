@@ -11,9 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 /// </summary>
 public sealed class TypeFullNameComparer : IComparer<Type>, IEqualityComparer<Type>
 {
-    private TypeFullNameComparer()
-    {
-    }
+    private TypeFullNameComparer() { }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.
@@ -52,14 +50,12 @@ public sealed class TypeFullNameComparer : IComparer<Type>, IEqualityComparer<Ty
     /// <param name="x">The first object to compare.</param>
     /// <param name="y">The second object to compare.</param>
     /// <returns><see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />.</returns>
-    public bool Equals(Type? x, Type? y)
-        => Compare(x, y) == 0;
+    public bool Equals(Type? x, Type? y) => Compare(x, y) == 0;
 
     /// <summary>
     ///     Returns a hash code for the specified object.
     /// </summary>
     /// <param name="obj">The for which a hash code is to be returned.</param>
     /// <returns>A hash code for the specified object.</returns>
-    public int GetHashCode(Type obj)
-        => obj.Name.GetHashCode();
+    public int GetHashCode(Type obj) => obj.Name.GetHashCode();
 }

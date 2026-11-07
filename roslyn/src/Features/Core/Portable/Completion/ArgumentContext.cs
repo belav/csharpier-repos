@@ -17,14 +17,17 @@ namespace Microsoft.CodeAnalysis.Completion
         int position,
         IParameterSymbol parameter,
         string? previousValue,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        internal ArgumentProvider Provider { get; } = provider ?? throw new ArgumentNullException(nameof(provider));
+        internal ArgumentProvider Provider { get; } =
+            provider ?? throw new ArgumentNullException(nameof(provider));
 
         /// <summary>
         /// Gets the semantic model where argument completion is requested.
         /// </summary>
-        public SemanticModel SemanticModel { get; } = semanticModel ?? throw new ArgumentNullException(nameof(semanticModel));
+        public SemanticModel SemanticModel { get; } =
+            semanticModel ?? throw new ArgumentNullException(nameof(semanticModel));
 
         /// <summary>
         /// Gets the position within <see cref="SemanticModel"/> where argument completion is requested.
@@ -34,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Gets the symbol for the parameter for which an argument value is requested.
         /// </summary>
-        public IParameterSymbol Parameter { get; } = parameter ?? throw new ArgumentNullException(nameof(parameter));
+        public IParameterSymbol Parameter { get; } =
+            parameter ?? throw new ArgumentNullException(nameof(parameter));
 
         /// <summary>
         /// Gets the previously-provided argument value for this parameter.

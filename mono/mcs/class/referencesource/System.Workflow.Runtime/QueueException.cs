@@ -13,23 +13,18 @@ namespace System.Workflow.Runtime
         [NonSerialized]
         MessageQueueErrorCode errorCode;
 
-        public QueueException(string message, MessageQueueErrorCode errorCode) : base(message)
+        public QueueException(string message, MessageQueueErrorCode errorCode)
+            : base(message)
         {
             this.errorCode = errorCode;
         }
 
         protected QueueException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-
-        }
+            : base(info, context) { }
 
         public MessageQueueErrorCode ErrorCode
         {
-            get
-            {
-                return this.errorCode;
-            }
+            get { return this.errorCode; }
         }
     }
 }

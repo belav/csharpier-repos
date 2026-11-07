@@ -10,13 +10,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal sealed class DirectiveInfo<TDirectiveTriviaSyntax>(
         Dictionary<TDirectiveTriviaSyntax, TDirectiveTriviaSyntax?> directiveMap,
-        Dictionary<TDirectiveTriviaSyntax, ImmutableArray<TDirectiveTriviaSyntax>> conditionalMap)
+        Dictionary<TDirectiveTriviaSyntax, ImmutableArray<TDirectiveTriviaSyntax>> conditionalMap
+    )
         where TDirectiveTriviaSyntax : SyntaxNode
     {
         // Maps a directive to its pair
-        public Dictionary<TDirectiveTriviaSyntax, TDirectiveTriviaSyntax?> DirectiveMap { get; } = directiveMap;
+        public Dictionary<TDirectiveTriviaSyntax, TDirectiveTriviaSyntax?> DirectiveMap { get; } =
+            directiveMap;
 
         // Maps a #If/#elif/#else/#endIf directive to its list of matching #If/#elif/#else/#endIf directives
-        public Dictionary<TDirectiveTriviaSyntax, ImmutableArray<TDirectiveTriviaSyntax>> ConditionalMap { get; } = conditionalMap;
+        public Dictionary<
+            TDirectiveTriviaSyntax,
+            ImmutableArray<TDirectiveTriviaSyntax>
+        > ConditionalMap { get; } = conditionalMap;
     }
 }

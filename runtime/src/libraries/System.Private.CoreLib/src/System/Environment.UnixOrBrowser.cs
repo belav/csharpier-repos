@@ -24,7 +24,8 @@ namespace System
         {
             var result = new ValueStringBuilder(stackalloc char[128]);
 
-            int lastPos = 0, pos;
+            int lastPos = 0,
+                pos;
             while (lastPos < name.Length && (pos = name.IndexOf('%', lastPos + 1)) >= 0)
             {
                 if (name[lastPos] == '%')
@@ -50,9 +51,11 @@ namespace System
 
         internal const string NewLineConst = "\n";
 
-        public static string SystemDirectory => GetFolderPathCore(SpecialFolder.System, SpecialFolderOption.None);
+        public static string SystemDirectory =>
+            GetFolderPathCore(SpecialFolder.System, SpecialFolderOption.None);
 
-        private static int GetSystemPageSize() => CheckedSysConf(Interop.Sys.SysConfName._SC_PAGESIZE);
+        private static int GetSystemPageSize() =>
+            CheckedSysConf(Interop.Sys.SysConfName._SC_PAGESIZE);
 
         public static string UserDomainName => MachineName;
 
@@ -63,9 +66,9 @@ namespace System
             if (result == -1)
             {
                 Interop.ErrorInfo errno = Interop.Sys.GetLastErrorInfo();
-                throw errno.Error == Interop.Error.EINVAL ?
-                    new ArgumentOutOfRangeException(nameof(name), name, errno.GetErrorMessage()) :
-                    Interop.GetIOException(errno);
+                throw errno.Error == Interop.Error.EINVAL
+                    ? new ArgumentOutOfRangeException(nameof(name), name, errno.GetErrorMessage())
+                    : Interop.GetIOException(errno);
             }
             return (int)result;
         }

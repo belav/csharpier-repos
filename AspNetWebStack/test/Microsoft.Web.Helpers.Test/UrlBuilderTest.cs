@@ -66,7 +66,12 @@ namespace Microsoft.Web.Helpers.Test
             var pagePath = "http://www.test.com/page-path.vbhtml?param=value&baz=biz";
 
             // Act
-            var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, new { param2 = "param2val" });
+            var builder = new UrlBuilder(
+                GetContext(),
+                _virtualPathUtility,
+                pagePath,
+                new { param2 = "param2val" }
+            );
 
             // Assert
             Assert.Equal("http://www.test.com/page-path.vbhtml", builder.Path);
@@ -117,7 +122,12 @@ namespace Microsoft.Web.Helpers.Test
             var pagePath = "~/page";
 
             // Act
-            var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, new { Foo = "bar", baz = "qux" });
+            var builder = new UrlBuilder(
+                GetContext(),
+                _virtualPathUtility,
+                pagePath,
+                new { Foo = "bar", baz = "qux" }
+            );
 
             // Assert
             Assert.Equal("page", builder.Path);
@@ -145,7 +155,12 @@ namespace Microsoft.Web.Helpers.Test
             var pagePath = "~/dir/page?someparam=value";
 
             // Act
-            var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, new { someotherparam = "value2" });
+            var builder = new UrlBuilder(
+                GetContext(),
+                _virtualPathUtility,
+                pagePath,
+                new { someotherparam = "value2" }
+            );
 
             // Assert
             Assert.Equal("dir/page", builder.Path);
@@ -261,10 +276,18 @@ namespace Microsoft.Web.Helpers.Test
             var pagePath = "~/dir/page/?someparam=value";
 
             // Act
-            var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, new { Λ = "λ" });
+            var builder = new UrlBuilder(
+                GetContext(),
+                _virtualPathUtility,
+                pagePath,
+                new { Λ = "λ" }
+            );
             builder.AddParam(new { π = "is not a lie" }).AddParam("Π", "maybe a lie");
             // Assert
-            Assert.Equal("?someparam=value&%ce%9b=%ce%bb&%cf%80=is+not+a+lie&%ce%a0=maybe+a+lie", builder.QueryString);
+            Assert.Equal(
+                "?someparam=value&%ce%9b=%ce%bb&%cf%80=is+not+a+lie&%ce%a0=maybe+a+lie",
+                builder.QueryString
+            );
         }
 
         [Fact]
@@ -303,7 +326,11 @@ namespace Microsoft.Web.Helpers.Test
 
             // Act
             var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, null);
-            builder.AddParam("", "bar").AddParam(new { baz = "", biz = "quark" }).AddParam("qux", null).AddParam(null, "somevalue");
+            builder
+                .AddParam("", "bar")
+                .AddParam(new { baz = "", biz = "quark" })
+                .AddParam("qux", null)
+                .AddParam(null, "somevalue");
 
             // Assert
             Assert.Equal("?baz=&biz=quark&qux=", builder.QueryString);
@@ -331,7 +358,10 @@ namespace Microsoft.Web.Helpers.Test
             try
             {
                 // Act
-                CreateHttpContext("default.aspx", "http://localhost/WebSite1/subfolder1/default.aspx");
+                CreateHttpContext(
+                    "default.aspx",
+                    "http://localhost/WebSite1/subfolder1/default.aspx"
+                );
                 CreateHttpRuntime("/WebSite1/");
                 var builder = new UrlBuilder(pagePath, null);
 
@@ -376,16 +406,25 @@ namespace Microsoft.Web.Helpers.Test
         internal static void CreateHttpRuntime(string appVPath)
         {
             var runtime = new HttpRuntime();
-            var appDomainAppVPathField = typeof(HttpRuntime).GetField("_appDomainAppVPath", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+            var appDomainAppVPathField = typeof(HttpRuntime).GetField(
+                "_appDomainAppVPath",
+                BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
+            );
             appDomainAppVPathField.SetValue(runtime, CreateVirtualPath(appVPath));
             GetTheRuntime().SetValue(null, runtime);
-            var appDomainIdField = typeof(HttpRuntime).GetField("_appDomainId", BindingFlags.NonPublic | BindingFlags.Instance);
+            var appDomainIdField = typeof(HttpRuntime).GetField(
+                "_appDomainId",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             appDomainIdField.SetValue(runtime, "test");
         }
 
         internal static FieldInfo GetTheRuntime()
         {
-            return typeof(HttpRuntime).GetField("_theRuntime", BindingFlags.NonPublic | BindingFlags.Static);
+            return typeof(HttpRuntime).GetField(
+                "_theRuntime",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
         }
 
         internal static void RestoreHttpRuntime()
@@ -397,7 +436,10 @@ namespace Microsoft.Web.Helpers.Test
         internal static void CreateHttpContext(string filename, string url)
         {
             var request = new HttpRequest(filename, url, null);
-            var httpContext = new HttpContext(request, new HttpResponse(new StringWriter(new StringBuilder())));
+            var httpContext = new HttpContext(
+                request,
+                new HttpResponse(new StringWriter(new StringBuilder()))
+            );
             HttpContext.Current = httpContext;
         }
 
@@ -409,7 +451,10 @@ namespace Microsoft.Web.Helpers.Test
         internal static object CreateVirtualPath(string path)
         {
             var vPath = typeof(Page).Assembly.GetType("System.Web.VirtualPath");
-            var method = vPath.GetMethod("CreateNonRelativeTrailingSlash", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var method = vPath.GetMethod(
+                "CreateNonRelativeTrailingSlash",
+                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+            );
             return method.Invoke(null, new object[] { path });
         }
     }

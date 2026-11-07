@@ -109,9 +109,8 @@ public class ReadOnlyTagHelperAttributeListTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            "index",
-            () => attributes[index]
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+            attributes[index]
         );
     }
 

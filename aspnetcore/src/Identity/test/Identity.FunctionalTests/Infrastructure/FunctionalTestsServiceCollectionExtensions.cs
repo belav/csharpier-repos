@@ -32,14 +32,10 @@ public static class FunctionalTestsServiceCollectionExtensions
         }
 
         services.AddScoped(p =>
-            DbContextOptionsFactory<TContext>(
-                p,
-                (sp, options) =>
-                    options
-                        .ConfigureWarnings(b =>
-                            b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
-                        .UseSqlite(connection)
+            DbContextOptionsFactory<TContext>(p, (sp, options) =>
+                options
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+                    .UseSqlite(connection)
             )
         );
 
@@ -78,16 +74,12 @@ public static class FunctionalTestsServiceCollectionExtensions
         this IServiceCollection services,
         Action<ClaimsPrincipal> captureUser,
         string schemeName
-    ) =>
-        services.Configure<CookieAuthenticationOptions>(
-            schemeName,
-            o =>
-                o.Events.OnSigningIn = context =>
+    ) => services.Configure<CookieAuthenticationOptions>(schemeName, o => o.Events.OnSigningIn =
+                context =>
                 {
                     captureUser(context.Principal);
                     return Task.CompletedTask;
-                }
-        );
+                });
 
     public static IServiceCollection SetupEmailRequired(this IServiceCollection services) =>
         services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedEmail = true);

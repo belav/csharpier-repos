@@ -15,9 +15,7 @@ namespace System.ServiceModel.Configuration
     {
         Guid id = Guid.NewGuid();
 
-        public DelegatingHandlerElement()
-        {
-        }
+        public DelegatingHandlerElement() { }
 
         internal DelegatingHandlerElement(Type handlerType)
         {
@@ -25,15 +23,14 @@ namespace System.ServiceModel.Configuration
             this.Type = handlerType.AssemblyQualifiedName;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Type, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Type,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string Type
         {
-            get
-            {
-                return (string)base[ConfigurationStrings.Type];
-            }
-
+            get { return (string)base[ConfigurationStrings.Type]; }
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -45,12 +42,9 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        internal Guid Id 
+        internal Guid Id
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
         }
     }
 }

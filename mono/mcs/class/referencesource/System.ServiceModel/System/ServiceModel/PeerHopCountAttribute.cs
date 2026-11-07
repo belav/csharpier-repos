@@ -4,15 +4,17 @@
 
 namespace System.ServiceModel
 {
-
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Net.Security;
-
     using System.ServiceModel.Channels;
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class PeerHopCountAttribute : MessageHeaderAttribute
     {
         public PeerHopCountAttribute()
@@ -23,6 +25,7 @@ namespace System.ServiceModel
             base.ProtectionLevel = ProtectionLevel.None;
             base.MustUnderstand = false;
         }
+
         public new bool MustUnderstand
         {
             get { return base.MustUnderstand; }

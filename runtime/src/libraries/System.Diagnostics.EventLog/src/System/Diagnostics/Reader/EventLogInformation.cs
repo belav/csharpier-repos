@@ -13,18 +13,62 @@ namespace System.Diagnostics.Eventing.Reader
     {
         internal EventLogInformation(EventLogSession session, string channelName, PathType pathType)
         {
-            EventLogHandle logHandle = NativeWrapper.EvtOpenLog(session.Handle, channelName, pathType);
+            EventLogHandle logHandle = NativeWrapper.EvtOpenLog(
+                session.Handle,
+                channelName,
+                pathType
+            );
 
             using (logHandle)
             {
-                CreationTime = (DateTime?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogCreationTime);
-                LastAccessTime = (DateTime?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastAccessTime);
-                LastWriteTime = (DateTime?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastWriteTime);
-                FileSize = (long?)((ulong?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFileSize));
-                Attributes = (int?)((uint?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogAttributes));
-                RecordCount = (long?)((ulong?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogNumberOfLogRecords));
-                OldestRecordNumber = (long?)((ulong?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogOldestRecordNumber));
-                IsLogFull = (bool?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFull);
+                CreationTime = (DateTime?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogCreationTime
+                    );
+                LastAccessTime = (DateTime?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastAccessTime
+                    );
+                LastWriteTime = (DateTime?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastWriteTime
+                    );
+                FileSize = (long?)(
+                    (ulong?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogFileSize
+                        )
+                );
+                Attributes = (int?)(
+                    (uint?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogAttributes
+                        )
+                );
+                RecordCount = (long?)(
+                    (ulong?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogNumberOfLogRecords
+                        )
+                );
+                OldestRecordNumber = (long?)(
+                    (ulong?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogOldestRecordNumber
+                        )
+                );
+                IsLogFull = (bool?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogFull
+                    );
             }
         }
 

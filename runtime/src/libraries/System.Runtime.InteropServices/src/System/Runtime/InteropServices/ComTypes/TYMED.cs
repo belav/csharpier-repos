@@ -16,6 +16,6 @@ namespace System.Runtime.InteropServices.ComTypes
         TYMED_GDI = 16,
         TYMED_MFPICT = 32,
         TYMED_ENHMF = 64,
-        TYMED_NULL = 0
+        TYMED_NULL = 0,
     }
 }

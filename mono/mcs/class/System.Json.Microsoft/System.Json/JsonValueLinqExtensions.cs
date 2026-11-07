@@ -7,9 +7,13 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Json
 {
     /// <summary>
-    /// This class extends the funcionality of the <see cref="JsonValue"/> type for better Linq support . 
+    /// This class extends the funcionality of the <see cref="JsonValue"/> type for better Linq support .
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Linq is a technical name.")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        Justification = "Linq is a technical name."
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class JsonValueLinqExtensions
     {
@@ -28,8 +32,14 @@ namespace System.Json
         /// </summary>
         /// <param name="items">The enumerable instance.</param>
         /// <returns>A <see cref="JsonValue"/> created from the specified items.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "JsonValue implements the nested type in param.")]
-        public static JsonObject ToJsonObject(this IEnumerable<KeyValuePair<string, JsonValue>> items)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "JsonValue implements the nested type in param."
+        )]
+        public static JsonObject ToJsonObject(
+            this IEnumerable<KeyValuePair<string, JsonValue>> items
+        )
         {
             return new JsonObject(items);
         }

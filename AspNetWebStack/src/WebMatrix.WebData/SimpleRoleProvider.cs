@@ -18,9 +18,7 @@ namespace WebMatrix.WebData
         private SimpleMembershipProviderCasingBehavior _casingBehavior;
 
         public SimpleRoleProvider()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public SimpleRoleProvider(RoleProvider previousProvider)
         {
@@ -33,7 +31,9 @@ namespace WebMatrix.WebData
             {
                 if (_previousProvider == null)
                 {
-                    throw new InvalidOperationException(WebDataResources.Security_InitializeMustBeCalledFirst);
+                    throw new InvalidOperationException(
+                        WebDataResources.Security_InitializeMustBeCalledFirst
+                    );
                 }
                 else
                 {
@@ -86,15 +86,19 @@ namespace WebMatrix.WebData
         /// </remarks>
         public SimpleMembershipProviderCasingBehavior CasingBehavior
         {
-            get
-            {
-                return _casingBehavior;
-            }
+            get { return _casingBehavior; }
             set
             {
-                if (value < SimpleMembershipProviderCasingBehavior.NormalizeCasing || value > SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation)
+                if (
+                    value < SimpleMembershipProviderCasingBehavior.NormalizeCasing
+                    || value > SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation
+                )
                 {
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(SimpleMembershipProviderCasingBehavior));
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(SimpleMembershipProviderCasingBehavior)
+                    );
                 }
 
                 _casingBehavior = value;
@@ -135,7 +139,9 @@ namespace WebMatrix.WebData
         {
             if (!InitializeCalled)
             {
-                throw new InvalidOperationException(WebDataResources.Security_InitializeMustBeCalledFirst);
+                throw new InvalidOperationException(
+                    WebDataResources.Security_InitializeMustBeCalledFirst
+                );
             }
         }
 
@@ -150,16 +156,30 @@ namespace WebMatrix.WebData
             {
                 if (!SimpleMembershipProvider.CheckTableExists(db, RoleTableName))
                 {
-                    db.Execute(@"CREATE TABLE " + RoleTableName + @" (
+                    db.Execute(
+                        @"CREATE TABLE "
+                            + RoleTableName
+                            + @" (
                         RoleId                                  int                 NOT NULL PRIMARY KEY IDENTITY,
-                        RoleName                                nvarchar(256)       NOT NULL UNIQUE)");
+                        RoleName                                nvarchar(256)       NOT NULL UNIQUE)"
+                    );
 
-                    db.Execute(@"CREATE TABLE " + UsersInRoleTableName + @" (
+                    db.Execute(
+                        @"CREATE TABLE "
+                            + UsersInRoleTableName
+                            + @" (
                         UserId                                  int                 NOT NULL,
                         RoleId                                  int                 NOT NULL,
                         PRIMARY KEY (UserId, RoleId),
-                        CONSTRAINT fk_UserId FOREIGN KEY (UserId) REFERENCES " + SafeUserTableName + "(" + SafeUserIdColumn + @"),
-                        CONSTRAINT fk_RoleId FOREIGN KEY (RoleId) REFERENCES " + RoleTableName + "(RoleId) )");
+                        CONSTRAINT fk_UserId FOREIGN KEY (UserId) REFERENCES "
+                            + SafeUserTableName
+                            + "("
+                            + SafeUserIdColumn
+                            + @"),
+                        CONSTRAINT fk_RoleId FOREIGN KEY (RoleId) REFERENCES "
+                            + RoleTableName
+                            + "(RoleId) )"
+                    );
                 }
             }
         }
@@ -169,10 +189,23 @@ namespace WebMatrix.WebData
             List<int> userIds = new List<int>(usernames.Length);
             foreach (string username in usernames)
             {
-                int id = SimpleMembershipProvider.GetUserId(db, SafeUserTableName, SafeUserNameColumn, SafeUserIdColumn, CasingBehavior, username);
+                int id = SimpleMembershipProvider.GetUserId(
+                    db,
+                    SafeUserTableName,
+                    SafeUserNameColumn,
+                    SafeUserIdColumn,
+                    CasingBehavior,
+                    username
+                );
                 if (id == -1)
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebDataResources.Security_NoUserFound, username));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebDataResources.Security_NoUserFound,
+                            username
+                        )
+                    );
                 }
                 userIds.Add(id);
             }
@@ -187,7 +220,13 @@ namespace WebMatrix.WebData
                 int id = FindRoleId(db, role);
                 if (id == -1)
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebDataResources.SimpleRoleProvider_NoRoleFound, role));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebDataResources.SimpleRoleProvider_NoRoleFound,
+                            role
+                        )
+                    );
                 }
                 roleIds.Add(id);
             }
@@ -217,11 +256,26 @@ namespace WebMatrix.WebData
                         {
                             if (IsUserInRole(usernames[uId], roleNames[rId]))
                             {
-                                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebDataResources.SimpleRoleProvder_UserAlreadyInRole, usernames[uId], roleNames[rId]));
+                                throw new InvalidOperationException(
+                                    String.Format(
+                                        CultureInfo.CurrentCulture,
+                                        WebDataResources.SimpleRoleProvder_UserAlreadyInRole,
+                                        usernames[uId],
+                                        roleNames[rId]
+                                    )
+                                );
                             }
 
                             // REVIEW: is there a way to batch up these inserts?
-                            int rows = db.Execute("INSERT INTO " + UsersInRoleTableName + " VALUES (" + userIds[uId] + "," + roleIds[rId] + "); ");
+                            int rows = db.Execute(
+                                "INSERT INTO "
+                                    + UsersInRoleTableName
+                                    + " VALUES ("
+                                    + userIds[uId]
+                                    + ","
+                                    + roleIds[rId]
+                                    + "); "
+                            );
                             if (rows != 1)
                             {
                                 throw new ProviderException(WebDataResources.Security_DbFailure);
@@ -246,10 +300,19 @@ namespace WebMatrix.WebData
                     int roleId = FindRoleId(db, roleName);
                     if (roleId != -1)
                     {
-                        throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, WebDataResources.SimpleRoleProvider_RoleExists, roleName));
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                WebDataResources.SimpleRoleProvider_RoleExists,
+                                roleName
+                            )
+                        );
                     }
 
-                    int rows = db.Execute("INSERT INTO " + RoleTableName + " (RoleName) VALUES (@0)", roleName);
+                    int rows = db.Execute(
+                        "INSERT INTO " + RoleTableName + " (RoleName) VALUES (@0)",
+                        roleName
+                    );
                     if (rows != 1)
                     {
                         throw new ProviderException(WebDataResources.Security_DbFailure);
@@ -275,19 +338,35 @@ namespace WebMatrix.WebData
 
                 if (throwOnPopulatedRole)
                 {
-                    int usersInRole = db.Query(@"SELECT * FROM " + UsersInRoleTableName + " WHERE (RoleId = @0)", roleId).Count();
+                    int usersInRole = db.Query(
+                            @"SELECT * FROM " + UsersInRoleTableName + " WHERE (RoleId = @0)",
+                            roleId
+                        )
+                        .Count();
                     if (usersInRole > 0)
                     {
-                        throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, WebDataResources.SimpleRoleProvder_RolePopulated, roleName));
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                WebDataResources.SimpleRoleProvder_RolePopulated,
+                                roleName
+                            )
+                        );
                     }
                 }
                 else
                 {
                     // Delete any users in this role first
-                    db.Execute(@"DELETE FROM " + UsersInRoleTableName + " WHERE (RoleId = @0)", roleId);
+                    db.Execute(
+                        @"DELETE FROM " + UsersInRoleTableName + " WHERE (RoleId = @0)",
+                        roleId
+                    );
                 }
 
-                int rows = db.Execute(@"DELETE FROM " + RoleTableName + " WHERE (RoleId = @0)", roleId);
+                int rows = db.Execute(
+                    @"DELETE FROM " + RoleTableName + " WHERE (RoleId = @0)",
+                    roleId
+                );
                 return (rows == 1); // REVIEW: should this ever be > 1?
             }
         }
@@ -302,7 +381,23 @@ namespace WebMatrix.WebData
             using (var db = ConnectToDatabase())
             {
                 // REVIEW: Is there any way to directly get out a string[]?
-                List<dynamic> userNames = db.Query(@"SELECT u." + SafeUserNameColumn + " FROM " + SafeUserTableName + " u, " + UsersInRoleTableName + " ur, " + RoleTableName + " r Where (r.RoleName = @0 and ur.RoleId = r.RoleId and ur.UserId = u." + SafeUserIdColumn + " and u." + SafeUserNameColumn + " LIKE @1)", new object[] { roleName, usernameToMatch }).ToList();
+                List<dynamic> userNames = db.Query(
+                        @"SELECT u."
+                            + SafeUserNameColumn
+                            + " FROM "
+                            + SafeUserTableName
+                            + " u, "
+                            + UsersInRoleTableName
+                            + " ur, "
+                            + RoleTableName
+                            + " r Where (r.RoleName = @0 and ur.RoleId = r.RoleId and ur.UserId = u."
+                            + SafeUserIdColumn
+                            + " and u."
+                            + SafeUserNameColumn
+                            + " LIKE @1)",
+                        new object[] { roleName, usernameToMatch }
+                    )
+                    .ToList();
                 string[] users = new string[userNames.Count];
                 for (int i = 0; i < userNames.Count; i++)
                 {
@@ -321,7 +416,9 @@ namespace WebMatrix.WebData
             }
             using (var db = ConnectToDatabase())
             {
-                return db.Query(@"SELECT RoleName FROM " + RoleTableName).Select<dynamic, string>(d => (string)d[0]).ToArray();
+                return db.Query(@"SELECT RoleName FROM " + RoleTableName)
+                    .Select<dynamic, string>(d => (string)d[0])
+                    .ToArray();
             }
         }
 
@@ -334,14 +431,34 @@ namespace WebMatrix.WebData
             }
             using (var db = ConnectToDatabase())
             {
-                int userId = SimpleMembershipProvider.GetUserId(db, SafeUserTableName, SafeUserNameColumn, SafeUserIdColumn, CasingBehavior, username);
+                int userId = SimpleMembershipProvider.GetUserId(
+                    db,
+                    SafeUserTableName,
+                    SafeUserNameColumn,
+                    SafeUserIdColumn,
+                    CasingBehavior,
+                    username
+                );
                 if (userId == -1)
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebDataResources.Security_NoUserFound, username));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebDataResources.Security_NoUserFound,
+                            username
+                        )
+                    );
                 }
 
-                string query = @"SELECT r.RoleName FROM " + UsersInRoleTableName + " u, " + RoleTableName + " r Where (u.UserId = @0 and u.RoleId = r.RoleId) GROUP BY RoleName";
-                return db.Query(query, new object[] { userId }).Select<dynamic, string>(d => (string)d[0]).ToArray();
+                string query =
+                    @"SELECT r.RoleName FROM "
+                    + UsersInRoleTableName
+                    + " u, "
+                    + RoleTableName
+                    + " r Where (u.UserId = @0 and u.RoleId = r.RoleId) GROUP BY RoleName";
+                return db.Query(query, new object[] { userId })
+                    .Select<dynamic, string>(d => (string)d[0])
+                    .ToArray();
             }
         }
 
@@ -354,8 +471,21 @@ namespace WebMatrix.WebData
             }
             using (var db = ConnectToDatabase())
             {
-                string query = @"SELECT u." + SafeUserNameColumn + " FROM " + SafeUserTableName + " u, " + UsersInRoleTableName + " ur, " + RoleTableName + " r Where (r.RoleName = @0 and ur.RoleId = r.RoleId and ur.UserId = u." + SafeUserIdColumn + ")";
-                return db.Query(query, new object[] { roleName }).Select<dynamic, string>(d => (string)d[0]).ToArray();
+                string query =
+                    @"SELECT u."
+                    + SafeUserNameColumn
+                    + " FROM "
+                    + SafeUserTableName
+                    + " u, "
+                    + UsersInRoleTableName
+                    + " ur, "
+                    + RoleTableName
+                    + " r Where (r.RoleName = @0 and ur.RoleId = r.RoleId and ur.UserId = u."
+                    + SafeUserIdColumn
+                    + ")";
+                return db.Query(query, new object[] { roleName })
+                    .Select<dynamic, string>(d => (string)d[0])
+                    .ToArray();
             }
         }
 
@@ -368,7 +498,21 @@ namespace WebMatrix.WebData
             }
             using (var db = ConnectToDatabase())
             {
-                var count = db.QuerySingle("SELECT COUNT(*) FROM " + SafeUserTableName + " u, " + UsersInRoleTableName + " ur, " + RoleTableName + " r Where (u." + SafeUserNameColumn + " = @0 and r.RoleName = @1 and ur.RoleId = r.RoleId and ur.UserId = u." + SafeUserIdColumn + ")", username, roleName);
+                var count = db.QuerySingle(
+                    "SELECT COUNT(*) FROM "
+                        + SafeUserTableName
+                        + " u, "
+                        + UsersInRoleTableName
+                        + " ur, "
+                        + RoleTableName
+                        + " r Where (u."
+                        + SafeUserNameColumn
+                        + " = @0 and r.RoleName = @1 and ur.RoleId = r.RoleId and ur.UserId = u."
+                        + SafeUserIdColumn
+                        + ")",
+                    username,
+                    roleName
+                );
                 return (count[0] == 1);
             }
         }
@@ -386,7 +530,13 @@ namespace WebMatrix.WebData
                 {
                     if (!RoleExists(rolename))
                     {
-                        throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebDataResources.SimpleRoleProvider_NoRoleFound, rolename));
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                WebDataResources.SimpleRoleProvider_NoRoleFound,
+                                rolename
+                            )
+                        );
                     }
                 }
 
@@ -396,7 +546,14 @@ namespace WebMatrix.WebData
                     {
                         if (!IsUserInRole(username, rolename))
                         {
-                            throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebDataResources.SimpleRoleProvder_UserNotInRole, username, rolename));
+                            throw new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.CurrentCulture,
+                                    WebDataResources.SimpleRoleProvder_UserNotInRole,
+                                    username,
+                                    rolename
+                                )
+                            );
                         }
                     }
                 }
@@ -411,7 +568,14 @@ namespace WebMatrix.WebData
                         foreach (int roleId in roleIds)
                         {
                             // Review: Is there a way to do these all in one query?
-                            int rows = db.Execute("DELETE FROM " + UsersInRoleTableName + " WHERE UserId = " + userId + " and RoleId = " + roleId);
+                            int rows = db.Execute(
+                                "DELETE FROM "
+                                    + UsersInRoleTableName
+                                    + " WHERE UserId = "
+                                    + userId
+                                    + " and RoleId = "
+                                    + roleId
+                            );
                             if (rows != 1)
                             {
                                 throw new ProviderException(WebDataResources.Security_DbFailure);
@@ -424,7 +588,10 @@ namespace WebMatrix.WebData
 
         private static int FindRoleId(IDatabase db, string roleName)
         {
-            var result = db.QuerySingle(@"SELECT RoleId FROM " + RoleTableName + " WHERE (RoleName = @0)", roleName);
+            var result = db.QuerySingle(
+                @"SELECT RoleId FROM " + RoleTableName + " WHERE (RoleName = @0)",
+                roleName
+            );
             if (result == null)
             {
                 return -1;

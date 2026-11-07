@@ -12,7 +12,10 @@ namespace System
 {
     public class Type
     {
-        public RuntimeTypeHandle TypeHandle { get { return default(RuntimeTypeHandle); } }
+        public RuntimeTypeHandle TypeHandle
+        {
+            get { return default(RuntimeTypeHandle); }
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

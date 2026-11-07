@@ -21,13 +21,16 @@ public class LargeFuncletFrame
             public long long_1;
             public uint uint_2;
         }
+
         public struct S1_D1_F2
         {
             public S1.S1_D1_F1 s1_s1_d1_f1_3;
             public S1.S1_D1_F1 s1_s1_d1_f1_4;
         }
+
         public sbyte sbyte_5;
     }
+
     public struct S2
     {
         public struct S2_D1_F1
@@ -35,6 +38,7 @@ public class LargeFuncletFrame
             public double double_7;
         }
     }
+
     static int s_int_15 = -1;
     static ulong s_ulong_22 = 2;
     static S1.S1_D1_F2 s_s1_s1_d1_f2_24 = new S1.S1_D1_F2();
@@ -50,44 +54,50 @@ public class LargeFuncletFrame
     S2.S2_D1_F1 s2_s2_d1_f1_45 = new S2.S2_D1_F1();
     S2 s2_46 = new S2();
     static int s_loopInvariant = 8;
+
     public decimal LeafMethod3()
     {
         unchecked
         {
-            return 15+4;
+            return 15 + 4;
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public double LeafMethod4()
     {
         unchecked
         {
-            return 15+4;
+            return 15 + 4;
         }
     }
+
     public int LeafMethod6()
     {
         unchecked
         {
-            return int_34 <<= s_int_15 >>= 15+4;
+            return int_34 <<= s_int_15 >>= 15 + 4;
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public sbyte LeafMethod8()
     {
         unchecked
         {
-            return 15%4;
+            return 15 % 4;
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public ushort LeafMethod11()
     {
         unchecked
         {
-            return 15-4;
+            return 15 - 4;
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public uint LeafMethod12()
     {
@@ -96,6 +106,7 @@ public class LargeFuncletFrame
             return s1_s1_d1_f2_43.s1_s1_d1_f1_3.uint_2 <<= int_34;
         }
     }
+
     public S1.S1_D1_F2 LeafMethod15()
     {
         unchecked
@@ -103,6 +114,7 @@ public class LargeFuncletFrame
             return s_s1_s1_d1_f2_24;
         }
     }
+
     public S2 Method1(ref S2 p_s2_47)
     {
         unchecked
@@ -120,21 +132,20 @@ public class LargeFuncletFrame
                 {
                     try
                     {
-                        if ((ulong_41 = 15+4)* s_ulong_22<= (15-4* (ulong_61 &= ulong_61)& s_ulong_22 % 15-4+ 11))
-                        {
-                        }
-                        else
-                        {
-                        }
+                        if (
+                            (ulong_41 = 15 + 4) * s_ulong_22
+                            <= (15 - 4 * (ulong_61 &= ulong_61) & s_ulong_22 % 15 - 4 + 11)
+                        ) { }
+                        else { }
 
                         throw new Exception();
                     }
-                    catch (Exception)
-                    {
-                    }
+                    catch (Exception) { }
                     finally
                     {
-                        s_s1_s1_d1_f2_24.s1_s1_d1_f1_4.uint_2 |= s_s1_s1_d1_f2_24.s1_s1_d1_f1_3.uint_2 /= LeafMethod12()+ 7;
+                        s_s1_s1_d1_f2_24.s1_s1_d1_f1_4.uint_2 |= s_s1_s1_d1_f2_24
+                            .s1_s1_d1_f1_3
+                            .uint_2 /= LeafMethod12() + 7;
                     }
                     break;
                 }
@@ -144,21 +155,26 @@ public class LargeFuncletFrame
                 }
                 case '0':
                 {
-                    int __loopvar1 = s_loopInvariant, __loopSecondaryVar1_0 = s_loopInvariant;
-                    for (;;)
+                    int __loopvar1 = s_loopInvariant,
+                        __loopSecondaryVar1_0 = s_loopInvariant;
+                    for (; ; )
                     {
-                        if (__loopvar1 > 15+4)
+                        if (__loopvar1 > 15 + 4)
                             break;
                         int __loopvar0 = s_loopInvariant;
                         while (bool_48 = bool_48)
                         {
-                            if (__loopvar0 <= 15-4)
+                            if (__loopvar0 <= 15 - 4)
                                 break;
                             LeafMethod3();
                         }
-                        if (short_53 >= (short_53 = 15+4))
+                        if (short_53 >= (short_53 = 15 + 4))
                         {
-                            s_s1_25.sbyte_5 |= (sbyte)(LeafMethod8() / LeafMethod8() >> 15+4- s1_64.sbyte_5<< LeafMethod6());
+                            s_s1_25.sbyte_5 |= (sbyte)(
+                                LeafMethod8() / LeafMethod8()
+                                >> 15 + 4 - s1_64.sbyte_5
+                                << LeafMethod6()
+                            );
                         }
                         else
                         {
@@ -170,25 +186,52 @@ public class LargeFuncletFrame
                 }
                 default:
                 {
-                    ushort_59 ^= ushort_39 >>= s_int_15 *= int_54| 15/4- ushort_59 / LeafMethod11()+ 93/ (ushort_39 | LeafMethod11())+ 26+ 37;
+                    ushort_59 ^=
+                        ushort_39 >>=
+                        s_int_15 *=
+                            int_54
+                            | 15 / 4
+                                - ushort_59 / LeafMethod11()
+                                + 93 / (ushort_39 | LeafMethod11())
+                                + 26
+                                + 37;
                     break;
                 }
             }
             return s2_46;
         }
     }
-    public S1 Method3(out S1.S1_D1_F2 p_s1_s1_d1_f2_90, ref double p_double_91, uint p_uint_92, ref S2.S2_D1_F1 p_s2_s2_d1_f1_93, S2.S2_D1_F1 p_s2_s2_d1_f1_94, ref S1.S1_D1_F2 p_s1_s1_d1_f2_95, ref S2 p_s2_96, ref S1.S1_D1_F2 p_s1_s1_d1_f2_97, out decimal p_decimal_98, ref S1.S1_D1_F2 p_s1_s1_d1_f2_99, S1.S1_D1_F2 p_s1_s1_d1_f2_100, S2.S2_D1_F1 p_s2_s2_d1_f1_101, S1.S1_D1_F2 p_s1_s1_d1_f2_102, out S2.S2_D1_F1 p_s2_s2_d1_f1_103, out S2 p_s2_104, ref ulong p_ulong_105)
+
+    public S1 Method3(
+        out S1.S1_D1_F2 p_s1_s1_d1_f2_90,
+        ref double p_double_91,
+        uint p_uint_92,
+        ref S2.S2_D1_F1 p_s2_s2_d1_f1_93,
+        S2.S2_D1_F1 p_s2_s2_d1_f1_94,
+        ref S1.S1_D1_F2 p_s1_s1_d1_f2_95,
+        ref S2 p_s2_96,
+        ref S1.S1_D1_F2 p_s1_s1_d1_f2_97,
+        out decimal p_decimal_98,
+        ref S1.S1_D1_F2 p_s1_s1_d1_f2_99,
+        S1.S1_D1_F2 p_s1_s1_d1_f2_100,
+        S2.S2_D1_F1 p_s2_s2_d1_f1_101,
+        S1.S1_D1_F2 p_s1_s1_d1_f2_102,
+        out S2.S2_D1_F1 p_s2_s2_d1_f1_103,
+        out S2 p_s2_104,
+        ref ulong p_ulong_105
+    )
     {
         unchecked
         {
             S1.S1_D1_F2 s1_s1_d1_f2_121 = new S1.S1_D1_F2();
             p_s1_s1_d1_f2_90 = s1_s1_d1_f2_121;
-            p_decimal_98 = 15+4;
+            p_decimal_98 = 15 + 4;
             p_s2_s2_d1_f1_103 = s_s2_s2_d1_f1_26;
             Method1(ref s2_46);
             return s1_44;
         }
     }
+
     internal void Method0()
     {
         unchecked
@@ -199,7 +242,24 @@ public class LargeFuncletFrame
             S2.S2_D1_F1 s2_s2_d1_f1_3046 = new S2.S2_D1_F1();
             S2 s2_3047 = new S2();
             s_s2_27 = Method1(ref s_s2_27);
-            s1_44 = Method3(out s1_s1_d1_f2_3044, ref s_s2_s2_d1_f1_26.double_7, 15+4, ref s2_s2_d1_f1_45, s_s2_s2_d1_f1_26, ref s1_s1_d1_f2_3044, ref s2_3047, ref s1_s1_d1_f2_43, out s1_s1_d1_f1_3042.decimal_0, ref s_s1_s1_d1_f2_24, s1_s1_d1_f2_3044, s2_s2_d1_f1_3046, s1_s1_d1_f2_3044, out s2_s2_d1_f1_45, out s_s2_27, ref ulong_3041);
+            s1_44 = Method3(
+                out s1_s1_d1_f2_3044,
+                ref s_s2_s2_d1_f1_26.double_7,
+                15 + 4,
+                ref s2_s2_d1_f1_45,
+                s_s2_s2_d1_f1_26,
+                ref s1_s1_d1_f2_3044,
+                ref s2_3047,
+                ref s1_s1_d1_f2_43,
+                out s1_s1_d1_f1_3042.decimal_0,
+                ref s_s1_s1_d1_f2_24,
+                s1_s1_d1_f2_3044,
+                s2_s2_d1_f1_3046,
+                s1_s1_d1_f2_3044,
+                out s2_s2_d1_f1_45,
+                out s_s2_27,
+                ref ulong_3041
+            );
             return;
         }
     }

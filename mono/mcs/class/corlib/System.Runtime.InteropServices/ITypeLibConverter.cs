@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,17 +34,47 @@
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace System.Runtime.InteropServices {
-
-	[ComVisible (true)]
-	[Guid("F1C3BF78-C3E4-11D3-88E7-00902754C43A")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	public interface ITypeLibConverter {
-		[return: MarshalAs(UnmanagedType.Interface)]
-		object ConvertAssemblyToTypeLib (Assembly assembly, string typeLibName, TypeLibExporterFlags flags, ITypeLibExporterNotifySink notifySink);
-		AssemblyBuilder ConvertTypeLibToAssembly ([MarshalAs(UnmanagedType.Interface)] object typeLib, string asmFileName, int flags, ITypeLibImporterNotifySink notifySink, byte[] publicKey, StrongNameKeyPair keyPair, bool unsafeInterfaces);
-		AssemblyBuilder ConvertTypeLibToAssembly ([MarshalAs(UnmanagedType.Interface)] object typeLib, string asmFileName, TypeLibImporterFlags flags, ITypeLibImporterNotifySink notifySink, byte[] publicKey, StrongNameKeyPair keyPair, string asmNamespace, Version asmVersion);
-		bool GetPrimaryInteropAssembly (Guid g, int major, int minor, int lcid, out string asmName, out string asmCodeBase);
-	}
+namespace System.Runtime.InteropServices
+{
+    [ComVisible(true)]
+    [Guid("F1C3BF78-C3E4-11D3-88E7-00902754C43A")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface ITypeLibConverter
+    {
+        [return: MarshalAs(UnmanagedType.Interface)]
+        object ConvertAssemblyToTypeLib(
+            Assembly assembly,
+            string typeLibName,
+            TypeLibExporterFlags flags,
+            ITypeLibExporterNotifySink notifySink
+        );
+        AssemblyBuilder ConvertTypeLibToAssembly(
+            [MarshalAs(UnmanagedType.Interface)] object typeLib,
+            string asmFileName,
+            int flags,
+            ITypeLibImporterNotifySink notifySink,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            bool unsafeInterfaces
+        );
+        AssemblyBuilder ConvertTypeLibToAssembly(
+            [MarshalAs(UnmanagedType.Interface)] object typeLib,
+            string asmFileName,
+            TypeLibImporterFlags flags,
+            ITypeLibImporterNotifySink notifySink,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            string asmNamespace,
+            Version asmVersion
+        );
+        bool GetPrimaryInteropAssembly(
+            Guid g,
+            int major,
+            int minor,
+            int lcid,
+            out string asmName,
+            out string asmCodeBase
+        );
+    }
 }
 #endif

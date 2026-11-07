@@ -1,5 +1,7 @@
 ﻿namespace AutoMapper.IntegrationTests;
-public class IEnumerableMemberProjections : IntegrationTest<IEnumerableMemberProjections.DatabaseInitializer>
+
+public class IEnumerableMemberProjections
+    : IntegrationTest<IEnumerableMemberProjections.DatabaseInitializer>
 {
     public class Customer
     {
@@ -36,12 +38,19 @@ public class IEnumerableMemberProjections : IntegrationTest<IEnumerableMemberPro
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-            });
+            context.Customers.Add(
+                new Customer
+                {
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Items = new[]
+                    {
+                        new Item { Code = 1 },
+                        new Item { Code = 3 },
+                        new Item { Code = 5 },
+                    },
+                }
+            );
 
             base.Seed(context);
         }
@@ -52,11 +61,12 @@ public class IEnumerableMemberProjections : IntegrationTest<IEnumerableMemberPro
         public IEnumerable<int> ItemCodes { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>();
-        cfg.CreateProjection<Item, ItemModel>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>();
+            cfg.CreateProjection<Item, ItemModel>();
+        });
 
     [Fact]
     public void Can_map_to_ienumerable()

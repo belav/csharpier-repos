@@ -5,8 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class ModelBuilding101RelationalTestBase : ModelBuilding101TestBase
 {
-    protected override ModelMetadata GetModelMetadata(Context101 context)
-        => new RelationalModelMetadata(context.Model, context.Database.GenerateCreateScript());
+    protected override ModelMetadata GetModelMetadata(Context101 context) =>
+        new RelationalModelMetadata(context.Model, context.Database.GenerateCreateScript());
 
     protected class RelationalModelMetadata : ModelMetadata
     {
@@ -18,11 +18,9 @@ public abstract class ModelBuilding101RelationalTestBase : ModelBuilding101TestB
 
         public virtual string Schema { get; }
 
-        protected bool Equals(RelationalModelMetadata other)
-            => base.Equals(other)
-                && Schema == other.Schema;
+        protected bool Equals(RelationalModelMetadata other) =>
+            base.Equals(other) && Schema == other.Schema;
 
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Schema);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Schema);
     }
 }

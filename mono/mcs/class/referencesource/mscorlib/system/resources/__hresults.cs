@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //=============================================================================
 //
 // Class: __HResults
-// 
+//
 // <OWNER>jathaine</OWNER>
 //
 // Purpose: Define HResult constants returned by the Windows Modern Resource Manager
@@ -14,8 +14,10 @@
 //
 //===========================================================================*/
 #if FEATURE_APPX
-namespace System.Resources {
+namespace System.Resources
+{
     using System;
+
     // Only static data no need to serialize
     internal static class __HResults
     {

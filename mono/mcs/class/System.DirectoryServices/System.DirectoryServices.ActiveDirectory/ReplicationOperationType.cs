@@ -23,12 +23,12 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum ReplicationOperationType
-	{
-		Sync,
-		Add,
-		Delete,
-		Modify,
-		UpdateReference
-	}
+    public enum ReplicationOperationType
+    {
+        Sync,
+        Add,
+        Delete,
+        Modify,
+        UpdateReference,
+    }
 }

@@ -19,7 +19,10 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal AsyncSerializedWorker(WaitCallback defaultCallback, SynchronizationContext syncContext)
+        internal AsyncSerializedWorker(
+            WaitCallback defaultCallback,
+            SynchronizationContext syncContext
+        )
         {
             _syncContext = syncContext;
             _workerPostCallback = new SendOrPostCallback(WorkerProc);

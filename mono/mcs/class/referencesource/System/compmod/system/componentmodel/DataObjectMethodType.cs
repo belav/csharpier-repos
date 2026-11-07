@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataObjectMethodType.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
 
-    public enum DataObjectMethodType {
-
+    public enum DataObjectMethodType
+    {
         Fill = 0,
 
         Select = 1,
@@ -18,6 +18,6 @@ namespace System.ComponentModel {
 
         Insert = 3,
 
-        Delete = 4
+        Delete = 4,
     }
 }

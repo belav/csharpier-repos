@@ -1,13 +1,13 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** File: ThreadAttributes.cs
 **
-** Author: 
+** Author:
 **
 ** Purpose: For Threads-related custom attributes.
 **
@@ -15,23 +15,19 @@
 **
 =============================================================================*/
 
-
-namespace System {
-    [AttributeUsage (AttributeTargets.Method)]  
-[System.Runtime.InteropServices.ComVisible(true)]
+namespace System
+{
+    [AttributeUsage(AttributeTargets.Method)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class STAThreadAttribute : Attribute
     {
-        public STAThreadAttribute()
-        {
-        }
+        public STAThreadAttribute() { }
     }
 
-    [AttributeUsage (AttributeTargets.Method)]  
-[System.Runtime.InteropServices.ComVisible(true)]
+    [AttributeUsage(AttributeTargets.Method)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class MTAThreadAttribute : Attribute
     {
-        public MTAThreadAttribute()
-        {
-        }
+        public MTAThreadAttribute() { }
     }
 }

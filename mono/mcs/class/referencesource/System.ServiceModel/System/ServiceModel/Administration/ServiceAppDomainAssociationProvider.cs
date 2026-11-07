@@ -16,8 +16,14 @@ namespace System.ServiceModel.Administration
             {
                 IWmiInstance instance = instances.NewInstance(null);
 
-                instance.SetProperty(AdministrationStrings.AppDomainInfo, AppDomainInstanceProvider.GetReference());
-                instance.SetProperty(AdministrationStrings.Service, ServiceInstanceProvider.GetReference(info));
+                instance.SetProperty(
+                    AdministrationStrings.AppDomainInfo,
+                    AppDomainInstanceProvider.GetReference()
+                );
+                instance.SetProperty(
+                    AdministrationStrings.Service,
+                    ServiceInstanceProvider.GetReference(info)
+                );
 
                 instances.AddInstance(instance);
             }
@@ -27,7 +33,8 @@ namespace System.ServiceModel.Administration
         {
             Fx.Assert(null != instance, "");
             string serviceRef = instance.GetProperty(AdministrationStrings.Service) as string;
-            string appDomainInfoRef = instance.GetProperty(AdministrationStrings.AppDomainInfo) as string;
+            string appDomainInfoRef =
+                instance.GetProperty(AdministrationStrings.AppDomainInfo) as string;
 
             return !String.IsNullOrEmpty(serviceRef) && !String.IsNullOrEmpty(appDomainInfoRef);
         }

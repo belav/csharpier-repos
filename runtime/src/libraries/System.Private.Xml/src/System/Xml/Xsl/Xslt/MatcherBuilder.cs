@@ -95,7 +95,7 @@ namespace System.Xml.Xsl.Xslt
         private XmlNodeKindFlags _nodeKind;
         private QilName? _qname;
         private readonly QilIterator _iterator;
-        private QilNode? _condition;    // null means f.True()
+        private QilNode? _condition; // null means f.True()
 
         public XmlNodeKindFlags NodeKind
         {
@@ -125,7 +125,9 @@ namespace System.Xml.Xsl.Xslt
         public TemplateMatch(Template template, QilLoop filter)
         {
             _template = template;
-            _priority = double.IsNaN(template.Priority) ? XPathPatternBuilder.GetPriority(filter) : template.Priority;
+            _priority = double.IsNaN(template.Priority)
+                ? XPathPatternBuilder.GetPriority(filter)
+                : template.Priority;
             _iterator = filter.Variable;
             _condition = filter.Body;
 
@@ -133,8 +135,10 @@ namespace System.Xml.Xsl.Xslt
             NipOffTypeNameCheck();
 
             Debug.Assert(
-                _qname == null ||
-                _nodeKind == XmlNodeKindFlags.Element || _nodeKind == XmlNodeKindFlags.Attribute || _nodeKind == XmlNodeKindFlags.PI,
+                _qname == null
+                    || _nodeKind == XmlNodeKindFlags.Element
+                    || _nodeKind == XmlNodeKindFlags.Attribute
+                    || _nodeKind == XmlNodeKindFlags.PI,
                 "qname may be not null only for element, attribute, or PI patterns"
             );
         }
@@ -155,9 +159,9 @@ namespace System.Xml.Xsl.Xslt
          */
         private void NipOffTypeNameCheck()
         {
-            QilBinary[] leftPath = new QilBinary[4];   // Circular buffer for last 4 And nodes
-            int idx = -1;                 // Index of last element in leftPath
-            QilNode node = _condition!;          // Walker through left path of the tree
+            QilBinary[] leftPath = new QilBinary[4]; // Circular buffer for last 4 And nodes
+            int idx = -1; // Index of last element in leftPath
+            QilNode node = _condition!; // Walker through left path of the tree
 
             _nodeKind = XmlNodeKindFlags.None;
             _qname = null;
@@ -194,8 +198,10 @@ namespace System.Xml.Xsl.Xslt
                 QilBinary eq = (QilBinary)lastAnd.Right;
 
                 // Recognizing (Eq (NameOf RefTo) LiteralQName)
-                if (eq.Left.NodeType == QilNodeType.NameOf &&
-                    ((QilUnary)eq.Left).Child == _iterator && eq.Right.NodeType == QilNodeType.LiteralQName
+                if (
+                    eq.Left.NodeType == QilNodeType.NameOf
+                    && ((QilUnary)eq.Left).Child == _iterator
+                    && eq.Right.NodeType == QilNodeType.LiteralQName
                 )
                 {
                     // Recognized pattern B
@@ -234,9 +240,9 @@ namespace System.Xml.Xsl.Xslt
                 Debug.Assert(!double.IsNaN(x!._priority));
                 Debug.Assert(!double.IsNaN(y!._priority));
                 return (
-                    x._priority > y._priority ? 1 :
-                    x._priority < y._priority ? -1 :
-                    x._template.OrderNumber - y._template.OrderNumber
+                    x._priority > y._priority ? 1
+                    : x._priority < y._priority ? -1
+                    : x._template.OrderNumber - y._template.OrderNumber
                 );
             }
         }
@@ -258,8 +264,9 @@ namespace System.Xml.Xsl.Xslt
 
     internal sealed class PatternBag
     {
-        public Dictionary<QilName, List<Pattern>> FixedNamePatterns = new Dictionary<QilName, List<Pattern>>();
-        public List<QilName> FixedNamePatternsNames = new List<QilName>();  // Needed only to guarantee a stable order
+        public Dictionary<QilName, List<Pattern>> FixedNamePatterns =
+            new Dictionary<QilName, List<Pattern>>();
+        public List<QilName> FixedNamePatternsNames = new List<QilName>(); // Needed only to guarantee a stable order
         public List<Pattern> NonFixedNamePatterns = new List<Pattern>();
 
         public void Clear()
@@ -298,7 +305,11 @@ namespace System.Xml.Xsl.Xslt
 
         private const int NoMatch = -1;
 
-        public MatcherBuilder(XPathQilFactory f, ReferenceReplacer refReplacer, InvokeGenerator invkGen)
+        public MatcherBuilder(
+            XPathQilFactory f,
+            ReferenceReplacer refReplacer,
+            InvokeGenerator invkGen
+        )
         {
             _f = f;
             _refReplacer = refReplacer;
@@ -341,13 +352,27 @@ namespace System.Xml.Xsl.Xslt
 
                 switch (match.NodeKind)
                 {
-                    case XmlNodeKindFlags.Element: _elementPatterns.Add(pattern); break;
-                    case XmlNodeKindFlags.Attribute: _attributePatterns.Add(pattern); break;
-                    case XmlNodeKindFlags.Text: _textPatterns.Add(pattern); break;
-                    case XmlNodeKindFlags.Document: _documentPatterns.Add(pattern); break;
-                    case XmlNodeKindFlags.Comment: _commentPatterns.Add(pattern); break;
-                    case XmlNodeKindFlags.PI: _piPatterns.Add(pattern); break;
-                    default: _heterogenousPatterns.Add(pattern); break;
+                    case XmlNodeKindFlags.Element:
+                        _elementPatterns.Add(pattern);
+                        break;
+                    case XmlNodeKindFlags.Attribute:
+                        _attributePatterns.Add(pattern);
+                        break;
+                    case XmlNodeKindFlags.Text:
+                        _textPatterns.Add(pattern);
+                        break;
+                    case XmlNodeKindFlags.Document:
+                        _documentPatterns.Add(pattern);
+                        break;
+                    case XmlNodeKindFlags.Comment:
+                        _commentPatterns.Add(pattern);
+                        break;
+                    case XmlNodeKindFlags.PI:
+                        _piPatterns.Add(pattern);
+                        break;
+                    default:
+                        _heterogenousPatterns.Add(pattern);
+                        break;
                 }
             }
         }
@@ -401,13 +426,22 @@ namespace System.Xml.Xsl.Xslt
             foreach (Pattern pattern in patternList)
             {
                 // if ($it =~ pattern.Match) then pattern.Priority else...
-                result = _f.Conditional(MatchPattern(it, pattern.Match), _f.Int32(pattern.Priority), result);
+                result = _f.Conditional(
+                    MatchPattern(it, pattern.Match),
+                    _f.Int32(pattern.Priority),
+                    result
+                );
             }
 
             return result;
         }
 
-        private QilNode MatchPatterns(QilIterator it, XmlQueryType xt, List<Pattern> patternList, QilNode otherwise)
+        private QilNode MatchPatterns(
+            QilIterator it,
+            XmlQueryType xt,
+            List<Pattern> patternList,
+            QilNode otherwise
+        )
         {
             if (patternList.Count == 0)
             {
@@ -426,7 +460,11 @@ namespace System.Xml.Xsl.Xslt
             return false;
         }
 
-        private QilNode MatchPatternsWhosePriorityGreater(QilIterator it, List<Pattern> patternList, QilNode matcher)
+        private QilNode MatchPatternsWhosePriorityGreater(
+            QilIterator it,
+            List<Pattern> patternList,
+            QilNode matcher
+        )
         {
             if (patternList.Count == 0)
             {
@@ -450,23 +488,40 @@ namespace System.Xml.Xsl.Xslt
                 Debug.Assert(pattern.Priority > lastPriority);
                 if (pattern.Priority > lastPriority + 1)
                 {
-                    result = _f.Conditional(_f.Gt(stopPriority, _f.Int32(lastPriority)), stopPriority, result);
+                    result = _f.Conditional(
+                        _f.Gt(stopPriority, _f.Int32(lastPriority)),
+                        stopPriority,
+                        result
+                    );
                 }
 
-                result = _f.Conditional(MatchPattern(it, pattern.Match), _f.Int32(pattern.Priority), result);
+                result = _f.Conditional(
+                    MatchPattern(it, pattern.Match),
+                    _f.Int32(pattern.Priority),
+                    result
+                );
                 lastPriority = pattern.Priority;
             }
 
             // If the last pattern has the highest priority, the check can be eliminated
             if (lastPriority != _priority)
             {
-                result = _f.Conditional(_f.Gt(stopPriority, _f.Int32(lastPriority)), stopPriority, result);
+                result = _f.Conditional(
+                    _f.Gt(stopPriority, _f.Int32(lastPriority)),
+                    stopPriority,
+                    result
+                );
             }
 
             return _f.Loop(stopPriority, result);
         }
 
-        private QilNode MatchPatterns(QilIterator it, XmlQueryType xt, PatternBag patternBag, QilNode otherwise)
+        private QilNode MatchPatterns(
+            QilIterator it,
+            XmlQueryType xt,
+            PatternBag patternBag,
+            QilNode otherwise
+        )
         {
             if (patternBag.FixedNamePatternsNames.Count == 0)
             {
@@ -477,13 +532,18 @@ namespace System.Xml.Xsl.Xslt
 
             foreach (QilName qname in patternBag.FixedNamePatternsNames)
             {
-                matcher = _f.Conditional(_f.Eq(_f.NameOf(it), qname.ShallowClone(_f.BaseFactory)),
+                matcher = _f.Conditional(
+                    _f.Eq(_f.NameOf(it), qname.ShallowClone(_f.BaseFactory)),
                     MatchPatterns(it, patternBag.FixedNamePatterns[qname]),
                     matcher
                 );
             }
 
-            matcher = MatchPatternsWhosePriorityGreater(it, patternBag.NonFixedNamePatterns, matcher);
+            matcher = MatchPatternsWhosePriorityGreater(
+                it,
+                patternBag.NonFixedNamePatterns,
+                matcher
+            );
             return _f.Conditional(_f.IsType(it, xt), matcher, otherwise);
         }
 
@@ -514,7 +574,10 @@ namespace System.Xml.Xsl.Xslt
             {
                 foreach (TemplateMatch match in list)
                 {
-                    branches[++priority] = _invkGen.GenerateInvoke(match.TemplateFunction!, actualArgs);
+                    branches[++priority] = _invkGen.GenerateInvoke(
+                        match.TemplateFunction!,
+                        actualArgs
+                    );
                 }
             }
 
@@ -526,9 +589,12 @@ namespace System.Xml.Xsl.Xslt
             QilNode result = otherwise;
             int priority = 0;
 
-            foreach (List<TemplateMatch> list in allMatches) {
-                foreach (TemplateMatch match in list) {
-                    result = f.Conditional(f.Eq(p, f.Int32(priority++)),
+            foreach (List<TemplateMatch> list in allMatches)
+            {
+                foreach (TemplateMatch match in list)
+                {
+                    result = f.Conditional(
+                        f.Eq(p, f.Int32(priority++)),
                         invkGen.GenerateInvoke(match.TemplateFunction, actualArgs),
                         result
                     );
@@ -539,45 +605,70 @@ namespace System.Xml.Xsl.Xslt
 #endif
         }
 #else
-        public QilNode BuildMatcher(QilIterator it, IList<XslNode> actualArgs, QilNode otherwise) {
+        public QilNode BuildMatcher(QilIterator it, IList<XslNode> actualArgs, QilNode otherwise)
+        {
             QilNode result = otherwise;
 
-            foreach (List<TemplateMatch> list in allMatches) {
-                foreach (TemplateMatch match in list) {
+            foreach (List<TemplateMatch> list in allMatches)
+            {
+                foreach (TemplateMatch match in list)
+                {
                     XmlNodeKindFlags nodeKind = match.NodeKind;
                     QilName qname = match.QName;
                     QilNode cond = match.Condition;
 
-                    if (cond != null) {
+                    if (cond != null)
+                    {
                         // We have to clone, because the same pattern may be used
                         // in many different xsl:apply-templates/imports functions
                         cond = cond.DeepClone(f.BaseFactory);
                         cond = refReplacer.Replace(cond, match.Iterator, it);
                     }
 
-                    if (nodeKind != 0) {
+                    if (nodeKind != 0)
+                    {
                         XmlQueryType nodeType;
-                        switch (nodeKind) {
-                        case XmlNodeKindFlags.Element   : nodeType = T.Element  ;  break;
-                        case XmlNodeKindFlags.Attribute : nodeType = T.Attribute;  break;
-                        case XmlNodeKindFlags.Text      : nodeType = T.Text     ;  break;
-                        case XmlNodeKindFlags.Document  : nodeType = T.Document ;  break;
-                        case XmlNodeKindFlags.Comment   : nodeType = T.Comment  ;  break;
-                        case XmlNodeKindFlags.PI        : nodeType = T.PI       ;  break;
-                        default                         : nodeType = null       ;  break;
+                        switch (nodeKind)
+                        {
+                            case XmlNodeKindFlags.Element:
+                                nodeType = T.Element;
+                                break;
+                            case XmlNodeKindFlags.Attribute:
+                                nodeType = T.Attribute;
+                                break;
+                            case XmlNodeKindFlags.Text:
+                                nodeType = T.Text;
+                                break;
+                            case XmlNodeKindFlags.Document:
+                                nodeType = T.Document;
+                                break;
+                            case XmlNodeKindFlags.Comment:
+                                nodeType = T.Comment;
+                                break;
+                            case XmlNodeKindFlags.PI:
+                                nodeType = T.PI;
+                                break;
+                            default:
+                                nodeType = null;
+                                break;
                         }
 
                         Debug.Assert(nodeType != null, $"Unexpected nodeKind: {nodeKind}");
                         QilNode typeNameCheck = f.IsType(it, nodeType);
 
-                        if (qname != null) {
-                            typeNameCheck = f.And(typeNameCheck, f.Eq(f.NameOf(it), qname.ShallowClone(f.BaseFactory)));
+                        if (qname != null)
+                        {
+                            typeNameCheck = f.And(
+                                typeNameCheck,
+                                f.Eq(f.NameOf(it), qname.ShallowClone(f.BaseFactory))
+                            );
                         }
 
                         cond = (cond == null) ? typeNameCheck : f.And(typeNameCheck, cond);
                     }
 
-                    result = f.Conditional(cond,
+                    result = f.Conditional(
+                        cond,
                         invkGen.GenerateInvoke(match.TemplateFunction, actualArgs),
                         result
                     );

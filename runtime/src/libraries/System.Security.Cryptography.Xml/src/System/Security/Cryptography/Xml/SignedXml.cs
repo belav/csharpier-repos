@@ -35,15 +35,21 @@ namespace System.Security.Cryptography.Xml
 
         // Built in canonicalization algorithm URIs
         private static IList<string>? s_knownCanonicalizationMethods;
+
         // Built in transform algorithm URIs (excluding canonicalization URIs)
         private static IList<string>? s_defaultSafeTransformMethods;
 
         // additional HMAC Url identifiers
-        private const string XmlDsigMoreHMACMD5Url = "http://www.w3.org/2001/04/xmldsig-more#hmac-md5";
-        private const string XmlDsigMoreHMACSHA256Url = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256";
-        private const string XmlDsigMoreHMACSHA384Url = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha384";
-        private const string XmlDsigMoreHMACSHA512Url = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha512";
-        private const string XmlDsigMoreHMACRIPEMD160Url = "http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160";
+        private const string XmlDsigMoreHMACMD5Url =
+            "http://www.w3.org/2001/04/xmldsig-more#hmac-md5";
+        private const string XmlDsigMoreHMACSHA256Url =
+            "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256";
+        private const string XmlDsigMoreHMACSHA384Url =
+            "http://www.w3.org/2001/04/xmldsig-more#hmac-sha384";
+        private const string XmlDsigMoreHMACSHA512Url =
+            "http://www.w3.org/2001/04/xmldsig-more#hmac-sha512";
+        private const string XmlDsigMoreHMACRIPEMD160Url =
+            "http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160";
 
         // defines the XML encryption processing rules
         private EncryptedXml? _exml;
@@ -53,9 +59,11 @@ namespace System.Security.Cryptography.Xml
         //
 
         public const string XmlDsigNamespaceUrl = "http://www.w3.org/2000/09/xmldsig#";
-        public const string XmlDsigMinimalCanonicalizationUrl = "http://www.w3.org/2000/09/xmldsig#minimal";
+        public const string XmlDsigMinimalCanonicalizationUrl =
+            "http://www.w3.org/2000/09/xmldsig#minimal";
         public const string XmlDsigCanonicalizationUrl = XmlDsigC14NTransformUrl;
-        public const string XmlDsigCanonicalizationWithCommentsUrl = XmlDsigC14NWithCommentsTransformUrl;
+        public const string XmlDsigCanonicalizationWithCommentsUrl =
+            XmlDsigC14NWithCommentsTransformUrl;
 
         public const string XmlDsigSHA1Url = "http://www.w3.org/2000/09/xmldsig#sha1";
         public const string XmlDsigDSAUrl = "http://www.w3.org/2000/09/xmldsig#dsa-sha1";
@@ -63,25 +71,34 @@ namespace System.Security.Cryptography.Xml
         public const string XmlDsigHMACSHA1Url = "http://www.w3.org/2000/09/xmldsig#hmac-sha1";
 
         public const string XmlDsigSHA256Url = "http://www.w3.org/2001/04/xmlenc#sha256";
-        public const string XmlDsigRSASHA256Url = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+        public const string XmlDsigRSASHA256Url =
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
 
         // Yes, SHA384 is in the xmldsig-more namespace even though all the other SHA variants are in xmlenc. That's the standard.
         public const string XmlDsigSHA384Url = "http://www.w3.org/2001/04/xmldsig-more#sha384";
-        public const string XmlDsigRSASHA384Url = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384";
+        public const string XmlDsigRSASHA384Url =
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384";
 
         public const string XmlDsigSHA512Url = "http://www.w3.org/2001/04/xmlenc#sha512";
-        public const string XmlDsigRSASHA512Url = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512";
+        public const string XmlDsigRSASHA512Url =
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512";
 
-        public const string XmlDsigC14NTransformUrl = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315";
-        public const string XmlDsigC14NWithCommentsTransformUrl = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments";
+        public const string XmlDsigC14NTransformUrl =
+            "http://www.w3.org/TR/2001/REC-xml-c14n-20010315";
+        public const string XmlDsigC14NWithCommentsTransformUrl =
+            "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments";
         public const string XmlDsigExcC14NTransformUrl = "http://www.w3.org/2001/10/xml-exc-c14n#";
-        public const string XmlDsigExcC14NWithCommentsTransformUrl = "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
+        public const string XmlDsigExcC14NWithCommentsTransformUrl =
+            "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
         public const string XmlDsigBase64TransformUrl = "http://www.w3.org/2000/09/xmldsig#base64";
-        public const string XmlDsigXPathTransformUrl = "http://www.w3.org/TR/1999/REC-xpath-19991116";
+        public const string XmlDsigXPathTransformUrl =
+            "http://www.w3.org/TR/1999/REC-xpath-19991116";
         public const string XmlDsigXsltTransformUrl = "http://www.w3.org/TR/1999/REC-xslt-19991116";
-        public const string XmlDsigEnvelopedSignatureTransformUrl = "http://www.w3.org/2000/09/xmldsig#enveloped-signature";
+        public const string XmlDsigEnvelopedSignatureTransformUrl =
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature";
         public const string XmlDecryptionTransformUrl = "http://www.w3.org/2002/07/decrypt#XML";
-        public const string XmlLicenseTransformUrl = "urn:mpeg:mpeg21:2003:01-REL-R-NS:licenseTransform";
+        public const string XmlLicenseTransformUrl =
+            "urn:mpeg:mpeg21:2003:01-REL-R-NS:licenseTransform";
 
         //
         // public constructors
@@ -181,8 +198,16 @@ namespace System.Security.Cryptography.Xml
         [AllowNull]
         public EncryptedXml EncryptedXml
         {
-            [UnconditionalSuppressMessage("AOT", "IL3050:RequiresDynamicCode", Justification = "ctors are marked as RDC")]
-            [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RUC")]
+            [UnconditionalSuppressMessage(
+                "AOT",
+                "IL3050:RequiresDynamicCode",
+                Justification = "ctors are marked as RDC"
+            )]
+            [UnconditionalSuppressMessage(
+                "ILLink",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "ctors are marked as RUC"
+            )]
             get => _exml ??= new EncryptedXml(_containingDocument!); // default processing rules
             set => _exml = value;
         }
@@ -227,8 +252,16 @@ namespace System.Security.Cryptography.Xml
                 return m_signature.GetXml();
         }
 
-        [UnconditionalSuppressMessage("AOT", "IL3050:RequiresDynamicCode", Justification = "ctors are marked as RDC")]
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RUC")]
+        [UnconditionalSuppressMessage(
+            "AOT",
+            "IL3050:RequiresDynamicCode",
+            Justification = "ctors are marked as RDC"
+        )]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RUC"
+        )]
         public void LoadXml(XmlElement value)
         {
             if (value is null)
@@ -298,14 +331,20 @@ namespace System.Security.Cryptography.Xml
 
             if (!CheckSignedInfo(key))
             {
-                SignedXmlDebugLog.LogVerificationFailure(this, SR.Log_VerificationFailed_SignedInfo);
+                SignedXmlDebugLog.LogVerificationFailure(
+                    this,
+                    SR.Log_VerificationFailed_SignedInfo
+                );
                 return false;
             }
 
             // Now is the time to go through all the references and see if their DigestValues are good
             if (!CheckDigestedReferences())
             {
-                SignedXmlDebugLog.LogVerificationFailure(this, SR.Log_VerificationFailed_References);
+                SignedXmlDebugLog.LogVerificationFailure(
+                    this,
+                    SR.Log_VerificationFailed_References
+                );
                 return false;
             }
 
@@ -322,13 +361,19 @@ namespace System.Security.Cryptography.Xml
 
             if (!CheckSignedInfo(macAlg))
             {
-                SignedXmlDebugLog.LogVerificationFailure(this, SR.Log_VerificationFailed_SignedInfo);
+                SignedXmlDebugLog.LogVerificationFailure(
+                    this,
+                    SR.Log_VerificationFailed_SignedInfo
+                );
                 return false;
             }
 
             if (!CheckDigestedReferences())
             {
-                SignedXmlDebugLog.LogVerificationFailure(this, SR.Log_VerificationFailed_References);
+                SignedXmlDebugLog.LogVerificationFailure(
+                    this,
+                    SR.Log_VerificationFailed_References
+                );
                 return false;
             }
 
@@ -343,18 +388,29 @@ namespace System.Security.Cryptography.Xml
                 // Check key usages to make sure it is good for signing.
                 foreach (X509Extension extension in certificate.Extensions)
                 {
-                    if (string.Equals(extension.Oid!.Value, "2.5.29.15" /* szOID_KEY_USAGE */, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            extension.Oid!.Value,
+                            "2.5.29.15" /* szOID_KEY_USAGE */
+                            ,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         X509KeyUsageExtension keyUsage = new X509KeyUsageExtension();
                         keyUsage.CopyFrom(extension);
                         SignedXmlDebugLog.LogVerifyKeyUsage(this, certificate, keyUsage);
 
-                        bool validKeyUsage = (keyUsage.KeyUsages & X509KeyUsageFlags.DigitalSignature) != 0 ||
-                                             (keyUsage.KeyUsages & X509KeyUsageFlags.NonRepudiation) != 0;
+                        bool validKeyUsage =
+                            (keyUsage.KeyUsages & X509KeyUsageFlags.DigitalSignature) != 0
+                            || (keyUsage.KeyUsages & X509KeyUsageFlags.NonRepudiation) != 0;
 
                         if (!validKeyUsage)
                         {
-                            SignedXmlDebugLog.LogVerificationFailure(this, SR.Log_VerificationFailed_X509KeyUsage);
+                            SignedXmlDebugLog.LogVerificationFailure(
+                                this,
+                                SR.Log_VerificationFailed_X509KeyUsage
+                            );
                             return false;
                         }
                         break;
@@ -369,7 +425,10 @@ namespace System.Security.Cryptography.Xml
 
                 if (!chainVerified)
                 {
-                    SignedXmlDebugLog.LogVerificationFailure(this, SR.Log_VerificationFailed_X509Chain);
+                    SignedXmlDebugLog.LogVerificationFailure(
+                        this,
+                        SR.Log_VerificationFailed_X509Chain
+                    );
                     return false;
                 }
             }
@@ -386,7 +445,11 @@ namespace System.Security.Cryptography.Xml
             return true;
         }
 
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RDC")]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RDC"
+        )]
         public void ComputeSignature()
         {
             SignedXmlDebugLog.LogBeginSignatureComputation(this, _context!);
@@ -418,9 +481,14 @@ namespace System.Security.Cryptography.Xml
             }
 
             // See if there is a signature description class defined in the Config file
-            SignatureDescription? signatureDescription = CryptoHelpers.CreateNonTransformFromName<SignatureDescription>(SignedInfo.SignatureMethod);
+            SignatureDescription? signatureDescription =
+                CryptoHelpers.CreateNonTransformFromName<SignatureDescription>(
+                    SignedInfo.SignatureMethod
+                );
             if (signatureDescription == null)
-                throw new CryptographicException(SR.Cryptography_Xml_SignatureDescriptionNotCreated);
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_SignatureDescriptionNotCreated
+                );
             HashAlgorithm? hashAlg = signatureDescription.CreateDigest();
             if (hashAlg == null)
                 throw new CryptographicException(SR.Cryptography_Xml_CreateHashAlgorithmFailed);
@@ -429,9 +497,16 @@ namespace System.Security.Cryptography.Xml
             // The return value is not needed.
             GetC14NDigest(hashAlg);
 
-            AsymmetricSignatureFormatter asymmetricSignatureFormatter = signatureDescription.CreateFormatter(key);
+            AsymmetricSignatureFormatter asymmetricSignatureFormatter =
+                signatureDescription.CreateFormatter(key);
 
-            SignedXmlDebugLog.LogSigning(this, key, signatureDescription, hashAlg, asymmetricSignatureFormatter);
+            SignedXmlDebugLog.LogSigning(
+                this,
+                key,
+                signatureDescription,
+                hashAlg,
+                asymmetricSignatureFormatter
+            );
             m_signature.SignatureValue = asymmetricSignatureFormatter.CreateSignature(hashAlg);
         }
 
@@ -466,7 +541,9 @@ namespace System.Security.Cryptography.Xml
                 "SHA512" => SignedXml.XmlDsigMoreHMACSHA512Url,
                 "MD5" => SignedXml.XmlDsigMoreHMACMD5Url,
                 "RIPEMD160" => SignedXml.XmlDsigMoreHMACRIPEMD160Url,
-                _ => throw new CryptographicException(SR.Cryptography_Xml_SignatureMethodKeyMismatch),
+                _ => throw new CryptographicException(
+                    SR.Cryptography_Xml_SignatureMethodKeyMismatch
+                ),
             };
             byte[] hashValue = GetC14NDigest(hash);
 
@@ -505,7 +582,10 @@ namespace System.Security.Cryptography.Xml
                         return dsaKeyValue.Key;
 
                     case KeyInfoX509Data x509Data:
-                        _x509Collection = Utils.BuildBagOfCerts(x509Data, CertUsageType.Verification);
+                        _x509Collection = Utils.BuildBagOfCerts(
+                            x509Data,
+                            CertUsageType.Verification
+                        );
                         if (_x509Collection.Count > 0)
                         {
                             _x509Enum = _x509Collection.GetEnumerator();
@@ -529,7 +609,9 @@ namespace System.Security.Cryptography.Xml
                 {
                     if (clause is KeyInfoX509Data x509Data)
                     {
-                        collection.AddRange(Utils.BuildBagOfCerts(x509Data, CertUsageType.Verification));
+                        collection.AddRange(
+                            Utils.BuildBagOfCerts(x509Data, CertUsageType.Verification)
+                        );
                     }
                 }
             }
@@ -596,8 +678,7 @@ namespace System.Security.Cryptography.Xml
 
                     if (cloneElem2 != null)
                     {
-                        throw new CryptographicException(
-                            SR.Cryptography_Xml_InvalidReference);
+                        throw new CryptographicException(SR.Cryptography_Xml_InvalidReference);
                     }
                 }
 
@@ -643,7 +724,11 @@ namespace System.Security.Cryptography.Xml
 
         // Validation function to see if the current signature is signed with a truncated HMAC - one which
         // has a signature length of fewer bits than the whole HMAC output.
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RDC")]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RDC"
+        )]
         private bool DoesSignatureUseTruncatedHmac()
         {
             // If we're not using the SignatureLength property, then we're not truncating the signature length
@@ -680,13 +765,23 @@ namespace System.Security.Cryptography.Xml
         {
             foreach (string safeAlgorithm in SafeCanonicalizationMethods)
             {
-                if (string.Equals(safeAlgorithm, SignedInfo!.CanonicalizationMethod, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        safeAlgorithm,
+                        SignedInfo!.CanonicalizationMethod,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
             }
 
-            SignedXmlDebugLog.LogUnsafeCanonicalizationMethod(this, SignedInfo!.CanonicalizationMethod, SafeCanonicalizationMethods);
+            SignedXmlDebugLog.LogUnsafeCanonicalizationMethod(
+                this,
+                SignedInfo!.CanonicalizationMethod,
+                SafeCanonicalizationMethods
+            );
             return false;
         }
 
@@ -713,7 +808,13 @@ namespace System.Security.Cryptography.Xml
             // All canonicalization algorithms are valid transform algorithms.
             foreach (string safeAlgorithm in SafeCanonicalizationMethods)
             {
-                if (string.Equals(safeAlgorithm, transformAlgorithm, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        safeAlgorithm,
+                        transformAlgorithm,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -721,7 +822,13 @@ namespace System.Security.Cryptography.Xml
 
             foreach (string safeAlgorithm in DefaultSafeTransformMethods)
             {
-                if (string.Equals(safeAlgorithm, transformAlgorithm, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        safeAlgorithm,
+                        transformAlgorithm,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -731,7 +838,8 @@ namespace System.Security.Cryptography.Xml
                 this,
                 transformAlgorithm,
                 SafeCanonicalizationMethods,
-                DefaultSafeTransformMethods);
+                DefaultSafeTransformMethods
+            );
 
             return false;
         }
@@ -788,18 +896,30 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RDC")]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RDC"
+        )]
         private byte[] GetC14NDigest(HashAlgorithm hash)
         {
             bool isKeyedHashAlgorithm = hash is KeyedHashAlgorithm;
             if (isKeyedHashAlgorithm || !_bCacheValid || !SignedInfo!.CacheValid)
             {
                 string? baseUri = _containingDocument?.BaseURI;
-                XmlResolver? resolver = (_bResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver());
-                XmlDocument doc = Utils.PreProcessElementInput(SignedInfo!.GetXml(), resolver!, baseUri );
+                XmlResolver? resolver = (
+                    _bResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver()
+                );
+                XmlDocument doc = Utils.PreProcessElementInput(
+                    SignedInfo!.GetXml(),
+                    resolver!,
+                    baseUri
+                );
 
                 // Add non default namespaces in scope
-                CanonicalXmlNodeList? namespaces = (_context == null ? null : Utils.GetPropagatedAttributes(_context));
+                CanonicalXmlNodeList? namespaces = (
+                    _context == null ? null : Utils.GetPropagatedAttributes(_context)
+                );
                 SignedXmlDebugLog.LogNamespacePropagation(this, namespaces);
                 Utils.AddNamespaces(doc.DocumentElement!, namespaces);
 
@@ -822,10 +942,14 @@ namespace System.Security.Cryptography.Xml
             Debug.Assert(_refProcessed != null);
             Debug.Assert(_refLevelCache != null);
 
-            if (_refProcessed[index]) return _refLevelCache[index];
+            if (_refProcessed[index])
+                return _refLevelCache[index];
             _refProcessed[index] = true;
             Reference reference = (Reference)references[index]!;
-            if (string.IsNullOrEmpty(reference.Uri) || (reference.Uri.Length > 0 && reference.Uri[0] != '#'))
+            if (
+                string.IsNullOrEmpty(reference.Uri)
+                || (reference.Uri.Length > 0 && reference.Uri[0] != '#')
+            )
             {
                 _refLevelCache[index] = 0;
                 return 0;
@@ -858,6 +982,7 @@ namespace System.Security.Cryptography.Xml
         private sealed class ReferenceLevelSortOrder : IComparer
         {
             private ArrayList? _references;
+
             public ReferenceLevelSortOrder() { }
 
             public ArrayList References
@@ -877,8 +1002,10 @@ namespace System.Security.Cryptography.Xml
                 int i = 0;
                 foreach (Reference reference in References)
                 {
-                    if (reference == referenceA) iIndexA = i;
-                    if (reference == referenceB) iIndexB = i;
+                    if (reference == referenceA)
+                        iIndexA = i;
+                    if (reference == referenceB)
+                        iIndexB = i;
                     i++;
                 }
 
@@ -888,7 +1015,11 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RDC")]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RDC"
+        )]
         private void BuildDigestedReferences()
         {
             // Default the DigestMethod and Canonicalization
@@ -926,7 +1057,11 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RDC")]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RDC"
+        )]
         private bool CheckDigestedReferences()
         {
             ArrayList references = m_signature.SignedInfo!.References;
@@ -943,7 +1078,10 @@ namespace System.Security.Cryptography.Xml
                 byte[]? calculatedHash;
                 try
                 {
-                    calculatedHash = digestedReference.CalculateHashValue(_containingDocument!, m_signature.ReferencedItems);
+                    calculatedHash = digestedReference.CalculateHashValue(
+                        _containingDocument!,
+                        m_signature.ReferencedItems
+                    );
                 }
                 catch (CryptoSignedXmlRecursionException)
                 {
@@ -951,7 +1089,12 @@ namespace System.Security.Cryptography.Xml
                     return false;
                 }
                 // Compare both hashes
-                SignedXmlDebugLog.LogVerifyReferenceHash(this, digestedReference, calculatedHash, digestedReference.DigestValue);
+                SignedXmlDebugLog.LogVerifyReferenceHash(
+                    this,
+                    digestedReference,
+                    calculatedHash,
+                    digestedReference.DigestValue
+                );
 
                 if (!CryptographicEquals(calculatedHash, digestedReference.DigestValue))
                 {
@@ -978,7 +1121,6 @@ namespace System.Security.Cryptography.Xml
             // Short cut if the lengths are not identical
             if (a.Length != b.Length)
                 return false;
-
             unchecked
             {
                 // Normally this caching doesn't matter, but with the optimizer off, this nets a non-trivial speedup.
@@ -1015,8 +1157,16 @@ namespace System.Security.Cryptography.Xml
             return formatValid;
         }
 
-        [UnconditionalSuppressMessage("ILLink", "IL2026:RequiresUnreferencedCode", Justification = "ctors are marked as RDC")]
-        [UnconditionalSuppressMessage("ILLink", "IL2057:UnrecognizedReflectionPattern", Justification = "ctors are marked as RDC")]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "ctors are marked as RDC"
+        )]
+        [UnconditionalSuppressMessage(
+            "ILLink",
+            "IL2057:UnrecognizedReflectionPattern",
+            Justification = "ctors are marked as RDC"
+        )]
         private bool CheckSignedInfo(AsymmetricAlgorithm key)
         {
             if (key is null)
@@ -1026,9 +1176,12 @@ namespace System.Security.Cryptography.Xml
 
             SignedXmlDebugLog.LogBeginCheckSignedInfo(this, m_signature.SignedInfo!);
 
-            SignatureDescription? signatureDescription = CryptoHelpers.CreateNonTransformFromName<SignatureDescription>(SignatureMethod);
+            SignatureDescription? signatureDescription =
+                CryptoHelpers.CreateNonTransformFromName<SignatureDescription>(SignatureMethod);
             if (signatureDescription == null)
-                throw new CryptographicException(SR.Cryptography_Xml_SignatureDescriptionNotCreated);
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_SignatureDescriptionNotCreated
+                );
 
             // Let's see if the key corresponds with the SignatureMethod
             Type ta = Type.GetType(signatureDescription.KeyAlgorithm!)!;
@@ -1040,15 +1193,21 @@ namespace System.Security.Cryptography.Xml
                 throw new CryptographicException(SR.Cryptography_Xml_CreateHashAlgorithmFailed);
             byte[] hashval = GetC14NDigest(hashAlgorithm);
 
-            AsymmetricSignatureDeformatter asymmetricSignatureDeformatter = signatureDescription.CreateDeformatter(key);
-            SignedXmlDebugLog.LogVerifySignedInfo(this,
-                                                  key,
-                                                  signatureDescription,
-                                                  hashAlgorithm,
-                                                  asymmetricSignatureDeformatter,
-                                                  hashval,
-                                                  m_signature.SignatureValue);
-            return asymmetricSignatureDeformatter.VerifySignature(hashval, m_signature.SignatureValue!);
+            AsymmetricSignatureDeformatter asymmetricSignatureDeformatter =
+                signatureDescription.CreateDeformatter(key);
+            SignedXmlDebugLog.LogVerifySignedInfo(
+                this,
+                key,
+                signatureDescription,
+                hashAlgorithm,
+                asymmetricSignatureDeformatter,
+                hashval,
+                m_signature.SignatureValue
+            );
+            return asymmetricSignatureDeformatter.VerifySignature(
+                hashval,
+                m_signature.SignatureValue!
+            );
         }
 
         private bool CheckSignedInfo(KeyedHashAlgorithm macAlg)
@@ -1078,12 +1237,23 @@ namespace System.Security.Cryptography.Xml
 
             // Calculate the hash
             byte[] hashValue = GetC14NDigest(macAlg);
-            SignedXmlDebugLog.LogVerifySignedInfo(this, macAlg, hashValue, m_signature.SignatureValue);
+            SignedXmlDebugLog.LogVerifySignedInfo(
+                this,
+                macAlg,
+                hashValue,
+                m_signature.SignatureValue
+            );
 
-            return m_signature.SignatureValue.AsSpan().SequenceEqual(hashValue.AsSpan(0, m_signature.SignatureValue.Length));
+            return m_signature
+                .SignatureValue.AsSpan()
+                .SequenceEqual(hashValue.AsSpan(0, m_signature.SignatureValue.Length));
         }
 
-        private static XmlElement? GetSingleReferenceTarget(XmlDocument document, string idAttributeName, string idValue)
+        private static XmlElement? GetSingleReferenceTarget(
+            XmlDocument document,
+            string idAttributeName,
+            string idValue
+        )
         {
             // idValue has already been tested as an NCName (unless overridden for compatibility), so there's no
             // escaping that needs to be done here.
@@ -1139,7 +1309,7 @@ namespace System.Security.Cryptography.Xml
             }
 
             if (expectedType == null)
-                return false;   // SignatureDescription specified something that isn't even a subclass of AsymmetricAlgorithm. For compatibility with 4.6, return false rather throw.
+                return false; // SignatureDescription specified something that isn't even a subclass of AsymmetricAlgorithm. For compatibility with 4.6, return false rather throw.
 
             if (actualType.IsSubclassOf(expectedType))
                 return true;

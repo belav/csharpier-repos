@@ -7,19 +7,44 @@ namespace System.Xml.XmlDocumentTests
 {
     public static class TwoTextNodeTests
     {
-        private static readonly InsertType[] s_InsertTypes = new[] { InsertType.Prepend, InsertType.Append, InsertType.InsertBefore };
-        private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.SignificantWhitespace, XmlNodeType.CDATA, XmlNodeType.Element /*, XmlNodeType.EntityReference*/ };
+        private static readonly InsertType[] s_InsertTypes = new[]
+        {
+            InsertType.Prepend,
+            InsertType.Append,
+            InsertType.InsertBefore,
+        };
+        private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[]
+        {
+            XmlNodeType.Whitespace,
+            XmlNodeType.SignificantWhitespace,
+            XmlNodeType.CDATA,
+            XmlNodeType.Element, /*, XmlNodeType.EntityReference*/
+        };
 
-        private static void TwoTextNodeBase(XmlDocument xmlDocument, InsertType insertType, XmlNodeType nodeType)
+        private static void TwoTextNodeBase(
+            XmlDocument xmlDocument,
+            InsertType insertType,
+            XmlNodeType nodeType
+        )
         {
             XmlNode parent = xmlDocument.DocumentElement;
-            XmlNode refChild = (insertType == InsertType.Prepend) ? parent.FirstChild : parent.LastChild;
+            XmlNode refChild =
+                (insertType == InsertType.Prepend) ? parent.FirstChild : parent.LastChild;
             XmlNode newChild = TestHelper.CreateNode(xmlDocument, nodeType);
 
             string original = parent.InnerXml;
-            string expected = (insertType == InsertType.Prepend) ? (newChild.OuterXml + parent.InnerXml)
-                : ((insertType == InsertType.Append) ? (parent.InnerXml + newChild.OuterXml)
-                : (refChild.PreviousSibling.OuterXml + newChild.OuterXml + refChild.OuterXml));
+            string expected =
+                (insertType == InsertType.Prepend)
+                    ? (newChild.OuterXml + parent.InnerXml)
+                    : (
+                        (insertType == InsertType.Append)
+                            ? (parent.InnerXml + newChild.OuterXml)
+                            : (
+                                refChild.PreviousSibling.OuterXml
+                                + newChild.OuterXml
+                                + refChild.OuterXml
+                            )
+                    );
 
             // insert new child
             var insertDelegate = TestHelper.CreateInsertBeforeOrAfter(insertType);
@@ -49,7 +74,11 @@ namespace System.Xml.XmlDocumentTests
             TwoTextNodeBase(xmlDocument, insertType, nodeType);
         }
 
-        private static void TwoTextNodeBase(XmlNodeType[] nodeTypes, InsertType insertType, XmlNodeType nodeType)
+        private static void TwoTextNodeBase(
+            XmlNodeType[] nodeTypes,
+            InsertType insertType,
+            XmlNodeType nodeType
+        )
         {
             XmlDocument xmlDocument = new XmlDocument { PreserveWhitespace = true };
             var elem = xmlDocument.CreateElement("elem");
@@ -68,8 +97,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @" <WC> 	<![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></WC>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -78,40 +107,60 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<CT><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]>text</CT>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
         public static void Whitespace_Whitespace()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.Whitespace }, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.Whitespace },
+                    insertType,
+                    nodeType
+                );
         }
 
         [Fact]
         public static void SignificantWhitespace_SignificantWhitespace()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(new XmlNodeType[] { XmlNodeType.SignificantWhitespace, XmlNodeType.SignificantWhitespace }, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[]
+                    {
+                        XmlNodeType.SignificantWhitespace,
+                        XmlNodeType.SignificantWhitespace,
+                    },
+                    insertType,
+                    nodeType
+                );
         }
 
         [Fact]
         public static void Text_Text()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.Text }, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.Text },
+                    insertType,
+                    nodeType
+                );
         }
 
         [Fact]
         public static void Text_SignificantWhitespace()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.SignificantWhitespace }, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.SignificantWhitespace },
+                    insertType,
+                    nodeType
+                );
         }
     }
 }

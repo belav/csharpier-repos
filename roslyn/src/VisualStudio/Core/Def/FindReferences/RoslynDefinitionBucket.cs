@@ -34,7 +34,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// the same file/span.  So we represent this as one entry with several project flavors.  If
             /// we get more than one flavor, we'll show that the user in the UI.
             /// </summary>
-            private readonly Dictionary<(string? filePath, TextSpan span), DocumentSpanEntry> _locationToEntry = new();
+            private readonly Dictionary<
+                (string? filePath, TextSpan span),
+                DocumentSpanEntry
+            > _locationToEntry = new();
 
             public RoslynDefinitionBucket(
                 string name,
@@ -42,11 +45,14 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 StreamingFindUsagesPresenter presenter,
                 AbstractTableDataSourceFindUsagesContext context,
                 DefinitionItem definitionItem,
-                IThreadingContext threadingContext)
-                : base(name,
-                       sourceTypeIdentifier: context.SourceTypeIdentifier,
-                       identifier: context.Identifier,
-                       expandedByDefault: expandedByDefault)
+                IThreadingContext threadingContext
+            )
+                : base(
+                    name,
+                    sourceTypeIdentifier: context.SourceTypeIdentifier,
+                    identifier: context.Identifier,
+                    expandedByDefault: expandedByDefault
+                )
             {
                 _presenter = presenter;
                 DefinitionItem = definitionItem;
@@ -58,25 +64,38 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 AbstractTableDataSourceFindUsagesContext context,
                 DefinitionItem definitionItem,
                 bool expandedByDefault,
-                IThreadingContext threadingContext)
+                IThreadingContext threadingContext
+            )
             {
                 var isPrimary = definitionItem.Properties.ContainsKey(DefinitionItem.Primary);
 
                 // Sort the primary item above everything else.
-                var name = $"{(isPrimary ? 0 : 1)} {definitionItem.DisplayParts.JoinText()} {definitionItem.GetHashCode()}";
+                var name =
+                    $"{(isPrimary ? 0 : 1)} {definitionItem.DisplayParts.JoinText()} {definitionItem.GetHashCode()}";
 
                 return new RoslynDefinitionBucket(
-                    name, expandedByDefault, presenter, context, definitionItem, threadingContext);
+                    name,
+                    expandedByDefault,
+                    presenter,
+                    context,
+                    definitionItem,
+                    threadingContext
+                );
             }
 
-            public bool CanNavigateTo()
-                => true;
+            public bool CanNavigateTo() => true;
 
-            public async Task NavigateToAsync(NavigationOptions options, CancellationToken cancellationToken)
+            public async Task NavigateToAsync(
+                NavigationOptions options,
+                CancellationToken cancellationToken
+            )
             {
-                var location = await DefinitionItem.GetNavigableLocationAsync(
-                    _presenter._workspace, cancellationToken).ConfigureAwait(false);
-                await location.TryNavigateToAsync(_threadingContext, options, cancellationToken).ConfigureAwait(false);
+                var location = await DefinitionItem
+                    .GetNavigableLocationAsync(_presenter._workspace, cancellationToken)
+                    .ConfigureAwait(false);
+                await location
+                    .TryNavigateToAsync(_threadingContext, options, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             public override bool TryGetValue(string key, out object? content)
@@ -92,7 +111,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// </summary>
             public override bool TryCreateStringContent(out string? content)
             {
-                if (TryGetValue(StandardTableKeyNames.Text, out var contentValue) && contentValue is string textContent)
+                if (
+                    TryGetValue(StandardTableKeyNames.Text, out var contentValue)
+                    && contentValue is string textContent
+                )
                 {
                     content = textContent;
                     return true;
@@ -112,7 +134,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                     case StandardTableKeyNames2.TextInlines:
                         var inlines = new List<Inline> { new Run(" ") };
-                        inlines.AddRange(DefinitionItem.DisplayParts.ToInlines(_presenter.ClassificationFormatMap, _presenter.TypeMap));
+                        inlines.AddRange(
+                            DefinitionItem.DisplayParts.ToInlines(
+                                _presenter.ClassificationFormatMap,
+                                _presenter.TypeMap
+                            )
+                        );
                         foreach (var inline in inlines)
                         {
                             inline.SetValue(TextElement.FontWeightProperty, FontWeights.Bold);
@@ -127,7 +154,11 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return null;
             }
 
-            public DocumentSpanEntry GetOrAddEntry(string? filePath, TextSpan sourceSpan, DocumentSpanEntry entry)
+            public DocumentSpanEntry GetOrAddEntry(
+                string? filePath,
+                TextSpan sourceSpan,
+                DocumentSpanEntry entry
+            )
             {
                 var key = (filePath, sourceSpan);
                 lock (_locationToEntry)

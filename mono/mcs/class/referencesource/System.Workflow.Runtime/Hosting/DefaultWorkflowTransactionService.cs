@@ -5,35 +5,41 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Transactions;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Configuration;
+using System.Diagnostics;
+using System.Transactions;
 
 namespace System.Workflow.Runtime.Hosting
 {
     /// <summary> A simple TransactionService that creates
-    /// <c>System.Transactions.CommittableTransaction</c>.</summary> 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    /// <c>System.Transactions.CommittableTransaction</c>.</summary>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class DefaultWorkflowCommitWorkBatchService : WorkflowCommitWorkBatchService
     {
         private bool _enableRetries = false;
         private bool _ignoreCommonEnableRetries = false;
 
-        public DefaultWorkflowCommitWorkBatchService()
-        {
-        }
+        public DefaultWorkflowCommitWorkBatchService() { }
 
         public DefaultWorkflowCommitWorkBatchService(NameValueCollection parameters)
         {
             if (parameters == null)
-                throw new ArgumentNullException("parameters", ExecutionStringManager.MissingParameters);
+                throw new ArgumentNullException(
+                    "parameters",
+                    ExecutionStringManager.MissingParameters
+                );
 
             if (parameters.Count > 0)
             {
                 foreach (string key in parameters.Keys)
                 {
-                    if (0 == string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        0
+                        == string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         _enableRetries = bool.Parse(parameters[key]);
                         _ignoreCommonEnableRetries = true;
@@ -54,20 +60,28 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Start()
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "DefaultWorkflowCommitWorkBatchService: Starting");
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "DefaultWorkflowCommitWorkBatchService: Starting"
+            );
 
             //
             // If we didn't find a local value for enable retries
             // check in the common section
             if ((!_ignoreCommonEnableRetries) && (null != base.Runtime))
             {
-                NameValueConfigurationCollection commonConfigurationParameters = base.Runtime.CommonParameters;
+                NameValueConfigurationCollection commonConfigurationParameters =
+                    base.Runtime.CommonParameters;
                 if (commonConfigurationParameters != null)
                 {
                     // Then scan for connection string in the common configuration parameters section
                     foreach (string key in commonConfigurationParameters.AllKeys)
                     {
-                        if (string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             _enableRetries = bool.Parse(commonConfigurationParameters[key].Value);
                             break;
@@ -80,12 +94,18 @@ namespace System.Workflow.Runtime.Hosting
 
         protected override void OnStopped()
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "DefaultWorkflowCommitWorkBatchService: Stopping");
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "DefaultWorkflowCommitWorkBatchService: Stopping"
+            );
 
             base.OnStopped();
         }
 
-        internal protected override void CommitWorkBatch(CommitWorkBatchCallback commitWorkBatchCallback)
+        protected internal override void CommitWorkBatch(
+            CommitWorkBatchCallback commitWorkBatchCallback
+        )
         {
             DbRetry dbRetry = new DbRetry(_enableRetries);
             short retryCounter = 0;
@@ -107,11 +127,24 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "DefaultWorkflowCommitWorkBatchService caught exception from commitWorkBatchCallback: " + e.ToString());
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "DefaultWorkflowCommitWorkBatchService caught exception from commitWorkBatchCallback: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref retryCounter))
                     {
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "DefaultWorkflowCommitWorkBatchService retrying commitWorkBatchCallback (retry attempt " + retryCounter.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")");
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "DefaultWorkflowCommitWorkBatchService retrying commitWorkBatchCallback (retry attempt "
+                                + retryCounter.ToString(
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                )
+                                + ")"
+                        );
                         continue;
                     }
                     else

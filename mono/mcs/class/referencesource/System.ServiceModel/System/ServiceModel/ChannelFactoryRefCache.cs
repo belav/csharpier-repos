@@ -51,15 +51,13 @@ namespace System.ServiceModel
 
         public ChannelFactory<TChannel> ChannelFactory
         {
-            get
-            {
-                return this.channelFactory;
-            }
+            get { return this.channelFactory; }
         }
     }
 
-    class ChannelFactoryRefCache<TChannel> : MruCache<EndpointTrait<TChannel>, ChannelFactoryRef<TChannel>>
-       where TChannel : class
+    class ChannelFactoryRefCache<TChannel>
+        : MruCache<EndpointTrait<TChannel>, ChannelFactoryRef<TChannel>>
+        where TChannel : class
     {
         static EndpointTraitComparer DefaultEndpointTraitComparer = new EndpointTraitComparer();
         readonly int watermark;

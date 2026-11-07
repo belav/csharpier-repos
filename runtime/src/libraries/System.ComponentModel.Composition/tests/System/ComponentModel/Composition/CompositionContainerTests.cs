@@ -76,7 +76,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor3_EmptyArrayAsProvidersArgument_ShouldSetProvidersPropertyToEmpty()
         {
-            var container = new CompositionContainer(CatalogFactory.Create(), new ExportProvider[0]);
+            var container = new CompositionContainer(
+                CatalogFactory.Create(),
+                new ExportProvider[0]
+            );
 
             Assert.Empty(container.Providers);
         }
@@ -100,7 +103,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor3_NullAsCatalogArgument_ShouldSetCatalogPropertyToNull()
         {
-            var container = new CompositionContainer((ComposablePartCatalog)null, new ExportProvider[0]);
+            var container = new CompositionContainer(
+                (ComposablePartCatalog)null,
+                new ExportProvider[0]
+            );
 
             Assert.Null(container.Catalog);
         }
@@ -441,7 +447,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ExactlyOne
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -454,7 +463,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrOne
+            );
 
             var exports = container.GetExports(definition);
 
@@ -466,7 +478,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = container.GetExports(definition);
 
@@ -608,7 +623,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportOfT1_AskingForContractWithOneExport_ShouldReturnExport()
         {
-            var container = ContainerFactory.Create(new MicroExport(ContractFromType(typeof(string)), "Value"));
+            var container = ContainerFactory.Create(
+                new MicroExport(ContractFromType(typeof(string)), "Value")
+            );
 
             var export = container.GetExport<string>();
 
@@ -628,7 +645,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportOfTTMetadataView1_AskingForContractWithOneExport_ShouldReturnExport()
         {
-            var container = ContainerFactory.Create(new MicroExport(ContractFromType(typeof(string)), "Value"));
+            var container = ContainerFactory.Create(
+                new MicroExport(ContractFromType(typeof(string)), "Value")
+            );
 
             var export = container.GetExport<string, object>();
 
@@ -650,7 +669,10 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create(new MicroExport("Contract", "Value"));
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ExactlyOne
+            );
 
             var exports = container.GetExports(definition);
 
@@ -662,7 +684,10 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create(new MicroExport("Contract", "Value"));
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrOne
+            );
 
             var exports = container.GetExports(definition);
 
@@ -674,7 +699,10 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create(new MicroExport("Contract", "Value"));
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = container.GetExports(definition);
 
@@ -794,29 +822,35 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportOfT1_AskingForContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport(ContractFromType(typeof(string)), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(ContractFromType(typeof(string)), "Value1", "Value2")
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
-             {
-                 container.GetExport<string>();
-             });
+            {
+                container.GetExport<string>();
+            });
         }
 
         [Fact]
         public void GetExportOfT2_AskingForContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
-             {
-                 container.GetExport<string>("Contract");
-             });
+            {
+                container.GetExport<string>("Contract");
+            });
         }
 
         [Fact]
         public void GetExportOfTTMetadataView1_AskingForContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport(ContractFromType(typeof(string)), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(ContractFromType(typeof(string)), "Value1", "Value2")
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -827,7 +861,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportOfTTMetadataView2_AskingForContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -838,9 +874,14 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports1_AskingForExactlyOneContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ExactlyOne
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -851,9 +892,14 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports1_AskingForZeroOrOneContractWithMultipleExports_ShouldReturnZero()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrOne
+            );
 
             Assert.Equal(0, container.GetExports(definition).Count());
         }
@@ -861,9 +907,14 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports1_AskingForZeroOrMoreContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = container.GetExports(definition);
 
@@ -873,7 +924,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports2_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             var exports = container.GetExports(typeof(string), (Type)null, "Contract");
 
@@ -883,7 +936,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportsOfT1_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport(typeof(string), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(typeof(string), "Value1", "Value2")
+            );
 
             var exports = container.GetExports<string>();
 
@@ -893,7 +948,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportsOfT2_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             var exports = container.GetExports<string>("Contract");
 
@@ -903,7 +960,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportsOfTTMetadataView1_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport(typeof(string), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(typeof(string), "Value1", "Value2")
+            );
 
             var exports = container.GetExports<string, object>();
 
@@ -913,7 +972,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportsOfTTMetadataView2_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             var exports = container.GetExports<string, object>("Contract");
 
@@ -923,7 +984,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValueOfT1_AskingForContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport(typeof(string), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(typeof(string), "Value1", "Value2")
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -934,7 +997,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValueOfT2_AskingForContractWithMultipleExports_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -945,7 +1010,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValueOrDefaultOfT1_AskingForContractWithMultipleExports_ShouldReturnZero()
         {
-            var container = ContainerFactory.Create(new MicroExport(typeof(string), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(typeof(string), "Value1", "Value2")
+            );
 
             Assert.Null(container.GetExportedValueOrDefault<string>());
         }
@@ -953,7 +1020,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValueOrDefaultOfT2_AskingForContractWithMultipleExports_ShouldReturnZero()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", "Value1", "Value2")
+            );
 
             Assert.Null(container.GetExportedValueOrDefault<string>("Contract"));
         }
@@ -961,7 +1030,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValuesOfT1_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport(typeof(string), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport(typeof(string), "Value1", "Value2")
+            );
 
             var exportedValues = container.GetExportedValues<string>();
 
@@ -971,7 +1042,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValuesOfT2_AskingForContractWithMultipleExports_ShouldReturnMultipleExports()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), "Value1", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), "Value1", "Value2")
+            );
 
             var exportedValues = container.GetExportedValues<string>("Contract");
 
@@ -981,10 +1054,15 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports1_AskingForExactlyOneAndAll_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract1", "Value1", "Value2", "Value3"),
-                                                    new MicroExport("Contract2", "Value4", "Value5", "Value6"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract1", "Value1", "Value2", "Value3"),
+                new MicroExport("Contract2", "Value4", "Value5", "Value6")
+            );
 
-            var definition = ImportDefinitionFactory.Create(import => true, ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                import => true,
+                ImportCardinality.ExactlyOne
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -995,10 +1073,15 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports1_AskingForZeroOrOneAndAll_ShouldReturnZero()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract1", "Value1", "Value2", "Value3"),
-                                                    new MicroExport("Contract2", "Value4", "Value5", "Value6"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract1", "Value1", "Value2", "Value3"),
+                new MicroExport("Contract2", "Value4", "Value5", "Value6")
+            );
 
-            var definition = ImportDefinitionFactory.Create(import => true, ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                import => true,
+                ImportCardinality.ZeroOrOne
+            );
 
             Assert.Equal(0, container.GetExports(definition).Count());
         }
@@ -1006,15 +1089,27 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports1_AskingForZeroOrMoreAndAll_ShouldReturnAll()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract1", "Value1", "Value2", "Value3"),
-                                                    new MicroExport("Contract2", "Value4", "Value5", "Value6"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract1", "Value1", "Value2", "Value3"),
+                new MicroExport("Contract2", "Value4", "Value5", "Value6")
+            );
 
-            var definition = ImportDefinitionFactory.Create(import => true, ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                import => true,
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = container.GetExports(definition);
 
-            ExportsAssert.AreEqual(exports, "Value1", "Value2", "Value3",
-                                            "Value4", "Value5", "Value6");
+            ExportsAssert.AreEqual(
+                exports,
+                "Value1",
+                "Value2",
+                "Value3",
+                "Value4",
+                "Value5",
+                "Value6"
+            );
         }
 
         [Fact]
@@ -1033,7 +1128,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportOfT2_StringAsTTypeArgumentAskingForContractWithOneObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             var export = container.GetExport<string>("Contract");
 
@@ -1059,7 +1156,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportOfTTMetadataView2_StringAsTTypeArgumentAskingForContractWithOneObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             var export = container.GetExport<string, object>("Contract");
 
@@ -1072,7 +1171,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExports2_StringAsTTypeArgumentAskingForContractWithOneObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             var exports = container.GetExports(typeof(string), (Type)null, "Contract");
 
@@ -1106,7 +1207,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportsOfT2_StringAsTTypeArgumentAskingForContractWithOneObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             var exports = container.GetExports<string>("Contract");
 
@@ -1140,7 +1243,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportsOfTTMetadataView2_StringAsTTypeArgumentAskingForContractWithOneObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             var exports = container.GetExports<string, object>("Contract");
 
@@ -1168,7 +1273,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValueOfT2_StringAsTTypeArgumentAskingForContractWithObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
             {
@@ -1190,7 +1297,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValueOrDefaultOfT2_StringAsTTypeArgumentAskingForContractWithObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
             {
@@ -1212,7 +1321,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetExportedValuesOfT2_StringAsTTypeArgumentAskingForContractWithOneObjectExport_ShouldThrowContractMismatch()
         {
-            var container = ContainerFactory.Create(new MicroExport("Contract", typeof(string), new object()));
+            var container = ContainerFactory.Create(
+                new MicroExport("Contract", typeof(string), new object())
+            );
 
             ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
             {
@@ -1270,7 +1381,10 @@ namespace System.ComponentModel.Composition
             var parent = ContainerFactory.Create(new MicroExport("Contract", "Parent"));
             var child = ContainerFactory.Create(parent);
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ExactlyOne
+            );
 
             var exports = child.GetExports(definition);
 
@@ -1283,7 +1397,10 @@ namespace System.ComponentModel.Composition
             var parent = ContainerFactory.Create(new MicroExport("Contract", "Parent"));
             var child = ContainerFactory.Create(parent);
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrOne
+            );
 
             var exports = child.GetExports(definition);
 
@@ -1296,7 +1413,10 @@ namespace System.ComponentModel.Composition
             var parent = ContainerFactory.Create(new MicroExport("Contract", "Parent"));
             var child = ContainerFactory.Create(parent);
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = child.GetExports(definition);
 
@@ -1474,7 +1594,10 @@ namespace System.ComponentModel.Composition
             var parent = ContainerFactory.Create(new MicroExport("Contract", "Parent"));
             var child = ContainerFactory.Create(parent, new MicroExport("Contract", "Child"));
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ExactlyOne
+            );
 
             var exports = child.GetExports(definition);
 
@@ -1487,7 +1610,10 @@ namespace System.ComponentModel.Composition
             var parent = ContainerFactory.Create(new MicroExport("Contract", "Parent"));
             var child = ContainerFactory.Create(parent, new MicroExport("Contract", "Child"));
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrOne
+            );
 
             var exports = child.GetExports(definition);
 
@@ -1500,7 +1626,10 @@ namespace System.ComponentModel.Composition
             var parent = ContainerFactory.Create(new MicroExport("Contract", "Parent"));
             var child = ContainerFactory.Create(parent, new MicroExport("Contract", "Child"));
 
-            var definition = ImportDefinitionFactory.Create("Contract", ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                "Contract",
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = child.GetExports(definition);
 
@@ -1637,9 +1766,11 @@ namespace System.ComponentModel.Composition
             metadata.Add("Metadata2", "MetadataValue2");
             metadata.Add("Metadata3", "MetadataValue3");
 
-            var container = ContainerFactory.Create(new MicroExport("Another", metadata, "Value1"),
-                                                    new MicroExport(typeof(string), metadata, "Value1"),
-                                                    new MicroExport(typeof(string), "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Another", metadata, "Value1"),
+                new MicroExport(typeof(string), metadata, "Value1"),
+                new MicroExport(typeof(string), "Value2")
+            );
 
             var export = container.GetExport<string, IMetadataView>();
             var metadataExport = (Lazy<string, IMetadataView>)export;
@@ -1658,9 +1789,11 @@ namespace System.ComponentModel.Composition
             metadata.Add("Metadata2", "MetadataValue2");
             metadata.Add("Metadata3", "MetadataValue3");
 
-            var container = ContainerFactory.Create(new MicroExport("Another", metadata, "Value1"),
-                                                                     new MicroExport("Contract", metadata, "Value1"),
-                                                                     new MicroExport("Contract", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Another", metadata, "Value1"),
+                new MicroExport("Contract", metadata, "Value1"),
+                new MicroExport("Contract", "Value2")
+            );
 
             var export = container.GetExport<string, IMetadataView>("Contract");
             var metadataExport = (Lazy<string, IMetadataView>)export;
@@ -1679,14 +1812,21 @@ namespace System.ComponentModel.Composition
             metadata.Add("Metadata2", "MetadataValue2");
             metadata.Add("Metadata3", "MetadataValue3");
 
-            var container = ContainerFactory.Create(new MicroExport("Another", metadata, "Value1"),
-                                                                     new MicroExport("Contract", metadata, "Value1"),
-                                                                     new MicroExport("Contract", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Another", metadata, "Value1"),
+                new MicroExport("Contract", metadata, "Value1"),
+                new MicroExport("Contract", "Value2")
+            );
 
             var definition = ImportDefinitionFactory.Create(
                 "Contract",
-                new Dictionary<string, Type> { { "Metadata1", typeof(object) }, { "Metadata2", typeof(object) }, { "Metadata3", typeof(object) } }
-                );
+                new Dictionary<string, Type>
+                {
+                    { "Metadata1", typeof(object) },
+                    { "Metadata2", typeof(object) },
+                    { "Metadata3", typeof(object) },
+                }
+            );
 
             var exports = container.GetExports(definition);
 
@@ -1706,9 +1846,11 @@ namespace System.ComponentModel.Composition
             metadata.Add("Metadata2", "MetadataValue2");
             metadata.Add("Metadata3", "MetadataValue3");
 
-            var container = ContainerFactory.Create(new MicroExport("Another", metadata, "Value1"),
-                                                                     new MicroExport("Contract", metadata, "Value1"),
-                                                                     new MicroExport("Contract", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Another", metadata, "Value1"),
+                new MicroExport("Contract", metadata, "Value1"),
+                new MicroExport("Contract", "Value2")
+            );
 
             var exports = container.GetExports(typeof(string), typeof(IMetadataView), "Contract");
 
@@ -1733,9 +1875,11 @@ namespace System.ComponentModel.Composition
             metadata.Add("Metadata2", "MetadataValue2");
             metadata.Add("Metadata3", "MetadataValue3");
 
-            var container = ContainerFactory.Create(new MicroExport("Another", metadata, "Value1"),
-                                                                     new MicroExport(typeof(string), metadata, "Value1"),
-                                                                     new MicroExport(typeof(string), "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Another", metadata, "Value1"),
+                new MicroExport(typeof(string), metadata, "Value1"),
+                new MicroExport(typeof(string), "Value2")
+            );
 
             var exports = container.GetExports<string, IMetadataView>();
 
@@ -1757,9 +1901,11 @@ namespace System.ComponentModel.Composition
             metadata.Add("Metadata2", "MetadataValue2");
             metadata.Add("Metadata3", "MetadataValue3");
 
-            var container = ContainerFactory.Create(new MicroExport("Another", metadata, "Value1"),
-                                                                     new MicroExport("Contract", metadata, "Value1"),
-                                                                     new MicroExport("Contract", "Value2"));
+            var container = ContainerFactory.Create(
+                new MicroExport("Another", metadata, "Value1"),
+                new MicroExport("Contract", metadata, "Value1"),
+                new MicroExport("Contract", "Value2")
+            );
 
             var exports = container.GetExports<string, IMetadataView>("Contract");
 
@@ -1778,7 +1924,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            var definition = ImportDefinitionFactory.Create(export => true, ImportCardinality.ExactlyOne);
+            var definition = ImportDefinitionFactory.Create(
+                export => true,
+                ImportCardinality.ExactlyOne
+            );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
             {
@@ -1791,7 +1940,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            var definition = ImportDefinitionFactory.Create(export => true, ImportCardinality.ZeroOrOne);
+            var definition = ImportDefinitionFactory.Create(
+                export => true,
+                ImportCardinality.ZeroOrOne
+            );
 
             var exports = container.GetExports(definition);
 
@@ -1803,7 +1955,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            var definition = ImportDefinitionFactory.Create(export => true, ImportCardinality.ZeroOrMore);
+            var definition = ImportDefinitionFactory.Create(
+                export => true,
+                ImportCardinality.ZeroOrMore
+            );
 
             var exports = container.GetExports(definition);
 
@@ -1822,7 +1977,9 @@ namespace System.ComponentModel.Composition
             Assert.Equal(1, importer.Value);
             Assert.Equal(1, importer.ImportSatisfiedCount);
 
-            var doesNotExistInContainer = PartFactory.CreateExporter(new MicroExport(contractName, 2));
+            var doesNotExistInContainer = PartFactory.CreateExporter(
+                new MicroExport(contractName, 2)
+            );
 
             CompositionBatch batch = new CompositionBatch();
             batch.RemovePart(doesNotExistInContainer);
@@ -1891,10 +2048,15 @@ namespace System.ComponentModel.Composition
             CompositionBatch batch = new CompositionBatch();
             batch.AddParts(importer);
 
-            CompositionAssert.ThrowsChangeRejectedError(ErrorId.ImportEngine_PartCannotSetImport, ErrorId.ImportEngine_ImportCardinalityMismatch, RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsChangeRejectedError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ImportEngine_ImportCardinalityMismatch,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
 
             Assert.Equal(0, importer.Value);
         }
@@ -1954,7 +2116,7 @@ namespace System.ComponentModel.Composition
             Assert.False(container.IsPresent("foo"));
 
             batch = new CompositionBatch();
-            batch.RemovePart(key);        // Remove should be idempotent
+            batch.RemovePart(key); // Remove should be idempotent
             container.Compose(batch);
         }
 
@@ -2163,7 +2325,6 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ExportsChanged_FromAggregateCatalog_ShouldFireExportsChangedOnce()
         {
-
             var cat = new AggregateCatalog();
             var container = new CompositionContainer(cat);
             IEnumerable<string> changedNames = null;
@@ -2213,7 +2374,6 @@ namespace System.ComponentModel.Composition
                 {
                     finalizerCalled = true;
                 }
-
             });
 
             container.Dispose();
@@ -2264,12 +2424,14 @@ namespace System.ComponentModel.Composition
 
         [Fact]
         public void Dispose_ContainerAsPart_CanBeDisposed()
-        {   // Tests that when we re-enter CompositionContainer.Dispose, that we don't
+        { // Tests that when we re-enter CompositionContainer.Dispose, that we don't
             // stack overflow.
 
             using (var container = CreateCompositionContainer())
             {
-                var part = PartFactory.CreateExporter(new MicroExport(typeof(ICompositionService), container));
+                var part = PartFactory.CreateExporter(
+                    new MicroExport(typeof(ICompositionService), container)
+                );
                 CompositionBatch batch = new CompositionBatch();
                 batch.AddPart(part);
                 container.Compose(batch);
@@ -2339,8 +2501,7 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            Assert.Throws<ArgumentNullException>("export",
-                () => container.ReleaseExport(null));
+            Assert.Throws<ArgumentNullException>("export", () => container.ReleaseExport(null));
         }
 
         [Fact]
@@ -2348,8 +2509,7 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            Assert.Throws<ArgumentNullException>("exports",
-                () => container.ReleaseExports(null));
+            Assert.Throws<ArgumentNullException>("exports", () => container.ReleaseExports(null));
         }
 
         [Fact]
@@ -2357,38 +2517,30 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            Assert.Throws<ArgumentException>("exports",
-                () => container.ReleaseExports(new Export[] { null }));
+            Assert.Throws<ArgumentException>("exports", () =>
+                container.ReleaseExports(new Export[] { null })
+            );
         }
 
         public class OptionalImporter
         {
             [Import("ValueType", AllowDefault = true)]
-            public int ValueType
-            {
-                get;
-                set;
-            }
+            public int ValueType { get; set; }
 
             [Import("NullableValueType", AllowDefault = true)]
-            public int? NullableValueType
-            {
-                get;
-                set;
-            }
+            public int? NullableValueType { get; set; }
 
             [Import("ReferenceType", AllowDefault = true)]
-            public string ReferenceType
-            {
-                get;
-                set;
-            }
+            public string ReferenceType { get; set; }
         }
 
         public class ExportSimpleIntWithException
         {
             [Export("SimpleInt")]
-            public int SimpleInt { get { throw new NotImplementedException(); } }
+            public int SimpleInt
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
 
         [Fact]
@@ -2409,10 +2561,14 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
             CompositionBatch batch = new CompositionBatch();
-            batch.AddParts(new CallbackImportNotify(delegate
-            {
-                container.GetExportedValueOrDefault<int>();
-            }));
+            batch.AddParts(
+                new CallbackImportNotify(
+                    delegate
+                    {
+                        container.GetExportedValueOrDefault<int>();
+                    }
+                )
+            );
 
             container.Compose(batch);
         }
@@ -2432,22 +2588,16 @@ namespace System.ComponentModel.Composition
         }
 
         [Export("MyExporterWithNoFoo")]
-        public class MyExporterWithNoFoo
-        {
-        }
+        public class MyExporterWithNoFoo { }
 
         [Export("MyExporterWithFoo")]
         [ExportMetadata("Foo", "Foo value")]
-        public class MyExporterWithFoo
-        {
-        }
+        public class MyExporterWithFoo { }
 
         [Export("MyExporterWithFooBar")]
         [ExportMetadata("Foo", "Foo value")]
         [ExportMetadata("Bar", "Bar value")]
-        public class MyExporterWithFooBar
-        {
-        }
+        public class MyExporterWithFooBar { }
 
         // Silverlight doesn't support strongly typed metadata
         [Fact]
@@ -2558,12 +2708,15 @@ namespace System.ComponentModel.Composition
             CompositionBatch batch = new CompositionBatch();
             batch.AddPart(importer);
 
-            CompositionAssert.ThrowsChangeRejectedError(ErrorId.ImportEngine_PartCannotSetImport,          // Cannot set Int32Importer.Value because
-                                          ErrorId.ImportEngine_ImportCardinalityMismatch,    // No exports are present that match contract
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsChangeRejectedError(
+                ErrorId.ImportEngine_PartCannotSetImport, // Cannot set Int32Importer.Value because
+                ErrorId.ImportEngine_ImportCardinalityMismatch, // No exports are present that match contract
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -2571,16 +2724,23 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
             CompositionBatch batch = new CompositionBatch();
-            batch.AddParts(new CallbackImportNotify(delegate
-            {
-                throw new InvalidOperationException();
-            }));
+            batch.AddParts(
+                new CallbackImportNotify(
+                    delegate
+                    {
+                        throw new InvalidOperationException();
+                    }
+                )
+            );
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotActivate,              // Cannot activate CallbackImportNotify because
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotActivate, // Cannot activate CallbackImportNotify because
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -2588,11 +2748,15 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
             CompositionBatch batch = new CompositionBatch();
-            batch.AddParts(new CallbackImportNotify(delegate
-            {
-                // Is this really a supported scenario?
-                container.Compose(batch);
-            }));
+            batch.AddParts(
+                new CallbackImportNotify(
+                    delegate
+                    {
+                        // Is this really a supported scenario?
+                        container.Compose(batch);
+                    }
+                )
+            );
 
             container.Compose(batch);
         }
@@ -2617,10 +2781,7 @@ namespace System.ComponentModel.Composition
 
             public override IEnumerable<ImportDefinition> ImportDefinitions
             {
-                get
-                {
-                    return Enumerable.Empty<ImportDefinition>();
-                }
+                get { return Enumerable.Empty<ImportDefinition>(); }
             }
 
             public override object GetExportedValue(ExportDefinition definition)
@@ -2635,10 +2796,7 @@ namespace System.ComponentModel.Composition
         }
 
         [Export]
-        public class SimpleExporter
-        {
-
-        }
+        public class SimpleExporter { }
 
         [Fact]
         public void ThreadSafeCompositionContainer()
@@ -2656,7 +2814,6 @@ namespace System.ComponentModel.Composition
             Assert.Equal(42, importer.Value);
 
             container.Dispose();
-
         }
 
         [Fact]
@@ -2664,7 +2821,10 @@ namespace System.ComponentModel.Composition
         {
             TypeCatalog catalog = new TypeCatalog(typeof(SimpleExporter));
 
-            CompositionContainer container = new CompositionContainer(catalog, CompositionOptions.IsThreadSafe);
+            CompositionContainer container = new CompositionContainer(
+                catalog,
+                CompositionOptions.IsThreadSafe
+            );
             Int32Importer importer = new Int32Importer();
 
             CompositionBatch batch = new CompositionBatch();
@@ -2682,7 +2842,10 @@ namespace System.ComponentModel.Composition
         {
             TypeCatalog catalog = new TypeCatalog(typeof(SimpleExporter));
 
-            CompositionContainer container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+            CompositionContainer container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
             Int32Importer importer = new Int32Importer();
 
             CompositionBatch batch = new CompositionBatch();
@@ -2700,7 +2863,10 @@ namespace System.ComponentModel.Composition
         {
             TypeCatalog catalog = new TypeCatalog(typeof(SimpleExporter));
 
-            CompositionContainer container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe);
+            CompositionContainer container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe
+            );
             Int32Importer importer = new Int32Importer();
 
             CompositionBatch batch = new CompositionBatch();
@@ -2716,8 +2882,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void CompositionOptionsInvalidValue()
         {
-            Assert.Throws<ArgumentOutOfRangeException>("compositionOptions",
-                () => new CompositionContainer((CompositionOptions)0x0400));
+            Assert.Throws<ArgumentOutOfRangeException>("compositionOptions", () =>
+                new CompositionContainer((CompositionOptions)0x0400)
+            );
         }
 
         [Fact]
@@ -2728,10 +2895,12 @@ namespace System.ComponentModel.Composition
 
             batch.AddPart(new PartWithReentrantCompose(container));
 
-            ExceptionAssert.Throws<InvalidOperationException>(() =>
-                container.Compose(batch));
+            ExceptionAssert.Throws<InvalidOperationException>(() => container.Compose(batch));
         }
-        private static Expression<Func<ExportDefinition, bool>> ConstraintFromContract(string contractName)
+
+        private static Expression<Func<ExportDefinition, bool>> ConstraintFromContract(
+            string contractName
+        )
         {
             return ConstraintFactory.Create(contractName);
         }
@@ -2748,20 +2917,11 @@ namespace System.ComponentModel.Composition
 
         public interface IMetadataView
         {
-            string Metadata1
-            {
-                get;
-            }
+            string Metadata1 { get; }
 
-            string Metadata2
-            {
-                get;
-            }
+            string Metadata2 { get; }
 
-            string Metadata3
-            {
-                get;
-            }
+            string Metadata3 { get; }
         }
 
         [Fact]
@@ -2839,7 +2999,13 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.ComposeExportedValue<string>("Value");
 
-            var importDefinition = new ImportDefinition(ed => true, null, ImportCardinality.ZeroOrMore, false, false);
+            var importDefinition = new ImportDefinition(
+                ed => true,
+                null,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var exports = container.GetExports(importDefinition);
             Assert.Equal(1, exports.Count());
             Assert.Equal(expectedContractName, exports.Single().Definition.ContractName);
@@ -2851,10 +3017,16 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.ComposeExportedValue<string>("Value");
 
-            var importDefinition = new ImportDefinition(ed => true, null, ImportCardinality.ZeroOrMore, false, false);
+            var importDefinition = new ImportDefinition(
+                ed => true,
+                null,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var exports = container.GetExports(importDefinition);
             Assert.Equal(1, exports.Count());
-            Assert.Equal(1, exports.Single().Metadata.Count);  // contains type identity
+            Assert.Equal(1, exports.Single().Metadata.Count); // contains type identity
         }
 
         [Fact]
@@ -2864,7 +3036,7 @@ namespace System.ComponentModel.Composition
             container.ComposeExportedValue<string>("Value");
 
             var lazy = container.GetExport<string, IDictionary<string, object>>();
-            Assert.Equal(1, lazy.Metadata.Count);  // contains type identity
+            Assert.Equal(1, lazy.Metadata.Count); // contains type identity
         }
 
         [Fact]
@@ -2875,9 +3047,15 @@ namespace System.ComponentModel.Composition
 
             container.ComposeExportedValue<object>(importer);
 
-            var importDefinition = new ImportDefinition(ed => true, null, ImportCardinality.ZeroOrMore, false, false);
+            var importDefinition = new ImportDefinition(
+                ed => true,
+                null,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var exports = container.GetExports(importDefinition);
-            Assert.Equal(1, exports.Count());  // we only get one if the import was not discovered since the import is not satisfied
+            Assert.Equal(1, exports.Count()); // we only get one if the import was not discovered since the import is not satisfied
         }
 
         [Fact]
@@ -2885,7 +3063,8 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
             Assert.Throws<ArgumentNullException>("contractName", () =>
-                container.ComposeExportedValue<string>((string)null, "Value"));
+                container.ComposeExportedValue<string>((string)null, "Value")
+            );
         }
 
         [Fact]
@@ -2893,7 +3072,8 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
             Assert.Throws<ArgumentException>("contractName", () =>
-                container.ComposeExportedValue<string>(string.Empty, "Value"));
+                container.ComposeExportedValue<string>(string.Empty, "Value")
+            );
         }
 
         [Fact]
@@ -2916,7 +3096,8 @@ namespace System.ComponentModel.Composition
                 Assert.Equal(expectation.Item2, actualValue);
 
                 ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
-                    container.GetExportedValue<string>());
+                    container.GetExportedValue<string>()
+                );
             }
         }
 
@@ -2927,7 +3108,13 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.ComposeExportedValue<string>(expectedContractName, "Value");
 
-            var importDefinition = new ImportDefinition(ed => true, null, ImportCardinality.ZeroOrMore, false, false);
+            var importDefinition = new ImportDefinition(
+                ed => true,
+                null,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var exports = container.GetExports(importDefinition);
             Assert.Equal(1, exports.Count());
             Assert.Equal(expectedContractName, exports.Single().Definition.ContractName);
@@ -2941,9 +3128,15 @@ namespace System.ComponentModel.Composition
 
             container.ComposeExportedValue<object>("ContractName", importer);
 
-            var importDefinition = new ImportDefinition(ed => true, null, ImportCardinality.ZeroOrMore, false, false);
+            var importDefinition = new ImportDefinition(
+                ed => true,
+                null,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var exports = container.GetExports(importDefinition);
-            Assert.Equal(1, exports.Count());  // we only get one if the import was not discovered since the import is not satisfied
+            Assert.Equal(1, exports.Count()); // we only get one if the import was not discovered since the import is not satisfied
         }
 
         [Fact]
@@ -2962,19 +3155,28 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TestExportedValueUsingWhereClause_ExportSuccessful()
         {
-            CompositionContainer container = new CompositionContainer(new TypeCatalog(typeof(MefCollection<,>)));
-            IMefCollection<DerivedClass, BaseClass> actualValue = container.GetExportedValue<IMefCollection<DerivedClass, BaseClass>>("UsingWhereClause");
+            CompositionContainer container = new CompositionContainer(
+                new TypeCatalog(typeof(MefCollection<,>))
+            );
+            IMefCollection<DerivedClass, BaseClass> actualValue = container.GetExportedValue<
+                IMefCollection<DerivedClass, BaseClass>
+            >("UsingWhereClause");
             Assert.NotNull(actualValue);
             Assert.IsType<MefCollection<DerivedClass, BaseClass>>(actualValue);
         }
 
         public interface IMefCollection { }
-        public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection where TC : TP { }
+
+        public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection
+            where TC : TP { }
+
         public class BaseClass { }
+
         public class DerivedClass : BaseClass { }
 
         [Export("UsingWhereClause", typeof(IMefCollection<,>))]
-        public class MefCollection<TC, TP> : ObservableCollection<TC>, IMefCollection<TC, TP> where TC : TP { }
+        public class MefCollection<TC, TP> : ObservableCollection<TC>, IMefCollection<TC, TP>
+            where TC : TP { }
 
         public class ExportsMutableProperty
         {

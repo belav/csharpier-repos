@@ -19,9 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Internal.CSharpErrorFactsGenerator
             if (args.Length != 2)
             {
                 Console.WriteLine(
-@"Usage: CSharpErrorFactsGenerator.exe input output
+                    @"Usage: CSharpErrorFactsGenerator.exe input output
   input     The path to ErrorCode.cs
-  output    The path to GeneratedErrorFacts.cs");
+  output    The path to GeneratedErrorFacts.cs"
+                );
 
                 return -1;
             }

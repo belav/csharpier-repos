@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
 using Ecma = System.Reflection.Metadata;
 
@@ -41,7 +40,10 @@ namespace ILCompiler.Metadata
         /// Returns true if the custom attribute should generate <see cref="CustomAttribute"/> metadata.
         /// If false, the custom attribute is not generated.
         /// </summary>
-        bool GeneratesMetadata(Cts.Ecma.EcmaModule module, Ecma.CustomAttributeHandle customAttribute);
+        bool GeneratesMetadata(
+            Cts.Ecma.EcmaModule module,
+            Ecma.CustomAttributeHandle customAttribute
+        );
 
         /// <summary>
         /// Returns true if an exported type entry should generate <see cref="TypeForwarder"/> metadata.

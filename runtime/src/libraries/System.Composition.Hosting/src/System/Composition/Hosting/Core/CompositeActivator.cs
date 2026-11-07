@@ -10,5 +10,8 @@ namespace System.Composition.Hosting.Core
     /// <param name="context">The context in which the part or export is being accessed.</param>
     /// <param name="operation">The operation within which the activation is occurring.</param>
     /// <returns>The activated part or export.</returns>
-    public delegate object CompositeActivator(LifetimeContext context, CompositionOperation operation);
+    public delegate object CompositeActivator(
+        LifetimeContext context,
+        CompositionOperation operation
+    );
 }

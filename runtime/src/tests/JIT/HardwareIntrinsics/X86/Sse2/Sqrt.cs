@@ -23,23 +23,36 @@ namespace IntelHardwareIntrinsicTest.SSE2
                 {
                     for (int i = 0; i < testsCount; i++)
                     {
-                        (Vector128<double>, Vector128<double>, Vector128<double>) value = doubleTable[i];
+                        (Vector128<double>, Vector128<double>, Vector128<double>) value =
+                            doubleTable[i];
                         var result = Sse2.Sqrt(value.Item1);
                         doubleTable.SetOutArray(result);
                     }
 
-                    CheckMethod<double> checkDouble = (double x, double y, double z, ref double a) => (a = Math.Sqrt(x)) == z;
+                    CheckMethod<double> checkDouble = (
+                        double x,
+                        double y,
+                        double z,
+                        ref double a
+                    ) => (a = Math.Sqrt(x)) == z;
 
                     if (!doubleTable.CheckResult(checkDouble))
                     {
-                        PrintError(doubleTable, methodUnderTestName, "(double x, double y, double z, ref double a) => (a = x - y) == z", checkDouble);
+                        PrintError(
+                            doubleTable,
+                            methodUnderTestName,
+                            "(double x, double y, double z, ref double a) => (a = x - y) == z",
+                            checkDouble
+                        );
                         Assert.Fail("");
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}");
+                Console.WriteLine(
+                    $"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}"
+                );
             }
         }
     }

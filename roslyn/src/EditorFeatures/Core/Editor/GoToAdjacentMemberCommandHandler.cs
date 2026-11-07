@@ -29,25 +29,30 @@ namespace Microsoft.CodeAnalysis.Editor
     [Name(PredefinedCommandHandlerNames.GoToAdjacentMember)]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal class GoToAdjacentMemberCommandHandler(IOutliningManagerService outliningManagerService) :
-        ICommandHandler<GoToNextMemberCommandArgs>,
-        ICommandHandler<GoToPreviousMemberCommandArgs>
+    internal class GoToAdjacentMemberCommandHandler(
+        IOutliningManagerService outliningManagerService
+    ) : ICommandHandler<GoToNextMemberCommandArgs>, ICommandHandler<GoToPreviousMemberCommandArgs>
     {
-        private readonly IOutliningManagerService _outliningManagerService = outliningManagerService;
+        private readonly IOutliningManagerService _outliningManagerService =
+            outliningManagerService;
 
         public string DisplayName => EditorFeaturesResources.Go_To_Adjacent_Member;
 
-        public CommandState GetCommandState(GoToNextMemberCommandArgs args)
-            => GetCommandStateImpl(args);
+        public CommandState GetCommandState(GoToNextMemberCommandArgs args) =>
+            GetCommandStateImpl(args);
 
-        public bool ExecuteCommand(GoToNextMemberCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandImpl(args, gotoNextMember: true, context);
+        public bool ExecuteCommand(
+            GoToNextMemberCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommandImpl(args, gotoNextMember: true, context);
 
-        public CommandState GetCommandState(GoToPreviousMemberCommandArgs args)
-            => GetCommandStateImpl(args);
+        public CommandState GetCommandState(GoToPreviousMemberCommandArgs args) =>
+            GetCommandStateImpl(args);
 
-        public bool ExecuteCommand(GoToPreviousMemberCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandImpl(args, gotoNextMember: false, context);
+        public bool ExecuteCommand(
+            GoToPreviousMemberCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommandImpl(args, gotoNextMember: false, context);
 
         private static CommandState GetCommandStateImpl(EditorCommandArgs args)
         {
@@ -58,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 return CommandState.Unspecified;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document?.SupportsSyntaxTree != true)
             {
                 return CommandState.Unspecified;
@@ -67,7 +73,11 @@ namespace Microsoft.CodeAnalysis.Editor
             return CommandState.Available;
         }
 
-        private bool ExecuteCommandImpl(EditorCommandArgs args, bool gotoNextMember, CommandExecutionContext context)
+        private bool ExecuteCommandImpl(
+            EditorCommandArgs args,
+            bool gotoNextMember,
+            CommandExecutionContext context
+        )
         {
             var subjectBuffer = args.SubjectBuffer;
             var caretPoint = args.TextView.GetCaretPoint(subjectBuffer);
@@ -76,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 return false;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var syntaxFactsService = document?.GetLanguageService<ISyntaxFactsService>();
             if (syntaxFactsService == null)
             {
@@ -84,15 +95,30 @@ namespace Microsoft.CodeAnalysis.Editor
             }
 
             int? targetPosition = null;
-            using (context.OperationContext.AddScope(allowCancellation: true, description: EditorFeaturesResources.Navigating))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    description: EditorFeaturesResources.Navigating
+                )
+            )
             {
-                var root = document.GetSyntaxRootSynchronously(context.OperationContext.UserCancellationToken);
-                targetPosition = GetTargetPosition(syntaxFactsService, root, caretPoint.Value.Position, gotoNextMember);
+                var root = document.GetSyntaxRootSynchronously(
+                    context.OperationContext.UserCancellationToken
+                );
+                targetPosition = GetTargetPosition(
+                    syntaxFactsService,
+                    root,
+                    caretPoint.Value.Position,
+                    gotoNextMember
+                );
             }
 
             if (targetPosition != null)
             {
-                args.TextView.TryMoveCaretToAndEnsureVisible(new SnapshotPoint(subjectBuffer.CurrentSnapshot, targetPosition.Value), _outliningManagerService);
+                args.TextView.TryMoveCaretToAndEnsureVisible(
+                    new SnapshotPoint(subjectBuffer.CurrentSnapshot, targetPosition.Value),
+                    _outliningManagerService
+                );
             }
 
             return true;
@@ -101,7 +127,12 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <summary>
         /// Internal for testing purposes.
         /// </summary>
-        internal static int? GetTargetPosition(ISyntaxFactsService service, SyntaxNode root, int caretPosition, bool next)
+        internal static int? GetTargetPosition(
+            ISyntaxFactsService service,
+            SyntaxNode root,
+            int caretPosition,
+            bool next
+        )
         {
             var members = service.GetMethodLevelMembers(root);
             if (members.Count == 0)

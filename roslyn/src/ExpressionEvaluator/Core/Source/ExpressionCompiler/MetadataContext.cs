@@ -13,14 +13,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal readonly ImmutableArray<MetadataBlock> MetadataBlocks;
         internal readonly ImmutableDictionary<MetadataContextId, TAssemblyContext> AssemblyContexts;
 
-        internal MetadataContext(ImmutableArray<MetadataBlock> metadataBlocks, ImmutableDictionary<MetadataContextId, TAssemblyContext> assemblyContexts)
+        internal MetadataContext(
+            ImmutableArray<MetadataBlock> metadataBlocks,
+            ImmutableDictionary<MetadataContextId, TAssemblyContext> assemblyContexts
+        )
         {
             MetadataBlocks = metadataBlocks;
             AssemblyContexts = assemblyContexts;
         }
 
-        internal bool Matches(ImmutableArray<MetadataBlock> metadataBlocks)
-            => !MetadataBlocks.IsDefault &&
-                MetadataBlocks.SequenceEqual(metadataBlocks);
+        internal bool Matches(ImmutableArray<MetadataBlock> metadataBlocks) =>
+            !MetadataBlocks.IsDefault && MetadataBlocks.SequenceEqual(metadataBlocks);
     }
 }

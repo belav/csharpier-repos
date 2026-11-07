@@ -7,11 +7,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class OperatorsQuerySqlServerTest : OperatorsQueryTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    protected void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    protected void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
     public override async Task Bitwise_and_on_expression_with_like_and_null_check_being_compared_to_false()
     {
@@ -54,7 +53,8 @@ END | CASE
     ELSE CAST(0 AS bit)
 END = CAST(1 AS bit) AND [o3].[Value] = 2
 ORDER BY [o].[Id], [o0].[Id], [o1].[Id], [o2].[Id], [o3].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Projection_with_not_and_negation_on_integer()
@@ -68,7 +68,8 @@ FROM [OperatorEntityLong] AS [o]
 CROSS JOIN [OperatorEntityLong] AS [o0]
 CROSS JOIN [OperatorEntityLong] AS [o1]
 ORDER BY [o].[Id], [o0].[Id], [o1].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Negate_on_column(bool async)
@@ -80,7 +81,8 @@ ORDER BY [o].[Id], [o0].[Id], [o1].[Id]
 SELECT [o].[Id]
 FROM [OperatorEntityInt] AS [o]
 WHERE [o].[Id] = -[o].[Value]
-""");
+"""
+        );
     }
 
     public override async Task Double_negate_on_column()
@@ -92,7 +94,8 @@ WHERE [o].[Id] = -[o].[Value]
 SELECT [o].[Id]
 FROM [OperatorEntityInt] AS [o]
 WHERE -(-[o].[Value]) = [o].[Value]
-""");
+"""
+        );
     }
 
     public override async Task Negate_on_binary_expression(bool async)
@@ -105,7 +108,8 @@ SELECT [o].[Id] AS [Id1], [o0].[Id] AS [Id2]
 FROM [OperatorEntityInt] AS [o]
 CROSS JOIN [OperatorEntityInt] AS [o0]
 WHERE -[o].[Value] = -([o].[Id] + [o0].[Value])
-""");
+"""
+        );
     }
 
     public override async Task Negate_on_like_expression(bool async)
@@ -117,7 +121,8 @@ WHERE -[o].[Value] = -([o].[Id] + [o0].[Value])
 SELECT [o].[Id]
 FROM [OperatorEntityString] AS [o]
 WHERE [o].[Value] NOT LIKE N'A%' OR [o].[Value] IS NULL
-""");
+"""
+        );
     }
 
     public override async Task Concat_and_json_scalar(bool async)
@@ -129,7 +134,8 @@ WHERE [o].[Value] NOT LIKE N'A%' OR [o].[Value] IS NULL
 SELECT TOP(2) [o].[Id], [o].[Owned]
 FROM [Owner] AS [o]
 WHERE N'Foo' + JSON_VALUE([o].[Owned], '$.SomeProperty') = N'FooBar'
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -140,13 +146,19 @@ WHERE N'Foo' + JSON_VALUE([o].[Owned], '$.SomeProperty') = N'FooBar'
         var contextFactory = await InitializeAsync<OperatorsContext>(seed: Seed);
         using var context = contextFactory.CreateContext();
 
-        var expected = (from e in ExpectedData.OperatorEntitiesDateTimeOffset
-                        where e.Value.UtcDateTime == new DateTimeOffset(2000, 1, 1, 18, 0, 0, TimeSpan.Zero)
-                        select e.Id).ToList();
+        var expected = (
+            from e in ExpectedData.OperatorEntitiesDateTimeOffset
+            where e.Value.UtcDateTime == new DateTimeOffset(2000, 1, 1, 18, 0, 0, TimeSpan.Zero)
+            select e.Id
+        ).ToList();
 
-        var actual = (from e in context.Set<OperatorEntityDateTimeOffset>()
-                      where EF.Functions.AtTimeZone(e.Value, "UTC") == new DateTimeOffset(2000, 1, 1, 18, 0, 0, TimeSpan.Zero)
-                      select e.Id).ToList();
+        var actual = (
+            from e in context.Set<OperatorEntityDateTimeOffset>()
+            where
+                EF.Functions.AtTimeZone(e.Value, "UTC")
+                == new DateTimeOffset(2000, 1, 1, 18, 0, 0, TimeSpan.Zero)
+            select e.Id
+        ).ToList();
 
         Assert.Equal(expected.Count, actual.Count);
         for (var i = 0; i < expected.Count; i++)
@@ -159,7 +171,8 @@ WHERE N'Foo' + JSON_VALUE([o].[Owned], '$.SomeProperty') = N'FooBar'
 SELECT [o].[Id]
 FROM [OperatorEntityDateTimeOffset] AS [o]
 WHERE [o].[Value] AT TIME ZONE 'UTC' = '2000-01-01T18:00:00.0000000+00:00'
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -173,13 +186,17 @@ WHERE [o].[Value] AT TIME ZONE 'UTC' = '2000-01-01T18:00:00.0000000+00:00'
         var dateTime = new DateTimeOffset(2000, 1, 1, 18, 0, 0, TimeSpan.Zero);
         var timeZone = "UTC";
 
-        var expected = (from e in ExpectedData.OperatorEntitiesDateTimeOffset
-                        where e.Value.UtcDateTime == dateTime
-                        select e.Id).ToList();
+        var expected = (
+            from e in ExpectedData.OperatorEntitiesDateTimeOffset
+            where e.Value.UtcDateTime == dateTime
+            select e.Id
+        ).ToList();
 
-        var actual = (from e in context.Set<OperatorEntityDateTimeOffset>()
-                      where EF.Functions.AtTimeZone(e.Value, timeZone) == dateTime
-                      select e.Id).ToList();
+        var actual = (
+            from e in context.Set<OperatorEntityDateTimeOffset>()
+            where EF.Functions.AtTimeZone(e.Value, timeZone) == dateTime
+            select e.Id
+        ).ToList();
 
         Assert.Equal(expected.Count, actual.Count);
         for (var i = 0; i < expected.Count; i++)
@@ -195,7 +212,8 @@ WHERE [o].[Value] AT TIME ZONE 'UTC' = '2000-01-01T18:00:00.0000000+00:00'
 SELECT [o].[Id]
 FROM [OperatorEntityDateTimeOffset] AS [o]
 WHERE [o].[Value] AT TIME ZONE @__timeZone_1 = @__dateTime_2
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -206,15 +224,19 @@ WHERE [o].[Value] AT TIME ZONE @__timeZone_1 = @__dateTime_2
         var contextFactory = await InitializeAsync<OperatorsContext>(seed: Seed);
         using var context = contextFactory.CreateContext();
 
-        var expected = (from e1 in ExpectedData.OperatorEntitiesDateTimeOffset
-                        from e2 in ExpectedData.OperatorEntitiesDateTimeOffset
-                        where e1.Value == e2.Value.UtcDateTime
-                        select new { Id1 = e1.Id, Id2 = e2.Id }).ToList();
+        var expected = (
+            from e1 in ExpectedData.OperatorEntitiesDateTimeOffset
+            from e2 in ExpectedData.OperatorEntitiesDateTimeOffset
+            where e1.Value == e2.Value.UtcDateTime
+            select new { Id1 = e1.Id, Id2 = e2.Id }
+        ).ToList();
 
-        var actual = (from e1 in context.Set<OperatorEntityDateTimeOffset>()
-                      from e2 in context.Set<OperatorEntityDateTimeOffset>()
-                      where EF.Functions.AtTimeZone(e1.Value, "UTC") == e2.Value
-                      select new { Id1 = e1.Id, Id2 = e2.Id }).ToList();
+        var actual = (
+            from e1 in context.Set<OperatorEntityDateTimeOffset>()
+            from e2 in context.Set<OperatorEntityDateTimeOffset>()
+            where EF.Functions.AtTimeZone(e1.Value, "UTC") == e2.Value
+            select new { Id1 = e1.Id, Id2 = e2.Id }
+        ).ToList();
 
         Assert.Equal(expected.Count, actual.Count);
         for (var i = 0; i < expected.Count; i++)
@@ -229,6 +251,7 @@ SELECT [o].[Id] AS [Id1], [o0].[Id] AS [Id2]
 FROM [OperatorEntityDateTimeOffset] AS [o]
 CROSS JOIN [OperatorEntityDateTimeOffset] AS [o0]
 WHERE [o].[Value] AT TIME ZONE 'UTC' = [o0].[Value]
-""");
+"""
+        );
     }
 }

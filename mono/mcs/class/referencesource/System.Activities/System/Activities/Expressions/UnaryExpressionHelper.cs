@@ -11,29 +11,50 @@ namespace System.Activities.Expressions
 
     static class UnaryExpressionHelper
     {
-        public static void OnGetArguments<TOperand>(CodeActivityMetadata metadata, InArgument<TOperand> operand)
+        public static void OnGetArguments<TOperand>(
+            CodeActivityMetadata metadata,
+            InArgument<TOperand> operand
+        )
         {
-            RuntimeArgument operandArgument = new RuntimeArgument("Operand", typeof(TOperand), ArgumentDirection.In, true);
+            RuntimeArgument operandArgument = new RuntimeArgument(
+                "Operand",
+                typeof(TOperand),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(operand, operandArgument);
 
-            metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    operandArgument
-                });
+            metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { operandArgument });
         }
 
-        public static bool TryGenerateLinqDelegate<TOperand, TResult>(ExpressionType operatorType, out Func<TOperand, TResult> operation, out ValidationError validationError)
+        public static bool TryGenerateLinqDelegate<TOperand, TResult>(
+            ExpressionType operatorType,
+            out Func<TOperand, TResult> operation,
+            out ValidationError validationError
+        )
         {
             operation = null;
             validationError = null;
 
-            ParameterExpression operandParameter = Expression.Parameter(typeof(TOperand), "operand");
+            ParameterExpression operandParameter = Expression.Parameter(
+                typeof(TOperand),
+                "operand"
+            );
             try
             {
-                UnaryExpression unaryExpression = Expression.MakeUnary(operatorType, operandParameter, typeof(TResult));
-                Expression expressionToCompile = OperatorPermissionHelper.InjectReflectionPermissionIfNecessary(unaryExpression.Method, unaryExpression);
-                Expression<Func<TOperand, TResult>> lambdaExpression = Expression.Lambda<Func<TOperand, TResult>>(expressionToCompile, operandParameter);
+                UnaryExpression unaryExpression = Expression.MakeUnary(
+                    operatorType,
+                    operandParameter,
+                    typeof(TResult)
+                );
+                Expression expressionToCompile =
+                    OperatorPermissionHelper.InjectReflectionPermissionIfNecessary(
+                        unaryExpression.Method,
+                        unaryExpression
+                    );
+                Expression<Func<TOperand, TResult>> lambdaExpression = Expression.Lambda<
+                    Func<TOperand, TResult>
+                >(expressionToCompile, operandParameter);
                 operation = lambdaExpression.Compile();
                 return true;
             }
@@ -49,5 +70,4 @@ namespace System.Activities.Expressions
             }
         }
     }
-
 }

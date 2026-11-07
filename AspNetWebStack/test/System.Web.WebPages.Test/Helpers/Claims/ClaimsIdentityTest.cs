@@ -14,7 +14,9 @@ namespace System.Web.Helpers.Claims.Test
         public void TryConvert_GetClaims()
         {
             // Act
-            ClaimsIdentity claimsIdentity = ClaimsIdentity.TryConvert<IClaimsIdentity, IClaim>(new MyClaimsIdentity());
+            ClaimsIdentity claimsIdentity = ClaimsIdentity.TryConvert<IClaimsIdentity, IClaim>(
+                new MyClaimsIdentity()
+            );
             var claims = claimsIdentity.GetClaims().ToArray();
 
             // Assert
@@ -45,7 +47,7 @@ namespace System.Web.Helpers.Claims.Test
                     return new MyClaim[]
                     {
                         new MyClaim() { ClaimType = "claim-type-1", Value = "claim-value-1" },
-                        new MyClaim() { ClaimType = "claim-type-2", Value = "claim-value-2" }
+                        new MyClaim() { ClaimType = "claim-type-2", Value = "claim-value-2" },
                     };
                 }
             }

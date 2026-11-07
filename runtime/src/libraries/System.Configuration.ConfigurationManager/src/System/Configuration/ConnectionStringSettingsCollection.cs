@@ -6,11 +6,11 @@ namespace System.Configuration
     [ConfigurationCollection(typeof(ConnectionStringSettings))]
     public sealed class ConnectionStringSettingsCollection : ConfigurationElementCollection
     {
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection();
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection();
 
         public ConnectionStringSettingsCollection()
-            : base(StringComparer.OrdinalIgnoreCase)
-        { }
+            : base(StringComparer.OrdinalIgnoreCase) { }
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 
@@ -19,12 +19,14 @@ namespace System.Configuration
             get { return (ConnectionStringSettings)BaseGet(index); }
             set
             {
-                if (BaseGet(index) != null) BaseRemoveAt(index);
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
                 BaseAdd(index, value);
             }
         }
 
-        public new ConnectionStringSettings this[string name] => (ConnectionStringSettings)BaseGet(name);
+        public new ConnectionStringSettings this[string name] =>
+            (ConnectionStringSettings)BaseGet(name);
 
         public int IndexOf(ConnectionStringSettings settings)
         {
@@ -37,8 +39,10 @@ namespace System.Configuration
         // patterened
         protected override void BaseAdd(int index, ConfigurationElement element)
         {
-            if (index == -1) BaseAdd(element, false);
-            else base.BaseAdd(index, element);
+            if (index == -1)
+                BaseAdd(element, false);
+            else
+                base.BaseAdd(index, element);
         }
 
         public void Add(ConnectionStringSettings settings)
@@ -48,7 +52,8 @@ namespace System.Configuration
 
         public void Remove(ConnectionStringSettings settings)
         {
-            if (BaseIndexOf(settings) >= 0) BaseRemove(settings.Key);
+            if (BaseIndexOf(settings) >= 0)
+                BaseRemove(settings.Key);
         }
 
         public void RemoveAt(int index)

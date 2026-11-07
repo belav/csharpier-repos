@@ -18,18 +18,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FieldDeclarationOrganizer()
-        {
-        }
+        public FieldDeclarationOrganizer() { }
 
         protected override FieldDeclarationSyntax Organize(
             FieldDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return syntax.Update(syntax.AttributeLists,
+            return syntax.Update(
+                syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),
                 syntax.Declaration,
-                syntax.SemicolonToken);
+                syntax.SemicolonToken
+            );
         }
     }
 }

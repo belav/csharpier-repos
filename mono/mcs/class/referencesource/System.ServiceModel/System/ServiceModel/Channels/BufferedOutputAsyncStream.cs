@@ -13,24 +13,23 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics.Application;
     using System.Threading;
 
-
     /// <summary>
-    /// 
+    ///
     /// BufferedOutputAsyncStream is used for writing streamed response.
     /// For performance reasons, the behavior we want is chunk, chunk, chunk,.. terminating chunk  without a delay.
-    /// We call BeginWrite,BeginWrite,BeginWrite and Close()(close sends the terminating chunk) without 
+    /// We call BeginWrite,BeginWrite,BeginWrite and Close()(close sends the terminating chunk) without
     /// waiting for all outstanding BeginWrites to complete.
-    /// 
+    ///
     /// BufferedOutputAsyncStream is not a general-purpose stream wrapper, it requires that the base stream
     ///     1. allow concurrent IO (for multiple BeginWrite calls)
     ///     2. support the BeginWrite,BeginWrite,BeginWrite,.. Close() calling pattern.
-    /// 
+    ///
     /// Currently BufferedOutputAsyncStream only used to wrap the System.Net.HttpResponseStream, which satisfy both requirements.
-    /// 
+    ///
     /// BufferedOutputAsyncStream can also be used when doing asynchronous operations. Sync operations are not allowed when an async
-    /// operation is in-flight. If a sync operation is in progress (i.e., data exists in our CurrentBuffer) and we issue an async operation, 
-    /// we flush everything in the buffers (and block while doing so) before the async operation is allowed to proceed. 
-    ///     
+    /// operation is in-flight. If a sync operation is in progress (i.e., data exists in our CurrentBuffer) and we issue an async operation,
+    /// we flush everything in the buffers (and block while doing so) before the async operation is allowed to proceed.
+    ///
     /// </summary>
     class BufferedOutputAsyncStream : Stream
     {
@@ -79,7 +78,9 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Length contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ReadNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.ReadNotSupported))
+                );
             }
         }
 
@@ -88,11 +89,15 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Position contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+                );
             }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+                );
             }
         }
 
@@ -160,7 +165,9 @@ namespace System.ServiceModel.Channels
         {
             if (Interlocked.Increment(ref this.asyncWriteCount) > 1)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending))
+                );
             }
         }
 
@@ -168,7 +175,9 @@ namespace System.ServiceModel.Channels
         {
             if (Interlocked.Decrement(ref this.asyncWriteCount) != 0)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
+                );
             }
         }
 
@@ -176,7 +185,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.asyncWriteCount != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending))
+                );
             }
         }
 
@@ -184,7 +195,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.closed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.StreamClosed)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.StreamClosed))
+                );
             }
         }
 
@@ -212,27 +225,35 @@ namespace System.ServiceModel.Channels
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ReadNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.ReadNotSupported))
+            );
         }
 
         public override int ReadByte()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ReadNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.ReadNotSupported))
+            );
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+            );
         }
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+            );
         }
 
         void WaitForAllWritesToComplete()
         {
-            // Complete all outstanding writes 
+            // Complete all outstanding writes
             this.buffers.WaitForAllWritesToComplete();
         }
 
@@ -249,7 +270,7 @@ namespace System.ServiceModel.Channels
                     currentBuffer = this.NextBuffer();
                 }
 
-                int freeBytes = currentBuffer.FreeBytes;   // space left in the CurrentBuffer
+                int freeBytes = currentBuffer.FreeBytes; // space left in the CurrentBuffer
                 if (freeBytes > 0)
                 {
                     if (freeBytes > count)
@@ -266,15 +287,23 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.EnsureOpened();
             this.IncrementAsyncWriteCount();
 
-            Fx.Assert(this.writeState == null ||
-                this.writeState.Arguments == null ||
-                this.writeState.Arguments.Count <= 0,
-                "All data has not been written yet.");
+            Fx.Assert(
+                this.writeState == null
+                    || this.writeState.Arguments == null
+                    || this.writeState.Arguments.Count <= 0,
+                "All data has not been written yet."
+            );
 
             if (onWriteCallback == null)
             {
@@ -289,7 +318,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                // Since writeState!= null, check if the stream has an  
+                // Since writeState!= null, check if the stream has an
                 // exception as the async path has already been invoked.
                 this.ThrowOnException();
             }
@@ -335,13 +364,14 @@ namespace System.ServiceModel.Channels
         void DequeueAndFlush(ByteBuffer currentBuffer, AsyncEventArgsCallback callback)
         {
             // Dequeue does a checkout of the buffer from its slot.
-            // the callback for the sync path only enqueues the buffer. 
+            // the callback for the sync path only enqueues the buffer.
             // The WriteAsync callback needs to enqueue and also complete.
             this.currentByteBuffer = null;
             ByteBuffer dequeued = this.buffers.Dequeue();
             Fx.Assert(dequeued == currentBuffer, "Buffer queue in an inconsistent state.");
 
-            WriteFlushAsyncEventArgs writeflushState = (WriteFlushAsyncEventArgs)currentBuffer.FlushAsyncArgs;
+            WriteFlushAsyncEventArgs writeflushState = (WriteFlushAsyncEventArgs)
+                currentBuffer.FlushAsyncArgs;
             if (writeflushState == null)
             {
                 writeflushState = new WriteFlushAsyncEventArgs();
@@ -366,7 +396,10 @@ namespace System.ServiceModel.Channels
 
         AsyncCompletionResult WriteAsync(WriteAsyncState state)
         {
-            Fx.Assert(state != null && state.Arguments != null, "Invalid WriteAsyncState parameter.");
+            Fx.Assert(
+                state != null && state.Arguments != null,
+                "Invalid WriteAsyncState parameter."
+            );
 
             if (state.Arguments.Count == 0)
             {
@@ -382,10 +415,12 @@ namespace System.ServiceModel.Channels
             {
                 if (currentBuffer == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.WriteAsyncWithoutFreeBuffer)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.GetString(SR.WriteAsyncWithoutFreeBuffer))
+                    );
                 }
 
-                int freeBytes = currentBuffer.FreeBytes;   // space left in the CurrentBuffer
+                int freeBytes = currentBuffer.FreeBytes; // space left in the CurrentBuffer
                 if (freeBytes > 0)
                 {
                     if (freeBytes > count)
@@ -412,7 +447,7 @@ namespace System.ServiceModel.Channels
                 state.Arguments.Offset = offset;
                 state.Arguments.Count = count;
 
-                // We can complete synchronously only 
+                // We can complete synchronously only
                 // if there a buffer available for writes.
                 currentBuffer = this.GetCurrentBuffer();
                 if (currentBuffer == null)
@@ -449,7 +484,10 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        if (thisPtr.WriteAsync(thisPtr.writeState) == AsyncCompletionResult.Completed)
+                        if (
+                            thisPtr.WriteAsync(thisPtr.writeState)
+                            == AsyncCompletionResult.Completed
+                        )
                         {
                             completeSelf = true;
                         }
@@ -528,10 +566,7 @@ namespace System.ServiceModel.Channels
 
             object ThisLock
             {
-                get
-                {
-                    return this.buffers;
-                }
+                get { return this.buffers; }
             }
 
             internal int Count
@@ -547,7 +582,10 @@ namespace System.ServiceModel.Channels
 
             internal ByteBuffer Dequeue()
             {
-                Fx.Assert(!this.pendingCompletion, "Dequeue cannot be invoked when there is a pending completion");
+                Fx.Assert(
+                    !this.pendingCompletion,
+                    "Dequeue cannot be invoked when there is a pending completion"
+                );
 
                 lock (ThisLock)
                 {
@@ -586,7 +624,8 @@ namespace System.ServiceModel.Channels
             {
                 lock (ThisLock)
                 {
-                    this.completionException = this.completionException ?? buffer.CompletionException;
+                    this.completionException =
+                        this.completionException ?? buffer.CompletionException;
                     Fx.Assert(count < size, "The queue is already full.");
                     int tail = (this.head + this.count) % size;
                     Slot s = this.buffers[tail];
@@ -645,7 +684,7 @@ namespace System.ServiceModel.Channels
 
             internal bool TryUnlock()
             {
-                // The main thread tries to indicate a pending completion 
+                // The main thread tries to indicate a pending completion
                 // if there aren't any free buffers for the next write.
                 // The callback should try to complete() through TryAcquireLock.
                 lock (ThisLock)
@@ -688,9 +727,7 @@ namespace System.ServiceModel.Channels
         /// <summary>
         /// AsyncEventArgs used to invoke the FlushAsync() on the ByteBuffer.
         /// </summary>
-        class WriteFlushAsyncEventArgs : AsyncEventArgs<object, ByteBuffer>
-        {
-        }
+        class WriteFlushAsyncEventArgs : AsyncEventArgs<object, ByteBuffer> { }
 
         class ByteBuffer
         {
@@ -727,17 +764,10 @@ namespace System.ServiceModel.Channels
 
             internal int FreeBytes
             {
-                get
-                {
-                    return this.bytes.Length - this.position;
-                }
+                get { return this.bytes.Length - this.position; }
             }
 
-            internal AsyncEventArgs<object, ByteBuffer> FlushAsyncArgs
-            {
-                get;
-                set;
-            }
+            internal AsyncEventArgs<object, ByteBuffer> FlushAsyncArgs { get; set; }
 
             static void WriteCallback(IAsyncResult result)
             {
@@ -754,7 +784,6 @@ namespace System.ServiceModel.Channels
                     }
 
                     buffer.stream.EndWrite(result);
-
                 }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
                 catch (Exception e)
@@ -801,8 +830,23 @@ namespace System.ServiceModel.Channels
 
             internal void CopyData(byte[] buffer, int offset, int count)
             {
-                Fx.Assert(this.position + count <= this.bytes.Length, string.Format(CultureInfo.InvariantCulture, "Chunk is too big to fit in this buffer. Chunk size={0}, free space={1}", count, this.bytes.Length - this.position));
-                Fx.Assert(!this.writePending, string.Format(CultureInfo.InvariantCulture, "The buffer is in use, position={0}", this.position));
+                Fx.Assert(
+                    this.position + count <= this.bytes.Length,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Chunk is too big to fit in this buffer. Chunk size={0}, free space={1}",
+                        count,
+                        this.bytes.Length - this.position
+                    )
+                );
+                Fx.Assert(
+                    !this.writePending,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "The buffer is in use, position={0}",
+                        this.position
+                    )
+                );
 
                 Buffer.BlockCopy(buffer, offset, this.bytes, this.position, count);
                 this.position += count;
@@ -811,7 +855,14 @@ namespace System.ServiceModel.Channels
             internal void CopyData(byte value)
             {
                 Fx.Assert(this.position < this.bytes.Length, "Buffer is full");
-                Fx.Assert(!this.writePending, string.Format(CultureInfo.InvariantCulture, "The buffer is in use, position={0}", this.position));
+                Fx.Assert(
+                    !this.writePending,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "The buffer is in use, position={0}",
+                        this.position
+                    )
+                );
 
                 this.bytes[this.position++] = value;
             }
@@ -838,10 +889,20 @@ namespace System.ServiceModel.Channels
 
                 if (TD.BufferedAsyncWriteStartIsEnabled())
                 {
-                    TD.BufferedAsyncWriteStart(this.parent.EventTraceActivity, this.GetHashCode(), bytesToWrite);
+                    TD.BufferedAsyncWriteStart(
+                        this.parent.EventTraceActivity,
+                        this.GetHashCode(),
+                        bytesToWrite
+                    );
                 }
 
-                IAsyncResult asyncResult = this.stream.BeginWrite(this.bytes, 0, bytesToWrite, flushCallback, this);
+                IAsyncResult asyncResult = this.stream.BeginWrite(
+                    this.bytes,
+                    0,
+                    bytesToWrite,
+                    flushCallback,
+                    this
+                );
                 if (asyncResult.CompletedSynchronously)
                 {
                     if (TD.BufferedAsyncWriteStopIsEnabled())
@@ -902,7 +963,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.writePending)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse))
+                        );
                     }
 
                     this.writePending = true;
@@ -911,7 +974,7 @@ namespace System.ServiceModel.Channels
         }
 
         /// <summary>
-        /// Used to hold the users callback and state and arguments when BeginWrite is invoked. 
+        /// Used to hold the users callback and state and arguments when BeginWrite is invoked.
         /// </summary>
         class WriteAsyncArgs
         {
@@ -925,7 +988,13 @@ namespace System.ServiceModel.Channels
 
             internal object AsyncState { get; set; }
 
-            internal void Set(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+            internal void Set(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.Buffer = buffer;
                 this.Offset = offset;
@@ -989,7 +1058,9 @@ namespace System.ServiceModel.Channels
                 {
                     get
                     {
-                        return this.writeState.Arguments != null ? this.writeState.Arguments.AsyncState : null;
+                        return this.writeState.Arguments != null
+                            ? this.writeState.Arguments.AsyncState
+                            : null;
                     }
                 }
 

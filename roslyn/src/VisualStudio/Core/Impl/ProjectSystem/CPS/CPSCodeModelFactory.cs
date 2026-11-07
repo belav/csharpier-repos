@@ -16,14 +16,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CPSCodeModelFactory()
-        {
-        }
+        public CPSCodeModelFactory() { }
 
-        public EnvDTE.CodeModel GetCodeModel(IWorkspaceProjectContext context, EnvDTE.Project project)
-            => ((CPSProject)context).GetCodeModel(project);
+        public EnvDTE.CodeModel GetCodeModel(
+            IWorkspaceProjectContext context,
+            EnvDTE.Project project
+        ) => ((CPSProject)context).GetCodeModel(project);
 
-        public EnvDTE.FileCodeModel GetFileCodeModel(IWorkspaceProjectContext context, EnvDTE.ProjectItem item)
-            => ((CPSProject)context).GetFileCodeModel(item);
+        public EnvDTE.FileCodeModel GetFileCodeModel(
+            IWorkspaceProjectContext context,
+            EnvDTE.ProjectItem item
+        ) => ((CPSProject)context).GetFileCodeModel(item);
     }
 }

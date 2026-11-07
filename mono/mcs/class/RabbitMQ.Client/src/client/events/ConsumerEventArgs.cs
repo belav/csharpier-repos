@@ -60,7 +60,7 @@ namespace RabbitMQ.Client.Events
 {
     ///<summary>Event relating to a successful consumer registration
     ///or cancellation.</summary>
-    public class ConsumerEventArgs: EventArgs
+    public class ConsumerEventArgs : EventArgs
     {
         private readonly string m_consumerTag;
 
@@ -73,6 +73,9 @@ namespace RabbitMQ.Client.Events
 
         ///<summary>Access the consumer-tag of the consumer the event
         ///relates to.</summary>
-        public string ConsumerTag { get { return m_consumerTag; } }
+        public string ConsumerTag
+        {
+            get { return m_consumerTag; }
+        }
     }
 }

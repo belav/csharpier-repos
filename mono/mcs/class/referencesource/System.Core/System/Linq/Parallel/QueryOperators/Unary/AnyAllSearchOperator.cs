@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -39,7 +39,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInput"></typeparam>
     internal sealed class AnyAllSearchOperator<TInput> : UnaryQueryOperator<TInput, bool>
     {
-
         private readonly Func<TInput, bool> m_predicate; // The predicate used to test membership.
         private readonly bool m_qualification; // Whether we're looking for true (any) or false (all).
 
@@ -52,8 +51,12 @@ namespace System.Linq.Parallel
         //                     a member of the set; for any this is true, for all it is false.
         //
 
-        internal AnyAllSearchOperator(IEnumerable<TInput> child, bool qualification, Func<TInput, bool> predicate)
-            :base(child)
+        internal AnyAllSearchOperator(
+            IEnumerable<TInput> child,
+            bool qualification,
+            Func<TInput, bool> predicate
+        )
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             Contract.Assert(predicate != null, "need a predicate function");
@@ -69,11 +72,16 @@ namespace System.Linq.Parallel
 
         internal bool Aggregate()
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // could do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<bool> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<bool> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Any value equal to our qualification means that we've found an element matching
                 // the condition, and so we return the qualification without looking in subsequent
@@ -95,33 +103,44 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<bool> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<bool> Open(QuerySettings settings, bool preferStriping)
         {
             // We just open the child operator.
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
-        internal override void  WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput,TKey> inputStream, IPartitionedStreamRecipient<bool> recipient, bool preferStriping, QuerySettings settings)
+        internal override void WrapPartitionedStream<TKey>(
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<bool> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // Create a shared cancelation variable and then return a possibly wrapped new enumerator.
             Shared<bool> resultFoundFlag = new Shared<bool>(false);
 
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
-            
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Correct
+            );
+
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new AnyAllSearchOperatorEnumerator<TKey>(inputStream[i], m_qualification, m_predicate, i, resultFoundFlag, 
-                    settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new AnyAllSearchOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    m_qualification,
+                    m_predicate,
+                    i,
+                    resultFoundFlag,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -129,7 +148,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<bool> AsSequentialQuery(CancellationToken token)
         {
-            Contract.Assert(false, "This method should never be called as it is an ending operator with LimitsParallelism=false.");
+            Contract.Assert(
+                false,
+                "This method should never be called as it is an ending operator with LimitsParallelism=false."
+            );
             throw new NotSupportedException();
         }
 
@@ -162,9 +184,14 @@ namespace System.Linq.Parallel
             // Instantiates a new any/all search operator.
             //
 
-            internal AnyAllSearchOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source, bool qualification,
-                                                    Func<TInput, bool> predicate, int partitionIndex, Shared<bool> resultFoundFlag,
-                                                    CancellationToken cancellationToken)
+            internal AnyAllSearchOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                bool qualification,
+                Func<TInput, bool> predicate,
+                int partitionIndex,
+                Shared<bool> resultFoundFlag,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(predicate != null);
@@ -195,7 +222,7 @@ namespace System.Linq.Parallel
                 // We just scroll through the enumerator and accumulate the result.
                 TInput element = default(TInput);
                 TKey keyUnused = default(TKey);
-                
+
                 if (m_source.MoveNext(ref element, ref keyUnused))
                 {
                     currentElement = !m_qualification;
@@ -223,8 +250,7 @@ namespace System.Linq.Parallel
                             currentElement = m_qualification;
                             break;
                         }
-                    }
-                    while (m_source.MoveNext(ref element, ref keyUnused));
+                    } while (m_source.MoveNext(ref element, ref keyUnused));
 
                     return true;
                 }

@@ -63,21 +63,31 @@ namespace System.ServiceModel.Channels
                 int refCount = 0;
                 if (targetNameCounter.TryGetValue(key, out refCount))
                 {
-                    if (!AuthenticationManager.CustomTargetNameDictionary.ContainsKey(key)
-                        || AuthenticationManager.CustomTargetNameDictionary[key] != value)
+                    if (
+                        !AuthenticationManager.CustomTargetNameDictionary.ContainsKey(key)
+                        || AuthenticationManager.CustomTargetNameDictionary[key] != value
+                    )
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)));
+                            new InvalidOperationException(
+                                SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
+                            )
+                        );
                     }
                     targetNameCounter[key] = refCount + 1;
                 }
                 else
                 {
-                    if (AuthenticationManager.CustomTargetNameDictionary.ContainsKey(key)
-                        && AuthenticationManager.CustomTargetNameDictionary[key] != value)
+                    if (
+                        AuthenticationManager.CustomTargetNameDictionary.ContainsKey(key)
+                        && AuthenticationManager.CustomTargetNameDictionary[key] != value
+                    )
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)));
+                            new InvalidOperationException(
+                                SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
+                            )
+                        );
                     }
 
                     AuthenticationManager.CustomTargetNameDictionary[key] = value;
@@ -88,7 +98,11 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        public static void RemoveIdentityMapping(Uri via, EndpointAddress target, bool validateState)
+        public static void RemoveIdentityMapping(
+            Uri via,
+            EndpointAddress target,
+            bool validateState
+        )
         {
             string key = via.AbsoluteUri;
             string value;
@@ -117,30 +131,41 @@ namespace System.ServiceModel.Channels
 
                 if (validateState)
                 {
-                    if (!AuthenticationManager.CustomTargetNameDictionary.ContainsKey(key)
-                        || AuthenticationManager.CustomTargetNameDictionary[key] != value)
+                    if (
+                        !AuthenticationManager.CustomTargetNameDictionary.ContainsKey(key)
+                        || AuthenticationManager.CustomTargetNameDictionary[key] != value
+                    )
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)));
+                            new InvalidOperationException(
+                                SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
+                            )
+                        );
                     }
                 }
             }
         }
 
-        static Dictionary<HttpWebRequest, string> serverCertMap = new Dictionary<HttpWebRequest, string>();
+        static Dictionary<HttpWebRequest, string> serverCertMap =
+            new Dictionary<HttpWebRequest, string>();
         static RemoteCertificateValidationCallback chainedServerCertValidationCallback = null;
         static bool serverCertValidationCallbackInstalled = false;
 
         public static void AddServerCertMapping(HttpWebRequest request, EndpointAddress to)
         {
-            Fx.Assert(request.RequestUri.Scheme == Uri.UriSchemeHttps,
-                "Wrong URI scheme for AddServerCertMapping().");
-            X509CertificateEndpointIdentity remoteCertificateIdentity = to.Identity as X509CertificateEndpointIdentity;
+            Fx.Assert(
+                request.RequestUri.Scheme == Uri.UriSchemeHttps,
+                "Wrong URI scheme for AddServerCertMapping()."
+            );
+            X509CertificateEndpointIdentity remoteCertificateIdentity =
+                to.Identity as X509CertificateEndpointIdentity;
             if (remoteCertificateIdentity != null)
             {
                 // The following condition should have been validated when the channel was created.
-                Fx.Assert(remoteCertificateIdentity.Certificates.Count <= 1,
-                    "HTTPS server certificate identity contains multiple certificates");
+                Fx.Assert(
+                    remoteCertificateIdentity.Certificates.Count <= 1,
+                    "HTTPS server certificate identity contains multiple certificates"
+                );
                 AddServerCertMapping(request, remoteCertificateIdentity.Certificates[0].Thumbprint);
             }
         }
@@ -151,9 +176,10 @@ namespace System.ServiceModel.Channels
             {
                 if (!serverCertValidationCallbackInstalled)
                 {
-                    chainedServerCertValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
-                    ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(
-                        OnValidateServerCertificate);
+                    chainedServerCertValidationCallback =
+                        ServicePointManager.ServerCertificateValidationCallback;
+                    ServicePointManager.ServerCertificateValidationCallback =
+                        new RemoteCertificateValidationCallback(OnValidateServerCertificate);
                     serverCertValidationCallbackInstalled = true;
                 }
 
@@ -161,8 +187,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static bool OnValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+        static bool OnValidateServerCertificate(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             HttpWebRequest request = sender as HttpWebRequest;
             if (request != null)
@@ -192,7 +222,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                return chainedServerCertValidationCallback(sender, certificate, chain, sslPolicyErrors);
+                return chainedServerCertValidationCallback(
+                    sender,
+                    certificate,
+                    chain,
+                    sslPolicyErrors
+                );
             }
         }
 
@@ -210,82 +245,148 @@ namespace System.ServiceModel.Channels
             if (!thumbprint.Equals(certHashString))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(SR.GetString(SR.HttpsServerCertThumbprintMismatch,
-                    certificate.Subject, certHashString, thumbprint)));
+                    new SecurityNegotiationException(
+                        SR.GetString(
+                            SR.HttpsServerCertThumbprintMismatch,
+                            certificate.Subject,
+                            certHashString,
+                            thumbprint
+                        )
+                    )
+                );
             }
         }
     }
 
     static class TransportSecurityHelpers
     {
-        public static IAsyncResult BeginGetSspiCredential(SecurityTokenProviderContainer tokenProvider, TimeSpan timeout,
-            AsyncCallback callback, object state)
+        public static IAsyncResult BeginGetSspiCredential(
+            SecurityTokenProviderContainer tokenProvider,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new GetSspiCredentialAsyncResult(tokenProvider.TokenProvider as SspiSecurityTokenProvider, timeout, callback, state);
+            return new GetSspiCredentialAsyncResult(
+                tokenProvider.TokenProvider as SspiSecurityTokenProvider,
+                timeout,
+                callback,
+                state
+            );
         }
 
-        public static IAsyncResult BeginGetSspiCredential(SecurityTokenProvider tokenProvider, TimeSpan timeout,
-            AsyncCallback callback, object state)
+        public static IAsyncResult BeginGetSspiCredential(
+            SecurityTokenProvider tokenProvider,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new GetSspiCredentialAsyncResult((SspiSecurityTokenProvider)tokenProvider, timeout, callback, state);
+            return new GetSspiCredentialAsyncResult(
+                (SspiSecurityTokenProvider)tokenProvider,
+                timeout,
+                callback,
+                state
+            );
         }
 
-        public static NetworkCredential EndGetSspiCredential(IAsyncResult result,
-            out TokenImpersonationLevel impersonationLevel, out AuthenticationLevel authenticationLevel)
+        public static NetworkCredential EndGetSspiCredential(
+            IAsyncResult result,
+            out TokenImpersonationLevel impersonationLevel,
+            out AuthenticationLevel authenticationLevel
+        )
         {
-            return GetSspiCredentialAsyncResult.End(result, out impersonationLevel, out authenticationLevel);
+            return GetSspiCredentialAsyncResult.End(
+                result,
+                out impersonationLevel,
+                out authenticationLevel
+            );
         }
 
-        public static NetworkCredential EndGetSspiCredential(IAsyncResult result,
-            out TokenImpersonationLevel impersonationLevel, out bool allowNtlm)
+        public static NetworkCredential EndGetSspiCredential(
+            IAsyncResult result,
+            out TokenImpersonationLevel impersonationLevel,
+            out bool allowNtlm
+        )
         {
             return GetSspiCredentialAsyncResult.End(result, out impersonationLevel, out allowNtlm);
         }
 
         // used for HTTP (from HttpChannelUtilities.GetCredential)
-        public static NetworkCredential GetSspiCredential(SecurityTokenProviderContainer tokenProvider, TimeSpan timeout,
-            out TokenImpersonationLevel impersonationLevel, out AuthenticationLevel authenticationLevel)
+        public static NetworkCredential GetSspiCredential(
+            SecurityTokenProviderContainer tokenProvider,
+            TimeSpan timeout,
+            out TokenImpersonationLevel impersonationLevel,
+            out AuthenticationLevel authenticationLevel
+        )
         {
             bool dummyExtractWindowsGroupClaims;
             bool allowNtlm;
-            NetworkCredential result = GetSspiCredential(tokenProvider.TokenProvider as SspiSecurityTokenProvider, timeout,
-                out dummyExtractWindowsGroupClaims, out impersonationLevel, out allowNtlm);
-            authenticationLevel = allowNtlm ?
-                AuthenticationLevel.MutualAuthRequested : AuthenticationLevel.MutualAuthRequired;
+            NetworkCredential result = GetSspiCredential(
+                tokenProvider.TokenProvider as SspiSecurityTokenProvider,
+                timeout,
+                out dummyExtractWindowsGroupClaims,
+                out impersonationLevel,
+                out allowNtlm
+            );
+            authenticationLevel = allowNtlm
+                ? AuthenticationLevel.MutualAuthRequested
+                : AuthenticationLevel.MutualAuthRequired;
             return result;
         }
 
         // used by client WindowsStream security (from InitiateUpgrade)
-        public static NetworkCredential GetSspiCredential(SspiSecurityTokenProvider tokenProvider, TimeSpan timeout,
-            out TokenImpersonationLevel impersonationLevel, out bool allowNtlm)
+        public static NetworkCredential GetSspiCredential(
+            SspiSecurityTokenProvider tokenProvider,
+            TimeSpan timeout,
+            out TokenImpersonationLevel impersonationLevel,
+            out bool allowNtlm
+        )
         {
             bool dummyExtractWindowsGroupClaims;
-            return GetSspiCredential(tokenProvider, timeout,
-                out dummyExtractWindowsGroupClaims, out impersonationLevel, out allowNtlm);
+            return GetSspiCredential(
+                tokenProvider,
+                timeout,
+                out dummyExtractWindowsGroupClaims,
+                out impersonationLevel,
+                out allowNtlm
+            );
         }
 
         // used by server WindowsStream security (from Open)
-        public static NetworkCredential GetSspiCredential(SecurityTokenManager credentialProvider,
-            SecurityTokenRequirement sspiTokenRequirement, TimeSpan timeout,
-            out bool extractGroupsForWindowsAccounts)
+        public static NetworkCredential GetSspiCredential(
+            SecurityTokenManager credentialProvider,
+            SecurityTokenRequirement sspiTokenRequirement,
+            TimeSpan timeout,
+            out bool extractGroupsForWindowsAccounts
+        )
         {
             extractGroupsForWindowsAccounts = TransportDefaults.ExtractGroupsForWindowsAccounts;
             NetworkCredential result = null;
 
             if (credentialProvider != null)
             {
-                SecurityTokenProvider tokenProvider = credentialProvider.CreateSecurityTokenProvider(sspiTokenRequirement);
+                SecurityTokenProvider tokenProvider =
+                    credentialProvider.CreateSecurityTokenProvider(sspiTokenRequirement);
                 if (tokenProvider != null)
                 {
                     TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                    SecurityUtils.OpenTokenProviderIfRequired(tokenProvider, timeoutHelper.RemainingTime());
+                    SecurityUtils.OpenTokenProviderIfRequired(
+                        tokenProvider,
+                        timeoutHelper.RemainingTime()
+                    );
                     bool success = false;
                     try
                     {
                         TokenImpersonationLevel dummyImpersonationLevel;
                         bool dummyAllowNtlm;
-                        result = GetSspiCredential((SspiSecurityTokenProvider)tokenProvider, timeoutHelper.RemainingTime(), out extractGroupsForWindowsAccounts,
-                            out dummyImpersonationLevel, out dummyAllowNtlm);
+                        result = GetSspiCredential(
+                            (SspiSecurityTokenProvider)tokenProvider,
+                            timeoutHelper.RemainingTime(),
+                            out extractGroupsForWindowsAccounts,
+                            out dummyImpersonationLevel,
+                            out dummyAllowNtlm
+                        );
 
                         success = true;
                     }
@@ -296,7 +397,10 @@ namespace System.ServiceModel.Channels
                             SecurityUtils.AbortTokenProviderIfRequired(tokenProvider);
                         }
                     }
-                    SecurityUtils.CloseTokenProviderIfRequired(tokenProvider, timeoutHelper.RemainingTime());
+                    SecurityUtils.CloseTokenProviderIfRequired(
+                        tokenProvider,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
             }
 
@@ -304,9 +408,13 @@ namespace System.ServiceModel.Channels
         }
 
         // core Cred lookup code
-        static NetworkCredential GetSspiCredential(SspiSecurityTokenProvider tokenProvider, TimeSpan timeout,
-            out bool extractGroupsForWindowsAccounts, out TokenImpersonationLevel impersonationLevel,
-            out bool allowNtlm)
+        static NetworkCredential GetSspiCredential(
+            SspiSecurityTokenProvider tokenProvider,
+            TimeSpan timeout,
+            out bool extractGroupsForWindowsAccounts,
+            out TokenImpersonationLevel impersonationLevel,
+            out bool allowNtlm
+        )
         {
             NetworkCredential credential = null;
             extractGroupsForWindowsAccounts = TransportDefaults.ExtractGroupsForWindowsAccounts;
@@ -315,7 +423,10 @@ namespace System.ServiceModel.Channels
 
             if (tokenProvider != null)
             {
-                SspiSecurityToken token = TransportSecurityHelpers.GetToken<SspiSecurityToken>(tokenProvider, timeout);
+                SspiSecurityToken token = TransportSecurityHelpers.GetToken<SspiSecurityToken>(
+                    tokenProvider,
+                    timeout
+                );
                 if (token != null)
                 {
                     extractGroupsForWindowsAccounts = token.ExtractGroupsForWindowsAccounts;
@@ -340,9 +451,13 @@ namespace System.ServiceModel.Channels
             return credential;
         }
 
-        public static SecurityTokenRequirement CreateSspiTokenRequirement(string transportScheme, Uri listenUri)
+        public static SecurityTokenRequirement CreateSspiTokenRequirement(
+            string transportScheme,
+            Uri listenUri
+        )
         {
-            RecipientServiceModelSecurityTokenRequirement tokenRequirement = new RecipientServiceModelSecurityTokenRequirement();
+            RecipientServiceModelSecurityTokenRequirement tokenRequirement =
+                new RecipientServiceModelSecurityTokenRequirement();
             tokenRequirement.TransportScheme = transportScheme;
             tokenRequirement.RequireCryptographicToken = false;
             tokenRequirement.ListenUri = listenUri;
@@ -350,9 +465,14 @@ namespace System.ServiceModel.Channels
             return tokenRequirement;
         }
 
-        static SecurityTokenRequirement CreateSspiTokenRequirement(EndpointAddress target, Uri via, string transportScheme)
+        static SecurityTokenRequirement CreateSspiTokenRequirement(
+            EndpointAddress target,
+            Uri via,
+            string transportScheme
+        )
         {
-            InitiatorServiceModelSecurityTokenRequirement sspiTokenRequirement = new InitiatorServiceModelSecurityTokenRequirement();
+            InitiatorServiceModelSecurityTokenRequirement sspiTokenRequirement =
+                new InitiatorServiceModelSecurityTokenRequirement();
             sspiTokenRequirement.TokenType = ServiceModelSecurityTokenTypes.SspiCredential;
             sspiTokenRequirement.RequireCryptographicToken = false;
             sspiTokenRequirement.TransportScheme = transportScheme;
@@ -362,17 +482,33 @@ namespace System.ServiceModel.Channels
         }
 
         public static SspiSecurityTokenProvider GetSspiTokenProvider(
-            SecurityTokenManager tokenManager, EndpointAddress target, Uri via, string transportScheme, AuthenticationSchemes authenticationScheme, ChannelParameterCollection channelParameters)
+            SecurityTokenManager tokenManager,
+            EndpointAddress target,
+            Uri via,
+            string transportScheme,
+            AuthenticationSchemes authenticationScheme,
+            ChannelParameterCollection channelParameters
+        )
         {
             if (tokenManager != null)
             {
-                SecurityTokenRequirement sspiRequirement = CreateSspiTokenRequirement(target, via, transportScheme);
-                sspiRequirement.Properties[ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty] = authenticationScheme;
+                SecurityTokenRequirement sspiRequirement = CreateSspiTokenRequirement(
+                    target,
+                    via,
+                    transportScheme
+                );
+                sspiRequirement.Properties[
+                    ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty
+                ] = authenticationScheme;
                 if (channelParameters != null)
                 {
-                    sspiRequirement.Properties[ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty] = channelParameters;
+                    sspiRequirement.Properties[
+                        ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty
+                    ] = channelParameters;
                 }
-                SspiSecurityTokenProvider tokenProvider = tokenManager.CreateSecurityTokenProvider(sspiRequirement) as SspiSecurityTokenProvider;
+                SspiSecurityTokenProvider tokenProvider =
+                    tokenManager.CreateSecurityTokenProvider(sspiRequirement)
+                    as SspiSecurityTokenProvider;
                 return tokenProvider;
             }
             else
@@ -382,14 +518,20 @@ namespace System.ServiceModel.Channels
         }
 
         public static SspiSecurityTokenProvider GetSspiTokenProvider(
-            SecurityTokenManager tokenManager, EndpointAddress target, Uri via, string transportScheme,
-            out IdentityVerifier identityVerifier)
+            SecurityTokenManager tokenManager,
+            EndpointAddress target,
+            Uri via,
+            string transportScheme,
+            out IdentityVerifier identityVerifier
+        )
         {
             identityVerifier = null;
             if (tokenManager != null)
             {
                 SspiSecurityTokenProvider tokenProvider =
-                    tokenManager.CreateSecurityTokenProvider(CreateSspiTokenRequirement(target, via, transportScheme)) as SspiSecurityTokenProvider;
+                    tokenManager.CreateSecurityTokenProvider(
+                        CreateSspiTokenRequirement(target, via, transportScheme)
+                    ) as SspiSecurityTokenProvider;
 
                 if (tokenProvider != null)
                 {
@@ -402,8 +544,13 @@ namespace System.ServiceModel.Channels
         }
 
         public static SecurityTokenProvider GetDigestTokenProvider(
-            SecurityTokenManager tokenManager, EndpointAddress target, Uri via,
-            string transportScheme, AuthenticationSchemes authenticationScheme, ChannelParameterCollection channelParameters)
+            SecurityTokenManager tokenManager,
+            EndpointAddress target,
+            Uri via,
+            string transportScheme,
+            AuthenticationSchemes authenticationScheme,
+            ChannelParameterCollection channelParameters
+        )
         {
             if (tokenManager != null)
             {
@@ -414,19 +561,29 @@ namespace System.ServiceModel.Channels
                 digestTokenRequirement.Via = via;
                 digestTokenRequirement.RequireCryptographicToken = false;
                 digestTokenRequirement.TransportScheme = transportScheme;
-                digestTokenRequirement.Properties[ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty] = authenticationScheme;
+                digestTokenRequirement.Properties[
+                    ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty
+                ] = authenticationScheme;
                 if (channelParameters != null)
                 {
-                    digestTokenRequirement.Properties[ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty] = channelParameters;
+                    digestTokenRequirement.Properties[
+                        ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty
+                    ] = channelParameters;
                 }
-                return tokenManager.CreateSecurityTokenProvider(digestTokenRequirement) as SspiSecurityTokenProvider;
+                return tokenManager.CreateSecurityTokenProvider(digestTokenRequirement)
+                    as SspiSecurityTokenProvider;
             }
             return null;
         }
 
-        public static SecurityTokenAuthenticator GetCertificateTokenAuthenticator(SecurityTokenManager tokenManager, string transportScheme, Uri listenUri)
+        public static SecurityTokenAuthenticator GetCertificateTokenAuthenticator(
+            SecurityTokenManager tokenManager,
+            string transportScheme,
+            Uri listenUri
+        )
         {
-            RecipientServiceModelSecurityTokenRequirement clientAuthRequirement = new RecipientServiceModelSecurityTokenRequirement();
+            RecipientServiceModelSecurityTokenRequirement clientAuthRequirement =
+                new RecipientServiceModelSecurityTokenRequirement();
             clientAuthRequirement.TokenType = SecurityTokenTypes.X509Certificate;
             clientAuthRequirement.RequireCryptographicToken = true;
             clientAuthRequirement.KeyUsage = SecurityKeyUsage.Signature;
@@ -437,7 +594,12 @@ namespace System.ServiceModel.Channels
         }
 
         public static SecurityTokenProvider GetCertificateTokenProvider(
-            SecurityTokenManager tokenManager, EndpointAddress target, Uri via, string transportScheme, ChannelParameterCollection channelParameters)
+            SecurityTokenManager tokenManager,
+            EndpointAddress target,
+            Uri via,
+            string transportScheme,
+            ChannelParameterCollection channelParameters
+        )
         {
             if (tokenManager != null)
             {
@@ -450,7 +612,9 @@ namespace System.ServiceModel.Channels
                 certificateTokenRequirement.TransportScheme = transportScheme;
                 if (channelParameters != null)
                 {
-                    certificateTokenRequirement.Properties[ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty] = channelParameters;
+                    certificateTokenRequirement.Properties[
+                        ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty
+                    ] = channelParameters;
                 }
                 return tokenManager.CreateSecurityTokenProvider(certificateTokenRequirement);
             }
@@ -463,14 +627,21 @@ namespace System.ServiceModel.Channels
             SecurityToken result = tokenProvider.GetToken(timeout);
             if ((result != null) && !(result is T))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.InvalidTokenProvided, tokenProvider.GetType(), typeof(T))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InvalidTokenProvided, tokenProvider.GetType(), typeof(T))
+                    )
+                );
             }
             return result as T;
         }
 
-        public static IAsyncResult BeginGetUserNameCredential(SecurityTokenProviderContainer tokenProvider, TimeSpan timeout,
-            AsyncCallback callback, object state)
+        public static IAsyncResult BeginGetUserNameCredential(
+            SecurityTokenProviderContainer tokenProvider,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new GetUserNameCredentialAsyncResult(tokenProvider, timeout, callback, state);
         }
@@ -480,13 +651,19 @@ namespace System.ServiceModel.Channels
             return GetUserNameCredentialAsyncResult.End(result);
         }
 
-        public static NetworkCredential GetUserNameCredential(SecurityTokenProviderContainer tokenProvider, TimeSpan timeout)
+        public static NetworkCredential GetUserNameCredential(
+            SecurityTokenProviderContainer tokenProvider,
+            TimeSpan timeout
+        )
         {
             NetworkCredential result = null;
 
             if (tokenProvider != null && tokenProvider.TokenProvider != null)
             {
-                UserNameSecurityToken token = GetToken<UserNameSecurityToken>(tokenProvider.TokenProvider, timeout);
+                UserNameSecurityToken token = GetToken<UserNameSecurityToken>(
+                    tokenProvider.TokenProvider,
+                    timeout
+                );
                 if (token != null)
                 {
                     SecurityUtils.PrepareNetworkCredential();
@@ -496,17 +673,22 @@ namespace System.ServiceModel.Channels
 
             if (result == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.NoUserNameTokenProvided)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
+                );
             }
 
             return result;
         }
 
         static InitiatorServiceModelSecurityTokenRequirement CreateUserNameTokenRequirement(
-            EndpointAddress target, Uri via, string transportScheme)
+            EndpointAddress target,
+            Uri via,
+            string transportScheme
+        )
         {
-            InitiatorServiceModelSecurityTokenRequirement usernameRequirement = new InitiatorServiceModelSecurityTokenRequirement();
+            InitiatorServiceModelSecurityTokenRequirement usernameRequirement =
+                new InitiatorServiceModelSecurityTokenRequirement();
             usernameRequirement.RequireCryptographicToken = false;
             usernameRequirement.TokenType = SecurityTokenTypes.UserName;
             usernameRequirement.TargetAddress = target;
@@ -516,17 +698,30 @@ namespace System.ServiceModel.Channels
         }
 
         public static SecurityTokenProvider GetUserNameTokenProvider(
-            SecurityTokenManager tokenManager, EndpointAddress target, Uri via, string transportScheme, AuthenticationSchemes authenticationScheme,
-            ChannelParameterCollection channelParameters)
+            SecurityTokenManager tokenManager,
+            EndpointAddress target,
+            Uri via,
+            string transportScheme,
+            AuthenticationSchemes authenticationScheme,
+            ChannelParameterCollection channelParameters
+        )
         {
             SecurityTokenProvider result = null;
             if (tokenManager != null)
             {
-                SecurityTokenRequirement usernameRequirement = CreateUserNameTokenRequirement(target, via, transportScheme);
-                usernameRequirement.Properties[ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty] = authenticationScheme;
+                SecurityTokenRequirement usernameRequirement = CreateUserNameTokenRequirement(
+                    target,
+                    via,
+                    transportScheme
+                );
+                usernameRequirement.Properties[
+                    ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty
+                ] = authenticationScheme;
                 if (channelParameters != null)
                 {
-                    usernameRequirement.Properties[ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty] = channelParameters;
+                    usernameRequirement.Properties[
+                        ServiceModelSecurityTokenRequirement.ChannelParametersCollectionProperty
+                    ] = channelParameters;
                 }
                 result = tokenManager.CreateSecurityTokenProvider(usernameRequirement);
             }
@@ -560,14 +755,19 @@ namespace System.ServiceModel.Channels
             static AsyncCallback onGetToken = Fx.ThunkCallback(new AsyncCallback(OnGetToken));
             SecurityTokenProvider tokenProvider;
 
-            public GetUserNameCredentialAsyncResult(SecurityTokenProviderContainer tokenProvider, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public GetUserNameCredentialAsyncResult(
+                SecurityTokenProviderContainer tokenProvider,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 if (tokenProvider == null || tokenProvider.TokenProvider == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                        SR.NoUserNameTokenProvided)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
+                    );
                 }
 
                 this.tokenProvider = tokenProvider.TokenProvider;
@@ -581,7 +781,8 @@ namespace System.ServiceModel.Channels
 
             void CompleteGetToken(IAsyncResult result)
             {
-                UserNameSecurityToken token = (UserNameSecurityToken)this.tokenProvider.EndGetToken(result);
+                UserNameSecurityToken token = (UserNameSecurityToken)
+                    this.tokenProvider.EndGetToken(result);
                 if (token != null)
                 {
                     SecurityUtils.PrepareNetworkCredential();
@@ -589,8 +790,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                        SR.NoUserNameTokenProvided)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
+                    );
                 }
             }
 
@@ -599,7 +801,8 @@ namespace System.ServiceModel.Channels
                 if (result.CompletedSynchronously)
                     return;
 
-                GetUserNameCredentialAsyncResult thisPtr = (GetUserNameCredentialAsyncResult)result.AsyncState;
+                GetUserNameCredentialAsyncResult thisPtr = (GetUserNameCredentialAsyncResult)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 try
@@ -620,7 +823,8 @@ namespace System.ServiceModel.Channels
 
             public static NetworkCredential End(IAsyncResult result)
             {
-                GetUserNameCredentialAsyncResult thisPtr = AsyncResult.End<GetUserNameCredentialAsyncResult>(result);
+                GetUserNameCredentialAsyncResult thisPtr =
+                    AsyncResult.End<GetUserNameCredentialAsyncResult>(result);
                 return thisPtr.credential;
             }
         }
@@ -633,8 +837,12 @@ namespace System.ServiceModel.Channels
             static AsyncCallback onGetToken;
             SspiSecurityTokenProvider credentialProvider;
 
-            public GetSspiCredentialAsyncResult(SspiSecurityTokenProvider credentialProvider, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public GetSspiCredentialAsyncResult(
+                SspiSecurityTokenProvider credentialProvider,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.allowNtlm = ConnectionOrientedTransportDefaults.AllowNtlm;
@@ -662,7 +870,8 @@ namespace System.ServiceModel.Channels
 
             void CompleteGetToken(IAsyncResult result)
             {
-                SspiSecurityToken token = (SspiSecurityToken)this.credentialProvider.EndGetToken(result);
+                SspiSecurityToken token = (SspiSecurityToken)
+                    this.credentialProvider.EndGetToken(result);
                 if (token != null)
                 {
                     this.impersonationLevel = token.ImpersonationLevel;
@@ -693,7 +902,8 @@ namespace System.ServiceModel.Channels
                 if (result.CompletedSynchronously)
                     return;
 
-                GetSspiCredentialAsyncResult thisPtr = (GetSspiCredentialAsyncResult)result.AsyncState;
+                GetSspiCredentialAsyncResult thisPtr = (GetSspiCredentialAsyncResult)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 try
@@ -712,20 +922,29 @@ namespace System.ServiceModel.Channels
                 thisPtr.Complete(false, completionException);
             }
 
-            public static NetworkCredential End(IAsyncResult result,
-                out TokenImpersonationLevel impersonationLevel, out AuthenticationLevel authenticationLevel)
+            public static NetworkCredential End(
+                IAsyncResult result,
+                out TokenImpersonationLevel impersonationLevel,
+                out AuthenticationLevel authenticationLevel
+            )
             {
-                GetSspiCredentialAsyncResult thisPtr = AsyncResult.End<GetSspiCredentialAsyncResult>(result);
+                GetSspiCredentialAsyncResult thisPtr =
+                    AsyncResult.End<GetSspiCredentialAsyncResult>(result);
                 impersonationLevel = thisPtr.impersonationLevel;
-                authenticationLevel = thisPtr.allowNtlm ?
-                    AuthenticationLevel.MutualAuthRequested : AuthenticationLevel.MutualAuthRequired;
+                authenticationLevel = thisPtr.allowNtlm
+                    ? AuthenticationLevel.MutualAuthRequested
+                    : AuthenticationLevel.MutualAuthRequired;
                 return thisPtr.credential;
             }
 
-            public static NetworkCredential End(IAsyncResult result,
-                out TokenImpersonationLevel impersonationLevel, out bool allowNtlm)
+            public static NetworkCredential End(
+                IAsyncResult result,
+                out TokenImpersonationLevel impersonationLevel,
+                out bool allowNtlm
+            )
             {
-                GetSspiCredentialAsyncResult thisPtr = AsyncResult.End<GetSspiCredentialAsyncResult>(result);
+                GetSspiCredentialAsyncResult thisPtr =
+                    AsyncResult.End<GetSspiCredentialAsyncResult>(result);
                 impersonationLevel = thisPtr.impersonationLevel;
                 allowNtlm = thisPtr.allowNtlm;
                 return thisPtr.credential;

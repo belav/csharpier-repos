@@ -26,52 +26,60 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Text;
-using System.IO;
 using System.Data;
+using System.IO;
+using System.Text;
+using NUnit.Framework;
+
 //using GHTUtils;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture] public class EvaluateExceptionTest
-	{
-		[Test]
-		public void Generate()
-		{
-			Exception tmpEx = new Exception() ;
+    [TestFixture]
+    public class EvaluateExceptionTest
+    {
+        [Test]
+        public void Generate()
+        {
+            Exception tmpEx = new Exception();
 
-			DataTable tbl = new DataTable();
-			tbl.Columns.Add(new DataColumn("Column"));
-			DataColumn dc = new DataColumn();
-			dc.Expression = "something"; //invalid expression
+            DataTable tbl = new DataTable();
+            tbl.Columns.Add(new DataColumn("Column"));
+            DataColumn dc = new DataColumn();
+            dc.Expression = "something"; //invalid expression
 
-			// EvaluateException - Column 
-			try 
-			{
-				tbl.Columns.Add(dc);
-				Assert.Fail("EVE1: Columns.Add failed to raise EvaluateException.");
-			}
-			catch (EvaluateException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("EVE2: Columns.Add wrong exception type. Got: " + exc);
-			}
+            // EvaluateException - Column
+            try
+            {
+                tbl.Columns.Add(dc);
+                Assert.Fail("EVE1: Columns.Add failed to raise EvaluateException.");
+            }
+            catch (EvaluateException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("EVE2: Columns.Add wrong exception type. Got: " + exc);
+            }
 
-			// EvaluateException - Column Expression
-			try 
-			{
-				tbl.Columns[0].Expression = "Min(AK47)"; //invalid expression
-				Assert.Fail("EVE3: Columns[0].Expression failed to raise EvaluateException.");
-			}
-			catch (EvaluateException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("EVE4: Columns[0].Expression wrong exception type. Got: " + exc);
-			}
-		}
-	}
+            // EvaluateException - Column Expression
+            try
+            {
+                tbl.Columns[0].Expression = "Min(AK47)"; //invalid expression
+                Assert.Fail("EVE3: Columns[0].Expression failed to raise EvaluateException.");
+            }
+            catch (EvaluateException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("EVE4: Columns[0].Expression wrong exception type. Got: " + exc);
+            }
+        }
+    }
 }

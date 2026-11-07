@@ -30,16 +30,18 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Logging
 {
-        public class ForwardingLoggerRecord
+    public class ForwardingLoggerRecord
+    {
+        public ForwardingLoggerRecord(
+            ILogger centralLogger,
+            LoggerDescription forwardingLoggerDescription
+        )
         {
-                public ForwardingLoggerRecord (ILogger centralLogger, LoggerDescription forwardingLoggerDescription)
-                {
-                        this.CentralLogger = centralLogger;
-                        this.ForwardingLoggerDescription = forwardingLoggerDescription;
-                }
-
-                public ILogger CentralLogger { get; private set; }
-                public LoggerDescription ForwardingLoggerDescription { get; private set; }
+            this.CentralLogger = centralLogger;
+            this.ForwardingLoggerDescription = forwardingLoggerDescription;
         }
-}
 
+        public ILogger CentralLogger { get; private set; }
+        public LoggerDescription ForwardingLoggerDescription { get; private set; }
+    }
+}

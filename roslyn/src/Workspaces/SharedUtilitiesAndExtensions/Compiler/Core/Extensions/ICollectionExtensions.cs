@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class ICollectionExtensions
     {
-        public static ImmutableArray<T> WhereAsArray<T, TState>(this IEnumerable<T> values, Func<T, TState, bool> predicate, TState state)
+        public static ImmutableArray<T> WhereAsArray<T, TState>(
+            this IEnumerable<T> values,
+            Func<T, TState, bool> predicate,
+            TState state
+        )
         {
             using var _ = ArrayBuilder<T>.GetInstance(out var result);
 
@@ -40,13 +44,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static void AddIfNotNull<T>(this ICollection<T> collection, T? value) where T : struct
+        public static void AddIfNotNull<T>(this ICollection<T> collection, T? value)
+            where T : struct
         {
             if (value != null)
                 collection.Add(value.Value);
         }
 
-        public static void AddIfNotNull<T>(this ICollection<T> collection, T? value) where T : class
+        public static void AddIfNotNull<T>(this ICollection<T> collection, T? value)
+            where T : class
         {
             if (value != null)
                 collection.Add(value);

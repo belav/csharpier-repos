@@ -18,13 +18,10 @@ namespace System.Diagnostics
         /// class.</para>
         /// </devdoc>
         public BooleanSwitch(string displayName, string? description)
-            : base(displayName, description)
-        {
-        }
+            : base(displayName, description) { }
 
         public BooleanSwitch(string displayName, string? description, string defaultSwitchValue)
-            : base(displayName, description, defaultSwitchValue)
-        { }
+            : base(displayName, description, defaultSwitchValue) { }
 
         /// <devdoc>
         ///    <para>Specifies whether the switch is enabled
@@ -32,14 +29,8 @@ namespace System.Diagnostics
         /// </devdoc>
         public bool Enabled
         {
-            get
-            {
-                return (SwitchSetting == 0) ? false : true;
-            }
-            set
-            {
-                SwitchSetting = value ? 1 : 0;
-            }
+            get { return (SwitchSetting == 0) ? false : true; }
+            set { SwitchSetting = value ? 1 : 0; }
         }
 
         protected override void OnValueChanged()

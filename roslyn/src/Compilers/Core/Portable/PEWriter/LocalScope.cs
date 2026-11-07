@@ -27,7 +27,12 @@ namespace Microsoft.Cci
         private readonly ImmutableArray<ILocalDefinition> _constants;
         private readonly ImmutableArray<ILocalDefinition> _locals;
 
-        internal LocalScope(int offset, int endOffset, ImmutableArray<ILocalDefinition> constants, ImmutableArray<ILocalDefinition> locals)
+        internal LocalScope(
+            int offset,
+            int endOffset,
+            ImmutableArray<ILocalDefinition> constants,
+            ImmutableArray<ILocalDefinition> locals
+        )
         {
             Debug.Assert(!locals.Any(l => l.Name == null));
             Debug.Assert(!constants.Any(c => c.Name == null));

@@ -37,8 +37,12 @@ namespace Internal.TypeSystem
                 MetadataType typeDefinition = (MetadataType)GetTypeDefinition();
 
                 bool changed;
-                Instantiation sharedInstantiation = RuntimeDeterminedTypeUtilities.ConvertInstantiationToSharedRuntimeForm(
-                    instantiation, typeDefinition.Instantiation, out changed);
+                Instantiation sharedInstantiation =
+                    RuntimeDeterminedTypeUtilities.ConvertInstantiationToSharedRuntimeForm(
+                        instantiation,
+                        typeDefinition.Instantiation,
+                        out changed
+                    );
                 if (changed)
                 {
                     return Context.GetInstantiatedType(typeDefinition, sharedInstantiation);
@@ -48,7 +52,10 @@ namespace Internal.TypeSystem
             return this;
         }
 
-        public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             TypeDesc typeDefinition = GetTypeDefinition();
             if (this == typeDefinition)
@@ -60,7 +67,11 @@ namespace Internal.TypeSystem
             for (int i = 0; i < instantiation.Length; i++)
             {
                 TypeDesc uninst = instantiation[i];
-                TypeDesc inst = uninst.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(typeInstantiation, methodInstantiation);
+                TypeDesc inst =
+                    uninst.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+                        typeInstantiation,
+                        methodInstantiation
+                    );
                 if (inst != uninst)
                 {
                     if (clone == null)
@@ -77,7 +88,10 @@ namespace Internal.TypeSystem
 
             if (clone != null)
             {
-                return Context.GetInstantiatedType((MetadataType)typeDefinition, new Instantiation(clone));
+                return Context.GetInstantiatedType(
+                    (MetadataType)typeDefinition,
+                    new Instantiation(clone)
+                );
             }
 
             return this;

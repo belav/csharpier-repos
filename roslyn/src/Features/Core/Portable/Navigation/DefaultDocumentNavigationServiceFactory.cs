@@ -11,16 +11,17 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Navigation
 {
-    [ExportWorkspaceServiceFactory(typeof(IDocumentNavigationService), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IDocumentNavigationService), ServiceLayer.Default),
+        Shared
+    ]
     internal sealed class DefaultDocumentNavigationServiceFactory : IWorkspaceServiceFactory
     {
         private IDocumentNavigationService _singleton;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDocumentNavigationServiceFactory()
-        {
-        }
+        public DefaultDocumentNavigationServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

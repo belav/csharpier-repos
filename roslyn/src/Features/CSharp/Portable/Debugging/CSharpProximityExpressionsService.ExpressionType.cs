@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             ValidExpression = 0x1,
 
             // Note: ValidTerm implies ValidExpression.
-            ValidTerm = 0x3
+            ValidTerm = 0x3,
         }
     }
 }

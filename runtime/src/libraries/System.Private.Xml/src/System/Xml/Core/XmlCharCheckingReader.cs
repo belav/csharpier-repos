@@ -22,8 +22,8 @@ namespace System.Xml
             Initial,
             InReadBinary,
             Error,
-            Interactive,  // Interactive means other than ReadState.Initial and ReadState.Error; still needs to call
-                          // underlying XmlReader to find out if the reported ReadState should be Interactive or EndOfFile
+            Interactive, // Interactive means other than ReadState.Initial and ReadState.Error; still needs to call
+            // underlying XmlReader to find out if the reported ReadState should be Interactive or EndOfFile
         };
 
         //
@@ -45,10 +45,23 @@ namespace System.Xml
         //
         // Constructor
         //
-        internal XmlCharCheckingReader(XmlReader reader, bool checkCharacters, bool ignoreWhitespace, bool ignoreComments, bool ignorePis, DtdProcessing dtdProcessing)
+        internal XmlCharCheckingReader(
+            XmlReader reader,
+            bool checkCharacters,
+            bool ignoreWhitespace,
+            bool ignoreComments,
+            bool ignorePis,
+            DtdProcessing dtdProcessing
+        )
             : base(reader)
         {
-            Debug.Assert(checkCharacters || ignoreWhitespace || ignoreComments || ignorePis || (int)dtdProcessing != -1);
+            Debug.Assert(
+                checkCharacters
+                    || ignoreWhitespace
+                    || ignoreComments
+                    || ignorePis
+                    || (int)dtdProcessing != -1
+            );
 
             _state = State.Initial;
 
@@ -316,7 +329,10 @@ namespace System.Xml
                                 int i;
                                 if ((i = XmlCharType.IsPublicId(str)) >= 0)
                                 {
-                                    Throw(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(str, i));
+                                    Throw(
+                                        SR.Xml_InvalidCharacter,
+                                        XmlException.BuildCharExceptionArgs(str, i)
+                                    );
                                 }
                             }
                         }
@@ -362,7 +378,9 @@ namespace System.Xml
                 switch (_state)
                 {
                     case State.Initial:
-                        return base.reader.ReadState == ReadState.Closed ? ReadState.Closed : ReadState.Initial;
+                        return base.reader.ReadState == ReadState.Closed
+                            ? ReadState.Closed
+                            : ReadState.Initial;
                     case State.Error:
                         return ReadState.Error;
                     case State.InReadBinary:
@@ -384,10 +402,7 @@ namespace System.Xml
 
         public override bool CanReadBinaryContent
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
@@ -410,7 +425,10 @@ namespace System.Xml
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -453,7 +471,10 @@ namespace System.Xml
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -501,7 +522,10 @@ namespace System.Xml
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -548,7 +572,10 @@ namespace System.Xml
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -592,7 +619,10 @@ namespace System.Xml
             int i;
             if ((i = XmlCharType.IsOnlyWhitespaceWithPos(value)) != -1)
             {
-                Throw(SR.Xml_InvalidWhitespaceCharacter, XmlException.BuildCharExceptionArgs(value, i));
+                Throw(
+                    SR.Xml_InvalidWhitespaceCharacter,
+                    XmlException.BuildCharExceptionArgs(value, i)
+                );
             }
         }
 
@@ -620,7 +650,11 @@ namespace System.Xml
 
         private static void CheckCharacters(string value)
         {
-            XmlConvert.VerifyCharData(value, ExceptionType.ArgumentException, ExceptionType.XmlException);
+            XmlConvert.VerifyCharData(
+                value,
+                ExceptionType.ArgumentException,
+                ExceptionType.XmlException
+            );
         }
 
         private void FinishReadBinary()
@@ -637,16 +671,34 @@ namespace System.Xml
     {
         internal IXmlNamespaceResolver readerAsNSResolver;
 
-        internal XmlCharCheckingReaderWithNS(XmlReader reader, IXmlNamespaceResolver readerAsNSResolver, bool checkCharacters, bool ignoreWhitespace, bool ignoreComments, bool ignorePis, DtdProcessing dtdProcessing)
-            : base(reader, checkCharacters, ignoreWhitespace, ignoreComments, ignorePis, dtdProcessing)
+        internal XmlCharCheckingReaderWithNS(
+            XmlReader reader,
+            IXmlNamespaceResolver readerAsNSResolver,
+            bool checkCharacters,
+            bool ignoreWhitespace,
+            bool ignoreComments,
+            bool ignorePis,
+            DtdProcessing dtdProcessing
+        )
+            : base(
+                reader,
+                checkCharacters,
+                ignoreWhitespace,
+                ignoreComments,
+                ignorePis,
+                dtdProcessing
+            )
         {
             Debug.Assert(readerAsNSResolver != null);
             this.readerAsNSResolver = readerAsNSResolver;
         }
+
         //
         // IXmlNamespaceResolver
         //
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return readerAsNSResolver.GetNamespacesInScope(scope);
         }

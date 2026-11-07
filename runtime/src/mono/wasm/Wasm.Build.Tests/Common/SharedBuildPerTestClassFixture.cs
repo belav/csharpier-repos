@@ -24,9 +24,12 @@ namespace Wasm.Build.Tests
             _buildPaths.Add(buildArgs, product);
         }
 
-        public void RemoveFromCache(string buildPath, bool keepDir=true)
+        public void RemoveFromCache(string buildPath, bool keepDir = true)
         {
-            BuildArgs? foundBuildArgs = _buildPaths.Where(kvp => kvp.Value.ProjectDir == buildPath).Select(kvp => kvp.Key).SingleOrDefault();
+            BuildArgs? foundBuildArgs = _buildPaths
+                .Where(kvp => kvp.Value.ProjectDir == buildPath)
+                .Select(kvp => kvp.Key)
+                .SingleOrDefault();
             if (foundBuildArgs is not null)
                 _buildPaths.Remove(foundBuildArgs);
 
@@ -34,12 +37,14 @@ namespace Wasm.Build.Tests
                 RemoveDirectory(buildPath);
         }
 
-        public bool TryGetBuildFor(BuildArgs buildArgs, [NotNullWhen(true)] out BuildProduct? product)
-            => _buildPaths.TryGetValue(buildArgs, out product);
+        public bool TryGetBuildFor(
+            BuildArgs buildArgs,
+            [NotNullWhen(true)] out BuildProduct? product
+        ) => _buildPaths.TryGetValue(buildArgs, out product);
 
         public void Dispose()
         {
-            Console.WriteLine ($"============== DELETING THE BUILDS =============");
+            Console.WriteLine($"============== DELETING THE BUILDS =============");
             foreach (var kvp in _buildPaths.Values)
             {
                 RemoveDirectory(kvp.ProjectDir);
@@ -61,6 +66,5 @@ namespace Wasm.Build.Tests
                 throw;
             }
         }
-
     }
 }

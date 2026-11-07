@@ -5,8 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines support for floating-point constants.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
-    public interface IFloatingPointConstants<TSelf>
-        : INumberBase<TSelf>
+    public interface IFloatingPointConstants<TSelf> : INumberBase<TSelf>
         where TSelf : IFloatingPointConstants<TSelf>?
     {
         /// <summary>Gets the mathematical constant <c>e</c>.</summary>

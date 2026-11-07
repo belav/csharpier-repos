@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             IWpfTextView wpfTextView,
             ITextBuffer subjectBuffer,
             IOleCommandTarget nextCommandTarget,
-            IComponentModel componentModel)
+            IComponentModel componentModel
+        )
             : base(wpfTextView, componentModel)
         {
             Contract.ThrowIfNull(wpfTextView);
@@ -35,13 +36,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             _subjectBuffer = subjectBuffer;
 
             // Chain in editor command handler service. It will execute all our command handlers migrated to the modern editor commanding.
-            var vsCommandHandlerServiceAdapterFactory = componentModel.GetService<IVsCommandHandlerServiceAdapterFactory>();
-            var vsCommandHandlerServiceAdapter = vsCommandHandlerServiceAdapterFactory.Create(wpfTextView, _subjectBuffer, nextCommandTarget);
+            var vsCommandHandlerServiceAdapterFactory =
+                componentModel.GetService<IVsCommandHandlerServiceAdapterFactory>();
+            var vsCommandHandlerServiceAdapter = vsCommandHandlerServiceAdapterFactory.Create(
+                wpfTextView,
+                _subjectBuffer,
+                nextCommandTarget
+            );
             NextCommandTarget = vsCommandHandlerServiceAdapter;
         }
 
-        protected override ITextBuffer GetSubjectBufferContainingCaret()
-            => _subjectBuffer;
+        protected override ITextBuffer GetSubjectBufferContainingCaret() => _subjectBuffer;
 
         protected override int GetDataTipTextImpl(TextSpan[] pSpan, out string pbstrText)
         {
@@ -55,7 +60,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             // We need to map the TextSpan from the DataBuffer to our subject buffer.
             var span = textViewModel.DataBuffer.CurrentSnapshot.GetSpan(pSpan[0]);
-            var subjectSpans = WpfTextView.BufferGraph.MapDownToBuffer(span, SpanTrackingMode.EdgeInclusive, _subjectBuffer);
+            var subjectSpans = WpfTextView.BufferGraph.MapDownToBuffer(
+                span,
+                SpanTrackingMode.EdgeInclusive,
+                _subjectBuffer
+            );
 
             // The following loop addresses the case where the position is on a seam and maps to multiple source spans.
             // In these cases, we assume it's okay to return the first span that successfully returns a DataTip.
@@ -63,7 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             var expectedSpanLength = span.Length;
             foreach (var candidateSpan in subjectSpans)
             {
-                // First, we'll only consider spans whose length matches our input span. 
+                // First, we'll only consider spans whose length matches our input span.
                 if (candidateSpan.Length != expectedSpanLength)
                 {
                     continue;
@@ -75,13 +84,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 var hr = GetDataTipTextImpl(_subjectBuffer, subjectBufferSpanData, out pbstrText);
                 if (ErrorHandler.Succeeded(hr))
                 {
-                    var subjectSpan = _subjectBuffer.CurrentSnapshot.GetSpan(subjectBufferSpanData[0]);
+                    var subjectSpan = _subjectBuffer.CurrentSnapshot.GetSpan(
+                        subjectBufferSpanData[0]
+                    );
 
                     // When mapping back up to the surface buffer, if we get more than one span,
                     // take the span that intersects with the input span, since that's probably
                     // the one we care about.
                     // If there are no such spans, just return.
-                    var surfaceSpan = WpfTextView.BufferGraph.MapUpToBuffer(subjectSpan, SpanTrackingMode.EdgeInclusive, textViewModel.DataBuffer)
+                    var surfaceSpan = WpfTextView
+                        .BufferGraph.MapUpToBuffer(
+                            subjectSpan,
+                            SpanTrackingMode.EdgeInclusive,
+                            textViewModel.DataBuffer
+                        )
                         .SingleOrDefault(x => x.IntersectsWith(span));
 
                     if (surfaceSpan == default)

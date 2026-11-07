@@ -13,17 +13,29 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Get whether the given tree is generated.
         /// </summary>
-        public abstract GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken cancellationToken);
+        public abstract GeneratedKind IsGenerated(
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get diagnostic severity setting for a given diagnostic identifier in a given tree.
         /// </summary>
-        public abstract bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity);
+        public abstract bool TryGetDiagnosticValue(
+            SyntaxTree tree,
+            string diagnosticId,
+            CancellationToken cancellationToken,
+            out ReportDiagnostic severity
+        );
 
         /// <summary>
         /// Get diagnostic severity set globally for a given diagnostic identifier
         /// </summary>
-        public abstract bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity);
+        public abstract bool TryGetGlobalDiagnosticValue(
+            string diagnosticId,
+            CancellationToken cancellationToken,
+            out ReportDiagnostic severity
+        );
     }
 
     internal sealed class CompilerSyntaxTreeOptionsProvider : SyntaxTreeOptionsProvider
@@ -38,7 +50,9 @@ namespace Microsoft.CodeAnalysis
                 if (result is AnalyzerConfigOptionsResult r)
                 {
                     DiagnosticOptions = r.TreeOptions;
-                    IsGenerated = GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(r.AnalyzerOptions);
+                    IsGenerated = GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(
+                        r.AnalyzerOptions
+                    );
                 }
                 else
                 {
@@ -55,7 +69,8 @@ namespace Microsoft.CodeAnalysis
         public CompilerSyntaxTreeOptionsProvider(
             SyntaxTree?[] trees,
             ImmutableArray<AnalyzerConfigOptionsResult> results,
-            AnalyzerConfigOptionsResult globalResults)
+            AnalyzerConfigOptionsResult globalResults
+        )
         {
             var builder = ImmutableDictionary.CreateBuilder<SyntaxTree, Options>();
             for (int i = 0; i < trees.Length; i++)
@@ -64,17 +79,25 @@ namespace Microsoft.CodeAnalysis
                 {
                     builder.Add(
                         trees[i]!,
-                        new Options(results.IsDefault ? null : (AnalyzerConfigOptionsResult?)results[i]));
+                        new Options(
+                            results.IsDefault ? null : (AnalyzerConfigOptionsResult?)results[i]
+                        )
+                    );
                 }
             }
             _options = builder.ToImmutableDictionary();
             _globalOptions = globalResults;
         }
 
-        public override GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken _)
-            => _options.TryGetValue(tree, out var value) ? value.IsGenerated : GeneratedKind.Unknown;
+        public override GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken _) =>
+            _options.TryGetValue(tree, out var value) ? value.IsGenerated : GeneratedKind.Unknown;
 
-        public override bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken _, out ReportDiagnostic severity)
+        public override bool TryGetDiagnosticValue(
+            SyntaxTree tree,
+            string diagnosticId,
+            CancellationToken _,
+            out ReportDiagnostic severity
+        )
         {
             if (_options.TryGetValue(tree, out var value))
             {
@@ -84,7 +107,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public override bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken _, out ReportDiagnostic severity)
+        public override bool TryGetGlobalDiagnosticValue(
+            string diagnosticId,
+            CancellationToken _,
+            out ReportDiagnostic severity
+        )
         {
             if (_globalOptions.TreeOptions is object)
             {

@@ -24,9 +24,7 @@ namespace System.ComponentModel
         /// If no such provider is given, the base versions of the methods will
         /// return empty, but valid values.
         /// </summary>
-        protected TypeDescriptionProvider()
-        {
-        }
+        protected TypeDescriptionProvider() { }
 
         /// <summary>
         /// There are two versions of the constructor for this class. The empty
@@ -52,9 +50,11 @@ namespace System.ComponentModel
         /// </summary>
         public virtual object? CreateInstance(
             IServiceProvider? provider,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type objectType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type objectType,
             Type[]? argTypes,
-            object?[]? args)
+            object?[]? args
+        )
         {
             if (_parent != null)
             {
@@ -142,7 +142,10 @@ namespace System.ComponentModel
         /// is called to perform normal reflection against the object.
         /// </summary>
         [return: DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
-        public Type GetReflectionType([DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)] Type objectType) => GetReflectionType(objectType, null);
+        public Type GetReflectionType(
+            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
+                Type objectType
+        ) => GetReflectionType(objectType, null);
 
         /// <summary>
         /// The GetReflection method is a lower level version of GetTypeDescriptor.
@@ -153,7 +156,9 @@ namespace System.ComponentModel
         /// object type if no parent provider was passed. If a parent provider was passed, this
         /// method will invoke the parent provider's GetReflectionType method.
         /// </summary>
-        [RequiresUnreferencedCode("GetReflectionType is not trim compatible because the Type of object cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "GetReflectionType is not trim compatible because the Type of object cannot be statically discovered."
+        )]
         public Type GetReflectionType(object instance)
         {
             ArgumentNullException.ThrowIfNull(instance);
@@ -172,8 +177,10 @@ namespace System.ComponentModel
         /// </summary>
         [return: DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
         public virtual Type GetReflectionType(
-            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)] Type objectType,
-            object? instance)
+            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
+                Type objectType,
+            object? instance
+        )
         {
             if (_parent != null)
             {
@@ -214,7 +221,9 @@ namespace System.ComponentModel
         /// interested in providing type information for the object it should
         /// return base.
         /// </summary>
-        public ICustomTypeDescriptor? GetTypeDescriptor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType)
+        public ICustomTypeDescriptor? GetTypeDescriptor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType
+        )
         {
             return GetTypeDescriptor(objectType, null);
         }
@@ -249,7 +258,10 @@ namespace System.ComponentModel
         /// this method will invoke the parent provider's GetTypeDescriptor
         /// method.
         /// </summary>
-        public virtual ICustomTypeDescriptor? GetTypeDescriptor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType, object? instance)
+        public virtual ICustomTypeDescriptor? GetTypeDescriptor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
+            object? instance
+        )
         {
             if (_parent != null)
             {
@@ -279,8 +291,6 @@ namespace System.ComponentModel
         /// A simple empty descriptor that is used as a placeholder for times
         /// when the user does not provide their own.
         /// </summary>
-        private sealed class EmptyCustomTypeDescriptor : CustomTypeDescriptor
-        {
-        }
+        private sealed class EmptyCustomTypeDescriptor : CustomTypeDescriptor { }
     }
 }

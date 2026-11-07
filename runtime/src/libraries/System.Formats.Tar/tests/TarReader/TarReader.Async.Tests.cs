@@ -14,7 +14,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public async Task TarReader_LeaveOpen_False_Async()
         {
-            await using MemoryStream ms = GetTarMemoryStream(CompressionMethod.Uncompressed, TestTarFormat.pax, "many_small_files");
+            await using MemoryStream ms = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.pax,
+                "many_small_files"
+            );
             List<Stream> dataStreams = new List<Stream>();
             await using (TarReader reader = new TarReader(ms, leaveOpen: false))
             {
@@ -40,7 +44,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public async Task TarReader_LeaveOpen_True_Async()
         {
-            await using MemoryStream ms = GetTarMemoryStream(CompressionMethod.Uncompressed, TestTarFormat.pax, "many_small_files");
+            await using MemoryStream ms = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.pax,
+                "many_small_files"
+            );
             List<Stream> dataStreams = new List<Stream>();
             await using (TarReader reader = new TarReader(ms, leaveOpen: true))
             {

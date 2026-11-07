@@ -17,26 +17,39 @@ namespace DebuggerTests
 {
     internal class InspectorClient : DevToolsClient
     {
-        protected readonly ConcurrentDictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new();
+        protected readonly ConcurrentDictionary<
+            MessageId,
+            TaskCompletionSource<Result>
+        > pending_cmds = new();
         protected Func<string, string, JObject, CancellationToken, Task> onEvent;
         protected int next_cmd_id;
 
         public SessionId CurrentSessionId { get; set; } = SessionId.Null;
 
-        public InspectorClient(ILogger logger) : base(logger) { }
+        public InspectorClient(ILogger logger)
+            : base(logger) { }
 
-        protected override async Task<WasmDebuggerConnection> SetupConnection(Uri webserverUri, CancellationToken token)
-            => new DevToolsDebuggerConnection(
-                        await ConnectToWebServer(webserverUri, token),
-                        "client",
-                         logger);
+        protected override async Task<WasmDebuggerConnection> SetupConnection(
+            Uri webserverUri,
+            CancellationToken token
+        ) =>
+            new DevToolsDebuggerConnection(
+                await ConnectToWebServer(webserverUri, token),
+                "client",
+                logger
+            );
 
         protected virtual Task HandleMessage(string msg, CancellationToken token)
         {
             var res = JObject.Parse(msg);
 
             if (res["id"] == null)
-                return onEvent(res["sessionId"]?.Value<string>(), res["method"].Value<string>(), res["params"] as JObject, token);
+                return onEvent(
+                    res["sessionId"]?.Value<string>(),
+                    res["method"].Value<string>(),
+                    res["params"] as JObject,
+                    token
+                );
 
             var id = res.ToObject<MessageId>();
             if (!pending_cmds.TryRemove(id, out var item))
@@ -54,7 +67,8 @@ namespace DebuggerTests
         public virtual async Task Connect(
             Uri uri,
             Func<string, string, JObject, CancellationToken, Task> onEvent,
-            CancellationTokenSource cts)
+            CancellationTokenSource cts
+        )
         {
             this.onEvent = onEvent;
 
@@ -76,28 +90,35 @@ namespace DebuggerTests
             await ConnectAndStartRunLoopAsync(uri, HandleMessage, cts);
         }
 
-        public Task<Result> SendCommand(string method, JObject args, CancellationToken token)
-            => SendCommand(CurrentSessionId, method, args, token);
+        public Task<Result> SendCommand(string method, JObject args, CancellationToken token) =>
+            SendCommand(CurrentSessionId, method, args, token);
 
-        public virtual Task<Result> SendCommand(SessionId sessionId, string method, JObject args, CancellationToken token)
+        public virtual Task<Result> SendCommand(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        )
         {
             int id = Interlocked.Increment(ref next_cmd_id);
             if (args == null)
                 args = new JObject();
 
-            var o = JObject.FromObject(new
-            {
-                id = id,
-                method = method,
-                @params = args
-            });
+            var o = JObject.FromObject(
+                new
+                {
+                    id = id,
+                    method = method,
+                    @params = args,
+                }
+            );
 
             if (sessionId != SessionId.Null)
                 o.Add("sessionId", sessionId.sessionId);
             var tcs = new TaskCompletionSource<Result>();
 
             MessageId msgId = new MessageId(sessionId.sessionId, id);
-            pending_cmds.AddOrUpdate(msgId, tcs,  (key, oldValue) => tcs);
+            pending_cmds.AddOrUpdate(msgId, tcs, (key, oldValue) => tcs);
 
             var str = o.ToString();
 

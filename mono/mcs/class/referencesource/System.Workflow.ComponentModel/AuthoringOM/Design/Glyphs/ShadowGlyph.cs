@@ -8,7 +8,9 @@ namespace System.Workflow.ComponentModel.Design
     #region Glyphs
 
     #region Class ShadowGlyph
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ShadowGlyph : DesignerGlyph
     {
         private static ShadowGlyph defaultShadowGlyph = null;
@@ -33,26 +35,38 @@ namespace System.Workflow.ComponentModel.Design
             return bounds;
         }
 
-        protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+        protected override void OnPaint(
+            Graphics graphics,
+            bool activated,
+            AmbientTheme ambientTheme,
+            ActivityDesigner designer
+        )
         {
             Rectangle bounds = GetBounds(designer, activated);
             if (!bounds.Size.IsEmpty)
             {
-                bool drawRounded = (designer.DesignerTheme.DesignerGeometry == DesignerGeometry.RoundedRectangle && !designer.IsRootDesigner);
-                ActivityDesignerPaint.DrawDropShadow(graphics, designer.Bounds, designer.DesignerTheme.BorderPen.Color, AmbientTheme.DropShadowWidth, LightSourcePosition.Left | LightSourcePosition.Top, 0.5f, drawRounded);
+                bool drawRounded = (
+                    designer.DesignerTheme.DesignerGeometry == DesignerGeometry.RoundedRectangle
+                    && !designer.IsRootDesigner
+                );
+                ActivityDesignerPaint.DrawDropShadow(
+                    graphics,
+                    designer.Bounds,
+                    designer.DesignerTheme.BorderPen.Color,
+                    AmbientTheme.DropShadowWidth,
+                    LightSourcePosition.Left | LightSourcePosition.Top,
+                    0.5f,
+                    drawRounded
+                );
             }
         }
 
         public override int Priority
         {
-            get
-            {
-                return DesignerGlyph.LowestPriority;
-            }
+            get { return DesignerGlyph.LowestPriority; }
         }
     }
     #endregion
 
     #endregion
 }
-

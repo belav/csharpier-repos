@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public RemoveMetadataReferenceUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 ProjectId fromProjectId,
-                string filePath)
+                string filePath
+            )
                 : base(workspace, fromProjectId)
             {
                 _filePath = filePath;
@@ -32,8 +33,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var fromProject = currentSolution.GetProject(FromProjectId);
                 if (fromProject != null)
                 {
-                    var reference = fromProject.MetadataReferences.OfType<PortableExecutableReference>()
-                                               .FirstOrDefault(p => StringComparer.OrdinalIgnoreCase.Equals(p.FilePath!, _filePath));
+                    var reference = fromProject
+                        .MetadataReferences.OfType<PortableExecutableReference>()
+                        .FirstOrDefault(p =>
+                            StringComparer.OrdinalIgnoreCase.Equals(p.FilePath!, _filePath)
+                        );
 
                     if (reference != null)
                     {
@@ -45,8 +49,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             public override void GetDescription(out string pBstr)
             {
-                pBstr = string.Format(FeaturesResources.Remove_reference_to_0,
-                    Path.GetFileName(_filePath));
+                pBstr = string.Format(
+                    FeaturesResources.Remove_reference_to_0,
+                    Path.GetFileName(_filePath)
+                );
             }
         }
     }

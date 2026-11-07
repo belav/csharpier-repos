@@ -8,7 +8,10 @@ namespace Roslyn.Utilities
 {
     internal static class IReadOnlyDictionaryExtensions
     {
-        public static TValue? GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue? GetValueOrDefault<TKey, TValue>(
+            this IReadOnlyDictionary<TKey, TValue> dictionary,
+            TKey key
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var value))
@@ -19,17 +22,25 @@ namespace Roslyn.Utilities
             return default!;
         }
 
-        public static IEnumerable<T> GetEnumerableMetadata<T>(this IReadOnlyDictionary<string, object> metadata, string name)
+        public static IEnumerable<T> GetEnumerableMetadata<T>(
+            this IReadOnlyDictionary<string, object> metadata,
+            string name
+        )
         {
             switch (metadata.GetValueOrDefault(name))
             {
-                case IEnumerable<T> enumerable: return enumerable;
-                case T s: return SpecializedCollections.SingletonEnumerable(s);
-                default: return SpecializedCollections.EmptyEnumerable<T>();
+                case IEnumerable<T> enumerable:
+                    return enumerable;
+                case T s:
+                    return SpecializedCollections.SingletonEnumerable(s);
+                default:
+                    return SpecializedCollections.EmptyEnumerable<T>();
             }
         }
 
-        public static IReadOnlyDictionary<TKey, TValue?> AsNullable<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary)
+        public static IReadOnlyDictionary<TKey, TValue?> AsNullable<TKey, TValue>(
+            this IReadOnlyDictionary<TKey, TValue> dictionary
+        )
             where TKey : notnull
             where TValue : class
         {

@@ -35,30 +35,18 @@ public class WebApplicationFunctionalTests : LoggedTest
             var factory = (ILoggerFactory)app.Services.GetService(typeof(ILoggerFactory));
             var logger = factory.CreateLogger("Test");
 
-            logger.Log(
-                LogLevel.Information,
-                0,
-                "Message",
-                null,
-                (s, e) =>
-                {
-                    Assert.True(false);
-                    return string.Empty;
-                }
-            );
+            logger.Log(LogLevel.Information, 0, "Message", null, (s, e) =>
+            {
+                Assert.True(false);
+                return string.Empty;
+            });
 
             var logWritten = false;
-            logger.Log(
-                LogLevel.Warning,
-                0,
-                "Message",
-                null,
-                (s, e) =>
-                {
-                    logWritten = true;
-                    return string.Empty;
-                }
-            );
+            logger.Log(LogLevel.Warning, 0, "Message", null, (s, e) =>
+            {
+                logWritten = true;
+                return string.Empty;
+            });
 
             Assert.True(logWritten);
         }
@@ -95,30 +83,18 @@ public class WebApplicationFunctionalTests : LoggedTest
             var factory = (ILoggerFactory)app.Services.GetService(typeof(ILoggerFactory));
             var logger = factory.CreateLogger("Test");
 
-            logger.Log(
-                LogLevel.Information,
-                0,
-                "Message",
-                null,
-                (s, e) =>
-                {
-                    Assert.True(false);
-                    return string.Empty;
-                }
-            );
+            logger.Log(LogLevel.Information, 0, "Message", null, (s, e) =>
+            {
+                Assert.True(false);
+                return string.Empty;
+            });
 
             var logWritten = false;
-            logger.Log(
-                LogLevel.Warning,
-                0,
-                "Message",
-                null,
-                (s, e) =>
-                {
-                    logWritten = true;
-                    return string.Empty;
-                }
-            );
+            logger.Log(LogLevel.Warning, 0, "Message", null, (s, e) =>
+            {
+                logWritten = true;
+                return string.Empty;
+            });
 
             Assert.True(logWritten);
         }
@@ -163,17 +139,11 @@ public class WebApplicationFunctionalTests : LoggedTest
 
             Assert.False(logger.IsEnabled(LogLevel.Warning));
 
-            logger.Log(
-                LogLevel.Warning,
-                0,
-                "Message",
-                null,
-                (s, e) =>
-                {
-                    Assert.True(false);
-                    return string.Empty;
-                }
-            );
+            logger.Log(LogLevel.Warning, 0, "Message", null, (s, e) =>
+            {
+                Assert.True(false);
+                return string.Empty;
+            });
 
             // Lower log level from Error to Warning and wait for logging to react to the config changes.
             var configChangedTcs = new TaskCompletionSource(
@@ -208,17 +178,11 @@ public class WebApplicationFunctionalTests : LoggedTest
 
             while (!logWritten && Environment.TickCount < timeoutTicks)
             {
-                logger.Log(
-                    LogLevel.Warning,
-                    0,
-                    "Message",
-                    null,
-                    (s, e) =>
-                    {
-                        logWritten = true;
-                        return string.Empty;
-                    }
-                );
+                logger.Log(LogLevel.Warning, 0, "Message", null, (s, e) =>
+                {
+                    logWritten = true;
+                    return string.Empty;
+                });
             }
 
             Assert.True(logWritten);

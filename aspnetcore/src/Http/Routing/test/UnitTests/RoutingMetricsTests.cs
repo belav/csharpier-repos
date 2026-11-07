@@ -30,16 +30,10 @@ public class RoutingMetricsTests
             order: 0
         );
         var meterFactory = new TestMeterFactory();
-        var middleware = CreateMiddleware(
-            matcherFactory: new TestMatcherFactory(
-                true,
-                c =>
-                {
-                    c.SetEndpoint(routeEndpointBuilder.Build());
-                }
-            ),
-            meterFactory: meterFactory
-        );
+        var middleware = CreateMiddleware(matcherFactory: new TestMatcherFactory(true, c =>
+            {
+                c.SetEndpoint(routeEndpointBuilder.Build());
+            }), meterFactory: meterFactory);
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
@@ -56,9 +50,8 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(
-            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertSuccess(m, "/{hi}", fallback: false)
+        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(), m =>
+            AssertSuccess(m, "/{hi}", fallback: false)
         );
     }
 
@@ -78,16 +71,10 @@ public class RoutingMetricsTests
             routeEndpointBuilder.Metadata.Add(FallbackMetadata.Instance);
         }
         var meterFactory = new TestMeterFactory();
-        var middleware = CreateMiddleware(
-            matcherFactory: new TestMatcherFactory(
-                true,
-                c =>
-                {
-                    c.SetEndpoint(routeEndpointBuilder.Build());
-                }
-            ),
-            meterFactory: meterFactory
-        );
+        var middleware = CreateMiddleware(matcherFactory: new TestMatcherFactory(true, c =>
+            {
+                c.SetEndpoint(routeEndpointBuilder.Build());
+            }), meterFactory: meterFactory);
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
@@ -104,9 +91,8 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(
-            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertSuccess(m, "/{hi}", fallback: hasFallbackMetadata)
+        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(), m =>
+            AssertSuccess(m, "/{hi}", fallback: hasFallbackMetadata)
         );
     }
 
@@ -115,22 +101,16 @@ public class RoutingMetricsTests
     {
         // Arrange
         var meterFactory = new TestMeterFactory();
-        var middleware = CreateMiddleware(
-            matcherFactory: new TestMatcherFactory(
-                true,
-                c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            EndpointMetadataCollection.Empty,
-                            "Test name"
-                        )
-                    );
-                }
-            ),
-            meterFactory: meterFactory
-        );
+        var middleware = CreateMiddleware(matcherFactory: new TestMatcherFactory(true, c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        EndpointMetadataCollection.Empty,
+                        "Test name"
+                    )
+                );
+            }), meterFactory: meterFactory);
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
@@ -147,9 +127,8 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(
-            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertSuccess(m, "(missing)", fallback: false)
+        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(), m =>
+            AssertSuccess(m, "(missing)", fallback: false)
         );
     }
 
@@ -178,9 +157,8 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(
-            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertFailure(m)
+        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(), m =>
+            AssertFailure(m)
         );
     }
 

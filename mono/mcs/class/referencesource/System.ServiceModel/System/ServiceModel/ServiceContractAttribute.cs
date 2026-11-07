@@ -5,14 +5,18 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.ServiceModel.Description;
-    using System.Transactions;
-    using System.ServiceModel.Channels;
-    using System.Runtime.CompilerServices;
     using System.Net.Security;
+    using System.Runtime.CompilerServices;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
+    using System.Transactions;
 
-    [AttributeUsage(ServiceModelAttributeTargets.ServiceContract, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        ServiceModelAttributeTargets.ServiceContract,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class ServiceContractAttribute : Attribute
     {
         Type callbackContract = null;
@@ -34,8 +38,12 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxConfigurationNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxConfigurationNameCannotBeEmpty)
+                        )
+                    );
                 }
                 this.configurationName = value;
             }
@@ -52,8 +60,12 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxNameCannotBeEmpty)
+                        )
+                    );
                 }
                 name = value;
             }
@@ -72,14 +84,13 @@ namespace System.ServiceModel
 
         public ProtectionLevel ProtectionLevel
         {
-            get
-            {
-                return this.protectionLevel;
-            }
+            get { return this.protectionLevel; }
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -97,7 +108,9 @@ namespace System.ServiceModel
             {
                 if (!SessionModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.sessionMode = value;

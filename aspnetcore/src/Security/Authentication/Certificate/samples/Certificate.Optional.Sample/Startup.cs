@@ -53,26 +53,20 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints
-                .Map(
-                    "/auth",
-                    context =>
-                    {
-                        return context.Response.WriteAsync(
-                            $"Hello {context.User.Identity.Name} at {context.Request.Host}"
-                        );
-                    }
-                )
-                .RequireAuthorization();
-
-            endpoints.Map(
-                "{*url}",
-                context =>
+                .Map("/auth", context =>
                 {
                     return context.Response.WriteAsync(
-                        $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                        $"Hello {context.User.Identity.Name} at {context.Request.Host}"
                     );
-                }
-            );
+                })
+                .RequireAuthorization();
+
+            endpoints.Map("{*url}", context =>
+            {
+                return context.Response.WriteAsync(
+                    $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                );
+            });
         });
     }
 }

@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
-using System.Linq;
 using Xunit;
 using static Roslyn.Test.Utilities.TestMetadata;
 
@@ -22,11 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadNonGenericEvents()
         {
             var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
-                new[]
-                {
-                    Net451.mscorlib,
-                    TestReferences.SymbolsTests.Events,
-                });
+                new[] { Net451.mscorlib, TestReferences.SymbolsTests.Events }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -39,11 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadGenericEvents()
         {
             var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
-                new[]
-                {
-                    Net451.mscorlib,
-                    TestReferences.SymbolsTests.Events,
-                });
+                new[] { Net451.mscorlib, TestReferences.SymbolsTests.Events }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -56,11 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadClosedGenericEvents()
         {
             var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
-                new[]
-                {
-                    Net451.mscorlib,
-                    TestReferences.SymbolsTests.Events,
-                });
+                new[] { Net451.mscorlib, TestReferences.SymbolsTests.Events }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -69,7 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CheckInstanceAndStaticEvents(@class, "System.Action<System.Int32>");
         }
 
-        private static void CheckInstanceAndStaticEvents(NamedTypeSymbol @class, string eventTypeDisplayString)
+        private static void CheckInstanceAndStaticEvents(
+            NamedTypeSymbol @class,
+            string eventTypeDisplayString
+        )
         {
             var instanceEvent = @class.GetMember<EventSymbol>("InstanceEvent");
 
@@ -103,7 +97,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Assert.Same(@event.RemoveMethod, accessor);
                     break;
                 default:
-                    Assert.False(true, string.Format("Accessor {0} has unexpected MethodKind {1}", accessor, accessor.MethodKind));
+                    Assert.False(
+                        true,
+                        string.Format(
+                            "Accessor {0} has unexpected MethodKind {1}",
+                            accessor,
+                            accessor.MethodKind
+                        )
+                    );
                     break;
             }
 
@@ -121,11 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadSignatureMismatchEvents()
         {
             var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
-                new[]
-                {
-                    Net451.mscorlib,
-                    TestReferences.SymbolsTests.Events,
-                });
+                new[] { Net451.mscorlib, TestReferences.SymbolsTests.Events }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -133,10 +131,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var mismatchedAddEvent = @class.GetMember<EventSymbol>("AddMismatch");
             var mismatchedRemoveEvent = @class.GetMember<EventSymbol>("RemoveMismatch");
 
-            Assert.NotEqual(mismatchedAddEvent.Type, mismatchedAddEvent.AddMethod.Parameters.Single().Type);
+            Assert.NotEqual(
+                mismatchedAddEvent.Type,
+                mismatchedAddEvent.AddMethod.Parameters.Single().Type
+            );
             Assert.True(mismatchedAddEvent.MustCallMethodsDirectly);
 
-            Assert.NotEqual(mismatchedRemoveEvent.Type, mismatchedRemoveEvent.RemoveMethod.Parameters.Single().Type);
+            Assert.NotEqual(
+                mismatchedRemoveEvent.Type,
+                mismatchedRemoveEvent.RemoveMethod.Parameters.Single().Type
+            );
             Assert.True(mismatchedRemoveEvent.MustCallMethodsDirectly);
         }
 
@@ -144,11 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadMissingParameterEvents()
         {
             var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
-                new[]
-                {
-                    Net451.mscorlib,
-                    TestReferences.SymbolsTests.Events,
-                });
+                new[] { Net451.mscorlib, TestReferences.SymbolsTests.Events }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -167,11 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadNonDelegateEvent()
         {
             var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
-                new[]
-                {
-                    Net451.mscorlib,
-                    TestReferences.SymbolsTests.Events,
-                });
+                new[] { Net451.mscorlib, TestReferences.SymbolsTests.Events }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -189,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Events.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -216,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Events.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -231,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceEvent = (EventSymbol)substitutedInterface.GetMembers("Event").Single();
+            var substitutedInterfaceEvent = (EventSymbol)
+                substitutedInterface.GetMembers("Event").Single();
             Assert.Equal(interfaceEvent, substitutedInterfaceEvent.OriginalDefinition);
 
             var classEvent = (EventSymbol)@class.GetMembers("IGeneric<S>.Event").Single();
@@ -248,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Events.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -263,10 +265,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceEvent = (EventSymbol)substitutedInterface.GetMembers("Event").Single();
+            var substitutedInterfaceEvent = (EventSymbol)
+                substitutedInterface.GetMembers("Event").Single();
             Assert.Equal(interfaceEvent, substitutedInterfaceEvent.OriginalDefinition);
 
-            var classEvent = (EventSymbol)@class.GetMembers("IGeneric<System.Int32>.Event").Single();
+            var classEvent = (EventSymbol)
+                @class.GetMembers("IGeneric<System.Int32>.Event").Single();
 
             var explicitImpl = classEvent.ExplicitInterfaceImplementations.Single();
             Assert.Equal(substitutedInterfaceEvent, explicitImpl);
@@ -284,20 +288,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Events.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var defInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Interface").Single();
+            var defInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("Interface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
 
             var defInterfaceEvent = (EventSymbol)defInterface.GetMembers("Event").Single();
 
-            var refInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IGenericInterface").Single();
+            var refInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGenericInterface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
             Assert.True(refInterface.Interfaces().Contains(defInterface));
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IndirectImplementation").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IndirectImplementation").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
 
             var classInterfacesConstructedFrom = @class.Interfaces().Select(i => i.ConstructedFrom);
@@ -324,15 +332,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Events.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var outerInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IGeneric2").Single();
+            var outerInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGeneric2").Single();
             Assert.Equal(1, outerInterface.Arity);
             Assert.Equal(TypeKind.Interface, outerInterface.TypeKind);
 
-            var outerInterfaceEvent = outerInterface.GetMembers().Single(m => m.Kind == SymbolKind.Event);
+            var outerInterfaceEvent = outerInterface
+                .GetMembers()
+                .Single(m => m.Kind == SymbolKind.Event);
 
             var outerClass = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Outer").Single();
             Assert.Equal(1, outerClass.Arity);
@@ -342,7 +354,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(1, innerInterface.Arity);
             Assert.Equal(TypeKind.Interface, innerInterface.TypeKind);
 
-            var innerInterfaceEvent = innerInterface.GetMembers().Single(m => m.Kind == SymbolKind.Event);
+            var innerInterfaceEvent = innerInterface
+                .GetMembers()
+                .Single(m => m.Kind == SymbolKind.Event);
 
             var innerClass1 = (NamedTypeSymbol)outerClass.GetTypeMembers("Inner1").Single();
             CheckInnerClassHelper(innerClass1, "IGeneric2<A>.Event", outerInterfaceEvent);
@@ -357,7 +371,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CheckInnerClassHelper(innerClass4, "Outer<T>.IInner<T>.Event", innerInterfaceEvent);
         }
 
-        private static void CheckInnerClassHelper(NamedTypeSymbol innerClass, string methodName, Symbol interfaceEvent)
+        private static void CheckInnerClassHelper(
+            NamedTypeSymbol innerClass,
+            string methodName,
+            Symbol interfaceEvent
+        )
         {
             var @interface = interfaceEvent.ContainingType;
 
@@ -366,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassEvent = (EventSymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingEvent = innerClassEvent.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingEvent =
+                innerClassEvent.ExplicitInterfaceImplementations.Single();
             Assert.Equal(interfaceEvent, innerClassImplementingEvent.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingEvent.ContainingType.ConstructedFrom);
         }
@@ -376,7 +395,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void TestMixedAccessorModifiers()
         {
-            var assembly = MetadataTestHelpers.GetSymbolForReference(TestReferences.SymbolsTests.Events);
+            var assembly = MetadataTestHelpers.GetSymbolForReference(
+                TestReferences.SymbolsTests.Events
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
@@ -459,14 +480,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [WorkItem(1055825, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1055825")]
         public void AssociatedField()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public event System.Action E;
 }
 ";
             var reference = CreateCompilation(source).EmitToImageReference();
-            var comp = CreateCompilation("", new[] { reference }, TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var comp = CreateCompilation(
+                "",
+                new[] { reference },
+                TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var @event = type.GetMember<PEEventSymbol>("E");
@@ -482,7 +508,8 @@ public class C
         [WorkItem(1055825, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1055825")]
         public void AssociatedField_MultipleFields()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -519,7 +546,11 @@ public class C
 } // end of class C
 ";
             var ilRef = CompileIL(ilSource);
-            var comp = CreateCompilation("", new[] { ilRef }, TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var comp = CreateCompilation(
+                "",
+                new[] { ilRef },
+                TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             comp.VerifyDiagnostics();
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -537,7 +568,8 @@ public class C
         [WorkItem(1055825, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1055825")]
         public void AssociatedField_DuplicateEvents()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -579,7 +611,11 @@ public class C
 } // end of class C
 ";
             var ilRef = CompileIL(ilSource);
-            var comp = CreateCompilation("", new[] { ilRef }, TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var comp = CreateCompilation(
+                "",
+                new[] { ilRef },
+                TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             comp.VerifyDiagnostics();
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -593,8 +629,8 @@ public class C
 
             Assert.Contains(field.AssociatedSymbol, events);
         }
-        [Flags]
 
+        [Flags]
         private enum VirtualnessModifiers
         {
             None = 0,
@@ -608,11 +644,15 @@ public class C
         {
             VirtualnessModifiers mods = VirtualnessModifiers.None;
 
-            if (symbol.IsAbstract) mods |= VirtualnessModifiers.Abstract;
-            if (symbol.IsVirtual) mods |= VirtualnessModifiers.Virtual;
+            if (symbol.IsAbstract)
+                mods |= VirtualnessModifiers.Abstract;
+            if (symbol.IsVirtual)
+                mods |= VirtualnessModifiers.Virtual;
 
-            if (symbol.IsSealed) mods |= VirtualnessModifiers.Sealed;
-            else if (symbol.IsOverride) mods |= VirtualnessModifiers.Override;
+            if (symbol.IsSealed)
+                mods |= VirtualnessModifiers.Sealed;
+            else if (symbol.IsOverride)
+                mods |= VirtualnessModifiers.Override;
 
             return mods;
         }

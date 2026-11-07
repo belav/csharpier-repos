@@ -1,30 +1,27 @@
 using System;
 
-public class Blah {
+public class Blah
+{
+    static int Foo(string s)
+    {
+        return 2;
+    }
 
-	static int Foo (string s)
-	{
-		return 2;
-	}
+    static int Foo(object o)
+    {
+        return 1;
+    }
 
-	static int Foo (object o)
-	{
-		return 1;
-	}
+    public static int Main()
+    {
+        int i = Foo(null);
 
-	public static int Main ()
-	{
-		int i = Foo (null);
+        if (i == 1)
+        {
+            Console.WriteLine("Wrong method ");
+            return 1;
+        }
 
-		if (i == 1) {
-			Console.WriteLine ("Wrong method ");
-			return 1;
-		}
-		
-		return 0;
-	}
-
+        return 0;
+    }
 }
-
-
-

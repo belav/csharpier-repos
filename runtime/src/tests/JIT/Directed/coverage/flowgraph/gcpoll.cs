@@ -12,6 +12,7 @@ public class TestClass13
     {
         Console.WriteLine();
     }
+
     [Fact]
     public static void TestEntryPoint()
     {

@@ -19,11 +19,15 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public readonly MethodDesc Method;
 
-        public string Name { get => Method.Name; }
+        public string Name
+        {
+            get => Method.Name;
+        }
 
         public string GetDisplayName() => Method.GetDisplayName();
 
-        internal partial bool IsDeclaredOnType(string fullTypeName) => Method.IsDeclaredOnType(fullTypeName);
+        internal partial bool IsDeclaredOnType(string fullTypeName) =>
+            Method.IsDeclaredOnType(fullTypeName);
 
         internal partial bool HasMetadataParameters() => GetMetadataParametersCount() > 0;
 
@@ -37,18 +41,22 @@ namespace ILLink.Shared.TypeSystemProxy
         /// <summary>
         /// Use only when iterating over all parameters. When wanting to index, use GetParameters(ParameterIndex)
         /// </summary>
-        internal partial ParameterProxyEnumerable GetParameters() => new ParameterProxyEnumerable(0, Method.GetParametersCount(), Method);
+        internal partial ParameterProxyEnumerable GetParameters() =>
+            new ParameterProxyEnumerable(0, Method.GetParametersCount(), Method);
 
         internal partial ParameterProxy GetParameter(ParameterIndex index)
         {
             return GetParametersCount() <= (int)index || (int)index < 0
-                ? throw new InvalidOperationException($"Cannot get parameter #{(int)index} of method {GetDisplayName()} with {GetParametersCount()} parameters")
+                ? throw new InvalidOperationException(
+                    $"Cannot get parameter #{(int)index} of method {GetDisplayName()} with {GetParametersCount()} parameters"
+                )
                 : new ParameterProxy(this, index);
         }
 
         internal partial bool HasGenericParameters() => Method.HasInstantiation;
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount) => Method.Instantiation.Length == genericParameterCount;
+        internal partial bool HasGenericParametersCount(int genericParameterCount) =>
+            Method.Instantiation.Length == genericParameterCount;
 
         internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
@@ -57,7 +65,8 @@ namespace ILLink.Shared.TypeSystemProxy
             if (!methodDef.HasInstantiation)
                 return ImmutableArray<GenericParameterProxy>.Empty;
 
-            ImmutableArray<GenericParameterProxy>.Builder builder = ImmutableArray.CreateBuilder<GenericParameterProxy>(methodDef.Instantiation.Length);
+            ImmutableArray<GenericParameterProxy>.Builder builder =
+                ImmutableArray.CreateBuilder<GenericParameterProxy>(methodDef.Instantiation.Length);
             foreach (TypeDesc? genericParameter in methodDef.Instantiation)
             {
                 builder.Add(new GenericParameterProxy((GenericParameterDesc)genericParameter));

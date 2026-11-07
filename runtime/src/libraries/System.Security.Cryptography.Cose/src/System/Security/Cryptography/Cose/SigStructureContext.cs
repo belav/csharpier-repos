@@ -6,6 +6,6 @@ namespace System.Security.Cryptography.Cose
     internal enum SigStructureContext
     {
         Signature,
-        Signature1
+        Signature1,
     }
 }

@@ -12,7 +12,10 @@ namespace System.Web.WebPages.Test
         public void DefaultBrowserOverrideStoreIsCookie()
         {
             // Act & Assert
-            Assert.Equal(typeof(CookieBrowserOverrideStore), BrowserOverrideStores.Current.GetType());
+            Assert.Equal(
+                typeof(CookieBrowserOverrideStore),
+                BrowserOverrideStores.Current.GetType()
+            );
         }
 
         [Fact]

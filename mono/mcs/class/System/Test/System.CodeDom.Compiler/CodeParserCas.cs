@@ -1,5 +1,5 @@
 //
-// CodeParserCas.cs 
+// CodeParserCas.cs
 //	- CAS unit tests for System.CodeDom.Compiler.CodeParser
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,54 +27,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
-using System.IO;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.IO;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.CodeDom.Compiler;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom.Compiler {
+namespace MonoCasTests.System.CodeDom.Compiler
+{
+    class CodeParserTest : CodeParser
+    {
+        public override CodeCompileUnit Parse(TextReader codeStream)
+        {
+            return new CodeCompileUnit();
+        }
+    }
 
-	class CodeParserTest: CodeParser {
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeParserCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		public override CodeCompileUnit Parse (TextReader codeStream)
-		{
-			return new CodeCompileUnit ();
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor()
+        {
+            CodeParserTest cp = new CodeParserTest();
+            Assert.IsNotNull(cp.Parse(null), "Parse");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeParserCas {
-
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor ()
-		{
-			CodeParserTest cp = new CodeParserTest ();
-			Assert.IsNotNull (cp.Parse (null), "Parse");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeParserTest).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeParserTest).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

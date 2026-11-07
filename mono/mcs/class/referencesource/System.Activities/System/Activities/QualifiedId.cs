@@ -18,7 +18,7 @@ namespace System.Activities
             int bufferSize = 0;
 
             Stack<int> ids = new Stack<int>();
-            
+
             int id = element.InternalId;
             bufferSize += GetEncodedSize(id);
             ids.Push(id);
@@ -65,14 +65,25 @@ namespace System.Activities
             }
         }
 
-        public static bool TryGetElementFromRoot(Activity root, QualifiedId id, out Activity targetElement)
+        public static bool TryGetElementFromRoot(
+            Activity root,
+            QualifiedId id,
+            out Activity targetElement
+        )
         {
             return TryGetElementFromRoot(root, id.compressedId, out targetElement);
         }
 
-        public static bool TryGetElementFromRoot(Activity root, byte[] idBytes, out Activity targetElement)
+        public static bool TryGetElementFromRoot(
+            Activity root,
+            byte[] idBytes,
+            out Activity targetElement
+        )
         {
-            Fx.Assert(root.MemberOf != null, "We need to have our IdSpaces set up for this to work.");
+            Fx.Assert(
+                root.MemberOf != null,
+                "We need to have our IdSpaces set up for this to work."
+            );
 
             Activity currentActivity = root;
             IdSpace currentIdSpace = root.MemberOf;
@@ -117,7 +128,10 @@ namespace System.Activities
 
         public static bool TryParse(string value, out QualifiedId result)
         {
-            Fx.Assert(!string.IsNullOrEmpty(value), "We should have already made sure it isn't null or empty.");
+            Fx.Assert(
+                !string.IsNullOrEmpty(value),
+                "We should have already made sure it isn't null or empty."
+            );
 
             string[] idStrings = value.Split('.');
             int[] ids = new int[idStrings.Length];
@@ -203,7 +217,7 @@ namespace System.Activities
             {
                 if (needDot)
                 {
-                    builder.Append('.');   
+                    builder.Append('.');
                 }
 
                 int value;
@@ -238,7 +252,7 @@ namespace System.Activities
         {
             int bytesConsumed = 0;
             value = 0;
-            
+
             while (offset < buffer.Length)
             {
                 int next = buffer[offset];
@@ -268,5 +282,3 @@ namespace System.Activities
         }
     }
 }
-
-

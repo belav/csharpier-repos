@@ -25,29 +25,18 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// Constructs an EntityContainerAssociationSetEnd
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
-        public EntityContainerAssociationSetEnd( EntityContainerAssociationSet parentElement )
-            : base( parentElement )
-        {
-        }
+        public EntityContainerAssociationSetEnd(EntityContainerAssociationSet parentElement)
+            : base(parentElement) { }
 
         public string Role
         {
-            get
-            {
-                return _unresolvedRelationshipEndRole;
-            }
-            set
-            {
-                _unresolvedRelationshipEndRole = value;
-            }
+            get { return _unresolvedRelationshipEndRole; }
+            set { _unresolvedRelationshipEndRole = value; }
         }
 
         public override string Name
         {
-            get
-            {
-                return Role;
-            }
+            get { return Role; }
         }
 
         protected override bool HandleAttribute(XmlReader reader)
@@ -69,26 +58,28 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// This is the method that is called when an Role Attribute is encountered.
         /// </summary>
         /// <param name="reader">The XmlRead positned at the extent attribute.</param>
-        private void HandleRoleAttribute( XmlReader reader )
+        private void HandleRoleAttribute(XmlReader reader)
         {
-            _unresolvedRelationshipEndRole = HandleUndottedNameAttribute( reader, _unresolvedRelationshipEndRole );
+            _unresolvedRelationshipEndRole = HandleUndottedNameAttribute(
+                reader,
+                _unresolvedRelationshipEndRole
+            );
         }
 
         /// <summary>
         /// Used during the resolve phase to resolve the type name to the object that represents that type
         /// </summary>
-        internal override void  ResolveTopLevelNames()
+        internal override void ResolveTopLevelNames()
         {
             base.ResolveTopLevelNames();
 
             // resolve end name to the corosponding relationship end
             IRelationship relationship = ParentElement.Relationship;
-            if ( relationship == null )
+            if (relationship == null)
             {
                 // error already logged for this
                 return;
             }
-
         }
 
         internal override void ResolveSecondLevelNames()
@@ -115,9 +106,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 else
                 {
                     // couldn't find a matching relationship end for this RelationshipSet end
-                    AddError(ErrorCode.InvalidContainerTypeForEnd, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidEntityEndName(Role, relationship.FQName));
-
+                    AddError(
+                        ErrorCode.InvalidContainerTypeForEnd,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidEntityEndName(Role, relationship.FQName)
+                    );
                 }
             }
         }
@@ -128,42 +121,57 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="set">The given EntitySet</param>
         /// <returns>The appropriate relationship end</returns>
-        private IRelationshipEnd InferRelationshipEnd( EntityContainerEntitySet set )
+        private IRelationshipEnd InferRelationshipEnd(EntityContainerEntitySet set)
         {
             Debug.Assert(set != null, "set parameter is null");
 
-            if ( ParentElement.Relationship == null )
+            if (ParentElement.Relationship == null)
             {
                 return null;
             }
 
             List<IRelationshipEnd> possibleEnds = new List<IRelationshipEnd>();
-            foreach ( IRelationshipEnd end in ParentElement.Relationship.Ends )
+            foreach (IRelationshipEnd end in ParentElement.Relationship.Ends)
             {
-                if ( set.EntityType.IsOfType( end.Type ) )
+                if (set.EntityType.IsOfType(end.Type))
                 {
-                    possibleEnds.Add( end );
+                    possibleEnds.Add(end);
                 }
             }
 
-            if ( possibleEnds.Count == 1 )
+            if (possibleEnds.Count == 1)
             {
                 return possibleEnds[0];
             }
-            else if ( possibleEnds.Count == 0 )
+            else if (possibleEnds.Count == 0)
             {
                 // no matchs
-                AddError( ErrorCode.FailedInference, EdmSchemaErrorSeverity.Error,
+                AddError(
+                    ErrorCode.FailedInference,
+                    EdmSchemaErrorSeverity.Error,
                     System.Data.Entity.Strings.InferRelationshipEndFailedNoEntitySetMatch(
-                    set.Name, this.ParentElement.Name, ParentElement.Relationship.FQName, set.EntityType.FQName, this.ParentElement.ParentElement.FQName ) );
+                        set.Name,
+                        this.ParentElement.Name,
+                        ParentElement.Relationship.FQName,
+                        set.EntityType.FQName,
+                        this.ParentElement.ParentElement.FQName
+                    )
+                );
             }
             else
             {
                 // ambiguous
-                AddError( ErrorCode.FailedInference, EdmSchemaErrorSeverity.Error,
+                AddError(
+                    ErrorCode.FailedInference,
+                    EdmSchemaErrorSeverity.Error,
                     System.Data.Entity.Strings.InferRelationshipEndAmbiguous(
-                    set.Name, this.ParentElement.Name, ParentElement.Relationship.FQName, set.EntityType.FQName, this.ParentElement.ParentElement.FQName));
-
+                        set.Name,
+                        this.ParentElement.Name,
+                        ParentElement.Relationship.FQName,
+                        set.EntityType.FQName,
+                        this.ParentElement.ParentElement.FQName
+                    )
+                );
             }
 
             return null;
@@ -171,12 +179,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         internal override SchemaElement Clone(SchemaElement parentElement)
         {
-            EntityContainerAssociationSetEnd setEnd = new EntityContainerAssociationSetEnd((EntityContainerAssociationSet)parentElement);
+            EntityContainerAssociationSetEnd setEnd = new EntityContainerAssociationSetEnd(
+                (EntityContainerAssociationSet)parentElement
+            );
             setEnd._unresolvedRelationshipEndRole = _unresolvedRelationshipEndRole;
             setEnd.EntitySet = this.EntitySet;
 
             return setEnd;
         }
-
     }
 }

@@ -10,6 +10,8 @@ namespace Microsoft.CodeAnalysis.Editor;
 
 internal static class BraceMatchingOptionsStorage
 {
-    public static BraceMatchingOptions GetBraceMatchingOptions(this IGlobalOptionService globalOptions, string language)
-        => new(HighlightingOptions: globalOptions.GetHighlightingOptions(language));
+    public static BraceMatchingOptions GetBraceMatchingOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) => new(HighlightingOptions: globalOptions.GetHighlightingOptions(language));
 }

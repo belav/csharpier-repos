@@ -18,7 +18,11 @@ namespace System.Reflection.Metadata
             // When ignoring case
             // - the most likely case is still a == b
             // - ignoreCaseMask is 0x20
-            return a == b || ((a | 0x20) == (b | 0x20) && unchecked((uint)((a | ignoreCaseMask) - 'a')) <= 'z' - 'a');
+            return a == b
+                || (
+                    (a | 0x20) == (b | 0x20)
+                    && unchecked((uint)((a | ignoreCaseMask) - 'a')) <= 'z' - 'a'
+                );
         }
     }
 }

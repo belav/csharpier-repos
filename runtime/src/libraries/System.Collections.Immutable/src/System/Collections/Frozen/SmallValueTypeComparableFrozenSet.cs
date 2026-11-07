@@ -15,12 +15,14 @@ namespace System.Collections.Frozen
     /// used for an <see cref="IComparable{T}"/> as we can't know for sure whether it's valid, e.g. if the T is a ValueTuple`2, it itself
     /// is comparable, but its items might not be such that trying to compare it will result in exception.
     /// </remarks>
-    internal sealed class SmallValueTypeComparableFrozenSet<T> : FrozenSetInternalBase<T, SmallValueTypeComparableFrozenSet<T>.GSW>
+    internal sealed class SmallValueTypeComparableFrozenSet<T>
+        : FrozenSetInternalBase<T, SmallValueTypeComparableFrozenSet<T>.GSW>
     {
         private readonly T[] _items;
         private readonly T _max;
 
-        internal SmallValueTypeComparableFrozenSet(HashSet<T> source) : base(EqualityComparer<T>.Default)
+        internal SmallValueTypeComparableFrozenSet(HashSet<T> source)
+            : base(EqualityComparer<T>.Default)
         {
             Debug.Assert(default(T) is IComparable<T>);
             Debug.Assert(default(T) is not null);
@@ -36,7 +38,9 @@ namespace System.Collections.Frozen
         }
 
         private protected override T[] ItemsCore => _items;
+
         private protected override Enumerator GetEnumeratorCore() => new Enumerator(_items);
+
         private protected override int CountCore => _items.Length;
 
         private protected override int FindItemIndex(T item)
@@ -65,11 +69,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private SmallValueTypeComparableFrozenSet<T> _set;
+
             public void Store(FrozenSet<T> set) => _set = (SmallValueTypeComparableFrozenSet<T>)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<T> Comparer => _set.Comparer;
+
             public int FindItemIndex(T item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

@@ -28,7 +28,11 @@ namespace System.Globalization
             int i = 0;
             while (i < s.Length)
             {
-                if (char.IsHighSurrogate(source[i]) && i < s.Length - 1 && char.IsLowSurrogate(source[i + 1]))
+                if (
+                    char.IsHighSurrogate(source[i])
+                    && i < s.Length - 1
+                    && char.IsLowSurrogate(source[i + 1])
+                )
                 {
                     SurrogateCasing.ToLower(source[i], source[i + 1], out char h, out char l);
                     if (source[i] != h || source[i + 1] != l)
@@ -74,7 +78,11 @@ namespace System.Globalization
             int i = 0;
             while (i < s.Length)
             {
-                if (char.IsHighSurrogate(source[i]) && i < s.Length - 1 && char.IsLowSurrogate(source[i + 1]))
+                if (
+                    char.IsHighSurrogate(source[i])
+                    && i < s.Length - 1
+                    && char.IsLowSurrogate(source[i + 1])
+                )
                 {
                     SurrogateCasing.ToUpper(source[i], source[i + 1], out char h, out char l);
                     if (source[i] != h || source[i + 1] != l)
@@ -123,8 +131,8 @@ namespace System.Globalization
                     {
                         // well formed surrogates
                         SurrogateCasing.ToUpper(c, cl, out char h, out char l);
-                        destination[i]   = h;
-                        destination[i+1] = l;
+                        destination[i] = h;
+                        destination[i + 1] = l;
                         i++; // skip the low surrogate
                         continue;
                     }
@@ -142,15 +150,15 @@ namespace System.Globalization
             for (int i = 0; i < source.Length; i++)
             {
                 char c = source[i];
-                if (char.IsHighSurrogate(c) && i < source.Length - 1 )
+                if (char.IsHighSurrogate(c) && i < source.Length - 1)
                 {
                     char cl = source[i + 1];
                     if (char.IsLowSurrogate(cl))
                     {
                         // well formed surrogates
                         SurrogateCasing.ToLower(c, cl, out char h, out char l);
-                        destination[i]   = h;
-                        destination[i+1] = l;
+                        destination[i] = h;
+                        destination[i + 1] = l;
                         i++; // skip the low surrogate
                         continue;
                     }
@@ -178,7 +186,12 @@ namespace System.Globalization
             return (UnicodeUtility.GetScalarFromUtf16SurrogatePair(charA, charB), 2);
         }
 
-        internal static int CompareStringIgnoreCase(ref char strA, int lengthA, ref char strB, int lengthB)
+        internal static int CompareStringIgnoreCase(
+            ref char strA,
+            int lengthA,
+            ref char strB,
+            int lengthB
+        )
         {
             Debug.Assert(GlobalizationMode.Invariant);
 
@@ -221,14 +234,17 @@ namespace System.Globalization
             return lengthA - lengthB;
         }
 
-        internal static unsafe int IndexOfIgnoreCase(ReadOnlySpan<char> source, ReadOnlySpan<char> value)
+        internal static unsafe int IndexOfIgnoreCase(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value
+        )
         {
             Debug.Assert(value.Length > 0);
             Debug.Assert(value.Length <= source.Length);
             Debug.Assert(GlobalizationMode.Invariant);
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
-            fixed (char* pValue  = &MemoryMarshal.GetReference(value))
+            fixed (char* pValue = &MemoryMarshal.GetReference(value))
             {
                 char* pSourceLimit = pSource + (source.Length - value.Length);
                 char* pValueLimit = pValue + value.Length - 1;
@@ -236,8 +252,8 @@ namespace System.Globalization
 
                 while (pCurrentSource <= pSourceLimit)
                 {
-                    char *pVal = pValue;
-                    char *pSrc = pCurrentSource;
+                    char* pVal = pValue;
+                    char* pSrc = pCurrentSource;
 
                     while (pVal <= pValueLimit)
                     {
@@ -251,7 +267,11 @@ namespace System.Globalization
                             continue;
                         }
 
-                        if (char.IsHighSurrogate(*pSrc) && char.IsLowSurrogate(*(pSrc + 1)) && char.IsLowSurrogate(*(pVal + 1)))
+                        if (
+                            char.IsHighSurrogate(*pSrc)
+                            && char.IsLowSurrogate(*(pSrc + 1))
+                            && char.IsLowSurrogate(*(pVal + 1))
+                        )
                         {
                             // Well formed surrogates
                             // both the source and the Value have well-formed surrogates.
@@ -273,7 +293,7 @@ namespace System.Globalization
                     if (pVal > pValueLimit)
                     {
                         // Found match.
-                        return (int) (pCurrentSource - pSource);
+                        return (int)(pCurrentSource - pSource);
                     }
 
                     pCurrentSource++;
@@ -283,22 +303,25 @@ namespace System.Globalization
             }
         }
 
-        internal static unsafe int LastIndexOfIgnoreCase(ReadOnlySpan<char> source, ReadOnlySpan<char> value)
+        internal static unsafe int LastIndexOfIgnoreCase(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value
+        )
         {
             Debug.Assert(value.Length > 0);
             Debug.Assert(value.Length <= source.Length);
             Debug.Assert(GlobalizationMode.Invariant);
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
-            fixed (char* pValue  = &MemoryMarshal.GetReference(value))
+            fixed (char* pValue = &MemoryMarshal.GetReference(value))
             {
                 char* pValueLimit = pValue + value.Length - 1;
                 char* pCurrentSource = pSource + (source.Length - value.Length);
 
                 while (pCurrentSource >= pSource)
                 {
-                    char *pVal = pValue;
-                    char *pSrc = pCurrentSource;
+                    char* pVal = pValue;
+                    char* pSrc = pCurrentSource;
 
                     while (pVal <= pValueLimit)
                     {
@@ -312,7 +335,11 @@ namespace System.Globalization
                             continue;
                         }
 
-                        if (char.IsHighSurrogate(*pSrc) && char.IsLowSurrogate(*(pSrc + 1)) && char.IsLowSurrogate(*(pVal + 1)))
+                        if (
+                            char.IsHighSurrogate(*pSrc)
+                            && char.IsLowSurrogate(*(pSrc + 1))
+                            && char.IsLowSurrogate(*(pVal + 1))
+                        )
                         {
                             // Well formed surrogates
                             // both the source and the Value have well-formed surrogates.
@@ -334,7 +361,7 @@ namespace System.Globalization
                     if (pVal > pValueLimit)
                     {
                         // Found match.
-                        return (int) (pCurrentSource - pSource);
+                        return (int)(pCurrentSource - pSource);
                     }
 
                     pCurrentSource--;

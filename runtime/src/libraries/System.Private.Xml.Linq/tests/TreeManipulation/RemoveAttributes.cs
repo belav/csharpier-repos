@@ -26,14 +26,120 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(NoAttributes) { Attribute = new VariationAttribute("No attributes") { Priority = 1 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Single attribute") { Params = new object[] { "<square wIdth='1'>text<B/><!--comment--></square>", new[] { "wIdth" } }, Priority = 2 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Default attribute from DTD") { Params = new object[] { "<!DOCTYPE square [<!ELEMENT square (B*)><!ATTLIST square wIdth CDATA '10'>]><square>text<B/><!--comment--></square>", new[] { "wIdth" } }, Priority = 2 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Single namespace") { Params = new object[] { "<p:square xmlns:p='x'>text<B/><!--comment--></p:square>", new[] { "{http://www.w3.org/2000/xmlns/}p" } }, Priority = 2 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Single namespace (default)") { Params = new object[] { "<square xmlns='x'>text<B/><!--comment--></square>", new[] { "xmlns" } }, Priority = 2 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Multiple attributes") { Params = new object[] { "<square wIdth='1' depth='11'><sub1/>text</square>", new[] { "wIdth", "depth" } }, Priority = 2 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Multiple namespaces") { Params = new object[] { "<p:square xmlns:p='x' xmlns='x1'><p:A/><B/></p:square>", new[] { "{http://www.w3.org/2000/xmlns/}p", "{http://www.w3.org/2000/xmlns/}p" } }, Priority = 2 } });
-            AddChild(new TestVariation(DeleteAttributes) { Attribute = new VariationAttribute("Multiple namespaces + attributes") { Params = new object[] { "<p:square xmlns:p='x' xmlns='x1' a1='xxx' p:a1='yyy'><p:A/><B p:x='ayay'/></p:square>", new[] { "{http://www.w3.org/2000/xmlns/}p", "{http://www.w3.org/2000/xmlns/}p", "a1", "{x}a1" } }, Priority = 2 } });
+            AddChild(
+                new TestVariation(NoAttributes)
+                {
+                    Attribute = new VariationAttribute("No attributes") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Single attribute")
+                    {
+                        Params = new object[]
+                        {
+                            "<square wIdth='1'>text<B/><!--comment--></square>",
+                            new[] { "wIdth" },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Default attribute from DTD")
+                    {
+                        Params = new object[]
+                        {
+                            "<!DOCTYPE square [<!ELEMENT square (B*)><!ATTLIST square wIdth CDATA '10'>]><square>text<B/><!--comment--></square>",
+                            new[] { "wIdth" },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Single namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<p:square xmlns:p='x'>text<B/><!--comment--></p:square>",
+                            new[] { "{http://www.w3.org/2000/xmlns/}p" },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Single namespace (default)")
+                    {
+                        Params = new object[]
+                        {
+                            "<square xmlns='x'>text<B/><!--comment--></square>",
+                            new[] { "xmlns" },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Multiple attributes")
+                    {
+                        Params = new object[]
+                        {
+                            "<square wIdth='1' depth='11'><sub1/>text</square>",
+                            new[] { "wIdth", "depth" },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Multiple namespaces")
+                    {
+                        Params = new object[]
+                        {
+                            "<p:square xmlns:p='x' xmlns='x1'><p:A/><B/></p:square>",
+                            new[]
+                            {
+                                "{http://www.w3.org/2000/xmlns/}p",
+                                "{http://www.w3.org/2000/xmlns/}p",
+                            },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DeleteAttributes)
+                {
+                    Attribute = new VariationAttribute("Multiple namespaces + attributes")
+                    {
+                        Params = new object[]
+                        {
+                            "<p:square xmlns:p='x' xmlns='x1' a1='xxx' p:a1='yyy'><p:A/><B p:x='ayay'/></p:square>",
+                            new[]
+                            {
+                                "{http://www.w3.org/2000/xmlns/}p",
+                                "{http://www.w3.org/2000/xmlns/}p",
+                                "a1",
+                                "{x}a1",
+                            },
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
         }
 
         // no attributes
@@ -61,7 +167,11 @@ namespace XLinqTests
             XDocument doc = XDocument.Parse(xml);
 
             TestLog.Compare(doc.Root.HasAttributes, "HasAttributes");
-            TestLog.Compare(doc.Root.Attributes().Count(), attNames.Count(), "default attribute - Attributes()");
+            TestLog.Compare(
+                doc.Root.Attributes().Count(),
+                attNames.Count(),
+                "default attribute - Attributes()"
+            );
             foreach (string name in attNames)
             {
                 TestLog.Compare(doc.Root.Attribute(name) != null, "Attribute (XName) before");
@@ -85,11 +195,17 @@ namespace XLinqTests
             TestLog.Compare(doc.Root.FirstAttribute == null, "FirstAttribute");
             TestLog.Compare(doc.Root.LastAttribute == null, "LastAttribute");
             TestLog.Compare(doc.Root.Nodes().SequenceEqual(origNodes), "Content");
-            TestLog.Compare(origAttributes.Where(a => a.Parent != null).IsEmpty(), "Deleted attributes property");
+            TestLog.Compare(
+                origAttributes.Where(a => a.Parent != null).IsEmpty(),
+                "Deleted attributes property"
+            );
 
             foreach (string name in attNames)
             {
-                TestLog.Compare(doc.Root.Attribute(name) == null, "Attribute (XName) after: " + name);
+                TestLog.Compare(
+                    doc.Root.Attribute(name) == null,
+                    "Attribute (XName) after: " + name
+                );
             }
         }
 

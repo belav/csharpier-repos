@@ -50,7 +50,11 @@ namespace ComWrappersTests
 
         public WrapperRegistration Registration { get; }
 
-        public WeakReferenceableWrapper(IntPtr instance, WrapperRegistration reg, bool releaseInFinalizer = true)
+        public WeakReferenceableWrapper(
+            IntPtr instance,
+            WrapperRegistration reg,
+            bool releaseInFinalizer = true
+        )
         {
             var inst = Marshal.PtrToStructure<VtblPtr>(instance);
             this.vtable = Marshal.PtrToStructure<Vtbl>(inst.Vtbl);
@@ -61,7 +65,7 @@ namespace ComWrappersTests
 
         public int QueryInterface(Guid iid, out IntPtr ptr)
         {
-            fixed(IntPtr* ppv = &ptr)
+            fixed (IntPtr* ppv = &ptr)
             {
                 return this.vtable.QueryInterface(this.instance, &iid, ppv);
             }
@@ -79,17 +83,32 @@ namespace ComWrappersTests
     class DerivedObject : ICustomQueryInterface
     {
         private WeakReferenceableWrapper inner;
+
         public DerivedObject(TestComWrappers comWrappersInstance)
         {
             IntPtr innerInstance = WeakReferenceNative.CreateAggregatedWeakReferenceObject(
-                comWrappersInstance.GetOrCreateComInterfaceForObject(this, CreateComInterfaceFlags.None));
-            inner = new WeakReferenceableWrapper(innerInstance, comWrappersInstance.Registration, releaseInFinalizer: false);
-            comWrappersInstance.GetOrRegisterObjectForComInstance(innerInstance, CreateObjectFlags.Aggregation, this);
+                comWrappersInstance.GetOrCreateComInterfaceForObject(
+                    this,
+                    CreateComInterfaceFlags.None
+                )
+            );
+            inner = new WeakReferenceableWrapper(
+                innerInstance,
+                comWrappersInstance.Registration,
+                releaseInFinalizer: false
+            );
+            comWrappersInstance.GetOrRegisterObjectForComInstance(
+                innerInstance,
+                CreateObjectFlags.Aggregation,
+                this
+            );
         }
 
         public CustomQueryInterfaceResult GetInterface(ref Guid iid, out IntPtr ppv)
         {
-            return inner.QueryInterface(iid, out ppv) == 0 ? CustomQueryInterfaceResult.Handled : CustomQueryInterfaceResult.Failed;
+            return inner.QueryInterface(iid, out ppv) == 0
+                ? CustomQueryInterfaceResult.Handled
+                : CustomQueryInterfaceResult.Failed;
         }
     }
 
@@ -102,7 +121,11 @@ namespace ComWrappersTests
             Registration = reg;
         }
 
-        protected unsafe override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+        protected override unsafe ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        )
         {
             count = 0;
             return null;
@@ -114,18 +137,23 @@ namespace ComWrappersTests
             return new WeakReferenceableWrapper(externalComObject, Registration);
         }
 
-        protected override void ReleaseObjects(IEnumerable objects)
-        {
-        }
+        protected override void ReleaseObjects(IEnumerable objects) { }
 
-        public static readonly TestComWrappers TrackerSupportInstance = new TestComWrappers(WrapperRegistration.TrackerSupport);
-        public static readonly TestComWrappers MarshallingInstance = new TestComWrappers(WrapperRegistration.Marshalling);
+        public static readonly TestComWrappers TrackerSupportInstance = new TestComWrappers(
+            WrapperRegistration.TrackerSupport
+        );
+        public static readonly TestComWrappers MarshallingInstance = new TestComWrappers(
+            WrapperRegistration.Marshalling
+        );
     }
 
     public class Program
     {
-
-        private static void ValidateWeakReferenceState(WeakReference<WeakReferenceableWrapper> wr, bool expectedIsAlive, TestComWrappers sourceWrappers = null)
+        private static void ValidateWeakReferenceState(
+            WeakReference<WeakReferenceableWrapper> wr,
+            bool expectedIsAlive,
+            TestComWrappers sourceWrappers = null
+        )
         {
             WeakReferenceableWrapper target;
             bool isAlive = wr.TryGetTarget(out target);
@@ -138,10 +166,13 @@ namespace ComWrappersTests
         private static void ValidateNativeWeakReference(TestComWrappers cw)
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static (WeakReference<WeakReferenceableWrapper>, IntPtr) GetWeakReference(TestComWrappers cw)
+            static (WeakReference<WeakReferenceableWrapper>, IntPtr) GetWeakReference(
+                TestComWrappers cw
+            )
             {
                 IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
-                var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
+                var obj = (WeakReferenceableWrapper)
+                    cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
                 var wr = new WeakReference<WeakReferenceableWrapper>(obj);
                 ValidateWeakReferenceState(wr, expectedIsAlive: true, cw);
                 GC.KeepAlive(obj);
@@ -149,10 +180,14 @@ namespace ComWrappersTests
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static IntPtr SetWeakReferenceTarget(WeakReference<WeakReferenceableWrapper> wr, TestComWrappers cw)
+            static IntPtr SetWeakReferenceTarget(
+                WeakReference<WeakReferenceableWrapper> wr,
+                TestComWrappers cw
+            )
             {
                 IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
-                var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
+                var obj = (WeakReferenceableWrapper)
+                    cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
                 wr.SetTarget(obj);
                 ValidateWeakReferenceState(wr, expectedIsAlive: true, cw);
                 GC.KeepAlive(obj);
@@ -265,7 +300,10 @@ namespace ComWrappersTests
                 DerivedObject obj = new DerivedObject(TestComWrappers.TrackerSupportInstance);
                 // We use an explicit weak GC handle here to enable us to validate that we are using "weak" GCHandle
                 // semantics with the weak reference.
-                return (GCHandle.Alloc(obj, GCHandleType.Weak), new WeakReference<DerivedObject>(obj));
+                return (
+                    GCHandle.Alloc(obj, GCHandleType.Weak),
+                    new WeakReference<DerivedObject>(obj)
+                );
             }
 
             Console.WriteLine("Validate weak reference with aggregation.");

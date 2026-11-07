@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Debug = System.Diagnostics.Debug;
 using System;
+using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
@@ -84,7 +84,11 @@ namespace Internal.TypeSystem
                 var defType = (DefType)this;
 
                 // 1. Type is a COMImport/COMEvent interface, enum, struct, or delegate
-                if (!(IsInterface && (IsComImport || IsComEventInterface)) && !IsValueType && !IsDelegate)
+                if (
+                    !(IsInterface && (IsComImport || IsComEventInterface))
+                    && !IsValueType
+                    && !IsDelegate
+                )
                     return false;
 
                 // 2. Type is not generic
@@ -92,7 +96,11 @@ namespace Internal.TypeSystem
                     return false;
 
                 // 3. Type is externally visible (i.e public)
-                if (!((TypeDesc)defType).GetEffectiveVisibility().IsExposedOutsideOfThisAssembly(false))
+                if (
+                    !((TypeDesc)defType)
+                        .GetEffectiveVisibility()
+                        .IsExposedOutsideOfThisAssembly(false)
+                )
                     return false;
 
                 // 4. Type is not tdWindowsRuntime

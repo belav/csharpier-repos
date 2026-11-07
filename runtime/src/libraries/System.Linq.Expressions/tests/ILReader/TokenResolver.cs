@@ -29,14 +29,23 @@ namespace System.Linq.Expressions.Tests
             _enclosingMethod = method;
             _module = method.Module;
             _methodContext = (method is ConstructorInfo) ? null : method.GetGenericArguments();
-            _typeContext = (method.DeclaringType == null) ? null : method.DeclaringType.GetGenericArguments();
+            _typeContext =
+                (method.DeclaringType == null) ? null : method.DeclaringType.GetGenericArguments();
         }
 
-        public MethodBase AsMethod(int token) => _module.ResolveMethod(token, _typeContext, _methodContext);
-        public FieldInfo AsField(int token) => _module.ResolveField(token, _typeContext, _methodContext);
+        public MethodBase AsMethod(int token) =>
+            _module.ResolveMethod(token, _typeContext, _methodContext);
+
+        public FieldInfo AsField(int token) =>
+            _module.ResolveField(token, _typeContext, _methodContext);
+
         public Type AsType(int token) => _module.ResolveType(token, _typeContext, _methodContext);
-        public MemberInfo AsMember(int token) => _module.ResolveMember(token, _typeContext, _methodContext);
+
+        public MemberInfo AsMember(int token) =>
+            _module.ResolveMember(token, _typeContext, _methodContext);
+
         public string AsString(int token) => _module.ResolveString(token);
+
         public byte[] AsSignature(int token) => _module.ResolveSignature(token);
     }
 
@@ -47,21 +56,84 @@ namespace System.Linq.Expressions.Tests
         private static readonly MethodInfo s_resolveType = GetMethodInfo(nameof(ResolveType));
         private static readonly MethodInfo s_resolveMember = GetMethodInfo(nameof(ResolveMember));
         private static readonly MethodInfo s_resolveString = GetMethodInfo(nameof(ResolveString));
-        private static readonly MethodInfo s_resolveSignature = GetMethodInfo(nameof(ResolveSignature));
+        private static readonly MethodInfo s_resolveSignature = GetMethodInfo(
+            nameof(ResolveSignature)
+        );
 
-        public static MethodBase ResolveMethod(this Module module, int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) => Invoke<MethodBase>(s_resolveMethod, module, metadataToken, genericTypeArguments, genericMethodArguments);
-        public static FieldInfo ResolveField(this Module module, int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) => Invoke<FieldInfo>(s_resolveField, module, metadataToken, genericTypeArguments, genericMethodArguments);
-        public static Type ResolveType(this Module module, int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) => Invoke<Type>(s_resolveType, module, metadataToken, genericTypeArguments, genericMethodArguments);
-        public static MemberInfo ResolveMember(this Module module, int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) => Invoke<MemberInfo>(s_resolveMember, module, metadataToken, genericTypeArguments, genericMethodArguments);
-        public static byte[] ResolveSignature(this Module module, int metadataToken) => Invoke<byte[]>(s_resolveSignature, module, metadataToken);
-        public static string ResolveString(this Module module, int metadataToken) => Invoke<string>(s_resolveString, module, metadataToken);
+        public static MethodBase ResolveMethod(
+            this Module module,
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        ) =>
+            Invoke<MethodBase>(
+                s_resolveMethod,
+                module,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
+
+        public static FieldInfo ResolveField(
+            this Module module,
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        ) =>
+            Invoke<FieldInfo>(
+                s_resolveField,
+                module,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
+
+        public static Type ResolveType(
+            this Module module,
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        ) =>
+            Invoke<Type>(
+                s_resolveType,
+                module,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
+
+        public static MemberInfo ResolveMember(
+            this Module module,
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        ) =>
+            Invoke<MemberInfo>(
+                s_resolveMember,
+                module,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
+
+        public static byte[] ResolveSignature(this Module module, int metadataToken) =>
+            Invoke<byte[]>(s_resolveSignature, module, metadataToken);
+
+        public static string ResolveString(this Module module, int metadataToken) =>
+            Invoke<string>(s_resolveString, module, metadataToken);
 
         private static MethodInfo GetMethodInfo(string name)
         {
-            Type[] parameterTypes = typeof(ModuleExtensions).GetMethod(name).GetParameters().Skip(1).Select(p => p.ParameterType).ToArray();
+            Type[] parameterTypes = typeof(ModuleExtensions)
+                .GetMethod(name)
+                .GetParameters()
+                .Skip(1)
+                .Select(p => p.ParameterType)
+                .ToArray();
             return typeof(Module).GetMethod(name, parameterTypes);
         }
 
-        private static T Invoke<T>(MethodInfo method, Module module, params object[] args) => (T)method.Invoke(module, args);
+        private static T Invoke<T>(MethodInfo method, Module module, params object[] args) =>
+            (T)method.Invoke(module, args);
     }
 }

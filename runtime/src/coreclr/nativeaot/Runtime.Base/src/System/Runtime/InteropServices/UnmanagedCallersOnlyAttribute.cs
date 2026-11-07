@@ -17,9 +17,7 @@ namespace System.Runtime.InteropServices
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     public sealed class UnmanagedCallersOnlyAttribute : Attribute
     {
-        public UnmanagedCallersOnlyAttribute()
-        {
-        }
+        public UnmanagedCallersOnlyAttribute() { }
 
         /// <summary>
         /// Optional. If omitted, the runtime will use the default platform calling convention.
@@ -43,14 +41,17 @@ namespace System.Runtime.CompilerServices
     {
         public CallConvCdecl() { }
     }
+
     public class CallConvFastcall
     {
         public CallConvFastcall() { }
     }
+
     public class CallConvStdcall
     {
         public CallConvStdcall() { }
     }
+
     public class CallConvThiscall
     {
         public CallConvThiscall() { }

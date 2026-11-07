@@ -6,11 +6,11 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Workflow.ComponentModel.Design;
 
     // <summary>
     // This class provides the visualisation of the backdrop + hightlighted designer when
@@ -21,6 +21,7 @@ namespace System.Workflow.ComponentModel.Design
     {
         private Rectangle bounds;
         private List<ActivityDesigner> highlightedDesigners;
+
         public HighlightOverlayGlyph(Rectangle bounds, List<ActivityDesigner> highlightedDesigners)
         {
             this.HighlightedDesigners = highlightedDesigners;
@@ -39,15 +40,25 @@ namespace System.Workflow.ComponentModel.Design
             set { highlightedDesigners = value; }
         }
 
-        protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+        protected override void OnPaint(
+            Graphics graphics,
+            bool activated,
+            AmbientTheme ambientTheme,
+            ActivityDesigner designer
+        )
         {
             Rectangle frameRect = Bounds;
             Rectangle shadowRect = frameRect;
 
-            Color BaseColor = Color.FromArgb(150, 0, 0, 0); // dark semitransparent backdrop 
+            Color BaseColor = Color.FromArgb(150, 0, 0, 0); // dark semitransparent backdrop
             Color LightingColor = Color.FromArgb(150, 0, 0, 0);
 
-            Brush frameBrush = new LinearGradientBrush(new Point(frameRect.Left, frameRect.Top), new Point(frameRect.Left, frameRect.Bottom), BaseColor, LightingColor);
+            Brush frameBrush = new LinearGradientBrush(
+                new Point(frameRect.Left, frameRect.Top),
+                new Point(frameRect.Left, frameRect.Bottom),
+                BaseColor,
+                LightingColor
+            );
 
             shadowRect = DropRoundedRectangleShadow(shadowRect, graphics);
             graphics.FillPath(frameBrush, RoundedRect(frameRect));
@@ -56,13 +67,20 @@ namespace System.Workflow.ComponentModel.Design
 
             foreach (ActivityDesigner highlightedDesigner in HighlightedDesigners)
             {
-                DesignerPainter.PaintDesigner(highlightedDesigner, new ActivityDesignerPaintEventArgs(graphics, designer.Bounds, designer.Bounds, null));
+                DesignerPainter.PaintDesigner(
+                    highlightedDesigner,
+                    new ActivityDesignerPaintEventArgs(
+                        graphics,
+                        designer.Bounds,
+                        designer.Bounds,
+                        null
+                    )
+                );
             }
         }
 
         private Rectangle DropRoundedRectangleShadow(Rectangle shadowRect, Graphics outputGraphics)
         {
-
             int shadowIntensity = 1;
             using (Pen shadowPen = new Pen(Color.FromArgb(shadowIntensity, 0, 0, 0)))
             {
@@ -72,13 +90,13 @@ namespace System.Workflow.ComponentModel.Design
                     outputGraphics.DrawPath(shadowPen, RoundedRect(shadowRect));
                     shadowPen.Color = Color.FromArgb(shadowIntensity - 1, 0, 0, 0);
                     shadowIntensity += 2;
-                    shadowPen.Width = shadowPen.Width - 2;;
+                    shadowPen.Width = shadowPen.Width - 2;
+                    ;
                 }
 
                 return shadowRect;
             }
         }
-
 
         private GraphicsPath RoundedRect(Rectangle frame)
         {
@@ -97,5 +115,4 @@ namespace System.Workflow.ComponentModel.Design
             return path;
         }
     }
-
 }

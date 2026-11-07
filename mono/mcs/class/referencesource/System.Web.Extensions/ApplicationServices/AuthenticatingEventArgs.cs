@@ -12,33 +12,39 @@ namespace System.Web.ApplicationServices
     public class AuthenticatingEventArgs : EventArgs
     {
         private bool _authenticated;
-        public bool Authenticated {
+        public bool Authenticated
+        {
             get { return _authenticated; }
             set { _authenticated = value; }
         }
 
         private bool _authenticationIsComplete;
-        public bool AuthenticationIsComplete {
+        public bool AuthenticationIsComplete
+        {
             get { return _authenticationIsComplete; }
             set { _authenticationIsComplete = value; }
         }
 
         private string _userName;
-        public string UserName {
+        public string UserName
+        {
             get { return _userName; }
         }
 
         private string _password;
-        public string Password {
+        public string Password
+        {
             get { return _password; }
         }
 
         private string _customCredential;
-        public string CustomCredential {
+        public string CustomCredential
+        {
             get { return _customCredential; }
         }
 
-        internal AuthenticatingEventArgs(string username, string password, string customCredential) {
+        internal AuthenticatingEventArgs(string username, string password, string customCredential)
+        {
             _authenticated = false;
             _authenticationIsComplete = false;
             _userName = username;

@@ -28,96 +28,106 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class HyperLinkColumn_Text
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected GHTWebControls.GHTSubTest Ghtsubtest2;
-		protected System.Web.UI.WebControls.DataGrid DataGrid2;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class HyperLinkColumn_Text : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected GHTWebControls.GHTSubTest Ghtsubtest2;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
-				System.Web.UI.WebControls.HyperLinkColumn c_id = new System.Web.UI.WebControls.HyperLinkColumn();
-				System.Web.UI.WebControls.HyperLinkColumn c_name = new System.Web.UI.WebControls.HyperLinkColumn();
-				System.Web.UI.WebControls.HyperLinkColumn c_company = new System.Web.UI.WebControls.HyperLinkColumn();
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-				c_id.Text = "";
-				c_id.DataNavigateUrlField = "Name";
-				c_name.Text = "simple text";
-				c_name.DataNavigateUrlField = "Name";
-				c_company.Text = "text with !@#$%^&*()_+";
-				c_company.DataNavigateUrlField = "Name";
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
+                System.Web.UI.WebControls.HyperLinkColumn c_id =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_name =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_company =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
 
-				DataGrid1.Columns.Add(c_id);
-				DataGrid1.Columns.Add(c_name);
-				DataGrid1.Columns.Add(c_company);
+                c_id.Text = "";
+                c_id.DataNavigateUrlField = "Name";
+                c_name.Text = "simple text";
+                c_name.DataNavigateUrlField = "Name";
+                c_company.Text = "text with !@#$%^&*()_+";
+                c_company.DataNavigateUrlField = "Name";
 
-				DataGrid1.DataBind();;
+                DataGrid1.Columns.Add(c_id);
+                DataGrid1.Columns.Add(c_name);
+                DataGrid1.Columns.Add(c_company);
 
-				GHTSubTestAddResult(c_id.Text);
-				GHTSubTestAddResult(c_name.Text);
-				GHTSubTestAddResult(c_company.Text);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+                DataGrid1.DataBind();
+                ;
 
-			GHTActiveSubTest = Ghtsubtest2;
-			try 
-			{
-				DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
-				DataGrid2.DataBind();;
+                GHTSubTestAddResult(c_id.Text);
+                GHTSubTestAddResult(c_name.Text);
+                GHTSubTestAddResult(c_company.Text);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-				GHTSubTestAddResult(( (System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[0]).Text);
-				GHTSubTestAddResult(( (System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[1]).Text);
-				GHTSubTestAddResult(( (System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[2]).Text);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest2;
+            try
+            {
+                DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
+                DataGrid2.DataBind();
+                ;
 
-			GHTTestEnd();
-		}
-	}
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[0]).Text
+                );
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[1]).Text
+                );
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[2]).Text
+                );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+
+            GHTTestEnd();
+        }
+    }
 }

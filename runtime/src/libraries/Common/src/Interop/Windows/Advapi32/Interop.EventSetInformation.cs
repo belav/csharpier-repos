@@ -12,6 +12,7 @@ internal static partial class Interop
             long registrationHandle,
             EVENT_INFO_CLASS informationClass,
             void* eventInformation,
-            uint informationLength);
+            uint informationLength
+        );
     }
 }

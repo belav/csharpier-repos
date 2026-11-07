@@ -8,15 +8,51 @@ using Xunit;
 internal static class TestData
 {
     // see: https://docs.microsoft.com/en-us/windows/desktop/FileIO/naming-a-file
-    private static readonly char[] s_invalidFileNameChars = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-        new char[]
+    private static readonly char[] s_invalidFileNameChars = RuntimeInformation.IsOSPlatform(
+        OSPlatform.Windows
+    )
+        ? new char[]
         {
-            '\"', '<', '>', '|', '\0', (char)1, (char)2, (char)3, (char)4, (char)5, (char)6, (char)7,
-            (char)8, (char)9, (char)10, (char)11, (char)12, (char)13, (char)14, (char)15, (char)16,
-            (char)17, (char)18, (char)19, (char)20, (char)21, (char)22, (char)23, (char)24, (char)25,
-            (char)26, (char)27, (char)28, (char)29, (char)30, (char)31, '*', '?'
-        } :
-        new char[] { '\0' };
+            '\"',
+            '<',
+            '>',
+            '|',
+            '\0',
+            (char)1,
+            (char)2,
+            (char)3,
+            (char)4,
+            (char)5,
+            (char)6,
+            (char)7,
+            (char)8,
+            (char)9,
+            (char)10,
+            (char)11,
+            (char)12,
+            (char)13,
+            (char)14,
+            (char)15,
+            (char)16,
+            (char)17,
+            (char)18,
+            (char)19,
+            (char)20,
+            (char)21,
+            (char)22,
+            (char)23,
+            (char)24,
+            (char)25,
+            (char)26,
+            (char)27,
+            (char)28,
+            (char)29,
+            (char)30,
+            (char)31,
+            '*',
+            '?',
+        }
+        : new char[] { '\0' };
 
     public static TheoryData<string> PathsWithInvalidColons
     {
@@ -47,7 +83,7 @@ internal static class TestData
                 @"http://server/",
                 @"http://server/home",
                 @"file://",
-                @"file:///C|/My Documents/ALetter.html"
+                @"file:///C|/My Documents/ALetter.html",
             };
         }
     }
@@ -56,11 +92,7 @@ internal static class TestData
     {
         get
         {
-            TheoryData<string> data = new TheoryData<string>
-            {
-                "middle\0path",
-                "trailing\0"
-            };
+            TheoryData<string> data = new TheoryData<string> { "middle\0path", "trailing\0" };
 
             foreach (char c in s_invalidFileNameChars)
             {
@@ -82,7 +114,7 @@ internal static class TestData
             {
                 // A valid, non separator
                 'a',
-                Path.DirectorySeparatorChar
+                Path.DirectorySeparatorChar,
             };
 
             if (Path.DirectorySeparatorChar != Path.AltDirectorySeparatorChar)

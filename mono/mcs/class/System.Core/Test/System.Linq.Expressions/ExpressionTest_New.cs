@@ -27,315 +27,359 @@
 //
 
 using System;
-using System.Reflection;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Reflection;
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq.Expressions {
+namespace MonoTests.System.Linq.Expressions
+{
+    [TestFixture]
+    [Category("SRE")]
+    public class ExpressionTest_New
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullType()
+        {
+            Expression.New(null as Type);
+        }
 
-	[TestFixture]
-	[Category("SRE")]
-	public class ExpressionTest_New {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullConstructor()
+        {
+            Expression.New(null as ConstructorInfo);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void NullType ()
-		{
-			Expression.New (null as Type);
-		}
+        public class Foo
+        {
+            public Foo(string s) { }
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void NullConstructor ()
-		{
-			Expression.New (null as ConstructorInfo);
-		}
+        public class Bar
+        {
+            public string Value { get; set; }
 
-		public class Foo {
+            public Bar() { }
+        }
 
-			public Foo (string s)
-			{
-			}
-		}
+        public struct Baz { }
 
-		public class Bar {
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void NoParameterlessConstructor()
+        {
+            Expression.New(typeof(Foo));
+        }
 
-			public string Value { get; set; }
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorHasTooMuchParameters()
+        {
+            Expression.New(typeof(Foo).GetConstructor(new[] { typeof(string) }));
+        }
 
-			public Bar ()
-			{
-			}
-		}
+        [Test]
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void NewVoid()
+        {
+            Expression.New(typeof(void));
+        }
 
-		public struct Baz {
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void HasNullArgument()
+        {
+            Expression.New(
+                typeof(Foo).GetConstructor(new[] { typeof(string) }),
+                null as Expression
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void NoParameterlessConstructor ()
-		{
-			Expression.New (typeof (Foo));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void HasWrongArgument()
+        {
+            Expression.New(
+                typeof(Foo).GetConstructor(new[] { typeof(string) }),
+                Expression.Constant(12)
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConstructorHasTooMuchParameters ()
-		{
-			Expression.New (typeof (Foo).GetConstructor (new [] { typeof (string) }));
-		}
+        [Test]
+        public void NewFoo()
+        {
+            var n = Expression.New(
+                typeof(Foo).GetConstructor(new[] { typeof(string) }),
+                Expression.Constant("foo")
+            );
 
-		[Test]
-		[Category ("NotDotNet")]
-		[ExpectedException (typeof (ArgumentException))]
-		public void NewVoid ()
-		{
-			Expression.New (typeof (void));
-		}
+            Assert.AreEqual(ExpressionType.New, n.NodeType);
+            Assert.AreEqual(typeof(Foo), n.Type);
+            Assert.AreEqual(1, n.Arguments.Count);
+            Assert.IsNull(n.Members);
+            Assert.AreEqual("new Foo(\"foo\")", n.ToString());
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void HasNullArgument ()
-		{
-			Expression.New (typeof (Foo).GetConstructor (new [] { typeof (string) }), null as Expression);
-		}
+        [Test]
+        public void NewBar()
+        {
+            var n = Expression.New(typeof(Bar));
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void HasWrongArgument ()
-		{
-			Expression.New (typeof (Foo).GetConstructor (new [] { typeof (string) }), Expression.Constant (12));
-		}
+            Assert.IsNotNull(n.Constructor);
+            Assert.IsNotNull(n.Arguments);
+            Assert.IsNull(n.Members); // wrong doc
 
-		[Test]
-		public void NewFoo ()
-		{
-			var n = Expression.New (typeof (Foo).GetConstructor (new [] { typeof (string) }), Expression.Constant ("foo"));
+            Assert.AreEqual("new Bar()", n.ToString());
 
-			Assert.AreEqual (ExpressionType.New, n.NodeType);
-			Assert.AreEqual (typeof (Foo), n.Type);
-			Assert.AreEqual (1, n.Arguments.Count);
-			Assert.IsNull (n.Members);
-			Assert.AreEqual ("new Foo(\"foo\")", n.ToString ());
-		}
+            n = Expression.New(typeof(Bar).GetConstructor(Type.EmptyTypes));
 
-		[Test]
-		public void NewBar ()
-		{
-			var n = Expression.New (typeof (Bar));
+            Assert.AreEqual("new Bar()", n.ToString());
+        }
 
-			Assert.IsNotNull (n.Constructor);
-			Assert.IsNotNull (n.Arguments);
-			Assert.IsNull (n.Members); // wrong doc
+        public class Gazonk
+        {
+            string value;
 
-			Assert.AreEqual ("new Bar()", n.ToString ());
+            public Gazonk(string s)
+            {
+                value = s;
+            }
 
-			n = Expression.New (typeof (Bar).GetConstructor (Type.EmptyTypes));
+            public override bool Equals(object obj)
+            {
+                var o = obj as Gazonk;
+                if (o == null)
+                    return false;
 
-			Assert.AreEqual ("new Bar()", n.ToString ());
-		}
+                return value == o.value;
+            }
 
-		public class Gazonk {
+            public override int GetHashCode()
+            {
+                return value.GetHashCode();
+            }
+        }
 
-			string value;
+        [Test]
+        public void CompileNewClass()
+        {
+            var p = Expression.Parameter(typeof(string), "p");
+            var n = Expression.New(typeof(Gazonk).GetConstructor(new[] { typeof(string) }), p);
+            var fgaz = Expression.Lambda<Func<string, Gazonk>>(n, p).Compile();
 
-			public Gazonk (string s)
-			{
-				value = s;
-			}
+            var g1 = new Gazonk("foo");
+            var g2 = new Gazonk("bar");
 
-			public override bool Equals (object obj)
-			{
-				var o = obj as Gazonk;
-				if (o == null)
-					return false;
+            Assert.IsNotNull(g1);
+            Assert.AreEqual(g1, fgaz("foo"));
+            Assert.IsNotNull(g2);
+            Assert.AreEqual(g2, fgaz("bar"));
 
-				return value == o.value;
-			}
+            n = Expression.New(typeof(Bar));
+            var lbar = Expression.Lambda<Func<Bar>>(n).Compile();
 
-			public override int GetHashCode ()
-			{
-				return value.GetHashCode ();
-			}
-		}
+            var bar = lbar();
 
-		[Test]
-		public void CompileNewClass ()
-		{
-			var p = Expression.Parameter (typeof (string), "p");
-			var n = Expression.New (typeof (Gazonk).GetConstructor (new [] { typeof (string) }), p);
-			var fgaz = Expression.Lambda<Func<string, Gazonk>> (n, p).Compile ();
+            Assert.IsNotNull(bar);
+            Assert.IsNull(bar.Value);
+        }
 
-			var g1 = new Gazonk ("foo");
-			var g2 = new Gazonk ("bar");
+        public class FakeAnonymousType
+        {
+            public string Foo { get; set; }
+            public string Bar { get; set; }
+            public string Baz { get; set; }
+            public int Gazonk { get; set; }
+            public string Tzap
+            {
+                set { }
+            }
 
-			Assert.IsNotNull (g1);
-			Assert.AreEqual (g1, fgaz ("foo"));
-			Assert.IsNotNull (g2);
-			Assert.AreEqual (g2, fgaz ("bar"));
+            public FakeAnonymousType(string foo)
+            {
+                Foo = foo;
+            }
 
-			n = Expression.New (typeof (Bar));
-			var lbar = Expression.Lambda<Func<Bar>> (n).Compile ();
+            public FakeAnonymousType(string foo, string bar, string baz)
+            {
+                Foo = foo;
+                Bar = bar;
+                Baz = baz;
+            }
+        }
 
-			var bar = lbar ();
+        [Test]
+        public void NewFakeAnonymousType()
+        {
+            var n = Expression.New(
+                typeof(FakeAnonymousType).GetConstructor(
+                    new[] { typeof(string), typeof(string), typeof(string) }
+                ),
+                new[] { "Foo".ToConstant(), "Bar".ToConstant(), "Baz".ToConstant() },
+                new[]
+                {
+                    typeof(FakeAnonymousType).GetProperty("Foo"),
+                    typeof(FakeAnonymousType).GetProperty("Bar"),
+                    typeof(FakeAnonymousType).GetProperty("Baz"),
+                }
+            );
 
-			Assert.IsNotNull (bar);
-			Assert.IsNull (bar.Value);
-		}
+            Assert.IsNotNull(n.Constructor);
+            Assert.IsNotNull(n.Arguments);
+            Assert.IsNotNull(n.Members);
+            Assert.AreEqual(
+                "new FakeAnonymousType(Foo = \"Foo\", Bar = \"Bar\", Baz = \"Baz\")",
+                n.ToString()
+            );
+        }
 
-		public class FakeAnonymousType {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullMember()
+        {
+            Expression.New(
+                typeof(FakeAnonymousType).GetConstructor(new[] { typeof(string) }),
+                new[] { "Foo".ToConstant() },
+                new MemberInfo[] { null }
+            );
+        }
 
-			public string Foo { get; set; }
-			public string Bar { get; set; }
-			public string Baz { get; set; }
-			public int Gazonk { get; set; }
-			public string Tzap { set {} }
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MemberArgumentMiscount()
+        {
+            Expression.New(
+                typeof(FakeAnonymousType).GetConstructor(new[] { typeof(string) }),
+                new[] { "Foo".ToConstant() },
+                new[]
+                {
+                    typeof(FakeAnonymousType).GetProperty("Foo"),
+                    typeof(FakeAnonymousType).GetProperty("Bar"),
+                }
+            );
+        }
 
-			public FakeAnonymousType (string foo)
-			{
-				Foo = foo;
-			}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MemberArgumentMismatch()
+        {
+            Expression.New(
+                typeof(FakeAnonymousType).GetConstructor(new[] { typeof(string) }),
+                new[] { "Foo".ToConstant() },
+                new[] { typeof(FakeAnonymousType).GetProperty("Gazonk") }
+            );
+        }
 
-			public FakeAnonymousType (string foo, string bar, string baz)
-			{
-				Foo = foo;
-				Bar = bar;
-				Baz = baz;
-			}
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MemberHasNoGetter()
+        {
+            Expression.New(
+                typeof(FakeAnonymousType).GetConstructor(new[] { typeof(string) }),
+                new[] { "Foo".ToConstant() },
+                new[] { typeof(FakeAnonymousType).GetProperty("Tzap") }
+            );
+        }
 
-		[Test]
-		public void NewFakeAnonymousType ()
-		{
-			var n = Expression.New (
-				typeof (FakeAnonymousType).GetConstructor (new [] { typeof (string), typeof (string), typeof (string) } ),
-				new [] { "Foo".ToConstant (), "Bar".ToConstant (), "Baz".ToConstant () },
-				new [] { typeof (FakeAnonymousType).GetProperty ("Foo"), typeof (FakeAnonymousType).GetProperty ("Bar"), typeof (FakeAnonymousType).GetProperty ("Baz") });
+        public struct EineStrukt
+        {
+            public int left;
+            public int right;
 
-			Assert.IsNotNull (n.Constructor);
-			Assert.IsNotNull (n.Arguments);
-			Assert.IsNotNull (n.Members);
-			Assert.AreEqual ("new FakeAnonymousType(Foo = \"Foo\", Bar = \"Bar\", Baz = \"Baz\")", n.ToString ());
-		}
+            public EineStrukt(int left, int right)
+            {
+                this.left = left;
+                this.right = right;
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void NullMember ()
-		{
-			Expression.New (
-				typeof (FakeAnonymousType).GetConstructor (new [] { typeof (string) }),
-				new [] { "Foo".ToConstant () },
-				new MemberInfo [] { null });
-		}
+        [Test]
+        public void CompileNewStruct()
+        {
+            var create = Expression
+                .Lambda<Func<EineStrukt>>(Expression.New(typeof(EineStrukt)))
+                .Compile();
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MemberArgumentMiscount ()
-		{
-			Expression.New (
-				typeof (FakeAnonymousType).GetConstructor (new [] { typeof (string) }),
-				new [] { "Foo".ToConstant () },
-				new [] { typeof (FakeAnonymousType).GetProperty ("Foo"), typeof (FakeAnonymousType).GetProperty ("Bar") });
-		}
+            var s = create();
+            Assert.AreEqual(0, s.left);
+            Assert.AreEqual(0, s.right);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MemberArgumentMismatch ()
-		{
-			Expression.New (
-				typeof (FakeAnonymousType).GetConstructor (new [] { typeof (string) }),
-				new [] { "Foo".ToConstant () },
-				new [] { typeof (FakeAnonymousType).GetProperty ("Gazonk") });
-		}
+        [Test]
+        public void CompileNewStructWithParameters()
+        {
+            var pl = Expression.Parameter(typeof(int), "left");
+            var pr = Expression.Parameter(typeof(int), "right");
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MemberHasNoGetter ()
-		{
-			Expression.New (
-				typeof (FakeAnonymousType).GetConstructor (new [] { typeof (string) }),
-				new [] { "Foo".ToConstant () },
-				new [] { typeof (FakeAnonymousType).GetProperty ("Tzap") });
-		}
+            var create = Expression
+                .Lambda<Func<int, int, EineStrukt>>(
+                    Expression.New(
+                        typeof(EineStrukt).GetConstructor(new[] { typeof(int), typeof(int) }),
+                        pl,
+                        pr
+                    ),
+                    pl,
+                    pr
+                )
+                .Compile();
 
-		public struct EineStrukt {
-			public int left;
-			public int right;
+            var s = create(42, 12);
 
-			public EineStrukt (int left, int right)
-			{
-				this.left = left;
-				this.right = right;
-			}
-		}
+            Assert.AreEqual(42, s.left);
+            Assert.AreEqual(12, s.right);
+        }
 
-		[Test]
-		public void CompileNewStruct ()
-		{
-			var create = Expression.Lambda<Func<EineStrukt>> (
-				Expression.New (typeof (EineStrukt))).Compile ();
+        public class EineKlass
+        {
+            public string Left { get; set; }
+            public string Right { get; set; }
 
-			var s = create ();
-			Assert.AreEqual (0, s.left);
-			Assert.AreEqual (0, s.right);
-		}
+            public EineKlass() { }
 
-		[Test]
-		public void CompileNewStructWithParameters ()
-		{
-			var pl = Expression.Parameter (typeof (int), "left");
-			var pr = Expression.Parameter (typeof (int), "right");
+            public EineKlass(string l, string r)
+            {
+                Left = l;
+                Right = r;
+            }
+        }
 
-			var create = Expression.Lambda<Func<int, int, EineStrukt>> (
-				Expression.New (typeof (EineStrukt).GetConstructor (new [] { typeof (int), typeof (int) }), pl, pr), pl, pr).Compile ();
+        [Test]
+        public void CompileNewClassEmptyConstructor()
+        {
+            var create = Expression
+                .Lambda<Func<EineKlass>>(Expression.New(typeof(EineKlass)))
+                .Compile();
 
-			var s = create (42, 12);
+            var k = create();
+            Assert.IsNull(k.Left);
+            Assert.IsNull(k.Right);
+        }
 
-			Assert.AreEqual (42, s.left);
-			Assert.AreEqual (12, s.right);
-		}
+        [Test]
+        public void CompileNewClassWithParameters()
+        {
+            var pl = Expression.Parameter(typeof(string), "left");
+            var pr = Expression.Parameter(typeof(string), "right");
 
-		public class EineKlass {
+            var create = Expression
+                .Lambda<Func<string, string, EineKlass>>(
+                    Expression.New(
+                        typeof(EineKlass).GetConstructor(new[] { typeof(string), typeof(string) }),
+                        pl,
+                        pr
+                    ),
+                    pl,
+                    pr
+                )
+                .Compile();
 
-			public string Left { get; set; }
-			public string Right { get; set; }
+            var k = create("foo", "bar");
 
-			public EineKlass ()
-			{
-			}
-
-			public EineKlass (string l, string r)
-			{
-				Left = l;
-				Right = r;
-			}
-		}
-
-		[Test]
-		public void CompileNewClassEmptyConstructor ()
-		{
-			var create = Expression.Lambda<Func<EineKlass>> (
-				Expression.New (typeof (EineKlass))).Compile ();
-
-			var k = create ();
-			Assert.IsNull (k.Left);
-			Assert.IsNull (k.Right);
-		}
-
-		[Test]
-		public void CompileNewClassWithParameters ()
-		{
-			var pl = Expression.Parameter (typeof (string), "left");
-			var pr = Expression.Parameter (typeof (string), "right");
-
-			var create = Expression.Lambda<Func<string, string, EineKlass>> (
-				Expression.New (typeof (EineKlass).GetConstructor (new [] { typeof (string), typeof (string) }), pl, pr), pl, pr).Compile ();
-
-			var k = create ("foo", "bar");
-
-			Assert.AreEqual ("foo", k.Left);
-			Assert.AreEqual ("bar", k.Right);
-		}
-	}
+            Assert.AreEqual("foo", k.Left);
+            Assert.AreEqual("bar", k.Right);
+        }
+    }
 }

@@ -51,13 +51,12 @@ namespace System.Diagnostics.Tracing
                     {
                         hi = i;
                     }
-                }
-                while (lo != hi);
+                } while (lo != hi);
             }
 
             item = null;
 
-        Done:
+            Done:
 
             return item;
         }
@@ -68,7 +67,7 @@ namespace System.Diagnostics.Tracing
             var oldItems = this.items;
             ItemType[] newItems;
 
-        Retry:
+            Retry:
 
             if (oldItems == null)
             {
@@ -96,8 +95,7 @@ namespace System.Diagnostics.Tracing
                     {
                         hi = i;
                     }
-                }
-                while (lo != hi);
+                } while (lo != hi);
 
                 int oldLength = oldItems.Length;
                 newItems = new ItemType[oldLength + 1];
@@ -115,7 +113,7 @@ namespace System.Diagnostics.Tracing
 
             item = newItem;
 
-        Done:
+            Done:
 
             return item;
         }

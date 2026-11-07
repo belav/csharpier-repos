@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -18,7 +18,7 @@ namespace System.Linq.Parallel
 {
     /// <summary>
     /// Represents operators AsOrdered and AsUnordered. In the current implementation, it
-    /// simply turns on preservation globally in the query. 
+    /// simply turns on preservation globally in the query.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     internal sealed class OrderingQueryOperator<TSource> : QueryOperator<TSource>
@@ -45,7 +45,10 @@ namespace System.Linq.Parallel
             return m_child.Open(settings, preferStriping);
         }
 
-        internal override IEnumerator<TSource> GetEnumerator(ParallelMergeOptions? mergeOptions, bool suppressOrderPreservation)
+        internal override IEnumerator<TSource> GetEnumerator(
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrderPreservation
+        )
         {
             ScanQueryOperator<TSource> childAsScan = m_child as ScanQueryOperator<TSource>;
             if (childAsScan != null)
@@ -64,12 +67,11 @@ namespace System.Linq.Parallel
             return m_child.AsSequentialQuery(token);
         }
 
-
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
         // a similar sequential operation (i.e., in LINQ to Objects).
         //
-       
+
         internal override bool LimitsParallelism
         {
             get { return m_child.LimitsParallelism; }

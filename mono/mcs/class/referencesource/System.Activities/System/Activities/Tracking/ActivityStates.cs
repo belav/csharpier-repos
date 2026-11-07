@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 
 namespace System.Activities.Tracking
-{    
+{
     public static class ActivityStates
     {
         public const string Canceled = "Canceled";

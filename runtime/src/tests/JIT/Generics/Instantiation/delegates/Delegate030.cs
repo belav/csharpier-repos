@@ -9,7 +9,7 @@ internal delegate T GenDelegate<T>(T p1, out T p2);
 
 internal struct Foo<T>
 {
-    static public T Function(T i, out T j)
+    public static T Function(T i, out T j)
     {
         j = i;
         return i;
@@ -21,7 +21,8 @@ public class Test_Delegate030
     [Fact]
     public static int TestEntryPoint()
     {
-        int i, j;
+        int i,
+            j;
         GenDelegate<int> MyDelegate = new GenDelegate<int>(Foo<int>.Function);
         i = MyDelegate(10, out j);
 
@@ -35,4 +36,3 @@ public class Test_Delegate030
         return 100;
     }
 }
-

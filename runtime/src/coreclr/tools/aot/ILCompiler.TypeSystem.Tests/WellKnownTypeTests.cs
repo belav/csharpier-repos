@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Xunit;
 
 namespace TypeSystemTests
@@ -84,20 +83,44 @@ namespace TypeSystemTests
         [Fact]
         public void TestPrimitiveSizes()
         {
-            Assert.Equal(1, _context.GetWellKnownType(WellKnownType.Boolean).InstanceFieldSize.AsInt);
+            Assert.Equal(
+                1,
+                _context.GetWellKnownType(WellKnownType.Boolean).InstanceFieldSize.AsInt
+            );
             Assert.Equal(2, _context.GetWellKnownType(WellKnownType.Char).InstanceFieldSize.AsInt);
             Assert.Equal(1, _context.GetWellKnownType(WellKnownType.SByte).InstanceFieldSize.AsInt);
             Assert.Equal(1, _context.GetWellKnownType(WellKnownType.Byte).InstanceFieldSize.AsInt);
             Assert.Equal(2, _context.GetWellKnownType(WellKnownType.Int16).InstanceFieldSize.AsInt);
-            Assert.Equal(2, _context.GetWellKnownType(WellKnownType.UInt16).InstanceFieldSize.AsInt);
+            Assert.Equal(
+                2,
+                _context.GetWellKnownType(WellKnownType.UInt16).InstanceFieldSize.AsInt
+            );
             Assert.Equal(4, _context.GetWellKnownType(WellKnownType.Int32).InstanceFieldSize.AsInt);
-            Assert.Equal(4, _context.GetWellKnownType(WellKnownType.UInt32).InstanceFieldSize.AsInt);
+            Assert.Equal(
+                4,
+                _context.GetWellKnownType(WellKnownType.UInt32).InstanceFieldSize.AsInt
+            );
             Assert.Equal(8, _context.GetWellKnownType(WellKnownType.Int64).InstanceFieldSize.AsInt);
-            Assert.Equal(8, _context.GetWellKnownType(WellKnownType.UInt64).InstanceFieldSize.AsInt);
-            Assert.Equal(_context.Target.PointerSize, _context.GetWellKnownType(WellKnownType.IntPtr).InstanceFieldSize.AsInt);
-            Assert.Equal(_context.Target.PointerSize, _context.GetWellKnownType(WellKnownType.UIntPtr).InstanceFieldSize.AsInt);
-            Assert.Equal(4, _context.GetWellKnownType(WellKnownType.Single).InstanceFieldSize.AsInt);
-            Assert.Equal(8, _context.GetWellKnownType(WellKnownType.Double).InstanceFieldSize.AsInt);
+            Assert.Equal(
+                8,
+                _context.GetWellKnownType(WellKnownType.UInt64).InstanceFieldSize.AsInt
+            );
+            Assert.Equal(
+                _context.Target.PointerSize,
+                _context.GetWellKnownType(WellKnownType.IntPtr).InstanceFieldSize.AsInt
+            );
+            Assert.Equal(
+                _context.Target.PointerSize,
+                _context.GetWellKnownType(WellKnownType.UIntPtr).InstanceFieldSize.AsInt
+            );
+            Assert.Equal(
+                4,
+                _context.GetWellKnownType(WellKnownType.Single).InstanceFieldSize.AsInt
+            );
+            Assert.Equal(
+                8,
+                _context.GetWellKnownType(WellKnownType.Double).InstanceFieldSize.AsInt
+            );
         }
 
         [Fact]

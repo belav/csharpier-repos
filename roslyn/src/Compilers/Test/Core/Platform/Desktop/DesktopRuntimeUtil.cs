@@ -29,7 +29,7 @@ namespace Roslyn.Test.Utilities.Desktop
         /// from a hex-encoded byte stream representing a gzipped assembly image.
         /// </summary>
         /// <param name="image">
-        /// A string containing a hex-encoded byte stream representing a gzipped assembly image. 
+        /// A string containing a hex-encoded byte stream representing a gzipped assembly image.
         /// Hex digits are case-insensitive and can be separated by spaces or newlines.
         /// Cannot be null.
         /// </param>
@@ -40,7 +40,8 @@ namespace Roslyn.Test.Utilities.Desktop
             string image,
             MetadataReferenceProperties properties = default(MetadataReferenceProperties),
             DocumentationProvider documentation = null,
-            string filePath = null)
+            string filePath = null
+        )
         {
             if (image == null)
             {
@@ -53,7 +54,12 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 gzipStream.CopyTo(uncompressed);
                 uncompressed.Position = 0;
-                return MetadataReference.CreateFromStream(uncompressed, properties, documentation, filePath);
+                return MetadataReference.CreateFromStream(
+                    uncompressed,
+                    properties,
+                    documentation,
+                    filePath
+                );
             }
         }
 
@@ -63,7 +69,11 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 var name = Path.GetFileName(file.Path);
                 var appDomain = AppDomain.CurrentDomain;
-                var assembly = appDomain.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Save, Path.GetDirectoryName(file.Path));
+                var assembly = appDomain.DefineDynamicAssembly(
+                    new AssemblyName(name),
+                    AssemblyBuilderAccess.Save,
+                    Path.GetDirectoryName(file.Path)
+                );
                 var module = assembly.DefineDynamicModule(CommonTestBase.GetUniqueName(), name);
                 create(module);
                 assembly.Save(name);
@@ -76,7 +86,11 @@ namespace Roslyn.Test.Utilities.Desktop
         /// <summary>
         /// Loads given array of bytes as an assembly image using <see cref="Assembly.Load(byte[])"/> or <see cref="Assembly.ReflectionOnlyLoad(byte[])"/>.
         /// </summary>
-        internal static Assembly LoadAsAssembly(string moduleName, ImmutableArray<byte> rawAssembly, bool reflectionOnly = false)
+        internal static Assembly LoadAsAssembly(
+            string moduleName,
+            ImmutableArray<byte> rawAssembly,
+            bool reflectionOnly = false
+        )
         {
             Debug.Assert(!rawAssembly.IsDefault);
 
@@ -95,7 +109,10 @@ namespace Roslyn.Test.Utilities.Desktop
             }
             catch (Exception ex)
             {
-                throw new Exception($"Exception loading {moduleName} reflectionOnly:{reflectionOnly}", ex);
+                throw new Exception(
+                    $"Exception loading {moduleName} reflectionOnly:{reflectionOnly}",
+                    ex
+                );
             }
         }
     }

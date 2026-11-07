@@ -40,7 +40,11 @@ namespace System.Security.Cryptography.X509Certificates
             return certPal.DuplicateHandles();
         }
 
-        public static ICertificatePal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -48,11 +52,20 @@ namespace System.Security.Cryptography.X509Certificates
             Exception? openSslException;
             bool ephemeralSpecified = keyStorageFlags.HasFlag(X509KeyStorageFlags.EphemeralKeySet);
 
-            if (TryReadX509Der(rawData, out cert) ||
-                TryReadX509Pem(rawData, out cert) ||
-                OpenSslPkcsFormatReader.TryReadPkcs7Der(rawData, out cert) ||
-                OpenSslPkcsFormatReader.TryReadPkcs7Pem(rawData, out cert) ||
-                OpenSslPkcsFormatReader.TryReadPkcs12(rawData, password, ephemeralSpecified, readingFromFile: false, out cert, out openSslException))
+            if (
+                TryReadX509Der(rawData, out cert)
+                || TryReadX509Pem(rawData, out cert)
+                || OpenSslPkcsFormatReader.TryReadPkcs7Der(rawData, out cert)
+                || OpenSslPkcsFormatReader.TryReadPkcs7Pem(rawData, out cert)
+                || OpenSslPkcsFormatReader.TryReadPkcs12(
+                    rawData,
+                    password,
+                    ephemeralSpecified,
+                    readingFromFile: false,
+                    out cert,
+                    out openSslException
+                )
+            )
             {
                 if (cert == null)
                 {
@@ -68,7 +81,11 @@ namespace System.Security.Cryptography.X509Certificates
             throw openSslException;
         }
 
-        public static ICertificatePal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             ICertificatePal? pal;
             bool ephemeralSpecified = keyStorageFlags.HasFlag(X509KeyStorageFlags.EphemeralKeySet);
@@ -89,7 +106,8 @@ namespace System.Security.Cryptography.X509Certificates
                     ephemeralSpecified,
                     readingFromFile: true,
                     out pal,
-                    out Exception? exception);
+                    out Exception? exception
+                );
 
                 if (exception != null)
                 {
@@ -151,11 +169,15 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static bool TryReadX509Der(ReadOnlySpan<byte> rawData, [NotNullWhen(true)] out ICertificatePal? certPal)
+        internal static bool TryReadX509Der(
+            ReadOnlySpan<byte> rawData,
+            [NotNullWhen(true)] out ICertificatePal? certPal
+        )
         {
             SafeX509Handle certHandle = Interop.Crypto.DecodeX509(
                 ref MemoryMarshal.GetReference(rawData),
-                rawData.Length);
+                rawData.Length
+            );
 
             if (certHandle.IsInvalid)
             {
@@ -169,7 +191,10 @@ namespace System.Security.Cryptography.X509Certificates
             return true;
         }
 
-        internal static bool TryReadX509Pem(SafeBioHandle bio, [NotNullWhen(true)] out ICertificatePal? certPal)
+        internal static bool TryReadX509Pem(
+            SafeBioHandle bio,
+            [NotNullWhen(true)] out ICertificatePal? certPal
+        )
         {
             SafeX509Handle cert = Interop.Crypto.PemReadX509FromBioAux(bio);
 
@@ -185,7 +210,10 @@ namespace System.Security.Cryptography.X509Certificates
             return true;
         }
 
-        internal static bool TryReadX509PemNoAux(SafeBioHandle bio, [NotNullWhen(true)] out ICertificatePal? certPal)
+        internal static bool TryReadX509PemNoAux(
+            SafeBioHandle bio,
+            [NotNullWhen(true)] out ICertificatePal? certPal
+        )
         {
             SafeX509Handle cert = Interop.Crypto.PemReadX509FromBio(bio);
 
@@ -201,7 +229,10 @@ namespace System.Security.Cryptography.X509Certificates
             return true;
         }
 
-        internal static bool TryReadX509Pem(ReadOnlySpan<byte> rawData, [NotNullWhen(true)] out ICertificatePal? certPal)
+        internal static bool TryReadX509Pem(
+            ReadOnlySpan<byte> rawData,
+            [NotNullWhen(true)] out ICertificatePal? certPal
+        )
         {
             using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
             {
@@ -216,7 +247,10 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static bool TryReadX509Der(SafeBioHandle bio, [NotNullWhen(true)] out ICertificatePal? fromBio)
+        internal static bool TryReadX509Der(
+            SafeBioHandle bio,
+            [NotNullWhen(true)] out ICertificatePal? fromBio
+        )
         {
             SafeX509Handle cert = Interop.Crypto.ReadX509AsDerFromBio(bio);
 
@@ -268,7 +302,8 @@ namespace System.Security.Cryptography.X509Certificates
                 // IssuerName is mutable to callers in X509Certificate. We want to be
                 // able to get the issuer even if IssuerName has been mutated, so we
                 // don't use it here.
-                return _issuer ??= UseCertInteriorData(static cert => {
+                return _issuer ??= UseCertInteriorData(static cert =>
+                {
                     return Interop.Crypto.LoadX500Name(Interop.Crypto.X509GetIssuerName(cert)).Name;
                 });
             }
@@ -281,8 +316,11 @@ namespace System.Security.Cryptography.X509Certificates
                 // SubjectName is mutable to callers in X509Certificate. We want to be
                 // able to get the subject even if SubjectName has been mutated, so we
                 // don't use it here.
-                return _subject ??= UseCertInteriorData(static cert => {
-                    return Interop.Crypto.LoadX500Name(Interop.Crypto.X509GetSubjectName(cert)).Name;
+                return _subject ??= UseCertInteriorData(static cert =>
+                {
+                    return Interop
+                        .Crypto.LoadX500Name(Interop.Crypto.X509GetSubjectName(cert))
+                        .Name;
                 });
             }
         }
@@ -293,17 +331,15 @@ namespace System.Security.Cryptography.X509Certificates
 
         public byte[] Thumbprint
         {
-            get
-            {
-                return Interop.Crypto.GetX509Thumbprint(_cert);
-            }
+            get { return Interop.Crypto.GetX509Thumbprint(_cert); }
         }
 
         public string KeyAlgorithm
         {
             get
             {
-                return UseCertInteriorData(static cert => {
+                return UseCertInteriorData(static cert =>
+                {
                     IntPtr oidPtr = Interop.Crypto.GetX509PublicKeyAlgorithm(cert);
                     return Interop.Crypto.GetOidValue(oidPtr);
                 });
@@ -312,17 +348,15 @@ namespace System.Security.Cryptography.X509Certificates
 
         public byte[] KeyAlgorithmParameters
         {
-            get
-            {
-                return Interop.Crypto.GetX509PublicKeyParameterBytes(_cert);
-            }
+            get { return Interop.Crypto.GetX509PublicKeyParameterBytes(_cert); }
         }
 
         public byte[] PublicKeyValue
         {
             get
             {
-                return UseCertInteriorData(static cert => {
+                return UseCertInteriorData(static cert =>
+                {
                     IntPtr keyBytesPtr = Interop.Crypto.GetX509PublicKeyBytes(cert);
                     return Interop.Crypto.GetAsn1StringBytes(keyBytesPtr);
                 });
@@ -333,7 +367,11 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                using (SafeSharedAsn1IntegerHandle serialNumber = Interop.Crypto.X509GetSerialNumber(_cert))
+                using (
+                    SafeSharedAsn1IntegerHandle serialNumber = Interop.Crypto.X509GetSerialNumber(
+                        _cert
+                    )
+                )
                 {
                     return Interop.Crypto.GetAsn1IntegerBytes(serialNumber);
                 }
@@ -344,7 +382,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                return UseCertInteriorData(static cert => {
+                return UseCertInteriorData(static cert =>
+                {
                     IntPtr oidPtr = Interop.Crypto.GetX509SignatureAlgorithm(cert);
                     return Interop.Crypto.GetOidValue(oidPtr);
                 });
@@ -356,7 +395,8 @@ namespace System.Security.Cryptography.X509Certificates
             get
             {
 
-                return UseCertInteriorData(static cert => {
+                return UseCertInteriorData(static cert =>
+                {
                     return ExtractValidityDateTime(Interop.Crypto.GetX509NotAfter(cert));
                 });
             }
@@ -366,7 +406,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                return UseCertInteriorData(static cert => {
+                return UseCertInteriorData(static cert =>
+                {
                     return ExtractValidityDateTime(Interop.Crypto.GetX509NotBefore(cert));
                 });
             }
@@ -379,7 +420,8 @@ namespace System.Security.Cryptography.X509Certificates
                 return Interop.Crypto.OpenSslEncode(
                     Interop.Crypto.GetX509DerSize,
                     Interop.Crypto.EncodeX509,
-                    _cert);
+                    _cert
+                );
             }
         }
 
@@ -406,7 +448,8 @@ namespace System.Security.Cryptography.X509Certificates
             set
             {
                 throw new PlatformNotSupportedException(
-                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, "Archived"));
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, "Archived")
+                );
             }
         }
 
@@ -416,7 +459,8 @@ namespace System.Security.Cryptography.X509Certificates
             set
             {
                 throw new PlatformNotSupportedException(
-                  SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, "FriendlyName"));
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, "FriendlyName")
+                );
             }
         }
 
@@ -424,7 +468,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                return _subjectName ??= UseCertInteriorData(static cert => {
+                return _subjectName ??= UseCertInteriorData(static cert =>
+                {
                     return Interop.Crypto.LoadX500Name(Interop.Crypto.X509GetSubjectName(cert));
                 });
             }
@@ -434,7 +479,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                return _issuerName ??= UseCertInteriorData(static cert => {
+                return _issuerName ??= UseCertInteriorData(static cert =>
+                {
                     return Interop.Crypto.LoadX500Name(Interop.Crypto.X509GetIssuerName(cert));
                 });
             }
@@ -442,7 +488,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         public PolicyData GetPolicyData()
         {
-            return UseCertInteriorData(static cert => {
+            return UseCertInteriorData(static cert =>
+            {
                 PolicyData policyData = default;
 
                 int extensionCount = Interop.Crypto.X509GetExtCount(cert);
@@ -462,22 +509,31 @@ namespace System.Security.Cryptography.X509Certificates
                     switch (oidValue)
                     {
                         case Oids.ApplicationCertPolicies:
-                            policyData.ApplicationCertPolicies = Interop.Crypto.GetAsn1StringBytes(dataPtr);
+                            policyData.ApplicationCertPolicies = Interop.Crypto.GetAsn1StringBytes(
+                                dataPtr
+                            );
                             break;
                         case Oids.CertPolicies:
                             policyData.CertPolicies = Interop.Crypto.GetAsn1StringBytes(dataPtr);
                             break;
                         case Oids.CertPolicyMappings:
-                            policyData.CertPolicyMappings = Interop.Crypto.GetAsn1StringBytes(dataPtr);
+                            policyData.CertPolicyMappings = Interop.Crypto.GetAsn1StringBytes(
+                                dataPtr
+                            );
                             break;
                         case Oids.CertPolicyConstraints:
-                        policyData.CertPolicyConstraints = Interop.Crypto.GetAsn1StringBytes(dataPtr);
-                        break;
+                            policyData.CertPolicyConstraints = Interop.Crypto.GetAsn1StringBytes(
+                                dataPtr
+                            );
+                            break;
                         case Oids.EnhancedKeyUsage:
-                            policyData.EnhancedKeyUsage = Interop.Crypto.GetAsn1StringBytes(dataPtr);
+                            policyData.EnhancedKeyUsage = Interop.Crypto.GetAsn1StringBytes(
+                                dataPtr
+                            );
                             break;
                         case Oids.InhibitAnyPolicyExtension:
-                            policyData.InhibitAnyPolicyExtension = Interop.Crypto.GetAsn1StringBytes(dataPtr);
+                            policyData.InhibitAnyPolicyExtension =
+                                Interop.Crypto.GetAsn1StringBytes(dataPtr);
                             break;
                     }
                 }
@@ -490,7 +546,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                return UseCertInteriorData(static cert => {
+                return UseCertInteriorData(static cert =>
+                {
                     int extensionCount = Interop.Crypto.X509GetExtCount(cert);
                     X509Extension[] extensions = new X509Extension[extensionCount];
 
@@ -526,7 +583,12 @@ namespace System.Security.Cryptography.X509Certificates
         {
             int nid = Interop.Crypto.ResolveRequiredNid(oidValue);
 
-            using (SafeSharedAsn1OctetStringHandle data = Interop.Crypto.X509FindExtensionData(cert, nid))
+            using (
+                SafeSharedAsn1OctetStringHandle data = Interop.Crypto.X509FindExtensionData(
+                    cert,
+                    nid
+                )
+            )
             {
                 if (data.IsInvalid)
                 {
@@ -701,7 +763,13 @@ namespace System.Security.Cryptography.X509Certificates
 
         public string GetNameInfo(X509NameType nameType, bool forIssuer)
         {
-            using (SafeBioHandle bioHandle = Interop.Crypto.GetX509NameInfo(_cert, (int)nameType, forIssuer))
+            using (
+                SafeBioHandle bioHandle = Interop.Crypto.GetX509NameInfo(
+                    _cert,
+                    (int)nameType,
+                    forIssuer
+                )
+            )
             {
                 if (bioHandle.IsInvalid)
                 {
@@ -726,8 +794,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                     current = current.Slice(read);
                     total += read;
-                }
-                while (read > 0);
+                } while (read > 0);
 
                 return Encoding.UTF8.GetString(buffer.Slice(0, total));
             }
@@ -792,10 +859,9 @@ namespace System.Security.Cryptography.X509Certificates
             Debug.Assert(bytes != null);
             Debug.Assert(
                 bytes.Length == 13 || bytes.Length == 15,
-                "DateTime value should be UTCTime (13 bytes) or GeneralizedTime (15 bytes)");
-            Debug.Assert(
-                bytes[bytes.Length - 1] == 'Z',
-                "DateTime value should end with Z marker");
+                "DateTime value should be UTCTime (13 bytes) or GeneralizedTime (15 bytes)"
+            );
+            Debug.Assert(bytes[bytes.Length - 1] == 'Z', "DateTime value should end with Z marker");
 
             if (bytes != null && bytes.Length is 13 or 15 && bytes[^1] == 'Z')
             {
@@ -804,8 +870,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (s_validityDateTimeFormatInfo == null)
                 {
-                    DateTimeFormatInfo validityFormatInfo =
-                        (DateTimeFormatInfo)CultureInfo.InvariantCulture.DateTimeFormat.Clone();
+                    DateTimeFormatInfo validityFormatInfo = (DateTimeFormatInfo)
+                        CultureInfo.InvariantCulture.DateTimeFormat.Clone();
 
                     // Two-digit years are 1950-2049
                     validityFormatInfo.Calendar.TwoDigitYearMax = 2049;
@@ -813,12 +879,15 @@ namespace System.Security.Cryptography.X509Certificates
                     s_validityDateTimeFormatInfo = validityFormatInfo;
                 }
 
-                if (DateTime.TryParseExact(
-                    dateString,
-                    bytes.Length == 13 ? "yyMMddHHmmss'Z'" : "yyyyMMddHHmmss'Z'",
-                    s_validityDateTimeFormatInfo,
-                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
-                    out DateTime time))
+                if (
+                    DateTime.TryParseExact(
+                        dateString,
+                        bytes.Length == 13 ? "yyMMddHHmmss'Z'" : "yyyyMMddHHmmss'Z'",
+                        s_validityDateTimeFormatInfo,
+                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                        out DateTime time
+                    )
+                )
                 {
                     return time.ToLocalTime();
                 }

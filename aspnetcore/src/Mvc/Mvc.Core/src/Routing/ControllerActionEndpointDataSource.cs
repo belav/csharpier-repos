@@ -170,15 +170,12 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
             order ??= _orderSequence.GetNext();
 
             endpoints
-                .Map(
-                    pattern,
-                    context =>
-                    {
-                        throw new InvalidOperationException(
-                            "This endpoint is not expected to be executed directly."
-                        );
-                    }
-                )
+                .Map(pattern, context =>
+                {
+                    throw new InvalidOperationException(
+                        "This endpoint is not expected to be executed directly."
+                    );
+                })
                 .Add(b =>
                 {
                     ((RouteEndpointBuilder)b).Order = order.Value;

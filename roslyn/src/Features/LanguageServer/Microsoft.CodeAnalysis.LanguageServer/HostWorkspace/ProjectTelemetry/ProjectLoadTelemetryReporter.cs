@@ -15,9 +15,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace.ProjectTelemetry;
 [Export, Shared]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, ServerConfiguration serverConfiguration)
+internal class ProjectLoadTelemetryReporter(
+    ILoggerFactory loggerFactory,
+    ServerConfiguration serverConfiguration
+)
 {
-    private static readonly string s_hashedSessionId = VsTfmAndFileExtHashingAlgorithm.HashInput(Guid.NewGuid().ToString());
+    private static readonly string s_hashedSessionId = VsTfmAndFileExtHashingAlgorithm.HashInput(
+        Guid.NewGuid().ToString()
+    );
 
     private readonly ILogger _logger = loggerFactory.CreateLogger<ProjectLoadTelemetryReporter>();
 
@@ -26,7 +31,14 @@ internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, Server
     /// so that we are able to compare data accurately.
     /// See https://github.com/OmniSharp/omnisharp-roslyn/blob/b2e64c6006beed49460f063117793f42ab2a8a5c/src/OmniSharp.MSBuild/ProjectLoadListener.cs#L36
     /// </summary>
-    public async Task ReportProjectLoadTelemetryAsync(Dictionary<ProjectFileInfo, (ImmutableArray<CommandLineReference> MetadataReferences, OutputKind OutputKind)> projectFileInfos, ProjectToLoad projectToLoad, CancellationToken cancellationToken)
+    public async Task ReportProjectLoadTelemetryAsync(
+        Dictionary<
+            ProjectFileInfo,
+            (ImmutableArray<CommandLineReference> MetadataReferences, OutputKind OutputKind)
+        > projectFileInfos,
+        ProjectToLoad projectToLoad,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -70,7 +82,8 @@ internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, Server
                 References: hashedReferences,
                 FileExtensions: fileCounts.Keys,
                 FileCounts: fileCounts.Values,
-                SdkStyleProject: isSdkStyleProject);
+                SdkStyleProject: isSdkStyleProject
+            );
 
             await ReportEventAsync(projectEvent, cancellationToken);
         }
@@ -81,20 +94,30 @@ internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, Server
         }
     }
 
-    private static async Task ReportEventAsync(ProjectLoadTelemetryEvent telemetryEvent, CancellationToken cancellationToken)
+    private static async Task ReportEventAsync(
+        ProjectLoadTelemetryEvent telemetryEvent,
+        CancellationToken cancellationToken
+    )
     {
         var instance = LanguageServerHost.Instance;
         Contract.ThrowIfNull(instance, nameof(instance));
-        var clientLanguageServerManager = instance.GetRequiredLspService<IClientLanguageServerManager>();
-        await clientLanguageServerManager.SendNotificationAsync("workspace/projectConfigurationTelemetry", telemetryEvent, cancellationToken);
+        var clientLanguageServerManager =
+            instance.GetRequiredLspService<IClientLanguageServerManager>();
+        await clientLanguageServerManager.SendNotificationAsync(
+            "workspace/projectConfigurationTelemetry",
+            telemetryEvent,
+            cancellationToken
+        );
     }
 
-    private static ImmutableDictionary<string, int> GetUniqueHashedFileExtensionsAndCounts(ProjectFileInfo projectFileInfo)
+    private static ImmutableDictionary<string, int> GetUniqueHashedFileExtensionsAndCounts(
+        ProjectFileInfo projectFileInfo
+    )
     {
         // Similar to O#, we report the content files + any non-generated source files.
         var contentFiles = projectFileInfo.ContentFilePaths;
-        var sourceFiles = projectFileInfo.Documents
-            .Concat(projectFileInfo.AdditionalDocuments)
+        var sourceFiles = projectFileInfo
+            .Documents.Concat(projectFileInfo.AdditionalDocuments)
             .Concat(projectFileInfo.AnalyzerConfigDocuments)
             .Where(d => !d.IsGenerated)
             .SelectAsArray(d => d.FilePath);
@@ -106,10 +129,15 @@ internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, Server
             fileCounts[fileExtension] = fileCounts.GetOrAdd(fileExtension, 0) + 1;
         }
 
-        return fileCounts.ToImmutableDictionary(kvp => VsTfmAndFileExtHashingAlgorithm.HashInput(kvp.Key), kvp => kvp.Value);
+        return fileCounts.ToImmutableDictionary(
+            kvp => VsTfmAndFileExtHashingAlgorithm.HashInput(kvp.Key),
+            kvp => kvp.Value
+        );
     }
 
-    private static ImmutableArray<string> GetHashedReferences(ImmutableArray<CommandLineReference> metadataReferences)
+    private static ImmutableArray<string> GetHashedReferences(
+        ImmutableArray<CommandLineReference> metadataReferences
+    )
     {
         return metadataReferences.SelectAsArray(GetHashedReferenceName);
 
@@ -130,7 +158,9 @@ internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, Server
         {
             // The projectId is formatted as {GUID}.
             // In order to match with O#, we need just the guid.
-            var projectGuid = projectToLoad.ProjectGuid.Replace("{", string.Empty).Replace("}", string.Empty);
+            var projectGuid = projectToLoad
+                .ProjectGuid.Replace("{", string.Empty)
+                .Replace("}", string.Empty);
 
             // No need to actually hash the project guid.
             return projectGuid;
@@ -138,11 +168,18 @@ internal class ProjectLoadTelemetryReporter(ILoggerFactory loggerFactory, Server
 
         var content = await File.ReadAllTextAsync(projectToLoad.Path);
         // This should exactly match O# to ensure we get the same hashes.
-        return VsReferenceHashingAlgorithm.HashInput($"Filename: {Path.GetFileName(projectToLoad.Path)}\n{content}");
+        return VsReferenceHashingAlgorithm.HashInput(
+            $"Filename: {Path.GetFileName(projectToLoad.Path)}\n{content}"
+        );
     }
 
-    private static ImmutableArray<string> GetTargetFrameworks(IEnumerable<ProjectFileInfo> projectFileInfos)
+    private static ImmutableArray<string> GetTargetFrameworks(
+        IEnumerable<ProjectFileInfo> projectFileInfos
+    )
     {
-        return projectFileInfos.Select(p => p.TargetFramework?.ToLower()).WhereNotNull().ToImmutableArray();
+        return projectFileInfos
+            .Select(p => p.TargetFramework?.ToLower())
+            .WhereNotNull()
+            .ToImmutableArray();
     }
 }

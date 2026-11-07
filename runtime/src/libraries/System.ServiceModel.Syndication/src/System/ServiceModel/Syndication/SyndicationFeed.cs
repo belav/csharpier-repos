@@ -13,7 +13,16 @@ namespace System.ServiceModel.Syndication
     public class SyndicationFeed : IExtensibleSyndicationObject
     {
         private static readonly HashSet<string> s_acceptedDays = new HashSet<string>(
-            new string[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" },
+            new string[]
+            {
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday",
+            },
             StringComparer.OrdinalIgnoreCase
         );
 
@@ -25,30 +34,40 @@ namespace System.ServiceModel.Syndication
         private DateTimeOffset _lastUpdatedTime;
         private Collection<SyndicationLink> _links;
 
-        public SyndicationFeed() : this((IEnumerable<SyndicationItem>)null)
-        {
-        }
+        public SyndicationFeed()
+            : this((IEnumerable<SyndicationItem>)null) { }
 
-        public SyndicationFeed(IEnumerable<SyndicationItem> items) : this(null, null, null, items)
-        {
-        }
+        public SyndicationFeed(IEnumerable<SyndicationItem> items)
+            : this(null, null, null, items) { }
 
         public SyndicationFeed(string title, string description, Uri feedAlternateLink)
-            : this(title, description, feedAlternateLink, null)
-        {
-        }
+            : this(title, description, feedAlternateLink, null) { }
 
-        public SyndicationFeed(string title, string description, Uri feedAlternateLink, IEnumerable<SyndicationItem> items)
-            : this(title, description, feedAlternateLink, null, DateTimeOffset.MinValue, items)
-        {
-        }
+        public SyndicationFeed(
+            string title,
+            string description,
+            Uri feedAlternateLink,
+            IEnumerable<SyndicationItem> items
+        )
+            : this(title, description, feedAlternateLink, null, DateTimeOffset.MinValue, items) { }
 
-        public SyndicationFeed(string title, string description, Uri feedAlternateLink, string id, DateTimeOffset lastUpdatedTime)
-            : this(title, description, feedAlternateLink, id, lastUpdatedTime, null)
-        {
-        }
+        public SyndicationFeed(
+            string title,
+            string description,
+            Uri feedAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
+            : this(title, description, feedAlternateLink, id, lastUpdatedTime, null) { }
 
-        public SyndicationFeed(string title, string description, Uri feedAlternateLink, string id, DateTimeOffset lastUpdatedTime, IEnumerable<SyndicationItem> items)
+        public SyndicationFeed(
+            string title,
+            string description,
+            Uri feedAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime,
+            IEnumerable<SyndicationItem> items
+        )
         {
             if (title != null)
             {
@@ -108,13 +127,13 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Collection<SyndicationPerson> Authors
         {
             get => _authors ??= new NullNotAllowedCollection<SyndicationPerson>();
         }
-
 
         public Uri BaseUri { get; set; }
 
@@ -132,7 +151,8 @@ namespace System.ServiceModel.Syndication
 
         public TextSyndicationContent Description { get; set; }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public string Generator { get; set; }
 
@@ -190,9 +210,20 @@ namespace System.ServiceModel.Syndication
             get => InternalTimeToLive ??= TryReadTimeToLiveFromExtension(ElementExtensions);
             set
             {
-                if (value.HasValue && (value.Value.Milliseconds != 0 || value.Value.Seconds != 0 || value.Value.TotalMinutes < 0))
+                if (
+                    value.HasValue
+                    && (
+                        value.Value.Milliseconds != 0
+                        || value.Value.Seconds != 0
+                        || value.Value.TotalMinutes < 0
+                    )
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value.Value, SR.InvalidTimeToLiveValue);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value.Value,
+                        SR.InvalidTimeToLiveValue
+                    );
                 }
 
                 InternalTimeToLive = value;
@@ -241,25 +272,38 @@ namespace System.ServiceModel.Syndication
             set => InternalTextInput = value;
         }
 
-        private SyndicationLink TryReadDocumentationFromExtension(SyndicationElementExtensionCollection elementExtensions)
+        private SyndicationLink TryReadDocumentationFromExtension(
+            SyndicationElementExtensionCollection elementExtensions
+        )
         {
-            SyndicationElementExtension documentationElement = elementExtensions
-                                      .FirstOrDefault(e => e.OuterName == Rss20Constants.DocumentationTag && e.OuterNamespace == Rss20Constants.Rss20Namespace);
+            SyndicationElementExtension documentationElement = elementExtensions.FirstOrDefault(e =>
+                e.OuterName == Rss20Constants.DocumentationTag
+                && e.OuterNamespace == Rss20Constants.Rss20Namespace
+            );
 
             if (documentationElement == null)
                 return null;
 
             using (XmlReader reader = documentationElement.GetReader())
             {
-                SyndicationLink documentation = Rss20FeedFormatter.ReadAlternateLink(reader, BaseUri, SyndicationFeedFormatter.DefaultUriParser, preserveAttributeExtensions: true);
+                SyndicationLink documentation = Rss20FeedFormatter.ReadAlternateLink(
+                    reader,
+                    BaseUri,
+                    SyndicationFeedFormatter.DefaultUriParser,
+                    preserveAttributeExtensions: true
+                );
                 return documentation;
             }
         }
 
-        private static TimeSpan? TryReadTimeToLiveFromExtension(SyndicationElementExtensionCollection elementExtensions)
+        private static TimeSpan? TryReadTimeToLiveFromExtension(
+            SyndicationElementExtensionCollection elementExtensions
+        )
         {
-            SyndicationElementExtension timeToLiveElement = elementExtensions
-                                      .FirstOrDefault(e => e.OuterName == Rss20Constants.TimeToLiveTag && e.OuterNamespace == Rss20Constants.Rss20Namespace);
+            SyndicationElementExtension timeToLiveElement = elementExtensions.FirstOrDefault(e =>
+                e.OuterName == Rss20Constants.TimeToLiveTag
+                && e.OuterNamespace == Rss20Constants.Rss20Namespace
+            );
 
             if (timeToLiveElement == null)
                 return null;
@@ -285,10 +329,15 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        private static void TryReadSkipHoursFromExtension(SyndicationElementExtensionCollection elementExtensions, Collection<int> skipHours)
+        private static void TryReadSkipHoursFromExtension(
+            SyndicationElementExtensionCollection elementExtensions,
+            Collection<int> skipHours
+        )
         {
-            SyndicationElementExtension skipHoursElement = elementExtensions
-                                      .FirstOrDefault(e => e.OuterName == Rss20Constants.SkipHoursTag && e.OuterNamespace == Rss20Constants.Rss20Namespace);
+            SyndicationElementExtension skipHoursElement = elementExtensions.FirstOrDefault(e =>
+                e.OuterName == Rss20Constants.SkipHoursTag
+                && e.OuterNamespace == Rss20Constants.Rss20Namespace
+            );
 
             if (skipHoursElement == null)
                 return;
@@ -302,7 +351,12 @@ namespace System.ServiceModel.Syndication
                     if (reader.LocalName == Rss20Constants.HourTag)
                     {
                         string value = reader.ReadElementString();
-                        bool parsed = int.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour);
+                        bool parsed = int.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out int hour
+                        );
 
                         if (!parsed || (hour < 0 || hour > 23))
                         {
@@ -319,10 +373,15 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        private static void TryReadSkipDaysFromExtension(SyndicationElementExtensionCollection elementExtensions, Collection<string> skipDays)
+        private static void TryReadSkipDaysFromExtension(
+            SyndicationElementExtensionCollection elementExtensions,
+            Collection<string> skipDays
+        )
         {
-            SyndicationElementExtension skipDaysElement = elementExtensions
-                                      .FirstOrDefault(e => e.OuterName == Rss20Constants.SkipDaysTag && e.OuterNamespace == Rss20Constants.Rss20Namespace);
+            SyndicationElementExtension skipDaysElement = elementExtensions.FirstOrDefault(e =>
+                e.OuterName == Rss20Constants.SkipDaysTag
+                && e.OuterNamespace == Rss20Constants.Rss20Namespace
+            );
 
             if (skipDaysElement == null)
                 return;
@@ -355,10 +414,14 @@ namespace System.ServiceModel.Syndication
 
         private static bool IsValidDay(string day) => s_acceptedDays.Contains(day);
 
-        private static SyndicationTextInput TryReadTextInputFromExtension(SyndicationElementExtensionCollection elementExtensions)
+        private static SyndicationTextInput TryReadTextInputFromExtension(
+            SyndicationElementExtensionCollection elementExtensions
+        )
         {
-            SyndicationElementExtension textInputElement = elementExtensions
-                                      .FirstOrDefault(e => e.OuterName == Rss20Constants.TextInputTag && e.OuterNamespace == Rss20Constants.Rss20Namespace);
+            SyndicationElementExtension textInputElement = elementExtensions.FirstOrDefault(e =>
+                e.OuterName == Rss20Constants.TextInputTag
+                && e.OuterNamespace == Rss20Constants.Rss20Namespace
+            );
 
             if (textInputElement == null)
                 return null;
@@ -383,7 +446,9 @@ namespace System.ServiceModel.Syndication
                             break;
 
                         case Rss20Constants.LinkTag:
-                            textInput.Link = new SyndicationLink(new Uri(value, UriKind.RelativeOrAbsolute));
+                            textInput.Link = new SyndicationLink(
+                                new Uri(value, UriKind.RelativeOrAbsolute)
+                            );
                             break;
 
                         case Rss20Constants.NameTag:
@@ -404,32 +469,40 @@ namespace System.ServiceModel.Syndication
         private static bool IsValidTextInput(SyndicationTextInput textInput)
         {
             // All textInput items are required, we check if all items were instantiated.
-            return textInput.Description != null && textInput.Title != null && textInput.Name != null && textInput.Link != null;
+            return textInput.Description != null
+                && textInput.Title != null
+                && textInput.Name != null
+                && textInput.Link != null;
         }
 
         public static SyndicationFeed Load(XmlReader reader) => Load<SyndicationFeed>(reader);
 
-        public static TSyndicationFeed Load<TSyndicationFeed>(XmlReader reader) where TSyndicationFeed : SyndicationFeed, new()
+        public static TSyndicationFeed Load<TSyndicationFeed>(XmlReader reader)
+            where TSyndicationFeed : SyndicationFeed, new()
         {
             if (reader is null)
             {
                 throw new ArgumentNullException(nameof(reader));
             }
 
-            Atom10FeedFormatter<TSyndicationFeed> atomSerializer = new Atom10FeedFormatter<TSyndicationFeed>();
+            Atom10FeedFormatter<TSyndicationFeed> atomSerializer =
+                new Atom10FeedFormatter<TSyndicationFeed>();
             if (atomSerializer.CanRead(reader))
             {
                 atomSerializer.ReadFrom(reader);
                 return atomSerializer.Feed as TSyndicationFeed;
             }
-            Rss20FeedFormatter<TSyndicationFeed> rssSerializer = new Rss20FeedFormatter<TSyndicationFeed>();
+            Rss20FeedFormatter<TSyndicationFeed> rssSerializer =
+                new Rss20FeedFormatter<TSyndicationFeed>();
             if (rssSerializer.CanRead(reader))
             {
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Feed as TSyndicationFeed;
             }
 
-            throw new XmlException(SR.Format(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI));
+            throw new XmlException(
+                SR.Format(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
+            );
         }
 
         public virtual SyndicationFeed Clone(bool cloneItems)
@@ -476,7 +549,12 @@ namespace System.ServiceModel.Syndication
             return new SyndicationPerson();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -522,7 +600,10 @@ namespace System.ServiceModel.Syndication
             return false;
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

@@ -6,6 +6,6 @@ namespace System.Security.Cryptography.Cose
     internal enum KeyType
     {
         ECDsa,
-        RSA
+        RSA,
     }
 }

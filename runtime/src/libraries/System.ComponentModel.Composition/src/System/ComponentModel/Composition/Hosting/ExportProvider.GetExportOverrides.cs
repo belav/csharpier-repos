@@ -258,12 +258,22 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
-        public IEnumerable<Lazy<object, object>> GetExports(Type type, Type? metadataViewType, string? contractName)
+        public IEnumerable<Lazy<object, object>> GetExports(
+            Type type,
+            Type? metadataViewType,
+            string? contractName
+        )
         {
-            IEnumerable<Export> exports = GetExportsCore(type, metadataViewType, contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = GetExportsCore(
+                type,
+                metadataViewType,
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
             Collection<Lazy<object, object>> result = new Collection<Lazy<object, object>>();
 
-            Func<Export, Lazy<object, object>> typedExportFactory = ExportServices.CreateSemiStronglyTypedLazyFactory(type, metadataViewType);
+            Func<Export, Lazy<object, object>> typedExportFactory =
+                ExportServices.CreateSemiStronglyTypedLazyFactory(type, metadataViewType);
             foreach (Export export in exports)
             {
                 result.Add(typedExportFactory.Invoke(export));
@@ -425,7 +435,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
-        public IEnumerable<Lazy<T, TMetadataView>> GetExports<T, TMetadataView>(string? contractName)
+        public IEnumerable<Lazy<T, TMetadataView>> GetExports<T, TMetadataView>(
+            string? contractName
+        )
         {
             return GetExportsCore<T, TMetadataView>(contractName);
         }
@@ -710,7 +722,12 @@ namespace System.ComponentModel.Composition.Hosting
 
         private Collection<T> GetExportedValuesCore<T>(string? contractName)
         {
-            IEnumerable<Export> exports = GetExportsCore(typeof(T), (Type?)null, contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = GetExportsCore(
+                typeof(T),
+                (Type?)null,
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
 
             Collection<T> result = new Collection<T>();
             foreach (Export export in exports)
@@ -727,14 +744,20 @@ namespace System.ComponentModel.Composition.Hosting
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
-            Export? export = GetExportsCore(typeof(T), (Type?)null, contractName, cardinality).SingleOrDefault();
+            Export? export = GetExportsCore(typeof(T), (Type?)null, contractName, cardinality)
+                .SingleOrDefault();
 
             return (export != null) ? ExportServices.GetCastedExportedValue<T>(export) : default;
         }
 
         private Collection<Lazy<T>> GetExportsCore<T>(string? contractName)
         {
-            IEnumerable<Export> exports = GetExportsCore(typeof(T), (Type?)null, contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = GetExportsCore(
+                typeof(T),
+                (Type?)null,
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
 
             Collection<Lazy<T>> result = new Collection<Lazy<T>>();
             foreach (Export export in exports)
@@ -744,9 +767,16 @@ namespace System.ComponentModel.Composition.Hosting
             return result;
         }
 
-        private Collection<Lazy<T, TMetadataView>> GetExportsCore<T, TMetadataView>(string? contractName)
+        private Collection<Lazy<T, TMetadataView>> GetExportsCore<T, TMetadataView>(
+            string? contractName
+        )
         {
-            IEnumerable<Export> exports = GetExportsCore(typeof(T), typeof(TMetadataView), contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = GetExportsCore(
+                typeof(T),
+                typeof(TMetadataView),
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
 
             Collection<Lazy<T, TMetadataView>> result = new Collection<Lazy<T, TMetadataView>>();
             foreach (Export export in exports)
@@ -758,19 +788,38 @@ namespace System.ComponentModel.Composition.Hosting
 
         private Lazy<T, TMetadataView>? GetExportCore<T, TMetadataView>(string? contractName)
         {
-            Export? export = GetExportsCore(typeof(T), typeof(TMetadataView), contractName, ImportCardinality.ExactlyOne).SingleOrDefault();
+            Export? export = GetExportsCore(
+                    typeof(T),
+                    typeof(TMetadataView),
+                    contractName,
+                    ImportCardinality.ExactlyOne
+                )
+                .SingleOrDefault();
 
-            return (export != null) ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export) : null;
+            return (export != null)
+                ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export)
+                : null;
         }
 
         private Lazy<T>? GetExportCore<T>(string? contractName)
         {
-            Export? export = GetExportsCore(typeof(T), null, contractName, ImportCardinality.ExactlyOne).SingleOrDefault();
+            Export? export = GetExportsCore(
+                    typeof(T),
+                    null,
+                    contractName,
+                    ImportCardinality.ExactlyOne
+                )
+                .SingleOrDefault();
 
             return (export != null) ? ExportServices.CreateStronglyTypedLazyOfT<T>(export) : null;
         }
 
-        private IEnumerable<Export> GetExportsCore(Type type, Type? metadataViewType, string? contractName, ImportCardinality cardinality)
+        private IEnumerable<Export> GetExportsCore(
+            Type type,
+            Type? metadataViewType,
+            string? contractName,
+            ImportCardinality cardinality
+        )
         {
             // Only 'type' cannot be null - the other parameters have sensible defaults.
             Requires.NotNull(type, nameof(type));
@@ -784,21 +833,37 @@ namespace System.ComponentModel.Composition.Hosting
 
             if (!MetadataViewProvider.IsViewTypeValid(metadataViewType))
             {
-                throw new InvalidOperationException(SR.Format(SR.InvalidMetadataView, metadataViewType.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidMetadataView, metadataViewType.Name)
+                );
             }
 
-            ContractBasedImportDefinition importDefinition = BuildImportDefinition(type, metadataViewType, contractName, cardinality);
+            ContractBasedImportDefinition importDefinition = BuildImportDefinition(
+                type,
+                metadataViewType,
+                contractName,
+                cardinality
+            );
             return GetExports(importDefinition, null);
         }
 
-        private static ContractBasedImportDefinition BuildImportDefinition(Type type, Type metadataViewType, string contractName, ImportCardinality cardinality)
+        private static ContractBasedImportDefinition BuildImportDefinition(
+            Type type,
+            Type metadataViewType,
+            string contractName,
+            ImportCardinality cardinality
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(metadataViewType);
             ArgumentNullException.ThrowIfNull(contractName);
 
-            IEnumerable<KeyValuePair<string, Type>> requiredMetadata = CompositionServices.GetRequiredMetadata(metadataViewType);
-            IDictionary<string, object?> metadata = CompositionServices.GetImportMetadata(type, null);
+            IEnumerable<KeyValuePair<string, Type>> requiredMetadata =
+                CompositionServices.GetRequiredMetadata(metadataViewType);
+            IDictionary<string, object?> metadata = CompositionServices.GetImportMetadata(
+                type,
+                null
+            );
 
             string? requiredTypeIdentity = null;
             if (type != typeof(object))
@@ -806,7 +871,16 @@ namespace System.ComponentModel.Composition.Hosting
                 requiredTypeIdentity = AttributedModelServices.GetTypeIdentity(type);
             }
 
-            return new ContractBasedImportDefinition(contractName, requiredTypeIdentity, requiredMetadata, cardinality, false, true, CreationPolicy.Any, metadata);
+            return new ContractBasedImportDefinition(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                false,
+                true,
+                CreationPolicy.Any,
+                metadata
+            );
         }
     }
 }

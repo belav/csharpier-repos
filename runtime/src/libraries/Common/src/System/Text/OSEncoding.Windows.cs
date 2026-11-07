@@ -12,7 +12,8 @@ namespace System.Text
         private readonly int _codePage;
         private string? _encodingName;
 
-        internal OSEncoding(int codePage) : base(codePage)
+        internal OSEncoding(int codePage)
+            : base(codePage)
         {
             _codePage = codePage;
         }
@@ -25,7 +26,10 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(count);
 
             if (chars.Length - index < count)
-                throw new ArgumentOutOfRangeException(nameof(chars), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (count == 0)
                 return 0;
@@ -49,7 +53,13 @@ namespace System.Text
             }
         }
 
-        public override unsafe int GetBytes(string s, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override unsafe int GetBytes(
+            string s,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(s);
             ArgumentNullException.ThrowIfNull(bytes);
@@ -61,7 +71,10 @@ namespace System.Text
                 throw new ArgumentOutOfRangeException(nameof(s), SR.ArgumentOutOfRange_IndexCount);
 
             if (byteIndex < 0 || byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
 
             if (charCount == 0)
                 return 0;
@@ -74,11 +87,23 @@ namespace System.Text
             fixed (char* pChars = s)
             fixed (byte* pBytes = &bytes[0])
             {
-                return WideCharToMultiByte(_codePage, pChars + charIndex, charCount, pBytes + byteIndex, bytes.Length - byteIndex);
+                return WideCharToMultiByte(
+                    _codePage,
+                    pChars + charIndex,
+                    charCount,
+                    pBytes + byteIndex,
+                    bytes.Length - byteIndex
+                );
             }
         }
 
-        public override unsafe int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override unsafe int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentNullException.ThrowIfNull(bytes);
@@ -87,10 +112,16 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(charCount);
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (byteIndex < 0 || byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
 
             if (charCount == 0)
                 return 0;
@@ -103,7 +134,13 @@ namespace System.Text
             fixed (char* pChars = chars)
             fixed (byte* pBytes = &bytes[0])
             {
-                return WideCharToMultiByte(_codePage, pChars + charIndex, charCount, pBytes + byteIndex, bytes.Length - byteIndex);
+                return WideCharToMultiByte(
+                    _codePage,
+                    pChars + charIndex,
+                    charCount,
+                    pBytes + byteIndex,
+                    bytes.Length - byteIndex
+                );
             }
         }
 
@@ -115,7 +152,10 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(count);
 
             if (bytes.Length - index < count)
-                throw new ArgumentOutOfRangeException(nameof(bytes), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (count == 0)
                 return 0;
@@ -126,7 +166,13 @@ namespace System.Text
             }
         }
 
-        public override unsafe int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override unsafe int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentNullException.ThrowIfNull(chars);
@@ -135,10 +181,16 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(byteCount);
 
             if (bytes.Length - byteIndex < byteCount)
-                throw new ArgumentOutOfRangeException(nameof(bytes), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (charIndex < 0 || charIndex > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(charIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charIndex),
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
 
             if (byteCount == 0)
                 return 0;
@@ -149,7 +201,13 @@ namespace System.Text
             fixed (byte* pBytes = bytes)
             fixed (char* pChars = &chars[0])
             {
-                return MultiByteToWideChar(_codePage, pBytes + byteIndex, byteCount, pChars + charIndex, chars.Length - charIndex);
+                return MultiByteToWideChar(
+                    _codePage,
+                    pBytes + byteIndex,
+                    byteCount,
+                    pChars + charIndex,
+                    chars.Length - charIndex
+                );
             }
         }
 
@@ -159,7 +217,10 @@ namespace System.Text
 
             long byteCount = (long)charCount * 14; // Max possible value for all encodings
             if (byteCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException(nameof(charCount), SR.ArgumentOutOfRange_GetByteCountOverflow);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.ArgumentOutOfRange_GetByteCountOverflow
+                );
 
             return (int)byteCount;
         }
@@ -171,7 +232,10 @@ namespace System.Text
             long charCount = byteCount * 4; // Max possible value for all encodings
 
             if (charCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.ArgumentOutOfRange_GetCharCountOverflow);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.ArgumentOutOfRange_GetCharCountOverflow
+                );
 
             return (int)charCount;
         }
@@ -180,10 +244,7 @@ namespace System.Text
 
         public override string WebName
         {
-            get
-            {
-                return EncodingName;
-            }
+            get { return EncodingName; }
         }
 
         public override Encoder GetEncoder()
@@ -195,11 +256,11 @@ namespace System.Text
         {
             switch (CodePage)
             {
-                case 932:   // Japanese (Shift-JIS)
-                case 936:   // Chinese Simplified (GB2312)
-                case 949:   // Korean
-                case 950:   // Chinese Traditional (Big5)
-                case 1361:  // Korean (Johab)
+                case 932: // Japanese (Shift-JIS)
+                case 936: // Chinese Simplified (GB2312)
+                case 949: // Korean
+                case 950: // Chinese Traditional (Big5)
+                case 1361: // Korean (Johab)
                 case 10001: // Japanese (Mac)
                 case 10002: // Chinese Traditional (Mac)
                 case 10003: // Korean (Mac)
@@ -221,17 +282,45 @@ namespace System.Text
             }
         }
 
-        internal static unsafe int WideCharToMultiByte(int codePage, char* pChars, int count, byte* pBytes, int byteCount)
+        internal static unsafe int WideCharToMultiByte(
+            int codePage,
+            char* pChars,
+            int count,
+            byte* pBytes,
+            int byteCount
+        )
         {
-            int result = Interop.Kernel32.WideCharToMultiByte((uint)codePage, 0, pChars, count, pBytes, byteCount, null, null);
+            int result = Interop.Kernel32.WideCharToMultiByte(
+                (uint)codePage,
+                0,
+                pChars,
+                count,
+                pBytes,
+                byteCount,
+                null,
+                null
+            );
             if (result <= 0)
                 throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex);
             return result;
         }
 
-        internal static unsafe int MultiByteToWideChar(int codePage, byte* pBytes, int byteCount, char* pChars, int count)
+        internal static unsafe int MultiByteToWideChar(
+            int codePage,
+            byte* pBytes,
+            int byteCount,
+            char* pChars,
+            int count
+        )
         {
-            int result = Interop.Kernel32.MultiByteToWideChar((uint)codePage, 0, pBytes, byteCount, pChars, count);
+            int result = Interop.Kernel32.MultiByteToWideChar(
+                (uint)codePage,
+                0,
+                pBytes,
+                byteCount,
+                pChars,
+                count
+            );
             if (result <= 0)
                 throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex);
             return result;

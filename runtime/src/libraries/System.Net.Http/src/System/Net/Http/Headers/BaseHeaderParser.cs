@@ -9,9 +9,7 @@ namespace System.Net.Http.Headers
     internal abstract class BaseHeaderParser : HttpHeaderParser
     {
         protected BaseHeaderParser(bool supportsMultipleValues)
-            : base(supportsMultipleValues)
-        {
-        }
+            : base(supportsMultipleValues) { }
 
         /// <summary>
         /// Parses a full header or a segment of a multi-value header.
@@ -21,12 +19,20 @@ namespace System.Net.Http.Headers
         /// <param name="storeValue"></param>
         /// <param name="parsedValue">The resulting value parsed.</param>
         /// <returns>If a value could be parsed, the number of characters used to parse that value. Otherwise, 0.</returns>
-        protected abstract int GetParsedValueLength(string value, int startIndex, object? storeValue,
-            out object? parsedValue);
+        protected abstract int GetParsedValueLength(
+            string value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        );
 
 #pragma warning disable CS8765 // Doesn't match overridden member nullable attribute on out parameter
-        public sealed override bool TryParseValue(string? value, object? storeValue, ref int index,
-            out object? parsedValue)
+        public sealed override bool TryParseValue(
+            string? value,
+            object? storeValue,
+            ref int index,
+            out object? parsedValue
+        )
 #pragma warning restore CS8765
         {
             parsedValue = null;
@@ -42,8 +48,12 @@ namespace System.Net.Http.Headers
             }
 
             bool separatorFound;
-            int current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(value, index, SupportsMultipleValues,
-                out separatorFound);
+            int current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                value,
+                index,
+                SupportsMultipleValues,
+                out separatorFound
+            );
 
             if (separatorFound && !SupportsMultipleValues)
             {
@@ -67,11 +77,18 @@ namespace System.Net.Http.Headers
             }
 
             current += length;
-            current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(value, current, SupportsMultipleValues,
-                out separatorFound);
+            current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                value,
+                current,
+                SupportsMultipleValues,
+                out separatorFound
+            );
 
             // If we support multiple values and we've not reached the end of the string, then we must have a separator.
-            if ((separatorFound && !SupportsMultipleValues) || (!separatorFound && (current < value.Length)))
+            if (
+                (separatorFound && !SupportsMultipleValues)
+                || (!separatorFound && (current < value.Length))
+            )
             {
                 return false;
             }

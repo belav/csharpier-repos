@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,102 +14,106 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.IO;
-	using System.Reflection;
-	using System.Reflection.Emit;
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using Castle.Core.Tests;
+    using NUnit.Framework;
 
-	using Castle.Core.Tests;
+    [TestFixture]
+    public class BaseTestCaseTestCase : BasePEVerifyTestCase
+    {
+        public override void TearDown()
+        {
+            ResetGeneratorAndBuilder(); // we call TearDown ourselves in these test cases
+            base.TearDown();
+        }
 
-	using NUnit.Framework;
+        [Test]
+        public void TearDown_DoesNotSaveAnything_IfNoProxyGenerated()
+        {
+            string path = ModuleScope.DEFAULT_FILE_NAME;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
-	[TestFixture]
-	public class BaseTestCaseTestCase : BasePEVerifyTestCase
-	{
-		public override void TearDown()
-		{
-			ResetGeneratorAndBuilder(); // we call TearDown ourselves in these test cases
-			base.TearDown();
-		}
+            base.TearDown();
 
-		[Test]
-		public void TearDown_DoesNotSaveAnything_IfNoProxyGenerated()
-		{
-			string path = ModuleScope.DEFAULT_FILE_NAME;
-			if (File.Exists(path))
-			{
-				File.Delete(path);
-			}
+            Assert.IsFalse(File.Exists(path));
+        }
 
-			base.TearDown();
+        [Test]
+        public void TearDown_SavesAssembly_IfProxyGenerated()
+        {
+            string path = ModuleScope.DEFAULT_FILE_NAME;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
-			Assert.IsFalse(File.Exists(path));
-		}
+            generator.CreateClassProxy(typeof(object), new StandardInterceptor());
 
-		[Test]
-		public void TearDown_SavesAssembly_IfProxyGenerated()
-		{
-			string path = ModuleScope.DEFAULT_FILE_NAME;
-			if (File.Exists(path))
-			{
-				File.Delete(path);
-			}
+            base.TearDown();
+            Assert.AreEqual(IsVerificationPossible, File.Exists(path));
+        }
 
-			generator.CreateClassProxy(typeof(object), new StandardInterceptor());
+        private void FindVerificationErrors()
+        {
+            ModuleBuilder moduleBuilder = generator.ProxyBuilder.ModuleScope.ObtainDynamicModule(
+                true
+            );
+            TypeBuilder invalidType = moduleBuilder.DefineType("InvalidType");
+            MethodBuilder invalidMethod = invalidType.DefineMethod(
+                "InvalidMethod",
+                MethodAttributes.Public
+            );
+            invalidMethod.GetILGenerator().Emit(OpCodes.Ldnull); // missing RET statement
 
-			base.TearDown();
-			Assert.AreEqual(IsVerificationPossible, File.Exists(path));
-		}
+            invalidType.CreateTypeInfo();
 
-		private void FindVerificationErrors()
-		{
-			ModuleBuilder moduleBuilder = generator.ProxyBuilder.ModuleScope.ObtainDynamicModule(true);
-			TypeBuilder invalidType = moduleBuilder.DefineType("InvalidType");
-			MethodBuilder invalidMethod = invalidType.DefineMethod("InvalidMethod", MethodAttributes.Public);
-			invalidMethod.GetILGenerator().Emit(OpCodes.Ldnull); // missing RET statement
+            if (!IsVerificationDisabled)
+            {
+                Console.WriteLine("This next test case is expected to yield a verification error.");
+            }
 
-			invalidType.CreateTypeInfo();
+            base.TearDown();
+        }
 
-			if (!IsVerificationDisabled)
-			{
-				Console.WriteLine("This next test case is expected to yield a verification error.");
-			}
+        [Test]
+        public void TearDown_FindsVerificationErrors()
+        {
+            if (!IsVerificationPossible)
+                Assert.Ignore();
 
-			base.TearDown();
-		}
+            var ex = Assert.Throws<AssertionException>(() => FindVerificationErrors());
+            StringAssert.Contains("PeVerify reported error(s)", ex.Message);
+            StringAssert.Contains("fall through end of the method without returning", ex.Message);
+        }
 
-		[Test]
-		public void TearDown_FindsVerificationErrors()
-		{
-			if (!IsVerificationPossible) Assert.Ignore();
+        [Test]
+        public void DisableVerification_DisablesVerificationForTestCase()
+        {
+            DisableVerification();
 
-			var ex = Assert.Throws<AssertionException>(() => FindVerificationErrors());
-			StringAssert.Contains("PeVerify reported error(s)", ex.Message);
-			StringAssert.Contains("fall through end of the method without returning", ex.Message);
-		}
+            FindVerificationErrors();
+        }
 
-		[Test]
-		public void DisableVerification_DisablesVerificationForTestCase()
-		{
-			DisableVerification();
+        [Test]
+        public void DisableVerification_ResetInNextTestCase1()
+        {
+            Assert.IsFalse(IsVerificationDisabled);
+            DisableVerification();
+            Assert.IsTrue(IsVerificationDisabled);
+        }
 
-			FindVerificationErrors();
-		}
-
-		[Test]
-		public void DisableVerification_ResetInNextTestCase1()
-		{
-			Assert.IsFalse(IsVerificationDisabled);
-			DisableVerification();
-			Assert.IsTrue(IsVerificationDisabled);
-		}
-
-		[Test]
-		public void DisableVerification_ResetInNextTestCase2()
-		{
-			Assert.IsFalse(IsVerificationDisabled);
-			DisableVerification();
-			Assert.IsTrue(IsVerificationDisabled);
-		}
-	}
+        [Test]
+        public void DisableVerification_ResetInNextTestCase2()
+        {
+            Assert.IsFalse(IsVerificationDisabled);
+            DisableVerification();
+            Assert.IsTrue(IsVerificationDisabled);
+        }
+    }
 }

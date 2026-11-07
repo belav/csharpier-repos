@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -18,18 +18,17 @@ using System.Threading;
 namespace System.Linq.Parallel
 {
     /// <summary>
-    /// An inlined sum aggregation and its enumerator, for nullable decimals. 
+    /// An inlined sum aggregation and its enumerator, for nullable decimals.
     /// </summary>
-    internal sealed class NullableDecimalSumAggregationOperator : InlinedAggregationOperator<decimal?, decimal?, decimal?>
+    internal sealed class NullableDecimalSumAggregationOperator
+        : InlinedAggregationOperator<decimal?, decimal?, decimal?>
     {
-
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal NullableDecimalSumAggregationOperator(IEnumerable<decimal?> child) : base(child)
-        {
-        }
+        internal NullableDecimalSumAggregationOperator(IEnumerable<decimal?> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -41,11 +40,16 @@ namespace System.Linq.Parallel
 
         protected override decimal? InternalAggregate(ref Exception singularExceptionToThrow)
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<decimal?> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<decimal?> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // We just reduce the elements in each output partition.
                 decimal sum = 0.0m;
@@ -62,10 +66,19 @@ namespace System.Linq.Parallel
         // Creates an enumerator that is used internally for the final aggregation step.
         //
 
-        protected override QueryOperatorEnumerator<decimal?,int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<decimal?, TKey> source, object sharedData, CancellationToken cancellationToken)
+        protected override QueryOperatorEnumerator<decimal?, int> CreateEnumerator<TKey>(
+            int index,
+            int count,
+            QueryOperatorEnumerator<decimal?, TKey> source,
+            object sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new NullableDecimalSumAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
+            return new NullableDecimalSumAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -73,7 +86,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private class NullableDecimalSumAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<decimal?>
+        private class NullableDecimalSumAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<decimal?>
         {
             private readonly QueryOperatorEnumerator<decimal?, TKey> m_source; // The source data.
 
@@ -81,9 +95,12 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal NullableDecimalSumAggregationOperatorEnumerator(QueryOperatorEnumerator<decimal?, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal NullableDecimalSumAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<decimal?, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Contract.Assert(source != null);
                 m_source = source;
@@ -111,8 +128,7 @@ namespace System.Linq.Parallel
                             CancellationState.ThrowIfCanceled(m_cancellationToken);
 
                         tempSum += element.GetValueOrDefault();
-                    }
-                    while (source.MoveNext(ref element, ref keyUnused));
+                    } while (source.MoveNext(ref element, ref keyUnused));
 
                     // The sum has been calculated. Now just return.
                     currentElement = new decimal?(tempSum);

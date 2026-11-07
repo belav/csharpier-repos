@@ -205,14 +205,22 @@ namespace System.Xml.XmlSchemaTests
             XmlSchemaSet schemaSet1 = new XmlSchemaSet();
             XmlSchemaSet schemaSet2 = new XmlSchemaSet();
 
-            XmlSchema schema1 = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdAuthor, FileMode.Open, FileAccess.Read)), null);
-            XmlSchema schema2 = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema schema1 = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._XsdAuthor, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
+            XmlSchema schema2 = XmlSchema.Read(
+                new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)),
+                null
+            );
 
             schemaSet1.Add(schema1);
             schemaSet1.Add(schema2); // added two schemas
 
             XmlSchemaElement elem = new XmlSchemaElement();
-            schema1.Items.Add(elem);  // make the first schema dirty
+            schema1.Items.Add(elem); // make the first schema dirty
 
             //the following throws an exception
             try
@@ -239,9 +247,22 @@ namespace System.Xml.XmlSchemaTests
         {
             XmlSchemaSet schemaSet1 = new XmlSchemaSet();
             XmlSchemaSet schemaSet2 = new XmlSchemaSet();
-            XmlSchema schema1 = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdAuthor, FileMode.Open, FileAccess.Read)), null);
-            XmlSchema schema2 = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)), null);
-            XmlSchema schema3 = XmlSchema.Read(new StreamReader(new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema schema1 = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._XsdAuthor, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
+            XmlSchema schema2 = XmlSchema.Read(
+                new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)),
+                null
+            );
+            XmlSchema schema3 = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
 
             schemaSet1.Add(schema1);
             schemaSet1.Add(schema2); // added two schemas

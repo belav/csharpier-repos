@@ -8,8 +8,8 @@
 namespace System.Text
 {
     using System;
-    using System.Runtime;
     using System.Diagnostics.Contracts;
+    using System.Runtime;
 
     [Serializable]
     public sealed class EncoderReplacementFallback : EncoderFallback
@@ -18,9 +18,8 @@ namespace System.Text
         private String strDefault;
 
         // Construction.  Default replacement fallback uses no best fit and ? replacement string
-        public EncoderReplacementFallback() : this("?")
-        {
-        }
+        public EncoderReplacementFallback()
+            : this("?") { }
 
         public EncoderReplacementFallback(String replacement)
         {
@@ -30,18 +29,18 @@ namespace System.Text
             Contract.EndContractBlock();
 
             // Make sure it doesn't have bad surrogate pairs
-            bool bFoundHigh=false;
+            bool bFoundHigh = false;
             for (int i = 0; i < replacement.Length; i++)
             {
                 // Found a surrogate?
-                if (Char.IsSurrogate(replacement,i))
+                if (Char.IsSurrogate(replacement, i))
                 {
                     // High or Low?
                     if (Char.IsHighSurrogate(replacement, i))
                     {
                         // if already had a high one, stop
                         if (bFoundHigh)
-                            break;  // break & throw at the bFoundHIgh below
+                            break; // break & throw at the bFoundHIgh below
                         bFoundHigh = true;
                     }
                     else
@@ -63,17 +62,19 @@ namespace System.Text
                     break;
             }
             if (bFoundHigh)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidCharSequenceNoIndex", "replacement"));
+                throw new ArgumentException(
+                    Environment.GetResourceString(
+                        "Argument_InvalidCharSequenceNoIndex",
+                        "replacement"
+                    )
+                );
 
             strDefault = replacement;
         }
 
         public String DefaultString
         {
-             get
-             {
-                return strDefault;
-             }
+            get { return strDefault; }
         }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer()
@@ -84,10 +85,7 @@ namespace System.Text
         // Maximum number of characters that this instance of this fallback could return
         public override int MaxCharCount
         {
-            get
-            {
-                return strDefault.Length;
-            }
+            get { return strDefault.Length; }
         }
 
         public override bool Equals(Object value)
@@ -105,8 +103,6 @@ namespace System.Text
             return strDefault.GetHashCode();
         }
     }
-
-
 
     public sealed class EncoderReplacementFallbackBuffer : EncoderFallbackBuffer
     {
@@ -130,9 +126,14 @@ namespace System.Text
             if (fallbackCount >= 1)
             {
                 // If we're recursive we may still have something in our buffer that makes this a surrogate
-                if (char.IsHighSurrogate(charUnknown) && fallbackCount >= 0 &&
-                    char.IsLowSurrogate(strDefault[fallbackIndex+1]))
-                    ThrowLastCharRecursive(Char.ConvertToUtf32(charUnknown, strDefault[fallbackIndex+1]));
+                if (
+                    char.IsHighSurrogate(charUnknown)
+                    && fallbackCount >= 0
+                    && char.IsLowSurrogate(strDefault[fallbackIndex + 1])
+                )
+                    ThrowLastCharRecursive(
+                        Char.ConvertToUtf32(charUnknown, strDefault[fallbackIndex + 1])
+                    );
 
                 // Nope, just one character
                 ThrowLastCharRecursive(unchecked((int)charUnknown));
@@ -140,7 +141,7 @@ namespace System.Text
 
             // Go ahead and get our fallback
             // Divide by 2 because we aren't a surrogate pair
-            fallbackCount = strDefault.Length/2;
+            fallbackCount = strDefault.Length / 2;
             fallbackIndex = -1;
 
             return fallbackCount != 0;
@@ -150,14 +151,16 @@ namespace System.Text
         {
             // Double check input surrogate pair
             if (!Char.IsHighSurrogate(charUnknownHigh))
-                throw new ArgumentOutOfRangeException("charUnknownHigh",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xD800, 0xDBFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownHigh",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xD800, 0xDBFF)
+                );
 
             if (!Char.IsLowSurrogate(charUnknownLow))
-                throw new ArgumentOutOfRangeException("charUnknownLow",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xDC00, 0xDFFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownLow",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xDC00, 0xDFFF)
+                );
             Contract.EndContractBlock();
 
             // If we had a buffer already we're being recursive, throw, it's probably at the suspect
@@ -178,7 +181,7 @@ namespace System.Text
             // and we need to detect recursion.  We could have a flag but we already have this counter.
             fallbackCount--;
             fallbackIndex++;
-            
+
             // Do we have anything left? 0 is now last fallback char, negative is nothing left
             if (fallbackCount < 0)
                 return '\0';
@@ -192,8 +195,10 @@ namespace System.Text
             }
 
             // Now make sure its in the expected range
-            Contract.Assert(fallbackIndex < strDefault.Length && fallbackIndex >= 0,
-                            "Index exceeds buffer range");
+            Contract.Assert(
+                fallbackIndex < strDefault.Length && fallbackIndex >= 0,
+                "Index exceeds buffer range"
+            );
 
             return strDefault[fallbackIndex];
         }
@@ -223,7 +228,7 @@ namespace System.Text
         }
 
         // Clear the buffer
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public override unsafe void Reset()
         {
             fallbackCount = -1;
@@ -233,4 +238,3 @@ namespace System.Text
         }
     }
 }
-

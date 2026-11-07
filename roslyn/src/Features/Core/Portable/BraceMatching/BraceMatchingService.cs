@@ -19,11 +19,18 @@ namespace Microsoft.CodeAnalysis.BraceMatching
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal class BraceMatchingService(
-        [ImportMany] IEnumerable<Lazy<IBraceMatcher, LanguageMetadata>> braceMatchers) : IBraceMatchingService
+        [ImportMany] IEnumerable<Lazy<IBraceMatcher, LanguageMetadata>> braceMatchers
+    ) : IBraceMatchingService
     {
-        private readonly ImmutableArray<Lazy<IBraceMatcher, LanguageMetadata>> _braceMatchers = braceMatchers.ToImmutableArray();
+        private readonly ImmutableArray<Lazy<IBraceMatcher, LanguageMetadata>> _braceMatchers =
+            braceMatchers.ToImmutableArray();
 
-        public async Task<BraceMatchingResult?> GetMatchingBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+        public async Task<BraceMatchingResult?> GetMatchingBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             if (position < 0 || position > text.Length)
@@ -31,11 +38,15 @@ namespace Microsoft.CodeAnalysis.BraceMatching
                 throw new ArgumentException(nameof(position));
             }
 
-            var matchers = _braceMatchers.Where(b => b.Metadata.Language == document.Project.Language);
+            var matchers = _braceMatchers.Where(b =>
+                b.Metadata.Language == document.Project.Language
+            );
             foreach (var matcher in matchers)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var braces = await matcher.Value.FindBracesAsync(document, position, options, cancellationToken).ConfigureAwait(false);
+                var braces = await matcher
+                    .Value.FindBracesAsync(document, position, options, cancellationToken)
+                    .ConfigureAwait(false);
                 if (braces.HasValue)
                 {
                     return braces;

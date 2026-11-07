@@ -3,21 +3,21 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
     using System.Drawing;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
+    using System.Drawing.Design;
+    using System.Reflection;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Runtime.DebugEngine;
+    using System.Text;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime.DebugEngine;
 
     #endregion
 
@@ -28,24 +28,26 @@ namespace System.Workflow.Activities
     [ActivityValidator(typeof(ParallelValidator))]
     [SRCategory(SR.Standard)]
     [WorkflowDebuggerSteppingAttribute(WorkflowDebuggerSteppingOption.Concurrent)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class ParallelActivity : CompositeActivity, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class ParallelActivity
+        : CompositeActivity,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
         #region Constructors
 
-        public ParallelActivity()
-        {
-        }
+        public ParallelActivity() { }
 
         public ParallelActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
         #region Protected Methods
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -60,8 +62,11 @@ namespace System.Workflow.Activities
                 executionContext.ExecuteActivity(childActivity);
             }
 
-            return (this.EnabledActivities.Count == 0) ? ActivityExecutionStatus.Closed : ActivityExecutionStatus.Executing;
+            return (this.EnabledActivities.Count == 0)
+                ? ActivityExecutionStatus.Closed
+                : ActivityExecutionStatus.Executing;
         }
+
         protected override ActivityExecutionStatus Cancel(ActivityExecutionContext executionContext)
         {
             if (executionContext == null)
@@ -78,7 +83,10 @@ namespace System.Workflow.Activities
                     executionContext.CancelActivity(childActivity);
                     canCloseNow = false;
                 }
-                else if (childActivity.ExecutionStatus == ActivityExecutionStatus.Canceling || childActivity.ExecutionStatus == ActivityExecutionStatus.Faulting)
+                else if (
+                    childActivity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || childActivity.ExecutionStatus == ActivityExecutionStatus.Faulting
+                )
                 {
                     canCloseNow = false;
                 }
@@ -86,14 +94,16 @@ namespace System.Workflow.Activities
 
             return canCloseNow ? ActivityExecutionStatus.Closed : ActivityExecutionStatus.Canceling;
         }
+
         protected override void OnClosed(IServiceProvider provider)
         {
             base.RemoveProperty(ParallelActivity.IsExecutingProperty);
         }
 
-
-
-        protected override void OnActivityChangeAdd(ActivityExecutionContext executionContext, Activity addedActivity)
+        protected override void OnActivityChangeAdd(
+            ActivityExecutionContext executionContext,
+            Activity addedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -102,19 +112,24 @@ namespace System.Workflow.Activities
 
             ParallelActivity parallel = executionContext.Activity as ParallelActivity;
 
-            if (parallel.ExecutionStatus == ActivityExecutionStatus.Executing && parallel.IsExecuting)
+            if (
+                parallel.ExecutionStatus == ActivityExecutionStatus.Executing
+                && parallel.IsExecuting
+            )
             {
                 addedActivity.RegisterForStatusChange(Activity.ClosedEvent, this);
                 executionContext.ExecuteActivity(addedActivity);
             }
         }
 
-        protected override void OnActivityChangeRemove(ActivityExecutionContext rootExecutionContext, Activity removedActivity)
-        {
+        protected override void OnActivityChangeRemove(
+            ActivityExecutionContext rootExecutionContext,
+            Activity removedActivity
+        ) { }
 
-        }
-
-        protected override void OnWorkflowChangesCompleted(ActivityExecutionContext executionContext)
+        protected override void OnWorkflowChangesCompleted(
+            ActivityExecutionContext executionContext
+        )
         {
             base.OnWorkflowChangesCompleted(executionContext);
 
@@ -139,7 +154,10 @@ namespace System.Workflow.Activities
         #endregion
 
         #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");
@@ -149,7 +167,10 @@ namespace System.Workflow.Activities
             ActivityExecutionContext context = sender as ActivityExecutionContext;
 
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             ParallelActivity parallel = context.Activity as ParallelActivity;
 
@@ -160,7 +181,12 @@ namespace System.Workflow.Activities
             for (int i = 0; i < parallel.EnabledActivities.Count; ++i)
             {
                 Activity childActivity = parallel.EnabledActivities[i];
-                if (!(childActivity.ExecutionStatus == ActivityExecutionStatus.Initialized || childActivity.ExecutionStatus == ActivityExecutionStatus.Closed))
+                if (
+                    !(
+                        childActivity.ExecutionStatus == ActivityExecutionStatus.Initialized
+                        || childActivity.ExecutionStatus == ActivityExecutionStatus.Closed
+                    )
+                )
                 {
                     canCloseNow = false;
                     break;
@@ -174,18 +200,17 @@ namespace System.Workflow.Activities
 
         #region Runtime Specific Data
         //Runtime Properties
-        static DependencyProperty IsExecutingProperty = DependencyProperty.Register("IsExecuting", typeof(bool), typeof(ParallelActivity), new PropertyMetadata(false));
+        static DependencyProperty IsExecutingProperty = DependencyProperty.Register(
+            "IsExecuting",
+            typeof(bool),
+            typeof(ParallelActivity),
+            new PropertyMetadata(false)
+        );
 
         private bool IsExecuting
         {
-            get
-            {
-                return (bool)base.GetValue(IsExecutingProperty);
-            }
-            set
-            {
-                base.SetValue(IsExecutingProperty, value);
-            }
+            get { return (bool)base.GetValue(IsExecutingProperty); }
+            set { base.SetValue(IsExecutingProperty, value); }
         }
         #endregion
     }
@@ -199,11 +224,22 @@ namespace System.Workflow.Activities
 
             ParallelActivity parallel = obj as ParallelActivity;
             if (parallel == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(ParallelActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(ParallelActivity).FullName
+                    ),
+                    "obj"
+                );
 
             // Validate number of children
             if (parallel.EnabledActivities.Count < 2)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ParallelLessThanTwoChildren), ErrorNumbers.Error_ParallelLessThanTwoChildren));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_ParallelLessThanTwoChildren),
+                        ErrorNumbers.Error_ParallelLessThanTwoChildren
+                    )
+                );
 
             bool notAllSequence = false;
 
@@ -217,7 +253,12 @@ namespace System.Workflow.Activities
 
             // Validate that all child activities are sequence activities.
             if (notAllSequence)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ParallelNotAllSequence), ErrorNumbers.Error_ParallelNotAllSequence));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_ParallelNotAllSequence),
+                        ErrorNumbers.Error_ParallelNotAllSequence
+                    )
+                );
 
             return validationErrors;
         }

@@ -58,7 +58,8 @@ public sealed record HistoryRepositoryDependencies
         IRelationalTypeMappingSource typeMappingSource,
         ICurrentDbContext currentContext,
         IModelRuntimeInitializer modelRuntimeInitializer,
-        IRelationalCommandDiagnosticsLogger commandLogger)
+        IRelationalCommandDiagnosticsLogger commandLogger
+    )
     {
         DatabaseCreator = databaseCreator;
         RawSqlCommandBuilder = rawSqlCommandBuilder;

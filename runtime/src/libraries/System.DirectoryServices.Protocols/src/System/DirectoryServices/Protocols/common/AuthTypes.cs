@@ -16,13 +16,13 @@ namespace System.DirectoryServices.Protocols
         Dpa = 6,
         Msn = 7,
         External = 8,
-        Kerberos = 9
+        Kerberos = 9,
     }
 
     public enum PartialResultProcessing
     {
         NoPartialResultSupport,
         ReturnPartialResults,
-        ReturnPartialResultsAndNotifyCallback
+        ReturnPartialResultsAndNotifyCallback,
     }
 }

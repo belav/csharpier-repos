@@ -19,7 +19,11 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="builder">The builder to add to.</param>
         /// <param name="configureSource">Configures the source secrets.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder Add<TSource>(this IConfigurationBuilder builder, Action<TSource>? configureSource) where TSource : IConfigurationSource, new()
+        public static IConfigurationBuilder Add<TSource>(
+            this IConfigurationBuilder builder,
+            Action<TSource>? configureSource
+        )
+            where TSource : IConfigurationSource, new()
         {
             var source = new TSource();
             configureSource?.Invoke(source);
@@ -42,7 +46,9 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         /// <param name="configuration">The configuration to enumerate.</param>
         /// <returns>An enumeration of key value pairs.</returns>
-        public static IEnumerable<KeyValuePair<string, string?>> AsEnumerable(this IConfiguration configuration) => configuration.AsEnumerable(makePathsRelative: false);
+        public static IEnumerable<KeyValuePair<string, string?>> AsEnumerable(
+            this IConfiguration configuration
+        ) => configuration.AsEnumerable(makePathsRelative: false);
 
         /// <summary>
         /// Get the enumeration of key value pairs within the <see cref="IConfiguration" />
@@ -50,18 +56,30 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="configuration">The configuration to enumerate.</param>
         /// <param name="makePathsRelative">If true, the child keys returned will have the current configuration's Path trimmed from the front.</param>
         /// <returns>An enumeration of key value pairs.</returns>
-        public static IEnumerable<KeyValuePair<string, string?>> AsEnumerable(this IConfiguration configuration, bool makePathsRelative)
+        public static IEnumerable<KeyValuePair<string, string?>> AsEnumerable(
+            this IConfiguration configuration,
+            bool makePathsRelative
+        )
         {
             var stack = new Stack<IConfiguration>();
             stack.Push(configuration);
-            int prefixLength = (makePathsRelative && configuration is IConfigurationSection rootSection) ? rootSection.Path.Length + 1 : 0;
+            int prefixLength =
+                (makePathsRelative && configuration is IConfigurationSection rootSection)
+                    ? rootSection.Path.Length + 1
+                    : 0;
             while (stack.Count > 0)
             {
                 IConfiguration config = stack.Pop();
                 // Don't include the sections value if we are removing paths, since it will be an empty key
-                if (config is IConfigurationSection section && (!makePathsRelative || config != configuration))
+                if (
+                    config is IConfigurationSection section
+                    && (!makePathsRelative || config != configuration)
+                )
                 {
-                    yield return new KeyValuePair<string, string?>(section.Path.Substring(prefixLength), section.Value);
+                    yield return new KeyValuePair<string, string?>(
+                        section.Path.Substring(prefixLength),
+                        section.Value
+                    );
                 }
                 foreach (IConfigurationSection child in config.GetChildren())
                 {
@@ -94,7 +112,10 @@ namespace Microsoft.Extensions.Configuration
         ///     If no matching sub-section is found with the specified key, an exception is raised.
         /// </remarks>
         /// <exception cref="System.InvalidOperationException">There is no section with key <paramref name="key"/>.</exception>
-        public static IConfigurationSection GetRequiredSection(this IConfiguration configuration, string key)
+        public static IConfigurationSection GetRequiredSection(
+            this IConfiguration configuration,
+            string key
+        )
         {
             ThrowHelper.ThrowIfNull(configuration);
 

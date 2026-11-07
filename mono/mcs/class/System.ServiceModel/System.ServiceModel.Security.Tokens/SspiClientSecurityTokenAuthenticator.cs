@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,11 +28,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Net.Security;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.IO;
+using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
@@ -41,36 +41,38 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using System.Xml;
-
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	// FIXME: implement all
-	class SspiClientSecurityTokenAuthenticator : SecurityTokenAuthenticator
-	{
-		ClientCredentialsSecurityTokenManager manager;
+    // FIXME: implement all
+    class SspiClientSecurityTokenAuthenticator : SecurityTokenAuthenticator
+    {
+        ClientCredentialsSecurityTokenManager manager;
 
-		public SspiClientSecurityTokenAuthenticator (
-			ClientCredentialsSecurityTokenManager manager, 
-			SecurityTokenRequirement r)
-		{
-			this.manager = manager;
-		}
+        public SspiClientSecurityTokenAuthenticator(
+            ClientCredentialsSecurityTokenManager manager,
+            SecurityTokenRequirement r
+        )
+        {
+            this.manager = manager;
+        }
 
-		public ClientCredentialsSecurityTokenManager Manager {
-			get { return manager; }
-		}
+        public ClientCredentialsSecurityTokenManager Manager
+        {
+            get { return manager; }
+        }
 
-		protected override bool CanValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override bool CanValidateTokenCore(SecurityToken token)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected override ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

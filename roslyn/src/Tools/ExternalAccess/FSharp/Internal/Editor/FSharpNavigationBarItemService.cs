@@ -32,16 +32,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpNavigationBarItemService(
             IThreadingContext threadingContext,
-            IFSharpNavigationBarItemService service)
+            IFSharpNavigationBarItemService service
+        )
         {
             _threadingContext = threadingContext;
             _service = service;
         }
 
-        public Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(Document document, ITextVersion textVersion, CancellationToken cancellationToken)
+        public Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(
+            Document document,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
             return ((INavigationBarItemService)this).GetItemsAsync(
-                document, workspaceSupportsDocumentChanges: true, forceFrozenPartialSemanticsForCrossProcessOperations: false, textVersion, cancellationToken);
+                document,
+                workspaceSupportsDocumentChanges: true,
+                forceFrozenPartialSemanticsForCrossProcessOperations: false,
+                textVersion,
+                cancellationToken
+            );
         }
 
         async Task<ImmutableArray<NavigationBarItem>> INavigationBarItemService.GetItemsAsync(
@@ -49,36 +59,68 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             bool workspaceSupportsDocumentChanges,
             bool forceFrozenPartialSemanticsForCrossProcessOperations,
             ITextVersion textVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var items = await _service.GetItemsAsync(document, cancellationToken).ConfigureAwait(false);
+            var items = await _service
+                .GetItemsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             return items == null
                 ? ImmutableArray<NavigationBarItem>.Empty
                 : ConvertItems(items, textVersion);
         }
 
-        private static ImmutableArray<NavigationBarItem> ConvertItems(IList<FSharpNavigationBarItem> items, ITextVersion textVersion)
-            => (items ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>()).Where(x => x.Spans.Any()).SelectAsArray(x => ConvertToNavigationBarItem(x, textVersion));
+        private static ImmutableArray<NavigationBarItem> ConvertItems(
+            IList<FSharpNavigationBarItem> items,
+            ITextVersion textVersion
+        ) =>
+            (items ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>())
+                .Where(x => x.Spans.Any())
+                .SelectAsArray(x => ConvertToNavigationBarItem(x, textVersion));
 
         public async Task<bool> TryNavigateToItemAsync(
-            Document document, NavigationBarItem item, ITextView view, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            NavigationBarItem item,
+            ITextView view,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
             // The logic here was ported from FSharp's implementation. The main reason was to avoid shimming INotificationService.
             // Spans.First() is safe here as we filtered down to only items that have spans in ConvertItems.
             var span = item.GetCurrentItemSpan(textVersion, item.Spans.First());
             var workspace = document.Project.Solution.Workspace;
-            var navigationService = workspace.Services.GetRequiredService<IFSharpDocumentNavigationService>();
+            var navigationService =
+                workspace.Services.GetRequiredService<IFSharpDocumentNavigationService>();
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            if (navigationService.CanNavigateToPosition(workspace, document.Id, span.Start, virtualSpace: 0, cancellationToken))
+            if (
+                navigationService.CanNavigateToPosition(
+                    workspace,
+                    document.Id,
+                    span.Start,
+                    virtualSpace: 0,
+                    cancellationToken
+                )
+            )
             {
-                navigationService.TryNavigateToPosition(workspace, document.Id, span.Start, virtualSpace: 0, cancellationToken);
+                navigationService.TryNavigateToPosition(
+                    workspace,
+                    document.Id,
+                    span.Start,
+                    virtualSpace: 0,
+                    cancellationToken
+                );
             }
             else
             {
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                notificationService.SendNotification(EditorFeaturesResources.The_definition_of_the_object_is_hidden, severity: NotificationSeverity.Error);
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                notificationService.SendNotification(
+                    EditorFeaturesResources.The_definition_of_the_object_is_hidden,
+                    severity: NotificationSeverity.Error
+                );
             }
 
             return true;
@@ -89,7 +131,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             return false;
         }
 
-        private static NavigationBarItem ConvertToNavigationBarItem(FSharpNavigationBarItem item, ITextVersion textVersion)
+        private static NavigationBarItem ConvertToNavigationBarItem(
+            FSharpNavigationBarItem item,
+            ITextVersion textVersion
+        )
         {
             var spans = item.Spans.ToImmutableArrayOrEmpty();
             return new SimpleNavigationBarItem(
@@ -100,7 +145,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                 ConvertItems(item.ChildItems, textVersion),
                 item.Indent,
                 item.Bolded,
-                item.Grayed);
+                item.Grayed
+            );
         }
     }
 }

@@ -42,13 +42,23 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void ReadServerMode(MsmqChannelListenerBase listener, ServerModeDecoder modeDecoder, byte[] incoming, long lookupId, ref int offset, ref int size)
+        static void ReadServerMode(
+            MsmqChannelListenerBase listener,
+            ServerModeDecoder modeDecoder,
+            byte[] incoming,
+            long lookupId,
+            ref int offset,
+            ref int size
+        )
         {
-            for (;;)
+            for (; ; )
             {
                 if (size <= 0)
                 {
-                    throw listener.NormalizePoisonException(lookupId, modeDecoder.CreatePrematureEOFException());
+                    throw listener.NormalizePoisonException(
+                        lookupId,
+                        modeDecoder.CreatePrematureEOFException()
+                    );
                 }
                 int decoded = modeDecoder.Decode(incoming, offset, size);
                 offset += decoded;
@@ -58,7 +68,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static Message DecodeTransportDatagram(MsmqInputChannelListener listener, MsmqReceiveHelper receiver, MsmqInputMessage msmqMessage, MsmqMessageProperty messageProperty)
+        internal static Message DecodeTransportDatagram(
+            MsmqInputChannelListener listener,
+            MsmqReceiveHelper receiver,
+            MsmqInputMessage msmqMessage,
+            MsmqMessageProperty messageProperty
+        )
         {
             using (MsmqDiagnostics.BoundReceiveBytesOperation())
             {
@@ -71,7 +86,14 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    ReadServerMode(listener, modeDecoder, incoming, messageProperty.LookupId, ref offset, ref size);
+                    ReadServerMode(
+                        listener,
+                        modeDecoder,
+                        incoming,
+                        messageProperty.LookupId,
+                        ref offset,
+                        ref size
+                    );
                 }
                 catch (ProtocolException ex)
                 {
@@ -82,17 +104,27 @@ namespace System.ServiceModel.Channels
                 if (modeDecoder.Mode != FramingMode.SingletonSized)
                 {
                     receiver.FinalDisposition(messageProperty);
-                    throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadFrame)));
+                    throw listener.NormalizePoisonException(
+                        messageProperty.LookupId,
+                        new ProtocolException(SR.GetString(SR.MsmqBadFrame))
+                    );
                 }
 
-                ServerSingletonSizedDecoder decoder = new ServerSingletonSizedDecoder(0, defaultMaxViaSize, defaultMaxContentTypeSize);
+                ServerSingletonSizedDecoder decoder = new ServerSingletonSizedDecoder(
+                    0,
+                    defaultMaxViaSize,
+                    defaultMaxContentTypeSize
+                );
                 try
                 {
-                    for (;;)
+                    for (; ; )
                     {
                         if (size <= 0)
                         {
-                            throw listener.NormalizePoisonException(messageProperty.LookupId, decoder.CreatePrematureEOFException());
+                            throw listener.NormalizePoisonException(
+                                messageProperty.LookupId,
+                                decoder.CreatePrematureEOFException()
+                            );
                         }
 
                         int decoded = decoder.Decode(incoming, offset, size);
@@ -111,13 +143,25 @@ namespace System.ServiceModel.Channels
                 if (size > listener.MaxReceivedMessageSize)
                 {
                     receiver.FinalDisposition(messageProperty);
-                    throw listener.NormalizePoisonException(messageProperty.LookupId, MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(listener.MaxReceivedMessageSize));
+                    throw listener.NormalizePoisonException(
+                        messageProperty.LookupId,
+                        MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                            listener.MaxReceivedMessageSize
+                        )
+                    );
                 }
 
-                if (!listener.MessageEncoderFactory.Encoder.IsContentTypeSupported(decoder.ContentType))
+                if (
+                    !listener.MessageEncoderFactory.Encoder.IsContentTypeSupported(
+                        decoder.ContentType
+                    )
+                )
                 {
                     receiver.FinalDisposition(messageProperty);
-                    throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadContentType)));
+                    throw listener.NormalizePoisonException(
+                        messageProperty.LookupId,
+                        new ProtocolException(SR.GetString(SR.MsmqBadContentType))
+                    );
                 }
 
                 byte[] envelopeBuffer = listener.BufferManager.TakeBuffer(size);
@@ -130,18 +174,25 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         message = listener.MessageEncoderFactory.Encoder.ReadMessage(
-                            new ArraySegment<byte>(envelopeBuffer, 0, size), listener.BufferManager);
+                            new ArraySegment<byte>(envelopeBuffer, 0, size),
+                            listener.BufferManager
+                        );
                     }
                     catch (XmlException e)
                     {
                         receiver.FinalDisposition(messageProperty);
-                        throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadXml), e));
+                        throw listener.NormalizePoisonException(
+                            messageProperty.LookupId,
+                            new ProtocolException(SR.GetString(SR.MsmqBadXml), e)
+                        );
                     }
 
                     bool closeMessage = true;
                     try
                     {
-                        SecurityMessageProperty securityProperty = listener.ValidateSecurity(msmqMessage);
+                        SecurityMessageProperty securityProperty = listener.ValidateSecurity(
+                            msmqMessage
+                        );
                         if (null != securityProperty)
                             message.Properties.Security = securityProperty;
 
@@ -171,7 +222,8 @@ namespace System.ServiceModel.Channels
             MsmqInputSessionChannelListener listener,
             MsmqInputMessage msmqMessage,
             MsmqMessageProperty messageProperty,
-            MsmqReceiveContextLockManager receiveContextManager)
+            MsmqReceiveContextLockManager receiveContextManager
+        )
         {
             using (MsmqDiagnostics.BoundReceiveBytesOperation())
             {
@@ -185,7 +237,14 @@ namespace System.ServiceModel.Channels
                 ServerModeDecoder modeDecoder = new ServerModeDecoder();
                 try
                 {
-                    ReadServerMode(listener, modeDecoder, incoming, messageProperty.LookupId, ref offset, ref size);
+                    ReadServerMode(
+                        listener,
+                        modeDecoder,
+                        incoming,
+                        messageProperty.LookupId,
+                        ref offset,
+                        ref size
+                    );
                 }
                 catch (ProtocolException ex)
                 {
@@ -196,19 +255,29 @@ namespace System.ServiceModel.Channels
                 if (modeDecoder.Mode != FramingMode.Simplex)
                 {
                     receiver.FinalDisposition(messageProperty);
-                    throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadFrame)));
+                    throw listener.NormalizePoisonException(
+                        messageProperty.LookupId,
+                        new ProtocolException(SR.GetString(SR.MsmqBadFrame))
+                    );
                 }
 
                 MsmqInputSessionChannel channel = null;
-                ServerSessionDecoder sessionDecoder = new ServerSessionDecoder(0, defaultMaxViaSize, defaultMaxContentTypeSize);
+                ServerSessionDecoder sessionDecoder = new ServerSessionDecoder(
+                    0,
+                    defaultMaxViaSize,
+                    defaultMaxContentTypeSize
+                );
 
                 try
                 {
-                    for (;;)
+                    for (; ; )
                     {
                         if (size <= 0)
                         {
-                            throw listener.NormalizePoisonException(messageProperty.LookupId, sessionDecoder.CreatePrematureEOFException());
+                            throw listener.NormalizePoisonException(
+                                messageProperty.LookupId,
+                                sessionDecoder.CreatePrematureEOFException()
+                            );
                         }
 
                         int decoded = sessionDecoder.Decode(incoming, offset, size);
@@ -229,7 +298,10 @@ namespace System.ServiceModel.Channels
                 if (!encoder.IsContentTypeSupported(sessionDecoder.ContentType))
                 {
                     receiver.FinalDisposition(messageProperty);
-                    throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadContentType)));
+                    throw listener.NormalizePoisonException(
+                        messageProperty.LookupId,
+                        new ProtocolException(SR.GetString(SR.MsmqBadContentType))
+                    );
                 }
 
                 ReceiveContext receiveContext = null;
@@ -237,12 +309,26 @@ namespace System.ServiceModel.Channels
                 // tack on the receive context property depending on the receive mode
                 if (receiver.MsmqReceiveParameters.ReceiveContextSettings.Enabled)
                 {
-                    receiveContext = receiveContextManager.CreateMsmqReceiveContext(msmqMessage.LookupId.Value);
+                    receiveContext = receiveContextManager.CreateMsmqReceiveContext(
+                        msmqMessage.LookupId.Value
+                    );
                 }
 
-                channel = new MsmqInputSessionChannel(listener, Transaction.Current, receiveContext);
+                channel = new MsmqInputSessionChannel(
+                    listener,
+                    Transaction.Current,
+                    receiveContext
+                );
 
-                Message message = DecodeSessiongramMessage(listener, channel, encoder, messageProperty, incoming, offset, sessionDecoder.EnvelopeSize);
+                Message message = DecodeSessiongramMessage(
+                    listener,
+                    channel,
+                    encoder,
+                    messageProperty,
+                    incoming,
+                    offset,
+                    sessionDecoder.EnvelopeSize
+                );
 
                 SecurityMessageProperty securityProperty = null;
                 try
@@ -265,7 +351,7 @@ namespace System.ServiceModel.Channels
                 channel.EnqueueAndDispatch(message);
                 listener.RaiseMessageReceived();
 
-                for (;;)
+                for (; ; )
                 {
                     int decoded;
                     try
@@ -274,7 +360,10 @@ namespace System.ServiceModel.Channels
                         {
                             channel.FaultChannel();
                             receiver.FinalDisposition(messageProperty);
-                            throw listener.NormalizePoisonException(messageProperty.LookupId, sessionDecoder.CreatePrematureEOFException());
+                            throw listener.NormalizePoisonException(
+                                messageProperty.LookupId,
+                                sessionDecoder.CreatePrematureEOFException()
+                            );
                         }
 
                         decoded = sessionDecoder.Decode(incoming, offset, size);
@@ -291,10 +380,19 @@ namespace System.ServiceModel.Channels
                         break;
                     if (ServerSessionDecoder.State.EnvelopeStart == sessionDecoder.CurrentState)
                     {
-                        message = DecodeSessiongramMessage(listener, channel, encoder, messageProperty, incoming, offset, sessionDecoder.EnvelopeSize);
+                        message = DecodeSessiongramMessage(
+                            listener,
+                            channel,
+                            encoder,
+                            messageProperty,
+                            incoming,
+                            offset,
+                            sessionDecoder.EnvelopeSize
+                        );
                         if (null != securityProperty)
                         {
-                            message.Properties.Security = (SecurityMessageProperty)securityProperty.CreateCopy();
+                            message.Properties.Security = (SecurityMessageProperty)
+                                securityProperty.CreateCopy();
                         }
                         message.Properties[MsmqMessageProperty.Name] = messageProperty;
                         channel.EnqueueAndDispatch(message);
@@ -303,7 +401,11 @@ namespace System.ServiceModel.Channels
                 }
 
                 channel.Shutdown();
-                MsmqDiagnostics.SessiongramReceived(channel.Session.Id, msmqMessage.MessageId, channel.InternalPendingItems);
+                MsmqDiagnostics.SessiongramReceived(
+                    channel.Session.Id,
+                    msmqMessage.MessageId,
+                    channel.InternalPendingItems
+                );
 
                 return channel;
             }
@@ -316,13 +418,19 @@ namespace System.ServiceModel.Channels
             MsmqMessageProperty messageProperty,
             byte[] buffer,
             int offset,
-            int size)
+            int size
+        )
         {
             if (size > listener.MaxReceivedMessageSize)
             {
                 channel.FaultChannel();
                 listener.MsmqReceiveHelper.FinalDisposition(messageProperty);
-                throw listener.NormalizePoisonException(messageProperty.LookupId, MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(listener.MaxReceivedMessageSize));
+                throw listener.NormalizePoisonException(
+                    messageProperty.LookupId,
+                    MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                        listener.MaxReceivedMessageSize
+                    )
+                );
             }
 
             // Fix for CSDMain bug 17842
@@ -330,7 +438,10 @@ namespace System.ServiceModel.Channels
             if ((size + offset) > buffer.Length)
             {
                 listener.MsmqReceiveHelper.FinalDisposition(messageProperty);
-                throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadFrame)));
+                throw listener.NormalizePoisonException(
+                    messageProperty.LookupId,
+                    new ProtocolException(SR.GetString(SR.MsmqBadFrame))
+                );
             }
 
             byte[] envelopeBuffer = listener.BufferManager.TakeBuffer(size);
@@ -340,7 +451,10 @@ namespace System.ServiceModel.Channels
                 Message message = null;
                 using (MsmqDiagnostics.BoundDecodeOperation())
                 {
-                    message = encoder.ReadMessage(new ArraySegment<byte>(envelopeBuffer, 0, size), listener.BufferManager);
+                    message = encoder.ReadMessage(
+                        new ArraySegment<byte>(envelopeBuffer, 0, size),
+                        listener.BufferManager
+                    );
                     MsmqDiagnostics.TransferFromTransport(message);
                 }
                 return message;
@@ -349,11 +463,19 @@ namespace System.ServiceModel.Channels
             {
                 channel.FaultChannel();
                 listener.MsmqReceiveHelper.FinalDisposition(messageProperty);
-                throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqBadXml), e));
+                throw listener.NormalizePoisonException(
+                    messageProperty.LookupId,
+                    new ProtocolException(SR.GetString(SR.MsmqBadXml), e)
+                );
             }
         }
 
-        internal static Message DecodeIntegrationDatagram(MsmqIntegrationChannelListener listener, MsmqReceiveHelper receiver, MsmqIntegrationInputMessage msmqMessage, MsmqMessageProperty messageProperty)
+        internal static Message DecodeIntegrationDatagram(
+            MsmqIntegrationChannelListener listener,
+            MsmqReceiveHelper receiver,
+            MsmqIntegrationInputMessage msmqMessage,
+            MsmqMessageProperty messageProperty
+        )
         {
             using (MsmqDiagnostics.BoundReceiveBytesOperation())
             {
@@ -362,11 +484,14 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    SecurityMessageProperty securityProperty = listener.ValidateSecurity(msmqMessage);
+                    SecurityMessageProperty securityProperty = listener.ValidateSecurity(
+                        msmqMessage
+                    );
                     if (null != securityProperty)
                         message.Properties.Security = securityProperty;
 
-                    MsmqIntegrationMessageProperty integrationProperty = new MsmqIntegrationMessageProperty();
+                    MsmqIntegrationMessageProperty integrationProperty =
+                        new MsmqIntegrationMessageProperty();
                     msmqMessage.SetMessageProperties(integrationProperty);
 
                     int size = msmqMessage.BodyLength.Value;
@@ -374,28 +499,47 @@ namespace System.ServiceModel.Channels
                     if (size > listener.MaxReceivedMessageSize)
                     {
                         receiver.FinalDisposition(messageProperty);
-                        throw listener.NormalizePoisonException(messageProperty.LookupId, MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(listener.MaxReceivedMessageSize));
+                        throw listener.NormalizePoisonException(
+                            messageProperty.LookupId,
+                            MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                                listener.MaxReceivedMessageSize
+                            )
+                        );
                     }
 
                     byte[] bodyBytes = msmqMessage.Body.GetBufferCopy(size);
 
-                    MemoryStream bodyStream = new MemoryStream(bodyBytes, 0, bodyBytes.Length, false);
+                    MemoryStream bodyStream = new MemoryStream(
+                        bodyBytes,
+                        0,
+                        bodyBytes.Length,
+                        false
+                    );
 
                     object body = null;
                     using (MsmqDiagnostics.BoundDecodeOperation())
                     {
                         try
                         {
-                            body = DeserializeForIntegration(listener, bodyStream, integrationProperty, messageProperty.LookupId);
+                            body = DeserializeForIntegration(
+                                listener,
+                                bodyStream,
+                                integrationProperty,
+                                messageProperty.LookupId
+                            );
                         }
                         catch (SerializationException e)
                         {
                             receiver.FinalDisposition(messageProperty);
-                            throw listener.NormalizePoisonException(messageProperty.LookupId, new ProtocolException(SR.GetString(SR.MsmqDeserializationError), e));
+                            throw listener.NormalizePoisonException(
+                                messageProperty.LookupId,
+                                new ProtocolException(SR.GetString(SR.MsmqDeserializationError), e)
+                            );
                         }
 
                         integrationProperty.Body = body;
-                        message.Properties[MsmqIntegrationMessageProperty.Name] = integrationProperty;
+                        message.Properties[MsmqIntegrationMessageProperty.Name] =
+                            integrationProperty;
                         bodyStream.Seek(0, SeekOrigin.Begin);
                         message.Headers.To = listener.Uri;
                         closeMessage = false;
@@ -411,9 +555,16 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static object DeserializeForIntegration(MsmqIntegrationChannelListener listener, Stream bodyStream, MsmqIntegrationMessageProperty property, long lookupId)
+        static object DeserializeForIntegration(
+            MsmqIntegrationChannelListener listener,
+            Stream bodyStream,
+            MsmqIntegrationMessageProperty property,
+            long lookupId
+        )
         {
-            MsmqMessageSerializationFormat serializationFormat = (listener.ReceiveParameters as MsmqIntegrationReceiveParameters).SerializationFormat;
+            MsmqMessageSerializationFormat serializationFormat = (
+                listener.ReceiveParameters as MsmqIntegrationReceiveParameters
+            ).SerializationFormat;
 
             switch (serializationFormat)
             {
@@ -434,11 +585,17 @@ namespace System.ServiceModel.Channels
                     return bodyStream;
 
                 default:
-                    throw new SerializationException(SR.GetString(SR.MsmqUnsupportedSerializationFormat, serializationFormat));
+                    throw new SerializationException(
+                        SR.GetString(SR.MsmqUnsupportedSerializationFormat, serializationFormat)
+                    );
             }
         }
 
-        static object XmlDeserializeForIntegration(MsmqIntegrationChannelListener listener, Stream stream, long lookupId)
+        static object XmlDeserializeForIntegration(
+            MsmqIntegrationChannelListener listener,
+            Stream stream,
+            long lookupId
+        )
         {
             XmlTextReader reader = new XmlTextReader(stream);
             reader.WhitespaceHandling = WhitespaceHandling.Significant;
@@ -463,4 +620,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

@@ -28,8 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
         IUIThreadOperationExecutor uiThreadOperationExecutor,
         ITextUndoHistoryRegistry undoHistoryRegistry,
         IEditorOperationsFactoryService editorOperationsFactoryService,
-        EditorOptionsService editorOptionsService)
-                : AbstractDocumentationCommentCommandHandler(uiThreadOperationExecutor, undoHistoryRegistry, editorOperationsFactoryService, editorOptionsService)
+        EditorOptionsService editorOptionsService
+    )
+        : AbstractDocumentationCommentCommandHandler(
+            uiThreadOperationExecutor,
+            undoHistoryRegistry,
+            editorOperationsFactoryService,
+            editorOptionsService
+        )
     {
         protected override string ExteriorTriviaText => "///";
     }

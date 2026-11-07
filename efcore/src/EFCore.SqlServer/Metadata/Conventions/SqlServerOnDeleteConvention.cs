@@ -14,9 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
-public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
-    ISkipNavigationForeignKeyChangedConvention,
-    IEntityTypeAnnotationChangedConvention
+public class SqlServerOnDeleteConvention
+    : CascadeDeleteConvention,
+        ISkipNavigationForeignKeyChangedConvention,
+        IEntityTypeAnnotationChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerOnDeleteConvention" />.
@@ -25,7 +26,8 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerOnDeleteConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -41,7 +43,8 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionForeignKey? foreignKey,
         IConventionForeignKey? oldForeignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
         if (foreignKey is not null && foreignKey.IsInModel)
         {
@@ -61,12 +64,13 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
         return ProcessSkipNavigations(foreignKey.GetReferencingSkipNavigations()) ?? deleteBehavior;
     }
 
-    private DeleteBehavior? ProcessSkipNavigations(IEnumerable<IConventionSkipNavigation> skipNavigations)
+    private DeleteBehavior? ProcessSkipNavigations(
+        IEnumerable<IConventionSkipNavigation> skipNavigations
+    )
     {
-        var skipNavigation = skipNavigations
-            .FirstOrDefault(
-                s => s.Inverse != null
-                    && IsMappedToSameTable(s.DeclaringEntityType, s.TargetEntityType));
+        var skipNavigation = skipNavigations.FirstOrDefault(s =>
+            s.Inverse != null && IsMappedToSameTable(s.DeclaringEntityType, s.TargetEntityType)
+        );
 
         if (skipNavigation != null)
         {
@@ -81,10 +85,15 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
             var deleteBehavior = DefaultDeleteBehavior(skipNavigation);
             var inverseDeleteBehavior = DefaultDeleteBehavior(inverseSkipNavigation);
 
-            if (deleteBehavior == DeleteBehavior.Cascade
+            if (
+                deleteBehavior == DeleteBehavior.Cascade
                 && inverseDeleteBehavior == DeleteBehavior.Cascade
-                && !(inverseSkipNavigation.ForeignKey!.GetDeleteBehaviorConfigurationSource() == ConfigurationSource.Explicit
-                    && inverseSkipNavigation.ForeignKey!.DeleteBehavior != DeleteBehavior.Cascade))
+                && !(
+                    inverseSkipNavigation.ForeignKey!.GetDeleteBehaviorConfigurationSource()
+                        == ConfigurationSource.Explicit
+                    && inverseSkipNavigation.ForeignKey!.DeleteBehavior != DeleteBehavior.Cascade
+                )
+            )
             {
                 deleteBehavior = DeleteBehavior.ClientCascade;
             }
@@ -97,10 +106,15 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
 
         return null;
 
-        DeleteBehavior DefaultDeleteBehavior(IConventionSkipNavigation conventionSkipNavigation)
-            => conventionSkipNavigation.ForeignKey!.IsRequired ? DeleteBehavior.Cascade : DeleteBehavior.ClientSetNull;
+        DeleteBehavior DefaultDeleteBehavior(IConventionSkipNavigation conventionSkipNavigation) =>
+            conventionSkipNavigation.ForeignKey!.IsRequired
+                ? DeleteBehavior.Cascade
+                : DeleteBehavior.ClientSetNull;
 
-        bool IsMappedToSameTable(IConventionEntityType entityType1, IConventionEntityType entityType2)
+        bool IsMappedToSameTable(
+            IConventionEntityType entityType1,
+            IConventionEntityType entityType2
+        )
         {
             var tableName1 = entityType1.GetTableName();
             var tableName2 = entityType2.GetTableName();
@@ -111,10 +125,18 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
                 && entityType1.GetSchema() == entityType2.GetSchema();
         }
 
-        bool IsFirstSkipNavigation(IConventionSkipNavigation navigation)
-            => navigation.DeclaringEntityType != navigation.TargetEntityType
-                ? string.Compare(navigation.DeclaringEntityType.Name, navigation.TargetEntityType.Name, StringComparison.Ordinal) < 0
-                : string.Compare(navigation.Name, navigation.Inverse!.Name, StringComparison.Ordinal) < 0;
+        bool IsFirstSkipNavigation(IConventionSkipNavigation navigation) =>
+            navigation.DeclaringEntityType != navigation.TargetEntityType
+                ? string.Compare(
+                    navigation.DeclaringEntityType.Name,
+                    navigation.TargetEntityType.Name,
+                    StringComparison.Ordinal
+                ) < 0
+                : string.Compare(
+                    navigation.Name,
+                    navigation.Inverse!.Name,
+                    StringComparison.Ordinal
+                ) < 0;
     }
 
     /// <inheritdoc />
@@ -123,7 +145,8 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention,
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name is RelationalAnnotationNames.TableName or RelationalAnnotationNames.Schema)
         {

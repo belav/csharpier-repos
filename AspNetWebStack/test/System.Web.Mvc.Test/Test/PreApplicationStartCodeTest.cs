@@ -20,8 +20,13 @@ namespace System.Web.Mvc.Test
         public void PreApplicationStartMethodAttributeTest()
         {
             Assembly assembly = typeof(Controller).Assembly;
-            object[] attributes = assembly.GetCustomAttributes(typeof(PreApplicationStartMethodAttribute), true);
-            var preAppStartMethodAttribute = Assert.Single(attributes.Cast<PreApplicationStartMethodAttribute>());
+            object[] attributes = assembly.GetCustomAttributes(
+                typeof(PreApplicationStartMethodAttribute),
+                true
+            );
+            var preAppStartMethodAttribute = Assert.Single(
+                attributes.Cast<PreApplicationStartMethodAttribute>()
+            );
             Type preAppStartMethodType = preAppStartMethodAttribute.Type;
             Assert.Equal(typeof(PreApplicationStartCode), preAppStartMethodType);
         }

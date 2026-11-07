@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Build.Framework;
-using Microsoft.Build.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Tasks;
 
 namespace Microsoft.WebAssembly.Build.Tasks
 {
@@ -40,7 +40,9 @@ namespace Microsoft.WebAssembly.Build.Tasks
                 Command = $"bash -c 'source {envScriptPath} > /dev/null 2>&1 && {Command}'";
             }
 
-            var workingDir = string.IsNullOrEmpty(WorkingDirectory) ? Directory.GetCurrentDirectory() : WorkingDirectory;
+            var workingDir = string.IsNullOrEmpty(WorkingDirectory)
+                ? Directory.GetCurrentDirectory()
+                : WorkingDirectory;
             Log.LogMessage(MessageImportance.Low, $"Working directory: {workingDir}");
             Log.LogMessage(MessageImportance.Low, $"Using Command: {Command}");
 
@@ -49,7 +51,9 @@ namespace Microsoft.WebAssembly.Build.Tasks
             bool CheckEnvScript(string envScriptPath)
             {
                 if (!File.Exists(envScriptPath))
-                    Log.LogError($"Could not find '{envScriptPath}' required to run command: {Command}");
+                    Log.LogError(
+                        $"Could not find '{envScriptPath}' required to run command: {Command}"
+                    );
 
                 return !Log.HasLoggedErrors;
             }

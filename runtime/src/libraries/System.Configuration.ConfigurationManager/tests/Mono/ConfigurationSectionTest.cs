@@ -41,7 +41,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void TwoConfigElementsInARow() // Bug #521231
         {
-            string config = @"<fooconfig><foos><foo id=""1"" /></foos><bars><bar id=""1"" /></bars></fooconfig>";
+            string config =
+                @"<fooconfig><foos><foo id=""1"" /></foos><bars><bar id=""1"" /></bars></fooconfig>";
             var fooSection = new FooConfigSection();
             fooSection.Load(config);
         }
@@ -96,7 +97,6 @@ namespace MonoTests.System.Configuration
                 get { return (int)base["id"]; }
                 set { base["id"] = value; }
             }
-
         }
 
         class BarConfigElementCollection : ConfigurationElementCollection

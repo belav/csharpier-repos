@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Wrapping;
 /// Base type for the C# and VB wrapping refactorings.  The only responsibility of this type is
 /// to walk up the tree at the position the user is at, seeing if any node above the user can be
 /// wrapped by any provided <see cref="ISyntaxWrapper"/>s.
-/// 
+///
 /// Once we get any wrapping actions, we stop looking further.  This keeps the refactorings
 /// scoped as closely as possible to where the user is, as well as preventing overloading of the
 /// lightbulb with too many actions.
@@ -25,13 +25,15 @@ internal abstract class AbstractWrappingCodeRefactoringProvider : CodeRefactorin
 {
     private readonly ImmutableArray<ISyntaxWrapper> _wrappers;
 
-    protected AbstractWrappingCodeRefactoringProvider(
-        ImmutableArray<ISyntaxWrapper> wrappers)
+    protected AbstractWrappingCodeRefactoringProvider(ImmutableArray<ISyntaxWrapper> wrappers)
     {
         _wrappers = wrappers;
     }
 
-    protected abstract SyntaxWrappingOptions GetWrappingOptions(IOptionsReader options, CodeActionOptions ideOptions);
+    protected abstract SyntaxWrappingOptions GetWrappingOptions(
+        IOptionsReader options,
+        CodeActionOptions ideOptions
+    );
 
     public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
@@ -40,15 +42,23 @@ internal abstract class AbstractWrappingCodeRefactoringProvider : CodeRefactorin
             return;
 
         var position = span.Start;
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
         var token = root.FindToken(position);
 
-        var configOptions = await document.GetAnalyzerConfigOptionsAsync(cancellationToken).ConfigureAwait(false);
-        var options = GetWrappingOptions(configOptions, context.Options.GetOptions(document.Project.Services));
+        var configOptions = await document
+            .GetAnalyzerConfigOptionsAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var options = GetWrappingOptions(
+            configOptions,
+            context.Options.GetOptions(document.Project.Services)
+        );
 
         foreach (var node in token.GetRequiredParent().AncestorsAndSelf())
         {
-            var containsSyntaxError = node.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error);
+            var containsSyntaxError = node.GetDiagnostics()
+                .Any(d => d.Severity == DiagnosticSeverity.Error);
 
             // Check if any wrapper can handle this node.  If so, then we're done, otherwise
             // keep walking up.
@@ -56,8 +66,16 @@ internal abstract class AbstractWrappingCodeRefactoringProvider : CodeRefactorin
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var computer = await wrapper.TryCreateComputerAsync(
-                    document, position, node, options, containsSyntaxError, cancellationToken).ConfigureAwait(false);
+                var computer = await wrapper
+                    .TryCreateComputerAsync(
+                        document,
+                        position,
+                        node,
+                        options,
+                        containsSyntaxError,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (computer == null)
                     continue;

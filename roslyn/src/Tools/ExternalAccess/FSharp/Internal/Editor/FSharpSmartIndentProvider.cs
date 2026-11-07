@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public FSharpSmartIndentProvider(
             [Import(AllowDefault = true)] IFSharpSynchronousIndentationService? legacyService,
             [Import(AllowDefault = true)] IFSharpIndentationService? service,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             Contract.ThrowIfTrue(service == null && legacyService == null);
 
@@ -49,8 +50,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             _globalOptions = globalOptions;
         }
 
-        public ISmartIndent? CreateSmartIndent(ITextView textView)
-            => _globalOptions.GetOption(SmartIndenterOptionsStorage.SmartIndenter) ? new SmartIndent(textView, this) : null;
+        public ISmartIndent? CreateSmartIndent(ITextView textView) =>
+            _globalOptions.GetOption(SmartIndenterOptionsStorage.SmartIndenter)
+                ? new SmartIndent(textView, this)
+                : null;
 
         private sealed class SmartIndent : ISmartIndent
         {
@@ -63,14 +66,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                 _provider = provider;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
-            public int? GetDesiredIndentation(ITextSnapshotLine line)
-                => GetDesiredIndentation(line, CancellationToken.None);
+            public int? GetDesiredIndentation(ITextSnapshotLine line) =>
+                GetDesiredIndentation(line, CancellationToken.None);
 
-            private int? GetDesiredIndentation(ITextSnapshotLine line, CancellationToken cancellationToken)
+            private int? GetDesiredIndentation(
+                ITextSnapshotLine line,
+                CancellationToken cancellationToken
+            )
             {
                 using (Logger.LogBlock(FunctionId.SmartIndentation_Start, cancellationToken))
                 {
@@ -85,23 +89,45 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                     {
                         var text = document.GetTextSynchronously(cancellationToken);
 
-                        var indentStyle = _provider._globalOptions.GetOption(IndentationOptionsStorage.SmartIndent, document.Project.Language);
+                        var indentStyle = _provider._globalOptions.GetOption(
+                            IndentationOptionsStorage.SmartIndent,
+                            document.Project.Language
+                        );
 
                         var fsharpOptions = new FSharpIndentationOptions(
-                            TabSize: _textView.Options.GetOptionValue(DefaultOptions.TabSizeOptionId),
-                            IndentStyle: (FormattingOptions.IndentStyle)indentStyle);
+                            TabSize: _textView.Options.GetOptionValue(
+                                DefaultOptions.TabSizeOptionId
+                            ),
+                            IndentStyle: (FormattingOptions.IndentStyle)indentStyle
+                        );
 
 #pragma warning disable 0618 // Compat with existing EA api
-                        result = _provider._service.GetDesiredIndentation(document.Project.LanguageServices, text, document.Id, document.FilePath, line.LineNumber, fsharpOptions);
+                        result = _provider._service.GetDesiredIndentation(
+                            document.Project.LanguageServices,
+                            text,
+                            document.Id,
+                            document.FilePath,
+                            line.LineNumber,
+                            fsharpOptions
+                        );
 #pragma warning restore
                     }
                     else
                     {
                         Contract.ThrowIfNull(_provider._legacyService);
-                        result = _provider._legacyService.GetDesiredIndentation(document, line.LineNumber, cancellationToken);
+                        result = _provider._legacyService.GetDesiredIndentation(
+                            document,
+                            line.LineNumber,
+                            cancellationToken
+                        );
                     }
 
-                    return result.HasValue ? new IndentationResult(result.Value.BasePosition, result.Value.Offset).GetIndentation(_textView, line) : null;
+                    return result.HasValue
+                        ? new IndentationResult(
+                            result.Value.BasePosition,
+                            result.Value.Offset
+                        ).GetIndentation(_textView, line)
+                        : null;
                 }
             }
         }

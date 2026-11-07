@@ -7,7 +7,6 @@ using Xunit;
 
 namespace TestClass
 {
-
     public class Test
     {
         [Fact]
@@ -24,6 +23,7 @@ namespace TestClass
             }
         }
     }
+
     public struct ExpenseValues
     {
         public double AnnualPaidOutsideFunds;
@@ -33,10 +33,7 @@ namespace TestClass
     {
         double mPeriodicExpense = 10000.0;
 
-        public TestClass()
-        {
-
-        }
+        public TestClass() { }
 
         public double ApplyTime()
         {

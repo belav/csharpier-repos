@@ -116,7 +116,10 @@ namespace System.Web.Mvc.Test
         {
             var filter = new ViewTypeParserFilter();
             var pageAttributes = new Dictionary<string, string> { { "inherits", "foobar<baz>" } };
-            var importAttributes = new Dictionary<string, string> { { "inherits", "dummyvalue<baz>" } };
+            var importAttributes = new Dictionary<string, string>
+            {
+                { "inherits", "dummyvalue<baz>" },
+            };
             var builder = new MvcBuilder();
 
             filter.PreprocessDirective("page", pageAttributes);
@@ -189,8 +192,14 @@ namespace System.Web.Mvc.Test
         public void VBDirectivesAfterPageDirectiveProperlyPreserveInheritsDirective()
         {
             var filter = new ViewTypeParserFilter();
-            var pageAttributes = new Dictionary<string, string> { { "inherits", "foobar(of baz)" } };
-            var importAttributes = new Dictionary<string, string> { { "inherits", "dummyvalue(of baz)" } };
+            var pageAttributes = new Dictionary<string, string>
+            {
+                { "inherits", "foobar(of baz)" },
+            };
+            var importAttributes = new Dictionary<string, string>
+            {
+                { "inherits", "dummyvalue(of baz)" },
+            };
             var builder = new MvcBuilder();
 
             filter.PreprocessDirective("page", pageAttributes);

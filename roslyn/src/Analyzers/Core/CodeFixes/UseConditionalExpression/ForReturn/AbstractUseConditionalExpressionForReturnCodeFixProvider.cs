@@ -23,71 +23,111 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         TStatementSyntax,
         TIfStatementSyntax,
         TExpressionSyntax,
-        TConditionalExpressionSyntax>
-        : AbstractUseConditionalExpressionCodeFixProvider<TStatementSyntax, TIfStatementSyntax, TExpressionSyntax, TConditionalExpressionSyntax>
+        TConditionalExpressionSyntax
+    >
+        : AbstractUseConditionalExpressionCodeFixProvider<
+            TStatementSyntax,
+            TIfStatementSyntax,
+            TExpressionSyntax,
+            TConditionalExpressionSyntax
+        >
         where TStatementSyntax : SyntaxNode
         where TIfStatementSyntax : TStatementSyntax
         where TExpressionSyntax : SyntaxNode
         where TConditionalExpressionSyntax : TExpressionSyntax
     {
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var (title, key) = context.Diagnostics.First().Properties.ContainsKey(UseConditionalExpressionHelpers.CanSimplifyName)
+            var (title, key) = context
+                .Diagnostics.First()
+                .Properties.ContainsKey(UseConditionalExpressionHelpers.CanSimplifyName)
                 ? (AnalyzersResources.Simplify_check, nameof(AnalyzersResources.Simplify_check))
-                : (AnalyzersResources.Convert_to_conditional_expression, nameof(AnalyzersResources.Convert_to_conditional_expression));
+                : (
+                    AnalyzersResources.Convert_to_conditional_expression,
+                    nameof(AnalyzersResources.Convert_to_conditional_expression)
+                );
 
             RegisterCodeFix(context, title, key);
             return Task.CompletedTask;
         }
 
         protected override async Task FixOneAsync(
-            Document document, Diagnostic diagnostic,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            Diagnostic diagnostic,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var ifStatement = (TIfStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
+            var ifStatement = (TIfStatementSyntax)
+                diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var ifOperation = (IConditionalOperation)semanticModel.GetOperation(ifStatement, cancellationToken)!;
-            var containingSymbol = semanticModel.GetRequiredEnclosingSymbol(ifStatement.SpanStart, cancellationToken);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var ifOperation = (IConditionalOperation)
+                semanticModel.GetOperation(ifStatement, cancellationToken)!;
+            var containingSymbol = semanticModel.GetRequiredEnclosingSymbol(
+                ifStatement.SpanStart,
+                cancellationToken
+            );
 
-            if (!UseConditionalExpressionForReturnHelpers.TryMatchPattern(
-                    syntaxFacts, ifOperation, containingSymbol, out var isRef,
-                    out var trueStatement, out var falseStatement,
-                    out var trueReturn, out var falseReturn))
+            if (
+                !UseConditionalExpressionForReturnHelpers.TryMatchPattern(
+                    syntaxFacts,
+                    ifOperation,
+                    containingSymbol,
+                    out var isRef,
+                    out var trueStatement,
+                    out var falseStatement,
+                    out var trueReturn,
+                    out var falseReturn
+                )
+            )
             {
                 return;
             }
 
             var anyReturn = (trueReturn ?? falseReturn)!;
             var conditionalExpression = await CreateConditionalExpressionAsync(
-                document, ifOperation,
-                trueStatement, falseStatement,
-                trueReturn?.ReturnedValue ?? trueStatement,
-                falseReturn?.ReturnedValue ?? falseStatement,
-                isRef,
-                fallbackOptions,
-                cancellationToken).ConfigureAwait(false);
+                    document,
+                    ifOperation,
+                    trueStatement,
+                    falseStatement,
+                    trueReturn?.ReturnedValue ?? trueStatement,
+                    falseReturn?.ReturnedValue ?? falseStatement,
+                    isRef,
+                    fallbackOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
-            var returnStatement = anyReturn.Kind == OperationKind.YieldReturn
-                ? (TStatementSyntax)generatorInternal.YieldReturnStatement(conditionalExpression)
-                : (TStatementSyntax)editor.Generator.ReturnStatement(conditionalExpression);
+            var returnStatement =
+                anyReturn.Kind == OperationKind.YieldReturn
+                    ? (TStatementSyntax)
+                        generatorInternal.YieldReturnStatement(conditionalExpression)
+                    : (TStatementSyntax)editor.Generator.ReturnStatement(conditionalExpression);
 
             returnStatement = returnStatement.WithTriviaFrom(ifStatement);
 
             editor.ReplaceNode(
                 ifStatement,
-                WrapWithBlockIfAppropriate(ifStatement, returnStatement));
+                WrapWithBlockIfAppropriate(ifStatement, returnStatement)
+            );
 
             // if the if-statement had no 'else' clause, then we were using the following statement
             // as the 'false' statement.  If so, remove it explicitly.
             if (ifOperation.WhenFalse == null)
             {
-                editor.RemoveNode(falseStatement.Syntax, GetRemoveOptions(syntaxFacts, falseStatement.Syntax));
+                editor.RemoveNode(
+                    falseStatement.Syntax,
+                    GetRemoveOptions(syntaxFacts, falseStatement.Syntax)
+                );
             }
         }
     }

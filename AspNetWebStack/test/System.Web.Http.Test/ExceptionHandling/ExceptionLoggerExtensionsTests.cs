@@ -16,8 +16,9 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             Task expectedTask = CreateCompletedTask();
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock
-                .Setup(h => h.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(h =>
+                    h.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+                )
                 .Returns(expectedTask);
 
             IExceptionLogger logger = mock.Object;
@@ -28,14 +29,26 @@ namespace System.Web.Http.ExceptionHandling
                 CancellationToken expectedCancellationToken = tokenSource.Token;
 
                 // Act
-                Task task = ExceptionLoggerExtensions.LogAsync(logger, expectedContext, expectedCancellationToken);
+                Task task = ExceptionLoggerExtensions.LogAsync(
+                    logger,
+                    expectedContext,
+                    expectedCancellationToken
+                );
 
                 // Assert
                 Assert.Same(expectedTask, task);
                 await task;
 
-                mock.Verify(h => h.LogAsync(It.Is<ExceptionLoggerContext>(c => c.ExceptionContext == expectedContext),
-                    expectedCancellationToken), Times.Once());
+                mock.Verify(
+                    h =>
+                        h.LogAsync(
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext == expectedContext
+                            ),
+                            expectedCancellationToken
+                        ),
+                    Times.Once()
+                );
             }
         }
 
@@ -48,8 +61,10 @@ namespace System.Web.Http.ExceptionHandling
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-                ExceptionLoggerExtensions.LogAsync(logger, context, cancellationToken), "logger");
+            Assert.ThrowsArgumentNull(
+                () => ExceptionLoggerExtensions.LogAsync(logger, context, cancellationToken),
+                "logger"
+            );
         }
 
         [Fact]
@@ -61,8 +76,10 @@ namespace System.Web.Http.ExceptionHandling
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-                ExceptionLoggerExtensions.LogAsync(logger, context, cancellationToken), "context");
+            Assert.ThrowsArgumentNull(
+                () => ExceptionLoggerExtensions.LogAsync(logger, context, cancellationToken),
+                "context"
+            );
         }
 
         private static CancellationTokenSource CreateCancellationTokenSource()

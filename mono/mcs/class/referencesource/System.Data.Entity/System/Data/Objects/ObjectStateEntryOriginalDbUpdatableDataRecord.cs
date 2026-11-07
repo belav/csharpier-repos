@@ -21,13 +21,20 @@ namespace System.Data.Objects
     // See ObjectStateEntryOriginalDbUpdatableDataRecord_Public for user scenarios.
     internal class ObjectStateEntryOriginalDbUpdatableDataRecord_Internal : OriginalValueRecord
     {
-        internal ObjectStateEntryOriginalDbUpdatableDataRecord_Internal(EntityEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject)
+        internal ObjectStateEntryOriginalDbUpdatableDataRecord_Internal(
+            EntityEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject
+        )
             : base(cacheEntry, metadata, userObject)
         {
             EntityUtil.CheckArgumentNull(cacheEntry, "cacheEntry");
             EntityUtil.CheckArgumentNull(userObject, "userObject");
             EntityUtil.CheckArgumentNull(metadata, "metadata");
-            Debug.Assert(!cacheEntry.IsKeyEntry, "Cannot create an ObjectStateEntryOriginalDbUpdatableDataRecord_Internal for a key entry");
+            Debug.Assert(
+                !cacheEntry.IsKeyEntry,
+                "Cannot create an ObjectStateEntryOriginalDbUpdatableDataRecord_Internal for a key entry"
+            );
             switch (cacheEntry.State)
             {
                 case EntityState.Unchanged:
@@ -35,19 +42,34 @@ namespace System.Data.Objects
                 case EntityState.Deleted:
                     break;
                 default:
-                    Debug.Assert(false, "An OriginalValueRecord cannot be created for an object in an added or detached state.");
+                    Debug.Assert(
+                        false,
+                        "An OriginalValueRecord cannot be created for an object in an added or detached state."
+                    );
                     break;
             }
         }
+
         protected override object GetRecordValue(int ordinal)
         {
             Debug.Assert(!_cacheEntry.IsRelationship, "should not be relationship");
-            return (_cacheEntry as EntityEntry).GetOriginalEntityValue(_metadata, ordinal, _userObject, ObjectStateValueRecord.OriginalUpdatableInternal);
+            return (_cacheEntry as EntityEntry).GetOriginalEntityValue(
+                _metadata,
+                ordinal,
+                _userObject,
+                ObjectStateValueRecord.OriginalUpdatableInternal
+            );
         }
+
         protected override void SetRecordValue(int ordinal, object value)
         {
             Debug.Assert(!_cacheEntry.IsRelationship, "should not be relationship");
-            (_cacheEntry as EntityEntry).SetOriginalEntityValue(_metadata, ordinal, _userObject, value);
+            (_cacheEntry as EntityEntry).SetOriginalEntityValue(
+                _metadata,
+                ordinal,
+                _userObject,
+                value
+            );
         }
     }
 
@@ -56,12 +78,18 @@ namespace System.Data.Objects
     // This version must maintain information about the index of the top-level entity property that corresponds to this record, because the record
     // may represent a complex type somewhere in an entity hierarchy and this is the only way we know which entity property it is associated with.
     // This version also does minimal necessary validation on the values that the user is trying to set.
-    internal sealed class ObjectStateEntryOriginalDbUpdatableDataRecord_Public : ObjectStateEntryOriginalDbUpdatableDataRecord_Internal
+    internal sealed class ObjectStateEntryOriginalDbUpdatableDataRecord_Public
+        : ObjectStateEntryOriginalDbUpdatableDataRecord_Internal
     {
         // Will be EntityEntry.s_EntityRoot for entities and for complex types will be the index of the top-level entity property related to this complex type
         int _parentEntityPropertyIndex;
 
-        internal ObjectStateEntryOriginalDbUpdatableDataRecord_Public(EntityEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject, int parentEntityPropertyIndex)
+        internal ObjectStateEntryOriginalDbUpdatableDataRecord_Public(
+            EntityEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject,
+            int parentEntityPropertyIndex
+        )
             : base(cacheEntry, metadata, userObject)
         {
             _parentEntityPropertyIndex = parentEntityPropertyIndex;
@@ -70,7 +98,13 @@ namespace System.Data.Objects
         protected override object GetRecordValue(int ordinal)
         {
             Debug.Assert(!_cacheEntry.IsRelationship, "should not be relationship");
-            return (_cacheEntry as EntityEntry).GetOriginalEntityValue(_metadata, ordinal, _userObject, ObjectStateValueRecord.OriginalUpdatablePublic, GetPropertyIndex(ordinal));
+            return (_cacheEntry as EntityEntry).GetOriginalEntityValue(
+                _metadata,
+                ordinal,
+                _userObject,
+                ObjectStateValueRecord.OriginalUpdatablePublic,
+                GetPropertyIndex(ordinal)
+            );
         }
 
         protected override void SetRecordValue(int ordinal, object value)
@@ -104,12 +138,18 @@ namespace System.Data.Objects
                 // Verify non-nullable EDM members are not being set to null
                 // Need to continue allowing CLR reference types to be set to null for backwards compatibility
                 Type memberClrType = member.ClrType;
-                if ((object)DBNull.Value == fieldValue &&
-                    memberClrType.IsValueType &&
-                    !member.CdmMetadata.Nullable)
+                if (
+                    (object)DBNull.Value == fieldValue
+                    && memberClrType.IsValueType
+                    && !member.CdmMetadata.Nullable
+                )
                 {
                     // Throw if the underlying CLR type of this property is not nullable, and it is being set to null
-                    throw EntityUtil.NullOriginalValueForNonNullableProperty(member.CLayerName, member.ClrMetadata.Name, member.ClrMetadata.DeclaringType.FullName);
+                    throw EntityUtil.NullOriginalValueForNonNullableProperty(
+                        member.CLayerName,
+                        member.ClrMetadata.Name,
+                        member.ClrMetadata.DeclaringType.FullName
+                    );
                 }
 
                 base.SetRecordValue(ordinal, value);
@@ -128,7 +168,9 @@ namespace System.Data.Objects
         // For entities the property index is the specified ordinal, but otherwise it's the top-level entity property index that we have saved
         private int GetPropertyIndex(int ordinal)
         {
-            return _parentEntityPropertyIndex == EntityEntry.s_EntityRoot ? ordinal : _parentEntityPropertyIndex;
+            return _parentEntityPropertyIndex == EntityEntry.s_EntityRoot
+                ? ordinal
+                : _parentEntityPropertyIndex;
         }
     }
 }

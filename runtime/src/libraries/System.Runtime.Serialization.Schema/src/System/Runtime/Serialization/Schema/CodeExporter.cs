@@ -17,8 +17,10 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, System.Runtime.Serialization.DataContracts.DataContract>;
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 using ExceptionUtil = System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility;
 
 namespace System.Runtime.Serialization
@@ -30,7 +32,8 @@ namespace System.Runtime.Serialization
         private const int MaxIdentifierLength = 511;
 
         private static readonly object s_codeUserDataActualTypeKey = new object();
-        private static readonly object s_surrogateDataKey = typeof(ISerializationSurrogateProvider2);
+        private static readonly object s_surrogateDataKey =
+            typeof(ISerializationSurrogateProvider2);
 
         private readonly DataContractSet _dataContractSet;
         private readonly CodeCompileUnit _codeCompileUnit;
@@ -38,7 +41,11 @@ namespace System.Runtime.Serialization
         private readonly Dictionary<string, string> _namespaces;
         private readonly Dictionary<string, string?> _clrNamespaces;
 
-        internal CodeExporter(DataContractSet dataContractSet, ImportOptions? options, CodeCompileUnit codeCompileUnit)
+        internal CodeExporter(
+            DataContractSet dataContractSet,
+            ImportOptions? options,
+            CodeCompileUnit codeCompileUnit
+        )
         {
             _dataContractSet = dataContractSet;
             _codeCompileUnit = codeCompileUnit;
@@ -51,10 +58,18 @@ namespace System.Runtime.Serialization
             foreach (KeyValuePair<XmlQualifiedName, DataContract> pair in dataContractSet.Contracts)
             {
                 DataContract dataContract = pair.Value;
-                if (!(dataContract.IsBuiltInDataContract || dataContract.Is(DataContractType.ClassDataContract)))
+                if (
+                    !(
+                        dataContract.IsBuiltInDataContract
+                        || dataContract.Is(DataContractType.ClassDataContract)
+                    )
+                )
                 {
                     ContractCodeDomInfo contractCodeDomInfo = GetContractCodeDomInfo(dataContract);
-                    if (contractCodeDomInfo.IsProcessed && !contractCodeDomInfo.UsesWildcardNamespace)
+                    if (
+                        contractCodeDomInfo.IsProcessed
+                        && !contractCodeDomInfo.UsesWildcardNamespace
+                    )
                     {
                         string? clrNamespace = contractCodeDomInfo.ClrNamespace;
                         if (clrNamespace != null && !_clrNamespaces.ContainsKey(clrNamespace))
@@ -78,7 +93,16 @@ namespace System.Runtime.Serialization
                     if (_clrNamespaces.TryGetValue(clrNamespace, out currentDataContractNamespace))
                     {
                         if (dataContractNamespace != currentDataContractNamespace)
-                            throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.CLRNamespaceMappedMultipleTimes, currentDataContractNamespace, dataContractNamespace, clrNamespace)));
+                            throw ExceptionUtil.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.Format(
+                                        SR.CLRNamespaceMappedMultipleTimes,
+                                        currentDataContractNamespace,
+                                        dataContractNamespace,
+                                        clrNamespace
+                                    )
+                                )
+                            );
                     }
                     else
                         _clrNamespaces.Add(clrNamespace, dataContractNamespace);
@@ -113,7 +137,6 @@ namespace System.Runtime.Serialization
                     }
                 }
             }
-
         }
 
         private void AddReferencedAssembly(Assembly assembly)
@@ -135,7 +158,6 @@ namespace System.Runtime.Serialization
             }
             if (!alreadyExisting)
                 _codeCompileUnit.ReferencedAssemblies.Add(assemblyName);
-
         }
 
         private bool GenerateSerializableTypes
@@ -160,32 +182,62 @@ namespace System.Runtime.Serialization
 
         private bool SupportsDeclareEvents
         {
-            get { return (CodeProvider == null) ? true : CodeProvider.Supports(GeneratorSupport.DeclareEvents); }
+            get
+            {
+                return (CodeProvider == null)
+                    ? true
+                    : CodeProvider.Supports(GeneratorSupport.DeclareEvents);
+            }
         }
 
         private bool SupportsDeclareValueTypes
         {
-            get { return (CodeProvider == null) ? true : CodeProvider.Supports(GeneratorSupport.DeclareValueTypes); }
+            get
+            {
+                return (CodeProvider == null)
+                    ? true
+                    : CodeProvider.Supports(GeneratorSupport.DeclareValueTypes);
+            }
         }
 
         private bool SupportsGenericTypeReference
         {
-            get { return (CodeProvider == null) ? true : CodeProvider.Supports(GeneratorSupport.GenericTypeReference); }
+            get
+            {
+                return (CodeProvider == null)
+                    ? true
+                    : CodeProvider.Supports(GeneratorSupport.GenericTypeReference);
+            }
         }
 
         private bool SupportsAssemblyAttributes
         {
-            get { return (CodeProvider == null) ? true : CodeProvider.Supports(GeneratorSupport.AssemblyAttributes); }
+            get
+            {
+                return (CodeProvider == null)
+                    ? true
+                    : CodeProvider.Supports(GeneratorSupport.AssemblyAttributes);
+            }
         }
 
         private bool SupportsPartialTypes
         {
-            get { return (CodeProvider == null) ? true : CodeProvider.Supports(GeneratorSupport.PartialTypes); }
+            get
+            {
+                return (CodeProvider == null)
+                    ? true
+                    : CodeProvider.Supports(GeneratorSupport.PartialTypes);
+            }
         }
 
         private bool SupportsNestedTypes
         {
-            get { return (CodeProvider == null) ? true : CodeProvider.Supports(GeneratorSupport.NestedTypes); }
+            get
+            {
+                return (CodeProvider == null)
+                    ? true
+                    : CodeProvider.Supports(GeneratorSupport.NestedTypes);
+            }
         }
 
         private string FileExtension
@@ -208,7 +260,9 @@ namespace System.Runtime.Serialization
         {
             try
             {
-                foreach (KeyValuePair<XmlQualifiedName, DataContract> pair in _dataContractSet.Contracts)
+                foreach (
+                    KeyValuePair<XmlQualifiedName, DataContract> pair in _dataContractSet.Contracts
+                )
                 {
                     DataContract dataContract = pair.Value;
                     if (dataContract.IsBuiltInDataContract)
@@ -221,9 +275,17 @@ namespace System.Runtime.Serialization
                         {
                             case DataContractType.ClassDataContract:
                                 if (dataContract.IsISerializable)
-                                    ExportISerializableDataContract(dataContract, contractCodeDomInfo);
+                                    ExportISerializableDataContract(
+                                        dataContract,
+                                        contractCodeDomInfo
+                                    );
                                 else
-                                    ExportClassDataContractHierarchy(dataContract.XmlName, dataContract, contractCodeDomInfo, new Dictionary<XmlQualifiedName, object?>());
+                                    ExportClassDataContractHierarchy(
+                                        dataContract.XmlName,
+                                        dataContract,
+                                        contractCodeDomInfo,
+                                        new Dictionary<XmlQualifiedName, object?>()
+                                    );
                                 break;
                             case DataContractType.CollectionDataContract:
                                 ExportCollectionDataContract(dataContract, contractCodeDomInfo);
@@ -235,16 +297,30 @@ namespace System.Runtime.Serialization
                                 if (dataContract is XmlDataContract xmlDataContract)
                                     ExportXmlDataContract(xmlDataContract, contractCodeDomInfo);
                                 else
-                                    throw ExceptionUtil.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.UnexpectedContractType, GetClrTypeFullName(dataContract.GetType()), GetClrTypeFullName(dataContract.UnderlyingType))));
+                                    throw ExceptionUtil.ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.Format(
+                                                SR.UnexpectedContractType,
+                                                GetClrTypeFullName(dataContract.GetType()),
+                                                GetClrTypeFullName(dataContract.UnderlyingType)
+                                            )
+                                        )
+                                    );
                                 break;
-                        };
+                        }
+                        ;
                         contractCodeDomInfo.IsProcessed = true;
                     }
                 }
 
-                if (_options?.DataContractSurrogate is ISerializationCodeDomSurrogateProvider cdSurrogateProvider)
+                if (
+                    _options?.DataContractSurrogate
+                    is ISerializationCodeDomSurrogateProvider cdSurrogateProvider
+                )
                 {
-                    CodeNamespace[] namespaces = new CodeNamespace[_codeCompileUnit.Namespaces.Count];
+                    CodeNamespace[] namespaces = new CodeNamespace[
+                        _codeCompileUnit.Namespaces.Count
+                    ];
                     _codeCompileUnit.Namespaces.CopyTo(namespaces, 0);
                     foreach (CodeNamespace codeNamespace in namespaces)
                         InvokeProcessImportedType(codeNamespace.Types, cdSurrogateProvider);
@@ -257,12 +333,30 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void ExportClassDataContractHierarchy(XmlQualifiedName typeName, DataContract classContract, ContractCodeDomInfo contractCodeDomInfo, Dictionary<XmlQualifiedName, object?> contractNamesInHierarchy)
+        private void ExportClassDataContractHierarchy(
+            XmlQualifiedName typeName,
+            DataContract classContract,
+            ContractCodeDomInfo contractCodeDomInfo,
+            Dictionary<XmlQualifiedName, object?> contractNamesInHierarchy
+        )
         {
             Debug.Assert(classContract.Is(DataContractType.ClassDataContract));
 
             if (contractNamesInHierarchy.ContainsKey(classContract.XmlName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.TypeCannotBeImported, typeName.Name, typeName.Namespace, SR.Format(SR.CircularTypeReference, classContract.XmlName.Name, classContract.XmlName.Namespace))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.Format(
+                            SR.TypeCannotBeImported,
+                            typeName.Name,
+                            typeName.Namespace,
+                            SR.Format(
+                                SR.CircularTypeReference,
+                                classContract.XmlName.Name,
+                                classContract.XmlName.Namespace
+                            )
+                        )
+                    )
+                );
             contractNamesInHierarchy.Add(classContract.XmlName, null);
 
             DataContract? baseContract = classContract.BaseContract;
@@ -271,14 +365,22 @@ namespace System.Runtime.Serialization
                 ContractCodeDomInfo baseContractCodeDomInfo = GetContractCodeDomInfo(baseContract);
                 if (!baseContractCodeDomInfo.IsProcessed)
                 {
-                    ExportClassDataContractHierarchy(typeName, baseContract, baseContractCodeDomInfo, contractNamesInHierarchy);
+                    ExportClassDataContractHierarchy(
+                        typeName,
+                        baseContract,
+                        baseContractCodeDomInfo,
+                        contractNamesInHierarchy
+                    );
                     baseContractCodeDomInfo.IsProcessed = true;
                 }
             }
             ExportClassDataContract(classContract, contractCodeDomInfo);
         }
 
-        private void InvokeProcessImportedType(CollectionBase collection, ISerializationCodeDomSurrogateProvider surrogateProvider)
+        private void InvokeProcessImportedType(
+            CollectionBase collection,
+            ISerializationCodeDomSurrogateProvider surrogateProvider
+        )
         {
             object[] objects = new object[collection.Count];
             ((ICollection)collection).CopyTo(objects, 0);
@@ -287,7 +389,11 @@ namespace System.Runtime.Serialization
             {
                 if (obj is CodeTypeDeclaration codeTypeDeclaration)
                 {
-                    CodeTypeDeclaration? newCodeTypeDeclaration = surrogateProvider.ProcessImportedType(codeTypeDeclaration, _codeCompileUnit);
+                    CodeTypeDeclaration? newCodeTypeDeclaration =
+                        surrogateProvider.ProcessImportedType(
+                            codeTypeDeclaration,
+                            _codeCompileUnit
+                        );
 
                     if (newCodeTypeDeclaration != codeTypeDeclaration)
                     {
@@ -296,7 +402,10 @@ namespace System.Runtime.Serialization
                             ((IList)collection).Add(newCodeTypeDeclaration);
                     }
                     if (newCodeTypeDeclaration != null)
-                        InvokeProcessImportedType(newCodeTypeDeclaration.Members, surrogateProvider);
+                        InvokeProcessImportedType(
+                            newCodeTypeDeclaration.Members,
+                            surrogateProvider
+                        );
                 }
             }
         }
@@ -331,7 +440,7 @@ namespace System.Runtime.Serialization
                 foreach (var param in parameters)
                 {
                     CodeTypeReference? paramTypeReference = null;
-                    bool isParamValueType = true;   // Default not important. It either gets set, or paramTypeReference stays null and we short circuit before referencing this value.
+                    bool isParamValueType = true; // Default not important. It either gets set, or paramTypeReference stays null and we short circuit before referencing this value.
 
                     if (param is DataContract paramContract)
                     {
@@ -340,8 +449,13 @@ namespace System.Runtime.Serialization
                     }
                     else if (param is Tuple<Type, object[]?> typeParameters)
                     {
-                        paramTypeReference = GetCodeTypeReference(typeParameters.Item1, typeParameters.Item2);
-                        isParamValueType = (paramTypeReference != null && paramTypeReference.ArrayRank == 0); // only value type information we can get from CodeTypeReference
+                        paramTypeReference = GetCodeTypeReference(
+                            typeParameters.Item1,
+                            typeParameters.Item2
+                        );
+                        isParamValueType = (
+                            paramTypeReference != null && paramTypeReference.ArrayRank == 0
+                        ); // only value type information we can get from CodeTypeReference
                     }
 
                     if (paramTypeReference == null)
@@ -357,7 +471,10 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        internal CodeTypeReference GetElementTypeReference(DataContract dataContract, bool isElementTypeNullable)
+        internal CodeTypeReference GetElementTypeReference(
+            DataContract dataContract,
+            bool isElementTypeNullable
+        )
         {
             CodeTypeReference elementTypeReference = GetCodeTypeReference(dataContract);
             if (dataContract.IsValueType && isElementTypeNullable)
@@ -365,7 +482,11 @@ namespace System.Runtime.Serialization
             return elementTypeReference;
         }
 
-        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Part of a logical set of properties, some of which are not static. May not remain static with future implementation updates.")]
+        [SuppressMessage(
+            "Performance",
+            "CA1822:Mark members as static",
+            Justification = "Part of a logical set of properties, some of which are not static. May not remain static with future implementation updates."
+        )]
         private XmlQualifiedName GenericListName
         {
             [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
@@ -378,7 +499,11 @@ namespace System.Runtime.Serialization
             get { return _dataContractSet.GetDataContract(typeof(List<>)); }
         }
 
-        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Part of a logical set of properties, some of which are not static. May not remain static with future implementation updates.")]
+        [SuppressMessage(
+            "Performance",
+            "CA1822:Mark members as static",
+            Justification = "Part of a logical set of properties, some of which are not static. May not remain static with future implementation updates."
+        )]
         private XmlQualifiedName GenericDictionaryName
         {
             [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
@@ -405,7 +530,10 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void GenerateType(DataContract dataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void GenerateType(
+            DataContract dataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             if (!contractCodeDomInfo.IsProcessed)
             {
@@ -421,24 +549,41 @@ namespace System.Runtime.Serialization
                     if (type == null)
                     {
                         string clrNamespace = GetClrNamespace(dataContract, contractCodeDomInfo);
-                        CodeNamespace ns = GetCodeNamespace(clrNamespace, dataContract.XmlName.Namespace, contractCodeDomInfo);
+                        CodeNamespace ns = GetCodeNamespace(
+                            clrNamespace,
+                            dataContract.XmlName.Namespace,
+                            contractCodeDomInfo
+                        );
                         type = GetNestedType(dataContract, contractCodeDomInfo);
                         if (type == null)
                         {
                             string typeName = XmlConvert.DecodeName(dataContract.XmlName.Name);
                             typeName = GetClrIdentifier(typeName, ImportGlobals.DefaultTypeName);
-                            if (NamespaceContainsType(ns, typeName) || GlobalTypeNameConflicts(clrNamespace, typeName))
+                            if (
+                                NamespaceContainsType(ns, typeName)
+                                || GlobalTypeNameConflicts(clrNamespace, typeName)
+                            )
                             {
-                                for (int i = 1;; i++)
+                                for (int i = 1; ; i++)
                                 {
-                                    string uniqueName = AppendToValidClrIdentifier(typeName, i.ToString(NumberFormatInfo.InvariantInfo));
-                                    if (!NamespaceContainsType(ns, uniqueName) && !GlobalTypeNameConflicts(clrNamespace, uniqueName))
+                                    string uniqueName = AppendToValidClrIdentifier(
+                                        typeName,
+                                        i.ToString(NumberFormatInfo.InvariantInfo)
+                                    );
+                                    if (
+                                        !NamespaceContainsType(ns, uniqueName)
+                                        && !GlobalTypeNameConflicts(clrNamespace, uniqueName)
+                                    )
                                     {
                                         typeName = uniqueName;
                                         break;
                                     }
                                     if (i == int.MaxValue)
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.CannotComputeUniqueName, typeName)));
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                            new InvalidDataContractException(
+                                                SR.Format(SR.CannotComputeUniqueName, typeName)
+                                            )
+                                        );
                                 }
                             }
 
@@ -448,7 +593,11 @@ namespace System.Runtime.Serialization
                             {
                                 AddGlobalTypeName(typeName);
                             }
-                            contractCodeDomInfo.TypeReference = new CodeTypeReference((clrNamespace == null || clrNamespace.Length == 0) ? typeName : clrNamespace + "." + typeName);
+                            contractCodeDomInfo.TypeReference = new CodeTypeReference(
+                                (clrNamespace == null || clrNamespace.Length == 0)
+                                    ? typeName
+                                    : clrNamespace + "." + typeName
+                            );
 
                             if (GenerateInternalTypes)
                                 type.TypeAttributes = TypeAttributes.NotPublic;
@@ -457,7 +606,10 @@ namespace System.Runtime.Serialization
                         }
 
                         if (_options?.DataContractSurrogate != null)
-                            type.UserData.Add(s_surrogateDataKey, _dataContractSet.SurrogateData[dataContract]);
+                            type.UserData.Add(
+                                s_surrogateDataKey,
+                                _dataContractSet.SurrogateData[dataContract]
+                            );
 
                         contractCodeDomInfo.TypeDeclaration = type;
                     }
@@ -466,7 +618,10 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private CodeTypeDeclaration? GetNestedType(DataContract dataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private CodeTypeDeclaration? GetNestedType(
+            DataContract dataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             if (!SupportsNestedTypes)
                 return null;
@@ -475,13 +630,19 @@ namespace System.Runtime.Serialization
             if (nestedTypeIndex <= 0)
                 return null;
             string containingTypeName = originalName.Substring(0, nestedTypeIndex);
-            DataContract? containingDataContract = _dataContractSet.GetDataContract(new XmlQualifiedName(containingTypeName, dataContract.XmlName.Namespace));
+            DataContract? containingDataContract = _dataContractSet.GetDataContract(
+                new XmlQualifiedName(containingTypeName, dataContract.XmlName.Namespace)
+            );
             if (containingDataContract == null)
                 return null;
-            string nestedTypeName = XmlConvert.DecodeName(originalName.Substring(nestedTypeIndex + 1));
+            string nestedTypeName = XmlConvert.DecodeName(
+                originalName.Substring(nestedTypeIndex + 1)
+            );
             nestedTypeName = GetClrIdentifier(nestedTypeName, ImportGlobals.DefaultTypeName);
 
-            ContractCodeDomInfo containingContractCodeDomInfo = GetContractCodeDomInfo(containingDataContract);
+            ContractCodeDomInfo containingContractCodeDomInfo = GetContractCodeDomInfo(
+                containingDataContract
+            );
             GenerateType(containingDataContract, containingContractCodeDomInfo);
             if (containingContractCodeDomInfo.ReferencedTypeExists)
                 return null;
@@ -489,9 +650,12 @@ namespace System.Runtime.Serialization
             CodeTypeDeclaration containingType = containingContractCodeDomInfo.TypeDeclaration!; // Nested types by definition have containing types.
             if (TypeContainsNestedType(containingType, nestedTypeName))
             {
-                for (int i = 1;; i++)
+                for (int i = 1; ; i++)
                 {
-                    string uniqueName = AppendToValidClrIdentifier(nestedTypeName, i.ToString(NumberFormatInfo.InvariantInfo));
+                    string uniqueName = AppendToValidClrIdentifier(
+                        nestedTypeName,
+                        i.ToString(NumberFormatInfo.InvariantInfo)
+                    );
                     if (!TypeContainsNestedType(containingType, uniqueName))
                     {
                         nestedTypeName = uniqueName;
@@ -502,7 +666,9 @@ namespace System.Runtime.Serialization
 
             CodeTypeDeclaration type = CreateTypeDeclaration(nestedTypeName, dataContract);
             containingType.Members.Add(type);
-            contractCodeDomInfo.TypeReference = new CodeTypeReference(containingContractCodeDomInfo.TypeReference!.BaseType + "+" + nestedTypeName); // Again, nested types by definition have containing types.
+            contractCodeDomInfo.TypeReference = new CodeTypeReference(
+                containingContractCodeDomInfo.TypeReference!.BaseType + "+" + nestedTypeName
+            ); // Again, nested types by definition have containing types.
 
             if (GenerateInternalTypes)
                 type.TypeAttributes = TypeAttributes.NestedAssembly;
@@ -511,15 +677,28 @@ namespace System.Runtime.Serialization
             return type;
         }
 
-        private static CodeTypeDeclaration CreateTypeDeclaration(string typeName, DataContract dataContract)
+        private static CodeTypeDeclaration CreateTypeDeclaration(
+            string typeName,
+            DataContract dataContract
+        )
         {
             CodeTypeDeclaration typeDecl = new CodeTypeDeclaration(typeName);
-            CodeAttributeDeclaration debuggerStepThroughAttribute = new CodeAttributeDeclaration(typeof(System.Diagnostics.DebuggerStepThroughAttribute).FullName!);
-            CodeAttributeDeclaration generatedCodeAttribute = new CodeAttributeDeclaration(typeof(GeneratedCodeAttribute).FullName!);
+            CodeAttributeDeclaration debuggerStepThroughAttribute = new CodeAttributeDeclaration(
+                typeof(System.Diagnostics.DebuggerStepThroughAttribute).FullName!
+            );
+            CodeAttributeDeclaration generatedCodeAttribute = new CodeAttributeDeclaration(
+                typeof(GeneratedCodeAttribute).FullName!
+            );
 
             AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
-            generatedCodeAttribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Name!)));
-            generatedCodeAttribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Version?.ToString()!)));
+            generatedCodeAttribute.Arguments.Add(
+                new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Name!))
+            );
+            generatedCodeAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(assemblyName.Version?.ToString()!)
+                )
+            );
 
             // System.Diagnostics.DebuggerStepThroughAttribute not allowed on enums
             // ensure that the attribute is only generated on types that are not enums
@@ -538,7 +717,13 @@ namespace System.Runtime.Serialization
             if (typeReference != null)
                 return typeReference;
 
-            Type? type = _dataContractSet.GetReferencedType(dataContract.XmlName, dataContract, out DataContract? referencedContract, out object[]? parameters, SupportsGenericTypeReference);
+            Type? type = _dataContractSet.GetReferencedType(
+                dataContract.XmlName,
+                dataContract,
+                out DataContract? referencedContract,
+                out object[]? parameters,
+                SupportsGenericTypeReference
+            );
             if (type != null && !type.IsGenericTypeDefinition && !type.ContainsGenericParameters)
             {
                 if (dataContract is XmlDataContract xmlContract)
@@ -548,7 +733,16 @@ namespace System.Runtime.Serialization
                         if (xmlContract.IsTypeDefinedOnImport)
                         {
                             if (!xmlContract.Equals(_dataContractSet.GetDataContract(type)))
-                                throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.ReferencedTypeDoesNotMatch, type.AssemblyQualifiedName, dataContract.XmlName.Name, dataContract.XmlName.Namespace)));
+                                throw ExceptionUtil.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.Format(
+                                            SR.ReferencedTypeDoesNotMatch,
+                                            type.AssemblyQualifiedName,
+                                            dataContract.XmlName.Name,
+                                            dataContract.XmlName.Namespace
+                                        )
+                                    )
+                                );
                         }
                         else
                         {
@@ -557,7 +751,17 @@ namespace System.Runtime.Serialization
                         }
                         return GetCodeTypeReference(type);
                     }
-                    throw ExceptionUtil.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.TypeMustBeIXmlSerializable, GetClrTypeFullName(type), GetClrTypeFullName(typeof(IXmlSerializable)), dataContract.XmlName.Name, dataContract.XmlName.Namespace)));
+                    throw ExceptionUtil.ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.TypeMustBeIXmlSerializable,
+                                GetClrTypeFullName(type),
+                                GetClrTypeFullName(typeof(IXmlSerializable)),
+                                dataContract.XmlName.Name,
+                                dataContract.XmlName.Namespace
+                            )
+                        )
+                    );
                 }
                 referencedContract = _dataContractSet.GetDataContract(type);
                 if (referencedContract.Equals(dataContract))
@@ -566,7 +770,16 @@ namespace System.Runtime.Serialization
                     typeReference.UserData.Add(s_codeUserDataActualTypeKey, type);
                     return typeReference;
                 }
-                throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.ReferencedTypeDoesNotMatch, type.AssemblyQualifiedName, dataContract.XmlName.Name, dataContract.XmlName.Namespace)));
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.Format(
+                            SR.ReferencedTypeDoesNotMatch,
+                            type.AssemblyQualifiedName,
+                            dataContract.XmlName.Name,
+                            dataContract.XmlName.Namespace
+                        )
+                    )
+                );
             }
             else if (type != null)
             {
@@ -576,10 +789,16 @@ namespace System.Runtime.Serialization
                 {
                     Debug.Assert(typeReference != null);
                     type = (Type?)typeReference.UserData[s_codeUserDataActualTypeKey];
-                    throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.ReferencedTypeDoesNotMatch,
-                        type?.AssemblyQualifiedName,
-                        referencedContract.XmlName.Name,
-                        referencedContract.XmlName.Namespace)));
+                    throw ExceptionUtil.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(
+                                SR.ReferencedTypeDoesNotMatch,
+                                type?.AssemblyQualifiedName,
+                                referencedContract.XmlName.Name,
+                                referencedContract.XmlName.Namespace
+                            )
+                        )
+                    );
                 }
 
                 return typeReference;
@@ -590,7 +809,9 @@ namespace System.Runtime.Serialization
                 return typeReference;
             }
 
-            return GetReferencedCollectionType(dataContract.As(DataContractType.CollectionDataContract));
+            return GetReferencedCollectionType(
+                dataContract.As(DataContractType.CollectionDataContract)
+            );
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
@@ -613,9 +834,18 @@ namespace System.Runtime.Serialization
                         GenerateKeyValueType(itemContract.As(DataContractType.ClassDataContract));
                     }
                     bool isItemTypeNullable = collectionContract.IsItemTypeNullable();
-                    if (!TryGetReferencedListType(itemContract, isItemTypeNullable, out typeReference))
+                    if (
+                        !TryGetReferencedListType(
+                            itemContract,
+                            isItemTypeNullable,
+                            out typeReference
+                        )
+                    )
                     {
-                        CodeTypeReference? elementTypeReference = GetElementTypeReference(itemContract, isItemTypeNullable);
+                        CodeTypeReference? elementTypeReference = GetElementTypeReference(
+                            itemContract,
+                            isItemTypeNullable
+                        );
                         if (elementTypeReference != null)
                             typeReference = new CodeTypeReference(elementTypeReference, 1);
                     }
@@ -632,30 +862,58 @@ namespace System.Runtime.Serialization
 
             // ItemContract - aka BaseContract - is never null for CollectionDataContract
             DataContract itemContract = collectionContract.BaseContract!;
-            bool isDictionary = collectionContract.IsDictionaryLike(out string? keyName, out string? valueName, out string? itemName);
+            bool isDictionary = collectionContract.IsDictionaryLike(
+                out string? keyName,
+                out string? valueName,
+                out string? itemName
+            );
             if (itemName != itemContract.XmlName.Name)
                 return false;
 
-            if (isDictionary && (keyName != ImportGlobals.KeyLocalName || valueName != ImportGlobals.ValueLocalName))
+            if (
+                isDictionary
+                && (
+                    keyName != ImportGlobals.KeyLocalName
+                    || valueName != ImportGlobals.ValueLocalName
+                )
+            )
                 return false;
 
-            XmlQualifiedName expectedType = itemContract.GetArrayTypeName(collectionContract.IsItemTypeNullable());
-            return (collectionContract.XmlName.Name == expectedType.Name && collectionContract.XmlName.Namespace == expectedType.Namespace);
+            XmlQualifiedName expectedType = itemContract.GetArrayTypeName(
+                collectionContract.IsItemTypeNullable()
+            );
+            return (
+                collectionContract.XmlName.Name == expectedType.Name
+                && collectionContract.XmlName.Namespace == expectedType.Namespace
+            );
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private bool TryGetReferencedDictionaryType(DataContract collectionContract, [NotNullWhen(true)] out CodeTypeReference? typeReference)
+        private bool TryGetReferencedDictionaryType(
+            DataContract collectionContract,
+            [NotNullWhen(true)] out CodeTypeReference? typeReference
+        )
         {
             Debug.Assert(collectionContract.Is(DataContractType.CollectionDataContract));
 
             // Check if it is a dictionary and use referenced dictionary type if present
-            if (collectionContract.IsDictionaryLike(out _, out _, out _)
-                && SupportsGenericTypeReference)
+            if (
+                collectionContract.IsDictionaryLike(out _, out _, out _)
+                && SupportsGenericTypeReference
+            )
             {
-                Type? type = _dataContractSet.GetReferencedType(GenericDictionaryName, GenericDictionaryContract, out DataContract? _, out object[]? _) ?? typeof(Dictionary<,>);
+                Type? type =
+                    _dataContractSet.GetReferencedType(
+                        GenericDictionaryName,
+                        GenericDictionaryContract,
+                        out DataContract? _,
+                        out object[]? _
+                    ) ?? typeof(Dictionary<,>);
 
                 // ItemContract - aka BaseContract - is never null for CollectionDataContract
-                DataContract? itemContract = collectionContract.BaseContract!.As(DataContractType.ClassDataContract);
+                DataContract? itemContract = collectionContract.BaseContract!.As(
+                    DataContractType.ClassDataContract
+                );
 
                 // A dictionary should have a Key/Value item contract that has at least two members: key and value.
                 Debug.Assert(itemContract != null);
@@ -663,8 +921,14 @@ namespace System.Runtime.Serialization
 
                 DataMember keyMember = itemContract.DataMembers[0];
                 DataMember valueMember = itemContract.DataMembers[1];
-                CodeTypeReference? keyTypeReference = GetElementTypeReference(keyMember.MemberTypeContract, keyMember.IsNullable);
-                CodeTypeReference? valueTypeReference = GetElementTypeReference(valueMember.MemberTypeContract, valueMember.IsNullable);
+                CodeTypeReference? keyTypeReference = GetElementTypeReference(
+                    keyMember.MemberTypeContract,
+                    keyMember.IsNullable
+                );
+                CodeTypeReference? valueTypeReference = GetElementTypeReference(
+                    valueMember.MemberTypeContract,
+                    valueMember.IsNullable
+                );
                 if (keyTypeReference != null && valueTypeReference != null)
                 {
                     typeReference = GetCodeTypeReference(type);
@@ -678,15 +942,26 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private bool TryGetReferencedListType(DataContract itemContract, bool isItemTypeNullable, out CodeTypeReference? typeReference)
+        private bool TryGetReferencedListType(
+            DataContract itemContract,
+            bool isItemTypeNullable,
+            out CodeTypeReference? typeReference
+        )
         {
             if (SupportsGenericTypeReference)
             {
-                Type? type = _dataContractSet.GetReferencedType(GenericListName, GenericListContract, out DataContract? _, out object[]? _);
+                Type? type = _dataContractSet.GetReferencedType(
+                    GenericListName,
+                    GenericListContract,
+                    out DataContract? _,
+                    out object[]? _
+                );
                 if (type != null)
                 {
                     typeReference = GetCodeTypeReference(type);
-                    typeReference.TypeArguments.Add(GetElementTypeReference(itemContract, isItemTypeNullable)!);    // Lists have an item type
+                    typeReference.TypeArguments.Add(
+                        GetElementTypeReference(itemContract, isItemTypeNullable)!
+                    ); // Lists have an item type
                     return true;
                 }
             }
@@ -711,10 +986,22 @@ namespace System.Runtime.Serialization
         private Type? GetReferencedTypeOnImport(DataContract dataContract)
         {
             Type? type = null;
-            if (_options?.DataContractSurrogate is ISerializationSurrogateProvider2 surrogateProvider)
+            if (
+                _options?.DataContractSurrogate
+                is ISerializationSurrogateProvider2 surrogateProvider
+            )
             {
-                if (DataContract.GetBuiltInDataContract(dataContract.XmlName.Name, dataContract.XmlName.Namespace) == null)
-                    type = surrogateProvider.GetReferencedTypeOnImport(dataContract.XmlName.Name, dataContract.XmlName.Namespace, _dataContractSet.SurrogateData[dataContract]);
+                if (
+                    DataContract.GetBuiltInDataContract(
+                        dataContract.XmlName.Name,
+                        dataContract.XmlName.Namespace
+                    ) == null
+                )
+                    type = surrogateProvider.GetReferencedTypeOnImport(
+                        dataContract.XmlName.Name,
+                        dataContract.XmlName.Namespace,
+                        _dataContractSet.SurrogateData[dataContract]
+                    );
             }
             return type;
         }
@@ -742,13 +1029,22 @@ namespace System.Runtime.Serialization
             }
         }
 
-        private static bool TypeContainsNestedType(CodeTypeDeclaration containingType, string typeName)
+        private static bool TypeContainsNestedType(
+            CodeTypeDeclaration containingType,
+            string typeName
+        )
         {
             foreach (CodeTypeMember member in containingType.Members)
             {
                 if (member is CodeTypeDeclaration declaration)
                 {
-                    if (string.Equals(typeName, declaration.Name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            typeName,
+                            declaration.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         return true;
                 }
             }
@@ -765,17 +1061,27 @@ namespace System.Runtime.Serialization
             return name == reencodedName ? decodedName : name;
         }
 
-        private void AddSerializableAttribute(bool generateSerializable, CodeTypeDeclaration type, ContractCodeDomInfo contractCodeDomInfo)
+        private void AddSerializableAttribute(
+            bool generateSerializable,
+            CodeTypeDeclaration type,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             if (generateSerializable)
             {
                 type.CustomAttributes.Add(SerializableAttribute);
-                AddImportStatement(typeof(SerializableAttribute).Namespace, contractCodeDomInfo.CodeNamespace);
+                AddImportStatement(
+                    typeof(SerializableAttribute).Namespace,
+                    contractCodeDomInfo.CodeNamespace
+                );
             }
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void ExportClassDataContract(DataContract classDataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void ExportClassDataContract(
+            DataContract classDataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             Debug.Assert(classDataContract.Is(DataContractType.ClassDataContract));
 
@@ -795,13 +1101,33 @@ namespace System.Runtime.Serialization
                 type.IsClass = true;
 
             string dataContractName = GetNameForAttribute(classDataContract.XmlName.Name);
-            CodeAttributeDeclaration dataContractAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(DataContractAttribute)));
-            dataContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NameProperty, new CodePrimitiveExpression(dataContractName)));
-            dataContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NamespaceProperty, new CodePrimitiveExpression(classDataContract.XmlName.Namespace)));
+            CodeAttributeDeclaration dataContractAttribute = new CodeAttributeDeclaration(
+                GetClrTypeFullName(typeof(DataContractAttribute))
+            );
+            dataContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.NameProperty,
+                    new CodePrimitiveExpression(dataContractName)
+                )
+            );
+            dataContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.NamespaceProperty,
+                    new CodePrimitiveExpression(classDataContract.XmlName.Namespace)
+                )
+            );
             if (classDataContract.IsReference != ImportGlobals.DefaultIsReference)
-                dataContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.IsReferenceProperty, new CodePrimitiveExpression(classDataContract.IsReference)));
+                dataContractAttribute.Arguments.Add(
+                    new CodeAttributeArgument(
+                        ImportGlobals.IsReferenceProperty,
+                        new CodePrimitiveExpression(classDataContract.IsReference)
+                    )
+                );
             type.CustomAttributes.Add(dataContractAttribute);
-            AddImportStatement(typeof(DataContractAttribute).Namespace, contractCodeDomInfo.CodeNamespace);
+            AddImportStatement(
+                typeof(DataContractAttribute).Namespace,
+                contractCodeDomInfo.CodeNamespace
+            );
 
             AddSerializableAttribute(GenerateSerializableTypes, type, contractCodeDomInfo);
 
@@ -817,14 +1143,22 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                ContractCodeDomInfo baseContractCodeDomInfo = GetContractCodeDomInfo(classDataContract.BaseContract);
-                Debug.Assert(baseContractCodeDomInfo.IsProcessed, "Cannot generate code for type if code for base type has not been generated");
+                ContractCodeDomInfo baseContractCodeDomInfo = GetContractCodeDomInfo(
+                    classDataContract.BaseContract
+                );
+                Debug.Assert(
+                    baseContractCodeDomInfo.IsProcessed,
+                    "Cannot generate code for type if code for base type has not been generated"
+                );
                 type.BaseTypes.Add(baseContractCodeDomInfo.TypeReference!);
                 AddBaseMemberNames(baseContractCodeDomInfo, contractCodeDomInfo);
                 if (baseContractCodeDomInfo.ReferencedTypeExists)
                 {
-                    Type? actualType = (Type?)baseContractCodeDomInfo.TypeReference?.UserData[s_codeUserDataActualTypeKey];
-                    Debug.Assert(actualType != null);   // If we're in this if condition, then we should be able to get a Type
+                    Type? actualType = (Type?)
+                        baseContractCodeDomInfo
+                            .TypeReference
+                            ?.UserData[s_codeUserDataActualTypeKey];
+                    Debug.Assert(actualType != null); // If we're in this if condition, then we should be able to get a Type
                     ThrowIfReferencedBaseTypeSealed(actualType, classDataContract);
                     if (!typeof(IExtensibleDataObject).IsAssignableFrom(actualType))
                         AddExtensionData(contractCodeDomInfo);
@@ -843,37 +1177,72 @@ namespace System.Runtime.Serialization
             {
                 DataMember dataMember = classDataContract.DataMembers[i];
 
-                CodeTypeReference memberType = GetElementTypeReference(dataMember.MemberTypeContract,
-                    (dataMember.IsNullable && dataMember.MemberTypeContract.IsValueType));
+                CodeTypeReference memberType = GetElementTypeReference(
+                    dataMember.MemberTypeContract,
+                    (dataMember.IsNullable && dataMember.MemberTypeContract.IsValueType)
+                );
 
                 string dataMemberName = GetNameForAttribute(dataMember.Name);
                 string propertyName = GetMemberName(dataMemberName, contractCodeDomInfo);
-                string fieldName = GetMemberName(AppendToValidClrIdentifier(propertyName, ImportGlobals.DefaultFieldSuffix), contractCodeDomInfo);
+                string fieldName = GetMemberName(
+                    AppendToValidClrIdentifier(propertyName, ImportGlobals.DefaultFieldSuffix),
+                    contractCodeDomInfo
+                );
 
                 CodeMemberField field = new CodeMemberField();
                 field.Type = memberType;
                 field.Name = fieldName;
                 field.Attributes = MemberAttributes.Private;
 
-                CodeMemberProperty property = CreateProperty(memberType, propertyName, fieldName, dataMember.MemberTypeContract.IsValueType && SupportsDeclareValueTypes, raisePropertyChanged);
+                CodeMemberProperty property = CreateProperty(
+                    memberType,
+                    propertyName,
+                    fieldName,
+                    dataMember.MemberTypeContract.IsValueType && SupportsDeclareValueTypes,
+                    raisePropertyChanged
+                );
                 object? surrogateData = _dataContractSet.SurrogateData[dataMember];
                 if (surrogateData != null)
                     property.UserData.Add(s_surrogateDataKey, surrogateData);
 
-                CodeAttributeDeclaration dataMemberAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(DataMemberAttribute)));
+                CodeAttributeDeclaration dataMemberAttribute = new CodeAttributeDeclaration(
+                    GetClrTypeFullName(typeof(DataMemberAttribute))
+                );
                 if (dataMemberName != property.Name)
-                    dataMemberAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NameProperty, new CodePrimitiveExpression(dataMemberName)));
+                    dataMemberAttribute.Arguments.Add(
+                        new CodeAttributeArgument(
+                            ImportGlobals.NameProperty,
+                            new CodePrimitiveExpression(dataMemberName)
+                        )
+                    );
                 if (dataMember.IsRequired != ImportGlobals.DefaultIsRequired)
-                    dataMemberAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.IsRequiredProperty, new CodePrimitiveExpression(dataMember.IsRequired)));
+                    dataMemberAttribute.Arguments.Add(
+                        new CodeAttributeArgument(
+                            ImportGlobals.IsRequiredProperty,
+                            new CodePrimitiveExpression(dataMember.IsRequired)
+                        )
+                    );
                 if (dataMember.EmitDefaultValue != ImportGlobals.DefaultEmitDefaultValue)
-                    dataMemberAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.EmitDefaultValueProperty, new CodePrimitiveExpression(dataMember.EmitDefaultValue)));
+                    dataMemberAttribute.Arguments.Add(
+                        new CodeAttributeArgument(
+                            ImportGlobals.EmitDefaultValueProperty,
+                            new CodePrimitiveExpression(dataMember.EmitDefaultValue)
+                        )
+                    );
                 if (dataMember.Order != ImportGlobals.DefaultOrder)
-                    dataMemberAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.OrderProperty, new CodePrimitiveExpression(dataMember.Order)));
+                    dataMemberAttribute.Arguments.Add(
+                        new CodeAttributeArgument(
+                            ImportGlobals.OrderProperty,
+                            new CodePrimitiveExpression(dataMember.Order)
+                        )
+                    );
                 property.CustomAttributes.Add(dataMemberAttribute);
 
                 if (GenerateSerializableTypes && !dataMember.IsRequired)
                 {
-                    CodeAttributeDeclaration optionalFieldAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(OptionalFieldAttribute)));
+                    CodeAttributeDeclaration optionalFieldAttribute = new CodeAttributeDeclaration(
+                        GetClrTypeFullName(typeof(OptionalFieldAttribute))
+                    );
                     field.CustomAttributes.Add(optionalFieldAttribute);
                 }
 
@@ -887,9 +1256,14 @@ namespace System.Runtime.Serialization
             return SupportsAssemblyAttributes && !contractCodeDomInfo.UsesWildcardNamespace;
         }
 
-        private static bool NeedsExplicitNamespace(string dataContractNamespace, string clrNamespace)
+        private static bool NeedsExplicitNamespace(
+            string dataContractNamespace,
+            string clrNamespace
+        )
         {
-            return (SchemaImportHelper.GetDefaultXmlNamespace(clrNamespace) != dataContractNamespace);
+            return (
+                SchemaImportHelper.GetDefaultXmlNamespace(clrNamespace) != dataContractNamespace
+            );
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
@@ -924,13 +1298,19 @@ namespace System.Runtime.Serialization
                 if (!contractCodeDomInfo.IsProcessed)
                     GenerateType(dataContract, contractCodeDomInfo);
                 if (contractCodeDomInfo.ReferencedTypeExists)
-                    return GetKnownTypeContracts(dataContract, new Dictionary<DataContract, object?>());
+                    return GetKnownTypeContracts(
+                        dataContract,
+                        new Dictionary<DataContract, object?>()
+                    );
             }
             return null;
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private DataContractDictionary? GetKnownTypeContracts(DataContract classDataContract, Dictionary<DataContract, object?> handledContracts)
+        private DataContractDictionary? GetKnownTypeContracts(
+            DataContract classDataContract,
+            Dictionary<DataContract, object?> handledContracts
+        )
         {
             Debug.Assert(classDataContract.Is(DataContractType.ClassDataContract));
 
@@ -938,11 +1318,15 @@ namespace System.Runtime.Serialization
                 return classDataContract.KnownDataContracts;
 
             handledContracts.Add(classDataContract, null);
-                bool objectMemberHandled = false;
+            bool objectMemberHandled = false;
             foreach (DataMember dataMember in classDataContract.DataMembers)
             {
                 DataContract memberContract = dataMember.MemberTypeContract;
-                if (!objectMemberHandled && _dataContractSet.KnownTypesForObject != null && IsObjectContract(memberContract))
+                if (
+                    !objectMemberHandled
+                    && _dataContractSet.KnownTypesForObject != null
+                    && IsObjectContract(memberContract)
+                )
                 {
                     AddKnownTypeContracts(classDataContract, _dataContractSet.KnownTypesForObject);
                     objectMemberHandled = true;
@@ -954,7 +1338,10 @@ namespace System.Runtime.Serialization
                         GenerateType(memberContract, memberCodeDomInfo);
                     if (memberCodeDomInfo.ReferencedTypeExists)
                     {
-                        AddKnownTypeContracts(classDataContract, GetKnownTypeContracts(memberContract, handledContracts));
+                        AddKnownTypeContracts(
+                            classDataContract,
+                            GetKnownTypeContracts(memberContract, handledContracts)
+                        );
                     }
                 }
             }
@@ -963,7 +1350,10 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private static void AddKnownTypeContracts(DataContract classDataContract, DataContractDictionary? knownContracts)
+        private static void AddKnownTypeContracts(
+            DataContract classDataContract,
+            DataContractDictionary? knownContracts
+        )
         {
             if (knownContracts == null || knownContracts.Count == 0)
                 return;
@@ -974,17 +1364,27 @@ namespace System.Runtime.Serialization
 
             foreach (KeyValuePair<XmlQualifiedName, DataContract> pair in knownContracts)
             {
-                if (classDataContract.XmlName != pair.Key && !classDataContract.KnownDataContracts.ContainsKey(pair.Key) && !pair.Value.IsBuiltInDataContract)
+                if (
+                    classDataContract.XmlName != pair.Key
+                    && !classDataContract.KnownDataContracts.ContainsKey(pair.Key)
+                    && !pair.Value.IsBuiltInDataContract
+                )
                     classDataContract.KnownDataContracts.Add(pair.Key, pair.Value);
             }
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void AddKnownTypes(DataContract classDataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void AddKnownTypes(
+            DataContract classDataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             Debug.Assert(classDataContract.Is(DataContractType.ClassDataContract));
 
-            DataContractDictionary? knownContractDictionary = GetKnownTypeContracts(classDataContract, new Dictionary<DataContract, object?>());
+            DataContractDictionary? knownContractDictionary = GetKnownTypeContracts(
+                classDataContract,
+                new Dictionary<DataContract, object?>()
+            );
             if (knownContractDictionary == null || knownContractDictionary.Count == 0)
                 return;
 
@@ -994,11 +1394,20 @@ namespace System.Runtime.Serialization
                 // This is only called from methods that first call GenerateType to fill in this info.
                 Debug.Assert(contractCodeDomInfo.TypeDeclaration != null);
 
-                CodeAttributeDeclaration knownTypeAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(KnownTypeAttribute)));
-                knownTypeAttribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(GetCodeTypeReference(knownTypeContract))));
+                CodeAttributeDeclaration knownTypeAttribute = new CodeAttributeDeclaration(
+                    GetClrTypeFullName(typeof(KnownTypeAttribute))
+                );
+                knownTypeAttribute.Arguments.Add(
+                    new CodeAttributeArgument(
+                        new CodeTypeOfExpression(GetCodeTypeReference(knownTypeContract))
+                    )
+                );
                 contractCodeDomInfo.TypeDeclaration.CustomAttributes.Add(knownTypeAttribute);
             }
-            AddImportStatement(typeof(KnownTypeAttribute).Namespace, contractCodeDomInfo.CodeNamespace);
+            AddImportStatement(
+                typeof(KnownTypeAttribute).Namespace,
+                contractCodeDomInfo.CodeNamespace
+            );
         }
 
         private CodeTypeReference WrapNullable(CodeTypeReference memberType)
@@ -1020,7 +1429,9 @@ namespace System.Runtime.Serialization
                 CodeMemberField extensionDataObjectField = ExtensionDataObjectField;
                 if (GenerateSerializableTypes)
                 {
-                    CodeAttributeDeclaration nonSerializedAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(NonSerializedAttribute)));
+                    CodeAttributeDeclaration nonSerializedAttribute = new CodeAttributeDeclaration(
+                        GetClrTypeFullName(typeof(NonSerializedAttribute))
+                    );
                     extensionDataObjectField.CustomAttributes.Add(nonSerializedAttribute);
                 }
                 type.Members.Add(extensionDataObjectField);
@@ -1031,9 +1442,16 @@ namespace System.Runtime.Serialization
             }
         }
 
-        private void AddPropertyChangedNotifier(ContractCodeDomInfo contractCodeDomInfo, bool isValueType)
+        private void AddPropertyChangedNotifier(
+            ContractCodeDomInfo contractCodeDomInfo,
+            bool isValueType
+        )
         {
-            if (EnableDataBinding && SupportsDeclareEvents && contractCodeDomInfo.TypeDeclaration != null)
+            if (
+                EnableDataBinding
+                && SupportsDeclareEvents
+                && contractCodeDomInfo.TypeDeclaration != null
+            )
             {
                 CodeTypeDeclaration codeTypeDeclaration = contractCodeDomInfo.TypeDeclaration;
                 codeTypeDeclaration.BaseTypes.Add(CodeTypeIPropertyChange);
@@ -1048,14 +1466,29 @@ namespace System.Runtime.Serialization
             }
         }
 
-        private static void ThrowIfReferencedBaseTypeSealed(Type baseType, DataContract dataContract)
+        private static void ThrowIfReferencedBaseTypeSealed(
+            Type baseType,
+            DataContract dataContract
+        )
         {
             if (baseType.IsSealed)
-                throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.CannotDeriveFromSealedReferenceType, dataContract.XmlName.Name, dataContract.XmlName.Namespace, GetClrTypeFullName(baseType))));
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.Format(
+                            SR.CannotDeriveFromSealedReferenceType,
+                            dataContract.XmlName.Name,
+                            dataContract.XmlName.Namespace,
+                            GetClrTypeFullName(baseType)
+                        )
+                    )
+                );
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void ExportEnumDataContract(DataContract enumDataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void ExportEnumDataContract(
+            DataContract enumDataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             Debug.Assert(enumDataContract.Is(DataContractType.EnumDataContract));
 
@@ -1073,38 +1506,70 @@ namespace System.Runtime.Serialization
             type.BaseTypes.Add(baseType);
             if (baseType.IsDefined(typeof(FlagsAttribute), false))
             {
-                type.CustomAttributes.Add(new CodeAttributeDeclaration(GetClrTypeFullName(typeof(FlagsAttribute))));
-                AddImportStatement(typeof(FlagsAttribute).Namespace, contractCodeDomInfo.CodeNamespace);
+                type.CustomAttributes.Add(
+                    new CodeAttributeDeclaration(GetClrTypeFullName(typeof(FlagsAttribute)))
+                );
+                AddImportStatement(
+                    typeof(FlagsAttribute).Namespace,
+                    contractCodeDomInfo.CodeNamespace
+                );
             }
 
             string dataContractName = GetNameForAttribute(enumDataContract.XmlName.Name);
-            CodeAttributeDeclaration dataContractAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(DataContractAttribute)));
-            dataContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NameProperty, new CodePrimitiveExpression(dataContractName)));
-            dataContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NamespaceProperty, new CodePrimitiveExpression(enumDataContract.XmlName.Namespace)));
+            CodeAttributeDeclaration dataContractAttribute = new CodeAttributeDeclaration(
+                GetClrTypeFullName(typeof(DataContractAttribute))
+            );
+            dataContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.NameProperty,
+                    new CodePrimitiveExpression(dataContractName)
+                )
+            );
+            dataContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.NamespaceProperty,
+                    new CodePrimitiveExpression(enumDataContract.XmlName.Namespace)
+                )
+            );
             type.CustomAttributes.Add(dataContractAttribute);
-            AddImportStatement(typeof(DataContractAttribute).Namespace, contractCodeDomInfo.CodeNamespace);
+            AddImportStatement(
+                typeof(DataContractAttribute).Namespace,
+                contractCodeDomInfo.CodeNamespace
+            );
 
             for (int i = 0; i < enumDataContract.DataMembers.Count; i++)
             {
                 string stringValue = enumDataContract.DataMembers[i].Name;
-                long longValue = enumDataContract.DataMembers[i].Order;   // Members[] and Values[] go hand in hand.
+                long longValue = enumDataContract.DataMembers[i].Order; // Members[] and Values[] go hand in hand.
 
                 CodeMemberField enumMember = new CodeMemberField();
                 if (baseType == typeof(ulong))
-                    enumMember.InitExpression = new CodeSnippetExpression(XmlConvert.ToString((ulong)longValue));
+                    enumMember.InitExpression = new CodeSnippetExpression(
+                        XmlConvert.ToString((ulong)longValue)
+                    );
                 else
                     enumMember.InitExpression = new CodePrimitiveExpression(longValue);
                 enumMember.Name = GetMemberName(stringValue, contractCodeDomInfo);
-                CodeAttributeDeclaration enumMemberAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(EnumMemberAttribute)));
+                CodeAttributeDeclaration enumMemberAttribute = new CodeAttributeDeclaration(
+                    GetClrTypeFullName(typeof(EnumMemberAttribute))
+                );
                 if (enumMember.Name != stringValue)
-                    enumMemberAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.ValueProperty, new CodePrimitiveExpression(stringValue)));
+                    enumMemberAttribute.Arguments.Add(
+                        new CodeAttributeArgument(
+                            ImportGlobals.ValueProperty,
+                            new CodePrimitiveExpression(stringValue)
+                        )
+                    );
                 enumMember.CustomAttributes.Add(enumMemberAttribute);
                 type.Members.Add(enumMember);
             }
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void ExportISerializableDataContract(DataContract classDataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void ExportISerializableDataContract(
+            DataContract classDataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             Debug.Assert(classDataContract.Is(DataContractType.ClassDataContract));
 
@@ -1112,18 +1577,45 @@ namespace System.Runtime.Serialization
             if (contractCodeDomInfo.ReferencedTypeExists)
                 return;
 
-            if (SchemaImportHelper.GetDefaultXmlNamespace(contractCodeDomInfo.ClrNamespace) != classDataContract.XmlName.Namespace)
-                throw ExceptionUtil.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.InvalidClrNamespaceGeneratedForISerializable, classDataContract.XmlName.Name, classDataContract.XmlName.Namespace, SchemaImportHelper.GetDataContractNamespaceFromUri(classDataContract.XmlName.Namespace), contractCodeDomInfo.ClrNamespace)));
+            if (
+                SchemaImportHelper.GetDefaultXmlNamespace(contractCodeDomInfo.ClrNamespace)
+                != classDataContract.XmlName.Namespace
+            )
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.Format(
+                            SR.InvalidClrNamespaceGeneratedForISerializable,
+                            classDataContract.XmlName.Name,
+                            classDataContract.XmlName.Namespace,
+                            SchemaImportHelper.GetDataContractNamespaceFromUri(
+                                classDataContract.XmlName.Namespace
+                            ),
+                            contractCodeDomInfo.ClrNamespace
+                        )
+                    )
+                );
 
             string dataContractName = GetNameForAttribute(classDataContract.XmlName.Name);
             int nestedTypeIndex = dataContractName.LastIndexOf('.');
-            string expectedName = (nestedTypeIndex <= 0 || nestedTypeIndex == dataContractName.Length - 1) ? dataContractName : dataContractName.Substring(nestedTypeIndex + 1);
+            string expectedName =
+                (nestedTypeIndex <= 0 || nestedTypeIndex == dataContractName.Length - 1)
+                    ? dataContractName
+                    : dataContractName.Substring(nestedTypeIndex + 1);
 
             // This is supposed to be set by GenerateType. If it wasn't, there is a problem.
             Debug.Assert(contractCodeDomInfo.TypeDeclaration != null);
 
             if (contractCodeDomInfo.TypeDeclaration.Name != expectedName)
-                throw ExceptionUtil.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.InvalidClrNameGeneratedForISerializable, classDataContract.XmlName.Name, classDataContract.XmlName.Namespace, contractCodeDomInfo.TypeDeclaration.Name)));
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.Format(
+                            SR.InvalidClrNameGeneratedForISerializable,
+                            classDataContract.XmlName.Name,
+                            classDataContract.XmlName.Namespace,
+                            contractCodeDomInfo.TypeDeclaration.Name
+                        )
+                    )
+                );
 
             CodeTypeDeclaration type = contractCodeDomInfo.TypeDeclaration;
             if (SupportsPartialTypes)
@@ -1133,7 +1625,12 @@ namespace System.Runtime.Serialization
             else
                 type.IsClass = true;
 
-            AddSerializableAttribute(true /*generateSerializable*/, type, contractCodeDomInfo);
+            AddSerializableAttribute(
+                true /*generateSerializable*/
+                ,
+                type,
+                contractCodeDomInfo
+            );
 
             AddKnownTypes(classDataContract, contractCodeDomInfo);
 
@@ -1150,13 +1647,18 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                ContractCodeDomInfo baseContractCodeDomInfo = GetContractCodeDomInfo(classDataContract.BaseContract);
+                ContractCodeDomInfo baseContractCodeDomInfo = GetContractCodeDomInfo(
+                    classDataContract.BaseContract
+                );
                 GenerateType(classDataContract.BaseContract, baseContractCodeDomInfo);
                 type.BaseTypes.Add(baseContractCodeDomInfo.TypeReference!);
                 if (baseContractCodeDomInfo.ReferencedTypeExists)
                 {
-                    Type? actualType = (Type?)baseContractCodeDomInfo.TypeReference?.UserData[s_codeUserDataActualTypeKey];
-                    Debug.Assert(actualType != null);   // If we're in this if condition, then we should be able to get a Type
+                    Type? actualType = (Type?)
+                        baseContractCodeDomInfo
+                            .TypeReference
+                            ?.UserData[s_codeUserDataActualTypeKey];
+                    Debug.Assert(actualType != null); // If we're in this if condition, then we should be able to get a Type
                     ThrowIfReferencedBaseTypeSealed(actualType, classDataContract);
                 }
                 type.Members.Add(ISerializableDerivedConstructor);
@@ -1166,14 +1668,24 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
         private void GenerateKeyValueType(DataContract? keyValueContract)
         {
-            Debug.Assert(keyValueContract == null || keyValueContract.Is(DataContractType.ClassDataContract));
+            Debug.Assert(
+                keyValueContract == null || keyValueContract.Is(DataContractType.ClassDataContract)
+            );
 
             // Add code for KeyValue item type in the case where its usage is limited to dictionary
             // and dictionary is not found in referenced types
-            if (keyValueContract != null && _dataContractSet.GetDataContract(keyValueContract.XmlName) == null)
+            if (
+                keyValueContract != null
+                && _dataContractSet.GetDataContract(keyValueContract.XmlName) == null
+            )
             {
                 ContractCodeDomInfo? contractCodeDomInfo = null;
-                if (_dataContractSet.ProcessedContracts.TryGetValue(keyValueContract, out object? info))
+                if (
+                    _dataContractSet.ProcessedContracts.TryGetValue(
+                        keyValueContract,
+                        out object? info
+                    )
+                )
                     contractCodeDomInfo = info as ContractCodeDomInfo;
                 if (contractCodeDomInfo == null)
                 {
@@ -1186,7 +1698,10 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void ExportCollectionDataContract(DataContract collectionContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void ExportCollectionDataContract(
+            DataContract collectionContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             Debug.Assert(collectionContract.Is(DataContractType.CollectionDataContract));
 
@@ -1198,37 +1713,71 @@ namespace System.Runtime.Serialization
 
             // If type name is not expected, generate collection type that derives from referenced list type and uses [CollectionDataContract]
             if (!SupportsGenericTypeReference)
-                throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(
-                    SR.Format(SR.CannotUseGenericTypeAsBase, dataContractName,
-                    collectionContract.XmlName.Namespace)));
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.Format(
+                            SR.CannotUseGenericTypeAsBase,
+                            dataContractName,
+                            collectionContract.XmlName.Namespace
+                        )
+                    )
+                );
 
             // ItemContract - aka BaseContract - is never null for CollectionDataContract
             DataContract itemContract = collectionContract.BaseContract!;
             bool isItemTypeNullable = collectionContract.IsItemTypeNullable();
-            bool isDictionary = collectionContract.IsDictionaryLike(out string? keyName, out string? valueName, out string? itemName);
+            bool isDictionary = collectionContract.IsDictionaryLike(
+                out string? keyName,
+                out string? valueName,
+                out string? itemName
+            );
 
             CodeTypeReference? baseTypeReference;
-            bool foundDictionaryBase = TryGetReferencedDictionaryType(collectionContract, out baseTypeReference);
+            bool foundDictionaryBase = TryGetReferencedDictionaryType(
+                collectionContract,
+                out baseTypeReference
+            );
             if (!foundDictionaryBase)
             {
                 if (isDictionary)
                 {
                     GenerateKeyValueType(itemContract.As(DataContractType.ClassDataContract));
                 }
-                if (!TryGetReferencedListType(itemContract, isItemTypeNullable, out baseTypeReference))
+                if (
+                    !TryGetReferencedListType(
+                        itemContract,
+                        isItemTypeNullable,
+                        out baseTypeReference
+                    )
+                )
                 {
                     if (SupportsGenericTypeReference)
                     {
                         baseTypeReference = GetCodeTypeReference(typeof(List<>));
-                        baseTypeReference.TypeArguments.Add(GetElementTypeReference(itemContract, isItemTypeNullable));
+                        baseTypeReference.TypeArguments.Add(
+                            GetElementTypeReference(itemContract, isItemTypeNullable)
+                        );
                     }
                     else
                     {
-                        string expectedTypeName = ImportGlobals.ArrayPrefix + itemContract.XmlName.Name;
-                        string expectedTypeNs = SchemaImportHelper.GetCollectionNamespace(itemContract.XmlName.Namespace);
-                        throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.ReferencedBaseTypeDoesNotExist,
-                            dataContractName, collectionContract.XmlName.Namespace,
-                            expectedTypeName, expectedTypeNs, GetClrTypeFullName(typeof(IList<>)), GetClrTypeFullName(typeof(ICollection<>)))));
+                        string expectedTypeName =
+                            ImportGlobals.ArrayPrefix + itemContract.XmlName.Name;
+                        string expectedTypeNs = SchemaImportHelper.GetCollectionNamespace(
+                            itemContract.XmlName.Namespace
+                        );
+                        throw ExceptionUtil.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.Format(
+                                    SR.ReferencedBaseTypeDoesNotExist,
+                                    dataContractName,
+                                    collectionContract.XmlName.Namespace,
+                                    expectedTypeName,
+                                    expectedTypeNs,
+                                    GetClrTypeFullName(typeof(IList<>)),
+                                    GetClrTypeFullName(typeof(ICollection<>))
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -1238,27 +1787,65 @@ namespace System.Runtime.Serialization
 
             CodeTypeDeclaration generatedType = contractCodeDomInfo.TypeDeclaration;
             generatedType.BaseTypes.Add(baseTypeReference!);
-            CodeAttributeDeclaration collectionContractAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(CollectionDataContractAttribute)));
-            collectionContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NameProperty, new CodePrimitiveExpression(dataContractName)));
-            collectionContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.NamespaceProperty, new CodePrimitiveExpression(collectionContract.XmlName.Namespace)));
+            CodeAttributeDeclaration collectionContractAttribute = new CodeAttributeDeclaration(
+                GetClrTypeFullName(typeof(CollectionDataContractAttribute))
+            );
+            collectionContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.NameProperty,
+                    new CodePrimitiveExpression(dataContractName)
+                )
+            );
+            collectionContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.NamespaceProperty,
+                    new CodePrimitiveExpression(collectionContract.XmlName.Namespace)
+                )
+            );
             if (collectionContract.IsReference != ImportGlobals.DefaultIsReference)
-                collectionContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.IsReferenceProperty, new CodePrimitiveExpression(collectionContract.IsReference)));
-            collectionContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.ItemNameProperty, new CodePrimitiveExpression(GetNameForAttribute(itemName!))));    // ItemName is never null for Collection contracts.
+                collectionContractAttribute.Arguments.Add(
+                    new CodeAttributeArgument(
+                        ImportGlobals.IsReferenceProperty,
+                        new CodePrimitiveExpression(collectionContract.IsReference)
+                    )
+                );
+            collectionContractAttribute.Arguments.Add(
+                new CodeAttributeArgument(
+                    ImportGlobals.ItemNameProperty,
+                    new CodePrimitiveExpression(GetNameForAttribute(itemName!))
+                )
+            ); // ItemName is never null for Collection contracts.
             if (foundDictionaryBase)
             {
                 // These are not null if we are working with a dictionary. See CollectionDataContract.IsDictionary
                 Debug.Assert(keyName != null);
                 Debug.Assert(valueName != null);
-                collectionContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.KeyNameProperty, new CodePrimitiveExpression(GetNameForAttribute(keyName))));
-                collectionContractAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.ValueNameProperty, new CodePrimitiveExpression(GetNameForAttribute(valueName))));
+                collectionContractAttribute.Arguments.Add(
+                    new CodeAttributeArgument(
+                        ImportGlobals.KeyNameProperty,
+                        new CodePrimitiveExpression(GetNameForAttribute(keyName))
+                    )
+                );
+                collectionContractAttribute.Arguments.Add(
+                    new CodeAttributeArgument(
+                        ImportGlobals.ValueNameProperty,
+                        new CodePrimitiveExpression(GetNameForAttribute(valueName))
+                    )
+                );
             }
             generatedType.CustomAttributes.Add(collectionContractAttribute);
-            AddImportStatement(typeof(CollectionDataContractAttribute).Namespace, contractCodeDomInfo.CodeNamespace);
+            AddImportStatement(
+                typeof(CollectionDataContractAttribute).Namespace,
+                contractCodeDomInfo.CodeNamespace
+            );
             AddSerializableAttribute(GenerateSerializableTypes, generatedType, contractCodeDomInfo);
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private void ExportXmlDataContract(XmlDataContract xmlDataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private void ExportXmlDataContract(
+            XmlDataContract xmlDataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             GenerateType(xmlDataContract, contractCodeDomInfo);
             if (contractCodeDomInfo.ReferencedTypeExists)
@@ -1288,55 +1875,107 @@ namespace System.Runtime.Serialization
             type.Members.Add(GetSchemaMethod);
             if (xmlDataContract.IsAnonymous && !xmlDataContract.HasRoot)
             {
-                type.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    GetClrTypeFullName(ImportGlobals.TypeOfXmlSchemaProviderAttribute),
-                    new CodeAttributeArgument(NullReference),
-                    new CodeAttributeArgument(ImportGlobals.IsAnyProperty, new CodePrimitiveExpression(true)))
+                type.CustomAttributes.Add(
+                    new CodeAttributeDeclaration(
+                        GetClrTypeFullName(ImportGlobals.TypeOfXmlSchemaProviderAttribute),
+                        new CodeAttributeArgument(NullReference),
+                        new CodeAttributeArgument(
+                            ImportGlobals.IsAnyProperty,
+                            new CodePrimitiveExpression(true)
+                        )
+                    )
                 );
             }
             else
             {
-                type.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    GetClrTypeFullName(ImportGlobals.TypeOfXmlSchemaProviderAttribute),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(ImportGlobals.ExportSchemaMethod)))
+                type.CustomAttributes.Add(
+                    new CodeAttributeDeclaration(
+                        GetClrTypeFullName(ImportGlobals.TypeOfXmlSchemaProviderAttribute),
+                        new CodeAttributeArgument(
+                            new CodePrimitiveExpression(ImportGlobals.ExportSchemaMethod)
+                        )
+                    )
                 );
 
-                CodeMemberField typeNameField = new CodeMemberField(ImportGlobals.TypeOfXmlQualifiedName, TypeNameFieldName);
+                CodeMemberField typeNameField = new CodeMemberField(
+                    ImportGlobals.TypeOfXmlQualifiedName,
+                    TypeNameFieldName
+                );
                 typeNameField.Attributes |= MemberAttributes.Static | MemberAttributes.Private;
                 XmlQualifiedName typeName = xmlDataContract.IsAnonymous
-                    ? XsdDataContractImporter.ImportActualType(xmlDataContract.XsdType?.Annotation, xmlDataContract.XmlName, xmlDataContract.XmlName)
+                    ? XsdDataContractImporter.ImportActualType(
+                        xmlDataContract.XsdType?.Annotation,
+                        xmlDataContract.XmlName,
+                        xmlDataContract.XmlName
+                    )
                     : xmlDataContract.XmlName;
-                typeNameField.InitExpression = new CodeObjectCreateExpression(ImportGlobals.TypeOfXmlQualifiedName, new CodePrimitiveExpression(typeName.Name), new CodePrimitiveExpression(typeName.Namespace));
+                typeNameField.InitExpression = new CodeObjectCreateExpression(
+                    ImportGlobals.TypeOfXmlQualifiedName,
+                    new CodePrimitiveExpression(typeName.Name),
+                    new CodePrimitiveExpression(typeName.Namespace)
+                );
                 type.Members.Add(typeNameField);
 
                 type.Members.Add(GetSchemaStaticMethod);
 
                 bool isElementNameDifferent =
-                    (xmlDataContract.TopLevelElementName != null && xmlDataContract.TopLevelElementName.Value != xmlDataContract.XmlName.Name) ||
-                    (xmlDataContract.TopLevelElementNamespace != null && xmlDataContract.TopLevelElementNamespace.Value != xmlDataContract.XmlName.Namespace);
+                    (
+                        xmlDataContract.TopLevelElementName != null
+                        && xmlDataContract.TopLevelElementName.Value != xmlDataContract.XmlName.Name
+                    )
+                    || (
+                        xmlDataContract.TopLevelElementNamespace != null
+                        && xmlDataContract.TopLevelElementNamespace.Value
+                            != xmlDataContract.XmlName.Namespace
+                    );
                 if (isElementNameDifferent || xmlDataContract.IsTopLevelElementNullable == false)
                 {
-                    CodeAttributeDeclaration xmlRootAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(XmlRootAttribute)));
+                    CodeAttributeDeclaration xmlRootAttribute = new CodeAttributeDeclaration(
+                        GetClrTypeFullName(typeof(XmlRootAttribute))
+                    );
                     if (isElementNameDifferent)
                     {
                         if (xmlDataContract.TopLevelElementName != null)
                         {
-                            xmlRootAttribute.Arguments.Add(new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(xmlDataContract.TopLevelElementName.Value)));
+                            xmlRootAttribute.Arguments.Add(
+                                new CodeAttributeArgument(
+                                    "ElementName",
+                                    new CodePrimitiveExpression(
+                                        xmlDataContract.TopLevelElementName.Value
+                                    )
+                                )
+                            );
                         }
                         if (xmlDataContract.TopLevelElementNamespace != null)
                         {
-                            xmlRootAttribute.Arguments.Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(xmlDataContract.TopLevelElementNamespace.Value)));
+                            xmlRootAttribute.Arguments.Add(
+                                new CodeAttributeArgument(
+                                    "Namespace",
+                                    new CodePrimitiveExpression(
+                                        xmlDataContract.TopLevelElementNamespace.Value
+                                    )
+                                )
+                            );
                         }
                     }
                     if (xmlDataContract.IsTopLevelElementNullable == false)
-                        xmlRootAttribute.Arguments.Add(new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false)));
+                        xmlRootAttribute.Arguments.Add(
+                            new CodeAttributeArgument(
+                                "IsNullable",
+                                new CodePrimitiveExpression(false)
+                            )
+                        );
                     type.CustomAttributes.Add(xmlRootAttribute);
                 }
             }
             AddPropertyChangedNotifier(contractCodeDomInfo, type.IsStruct);
         }
 
-        private CodeNamespace GetCodeNamespace(string clrNamespace, string dataContractNamespace, ContractCodeDomInfo contractCodeDomInfo)
+        private CodeNamespace GetCodeNamespace(
+            string clrNamespace,
+            string dataContractNamespace,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             if (contractCodeDomInfo.CodeNamespace != null)
                 return contractCodeDomInfo.CodeNamespace;
@@ -1354,19 +1993,33 @@ namespace System.Runtime.Serialization
             CodeNamespace codeNamespace = new CodeNamespace(clrNamespace);
             codeNamespaceCollection.Add(codeNamespace);
 
-            if (CanDeclareAssemblyAttribute(contractCodeDomInfo)
-                && NeedsExplicitNamespace(dataContractNamespace, clrNamespace))
+            if (
+                CanDeclareAssemblyAttribute(contractCodeDomInfo)
+                && NeedsExplicitNamespace(dataContractNamespace, clrNamespace)
+            )
             {
-                CodeAttributeDeclaration namespaceAttribute = new CodeAttributeDeclaration(GetClrTypeFullName(typeof(ContractNamespaceAttribute)));
-                namespaceAttribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(dataContractNamespace)));
-                namespaceAttribute.Arguments.Add(new CodeAttributeArgument(ImportGlobals.ClrNamespaceProperty, new CodePrimitiveExpression(clrNamespace)));
+                CodeAttributeDeclaration namespaceAttribute = new CodeAttributeDeclaration(
+                    GetClrTypeFullName(typeof(ContractNamespaceAttribute))
+                );
+                namespaceAttribute.Arguments.Add(
+                    new CodeAttributeArgument(new CodePrimitiveExpression(dataContractNamespace))
+                );
+                namespaceAttribute.Arguments.Add(
+                    new CodeAttributeArgument(
+                        ImportGlobals.ClrNamespaceProperty,
+                        new CodePrimitiveExpression(clrNamespace)
+                    )
+                );
                 _codeCompileUnit.AssemblyCustomAttributes.Add(namespaceAttribute);
             }
             contractCodeDomInfo.CodeNamespace = codeNamespace;
             return codeNamespace;
         }
 
-        private static string GetMemberName(string memberName, ContractCodeDomInfo contractCodeDomInfo)
+        private static string GetMemberName(
+            string memberName,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             memberName = GetClrIdentifier(memberName, ImportGlobals.DefaultGeneratedMember);
 
@@ -1374,14 +2027,20 @@ namespace System.Runtime.Serialization
             Debug.Assert(contractCodeDomInfo.TypeDeclaration != null);
 
             if (memberName == contractCodeDomInfo.TypeDeclaration.Name)
-                memberName = AppendToValidClrIdentifier(memberName, ImportGlobals.DefaultMemberSuffix);
+                memberName = AppendToValidClrIdentifier(
+                    memberName,
+                    ImportGlobals.DefaultMemberSuffix
+                );
 
             if (contractCodeDomInfo.GetMemberNames().Contains(memberName))
             {
                 string uniqueMemberName;
-                for (int i = 1;; i++)
+                for (int i = 1; ; i++)
                 {
-                    uniqueMemberName = AppendToValidClrIdentifier(memberName, i.ToString(NumberFormatInfo.InvariantInfo));
+                    uniqueMemberName = AppendToValidClrIdentifier(
+                        memberName,
+                        i.ToString(NumberFormatInfo.InvariantInfo)
+                    );
                     if (!contractCodeDomInfo.GetMemberNames().Contains(uniqueMemberName))
                     {
                         memberName = uniqueMemberName;
@@ -1394,7 +2053,10 @@ namespace System.Runtime.Serialization
             return memberName;
         }
 
-        private static void AddBaseMemberNames(ContractCodeDomInfo baseContractCodeDomInfo, ContractCodeDomInfo contractCodeDomInfo)
+        private static void AddBaseMemberNames(
+            ContractCodeDomInfo baseContractCodeDomInfo,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             if (!baseContractCodeDomInfo.ReferencedTypeExists)
             {
@@ -1409,7 +2071,10 @@ namespace System.Runtime.Serialization
 
         private static string GetClrIdentifier(string identifier, string defaultIdentifier)
         {
-            if (identifier.Length <= MaxIdentifierLength && CodeGenerator.IsValidLanguageIndependentIdentifier(identifier))
+            if (
+                identifier.Length <= MaxIdentifierLength
+                && CodeGenerator.IsValidLanguageIndependentIdentifier(identifier)
+            )
                 return identifier;
 
             bool isStart = true;
@@ -1433,7 +2098,9 @@ namespace System.Runtime.Serialization
 
         internal static string GetClrTypeFullName(Type type)
         {
-            return !type.IsGenericTypeDefinition && type.ContainsGenericParameters ? type.Namespace + "." + type.Name : type.FullName!;
+            return !type.IsGenericTypeDefinition && type.ContainsGenericParameters
+                ? type.Namespace + "." + type.Name
+                : type.FullName!;
         }
 
         private static string AppendToValidClrIdentifier(string identifier, string appendString)
@@ -1446,7 +2113,10 @@ namespace System.Runtime.Serialization
             return identifier;
         }
 
-        private string GetClrNamespace(DataContract dataContract, ContractCodeDomInfo contractCodeDomInfo)
+        private string GetClrNamespace(
+            DataContract dataContract,
+            ContractCodeDomInfo contractCodeDomInfo
+        )
         {
             string? clrNamespace = contractCodeDomInfo.ClrNamespace;
             bool usesWildcardNamespace = false;
@@ -1464,9 +2134,14 @@ namespace System.Runtime.Serialization
                         if (ClrNamespaces.ContainsKey(clrNamespace))
                         {
                             string uniqueNamespace;
-                            for (int i = 1;; i++)
+                            for (int i = 1; ; i++)
                             {
-                                uniqueNamespace = ((clrNamespace.Length == 0) ? ImportGlobals.DefaultClrNamespace : clrNamespace) + i.ToString(NumberFormatInfo.InvariantInfo);
+                                uniqueNamespace =
+                                    (
+                                        (clrNamespace.Length == 0)
+                                            ? ImportGlobals.DefaultClrNamespace
+                                            : clrNamespace
+                                    ) + i.ToString(NumberFormatInfo.InvariantInfo);
                                 if (!ClrNamespaces.ContainsKey(uniqueNamespace))
                                 {
                                     clrNamespace = uniqueNamespace;
@@ -1516,14 +2191,25 @@ namespace System.Runtime.Serialization
             StringBuilder builder = new StringBuilder();
             if (Uri.TryCreate(dataContractNamespace, UriKind.RelativeOrAbsolute, out Uri? uri))
             {
-                Dictionary<string, object?> fragments = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, object?> fragments = new Dictionary<string, object?>(
+                    StringComparer.OrdinalIgnoreCase
+                );
                 if (!uri.IsAbsoluteUri)
                     AddToNamespace(builder, uri.OriginalString, fragments);
                 else
                 {
                     string uriString = uri.AbsoluteUri;
-                    if (uriString.StartsWith(ImportGlobals.DataContractXsdBaseNamespace, StringComparison.Ordinal))
-                        AddToNamespace(builder, uriString.Substring(ImportGlobals.DataContractXsdBaseNamespace.Length), fragments);
+                    if (
+                        uriString.StartsWith(
+                            ImportGlobals.DataContractXsdBaseNamespace,
+                            StringComparison.Ordinal
+                        )
+                    )
+                        AddToNamespace(
+                            builder,
+                            uriString.Substring(ImportGlobals.DataContractXsdBaseNamespace.Length),
+                            fragments
+                        );
                     else
                     {
                         string host = uri.Host;
@@ -1547,7 +2233,11 @@ namespace System.Runtime.Serialization
             return builder.ToString(0, length);
         }
 
-        private static void AddToNamespace(StringBuilder builder, string? fragment, Dictionary<string, object?> fragments)
+        private static void AddToNamespace(
+            StringBuilder builder,
+            string? fragment,
+            Dictionary<string, object?> fragments
+        )
         {
             if (fragment == null)
                 return;
@@ -1567,8 +2257,13 @@ namespace System.Runtime.Serialization
                     fragmentLength++;
                     isStart = false;
                 }
-                else if ((c == '.' || c == '/' || c == ':') && (builder.Length == 1
-                    || (builder.Length > 1 && builder[builder.Length - 1] != '.')))
+                else if (
+                    (c == '.' || c == '/' || c == ':')
+                    && (
+                        builder.Length == 1
+                        || (builder.Length > 1 && builder[builder.Length - 1] != '.')
+                    )
+                )
                 {
                     AddNamespaceFragment(builder, fragmentOffset, fragmentLength, fragments);
                     builder.Append('.');
@@ -1580,8 +2275,12 @@ namespace System.Runtime.Serialization
             AddNamespaceFragment(builder, fragmentOffset, fragmentLength, fragments);
         }
 
-        private static void AddNamespaceFragment(StringBuilder builder, int fragmentOffset,
-            int fragmentLength, Dictionary<string, object?> fragments)
+        private static void AddNamespaceFragment(
+            StringBuilder builder,
+            int fragmentOffset,
+            int fragmentLength,
+            Dictionary<string, object?> fragments
+        )
         {
             if (fragmentLength == 0)
                 return;
@@ -1589,7 +2288,7 @@ namespace System.Runtime.Serialization
             string nsFragment = builder.ToString(fragmentOffset, fragmentLength);
             if (fragments.ContainsKey(nsFragment))
             {
-                for (int i = 1;; i++)
+                for (int i = 1; ; i++)
                 {
                     string uniquifier = i.ToString(NumberFormatInfo.InvariantInfo);
                     string uniqueNsFragment = AppendToValidClrIdentifier(nsFragment, uniquifier);
@@ -1600,7 +2299,11 @@ namespace System.Runtime.Serialization
                         break;
                     }
                     if (i == int.MaxValue)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.CannotComputeUniqueName, nsFragment)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.Format(SR.CannotComputeUniqueName, nsFragment)
+                            )
+                        );
                 }
             }
             fragments.Add(nsFragment, null);
@@ -1620,7 +2323,10 @@ namespace System.Runtime.Serialization
 
                 if (!previousCollectionTypes.ContainsKey(dataContract.OriginalUnderlyingType))
                 {
-                    previousCollectionTypes.Add(dataContract.OriginalUnderlyingType, dataContract.OriginalUnderlyingType);
+                    previousCollectionTypes.Add(
+                        dataContract.OriginalUnderlyingType,
+                        dataContract.OriginalUnderlyingType
+                    );
                     dataContract = dataContract.BaseContract;
                 }
                 else
@@ -1629,7 +2335,9 @@ namespace System.Runtime.Serialization
                 }
             }
 
-            return dataContract != null && dataContract.Is(DataContractType.PrimitiveDataContract) && dataContract.UnderlyingType == typeof(object);
+            return dataContract != null
+                && dataContract.Is(DataContractType.PrimitiveDataContract)
+                && dataContract.UnderlyingType == typeof(object);
         }
 
         private static bool IsValidStart(char c)
@@ -1645,15 +2353,15 @@ namespace System.Runtime.Serialization
 
             switch (uc)
             {
-                case UnicodeCategory.UppercaseLetter:        // Lu
-                case UnicodeCategory.LowercaseLetter:        // Ll
-                case UnicodeCategory.TitlecaseLetter:        // Lt
-                case UnicodeCategory.ModifierLetter:         // Lm
-                case UnicodeCategory.OtherLetter:            // Lo
-                case UnicodeCategory.DecimalDigitNumber:     // Nd
-                case UnicodeCategory.NonSpacingMark:         // Mn
-                case UnicodeCategory.SpacingCombiningMark:   // Mc
-                case UnicodeCategory.ConnectorPunctuation:   // Pc
+                case UnicodeCategory.UppercaseLetter: // Lu
+                case UnicodeCategory.LowercaseLetter: // Ll
+                case UnicodeCategory.TitlecaseLetter: // Lt
+                case UnicodeCategory.ModifierLetter: // Lm
+                case UnicodeCategory.OtherLetter: // Lo
+                case UnicodeCategory.DecimalDigitNumber: // Nd
+                case UnicodeCategory.NonSpacingMark: // Mn
+                case UnicodeCategory.SpacingCombiningMark: // Mc
+                case UnicodeCategory.ConnectorPunctuation: // Pc
                     return true;
                 default:
                     return false;
@@ -1662,7 +2370,10 @@ namespace System.Runtime.Serialization
 
         private CodeTypeReference CodeTypeIPropertyChange
         {
-            get { return GetCodeTypeReference(typeof(System.ComponentModel.INotifyPropertyChanged)); }
+            get
+            {
+                return GetCodeTypeReference(typeof(System.ComponentModel.INotifyPropertyChanged));
+            }
         }
 
         private static CodeThisReferenceExpression ThisReference
@@ -1677,24 +2388,46 @@ namespace System.Runtime.Serialization
 
         private CodeParameterDeclarationExpression SerializationInfoParameter
         {
-            get { return new CodeParameterDeclarationExpression(GetCodeTypeReference(typeof(SerializationInfo)), ImportGlobals.SerializationInfoFieldName); }
+            get
+            {
+                return new CodeParameterDeclarationExpression(
+                    GetCodeTypeReference(typeof(SerializationInfo)),
+                    ImportGlobals.SerializationInfoFieldName
+                );
+            }
         }
 
         private CodeParameterDeclarationExpression StreamingContextParameter
         {
-            get { return new CodeParameterDeclarationExpression(GetCodeTypeReference(typeof(StreamingContext)), ImportGlobals.ContextFieldName); }
+            get
+            {
+                return new CodeParameterDeclarationExpression(
+                    GetCodeTypeReference(typeof(StreamingContext)),
+                    ImportGlobals.ContextFieldName
+                );
+            }
         }
 
         private CodeAttributeDeclaration SerializableAttribute
         {
-            get { return new CodeAttributeDeclaration(GetCodeTypeReference(typeof(SerializableAttribute))); }
+            get
+            {
+                return new CodeAttributeDeclaration(
+                    GetCodeTypeReference(typeof(SerializableAttribute))
+                );
+            }
         }
 
         private CodeMemberProperty NodeArrayProperty
         {
             get
             {
-                return CreateProperty(GetCodeTypeReference(ImportGlobals.TypeOfXmlNodeArray), ImportGlobals.NodeArrayPropertyName, ImportGlobals.NodeArrayFieldName, false/*isValueType*/);
+                return CreateProperty(
+                    GetCodeTypeReference(ImportGlobals.TypeOfXmlNodeArray),
+                    ImportGlobals.NodeArrayPropertyName,
+                    ImportGlobals.NodeArrayFieldName,
+                    false /*isValueType*/
+                );
             }
         }
 
@@ -1716,17 +2449,23 @@ namespace System.Runtime.Serialization
             {
                 CodeMemberMethod readXmlMethod = new CodeMemberMethod();
                 readXmlMethod.Name = "ReadXml";
-                CodeParameterDeclarationExpression readerArg = new CodeParameterDeclarationExpression(typeof(XmlReader), "reader");
+                CodeParameterDeclarationExpression readerArg =
+                    new CodeParameterDeclarationExpression(typeof(XmlReader), "reader");
                 readXmlMethod.Parameters.Add(readerArg);
                 readXmlMethod.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                 readXmlMethod.ImplementationTypes.Add(typeof(IXmlSerializable));
                 CodeAssignStatement setNode = new CodeAssignStatement();
-                setNode.Left = new CodeFieldReferenceExpression(ThisReference, ImportGlobals.NodeArrayFieldName);
+                setNode.Left = new CodeFieldReferenceExpression(
+                    ThisReference,
+                    ImportGlobals.NodeArrayFieldName
+                );
                 setNode.Right = new CodeMethodInvokeExpression(
-                                      new CodeTypeReferenceExpression(GetCodeTypeReference(typeof(XmlSerializableServices))),
-                                      nameof(XmlSerializableServices.ReadNodes),
-                                      new CodeArgumentReferenceExpression(readerArg.Name)
-                                    );
+                    new CodeTypeReferenceExpression(
+                        GetCodeTypeReference(typeof(XmlSerializableServices))
+                    ),
+                    nameof(XmlSerializableServices.ReadNodes),
+                    new CodeArgumentReferenceExpression(readerArg.Name)
+                );
                 readXmlMethod.Statements.Add(setNode);
                 return readXmlMethod;
             }
@@ -1738,16 +2477,22 @@ namespace System.Runtime.Serialization
             {
                 CodeMemberMethod writeXmlMethod = new CodeMemberMethod();
                 writeXmlMethod.Name = "WriteXml";
-                CodeParameterDeclarationExpression writerArg = new CodeParameterDeclarationExpression(typeof(XmlWriter), "writer");
+                CodeParameterDeclarationExpression writerArg =
+                    new CodeParameterDeclarationExpression(typeof(XmlWriter), "writer");
                 writeXmlMethod.Parameters.Add(writerArg);
                 writeXmlMethod.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                 writeXmlMethod.ImplementationTypes.Add(typeof(IXmlSerializable));
                 writeXmlMethod.Statements.Add(
                     new CodeMethodInvokeExpression(
-                        new CodeTypeReferenceExpression(GetCodeTypeReference(typeof(XmlSerializableServices))),
+                        new CodeTypeReferenceExpression(
+                            GetCodeTypeReference(typeof(XmlSerializableServices))
+                        ),
                         nameof(XmlSerializableServices.WriteNodes),
                         new CodeArgumentReferenceExpression(writerArg.Name),
-                        new CodePropertyReferenceExpression(ThisReference, ImportGlobals.NodeArrayPropertyName)
+                        new CodePropertyReferenceExpression(
+                            ThisReference,
+                            ImportGlobals.NodeArrayPropertyName
+                        )
                     )
                 );
                 return writeXmlMethod;
@@ -1774,13 +2519,19 @@ namespace System.Runtime.Serialization
             {
                 CodeMemberMethod getSchemaStaticMethod = new CodeMemberMethod();
                 getSchemaStaticMethod.Name = ImportGlobals.ExportSchemaMethod;
-                getSchemaStaticMethod.ReturnType = GetCodeTypeReference(ImportGlobals.TypeOfXmlQualifiedName);
-                CodeParameterDeclarationExpression paramDeclaration = new CodeParameterDeclarationExpression(typeof(XmlSchemaSet), "schemas");
+                getSchemaStaticMethod.ReturnType = GetCodeTypeReference(
+                    ImportGlobals.TypeOfXmlQualifiedName
+                );
+                CodeParameterDeclarationExpression paramDeclaration =
+                    new CodeParameterDeclarationExpression(typeof(XmlSchemaSet), "schemas");
                 getSchemaStaticMethod.Parameters.Add(paramDeclaration);
-                getSchemaStaticMethod.Attributes = MemberAttributes.Static | MemberAttributes.Public;
+                getSchemaStaticMethod.Attributes =
+                    MemberAttributes.Static | MemberAttributes.Public;
                 getSchemaStaticMethod.Statements.Add(
                     new CodeMethodInvokeExpression(
-                        new CodeTypeReferenceExpression(GetCodeTypeReference(typeof(XmlSerializableServices))),
+                        new CodeTypeReferenceExpression(
+                            GetCodeTypeReference(typeof(XmlSerializableServices))
+                        ),
                         nameof(XmlSerializableServices.AddDefaultSchema),
                         new CodeArgumentReferenceExpression(paramDeclaration.Name),
                         new CodeFieldReferenceExpression(null!, TypeNameFieldName)
@@ -1804,13 +2555,26 @@ namespace System.Runtime.Serialization
                 baseConstructor.Parameters.Add(SerializationInfoParameter);
                 baseConstructor.Parameters.Add(StreamingContextParameter);
                 CodeAssignStatement setObjectData = new CodeAssignStatement();
-                setObjectData.Left = new CodePropertyReferenceExpression(ThisReference, ImportGlobals.SerializationInfoFieldName);
-                setObjectData.Right = new CodeArgumentReferenceExpression(ImportGlobals.SerializationInfoFieldName);
+                setObjectData.Left = new CodePropertyReferenceExpression(
+                    ThisReference,
+                    ImportGlobals.SerializationInfoFieldName
+                );
+                setObjectData.Right = new CodeArgumentReferenceExpression(
+                    ImportGlobals.SerializationInfoFieldName
+                );
                 baseConstructor.Statements.Add(setObjectData);
                 // Special-cased check for vb here since CodeGeneratorOptions does not provide information indicating that VB cannot initialize event member
                 if (EnableDataBinding && SupportsDeclareEvents && FileExtension != "vb")
                 {
-                    baseConstructor.Statements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(ThisReference, PropertyChangedEvent.Name), NullReference));
+                    baseConstructor.Statements.Add(
+                        new CodeAssignStatement(
+                            new CodePropertyReferenceExpression(
+                                ThisReference,
+                                PropertyChangedEvent.Name
+                            ),
+                            NullReference
+                        )
+                    );
                 }
                 return baseConstructor;
             }
@@ -1824,8 +2588,12 @@ namespace System.Runtime.Serialization
                 derivedConstructor.Attributes = MemberAttributes.Public;
                 derivedConstructor.Parameters.Add(SerializationInfoParameter);
                 derivedConstructor.Parameters.Add(StreamingContextParameter);
-                derivedConstructor.BaseConstructorArgs.Add(new CodeVariableReferenceExpression(ImportGlobals.SerializationInfoFieldName));
-                derivedConstructor.BaseConstructorArgs.Add(new CodeVariableReferenceExpression(ImportGlobals.ContextFieldName));
+                derivedConstructor.BaseConstructorArgs.Add(
+                    new CodeVariableReferenceExpression(ImportGlobals.SerializationInfoFieldName)
+                );
+                derivedConstructor.BaseConstructorArgs.Add(
+                    new CodeVariableReferenceExpression(ImportGlobals.ContextFieldName)
+                );
                 return derivedConstructor;
             }
         }
@@ -1846,7 +2614,12 @@ namespace System.Runtime.Serialization
         {
             get
             {
-                return CreateProperty(GetCodeTypeReference(typeof(SerializationInfo)), ImportGlobals.SerializationInfoPropertyName, ImportGlobals.SerializationInfoFieldName, false/*isValueType*/);
+                return CreateProperty(
+                    GetCodeTypeReference(typeof(SerializationInfo)),
+                    ImportGlobals.SerializationInfoPropertyName,
+                    ImportGlobals.SerializationInfoFieldName,
+                    false /*isValueType*/
+                );
             }
         }
 
@@ -1864,46 +2637,69 @@ namespace System.Runtime.Serialization
                 // Generates: if (this.SerializationInfo == null) return;
                 CodeConditionStatement returnIfNull = new CodeConditionStatement();
                 returnIfNull.Condition = new CodeBinaryOperatorExpression(
-                    new CodePropertyReferenceExpression(ThisReference, ImportGlobals.SerializationInfoPropertyName),
+                    new CodePropertyReferenceExpression(
+                        ThisReference,
+                        ImportGlobals.SerializationInfoPropertyName
+                    ),
                     CodeBinaryOperatorType.IdentityEquality,
-                    NullReference);
+                    NullReference
+                );
                 returnIfNull.TrueStatements.Add(new CodeMethodReturnStatement());
 
                 // Generates: SerializationInfoEnumerator enumerator = this.SerializationInfo.GetEnumerator();
-                CodeVariableDeclarationStatement getEnumerator = new CodeVariableDeclarationStatement();
+                CodeVariableDeclarationStatement getEnumerator =
+                    new CodeVariableDeclarationStatement();
                 getEnumerator.Type = GetCodeTypeReference(typeof(SerializationInfoEnumerator));
                 getEnumerator.Name = ImportGlobals.EnumeratorFieldName;
                 getEnumerator.InitExpression = new CodeMethodInvokeExpression(
-                    new CodePropertyReferenceExpression(ThisReference, ImportGlobals.SerializationInfoPropertyName),
-                    ImportGlobals.GetEnumeratorMethodName);
+                    new CodePropertyReferenceExpression(
+                        ThisReference,
+                        ImportGlobals.SerializationInfoPropertyName
+                    ),
+                    ImportGlobals.GetEnumeratorMethodName
+                );
 
                 //Generates: SerializationEntry entry = enumerator.Current;
-                CodeVariableDeclarationStatement getCurrent = new CodeVariableDeclarationStatement();
+                CodeVariableDeclarationStatement getCurrent =
+                    new CodeVariableDeclarationStatement();
                 getCurrent.Type = GetCodeTypeReference(typeof(SerializationEntry));
                 getCurrent.Name = ImportGlobals.SerializationEntryFieldName;
                 getCurrent.InitExpression = new CodePropertyReferenceExpression(
                     new CodeVariableReferenceExpression(ImportGlobals.EnumeratorFieldName),
-                    ImportGlobals.CurrentPropertyName);
+                    ImportGlobals.CurrentPropertyName
+                );
 
                 //Generates: info.AddValue(entry.Name, entry.Value);
                 CodeExpressionStatement addValue = new CodeExpressionStatement();
-                CodePropertyReferenceExpression getCurrentName = new CodePropertyReferenceExpression(
-                    new CodeVariableReferenceExpression(ImportGlobals.SerializationEntryFieldName),
-                    ImportGlobals.NameProperty);
-                CodePropertyReferenceExpression getCurrentValue = new CodePropertyReferenceExpression(
-                    new CodeVariableReferenceExpression(ImportGlobals.SerializationEntryFieldName),
-                    ImportGlobals.ValueProperty);
+                CodePropertyReferenceExpression getCurrentName =
+                    new CodePropertyReferenceExpression(
+                        new CodeVariableReferenceExpression(
+                            ImportGlobals.SerializationEntryFieldName
+                        ),
+                        ImportGlobals.NameProperty
+                    );
+                CodePropertyReferenceExpression getCurrentValue =
+                    new CodePropertyReferenceExpression(
+                        new CodeVariableReferenceExpression(
+                            ImportGlobals.SerializationEntryFieldName
+                        ),
+                        ImportGlobals.ValueProperty
+                    );
                 addValue.Expression = new CodeMethodInvokeExpression(
                     new CodeArgumentReferenceExpression(ImportGlobals.SerializationInfoFieldName),
                     ImportGlobals.AddValueMethodName,
-                    new CodeExpression[] { getCurrentName, getCurrentValue });
+                    new CodeExpression[] { getCurrentName, getCurrentValue }
+                );
 
                 //Generates: for (; enumerator.MoveNext(); )
                 CodeIterationStatement loop = new CodeIterationStatement();
                 loop.TestExpression = new CodeMethodInvokeExpression(
                     new CodeVariableReferenceExpression(ImportGlobals.EnumeratorFieldName),
-                    ImportGlobals.MoveNextMethodName);
-                loop.InitStatement = loop.IncrementStatement = new CodeSnippetStatement(string.Empty);
+                    ImportGlobals.MoveNextMethodName
+                );
+                loop.InitStatement = loop.IncrementStatement = new CodeSnippetStatement(
+                    string.Empty
+                );
                 loop.Statements.Add(getCurrent);
                 loop.Statements.Add(addValue);
 
@@ -1932,17 +2728,26 @@ namespace System.Runtime.Serialization
             get
             {
                 CodeMemberProperty extensionDataObjectProperty = new CodeMemberProperty();
-                extensionDataObjectProperty.Type = GetCodeTypeReference(typeof(ExtensionDataObject));
+                extensionDataObjectProperty.Type = GetCodeTypeReference(
+                    typeof(ExtensionDataObject)
+                );
                 extensionDataObjectProperty.Name = ImportGlobals.ExtensionDataObjectPropertyName;
-                extensionDataObjectProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                extensionDataObjectProperty.Attributes =
+                    MemberAttributes.Public | MemberAttributes.Final;
                 extensionDataObjectProperty.ImplementationTypes.Add(typeof(IExtensibleDataObject));
 
                 CodeMethodReturnStatement propertyGet = new CodeMethodReturnStatement();
-                propertyGet.Expression = new CodeFieldReferenceExpression(ThisReference, ImportGlobals.ExtensionDataObjectFieldName);
+                propertyGet.Expression = new CodeFieldReferenceExpression(
+                    ThisReference,
+                    ImportGlobals.ExtensionDataObjectFieldName
+                );
                 extensionDataObjectProperty.GetStatements.Add(propertyGet);
 
                 CodeAssignStatement propertySet = new CodeAssignStatement();
-                propertySet.Left = new CodeFieldReferenceExpression(ThisReference, ImportGlobals.ExtensionDataObjectFieldName);
+                propertySet.Left = new CodeFieldReferenceExpression(
+                    ThisReference,
+                    ImportGlobals.ExtensionDataObjectFieldName
+                );
                 propertySet.Right = new CodePropertySetValueReferenceExpression();
                 extensionDataObjectProperty.SetStatements.Add(propertySet);
 
@@ -1957,13 +2762,42 @@ namespace System.Runtime.Serialization
                 CodeMemberMethod raisePropertyChangedEventMethod = new CodeMemberMethod();
                 raisePropertyChangedEventMethod.Name = "RaisePropertyChanged";
                 raisePropertyChangedEventMethod.Attributes = MemberAttributes.Final;
-                CodeArgumentReferenceExpression propertyName = new CodeArgumentReferenceExpression("propertyName");
-                raisePropertyChangedEventMethod.Parameters.Add(new CodeParameterDeclarationExpression(typeof(string), propertyName.ParameterName));
-                CodeVariableReferenceExpression propertyChanged = new CodeVariableReferenceExpression("propertyChanged");
-                raisePropertyChangedEventMethod.Statements.Add(new CodeVariableDeclarationStatement(typeof(PropertyChangedEventHandler), propertyChanged.VariableName, new CodeEventReferenceExpression(ThisReference, PropertyChangedEvent.Name)));
-                CodeConditionStatement ifStatement = new CodeConditionStatement(new CodeBinaryOperatorExpression(propertyChanged, CodeBinaryOperatorType.IdentityInequality, NullReference));
+                CodeArgumentReferenceExpression propertyName = new CodeArgumentReferenceExpression(
+                    "propertyName"
+                );
+                raisePropertyChangedEventMethod.Parameters.Add(
+                    new CodeParameterDeclarationExpression(
+                        typeof(string),
+                        propertyName.ParameterName
+                    )
+                );
+                CodeVariableReferenceExpression propertyChanged =
+                    new CodeVariableReferenceExpression("propertyChanged");
+                raisePropertyChangedEventMethod.Statements.Add(
+                    new CodeVariableDeclarationStatement(
+                        typeof(PropertyChangedEventHandler),
+                        propertyChanged.VariableName,
+                        new CodeEventReferenceExpression(ThisReference, PropertyChangedEvent.Name)
+                    )
+                );
+                CodeConditionStatement ifStatement = new CodeConditionStatement(
+                    new CodeBinaryOperatorExpression(
+                        propertyChanged,
+                        CodeBinaryOperatorType.IdentityInequality,
+                        NullReference
+                    )
+                );
                 raisePropertyChangedEventMethod.Statements.Add(ifStatement);
-                ifStatement.TrueStatements.Add(new CodeDelegateInvokeExpression(propertyChanged, ThisReference, new CodeObjectCreateExpression(typeof(PropertyChangedEventArgs), propertyName)));
+                ifStatement.TrueStatements.Add(
+                    new CodeDelegateInvokeExpression(
+                        propertyChanged,
+                        ThisReference,
+                        new CodeObjectCreateExpression(
+                            typeof(PropertyChangedEventArgs),
+                            propertyName
+                        )
+                    )
+                );
                 return raisePropertyChangedEventMethod;
             }
         }
@@ -1975,18 +2809,37 @@ namespace System.Runtime.Serialization
                 CodeMemberEvent propertyChangedEvent = new CodeMemberEvent();
                 propertyChangedEvent.Attributes = MemberAttributes.Public;
                 propertyChangedEvent.Name = "PropertyChanged";
-                propertyChangedEvent.Type = GetCodeTypeReference(typeof(PropertyChangedEventHandler));
+                propertyChangedEvent.Type = GetCodeTypeReference(
+                    typeof(PropertyChangedEventHandler)
+                );
                 propertyChangedEvent.ImplementationTypes.Add(typeof(INotifyPropertyChanged));
                 return propertyChangedEvent;
             }
         }
 
-        private CodeMemberProperty CreateProperty(CodeTypeReference type, string propertyName, string fieldName, bool isValueType)
+        private CodeMemberProperty CreateProperty(
+            CodeTypeReference type,
+            string propertyName,
+            string fieldName,
+            bool isValueType
+        )
         {
-            return CreateProperty(type, propertyName, fieldName, isValueType, EnableDataBinding && SupportsDeclareEvents);
+            return CreateProperty(
+                type,
+                propertyName,
+                fieldName,
+                isValueType,
+                EnableDataBinding && SupportsDeclareEvents
+            );
         }
 
-        private CodeMemberProperty CreateProperty(CodeTypeReference type, string propertyName, string fieldName, bool isValueType, bool raisePropertyChanged)
+        private CodeMemberProperty CreateProperty(
+            CodeTypeReference type,
+            string propertyName,
+            string fieldName,
+            bool isValueType,
+            bool raisePropertyChanged
+        )
         {
             CodeMemberProperty property = new CodeMemberProperty();
             property.Type = type;
@@ -2011,17 +2864,34 @@ namespace System.Runtime.Serialization
                 CodeExpression right = new CodePropertySetValueReferenceExpression();
                 if (!isValueType)
                 {
-                    left = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(typeof(object)),
-                        "ReferenceEquals", new CodeExpression[] { left, right });
+                    left = new CodeMethodInvokeExpression(
+                        new CodeTypeReferenceExpression(typeof(object)),
+                        "ReferenceEquals",
+                        new CodeExpression[] { left, right }
+                    );
                 }
                 else
                 {
-                    left = new CodeMethodInvokeExpression(left, "Equals", new CodeExpression[] { right });
+                    left = new CodeMethodInvokeExpression(
+                        left,
+                        "Equals",
+                        new CodeExpression[] { right }
+                    );
                 }
                 right = new CodePrimitiveExpression(true);
-                ifStatement.Condition = new CodeBinaryOperatorExpression(left, CodeBinaryOperatorType.IdentityInequality, right);
+                ifStatement.Condition = new CodeBinaryOperatorExpression(
+                    left,
+                    CodeBinaryOperatorType.IdentityInequality,
+                    right
+                );
                 ifStatement.TrueStatements.Add(propertySet);
-                ifStatement.TrueStatements.Add(new CodeMethodInvokeExpression(ThisReference, RaisePropertyChangedEventMethod.Name, new CodePrimitiveExpression(propertyName)));
+                ifStatement.TrueStatements.Add(
+                    new CodeMethodInvokeExpression(
+                        ThisReference,
+                        RaisePropertyChangedEventMethod.Name,
+                        new CodePrimitiveExpression(propertyName)
+                    )
+                );
                 property.SetStatements.Add(ifStatement);
             }
             else

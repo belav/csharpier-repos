@@ -4,17 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     /// <internalonly />
     /// <devdoc>
     /// Allows the ControlSerializer to get to the ControlBuilder for a Control.
     /// </devdoc>
-    public interface IControlBuilderAccessor {
-
-        ControlBuilder ControlBuilder {
-            get;
-        }
+    public interface IControlBuilderAccessor
+    {
+        ControlBuilder ControlBuilder { get; }
     }
 }
-

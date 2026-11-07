@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,58 +27,66 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Policy;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public abstract class SecurityKeyIdentifierClause
-	{
-		protected SecurityKeyIdentifierClause (string clauseType)
-		{
-			this.clause_type = clauseType;
-		}
+    public abstract class SecurityKeyIdentifierClause
+    {
+        protected SecurityKeyIdentifierClause(string clauseType)
+        {
+            this.clause_type = clauseType;
+        }
 
-		protected SecurityKeyIdentifierClause (string clauseType, byte [] nonce, int length)
-		{
-			this.clause_type = clauseType;
-			if (nonce != null)
-				this.nonce = (byte []) nonce.Clone ();
-			this.deriv_length = length;
-		}
+        protected SecurityKeyIdentifierClause(string clauseType, byte[] nonce, int length)
+        {
+            this.clause_type = clauseType;
+            if (nonce != null)
+                this.nonce = (byte[])nonce.Clone();
+            this.deriv_length = length;
+        }
 
-		string clause_type;
-		byte [] nonce;
-		int deriv_length;
+        string clause_type;
+        byte[] nonce;
+        int deriv_length;
 
-		public virtual bool CanCreateKey {
-			get { return false; }
-		}
+        public virtual bool CanCreateKey
+        {
+            get { return false; }
+        }
 
-		public string ClauseType {
-			get { return clause_type; }
-		}
+        public string ClauseType
+        {
+            get { return clause_type; }
+        }
 
-		public int DerivationLength {
-			get { return deriv_length; }
-		}
+        public int DerivationLength
+        {
+            get { return deriv_length; }
+        }
 
-		public byte [] GetDerivationNonce ()
-		{
-			return nonce != null ? (byte []) nonce.Clone () : null;
-		}
+        public byte[] GetDerivationNonce()
+        {
+            return nonce != null ? (byte[])nonce.Clone() : null;
+        }
 
-		public string Id { get; set; }
+        public string Id { get; set; }
 
-		public virtual SecurityKey CreateKey ()
-		{
-			throw new NotSupportedException (String.Format ("This '{0}' identifier clause does not support key creation.", GetType ()));
-		}
+        public virtual SecurityKey CreateKey()
+        {
+            throw new NotSupportedException(
+                String.Format(
+                    "This '{0}' identifier clause does not support key creation.",
+                    GetType()
+                )
+            );
+        }
 
-		[MonoTODO]
-		public virtual bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public virtual bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

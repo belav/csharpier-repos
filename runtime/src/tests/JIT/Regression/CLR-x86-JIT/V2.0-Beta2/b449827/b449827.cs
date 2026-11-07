@@ -9,7 +9,8 @@ public class MainApp
     [Fact]
     public static int TestEntryPoint()
     {
-        int a, prev;
+        int a,
+            prev;
 
         Console.WriteLine("\n========== Case 1 (wrong result) ==========");
 
@@ -18,7 +19,8 @@ public class MainApp
 
         a += 0x12345678;
 
-        if (a < 0) a = -a;
+        if (a < 0)
+            a = -a;
         Console.WriteLine("a2={0}", a);
 
         prev = a;
@@ -32,7 +34,8 @@ public class MainApp
         a += 0x12345678;
         a.ToString();
 
-        if (a < 0) a = -a;
+        if (a < 0)
+            a = -a;
         Console.WriteLine("a2={0}", a);
 
         Console.WriteLine("prev={0}, a3={1}", prev, a);
@@ -50,4 +53,3 @@ public class MainApp
         }
     }
 }
-

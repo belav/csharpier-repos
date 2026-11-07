@@ -36,7 +36,13 @@ namespace System.Reflection
     internal abstract class RtFieldInfo : FieldInfo
     {
         internal abstract object UnsafeGetValue(object obj);
-        internal abstract void UnsafeSetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture);
+        internal abstract void UnsafeSetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        );
         internal abstract void CheckConsistency(object target);
     }
 
@@ -53,10 +59,7 @@ namespace System.Reflection
 
         public override Module Module
         {
-            get
-            {
-                return GetRuntimeModule();
-            }
+            get { return GetRuntimeModule(); }
         }
 
         internal RuntimeType GetDeclaringTypeInternal()
@@ -86,8 +89,8 @@ namespace System.Reflection
                     else
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.Arg_FieldDeclTarget,
-                                Name, DeclaringType, target.GetType()));
+                            SR.Format(SR.Arg_FieldDeclTarget, Name, DeclaringType, target.GetType())
+                        );
                     }
                 }
             }
@@ -95,10 +98,24 @@ namespace System.Reflection
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-        internal override void UnsafeSetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        internal override void UnsafeSetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             bool domainInitialized = false;
-            RuntimeFieldHandle.SetValue(this, obj, value, null, Attributes, null, ref domainInitialized);
+            RuntimeFieldHandle.SetValue(
+                this,
+                obj,
+                value,
+                null,
+                Attributes,
+                null,
+                ref domainInitialized
+            );
         }
 
         [DebuggerStepThrough]
@@ -112,7 +129,13 @@ namespace System.Reflection
             {
                 // Passing TypedReference by reference is easier to make correct in native code
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
-                RuntimeFieldHandle.SetValueDirect(this, (RuntimeType)FieldType, &obj, value, (RuntimeType?)DeclaringType);
+                RuntimeFieldHandle.SetValueDirect(
+                    this,
+                    (RuntimeType)FieldType,
+                    &obj,
+                    value,
+                    (RuntimeType?)DeclaringType
+                );
 #pragma warning restore CS8500
             }
         }
@@ -128,24 +151,23 @@ namespace System.Reflection
             {
                 // Passing TypedReference by reference is easier to make correct in native code
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
-                return RuntimeFieldHandle.GetValueDirect(this, (RuntimeType)FieldType, &obj, (RuntimeType?)DeclaringType);
+                return RuntimeFieldHandle.GetValueDirect(
+                    this,
+                    (RuntimeType)FieldType,
+                    &obj,
+                    (RuntimeType?)DeclaringType
+                );
 #pragma warning restore CS8500
             }
         }
 
         public override FieldAttributes Attributes
         {
-            get
-            {
-                return attrs;
-            }
+            get { return attrs; }
         }
         public override RuntimeFieldHandle FieldHandle
         {
-            get
-            {
-                return fhandle;
-            }
+            get { return fhandle; }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -158,10 +180,7 @@ namespace System.Reflection
 
         public override Type ReflectedType
         {
-            get
-            {
-                return GetParentType(false);
-            }
+            get { return GetParentType(false); }
         }
         public override Type? DeclaringType
         {
@@ -173,10 +192,7 @@ namespace System.Reflection
         }
         public override string Name
         {
-            get
-            {
-                return name!;
-            }
+            get { return name!; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -207,7 +223,10 @@ namespace System.Reflection
                 if (obj == null)
                     throw new TargetException(SR.RFLCT_Targ_StatFldReqTarg);
                 if (!DeclaringType!.IsAssignableFrom(obj.GetType()))
-                    throw new ArgumentException(SR.Format(SR.Arg_FieldDeclTarget, Name, DeclaringType, obj.GetType()), nameof(obj));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_FieldDeclTarget, Name, DeclaringType, obj.GetType()),
+                        nameof(obj)
+                    );
             }
 
             if (!IsLiteral)
@@ -218,20 +237,29 @@ namespace System.Reflection
 
         public override string ToString()
         {
-            return $"{FieldType.FormatTypeName ()} {name}";
+            return $"{FieldType.FormatTypeName()} {name}";
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void SetValueInternal(FieldInfo fi, object? obj, object? value);
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             if (!IsStatic)
             {
                 if (obj == null)
                     throw new TargetException(SR.RFLCT_Targ_StatFldReqTarg);
                 if (!DeclaringType!.IsAssignableFrom(obj.GetType()))
-                    throw new ArgumentException(SR.Format(SR.Arg_FieldDeclTarget, Name, DeclaringType, obj.GetType()), nameof(obj));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_FieldDeclTarget, Name, DeclaringType, obj.GetType()),
+                        nameof(obj)
+                    );
             }
             if (IsLiteral)
                 throw new FieldAccessException(SR.Acc_ReadOnly);
@@ -277,14 +305,12 @@ namespace System.Reflection
                 throw new InvalidOperationException(SR.Arg_UnboundGenField);
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
 
         public override int MetadataToken
         {
-            get
-            {
-                return get_metadata_token(this);
-            }
+            get { return get_metadata_token(this); }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -297,9 +323,13 @@ namespace System.Reflection
 
         public override Type[] GetRequiredCustomModifiers() => GetCustomModifiers(false);
 
-        private Type[] GetCustomModifiers(bool optional) => GetTypeModifiers(optional) ?? Type.EmptyTypes;
+        private Type[] GetCustomModifiers(bool optional) =>
+            GetTypeModifiers(optional) ?? Type.EmptyTypes;
 
-        internal Type[] GetCustomModifiersFromModifiedType(bool optional, int genericArgumentPosition) => GetTypeModifiers(optional, genericArgumentPosition) ?? Type.EmptyTypes;
+        internal Type[] GetCustomModifiersFromModifiedType(
+            bool optional,
+            int genericArgumentPosition
+        ) => GetTypeModifiers(optional, genericArgumentPosition) ?? Type.EmptyTypes;
 
         public override Type GetModifiedFieldType() => ModifiedType.Create(FieldType, this);
     }

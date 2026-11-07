@@ -7,16 +7,15 @@
  * NGen time "Assertion failed 'EA_SIZE(attr) != EA_1BYTE || (emitRegMask(ireg)
  * & SRM_BYTE_REGS)'" under DOTNET_JitStressBBProf=1
 
-   The actual repro attached to the bug was to ngen one of the visual studio assemblies. 
-   I was talking to brian about the problem, and he told me to use a struct, which contains four 
-   value types (bools) to repro the same issue. Which it did. 
+   The actual repro attached to the bug was to ngen one of the visual studio assemblies.
+   I was talking to brian about the problem, and he told me to use a struct, which contains four
+   value types (bools) to repro the same issue. Which it did.
 
  * */
 
-
 using System;
-using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace b392262

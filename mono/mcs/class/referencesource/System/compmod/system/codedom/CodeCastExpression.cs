@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeCastExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -20,12 +20,9 @@ namespace System.CodeDom {
     ///       type cast expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeCastExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeCastExpression : CodeExpression
+    {
         private CodeTypeReference targetType;
         private CodeExpression expression;
 
@@ -34,8 +31,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeCastExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeCastExpression() {
-        }
+        public CodeCastExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -43,7 +39,8 @@ namespace System.CodeDom {
         ///       parameters.
         ///    </para>
         /// </devdoc>
-        public CodeCastExpression(CodeTypeReference targetType, CodeExpression expression) {
+        public CodeCastExpression(CodeTypeReference targetType, CodeExpression expression)
+        {
             TargetType = targetType;
             Expression = expression;
         }
@@ -51,7 +48,8 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeCastExpression(string targetType, CodeExpression expression) {
+        public CodeCastExpression(string targetType, CodeExpression expression)
+        {
             TargetType = new CodeTypeReference(targetType);
             Expression = expression;
         }
@@ -59,7 +57,8 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeCastExpression(Type targetType, CodeExpression expression) {
+        public CodeCastExpression(Type targetType, CodeExpression expression)
+        {
             TargetType = new CodeTypeReference(targetType);
             Expression = expression;
         }
@@ -69,16 +68,17 @@ namespace System.CodeDom {
         ///       The target type of the cast.
         ///    </para>
         /// </devdoc>
-        public CodeTypeReference TargetType {
-            get {
-                if (targetType == null) {
+        public CodeTypeReference TargetType
+        {
+            get
+            {
+                if (targetType == null)
+                {
                     targetType = new CodeTypeReference("");
                 }
                 return targetType;
             }
-            set {
-                targetType = value;
-            }
+            set { targetType = value; }
         }
 
         /// <devdoc>
@@ -86,13 +86,10 @@ namespace System.CodeDom {
         ///       The expression to cast.
         ///    </para>
         /// </devdoc>
-        public CodeExpression Expression {
-            get {
-                return expression;
-            }
-            set {
-                expression = value;
-            }
+        public CodeExpression Expression
+        {
+            get { return expression; }
+            set { expression = value; }
         }
     }
 }

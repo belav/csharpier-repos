@@ -10,13 +10,10 @@ public class FakeLogger<T> : ILogger<T>
         EventId eventId,
         TState state,
         Exception exception,
-        Func<TState, Exception, string> formatter)
-    {
-    }
+        Func<TState, Exception, string> formatter
+    ) { }
 
-    public bool IsEnabled(LogLevel logLevel)
-        => true;
+    public bool IsEnabled(LogLevel logLevel) => true;
 
-    public IDisposable BeginScope<TState>(TState state)
-        => throw new NotImplementedException();
+    public IDisposable BeginScope<TState>(TState state) => throw new NotImplementedException();
 }

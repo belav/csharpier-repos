@@ -31,6 +31,6 @@ namespace System.Composition.Diagnostics
         Registration_MemberImportConventionMatchedTwice = 106,
         Registration_PartMetadataConventionOverridden = 107,
         Registration_ParameterImportConventionOverridden = 108,
-        Registration_OnSatisfiedImportNotificationOverridden = 109
+        Registration_OnSatisfiedImportNotificationOverridden = 109,
     }
 }

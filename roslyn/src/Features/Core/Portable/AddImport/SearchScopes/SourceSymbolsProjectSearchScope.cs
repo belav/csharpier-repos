@@ -22,15 +22,26 @@ namespace Microsoft.CodeAnalysis.AddImport
         private class SourceSymbolsProjectSearchScope(
             AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
             ConcurrentDictionary<Project, AsyncLazy<IAssemblySymbol?>> projectToAssembly,
-            Project project, bool ignoreCase) : ProjectSearchScope(provider, project, ignoreCase)
+            Project project,
+            bool ignoreCase
+        ) : ProjectSearchScope(provider, project, ignoreCase)
         {
-            private readonly ConcurrentDictionary<Project, AsyncLazy<IAssemblySymbol?>> _projectToAssembly = projectToAssembly;
+            private readonly ConcurrentDictionary<
+                Project,
+                AsyncLazy<IAssemblySymbol?>
+            > _projectToAssembly = projectToAssembly;
 
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
-                SymbolFilter filter, SearchQuery searchQuery, CancellationToken cancellationToken)
+                SymbolFilter filter,
+                SearchQuery searchQuery,
+                CancellationToken cancellationToken
+            )
             {
-                var service = _project.Solution.Services.GetRequiredService<ISymbolTreeInfoCacheService>();
-                var info = await service.TryGetPotentiallyStaleSourceSymbolTreeInfoAsync(_project, cancellationToken).ConfigureAwait(false);
+                var service =
+                    _project.Solution.Services.GetRequiredService<ISymbolTreeInfoCacheService>();
+                var info = await service
+                    .TryGetPotentiallyStaleSourceSymbolTreeInfoAsync(_project, cancellationToken)
+                    .ConfigureAwait(false);
                 if (info == null)
                 {
                     // Looks like there was nothing in the cache.  Return no results for now.
@@ -43,16 +54,23 @@ namespace Microsoft.CodeAnalysis.AddImport
                 var lazyAssembly = _projectToAssembly.GetOrAdd(_project, CreateLazyAssembly);
 
                 var declarations = await info.FindAsync(
-                    searchQuery, lazyAssembly, filter, cancellationToken).ConfigureAwait(false);
+                        searchQuery,
+                        lazyAssembly,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
 
-                static AsyncLazy<IAssemblySymbol?> CreateLazyAssembly(Project project)
-                    => new(async c =>
-                           {
-                               var compilation = await project.GetRequiredCompilationAsync(c).ConfigureAwait(false);
-                               return compilation.Assembly;
-                           });
+                static AsyncLazy<IAssemblySymbol?> CreateLazyAssembly(Project project) =>
+                    new(async c =>
+                    {
+                        var compilation = await project
+                            .GetRequiredCompilationAsync(c)
+                            .ConfigureAwait(false);
+                        return compilation.Assembly;
+                    });
             }
         }
     }

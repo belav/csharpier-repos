@@ -12,20 +12,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Convert
     internal class NullableBoolOptionConverter : IValueConverter
     {
         private readonly Func<bool> _onNullValue;
+
         public NullableBoolOptionConverter(Func<bool> onNullValue)
         {
             _onNullValue = onNullValue;
         }
 
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
-            => value switch
+        public object Convert(
+            object? value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) =>
+            value switch
             {
                 null => _onNullValue(),
                 bool b => b,
-                _ => DependencyProperty.UnsetValue
+                _ => DependencyProperty.UnsetValue,
             };
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => value;
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => value;
     }
 }

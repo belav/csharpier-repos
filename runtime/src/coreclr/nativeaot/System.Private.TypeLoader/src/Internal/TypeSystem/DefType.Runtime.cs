@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.NativeFormat;
 using Internal.Runtime.TypeLoader;
 

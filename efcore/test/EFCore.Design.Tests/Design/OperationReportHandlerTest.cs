@@ -6,8 +6,7 @@ namespace Microsoft.EntityFrameworkCore.Design;
 public class OperationReportHandlerTest
 {
     [ConditionalFact]
-    public void Version_is_zero()
-        => Assert.Equal(0, new OperationReportHandler().Version);
+    public void Version_is_zero() => Assert.Equal(0, new OperationReportHandler().Version);
 
     [ConditionalFact]
     public void On_methods_are_noops_when_null()

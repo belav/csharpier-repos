@@ -16,8 +16,20 @@ namespace System.Net.Http.Handlers
         private readonly ProgressStream _progressStream;
         private readonly int _count;
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is handled as part of IAsyncResult completion.")]
-        public ProgressWriteAsyncResult(Stream innerStream, ProgressStream progressStream, byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is handled as part of IAsyncResult completion."
+        )]
+        public ProgressWriteAsyncResult(
+            Stream innerStream,
+            ProgressStream progressStream,
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             Contract.Assert(innerStream != null);
@@ -30,7 +42,13 @@ namespace System.Net.Http.Handlers
 
             try
             {
-                IAsyncResult result = innerStream.BeginWrite(buffer, offset, count, _writeCompletedCallback, this);
+                IAsyncResult result = innerStream.BeginWrite(
+                    buffer,
+                    offset,
+                    count,
+                    _writeCompletedCallback,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     WriteCompleted(result);
@@ -42,7 +60,11 @@ namespace System.Net.Http.Handlers
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is handled as part of IAsyncResult completion.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is handled as part of IAsyncResult completion."
+        )]
         private static void WriteCompletedCallback(IAsyncResult result)
         {
             if (result.CompletedSynchronously)

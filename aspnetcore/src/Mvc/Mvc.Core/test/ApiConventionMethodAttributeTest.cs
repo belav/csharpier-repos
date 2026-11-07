@@ -76,15 +76,12 @@ public class ApiConventionMethodAttributeTest
         var attributes = method.GetCustomAttributes(false);
 
         // Act & Assert
-        Assert.Contains(
-            attributes,
-            (a) =>
-            {
-                var attributeType = a.GetType();
-                return attributeType.FullName
-                    == "System.Runtime.CompilerServices.NullableContextAttribute";
-            }
-        );
+        Assert.Contains(attributes, (a) =>
+        {
+            var attributeType = a.GetType();
+            return attributeType.FullName
+                == "System.Runtime.CompilerServices.NullableContextAttribute";
+        });
     }
 
     [Fact]

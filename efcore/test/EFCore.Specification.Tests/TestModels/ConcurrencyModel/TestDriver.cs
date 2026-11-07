@@ -18,19 +18,28 @@ public class TestDriver : Driver
             int podiums,
             int poles,
             int fastestLaps,
-            int teamId)
-            : base(loader, id, name, carNumber, championships, races, wins, podiums, poles, fastestLaps, teamId)
-        {
-        }
+            int teamId
+        )
+            : base(
+                loader,
+                id,
+                name,
+                carNumber,
+                championships,
+                races,
+                wins,
+                podiums,
+                poles,
+                fastestLaps,
+                teamId
+            ) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
         public bool InitializedCalled { get; set; }
     }
 
-    public TestDriver()
-    {
-    }
+    public TestDriver() { }
 
     private TestDriver(
         ILazyLoader loader,
@@ -43,8 +52,21 @@ public class TestDriver : Driver
         int podiums,
         int poles,
         int fastestLaps,
-        int teamId)
-        : base(loader, id, name, carNumber, championships, races, wins, podiums, poles, fastestLaps, teamId)
+        int teamId
+    )
+        : base(
+            loader,
+            id,
+            name,
+            carNumber,
+            championships,
+            races,
+            wins,
+            podiums,
+            poles,
+            fastestLaps,
+            teamId
+        )
     {
         Assert.IsType<TestDriverProxy>(this);
     }

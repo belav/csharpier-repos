@@ -19,8 +19,12 @@ namespace System.ServiceModel.Channels
         Socket listenSocket;
         ExclusiveTcpTransportManagerRegistration registration;
 
-        public ExclusiveTcpTransportManager(ExclusiveTcpTransportManagerRegistration registration,
-            TcpChannelListener channelListener, IPAddress ipAddressAny, UriHostNameType ipHostNameType)
+        public ExclusiveTcpTransportManager(
+            ExclusiveTcpTransportManagerRegistration registration,
+            TcpChannelListener channelListener,
+            IPAddress ipAddressAny,
+            UriHostNameType ipHostNameType
+        )
         {
             ApplyListenerSettings(channelListener);
 
@@ -44,18 +48,12 @@ namespace System.ServiceModel.Channels
 
         public IPAddress IPAddress
         {
-            get
-            {
-                return this.ipAddress;
-            }
+            get { return this.ipAddress; }
         }
 
         public int ListenBacklog
         {
-            get
-            {
-                return this.listenBacklog;
-            }
+            get { return this.listenBacklog; }
         }
 
         int ISocketListenerSettings.BufferSize
@@ -88,21 +86,38 @@ namespace System.ServiceModel.Channels
                 if (port == -1)
                     port = TcpUri.DefaultPort;
 
-                socketListener = new SocketConnectionListener(new IPEndPoint(ipAddress, port), this, false);
+                socketListener = new SocketConnectionListener(
+                    new IPEndPoint(ipAddress, port),
+                    this,
+                    false
+                );
             }
 
-            connectionListener = new BufferedConnectionListener(socketListener, MaxOutputDelay, ConnectionBufferSize);
+            connectionListener = new BufferedConnectionListener(
+                socketListener,
+                MaxOutputDelay,
+                ConnectionBufferSize
+            );
             if (DiagnosticUtility.ShouldUseActivity)
             {
-                connectionListener = new TracingConnectionListener(connectionListener, this.registration.ListenUri.ToString(), false);
+                connectionListener = new TracingConnectionListener(
+                    connectionListener,
+                    this.registration.ListenUri.ToString(),
+                    false
+                );
             }
-            connectionDemuxer = new ConnectionDemuxer(connectionListener,
-                MaxPendingAccepts, MaxPendingConnections, ChannelInitializationTimeout,
-                IdleTimeout, MaxPooledConnections,
+            connectionDemuxer = new ConnectionDemuxer(
+                connectionListener,
+                MaxPendingAccepts,
+                MaxPendingConnections,
+                ChannelInitializationTimeout,
+                IdleTimeout,
+                MaxPooledConnections,
                 OnGetTransportFactorySettings,
                 OnGetSingletonMessageHandler,
                 OnHandleServerSessionPreamble,
-                OnDemuxerError);
+                OnDemuxerError
+            );
 
             bool startedDemuxing = false;
             try
@@ -171,7 +186,10 @@ namespace System.ServiceModel.Channels
         ExclusiveTcpTransportManager ipv4TransportManager;
         ExclusiveTcpTransportManager ipv6TransportManager;
 
-        public ExclusiveTcpTransportManagerRegistration(Uri listenUri, TcpChannelListener channelListener)
+        public ExclusiveTcpTransportManagerRegistration(
+            Uri listenUri,
+            TcpChannelListener channelListener
+        )
             : base(listenUri, channelListener.HostNameComparisonMode)
         {
             this.connectionBufferSize = channelListener.ConnectionBufferSize;
@@ -207,7 +225,10 @@ namespace System.ServiceModel.Channels
 
             if ((this.ipv4TransportManager == null) && (this.ipv6TransportManager == null))
             {
-                TcpChannelListener.StaticTransportManagerTable.UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
+                TcpChannelListener.StaticTransportManagerTable.UnregisterUri(
+                    this.ListenUri,
+                    this.HostNameComparisonMode
+                );
             }
         }
 
@@ -224,9 +245,13 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            return (!channelListener.PortSharingEnabled
+            return (
+                !channelListener.PortSharingEnabled
                 && (useIPv4 || useIPv6)
-                && (this.channelInitializationTimeout == channelListener.ChannelInitializationTimeout)
+                && (
+                    this.channelInitializationTimeout
+                    == channelListener.ChannelInitializationTimeout
+                )
                 && (this.idleTimeout == channelListener.IdleTimeout)
                 && (this.maxPooledConnections == channelListener.MaxPooledConnections)
                 && (this.connectionBufferSize == channelListener.ConnectionBufferSize)
@@ -234,23 +259,36 @@ namespace System.ServiceModel.Channels
                 && (this.listenBacklog == channelListener.ListenBacklog)
                 && (this.maxPendingConnections == channelListener.MaxPendingConnections)
                 && (this.maxOutputDelay == channelListener.MaxOutputDelay)
-                && (this.maxPendingAccepts == channelListener.MaxPendingAccepts));
+                && (this.maxPendingAccepts == channelListener.MaxPendingAccepts)
+            );
         }
 
-        void ProcessSelection(TcpChannelListener channelListener, IPAddress ipAddressAny, UriHostNameType ipHostNameType,
-            ref ExclusiveTcpTransportManager transportManager, IList<TransportManager> result)
+        void ProcessSelection(
+            TcpChannelListener channelListener,
+            IPAddress ipAddressAny,
+            UriHostNameType ipHostNameType,
+            ref ExclusiveTcpTransportManager transportManager,
+            IList<TransportManager> result
+        )
         {
             if (transportManager == null)
             {
-                transportManager = new ExclusiveTcpTransportManager(this, channelListener, ipAddressAny, ipHostNameType);
+                transportManager = new ExclusiveTcpTransportManager(
+                    this,
+                    channelListener,
+                    ipAddressAny,
+                    ipHostNameType
+                );
             }
             result.Add(transportManager);
         }
 
         public override IList<TransportManager> Select(TransportChannelListener channelListener)
         {
-            bool useIPv4 = (this.ListenUri.HostNameType != UriHostNameType.IPv6) && Socket.OSSupportsIPv4;
-            bool useIPv6 = (this.ListenUri.HostNameType != UriHostNameType.IPv4) && Socket.OSSupportsIPv6;
+            bool useIPv4 =
+                (this.ListenUri.HostNameType != UriHostNameType.IPv6) && Socket.OSSupportsIPv4;
+            bool useIPv6 =
+                (this.ListenUri.HostNameType != UriHostNameType.IPv4) && Socket.OSSupportsIPv6;
 
             TcpChannelListener tcpListener = (TcpChannelListener)channelListener;
             if (!this.IsCompatible(tcpListener, useIPv4, useIPv6))
@@ -261,13 +299,23 @@ namespace System.ServiceModel.Channels
             IList<TransportManager> result = new List<TransportManager>();
             if (useIPv4)
             {
-                this.ProcessSelection(tcpListener, IPAddress.Any, UriHostNameType.IPv4,
-                    ref this.ipv4TransportManager, result);
+                this.ProcessSelection(
+                    tcpListener,
+                    IPAddress.Any,
+                    UriHostNameType.IPv4,
+                    ref this.ipv4TransportManager,
+                    result
+                );
             }
             if (useIPv6)
             {
-                this.ProcessSelection(tcpListener, IPAddress.IPv6Any, UriHostNameType.IPv6,
-                    ref this.ipv6TransportManager, result);
+                this.ProcessSelection(
+                    tcpListener,
+                    IPAddress.IPv6Any,
+                    UriHostNameType.IPv6,
+                    ref this.ipv6TransportManager,
+                    result
+                );
             }
             return result;
         }

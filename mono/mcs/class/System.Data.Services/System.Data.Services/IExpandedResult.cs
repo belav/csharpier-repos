@@ -26,10 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Data.Services {
-	public interface IExpandedResult {
-		object ExpandedElement { get; }
+namespace System.Data.Services
+{
+    public interface IExpandedResult
+    {
+        object ExpandedElement { get; }
 
-		object GetExpandedPropertyValue (string name);
-	}
+        object GetExpandedPropertyValue(string name);
+    }
 }

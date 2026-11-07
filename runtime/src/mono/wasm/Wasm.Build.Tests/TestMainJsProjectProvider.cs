@@ -13,26 +13,30 @@ namespace Wasm.Build.Tests;
 public class TestMainJsProjectProvider : ProjectProviderBase
 {
     public TestMainJsProjectProvider(ITestOutputHelper _testOutput, string? _projectDir = null)
-            : base(_testOutput, _projectDir)
+        : base(_testOutput, _projectDir)
     {
         BundleDirName = "AppBundle";
     }
 
     // no fingerprinting
-    protected override IReadOnlyDictionary<string, bool> GetAllKnownDotnetFilesToFingerprintMap(AssertBundleOptionsBase assertOptions)
-        => new SortedDictionary<string, bool>()
-            {
-               { "dotnet.js", false },
-               { "dotnet.js.map", false },
-               { "dotnet.native.js", false },
-               { "dotnet.native.js.symbols", false },
-               { "dotnet.native.wasm", false },
-               { "dotnet.native.worker.js", false },
-               { "dotnet.runtime.js", false },
-               { "dotnet.runtime.js.map", false }
-            };
+    protected override IReadOnlyDictionary<string, bool> GetAllKnownDotnetFilesToFingerprintMap(
+        AssertBundleOptionsBase assertOptions
+    ) =>
+        new SortedDictionary<string, bool>()
+        {
+            { "dotnet.js", false },
+            { "dotnet.js.map", false },
+            { "dotnet.native.js", false },
+            { "dotnet.native.js.symbols", false },
+            { "dotnet.native.wasm", false },
+            { "dotnet.native.worker.js", false },
+            { "dotnet.runtime.js", false },
+            { "dotnet.runtime.js.map", false },
+        };
 
-    protected override IReadOnlySet<string> GetDotNetFilesExpectedSet(AssertBundleOptionsBase assertOptions)
+    protected override IReadOnlySet<string> GetDotNetFilesExpectedSet(
+        AssertBundleOptionsBase assertOptions
+    )
     {
         SortedSet<string>? res = new();
         if (assertOptions.RuntimeType is RuntimeVariant.SingleThreaded)
@@ -64,7 +68,8 @@ public class TestMainJsProjectProvider : ProjectProviderBase
         if (assertOptions.AssertSymbolsFile && assertOptions.ExpectSymbolsFile)
             res.Add("dotnet.native.js.symbols");
 
-        return res ?? throw new ArgumentException($"Unknown runtime type: {assertOptions.RuntimeType}");
+        return res
+            ?? throw new ArgumentException($"Unknown runtime type: {assertOptions.RuntimeType}");
     }
 
     public void AssertBundle(AssertTestMainJsAppBundleOptions assertOptions)
@@ -74,7 +79,11 @@ public class TestMainJsProjectProvider : ProjectProviderBase
         TestUtils.AssertFilesExist(assertOptions.BundleDir, new[] { assertOptions.MainJS });
         if (assertOptions.IsBrowserProject)
             TestUtils.AssertFilesExist(assertOptions.BundleDir, new[] { "index.html" });
-        TestUtils.AssertFilesExist(assertOptions.BundleDir, new[] { "run-v8.sh" }, expectToExist: assertOptions.HasV8Script);
+        TestUtils.AssertFilesExist(
+            assertOptions.BundleDir,
+            new[] { "run-v8.sh" },
+            expectToExist: assertOptions.HasV8Script
+        );
 
         string bundledMainAppAssembly = $"{assertOptions.ProjectName}{WasmAssemblyExtension}";
         TestUtils.AssertFilesExist(assertOptions.BinFrameworkDir, new[] { bundledMainAppAssembly });
@@ -82,35 +91,51 @@ public class TestMainJsProjectProvider : ProjectProviderBase
 
     public void AssertBundle(BuildArgs buildArgs, BuildProjectOptions buildProjectOptions)
     {
-        string binFrameworkDir = buildProjectOptions.BinFrameworkDir
-                                    ?? FindBinFrameworkDir(buildArgs.Config,
-                                                     buildProjectOptions.Publish,
-                                                     buildProjectOptions.TargetFramework);
-        NativeFilesType expectedFileType = buildArgs.AOT
-                                            ? NativeFilesType.AOT
-                                            : buildProjectOptions.DotnetWasmFromRuntimePack == false
-                                                ? NativeFilesType.Relinked
-                                                : NativeFilesType.FromRuntimePack;
+        string binFrameworkDir =
+            buildProjectOptions.BinFrameworkDir
+            ?? FindBinFrameworkDir(
+                buildArgs.Config,
+                buildProjectOptions.Publish,
+                buildProjectOptions.TargetFramework
+            );
+        NativeFilesType expectedFileType =
+            buildArgs.AOT ? NativeFilesType.AOT
+            : buildProjectOptions.DotnetWasmFromRuntimePack == false ? NativeFilesType.Relinked
+            : NativeFilesType.FromRuntimePack;
 
         var assertOptions = new AssertTestMainJsAppBundleOptions(
-                                        Config: buildArgs.Config,
-                                        IsPublish: buildProjectOptions.Publish,
-                                        TargetFramework: buildProjectOptions.TargetFramework!,
-                                        BinFrameworkDir: binFrameworkDir,
-                                        ProjectName: buildArgs.ProjectName,
-                                        MainJS: buildProjectOptions.MainJS ?? "test-main.js",
-                                        GlobalizationMode: buildProjectOptions.GlobalizationMode,
-                                        HasV8Script: buildProjectOptions.HasV8Script,
-                                        PredefinedIcudt: buildProjectOptions.PredefinedIcudt ?? string.Empty,
-                                        IsBrowserProject: buildProjectOptions.IsBrowserProject,
-                                        ExpectedFileType: expectedFileType,
-                                        ExpectSymbolsFile: !buildArgs.AOT);
+            Config: buildArgs.Config,
+            IsPublish: buildProjectOptions.Publish,
+            TargetFramework: buildProjectOptions.TargetFramework!,
+            BinFrameworkDir: binFrameworkDir,
+            ProjectName: buildArgs.ProjectName,
+            MainJS: buildProjectOptions.MainJS ?? "test-main.js",
+            GlobalizationMode: buildProjectOptions.GlobalizationMode,
+            HasV8Script: buildProjectOptions.HasV8Script,
+            PredefinedIcudt: buildProjectOptions.PredefinedIcudt ?? string.Empty,
+            IsBrowserProject: buildProjectOptions.IsBrowserProject,
+            ExpectedFileType: expectedFileType,
+            ExpectSymbolsFile: !buildArgs.AOT
+        );
         AssertBundle(assertOptions);
     }
 
-    public override string FindBinFrameworkDir(string config, bool forPublish, string framework, string? bundleDirName = null)
+    public override string FindBinFrameworkDir(
+        string config,
+        bool forPublish,
+        string framework,
+        string? bundleDirName = null
+    )
     {
         EnsureProjectDirIsSet();
-        return Path.Combine(ProjectDir!, "bin", config, framework, "browser-wasm", bundleDirName ?? this.BundleDirName, "_framework");
+        return Path.Combine(
+            ProjectDir!,
+            "bin",
+            config,
+            framework,
+            "browser-wasm",
+            bundleDirName ?? this.BundleDirName,
+            "_framework"
+        );
     }
 }

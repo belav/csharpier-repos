@@ -9,11 +9,14 @@ namespace System
     {
         internal const long DefaultPkcs12UnspecifiedPasswordIterationLimit = 600_000;
 
-        internal static long Pkcs12UnspecifiedPasswordIterationLimit { get; } = InitializePkcs12UnspecifiedPasswordIterationLimit();
+        internal static long Pkcs12UnspecifiedPasswordIterationLimit { get; } =
+            InitializePkcs12UnspecifiedPasswordIterationLimit();
 
         private static long InitializePkcs12UnspecifiedPasswordIterationLimit()
         {
-            object? data = AppContext.GetData("System.Security.Cryptography.Pkcs12UnspecifiedPasswordIterationLimit");
+            object? data = AppContext.GetData(
+                "System.Security.Cryptography.Pkcs12UnspecifiedPasswordIterationLimit"
+            );
 
             if (data is null)
             {

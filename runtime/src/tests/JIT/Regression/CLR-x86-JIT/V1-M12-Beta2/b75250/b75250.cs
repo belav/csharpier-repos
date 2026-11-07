@@ -4,9 +4,9 @@
 
 using System;
 using Xunit;
+
 public class testout1
 {
-
     public struct VT
     {
         public double a1;
@@ -27,7 +27,6 @@ public class testout1
 
     public static long Func(CL cl, VT vt)
     {
-
         vtstatic.a1 = 18;
         vtstatic.a2 = 2;
         vtstatic.a3 = 5L;
@@ -35,7 +34,23 @@ public class testout1
         vtstatic.a5 = 8;
         vtstatic.a6 = -6L;
         vtstatic.a7 = 1L;
-        long retval = Convert.ToInt64((((long)(Convert.ToInt32(cl.a0 / vtstatic.a5) + (long)(Convert.ToInt32(57) - (long)(-70L))) + (long)(vt.a6 * vt.a4)) + (long)((long)(Convert.ToInt32(1787522586) - (long)((vtstatic.a3 + (long)(Convert.ToInt32(1787522586) - (long)(56L))))) * (vt.a4 - vtstatic.a1)) - (long)(vtstatic.a7 * vt.a2)));
+        long retval = Convert.ToInt64(
+            (
+                (
+                    (long)(
+                        Convert.ToInt32(cl.a0 / vtstatic.a5)
+                        + (long)(Convert.ToInt32(57) - (long)(-70L))
+                    ) + (long)(vt.a6 * vt.a4)
+                )
+                + (long)(
+                    (long)(
+                        Convert.ToInt32(1787522586)
+                        - (long)((vtstatic.a3 + (long)(Convert.ToInt32(1787522586) - (long)(56L))))
+                    ) * (vt.a4 - vtstatic.a1)
+                )
+                - (long)(vtstatic.a7 * vt.a2)
+            )
+        );
         return retval;
     }
 
@@ -53,5 +68,4 @@ public class testout1
         CL cl = new CL();
         long val = Func(cl, vt);
     }
-
 }

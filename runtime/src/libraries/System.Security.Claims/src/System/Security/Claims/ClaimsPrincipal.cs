@@ -21,13 +21,14 @@ namespace System.Security.Claims
         {
             None = 0,
             HasIdentities = 1,
-            UserData = 2
+            UserData = 2,
         }
 
         private readonly List<ClaimsIdentity> _identities = new List<ClaimsIdentity>();
         private readonly byte[]? _userSerializationData;
 
-        private static Func<IEnumerable<ClaimsIdentity>, ClaimsIdentity?> s_identitySelector = SelectPrimaryIdentity;
+        private static Func<IEnumerable<ClaimsIdentity>, ClaimsIdentity?> s_identitySelector =
+            SelectPrimaryIdentity;
         private static Func<ClaimsPrincipal> s_principalSelector = ClaimsPrincipalSelector;
 
         private static ClaimsPrincipal? SelectClaimsPrincipal()
@@ -40,14 +41,19 @@ namespace System.Security.Claims
 
             IPrincipal? threadPrincipal = Thread.CurrentPrincipal;
 
-            return threadPrincipal switch {
+            return threadPrincipal switch
+            {
                 ClaimsPrincipal claimsPrincipal => claimsPrincipal,
                 not null => new ClaimsPrincipal(threadPrincipal),
-                null => null
+                null => null,
             };
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected ClaimsPrincipal(SerializationInfo info, StreamingContext context)
         {
@@ -74,34 +80,20 @@ namespace System.Security.Claims
 
         public static Func<IEnumerable<ClaimsIdentity>, ClaimsIdentity?> PrimaryIdentitySelector
         {
-            get
-            {
-                return s_identitySelector;
-            }
-            set
-            {
-                s_identitySelector = value;
-            }
+            get { return s_identitySelector; }
+            set { s_identitySelector = value; }
         }
 
         public static Func<ClaimsPrincipal> ClaimsPrincipalSelector
         {
-            get
-            {
-                return s_principalSelector;
-            }
-            set
-            {
-                s_principalSelector = value;
-            }
+            get { return s_principalSelector; }
+            set { s_principalSelector = value; }
         }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsPrincipal"/>.
         /// </summary>
-        public ClaimsPrincipal()
-        {
-        }
+        public ClaimsPrincipal() { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsPrincipal"/>.
@@ -244,10 +236,7 @@ namespace System.Security.Claims
         /// </summary>
         protected virtual byte[]? CustomSerializationData
         {
-            get
-            {
-                return _userSerializationData;
-            }
+            get { return _userSerializationData; }
         }
 
         /// <summary>
@@ -279,7 +268,9 @@ namespace System.Security.Claims
             // just accesses the current selected principal selector, doesn't set
             get
             {
-                return s_principalSelector is not null ? s_principalSelector() : SelectClaimsPrincipal();
+                return s_principalSelector is not null
+                    ? s_principalSelector()
+                    : SelectClaimsPrincipal();
             }
         }
 
@@ -451,10 +442,7 @@ namespace System.Security.Claims
         /// </summary>
         public virtual IEnumerable<ClaimsIdentity> Identities
         {
-            get
-            {
-                return _identities;
-            }
+            get { return _identities; }
         }
 
         /// <summary>

@@ -1,26 +1,28 @@
 using System;
 
-class Foo {
-
-        static public int i = 0;
+class Foo
+{
+    public static int i = 0;
 }
 
-class Bar {
+class Bar
+{
+    public static int j;
 
-        static public int j;
-
-        static Bar () {
-                j = Foo.i;
-        }
+    static Bar()
+    {
+        j = Foo.i;
+    }
 }
 
-class Bug {
+class Bug
+{
+    public static int Main()
+    {
+        Foo.i = 5;
+        if (Bar.j != 5)
+            return 1;
 
-        static public int Main () {
-                Foo.i = 5;
-		if (Bar.j != 5)
-			return 1;
-
-		return 0;
-        }
+        return 0;
+    }
 }

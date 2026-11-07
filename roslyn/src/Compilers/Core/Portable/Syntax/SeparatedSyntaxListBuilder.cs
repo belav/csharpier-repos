@@ -7,15 +7,14 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Syntax
 {
-    internal struct SeparatedSyntaxListBuilder<TNode> where TNode : SyntaxNode
+    internal struct SeparatedSyntaxListBuilder<TNode>
+        where TNode : SyntaxNode
     {
         private readonly SyntaxListBuilder _builder;
         private bool _expectedSeparator;
 
         public SeparatedSyntaxListBuilder(int size)
-            : this(new SyntaxListBuilder(size))
-        {
-        }
+            : this(new SyntaxListBuilder(size)) { }
 
         public static SeparatedSyntaxListBuilder<TNode> Create()
         {
@@ -30,18 +29,12 @@ namespace Microsoft.CodeAnalysis.Syntax
 
         public bool IsNull
         {
-            get
-            {
-                return _builder == null;
-            }
+            get { return _builder == null; }
         }
 
         public int Count
         {
-            get
-            {
-                return _builder.Count;
-            }
+            get { return _builder.Count; }
         }
 
         public void Clear()
@@ -91,7 +84,10 @@ namespace Microsoft.CodeAnalysis.Syntax
             return this;
         }
 
-        public SeparatedSyntaxListBuilder<TNode> AddRange(in SeparatedSyntaxList<TNode> nodes, int count)
+        public SeparatedSyntaxListBuilder<TNode> AddRange(
+            in SeparatedSyntaxList<TNode> nodes,
+            int count
+        )
         {
             CheckExpectedElement();
             SyntaxNodeOrTokenList list = nodes.GetWithSeparators();
@@ -110,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Syntax
             return _builder.ToSeparatedList<TNode>();
         }
 
-        public SeparatedSyntaxList<TDerived> ToList<TDerived>() where TDerived : TNode
+        public SeparatedSyntaxList<TDerived> ToList<TDerived>()
+            where TDerived : TNode
         {
             if (_builder == null)
             {
@@ -120,12 +117,16 @@ namespace Microsoft.CodeAnalysis.Syntax
             return _builder.ToSeparatedList<TDerived>();
         }
 
-        public static implicit operator SyntaxListBuilder(in SeparatedSyntaxListBuilder<TNode> builder)
+        public static implicit operator SyntaxListBuilder(
+            in SeparatedSyntaxListBuilder<TNode> builder
+        )
         {
             return builder._builder;
         }
 
-        public static implicit operator SeparatedSyntaxList<TNode>(in SeparatedSyntaxListBuilder<TNode> builder)
+        public static implicit operator SeparatedSyntaxList<TNode>(
+            in SeparatedSyntaxListBuilder<TNode> builder
+        )
         {
             if (builder._builder != null)
             {

@@ -17,9 +17,8 @@ public class UsePathBaseExtensionsTests
     {
         // Arrange
         var useCalled = false;
-        var builder = new ApplicationBuilderWrapper(
-            CreateBuilder(),
-            () => useCalled = true
+        var builder = new ApplicationBuilderWrapper(CreateBuilder(), () =>
+            useCalled = true
         ).UsePathBase(pathBase);
 
         // Act

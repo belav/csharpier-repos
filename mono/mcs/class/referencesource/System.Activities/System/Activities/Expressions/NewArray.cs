@@ -31,7 +31,7 @@ namespace System.Activities.Expressions
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.bounds;
@@ -58,7 +58,9 @@ namespace System.Activities.Expressions
                 Argument argument = this.Bounds[i];
                 if (argument == null || argument.IsEmpty)
                 {
-                    metadata.AddValidationError(SR.ArgumentRequired("Bounds", typeof(NewArray<TResult>)));
+                    metadata.AddValidationError(
+                        SR.ArgumentRequired("Bounds", typeof(NewArray<TResult>))
+                    );
                     foundError = true;
                 }
                 else
@@ -70,7 +72,12 @@ namespace System.Activities.Expressions
                     }
                     else
                     {
-                        RuntimeArgument runtimeArgument = new RuntimeArgument("Argument" + i, this.Bounds[i].ArgumentType, this.bounds[i].Direction, true);
+                        RuntimeArgument runtimeArgument = new RuntimeArgument(
+                            "Argument" + i,
+                            this.Bounds[i].ArgumentType,
+                            this.bounds[i].Direction,
+                            true
+                        );
                         metadata.Bind(this.Bounds[i], runtimeArgument);
                         metadata.AddArgument(runtimeArgument);
 
@@ -89,7 +96,7 @@ namespace System.Activities.Expressions
                     metadata.AddValidationError(SR.ConstructorInfoNotFound(typeof(TResult).Name));
                 }
             }
-        } 
+        }
 
         protected override TResult Execute(CodeActivityContext context)
         {
@@ -106,8 +113,17 @@ namespace System.Activities.Expressions
 
         bool isIntegralType(Type type)
         {
-            if (type == typeof(sbyte) || type == typeof(byte) || type == typeof(char) || type == typeof(short) || 
-                type == typeof(ushort) || type == typeof(int) || type == typeof(uint) || type == typeof(long) || type == typeof(ulong))
+            if (
+                type == typeof(sbyte)
+                || type == typeof(byte)
+                || type == typeof(char)
+                || type == typeof(short)
+                || type == typeof(ushort)
+                || type == typeof(int)
+                || type == typeof(uint)
+                || type == typeof(long)
+                || type == typeof(ulong)
+            )
             {
                 return true;
             }
@@ -116,6 +132,5 @@ namespace System.Activities.Expressions
                 return false;
             }
         }
-
     }
 }

@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.Globalization;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     public static class MetadataExchangeBindings
     {
@@ -139,11 +139,11 @@ namespace System.ServiceModel.Description
             {
                 binding = Https;
             }
-            else if (String.Compare(scheme, "net.tcp", StringComparison.OrdinalIgnoreCase) == 0) 
+            else if (String.Compare(scheme, "net.tcp", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 binding = Tcp;
             }
-            else if (String.Compare(scheme, "net.pipe", StringComparison.OrdinalIgnoreCase) == 0) 
+            else if (String.Compare(scheme, "net.pipe", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 binding = NamedPipe;
             }
@@ -157,7 +157,10 @@ namespace System.ServiceModel.Description
 
         static WSHttpBinding CreateHttpBinding()
         {
-            WSHttpBinding binding = new WSHttpBinding(SecurityMode.None, /* reliableSessionEnabled */ false);
+            WSHttpBinding binding = new WSHttpBinding(
+                SecurityMode.None, /* reliableSessionEnabled */
+                false
+            );
             binding.Name = MetadataStrings.MetadataExchangeStrings.HttpBindingName;
             binding.Namespace = MetadataStrings.MetadataExchangeStrings.BindingNamespace;
             return binding;
@@ -166,10 +169,16 @@ namespace System.ServiceModel.Description
         static WSHttpBinding CreateHttpsBinding()
         {
             WSHttpBinding binding = new WSHttpBinding(
-                new WSHttpSecurity(SecurityMode.Transport, new HttpTransportSecurity(), new NonDualMessageSecurityOverHttp()), /* reliableSessionEnabled */ false);
+                new WSHttpSecurity(
+                    SecurityMode.Transport,
+                    new HttpTransportSecurity(),
+                    new NonDualMessageSecurityOverHttp()
+                ), /* reliableSessionEnabled */
+                false
+            );
             binding.Name = MetadataStrings.MetadataExchangeStrings.HttpsBindingName;
             binding.Namespace = MetadataStrings.MetadataExchangeStrings.BindingNamespace;
-            
+
             return binding;
         }
 
@@ -185,7 +194,8 @@ namespace System.ServiceModel.Description
 
         static CustomBinding CreateGetBinding(HttpTransportBindingElement httpTransport)
         {
-            TextMessageEncodingBindingElement textEncoding = new TextMessageEncodingBindingElement();
+            TextMessageEncodingBindingElement textEncoding =
+                new TextMessageEncodingBindingElement();
             textEncoding.MessageVersion = MessageVersion.None;
             httpTransport.Method = "GET";
             httpTransport.InheritBaseAddressSettings = true;
@@ -194,7 +204,10 @@ namespace System.ServiceModel.Description
 
         static CustomBinding CreateTcpBinding()
         {
-            CustomBinding binding = new CustomBinding(MetadataStrings.MetadataExchangeStrings.TcpBindingName, MetadataStrings.MetadataExchangeStrings.BindingNamespace);
+            CustomBinding binding = new CustomBinding(
+                MetadataStrings.MetadataExchangeStrings.TcpBindingName,
+                MetadataStrings.MetadataExchangeStrings.BindingNamespace
+            );
             TcpTransportBindingElement tcpTransport = new TcpTransportBindingElement();
             binding.Elements.Add(tcpTransport);
             return binding;
@@ -202,7 +215,10 @@ namespace System.ServiceModel.Description
 
         static CustomBinding CreateNamedPipeBinding()
         {
-            CustomBinding binding = new CustomBinding(MetadataStrings.MetadataExchangeStrings.NamedPipeBindingName, MetadataStrings.MetadataExchangeStrings.BindingNamespace);
+            CustomBinding binding = new CustomBinding(
+                MetadataStrings.MetadataExchangeStrings.NamedPipeBindingName,
+                MetadataStrings.MetadataExchangeStrings.BindingNamespace
+            );
             NamedPipeTransportBindingElement pipeTransport = new NamedPipeTransportBindingElement();
             binding.Elements.Add(pipeTransport);
             return binding;

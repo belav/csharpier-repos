@@ -14,7 +14,7 @@ public class Test_AddrOfPinnedObject_neg
         bool passed = true;
 
         Console.WriteLine("Allocating a normal handle to object..");
-        GCHandle handle = GCHandle.Alloc(array);  // handle is NOT pinned.
+        GCHandle handle = GCHandle.Alloc(array); // handle is NOT pinned.
 
         try
         {
@@ -49,7 +49,6 @@ public class Test_AddrOfPinnedObject_neg
             Console.WriteLine("Test1 Failed!");
             passed = false;
         }
-
 
         if (!passed)
         {

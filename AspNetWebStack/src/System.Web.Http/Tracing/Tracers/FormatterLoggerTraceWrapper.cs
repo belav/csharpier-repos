@@ -18,11 +18,13 @@ namespace System.Web.Http.Tracing.Tracers
         private readonly string _operatorName;
         private readonly string _operationName;
 
-        public FormatterLoggerTraceWrapper(IFormatterLogger formatterLogger,
-                                           ITraceWriter traceWriter,
-                                           HttpRequestMessage request,
-                                           string operatorName,
-                                           string operationName)
+        public FormatterLoggerTraceWrapper(
+            IFormatterLogger formatterLogger,
+            ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string operatorName,
+            string operationName
+        )
         {
             Contract.Assert(formatterLogger != null);
             Contract.Assert(traceWriter != null);
@@ -36,25 +38,35 @@ namespace System.Web.Http.Tracing.Tracers
 
         public void LogError(string errorPath, string errorMessage)
         {
-            _traceWriter.Trace(_request, TraceCategories.FormattingCategory, TraceLevel.Error, (traceRecord) =>
+            _traceWriter.Trace(
+                _request,
+                TraceCategories.FormattingCategory,
+                TraceLevel.Error,
+                (traceRecord) =>
                 {
                     traceRecord.Kind = TraceKind.Trace;
                     traceRecord.Operator = _operatorName;
                     traceRecord.Operation = _operationName;
                     traceRecord.Message = errorMessage;
-                });
+                }
+            );
             _formatterLogger.LogError(errorPath, errorMessage);
         }
 
         public void LogError(string errorPath, Exception exception)
         {
-            _traceWriter.Trace(_request, TraceCategories.FormattingCategory, TraceLevel.Error, (traceRecord) =>
+            _traceWriter.Trace(
+                _request,
+                TraceCategories.FormattingCategory,
+                TraceLevel.Error,
+                (traceRecord) =>
                 {
                     traceRecord.Kind = TraceKind.Trace;
                     traceRecord.Operator = _operatorName;
                     traceRecord.Operation = _operationName;
                     traceRecord.Exception = exception;
-                });
+                }
+            );
             _formatterLogger.LogError(errorPath, exception);
         }
     }

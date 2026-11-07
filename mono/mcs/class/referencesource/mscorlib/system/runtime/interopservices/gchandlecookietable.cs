@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 #if MDA_SUPPORTED
 
@@ -10,12 +10,11 @@ namespace System.Runtime.InteropServices
     using System;
     using System.Collections.Generic;
     using System.Threading;
-
-    using ObjectHandle = IntPtr;
     using GCHandleCookie = IntPtr;
+    using ObjectHandle = IntPtr;
 
     // Internal class used to map a GCHandle to an IntPtr. Instead of handing out the underlying CLR
-    // handle, we now hand out a cookie that can later be converted back to the CLR handle it 
+    // handle, we now hand out a cookie that can later be converted back to the CLR handle it
     // is associated with.
 
     // NOTE:
@@ -44,7 +43,7 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        // Retrieve a cookie for the passed in handle. If no cookie has yet been allocated for 
+        // Retrieve a cookie for the passed in handle. If no cookie has yet been allocated for
         // this handle, one will be created. This method is thread safe.
         internal GCHandleCookie FindOrAddHandle(ObjectHandle handle)
         {
@@ -60,9 +59,12 @@ namespace System.Runtime.InteropServices
                 if (m_HandleToCookieMap.ContainsKey(handle))
                     return m_HandleToCookieMap[handle];
 
-                if ((m_FreeIndex < m_HandleList.Length) && (Volatile.Read(ref m_HandleList[m_FreeIndex]) == ObjectHandle.Zero))
+                if (
+                    (m_FreeIndex < m_HandleList.Length)
+                    && (Volatile.Read(ref m_HandleList[m_FreeIndex]) == ObjectHandle.Zero)
+                )
                 {
-                    Volatile.Write(ref m_HandleList[m_FreeIndex],  handle);
+                    Volatile.Write(ref m_HandleList[m_FreeIndex], handle);
                     cookie = GetCookieFromData((uint)m_FreeIndex, m_CycleCounts[m_FreeIndex]);
 
                     // Set our next guess just one higher as this index is now in use.
@@ -77,7 +79,10 @@ namespace System.Runtime.InteropServices
                         if (m_HandleList[m_FreeIndex] == ObjectHandle.Zero)
                         {
                             Volatile.Write(ref m_HandleList[m_FreeIndex], handle);
-                            cookie = GetCookieFromData((uint)m_FreeIndex, m_CycleCounts[m_FreeIndex]);
+                            cookie = GetCookieFromData(
+                                (uint)m_FreeIndex,
+                                m_CycleCounts[m_FreeIndex]
+                            );
 
                             // this will be our next guess for a free index.
                             // it's ok if this sets m_FreeIndex > m_HandleList.Length
@@ -92,7 +97,9 @@ namespace System.Runtime.InteropServices
                 }
 
                 if (cookie == GCHandleCookie.Zero)
-                    throw new OutOfMemoryException(Environment.GetResourceString("OutOfMemory_GCHandleMDA"));
+                    throw new OutOfMemoryException(
+                        Environment.GetResourceString("OutOfMemory_GCHandleMDA")
+                    );
 
                 // This handle hasn't been added to the map yet so add it.
                 m_HandleToCookieMap.Add(handle, cookie);
@@ -114,7 +121,7 @@ namespace System.Runtime.InteropServices
             return oh;
         }
 
-        // Remove the handle from the cookie table if it is present. 
+        // Remove the handle from the cookie table if it is present.
         //
         internal void RemoveHandleIfPresent(ObjectHandle handle)
         {
@@ -217,4 +224,3 @@ namespace System.Runtime.InteropServices
 }
 
 #endif
-

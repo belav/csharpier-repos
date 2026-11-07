@@ -1,5 +1,5 @@
 //
-// ValidatorCollectionCas.cs 
+// ValidatorCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.ValidatorCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,47 +27,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ValidatorCollectionCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            ValidatorCollection vc = new ValidatorCollection();
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ValidatorCollectionCas : AspNetHostingMinimal {
+            Assert.AreEqual(0, vc.Count, "Count");
+            Assert.IsFalse(vc.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse(vc.IsSynchronized, "IsSynchronized");
+            Assert.IsNotNull(vc.SyncRoot, "SyncRoot");
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ValidatorCollection vc = new ValidatorCollection ();
+            vc.Add(null);
+            Assert.IsNull(vc[0], "this[int]");
+            Assert.IsTrue(vc.Contains(null), "Contains");
+            Assert.IsNotNull(vc.GetEnumerator(), "GetEnumerator");
+            vc.Remove(null);
 
-			Assert.AreEqual (0, vc.Count, "Count");
-			Assert.IsFalse (vc.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (vc.IsSynchronized, "IsSynchronized");
-			Assert.IsNotNull (vc.SyncRoot, "SyncRoot");
+            IValidator validator = new CustomValidator();
+            vc.Add(validator);
+            vc.CopyTo(new IValidator[1], 0);
+        }
 
-			vc.Add (null);
-			Assert.IsNull (vc[0], "this[int]");
-			Assert.IsTrue (vc.Contains (null), "Contains");
-			Assert.IsNotNull (vc.GetEnumerator (), "GetEnumerator");
-			vc.Remove (null);
+        // LinkDemand
 
-			IValidator validator = new CustomValidator ();
-			vc.Add (validator);
-			vc.CopyTo (new IValidator[1], 0);
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (ValidatorCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(ValidatorCollection); }
+        }
+    }
 }

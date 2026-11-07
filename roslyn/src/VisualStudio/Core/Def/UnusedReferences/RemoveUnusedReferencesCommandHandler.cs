@@ -39,8 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         private readonly IUIThreadOperationExecutor _threadOperationExecutor;
         private IServiceProvider? _serviceProvider;
 
-        private IReferenceCleanupService ReferenceCleanupService
-            => _workspace.Services.GetRequiredService<IReferenceCleanupService>();
+        private IReferenceCleanupService ReferenceCleanupService =>
+            _workspace.Services.GetRequiredService<IReferenceCleanupService>();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             RemoveUnusedReferencesDialogProvider unusedReferenceDialogProvider,
             IUIThreadOperationExecutor threadOperationExecutor,
             VisualStudioWorkspace workspace,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _unusedReferenceDialogProvider = unusedReferenceDialogProvider;
@@ -58,18 +59,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             _globalOptions = globalOptions;
         }
 
-        public async Task InitializeAsync(IAsyncServiceProvider serviceProvider, CancellationToken cancellationToken)
+        public async Task InitializeAsync(
+            IAsyncServiceProvider serviceProvider,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(serviceProvider);
 
             _serviceProvider = (IServiceProvider)serviceProvider;
 
             // Hook up the "Remove Unused References" menu command for CPS based managed projects.
-            var menuCommandService = await serviceProvider.GetServiceAsync<IMenuCommandService, IMenuCommandService>(_threadingContext.JoinableTaskFactory, throwOnFailure: false).ConfigureAwait(false);
+            var menuCommandService = await serviceProvider
+                .GetServiceAsync<IMenuCommandService, IMenuCommandService>(
+                    _threadingContext.JoinableTaskFactory,
+                    throwOnFailure: false
+                )
+                .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                VisualStudioCommandHandlerHelpers.AddCommand(menuCommandService, ID.RoslynCommands.RemoveUnusedReferences, Guids.RoslynGroupId, OnRemoveUnusedReferencesForSelectedProject, OnRemoveUnusedReferencesForSelectedProjectStatus);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
+                VisualStudioCommandHandlerHelpers.AddCommand(
+                    menuCommandService,
+                    ID.RoslynCommands.RemoveUnusedReferences,
+                    Guids.RoslynGroupId,
+                    OnRemoveUnusedReferencesForSelectedProject,
+                    OnRemoveUnusedReferencesForSelectedProjectStatus
+                );
             }
         }
 
@@ -78,12 +95,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             var command = (OleMenuCommand)sender;
 
             // If the option hasn't been expicitly set then fallback to whether this is enabled as part of an experiment.
-            var isOptionEnabled = _globalOptions.GetOption(FeatureOnOffOptions.OfferRemoveUnusedReferences)
-                ?? _globalOptions.GetOption(FeatureOnOffOptions.OfferRemoveUnusedReferencesFeatureFlag);
+            var isOptionEnabled =
+                _globalOptions.GetOption(FeatureOnOffOptions.OfferRemoveUnusedReferences)
+                ?? _globalOptions.GetOption(
+                    FeatureOnOffOptions.OfferRemoveUnusedReferencesFeatureFlag
+                );
 
-            var isDotNetCpsProject = VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(_serviceProvider, out var hierarchy) &&
-                hierarchy.IsCapabilityMatch("CPS") &&
-                hierarchy.IsCapabilityMatch(".NET");
+            var isDotNetCpsProject =
+                VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(
+                    _serviceProvider,
+                    out var hierarchy
+                )
+                && hierarchy.IsCapabilityMatch("CPS")
+                && hierarchy.IsCapabilityMatch(".NET");
 
             // Only show the "Remove Unused Reference" menu commands for CPS based managed projects.
             var visible = isOptionEnabled && isDotNetCpsProject;
@@ -107,31 +131,59 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         private void OnRemoveUnusedReferencesForSelectedProject(object sender, EventArgs args)
         {
-            if (VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(_serviceProvider, out var hierarchy))
+            if (
+                VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(
+                    _serviceProvider,
+                    out var hierarchy
+                )
+            )
             {
                 Solution? solution = null;
                 string? projectFilePath = null;
                 ImmutableArray<ReferenceUpdate> referenceUpdates = default;
-                var status = _threadOperationExecutor.Execute(ServicesVSResources.Remove_Unused_References, ServicesVSResources.Analyzing_project_references, allowCancellation: true, showProgress: true, (operationContext) =>
-                {
-                    (solution, projectFilePath, referenceUpdates) = GetUnusedReferencesForProjectHierarchy(hierarchy, operationContext.UserCancellationToken);
-                });
+                var status = _threadOperationExecutor.Execute(
+                    ServicesVSResources.Remove_Unused_References,
+                    ServicesVSResources.Analyzing_project_references,
+                    allowCancellation: true,
+                    showProgress: true,
+                    (operationContext) =>
+                    {
+                        (solution, projectFilePath, referenceUpdates) =
+                            GetUnusedReferencesForProjectHierarchy(
+                                hierarchy,
+                                operationContext.UserCancellationToken
+                            );
+                    }
+                );
 
                 if (status == UIThreadOperationStatus.Canceled)
                 {
                     return;
                 }
 
-                if (solution is null ||
-                    projectFilePath is not string { Length: > 0 } ||
-                    referenceUpdates.IsEmpty)
+                if (
+                    solution is null
+                    || projectFilePath is not string { Length: > 0 }
+                    || referenceUpdates.IsEmpty
+                )
                 {
-                    MessageDialog.Show(ServicesVSResources.Remove_Unused_References, ServicesVSResources.No_unused_references_were_found, MessageDialogCommandSet.Ok);
+                    MessageDialog.Show(
+                        ServicesVSResources.Remove_Unused_References,
+                        ServicesVSResources.No_unused_references_were_found,
+                        MessageDialogCommandSet.Ok
+                    );
                     return;
                 }
 
                 var dialog = _unusedReferenceDialogProvider.CreateDialog();
-                if (dialog.ShowModal(_threadingContext.JoinableTaskFactory, solution, projectFilePath, referenceUpdates) == false)
+                if (
+                    dialog.ShowModal(
+                        _threadingContext.JoinableTaskFactory,
+                        solution,
+                        projectFilePath,
+                        referenceUpdates
+                    ) == false
+                )
                 {
                     return;
                 }
@@ -139,7 +191,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 // If we are removing, then that is a change or if we are newly marking a reference as TreatAsUsed,
                 // then that is a change.
                 var referenceChanges = referenceUpdates
-                    .Where(update => update.Action != UpdateAction.TreatAsUsed || !update.ReferenceInfo.TreatAsUsed)
+                    .Where(update =>
+                        update.Action != UpdateAction.TreatAsUsed
+                        || !update.ReferenceInfo.TreatAsUsed
+                    )
                     .ToImmutableArray();
 
                 // If there are no changes, then we can return
@@ -149,26 +204,53 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 }
 
                 // Since undo/redo is not supported, get confirmation that we should apply these changes.
-                var result = MessageDialog.Show(ServicesVSResources.Remove_Unused_References, ServicesVSResources.This_action_cannot_be_undone_Do_you_wish_to_continue, MessageDialogCommandSet.YesNo);
+                var result = MessageDialog.Show(
+                    ServicesVSResources.Remove_Unused_References,
+                    ServicesVSResources.This_action_cannot_be_undone_Do_you_wish_to_continue,
+                    MessageDialogCommandSet.YesNo
+                );
                 if (result == MessageDialogCommand.No)
                 {
                     return;
                 }
 
-                _threadOperationExecutor.Execute(ServicesVSResources.Remove_Unused_References, ServicesVSResources.Updating_project_references, allowCancellation: false, showProgress: true, (operationContext) =>
-                {
-                    ApplyUnusedReferenceUpdates(_threadingContext.JoinableTaskFactory, solution, projectFilePath, referenceChanges, CancellationToken.None);
-                });
+                _threadOperationExecutor.Execute(
+                    ServicesVSResources.Remove_Unused_References,
+                    ServicesVSResources.Updating_project_references,
+                    allowCancellation: false,
+                    showProgress: true,
+                    (operationContext) =>
+                    {
+                        ApplyUnusedReferenceUpdates(
+                            _threadingContext.JoinableTaskFactory,
+                            solution,
+                            projectFilePath,
+                            referenceChanges,
+                            CancellationToken.None
+                        );
+                    }
+                );
             }
 
             return;
         }
 
-        private (Solution?, string?, ImmutableArray<ReferenceUpdate>) GetUnusedReferencesForProjectHierarchy(
+        private (
+            Solution?,
+            string?,
+            ImmutableArray<ReferenceUpdate>
+        ) GetUnusedReferencesForProjectHierarchy(
             IVsHierarchy projectHierarchy,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (!TryGetPropertyValue(projectHierarchy, ProjectAssetsFilePropertyName, out var projectAssetsFile))
+            if (
+                !TryGetPropertyValue(
+                    projectHierarchy,
+                    ProjectAssetsFilePropertyName,
+                    out var projectAssetsFile
+                )
+            )
             {
                 return (null, null, ImmutableArray<ReferenceUpdate>.Empty);
             }
@@ -181,34 +263,77 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             var solution = _workspace.CurrentSolution;
 
-            var unusedReferences = GetUnusedReferencesForProject(solution, projectFilePath!, projectAssetsFile, cancellationToken);
+            var unusedReferences = GetUnusedReferencesForProject(
+                solution,
+                projectFilePath!,
+                projectAssetsFile,
+                cancellationToken
+            );
 
             return (solution, projectFilePath, unusedReferences);
         }
 
-        private ImmutableArray<ReferenceUpdate> GetUnusedReferencesForProject(Solution solution, string projectFilePath, string projectAssetsFile, CancellationToken cancellationToken)
+        private ImmutableArray<ReferenceUpdate> GetUnusedReferencesForProject(
+            Solution solution,
+            string projectFilePath,
+            string projectAssetsFile,
+            CancellationToken cancellationToken
+        )
         {
             var unusedReferences = _threadingContext.JoinableTaskFactory.Run(async () =>
             {
-                var projectReferences = await this.ReferenceCleanupService.GetProjectReferencesAsync(projectFilePath, cancellationToken).ConfigureAwait(true);
-                var unusedReferenceAnalysisService = solution.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
-                return await unusedReferenceAnalysisService.GetUnusedReferencesAsync(solution, projectFilePath, projectAssetsFile, projectReferences, cancellationToken).ConfigureAwait(true);
+                var projectReferences = await this
+                    .ReferenceCleanupService.GetProjectReferencesAsync(
+                        projectFilePath,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
+                var unusedReferenceAnalysisService =
+                    solution.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
+                return await unusedReferenceAnalysisService
+                    .GetUnusedReferencesAsync(
+                        solution,
+                        projectFilePath,
+                        projectAssetsFile,
+                        projectReferences,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
             });
 
             var referenceUpdates = unusedReferences
-                .Select(reference => new ReferenceUpdate(reference.TreatAsUsed ? UpdateAction.TreatAsUsed : UpdateAction.Remove, reference))
+                .Select(reference => new ReferenceUpdate(
+                    reference.TreatAsUsed ? UpdateAction.TreatAsUsed : UpdateAction.Remove,
+                    reference
+                ))
                 .ToImmutableArray();
 
             return referenceUpdates;
         }
 
-        private static void ApplyUnusedReferenceUpdates(JoinableTaskFactory joinableTaskFactory, Solution solution, string projectFilePath, ImmutableArray<ReferenceUpdate> referenceUpdates, CancellationToken cancellationToken)
+        private static void ApplyUnusedReferenceUpdates(
+            JoinableTaskFactory joinableTaskFactory,
+            Solution solution,
+            string projectFilePath,
+            ImmutableArray<ReferenceUpdate> referenceUpdates,
+            CancellationToken cancellationToken
+        )
         {
-            joinableTaskFactory.Run(
-                () => UnusedReferencesRemover.UpdateReferencesAsync(solution, projectFilePath, referenceUpdates, cancellationToken));
+            joinableTaskFactory.Run(() =>
+                UnusedReferencesRemover.UpdateReferencesAsync(
+                    solution,
+                    projectFilePath,
+                    referenceUpdates,
+                    cancellationToken
+                )
+            );
         }
 
-        private static bool TryGetPropertyValue(IVsHierarchy hierarchy, string propertyName, [NotNullWhen(returnValue: true)] out string? propertyValue)
+        private static bool TryGetPropertyValue(
+            IVsHierarchy hierarchy,
+            string propertyName,
+            [NotNullWhen(returnValue: true)] out string? propertyValue
+        )
         {
             if (hierarchy is not IVsBuildPropertyStorage storage)
             {
@@ -216,7 +341,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 return false;
             }
 
-            return ErrorHandler.Succeeded(storage.GetPropertyValue(propertyName, null, (uint)_PersistStorageType.PST_PROJECT_FILE, out propertyValue));
+            return ErrorHandler.Succeeded(
+                storage.GetPropertyValue(
+                    propertyName,
+                    null,
+                    (uint)_PersistStorageType.PST_PROJECT_FILE,
+                    out propertyValue
+                )
+            );
         }
     }
 }

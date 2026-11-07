@@ -15,8 +15,13 @@ namespace System.Net.Http.Json
     /// </summary>
     public static partial class HttpClientJsonExtensions
     {
-        private static readonly Func<HttpClient, Uri?, CancellationToken, Task<HttpResponseMessage>> s_deleteAsync =
-            static (client, uri, cancellation) => client.DeleteAsync(uri, cancellation);
+        private static readonly Func<
+            HttpClient,
+            Uri?,
+            CancellationToken,
+            Task<HttpResponseMessage>
+        > s_deleteAsync = static (client, uri, cancellation) =>
+            client.DeleteAsync(uri, cancellation);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -30,8 +35,13 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<object?> DeleteFromJsonAsync(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, Type type, JsonSerializerOptions? options, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync(client, CreateUri(requestUri), type, options, cancellationToken);
+        public static Task<object?> DeleteFromJsonAsync(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            Type type,
+            JsonSerializerOptions? options,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync(client, CreateUri(requestUri), type, options, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -45,8 +55,13 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<object?> DeleteFromJsonAsync(this HttpClient client, Uri? requestUri, Type type, JsonSerializerOptions? options, CancellationToken cancellationToken = default) =>
-            FromJsonAsyncCore(s_deleteAsync, client, requestUri, type, options, cancellationToken);
+        public static Task<object?> DeleteFromJsonAsync(
+            this HttpClient client,
+            Uri? requestUri,
+            Type type,
+            JsonSerializerOptions? options,
+            CancellationToken cancellationToken = default
+        ) => FromJsonAsyncCore(s_deleteAsync, client, requestUri, type, options, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -60,8 +75,12 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<TValue?> DeleteFromJsonAsync<TValue>(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, JsonSerializerOptions? options, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync<TValue>(client, CreateUri(requestUri), options, cancellationToken);
+        public static Task<TValue?> DeleteFromJsonAsync<TValue>(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            JsonSerializerOptions? options,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync<TValue>(client, CreateUri(requestUri), options, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -75,8 +94,19 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<TValue?> DeleteFromJsonAsync<TValue>(this HttpClient client, Uri? requestUri, JsonSerializerOptions? options, CancellationToken cancellationToken = default) =>
-            FromJsonAsyncCore<TValue>(s_deleteAsync, client, requestUri, options, cancellationToken);
+        public static Task<TValue?> DeleteFromJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            JsonSerializerOptions? options,
+            CancellationToken cancellationToken = default
+        ) =>
+            FromJsonAsyncCore<TValue>(
+                s_deleteAsync,
+                client,
+                requestUri,
+                options,
+                cancellationToken
+            );
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -88,8 +118,13 @@ namespace System.Net.Http.Json
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
-        public static Task<object?> DeleteFromJsonAsync(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, Type type, JsonSerializerContext context, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync(client, CreateUri(requestUri), type, context, cancellationToken);
+        public static Task<object?> DeleteFromJsonAsync(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            Type type,
+            JsonSerializerContext context,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync(client, CreateUri(requestUri), type, context, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -101,8 +136,13 @@ namespace System.Net.Http.Json
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
-        public static Task<object?> DeleteFromJsonAsync(this HttpClient client, Uri? requestUri, Type type, JsonSerializerContext context, CancellationToken cancellationToken = default) =>
-            FromJsonAsyncCore(s_deleteAsync, client, requestUri, type, context, cancellationToken);
+        public static Task<object?> DeleteFromJsonAsync(
+            this HttpClient client,
+            Uri? requestUri,
+            Type type,
+            JsonSerializerContext context,
+            CancellationToken cancellationToken = default
+        ) => FromJsonAsyncCore(s_deleteAsync, client, requestUri, type, context, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -114,8 +154,12 @@ namespace System.Net.Http.Json
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
-        public static Task<TValue?> DeleteFromJsonAsync<TValue>(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync(client, CreateUri(requestUri), jsonTypeInfo, cancellationToken);
+        public static Task<TValue?> DeleteFromJsonAsync<TValue>(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync(client, CreateUri(requestUri), jsonTypeInfo, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -127,8 +171,12 @@ namespace System.Net.Http.Json
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
-        public static Task<TValue?> DeleteFromJsonAsync<TValue>(this HttpClient client, Uri? requestUri, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default) =>
-            FromJsonAsyncCore(s_deleteAsync, client, requestUri, jsonTypeInfo, cancellationToken);
+        public static Task<TValue?> DeleteFromJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            CancellationToken cancellationToken = default
+        ) => FromJsonAsyncCore(s_deleteAsync, client, requestUri, jsonTypeInfo, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -141,8 +189,12 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<object?> DeleteFromJsonAsync(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, Type type, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync(client, requestUri, type, options: null, cancellationToken);
+        public static Task<object?> DeleteFromJsonAsync(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            Type type,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync(client, requestUri, type, options: null, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -155,8 +207,12 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<object?> DeleteFromJsonAsync(this HttpClient client, Uri? requestUri, Type type, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync(client, requestUri, type, options: null, cancellationToken);
+        public static Task<object?> DeleteFromJsonAsync(
+            this HttpClient client,
+            Uri? requestUri,
+            Type type,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync(client, requestUri, type, options: null, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -169,8 +225,11 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<TValue?> DeleteFromJsonAsync<TValue>(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync<TValue>(client, requestUri, options: null, cancellationToken);
+        public static Task<TValue?> DeleteFromJsonAsync<TValue>(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync<TValue>(client, requestUri, options: null, cancellationToken);
 
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.
@@ -183,7 +242,10 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<TValue?> DeleteFromJsonAsync<TValue>(this HttpClient client, Uri? requestUri, CancellationToken cancellationToken = default) =>
-            DeleteFromJsonAsync<TValue>(client, requestUri, options: null, cancellationToken);
+        public static Task<TValue?> DeleteFromJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            CancellationToken cancellationToken = default
+        ) => DeleteFromJsonAsync<TValue>(client, requestUri, options: null, cancellationToken);
     }
 }

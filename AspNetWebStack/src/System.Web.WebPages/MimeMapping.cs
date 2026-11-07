@@ -9,7 +9,10 @@ namespace Microsoft.Internal.Web.Utils
 {
     internal static class MimeMapping
     {
-        private static readonly IDictionary<string, string> _mimeMappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        private static readonly IDictionary<string, string> _mimeMappings = new Dictionary<
+            string,
+            string
+        >(StringComparer.OrdinalIgnoreCase)
         {
             { ".*", "application/octet-stream" },
             { ".323", "text/h323" },
@@ -217,7 +220,10 @@ namespace Microsoft.Internal.Web.Utils
             { ".ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow" },
             { ".ppt", "application/vnd.ms-powerpoint" },
             { ".pptm", "application/vnd.ms-powerpoint.presentation.macroEnabled.12" },
-            { ".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
+            {
+                ".pptx",
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            },
             { ".prf", "application/pics-rules" },
             { ".prm", "application/octet-stream" },
             { ".prx", "application/octet-stream" },
@@ -354,7 +360,7 @@ namespace Microsoft.Internal.Web.Utils
             { ".xtp", "application/octet-stream" },
             { ".xwd", "image/x-xwindowdump" },
             { ".z", "application/x-compress" },
-            { ".zip", "application/x-zip-compressed" }
+            { ".zip", "application/x-zip-compressed" },
         };
 
         internal static string GetMimeMapping(string fileName)

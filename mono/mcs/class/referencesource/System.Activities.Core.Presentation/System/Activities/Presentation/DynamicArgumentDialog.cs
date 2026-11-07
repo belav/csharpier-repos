@@ -5,11 +5,11 @@
 namespace System.Activities.Presentation
 {
     using System.Activities.Presentation.Model;
-    using System.Windows;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime;
+    using System.Windows;
 
     public sealed class DynamicArgumentDialog : WorkflowElementDialog
     {
@@ -17,7 +17,13 @@ namespace System.Activities.Presentation
         Type underlyingArgumentType;
         ModelItem data;
 
-        DynamicArgumentDialog(ModelItem activity, ModelItem data, EditingContext context, DependencyObject owner, DynamicArgumentDesignerOptions options)
+        DynamicArgumentDialog(
+            ModelItem activity,
+            ModelItem data,
+            EditingContext context,
+            DependencyObject owner,
+            DynamicArgumentDesignerOptions options
+        )
         {
             this.MinHeight = 200;
             this.MinWidth = 700;
@@ -30,7 +36,11 @@ namespace System.Activities.Presentation
             this.data = data;
             this.Content = new DynamicArgumentDesigner()
             {
-                DynamicArguments = DynamicArgumentDesigner.ModelItemToWrapperCollection(data, out isDictionary, out underlyingArgumentType),
+                DynamicArguments = DynamicArgumentDesigner.ModelItemToWrapperCollection(
+                    data,
+                    out isDictionary,
+                    out underlyingArgumentType
+                ),
                 IsDictionary = isDictionary,
                 UnderlyingArgumentType = underlyingArgumentType,
                 Context = context,
@@ -42,16 +52,33 @@ namespace System.Activities.Presentation
             };
         }
 
-        public static bool ShowDialog(ModelItem activity, ModelItem data, EditingContext context, DependencyObject owner, DynamicArgumentDesignerOptions options)
+        public static bool ShowDialog(
+            ModelItem activity,
+            ModelItem data,
+            EditingContext context,
+            DependencyObject owner,
+            DynamicArgumentDesignerOptions options
+        )
         {
-            return new DynamicArgumentDialog(activity, data, context, owner, options).ShowOkCancel();
+            return new DynamicArgumentDialog(
+                activity,
+                data,
+                context,
+                owner,
+                options
+            ).ShowOkCancel();
         }
 
         protected override void OnWorkflowElementDialogClosed(bool? dialogResult)
         {
             if (dialogResult.Value)
             {
-                DynamicArgumentDesigner.WrapperCollectionToModelItem((this.Content as DynamicArgumentDesigner).DynamicArguments, data, isDictionary, underlyingArgumentType);
+                DynamicArgumentDesigner.WrapperCollectionToModelItem(
+                    (this.Content as DynamicArgumentDesigner).DynamicArguments,
+                    data,
+                    isDictionary,
+                    underlyingArgumentType
+                );
             }
         }
     }

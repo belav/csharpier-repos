@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -16,7 +16,10 @@ using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    internal sealed class CLRIReferenceImpl<T> : CLRIPropertyValueImpl, IReference<T>, ICustomPropertyProvider
+    internal sealed class CLRIReferenceImpl<T>
+        : CLRIPropertyValueImpl,
+            IReference<T>,
+            ICustomPropertyProvider
     {
         private T _value;
 
@@ -27,7 +30,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             _value = obj;
         }
 
-        public T Value {
+        public T Value
+        {
             get { return _value; }
         }
 
@@ -51,10 +55,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         }
 
         [Pure]
-        ICustomProperty ICustomPropertyProvider.GetIndexedProperty(string name, Type indexParameterType)
+        ICustomProperty ICustomPropertyProvider.GetIndexedProperty(
+            string name,
+            Type indexParameterType
+        )
         {
             // _value should not be null
-            return ICustomPropertyProviderImpl.CreateIndexedProperty((object)_value, name, indexParameterType);
+            return ICustomPropertyProviderImpl.CreateIndexedProperty(
+                (object)_value,
+                name,
+                indexParameterType
+            );
         }
 
         [Pure]
@@ -64,16 +75,16 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return ((object)_value).ToString();
         }
 
-        Type ICustomPropertyProvider.Type 
-        { 
-            [Pure]        
+        Type ICustomPropertyProvider.Type
+        {
+            [Pure]
             get
             {
                 // _value should not be null
                 return ((object)_value).GetType();
             }
         }
-        
+
         // We have T in an IReference<T>.  Need to QI for IReference<T> with the appropriate GUID, call
         // the get_Value property, allocate an appropriately-sized managed object, marshal the native object
         // to the managed object, and free the native method.  Also we want the return value boxed (aka normal value type boxing).
@@ -84,17 +95,23 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal static Object UnboxHelper(Object wrapper)
         {
             Contract.Requires(wrapper != null);
-            IReference<T> reference = (IReference<T>) wrapper;
-            Contract.Assert(reference != null, "CLRIReferenceImpl::UnboxHelper - QI'ed for IReference<"+typeof(T)+">, but that failed.");
+            IReference<T> reference = (IReference<T>)wrapper;
+            Contract.Assert(
+                reference != null,
+                "CLRIReferenceImpl::UnboxHelper - QI'ed for IReference<"
+                    + typeof(T)
+                    + ">, but that failed."
+            );
             return reference.Value;
         }
     }
 
     // T can be any WinRT-compatible type
-    internal sealed class CLRIReferenceArrayImpl<T> : CLRIPropertyValueImpl, 
-                                                      IReferenceArray<T>, 
-                                                      ICustomPropertyProvider,
-                                                      IList                     // Jupiter data binding needs IList/IEnumerable
+    internal sealed class CLRIReferenceArrayImpl<T>
+        : CLRIPropertyValueImpl,
+            IReferenceArray<T>,
+            ICustomPropertyProvider,
+            IList // Jupiter data binding needs IList/IEnumerable
     {
         private T[] _value;
         private IList _list;
@@ -106,12 +123,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             _value = obj;
 
-            // This should not fail but I'm making a cast here anyway just in case 
+            // This should not fail but I'm making a cast here anyway just in case
             // we have a bug (that _value is not an array) or there is a runtime failure
-            _list = (IList) _value;
+            _list = (IList)_value;
         }
 
-        public T[] Value {
+        public T[] Value
+        {
             get { return _value; }
         }
 
@@ -135,10 +153,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         }
 
         [Pure]
-        ICustomProperty ICustomPropertyProvider.GetIndexedProperty(string name, Type indexParameterType)
+        ICustomProperty ICustomPropertyProvider.GetIndexedProperty(
+            string name,
+            Type indexParameterType
+        )
         {
             // _value should not be null
-            return ICustomPropertyProviderImpl.CreateIndexedProperty((object)_value, name, indexParameterType);
+            return ICustomPropertyProviderImpl.CreateIndexedProperty(
+                (object)_value,
+                name,
+                indexParameterType
+            );
         }
 
         [Pure]
@@ -148,9 +173,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return ((object)_value).ToString();
         }
 
-        Type ICustomPropertyProvider.Type 
-        { 
-            [Pure]        
+        Type ICustomPropertyProvider.Type
+        {
+            [Pure]
             get
             {
                 // _value should not be null
@@ -168,67 +193,55 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         }
 
         //
-        // IList & ICollection methods. 
+        // IList & ICollection methods.
         // This enables two-way data binding and index access in Jupiter
         //
-        Object IList.this[int index] {
-            get
-            {
-                return _list[index];
-            }
-
-            set
-            {
-                _list[index] = value;
-            }
+        Object IList.this[int index]
+        {
+            get { return _list[index]; }
+            set { _list[index] = value; }
         }
-    
+
         int IList.Add(Object value)
         {
             return _list.Add(value);
         }
-    
+
         bool IList.Contains(Object value)
         {
             return _list.Contains(value);
         }
-    
+
         void IList.Clear()
         {
             _list.Clear();
         }
 
-        bool IList.IsReadOnly 
-        { 
-            get
-            {
-                return _list.IsReadOnly;
-            }
+        bool IList.IsReadOnly
+        {
+            get { return _list.IsReadOnly; }
         }
-    
+
         bool IList.IsFixedSize
         {
-            get
-            {
-                return _list.IsFixedSize;
-            }
+            get { return _list.IsFixedSize; }
         }
 
         int IList.IndexOf(Object value)
         {
             return _list.IndexOf(value);
         }
-    
+
         void IList.Insert(int index, Object value)
         {
             _list.Insert(index, value);
         }
-    
+
         void IList.Remove(Object value)
         {
             _list.Remove(value);
         }
-    
+
         void IList.RemoveAt(int index)
         {
             _list.RemoveAt(index);
@@ -238,31 +251,22 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             _list.CopyTo(array, index);
         }
-        
+
         int ICollection.Count
-        { 
-            get
-            {
-                return _list.Count;
-            }
+        {
+            get { return _list.Count; }
         }
 
         Object ICollection.SyncRoot
-        { 
-            get
-            {
-                return _list.SyncRoot;
-            }
+        {
+            get { return _list.SyncRoot; }
         }
-            
+
         bool ICollection.IsSynchronized
-        { 
-            get
-            {
-                return _list.IsSynchronized;
-            }
+        {
+            get { return _list.IsSynchronized; }
         }
-        
+
         // We have T in an IReferenceArray<T>.  Need to QI for IReferenceArray<T> with the appropriate GUID, call
         // the get_Value property, allocate an appropriately-sized managed object, marshal the native object
         // to the managed object, and free the native method.
@@ -274,7 +278,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             Contract.Requires(wrapper != null);
             IReferenceArray<T> reference = (IReferenceArray<T>)wrapper;
-            Contract.Assert(reference != null, "CLRIReferenceArrayImpl::UnboxHelper - QI'ed for IReferenceArray<" + typeof(T) + ">, but that failed.");
+            Contract.Assert(
+                reference != null,
+                "CLRIReferenceArrayImpl::UnboxHelper - QI'ed for IReferenceArray<"
+                    + typeof(T)
+                    + ">, but that failed."
+            );
             T[] marshaled = reference.Value;
             return marshaled;
         }
@@ -283,9 +292,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // For creating instances of Windows Runtime's IReference<T> and IReferenceArray<T>.
     internal static class IReferenceFactory
     {
-        internal static readonly Type s_pointType = Type.GetType("Windows.Foundation.Point, " + AssemblyRef.SystemRuntimeWindowsRuntime);
-        internal static readonly Type s_rectType = Type.GetType("Windows.Foundation.Rect, " + AssemblyRef.SystemRuntimeWindowsRuntime);
-        internal static readonly Type s_sizeType = Type.GetType("Windows.Foundation.Size, " + AssemblyRef.SystemRuntimeWindowsRuntime);
+        internal static readonly Type s_pointType = Type.GetType(
+            "Windows.Foundation.Point, " + AssemblyRef.SystemRuntimeWindowsRuntime
+        );
+        internal static readonly Type s_rectType = Type.GetType(
+            "Windows.Foundation.Rect, " + AssemblyRef.SystemRuntimeWindowsRuntime
+        );
+        internal static readonly Type s_sizeType = Type.GetType(
+            "Windows.Foundation.Size, " + AssemblyRef.SystemRuntimeWindowsRuntime
+        );
 
         [SecuritySafeCritical]
         internal static Object CreateIReference(Object obj)
@@ -296,7 +311,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             Type type = obj.GetType();
 
             if (type.IsArray)
-                return CreateIReferenceArray((Array) obj);
+                return CreateIReferenceArray((Array)obj);
 
             if (type == typeof(int))
                 return new CLRIReferenceImpl<int>(PropertyType.Int32, (int)obj);
@@ -325,13 +340,16 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (type == typeof(Guid))
                 return new CLRIReferenceImpl<Guid>(PropertyType.Guid, (Guid)obj);
             if (type == typeof(DateTimeOffset))
-                return new CLRIReferenceImpl<DateTimeOffset>(PropertyType.DateTime, (DateTimeOffset)obj);
+                return new CLRIReferenceImpl<DateTimeOffset>(
+                    PropertyType.DateTime,
+                    (DateTimeOffset)obj
+                );
             if (type == typeof(TimeSpan))
                 return new CLRIReferenceImpl<TimeSpan>(PropertyType.TimeSpan, (TimeSpan)obj);
             if (type == typeof(Object))
                 return new CLRIReferenceImpl<Object>(PropertyType.Inspectable, (Object)obj);
             if (type == typeof(RuntimeType))
-            {   // If the type is System.RuntimeType, we want to use System.Type marshaler (it's parent of the type)
+            { // If the type is System.RuntimeType, we want to use System.Type marshaler (it's parent of the type)
                 return new CLRIReferenceImpl<Type>(PropertyType.Other, (Type)obj);
             }
 
@@ -372,7 +390,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             Contract.Ensures(Contract.Result<Object>() != null);
 
             Type type = obj.GetType().GetElementType();
-            
+
             Contract.Assert(obj.Rank == 1 && obj.GetLowerBound(0) == 0 && !type.IsArray);
 
             if (type == typeof(int))
@@ -402,11 +420,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (type == typeof(Guid))
                 return new CLRIReferenceArrayImpl<Guid>(PropertyType.GuidArray, (Guid[])obj);
             if (type == typeof(DateTimeOffset))
-                return new CLRIReferenceArrayImpl<DateTimeOffset>(PropertyType.DateTimeArray, (DateTimeOffset[])obj);
+                return new CLRIReferenceArrayImpl<DateTimeOffset>(
+                    PropertyType.DateTimeArray,
+                    (DateTimeOffset[])obj
+                );
             if (type == typeof(TimeSpan))
-                return new CLRIReferenceArrayImpl<TimeSpan>(PropertyType.TimeSpanArray, (TimeSpan[])obj);
+                return new CLRIReferenceArrayImpl<TimeSpan>(
+                    PropertyType.TimeSpanArray,
+                    (TimeSpan[])obj
+                );
             if (type == typeof(Type))
-            {   // Note: The array type will be System.Type, not System.RuntimeType
+            { // Note: The array type will be System.Type, not System.RuntimeType
                 return new CLRIReferenceArrayImpl<Type>(PropertyType.OtherArray, (Type[])obj);
             }
 
@@ -427,8 +451,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 // note that KeyValuePair`2 is a reference type on the WinRT side so the array
                 // must be wrapped with CLRIReferenceArrayImpl<Object>
-                if (type.IsGenericType &&
-                    type.GetGenericTypeDefinition() == typeof(System.Collections.Generic.KeyValuePair<,>))
+                if (
+                    type.IsGenericType
+                    && type.GetGenericTypeDefinition()
+                        == typeof(System.Collections.Generic.KeyValuePair<,>)
+                )
                 {
                     Object[] objArray = new Object[obj.Length];
                     for (int i = 0; i < objArray.Length; i++)
@@ -447,7 +474,6 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 propType = PropertyType.OtherArray;
             }
 
-
             if (propType.HasValue)
             {
                 // All WinRT value type will be Property.Other
@@ -457,7 +483,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             else
             {
                 // All WinRT reference type (including arbitary managed type) will be PropertyType.ObjectArray
-                return new CLRIReferenceArrayImpl<Object>(PropertyType.InspectableArray, (Object[])obj);
+                return new CLRIReferenceArrayImpl<Object>(
+                    PropertyType.InspectableArray,
+                    (Object[])obj
+                );
             }
         }
     }

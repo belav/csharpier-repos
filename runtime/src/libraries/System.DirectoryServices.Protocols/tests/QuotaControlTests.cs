@@ -8,7 +8,10 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
     public class QuotaControlTests
     {
         [Fact]
@@ -20,13 +23,46 @@ namespace System.DirectoryServices.Protocols.Tests
             Assert.True(control.ServerSide);
             Assert.Equal("1.2.840.113556.1.4.1852", control.Type);
 
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 2, 4, 0 } : new byte[] { 48, 2, 4, 0 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 2, 4, 0 }
+                    : new byte[] { 48, 2, 4, 0 };
             Assert.Equal(expected, control.GetValue());
         }
 
         public static IEnumerable<object[]> Ctor_QuerySid_TestData()
         {
-            yield return new object[] { new SecurityIdentifier("S-1-5-32-544"), new byte[] { 48, 132, 0, 0, 0, 18, 4, 16, 1, 2, 0, 0, 0, 0, 0, 5, 32, 0, 0, 0, 32, 2, 0, 0 } };
+            yield return new object[]
+            {
+                new SecurityIdentifier("S-1-5-32-544"),
+                new byte[]
+                {
+                    48,
+                    132,
+                    0,
+                    0,
+                    0,
+                    18,
+                    4,
+                    16,
+                    1,
+                    2,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    5,
+                    32,
+                    0,
+                    0,
+                    0,
+                    32,
+                    2,
+                    0,
+                    0,
+                },
+            };
             yield return new object[] { null, new byte[] { 48, 132, 0, 0, 0, 2, 4, 0 } };
         }
 

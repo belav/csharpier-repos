@@ -30,23 +30,25 @@ namespace System.Activities.Statements
         const string RootId = "0";
         const string ExitProperty = "Exit";
 
-        static Func<StateMachineExtension> getDefaultExtension = new Func<StateMachineExtension>(GetStateMachineExtension);
+        static Func<StateMachineExtension> getDefaultExtension = new Func<StateMachineExtension>(
+            GetStateMachineExtension
+        );
 
         // states in root level of StateMachine
         Collection<State> states;
-        
+
         // variables used in StateMachine
         Collection<Variable> variables;
 
         // internal representations of states
         Collection<InternalState> internalStates;
-        
+
         // ActivityFuncs who call internal activities
         Collection<ActivityFunc<StateMachineEventManager, string>> internalStateFuncs;
 
         // Callback when a state completes
         CompletionCallback<string> onStateComplete;
-        
+
         // eventManager is used to manage the events of trigger completion.
         // When a trigger on a transition is completed, the corresponding event will be sent to eventManager.
         // eventManager will decide whether immediate process it or just register it.
@@ -58,8 +60,13 @@ namespace System.Activities.Statements
         public StateMachine()
         {
             this.internalStates = new Collection<InternalState>();
-            this.internalStateFuncs = new Collection<ActivityFunc<StateMachineEventManager, string>>();
-            this.eventManager = new Variable<StateMachineEventManager> { Name = "EventManager", Default = new StateMachineEventManagerFactory() };
+            this.internalStateFuncs =
+                new Collection<ActivityFunc<StateMachineEventManager, string>>();
+            this.eventManager = new Variable<StateMachineEventManager>
+            {
+                Name = "EventManager",
+                Default = new StateMachineEventManagerFactory(),
+            };
             this.onStateComplete = new CompletionCallback<string>(this.OnStateComplete);
         }
 
@@ -67,11 +74,7 @@ namespace System.Activities.Statements
         /// Gets or sets the start point of the StateMachine.
         /// </summary>
         [DefaultValue(null)]
-        public State InitialState
-        {
-            get;
-            set;
-        }
+        public State InitialState { get; set; }
 
         /// <summary>
         /// Gets all root level States in the StateMachine.
@@ -95,7 +98,7 @@ namespace System.Activities.Statements
                         },
                     };
                 }
-             
+
                 return this.states;
             }
         }
@@ -127,11 +130,7 @@ namespace System.Activities.Statements
             }
         }
 
-        uint PassNumber
-        {
-            get;
-            set;
-        }
+        uint PassNumber { get; set; }
 
         /// <summary>
         /// Perform State Machine validation, in the following order:
@@ -150,27 +149,44 @@ namespace System.Activities.Statements
             // clear Ids and Flags via transitions
             this.PassNumber++;
             this.TraverseViaTransitions(ClearState, ClearTransition);
-            
+
             // clear Ids and Flags of all containing State references.
             this.PassNumber++;
             this.TraverseStates(
-                (NativeActivityMetadata m, Collection<State> states) => { ClearStates(states); },
-                (NativeActivityMetadata m, State state) => { ClearTransitions(state); },
+                (NativeActivityMetadata m, Collection<State> states) =>
+                {
+                    ClearStates(states);
+                },
+                (NativeActivityMetadata m, State state) =>
+                {
+                    ClearTransitions(state);
+                },
                 metadata,
-                checkReached: false);
+                checkReached: false
+            );
 
             // Mark via states and do some check
             this.PassNumber++;
             this.TraverseStates(
                 this.MarkStatesViaChildren,
-                (NativeActivityMetadata m, State state) => { MarkTransitionsInState(state); },
+                (NativeActivityMetadata m, State state) =>
+                {
+                    MarkTransitionsInState(state);
+                },
                 metadata,
-                checkReached: false);
+                checkReached: false
+            );
 
             this.PassNumber++;
-            
+
             // Mark via transition
-            this.TraverseViaTransitions(delegate(State state) { MarkStateViaTransition(state); }, null);
+            this.TraverseViaTransitions(
+                delegate(State state)
+                {
+                    MarkStateViaTransition(state);
+                },
+                null
+            );
 
             // Do validation via children
             // need not check the violation of state which is not reached
@@ -181,13 +197,14 @@ namespace System.Activities.Statements
                 {
                     ValidateTransitions(metadata, state);
                 },
-                actionForTransition: null);
+                actionForTransition: null
+            );
 
             this.PassNumber++;
 
             this.TraverseStates(
                 ValidateStates,
-                (NativeActivityMetadata m, State state) => 
+                (NativeActivityMetadata m, State state) =>
                 {
                     if (!state.Reachable)
                     {
@@ -196,7 +213,8 @@ namespace System.Activities.Statements
                     }
                 },
                 metadata: metadata,
-                checkReached: true);
+                checkReached: true
+            );
 
             // Validate the root state machine itself
             this.ValidateStateMachine(metadata);
@@ -215,8 +233,12 @@ namespace System.Activities.Statements
         /// Execution of StateMachine
         /// </summary>
         /// <param name="context">NativeActivityContext reference</param>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
-                        Justification = "The context is used by workflow runtime. The parameter should be fine.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1062:Validate arguments of public methods",
+            MessageId = "0",
+            Justification = "The context is used by workflow runtime. The parameter should be fine."
+        )]
         protected override void Execute(NativeActivityContext context)
         {
             // We view the duration before moving to initial state is on transition.
@@ -228,10 +250,14 @@ namespace System.Activities.Statements
             context.ScheduleFunc<StateMachineEventManager, string>(
                 this.internalStateFuncs[index],
                 localEventManager,
-                this.onStateComplete);
+                this.onStateComplete
+            );
         }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             // enable dynamic update in state machine
             metadata.AllowUpdateInsideThisActivity();
@@ -303,31 +329,40 @@ namespace System.Activities.Statements
                 {
                     if (state.Exit != null)
                     {
-                        metadata.AddValidationError(new ValidationError(
-                            SR.FinalStateCannotHaveProperty(state.DisplayName, ExitProperty),
-                            isWarning: false,
-                            propertyName: string.Empty,
-                            sourceDetail: state));
+                        metadata.AddValidationError(
+                            new ValidationError(
+                                SR.FinalStateCannotHaveProperty(state.DisplayName, ExitProperty),
+                                isWarning: false,
+                                propertyName: string.Empty,
+                                sourceDetail: state
+                            )
+                        );
                     }
 
                     if (state.Transitions.Count > 0)
                     {
-                        metadata.AddValidationError(new ValidationError(
-                            SR.FinalStateCannotHaveTransition(state.DisplayName),
-                            isWarning: false,
-                            propertyName: string.Empty,
-                            sourceDetail: state));
+                        metadata.AddValidationError(
+                            new ValidationError(
+                                SR.FinalStateCannotHaveTransition(state.DisplayName),
+                                isWarning: false,
+                                propertyName: string.Empty,
+                                sourceDetail: state
+                            )
+                        );
                     }
                 }
                 else
                 {
                     if (state.Transitions.Count == 0)
                     {
-                        metadata.AddValidationError(new ValidationError(
-                            SR.SimpleStateMustHaveOneTransition(state.DisplayName),
-                            isWarning: false,
-                            propertyName: string.Empty,
-                            sourceDetail: state));
+                        metadata.AddValidationError(
+                            new ValidationError(
+                                SR.SimpleStateMustHaveOneTransition(state.DisplayName),
+                                isWarning: false,
+                                propertyName: string.Empty,
+                                sourceDetail: state
+                            )
+                        );
                     }
                 }
             }
@@ -337,17 +372,25 @@ namespace System.Activities.Statements
         {
             Collection<Transition> transitions = currentState.Transitions;
             HashSet<Activity> conditionalTransitionTriggers = new HashSet<Activity>();
-            Dictionary<Activity, List<Transition>> unconditionalTransitionMapping = new Dictionary<Activity, List<Transition>>();
+            Dictionary<Activity, List<Transition>> unconditionalTransitionMapping =
+                new Dictionary<Activity, List<Transition>>();
 
             foreach (Transition transition in transitions)
             {
                 if (transition.Source != null)
                 {
-                    metadata.AddValidationError(new ValidationError(
-                        SR.TransitionCannotBeAddedTwice(transition.DisplayName, currentState.DisplayName, transition.Source.DisplayName),
-                        isWarning: false,
-                        propertyName: string.Empty,
-                        sourceDetail: transition));
+                    metadata.AddValidationError(
+                        new ValidationError(
+                            SR.TransitionCannotBeAddedTwice(
+                                transition.DisplayName,
+                                currentState.DisplayName,
+                                transition.Source.DisplayName
+                            ),
+                            isWarning: false,
+                            propertyName: string.Empty,
+                            sourceDetail: transition
+                        )
+                    );
                     continue;
                 }
                 else
@@ -357,21 +400,31 @@ namespace System.Activities.Statements
 
                 if (transition.To == null)
                 {
-                    metadata.AddValidationError(new ValidationError(
-                        SR.TransitionTargetCannotBeNull(transition.DisplayName, currentState.DisplayName),
-                        isWarning: false,
-                        propertyName: string.Empty,
-                        sourceDetail: transition));
+                    metadata.AddValidationError(
+                        new ValidationError(
+                            SR.TransitionTargetCannotBeNull(
+                                transition.DisplayName,
+                                currentState.DisplayName
+                            ),
+                            isWarning: false,
+                            propertyName: string.Empty,
+                            sourceDetail: transition
+                        )
+                    );
                 }
                 else if (string.IsNullOrEmpty(transition.To.StateId))
                 {
-                    metadata.AddValidationError(new ValidationError(
-                        SR.StateNotBelongToAnyParent(
-                            transition.DisplayName,
-                            transition.To.DisplayName),
-                        isWarning: false,
-                        propertyName: string.Empty,
-                        sourceDetail: transition));
+                    metadata.AddValidationError(
+                        new ValidationError(
+                            SR.StateNotBelongToAnyParent(
+                                transition.DisplayName,
+                                transition.To.DisplayName
+                            ),
+                            isWarning: false,
+                            propertyName: string.Empty,
+                            sourceDetail: transition
+                        )
+                    );
                 }
 
                 Activity triggerActivity = transition.ActiveTrigger;
@@ -391,34 +444,49 @@ namespace System.Activities.Statements
                 }
             }
 
-            foreach (KeyValuePair<Activity, List<Transition>> unconditionalTransitions in unconditionalTransitionMapping)
+            foreach (
+                KeyValuePair<
+                    Activity,
+                    List<Transition>
+                > unconditionalTransitions in unconditionalTransitionMapping
+            )
             {
-                if (conditionalTransitionTriggers.Contains(unconditionalTransitions.Key) ||
-                    unconditionalTransitions.Value.Count > 1)
+                if (
+                    conditionalTransitionTriggers.Contains(unconditionalTransitions.Key)
+                    || unconditionalTransitions.Value.Count > 1
+                )
                 {
                     foreach (Transition transition in unconditionalTransitions.Value)
                     {
                         if (transition.Trigger != null)
                         {
-                            metadata.AddValidationError(new ValidationError(
-                                SR.UnconditionalTransitionShouldNotShareTriggersWithOthers(
-                                    transition.DisplayName,
-                                    currentState.DisplayName,
-                                    transition.Trigger.DisplayName),
-                                isWarning: false,
-                                propertyName: string.Empty,
-                                sourceDetail: currentState));
+                            metadata.AddValidationError(
+                                new ValidationError(
+                                    SR.UnconditionalTransitionShouldNotShareTriggersWithOthers(
+                                        transition.DisplayName,
+                                        currentState.DisplayName,
+                                        transition.Trigger.DisplayName
+                                    ),
+                                    isWarning: false,
+                                    propertyName: string.Empty,
+                                    sourceDetail: currentState
+                                )
+                            );
                         }
                         else
                         {
                             // Null Trigger
-                            metadata.AddValidationError(new ValidationError(
-                                SR.UnconditionalTransitionShouldNotShareNullTriggersWithOthers(
-                                    transition.DisplayName,
-                                    currentState.DisplayName),
-                                isWarning: false,
-                                propertyName: string.Empty,
-                                sourceDetail: currentState));
+                            metadata.AddValidationError(
+                                new ValidationError(
+                                    SR.UnconditionalTransitionShouldNotShareNullTriggersWithOthers(
+                                        transition.DisplayName,
+                                        currentState.DisplayName
+                                    ),
+                                    isWarning: false,
+                                    propertyName: string.Empty,
+                                    sourceDetail: currentState
+                                )
+                            );
                         }
                     }
                 }
@@ -444,10 +512,14 @@ namespace System.Activities.Statements
                 InternalState internalState = state.InternalState;
                 this.internalStates.Add(internalState);
 
-                DelegateInArgument<StateMachineEventManager> eventManager = new DelegateInArgument<Statements.StateMachineEventManager>();
+                DelegateInArgument<StateMachineEventManager> eventManager =
+                    new DelegateInArgument<Statements.StateMachineEventManager>();
                 internalState.EventManager = eventManager;
 
-                ActivityFunc<StateMachineEventManager, string> activityFunc = new ActivityFunc<StateMachineEventManager, string>
+                ActivityFunc<StateMachineEventManager, string> activityFunc = new ActivityFunc<
+                    StateMachineEventManager,
+                    string
+                >
                 {
                     Argument = eventManager,
                     Handler = internalState,
@@ -456,14 +528,21 @@ namespace System.Activities.Statements
                 if (state.Reachable)
                 {
                     // If this state is not reached, we should not add it as child because it's even not well validated.
-                    metadata.AddDelegate(activityFunc, /* origin = */ state);
+                    metadata.AddDelegate(
+                        activityFunc, /* origin = */
+                        state
+                    );
                 }
 
                 this.internalStateFuncs.Add(activityFunc);
             }
         }
 
-        void OnStateComplete(NativeActivityContext context, ActivityInstance completedInstance, string result)
+        void OnStateComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            string result
+        )
         {
             if (StateMachineIdHelper.IsAncestor(RootId, result))
             {
@@ -471,7 +550,8 @@ namespace System.Activities.Statements
                 context.ScheduleFunc<StateMachineEventManager, string>(
                     this.internalStateFuncs[index],
                     this.eventManager.Get(context),
-                    this.onStateComplete);
+                    this.onStateComplete
+                );
             }
         }
 
@@ -485,18 +565,29 @@ namespace System.Activities.Statements
             {
                 if (this.InitialState.IsFinal)
                 {
-                    Fx.Assert(!string.IsNullOrEmpty(this.InitialState.StateId), "StateId should have get set on the initialState.");
-                    metadata.AddValidationError(new ValidationError(
-                        SR.InitialStateCannotBeFinalState(this.InitialState.DisplayName),
-                        isWarning: false,
-                        propertyName: string.Empty,
-                        sourceDetail: this.InitialState));
+                    Fx.Assert(
+                        !string.IsNullOrEmpty(this.InitialState.StateId),
+                        "StateId should have get set on the initialState."
+                    );
+                    metadata.AddValidationError(
+                        new ValidationError(
+                            SR.InitialStateCannotBeFinalState(this.InitialState.DisplayName),
+                            isWarning: false,
+                            propertyName: string.Empty,
+                            sourceDetail: this.InitialState
+                        )
+                    );
                 }
 
                 if (!this.States.Contains(this.InitialState))
                 {
-                    Fx.Assert(string.IsNullOrEmpty(this.InitialState.StateId), "Initial state would not have an id because it is not in the States collection.");
-                    metadata.AddValidationError(SR.InitialStateNotInStatesCollection(this.InitialState.DisplayName));
+                    Fx.Assert(
+                        string.IsNullOrEmpty(this.InitialState.StateId),
+                        "Initial state would not have an id because it is not in the States collection."
+                    );
+                    metadata.AddValidationError(
+                        SR.InitialStateNotInStatesCollection(this.InitialState.DisplayName)
+                    );
                 }
             }
         }
@@ -505,7 +596,8 @@ namespace System.Activities.Statements
             Action<NativeActivityMetadata, Collection<State>> actionForStates,
             Action<NativeActivityMetadata, State> actionForTransitions,
             NativeActivityMetadata metadata,
-            bool checkReached)
+            bool checkReached
+        )
         {
             if (actionForStates != null)
             {
@@ -540,22 +632,28 @@ namespace System.Activities.Statements
                     if (string.IsNullOrEmpty(state.StateId))
                     {
                         state.StateId = StateMachineIdHelper.GenerateStateId(RootId, i);
-                        state.StateMachineName = this.DisplayName; 
+                        state.StateMachineName = this.DisplayName;
                     }
                     else
                     {
                         // the state has been makred already: a duplicate state is found
-                        metadata.AddValidationError(new ValidationError(
-                        SR.StateCannotBeAddedTwice(state.DisplayName),
-                            isWarning: false,
-                            propertyName: string.Empty,
-                            sourceDetail: state));
+                        metadata.AddValidationError(
+                            new ValidationError(
+                                SR.StateCannotBeAddedTwice(state.DisplayName),
+                                isWarning: false,
+                                propertyName: string.Empty,
+                                sourceDetail: state
+                            )
+                        );
                     }
                 }
             }
         }
 
-        void TraverseViaTransitions(Action<State> actionForState, Action<Transition> actionForTransition)
+        void TraverseViaTransitions(
+            Action<State> actionForState,
+            Action<Transition> actionForTransition
+        )
         {
             Stack<State> stack = new Stack<State>();
             stack.Push(this.InitialState);
@@ -567,7 +665,7 @@ namespace System.Activities.Statements
                 {
                     continue;
                 }
-                
+
                 currentState.PassNumber = passNumber;
 
                 if (actionForState != null)
@@ -586,10 +684,10 @@ namespace System.Activities.Statements
                 }
             }
         }
-        
+
         /// <summary>
         /// Originally, the Default value for StateMachineEventManager variable in StateMachine activity,
-        /// is initialized via a LambdaValue activity. However, PartialTrust environment does not support 
+        /// is initialized via a LambdaValue activity. However, PartialTrust environment does not support
         /// LambdaValue activity that references any local variables or non-public members.
         /// The recommended approach is to convert the LambdaValue to an equivalent internal CodeActivity.
         /// </summary>
@@ -598,21 +696,25 @@ namespace System.Activities.Statements
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
                 if (this.Result == null)
-                { 
-                    // metdata.Bind uses reflection if the argument property has a value of null. 
+                {
+                    // metdata.Bind uses reflection if the argument property has a value of null.
                     // So by forcing the argument property to have a non-null value, it avoids reflection.
                     // Otherwise it would use reflection to initializer Result and would fail Partial Trust.
                     this.Result = new OutArgument<StateMachineEventManager>();
                 }
-                
-                RuntimeArgument eventManagerArgument = new RuntimeArgument("Result", this.ResultType, ArgumentDirection.Out);
+
+                RuntimeArgument eventManagerArgument = new RuntimeArgument(
+                    "Result",
+                    this.ResultType,
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.Result, eventManagerArgument);
                 metadata.AddArgument(eventManagerArgument);
             }
-            
+
             protected override StateMachineEventManager Execute(CodeActivityContext context)
             {
-                return new StateMachineEventManager();  
+                return new StateMachineEventManager();
             }
         }
     }

@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 {
-    internal abstract partial class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+    internal abstract partial class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
+        : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
     {
         private sealed partial class SymbolStartAnalyzer
         {
@@ -64,16 +65,33 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     _referencedParameters = new ConcurrentDictionary<IParameterSymbol, bool>();
                 }
 
-                public static void Analyze(OperationBlockStartAnalysisContext context, SymbolStartAnalyzer symbolStartAnalyzer)
+                public static void Analyze(
+                    OperationBlockStartAnalysisContext context,
+                    SymbolStartAnalyzer symbolStartAnalyzer
+                )
                 {
                     if (!ShouldAnalyze(context, symbolStartAnalyzer, out var options))
                         return;
 
                     var blockAnalyzer = new BlockAnalyzer(symbolStartAnalyzer, options);
-                    context.RegisterOperationAction(blockAnalyzer.AnalyzeExpressionStatement, OperationKind.ExpressionStatement);
-                    context.RegisterOperationAction(blockAnalyzer.AnalyzeDelegateCreationOrAnonymousFunction, OperationKind.DelegateCreation, OperationKind.AnonymousFunction);
-                    context.RegisterOperationAction(blockAnalyzer.AnalyzeLocalOrParameterReference, OperationKind.LocalReference, OperationKind.ParameterReference);
-                    context.RegisterOperationAction(_ => blockAnalyzer._hasInvalidOperation = true, OperationKind.Invalid);
+                    context.RegisterOperationAction(
+                        blockAnalyzer.AnalyzeExpressionStatement,
+                        OperationKind.ExpressionStatement
+                    );
+                    context.RegisterOperationAction(
+                        blockAnalyzer.AnalyzeDelegateCreationOrAnonymousFunction,
+                        OperationKind.DelegateCreation,
+                        OperationKind.AnonymousFunction
+                    );
+                    context.RegisterOperationAction(
+                        blockAnalyzer.AnalyzeLocalOrParameterReference,
+                        OperationKind.LocalReference,
+                        OperationKind.ParameterReference
+                    );
+                    context.RegisterOperationAction(
+                        _ => blockAnalyzer._hasInvalidOperation = true,
+                        OperationKind.Invalid
+                    );
                     context.RegisterOperationBlockEndAction(blockAnalyzer.AnalyzeOperationBlockEnd);
                     return;
 
@@ -81,7 +99,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     bool ShouldAnalyze(
                         OperationBlockStartAnalysisContext context,
                         SymbolStartAnalyzer symbolStartAnalyzer,
-                        [NotNullWhen(true)] out Options? options)
+                        [NotNullWhen(true)] out Options? options
+                    )
                     {
                         options = null;
                         if (HasSyntaxErrors() || context.OperationBlocks.IsEmpty)
@@ -96,11 +115,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                         // All operation blocks for a symbol belong to the same tree.
                         var firstBlock = context.OperationBlocks[0];
-                        if (!symbolStartAnalyzer._compilationAnalyzer.TryGetOptions(firstBlock.Syntax.SyntaxTree,
-                                                                                    context.Options,
-                                                                                    context.Compilation.Options,
-                                                                                    context.CancellationToken,
-                                                                                    out options))
+                        if (
+                            !symbolStartAnalyzer._compilationAnalyzer.TryGetOptions(
+                                firstBlock.Syntax.SyntaxTree,
+                                context.Options,
+                                context.Compilation.Options,
+                                context.CancellationToken,
+                                out options
+                            )
+                        )
                         {
                             return false;
                         }
@@ -112,8 +135,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             return false;
 
                         // If we are analyzing a specific filter tree, skip operation blocks in unrelated trees.
-                        if (symbolStartAnalyzer._symbolStartAnalysisContext.FilterTree is { } filterTree &&
-                            firstBlock.Syntax.SyntaxTree != filterTree)
+                        if (
+                            symbolStartAnalyzer._symbolStartAnalysisContext.FilterTree
+                                is { } filterTree
+                            && firstBlock.Syntax.SyntaxTree != filterTree
+                        )
                         {
                             return false;
                         }
@@ -121,11 +147,23 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // If we are analyzing a specific filter span, skip operation blocks outside the filter span.
                         if (context.FilterSpan.HasValue)
                         {
-                            Contract.ThrowIfFalse(context.FilterSpan != symbolStartAnalyzer._symbolStartAnalysisContext.FilterSpan);
-                            Contract.ThrowIfNull(symbolStartAnalyzer._symbolStartAnalysisContext.FilterTree);
-                            var root = firstBlock.Syntax.SyntaxTree.GetRoot(context.CancellationToken);
+                            Contract.ThrowIfFalse(
+                                context.FilterSpan
+                                    != symbolStartAnalyzer._symbolStartAnalysisContext.FilterSpan
+                            );
+                            Contract.ThrowIfNull(
+                                symbolStartAnalyzer._symbolStartAnalysisContext.FilterTree
+                            );
+                            var root = firstBlock.Syntax.SyntaxTree.GetRoot(
+                                context.CancellationToken
+                            );
                             var spanStart = firstBlock.Syntax.SpanStart;
-                            var memberDecl = symbolStartAnalyzer._compilationAnalyzer.SyntaxFacts.GetContainingMemberDeclaration(root, spanStart, useFullSpan: false);
+                            var memberDecl =
+                                symbolStartAnalyzer._compilationAnalyzer.SyntaxFacts.GetContainingMemberDeclaration(
+                                    root,
+                                    spanStart,
+                                    useFullSpan: false
+                                );
                             if (memberDecl != null && !context.ShouldAnalyzeSpan(memberDecl.Span))
                                 return false;
                         }
@@ -137,7 +175,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     {
                         foreach (var operationBlock in context.OperationBlocks)
                         {
-                            if (operationBlock.Syntax.GetDiagnostics().ToImmutableArrayOrEmpty().HasAnyErrors())
+                            if (
+                                operationBlock
+                                    .Syntax.GetDiagnostics()
+                                    .ToImmutableArrayOrEmpty()
+                                    .HasAnyErrors()
+                            )
                                 return true;
                         }
 
@@ -148,8 +191,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     {
                         foreach (var operationBlock in context.OperationBlocks)
                         {
-                            if (operationBlock.Syntax.DescendantNodes(descendIntoTrivia: true)
-                                                     .Any(symbolStartAnalyzer._compilationAnalyzer.IsIfConditionalDirective))
+                            if (
+                                operationBlock
+                                    .Syntax.DescendantNodes(descendIntoTrivia: true)
+                                    .Any(
+                                        symbolStartAnalyzer
+                                            ._compilationAnalyzer
+                                            .IsIfConditionalDirective
+                                    )
+                            )
                             {
                                 return true;
                             }
@@ -161,7 +211,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                 private void AnalyzeExpressionStatement(OperationAnalysisContext context)
                 {
-                    if (_options.UnusedValueExpressionStatementNotification.Severity == ReportDiagnostic.Suppress)
+                    if (
+                        _options.UnusedValueExpressionStatementNotification.Severity
+                        == ReportDiagnostic.Suppress
+                    )
                     {
                         return;
                     }
@@ -172,9 +225,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // Bail out cases for report unused expression value:
 
                     //  1. Null type, error type and void returning method invocations: no value being dropped here.
-                    if (value.Type == null ||
-                        value.Type.IsErrorType() ||
-                        value.Type.SpecialType == SpecialType.System_Void)
+                    if (
+                        value.Type == null
+                        || value.Type.IsErrorType()
+                        || value.Type.SpecialType == SpecialType.System_Void
+                    )
                     {
                         return;
                     }
@@ -188,15 +243,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //  3. Bail out for semantic error (invalid operation) cases.
                     //     Also bail out for constant expressions in expression statement syntax, say as "1;",
                     //     which do not seem to have an invalid operation in the operation tree.
-                    if (value is IInvalidOperation ||
-                        value.ConstantValue.HasValue)
+                    if (value is IInvalidOperation || value.ConstantValue.HasValue)
                     {
                         return;
                     }
 
                     //  4. Assignments, increment/decrement operations: value is actually being assigned.
-                    if (value is IAssignmentOperation or
-                        IIncrementOrDecrementOperation)
+                    if (value is IAssignmentOperation or IIncrementOrDecrementOperation)
                     {
                         return;
                     }
@@ -205,40 +258,65 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //     For example, VB call statement is used to explicitly ignore the value returned by
                     //     an invocation by prefixing the invocation with keyword "Call".
                     //     Similarly, we do not want to flag an expression of a C# expression body.
-                    if (_symbolStartAnalyzer._compilationAnalyzer.IsCallStatement(expressionStatement) ||
-                        _symbolStartAnalyzer._compilationAnalyzer.IsExpressionOfExpressionBody(expressionStatement))
+                    if (
+                        _symbolStartAnalyzer._compilationAnalyzer.IsCallStatement(
+                            expressionStatement
+                        )
+                        || _symbolStartAnalyzer._compilationAnalyzer.IsExpressionOfExpressionBody(
+                            expressionStatement
+                        )
+                    )
                     {
                         return;
                     }
 
-                    var properties = s_propertiesMap[(_options.UnusedValueExpressionStatementPreference, isUnusedLocalAssignment: false, isRemovableAssignment: false)];
-                    var diagnostic = DiagnosticHelper.Create(s_expressionValueIsUnusedRule,
-                                                             value.Syntax.GetLocation(),
-                                                             _options.UnusedValueExpressionStatementNotification,
-                                                             additionalLocations: null,
-                                                             properties);
+                    var properties = s_propertiesMap[
+                        (
+                            _options.UnusedValueExpressionStatementPreference,
+                            isUnusedLocalAssignment: false,
+                            isRemovableAssignment: false
+                        )
+                    ];
+                    var diagnostic = DiagnosticHelper.Create(
+                        s_expressionValueIsUnusedRule,
+                        value.Syntax.GetLocation(),
+                        _options.UnusedValueExpressionStatementNotification,
+                        additionalLocations: null,
+                        properties
+                    );
                     context.ReportDiagnostic(diagnostic);
                 }
 
-                private void AnalyzeDelegateCreationOrAnonymousFunction(OperationAnalysisContext operationAnalysisContext)
+                private void AnalyzeDelegateCreationOrAnonymousFunction(
+                    OperationAnalysisContext operationAnalysisContext
+                )
                 {
                     _hasDelegateCreationOrAnonymousFunction = true;
                     if (!_hasDelegateEscape)
                     {
-                        _hasDelegateEscape = !IsHandledDelegateCreationOrAnonymousFunctionTreeShape(operationAnalysisContext.Operation);
+                        _hasDelegateEscape = !IsHandledDelegateCreationOrAnonymousFunctionTreeShape(
+                            operationAnalysisContext.Operation
+                        );
                     }
                 }
 
-                private void AnalyzeLocalOrParameterReference(OperationAnalysisContext operationAnalysisContext)
+                private void AnalyzeLocalOrParameterReference(
+                    OperationAnalysisContext operationAnalysisContext
+                )
                 {
-                    if (operationAnalysisContext.Operation is IParameterReferenceOperation parameterReference)
+                    if (
+                        operationAnalysisContext.Operation
+                        is IParameterReferenceOperation parameterReference
+                    )
                     {
                         _referencedParameters.GetOrAdd(parameterReference.Parameter, true);
                     }
 
                     if (!_hasDelegateEscape)
                     {
-                        _hasDelegateEscape = !IsHandledLocalOrParameterReferenceTreeShape(operationAnalysisContext.Operation);
+                        _hasDelegateEscape = !IsHandledLocalOrParameterReferenceTreeShape(
+                            operationAnalysisContext.Operation
+                        );
                     }
                 }
 
@@ -253,14 +331,20 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 /// This function checks the operation tree shape in context of
                 /// an <see cref="IDelegateCreationOperation"/> or an <see cref="IAnonymousFunctionOperation"/>.
                 /// </summary>
-                private static bool IsHandledDelegateCreationOrAnonymousFunctionTreeShape(IOperation operation)
+                private static bool IsHandledDelegateCreationOrAnonymousFunctionTreeShape(
+                    IOperation operation
+                )
                 {
-                    Debug.Assert(operation.Kind is OperationKind.DelegateCreation or OperationKind.AnonymousFunction);
+                    Debug.Assert(
+                        operation.Kind
+                            is OperationKind.DelegateCreation
+                                or OperationKind.AnonymousFunction
+                    );
 
                     // 1. Delegate creation or anonymous function variable initializer is handled.
                     //    For example, for 'Action a = () => { ... };', the lambda is the variable initializer
                     //    and we track that 'a' points to this lambda during flow analysis
-                    //    and analyze lambda body at invocation sites 'a();' 
+                    //    and analyze lambda body at invocation sites 'a();'
                     if (operation.Parent is IVariableInitializerOperation)
                     {
                         return true;
@@ -269,10 +353,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // 2. Delegate creation or anonymous function assigned to a local or parameter are handled.
                     //    For example, for 'Action a; a = () => { ... };', the lambda is assigned to local 'a'
                     //    and we track that 'a' points to this lambda during flow analysis
-                    //    and analyze lambda body at invocation sites 'a();' 
-                    if (operation.Parent is ISimpleAssignmentOperation assignment &&
-                        (assignment.Target.Kind == OperationKind.LocalReference ||
-                         assignment.Target.Kind == OperationKind.ParameterReference))
+                    //    and analyze lambda body at invocation sites 'a();'
+                    if (
+                        operation.Parent is ISimpleAssignmentOperation assignment
+                        && (
+                            assignment.Target.Kind == OperationKind.LocalReference
+                            || assignment.Target.Kind == OperationKind.ParameterReference
+                        )
+                    )
                     {
                         return true;
                     }
@@ -280,10 +368,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // 3. For anonymous functions parented by delegate creation, we analyze the parent operation.
                     //    For example, for 'Action a = () => { ... };', the lambda generates an anonymous function
                     //    operation parented by a delegate creation.
-                    if (operation.Kind == OperationKind.AnonymousFunction &&
-                        operation.Parent is IDelegateCreationOperation)
+                    if (
+                        operation.Kind == OperationKind.AnonymousFunction
+                        && operation.Parent is IDelegateCreationOperation
+                    )
                     {
-                        return IsHandledDelegateCreationOrAnonymousFunctionTreeShape(operation.Parent);
+                        return IsHandledDelegateCreationOrAnonymousFunctionTreeShape(
+                            operation.Parent
+                        );
                     }
 
                     // 4. Otherwise, conservatively consider this as an unhandled delegate escape.
@@ -302,9 +394,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 /// an <see cref="IParameterReferenceOperation"/> or an <see cref="ILocalReferenceOperation"/>
                 /// of delegate type.
                 /// </summary>
-                private static bool IsHandledLocalOrParameterReferenceTreeShape(IOperation operation)
+                private static bool IsHandledLocalOrParameterReferenceTreeShape(
+                    IOperation operation
+                )
                 {
-                    Debug.Assert(operation.Kind is OperationKind.LocalReference or OperationKind.ParameterReference);
+                    Debug.Assert(
+                        operation.Kind
+                            is OperationKind.LocalReference
+                                or OperationKind.ParameterReference
+                    );
 
                     // 1. We are only interested in parameters or locals of delegate type.
                     if (!operation.Type.IsDelegateType())
@@ -315,7 +413,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // 2. Delegate invocations are handled.
                     //    For example, for 'Action a = () => { ... };  a();'
                     //    we track that 'a' points to the lambda during flow analysis
-                    //    and analyze lambda body at invocation sites 'a();' 
+                    //    and analyze lambda body at invocation sites 'a();'
                     if (operation.Parent is IInvocationOperation)
                     {
                         return true;
@@ -326,7 +424,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // 3. Parameter/local as target of an assignment is handled.
                         //    For example, for 'a = () => { ... };  a();'
                         //    assignment of a lambda to a local/parameter 'a' is tracked during flow analysis
-                        //    and we analyze lambda body at invocation sites 'a();' 
+                        //    and we analyze lambda body at invocation sites 'a();'
                         if (assignmentOperation.Target == operation)
                         {
                             return true;
@@ -336,10 +434,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         //    assigned to some parameter or local of delegate type.
                         //    For example, for 'a = () => { ... }; b = a;  b();'
                         //    assignment of a local/parameter 'b = a' is tracked during flow analysis
-                        //    and we analyze lambda body at invocation sites 'b();' 
-                        if (assignmentOperation.Target.Type.IsDelegateType() &&
-                            (assignmentOperation.Target.Kind == OperationKind.LocalReference ||
-                            assignmentOperation.Target.Kind == OperationKind.ParameterReference))
+                        //    and we analyze lambda body at invocation sites 'b();'
+                        if (
+                            assignmentOperation.Target.Type.IsDelegateType()
+                            && (
+                                assignmentOperation.Target.Kind == OperationKind.LocalReference
+                                || assignmentOperation.Target.Kind
+                                    == OperationKind.ParameterReference
+                            )
+                        )
                         {
                             return true;
                         }
@@ -362,7 +465,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 /// Method invoked in <see cref="AnalyzeOperationBlockEnd(OperationBlockAnalysisContext)"/>
                 /// for each operation block to determine if we should analyze the operation block or bail out.
                 /// </summary>
-                private bool ShouldAnalyze(IOperation operationBlock, ISymbol owningSymbol, ref bool hasUnknownOperationNoneDescendant)
+                private bool ShouldAnalyze(
+                    IOperation operationBlock,
+                    ISymbol owningSymbol,
+                    ref bool hasUnknownOperationNoneDescendant
+                )
                 {
                     switch (operationBlock.Kind)
                     {
@@ -380,7 +487,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     // Workaround for https://github.com/dotnet/roslyn/issues/31007
                                     // We cannot perform flow analysis correctly for a ref assignment operation or ref conditional operation until this compiler feature is implemented.
                                     case IConditionalOperation conditional when conditional.IsRef:
-                                    case ISimpleAssignmentOperation assignment when assignment.IsRef:
+                                    case ISimpleAssignmentOperation assignment
+                                        when assignment.IsRef:
                                         return false;
 
                                     default:
@@ -389,7 +497,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                         if (operation.Kind == OperationKind.None)
                                         {
                                             // `nameof(SomeTypeName)` is a well-known case where operation related to `SomeTypeName` syntax is of kind `None`
-                                            hasUnknownOperationNoneDescendant = operation.Parent is not INameOfOperation;
+                                            hasUnknownOperationNoneDescendant =
+                                                operation.Parent is not INameOfOperation;
                                             return false;
                                         }
 
@@ -418,7 +527,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //  2. Bail out if we have a delegate escape via operation tree shapes that we do not understand.
                     //     This indicates the delegate targets (such as lambda/local functions) have escaped current method
                     //     and can be invoked from a separate method, and these invocations can read values written
-                    //     to any local/parameter in the current method. We cannot reliably flag any write to a 
+                    //     to any local/parameter in the current method. We cannot reliably flag any write to a
                     //     local/parameter as unused for such cases.
                     if (_hasDelegateEscape)
                     {
@@ -427,9 +536,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                     //  3. Bail out for method returning delegates or ref/out parameters of delegate type.
                     //     We can analyze this correctly when we do points-to-analysis.
-                    if (owningSymbol is IMethodSymbol method &&
-                        (method.ReturnType.IsDelegateType() ||
-                         method.Parameters.Any(static p => p.IsRefOrOut() && p.Type.IsDelegateType())))
+                    if (
+                        owningSymbol is IMethodSymbol method
+                        && (
+                            method.ReturnType.IsDelegateType()
+                            || method.Parameters.Any(static p =>
+                                p.IsRefOrOut() && p.Type.IsDelegateType()
+                            )
+                        )
+                    )
                     {
                         return false;
                     }
@@ -452,9 +567,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 private void AnalyzeOperationBlockEnd(OperationBlockAnalysisContext context)
                 {
                     // Bail out if we are neither computing unused parameters nor unused value assignments.
-                    var isComputingUnusedParams = _options.IsComputingUnusedParams(context.OwningSymbol);
-                    if (_options.UnusedValueAssignmentSeverity.Severity == ReportDiagnostic.Suppress &&
-                        !isComputingUnusedParams)
+                    var isComputingUnusedParams = _options.IsComputingUnusedParams(
+                        context.OwningSymbol
+                    );
+                    if (
+                        _options.UnusedValueAssignmentSeverity.Severity == ReportDiagnostic.Suppress
+                        && !isComputingUnusedParams
+                    )
                     {
                         return;
                     }
@@ -466,12 +585,26 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                     // Builder to store the symbol read/write usage result for each operation block computed during the first pass.
                     // These are later used to compute unused parameters in second pass.
-                    using var _ = PooledHashSet<SymbolUsageResult>.GetInstance(out var symbolUsageResultsBuilder);
+                    using var _ = PooledHashSet<SymbolUsageResult>.GetInstance(
+                        out var symbolUsageResultsBuilder
+                    );
 
-                    // Flag indicating if we found an operation block where all symbol writes were used. 
-                    AnalyzeUnusedValueAssignments(context, isComputingUnusedParams, symbolUsageResultsBuilder, out var hasBlockWithAllUsedWrites, out var hasUnknownOperationNoneDescendant);
+                    // Flag indicating if we found an operation block where all symbol writes were used.
+                    AnalyzeUnusedValueAssignments(
+                        context,
+                        isComputingUnusedParams,
+                        symbolUsageResultsBuilder,
+                        out var hasBlockWithAllUsedWrites,
+                        out var hasUnknownOperationNoneDescendant
+                    );
 
-                    AnalyzeUnusedParameters(context, isComputingUnusedParams, symbolUsageResultsBuilder, hasBlockWithAllUsedWrites, hasUnknownOperationNoneDescendant);
+                    AnalyzeUnusedParameters(
+                        context,
+                        isComputingUnusedParams,
+                        symbolUsageResultsBuilder,
+                        hasBlockWithAllUsedWrites,
+                        hasUnknownOperationNoneDescendant
+                    );
                 }
 
                 private void AnalyzeUnusedValueAssignments(
@@ -479,14 +612,21 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     bool isComputingUnusedParams,
                     PooledHashSet<SymbolUsageResult> symbolUsageResultsBuilder,
                     out bool hasBlockWithAllUsedSymbolWrites,
-                    out bool hasUnknownOperationNoneDescendant)
+                    out bool hasUnknownOperationNoneDescendant
+                )
                 {
                     hasBlockWithAllUsedSymbolWrites = false;
                     hasUnknownOperationNoneDescendant = false;
 
                     foreach (var operationBlock in context.OperationBlocks)
                     {
-                        if (!ShouldAnalyze(operationBlock, context.OwningSymbol, ref hasUnknownOperationNoneDescendant))
+                        if (
+                            !ShouldAnalyze(
+                                operationBlock,
+                                context.OwningSymbol,
+                                ref hasUnknownOperationNoneDescendant
+                            )
+                        )
                         {
                             continue;
                         }
@@ -499,12 +639,23 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // at any given program point needs needs flow analysis (second pass).
                         if (!_hasDelegateCreationOrAnonymousFunction)
                         {
-                            var resultFromOperationBlockAnalysis = SymbolUsageAnalysis.Run(operationBlock, context.OwningSymbol, context.CancellationToken);
+                            var resultFromOperationBlockAnalysis = SymbolUsageAnalysis.Run(
+                                operationBlock,
+                                context.OwningSymbol,
+                                context.CancellationToken
+                            );
                             if (!resultFromOperationBlockAnalysis.HasUnreadSymbolWrites())
                             {
                                 // Assert that even slow pass (dataflow analysis) would have yielded no unused symbol writes.
-                                Debug.Assert(!SymbolUsageAnalysis.Run(context.GetControlFlowGraph(operationBlock), context.OwningSymbol, context.CancellationToken)
-                                             .HasUnreadSymbolWrites());
+                                Debug.Assert(
+                                    !SymbolUsageAnalysis
+                                        .Run(
+                                            context.GetControlFlowGraph(operationBlock),
+                                            context.OwningSymbol,
+                                            context.CancellationToken
+                                        )
+                                        .HasUnreadSymbolWrites()
+                                );
 
                                 hasBlockWithAllUsedSymbolWrites = true;
                                 continue;
@@ -513,10 +664,19 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                         // Now perform the slower, precise, CFG based dataflow analysis to identify the actual unused symbol writes.
                         var controlFlowGraph = context.GetControlFlowGraph(operationBlock);
-                        var symbolUsageResult = SymbolUsageAnalysis.Run(controlFlowGraph, context.OwningSymbol, context.CancellationToken);
+                        var symbolUsageResult = SymbolUsageAnalysis.Run(
+                            controlFlowGraph,
+                            context.OwningSymbol,
+                            context.CancellationToken
+                        );
                         symbolUsageResultsBuilder.Add(symbolUsageResult);
 
-                        foreach (var (symbol, unreadWriteOperation) in symbolUsageResult.GetUnreadSymbolWrites())
+                        foreach (
+                            var (
+                                symbol,
+                                unreadWriteOperation
+                            ) in symbolUsageResult.GetUnreadSymbolWrites()
+                        )
                         {
                             if (unreadWriteOperation == null)
                             {
@@ -530,10 +690,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                 // However, we do report unused parameters for local function here.
                                 // Local function parameters are completely scoped to this operation block, and should be reported per-operation block.
                                 var unusedParameter = (IParameterSymbol)symbol;
-                                if (isComputingUnusedParams &&
-                                    unusedParameter.ContainingSymbol.IsLocalFunction())
+                                if (
+                                    isComputingUnusedParams
+                                    && unusedParameter.ContainingSymbol.IsLocalFunction()
+                                )
                                 {
-                                    var hasReference = symbolUsageResult.SymbolsRead.Contains(unusedParameter);
+                                    var hasReference = symbolUsageResult.SymbolsRead.Contains(
+                                        unusedParameter
+                                    );
 
                                     bool shouldReport;
                                     switch (unusedParameter.RefKind)
@@ -548,7 +712,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                         case RefKind.Ref:
                                             // Report ref parameters only if they have no read/write references.
                                             // Note that we always have one write for the parameter input value from the caller.
-                                            shouldReport = !hasReference && symbolUsageResult.GetSymbolWriteCount(unusedParameter) == 1;
+                                            shouldReport =
+                                                !hasReference
+                                                && symbolUsageResult.GetSymbolWriteCount(
+                                                    unusedParameter
+                                                ) == 1;
                                             break;
 
                                         default:
@@ -558,21 +726,38 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                                     if (shouldReport)
                                     {
-                                        _symbolStartAnalyzer.ReportUnusedParameterDiagnostic(unusedParameter, hasReference, context.ReportDiagnostic, context.Options, cancellationToken: context.CancellationToken);
+                                        _symbolStartAnalyzer.ReportUnusedParameterDiagnostic(
+                                            unusedParameter,
+                                            hasReference,
+                                            context.ReportDiagnostic,
+                                            context.Options,
+                                            cancellationToken: context.CancellationToken
+                                        );
                                     }
                                 }
 
                                 continue;
                             }
 
-                            if (ShouldReportUnusedValueDiagnostic(symbol, unreadWriteOperation, symbolUsageResult, out var properties))
+                            if (
+                                ShouldReportUnusedValueDiagnostic(
+                                    symbol,
+                                    unreadWriteOperation,
+                                    symbolUsageResult,
+                                    out var properties
+                                )
+                            )
                             {
-                                var diagnostic = DiagnosticHelper.Create(s_valueAssignedIsUnusedRule,
-                                                                         _symbolStartAnalyzer._compilationAnalyzer.GetDefinitionLocationToFade(unreadWriteOperation),
-                                                                         _options.UnusedValueAssignmentSeverity,
-                                                                         additionalLocations: null,
-                                                                         properties,
-                                                                         symbol.Name);
+                                var diagnostic = DiagnosticHelper.Create(
+                                    s_valueAssignedIsUnusedRule,
+                                    _symbolStartAnalyzer._compilationAnalyzer.GetDefinitionLocationToFade(
+                                        unreadWriteOperation
+                                    ),
+                                    _options.UnusedValueAssignmentSeverity,
+                                    additionalLocations: null,
+                                    properties,
+                                    symbol.Name
+                                );
                                 context.ReportDiagnostic(diagnostic);
                             }
                         }
@@ -585,7 +770,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         ISymbol symbol,
                         IOperation unreadWriteOperation,
                         SymbolUsageResult resultFromFlowAnalysis,
-                        out ImmutableDictionary<string, string?>? properties)
+                        out ImmutableDictionary<string, string?>? properties
+                    )
                     {
                         Debug.Assert(symbol is not ILocalSymbol local || !local.IsRef);
 
@@ -597,48 +783,73 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         //   3. Static local symbols. Assignment to static locals
                         //      is not unnecessary as the assigned value can be used on the next invocation.
                         //   4. Ignore special discard symbol names (see https://github.com/dotnet/roslyn/issues/32923).
-                        if (_options.UnusedValueAssignmentSeverity.Severity == ReportDiagnostic.Suppress ||
-                            symbol.GetSymbolType().IsErrorType() ||
-                            (symbol.IsStatic && symbol.Kind == SymbolKind.Local) ||
-                            symbol.IsSymbolWithSpecialDiscardName())
+                        if (
+                            _options.UnusedValueAssignmentSeverity.Severity
+                                == ReportDiagnostic.Suppress
+                            || symbol.GetSymbolType().IsErrorType()
+                            || (symbol.IsStatic && symbol.Kind == SymbolKind.Local)
+                            || symbol.IsSymbolWithSpecialDiscardName()
+                        )
                         {
                             return false;
                         }
 
                         // Flag to indicate if the symbol has no reads.
-                        var isUnusedLocalAssignment = symbol is ILocalSymbol localSymbol &&
-                                                      !resultFromFlowAnalysis.SymbolsRead.Contains(localSymbol);
+                        var isUnusedLocalAssignment =
+                            symbol is ILocalSymbol localSymbol
+                            && !resultFromFlowAnalysis.SymbolsRead.Contains(localSymbol);
 
-                        var isRemovableAssignment = IsRemovableAssignmentWithoutSideEffects(unreadWriteOperation);
+                        var isRemovableAssignment = IsRemovableAssignmentWithoutSideEffects(
+                            unreadWriteOperation
+                        );
 
-                        if (isUnusedLocalAssignment &&
-                            !isRemovableAssignment &&
-                            _options.UnusedValueAssignmentPreference == UnusedValuePreference.UnusedLocalVariable)
+                        if (
+                            isUnusedLocalAssignment
+                            && !isRemovableAssignment
+                            && _options.UnusedValueAssignmentPreference
+                                == UnusedValuePreference.UnusedLocalVariable
+                        )
                         {
                             // Meets current user preference of using unused local symbols for storing computation result.
                             // Skip reporting diagnostic.
                             return false;
                         }
 
-                        properties = s_propertiesMap[(_options.UnusedValueAssignmentPreference, isUnusedLocalAssignment, isRemovableAssignment)];
+                        properties = s_propertiesMap[
+                            (
+                                _options.UnusedValueAssignmentPreference,
+                                isUnusedLocalAssignment,
+                                isRemovableAssignment
+                            )
+                        ];
                         return true;
                     }
 
                     // Indicates if the given unused symbol write is a removable assignment.
                     // This is true if the expression for the assigned value has no side effects.
-                    bool IsRemovableAssignmentWithoutSideEffects(IOperation unusedSymbolWriteOperation)
+                    bool IsRemovableAssignmentWithoutSideEffects(
+                        IOperation unusedSymbolWriteOperation
+                    )
                     {
-                        if (_symbolStartAnalyzer._compilationAnalyzer.ShouldBailOutFromRemovableAssignmentAnalysis(unusedSymbolWriteOperation))
+                        if (
+                            _symbolStartAnalyzer._compilationAnalyzer.ShouldBailOutFromRemovableAssignmentAnalysis(
+                                unusedSymbolWriteOperation
+                            )
+                        )
                         {
                             return false;
                         }
 
-                        if (unusedSymbolWriteOperation.Parent is IAssignmentOperation assignment &&
-                            assignment.Target == unusedSymbolWriteOperation)
+                        if (
+                            unusedSymbolWriteOperation.Parent is IAssignmentOperation assignment
+                            && assignment.Target == unusedSymbolWriteOperation
+                        )
                         {
                             return IsRemovableAssignmentValueWithoutSideEffects(assignment.Value);
                         }
-                        else if (unusedSymbolWriteOperation.Parent is IIncrementOrDecrementOperation)
+                        else if (
+                            unusedSymbolWriteOperation.Parent is IIncrementOrDecrementOperation
+                        )
                         {
                             // As the new value assigned to the incremented/decremented variable is unused,
                             // it is safe to remove the entire increment/decrement operation,
@@ -650,7 +861,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         return false;
                     }
 
-                    static bool IsRemovableAssignmentValueWithoutSideEffects(IOperation assignmentValue)
+                    static bool IsRemovableAssignmentValueWithoutSideEffects(
+                        IOperation assignmentValue
+                    )
                     {
                         if (assignmentValue.ConstantValue.HasValue)
                         {
@@ -669,7 +882,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                 // Field references with null instance (static fields) or 'this' or 'Me' instance can
                                 // have no side effects and can be removed.
                                 var fieldReference = (IFieldReferenceOperation)assignmentValue;
-                                return fieldReference.Instance == null || fieldReference.Instance.Kind == OperationKind.InstanceReference;
+                                return fieldReference.Instance == null
+                                    || fieldReference.Instance.Kind
+                                        == OperationKind.InstanceReference;
 
                             case OperationKind.DefaultValue:
                                 // Default value expressions have no side-effects.
@@ -680,8 +895,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                 // However, for all practical purposes, we can assume that a non-user defined conversion whose operand
                                 // has no side effects can be safely removed.
                                 var conversion = (IConversionOperation)assignmentValue;
-                                return conversion.OperatorMethod == null &&
-                                    IsRemovableAssignmentValueWithoutSideEffects(conversion.Operand);
+                                return conversion.OperatorMethod == null
+                                    && IsRemovableAssignmentValueWithoutSideEffects(
+                                        conversion.Operand
+                                    );
                         }
 
                         // Assume all other operations can have side effects, and cannot be removed.
@@ -694,7 +911,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     bool isComputingUnusedParams,
                     PooledHashSet<SymbolUsageResult> symbolUsageResultsBuilder,
                     bool hasBlockWithAllUsedSymbolWrites,
-                    bool hasUnknownOperationNoneDescendant)
+                    bool hasUnknownOperationNoneDescendant
+                )
                 {
                     // Process parameters for the context's OwningSymbol that are unused across all operation blocks.
 
@@ -756,9 +974,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                             // Ref/Out parameters are considered used if they have any reads or writes
                             // Note that we always have one write for the parameter input value from the caller.
-                            if (isRefOrOutParam &&
-                                (isSymbolRead ||
-                                symbolUsageResult.GetSymbolWriteCount(parameter) > 1))
+                            if (
+                                isRefOrOutParam
+                                && (
+                                    isSymbolRead
+                                    || symbolUsageResult.GetSymbolWriteCount(parameter) > 1
+                                )
+                            )
                             {
                                 isUsed = true;
                                 break;
@@ -768,8 +990,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         if (!isUsed)
                         {
                             // Mark if the symbol's value is read or the symbol is referenced to ensure appropriate diagnostic message is given.
-                            _symbolStartAnalyzer._unusedParameters[parameter] = isSymbolRead ||
-                                _referencedParameters.ContainsKey(parameter);
+                            _symbolStartAnalyzer._unusedParameters[parameter] =
+                                isSymbolRead || _referencedParameters.ContainsKey(parameter);
                         }
                     }
                 }

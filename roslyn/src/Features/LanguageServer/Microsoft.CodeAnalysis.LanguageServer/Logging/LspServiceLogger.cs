@@ -18,18 +18,27 @@ internal sealed class LspServiceLogger : ILspServiceLogger
         _hostLogger = hostLogger;
     }
 
-    public void LogEndContext(string message, params object[] @params) => _hostLogger.LogDebug($"[{DateTime.UtcNow:hh:mm:ss.fff}][End]{message}", @params);
+    public void LogEndContext(string message, params object[] @params) =>
+        _hostLogger.LogDebug($"[{DateTime.UtcNow:hh:mm:ss.fff}][End]{message}", @params);
 
-    public void LogError(string message, params object[] @params) => _hostLogger.LogError(message, @params);
+    public void LogError(string message, params object[] @params) =>
+        _hostLogger.LogError(message, @params);
 
-    public void LogException(Exception exception, string? message = null, params object[] @params) => _hostLogger.LogError(exception, message, @params);
+    public void LogException(
+        Exception exception,
+        string? message = null,
+        params object[] @params
+    ) => _hostLogger.LogError(exception, message, @params);
 
     /// <summary>
     /// TODO - This should call LogInformation, however we need to introduce a LogDebug call in clasp first.
     /// </summary>
-    public void LogInformation(string message, params object[] @params) => _hostLogger.LogDebug(message, @params);
+    public void LogInformation(string message, params object[] @params) =>
+        _hostLogger.LogDebug(message, @params);
 
-    public void LogStartContext(string message, params object[] @params) => _hostLogger.LogDebug($"[{DateTime.UtcNow:hh:mm:ss.fff}][Start]{message}", @params);
+    public void LogStartContext(string message, params object[] @params) =>
+        _hostLogger.LogDebug($"[{DateTime.UtcNow:hh:mm:ss.fff}][Start]{message}", @params);
 
-    public void LogWarning(string message, params object[] @params) => _hostLogger.LogWarning(message, @params);
+    public void LogWarning(string message, params object[] @params) =>
+        _hostLogger.LogWarning(message, @params);
 }

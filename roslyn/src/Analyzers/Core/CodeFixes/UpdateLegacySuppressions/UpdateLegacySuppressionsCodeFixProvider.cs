@@ -17,38 +17,70 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.UpdateLegacySuppressions), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.UpdateLegacySuppressions
+        ),
+        Shared
+    ]
     internal sealed class UpdateLegacySuppressionsCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UpdateLegacySuppressionsCodeFixProvider()
-        {
-        }
+        public UpdateLegacySuppressionsCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.LegacyFormatSuppressMessageAttributeDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                IDEDiagnosticIds.LegacyFormatSuppressMessageAttributeDiagnosticId
+            );
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context
+                .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in context.Diagnostics)
             {
-                if (diagnostic.Properties?.ContainsKey(AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey) == true &&
-                    root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true) != null)
+                if (
+                    diagnostic.Properties?.ContainsKey(
+                        AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
+                    ) == true
+                    && root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true)
+                        != null
+                )
                 {
-                    RegisterCodeFix(context, CodeFixesResources.Update_suppression_format, nameof(CodeFixesResources.Update_suppression_format));
+                    RegisterCodeFix(
+                        context,
+                        CodeFixesResources.Update_suppression_format,
+                        nameof(CodeFixesResources.Update_suppression_format)
+                    );
                 }
             }
         }
 
-        protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor.OriginalRoot.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
-                var newDocCommentId = diagnostic.Properties[AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey];
-                editor.ReplaceNode(node, editor.Generator.LiteralExpression(newDocCommentId).WithTriviaFrom(node));
+                var node = editor.OriginalRoot.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
+                var newDocCommentId = diagnostic.Properties[
+                    AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
+                ];
+                editor.ReplaceNode(
+                    node,
+                    editor.Generator.LiteralExpression(newDocCommentId).WithTriviaFrom(node)
+                );
             }
 
             return Task.CompletedTask;

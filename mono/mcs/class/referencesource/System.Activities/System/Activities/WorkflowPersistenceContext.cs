@@ -5,20 +5,22 @@
 namespace System.Activities
 {
     using System.Collections.Generic;
-    using System.Transactions;
     using System.Runtime;
+    using System.Transactions;
 
     class WorkflowPersistenceContext
     {
         CommittableTransaction contextOwnedTransaction;
-        Transaction clonedTransaction;        
+        Transaction clonedTransaction;
 
         public WorkflowPersistenceContext(bool transactionRequired, TimeSpan transactionTimeout)
-            : this(transactionRequired, CloneAmbientTransaction(), transactionTimeout)
-        {
-        }
+            : this(transactionRequired, CloneAmbientTransaction(), transactionTimeout) { }
 
-        public WorkflowPersistenceContext(bool transactionRequired, Transaction transactionToUse, TimeSpan transactionTimeout)
+        public WorkflowPersistenceContext(
+            bool transactionRequired,
+            Transaction transactionToUse,
+            TimeSpan transactionTimeout
+        )
         {
             if (transactionToUse != null)
             {
@@ -34,11 +36,8 @@ namespace System.Activities
 
         public Transaction PublicTransaction
         {
-            get
-            {
-                return this.clonedTransaction;
-            }
-        }       
+            get { return this.clonedTransaction; }
+        }
 
         public void Abort()
         {
@@ -61,12 +60,12 @@ namespace System.Activities
         }
 
         public void Complete()
-        {            
+        {
             if (this.contextOwnedTransaction != null)
             {
                 this.contextOwnedTransaction.Commit();
             }
-        }        
+        }
 
         // Returns true if end needs to be called
         // Note: this is side effecting even if it returns false
@@ -75,7 +74,7 @@ namespace System.Activities
             // In the interest of allocating less objects we don't implement
             // the full async pattern here.  Instead, we've flattened it to
             // do the sync part and then optionally delegate down to the inner
-            // BeginCommit.            
+            // BeginCommit.
 
             if (this.contextOwnedTransaction != null)
             {
@@ -91,7 +90,10 @@ namespace System.Activities
 
         public void EndComplete(IAsyncResult result)
         {
-            Fx.Assert(this.contextOwnedTransaction != null, "We must have a contextOwnedTransaction if we are calling End");
+            Fx.Assert(
+                this.contextOwnedTransaction != null,
+                "We must have a contextOwnedTransaction if we are calling End"
+            );
 
             this.contextOwnedTransaction.EndCommit(result);
         }

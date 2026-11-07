@@ -47,13 +47,18 @@ namespace Microsoft.CodeAnalysis.Text
                 // check span is start of line
                 if (span.Start > 0 && !TextUtilities.IsAnyLineBreakCharacter(text[span.Start - 1]))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(span), CodeAnalysisResources.SpanDoesNotIncludeStartOfLine);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(span),
+                        CodeAnalysisResources.SpanDoesNotIncludeStartOfLine
+                    );
                 }
 
                 bool endIncludesLineBreak = false;
                 if (span.End > span.Start)
                 {
-                    endIncludesLineBreak = TextUtilities.IsAnyLineBreakCharacter(text[span.End - 1]);
+                    endIncludesLineBreak = TextUtilities.IsAnyLineBreakCharacter(
+                        text[span.End - 1]
+                    );
                 }
 
                 if (!endIncludesLineBreak && span.End < text.Length)
@@ -70,7 +75,10 @@ namespace Microsoft.CodeAnalysis.Text
                 // check end of span is at end of line
                 if (span.End < text.Length && !endIncludesLineBreak)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(span), CodeAnalysisResources.SpanDoesNotIncludeEndOfLine);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(span),
+                        CodeAnalysisResources.SpanDoesNotIncludeEndOfLine
+                    );
                 }
 
                 return new TextLine(text, span.Start, span.End);
@@ -94,10 +102,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         public int LineNumber
         {
-            get
-            {
-                return _text?.Lines.IndexOf(_start) ?? 0;
-            }
+            get { return _text?.Lines.IndexOf(_start) ?? 0; }
         }
 
         /// <summary>
@@ -127,7 +132,12 @@ namespace Microsoft.CodeAnalysis.Text
 
                 int startLineBreak;
                 int lineBreakLength;
-                TextUtilities.GetStartAndLengthOfLineBreakEndingAt(_text, _endIncludingBreaks - 1, out startLineBreak, out lineBreakLength);
+                TextUtilities.GetStartAndLengthOfLineBreakEndingAt(
+                    _text,
+                    _endIncludingBreaks - 1,
+                    out startLineBreak,
+                    out lineBreakLength
+                );
                 return lineBreakLength;
             }
         }

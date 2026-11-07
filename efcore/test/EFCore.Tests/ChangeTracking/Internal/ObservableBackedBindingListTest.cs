@@ -24,15 +24,7 @@ public class ObservableBackedBindingListTest
     public void Items_removed_from_ObservableCollection_are_removed_from_binding_list()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         oc.Remove(item);
@@ -45,15 +37,7 @@ public class ObservableBackedBindingListTest
     public void Items_replaced_in_the_ObservableCollection_are_replaced_in_the_binding_list()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         var newItem = new ListElement(-4);
@@ -67,15 +51,7 @@ public class ObservableBackedBindingListTest
     [ConditionalFact]
     public void Items_cleared_in_the_ObservableCollection_are_cleared_in_the_binding_list()
     {
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, 4, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         oc.Clear();
@@ -87,15 +63,7 @@ public class ObservableBackedBindingListTest
     public void Adding_duplicate_item_to_the_ObservableCollection_adds_duplicate_to_the_binding_list()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         oc.Add(item);
@@ -156,15 +124,7 @@ public class ObservableBackedBindingListTest
     public void Items_set_in_the_binding_list_are_replaced_in_the_ObservableCollection()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         var newItem = new ListElement(7);
@@ -178,15 +138,7 @@ public class ObservableBackedBindingListTest
     public void Items_removed_from_the_binding_list_are_removed_from_the_ObservableCollection()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         obbl.Remove(item);
@@ -198,15 +150,7 @@ public class ObservableBackedBindingListTest
     public void Items_removed_by_index_from_the_binding_list_are_removed_from_the_ObservableCollection()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         obbl.RemoveAt(2);
@@ -217,15 +161,7 @@ public class ObservableBackedBindingListTest
     [ConditionalFact]
     public void Items_cleared_from_the_binding_list_are_cleared_from_the_ObservableCollection()
     {
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, 4, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         obbl.Clear();
@@ -237,15 +173,7 @@ public class ObservableBackedBindingListTest
     public void Adding_duplicate_item_to_the_binding_list_adds_duplicate_to_the_ObservableCollection()
     {
         var item = new ListElement(4);
-        var oc = new ObservableCollection<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableCollection<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc) { item };
 
         Assert.Equal(7, oc.Count);
@@ -294,15 +222,7 @@ public class ObservableBackedBindingListTest
     public void Items_removed_from_ObservableHashSet_are_removed_from_binding_list()
     {
         var item = new ListElement(4);
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         oc.Remove(item);
@@ -314,15 +234,7 @@ public class ObservableBackedBindingListTest
     [ConditionalFact]
     public void Items_cleared_in_the_ObservableHashSet_are_cleared_in_the_binding_list()
     {
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, 4, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         oc.Clear();
@@ -334,15 +246,7 @@ public class ObservableBackedBindingListTest
     public void Adding_duplicate_item_to_the_ObservableHashSet_is_ignored()
     {
         var item = new ListElement(4);
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         oc.Add(item);
@@ -403,15 +307,7 @@ public class ObservableBackedBindingListTest
     public void Items_set_in_the_binding_list_are_replaced_in_the_ObservableHashSet()
     {
         var item = new ListElement(4);
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         var newItem = new ListElement(7);
@@ -425,15 +321,7 @@ public class ObservableBackedBindingListTest
     public void Items_removed_from_the_binding_list_are_removed_from_the_ObservableHashSet()
     {
         var item = new ListElement(4);
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         obbl.Remove(item);
@@ -445,15 +333,7 @@ public class ObservableBackedBindingListTest
     public void Items_removed_by_index_from_the_binding_list_are_removed_from_the_ObservableHashSet()
     {
         var item = new ListElement(4);
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         obbl.RemoveAt(2);
@@ -464,15 +344,7 @@ public class ObservableBackedBindingListTest
     [ConditionalFact]
     public void Items_cleared_from_the_binding_list_are_cleared_from_the_ObservableHashSet()
     {
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, 4, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc);
 
         obbl.Clear();
@@ -484,15 +356,7 @@ public class ObservableBackedBindingListTest
     public void Adding_duplicate_item_to_the_binding_list_is_ignored()
     {
         var item = new ListElement(4);
-        var oc = new ObservableHashSet<ListElement>
-        {
-            3,
-            1,
-            item,
-            1,
-            5,
-            9
-        };
+        var oc = new ObservableHashSet<ListElement> { 3, 1, item, 1, 5, 9 };
         var obbl = new ObservableBackedBindingList<ListElement>(oc) { item };
 
         Assert.Equal(6, oc.Count);
@@ -513,8 +377,7 @@ public class ObservableBackedBindingListTest
     }
 
     [ConditionalFact]
-    public void
-        Attempt_to_AddNew_on_set_for_type_without_parameterless_constructor_works_if_AddingNew_event_is_used_to_create_new_object()
+    public void Attempt_to_AddNew_on_set_for_type_without_parameterless_constructor_works_if_AddingNew_event_is_used_to_create_new_object()
     {
         var obbl = new ObservableBackedBindingList<NotXText>(new ObservableHashSet<NotXText>());
         var item = new NotXText("Some Value");
@@ -528,9 +391,7 @@ public class ObservableBackedBindingListTest
 
     private class ListElement
     {
-        public ListElement()
-        {
-        }
+        public ListElement() { }
 
         public ListElement(int i)
         {
@@ -542,8 +403,7 @@ public class ObservableBackedBindingListTest
             ByteArray = new[] { (byte)i, (byte)i, (byte)i, (byte)i };
         }
 
-        public static implicit operator ListElement(int i)
-            => new(i);
+        public static implicit operator ListElement(int i) => new(i);
 
         public int Int { get; }
         public int? NullableInt { get; }
@@ -552,13 +412,11 @@ public class ObservableBackedBindingListTest
         public Random Random { get; }
         public byte[] ByteArray { get; }
 
-        public static PropertyDescriptor Property(string name)
-            => TypeDescriptor.GetProperties(typeof(ListElement))[name];
+        public static PropertyDescriptor Property(string name) =>
+            TypeDescriptor.GetProperties(typeof(ListElement))[name];
     }
 
-    private abstract class NotXNode
-    {
-    }
+    private abstract class NotXNode { }
 
     private class NotXText : NotXNode
     {

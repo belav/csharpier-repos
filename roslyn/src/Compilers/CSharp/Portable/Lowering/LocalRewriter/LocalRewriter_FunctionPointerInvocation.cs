@@ -11,14 +11,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        public override BoundNode? VisitFunctionPointerInvocation(BoundFunctionPointerInvocation node)
+        public override BoundNode? VisitFunctionPointerInvocation(
+            BoundFunctionPointerInvocation node
+        )
         {
             var rewrittenExpression = VisitExpression(node.InvokedExpression);
             Debug.Assert(rewrittenExpression != null);
 
             // There are target types so we can have handler conversions, but there are no attributes so contexts cannot
             // be involved.
-            AssertNoImplicitInterpolatedStringHandlerConversions(node.Arguments, allowConversionsWithNoContext: true);
+            AssertNoImplicitInterpolatedStringHandlerConversions(
+                node.Arguments,
+                allowConversionsWithNoContext: true
+            );
             MethodSymbol functionPointer = node.FunctionPointer.Signature;
             var argumentRefKindsOpt = node.ArgumentRefKindsOpt;
             BoundExpression? discardedReceiver = null;
@@ -31,13 +36,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default,
                 argumentRefKindsOpt: argumentRefKindsOpt,
                 storesOpt: null,
-                ref temps);
+                ref temps
+            );
 
             Debug.Assert(discardedReceiver is null);
 
-            if (node.InterceptableNameSyntax is { } nameSyntax && this._compilation.TryGetInterceptor(nameSyntax.Location) is var (attributeLocation, _))
+            if (
+                node.InterceptableNameSyntax is { } nameSyntax
+                && this._compilation.TryGetInterceptor(nameSyntax.Location)
+                    is var (attributeLocation, _)
+            )
             {
-                this._diagnostics.Add(ErrorCode.ERR_InterceptableMethodMustBeOrdinary, attributeLocation, nameSyntax.Identifier.ValueText);
+                this._diagnostics.Add(
+                    ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
+                    attributeLocation,
+                    nameSyntax.Identifier.ValueText
+                );
             }
 
             rewrittenArgs = MakeArguments(
@@ -47,9 +61,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default,
                 ref argumentRefKindsOpt,
                 ref temps,
-                invokedAsExtensionMethod: false);
+                invokedAsExtensionMethod: false
+            );
 
-            BoundExpression rewrittenInvocation = node.Update(rewrittenExpression, rewrittenArgs, argumentRefKindsOpt, node.ResultKind, node.Type);
+            BoundExpression rewrittenInvocation = node.Update(
+                rewrittenExpression,
+                rewrittenArgs,
+                argumentRefKindsOpt,
+                node.ResultKind,
+                node.Type
+            );
 
             if (temps.Count == 0)
             {
@@ -57,12 +78,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                rewrittenInvocation = new BoundSequence(rewrittenInvocation.Syntax, temps.ToImmutableAndFree(), sideEffects: ImmutableArray<BoundExpression>.Empty, rewrittenInvocation, node.Type);
+                rewrittenInvocation = new BoundSequence(
+                    rewrittenInvocation.Syntax,
+                    temps.ToImmutableAndFree(),
+                    sideEffects: ImmutableArray<BoundExpression>.Empty,
+                    rewrittenInvocation,
+                    node.Type
+                );
             }
 
             if (Instrument)
             {
-                rewrittenInvocation = Instrumenter.InstrumentFunctionPointerInvocation(node, rewrittenInvocation);
+                rewrittenInvocation = Instrumenter.InstrumentFunctionPointerInvocation(
+                    node,
+                    rewrittenInvocation
+                );
             }
 
             return rewrittenInvocation;

@@ -12,8 +12,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Assert(expr != null);
 
-            if (expr is ExprCall pCall && pCall.MemberGroup.OptionalObject == null
-                && (pCall.MethWithInst?.Meth().IsNullableConstructor() ?? false))
+            if (
+                expr is ExprCall pCall
+                && pCall.MemberGroup.OptionalObject == null
+                && (pCall.MethWithInst?.Meth().IsNullableConstructor() ?? false)
+            )
             {
                 call = pCall;
                 return true;
@@ -69,7 +72,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol meth = PredefinedMembers.GetMethod(PREDEFMETH.PM_G_OPTIONAL_CTOR);
             MethWithInst methwithinst = new MethWithInst(meth, pSourceType, TypeArray.Empty);
             ExprMemberGroup memgroup = ExprFactory.CreateMemGroup(null, methwithinst);
-            return ExprFactory.CreateCall(EXPRFLAG.EXF_NEWOBJCALL | EXPRFLAG.EXF_CANTBENULL, pNubSourceType, exprSrc, memgroup, methwithinst);
+            return ExprFactory.CreateCall(
+                EXPRFLAG.EXF_NEWOBJCALL | EXPRFLAG.EXF_CANTBENULL,
+                pNubSourceType,
+                exprSrc,
+                memgroup,
+                methwithinst
+            );
         }
     }
 }

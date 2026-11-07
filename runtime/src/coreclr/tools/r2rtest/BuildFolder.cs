@@ -11,10 +11,7 @@ namespace R2RTest
 {
     public class BuildFolder
     {
-        private static string[] s_runtimeExecutables =
-        {
-            "corerun"
-        };
+        private static string[] s_runtimeExecutables = { "corerun" };
 
         private static string[] s_runtimeLibraries =
         {
@@ -24,10 +21,7 @@ namespace R2RTest
             "mscordbi",
         };
 
-        private static string[] s_runtimeWindowsOnlyLibraries =
-        {
-            "mscorrc",
-        };
+        private static string[] s_runtimeWindowsOnlyLibraries = { "mscorrc" };
 
         private List<string> _compilationInputFiles;
 
@@ -52,7 +46,8 @@ namespace R2RTest
             IEnumerable<CompilerRunner> compilerRunners,
             string inputFolder,
             string outputFolder,
-            BuildOptions options)
+            BuildOptions options
+        )
         {
             _compilationInputFiles = compilationInputFiles;
             _mainExecutables = mainExecutables;
@@ -68,8 +63,17 @@ namespace R2RTest
                 ProcessInfo[] fileCompilations = new ProcessInfo[(int)CompilerIndex.Count];
                 foreach (CompilerRunner runner in compilerRunners)
                 {
-                    string outputFile = runner.GetOutputFileName(_outputFolder, "composite-r2r.dll");
-                    ProcessInfo compilationProcess = new ProcessInfo(new CompilationProcessConstructor(runner, outputFile, _compilationInputFiles));
+                    string outputFile = runner.GetOutputFileName(
+                        _outputFolder,
+                        "composite-r2r.dll"
+                    );
+                    ProcessInfo compilationProcess = new ProcessInfo(
+                        new CompilationProcessConstructor(
+                            runner,
+                            outputFile,
+                            _compilationInputFiles
+                        )
+                    );
                     fileCompilations[(int)runner.Index] = compilationProcess;
                 }
                 _compilations.Add(fileCompilations);
@@ -82,7 +86,13 @@ namespace R2RTest
                     foreach (CompilerRunner runner in compilerRunners)
                     {
                         string outputFile = runner.GetOutputFileName(_outputFolder, file);
-                        ProcessInfo compilationProcess = new ProcessInfo(new CompilationProcessConstructor(runner, outputFile, new string[] { file }));
+                        ProcessInfo compilationProcess = new ProcessInfo(
+                            new CompilationProcessConstructor(
+                                runner,
+                                outputFile,
+                                new string[] { file }
+                            )
+                        );
                         fileCompilations[(int)runner.Index] = compilationProcess;
                     }
                     _compilations.Add(fileCompilations);
@@ -98,18 +108,36 @@ namespace R2RTest
 
                     foreach (CompilerRunner runner in compilerRunners)
                     {
-                        HashSet<string> modules = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                        HashSet<string> folders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                        HashSet<string> modules = new HashSet<string>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
+                        HashSet<string> folders = new HashSet<string>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
 
                         modules.Add(runner.GetOutputFileName(_outputFolder, script));
                         modules.UnionWith(_compilationInputFiles);
-                        modules.UnionWith(_compilationInputFiles.Select(file => runner.GetOutputFileName(_outputFolder, file)));
+                        modules.UnionWith(
+                            _compilationInputFiles.Select(file =>
+                                runner.GetOutputFileName(_outputFolder, file)
+                            )
+                        );
                         folders.Add(Path.GetDirectoryName(script));
                         folders.UnionWith(runner.ReferenceFolders);
 
-                        ProcessConstructor constructor = new ScriptExecutionProcessConstructor(runner, _outputFolder, script, modules, folders);
+                        ProcessConstructor constructor = new ScriptExecutionProcessConstructor(
+                            runner,
+                            _outputFolder,
+                            script,
+                            modules,
+                            folders
+                        );
                         ProcessInfo[] iterations = new ProcessInfo[options.Iterations];
-                        for (int iterationIndex = 0; iterationIndex < options.Iterations; iterationIndex++)
+                        for (
+                            int iterationIndex = 0;
+                            iterationIndex < options.Iterations;
+                            iterationIndex++
+                        )
                         {
                             iterations[iterationIndex] = new ProcessInfo(constructor);
                         }
@@ -120,25 +148,40 @@ namespace R2RTest
             }
         }
 
-        public static BuildFolder FromDirectory(string inputDirectory, IEnumerable<CompilerRunner> compilerRunners, string outputRoot, BuildOptions options)
+        public static BuildFolder FromDirectory(
+            string inputDirectory,
+            IEnumerable<CompilerRunner> compilerRunners,
+            string outputRoot,
+            BuildOptions options
+        )
         {
             List<string> compilationInputFiles = new List<string>();
             HashSet<string> passThroughFiles = new HashSet<string>();
             List<string> mainExecutables = new List<string>();
             List<string> executionScripts = new List<string>();
 
-            string scriptExtension = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".cmd" : ".sh");
+            string scriptExtension = (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".cmd" : ".sh"
+            );
 
             // Copy unmanaged files (runtime, native dependencies, resources, etc)
-            foreach (string file in Directory.EnumerateFiles(inputDirectory, options.InputFileSearchString ?? "*"))
+            foreach (
+                string file in Directory.EnumerateFiles(
+                    inputDirectory,
+                    options.InputFileSearchString ?? "*"
+                )
+            )
             {
                 bool isManagedAssembly = ComputeManagedAssemblies.IsManaged(file);
                 if (isManagedAssembly)
                 {
                     compilationInputFiles.Add(file);
                 }
-                if ((!isManagedAssembly || options.Composite) &&
-                    (Path.GetExtension(file) != ".pdb") && (Path.GetExtension(file) != ".ilk")) // exclude .pdb and .ilk files that are large and not needed in the target folder
+                if (
+                    (!isManagedAssembly || options.Composite)
+                    && (Path.GetExtension(file) != ".pdb")
+                    && (Path.GetExtension(file) != ".ilk")
+                ) // exclude .pdb and .ilk files that are large and not needed in the target folder
                 {
                     passThroughFiles.Add(file);
                 }
@@ -165,24 +208,43 @@ namespace R2RTest
                 // instead of the rewritten ones next to the app.
                 foreach (string exe in s_runtimeExecutables)
                 {
-                    passThroughFiles.Add(Path.Combine(options.CoreRootDirectory.FullName, exe.AppendOSExeSuffix()));
+                    passThroughFiles.Add(
+                        Path.Combine(options.CoreRootDirectory.FullName, exe.AppendOSExeSuffix())
+                    );
                 }
-                string libraryPrefix = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "" : "lib");
+                string libraryPrefix = (
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "" : "lib"
+                );
                 foreach (string lib in s_runtimeLibraries)
                 {
-                    passThroughFiles.Add(Path.Combine(options.CoreRootDirectory.FullName, (libraryPrefix + lib).AppendOSDllSuffix()));
+                    passThroughFiles.Add(
+                        Path.Combine(
+                            options.CoreRootDirectory.FullName,
+                            (libraryPrefix + lib).AppendOSDllSuffix()
+                        )
+                    );
                 }
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     foreach (string lib in s_runtimeWindowsOnlyLibraries)
                     {
-                        passThroughFiles.Add(Path.Combine(options.CoreRootDirectory.FullName, lib.AppendOSDllSuffix()));
+                        passThroughFiles.Add(
+                            Path.Combine(
+                                options.CoreRootDirectory.FullName,
+                                lib.AppendOSDllSuffix()
+                            )
+                        );
                     }
                 }
                 else
                 {
                     // Several native lib*.so / dylib are needed by the runtime
-                    foreach (string nativeLib in Directory.EnumerateFiles(options.CoreRootDirectory.FullName, "lib*".AppendOSDllSuffix()))
+                    foreach (
+                        string nativeLib in Directory.EnumerateFiles(
+                            options.CoreRootDirectory.FullName,
+                            "lib*".AppendOSDllSuffix()
+                        )
+                    )
                     {
                         passThroughFiles.Add(nativeLib);
                     }
@@ -202,20 +264,46 @@ namespace R2RTest
                 }
             }
 
-            return new BuildFolder(compilationInputFiles, mainExecutables, executionScripts, compilerRunners, inputDirectory, outputRoot, options);
+            return new BuildFolder(
+                compilationInputFiles,
+                mainExecutables,
+                executionScripts,
+                compilerRunners,
+                inputDirectory,
+                outputRoot,
+                options
+            );
         }
 
-        public void AddModuleToJittedMethodsMapping(Dictionary<string, HashSet<string>> moduleToJittedMethods, int executionIndex, CompilerIndex compilerIndex)
+        public void AddModuleToJittedMethodsMapping(
+            Dictionary<string, HashSet<string>> moduleToJittedMethods,
+            int executionIndex,
+            CompilerIndex compilerIndex
+        )
         {
             ProcessInfo[] executionProcesses = _executions[executionIndex][(int)compilerIndex];
             if (executionProcesses != null)
             {
-                foreach (ProcessInfo executionProcess in executionProcesses.Where(ep => ep.JittedMethods != null))
+                foreach (
+                    ProcessInfo executionProcess in executionProcesses.Where(ep =>
+                        ep.JittedMethods != null
+                    )
+                )
                 {
-                    foreach (KeyValuePair<string, HashSet<string>> moduleMethodKvp in executionProcess.JittedMethods)
+                    foreach (
+                        KeyValuePair<
+                            string,
+                            HashSet<string>
+                        > moduleMethodKvp in executionProcess.JittedMethods
+                    )
                     {
                         HashSet<string> jittedMethodsPerModule;
-                        if (!moduleToJittedMethods.TryGetValue(moduleMethodKvp.Key, out jittedMethodsPerModule))
+                        if (
+                            !moduleToJittedMethods.TryGetValue(
+                                moduleMethodKvp.Key,
+                                out jittedMethodsPerModule
+                            )
+                        )
                         {
                             jittedMethodsPerModule = new HashSet<string>();
                             moduleToJittedMethods.Add(moduleMethodKvp.Key, jittedMethodsPerModule);
@@ -226,12 +314,22 @@ namespace R2RTest
             }
         }
 
-        public static void WriteJitStatistics(TextWriter writer, Dictionary<string, HashSet<string>>[] perCompilerStatistics, IEnumerable<CompilerRunner> compilerRunners)
+        public static void WriteJitStatistics(
+            TextWriter writer,
+            Dictionary<string, HashSet<string>>[] perCompilerStatistics,
+            IEnumerable<CompilerRunner> compilerRunners
+        )
         {
-            Dictionary<string, int> moduleNameUnion = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, int> moduleNameUnion = new Dictionary<string, int>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (CompilerRunner compilerRunner in compilerRunners)
             {
-                foreach (KeyValuePair<string, HashSet<string>> kvp in perCompilerStatistics[(int)compilerRunner.Index])
+                foreach (
+                    KeyValuePair<string, HashSet<string>> kvp in perCompilerStatistics[
+                        (int)compilerRunner.Index
+                    ]
+                )
                 {
                     int methodCount;
                     moduleNameUnion.TryGetValue(kvp.Key, out methodCount);
@@ -250,28 +348,46 @@ namespace R2RTest
 
             foreach (CompilerRunner compilerRunner in compilerRunners)
             {
-                writer.Write($"{compilerRunner.Index.ToString(),9} |");
+                writer.Write($"{compilerRunner.Index.ToString(), 9} |");
             }
             writer.WriteLine(" Assembly Name");
             writer.WriteLine(new string('-', 11 * compilerRunners.Count() + 14));
-            foreach (string moduleName in moduleNameUnion.OrderByDescending(kvp => kvp.Value).Select(kvp => kvp.Key))
+            foreach (
+                string moduleName in moduleNameUnion
+                    .OrderByDescending(kvp => kvp.Value)
+                    .Select(kvp => kvp.Key)
+            )
             {
                 foreach (CompilerRunner compilerRunner in compilerRunners)
                 {
                     HashSet<string> jittedMethodsPerModule;
-                    perCompilerStatistics[(int)compilerRunner.Index].TryGetValue(moduleName, out jittedMethodsPerModule);
-                    writer.Write(string.Format("{0,9} |", jittedMethodsPerModule != null ? jittedMethodsPerModule.Count.ToString() : ""));
+                    perCompilerStatistics[(int)compilerRunner.Index]
+                        .TryGetValue(moduleName, out jittedMethodsPerModule);
+                    writer.Write(
+                        string.Format(
+                            "{0,9} |",
+                            jittedMethodsPerModule != null
+                                ? jittedMethodsPerModule.Count.ToString()
+                                : ""
+                        )
+                    );
                 }
                 writer.Write(' ');
                 writer.WriteLine(moduleName);
             }
         }
 
-        public void WriteJitStatistics(Dictionary<string, HashSet<string>>[] perCompilerStatistics, IEnumerable<CompilerRunner> compilerRunners)
+        public void WriteJitStatistics(
+            Dictionary<string, HashSet<string>>[] perCompilerStatistics,
+            IEnumerable<CompilerRunner> compilerRunners
+        )
         {
             for (int exeIndex = 0; exeIndex < _mainExecutables.Count; exeIndex++)
             {
-                string jitStatisticsFile = Path.ChangeExtension(_mainExecutables[exeIndex], ".jit-statistics");
+                string jitStatisticsFile = Path.ChangeExtension(
+                    _mainExecutables[exeIndex],
+                    ".jit-statistics"
+                );
                 using (StreamWriter streamWriter = new StreamWriter(jitStatisticsFile))
                 {
                     WriteJitStatistics(streamWriter, perCompilerStatistics, compilerRunners);

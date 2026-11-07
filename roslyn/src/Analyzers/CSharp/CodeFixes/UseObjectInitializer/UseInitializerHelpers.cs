@@ -14,39 +14,57 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
     {
         public static BaseObjectCreationExpressionSyntax GetNewObjectCreation(
             BaseObjectCreationExpressionSyntax baseObjectCreation,
-            SeparatedSyntaxList<ExpressionSyntax> expressions)
+            SeparatedSyntaxList<ExpressionSyntax> expressions
+        )
         {
-            if (baseObjectCreation is ObjectCreationExpressionSyntax { ArgumentList.Arguments.Count: 0 } objectCreation)
+            if (
+                baseObjectCreation is ObjectCreationExpressionSyntax
+                {
+                    ArgumentList.Arguments.Count: 0
+                } objectCreation
+            )
             {
                 baseObjectCreation = objectCreation
-                    .WithType(objectCreation.Type.WithTrailingTrivia(objectCreation.ArgumentList.GetTrailingTrivia()))
+                    .WithType(
+                        objectCreation.Type.WithTrailingTrivia(
+                            objectCreation.ArgumentList.GetTrailingTrivia()
+                        )
+                    )
                     .WithArgumentList(null);
             }
 
             var firstExpression = expressions.First();
-            var initializerKind = firstExpression is AssignmentExpressionSyntax
-                ? SyntaxKind.ObjectInitializerExpression
-                : SyntaxKind.CollectionInitializerExpression;
+            var initializerKind =
+                firstExpression is AssignmentExpressionSyntax
+                    ? SyntaxKind.ObjectInitializerExpression
+                    : SyntaxKind.CollectionInitializerExpression;
 
-            return baseObjectCreation.WithInitializer(InitializerExpression(initializerKind, expressions));
+            return baseObjectCreation.WithInitializer(
+                InitializerExpression(initializerKind, expressions)
+            );
         }
 
         public static void AddExistingItems<TMatch, TElementSyntax>(
             BaseObjectCreationExpressionSyntax objectCreation,
             ArrayBuilder<SyntaxNodeOrToken> nodesAndTokens,
             bool addTrailingComma,
-            Func<TMatch?, ExpressionSyntax, TElementSyntax> createElement)
+            Func<TMatch?, ExpressionSyntax, TElementSyntax> createElement
+        )
             where TMatch : struct
             where TElementSyntax : SyntaxNode
         {
             if (objectCreation.Initializer != null)
             {
-                foreach (var nodeOrToken in objectCreation.Initializer.Expressions.GetWithSeparators())
+                foreach (
+                    var nodeOrToken in objectCreation.Initializer.Expressions.GetWithSeparators()
+                )
                 {
                     if (nodeOrToken.IsToken)
                         nodesAndTokens.Add(nodeOrToken.AsToken());
                     else
-                        nodesAndTokens.Add(createElement(null, (ExpressionSyntax)nodeOrToken.AsNode()!));
+                        nodesAndTokens.Add(
+                            createElement(null, (ExpressionSyntax)nodeOrToken.AsNode()!)
+                        );
                 }
             }
 
@@ -57,7 +75,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                 var last = nodesAndTokens.Last();
                 nodesAndTokens.RemoveLast();
                 nodesAndTokens.Add(last.WithTrailingTrivia());
-                nodesAndTokens.Add(Token(SyntaxKind.CommaToken).WithTrailingTrivia(last.GetTrailingTrivia()));
+                nodesAndTokens.Add(
+                    Token(SyntaxKind.CommaToken).WithTrailingTrivia(last.GetTrailingTrivia())
+                );
             }
         }
     }

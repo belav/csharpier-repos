@@ -122,7 +122,11 @@ namespace System.Runtime.Intrinsics
         /// <param name="destination">The destination to which <paramref name="elementOffset" /> will be added before the vector will be stored.</param>
         /// <param name="elementOffset">The element offset from <paramref name="destination" /> from which the vector will be stored.</param>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
-        public static void StoreUnsafe<TVector, T>(this TVector vector, ref T destination, nuint elementOffset)
+        public static void StoreUnsafe<TVector, T>(
+            this TVector vector,
+            ref T destination,
+            nuint elementOffset
+        )
             where TVector : ISimdVector<TVector, T>
         {
             TVector.StoreUnsafe(vector, ref destination, elementOffset);

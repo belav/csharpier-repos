@@ -9,14 +9,14 @@ using Xunit;
 
 public class L
 {
-    unsafe static int Use4()
+    static unsafe int Use4()
     {
         byte* i = stackalloc byte[4];
         i[2] = 50;
         return i[2] * 2;
     }
 
-    unsafe static int Use(int x)
+    static unsafe int Use(int x)
     {
         byte* i = stackalloc byte[x];
         i[1] = 50;

@@ -1,17 +1,15 @@
 using System;
 using System.Collections;
-using System.Security.Principal;
 using System.Diagnostics.Contracts;
+using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-
     public enum AccessControlType
     {
-        Allow          = 0,
-        Deny           = 1,
+        Allow = 0,
+        Deny = 1,
     }
-
 
     public abstract class AuthorizationRule
     {
@@ -32,32 +30,52 @@ namespace System.Security.AccessControl
             int accessMask,
             bool isInherited,
             InheritanceFlags inheritanceFlags,
-            PropagationFlags propagationFlags )
+            PropagationFlags propagationFlags
+        )
         {
-            if ( identity == null )
+            if (identity == null)
             {
-                throw new ArgumentNullException( "identity" );
+                throw new ArgumentNullException("identity");
             }
 
-            if ( accessMask == 0 )
+            if (accessMask == 0)
             {
                 throw new ArgumentException(
-                    Environment.GetResourceString( "Argument_ArgumentZero" ),
-                    "accessMask" );
+                    Environment.GetResourceString("Argument_ArgumentZero"),
+                    "accessMask"
+                );
             }
 
-            if ( inheritanceFlags < InheritanceFlags.None || inheritanceFlags > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit) )
+            if (
+                inheritanceFlags < InheritanceFlags.None
+                || inheritanceFlags
+                    > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit)
+            )
             {
                 throw new ArgumentOutOfRangeException(
                     "inheritanceFlags",
-                    Environment.GetResourceString( "Argument_InvalidEnumValue", inheritanceFlags, "InheritanceFlags" ));
+                    Environment.GetResourceString(
+                        "Argument_InvalidEnumValue",
+                        inheritanceFlags,
+                        "InheritanceFlags"
+                    )
+                );
             }
 
-            if ( propagationFlags < PropagationFlags.None || propagationFlags > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly) )
+            if (
+                propagationFlags < PropagationFlags.None
+                || propagationFlags
+                    > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
+            )
             {
                 throw new ArgumentOutOfRangeException(
                     "propagationFlags",
-                    Environment.GetResourceString( "Argument_InvalidEnumValue", inheritanceFlags, "PropagationFlags" ));
+                    Environment.GetResourceString(
+                        "Argument_InvalidEnumValue",
+                        inheritanceFlags,
+                        "PropagationFlags"
+                    )
+                );
             }
             Contract.EndContractBlock();
 
@@ -65,7 +83,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentException(
                     Environment.GetResourceString("Arg_MustBeIdentityReferenceType"),
-                    "identity");
+                    "identity"
+                );
             }
 
             _identity = identity;
@@ -73,7 +92,7 @@ namespace System.Security.AccessControl
             _isInherited = isInherited;
             _inheritanceFlags = inheritanceFlags;
 
-            if ( inheritanceFlags != 0 )
+            if (inheritanceFlags != 0)
             {
                 _propagationFlags = propagationFlags;
             }
@@ -92,7 +111,7 @@ namespace System.Security.AccessControl
             get { return _identity; }
         }
 
-        internal protected int AccessMask
+        protected internal int AccessMask
         {
             get { return _accessMask; }
         }
@@ -115,7 +134,6 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public abstract class AccessRule : AuthorizationRule
     {
         #region Private Methods
@@ -132,29 +150,48 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type )
-            : base( identity, accessMask, isInherited, inheritanceFlags, propagationFlags )
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
         {
-            if ( type != AccessControlType.Allow &&
-                type != AccessControlType.Deny )
+            if (type != AccessControlType.Allow && type != AccessControlType.Deny)
             {
                 throw new ArgumentOutOfRangeException(
                     "type",
-                    Environment.GetResourceString( "ArgumentOutOfRange_Enum" ));
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             }
 
-            if ( inheritanceFlags < InheritanceFlags.None || inheritanceFlags > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit) )
+            if (
+                inheritanceFlags < InheritanceFlags.None
+                || inheritanceFlags
+                    > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit)
+            )
             {
                 throw new ArgumentOutOfRangeException(
                     "inheritanceFlags",
-                    Environment.GetResourceString( "Argument_InvalidEnumValue", inheritanceFlags, "InheritanceFlags" ));
+                    Environment.GetResourceString(
+                        "Argument_InvalidEnumValue",
+                        inheritanceFlags,
+                        "InheritanceFlags"
+                    )
+                );
             }
 
-            if ( propagationFlags < PropagationFlags.None || propagationFlags > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly) )
+            if (
+                propagationFlags < PropagationFlags.None
+                || propagationFlags
+                    > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
+            )
             {
                 throw new ArgumentOutOfRangeException(
                     "propagationFlags",
-                    Environment.GetResourceString( "Argument_InvalidEnumValue", inheritanceFlags, "PropagationFlags" ));
+                    Environment.GetResourceString(
+                        "Argument_InvalidEnumValue",
+                        inheritanceFlags,
+                        "PropagationFlags"
+                    )
+                );
             }
             Contract.EndContractBlock();
 
@@ -173,8 +210,7 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
-    public abstract class ObjectAccessRule: AccessRule
+    public abstract class ObjectAccessRule : AccessRule
     {
         #region Private Members
 
@@ -183,13 +219,25 @@ namespace System.Security.AccessControl
         private readonly ObjectAceFlags _objectFlags = ObjectAceFlags.None;
 
         #endregion
-        
+
         #region Constructors
 
-        protected ObjectAccessRule( IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, Guid objectType, Guid inheritedObjectType, AccessControlType type )
-            : base( identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type )
+        protected ObjectAccessRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            Guid objectType,
+            Guid inheritedObjectType,
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
         {
-            if (( !objectType.Equals( Guid.Empty )) && (( accessMask & ObjectAce.AccessMaskWithObjectType ) != 0 ))
+            if (
+                (!objectType.Equals(Guid.Empty))
+                && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
+            )
             {
                 _objectType = objectType;
                 _objectFlags |= ObjectAceFlags.ObjectAceTypePresent;
@@ -199,7 +247,10 @@ namespace System.Security.AccessControl
                 _objectType = Guid.Empty;
             }
 
-            if (( !inheritedObjectType.Equals( Guid.Empty )) && ((inheritanceFlags & InheritanceFlags.ContainerInherit ) != 0 ))
+            if (
+                (!inheritedObjectType.Equals(Guid.Empty))
+                && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
+            )
             {
                 _inheritedObjectType = inheritedObjectType;
                 _objectFlags |= ObjectAceFlags.InheritedObjectAceTypePresent;
@@ -232,7 +283,6 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public abstract class AuditRule : AuthorizationRule
     {
         #region Private Members
@@ -249,20 +299,23 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags auditFlags )
-            : base( identity, accessMask, isInherited, inheritanceFlags, propagationFlags )
+            AuditFlags auditFlags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
         {
-            if ( auditFlags == AuditFlags.None )
+            if (auditFlags == AuditFlags.None)
             {
                 throw new ArgumentException(
-                    Environment.GetResourceString( "Arg_EnumAtLeastOneFlag" ),
-                    "auditFlags" );
+                    Environment.GetResourceString("Arg_EnumAtLeastOneFlag"),
+                    "auditFlags"
+                );
             }
-            else if (( auditFlags & ~( AuditFlags.Success | AuditFlags.Failure )) != 0 )
+            else if ((auditFlags & ~(AuditFlags.Success | AuditFlags.Failure)) != 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "auditFlags",
-                    Environment.GetResourceString( "ArgumentOutOfRange_Enum" ));
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             }
 
             _flags = auditFlags;
@@ -280,8 +333,7 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
-    public abstract class ObjectAuditRule: AuditRule
+    public abstract class ObjectAuditRule : AuditRule
     {
         #region Private Members
 
@@ -293,11 +345,29 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        protected ObjectAuditRule( IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, Guid objectType, Guid inheritedObjectType, AuditFlags auditFlags )
-            : base( identity, accessMask, isInherited, inheritanceFlags, propagationFlags, auditFlags )
+        protected ObjectAuditRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            Guid objectType,
+            Guid inheritedObjectType,
+            AuditFlags auditFlags
+        )
+            : base(
+                identity,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                auditFlags
+            )
         {
-            
-            if (( !objectType.Equals( Guid.Empty )) && (( accessMask & ObjectAce.AccessMaskWithObjectType ) != 0 ))
+            if (
+                (!objectType.Equals(Guid.Empty))
+                && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
+            )
             {
                 _objectType = objectType;
                 _objectFlags |= ObjectAceFlags.ObjectAceTypePresent;
@@ -307,7 +377,10 @@ namespace System.Security.AccessControl
                 _objectType = Guid.Empty;
             }
 
-            if (( !inheritedObjectType.Equals( Guid.Empty )) && ((inheritanceFlags & InheritanceFlags.ContainerInherit ) != 0 ))
+            if (
+                (!inheritedObjectType.Equals(Guid.Empty))
+                && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
+            )
             {
                 _inheritedObjectType = inheritedObjectType;
                 _objectFlags |= ObjectAceFlags.InheritedObjectAceTypePresent;
@@ -337,36 +410,32 @@ namespace System.Security.AccessControl
             get { return _objectFlags; }
         }
 
-
         #endregion
     }
-
 
     public sealed class AuthorizationRuleCollection : ReadOnlyCollectionBase
     {
         #region Constructors
 
         public AuthorizationRuleCollection()
-            : base()
-        {
-        }
+            : base() { }
 
         #endregion
 
         #region Public methods
 
-        public void AddRule( AuthorizationRule rule )
+        public void AddRule(AuthorizationRule rule)
         {
-            InnerList.Add( rule );
+            InnerList.Add(rule);
         }
 
         #endregion
 
         #region ICollection Members
 
-        public void CopyTo( AuthorizationRule[] rules, int index )
+        public void CopyTo(AuthorizationRule[] rules, int index)
         {
-            (( ICollection )this ).CopyTo( rules, index );
+            ((ICollection)this).CopyTo(rules, index);
         }
 
         #endregion

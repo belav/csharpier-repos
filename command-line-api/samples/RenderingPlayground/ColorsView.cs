@@ -34,17 +34,13 @@ namespace RenderingPlayground
                     i++;
                 }
 
-                var subregion = new Region(
-                    region.Left + x,
-                    region.Top + y,
-                    1,
-                    1);
-
+                var subregion = new Region(region.Left + x, region.Top + y, 1, 1);
                 unchecked
                 {
                     renderer.RenderToRegion(
                         $"{ForegroundColorSpan.Rgb(r += 2, g += 3, b += 5)}{Text[i]}{ForegroundColorSpan.Reset()}",
-                        subregion);
+                        subregion
+                    );
                 }
             }
         }

@@ -16,19 +16,20 @@ namespace System.Xml.Xsl.IlGen
     internal enum XmlILMethodAttributes
     {
         None = 0,
-        NonUser = 1,    // Non-user method which should debugger should step through
-        Raw = 2,        // Raw method which should not add an implicit first argument of type XmlQueryRuntime
+        NonUser = 1, // Non-user method which should debugger should step through
+        Raw = 2, // Raw method which should not add an implicit first argument of type XmlQueryRuntime
     }
 
     [RequiresDynamicCode("Creates DynamicMethods")]
     internal sealed class XmlILModule
     {
-        private static long s_assemblyId;                                     // Unique identifier used to ensure that assembly names are unique within AppDomain
-        private static readonly ModuleBuilder s_LREModule = CreateLREModule();         // Module used to emit dynamic lightweight-reflection-emit (LRE) methods
+        private static long s_assemblyId; // Unique identifier used to ensure that assembly names are unique within AppDomain
+        private static readonly ModuleBuilder s_LREModule = CreateLREModule(); // Module used to emit dynamic lightweight-reflection-emit (LRE) methods
 
         private TypeBuilder? _typeBldr;
         private Hashtable _methods;
-        private readonly bool _useLRE, _emitSymbols;
+        private readonly bool _useLRE,
+            _emitSymbols;
 
         private const string RuntimeName = $"{{{XmlReservedNs.NsXslDebug}}}runtime";
 
@@ -38,11 +39,16 @@ namespace System.Xml.Xsl.IlGen
             // 2. No temp files need be created
             // 3. Never allow assembly to Assert permissions
             AssemblyName asmName = CreateAssemblyName();
-            AssemblyBuilder asmBldr = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder asmBldr = AssemblyBuilder.DefineDynamicAssembly(
+                asmName,
+                AssemblyBuilderAccess.Run
+            );
 
             // Add custom attribute to assembly marking it as security transparent so that Assert will not be allowed
             // and link demands will be converted to full demands.
-            asmBldr.SetCustomAttribute(new CustomAttributeBuilder(XmlILConstructors.Transparent, Array.Empty<object>()));
+            asmBldr.SetCustomAttribute(
+                new CustomAttributeBuilder(XmlILConstructors.Transparent, Array.Empty<object>())
+            );
 
             // Store LREModule once.  If multiple threads are doing this, then some threads might get different
             // modules.  This is OK, since it's not mandatory to share, just preferable.
@@ -61,10 +67,7 @@ namespace System.Xml.Xsl.IlGen
 
         public bool EmitSymbols
         {
-            get
-            {
-                return _emitSymbols;
-            }
+            get { return _emitSymbols; }
         }
 
         // SxS note: AssemblyBuilder.DefineDynamicModule() below may be using name which is not SxS safe.
@@ -91,31 +94,49 @@ namespace System.Xml.Xsl.IlGen
                 // 3. Never allow assembly to Assert permissions
                 asmName = CreateAssemblyName();
 
-                asmBldr = AssemblyBuilder.DefineDynamicAssembly(
-                            asmName, AssemblyBuilderAccess.Run);
+                asmBldr = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 
                 // Add custom attribute to assembly marking it as security transparent so that Assert will not be allowed
                 // and link demands will be converted to full demands.
-                asmBldr.SetCustomAttribute(new CustomAttributeBuilder(XmlILConstructors.Transparent, Array.Empty<object>()));
+                asmBldr.SetCustomAttribute(
+                    new CustomAttributeBuilder(XmlILConstructors.Transparent, Array.Empty<object>())
+                );
 
                 if (emitSymbols)
                 {
                     // Add DebuggableAttribute to assembly so that debugging is a better experience
-                    DebuggingModes debuggingModes = DebuggingModes.Default | DebuggingModes.IgnoreSymbolStoreSequencePoints | DebuggingModes.DisableOptimizations;
-                    asmBldr.SetCustomAttribute(new CustomAttributeBuilder(XmlILConstructors.Debuggable, new object[] { debuggingModes }));
+                    DebuggingModes debuggingModes =
+                        DebuggingModes.Default
+                        | DebuggingModes.IgnoreSymbolStoreSequencePoints
+                        | DebuggingModes.DisableOptimizations;
+                    asmBldr.SetCustomAttribute(
+                        new CustomAttributeBuilder(
+                            XmlILConstructors.Debuggable,
+                            new object[] { debuggingModes }
+                        )
+                    );
                 }
 
                 // Create ModuleBuilder
                 modBldr = asmBldr.DefineDynamicModule("System.Xml.Xsl.CompiledQuery");
 
-                _typeBldr = modBldr.DefineType("System.Xml.Xsl.CompiledQuery.Query", TypeAttributes.Public);
+                _typeBldr = modBldr.DefineType(
+                    "System.Xml.Xsl.CompiledQuery.Query",
+                    TypeAttributes.Public
+                );
             }
         }
 
         /// <summary>
         /// Define a method in this module with the specified name and parameters.
         /// </summary>
-        public MethodInfo DefineMethod(string name, Type returnType, Type[] paramTypes, string?[] paramNames, XmlILMethodAttributes xmlAttrs)
+        public MethodInfo DefineMethod(
+            string name,
+            Type returnType,
+            Type[] paramTypes,
+            string?[] paramNames,
+            XmlILMethodAttributes xmlAttrs
+        )
         {
             MethodInfo methResult;
             int uniqueId = 1;
@@ -143,16 +164,27 @@ namespace System.Xml.Xsl.IlGen
             if (!_useLRE)
             {
                 MethodBuilder methBldr = _typeBldr!.DefineMethod(
-                            name,
-                            MethodAttributes.Private | MethodAttributes.Static,
-                            returnType,
-                            paramTypes);
+                    name,
+                    MethodAttributes.Private | MethodAttributes.Static,
+                    returnType,
+                    paramTypes
+                );
 
                 if (_emitSymbols && (xmlAttrs & XmlILMethodAttributes.NonUser) != 0)
                 {
                     // Add DebuggerStepThroughAttribute and DebuggerNonUserCodeAttribute to non-user methods so that debugging is a better experience
-                    methBldr.SetCustomAttribute(new CustomAttributeBuilder(XmlILConstructors.StepThrough, Array.Empty<object>()));
-                    methBldr.SetCustomAttribute(new CustomAttributeBuilder(XmlILConstructors.NonUserCode, Array.Empty<object>()));
+                    methBldr.SetCustomAttribute(
+                        new CustomAttributeBuilder(
+                            XmlILConstructors.StepThrough,
+                            Array.Empty<object>()
+                        )
+                    );
+                    methBldr.SetCustomAttribute(
+                        new CustomAttributeBuilder(
+                            XmlILConstructors.NonUserCode,
+                            Array.Empty<object>()
+                        )
+                    );
                 }
 
                 if (!isRaw)
@@ -161,14 +193,23 @@ namespace System.Xml.Xsl.IlGen
                 for (int i = 0; i < paramNames.Length; i++)
                 {
                     if (!string.IsNullOrEmpty(paramNames[i]))
-                        methBldr.DefineParameter(i + (isRaw ? 1 : 2), ParameterAttributes.None, paramNames[i]);
+                        methBldr.DefineParameter(
+                            i + (isRaw ? 1 : 2),
+                            ParameterAttributes.None,
+                            paramNames[i]
+                        );
                 }
 
                 methResult = methBldr;
             }
             else
             {
-                DynamicMethod methDyn = new DynamicMethod(name, returnType, paramTypes, s_LREModule);
+                DynamicMethod methDyn = new DynamicMethod(
+                    name,
+                    returnType,
+                    paramTypes,
+                    s_LREModule
+                );
                 methDyn.InitLocals = true;
 
                 methResult = methDyn;
@@ -209,7 +250,11 @@ namespace System.Xml.Xsl.IlGen
         public FieldInfo DefineInitializedData(string name, byte[] data)
         {
             Debug.Assert(!_useLRE, "Cannot create initialized data for an LRE module");
-            return _typeBldr!.DefineInitializedData(name, data, FieldAttributes.Private | FieldAttributes.Static);
+            return _typeBldr!.DefineInitializedData(
+                name,
+                data,
+                FieldAttributes.Private | FieldAttributes.Static
+            );
         }
 
         /// <summary>
@@ -218,7 +263,11 @@ namespace System.Xml.Xsl.IlGen
         public FieldInfo DefineField(string fieldName, Type type)
         {
             Debug.Assert(!_useLRE, "Cannot create field for an LRE module");
-            return _typeBldr!.DefineField(fieldName, type, FieldAttributes.Private | FieldAttributes.Static);
+            return _typeBldr!.DefineField(
+                fieldName,
+                type,
+                FieldAttributes.Private | FieldAttributes.Static
+            );
         }
 
         /// <summary>
@@ -247,7 +296,10 @@ namespace System.Xml.Xsl.IlGen
                 methodsBaked = new Hashtable(_methods.Count);
                 foreach (string methName in _methods.Keys)
                 {
-                    methodsBaked[methName] = typBaked.GetMethod(methName, BindingFlags.NonPublic | BindingFlags.Static);
+                    methodsBaked[methName] = typBaked.GetMethod(
+                        methName,
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    );
                 }
                 _methods = methodsBaked;
 

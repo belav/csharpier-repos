@@ -41,7 +41,15 @@ namespace System.Text.Tests
                 bytes[i] = (byte)i;
             }
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, true, bytes.Length / 2 + 1, "002.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                bytes.Length / 2 + 1,
+                "002.1"
+            );
             VerificationHelper(decoder, bytes, 0, bytes.Length, false, bytes.Length / 2, "002.2");
         }
 
@@ -52,20 +60,7 @@ namespace System.Text.Tests
             Decoder decoder = Encoding.Unicode.GetDecoder();
             int expected = 6;
             // Unicode string: \u8FD9\u4E2A\u4E00\u4E2A\u6D4B\u8BD5
-            byte[] bytes = new byte[] {
-                217,
-                143,
-                42,
-                78,
-                0,
-                78,
-                42,
-                78,
-                75,
-                109,
-                213,
-                139
-            };
+            byte[] bytes = new byte[] { 217, 143, 42, 78, 0, 78, 42, 78, 75, 109, 213, 139 };
 
             VerificationHelper(decoder, bytes, 0, bytes.Length, true, expected, "003.1");
             VerificationHelper(decoder, bytes, 0, bytes.Length, false, expected, "003.2");
@@ -119,20 +114,7 @@ namespace System.Text.Tests
         {
             Decoder decoder = Encoding.Unicode.GetDecoder();
             // Unicode string: \u8FD9\u4E2A\u4E00\u4E2A\u6D4B\u8BD5
-            byte[] bytes = new byte[] {
-                217,
-                143,
-                42,
-                78,
-                0,
-                78,
-                42,
-                78,
-                75,
-                109,
-                213,
-                139
-            };
+            byte[] bytes = new byte[] { 217, 143, 42, 78, 0, 78, 42, 78, 75, 109, 213, 139 };
             int expected = 3;
 
             VerificationHelper(decoder, bytes, 0, bytes.Length / 2, true, expected, "007.1");
@@ -161,7 +143,15 @@ namespace System.Text.Tests
         }
         #endregion
 
-        private void VerificationHelper(Decoder decoder, byte[] bytes, int index, int count, bool flush, int expected, string errorno)
+        private void VerificationHelper(
+            Decoder decoder,
+            byte[] bytes,
+            int index,
+            int count,
+            bool flush,
+            int expected,
+            string errorno
+        )
         {
             int ret = decoder.GetCharCount(bytes, index, count, flush);
             Assert.Equal(expected, ret);

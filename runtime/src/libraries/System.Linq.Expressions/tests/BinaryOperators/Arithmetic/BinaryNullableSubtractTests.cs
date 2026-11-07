@@ -122,7 +122,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableFloatSubtractTest(bool useInterpreter)
         {
-            float?[] array = { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN, null };
+            float?[] array =
+            {
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+                null,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -136,7 +148,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableDoubleSubtractTest(bool useInterpreter)
         {
-            double?[] array = { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN, null };
+            double?[] array =
+            {
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+                null,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -150,7 +174,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableDecimalSubtractTest(bool useInterpreter)
         {
-            decimal?[] array = { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue, null };
+            decimal?[] array =
+            {
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+                null,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -196,25 +228,31 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortSubtract(ushort? a, ushort? b, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)(a - b)), f());
         }
 
-        private static void VerifyNullableUShortSubtractOvf(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyNullableUShortSubtractOvf(
+            ushort? a,
+            ushort? b,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             ushort? expected;
@@ -233,12 +271,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortSubtract(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)(a - b)), f());
@@ -246,12 +285,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortSubtractOvf(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             short? expected;
@@ -270,12 +310,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntSubtract(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a - b), f());
@@ -283,12 +324,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntSubtractOvf(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             uint? expected;
@@ -307,12 +349,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntSubtract(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a - b), f());
@@ -320,12 +363,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntSubtractOvf(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             int? expected;
@@ -344,12 +388,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongSubtract(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a - b), f());
@@ -357,12 +402,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongSubtractOvf(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             ulong? expected;
@@ -381,12 +427,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongSubtract(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a - b), f());
@@ -394,12 +441,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongSubtractOvf(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             long? expected;
@@ -418,12 +466,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatSubtract(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a - b, f());
@@ -431,12 +480,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatSubtractOvf(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a - b, f());
@@ -444,38 +494,49 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleSubtract(double? a, double? b, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a - b, f());
         }
 
-        private static void VerifyNullableDoubleSubtractOvf(double? a, double? b, bool useInterpreter)
+        private static void VerifyNullableDoubleSubtractOvf(
+            double? a,
+            double? b,
+            bool useInterpreter
+        )
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a - b, f());
         }
 
-        private static void VerifyNullableDecimalSubtract(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyNullableDecimalSubtract(
+            decimal? a,
+            decimal? b,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Subtract(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Subtract(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -497,14 +558,19 @@ namespace System.Linq.Expressions.Tests
                 Assert.Null(f());
         }
 
-        private static void VerifyNullableDecimalSubtractOvf(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyNullableDecimalSubtractOvf(
+            decimal? a,
+            decimal? b,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.SubtractChecked(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.SubtractChecked(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)

@@ -7,7 +7,8 @@ namespace System.Net.NetworkInformation
 {
     internal sealed class SafeFreeMibTable : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeFreeMibTable() : base(true) { }
+        public SafeFreeMibTable()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

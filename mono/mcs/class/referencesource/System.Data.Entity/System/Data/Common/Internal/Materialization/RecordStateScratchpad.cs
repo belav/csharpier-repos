@@ -16,7 +16,7 @@ namespace System.Data.Common.Internal.Materialization
     /// <summary>
     /// Used in the Translator to aggregate information about a (nested) record
     /// state.  After the translator visits the columnMaps, it will compile
-    /// the recordState(s) which produces an immutable RecordStateFactory that 
+    /// the recordState(s) which produces an immutable RecordStateFactory that
     /// can be shared amongst many query instances.
     /// </summary>
     internal class RecordStateScratchpad
@@ -62,26 +62,34 @@ namespace System.Data.Common.Internal.Materialization
             set { _typeUsages = value; }
         }
 
-        private List<RecordStateScratchpad> _nestedRecordStateScratchpads = new List<RecordStateScratchpad>();
+        private List<RecordStateScratchpad> _nestedRecordStateScratchpads =
+            new List<RecordStateScratchpad>();
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         internal RecordStateFactory Compile()
         {
-            RecordStateFactory[] nestedRecordStateFactories = new RecordStateFactory[_nestedRecordStateScratchpads.Count];
+            RecordStateFactory[] nestedRecordStateFactories = new RecordStateFactory[
+                _nestedRecordStateScratchpads.Count
+            ];
             for (int i = 0; i < nestedRecordStateFactories.Length; i++)
             {
                 nestedRecordStateFactories[i] = _nestedRecordStateScratchpads[i].Compile();
             }
 
-            RecordStateFactory result = (RecordStateFactory)Activator.CreateInstance(typeof(RecordStateFactory), new object[] {
-                                                            this.StateSlotNumber, 
-                                                            this.ColumnCount,
-                                                            nestedRecordStateFactories,
-                                                            this.DataRecordInfo,
-                                                            this.GatherData,
-                                                            this.PropertyNames,
-                                                            this.TypeUsages
-                                                            });
+            RecordStateFactory result = (RecordStateFactory)
+                Activator.CreateInstance(
+                    typeof(RecordStateFactory),
+                    new object[]
+                    {
+                        this.StateSlotNumber,
+                        this.ColumnCount,
+                        nestedRecordStateFactories,
+                        this.DataRecordInfo,
+                        this.GatherData,
+                        this.PropertyNames,
+                        this.TypeUsages,
+                    }
+                );
             return result;
         }
     }

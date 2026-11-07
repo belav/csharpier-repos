@@ -10,6 +10,6 @@ namespace System.Runtime.CompilerServices
         IL = MethodImplAttributes.IL,
         Native = MethodImplAttributes.Native,
         OPTIL = MethodImplAttributes.OPTIL,
-        Runtime = MethodImplAttributes.Runtime
+        Runtime = MethodImplAttributes.Runtime,
     }
 }

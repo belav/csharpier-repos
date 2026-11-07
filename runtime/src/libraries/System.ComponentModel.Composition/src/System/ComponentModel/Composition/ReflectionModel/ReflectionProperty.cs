@@ -68,7 +68,6 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                 }
 
-
                 // Remove 'get_' or 'set_'
                 return name.Substring(4);
             }
@@ -131,6 +130,5 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
             UnderlyingSetMethod!.SafeInvoke(instance, value);
         }
-
     }
 }

@@ -39,30 +39,76 @@ namespace System.Globalization
             bool result = true;
 
             // these can return null but are later replaced with String.Empty or other non-nullable value
-            result &= GetCalendarInfo(localeName, calendarId, CalendarDataType.NativeName, out this.sNativeName!);
-            result &= GetCalendarInfo(localeName, calendarId, CalendarDataType.MonthDay, out this.sMonthDay!);
+            result &= GetCalendarInfo(
+                localeName,
+                calendarId,
+                CalendarDataType.NativeName,
+                out this.sNativeName!
+            );
+            result &= GetCalendarInfo(
+                localeName,
+                calendarId,
+                CalendarDataType.MonthDay,
+                out this.sMonthDay!
+            );
 
             if (this.sMonthDay != null)
             {
                 this.sMonthDay = NormalizeDatePattern(this.sMonthDay);
             }
 
-            result &= EnumDatePatterns(localeName, calendarId, CalendarDataType.ShortDates, out this.saShortDates!);
-            result &= EnumDatePatterns(localeName, calendarId, CalendarDataType.LongDates, out this.saLongDates!);
-            result &= EnumDatePatterns(localeName, calendarId, CalendarDataType.YearMonths, out this.saYearMonths!);
-            result &= EnumCalendarInfo(localeName, calendarId, CalendarDataType.DayNames, out this.saDayNames!);
-            result &= EnumCalendarInfo(localeName, calendarId, CalendarDataType.AbbrevDayNames, out this.saAbbrevDayNames!);
-            result &= EnumCalendarInfo(localeName, calendarId, CalendarDataType.SuperShortDayNames, out this.saSuperShortDayNames!);
+            result &= EnumDatePatterns(
+                localeName,
+                calendarId,
+                CalendarDataType.ShortDates,
+                out this.saShortDates!
+            );
+            result &= EnumDatePatterns(
+                localeName,
+                calendarId,
+                CalendarDataType.LongDates,
+                out this.saLongDates!
+            );
+            result &= EnumDatePatterns(
+                localeName,
+                calendarId,
+                CalendarDataType.YearMonths,
+                out this.saYearMonths!
+            );
+            result &= EnumCalendarInfo(
+                localeName,
+                calendarId,
+                CalendarDataType.DayNames,
+                out this.saDayNames!
+            );
+            result &= EnumCalendarInfo(
+                localeName,
+                calendarId,
+                CalendarDataType.AbbrevDayNames,
+                out this.saAbbrevDayNames!
+            );
+            result &= EnumCalendarInfo(
+                localeName,
+                calendarId,
+                CalendarDataType.SuperShortDayNames,
+                out this.saSuperShortDayNames!
+            );
 
             string? leapHebrewMonthName = null;
-            result &= EnumMonthNames(localeName, calendarId, CalendarDataType.MonthNames, out this.saMonthNames!, ref leapHebrewMonthName);
+            result &= EnumMonthNames(
+                localeName,
+                calendarId,
+                CalendarDataType.MonthNames,
+                out this.saMonthNames!,
+                ref leapHebrewMonthName
+            );
             if (leapHebrewMonthName != null)
             {
                 Debug.Assert(this.saMonthNames != null);
 
                 // In Hebrew calendar, get the leap month name Adar II and override the non-leap month 7
                 Debug.Assert(calendarId == CalendarId.HEBREW && saMonthNames.Length == 13);
-                saLeapYearMonthNames = (string[]) saMonthNames.Clone();
+                saLeapYearMonthNames = (string[])saMonthNames.Clone();
                 saLeapYearMonthNames[6] = leapHebrewMonthName;
 
                 // The returned data from ICU has 6th month name as 'Adar I' and 7th month name as 'Adar'
@@ -70,14 +116,41 @@ namespace System.Globalization
                 // note that when formatting non-leap year dates, 7th month shouldn't get used at all.
                 saMonthNames[5] = saMonthNames[6];
                 saMonthNames[6] = leapHebrewMonthName;
-
             }
-            result &= EnumMonthNames(localeName, calendarId, CalendarDataType.AbbrevMonthNames, out this.saAbbrevMonthNames!, ref leapHebrewMonthName);
-            result &= EnumMonthNames(localeName, calendarId, CalendarDataType.MonthGenitiveNames, out this.saMonthGenitiveNames!, ref leapHebrewMonthName);
-            result &= EnumMonthNames(localeName, calendarId, CalendarDataType.AbbrevMonthGenitiveNames, out this.saAbbrevMonthGenitiveNames!, ref leapHebrewMonthName);
+            result &= EnumMonthNames(
+                localeName,
+                calendarId,
+                CalendarDataType.AbbrevMonthNames,
+                out this.saAbbrevMonthNames!,
+                ref leapHebrewMonthName
+            );
+            result &= EnumMonthNames(
+                localeName,
+                calendarId,
+                CalendarDataType.MonthGenitiveNames,
+                out this.saMonthGenitiveNames!,
+                ref leapHebrewMonthName
+            );
+            result &= EnumMonthNames(
+                localeName,
+                calendarId,
+                CalendarDataType.AbbrevMonthGenitiveNames,
+                out this.saAbbrevMonthGenitiveNames!,
+                ref leapHebrewMonthName
+            );
 
-            result &= EnumEraNames(localeName, calendarId, CalendarDataType.EraNames, out this.saEraNames!);
-            result &= EnumEraNames(localeName, calendarId, CalendarDataType.AbbrevEraNames, out this.saAbbrevEraNames!);
+            result &= EnumEraNames(
+                localeName,
+                calendarId,
+                CalendarDataType.EraNames,
+                out this.saEraNames!
+            );
+            result &= EnumEraNames(
+                localeName,
+                calendarId,
+                CalendarDataType.AbbrevEraNames,
+                out this.saAbbrevEraNames!
+            );
 
             return result;
         }
@@ -92,7 +165,11 @@ namespace System.Globalization
             int count;
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             if (GlobalizationMode.Hybrid)
-                count = Interop.Globalization.GetCalendarsNative(localeName, calendars, calendars.Length);
+                count = Interop.Globalization.GetCalendarsNative(
+                    localeName,
+                    calendars,
+                    calendars.Length
+                );
             else
                 count = Interop.Globalization.GetCalendars(localeName, calendars, calendars.Length);
 #else
@@ -117,7 +194,12 @@ namespace System.Globalization
 
         // PAL Layer ends here
 
-        private static unsafe bool GetCalendarInfo(string localeName, CalendarId calendarId, CalendarDataType dataType, out string? calendarString)
+        private static unsafe bool GetCalendarInfo(
+            string localeName,
+            CalendarId calendarId,
+            CalendarDataType dataType,
+            out string? calendarString
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 
@@ -126,16 +208,28 @@ namespace System.Globalization
                 {
                     fixed (char* bufferPtr = buffer)
                     {
-                        return Interop.Globalization.GetCalendarInfo(locale, id, type, bufferPtr, buffer.Length);
+                        return Interop.Globalization.GetCalendarInfo(
+                            locale,
+                            id,
+                            type,
+                            bufferPtr,
+                            buffer.Length
+                        );
                     }
                 },
                 localeName,
                 calendarId,
                 dataType,
-                out calendarString);
+                out calendarString
+            );
         }
 
-        private static bool EnumDatePatterns(string localeName, CalendarId calendarId, CalendarDataType dataType, out string[]? datePatterns)
+        private static bool EnumDatePatterns(
+            string localeName,
+            CalendarId calendarId,
+            CalendarDataType dataType,
+            out string[]? datePatterns
+        )
         {
             datePatterns = null;
 
@@ -258,9 +352,10 @@ namespace System.Globalization
         /// </remarks>
         private static string NormalizeDatePattern(string input)
         {
-            var destination = input.Length < 128 ?
-                new ValueStringBuilder(stackalloc char[128]) :
-                new ValueStringBuilder(input.Length);
+            var destination =
+                input.Length < 128
+                    ? new ValueStringBuilder(stackalloc char[128])
+                    : new ValueStringBuilder(input.Length);
 
             int index = 0;
             while (index < input.Length)
@@ -326,8 +421,10 @@ namespace System.Globalization
                         break;
                     default:
                         const string unsupportedDateFieldSymbols = "YuUrQqwWDFg";
-                        Debug.Assert(!unsupportedDateFieldSymbols.Contains(input[index]),
-                            $"Encountered an unexpected date field symbol '{input[index]}' from ICU which has no known corresponding .NET equivalent.");
+                        Debug.Assert(
+                            !unsupportedDateFieldSymbols.Contains(input[index]),
+                            $"Encountered an unexpected date field symbol '{input[index]}' from ICU which has no known corresponding .NET equivalent."
+                        );
 
                         destination.Append(input[index++]);
                         break;
@@ -337,7 +434,11 @@ namespace System.Globalization
             return destination.ToString();
         }
 
-        private static void NormalizeDayOfWeek(string input, ref ValueStringBuilder destination, ref int index)
+        private static void NormalizeDayOfWeek(
+            string input,
+            ref ValueStringBuilder destination,
+            ref int index
+        )
         {
             char dayChar = input[index];
             int occurrences = CountOccurrences(input, dayChar, ref index);
@@ -362,7 +463,13 @@ namespace System.Globalization
             return index - startIndex;
         }
 
-        private static bool EnumMonthNames(string localeName, CalendarId calendarId, CalendarDataType dataType, out string[]? monthNames, ref string? leapHebrewMonthName)
+        private static bool EnumMonthNames(
+            string localeName,
+            CalendarId calendarId,
+            CalendarDataType dataType,
+            out string[]? monthNames,
+            ref string? leapHebrewMonthName
+        )
         {
             monthNames = null;
 
@@ -380,7 +487,9 @@ namespace System.Globalization
 
                 if (callbackContext.Results.Count > 13)
                 {
-                    Debug.Assert(calendarId == CalendarId.HEBREW && callbackContext.Results.Count == 14);
+                    Debug.Assert(
+                        calendarId == CalendarId.HEBREW && callbackContext.Results.Count == 14
+                    );
 
                     if (calendarId == CalendarId.HEBREW)
                     {
@@ -395,13 +504,22 @@ namespace System.Globalization
             return result;
         }
 
-        private static bool EnumEraNames(string localeName, CalendarId calendarId, CalendarDataType dataType, out string[]? eraNames)
+        private static bool EnumEraNames(
+            string localeName,
+            CalendarId calendarId,
+            CalendarDataType dataType,
+            out string[]? eraNames
+        )
         {
             bool result = EnumCalendarInfo(localeName, calendarId, dataType, out eraNames);
 
             // .NET expects that only the Japanese calendars have more than 1 era.
             // So for other calendars, only return the latest era.
-            if (calendarId != CalendarId.JAPAN && calendarId != CalendarId.JAPANESELUNISOLAR && eraNames?.Length > 0)
+            if (
+                calendarId != CalendarId.JAPAN
+                && calendarId != CalendarId.JAPANESELUNISOLAR
+                && eraNames?.Length > 0
+            )
             {
                 string[] latestEraName = new string[] { eraNames![eraNames.Length - 1] };
                 eraNames = latestEraName;
@@ -410,7 +528,12 @@ namespace System.Globalization
             return result;
         }
 
-        internal static bool EnumCalendarInfo(string localeName, CalendarId calendarId, CalendarDataType dataType, out string[]? calendarData)
+        internal static bool EnumCalendarInfo(
+            string localeName,
+            CalendarId calendarId,
+            CalendarDataType dataType,
+            out string[]? calendarData
+        )
         {
             calendarData = null;
 
@@ -425,9 +548,20 @@ namespace System.Globalization
             return result;
         }
 
-        private static unsafe bool EnumCalendarInfo(string localeName, CalendarId calendarId, CalendarDataType dataType, ref IcuEnumCalendarsData callbackContext)
+        private static unsafe bool EnumCalendarInfo(
+            string localeName,
+            CalendarId calendarId,
+            CalendarDataType dataType,
+            ref IcuEnumCalendarsData callbackContext
+        )
         {
-            return Interop.Globalization.EnumCalendarInfo(&EnumCalendarInfoCallback, localeName, calendarId, dataType, (IntPtr)Unsafe.AsPointer(ref callbackContext));
+            return Interop.Globalization.EnumCalendarInfo(
+                &EnumCalendarInfoCallback,
+                localeName,
+                calendarId,
+                dataType,
+                (IntPtr)Unsafe.AsPointer(ref callbackContext)
+            );
         }
 
         [UnmanagedCallersOnly]
@@ -435,7 +569,8 @@ namespace System.Globalization
         {
             try
             {
-                ReadOnlySpan<char> calendarStringSpan = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(calendarStringPtr);
+                ReadOnlySpan<char> calendarStringSpan =
+                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(calendarStringPtr);
 #pragma warning disable 8500
                 IcuEnumCalendarsData* callbackContext = (IcuEnumCalendarsData*)context;
 #pragma warning restore 8500

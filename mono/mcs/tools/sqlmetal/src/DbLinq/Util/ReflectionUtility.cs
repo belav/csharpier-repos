@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -44,7 +44,9 @@ namespace DbLinq.Util
             var methodCallExpression = lambdaExpression.Body as MethodCallExpression;
             if (methodCallExpression != null)
                 return methodCallExpression.Method;
-            throw new ArgumentException("Lambda expression is not correctly formated for MethodInfo extraction");
+            throw new ArgumentException(
+                "Lambda expression is not correctly formated for MethodInfo extraction"
+            );
         }
 
         /// <summary>
@@ -81,11 +83,12 @@ namespace DbLinq.Util
 
         public static MemberInfo GetMemberCallInfo(LambdaExpression lambdaExpression)
         {
-            MethodCallExpression methodCallExpression = lambdaExpression.Body as MethodCallExpression;
+            MethodCallExpression methodCallExpression =
+                lambdaExpression.Body as MethodCallExpression;
             if (methodCallExpression != null)
             {
                 Expression memberExpression = methodCallExpression;
-                while ( true )
+                while (true)
                 {
                     switch (memberExpression.NodeType)
                     {
@@ -93,7 +96,10 @@ namespace DbLinq.Util
                             return ((MemberExpression)memberExpression).Member;
                         case ExpressionType.Call:
                             methodCallExpression = memberExpression as MethodCallExpression;
-                            memberExpression = (methodCallExpression.Object != null) ? methodCallExpression.Object : methodCallExpression.Arguments[0];
+                            memberExpression =
+                                (methodCallExpression.Object != null)
+                                    ? methodCallExpression.Object
+                                    : methodCallExpression.Arguments[0];
                             break;
                         default:
                             return null;
@@ -136,9 +142,11 @@ namespace DbLinq.Util
         /// <typeparam name="T"></typeparam>
         /// <param name="lambdaExpression"></param>
         /// <returns></returns>
-        public static PropertyInfo GetPropertyInfo<T>(this Expression<Func<T, object>> lambdaExpression)
+        public static PropertyInfo GetPropertyInfo<T>(
+            this Expression<Func<T, object>> lambdaExpression
+        )
         {
-            return (PropertyInfo)GetMemberInfo((LambdaExpression) lambdaExpression);
+            return (PropertyInfo)GetMemberInfo((LambdaExpression)lambdaExpression);
         }
 
         /// <summary>
@@ -148,7 +156,7 @@ namespace DbLinq.Util
         /// <returns></returns>
         public static PropertyInfo GetPropertyInfo(this Expression<Func<object>> lambdaExpression)
         {
-            return (PropertyInfo)GetMemberInfo((LambdaExpression) lambdaExpression);
+            return (PropertyInfo)GetMemberInfo((LambdaExpression)lambdaExpression);
         }
 
         /// <summary>
@@ -160,7 +168,7 @@ namespace DbLinq.Util
         /// <returns></returns>
         public static MemberInfo GetMemberInfo<T>(this Expression<Func<T, object>> lambdaExpression)
         {
-            return GetMemberInfo((LambdaExpression) lambdaExpression);
+            return GetMemberInfo((LambdaExpression)lambdaExpression);
         }
 
         /// <summary>
@@ -170,7 +178,7 @@ namespace DbLinq.Util
         /// <returns></returns>
         public static MemberInfo GetMemberInfo(this Expression<Func<object>> lambdaExpression)
         {
-            return GetMemberInfo((LambdaExpression) lambdaExpression);
+            return GetMemberInfo((LambdaExpression)lambdaExpression);
         }
     }
 }

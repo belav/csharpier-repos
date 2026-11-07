@@ -2,12 +2,12 @@
 
 partial class Foo
 {
-	~Foo ()
-	{ }
+    ~Foo() { }
 }
 
-partial class Foo
-{ }
+partial class Foo { }
 
-class B { public static void Main () {} }
-
+class B
+{
+    public static void Main() { }
+}

@@ -13,11 +13,11 @@ namespace System.ServiceModel.Dispatcher
     class NameValueCache<T>
     {
         // The NameValueCache implements a structure that uses a dictionary to map objects to
-        // indices of an array of cache entries.  This allows us to store the cache entries in 
+        // indices of an array of cache entries.  This allows us to store the cache entries in
         // the order in which they were added to the cache, and yet still lookup any cache entry.
-        // The eviction policy of the cache is to evict the least-recently-added cache entry.  
-        // Using a pointer to the next available cache entry in the array, we can always be sure 
-        // that the given entry is the oldest entry. 
+        // The eviction policy of the cache is to evict the least-recently-added cache entry.
+        // Using a pointer to the next available cache entry in the array, we can always be sure
+        // that the given entry is the oldest entry.
         Hashtable cache;
         string[] currentKeys;
         int nextAvailableCacheIndex;
@@ -25,9 +25,7 @@ namespace System.ServiceModel.Dispatcher
         internal const int maxNumberofEntriesInCache = 16;
 
         public NameValueCache()
-            : this(maxNumberofEntriesInCache)
-        {
-        }
+            : this(maxNumberofEntriesInCache) { }
 
         public NameValueCache(int maxCacheEntries)
         {

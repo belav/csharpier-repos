@@ -21,8 +21,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             private const uint transitionHigh = 0x19999999;
             private const byte maxScale = 28;
 
-            private static readonly decimal normalZero = new decimal(lo: 0, mid: 0, hi: 0, isNegative: false, scale: maxScale);
-            private static readonly decimal epsilon = new decimal(lo: 1, mid: 0, hi: 0, isNegative: false, scale: maxScale);
+            private static readonly decimal normalZero = new decimal(
+                lo: 0,
+                mid: 0,
+                hi: 0,
+                isNegative: false,
+                scale: maxScale
+            );
+            private static readonly decimal epsilon = new decimal(
+                lo: 1,
+                mid: 0,
+                hi: 0,
+                isNegative: false,
+                scale: maxScale
+            );
 
             decimal INumericTC<decimal>.MinValue => decimal.MinValue;
 
@@ -30,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             decimal INumericTC<decimal>.Zero => 0M;
 
-            public decimal FromConstantValue(ConstantValue constantValue) => constantValue.IsBad ? 0m : constantValue.DecimalValue;
+            public decimal FromConstantValue(ConstantValue constantValue) =>
+                constantValue.IsBad ? 0m : constantValue.DecimalValue;
 
             public ConstantValue ToConstantValue(decimal value) => ConstantValue.Create(value);
 
@@ -48,24 +61,67 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return normalZero; // skip negative zero
 
                     // This should not occur, as numbers such as this are not in our normal form (not at maximum scale).
-                    Debug.Assert(!(scale < 28 && low == transitionLow && mid == transitionMid && high == transitionHigh));
+                    Debug.Assert(
+                        !(
+                            scale < 28
+                            && low == transitionLow
+                            && mid == transitionMid
+                            && high == transitionHigh
+                        )
+                    );
 
                     if (low != 0)
-                        return new DecimalRep(low: low - 1, mid: mid, high: high, isNegative: isNegative, scale: scale).Value;
+                        return new DecimalRep(
+                            low: low - 1,
+                            mid: mid,
+                            high: high,
+                            isNegative: isNegative,
+                            scale: scale
+                        ).Value;
                     if (mid != 0)
-                        return new DecimalRep(low: uint.MaxValue, mid: mid - 1, high: high, isNegative: isNegative, scale: scale).Value;
+                        return new DecimalRep(
+                            low: uint.MaxValue,
+                            mid: mid - 1,
+                            high: high,
+                            isNegative: isNegative,
+                            scale: scale
+                        ).Value;
                     Debug.Assert(high > 0); // otherwise value == 0m
-                    return new DecimalRep(low: uint.MaxValue, mid: uint.MaxValue, high: high - 1, isNegative: isNegative, scale: scale).Value;
+                    return new DecimalRep(
+                        low: uint.MaxValue,
+                        mid: uint.MaxValue,
+                        high: high - 1,
+                        isNegative: isNegative,
+                        scale: scale
+                    ).Value;
                 }
                 else
                 {
                     // get the next value farther from zero.(more positive)
                     if (low != uint.MaxValue)
-                        return new DecimalRep(low: low + 1, mid: mid, high: high, isNegative: isNegative, scale: scale).Value;
+                        return new DecimalRep(
+                            low: low + 1,
+                            mid: mid,
+                            high: high,
+                            isNegative: isNegative,
+                            scale: scale
+                        ).Value;
                     if (mid != uint.MaxValue)
-                        return new DecimalRep(low: 0, mid: mid + 1, high: high, isNegative: isNegative, scale: scale).Value;
+                        return new DecimalRep(
+                            low: 0,
+                            mid: mid + 1,
+                            high: high,
+                            isNegative: isNegative,
+                            scale: scale
+                        ).Value;
                     if (high != uint.MaxValue)
-                        return new DecimalRep(low: 0, mid: 0, high: high + 1, isNegative: isNegative, scale: scale).Value;
+                        return new DecimalRep(
+                            low: 0,
+                            mid: 0,
+                            high: high + 1,
+                            isNegative: isNegative,
+                            scale: scale
+                        ).Value;
 
                     // the mantissa it at its maximum value.  Divide the mantissa by 10 and decrease the scale.
                     // Since we know the value of the mantissa, we can simply assign mantissa/10 here.
@@ -75,16 +131,34 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(scale > 0); // otherwise value == decimal.MaxValue
                     scale -= 1;
 
-                    var result = new DecimalRep(low: low + 1, mid: mid, high: high, isNegative: isNegative, scale: scale).Value;
+                    var result = new DecimalRep(
+                        low: low + 1,
+                        mid: mid,
+                        high: high,
+                        isNegative: isNegative,
+                        scale: scale
+                    ).Value;
 
                     // Assert that the value returned really is the next possible value.
-                    Debug.Assert(new DecimalRep(low: low, mid: mid, high: high, isNegative: isNegative, scale: scale).Value <= value);
+                    Debug.Assert(
+                        new DecimalRep(
+                            low: low,
+                            mid: mid,
+                            high: high,
+                            isNegative: isNegative,
+                            scale: scale
+                        ).Value <= value
+                    );
                     Debug.Assert(result > value);
                     return result;
                 }
             }
 
-            bool INumericTC<decimal>.Related(BinaryOperatorKind relation, decimal left, decimal right)
+            bool INumericTC<decimal>.Related(
+                BinaryOperatorKind relation,
+                decimal left,
+                decimal right
+            )
             {
                 switch (relation)
                 {
@@ -103,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            string INumericTC<decimal>.ToString(decimal value) => FormattableString.Invariant($"{value:G}");
+            string INumericTC<decimal>.ToString(decimal value) =>
+                FormattableString.Invariant($"{value:G}");
 
             decimal INumericTC<decimal>.Prev(decimal value)
             {
@@ -118,10 +193,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     mid: uinttc.Random(random),
                     high: uinttc.Random(random),
                     isNegative: random.NextDouble() < 0.5,
-                    scale: (byte)random.Next(0, maxScale + 1)).Normalize().Value;
+                    scale: (byte)random.Next(0, maxScale + 1)
+                )
+                    .Normalize()
+                    .Value;
             }
 
-            public static decimal Normalize(decimal value) => DecimalRep.FromValue(value).Normalize().Value;
+            public static decimal Normalize(decimal value) =>
+                DecimalRep.FromValue(value).Normalize().Value;
 
             private readonly struct DecimalRep
             {
@@ -143,7 +222,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     this.scale = scale;
                 }
 
-                public decimal Value => new decimal(lo: (int)low, mid: (int)mid, hi: (int)high, isNegative: isNegative, scale: scale);
+                public decimal Value =>
+                    new decimal(
+                        lo: (int)low,
+                        mid: (int)mid,
+                        hi: (int)high,
+                        isNegative: isNegative,
+                        scale: scale
+                    );
 
                 public DecimalRep Normalize()
                 {
@@ -179,15 +265,40 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public static DecimalRep FromValue(decimal value)
                 {
-                    value.GetBits(out bool isNegative, out byte scale, out uint low, out uint mid, out uint high);
+                    value.GetBits(
+                        out bool isNegative,
+                        out byte scale,
+                        out uint low,
+                        out uint mid,
+                        out uint high
+                    );
                     Debug.Assert(scale <= maxScale);
-                    return new DecimalRep(low: low, mid: mid, high: high, isNegative: isNegative, scale: scale);
+                    return new DecimalRep(
+                        low: low,
+                        mid: mid,
+                        high: high,
+                        isNegative: isNegative,
+                        scale: scale
+                    );
                 }
 
-                public void Deconstruct(out uint low, out uint mid, out uint high, out bool isNegative, out byte scale) =>
-                    (low, mid, high, isNegative, scale) = (this.low, this.mid, this.high, this.isNegative, this.scale);
+                public void Deconstruct(
+                    out uint low,
+                    out uint mid,
+                    out uint high,
+                    out bool isNegative,
+                    out byte scale
+                ) =>
+                    (low, mid, high, isNegative, scale) = (
+                        this.low,
+                        this.mid,
+                        this.high,
+                        this.isNegative,
+                        this.scale
+                    );
 
-                public override string ToString() => $"Decimal({(isNegative ? "-" : "+")}, 0x{high:08X} 0x{mid:08X} 0x{low:08X} *10^-{scale})";
+                public override string ToString() =>
+                    $"Decimal({(isNegative ? "-" : "+")}, 0x{high:08X} 0x{mid:08X} 0x{low:08X} *10^-{scale})";
             }
         }
     }

@@ -60,7 +60,10 @@ namespace Newtonsoft.Json.Tests.Issues
             Mock<IFoo> mock = new Mock<IFoo>();
             IFoo foo = mock.Object;
 
-            string json = JsonConvert.SerializeObject(foo, new JsonSerializerSettings() { Converters = { new FooConverter() } });
+            string json = JsonConvert.SerializeObject(
+                foo,
+                new JsonSerializerSettings() { Converters = { new FooConverter() } }
+            );
             Assert.AreEqual(@"""foo""", json);
         }
 
@@ -70,27 +73,40 @@ namespace Newtonsoft.Json.Tests.Issues
             Mock<IFoo> mock = new Mock<IFoo>();
             IFoo foo = mock.Object;
 
-            List<MemberInfo> properties = ReflectionUtils.GetFieldsAndProperties(foo.GetType(), BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic).ToList();
+            List<MemberInfo> properties = ReflectionUtils
+                .GetFieldsAndProperties(
+                    foo.GetType(),
+                    BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                )
+                .ToList();
 
             Assert.AreEqual(1, properties.Count(p => p.Name == "Mock"));
         }
 
-        public interface IFoo
-        {
-        }
+        public interface IFoo { }
 
-        public class Foo : IFoo
-        {
-        }
+        public class Foo : IFoo { }
 
         public class FooConverter : JsonConverter
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteValue("foo");
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            )
             {
                 return new Foo();
             }

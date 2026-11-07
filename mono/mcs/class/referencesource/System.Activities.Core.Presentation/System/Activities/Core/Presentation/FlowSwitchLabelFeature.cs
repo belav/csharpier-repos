@@ -19,7 +19,13 @@ namespace System.Activities.Core.Presentation
         {
             get
             {
-                yield return new AttachedPropertyInfo<string> { PropertyName = DefaultCaseDisplayNamePropertyName, IsBrowsable = false, IsVisibleToModelItem = true, DefaultValue = DefaultCaseDisplayNameDefaultValue };
+                yield return new AttachedPropertyInfo<string>
+                {
+                    PropertyName = DefaultCaseDisplayNamePropertyName,
+                    IsBrowsable = false,
+                    IsVisibleToModelItem = true,
+                    DefaultValue = DefaultCaseDisplayNameDefaultValue,
+                };
             }
         }
     }

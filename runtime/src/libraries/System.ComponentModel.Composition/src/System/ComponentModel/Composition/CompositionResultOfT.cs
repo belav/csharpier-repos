@@ -14,19 +14,13 @@ namespace System.ComponentModel.Composition
         private readonly T? _value;
 
         public CompositionResult(T value)
-            : this(value, null)
-        {
-        }
+            : this(value, null) { }
 
         public CompositionResult(params CompositionError[] errors)
-            : this(default, errors)
-        {
-        }
+            : this(default, errors) { }
 
         public CompositionResult(IEnumerable<CompositionError>? errors)
-            : this(default, errors)
-        {
-        }
+            : this(default, errors) { }
 
         internal CompositionResult(T? value, IEnumerable<CompositionError>? errors)
         {

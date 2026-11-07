@@ -18,12 +18,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal class SymbolAndDiagnostics
         {
-            public static readonly SymbolAndDiagnostics Empty = new SymbolAndDiagnostics(null, ImmutableBindingDiagnostic<AssemblySymbol>.Empty);
+            public static readonly SymbolAndDiagnostics Empty = new SymbolAndDiagnostics(
+                null,
+                ImmutableBindingDiagnostic<AssemblySymbol>.Empty
+            );
 
             public readonly Symbol Symbol;
             public readonly ImmutableBindingDiagnostic<AssemblySymbol> Diagnostics;
 
-            public SymbolAndDiagnostics(Symbol symbol, ImmutableBindingDiagnostic<AssemblySymbol> diagnostics)
+            public SymbolAndDiagnostics(
+                Symbol symbol,
+                ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
+            )
             {
                 this.Symbol = symbol;
                 this.Diagnostics = diagnostics;

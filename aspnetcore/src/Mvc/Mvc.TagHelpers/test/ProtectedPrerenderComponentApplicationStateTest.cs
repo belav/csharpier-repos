@@ -71,8 +71,8 @@ public class ProtectedPrerenderComponentApplicationStateTest
         );
 
         // Act & Assert
-        Assert.Throws<CryptographicException>(
-            () => new ProtectedPrerenderComponentApplicationStore(persistedState, _provider)
+        Assert.Throws<CryptographicException>(() =>
+            new ProtectedPrerenderComponentApplicationStore(persistedState, _provider)
         );
     }
 }

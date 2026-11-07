@@ -35,7 +35,8 @@ namespace System.Threading.RateLimiting
         /// <value>
         /// <see cref="QueueProcessingOrder.OldestFirst"/> by default.
         /// </value>
-        public QueueProcessingOrder QueueProcessingOrder { get; set; } = QueueProcessingOrder.OldestFirst;
+        public QueueProcessingOrder QueueProcessingOrder { get; set; } =
+            QueueProcessingOrder.OldestFirst;
 
         /// <summary>
         /// Maximum cumulative permit count of queued acquisition requests.

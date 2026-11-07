@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,21 +21,20 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
-using System.Data.Common;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Linq.Mapping;
-using System.Reflection;
 using System.Data;
+using System.Data.Common;
+using System.Data.Linq.Mapping;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using DbLinq.Data.Linq;
 using DbLinq.Data.Linq.SqlClient;
 using DbLinq.Util;
 using DbLinq.Vendor;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
@@ -50,22 +49,37 @@ namespace DbLinq.MySql
 #endif
     class MySqlVendor : Vendor.Implementation.Vendor
     {
-        public override string VendorName { get { return "MySQL"; } }
+        public override string VendorName
+        {
+            get { return "MySQL"; }
+        }
 
         protected readonly MySqlSqlProvider sqlProvider = new MySqlSqlProvider();
-        public override ISqlProvider SqlProvider { get { return sqlProvider; } }
+        public override ISqlProvider SqlProvider
+        {
+            get { return sqlProvider; }
+        }
 
         /// <summary>
-        /// for large number of rows, we want to use BULK INSERT, 
+        /// for large number of rows, we want to use BULK INSERT,
         /// because it does not fill up the translation log.
         /// This is enabled for tables where Vendor.UserBulkInsert[db.Table] is true.
         /// </summary>
-        public override void BulkInsert<T>(Table<T> table, List<T> rows, int pageSize, IDbTransaction transaction)
+        public override void BulkInsert<T>(
+            Table<T> table,
+            List<T> rows,
+            int pageSize,
+            IDbTransaction transaction
+        )
         {
             // name parameters we're going to insert
             var members = new Dictionary<string, MemberInfo>();
             var tableName = table.Context.Mapping.GetTable(typeof(T)).TableName;
-            foreach (var dataMember in table.Context.Mapping.GetTable(typeof(T)).RowType.PersistentDataMembers)
+            foreach (
+                var dataMember in table
+                    .Context.Mapping.GetTable(typeof(T))
+                    .RowType.PersistentDataMembers
+            )
             {
                 members[dataMember.MappedName.Trim('"')] = dataMember.Member;
             }
@@ -88,7 +102,9 @@ namespace DbLinq.MySql
                         foreach (var keyValue in members)
                         {
                             var parameter = command.CreateParameter();
-                            parameter.ParameterName = SqlProvider.GetParameterName(string.Format("{0}_{1}", keyValue.Key, lineIndex));
+                            parameter.ParameterName = SqlProvider.GetParameterName(
+                                string.Format("{0}_{1}", keyValue.Key, lineIndex)
+                            );
                             parameter.SetValue(keyValue.Value.GetMemberValue(row));
                             values.Add(parameter.ParameterName);
                             command.Parameters.Add(parameter);
@@ -96,8 +112,11 @@ namespace DbLinq.MySql
                         lineIndex++;
                         valuesLists.Add(values);
                     }
-                    command.CommandText = sqlProvider.GetBulkInsert(SqlProvider.GetTable(tableName), columns,
-                                                                    valuesLists);
+                    command.CommandText = sqlProvider.GetBulkInsert(
+                        SqlProvider.GetTable(tableName),
+                        columns,
+                        valuesLists
+                    );
                     var result = command.ExecuteNonQuery();
                 }
             }
@@ -109,10 +128,17 @@ namespace DbLinq.MySql
             int pageSize = UseBulkInsert[table];
             //ProjectionData projData = ProjectionData.FromReflectedType(typeof(T));
             ProjectionData projData = AttribHelper.GetProjectionData(typeof(T));
-            TableAttribute tableAttrib = typeof(T).GetCustomAttributes(false).OfType<TableAttribute>().Single();
+            TableAttribute tableAttrib = typeof(T)
+                .GetCustomAttributes(false)
+                .OfType<TableAttribute>()
+                .Single();
 
             //build "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit)"
-            string header = "INSERT INTO " + tableAttrib.Name + " " + InsertClauseBuilder.InsertRowHeader(projData);
+            string header =
+                "INSERT INTO "
+                + tableAttrib.Name
+                + " "
+                + InsertClauseBuilder.InsertRowHeader(projData);
 
             foreach (List<T> page in Page.Paginate(rows, pageSize))
             {
@@ -127,8 +153,14 @@ namespace DbLinq.MySql
                 foreach (T row in page)
                 {
                     //prepare values = "(?P1, ?P2, ?P3, ?P4)"
-                    string values =
-                        InsertClauseBuilder.InsertRowFields(this, cmd, row, projData, paramList, ref numFieldsAdded);
+                    string values = InsertClauseBuilder.InsertRowFields(
+                        this,
+                        cmd,
+                        row,
+                        projData,
+                        paramList,
+                        ref numFieldsAdded
+                    );
                     sbValues.Append(separator).Append(values);
                     separator = ", ";
                 }
@@ -141,12 +173,16 @@ namespace DbLinq.MySql
             }
         }
 #endif
+
         /// <summary>
-        /// call mysql stored proc or stored function, 
+        /// call mysql stored proc or stored function,
         /// optionally return DataSet, and collect return params.
         /// </summary>
-        public override System.Data.Linq.IExecuteResult ExecuteMethodCall(DataContext context, MethodInfo method
-                                                                 , params object[] inputValues)
+        public override System.Data.Linq.IExecuteResult ExecuteMethodCall(
+            DataContext context,
+            MethodInfo method,
+            params object[] inputValues
+        )
         {
             if (method == null)
                 throw new ArgumentNullException("L56 Null 'method' parameter");
@@ -175,7 +211,10 @@ namespace DbLinq.MySql
                     ParameterInfo paramInfo = paramInfos[i];
 
                     //TODO: check to make sure there is exactly one [Parameter]?
-                    ParameterAttribute paramAttrib = paramInfo.GetCustomAttributes(false).OfType<ParameterAttribute>().Single();
+                    ParameterAttribute paramAttrib = paramInfo
+                        .GetCustomAttributes(false)
+                        .OfType<ParameterAttribute>()
+                        .Single();
 
                     string paramName = "?" + paramAttrib.Name; //eg. '?param1'
                     paramNames.Add(paramName);
@@ -185,7 +224,10 @@ namespace DbLinq.MySql
                     IDbDataParameter cmdParam = command.CreateParameter();
                     cmdParam.ParameterName = paramName;
                     //cmdParam.Direction = System.Data.ParameterDirection.Input;
-                    if (direction == System.Data.ParameterDirection.Input || direction == System.Data.ParameterDirection.InputOutput)
+                    if (
+                        direction == System.Data.ParameterDirection.Input
+                        || direction == System.Data.ParameterDirection.InputOutput
+                    )
                     {
                         object inputValue = inputValues[currInputIndex++];
                         cmdParam.Value = inputValue;
@@ -231,7 +273,10 @@ namespace DbLinq.MySql
             }
         }
 
-        static System.Data.ParameterDirection GetDirection(ParameterInfo paramInfo, ParameterAttribute paramAttrib)
+        static System.Data.ParameterDirection GetDirection(
+            ParameterInfo paramInfo,
+            ParameterAttribute paramAttrib
+        )
         {
             //strange hack to determine what's a ref, out parameter:
             //http://lists.ximian.com/pipermain/mono-list/2003-March/012751.html
@@ -246,7 +291,10 @@ namespace DbLinq.MySql
         /// <summary>
         /// Collect all Out or InOut param values, casting them to the correct .net type.
         /// </summary>
-        private List<object> CopyOutParams(ParameterInfo[] paramInfos, IDataParameterCollection paramSet)
+        private List<object> CopyOutParams(
+            ParameterInfo[] paramInfos,
+            IDataParameterCollection paramSet
+        )
         {
             List<object> outParamValues = new List<object>();
             //Type type_t = typeof(T);

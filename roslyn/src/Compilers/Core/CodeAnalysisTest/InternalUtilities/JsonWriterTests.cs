@@ -86,7 +86,10 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
             Assert.StrictEqual($"\"{expected}\"", WriteToString(value));
             Assert.StrictEqual($"\"{expected}_after\"", WriteToString($"{value}_after"));
             Assert.StrictEqual($"\"before_{expected}\"", WriteToString($"before_{value}"));
-            Assert.StrictEqual($"\"before_{expected}_after\"", WriteToString($"before_{value}_after"));
+            Assert.StrictEqual(
+                $"\"before_{expected}_after\"",
+                WriteToString($"before_{value}_after")
+            );
         }
 
         private static string WriteToString(Action<JsonWriter> action)

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,7 +12,11 @@ namespace Test
     {
         private AA m_buddy = null;
 
-        public AA(int reclevel) { if (reclevel < 1000) m_buddy = new AA(reclevel + 1); }
+        public AA(int reclevel)
+        {
+            if (reclevel < 1000)
+                m_buddy = new AA(reclevel + 1);
+        }
 
         ~AA() { }
     }

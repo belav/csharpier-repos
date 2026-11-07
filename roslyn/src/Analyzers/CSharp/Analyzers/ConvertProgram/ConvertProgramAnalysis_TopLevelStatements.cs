@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
 {
     internal static partial class ConvertProgramAnalysis
     {
-        public static bool CanOfferUseTopLevelStatements(CodeStyleOption2<bool> option, bool forAnalyzer)
+        public static bool CanOfferUseTopLevelStatements(
+            CodeStyleOption2<bool> option,
+            bool forAnalyzer
+        )
         {
             var userPrefersTopLevelStatements = option.Value == true;
             var analyzerDisabled = option.Notification.Severity == ReportDiagnostic.Suppress;
@@ -23,15 +26,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             // If the user likes top level statements, then we offer to convert to them from the diagnostic analyzer.
             // If the user prefers Program.Main then we offer to use top-level-statements from the refactoring provider.
             // If the analyzer is disabled completely, the refactoring is enabled in both directions.
-            var canOffer = userPrefersTopLevelStatements == forAnalyzer || (forRefactoring && analyzerDisabled);
+            var canOffer =
+                userPrefersTopLevelStatements == forAnalyzer
+                || (forRefactoring && analyzerDisabled);
             return canOffer;
         }
 
-        public static Location GetUseTopLevelStatementsDiagnosticLocation(MethodDeclarationSyntax methodDeclaration, bool isHidden)
+        public static Location GetUseTopLevelStatementsDiagnosticLocation(
+            MethodDeclarationSyntax methodDeclaration,
+            bool isHidden
+        )
         {
             // if the diagnostic is hidden, show it anywhere on the main method. Otherwise, just put the diagnostic on
             // the the 'Main' identifier.
-            return isHidden ? methodDeclaration.GetLocation() : methodDeclaration.Identifier.GetLocation();
+            return isHidden
+                ? methodDeclaration.GetLocation()
+                : methodDeclaration.Identifier.GetLocation();
         }
 
         public static string? GetMainTypeName(Compilation compilation)
@@ -46,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             MethodDeclarationSyntax methodDeclaration,
             string? mainTypeName,
             CancellationToken cancellationToken,
-            out bool canConvertToTopLevelStatements)
+            out bool canConvertToTopLevelStatements
+        )
         {
             canConvertToTopLevelStatements = false;
 
@@ -55,22 +66,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             //
             // For simplicity, we require the method to have a body so that we don't have to care about
             // expression-bodied members later.
-            if (!methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
-                methodDeclaration.TypeParameterList is not null ||
-                methodDeclaration.Identifier.ValueText != WellKnownMemberNames.EntryPointMethodName ||
-                methodDeclaration.Parent is not TypeDeclarationSyntax containingTypeDeclaration ||
-                methodDeclaration.Body == null)
+            if (
+                !methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+                || methodDeclaration.TypeParameterList is not null
+                || methodDeclaration.Identifier.ValueText
+                    != WellKnownMemberNames.EntryPointMethodName
+                || methodDeclaration.Parent is not TypeDeclarationSyntax containingTypeDeclaration
+                || methodDeclaration.Body == null
+            )
             {
                 return false;
             }
 
             // If the compilation options specified a type name that Main should be found in, then do a quick check that
             // our containing type matches that.
-            if (mainTypeName != null && containingTypeDeclaration.Identifier.ValueText != mainTypeName)
+            if (
+                mainTypeName != null
+                && containingTypeDeclaration.Identifier.ValueText != mainTypeName
+            )
                 return false;
 
             // If the user renamed the 'args' parameter, we can't convert to top level statements.
-            if (methodDeclaration.ParameterList.Parameters is [{ Identifier.ValueText: not "args" }])
+            if (
+                methodDeclaration.ParameterList.Parameters is [{ Identifier.ValueText: not "args" }]
+            )
                 return false;
 
             // Found a suitable candidate.  See if this matches the entrypoint the compiler has actually chosen.
@@ -84,11 +103,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
 
             // We found the entrypoint.  However, we can only effectively convert this to top-level-statements
             // if the existing type is amenable to that.
-            canConvertToTopLevelStatements = TypeCanBeConverted(entryPointMethod.ContainingType, containingTypeDeclaration);
+            canConvertToTopLevelStatements = TypeCanBeConverted(
+                entryPointMethod.ContainingType,
+                containingTypeDeclaration
+            );
             return true;
         }
 
-        private static bool TypeCanBeConverted(INamedTypeSymbol containingType, TypeDeclarationSyntax typeDeclaration)
+        private static bool TypeCanBeConverted(
+            INamedTypeSymbol containingType,
+            TypeDeclarationSyntax typeDeclaration
+        )
         {
             // Can't convert if our Program type derives or implements anything special.
             if (containingType.BaseType?.SpecialType != SpecialType.System_Object)
@@ -129,7 +154,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
                     return false;
 
                 // if not private, can't convert as something may be referencing it.
-                if (member.Modifiers.Any(m => m.Kind() is SyntaxKind.PublicKeyword or SyntaxKind.ProtectedKeyword or SyntaxKind.InternalKeyword))
+                if (
+                    member.Modifiers.Any(m =>
+                        m.Kind()
+                            is SyntaxKind.PublicKeyword
+                                or SyntaxKind.ProtectedKeyword
+                                or SyntaxKind.InternalKeyword
+                    )
+                )
                     return false;
 
                 if (!member.Modifiers.Any(SyntaxKind.StaticKeyword))

@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListChangedEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System.Security.Permissions;
 
     /// <devdoc>
@@ -12,5 +13,4 @@ namespace System.ComponentModel {
     /// </devdoc>
     [HostProtection(SharedState = true)]
     public delegate void ListChangedEventHandler(object sender, ListChangedEventArgs e);
-
 }

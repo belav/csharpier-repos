@@ -23,9 +23,7 @@ public class SqlServerDateOnlyTypeMapping : DateOnlyTypeMapping
     public static new SqlServerDateOnlyTypeMapping Default { get; } = new("date");
 
     internal SqlServerDateOnlyTypeMapping(string storeType)
-        : base(storeType)
-    {
-    }
+        : base(storeType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,9 +32,7 @@ public class SqlServerDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerDateOnlyTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +40,8 @@ public class SqlServerDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerDateOnlyTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerDateOnlyTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,6 +63,5 @@ public class SqlServerDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => "'{0:yyyy-MM-dd}'";
+    protected override string SqlLiteralFormatString => "'{0:yyyy-MM-dd}'";
 }

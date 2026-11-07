@@ -3,7 +3,10 @@
 
 namespace System.Diagnostics
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Constructor, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Constructor,
+        Inherited = false
+    )]
     public sealed class DebuggerHiddenAttribute : Attribute
     {
         public DebuggerHiddenAttribute() { }

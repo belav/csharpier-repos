@@ -20,13 +20,17 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode declaration,
             int insertionIndex,
             SyntaxNode parameterDeclaration,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var sourceText = declaration.SyntaxTree.GetText(cancellationToken);
             var generator = editor.Generator;
 
             var existingParameters = generator.GetParameters(declaration);
-            var placeOnNewLine = ShouldPlaceParametersOnNewLine(existingParameters, cancellationToken);
+            var placeOnNewLine = ShouldPlaceParametersOnNewLine(
+                existingParameters,
+                cancellationToken
+            );
 
             if (!placeOnNewLine)
             {
@@ -41,9 +45,13 @@ namespace Microsoft.CodeAnalysis.Editing
                 // Get the indentation of the original last parameter and give the new parameter the same indentation.
                 // Even if we're adding multiple parameters past the original last parameter, we can give them all the identation of the original 'last' parameter.
                 var leadingIndentation = GetDesiredLeadingIndentation(
-                    syntaxFacts, existingParameters[existingParameters.Count - 1], includeLeadingNewLine: true);
-                parameterDeclaration = parameterDeclaration.WithPrependedLeadingTrivia(leadingIndentation)
-                                                           .WithAdditionalAnnotations(Formatter.Annotation);
+                    syntaxFacts,
+                    existingParameters[existingParameters.Count - 1],
+                    includeLeadingNewLine: true
+                );
+                parameterDeclaration = parameterDeclaration
+                    .WithPrependedLeadingTrivia(leadingIndentation)
+                    .WithAdditionalAnnotations(Formatter.Annotation);
 
                 editor.AddParameter(declaration, parameterDeclaration);
             }
@@ -56,7 +64,7 @@ namespace Microsoft.CodeAnalysis.Editing
 
                 if (sourceText.AreOnSameLine(previousToken, firstParameter.GetFirstToken()))
                 {
-                    // First parameter is on hte same line as the method.  
+                    // First parameter is on hte same line as the method.
 
                     // We want to insert the parameter at the front of the existing parameter
                     // list.  That means we need to move the current first parameter to a new
@@ -66,17 +74,22 @@ namespace Microsoft.CodeAnalysis.Editing
                     var nextParameter = existingParameters[insertionIndex];
 
                     var nextLeadingIndentation = GetDesiredLeadingIndentation(
-                        syntaxFacts, existingParameters[insertionIndex + 1], includeLeadingNewLine: true);
+                        syntaxFacts,
+                        existingParameters[insertionIndex + 1],
+                        includeLeadingNewLine: true
+                    );
                     editor.ReplaceNode(
                         nextParameter,
-                        nextParameter.WithPrependedLeadingTrivia(nextLeadingIndentation)
-                                     .WithAdditionalAnnotations(Formatter.Annotation));
+                        nextParameter
+                            .WithPrependedLeadingTrivia(nextLeadingIndentation)
+                            .WithAdditionalAnnotations(Formatter.Annotation)
+                    );
                 }
                 else
                 {
                     // First parameter is on its own line.  No need to adjust its indentation.
                     // Just copy its indentation over to the parameter we're inserting, and
-                    // make sure the current first parameter gets a newline so it stays on 
+                    // make sure the current first parameter gets a newline so it stays on
                     // its own line.
 
                     // We want to insert the parameter at the front of the existing parameter
@@ -84,42 +97,60 @@ namespace Microsoft.CodeAnalysis.Editing
                     // line.  Give the current first parameter the indentation of the second
                     // parameter in the list.
                     var firstLeadingIndentation = GetDesiredLeadingIndentation(
-                        syntaxFacts, existingParameters[0], includeLeadingNewLine: false);
+                        syntaxFacts,
+                        existingParameters[0],
+                        includeLeadingNewLine: false
+                    );
 
-                    editor.InsertParameter(declaration, insertionIndex,
-                        parameterDeclaration.WithLeadingTrivia(firstLeadingIndentation));
+                    editor.InsertParameter(
+                        declaration,
+                        insertionIndex,
+                        parameterDeclaration.WithLeadingTrivia(firstLeadingIndentation)
+                    );
                     var nextParameter = existingParameters[insertionIndex];
 
                     editor.ReplaceNode(
                         nextParameter,
-                        nextParameter.WithPrependedLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
-                                     .WithAdditionalAnnotations(Formatter.Annotation));
+                        nextParameter
+                            .WithPrependedLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
+                            .WithAdditionalAnnotations(Formatter.Annotation)
+                    );
                 }
             }
             else
             {
-                // We're inserting somewhere after the start (but not at the end). Because 
+                // We're inserting somewhere after the start (but not at the end). Because
                 // we've set placeOnNewLine, we know that the current comma we'll be placed
-                // after already have a newline following it.  So all we need for this new 
+                // after already have a newline following it.  So all we need for this new
                 // parameter is to get the indentation of the following parameter.
                 // Because we're going to 'steal' the existing comma from that parameter,
                 // ensure that the next parameter has a new-line added to it so that it will
                 // still stay on a new line.
                 var nextParameter = existingParameters[insertionIndex];
                 var leadingIndentation = GetDesiredLeadingIndentation(
-                    syntaxFacts, existingParameters[insertionIndex], includeLeadingNewLine: false);
-                parameterDeclaration = parameterDeclaration.WithPrependedLeadingTrivia(leadingIndentation);
+                    syntaxFacts,
+                    existingParameters[insertionIndex],
+                    includeLeadingNewLine: false
+                );
+                parameterDeclaration = parameterDeclaration.WithPrependedLeadingTrivia(
+                    leadingIndentation
+                );
 
                 editor.InsertParameter(declaration, insertionIndex, parameterDeclaration);
                 editor.ReplaceNode(
                     nextParameter,
-                    nextParameter.WithPrependedLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
-                                 .WithAdditionalAnnotations(Formatter.Annotation));
+                    nextParameter
+                        .WithPrependedLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
+                        .WithAdditionalAnnotations(Formatter.Annotation)
+                );
             }
         }
 
         private static ImmutableArray<SyntaxTrivia> GetDesiredLeadingIndentation(
-            ISyntaxFacts syntaxFacts, SyntaxNode node, bool includeLeadingNewLine)
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode node,
+            bool includeLeadingNewLine
+        )
         {
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var triviaList);
             if (includeLeadingNewLine)
@@ -149,7 +180,9 @@ namespace Microsoft.CodeAnalysis.Editing
         }
 
         private static bool ShouldPlaceParametersOnNewLine(
-            IReadOnlyList<SyntaxNode> parameters, CancellationToken cancellationToken)
+            IReadOnlyList<SyntaxNode> parameters,
+            CancellationToken cancellationToken
+        )
         {
             if (parameters.Count <= 1)
             {

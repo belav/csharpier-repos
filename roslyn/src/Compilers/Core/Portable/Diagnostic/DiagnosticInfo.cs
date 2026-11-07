@@ -9,8 +9,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -30,20 +30,32 @@ namespace Microsoft.CodeAnalysis
         private readonly DiagnosticSeverity _effectiveSeverity;
         private readonly object[] _arguments;
 
-        private static ImmutableDictionary<int, DiagnosticDescriptor> s_errorCodeToDescriptorMap = ImmutableDictionary<int, DiagnosticDescriptor>.Empty;
+        private static ImmutableDictionary<int, DiagnosticDescriptor> s_errorCodeToDescriptorMap =
+            ImmutableDictionary<int, DiagnosticDescriptor>.Empty;
 
         // Mark compiler errors as non-configurable to ensure they can never be suppressed or filtered.
-        private static readonly ImmutableArray<string> s_compilerErrorCustomTags = ImmutableArray.Create(WellKnownDiagnosticTags.Compiler, WellKnownDiagnosticTags.Telemetry, WellKnownDiagnosticTags.NotConfigurable);
-        private static readonly ImmutableArray<string> s_compilerNonErrorCustomTags = ImmutableArray.Create(WellKnownDiagnosticTags.Compiler, WellKnownDiagnosticTags.Telemetry);
+        private static readonly ImmutableArray<string> s_compilerErrorCustomTags =
+            ImmutableArray.Create(
+                WellKnownDiagnosticTags.Compiler,
+                WellKnownDiagnosticTags.Telemetry,
+                WellKnownDiagnosticTags.NotConfigurable
+            );
+        private static readonly ImmutableArray<string> s_compilerNonErrorCustomTags =
+            ImmutableArray.Create(
+                WellKnownDiagnosticTags.Compiler,
+                WellKnownDiagnosticTags.Telemetry
+            );
 
         // Only the compiler creates instances.
         internal DiagnosticInfo(CommonMessageProvider messageProvider, int errorCode)
-            : this(messageProvider, errorCode, Array.Empty<object>())
-        {
-        }
+            : this(messageProvider, errorCode, Array.Empty<object>()) { }
 
         // Only the compiler creates instances.
-        internal DiagnosticInfo(CommonMessageProvider messageProvider, int errorCode, params object[] arguments)
+        internal DiagnosticInfo(
+            CommonMessageProvider messageProvider,
+            int errorCode,
+            params object[] arguments
+        )
         {
             AssertMessageSerializable(arguments);
             AssertExpectedMessageArgumentsLength(messageProvider, errorCode, arguments.Length);
@@ -65,22 +77,35 @@ namespace Microsoft.CodeAnalysis
             _effectiveSeverity = overriddenSeverity;
         }
 
-        internal static DiagnosticDescriptor GetDescriptor(int errorCode, CommonMessageProvider messageProvider)
+        internal static DiagnosticDescriptor GetDescriptor(
+            int errorCode,
+            CommonMessageProvider messageProvider
+        )
         {
             var defaultSeverity = messageProvider.GetSeverity(errorCode);
             return GetOrCreateDescriptor(errorCode, defaultSeverity, messageProvider);
         }
 
-        private static DiagnosticDescriptor GetOrCreateDescriptor(int errorCode, DiagnosticSeverity defaultSeverity, CommonMessageProvider messageProvider)
+        private static DiagnosticDescriptor GetOrCreateDescriptor(
+            int errorCode,
+            DiagnosticSeverity defaultSeverity,
+            CommonMessageProvider messageProvider
+        )
         {
             return ImmutableInterlocked.GetOrAdd(
                 ref s_errorCodeToDescriptorMap,
                 errorCode,
-                static (code, arg) => CreateDescriptor(code, arg.defaultSeverity, arg.messageProvider),
-                (defaultSeverity, messageProvider));
+                static (code, arg) =>
+                    CreateDescriptor(code, arg.defaultSeverity, arg.messageProvider),
+                (defaultSeverity, messageProvider)
+            );
         }
 
-        private static DiagnosticDescriptor CreateDescriptor(int errorCode, DiagnosticSeverity defaultSeverity, CommonMessageProvider messageProvider)
+        private static DiagnosticDescriptor CreateDescriptor(
+            int errorCode,
+            DiagnosticSeverity defaultSeverity,
+            CommonMessageProvider messageProvider
+        )
         {
             var id = messageProvider.GetIdForErrorCode(errorCode);
             var title = messageProvider.GetTitle(errorCode);
@@ -89,8 +114,17 @@ namespace Microsoft.CodeAnalysis
             var helpLink = messageProvider.GetHelpLink(errorCode);
             var category = messageProvider.GetCategory(errorCode);
             var customTags = GetCustomTags(defaultSeverity);
-            return new DiagnosticDescriptor(id, title, messageFormat, category, defaultSeverity,
-                isEnabledByDefault: messageProvider.GetIsEnabledByDefault(errorCode), description: description, helpLinkUri: helpLink, customTags: customTags);
+            return new DiagnosticDescriptor(
+                id,
+                title,
+                messageFormat,
+                category,
+                defaultSeverity,
+                isEnabledByDefault: messageProvider.GetIsEnabledByDefault(errorCode),
+                description: description,
+                helpLinkUri: helpLink,
+                customTags: customTags
+            );
         }
 
         [Conditional("DEBUG")]
@@ -122,7 +156,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         [Conditional("DEBUG")]
-        private static void AssertExpectedMessageArgumentsLength(CommonMessageProvider messageProvider, int errorCode, int actualLength)
+        private static void AssertExpectedMessageArgumentsLength(
+            CommonMessageProvider messageProvider,
+            int errorCode,
+            int actualLength
+        )
         {
 #if DEBUG
             if (!messageProvider.ShouldAssertExpectedMessageArgumentsLength(errorCode))
@@ -148,7 +186,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         // Only the compiler creates instances.
-        internal DiagnosticInfo(CommonMessageProvider messageProvider, bool isWarningAsError, int errorCode, params object[] arguments)
+        internal DiagnosticInfo(
+            CommonMessageProvider messageProvider,
+            bool isWarningAsError,
+            int errorCode,
+            params object[] arguments
+        )
             : this(messageProvider, errorCode, arguments)
         {
             Debug.Assert(!isWarningAsError || _defaultSeverity == DiagnosticSeverity.Warning);
@@ -182,14 +225,14 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The error code, as an integer.
         /// </summary>
-        public int Code { get { return _errorCode; } }
+        public int Code
+        {
+            get { return _errorCode; }
+        }
 
         public virtual DiagnosticDescriptor Descriptor
         {
-            get
-            {
-                return GetOrCreateDescriptor(_errorCode, _defaultSeverity, _messageProvider);
-            }
+            get { return GetOrCreateDescriptor(_errorCode, _defaultSeverity, _messageProvider); }
         }
 
         /// <summary>
@@ -198,10 +241,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public DiagnosticSeverity Severity
         {
-            get
-            {
-                return _effectiveSeverity;
-            }
+            get { return _effectiveSeverity; }
         }
 
         /// <summary>
@@ -210,10 +250,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public DiagnosticSeverity DefaultSeverity
         {
-            get
-            {
-                return _defaultSeverity;
-            }
+            get { return _defaultSeverity; }
         }
 
         /// <summary>
@@ -244,8 +281,8 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return this.DefaultSeverity == DiagnosticSeverity.Warning &&
-                    this.Severity == DiagnosticSeverity.Error;
+                return this.DefaultSeverity == DiagnosticSeverity.Warning
+                    && this.Severity == DiagnosticSeverity.Error;
             }
         }
 
@@ -255,25 +292,19 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public string Category
         {
-            get
-            {
-                return _messageProvider.GetCategory(_errorCode);
-            }
+            get { return _messageProvider.GetCategory(_errorCode); }
         }
 
         internal ImmutableArray<string> CustomTags
         {
-            get
-            {
-                return GetCustomTags(_defaultSeverity);
-            }
+            get { return GetCustomTags(_defaultSeverity); }
         }
 
         private static ImmutableArray<string> GetCustomTags(DiagnosticSeverity defaultSeverity)
         {
-            return defaultSeverity == DiagnosticSeverity.Error ?
-                s_compilerErrorCustomTags :
-                s_compilerNonErrorCustomTags;
+            return defaultSeverity == DiagnosticSeverity.Error
+                ? s_compilerErrorCustomTags
+                : s_compilerNonErrorCustomTags;
         }
 
         internal bool IsNotConfigurable()
@@ -289,10 +320,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public virtual IReadOnlyList<Location> AdditionalLocations
         {
-            get
-            {
-                return SpecializedCollections.EmptyReadOnlyList<Location>();
-            }
+            get { return SpecializedCollections.EmptyReadOnlyList<Location>(); }
         }
 
         /// <summary>
@@ -301,10 +329,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public virtual string MessageIdentifier
         {
-            get
-            {
-                return _messageProvider.GetIdForErrorCode(_errorCode);
-            }
+            get { return _messageProvider.GetIdForErrorCode(_errorCode); }
         }
 
         /// <summary>
@@ -313,7 +338,10 @@ namespace Microsoft.CodeAnalysis
         public virtual string GetMessage(IFormatProvider? formatProvider = null)
         {
             // Get the message and fill in arguments.
-            string message = _messageProvider.LoadMessage(_errorCode, formatProvider as CultureInfo);
+            string message = _messageProvider.LoadMessage(
+                _errorCode,
+                formatProvider as CultureInfo
+            );
             if (string.IsNullOrEmpty(message))
             {
                 return string.Empty;
@@ -340,7 +368,8 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                var symbol = _arguments[i] as ISymbol ?? (_arguments[i] as ISymbolInternal)?.GetISymbol();
+                var symbol =
+                    _arguments[i] as ISymbol ?? (_arguments[i] as ISymbolInternal)?.GetISymbol();
                 if (symbol != null)
                 {
                     argumentsToUse = InitializeArgumentListIfNeeded(argumentsToUse);
@@ -387,9 +416,17 @@ namespace Microsoft.CodeAnalysis
 
         string IFormattable.ToString(string? format, IFormatProvider? formatProvider)
         {
-            return String.Format(formatProvider, "{0}: {1}",
-                _messageProvider.GetMessagePrefix(this.MessageIdentifier, this.Severity, this.IsWarningAsError, formatProvider as CultureInfo),
-                this.GetMessage(formatProvider));
+            return String.Format(
+                formatProvider,
+                "{0}: {1}",
+                _messageProvider.GetMessagePrefix(
+                    this.MessageIdentifier,
+                    this.Severity,
+                    this.IsWarningAsError,
+                    formatProvider as CultureInfo
+                ),
+                this.GetMessage(formatProvider)
+            );
         }
 
         public sealed override int GetHashCode()
@@ -409,9 +446,11 @@ namespace Microsoft.CodeAnalysis
 
             bool result = false;
 
-            if (other != null &&
-                other._errorCode == _errorCode &&
-                other.GetType() == this.GetType())
+            if (
+                other != null
+                && other._errorCode == _errorCode
+                && other.GetType() == this.GetType()
+            )
             {
                 if (_arguments.Length == other._arguments.Length)
                 {

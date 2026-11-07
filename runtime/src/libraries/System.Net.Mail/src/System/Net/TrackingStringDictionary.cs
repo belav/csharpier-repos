@@ -10,16 +10,19 @@ namespace System.Net
         private readonly bool _isReadOnly;
         private bool _isChanged;
 
-        internal TrackingStringDictionary() : this(false)
-        {
-        }
+        internal TrackingStringDictionary()
+            : this(false) { }
 
         internal TrackingStringDictionary(bool isReadOnly)
         {
             _isReadOnly = isReadOnly;
         }
 
-        internal bool IsChanged { get { return _isChanged; } set { _isChanged = value; } }
+        internal bool IsChanged
+        {
+            get { return _isChanged; }
+            set { _isChanged = value; }
+        }
 
         public override void Add(string key, string? value)
         {

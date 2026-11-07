@@ -18,22 +18,46 @@ namespace System.Reflection.TypeLoading.Ecma
     // Compat: Since this a new library, we are choosing not to carry forth the ancient oddities of runtime
     // Reflection's ToString() ("ByRef" instead of "&", "Int32" rather than "System.Int32"), etc.
     //
-    internal sealed class EcmaSignatureTypeProviderForToString : ISignatureTypeProvider<string, TypeContext>
+    internal sealed class EcmaSignatureTypeProviderForToString
+        : ISignatureTypeProvider<string, TypeContext>
     {
-        public static readonly EcmaSignatureTypeProviderForToString Instance = new EcmaSignatureTypeProviderForToString();
+        public static readonly EcmaSignatureTypeProviderForToString Instance =
+            new EcmaSignatureTypeProviderForToString();
 
         private EcmaSignatureTypeProviderForToString() { }
 
-        public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind) => handle.ToTypeString(reader);
-        public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind) => handle.ToTypeString(reader);
-        public string GetTypeFromSpecification(MetadataReader reader, TypeContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind) => handle.ToTypeString(reader, genericContext);
+        public string GetTypeFromDefinition(
+            MetadataReader reader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind
+        ) => handle.ToTypeString(reader);
+
+        public string GetTypeFromReference(
+            MetadataReader reader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind
+        ) => handle.ToTypeString(reader);
+
+        public string GetTypeFromSpecification(
+            MetadataReader reader,
+            TypeContext genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind
+        ) => handle.ToTypeString(reader, genericContext);
 
         public string GetSZArrayType(string elementType) => elementType + "[]";
-        public string GetArrayType(string elementType, ArrayShape shape) => elementType + Helpers.ComputeArraySuffix(shape.Rank, multiDim: true);
+
+        public string GetArrayType(string elementType, ArrayShape shape) =>
+            elementType + Helpers.ComputeArraySuffix(shape.Rank, multiDim: true);
+
         public string GetByReferenceType(string elementType) => elementType + "&";
+
         public string GetPointerType(string elementType) => elementType + "*";
 
-        public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments)
+        public string GetGenericInstantiation(
+            string genericType,
+            ImmutableArray<string> typeArguments
+        )
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(genericType);
@@ -51,8 +75,11 @@ namespace System.Reflection.TypeLoading.Ecma
             return sb.ToString();
         }
 
-        public string GetGenericTypeParameter(TypeContext genericContext, int index) => genericContext.GetGenericTypeArgumentOrNull(index)?.ToString() ?? ("!" + index);
-        public string GetGenericMethodParameter(TypeContext genericContext, int index) => genericContext.GetGenericMethodArgumentOrNull(index)?.ToString() ?? ("!!" + index);
+        public string GetGenericTypeParameter(TypeContext genericContext, int index) =>
+            genericContext.GetGenericTypeArgumentOrNull(index)?.ToString() ?? ("!" + index);
+
+        public string GetGenericMethodParameter(TypeContext genericContext, int index) =>
+            genericContext.GetGenericMethodArgumentOrNull(index)?.ToString() ?? ("!!" + index);
 
         public string GetFunctionPointerType(MethodSignature<string> signature)
         {
@@ -71,13 +98,18 @@ namespace System.Reflection.TypeLoading.Ecma
             sb.Append(')');
             return sb.ToString();
         }
-        public string GetModifiedType(string modifier, string unmodifiedType, bool isRequired) => unmodifiedType;
+
+        public string GetModifiedType(string modifier, string unmodifiedType, bool isRequired) =>
+            unmodifiedType;
+
         public string GetPinnedType(string elementType) => elementType;
 
         public string GetPrimitiveType(PrimitiveTypeCode typeCode)
         {
-            typeCode.ToCoreType().GetFullName(out ReadOnlySpan<byte> ns, out ReadOnlySpan<byte> name);
-            return ns.ToUtf16() + "." + name.ToUtf16();  // This is not safe for types outside of a namespace, but all primitive types are known to be in "System"
+            typeCode
+                .ToCoreType()
+                .GetFullName(out ReadOnlySpan<byte> ns, out ReadOnlySpan<byte> name);
+            return ns.ToUtf16() + "." + name.ToUtf16(); // This is not safe for types outside of a namespace, but all primitive types are known to be in "System"
         }
     }
 }

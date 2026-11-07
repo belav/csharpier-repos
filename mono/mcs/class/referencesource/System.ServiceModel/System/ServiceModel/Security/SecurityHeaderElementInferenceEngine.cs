@@ -4,17 +4,25 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Security.Tokens;
     using System.Xml;
 
     abstract class SecurityHeaderElementInferenceEngine
     {
-        public abstract void ExecuteProcessingPasses(ReceiveSecurityHeader securityHeader, XmlDictionaryReader reader);
+        public abstract void ExecuteProcessingPasses(
+            ReceiveSecurityHeader securityHeader,
+            XmlDictionaryReader reader
+        );
 
-        public abstract void MarkElements(ReceiveSecurityHeaderElementManager elementManager, bool messageSecurityMode);
+        public abstract void MarkElements(
+            ReceiveSecurityHeaderElementManager elementManager,
+            bool messageSecurityMode
+        );
 
-        public static SecurityHeaderElementInferenceEngine GetInferenceEngine(SecurityHeaderLayout layout)
+        public static SecurityHeaderElementInferenceEngine GetInferenceEngine(
+            SecurityHeaderLayout layout
+        )
         {
             SecurityHeaderLayoutHelper.Validate(layout);
 
@@ -29,7 +37,9 @@ namespace System.ServiceModel.Security
                 case SecurityHeaderLayout.LaxTimestampLast:
                     return LaxTimestampLastModeSecurityHeaderElementInferenceEngine.Instance;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("layout"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("layout")
+                    );
             }
         }
     }

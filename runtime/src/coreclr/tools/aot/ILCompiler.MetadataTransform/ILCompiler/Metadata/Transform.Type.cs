@@ -4,19 +4,19 @@
 using System;
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
-using Ecma = System.Reflection.Metadata;
 using Cts = Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 using TypeAttributes = System.Reflection.TypeAttributes;
 
 namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        internal EntityMap<Cts.TypeDesc, MetadataRecord> _types =
-            new EntityMap<Cts.TypeDesc, MetadataRecord>(EqualityComparer<Cts.TypeDesc>.Default);
+        internal EntityMap<Cts.TypeDesc, MetadataRecord> _types = new EntityMap<
+            Cts.TypeDesc,
+            MetadataRecord
+        >(EqualityComparer<Cts.TypeDesc>.Default);
 
         private Action<Cts.MetadataType, TypeDefinition> _initTypeDef;
         private Action<Cts.MetadataType, TypeReference> _initTypeRef;
@@ -52,13 +52,22 @@ namespace ILCompiler.Metadata
                     rec = _types.Create((Cts.PointerType)type, _initPointer ??= InitializePointer);
                     break;
                 case Cts.TypeFlags.FunctionPointer:
-                    rec = _types.Create((Cts.FunctionPointerType)type, _initFunctionPointer ??= InitializeFunctionPointer);
+                    rec = _types.Create(
+                        (Cts.FunctionPointerType)type,
+                        _initFunctionPointer ??= InitializeFunctionPointer
+                    );
                     break;
                 case Cts.TypeFlags.SignatureTypeVariable:
-                    rec = _types.Create((Cts.SignatureTypeVariable)type, _initTypeVar ??= InitializeTypeVariable);
+                    rec = _types.Create(
+                        (Cts.SignatureTypeVariable)type,
+                        _initTypeVar ??= InitializeTypeVariable
+                    );
                     break;
                 case Cts.TypeFlags.SignatureMethodVariable:
-                    rec = _types.Create((Cts.SignatureMethodVariable)type, _initMethodVar ??= InitializeMethodVariable);
+                    rec = _types.Create(
+                        (Cts.SignatureMethodVariable)type,
+                        _initMethodVar ??= InitializeMethodVariable
+                    );
                     break;
                 default:
                     {
@@ -76,11 +85,17 @@ namespace ILCompiler.Metadata
                             if (_policy.GeneratesMetadata(metadataType))
                             {
                                 Debug.Assert(!_policy.IsBlocked(metadataType));
-                                rec = _types.Create(metadataType, _initTypeDef ??= InitializeTypeDef);
+                                rec = _types.Create(
+                                    metadataType,
+                                    _initTypeDef ??= InitializeTypeDef
+                                );
                             }
                             else
                             {
-                                rec = _types.Create(metadataType, _initTypeRef ??= InitializeTypeRef);
+                                rec = _types.Create(
+                                    metadataType,
+                                    _initTypeRef ??= InitializeTypeRef
+                                );
                             }
                         }
                     }
@@ -115,42 +130,39 @@ namespace ILCompiler.Metadata
 
         private void InitializeByRef(Cts.ByRefType entity, TypeSpecification record)
         {
-            record.Signature = new ByReferenceSignature
-            {
-                Type = HandleType(entity.ParameterType)
-            };
+            record.Signature = new ByReferenceSignature { Type = HandleType(entity.ParameterType) };
         }
 
         private void InitializePointer(Cts.PointerType entity, TypeSpecification record)
         {
-            record.Signature = new PointerSignature
-            {
-                Type = HandleType(entity.ParameterType)
-            };
+            record.Signature = new PointerSignature { Type = HandleType(entity.ParameterType) };
         }
 
-        private void InitializeFunctionPointer(Cts.FunctionPointerType entity, TypeSpecification record)
+        private void InitializeFunctionPointer(
+            Cts.FunctionPointerType entity,
+            TypeSpecification record
+        )
         {
             record.Signature = new FunctionPointerSignature
             {
-                Signature = HandleMethodSignature(entity.Signature)
+                Signature = HandleMethodSignature(entity.Signature),
             };
         }
 
-        private void InitializeTypeVariable(Cts.SignatureTypeVariable entity, TypeSpecification record)
+        private void InitializeTypeVariable(
+            Cts.SignatureTypeVariable entity,
+            TypeSpecification record
+        )
         {
-            record.Signature = new TypeVariableSignature
-            {
-                Number = entity.Index
-            };
+            record.Signature = new TypeVariableSignature { Number = entity.Index };
         }
 
-        private void InitializeMethodVariable(Cts.SignatureMethodVariable entity, TypeSpecification record)
+        private void InitializeMethodVariable(
+            Cts.SignatureMethodVariable entity,
+            TypeSpecification record
+        )
         {
-            record.Signature = new MethodTypeVariableSignature
-            {
-                Number = entity.Index
-            };
+            record.Signature = new MethodTypeVariableSignature { Number = entity.Index };
         }
 
         private void InitializeTypeInstance(Cts.TypeDesc entity, TypeSpecification record)
@@ -198,11 +210,16 @@ namespace ILCompiler.Metadata
 
             if (containingType.ContainingType != null)
             {
-                parentReferenceRecord.ParentNamespaceOrType = GetNestedReferenceParent(containingType);
+                parentReferenceRecord.ParentNamespaceOrType = GetNestedReferenceParent(
+                    containingType
+                );
             }
             else
             {
-                parentReferenceRecord.ParentNamespaceOrType = HandleNamespaceReference(containingType.Module, containingType.Namespace);
+                parentReferenceRecord.ParentNamespaceOrType = HandleNamespaceReference(
+                    containingType.Module,
+                    containingType.Namespace
+                );
             }
 
             return parentReferenceRecord;
@@ -218,7 +235,10 @@ namespace ILCompiler.Metadata
             }
             else
             {
-                record.ParentNamespaceOrType = HandleNamespaceReference(entity.Module, entity.Namespace);
+                record.ParentNamespaceOrType = HandleNamespaceReference(
+                    entity.Module,
+                    entity.Namespace
+                );
             }
 
             record.TypeName = HandleString(entity.Name);
@@ -235,13 +255,18 @@ namespace ILCompiler.Metadata
                 record.EnclosingType = enclosingType;
                 enclosingType.NestedTypes.Add(record);
 
-                var namespaceDefinition =
-                    HandleNamespaceDefinition(containingType.Module, entity.ContainingType.Namespace);
+                var namespaceDefinition = HandleNamespaceDefinition(
+                    containingType.Module,
+                    entity.ContainingType.Namespace
+                );
                 record.NamespaceDefinition = namespaceDefinition;
             }
             else
             {
-                var namespaceDefinition = HandleNamespaceDefinition(entity.Module, entity.Namespace);
+                var namespaceDefinition = HandleNamespaceDefinition(
+                    entity.Module,
+                    entity.Namespace
+                );
                 record.NamespaceDefinition = namespaceDefinition;
 
                 if (entity.IsModuleType)
@@ -305,7 +330,9 @@ namespace ILCompiler.Metadata
             {
                 record.GenericParameters.Capacity = entity.Instantiation.Length;
                 foreach (var p in entity.Instantiation)
-                    record.GenericParameters.Add(HandleGenericParameter((Cts.GenericParameterDesc)p));
+                    record.GenericParameters.Add(
+                        HandleGenericParameter((Cts.GenericParameterDesc)p)
+                    );
             }
 
             foreach (var field in entity.GetFields())
@@ -327,7 +354,9 @@ namespace ILCompiler.Metadata
             var ecmaEntity = entity as Cts.Ecma.EcmaType;
             if (ecmaEntity != null)
             {
-                Ecma.TypeDefinition ecmaRecord = ecmaEntity.MetadataReader.GetTypeDefinition(ecmaEntity.Handle);
+                Ecma.TypeDefinition ecmaRecord = ecmaEntity.MetadataReader.GetTypeDefinition(
+                    ecmaEntity.Handle
+                );
 
                 foreach (var e in ecmaRecord.GetEvents())
                 {
@@ -343,10 +372,14 @@ namespace ILCompiler.Metadata
                         record.Properties.Add(prop);
                 }
 
-                Ecma.CustomAttributeHandleCollection customAttributes = ecmaRecord.GetCustomAttributes();
+                Ecma.CustomAttributeHandleCollection customAttributes =
+                    ecmaRecord.GetCustomAttributes();
                 if (customAttributes.Count > 0)
                 {
-                    record.CustomAttributes = HandleCustomAttributes(ecmaEntity.EcmaModule, customAttributes);
+                    record.CustomAttributes = HandleCustomAttributes(
+                        ecmaEntity.EcmaModule,
+                        customAttributes
+                    );
                 }
 
                 /* COMPLETENESS
@@ -374,8 +407,8 @@ namespace ILCompiler.Metadata
                 }*/
             }
 
-            static bool HasNestedTypes(Cts.MetadataType entity)
-                => entity.GetNestedTypes().GetEnumerator().MoveNext();
+            static bool HasNestedTypes(Cts.MetadataType entity) =>
+                entity.GetNestedTypes().GetEnumerator().MoveNext();
         }
 
         private MetadataRecord HandleType(Cts.Ecma.EcmaModule module, ref Ecma.BlobReader reader)
@@ -423,79 +456,82 @@ namespace ILCompiler.Metadata
                     {
                         Signature = new SZArraySignature()
                         {
-                            ElementType = HandleType(module, ref reader)
-                        }
+                            ElementType = HandleType(module, ref reader),
+                        },
                     };
                 case Ecma.SignatureTypeCode.Array:
+                {
+                    MetadataRecord elementType = HandleType(module, ref reader);
+                    int rank = reader.ReadCompressedInteger();
+
+                    var boundsCount = reader.ReadCompressedInteger();
+                    for (int i = 0; i < boundsCount; i++)
+                        reader.ReadCompressedInteger();
+                    var lowerBoundsCount = reader.ReadCompressedInteger();
+                    for (int j = 0; j < lowerBoundsCount; j++)
+                        reader.ReadCompressedSignedInteger();
+
+                    return new TypeSpecification
                     {
-                        MetadataRecord elementType = HandleType(module, ref reader);
-                        int rank = reader.ReadCompressedInteger();
-
-                        var boundsCount = reader.ReadCompressedInteger();
-                        for (int i = 0; i < boundsCount; i++)
-                            reader.ReadCompressedInteger();
-                        var lowerBoundsCount = reader.ReadCompressedInteger();
-                        for (int j = 0; j < lowerBoundsCount; j++)
-                            reader.ReadCompressedSignedInteger();
-
-                        return new TypeSpecification
+                        Signature = new ArraySignature()
                         {
-                            Signature = new ArraySignature()
-                            {
-                                ElementType = elementType,
-                                Rank = rank,
-                                // TODO: LowerBounds
-                                LowerBounds = Array.Empty<int>(),
-                                // TODO: Sizes
-                                Sizes = Array.Empty<int>(),
-                            }
-                        };
-                    }
+                            ElementType = elementType,
+                            Rank = rank,
+                            // TODO: LowerBounds
+                            LowerBounds = Array.Empty<int>(),
+                            // TODO: Sizes
+                            Sizes = Array.Empty<int>(),
+                        },
+                    };
+                }
                 case Ecma.SignatureTypeCode.ByReference:
                     return new TypeSpecification
                     {
                         Signature = new ByReferenceSignature()
                         {
-                            Type = HandleType(module, ref reader)
-                        }
+                            Type = HandleType(module, ref reader),
+                        },
                     };
                 case Ecma.SignatureTypeCode.Pointer:
                     return new TypeSpecification
                     {
                         Signature = new PointerSignature()
                         {
-                            Type = HandleType(module, ref reader)
-                        }
+                            Type = HandleType(module, ref reader),
+                        },
                     };
                 case Ecma.SignatureTypeCode.GenericTypeParameter:
-                    return HandleType(module.Context.GetSignatureVariable(reader.ReadCompressedInteger(), false));
+                    return HandleType(
+                        module.Context.GetSignatureVariable(reader.ReadCompressedInteger(), false)
+                    );
                 case Ecma.SignatureTypeCode.GenericMethodParameter:
-                    return HandleType(module.Context.GetSignatureVariable(reader.ReadCompressedInteger(), true));
+                    return HandleType(
+                        module.Context.GetSignatureVariable(reader.ReadCompressedInteger(), true)
+                    );
                 case Ecma.SignatureTypeCode.GenericTypeInstance:
+                {
+                    var sig = new TypeInstantiationSignature
                     {
-                        var sig = new TypeInstantiationSignature
-                        {
-                            GenericType = HandleType(module, ref reader)
-                        };
+                        GenericType = HandleType(module, ref reader),
+                    };
 
-                        int count = reader.ReadCompressedInteger();
-                        for (int i = 0; i < count; i++)
-                            sig.GenericTypeArguments.Add(HandleType(module, ref reader));
+                    int count = reader.ReadCompressedInteger();
+                    for (int i = 0; i < count; i++)
+                        sig.GenericTypeArguments.Add(HandleType(module, ref reader));
 
-                        return new TypeSpecification
-                        {
-                            Signature = sig
-                        };
-                    }
+                    return new TypeSpecification { Signature = sig };
+                }
                 case Ecma.SignatureTypeCode.TypedReference:
-                    return HandleType(module.Context.GetWellKnownType(Cts.WellKnownType.TypedReference));
+                    return HandleType(
+                        module.Context.GetWellKnownType(Cts.WellKnownType.TypedReference)
+                    );
                 case Ecma.SignatureTypeCode.FunctionPointer:
                     return new TypeSpecification
                     {
                         Signature = new FunctionPointerSignature
                         {
-                            Signature = HandleMethodSignature(module, ref reader)
-                        }
+                            Signature = HandleMethodSignature(module, ref reader),
+                        },
                     };
                 case Ecma.SignatureTypeCode.OptionalModifier:
                     return new ModifiedType
@@ -524,7 +560,9 @@ namespace ILCompiler.Metadata
             var ecmaType = type as Cts.Ecma.EcmaType;
             if (ecmaType != null)
             {
-                Ecma.TypeDefinition ecmaRecord = ecmaType.MetadataReader.GetTypeDefinition(ecmaType.Handle);
+                Ecma.TypeDefinition ecmaRecord = ecmaType.MetadataReader.GetTypeDefinition(
+                    ecmaType.Handle
+                );
                 result = ecmaRecord.Attributes;
             }
             else

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,53 +27,56 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class SplitterEventArgs : EventArgs
-	{
-		#region Private fields
-	    
-		internal int split_x;
-		internal int split_y;
-		internal int x;
-		internal int y;
+namespace System.Windows.Forms
+{
+    [ComVisible(true)]
+    public class SplitterEventArgs : EventArgs
+    {
+        #region Private fields
 
-		#endregion
-		
-		#region Constructors
-		
-		public SplitterEventArgs(int x, int y, int splitX, int splitY)
-		{
-			this.x = x;
-			this.y = y;
-			SplitX = splitX;
-			SplitY = splitY;
-		}
-		
-		#endregion
+        internal int split_x;
+        internal int split_y;
+        internal int x;
+        internal int y;
 
-		#region Properties
-		
-		public int SplitX { 
-			get { return split_x; }
-			set { split_x = value; }
-		}
-	    
-		public int SplitY {
-			get { return split_y; }
-			set { split_y = value; }
-		}
-		
-		public int X {
-			get { return x; }
-		}
-	
-		public int Y {
-			get { return y; }
-		}
-	
-		#endregion
-	}
+        #endregion
+
+        #region Constructors
+
+        public SplitterEventArgs(int x, int y, int splitX, int splitY)
+        {
+            this.x = x;
+            this.y = y;
+            SplitX = splitX;
+            SplitY = splitY;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public int SplitX
+        {
+            get { return split_x; }
+            set { split_x = value; }
+        }
+
+        public int SplitY
+        {
+            get { return split_y; }
+            set { split_y = value; }
+        }
+
+        public int X
+        {
+            get { return x; }
+        }
+
+        public int Y
+        {
+            get { return y; }
+        }
+
+        #endregion
+    }
 }
-
-

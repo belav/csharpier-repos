@@ -12,8 +12,9 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
 {
     using VerifyCS = CSharpCodeFixVerifier<
-       CSharpRemoveRedundantEqualityDiagnosticAnalyzer,
-       RemoveRedundantEqualityCodeFixProvider>;
+        CSharpRemoveRedundantEqualityDiagnosticAnalyzer,
+        RemoveRedundantEqualityCodeFixProvider
+    >;
 
     public class RemoveRedundantEqualityTests
     {

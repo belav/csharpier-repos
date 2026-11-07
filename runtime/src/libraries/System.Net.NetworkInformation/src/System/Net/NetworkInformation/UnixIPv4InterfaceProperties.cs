@@ -12,6 +12,9 @@ namespace System.Net.NetworkInformation
             _uni = uni;
         }
 
-        public sealed override int Index { get { return _uni.Index; } }
+        public sealed override int Index
+        {
+            get { return _uni.Index; }
+        }
     }
 }

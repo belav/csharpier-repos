@@ -21,12 +21,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                 Computation.ChainTaskAndNotifyControllerWhenFinished(
                     model => SetModelExplicitlySelectedItemInBackground(model, selector),
-                    updateController: false);
+                    updateController: false
+                );
             }
 
             private Model SetModelExplicitlySelectedItemInBackground(
                 Model model,
-                Func<Model, SignatureHelpItem> selector)
+                Func<Model, SignatureHelpItem> selector
+            )
             {
                 this.Computation.ThreadingContext.ThrowIfNotOnBackgroundThread();
 

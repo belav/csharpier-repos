@@ -24,13 +24,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Collections.Specialized.INotifyCollectionChanged))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Collections.ObjectModel.ObservableCollection<>))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Collections.ObjectModel.ReadOnlyObservableCollection<>))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Collections.Specialized.NotifyCollectionChangedAction))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Collections.Specialized.NotifyCollectionChangedEventArgs))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Collections.Specialized.NotifyCollectionChangedEventHandler))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Windows.Input.ICommand))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.ComponentModel.INotifyDataErrorInfo))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.ComponentModel.DataErrorsChangedEventArgs))]
-
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Collections.Specialized.INotifyCollectionChanged)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Collections.ObjectModel.ObservableCollection<>)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Collections.ObjectModel.ReadOnlyObservableCollection<>)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Collections.Specialized.NotifyCollectionChangedAction)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Collections.Specialized.NotifyCollectionChangedEventHandler)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Windows.Input.ICommand)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.ComponentModel.INotifyDataErrorInfo)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.ComponentModel.DataErrorsChangedEventArgs)
+)]

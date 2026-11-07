@@ -20,9 +20,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// <summary>
         /// Clear all the rules
         /// </summary>
-        void IElementFactory.RemoveAllRules()
-        {
-        }
+        void IElementFactory.RemoveAllRules() { }
 
         IPropertyTag IElementFactory.CreatePropertyTag(IElement parent)
         {
@@ -39,14 +37,24 @@ namespace System.Speech.Recognition.SrgsGrammar
             return new SrgsText(value);
         }
 
-        IToken IElementFactory.CreateToken(IElement parent, string content, string pronunciation, string display, float reqConfidence)
+        IToken IElementFactory.CreateToken(
+            IElement parent,
+            string content,
+            string pronunciation,
+            string display,
+            float reqConfidence
+        )
         {
             SrgsToken token = new(content);
             if (!string.IsNullOrEmpty(pronunciation))
             {
                 // Check if the pronunciations are ok
                 string sPron = pronunciation;
-                for (int iCurPron = 0, iDeliminator = 0; iCurPron < sPron.Length; iCurPron = iDeliminator + 1)
+                for (
+                    int iCurPron = 0, iDeliminator = 0;
+                    iCurPron < sPron.Length;
+                    iCurPron = iDeliminator + 1
+                )
                 {
                     // Find semi-colon delimiter and replace with null
                     iDeliminator = pronunciation.IndexOfAny(s_pronSeparator, iCurPron);
@@ -61,7 +69,10 @@ namespace System.Speech.Recognition.SrgsGrammar
                     switch (_grammar.PhoneticAlphabet)
                     {
                         case AlphabetType.Sapi:
-                            sSubPron = PhonemeConverter.ConvertPronToId(sSubPron, _grammar.Culture.LCID);
+                            sSubPron = PhonemeConverter.ConvertPronToId(
+                                sSubPron,
+                                _grammar.Culture.LCID
+                            );
                             break;
 
                         case AlphabetType.Ipa:
@@ -89,7 +100,14 @@ namespace System.Speech.Recognition.SrgsGrammar
             return token;
         }
 
-        IItem IElementFactory.CreateItem(IElement parent, IRule rule, int minRepeat, int maxRepeat, float repeatProbability, float weight)
+        IItem IElementFactory.CreateItem(
+            IElement parent,
+            IRule rule,
+            int minRepeat,
+            int maxRepeat,
+            float repeatProbability,
+            float weight
+        )
         {
             SrgsItem item = new();
             if (minRepeat != 1 || maxRepeat != 1)
@@ -106,7 +124,12 @@ namespace System.Speech.Recognition.SrgsGrammar
             return new SrgsRuleRef(srgsUri);
         }
 
-        IRuleRef IElementFactory.CreateRuleRef(IElement parent, Uri srgsUri, string semanticKey, string parameters)
+        IRuleRef IElementFactory.CreateRuleRef(
+            IElement parent,
+            Uri srgsUri,
+            string semanticKey,
+            string parameters
+        )
         {
             return new SrgsRuleRef(semanticKey, parameters, srgsUri);
         }
@@ -141,9 +164,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             return new SrgsSubset(text, matchingMode);
         }
 
-        void IElementFactory.InitSpecialRuleRef(IElement parent, IRuleRef special)
-        {
-        }
+        void IElementFactory.InitSpecialRuleRef(IElement parent, IRuleRef special) { }
 
         void IElementFactory.AddScript(IGrammar grammar, string sRule, string code)
         {
@@ -159,7 +180,13 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
         }
 
-        string IElementFactory.AddScript(IGrammar grammar, string sRule, string code, string filename, int line)
+        string IElementFactory.AddScript(
+            IGrammar grammar,
+            string sRule,
+            string code,
+            string filename,
+            int line
+        )
         {
             return code;
         }
@@ -187,32 +214,20 @@ namespace System.Speech.Recognition.SrgsGrammar
 
         IGrammar IElementFactory.Grammar
         {
-            get
-            {
-                return _grammar;
-            }
+            get { return _grammar; }
         }
 
         IRuleRef IElementFactory.Null
         {
-            get
-            {
-                return SrgsRuleRef.Null;
-            }
+            get { return SrgsRuleRef.Null; }
         }
         IRuleRef IElementFactory.Void
         {
-            get
-            {
-                return SrgsRuleRef.Void;
-            }
+            get { return SrgsRuleRef.Void; }
         }
         IRuleRef IElementFactory.Garbage
         {
-            get
-            {
-                return SrgsRuleRef.Garbage;
-            }
+            get { return SrgsRuleRef.Garbage; }
         }
         private SrgsGrammar _grammar;
 

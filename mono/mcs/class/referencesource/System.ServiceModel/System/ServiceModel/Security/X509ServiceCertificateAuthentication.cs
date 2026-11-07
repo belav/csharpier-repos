@@ -11,7 +11,8 @@ namespace System.ServiceModel.Security
 
     public sealed class X509ServiceCertificateAuthentication
     {
-        internal const X509CertificateValidationMode DefaultCertificateValidationMode = X509CertificateValidationMode.ChainTrust;
+        internal const X509CertificateValidationMode DefaultCertificateValidationMode =
+            X509CertificateValidationMode.ChainTrust;
         internal const X509RevocationMode DefaultRevocationMode = X509RevocationMode.Online;
         internal const StoreLocation DefaultTrustedStoreLocation = StoreLocation.CurrentUser;
         static X509CertificateValidator defaultCertificateValidator;
@@ -22,9 +23,7 @@ namespace System.ServiceModel.Security
         X509CertificateValidator customCertificateValidator = null;
         bool isReadOnly;
 
-        public X509ServiceCertificateAuthentication()
-        {
-        }
+        public X509ServiceCertificateAuthentication() { }
 
         internal X509ServiceCertificateAuthentication(X509ServiceCertificateAuthentication other)
         {
@@ -41,10 +40,15 @@ namespace System.ServiceModel.Security
             {
                 if (defaultCertificateValidator == null)
                 {
-                    bool useMachineContext = DefaultTrustedStoreLocation == StoreLocation.LocalMachine;
+                    bool useMachineContext =
+                        DefaultTrustedStoreLocation == StoreLocation.LocalMachine;
                     X509ChainPolicy chainPolicy = new X509ChainPolicy();
                     chainPolicy.RevocationMode = DefaultRevocationMode;
-                    defaultCertificateValidator = X509CertificateValidator.CreateChainTrustValidator(useMachineContext, chainPolicy);
+                    defaultCertificateValidator =
+                        X509CertificateValidator.CreateChainTrustValidator(
+                            useMachineContext,
+                            chainPolicy
+                        );
                 }
                 return defaultCertificateValidator;
             }
@@ -52,10 +56,7 @@ namespace System.ServiceModel.Security
 
         public X509CertificateValidationMode CertificateValidationMode
         {
-            get
-            {
-                return this.certificateValidationMode;
-            }
+            get { return this.certificateValidationMode; }
             set
             {
                 X509CertificateValidationModeHelper.Validate(value);
@@ -66,10 +67,7 @@ namespace System.ServiceModel.Security
 
         public X509RevocationMode RevocationMode
         {
-            get
-            {
-                return this.revocationMode;
-            }
+            get { return this.revocationMode; }
             set
             {
                 ThrowIfImmutable();
@@ -79,10 +77,7 @@ namespace System.ServiceModel.Security
 
         public StoreLocation TrustedStoreLocation
         {
-            get
-            {
-                return this.trustedStoreLocation;
-            }
+            get { return this.trustedStoreLocation; }
             set
             {
                 ThrowIfImmutable();
@@ -92,10 +87,7 @@ namespace System.ServiceModel.Security
 
         public X509CertificateValidator CustomCertificateValidator
         {
-            get
-            {
-                return this.customCertificateValidator;
-            }
+            get { return this.customCertificateValidator; }
             set
             {
                 ThrowIfImmutable();
@@ -125,11 +117,17 @@ namespace System.ServiceModel.Security
                 chainPolicy.RevocationMode = this.revocationMode;
                 if (this.certificateValidationMode == X509CertificateValidationMode.ChainTrust)
                 {
-                    validator = X509CertificateValidator.CreateChainTrustValidator(useMachineContext, chainPolicy);
+                    validator = X509CertificateValidator.CreateChainTrustValidator(
+                        useMachineContext,
+                        chainPolicy
+                    );
                 }
                 else
                 {
-                    validator = X509CertificateValidator.CreatePeerOrChainTrustValidator(useMachineContext, chainPolicy);
+                    validator = X509CertificateValidator.CreatePeerOrChainTrustValidator(
+                        useMachineContext,
+                        chainPolicy
+                    );
                 }
             }
             return (validator != null);
@@ -141,7 +139,11 @@ namespace System.ServiceModel.Security
             if (!TryGetCertificateValidator(out result))
             {
                 Fx.Assert(this.customCertificateValidator == null, "");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MissingCustomCertificateValidator)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.MissingCustomCertificateValidator)
+                    )
+                );
             }
             return result;
         }
@@ -155,7 +157,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

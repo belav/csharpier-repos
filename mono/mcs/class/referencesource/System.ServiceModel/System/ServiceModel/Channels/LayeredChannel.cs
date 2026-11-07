@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Channels;
     using System.Runtime;
+    using System.ServiceModel.Channels;
 
-    // 
+    //
     abstract class LayeredChannel<TInnerChannel> : ChannelBase
         where TInnerChannel : class, IChannel
     {
@@ -56,7 +56,11 @@ namespace System.ServiceModel.Channels
             this.innerChannel.Close(timeout);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannel.BeginClose(timeout, callback, state);
         }
@@ -71,7 +75,11 @@ namespace System.ServiceModel.Channels
             this.innerChannel.Open(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannel.BeginOpen(timeout, callback, state);
         }

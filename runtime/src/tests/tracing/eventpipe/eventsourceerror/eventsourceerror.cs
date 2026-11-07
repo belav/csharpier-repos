@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Diagnostics.Tracing;
-using Tracing.Tests.Common;
-using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using Microsoft.Diagnostics.NETCore.Client;
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using Tracing.Tests.Common;
 using Xunit;
 
 namespace Tracing.Tests.EventSourceError
@@ -21,14 +21,12 @@ namespace Tracing.Tests.EventSourceError
     // that error over EventPipe.
     class IllegalTypesEventSource : EventSource
     {
-        public IllegalTypesEventSource()
-        {
-        }
+        public IllegalTypesEventSource() { }
 
         [Event(1, Level = EventLevel.LogAlways)]
         public void SimpleArrayEvent(int[] simpleArray)
         {
-           WriteEvent(1, simpleArray);
+            WriteEvent(1, simpleArray);
         }
 
         [Event(2, Level = EventLevel.LogAlways)]
@@ -53,15 +51,24 @@ namespace Tracing.Tests.EventSourceError
 
             var providers = new List<EventPipeProvider>
             {
-                new EventPipeProvider("IllegalTypesEventSource", EventLevel.Verbose)
+                new EventPipeProvider("IllegalTypesEventSource", EventLevel.Verbose),
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _DoesRundownContainMethodEvents);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _DoesRundownContainMethodEvents
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
-            { "IllegalTypesEventSource", 1 }
+            { "IllegalTypesEventSource", 1 },
         };
 
         private static Action _eventGeneratingAction = () =>
@@ -73,25 +80,34 @@ namespace Tracing.Tests.EventSourceError
             eventSource.SimpleArrayEvent(new int[] { 12 });
         };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (
+            source
+        ) =>
         {
             int eventCount = 0;
             bool sawEvent = false;
             source.Dynamic.All += (TraceEvent traceEvent) =>
             {
-                if (traceEvent.ProviderName == "SentinelEventSource"
+                if (
+                    traceEvent.ProviderName == "SentinelEventSource"
                     || traceEvent.ProviderName == "Microsoft-Windows-DotNETRuntime"
                     || traceEvent.ProviderName == "Microsoft-Windows-DotNETRuntimeRundown"
-                    || traceEvent.ProviderName == "Microsoft-DotNETCore-EventPipe")
+                    || traceEvent.ProviderName == "Microsoft-DotNETCore-EventPipe"
+                )
                 {
                     return;
                 }
 
                 ++eventCount;
 
-                if (traceEvent.ProviderName == "IllegalTypesEventSource"
+                if (
+                    traceEvent.ProviderName == "IllegalTypesEventSource"
                     && traceEvent.EventName == "EventSourceMessage"
-                    && traceEvent.FormattedMessage.StartsWith("ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource", StringComparison.OrdinalIgnoreCase))
+                    && traceEvent.FormattedMessage.StartsWith(
+                        "ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     sawEvent = true;
                 }

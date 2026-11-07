@@ -55,7 +55,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
             ValidationAttribute validatingAttribute = new UrlAttribute();
             object value = new object();
 
-            ValidationException ex = new ValidationException(validationResult, validatingAttribute, value);
+            ValidationException ex = new ValidationException(
+                validationResult,
+                validatingAttribute,
+                value
+            );
             Assert.Equal(validationResult.ErrorMessage, ex.Message);
             Assert.Null(ex.InnerException);
 
@@ -71,7 +75,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
             ValidationAttribute validatingAttribute = new UrlAttribute();
             object value = new object();
 
-            ValidationException ex = new ValidationException(errorMessage, validatingAttribute, value);
+            ValidationException ex = new ValidationException(
+                errorMessage,
+                validatingAttribute,
+                value
+            );
             Assert.Equal(errorMessage, ex.Message);
             Assert.Null(ex.InnerException);
 
@@ -80,7 +88,10 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Same(value, ex.Value);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void Ctor_SerializationInfo_StreamingContext()
         {
             using (var stream = new MemoryStream())

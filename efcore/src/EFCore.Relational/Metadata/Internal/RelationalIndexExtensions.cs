@@ -23,12 +23,12 @@ public static class RelationalIndexExtensions
         this IReadOnlyIndex index,
         IReadOnlyIndex duplicateIndex,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         var columnNames = index.Properties.GetColumnNames(storeObject);
         var duplicateColumnNames = duplicateIndex.Properties.GetColumnNames(storeObject);
-        if (columnNames == null
-            || duplicateColumnNames == null)
+        if (columnNames == null || duplicateColumnNames == null)
         {
             if (shouldThrow)
             {
@@ -40,7 +40,9 @@ public static class RelationalIndexExtensions
                         duplicateIndex.DeclaringEntityType.DisplayName(),
                         index.GetDatabaseName(storeObject),
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        duplicateIndex.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                        duplicateIndex.DeclaringEntityType.GetSchemaQualifiedTableName()
+                    )
+                );
             }
 
             return false;
@@ -59,7 +61,9 @@ public static class RelationalIndexExtensions
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         index.GetDatabaseName(storeObject),
                         index.Properties.FormatColumns(storeObject),
-                        duplicateIndex.Properties.FormatColumns(storeObject)));
+                        duplicateIndex.Properties.FormatColumns(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -76,16 +80,22 @@ public static class RelationalIndexExtensions
                         duplicateIndex.DisplayName(),
                         duplicateIndex.DeclaringEntityType.DisplayName(),
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        index.GetDatabaseName(storeObject)));
+                        index.GetDatabaseName(storeObject)
+                    )
+                );
             }
 
             return false;
         }
 
-        if (index.IsDescending is null != duplicateIndex.IsDescending is null
-            || (index.IsDescending is not null
+        if (
+            index.IsDescending is null != duplicateIndex.IsDescending is null
+            || (
+                index.IsDescending is not null
                 && duplicateIndex.IsDescending is not null
-                && !index.IsDescending.SequenceEqual(duplicateIndex.IsDescending)))
+                && !index.IsDescending.SequenceEqual(duplicateIndex.IsDescending)
+            )
+        )
         {
             if (shouldThrow)
             {
@@ -96,7 +106,9 @@ public static class RelationalIndexExtensions
                         duplicateIndex.DisplayName(),
                         duplicateIndex.DeclaringEntityType.DisplayName(),
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        index.GetDatabaseName(storeObject)));
+                        index.GetDatabaseName(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -115,7 +127,9 @@ public static class RelationalIndexExtensions
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         index.GetDatabaseName(storeObject),
                         index.GetFilter(),
-                        duplicateIndex.GetFilter()));
+                        duplicateIndex.GetFilter()
+                    )
+                );
             }
 
             return false;
@@ -133,7 +147,8 @@ public static class RelationalIndexExtensions
     public static string? GetDatabaseName(
         this IReadOnlyIndex index,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger
+    )
     {
         if (storeObject.StoreObjectType != StoreObjectType.Table)
         {
@@ -142,11 +157,9 @@ public static class RelationalIndexExtensions
 
         var defaultName = index.GetDefaultDatabaseName(storeObject, logger);
         var annotation = index.FindAnnotation(RelationalAnnotationNames.Name);
-        return annotation != null && defaultName != null
-            ? (string?)annotation.Value
-            : defaultName != null
-                ? index.Name ?? defaultName
-                : defaultName;
+        return annotation != null && defaultName != null ? (string?)annotation.Value
+            : defaultName != null ? index.Name ?? defaultName
+            : defaultName;
     }
 
     /// <summary>
@@ -158,7 +171,8 @@ public static class RelationalIndexExtensions
     public static string? GetDefaultDatabaseName(
         this IReadOnlyIndex index,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger
+    )
     {
         if (storeObject.StoreObjectType != StoreObjectType.Table)
         {
@@ -168,8 +182,11 @@ public static class RelationalIndexExtensions
         var columnNames = index.Properties.GetColumnNames(storeObject);
         if (columnNames == null)
         {
-            if (logger != null
-                && ((IConventionIndex)index).GetConfigurationSource() != ConfigurationSource.Convention)
+            if (
+                logger != null
+                && ((IConventionIndex)index).GetConfigurationSource()
+                    != ConfigurationSource.Convention
+            )
             {
                 IReadOnlyProperty? propertyNotMappedToAnyTable = null;
                 (string, List<StoreObjectIdentifier>)? firstPropertyTables = null;
@@ -177,7 +194,9 @@ public static class RelationalIndexExtensions
                 HashSet<StoreObjectIdentifier>? overlappingTables = null;
                 foreach (var property in index.Properties)
                 {
-                    var tablesMappedToProperty = property.GetMappedStoreObjects(storeObject.StoreObjectType).ToList();
+                    var tablesMappedToProperty = property
+                        .GetMappedStoreObjects(storeObject.StoreObjectType)
+                        .ToList();
                     if (tablesMappedToProperty.Count == 0)
                     {
                         propertyNotMappedToAnyTable = property;
@@ -210,7 +229,9 @@ public static class RelationalIndexExtensions
 
                     if (overlappingTables == null)
                     {
-                        overlappingTables = new HashSet<StoreObjectIdentifier>(tablesMappedToProperty);
+                        overlappingTables = new HashSet<StoreObjectIdentifier>(
+                            tablesMappedToProperty
+                        );
                     }
                     else
                     {
@@ -228,14 +249,16 @@ public static class RelationalIndexExtensions
                     {
                         logger.AllIndexPropertiesNotToMappedToAnyTable(
                             (IEntityType)index.DeclaringEntityType,
-                            (IIndex)index);
+                            (IIndex)index
+                        );
                     }
                     else
                     {
                         logger.IndexPropertiesBothMappedAndNotMappedToTable(
                             (IEntityType)index.DeclaringEntityType,
                             (IIndex)index,
-                            propertyNotMappedToAnyTable!.Name);
+                            propertyNotMappedToAnyTable!.Name
+                        );
                     }
                 }
                 else if (overlappingTables.Count == 0)
@@ -249,7 +272,8 @@ public static class RelationalIndexExtensions
                         firstPropertyTables.Value.Item1,
                         firstPropertyTables.Value.Item2.Select(t => (t.Name, t.Schema)).ToList(),
                         lastPropertyTables.Value.Item1,
-                        lastPropertyTables.Value.Item2.Select(t => (t.Name, t.Schema)).ToList());
+                        lastPropertyTables.Value.Item2.Select(t => (t.Name, t.Schema)).ToList()
+                    );
                 }
             }
 
@@ -263,13 +287,14 @@ public static class RelationalIndexExtensions
         for (var i = 0; i < RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
         {
             IReadOnlyIndex? linkedIndex = null;
-            foreach (var otherIndex in rootIndex.DeclaringEntityType
-                         .FindRowInternalForeignKeys(storeObject)
-                         .SelectMany(fk => fk.PrincipalEntityType.GetIndexes()))
+            foreach (
+                var otherIndex in rootIndex
+                    .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                    .SelectMany(fk => fk.PrincipalEntityType.GetIndexes())
+            )
             {
                 var otherColumnNames = otherIndex.Properties.GetColumnNames(storeObject);
-                if ((otherColumnNames != null)
-                    && otherColumnNames.SequenceEqual(columnNames))
+                if ((otherColumnNames != null) && otherColumnNames.SequenceEqual(columnNames))
                 {
                     linkedIndex = otherIndex;
                     break;
@@ -296,6 +321,9 @@ public static class RelationalIndexExtensions
             .AppendJoin(columnNames, "_")
             .ToString();
 
-        return Uniquifier.Truncate(baseName, index.DeclaringEntityType.Model.GetMaxIdentifierLength());
+        return Uniquifier.Truncate(
+            baseName,
+            index.DeclaringEntityType.Model.GetMaxIdentifierLength()
+        );
     }
 }

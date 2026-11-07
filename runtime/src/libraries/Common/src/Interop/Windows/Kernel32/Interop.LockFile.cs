@@ -10,10 +10,22 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool LockFile(SafeFileHandle handle, int offsetLow, int offsetHigh, int countLow, int countHigh);
+        internal static partial bool LockFile(
+            SafeFileHandle handle,
+            int offsetLow,
+            int offsetHigh,
+            int countLow,
+            int countHigh
+        );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool UnlockFile(SafeFileHandle handle, int offsetLow, int offsetHigh, int countLow, int countHigh);
+        internal static partial bool UnlockFile(
+            SafeFileHandle handle,
+            int offsetLow,
+            int offsetHigh,
+            int countLow,
+            int countHigh
+        );
     }
 }

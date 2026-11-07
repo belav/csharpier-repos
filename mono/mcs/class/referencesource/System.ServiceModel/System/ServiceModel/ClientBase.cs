@@ -7,14 +7,14 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Remoting.Messaging;
+    using System.Security;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Remoting.Messaging;
     using System.ServiceModel.Dispatcher;
-    using System.Security;
+    using System.Threading;
 
     public abstract class ClientBase<TChannel> : ICommunicationObject, IDisposable
         where TChannel : class
@@ -46,14 +46,17 @@ namespace System.ServiceModel
 
         // Cache at most 32 ChannelFactories
         const int maxNumChannelFactories = 32;
-        static ChannelFactoryRefCache<TChannel> factoryRefCache = new ChannelFactoryRefCache<TChannel>(maxNumChannelFactories);
+        static ChannelFactoryRefCache<TChannel> factoryRefCache =
+            new ChannelFactoryRefCache<TChannel>(maxNumChannelFactories);
         static object staticLock = new object();
 
         static object cacheLock = new object();
         static CacheSetting cacheSetting = CacheSetting.Default;
         static bool isCacheSettingReadOnly;
 
-        static AsyncCallback onAsyncCallCompleted = Fx.ThunkCallback(new AsyncCallback(OnAsyncCallCompleted));
+        static AsyncCallback onAsyncCallCompleted = Fx.ThunkCallback(
+            new AsyncCallback(OnAsyncCallCompleted)
+        );
 
         // IMPORTANT: any changes to the set of protected .ctors of this class need to be reflected
         // in ServiceContractGenerator.cs as well.
@@ -64,7 +67,9 @@ namespace System.ServiceModel
 
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
-                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(new ChannelFactory<TChannel>("*"));
+                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
+                    new ChannelFactory<TChannel>("*")
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
@@ -78,19 +83,27 @@ namespace System.ServiceModel
         protected ClientBase(string endpointConfigurationName)
         {
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
 
             MakeCacheSettingReadOnly();
 
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
-                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(new ChannelFactory<TChannel>(endpointConfigurationName));
+                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
+                    new ChannelFactory<TChannel>(endpointConfigurationName)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(endpointConfigurationName, null, null);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    endpointConfigurationName,
+                    null,
+                    null
+                );
                 InitializeChannelFactoryRef();
             }
         }
@@ -98,7 +111,9 @@ namespace System.ServiceModel
         protected ClientBase(string endpointConfigurationName, string remoteAddress)
         {
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -107,13 +122,19 @@ namespace System.ServiceModel
 
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
-                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(new ChannelFactory<TChannel>(endpointConfigurationName, endpointAddress));
+                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
+                    new ChannelFactory<TChannel>(endpointConfigurationName, endpointAddress)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(endpointConfigurationName, endpointAddress, null);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    endpointConfigurationName,
+                    endpointAddress,
+                    null
+                );
                 InitializeChannelFactoryRef();
             }
         }
@@ -121,7 +142,9 @@ namespace System.ServiceModel
         protected ClientBase(string endpointConfigurationName, EndpointAddress remoteAddress)
         {
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -129,16 +152,21 @@ namespace System.ServiceModel
 
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
-                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(new ChannelFactory<TChannel>(endpointConfigurationName, remoteAddress));
+                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
+                    new ChannelFactory<TChannel>(endpointConfigurationName, remoteAddress)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(endpointConfigurationName, remoteAddress, null);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    endpointConfigurationName,
+                    remoteAddress,
+                    null
+                );
                 InitializeChannelFactoryRef();
             }
-
         }
 
         protected ClientBase(Binding binding, EndpointAddress remoteAddress)
@@ -152,12 +180,18 @@ namespace System.ServiceModel
 
             if (cacheSetting == CacheSetting.AlwaysOn)
             {
-                this.endpointTrait = new ProgrammaticEndpointTrait<TChannel>(binding, remoteAddress, null);
+                this.endpointTrait = new ProgrammaticEndpointTrait<TChannel>(
+                    binding,
+                    remoteAddress,
+                    null
+                );
                 InitializeChannelFactoryRef();
             }
             else
             {
-                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(new ChannelFactory<TChannel>(binding, remoteAddress));
+                this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
+                    new ChannelFactory<TChannel>(binding, remoteAddress)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
@@ -177,7 +211,9 @@ namespace System.ServiceModel
             }
             else
             {
-                channelFactoryRef = new ChannelFactoryRef<TChannel>(new ChannelFactory<TChannel>(endpoint));
+                channelFactoryRef = new ChannelFactoryRef<TChannel>(
+                    new ChannelFactory<TChannel>(endpoint)
+                );
                 channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
@@ -186,20 +222,27 @@ namespace System.ServiceModel
         protected ClientBase(InstanceContext callbackInstance)
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "callbackInstance"
+                );
 
             MakeCacheSettingReadOnly();
 
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
                 this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
-                    new DuplexChannelFactory<TChannel>(callbackInstance, "*"));
+                    new DuplexChannelFactory<TChannel>(callbackInstance, "*")
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>("*", null, callbackInstance);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    "*",
+                    null,
+                    callbackInstance
+                );
                 InitializeChannelFactoryRef();
             }
         }
@@ -207,32 +250,49 @@ namespace System.ServiceModel
         protected ClientBase(InstanceContext callbackInstance, string endpointConfigurationName)
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "callbackInstance"
+                );
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
 
             MakeCacheSettingReadOnly();
 
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
                 this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
-                    new DuplexChannelFactory<TChannel>(callbackInstance, endpointConfigurationName));
+                    new DuplexChannelFactory<TChannel>(callbackInstance, endpointConfigurationName)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(endpointConfigurationName, null, callbackInstance);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    endpointConfigurationName,
+                    null,
+                    callbackInstance
+                );
                 InitializeChannelFactoryRef();
             }
         }
 
-        protected ClientBase(InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress)
+        protected ClientBase(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName,
+            string remoteAddress
+        )
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "callbackInstance"
+                );
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -242,23 +302,40 @@ namespace System.ServiceModel
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
                 this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
-                    new DuplexChannelFactory<TChannel>(callbackInstance, endpointConfigurationName, endpointAddress));
+                    new DuplexChannelFactory<TChannel>(
+                        callbackInstance,
+                        endpointConfigurationName,
+                        endpointAddress
+                    )
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(endpointConfigurationName, endpointAddress, callbackInstance);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    endpointConfigurationName,
+                    endpointAddress,
+                    callbackInstance
+                );
                 InitializeChannelFactoryRef();
             }
         }
 
-        protected ClientBase(InstanceContext callbackInstance, string endpointConfigurationName, EndpointAddress remoteAddress)
+        protected ClientBase(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "callbackInstance"
+                );
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -267,21 +344,36 @@ namespace System.ServiceModel
             if (cacheSetting == CacheSetting.AlwaysOff)
             {
                 this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
-                    new DuplexChannelFactory<TChannel>(callbackInstance, endpointConfigurationName, remoteAddress));
+                    new DuplexChannelFactory<TChannel>(
+                        callbackInstance,
+                        endpointConfigurationName,
+                        remoteAddress
+                    )
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
             else
             {
-                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(endpointConfigurationName, remoteAddress, callbackInstance);
+                this.endpointTrait = new ConfigurationEndpointTrait<TChannel>(
+                    endpointConfigurationName,
+                    remoteAddress,
+                    callbackInstance
+                );
                 InitializeChannelFactoryRef();
             }
         }
 
-        protected ClientBase(InstanceContext callbackInstance, Binding binding, EndpointAddress remoteAddress)
+        protected ClientBase(
+            InstanceContext callbackInstance,
+            Binding binding,
+            EndpointAddress remoteAddress
+        )
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "callbackInstance"
+                );
             if (binding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("binding");
             if (remoteAddress == null)
@@ -291,13 +383,18 @@ namespace System.ServiceModel
 
             if (cacheSetting == CacheSetting.AlwaysOn)
             {
-                this.endpointTrait = new ProgrammaticEndpointTrait<TChannel>(binding, remoteAddress, callbackInstance);
+                this.endpointTrait = new ProgrammaticEndpointTrait<TChannel>(
+                    binding,
+                    remoteAddress,
+                    callbackInstance
+                );
                 InitializeChannelFactoryRef();
             }
             else
             {
                 this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
-                    new DuplexChannelFactory<TChannel>(callbackInstance, binding, remoteAddress));
+                    new DuplexChannelFactory<TChannel>(callbackInstance, binding, remoteAddress)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
@@ -306,7 +403,9 @@ namespace System.ServiceModel
         protected ClientBase(InstanceContext callbackInstance, ServiceEndpoint endpoint)
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "callbackInstance"
+                );
             if (endpoint == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
 
@@ -320,7 +419,8 @@ namespace System.ServiceModel
             else
             {
                 this.channelFactoryRef = new ChannelFactoryRef<TChannel>(
-                    new DuplexChannelFactory<TChannel>(callbackInstance, endpoint));
+                    new DuplexChannelFactory<TChannel>(callbackInstance, endpoint)
+                );
                 this.channelFactoryRef.ChannelFactory.TraceOpenAndClose = false;
                 TryDisableSharing();
             }
@@ -333,10 +433,7 @@ namespace System.ServiceModel
 
         object ThisLock
         {
-            get
-            {
-                return syncRoot;
-            }
+            get { return syncRoot; }
         }
 
         protected TChannel Channel
@@ -350,11 +447,22 @@ namespace System.ServiceModel
                     {
                         if (this.channel == null)
                         {
-                            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+                            using (
+                                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                                    ? ServiceModelActivity.CreateBoundedActivity()
+                                    : null
+                            )
                             {
                                 if (DiagnosticUtility.ShouldUseActivity)
                                 {
-                                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityOpenClientBase, typeof(TChannel).FullName), ActivityType.OpenClient);
+                                    ServiceModelActivity.Start(
+                                        activity,
+                                        SR.GetString(
+                                            SR.ActivityOpenClientBase,
+                                            typeof(TChannel).FullName
+                                        ),
+                                        ActivityType.OpenClient
+                                    );
                                 }
 
                                 if (this.useCachedFactory)
@@ -366,12 +474,19 @@ namespace System.ServiceModel
 #pragma warning suppress 56500 // covered by FxCOP
                                     catch (Exception ex)
                                     {
-                                        if (this.useCachedFactory &&
-                                            (ex is CommunicationException ||
-                                            ex is ObjectDisposedException ||
-                                            ex is TimeoutException))
+                                        if (
+                                            this.useCachedFactory
+                                            && (
+                                                ex is CommunicationException
+                                                || ex is ObjectDisposedException
+                                                || ex is TimeoutException
+                                            )
+                                        )
                                         {
-                                            DiagnosticUtility.TraceHandledException(ex, TraceEventType.Warning);
+                                            DiagnosticUtility.TraceHandledException(
+                                                ex,
+                                                TraceEventType.Warning
+                                            );
                                             InvalidateCacheAndCreateChannel();
                                         }
                                         else
@@ -395,17 +510,21 @@ namespace System.ServiceModel
 
         public static CacheSetting CacheSetting
         {
-            get
-            {
-                return cacheSetting;
-            }
+            get { return cacheSetting; }
             set
             {
                 lock (cacheLock)
                 {
                     if (isCacheSettingReadOnly && cacheSetting != value)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxImmutableClientBaseCacheSetting, typeof(TChannel).ToString())));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxImmutableClientBaseCacheSetting,
+                                    typeof(TChannel).ToString()
+                                )
+                            )
+                        );
                     }
                     else
                     {
@@ -465,10 +584,7 @@ namespace System.ServiceModel
 
         public IClientChannel InnerChannel
         {
-            get
-            {
-                return (IClientChannel)Channel;
-            }
+            get { return (IClientChannel)Channel; }
         }
 
         public ServiceEndpoint Endpoint
@@ -529,7 +645,7 @@ namespace System.ServiceModel
             ((IClientChannel)this.InnerChannel).DisplayInitializationUI();
         }
 
-        // This ensures that the cachesetting (on, off or default) cannot be modified by 
+        // This ensures that the cachesetting (on, off or default) cannot be modified by
         // another ClientBase instance of matching TChannel after the first instance is created.
         void MakeCacheSettingReadOnly()
         {
@@ -596,11 +712,19 @@ namespace System.ServiceModel
 
         void ICommunicationObject.Close(TimeSpan timeout)
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityCloseClientBase, typeof(TChannel).FullName), ActivityType.Close);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityCloseClientBase, typeof(TChannel).FullName),
+                        ActivityType.Close
+                    );
                 }
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
@@ -642,72 +766,58 @@ namespace System.ServiceModel
 
         event EventHandler ICommunicationObject.Closed
         {
-            add
-            {
-                this.InnerChannel.Closed += value;
-            }
-            remove
-            {
-                this.InnerChannel.Closed -= value;
-            }
+            add { this.InnerChannel.Closed += value; }
+            remove { this.InnerChannel.Closed -= value; }
         }
 
         event EventHandler ICommunicationObject.Closing
         {
-            add
-            {
-                this.InnerChannel.Closing += value;
-            }
-            remove
-            {
-                this.InnerChannel.Closing -= value;
-            }
+            add { this.InnerChannel.Closing += value; }
+            remove { this.InnerChannel.Closing -= value; }
         }
 
         event EventHandler ICommunicationObject.Faulted
         {
-            add
-            {
-                this.InnerChannel.Faulted += value;
-            }
-            remove
-            {
-                this.InnerChannel.Faulted -= value;
-            }
+            add { this.InnerChannel.Faulted += value; }
+            remove { this.InnerChannel.Faulted -= value; }
         }
 
         event EventHandler ICommunicationObject.Opened
         {
-            add
-            {
-                this.InnerChannel.Opened += value;
-            }
-            remove
-            {
-                this.InnerChannel.Opened -= value;
-            }
+            add { this.InnerChannel.Opened += value; }
+            remove { this.InnerChannel.Opened -= value; }
         }
 
         event EventHandler ICommunicationObject.Opening
         {
-            add
-            {
-                this.InnerChannel.Opening += value;
-            }
-            remove
-            {
-                this.InnerChannel.Opening -= value;
-            }
+            add { this.InnerChannel.Opening += value; }
+            remove { this.InnerChannel.Opening -= value; }
         }
 
         IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
         {
-            return ((ICommunicationObject)this).BeginClose(GetChannelFactory().InternalCloseTimeout, callback, state);
+            return ((ICommunicationObject)this).BeginClose(
+                GetChannelFactory().InternalCloseTimeout,
+                callback,
+                state
+            );
         }
 
-        IAsyncResult ICommunicationObject.BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, BeginChannelClose, EndChannelClose, BeginFactoryClose, EndFactoryClose);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                BeginChannelClose,
+                EndChannelClose,
+                BeginFactoryClose,
+                EndFactoryClose
+            );
         }
 
         void ICommunicationObject.EndClose(IAsyncResult result)
@@ -717,12 +827,28 @@ namespace System.ServiceModel
 
         IAsyncResult ICommunicationObject.BeginOpen(AsyncCallback callback, object state)
         {
-            return ((ICommunicationObject)this).BeginOpen(GetChannelFactory().InternalOpenTimeout, callback, state);
+            return ((ICommunicationObject)this).BeginOpen(
+                GetChannelFactory().InternalOpenTimeout,
+                callback,
+                state
+            );
         }
 
-        IAsyncResult ICommunicationObject.BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, BeginFactoryOpen, EndFactoryOpen, BeginChannelOpen, EndChannelOpen);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                BeginFactoryOpen,
+                EndFactoryOpen,
+                BeginChannelOpen,
+                EndChannelOpen
+            );
         }
 
         void ICommunicationObject.EndOpen(IAsyncResult result)
@@ -732,7 +858,11 @@ namespace System.ServiceModel
 
         //ChainedAsyncResult methods for opening and closing ChannelFactory<T>
 
-        internal IAsyncResult BeginFactoryOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginFactoryOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.useCachedFactory)
             {
@@ -756,7 +886,11 @@ namespace System.ServiceModel
             }
         }
 
-        internal IAsyncResult BeginChannelOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginChannelOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginOpen(timeout, callback, state);
         }
@@ -766,7 +900,11 @@ namespace System.ServiceModel
             this.InnerChannel.EndOpen(result);
         }
 
-        internal IAsyncResult BeginFactoryClose(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginFactoryClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.useCachedFactory)
             {
@@ -790,7 +928,11 @@ namespace System.ServiceModel
             }
         }
 
-        internal IAsyncResult BeginChannelClose(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginChannelClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.channel != null)
             {
@@ -821,8 +963,14 @@ namespace System.ServiceModel
 
         void InitializeChannelFactoryRef()
         {
-            Fx.Assert(this.channelFactoryRef == null, "The channelFactory should have never been assigned");
-            Fx.Assert(this.canShareFactory, "GetChannelFactoryFromCache can be called only when canShareFactory is true");
+            Fx.Assert(
+                this.channelFactoryRef == null,
+                "The channelFactory should have never been assigned"
+            );
+            Fx.Assert(
+                this.canShareFactory,
+                "GetChannelFactoryFromCache can be called only when canShareFactory is true"
+            );
             lock (staticLock)
             {
                 ChannelFactoryRef<TChannel> factoryRef;
@@ -854,9 +1002,14 @@ namespace System.ServiceModel
             }
         }
 
-        static ChannelFactoryRef<TChannel> CreateChannelFactoryRef(EndpointTrait<TChannel> endpointTrait)
+        static ChannelFactoryRef<TChannel> CreateChannelFactoryRef(
+            EndpointTrait<TChannel> endpointTrait
+        )
         {
-            Fx.Assert(endpointTrait != null, "The endpointTrait should not be null when the factory can be shared.");
+            Fx.Assert(
+                endpointTrait != null,
+                "The endpointTrait should not be null when the factory can be shared."
+            );
 
             ChannelFactory<TChannel> channelFactory = endpointTrait.CreateChannelFactory();
             channelFactory.TraceOpenAndClose = false;
@@ -864,7 +1017,7 @@ namespace System.ServiceModel
         }
 
         // Once the channel is created, we can't disable caching.
-        // This method can be called safely multiple times.  
+        // This method can be called safely multiple times.
         // this.sharingFinalized is set the first time the method is called.
         // Subsequent calls are essentially no-ops.
         void TryDisableSharing()
@@ -900,7 +1053,7 @@ namespace System.ServiceModel
             }
 
             // can be done outside the lock since the lines below do not access shared data.
-            // also the use of this.sharingFinalized in the lines above ensures that tracing 
+            // also the use of this.sharingFinalized in the lines above ensures that tracing
             // happens only once and only when needed.
             if (TD.ClientBaseUsingLocalChannelFactoryIsEnabled())
             {
@@ -910,9 +1063,14 @@ namespace System.ServiceModel
 
         void TryAddChannelFactoryToCache()
         {
-            Fx.Assert(this.canShareFactory, "This should be called only when this proxy can share ChannelFactory.");
-            Fx.Assert(this.channelFactoryRef.ChannelFactory.State == CommunicationState.Opened,
-                "The ChannelFactory must be in Opened state for caching.");
+            Fx.Assert(
+                this.canShareFactory,
+                "This should be called only when this proxy can share ChannelFactory."
+            );
+            Fx.Assert(
+                this.channelFactoryRef.ChannelFactory.State == CommunicationState.Opened,
+                "The ChannelFactory must be in Opened state for caching."
+            );
 
             // Lock the cache and add the item to synchronize with lookup.
             lock (staticLock)
@@ -926,7 +1084,11 @@ namespace System.ServiceModel
                     this.useCachedFactory = true;
                     if (TD.ClientBaseCachedChannelFactoryCountIsEnabled())
                     {
-                        TD.ClientBaseCachedChannelFactoryCount(factoryRefCache.Count, maxNumChannelFactories, this);
+                        TD.ClientBaseCachedChannelFactoryCount(
+                            factoryRefCache.Count,
+                            maxNumChannelFactories,
+                            this
+                        );
                     }
                 }
             }
@@ -955,18 +1117,27 @@ namespace System.ServiceModel
             }
         }
 
-        // WARNING: changes in the signature/name of the following delegates must be applied to the 
+        // WARNING: changes in the signature/name of the following delegates must be applied to the
         // ClientClassGenerator.cs as well, otherwise the ClientClassGenerator would generate wrong code.
-        protected delegate IAsyncResult BeginOperationDelegate(object[] inValues, AsyncCallback asyncCallback, object state);
+        protected delegate IAsyncResult BeginOperationDelegate(
+            object[] inValues,
+            AsyncCallback asyncCallback,
+            object state
+        );
         protected delegate object[] EndOperationDelegate(IAsyncResult result);
 
-        // WARNING: Any changes in the signature/name of the following type and its ctor must be applied to the 
+        // WARNING: Any changes in the signature/name of the following type and its ctor must be applied to the
         // ClientClassGenerator.cs as well, otherwise the ClientClassGenerator would generate wrong code.
         protected class InvokeAsyncCompletedEventArgs : AsyncCompletedEventArgs
         {
             object[] results;
 
-            internal InvokeAsyncCompletedEventArgs(object[] results, Exception error, bool cancelled, object userState)
+            internal InvokeAsyncCompletedEventArgs(
+                object[] results,
+                Exception error,
+                bool cancelled,
+                object userState
+            )
                 : base(error, cancelled, userState)
             {
                 this.results = results;
@@ -974,29 +1145,39 @@ namespace System.ServiceModel
 
             public object[] Results
             {
-                get
-                {
-                    return this.results;
-                }
+                get { return this.results; }
             }
         }
 
-        // WARNING: Any changes in the signature/name of the following method ctor must be applied to the 
+        // WARNING: Any changes in the signature/name of the following method ctor must be applied to the
         // ClientClassGenerator.cs as well, otherwise the ClientClassGenerator would generate wrong code.
-        protected void InvokeAsync(BeginOperationDelegate beginOperationDelegate, object[] inValues,
-            EndOperationDelegate endOperationDelegate, SendOrPostCallback operationCompletedCallback, object userState)
+        protected void InvokeAsync(
+            BeginOperationDelegate beginOperationDelegate,
+            object[] inValues,
+            EndOperationDelegate endOperationDelegate,
+            SendOrPostCallback operationCompletedCallback,
+            object userState
+        )
         {
             if (beginOperationDelegate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("beginOperationDelegate");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "beginOperationDelegate"
+                );
             }
             if (endOperationDelegate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endOperationDelegate");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endOperationDelegate"
+                );
             }
 
             AsyncOperation asyncOperation = AsyncOperationManager.CreateOperation(userState);
-            AsyncOperationContext context = new AsyncOperationContext(asyncOperation, endOperationDelegate, operationCompletedCallback);
+            AsyncOperationContext context = new AsyncOperationContext(
+                asyncOperation,
+                endOperationDelegate,
+                operationCompletedCallback
+            );
 
             Exception error = null;
             object[] results = null;
@@ -1051,11 +1232,20 @@ namespace System.ServiceModel
             CompleteAsyncCall(context, results, error);
         }
 
-        static void CompleteAsyncCall(AsyncOperationContext context, object[] results, Exception error)
+        static void CompleteAsyncCall(
+            AsyncOperationContext context,
+            object[] results,
+            Exception error
+        )
         {
             if (context.CompletionCallback != null)
             {
-                InvokeAsyncCompletedEventArgs e = new InvokeAsyncCompletedEventArgs(results, error, false, context.AsyncOperation.UserSuppliedState);
+                InvokeAsyncCompletedEventArgs e = new InvokeAsyncCompletedEventArgs(
+                    results,
+                    error,
+                    false,
+                    context.AsyncOperation.UserSuppliedState
+                );
                 context.AsyncOperation.PostOperationCompleted(context.CompletionCallback, e);
             }
             else
@@ -1070,7 +1260,11 @@ namespace System.ServiceModel
             EndOperationDelegate endDelegate;
             SendOrPostCallback completionCallback;
 
-            internal AsyncOperationContext(AsyncOperation asyncOperation, EndOperationDelegate endDelegate, SendOrPostCallback completionCallback)
+            internal AsyncOperationContext(
+                AsyncOperation asyncOperation,
+                EndOperationDelegate endDelegate,
+                SendOrPostCallback completionCallback
+            )
             {
                 this.asyncOperation = asyncOperation;
                 this.endDelegate = endDelegate;
@@ -1079,30 +1273,25 @@ namespace System.ServiceModel
 
             internal AsyncOperation AsyncOperation
             {
-                get
-                {
-                    return this.asyncOperation;
-                }
+                get { return this.asyncOperation; }
             }
 
             internal EndOperationDelegate EndDelegate
             {
-                get
-                {
-                    return this.endDelegate;
-                }
+                get { return this.endDelegate; }
             }
 
             internal SendOrPostCallback CompletionCallback
             {
-                get
-                {
-                    return this.completionCallback;
-                }
+                get { return this.completionCallback; }
             }
         }
 
-        protected class ChannelBase<T> : IClientChannel, IOutputChannel, IRequestChannel, IChannelBaseProxy
+        protected class ChannelBase<T>
+            : IClientChannel,
+                IOutputChannel,
+                IRequestChannel,
+                IChannelBaseProxy
             where T : class
         {
             ServiceChannel channel;
@@ -1112,20 +1301,34 @@ namespace System.ServiceModel
             {
                 if (client.Endpoint.Address == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
+                        )
+                    );
                 }
 
                 ChannelFactory<T> cf = client.ChannelFactory;
-                cf.EnsureOpened();  // to prevent the NullReferenceException that is thrown if the ChannelFactory is not open when cf.ServiceChannelFactory is accessed.
-                this.channel = cf.ServiceChannelFactory.CreateServiceChannel(client.Endpoint.Address, client.Endpoint.Address.Uri);
+                cf.EnsureOpened(); // to prevent the NullReferenceException that is thrown if the ChannelFactory is not open when cf.ServiceChannelFactory is accessed.
+                this.channel = cf.ServiceChannelFactory.CreateServiceChannel(
+                    client.Endpoint.Address,
+                    client.Endpoint.Address.Uri
+                );
                 this.channel.InstanceContext = cf.CallbackInstance;
                 this.runtime = this.channel.ClientRuntime.GetRuntime();
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses the critical IMethodCallMessage interface.",
-                Safe = "The implementation of IMethodCallMessage is local and is created locally as weell; i.e. not passed in from Remoting.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses the critical IMethodCallMessage interface.",
+                Safe = "The implementation of IMethodCallMessage is local and is created locally as weell; i.e. not passed in from Remoting."
+            )]
             [SecuritySafeCritical]
-            protected IAsyncResult BeginInvoke(string methodName, object[] args, AsyncCallback callback, object state)
+            protected IAsyncResult BeginInvoke(
+                string methodName,
+                object[] args,
+                AsyncCallback callback,
+                object state
+            )
             {
                 object[] inArgs = new object[args.Length + 2];
                 Array.Copy(args, inArgs, args.Length);
@@ -1138,8 +1341,10 @@ namespace System.ServiceModel
                 return this.channel.BeginCall(op.Action, op.IsOneWay, op, ins, callback, state);
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses the critical IMethodCallMessage interface.",
-                Safe = "The implementation of IMethodCallMessage is local and is created locally as weell; i.e. not passed in from Remoting.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses the critical IMethodCallMessage interface.",
+                Safe = "The implementation of IMethodCallMessage is local and is created locally as weell; i.e. not passed in from Remoting."
+            )]
             [SecuritySafeCritical]
             protected object EndInvoke(string methodName, object[] args, IAsyncResult result)
             {
@@ -1155,18 +1360,27 @@ namespace System.ServiceModel
                 object[] retArgs = op.MapAsyncOutputs(methodCall, outs, ref ret);
                 if (retArgs != null)
                 {
-                    Fx.Assert(retArgs.Length == inArgs.Length, "retArgs.Length should be equal to inArgs.Length");
+                    Fx.Assert(
+                        retArgs.Length == inArgs.Length,
+                        "retArgs.Length should be equal to inArgs.Length"
+                    );
                     Array.Copy(retArgs, args, args.Length);
                 }
                 return ret;
             }
 
-            System.ServiceModel.Dispatcher.ProxyOperationRuntime GetOperationByName(string methodName)
+            System.ServiceModel.Dispatcher.ProxyOperationRuntime GetOperationByName(
+                string methodName
+            )
             {
                 ProxyOperationRuntime op = this.runtime.GetOperationByName(methodName);
                 if (op == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SFxMethodNotSupported1, methodName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SFxMethodNotSupported1, methodName)
+                        )
+                    );
                 }
                 return op;
             }
@@ -1198,7 +1412,10 @@ namespace System.ServiceModel
                 ((IClientChannel)this.channel).DisplayInitializationUI();
             }
 
-            IAsyncResult IClientChannel.BeginDisplayInitializationUI(AsyncCallback callback, object state)
+            IAsyncResult IClientChannel.BeginDisplayInitializationUI(
+                AsyncCallback callback,
+                object state
+            )
             {
                 return ((IClientChannel)this.channel).BeginDisplayInitializationUI(callback, state);
             }
@@ -1305,7 +1522,11 @@ namespace System.ServiceModel
                 return ((ICommunicationObject)this.channel).BeginClose(callback, state);
             }
 
-            IAsyncResult ICommunicationObject.BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            IAsyncResult ICommunicationObject.BeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return ((ICommunicationObject)this.channel).BeginClose(timeout, callback, state);
             }
@@ -1330,7 +1551,11 @@ namespace System.ServiceModel
                 return ((ICommunicationObject)this.channel).BeginOpen(callback, state);
             }
 
-            IAsyncResult ICommunicationObject.BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            IAsyncResult ICommunicationObject.BeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return ((ICommunicationObject)this.channel).BeginOpen(timeout, callback, state);
             }
@@ -1370,12 +1595,21 @@ namespace System.ServiceModel
                 ((IOutputChannel)this.channel).Send(message, timeout);
             }
 
-            IAsyncResult IOutputChannel.BeginSend(Message message, AsyncCallback callback, object state)
+            IAsyncResult IOutputChannel.BeginSend(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return ((IOutputChannel)this.channel).BeginSend(message, callback, state);
             }
 
-            IAsyncResult IOutputChannel.BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            IAsyncResult IOutputChannel.BeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return ((IOutputChannel)this.channel).BeginSend(message, timeout, callback, state);
             }
@@ -1405,14 +1639,28 @@ namespace System.ServiceModel
                 return ((IRequestChannel)this.channel).Request(message, timeout);
             }
 
-            IAsyncResult IRequestChannel.BeginRequest(Message message, AsyncCallback callback, object state)
+            IAsyncResult IRequestChannel.BeginRequest(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return ((IRequestChannel)this.channel).BeginRequest(message, callback, state);
             }
 
-            IAsyncResult IRequestChannel.BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            IAsyncResult IRequestChannel.BeginRequest(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return ((IRequestChannel)this.channel).BeginRequest(message, timeout, callback, state);
+                return ((IRequestChannel)this.channel).BeginRequest(
+                    message,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             Message IRequestChannel.EndRequest(IAsyncResult result)
@@ -1451,19 +1699,25 @@ namespace System.ServiceModel
 
                 public object GetInArg(int argNum)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotImplementedException()
+                    );
                 }
 
                 public string GetInArgName(int index)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotImplementedException()
+                    );
                 }
 
                 public int InArgCount
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1472,22 +1726,27 @@ namespace System.ServiceModel
                     get { return this.args; }
                 }
 
-
                 public object GetArg(int argNum)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotImplementedException()
+                    );
                 }
 
                 public string GetArgName(int index)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotImplementedException()
+                    );
                 }
 
                 public bool HasVarArgs
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1495,7 +1754,9 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1503,7 +1764,9 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1511,7 +1774,9 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1519,7 +1784,9 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1527,7 +1794,9 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
 
@@ -1535,7 +1804,9 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotImplementedException()
+                        );
                     }
                 }
             }

@@ -853,9 +853,8 @@ public class TagHelperOutputExtensionsTest
 
         // Assert
         Assert.Equal(2, tagHelperOutput.Attributes.Count);
-        var attribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var attribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedAttribute1.Value, attribute.Value);
         attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class2"));
@@ -907,9 +906,8 @@ public class TagHelperOutputExtensionsTest
 
         // Assert
         Assert.Equal(2, tagHelperOutput.Attributes.Count);
-        var attribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var attribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedOutputAttribute.Value, attribute.Value);
         attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("for"));
@@ -934,9 +932,8 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.AddClass("btn", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
@@ -960,9 +957,8 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.AddClass("btn-primary", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
@@ -990,9 +986,8 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
@@ -1016,11 +1011,11 @@ public class TagHelperOutputExtensionsTest
         );
 
         // Act and Assert
-        var exceptionAdd = Assert.Throws<ArgumentException>(
-            () => tagHelperOutput.AddClass(classValue, htmlEncoder)
+        var exceptionAdd = Assert.Throws<ArgumentException>(() =>
+            tagHelperOutput.AddClass(classValue, htmlEncoder)
         );
-        var exceptionRemove = Assert.Throws<ArgumentException>(
-            () => tagHelperOutput.RemoveClass(classValue, htmlEncoder)
+        var exceptionRemove = Assert.Throws<ArgumentException>(() =>
+            tagHelperOutput.RemoveClass(classValue, htmlEncoder)
         );
         Assert.Equal(expected, exceptionAdd.Message);
         Assert.Equal(expected, exceptionRemove.Message);
@@ -1075,9 +1070,8 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.RemoveClass("btn", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
@@ -1127,9 +1121,8 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(
-            tagHelperOutput.Attributes,
-            attr => attr.Name.Equals("class")
+        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr =>
+            attr.Name.Equals("class")
         );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }

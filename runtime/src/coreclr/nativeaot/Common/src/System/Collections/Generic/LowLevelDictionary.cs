@@ -23,14 +23,13 @@ namespace System.Collections.Generic
 #if TYPE_LOADER_IMPLEMENTATION
     [System.Runtime.CompilerServices.ForceDictionaryLookups]
 #endif
-    internal class LowLevelDictionary<TKey, TValue> where TKey : IEquatable<TKey>
+    internal class LowLevelDictionary<TKey, TValue>
+        where TKey : IEquatable<TKey>
     {
         private const int DefaultSize = 17;
 
         public LowLevelDictionary()
-            : this(DefaultSize)
-        {
-        }
+            : this(DefaultSize) { }
 
         public LowLevelDictionary(int capacity)
         {
@@ -39,10 +38,7 @@ namespace System.Collections.Generic
 
         public int Count
         {
-            get
-            {
-                return _numEntries;
-            }
+            get { return _numEntries; }
         }
 
         public TValue this[TKey key]
@@ -173,7 +169,6 @@ namespace System.Collections.Generic
             return entry;
         }
 
-
         private void ExpandBuckets()
         {
             try
@@ -196,9 +191,7 @@ namespace System.Collections.Generic
                 }
                 _buckets = newBuckets;
             }
-            catch (OutOfMemoryException)
-            {
-            }
+            catch (OutOfMemoryException) { }
         }
 
         private int GetBucket(TKey key, int numBuckets = 0)
@@ -207,7 +200,6 @@ namespace System.Collections.Generic
             h &= 0x7fffffff;
             return (h % (numBuckets == 0 ? _buckets.Length : numBuckets));
         }
-
 
 #if TYPE_LOADER_IMPLEMENTATION
         [System.Runtime.CompilerServices.ForceDictionaryLookups]
@@ -260,9 +252,7 @@ namespace System.Collections.Generic
                 }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {
@@ -300,7 +290,10 @@ namespace System.Collections.Generic
     /// <summary>
     /// LowLevelDictionary when enumeration is needed
     /// </summary>
-    internal sealed class LowLevelDictionaryWithIEnumerable<TKey, TValue> : LowLevelDictionary<TKey, TValue>, IEnumerable<KeyValuePair<TKey, TValue>> where TKey : IEquatable<TKey>
+    internal sealed class LowLevelDictionaryWithIEnumerable<TKey, TValue>
+        : LowLevelDictionary<TKey, TValue>,
+            IEnumerable<KeyValuePair<TKey, TValue>>
+        where TKey : IEquatable<TKey>
     {
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {

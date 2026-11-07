@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NativeExports
 {
-    public unsafe static class VirtualMethodTables
+    public static unsafe class VirtualMethodTables
     {
         struct StaticFunctionTable
         {
@@ -31,7 +31,11 @@ namespace NativeExports
 
         static VirtualMethodTables()
         {
-            StaticTable = (StaticFunctionTable*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(VirtualMethodTables), sizeof(StaticFunctionTable));
+            StaticTable = (StaticFunctionTable*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(VirtualMethodTables),
+                    sizeof(StaticFunctionTable)
+                );
 
             StaticTable->Add = &Add;
             StaticTable->Multiply = &Multiply;
@@ -50,22 +54,37 @@ namespace NativeExports
                 public delegate* unmanaged<NativeObjectInterface*, int> getData;
                 public delegate* unmanaged<NativeObjectInterface*, int, void> setData;
                 public delegate* unmanaged<NativeObjectInterface*, int*, void> exchangeData;
-                public delegate* unmanaged<NativeObjectInterface*, int*, int, int*, void> sumAndSetData;
-                public delegate* unmanaged<NativeObjectInterface*, int**, int, int*, void> sumAndSetDataWithRef;
-                public delegate* unmanaged<NativeObjectInterface*, int*, int, void> multiplyWithData;
+                public delegate* unmanaged<
+                    NativeObjectInterface*,
+                    int*,
+                    int,
+                    int*,
+                    void> sumAndSetData;
+                public delegate* unmanaged<
+                    NativeObjectInterface*,
+                    int**,
+                    int,
+                    int*,
+                    void> sumAndSetDataWithRef;
+                public delegate* unmanaged<
+                    NativeObjectInterface*,
+                    int*,
+                    int,
+                    void> multiplyWithData;
             }
 
             public readonly VirtualFunctionTable* VTable;
 
             public NativeObjectInterface()
             {
-                throw new UnreachableException("This type should only be accessed through a pointer as it represents an arbitrary implementation of a type that has a NativeObject virtual method table.");
+                throw new UnreachableException(
+                    "This type should only be accessed through a pointer as it represents an arbitrary implementation of a type that has a NativeObject virtual method table."
+                );
             }
         }
 
         public struct NativeObject
         {
-
             public struct VirtualFunctionTable
             {
                 // The order of functions here should match NativeObjectInterface.VirtualFunctionTable's members.
@@ -73,12 +92,22 @@ namespace NativeExports
                 public delegate* unmanaged<NativeObject*, int, void> setData;
                 public delegate* unmanaged<NativeObject*, int*, void> exchangeData;
                 public delegate* unmanaged<NativeObject*, int*, int, int*, void> sumAndSetData;
-                public delegate* unmanaged<NativeObject*, int**, int, int*, void> sumAndSetDataWithRef;
+                public delegate* unmanaged<
+                    NativeObject*,
+                    int**,
+                    int,
+                    int*,
+                    void> sumAndSetDataWithRef;
                 public delegate* unmanaged<NativeObject*, int*, int, void> multiplyWithData;
             }
+
             static NativeObject()
             {
-                VTablePointer = (VirtualFunctionTable*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(NativeObject), sizeof(VirtualFunctionTable));
+                VTablePointer = (VirtualFunctionTable*)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(NativeObject),
+                        sizeof(VirtualFunctionTable)
+                    );
                 VTablePointer->getData = &GetData;
                 VTablePointer->setData = &SetData;
                 VTablePointer->exchangeData = &ExchangeData;
@@ -91,9 +120,7 @@ namespace NativeExports
 
             private readonly VirtualFunctionTable* vtable = VTablePointer;
 
-            public NativeObject()
-            {
-            }
+            public NativeObject() { }
 
             public int Data { get; set; } = 0;
 
@@ -118,7 +145,12 @@ namespace NativeExports
             }
 
             [UnmanagedCallersOnly]
-            private static void SumAndSetData(NativeObject* obj, int** values, int numValues, int* oldValue)
+            private static void SumAndSetData(
+                NativeObject* obj,
+                int** values,
+                int numValues,
+                int* oldValue
+            )
             {
                 *oldValue = obj->Data;
 
@@ -132,7 +164,12 @@ namespace NativeExports
             }
 
             [UnmanagedCallersOnly]
-            private static void SumAndSetData(NativeObject* obj, int* values, int numValues, int* oldValue)
+            private static void SumAndSetData(
+                NativeObject* obj,
+                int* values,
+                int numValues,
+                int* oldValue
+            )
             {
                 *oldValue = obj->Data;
 
@@ -168,49 +205,73 @@ namespace NativeExports
 
         [UnmanagedCallersOnly(EntryPoint = "delete_native_object")]
         [DNNE.C99DeclCode("struct NativeObject;")]
-        public static void DeleteNativeObject([DNNE.C99Type("struct NativeObject*")] NativeObject* obj)
+        public static void DeleteNativeObject(
+            [DNNE.C99Type("struct NativeObject*")] NativeObject* obj
+        )
         {
             NativeMemory.Free(obj);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "set_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static void SetNativeObjectData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj, int x)
+        public static void SetNativeObjectData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj,
+            int x
+        )
         {
             obj->VTable->setData(obj, x);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "get_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static int GetNativeObjectData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj)
+        public static int GetNativeObjectData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj
+        )
         {
             return obj->VTable->getData(obj);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "exchange_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static void ExchangeNativeObjectData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj, int* x)
+        public static void ExchangeNativeObjectData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj,
+            int* x
+        )
         {
             obj->VTable->exchangeData(obj, x);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "sum_and_set_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static void SumAndSetData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj, int* values, int numValues, int* oldValue)
+        public static void SumAndSetData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj,
+            int* values,
+            int numValues,
+            int* oldValue
+        )
         {
             obj->VTable->sumAndSetData(obj, values, numValues, oldValue);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "sum_and_set_native_object_data_with_ref")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static void SumAndSetDataWithRef([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj, int** values, int numValues, int* oldValue)
+        public static void SumAndSetDataWithRef(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj,
+            int** values,
+            int numValues,
+            int* oldValue
+        )
         {
             obj->VTable->sumAndSetDataWithRef(obj, values, numValues, oldValue);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "multiply_with_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static void MultiplyWithData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj, int* values, int numValues)
+        public static void MultiplyWithData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj,
+            int* values,
+            int numValues
+        )
         {
             obj->VTable->multiplyWithData(obj, values, numValues);
         }

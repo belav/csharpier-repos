@@ -30,8 +30,7 @@ namespace System.CommandLine.Rendering
                 return true;
             }
 
-            return obj.GetType() == GetType() &&
-                   Equals((ContentSpan)obj);
+            return obj.GetType() == GetType() && Equals((ContentSpan)obj);
         }
 
         public override int GetHashCode() => Content?.GetHashCode() ?? 0;

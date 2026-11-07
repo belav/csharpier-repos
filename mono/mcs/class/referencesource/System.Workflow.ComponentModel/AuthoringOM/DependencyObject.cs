@@ -1,33 +1,93 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.Workflow.ComponentModel.Design;
-using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.ComponentModel.Serialization;
-using System.Reflection;
 using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text;
+using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
+using System.Workflow.ComponentModel.Serialization;
 
 namespace System.Workflow.ComponentModel
 {
-
     //TBD: DharmaS, Move the collections to the LocalStore class and have DO keep a ref to LS
     [DesignerSerializer(typeof(WorkflowMarkupSerializer), typeof(WorkflowMarkupSerializer))]
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class DependencyObject : IComponent, IDependencyObjectAccessor, IDisposable
     {
-        private static DependencyProperty SiteProperty = DependencyProperty.Register("Site", typeof(ISite), typeof(DependencyObject), new PropertyMetadata(DependencyPropertyOptions.Metadata, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
-        private static DependencyProperty ReadonlyProperty = DependencyProperty.Register("Readonly", typeof(bool), typeof(DependencyObject), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
-        private static DependencyProperty ParentDependencyObjectProperty = DependencyProperty.Register("ParentDependencyObject", typeof(DependencyObject), typeof(DependencyObject), new PropertyMetadata(null, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
-        private static DependencyProperty UserDataProperty = DependencyProperty.Register("UserData", typeof(IDictionary), typeof(DependencyObject), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
+        private static DependencyProperty SiteProperty = DependencyProperty.Register(
+            "Site",
+            typeof(ISite),
+            typeof(DependencyObject),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata,
+                new Attribute[]
+                {
+                    new BrowsableAttribute(false),
+                    new DesignerSerializationVisibilityAttribute(
+                        DesignerSerializationVisibility.Hidden
+                    ),
+                }
+            )
+        );
+        private static DependencyProperty ReadonlyProperty = DependencyProperty.Register(
+            "Readonly",
+            typeof(bool),
+            typeof(DependencyObject),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
+                new Attribute[]
+                {
+                    new BrowsableAttribute(false),
+                    new DesignerSerializationVisibilityAttribute(
+                        DesignerSerializationVisibility.Hidden
+                    ),
+                }
+            )
+        );
+        private static DependencyProperty ParentDependencyObjectProperty =
+            DependencyProperty.Register(
+                "ParentDependencyObject",
+                typeof(DependencyObject),
+                typeof(DependencyObject),
+                new PropertyMetadata(
+                    null,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
+        private static DependencyProperty UserDataProperty = DependencyProperty.Register(
+            "UserData",
+            typeof(IDictionary),
+            typeof(DependencyObject),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
+                new Attribute[]
+                {
+                    new BrowsableAttribute(false),
+                    new DesignerSerializationVisibilityAttribute(
+                        DesignerSerializationVisibility.Hidden
+                    ),
+                }
+            )
+        );
 
         //design meta data holder
         [NonSerialized]
-        private IDictionary<DependencyProperty, object> metaProperties = new Dictionary<DependencyProperty, object>();
+        private IDictionary<DependencyProperty, object> metaProperties =
+            new Dictionary<DependencyProperty, object>();
+
         [NonSerialized]
         private bool readonlyPropertyValue;
 
@@ -42,7 +102,7 @@ namespace System.Workflow.ComponentModel
 
         ~DependencyObject()
         {
-            // In designer/build scenarios, some dependencies may be missing, which could cause a 
+            // In designer/build scenarios, some dependencies may be missing, which could cause a
             // JIT failure in user overrides of Dispose. Ignore these failures so they don't
             // crash the process.
             if (this.DesignMode)
@@ -52,12 +112,8 @@ namespace System.Workflow.ComponentModel
                     Dispose(false);
                 }
                 // These are the most common JIT exceptions for this scenario, based on Watson data
-                catch (TypeInitializationException)
-                {
-                }
-                catch (System.IO.FileNotFoundException)
-                {
-                }
+                catch (TypeInitializationException) { }
+                catch (System.IO.FileNotFoundException) { }
             }
             else
             {
@@ -67,10 +123,7 @@ namespace System.Workflow.ComponentModel
 
         internal bool Readonly
         {
-            get
-            {
-                return (bool)GetValue(ReadonlyProperty);
-            }
+            get { return (bool)GetValue(ReadonlyProperty); }
             set
             {
                 SetReadOnlyPropertyValue(ReadonlyProperty, value);
@@ -82,27 +135,18 @@ namespace System.Workflow.ComponentModel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IDictionary UserData
         {
-            get
-            {
-                return (IDictionary)GetValue(UserDataProperty);
-            }
+            get { return (IDictionary)GetValue(UserDataProperty); }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected internal bool DesignMode
         {
-            get
-            {
-                return !readonlyPropertyValue;
-            }
+            get { return !readonlyPropertyValue; }
         }
         protected DependencyObject ParentDependencyObject
         {
-            get
-            {
-                return (DependencyObject)this.GetValue(ParentDependencyObjectProperty);
-            }
+            get { return (DependencyObject)this.GetValue(ParentDependencyObjectProperty); }
         }
 
         #region Dynamic Property Support
@@ -111,20 +155,46 @@ namespace System.Workflow.ComponentModel
             if (dependencyProperty == null)
                 throw new ArgumentNullException("dependencyProperty");
 
-            if (dependencyProperty.DefaultMetadata != null && dependencyProperty.DefaultMetadata.IsReadOnly)
-                throw new ArgumentException(SR.GetString(SR.Error_DPReadOnly), "dependencyProperty");
+            if (
+                dependencyProperty.DefaultMetadata != null
+                && dependencyProperty.DefaultMetadata.IsReadOnly
+            )
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPReadOnly),
+                    "dependencyProperty"
+                );
 
             if (dependencyProperty.OwnerType == null)
-                throw new ArgumentException(SR.GetString(SR.Error_MissingOwnerTypeProperty), "dependencyProperty");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_MissingOwnerTypeProperty),
+                    "dependencyProperty"
+                );
 
-            if (!dependencyProperty.IsAttached && !dependencyProperty.OwnerType.IsAssignableFrom(this.GetType()))
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidDependencyProperty, this.GetType().FullName, dependencyProperty.Name, dependencyProperty.OwnerType.FullName));
+            if (
+                !dependencyProperty.IsAttached
+                && !dependencyProperty.OwnerType.IsAssignableFrom(this.GetType())
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_InvalidDependencyProperty,
+                        this.GetType().FullName,
+                        dependencyProperty.Name,
+                        dependencyProperty.OwnerType.FullName
+                    )
+                );
 
             if (!this.DesignMode)
                 throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
 
-            if (dependencyProperty.DefaultMetadata != null && dependencyProperty.DefaultMetadata.IsMetaProperty && !typeof(ActivityBind).IsAssignableFrom(dependencyProperty.PropertyType))
-                throw new ArgumentException(SR.GetString(SR.Error_DPMetaPropertyBinding), "dependencyProperty");
+            if (
+                dependencyProperty.DefaultMetadata != null
+                && dependencyProperty.DefaultMetadata.IsMetaProperty
+                && !typeof(ActivityBind).IsAssignableFrom(dependencyProperty.PropertyType)
+            )
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPMetaPropertyBinding),
+                    "dependencyProperty"
+                );
 
             if (this.metaProperties.ContainsKey(dependencyProperty))
                 this.metaProperties[dependencyProperty] = bind;
@@ -136,11 +206,7 @@ namespace System.Workflow.ComponentModel
                 this.DependencyPropertyValues.Remove(dependencyProperty);
         }
 
-        // 
-
-
-
-
+        //
 
         public ActivityBind GetBinding(DependencyProperty dependencyProperty)
         {
@@ -148,8 +214,13 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("dependencyProperty");
 
             //Designer needs the bind and not bound value
-            return (this.metaProperties.ContainsKey(dependencyProperty) ? this.metaProperties[dependencyProperty] as ActivityBind : null);
+            return (
+                this.metaProperties.ContainsKey(dependencyProperty)
+                    ? this.metaProperties[dependencyProperty] as ActivityBind
+                    : null
+            );
         }
+
         public object GetValue(DependencyProperty dependencyProperty)
         {
             //Return the property values
@@ -157,7 +228,10 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("dependencyProperty");
 
             if (dependencyProperty.IsEvent)
-                throw new ArgumentException(SR.GetString(SR.Error_DPGetValueHandler), "dependencyProperty");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPGetValueHandler),
+                    "dependencyProperty"
+                );
 
             // Get type-specific metadata for this property
             PropertyMetadata metadata = dependencyProperty.DefaultMetadata;
@@ -167,26 +241,47 @@ namespace System.Workflow.ComponentModel
             return GetValueCommon(dependencyProperty, metadata);
         }
 
-        private object GetValueCommon(DependencyProperty dependencyProperty, PropertyMetadata metadata)
+        private object GetValueCommon(
+            DependencyProperty dependencyProperty,
+            PropertyMetadata metadata
+        )
         {
             //ok, the default case
             // pick either the instance bag or meta bag, instance bag is given first chance
             object value;
             if (!this.DependencyPropertyValues.TryGetValue(dependencyProperty, out value))
             {
-                if (metaProperties == null || !metaProperties.TryGetValue(dependencyProperty, out value))
+                if (
+                    metaProperties == null
+                    || !metaProperties.TryGetValue(dependencyProperty, out value)
+                )
                     return dependencyProperty.DefaultMetadata.DefaultValue;
             }
 
             //Designer needs the bind and not bound value
-            if (this.metaProperties != null && !this.DesignMode && value is ActivityBind && !typeof(ActivityBind).IsAssignableFrom(dependencyProperty.PropertyType))
+            if (
+                this.metaProperties != null
+                && !this.DesignMode
+                && value is ActivityBind
+                && !typeof(ActivityBind).IsAssignableFrom(dependencyProperty.PropertyType)
+            )
                 value = this.GetBoundValue((ActivityBind)value, dependencyProperty.PropertyType);
 
             if (value == null || value is ActivityBind)
                 return dependencyProperty.DefaultMetadata.DefaultValue;
 
             if (!dependencyProperty.PropertyType.IsAssignableFrom(value.GetType()))
-                throw new InvalidOperationException(SR.GetString(SR.Error_DynamicPropertyTypeValueMismatch, new object[] { dependencyProperty.PropertyType.FullName, dependencyProperty.Name, value.GetType().FullName }));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_DynamicPropertyTypeValueMismatch,
+                        new object[]
+                        {
+                            dependencyProperty.PropertyType.FullName,
+                            dependencyProperty.Name,
+                            value.GetType().FullName,
+                        }
+                    )
+                );
 
             return value;
         }
@@ -200,16 +295,35 @@ namespace System.Workflow.ComponentModel
             return this.GetValueCommon(dependencyProperty, dependencyProperty.DefaultMetadata);
         }
 
-        protected internal void SetReadOnlyPropertyValue(DependencyProperty dependencyProperty, object value)
+        protected internal void SetReadOnlyPropertyValue(
+            DependencyProperty dependencyProperty,
+            object value
+        )
         {
             if (dependencyProperty == null)
                 throw new ArgumentNullException("dependencyProperty");
 
             if (!dependencyProperty.DefaultMetadata.IsReadOnly)
-                throw new InvalidOperationException(SR.GetString(SR.Error_NotReadOnlyProperty, dependencyProperty.Name, dependencyProperty.OwnerType.FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_NotReadOnlyProperty,
+                        dependencyProperty.Name,
+                        dependencyProperty.OwnerType.FullName
+                    )
+                );
 
-            if (!dependencyProperty.IsAttached && !dependencyProperty.OwnerType.IsAssignableFrom(this.GetType()))
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidDependencyProperty, this.GetType().FullName, dependencyProperty.Name, dependencyProperty.OwnerType.FullName));
+            if (
+                !dependencyProperty.IsAttached
+                && !dependencyProperty.OwnerType.IsAssignableFrom(this.GetType())
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_InvalidDependencyProperty,
+                        this.GetType().FullName,
+                        dependencyProperty.Name,
+                        dependencyProperty.OwnerType.FullName
+                    )
+                );
 
             IDictionary<DependencyProperty, object> properties = null;
             if (dependencyProperty.DefaultMetadata.IsMetaProperty)
@@ -230,9 +344,13 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("dependencyProperty");
 
             PropertyMetadata metadata = dependencyProperty.DefaultMetadata;
-            this.SetValueCommon(dependencyProperty, value, metadata, metadata.ShouldAlwaysCallOverride);
+            this.SetValueCommon(
+                dependencyProperty,
+                value,
+                metadata,
+                metadata.ShouldAlwaysCallOverride
+            );
         }
-
 
         public void SetValue(DependencyProperty dependencyProperty, object value)
         {
@@ -243,25 +361,64 @@ namespace System.Workflow.ComponentModel
             this.SetValueCommon(dependencyProperty, value, metadata, true);
         }
 
-        internal void SetValueCommon(DependencyProperty dependencyProperty, object value, PropertyMetadata metadata, bool shouldCallSetValueOverrideIfExists)
+        internal void SetValueCommon(
+            DependencyProperty dependencyProperty,
+            object value,
+            PropertyMetadata metadata,
+            bool shouldCallSetValueOverrideIfExists
+        )
         {
             if (dependencyProperty.DefaultMetadata.IsReadOnly)
-                throw new ArgumentException(SR.GetString(SR.Error_DPReadOnly), "dependencyProperty");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPReadOnly),
+                    "dependencyProperty"
+                );
             if (value is ActivityBind)
                 throw new ArgumentException(SR.GetString(SR.Error_DPSetValueBind), "value");
             if (dependencyProperty.IsEvent)
-                throw new ArgumentException(SR.GetString(SR.Error_DPSetValueHandler), "dependencyProperty");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPSetValueHandler),
+                    "dependencyProperty"
+                );
 
-            if (!dependencyProperty.IsAttached && !dependencyProperty.OwnerType.IsAssignableFrom(this.GetType()))
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidDependencyProperty, this.GetType().FullName, dependencyProperty.Name, dependencyProperty.OwnerType.FullName));
+            if (
+                !dependencyProperty.IsAttached
+                && !dependencyProperty.OwnerType.IsAssignableFrom(this.GetType())
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_InvalidDependencyProperty,
+                        this.GetType().FullName,
+                        dependencyProperty.Name,
+                        dependencyProperty.OwnerType.FullName
+                    )
+                );
 
             //ok, the default case
             // Work around  Declarative conditions
-            if (!this.DesignMode && (dependencyProperty.DefaultMetadata.IsMetaProperty && dependencyProperty != Design.ConditionTypeConverter.DeclarativeConditionDynamicProp))
+            if (
+                !this.DesignMode
+                && (
+                    dependencyProperty.DefaultMetadata.IsMetaProperty
+                    && dependencyProperty
+                        != Design.ConditionTypeConverter.DeclarativeConditionDynamicProp
+                )
+            )
                 throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
 
             if (value != null && !dependencyProperty.PropertyType.IsAssignableFrom(value.GetType()))
-                throw new ArgumentException(SR.GetString(SR.Error_DynamicPropertyTypeValueMismatch, new object[] { dependencyProperty.PropertyType.FullName, dependencyProperty.Name, value.GetType().FullName }), "value");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_DynamicPropertyTypeValueMismatch,
+                        new object[]
+                        {
+                            dependencyProperty.PropertyType.FullName,
+                            dependencyProperty.Name,
+                            value.GetType().FullName,
+                        }
+                    ),
+                    "value"
+                );
 
             // Set type-specific metadata for this property if the delegate was specified
             if (shouldCallSetValueOverrideIfExists && metadata.SetValueOverride != null)
@@ -277,7 +434,6 @@ namespace System.Workflow.ComponentModel
                 properties = this.metaProperties;
             else
                 properties = this.DependencyPropertyValues;
-
 
             object oldMetaValue = null;
             if (this.metaProperties != null && this.metaProperties.ContainsKey(dependencyProperty))
@@ -305,10 +461,15 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("dependencyProperty");
 
             bool removed = false;
-            if (dependencyProperty.DefaultMetadata != null && dependencyProperty.DefaultMetadata.IsMetaProperty)
+            if (
+                dependencyProperty.DefaultMetadata != null
+                && dependencyProperty.DefaultMetadata.IsMetaProperty
+            )
             {
                 if (!DesignMode)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 removed = this.metaProperties.Remove(dependencyProperty);
             }
             else
@@ -331,23 +492,59 @@ namespace System.Workflow.ComponentModel
             if (value is ActivityBind)
                 throw new ArgumentException(SR.GetString(SR.Error_DPSetValueBind), "value");
 
-            if (dependencyEvent.DefaultMetadata != null && dependencyEvent.DefaultMetadata.IsMetaProperty)
-                throw new ArgumentException(SR.GetString(SR.Error_DPAddHandlerMetaProperty), "dependencyEvent");
+            if (
+                dependencyEvent.DefaultMetadata != null
+                && dependencyEvent.DefaultMetadata.IsMetaProperty
+            )
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPAddHandlerMetaProperty),
+                    "dependencyEvent"
+                );
 
             if (!dependencyEvent.IsEvent)
-                throw new ArgumentException(SR.GetString(SR.Error_DPAddHandlerNonEvent), "dependencyEvent");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPAddHandlerNonEvent),
+                    "dependencyEvent"
+                );
 
             if (dependencyEvent.PropertyType == null)
-                throw new ArgumentException(SR.GetString(SR.Error_DPPropertyTypeMissing), "dependencyEvent");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPPropertyTypeMissing),
+                    "dependencyEvent"
+                );
 
             if (dependencyEvent.OwnerType == null)
-                throw new ArgumentException(SR.GetString(SR.Error_MissingOwnerTypeProperty), "dependencyEvent");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_MissingOwnerTypeProperty),
+                    "dependencyEvent"
+                );
 
-            if (!dependencyEvent.IsAttached && !dependencyEvent.OwnerType.IsAssignableFrom(this.GetType()))
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidDependencyProperty, this.GetType().FullName, dependencyEvent.Name, dependencyEvent.OwnerType.FullName));
+            if (
+                !dependencyEvent.IsAttached
+                && !dependencyEvent.OwnerType.IsAssignableFrom(this.GetType())
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_InvalidDependencyProperty,
+                        this.GetType().FullName,
+                        dependencyEvent.Name,
+                        dependencyEvent.OwnerType.FullName
+                    )
+                );
 
             if (value != null && !dependencyEvent.PropertyType.IsAssignableFrom(value.GetType()))
-                throw new ArgumentException(SR.GetString(SR.Error_DynamicPropertyTypeValueMismatch, new object[] { dependencyEvent.PropertyType.FullName, dependencyEvent.Name, value.GetType().FullName }), "value");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_DynamicPropertyTypeValueMismatch,
+                        new object[]
+                        {
+                            dependencyEvent.PropertyType.FullName,
+                            dependencyEvent.Name,
+                            value.GetType().FullName,
+                        }
+                    ),
+                    "value"
+                );
 
             // get appropriate meta bag or instance bag
             IDictionary<DependencyProperty, object> properties = this.DependencyPropertyValues;
@@ -377,11 +574,20 @@ namespace System.Workflow.ComponentModel
             if (value is ActivityBind)
                 throw new ArgumentException(SR.GetString(SR.Error_DPRemoveHandlerBind), "value");
 
-            if (dependencyEvent.DefaultMetadata != null && dependencyEvent.DefaultMetadata.IsMetaProperty)
-                throw new ArgumentException(SR.GetString(SR.Error_DPAddHandlerMetaProperty), "dependencyEvent");
+            if (
+                dependencyEvent.DefaultMetadata != null
+                && dependencyEvent.DefaultMetadata.IsMetaProperty
+            )
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPAddHandlerMetaProperty),
+                    "dependencyEvent"
+                );
 
             if (!dependencyEvent.IsEvent)
-                throw new ArgumentException(SR.GetString(SR.Error_DPAddHandlerNonEvent), "dependencyEvent");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPAddHandlerNonEvent),
+                    "dependencyEvent"
+                );
 
             // get appropriate meta bag or instance bag
             IDictionary<DependencyProperty, object> properties = this.DependencyPropertyValues;
@@ -411,12 +617,15 @@ namespace System.Workflow.ComponentModel
                 {
                     if (handlers.Count == 1)
                         return handlers[0];
-                    else //Combine 
+                    else //Combine
                     {
                         Delegate delegateHandler = handlers[0] as Delegate;
                         for (int i = 1; i < handlers.Count; ++i)
                         {
-                            delegateHandler = Delegate.Combine(delegateHandler, handlers[i] as Delegate);
+                            delegateHandler = Delegate.Combine(
+                                delegateHandler,
+                                handlers[i] as Delegate
+                            );
                         }
 
                         return delegateHandler;
@@ -431,32 +640,42 @@ namespace System.Workflow.ComponentModel
             if (dependencyProperty == null)
                 throw new ArgumentNullException("dependencyProperty");
 
-            return (!this.DependencyPropertyValues.ContainsKey(dependencyProperty) &&
-                    this.metaProperties.ContainsKey(dependencyProperty) &&
-                    this.metaProperties[dependencyProperty] is ActivityBind);
+            return (
+                !this.DependencyPropertyValues.ContainsKey(dependencyProperty)
+                && this.metaProperties.ContainsKey(dependencyProperty)
+                && this.metaProperties[dependencyProperty] is ActivityBind
+            );
         }
 
         public bool MetaEquals(DependencyObject dependencyObject)
         {
 #pragma warning suppress 56506
-            return dependencyObject != null && dependencyObject.metaProperties == this.metaProperties;
+            return dependencyObject != null
+                && dependencyObject.metaProperties == this.metaProperties;
         }
 
         #region IDependencyObjectAccessor
 
-        void IDependencyObjectAccessor.InitializeInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
+        void IDependencyObjectAccessor.InitializeInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             OnInitializeInstanceForRuntime(workflowCoreRuntime);
         }
-        internal virtual void OnInitializeInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
-        {
-        }
+
+        internal virtual void OnInitializeInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        ) { }
 
         //This is invoked for every activating instance
-        void IDependencyObjectAccessor.InitializeActivatingInstanceForRuntime(DependencyObject parentDependencyObject, IWorkflowCoreRuntime workflowCoreRuntime)
+        void IDependencyObjectAccessor.InitializeActivatingInstanceForRuntime(
+            DependencyObject parentDependencyObject,
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             if (parentDependencyObject != null)
-                this.DependencyPropertyValues[ParentDependencyObjectProperty] = parentDependencyObject;
+                this.DependencyPropertyValues[ParentDependencyObjectProperty] =
+                    parentDependencyObject;
 
             // InitializeForRuntime call allows people to put more meta properties in the bag.
             foreach (DependencyProperty dependencyProperty in this.MetaDependencyProperties)
@@ -464,14 +683,19 @@ namespace System.Workflow.ComponentModel
                 object propValue = this.metaProperties[dependencyProperty];
                 if (propValue is DependencyObject)
                 {
-                    ((IDependencyObjectAccessor)propValue).InitializeActivatingInstanceForRuntime(this, workflowCoreRuntime);
+                    ((IDependencyObjectAccessor)propValue).InitializeActivatingInstanceForRuntime(
+                        this,
+                        workflowCoreRuntime
+                    );
                     this.DependencyPropertyValues[dependencyProperty] = propValue;
                 }
                 else if (propValue is WorkflowParameterBindingCollection)
                 {
                     IList collection = propValue as IList;
                     for (int index2 = 0; index2 < collection.Count; index2++)
-                        ((IDependencyObjectAccessor)collection[index2]).InitializeActivatingInstanceForRuntime(this, workflowCoreRuntime);
+                        (
+                            (IDependencyObjectAccessor)collection[index2]
+                        ).InitializeActivatingInstanceForRuntime(this, workflowCoreRuntime);
                     this.DependencyPropertyValues[dependencyProperty] = propValue;
                 }
             }
@@ -479,15 +703,21 @@ namespace System.Workflow.ComponentModel
 
             this.Readonly = true;
         }
-        internal virtual void OnInitializeActivatingInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
+
+        internal virtual void OnInitializeActivatingInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             InitializeProperties();
         }
 
-        void IDependencyObjectAccessor.InitializeDefinitionForRuntime(DependencyObject parentDependencyObject)
+        void IDependencyObjectAccessor.InitializeDefinitionForRuntime(
+            DependencyObject parentDependencyObject
+        )
         {
             if (parentDependencyObject != null)
-                this.DependencyPropertyValues[ParentDependencyObjectProperty] = parentDependencyObject;
+                this.DependencyPropertyValues[ParentDependencyObjectProperty] =
+                    parentDependencyObject;
 
             // InitializeForRuntime call allows people to put more meta properties in the bag.
             foreach (DependencyProperty dependencyProperty in this.MetaDependencyProperties)
@@ -502,7 +732,9 @@ namespace System.Workflow.ComponentModel
                 {
                     IList collection = propValue as IList;
                     for (int index2 = 0; index2 < collection.Count; index2++)
-                        ((IDependencyObjectAccessor)collection[index2]).InitializeDefinitionForRuntime(this);
+                        (
+                            (IDependencyObjectAccessor)collection[index2]
+                        ).InitializeDefinitionForRuntime(this);
                     this.DependencyPropertyValues[dependencyProperty] = propValue;
                 }
                 else if (propValue is ActivityBind)
@@ -516,27 +748,38 @@ namespace System.Workflow.ComponentModel
             InitializeProperties();
             this.Readonly = true;
         }
-        internal virtual void OnInitializeDefinitionForRuntime()
-        {
-        }
-        protected virtual void InitializeProperties()
-        {
-        }
+
+        internal virtual void OnInitializeDefinitionForRuntime() { }
+
+        protected virtual void InitializeProperties() { }
+
         internal virtual void FixUpMetaProperties(DependencyObject originalObject)
         {
             if (originalObject == null)
                 throw new ArgumentNullException();
 
             this.metaProperties = originalObject.metaProperties;
-            this.readonlyPropertyValue = true;       // alway readonly if fixing up
-            foreach (KeyValuePair<DependencyProperty, object> keyValuePair in this.DependencyPropertyValues)
+            this.readonlyPropertyValue = true; // alway readonly if fixing up
+            foreach (
+                KeyValuePair<
+                    DependencyProperty,
+                    object
+                > keyValuePair in this.DependencyPropertyValues
+            )
             {
-                if (keyValuePair.Key != ParentDependencyObjectProperty && originalObject.DependencyPropertyValues.ContainsKey(keyValuePair.Key))
+                if (
+                    keyValuePair.Key != ParentDependencyObjectProperty
+                    && originalObject.DependencyPropertyValues.ContainsKey(keyValuePair.Key)
+                )
                 {
-                    object originalPropValue = originalObject.DependencyPropertyValues[keyValuePair.Key];
+                    object originalPropValue = originalObject.DependencyPropertyValues[
+                        keyValuePair.Key
+                    ];
                     if (keyValuePair.Value is DependencyObject)
                     {
-                        ((DependencyObject)keyValuePair.Value).FixUpMetaProperties(originalPropValue as DependencyObject);
+                        ((DependencyObject)keyValuePair.Value).FixUpMetaProperties(
+                            originalPropValue as DependencyObject
+                        );
                     }
                     else if (keyValuePair.Value is WorkflowParameterBindingCollection)
                     {
@@ -544,23 +787,30 @@ namespace System.Workflow.ComponentModel
                         IList originalCollection = originalPropValue as IList;
                         for (int index = 0; index < collection.Count; index++)
                         {
-                            ((DependencyObject)collection[index]).FixUpMetaProperties(originalCollection[index] as DependencyObject);
+                            ((DependencyObject)collection[index]).FixUpMetaProperties(
+                                originalCollection[index] as DependencyObject
+                            );
                         }
                     }
                 }
             }
         }
+
         T[] IDependencyObjectAccessor.GetInvocationList<T>(DependencyProperty dependencyEvent)
         {
             return this.GetInvocationList<T>(dependencyEvent);
         }
+
         protected T[] GetInvocationList<T>(DependencyProperty dependencyEvent)
         {
             if (dependencyEvent == null)
                 throw new ArgumentNullException("dependencyEvent");
 
             if (!dependencyEvent.IsEvent)
-                throw new ArgumentException(SR.GetString(SR.Error_DPAddHandlerNonEvent), "dependencyEvent");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_DPAddHandlerNonEvent),
+                    "dependencyEvent"
+                );
 
             // pick the appropriate meta bag or instance bag, first priority is to instance bag
             IDictionary<DependencyProperty, object> properties = null;
@@ -577,7 +827,11 @@ namespace System.Workflow.ComponentModel
                     if (!this.DesignMode)
                     {
                         T delegateValue = default(T);
-                        delegateValue = (T)this.GetBoundValue((ActivityBind)properties[dependencyEvent], typeof(T));
+                        delegateValue = (T)
+                            this.GetBoundValue(
+                                (ActivityBind)properties[dependencyEvent],
+                                typeof(T)
+                            );
                         if (delegateValue is T)
                             delegates.Add(delegateValue);
                     }
@@ -599,10 +853,7 @@ namespace System.Workflow.ComponentModel
 
         internal IList<DependencyProperty> MetaDependencyProperties
         {
-            get
-            {
-                return new List<DependencyProperty>(this.metaProperties.Keys).AsReadOnly();
-            }
+            get { return new List<DependencyProperty>(this.metaProperties.Keys).AsReadOnly(); }
         }
 
         //
@@ -636,6 +887,7 @@ namespace System.Workflow.ComponentModel
 
             return returnVal;
         }
+
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         protected virtual void SetBoundValue(ActivityBind bind, object value)
         {
@@ -647,7 +899,7 @@ namespace System.Workflow.ComponentModel
                 bind.SetRuntimeValue(activity, value);
         }
 
-        // 
+        //
         private Activity ResolveOwnerActivity()
         {
             DependencyObject activityDependencyObject = this;
@@ -664,14 +916,8 @@ namespace System.Workflow.ComponentModel
 
         event EventHandler IComponent.Disposed
         {
-            add
-            {
-                disposed += value;
-            }
-            remove
-            {
-                disposed -= value;
-            }
+            add { disposed += value; }
+            remove { disposed -= value; }
         }
 
         [Browsable(false)]
@@ -679,14 +925,8 @@ namespace System.Workflow.ComponentModel
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         public ISite Site
         {
-            get
-            {
-                return (ISite)GetValue(SiteProperty);
-            }
-            set
-            {
-                SetValue(SiteProperty, value);
-            }
+            get { return (ISite)GetValue(SiteProperty); }
+            set { SetValue(SiteProperty, value); }
         }
 
         #endregion

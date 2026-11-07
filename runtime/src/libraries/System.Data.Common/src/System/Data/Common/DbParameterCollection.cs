@@ -9,7 +9,8 @@ namespace System.Data.Common
 {
     public abstract class DbParameterCollection : MarshalByRefObject, IDataParameterCollection
     {
-        protected DbParameterCollection() : base() { }
+        protected DbParameterCollection()
+            : base() { }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

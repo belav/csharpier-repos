@@ -20,14 +20,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly HashSet<string> _namesToCheck;
             private readonly ArrayBuilder<ParameterSymbol> _captured;
 
-            private CapturedParametersFinder(SynthesizedPrimaryConstructor primaryConstructor, HashSet<string> namesToCheck, ArrayBuilder<ParameterSymbol> captured)
+            private CapturedParametersFinder(
+                SynthesizedPrimaryConstructor primaryConstructor,
+                HashSet<string> namesToCheck,
+                ArrayBuilder<ParameterSymbol> captured
+            )
             {
                 this._primaryConstructor = primaryConstructor;
                 this._namesToCheck = namesToCheck;
                 this._captured = captured;
             }
 
-            public static IReadOnlyDictionary<ParameterSymbol, FieldSymbol> GetCapturedParameters(SynthesizedPrimaryConstructor primaryConstructor)
+            public static IReadOnlyDictionary<ParameterSymbol, FieldSymbol> GetCapturedParameters(
+                SynthesizedPrimaryConstructor primaryConstructor
+            )
             {
                 var namesToCheck = PooledHashSet<string>.GetInstance();
                 addParameterNames(namesToCheck);
@@ -35,16 +41,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (namesToCheck.Count == 0)
                 {
                     namesToCheck.Free();
-                    return SpecializedCollections.EmptyReadOnlyDictionary<ParameterSymbol, FieldSymbol>();
+                    return SpecializedCollections.EmptyReadOnlyDictionary<
+                        ParameterSymbol,
+                        FieldSymbol
+                    >();
                 }
 
-                var captured = ArrayBuilder<ParameterSymbol>.GetInstance(primaryConstructor.Parameters.Length);
+                var captured = ArrayBuilder<ParameterSymbol>.GetInstance(
+                    primaryConstructor.Parameters.Length
+                );
 
-                var finder = new CapturedParametersFinder(primaryConstructor, namesToCheck, captured);
+                var finder = new CapturedParametersFinder(
+                    primaryConstructor,
+                    namesToCheck,
+                    captured
+                );
 
                 var containingType = primaryConstructor.ContainingType;
 
-                foreach (SourceMemberMethodSymbol sourceMethod in containingType.GetMethodsPossiblyCapturingPrimaryConstructorParameters())
+                foreach (
+                    SourceMemberMethodSymbol sourceMethod in containingType.GetMethodsPossiblyCapturingPrimaryConstructorParameters()
+                )
                 {
                     Binder? bodyBinder;
                     CSharpSyntaxNode? syntaxNode;
@@ -57,7 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     Debug.Assert(syntaxNode is not null);
 
-                    bool keepChecking = checkParameterReferencesInMethodBody(syntaxNode, bodyBinder);
+                    bool keepChecking = checkParameterReferencesInMethodBody(
+                        syntaxNode,
+                        bodyBinder
+                    );
                     if (!keepChecking)
                     {
                         break;
@@ -70,17 +90,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (captured.Count == 0)
                 {
                     captured.Free();
-                    return SpecializedCollections.EmptyReadOnlyDictionary<ParameterSymbol, FieldSymbol>();
+                    return SpecializedCollections.EmptyReadOnlyDictionary<
+                        ParameterSymbol,
+                        FieldSymbol
+                    >();
                 }
 
-                var result = new Dictionary<ParameterSymbol, FieldSymbol>(ReferenceEqualityComparer.Instance);
+                var result = new Dictionary<ParameterSymbol, FieldSymbol>(
+                    ReferenceEqualityComparer.Instance
+                );
 
                 foreach (var parameter in captured)
                 {
-                    result.Add(parameter,
-                               new SynthesizedPrimaryConstructorParameterBackingFieldSymbol(parameter,
-                                                                                            GeneratedNames.MakePrimaryConstructorParameterFieldName(parameter.Name),
-                                                                                            isReadOnly: containingType.IsReadOnly));
+                    result.Add(
+                        parameter,
+                        new SynthesizedPrimaryConstructorParameterBackingFieldSymbol(
+                            parameter,
+                            GeneratedNames.MakePrimaryConstructorParameterFieldName(parameter.Name),
+                            isReadOnly: containingType.IsReadOnly
+                        )
+                    );
                 }
 
                 captured.Free();
@@ -97,7 +126,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                void getBodyBinderAndSyntax(SourceMemberMethodSymbol sourceMethod, out Binder? bodyBinder, out CSharpSyntaxNode? syntaxNode)
+                void getBodyBinderAndSyntax(
+                    SourceMemberMethodSymbol sourceMethod,
+                    out Binder? bodyBinder,
+                    out CSharpSyntaxNode? syntaxNode
+                )
                 {
                     bodyBinder = null;
                     syntaxNode = null;
@@ -112,22 +145,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntaxNode = sourceMethod.SyntaxNode;
                 }
 
-                bool checkParameterReferencesInMethodBody(CSharpSyntaxNode syntaxNode, Binder bodyBinder)
+                bool checkParameterReferencesInMethodBody(
+                    CSharpSyntaxNode syntaxNode,
+                    Binder bodyBinder
+                )
                 {
                     switch (syntaxNode)
                     {
                         case ConstructorDeclarationSyntax s:
-                            return finder.CheckIdentifiersInNode(s.Initializer, bodyBinder) &&
-                                   finder.CheckIdentifiersInNode(s.Body, bodyBinder) &&
-                                   finder.CheckIdentifiersInNode(s.ExpressionBody, bodyBinder);
+                            return finder.CheckIdentifiersInNode(s.Initializer, bodyBinder)
+                                && finder.CheckIdentifiersInNode(s.Body, bodyBinder)
+                                && finder.CheckIdentifiersInNode(s.ExpressionBody, bodyBinder);
 
                         case BaseMethodDeclarationSyntax s:
-                            return finder.CheckIdentifiersInNode(s.Body, bodyBinder) &&
-                                   finder.CheckIdentifiersInNode(s.ExpressionBody, bodyBinder);
+                            return finder.CheckIdentifiersInNode(s.Body, bodyBinder)
+                                && finder.CheckIdentifiersInNode(s.ExpressionBody, bodyBinder);
 
                         case AccessorDeclarationSyntax s:
-                            return finder.CheckIdentifiersInNode(s.Body, bodyBinder) &&
-                                   finder.CheckIdentifiersInNode(s.ExpressionBody, bodyBinder);
+                            return finder.CheckIdentifiersInNode(s.Body, bodyBinder)
+                                && finder.CheckIdentifiersInNode(s.ExpressionBody, bodyBinder);
 
                         case ArrowExpressionClauseSyntax s:
                             return finder.CheckIdentifiersInNode(s, bodyBinder);
@@ -143,7 +179,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return _namesToCheck.Contains(id.Identifier.ValueText);
             }
 
-            protected override bool CheckAndClearLookupResult(Binder enclosingBinder, IdentifierNameSyntax id, LookupResult lookupResult)
+            protected override bool CheckAndClearLookupResult(
+                Binder enclosingBinder,
+                IdentifierNameSyntax id,
+                LookupResult lookupResult
+            )
             {
                 if (lookupResult.IsMultiViable)
                 {
@@ -152,7 +192,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     foreach (var candidate in lookupResult.Symbols)
                     {
-                        if (candidate is ParameterSymbol parameter && parameter.ContainingSymbol == (object)_primaryConstructor)
+                        if (
+                            candidate is ParameterSymbol parameter
+                            && parameter.ContainingSymbol == (object)_primaryConstructor
+                        )
                         {
                             isInsideNameof ??= enclosingBinder.IsInsideNameof;
 
@@ -162,13 +205,35 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else if (lookupResult.IsSingleViable)
                             {
-                                Debug.Assert(lookupResult.SingleSymbolOrDefault == (object)parameter);
+                                Debug.Assert(
+                                    lookupResult.SingleSymbolOrDefault == (object)parameter
+                                );
 
-                                // Check for left of potential color color member access 
-                                if (isTypeOrValueReceiver(enclosingBinder, id, parameter.Type, out SyntaxNode? memberAccessNode, out string? memberName, out int targetMemberArity, out bool invoked))
+                                // Check for left of potential color color member access
+                                if (
+                                    isTypeOrValueReceiver(
+                                        enclosingBinder,
+                                        id,
+                                        parameter.Type,
+                                        out SyntaxNode? memberAccessNode,
+                                        out string? memberName,
+                                        out int targetMemberArity,
+                                        out bool invoked
+                                    )
+                                )
                                 {
                                     lookupResult.Clear();
-                                    if (TreatAsInstanceMemberAccess(enclosingBinder, parameter.Type, memberAccessNode, memberName, targetMemberArity, invoked, lookupResult))
+                                    if (
+                                        TreatAsInstanceMemberAccess(
+                                            enclosingBinder,
+                                            parameter.Type,
+                                            memberAccessNode,
+                                            memberName,
+                                            targetMemberArity,
+                                            invoked,
+                                            lookupResult
+                                        )
+                                    )
                                     {
                                         _captured.Add(parameter);
                                         detectedCapture = true;

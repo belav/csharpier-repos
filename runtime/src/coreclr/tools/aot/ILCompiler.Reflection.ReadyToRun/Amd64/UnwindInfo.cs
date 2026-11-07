@@ -89,7 +89,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                     {
                         OpInfoStr += "Unscaled large";
                         uint nextOffset = NativeReader.ReadUInt16(image, ref offset);
-                        NextFrameOffset = (int)((uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset);
+                        NextFrameOffset = (int)(
+                            (uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset
+                        );
                     }
                     else
                     {
@@ -107,11 +109,15 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                     {
                         OpInfoStr = $"Unused({OpInfo})";
                         uint nextOffset = NativeReader.ReadUInt16(image, ref offset);
-                        nextOffset = ((uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset);
+                        nextOffset = (
+                            (uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset
+                        );
                         NextFrameOffset = (int)nextOffset * 16;
                         if ((NextFrameOffset & 0xF0000000) != 0)
                         {
-                            throw new BadImageFormatException("Warning: Illegal unwindInfo unscaled offset: too large");
+                            throw new BadImageFormatException(
+                                "Warning: Illegal unwindInfo unscaled offset: too large"
+                            );
                         }
                     }
                     break;
@@ -125,7 +131,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                     {
                         OpInfoStr = $"{(Registers)OpInfo}({OpInfo})";
                         uint nextOffset = NativeReader.ReadUInt16(image, ref offset);
-                        NextFrameOffset = (int)((uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset);
+                        NextFrameOffset = (int)(
+                            (uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset
+                        );
                     }
                     break;
                 case UnwindOpCodes.UWOP_SAVE_XMM128:
@@ -138,7 +146,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                     {
                         OpInfoStr = $"XMM{OpInfo}({OpInfo})";
                         uint nextOffset = NativeReader.ReadUInt16(image, ref offset);
-                        NextFrameOffset = (int)((uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset);
+                        NextFrameOffset = (int)(
+                            (uint)(NativeReader.ReadUInt16(image, ref offset) << 16) | nextOffset
+                        );
                     }
                     break;
                 default:
@@ -234,7 +244,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             foreach (UnwindCode unwindCode in UnwindCodes)
             {
                 sb.AppendLine($"        CodeOffset: 0x{unwindCode.CodeOffset:X2}");
-                sb.AppendLine($"        UnwindOp: {unwindCode.UnwindOp}({(byte)unwindCode.UnwindOp})");
+                sb.AppendLine(
+                    $"        UnwindOp: {unwindCode.UnwindOp}({(byte)unwindCode.UnwindOp})"
+                );
                 sb.AppendLine($"        OpInfo: {unwindCode.OpInfoStr}");
                 if (unwindCode.NextFrameOffset != -1)
                 {
@@ -247,6 +259,5 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
 
             return sb.ToString();
         }
-
     }
 }

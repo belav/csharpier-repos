@@ -56,11 +56,13 @@
 //---------------------------------------------------------------------------
 using RabbitMQ.Client;
 
-namespace RabbitMQ.Client.Impl {
+namespace RabbitMQ.Client.Impl
+{
     public delegate void CommandHandler(ISession session, Command cmd);
     public delegate void SessionShutdownEventHandler(ISession session, ShutdownEventArgs reason);
 
-    public interface ISession {
+    public interface ISession
+    {
         ///<summary>Single recipient - no need for multiple handlers
         ///to be informed of arriving commands.</summary>
         CommandHandler CommandReceived { get; set; }

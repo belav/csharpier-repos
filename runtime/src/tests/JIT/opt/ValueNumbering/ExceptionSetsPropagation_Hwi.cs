@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 // We're testing whether HWI nodes with > 2 operands propagate exception sets correctly.

@@ -16,7 +16,5 @@ namespace Microsoft.CodeAnalysis
     /// <remarks>
     /// CONSIDER: Should we remove this class and let the sub-classes derived from WellKnownAttributeData?
     /// </remarks>
-    internal abstract class EarlyWellKnownAttributeData : WellKnownAttributeData
-    {
-    }
+    internal abstract class EarlyWellKnownAttributeData : WellKnownAttributeData { }
 }

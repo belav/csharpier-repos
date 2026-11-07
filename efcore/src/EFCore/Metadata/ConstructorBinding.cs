@@ -18,7 +18,8 @@ public class ConstructorBinding : InstantiationBinding
     /// <param name="parameterBindings">The parameters to bind.</param>
     public ConstructorBinding(
         ConstructorInfo constructor,
-        IReadOnlyList<ParameterBinding> parameterBindings)
+        IReadOnlyList<ParameterBinding> parameterBindings
+    )
         : base(parameterBindings)
     {
         Check.NotNull(constructor, nameof(constructor));
@@ -37,22 +38,19 @@ public class ConstructorBinding : InstantiationBinding
     /// </summary>
     /// <param name="bindingInfo">Information needed to create the expression.</param>
     /// <returns>The expression tree.</returns>
-    public override Expression CreateConstructorExpression(ParameterBindingInfo bindingInfo)
-        => Expression.New(
-            Constructor,
-            ParameterBindings.Select(b => b.BindToParameter(bindingInfo)));
+    public override Expression CreateConstructorExpression(ParameterBindingInfo bindingInfo) =>
+        Expression.New(Constructor, ParameterBindings.Select(b => b.BindToParameter(bindingInfo)));
 
     /// <summary>
     ///     The type that will be created from the expression tree created for this binding.
     /// </summary>
-    public override Type RuntimeType
-        => Constructor.DeclaringType!;
+    public override Type RuntimeType => Constructor.DeclaringType!;
 
     /// <summary>
     ///     Creates a copy that contains the given parameter bindings.
     /// </summary>
     /// <param name="parameterBindings">The new parameter bindings.</param>
     /// <returns>A copy with replaced parameter bindings.</returns>
-    public override InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings)
-        => new ConstructorBinding(Constructor, parameterBindings);
+    public override InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings) =>
+        new ConstructorBinding(Constructor, parameterBindings);
 }

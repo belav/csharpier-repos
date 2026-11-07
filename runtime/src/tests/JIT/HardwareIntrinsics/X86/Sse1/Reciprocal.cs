@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse1
@@ -20,20 +20,35 @@ namespace IntelHardwareIntrinsicTest._Sse1
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4]
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     var vf2 = Sse.Reciprocal(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
 
-                    if (!floatTable.CheckResult((x, y) => {
-                        var expected = 1 / x;
-                        return (Math.Abs((1 / x) - y) <= 0.0003662109375f) // |Relative Error| <= 1.5 * 2^-12
-                            || (float.IsNaN(expected) && float.IsNaN(y))
-                            || (float.IsNegativeInfinity(expected) && float.IsNegativeInfinity(y))
-                            || (float.IsPositiveInfinity(expected) && float.IsPositiveInfinity(y));
-                    }))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                            {
+                                var expected = 1 / x;
+                                return (Math.Abs((1 / x) - y) <= 0.0003662109375f) // |Relative Error| <= 1.5 * 2^-12
+                                    || (float.IsNaN(expected) && float.IsNaN(y))
+                                    || (
+                                        float.IsNegativeInfinity(expected)
+                                        && float.IsNegativeInfinity(y)
+                                    )
+                                    || (
+                                        float.IsPositiveInfinity(expected)
+                                        && float.IsPositiveInfinity(y)
+                                    );
+                            }
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Reciprocal failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -45,7 +60,6 @@ namespace IntelHardwareIntrinsicTest._Sse1
                     }
                 }
             }
-
 
             Assert.Equal(Pass, testResult);
         }

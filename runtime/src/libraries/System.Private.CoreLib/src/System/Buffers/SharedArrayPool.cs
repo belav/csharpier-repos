@@ -27,13 +27,17 @@ namespace System.Buffers
         /// <summary>A per-thread array of arrays, to cache one array per array size per thread.</summary>
         [ThreadStatic]
         private static ThreadLocalArray[]? t_tlsBuckets;
+
         /// <summary>Used to keep track of all thread local buckets for trimming if needed.</summary>
-        private readonly ConditionalWeakTable<ThreadLocalArray[], object?> _allTlsBuckets = new ConditionalWeakTable<ThreadLocalArray[], object?>();
+        private readonly ConditionalWeakTable<ThreadLocalArray[], object?> _allTlsBuckets =
+            new ConditionalWeakTable<ThreadLocalArray[], object?>();
+
         /// <summary>
         /// An array of per-core partitions. The slots are lazily initialized to avoid creating
         /// lots of overhead for unused array sizes.
         /// </summary>
         private readonly Partitions?[] _buckets = new Partitions[NumBuckets];
+
         /// <summary>Whether the callback to trim arrays in response to memory pressure has been created.</summary>
         private int _trimCallbackCreated;
 
@@ -112,9 +116,15 @@ namespace System.Buffers
             {
                 int bufferId = buffer.GetHashCode();
                 log.BufferRented(bufferId, buffer.Length, Id, ArrayPoolEventSource.NoBucketId);
-                log.BufferAllocated(bufferId, buffer.Length, Id, ArrayPoolEventSource.NoBucketId, bucketIndex >= _buckets.Length ?
-                    ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize :
-                    ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted);
+                log.BufferAllocated(
+                    bufferId,
+                    buffer.Length,
+                    Id,
+                    ArrayPoolEventSource.NoBucketId,
+                    bucketIndex >= _buckets.Length
+                        ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
+                        : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
+                );
             }
             return buffer;
         }
@@ -150,7 +160,10 @@ namespace System.Buffers
                 // Check to see if the buffer is the correct size for this bucket.
                 if (array.Length != Utilities.GetMaxSizeForBucket(bucketIndex))
                 {
-                    throw new ArgumentException(SR.ArgumentException_BufferNotFromPool, nameof(array));
+                    throw new ArgumentException(
+                        SR.ArgumentException_BufferNotFromPool,
+                        nameof(array)
+                    );
                 }
 
                 // Store the array into the TLS bucket.  If there's already an array in it,
@@ -161,7 +174,8 @@ namespace System.Buffers
                 tla = new ThreadLocalArray(array);
                 if (prev is not null)
                 {
-                    Partitions partitionsForArraySize = _buckets[bucketIndex] ?? CreatePerCorePartitions(bucketIndex);
+                    Partitions partitionsForArraySize =
+                        _buckets[bucketIndex] ?? CreatePerCorePartitions(bucketIndex);
                     returned = partitionsForArraySize.TryPush(prev);
                 }
             }
@@ -173,9 +187,15 @@ namespace System.Buffers
                 log.BufferReturned(array.GetHashCode(), array.Length, Id);
                 if (!(haveBucket & returned))
                 {
-                    log.BufferDropped(array.GetHashCode(), array.Length, Id,
+                    log.BufferDropped(
+                        array.GetHashCode(),
+                        array.Length,
+                        Id,
                         haveBucket ? bucketIndex : ArrayPoolEventSource.NoBucketId,
-                        haveBucket ? ArrayPoolEventSource.BufferDroppedReason.Full : ArrayPoolEventSource.BufferDroppedReason.OverMaximumSize);
+                        haveBucket
+                            ? ArrayPoolEventSource.BufferDroppedReason.Full
+                            : ArrayPoolEventSource.BufferDroppedReason.OverMaximumSize
+                    );
                 }
             }
         }
@@ -196,7 +216,8 @@ namespace System.Buffers
             Partitions?[] perCoreBuckets = _buckets;
             for (int i = 0; i < perCoreBuckets.Length; i++)
             {
-                perCoreBuckets[i]?.Trim(currentMilliseconds, Id, pressure, Utilities.GetMaxSizeForBucket(i));
+                perCoreBuckets[i]
+                    ?.Trim(currentMilliseconds, Id, pressure, Utilities.GetMaxSizeForBucket(i));
             }
 
             // Trim each of the TLS buckets. Note that threads may be modifying their TLS slots concurrently with
@@ -262,8 +283,10 @@ namespace System.Buffers
                         {
                             // Time noticeably wrapped, or we've surpassed the threshold.
                             // Clear out the array, and log its being trimmed if desired.
-                            if (Interlocked.Exchange(ref buckets[i].Array, null) is T[] buffer &&
-                                log.IsEnabled())
+                            if (
+                                Interlocked.Exchange(ref buckets[i].Array, null) is T[] buffer
+                                && log.IsEnabled()
+                            )
                             {
                                 log.BufferTrimmed(buffer.GetHashCode(), buffer.Length, Id);
                             }
@@ -319,11 +342,16 @@ namespace System.Buffers
                 // Try to push on to the associated partition first.  If that fails,
                 // round-robin through the other partitions.
                 Partition[] partitions = _partitions;
-                int index = (int)((uint)Thread.GetCurrentProcessorId() % (uint)SharedArrayPoolStatics.s_partitionCount); // mod by constant in tier 1
+                int index = (int)(
+                    (uint)Thread.GetCurrentProcessorId()
+                    % (uint)SharedArrayPoolStatics.s_partitionCount
+                ); // mod by constant in tier 1
                 for (int i = 0; i < partitions.Length; i++)
                 {
-                    if (partitions[index].TryPush(array)) return true;
-                    if (++index == partitions.Length) index = 0;
+                    if (partitions[index].TryPush(array))
+                        return true;
+                    if (++index == partitions.Length)
+                        index = 0;
                 }
 
                 return false;
@@ -339,16 +367,26 @@ namespace System.Buffers
                 // Try to pop from the associated partition first.  If that fails, round-robin through the other partitions.
                 T[]? arr;
                 Partition[] partitions = _partitions;
-                int index = (int)((uint)Thread.GetCurrentProcessorId() % (uint)SharedArrayPoolStatics.s_partitionCount); // mod by constant in tier 1
+                int index = (int)(
+                    (uint)Thread.GetCurrentProcessorId()
+                    % (uint)SharedArrayPoolStatics.s_partitionCount
+                ); // mod by constant in tier 1
                 for (int i = 0; i < partitions.Length; i++)
                 {
-                    if ((arr = partitions[index].TryPop()) is not null) return arr;
-                    if (++index == partitions.Length) index = 0;
+                    if ((arr = partitions[index].TryPop()) is not null)
+                        return arr;
+                    if (++index == partitions.Length)
+                        index = 0;
                 }
                 return null;
             }
 
-            public void Trim(int currentMilliseconds, int id, Utilities.MemoryPressure pressure, int bucketSize)
+            public void Trim(
+                int currentMilliseconds,
+                int id,
+                Utilities.MemoryPressure pressure,
+                int bucketSize
+            )
             {
                 Partition[] partitions = _partitions;
                 for (int i = 0; i < partitions.Length; i++)
@@ -362,9 +400,13 @@ namespace System.Buffers
         private sealed class Partition
         {
             /// <summary>The arrays in the partition.</summary>
-            private readonly T[]?[] _arrays = new T[SharedArrayPoolStatics.s_maxArraysPerPartition][];
+            private readonly T[]?[] _arrays = new T[
+                SharedArrayPoolStatics.s_maxArraysPerPartition
+            ][];
+
             /// <summary>Number of arrays stored in <see cref="_arrays"/>.</summary>
             private int _count;
+
             /// <summary>Timestamp set by Trim when it sees this as 0.</summary>
             private int _millisecondsTimestamp;
 
@@ -409,18 +451,23 @@ namespace System.Buffers
                 return arr;
             }
 
-            public void Trim(int currentMilliseconds, int id, Utilities.MemoryPressure pressure, int bucketSize)
+            public void Trim(
+                int currentMilliseconds,
+                int id,
+                Utilities.MemoryPressure pressure,
+                int bucketSize
+            )
             {
-                const int TrimAfterMS = 60 * 1000;                                  // Trim after 60 seconds for low/moderate pressure
-                const int HighTrimAfterMS = 10 * 1000;                              // Trim after 10 seconds for high pressure
+                const int TrimAfterMS = 60 * 1000; // Trim after 60 seconds for low/moderate pressure
+                const int HighTrimAfterMS = 10 * 1000; // Trim after 10 seconds for high pressure
 
-                const int LargeBucket = 16384;                                      // If the bucket is larger than this we'll trim an extra when under high pressure
+                const int LargeBucket = 16384; // If the bucket is larger than this we'll trim an extra when under high pressure
 
-                const int ModerateTypeSize = 16;                                    // If T is larger than this we'll trim an extra when under high pressure
-                const int LargeTypeSize = 32;                                       // If T is larger than this we'll trim an extra (additional) when under high pressure
+                const int ModerateTypeSize = 16; // If T is larger than this we'll trim an extra when under high pressure
+                const int LargeTypeSize = 32; // If T is larger than this we'll trim an extra (additional) when under high pressure
 
-                const int LowTrimCount = 1;                                         // Trim one item when pressure is low
-                const int MediumTrimCount = 2;                                      // Trim two items when pressure is moderate
+                const int LowTrimCount = 1; // Trim one item when pressure is low
+                const int MediumTrimCount = 2; // Trim two items when pressure is moderate
                 int HighTrimCount = SharedArrayPoolStatics.s_maxArraysPerPartition; // Trim all items when pressure is high
 
                 if (_count == 0)
@@ -428,7 +475,8 @@ namespace System.Buffers
                     return;
                 }
 
-                int trimMilliseconds = pressure == Utilities.MemoryPressure.High ? HighTrimAfterMS : TrimAfterMS;
+                int trimMilliseconds =
+                    pressure == Utilities.MemoryPressure.High ? HighTrimAfterMS : TrimAfterMS;
 
                 lock (this)
                 {
@@ -486,7 +534,10 @@ namespace System.Buffers
                     while (_count > 0 && trimCount-- > 0)
                     {
                         T[]? array = _arrays[--_count];
-                        Debug.Assert(array is not null, "No nulls should have been present in slots < _count.");
+                        Debug.Assert(
+                            array is not null,
+                            "No nulls should have been present in slots < _count."
+                        );
                         _arrays[_count] = null;
 
                         if (log.IsEnabled())
@@ -495,9 +546,11 @@ namespace System.Buffers
                         }
                     }
 
-                    _millisecondsTimestamp = _count > 0 ?
-                        _millisecondsTimestamp + (trimMilliseconds / 4) : // Give the remaining items a bit more time
-                        0;
+                    _millisecondsTimestamp =
+                        _count > 0
+                            ? _millisecondsTimestamp + (trimMilliseconds / 4)
+                            : // Give the remaining items a bit more time
+                            0;
                 }
             }
         }
@@ -507,6 +560,7 @@ namespace System.Buffers
         {
             /// <summary>The stored array.</summary>
             public T[]? Array;
+
             /// <summary>Environment.TickCount timestamp for when this array was observed by Trim.</summary>
             public int MillisecondsTimeStamp;
 
@@ -522,6 +576,7 @@ namespace System.Buffers
     {
         /// <summary>Number of partitions to employ.</summary>
         internal static readonly int s_partitionCount = GetPartitionCount();
+
         /// <summary>The maximum number of arrays per array size to store per partition.</summary>
         internal static readonly int s_maxArraysPerPartition = GetMaxArraysPerPartition();
 
@@ -529,9 +584,14 @@ namespace System.Buffers
         /// <remarks>Defaults to int.MaxValue.  Whatever value is returned will end up being clamped to <see cref="Environment.ProcessorCount"/>.</remarks>
         private static int GetPartitionCount()
         {
-            int partitionCount = TryGetInt32EnvironmentVariable("DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXPARTITIONCOUNT", out int result) && result > 0 ?
-                result :
-                int.MaxValue; // no limit other than processor count
+            int partitionCount =
+                TryGetInt32EnvironmentVariable(
+                    "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXPARTITIONCOUNT",
+                    out int result
+                )
+                && result > 0
+                    ? result
+                    : int.MaxValue; // no limit other than processor count
             return Math.Min(partitionCount, Environment.ProcessorCount);
         }
 
@@ -539,9 +599,14 @@ namespace System.Buffers
         /// <returns>Defaults to 32. This does not factor in or impact the number of arrays cached per thread in TLS (currently only 1).</returns>
         private static int GetMaxArraysPerPartition()
         {
-            return TryGetInt32EnvironmentVariable("DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXARRAYSPERPARTITION", out int result) && result > 0 ?
-                result :
-                32; // arbitrary limit
+            return
+                TryGetInt32EnvironmentVariable(
+                    "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXARRAYSPERPARTITION",
+                    out int result
+                )
+                && result > 0
+                ? result
+                : 32; // arbitrary limit
         }
 
         /// <summary>Look up an environment variable and try to parse it as an Int32.</summary>
@@ -550,8 +615,10 @@ namespace System.Buffers
         {
             // Avoid globalization stack, as it might in turn be using ArrayPool.
 
-            if (Environment.GetEnvironmentVariableCore_NoArrayPool(variable) is string envVar &&
-                envVar.Length is > 0 and <= 32) // arbitrary limit that allows for some spaces around the maximum length of a non-negative Int32 (10 digits)
+            if (
+                Environment.GetEnvironmentVariableCore_NoArrayPool(variable) is string envVar
+                && envVar.Length is > 0 and <= 32
+            ) // arbitrary limit that allows for some spaces around the maximum length of a non-negative Int32 (10 digits)
             {
                 ReadOnlySpan<char> value = envVar.AsSpan().Trim(' ');
                 if (!value.IsEmpty && value.Length <= 10)
@@ -576,7 +643,7 @@ namespace System.Buffers
                 }
             }
 
-        Fail:
+            Fail:
             result = 0;
             return false;
         }

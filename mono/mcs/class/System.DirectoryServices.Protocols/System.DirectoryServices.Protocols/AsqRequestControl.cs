@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,25 +32,23 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class AsqRequestControl : DirectoryControl
-	{
-		public AsqRequestControl ()
-			: base (null, null, false, false)
-		{
-		}
+    public class AsqRequestControl : DirectoryControl
+    {
+        public AsqRequestControl()
+            : base(null, null, false, false) { }
 
-		public AsqRequestControl (string attributeName)
-			: this ()
-		{
-			AttributeName = attributeName;
-		}
+        public AsqRequestControl(string attributeName)
+            : this()
+        {
+            AttributeName = attributeName;
+        }
 
-		public string AttributeName { get; set; }
+        public string AttributeName { get; set; }
 
-		[MonoTODO]
-		public override byte [] GetValue ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override byte[] GetValue()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

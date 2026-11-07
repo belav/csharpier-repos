@@ -21,6 +21,6 @@ namespace System.ComponentModel.DataAnnotations.Schema
         /// <summary>
         ///     The database generates a value when a row is inserted or updated.
         /// </summary>
-        Computed = 2
+        Computed = 2,
     }
 }

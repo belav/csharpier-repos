@@ -7,7 +7,7 @@ using Xunit;
 // interface method because the context used was from the base interface.
 
 // The OneArgBaseInterface portion of this test handles the original bug
-// where the base interface has less generic arguments than the derived 
+// where the base interface has less generic arguments than the derived
 // interface and the runtime aborts.
 
 // The SecondInterface portion of this test handles an additional scenario
@@ -26,7 +26,7 @@ public class Program
     {
         int result = new TestClass().DoTest();
         if (result != 100)
-                return result;
+            return result;
         result = new TestClass2().DoTest();
         return result;
     }
@@ -42,7 +42,9 @@ public interface TwoArgBaseInterface<T1, T2>
     int SomeFunc1(T1 someParam1, T2 someParam2, Type someParam1Type, Type someParam2Type);
 }
 
-public interface SecondInterface<TParam2Type, TParam1Type> :  OneArgBaseInterface<TParam1Type>, TwoArgBaseInterface<TParam1Type, TParam2Type>
+public interface SecondInterface<TParam2Type, TParam1Type>
+    : OneArgBaseInterface<TParam1Type>,
+        TwoArgBaseInterface<TParam1Type, TParam2Type>
 {
     int OneArgBaseInterface<TParam1Type>.SomeFunc1(TParam1Type someParam1, Type someParam1Type)
     {
@@ -55,7 +57,12 @@ public interface SecondInterface<TParam2Type, TParam1Type> :  OneArgBaseInterfac
         return 100;
     }
 
-    int TwoArgBaseInterface<TParam1Type, TParam2Type>.SomeFunc1(TParam1Type someParam1, TParam2Type someParam2, Type someParam1Type, Type someParam2Type)
+    int TwoArgBaseInterface<TParam1Type, TParam2Type>.SomeFunc1(
+        TParam1Type someParam1,
+        TParam2Type someParam2,
+        Type someParam1Type,
+        Type someParam2Type
+    )
     {
         if (typeof(TParam1Type) != someParam1Type)
         {
@@ -75,13 +82,18 @@ public interface SecondInterface<TParam2Type, TParam1Type> :  OneArgBaseInterfac
 
 public class TestClass : SecondInterface<int, string>
 {
-    public int DoTest ()
+    public int DoTest()
     {
         int ret = (this as OneArgBaseInterface<string>).SomeFunc1("test string", typeof(string));
         if (ret != 100)
             return ret;
 
-        ret = (this as TwoArgBaseInterface<string, int>).SomeFunc1("test string", 0, typeof(string), typeof(int));
+        ret = (this as TwoArgBaseInterface<string, int>).SomeFunc1(
+            "test string",
+            0,
+            typeof(string),
+            typeof(int)
+        );
         if (ret != 100)
             return ret;
 
@@ -97,17 +109,26 @@ public interface IA
 
 public interface IB<T> : IA
 {
-        int IA.Foo() { return 104; }
+    int IA.Foo()
+    {
+        return 104;
+    }
 }
 
 public interface IC<H1, H2> : IB<H2>
 {
-        int IA.Foo() { return 105; }
+    int IA.Foo()
+    {
+        return 105;
+    }
 }
 
 public class C<U, V, W> : IC<V, W>
 {
-        int IA.Foo() { return 100; }
+    int IA.Foo()
+    {
+        return 100;
+    }
 }
 
 public class TestClass2

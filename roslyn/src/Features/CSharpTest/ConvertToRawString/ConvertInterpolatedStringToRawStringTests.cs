@@ -11,13 +11,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString;
 
-using VerifyCS = CSharpCodeRefactoringVerifier<
-    ConvertStringToRawStringCodeRefactoringProvider>;
+using VerifyCS = CSharpCodeRefactoringVerifier<ConvertStringToRawStringCodeRefactoringProvider>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsConvertToRawString)]
 public class ConvertInterpolatedStringToRawStringTests
 {
-    private static async Task VerifyRefactoringAsync(string testCode, string? fixedCode = null, int index = 0, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    private static async Task VerifyRefactoringAsync(
+        string testCode,
+        string? fixedCode = null,
+        int index = 0,
+        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary
+    )
     {
         fixedCode ??= testCode;
 
@@ -28,10 +32,7 @@ public class ConvertInterpolatedStringToRawStringTests
             FixedCode = fixedCode,
             LanguageVersion = LanguageVersion.CSharp11,
             CodeActionIndex = index,
-            TestState =
-            {
-                OutputKind = outputKind,
-            },
+            TestState = { OutputKind = outputKind },
         }.RunAsync();
     }
 
@@ -168,7 +169,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""👩""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
@@ -183,7 +185,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"\uD83D{0}\uDC69";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -285,7 +288,8 @@ public class ConvertInterpolatedStringToRawStringTests
     [Fact]
     public async Task TestSimpleString()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -293,7 +297,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"a";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -301,13 +306,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""a""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -315,7 +322,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{{";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -323,13 +331,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$"""{""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces1_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -337,7 +347,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"}}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -345,13 +356,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$"""}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -359,7 +372,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{{a{{";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -367,13 +381,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$"""{a{""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces2_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -381,7 +397,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{{a}}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -389,13 +406,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$"""{a}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces3()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -403,7 +422,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{{{{";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -411,13 +431,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$$"""{{""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces3_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -425,7 +447,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"}}}}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -433,13 +456,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$$"""}}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestBraces4_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -447,7 +472,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{{}}}}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -455,13 +481,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $$$"""{}}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -469,7 +497,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"a{0}b";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -477,13 +506,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""a{0}b""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -491,7 +522,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{0}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -499,13 +531,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""{0}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine3()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -513,7 +547,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{0:dddd}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -521,13 +556,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""{0:dddd}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine4()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -535,7 +572,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{0:\u0041}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -543,13 +581,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""{0:A}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine5()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -557,7 +597,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{0}ab{1}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -565,13 +606,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""{0}ab{1}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine6()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -579,7 +622,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"{0}\"{1}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -587,13 +631,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""{0}"{1}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_SingleLine7()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -601,7 +647,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$@"{0}""{1}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -609,13 +656,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""{0}"{1}""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -625,7 +674,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -637,13 +687,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -653,7 +705,8 @@ public class ConvertInterpolatedStringToRawStringTests
             2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -665,13 +718,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1_B()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -681,7 +736,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -693,13 +749,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1_C()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -709,7 +767,8 @@ public class ConvertInterpolatedStringToRawStringTests
                 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -721,13 +780,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1_D()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -737,7 +798,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -749,13 +811,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1_E()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -765,7 +829,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -777,13 +842,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine1_F()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -793,7 +860,8 @@ public class ConvertInterpolatedStringToRawStringTests
                             2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -805,13 +873,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -821,7 +891,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -833,13 +904,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine3()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -849,7 +922,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         {1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -861,13 +935,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine4()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -877,7 +953,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         {1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -888,13 +965,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine4_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -905,7 +985,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -916,13 +997,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine5()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -932,7 +1016,8 @@ public class ConvertInterpolatedStringToRawStringTests
             {1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -943,13 +1028,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine5_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -960,7 +1048,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -971,13 +1060,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine6()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -988,7 +1080,8 @@ public class ConvertInterpolatedStringToRawStringTests
             {1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1000,13 +1093,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine6_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1018,7 +1114,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1030,13 +1127,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine7()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1050,7 +1150,8 @@ public class ConvertInterpolatedStringToRawStringTests
             }";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1066,13 +1167,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine8()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1082,7 +1185,8 @@ public class ConvertInterpolatedStringToRawStringTests
             {1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1094,13 +1198,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestInterpolation_MultiLine9()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1109,7 +1215,8 @@ public class ConvertInterpolatedStringToRawStringTests
             {1 + 2}";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1120,13 +1227,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimSimpleString1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1134,7 +1243,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]@$"a";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1142,13 +1252,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""a""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimSimpleString2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1156,7 +1268,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$@"a";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1164,23 +1277,29 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""a""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestSimpleStringTopLevel()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             var v = [||]$"a";
-            """, """"
+            """,
+            """"
             var v = $"""a""";
-            """", outputKind: OutputKind.ConsoleApplication);
+            """",
+            outputKind: OutputKind.ConsoleApplication
+        );
     }
 
     [Fact]
     public async Task TestStringWithQuoteInMiddle()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1188,7 +1307,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"goo\"bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1196,13 +1316,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""goo"bar""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithQuoteInMiddle1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1210,7 +1332,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]@$"goo""bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1218,13 +1341,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""goo"bar""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithQuoteInMiddle2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1232,7 +1357,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$@"goo""bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1240,13 +1366,15 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = $"""goo"bar""";
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestStringWithQuoteAtStart()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1254,7 +1382,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"\"goobar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1264,13 +1393,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithQuoteAtStart1()
     {
-        await VerifyRefactoringAsync(""""
+        await VerifyRefactoringAsync(
+            """"
             public class C
             {
                 void M()
@@ -1278,7 +1409,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]@$"""goobar";
                 }
             }
-            """", """"
+            """",
+            """"
             public class C
             {
                 void M()
@@ -1288,13 +1420,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithQuoteAtStart2()
     {
-        await VerifyRefactoringAsync(""""
+        await VerifyRefactoringAsync(
+            """"
             public class C
             {
                 void M()
@@ -1302,7 +1436,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$@"""goobar";
                 }
             }
-            """", """"
+            """",
+            """"
             public class C
             {
                 void M()
@@ -1312,13 +1447,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestStringWithQuoteAtEnd()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1326,7 +1463,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"goobar\"";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1336,13 +1474,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithQuoteAtEnd1()
     {
-        await VerifyRefactoringAsync(""""
+        await VerifyRefactoringAsync(
+            """"
             public class C
             {
                 void M()
@@ -1350,7 +1490,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$@"goobar""";
                 }
             }
-            """", """"
+            """",
+            """"
             public class C
             {
                 void M()
@@ -1360,13 +1501,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithQuoteAtEnd2()
     {
-        await VerifyRefactoringAsync(""""
+        await VerifyRefactoringAsync(
+            """"
             public class C
             {
                 void M()
@@ -1374,7 +1517,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]@$"goobar""";
                 }
             }
-            """", """"
+            """",
+            """"
             public class C
             {
                 void M()
@@ -1384,13 +1528,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestStringWithNewLine()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1398,7 +1544,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"goo\r\nbar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1409,13 +1556,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithNewLine1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1424,7 +1573,8 @@ public class ConvertInterpolatedStringToRawStringTests
             bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1435,13 +1585,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithNewLine2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1450,7 +1602,8 @@ public class ConvertInterpolatedStringToRawStringTests
             bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1461,13 +1614,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestStringWithNewLineAtStartAndEnd()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1475,7 +1630,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"\r\ngoobar\r\n";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1487,13 +1643,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithNewLineAtStartAndEnd1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1503,7 +1661,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1515,13 +1674,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimStringWithNewLineAtStartAndEnd2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1531,7 +1692,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1543,13 +1705,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestNoIndentVerbatimStringWithNewLineAtStartAndEnd()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1559,7 +1723,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1569,13 +1734,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestIndentedString()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1583,7 +1751,8 @@ public class ConvertInterpolatedStringToRawStringTests
                     var v = [||]$"goo\r\nbar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1594,13 +1763,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1611,7 +1782,8 @@ public class ConvertInterpolatedStringToRawStringTests
             select x";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1623,43 +1795,55 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestIndentedStringTopLevel()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             var v = [||]$"goo\r\nbar";
-            """, """"
+            """,
+            """"
             var v = $"""
                 goo
                 bar
                 """;
-            """", outputKind: OutputKind.ConsoleApplication);
+            """",
+            outputKind: OutputKind.ConsoleApplication
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespaceTopLevel()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             var v = [||]@$"
             from x in y
             where x > 0
             select x";
-            """, """"
+            """,
+            """"
             var v = $"""
                 from x in y
                 where x > 0
                 select x
                 """;
-            """", index: 1, outputKind: OutputKind.ConsoleApplication);
+            """",
+            index: 1,
+            outputKind: OutputKind.ConsoleApplication
+        );
     }
 
     [Fact]
     public async Task TestVerbatimIndentedString()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1668,7 +1852,8 @@ public class ConvertInterpolatedStringToRawStringTests
             bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1679,13 +1864,15 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestIndentedStringOnOwnLine()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1694,7 +1881,8 @@ public class ConvertInterpolatedStringToRawStringTests
                             [||]$"goo\r\nbar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1706,13 +1894,15 @@ public class ConvertInterpolatedStringToRawStringTests
                             """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestVerbatimIndentedStringOnOwnLine()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1722,7 +1912,8 @@ public class ConvertInterpolatedStringToRawStringTests
             bar";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1734,13 +1925,15 @@ public class ConvertInterpolatedStringToRawStringTests
                             """;
                 }
             }
-            """");
+            """"
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1751,7 +1944,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         select x";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1763,13 +1957,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace3()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1781,7 +1978,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1793,13 +1991,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace4()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1811,7 +2012,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1823,13 +2025,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace5()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1841,7 +2046,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1853,13 +2059,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace6()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1873,7 +2082,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1887,13 +2097,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace7()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1904,7 +2117,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1916,13 +2130,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace7_A()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1932,7 +2149,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         select x";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1944,13 +2162,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace7_B()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1961,7 +2182,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -1973,13 +2195,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithoutLeadingWhitespace8()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -1989,7 +2214,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         select x";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2001,13 +2227,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString1()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2024,7 +2253,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2041,13 +2271,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString2()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2064,7 +2297,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2081,13 +2315,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString3()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2106,7 +2343,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2125,13 +2363,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString4()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2150,7 +2391,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2169,13 +2411,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString5()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2192,7 +2437,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2209,13 +2455,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString6()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2232,7 +2481,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2249,13 +2499,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString7()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2270,7 +2523,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2285,13 +2539,16 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestWithNestedVerbatimString8()
     {
-        await VerifyRefactoringAsync("""
+        await VerifyRefactoringAsync(
+            """
             public class C
             {
                 void M()
@@ -2306,7 +2563,8 @@ public class ConvertInterpolatedStringToRawStringTests
             ";
                 }
             }
-            """, """"
+            """,
+            """"
             public class C
             {
                 void M()
@@ -2321,6 +2579,8 @@ public class ConvertInterpolatedStringToRawStringTests
                         """;
                 }
             }
-            """", index: 1);
+            """",
+            index: 1
+        );
     }
 }

@@ -50,7 +50,10 @@ namespace System.CodeDom.Compiler.Tests
             Assert.Empty(parameters.LinkedResources);
             Assert.Null(parameters.MainClass);
             Assert.Null(parameters.OutputAssembly);
-            Assert.Equal(assemblyNames ?? Array.Empty<string>(), parameters.ReferencedAssemblies.Cast<string>());
+            Assert.Equal(
+                assemblyNames ?? Array.Empty<string>(),
+                parameters.ReferencedAssemblies.Cast<string>()
+            );
             Assert.False(parameters.TreatWarningsAsErrors);
             Assert.Equal(IntPtr.Zero, parameters.UserToken);
             Assert.Equal(-1, parameters.WarningLevel);
@@ -78,7 +81,10 @@ namespace System.CodeDom.Compiler.Tests
             Assert.Empty(parameters.LinkedResources);
             Assert.Null(parameters.MainClass);
             Assert.Equal(outputName, parameters.OutputAssembly);
-            Assert.Equal(assemblyNames ?? Array.Empty<string>(), parameters.ReferencedAssemblies.Cast<string>());
+            Assert.Equal(
+                assemblyNames ?? Array.Empty<string>(),
+                parameters.ReferencedAssemblies.Cast<string>()
+            );
             Assert.False(parameters.TreatWarningsAsErrors);
             Assert.Equal(IntPtr.Zero, parameters.UserToken);
             Assert.Equal(-1, parameters.WarningLevel);
@@ -94,9 +100,17 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_StringArray_String_Bool_TestData))]
-        public void Ctor_StringArray_String_Bool(string[] assemblyNames, string outputName, bool includeDebugInformation)
+        public void Ctor_StringArray_String_Bool(
+            string[] assemblyNames,
+            string outputName,
+            bool includeDebugInformation
+        )
         {
-            var parameters = new CompilerParameters(assemblyNames, outputName, includeDebugInformation);
+            var parameters = new CompilerParameters(
+                assemblyNames,
+                outputName,
+                includeDebugInformation
+            );
             Assert.Null(parameters.CompilerOptions);
             Assert.Empty(parameters.CoreAssemblyFileName);
             Assert.Empty(parameters.EmbeddedResources);
@@ -106,7 +120,10 @@ namespace System.CodeDom.Compiler.Tests
             Assert.Empty(parameters.LinkedResources);
             Assert.Null(parameters.MainClass);
             Assert.Equal(outputName, parameters.OutputAssembly);
-            Assert.Equal(assemblyNames ?? Array.Empty<string>(), parameters.ReferencedAssemblies.Cast<string>());
+            Assert.Equal(
+                assemblyNames ?? Array.Empty<string>(),
+                parameters.ReferencedAssemblies.Cast<string>()
+            );
             Assert.False(parameters.TreatWarningsAsErrors);
             Assert.Equal(IntPtr.Zero, parameters.UserToken);
             Assert.Equal(-1, parameters.WarningLevel);

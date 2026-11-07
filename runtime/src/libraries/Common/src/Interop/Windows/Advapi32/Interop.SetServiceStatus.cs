@@ -10,6 +10,9 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static unsafe partial bool SetServiceStatus(IntPtr serviceStatusHandle, SERVICE_STATUS* status);
+        public static unsafe partial bool SetServiceStatus(
+            IntPtr serviceStatusHandle,
+            SERVICE_STATUS* status
+        );
     }
 }

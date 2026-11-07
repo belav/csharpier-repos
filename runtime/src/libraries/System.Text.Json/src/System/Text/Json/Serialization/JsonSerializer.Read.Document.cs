@@ -28,7 +28,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static TValue? Deserialize<TValue>(this JsonDocument document, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<TValue>(
+            this JsonDocument document,
+            JsonSerializerOptions? options = null
+        )
         {
             if (document is null)
             {
@@ -59,7 +62,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static object? Deserialize(this JsonDocument document, Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            this JsonDocument document,
+            Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (document is null)
             {
@@ -92,7 +99,10 @@ namespace System.Text.Json
         /// <exception cref="JsonException">
         /// <typeparamref name="TValue" /> is not compatible with the JSON.
         /// </exception>
-        public static TValue? Deserialize<TValue>(this JsonDocument document, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static TValue? Deserialize<TValue>(
+            this JsonDocument document,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (document is null)
             {
@@ -173,7 +183,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static object? Deserialize(this JsonDocument document, Type returnType, JsonSerializerContext context)
+        public static object? Deserialize(
+            this JsonDocument document,
+            Type returnType,
+            JsonSerializerContext context
+        )
         {
             if (document is null)
             {

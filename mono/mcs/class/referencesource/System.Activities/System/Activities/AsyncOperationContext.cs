@@ -5,20 +5,23 @@
 namespace System.Activities
 {
     using System;
+    using System.Activities.Hosting;
     using System.Activities.Runtime;
     using System.Runtime;
-    using System.Activities.Hosting;
 
     class AsyncOperationContext
     {
         static AsyncCallback onResumeAsyncCodeActivityBookmark;
-     
+
         ActivityExecutor executor;
         ActivityInstance owningActivityInstance;
         bool hasCanceled;
         bool hasCompleted;
 
-        internal AsyncOperationContext(ActivityExecutor executor, ActivityInstance owningActivityInstance)
+        internal AsyncOperationContext(
+            ActivityExecutor executor,
+            ActivityInstance owningActivityInstance
+        )
         {
             this.executor = executor;
             this.owningActivityInstance = owningActivityInstance;
@@ -26,29 +29,14 @@ namespace System.Activities
 
         internal bool IsStillActive
         {
-            get
-            {
-                return !this.hasCanceled && !this.hasCompleted;
-            }
+            get { return !this.hasCanceled && !this.hasCompleted; }
         }
 
-        public object UserState
-        {
-            get;
-            set;
-        }
+        public object UserState { get; set; }
 
-        public bool HasCalledAsyncCodeActivityCancel
-        {
-            get;
-            set;
-        }
+        public bool HasCalledAsyncCodeActivityCancel { get; set; }
 
-        public bool IsAborting
-        {
-            get;
-            set;
-        }
+        public bool IsAborting { get; set; }
 
         bool ShouldCancel()
         {
@@ -64,7 +52,9 @@ namespace System.Activities
 
             if (this.hasCompleted)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.OperationAlreadyCompleted));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.OperationAlreadyCompleted)
+                );
             }
 
             return true;
@@ -103,13 +93,20 @@ namespace System.Activities
 
             if (onResumeAsyncCodeActivityBookmark == null)
             {
-                onResumeAsyncCodeActivityBookmark = Fx.ThunkCallback(new AsyncCallback(OnResumeAsyncCodeActivityBookmark));
+                onResumeAsyncCodeActivityBookmark = Fx.ThunkCallback(
+                    new AsyncCallback(OnResumeAsyncCodeActivityBookmark)
+                );
             }
 
             try
             {
-                IAsyncResult result = this.executor.BeginResumeBookmark(Bookmark.AsyncOperationCompletionBookmark,
-                    completeData, TimeSpan.MaxValue, onResumeAsyncCodeActivityBookmark, this.executor);
+                IAsyncResult result = this.executor.BeginResumeBookmark(
+                    Bookmark.AsyncOperationCompletionBookmark,
+                    completeData,
+                    TimeSpan.MaxValue,
+                    onResumeAsyncCodeActivityBookmark,
+                    this.executor
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.executor.EndResumeBookmark(result);
@@ -164,26 +161,17 @@ namespace System.Activities
 
             protected ActivityExecutor Executor
             {
-                get
-                {
-                    return this.context.executor;
-                }
+                get { return this.context.executor; }
             }
 
             public ActivityInstance Instance
             {
-                get
-                {
-                    return this.context.owningActivityInstance;
-                }
+                get { return this.context.owningActivityInstance; }
             }
 
             protected AsyncOperationContext AsyncContext
             {
-                get
-                {
-                    return this.context;
-                }
+                get { return this.context; }
             }
 
             // This method will throw if the complete/cancel is now invalid, it will return

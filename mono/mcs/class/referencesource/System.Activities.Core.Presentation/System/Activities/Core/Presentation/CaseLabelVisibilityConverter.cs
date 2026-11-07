@@ -24,10 +24,14 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }
-
     }
 }

@@ -23,7 +23,9 @@ namespace System.Collections.Generic
         public SynchronizedCollection(object syncRoot)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
 
             this.items = new List<T>();
             this.sync = syncRoot;
@@ -32,9 +34,13 @@ namespace System.Collections.Generic
         public SynchronizedCollection(object syncRoot, IEnumerable<T> list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
             if (list == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("list"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("list")
+                );
 
             this.items = new List<T>(list);
             this.sync = syncRoot;
@@ -43,9 +49,13 @@ namespace System.Collections.Generic
         public SynchronizedCollection(object syncRoot, params T[] list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
             if (list == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("list"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("list")
+                );
 
             this.items = new List<T>(list.Length);
             for (int i = 0; i < list.Length; i++)
@@ -56,7 +66,13 @@ namespace System.Collections.Generic
 
         public int Count
         {
-            get { lock (this.sync) { return this.items.Count; } }
+            get
+            {
+                lock (this.sync)
+                {
+                    return this.items.Count;
+                }
+            }
         }
 
         protected List<T> Items
@@ -83,8 +99,13 @@ namespace System.Collections.Generic
                 lock (this.sync)
                 {
                     if (index < 0 || index >= this.items.Count)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index", index,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, this.items.Count - 1)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "index",
+                                index,
+                                SR.GetString(SR.ValueMustBeInRange, 0, this.items.Count - 1)
+                            )
+                        );
 
                     this.SetItem(index, value);
                 }
@@ -145,8 +166,13 @@ namespace System.Collections.Generic
             lock (this.sync)
             {
                 if (index < 0 || index > this.items.Count)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index", index,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, this.items.Count)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "index",
+                            index,
+                            SR.GetString(SR.ValueMustBeInRange, 0, this.items.Count)
+                        )
+                    );
 
                 this.InsertItem(index, item);
             }
@@ -184,9 +210,13 @@ namespace System.Collections.Generic
             lock (this.sync)
             {
                 if (index < 0 || index >= this.items.Count)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index", index,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, this.items.Count - 1)));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "index",
+                            index,
+                            SR.GetString(SR.ValueMustBeInRange, 0, this.items.Count - 1)
+                        )
+                    );
 
                 this.RemoveItem(index);
             }
@@ -242,10 +272,7 @@ namespace System.Collections.Generic
 
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get { return this[index]; }
             set
             {
                 VerifyValueType(value);
@@ -304,12 +331,18 @@ namespace System.Collections.Generic
             {
                 if (typeof(T).IsValueType)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SynchronizedCollectionWrongTypeNull)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.SynchronizedCollectionWrongTypeNull))
+                    );
                 }
             }
             else if (!(value is T))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SynchronizedCollectionWrongType1, value.GetType().FullName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SynchronizedCollectionWrongType1, value.GetType().FullName)
+                    )
+                );
             }
         }
     }

@@ -36,8 +36,12 @@ namespace System.Text.Json
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
         /// for <paramref name="typeToConvert"/> or its serializable members.
         /// </exception>
-        [RequiresUnreferencedCode("Getting a converter for a type may require reflection which depends on unreferenced code.")]
-        [RequiresDynamicCode("Getting a converter for a type may require reflection which depends on runtime code generation.")]
+        [RequiresUnreferencedCode(
+            "Getting a converter for a type may require reflection which depends on unreferenced code."
+        )]
+        [RequiresDynamicCode(
+            "Getting a converter for a type may require reflection which depends on runtime code generation."
+        )]
         public JsonConverter GetConverter(Type typeToConvert)
         {
             if (typeToConvert is null)
@@ -63,7 +67,11 @@ namespace System.Text.Json
         /// </summary>
         internal JsonConverter GetConverterInternal(Type typeToConvert)
         {
-            JsonTypeInfo jsonTypeInfo = GetTypeInfoInternal(typeToConvert, ensureConfigured: false, resolveIfMutable: true);
+            JsonTypeInfo jsonTypeInfo = GetTypeInfoInternal(
+                typeToConvert,
+                ensureConfigured: false,
+                resolveIfMutable: true
+            );
             return jsonTypeInfo.Converter;
         }
 
@@ -94,7 +102,10 @@ namespace System.Text.Json
             return converter;
         }
 
-        internal static void CheckConverterNullabilityIsSameAsPropertyType(JsonConverter converter, Type propertyType)
+        internal static void CheckConverterNullabilityIsSameAsPropertyType(
+            JsonConverter converter,
+            Type propertyType
+        )
         {
             // User has indicated that either:
             //   a) a non-nullable-struct handling converter should handle a nullable struct type or
@@ -104,10 +115,16 @@ namespace System.Text.Json
             //
             // We also throw to avoid passing an invalid argument to setters for nullable struct properties,
             // which would cause an InvalidProgramException when the generated IL is invoked.
-            if (propertyType.IsValueType && converter.IsValueType &&
-                (propertyType.IsNullableOfT() ^ converter.Type!.IsNullableOfT()))
+            if (
+                propertyType.IsValueType
+                && converter.IsValueType
+                && (propertyType.IsNullableOfT() ^ converter.Type!.IsNullableOfT())
+            )
             {
-                ThrowHelper.ThrowInvalidOperationException_ConverterCanConvertMultipleTypes(propertyType, converter);
+                ThrowHelper.ThrowInvalidOperationException_ConverterCanConvertMultipleTypes(
+                    propertyType,
+                    converter
+                );
             }
         }
     }

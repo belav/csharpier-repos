@@ -9,11 +9,10 @@ namespace System.Threading
     {
         private bool _requireWaitNotification;
 
-        public SynchronizationContext()
-        {
-        }
+        public SynchronizationContext() { }
 
-        public static SynchronizationContext? Current => Thread.CurrentThread._synchronizationContext;
+        public static SynchronizationContext? Current =>
+            Thread.CurrentThread._synchronizationContext;
 
         protected void SetWaitNotificationRequired() => _requireWaitNotification = true;
 
@@ -21,22 +20,22 @@ namespace System.Threading
 
         public virtual void Send(SendOrPostCallback d, object? state) => d(state);
 
-        public virtual void Post(SendOrPostCallback d, object? state)
-            => ThreadPool.QueueUserWorkItem(static s => s.Key(s.Value), new KeyValuePair<SendOrPostCallback, object?>(d, state), preferLocal: false);
+        public virtual void Post(SendOrPostCallback d, object? state) =>
+            ThreadPool.QueueUserWorkItem(
+                static s => s.Key(s.Value),
+                new KeyValuePair<SendOrPostCallback, object?>(d, state),
+                preferLocal: false
+            );
 
         /// <summary>
         ///     Optional override for subclasses, for responding to notification that operation is starting.
         /// </summary>
-        public virtual void OperationStarted()
-        {
-        }
+        public virtual void OperationStarted() { }
 
         /// <summary>
         ///     Optional override for subclasses, for responding to notification that operation has completed.
         /// </summary>
-        public virtual void OperationCompleted()
-        {
-        }
+        public virtual void OperationCompleted() { }
 
         [CLSCompliant(false)]
         public virtual int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
@@ -49,10 +48,15 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(waitHandles);
 
-            return WaitHandle.WaitMultipleIgnoringSyncContext(waitHandles, waitAll, millisecondsTimeout);
+            return WaitHandle.WaitMultipleIgnoringSyncContext(
+                waitHandles,
+                waitAll,
+                millisecondsTimeout
+            );
         }
 
-        public static void SetSynchronizationContext(SynchronizationContext? syncContext) => Thread.CurrentThread._synchronizationContext = syncContext;
+        public static void SetSynchronizationContext(SynchronizationContext? syncContext) =>
+            Thread.CurrentThread._synchronizationContext = syncContext;
 
         public virtual SynchronizationContext CreateCopy() => new SynchronizationContext();
     }

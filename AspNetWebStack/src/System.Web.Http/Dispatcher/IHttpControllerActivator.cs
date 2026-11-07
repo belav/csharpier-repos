@@ -11,6 +11,10 @@ namespace System.Web.Http.Dispatcher
     /// </summary>
     public interface IHttpControllerActivator
     {
-        IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType);
+        IHttpController Create(
+            HttpRequestMessage request,
+            HttpControllerDescriptor controllerDescriptor,
+            Type controllerType
+        );
     }
 }

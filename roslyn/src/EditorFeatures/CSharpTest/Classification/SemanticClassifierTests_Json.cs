@@ -42,9 +42,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Operator("-"),
                 Json.Keyword("Infinity"),
                 Json.Punctuation(","),
-                Json.PropertyName("""
+                Json.PropertyName(
+                    """
                     ""baz""
-                    """),
+                    """
+                ),
                 Json.Punctuation(":"),
                 Json.Keyword("true"),
                 Json.Object("}"),
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(","),
                 Json.String("'str'"),
                 Json.Array("]"),
-                Json.Comment("// comment"));
+                Json.Comment("// comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -126,9 +130,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Operator("-"),
                 Json.Keyword("Infinity"),
                 Json.Punctuation(","),
-                Json.PropertyName("""
+                Json.PropertyName(
+                    """
                     ""baz""
-                    """),
+                    """
+                ),
                 Json.Punctuation(":"),
                 Json.Keyword("true"),
                 Json.Punctuation(","),
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(","),
                 Json.String("'str'"),
                 Json.Array("]"),
-                Json.Comment("// comment"));
+                Json.Comment("// comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -161,9 +168,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """;
-            await TestAsync(input,
-                testHost,
-                Keyword("var"));
+            await TestAsync(input, testHost, Keyword("var"));
         }
 
         [Theory, CombinatorialData]
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """;
-            await TestAsync(input,
+            await TestAsync(
+                input,
                 testHost,
                 Keyword("var"),
                 Json.Array("["),
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Object("}"),
                 Json.Punctuation(","),
                 Json.Number("3"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -219,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -247,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -277,12 +286,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/roslyn/issues/69237")]
-        public async Task TestJsonOnApiWithStringSyntaxAttribute_PropertyInitializer(TestHost testHost)
+        public async Task TestJsonOnApiWithStringSyntaxAttribute_PropertyInitializer(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """"
@@ -310,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Number("2"),
                 Json.Punctuation(","),
                 Json.Number("3"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -344,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Number("2"),
                 Json.Punctuation(","),
                 Json.Number("3"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
     }
 }

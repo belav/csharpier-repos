@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-//this is regression test for 307867 
+
+//this is regression test for 307867
 //this failed due to inlining under gcstress
 public class TEST
 {
     // prevent induction variable from being optimized away
-    private volatile static int s_numLeft;
+    private static volatile int s_numLeft;
 
     [Fact]
     public static unsafe int TestEntryPoint()
@@ -15,7 +16,6 @@ public class TEST
         string value = "Hello, World!";
         char[] dest = new char[value.Length];
         s_numLeft = value.Length - 1;
-
 
         while (s_numLeft >= 0)
         {
@@ -38,4 +38,3 @@ public class TEST
         return 100;
     }
 }
-

@@ -28,296 +28,293 @@ namespace System
             private const int BitsForLongestDigitSequence = 2552;
 
             // We require BitsPerBlock additional bits for shift space used during the pre-division preparation
-            private const int MaxBits = BitsForLongestBinaryMantissa + BitsForLongestDigitSequence + BitsPerBlock;
+            private const int MaxBits =
+                BitsForLongestBinaryMantissa + BitsForLongestDigitSequence + BitsPerBlock;
 
             private const int BitsPerBlock = sizeof(int) * 8;
             private const int MaxBlockCount = (MaxBits + (BitsPerBlock - 1)) / BitsPerBlock;
 
             private static ReadOnlySpan<uint> Pow10UInt32Table =>
-            [
-                1,          // 10^0
-                10,         // 10^1
-                100,        // 10^2
-                1000,       // 10^3
-                10000,      // 10^4
-                100000,     // 10^5
-                1000000,    // 10^6
-                10000000,   // 10^7
-                // These last two are accessed only by MultiplyPow10.
-                100000000,  // 10^8
-                1000000000  // 10^9
-            ];
+                [
+                    1, // 10^0
+                    10, // 10^1
+                    100, // 10^2
+                    1000, // 10^3
+                    10000, // 10^4
+                    100000, // 10^5
+                    1000000, // 10^6
+                    10000000, // 10^7
+                    // These last two are accessed only by MultiplyPow10.
+                    100000000, // 10^8
+                    1000000000, // 10^9
+                ];
 
             private static ReadOnlySpan<int> Pow10BigNumTableIndices =>
-            [
-                0,          // 10^8
-                2,          // 10^16
-                5,          // 10^32
-                10,         // 10^64
-                18,         // 10^128
-                33,         // 10^256
-                61,         // 10^512
-                116,        // 10^1024
-            ];
+                [
+                    0, // 10^8
+                    2, // 10^16
+                    5, // 10^32
+                    10, // 10^64
+                    18, // 10^128
+                    33, // 10^256
+                    61, // 10^512
+                    116, // 10^1024
+                ];
 
             private static ReadOnlySpan<uint> Pow10BigNumTable =>
-            [
-                // 10^8
-                1,          // _length
-                100000000,  // _blocks
-
-                // 10^16
-                2,          // _length
-                0x6FC10000, // _blocks
-                0x002386F2,
-
-                // 10^32
-                4,          // _length
-                0x00000000, // _blocks
-                0x85ACEF81,
-                0x2D6D415B,
-                0x000004EE,
-
-                // 10^64
-                7,          // _length
-                0x00000000, // _blocks
-                0x00000000,
-                0xBF6A1F01,
-                0x6E38ED64,
-                0xDAA797ED,
-                0xE93FF9F4,
-                0x00184F03,
-
-                // 10^128
-                14,         // _length
-                0x00000000, // _blocks
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x2E953E01,
-                0x03DF9909,
-                0x0F1538FD,
-                0x2374E42F,
-                0xD3CFF5EC,
-                0xC404DC08,
-                0xBCCDB0DA,
-                0xA6337F19,
-                0xE91F2603,
-                0x0000024E,
-
-                // 10^256
-                27,         // _length
-                0x00000000, // _blocks
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x982E7C01,
-                0xBED3875B,
-                0xD8D99F72,
-                0x12152F87,
-                0x6BDE50C6,
-                0xCF4A6E70,
-                0xD595D80F,
-                0x26B2716E,
-                0xADC666B0,
-                0x1D153624,
-                0x3C42D35A,
-                0x63FF540E,
-                0xCC5573C0,
-                0x65F9EF17,
-                0x55BC28F2,
-                0x80DCC7F7,
-                0xF46EEDDC,
-                0x5FDCEFCE,
-                0x000553F7,
-
-                // 10^512
-                54,         // _length
-                0x00000000, // _blocks
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0xFC6CF801,
-                0x77F27267,
-                0x8F9546DC,
-                0x5D96976F,
-                0xB83A8A97,
-                0xC31E1AD9,
-                0x46C40513,
-                0x94E65747,
-                0xC88976C1,
-                0x4475B579,
-                0x28F8733B,
-                0xAA1DA1BF,
-                0x703ED321,
-                0x1E25CFEA,
-                0xB21A2F22,
-                0xBC51FB2E,
-                0x96E14F5D,
-                0xBFA3EDAC,
-                0x329C57AE,
-                0xE7FC7153,
-                0xC3FC0695,
-                0x85A91924,
-                0xF95F635E,
-                0xB2908EE0,
-                0x93ABADE4,
-                0x1366732A,
-                0x9449775C,
-                0x69BE5B0E,
-                0x7343AFAC,
-                0xB099BC81,
-                0x45A71D46,
-                0xA2699748,
-                0x8CB07303,
-                0x8A0B1F13,
-                0x8CAB8A97,
-                0xC1D238D9,
-                0x633415D4,
-                0x0000001C,
-
-                // 10^1024
-                107,        // _length
-                0x00000000, // _blocks
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x2919F001,
-                0xF55B2B72,
-                0x6E7C215B,
-                0x1EC29F86,
-                0x991C4E87,
-                0x15C51A88,
-                0x140AC535,
-                0x4C7D1E1A,
-                0xCC2CD819,
-                0x0ED1440E,
-                0x896634EE,
-                0x7DE16CFB,
-                0x1E43F61F,
-                0x9FCE837D,
-                0x231D2B9C,
-                0x233E55C7,
-                0x65DC60D7,
-                0xF451218B,
-                0x1C5CD134,
-                0xC9635986,
-                0x922BBB9F,
-                0xA7E89431,
-                0x9F9F2A07,
-                0x62BE695A,
-                0x8E1042C4,
-                0x045B7A74,
-                0x1ABE1DE3,
-                0x8AD822A5,
-                0xBA34C411,
-                0xD814B505,
-                0xBF3FDEB3,
-                0x8FC51A16,
-                0xB1B896BC,
-                0xF56DEEEC,
-                0x31FB6BFD,
-                0xB6F4654B,
-                0x101A3616,
-                0x6B7595FB,
-                0xDC1A47FE,
-                0x80D98089,
-                0x80BDA5A5,
-                0x9A202882,
-                0x31EB0F66,
-                0xFC8F1F90,
-                0x976A3310,
-                0xE26A7B7E,
-                0xDF68368A,
-                0x3CE3A0B8,
-                0x8E4262CE,
-                0x75A351A2,
-                0x6CB0B6C9,
-                0x44597583,
-                0x31B5653F,
-                0xC356E38A,
-                0x35FAABA6,
-                0x0190FBA0,
-                0x9FC4ED52,
-                0x88BC491B,
-                0x1640114A,
-                0x005B8041,
-                0xF4F3235E,
-                0x1E8D4649,
-                0x36A8DE06,
-                0x73C55349,
-                0xA7E6BD2A,
-                0xC1A6970C,
-                0x47187094,
-                0xD2DB49EF,
-                0x926C3F5B,
-                0xAE6209D4,
-                0x2D433949,
-                0x34F4A3C6,
-                0xD4305D94,
-                0xD9D61A05,
-                0x00000325,
-
-                // 9 Trailing blocks to ensure MaxBlockCount
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-                0x00000000,
-            ];
+                [
+                    // 10^8
+                    1, // _length
+                    100000000, // _blocks
+                    // 10^16
+                    2, // _length
+                    0x6FC10000, // _blocks
+                    0x002386F2,
+                    // 10^32
+                    4, // _length
+                    0x00000000, // _blocks
+                    0x85ACEF81,
+                    0x2D6D415B,
+                    0x000004EE,
+                    // 10^64
+                    7, // _length
+                    0x00000000, // _blocks
+                    0x00000000,
+                    0xBF6A1F01,
+                    0x6E38ED64,
+                    0xDAA797ED,
+                    0xE93FF9F4,
+                    0x00184F03,
+                    // 10^128
+                    14, // _length
+                    0x00000000, // _blocks
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x2E953E01,
+                    0x03DF9909,
+                    0x0F1538FD,
+                    0x2374E42F,
+                    0xD3CFF5EC,
+                    0xC404DC08,
+                    0xBCCDB0DA,
+                    0xA6337F19,
+                    0xE91F2603,
+                    0x0000024E,
+                    // 10^256
+                    27, // _length
+                    0x00000000, // _blocks
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x982E7C01,
+                    0xBED3875B,
+                    0xD8D99F72,
+                    0x12152F87,
+                    0x6BDE50C6,
+                    0xCF4A6E70,
+                    0xD595D80F,
+                    0x26B2716E,
+                    0xADC666B0,
+                    0x1D153624,
+                    0x3C42D35A,
+                    0x63FF540E,
+                    0xCC5573C0,
+                    0x65F9EF17,
+                    0x55BC28F2,
+                    0x80DCC7F7,
+                    0xF46EEDDC,
+                    0x5FDCEFCE,
+                    0x000553F7,
+                    // 10^512
+                    54, // _length
+                    0x00000000, // _blocks
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0xFC6CF801,
+                    0x77F27267,
+                    0x8F9546DC,
+                    0x5D96976F,
+                    0xB83A8A97,
+                    0xC31E1AD9,
+                    0x46C40513,
+                    0x94E65747,
+                    0xC88976C1,
+                    0x4475B579,
+                    0x28F8733B,
+                    0xAA1DA1BF,
+                    0x703ED321,
+                    0x1E25CFEA,
+                    0xB21A2F22,
+                    0xBC51FB2E,
+                    0x96E14F5D,
+                    0xBFA3EDAC,
+                    0x329C57AE,
+                    0xE7FC7153,
+                    0xC3FC0695,
+                    0x85A91924,
+                    0xF95F635E,
+                    0xB2908EE0,
+                    0x93ABADE4,
+                    0x1366732A,
+                    0x9449775C,
+                    0x69BE5B0E,
+                    0x7343AFAC,
+                    0xB099BC81,
+                    0x45A71D46,
+                    0xA2699748,
+                    0x8CB07303,
+                    0x8A0B1F13,
+                    0x8CAB8A97,
+                    0xC1D238D9,
+                    0x633415D4,
+                    0x0000001C,
+                    // 10^1024
+                    107, // _length
+                    0x00000000, // _blocks
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x2919F001,
+                    0xF55B2B72,
+                    0x6E7C215B,
+                    0x1EC29F86,
+                    0x991C4E87,
+                    0x15C51A88,
+                    0x140AC535,
+                    0x4C7D1E1A,
+                    0xCC2CD819,
+                    0x0ED1440E,
+                    0x896634EE,
+                    0x7DE16CFB,
+                    0x1E43F61F,
+                    0x9FCE837D,
+                    0x231D2B9C,
+                    0x233E55C7,
+                    0x65DC60D7,
+                    0xF451218B,
+                    0x1C5CD134,
+                    0xC9635986,
+                    0x922BBB9F,
+                    0xA7E89431,
+                    0x9F9F2A07,
+                    0x62BE695A,
+                    0x8E1042C4,
+                    0x045B7A74,
+                    0x1ABE1DE3,
+                    0x8AD822A5,
+                    0xBA34C411,
+                    0xD814B505,
+                    0xBF3FDEB3,
+                    0x8FC51A16,
+                    0xB1B896BC,
+                    0xF56DEEEC,
+                    0x31FB6BFD,
+                    0xB6F4654B,
+                    0x101A3616,
+                    0x6B7595FB,
+                    0xDC1A47FE,
+                    0x80D98089,
+                    0x80BDA5A5,
+                    0x9A202882,
+                    0x31EB0F66,
+                    0xFC8F1F90,
+                    0x976A3310,
+                    0xE26A7B7E,
+                    0xDF68368A,
+                    0x3CE3A0B8,
+                    0x8E4262CE,
+                    0x75A351A2,
+                    0x6CB0B6C9,
+                    0x44597583,
+                    0x31B5653F,
+                    0xC356E38A,
+                    0x35FAABA6,
+                    0x0190FBA0,
+                    0x9FC4ED52,
+                    0x88BC491B,
+                    0x1640114A,
+                    0x005B8041,
+                    0xF4F3235E,
+                    0x1E8D4649,
+                    0x36A8DE06,
+                    0x73C55349,
+                    0xA7E6BD2A,
+                    0xC1A6970C,
+                    0x47187094,
+                    0xD2DB49EF,
+                    0x926C3F5B,
+                    0xAE6209D4,
+                    0x2D433949,
+                    0x34F4A3C6,
+                    0xD4305D94,
+                    0xD9D61A05,
+                    0x00000325,
+                    // 9 Trailing blocks to ensure MaxBlockCount
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                    0x00000000,
+                ];
 
             private int _length;
             private fixed uint _blocks[MaxBlockCount];
 
-            public static void Add(scoped ref BigInteger lhs, scoped ref BigInteger rhs, out BigInteger result)
+            public static void Add(
+                scoped ref BigInteger lhs,
+                scoped ref BigInteger rhs,
+                out BigInteger result
+            )
             {
                 // determine which operand has the smaller length
                 ref BigInteger large = ref (lhs._length < rhs._length) ? ref rhs : ref lhs;
@@ -427,7 +424,12 @@ namespace System
                 return (lastIndex * BitsPerBlock) + CountSignificantBits(value._blocks[lastIndex]);
             }
 
-            public static void DivRem(scoped ref BigInteger lhs, scoped ref BigInteger rhs, out BigInteger quo, out BigInteger rem)
+            public static void DivRem(
+                scoped ref BigInteger lhs,
+                scoped ref BigInteger rhs,
+                out BigInteger quo,
+                out BigInteger rem
+            )
             {
                 // This is modified from the libraries BigIntegerCalculator.DivRem.cs implementation:
                 // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Runtime.Numerics/src/System/Numerics/BigIntegerCalculator.DivRem.cs
@@ -648,14 +650,14 @@ namespace System
                         ulong product = ((ulong)(divisor._blocks[index]) * quotient) + carry;
                         carry = product >> 32;
 
-                        ulong difference = (ulong)(dividend._blocks[index]) - (uint)(product) - borrow;
+                        ulong difference =
+                            (ulong)(dividend._blocks[index]) - (uint)(product) - borrow;
                         borrow = (difference >> 32) & 1;
 
                         dividend._blocks[index] = (uint)(difference);
 
                         index++;
-                    }
-                    while (index < divisorLength);
+                    } while (index < divisorLength);
 
                     // Remove all leading zero blocks from dividend
                     while ((divisorLength > 0) && (dividend._blocks[divisorLength - 1] == 0))
@@ -678,14 +680,14 @@ namespace System
 
                     do
                     {
-                        ulong difference = (ulong)(dividend._blocks[index]) - divisor._blocks[index] - borrow;
+                        ulong difference =
+                            (ulong)(dividend._blocks[index]) - divisor._blocks[index] - borrow;
                         borrow = (difference >> 32) & 1;
 
                         dividend._blocks[index] = (uint)(difference);
 
                         index++;
-                    }
-                    while (index < divisorLength);
+                    } while (index < divisorLength);
 
                     // Remove all leading zero blocks from dividend
                     while ((divisorLength > 0) && (dividend._blocks[divisorLength - 1] == 0))
@@ -699,7 +701,11 @@ namespace System
                 return quotient;
             }
 
-            public static void Multiply(scoped ref BigInteger lhs, uint value, out BigInteger result)
+            public static void Multiply(
+                scoped ref BigInteger lhs,
+                uint value,
+                out BigInteger result
+            )
             {
                 if (lhs._length <= 1)
                 {
@@ -745,7 +751,11 @@ namespace System
                 }
             }
 
-            public static void Multiply(scoped ref BigInteger lhs, scoped ref BigInteger rhs, out BigInteger result)
+            public static void Multiply(
+                scoped ref BigInteger lhs,
+                scoped ref BigInteger rhs,
+                out BigInteger result
+            )
             {
                 if (lhs._length <= 1)
                 {
@@ -796,14 +806,16 @@ namespace System
 
                         do
                         {
-                            ulong product = result._blocks[resultIndex] + ((ulong)(small._blocks[smallIndex]) * large._blocks[largeIndex]) + carry;
+                            ulong product =
+                                result._blocks[resultIndex]
+                                + ((ulong)(small._blocks[smallIndex]) * large._blocks[largeIndex])
+                                + carry;
                             carry = product >> 32;
                             result._blocks[resultIndex] = (uint)(product);
 
                             resultIndex++;
                             largeIndex++;
-                        }
-                        while (largeIndex < largeLength);
+                        } while (largeIndex < largeLength);
 
                         result._blocks[resultIndex] = (uint)(carry);
                     }
@@ -860,7 +872,9 @@ namespace System
 
                 // Validate that `Pow10BigNumTable` has exactly enough trailing elements to fill a BigInteger (which contains MaxBlockCount + 1 elements)
                 // We validate here, since this is the only current consumer of the array
-                Debug.Assert((Pow10BigNumTableIndices[^1] + MaxBlockCount + 2) == Pow10BigNumTable.Length);
+                Debug.Assert(
+                    (Pow10BigNumTableIndices[^1] + MaxBlockCount + 2) == Pow10BigNumTable.Length
+                );
 
                 SetUInt32(out BigInteger temp1, Pow10UInt32Table[(int)(exponent & 0x7)]);
                 ref BigInteger lhs = ref temp1;
@@ -877,7 +891,11 @@ namespace System
                     if ((exponent & 1) != 0)
                     {
                         // Multiply into the next temporary
-                        fixed (uint* pBigNumEntry = &Pow10BigNumTable[Pow10BigNumTableIndices[(int)index]])
+                        fixed (
+                            uint* pBigNumEntry = &Pow10BigNumTable[
+                                Pow10BigNumTableIndices[(int)index]
+                            ]
+                        )
                         {
                             ref BigInteger rhs = ref *(BigInteger*)(pBigNumEntry);
                             Multiply(ref lhs, ref rhs, out product);
@@ -897,7 +915,11 @@ namespace System
                 SetValue(out result, ref lhs);
             }
 
-            private static uint AddDivisor(ref BigInteger lhs, int lhsStartIndex, ref BigInteger rhs)
+            private static uint AddDivisor(
+                ref BigInteger lhs,
+                int lhsStartIndex,
+                ref BigInteger rhs
+            )
             {
                 int lhsLength = lhs._length;
                 int rhsLength = rhs._length;
@@ -922,7 +944,13 @@ namespace System
                 return (uint)(carry);
             }
 
-            private static bool DivideGuessTooBig(ulong q, ulong valHi, uint valLo, uint divHi, uint divLo)
+            private static bool DivideGuessTooBig(
+                ulong q,
+                ulong valHi,
+                uint valLo,
+                uint divHi,
+                uint divLo
+            )
             {
                 Debug.Assert(q <= 0xFFFFFFFF);
 
@@ -952,7 +980,12 @@ namespace System
                 return false;
             }
 
-            private static uint SubtractDivisor(ref BigInteger lhs, int lhsStartIndex, ref BigInteger rhs, ulong q)
+            private static uint SubtractDivisor(
+                ref BigInteger lhs,
+                int lhsStartIndex,
+                ref BigInteger rhs,
+                ulong q
+            )
             {
                 int lhsLength = lhs._length - lhsStartIndex;
                 int rhsLength = rhs._length;
@@ -1235,7 +1268,8 @@ namespace System
             private void Clear(uint length) =>
                 NativeMemory.Clear(
                     (byte*)Unsafe.AsPointer(ref _blocks[0]), // This is safe to do since we are a ref struct
-                    length * sizeof(uint));
+                    length * sizeof(uint)
+                );
 
             private static uint DivRem32(uint value, out uint remainder)
             {

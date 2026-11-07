@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,39 +34,40 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class NamedPipeConnectionPoolSettings
-	{
-		internal NamedPipeConnectionPoolSettings ()
-		{
-		}
+    public sealed class NamedPipeConnectionPoolSettings
+    {
+        internal NamedPipeConnectionPoolSettings() { }
 
-		string group_name = "default";
-		TimeSpan idle_timeout = TimeSpan.FromSeconds (120);
-		int max_conn = 10;
+        string group_name = "default";
+        TimeSpan idle_timeout = TimeSpan.FromSeconds(120);
+        int max_conn = 10;
 
-		internal void CopyPropertiesFrom (NamedPipeConnectionPoolSettings other)
-		{
-			group_name = other.group_name;
-			idle_timeout = other.idle_timeout;
-			max_conn = other.max_conn;
-		}
+        internal void CopyPropertiesFrom(NamedPipeConnectionPoolSettings other)
+        {
+            group_name = other.group_name;
+            idle_timeout = other.idle_timeout;
+            max_conn = other.max_conn;
+        }
 
-		[MonoTODO]
-		public string GroupName {
-			get { return group_name; }
-			set { group_name = value; }
-		}
+        [MonoTODO]
+        public string GroupName
+        {
+            get { return group_name; }
+            set { group_name = value; }
+        }
 
-		[MonoTODO]
-		public TimeSpan IdleTimeout {
-			get { return idle_timeout; }
-			set { idle_timeout = value; }
-		}
+        [MonoTODO]
+        public TimeSpan IdleTimeout
+        {
+            get { return idle_timeout; }
+            set { idle_timeout = value; }
+        }
 
-		[MonoTODO]
-		public int MaxOutboundConnectionsPerEndpoint {
-			get { return max_conn; }
-			set { max_conn = value; }
-		}
-	}
+        [MonoTODO]
+        public int MaxOutboundConnectionsPerEndpoint
+        {
+            get { return max_conn; }
+            set { max_conn = value; }
+        }
+    }
 }

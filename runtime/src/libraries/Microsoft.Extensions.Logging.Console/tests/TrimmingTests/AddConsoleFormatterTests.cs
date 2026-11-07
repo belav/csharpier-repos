@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
-using System.IO;
 
 class Program
 {
@@ -18,7 +18,10 @@ class Program
         descriptors.AddLogging(builder =>
         {
             builder.AddConsoleFormatter<CustomFormatter, CustomOptions>();
-            builder.AddConsole(o => { o.FormatterName = "custom"; });
+            builder.AddConsole(o =>
+            {
+                o.FormatterName = "custom";
+            });
         });
 
         ServiceProvider provider = descriptors.BuildServiceProvider();
@@ -26,8 +29,7 @@ class Program
         ILoggerProvider logger = provider.GetRequiredService<ILoggerProvider>();
         logger.CreateLogger("log").LogError("Hello");
 
-        if (ConstructorCallCount != 1 ||
-            WriteCallCount != 1)
+        if (ConstructorCallCount != 1 || WriteCallCount != 1)
         {
             return -1;
         }
@@ -37,11 +39,17 @@ class Program
 
     private class CustomFormatter : ConsoleFormatter
     {
-        public CustomFormatter() : base("Custom")
+        public CustomFormatter()
+            : base("Custom")
         {
             ConstructorCallCount++;
         }
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
+
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider scopeProvider,
+            TextWriter textWriter
+        )
         {
             WriteCallCount++;
         }

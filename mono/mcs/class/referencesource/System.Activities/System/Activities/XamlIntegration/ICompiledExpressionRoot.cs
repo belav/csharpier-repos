@@ -16,14 +16,30 @@ namespace System.Activities.XamlIntegration
     {
         string GetLanguage();
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "Interface is intended to be implemented only by generated code and consumed only by internal code")]
-        bool CanExecuteExpression(string expressionText, bool isReference, IList<LocationReference> locations, out int expressionId);
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Interface is intended to be implemented only by generated code and consumed only by internal code"
+        )]
+        bool CanExecuteExpression(
+            string expressionText,
+            bool isReference,
+            IList<LocationReference> locations,
+            out int expressionId
+        );
 
-        object InvokeExpression(int expressionId, IList<LocationReference> locations, ActivityContext activityContext);
+        object InvokeExpression(
+            int expressionId,
+            IList<LocationReference> locations,
+            ActivityContext activityContext
+        );
         object InvokeExpression(int expressionId, IList<Location> locations);
 
         IList<string> GetRequiredLocations(int expressionId);
 
-        Expression GetExpressionTreeForExpression(int expressionId, IList<LocationReference> locationReferences);
+        Expression GetExpressionTreeForExpression(
+            int expressionId,
+            IList<LocationReference> locationReferences
+        );
     }
 }

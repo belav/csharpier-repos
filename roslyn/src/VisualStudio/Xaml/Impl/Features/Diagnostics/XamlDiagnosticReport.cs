@@ -11,7 +11,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Diagnostics
         public string? ResultId { get; set; }
         public ImmutableArray<XamlDiagnostic>? Diagnostics { get; set; }
 
-        public XamlDiagnosticReport(string? resultId = null, ImmutableArray<XamlDiagnostic>? diagnostics = null)
+        public XamlDiagnosticReport(
+            string? resultId = null,
+            ImmutableArray<XamlDiagnostic>? diagnostics = null
+        )
         {
             this.ResultId = resultId;
             this.Diagnostics = diagnostics;

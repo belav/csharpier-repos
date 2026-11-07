@@ -15,7 +15,11 @@ namespace System.Data.Common.CommandTrees
     /// <summary>
     /// The expression visitor pattern abstract base class that should be implemented by visitors that do not return a result value.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public abstract class DbExpressionVisitor
     {
         /// <summary>
@@ -59,7 +63,7 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         /// <param name="expression">The DbComparisonExpression that is being visited.</param>
         public abstract void Visit(DbComparisonExpression expression);
-        
+
         /// <summary>
         /// Visitor pattern method for DbConstantExpression.
         /// </summary>
@@ -143,13 +147,13 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         /// <param name="expression">The DbIsNullExpression that is being visited.</param>
         public abstract void Visit(DbIsNullExpression expression);
-        
+
         /// <summary>
         /// Visitor pattern method for DbIsOfExpression.
         /// </summary>
         /// <param name="expression">The DbIsOfExpression that is being visited.</param>
         public abstract void Visit(DbIsOfExpression expression);
-        
+
         /// <summary>
         /// Visitor pattern method for DbJoinExpression.
         /// </summary>
@@ -220,7 +224,7 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         /// <param name="expression">The DbParameterReferenceExpression that is being visited.</param>
         public abstract void Visit(DbParameterReferenceExpression expression);
-        
+
         /// <summary>
         /// Visitor pattern method for DbProjectExpression.
         /// </summary>
@@ -274,13 +278,13 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         /// <param name="expression">The DbTreatExpression that is being visited.</param>
         public abstract void Visit(DbTreatExpression expression);
-        
+
         /// <summary>
         /// Visitor pattern method for DbUnionAllExpression.
         /// </summary>
         /// <param name="expression">The DbUnionAllExpression that is being visited.</param>
         public abstract void Visit(DbUnionAllExpression expression);
-        
+
         /// <summary>
         /// Visitor pattern method for DbVariableReferenceExpression.
         /// </summary>

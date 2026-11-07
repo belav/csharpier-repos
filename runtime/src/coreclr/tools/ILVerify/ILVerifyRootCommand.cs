@@ -11,25 +11,60 @@ namespace ILVerify
     internal sealed class ILVerifyRootCommand : CliRootCommand
     {
         public CliArgument<Dictionary<string, string>> InputFilePath { get; } =
-            new("input-file-path") { CustomParser = result => Helpers.BuildPathDictionary(result.Tokens, true), Description = "Input file(s)", Arity = ArgumentArity.OneOrMore };
+            new("input-file-path")
+            {
+                CustomParser = result => Helpers.BuildPathDictionary(result.Tokens, true),
+                Description = "Input file(s)",
+                Arity = ArgumentArity.OneOrMore,
+            };
         public CliOption<Dictionary<string, string>> Reference { get; } =
-            new("--reference", "-r") { CustomParser = result => Helpers.BuildPathDictionary(result.Tokens, false), Description = "Reference metadata from the specified assembly" };
+            new("--reference", "-r")
+            {
+                CustomParser = result => Helpers.BuildPathDictionary(result.Tokens, false),
+                Description = "Reference metadata from the specified assembly",
+            };
         public CliOption<string> SystemModule { get; } =
             new("--system-module", "-s") { Description = "System module name (default: mscorlib)" };
         public CliOption<bool> SanityChecks { get; } =
-            new("--sanity-checks", "-c") { Description = "Check for valid constructs that are likely mistakes" };
+            new("--sanity-checks", "-c")
+            {
+                Description = "Check for valid constructs that are likely mistakes",
+            };
         public CliOption<string[]> Include { get; } =
-            new("--include", "-i") { Description = "Use only methods/types/namespaces, which match the given regular expression(s)" };
+            new("--include", "-i")
+            {
+                Description =
+                    "Use only methods/types/namespaces, which match the given regular expression(s)",
+            };
         public CliOption<FileInfo> IncludeFile { get; } =
-            new CliOption<FileInfo>("--include-file") { Description = "Same as --include, but the regular expression(s) are declared line by line in the specified file." }.AcceptExistingOnly();
+            new CliOption<FileInfo>("--include-file")
+            {
+                Description =
+                    "Same as --include, but the regular expression(s) are declared line by line in the specified file.",
+            }.AcceptExistingOnly();
         public CliOption<string[]> Exclude { get; } =
-            new("--exclude", "-e") { Description = "Skip methods/types/namespaces, which match the given regular expression(s)" };
+            new("--exclude", "-e")
+            {
+                Description =
+                    "Skip methods/types/namespaces, which match the given regular expression(s)",
+            };
         public CliOption<FileInfo> ExcludeFile { get; } =
-            new CliOption<FileInfo>("--exclude-file") { Description = "Same as --exclude, but the regular expression(s) are declared line by line in the specified file." }.AcceptExistingOnly();
+            new CliOption<FileInfo>("--exclude-file")
+            {
+                Description =
+                    "Same as --exclude, but the regular expression(s) are declared line by line in the specified file.",
+            }.AcceptExistingOnly();
         public CliOption<string[]> IgnoreError { get; } =
-            new("--ignore-error", "-g") { Description = "Ignore errors, which match the given regular expression(s)" };
+            new("--ignore-error", "-g")
+            {
+                Description = "Ignore errors, which match the given regular expression(s)",
+            };
         public CliOption<FileInfo> IgnoreErrorFile { get; } =
-            new CliOption<FileInfo>("--ignore-error-file") { Description = "Same as --ignore-error, but the regular expression(s) are declared line by line in the specified file." }.AcceptExistingOnly();
+            new CliOption<FileInfo>("--ignore-error-file")
+            {
+                Description =
+                    "Same as --ignore-error, but the regular expression(s) are declared line by line in the specified file.",
+            }.AcceptExistingOnly();
         public CliOption<bool> Statistics { get; } =
             new("--statistics") { Description = "Print verification statistics" };
         public CliOption<bool> Verbose { get; } =

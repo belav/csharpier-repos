@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private readonly Cci.ITypeReference _type;
         private readonly Cci.IMetadataExpression _value;
 
-        public MetadataNamedArgument(ISymbolInternal entity, Cci.ITypeReference type, Cci.IMetadataExpression value)
+        public MetadataNamedArgument(
+            ISymbolInternal entity,
+            Cci.ITypeReference type,
+            Cci.IMetadataExpression value
+        )
         {
             // entity must be one of INamedEntity or IFieldDefinition or IPropertyDefinition
             _entity = entity;

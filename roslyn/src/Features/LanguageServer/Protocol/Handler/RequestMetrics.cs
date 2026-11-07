@@ -48,7 +48,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         {
             Contract.ThrowIfNull(_queuedDuration, "RecordExecutionStart was not called");
             var overallDuration = _sharedStopWatch.Elapsed;
-            _requestTelemetryLogger.UpdateTelemetryData(_methodName, _queuedDuration.Value, overallDuration, result);
+            _requestTelemetryLogger.UpdateTelemetryData(
+                _methodName,
+                _queuedDuration.Value,
+                overallDuration,
+                result
+            );
         }
     }
 }

@@ -37,15 +37,17 @@ namespace ILCompiler.Metadata
                     return false;
 
                 case Cts.TypeFlags.FunctionPointer:
-                    {
-                        Cts.MethodSignature pointerSignature = ((Cts.FunctionPointerType)type).Signature;
+                {
+                    Cts.MethodSignature pointerSignature = (
+                        (Cts.FunctionPointerType)type
+                    ).Signature;
 
-                        for (int i = 0; i < pointerSignature.Length; i++)
-                            if (IsBlocked(pointerSignature[i]))
-                                return true;
+                    for (int i = 0; i < pointerSignature.Length; i++)
+                        if (IsBlocked(pointerSignature[i]))
+                            return true;
 
-                        return IsBlocked(pointerSignature.ReturnType);
-                    }
+                    return IsBlocked(pointerSignature.ReturnType);
+                }
                 default:
                     Debug.Assert(type.IsDefType);
 

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Completion
             bool dismissIfLastCharacterDeleted,
             ImmutableArray<char> defaultCommitCharacters,
             EnterKeyRule defaultEnterKeyRule,
-            SnippetsRule snippetsRule)
+            SnippetsRule snippetsRule
+        )
         {
             DismissIfEmpty = dismissIfEmpty;
             DismissIfLastCharacterDeleted = dismissIfLastCharacterDeleted;
@@ -64,10 +65,16 @@ namespace Microsoft.CodeAnalysis.Completion
             bool dismissIfEmpty,
             bool dismissIfLastCharacterDeleted,
             ImmutableArray<char> defaultCommitCharacters,
-            EnterKeyRule defaultEnterKeyRule)
+            EnterKeyRule defaultEnterKeyRule
+        )
         {
-            return Create(dismissIfEmpty, dismissIfLastCharacterDeleted, defaultCommitCharacters,
-                defaultEnterKeyRule, SnippetsRule.Default);
+            return Create(
+                dismissIfEmpty,
+                dismissIfLastCharacterDeleted,
+                defaultCommitCharacters,
+                defaultEnterKeyRule,
+                SnippetsRule.Default
+            );
         }
 
         /// <summary>
@@ -83,14 +90,16 @@ namespace Microsoft.CodeAnalysis.Completion
             bool dismissIfLastCharacterDeleted = false,
             ImmutableArray<char> defaultCommitCharacters = default,
             EnterKeyRule defaultEnterKeyRule = EnterKeyRule.Default,
-            SnippetsRule snippetsRule = SnippetsRule.Default)
+            SnippetsRule snippetsRule = SnippetsRule.Default
+        )
         {
             return new CompletionRules(
                 dismissIfEmpty: dismissIfEmpty,
                 dismissIfLastCharacterDeleted: dismissIfLastCharacterDeleted,
                 defaultCommitCharacters: defaultCommitCharacters,
                 defaultEnterKeyRule: defaultEnterKeyRule,
-                snippetsRule: snippetsRule);
+                snippetsRule: snippetsRule
+            );
         }
 
         private CompletionRules With(
@@ -98,19 +107,28 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<bool> dismissIfLastCharacterDeleted = default,
             Optional<ImmutableArray<char>> defaultCommitCharacters = default,
             Optional<EnterKeyRule> defaultEnterKeyRule = default,
-            Optional<SnippetsRule> snippetsRule = default)
+            Optional<SnippetsRule> snippetsRule = default
+        )
         {
             var newDismissIfEmpty = dismissIfEmpty.HasValue ? dismissIfEmpty.Value : DismissIfEmpty;
-            var newDismissIfLastCharacterDeleted = dismissIfLastCharacterDeleted.HasValue ? dismissIfLastCharacterDeleted.Value : DismissIfLastCharacterDeleted;
-            var newDefaultCommitCharacters = defaultCommitCharacters.HasValue ? defaultCommitCharacters.Value : DefaultCommitCharacters;
-            var newDefaultEnterKeyRule = defaultEnterKeyRule.HasValue ? defaultEnterKeyRule.Value : DefaultEnterKeyRule;
+            var newDismissIfLastCharacterDeleted = dismissIfLastCharacterDeleted.HasValue
+                ? dismissIfLastCharacterDeleted.Value
+                : DismissIfLastCharacterDeleted;
+            var newDefaultCommitCharacters = defaultCommitCharacters.HasValue
+                ? defaultCommitCharacters.Value
+                : DefaultCommitCharacters;
+            var newDefaultEnterKeyRule = defaultEnterKeyRule.HasValue
+                ? defaultEnterKeyRule.Value
+                : DefaultEnterKeyRule;
             var newSnippetsRule = snippetsRule.HasValue ? snippetsRule.Value : SnippetsRule;
 
-            if (newDismissIfEmpty == DismissIfEmpty &&
-                newDismissIfLastCharacterDeleted == DismissIfLastCharacterDeleted &&
-                newDefaultCommitCharacters == DefaultCommitCharacters &&
-                newDefaultEnterKeyRule == DefaultEnterKeyRule &&
-                newSnippetsRule == SnippetsRule)
+            if (
+                newDismissIfEmpty == DismissIfEmpty
+                && newDismissIfLastCharacterDeleted == DismissIfLastCharacterDeleted
+                && newDefaultCommitCharacters == DefaultCommitCharacters
+                && newDefaultEnterKeyRule == DefaultEnterKeyRule
+                && newSnippetsRule == SnippetsRule
+            )
             {
                 return this;
             }
@@ -121,44 +139,75 @@ namespace Microsoft.CodeAnalysis.Completion
                     newDismissIfLastCharacterDeleted,
                     newDefaultCommitCharacters,
                     newDefaultEnterKeyRule,
-                    newSnippetsRule);
+                    newSnippetsRule
+                );
             }
         }
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionRules"/> with the <see cref="DismissIfEmpty"/> property changed.
         /// </summary>
-        public CompletionRules WithDismissIfEmpty(bool dismissIfEmpty)
-            => With(dismissIfEmpty: dismissIfEmpty);
+        public CompletionRules WithDismissIfEmpty(bool dismissIfEmpty) =>
+            With(dismissIfEmpty: dismissIfEmpty);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionRules"/> with the <see cref="DismissIfLastCharacterDeleted"/> property changed.
         /// </summary>
-        public CompletionRules WithDismissIfLastCharacterDeleted(bool dismissIfLastCharacterDeleted)
-            => With(dismissIfLastCharacterDeleted: dismissIfLastCharacterDeleted);
+        public CompletionRules WithDismissIfLastCharacterDeleted(
+            bool dismissIfLastCharacterDeleted
+        ) => With(dismissIfLastCharacterDeleted: dismissIfLastCharacterDeleted);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionRules"/> with the <see cref="DefaultCommitCharacters"/> property changed.
         /// </summary>
-        public CompletionRules WithDefaultCommitCharacters(ImmutableArray<char> defaultCommitCharacters)
-            => With(defaultCommitCharacters: defaultCommitCharacters);
+        public CompletionRules WithDefaultCommitCharacters(
+            ImmutableArray<char> defaultCommitCharacters
+        ) => With(defaultCommitCharacters: defaultCommitCharacters);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionRules"/> with the <see cref="DefaultEnterKeyRule"/> property changed.
         /// </summary>
-        public CompletionRules WithDefaultEnterKeyRule(EnterKeyRule defaultEnterKeyRule)
-            => With(defaultEnterKeyRule: defaultEnterKeyRule);
+        public CompletionRules WithDefaultEnterKeyRule(EnterKeyRule defaultEnterKeyRule) =>
+            With(defaultEnterKeyRule: defaultEnterKeyRule);
 
         /// <summary>
         /// Creates a copy of the this <see cref="CompletionRules"/> with the <see cref="SnippetsRule"/> property changed.
         /// </summary>
-        public CompletionRules WithSnippetsRule(SnippetsRule snippetsRule)
-            => With(snippetsRule: snippetsRule);
+        public CompletionRules WithSnippetsRule(SnippetsRule snippetsRule) =>
+            With(snippetsRule: snippetsRule);
 
         private static readonly ImmutableArray<char> s_defaultCommitKeys = ImmutableArray.Create(
-                ' ', '{', '}', '[', ']', '(', ')', '.', ',', ':',
-                ';', '+', '-', '*', '/', '%', '&', '|', '^', '!',
-                '~', '=', '<', '>', '?', '@', '#', '\'', '\"', '\\');
+            ' ',
+            '{',
+            '}',
+            '[',
+            ']',
+            '(',
+            ')',
+            '.',
+            ',',
+            ':',
+            ';',
+            '+',
+            '-',
+            '*',
+            '/',
+            '%',
+            '&',
+            '|',
+            '^',
+            '!',
+            '~',
+            '=',
+            '<',
+            '>',
+            '?',
+            '@',
+            '#',
+            '\'',
+            '\"',
+            '\\'
+        );
 
         /// <summary>
         /// The default <see cref="CompletionRules"/> if none is otherwise specified.
@@ -168,6 +217,7 @@ namespace Microsoft.CodeAnalysis.Completion
             dismissIfLastCharacterDeleted: false,
             defaultCommitCharacters: s_defaultCommitKeys,
             defaultEnterKeyRule: EnterKeyRule.Default,
-            snippetsRule: SnippetsRule.Default);
+            snippetsRule: SnippetsRule.Default
+        );
     }
 }

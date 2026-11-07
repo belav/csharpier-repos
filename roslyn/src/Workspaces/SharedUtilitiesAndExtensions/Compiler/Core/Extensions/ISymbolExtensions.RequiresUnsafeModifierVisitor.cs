@@ -88,9 +88,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return false;
                 }
 
-                return
-                    symbol.Type.Accept(this) ||
-                    symbol.Parameters.Any(static (p, self) => p.Accept(self), this);
+                return symbol.Type.Accept(this)
+                    || symbol.Parameters.Any(static (p, self) => p.Accept(self), this);
             }
 
             public override bool VisitTypeParameter(ITypeParameterSymbol symbol)
@@ -110,10 +109,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return false;
                 }
 
-                return
-                    symbol.ReturnType.Accept(this) ||
-                    symbol.Parameters.Any(static (p, self) => p.Accept(self), this) ||
-                    symbol.TypeParameters.Any(static (tp, self) => tp.Accept(self), this);
+                return symbol.ReturnType.Accept(this)
+                    || symbol.Parameters.Any(static (p, self) => p.Accept(self), this)
+                    || symbol.TypeParameters.Any(static (tp, self) => tp.Accept(self), this);
             }
 
             public override bool VisitParameter(IParameterSymbol symbol)

@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 namespace System.Net.Http
@@ -104,11 +103,7 @@ namespace System.Net.Http
         private SafeWinHttpHandle? _requestHandle;
         public SafeWinHttpHandle? RequestHandle
         {
-            get
-            {
-                return _requestHandle;
-            }
-
+            get { return _requestHandle; }
             set
             {
 #if DEBUG
@@ -125,7 +120,13 @@ namespace System.Net.Http
 
         public bool CheckCertificateRevocationList { get; set; }
 
-        public Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>? ServerCertificateValidationCallback { get; set; }
+        public Func<
+            HttpRequestMessage,
+            X509Certificate2,
+            X509Chain,
+            SslPolicyErrors,
+            bool
+        >? ServerCertificateValidationCallback { get; set; }
 
         [AllowNull]
         public WinHttpTransportContext TransportContext
@@ -148,7 +149,8 @@ namespace System.Net.Http
 
         public bool RetryRequest { get; set; }
 
-        public RendezvousAwaitable<int> LifecycleAwaitable { get; set; } = new RendezvousAwaitable<int>();
+        public RendezvousAwaitable<int> LifecycleAwaitable { get; set; } =
+            new RendezvousAwaitable<int>();
         public TaskCompletionSource<bool>? TcsInternalWriteDataToRequestStream { get; set; }
         public bool AsyncReadInProgress { get; set; }
 
@@ -160,7 +162,10 @@ namespace System.Net.Http
 
         public void PinReceiveBuffer(byte[] buffer)
         {
-            if (!_cachedReceivePinnedBuffer.IsAllocated || _cachedReceivePinnedBuffer.Target != buffer)
+            if (
+                !_cachedReceivePinnedBuffer.IsAllocated
+                || _cachedReceivePinnedBuffer.Target != buffer
+            )
             {
                 if (_cachedReceivePinnedBuffer.IsAllocated)
                 {
@@ -177,7 +182,11 @@ namespace System.Net.Http
 #if DEBUG
             Interlocked.Increment(ref s_dbg_callDispose);
 #endif
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"GCHandle=0x{ToIntPtr():X}, disposed={_disposed}, disposing={disposing}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"GCHandle=0x{ToIntPtr():X}, disposed={_disposed}, disposing={disposing}"
+                );
 
             // Since there is no finalizer and this class is sealed, the disposing parameter should be TRUE.
             Debug.Assert(disposing, "WinHttpRequestState.Dispose() should have disposing=TRUE");

@@ -1,8 +1,8 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
@@ -11,34 +11,40 @@ using System.Xml;
 using System.Xml.Serialization;
 using LinqToSqlShared.Mapping;
 
-namespace System.Data.Linq.Mapping {
+namespace System.Data.Linq.Mapping
+{
     using System.Data.Linq.Provider;
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Represents a source for mapping information.
     /// </summary>
-    public abstract class MappingSource {
+    public abstract class MappingSource
+    {
         MetaModel primaryModel;
         ReaderWriterLock rwlock;
         Dictionary<Type, MetaModel> secondaryModels;
 
         /// <summary>
-        /// Gets the MetaModel representing a DataContext and all it's 
+        /// Gets the MetaModel representing a DataContext and all it's
         /// accessible tables, functions and entities.
         /// </summary>
-        public MetaModel GetModel(Type dataContextType) {
-            if (dataContextType == null) {
+        public MetaModel GetModel(Type dataContextType)
+        {
+            if (dataContextType == null)
+            {
                 throw Error.ArgumentNull("dataContextType");
             }
             MetaModel model = null;
-            if (this.primaryModel == null) {
+            if (this.primaryModel == null)
+            {
                 model = this.CreateModel(dataContextType);
                 Interlocked.CompareExchange<MetaModel>(ref this.primaryModel, model, null);
             }
 
             // if the primary one matches, use it!
-            if (this.primaryModel.ContextType == dataContextType) {
+            if (this.primaryModel.ContextType == dataContextType)
+            {
                 return this.primaryModel;
             }
 
@@ -46,38 +52,55 @@ namespace System.Data.Linq.Mapping {
             // more than one context type
 
             // build a map if one is not already defined
-            if (this.secondaryModels == null) {
-                Interlocked.CompareExchange<Dictionary<Type, MetaModel>>(ref this.secondaryModels, new Dictionary<Type, MetaModel>(), null);
+            if (this.secondaryModels == null)
+            {
+                Interlocked.CompareExchange<Dictionary<Type, MetaModel>>(
+                    ref this.secondaryModels,
+                    new Dictionary<Type, MetaModel>(),
+                    null
+                );
             }
 
             // if we haven't created a read/writer lock, make one now
-            if (this.rwlock == null) {
-                Interlocked.CompareExchange<ReaderWriterLock>(ref this.rwlock, new ReaderWriterLock(), null);
+            if (this.rwlock == null)
+            {
+                Interlocked.CompareExchange<ReaderWriterLock>(
+                    ref this.rwlock,
+                    new ReaderWriterLock(),
+                    null
+                );
             }
 
             // lock the map and look inside
             MetaModel foundModel;
             this.rwlock.AcquireReaderLock(Timeout.Infinite);
-            try {
-                if (this.secondaryModels.TryGetValue(dataContextType, out foundModel)) {
+            try
+            {
+                if (this.secondaryModels.TryGetValue(dataContextType, out foundModel))
+                {
                     return foundModel;
                 }
             }
-            finally {
+            finally
+            {
                 this.rwlock.ReleaseReaderLock();
             }
             // if it wasn't found, lock for write and try again
             this.rwlock.AcquireWriterLock(Timeout.Infinite);
-            try {
-                if (this.secondaryModels.TryGetValue(dataContextType, out foundModel)) {
+            try
+            {
+                if (this.secondaryModels.TryGetValue(dataContextType, out foundModel))
+                {
                     return foundModel;
                 }
-                if (model == null) {
+                if (model == null)
+                {
                     model = this.CreateModel(dataContextType);
                 }
                 this.secondaryModels.Add(dataContextType, model);
             }
-            finally {
+            finally
+            {
                 this.rwlock.ReleaseWriterLock();
             }
             return model;
@@ -92,38 +115,45 @@ namespace System.Data.Linq.Mapping {
         protected abstract MetaModel CreateModel(Type dataContextType);
     }
 
-
     /// <summary>
     /// A mapping source that uses attributes on the context to create the mapping model.
     /// </summary>
-    public sealed class AttributeMappingSource : MappingSource {
-        public AttributeMappingSource() {
-        }
+    public sealed class AttributeMappingSource : MappingSource
+    {
+        public AttributeMappingSource() { }
 
-        protected override MetaModel CreateModel(Type dataContextType) {
-            if (dataContextType == null) {
+        protected override MetaModel CreateModel(Type dataContextType)
+        {
+            if (dataContextType == null)
+            {
                 throw Error.ArgumentNull("dataContextType");
             }
             return new AttributedMetaModel(this, dataContextType);
         }
     }
 
-
     /// <summary>
     /// A mapping source that uses an external XML mapping source to create the model.
     /// </summary>
-    public sealed class XmlMappingSource : MappingSource {
+    public sealed class XmlMappingSource : MappingSource
+    {
         DatabaseMapping map;
-        
+
         [ResourceExposure(ResourceScope.Assembly)] // map parameter contains type names.
-        private XmlMappingSource(DatabaseMapping map) {
+        private XmlMappingSource(DatabaseMapping map)
+        {
             this.map = map;
         }
 
         [ResourceExposure(ResourceScope.None)] // Exposure is via map instance variable.
-        [ResourceConsumption(ResourceScope.Assembly | ResourceScope.Machine, ResourceScope.Assembly | ResourceScope.Machine)] // For MappedMetaModel constructor call.
-        protected override MetaModel CreateModel(Type dataContextType) {
-            if (dataContextType == null) {
+        [ResourceConsumption(
+            ResourceScope.Assembly | ResourceScope.Machine,
+            ResourceScope.Assembly | ResourceScope.Machine
+        )] // For MappedMetaModel constructor call.
+        protected override MetaModel CreateModel(Type dataContextType)
+        {
+            if (dataContextType == null)
+            {
                 throw Error.ArgumentNull("dataContextType");
             }
             return new MappedMetaModel(this, dataContextType, this.map);
@@ -137,8 +167,10 @@ namespace System.Data.Linq.Mapping {
         /// <returns>The mapping source.</returns>
         [ResourceExposure(ResourceScope.Assembly)] // Xml contains type names.
         [ResourceConsumption(ResourceScope.Assembly)] // For FromReader method call.
-        public static XmlMappingSource FromXml(string xml) {
-            if (xml == null) {
+        public static XmlMappingSource FromXml(string xml)
+        {
+            if (xml == null)
+            {
                 throw Error.ArgumentNull("xml");
             }
             XmlTextReader reader = new XmlTextReader(new System.IO.StringReader(xml));
@@ -155,14 +187,17 @@ namespace System.Data.Linq.Mapping {
         /// <returns>The mapping source.</returns>
         [ResourceExposure(ResourceScope.Assembly)] // reader parameter contains type names.
         [ResourceConsumption(ResourceScope.Assembly)] // XmlMappingSource constructor call.
-        public static XmlMappingSource FromReader(XmlReader reader) {
-            if (reader == null) {
+        public static XmlMappingSource FromReader(XmlReader reader)
+        {
+            if (reader == null)
+            {
                 throw Error.ArgumentNull("reader");
             }
             reader.MoveToContent();
             DatabaseMapping db = XmlMappingReader.ReadDatabaseMapping(reader);
 
-            if (db == null) {
+            if (db == null)
+            {
                 throw Error.DatabaseNodeNotFound(XmlMappingConstant.MappingNamespace);
             }
 
@@ -177,8 +212,10 @@ namespace System.Data.Linq.Mapping {
         /// <returns>The mapping source.</returns>
         [ResourceExposure(ResourceScope.Assembly)] // Stream contains type names.
         [ResourceConsumption(ResourceScope.Assembly)] // For FromReader method call.
-        public static XmlMappingSource FromStream(System.IO.Stream stream) {
-            if (stream == null) {
+        public static XmlMappingSource FromStream(System.IO.Stream stream)
+        {
+            if (stream == null)
+            {
                 throw Error.ArgumentNull("stream");
             }
             XmlTextReader reader = new XmlTextReader(stream);
@@ -193,53 +230,71 @@ namespace System.Data.Linq.Mapping {
         /// <param name="dataContextType">The type of DataContext to base the mapping on.</param>
         /// <param name="url">The Url pointing to the xml.</param>
         /// <returns>The mapping source.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification="Unknown reason.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#",
+            Justification = "Unknown reason."
+        )]
         [ResourceExposure(ResourceScope.Machine | ResourceScope.Assembly)] // url parameter which may contain type names.
         [ResourceConsumption(ResourceScope.Machine | ResourceScope.Assembly)] // XmlTextReader constructor & FromReader method call.
-        public static XmlMappingSource FromUrl(string url) {
-            if (url == null) {
+        public static XmlMappingSource FromUrl(string url)
+        {
+            if (url == null)
+            {
                 throw Error.ArgumentNull("url");
             }
             XmlTextReader reader = new XmlTextReader(url);
             reader.DtdProcessing = DtdProcessing.Prohibit;
 
-            try {
+            try
+            {
                 return FromReader(reader);
             }
-            finally {
+            finally
+            {
                 reader.Close();
             }
         }
     }
 
-    class XmlMappingReader {
-        private static string RequiredAttribute(XmlReader reader, string attribute) {
+    class XmlMappingReader
+    {
+        private static string RequiredAttribute(XmlReader reader, string attribute)
+        {
             string result = OptionalAttribute(reader, attribute);
-            if (result == null) {
+            if (result == null)
+            {
                 throw Error.CouldNotFindRequiredAttribute(attribute, reader.ReadOuterXml());
             }
             return result;
         }
 
-        private static string OptionalAttribute(XmlReader reader, string attribute) {
+        private static string OptionalAttribute(XmlReader reader, string attribute)
+        {
             return reader.GetAttribute(attribute);
         }
 
-        private static bool OptionalBoolAttribute(XmlReader reader, string attribute, bool @default) {
+        private static bool OptionalBoolAttribute(XmlReader reader, string attribute, bool @default)
+        {
             string value = OptionalAttribute(reader, attribute);
             return (value != null) ? bool.Parse(value) : @default;
         }
 
-        private static bool? OptionalNullableBoolAttribute(XmlReader reader, string attribute) {
+        private static bool? OptionalNullableBoolAttribute(XmlReader reader, string attribute)
+        {
             string value = OptionalAttribute(reader, attribute);
             return (value != null) ? (bool?)bool.Parse(value) : null;
         }
 
-        private static void AssertEmptyElement(XmlReader reader) {
-            if (!reader.IsEmptyElement) {
+        private static void AssertEmptyElement(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
                 string nodeName = reader.Name;
                 reader.Read();
-                if (reader.NodeType != XmlNodeType.EndElement) {
+                if (reader.NodeType != XmlNodeType.EndElement)
+                {
                     throw Error.ExpectedEmptyElement(nodeName, reader.NodeType, reader.Name);
                 }
             }
@@ -247,32 +302,38 @@ namespace System.Data.Linq.Mapping {
             reader.Skip();
         }
 
-        internal static DatabaseMapping ReadDatabaseMapping(XmlReader reader) {
+        internal static DatabaseMapping ReadDatabaseMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Database) {
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Database)
+            {
                 return null;
             }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.Name, 
-                                               XmlMappingConstant.Provider 
-                                           });
+            ValidateAttributes(
+                reader,
+                new[] { XmlMappingConstant.Name, XmlMappingConstant.Provider }
+            );
 
             DatabaseMapping dm = new DatabaseMapping();
 
             dm.DatabaseName = RequiredAttribute(reader, XmlMappingConstant.Name);
             dm.Provider = OptionalAttribute(reader, XmlMappingConstant.Provider);
 
-            if (!reader.IsEmptyElement) {
+            if (!reader.IsEmptyElement)
+            {
                 reader.ReadStartElement();
                 reader.MoveToContent();
-                while (reader.NodeType != XmlNodeType.EndElement) {
-                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader)) {
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader))
+                    {
                         reader.Skip();
                         continue;
                     }
 
-                    switch (reader.LocalName) {
+                    switch (reader.LocalName)
+                    {
                         case XmlMappingConstant.Table:
                             dm.Tables.Add(ReadTableMapping(reader));
                             break;
@@ -280,18 +341,37 @@ namespace System.Data.Linq.Mapping {
                             dm.Functions.Add(ReadFunctionMapping(reader));
                             break;
                         default:
-                            throw Error.UnrecognizedElement(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+                            throw Error.UnrecognizedElement(
+                                String.Format(
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    "{0}{1}{2}",
+                                    reader.Prefix,
+                                    String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                                    reader.LocalName
+                                )
+                            );
                     }
                     reader.MoveToContent();
                 }
-                
-                if (reader.LocalName != XmlMappingConstant.Database) {
-                    throw Error.UnexpectedElement(XmlMappingConstant.Database, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
-                } 
-                
+
+                if (reader.LocalName != XmlMappingConstant.Database)
+                {
+                    throw Error.UnexpectedElement(
+                        XmlMappingConstant.Database,
+                        String.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            "{0}{1}{2}",
+                            reader.Prefix,
+                            String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                            reader.LocalName
+                        )
+                    );
+                }
+
                 reader.ReadEndElement();
             }
-            else {
+            else
+            {
                 System.Diagnostics.Debug.Assert(false, "DatabaseMapping has no content");
                 reader.Skip();
             }
@@ -299,21 +379,38 @@ namespace System.Data.Linq.Mapping {
             return dm;
         }
 
-        internal static bool IsInNamespace(XmlReader reader) {
+        internal static bool IsInNamespace(XmlReader reader)
+        {
             return reader.LookupNamespace(reader.Prefix) == XmlMappingConstant.MappingNamespace;
         }
 
-        internal static void ValidateAttributes(XmlReader reader, string[] validAttributes) {
-            if (reader.HasAttributes) {
+        internal static void ValidateAttributes(XmlReader reader, string[] validAttributes)
+        {
+            if (reader.HasAttributes)
+            {
                 List<string> attrList = new List<string>(validAttributes);
                 const string xmlns = "xmlns";
 
-                for (int i = 0; i < reader.AttributeCount; i++) {
+                for (int i = 0; i < reader.AttributeCount; i++)
+                {
                     reader.MoveToAttribute(i);
 
                     // if the node's in the namespace, it is required to be one of the valid ones
-                    if (IsInNamespace(reader) && reader.LocalName != xmlns && !attrList.Contains(reader.LocalName)) {
-                        throw Error.UnrecognizedAttribute(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : ":", reader.LocalName));
+                    if (
+                        IsInNamespace(reader)
+                        && reader.LocalName != xmlns
+                        && !attrList.Contains(reader.LocalName)
+                    )
+                    {
+                        throw Error.UnrecognizedAttribute(
+                            String.Format(
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                "{0}{1}{2}",
+                                reader.Prefix,
+                                String.IsNullOrEmpty(reader.Prefix) ? "" : ":",
+                                reader.LocalName
+                            )
+                        );
                     }
                 }
 
@@ -321,33 +418,52 @@ namespace System.Data.Linq.Mapping {
             }
         }
 
-        internal static FunctionMapping ReadFunctionMapping(XmlReader reader) {
+        internal static FunctionMapping ReadFunctionMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Function) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Function, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
-            } 
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Function)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Function,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
+            }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.Name, 
-                                               XmlMappingConstant.Method, 
-                                               XmlMappingConstant.IsComposable
-                                           });
+            ValidateAttributes(
+                reader,
+                new[]
+                {
+                    XmlMappingConstant.Name,
+                    XmlMappingConstant.Method,
+                    XmlMappingConstant.IsComposable,
+                }
+            );
 
             FunctionMapping fm = new FunctionMapping();
             fm.MethodName = RequiredAttribute(reader, XmlMappingConstant.Method);
             fm.Name = OptionalAttribute(reader, XmlMappingConstant.Name);
             fm.IsComposable = OptionalBoolAttribute(reader, XmlMappingConstant.IsComposable, false);
 
-            if (!reader.IsEmptyElement) {
+            if (!reader.IsEmptyElement)
+            {
                 reader.ReadStartElement();
                 reader.MoveToContent();
-                while (reader.NodeType != XmlNodeType.EndElement) {
-                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader)) {
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader))
+                    {
                         reader.Skip();
                         continue;
                     }
-                    
-                    switch (reader.LocalName) {
+
+                    switch (reader.LocalName)
+                    {
                         case XmlMappingConstant.Parameter:
                             fm.Parameters.Add(ReadParameterMapping(reader));
                             break;
@@ -358,13 +474,22 @@ namespace System.Data.Linq.Mapping {
                             fm.FunReturn = ReadReturnMapping(reader);
                             break;
                         default:
-                            throw Error.UnrecognizedElement(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+                            throw Error.UnrecognizedElement(
+                                String.Format(
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    "{0}{1}{2}",
+                                    reader.Prefix,
+                                    String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                                    reader.LocalName
+                                )
+                            );
                     }
                     reader.MoveToContent();
                 }
                 reader.ReadEndElement();
             }
-            else {
+            else
+            {
                 // no content is okay
                 reader.Skip();
             }
@@ -372,15 +497,24 @@ namespace System.Data.Linq.Mapping {
             return fm;
         }
 
-        private static ReturnMapping ReadReturnMapping(XmlReader reader) {
+        private static ReturnMapping ReadReturnMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Return) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Return, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
-            } 
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Return)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Return,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
+            }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.DbType
-                                           });
+            ValidateAttributes(reader, new[] { XmlMappingConstant.DbType });
 
             ReturnMapping rm = new ReturnMapping();
             rm.DbType = OptionalAttribute(reader, XmlMappingConstant.DbType);
@@ -390,18 +524,33 @@ namespace System.Data.Linq.Mapping {
             return rm;
         }
 
-        private static ParameterMapping ReadParameterMapping(XmlReader reader) {
+        private static ParameterMapping ReadParameterMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Parameter) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Parameter, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Parameter)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Parameter,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
             }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.Name, 
-                                               XmlMappingConstant.DbType, 
-                                               XmlMappingConstant.Parameter, 
-                                               XmlMappingConstant.Direction
-                                           });
+            ValidateAttributes(
+                reader,
+                new[]
+                {
+                    XmlMappingConstant.Name,
+                    XmlMappingConstant.DbType,
+                    XmlMappingConstant.Parameter,
+                    XmlMappingConstant.Direction,
+                }
+            );
 
             ParameterMapping pm = new ParameterMapping();
             pm.Name = RequiredAttribute(reader, XmlMappingConstant.Name);
@@ -414,50 +563,85 @@ namespace System.Data.Linq.Mapping {
             return pm;
         }
 
-        private static TableMapping ReadTableMapping(XmlReader reader) {
+        private static TableMapping ReadTableMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Table) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Table, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Table)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Table,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
             }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.Name, 
-                                               XmlMappingConstant.Member
-                                           });
+            ValidateAttributes(
+                reader,
+                new[] { XmlMappingConstant.Name, XmlMappingConstant.Member }
+            );
 
             TableMapping tm = new TableMapping();
             tm.TableName = OptionalAttribute(reader, XmlMappingConstant.Name);
             tm.Member = OptionalAttribute(reader, XmlMappingConstant.Member);
 
-            if (!reader.IsEmptyElement) {
+            if (!reader.IsEmptyElement)
+            {
                 reader.ReadStartElement();
                 reader.MoveToContent();
-                while (reader.NodeType != XmlNodeType.EndElement) {
-                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader)) {
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader))
+                    {
                         reader.Skip();
                         continue;
                     }
 
-                    switch (reader.LocalName) {
+                    switch (reader.LocalName)
+                    {
                         case XmlMappingConstant.Type:
-                            if (tm.RowType != null) {
+                            if (tm.RowType != null)
+                            {
                                 goto default;
                             }
                             tm.RowType = ReadTypeMapping(null, reader);
                             break;
                         default:
-                            throw Error.UnrecognizedElement(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+                            throw Error.UnrecognizedElement(
+                                String.Format(
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    "{0}{1}{2}",
+                                    reader.Prefix,
+                                    String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                                    reader.LocalName
+                                )
+                            );
                     }
                     reader.MoveToContent();
                 }
-                
-                if (reader.LocalName != XmlMappingConstant.Table) {
-                    throw Error.UnexpectedElement(XmlMappingConstant.Table, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
-                } 
-                
+
+                if (reader.LocalName != XmlMappingConstant.Table)
+                {
+                    throw Error.UnexpectedElement(
+                        XmlMappingConstant.Table,
+                        String.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            "{0}{1}{2}",
+                            reader.Prefix,
+                            String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                            reader.LocalName
+                        )
+                    );
+                }
+
                 reader.ReadEndElement();
             }
-            else {
+            else
+            {
                 System.Diagnostics.Debug.Assert(false, "Table has no content");
                 reader.Skip();
             }
@@ -465,47 +649,82 @@ namespace System.Data.Linq.Mapping {
             return tm;
         }
 
-        private static TypeMapping ReadElementTypeMapping(TypeMapping baseType, XmlReader reader) {
+        private static TypeMapping ReadElementTypeMapping(TypeMapping baseType, XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.ElementType) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Type, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.ElementType)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Type,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
             }
 
             return ReadTypeMappingImpl(baseType, reader);
         }
 
-        private static TypeMapping ReadTypeMapping(TypeMapping baseType, XmlReader reader) {
+        private static TypeMapping ReadTypeMapping(TypeMapping baseType, XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Type) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Type, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Type)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Type,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
             }
 
             return ReadTypeMappingImpl(baseType, reader);
         }
 
-        private static TypeMapping ReadTypeMappingImpl(TypeMapping baseType, XmlReader reader) {
-            ValidateAttributes(reader, new[] { 
-                                                 XmlMappingConstant.Name, 
-                                                 XmlMappingConstant.InheritanceCode, 
-                                                 XmlMappingConstant.IsInheritanceDefault
-                                             });
+        private static TypeMapping ReadTypeMappingImpl(TypeMapping baseType, XmlReader reader)
+        {
+            ValidateAttributes(
+                reader,
+                new[]
+                {
+                    XmlMappingConstant.Name,
+                    XmlMappingConstant.InheritanceCode,
+                    XmlMappingConstant.IsInheritanceDefault,
+                }
+            );
 
             TypeMapping tm = new TypeMapping();
             tm.BaseType = baseType;
             tm.Name = RequiredAttribute(reader, XmlMappingConstant.Name);
             tm.InheritanceCode = OptionalAttribute(reader, XmlMappingConstant.InheritanceCode);
-            tm.IsInheritanceDefault = OptionalBoolAttribute(reader, XmlMappingConstant.IsInheritanceDefault, false);
+            tm.IsInheritanceDefault = OptionalBoolAttribute(
+                reader,
+                XmlMappingConstant.IsInheritanceDefault,
+                false
+            );
 
-            if (!reader.IsEmptyElement) {
+            if (!reader.IsEmptyElement)
+            {
                 reader.ReadStartElement();
                 reader.MoveToContent();
-                while (reader.NodeType != XmlNodeType.EndElement) {
-                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader)) {
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Whitespace || !IsInNamespace(reader))
+                    {
                         reader.Skip();
                         continue;
                     }
 
-                    switch (reader.LocalName) {
+                    switch (reader.LocalName)
+                    {
                         case XmlMappingConstant.Type:
                             tm.DerivedTypes.Add(ReadTypeMapping(tm, reader));
                             break;
@@ -516,36 +735,60 @@ namespace System.Data.Linq.Mapping {
                             tm.Members.Add(ReadColumnMapping(reader));
                             break;
                         default:
-                            throw Error.UnrecognizedElement(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+                            throw Error.UnrecognizedElement(
+                                String.Format(
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    "{0}{1}{2}",
+                                    reader.Prefix,
+                                    String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                                    reader.LocalName
+                                )
+                            );
                     }
                     reader.MoveToContent();
                 }
                 reader.ReadEndElement();
             }
-            else {
+            else
+            {
                 // no content is okay
                 reader.Skip();
             }
             return tm;
         }
 
-        private static AssociationMapping ReadAssociationMapping(XmlReader reader) {
+        private static AssociationMapping ReadAssociationMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Association) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Association, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Association)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Association,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
             }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.Name, 
-                                               XmlMappingConstant.IsForeignKey, 
-                                               XmlMappingConstant.IsUnique, 
-                                               XmlMappingConstant.Member, 
-                                               XmlMappingConstant.OtherKey, 
-                                               XmlMappingConstant.Storage, 
-                                               XmlMappingConstant.ThisKey, 
-                                               XmlMappingConstant.DeleteRule, 
-                                               XmlMappingConstant.DeleteOnNull, 
-                                           });
+            ValidateAttributes(
+                reader,
+                new[]
+                {
+                    XmlMappingConstant.Name,
+                    XmlMappingConstant.IsForeignKey,
+                    XmlMappingConstant.IsUnique,
+                    XmlMappingConstant.Member,
+                    XmlMappingConstant.OtherKey,
+                    XmlMappingConstant.Storage,
+                    XmlMappingConstant.ThisKey,
+                    XmlMappingConstant.DeleteRule,
+                    XmlMappingConstant.DeleteOnNull,
+                }
+            );
 
             AssociationMapping am = new AssociationMapping();
             am.DbName = OptionalAttribute(reader, XmlMappingConstant.Name);
@@ -563,32 +806,55 @@ namespace System.Data.Linq.Mapping {
             return am;
         }
 
-        private static ColumnMapping ReadColumnMapping(XmlReader reader) {
+        private static ColumnMapping ReadColumnMapping(XmlReader reader)
+        {
             System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.Element);
-            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Column) {
-                throw Error.UnexpectedElement(XmlMappingConstant.Column, String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}", reader.Prefix, String.IsNullOrEmpty(reader.Prefix) ? "" : "/", reader.LocalName));
+            if (!IsInNamespace(reader) || reader.LocalName != XmlMappingConstant.Column)
+            {
+                throw Error.UnexpectedElement(
+                    XmlMappingConstant.Column,
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}{2}",
+                        reader.Prefix,
+                        String.IsNullOrEmpty(reader.Prefix) ? "" : "/",
+                        reader.LocalName
+                    )
+                );
             }
 
-            ValidateAttributes(reader, new[] { 
-                                               XmlMappingConstant.Name, 
-                                               XmlMappingConstant.DbType, 
-                                               XmlMappingConstant.IsDbGenerated, 
-                                               XmlMappingConstant.IsDiscriminator, 
-                                               XmlMappingConstant.IsPrimaryKey, 
-                                               XmlMappingConstant.IsVersion, 
-                                               XmlMappingConstant.Member, 
-                                               XmlMappingConstant.Storage, 
-                                               XmlMappingConstant.Expression, 
-                                               XmlMappingConstant.CanBeNull, 
-                                               XmlMappingConstant.UpdateCheck, 
-                                               XmlMappingConstant.AutoSync
-                                           });
+            ValidateAttributes(
+                reader,
+                new[]
+                {
+                    XmlMappingConstant.Name,
+                    XmlMappingConstant.DbType,
+                    XmlMappingConstant.IsDbGenerated,
+                    XmlMappingConstant.IsDiscriminator,
+                    XmlMappingConstant.IsPrimaryKey,
+                    XmlMappingConstant.IsVersion,
+                    XmlMappingConstant.Member,
+                    XmlMappingConstant.Storage,
+                    XmlMappingConstant.Expression,
+                    XmlMappingConstant.CanBeNull,
+                    XmlMappingConstant.UpdateCheck,
+                    XmlMappingConstant.AutoSync,
+                }
+            );
 
             ColumnMapping cm = new ColumnMapping();
             cm.DbName = OptionalAttribute(reader, XmlMappingConstant.Name);
             cm.DbType = OptionalAttribute(reader, XmlMappingConstant.DbType);
-            cm.IsDbGenerated = OptionalBoolAttribute(reader, XmlMappingConstant.IsDbGenerated, false);
-            cm.IsDiscriminator = OptionalBoolAttribute(reader, XmlMappingConstant.IsDiscriminator, false);
+            cm.IsDbGenerated = OptionalBoolAttribute(
+                reader,
+                XmlMappingConstant.IsDbGenerated,
+                false
+            );
+            cm.IsDiscriminator = OptionalBoolAttribute(
+                reader,
+                XmlMappingConstant.IsDiscriminator,
+                false
+            );
             cm.IsPrimaryKey = OptionalBoolAttribute(reader, XmlMappingConstant.IsPrimaryKey, false);
             cm.IsVersion = OptionalBoolAttribute(reader, XmlMappingConstant.IsVersion, false);
             cm.MemberName = RequiredAttribute(reader, XmlMappingConstant.Member);
@@ -596,9 +862,15 @@ namespace System.Data.Linq.Mapping {
             cm.Expression = OptionalAttribute(reader, XmlMappingConstant.Expression);
             cm.CanBeNull = OptionalNullableBoolAttribute(reader, XmlMappingConstant.CanBeNull);
             string updateCheck = OptionalAttribute(reader, XmlMappingConstant.UpdateCheck);
-            cm.UpdateCheck = (updateCheck == null) ? UpdateCheck.Always : (UpdateCheck)Enum.Parse(typeof(UpdateCheck), updateCheck);
+            cm.UpdateCheck =
+                (updateCheck == null)
+                    ? UpdateCheck.Always
+                    : (UpdateCheck)Enum.Parse(typeof(UpdateCheck), updateCheck);
             string autoSync = OptionalAttribute(reader, XmlMappingConstant.AutoSync);
-            cm.AutoSync = (autoSync == null) ? AutoSync.Default : (AutoSync)Enum.Parse(typeof(AutoSync), autoSync);
+            cm.AutoSync =
+                (autoSync == null)
+                    ? AutoSync.Default
+                    : (AutoSync)Enum.Parse(typeof(AutoSync), autoSync);
 
             AssertEmptyElement(reader);
 

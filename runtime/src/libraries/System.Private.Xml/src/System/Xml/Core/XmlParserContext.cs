@@ -22,29 +22,68 @@ namespace System.Xml
         private string _baseURI = string.Empty;
         private Encoding? _encoding;
 
-        public XmlParserContext(XmlNameTable? nt, XmlNamespaceManager? nsMgr, string? xmlLang, XmlSpace xmlSpace)
-        : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace)
+        public XmlParserContext(
+            XmlNameTable? nt,
+            XmlNamespaceManager? nsMgr,
+            string? xmlLang,
+            XmlSpace xmlSpace
+        )
+            : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace)
         {
             // Intentionally Empty
         }
 
-        public XmlParserContext(XmlNameTable? nt, XmlNamespaceManager? nsMgr, string? xmlLang, XmlSpace xmlSpace, Encoding? enc)
-        : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace, enc)
+        public XmlParserContext(
+            XmlNameTable? nt,
+            XmlNamespaceManager? nsMgr,
+            string? xmlLang,
+            XmlSpace xmlSpace,
+            Encoding? enc
+        )
+            : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace, enc)
         {
             // Intentionally Empty
         }
 
-        public XmlParserContext(XmlNameTable? nt, XmlNamespaceManager? nsMgr, string? docTypeName,
-                  string? pubId, string? sysId, string? internalSubset, string? baseURI,
-                  string? xmlLang, XmlSpace xmlSpace)
-        : this(nt, nsMgr, docTypeName, pubId, sysId, internalSubset, baseURI, xmlLang, xmlSpace, null)
+        public XmlParserContext(
+            XmlNameTable? nt,
+            XmlNamespaceManager? nsMgr,
+            string? docTypeName,
+            string? pubId,
+            string? sysId,
+            string? internalSubset,
+            string? baseURI,
+            string? xmlLang,
+            XmlSpace xmlSpace
+        )
+            : this(
+                nt,
+                nsMgr,
+                docTypeName,
+                pubId,
+                sysId,
+                internalSubset,
+                baseURI,
+                xmlLang,
+                xmlSpace,
+                null
+            )
         {
             // Intentionally Empty
         }
 
-        public XmlParserContext(XmlNameTable? nt, XmlNamespaceManager? nsMgr, string? docTypeName,
-                          string? pubId, string? sysId, string? internalSubset, string? baseURI,
-                          string? xmlLang, XmlSpace xmlSpace, Encoding? enc)
+        public XmlParserContext(
+            XmlNameTable? nt,
+            XmlNamespaceManager? nsMgr,
+            string? docTypeName,
+            string? pubId,
+            string? sysId,
+            string? internalSubset,
+            string? baseURI,
+            string? xmlLang,
+            XmlSpace xmlSpace,
+            Encoding? enc
+        )
         {
             if (nsMgr != null)
             {
@@ -80,135 +119,79 @@ namespace System.Xml
 
         public XmlNameTable? NameTable
         {
-            get
-            {
-                return _nt;
-            }
-            set
-            {
-                _nt = value;
-            }
+            get { return _nt; }
+            set { _nt = value; }
         }
 
         public XmlNamespaceManager? NamespaceManager
         {
-            get
-            {
-                return _nsMgr;
-            }
-            set
-            {
-                _nsMgr = value;
-            }
+            get { return _nsMgr; }
+            set { _nsMgr = value; }
         }
 
         [AllowNull]
         public string DocTypeName
         {
-            get
-            {
-                return _docTypeName;
-            }
-            set
-            {
-                _docTypeName = value ?? string.Empty;
-            }
+            get { return _docTypeName; }
+            set { _docTypeName = value ?? string.Empty; }
         }
 
         [AllowNull]
         public string PublicId
         {
-            get
-            {
-                return _pubId;
-            }
-            set
-            {
-                _pubId = value ?? string.Empty;
-            }
+            get { return _pubId; }
+            set { _pubId = value ?? string.Empty; }
         }
 
         [AllowNull]
         public string SystemId
         {
-            get
-            {
-                return _sysId;
-            }
-            set
-            {
-                _sysId = value ?? string.Empty;
-            }
+            get { return _sysId; }
+            set { _sysId = value ?? string.Empty; }
         }
 
         [AllowNull]
         public string BaseURI
         {
-            get
-            {
-                return _baseURI;
-            }
-            set
-            {
-                _baseURI = value ?? string.Empty;
-            }
+            get { return _baseURI; }
+            set { _baseURI = value ?? string.Empty; }
         }
 
         [AllowNull]
         public string InternalSubset
         {
-            get
-            {
-                return _internalSubset;
-            }
-            set
-            {
-                _internalSubset = value ?? string.Empty;
-            }
+            get { return _internalSubset; }
+            set { _internalSubset = value ?? string.Empty; }
         }
 
         [AllowNull]
         public string XmlLang
         {
-            get
-            {
-                return _xmlLang;
-            }
-            set
-            {
-                _xmlLang = value ?? string.Empty;
-            }
+            get { return _xmlLang; }
+            set { _xmlLang = value ?? string.Empty; }
         }
 
         public XmlSpace XmlSpace
         {
-            get
-            {
-                return _xmlSpace;
-            }
-            set
-            {
-                _xmlSpace = value;
-            }
+            get { return _xmlSpace; }
+            set { _xmlSpace = value; }
         }
 
         public Encoding? Encoding
         {
-            get
-            {
-                return _encoding;
-            }
-            set
-            {
-                _encoding = value;
-            }
+            get { return _encoding; }
+            set { _encoding = value; }
         }
 
         internal bool HasDtdInfo
         {
             get
             {
-                return (_internalSubset != string.Empty || _pubId != string.Empty || _sysId != string.Empty);
+                return (
+                    _internalSubset != string.Empty
+                    || _pubId != string.Empty
+                    || _sysId != string.Empty
+                );
             }
         }
     } // class XmlContext

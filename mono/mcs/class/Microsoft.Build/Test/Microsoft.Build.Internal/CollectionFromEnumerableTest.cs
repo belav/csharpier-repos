@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,42 +26,46 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-using Microsoft.Build.Construction;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using Microsoft.Build.Construction;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Internal
 {
-        [TestFixture]
-        public class CollectionFromEnumerableTest
+    [TestFixture]
+    public class CollectionFromEnumerableTest
+    {
+        ICollection<ProjectPropertyElement> subject;
+
+        [SetUp]
+        public void SetUp()
         {
-                ICollection<ProjectPropertyElement> subject;
-                [SetUp]
-                public void SetUp ()
-                {
-                        subject = ProjectRootElement.Create ().Properties;
-                }
-                [Test]
-                [ExpectedException(typeof(InvalidOperationException))]
-                public void TestAdd ()
-                {
-                        subject.Add (null);
-                        Assert.Fail ("CFE1");
-                }
-                [Test]
-                [ExpectedException(typeof(InvalidOperationException))]
-                public void TestClear ()
-                {
-                        subject.Clear ();
-                        Assert.Fail ("CFE2");
-                }
-                [Test]
-                [ExpectedException(typeof(InvalidOperationException))]
-                public void TestRemove ()
-                {
-                        subject.Remove (null);
-                        Assert.Fail ("CFE3");
-                }
+            subject = ProjectRootElement.Create().Properties;
         }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestAdd()
+        {
+            subject.Add(null);
+            Assert.Fail("CFE1");
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestClear()
+        {
+            subject.Clear();
+            Assert.Fail("CFE2");
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestRemove()
+        {
+            subject.Remove(null);
+            Assert.Fail("CFE3");
+        }
+    }
 }

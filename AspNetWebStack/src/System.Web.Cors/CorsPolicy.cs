@@ -66,15 +66,15 @@ namespace System.Web.Cors
         /// </summary>
         public long? PreflightMaxAge
         {
-            get
-            {
-                return _preflightMaxAge;
-            }
+            get { return _preflightMaxAge; }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("value", SRResources.PreflightMaxAgeOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SRResources.PreflightMaxAgeOutOfRange
+                    );
                 }
                 _preflightMaxAge = value;
             }
@@ -101,7 +101,11 @@ namespace System.Web.Cors
             builder.Append(", AllowAnyOrigin: ");
             builder.Append(AllowAnyOrigin);
             builder.Append(", PreflightMaxAge: ");
-            builder.Append(PreflightMaxAge.HasValue ? PreflightMaxAge.Value.ToString(CultureInfo.InvariantCulture) : "null");
+            builder.Append(
+                PreflightMaxAge.HasValue
+                    ? PreflightMaxAge.Value.ToString(CultureInfo.InvariantCulture)
+                    : "null"
+            );
             builder.Append(", SupportsCredentials: ");
             builder.Append(SupportsCredentials);
             builder.Append(", Origins: {");

@@ -40,16 +40,18 @@ public class DevDiv_545504
             m_l3 = l + 3;
             m_l4 = l + 4;
             m_l5 = l + 5;
-            m_l6= l + 6;
-            m_l7= l + 7;
+            m_l6 = l + 6;
+            m_l7 = l + 7;
         }
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public long Compute()
         {
-            long result = ((m_l0 << (int)m_l1) >> (int)(m_l2 / 2)) +
-                          ((m_l3 << (int)m_l4) >> (int)(m_l5 / 2)) +
-                          m_l6 + m_l7;
+            long result =
+                ((m_l0 << (int)m_l1) >> (int)(m_l2 / 2))
+                + ((m_l3 << (int)m_l4) >> (int)(m_l5 / 2))
+                + m_l6
+                + m_l7;
             return result;
         }
     }
@@ -81,9 +83,11 @@ public class DevDiv_545504
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public long Compute()
         {
-            long result = ((m_s0.Compute() << (int)m_s1.Compute()) >> (int)(m_s2.Compute() / 2)) +
-                          ((m_s3.Compute() << (int)m_s4.Compute()) >> (int)(m_s5.Compute() / 2)) +
-                          m_s6.Compute() + m_s7.Compute();
+            long result =
+                ((m_s0.Compute() << (int)m_s1.Compute()) >> (int)(m_s2.Compute() / 2))
+                + ((m_s3.Compute() << (int)m_s4.Compute()) >> (int)(m_s5.Compute() / 2))
+                + m_s6.Compute()
+                + m_s7.Compute();
             return result;
         }
     }
@@ -98,12 +102,14 @@ public class DevDiv_545504
         Struct_512bytes s4 = new Struct_512bytes(4);
         Struct_512bytes s5 = new Struct_512bytes(5);
 
-        long result = ((s0.Compute() << (int)s1.Compute()) >> (int)(s2.Compute() / 2)) +
-                      ((s3.Compute() << (int)s4.Compute()) >> (int)(s5.Compute() / 2));
+        long result =
+            ((s0.Compute() << (int)s1.Compute()) >> (int)(s2.Compute() / 2))
+            + ((s3.Compute() << (int)s4.Compute()) >> (int)(s5.Compute() / 2));
 
         Console.WriteLine("Result: " + result);
         return result;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

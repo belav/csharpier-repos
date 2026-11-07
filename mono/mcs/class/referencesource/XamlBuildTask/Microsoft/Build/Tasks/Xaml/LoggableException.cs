@@ -13,43 +13,25 @@ namespace Microsoft.Build.Tasks.Xaml
         int lineNumber;
         int linePosition;
 
-        public LoggableException()
-        {
-        }
+        public LoggableException() { }
 
         public int LineNumber
         {
-            get
-            {
-                return this.lineNumber;
-            }
-            set
-            {
-                this.lineNumber = value;
-            }
+            get { return this.lineNumber; }
+            set { this.lineNumber = value; }
         }
 
         public int LinePosition
         {
-            get
-            {
-                return this.linePosition;
-            }
-            set
-            {
-                this.linePosition = value;
-            }
-        }
-        
-        public LoggableException(string message)
-            : base(message)
-        {
+            get { return this.linePosition; }
+            set { this.linePosition = value; }
         }
 
+        public LoggableException(string message)
+            : base(message) { }
+
         public LoggableException(Exception innerException)
-            : base(innerException.Message, innerException)
-        {
-        }
+            : base(innerException.Message, innerException) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

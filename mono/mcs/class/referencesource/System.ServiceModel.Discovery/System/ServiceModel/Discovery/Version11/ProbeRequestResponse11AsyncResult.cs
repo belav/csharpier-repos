@@ -7,19 +7,21 @@ namespace System.ServiceModel.Discovery.Version11
     using System.Collections.ObjectModel;
     using System.Runtime;
 
-    sealed class ProbeRequestResponse11AsyncResult : ProbeRequestResponseAsyncResult<ProbeMessage11, ProbeMatchesMessage11>
+    sealed class ProbeRequestResponse11AsyncResult
+        : ProbeRequestResponseAsyncResult<ProbeMessage11, ProbeMatchesMessage11>
     {
-        internal ProbeRequestResponse11AsyncResult(ProbeMessage11 probeMessage,
+        internal ProbeRequestResponse11AsyncResult(
+            ProbeMessage11 probeMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             AsyncCallback callback,
-            object state)
-            : base(probeMessage, discoveryServiceImpl, callback, state)
-        {
-        }
+            object state
+        )
+            : base(probeMessage, discoveryServiceImpl, callback, state) { }
 
         public static ProbeMatchesMessage11 End(IAsyncResult result)
         {
-            ProbeRequestResponse11AsyncResult thisPtr = AsyncResult.End<ProbeRequestResponse11AsyncResult>(result);
+            ProbeRequestResponse11AsyncResult thisPtr =
+                AsyncResult.End<ProbeRequestResponse11AsyncResult>(result);
             return thisPtr.End();
         }
 
@@ -32,7 +34,6 @@ namespace System.ServiceModel.Discovery.Version11
                     TD.DiscoveryMessageWithNoContent(null, ProtocolStrings.TracingStrings.Probe);
                 }
 
-
                 return false;
             }
             return true;
@@ -44,8 +45,9 @@ namespace System.ServiceModel.Discovery.Version11
         }
 
         protected override ProbeMatchesMessage11 GetProbeResponse(
-            DiscoveryMessageSequence discoveryMessageSequence, 
-            Collection<EndpointDiscoveryMetadata> matchingEndpoints)
+            DiscoveryMessageSequence discoveryMessageSequence,
+            Collection<EndpointDiscoveryMetadata> matchingEndpoints
+        )
         {
             return ProbeMatchesMessage11.Create(discoveryMessageSequence, matchingEndpoints);
         }

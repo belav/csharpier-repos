@@ -13,8 +13,12 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 401).Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusDescription = "Some description").Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusCode = 401)
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusDescription = "Some description")
+                .Verifiable();
 
             HttpUnauthorizedResult result = new HttpUnauthorizedResult("Some description");
 

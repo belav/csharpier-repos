@@ -26,10 +26,17 @@ namespace System.Data.Common.Tests
             public override string DataSource => throw new NotImplementedException();
             public override string ServerVersion => throw new NotImplementedException();
             public override ConnectionState State => throw new NotImplementedException();
-            public override void ChangeDatabase(string databaseName) => throw new NotImplementedException();
+
+            public override void ChangeDatabase(string databaseName) =>
+                throw new NotImplementedException();
+
             public override void Close() => throw new NotImplementedException();
+
             public override void Open() => throw new NotImplementedException();
-            protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel) => throw new NotImplementedException();
+
+            protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel) =>
+                throw new NotImplementedException();
+
             protected override DbCommand CreateDbCommand() => throw new NotImplementedException();
         }
 
@@ -77,7 +84,8 @@ namespace System.Data.Common.Tests
 
         private class DbProviderFactoryConnection : MockDbConnection
         {
-            protected override DbProviderFactory DbProviderFactory => TestDbProviderFactory.Instance;
+            protected override DbProviderFactory DbProviderFactory =>
+                TestDbProviderFactory.Instance;
         }
 
         private class TestDbProviderFactory : DbProviderFactory
@@ -99,7 +107,8 @@ namespace System.Data.Common.Tests
         public void ProviderFactoryTest()
         {
             DbProviderFactoryConnection con = new DbProviderFactoryConnection();
-            PropertyInfo providerFactoryProperty = con.GetType().GetProperty("ProviderFactory", BindingFlags.NonPublic | BindingFlags.Instance)!;
+            PropertyInfo providerFactoryProperty = con.GetType()
+                .GetProperty("ProviderFactory", BindingFlags.NonPublic | BindingFlags.Instance)!;
             Assert.NotNull(providerFactoryProperty);
             DbProviderFactory? factory = providerFactoryProperty.GetValue(con) as DbProviderFactory;
             Assert.NotNull(factory);
@@ -111,9 +120,19 @@ namespace System.Data.Common.Tests
         public void GetSchemaAsync_with_cancelled_token()
         {
             var conn = new MockDbConnection();
-            Assert.ThrowsAsync<TaskCanceledException>(async () => await conn.GetSchemaAsync(new CancellationToken(true)));
-            Assert.ThrowsAsync<TaskCanceledException>(async () => await conn.GetSchemaAsync("MetaDataCollections", new CancellationToken(true)));
-            Assert.ThrowsAsync<TaskCanceledException>(async () => await conn.GetSchemaAsync("MetaDataCollections", new string[0], new CancellationToken(true)));
+            Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await conn.GetSchemaAsync(new CancellationToken(true))
+            );
+            Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await conn.GetSchemaAsync("MetaDataCollections", new CancellationToken(true))
+            );
+            Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await conn.GetSchemaAsync(
+                    "MetaDataCollections",
+                    new string[0],
+                    new CancellationToken(true)
+                )
+            );
         }
 
         [Fact]
@@ -121,8 +140,12 @@ namespace System.Data.Common.Tests
         {
             var conn = new MockDbConnection();
             Assert.ThrowsAsync<NotSupportedException>(async () => await conn.GetSchemaAsync());
-            Assert.ThrowsAsync<NotSupportedException>(async () => await conn.GetSchemaAsync("MetaDataCollections"));
-            Assert.ThrowsAsync<NotSupportedException>(async () => await conn.GetSchemaAsync("MetaDataCollections", new string[0]));
+            Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await conn.GetSchemaAsync("MetaDataCollections")
+            );
+            Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await conn.GetSchemaAsync("MetaDataCollections", new string[0])
+            );
         }
 
         [Fact]

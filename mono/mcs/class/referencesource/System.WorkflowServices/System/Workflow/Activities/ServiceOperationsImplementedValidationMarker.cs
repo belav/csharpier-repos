@@ -4,7 +4,5 @@
 
 namespace System.Workflow.Activities
 {
-    internal class ServiceOperationsImplementedValidationMarker
-    {
-    }
+    internal class ServiceOperationsImplementedValidationMarker { }
 }

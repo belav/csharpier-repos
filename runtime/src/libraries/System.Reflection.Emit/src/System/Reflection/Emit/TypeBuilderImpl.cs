@@ -16,6 +16,7 @@ namespace System.Reflection.Emit
         private readonly string _name;
         private readonly string? _namespace;
         private string? _strFullName;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private Type? _typeParent;
         private readonly TypeBuilderImpl? _declaringType;
@@ -37,9 +38,16 @@ namespace System.Reflection.Emit
         internal readonly List<PropertyBuilderImpl> _propertyDefinitions = new();
         internal List<CustomAttributeWrapper>? _customAttributes;
 
-        internal TypeBuilderImpl(string fullName, TypeAttributes typeAttributes,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, ModuleBuilderImpl module,
-            Type[]? interfaces, PackingSize packingSize, int typeSize, TypeBuilderImpl? enclosingType)
+        internal TypeBuilderImpl(
+            string fullName,
+            TypeAttributes typeAttributes,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            ModuleBuilderImpl module,
+            Type[]? interfaces,
+            PackingSize packingSize,
+            int typeSize,
+            TypeBuilderImpl? enclosingType
+        )
         {
             _name = fullName;
             _module = module;
@@ -71,10 +79,13 @@ namespace System.Reflection.Emit
         }
 
         internal ModuleBuilderImpl GetModuleBuilder() => _module;
+
         protected override PackingSize PackingSizeCore => _packingSize;
         protected override int SizeCore => _typeSize;
 
-        protected override void AddInterfaceImplementationCore([DynamicallyAccessedMembers((DynamicallyAccessedMemberTypes.All))] Type interfaceType)
+        protected override void AddInterfaceImplementationCore(
+            [DynamicallyAccessedMembers((DynamicallyAccessedMemberTypes.All))] Type interfaceType
+        )
         {
             ThrowIfCreated();
 
@@ -82,7 +93,11 @@ namespace System.Reflection.Emit
             _interfaces.Add(interfaceType);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2083:DynamicallyAccessedMembers", Justification = "Not sure how to handle")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2083:DynamicallyAccessedMembers",
+            Justification = "Not sure how to handle"
+        )]
         [return: DynamicallyAccessedMembers((DynamicallyAccessedMemberTypes)(-1))]
         protected override TypeInfo CreateTypeInfoCore()
         {
@@ -93,8 +108,15 @@ namespace System.Reflection.Emit
 
             // Create a public default constructor if this class has no constructor. Except the type is Interface, ValueType, Enum, or a static class.
             // (TypeAttributes.Abstract | TypeAttributes.Sealed) determines if the type is static
-            if (_constructorDefinitions.Count == 0 && (_attributes & TypeAttributes.Interface) == 0 && !IsValueType &&
-                ((_attributes & (TypeAttributes.Abstract | TypeAttributes.Sealed)) != (TypeAttributes.Abstract | TypeAttributes.Sealed)))
+            if (
+                _constructorDefinitions.Count == 0
+                && (_attributes & TypeAttributes.Interface) == 0
+                && !IsValueType
+                && (
+                    (_attributes & (TypeAttributes.Abstract | TypeAttributes.Sealed))
+                    != (TypeAttributes.Abstract | TypeAttributes.Sealed)
+                )
+            )
             {
                 DefineDefaultConstructor(MethodAttributes.Public);
             }
@@ -113,11 +135,22 @@ namespace System.Reflection.Emit
             }
         }
 
-        protected override ConstructorBuilder DefineConstructorCore(MethodAttributes attributes, CallingConventions callingConvention, Type[]? parameterTypes, Type[][]? requiredCustomModifiers, Type[][]? optionalCustomModifiers)
+        protected override ConstructorBuilder DefineConstructorCore(
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[]? parameterTypes,
+            Type[][]? requiredCustomModifiers,
+            Type[][]? optionalCustomModifiers
+        )
         {
-            if ((_attributes & TypeAttributes.Interface) == TypeAttributes.Interface && (attributes & MethodAttributes.Static) != MethodAttributes.Static)
+            if (
+                (_attributes & TypeAttributes.Interface) == TypeAttributes.Interface
+                && (attributes & MethodAttributes.Static) != MethodAttributes.Static
+            )
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ConstructorNotAllowedOnInterface);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ConstructorNotAllowedOnInterface
+                );
             }
 
             ThrowIfCreated();
@@ -133,35 +166,64 @@ namespace System.Reflection.Emit
             }
 
             attributes |= MethodAttributes.SpecialName;
-            ConstructorBuilderImpl constBuilder = new ConstructorBuilderImpl(name, attributes, callingConvention, parameterTypes, _module, this);
+            ConstructorBuilderImpl constBuilder = new ConstructorBuilderImpl(
+                name,
+                attributes,
+                callingConvention,
+                parameterTypes,
+                _module,
+                this
+            );
             _constructorDefinitions.Add(constBuilder);
             return constBuilder;
         }
 
-        protected override ConstructorBuilder DefineDefaultConstructorCore(MethodAttributes attributes)
+        protected override ConstructorBuilder DefineDefaultConstructorCore(
+            MethodAttributes attributes
+        )
         {
             if ((_attributes & TypeAttributes.Interface) == TypeAttributes.Interface)
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ConstructorNotAllowedOnInterface);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ConstructorNotAllowedOnInterface
+                );
             }
 
             return DefineDefaultConstructorInternal(attributes);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "GetConstructor is only called on a TypeBuilderInstantiation which is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "GetConstructor is only called on a TypeBuilderInstantiation which is not subject to trimming"
+        )]
         private ConstructorBuilderImpl DefineDefaultConstructorInternal(MethodAttributes attributes)
         {
             // Get the parent class's default constructor and add it to the IL
             ConstructorInfo? con;
-            if (_typeParent!.IsConstructedGenericType && _typeParent.GetGenericTypeDefinition() is TypeBuilderImpl typeBuilder)
+            if (
+                _typeParent!.IsConstructedGenericType
+                && _typeParent.GetGenericTypeDefinition() is TypeBuilderImpl typeBuilder
+            )
             {
-                con = GetConstructor(_typeParent, typeBuilder.GetConstructor(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, EmptyTypes, null)!);
+                con = GetConstructor(
+                    _typeParent,
+                    typeBuilder.GetConstructor(
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                        null,
+                        EmptyTypes,
+                        null
+                    )!
+                );
             }
             else
             {
-                con = _typeParent.GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, EmptyTypes, null);
+                con = _typeParent.GetConstructor(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    null,
+                    EmptyTypes,
+                    null
+                );
             }
 
             if (con == null)
@@ -169,7 +231,13 @@ namespace System.Reflection.Emit
                 throw new NotSupportedException(SR.NotSupported_NoParentDefaultConstructor);
             }
 
-            ConstructorBuilderImpl constBuilder = (ConstructorBuilderImpl)DefineConstructorCore(attributes, CallingConventions.Standard, null, null, null);
+            ConstructorBuilderImpl constBuilder = (ConstructorBuilderImpl)DefineConstructorCore(
+                attributes,
+                CallingConventions.Standard,
+                null,
+                null,
+                null
+            );
 
             // generate the code to call the parent's default constructor
             ILGenerator il = constBuilder.GetILGenerator();
@@ -181,9 +249,19 @@ namespace System.Reflection.Emit
             return constBuilder;
         }
 
-        protected override EventBuilder DefineEventCore(string name, EventAttributes attributes, Type eventtype) => throw new NotImplementedException();
+        protected override EventBuilder DefineEventCore(
+            string name,
+            EventAttributes attributes,
+            Type eventtype
+        ) => throw new NotImplementedException();
 
-        protected override FieldBuilder DefineFieldCore(string fieldName, Type type, Type[]? requiredCustomModifiers, Type[]? optionalCustomModifiers, FieldAttributes attributes)
+        protected override FieldBuilder DefineFieldCore(
+            string fieldName,
+            Type type,
+            Type[]? requiredCustomModifiers,
+            Type[]? optionalCustomModifiers,
+            FieldAttributes attributes
+        )
         {
             ThrowIfCreated();
 
@@ -201,7 +279,9 @@ namespace System.Reflection.Emit
             return field;
         }
 
-        protected override GenericTypeParameterBuilder[] DefineGenericParametersCore(params string[] names)
+        protected override GenericTypeParameterBuilder[] DefineGenericParametersCore(
+            params string[] names
+        )
         {
             if (_typeParameters != null)
             {
@@ -219,40 +299,122 @@ namespace System.Reflection.Emit
             return _typeParameters = typeParameters;
         }
 
-        protected override FieldBuilder DefineInitializedDataCore(string name, byte[] data, FieldAttributes attributes) => throw new NotImplementedException();
+        protected override FieldBuilder DefineInitializedDataCore(
+            string name,
+            byte[] data,
+            FieldAttributes attributes
+        ) => throw new NotImplementedException();
 
-        protected override MethodBuilder DefineMethodCore(string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers, Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers)
+        protected override MethodBuilder DefineMethodCore(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        )
         {
             ThrowIfCreated();
 
-            MethodBuilderImpl methodBuilder = new(name, attributes, callingConvention, returnType, parameterTypes, _module, this);
+            MethodBuilderImpl methodBuilder = new(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                _module,
+                this
+            );
             _methodDefinitions.Add(methodBuilder);
             return methodBuilder;
         }
 
-        protected override void DefineMethodOverrideCore(MethodInfo methodInfoBody, MethodInfo methodInfoDeclaration) => throw new NotImplementedException();
+        protected override void DefineMethodOverrideCore(
+            MethodInfo methodInfoBody,
+            MethodInfo methodInfoDeclaration
+        ) => throw new NotImplementedException();
 
-        protected override TypeBuilder DefineNestedTypeCore(string name, TypeAttributes attr,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, Type[]? interfaces, PackingSize packSize, int typeSize)
+        protected override TypeBuilder DefineNestedTypeCore(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            Type[]? interfaces,
+            PackingSize packSize,
+            int typeSize
+        )
         {
-            return _module.DefineNestedType(name, attr, parent, interfaces, packSize, typeSize, this);
+            return _module.DefineNestedType(
+                name,
+                attr,
+                parent,
+                interfaces,
+                packSize,
+                typeSize,
+                this
+            );
         }
 
-        [RequiresUnreferencedCode("P/Invoke marshalling may dynamically access members that could be trimmed.")]
-        protected override MethodBuilder DefinePInvokeMethodCore(string name, string dllName, string entryName, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers, Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers, CallingConvention nativeCallConv, CharSet nativeCharSet) => throw new NotImplementedException();
+        [RequiresUnreferencedCode(
+            "P/Invoke marshalling may dynamically access members that could be trimmed."
+        )]
+        protected override MethodBuilder DefinePInvokeMethodCore(
+            string name,
+            string dllName,
+            string entryName,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers,
+            CallingConvention nativeCallConv,
+            CharSet nativeCharSet
+        ) => throw new NotImplementedException();
 
-        protected override PropertyBuilder DefinePropertyCore(string name, PropertyAttributes attributes, CallingConventions callingConvention, Type returnType, Type[]? returnTypeRequiredCustomModifiers,
-            Type[]? returnTypeOptionalCustomModifiers, Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers)
+        protected override PropertyBuilder DefinePropertyCore(
+            string name,
+            PropertyAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        )
         {
-            PropertyBuilderImpl property = new PropertyBuilderImpl(name, attributes, callingConvention, returnType, parameterTypes, this);
+            PropertyBuilderImpl property = new PropertyBuilderImpl(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                this
+            );
             _propertyDefinitions.Add(property);
             return property;
         }
 
-        protected override ConstructorBuilder DefineTypeInitializerCore() => throw new NotImplementedException();
-        protected override FieldBuilder DefineUninitializedDataCore(string name, int size, FieldAttributes attributes) => throw new NotImplementedException();
+        protected override ConstructorBuilder DefineTypeInitializerCore() =>
+            throw new NotImplementedException();
+
+        protected override FieldBuilder DefineUninitializedDataCore(
+            string name,
+            int size,
+            FieldAttributes attributes
+        ) => throw new NotImplementedException();
+
         protected override bool IsCreatedCore() => _isCreated;
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             // Handle pseudo custom attributes
             switch (con.ReflectedType!.FullName)
@@ -288,9 +450,15 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        private void ParseStructLayoutAttribute(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        private void ParseStructLayoutAttribute(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
-            CustomAttributeInfo attributeInfo = CustomAttributeInfo.DecodeCustomAttribute(con, binaryAttribute);
+            CustomAttributeInfo attributeInfo = CustomAttributeInfo.DecodeCustomAttribute(
+                con,
+                binaryAttribute
+            );
             LayoutKind layoutKind = (LayoutKind)attributeInfo._ctorArgs[0]!;
             _attributes &= ~TypeAttributes.LayoutMask;
             _attributes |= layoutKind switch
@@ -313,7 +481,9 @@ namespace System.Reflection.Emit
                         {
                             case CharSet.None:
                             case CharSet.Ansi:
-                                _attributes &= ~(TypeAttributes.UnicodeClass | TypeAttributes.AutoClass);
+                                _attributes &= ~(
+                                    TypeAttributes.UnicodeClass | TypeAttributes.AutoClass
+                                );
                                 break;
                             case CharSet.Unicode:
                                 _attributes &= ~TypeAttributes.AutoClass;
@@ -332,14 +502,22 @@ namespace System.Reflection.Emit
                         _typeSize = value;
                         break;
                     default:
-                        throw new ArgumentException(SR.Format(SR.Argument_UnknownNamedType, con.DeclaringType, name), nameof(binaryAttribute));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_UnknownNamedType, con.DeclaringType, name),
+                            nameof(binaryAttribute)
+                        );
                 }
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2074:DynamicallyAccessedMembers",
-            Justification = "System.Object type is preserved via ModulBuilderImpl.s_coreTypes")]
-        protected override void SetParentCore([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2074:DynamicallyAccessedMembers",
+            Justification = "System.Object type is preserved via ModulBuilderImpl.s_coreTypes"
+        )]
+        protected override void SetParentCore(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
+        )
         {
             ThrowIfCreated();
 
@@ -362,7 +540,9 @@ namespace System.Reflection.Emit
                 {
                     if ((_attributes & TypeAttributes.Abstract) == 0)
                     {
-                        throw new InvalidOperationException(SR.InvalidOperation_BadInterfaceNotAbstract);
+                        throw new InvalidOperationException(
+                            SR.InvalidOperation_BadInterfaceNotAbstract
+                        );
                     }
 
                     // There is no extends for interface class.
@@ -370,15 +550,19 @@ namespace System.Reflection.Emit
                 }
             }
         }
+
         public override string Name => _name;
         public override Type? DeclaringType => _declaringType;
         public override Type? ReflectedType => _declaringType;
         public override bool IsGenericTypeDefinition => IsGenericType;
         public override bool IsConstructedGenericType => false;
         public override bool IsGenericType => _typeParameters != null;
+
         // Not returning a copy for compat with existing runtime behavior
         public override Type[] GenericTypeParameters => _typeParameters ?? EmptyTypes;
+
         public override Type[] GetGenericArguments() => _typeParameters ?? EmptyTypes;
+
         public override Type GetGenericTypeDefinition()
         {
             if (IsGenericTypeDefinition)
@@ -388,12 +572,21 @@ namespace System.Reflection.Emit
 
             throw new InvalidOperationException();
         }
-        public override bool IsDefined(Type attributeType, bool inherit) => throw new NotImplementedException();
-        public override object[] GetCustomAttributes(bool inherit) => throw new NotImplementedException();
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
+
+        public override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new NotImplementedException();
+
+        public override object[] GetCustomAttributes(bool inherit) =>
+            throw new NotImplementedException();
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new NotImplementedException();
+
         public override Type GetElementType() => throw new NotSupportedException();
+
         public override string? AssemblyQualifiedName => throw new NotSupportedException();
-        public override string? FullName => _strFullName ??= TypeNameBuilder.ToString(this, TypeNameBuilder.Format.FullName);
+        public override string? FullName =>
+            _strFullName ??= TypeNameBuilder.ToString(this, TypeNameBuilder.Format.FullName);
         public override string? Namespace => _namespace;
         public override Assembly Assembly => _module.Assembly;
         public override Module Module => _module;
@@ -405,7 +598,9 @@ namespace System.Reflection.Emit
                 {
                     if (_enumUnderlyingType == null)
                     {
-                        throw new InvalidOperationException(SR.InvalidOperation_NoUnderlyingTypeOnEnum);
+                        throw new InvalidOperationException(
+                            SR.InvalidOperation_NoUnderlyingTypeOnEnum
+                        );
                     }
 
                     return _enumUnderlyingType;
@@ -419,15 +614,31 @@ namespace System.Reflection.Emit
         public override Guid GUID => throw new NotSupportedException();
         public override Type? BaseType => _typeParent;
         public override int MetadataToken => MetadataTokens.GetToken(_handle);
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        public override object? InvokeMember(string name, BindingFlags invokeAttr, Binder? binder, object? target,
-            object?[]? args, ParameterModifier[]? modifiers, CultureInfo? culture, string[]? namedParameters) => throw new NotSupportedException();
+        public override object? InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object? target,
+            object?[]? args,
+            ParameterModifier[]? modifiers,
+            CultureInfo? culture,
+            string[]? namedParameters
+        ) => throw new NotSupportedException();
+
         protected override bool IsArrayImpl() => false;
+
         protected override bool IsByRefImpl() => false;
+
         protected override bool IsPointerImpl() => false;
+
         protected override bool IsPrimitiveImpl() => false;
+
         protected override bool HasElementTypeImpl() => false;
+
         protected override TypeAttributes GetAttributeFlagsImpl() => _attributes;
+
         protected override bool IsCOMObjectImpl()
         {
             return ((GetAttributeFlagsImpl() & TypeAttributes.Import) != 0) ? true : false;
@@ -441,9 +652,17 @@ namespace System.Reflection.Emit
             }
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        protected override ConstructorInfo? GetConstructorImpl(BindingFlags bindingAttr, Binder? binder,
-                CallingConventions callConvention, Type[] types, ParameterModifier[]? _)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        protected override ConstructorInfo? GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? _
+        )
         {
             ThrowIfNotCreated();
             ArgumentNullException.ThrowIfNull(types);
@@ -455,7 +674,15 @@ namespace System.Reflection.Emit
 
             foreach (ConstructorBuilderImpl con in _constructorDefinitions)
             {
-                if (MatchesTheFilter(con._methodBuilder, con._methodBuilder.GetBindingFlags(), bindingAttr, callConvention, types))
+                if (
+                    MatchesTheFilter(
+                        con._methodBuilder,
+                        con._methodBuilder.GetBindingFlags(),
+                        bindingAttr,
+                        callConvention,
+                        types
+                    )
+                )
                 {
                     return con;
                 }
@@ -464,7 +691,13 @@ namespace System.Reflection.Emit
             return null;
         }
 
-        private static bool MatchesTheFilter(MethodBuilderImpl method, BindingFlags ctorFlags, BindingFlags bindingFlags, CallingConventions callConv, Type[]? argumentTypes)
+        private static bool MatchesTheFilter(
+            MethodBuilderImpl method,
+            BindingFlags ctorFlags,
+            BindingFlags bindingFlags,
+            CallingConventions callConv,
+            Type[]? argumentTypes
+        )
         {
             if ((bindingFlags & ctorFlags) != ctorFlags)
             {
@@ -473,12 +706,18 @@ namespace System.Reflection.Emit
 
             if ((callConv & CallingConventions.Any) == 0)
             {
-                if ((callConv & CallingConventions.VarArgs) != 0 && (method.CallingConvention & CallingConventions.VarArgs) == 0)
+                if (
+                    (callConv & CallingConventions.VarArgs) != 0
+                    && (method.CallingConvention & CallingConventions.VarArgs) == 0
+                )
                 {
                     return false;
                 }
 
-                if ((callConv & CallingConventions.Standard) != 0 && (method.CallingConvention & CallingConventions.Standard) == 0)
+                if (
+                    (callConv & CallingConventions.Standard) != 0
+                    && (method.CallingConvention & CallingConventions.Standard) == 0
+                )
                 {
                     return false;
                 }
@@ -507,7 +746,10 @@ namespace System.Reflection.Emit
             return true;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
             ThrowIfNotCreated();
@@ -515,7 +757,15 @@ namespace System.Reflection.Emit
             List<ConstructorInfo> ctors = new();
             foreach (ConstructorBuilderImpl con in _constructorDefinitions)
             {
-                if (MatchesTheFilter(con._methodBuilder, con._methodBuilder.GetBindingFlags(), bindingAttr, CallingConventions.Any, con._methodBuilder.ParameterTypes))
+                if (
+                    MatchesTheFilter(
+                        con._methodBuilder,
+                        con._methodBuilder.GetBindingFlags(),
+                        bindingAttr,
+                        CallingConventions.Any,
+                        con._methodBuilder.ParameterTypes
+                    )
+                )
                 {
                     ctors.Add(con);
                 }
@@ -526,55 +776,132 @@ namespace System.Reflection.Emit
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         public override EventInfo[] GetEvents() => throw new NotSupportedException();
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
-        public override EventInfo[] GetEvents(BindingFlags bindingAttr) => throw new NotSupportedException();
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
-        public override EventInfo? GetEvent(string name, BindingFlags bindingAttr) => throw new NotSupportedException();
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        public override MethodInfo[] GetMethods(BindingFlags bindingAttr) => throw new NotSupportedException();
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder,
-                CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers) => throw new NotSupportedException();
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-        public override FieldInfo? GetField(string name, BindingFlags bindingAttr) => throw new NotSupportedException();
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
+        public override EventInfo[] GetEvents(BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-        public override FieldInfo[] GetFields(BindingFlags bindingAttr) => throw new NotSupportedException();
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
+        public override EventInfo? GetEvent(string name, BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        public override MethodInfo[] GetMethods(BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) => throw new NotSupportedException();
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
+        public override FieldInfo? GetField(string name, BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
+        public override FieldInfo[] GetFields(BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-        public override Type? GetInterface(string name, bool ignoreCase) => throw new NotSupportedException();
+        public override Type? GetInterface(string name, bool ignoreCase) =>
+            throw new NotSupportedException();
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-        public override Type[] GetInterfaces() => _interfaces == null ? EmptyTypes : _interfaces.ToArray();
+        public override Type[] GetInterfaces() =>
+            _interfaces == null ? EmptyTypes : _interfaces.ToArray();
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => throw new NotSupportedException();
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder,
-                Type? returnType, Type[]? types, ParameterModifier[]? modifiers) => throw new NotSupportedException();
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-        public override Type[] GetNestedTypes(BindingFlags bindingAttr) => throw new NotSupportedException();
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) => throw new NotSupportedException();
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-        public override Type? GetNestedType(string name, BindingFlags bindingAttr) => throw new NotSupportedException();
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
+        public override Type[] GetNestedTypes(BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
+        public override Type? GetNestedType(string name, BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
 
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr) => throw new NotSupportedException();
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        ) => throw new NotSupportedException();
 
-        public override InterfaceMapping GetInterfaceMap([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType)
-            => throw new NotSupportedException();
+        public override InterfaceMapping GetInterfaceMap(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType
+        ) => throw new NotSupportedException();
+
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMembers(BindingFlags bindingAttr) => throw new NotSupportedException();
-        public override bool IsAssignableFrom([NotNullWhen(true)] Type? c) => throw new NotSupportedException();
+        public override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>
+            throw new NotSupportedException();
 
-        internal const DynamicallyAccessedMemberTypes GetAllMembers = DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields |
-            DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods |
-            DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents |
-            DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties |
-            DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
-            DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes;
+        public override bool IsAssignableFrom([NotNullWhen(true)] Type? c) =>
+            throw new NotSupportedException();
+
+        internal const DynamicallyAccessedMemberTypes GetAllMembers =
+            DynamicallyAccessedMemberTypes.PublicFields
+            | DynamicallyAccessedMemberTypes.NonPublicFields
+            | DynamicallyAccessedMemberTypes.PublicMethods
+            | DynamicallyAccessedMemberTypes.NonPublicMethods
+            | DynamicallyAccessedMemberTypes.PublicEvents
+            | DynamicallyAccessedMemberTypes.NonPublicEvents
+            | DynamicallyAccessedMemberTypes.PublicProperties
+            | DynamicallyAccessedMemberTypes.NonPublicProperties
+            | DynamicallyAccessedMemberTypes.PublicConstructors
+            | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            | DynamicallyAccessedMemberTypes.NonPublicNestedTypes;
     }
 }

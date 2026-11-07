@@ -4,16 +4,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using ILCompiler.DependencyAnalysisFramework;
 using Internal.IL;
 using Internal.Text;
 using Internal.TypeSystem;
 
-using ILCompiler.DependencyAnalysisFramework;
-
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class ReadyToRunGenericHelperNode : AssemblyStubNode, INodeWithRuntimeDeterminedDependencies
+    public abstract partial class ReadyToRunGenericHelperNode
+        : AssemblyStubNode,
+            INodeWithRuntimeDeterminedDependencies
     {
         private readonly ReadyToRunHelperId _id;
         private readonly object _target;
@@ -37,7 +37,12 @@ namespace ILCompiler.DependencyAnalysis
             return _hasInvalidEntries;
         }
 
-        public ReadyToRunGenericHelperNode(NodeFactory factory, ReadyToRunHelperId helperId, object target, TypeSystemEntity dictionaryOwner)
+        public ReadyToRunGenericHelperNode(
+            NodeFactory factory,
+            ReadyToRunHelperId helperId,
+            object target,
+            TypeSystemEntity dictionaryOwner
+        )
         {
             _id = helperId;
             _dictionaryOwner = dictionaryOwner;
@@ -46,7 +51,11 @@ namespace ILCompiler.DependencyAnalysis
             _lookupSignature = GetLookupSignature(factory, helperId, target);
         }
 
-        public static GenericLookupResult GetLookupSignature(NodeFactory factory, ReadyToRunHelperId id, object target)
+        public static GenericLookupResult GetLookupSignature(
+            NodeFactory factory,
+            ReadyToRunHelperId id,
+            object target
+        )
         {
             // Necessary type handle is not something you can put in a dictionary - someone should have normalized to TypeHandle
             Debug.Assert(id != ReadyToRunHelperId.NecessaryTypeHandle);
@@ -57,7 +66,10 @@ namespace ILCompiler.DependencyAnalysis
                     return factory.GenericLookup.Type((TypeDesc)target);
                 case ReadyToRunHelperId.TypeHandleForCasting:
                     // Check that we unwrapped the cases that could be unwrapped to prevent duplicate entries
-                    Debug.Assert(factory.GenericLookup.Type((TypeDesc)target) != factory.GenericLookup.UnwrapNullableType((TypeDesc)target));
+                    Debug.Assert(
+                        factory.GenericLookup.Type((TypeDesc)target)
+                            != factory.GenericLookup.UnwrapNullableType((TypeDesc)target)
+                    );
                     return factory.GenericLookup.UnwrapNullableType((TypeDesc)target);
                 case ReadyToRunHelperId.MethodHandle:
                     return factory.GenericLookup.MethodHandle((MethodDesc)target);
@@ -85,7 +97,8 @@ namespace ILCompiler.DependencyAnalysis
                     return factory.GenericLookup.ConstrainedMethodUse(
                         ((ConstrainedCallInfo)target).Method,
                         ((ConstrainedCallInfo)target).ConstrainedType,
-                        directCall: !((ConstrainedCallInfo)target).Method.HasInstantiation);
+                        directCall: !((ConstrainedCallInfo)target).Method.HasInstantiation
+                    );
                 default:
                     throw new NotImplementedException();
             }
@@ -93,7 +106,9 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override bool IsVisibleFromManagedCode => false;
 
-        protected sealed override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected sealed override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
         public override bool IsShareable => true;
 
         protected sealed override void OnMarked(NodeFactory factory)
@@ -106,12 +121,18 @@ namespace ILCompiler.DependencyAnalysis
                 // includes the signature.
                 layout.EnsureEntry(_lookupSignature);
 
-                if ((_id == ReadyToRunHelperId.GetGCStaticBase || _id == ReadyToRunHelperId.GetThreadStaticBase) &&
-                    TriggersLazyStaticConstructor(factory))
+                if (
+                    (
+                        _id == ReadyToRunHelperId.GetGCStaticBase
+                        || _id == ReadyToRunHelperId.GetThreadStaticBase
+                    ) && TriggersLazyStaticConstructor(factory)
+                )
                 {
                     // If the type has a lazy static constructor, we also need the non-GC static base
                     // because that's where the class constructor context is.
-                    layout.EnsureEntry(factory.GenericLookup.TypeNonGCStaticBase((TypeDesc)_target));
+                    layout.EnsureEntry(
+                        factory.GenericLookup.TypeNonGCStaticBase((TypeDesc)_target)
+                    );
                 }
             }
         }
@@ -119,14 +140,24 @@ namespace ILCompiler.DependencyAnalysis
         private bool TriggersLazyStaticConstructor(NodeFactory factory)
         {
             TypeDesc type = (TypeDesc)_target;
-            return factory.PreinitializationManager.HasLazyStaticConstructor(type.ConvertToCanonForm(CanonicalFormKind.Specific));
+            return factory.PreinitializationManager.HasLazyStaticConstructor(
+                type.ConvertToCanonForm(CanonicalFormKind.Specific)
+            );
         }
 
-        public IEnumerable<DependencyListEntry> InstantiateDependencies(NodeFactory factory, Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public IEnumerable<DependencyListEntry> InstantiateDependencies(
+            NodeFactory factory,
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             DependencyList result = new DependencyList();
 
-            var lookupContext = new GenericLookupResultContext(_dictionaryOwner, typeInstantiation, methodInstantiation);
+            var lookupContext = new GenericLookupResultContext(
+                _dictionaryOwner,
+                typeInstantiation,
+                methodInstantiation
+            );
 
             switch (_id)
             {
@@ -139,8 +170,12 @@ namespace ILCompiler.DependencyAnalysis
                         {
                             result.Add(
                                 new DependencyListEntry(
-                                    factory.GenericLookup.TypeNonGCStaticBase((TypeDesc)_target).GetTarget(factory, lookupContext),
-                                    "Dictionary dependency"));
+                                    factory
+                                        .GenericLookup.TypeNonGCStaticBase((TypeDesc)_target)
+                                        .GetTarget(factory, lookupContext),
+                                    "Dictionary dependency"
+                                )
+                            );
                         }
                     }
                     break;
@@ -150,16 +185,26 @@ namespace ILCompiler.DependencyAnalysis
                         DelegateCreationInfo createInfo = (DelegateCreationInfo)_target;
                         if (createInfo.NeedsVirtualMethodUseTracking)
                         {
-                            MethodDesc instantiatedTargetMethod = createInfo.TargetMethod.GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(typeInstantiation, methodInstantiation);
+                            MethodDesc instantiatedTargetMethod =
+                                createInfo.TargetMethod.GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(
+                                    typeInstantiation,
+                                    methodInstantiation
+                                );
                             if (!factory.VTable(instantiatedTargetMethod.OwningType).HasFixedSlots)
                             {
                                 result.Add(
                                     new DependencyListEntry(
                                         factory.VirtualMethodUse(instantiatedTargetMethod),
-                                        "Dictionary dependency"));
+                                        "Dictionary dependency"
+                                    )
+                                );
                             }
 
-                            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref result, factory, instantiatedTargetMethod);
+                            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                                ref result,
+                                factory,
+                                instantiatedTargetMethod
+                            );
                         }
                     }
                     break;
@@ -168,9 +213,12 @@ namespace ILCompiler.DependencyAnalysis
             try
             {
                 // All generic lookups depend on the thing they point to
-                result.Add(new DependencyListEntry(
-                            _lookupSignature.GetTarget(factory, lookupContext),
-                            "Dictionary dependency"));
+                result.Add(
+                    new DependencyListEntry(
+                        _lookupSignature.GetTarget(factory, lookupContext),
+                        "Dictionary dependency"
+                    )
+                );
             }
             catch (TypeSystemException)
             {
@@ -186,10 +234,18 @@ namespace ILCompiler.DependencyAnalysis
 
         private static IMethodNode GetBadSlotHelper(NodeFactory factory)
         {
-            return factory.MethodEntrypoint(factory.TypeSystemContext.GetHelperEntryPoint("ThrowHelpers", "ThrowUnavailableType"));
+            return factory.MethodEntrypoint(
+                factory.TypeSystemContext.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowUnavailableType"
+                )
+            );
         }
 
-        protected void AppendLookupSignatureMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
+        protected void AppendLookupSignatureMangledName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        )
         {
             if (_id != ReadyToRunHelperId.DelegateCtor)
             {
@@ -214,41 +270,72 @@ namespace ILCompiler.DependencyAnalysis
 
             dependencies.Add(factory.GenericDictionaryLayout(_dictionaryOwner), "Layout");
 
-            foreach (DependencyNodeCore<NodeFactory> dependency in _lookupSignature.NonRelocDependenciesFromUsage(factory))
+            foreach (
+                DependencyNodeCore<NodeFactory> dependency in _lookupSignature.NonRelocDependenciesFromUsage(
+                    factory
+                )
+            )
             {
-                dependencies.Add(new DependencyListEntry(dependency, "GenericLookupResultDependency"));
+                dependencies.Add(
+                    new DependencyListEntry(dependency, "GenericLookupResultDependency")
+                );
             }
 
             if (_id == ReadyToRunHelperId.DelegateCtor)
             {
-                MethodDesc targetMethod = ((DelegateCreationInfo)_target).PossiblyUnresolvedTargetMethod.GetCanonMethodTarget(CanonicalFormKind.Specific);
-                factory.MetadataManager.GetDependenciesDueToDelegateCreation(ref dependencies, factory, targetMethod);
+                MethodDesc targetMethod = (
+                    (DelegateCreationInfo)_target
+                ).PossiblyUnresolvedTargetMethod.GetCanonMethodTarget(CanonicalFormKind.Specific);
+                factory.MetadataManager.GetDependenciesDueToDelegateCreation(
+                    ref dependencies,
+                    factory,
+                    targetMethod
+                );
             }
 
             return dependencies;
         }
 
         public override bool HasConditionalStaticDependencies => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
-            List<CombinedDependencyListEntry> conditionalDependencies = new List<CombinedDependencyListEntry>();
+            List<CombinedDependencyListEntry> conditionalDependencies =
+                new List<CombinedDependencyListEntry>();
             NativeLayoutSavedVertexNode templateLayout;
             if (_dictionaryOwner is MethodDesc)
             {
-                templateLayout = factory.NativeLayout.TemplateMethodLayout((MethodDesc)_dictionaryOwner);
-                conditionalDependencies.Add(new CombinedDependencyListEntry(_lookupSignature.TemplateDictionaryNode(factory),
-                                                                templateLayout,
-                                                                "Type loader template"));
+                templateLayout = factory.NativeLayout.TemplateMethodLayout(
+                    (MethodDesc)_dictionaryOwner
+                );
+                conditionalDependencies.Add(
+                    new CombinedDependencyListEntry(
+                        _lookupSignature.TemplateDictionaryNode(factory),
+                        templateLayout,
+                        "Type loader template"
+                    )
+                );
             }
             else
             {
-                templateLayout = factory.NativeLayout.TemplateTypeLayout((TypeDesc)_dictionaryOwner);
-                conditionalDependencies.Add(new CombinedDependencyListEntry(_lookupSignature.TemplateDictionaryNode(factory),
-                                                                templateLayout,
-                                                                "Type loader template"));
+                templateLayout = factory.NativeLayout.TemplateTypeLayout(
+                    (TypeDesc)_dictionaryOwner
+                );
+                conditionalDependencies.Add(
+                    new CombinedDependencyListEntry(
+                        _lookupSignature.TemplateDictionaryNode(factory),
+                        templateLayout,
+                        "Type loader template"
+                    )
+                );
             }
 
-            if (_id == ReadyToRunHelperId.GetGCStaticBase || _id == ReadyToRunHelperId.GetThreadStaticBase)
+            if (
+                _id == ReadyToRunHelperId.GetGCStaticBase
+                || _id == ReadyToRunHelperId.GetThreadStaticBase
+            )
             {
                 // If the type has a lazy static constructor, we also need the non-GC static base to be available as
                 // a template dictionary node.
@@ -256,10 +343,15 @@ namespace ILCompiler.DependencyAnalysis
                 Debug.Assert(templateLayout != null);
                 if (TriggersLazyStaticConstructor(factory))
                 {
-                    GenericLookupResult nonGcRegionLookup = factory.GenericLookup.TypeNonGCStaticBase(type);
-                    conditionalDependencies.Add(new CombinedDependencyListEntry(nonGcRegionLookup.TemplateDictionaryNode(factory),
-                                                                templateLayout,
-                                                                "Type loader template"));
+                    GenericLookupResult nonGcRegionLookup =
+                        factory.GenericLookup.TypeNonGCStaticBase(type);
+                    conditionalDependencies.Add(
+                        new CombinedDependencyListEntry(
+                            nonGcRegionLookup.TemplateDictionaryNode(factory),
+                            templateLayout,
+                            "Type loader template"
+                        )
+                    );
                 }
             }
 
@@ -277,14 +369,20 @@ namespace ILCompiler.DependencyAnalysis
                 if (((ReadyToRunGenericHelperNode)other)._dictionaryOwner is TypeDesc)
                     return -1;
 
-                compare = comparer.Compare((MethodDesc)_dictionaryOwner, (MethodDesc)((ReadyToRunGenericHelperNode)other)._dictionaryOwner);
+                compare = comparer.Compare(
+                    (MethodDesc)_dictionaryOwner,
+                    (MethodDesc)((ReadyToRunGenericHelperNode)other)._dictionaryOwner
+                );
             }
             else
             {
                 if (((ReadyToRunGenericHelperNode)other)._dictionaryOwner is MethodDesc)
                     return 1;
 
-                compare = comparer.Compare((TypeDesc)_dictionaryOwner, (TypeDesc)((ReadyToRunGenericHelperNode)other)._dictionaryOwner);
+                compare = comparer.Compare(
+                    (TypeDesc)_dictionaryOwner,
+                    (TypeDesc)((ReadyToRunGenericHelperNode)other)._dictionaryOwner
+                );
             }
 
             if (compare != 0)
@@ -298,18 +396,33 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.GetThreadStaticBase:
                 case ReadyToRunHelperId.DefaultConstructor:
                 case ReadyToRunHelperId.ObjectAllocator:
-                    return comparer.Compare((TypeDesc)_target, (TypeDesc)((ReadyToRunGenericHelperNode)other)._target);
+                    return comparer.Compare(
+                        (TypeDesc)_target,
+                        (TypeDesc)((ReadyToRunGenericHelperNode)other)._target
+                    );
                 case ReadyToRunHelperId.MethodHandle:
                 case ReadyToRunHelperId.MethodDictionary:
                 case ReadyToRunHelperId.VirtualDispatchCell:
                 case ReadyToRunHelperId.MethodEntry:
-                    return comparer.Compare((MethodDesc)_target, (MethodDesc)((ReadyToRunGenericHelperNode)other)._target);
+                    return comparer.Compare(
+                        (MethodDesc)_target,
+                        (MethodDesc)((ReadyToRunGenericHelperNode)other)._target
+                    );
                 case ReadyToRunHelperId.FieldHandle:
-                    return comparer.Compare((FieldDesc)_target, (FieldDesc)((ReadyToRunGenericHelperNode)other)._target);
+                    return comparer.Compare(
+                        (FieldDesc)_target,
+                        (FieldDesc)((ReadyToRunGenericHelperNode)other)._target
+                    );
                 case ReadyToRunHelperId.DelegateCtor:
-                    return ((DelegateCreationInfo)_target).CompareTo((DelegateCreationInfo)((ReadyToRunGenericHelperNode)other)._target, comparer);
+                    return ((DelegateCreationInfo)_target).CompareTo(
+                        (DelegateCreationInfo)((ReadyToRunGenericHelperNode)other)._target,
+                        comparer
+                    );
                 case ReadyToRunHelperId.ConstrainedDirectCall:
-                    return ((ConstrainedCallInfo)_target).CompareTo((ConstrainedCallInfo)((ReadyToRunGenericHelperNode)other)._target, comparer);
+                    return ((ConstrainedCallInfo)_target).CompareTo(
+                        (ConstrainedCallInfo)((ReadyToRunGenericHelperNode)other)._target,
+                        comparer
+                    );
                 default:
                     throw new NotImplementedException();
             }
@@ -318,10 +431,13 @@ namespace ILCompiler.DependencyAnalysis
 
     public partial class ReadyToRunGenericLookupFromDictionaryNode : ReadyToRunGenericHelperNode
     {
-        public ReadyToRunGenericLookupFromDictionaryNode(NodeFactory factory, ReadyToRunHelperId helperId, object target, TypeSystemEntity dictionaryOwner)
-            : base(factory, helperId, target, dictionaryOwner)
-        {
-        }
+        public ReadyToRunGenericLookupFromDictionaryNode(
+            NodeFactory factory,
+            ReadyToRunHelperId helperId,
+            object target,
+            TypeSystemEntity dictionaryOwner
+        )
+            : base(factory, helperId, target, dictionaryOwner) { }
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -340,10 +456,13 @@ namespace ILCompiler.DependencyAnalysis
 
     public partial class ReadyToRunGenericLookupFromTypeNode : ReadyToRunGenericHelperNode
     {
-        public ReadyToRunGenericLookupFromTypeNode(NodeFactory factory, ReadyToRunHelperId helperId, object target, TypeSystemEntity dictionaryOwner)
-            : base(factory, helperId, target, dictionaryOwner)
-        {
-        }
+        public ReadyToRunGenericLookupFromTypeNode(
+            NodeFactory factory,
+            ReadyToRunHelperId helperId,
+            object target,
+            TypeSystemEntity dictionaryOwner
+        )
+            : base(factory, helperId, target, dictionaryOwner) { }
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {

@@ -14,7 +14,9 @@ internal static partial class Interop
         internal static partial ulong ErrClearError();
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_ErrGetErrorAlloc")]
-        private static partial ulong ErrGetErrorAlloc([MarshalAs(UnmanagedType.Bool)] out bool isAllocFailure);
+        private static partial ulong ErrGetErrorAlloc(
+            [MarshalAs(UnmanagedType.Bool)] out bool isAllocFailure
+        );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_ErrPeekError")]
         internal static partial ulong ErrPeekError();
@@ -22,7 +24,10 @@ internal static partial class Interop
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_ErrPeekLastError")]
         internal static partial ulong ErrPeekLastError();
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_ErrReasonErrorString")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "CryptoNative_ErrReasonErrorString"
+        )]
         internal static partial IntPtr ErrReasonErrorString(ulong error);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_ErrErrorStringN")]
@@ -83,7 +88,10 @@ internal static partial class Interop
 
             // Even though ErrGetError returns ulong (C++ unsigned long), we
             // really only expect error codes in the UInt32 range
-            Debug.Assert(error <= uint.MaxValue, "ErrGetError should only return error codes in the UInt32 range.");
+            Debug.Assert(
+                error <= uint.MaxValue,
+                "ErrGetError should only return error codes in the UInt32 range."
+            );
 
             // If there was an error code, and it wasn't something handled specially,
             // use the OpenSSL error string as the message to a CryptographicException.

@@ -114,13 +114,11 @@ public class HostingApplicationDiagnosticsTests
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value)
         );
-        Assert.Collection(
-            requestDurationCollector1.GetMeasurementSnapshot(),
-            m => Assert.True(m.Value > 0)
+        Assert.Collection(requestDurationCollector1.GetMeasurementSnapshot(), m =>
+            Assert.True(m.Value > 0)
         );
-        Assert.Collection(
-            requestDurationCollector2.GetMeasurementSnapshot(),
-            m => Assert.True(m.Value > 0)
+        Assert.Collection(requestDurationCollector2.GetMeasurementSnapshot(), m =>
+            Assert.True(m.Value > 0)
         );
 
         // Act/Assert 2
@@ -527,22 +525,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         hostingApplication.CreateContext(features);
 
@@ -559,22 +551,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         features.Set<IHttpRequestFeature>(
             new HttpRequestFeature()
@@ -589,13 +575,11 @@ public class HostingApplicationDiagnosticsTests
         hostingApplication.CreateContext(features);
         Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
         Assert.Equal("ParentId1", Activity.Current.ParentId);
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key1" && pair.Value == "value1"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key1" && pair.Value == "value1"
         );
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key2" && pair.Value == "value2"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key2" && pair.Value == "value2"
         );
     }
 
@@ -608,22 +592,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         features.Set<IHttpRequestFeature>(
             new HttpRequestFeature()
@@ -637,13 +615,11 @@ public class HostingApplicationDiagnosticsTests
         );
         hostingApplication.CreateContext(features);
         Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key1" && pair.Value == "value1"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key1" && pair.Value == "value1"
         );
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key2" && pair.Value == "value2"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key2" && pair.Value == "value2"
         );
     }
 
@@ -656,22 +632,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         features.Set<IHttpRequestFeature>(
             new HttpRequestFeature()
@@ -686,13 +656,11 @@ public class HostingApplicationDiagnosticsTests
         );
         hostingApplication.CreateContext(features);
         Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key1" && pair.Value == "value3"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key1" && pair.Value == "value3"
         );
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key2" && pair.Value == "value4"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key2" && pair.Value == "value4"
         );
     }
 
@@ -705,22 +673,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         features.Set<IHttpRequestFeature>(
             new HttpRequestFeature()
@@ -754,22 +716,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         features.Set<IHttpRequestFeature>(
             new HttpRequestFeature()
@@ -783,9 +739,8 @@ public class HostingApplicationDiagnosticsTests
         );
         hostingApplication.CreateContext(features);
         Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key1" && pair.Value == "value1/1"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key1" && pair.Value == "value1/1"
         );
     }
 
@@ -798,22 +753,16 @@ public class HostingApplicationDiagnosticsTests
             diagnosticListener: diagnosticListener
         );
 
-        diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
-            s =>
+        diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }), s =>
+        {
+            if (
+                s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal)
+            )
             {
-                if (
-                    s.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    )
-                )
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-        );
+            return false;
+        });
 
         features.Set<IHttpRequestFeature>(
             new HttpRequestFeature()
@@ -833,13 +782,11 @@ public class HostingApplicationDiagnosticsTests
         Assert.Equal("0123456789abcdef", Activity.Current.ParentSpanId.ToHexString());
         Assert.Equal("TraceState1", Activity.Current.TraceStateString);
 
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key1" && pair.Value == "value1"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key1" && pair.Value == "value1"
         );
-        Assert.Contains(
-            Activity.Current.Baggage,
-            pair => pair.Key == "Key2" && pair.Value == "value2"
+        Assert.Contains(Activity.Current.Baggage, pair =>
+            pair.Key == "Key2" && pair.Value == "value2"
         );
     }
 

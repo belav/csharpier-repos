@@ -20,10 +20,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override string ContractName
         {
-            get
-            {
-                return CompositionConstants.PartCreatorContractName;
-            }
+            get { return CompositionConstants.PartCreatorContractName; }
         }
 
         public override IDictionary<string, object?> Metadata
@@ -33,8 +30,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 if (_metadata == null)
                 {
                     var metadata = new Dictionary<string, object?>(_productDefinition.Metadata);
-                    metadata[CompositionConstants.ExportTypeIdentityMetadataName] = CompositionConstants.PartCreatorTypeIdentity;
-                    metadata[CompositionConstants.ProductDefinitionMetadataName] = _productDefinition;
+                    metadata[CompositionConstants.ExportTypeIdentityMetadataName] =
+                        CompositionConstants.PartCreatorTypeIdentity;
+                    metadata[CompositionConstants.ProductDefinitionMetadataName] =
+                        _productDefinition;
 
                     _metadata = metadata.AsReadOnly();
                 }
@@ -42,9 +41,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
         }
 
-        internal static bool IsProductConstraintSatisfiedBy(ImportDefinition productImportDefinition, ExportDefinition exportDefinition)
+        internal static bool IsProductConstraintSatisfiedBy(
+            ImportDefinition productImportDefinition,
+            ExportDefinition exportDefinition
+        )
         {
-            if (exportDefinition.Metadata.TryGetValue(CompositionConstants.ProductDefinitionMetadataName, out object? productValue))
+            if (
+                exportDefinition.Metadata.TryGetValue(
+                    CompositionConstants.ProductDefinitionMetadataName,
+                    out object? productValue
+                )
+            )
             {
                 if (productValue is ExportDefinition productDefinition)
                 {

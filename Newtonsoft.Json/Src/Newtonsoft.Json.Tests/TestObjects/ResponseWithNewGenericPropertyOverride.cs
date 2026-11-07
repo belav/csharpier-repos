@@ -25,7 +25,8 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class ResponseWithNewGenericPropertyOverride<T> : ResponseWithNewGenericPropertyVirtual<T>
+    public class ResponseWithNewGenericPropertyOverride<T>
+        : ResponseWithNewGenericPropertyVirtual<T>
     {
         public override T Data { get; set; }
     }

@@ -104,13 +104,10 @@ public class Startup
             endpoints.MapConnectionHandler<HttpHeaderConnectionHandler>("/httpheader");
             endpoints.MapConnectionHandler<AuthConnectionHandler>("/auth");
 
-            endpoints.MapGet(
-                "/generatetoken",
-                context =>
-                {
-                    return context.Response.WriteAsync(GenerateToken(context));
-                }
-            );
+            endpoints.MapGet("/generatetoken", context =>
+            {
+                return context.Response.WriteAsync(GenerateToken(context));
+            });
         });
     }
 

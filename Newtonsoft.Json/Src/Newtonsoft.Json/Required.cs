@@ -48,6 +48,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// The property is not required but it cannot be a null value.
         /// </summary>
-        DisallowNull = 3
+        DisallowNull = 3,
     }
 }

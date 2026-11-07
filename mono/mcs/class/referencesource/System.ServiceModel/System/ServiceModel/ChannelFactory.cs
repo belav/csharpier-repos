@@ -11,9 +11,9 @@ namespace System.ServiceModel
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Security;
-    using SecurityToken = System.IdentityModel.Tokens.SecurityToken;
     using FederatedClientCredentialsParameters = System.IdentityModel.Protocols.WSTrust.FederatedClientCredentialsParameters;
-    
+    using SecurityToken = System.IdentityModel.Tokens.SecurityToken;
+
     public abstract class ChannelFactory : CommunicationObject, IChannelFactory, IDisposable
     {
         string configurationName;
@@ -36,7 +36,10 @@ namespace System.ServiceModel
             {
                 if (this.Endpoint == null)
                     return null;
-                if (this.State == CommunicationState.Created || this.State == CommunicationState.Opening)
+                if (
+                    this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening
+                )
                 {
                     return EnsureCredentials(this.Endpoint);
                 }
@@ -85,10 +88,7 @@ namespace System.ServiceModel
 
         public ServiceEndpoint Endpoint
         {
-            get
-            {
-                return this.serviceEndpoint;
-            }
+            get { return this.serviceEndpoint; }
         }
 
         internal IChannelFactory InnerFactory
@@ -101,11 +101,7 @@ namespace System.ServiceModel
         // autoclose the underlying channel in that case.
         // Currently only accessed from the Send activity.
         [Fx.Tag.FriendAccessAllowed("System.ServiceModel.Activities")]
-        internal bool UseActiveAutoClose
-        {
-            get;
-            set;
-        }
+        internal bool UseActiveAutoClose { get; set; }
 
         protected internal void EnsureOpened()
         {
@@ -131,11 +127,18 @@ namespace System.ServiceModel
             this.ApplyConfiguration(configurationName, null);
         }
 
-        void ApplyConfiguration(string configurationName, System.Configuration.Configuration configuration)
+        void ApplyConfiguration(
+            string configurationName,
+            System.Configuration.Configuration configuration
+        )
         {
             if (this.Endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryCannotApplyConfigurationWithoutEndpoint)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxChannelFactoryCannotApplyConfigurationWithoutEndpoint)
+                    )
+                );
             }
 
             if (!this.Endpoint.IsFullyConfigured)
@@ -167,7 +170,11 @@ namespace System.ServiceModel
         {
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
+                    )
+                );
             }
 
             return endpoint.Address;
@@ -177,22 +184,40 @@ namespace System.ServiceModel
         {
             if (this.Endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryCannotCreateFactoryWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxChannelFactoryCannotCreateFactoryWithoutDescription)
+                    )
+                );
             }
 
             if (this.Endpoint.Binding == null)
             {
                 if (this.configurationName != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryNoBindingFoundInConfig1, configurationName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxChannelFactoryNoBindingFoundInConfig1,
+                                configurationName
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryNoBindingFoundInConfigOrCode)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxChannelFactoryNoBindingFoundInConfigOrCode)
+                        )
+                    );
                 }
             }
 
-            return ServiceChannelFactory.BuildChannelFactory(this.Endpoint, this.UseActiveAutoClose);
+            return ServiceChannelFactory.BuildChannelFactory(
+                this.Endpoint,
+                this.UseActiveAutoClose
+            );
         }
 
         void IDisposable.Dispose()
@@ -202,7 +227,11 @@ namespace System.ServiceModel
 
         void EnsureSecurityCredentialsManager(ServiceEndpoint endpoint)
         {
-            Fx.Assert(this.State == CommunicationState.Created || this.State == CommunicationState.Opening, "");
+            Fx.Assert(
+                this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening,
+                ""
+            );
             if (endpoint.Behaviors.Find<SecurityCredentialsManager>() == null)
             {
                 endpoint.Behaviors.Add(new ClientCredentials());
@@ -211,7 +240,11 @@ namespace System.ServiceModel
 
         ClientCredentials EnsureCredentials(ServiceEndpoint endpoint)
         {
-            Fx.Assert(this.State == CommunicationState.Created || this.State == CommunicationState.Opening, "");
+            Fx.Assert(
+                this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening,
+                ""
+            );
             ClientCredentials c = endpoint.Behaviors.Find<ClientCredentials>();
             if (c == null)
             {
@@ -221,7 +254,8 @@ namespace System.ServiceModel
             return c;
         }
 
-        public T GetProperty<T>() where T : class
+        public T GetProperty<T>()
+            where T : class
         {
             if (this.innerFactory != null)
             {
@@ -255,7 +289,11 @@ namespace System.ServiceModel
             ServiceEndpoint serviceEndpointFromConfig = null;
             if (configurationName != null)
             {
-                serviceEndpointFromConfig = ConfigLoader.LookupEndpoint(configurationName, address, this.serviceEndpoint.Contract);
+                serviceEndpointFromConfig = ConfigLoader.LookupEndpoint(
+                    configurationName,
+                    address,
+                    this.serviceEndpoint.Contract
+                );
             }
 
             if (serviceEndpointFromConfig != null)
@@ -275,14 +313,23 @@ namespace System.ServiceModel
             EnsureSecurityCredentialsManager(this.serviceEndpoint);
         }
 
-        internal void InitializeEndpoint(string configurationName, EndpointAddress address, System.Configuration.Configuration configuration)
+        internal void InitializeEndpoint(
+            string configurationName,
+            EndpointAddress address,
+            System.Configuration.Configuration configuration
+        )
         {
             this.serviceEndpoint = this.CreateDescription();
 
             ServiceEndpoint serviceEndpointFromConfig = null;
             if (configurationName != null)
             {
-                serviceEndpointFromConfig = ConfigLoader.LookupEndpoint(configurationName, address, this.serviceEndpoint.Contract, configuration.EvaluationContext);
+                serviceEndpointFromConfig = ConfigLoader.LookupEndpoint(
+                    configurationName,
+                    address,
+                    this.serviceEndpoint.Contract,
+                    configuration.EvaluationContext
+                );
             }
 
             if (serviceEndpointFromConfig != null)
@@ -357,12 +404,20 @@ namespace System.ServiceModel
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult(this.innerFactory, timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OpenAsyncResult(this.innerFactory, timeout, callback, state);
         }
@@ -394,23 +449,30 @@ namespace System.ServiceModel
 
             this.innerFactory = CreateFactory();
 
-
             if (TD.ChannelFactoryCreatedIsEnabled())
             {
                 TD.ChannelFactoryCreated(this);
             }
 
-
             if (this.innerFactory == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InnerChannelFactoryWasNotSet)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.InnerChannelFactoryWasNotSet))
+                );
         }
 
         class OpenAsyncResult : AsyncResult
         {
             ICommunicationObject communicationObject;
-            static AsyncCallback onOpenComplete = Fx.ThunkCallback(new AsyncCallback(OnOpenComplete));
+            static AsyncCallback onOpenComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnOpenComplete)
+            );
 
-            public OpenAsyncResult(ICommunicationObject communicationObject, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                ICommunicationObject communicationObject,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.communicationObject = communicationObject;
@@ -421,7 +483,11 @@ namespace System.ServiceModel
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(timeout, onOpenComplete, this);
+                IAsyncResult result = this.communicationObject.BeginOpen(
+                    timeout,
+                    onOpenComplete,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -463,9 +529,16 @@ namespace System.ServiceModel
         class CloseAsyncResult : AsyncResult
         {
             ICommunicationObject communicationObject;
-            static AsyncCallback onCloseComplete = Fx.ThunkCallback(new AsyncCallback(OnCloseComplete));
+            static AsyncCallback onCloseComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnCloseComplete)
+            );
 
-            public CloseAsyncResult(ICommunicationObject communicationObject, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                ICommunicationObject communicationObject,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.communicationObject = communicationObject;
@@ -476,7 +549,11 @@ namespace System.ServiceModel
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginClose(timeout, onCloseComplete, this);
+                IAsyncResult result = this.communicationObject.BeginClose(
+                    timeout,
+                    onCloseComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -535,7 +612,11 @@ namespace System.ServiceModel
 
             if (!channelType.IsInterface)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxChannelFactoryTypeMustBeInterface)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxChannelFactoryTypeMustBeInterface)
+                    )
+                );
             }
 
             this.channelType = channelType;
@@ -545,11 +626,19 @@ namespace System.ServiceModel
         public ChannelFactory()
             : this(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName),
+                        ActivityType.Construct
+                    );
                 }
                 this.InitializeEndpoint((string)null, null);
             }
@@ -557,23 +646,31 @@ namespace System.ServiceModel
 
         // TChannel provides ContractDescription, attr/config [TChannel,name] provides Address,Binding
         public ChannelFactory(string endpointConfigurationName)
-            : this(endpointConfigurationName, null)
-        {
-        }
+            : this(endpointConfigurationName, null) { }
 
         // TChannel provides ContractDescription, attr/config [TChannel,name] provides Binding, provide Address explicitly
         public ChannelFactory(string endpointConfigurationName, EndpointAddress remoteAddress)
             : this(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName),
+                        ActivityType.Construct
+                    );
                 }
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "endpointConfigurationName"
+                    );
                 }
 
                 this.InitializeEndpoint(endpointConfigurationName, remoteAddress);
@@ -582,24 +679,28 @@ namespace System.ServiceModel
 
         // TChannel provides ContractDescription, attr/config [TChannel,name] provides Address,Binding
         public ChannelFactory(Binding binding)
-            : this(binding, (EndpointAddress)null)
-        {
-        }
+            : this(binding, (EndpointAddress)null) { }
 
         public ChannelFactory(Binding binding, String remoteAddress)
-            : this(binding, new EndpointAddress(remoteAddress))
-        {
-        }
+            : this(binding, new EndpointAddress(remoteAddress)) { }
 
         // TChannel provides ContractDescription, provide Address,Binding explicitly
         public ChannelFactory(Binding binding, EndpointAddress remoteAddress)
             : this(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName),
+                        ActivityType.Construct
+                    );
                 }
                 if (binding == null)
                 {
@@ -614,11 +715,19 @@ namespace System.ServiceModel
         public ChannelFactory(ServiceEndpoint endpoint)
             : this(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityConstructChannelFactory, typeof(TChannel).FullName),
+                        ActivityType.Construct
+                    );
                 }
                 if (endpoint == null)
                 {
@@ -689,11 +798,20 @@ namespace System.ServiceModel
             bool traceOpenAndClose = this.TraceOpenAndClose;
             try
             {
-                using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity && this.TraceOpenAndClose ? ServiceModelActivity.CreateBoundedActivity() : null)
+                using (
+                    ServiceModelActivity activity =
+                        DiagnosticUtility.ShouldUseActivity && this.TraceOpenAndClose
+                            ? ServiceModelActivity.CreateBoundedActivity()
+                            : null
+                )
                 {
                     if (DiagnosticUtility.ShouldUseActivity)
                     {
-                        ServiceModelActivity.Start(activity, this.OpenActivityName, this.OpenActivityType);
+                        ServiceModelActivity.Start(
+                            activity,
+                            this.OpenActivityName,
+                            this.OpenActivityType
+                        );
                         // Turn open and close off for this open on contained objects.
                         this.TraceOpenAndClose = false;
                     }
@@ -704,11 +822,19 @@ namespace System.ServiceModel
 
                     if (this.HasDuplexOperations())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCreateNonDuplexChannel1, this.Endpoint.Contract.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxCreateNonDuplexChannel1,
+                                    this.Endpoint.Contract.Name
+                                )
+                            )
+                        );
                     }
 
                     EnsureOpened();
-                    return (TChannel)this.ServiceChannelFactory.CreateChannel(typeof(TChannel), address, via);
+                    return (TChannel)
+                        this.ServiceChannelFactory.CreateChannel(typeof(TChannel), address, via);
                 }
             }
             finally
@@ -725,25 +851,35 @@ namespace System.ServiceModel
         public TChannel CreateChannelWithIssuedToken(SecurityToken issuedToken)
         {
             TChannel channel = this.CreateChannel();
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.IssuedSecurityToken = issuedToken;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
         }
 
-        public TChannel CreateChannelWithIssuedToken(SecurityToken issuedToken, EndpointAddress address)
+        public TChannel CreateChannelWithIssuedToken(
+            SecurityToken issuedToken,
+            EndpointAddress address
+        )
         {
             TChannel channel = this.CreateChannel(address);
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.IssuedSecurityToken = issuedToken;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
         }
 
-        public TChannel CreateChannelWithIssuedToken(SecurityToken issuedToken, EndpointAddress address, Uri via)
+        public TChannel CreateChannelWithIssuedToken(
+            SecurityToken issuedToken,
+            EndpointAddress address,
+            Uri via
+        )
         {
             TChannel channel = this.CreateChannel(address, via);
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.IssuedSecurityToken = issuedToken;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
@@ -752,25 +888,35 @@ namespace System.ServiceModel
         public TChannel CreateChannelWithActAsToken(SecurityToken actAsToken)
         {
             TChannel channel = this.CreateChannel();
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.ActAs = actAsToken;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
         }
 
-        public TChannel CreateChannelWithActAsToken(SecurityToken actAsToken, EndpointAddress address)
+        public TChannel CreateChannelWithActAsToken(
+            SecurityToken actAsToken,
+            EndpointAddress address
+        )
         {
             TChannel channel = this.CreateChannel(address);
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.ActAs = actAsToken;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
         }
 
-        public TChannel CreateChannelWithActAsToken(SecurityToken actAsToken, EndpointAddress address, Uri via)
+        public TChannel CreateChannelWithActAsToken(
+            SecurityToken actAsToken,
+            EndpointAddress address,
+            Uri via
+        )
         {
             TChannel channel = this.CreateChannel(address, via);
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.ActAs = actAsToken;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
@@ -779,25 +925,35 @@ namespace System.ServiceModel
         public TChannel CreateChannelWithOnBehalfOfToken(SecurityToken onBehalfOf)
         {
             TChannel channel = this.CreateChannel();
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.OnBehalfOf = onBehalfOf;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
         }
 
-        public TChannel CreateChannelWithOnBehalfOfToken(SecurityToken onBehalfOf, EndpointAddress address)
+        public TChannel CreateChannelWithOnBehalfOfToken(
+            SecurityToken onBehalfOf,
+            EndpointAddress address
+        )
         {
             TChannel channel = this.CreateChannel(address);
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.OnBehalfOf = onBehalfOf;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
         }
 
-        public TChannel CreateChannelWithOnBehalfOfToken(SecurityToken onBehalfOf, EndpointAddress address, Uri via)
+        public TChannel CreateChannelWithOnBehalfOfToken(
+            SecurityToken onBehalfOf,
+            EndpointAddress address,
+            Uri via
+        )
         {
             TChannel channel = this.CreateChannel(address, via);
-            FederatedClientCredentialsParameters parameters = new FederatedClientCredentialsParameters();
+            FederatedClientCredentialsParameters parameters =
+                new FederatedClientCredentialsParameters();
             parameters.OnBehalfOf = onBehalfOf;
             ((IChannel)channel).GetProperty<ChannelParameterCollection>().Add(parameters);
             return channel;
@@ -823,7 +979,9 @@ namespace System.ServiceModel
 
         protected override ServiceEndpoint CreateDescription()
         {
-            ContractDescription contractDescription = this.TypeLoader.LoadContractDescription(this.channelType);
+            ContractDescription contractDescription = this.TypeLoader.LoadContractDescription(
+                this.channelType
+            );
 
             ServiceEndpoint endpoint = new ServiceEndpoint(contractDescription);
             ReflectOnCallbackInstance(endpoint);
@@ -838,7 +996,14 @@ namespace System.ServiceModel
             {
                 if (endpoint.Contract.CallbackContractType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxCallbackTypeCannotBeNull, endpoint.Contract.ContractType.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxCallbackTypeCannotBeNull,
+                                endpoint.Contract.ContractType.FullName
+                            )
+                        )
+                    );
                 }
 
                 this.TypeLoader.AddBehaviorsFromImplementationType(endpoint, callbackType);
@@ -847,7 +1012,14 @@ namespace System.ServiceModel
             {
                 if (endpoint.Contract.CallbackContractType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxCallbackTypeCannotBeNull, endpoint.Contract.ContractType.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxCallbackTypeCannotBeNull,
+                                endpoint.Contract.ContractType.FullName
+                            )
+                        )
+                    );
                 }
 
                 object implementation = this.CallbackInstance.UserObject;
@@ -871,11 +1043,20 @@ namespace System.ServiceModel
         //Static funtions to create channels
         protected static TChannel CreateChannel(String endpointConfigurationName)
         {
-            ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(endpointConfigurationName);
+            ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(
+                endpointConfigurationName
+            );
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1, channelFactory.channelType.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
+                            channelFactory.channelType.Name
+                        )
+                    )
+                );
             }
 
             TChannel channel = channelFactory.CreateChannel();
@@ -885,11 +1066,21 @@ namespace System.ServiceModel
 
         public static TChannel CreateChannel(Binding binding, EndpointAddress endpointAddress)
         {
-            ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(binding, endpointAddress);
+            ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(
+                binding,
+                endpointAddress
+            );
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1, channelFactory.channelType.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
+                            channelFactory.channelType.Name
+                        )
+                    )
+                );
             }
 
             TChannel channel = channelFactory.CreateChannel();
@@ -897,13 +1088,24 @@ namespace System.ServiceModel
             return channel;
         }
 
-        public static TChannel CreateChannel(Binding binding, EndpointAddress endpointAddress, Uri via)
+        public static TChannel CreateChannel(
+            Binding binding,
+            EndpointAddress endpointAddress,
+            Uri via
+        )
         {
             ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(binding);
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1, channelFactory.channelType.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
+                            channelFactory.channelType.Name
+                        )
+                    )
+                );
             }
 
             TChannel channel = channelFactory.CreateChannel(endpointAddress, via);

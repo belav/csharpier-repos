@@ -22,13 +22,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.ModuleInitializers
         [InlineData("private protected")]
         public void DisallowedMethodAccessibility(string keywords)
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
 {
     [ModuleInitializer]
-    " + keywords + @" static void M() { }
+    "
+                + keywords
+                + @" static void M() { }
 }
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
@@ -37,8 +40,13 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8796: Module initializer method 'M' must be accessible at the module level
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M").WithLocation(6, 6)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Theory]
@@ -47,14 +55,17 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [InlineData("protected internal")]
         public void AllowedMethodAccessibility(string keywords)
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
 class C
 {
     [ModuleInitializer]
-    " + keywords + @" static void M() => Console.WriteLine(""C.M"");
+    "
+                + keywords
+                + @" static void M() => Console.WriteLine(""C.M"");
 }
 
 class Program 
@@ -64,9 +75,13 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Theory]
@@ -74,11 +89,14 @@ Program.Main");
         [InlineData("internal")]
         public void AllowedTopLevelTypeAccessibility(string keywords)
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
-" + keywords + @" class C
+"
+                + keywords
+                + @" class C
 {
     [ModuleInitializer]
     public static void M() => Console.WriteLine(""C.M"");
@@ -91,9 +109,13 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Theory]
@@ -102,12 +124,15 @@ Program.Main");
         [InlineData("private protected")]
         public void DisallowedNestedTypeAccessibility(string keywords)
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 public class C
 {
-    " + keywords + @" class Nested
+    "
+                + keywords
+                + @" class Nested
     {
         [ModuleInitializer]
         public static void M() { }
@@ -120,14 +145,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (8,10): error CS8796: Module initializer method 'M' must be accessible at the module level
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M").WithLocation(8, 10)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M")
+                    .WithLocation(8, 10)
+            );
         }
 
         [Fact]
         public void ModuleInitializerOnPrivatePartialMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -160,26 +191,49 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS8814: Module initializer method 'M1' must be accessible at the module level
                 //     [ModuleInitializer] // 1
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M1").WithLocation(7, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M1")
+                    .WithLocation(7, 6),
                 // (10,6): error CS8814: Module initializer method 'M2' must be accessible at the module level
                 //     [ModuleInitializer] // 2
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M2").WithLocation(10, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M2")
+                    .WithLocation(10, 6),
                 // (15,6): error CS8814: Module initializer method 'M3' must be accessible at the module level
                 //     [ModuleInitializer] // 3
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M3").WithLocation(15, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M3")
+                    .WithLocation(15, 6),
                 // (18,6): error CS8814: Module initializer method 'M4' must be accessible at the module level
                 //     [ModuleInitializer] // 4
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M4").WithLocation(18, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M4")
+                    .WithLocation(18, 6),
                 // (20,6): error CS0579: Duplicate 'ModuleInitializer' attribute
                 //     [ModuleInitializer] // 5
-                Diagnostic(ErrorCode.ERR_DuplicateAttribute, "ModuleInitializer").WithArguments("ModuleInitializer").WithLocation(20, 6)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateAttribute, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer")
+                    .WithLocation(20, 6)
+            );
         }
 
         [Fact]
         public void ModuleInitializerOnPrivatePartialMethod_AllowMultiple()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -216,26 +270,52 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS8814: Module initializer method 'M1' must be accessible at the module level
                 //     [ModuleInitializer] // 1
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M1").WithLocation(7, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M1")
+                    .WithLocation(7, 6),
                 // (10,6): error CS8814: Module initializer method 'M2' must be accessible at the module level
                 //     [ModuleInitializer] // 2
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M2").WithLocation(10, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M2")
+                    .WithLocation(10, 6),
                 // (15,6): error CS8814: Module initializer method 'M3' must be accessible at the module level
                 //     [ModuleInitializer] // 3
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M3").WithLocation(15, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M3")
+                    .WithLocation(15, 6),
                 // (18,6): error CS8814: Module initializer method 'M4' must be accessible at the module level
                 //     [ModuleInitializer] // 4
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M4").WithLocation(18, 6),
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M4")
+                    .WithLocation(18, 6),
                 // (20,6): error CS8814: Module initializer method 'M4' must be accessible at the module level
                 //     [ModuleInitializer] // 5
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType, "ModuleInitializer").WithArguments("M4").WithLocation(20, 6)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M4")
+                    .WithLocation(20, 6)
+            );
         }
 
         [Fact]
         public void ModuleInitializerOnPublicPartialMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -266,7 +346,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [Fact]
         public void DuplicateModuleInitializerOnPublicPartialMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -282,16 +363,19 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
 ";
             var compilation = CreateCompilation(source, parseOptions: s_parseOptions);
             compilation.VerifyEmitDiagnostics(
-                    // (9,6): error CS0579: Duplicate 'ModuleInitializer' attribute
-                    //     [ModuleInitializer] // 1
-                    Diagnostic(ErrorCode.ERR_DuplicateAttribute, "ModuleInitializer").WithArguments("ModuleInitializer").WithLocation(9, 6)
-                );
+                // (9,6): error CS0579: Duplicate 'ModuleInitializer' attribute
+                //     [ModuleInitializer] // 1
+                Diagnostic(ErrorCode.ERR_DuplicateAttribute, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer")
+                    .WithLocation(9, 6)
+            );
         }
 
         [Fact]
         public void DuplicateModuleInitializerOnPublicPartialMethod_AllowMultiple()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -326,13 +410,16 @@ namespace System.Runtime.CompilerServices
         [InlineData("protected internal")]
         public void AllowedNestedTypeAccessibility(string keywords)
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
 public class C
 {
-    " + keywords + @" class Nested
+    "
+                + keywords
+                + @" class Nested
     {
         [ModuleInitializer]
         public static void M() => Console.WriteLine(""C.M"");
@@ -346,15 +433,20 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void ImplicitPublicInterfaceMethodAccessibility()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -375,16 +467,22 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 source,
                 parseOptions: s_parseOptions,
                 targetFramework: TargetFramework.NetCoreApp,
-                expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr ? @"
+                expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr
+                    ? @"
 I.M
-Program.Main" : null,
-                verify: ExecutionConditionUtil.IsMonoOrCoreClr ? Verification.Passes : Verification.Skipped);
+Program.Main"
+                    : null,
+                verify: ExecutionConditionUtil.IsMonoOrCoreClr
+                    ? Verification.Passes
+                    : Verification.Skipped
+            );
         }
 
         [Fact]
         public void ImplicitPublicInterfaceNestedTypeAccessibility()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -404,9 +502,13 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
     }
 }

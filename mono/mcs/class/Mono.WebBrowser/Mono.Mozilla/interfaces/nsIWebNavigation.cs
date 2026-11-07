@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,87 +26,88 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("F5D9E7B0-D930-11d3-B057-00A024FFC08C")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIWebNavigation
+    {
+        #region nsIWebNavigation
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCanGoBack(out bool ret);
 
-	[Guid ("F5D9E7B0-D930-11d3-B057-00A024FFC08C")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIWebNavigation {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCanGoForward(out bool ret);
 
-#region nsIWebNavigation
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCanGoBack ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int goBack();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCanGoForward ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int goForward();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int goBack ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int gotoIndex(int index);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int goForward ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int loadURI(
+            [MarshalAs(UnmanagedType.LPWStr)] string aURI,
+            uint aLoadFlags,
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aReferrer,
+            [MarshalAs(UnmanagedType.Interface)] nsIInputStream aPostData,
+            [MarshalAs(UnmanagedType.Interface)] nsIInputStream aHeaders
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int gotoIndex (
-				   int index);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int reload(uint aReloadFlags);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int loadURI (
-				[MarshalAs(UnmanagedType.LPWStr)]   string aURI,
-				   uint aLoadFlags,
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aReferrer,
-				[MarshalAs (UnmanagedType.Interface)]   nsIInputStream aPostData,
-				[MarshalAs (UnmanagedType.Interface)]   nsIInputStream aHeaders);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int stop(uint aStopFlags);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int reload (
-				   uint aReloadFlags);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDocument([MarshalAs(UnmanagedType.Interface)] out nsIDOMDocument ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int stop (
-				   uint aStopFlags);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCurrentURI([MarshalAs(UnmanagedType.Interface)] out nsIURI ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocument ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getReferringURI([MarshalAs(UnmanagedType.Interface)] out nsIURI ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCurrentURI ([MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getSessionHistory([MarshalAs(UnmanagedType.Interface)] out nsISHistory ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getReferringURI ([MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setSessionHistory([MarshalAs(UnmanagedType.Interface)] nsISHistory value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getSessionHistory ([MarshalAs (UnmanagedType.Interface)]  out nsISHistory ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setSessionHistory ([MarshalAs (UnmanagedType.Interface)]  nsISHistory value);
-
-#endregion
-	}
-
-
-	internal class nsWebNavigation {
-		public static nsIWebNavigation GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebNavigation obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIWebNavigation).GUID, obj);
-			return o as nsIWebNavigation;
-		}
-	}
+    internal class nsWebNavigation
+    {
+        public static nsIWebNavigation GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIWebNavigation obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIWebNavigation).GUID, obj);
+            return o as nsIWebNavigation;
+        }
+    }
 }

@@ -33,7 +33,10 @@ namespace System.Globalization.Tests
         {
             using (new ThreadCultureChange(new CultureInfoSubclassOverridesGetFormat("en-US")))
             {
-                Assert.Same(CultureInfoSubclassOverridesGetFormat.CustomFormat, NumberFormatInfo.CurrentInfo);
+                Assert.Same(
+                    CultureInfoSubclassOverridesGetFormat.CustomFormat,
+                    NumberFormatInfo.CurrentInfo
+                );
             }
         }
 
@@ -42,24 +45,31 @@ namespace System.Globalization.Tests
         {
             using (new ThreadCultureChange(new CultureInfoSubclassOverridesNumberFormat("en-US")))
             {
-                Assert.Same(CultureInfoSubclassOverridesNumberFormat.CustomFormat, NumberFormatInfo.CurrentInfo);
+                Assert.Same(
+                    CultureInfoSubclassOverridesNumberFormat.CustomFormat,
+                    NumberFormatInfo.CurrentInfo
+                );
             }
         }
 
         private class CultureInfoSubclassOverridesGetFormat : CultureInfo
         {
-            public CultureInfoSubclassOverridesGetFormat(string name): base(name) { }
+            public CultureInfoSubclassOverridesGetFormat(string name)
+                : base(name) { }
 
-            public static NumberFormatInfo CustomFormat { get; } = CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
+            public static NumberFormatInfo CustomFormat { get; } =
+                CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
 
             public override object GetFormat(Type formatType) => CustomFormat;
         }
 
         private class CultureInfoSubclassOverridesNumberFormat : CultureInfo
         {
-            public CultureInfoSubclassOverridesNumberFormat(string name): base(name) { }
+            public CultureInfoSubclassOverridesNumberFormat(string name)
+                : base(name) { }
 
-            public static NumberFormatInfo CustomFormat { get; } = CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
+            public static NumberFormatInfo CustomFormat { get; } =
+                CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
 
             public override NumberFormatInfo NumberFormat
             {

@@ -52,7 +52,6 @@ namespace System.Xml.XmlSchemaTests
                     _output.WriteLine("InnerException Message:" + se.InnerException.Message + "\n");
                 }
                 else
-
                     _output.WriteLine("Inner Exception is NULL\n");
             }
         }
@@ -63,12 +62,15 @@ namespace System.Xml.XmlSchemaTests
 
             settings.Schemas = new XmlSchemaSet();
             settings.Schemas.CompilationSettings.EnableUpaCheck = UpaCheck;
-            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
+            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(
+                ValidationCallback
+            );
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                        XmlSchemaValidationFlags.ProcessInlineSchema |
-                                        XmlSchemaValidationFlags.ReportValidationWarnings;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema
+                | XmlSchemaValidationFlags.ReportValidationWarnings;
 
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             XmlReader vr = XmlReader.Create(xmlFile, settings);
@@ -147,7 +149,8 @@ namespace System.Xml.XmlSchemaTests
             xss.Add(null, Path.Combine(testData, xsdFile));
 
             XmlReader vr = CreateReader(Path.Combine(testData, xmlFile), xss, false);
-            while (vr.Read()) ;
+            while (vr.Read())
+                ;
 
             CError.Compare(errorCount, expectedErrorCount, "Error Count mismatch");
 
@@ -155,7 +158,11 @@ namespace System.Xml.XmlSchemaTests
             {
                 for (int i = 0; i < errorCount; i++)
                 {
-                    CError.Compare(errorLineNumbers[i], expectedErrorLineNumbers[i], "Error Line Number is different");
+                    CError.Compare(
+                        errorLineNumbers[i],
+                        expectedErrorLineNumbers[i],
+                        "Error Line Number is different"
+                    );
                 }
             }
 

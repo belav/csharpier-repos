@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// <remarks>
         /// Test helper.
         /// </remarks>
-        internal static void GetAllScopes(this ISymUnmanagedMethod method, ArrayBuilder<ISymUnmanagedScope> builder)
+        internal static void GetAllScopes(
+            this ISymUnmanagedMethod method,
+            ArrayBuilder<ISymUnmanagedScope> builder
+        )
         {
             var unused = ArrayBuilder<ISymUnmanagedScope>.GetInstance();
             GetAllScopes(method, builder, unused, offset: -1, isScopeEndInclusive: false);
@@ -26,9 +29,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ISymUnmanagedScope> allScopes,
             ArrayBuilder<ISymUnmanagedScope> containingScopes,
             int offset,
-            bool isScopeEndInclusive)
+            bool isScopeEndInclusive
+        )
         {
-            GetAllScopes(method.GetRootScope(), allScopes, containingScopes, offset, isScopeEndInclusive);
+            GetAllScopes(
+                method.GetRootScope(),
+                allScopes,
+                containingScopes,
+                offset,
+                isScopeEndInclusive
+            );
         }
 
         private static void GetAllScopes(
@@ -36,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ISymUnmanagedScope> allScopes,
             ArrayBuilder<ISymUnmanagedScope> containingScopes,
             int offset,
-            bool isScopeEndInclusive)
+            bool isScopeEndInclusive
+        )
         {
             var stack = ArrayBuilder<ISymUnmanagedScope>.GetInstance();
             stack.Push(root);
@@ -69,7 +80,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             int endOffset = scope.GetEndOffset();
 
-            // In PDBs emitted by VB the end offset is inclusive, 
+            // In PDBs emitted by VB the end offset is inclusive,
             // in PDBs emitted by C# the end offset is exclusive.
             return isEndInclusive ? offset <= endOffset : offset < endOffset;
         }
@@ -87,10 +98,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return (type.SpecialType, symValue) switch
             {
                 (SpecialType.System_Boolean, short shortVal) => ConstantValue.Create(shortVal != 0),
-                (SpecialType.System_Byte, short shortVal) when unchecked((byte)shortVal) == shortVal => ConstantValue.Create((byte)shortVal),
-                (SpecialType.System_SByte, short shortVal) when unchecked((sbyte)shortVal) == shortVal => ConstantValue.Create((sbyte)shortVal),
+                (SpecialType.System_Byte, short shortVal)
+                    when unchecked((byte)shortVal) == shortVal => ConstantValue.Create(
+                    (byte)shortVal
+                ),
+                (SpecialType.System_SByte, short shortVal)
+                    when unchecked((sbyte)shortVal) == shortVal => ConstantValue.Create(
+                    (sbyte)shortVal
+                ),
                 (SpecialType.System_Int16, short shortVal) => ConstantValue.Create(shortVal),
-                (SpecialType.System_Char, ushort ushortVal) => ConstantValue.Create((char)ushortVal),
+                (SpecialType.System_Char, ushort ushortVal) => ConstantValue.Create(
+                    (char)ushortVal
+                ),
                 (SpecialType.System_UInt16, ushort ushortVal) => ConstantValue.Create(ushortVal),
                 (SpecialType.System_Int32, int intVal) => ConstantValue.Create(intVal),
                 (SpecialType.System_UInt32, uint uintVal) => ConstantValue.Create(uintVal),
@@ -102,12 +121,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 (SpecialType.System_String, null) => ConstantValue.Create(string.Empty),
                 (SpecialType.System_String, string str) => ConstantValue.Create(str),
                 (SpecialType.System_Object, 0) => ConstantValue.Null,
-                (SpecialType.System_Decimal, decimal decimalValue) => ConstantValue.Create(decimalValue),
-                (SpecialType.System_DateTime, double doubleVal) => ConstantValue.Create(DateTimeUtilities.ToDateTime(doubleVal)),
+                (SpecialType.System_Decimal, decimal decimalValue) => ConstantValue.Create(
+                    decimalValue
+                ),
+                (SpecialType.System_DateTime, double doubleVal) => ConstantValue.Create(
+                    DateTimeUtilities.ToDateTime(doubleVal)
+                ),
                 (SpecialType.None, 0) when type.IsReferenceType => ConstantValue.Null,
                 _ => ConstantValue.Bad,
             };
         }
     }
 }
-

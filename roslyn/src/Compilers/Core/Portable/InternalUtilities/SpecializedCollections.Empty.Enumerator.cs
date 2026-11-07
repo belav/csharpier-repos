@@ -15,9 +15,7 @@ namespace Roslyn.Utilities
             {
                 public static readonly IEnumerator Instance = new Enumerator();
 
-                protected Enumerator()
-                {
-                }
+                protected Enumerator() { }
 
                 public object? Current => throw new InvalidOperationException();
 

@@ -51,7 +51,11 @@ namespace System
 
         [RequiresUnreferencedCode("The type might be removed")]
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
-        public static Type? GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver)
+        public static Type? GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return GetType(typeName, assemblyResolver, typeResolver, false, false, ref stackMark);
@@ -59,24 +63,63 @@ namespace System
 
         [RequiresUnreferencedCode("The type might be removed")]
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
-        public static Type? GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError)
+        public static Type? GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return GetType(typeName, assemblyResolver, typeResolver, throwOnError, false, ref stackMark);
+            return GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                false,
+                ref stackMark
+            );
         }
 
         [RequiresUnreferencedCode("The type might be removed")]
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
-        public static Type? GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError, bool ignoreCase)
+        public static Type? GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            return GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
         }
 
         [RequiresUnreferencedCode("The type might be removed")]
-        private static Type? GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError, bool ignoreCase, ref StackCrawlMark stackMark)
+        private static Type? GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        )
         {
-            return TypeNameParser.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            return TypeNameParser.GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
         }
 
         public static Type? GetTypeFromHandle(RuntimeTypeHandle handle)
@@ -100,10 +143,7 @@ namespace System
 
         internal virtual bool IsUserType
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal virtual MethodInfo GetMethod(MethodInfo fromNoninstanciated)

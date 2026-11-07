@@ -23,10 +23,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
 using System.Collections;
 using System.ComponentModel;
-
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -73,6 +72,7 @@ namespace System.Data.Tests
             Assert.Equal("NewTable1", ds.Tables[0].TableName);
             Assert.Equal("NewTable2", ds.Tables[1].TableName);
         }
+
         [Fact]
         public void AddRange_NullValue()
         {
@@ -123,11 +123,17 @@ namespace System.Data.Tests
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
 
-            ds.Relations.Add("rel", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"], false);
+            ds.Relations.Add(
+                "rel",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"],
+                false
+            );
 
             Assert.False(ds.Tables.CanRemove(ds.Tables[0]));
             Assert.False(ds.Tables.CanRemove(ds.Tables[1]));
         }
+
         [Fact]
         public void CanRemove_PartOfConstraint()
         {
@@ -141,7 +147,9 @@ namespace System.Data.Tests
         {
             _counter = 0;
             var ds = new DataSet();
-            ds.Tables.CollectionChanged += new CollectionChangeEventHandler(Tables_CollectionChanged);
+            ds.Tables.CollectionChanged += new CollectionChangeEventHandler(
+                Tables_CollectionChanged
+            );
             ds.Tables.Add();
             ds.Tables.Add();
             Assert.Equal(2, _counter);
@@ -161,7 +169,9 @@ namespace System.Data.Tests
         {
             _counter = 0;
             var ds = new DataSet();
-            ds.Tables.CollectionChanging += new CollectionChangeEventHandler(Tables_CollectionChanging);
+            ds.Tables.CollectionChanging += new CollectionChangeEventHandler(
+                Tables_CollectionChanging
+            );
             ds.Tables.Add();
             ds.Tables.Add();
             Assert.Equal(2, _counter);
@@ -303,9 +313,9 @@ namespace System.Data.Tests
         {
             var ds = new DataSet();
             Assert.Throws<ArgumentNullException>(() =>
-           {
-               ds.Tables.Add((DataTable)null);
-           });
+            {
+                ds.Tables.Add((DataTable)null);
+            });
         }
 
         [Fact]

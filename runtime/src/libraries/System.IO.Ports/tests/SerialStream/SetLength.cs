@@ -16,13 +16,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SetLength_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
 
-                Debug.WriteLine("Verifying SetLength property throws exception After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying SetLength property throws exception After Open() then Close()"
+                );
 
                 Assert.Throws<NotSupportedException>(() => serialStream.SetLength(DEFAULT_VALUE));
             }
@@ -31,13 +37,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SetLength_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying SetLength property throws exception After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying SetLength property throws exception After Open() then BaseStream.Close()"
+                );
 
                 Assert.Throws<NotSupportedException>(() => serialStream.SetLength(DEFAULT_VALUE));
             }
@@ -46,10 +58,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SetLength_AfterOpen()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
-                Debug.WriteLine("Verifying SetLength method throws exception after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying SetLength method throws exception after a call to Open()"
+                );
 
                 Assert.Throws<NotSupportedException>(() => com.BaseStream.SetLength(DEFAULT_VALUE));
             }
@@ -58,11 +76,17 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SetLength_BadValue()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
 
-                Debug.WriteLine("Verifying SetLength method throws exception with a bad value after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying SetLength method throws exception with a bad value after a call to Open()"
+                );
 
                 Assert.Throws<NotSupportedException>(() => com.BaseStream.SetLength(BAD_VALUE));
             }

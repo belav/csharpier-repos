@@ -460,9 +460,8 @@ public class GlobbingUrlBuilderTest
 
         // Assert
         Assert.Collection(includePatterns, pattern => Assert.Equal($"{prefix}**/*.css", pattern));
-        Assert.Collection(
-            excludePatterns,
-            pattern => Assert.Equal($"{prefix}**/*.min.css", pattern)
+        Assert.Collection(excludePatterns, pattern =>
+            Assert.Equal($"{prefix}**/*.min.css", pattern)
         );
     }
 

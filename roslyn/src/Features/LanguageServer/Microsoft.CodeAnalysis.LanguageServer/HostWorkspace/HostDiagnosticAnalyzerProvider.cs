@@ -7,9 +7,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Workspaces.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace;
+
 internal class HostDiagnosticAnalyzerProvider : IHostDiagnosticAnalyzerProvider
 {
-    public ImmutableArray<(AnalyzerFileReference reference, string extensionId)> GetAnalyzerReferencesInExtensions()
+    public ImmutableArray<(
+        AnalyzerFileReference reference,
+        string extensionId
+    )> GetAnalyzerReferencesInExtensions()
     {
         // Right now we don't expose any way for the extensions in VS Code to provide analyzer references.
         return ImmutableArray<(AnalyzerFileReference reference, string extensionId)>.Empty;

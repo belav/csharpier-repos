@@ -20,16 +20,19 @@ using Roslyn.Utilities;
 namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
 {
     [ExportWorkspaceService(typeof(IProjectManagementService), ServiceLayer.Host), Shared]
-    internal class VisualStudioProjectManagementService : ForegroundThreadAffinitizedObject, IProjectManagementService
+    internal class VisualStudioProjectManagementService
+        : ForegroundThreadAffinitizedObject,
+            IProjectManagementService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioProjectManagementService(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+            : base(threadingContext) { }
 
-        public string GetDefaultNamespace(Microsoft.CodeAnalysis.Project project, Workspace workspace)
+        public string GetDefaultNamespace(
+            Microsoft.CodeAnalysis.Project project,
+            Workspace workspace
+        )
         {
             this.AssertIsForeground();
 
@@ -42,12 +45,14 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
 
             if (workspace is VisualStudioWorkspaceImpl vsWorkspace)
             {
-                vsWorkspace.GetProjectData(project.Id,
-                    out _, out var envDTEProject);
+                vsWorkspace.GetProjectData(project.Id, out _, out var envDTEProject);
 
                 try
                 {
-                    defaultNamespace = (string)envDTEProject.ProjectItems.ContainingProject.Properties.Item("DefaultNamespace").Value; // Do not Localize
+                    defaultNamespace = (string)
+                        envDTEProject
+                            .ProjectItems.ContainingProject.Properties.Item("DefaultNamespace")
+                            .Value; // Do not Localize
                 }
                 catch (ArgumentException)
                 {
@@ -64,15 +69,17 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
 
             if (workspace is VisualStudioWorkspaceImpl vsWorkspace)
             {
-                vsWorkspace.GetProjectData(projectId,
-                    out var hierarchy, out var envDTEProject);
+                vsWorkspace.GetProjectData(projectId, out var hierarchy, out var envDTEProject);
 
                 var projectItems = envDTEProject.ProjectItems;
 
                 var projectItemsStack = new Stack<Tuple<ProjectItem, string>>();
 
                 // Populate the stack
-                projectItems.OfType<ProjectItem>().Where(n => n.IsFolder()).Do(n => projectItemsStack.Push(Tuple.Create(n, "\\")));
+                projectItems
+                    .OfType<ProjectItem>()
+                    .Where(n => n.IsFolder())
+                    .Do(n => projectItemsStack.Push(Tuple.Create(n, "\\")));
                 while (projectItemsStack.Count != 0)
                 {
                     var projectItemTuple = projectItemsStack.Pop();
@@ -82,7 +89,10 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
                     var folderPath = currentFolderPath + projectItem.Name + "\\";
 
                     folders.Add(folderPath);
-                    projectItem.ProjectItems.OfType<ProjectItem>().Where(n => n.IsFolder()).Do(n => projectItemsStack.Push(Tuple.Create(n, folderPath)));
+                    projectItem
+                        .ProjectItems.OfType<ProjectItem>()
+                        .Where(n => n.IsFolder())
+                        .Do(n => projectItemsStack.Push(Tuple.Create(n, folderPath)));
                 }
             }
 

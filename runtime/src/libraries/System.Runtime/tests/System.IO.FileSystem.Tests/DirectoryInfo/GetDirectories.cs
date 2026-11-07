@@ -18,12 +18,18 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string path)
         {
-            return ((new DirectoryInfo(path).GetDirectories("*").Select(x => x.FullName)).ToArray());
+            return (
+                (new DirectoryInfo(path).GetDirectories("*").Select(x => x.FullName)).ToArray()
+            );
         }
 
         public override string[] GetEntries(string path, string searchPattern)
         {
-            return ((new DirectoryInfo(path).GetDirectories(searchPattern).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path).GetDirectories(searchPattern).Select(x => x.FullName)
+                ).ToArray()
+            );
         }
     }
 
@@ -31,17 +37,35 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string path)
         {
-            return ((new DirectoryInfo(path).GetDirectories("*", SearchOption.TopDirectoryOnly).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetDirectories("*", SearchOption.TopDirectoryOnly)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
 
         public override string[] GetEntries(string path, string searchPattern)
         {
-            return ((new DirectoryInfo(path).GetDirectories(searchPattern, SearchOption.TopDirectoryOnly).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetDirectories(searchPattern, SearchOption.TopDirectoryOnly)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
 
         public override string[] GetEntries(string path, string searchPattern, SearchOption option)
         {
-            return ((new DirectoryInfo(path).GetDirectories(searchPattern, option).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetDirectories(searchPattern, option)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
     }
 }

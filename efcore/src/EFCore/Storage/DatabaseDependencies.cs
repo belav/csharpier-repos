@@ -48,7 +48,8 @@ public sealed record DatabaseDependencies
     public DatabaseDependencies(
         IQueryCompilationContextFactory queryCompilationContextFactory,
         IUpdateAdapterFactory updateAdapterFactory,
-        IDiagnosticsLogger<DbLoggerCategory.Update> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Update> logger
+    )
     {
         QueryCompilationContextFactory = queryCompilationContextFactory;
         UpdateAdapterFactory = updateAdapterFactory;

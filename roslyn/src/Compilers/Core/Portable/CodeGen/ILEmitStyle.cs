@@ -7,7 +7,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
     internal enum ILEmitStyle : byte
     {
         // no optimizations
-        // add additional debug specific emit 
+        // add additional debug specific emit
         // like nops for sequence points mapping to no IL
         Debug = 0,
 

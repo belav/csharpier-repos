@@ -23,20 +23,37 @@ namespace Microsoft.CodeAnalysis.TaskList
 
         protected abstract string GetNormalizedText(string message);
         protected abstract int GetCommentStartingIndex(string message);
-        protected abstract void AppendTaskListItems(ImmutableArray<TaskListItemDescriptor> descriptors, SyntacticDocument document, SyntaxTrivia trivia, ArrayBuilder<TaskListItem> items);
+        protected abstract void AppendTaskListItems(
+            ImmutableArray<TaskListItemDescriptor> descriptors,
+            SyntacticDocument document,
+            SyntaxTrivia trivia,
+            ArrayBuilder<TaskListItem> items
+        );
 
         public async Task<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(
             Document document,
             ImmutableArray<TaskListItemDescriptor> descriptors,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(document.Project, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(document.Project, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
-                var result = await client.TryInvokeAsync<IRemoteTaskListService, ImmutableArray<TaskListItem>>(
-                    document.Project,
-                    (service, checksum, cancellationToken) => service.GetTaskListItemsAsync(checksum, document.Id, descriptors, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var result = await client
+                    .TryInvokeAsync<IRemoteTaskListService, ImmutableArray<TaskListItem>>(
+                        document.Project,
+                        (service, checksum, cancellationToken) =>
+                            service.GetTaskListItemsAsync(
+                                checksum,
+                                document.Id,
+                                descriptors,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!result.HasValue)
                     return ImmutableArray<TaskListItem>.Empty;
@@ -44,13 +61,15 @@ namespace Microsoft.CodeAnalysis.TaskList
                 return result.Value;
             }
 
-            return await GetTaskListItemsInProcessAsync(document, descriptors, cancellationToken).ConfigureAwait(false);
+            return await GetTaskListItemsInProcessAsync(document, descriptors, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private async Task<ImmutableArray<TaskListItem>> GetTaskListItemsInProcessAsync(
             Document document,
             ImmutableArray<TaskListItemDescriptor> descriptors,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (descriptors.IsEmpty)
                 return ImmutableArray<TaskListItem>.Empty;
@@ -58,7 +77,9 @@ namespace Microsoft.CodeAnalysis.TaskList
             cancellationToken.ThrowIfCancellationRequested();
 
             // strongly hold onto text and tree
-            var syntaxDoc = await SyntacticDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            var syntaxDoc = await SyntacticDocument
+                .CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             // reuse list
             using var _ = ArrayBuilder<TaskListItem>.GetInstance(out var items);
@@ -76,14 +97,18 @@ namespace Microsoft.CodeAnalysis.TaskList
             return items.ToImmutable();
         }
 
-        private bool ContainsComments(SyntaxTrivia trivia)
-            => PreprocessorHasComment(trivia) || IsSingleLineComment(trivia) || IsMultilineComment(trivia);
+        private bool ContainsComments(SyntaxTrivia trivia) =>
+            PreprocessorHasComment(trivia)
+            || IsSingleLineComment(trivia)
+            || IsMultilineComment(trivia);
 
         protected void AppendTaskListItemsOnSingleLine(
             ImmutableArray<TaskListItemDescriptor> descriptors,
             SyntacticDocument document,
-            string message, int start,
-            ArrayBuilder<TaskListItem> items)
+            string message,
+            int start,
+            ArrayBuilder<TaskListItem> items
+        )
         {
             var index = GetCommentStartingIndex(message);
             if (index >= message.Length)
@@ -93,14 +118,24 @@ namespace Microsoft.CodeAnalysis.TaskList
             foreach (var commentDescriptor in descriptors)
             {
                 var token = commentDescriptor.Text;
-                if (string.Compare(
-                        normalized, index, token, indexB: 0,
-                        length: token.Length, comparisonType: StringComparison.OrdinalIgnoreCase) != 0)
+                if (
+                    string.Compare(
+                        normalized,
+                        index,
+                        token,
+                        indexB: 0,
+                        length: token.Length,
+                        comparisonType: StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                )
                 {
                     continue;
                 }
 
-                if (message.Length > index + token.Length && IsIdentifierCharacter(message[index + token.Length]))
+                if (
+                    message.Length > index + token.Length
+                    && IsIdentifierCharacter(message[index + token.Length])
+                )
                     // they wrote something like:
                     // todoboo
                     // instead of
@@ -113,16 +148,25 @@ namespace Microsoft.CodeAnalysis.TaskList
                 // Go through SyntaxTree so that any `#line` remapping is picked up
                 var location = document.SyntaxTree.GetLocation(new TextSpan(position, 0));
 
-                items.Add(new TaskListItem(
-                    commentDescriptor.Priority, trimmedMessage, document.Document.Id, location.GetLineSpan(), location.GetMappedLineSpan()));
+                items.Add(
+                    new TaskListItem(
+                        commentDescriptor.Priority,
+                        trimmedMessage,
+                        document.Document.Id,
+                        location.GetLineSpan(),
+                        location.GetMappedLineSpan()
+                    )
+                );
             }
         }
 
         protected void ProcessMultilineComment(
             ImmutableArray<TaskListItemDescriptor> commentDescriptors,
             SyntacticDocument document,
-            SyntaxTrivia trivia, int postfixLength,
-            ArrayBuilder<TaskListItem> items)
+            SyntaxTrivia trivia,
+            int postfixLength,
+            ArrayBuilder<TaskListItem> items
+        )
         {
             // this is okay since we know it is already alive
             var text = document.Text;
@@ -136,21 +180,46 @@ namespace Microsoft.CodeAnalysis.TaskList
             // single line multiline comments
             if (startLine.LineNumber == endLine.LineNumber)
             {
-                var message = postfixLength == 0 ? fullString : fullString[..(fullSpan.Length - postfixLength)];
-                AppendTaskListItemsOnSingleLine(commentDescriptors, document, message, fullSpan.Start, items);
+                var message =
+                    postfixLength == 0
+                        ? fullString
+                        : fullString[..(fullSpan.Length - postfixLength)];
+                AppendTaskListItemsOnSingleLine(
+                    commentDescriptors,
+                    document,
+                    message,
+                    fullSpan.Start,
+                    items
+                );
                 return;
             }
 
-            // multiline 
+            // multiline
             var startMessage = text.ToString(TextSpan.FromBounds(fullSpan.Start, startLine.End));
-            AppendTaskListItemsOnSingleLine(commentDescriptors, document, startMessage, fullSpan.Start, items);
+            AppendTaskListItemsOnSingleLine(
+                commentDescriptors,
+                document,
+                startMessage,
+                fullSpan.Start,
+                items
+            );
 
-            for (var lineNumber = startLine.LineNumber + 1; lineNumber < endLine.LineNumber; lineNumber++)
+            for (
+                var lineNumber = startLine.LineNumber + 1;
+                lineNumber < endLine.LineNumber;
+                lineNumber++
+            )
             {
                 var line = text.Lines[lineNumber];
                 var message = line.ToString();
 
-                AppendTaskListItemsOnSingleLine(commentDescriptors, document, message, line.Start, items);
+                AppendTaskListItemsOnSingleLine(
+                    commentDescriptors,
+                    document,
+                    message,
+                    line.Start,
+                    items
+                );
             }
 
             var length = fullSpan.End - endLine.Start;
@@ -158,7 +227,13 @@ namespace Microsoft.CodeAnalysis.TaskList
                 length -= postfixLength;
 
             var endMessage = text.ToString(new TextSpan(endLine.Start, length));
-            AppendTaskListItemsOnSingleLine(commentDescriptors, document, endMessage, endLine.Start, items);
+            AppendTaskListItemsOnSingleLine(
+                commentDescriptors,
+                document,
+                endMessage,
+                endLine.Start,
+                items
+            );
         }
     }
 }

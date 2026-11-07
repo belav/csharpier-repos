@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     this.SwitchSections,
                     this.DefaultLabel?.Label ?? this.BreakLabel,
                     BindingDiagnosticBag.Discarded,
-                    forLowering: true);
+                    forLowering: true
+                );
                 Debug.Assert(!decisionDag.ContainsAnySynthesizedNodes());
             }
 

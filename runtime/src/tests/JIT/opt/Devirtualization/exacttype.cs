@@ -5,16 +5,30 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class Base 
+public class Base
 {
-    public virtual void Foo() { Console.WriteLine("Base:Foo"); }
-    public virtual void Bar() { Console.WriteLine("Base:Bar"); }
+    public virtual void Foo()
+    {
+        Console.WriteLine("Base:Foo");
+    }
+
+    public virtual void Bar()
+    {
+        Console.WriteLine("Base:Bar");
+    }
 }
 
 public class Derived : Base
 {
-    public override sealed void Foo() { Console.WriteLine("Derived:Foo"); }
-    public override void Bar() { Console.WriteLine("Derived:Bar"); }
+    public sealed override void Foo()
+    {
+        Console.WriteLine("Derived:Foo");
+    }
+
+    public override void Bar()
+    {
+        Console.WriteLine("Derived:Bar");
+    }
 }
 
 // The jit should to be able to devirtualize all calls to Bar since the
@@ -64,7 +78,3 @@ public class Test_exacttype
         new Derived().Bar();
     }
 }
-
-
-        
-    

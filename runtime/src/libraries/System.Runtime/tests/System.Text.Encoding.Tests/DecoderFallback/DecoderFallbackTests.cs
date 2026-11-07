@@ -12,7 +12,8 @@ namespace System.Text.Tests
         {
             public override int MaxCharCount => 0;
 
-            public override DecoderFallbackBuffer CreateFallbackBuffer() => new Utf8DecoderFallbackBuffer();
+            public override DecoderFallbackBuffer CreateFallbackBuffer() =>
+                new Utf8DecoderFallbackBuffer();
         }
 
         private class Utf8DecoderFallbackBuffer : DecoderFallbackBuffer
@@ -22,7 +23,9 @@ namespace System.Text.Tests
             public override bool Fallback(byte[] bytesUnknown, int index)
             {
                 if (index < 0)
-                    throw new DecoderFallbackException("Encountered a negative index during Utf8 decoding fallback ");
+                    throw new DecoderFallbackException(
+                        "Encountered a negative index during Utf8 decoding fallback "
+                    );
 
                 return false;
             }
@@ -37,7 +40,7 @@ namespace System.Text.Tests
         {
             // This test case ensuring when we fallback, we'll never encounter a negative index in
             // Utf8DecoderFallbackBuffer.Fallback
-            var e = (Encoding) Encoding.UTF8.Clone();
+            var e = (Encoding)Encoding.UTF8.Clone();
             e.DecoderFallback = new Utf8DecoderFallBack();
 
             // Assert.NoThrow

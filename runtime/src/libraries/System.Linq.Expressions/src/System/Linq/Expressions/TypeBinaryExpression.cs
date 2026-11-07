@@ -14,7 +14,11 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(TypeBinaryExpressionProxy))]
     public sealed class TypeBinaryExpression : Expression
     {
-        internal TypeBinaryExpression(Expression expression, Type typeOperand, ExpressionType nodeType)
+        internal TypeBinaryExpression(
+            Expression expression,
+            Type typeOperand,
+            ExpressionType nodeType
+        )
         {
             Expression = expression;
             TypeOperand = typeOperand;
@@ -63,18 +67,27 @@ namespace System.Linq.Expressions
                     }
                     else
                     {
-                        return Expression.NotEqual(Expression, Expression.Constant(null, Expression.Type));
+                        return Expression.NotEqual(
+                            Expression,
+                            Expression.Constant(null, Expression.Type)
+                        );
                     }
                 }
                 else
                 {
                     // For other value types (including Void), we can
                     // determine the result now
-                    return Expression.Block(Expression, Utils.Constant(cType == TypeOperand.GetNonNullableType()));
+                    return Expression.Block(
+                        Expression,
+                        Utils.Constant(cType == TypeOperand.GetNonNullableType())
+                    );
                 }
             }
 
-            Debug.Assert(TypeUtils.AreReferenceAssignable(typeof(object), Expression.Type), "Expecting reference types only after this point.");
+            Debug.Assert(
+                TypeUtils.AreReferenceAssignable(typeof(object), Expression.Type),
+                "Expecting reference types only after this point."
+            );
 
             // Can check the value right now for constants.
             if (Expression.NodeType == ExpressionType.Constant)
@@ -116,10 +129,7 @@ namespace System.Linq.Expressions
                 ParameterExpression temp = Expression.Parameter(typeof(Type));
                 getType = Expression.Block(
                     new TrueReadOnlyCollection<ParameterExpression>(temp),
-                    new TrueReadOnlyCollection<Expression>(
-                        Expression.Assign(temp, getType),
-                        temp
-                    )
+                    new TrueReadOnlyCollection<Expression>(Expression.Assign(temp, getType), temp)
                 );
             }
 
@@ -192,7 +202,8 @@ namespace System.Linq.Expressions
         {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             ArgumentNullException.ThrowIfNull(type);
-            if (type.IsByRef) throw Error.TypeMustNotBeByRef(nameof(type));
+            if (type.IsByRef)
+                throw Error.TypeMustNotBeByRef(nameof(type));
 
             return new TypeBinaryExpression(expression, type, ExpressionType.TypeIs);
         }
@@ -207,7 +218,8 @@ namespace System.Linq.Expressions
         {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             ArgumentNullException.ThrowIfNull(type);
-            if (type.IsByRef) throw Error.TypeMustNotBeByRef(nameof(type));
+            if (type.IsByRef)
+                throw Error.TypeMustNotBeByRef(nameof(type));
 
             return new TypeBinaryExpression(expression, type, ExpressionType.TypeEqual);
         }

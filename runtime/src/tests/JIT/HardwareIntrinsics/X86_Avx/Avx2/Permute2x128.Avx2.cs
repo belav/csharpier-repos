@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Permute2x128.Int32.2"] = Permute2x128Int322,
                 ["Permute2x128.UInt32.2"] = Permute2x128UInt322,
                 ["Permute2x128.Int64.2"] = Permute2x128Int642,

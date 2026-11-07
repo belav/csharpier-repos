@@ -9,19 +9,18 @@
 
 using System;
 using System.CodeDom;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Data;
 using System.Data.Common.Utils;
-using System.Data.EntityModel.SchemaObjectModel;
-using System.Globalization;
-using System.Data.Entity.Design.Common;
 using System.Data.Entity.Design;
+using System.Data.Entity.Design.Common;
+using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
-using System.Reflection;
-using System.Xml;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -31,7 +30,10 @@ namespace System.Data.EntityModel.Emitters
     internal static class CommentEmitter
     {
         #region Static Fields
-        private static readonly Regex LeadingBlanks = new Regex(@"^(?<LeadingBlanks>\s{1,})\S", RegexOptions.Singleline | RegexOptions.Compiled);
+        private static readonly Regex LeadingBlanks = new Regex(
+            @"^(?<LeadingBlanks>\s{1,})\S",
+            RegexOptions.Singleline | RegexOptions.Compiled
+        );
         #endregion
 
         #region Public Methods
@@ -41,14 +43,20 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="element">the element whose documentation is to be displayed</param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
-        public static void EmitSummaryComments(MetadataItem item, CodeCommentStatementCollection commentCollection)
+        public static void EmitSummaryComments(
+            MetadataItem item,
+            CodeCommentStatementCollection commentCollection
+        )
         {
             Debug.Assert(item != null, "item parameter is null");
             Debug.Assert(commentCollection != null, "commentCollection parameter is null");
 
             Documentation documentation = GetDocumentation(item);
-            string [] summaryComments = null;
-            if (documentation != null && !MetadataUtil.IsNullOrEmptyOrWhiteSpace(documentation.Summary)) 
+            string[] summaryComments = null;
+            if (
+                documentation != null
+                && !MetadataUtil.IsNullOrEmptyOrWhiteSpace(documentation.Summary)
+            )
             {
                 // we have documentation to emit
                 summaryComments = GetFormattedLines(documentation.Summary, true);
@@ -60,10 +68,14 @@ namespace System.Data.EntityModel.Emitters
                 switch (item.BuiltInTypeKind)
                 {
                     case BuiltInTypeKind.EdmProperty:
-                        summaryComment = Strings.MissingPropertyDocumentation(((EdmProperty)item).Name);
+                        summaryComment = Strings.MissingPropertyDocumentation(
+                            ((EdmProperty)item).Name
+                        );
                         break;
                     case BuiltInTypeKind.ComplexType:
-                        summaryComment = Strings.MissingComplexTypeDocumentation(((ComplexType)item).FullName);
+                        summaryComment = Strings.MissingComplexTypeDocumentation(
+                            ((ComplexType)item).FullName
+                        );
                         break;
                     default:
                         {
@@ -78,7 +90,6 @@ namespace System.Data.EntityModel.Emitters
                             {
                                 value = pi.GetValue(item, null);
                             }
-
 
                             if (value != null)
                             {
@@ -110,11 +121,17 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="summaryComments">the summary comments to be emitted</param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
-        public static void EmitSummaryComments(string summaryComments, CodeCommentStatementCollection commentCollection)
+        public static void EmitSummaryComments(
+            string summaryComments,
+            CodeCommentStatementCollection commentCollection
+        )
         {
             Debug.Assert(commentCollection != null, "commentCollection parameter is null");
 
-            if (string.IsNullOrEmpty(summaryComments) || string.IsNullOrEmpty(summaryComments = summaryComments.TrimEnd()))
+            if (
+                string.IsNullOrEmpty(summaryComments)
+                || string.IsNullOrEmpty(summaryComments = summaryComments.TrimEnd())
+            )
                 return;
 
             EmitSummaryComments(SplitIntoLines(summaryComments), commentCollection);
@@ -126,7 +143,11 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="commentLines">the lines of comments to emit</param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
         /// <param name="docComment">true if the comments are 'documentation' comments</param>
-        public static void EmitComments(string[] commentLines, CodeCommentStatementCollection commentCollection, bool docComment)
+        public static void EmitComments(
+            string[] commentLines,
+            CodeCommentStatementCollection commentCollection,
+            bool docComment
+        )
         {
             Debug.Assert(commentLines != null, "commentLines parameter is null");
             Debug.Assert(commentCollection != null, "commentCollection parameter is null");
@@ -143,14 +164,21 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="parameter">the parameter being commented</param>
         /// <param name="comment">the comment text</param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
-        public static void EmitParamComments(CodeParameterDeclarationExpression parameter, string comment,
-            CodeCommentStatementCollection commentCollection)
+        public static void EmitParamComments(
+            CodeParameterDeclarationExpression parameter,
+            string comment,
+            CodeCommentStatementCollection commentCollection
+        )
         {
             Debug.Assert(parameter != null, "parameter parameter is null");
             Debug.Assert(comment != null, "comment parameter is null");
 
-            string paramComment = string.Format(System.Globalization.CultureInfo.CurrentCulture,
-                "<param name=\"{0}\">{1}</param>", parameter.Name, comment);
+            string paramComment = string.Format(
+                System.Globalization.CultureInfo.CurrentCulture,
+                "<param name=\"{0}\">{1}</param>",
+                parameter.Name,
+                comment
+            );
             commentCollection.Add(new CodeCommentStatement(paramComment, true));
         }
 
@@ -243,7 +271,10 @@ namespace System.Data.EntityModel.Emitters
 
                 // use the leadingBlanks if it matched the new one or it is a leading substring of the new one
                 string leadingBlanks2 = match.Groups["LeadingBlanks"].Value;
-                if (leadingBlanks2 == leadingBlanks || leadingBlanks2.StartsWith(leadingBlanks, StringComparison.Ordinal))
+                if (
+                    leadingBlanks2 == leadingBlanks
+                    || leadingBlanks2.StartsWith(leadingBlanks, StringComparison.Ordinal)
+                )
                     continue;
 
                 if (leadingBlanks.StartsWith(leadingBlanks2, StringComparison.OrdinalIgnoreCase))
@@ -290,14 +321,21 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="documentation">the schema Docuementation element</param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
-        private static void EmitOtherDocumentationComments(Documentation documentation, CodeCommentStatementCollection commentCollection)
+        private static void EmitOtherDocumentationComments(
+            Documentation documentation,
+            CodeCommentStatementCollection commentCollection
+        )
         {
             Debug.Assert(commentCollection != null);
             if (documentation == null)
                 return;
 
             if (!string.IsNullOrEmpty(documentation.LongDescription))
-                EmitXmlComments("LongDescription", GetFormattedLines(documentation.LongDescription, true), commentCollection);
+                EmitXmlComments(
+                    "LongDescription",
+                    GetFormattedLines(documentation.LongDescription, true),
+                    commentCollection
+                );
         }
 
         /// <summary>
@@ -305,7 +343,10 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="summaryComments"></param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
-        private static void EmitSummaryComments(string[] summaryComments, CodeCommentStatementCollection commentCollection)
+        private static void EmitSummaryComments(
+            string[] summaryComments,
+            CodeCommentStatementCollection commentCollection
+        )
         {
             Debug.Assert(summaryComments != null);
             Debug.Assert(commentCollection != null);
@@ -319,19 +360,33 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="tag">the xml tag name</param>
         /// <param name="summaryComments">the lines of comments to emit</param>
         /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
-        private static void EmitXmlComments(string tag, string[] summaryComments, CodeCommentStatementCollection commentCollection)
+        private static void EmitXmlComments(
+            string tag,
+            string[] summaryComments,
+            CodeCommentStatementCollection commentCollection
+        )
         {
             Debug.Assert(tag != null);
             Debug.Assert(summaryComments != null);
             Debug.Assert(commentCollection != null);
 
-            commentCollection.Add(new CodeCommentStatement(string.Format(CultureInfo.InvariantCulture, "<{0}>", tag), true));
+            commentCollection.Add(
+                new CodeCommentStatement(
+                    string.Format(CultureInfo.InvariantCulture, "<{0}>", tag),
+                    true
+                )
+            );
             EmitComments(summaryComments, commentCollection, true);
-            commentCollection.Add(new CodeCommentStatement(string.Format(CultureInfo.InvariantCulture, "</{0}>", tag), true));
+            commentCollection.Add(
+                new CodeCommentStatement(
+                    string.Format(CultureInfo.InvariantCulture, "</{0}>", tag),
+                    true
+                )
+            );
         }
 
         /// <summary>
-        /// split a string into lines on '\n' chars and remove '\r' chars 
+        /// split a string into lines on '\n' chars and remove '\r' chars
         /// </summary>
         /// <param name="text">the string to split</param>
         /// <returns>the split string</returns>

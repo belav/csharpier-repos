@@ -16,9 +16,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         private int id;
         private string name;
 
-        public WcfPocoType()
-        {
-        }
+        public WcfPocoType() { }
 
         public WcfPocoType(int id, string name)
         {
@@ -28,11 +26,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
-
+            get { return this.id; }
             set
             {
                 this.IdSet = true;
@@ -42,17 +36,12 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
+            get { return this.name; }
             set
             {
                 this.NameSet = true;
                 this.name = value;
             }
-
         }
 
         [IgnoreDataMember]
@@ -75,10 +64,12 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public static IEnumerable<DerivedWcfPocoType> GetDerivedTypeTestData()
         {
-            return new DerivedWcfPocoType[] { 
-                new DerivedWcfPocoType(), 
-                new DerivedWcfPocoType(1, "SomeName", null), 
-                new DerivedWcfPocoType(1, "SomeName", new WcfPocoType(2, "SomeOtherName"))};
+            return new DerivedWcfPocoType[]
+            {
+                new DerivedWcfPocoType(),
+                new DerivedWcfPocoType(1, "SomeName", null),
+                new DerivedWcfPocoType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")),
+            };
         }
 
         public static IEnumerable<DerivedWcfPocoType> GetDerivedTypeTestDataWithNull()

@@ -7,25 +7,24 @@
  *  with mainly INT datatype.
 */
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     internal class VariantInt
     {
+        internal Object[] m_aVar;
+        internal Object[] m_aVar1;
 
-        internal Object [] m_aVar;
-        internal Object [] m_aVar1;
-
-        public static int Main(String [] Args)
+        public static int Main(String[] Args)
         {
             int iRep = 0;
             int iObj = 0;
             Console.WriteLine("Test should return with ExitCode 100 ...");
 
-            if (Args.Length==2)
+            if (Args.Length == 2)
             {
-                if (!Int32.TryParse( Args[0], out iRep ) ||
-                    !Int32.TryParse( Args[0], out iObj ))
+                if (!Int32.TryParse(Args[0], out iRep) || !Int32.TryParse(Args[0], out iObj))
                 {
                     iRep = 20;
                     iObj = 100;
@@ -38,7 +37,7 @@ namespace DefaultNamespace {
             }
 
             VariantInt Mv_Obj = new VariantInt();
-            if(Mv_Obj.runTest(iRep, iObj))
+            if (Mv_Obj.runTest(iRep, iObj))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -47,15 +46,14 @@ namespace DefaultNamespace {
             return 1;
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
-            for(int i = 0; i < iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 m_aVar = new Object[iObj];
-                for(int j = 0; j < iObj; j++)
+                for (int j = 0; j < iObj; j++)
                 {
-                    if(j%2 == 1)
+                    if (j % 2 == 1)
                     {
                         m_aVar[j] = i;
                     }
@@ -70,16 +68,15 @@ namespace DefaultNamespace {
             return true;
         }
 
-
         public void MakeLeak(int iRep, int iObj)
         {
-            Object [] L_Vart1 = new Object[iObj];
-            Object [] L_Vart2;
+            Object[] L_Vart1 = new Object[iObj];
+            Object[] L_Vart2;
             m_aVar1 = new Object[iObj];
-            for(int i = 0; i < iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 L_Vart2 = new Object[iObj];
-                for(int j=0; j< iObj; j++)
+                for (int j = 0; j < iObj; j++)
                 {
                     L_Vart1[j] = m_aVar[j];
                     L_Vart2[j] = (m_aVar[j]);

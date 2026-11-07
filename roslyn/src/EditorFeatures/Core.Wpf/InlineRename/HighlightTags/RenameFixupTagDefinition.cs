@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename.HighlightTag
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RenameFixupTagDefinition()
         {
-            this.Border = new Pen(Brushes.Green, thickness: StrokeThickness) { DashStyle = new DashStyle(StrokeDashArray, 0) };
+            this.Border = new Pen(Brushes.Green, thickness: StrokeThickness)
+            {
+                DashStyle = new DashStyle(StrokeDashArray, 0),
+            };
             this.DisplayName = EditorFeaturesResources.Inline_Rename_Fixup;
             this.ZOrder = 1;
         }

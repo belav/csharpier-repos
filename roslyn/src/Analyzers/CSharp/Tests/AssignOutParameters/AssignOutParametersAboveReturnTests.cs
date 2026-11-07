@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        AssignOutParametersAboveReturnCodeFixProvider>;
+        AssignOutParametersAboveReturnCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsAssignOutParameters)]
     public class AssignOutParametersAboveReturnTests
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return 'a';
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return 'a';
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -157,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -204,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return 'a';
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -229,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return s = "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -254,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return (i = 0).ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -285,7 +293,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -314,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -351,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         throw null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -373,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         return 'a';
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -399,7 +411,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         D d = (out int i) => { i = 0; return 'a'; };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -426,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         D(out _);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -459,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -494,7 +509,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         D(out _);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -559,7 +575,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -627,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -665,7 +683,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -725,7 +744,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -769,7 +789,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -841,7 +862,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

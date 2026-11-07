@@ -12,9 +12,7 @@ namespace System.Web.Http.Util
         private readonly CultureInfo _culture;
 
         public SimpleHttpValueProvider()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public SimpleHttpValueProvider(CultureInfo culture)
             : base(StringComparer.OrdinalIgnoreCase)
@@ -61,7 +59,11 @@ namespace System.Web.Http.Util
             object rawValue;
             if (TryGetValue(key, out rawValue))
             {
-                return new ValueProviderResult(rawValue, Convert.ToString(rawValue, _culture), _culture);
+                return new ValueProviderResult(
+                    rawValue,
+                    Convert.ToString(rawValue, _culture),
+                    _culture
+                );
             }
             else
             {

@@ -27,7 +27,16 @@ namespace System.Security.AccessControl.Tests
 
             // Case 2, collection has one ACE
             rAcl = new RawAcl(0, 1);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             myEnumerable = (IEnumerable)rAcl;
             myEnumerator = myEnumerable.GetEnumerator();
@@ -48,7 +57,16 @@ namespace System.Security.AccessControl.Tests
             for (int i = 0; i < 1820; i++)
             {
                 //this ace binary length is 36, 1820 * 36 = 65520
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, i + 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    i + 1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
             }
             myEnumerable = (IEnumerable)rAcl;

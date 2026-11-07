@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,147 +32,152 @@ using System.Collections;
 using System.Web.Services;
 using System.Xml;
 
-namespace System.Web.Services.Description {
-	public sealed class ServiceDescriptionFormatExtensionCollection : ServiceDescriptionBaseCollection {
-		
-		#region Constructors
-	
-		public ServiceDescriptionFormatExtensionCollection (object parent) 
-			: base (parent)
-		{
-		}
+namespace System.Web.Services.Description
+{
+    public sealed class ServiceDescriptionFormatExtensionCollection
+        : ServiceDescriptionBaseCollection
+    {
+        #region Constructors
 
-		#endregion // Constructors
+        public ServiceDescriptionFormatExtensionCollection(object parent)
+            : base(parent) { }
 
-		#region Properties
+        #endregion // Constructors
 
-		public object this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
+        #region Properties
 
-				return List[index]; 
-			}
-			set { List[index] = value; }
-		}
+        public object this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException();
 
-		#endregion // Properties
+                return List[index];
+            }
+            set { List[index] = value; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		public int Add (object extension) 
-		{
-			Insert (Count, extension);
-			return (Count - 1);
-		}
+        #region Methods
 
-		public bool Contains (object extension)
-		{
-			return List.Contains (extension);
-		}
+        public int Add(object extension)
+        {
+            Insert(Count, extension);
+            return (Count - 1);
+        }
 
-		public void CopyTo (object[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        public bool Contains(object extension)
+        {
+            return List.Contains(extension);
+        }
 
-		public object Find (Type type)
-		{
-			foreach (object value in List)
-				if (type.IsInstanceOfType (value))
-					return value;
-			return null;
-		}
+        public void CopyTo(object[] array, int index)
+        {
+            List.CopyTo(array, index);
+        }
 
-		public XmlElement Find (string name, string ns)
-		{
-			XmlElement xmlElement;
-			foreach (object value in List) 
-				if (value is XmlElement) {
-					xmlElement = (value as XmlElement);
-					if (xmlElement.Name == name && xmlElement.NamespaceURI == ns)
-						return xmlElement;
-				}
-			return null;
-		}
+        public object Find(Type type)
+        {
+            foreach (object value in List)
+                if (type.IsInstanceOfType(value))
+                    return value;
+            return null;
+        }
 
-		public object[] FindAll (Type type)
-		{
-			ArrayList searchResults = new ArrayList ();
-			foreach (object value in List)
-				if (type.IsInstanceOfType(value))
-					searchResults.Add (value);
-			object[] returnValue = new object [searchResults.Count];
+        public XmlElement Find(string name, string ns)
+        {
+            XmlElement xmlElement;
+            foreach (object value in List)
+                if (value is XmlElement)
+                {
+                    xmlElement = (value as XmlElement);
+                    if (xmlElement.Name == name && xmlElement.NamespaceURI == ns)
+                        return xmlElement;
+                }
+            return null;
+        }
 
-			if (searchResults.Count > 0)
-				searchResults.CopyTo (returnValue);
+        public object[] FindAll(Type type)
+        {
+            ArrayList searchResults = new ArrayList();
+            foreach (object value in List)
+                if (type.IsInstanceOfType(value))
+                    searchResults.Add(value);
+            object[] returnValue = new object[searchResults.Count];
 
-			return returnValue;
-		}
+            if (searchResults.Count > 0)
+                searchResults.CopyTo(returnValue);
 
-		public XmlElement[] FindAll (string name, string ns)
-		{
-			ArrayList searchResults = new ArrayList ();
-			XmlElement xmlElement;
+            return returnValue;
+        }
 
-			foreach (object value in List)
-				if (value is XmlElement) {
-					xmlElement = (value as XmlElement);
-					if (xmlElement.Name == name && xmlElement.NamespaceURI == ns)
-						searchResults.Add (xmlElement);
-				}
+        public XmlElement[] FindAll(string name, string ns)
+        {
+            ArrayList searchResults = new ArrayList();
+            XmlElement xmlElement;
 
-			XmlElement[] returnValue = new XmlElement [searchResults.Count];
+            foreach (object value in List)
+                if (value is XmlElement)
+                {
+                    xmlElement = (value as XmlElement);
+                    if (xmlElement.Name == name && xmlElement.NamespaceURI == ns)
+                        searchResults.Add(xmlElement);
+                }
 
-			if (searchResults.Count > 0)
-				searchResults.CopyTo (returnValue);
+            XmlElement[] returnValue = new XmlElement[searchResults.Count];
 
-			return returnValue;
-		}
+            if (searchResults.Count > 0)
+                searchResults.CopyTo(returnValue);
 
-		public int IndexOf (object extension)
-		{
-			return List.IndexOf (extension);
-		}
+            return returnValue;
+        }
 
-		public void Insert (int index, object extension)
-		{
-			List.Insert (index, extension);
-		}
+        public int IndexOf(object extension)
+        {
+            return List.IndexOf(extension);
+        }
 
-		[MonoTODO]
-		public bool IsHandled (object item)
-		{
-			throw new NotImplementedException ();
-		}
+        public void Insert(int index, object extension)
+        {
+            List.Insert(index, extension);
+        }
 
-		[MonoTODO]
-		public bool IsRequired (object item)
-		{
-			throw new NotImplementedException ();
-		}
-	
-		protected override void OnValidate (object value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ();
-			if (!(value is XmlElement || value is ServiceDescriptionFormatExtension))
-				throw new ArgumentException ();
-		}
-	
-		public void Remove (object extension)
-		{
-			List.Remove (extension);
-		}
-			
-		protected override void SetParent (object value, object parent)
-		{
-			ServiceDescriptionFormatExtension extension = value as ServiceDescriptionFormatExtension;
-			if (extension == null)
-				return;
-			extension.SetParent (parent);
-		}
-			
-		#endregion // Methods
-	}
+        [MonoTODO]
+        public bool IsHandled(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public bool IsRequired(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnValidate(object value)
+        {
+            if (value == null)
+                throw new ArgumentNullException();
+            if (!(value is XmlElement || value is ServiceDescriptionFormatExtension))
+                throw new ArgumentException();
+        }
+
+        public void Remove(object extension)
+        {
+            List.Remove(extension);
+        }
+
+        protected override void SetParent(object value, object parent)
+        {
+            ServiceDescriptionFormatExtension extension =
+                value as ServiceDescriptionFormatExtension;
+            if (extension == null)
+                return;
+            extension.SetParent(parent);
+        }
+
+        #endregion // Methods
+    }
 }

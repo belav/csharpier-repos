@@ -1,16 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="IXPathEnvironment.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">sdub</owner>
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Xml.Xsl.Qil;
 
-namespace System.Xml.Xsl.XPath {
-
+namespace System.Xml.Xsl.XPath
+{
     // <spec>http://www.w3.org/TR/xslt20/#dt-focus</spec>
-    internal interface IFocus {
+    internal interface IFocus
+    {
         // The context item:     the item currently being processed
         QilNode GetCurrent();
 
@@ -22,12 +23,13 @@ namespace System.Xml.Xsl.XPath {
         QilNode GetLast();
     }
 
-    internal interface IXPathEnvironment : IFocus {
+    internal interface IXPathEnvironment : IFocus
+    {
         XPathQilFactory Factory { get; }
 
         // Resolution of variables, functions, and prefixes
         QilNode ResolveVariable(string prefix, string name);
         QilNode ResolveFunction(string prefix, string name, IList<QilNode> args, IFocus env);
-        string  ResolvePrefix  (string prefix);
+        string ResolvePrefix(string prefix);
     }
 }

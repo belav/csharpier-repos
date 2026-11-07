@@ -26,8 +26,9 @@ namespace System.CommandLine.Binding
         /// The parse result for the current invocation.
         /// </summary>
         public ParseResult ParseResult { get; }
-        
-        internal HelpBuilder HelpBuilder => _helpBuilder ??= (HelpBuilder)ServiceProvider.GetService(typeof(HelpBuilder))!;
+
+        internal HelpBuilder HelpBuilder =>
+            _helpBuilder ??= (HelpBuilder)ServiceProvider.GetService(typeof(HelpBuilder))!;
 
         internal ServiceProvider ServiceProvider { get; }
 
@@ -61,7 +62,8 @@ namespace System.CommandLine.Binding
 
         internal bool TryGetValueSource(
             IValueDescriptor valueDescriptor,
-            [MaybeNullWhen(false)] out IValueSource valueSource)
+            [MaybeNullWhen(false)] out IValueSource valueSource
+        )
         {
             if (ServiceProvider.AvailableServiceTypes.Contains(valueDescriptor.ValueType))
             {
@@ -77,7 +79,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             IValueSource valueSource,
             ParseResult parseResult,
-            out BoundValue? boundValue)
+            out BoundValue? boundValue
+        )
         {
             if (valueSource.TryGetValue(valueDescriptor, this, out var value))
             {
@@ -88,16 +91,25 @@ namespace System.CommandLine.Binding
                 }
                 else
                 {
-                    ArgumentResult argumentResult = valueDescriptor is CliArgument argument 
+                    ArgumentResult argumentResult = valueDescriptor is CliArgument argument
                         ? parseResult.GetResult(argument) is ArgumentResult found
                             ? found
-                            : new ArgumentResult(argument, parseResult.RootCommandResult.SymbolResultTree, null)
-                        : new ArgumentResult(new CliArgument<string>(valueDescriptor.ValueName), parseResult.RootCommandResult.SymbolResultTree, null);
+                            : new ArgumentResult(
+                                argument,
+                                parseResult.RootCommandResult.SymbolResultTree,
+                                null
+                            )
+                        : new ArgumentResult(
+                            new CliArgument<string>(valueDescriptor.ValueName),
+                            parseResult.RootCommandResult.SymbolResultTree,
+                            null
+                        );
 
                     var parsed = ArgumentConverter.ConvertObject(
                         argumentResult,
                         valueDescriptor.ValueType,
-                        value);
+                        value
+                    );
 
                     if (parsed.Result == ArgumentConversionResultType.Successful)
                     {

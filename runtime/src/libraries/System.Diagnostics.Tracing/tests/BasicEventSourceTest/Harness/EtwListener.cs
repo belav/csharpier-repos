@@ -1,20 +1,20 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Diagnostics.Tracing;
-using Microsoft.Diagnostics.Tracing.Session;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing.Session;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace BasicEventSourceTests
 {
@@ -28,11 +28,19 @@ namespace BasicEventSourceTests
     {
         internal static void EnsureStopped()
         {
-            using (var session = new TraceEventSession("EventSourceTestSession", "EventSourceTestData.etl"))
+            using (
+                var session = new TraceEventSession(
+                    "EventSourceTestSession",
+                    "EventSourceTestData.etl"
+                )
+            )
                 session.Stop();
         }
 
-        public EtwListener(string dataFileName = "EventSourceTestData.etl", string sessionName = "EventSourceTestSession")
+        public EtwListener(
+            string dataFileName = "EventSourceTestData.etl",
+            string sessionName = "EventSourceTestSession"
+        )
         {
             _dataFileName = dataFileName;
 
@@ -46,15 +54,17 @@ namespace BasicEventSourceTests
             {
                 Debug.WriteLine("Creating a real time session " + sessionName);
 
-                Task.Factory.StartNew(delegate ()
-                {
-                    var session = new TraceEventSession(sessionName, dataFileName);
-                    session.Source.AllEvents += OnEventHelper;
-                    Debug.WriteLine("Listening for real time events");
-                    _session = session;    // Indicate that we are alive.
-                    _session.Source.Process();
-                    Debug.WriteLine("Real time listening stopping.");
-                });
+                Task.Factory.StartNew(
+                    delegate()
+                    {
+                        var session = new TraceEventSession(sessionName, dataFileName);
+                        session.Source.AllEvents += OnEventHelper;
+                        Debug.WriteLine("Listening for real time events");
+                        _session = session; // Indicate that we are alive.
+                        _session.Source.Process();
+                        Debug.WriteLine("Real time listening stopping.");
+                    }
+                );
 
                 SpinWait.SpinUntil(() => _session != null); // Wait for real time thread to wake up.
             }
@@ -67,23 +77,33 @@ namespace BasicEventSourceTests
             }
         }
 
-        public override void EventSourceCommand(string eventSourceName, EventCommand command, FilteringOptions options = null)
+        public override void EventSourceCommand(
+            string eventSourceName,
+            EventCommand command,
+            FilteringOptions options = null
+        )
         {
             if (command == EventCommand.Enable)
             {
                 if (options == null)
                     options = new FilteringOptions();
 
-                _session.EnableProvider(eventSourceName, (TraceEventLevel)options.Level, (ulong)options.Keywords,
-                    new TraceEventProviderOptions() { Arguments = options.Args });
+                _session.EnableProvider(
+                    eventSourceName,
+                    (TraceEventLevel)options.Level,
+                    (ulong)options.Keywords,
+                    new TraceEventProviderOptions() { Arguments = options.Args }
+                );
             }
             else if (command == EventCommand.Disable)
             {
-                _session.DisableProvider(TraceEventProviders.GetEventSourceGuidFromName(eventSourceName));
+                _session.DisableProvider(
+                    TraceEventProviders.GetEventSourceGuidFromName(eventSourceName)
+                );
             }
             else
                 throw new NotImplementedException();
-            Thread.Sleep(200);          // Calls are async, give them time to work.
+            Thread.Sleep(200); // Calls are async, give them time to work.
         }
 
         public override void Dispose()
@@ -95,8 +115,8 @@ namespace BasicEventSourceTests
 
             _disposed = true;
             _session.Flush();
-            Thread.Sleep(1010);      // Let it drain.
-            _session.Dispose();     // This also will kill the real time thread
+            Thread.Sleep(1010); // Let it drain.
+            _session.Dispose(); // This also will kill the real time thread
 
             if (_dataFileName != null)
             {
@@ -114,7 +134,7 @@ namespace BasicEventSourceTests
             }
         }
 
-    #region private
+        #region private
         private void OnEventHelper(TraceEvent data)
         {
             // Ignore EventTrace events.
@@ -131,42 +151,66 @@ namespace BasicEventSourceTests
             this.OnEvent(new EtwEvent(data));
         }
 
-        private static readonly Guid EventTraceProviderID = new Guid("9e814aad-3204-11d2-9a82-006008a86939");
-        private static readonly Guid KernelProviderID = new Guid("9e814aad-3204-11d2-9a82-006008a86939");
+        private static readonly Guid EventTraceProviderID = new Guid(
+            "9e814aad-3204-11d2-9a82-006008a86939"
+        );
+        private static readonly Guid KernelProviderID = new Guid(
+            "9e814aad-3204-11d2-9a82-006008a86939"
+        );
 
         /// <summary>
         /// EtwEvent implements the 'Event' abstraction for ETW events (it has a TraceEvent in it)
         /// </summary>
         internal class EtwEvent : Event
         {
-            public override bool IsEtw { get { return true; } }
-            public override string ProviderName { get { return _data.ProviderName; } }
-            public override string EventName { get { return _data.EventName; } }
+            public override bool IsEtw
+            {
+                get { return true; }
+            }
+            public override string ProviderName
+            {
+                get { return _data.ProviderName; }
+            }
+            public override string EventName
+            {
+                get { return _data.EventName; }
+            }
+
             public override object PayloadValue(int propertyIndex, string propertyName)
             {
                 if (propertyName != null)
                     Assert.Equal(propertyName, _data.PayloadNames[propertyIndex]);
                 return _data.PayloadValue(propertyIndex);
             }
+
             public override string PayloadString(int propertyIndex, string propertyName)
             {
                 Assert.Equal(propertyName, _data.PayloadNames[propertyIndex]);
                 return _data.PayloadString(propertyIndex);
             }
-            public override int PayloadCount { get { return _data.PayloadNames.Length; } }
-            public override IList<string> PayloadNames { get { return _data.PayloadNames; } }
 
-    #region private
-            internal EtwEvent(TraceEvent data) { _data = data.Clone(); }
+            public override int PayloadCount
+            {
+                get { return _data.PayloadNames.Length; }
+            }
+            public override IList<string> PayloadNames
+            {
+                get { return _data.PayloadNames; }
+            }
+
+            #region private
+            internal EtwEvent(TraceEvent data)
+            {
+                _data = data.Clone();
+            }
 
             private TraceEvent _data;
-    #endregion
+            #endregion
         }
 
         private bool _disposed;
         private string _dataFileName;
         private volatile TraceEventSession _session;
-    #endregion
-
+        #endregion
     }
 }

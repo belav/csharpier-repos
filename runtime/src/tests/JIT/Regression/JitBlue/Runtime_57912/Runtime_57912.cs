@@ -22,21 +22,23 @@ internal struct AA
         tmp3 = 108;
         q = qq;
     }
-    
+
     // The test verifies that we accurately update the byref variable that is a field of struct.
-    public static short call_target_ref(ref short arg) { arg = 100; return arg; }
+    public static short call_target_ref(ref short arg)
+    {
+        arg = 100;
+        return arg;
+    }
 }
 
-   
 public class Runtime_57912
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
         return (int)test_0_17(100, new AA(100), new AA(0));
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static short test_0_17(int num, AA init, AA zero)
     {

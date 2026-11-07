@@ -13,7 +13,7 @@ namespace System.Security.Cryptography
     public enum CngKeyCreationOptions : int
     {
         None = 0x00000000,
-        MachineKey = 0x00000020,            // NCRYPT_MACHINE_KEY_FLAG
-        OverwriteExistingKey = 0x00000080,  // NCRYPT_OVERWRITE_KEY_FLAG
+        MachineKey = 0x00000020, // NCRYPT_MACHINE_KEY_FLAG
+        OverwriteExistingKey = 0x00000080, // NCRYPT_OVERWRITE_KEY_FLAG
     }
 }

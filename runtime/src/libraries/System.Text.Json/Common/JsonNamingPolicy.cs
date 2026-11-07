@@ -26,22 +26,26 @@ namespace System.Text.Json
         /// <summary>
         /// Returns the naming policy for lower snake-casing.
         /// </summary>
-        public static JsonNamingPolicy SnakeCaseLower { get; } = new JsonSnakeCaseLowerNamingPolicy();
+        public static JsonNamingPolicy SnakeCaseLower { get; } =
+            new JsonSnakeCaseLowerNamingPolicy();
 
         /// <summary>
         /// Returns the naming policy for upper snake-casing.
         /// </summary>
-        public static JsonNamingPolicy SnakeCaseUpper { get; } = new JsonSnakeCaseUpperNamingPolicy();
+        public static JsonNamingPolicy SnakeCaseUpper { get; } =
+            new JsonSnakeCaseUpperNamingPolicy();
 
         /// <summary>
         /// Returns the naming policy for lower kebab-casing.
         /// </summary>
-        public static JsonNamingPolicy KebabCaseLower { get; } = new JsonKebabCaseLowerNamingPolicy();
+        public static JsonNamingPolicy KebabCaseLower { get; } =
+            new JsonKebabCaseLowerNamingPolicy();
 
         /// <summary>
         /// Returns the naming policy for upper kebab-casing.
         /// </summary>
-        public static JsonNamingPolicy KebabCaseUpper { get; } = new JsonKebabCaseUpperNamingPolicy();
+        public static JsonNamingPolicy KebabCaseUpper { get; } =
+            new JsonKebabCaseUpperNamingPolicy();
 
         /// <summary>
         /// When overridden in a derived class, converts the specified name according to the policy.

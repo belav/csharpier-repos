@@ -20,15 +20,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineTypeCheck)]
-    public partial class CSharpIsAndCastCheckDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class CSharpIsAndCastCheckDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpIsAndCastCheckDiagnosticAnalyzerTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpIsAndCastCheckDiagnosticAnalyzer(), new CSharpIsAndCastCheckCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpIsAndCastCheckDiagnosticAnalyzer(),
+                new CSharpIsAndCastCheckCodeFixProvider()
+            );
 
         [Fact]
         public async Task InlineTypeCheck1()
@@ -56,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,7 +79,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """, new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -92,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -110,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -128,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -146,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -164,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -193,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -228,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -259,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -289,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -321,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17126")]
@@ -363,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -392,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -421,7 +444,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -450,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -472,7 +497,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -495,7 +521,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -518,7 +545,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -559,7 +587,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18053")]
@@ -592,7 +621,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/429612")]
@@ -612,7 +642,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21172")]
@@ -632,15 +663,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestSeverity()
         {
-            var source =
-
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -653,8 +683,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 }
                 """;
             var warningOption = new CodeStyleOption2<bool>(true, NotificationOption2.Warning);
-            var options = Option(CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck, warningOption);
-            var testParameters = new TestParameters(options: options, parseOptions: TestOptions.Regular8);
+            var options = Option(
+                CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck,
+                warningOption
+            );
+            var testParameters = new TestParameters(
+                options: options,
+                parseOptions: TestOptions.Regular8
+            );
 
             using var workspace = CreateWorkspaceFromOptions(source, testParameters);
             var diag = (await GetDiagnosticsAsync(workspace, testParameters)).Single();
@@ -694,7 +730,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24287")]
@@ -715,7 +752,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24287")]
@@ -741,7 +779,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42462")]
@@ -788,7 +827,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

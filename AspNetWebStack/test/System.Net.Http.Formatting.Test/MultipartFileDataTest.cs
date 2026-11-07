@@ -31,7 +31,6 @@ namespace System.Net.Http
             // Act
             MultipartFileData fileData = new MultipartFileData(headers, fileName);
 
-
             Assert.Same(headers, fileData.Headers);
             Assert.Same(fileName, fileData.LocalFileName);
         }

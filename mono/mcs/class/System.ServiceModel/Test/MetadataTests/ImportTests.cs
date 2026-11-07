@@ -34,291 +34,364 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-
 using WS = System.Web.Services.Description;
 
-namespace MonoTests.System.ServiceModel.MetadataTests {
+namespace MonoTests.System.ServiceModel.MetadataTests
+{
+    /*
+     * This class is abstract to allow it to be run multiple times with
+     * different TestContexts.
+     */
+    [Category("MetadataTests")]
+    public abstract class ImportTests
+    {
+        public abstract TestContext Context { get; }
 
-	/*
-	 * This class is abstract to allow it to be run multiple times with
-	 * different TestContexts.
-	 */
-	[Category ("MetadataTests")]
-	public abstract class ImportTests {
+        protected MetadataSet GetMetadata(string name, out TestLabel label)
+        {
+            label = new TestLabel(name);
+            return Context.GetMetadata(name);
+        }
 
-		public abstract TestContext Context {
-			get;
-		}
+        protected MetadataSet GetMetadataAndConfig(
+            string name,
+            out XmlDocument config,
+            out TestLabel label
+        )
+        {
+            var metadata = GetMetadata(name, out label);
+            config = Context.GetConfiguration(name);
+            return metadata;
+        }
 
-		protected MetadataSet GetMetadata (string name, out TestLabel label)
-		{
-			label = new TestLabel (name);
-			return Context.GetMetadata (name);
-		}
+        [Test]
+        public virtual void BasicHttp()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp", out label);
 
-		protected MetadataSet GetMetadataAndConfig (
-			string name, out XmlDocument config, out TestLabel label)
-		{
-			var metadata = GetMetadata (name, out label);
-			config = Context.GetConfiguration (name);
-			return metadata;
-		}
+            BindingTestAssertions.BasicHttpBinding(Context, doc, BasicHttpSecurityMode.None, label);
+        }
 
-		[Test]
-		public virtual void BasicHttp ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp", out label);
+        [Test]
+        public virtual void BasicHttp_TransportSecurity()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp_TransportSecurity", out label);
 
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, BasicHttpSecurityMode.None, label);
-		}
-		
-		[Test]
-		public virtual void BasicHttp_TransportSecurity ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_TransportSecurity", out label);
+            BindingTestAssertions.BasicHttpBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.Transport,
+                label
+            );
+        }
 
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, BasicHttpSecurityMode.Transport, label);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void BasicHttp_MessageSecurity ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_MessageSecurity", out label);
+        [Test]
+        [Category("NotWorking")]
+        public virtual void BasicHttp_MessageSecurity()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp_MessageSecurity", out label);
 
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, BasicHttpSecurityMode.Message, label);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void BasicHttp_TransportWithMessageCredential ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_TransportWithMessageCredential", out label);
+            BindingTestAssertions.BasicHttpBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.Message,
+                label
+            );
+        }
 
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, BasicHttpSecurityMode.TransportWithMessageCredential, label);
-		}
-		
-		[Test]
-		public virtual void BasicHttp_Mtom ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_Mtom", out label);
+        [Test]
+        [Category("NotWorking")]
+        public virtual void BasicHttp_TransportWithMessageCredential()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp_TransportWithMessageCredential", out label);
 
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, WSMessageEncoding.Mtom, label);
-		}
+            BindingTestAssertions.BasicHttpBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.TransportWithMessageCredential,
+                label
+            );
+        }
 
-		[Test]
-		public virtual void BasicHttp_NtlmAuth ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_NtlmAuth", out label);
+        [Test]
+        public virtual void BasicHttp_Mtom()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp_Mtom", out label);
 
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, BasicHttpSecurityMode.TransportCredentialOnly,
-				WSMessageEncoding.Text, HttpClientCredentialType.Ntlm,
-				AuthenticationSchemes.Ntlm, label);
-		}
+            BindingTestAssertions.BasicHttpBinding(Context, doc, WSMessageEncoding.Mtom, label);
+        }
 
-		[Test]
-		public virtual void BasicHttps ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttps", out label);
+        [Test]
+        public virtual void BasicHttp_NtlmAuth()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp_NtlmAuth", out label);
 
-			BindingTestAssertions.BasicHttpsBinding (
-				Context, doc, BasicHttpSecurityMode.Transport, WSMessageEncoding.Text,
-				HttpClientCredentialType.None, AuthenticationSchemes.Anonymous,
-				label);
-		}
-		
-		[Test]
-		public virtual void BasicHttps_NtlmAuth ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttps_NtlmAuth", out label);
+            BindingTestAssertions.BasicHttpBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.TransportCredentialOnly,
+                WSMessageEncoding.Text,
+                HttpClientCredentialType.Ntlm,
+                AuthenticationSchemes.Ntlm,
+                label
+            );
+        }
 
-			BindingTestAssertions.BasicHttpsBinding (
-				Context, doc, BasicHttpSecurityMode.Transport, WSMessageEncoding.Text,
-				HttpClientCredentialType.Ntlm, AuthenticationSchemes.Ntlm,
-				label);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void BasicHttps_Certificate ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttps_Certificate", out label);
+        [Test]
+        public virtual void BasicHttps()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttps", out label);
 
-			BindingTestAssertions.BasicHttpsBinding (
-				Context, doc, BasicHttpSecurityMode.Transport, WSMessageEncoding.Text,
-				HttpClientCredentialType.Certificate, AuthenticationSchemes.Anonymous,
-				label);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void BasicHttps_TransportWithMessageCredential ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttps_TransportWithMessageCredential", out label);
+            BindingTestAssertions.BasicHttpsBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.Transport,
+                WSMessageEncoding.Text,
+                HttpClientCredentialType.None,
+                AuthenticationSchemes.Anonymous,
+                label
+            );
+        }
 
-			BindingTestAssertions.BasicHttpsBinding (
-				Context, doc, BasicHttpSecurityMode.TransportWithMessageCredential,
-				WSMessageEncoding.Text, HttpClientCredentialType.None,
-				AuthenticationSchemes.Anonymous, label);
-		}
-		
-		[Test]
-		public virtual void NetTcp ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp", out label);
+        [Test]
+        public virtual void BasicHttps_NtlmAuth()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttps_NtlmAuth", out label);
 
-			BindingTestAssertions.NetTcpBinding (
-				Context, doc, SecurityMode.None, false, TransferMode.Buffered, label);
-		}
+            BindingTestAssertions.BasicHttpsBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.Transport,
+                WSMessageEncoding.Text,
+                HttpClientCredentialType.Ntlm,
+                AuthenticationSchemes.Ntlm,
+                label
+            );
+        }
 
-		[Test]
-		public virtual void NetTcp_TransferMode ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp_TransferMode", out label);
+        [Test]
+        [Category("NotWorking")]
+        public virtual void BasicHttps_Certificate()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttps_Certificate", out label);
 
-			BindingTestAssertions.NetTcpBinding (
-				Context, doc, SecurityMode.None, false,
-				TransferMode.Streamed, label);
-		}
+            BindingTestAssertions.BasicHttpsBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.Transport,
+                WSMessageEncoding.Text,
+                HttpClientCredentialType.Certificate,
+                AuthenticationSchemes.Anonymous,
+                label
+            );
+        }
 
-		[Test]
-		public virtual void NetTcp_TransportSecurity ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp_TransportSecurity", out label);
+        [Test]
+        [Category("NotWorking")]
+        public virtual void BasicHttps_TransportWithMessageCredential()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttps_TransportWithMessageCredential", out label);
 
-			BindingTestAssertions.NetTcpBinding (
-				Context, doc, SecurityMode.Transport, false,
-				TransferMode.Buffered, label);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void NetTcp_MessageSecurity ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp_MessageSecurity", out label);
+            BindingTestAssertions.BasicHttpsBinding(
+                Context,
+                doc,
+                BasicHttpSecurityMode.TransportWithMessageCredential,
+                WSMessageEncoding.Text,
+                HttpClientCredentialType.None,
+                AuthenticationSchemes.Anonymous,
+                label
+            );
+        }
 
-			BindingTestAssertions.NetTcpBinding (
-				Context, doc, SecurityMode.Message, false,
-				TransferMode.Buffered, label);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void NetTcp_TransportWithMessageCredential ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp_TransportWithMessageCredential", out label);
+        [Test]
+        public virtual void NetTcp()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp", out label);
 
-			BindingTestAssertions.NetTcpBinding (
-				Context, doc, SecurityMode.TransportWithMessageCredential, false,
-				TransferMode.Buffered, label);
-		}
+            BindingTestAssertions.NetTcpBinding(
+                Context,
+                doc,
+                SecurityMode.None,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+        }
 
-		[Test]
-		public virtual void NetTcp_Binding ()
-		{
-			var label = new TestLabel ("NetTcp_Binding");
+        [Test]
+        public virtual void NetTcp_TransferMode()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp_TransferMode", out label);
 
-			label.EnterScope ("None");
-			BindingTestAssertions.CheckNetTcpBinding (
-				new NetTcpBinding (SecurityMode.None), SecurityMode.None,
-				false, TransferMode.Buffered, label);
-			label.LeaveScope ();
+            BindingTestAssertions.NetTcpBinding(
+                Context,
+                doc,
+                SecurityMode.None,
+                false,
+                TransferMode.Streamed,
+                label
+            );
+        }
 
-			label.EnterScope ("Transport");
-			BindingTestAssertions.CheckNetTcpBinding (
-				new NetTcpBinding (SecurityMode.Transport), SecurityMode.Transport,
-				false, TransferMode.Buffered, label);
-			label.LeaveScope ();
-		}
+        [Test]
+        public virtual void NetTcp_TransportSecurity()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp_TransportSecurity", out label);
 
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void NetTcp_Binding2 ()
-		{
-			var label = new TestLabel ("NetTcp_Binding2");
+            BindingTestAssertions.NetTcpBinding(
+                Context,
+                doc,
+                SecurityMode.Transport,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+        }
 
-			label.EnterScope ("TransportWithMessageCredential");
-			BindingTestAssertions.CheckNetTcpBinding (
-				new NetTcpBinding (SecurityMode.TransportWithMessageCredential),
-				SecurityMode.TransportWithMessageCredential, false,
-				TransferMode.Buffered, label);
-			label.LeaveScope ();
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public virtual void NetTcp_ReliableSession ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp_ReliableSession", out label);
+        [Test]
+        [Category("NotWorking")]
+        public virtual void NetTcp_MessageSecurity()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp_MessageSecurity", out label);
 
-			BindingTestAssertions.NetTcpBinding (
-				Context, doc, SecurityMode.None, true,
-				TransferMode.Buffered, label);
-		}
+            BindingTestAssertions.NetTcpBinding(
+                Context,
+                doc,
+                SecurityMode.Message,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+        }
 
-		[Test]
-		public virtual void BasicHttp_Operation ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_Operation", out label);
+        [Test]
+        [Category("NotWorking")]
+        public virtual void NetTcp_TransportWithMessageCredential()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp_TransportWithMessageCredential", out label);
 
-			BindingTestAssertions.TestOperation (doc, false, label);
-		}
+            BindingTestAssertions.NetTcpBinding(
+                Context,
+                doc,
+                SecurityMode.TransportWithMessageCredential,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+        }
 
-		[Test]
-		public virtual void NetTcp_Operation ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("NetTcp_Operation", out label);
+        [Test]
+        public virtual void NetTcp_Binding()
+        {
+            var label = new TestLabel("NetTcp_Binding");
 
-			BindingTestAssertions.TestOperation (doc, true, label);
-		}
+            label.EnterScope("None");
+            BindingTestAssertions.CheckNetTcpBinding(
+                new NetTcpBinding(SecurityMode.None),
+                SecurityMode.None,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+            label.LeaveScope();
 
-		[Test]
-		public virtual void BasicHttp_Config ()
-		{
-			TestLabel label;
-			XmlDocument config;
-			var metadata = GetMetadataAndConfig (
-				"BasicHttp_Config", out config, out label);
+            label.EnterScope("Transport");
+            BindingTestAssertions.CheckNetTcpBinding(
+                new NetTcpBinding(SecurityMode.Transport),
+                SecurityMode.Transport,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+            label.LeaveScope();
+        }
 
-			BindingTestAssertions.AssertConfig (metadata, config, label);
-		}
+        [Test]
+        [Category("NotWorking")]
+        public virtual void NetTcp_Binding2()
+        {
+            var label = new TestLabel("NetTcp_Binding2");
 
-		[Test]
-		public virtual void BasicHttp_Config2 ()
-		{
-			TestLabel label;
-			XmlDocument config;
-			var metadata = GetMetadataAndConfig (
-				"BasicHttp_Config2", out config, out label);
-			
-			BindingTestAssertions.AssertConfig (metadata, config, label);
-		}
-	}
+            label.EnterScope("TransportWithMessageCredential");
+            BindingTestAssertions.CheckNetTcpBinding(
+                new NetTcpBinding(SecurityMode.TransportWithMessageCredential),
+                SecurityMode.TransportWithMessageCredential,
+                false,
+                TransferMode.Buffered,
+                label
+            );
+            label.LeaveScope();
+        }
 
+        [Test]
+        [Category("NotWorking")]
+        public virtual void NetTcp_ReliableSession()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp_ReliableSession", out label);
+
+            BindingTestAssertions.NetTcpBinding(
+                Context,
+                doc,
+                SecurityMode.None,
+                true,
+                TransferMode.Buffered,
+                label
+            );
+        }
+
+        [Test]
+        public virtual void BasicHttp_Operation()
+        {
+            TestLabel label;
+            var doc = GetMetadata("BasicHttp_Operation", out label);
+
+            BindingTestAssertions.TestOperation(doc, false, label);
+        }
+
+        [Test]
+        public virtual void NetTcp_Operation()
+        {
+            TestLabel label;
+            var doc = GetMetadata("NetTcp_Operation", out label);
+
+            BindingTestAssertions.TestOperation(doc, true, label);
+        }
+
+        [Test]
+        public virtual void BasicHttp_Config()
+        {
+            TestLabel label;
+            XmlDocument config;
+            var metadata = GetMetadataAndConfig("BasicHttp_Config", out config, out label);
+
+            BindingTestAssertions.AssertConfig(metadata, config, label);
+        }
+
+        [Test]
+        public virtual void BasicHttp_Config2()
+        {
+            TestLabel label;
+            XmlDocument config;
+            var metadata = GetMetadataAndConfig("BasicHttp_Config2", out config, out label);
+
+            BindingTestAssertions.AssertConfig(metadata, config, label);
+        }
+    }
 }
 #endif
-

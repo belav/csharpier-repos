@@ -3,7 +3,13 @@
 
 namespace System.Runtime.InteropServices
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Interface
+            | AttributeTargets.Class
+            | AttributeTargets.Struct,
+        Inherited = false
+    )]
     public sealed class BestFitMappingAttribute : Attribute
     {
         public BestFitMappingAttribute(bool BestFitMapping)

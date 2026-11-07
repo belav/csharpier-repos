@@ -22,9 +22,7 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-namespace System.Windows.Forms {
-
-	public delegate void TreeViewEventHandler (object sender, TreeViewEventArgs e);
-
+namespace System.Windows.Forms
+{
+    public delegate void TreeViewEventHandler(object sender, TreeViewEventArgs e);
 }
-

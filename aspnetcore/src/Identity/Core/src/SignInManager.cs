@@ -858,7 +858,8 @@ public class SignInManager<TUser>
         var providerDisplayName =
             (await GetExternalAuthenticationSchemesAsync())
                 .FirstOrDefault(p => p.Name == provider)
-                ?.DisplayName ?? provider;
+                ?.DisplayName
+            ?? provider;
         return new ExternalLoginInfo(auth.Principal, provider, providerKey, providerDisplayName)
         {
             AuthenticationTokens = auth.Properties?.GetTokens(),

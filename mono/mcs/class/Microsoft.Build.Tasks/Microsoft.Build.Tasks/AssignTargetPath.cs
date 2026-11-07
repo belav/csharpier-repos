@@ -27,80 +27,84 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class AssignTargetPath : TaskExtension {
-	
-		ITaskItem[]	assignedFiles;
-		ITaskItem[]	files;
-		string		rootFolder;
-	
-		public AssignTargetPath ()
-		{
-		}
-		
-		public override bool Execute ()
-		{
-			if (files == null || files.Length == 0)
-				//nothing to do
-				return true;
+namespace Microsoft.Build.Tasks
+{
+    public class AssignTargetPath : TaskExtension
+    {
+        ITaskItem[] assignedFiles;
+        ITaskItem[] files;
+        string rootFolder;
 
-			assignedFiles = new ITaskItem [files.Length];
-			for (int i = 0; i < files.Length; i ++) {
-				string file = files [i].ItemSpec;
-				string link = files [i].GetMetadata ("Link");
-				string afile = null;
+        public AssignTargetPath() { }
 
-				if (String.IsNullOrEmpty (link)) {
-					//FIXME: Hack!
-					string normalized_root = Path.GetFullPath (rootFolder);
+        public override bool Execute()
+        {
+            if (files == null || files.Length == 0)
+                //nothing to do
+                return true;
 
-					// cur dir should already be set to
-					// the project dir
-					file = Path.GetFullPath (file);
+            assignedFiles = new ITaskItem[files.Length];
+            for (int i = 0; i < files.Length; i++)
+            {
+                string file = files[i].ItemSpec;
+                string link = files[i].GetMetadata("Link");
+                string afile = null;
 
-					if (file.StartsWith (normalized_root)) {
-						afile = Path.GetFullPath (file).Substring (
-								normalized_root.Length);
-						// skip over "root/"
-						if (afile [0] == '\\' ||
-							afile [0] == '/')
-							afile = afile.Substring (1);
+                if (String.IsNullOrEmpty(link))
+                {
+                    //FIXME: Hack!
+                    string normalized_root = Path.GetFullPath(rootFolder);
 
-					} else {
-						afile = Path.GetFileName (file);
-					}
-				} else {
-					afile = link;
-				}
+                    // cur dir should already be set to
+                    // the project dir
+                    file = Path.GetFullPath(file);
 
-				assignedFiles [i] = new TaskItem (files [i]);
-				assignedFiles [i].SetMetadata ("TargetPath", afile);
-			}
+                    if (file.StartsWith(normalized_root))
+                    {
+                        afile = Path.GetFullPath(file).Substring(normalized_root.Length);
+                        // skip over "root/"
+                        if (afile[0] == '\\' || afile[0] == '/')
+                            afile = afile.Substring(1);
+                    }
+                    else
+                    {
+                        afile = Path.GetFileName(file);
+                    }
+                }
+                else
+                {
+                    afile = link;
+                }
 
-			return true;
-		}
-		
-		[Output]
-		public ITaskItem[] AssignedFiles {
-			get { return assignedFiles; }
-		}
-		
-		public ITaskItem[] Files {
-			get { return files; }
-			set { files = value; }
-		}
-		
-		[Required]
-		public string RootFolder {
-			get { return rootFolder; }
-			set { rootFolder = value; }
-		}
-	}
+                assignedFiles[i] = new TaskItem(files[i]);
+                assignedFiles[i].SetMetadata("TargetPath", afile);
+            }
+
+            return true;
+        }
+
+        [Output]
+        public ITaskItem[] AssignedFiles
+        {
+            get { return assignedFiles; }
+        }
+
+        public ITaskItem[] Files
+        {
+            get { return files; }
+            set { files = value; }
+        }
+
+        [Required]
+        public string RootFolder
+        {
+            get { return rootFolder; }
+            set { rootFolder = value; }
+        }
+    }
 }
-

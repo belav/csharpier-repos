@@ -23,7 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly bool _inUsings;
         private QuickAttributeChecker? _lazyQuickAttributeChecker;
 
-        internal InSubmissionClassBinder(NamedTypeSymbol submissionClass, Binder next, CompilationUnitSyntax declarationSyntax, bool inUsings)
+        internal InSubmissionClassBinder(
+            NamedTypeSymbol submissionClass,
+            Binder next,
+            CompilationUnitSyntax declarationSyntax,
+            bool inUsings
+        )
             : base(submissionClass, next)
         {
             Debug.Assert(submissionClass.IsSubmissionClass);
@@ -36,30 +41,72 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             int arity,
             LookupOptions options,
-            Binder originalBinder)
+            Binder originalBinder
+        )
         {
-            for (var submission = this.Compilation; submission != null; submission = submission.PreviousSubmission)
+            for (
+                var submission = this.Compilation;
+                submission != null;
+                submission = submission.PreviousSubmission
+            )
             {
                 submission.ScriptClass?.GetExtensionMethods(methods, name, arity, options);
             }
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(result.IsClear);
 
-            this.LookupMembersInSubmissions(result, (NamedTypeSymbol)Container, _declarationSyntax, _inUsings, name, arity, basesBeingResolved, options, originalBinder, diagnose, ref useSiteInfo);
+            this.LookupMembersInSubmissions(
+                result,
+                (NamedTypeSymbol)Container,
+                _declarationSyntax,
+                _inUsings,
+                name,
+                arity,
+                basesBeingResolved,
+                options,
+                originalBinder,
+                diagnose,
+                ref useSiteInfo
+            );
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
-            this.AddMemberLookupSymbolsInfoInSubmissions(result, (NamedTypeSymbol)Container, _inUsings, options, originalBinder);
+            this.AddMemberLookupSymbolsInfoInSubmissions(
+                result,
+                (NamedTypeSymbol)Container,
+                _inUsings,
+                options,
+                originalBinder
+            );
         }
 
-        internal override ImmutableArray<AliasAndExternAliasDirective> ExternAliases => ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace).GetExternAliases(_declarationSyntax);
+        internal override ImmutableArray<AliasAndExternAliasDirective> ExternAliases =>
+            ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace).GetExternAliases(
+                _declarationSyntax
+            );
 
-        internal override ImmutableArray<AliasAndUsingDirective> UsingAliases => ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace).GetUsingAliases(_declarationSyntax, basesBeingResolved: null);
+        internal override ImmutableArray<AliasAndUsingDirective> UsingAliases =>
+            ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace).GetUsingAliases(
+                _declarationSyntax,
+                basesBeingResolved: null
+            );
 
         /// <summary>
         /// Get <see cref="QuickAttributeChecker"/> that can be used to quickly

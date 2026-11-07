@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ConversionExpression_Implicit_IdentityConversionDynamic()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -34,7 +35,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: dynamic d1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'd1 = o1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= o1')
@@ -45,8 +47,12 @@ IVariableDeclaratorOperation (Symbol: dynamic d1) (OperationKind.VariableDeclara
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         /// <summary>
@@ -56,7 +62,8 @@ IVariableDeclaratorOperation (Symbol: dynamic d1) (OperationKind.VariableDeclara
         [Fact]
         public void ConversionExpression_Implicit_IdentityConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -66,7 +73,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Object o2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'o2 = o1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= o1')
@@ -74,14 +82,19 @@ IVariableDeclaratorOperation (Symbol: System.Object o2) (OperationKind.VariableD
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NumericConversion_Valid()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -91,7 +104,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Double d1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'd1 = f1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= f1')
@@ -102,15 +116,20 @@ IVariableDeclaratorOperation (Symbol: System.Double d1) (OperationKind.VariableD
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NumericConversion_InvalidIllegalTypes()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -120,7 +139,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = f1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= f1')
@@ -129,20 +149,28 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
         Operand: 
           ILocalReferenceOperation: f1 (OperationKind.LocalReference, Type: System.Single, IsInvalid) (Syntax: 'f1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //         int /*<bind>*/i1 = f1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f1").WithArguments("float", "int").WithLocation(7, 28)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f1")
+                    .WithArguments("float", "int")
+                    .WithLocation(7, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [Fact]
         public void ConversionExpression_Implicit_NumericConversion_InvalidNoInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -153,43 +181,56 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 =/*</bind>*/')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '=/*</bind>*/')
       IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
         Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         int /*<bind>*/i1 =/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(8, 38)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(8, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 additionalOperationTreeVerifier: (operation, compilation, syntax) =>
                 {
                     // This scenario, where the syntax has IsMissing set, is special cased. We remove the conversion, and leave
                     // just an IInvalidOperation with null type. First assert that our assumptions are true, then test the actual
                     // result
                     var initializerSyntax = ((VariableDeclaratorSyntax)syntax).Initializer.Value;
-                    var typeInfo = compilation.GetSemanticModel(syntax.SyntaxTree).GetTypeInfo(initializerSyntax);
+                    var typeInfo = compilation
+                        .GetSemanticModel(syntax.SyntaxTree)
+                        .GetTypeInfo(initializerSyntax);
                     Assert.Equal(SyntaxKind.IdentifierName, initializerSyntax.Kind());
                     Assert.True(initializerSyntax.IsMissing);
                     Assert.Null(typeInfo.Type);
                     Assert.Null(typeInfo.ConvertedType);
 
-                    var initializerOperation = ((IVariableDeclaratorOperation)operation).Initializer.Value;
+                    var initializerOperation = ((IVariableDeclaratorOperation)operation)
+                        .Initializer
+                        .Value;
                     Assert.Null(initializerOperation.Type);
                     Assert.Equal(OperationKind.Invalid, initializerOperation.Kind);
-                });
+                }
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_EnumConversion_ZeroToEnum()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {    static void Main(string[] args)
     {
@@ -201,7 +242,8 @@ enum Enum1
     Option1, Option2
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'e1 = 0')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= 0')
@@ -210,21 +252,29 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'e1' is assigned but its value is never used
                 //         Enum1 /*<bind>*/e1 = 0/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1").WithArguments("e1").WithLocation(5, 25)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1")
+                    .WithArguments("e1")
+                    .WithLocation(5, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_EnumConversion_IntToEnum_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -238,7 +288,8 @@ enum Enum1
     Option1, Option2
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'e1 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= i1')
@@ -247,21 +298,29 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
         Operand: 
           ILocalReferenceOperation: i1 (OperationKind.LocalReference, Type: System.Int32, IsInvalid) (Syntax: 'i1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'int' to 'Program.Enum1'. An explicit conversion exists (are you missing a cast?)
                 //         Enum1 /*<bind>*/e1 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1").WithArguments("int", "Enum1").WithLocation(7, 30)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
+                    .WithArguments("int", "Enum1")
+                    .WithLocation(7, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_EnumConversion_OneToEnum_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {    static void Main(string[] args)
     {
@@ -273,7 +332,8 @@ enum Enum1
     Option1, Option2
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'e1 = 1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= 1')
@@ -282,23 +342,33 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1, IsInvalid) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (5,30): error CS0266: Cannot implicitly convert type 'int' to 'Enum1'. An explicit conversion exists (are you missing a cast?)
                 //         Enum1 /*<bind>*/e1 = 1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1").WithArguments("int", "Enum1").WithLocation(5, 30),
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1")
+                    .WithArguments("int", "Enum1")
+                    .WithLocation(5, 30),
                 // (5,25): warning CS0219: The variable 'e1' is assigned but its value is never used
                 //         Enum1 /*<bind>*/e1 = 1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1").WithArguments("e1").WithLocation(5, 25)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1")
+                    .WithArguments("e1")
+                    .WithLocation(5, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/20175")]
         public void ConversionExpression_Implicit_EnumConversion_NoInitializer_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -311,28 +381,37 @@ enum Enum1
     Option1, Option2
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclarationStatement, IsInvalid) (Syntax: 'Enum1 /*<bi ... *</bind>*/;')
   IVariableDeclaration (1 variables) (OperationKind.VariableDeclaration, IsInvalid) (Syntax: 'Enum1 /*<bi ... *</bind>*/;')
     Variables: Local_1: Enum1 e1
     Initializer: IConversionExpression (ConversionKind.Invalid, Implicit) (OperationKind.ConversionExpression, Type: Enum1, IsInvalid) (Syntax: '')
         IInvalidExpression (OperationKind.InvalidExpression, Type: ?, IsInvalid) (Syntax: '')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         Enum1 /*<bind>*/e1 =/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 40)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 40),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ThrowExpressionConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -343,7 +422,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'o = new obj ... Exception()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new objec ... Exception()')
@@ -367,26 +447,34 @@ IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 additionalOperationTreeVerifier: new ExpectedSymbolVerifier()
                 {
                     SyntaxSelector = (syntax) =>
                     {
-                        var initializer = (BinaryExpressionSyntax)((VariableDeclaratorSyntax)syntax).Initializer.Value;
+                        var initializer = (BinaryExpressionSyntax)
+                            ((VariableDeclaratorSyntax)syntax).Initializer.Value;
                         return initializer.Right;
                     },
                     OperationSelector = (operation) =>
                     {
-                        var initializer = ((IVariableDeclaratorOperation)operation).Initializer.Value;
+                        var initializer = ((IVariableDeclaratorOperation)operation)
+                            .Initializer
+                            .Value;
                         return (IConversionOperation)((ICoalesceOperation)initializer).WhenNull;
-                    }
-                }.Verify);
+                    },
+                }.Verify
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/20175")]
         public void ConversionExpression_Implicit_ThrowExpressionConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -397,7 +485,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclarationStatement, IsInvalid) (Syntax: 'object /*<b ... *</bind>*/;')
   IVariableDeclaration (1 variables) (OperationKind.VariableDeclaration, IsInvalid) (Syntax: 'object /*<b ... *</bind>*/;')
     Variables: Local_1: System.Object o
@@ -406,21 +495,27 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
           Children(1): IOperation:  (OperationKind.None, IsInvalid) (Syntax: 'throw new Exception()')
               Children(1): IObjectCreationExpression (Constructor: System.Exception..ctor()) (OperationKind.ObjectCreationExpression, Type: System.Exception) (Syntax: 'new Exception()')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8115: A throw expression is not allowed in this context.
                 //         object /*<bind>*/o = throw new Exception()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullToClassConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -429,7 +524,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.String s1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's1 = null')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= null')
@@ -438,21 +534,29 @@ IVariableDeclaratorOperation (Symbol: System.String s1) (OperationKind.VariableD
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 's1' is assigned but its value is never used
                 //         string /*<bind>*/s1 = null/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1").WithArguments("s1").WithLocation(6, 26)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
+                    .WithArguments("s1")
+                    .WithLocation(6, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullToNullableValueConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -465,7 +569,8 @@ struct S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: S1? s1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's1 = null')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= null')
@@ -474,21 +579,29 @@ IVariableDeclaratorOperation (Symbol: S1? s1) (OperationKind.VariableDeclarator,
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 's1' is assigned but its value is never used
                 //         S1? /*<bind>*/s1 = null/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1").WithArguments("s1").WithLocation(10, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
+                    .WithArguments("s1")
+                    .WithLocation(10, 23),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullToNonNullableConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -497,7 +610,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = null')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= null')
@@ -506,21 +620,29 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0037: Cannot convert null to 'int' because it is a non-nullable value type
                 //         int /*<bind>*/i1 = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int").WithLocation(6, 28)
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(6, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_DefaultToValueConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -531,7 +653,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = default')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= default')
@@ -540,22 +663,30 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDe
         Operand: 
           IDefaultValueOperation (OperationKind.DefaultValue, Type: System.Int64, Constant: 0) (Syntax: 'default')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         long /*<bind>*/i1 = default(int)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(8, 24)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(8, 24),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 parseOptions: TestOptions.Regular7_1,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_DefaultOfImplicitlyConvertableTypeToValueConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -566,7 +697,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = default(int)')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= default(int)')
@@ -575,14 +707,21 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDe
         Operand: 
           IDefaultValueOperation (OperationKind.DefaultValue, Type: System.Int32, Constant: 0) (Syntax: 'default(int)')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         long /*<bind>*/i1 = default(int)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(8, 24)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(8, 24),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         /// <summary>
@@ -592,7 +731,8 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDe
         [Fact]
         public void ConversionExpression_Implicit_DefaultToClassNoConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -603,26 +743,35 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.String i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = default(string)')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= default(string)')
       IDefaultValueOperation (OperationKind.DefaultValue, Type: System.String, Constant: null) (Syntax: 'default(string)')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         string /*<bind>*/i1 = default(string)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(8, 26)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(8, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullableFromConstantConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -631,7 +780,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32? i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = 1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= 1')
@@ -640,21 +790,29 @@ IVariableDeclaratorOperation (Symbol: System.Int32? i1) (OperationKind.VariableD
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         int? /*<bind>*/i1 = 1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(6, 24)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 24),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullableToNullableConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -664,7 +822,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int64? l1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'l1 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i1')
@@ -675,15 +834,20 @@ IVariableDeclaratorOperation (Symbol: System.Int64? l1) (OperationKind.VariableD
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullableFromNonNullableConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -693,7 +857,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32? i2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i2 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i1')
@@ -704,15 +869,20 @@ IVariableDeclaratorOperation (Symbol: System.Int32? i2) (OperationKind.VariableD
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_NullableToNonNullableConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -722,7 +892,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i2) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i2 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= i1')
@@ -731,14 +902,21 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i2) (OperationKind.VariableDe
         Operand: 
           ILocalReferenceOperation: i1 (OperationKind.LocalReference, Type: System.Int32?, IsInvalid) (Syntax: 'i1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //         int /*<bind>*/i2 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1").WithArguments("int?", "int").WithLocation(7, 28)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
+                    .WithArguments("int?", "int")
+                    .WithLocation(7, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -746,7 +924,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i2) (OperationKind.VariableDe
         public void ConversionExpression_Implicit_InterpolatedStringToIFormattableExpression()
         {
             // This needs to be updated once https://github.com/dotnet/roslyn/issues/20046 is addressed.
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -757,7 +936,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.IFormattable f1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'f1 = $""{1}""')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= $""{1}""')
@@ -776,15 +956,20 @@ IVariableDeclaratorOperation (Symbol: System.IFormattable f1) (OperationKind.Var
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceToObjectConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -795,7 +980,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Object o1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'o1 = new C1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new C1()')
@@ -809,15 +995,20 @@ IVariableDeclaratorOperation (Symbol: System.Object o1) (OperationKind.VariableD
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceToDynamicConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -828,7 +1019,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: dynamic d1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'd1 = new C1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new C1()')
@@ -842,15 +1034,20 @@ IVariableDeclaratorOperation (Symbol: dynamic d1) (OperationKind.VariableDeclara
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceClassToClassConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -865,7 +1062,8 @@ class C2 : C1
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = new C2()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new C2()')
@@ -879,15 +1077,20 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceClassToClassConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -902,7 +1105,8 @@ class C2
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1 = new C2()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new C2()')
@@ -914,21 +1118,29 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C2' to 'C1'
                 //         C1 /*<bind>*/c1 = new C2()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C2()").WithArguments("C2", "C1").WithLocation(8, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C2()")
+                    .WithArguments("C2", "C1")
+                    .WithLocation(8, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -939,7 +1151,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1 = new/*</bind>*/')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new/*</bind>*/')
@@ -949,21 +1162,27 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
           IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new/*</bind>*/')
             Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,41): error CS1526: A new expression requires an argument list or (), [], or {} after type
                 //         C1 /*<bind>*/c1 = new/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadNewExpr, ";").WithLocation(8, 41)
+                Diagnostic(ErrorCode.ERR_BadNewExpr, ";").WithLocation(8, 41),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceClassToInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 interface I1
@@ -978,7 +1197,8 @@ class C1 : I1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = new C1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new C1()')
@@ -992,15 +1212,20 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceClassToInterfaceConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 interface I1
@@ -1015,7 +1240,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = new C1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new C1()')
@@ -1027,21 +1253,29 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'C1' to 'I1'. An explicit conversion exists (are you missing a cast?)
                 //         I1 /*<bind>*/i1 = new C1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new C1()").WithArguments("C1", "I1").WithLocation(12, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new C1()")
+                    .WithArguments("C1", "I1")
+                    .WithLocation(12, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceInterfaceToClassConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 interface I1
@@ -1056,7 +1290,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = new I1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new I1()')
@@ -1066,21 +1301,29 @@ IVariableDeclaratorOperation (Symbol: C1 i1) (OperationKind.VariableDeclarator, 
           IInvalidOperation (OperationKind.Invalid, Type: I1, IsInvalid) (Syntax: 'new I1()')
             Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0144: Cannot create an instance of the abstract type or interface 'I1'
                 //         C1 /*<bind>*/i1 = new I1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new I1()").WithArguments("I1").WithLocation(12, 27)
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new I1()")
+                    .WithArguments("I1")
+                    .WithLocation(12, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceInterfaceToInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 interface I1
@@ -1100,7 +1343,8 @@ class C1 : I2
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = i2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i2')
@@ -1111,15 +1355,20 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceInterfaceToInterfaceConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 interface I1
@@ -1139,7 +1388,8 @@ class C1 : I2
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = i2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= i2')
@@ -1148,21 +1398,29 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
         Operand: 
           ILocalReferenceOperation: i2 (OperationKind.LocalReference, Type: I2, IsInvalid) (Syntax: 'i2')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'I2' to 'I1'. An explicit conversion exists (are you missing a cast?)
                 //         I1 /*<bind>*/i1 = i2/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i2").WithArguments("I2", "I1").WithLocation(17, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i2")
+                    .WithArguments("I2", "I1")
+                    .WithLocation(17, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToArrayConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1178,7 +1436,8 @@ class C2 : C1
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1arr = c2arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= c2arr')
@@ -1189,15 +1448,20 @@ IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclara
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToArrayConversion_InvalidDimensionMismatch()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1213,7 +1477,8 @@ class C2 : C1
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[][] c1arr) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1arr = c2arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= c2arr')
@@ -1222,21 +1487,29 @@ IVariableDeclaratorOperation (Symbol: C1[][] c1arr) (OperationKind.VariableDecla
         Operand: 
           ILocalReferenceOperation: c2arr (OperationKind.LocalReference, Type: C2[], IsInvalid) (Syntax: 'c2arr')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C2[]' to 'C1[][]'
                 //         C1[][] /*<bind>*/c1arr = c2arr/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "c2arr").WithArguments("C2[]", "C1[][]").WithLocation(9, 34)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "c2arr")
+                    .WithArguments("C2[]", "C1[][]")
+                    .WithLocation(9, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToArrayConversion_InvalidNoReferenceConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1252,7 +1525,8 @@ class C2
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1arr = c2arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= c2arr')
@@ -1261,21 +1535,29 @@ IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclara
         Operand: 
           ILocalReferenceOperation: c2arr (OperationKind.LocalReference, Type: C2[], IsInvalid) (Syntax: 'c2arr')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C2[]' to 'C1[]'
                 //         C1[] /*<bind>*/c1arr = c2arr/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "c2arr").WithArguments("C2[]", "C1[]").WithLocation(9, 32)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "c2arr")
+                    .WithArguments("C2[]", "C1[]")
+                    .WithLocation(9, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToArrayConversion_InvalidValueTypeToReferenceType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1294,7 +1576,8 @@ struct S1 : I1
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1[] i1arr) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1arr = new S1[10]')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new S1[10]')
@@ -1307,21 +1590,29 @@ IVariableDeclaratorOperation (Symbol: I1[] i1arr) (OperationKind.VariableDeclara
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'S1[]' to 'I1[]'
                 //         I1[] /*<bind>*/i1arr = new S1[10]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new S1[10]").WithArguments("S1[]", "I1[]").WithLocation(8, 32)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new S1[10]")
+                    .WithArguments("S1[]", "I1[]")
+                    .WithLocation(8, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToSystemArrayConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1332,7 +1623,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'a1 = new object[10]')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new object[10]')
@@ -1347,15 +1639,20 @@ IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToSystemArrayConversion_MultiDimensionalArray()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1366,7 +1663,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'a1 = new int[10][]')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new int[10][]')
@@ -1381,15 +1679,20 @@ IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToSystemArrayConversion_InvalidNotArrayType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1400,7 +1703,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'a1 = new object()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new object()')
@@ -1412,21 +1716,29 @@ IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDe
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'object' to 'System.Array'. An explicit conversion exists (are you missing a cast?)
                 //         Array /*<bind>*/a1 = new object()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()").WithArguments("object", "System.Array").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()")
+                    .WithArguments("object", "System.Array")
+                    .WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToIListTConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C1
@@ -1437,7 +1749,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.Int32> a1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'a1 = new int[10]')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new int[10]')
@@ -1452,15 +1765,20 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.In
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceArrayToIListTConversion_InvalidNonArrayType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C1
@@ -1471,7 +1789,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.Int32> a1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'a1 = new object()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new object()')
@@ -1483,21 +1802,29 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.In
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'object' to 'System.Collections.Generic.IList<int>'. An explicit conversion exists (are you missing a cast?)
                 //         IList<int> /*<bind>*/a1 = new object()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()").WithArguments("object", "System.Collections.Generic.IList<int>").WithLocation(8, 35)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()")
+                    .WithArguments("object", "System.Collections.Generic.IList<int>")
+                    .WithLocation(8, 35),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceDelegateTypeToSystemDelegateConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1514,7 +1841,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Delegate d2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'd2 = d1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= d1')
@@ -1525,15 +1853,20 @@ IVariableDeclaratorOperation (Symbol: System.Delegate d2) (OperationKind.Variabl
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceDelegateTypeToSystemDelegateConversion_InvalidNonDelegateType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1550,7 +1883,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Delegate d2) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'd2 = d1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= d1()')
@@ -1562,20 +1896,28 @@ IVariableDeclaratorOperation (Symbol: System.Delegate d2) (OperationKind.Variabl
               ILocalReferenceOperation: d1 (OperationKind.LocalReference, Type: C1.DType, IsInvalid) (Syntax: 'd1')
             Arguments(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'void' to 'System.Delegate'
                 //         Delegate /*<bind>*/d2 = d1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "d1()").WithArguments("void", "System.Delegate").WithLocation(10, 33)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "d1()")
+                    .WithArguments("void", "System.Delegate")
+                    .WithLocation(10, 33),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/20175")]
         public void ConversionExpression_Implicit_ReferenceDelegateTypeToSystemDelegateConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -1591,28 +1933,37 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclarationStatement, IsInvalid) (Syntax: 'Delegate /* ... *</bind>*/;')
   IVariableDeclaration (1 variables) (OperationKind.VariableDeclaration, IsInvalid) (Syntax: 'Delegate /* ... *</bind>*/;')
     Variables: Local_1: System.Delegate d2
     Initializer: IConversionExpression (ConversionKind.Invalid, Implicit) (OperationKind.ConversionExpression, Type: System.Delegate, IsInvalid) (Syntax: '')
         IInvalidExpression (OperationKind.InvalidExpression, Type: ?, IsInvalid) (Syntax: '')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         Delegate /*<bind>*/d2 =/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(9, 43)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(9, 43),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTransitiveConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -1629,7 +1980,8 @@ class C3 : C2
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = new C3()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new C3()')
@@ -1643,15 +1995,20 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceCovarianceTransitiveConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1<in T>
 {
 }
@@ -1677,7 +2034,8 @@ class C4 : C3
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = c2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= c2')
@@ -1688,15 +2046,20 @@ IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceCovarianceTransitiveConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 interface I1<in T>
 {
 }
@@ -1722,7 +2085,8 @@ class C4 : C3
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1<C3> c1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1 = c2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= c2')
@@ -1731,21 +2095,29 @@ IVariableDeclaratorOperation (Symbol: I1<C3> c1) (OperationKind.VariableDeclarat
         Operand: 
           ILocalReferenceOperation: c2 (OperationKind.LocalReference, Type: C2<C4>, IsInvalid) (Syntax: 'c2')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'C2<C4>' to 'I1<C3>'. An explicit conversion exists (are you missing a cast?)
                 //         I1<C3> /*<bind>*/c1 = c2/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2").WithArguments("C2<C4>", "I1<C3>").WithLocation(11, 31)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2")
+                    .WithArguments("C2<C4>", "I1<C3>")
+                    .WithLocation(11, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceContravarianceTransitiveConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1<out T>
 {
 }
@@ -1771,7 +2143,8 @@ class C4 : C3
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1<C3> c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = c2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= c2')
@@ -1782,15 +2155,20 @@ IVariableDeclaratorOperation (Symbol: I1<C3> c1) (OperationKind.VariableDeclarat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceContravarianceTransitiveConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 interface I1<out T>
 {
 }
@@ -1816,7 +2194,8 @@ class C4 : C3
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1 = c2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= c2')
@@ -1825,21 +2204,29 @@ IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarat
         Operand: 
           ILocalReferenceOperation: c2 (OperationKind.LocalReference, Type: C2<C3>, IsInvalid) (Syntax: 'c2')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'C2<C3>' to 'I1<C4>'. An explicit conversion exists (are you missing a cast?)
                 //         I1<C4> /*<bind>*/c1 = c2/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2").WithArguments("C2<C3>", "I1<C4>").WithLocation(11, 31)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2")
+                    .WithArguments("C2<C3>", "I1<C4>")
+                    .WithLocation(11, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceInvariantTransitiveConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C1
@@ -1850,7 +2237,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.String> list) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'list = new  ... t<string>()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new List<string>()')
@@ -1864,15 +2252,20 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.St
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterClassConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1<T>()
@@ -1887,7 +2280,8 @@ class C2 : C1
 
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = new T()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new T()')
@@ -1900,15 +2294,20 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterClassConversion_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1<T>()
@@ -1923,7 +2322,8 @@ class C2 : C1
 
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1 = new T()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new T()')
@@ -1934,21 +2334,29 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'T' to 'C1'
                 //         C1 /*<bind>*/c1 = new T()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new T()").WithArguments("T", "C1").WithLocation(7, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new T()")
+                    .WithArguments("T", "C1")
+                    .WithLocation(7, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -1962,7 +2370,8 @@ class C1 : I1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = new T()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new T()')
@@ -1975,15 +2384,20 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterToInterfaceConversion_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -1997,7 +2411,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = new T()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new T()')
@@ -2008,21 +2423,29 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'T' to 'I1'. An explicit conversion exists (are you missing a cast?)
                 //         I1 /*<bind>*/i1 = new T()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new T()").WithArguments("T", "I1").WithLocation(11, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new T()")
+                    .WithArguments("T", "I1")
+                    .WithLocation(11, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterToConstraintParameterConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2037,7 +2460,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: U u) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'u = new T()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new T()')
@@ -2050,15 +2474,20 @@ IVariableDeclaratorOperation (Symbol: U u) (OperationKind.VariableDeclarator, Ty
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterToConstraintParameter_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2073,7 +2502,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: U u) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'u = new T()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new T()')
@@ -2084,21 +2514,29 @@ IVariableDeclaratorOperation (Symbol: U u) (OperationKind.VariableDeclarator, Ty
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'T' to 'U'
                 //         U /*<bind>*/u = new T()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new T()").WithArguments("T", "U").WithLocation(12, 25)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new T()")
+                    .WithArguments("T", "U")
+                    .WithLocation(12, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterFromNull()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2112,7 +2550,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Type: null) (Syntax: 't = null')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= null')
@@ -2121,21 +2560,29 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 't' is assigned but its value is never used
                 //         T /*<bind>*/t = null/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t").WithArguments("t").WithLocation(11, 21)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
+                    .WithArguments("t")
+                    .WithLocation(11, 21),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReferenceTypeParameterFromNull_InvalidNoReferenceConstraint()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2149,7 +2596,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 't = null')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= null')
@@ -2158,21 +2606,29 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0403: Cannot convert null to type parameter 'T' because it could be a non-nullable value type. Consider using 'default(T)' instead.
                 //         T /*<bind>*/t = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_TypeVarCantBeNull, "null").WithArguments("T").WithLocation(11, 25)
+                Diagnostic(ErrorCode.ERR_TypeVarCantBeNull, "null")
+                    .WithArguments("T")
+                    .WithLocation(11, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNonNullableValueToObjectConversion()
         {
-            string source = @"
+            string source =
+                @"
 
 class C1
 {
@@ -2183,7 +2639,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'o = i')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i')
@@ -2194,15 +2651,20 @@ IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNonNullableValueToDynamicConversion()
         {
-            string source = @"
+            string source =
+                @"
 
 class C1
 {
@@ -2213,7 +2675,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: dynamic d) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'd = i')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i')
@@ -2224,15 +2687,20 @@ IVariableDeclaratorOperation (Symbol: dynamic d) (OperationKind.VariableDeclarat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingValueToSystemValueTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 struct S1
@@ -2244,7 +2712,8 @@ struct S1
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.ValueType v1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'v1 = new S1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new S1()')
@@ -2258,15 +2727,20 @@ IVariableDeclaratorOperation (Symbol: System.ValueType v1) (OperationKind.Variab
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNonNullableValueToSystemValueTypeConversion_InvalidNonValueType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -2278,7 +2752,8 @@ class C1
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.ValueType v1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'v1 = new C1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new C1()')
@@ -2290,21 +2765,29 @@ IVariableDeclaratorOperation (Symbol: System.ValueType v1) (OperationKind.Variab
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C1' to 'System.ValueType'
                 //         ValueType /*<bind>*/v1 = new C1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C1()").WithArguments("C1", "System.ValueType").WithLocation(8, 34)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C1()")
+                    .WithArguments("C1", "System.ValueType")
+                    .WithLocation(8, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNonNullableValueToImplementingInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2317,7 +2800,8 @@ struct S1 : I1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = new S1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new S1()')
@@ -2331,15 +2815,20 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNonNullableValueToImplementingInterfaceConversion_InvalidNotImplementing()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2352,7 +2841,8 @@ struct S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = new S1()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= new S1()')
@@ -2364,21 +2854,29 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
             Initializer: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'S1' to 'I1'
                 //         I1 /*<bind>*/i1 = new S1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new S1()").WithArguments("S1", "I1").WithLocation(10, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new S1()")
+                    .WithArguments("S1", "I1")
+                    .WithLocation(10, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNullableValueToImplementingInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2392,7 +2890,8 @@ struct S1 : I1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = s1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= s1')
@@ -2403,15 +2902,20 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingNullableValueToImplementingInterfaceConversion_InvalidNotImplementing()
         {
-            string source = @"
+            string source =
+                @"
 interface I1
 {
 }
@@ -2425,7 +2929,8 @@ struct S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = s1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= s1')
@@ -2434,21 +2939,29 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
         Operand: 
           ILocalReferenceOperation: s1 (OperationKind.LocalReference, Type: S1?, IsInvalid) (Syntax: 's1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'S1?' to 'I1'
                 //         I1 /*<bind>*/i1 = s1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "s1").WithArguments("S1?", "I1").WithLocation(11, 27)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "s1")
+                    .WithArguments("S1?", "I1")
+                    .WithLocation(11, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingEnumToSystemEnumConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 enum E1
@@ -2465,7 +2978,8 @@ struct S1
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Enum e) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'e = E1.E')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= E1.E')
@@ -2478,15 +2992,20 @@ IVariableDeclaratorOperation (Symbol: System.Enum e) (OperationKind.VariableDecl
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_BoxingEnumToSystemEnumConversion_InvalidNotEnum()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 enum E1
@@ -2503,7 +3022,8 @@ struct S1
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Enum e) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'e = 1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= 1')
@@ -2512,21 +3032,29 @@ IVariableDeclaratorOperation (Symbol: System.Enum e) (OperationKind.VariableDecl
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1, IsInvalid) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'int' to 'System.Enum'
                 //         Enum /*<bind>*/e = 1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "System.Enum").WithLocation(13, 28)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "System.Enum")
+                    .WithLocation(13, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_DynamicConversionToClass()
         {
-            string source = @"
+            string source =
+                @"
 class S1
 {
     void M1()
@@ -2536,7 +3064,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.String s1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's1 = d1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= d1')
@@ -2547,15 +3076,20 @@ IVariableDeclaratorOperation (Symbol: System.String s1) (OperationKind.VariableD
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_DynamicConversionToValueType()
         {
-            string source = @"
+            string source =
+                @"
 class S1
 {
     void M1()
@@ -2565,7 +3099,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = d1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= d1')
@@ -2576,15 +3111,20 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ConstantExpressionConversion()
         {
-            string source = @"
+            string source =
+                @"
 class S1
 {
     void M1()
@@ -2594,7 +3134,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's1 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i1')
@@ -2603,21 +3144,29 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
         Operand: 
           ILocalReferenceOperation: i1 (OperationKind.LocalReference, Type: System.Int32, Constant: 1) (Syntax: 'i1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 's1' is assigned but its value is never used
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1").WithArguments("s1").WithLocation(7, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
+                    .WithArguments("s1")
+                    .WithLocation(7, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                    additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ConstantExpressionConversion_InvalidValueTooLarge()
         {
-            string source = @"
+            string source =
+                @"
 class S1
 {
     void M1()
@@ -2627,7 +3176,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 's1 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= i1')
@@ -2636,24 +3186,34 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
         Operand: 
           ILocalReferenceOperation: i1 (OperationKind.LocalReference, Type: System.Int32, Constant: 4096, IsInvalid) (Syntax: 'i1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (7,36): error CS0031: Constant value '4096' cannot be converted to a 'sbyte'
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ConstOutOfRange, "i1").WithArguments("4096", "sbyte").WithLocation(7, 36),
+                Diagnostic(ErrorCode.ERR_ConstOutOfRange, "i1")
+                    .WithArguments("4096", "sbyte")
+                    .WithLocation(7, 36),
                 // (7,31): warning CS0219: The variable 's1' is assigned but its value is never used
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1").WithArguments("s1").WithLocation(7, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
+                    .WithArguments("s1")
+                    .WithLocation(7, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ConstantExpressionConversion_InvalidNonConstantExpression()
         {
-            string source = @"
+            string source =
+                @"
 class S1
 {
     void M1()
@@ -2663,7 +3223,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 's1 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= i1')
@@ -2672,21 +3233,29 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
         Operand: 
           ILocalReferenceOperation: i1 (OperationKind.LocalReference, Type: System.Int32, IsInvalid) (Syntax: 'i1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'int' to 'sbyte'. An explicit conversion exists (are you missing a cast?)
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1").WithArguments("int", "sbyte").WithLocation(7, 36)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
+                    .WithArguments("int", "sbyte")
+                    .WithLocation(7, 36),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_UserDefinedConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -2703,7 +3272,8 @@ class C2
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2 = this')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= this')
@@ -2714,15 +3284,20 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_UserDefinedMultiImplicitStepConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -2740,7 +3315,8 @@ class C2
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i1')
@@ -2754,18 +3330,23 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 additionalOperationTreeVerifier: new ExpectedSymbolVerifier()
                 {
-                    ConversionChildSelector = ExpectedSymbolVerifier.NestedConversionChildSelector
-                }.Verify);
+                    ConversionChildSelector = ExpectedSymbolVerifier.NestedConversionChildSelector,
+                }.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_UserDefinedMultiImplicitAndExplicitStepConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -2788,7 +3369,8 @@ class C2
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2 = (int)this')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)this')
@@ -2803,20 +3385,28 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
                 Operand: 
                   IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C1) (Syntax: 'this')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         int i1 = 1;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(6, 13)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 13),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_UserDefinedMultiImplicitAndExplicitStepConversion_InvalidMissingExplicitConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -2839,7 +3429,8 @@ class C2
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c2 = this')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= this')
@@ -2848,23 +3439,33 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
         Operand: 
           IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C1, IsInvalid) (Syntax: 'this')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C1' to 'C2'
                 //         C2 /*<bind>*/c2 = this/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "this").WithArguments("C1", "C2").WithLocation(7, 27),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "this")
+                    .WithArguments("C1", "C2")
+                    .WithLocation(7, 27),
                 // CS0219: The variable 'i1' is assigned but its value is never used
                 //         int i1 = 1;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1").WithLocation(6, 13)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
+                    .WithArguments("i1")
+                    .WithLocation(6, 13),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_UserDefinedMultipleCandidateConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
 }
@@ -2890,7 +3491,8 @@ class C3
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C3 c3) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c3 = this')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= this')
@@ -2901,15 +3503,20 @@ IVariableDeclaratorOperation (Symbol: C3 c3) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_PointerFromNullConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -2920,7 +3527,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'v1 = null')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= null')
@@ -2930,16 +3538,21 @@ IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDe
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 compilationOptions: TestOptions.UnsafeReleaseDll,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_PointerToVoidConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -2951,7 +3564,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'v1 = i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= i1')
@@ -2962,16 +3576,21 @@ IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 compilationOptions: TestOptions.UnsafeReleaseDll,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_PointerFromVoidConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -2983,7 +3602,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32* i1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i1 = v1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= v1')
@@ -2992,22 +3612,30 @@ IVariableDeclaratorOperation (Symbol: System.Int32* i1) (OperationKind.VariableD
         Operand: 
           ILocalReferenceOperation: v1 (OperationKind.LocalReference, Type: System.Void*, IsInvalid) (Syntax: 'v1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'void*' to 'int*'. An explicit conversion exists (are you missing a cast?)
                 //         int* /*<bind>*/i1 = v1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "v1").WithArguments("void*", "int*").WithLocation(9, 29)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "v1")
+                    .WithArguments("void*", "int*")
+                    .WithLocation(9, 29),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 compilationOptions: TestOptions.UnsafeReleaseDll,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_PointerFromIntegerConversion_Invalid()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class S1
@@ -3018,7 +3646,8 @@ class S1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'v1 = 0')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= 0')
@@ -3027,22 +3656,30 @@ IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDe
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0, IsInvalid) (Syntax: '0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'int' to 'void*'. An explicit conversion exists (are you missing a cast?)
                 //         void* /*<bind>*/v1 = 0/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "0").WithArguments("int", "void*").WithLocation(8, 30),
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "0")
+                    .WithArguments("int", "void*")
+                    .WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
                 compilationOptions: TestOptions.UnsafeReleaseDll,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ExpressionTreeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -3054,7 +3691,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Linq.Expressions.Expression<System.Func<System.Int32, System.Boolean>> exp) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'exp = num => num < 5')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= num => num < 5')
@@ -3073,14 +3711,19 @@ IVariableDeclaratorOperation (Symbol: System.Linq.Expressions.Expression<System.
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/20291")]
         public void ConversionExpression_Implicit_ExpressionTreeConversion_InvalidIncorrectLambdaType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -3092,7 +3735,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclarationStatement, IsInvalid) (Syntax: 'Expression< ... *</bind>*/;')
   IVariableDeclaration (1 variables) (OperationKind.VariableDeclaration, IsInvalid) (Syntax: 'Expression< ... *</bind>*/;')
     Variables: Local_1: System.Linq.Expressions.Expression<System.Func<System.Int32, System.Boolean>> exp
@@ -3103,26 +3747,36 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
               IConversionExpression (ConversionKind.Invalid, Implicit) (OperationKind.ConversionExpression, Type: System.Boolean, IsInvalid) (Syntax: 'num')
                 IParameterReferenceExpression: num (OperationKind.ParameterReferenceExpression, Type: System.Int32) (Syntax: 'num')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'int' to 'bool'
                 //         Expression<Func<int, bool>> /*<bind>*/exp = num => num/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "num").WithArguments("int", "bool").WithLocation(9, 60),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "num")
+                    .WithArguments("int", "bool")
+                    .WithLocation(9, 60),
                 // CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
                 //         Expression<Func<int, bool>> /*<bind>*/exp = num => num/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "num").WithArguments("lambda expression").WithLocation(9, 60)
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "num")
+                    .WithArguments("lambda expression")
+                    .WithLocation(9, 60),
             };
 
             // Due to https://github.com/dotnet/roslyn/issues/20291, we cannot verify that the types of the ioperation tree and the semantic model
             // match, as they do not actually match.
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ExpressionTreeConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -3134,7 +3788,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Linq.Expressions.Expression<System.Func<System.Int32, System.Boolean>> exp) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'exp = num =>/*</bind>*/')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= num =>/*</bind>*/')
@@ -3148,21 +3803,29 @@ IVariableDeclaratorOperation (Symbol: System.Linq.Expressions.Expression<System.
                   IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
                     Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         Expression<Func<int, bool>> /*<bind>*/exp = num =>/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(9, 70)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(9, 70),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReturnStatementConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public long M1()
@@ -3172,7 +3835,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return i;')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int64, IsImplicit) (Syntax: 'i')
@@ -3182,15 +3846,20 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return i;')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_ReturnStatementConversion_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public int M1()
@@ -3200,7 +3869,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return f;')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int32, IsInvalid, IsImplicit) (Syntax: 'f')
@@ -3208,21 +3878,29 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
       Operand: 
         ILocalReferenceOperation: f (OperationKind.LocalReference, Type: System.Single, IsInvalid) (Syntax: 'f')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //         /*<bind>*/return f;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f").WithArguments("float", "int").WithLocation(7, 26)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f")
+                    .WithArguments("float", "int")
+                    .WithLocation(7, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_CheckedOnlyAppliesToNumeric()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -3237,7 +3915,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'object o = null;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'object o = null')
     Declarators:
@@ -3251,20 +3930,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'o' is assigned but its value is never used
                 //                 /*<bind>*/object o = null/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "o").WithArguments("o").WithLocation(10, 34)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "o")
+                    .WithArguments("o")
+                    .WithLocation(10, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_DelegateTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class Program
 {
@@ -3275,7 +3962,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'Action<stri ... jectAction;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Action<stri ... bjectAction')
     Declarators:
@@ -3291,14 +3979,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_DelegateTypeConversion_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class Program
 {
@@ -3309,7 +4002,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'Action<int> ... jectAction;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Action<int> ... bjectAction')
     Declarators:
@@ -3323,20 +4017,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'System.Action<object>' to 'System.Action<int>'
                 //         /*<bind>*/Action<int> intAction = objectAction;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "objectAction").WithArguments("System.Action<object>", "System.Action<int>").WithLocation(8, 43)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "objectAction")
+                    .WithArguments("System.Action<object>", "System.Action<int>")
+                    .WithLocation(8, 43),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ConversionFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i, long l)
@@ -3347,7 +4049,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3371,14 +4074,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Implicit_InlineArray()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(Buffer10 arg)
@@ -3388,7 +4096,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.ReadOnlySpan<System.Char> span) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'span = arg')
   Initializer:
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= arg')
@@ -3399,9 +4108,16 @@ IVariableDeclaratorOperation (Symbol: System.ReadOnlySpan<System.Char> span) (Op
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilation(source + IOperationTests_IInlineArrayAccessOperation.Buffer10Definition, targetFramework: TargetFramework.Net80);
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(comp, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            var comp = CreateCompilation(
+                source + IOperationTests_IInlineArrayAccessOperation.Buffer10Definition,
+                targetFramework: TargetFramework.Net80
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         #endregion
@@ -3412,7 +4128,8 @@ IVariableDeclaratorOperation (Symbol: System.ReadOnlySpan<System.Char> span) (Op
         [Fact]
         public void ConversionExpression_Explicit_ExplicitIdentityConversionCreatesIConversionExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3421,7 +4138,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)1')
@@ -3430,21 +4148,29 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //         int /*<bind>*/i = (int)1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 23),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ImplicitAndExplicitConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3453,7 +4179,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int64 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)1')
@@ -3465,21 +4192,29 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i) (OperationKind.VariableDec
             Operand: 
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //         long /*<bind>*/i = (int)1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(6, 24)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 24),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: new ExpectedSymbolVerifier().Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_SimpleNumericCast()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3488,26 +4223,35 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int32, Constant: 1) (Syntax: '(int)1.0')
   Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: True, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   Operand: 
     ILiteralOperation (OperationKind.Literal, Type: System.Double, Constant: 1) (Syntax: '1.0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //         int i = /*<bind>*/(int)1.0/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(6, 13)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 13),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_SimpleNumericConversion_InvalidNoImplicitConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3516,7 +4260,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i = (float)1.0')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (float)1.0')
@@ -3528,23 +4273,33 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
             Operand: 
               ILiteralOperation (OperationKind.Literal, Type: System.Double, Constant: 1, IsInvalid) (Syntax: '1.0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (6,27): error CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //         int /*<bind>*/i = (float)1.0/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(float)1.0").WithArguments("float", "int").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(float)1.0")
+                    .WithArguments("float", "int")
+                    .WithLocation(6, 27),
                 // (6,23): warning CS0219: The variable 'i' is assigned but its value is never used
                 //         int /*<bind>*/i = (float)1.0/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 23),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_SimpleNumericConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3553,7 +4308,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int64 i) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i = (int)/*</bind>*/')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (int)/*</bind>*/')
@@ -3566,20 +4322,28 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i) (OperationKind.VariableDec
               IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
                 Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         long /*<bind>*/i = (int)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 44)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 44),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_EnumFromNumericLiteralConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3593,7 +4357,8 @@ enum E1
     One, Two
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: E1 e1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'e1 = (E1)1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (E1)1')
@@ -3602,20 +4367,28 @@ IVariableDeclaratorOperation (Symbol: E1 e1) (OperationKind.VariableDeclarator, 
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'e1' is assigned but its value is never used
                 //         E1 /*<bind>*/e1 = (E1)1/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1").WithArguments("e1").WithLocation(6, 22)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1")
+                    .WithArguments("e1")
+                    .WithLocation(6, 22),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_EnumToNumericTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3629,7 +4402,8 @@ enum E1
     One, Two
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)E1.One')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)E1.One')
@@ -3640,20 +4414,28 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
             Instance Receiver: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //         int /*<bind>*/i = (int)E1.One/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(6, 23)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 23),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_EnumToEnumConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3672,7 +4454,8 @@ enum E2
     Three, Four
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: E2 e2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'e2 = (E2)E1.One')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (E2)E1.One')
@@ -3683,20 +4466,28 @@ IVariableDeclaratorOperation (Symbol: E2 e2) (OperationKind.VariableDeclarator, 
             Instance Receiver: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'e2' is assigned but its value is never used
                 //         E2 /*<bind>*/e2 = (E2)E1.One/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e2").WithArguments("e2").WithLocation(6, 22)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e2")
+                    .WithArguments("e2")
+                    .WithLocation(6, 22),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_EnumToEnumConversion_InvalidOutOfRange()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M1()
@@ -3718,7 +4509,8 @@ enum E2 : byte
 
             // Note: The lack of a constant value for the conversion is expected here, it matches the semantic model.
             // Because the enum value is larger than the destination enum, the conversion is bad
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: E2 e2) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'e2 = (E2)E1.One')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (E2)E1.One')
@@ -3729,23 +4521,33 @@ IVariableDeclaratorOperation (Symbol: E2 e2) (OperationKind.VariableDeclarator, 
             Instance Receiver: 
               null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0221: Constant value '1000' cannot be converted to a 'E2' (use 'unchecked' syntax to override)
                 //         E2 /*<bind>*/e2 = (E2)E1.One/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(E2)E1.One").WithArguments("1000", "E2").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(E2)E1.One")
+                    .WithArguments("1000", "E2")
+                    .WithLocation(6, 27),
                 // CS0219: The variable 'e2' is assigned but its value is never used
                 //         E2 /*<bind>*/e2 = (E2)E1.One/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e2").WithArguments("e2").WithLocation(6, 22)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e2")
+                    .WithArguments("e2")
+                    .WithLocation(6, 22),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_NullableToNullableConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3755,7 +4557,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32? i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int?)l')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int?)l')
@@ -3766,14 +4569,19 @@ IVariableDeclaratorOperation (Symbol: System.Int32? i) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_NullableToNonNullableConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3783,7 +4591,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)l')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)l')
@@ -3794,14 +4603,19 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromObjectConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -3811,7 +4625,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.String s) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's = (string)o')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (string)o')
@@ -3822,14 +4637,19 @@ IVariableDeclaratorOperation (Symbol: System.String s) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromDynamicConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -3839,7 +4659,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.String s) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's = (string)d')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (string)d')
@@ -3850,14 +4671,19 @@ IVariableDeclaratorOperation (Symbol: System.String s) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromSuperclassConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -3871,7 +4697,8 @@ class C2 : C1
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2 = (C2)c1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C2)c1')
@@ -3882,14 +4709,19 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromSuperclassConversion_InvalidNoConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -3903,7 +4735,8 @@ class C2
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c2 = (C2)c1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (C2)c1')
@@ -3912,20 +4745,28 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
         Operand: 
           ILocalReferenceOperation: c1 (OperationKind.LocalReference, Type: C1, IsInvalid) (Syntax: 'c1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'C1' to 'C2'
                 //         C2 /*<bind>*/c2 = (C2)c1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)c1").WithArguments("C1", "C2").WithLocation(7, 27)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)c1")
+                    .WithArguments("C1", "C2")
+                    .WithLocation(7, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromImplementedInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 class C1 : I1
@@ -3937,7 +4778,8 @@ class C1 : I1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = (C1)i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C1)i1')
@@ -3948,14 +4790,19 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromUnimplementedInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 class C1
@@ -3967,7 +4814,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = (C1)i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C1)i1')
@@ -3978,14 +4826,19 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromUnimplementedInterfaceConversion_InvalidSealedClass()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 sealed class C1
@@ -3997,7 +4850,8 @@ sealed class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1 = (C1)i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (C1)i1')
@@ -4006,20 +4860,28 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
         Operand: 
           ILocalReferenceOperation: i1 (OperationKind.LocalReference, Type: I1, IsInvalid) (Syntax: 'i1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'I1' to 'C1'
                 //         C1 /*<bind>*/c1 = (C1)i1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1)i1").WithArguments("I1", "C1").WithLocation(9, 27)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1)i1")
+                    .WithArguments("I1", "C1")
+                    .WithLocation(9, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceFromInterfaceToInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 interface I2 { }
@@ -4033,7 +4895,8 @@ sealed class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I2 i2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i2 = (I2)i1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (I2)i1')
@@ -4044,14 +4907,19 @@ IVariableDeclaratorOperation (Symbol: I2 i2) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 interface I2 { }
 
 sealed class C1
@@ -4062,7 +4930,8 @@ sealed class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I2 i2) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'i2 = (I2)()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (I2)()')
@@ -4072,20 +4941,28 @@ IVariableDeclaratorOperation (Symbol: I2 i2) (OperationKind.VariableDeclarator, 
           IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
             Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ')'
                 //         I2 /*<bind>*/i2 = (I2)()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(8, 32)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(8, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceArrayTypeToArrayTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -4097,7 +4974,8 @@ class C1
 
 class C2 : C1 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2[] c2arr) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2arr = (C2[])c1arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C2[])c1arr')
@@ -4108,14 +4986,19 @@ IVariableDeclaratorOperation (Symbol: C2[] c2arr) (OperationKind.VariableDeclara
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceArrayTypeToArrayTypeConversion_InvalidNoElementTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -4127,7 +5010,8 @@ class C1
 
 class C2 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2[] c2arr) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c2arr = (C2[])c1arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (C2[])c1arr')
@@ -4136,20 +5020,28 @@ IVariableDeclaratorOperation (Symbol: C2[] c2arr) (OperationKind.VariableDeclara
         Operand: 
           ILocalReferenceOperation: c1arr (OperationKind.LocalReference, Type: C1[], IsInvalid) (Syntax: 'c1arr')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'C1[]' to 'C2[]'
                 //         C2[] /*<bind>*/c2arr = (C2[])c1arr/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2[])c1arr").WithArguments("C1[]", "C2[]").WithLocation(7, 32)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2[])c1arr")
+                    .WithArguments("C1[]", "C2[]")
+                    .WithLocation(7, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceArrayTypeToArrayTypeConversion_InvalidMismatchedSized()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     static void M1()
@@ -4159,7 +5051,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[][] c2arr) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c2arr = (C1[][])c1arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (C1[][])c1arr')
@@ -4168,20 +5061,28 @@ IVariableDeclaratorOperation (Symbol: C1[][] c2arr) (OperationKind.VariableDecla
         Operand: 
           ILocalReferenceOperation: c1arr (OperationKind.LocalReference, Type: C1[], IsInvalid) (Syntax: 'c1arr')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'C1[]' to 'C1[][]'
                 //         C1[][] /*<bind>*/c2arr = (C1[][])c1arr/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1[][])c1arr").WithArguments("C1[]", "C1[][]").WithLocation(7, 34)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1[][])c1arr")
+                    .WithArguments("C1[]", "C1[][]")
+                    .WithLocation(7, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceSystemArrayToArrayTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4193,7 +5094,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[] c2arr) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2arr = (C1[])c1arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C1[])c1arr')
@@ -4204,14 +5106,19 @@ IVariableDeclaratorOperation (Symbol: C1[] c2arr) (OperationKind.VariableDeclara
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceArrayToIListConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4224,7 +5131,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<C1> c1list) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1list = (I ... t<C1>)c1arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (IList<C1>)c1arr')
@@ -4235,14 +5143,19 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<C1> c1lis
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceArrayToIListConversion_InvalidMismatchedDimensions()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4255,7 +5168,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<C1> c1list) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1list = (I ... t<C1>)c1arr')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (IList<C1>)c1arr')
@@ -4264,20 +5178,28 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<C1> c1lis
         Operand: 
           ILocalReferenceOperation: c1arr (OperationKind.LocalReference, Type: C1[][], IsInvalid) (Syntax: 'c1arr')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'C1[][]' to 'System.Collections.Generic.IList<C1>'
                 //         IList<C1> /*<bind>*/c1list = (IList<C1>)c1arr/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(IList<C1>)c1arr").WithArguments("C1[][]", "System.Collections.Generic.IList<C1>").WithLocation(10, 38)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(IList<C1>)c1arr")
+                    .WithArguments("C1[][]", "System.Collections.Generic.IList<C1>")
+                    .WithLocation(10, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceIListToArrayTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4290,7 +5212,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1arr = (C1[])c1List')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C1[])c1List')
@@ -4301,14 +5224,19 @@ IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclara
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceIListToArrayTypeConversion_InvalidMismatchedDimensions()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4321,7 +5249,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C1[][] c1arr) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'c1arr = (C1[][])c1List')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (C1[][])c1List')
@@ -4330,20 +5259,28 @@ IVariableDeclaratorOperation (Symbol: C1[][] c1arr) (OperationKind.VariableDecla
         Operand: 
           ILocalReferenceOperation: c1List (OperationKind.LocalReference, Type: System.Collections.Generic.IList<C1>, IsInvalid) (Syntax: 'c1List')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'System.Collections.Generic.IList<C1>' to 'C1[][]'
                 //         C1[][] /*<bind>*/c1arr = (C1[][])c1List/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1[][])c1List").WithArguments("System.Collections.Generic.IList<C1>", "C1[][]").WithLocation(10, 34)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1[][])c1List")
+                    .WithArguments("System.Collections.Generic.IList<C1>", "C1[][]")
+                    .WithLocation(10, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceDelegateToDelegateTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4355,7 +5292,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Action a) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'a = (Action)d')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (Action)d')
@@ -4366,14 +5304,19 @@ IVariableDeclaratorOperation (Symbol: System.Action a) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReferenceContravarianceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1<out T>
 {
 }
@@ -4399,7 +5342,8 @@ class C4 : C3
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = (I1<C4>)c2')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (I1<C4>)c2')
@@ -4410,14 +5354,19 @@ IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingObjectToValueTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -4427,7 +5376,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)o')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)o')
@@ -4438,14 +5388,19 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingDynamicToValueTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -4455,7 +5410,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)d')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)d')
@@ -4466,14 +5422,19 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingSystemValueTypeToValueTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4485,7 +5446,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (int)v')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (int)v')
@@ -4496,14 +5458,19 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingSystemEnumToEnumConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4520,7 +5487,8 @@ enum E1
     One = 1
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: E1 e1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'e1 = (E1)e')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (E1)e')
@@ -4531,14 +5499,19 @@ IVariableDeclaratorOperation (Symbol: E1 e1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingReferenceToNullableTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4555,7 +5528,8 @@ enum E1
     One = 1
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: E1? e1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'e1 = (E1?)e')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (E1?)e')
@@ -4566,14 +5540,19 @@ IVariableDeclaratorOperation (Symbol: E1? e1) (OperationKind.VariableDeclarator,
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingReferenceToNullableTypeConversion_InvalidNoConversionToNonNullableType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4590,7 +5569,8 @@ enum E1
     One = 1
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Int32? e1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 'e1 = (E1?)e')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (E1?)e')
@@ -4602,20 +5582,28 @@ IVariableDeclaratorOperation (Symbol: System.Int32? e1) (OperationKind.VariableD
             Operand: 
               ILocalReferenceOperation: e (OperationKind.LocalReference, Type: System.Enum, IsInvalid) (Syntax: 'e')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'E1?' to 'int?'. An explicit conversion exists (are you missing a cast?)
                 //         int? /*<bind>*/e1 = (E1?)e/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E1?)e").WithArguments("E1?", "int?").WithLocation(9, 29)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E1?)e")
+                    .WithArguments("E1?", "int?")
+                    .WithLocation(9, 29),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingValueTypeFromInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4631,7 +5619,8 @@ interface I1 { }
 
 struct S1 : I1 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: S1 s1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's1 = (S1)i')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (S1)i')
@@ -4642,14 +5631,19 @@ IVariableDeclaratorOperation (Symbol: S1 s1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingValueTypeFromInterfaceConversion_InvalidNoConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4665,7 +5659,8 @@ interface I1 { }
 
 struct S1 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: S1 s1) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 's1 = (S1)i')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (S1)i')
@@ -4674,20 +5669,28 @@ IVariableDeclaratorOperation (Symbol: S1 s1) (OperationKind.VariableDeclarator, 
         Operand: 
           ILocalReferenceOperation: i (OperationKind.LocalReference, Type: I1, IsInvalid) (Syntax: 'i')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'I1' to 'S1'
                 //         S1 /*<bind>*/s1 = (S1)i/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(S1)i").WithArguments("I1", "S1").WithLocation(9, 27)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(S1)i")
+                    .WithArguments("I1", "S1")
+                    .WithLocation(9, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_UnboxingVarianceConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4704,7 +5707,8 @@ interface I1 { }
 
 struct S1 : I1 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<S1> s1List) (OperationKind.VariableDeclarator, Type: null) (Syntax: 's1List = (I ... <S1>)i1List')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (IList<S1>)i1List')
@@ -4715,14 +5719,19 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<S1> s1Lis
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_TypeParameterConstraintConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4733,7 +5742,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Type: null) (Syntax: 't = (T)u')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (T)u')
@@ -4744,14 +5754,19 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_TypeParameterConversion_InvalidNoConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4762,7 +5777,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Type: null, IsInvalid) (Syntax: 't = (T)u')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null, IsInvalid) (Syntax: '= (T)u')
@@ -4771,20 +5787,28 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
         Operand: 
           IParameterReferenceOperation: u (OperationKind.ParameterReference, Type: U, IsInvalid) (Syntax: 'u')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'U' to 'T'
                 //         T /*<bind>*/t = (T)u/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(T)u").WithArguments("U", "T").WithLocation(8, 25)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(T)u")
+                    .WithArguments("U", "T")
+                    .WithLocation(8, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_TypeParameterToInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 class C1
@@ -4795,7 +5819,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Type: null) (Syntax: 't = (T)i')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (T)i')
@@ -4806,14 +5831,19 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_TypeParameterFromInterfaceConversion()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 class C1
@@ -4824,7 +5854,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i = (I1)t')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (I1)t')
@@ -4835,14 +5866,19 @@ IVariableDeclaratorOperation (Symbol: I1 i) (OperationKind.VariableDeclarator, T
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ImplicitUserDefinedConversionAsExplicitConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -4856,7 +5892,8 @@ class C1
 
 class C2 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2 = (C2)c1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C2)c1')
@@ -4867,14 +5904,19 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ExplicitUserDefinedConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M1()
@@ -4888,7 +5930,8 @@ class C1
 
 class C2 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c2 = (C2)c1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C2)c1')
@@ -4899,14 +5942,19 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ExplicitUserDefinedConversion_WithImplicitConversionAfter()
         {
-            string source = @"
+            string source =
+                @"
 interface I1 { }
 
 class C1
@@ -4922,7 +5970,8 @@ class C1
 
 class C2 : I1 { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'i1 = (C2)c1')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (C2)c1')
@@ -4936,14 +5985,19 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReturnConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4954,7 +6008,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (int)1.0;')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int32, Constant: 1) (Syntax: '(int)1.0')
@@ -4964,14 +6019,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (int)1.0;')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReturnConversion_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -4982,7 +6042,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return (int)"""";')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int32, IsInvalid) (Syntax: '(int)""""')
@@ -4990,20 +6051,28 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
       Operand: 
         ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: """", IsInvalid) (Syntax: '""""')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'string' to 'int'
                 //         /*<bind>*/return (int)"";/*</bind>*/
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, @"(int)""""").WithArguments("string", "int").WithLocation(8, 26)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, @"(int)""""")
+                    .WithArguments("string", "int")
+                    .WithLocation(8, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_ReturnConversion_InvalidSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -5014,7 +6083,8 @@ class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return (int);')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int32, IsInvalid) (Syntax: '(int)')
@@ -5023,20 +6093,28 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
         IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
           Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         /*<bind>*/return (int);/*</bind>*/
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(8, 31)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(8, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_CheckedOnlyAppliesToNumeric()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -5051,7 +6129,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'object o = (object)null;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'object o = (object)null')
     Declarators:
@@ -5065,20 +6144,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'o' is assigned but its value is never used
                 //                 /*<bind>*/object o = (object)null/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "o").WithArguments("o").WithLocation(10, 34)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "o")
+                    .WithArguments("o")
+                    .WithLocation(10, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_DelegateTypeConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class Program
 {
@@ -5089,7 +6176,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Action<System.String>) (Syntax: '(Action<str ... bjectAction')
   Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
   Operand: 
@@ -5097,14 +6185,19 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_DelegateTypeConversion_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class Program
 {
@@ -5115,26 +6208,35 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Action<System.Int32>, IsInvalid) (Syntax: '(Action<int ... bjectAction')
   Conversion: CommonConversion (Exists: False, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   Operand: 
     ILocalReferenceOperation: objectAction (OperationKind.LocalReference, Type: System.Action<System.Object>, IsInvalid) (Syntax: 'objectAction')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0030: Cannot convert type 'System.Action<object>' to 'System.Action<int>'
                 //         Action<int> intAction = /*<bind>*/(Action<int>)objectAction/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(Action<int>)objectAction").WithArguments("System.Action<object>", "System.Action<int>").WithLocation(8, 43)
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(Action<int>)objectAction")
+                    .WithArguments("System.Action<object>", "System.Action<int>")
+                    .WithLocation(8, 43),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ConversionFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i, bool b, long l, long m)
@@ -5145,7 +6247,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5204,13 +6307,18 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void TestNullableConversion()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 
 using System;
@@ -5241,16 +6349,23 @@ class Class
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var assignment = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().First();
+            var assignment = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .First();
             var iopTree = (IAssignmentOperation)model.GetOperation(assignment);
-            Assert.Equal(CodeAnalysis.NullableAnnotation.Annotated, iopTree.Value.Type.NullableAnnotation);
+            Assert.Equal(
+                CodeAnalysis.NullableAnnotation.Annotated,
+                iopTree.Value.Type.NullableAnnotation
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ConversionExpression_Explicit_InlineArray()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(Buffer10 arg)
@@ -5260,7 +6375,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Span<System.Char>) (Syntax: '(System.Span<char>)arg')
   Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   Operand:
@@ -5268,8 +6384,15 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilation(source + IOperationTests_IInlineArrayAccessOperation.Buffer10Definition, targetFramework: TargetFramework.Net80);
-            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            var comp = CreateCompilation(
+                source + IOperationTests_IInlineArrayAccessOperation.Buffer10Definition,
+                targetFramework: TargetFramework.Net80
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         #endregion
@@ -5281,7 +6404,8 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
 
             public static SyntaxNode IdentitySelector(SyntaxNode syntaxNode) => syntaxNode;
 
-            public static SyntaxNode ReturnStatementSelector(SyntaxNode syntaxNode) => ((ReturnStatementSyntax)syntaxNode).Expression;
+            public static SyntaxNode ReturnStatementSelector(SyntaxNode syntaxNode) =>
+                ((ReturnStatementSyntax)syntaxNode).Expression;
 
             public static IOperation IVariableDeclarationStatementSelector(IOperation operation) =>
                 ((IVariableDeclarationGroupOperation)operation).Declarations.Single().Initializer;
@@ -5312,7 +6436,8 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
 
             public Func<IOperation, IConversionOperation> OperationSelector { get; set; }
 
-            public Func<IOperation, IOperation> ConversionChildSelector { get; set; } = ConversionOrDelegateChildSelector;
+            public Func<IOperation, IOperation> ConversionChildSelector { get; set; } =
+                ConversionOrDelegateChildSelector;
 
             public Func<SyntaxNode, SyntaxNode> SyntaxSelector { get; set; }
 
@@ -5326,7 +6451,11 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
             /// <see cref="ConversionChildSelector"/> is used to select what child node of the IConversion to compare original types to.
             /// this is useful for multiple conversion scenarios where we end up with multiple IConversion nodes in the tree.
             /// </summary>
-            public void Verify(IOperation variableDeclaration, Compilation compilation, SyntaxNode syntaxNode)
+            public void Verify(
+                IOperation variableDeclaration,
+                Compilation compilation,
+                SyntaxNode syntaxNode
+            )
             {
                 var finalSyntax = GetAndInvokeSyntaxSelector(syntaxNode);
                 var semanticModel = compilation.GetSemanticModel(finalSyntax.SyntaxTree);
@@ -5356,7 +6485,9 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                         case CastExpressionSyntax cast:
                             return cast.Expression;
                         default:
-                            throw new ArgumentException($"Cannot handle syntax of type {syntax.GetType()}");
+                            throw new ArgumentException(
+                                $"Cannot handle syntax of type {syntax.GetType()}"
+                            );
                     }
                 }
             }
@@ -5381,7 +6512,9 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                     case IConversionOperation conv:
                         return conv;
                     default:
-                        throw new ArgumentException($"Cannot handle arguments of type {operation.GetType()}");
+                        throw new ArgumentException(
+                            $"Cannot handle arguments of type {operation.GetType()}"
+                        );
                 }
             }
         }

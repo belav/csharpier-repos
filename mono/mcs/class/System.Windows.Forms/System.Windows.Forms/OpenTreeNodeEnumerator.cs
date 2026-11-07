@@ -22,91 +22,97 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
 using System.Collections;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    internal class OpenTreeNodeEnumerator : IEnumerator
+    {
+        private TreeNode start;
+        private TreeNode current;
+        private bool started;
 
-	internal class OpenTreeNodeEnumerator : IEnumerator {
+        public OpenTreeNodeEnumerator(TreeNode start)
+        {
+            this.start = start;
+        }
 
-		private TreeNode start;
-		private TreeNode current;
-		private bool started;
+        public object Current
+        {
+            get { return current; }
+        }
 
-		public OpenTreeNodeEnumerator (TreeNode start)
-		{
-			this.start = start;
-		}
+        public TreeNode CurrentNode
+        {
+            get { return current; }
+        }
 
-		public object Current {
-			get { return current; }
-		}
+        public bool MoveNext()
+        {
+            if (!started)
+            {
+                started = true;
+                current = start;
+                return (current != null);
+            }
 
-		public TreeNode CurrentNode {
-			get { return current; }
-		}
+            if (current.is_expanded && current.Nodes.Count > 0)
+            {
+                current = current.Nodes[0];
+                return true;
+            }
 
-		public bool MoveNext ()
-		{
-			if (!started) {
-				started = true;
-				current = start;
-				return (current != null);
-			}
+            TreeNode prev = current;
+            TreeNode next = current.NextNode;
+            while (next == null)
+            {
+                // The next node is null so we need to move back up the tree until we hit the top
+                if (prev.parent == null)
+                    return false;
+                prev = prev.parent;
+                if (prev.parent != null)
+                    next = prev.NextNode;
+            }
+            current = next;
+            return true;
+        }
 
-			if (current.is_expanded && current.Nodes.Count > 0) {
-				current = current.Nodes [0];
-				return true;
-			}
+        public bool MovePrevious()
+        {
+            if (!started)
+            {
+                started = true;
+                current = start;
+                return (current != null);
+            }
 
-			TreeNode prev = current;
-			TreeNode next = current.NextNode;
-			while (next == null) {
-				// The next node is null so we need to move back up the tree until we hit the top
-				if (prev.parent == null)
-					return false;
-				prev = prev.parent;
-				if (prev.parent != null)
-					next = prev.NextNode;
-			}
-			current = next;
-			return true;
-		}
-		
-		public bool MovePrevious ()
-		{
-			if (!started) {
-				started = true;
-				current = start;
-				return (current != null);
-			}
+            if (current.PrevNode != null)
+            {
+                // Drill down as far as possible
+                TreeNode prev = current.PrevNode;
+                TreeNode walk = prev;
+                while (walk != null)
+                {
+                    prev = walk;
+                    if (!walk.is_expanded)
+                        break;
+                    walk = walk.LastNode;
+                }
+                current = prev;
+                return true;
+            }
 
-			if (current.PrevNode != null) {
-				// Drill down as far as possible
-				TreeNode prev = current.PrevNode;
-				TreeNode walk = prev;
-				while (walk != null) {
-					prev = walk;
-					if (!walk.is_expanded)
-						break;
-					walk = walk.LastNode;
-				}
-				current = prev;
-				return true;
-			}
+            if (current.Parent == null)
+                return false;
 
-			if (current.Parent == null)
-				return false;
+            current = current.Parent;
+            return true;
+        }
 
-			current = current.Parent;
-			return true;
-		}
-
-		public void Reset ()
-		{
-			started = false;
-		}
-	}
+        public void Reset()
+        {
+            started = false;
+        }
+    }
 }
-

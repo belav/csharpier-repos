@@ -16,15 +16,17 @@ namespace System.Runtime.Caching
         private readonly object _value;
         private readonly DateTime _utcCreated;
         private int _state;
+
         // expiration
         private DateTime _utcAbsExp;
         private readonly TimeSpan _slidingExp;
         private ExpiresEntryRef _expiresEntryRef;
         private byte _expiresBucket; // index of the expiration list (bucket)
+
         // usage
-        private readonly byte _usageBucket;  // index of the usage list (== priority-1)
-        private UsageEntryRef _usageEntryRef;   // ref into the usage list
-        private DateTime _utcLastUpdateUsage;   // time we last updated usage
+        private readonly byte _usageBucket; // index of the usage list (== priority-1)
+        private UsageEntryRef _usageEntryRef; // ref into the usage list
+        private DateTime _utcLastUpdateUsage; // time we last updated usage
 
         private readonly CacheEntryRemovedCallback _callback;
         private SeldomUsedFields _fields; // optimization to reduce workingset when the entry hasn't any dependencies
@@ -32,7 +34,10 @@ namespace System.Runtime.Caching
         private sealed class SeldomUsedFields
         {
             internal Collection<ChangeMonitor> _dependencies; // the entry's dependency needs to be disposed when the entry is released
-            internal Dictionary<MemoryCacheEntryChangeMonitor, MemoryCacheEntryChangeMonitor> _dependents;  // dependents must be notified when this entry is removed
+            internal Dictionary<
+                MemoryCacheEntryChangeMonitor,
+                MemoryCacheEntryChangeMonitor
+            > _dependents; // dependents must be notified when this entry is removed
             internal MemoryCache _cache;
             internal Tuple<MemoryCacheStore, MemoryCacheEntry> _updateSentinel; // the MemoryCacheEntry (and its associated store) of the OnUpdateSentinel for this entry, if there is one
         }
@@ -103,14 +108,17 @@ namespace System.Runtime.Caching
             set { _utcLastUpdateUsage = value; }
         }
 
-        internal MemoryCacheEntry(string key,
-                                  object value,
-                                  DateTimeOffset absExp,
-                                  TimeSpan slidingExp,
-                                  CacheItemPriority priority,
-                                  Collection<ChangeMonitor> dependencies,
-                                  CacheEntryRemovedCallback removedCallback,
-                                  MemoryCache cache) : base(key)
+        internal MemoryCacheEntry(
+            string key,
+            object value,
+            DateTimeOffset absExp,
+            TimeSpan slidingExp,
+            CacheItemPriority priority,
+            Collection<ChangeMonitor> dependencies,
+            CacheEntryRemovedCallback removedCallback,
+            MemoryCache cache
+        )
+            : base(key)
         {
             if (value is null)
             {
@@ -167,18 +175,26 @@ namespace System.Runtime.Caching
 
                 _fields ??= new SeldomUsedFields();
                 _fields._cache ??= cache;
-                _fields._dependents ??= new Dictionary<MemoryCacheEntryChangeMonitor, MemoryCacheEntryChangeMonitor>();
+                _fields._dependents ??=
+                    new Dictionary<MemoryCacheEntryChangeMonitor, MemoryCacheEntryChangeMonitor>();
                 _fields._dependents[dependent] = dependent;
             }
         }
 
-        private void CallCacheEntryRemovedCallback(MemoryCache cache, CacheEntryRemovedReason reason)
+        private void CallCacheEntryRemovedCallback(
+            MemoryCache cache,
+            CacheEntryRemovedReason reason
+        )
         {
             if (_callback == null)
             {
                 return;
             }
-            CacheEntryRemovedArguments args = new CacheEntryRemovedArguments(cache, reason, new CacheItem(Key, _value));
+            CacheEntryRemovedArguments args = new CacheEntryRemovedArguments(
+                cache,
+                reason,
+                new CacheItem(Key, _value)
+            );
             try
             {
                 _callback(args);
@@ -202,12 +218,18 @@ namespace System.Runtime.Caching
 
         internal bool CompareExchangeState(EntryState value, EntryState comparand)
         {
-            return (Interlocked.CompareExchange(ref _state, (int)value, (int)comparand) == (int)comparand);
+            return (
+                Interlocked.CompareExchange(ref _state, (int)value, (int)comparand)
+                == (int)comparand
+            );
         }
 
         // Associates this entry with an update sentinel. If this entry has a sliding expiration, we need to
         // touch the sentinel so that it doesn't expire.
-        internal void ConfigureUpdateSentinel(MemoryCacheStore sentinelStore, MemoryCacheEntry sentinelEntry)
+        internal void ConfigureUpdateSentinel(
+            MemoryCacheStore sentinelStore,
+            MemoryCacheEntry sentinelEntry
+        )
         {
             lock (this)
             {
@@ -234,7 +256,11 @@ namespace System.Runtime.Caching
                 // to throw potentially unhandled "disposed" exceptions in this case.
                 // However, RemoveEntry sidesteps 'throwOnDispose' so we don't need to
                 // worry about a try/catch here.
-                _fields._cache.RemoveEntry(this.Key, this, CacheEntryRemovedReason.ChangeMonitorChanged);
+                _fields._cache.RemoveEntry(
+                    this.Key,
+                    this,
+                    CacheEntryRemovedReason.ChangeMonitorChanged
+                );
             }
         }
 
@@ -244,7 +270,10 @@ namespace System.Runtime.Caching
 
             // Are there any cache entries that depend on this entry?
             // If so, we need to fire their dependencies.
-            Dictionary<MemoryCacheEntryChangeMonitor, MemoryCacheEntryChangeMonitor>.KeyCollection deps = null;
+            Dictionary<
+                MemoryCacheEntryChangeMonitor,
+                MemoryCacheEntryChangeMonitor
+            >.KeyCollection deps = null;
             // clone the dependents
             lock (this)
             {
@@ -293,7 +322,10 @@ namespace System.Runtime.Caching
             if (_slidingExp > TimeSpan.Zero)
             {
                 DateTime utcNewExpires = utcNow + _slidingExp;
-                if (utcNewExpires - _utcAbsExp >= CacheExpires.MIN_UPDATE_DELTA || utcNewExpires < _utcAbsExp)
+                if (
+                    utcNewExpires - _utcAbsExp >= CacheExpires.MIN_UPDATE_DELTA
+                    || utcNewExpires < _utcAbsExp
+                )
                 {
                     expires.UtcUpdate(this, utcNewExpires);
                 }

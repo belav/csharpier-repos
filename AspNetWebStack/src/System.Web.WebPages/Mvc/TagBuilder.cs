@@ -10,7 +10,9 @@ using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.Mvc
 {
-    [TypeForwardedFrom("System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class TagBuilder
     {
         private string _idAttributeDotReplacement;
@@ -21,7 +23,10 @@ namespace System.Web.Mvc
         {
             if (String.IsNullOrEmpty(tagName))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "tagName");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "tagName"
+                );
             }
 
             TagName = tagName;
@@ -125,16 +130,18 @@ namespace System.Web.Mvc
             foreach (var attribute in Attributes)
             {
                 string key = attribute.Key;
-                if (String.Equals(key, "id", StringComparison.Ordinal /* case-sensitive */) && String.IsNullOrEmpty(attribute.Value))
+                if (
+                    String.Equals(
+                        key,
+                        "id",
+                        StringComparison.Ordinal /* case-sensitive */
+                    ) && String.IsNullOrEmpty(attribute.Value)
+                )
                 {
                     continue; // DevDiv Bugs #227595: don't output empty IDs
                 }
                 string value = HttpUtility.HtmlAttributeEncode(attribute.Value);
-                sb.Append(' ')
-                    .Append(key)
-                    .Append("=\"")
-                    .Append(value)
-                    .Append('"');
+                sb.Append(' ').Append(key).Append("=\"").Append(value).Append('"');
             }
         }
 
@@ -147,7 +154,10 @@ namespace System.Web.Mvc
         {
             if (String.IsNullOrEmpty(key))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "key");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "key"
+                );
             }
 
             if (replaceExisting || !Attributes.ContainsKey(key))
@@ -161,7 +171,10 @@ namespace System.Web.Mvc
             MergeAttributes(attributes, replaceExisting: false);
         }
 
-        public void MergeAttributes<TKey, TValue>(IDictionary<TKey, TValue> attributes, bool replaceExisting)
+        public void MergeAttributes<TKey, TValue>(
+            IDictionary<TKey, TValue> attributes,
+            bool replaceExisting
+        )
         {
             if (attributes != null)
             {
@@ -195,31 +208,22 @@ namespace System.Web.Mvc
             switch (renderMode)
             {
                 case TagRenderMode.StartTag:
-                    sb.Append('<')
-                        .Append(TagName);
+                    sb.Append('<').Append(TagName);
                     AppendAttributes(sb);
                     sb.Append('>');
                     break;
                 case TagRenderMode.EndTag:
-                    sb.Append("</")
-                        .Append(TagName)
-                        .Append('>');
+                    sb.Append("</").Append(TagName).Append('>');
                     break;
                 case TagRenderMode.SelfClosing:
-                    sb.Append('<')
-                        .Append(TagName);
+                    sb.Append('<').Append(TagName);
                     AppendAttributes(sb);
                     sb.Append(" />");
                     break;
                 default:
-                    sb.Append('<')
-                        .Append(TagName);
+                    sb.Append('<').Append(TagName);
                     AppendAttributes(sb);
-                    sb.Append('>')
-                        .Append(InnerHtml)
-                        .Append("</")
-                        .Append(TagName)
-                        .Append('>');
+                    sb.Append('>').Append(InnerHtml).Append("</").Append(TagName).Append('>');
                     break;
             }
             return sb.ToString();

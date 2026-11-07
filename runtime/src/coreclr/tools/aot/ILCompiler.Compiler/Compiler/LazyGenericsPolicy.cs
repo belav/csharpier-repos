@@ -20,7 +20,11 @@ namespace ILCompiler
                 return true;
 
             if (method.HasInstantiation)
-                return method.IsVirtual || method.HasCustomAttribute("System.Runtime.CompilerServices", "ForceLazyDictionaryAttribute");
+                return method.IsVirtual
+                    || method.HasCustomAttribute(
+                        "System.Runtime.CompilerServices",
+                        "ForceLazyDictionaryAttribute"
+                    );
 
             return false;
         }
@@ -35,14 +39,19 @@ namespace ILCompiler
 
         public sealed override bool UsesLazyGenerics(MetadataType type)
         {
-            return type.HasCustomAttribute("System.Runtime.CompilerServices", "ForceLazyDictionaryAttribute");
+            return type.HasCustomAttribute(
+                "System.Runtime.CompilerServices",
+                "ForceLazyDictionaryAttribute"
+            );
         }
     }
 
     public sealed class LazyGenericsDisabledPolicy : LazyGenericsPolicy
     {
         public sealed override bool UsesLazyGenerics(MethodDesc method) => false;
+
         public sealed override bool UsesLazyGenerics(TypeDesc type) => false;
+
         public sealed override bool UsesLazyGenerics(MetadataType type) => false;
     }
 }

@@ -16,7 +16,6 @@ namespace System.Runtime
         static XName definitionIdentities;
         static XName definitionIdentityFilter;
         static XName workflowApplication;
-  
 
         public static XName DefinitionIdentity
         {
@@ -50,7 +49,9 @@ namespace System.Runtime
             {
                 if (definitionIdentityFilter == null)
                 {
-                    definitionIdentityFilter = workflow45Namespace.GetName("DefinitionIdentityFilter");
+                    definitionIdentityFilter = workflow45Namespace.GetName(
+                        "DefinitionIdentityFilter"
+                    );
                 }
 
                 return definitionIdentityFilter;

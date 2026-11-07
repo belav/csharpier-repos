@@ -9,7 +9,11 @@ namespace ILCompiler
     {
         private readonly FieldDesc _underlyingFieldDesc;
 
-        public ImpliedRepeatedFieldDesc(DefType owningType, FieldDesc underlyingFieldDesc, int fieldIndex)
+        public ImpliedRepeatedFieldDesc(
+            DefType owningType,
+            FieldDesc underlyingFieldDesc,
+            int fieldIndex
+        )
         {
             OwningType = owningType;
             _underlyingFieldDesc = underlyingFieldDesc;
@@ -20,7 +24,8 @@ namespace ILCompiler
 
         public override TypeDesc FieldType => _underlyingFieldDesc.FieldType;
 
-        public override bool HasEmbeddedSignatureData => _underlyingFieldDesc.HasEmbeddedSignatureData;
+        public override bool HasEmbeddedSignatureData =>
+            _underlyingFieldDesc.HasEmbeddedSignatureData;
 
         public override bool IsStatic => _underlyingFieldDesc.IsStatic;
 
@@ -38,15 +43,20 @@ namespace ILCompiler
 
         protected override int ClassCode => 31666958;
 
-        public override EmbeddedSignatureData[] GetEmbeddedSignatureData() => _underlyingFieldDesc.GetEmbeddedSignatureData();
+        public override EmbeddedSignatureData[] GetEmbeddedSignatureData() =>
+            _underlyingFieldDesc.GetEmbeddedSignatureData();
 
-        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) => _underlyingFieldDesc.HasCustomAttribute(attributeNamespace, attributeName);
+        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
+            _underlyingFieldDesc.HasCustomAttribute(attributeNamespace, attributeName);
 
         protected override int CompareToImpl(FieldDesc other, TypeSystemComparer comparer)
         {
             var impliedRepeatedFieldDesc = (ImpliedRepeatedFieldDesc)other;
 
-            int result = comparer.Compare(_underlyingFieldDesc, impliedRepeatedFieldDesc._underlyingFieldDesc);
+            int result = comparer.Compare(
+                _underlyingFieldDesc,
+                impliedRepeatedFieldDesc._underlyingFieldDesc
+            );
 
             if (result != 0)
             {
@@ -56,7 +66,8 @@ namespace ILCompiler
             return FieldIndex.CompareTo(impliedRepeatedFieldDesc.FieldIndex);
         }
 
-        public override MarshalAsDescriptor GetMarshalAsDescriptor() => _underlyingFieldDesc.GetMarshalAsDescriptor();
+        public override MarshalAsDescriptor GetMarshalAsDescriptor() =>
+            _underlyingFieldDesc.GetMarshalAsDescriptor();
 
         public override string Name => $"{_underlyingFieldDesc.Name}[{FieldIndex}]";
     }

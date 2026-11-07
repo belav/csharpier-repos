@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             /// </summary>
             public readonly BasicBlockBuilder? WhenNull;
 
-            public ConditionalAccessOperationTracker(ArrayBuilder<IOperation> operations, BasicBlockBuilder whenNull)
+            public ConditionalAccessOperationTracker(
+                ArrayBuilder<IOperation> operations,
+                BasicBlockBuilder whenNull
+            )
             {
                 Debug.Assert(operations != null && whenNull != null);
                 Operations = operations;

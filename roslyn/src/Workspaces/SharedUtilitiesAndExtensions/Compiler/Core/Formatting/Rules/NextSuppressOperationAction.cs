@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ImmutableArray<AbstractFormattingRule> formattingRules,
         int index,
         SyntaxNode node,
-        List<SuppressOperation> list)
+        List<SuppressOperation> list
+    )
     {
-        private NextSuppressOperationAction NextAction
-            => new(formattingRules, index + 1, node, list);
+        private NextSuppressOperationAction NextAction =>
+            new(formattingRules, index + 1, node, list);
 
         public void Invoke()
         {

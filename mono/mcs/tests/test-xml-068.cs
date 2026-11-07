@@ -2,15 +2,11 @@
 
 class X
 {
-	/// <summary>
-	/// Test summary
-	/// </summary>
-	/// <see cref="#sometext"/>
-	static void Test ()
-	{
-	}
+    /// <summary>
+    /// Test summary
+    /// </summary>
+    /// <see cref="#sometext"/>
+    static void Test() { }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

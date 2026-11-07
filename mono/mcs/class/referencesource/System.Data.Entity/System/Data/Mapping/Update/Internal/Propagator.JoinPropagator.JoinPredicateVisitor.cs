@@ -7,10 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.CommandTrees;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Data.Common.CommandTrees;
+using System.Diagnostics;
+
 namespace System.Data.Mapping.Update.Internal
 {
     internal partial class Propagator
@@ -46,7 +47,8 @@ namespace System.Data.Mapping.Update.Internal
                 #region Fields
                 private readonly List<DbExpression> m_leftKeySelectors;
                 private readonly List<DbExpression> m_rightKeySelectors;
-                private static readonly string s_visitorName = typeof(JoinConditionVisitor).FullName;
+                private static readonly string s_visitorName =
+                    typeof(JoinConditionVisitor).FullName;
                 #endregion
 
                 #region Properties
@@ -74,7 +76,11 @@ namespace System.Data.Mapping.Update.Internal
                 /// </code>
                 /// See Walker class for an explanation of this coding pattern.
                 /// </remarks>
-                static internal void GetKeySelectors(DbExpression joinCondition, out ReadOnlyCollection<DbExpression> leftKeySelectors, out ReadOnlyCollection<DbExpression> rightKeySelectors)
+                static internal void GetKeySelectors(
+                    DbExpression joinCondition,
+                    out ReadOnlyCollection<DbExpression> leftKeySelectors,
+                    out ReadOnlyCollection<DbExpression> rightKeySelectors
+                )
                 {
                     EntityUtil.CheckArgumentNull(joinCondition, "joinCondition");
 
@@ -90,8 +96,10 @@ namespace System.Data.Mapping.Update.Internal
                     leftKeySelectors = visitor.m_leftKeySelectors.AsReadOnly();
                     rightKeySelectors = visitor.m_rightKeySelectors.AsReadOnly();
 
-                    Debug.Assert(leftKeySelectors.Count == rightKeySelectors.Count,
-                        "(Update/JoinPropagator) The equi-join must have an equal number of left and right properties");
+                    Debug.Assert(
+                        leftKeySelectors.Count == rightKeySelectors.Count,
+                        "(Update/JoinPropagator) The equi-join must have an equal number of left and right properties"
+                    );
                 }
                 #endregion
 

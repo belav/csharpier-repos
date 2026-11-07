@@ -13,17 +13,17 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         string fileName,
         string typeName,
         bool sameFile,
-        ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults)
+        ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults
+    )
     {
         public string FileName { get; } = fileName;
         public string TypeName { get; } = typeName;
         public bool SameFile { get; } = sameFile;
-        public ImmutableArray<ExtractClassMemberAnalysisResult> MemberAnalysisResults { get; } = memberAnalysisResults;
+        public ImmutableArray<ExtractClassMemberAnalysisResult> MemberAnalysisResults { get; } =
+            memberAnalysisResults;
     }
 
-    internal class ExtractClassMemberAnalysisResult(
-        ISymbol member,
-        bool makeAbstract)
+    internal class ExtractClassMemberAnalysisResult(ISymbol member, bool makeAbstract)
     {
         /// <summary>
         /// The member needs to be pulled up.

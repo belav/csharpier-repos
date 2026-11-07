@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void GetCorrespondingOperation_ForNull_ThrowsArgumentNullException()
         {
-            Assert.ThrowsAny<ArgumentNullException>(() => OperationExtensions.GetCorrespondingOperation(null));
+            Assert.ThrowsAny<ArgumentNullException>(() =>
+                OperationExtensions.GetCorrespondingOperation(null)
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -28,7 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void GetCorrespondingOperation_ForGotoBranch_ReturnsNull()
         {
-            var result = GetOuterOperationAndCorrespondingInnerOperation<LabeledStatementSyntax, GotoStatementSyntax>(@"
+            var result = GetOuterOperationAndCorrespondingInnerOperation<
+                LabeledStatementSyntax,
+                GotoStatementSyntax
+            >(
+                @"
 class C
 {
     void F()
@@ -39,7 +45,8 @@ class C
             /*<bind>*/goto begin;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
             Assert.IsAssignableFrom<ILabeledOperation>(result.outer);
             Assert.Null(result.corresponding);
         }
@@ -49,7 +56,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_ForLoopWithBreak()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -59,7 +67,8 @@ class C
             /*<bind>*/break;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -67,7 +76,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_WhileLoopWithContinue()
         {
-            AssertOuterIsCorrespondingLoopOfInner<WhileStatementSyntax, ContinueStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<WhileStatementSyntax, ContinueStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -77,7 +87,8 @@ class C
             /*<bind>*/continue;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -85,7 +96,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_DoWhileLoopWithBreakAndContinue()
         {
-            AssertOuterIsCorrespondingLoopOfInner<DoStatementSyntax, ContinueStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<DoStatementSyntax, ContinueStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -98,7 +110,8 @@ class C
                 /*<bind>*/continue;/*</bind>*/
         } while (true)/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -106,7 +119,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_ForEachLoopWithBreak()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForEachStatementSyntax, BreakStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForEachStatementSyntax, BreakStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -117,7 +131,8 @@ class C
                 /*<bind>*/break;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -125,7 +140,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_ForEachLoopWithBreakAndContinue()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForEachStatementSyntax, BreakStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForEachStatementSyntax, BreakStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -138,7 +154,8 @@ class C
                 continue;
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -146,7 +163,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_NestedLoops()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -159,7 +177,8 @@ class C
             /*<bind>*/break;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -167,7 +186,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_NestedLoops2()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -180,7 +200,8 @@ class C
             }/*</bind>*/
         }
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -188,7 +209,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_SwitchLookup_BreakInCase()
         {
-            AssertOuterIsCorrespondingSwitchOfInner(@"
+            AssertOuterIsCorrespondingSwitchOfInner(
+                @"
 class C
 {
     void F()
@@ -199,7 +221,8 @@ class C
             /*<bind>*/break;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -207,7 +230,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_SwitchLookup_NestedSwitches()
         {
-            AssertOuterIsCorrespondingSwitchOfInner(@"
+            AssertOuterIsCorrespondingSwitchOfInner(
+                @"
 class C
 {
     void F()
@@ -223,7 +247,8 @@ class C
             /*<bind>*/break;/*</bind>*/
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -231,7 +256,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_SwitchLookup_NestedSwitches2()
         {
-            AssertOuterIsCorrespondingSwitchOfInner(@"
+            AssertOuterIsCorrespondingSwitchOfInner(
+                @"
 class C
 {
     void F()
@@ -247,7 +273,8 @@ class C
             break;
         }
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -255,7 +282,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_LoopInSwitch()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, BreakStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -270,7 +298,8 @@ class C
             break;
         }
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -278,7 +307,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_SwitchLookup_SwitchInLoop()
         {
-            AssertOuterIsCorrespondingSwitchOfInner(@"
+            AssertOuterIsCorrespondingSwitchOfInner(
+                @"
 class C
 {
     void F()
@@ -292,7 +322,8 @@ class C
             }/*</bind>*/
         }
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -300,7 +331,8 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_ContinueNestedInIntermediateSwitch()
         {
-            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, ContinueStatementSyntax>(@"
+            AssertOuterIsCorrespondingLoopOfInner<ForStatementSyntax, ContinueStatementSyntax>(
+                @"
 class C
 {
     void F()
@@ -315,7 +347,8 @@ class C
             }
         }/*</bind>*/
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -323,14 +356,19 @@ class C
         [Fact]
         public void GetCorrespondingOperation_LoopLookup_BreakButNoLoop_ReturnsNull()
         {
-            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<ForStatementSyntax, BreakStatementSyntax>(@"
+            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<
+                ForStatementSyntax,
+                BreakStatementSyntax
+            >(
+                @"
 class C
 {
     void F()
     {
         /*<bind>*/break;/*</bind>*/
     }
-}");
+}"
+            );
 
             Assert.Null(expected);
             Assert.Null(actual);
@@ -341,43 +379,61 @@ class C
         [Fact]
         public void GetCorrespondingOperation_SwitchLookup_BreakButNoSwitch_ReturnsNull()
         {
-            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<SwitchStatementSyntax, BreakStatementSyntax>(@"
+            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<
+                SwitchStatementSyntax,
+                BreakStatementSyntax
+            >(
+                @"
 class C
 {
     void F()
     {
         /*<bind>*/break;/*</bind>*/
     }
-}");
+}"
+            );
 
             Assert.Null(expected);
             Assert.Null(actual);
         }
 
-        private void AssertOuterIsCorrespondingLoopOfInner<TOuterSyntax, TInnerSyntax>(string source)
+        private void AssertOuterIsCorrespondingLoopOfInner<TOuterSyntax, TInnerSyntax>(
+            string source
+        )
             where TOuterSyntax : SyntaxNode
             where TInnerSyntax : SyntaxNode
         {
-            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<TOuterSyntax, TInnerSyntax>(source);
+            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<
+                TOuterSyntax,
+                TInnerSyntax
+            >(source);
 
             Assert.Equal(expected.Syntax, actual.Syntax);
         }
 
         private void AssertOuterIsCorrespondingSwitchOfInner(string source)
         {
-            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<SwitchStatementSyntax, BreakStatementSyntax>(source);
+            var (expected, actual) = GetOuterOperationAndCorrespondingInnerOperation<
+                SwitchStatementSyntax,
+                BreakStatementSyntax
+            >(source);
 
             Assert.Equal(expected.Syntax, actual.Syntax);
         }
 
-        private (IOperation outer, IOperation corresponding) GetOuterOperationAndCorrespondingInnerOperation<TOuterSyntax, TInnerSyntax>(string source)
+        private (
+            IOperation outer,
+            IOperation corresponding
+        ) GetOuterOperationAndCorrespondingInnerOperation<TOuterSyntax, TInnerSyntax>(string source)
             where TOuterSyntax : SyntaxNode
             where TInnerSyntax : SyntaxNode
         {
             var compilation = CreateCompilation(source);
 
             var outer = GetOperationAndSyntaxForTest<TOuterSyntax>(compilation).operation;
-            var inner = GetOperationAndSyntaxForTest<TInnerSyntax>(compilation).operation as IBranchOperation;
+            var inner =
+                GetOperationAndSyntaxForTest<TInnerSyntax>(compilation).operation
+                as IBranchOperation;
             var correspondingOfInner = inner?.GetCorrespondingOperation();
 
             return (outer, correspondingOfInner);

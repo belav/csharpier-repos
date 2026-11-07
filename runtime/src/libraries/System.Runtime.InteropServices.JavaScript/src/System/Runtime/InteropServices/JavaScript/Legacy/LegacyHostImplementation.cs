@@ -21,7 +21,8 @@ namespace System.Runtime.InteropServices.JavaScript
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RegisterCSOwnedObject(JSObject proxy)
         {
-            JSHostImplementation.ThreadCsOwnedObjects[(int)proxy.JSHandle] = new WeakReference<JSObject>(proxy, trackResurrection: true);
+            JSHostImplementation.ThreadCsOwnedObjects[(int)proxy.JSHandle] =
+                new WeakReference<JSObject>(proxy, trackResurrection: true);
         }
 
         public static MarshalType GetMarshalTypeFromType(Type type)
@@ -41,7 +42,10 @@ namespace System.Runtime.InteropServices.JavaScript
                     case TypeCode.UInt64:
                         return MarshalType.ENUM64;
                     default:
-                        throw new ArgumentException(SR.Format(SR.UnsupportedEnumType, type.FullName), nameof(type));
+                        throw new ArgumentException(
+                            SR.Format(SR.UnsupportedEnumType, type.FullName),
+                            nameof(type)
+                        );
                 }
             }
 
@@ -74,7 +78,10 @@ namespace System.Runtime.InteropServices.JavaScript
             if (type.IsArray)
             {
                 if (!type.IsSZArray)
-                    throw new ArgumentException(SR.Format(SR.UnsupportedArrayType, type.FullName), nameof(type));
+                    throw new ArgumentException(
+                        SR.Format(SR.UnsupportedArrayType, type.FullName),
+                        nameof(type)
+                    );
 
                 var elementType = type.GetElementType();
                 switch (Type.GetTypeCode(elementType))
@@ -96,7 +103,10 @@ namespace System.Runtime.InteropServices.JavaScript
                     case TypeCode.Double:
                         return MarshalType.ARRAY_DOUBLE;
                     default:
-                        throw new ArgumentException(SR.Format(SR.UnsupportedElementType, elementType), nameof(type));
+                        throw new ArgumentException(
+                            SR.Format(SR.UnsupportedElementType, elementType),
+                            nameof(type)
+                        );
                 }
             }
             else if (type == typeof(IntPtr))
@@ -120,7 +130,10 @@ namespace System.Runtime.InteropServices.JavaScript
                 return MarshalType.OBJECT;
         }
 
-        public static char GetCallSignatureCharacterForMarshalType(MarshalType type, char? defaultValue)
+        public static char GetCallSignatureCharacterForMarshalType(
+            MarshalType type,
+            char? defaultValue
+        )
         {
             switch (type)
             {
@@ -159,7 +172,10 @@ namespace System.Runtime.InteropServices.JavaScript
                     if (defaultValue.HasValue)
                         return defaultValue.Value;
                     else
-                        throw new ArgumentException(SR.Format(SR.UnsupportedLegacyMarshlerType, type), nameof(type));
+                        throw new ArgumentException(
+                            SR.Format(SR.UnsupportedLegacyMarshlerType, type),
+                            nameof(type)
+                        );
             }
         }
 
@@ -195,7 +211,7 @@ namespace System.Runtime.InteropServices.JavaScript
             STRING_INTERNED = 29,
             VOID = 30,
             ENUM64 = 31,
-            POINTER = 32
+            POINTER = 32,
         }
 
         // see src/mono/wasm/driver.c MARSHAL_ERROR_xxx
@@ -205,7 +221,7 @@ namespace System.Runtime.InteropServices.JavaScript
             NULL_CLASS_POINTER = 513,
             NULL_TYPE_POINTER = 514,
             UNSUPPORTED_TYPE = 515,
-            FIRST = BUFFER_TOO_SMALL
+            FIRST = BUFFER_TOO_SMALL,
         }
 
         // please keep BINDING wasm_type_symbol in sync
@@ -224,7 +240,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (Thread.CurrentThread.ManagedThreadId != 1)
             {
-                throw new PlatformNotSupportedException("Legacy interop is not supported with WebAssembly threads.");
+                throw new PlatformNotSupportedException(
+                    "Legacy interop is not supported with WebAssembly threads."
+                );
             }
         }
 #endif

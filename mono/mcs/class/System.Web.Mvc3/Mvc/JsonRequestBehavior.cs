@@ -1,5 +1,7 @@
-﻿namespace System.Web.Mvc {
-    public enum JsonRequestBehavior {
+﻿namespace System.Web.Mvc
+{
+    public enum JsonRequestBehavior
+    {
         AllowGet,
         DenyGet,
     }

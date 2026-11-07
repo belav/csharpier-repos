@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="ThreadExceptionEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.Threading {
-    using System.Threading;
-    using System.Diagnostics;
-
+namespace System.Threading
+{
     using System;
+    using System.Diagnostics;
+    using System.Threading;
 
     /// <devdoc>
     /// <para>Represents the method that will handle the System.Windows.Forms.Application.OnThreadException

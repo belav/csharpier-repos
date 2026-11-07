@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class CompilationUnitSyntaxExtensions
     {
-        public static bool CanAddUsingDirectives(this SyntaxNode contextNode, bool allowInHiddenRegions, CancellationToken cancellationToken)
+        public static bool CanAddUsingDirectives(
+            this SyntaxNode contextNode,
+            bool allowInHiddenRegions,
+            CancellationToken cancellationToken
+        )
         {
             var usingDirectiveAncestor = contextNode.GetAncestor<UsingDirectiveSyntax>();
             if (usingDirectiveAncestor?.Parent is CompilationUnitSyntax)
@@ -47,7 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return true;
         }
 
-        private static TextSpan GetUsingsSpan(CompilationUnitSyntax root, BaseNamespaceDeclarationSyntax? namespaceDeclaration)
+        private static TextSpan GetUsingsSpan(
+            CompilationUnitSyntax root,
+            BaseNamespaceDeclarationSyntax? namespaceDeclaration
+        )
         {
             if (namespaceDeclaration != null)
             {
@@ -81,9 +88,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             UsingDirectiveSyntax usingDirective,
             SyntaxNode contextNode,
             bool placeSystemNamespaceFirst,
-            params SyntaxAnnotation[] annotations)
+            params SyntaxAnnotation[] annotations
+        )
         {
-            return root.AddUsingDirectives(new[] { usingDirective }, contextNode, placeSystemNamespaceFirst, annotations);
+            return root.AddUsingDirectives(
+                new[] { usingDirective },
+                contextNode,
+                placeSystemNamespaceFirst,
+                annotations
+            );
         }
 
         public static CompilationUnitSyntax AddUsingDirectives(
@@ -91,21 +104,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IList<UsingDirectiveSyntax> usingDirectives,
             SyntaxNode contextNode,
             bool placeSystemNamespaceFirst,
-            params SyntaxAnnotation[] annotations)
+            params SyntaxAnnotation[] annotations
+        )
         {
             if (!usingDirectives.Any())
             {
                 return root;
             }
 
-            var firstOuterNamespaceWithUsings = contextNode.GetInnermostNamespaceDeclarationWithUsings();
+            var firstOuterNamespaceWithUsings =
+                contextNode.GetInnermostNamespaceDeclarationWithUsings();
             if (firstOuterNamespaceWithUsings == null)
             {
-                return root.AddUsingDirectives(usingDirectives, placeSystemNamespaceFirst, annotations);
+                return root.AddUsingDirectives(
+                    usingDirectives,
+                    placeSystemNamespaceFirst,
+                    annotations
+                );
             }
             else
             {
-                var newNamespace = firstOuterNamespaceWithUsings.AddUsingDirectives(usingDirectives, placeSystemNamespaceFirst, annotations);
+                var newNamespace = firstOuterNamespaceWithUsings.AddUsingDirectives(
+                    usingDirectives,
+                    placeSystemNamespaceFirst,
+                    annotations
+                );
                 return root.ReplaceNode(firstOuterNamespaceWithUsings, newNamespace);
             }
         }
@@ -114,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this CompilationUnitSyntax root,
             IList<UsingDirectiveSyntax> usingDirectives,
             bool placeSystemNamespaceFirst,
-            params SyntaxAnnotation[] annotations)
+            params SyntaxAnnotation[] annotations
+        )
         {
             if (usingDirectives.Count == 0)
             {
@@ -130,20 +154,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (root.Externs.Count == 0)
             {
                 (root, addBlankLine) = AddImportHelpers.MoveTrivia(
-                    CSharpSyntaxFacts.Instance, root, root.Usings, usings);
+                    CSharpSyntaxFacts.Instance,
+                    root,
+                    root.Usings,
+                    usings
+                );
             }
 
             var rootWithNewUsings = root.WithUsings(
-                usings.Select(u => u.WithAdditionalAnnotations(annotations)).ToSyntaxList());
+                usings.Select(u => u.WithAdditionalAnnotations(annotations)).ToSyntaxList()
+            );
             if (addBlankLine)
             {
                 var lastUsing = rootWithNewUsings.Usings.Last();
-                var nextToken = lastUsing.GetLastToken(includeZeroWidth: true, includeSkipped: true).GetNextTokenOrEndOfFile(includeZeroWidth: true, includeSkipped: true);
-                var endOfLine = lastUsing.GetTrailingTrivia().LastOrDefault(CSharpSyntaxFacts.Instance.IsEndOfLineTrivia);
+                var nextToken = lastUsing
+                    .GetLastToken(includeZeroWidth: true, includeSkipped: true)
+                    .GetNextTokenOrEndOfFile(includeZeroWidth: true, includeSkipped: true);
+                var endOfLine = lastUsing
+                    .GetTrailingTrivia()
+                    .LastOrDefault(CSharpSyntaxFacts.Instance.IsEndOfLineTrivia);
                 Debug.Assert(!endOfLine.IsKind(SyntaxKind.None));
                 if (!endOfLine.IsKind(SyntaxKind.None))
                 {
-                    rootWithNewUsings = rootWithNewUsings.ReplaceToken(nextToken, nextToken.WithPrependedLeadingTrivia(endOfLine));
+                    rootWithNewUsings = rootWithNewUsings.ReplaceToken(
+                        nextToken,
+                        nextToken.WithPrependedLeadingTrivia(endOfLine)
+                    );
                 }
             }
 
@@ -151,7 +187,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         private static List<UsingDirectiveSyntax> AddUsingDirectives(
-            CompilationUnitSyntax root, IList<UsingDirectiveSyntax> usingDirectives)
+            CompilationUnitSyntax root,
+            IList<UsingDirectiveSyntax> usingDirectives
+        )
         {
             // We need to try and not place the using inside of a directive if possible.
             var usings = new List<UsingDirectiveSyntax>();
@@ -160,23 +198,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var endOfLastDirective = -1;
             for (var i = 0; i < root.Usings.Count; i++)
             {
-                if (root.Usings[i].GetLeadingTrivia().Any(trivia => trivia.IsKind(SyntaxKind.IfDirectiveTrivia)))
+                if (
+                    root.Usings[i]
+                        .GetLeadingTrivia()
+                        .Any(trivia => trivia.IsKind(SyntaxKind.IfDirectiveTrivia))
+                )
                 {
                     startOfLastDirective = i;
                 }
 
-                if (root.Usings[i].GetLeadingTrivia().Any(trivia => trivia.IsKind(SyntaxKind.EndIfDirectiveTrivia)))
+                if (
+                    root.Usings[i]
+                        .GetLeadingTrivia()
+                        .Any(trivia => trivia.IsKind(SyntaxKind.EndIfDirectiveTrivia))
+                )
                 {
                     endOfLastDirective = i;
                 }
             }
 
-            // if the entire using is in a directive or there is a using list at the end outside of the directive add the using at the end, 
+            // if the entire using is in a directive or there is a using list at the end outside of the directive add the using at the end,
             // else place it before the last directive.
             usings.AddRange(root.Usings);
-            if ((startOfLastDirective == 0 && (endOfLastDirective == endOfList || endOfLastDirective == -1)) ||
-                (startOfLastDirective == -1 && endOfLastDirective == -1) ||
-                (endOfLastDirective != endOfList && endOfLastDirective != -1))
+            if (
+                (
+                    startOfLastDirective == 0
+                    && (endOfLastDirective == endOfList || endOfLastDirective == -1)
+                )
+                || (startOfLastDirective == -1 && endOfLastDirective == -1)
+                || (endOfLastDirective != endOfList && endOfLastDirective != -1)
+            )
             {
                 usings.AddRange(usingDirectives);
             }

@@ -42,7 +42,6 @@ namespace System.Configuration
 
                 if (File.Exists(sourceFileFullPath))
                 {
-
                     ConfigXmlDocument doc = new ConfigXmlDocument();
                     try
                     {
@@ -50,14 +49,23 @@ namespace System.Configuration
                     }
                     catch (XmlException e)
                     {
-                        throw new ConfigurationErrorsException(e.Message, e, sourceFileFullPath, e.LineNumber);
+                        throw new ConfigurationErrorsException(
+                            e.Message,
+                            e,
+                            sourceFileFullPath,
+                            e.LineNumber
+                        );
                     }
 
                     if (section.Name != doc.DocumentElement.Name)
                     {
                         throw new ConfigurationErrorsException(
-                            SR.Format(SR.Config_name_value_file_section_file_invalid_root, section.Name),
-                            doc.DocumentElement);
+                            SR.Format(
+                                SR.Config_name_value_file_section_file_invalid_root,
+                                section.Name
+                            ),
+                            doc.DocumentElement
+                        );
                     }
 
                     result = NameValueSectionHandler.CreateStatic(result, doc.DocumentElement);
@@ -67,5 +75,4 @@ namespace System.Configuration
             return result;
         }
     }
-
 }

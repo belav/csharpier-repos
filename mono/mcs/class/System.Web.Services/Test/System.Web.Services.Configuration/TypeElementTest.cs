@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,43 +27,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Web.Services.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Services.Configuration {
-	[TestFixture]
-	public class TypeElementTest
-	{
-		[Test]
-		[Ignore ("causes NRE on .NET")]
-		public void Ctors1 ()
-		{
-			TypeElement el = new TypeElement ();
-			Assert.IsNull (el.Type, "A1");
-		}
+namespace MonoTests.System.Web.Services.Configuration
+{
+    [TestFixture]
+    public class TypeElementTest
+    {
+        [Test]
+        [Ignore("causes NRE on .NET")]
+        public void Ctors1()
+        {
+            TypeElement el = new TypeElement();
+            Assert.IsNull(el.Type, "A1");
+        }
 
-		[Test]
-		public void Ctors2 ()
-		{
-			TypeElement el;
+        [Test]
+        public void Ctors2()
+        {
+            TypeElement el;
 
-			el = new TypeElement (typeof (string));
-			Assert.AreEqual (typeof (string), el.Type, "A2");
+            el = new TypeElement(typeof(string));
+            Assert.AreEqual(typeof(string), el.Type, "A2");
 
-			el = new TypeElement ("System.String");
-			Assert.AreEqual (typeof (string), el.Type, "A3");
-		}
+            el = new TypeElement("System.String");
+            Assert.AreEqual(typeof(string), el.Type, "A3");
+        }
 
-		[Test]
-		public void GetSet ()
-		{
-			TypeElement el = new TypeElement ();
+        [Test]
+        public void GetSet()
+        {
+            TypeElement el = new TypeElement();
 
-			el.Type = typeof (string);
-			Assert.AreEqual (typeof (string), el.Type, "A1");
-		}
-	}
+            el.Type = typeof(string);
+            Assert.AreEqual(typeof(string), el.Type, "A1");
+        }
+    }
 }
-

@@ -6,13 +6,19 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
-
-    public class WmlChangePasswordAdapter : ChangePasswordAdapter {
-
+namespace System.Web.UI.WebControls.Adapters
+{
+    public class WmlChangePasswordAdapter : ChangePasswordAdapter
+    {
         // Overridden to render the validator *before* the label, to ensure the validator
         // is presented on the correct screen.
-        protected override void RenderInput(HtmlTextWriter writer, Literal label, Control textBox, Control validator) {
+        protected override void RenderInput(
+            HtmlTextWriter writer,
+            Literal label,
+            Control textBox,
+            Control validator
+        )
+        {
             validator.RenderControl(writer);
 
             // In the ChangePassword control, many styles are applied to the table cell that contains
@@ -28,8 +34,7 @@ namespace System.Web.UI.WebControls.Adapters {
             // TextBoxStyle is applied directly to the TextBox in the ChangePassword control
             textBox.RenderControl(writer);
         }
-
     }
 }
 
-#endif 
+#endif

@@ -12,19 +12,24 @@ namespace System.Text.Json.Serialization.Converters
     /// of JSON objects using parameterized constructors.
     /// </summary>
     internal sealed class LargeObjectWithParameterizedConstructorConverterWithReflection<T>
-        : LargeObjectWithParameterizedConstructorConverter<T> where T : notnull
+        : LargeObjectWithParameterizedConstructorConverter<T>
+        where T : notnull
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        public LargeObjectWithParameterizedConstructorConverterWithReflection()
-        {
-        }
+        public LargeObjectWithParameterizedConstructorConverterWithReflection() { }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        internal override void ConfigureJsonTypeInfoUsingReflection(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfoUsingReflection(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver.MemberAccessor.CreateParameterizedConstructor<T>(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs =
+                DefaultJsonTypeInfoResolver.MemberAccessor.CreateParameterizedConstructor<T>(
+                    ConstructorInfo!
+                );
         }
     }
 }

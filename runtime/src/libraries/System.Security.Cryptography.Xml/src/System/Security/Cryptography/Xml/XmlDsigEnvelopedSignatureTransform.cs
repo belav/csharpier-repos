@@ -8,7 +8,12 @@ namespace System.Security.Cryptography.Xml
 {
     public class XmlDsigEnvelopedSignatureTransform : Transform
     {
-        private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlNodeList), typeof(XmlDocument) };
+        private readonly Type[] _inputTypes =
+        {
+            typeof(Stream),
+            typeof(XmlNodeList),
+            typeof(XmlDocument),
+        };
         private readonly Type[] _outputTypes = { typeof(XmlNodeList), typeof(XmlDocument) };
         private XmlNodeList? _inputNodeList;
         private readonly bool _includeComments;
@@ -79,12 +84,16 @@ namespace System.Security.Cryptography.Xml
         {
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = true;
-            XmlResolver resolver = ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver();
+            XmlResolver resolver = ResolverSet
+                ? _xmlResolver
+                : XmlResolverHelper.GetThrowingResolver();
             XmlReader xmlReader = Utils.PreProcessStreamInput(stream, resolver, BaseURI!);
             doc.Load(xmlReader);
             _containingDocument = doc;
             if (_containingDocument == null)
-                throw new CryptographicException(SR.Cryptography_Xml_EnvelopedSignatureRequiresContext);
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_EnvelopedSignatureRequiresContext
+                );
             _nsm = new XmlNamespaceManager(_containingDocument.NameTable);
             _nsm.AddNamespace("dsig", SignedXml.XmlDsigNamespaceUrl);
         }
@@ -98,7 +107,9 @@ namespace System.Security.Cryptography.Xml
 
             _containingDocument = Utils.GetOwnerDocument(nodeList);
             if (_containingDocument == null)
-                throw new CryptographicException(SR.Cryptography_Xml_EnvelopedSignatureRequiresContext);
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_EnvelopedSignatureRequiresContext
+                );
 
             _nsm = new XmlNamespaceManager(_containingDocument.NameTable);
             _nsm.AddNamespace("dsig", SignedXml.XmlDsigNamespaceUrl);
@@ -120,20 +131,28 @@ namespace System.Security.Cryptography.Xml
         public override object GetOutput()
         {
             if (_containingDocument == null)
-                throw new CryptographicException(SR.Cryptography_Xml_EnvelopedSignatureRequiresContext);
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_EnvelopedSignatureRequiresContext
+                );
 
             // If we have received an XmlNodeList as input
             if (_inputNodeList != null)
             {
                 // If the position has not been set, then we don't want to remove any signature tags
-                if (_signaturePosition == 0) return _inputNodeList;
-                XmlNodeList? signatureList = _containingDocument.SelectNodes("//dsig:Signature", _nsm!);
-                if (signatureList == null) return _inputNodeList;
+                if (_signaturePosition == 0)
+                    return _inputNodeList;
+                XmlNodeList? signatureList = _containingDocument.SelectNodes(
+                    "//dsig:Signature",
+                    _nsm!
+                );
+                if (signatureList == null)
+                    return _inputNodeList;
 
                 CanonicalXmlNodeList resultNodeList = new CanonicalXmlNodeList();
                 foreach (XmlNode? node in _inputNodeList)
                 {
-                    if (node == null) continue;
+                    if (node == null)
+                        continue;
                     // keep namespaces
                     if (Utils.IsXmlNamespaceNode(node) || Utils.IsNamespaceNode(node))
                     {
@@ -145,12 +164,16 @@ namespace System.Security.Cryptography.Xml
                         try
                         {
                             // Find the nearest signature ancestor tag
-                            XmlNode result = node.SelectSingleNode("ancestor-or-self::dsig:Signature[1]", _nsm!)!;
+                            XmlNode result = node.SelectSingleNode(
+                                "ancestor-or-self::dsig:Signature[1]",
+                                _nsm!
+                            )!;
                             int position = 0;
                             foreach (XmlNode node1 in signatureList)
                             {
                                 position++;
-                                if (node1 == result) break;
+                                if (node1 == result)
+                                    break;
                             }
                             if (result == null || position != _signaturePosition)
                             {
@@ -165,12 +188,19 @@ namespace System.Security.Cryptography.Xml
             // Else we have received either a stream or a document as input
             else
             {
-                XmlNodeList? signatureList = _containingDocument.SelectNodes("//dsig:Signature", _nsm!);
-                if (signatureList == null) return _containingDocument;
-                if (signatureList.Count < _signaturePosition || _signaturePosition <= 0) return _containingDocument;
+                XmlNodeList? signatureList = _containingDocument.SelectNodes(
+                    "//dsig:Signature",
+                    _nsm!
+                );
+                if (signatureList == null)
+                    return _containingDocument;
+                if (signatureList.Count < _signaturePosition || _signaturePosition <= 0)
+                    return _containingDocument;
 
                 // Remove the signature node with all its children nodes
-                signatureList[_signaturePosition - 1]!.ParentNode!.RemoveChild(signatureList[_signaturePosition - 1]!);
+                signatureList[_signaturePosition - 1]!.ParentNode!.RemoveChild(
+                    signatureList[_signaturePosition - 1]!
+                );
                 return _containingDocument;
             }
         }
@@ -184,12 +214,19 @@ namespace System.Security.Cryptography.Xml
             }
             else if (type == typeof(XmlDocument) || type.IsSubclassOf(typeof(XmlDocument)))
             {
-                if (_inputNodeList != null) throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                if (_inputNodeList != null)
+                    throw new ArgumentException(
+                        SR.Cryptography_Xml_TransformIncorrectInputType,
+                        nameof(type)
+                    );
                 return (XmlDocument)GetOutput();
             }
             else
             {
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
             }
         }
     }

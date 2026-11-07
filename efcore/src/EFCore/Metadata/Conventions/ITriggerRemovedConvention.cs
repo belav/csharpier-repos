@@ -20,5 +20,6 @@ public interface ITriggerRemovedConvention : IConvention
     void ProcessTriggerRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionTrigger trigger,
-        IConventionContext<IConventionTrigger> context);
+        IConventionContext<IConventionTrigger> context
+    );
 }

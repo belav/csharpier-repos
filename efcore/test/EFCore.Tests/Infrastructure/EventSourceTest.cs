@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 [Collection("EventSourceTest")]
 public class EventSourceTest
 {
-    private static readonly BindingFlags _bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+    private static readonly BindingFlags _bindingFlags =
+        BindingFlags.Instance | BindingFlags.NonPublic;
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -88,7 +89,9 @@ public class EventSourceTest
         {
             using var context = new SomeDbContext();
 
-            var query = context.Foos.Where(e => e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6"));
+            var query = context.Foos.Where(e =>
+                e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6")
+            );
 
             _ = async ? await query.ToListAsync() : query.ToList();
 
@@ -122,7 +125,9 @@ public class EventSourceTest
 
             if (async)
             {
-                await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await context.SaveChangesAsync());
+                await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+                    await context.SaveChangesAsync()
+                );
             }
             else
             {
@@ -149,41 +154,46 @@ public class EventSourceTest
                 context,
                 retryCount: 2,
                 shouldRetryOn: e => e is ArgumentOutOfRangeException,
-                getNextDelay: e => TimeSpan.FromTicks(0));
+                getNextDelay: e => TimeSpan.FromTicks(0)
+            );
 
             if (async)
             {
                 Assert.IsType<ArgumentOutOfRangeException>(
-                    (await Assert.ThrowsAsync<RetryLimitExceededException>(
-                        () =>
-                            executionStrategyMock.ExecuteAsync(
-                                () =>
+                    (
+                        await Assert.ThrowsAsync<RetryLimitExceededException>(() =>
+                            executionStrategyMock.ExecuteAsync(() =>
+                            {
+                                if (executionCount++ < 3)
                                 {
-                                    if (executionCount++ < 3)
-                                    {
-                                        throw new ArgumentOutOfRangeException();
-                                    }
+                                    throw new ArgumentOutOfRangeException();
+                                }
 
-                                    Assert.True(false);
-                                    return Task.FromResult(1);
-                                }))).InnerException);
+                                Assert.True(false);
+                                return Task.FromResult(1);
+                            })
+                        )
+                    ).InnerException
+                );
             }
             else
             {
                 Assert.IsType<ArgumentOutOfRangeException>(
-                    Assert.Throws<RetryLimitExceededException>(
-                        () =>
-                            executionStrategyMock.Execute(
-                                () =>
+                    Assert
+                        .Throws<RetryLimitExceededException>(() =>
+                            executionStrategyMock.Execute(() =>
+                            {
+                                if (executionCount++ < 3)
                                 {
-                                    if (executionCount++ < 3)
-                                    {
-                                        throw new ArgumentOutOfRangeException();
-                                    }
+                                    throw new ArgumentOutOfRangeException();
+                                }
 
-                                    Assert.True(false);
-                                    return 0;
-                                })).InnerException);
+                                Assert.True(false);
+                                return 0;
+                            })
+                        )
+                        .InnerException
+                );
             }
 
             Assert.Equal(3, executionCount);
@@ -191,8 +201,8 @@ public class EventSourceTest
         }
     }
 
-    private static readonly FieldInfo _activeDbContexts
-        = typeof(EntityFrameworkEventSource).GetField("_activeDbContexts", _bindingFlags);
+    private static readonly FieldInfo _activeDbContexts =
+        typeof(EntityFrameworkEventSource).GetField("_activeDbContexts", _bindingFlags);
 
     private static long ActiveDbContexts
     {
@@ -200,8 +210,10 @@ public class EventSourceTest
         set => _activeDbContexts.SetValue(EntityFrameworkEventSource.Log, value);
     }
 
-    private static readonly FieldInfo _totalQueries
-        = typeof(EntityFrameworkEventSource).GetField(nameof(_totalQueries), _bindingFlags);
+    private static readonly FieldInfo _totalQueries = typeof(EntityFrameworkEventSource).GetField(
+        nameof(_totalQueries),
+        _bindingFlags
+    );
 
     private static long TotalQueries
     {
@@ -209,8 +221,8 @@ public class EventSourceTest
         set => _totalQueries.SetValue(EntityFrameworkEventSource.Log, value);
     }
 
-    private static readonly FieldInfo _totalSaveChanges
-        = typeof(EntityFrameworkEventSource).GetField(nameof(_totalSaveChanges), _bindingFlags);
+    private static readonly FieldInfo _totalSaveChanges =
+        typeof(EntityFrameworkEventSource).GetField(nameof(_totalSaveChanges), _bindingFlags);
 
     private static long TotalSaveChanges
     {
@@ -218,17 +230,28 @@ public class EventSourceTest
         set => _totalSaveChanges.SetValue(EntityFrameworkEventSource.Log, value);
     }
 
-    private static readonly FieldInfo _totalExecutionStrategyOperationFailures
-        = typeof(EntityFrameworkEventSource).GetField(nameof(_totalExecutionStrategyOperationFailures), _bindingFlags);
+    private static readonly FieldInfo _totalExecutionStrategyOperationFailures =
+        typeof(EntityFrameworkEventSource).GetField(
+            nameof(_totalExecutionStrategyOperationFailures),
+            _bindingFlags
+        );
 
     private static long TotalExecutionStrategyOperationFailures
     {
-        get => (long)_totalExecutionStrategyOperationFailures.GetValue(EntityFrameworkEventSource.Log);
-        set => _totalExecutionStrategyOperationFailures.SetValue(EntityFrameworkEventSource.Log, value);
+        get =>
+            (long)_totalExecutionStrategyOperationFailures.GetValue(EntityFrameworkEventSource.Log);
+        set =>
+            _totalExecutionStrategyOperationFailures.SetValue(
+                EntityFrameworkEventSource.Log,
+                value
+            );
     }
 
-    private static readonly FieldInfo _totalOptimisticConcurrencyFailures
-        = typeof(EntityFrameworkEventSource).GetField(nameof(_totalOptimisticConcurrencyFailures), _bindingFlags);
+    private static readonly FieldInfo _totalOptimisticConcurrencyFailures =
+        typeof(EntityFrameworkEventSource).GetField(
+            nameof(_totalOptimisticConcurrencyFailures),
+            _bindingFlags
+        );
 
     private static long TotalOptimisticConcurrencyFailures
     {
@@ -236,45 +259,53 @@ public class EventSourceTest
         set => _totalOptimisticConcurrencyFailures.SetValue(EntityFrameworkEventSource.Log, value);
     }
 
-    private static readonly FieldInfo _compiledQueryCacheInfo
-        = typeof(EntityFrameworkEventSource).GetField(nameof(_compiledQueryCacheInfo), _bindingFlags);
+    private static readonly FieldInfo _compiledQueryCacheInfo =
+        typeof(EntityFrameworkEventSource).GetField(nameof(_compiledQueryCacheInfo), _bindingFlags);
 
-    private static readonly MethodInfo _resetCacheInfo
-        = typeof(EntityFrameworkEventSource).GetMethod("ResetCacheInfo", _bindingFlags);
+    private static readonly MethodInfo _resetCacheInfo =
+        typeof(EntityFrameworkEventSource).GetMethod("ResetCacheInfo", _bindingFlags);
 
-    private static readonly FieldInfo _compiledQueryCacheInfoHits
-        = _compiledQueryCacheInfo.FieldType.GetField("Hits", _bindingFlags);
+    private static readonly FieldInfo _compiledQueryCacheInfoHits =
+        _compiledQueryCacheInfo.FieldType.GetField("Hits", _bindingFlags);
 
-    private static int CompiledQueryCacheInfoHits
-        => (int)_compiledQueryCacheInfoHits.GetValue(_compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log));
+    private static int CompiledQueryCacheInfoHits =>
+        (int)
+            _compiledQueryCacheInfoHits.GetValue(
+                _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
+            );
 
-    private static readonly FieldInfo _compiledQueryCacheInfoMisses
-        = _compiledQueryCacheInfo.FieldType.GetField("Misses", _bindingFlags);
+    private static readonly FieldInfo _compiledQueryCacheInfoMisses =
+        _compiledQueryCacheInfo.FieldType.GetField("Misses", _bindingFlags);
 
-    private static int CompiledQueryCacheInfoMisses
-        => (int)_compiledQueryCacheInfoMisses.GetValue(_compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log));
+    private static int CompiledQueryCacheInfoMisses =>
+        (int)
+            _compiledQueryCacheInfoMisses.GetValue(
+                _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
+            );
 
-    private static readonly MethodInfo _compiledQueryCacheInfoCalculateAndReset
-        = _compiledQueryCacheInfo.FieldType.GetMethod("CalculateAndReset", _bindingFlags);
+    private static readonly MethodInfo _compiledQueryCacheInfoCalculateAndReset =
+        _compiledQueryCacheInfo.FieldType.GetMethod("CalculateAndReset", _bindingFlags);
 
-    private static double CompiledQueryCacheInfoCalculateAndReset()
-        => (double)_compiledQueryCacheInfoCalculateAndReset.Invoke(
-            _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log), Array.Empty<object>());
+    private static double CompiledQueryCacheInfoCalculateAndReset() =>
+        (double)
+            _compiledQueryCacheInfoCalculateAndReset.Invoke(
+                _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log),
+                Array.Empty<object>()
+            );
 
-    private static void ResetCacheInfo()
-        => _resetCacheInfo.Invoke(EntityFrameworkEventSource.Log, null);
+    private static void ResetCacheInfo() =>
+        _resetCacheInfo.Invoke(EntityFrameworkEventSource.Log, null);
 
     private class SomeDbContext : DbContext
     {
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Foo> Foos { get; set; }
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Foo>().Property(e => e.Token).IsConcurrencyToken();
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Foo>().Property(e => e.Token).IsConcurrencyToken();
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseInMemoryDatabase(nameof(EventSourceTest));
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(nameof(EventSourceTest));
     }
 
     private class Foo
@@ -285,6 +316,4 @@ public class EventSourceTest
 }
 
 [CollectionDefinition("EventSourceTest", DisableParallelization = true)]
-public class EventSourceTestCollection
-{
-}
+public class EventSourceTestCollection { }

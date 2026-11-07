@@ -33,8 +33,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             protected override void VisitToken(SyntaxToken token)
             {
-                HasGeneratedCodeIdentifier |= string.Equals(token.ValueText, "GeneratedCode", StringComparison.Ordinal)
-                    || string.Equals(token.ValueText, nameof(GeneratedCodeAttribute), StringComparison.Ordinal);
+                HasGeneratedCodeIdentifier |=
+                    string.Equals(token.ValueText, "GeneratedCode", StringComparison.Ordinal)
+                    || string.Equals(
+                        token.ValueText,
+                        nameof(GeneratedCodeAttribute),
+                        StringComparison.Ordinal
+                    );
             }
         }
     }

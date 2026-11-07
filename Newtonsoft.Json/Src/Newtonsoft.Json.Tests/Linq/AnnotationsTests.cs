@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using Newtonsoft.Json.Linq;
+
 #if DNXCORE50
 using Xunit;
 using TestAttribute = Xunit.FactAttribute;
@@ -317,7 +318,7 @@ namespace Newtonsoft.Json.Tests.Linq
             v.AddAnnotation(version);
 
             o["Item1"] = v;
-            
+
             JObject o2 = (JObject)o.DeepClone();
             Assert.AreEqual("string!", o2.Annotation<string>());
             Assert.AreEqual(version, o2.Annotation<Version>());
@@ -377,7 +378,8 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(0, v2.Annotations<Version>().Count());
         }
 
-        private void AssertCloneCopy<T>(JToken t, T annotation) where T : class
+        private void AssertCloneCopy<T>(JToken t, T annotation)
+            where T : class
         {
             Assert.AreEqual(annotation, t.DeepClone().Annotation<T>());
         }
@@ -441,15 +443,18 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Example()
         {
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
                 'name': 'Bill G',
                 'age': 58,
                 'country': 'United States',
                 'employer': 'Microsoft'
-            }");
+            }"
+            );
 
             o.AddAnnotation(new HashSet<string>());
-            o.PropertyChanged += (sender, args) => o.Annotation<HashSet<string>>().Add(args.PropertyName);
+            o.PropertyChanged += (sender, args) =>
+                o.Annotation<HashSet<string>>().Add(args.PropertyName);
 
             o["age"] = 59;
             o["employer"] = "Bill & Melinda Gates Foundation";

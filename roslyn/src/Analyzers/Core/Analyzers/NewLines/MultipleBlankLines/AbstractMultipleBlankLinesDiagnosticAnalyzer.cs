@@ -12,41 +12,61 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
 {
-    internal abstract class AbstractMultipleBlankLinesDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractMultipleBlankLinesDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         private readonly ISyntaxFacts _syntaxFacts;
 
         protected AbstractMultipleBlankLinesDiagnosticAnalyzer(ISyntaxFacts syntaxFacts)
-            : base(IDEDiagnosticIds.MultipleBlankLinesDiagnosticId,
-                   EnforceOnBuildValues.MultipleBlankLines,
-                   CodeStyleOptions2.AllowMultipleBlankLines,
-                   new LocalizableResourceString(
-                       nameof(AnalyzersResources.Avoid_multiple_blank_lines), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
+            : base(
+                IDEDiagnosticIds.MultipleBlankLinesDiagnosticId,
+                EnforceOnBuildValues.MultipleBlankLines,
+                CodeStyleOptions2.AllowMultipleBlankLines,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Avoid_multiple_blank_lines),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            )
         {
             _syntaxFacts = syntaxFacts;
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
-                context.RegisterSyntaxTreeAction(treeContext => AnalyzeTree(treeContext, context.Compilation.Options)));
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
+            );
 
-        private void AnalyzeTree(SyntaxTreeAnalysisContext context, CompilationOptions compilationOptions)
+        private void AnalyzeTree(
+            SyntaxTreeAnalysisContext context,
+            CompilationOptions compilationOptions
+        )
         {
             var option = context.GetAnalyzerOptions().AllowMultipleBlankLines;
-            if (option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification))
+            if (
+                option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification)
+            )
                 return;
 
-            Recurse(context, option.Notification, context.GetAnalysisRoot(findInTrivia: false), context.CancellationToken);
+            Recurse(
+                context,
+                option.Notification,
+                context.GetAnalysisRoot(findInTrivia: false),
+                context.CancellationToken
+            );
         }
 
         private void Recurse(
             SyntaxTreeAnalysisContext context,
             NotificationOption2 notificationOption,
             SyntaxNode node,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -66,7 +86,11 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             }
         }
 
-        private void CheckToken(SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, SyntaxToken token)
+        private void CheckToken(
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            SyntaxToken token
+        )
         {
             if (token.ContainsDiagnostics)
                 return;
@@ -74,12 +98,15 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             if (!ContainsMultipleBlankLines(token, out var badTrivia))
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                Location.Create(badTrivia.SyntaxTree!, new TextSpan(badTrivia.SpanStart, 0)),
-                notificationOption,
-                additionalLocations: ImmutableArray.Create(token.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    Location.Create(badTrivia.SyntaxTree!, new TextSpan(badTrivia.SpanStart, 0)),
+                    notificationOption,
+                    additionalLocations: ImmutableArray.Create(token.GetLocation()),
+                    properties: null
+                )
+            );
         }
 
         private bool ContainsMultipleBlankLines(SyntaxToken token, out SyntaxTrivia firstBadTrivia)
@@ -87,8 +114,7 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             var leadingTrivia = token.LeadingTrivia;
             for (var i = 0; i < leadingTrivia.Count; i++)
             {
-                if (IsEndOfLine(leadingTrivia, i) &&
-                    IsEndOfLine(leadingTrivia, i + 1))
+                if (IsEndOfLine(leadingTrivia, i) && IsEndOfLine(leadingTrivia, i + 1))
                 {
                     // Three cases that end up with two blank lines.
                     //
@@ -96,8 +122,7 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
                     // 2. we have two newlines after structured trivia (which itself ends with an newline).
                     // 3. we have three newlines (following non-structured trivia).
 
-                    if (i == 0 ||
-                        leadingTrivia[i - 1].HasStructure)
+                    if (i == 0 || leadingTrivia[i - 1].HasStructure)
                     {
                         firstBadTrivia = leadingTrivia[i];
                         return true;

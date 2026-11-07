@@ -204,9 +204,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"Interactive component navigation ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
         Browser.False(() => IsElementStale(elementForStalenessCheck));
 
@@ -217,9 +216,8 @@ public class EnhancedNavigationTest
 
         // Ensure that the history stack was correctly updated
         Browser.Navigate().Back();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
         Browser.False(() => IsElementStale(elementForStalenessCheck));
 
@@ -243,9 +241,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"Interactive component navigation ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         // Normally, you shouldn't store references to elements because they could become stale references
@@ -288,9 +285,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"Interactive component navigation ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         // Normally, you shouldn't store references to elements because they could become stale references
@@ -328,16 +324,14 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"Interactive component navigation ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         EnhancedNavigationTestUtil.SuppressEnhancedNavigation(this, true, skipNavigation: true);
         Browser.Navigate().Refresh();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         // Normally, you shouldn't store references to elements because they could become stale references
@@ -375,9 +369,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"Interactive component navigation ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with interactive components that navigate",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with interactive components that navigate", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         // Normally, you shouldn't store references to elements because they could become stale references
@@ -434,12 +427,10 @@ public class EnhancedNavigationTest
         AssertEnhancedUpdateCountEquals(2);
 
         void AssertEnhancedUpdateCountEquals(long count) =>
-            Browser.Equal(
-                count,
-                () =>
-                    ((IJavaScriptExecutor)Browser).ExecuteScript(
-                        "return window.enhancedPageUpdateCount;"
-                    )
+            Browser.Equal(count, () =>
+                ((IJavaScriptExecutor)Browser).ExecuteScript(
+                    "return window.enhancedPageUpdateCount;"
+                )
             );
     }
 
@@ -486,9 +477,8 @@ public class EnhancedNavigationTest
 
         Browser.Click(By.Id("start-listening"));
 
-        Browser.Equal(
-            "Non preserved content",
-            () => Browser.Exists(By.Id("non-preserved-content")).Text
+        Browser.Equal("Non preserved content", () =>
+            Browser.Exists(By.Id("non-preserved-content")).Text
         );
 
         Browser.Click(By.Id("refresh-with-refresh"));
@@ -523,20 +513,17 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"LocationChanged/LocationChanging event ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
-        Browser.Equal(
-            "0",
-            () => Browser.Exists(By.Id($"location-changed-count-{renderMode}")).Text
+        Browser.Equal("0", () =>
+            Browser.Exists(By.Id($"location-changed-count-{renderMode}")).Text
         );
 
         Browser.Exists(By.Id($"update-query-string-{renderMode}")).Click();
 
-        Browser.Equal(
-            "1",
-            () => Browser.Exists(By.Id($"location-changed-count-{renderMode}")).Text
+        Browser.Equal("1", () =>
+            Browser.Exists(By.Id($"location-changed-count-{renderMode}")).Text
         );
     }
 
@@ -554,9 +541,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText("LocationChanged/LocationChanging event (server-and-wasm)"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
         Browser.Equal("0", () => Browser.Exists(By.Id("location-changed-count-server")).Text);
         Browser.Equal("0", () => Browser.Exists(By.Id("location-changed-count-wasm")).Text);
@@ -582,9 +568,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"LocationChanged/LocationChanging event ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
         Assert.EndsWith(
             $"/nav/location-changed/{renderMode}",
@@ -613,9 +598,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText("LocationChanged/LocationChanging event (server-and-wasm)"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
         Assert.EndsWith(
             "/nav/location-changed/server-and-wasm",
@@ -652,9 +636,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"LocationChanged/LocationChanging event ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         Browser.Exists(By.Id($"update-query-string-{renderMode}")).Click();
@@ -678,9 +661,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText("LocationChanged/LocationChanging event (server-and-wasm)"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         Browser.Exists(By.Id($"update-query-string-{runtimeThatInvokedNavigation}")).Click();
@@ -706,20 +688,17 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText($"LocationChanged/LocationChanging event ({renderMode})"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
-        Browser.Equal(
-            "0",
-            () => Browser.Exists(By.Id($"location-changing-count-{renderMode}")).Text
+        Browser.Equal("0", () =>
+            Browser.Exists(By.Id($"location-changing-count-{renderMode}")).Text
         );
 
         Browser.Exists(By.Id($"update-query-string-{renderMode}")).Click();
 
-        Browser.Equal(
-            "1",
-            () => Browser.Exists(By.Id($"location-changing-count-{renderMode}")).Text
+        Browser.Equal("1", () =>
+            Browser.Exists(By.Id($"location-changing-count-{renderMode}")).Text
         );
     }
 
@@ -737,9 +716,8 @@ public class EnhancedNavigationTest
             .Exists(By.TagName("nav"))
             .FindElement(By.LinkText("LocationChanged/LocationChanging event (server-and-wasm)"))
             .Click();
-        Browser.Equal(
-            "Page with location changed components",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal("Page with location changed components", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
         Browser.Equal("0", () => Browser.Exists(By.Id("location-changing-count-server")).Text);
         Browser.Equal("0", () => Browser.Exists(By.Id("location-changing-count-wasm")).Text);
@@ -748,26 +726,17 @@ public class EnhancedNavigationTest
 
         // LocationChanging event gets invoked only for the interactive runtime that invoked navigation
         var anotherRuntime = runtimeThatInvokedNavigation == "server" ? "wasm" : "server";
-        Browser.Equal(
-            "1",
-            () =>
-                Browser
-                    .Exists(By.Id($"location-changing-count-{runtimeThatInvokedNavigation}"))
-                    .Text
+        Browser.Equal("1", () =>
+            Browser.Exists(By.Id($"location-changing-count-{runtimeThatInvokedNavigation}")).Text
         );
-        Browser.Equal(
-            "0",
-            () => Browser.Exists(By.Id($"location-changing-count-{anotherRuntime}")).Text
+        Browser.Equal("0", () =>
+            Browser.Exists(By.Id($"location-changing-count-{anotherRuntime}")).Text
         );
     }
 
     private void AssertEnhancedUpdateCountEquals(long count) =>
-        Browser.Equal(
-            count,
-            () =>
-                ((IJavaScriptExecutor)Browser).ExecuteScript(
-                    "return window.enhancedPageUpdateCount;"
-                )
+        Browser.Equal(count, () =>
+            ((IJavaScriptExecutor)Browser).ExecuteScript("return window.enhancedPageUpdateCount;")
         );
 
     private static bool IsElementStale(IWebElement element)

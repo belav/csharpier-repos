@@ -10,21 +10,24 @@ namespace System.IdentityModel.Selectors
 
     public abstract class UserNameSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {
-        protected UserNameSecurityTokenAuthenticator()
-        { 
-        }
+        protected UserNameSecurityTokenAuthenticator() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return token is UserNameSecurityToken;
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
-            UserNameSecurityToken userNameToken = (UserNameSecurityToken) token;
+            UserNameSecurityToken userNameToken = (UserNameSecurityToken)token;
             return ValidateUserNamePasswordCore(userNameToken.UserName, userNameToken.Password);
         }
 
-        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(string userName, string password);
+        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(
+            string userName,
+            string password
+        );
     }
 }

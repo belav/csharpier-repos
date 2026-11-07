@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageService
@@ -15,11 +15,11 @@ namespace Microsoft.CodeAnalysis.LanguageService
     {
         // Matches the following:
         //
-        // (whitespace* newline)+ 
+        // (whitespace* newline)+
         private readonly Matcher<SyntaxTrivia> _oneOrMoreBlankLines;
 
         // Matches the following:
-        // 
+        //
         // (whitespace* (single-comment|multi-comment) whitespace* newline)+ OneOrMoreBlankLines
         private readonly Matcher<SyntaxTrivia> _bannerMatcher;
 
@@ -31,38 +31,70 @@ namespace Microsoft.CodeAnalysis.LanguageService
         protected AbstractFileBannerFacts()
         {
             var whitespace = Matcher.Repeat(
-                Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsWhitespaceTrivia, "\\b"));
+                Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsWhitespaceTrivia, "\\b")
+            );
             var endOfLine = Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsEndOfLineTrivia, "\\n");
             var singleBlankLine = Matcher.Sequence(whitespace, endOfLine);
 
-            var shebangComment = Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsShebangDirectiveTrivia, "#!");
-            var singleLineComment = Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsSingleLineCommentTrivia, "//");
-            var multiLineComment = Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsMultiLineCommentTrivia, "/**/");
-            var singleLineDocumentationComment = Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsSingleLineDocCommentTrivia, "///");
-            var multiLineDocumentationComment = Matcher.Single<SyntaxTrivia>(this.SyntaxFacts.IsMultiLineDocCommentTrivia, "/** */");
-            var anyCommentMatcher = Matcher.Choice(shebangComment, singleLineComment, multiLineComment, singleLineDocumentationComment, multiLineDocumentationComment);
+            var shebangComment = Matcher.Single<SyntaxTrivia>(
+                this.SyntaxFacts.IsShebangDirectiveTrivia,
+                "#!"
+            );
+            var singleLineComment = Matcher.Single<SyntaxTrivia>(
+                this.SyntaxFacts.IsSingleLineCommentTrivia,
+                "//"
+            );
+            var multiLineComment = Matcher.Single<SyntaxTrivia>(
+                this.SyntaxFacts.IsMultiLineCommentTrivia,
+                "/**/"
+            );
+            var singleLineDocumentationComment = Matcher.Single<SyntaxTrivia>(
+                this.SyntaxFacts.IsSingleLineDocCommentTrivia,
+                "///"
+            );
+            var multiLineDocumentationComment = Matcher.Single<SyntaxTrivia>(
+                this.SyntaxFacts.IsMultiLineDocCommentTrivia,
+                "/** */"
+            );
+            var anyCommentMatcher = Matcher.Choice(
+                shebangComment,
+                singleLineComment,
+                multiLineComment,
+                singleLineDocumentationComment,
+                multiLineDocumentationComment
+            );
 
-            var commentLine = Matcher.Sequence(whitespace, anyCommentMatcher, whitespace, endOfLine);
+            var commentLine = Matcher.Sequence(
+                whitespace,
+                anyCommentMatcher,
+                whitespace,
+                endOfLine
+            );
 
             _oneOrMoreBlankLines = Matcher.OneOrMore(singleBlankLine);
-            _bannerMatcher =
-                Matcher.Sequence(
-                    Matcher.OneOrMore(commentLine),
-                    _oneOrMoreBlankLines);
-            _fileBannerMatcher =
-                Matcher.Sequence(
-                    Matcher.OneOrMore(commentLine),
-                    Matcher.Repeat(singleBlankLine));
+            _bannerMatcher = Matcher.Sequence(Matcher.OneOrMore(commentLine), _oneOrMoreBlankLines);
+            _fileBannerMatcher = Matcher.Sequence(
+                Matcher.OneOrMore(commentLine),
+                Matcher.Repeat(singleBlankLine)
+            );
         }
 
         protected abstract ISyntaxFacts SyntaxFacts { get; }
         protected abstract IDocumentationCommentService DocumentationCommentService { get; }
 
-        public string GetBannerText(SyntaxNode? documentationCommentTriviaSyntax, int bannerLength, CancellationToken cancellationToken)
-            => DocumentationCommentService.GetBannerText(documentationCommentTriviaSyntax, bannerLength, cancellationToken);
+        public string GetBannerText(
+            SyntaxNode? documentationCommentTriviaSyntax,
+            int bannerLength,
+            CancellationToken cancellationToken
+        ) =>
+            DocumentationCommentService.GetBannerText(
+                documentationCommentTriviaSyntax,
+                bannerLength,
+                cancellationToken
+            );
 
-        public ImmutableArray<SyntaxTrivia> GetLeadingBlankLines(SyntaxNode node)
-            => GetLeadingBlankLines<SyntaxNode>(node);
+        public ImmutableArray<SyntaxTrivia> GetLeadingBlankLines(SyntaxNode node) =>
+            GetLeadingBlankLines<SyntaxNode>(node);
 
         public ImmutableArray<SyntaxTrivia> GetLeadingBlankLines<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
@@ -78,7 +110,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
         }
 
         public TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
-            TSyntaxNode node, out ImmutableArray<SyntaxTrivia> strippedTrivia)
+            TSyntaxNode node,
+            out ImmutableArray<SyntaxTrivia> strippedTrivia
+        )
             where TSyntaxNode : SyntaxNode
         {
             var leadingTriviaToKeep = new List<SyntaxTrivia>(node.GetLeadingTrivia());
@@ -91,7 +125,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
             return node.WithLeadingTrivia(leadingTriviaToKeep.Skip(index));
         }
 
-        public ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(TSyntaxNode node)
+        public ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
+            TSyntaxNode node
+        )
             where TSyntaxNode : SyntaxNode
         {
             GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out var leadingTrivia);
@@ -99,19 +135,22 @@ namespace Microsoft.CodeAnalysis.LanguageService
         }
 
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
-            TSyntaxNode node)
+            TSyntaxNode node
+        )
             where TSyntaxNode : SyntaxNode
         {
             return GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out _);
         }
 
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
-            TSyntaxNode node, out ImmutableArray<SyntaxTrivia> strippedTrivia)
+            TSyntaxNode node,
+            out ImmutableArray<SyntaxTrivia> strippedTrivia
+        )
             where TSyntaxNode : SyntaxNode
         {
             var leadingTrivia = node.GetLeadingTrivia();
 
-            // Rules for stripping trivia: 
+            // Rules for stripping trivia:
             // 1) If there is a pp directive, then it (and all preceding trivia) *must* be stripped.
             //    This rule supersedes all other rules.
             // 2) If there is a doc comment, it cannot be stripped.  Even if there is a doc comment,
@@ -120,7 +159,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             // 3) Single line comments in a group (i.e. with no blank lines between them) belong to
             //    the node *iff* there is no blank line between it and the following trivia.
 
-            List<SyntaxTrivia> leadingTriviaToStrip, leadingTriviaToKeep;
+            List<SyntaxTrivia> leadingTriviaToStrip,
+                leadingTriviaToKeep;
 
             var ppIndex = -1;
             for (var i = leadingTrivia.Count - 1; i >= 0; i--)
@@ -149,11 +189,13 @@ namespace Microsoft.CodeAnalysis.LanguageService
             var index = 0;
 
             while (
-                _oneOrMoreBlankLines.TryMatch(leadingTriviaToKeep, ref index) ||
-                _bannerMatcher.TryMatch(leadingTriviaToKeep, ref index) ||
-                (node.FullSpan.Start == 0 && _fileBannerMatcher.TryMatch(leadingTriviaToKeep, ref index)))
-            {
-            }
+                _oneOrMoreBlankLines.TryMatch(leadingTriviaToKeep, ref index)
+                || _bannerMatcher.TryMatch(leadingTriviaToKeep, ref index)
+                || (
+                    node.FullSpan.Start == 0
+                    && _fileBannerMatcher.TryMatch(leadingTriviaToKeep, ref index)
+                )
+            ) { }
 
             leadingTriviaToStrip.AddRange(leadingTriviaToKeep.Take(index));
 

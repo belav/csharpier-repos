@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeExpressionStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -20,37 +20,31 @@ namespace System.CodeDom {
     ///       a statement that is an expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeExpressionStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeExpressionStatement : CodeStatement
+    {
         private CodeExpression expression;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeExpressionStatement() {
-        }
-        
+        public CodeExpressionStatement() { }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeExpressionStatement(CodeExpression expression) {
+        public CodeExpressionStatement(CodeExpression expression)
+        {
             this.expression = expression;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeExpression Expression {
-            get {
-                return expression;
-            }
-            set {
-                expression = value;
-            }
+        public CodeExpression Expression
+        {
+            get { return expression; }
+            set { expression = value; }
         }
     }
 }

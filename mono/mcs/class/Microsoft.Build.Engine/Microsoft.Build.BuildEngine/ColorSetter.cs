@@ -1,9 +1,9 @@
 //
-// ColorSetter.cs: Defines the type of delegate used to set the console color. 
+// ColorSetter.cs: Defines the type of delegate used to set the console color.
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -33,5 +33,5 @@ namespace Microsoft.Build.Logging
 namespace Microsoft.Build.BuildEngine
 #endif
 {
-	public delegate void ColorSetter (ConsoleColor color);
+    public delegate void ColorSetter(ConsoleColor color);
 }

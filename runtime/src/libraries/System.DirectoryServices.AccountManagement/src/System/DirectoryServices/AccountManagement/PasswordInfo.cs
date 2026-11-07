@@ -25,7 +25,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<Nullable<DateTime>>(ref _lastPasswordSet, PropertyNames.PwdInfoLastPasswordSet, ref _lastPasswordSetLoaded);
+                return _owningPrincipal.HandleGet<Nullable<DateTime>>(
+                    ref _lastPasswordSet,
+                    PropertyNames.PwdInfoLastPasswordSet,
+                    ref _lastPasswordSetLoaded
+                );
             }
         }
 
@@ -37,7 +41,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<Nullable<DateTime>>(ref _lastBadPasswordAttempt, PropertyNames.PwdInfoLastBadPasswordAttempt, ref _lastBadPasswordAttemptLoaded);
+                return _owningPrincipal.HandleGet<Nullable<DateTime>>(
+                    ref _lastBadPasswordAttempt,
+                    PropertyNames.PwdInfoLastBadPasswordAttempt,
+                    ref _lastBadPasswordAttemptLoaded
+                );
             }
         }
 
@@ -49,13 +57,20 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<bool>(ref _passwordNotRequired, PropertyNames.PwdInfoPasswordNotRequired, ref _passwordNotRequiredChanged);
+                return _owningPrincipal.HandleGet<bool>(
+                    ref _passwordNotRequired,
+                    PropertyNames.PwdInfoPasswordNotRequired,
+                    ref _passwordNotRequiredChanged
+                );
             }
-
             set
             {
-                _owningPrincipal.HandleSet<bool>(ref _passwordNotRequired, value, ref _passwordNotRequiredChanged,
-                                  PropertyNames.PwdInfoPasswordNotRequired);
+                _owningPrincipal.HandleSet<bool>(
+                    ref _passwordNotRequired,
+                    value,
+                    ref _passwordNotRequiredChanged,
+                    PropertyNames.PwdInfoPasswordNotRequired
+                );
             }
         }
 
@@ -67,13 +82,20 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<bool>(ref _passwordNeverExpires, PropertyNames.PwdInfoPasswordNeverExpires, ref _passwordNeverExpiresChanged);
+                return _owningPrincipal.HandleGet<bool>(
+                    ref _passwordNeverExpires,
+                    PropertyNames.PwdInfoPasswordNeverExpires,
+                    ref _passwordNeverExpiresChanged
+                );
             }
-
             set
             {
-                _owningPrincipal.HandleSet<bool>(ref _passwordNeverExpires, value, ref _passwordNeverExpiresChanged,
-                                  PropertyNames.PwdInfoPasswordNeverExpires);
+                _owningPrincipal.HandleSet<bool>(
+                    ref _passwordNeverExpires,
+                    value,
+                    ref _passwordNeverExpiresChanged,
+                    PropertyNames.PwdInfoPasswordNeverExpires
+                );
             }
         }
 
@@ -89,21 +111,34 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                _owningPrincipal.HandleGet<bool>(ref _cannotChangePassword, PropertyNames.PwdInfoCannotChangePassword, ref _cannotChangePasswordChanged);
+                _owningPrincipal.HandleGet<bool>(
+                    ref _cannotChangePassword,
+                    PropertyNames.PwdInfoCannotChangePassword,
+                    ref _cannotChangePasswordChanged
+                );
 
-                if ((_cannotChangePasswordChanged != LoadState.Changed) && !_cannotChangePasswordRead && !_owningPrincipal.unpersisted)
+                if (
+                    (_cannotChangePasswordChanged != LoadState.Changed)
+                    && !_cannotChangePasswordRead
+                    && !_owningPrincipal.unpersisted
+                )
                 {
-                    _cannotChangePassword = _owningPrincipal.GetStoreCtxToUse().AccessCheck(_owningPrincipal, PrincipalAccessMask.ChangePassword);
+                    _cannotChangePassword = _owningPrincipal
+                        .GetStoreCtxToUse()
+                        .AccessCheck(_owningPrincipal, PrincipalAccessMask.ChangePassword);
                     _cannotChangePasswordRead = true;
                 }
 
                 return _cannotChangePassword;
             }
-
             set
             {
-                _owningPrincipal.HandleSet<bool>(ref _cannotChangePassword, value, ref _cannotChangePasswordChanged,
-                                  PropertyNames.PwdInfoCannotChangePassword);
+                _owningPrincipal.HandleSet<bool>(
+                    ref _cannotChangePassword,
+                    value,
+                    ref _cannotChangePasswordChanged,
+                    PropertyNames.PwdInfoCannotChangePassword
+                );
             }
         }
 
@@ -115,13 +150,20 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<bool>(ref _allowReversiblePasswordEncryption, PropertyNames.PwdInfoAllowReversiblePasswordEncryption, ref _allowReversiblePasswordEncryptionChanged);
+                return _owningPrincipal.HandleGet<bool>(
+                    ref _allowReversiblePasswordEncryption,
+                    PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
+                    ref _allowReversiblePasswordEncryptionChanged
+                );
             }
-
             set
             {
-                _owningPrincipal.HandleSet<bool>(ref _allowReversiblePasswordEncryption, value, ref _allowReversiblePasswordEncryptionChanged,
-                                  PropertyNames.PwdInfoAllowReversiblePasswordEncryption);
+                _owningPrincipal.HandleSet<bool>(
+                    ref _allowReversiblePasswordEncryption,
+                    value,
+                    ref _allowReversiblePasswordEncryptionChanged,
+                    PropertyNames.PwdInfoAllowReversiblePasswordEncryption
+                );
             }
         }
 
@@ -139,12 +181,20 @@ namespace System.DirectoryServices.AccountManagement
             // If we're not persisted, we just save up the change until we're Saved
             if (_owningPrincipal.unpersisted)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "SetPassword: saving until persisted");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "SetPassword: saving until persisted"
+                );
                 _storedNewPassword = newPassword;
             }
             else
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "SetPassword: sending request");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "SetPassword: sending request"
+                );
                 _owningPrincipal.GetStoreCtxToUse().SetPassword(_owningPrincipal, newPassword);
             }
         }
@@ -162,8 +212,14 @@ namespace System.DirectoryServices.AccountManagement
             if (_owningPrincipal.unpersisted)
                 throw new InvalidOperationException(SR.PasswordInfoChangePwdOnUnpersistedPrinc);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "ChangePassword: sending request");
-            _owningPrincipal.GetStoreCtxToUse().ChangePassword(_owningPrincipal, oldPassword, newPassword);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PasswordInfo",
+                "ChangePassword: sending request"
+            );
+            _owningPrincipal
+                .GetStoreCtxToUse()
+                .ChangePassword(_owningPrincipal, oldPassword, newPassword);
         }
 
         private bool _expirePasswordImmediately;
@@ -173,12 +229,20 @@ namespace System.DirectoryServices.AccountManagement
             // If we're not persisted, we just save up the change until we're Saved
             if (_owningPrincipal.unpersisted)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "ExpirePasswordNow: saving until persisted");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "ExpirePasswordNow: saving until persisted"
+                );
                 _expirePasswordImmediately = true;
             }
             else
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "ExpirePasswordNow: sending request");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "ExpirePasswordNow: sending request"
+                );
                 _owningPrincipal.GetStoreCtxToUse().ExpirePassword(_owningPrincipal);
             }
         }
@@ -188,12 +252,20 @@ namespace System.DirectoryServices.AccountManagement
             // If we're not persisted, we undo the expiration we saved up when ExpirePasswordNow was called (if it was).
             if (_owningPrincipal.unpersisted)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "RefreshExpiredPassword: saving until persisted");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "RefreshExpiredPassword: saving until persisted"
+                );
                 _expirePasswordImmediately = false;
             }
             else
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "RefreshExpiredPassword: sending request");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "RefreshExpiredPassword: sending request"
+                );
                 _owningPrincipal.GetStoreCtxToUse().UnexpirePassword(_owningPrincipal);
             }
         }
@@ -210,6 +282,7 @@ namespace System.DirectoryServices.AccountManagement
         // Private implementation
         //
         private readonly AuthenticablePrincipal _owningPrincipal;
+
         /*
                 // These methods implement the logic shared by all the get/set accessors for the internal properties
                 T HandleGet<T>(ref T currentValue, string name)
@@ -242,7 +315,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (value != null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "LoadValueIntoProperty: name=" + propertyName + " value=" + value.ToString());
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PasswordInfo",
+                    "LoadValueIntoProperty: name=" + propertyName + " value=" + value.ToString()
+                );
             }
 
             switch (propertyName)
@@ -278,7 +355,9 @@ namespace System.DirectoryServices.AccountManagement
                     break;
 
                 default:
-                    Debug.Fail($"PasswordInfo.LoadValueIntoProperty: fell off end looking for {propertyName}");
+                    Debug.Fail(
+                        $"PasswordInfo.LoadValueIntoProperty: fell off end looking for {propertyName}"
+                    );
                     break;
             }
         }
@@ -290,7 +369,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
         internal bool GetChangeStatusForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "GetChangeStatusForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PasswordInfo",
+                "GetChangeStatusForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -313,7 +396,9 @@ namespace System.DirectoryServices.AccountManagement
                     return (_expirePasswordImmediately);
 
                 default:
-                    Debug.Fail($"PasswordInfo.GetChangeStatusForProperty: fell off end looking for {propertyName}");
+                    Debug.Fail(
+                        $"PasswordInfo.GetChangeStatusForProperty: fell off end looking for {propertyName}"
+                    );
                     return false;
             }
         }
@@ -321,7 +406,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns the current value for the property.
         internal object GetValueForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "GetValueForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PasswordInfo",
+                "GetValueForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -344,7 +433,9 @@ namespace System.DirectoryServices.AccountManagement
                     return _expirePasswordImmediately;
 
                 default:
-                    Debug.Fail($"PasswordInfo.GetValueForProperty: fell off end looking for {propertyName}");
+                    Debug.Fail(
+                        $"PasswordInfo.GetValueForProperty: fell off end looking for {propertyName}"
+                    );
                     return null;
             }
         }
@@ -354,10 +445,22 @@ namespace System.DirectoryServices.AccountManagement
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "PasswordInfo", "ResetAllChangeStatus");
 
-            _passwordNotRequiredChanged = (_passwordNotRequiredChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _passwordNeverExpiresChanged = (_passwordNeverExpiresChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _cannotChangePasswordChanged = (_cannotChangePasswordChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _allowReversiblePasswordEncryptionChanged = (_allowReversiblePasswordEncryptionChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _passwordNotRequiredChanged =
+                (_passwordNotRequiredChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
+            _passwordNeverExpiresChanged =
+                (_passwordNeverExpiresChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
+            _cannotChangePasswordChanged =
+                (_cannotChangePasswordChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
+            _allowReversiblePasswordEncryptionChanged =
+                (_allowReversiblePasswordEncryptionChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
 
             _storedNewPassword = null;
             _expirePasswordImmediately = false;

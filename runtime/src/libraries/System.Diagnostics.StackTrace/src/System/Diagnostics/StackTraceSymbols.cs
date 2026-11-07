@@ -50,23 +50,46 @@ namespace System.Diagnostics
         /// <param name="sourceFile">source file return</param>
         /// <param name="sourceLine">line number return</param>
         /// <param name="sourceColumn">column return</param>
-        internal void GetSourceLineInfo(Assembly assembly, string assemblyPath, IntPtr loadedPeAddress, int loadedPeSize, bool isFileLayout,
-            IntPtr inMemoryPdbAddress, int inMemoryPdbSize, int methodToken, int ilOffset,
-            out string? sourceFile, out int sourceLine, out int sourceColumn)
+        internal void GetSourceLineInfo(
+            Assembly assembly,
+            string assemblyPath,
+            IntPtr loadedPeAddress,
+            int loadedPeSize,
+            bool isFileLayout,
+            IntPtr inMemoryPdbAddress,
+            int inMemoryPdbSize,
+            int methodToken,
+            int ilOffset,
+            out string? sourceFile,
+            out int sourceLine,
+            out int sourceColumn
+        )
         {
             sourceFile = null;
             sourceLine = 0;
             sourceColumn = 0;
 
-            MetadataReader? reader = TryGetReader(assembly, assemblyPath, loadedPeAddress, loadedPeSize, isFileLayout, inMemoryPdbAddress, inMemoryPdbSize);
+            MetadataReader? reader = TryGetReader(
+                assembly,
+                assemblyPath,
+                loadedPeAddress,
+                loadedPeSize,
+                isFileLayout,
+                inMemoryPdbAddress,
+                inMemoryPdbSize
+            );
             if (reader != null)
             {
                 Handle handle = MetadataTokens.Handle(methodToken);
 
                 if (handle.Kind == HandleKind.MethodDefinition)
                 {
-                    MethodDebugInformationHandle methodDebugHandle = ((MethodDefinitionHandle)handle).ToDebugInformationHandle();
-                    MethodDebugInformation methodInfo = reader.GetMethodDebugInformation(methodDebugHandle);
+                    MethodDebugInformationHandle methodDebugHandle = (
+                        (MethodDefinitionHandle)handle
+                    ).ToDebugInformationHandle();
+                    MethodDebugInformation methodInfo = reader.GetMethodDebugInformation(
+                        methodDebugHandle
+                    );
 
                     if (!methodInfo.SequencePointsBlob.IsNil)
                     {
@@ -86,7 +109,9 @@ namespace System.Diagnostics
                         {
                             sourceLine = bestPointSoFar.Value.StartLine;
                             sourceColumn = bestPointSoFar.Value.StartColumn;
-                            sourceFile = reader.GetString(reader.GetDocument(bestPointSoFar.Value.Document).Name);
+                            sourceFile = reader.GetString(
+                                reader.GetDocument(bestPointSoFar.Value.Document).Name
+                            );
                         }
                     }
                 }
@@ -115,9 +140,21 @@ namespace System.Diagnostics
         /// underlying ConditionalWeakTable doesn't keep the assembly alive, so cached types will be
         /// correctly invalidated when the Assembly is unloaded by the GC.
         /// </remarks>
-        private unsafe MetadataReader? TryGetReader(Assembly assembly, string assemblyPath, IntPtr loadedPeAddress, int loadedPeSize, bool isFileLayout, IntPtr inMemoryPdbAddress, int inMemoryPdbSize)
+        private unsafe MetadataReader? TryGetReader(
+            Assembly assembly,
+            string assemblyPath,
+            IntPtr loadedPeAddress,
+            int loadedPeSize,
+            bool isFileLayout,
+            IntPtr inMemoryPdbAddress,
+            int inMemoryPdbSize
+        )
         {
-            if (loadedPeAddress == IntPtr.Zero && assemblyPath == null && inMemoryPdbAddress == IntPtr.Zero)
+            if (
+                loadedPeAddress == IntPtr.Zero
+                && assemblyPath == null
+                && inMemoryPdbAddress == IntPtr.Zero
+            )
             {
                 return null;
             }
@@ -125,9 +162,15 @@ namespace System.Diagnostics
             MetadataReaderProvider? provider;
             while (!_metadataCache.TryGetValue(assembly, out provider))
             {
-                provider = inMemoryPdbAddress != IntPtr.Zero ?
-                    TryOpenReaderForInMemoryPdb(inMemoryPdbAddress, inMemoryPdbSize) :
-                    TryOpenReaderFromAssemblyFile(assemblyPath!, loadedPeAddress, loadedPeSize, isFileLayout);
+                provider =
+                    inMemoryPdbAddress != IntPtr.Zero
+                        ? TryOpenReaderForInMemoryPdb(inMemoryPdbAddress, inMemoryPdbSize)
+                        : TryOpenReaderFromAssemblyFile(
+                            assemblyPath!,
+                            loadedPeAddress,
+                            loadedPeSize,
+                            isFileLayout
+                        );
 
                 if (_metadataCache.TryAdd(assembly, provider))
                 {
@@ -141,19 +184,28 @@ namespace System.Diagnostics
             return provider?.GetMetadataReader();
         }
 
-        private static unsafe MetadataReaderProvider? TryOpenReaderForInMemoryPdb(IntPtr inMemoryPdbAddress, int inMemoryPdbSize)
+        private static unsafe MetadataReaderProvider? TryOpenReaderForInMemoryPdb(
+            IntPtr inMemoryPdbAddress,
+            int inMemoryPdbSize
+        )
         {
             Debug.Assert(inMemoryPdbAddress != IntPtr.Zero);
 
             // quick check to avoid throwing exceptions below in common cases:
             const uint ManagedMetadataSignature = 0x424A5342;
-            if (inMemoryPdbSize < sizeof(uint) || *(uint*)inMemoryPdbAddress != ManagedMetadataSignature)
+            if (
+                inMemoryPdbSize < sizeof(uint)
+                || *(uint*)inMemoryPdbAddress != ManagedMetadataSignature
+            )
             {
                 // not a Portable PDB
                 return null;
             }
 
-            var provider = MetadataReaderProvider.FromMetadataImage((byte*)inMemoryPdbAddress, inMemoryPdbSize);
+            var provider = MetadataReaderProvider.FromMetadataImage(
+                (byte*)inMemoryPdbAddress,
+                inMemoryPdbSize
+            );
             try
             {
                 // may throw if the metadata is invalid
@@ -167,11 +219,20 @@ namespace System.Diagnostics
             }
         }
 
-        private static unsafe PEReader? TryGetPEReader(string assemblyPath, IntPtr loadedPeAddress, int loadedPeSize, bool isFileLayout)
+        private static unsafe PEReader? TryGetPEReader(
+            string assemblyPath,
+            IntPtr loadedPeAddress,
+            int loadedPeSize,
+            bool isFileLayout
+        )
         {
             if (loadedPeAddress != IntPtr.Zero && loadedPeSize > 0)
             {
-                return new PEReader((byte*)loadedPeAddress, loadedPeSize, isLoadedImage: !isFileLayout);
+                return new PEReader(
+                    (byte*)loadedPeAddress,
+                    loadedPeSize,
+                    isLoadedImage: !isFileLayout
+                );
             }
 
             Stream? peStream = TryOpenFile(assemblyPath);
@@ -183,9 +244,21 @@ namespace System.Diagnostics
             return null;
         }
 
-        private static MetadataReaderProvider? TryOpenReaderFromAssemblyFile(string assemblyPath, IntPtr loadedPeAddress, int loadedPeSize, bool isFileLayout)
+        private static MetadataReaderProvider? TryOpenReaderFromAssemblyFile(
+            string assemblyPath,
+            IntPtr loadedPeAddress,
+            int loadedPeSize,
+            bool isFileLayout
+        )
         {
-            using (var peReader = TryGetPEReader(assemblyPath, loadedPeAddress, loadedPeSize, isFileLayout))
+            using (
+                var peReader = TryGetPEReader(
+                    assemblyPath,
+                    loadedPeAddress,
+                    loadedPeSize,
+                    isFileLayout
+                )
+            )
             {
                 if (peReader == null)
                 {
@@ -196,7 +269,14 @@ namespace System.Diagnostics
                 {
                     string? pdbPath;
                     MetadataReaderProvider? provider;
-                    if (peReader.TryOpenAssociatedPortablePdb(assemblyPath, TryOpenFile, out provider, out pdbPath))
+                    if (
+                        peReader.TryOpenAssociatedPortablePdb(
+                            assemblyPath,
+                            TryOpenFile,
+                            out provider,
+                            out pdbPath
+                        )
+                    )
                     {
                         return provider;
                     }
@@ -231,7 +311,12 @@ namespace System.Diagnostics
             try
             {
                 // Open the file with read and delete FileShare flags. This matches what dll loading does
-                return new FileStream(path!, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete);
+                return new FileStream(
+                    path!,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read | FileShare.Delete
+                );
             }
             catch
             {

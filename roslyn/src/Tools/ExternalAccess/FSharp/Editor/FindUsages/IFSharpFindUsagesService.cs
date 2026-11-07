@@ -20,6 +20,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.FindUsages
         /// Finds the implementations for the symbol at the specific position in the document,
         /// pushing the results into the context instance.
         /// </summary>
-        Task FindImplementationsAsync(Document document, int position, IFSharpFindUsagesContext context);
+        Task FindImplementationsAsync(
+            Document document,
+            int position,
+            IFSharpFindUsagesContext context
+        );
     }
 }

@@ -25,115 +25,143 @@
 //	Jordi Mas i Hernandez, jordimash@gmail.com
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Drawing.Printing;
+using System.IO;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Printing {
+namespace MonoTests.System.Drawing.Printing
+{
+    [TestFixture]
+    public class PrinterUnitConvertTest
+    {
+        static int n = 100,
+            r;
 
-	[TestFixture]
-	public class PrinterUnitConvertTest
-	{
-		static int n = 100, r;
+        [Test]
+        public void ConvertFromDisplay()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display, PrinterUnit.Display);
 
-		[Test]
-		public void ConvertFromDisplay ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.Display);
+            Assert.AreEqual(100, r, "CFD#1");
 
-			Assert.AreEqual (100, r, "CFD#1");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.Display,
+                PrinterUnit.HundredthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.HundredthsOfAMillimeter);
+            Assert.AreEqual(2540, r, "CFD#2");
 
-			Assert.AreEqual (2540, r, "CFD#2");
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display, PrinterUnit.TenthsOfAMillimeter);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.TenthsOfAMillimeter);
+            Assert.AreEqual(254, r, "CFD#3");
 
-			Assert.AreEqual (254, r, "CFD#3");
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display, PrinterUnit.ThousandthsOfAnInch);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.ThousandthsOfAnInch);
+            Assert.AreEqual(1000, r, "CFD#4");
+        }
 
-			Assert.AreEqual (1000, r, "CFD#4");
-		}
+        [Test]
+        public void ConvertFromHundredthsOfAMillimeter()
+        {
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.Display
+            );
 
-		[Test]
-		public void ConvertFromHundredthsOfAMillimeter ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.Display);
+            Assert.AreEqual(4, r, "CFH#1");
 
-			Assert.AreEqual (4, r, "CFH#1");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.HundredthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.HundredthsOfAMillimeter);
+            Assert.AreEqual(100, r, "CFH#2");
 
-			Assert.AreEqual (100, r, "CFH#2");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.TenthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.TenthsOfAMillimeter);
+            Assert.AreEqual(10, r, "CFH#3");
 
-			Assert.AreEqual (10, r, "CFH#3");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.ThousandthsOfAnInch
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.ThousandthsOfAnInch);
+            Assert.AreEqual(39, r, "CFH#4");
+        }
 
-			Assert.AreEqual (39, r, "CFH#4");
-		}
+        [Test]
+        public void ConvertFromTenthsOfAMillimeter()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.TenthsOfAMillimeter, PrinterUnit.Display);
 
-		[Test]
-		public void ConvertFromTenthsOfAMillimeter ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.Display);
+            Assert.AreEqual(39, r, "CFT#1");
 
-			Assert.AreEqual (39, r, "CFT#1");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.HundredthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.HundredthsOfAMillimeter);
+            Assert.AreEqual(1000, r, "CFT#2");
 
-			Assert.AreEqual (1000, r, "CFT#2");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.TenthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.TenthsOfAMillimeter);
+            Assert.AreEqual(100, r, "CFT#3");
 
-			Assert.AreEqual (100, r, "CFT#3");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.ThousandthsOfAnInch
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.ThousandthsOfAnInch);
+            Assert.AreEqual(394, r, "CFT#4");
+        }
 
-			Assert.AreEqual (394, r, "CFT#4");
-		}
+        [Test]
+        public void ConvertFromThousandthsOfAnInch()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.ThousandthsOfAnInch, PrinterUnit.Display);
 
-		[Test]
-		public void ConvertFromThousandthsOfAnInch ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.Display);
+            Assert.AreEqual(10, r, "CFI#1");
 
-			Assert.AreEqual (10, r, "CFI#1");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.HundredthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.HundredthsOfAMillimeter);
+            Assert.AreEqual(254, r, "CFI#2");
 
-			Assert.AreEqual (254, r, "CFI#2");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.TenthsOfAMillimeter
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.TenthsOfAMillimeter);
+            Assert.AreEqual(25, r, "CFI#3");
 
-			Assert.AreEqual (25, r, "CFI#3");
+            r = PrinterUnitConvert.Convert(
+                n,
+                PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.ThousandthsOfAnInch
+            );
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.ThousandthsOfAnInch);
-
-			Assert.AreEqual (100, r, "CFI#4");
-		}
-	}
+            Assert.AreEqual(100, r, "CFI#4");
+        }
+    }
 }
-

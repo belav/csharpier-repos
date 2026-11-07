@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
         Default = 0,
 
         /// <summary>
-        /// Report a diagnostic as an error.  
+        /// Report a diagnostic as an error.
         /// </summary>
         Error = 1,
 

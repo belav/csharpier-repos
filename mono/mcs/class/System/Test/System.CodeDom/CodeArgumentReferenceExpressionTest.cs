@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,30 +27,33 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
+using NUnit.Framework;
 
-namespace MonoTests.System.CodeDom {
-	[TestFixture]
-	public class CodeArgumentReferenceExpressionTest {
-		[Test]
-		public void DefaultConstructor ()
-		{
-			CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ();
-			Assert.AreEqual (string.Empty, care.ParameterName, "#1");
-			care.ParameterName = "mono";
-			Assert.AreEqual ("mono", care.ParameterName, "#2");
-		}
+namespace MonoTests.System.CodeDom
+{
+    [TestFixture]
+    public class CodeArgumentReferenceExpressionTest
+    {
+        [Test]
+        public void DefaultConstructor()
+        {
+            CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression();
+            Assert.AreEqual(string.Empty, care.ParameterName, "#1");
+            care.ParameterName = "mono";
+            Assert.AreEqual("mono", care.ParameterName, "#2");
+        }
 
-		[Test]
-		public void NullParameter ()
-		{
-			CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ((string) null);
-			Assert.AreEqual (string.Empty, care.ParameterName, "#1");
-			care.ParameterName = null;
-			Assert.AreEqual (string.Empty, care.ParameterName, "#2");
-		}
-	}
+        [Test]
+        public void NullParameter()
+        {
+            CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression(
+                (string)null
+            );
+            Assert.AreEqual(string.Empty, care.ParameterName, "#1");
+            care.ParameterName = null;
+            Assert.AreEqual(string.Empty, care.ParameterName, "#2");
+        }
+    }
 }

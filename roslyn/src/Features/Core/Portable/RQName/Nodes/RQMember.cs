@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 
         public abstract string MemberName { get; }
 
-        protected override void AppendChildren(List<SimpleTreeNode> childList)
-            => childList.Add(ContainingType.ToSimpleTree());
+        protected override void AppendChildren(List<SimpleTreeNode> childList) =>
+            childList.Add(ContainingType.ToSimpleTree());
     }
 }

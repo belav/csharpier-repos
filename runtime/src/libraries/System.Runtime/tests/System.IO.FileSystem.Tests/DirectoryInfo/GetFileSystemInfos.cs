@@ -10,7 +10,9 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string path)
         {
-            return ((new DirectoryInfo(path).GetFileSystemInfos().Select(x => x.FullName)).ToArray());
+            return (
+                (new DirectoryInfo(path).GetFileSystemInfos().Select(x => x.FullName)).ToArray()
+            );
         }
     }
 
@@ -18,12 +20,20 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string path)
         {
-            return ((new DirectoryInfo(path).GetFileSystemInfos("*").Select(x => x.FullName)).ToArray());
+            return (
+                (new DirectoryInfo(path).GetFileSystemInfos("*").Select(x => x.FullName)).ToArray()
+            );
         }
 
         public override string[] GetEntries(string path, string searchPattern)
         {
-            return ((new DirectoryInfo(path).GetFileSystemInfos(searchPattern).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos(searchPattern)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
     }
 
@@ -31,17 +41,35 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string path)
         {
-            return ((new DirectoryInfo(path).GetFileSystemInfos("*", SearchOption.TopDirectoryOnly).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos("*", SearchOption.TopDirectoryOnly)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
 
         public override string[] GetEntries(string path, string searchPattern)
         {
-            return ((new DirectoryInfo(path).GetFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
 
         public override string[] GetEntries(string path, string searchPattern, SearchOption option)
         {
-            return ((new DirectoryInfo(path).GetFileSystemInfos(searchPattern, option).Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos(searchPattern, option)
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
     }
 }

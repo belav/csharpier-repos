@@ -16,14 +16,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class DebugDirectoryNode : ObjectNode, ISymbolDefinitionNode
     {
         const int ImageDebugDirectorySize =
-            sizeof(int) +   // Characteristics
-            sizeof(int) +   // TimeDateStamp
-            sizeof(short) + // MajorVersion:
-            sizeof(short) + // MinorVersion
-            sizeof(int) +   // Type
-            sizeof(int) +   // SizeOfData:
-            sizeof(int) +   // AddressOfRawData:
-            sizeof(int);    // PointerToRawData
+            sizeof(int)
+            + // Characteristics
+            sizeof(int)
+            + // TimeDateStamp
+            sizeof(short)
+            + // MajorVersion:
+            sizeof(short)
+            + // MinorVersion
+            sizeof(int)
+            + // Type
+            sizeof(int)
+            + // SizeOfData:
+            sizeof(int)
+            + // AddressOfRawData:
+            sizeof(int); // PointerToRawData
 
         private EcmaModule _module;
         private NativeDebugDirectoryEntryNode _nativeEntry;
@@ -31,7 +38,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private bool _insertDeterministicEntry;
 
-        public DebugDirectoryNode(EcmaModule sourceModule, string outputFileName, bool shouldAddNiPdb, bool shouldGeneratePerfmap)
+        public DebugDirectoryNode(
+            EcmaModule sourceModule,
+            string outputFileName,
+            bool shouldAddNiPdb,
+            bool shouldGeneratePerfmap
+        )
         {
             _module = sourceModule;
             _insertDeterministicEntry = sourceModule == null; // Mark module as deterministic if generating composite image
@@ -52,7 +64,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -64,10 +77,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public int Offset => 0;
 
-        public int Size => (GetNumDebugDirectoryEntriesInModule()
-            + (_nativeEntry is not null ? 1 : 0)
-            + (_perfMapEntry is not null ? 1 : 0)
-            + (_insertDeterministicEntry ? 1 : 0)) * ImageDebugDirectorySize;
+        public int Size =>
+            (
+                GetNumDebugDirectoryEntriesInModule()
+                + (_nativeEntry is not null ? 1 : 0)
+                + (_perfMapEntry is not null ? 1 : 0)
+                + (_insertDeterministicEntry ? 1 : 0)
+            ) * ImageDebugDirectorySize;
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -81,7 +97,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             sb.Append($"__DebugDirectory_{directoryName}");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         int GetNumDebugDirectoryEntriesInModule()
         {
@@ -106,7 +123,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             int numEntries = GetNumDebugDirectoryEntriesInModule();
 
             // Reuse the module's PDB entry
-            DebugDirectoryEntry pdbEntry = entries.Where(s => s.Type == DebugDirectoryEntryType.CodeView).FirstOrDefault();
+            DebugDirectoryEntry pdbEntry = entries
+                .Where(s => s.Type == DebugDirectoryEntryType.CodeView)
+                .FirstOrDefault();
 
             // NI PDB entry
             _nativeEntry?.EmitHeader(ref builder, pdbEntry.Stamp, pdbEntry.MajorVersion);
@@ -122,7 +141,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Second, copy existing entries from input module
             for (int i = 0; i < numEntries; i++)
             {
-                builder.EmitUInt(0 /* Characteristics */);
+                builder.EmitUInt(
+                    0 /* Characteristics */
+                );
                 builder.EmitUInt(entries[i].Stamp);
                 builder.EmitUShort(entries[i].MajorVersion);
                 builder.EmitUShort(entries[i].MinorVersion);
@@ -135,8 +156,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
                 else
                 {
-                    builder.EmitReloc(factory.DebugDirectoryEntry(_module, i), RelocType.IMAGE_REL_BASED_ADDR32NB);
-                    builder.EmitReloc(factory.DebugDirectoryEntry(_module, i), RelocType.IMAGE_REL_FILE_ABSOLUTE);
+                    builder.EmitReloc(
+                        factory.DebugDirectoryEntry(_module, i),
+                        RelocType.IMAGE_REL_BASED_ADDR32NB
+                    );
+                    builder.EmitReloc(
+                        factory.DebugDirectoryEntry(_module, i),
+                        RelocType.IMAGE_REL_FILE_ABSOLUTE
+                    );
                 }
             }
 

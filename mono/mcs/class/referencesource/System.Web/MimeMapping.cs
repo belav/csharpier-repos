@@ -9,7 +9,8 @@
         Copyright (c) 2011 Microsoft Corporation
 --*/
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -17,42 +18,62 @@ namespace System.Web {
     using System.Web.Hosting;
     using System.Web.Util;
 
-    public static class MimeMapping {
-        private static MimeMappingDictionaryBase _mappingDictionary = new MimeMappingDictionaryClassic();
+    public static class MimeMapping
+    {
+        private static MimeMappingDictionaryBase _mappingDictionary =
+            new MimeMappingDictionaryClassic();
 
-        public static string GetMimeMapping(string fileName) {
-            if (fileName == null) {
+        public static string GetMimeMapping(string fileName)
+        {
+            if (fileName == null)
+            {
                 throw new ArgumentNullException("fileName");
             }
 
             return _mappingDictionary.GetMimeMapping(fileName);
         }
 
-        internal static void SetIntegratedApplicationContext(IntPtr appContext) {
+        internal static void SetIntegratedApplicationContext(IntPtr appContext)
+        {
             _mappingDictionary = new MimeMappingDictionaryIntegrated(appContext);
         }
 
-        private abstract class MimeMappingDictionaryBase {
-            private readonly Dictionary<string, string> _mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            private static readonly char[] _pathSeparatorChars = new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar, Path.VolumeSeparatorChar }; // from Path.GetFileName()
+        private abstract class MimeMappingDictionaryBase
+        {
+            private readonly Dictionary<string, string> _mappings = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
+            private static readonly char[] _pathSeparatorChars = new char[]
+            {
+                Path.DirectorySeparatorChar,
+                Path.AltDirectorySeparatorChar,
+                Path.VolumeSeparatorChar,
+            }; // from Path.GetFileName()
 
             private bool _isInitialized = false;
 
-            protected void AddMapping(string fileExtension, string mimeType) {
+            protected void AddMapping(string fileExtension, string mimeType)
+            {
                 _mappings.Add(fileExtension, mimeType);
             }
 
-            private void AddWildcardIfNotPresent() {
-                if (!_mappings.ContainsKey(".*")) {
+            private void AddWildcardIfNotPresent()
+            {
+                if (!_mappings.ContainsKey(".*"))
+                {
                     AddMapping(".*", "application/octet-stream");
                 }
             }
 
-            private void EnsureMapping() {
+            private void EnsureMapping()
+            {
                 // Ensure initialized only once
-                if (!_isInitialized) {
-                    lock (this) {
-                        if (!_isInitialized) {
+                if (!_isInitialized)
+                {
+                    lock (this)
+                    {
+                        if (!_isInitialized)
+                        {
                             PopulateMappings();
                             AddWildcardIfNotPresent();
                             _isInitialized = true;
@@ -65,21 +86,26 @@ namespace System.Web {
             protected abstract void PopulateMappings();
 
             // This method is similar to Path.GetFileName(), but it doesn't fail on invalid path characters
-            private static string GetFileName(string path) {
+            private static string GetFileName(string path)
+            {
                 int pathSeparatorIndex = path.LastIndexOfAny(_pathSeparatorChars);
                 return (pathSeparatorIndex >= 0) ? path.Substring(pathSeparatorIndex) : path;
             }
 
-            public string GetMimeMapping(string fileName) {
+            public string GetMimeMapping(string fileName)
+            {
                 EnsureMapping();
                 fileName = GetFileName(fileName); // strip off path separators
 
                 // some MIME types have complex extensions (like ".exe.config"), so we need to work left-to-right
-                for (int i = 0; i < fileName.Length; i++) {
-                    if (fileName[i] == '.') {
+                for (int i = 0; i < fileName.Length; i++)
+                {
+                    if (fileName[i] == '.')
+                    {
                         // potential extension - consult dictionary
                         string mimeType;
-                        if (_mappings.TryGetValue(fileName.Substring(i), out mimeType)) {
+                        if (_mappings.TryGetValue(fileName.Substring(i), out mimeType))
+                        {
                             // found!
                             return mimeType;
                         }
@@ -93,8 +119,10 @@ namespace System.Web {
         }
 
         // This can provide fallback mappings if we don't have an actual applicationHost.config from which to read
-        private sealed class MimeMappingDictionaryClassic : MimeMappingDictionaryBase {
-            protected override void PopulateMappings() {
+        private sealed class MimeMappingDictionaryClassic : MimeMappingDictionaryBase
+        {
+            protected override void PopulateMappings()
+            {
                 // This list was copied from the IIS7 configuration file located at:
                 // %windir%\system32\inetsrv\config\applicationHost.config
 
@@ -157,10 +185,16 @@ namespace System.Web {
                 AddMapping(".dlm", "text/dlm");
                 AddMapping(".doc", "application/msword");
                 AddMapping(".docm", "application/vnd.ms-word.document.macroEnabled.12");
-                AddMapping(".docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+                AddMapping(
+                    ".docx",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                );
                 AddMapping(".dot", "application/msword");
                 AddMapping(".dotm", "application/vnd.ms-word.template.macroEnabled.12");
-                AddMapping(".dotx", "application/vnd.openxmlformats-officedocument.wordprocessingml.template");
+                AddMapping(
+                    ".dotx",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
+                );
                 AddMapping(".dsp", "application/octet-stream");
                 AddMapping(".dtd", "text/xml");
                 AddMapping(".dvi", "application/x-dvi");
@@ -295,15 +329,24 @@ namespace System.Web {
                 AddMapping(".pnz", "image/png");
                 AddMapping(".pot", "application/vnd.ms-powerpoint");
                 AddMapping(".potm", "application/vnd.ms-powerpoint.template.macroEnabled.12");
-                AddMapping(".potx", "application/vnd.openxmlformats-officedocument.presentationml.template");
+                AddMapping(
+                    ".potx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.template"
+                );
                 AddMapping(".ppam", "application/vnd.ms-powerpoint.addin.macroEnabled.12");
                 AddMapping(".ppm", "image/x-portable-pixmap");
                 AddMapping(".pps", "application/vnd.ms-powerpoint");
                 AddMapping(".ppsm", "application/vnd.ms-powerpoint.slideshow.macroEnabled.12");
-                AddMapping(".ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow");
+                AddMapping(
+                    ".ppsx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
+                );
                 AddMapping(".ppt", "application/vnd.ms-powerpoint");
                 AddMapping(".pptm", "application/vnd.ms-powerpoint.presentation.macroEnabled.12");
-                AddMapping(".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+                AddMapping(
+                    ".pptx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                );
                 AddMapping(".prf", "application/pics-rules");
                 AddMapping(".prm", "application/octet-stream");
                 AddMapping(".prx", "application/octet-stream");
@@ -337,7 +380,10 @@ namespace System.Web {
                 AddMapping(".shar", "application/x-shar");
                 AddMapping(".sit", "application/x-stuffit");
                 AddMapping(".sldm", "application/vnd.ms-powerpoint.slide.macroEnabled.12");
-                AddMapping(".sldx", "application/vnd.openxmlformats-officedocument.presentationml.slide");
+                AddMapping(
+                    ".sldx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.slide"
+                );
                 AddMapping(".smd", "audio/x-smd");
                 AddMapping(".smi", "application/octet-stream");
                 AddMapping(".smx", "audio/x-smd");
@@ -423,10 +469,16 @@ namespace System.Web {
                 AddMapping(".xls", "application/vnd.ms-excel");
                 AddMapping(".xlsb", "application/vnd.ms-excel.sheet.binary.macroEnabled.12");
                 AddMapping(".xlsm", "application/vnd.ms-excel.sheet.macroEnabled.12");
-                AddMapping(".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                AddMapping(
+                    ".xlsx",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                );
                 AddMapping(".xlt", "application/vnd.ms-excel");
                 AddMapping(".xltm", "application/vnd.ms-excel.template.macroEnabled.12");
-                AddMapping(".xltx", "application/vnd.openxmlformats-officedocument.spreadsheetml.template");
+                AddMapping(
+                    ".xltx",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.template"
+                );
                 AddMapping(".xlw", "application/vnd.ms-excel");
                 AddMapping(".xml", "text/xml");
                 AddMapping(".xof", "x-world/x-vrml");
@@ -445,54 +497,85 @@ namespace System.Web {
         }
 
         // This can provide mappings from the actual applicationHost.config file in IIS7 integrated mode
-        private sealed class MimeMappingDictionaryIntegrated : MimeMappingDictionaryBase {
+        private sealed class MimeMappingDictionaryIntegrated : MimeMappingDictionaryBase
+        {
             private readonly IntPtr _applicationContext;
 
-            public MimeMappingDictionaryIntegrated(IntPtr applicationContext) {
+            public MimeMappingDictionaryIntegrated(IntPtr applicationContext)
+            {
                 _applicationContext = applicationContext;
             }
 
-            protected override void PopulateMappings() {
+            protected override void PopulateMappings()
+            {
                 IntPtr mimeMapCollection = IntPtr.Zero;
-                try {
+                try
+                {
                     int result;
                     int mimeMapCount;
 
                     // Read the collection
-                    result = UnsafeIISMethods.MgdGetMimeMapCollection(IntPtr.Zero, _applicationContext, out mimeMapCollection, out mimeMapCount);
+                    result = UnsafeIISMethods.MgdGetMimeMapCollection(
+                        IntPtr.Zero,
+                        _applicationContext,
+                        out mimeMapCollection,
+                        out mimeMapCount
+                    );
                     Marshal.ThrowExceptionForHR(result);
 
-                    for (int i = 0; i < mimeMapCount; i++) {
+                    for (int i = 0; i < mimeMapCount; i++)
+                    {
                         IntPtr bstrFileExtension = IntPtr.Zero;
                         IntPtr bstrMimeType = IntPtr.Zero;
 
-                        try {
+                        try
+                        {
                             int cBstrFileExtension;
                             int cBstrMimeType;
 
                             // Read an individual element from the collection
-                            result = UnsafeIISMethods.MgdGetNextMimeMap(mimeMapCollection, (uint)i, out bstrFileExtension, out cBstrFileExtension, out bstrMimeType, out cBstrMimeType);
+                            result = UnsafeIISMethods.MgdGetNextMimeMap(
+                                mimeMapCollection,
+                                (uint)i,
+                                out bstrFileExtension,
+                                out cBstrFileExtension,
+                                out bstrMimeType,
+                                out cBstrMimeType
+                            );
                             Marshal.ThrowExceptionForHR(result);
 
-                            string fileExtension = (cBstrFileExtension > 0) ? StringUtil.StringFromWCharPtr(bstrFileExtension, cBstrFileExtension) : null;
-                            string mimeType = (cBstrMimeType > 0) ? StringUtil.StringFromWCharPtr(bstrMimeType, cBstrMimeType) : null;
+                            string fileExtension =
+                                (cBstrFileExtension > 0)
+                                    ? StringUtil.StringFromWCharPtr(
+                                        bstrFileExtension,
+                                        cBstrFileExtension
+                                    )
+                                    : null;
+                            string mimeType =
+                                (cBstrMimeType > 0)
+                                    ? StringUtil.StringFromWCharPtr(bstrMimeType, cBstrMimeType)
+                                    : null;
                             AddMapping(fileExtension, mimeType);
                         }
-                        finally {
+                        finally
+                        {
                             // It's our responsibility to release these strings when we're done
-                            if (bstrFileExtension != IntPtr.Zero) Marshal.FreeBSTR(bstrFileExtension);
-                            if (bstrMimeType != IntPtr.Zero) Marshal.FreeBSTR(bstrMimeType);
+                            if (bstrFileExtension != IntPtr.Zero)
+                                Marshal.FreeBSTR(bstrFileExtension);
+                            if (bstrMimeType != IntPtr.Zero)
+                                Marshal.FreeBSTR(bstrMimeType);
                         }
                     }
                 }
-                finally {
+                finally
+                {
                     // It's our responsibility to release the collection when we're done
-                    if (mimeMapCollection != IntPtr.Zero) {
+                    if (mimeMapCollection != IntPtr.Zero)
+                    {
                         Marshal.Release(mimeMapCollection);
                     }
                 }
             }
         }
-
     }
 }

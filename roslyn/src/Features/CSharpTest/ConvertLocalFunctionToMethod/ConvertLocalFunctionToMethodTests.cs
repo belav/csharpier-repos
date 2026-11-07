@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
     public class ConvertLocalFunctionToMethodTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertLocalFunctionToMethodCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertLocalFunctionToMethodCodeRefactoringProvider();
 
         [Fact]
         public async Task TestCaptures1()
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         LocalFunction1(param1, ref param2, local1, ref local2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                 {
                     public int Value;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -151,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         System.Func<int> x = () => value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
 
                     private static int LocalFunction1(int i) => i;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -215,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         System.Func<int> x = () => value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -273,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         System.Action<T5, T6> x = (T5 a1, T6 b1) => LocalFunction1<T2, T4, T5, T6>(a1, b1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -300,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
 
                     private static int LocalFunction<T1, T2>(T1 a, T2 b, int i) => i;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -333,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
 
                     private void LocalFunction1() => M();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -372,7 +382,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         return var;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp7_2
+                )
+            );
         }
 
         [Fact]
@@ -411,7 +425,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         return var;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp7
+                )
+            );
         }
 
         [Fact]
@@ -442,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
 
                     private static int LocalFunction1(int i) => i;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -473,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
 
                     private static int LocalFunction1(int a, ref string b, ref int i, int j) => i = j;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -514,7 +534,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         return await task;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -555,7 +576,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
                         await task;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -577,7 +599,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
             async Task TestAsync(string signature)
             {
                 await TestInRegularAndScriptAsync(
-$@"class C
+                    $@"class C
 {{
     void M()
     {{
@@ -587,7 +609,7 @@ $@"class C
         }}
     }}
 }}",
-"""
+                    """
 class C
 {
     void M()
@@ -599,13 +621,14 @@ class C
         return null;
     }
 }
-""");
+"""
+                );
             }
 
             async Task TestMissingAsync(string signature)
             {
                 await this.TestMissingAsync(
-$@"class C
+                    $@"class C
 {{
     void M()
     {{
@@ -614,7 +637,8 @@ $@"class C
             return null;
         }}
     }}
-}}");
+}}"
+                );
             }
         }
 
@@ -646,13 +670,13 @@ $@"class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection2()
         {
-
             await TestMissingAsync(
                 """
                 class C
@@ -665,14 +689,14 @@ $@"class C
                         }|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection3()
         {
             await TestInRegularAndScriptAsync(
-
                 """
                 class C
                 {
@@ -700,76 +724,77 @@ $@"class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection4()
         {
-
             await this.TestMissingAsync(
-    """
-    class C
-    {
-        void M()
-        {
+                """
+                class C
+                {
+                    void M()
+                    {
 
-            object a = null[|;
-            C LocalFunction(C c)
-            {      
-                return null;
+                        object a = null[|;
+                        C LocalFunction(C c)
+                        {      
+                            return null;
 
-            }|]
-        }
-    }
-    """);
+                        }|]
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection5()
         {
-
             await this.TestMissingAsync(
-    """
-    class C
-    {
-        void M()
-        {
+                """
+                class C
+                {
+                    void M()
+                    {
 
-            [|
-            C LocalFunction(C c)
-            {      
-                return null;
+                        [|
+                        C LocalFunction(C c)
+                        {      
+                            return null;
 
-            }
-            object|] a = null
-        }
-    }
-    """);
+                        }
+                        object|] a = null
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection6()
         {
-
             await this.TestMissingAsync(
-    """
-    class C
-    {
-        void M()
-        {
-            C LocalFunction(C c)
-            {
-                object b = null;
-                [|
-                object a = null;
-                return null;
-                |]
+                """
+                class C
+                {
+                    void M()
+                    {
+                        C LocalFunction(C c)
+                        {
+                            object b = null;
+                            [|
+                            object a = null;
+                            return null;
+                            |]
 
-            }
-        }
-    }
-    """);
+                        }
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -787,7 +812,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -818,7 +844,8 @@ $@"class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -849,7 +876,8 @@ $@"class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -880,7 +908,8 @@ $@"class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -899,7 +928,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32976")]
@@ -934,7 +964,8 @@ $@"class C
                         return bytePt;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32976")]
@@ -969,7 +1000,8 @@ $@"class C
                         return bytePt;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32976")]
@@ -1004,13 +1036,15 @@ $@"class C
                         return bytePt;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestTopLevelStatements()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 Console.WriteLine("Hello");
                 {
                     public static int [|Add|](int x, int y)
@@ -1018,13 +1052,15 @@ $@"class C
                         return x + y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32975")]
         public async Task TestRefReturn()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 class ClassA
                 {
                     class RefClass { }
@@ -1038,7 +1074,8 @@ $@"class C
                         ref var aReference = ref GetRef();
                     }
                 }
-                """, """
+                """,
+                """
                 class ClassA
                 {
                     class RefClass { }
@@ -1053,13 +1090,15 @@ $@"class C
                         return ref refClass;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32975")]
         public async Task TestAttributes()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 class ClassA
                 {
                     class RefClass { }
@@ -1074,7 +1113,8 @@ $@"class C
                         ref var aReference = ref GetRef();
                     }
                 }
-                """, """
+                """,
+                """
                 class ClassA
                 {
                     class RefClass { }
@@ -1090,7 +1130,8 @@ $@"class C
                         return ref refClass;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

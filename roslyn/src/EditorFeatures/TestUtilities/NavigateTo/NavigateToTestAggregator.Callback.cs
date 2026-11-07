@@ -19,8 +19,9 @@ namespace Roslyn.Test.EditorUtilities.NavigateTo
         {
             private readonly List<NavigateToItem> _itemsReceived = new();
 
-            private readonly TaskCompletionSource<IEnumerable<NavigateToItem>> _taskCompletionSource =
-                new TaskCompletionSource<IEnumerable<NavigateToItem>>();
+            private readonly TaskCompletionSource<
+                IEnumerable<NavigateToItem>
+            > _taskCompletionSource = new TaskCompletionSource<IEnumerable<NavigateToItem>>();
 
             public Callback(INavigateToOptions options)
             {
@@ -35,20 +36,16 @@ namespace Roslyn.Test.EditorUtilities.NavigateTo
                     _itemsReceived.Add(item);
             }
 
-            public void Done()
-                => _taskCompletionSource.SetResult(_itemsReceived);
+            public void Done() => _taskCompletionSource.SetResult(_itemsReceived);
 
-            public void Invalidate()
-                => throw new InvalidOperationException("Unexpected call to Invalidate.");
+            public void Invalidate() =>
+                throw new InvalidOperationException("Unexpected call to Invalidate.");
 
-            public Task<IEnumerable<NavigateToItem>> GetItemsAsync()
-                => _taskCompletionSource.Task;
+            public Task<IEnumerable<NavigateToItem>> GetItemsAsync() => _taskCompletionSource.Task;
 
             public INavigateToOptions Options { get; }
 
-            public void ReportProgress(int current, int maximum)
-            {
-            }
+            public void ReportProgress(int current, int maximum) { }
         }
     }
 }

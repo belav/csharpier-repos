@@ -18,20 +18,24 @@ namespace System.Reflection.Runtime.CustomAttributes
     internal sealed class RuntimePseudoCustomAttributeData : RuntimeCustomAttributeData
     {
         public RuntimePseudoCustomAttributeData(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type attributeType, IList<CustomAttributeTypedArgument> constructorArguments)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type attributeType,
+            IList<CustomAttributeTypedArgument> constructorArguments
+        )
         {
             _attributeType = attributeType;
             constructorArguments ??= Array.Empty<CustomAttributeTypedArgument>();
-            _constructorArguments = new ReadOnlyCollection<CustomAttributeTypedArgument>(constructorArguments);
+            _constructorArguments = new ReadOnlyCollection<CustomAttributeTypedArgument>(
+                constructorArguments
+            );
         }
 
         public sealed override Type AttributeType
         {
-            get
-            {
-                return _attributeType;
-            }
+            get { return _attributeType; }
         }
 
         public sealed override ConstructorInfo Constructor
@@ -51,12 +55,16 @@ namespace System.Reflection.Runtime.CustomAttributes
             }
         }
 
-        internal sealed override IList<CustomAttributeTypedArgument> GetConstructorArguments(bool throwIfMissingMetadata)
+        internal sealed override IList<CustomAttributeTypedArgument> GetConstructorArguments(
+            bool throwIfMissingMetadata
+        )
         {
             return _constructorArguments;
         }
 
-        internal sealed override IList<CustomAttributeNamedArgument> GetNamedArguments(bool throwIfMissingMetadata)
+        internal sealed override IList<CustomAttributeNamedArgument> GetNamedArguments(
+            bool throwIfMissingMetadata
+        )
         {
             // Note: if we ever need to return non-empty named arguments, we need to ensure the reflection metadata for the
             // corresponding fields/properties is kept (we might have to bump the dataflow annotation on _attributeType).
@@ -65,7 +73,10 @@ namespace System.Reflection.Runtime.CustomAttributes
 
         // Equals/GetHashCode no need to override (they just implement reference equality but desktop never unified these things.)
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         private readonly Type _attributeType;
         private readonly ReadOnlyCollection<CustomAttributeTypedArgument> _constructorArguments;
     }

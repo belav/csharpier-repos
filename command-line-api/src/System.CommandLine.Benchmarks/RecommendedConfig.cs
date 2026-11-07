@@ -16,16 +16,21 @@ namespace System.CommandLine.Benchmarks
     public static class RecommendedConfig
     {
 #pragma warning disable CA1801 // Review unused parameters
-        public static IConfig Create(DirectoryInfo artifactsPath, ImmutableHashSet<string> mandatoryCategories)
+        public static IConfig Create(
+            DirectoryInfo artifactsPath,
+            ImmutableHashSet<string> mandatoryCategories
+        )
 #pragma warning restore CA1801 // Review unused parameters
 #pragma warning disable CA1062 // Validate arguments of public methods
-            => DefaultConfig.Instance
-                .With(Job.Default
-                    .WithWarmupCount(1)
-                    .WithIterationTime(TimeInterval.FromMilliseconds(250))
-                    .WithMinIterationCount(15)
-                    .WithMaxIterationCount(20)
-                    .AsDefault())
+            =>
+            DefaultConfig
+                .Instance.With(
+                    Job.Default.WithWarmupCount(1)
+                        .WithIterationTime(TimeInterval.FromMilliseconds(250))
+                        .WithMinIterationCount(15)
+                        .WithMaxIterationCount(20)
+                        .AsDefault()
+                )
                 .WithArtifactsPath(artifactsPath.FullName)
                 .With(MemoryDiagnoser.Default)
                 .With(JsonExporter.Full)

@@ -20,14 +20,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                 _subjectBuffer = subjectBuffer;
             }
 
-            public override void Connect()
-                => _subjectBuffer.ReadOnlyRegionsChanged += OnReadOnlyRegionsChanged;
+            public override void Connect() =>
+                _subjectBuffer.ReadOnlyRegionsChanged += OnReadOnlyRegionsChanged;
 
-            public override void Disconnect()
-                => _subjectBuffer.ReadOnlyRegionsChanged -= OnReadOnlyRegionsChanged;
+            public override void Disconnect() =>
+                _subjectBuffer.ReadOnlyRegionsChanged -= OnReadOnlyRegionsChanged;
 
-            private void OnReadOnlyRegionsChanged(object? sender, SnapshotSpanEventArgs e)
-                => this.RaiseChanged();
+            private void OnReadOnlyRegionsChanged(object? sender, SnapshotSpanEventArgs e) =>
+                this.RaiseChanged();
         }
     }
 }

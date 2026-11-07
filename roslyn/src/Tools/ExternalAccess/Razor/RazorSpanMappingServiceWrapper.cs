@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorSpanMappingServiceWrapper(IRazorSpanMappingService razorSpanMappingService)
         {
-            _razorSpanMappingService = razorSpanMappingService ?? throw new ArgumentNullException(nameof(razorSpanMappingService));
+            _razorSpanMappingService =
+                razorSpanMappingService
+                ?? throw new ArgumentNullException(nameof(razorSpanMappingService));
         }
 
         /// <summary>
@@ -28,17 +30,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         /// </summary>
         public override bool SupportsMappingImportDirectives => true;
 
-        public override async Task<ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>> GetMappedTextChangesAsync(
+        public override async Task<
+            ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>
+        > GetMappedTextChangesAsync(
             Document oldDocument,
             Document newDocument,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var diffService = newDocument.Project.Solution.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var diffService =
+                newDocument.Project.Solution.Services.GetRequiredService<IDocumentTextDifferencingService>();
 
             // This is a hack that finds a minimal diff. It's not the ideal algorithm but should cover most scenarios. In the future,
             // we should improve this algorithm - see https://github.com/dotnet/roslyn/issues/53346 for additional details.
-            var textChanges = await diffService.GetTextChangesAsync(oldDocument, newDocument, cancellationToken).ConfigureAwait(false);
-            var mappedSpanResults = await MapSpansAsync(oldDocument, textChanges.Select(tc => tc.Span), cancellationToken).ConfigureAwait(false);
+            var textChanges = await diffService
+                .GetTextChangesAsync(oldDocument, newDocument, cancellationToken)
+                .ConfigureAwait(false);
+            var mappedSpanResults = await MapSpansAsync(
+                    oldDocument,
+                    textChanges.Select(tc => tc.Span),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var mappedTextChanges = MatchMappedSpansToTextChanges(textChanges, mappedSpanResults);
             return mappedTextChanges;
@@ -47,9 +60,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         public override async Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
             Document document,
             IEnumerable<TextSpan> spans,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var razorSpans = await _razorSpanMappingService.MapSpansAsync(document, spans, cancellationToken).ConfigureAwait(false);
+            var razorSpans = await _razorSpanMappingService
+                .MapSpansAsync(document, spans, cancellationToken)
+                .ConfigureAwait(false);
             var roslynSpans = new MappedSpanResult[razorSpans.Length];
             for (var i = 0; i < razorSpans.Length; i++)
             {
@@ -61,7 +77,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 }
                 else
                 {
-                    roslynSpans[i] = new MappedSpanResult(razorSpan.FilePath, razorSpan.LinePositionSpan, razorSpan.Span);
+                    roslynSpans[i] = new MappedSpanResult(
+                        razorSpan.FilePath,
+                        razorSpan.LinePositionSpan,
+                        razorSpan.Span
+                    );
                 }
             }
 

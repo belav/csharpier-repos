@@ -5,72 +5,89 @@
 namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Security;
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml;
     using System.Xml.Linq;
-    using Microsoft.Build.Utilities;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using System.CodeDom;
-    using System.ComponentModel;
-    using System.CodeDom.Compiler;
-    using System.Linq;
     using Microsoft.Build.Framework;
+    using Microsoft.Build.Utilities;
     using XamlBuildTask;
 
     internal static class XamlBuildTaskServices
     {
-
         internal const string ClrNamespaceUriNamespacePart = "clr-namespace:";
         internal const string ClrNamespaceUriAssemblyPart = "assembly=";
         internal const string XamlExtension = ".xaml";
 
-
         //internal static XName SchemaTypeName = XamlSchemaTypeResolver.Default.GetTypeReference(typeof(SchemaType)).Name;
         const string UnknownExceptionErrorCode = "XC1000";
+
         // Update this value if any changes are made to it in System.Xaml\KnownStrings.cs
         const string serializerReferenceNamePrefix = "__ReferenceID";
 
         internal static string SerializerReferenceNamePrefix
-        { get { return serializerReferenceNamePrefix; } }
+        {
+            get { return serializerReferenceNamePrefix; }
+        }
 
         static string _private = String.Empty;
         internal static string PrivateModifier
-        { get { return _private; } }
+        {
+            get { return _private; }
+        }
 
         static string _public = String.Empty;
         internal static string PublicModifier
-        { get { return _public; } }
+        {
+            get { return _public; }
+        }
 
         static string _internal = String.Empty;
         internal static string InternalModifier
-        { get { return _internal; } }
+        {
+            get { return _internal; }
+        }
 
         static string _protected = String.Empty;
         internal static string ProtectedModifier
-        { get { return _protected; } }
+        {
+            get { return _protected; }
+        }
 
         static string _protectedInternal = String.Empty;
         internal static string ProtectedInternalModifier
-        { get { return _protectedInternal; } }
+        {
+            get { return _protectedInternal; }
+        }
 
         static string _protectedAndInternal = String.Empty;
         internal static string ProtectedAndInternalModifier
-        { get { return _protectedAndInternal; } }
+        {
+            get { return _protectedAndInternal; }
+        }
 
         static string _publicClass = String.Empty;
         internal static string PublicClassModifier
-        { get { return _publicClass; } }
+        {
+            get { return _publicClass; }
+        }
 
         static string _internalClass = String.Empty;
         internal static string InternalClassModifier
-        { get { return _internalClass; } }
+        {
+            get { return _internalClass; }
+        }
 
         static string _fileNotLoaded = String.Empty;
         internal static string FileNotLoaded
@@ -80,39 +97,55 @@ namespace Microsoft.Build.Tasks.Xaml
 
         internal static void PopulateModifiers(CodeDomProvider codeDomProvider)
         {
-            TypeConverter memberAttributesConverter = codeDomProvider.GetConverter(typeof(MemberAttributes));
+            TypeConverter memberAttributesConverter = codeDomProvider.GetConverter(
+                typeof(MemberAttributes)
+            );
             if (memberAttributesConverter != null)
             {
                 if (memberAttributesConverter.CanConvertTo(typeof(string)))
                 {
                     try
                     {
-                        _private = memberAttributesConverter.ConvertToInvariantString(MemberAttributes.Private).ToUpperInvariant();
-                        _public = memberAttributesConverter.ConvertToInvariantString(MemberAttributes.Public).ToUpperInvariant();
-                        _protected = memberAttributesConverter.ConvertToInvariantString(MemberAttributes.Family).ToUpperInvariant();
-                        _internal = memberAttributesConverter.ConvertToInvariantString(MemberAttributes.Assembly).ToUpperInvariant();
-                        _protectedInternal = memberAttributesConverter.ConvertToInvariantString(MemberAttributes.FamilyOrAssembly).ToUpperInvariant();
-                        _protectedAndInternal = memberAttributesConverter.ConvertToInvariantString(MemberAttributes.FamilyAndAssembly).ToUpperInvariant();
+                        _private = memberAttributesConverter
+                            .ConvertToInvariantString(MemberAttributes.Private)
+                            .ToUpperInvariant();
+                        _public = memberAttributesConverter
+                            .ConvertToInvariantString(MemberAttributes.Public)
+                            .ToUpperInvariant();
+                        _protected = memberAttributesConverter
+                            .ConvertToInvariantString(MemberAttributes.Family)
+                            .ToUpperInvariant();
+                        _internal = memberAttributesConverter
+                            .ConvertToInvariantString(MemberAttributes.Assembly)
+                            .ToUpperInvariant();
+                        _protectedInternal = memberAttributesConverter
+                            .ConvertToInvariantString(MemberAttributes.FamilyOrAssembly)
+                            .ToUpperInvariant();
+                        _protectedAndInternal = memberAttributesConverter
+                            .ConvertToInvariantString(MemberAttributes.FamilyAndAssembly)
+                            .ToUpperInvariant();
                     }
-                    catch (NotSupportedException)
-                    {
-                    }
+                    catch (NotSupportedException) { }
                 }
             }
 
-            TypeConverter typeAttributesConverter = codeDomProvider.GetConverter(typeof(TypeAttributes));
+            TypeConverter typeAttributesConverter = codeDomProvider.GetConverter(
+                typeof(TypeAttributes)
+            );
             if (typeAttributesConverter != null)
             {
                 if (typeAttributesConverter.CanConvertTo(typeof(string)))
                 {
                     try
                     {
-                        _internalClass = typeAttributesConverter.ConvertToInvariantString(TypeAttributes.NotPublic).ToUpperInvariant();
-                        _publicClass = typeAttributesConverter.ConvertToInvariantString(TypeAttributes.Public).ToUpperInvariant();
+                        _internalClass = typeAttributesConverter
+                            .ConvertToInvariantString(TypeAttributes.NotPublic)
+                            .ToUpperInvariant();
+                        _publicClass = typeAttributesConverter
+                            .ConvertToInvariantString(TypeAttributes.Public)
+                            .ToUpperInvariant();
                     }
-                    catch (NotSupportedException)
-                    {
-                    }
+                    catch (NotSupportedException) { }
                 }
             }
         }
@@ -121,18 +154,31 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (!string.IsNullOrEmpty(classModifier))
             {
-                if (string.Equals(classModifier, InternalClassModifier, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        classModifier,
+                        InternalClassModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return false;
                 }
-                else if (string.Equals(classModifier, PublicClassModifier, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        classModifier,
+                        PublicClassModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
                 else
                 {
                     throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.ClassModifierNotSupported(classModifier)));
+                        new InvalidOperationException(SR.ClassModifierNotSupported(classModifier))
+                    );
                 }
             }
             return true;
@@ -142,33 +188,71 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (!string.IsNullOrEmpty(memberModifier))
             {
-                if (string.Equals(memberModifier, XamlBuildTaskServices.PrivateModifier, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        memberModifier,
+                        XamlBuildTaskServices.PrivateModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return MemberVisibility.Private;
                 }
-                else if (string.Equals(memberModifier, XamlBuildTaskServices.PublicModifier, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        memberModifier,
+                        XamlBuildTaskServices.PublicModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return MemberVisibility.Public;
                 }
-                else if (string.Equals(memberModifier, XamlBuildTaskServices.ProtectedModifier, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        memberModifier,
+                        XamlBuildTaskServices.ProtectedModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return MemberVisibility.Family;
                 }
-                else if (string.Equals(memberModifier, XamlBuildTaskServices.InternalModifier, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        memberModifier,
+                        XamlBuildTaskServices.InternalModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return MemberVisibility.Assembly;
                 }
-                else if (string.Equals(memberModifier, XamlBuildTaskServices.ProtectedInternalModifier, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        memberModifier,
+                        XamlBuildTaskServices.ProtectedInternalModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return MemberVisibility.FamilyOrAssembly;
                 }
-                else if (string.Equals(memberModifier, XamlBuildTaskServices.ProtectedAndInternalModifier, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        memberModifier,
+                        XamlBuildTaskServices.ProtectedAndInternalModifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return MemberVisibility.FamilyAndAssembly;
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.FieldModifierNotSupported(memberModifier)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.FieldModifierNotSupported(memberModifier))
+                    );
                 }
             }
             // Public is only the default modifier for properties, not for fields.
@@ -191,7 +275,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
             }
 
-            // The fact that the file can not be found in the referenced assembly list means that 
+            // The fact that the file can not be found in the referenced assembly list means that
             // CLR will throw a FileLoadException once this event handler returns.
             // Since the FileLoadException's FileName property is set to null (due to the fact there is no path),
             // we are storing it in a static variable so that we can print a pretty error message later on.
@@ -205,7 +289,11 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (buildTaskPath == null)
             {
-                throw FxTrace.Exception.AsError(new LoggableException(new InvalidOperationException(SR.BuildTaskPathMustNotBeNull)));
+                throw FxTrace.Exception.AsError(
+                    new LoggableException(
+                        new InvalidOperationException(SR.BuildTaskPathMustNotBeNull)
+                    )
+                );
             }
 
             // Enable shadow copying in the Designer appdomain, so that we can continue to rebuild
@@ -226,15 +314,23 @@ namespace Microsoft.Build.Tasks.Xaml
                 friendlyName,
                 AppDomain.CurrentDomain.Evidence,
                 appDomainSetup,
-                new NamedPermissionSet("FullTrust"));
+                new NamedPermissionSet("FullTrust")
+            );
         }
 
-        internal static IList<Assembly> Load(IList<ITaskItem> referenceAssemblies, bool isDesignTime)
+        internal static IList<Assembly> Load(
+            IList<ITaskItem> referenceAssemblies,
+            bool isDesignTime
+        )
         {
             List<string> systemReferences = new List<string>();
             List<string> nonSystemReferences = new List<string>();
 
-            CategorizeReferenceAssemblies(referenceAssemblies, out systemReferences, out nonSystemReferences);
+            CategorizeReferenceAssemblies(
+                referenceAssemblies,
+                out systemReferences,
+                out nonSystemReferences
+            );
 
             IList<Assembly> assemblies = new List<Assembly>();
             foreach (string item in systemReferences)
@@ -265,7 +361,7 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 // here we want to check if the assembly is mscorlib.dll.
                 // for the current codebase, this check would have worked:
-                // if (asm == typeof(Object).Assembly), but we 
+                // if (asm == typeof(Object).Assembly), but we
                 // prefer a check that will continue to work when LMR is used
                 if (asm.GetReferencedAssemblies().Length == 0)
                 {
@@ -281,8 +377,11 @@ namespace Microsoft.Build.Tasks.Xaml
             return assemblies;
         }
 
-        [SuppressMessage(FxCop.Category.Reliability, FxCop.Rule.AvoidCallingProblematicMethods,
-            Justification = "Using LoadFile to avoid loading through Fusion and load the exact assembly the developer specified")]
+        [SuppressMessage(
+            FxCop.Category.Reliability,
+            FxCop.Rule.AvoidCallingProblematicMethods,
+            Justification = "Using LoadFile to avoid loading through Fusion and load the exact assembly the developer specified"
+        )]
         internal static Assembly Load(string reference)
         {
             if (reference.EndsWith("mscorlib.dll", StringComparison.OrdinalIgnoreCase))
@@ -298,7 +397,9 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (e.FileName == null)
                 {
-                    throw FxTrace.Exception.AsError((new FileNotFoundException(e.Message, fullPath)));
+                    throw FxTrace.Exception.AsError(
+                        (new FileNotFoundException(e.Message, fullPath))
+                    );
                 }
                 else
                     throw;
@@ -310,14 +411,37 @@ namespace Microsoft.Build.Tasks.Xaml
             LogException(buildLogger, message, null, 0, 0);
         }
 
-        internal static void LogException(TaskLoggingHelper buildLogger, string message, string fileName, int lineNumber, int linePosition)
+        internal static void LogException(
+            TaskLoggingHelper buildLogger,
+            string message,
+            string fileName,
+            int lineNumber,
+            int linePosition
+        )
         {
-            string errorCode, logMessage;
+            string errorCode,
+                logMessage;
             ExtractErrorCodeAndMessage(buildLogger, message, out errorCode, out logMessage);
-            buildLogger.LogError(null, errorCode, null, fileName, lineNumber, linePosition, 0, 0, logMessage, null);
+            buildLogger.LogError(
+                null,
+                errorCode,
+                null,
+                fileName,
+                lineNumber,
+                linePosition,
+                0,
+                0,
+                logMessage,
+                null
+            );
         }
 
-        static void ExtractErrorCodeAndMessage(TaskLoggingHelper buildLogger, string message, out string errorCode, out string logMessage)
+        static void ExtractErrorCodeAndMessage(
+            TaskLoggingHelper buildLogger,
+            string message,
+            out string errorCode,
+            out string logMessage
+        )
         {
             errorCode = buildLogger.ExtractMessageCode(message, out logMessage);
             if (string.IsNullOrEmpty(errorCode))
@@ -327,7 +451,11 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        internal static bool IsClrNamespaceUri(string nsName, out int nsIndex, out int assemblyIndex)
+        internal static bool IsClrNamespaceUri(
+            string nsName,
+            out int nsIndex,
+            out int assemblyIndex
+        )
         {
             if (nsName.StartsWith(ClrNamespaceUriNamespacePart, StringComparison.Ordinal))
             {
@@ -369,28 +497,47 @@ namespace Microsoft.Build.Tasks.Xaml
             return false;
         }
 
-        internal static string UpdateClrNamespaceUriWithLocalAssembly(string @namespace, string localAssemblyName)
+        internal static string UpdateClrNamespaceUriWithLocalAssembly(
+            string @namespace,
+            string localAssemblyName
+        )
         {
             return UpdateClrNamespaceUriWithLocalAssembly(@namespace, localAssemblyName, null);
         }
 
-        internal static string UpdateClrNamespaceUriWithLocalAssembly(string @namespace, string localAssemblyName, string realAssemblyName)
+        internal static string UpdateClrNamespaceUriWithLocalAssembly(
+            string @namespace,
+            string localAssemblyName,
+            string realAssemblyName
+        )
         {
-            int nsIndex, assemblyIndex;
+            int nsIndex,
+                assemblyIndex;
             if (IsClrNamespaceUri(@namespace, out nsIndex, out assemblyIndex))
             {
                 // If assembly portion of namespace does not exist, assume that this is part of the local assembly
                 if (assemblyIndex == -1)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0};{1}{2}",
-                        @namespace.TrimEnd(' ', ';'), XamlBuildTaskServices.ClrNamespaceUriAssemblyPart, localAssemblyName);
+                    return string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0};{1}{2}",
+                        @namespace.TrimEnd(' ', ';'),
+                        XamlBuildTaskServices.ClrNamespaceUriAssemblyPart,
+                        localAssemblyName
+                    );
                 }
-                else if (!string.IsNullOrEmpty(realAssemblyName) &&
-                    localAssemblyName != realAssemblyName &&
-                    @namespace.Substring(assemblyIndex) == realAssemblyName)
+                else if (
+                    !string.IsNullOrEmpty(realAssemblyName)
+                    && localAssemblyName != realAssemblyName
+                    && @namespace.Substring(assemblyIndex) == realAssemblyName
+                )
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}{1}",
-                        @namespace.Substring(0, assemblyIndex), localAssemblyName);
+                    return string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}{1}",
+                        @namespace.Substring(0, assemblyIndex),
+                        localAssemblyName
+                    );
                 }
             }
             return @namespace;
@@ -431,7 +578,11 @@ namespace Microsoft.Build.Tasks.Xaml
             return typeName;
         }
 
-        internal static XamlType GetXamlTypeFromString(string typeName, NamespaceTable namespaceTable, XamlSchemaContext xsc)
+        internal static XamlType GetXamlTypeFromString(
+            string typeName,
+            NamespaceTable namespaceTable,
+            XamlSchemaContext xsc
+        )
         {
             XamlTypeName xamlTypeName = XamlTypeName.Parse(typeName, namespaceTable);
             XamlType xamlType = xsc.GetXamlType(xamlTypeName);
@@ -442,7 +593,11 @@ namespace Microsoft.Build.Tasks.Xaml
             return xamlType;
         }
 
-        static XamlType GetXamlTypeFromXamlTypeName(XamlTypeName xamlTypeName, NamespaceTable namespaceTable, XamlSchemaContext xsc)
+        static XamlType GetXamlTypeFromXamlTypeName(
+            XamlTypeName xamlTypeName,
+            NamespaceTable namespaceTable,
+            XamlSchemaContext xsc
+        )
         {
             IList<XamlType> typeArgs = null;
             if (xamlTypeName.TypeArguments.Count > 0)
@@ -454,20 +609,30 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
             }
             return new XamlType(xamlTypeName.Namespace, xamlTypeName.Name, typeArgs, xsc);
-        }      
+        }
 
-        internal static bool TryGetClrTypeName(XamlType xamlType, string rootNamespace, out string clrTypeName)
+        internal static bool TryGetClrTypeName(
+            XamlType xamlType,
+            string rootNamespace,
+            out string clrTypeName
+        )
         {
-            bool isLocal;   
+            bool isLocal;
             return TryGetClrTypeName(xamlType, rootNamespace, out clrTypeName, out isLocal);
         }
 
-        internal static bool TryGetClrTypeName(XamlType xamlType, string rootNamespace, out string clrTypeName, out bool isLocal)
+        internal static bool TryGetClrTypeName(
+            XamlType xamlType,
+            string rootNamespace,
+            out string clrTypeName,
+            out bool isLocal
+        )
         {
             if (!xamlType.IsUnknown)
             {
                 isLocal = false;
-                clrTypeName = xamlType.UnderlyingType != null ? xamlType.UnderlyingType.FullName : null;
+                clrTypeName =
+                    xamlType.UnderlyingType != null ? xamlType.UnderlyingType.FullName : null;
                 return (clrTypeName != null);
             }
             else
@@ -479,14 +644,22 @@ namespace Microsoft.Build.Tasks.Xaml
 
         internal static bool TryExtractClrNs(string @namespace, out string clrNs)
         {
-            int nsIndex, assemblyIndex;
+            int nsIndex,
+                assemblyIndex;
             if (XamlBuildTaskServices.IsClrNamespaceUri(@namespace, out nsIndex, out assemblyIndex))
             {
-                clrNs = (assemblyIndex == -1)
-                    ? @namespace.Substring(nsIndex).TrimEnd(' ', ';')
-                    : @namespace.Substring(
-                        nsIndex,
-                        assemblyIndex - XamlBuildTaskServices.ClrNamespaceUriAssemblyPart.Length - nsIndex - 1).TrimEnd(' ', ';');
+                clrNs =
+                    (assemblyIndex == -1)
+                        ? @namespace.Substring(nsIndex).TrimEnd(' ', ';')
+                        : @namespace
+                            .Substring(
+                                nsIndex,
+                                assemblyIndex
+                                    - XamlBuildTaskServices.ClrNamespaceUriAssemblyPart.Length
+                                    - nsIndex
+                                    - 1
+                            )
+                            .TrimEnd(' ', ';');
                 return true;
             }
             else
@@ -496,7 +669,11 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        static bool TryGetClrTypeNameFromLocalType(XamlType xamlType, string rootNamespace, out string clrTypeName)
+        static bool TryGetClrTypeNameFromLocalType(
+            XamlType xamlType,
+            string rootNamespace,
+            out string clrTypeName
+        )
         {
             //
             // This means that either we have a type in the base hierarchy or type arguments
@@ -507,9 +684,11 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (@namespace != null && TryExtractClrNs(@namespace, out clrNs))
             {
-                if (!String.IsNullOrEmpty(rootNamespace) && 
-                    !String.IsNullOrEmpty(clrNs) &&
-                    clrNs.StartsWith(rootNamespace, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !String.IsNullOrEmpty(rootNamespace)
+                    && !String.IsNullOrEmpty(clrNs)
+                    && clrNs.StartsWith(rootNamespace, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if (clrNs.Length > rootNamespace.Length)
                     {
@@ -519,14 +698,19 @@ namespace Microsoft.Build.Tasks.Xaml
                     {
                         clrNs = string.Empty;
                     }
-                } 
+                }
                 if (string.IsNullOrEmpty(clrNs))
                 {
                     clrTypeName = name;
                 }
                 else
                 {
-                    clrTypeName = string.Format(CultureInfo.InvariantCulture, "{0}.{1}", clrNs, name);
+                    clrTypeName = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}.{1}",
+                        clrNs,
+                        name
+                    );
                 }
                 return true;
             }
@@ -540,7 +724,9 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     qualifiedName = name + "`" + xamlType.TypeArguments.Count;
                 }
-                XamlType resolvedType = xamlType.SchemaContext.GetXamlType(new XamlTypeName(@namespace, qualifiedName));
+                XamlType resolvedType = xamlType.SchemaContext.GetXamlType(
+                    new XamlTypeName(@namespace, qualifiedName)
+                );
                 if (resolvedType != null && resolvedType.UnderlyingType != null)
                 {
                     clrTypeName = resolvedType.UnderlyingType.FullName;
@@ -553,16 +739,28 @@ namespace Microsoft.Build.Tasks.Xaml
 
         // Returns true if type namespace is clr-namespace and populates assemblyName
         // Else returns false with assemblyName null;
-        internal static bool GetTypeNameInAssemblyOrNamespace(XamlType type, string localAssemblyName, string realAssemblyName, 
-            out string typeName, out string assemblyName, out string ns)
+        internal static bool GetTypeNameInAssemblyOrNamespace(
+            XamlType type,
+            string localAssemblyName,
+            string realAssemblyName,
+            out string typeName,
+            out string assemblyName,
+            out string ns
+        )
         {
-            int assemblyIndex, nsIndex;
+            int assemblyIndex,
+                nsIndex;
             string typeNs = type.PreferredXamlNamespace;
             typeName = GetFullTypeNameWithoutNamespace(type);
             if (IsClrNamespaceUri(typeNs, out nsIndex, out assemblyIndex))
             {
                 assemblyName = assemblyIndex > -1 ? typeNs.Substring(assemblyIndex) : String.Empty;
-                if ((!string.IsNullOrEmpty(localAssemblyName) && assemblyName.Contains(localAssemblyName)) || string.IsNullOrEmpty(assemblyName))
+                if (
+                    (
+                        !string.IsNullOrEmpty(localAssemblyName)
+                        && assemblyName.Contains(localAssemblyName)
+                    ) || string.IsNullOrEmpty(assemblyName)
+                )
                 {
                     assemblyName = realAssemblyName;
                 }
@@ -585,10 +783,25 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        internal static string GetTypeName(XamlType type, string localAssemblyName, string realAssemblyName)
+        internal static string GetTypeName(
+            XamlType type,
+            string localAssemblyName,
+            string realAssemblyName
+        )
         {
-            string typeName, assemblyName, ns;
-            if (GetTypeNameInAssemblyOrNamespace(type, localAssemblyName, realAssemblyName, out typeName, out assemblyName, out ns))
+            string typeName,
+                assemblyName,
+                ns;
+            if (
+                GetTypeNameInAssemblyOrNamespace(
+                    type,
+                    localAssemblyName,
+                    realAssemblyName,
+                    out typeName,
+                    out assemblyName,
+                    out ns
+                )
+            )
             {
                 return ns + "." + typeName;
             }
@@ -599,7 +812,10 @@ namespace Microsoft.Build.Tasks.Xaml
         }
 
         // Returns false if the type is known else returns true.
-        internal static bool GetUnresolvedLeafTypeArg(XamlType type, ref IList<XamlType> unresolvedLeafTypeList)
+        internal static bool GetUnresolvedLeafTypeArg(
+            XamlType type,
+            ref IList<XamlType> unresolvedLeafTypeList
+        )
         {
             if (unresolvedLeafTypeList != null && type != null && type.IsUnknown)
             {
@@ -612,7 +828,10 @@ namespace Microsoft.Build.Tasks.Xaml
                     bool hasUnknownChildren = false;
                     foreach (XamlType typeArg in type.TypeArguments)
                     {
-                        hasUnknownChildren |= GetUnresolvedLeafTypeArg(typeArg, ref unresolvedLeafTypeList);
+                        hasUnknownChildren |= GetUnresolvedLeafTypeArg(
+                            typeArg,
+                            ref unresolvedLeafTypeList
+                        );
                     }
                     if (!hasUnknownChildren)
                     {
@@ -627,10 +846,18 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        [SuppressMessage(FxCop.Category.Reliability, FxCop.Rule.AvoidCallingProblematicMethods,
-            Justification = "Using LoadFrom to avoid loading through Fusion and load from the exact path specified")]
-        internal static IEnumerable<T> GetXamlBuildTaskExtensions<T>(IList<Tuple<string, string, string>> extensionNames, TaskLoggingHelper logger, string currentProjectDirectory) where T : class
-        {            
+        [SuppressMessage(
+            FxCop.Category.Reliability,
+            FxCop.Rule.AvoidCallingProblematicMethods,
+            Justification = "Using LoadFrom to avoid loading through Fusion and load from the exact path specified"
+        )]
+        internal static IEnumerable<T> GetXamlBuildTaskExtensions<T>(
+            IList<Tuple<string, string, string>> extensionNames,
+            TaskLoggingHelper logger,
+            string currentProjectDirectory
+        )
+            where T : class
+        {
             List<T> extensionsLoaded = new List<T>();
 
             if (extensionNames == null)
@@ -654,14 +881,14 @@ namespace Microsoft.Build.Tasks.Xaml
                     {
                         if (Fx.IsFatal(e))
                         {
-                            throw;                            
+                            throw;
                         }
                         logger.LogWarning(SR.UnresolvedExtensionAssembly(assemblyName));
                     }
                 }
                 else
                 {
-                    try 
+                    try
                     {
                         if (Path.IsPathRooted(assemblyFile))
                         {
@@ -670,9 +897,11 @@ namespace Microsoft.Build.Tasks.Xaml
                         }
                         else
                         {
-                            // if the path is relative, we load from 
+                            // if the path is relative, we load from
                             // current project folder + provided relative path
-                            assembly = Assembly.LoadFrom(Path.Combine(currentProjectDirectory, assemblyFile));
+                            assembly = Assembly.LoadFrom(
+                                Path.Combine(currentProjectDirectory, assemblyFile)
+                            );
                         }
                     }
                     catch (Exception e)
@@ -683,7 +912,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         }
                         logger.LogWarning(SR.UnresolvedExtensionAssembly(assemblyFile));
                     }
-                }               
+                }
 
                 if (assembly == null)
                 {
@@ -695,10 +924,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 if (extensionType == null || extensionType.GetInterface(typeof(T).FullName) == null)
                 {
                     string assemblylocationInfo = assemblyFile != "" ? assemblyFile : assemblyName;
-                    logger.LogWarning(SR.UnresolvedExtension(extensionEntry.Item1, assemblylocationInfo));
+                    logger.LogWarning(
+                        SR.UnresolvedExtension(extensionEntry.Item1, assemblylocationInfo)
+                    );
                     continue;
                 }
-                
+
                 T extension;
                 try
                 {
@@ -711,26 +942,35 @@ namespace Microsoft.Build.Tasks.Xaml
                         throw;
                     }
 
-                    logger.LogWarning(SR.ExceptionThrownDuringConstruction(extensionEntry.Item1,
-                        e.GetType().ToString(),
-                        e.Message,
-                        e.InnerException != null ? e.InnerException.GetType().ToString() : "null",
-                        e.InnerException != null ? e.InnerException.Message : "null"));
+                    logger.LogWarning(
+                        SR.ExceptionThrownDuringConstruction(
+                            extensionEntry.Item1,
+                            e.GetType().ToString(),
+                            e.Message,
+                            e.InnerException != null
+                                ? e.InnerException.GetType().ToString()
+                                : "null",
+                            e.InnerException != null ? e.InnerException.Message : "null"
+                        )
+                    );
 
                     continue;
                 }
 
                 if (extension != null)
                 {
-                    extensionsLoaded.Add(extension);                    
-                }                
+                    extensionsLoaded.Add(extension);
+                }
             }
             return extensionsLoaded;
         }
 
-        internal static IList<Tuple<string, string, string>> GetXamlBuildTaskExtensionNames(ITaskItem[] xamlBuildTypeGenerationExtensionsNames)
+        internal static IList<Tuple<string, string, string>> GetXamlBuildTaskExtensionNames(
+            ITaskItem[] xamlBuildTypeGenerationExtensionsNames
+        )
         {
-            List<Tuple<string, string, string>> extensionNames = new List<Tuple<string, string, string>>();
+            List<Tuple<string, string, string>> extensionNames =
+                new List<Tuple<string, string, string>>();
             if (xamlBuildTypeGenerationExtensionsNames != null)
             {
                 string assemblyFile;
@@ -741,14 +981,24 @@ namespace Microsoft.Build.Tasks.Xaml
                     assemblyName = taskItem.GetMetadata("AssemblyName");
                     if (assemblyName != "" && assemblyFile != "")
                     {
-                        throw FxTrace.Exception.AsError(new LoggableException(SR.BothAssemblyNameAndFileSpecified));
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(SR.BothAssemblyNameAndFileSpecified)
+                        );
                     }
                     if (assemblyName == "" && assemblyFile == "")
                     {
-                        throw FxTrace.Exception.AsError(new LoggableException(SR.AssemblyNameOrFileNotSpecified));
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(SR.AssemblyNameOrFileNotSpecified)
+                        );
                     }
-                    
-                    extensionNames.Add(new Tuple<string, string, string>(taskItem.ItemSpec, assemblyName, assemblyFile));
+
+                    extensionNames.Add(
+                        new Tuple<string, string, string>(
+                            taskItem.ItemSpec,
+                            assemblyName,
+                            assemblyFile
+                        )
+                    );
                 }
             }
             return extensionNames;
@@ -765,7 +1015,11 @@ namespace Microsoft.Build.Tasks.Xaml
             return references;
         }
 
-        private static void CategorizeReferenceAssemblies(IList<ITaskItem> referenceAssemblies, out List<string> systemItems, out List<string> nonSystemItems)
+        private static void CategorizeReferenceAssemblies(
+            IList<ITaskItem> referenceAssemblies,
+            out List<string> systemItems,
+            out List<string> nonSystemItems
+        )
         {
             List<string> systemList = new List<string>();
             List<string> nonSystemList = new List<string>();
@@ -775,11 +1029,19 @@ namespace Microsoft.Build.Tasks.Xaml
                 string isSystemReference = item.GetMetadata("IsSystemReference");
                 string asmName = Path.GetFileName(item.ItemSpec);
 
-                bool isMsCorLib = asmName.Equals("mscorlib.dll", StringComparison.OrdinalIgnoreCase);
-                bool isManagedSystemMetadata = !String.IsNullOrEmpty(isSystemReference)
+                bool isMsCorLib = asmName.Equals(
+                    "mscorlib.dll",
+                    StringComparison.OrdinalIgnoreCase
+                );
+                bool isManagedSystemMetadata =
+                    !String.IsNullOrEmpty(isSystemReference)
                     && isSystemReference.Equals("True", StringComparison.OrdinalIgnoreCase);
-                bool isNativeSystemMetadata = resolvedFrom != null
-                    && (resolvedFrom == "GetSDKReferenceFiles" || resolvedFrom == "{TargetFrameworkDirectory}");
+                bool isNativeSystemMetadata =
+                    resolvedFrom != null
+                    && (
+                        resolvedFrom == "GetSDKReferenceFiles"
+                        || resolvedFrom == "{TargetFrameworkDirectory}"
+                    );
 
                 if (isManagedSystemMetadata || isNativeSystemMetadata || isMsCorLib)
                 {
@@ -795,6 +1057,4 @@ namespace Microsoft.Build.Tasks.Xaml
             nonSystemItems = nonSystemList;
         }
     }
-
-
 }

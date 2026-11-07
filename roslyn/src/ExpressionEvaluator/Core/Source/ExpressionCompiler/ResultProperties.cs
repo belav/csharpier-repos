@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResultCategory category,
             DkmEvaluationResultAccessType accessType,
             DkmEvaluationResultStorageType storageType,
-            DkmEvaluationResultTypeModifierFlags modifierFlags)
+            DkmEvaluationResultTypeModifierFlags modifierFlags
+        )
         {
             Flags = flags;
             Category = category;
@@ -33,8 +34,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// For statements and assignments, we are only interested in <see cref="DkmClrCompilationResultFlags"/>.
         /// </remarks>
         public ResultProperties(DkmClrCompilationResultFlags flags)
-            : this(flags, category: default, accessType: default, storageType: default, modifierFlags: default)
-        {
-        }
+            : this(
+                flags,
+                category: default,
+                accessType: default,
+                storageType: default,
+                modifierFlags: default
+            ) { }
     }
 }

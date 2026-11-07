@@ -12,7 +12,10 @@ namespace Microsoft.Extensions.Logging.Console
     /// This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Obsolete("This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.", error: true)]
+    [Obsolete(
+        "This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.",
+        error: true
+    )]
     public class ConsoleLoggerSettings : IConsoleLoggerSettings
     {
         /// <inheritdoc/>
@@ -29,7 +32,8 @@ namespace Microsoft.Extensions.Logging.Console
         /// <summary>
         /// This property is retained only for compatibility.
         /// </summary>
-        public IDictionary<string, LogLevel> Switches { get; set; } = new Dictionary<string, LogLevel>();
+        public IDictionary<string, LogLevel> Switches { get; set; } =
+            new Dictionary<string, LogLevel>();
 
         /// <inheritdoc/>
         public IConsoleLoggerSettings Reload()

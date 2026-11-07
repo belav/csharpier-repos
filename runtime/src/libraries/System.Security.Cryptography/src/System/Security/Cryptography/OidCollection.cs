@@ -31,7 +31,11 @@ namespace System.Security.Cryptography
             {
                 // For compat, throw an ArgumentOutOfRangeException instead of
                 // the IndexOutOfRangeException that comes from the array's indexer.
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual((uint)index, (uint)_count, nameof(index));
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    (uint)index,
+                    (uint)_count,
+                    nameof(index)
+                );
 
                 return _oids[index];
             }
@@ -43,7 +47,8 @@ namespace System.Security.Cryptography
             get
             {
                 // If we were passed the friendly name, retrieve the value String.
-                string? oidValue = OidLookup.ToOid(oid, OidGroup.All, fallBackToAllGroups: false) ?? oid;
+                string? oidValue =
+                    OidLookup.ToOid(oid, OidGroup.All, fallBackToAllGroups: false) ?? oid;
                 for (int i = 0; i < _count; i++)
                 {
                     Oid entry = _oids[i];
@@ -67,7 +72,10 @@ namespace System.Security.Cryptography
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index + Count > array.Length)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -85,7 +93,10 @@ namespace System.Security.Cryptography
             // Need to do part of the argument validation ourselves as OidCollection throws
             // ArgumentOutOfRangeException where List<>.CopyTo() throws ArgumentException.
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
 
             Array.Copy(_oids, 0, array, index, _count);
         }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,32 +29,30 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlReaderSettings
-	{
-		public XamlReaderSettings ()
-		{
-		}
+    public class XamlReaderSettings
+    {
+        public XamlReaderSettings() { }
 
-		public XamlReaderSettings (XamlReaderSettings settings)
-		{
-			// null settings is allowed (!)
-			var s = settings;
-			if (s == null)
-				return;
+        public XamlReaderSettings(XamlReaderSettings settings)
+        {
+            // null settings is allowed (!)
+            var s = settings;
+            if (s == null)
+                return;
 
-			AllowProtectedMembersOnRoot = s.AllowProtectedMembersOnRoot;
-			BaseUri = s.BaseUri;
-			IgnoreUidsOnPropertyElements = s.IgnoreUidsOnPropertyElements;
-			LocalAssembly = s.LocalAssembly;
-			ProvideLineInfo = s.ProvideLineInfo;
-			ValuesMustBeString = s.ValuesMustBeString;
-		}
+            AllowProtectedMembersOnRoot = s.AllowProtectedMembersOnRoot;
+            BaseUri = s.BaseUri;
+            IgnoreUidsOnPropertyElements = s.IgnoreUidsOnPropertyElements;
+            LocalAssembly = s.LocalAssembly;
+            ProvideLineInfo = s.ProvideLineInfo;
+            ValuesMustBeString = s.ValuesMustBeString;
+        }
 
-		public bool AllowProtectedMembersOnRoot { get; set; }
-		public Uri BaseUri { get; set; }
-		public bool IgnoreUidsOnPropertyElements { get; set; }
-		public Assembly LocalAssembly { get; set; }
-		public bool ProvideLineInfo { get; set; }
-		public bool ValuesMustBeString { get; set; }
-	}
+        public bool AllowProtectedMembersOnRoot { get; set; }
+        public Uri BaseUri { get; set; }
+        public bool IgnoreUidsOnPropertyElements { get; set; }
+        public Assembly LocalAssembly { get; set; }
+        public bool ProvideLineInfo { get; set; }
+        public bool ValuesMustBeString { get; set; }
+    }
 }

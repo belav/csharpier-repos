@@ -21,7 +21,6 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         public required ImmutableEquatableArray<TypedInterceptorInvocationInfo>? ConfigBinder_Bind_instance_BinderOptions { get; init; }
         public required ImmutableEquatableArray<TypedInterceptorInvocationInfo>? ConfigBinder_Bind_key_instance { get; init; }
 
-
         public required ImmutableEquatableArray<InvocationLocationInfo>? ConfigBinder { get; init; }
         public required ImmutableEquatableArray<InvocationLocationInfo>? OptionsBuilderExt { get; init; }
         public required ImmutableEquatableArray<InvocationLocationInfo>? ServiceCollectionExt { get; init; }
@@ -31,7 +30,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             Debug.Assert((MethodsToGen.ConfigBinder_Bind & interceptor) is 0);
 
             ImmutableEquatableArray<InvocationLocationInfo>? infoList;
-            if ((MethodsToGen.ConfigBinder_Any ^ MethodsToGen.ConfigBinder_Bind & interceptor) is not 0)
+            if (
+                (MethodsToGen.ConfigBinder_Any ^ MethodsToGen.ConfigBinder_Bind & interceptor)
+                is not 0
+            )
             {
                 infoList = ConfigBinder;
             }
@@ -60,7 +62,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             public MethodsToGen MethodsToGen { get; set; }
 
-            public void RegisterInterceptor_ConfigBinder_Bind(MethodsToGen overload, ComplexTypeSpec type, IInvocationOperation invocation)
+            public void RegisterInterceptor_ConfigBinder_Bind(
+                MethodsToGen overload,
+                ComplexTypeSpec type,
+                IInvocationOperation invocation
+            )
             {
                 Debug.Assert((MethodsToGen.ConfigBinder_Bind & overload) is not 0);
 
@@ -70,7 +76,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         RegisterInterceptor(ref _configBinder_InfoBuilder_Bind_instance);
                         break;
                     case MethodsToGen.ConfigBinder_Bind_instance_BinderOptions:
-                        RegisterInterceptor(ref _configBinder_InfoBuilder_Bind_instance_BinderOptions);
+                        RegisterInterceptor(
+                            ref _configBinder_InfoBuilder_Bind_instance_BinderOptions
+                        );
                         break;
                     case MethodsToGen.ConfigBinder_Bind_key_instance:
                         RegisterInterceptor(ref _configBinder_InfoBuilder_Bind_key_instance);
@@ -90,7 +98,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             {
                 Debug.Assert((MethodsToGen.ConfigBinder_Bind & overload) is 0);
 
-                if ((MethodsToGen.ConfigBinder_Any ^ MethodsToGen.ConfigBinder_Bind & overload) is not 0)
+                if (
+                    (MethodsToGen.ConfigBinder_Any ^ MethodsToGen.ConfigBinder_Bind & overload)
+                    is not 0
+                )
                 {
                     RegisterInterceptor(ref _interceptors_configBinder);
                 }
@@ -119,37 +130,58 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     MethodsToGen = MethodsToGen,
 
                     ConfigBinder = _interceptors_configBinder?.ToImmutableEquatableArray(),
-                    OptionsBuilderExt = _interceptors_OptionsBuilderExt?.ToImmutableEquatableArray(),
-                    ServiceCollectionExt = _interceptors_serviceCollectionExt?.ToImmutableEquatableArray(),
+                    OptionsBuilderExt =
+                        _interceptors_OptionsBuilderExt?.ToImmutableEquatableArray(),
+                    ServiceCollectionExt =
+                        _interceptors_serviceCollectionExt?.ToImmutableEquatableArray(),
 
-                    ConfigBinder_Bind_instance = _configBinder_InfoBuilder_Bind_instance?.ToIncrementalValue(),
-                    ConfigBinder_Bind_instance_BinderOptions = _configBinder_InfoBuilder_Bind_instance_BinderOptions?.ToIncrementalValue(),
-                    ConfigBinder_Bind_key_instance = _configBinder_InfoBuilder_Bind_key_instance?.ToIncrementalValue(),
+                    ConfigBinder_Bind_instance =
+                        _configBinder_InfoBuilder_Bind_instance?.ToIncrementalValue(),
+                    ConfigBinder_Bind_instance_BinderOptions =
+                        _configBinder_InfoBuilder_Bind_instance_BinderOptions?.ToIncrementalValue(),
+                    ConfigBinder_Bind_key_instance =
+                        _configBinder_InfoBuilder_Bind_key_instance?.ToIncrementalValue(),
                 };
         }
     }
 
     internal sealed class TypedInterceptorInfoBuildler
     {
-        private readonly Dictionary<ComplexTypeSpec, TypedInterceptorInvocationInfo.Builder> _invocationInfoBuilderCache = new();
+        private readonly Dictionary<
+            ComplexTypeSpec,
+            TypedInterceptorInvocationInfo.Builder
+        > _invocationInfoBuilderCache = new();
 
-        public void RegisterInterceptor(MethodsToGen overload, ComplexTypeSpec type, IInvocationOperation invocation)
+        public void RegisterInterceptor(
+            MethodsToGen overload,
+            ComplexTypeSpec type,
+            IInvocationOperation invocation
+        )
         {
-            if (!_invocationInfoBuilderCache.TryGetValue(type, out TypedInterceptorInvocationInfo.Builder? invocationInfoBuilder))
+            if (
+                !_invocationInfoBuilderCache.TryGetValue(
+                    type,
+                    out TypedInterceptorInvocationInfo.Builder? invocationInfoBuilder
+                )
+            )
             {
-                _invocationInfoBuilderCache[type] = invocationInfoBuilder = new TypedInterceptorInvocationInfo.Builder(overload, type);
+                _invocationInfoBuilderCache[type] = invocationInfoBuilder =
+                    new TypedInterceptorInvocationInfo.Builder(overload, type);
             }
 
             invocationInfoBuilder.RegisterInvocation(invocation);
         }
 
         public ImmutableEquatableArray<TypedInterceptorInvocationInfo>? ToIncrementalValue() =>
-            _invocationInfoBuilderCache.Values
-            .Select(b => b.ToIncrementalValue())
-            .ToImmutableEquatableArray();
+            _invocationInfoBuilderCache
+                .Values.Select(b => b.ToIncrementalValue())
+                .ToImmutableEquatableArray();
     }
 
-    public sealed record TypedInterceptorInvocationInfo(ComplexTypeSpec TargetType, ImmutableEquatableArray<InvocationLocationInfo> Locations)
+    public sealed record TypedInterceptorInvocationInfo(
+        ComplexTypeSpec TargetType,
+        ImmutableEquatableArray<InvocationLocationInfo> Locations
+    )
     {
         public sealed class Builder(MethodsToGen Overload, ComplexTypeSpec TargetType)
         {
@@ -158,9 +190,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             public void RegisterInvocation(IInvocationOperation invocation) =>
                 _infoList.Add(new InvocationLocationInfo(Overload, invocation));
 
-            public TypedInterceptorInvocationInfo ToIncrementalValue() => new(
-                TargetType,
-                Locations: _infoList.ToImmutableEquatableArray());
+            public TypedInterceptorInvocationInfo ToIncrementalValue() =>
+                new(TargetType, Locations: _infoList.ToImmutableEquatableArray());
         }
     }
 
@@ -170,9 +201,16 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         {
             Debug.Assert(BinderInvocation.IsBindingOperation(invocation));
 
-            if (invocation.Syntax is not InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccessExprSyntax })
+            if (
+                invocation.Syntax
+                is not InvocationExpressionSyntax
+                {
+                    Expression: MemberAccessExpressionSyntax memberAccessExprSyntax
+                }
+            )
             {
-                const string InvalidInvocationErrMsg = "The invocation should have been validated upstream when selecting invocations to emit interceptors for.";
+                const string InvalidInvocationErrMsg =
+                    "The invocation should have been validated upstream when selecting invocations to emit interceptors for.";
                 throw new ArgumentException(InvalidInvocationErrMsg, nameof(invocation));
             }
 
@@ -189,8 +227,15 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             // https://github.com/dotnet/roslyn/blob/f290437fcc75dad50a38c09e0977cce13a64f5ba/src/Compilers/CSharp/Portable/Compilation/CSharpCompilation.cs#L1063-L1064
             string GetInterceptorFilePath()
             {
-                SourceReferenceResolver? sourceReferenceResolver = invocation.SemanticModel?.Compilation.Options.SourceReferenceResolver;
-                return sourceReferenceResolver?.NormalizePath(operationSyntaxTree.FilePath, baseFilePath: null) ?? operationSyntaxTree.FilePath;
+                SourceReferenceResolver? sourceReferenceResolver = invocation
+                    .SemanticModel
+                    ?.Compilation
+                    .Options
+                    .SourceReferenceResolver;
+                return sourceReferenceResolver?.NormalizePath(
+                        operationSyntaxTree.FilePath,
+                        baseFilePath: null
+                    ) ?? operationSyntaxTree.FilePath;
             }
         }
 

@@ -47,23 +47,37 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 // not interested in Runtime information
 #pragma warning suppress 56503
-                throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
+                throw new NotImplementedException(
+                    TypeSystemSR.GetString("Error_RuntimeNotSupported")
+                );
             }
         }
         public override Type FieldType
         {
             get
             {
-                return declaringType.ResolveType(DesignTimeType.GetTypeNameFromCodeTypeReference(this.codeDomField.Type, declaringType));
+                return declaringType.ResolveType(
+                    DesignTimeType.GetTypeNameFromCodeTypeReference(
+                        this.codeDomField.Type,
+                        declaringType
+                    )
+                );
             }
         }
+
         public override Object GetValue(object obj)
         {
             // We don't need to get into instance probing
             throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
         {
             // We don't need to get into instance probing
             throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
@@ -79,26 +93,17 @@ namespace System.Workflow.ComponentModel.Compiler
         #region MemberInfo Overrides
         public override string Name
         {
-            get
-            {
-                return Helper.EnsureTypeName(this.codeDomField.Name);
-            }
+            get { return Helper.EnsureTypeName(this.codeDomField.Name); }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
 
         public override object[] GetCustomAttributes(bool inherit)
@@ -112,7 +117,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("attributeType");
 
             if (this.attributes == null)
-                this.attributes = Helper.LoadCustomAttributes(this.codeDomField.CustomAttributes, this.DeclaringType as DesignTimeType);
+                this.attributes = Helper.LoadCustomAttributes(
+                    this.codeDomField.CustomAttributes,
+                    this.DeclaringType as DesignTimeType
+                );
 
             return Helper.GetCustomAttributes(attributeType, inherit, this.attributes, this);
         }
@@ -123,7 +131,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("attributeType");
 
             if (this.attributes == null)
-                this.attributes = Helper.LoadCustomAttributes(this.codeDomField.CustomAttributes, this.DeclaringType as DesignTimeType);
+                this.attributes = Helper.LoadCustomAttributes(
+                    this.codeDomField.CustomAttributes,
+                    this.DeclaringType as DesignTimeType
+                );
 
             if (Helper.IsDefined(attributeType, inherit, attributes, this))
                 return true;

@@ -4,15 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    internal sealed class WizardSideBarListControlItemEventArgs : EventArgs {
+namespace System.Web.UI.WebControls
+{
+    internal sealed class WizardSideBarListControlItemEventArgs : EventArgs
+    {
+        public WizardSideBarListControlItem Item { get; private set; }
 
-        public WizardSideBarListControlItem Item {
-            get;
-            private set;
-        }
-
-        public WizardSideBarListControlItemEventArgs(WizardSideBarListControlItem item) {
+        public WizardSideBarListControlItemEventArgs(WizardSideBarListControlItem item)
+        {
             Item = item;
         }
     }

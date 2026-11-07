@@ -23,7 +23,13 @@ namespace System.IO.Pipelines.Tests
 
             var writerCompletedTask = new TaskCompletionSource<bool>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            pipe.Reader.OnWriterCompleted(delegate { writerCompletedTask.SetResult(true); }, null);
+            pipe.Reader.OnWriterCompleted(
+                delegate
+                {
+                    writerCompletedTask.SetResult(true);
+                },
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             // Call Dispose{Async} multiple times; all should succeed.
@@ -37,7 +43,9 @@ namespace System.IO.Pipelines.Tests
             await writerCompletedTask.Task;
 
             // Unable to write after disposing.
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await s.WriteAsync(new byte[1]));
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await s.WriteAsync(new byte[1])
+            );
 
             // Reads still work and return 0.
             ReadResult rr = await pipe.Reader.ReadAsync();
@@ -47,7 +55,9 @@ namespace System.IO.Pipelines.Tests
 
         [Theory]
         [MemberData(nameof(WriteCalls))]
-        public async Task WritingToPipeStreamWritesToUnderlyingPipeWriter(WriteAsyncDelegate writeAsync)
+        public async Task WritingToPipeStreamWritesToUnderlyingPipeWriter(
+            WriteAsyncDelegate writeAsync
+        )
         {
             byte[] helloBytes = "Hello World"u8.ToArray();
             var pipe = new Pipe();
@@ -106,12 +116,22 @@ namespace System.IO.Pipelines.Tests
             Assert.True(stream.CanWrite);
             Assert.False(stream.CanSeek);
             Assert.False(stream.CanRead);
-            Assert.Throws<NotSupportedException>(() => { long length = stream.Length; });
-            Assert.Throws<NotSupportedException>(() => { long position = stream.Position; });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long length = stream.Length;
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long position = stream.Position;
+            });
             Assert.Throws<NotSupportedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<NotSupportedException>(() => stream.Read(new byte[10], 0, 10));
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.ReadAsync(new byte[10], 0, 10));
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.ReadAsync(new byte[10]).AsTask());
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.ReadAsync(new byte[10], 0, 10)
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.ReadAsync(new byte[10]).AsTask()
+            );
             await Assert.ThrowsAsync<NotSupportedException>(() => stream.CopyToAsync(Stream.Null));
 
             pipe.Reader.Complete();
@@ -121,7 +141,9 @@ namespace System.IO.Pipelines.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task CancellingPendingFlushThrowsOperationCancelledException()
         {
-            var pipe = new Pipe(new PipeOptions(pauseWriterThreshold: 10, resumeWriterThreshold: 0));
+            var pipe = new Pipe(
+                new PipeOptions(pauseWriterThreshold: 10, resumeWriterThreshold: 0)
+            );
             byte[] helloBytes = "Hello World"u8.ToArray();
 
             Stream stream = pipe.Writer.AsStream();
@@ -138,7 +160,9 @@ namespace System.IO.Pipelines.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task CancellationTokenFlowsToUnderlyingPipeWriter()
         {
-            var pipe = new Pipe(new PipeOptions(pauseWriterThreshold: 10, resumeWriterThreshold: 0));
+            var pipe = new Pipe(
+                new PipeOptions(pauseWriterThreshold: 10, resumeWriterThreshold: 0)
+            );
             byte[] helloBytes = "Hello World"u8.ToArray();
 
             Stream stream = pipe.Writer.AsStream();
@@ -215,7 +239,9 @@ namespace System.IO.Pipelines.Tests
                 return default;
             }
 
-            public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default)
+            public override ValueTask<FlushResult> FlushAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 FlushCalled = true;
                 return default;
@@ -231,7 +257,10 @@ namespace System.IO.Pipelines.Tests
                 throw new NotImplementedException();
             }
 
-            public override ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+            public override ValueTask<FlushResult> WriteAsync(
+                ReadOnlyMemory<byte> source,
+                CancellationToken cancellationToken = default
+            )
             {
                 WriteAsyncCalled = true;
                 return default;
@@ -240,16 +269,24 @@ namespace System.IO.Pipelines.Tests
 
         public class NotImplementedPipeWriter : PipeWriter
         {
-            public NotImplementedPipeWriter()
-            {
-            }
+            public NotImplementedPipeWriter() { }
 
             public override void Advance(int bytes) => throw new NotImplementedException();
+
             public override void CancelPendingFlush() => throw new NotImplementedException();
-            public override void Complete(Exception exception = null) => throw new NotImplementedException();
-            public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
-            public override Memory<byte> GetMemory(int sizeHint = 0) => throw new NotImplementedException();
-            public override Span<byte> GetSpan(int sizeHint = 0) => throw new NotImplementedException();
+
+            public override void Complete(Exception exception = null) =>
+                throw new NotImplementedException();
+
+            public override ValueTask<FlushResult> FlushAsync(
+                CancellationToken cancellationToken = default
+            ) => throw new NotImplementedException();
+
+            public override Memory<byte> GetMemory(int sizeHint = 0) =>
+                throw new NotImplementedException();
+
+            public override Span<byte> GetSpan(int sizeHint = 0) =>
+                throw new NotImplementedException();
         }
 
         public static IEnumerable<object[]> WriteCalls

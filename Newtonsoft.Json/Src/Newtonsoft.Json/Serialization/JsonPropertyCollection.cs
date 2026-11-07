@@ -25,13 +25,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json.Utilities;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Text;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {
@@ -96,21 +96,38 @@ namespace Newtonsoft.Json.Serialization
                 {
                     if (property.DeclaringType != null && existingProperty.DeclaringType != null)
                     {
-                        if (property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
-                            || (existingProperty.DeclaringType.IsInterface() && property.DeclaringType.ImplementInterface(existingProperty.DeclaringType)))
+                        if (
+                            property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
+                            || (
+                                existingProperty.DeclaringType.IsInterface()
+                                && property.DeclaringType.ImplementInterface(
+                                    existingProperty.DeclaringType
+                                )
+                            )
+                        )
                         {
                             // current property is on a derived class and hides the existing
                             Remove(existingProperty);
                             duplicateProperty = false;
                         }
-                        if (existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
-                            || (property.DeclaringType.IsInterface() && existingProperty.DeclaringType.ImplementInterface(property.DeclaringType)))
+                        if (
+                            existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
+                            || (
+                                property.DeclaringType.IsInterface()
+                                && existingProperty.DeclaringType.ImplementInterface(
+                                    property.DeclaringType
+                                )
+                            )
+                        )
                         {
                             // current property is hidden by the existing so don't add it
                             return;
                         }
-                        
-                        if (_type.ImplementInterface(existingProperty.DeclaringType) && _type.ImplementInterface(property.DeclaringType))
+
+                        if (
+                            _type.ImplementInterface(existingProperty.DeclaringType)
+                            && _type.ImplementInterface(property.DeclaringType)
+                        )
                         {
                             // current property was already defined on another interface
                             return;
@@ -120,7 +137,13 @@ namespace Newtonsoft.Json.Serialization
 
                 if (duplicateProperty)
                 {
-                    throw new JsonSerializationException("A member with the name '{0}' already exists on '{1}'. Use the JsonPropertyAttribute to specify another name.".FormatWith(CultureInfo.InvariantCulture, property.PropertyName, _type));
+                    throw new JsonSerializationException(
+                        "A member with the name '{0}' already exists on '{1}'. Use the JsonPropertyAttribute to specify another name.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            property.PropertyName,
+                            _type
+                        )
+                    );
                 }
             }
 
@@ -145,7 +168,7 @@ namespace Newtonsoft.Json.Serialization
             return property;
         }
 
-        private bool TryGetProperty(string key, [NotNullWhen(true)]out JsonProperty? item)
+        private bool TryGetProperty(string key, [NotNullWhen(true)] out JsonProperty? item)
         {
             if (Dictionary == null)
             {

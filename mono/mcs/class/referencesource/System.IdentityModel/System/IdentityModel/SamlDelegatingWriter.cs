@@ -24,7 +24,12 @@ namespace System.IdentityModel
         XmlDictionaryWriter effectiveWriter;
         MemoryStream writerStream;
 
-        public SamlDelegatingWriter(XmlDictionaryWriter innerWriter, Stream canonicalStream, ICanonicalWriterEndRootElementCallback callback, IXmlDictionary dictionary)
+        public SamlDelegatingWriter(
+            XmlDictionaryWriter innerWriter,
+            Stream canonicalStream,
+            ICanonicalWriterEndRootElementCallback callback,
+            IXmlDictionary dictionary
+        )
         {
             if (innerWriter == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("innerWriter");
@@ -49,9 +54,15 @@ namespace System.IdentityModel
             this.endFragment = new MemoryStream();
             this.writerStream = new MemoryStream();
 
-            this.effectiveWriter = XmlDictionaryWriter.CreateBinaryWriter(this.writerStream, this.dictionary);
+            this.effectiveWriter = XmlDictionaryWriter.CreateBinaryWriter(
+                this.writerStream,
+                this.dictionary
+            );
             this.effectiveWriter.StartCanonicalization(this.canonicalStream, false, null);
-            ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(this.startFragment, false);
+            ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(
+                this.startFragment,
+                false
+            );
         }
 
         private void OnEndOfRootElement()
@@ -63,27 +74,45 @@ namespace System.IdentityModel
                 // and end canonicalization. Call back SAML to compute the signature.
                 ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
 
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(this.endFragment, false);
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(
+                    this.endFragment,
+                    false
+                );
                 this.effectiveWriter.WriteEndElement();
                 ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
 
                 this.effectiveWriter.EndCanonicalization();
 
                 // Start the signature fragment.
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(this.signatureFragment, false);
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(
+                    this.signatureFragment,
+                    false
+                );
 
                 this.callback.OnEndOfRootElement(this);
             }
             else if (this.elementCount == 0)
             {
-                // Signature fragment is complete. End this fragment and write all fragments into the 
+                // Signature fragment is complete. End this fragment and write all fragments into the
                 // inner writer.
                 this.effectiveWriter.WriteEndElement();
                 ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
 
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(this.startFragment.GetBuffer(), 0, (int)this.startFragment.Length);
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(this.signatureFragment.GetBuffer(), 0, (int)this.signatureFragment.Length);
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(this.endFragment.GetBuffer(), 0, (int)this.endFragment.Length);
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(
+                    this.startFragment.GetBuffer(),
+                    0,
+                    (int)this.startFragment.Length
+                );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(
+                    this.signatureFragment.GetBuffer(),
+                    0,
+                    (int)this.signatureFragment.Length
+                );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(
+                    this.endFragment.GetBuffer(),
+                    0,
+                    (int)this.endFragment.Length
+                );
 
                 this.startFragment.Close();
                 this.signatureFragment.Close();
@@ -91,7 +120,11 @@ namespace System.IdentityModel
 
                 this.writerStream.Position = 0;
 
-                XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(this.writerStream, this.dictionary, XmlDictionaryReaderQuotas.Max);
+                XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
+                    this.writerStream,
+                    this.dictionary,
+                    XmlDictionaryReaderQuotas.Max
+                );
                 reader.MoveToContent();
                 this.innerWriter.WriteNode(reader, false);
                 this.innerWriter.Flush();
@@ -116,102 +149,242 @@ namespace System.IdentityModel
             this.effectiveWriter.Flush();
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, bool[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, double[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, decimal[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, float[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, int[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, long[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, short[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, DateTime[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, Guid[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, TimeSpan[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, bool[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, decimal[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, double[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, float[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, int[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, long[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, short[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, DateTime[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, Guid[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, TimeSpan[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             this.effectiveWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -316,7 +489,10 @@ namespace System.IdentityModel
             this.effectiveWriter.WriteQualifiedName(localName, ns);
         }
 
-        public override void WriteQualifiedName(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override void WriteQualifiedName(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             this.effectiveWriter.WriteQualifiedName(localName, namespaceUri);
         }
@@ -336,7 +512,11 @@ namespace System.IdentityModel
             this.effectiveWriter.WriteStartAttribute(prefix, localName, ns);
         }
 
-        public override void WriteStartAttribute(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override void WriteStartAttribute(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             this.effectiveWriter.WriteStartAttribute(prefix, localName, namespaceUri);
         }
@@ -357,7 +537,11 @@ namespace System.IdentityModel
             this.effectiveWriter.WriteStartElement(prefix, localName, ns);
         }
 
-        public override void WriteStartElement(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override void WriteStartElement(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             this.elementCount++;
             this.effectiveWriter.WriteStartElement(prefix, localName, namespaceUri);
@@ -463,7 +647,10 @@ namespace System.IdentityModel
             this.effectiveWriter.WriteXmlAttribute(localName, value);
         }
 
-        public override void WriteXmlAttribute(XmlDictionaryString localName, XmlDictionaryString value)
+        public override void WriteXmlAttribute(
+            XmlDictionaryString localName,
+            XmlDictionaryString value
+        )
         {
             this.effectiveWriter.WriteXmlAttribute(localName, value);
         }

@@ -15,8 +15,10 @@ namespace System.Security.Cryptography
     {
         CBC = 1,
         ECB = 2,
-        [EditorBrowsable(EditorBrowsableState.Never)] OFB = 3,
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        OFB = 3,
         CFB = 4,
-        CTS = 5
+        CTS = 5,
     }
 }

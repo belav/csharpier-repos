@@ -11,7 +11,8 @@ namespace System.Net.Security.Tests
         [Fact]
         public void Constructor_NoParameter_DefaultMessageIsNotNull()
         {
-            InvalidCredentialException invalidCredentialException = new InvalidCredentialException();
+            InvalidCredentialException invalidCredentialException =
+                new InvalidCredentialException();
 
             Assert.NotNull(invalidCredentialException.Message);
         }
@@ -21,7 +22,9 @@ namespace System.Net.Security.Tests
         {
             const string passedInMessage = "base was called";
 
-            InvalidCredentialException invalidCredentialException = new InvalidCredentialException(passedInMessage);
+            InvalidCredentialException invalidCredentialException = new InvalidCredentialException(
+                passedInMessage
+            );
 
             Assert.Equal(passedInMessage, invalidCredentialException.Message);
         }
@@ -32,7 +35,10 @@ namespace System.Net.Security.Tests
             const string passedInMessage = "base was called";
             const string innerExceptionMessage = "this is the inner exception message";
 
-            InvalidCredentialException invalidCredentialException = new InvalidCredentialException(passedInMessage, new Exception(innerExceptionMessage));
+            InvalidCredentialException invalidCredentialException = new InvalidCredentialException(
+                passedInMessage,
+                new Exception(innerExceptionMessage)
+            );
 
             Assert.Equal(passedInMessage, invalidCredentialException.Message);
             Assert.Equal(innerExceptionMessage, invalidCredentialException.InnerException.Message);

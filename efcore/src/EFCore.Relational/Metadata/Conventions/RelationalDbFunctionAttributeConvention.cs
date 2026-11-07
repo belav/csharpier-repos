@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
 ///     <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
 /// </remarks>
-public class RelationalDbFunctionAttributeConvention : IModelInitializedConvention, IModelFinalizingConvention
+public class RelationalDbFunctionAttributeConvention
+    : IModelInitializedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalDbFunctionAttributeConvention" />.
@@ -20,7 +22,8 @@ public class RelationalDbFunctionAttributeConvention : IModelInitializedConventi
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalDbFunctionAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -43,18 +46,20 @@ public class RelationalDbFunctionAttributeConvention : IModelInitializedConventi
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessModelInitialized(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         var contextType = Dependencies.ContextType;
-        while (contextType != null
-               && contextType != typeof(DbContext))
+        while (contextType != null && contextType != typeof(DbContext))
         {
-            var functions = contextType.GetMethods(
+            var functions = contextType
+                .GetMethods(
                     BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-                    | BindingFlags.DeclaredOnly)
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.DeclaredOnly
+                )
                 .Where(mi => mi.IsDefined(typeof(DbFunctionAttribute)));
 
             foreach (var function in functions)
@@ -69,7 +74,8 @@ public class RelationalDbFunctionAttributeConvention : IModelInitializedConventi
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var function in modelBuilder.Metadata.GetDbFunctions())
         {
@@ -84,10 +90,13 @@ public class RelationalDbFunctionAttributeConvention : IModelInitializedConventi
     /// <param name="context">Additional information associated with convention execution.</param>
     protected virtual void ProcessDbFunctionAdded(
         IConventionDbFunctionBuilder dbFunctionBuilder,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var methodInfo = dbFunctionBuilder.Metadata.MethodInfo;
-        var dbFunctionAttribute = methodInfo?.GetCustomAttributes<DbFunctionAttribute>().SingleOrDefault();
+        var dbFunctionAttribute = methodInfo
+            ?.GetCustomAttributes<DbFunctionAttribute>()
+            .SingleOrDefault();
         if (dbFunctionAttribute != null)
         {
             dbFunctionBuilder.HasName(dbFunctionAttribute.Name, fromDataAnnotation: true);
@@ -98,12 +107,18 @@ public class RelationalDbFunctionAttributeConvention : IModelInitializedConventi
 
             if (dbFunctionAttribute.IsBuiltIn)
             {
-                dbFunctionBuilder.IsBuiltIn(dbFunctionAttribute.IsBuiltIn, fromDataAnnotation: true);
+                dbFunctionBuilder.IsBuiltIn(
+                    dbFunctionAttribute.IsBuiltIn,
+                    fromDataAnnotation: true
+                );
             }
 
             if (dbFunctionAttribute.IsNullableHasValue)
             {
-                dbFunctionBuilder.IsNullable(dbFunctionAttribute.IsNullable, fromDataAnnotation: true);
+                dbFunctionBuilder.IsNullable(
+                    dbFunctionAttribute.IsNullable,
+                    fromDataAnnotation: true
+                );
             }
         }
     }

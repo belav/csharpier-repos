@@ -18,7 +18,11 @@ namespace MS.Internal.Xml.Cache
         /// parent is this node).  Subsequent nodes may not have the same node as parent, so the caller will
         /// need to test the parent in order to terminate a search that processes only local namespaces.
         /// </summary>
-        public static int GetLocalNamespaces(XPathNode[] pageElem, int idxElem, out XPathNode[]? pageNmsp)
+        public static int GetLocalNamespaces(
+            XPathNode[] pageElem,
+            int idxElem,
+            out XPathNode[]? pageNmsp
+        )
         {
             if (pageElem[idxElem].HasNamespaceDecls)
             {
@@ -35,7 +39,11 @@ namespace MS.Internal.Xml.Cache
         /// have this element as their parent.  Since the xmlns:xml namespace node is always in scope, this
         /// method will never return 0 if the specified node is an element.
         /// </summary>
-        public static int GetInScopeNamespaces(XPathNode[] pageElem, int idxElem, out XPathNode[]? pageNmsp)
+        public static int GetInScopeNamespaces(
+            XPathNode[] pageElem,
+            int idxElem,
+            out XPathNode[]? pageNmsp
+        )
         {
             XPathDocument doc;
 
@@ -187,7 +195,12 @@ namespace MS.Internal.Xml.Cache
         /// then do not set pageNode or idxNode and return false.  Assume that the localName has been atomized with respect
         /// to this document's name table, but not the namespaceName.
         /// </summary>
-        public static bool GetElementChild(ref XPathNode[] pageNode, ref int idxNode, string? localName, string namespaceName)
+        public static bool GetElementChild(
+            ref XPathNode[] pageNode,
+            ref int idxNode,
+            string? localName,
+            string namespaceName
+        )
         {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
@@ -209,8 +222,7 @@ namespace MS.Internal.Xml.Cache
                         return true;
                     }
                     idx = page[idx].GetSibling(out page);
-                }
-                while (idx != 0);
+                } while (idx != 0);
             }
             return false;
         }
@@ -221,7 +233,12 @@ namespace MS.Internal.Xml.Cache
         /// return false.  Assume that the localName has been atomized with respect to this document's name table,
         /// but not the namespaceName.
         /// </summary>
-        public static bool GetElementSibling(ref XPathNode[] pageNode, ref int idxNode, string? localName, string namespaceName)
+        public static bool GetElementSibling(
+            ref XPathNode[] pageNode,
+            ref int idxNode,
+            string? localName,
+            string namespaceName
+        )
         {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
@@ -253,7 +270,11 @@ namespace MS.Internal.Xml.Cache
         /// Return the first child of the specified node that has the specified type (must be a content type).  If no such
         /// child exists, then do not set pageNode or idxNode and return false.
         /// </summary>
-        public static bool GetContentChild(ref XPathNode[] pageNode, ref int idxNode, XPathNodeType typ)
+        public static bool GetContentChild(
+            ref XPathNode[] pageNode,
+            ref int idxNode,
+            XPathNodeType typ
+        )
         {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
@@ -280,8 +301,7 @@ namespace MS.Internal.Xml.Cache
                     }
 
                     idx = page[idx].GetSibling(out page);
-                }
-                while (idx != 0);
+                } while (idx != 0);
             }
 
             return false;
@@ -291,7 +311,11 @@ namespace MS.Internal.Xml.Cache
         /// Return a following sibling of the specified node that has the specified type.  If no such
         /// sibling exists, then do not set pageNode or idxNode and return false.
         /// </summary>
-        public static bool GetContentSibling(ref XPathNode[] pageNode, ref int idxNode, XPathNodeType typ)
+        public static bool GetContentSibling(
+            ref XPathNode[] pageNode,
+            ref int idxNode,
+            XPathNodeType typ
+        )
         {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
@@ -309,7 +333,9 @@ namespace MS.Internal.Xml.Cache
 
                     if (((1 << (int)page![idx].NodeType) & mask) != 0)
                     {
-                        Debug.Assert(typ != XPathNodeType.Attribute && typ != XPathNodeType.Namespace);
+                        Debug.Assert(
+                            typ != XPathNodeType.Attribute && typ != XPathNodeType.Namespace
+                        );
                         pageNode = page;
                         idxNode = idx;
                         return true;
@@ -326,8 +352,12 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         public static bool GetPreviousContentSibling(ref XPathNode[] pageNode, ref int idxNode)
         {
-            XPathNode[]? pageParent, pagePrec, pageAnc;
-            int idxParent = idxNode, idxPrec, idxAnc;
+            XPathNode[]? pageParent,
+                pagePrec,
+                pageAnc;
+            int idxParent = idxNode,
+                idxPrec,
+                idxAnc;
             Debug.Assert(pageNode != null && idxNode != 0, "Cannot pass null argument(s)");
             Debug.Assert(pageNode[idxNode].NodeType != XPathNodeType.Attribute);
 
@@ -367,8 +397,7 @@ namespace MS.Internal.Xml.Cache
                     idxPrec = idxAnc;
                     idxAnc = pageAnc[idxAnc].GetParent(out pageAnc);
                     Debug.Assert(idxAnc != 0 && pageAnc != null);
-                }
-                while (idxAnc != idxParent || pageAnc != pageParent);
+                } while (idxAnc != idxParent || pageAnc != pageParent);
 
                 // We found the previous sibling, but if it's an attribute node, then return false
                 if (pagePrec[idxPrec].NodeType != XPathNodeType.Attribute)
@@ -387,7 +416,12 @@ namespace MS.Internal.Xml.Cache
         /// then do not set pageNode or idxNode and return false.  Assume that the localName has been atomized with respect
         /// to this document's name table, but not the namespaceName.
         /// </summary>
-        public static bool GetAttribute(ref XPathNode[] pageNode, ref int idxNode, string? localName, string namespaceName)
+        public static bool GetAttribute(
+            ref XPathNode[] pageNode,
+            ref int idxNode,
+            string? localName,
+            string namespaceName
+        )
         {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
@@ -406,8 +440,7 @@ namespace MS.Internal.Xml.Cache
                         return true;
                     }
                     idx = page[idx].GetSibling(out page);
-                }
-                while (idx != 0 && page![idx].NodeType == XPathNodeType.Attribute);
+                } while (idx != 0 && page![idx].NodeType == XPathNodeType.Attribute);
             }
 
             return false;
@@ -421,14 +454,24 @@ namespace MS.Internal.Xml.Cache
         /// If no such element exists, then do not set pageCurrent or idxCurrent and return false.
         /// Assume that the localName has been atomized with respect to this document's name table, but not the namespaceName.
         /// </summary>
-        public static bool GetElementFollowing(ref XPathNode[] pageCurrent, ref int idxCurrent, XPathNode[]? pageEnd, int idxEnd, string? localName, string namespaceName)
+        public static bool GetElementFollowing(
+            ref XPathNode[] pageCurrent,
+            ref int idxCurrent,
+            XPathNode[]? pageEnd,
+            int idxEnd,
+            string? localName,
+            string namespaceName
+        )
         {
             XPathNode[]? page = pageCurrent;
             int idx = idxCurrent;
             Debug.Assert(pageCurrent != null && idxCurrent != 0, "Cannot pass null argument(s)");
 
             // If current node is an element having a matching name,
-            if (page[idx].NodeType == XPathNodeType.Element && (object)page[idx].LocalName == (object?)localName)
+            if (
+                page[idx].NodeType == XPathNodeType.Element
+                && (object)page[idx].LocalName == (object?)localName
+            )
             {
                 // Then follow similar element name pointers
                 int idxPageEnd = 0;
@@ -440,7 +483,10 @@ namespace MS.Internal.Xml.Cache
                     idxPageCurrent = page[0].PageInfo!.PageNumber;
 
                     // If ending node is <= starting node in document order, then scan to end of document
-                    if (idxPageCurrent > idxPageEnd || (idxPageCurrent == idxPageEnd && idx >= idxEnd))
+                    if (
+                        idxPageCurrent > idxPageEnd
+                        || (idxPageCurrent == idxPageEnd && idx >= idxEnd)
+                    )
                         pageEnd = null;
                 }
 
@@ -464,7 +510,10 @@ namespace MS.Internal.Xml.Cache
                             break;
                     }
 
-                    if ((object)page[idx].LocalName == (object)localName && page[idx].NamespaceUri == namespaceName)
+                    if (
+                        (object)page[idx].LocalName == (object)localName
+                        && page[idx].NamespaceUri == namespaceName
+                    )
                         goto FoundNode;
                 }
 
@@ -500,12 +549,11 @@ namespace MS.Internal.Xml.Cache
 
                 page = page[0].PageInfo!.NextPage;
                 idx = 1;
-            }
-            while (page != null);
+            } while (page != null);
 
             return false;
 
-        FoundNode:
+            FoundNode:
             // Found match
             pageCurrent = page;
             idxCurrent = idx;
@@ -519,14 +567,26 @@ namespace MS.Internal.Xml.Cache
         ///   3. Has the specified XPathNodeType (but Attributes and Namespaces never match)
         /// If no such node exists, then do not set pageCurrent or idxCurrent and return false.
         /// </summary>
-        public static bool GetContentFollowing(ref XPathNode[] pageCurrent, ref int idxCurrent, XPathNode[]? pageEnd, int idxEnd, XPathNodeType typ)
+        public static bool GetContentFollowing(
+            ref XPathNode[] pageCurrent,
+            ref int idxCurrent,
+            XPathNode[]? pageEnd,
+            int idxEnd,
+            XPathNodeType typ
+        )
         {
             XPathNode[]? page = pageCurrent;
             int idx = idxCurrent;
             int mask = XPathNavigator.GetContentKindMask(typ);
             Debug.Assert(pageCurrent != null && idxCurrent != 0, "Cannot pass null argument(s)");
-            Debug.Assert(typ != XPathNodeType.Text, "Text should be handled by GetTextFollowing in order to take into account collapsed text.");
-            Debug.Assert(page[idx].NodeType != XPathNodeType.Attribute, "Current node should never be an attribute or namespace--caller should handle this case.");
+            Debug.Assert(
+                typ != XPathNodeType.Text,
+                "Text should be handled by GetTextFollowing in order to take into account collapsed text."
+            );
+            Debug.Assert(
+                page[idx].NodeType != XPathNodeType.Attribute,
+                "Current node should never be an attribute or namespace--caller should handle this case."
+            );
 
             // Since nodes are laid out in document order on pages, scan them sequentially
             // rather than following sibling/child/parent links.
@@ -557,13 +617,15 @@ namespace MS.Internal.Xml.Cache
 
                 page = page[0].PageInfo!.NextPage;
                 idx = 1;
-            }
-            while (page != null);
+            } while (page != null);
 
             return false;
 
-        FoundNode:
-            Debug.Assert(!page[idx].IsAttrNmsp, "GetContentFollowing should never return attributes or namespaces.");
+            FoundNode:
+            Debug.Assert(
+                !page[idx].IsAttrNmsp,
+                "GetContentFollowing should never return attributes or namespaces."
+            );
 
             // Found match
             pageCurrent = page;
@@ -578,12 +640,20 @@ namespace MS.Internal.Xml.Cache
         ///   2. Non-collapsed text nodes
         /// If no such node exists, then do not set pageCurrent or idxCurrent and return false.
         /// </summary>
-        public static bool GetTextFollowing(ref XPathNode[] pageCurrent, ref int idxCurrent, XPathNode[]? pageEnd, int idxEnd)
+        public static bool GetTextFollowing(
+            ref XPathNode[] pageCurrent,
+            ref int idxCurrent,
+            XPathNode[]? pageEnd,
+            int idxEnd
+        )
         {
             XPathNode[]? page = pageCurrent;
             int idx = idxCurrent;
             Debug.Assert(pageCurrent != null && idxCurrent != 0, "Cannot pass null argument(s)");
-            Debug.Assert(!page[idx].IsAttrNmsp, "Current node should never be an attribute or namespace--caller should handle this case.");
+            Debug.Assert(
+                !page[idx].IsAttrNmsp,
+                "Current node should never be an attribute or namespace--caller should handle this case."
+            );
 
             // Since nodes are laid out in document order on pages, scan them sequentially
             // rather than following sibling/child/parent links.
@@ -595,7 +665,13 @@ namespace MS.Internal.Xml.Cache
                     // Only scan to termination point
                     while (idx != idxEnd)
                     {
-                        if (page[idx].IsText || (page[idx].NodeType == XPathNodeType.Element && page[idx].HasCollapsedText))
+                        if (
+                            page[idx].IsText
+                            || (
+                                page[idx].NodeType == XPathNodeType.Element
+                                && page[idx].HasCollapsedText
+                            )
+                        )
                             goto FoundNode;
                         idx++;
                     }
@@ -606,7 +682,13 @@ namespace MS.Internal.Xml.Cache
                     // Scan all nodes in the page
                     while (idx < page[0].PageInfo!.NodeCount)
                     {
-                        if (page[idx].IsText || (page[idx].NodeType == XPathNodeType.Element && page[idx].HasCollapsedText))
+                        if (
+                            page[idx].IsText
+                            || (
+                                page[idx].NodeType == XPathNodeType.Element
+                                && page[idx].HasCollapsedText
+                            )
+                        )
                             goto FoundNode;
                         idx++;
                     }
@@ -614,12 +696,11 @@ namespace MS.Internal.Xml.Cache
 
                 page = page[0].PageInfo!.NextPage;
                 idx = 1;
-            }
-            while (page != null);
+            } while (page != null);
 
             return false;
 
-        FoundNode:
+            FoundNode:
             // Found match
             pageCurrent = page;
             idxCurrent = idx;
@@ -648,8 +729,7 @@ namespace MS.Internal.Xml.Cache
 
                 // Otherwise, try finding a sibling at the parent level
                 idx = page[idx].GetParent(out page);
-            }
-            while (idx != 0);
+            } while (idx != 0);
 
             return false;
         }
@@ -659,8 +739,14 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         private static void GetChild(ref XPathNode[] pageNode, ref int idxNode)
         {
-            Debug.Assert(pageNode[idxNode].HasAttribute || pageNode[idxNode].HasContentChild, "Caller must check HasAttribute/HasContentChild on parent before calling GetChild.");
-            Debug.Assert(pageNode[idxNode].HasAttribute || !pageNode[idxNode].HasCollapsedText, "Text child is virtualized and therefore is not present in the physical node page.");
+            Debug.Assert(
+                pageNode[idxNode].HasAttribute || pageNode[idxNode].HasContentChild,
+                "Caller must check HasAttribute/HasContentChild on parent before calling GetChild."
+            );
+            Debug.Assert(
+                pageNode[idxNode].HasAttribute || !pageNode[idxNode].HasCollapsedText,
+                "Text child is virtualized and therefore is not present in the physical node page."
+            );
 
             if (++idxNode >= pageNode.Length)
             {

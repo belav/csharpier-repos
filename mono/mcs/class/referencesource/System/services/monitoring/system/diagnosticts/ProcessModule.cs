@@ -1,20 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="ProcessModule.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-    using System.Diagnostics;
+namespace System.Diagnostics
+{
     using System;
     using System.Collections;
-    using System.IO;
-    using Microsoft.Win32;    
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Security.Permissions;
-//    using System.Windows.Forms;
+    using System.IO;
+    //    using System.Windows.Forms;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     A process module component represents a DLL or EXE loaded into
@@ -22,9 +23,10 @@ namespace System.Diagnostics {
     ///     information about the module.
     /// </devdoc>
     [Designer("System.Diagnostics.Design.ProcessModuleDesigner, " + AssemblyRef.SystemDesign)]
-    [PermissionSet(SecurityAction.LinkDemand, Name="FullTrust")]
-    [PermissionSet(SecurityAction.InheritanceDemand, Name="FullTrust")]
-    public class ProcessModule : Component {
+    [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
+    [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
+    public class ProcessModule : Component
+    {
         internal ModuleInfo moduleInfo;
         FileVersionInfo fileVersionInfo;
 
@@ -32,7 +34,8 @@ namespace System.Diagnostics {
         ///     Initialize the module.
         /// </devdoc>
         /// <internalonly/>
-        internal ProcessModule(ModuleInfo moduleInfo) {
+        internal ProcessModule(ModuleInfo moduleInfo)
+        {
             this.moduleInfo = moduleInfo;
             GC.SuppressFinalize(this);
         }
@@ -41,7 +44,8 @@ namespace System.Diagnostics {
         ///     Make sure we are running on NT.
         /// </devdoc>
         /// <internalonly/>
-        internal void EnsureNtProcessInfo() {
+        internal void EnsureNtProcessInfo()
+        {
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
                 throw new PlatformNotSupportedException(SR.GetString(SR.WinNTRequired));
         }
@@ -50,32 +54,29 @@ namespace System.Diagnostics {
         ///     Returns the name of the Module.
         /// </devdoc>
         [MonitoringDescription(SR.ProcModModuleName)]
-        public string ModuleName {
-            get {
-                return moduleInfo.baseName;
-            }
+        public string ModuleName
+        {
+            get { return moduleInfo.baseName; }
         }
 
         /// <devdoc>
         ///     Returns the full file path for the location of the module.
         /// </devdoc>
         [MonitoringDescription(SR.ProcModFileName)]
-        public string FileName {
+        public string FileName
+        {
             [ResourceExposure(ResourceScope.Machine)]
-            get {
-                return moduleInfo.fileName;
-            }
+            get { return moduleInfo.fileName; }
         }
 
         /// <devdoc>
         ///     Returns the memory address that the module was loaded at.
         /// </devdoc>
         [MonitoringDescription(SR.ProcModBaseAddress)]
-        public IntPtr BaseAddress {
+        public IntPtr BaseAddress
+        {
             [ResourceExposure(ResourceScope.Process)]
-            get {
-                return moduleInfo.baseOfDll;
-            }
+            get { return moduleInfo.baseOfDll; }
         }
 
         /// <devdoc>
@@ -85,10 +86,9 @@ namespace System.Diagnostics {
         ///     in the module file.
         /// </devdoc>
         [MonitoringDescription(SR.ProcModModuleMemorySize)]
-        public int ModuleMemorySize {
-            get {
-                return moduleInfo.sizeOfImage;
-            }
+        public int ModuleMemorySize
+        {
+            get { return moduleInfo.sizeOfImage; }
         }
 
         /// <devdoc>
@@ -96,8 +96,10 @@ namespace System.Diagnostics {
         ///     loaded and run.
         /// </devdoc>
         [MonitoringDescription(SR.ProcModEntryPointAddress)]
-        public IntPtr EntryPointAddress {
-            get {
+        public IntPtr EntryPointAddress
+        {
+            get
+            {
                 EnsureNtProcessInfo();
                 return moduleInfo.entryPoint;
             }
@@ -107,18 +109,26 @@ namespace System.Diagnostics {
         ///     Returns version information about the module.
         /// </devdoc>
         [Browsable(false)]
-        public FileVersionInfo FileVersionInfo {
-            [ResourceExposure(ResourceScope.Machine)]  // Let's review callers - why do they want this?
+        public FileVersionInfo FileVersionInfo
+        {
+            [ResourceExposure(ResourceScope.Machine)] // Let's review callers - why do they want this?
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
+            get
+            {
                 if (fileVersionInfo == null)
                     fileVersionInfo = FileVersionInfo.GetVersionInfo(FileName);
                 return fileVersionInfo;
             }
         }
 
-        public override string ToString() {
-            return String.Format(CultureInfo.CurrentCulture, "{0} ({1})", base.ToString(), this.ModuleName);
+        public override string ToString()
+        {
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "{0} ({1})",
+                base.ToString(),
+                this.ModuleName
+            );
         }
     }
 }

@@ -9,7 +9,7 @@ namespace System.IdentityModel.Tokens
     using System;
 
     /// <summary>
-    /// Represents the SubjectConfirmation element specified in [Saml2Core, 2.4.1.1]. 
+    /// Represents the SubjectConfirmation element specified in [Saml2Core, 2.4.1.1].
     /// </summary>
     public class Saml2SubjectConfirmation
     {
@@ -23,9 +23,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="method">The <see cref="Uri"/> to use for initialization.</param>
         public Saml2SubjectConfirmation(Uri method)
-            : this(method, null)
-        {
-        }
+            : this(method, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Saml2SubjectConfirmation"/> from a <see cref="Uri"/> indicating the
@@ -42,7 +40,10 @@ namespace System.IdentityModel.Tokens
 
             if (!method.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("method", SR.GetString(SR.ID0013));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "method",
+                    SR.GetString(SR.ID0013)
+                );
             }
 
             this.method = method;
@@ -50,16 +51,12 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a URI reference that identifies a protocol or mechanism to be used to 
+        /// Gets or sets a URI reference that identifies a protocol or mechanism to be used to
         /// confirm the subject. [Saml2Core, 2.4.1.1]
         /// </summary>
         public Uri Method
         {
-            get 
-            { 
-                return this.method; 
-            }
-
+            get { return this.method; }
             set
             {
                 if (null == value)
@@ -69,7 +66,10 @@ namespace System.IdentityModel.Tokens
 
                 if (!value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 this.method = value;
@@ -77,7 +77,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2NameIdentifier"/> expected to satisfy the enclosing subject 
+        /// Gets or sets the <see cref="Saml2NameIdentifier"/> expected to satisfy the enclosing subject
         /// confirmation requirements. [Saml2Core, 2.4.1.1]
         /// </summary>
         public Saml2NameIdentifier NameIdentifier

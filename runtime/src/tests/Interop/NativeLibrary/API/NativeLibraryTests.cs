@@ -41,23 +41,32 @@ public class NativeLibraryTests : IDisposable
     public void LoadLibraryOnInvalidFile_NameOnly()
     {
         string libName = Path.Combine(testBinDir, "NativeLibrary.cpp");
-        EXPECT(LoadLibrary_NameOnly(libName),
-                OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound);
+        EXPECT(
+            LoadLibrary_NameOnly(libName),
+            OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound
+        );
         EXPECT(TryLoadLibrary_NameOnly(libName), TestResult.ReturnFailure);
     }
 
     [Fact]
     public void LoadLibraryRelativePaths_NameOnly()
     {
-        
         {
-            string libName = Path.Combine("..", NativeLibraryToLoad.InvalidName, NativeLibraryToLoad.GetLibraryFileName(NativeLibraryToLoad.InvalidName));
+            string libName = Path.Combine(
+                "..",
+                NativeLibraryToLoad.InvalidName,
+                NativeLibraryToLoad.GetLibraryFileName(NativeLibraryToLoad.InvalidName)
+            );
             EXPECT(LoadLibrary_NameOnly(libName), TestResult.DllNotFound);
             EXPECT(TryLoadLibrary_NameOnly(libName), TestResult.ReturnFailure);
         }
 
         {
-            string libName = Path.Combine("..", nameof(NativeLibraryTests), NativeLibraryToLoad.GetLibraryFileName(NativeLibraryToLoad.Name));
+            string libName = Path.Combine(
+                "..",
+                nameof(NativeLibraryTests),
+                NativeLibraryToLoad.GetLibraryFileName(NativeLibraryToLoad.Name)
+            );
             EXPECT(LoadLibrary_NameOnly(libName), TestResult.Success);
             EXPECT(TryLoadLibrary_NameOnly(libName), TestResult.Success);
         }
@@ -83,8 +92,10 @@ public class NativeLibraryTests : IDisposable
     public void LoadLibraryOnInvalidFile_WithAssembly()
     {
         string libName = Path.Combine(testBinDir, "NativeLibrary.cpp");
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, null),
-                OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound);
+        EXPECT(
+            LoadLibrary_WithAssembly(libName, assembly, null),
+            OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound
+        );
         EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, null), TestResult.ReturnFailure);
     }
 
@@ -139,16 +150,40 @@ public class NativeLibraryTests : IDisposable
         EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.System32));
 
         // Library should not be found in the assembly directory and should be found in the system directory
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32));
-        EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32));
+        EXPECT(
+            LoadLibrary_WithAssembly(
+                libName,
+                assembly,
+                DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+            )
+        );
+        EXPECT(
+            TryLoadLibrary_WithAssembly(
+                libName,
+                assembly,
+                DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+            )
+        );
 
         // Library should not be found in the assembly directory, but should fall back to the default OS search which includes CWD on Windows
         EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory));
-        EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory));
+        EXPECT(
+            TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory)
+        );
 
         // Library should not be found in application directory
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.ApplicationDirectory), TestResult.DllNotFound);
-        EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.ApplicationDirectory), TestResult.ReturnFailure);
+        EXPECT(
+            LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.ApplicationDirectory),
+            TestResult.DllNotFound
+        );
+        EXPECT(
+            TryLoadLibrary_WithAssembly(
+                libName,
+                assembly,
+                DllImportSearchPath.ApplicationDirectory
+            ),
+            TestResult.ReturnFailure
+        );
     }
 
     [Fact]
@@ -170,8 +205,14 @@ public class NativeLibraryTests : IDisposable
     public void LoadLibrary_UsesFullPath_EvenWhen_AssemblyDirectory_Specified()
     {
         string libName = Path.Combine(testBinDir, Path.Combine("lib", NativeLibraryToLoad.Name));
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory), TestResult.DllNotFound);
-        EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory), TestResult.ReturnFailure);
+        EXPECT(
+            LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory),
+            TestResult.DllNotFound
+        );
+        EXPECT(
+            TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory),
+            TestResult.ReturnFailure
+        );
     }
 
     [Fact]
@@ -185,9 +226,23 @@ public class NativeLibraryTests : IDisposable
         if (!TestLibrary.Utilities.IsNativeAot && !TestLibrary.PlatformDetection.IsMonoLLVMFULLAOT)
         {
             // Library should be found in the assembly directory
-            Assembly assemblyInSubdirectory = Assembly.LoadFile(Path.Combine(subdirectory, $"{assembly.GetName().Name}{suffix}.dll"));
-            EXPECT(LoadLibrary_WithAssembly(libName, assemblyInSubdirectory, DllImportSearchPath.AssemblyDirectory));
-            EXPECT(TryLoadLibrary_WithAssembly(libName, assemblyInSubdirectory, DllImportSearchPath.AssemblyDirectory));
+            Assembly assemblyInSubdirectory = Assembly.LoadFile(
+                Path.Combine(subdirectory, $"{assembly.GetName().Name}{suffix}.dll")
+            );
+            EXPECT(
+                LoadLibrary_WithAssembly(
+                    libName,
+                    assemblyInSubdirectory,
+                    DllImportSearchPath.AssemblyDirectory
+                )
+            );
+            EXPECT(
+                TryLoadLibrary_WithAssembly(
+                    libName,
+                    assemblyInSubdirectory,
+                    DllImportSearchPath.AssemblyDirectory
+                )
+            );
         }
 
         if (TestLibrary.Utilities.IsNativeAot)
@@ -196,8 +251,20 @@ public class NativeLibraryTests : IDisposable
             // The passing of DllImportSearchPath.System32 is done to ensure on Windows the runtime won't fallback
             // and try to search the application directory by default.
             string libNameAot = $"{NativeLibraryToLoad.Name}-in-native";
-            EXPECT(LoadLibrary_WithAssembly(libNameAot, assembly, DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32));
-            EXPECT(TryLoadLibrary_WithAssembly(libNameAot, assembly, DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32));
+            EXPECT(
+                LoadLibrary_WithAssembly(
+                    libNameAot,
+                    assembly,
+                    DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+                )
+            );
+            EXPECT(
+                TryLoadLibrary_WithAssembly(
+                    libNameAot,
+                    assembly,
+                    DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+                )
+            );
         }
 
         if (OperatingSystem.IsWindows())
@@ -208,8 +275,20 @@ public class NativeLibraryTests : IDisposable
                 Environment.CurrentDirectory = subdirectory;
 
                 // Library should not be found in the assembly directory, but should fall back to the default OS search which includes CWD on Windows
-                EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory));
-                EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory));
+                EXPECT(
+                    LoadLibrary_WithAssembly(
+                        libName,
+                        assembly,
+                        DllImportSearchPath.AssemblyDirectory
+                    )
+                );
+                EXPECT(
+                    TryLoadLibrary_WithAssembly(
+                        libName,
+                        assembly,
+                        DllImportSearchPath.AssemblyDirectory
+                    )
+                );
             }
             finally
             {
@@ -240,13 +319,14 @@ public class NativeLibraryTests : IDisposable
         EXPECT(FreeLibrary(IntPtr.Zero));
     }
 
-    public void Dispose() {}
+    public void Dispose() { }
 
     static TestResult LoadLibrary_NameOnly(string libPath)
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             handle = NativeLibrary.Load(libPath);
             if (handle == IntPtr.Zero)
                 return TestResult.ReturnNull;
@@ -262,7 +342,8 @@ public class NativeLibraryTests : IDisposable
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             bool success = NativeLibrary.TryLoad(libPath, out handle);
             if (!success)
                 return TestResult.ReturnFailure;
@@ -276,12 +357,16 @@ public class NativeLibraryTests : IDisposable
         return result;
     }
 
-
-    static TestResult LoadLibrary_WithAssembly(string libName, Assembly assembly, DllImportSearchPath? searchPath)
+    static TestResult LoadLibrary_WithAssembly(
+        string libName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    )
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             handle = NativeLibrary.Load(libName, assembly, searchPath);
             if (handle == IntPtr.Zero)
                 return TestResult.ReturnNull;
@@ -293,11 +378,16 @@ public class NativeLibraryTests : IDisposable
         return result;
     }
 
-    static TestResult TryLoadLibrary_WithAssembly(string libName, Assembly assembly, DllImportSearchPath? searchPath)
+    static TestResult TryLoadLibrary_WithAssembly(
+        string libName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    )
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             bool success = NativeLibrary.TryLoad(libName, assembly, searchPath, out handle);
             if (!success)
                 return TestResult.ReturnFailure;
@@ -313,7 +403,8 @@ public class NativeLibraryTests : IDisposable
 
     static TestResult FreeLibrary(IntPtr handle)
     {
-        return Run(() => {
+        return Run(() =>
+        {
             NativeLibrary.Free(handle);
             return TestResult.Success;
         });

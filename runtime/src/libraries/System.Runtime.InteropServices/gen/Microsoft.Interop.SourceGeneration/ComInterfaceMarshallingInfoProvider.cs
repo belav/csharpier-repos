@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop
@@ -21,30 +21,52 @@ namespace Microsoft.Interop
             _compilation = compilation;
         }
 
-        public bool CanParseAttributeType(INamedTypeSymbol attributeType) => attributeType.ToDisplayString() == TypeNames.GeneratedComInterfaceAttribute;
+        public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
+            attributeType.ToDisplayString() == TypeNames.GeneratedComInterfaceAttribute;
 
-        public MarshallingInfo? ParseAttribute(AttributeData attributeData, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        public MarshallingInfo? ParseAttribute(
+            AttributeData attributeData,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             return CreateComInterfaceMarshallingInfo(_compilation, type);
         }
 
         public static MarshallingInfo CreateComInterfaceMarshallingInfo(
             Compilation compilation,
-            ITypeSymbol interfaceType)
+            ITypeSymbol interfaceType
+        )
         {
-            INamedTypeSymbol? comInterfaceMarshaller = compilation.GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_Metadata);
+            INamedTypeSymbol? comInterfaceMarshaller = compilation.GetTypeByMetadataName(
+                TypeNames.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_Metadata
+            );
             if (comInterfaceMarshaller is null)
                 return new MissingSupportMarshallingInfo();
 
             comInterfaceMarshaller = comInterfaceMarshaller.Construct(interfaceType);
 
-            if (ManualTypeMarshallingHelper.HasEntryPointMarshallerAttribute(comInterfaceMarshaller))
+            if (
+                ManualTypeMarshallingHelper.HasEntryPointMarshallerAttribute(comInterfaceMarshaller)
+            )
             {
-                if (ManualTypeMarshallingHelper.TryGetValueMarshallersFromEntryType(comInterfaceMarshaller, interfaceType, compilation, out CustomTypeMarshallers? marshallers))
+                if (
+                    ManualTypeMarshallingHelper.TryGetValueMarshallersFromEntryType(
+                        comInterfaceMarshaller,
+                        interfaceType,
+                        compilation,
+                        out CustomTypeMarshallers? marshallers
+                    )
+                )
                 {
                     return new NativeMarshallingAttributeInfo(
-                        EntryPointType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(comInterfaceMarshaller),
-                        Marshallers: marshallers.Value);
+                        EntryPointType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(
+                            comInterfaceMarshaller
+                        ),
+                        Marshallers: marshallers.Value
+                    );
                 }
             }
 

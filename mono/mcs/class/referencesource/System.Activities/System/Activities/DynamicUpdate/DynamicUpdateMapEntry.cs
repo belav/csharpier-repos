@@ -7,9 +7,9 @@ namespace System.Activities.DynamicUpdate
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.ComponentModel;
 
     [DataContract(IsReference = true)]
     internal class DynamicUpdateMapEntry
@@ -18,61 +18,41 @@ namespace System.Activities.DynamicUpdate
 
         DynamicUpdateMap implementationUpdateMap;
         int oldActivityId;
-        int newActivityId;        
-               
+        int newActivityId;
+
         public DynamicUpdateMapEntry(int oldActivityId, int newActivityId)
         {
             this.OldActivityId = oldActivityId;
             this.NewActivityId = newActivityId;
         }
-        
+
         // this is a dummy map entry to be used for creating a NativeActivityUpdateContext
         // for calling UpdateInstance() on activities without map entries.
-        // the OldActivityId and NewActivityId of this dummy map entry are invalid, 
+        // the OldActivityId and NewActivityId of this dummy map entry are invalid,
         // and should not be used anywhere except for creating NativeActivityUpdateContext.
         internal static DynamicUpdateMapEntry DummyMapEntry
         {
             get { return dummyMapEntry; }
-        }        
+        }
 
         public int OldActivityId
         {
-            get
-            {
-                return this.oldActivityId;
-            }
-            private set
-            {
-                this.oldActivityId = value;
-            }
-        }        
+            get { return this.oldActivityId; }
+            private set { this.oldActivityId = value; }
+        }
 
         public int NewActivityId
         {
-            get
-            {
-                return this.newActivityId;
-            }
-            private set
-            {
-                this.newActivityId = value;
-            }
+            get { return this.newActivityId; }
+            private set { this.newActivityId = value; }
         }
 
         [DataMember(EmitDefaultValue = false)]
-        public DynamicUpdateMapEntry Parent
-        {
-            get;
-            set;
-        }
+        public DynamicUpdateMapEntry Parent { get; set; }
 
         // Only set when IsRemoval == true && IsParentRemovedOrBlock == false
         [DataMember(EmitDefaultValue = false)]
-        public string DisplayName
-        {
-            get;
-            set;
-        }
+        public string DisplayName { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public UpdateBlockedReason BlockReason { get; set; }
@@ -82,10 +62,7 @@ namespace System.Activities.DynamicUpdate
 
         public bool IsRuntimeUpdateBlocked
         {
-            get
-            {
-                return BlockReason != UpdateBlockedReason.NotBlocked;
-            }
+            get { return BlockReason != UpdateBlockedReason.NotBlocked; }
         }
 
         [DataMember(EmitDefaultValue = false)]
@@ -95,9 +72,17 @@ namespace System.Activities.DynamicUpdate
         {
             get
             {
-                for (DynamicUpdateMapEntry parent = this.Parent; parent != null; parent = parent.Parent)
+                for (
+                    DynamicUpdateMapEntry parent = this.Parent;
+                    parent != null;
+                    parent = parent.Parent
+                )
                 {
-                    if (parent.IsRemoval || parent.IsRuntimeUpdateBlocked || parent.IsUpdateBlockedByUpdateAuthor)
+                    if (
+                        parent.IsRemoval
+                        || parent.IsRuntimeUpdateBlocked
+                        || parent.IsUpdateBlockedByUpdateAuthor
+                    )
                     {
                         return true;
                     }
@@ -114,22 +99,12 @@ namespace System.Activities.DynamicUpdate
         public object SavedOriginalValueFromParent { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public EnvironmentUpdateMap EnvironmentUpdateMap
-        {
-            get;
-            set;
-        }
+        public EnvironmentUpdateMap EnvironmentUpdateMap { get; set; }
 
         public DynamicUpdateMap ImplementationUpdateMap
         {
-            get
-            {
-                return this.implementationUpdateMap;
-            }
-            internal set
-            {
-                this.implementationUpdateMap = value;
-            }
+            get { return this.implementationUpdateMap; }
+            internal set { this.implementationUpdateMap = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "implementationUpdateMap")]
@@ -152,40 +127,47 @@ namespace System.Activities.DynamicUpdate
             get { return this.NewActivityId; }
             set { this.NewActivityId = value; }
         }
-        
+
         internal bool IsIdChange
         {
             get
             {
-                return this.NewActivityId > 0 && this.OldActivityId > 0 && this.NewActivityId != this.OldActivityId;
+                return this.NewActivityId > 0
+                    && this.OldActivityId > 0
+                    && this.NewActivityId != this.OldActivityId;
             }
         }
 
         internal bool IsRemoval
         {
-            get
-            {
-                return this.NewActivityId <= 0 && this.OldActivityId > 0;
-            }
+            get { return this.NewActivityId <= 0 && this.OldActivityId > 0; }
         }
 
         internal bool HasEnvironmentUpdates
         {
-            get
-            {
-                return this.EnvironmentUpdateMap != null;
-            }
+            get { return this.EnvironmentUpdateMap != null; }
         }
 
-        internal static DynamicUpdateMapEntry Merge(DynamicUpdateMapEntry first, DynamicUpdateMapEntry second,
-            DynamicUpdateMapEntry newParent, DynamicUpdateMap.MergeErrorContext errorContext)
+        internal static DynamicUpdateMapEntry Merge(
+            DynamicUpdateMapEntry first,
+            DynamicUpdateMapEntry second,
+            DynamicUpdateMapEntry newParent,
+            DynamicUpdateMap.MergeErrorContext errorContext
+        )
         {
             Fx.Assert(first.NewActivityId == second.OldActivityId, "Merging mismatched entries");
-            Fx.Assert((first.Parent == null && second.Parent == null) || (first.Parent.NewActivityId == second.Parent.OldActivityId), "Merging mismatched parents");
+            Fx.Assert(
+                (first.Parent == null && second.Parent == null)
+                    || (first.Parent.NewActivityId == second.Parent.OldActivityId),
+                "Merging mismatched parents"
+            );
 
-            DynamicUpdateMapEntry result = new DynamicUpdateMapEntry(first.OldActivityId, second.NewActivityId)
+            DynamicUpdateMapEntry result = new DynamicUpdateMapEntry(
+                first.OldActivityId,
+                second.NewActivityId
+            )
             {
-                Parent = newParent
+                Parent = newParent,
             };
 
             if (second.IsRemoval)
@@ -197,8 +179,12 @@ namespace System.Activities.DynamicUpdate
             }
             else
             {
-                result.SavedOriginalValues = Merge(first.SavedOriginalValues, second.SavedOriginalValues);
-                result.SavedOriginalValueFromParent = first.SavedOriginalValueFromParent ?? second.SavedOriginalValueFromParent;
+                result.SavedOriginalValues = Merge(
+                    first.SavedOriginalValues,
+                    second.SavedOriginalValues
+                );
+                result.SavedOriginalValueFromParent =
+                    first.SavedOriginalValueFromParent ?? second.SavedOriginalValueFromParent;
                 if (first.BlockReason == UpdateBlockedReason.NotBlocked)
                 {
                     result.BlockReason = second.BlockReason;
@@ -209,21 +195,38 @@ namespace System.Activities.DynamicUpdate
                     result.BlockReason = first.BlockReason;
                     result.BlockReasonMessage = second.BlockReasonMessage;
                 }
-                result.IsUpdateBlockedByUpdateAuthor = first.IsUpdateBlockedByUpdateAuthor || second.IsUpdateBlockedByUpdateAuthor;
+                result.IsUpdateBlockedByUpdateAuthor =
+                    first.IsUpdateBlockedByUpdateAuthor || second.IsUpdateBlockedByUpdateAuthor;
 
                 errorContext.PushIdSpace(result.NewActivityId);
-                result.EnvironmentUpdateMap = EnvironmentUpdateMap.Merge(first.EnvironmentUpdateMap, second.EnvironmentUpdateMap, errorContext);
-                if (!result.IsRuntimeUpdateBlocked && !result.IsUpdateBlockedByUpdateAuthor && !result.IsParentRemovedOrBlocked)
+                result.EnvironmentUpdateMap = EnvironmentUpdateMap.Merge(
+                    first.EnvironmentUpdateMap,
+                    second.EnvironmentUpdateMap,
+                    errorContext
+                );
+                if (
+                    !result.IsRuntimeUpdateBlocked
+                    && !result.IsUpdateBlockedByUpdateAuthor
+                    && !result.IsParentRemovedOrBlocked
+                )
                 {
-                    result.ImplementationUpdateMap = DynamicUpdateMap.Merge(first.ImplementationUpdateMap, second.ImplementationUpdateMap, errorContext);
+                    result.ImplementationUpdateMap = DynamicUpdateMap.Merge(
+                        first.ImplementationUpdateMap,
+                        second.ImplementationUpdateMap,
+                        errorContext
+                    );
                 }
                 errorContext.PopIdSpace();
-            };
+            }
+            ;
 
             return result;
         }
 
-        internal static IDictionary<string, object> Merge(IDictionary<string, object> first, IDictionary<string, object> second)
+        internal static IDictionary<string, object> Merge(
+            IDictionary<string, object> first,
+            IDictionary<string, object> second
+        )
         {
             if (first == null || second == null)
             {
@@ -254,7 +257,7 @@ namespace System.Activities.DynamicUpdate
                 IsUpdateBlockedByUpdateAuthor = this.IsUpdateBlockedByUpdateAuthor,
                 Parent = newParent,
                 SavedOriginalValues = this.SavedOriginalValues,
-                SavedOriginalValueFromParent = this.SavedOriginalValueFromParent
+                SavedOriginalValueFromParent = this.SavedOriginalValueFromParent,
             };
         }
     }

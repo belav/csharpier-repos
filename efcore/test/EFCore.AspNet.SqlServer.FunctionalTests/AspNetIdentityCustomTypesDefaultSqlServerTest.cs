@@ -4,29 +4,25 @@
 namespace Microsoft.EntityFrameworkCore;
 
 public class AspNetIdentityCustomTypesDefaultSqlServerTest
-    : AspNetIdentityCustomTypesDefaultTestBase<
-        AspNetIdentityCustomTypesDefaultSqlServerTest.AspNetIdentityCustomTypesDefaultSqlServerFixture>
+    : AspNetIdentityCustomTypesDefaultTestBase<AspNetIdentityCustomTypesDefaultSqlServerTest.AspNetIdentityCustomTypesDefaultSqlServerFixture>
 {
-    public AspNetIdentityCustomTypesDefaultSqlServerTest(AspNetIdentityCustomTypesDefaultSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+    public AspNetIdentityCustomTypesDefaultSqlServerTest(
+        AspNetIdentityCustomTypesDefaultSqlServerFixture fixture
+    )
+        : base(fixture) { }
 
     public class AspNetIdentityCustomTypesDefaultSqlServerFixture : AspNetIdentityFixtureBase
     {
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection).AddEntityFrameworkProxies();
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection).AddEntityFrameworkProxies();
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).UseLazyLoadingProxies();
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder).UseLazyLoadingProxies();
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        protected override string StoreName
-            => "AspNetCustomTypesDefaultIdentity";
+        protected override string StoreName => "AspNetCustomTypesDefaultIdentity";
     }
 }

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -27,11 +28,13 @@ namespace Test
             }
             return m_abFwd6;
         }
+
         [Fact]
         public static void TestEntryPoint()
         {
             new App().Method1();
         }
+
         public static bool m_bFwd1;
         public static byte[] m_abFwd6;
     }

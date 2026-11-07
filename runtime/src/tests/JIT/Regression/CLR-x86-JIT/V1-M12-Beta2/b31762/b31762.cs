@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,7 +11,11 @@ namespace Test
     public class BB
     {
         public static uint[] m_auForward5;
-        public static uint[] Method2() { return null; }
+
+        public static uint[] Method2()
+        {
+            return null;
+        }
 
         [Fact]
         public static void TestEntryPoint()
@@ -22,9 +27,7 @@ namespace Test
                     if (local3)
                         m_auForward5 = Method2();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
         }
     }
 }

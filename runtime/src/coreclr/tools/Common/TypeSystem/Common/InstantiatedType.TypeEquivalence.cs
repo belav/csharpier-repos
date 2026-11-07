@@ -7,6 +7,5 @@ namespace Internal.TypeSystem
     {
         public override TypeIdentifierData TypeIdentifierData => _typeDef.TypeIdentifierData;
         public override bool IsWindowsRuntime => _typeDef.IsWindowsRuntime;
-
     }
 }

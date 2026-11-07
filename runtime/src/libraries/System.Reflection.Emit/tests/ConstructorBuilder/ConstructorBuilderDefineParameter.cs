@@ -7,17 +7,18 @@ namespace System.Reflection.Emit.Tests
 {
     public class ConstructorBuilderDefineParameter
     {
-        private static readonly ParameterAttributes[] s_supportedAttributes = new ParameterAttributes[]
-        {
-            ParameterAttributes.None,
-            ParameterAttributes.HasDefault,
-            ParameterAttributes.HasFieldMarshal,
-            ParameterAttributes.In,
-            ParameterAttributes.None,
-            ParameterAttributes.Optional,
-            ParameterAttributes.Out,
-            ParameterAttributes.Retval
-        };
+        private static readonly ParameterAttributes[] s_supportedAttributes =
+            new ParameterAttributes[]
+            {
+                ParameterAttributes.None,
+                ParameterAttributes.HasDefault,
+                ParameterAttributes.HasFieldMarshal,
+                ParameterAttributes.In,
+                ParameterAttributes.None,
+                ParameterAttributes.Optional,
+                ParameterAttributes.Out,
+                ParameterAttributes.Retval,
+            };
 
         [Fact]
         public void DefineParameter_MultipleParameters()
@@ -27,7 +28,11 @@ namespace System.Reflection.Emit.Tests
             for (int i = 1; i < s_supportedAttributes.Length; i++)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-                ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes);
+                ConstructorBuilder constructor = type.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    parameterTypes
+                );
 
                 constructor.DefineParameter(1, s_supportedAttributes[i - 1], "parameter1" + i);
                 constructor.DefineParameter(2, s_supportedAttributes[i], "parameter2" + i);
@@ -52,7 +57,11 @@ namespace System.Reflection.Emit.Tests
             for (int i = 0; i < s_supportedAttributes.Length; i++)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-                ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes);
+                ConstructorBuilder constructor = type.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    parameterTypes
+                );
 
                 constructor.DefineParameter(1, s_supportedAttributes[i], "parameter1" + i);
 
@@ -76,7 +85,11 @@ namespace System.Reflection.Emit.Tests
             for (int i = 0; i < s_supportedAttributes.Length; i++)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-                ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes);
+                ConstructorBuilder constructor = type.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    parameterTypes
+                );
 
                 constructor.DefineParameter(1, s_supportedAttributes[i], null);
 
@@ -100,7 +113,11 @@ namespace System.Reflection.Emit.Tests
             for (int i = 1; i < s_supportedAttributes.Length; ++i)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-                ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes);
+                ConstructorBuilder constructor = type.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    parameterTypes
+                );
 
                 constructor.DefineParameter(1, s_supportedAttributes[i - 1], null);
                 constructor.DefineParameter(2, s_supportedAttributes[i], null);
@@ -121,7 +138,11 @@ namespace System.Reflection.Emit.Tests
         public void DefineParameter_ZeroSequence_NoParameters()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Any, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Any,
+                new Type[0]
+            );
             Assert.NotNull(constructor.DefineParameter(0, ParameterAttributes.None, "p"));
         }
 
@@ -129,7 +150,11 @@ namespace System.Reflection.Emit.Tests
         public void DefineParameter_ZeroSequence_SingleParameter()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Any, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Any,
+                new Type[0]
+            );
             Assert.NotNull(constructor.DefineParameter(0, ParameterAttributes.None, "p"));
         }
 
@@ -137,31 +162,51 @@ namespace System.Reflection.Emit.Tests
         public void DefineParameter_NoParameters_InvalidSequence_ThrowsArgumentOutOfRangeException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => constructor.DefineParameter(-1, ParameterAttributes.None, "p"));
-            Assert.Throws<ArgumentOutOfRangeException>(() => constructor.DefineParameter(1, ParameterAttributes.None, "p"));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                constructor.DefineParameter(-1, ParameterAttributes.None, "p")
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                constructor.DefineParameter(1, ParameterAttributes.None, "p")
+            );
         }
 
         [Fact]
         public void DefineParameter_SingleParameter_InvalidSequence_ThrowsArgumentOutOfRangeException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[] { typeof(int) });
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[] { typeof(int) }
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => constructor.DefineParameter(2, ParameterAttributes.None, "p"));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                constructor.DefineParameter(2, ParameterAttributes.None, "p")
+            );
         }
 
         [Fact]
         public void DefineParameter_TypeAlreadyCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[] { typeof(int) });
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[] { typeof(int) }
+            );
 
             constructor.GetILGenerator().Emit(OpCodes.Ret);
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(() => constructor.DefineParameter(1, ParameterAttributes.None, "p"));
+            Assert.Throws<InvalidOperationException>(() =>
+                constructor.DefineParameter(1, ParameterAttributes.None, "p")
+            );
         }
     }
 }

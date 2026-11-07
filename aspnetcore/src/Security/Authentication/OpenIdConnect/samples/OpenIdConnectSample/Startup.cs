@@ -161,30 +161,24 @@ public class Startup
 
             if (context.Request.Path.Equals("/signedout"))
             {
-                await WriteHtmlAsync(
-                    response,
-                    async res =>
-                    {
-                        await res.WriteAsync($"<h1>You have been signed out.</h1>");
-                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
-                    }
-                );
+                await WriteHtmlAsync(response, async res =>
+                {
+                    await res.WriteAsync($"<h1>You have been signed out.</h1>");
+                    await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
+                });
                 return;
             }
 
             if (context.Request.Path.Equals("/signout"))
             {
                 await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                await WriteHtmlAsync(
-                    response,
-                    async res =>
-                    {
-                        await res.WriteAsync(
-                            $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
-                        );
-                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
-                    }
-                );
+                await WriteHtmlAsync(response, async res =>
+                {
+                    await res.WriteAsync(
+                        $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
+                    );
+                    await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
+                });
                 return;
             }
 
@@ -201,35 +195,29 @@ public class Startup
 
             if (context.Request.Path.Equals("/access-denied-from-remote"))
             {
-                await WriteHtmlAsync(
-                    response,
-                    async res =>
-                    {
-                        await res.WriteAsync(
-                            $"<h1>Access Denied error received from the remote authorization server</h1>"
-                        );
-                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
-                    }
-                );
+                await WriteHtmlAsync(response, async res =>
+                {
+                    await res.WriteAsync(
+                        $"<h1>Access Denied error received from the remote authorization server</h1>"
+                    );
+                    await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
+                });
                 return;
             }
 
             if (context.Request.Path.Equals("/Account/AccessDenied"))
             {
                 await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                await WriteHtmlAsync(
-                    response,
-                    async res =>
-                    {
-                        await res.WriteAsync(
-                            $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
-                        );
-                        await res.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
-                        );
-                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
-                    }
-                );
+                await WriteHtmlAsync(response, async res =>
+                {
+                    await res.WriteAsync(
+                        $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
+                    );
+                    await res.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
+                    );
+                    await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
+                });
                 return;
             }
 
@@ -272,16 +260,13 @@ public class Startup
 
                 if (string.IsNullOrEmpty(refreshToken))
                 {
-                    await WriteHtmlAsync(
-                        response,
-                        async res =>
-                        {
-                            await res.WriteAsync($"No refresh_token is available.<br>");
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
-                            );
-                        }
-                    );
+                    await WriteHtmlAsync(response, async res =>
+                    {
+                        await res.WriteAsync($"No refresh_token is available.<br>");
+                        await res.WriteAsync(
+                            "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
+                        );
+                    });
 
                     return;
                 }
@@ -334,35 +319,30 @@ public class Startup
                     }
                     await context.SignInAsync(user, props);
 
-                    await WriteHtmlAsync(
-                        response,
-                        async res =>
-                        {
-                            await res.WriteAsync($"<h1>Refreshed.</h1>");
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
-                            );
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/\">Home</a>"
-                            );
+                    await WriteHtmlAsync(response, async res =>
+                    {
+                        await res.WriteAsync($"<h1>Refreshed.</h1>");
+                        await res.WriteAsync(
+                            "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
+                        );
+                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
 
-                            await res.WriteAsync("<h2>Tokens:</h2>");
-                            await WriteTableHeader(
-                                res,
-                                new string[] { "Token Type", "Value" },
-                                props
-                                    .GetTokens()
-                                    .Select(token => new string[] { token.Name, token.Value })
-                            );
+                        await res.WriteAsync("<h2>Tokens:</h2>");
+                        await WriteTableHeader(
+                            res,
+                            new string[] { "Token Type", "Value" },
+                            props
+                                .GetTokens()
+                                .Select(token => new string[] { token.Name, token.Value })
+                        );
 
-                            await res.WriteAsync("<h2>Payload:</h2>");
-                            await res.WriteAsync(
-                                HtmlEncoder
-                                    .Default.Encode(payload.RootElement.ToString())
-                                    .Replace(",", ",<br>") + "<br>"
-                            );
-                        }
-                    );
+                        await res.WriteAsync("<h2>Payload:</h2>");
+                        await res.WriteAsync(
+                            HtmlEncoder
+                                .Default.Encode(payload.RootElement.ToString())
+                                .Replace(",", ",<br>") + "<br>"
+                        );
+                    });
                 }
 
                 return;
@@ -387,44 +367,39 @@ public class Startup
                 return;
             }
 
-            await WriteHtmlAsync(
-                response,
-                async res =>
-                {
-                    await res.WriteAsync(
-                        $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
-                    );
-                    await res.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
-                    );
-                    await res.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
-                    );
-                    await res.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/login-challenge\">Login challenge</a>"
-                    );
-                    await res.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
-                    );
-                    await res.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
-                    );
+            await WriteHtmlAsync(response, async res =>
+            {
+                await res.WriteAsync(
+                    $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
+                );
+                await res.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
+                );
+                await res.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
+                );
+                await res.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/login-challenge\">Login challenge</a>"
+                );
+                await res.WriteAsync("<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>");
+                await res.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
+                );
 
-                    await res.WriteAsync("<h2>Claims:</h2>");
-                    await WriteTableHeader(
-                        res,
-                        new string[] { "Claim Type", "Value" },
-                        context.User.Claims.Select(c => new string[] { c.Type, c.Value })
-                    );
+                await res.WriteAsync("<h2>Claims:</h2>");
+                await WriteTableHeader(
+                    res,
+                    new string[] { "Claim Type", "Value" },
+                    context.User.Claims.Select(c => new string[] { c.Type, c.Value })
+                );
 
-                    await res.WriteAsync("<h2>Tokens:</h2>");
-                    await WriteTableHeader(
-                        res,
-                        new string[] { "Token Type", "Value" },
-                        props.GetTokens().Select(token => new string[] { token.Name, token.Value })
-                    );
-                }
-            );
+                await res.WriteAsync("<h2>Tokens:</h2>");
+                await WriteTableHeader(
+                    res,
+                    new string[] { "Token Type", "Value" },
+                    props.GetTokens().Select(token => new string[] { token.Name, token.Value })
+                );
+            });
         });
     }
 

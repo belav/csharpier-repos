@@ -34,9 +34,12 @@ namespace System.Web.WebPages
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             // Get the property info
-            PropertyInfo propInfo = RealObject.GetType().GetProperty(
-                binder.Name,
-                BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.Public);
+            PropertyInfo propInfo = RealObject
+                .GetType()
+                .GetProperty(
+                    binder.Name,
+                    BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.Public
+                );
 
             if (propInfo == null)
             {
@@ -56,15 +59,25 @@ namespace System.Web.WebPages
         }
 
         // Called when a method is called
-        public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
+        public override bool TryInvokeMember(
+            InvokeMemberBinder binder,
+            object[] args,
+            out object result
+        )
         {
-            result = RealObject.GetType().InvokeMember(
-                binder.Name,
-                BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                null,
-                RealObject,
-                args,
-                CultureInfo.InvariantCulture);
+            result = RealObject
+                .GetType()
+                .InvokeMember(
+                    binder.Name,
+                    BindingFlags.InvokeMethod
+                        | BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic,
+                    null,
+                    RealObject,
+                    args,
+                    CultureInfo.InvariantCulture
+                );
 
             return true;
         }

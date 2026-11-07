@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,58 +31,67 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.ServiceProcess {
+namespace System.ServiceProcess
+{
+    [Serializable]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Event,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    public class ServiceControllerPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        string machine_name;
+        string service_name;
+        ServiceControllerPermissionAccess permission_access;
 
-	[Serializable]
-	[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class |
-			AttributeTargets.Struct   | AttributeTargets.Constructor |
-			AttributeTargets.Method   | AttributeTargets.Event,
-			AllowMultiple=true, Inherited=false)]
-	public class ServiceControllerPermissionAttribute : CodeAccessSecurityAttribute {
+        public ServiceControllerPermissionAttribute(SecurityAction action)
+            : base(action)
+        {
+            machine_name = ResourcePermissionBase.Local;
+            service_name = ResourcePermissionBase.Any;
+            permission_access = ServiceControllerPermissionAccess.Browse;
+        }
 
-		string machine_name;
-		string service_name;
-		ServiceControllerPermissionAccess permission_access;
-		
-		public ServiceControllerPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-			machine_name = ResourcePermissionBase.Local;
-			service_name = ResourcePermissionBase.Any;
-			permission_access = ServiceControllerPermissionAccess.Browse;
-		}
+        public string MachineName
+        {
+            get { return machine_name; }
+            set
+            {
+                ServiceControllerPermission.ValidateMachineName(value);
+                machine_name = value;
+            }
+        }
 
-		public string MachineName {
-			get { return machine_name; }
-			set { 
-				ServiceControllerPermission.ValidateMachineName (value);
-				machine_name = value;
-			}
-		}
+        public ServiceControllerPermissionAccess PermissionAccess
+        {
+            get { return permission_access; }
+            set { permission_access = value; }
+        }
 
-		public ServiceControllerPermissionAccess PermissionAccess {
-			get { return permission_access; }
-			set {
-				permission_access = value;
-			}
-		}
+        public string ServiceName
+        {
+            get { return service_name; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("ServiceName");
+                ServiceControllerPermission.ValidateServiceName(value);
+                service_name = value;
+            }
+        }
 
-		public string ServiceName {
-			get { return service_name; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("ServiceName");
-				ServiceControllerPermission.ValidateServiceName (value);
-				service_name = value;
-			}
-		}
-
-		public override IPermission CreatePermission ()
-		{
-			if (base.Unrestricted)
-				return new ServiceControllerPermission (PermissionState.Unrestricted);
-			else
-				return new ServiceControllerPermission (PermissionState.None);
-		}
-	}
+        public override IPermission CreatePermission()
+        {
+            if (base.Unrestricted)
+                return new ServiceControllerPermission(PermissionState.Unrestricted);
+            else
+                return new ServiceControllerPermission(PermissionState.None);
+        }
+    }
 }

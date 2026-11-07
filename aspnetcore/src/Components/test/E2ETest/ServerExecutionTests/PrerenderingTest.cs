@@ -55,21 +55,18 @@ public class PrerenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<Pre
 
         // Prerendered output can't use JSInterop
         Browser.Equal("No value yet", () => Browser.Exists(By.Id("val-get-by-interop")).Text);
-        Browser.Equal(
-            string.Empty,
-            () => Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value")
+        Browser.Equal(string.Empty, () =>
+            Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value")
         );
 
         BeginInteractivity();
 
         // Once connected, we can
-        Browser.Equal(
-            "Hello from interop call",
-            () => Browser.Exists(By.Id("val-get-by-interop")).Text
+        Browser.Equal("Hello from interop call", () =>
+            Browser.Exists(By.Id("val-get-by-interop")).Text
         );
-        Browser.Equal(
-            "Hello from interop call",
-            () => Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value")
+        Browser.Equal("Hello from interop call", () =>
+            Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value")
         );
     }
 
@@ -94,16 +91,14 @@ public class PrerenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<Pre
         // The server doesn't receive the hash part of the URL, so you can't
         // read it during prerendering
         Navigate(url);
-        Browser.Equal(
-            _serverFixture.RootUri + urlWithoutHash,
-            () => Browser.Exists(By.TagName("strong")).Text
+        Browser.Equal(_serverFixture.RootUri + urlWithoutHash, () =>
+            Browser.Exists(By.TagName("strong")).Text
         );
 
         // Once connected, you do have access to the full URL
         BeginInteractivity();
-        Browser.Equal(
-            _serverFixture.RootUri + url,
-            () => Browser.Exists(By.TagName("strong")).Text
+        Browser.Equal(_serverFixture.RootUri + url, () =>
+            Browser.Exists(By.TagName("strong")).Text
         );
     }
 
@@ -142,17 +137,15 @@ public class PrerenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<Pre
         // See that the authentication state is usable during the initial prerendering
         SignInAs(initialUsername, null);
         Navigate("/prerendered/prerendered-transition");
-        Browser.Equal(
-            $"Hello, {initialUsername ?? "anonymous"}!",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal($"Hello, {initialUsername ?? "anonymous"}!", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
 
         // See that during connection, we update to whatever the latest authentication state now is
         SignInAs(interactiveUsername, null, useSeparateTab: true);
         BeginInteractivity();
-        Browser.Equal(
-            $"Hello, {interactiveUsername ?? "anonymous"}!",
-            () => Browser.Exists(By.TagName("h1")).Text
+        Browser.Equal($"Hello, {interactiveUsername ?? "anonymous"}!", () =>
+            Browser.Exists(By.TagName("h1")).Text
         );
     }
 
@@ -166,13 +159,10 @@ public class PrerenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<Pre
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.DoesNotContain(
-                log,
-                entry =>
-                {
-                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
-                }
-            );
+            Assert.DoesNotContain(log, entry =>
+            {
+                return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+            });
         }
     }
 

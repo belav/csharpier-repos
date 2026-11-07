@@ -15,14 +15,10 @@ namespace Microsoft.Test.ModuleCore
 
         //Constructor
         public TestCase()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         public TestCase(string name, string desc)
-            : base(name, desc, TestType.TestCase)
-        {
-        }
+            : base(name, desc, TestType.TestCase) { }
 
         //Accessors
         protected override TestAttribute CreateAttribute()
@@ -107,7 +103,9 @@ namespace Microsoft.Test.ModuleCore
                             }
                             if (!string.IsNullOrWhiteSpace(tse.Message))
                             {
-                                System.Console.WriteLine(indent + " SKIPPED" + ", Msg:" + tse.Message);
+                                System.Console.WriteLine(
+                                    indent + " SKIPPED" + ", Msg:" + tse.Message
+                                );
                             }
                             module.SkipCount++;
                         }

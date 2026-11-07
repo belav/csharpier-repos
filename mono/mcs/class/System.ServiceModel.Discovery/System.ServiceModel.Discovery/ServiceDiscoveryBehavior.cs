@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,57 +32,70 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class ServiceDiscoveryBehavior : IServiceBehavior
-	{
-		public ServiceDiscoveryBehavior ()
-		{
-			AnnouncementEndpoints = new Collection<AnnouncementEndpoint> ();
-		}
-		
-		public Collection<AnnouncementEndpoint> AnnouncementEndpoints { get; private set; }
+    public class ServiceDiscoveryBehavior : IServiceBehavior
+    {
+        public ServiceDiscoveryBehavior()
+        {
+            AnnouncementEndpoints = new Collection<AnnouncementEndpoint>();
+        }
 
-		void IServiceBehavior.AddBindingParameters (ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-		{
-			if (serviceDescription == null)
-				throw new ArgumentNullException ("serviceDescription");
-			if (serviceHostBase == null)
-				throw new ArgumentNullException ("serviceHostBase");
-			if (endpoints == null)
-				throw new ArgumentNullException ("endpoints");
-			if (bindingParameters == null)
-				throw new ArgumentNullException ("bindingParameters");
+        public Collection<AnnouncementEndpoint> AnnouncementEndpoints { get; private set; }
 
-			// do nothing
-		}
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        )
+        {
+            if (serviceDescription == null)
+                throw new ArgumentNullException("serviceDescription");
+            if (serviceHostBase == null)
+                throw new ArgumentNullException("serviceHostBase");
+            if (endpoints == null)
+                throw new ArgumentNullException("endpoints");
+            if (bindingParameters == null)
+                throw new ArgumentNullException("bindingParameters");
 
-		void IServiceBehavior.ApplyDispatchBehavior (ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-		{
-			if (serviceDescription == null)
-				throw new ArgumentNullException ("serviceDescription");
-			if (serviceHostBase == null)
-				throw new ArgumentNullException ("serviceHostBase");
+            // do nothing
+        }
 
-			// FIXME: add ChannelDispatchers (via extension)
-			foreach (var ae in AnnouncementEndpoints) {
-				serviceHostBase.ChannelDispatchers.Add (new DiscoveryChannelDispatcher (ae, true));
-				serviceHostBase.ChannelDispatchers.Add (new DiscoveryChannelDispatcher (ae, false));
-			}
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            if (serviceDescription == null)
+                throw new ArgumentNullException("serviceDescription");
+            if (serviceHostBase == null)
+                throw new ArgumentNullException("serviceHostBase");
 
-			// BTW, on .NET, calling this method again adds endpoints more than one time...
-		}
+            // FIXME: add ChannelDispatchers (via extension)
+            foreach (var ae in AnnouncementEndpoints)
+            {
+                serviceHostBase.ChannelDispatchers.Add(new DiscoveryChannelDispatcher(ae, true));
+                serviceHostBase.ChannelDispatchers.Add(new DiscoveryChannelDispatcher(ae, false));
+            }
 
-		void IServiceBehavior.Validate (ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-		{
-			if (serviceHostBase == null)
-				throw new ArgumentNullException ("serviceHostBase");
-			var dse = serviceHostBase.Extensions.Find<DiscoveryServiceExtension> ();
-			if (dse == null) {
-				dse = new DiscoveryServiceExtension.DefaultDiscoveryServiceExtension ();
-				serviceHostBase.Extensions.Add (dse);
-			}
-			
-			foreach (var se in serviceDescription.Endpoints)
-				se.Behaviors.Add (new DiscoveryEndpointPublisherBehavior (dse));
-		}
-	}
+            // BTW, on .NET, calling this method again adds endpoints more than one time...
+        }
+
+        void IServiceBehavior.Validate(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            if (serviceHostBase == null)
+                throw new ArgumentNullException("serviceHostBase");
+            var dse = serviceHostBase.Extensions.Find<DiscoveryServiceExtension>();
+            if (dse == null)
+            {
+                dse = new DiscoveryServiceExtension.DefaultDiscoveryServiceExtension();
+                serviceHostBase.Extensions.Add(dse);
+            }
+
+            foreach (var se in serviceDescription.Endpoints)
+                se.Behaviors.Add(new DiscoveryEndpointPublisherBehavior(dse));
+        }
+    }
 }

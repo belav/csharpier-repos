@@ -8,13 +8,23 @@ using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.ConvertTupleToStruct;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Host.Mef;
+
 namespace Microsoft.CodeAnalysis.CSharp.ConvertTupleToStruct
 {
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.IntroduceVariable)]
-    [ExportLanguageService(typeof(IConvertTupleToStructCodeRefactoringProvider), LanguageNames.CSharp)]
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertTupleToStruct), Shared]
-    internal class CSharpConvertTupleToStructCodeRefactoringProvider :
-        AbstractConvertTupleToStructCodeRefactoringProvider<
+    [ExportLanguageService(
+        typeof(IConvertTupleToStructCodeRefactoringProvider),
+        LanguageNames.CSharp
+    )]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertTupleToStruct
+        ),
+        Shared
+    ]
+    internal class CSharpConvertTupleToStructCodeRefactoringProvider
+        : AbstractConvertTupleToStructCodeRefactoringProvider<
             ExpressionSyntax,
             NameSyntax,
             IdentifierNameSyntax,
@@ -24,16 +34,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTupleToStruct
             ArgumentSyntax,
             TupleTypeSyntax,
             TypeDeclarationSyntax,
-            BaseNamespaceDeclarationSyntax>
+            BaseNamespaceDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertTupleToStructCodeRefactoringProvider()
-        {
-        }
+        public CSharpConvertTupleToStructCodeRefactoringProvider() { }
 
-        protected override ArgumentSyntax GetArgumentWithChangedName(ArgumentSyntax argument, string name)
-            => argument.WithNameColon(ChangeName(argument.NameColon, name));
+        protected override ArgumentSyntax GetArgumentWithChangedName(
+            ArgumentSyntax argument,
+            string name
+        ) => argument.WithNameColon(ChangeName(argument.NameColon, name));
 
         private static NameColonSyntax? ChangeName(NameColonSyntax? nameColon, string name)
         {

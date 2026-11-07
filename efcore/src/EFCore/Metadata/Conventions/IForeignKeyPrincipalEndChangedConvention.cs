@@ -18,5 +18,6 @@ public interface IForeignKeyPrincipalEndChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessForeignKeyPrincipalEndChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<IConventionForeignKeyBuilder> context);
+        IConventionContext<IConventionForeignKeyBuilder> context
+    );
 }

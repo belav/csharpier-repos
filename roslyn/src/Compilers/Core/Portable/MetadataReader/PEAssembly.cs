@@ -7,12 +7,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis
         private ThreeState _lazyDeclaresTheObjectClass;
 
         /// <summary>
-        /// We need to store reference to the assembly metadata to keep the metadata alive while 
+        /// We need to store reference to the assembly metadata to keep the metadata alive while
         /// symbols have reference to PEAssembly.
         /// </summary>
         private readonly AssemblyMetadata _owner;
@@ -81,10 +81,7 @@ namespace Microsoft.CodeAnalysis
 
         internal EntityHandle Handle
         {
-            get
-            {
-                return EntityHandle.AssemblyDefinition;
-            }
+            get { return EntityHandle.AssemblyDefinition; }
         }
 
         internal PEModule ManifestModule
@@ -94,18 +91,12 @@ namespace Microsoft.CodeAnalysis
 
         internal ImmutableArray<PEModule> Modules
         {
-            get
-            {
-                return _modules;
-            }
+            get { return _modules; }
         }
 
         internal AssemblyIdentity Identity
         {
-            get
-            {
-                return _identity;
-            }
+            get { return _identity; }
         }
 
         internal bool ContainsNoPiaLocalTypes()
@@ -129,7 +120,9 @@ namespace Microsoft.CodeAnalysis
 
         private Dictionary<string, List<ImmutableArray<byte>>> BuildInternalsVisibleToMap()
         {
-            var ivtMap = new Dictionary<string, List<ImmutableArray<byte>>>(StringComparer.OrdinalIgnoreCase);
+            var ivtMap = new Dictionary<string, List<ImmutableArray<byte>>>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (string attrVal in Modules[0].GetInternalsVisibleToAttributeValues(Handle))
             {
                 AssemblyIdentity identity;
@@ -157,7 +150,9 @@ namespace Microsoft.CodeAnalysis
             return ivtMap;
         }
 
-        internal IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
+        internal IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
+            string simpleName
+        )
         {
             EnsureInternalsVisibleToMapInitialized();
 
@@ -178,7 +173,11 @@ namespace Microsoft.CodeAnalysis
         private void EnsureInternalsVisibleToMapInitialized()
         {
             if (_lazyInternalsVisibleToMap == null)
-                Interlocked.CompareExchange(ref _lazyInternalsVisibleToMap, BuildInternalsVisibleToMap(), null);
+                Interlocked.CompareExchange(
+                    ref _lazyInternalsVisibleToMap,
+                    BuildInternalsVisibleToMap(),
+                    null
+                );
         }
 
         internal bool DeclaresTheObjectClass

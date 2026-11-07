@@ -25,7 +25,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EncapsulateField
         IThreadingContext threadingContext,
         ITextBufferUndoManagerProvider undoManager,
         IGlobalOptionService globalOptions,
-        IAsynchronousOperationListenerProvider listenerProvider) : AbstractEncapsulateFieldCommandHandler(threadingContext, undoManager, globalOptions, listenerProvider)
-    {
-    }
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AbstractEncapsulateFieldCommandHandler(
+            threadingContext,
+            undoManager,
+            globalOptions,
+            listenerProvider
+        ) { }
 }

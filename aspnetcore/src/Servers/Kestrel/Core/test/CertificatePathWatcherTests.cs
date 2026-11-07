@@ -24,10 +24,8 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(
-            dir,
-            logger,
-            _ => NoChangeFileProvider.Instance
+        using var watcher = new CertificatePathWatcher(dir, logger, _ =>
+            NoChangeFileProvider.Instance
         );
 
         var changeToken = watcher.GetChangeToken();
@@ -83,10 +81,8 @@ public class CertificatePathWatcherTests : LoggedTest
             dirs[i] = Path.Combine(rootDir, $"dir{i}");
         }
 
-        using var watcher = new CertificatePathWatcher(
-            rootDir,
-            logger,
-            _ => NoChangeFileProvider.Instance
+        using var watcher = new CertificatePathWatcher(rootDir, logger, _ =>
+            NoChangeFileProvider.Instance
         );
 
         var certificateConfigs = new CertificateConfig[fileCount];
@@ -247,10 +243,8 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(
-            dir,
-            logger,
-            _ => NoChangeFileProvider.Instance
+        using var watcher = new CertificatePathWatcher(dir, logger, _ =>
+            NoChangeFileProvider.Instance
         );
 
         var certificateConfig = new CertificateConfig { Path = filePath };
@@ -282,10 +276,8 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(
-            dir,
-            logger,
-            _ => NoChangeFileProvider.Instance
+        using var watcher = new CertificatePathWatcher(dir, logger, _ =>
+            NoChangeFileProvider.Instance
         );
 
         var certificateConfig1 = new CertificateConfig { Path = filePath };
@@ -320,10 +312,8 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(
-            dir,
-            logger,
-            _ => NoChangeFileProvider.Instance
+        using var watcher = new CertificatePathWatcher(dir, logger, _ =>
+            NoChangeFileProvider.Instance
         );
 
         var certificateConfig = new CertificateConfig { Path = filePath };
@@ -418,10 +408,8 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(
-            dir,
-            logger,
-            _ => NoChangeFileProvider.Instance
+        using var watcher = new CertificatePathWatcher(dir, logger, _ =>
+            NoChangeFileProvider.Instance
         );
 
         var changeToken = watcher.GetChangeToken();

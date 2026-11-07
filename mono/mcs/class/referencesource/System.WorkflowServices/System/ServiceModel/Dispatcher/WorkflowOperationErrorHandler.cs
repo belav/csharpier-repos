@@ -9,9 +9,7 @@ namespace System.ServiceModel.Dispatcher
     class WorkflowOperationErrorHandler : DurableErrorHandler
     {
         public WorkflowOperationErrorHandler(bool includeDebugInfo)
-            : base(includeDebugInfo)
-        {
-        }
+            : base(includeDebugInfo) { }
 
         public static Exception CreateUnhandledException(Exception innerException)
         {
@@ -35,10 +33,7 @@ namespace System.ServiceModel.Dispatcher
         class WorkflowOperationUnhandledException : Exception
         {
             public WorkflowOperationUnhandledException(Exception innerException)
-                : base(SR2.GetString(SR2.WorkflowOperationUnhandledException), innerException)
-            {
-
-            }
+                : base(SR2.GetString(SR2.WorkflowOperationUnhandledException), innerException) { }
         }
     }
 }

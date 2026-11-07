@@ -33,7 +33,10 @@ namespace Microsoft.Extensions.Http
                     // Don't overwrite factory if one is already set.
                     httpClientHandler.MeterFactory ??= _meterFactory;
                 }
-                else if (!OperatingSystem.IsBrowser() && builder.PrimaryHandler is SocketsHttpHandler socketsHttpHandler)
+                else if (
+                    !OperatingSystem.IsBrowser()
+                    && builder.PrimaryHandler is SocketsHttpHandler socketsHttpHandler
+                )
                 {
                     // Don't overwrite factory if one is already set.
                     socketsHttpHandler.MeterFactory ??= _meterFactory;

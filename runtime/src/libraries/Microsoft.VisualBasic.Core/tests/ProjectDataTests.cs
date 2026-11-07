@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.RemoteExecutor;
 using System;
+using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
 namespace Microsoft.VisualBasic.CompilerServices.Tests
@@ -12,7 +12,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [Fact]
         public void CreateProjectError()
         {
-            _ = Assert.Throws<ArgumentException>(() => ProjectData.CreateProjectError(0)).ToString();
+            _ = Assert
+                .Throws<ArgumentException>(() => ProjectData.CreateProjectError(0))
+                .ToString();
             _ = Assert.IsType<Exception>(ProjectData.CreateProjectError(1)).ToString();
             _ = Assert.IsType<OutOfMemoryException>(ProjectData.CreateProjectError(7)).ToString();
             _ = Assert.IsType<Exception>(ProjectData.CreateProjectError(32768)).ToString();
@@ -51,14 +53,17 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void EndApp()
         {
-            RemoteExecutor.Invoke(
-                new Action(() =>
-                {
-                    // See FileSystemTests.CloseAllFiles() for a test that EndApp() closes open files.
-                    ProjectData.EndApp();
-                    throw new Exception(); // Shouldn't reach here.
-                }),
-                new RemoteInvokeOptions() { ExpectedExitCode = 0 }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    new Action(() =>
+                    {
+                        // See FileSystemTests.CloseAllFiles() for a test that EndApp() closes open files.
+                        ProjectData.EndApp();
+                        throw new Exception(); // Shouldn't reach here.
+                    }),
+                    new RemoteInvokeOptions() { ExpectedExitCode = 0 }
+                )
+                .Dispose();
         }
     }
 }

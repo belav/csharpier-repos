@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-
 #if ASPNETWEBAPI
 using System.Web.Http.Controllers;
 using System.Web.Http.Properties;
@@ -54,8 +53,12 @@ namespace System.Web.Mvc.Routing
         /// <param name="targetIsAction">
         /// A value indicating whether the route is configured at the action or controller level.
         /// </param>
-        public DirectRouteFactoryContext(string prefix, IReadOnlyCollection<HttpActionDescriptor> actions,
-            IInlineConstraintResolver inlineConstraintResolver, bool targetIsAction)
+        public DirectRouteFactoryContext(
+            string prefix,
+            IReadOnlyCollection<HttpActionDescriptor> actions,
+            IInlineConstraintResolver inlineConstraintResolver,
+            bool targetIsAction
+        )
 #else
         /// <summary>Initializes a new instance of the <see cref="DirectRouteFactoryContext"/></summary>
         /// <param name="areaPrefix">The route prefix, if any, defined by the area.</param>
@@ -65,9 +68,13 @@ namespace System.Web.Mvc.Routing
         /// <param name="targetIsAction">
         /// A value indicating whether the route is configured at the action or controller level.
         /// </param>
-        public DirectRouteFactoryContext(string areaPrefix, string controllerPrefix,
-            IReadOnlyCollection<ActionDescriptor> actions, IInlineConstraintResolver inlineConstraintResolver,
-            bool targetIsAction)
+        public DirectRouteFactoryContext(
+            string areaPrefix,
+            string controllerPrefix,
+            IReadOnlyCollection<ActionDescriptor> actions,
+            IInlineConstraintResolver inlineConstraintResolver,
+            bool targetIsAction
+        )
 #endif
         {
             if (actions == null)
@@ -170,14 +177,21 @@ namespace System.Web.Mvc.Routing
         /// The inline constraint resolver to use, if any; otherwise, <see langword="null"/>.
         /// </param>
         /// <returns>A route builder that can build a route matching this context.</returns>
-        public IDirectRouteBuilder CreateBuilder(string template, IInlineConstraintResolver constraintResolver)
+        public IDirectRouteBuilder CreateBuilder(
+            string template,
+            IInlineConstraintResolver constraintResolver
+        )
         {
             DirectRouteBuilder builder = new DirectRouteBuilder(_actions, _targetIsAction);
 
 #if ASPNETWEBAPI
             string prefixedTemplate = BuildRouteTemplate(_prefix, template);
 #else
-            string prefixedTemplate = BuildRouteTemplate(_areaPrefix, _controllerPrefix, template ?? String.Empty);
+            string prefixedTemplate = BuildRouteTemplate(
+                _areaPrefix,
+                _controllerPrefix,
+                template ?? String.Empty
+            );
 #endif
             ValidateTemplate(prefixedTemplate);
 
@@ -186,8 +200,12 @@ namespace System.Web.Mvc.Routing
                 TRouteDictionary defaults = new TRouteDictionary();
                 TRouteDictionary constraints = new TRouteDictionary();
 
-                string detokenizedTemplate = InlineRouteTemplateParser.ParseRouteTemplate(prefixedTemplate, defaults,
-                    constraints, constraintResolver);
+                string detokenizedTemplate = InlineRouteTemplateParser.ParseRouteTemplate(
+                    prefixedTemplate,
+                    defaults,
+                    constraints,
+                    constraintResolver
+                );
                 TParsedRoute parsedRoute = RouteParser.Parse(detokenizedTemplate);
                 decimal precedence = RoutePrecedence.Compute(parsedRoute, constraints);
 
@@ -276,10 +294,18 @@ namespace System.Web.Mvc.Routing
             if (template != null && template.StartsWith("/", StringComparison.Ordinal))
             {
 #if ASPNETWEBAPI
-                string errorMessage = Error.Format(SRResources.AttributeRoutes_InvalidTemplate, template, _actionName);
+                string errorMessage = Error.Format(
+                    SRResources.AttributeRoutes_InvalidTemplate,
+                    template,
+                    _actionName
+                );
 #else
-                string errorMessage = Error.Format(MvcResources.RouteTemplate_CannotStart_WithForwardSlash, template,
-                    _actionName, _controllerName);
+                string errorMessage = Error.Format(
+                    MvcResources.RouteTemplate_CannotStart_WithForwardSlash,
+                    template,
+                    _actionName,
+                    _controllerName
+                );
 #endif
                 throw new InvalidOperationException(errorMessage);
             }

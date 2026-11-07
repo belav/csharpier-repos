@@ -1,14 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="SocketException.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
     using System.ComponentModel;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     /// <devdoc>
     ///    <para>
@@ -16,34 +17,40 @@ namespace System.Net.Sockets {
     ///    </para>
     /// </devdoc>
     [Serializable]
-    public class SocketException : Win32Exception {
-
+    public class SocketException : Win32Exception
+    {
         [NonSerialized]
         private EndPoint m_EndPoint;
-    
-#if MONO
-        [System.Runtime.CompilerServices.MethodImplAttribute (System.Runtime.CompilerServices.MethodImplOptions.InternalCall)]
-        static extern int WSAGetLastError_icall ();
-        
-        public SocketException () : base (WSAGetLastError_icall ())
-        {
-        }
 
-        internal SocketException (int error, string message) : base (error, message)
-        {
-        }
+#if MONO
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.InternalCall
+        )]
+        static extern int WSAGetLastError_icall();
+
+        public SocketException()
+            : base(WSAGetLastError_icall()) { }
+
+        internal SocketException(int error, string message)
+            : base(error, message) { }
 #else
         /// <devdoc>
         ///    <para>
         ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the default error code.
         ///    </para>
         /// </devdoc>
-        public SocketException() : base(Marshal.GetLastWin32Error()) {
-            GlobalLog.Print("SocketException::.ctor() " + NativeErrorCode.ToString() + ":" + Message);
+        public SocketException()
+            : base(Marshal.GetLastWin32Error())
+        {
+            GlobalLog.Print(
+                "SocketException::.ctor() " + NativeErrorCode.ToString() + ":" + Message
+            );
         }
 #endif
-        
-        internal SocketException(EndPoint endPoint) : base(Marshal.GetLastWin32Error()) {
+
+        internal SocketException(EndPoint endPoint)
+            : base(Marshal.GetLastWin32Error())
+        {
             m_EndPoint = endPoint;
         }
 
@@ -52,11 +59,17 @@ namespace System.Net.Sockets {
         ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code.
         ///    </para>
         /// </devdoc>
-        public SocketException(int errorCode) : base(errorCode) {
-            GlobalLog.Print("SocketException::.ctor(int) " + NativeErrorCode.ToString() + ":" + Message);
+        public SocketException(int errorCode)
+            : base(errorCode)
+        {
+            GlobalLog.Print(
+                "SocketException::.ctor(int) " + NativeErrorCode.ToString() + ":" + Message
+            );
         }
 
-        internal SocketException(int errorCode, EndPoint endPoint) : base(errorCode) {
+        internal SocketException(int errorCode, EndPoint endPoint)
+            : base(errorCode)
+        {
             m_EndPoint = endPoint;
         }
 
@@ -65,51 +78,55 @@ namespace System.Net.Sockets {
         ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError.
         ///    </para>
         /// </devdoc>
-        internal SocketException(SocketError socketError) : base((int)socketError) {
-        }
+        internal SocketException(SocketError socketError)
+            : base((int)socketError) { }
 
-        protected SocketException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext) {
-            GlobalLog.Print("SocketException::.ctor(serialized) " + NativeErrorCode.ToString() + ":" + Message);
+        protected SocketException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext)
+        {
+            GlobalLog.Print(
+                "SocketException::.ctor(serialized) " + NativeErrorCode.ToString() + ":" + Message
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int ErrorCode {
+        public override int ErrorCode
+        {
             //
             // the base class returns the HResult with this property
             // we need the Win32 Error Code, hence the override.
             //
-            get {
-                return NativeErrorCode;
-            }
+            get { return NativeErrorCode; }
         }
 
-        public override string Message {
-            get {
+        public override string Message
+        {
+            get
+            {
                 // If not null add EndPoint.ToString() to end of base Message
-                if (m_EndPoint == null) {
+                if (m_EndPoint == null)
+                {
                     return base.Message;
-                } else {
+                }
+                else
+                {
                     return base.Message + " " + m_EndPoint.ToString();
                 }
             }
         }
 
-
-        public SocketError SocketErrorCode {
+        public SocketError SocketErrorCode
+        {
             //
             // the base class returns the HResult with this property
             // we need the Win32 Error Code, hence the override.
             //
-            get {
-                return (SocketError)NativeErrorCode;
-            }
+            get { return (SocketError)NativeErrorCode; }
         }
-
-
     }; // class SocketException
-    
-
 } // namespace System.Net

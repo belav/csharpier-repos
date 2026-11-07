@@ -13,12 +13,16 @@ namespace System.Web.Http.ValueProviders.Providers
 {
     public class RouteDataValueProviderFactoryTest
     {
-        private readonly RouteDataValueProviderFactory _factory = new RouteDataValueProviderFactory();
+        private readonly RouteDataValueProviderFactory _factory =
+            new RouteDataValueProviderFactory();
 
         [Fact]
         public void GetValueProvider_WhenActionContextParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => _factory.GetValueProvider(actionContext: null), "actionContext");
+            Assert.ThrowsArgumentNull(
+                () => _factory.GetValueProvider(actionContext: null),
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -26,7 +30,11 @@ namespace System.Web.Http.ValueProviders.Providers
         {
             var routeData = new Mock<IHttpRouteData>();
             routeData.Setup(r => r.Values).Returns(() => new Dictionary<string, object>());
-            var controllerContext = new HttpControllerContext() { Request = new HttpRequestMessage(), RouteData = routeData.Object };
+            var controllerContext = new HttpControllerContext()
+            {
+                Request = new HttpRequestMessage(),
+                RouteData = routeData.Object,
+            };
             var context = new HttpActionContext() { ControllerContext = controllerContext };
 
             IValueProvider result = _factory.GetValueProvider(context);

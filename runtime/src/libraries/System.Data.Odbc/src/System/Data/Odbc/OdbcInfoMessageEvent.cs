@@ -28,7 +28,10 @@ namespace System.Data.Odbc
                 StringBuilder builder = new StringBuilder();
                 foreach (OdbcError error in Errors)
                 {
-                    if (0 < builder.Length) { builder.Append(Environment.NewLine); }
+                    if (0 < builder.Length)
+                    {
+                        builder.Append(Environment.NewLine);
+                    }
                     builder.Append(error.Message);
                 }
                 return builder.ToString();

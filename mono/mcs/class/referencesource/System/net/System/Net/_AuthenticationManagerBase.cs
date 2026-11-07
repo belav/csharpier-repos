@@ -6,19 +6,19 @@
 
 namespace System.Net
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Net.Configuration;
     using System.Reflection;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System;
     using System.Threading;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
 
     internal abstract class AuthenticationManagerBase : IAuthenticationManager
     {
@@ -30,14 +30,8 @@ namespace System.Net
 
         public ICredentialPolicy CredentialPolicy
         {
-            get
-            {
-                return s_ICredentialPolicy;
-            }
-            set
-            {
-                s_ICredentialPolicy = value;
-            }
+            get { return s_ICredentialPolicy; }
+            set { s_ICredentialPolicy = value; }
         }
 
         public virtual void EnsureConfigLoaded()
@@ -49,6 +43,7 @@ namespace System.Net
         {
             get { return m_SpnDictionary; }
         }
+
         //
         // This will give access to some internal methods
         //
@@ -57,13 +52,15 @@ namespace System.Net
             get { return m_SpnDictionary; }
         }
 
-        [SuppressMessage("Microsoft.Concurrency", "CA8001", Justification = "Reviewed for thread-safety.")]
+        [SuppressMessage(
+            "Microsoft.Concurrency",
+            "CA8001",
+            Justification = "Reviewed for thread-safety."
+        )]
         public bool OSSupportsExtendedProtection
         {
-
             get
             {
-
                 if (s_OSSupportsExtendedProtection == TriState.Unspecified)
                 {
                     if (ComNetOS.IsWin7orLater)
@@ -74,8 +71,8 @@ namespace System.Net
                     {
                         if (SspSupportsExtendedProtection)
                         {
-                            // EP is considered supported only if both SSPs and http.sys support CBT/EP. 
-                            // We don't support scenarios where e.g. only SSPs support CBT. In such cases 
+                            // EP is considered supported only if both SSPs and http.sys support CBT/EP.
+                            // We don't support scenarios where e.g. only SSPs support CBT. In such cases
                             // the customer needs to patch also http.sys (even if he may not use it).
                             if (UnsafeNclNativeMethods.HttpApi.ExtendedProtectionSupported)
                             {
@@ -97,13 +94,15 @@ namespace System.Net
             }
         }
 
-        [SuppressMessage("Microsoft.Concurrency", "CA8001", Justification = "Reviewed for thread-safety.")]
+        [SuppressMessage(
+            "Microsoft.Concurrency",
+            "CA8001",
+            Justification = "Reviewed for thread-safety."
+        )]
         public bool SspSupportsExtendedProtection
         {
-
             get
             {
-
                 if (s_SspSupportsExtendedProtection == TriState.Unspecified)
                 {
                     if (ComNetOS.IsWin7orLater)
@@ -112,20 +111,31 @@ namespace System.Net
                     }
                     else
                     {
-                        // Perform a loopback NTLM authentication to determine whether the underlying OS supports 
+                        // Perform a loopback NTLM authentication to determine whether the underlying OS supports
                         // extended protection
-                        ContextFlags clientFlags = ContextFlags.Connection | ContextFlags.InitIdentify;
+                        ContextFlags clientFlags =
+                            ContextFlags.Connection | ContextFlags.InitIdentify;
 
-                        NTAuthentication client = new NTAuthentication(false, NtlmClient.AuthType,
-                            SystemNetworkCredential.defaultCredential, "http/localhost", clientFlags, null);
+                        NTAuthentication client = new NTAuthentication(
+                            false,
+                            NtlmClient.AuthType,
+                            SystemNetworkCredential.defaultCredential,
+                            "http/localhost",
+                            clientFlags,
+                            null
+                        );
                         try
                         {
-
-                            NTAuthentication server = new NTAuthentication(true, NtlmClient.AuthType,
-                                SystemNetworkCredential.defaultCredential, null, ContextFlags.Connection, null);
+                            NTAuthentication server = new NTAuthentication(
+                                true,
+                                NtlmClient.AuthType,
+                                SystemNetworkCredential.defaultCredential,
+                                null,
+                                ContextFlags.Connection,
+                                null
+                            );
                             try
                             {
-
                                 SecurityStatus status;
                                 byte[] blob = null;
 
@@ -141,7 +151,11 @@ namespace System.Net
                                 }
                                 else
                                 {
-                                    if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_ssp_dont_support_cbt));
+                                    if (Logging.On)
+                                        Logging.PrintWarning(
+                                            Logging.Web,
+                                            SR.GetString(SR.net_ssp_dont_support_cbt)
+                                        );
                                     s_SspSupportsExtendedProtection = TriState.False;
                                 }
                             }
@@ -165,7 +179,11 @@ namespace System.Net
         ///    <para>Call each registered authentication module to determine the first module that
         ///       can respond to the authentication request.</para>
         /// </devdoc>
-        public abstract Authorization Authenticate(string challenge, WebRequest request, ICredentials credentials);
+        public abstract Authorization Authenticate(
+            string challenge,
+            WebRequest request,
+            ICredentials credentials
+        );
 
         // These four authentication modules require a Channel Binding Token to be able to preauthenticate over https.
         // After a successful authentication, they will cache the CBT used on the ServicePoint.  In order to PreAuthenticate,
@@ -173,10 +191,16 @@ namespace System.Net
         // without a cached CBT
 #if DEBUG
         // This method is only called as part of an assert
-        protected static bool ModuleRequiresChannelBinding(IAuthenticationModule authenticationModule)
+        protected static bool ModuleRequiresChannelBinding(
+            IAuthenticationModule authenticationModule
+        )
         {
-            return (authenticationModule is NtlmClient || authenticationModule is KerberosClient ||
-                    authenticationModule is NegotiateClient || authenticationModule is DigestClient);
+            return (
+                authenticationModule is NtlmClient
+                || authenticationModule is KerberosClient
+                || authenticationModule is NegotiateClient
+                || authenticationModule is DigestClient
+            );
         }
 #endif
 
@@ -194,6 +218,7 @@ namespace System.Net
         ///    <para>Unregisters authentication modules for an authentication scheme.</para>
         /// </devdoc>
         public abstract void Unregister(IAuthenticationModule authenticationModule);
+
         /// <devdoc>
         ///    <para>Unregisters authentication modules for an authentication scheme.</para>
         /// </devdoc>
@@ -204,10 +229,7 @@ namespace System.Net
         ///       Returns a list of registered authentication modules.
         ///    </para>
         /// </devdoc>
-        public abstract IEnumerator RegisteredModules
-        {
-            get;
-        }
+        public abstract IEnumerator RegisteredModules { get; }
 
         /// <devdoc>
         ///    <para>
@@ -218,7 +240,11 @@ namespace System.Net
         // generating that response
         // This association is used for deciding which module to invoke
         // for preauthentication purposes
-        public abstract void BindModule(Uri uri, Authorization response, IAuthenticationModule module);
+        public abstract void BindModule(
+            Uri uri,
+            Authorization response,
+            IAuthenticationModule module
+        );
 
         // This function returns a prefix of the given absolute Uri
         // which will be used for associating authentication information
@@ -227,8 +253,10 @@ namespace System.Net
         // notion of "protection realm"
         protected static string generalize(Uri location)
         {
-            string completeUri = location.GetComponents(UriComponents.AbsoluteUri
-                & ~(UriComponents.Query | UriComponents.Fragment), UriFormat.UriEscaped);
+            string completeUri = location.GetComponents(
+                UriComponents.AbsoluteUri & ~(UriComponents.Query | UriComponents.Fragment),
+                UriFormat.UriEscaped
+            );
             int lastFwdSlash = completeUri.LastIndexOf('/');
             if (lastFwdSlash < 0)
             {
@@ -237,5 +265,4 @@ namespace System.Net
             return completeUri.Substring(0, lastFwdSlash + 1);
         }
     }; // class AuthenticationManagerBase
-
 } // namespace System.Net

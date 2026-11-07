@@ -1,57 +1,63 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlPhoneCallAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
-using System.Globalization;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * WmlPhoneCallAdapter class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlPhoneCallAdapter.uex' path='docs/doc[@for="WmlPhoneCallAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlPhoneCallAdapter : WmlControlAdapter
     {
         /// <include file='doc\WmlPhoneCallAdapter.uex' path='docs/doc[@for="WmlPhoneCallAdapter.Control"]/*' />
         protected new PhoneCall Control
         {
-            get
-            {
-                return (PhoneCall)base.Control;
-            }
+            get { return (PhoneCall)base.Control; }
         }
 
         /// <include file='doc\WmlPhoneCallAdapter.uex' path='docs/doc[@for="WmlPhoneCallAdapter.Render"]/*' />
         public override void Render(WmlMobileTextWriter writer)
         {
-            String text, url, phoneNumber;
+            String text,
+                url,
+                phoneNumber;
             String controlText = Control.Text;
 
             // Always strip off optional separators for PhoneNumber before it
             // is added in markup.
 
             String originalNumber = Control.PhoneNumber;
-            char[] plainNumber = new char[originalNumber.Length];  // allocate enough buffer size
+            char[] plainNumber = new char[originalNumber.Length]; // allocate enough buffer size
 
             // Loop to strip out optional separators
             int sizeOfPlainNumber = 0;
@@ -71,9 +77,12 @@ namespace System.Web.UI.MobileControls.Adapters
             //
             if (!Device.CanInitiateVoiceCall)
             {
-                text = String.Format(CultureInfo.InvariantCulture, Control.AlternateFormat,
-                                     controlText,
-                                     originalNumber);
+                text = String.Format(
+                    CultureInfo.InvariantCulture,
+                    Control.AlternateFormat,
+                    controlText,
+                    originalNumber
+                );
                 url = Control.AlternateUrl;
             }
             else
@@ -82,15 +91,17 @@ namespace System.Web.UI.MobileControls.Adapters
                 // showing as text so it can be selected.  If it is not
                 // formatted in the text yet, append it to the end of the
                 // text.
-                if(Device.RequiresPhoneNumbersAsPlainText)
+                if (Device.RequiresPhoneNumbersAsPlainText)
                 {
                     text = controlText + " " + phoneNumber;
                     url = String.Empty;
                 }
                 else
                 {
-                    text = (controlText == null || controlText.Length > 0) ?
-                                controlText : originalNumber;
+                    text =
+                        (controlText == null || controlText.Length > 0)
+                            ? controlText
+                            : originalNumber;
                     url = "wtai://wp/mc;" + phoneNumber;
                 }
             }
@@ -130,7 +141,5 @@ namespace System.Web.UI.MobileControls.Adapters
             }
             writer.ExitStyle(Style);
         }
-
     }
-
 }

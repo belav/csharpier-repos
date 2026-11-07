@@ -17,7 +17,11 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly EcmaModule _module;
         private readonly PropertyDefinitionHandle _handle;
 
-        internal EcmaProperty(RoInstantiationProviderType declaringType, PropertyDefinitionHandle handle, Type reflectedType)
+        internal EcmaProperty(
+            RoInstantiationProviderType declaringType,
+            PropertyDefinitionHandle handle,
+            Type reflectedType
+        )
             : base(declaringType, reflectedType)
         {
             Debug.Assert(!handle.IsNil);
@@ -27,12 +31,15 @@ namespace System.Reflection.TypeLoading.Ecma
 
             _handle = handle;
             _module = (EcmaModule)(declaringType.Module);
-            _neverAccessThisExceptThroughPropertyDefinitionProperty = handle.GetPropertyDefinition(Reader);
+            _neverAccessThisExceptThroughPropertyDefinitionProperty = handle.GetPropertyDefinition(
+                Reader
+            );
         }
 
         internal sealed override RoModule GetRoModule() => _module;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => PropertyDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            PropertyDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
 
         public sealed override int MetadataToken => _handle.GetToken();
 
@@ -53,21 +60,30 @@ namespace System.Reflection.TypeLoading.Ecma
             return true;
         }
 
-        public sealed override int GetHashCode() => _handle.GetHashCode() ^ DeclaringType.GetHashCode();
+        public sealed override int GetHashCode() =>
+            _handle.GetHashCode() ^ DeclaringType.GetHashCode();
 
         protected sealed override string ComputeName() => PropertyDefinition.Name.GetString(Reader);
-        protected sealed override PropertyAttributes ComputeAttributes() => PropertyDefinition.Attributes;
-        protected sealed override Type ComputePropertyType() => PropertyDefinition.DecodeSignature(_module, TypeContext).ReturnType;
 
-        protected sealed override object? ComputeRawConstantValue() => PropertyDefinition.GetDefaultValue().ToRawObject(Reader);
+        protected sealed override PropertyAttributes ComputeAttributes() =>
+            PropertyDefinition.Attributes;
+
+        protected sealed override Type ComputePropertyType() =>
+            PropertyDefinition.DecodeSignature(_module, TypeContext).ReturnType;
+
+        protected sealed override object? ComputeRawConstantValue() =>
+            PropertyDefinition.GetDefaultValue().ToRawObject(Reader);
 
         public sealed override Type GetModifiedPropertyType()
         {
             return ModifiedType;
         }
 
-        public sealed override Type[] GetOptionalCustomModifiers() => ModifiedType.GetOptionalCustomModifiers();
-        public sealed override Type[] GetRequiredCustomModifiers() => ModifiedType.GetRequiredCustomModifiers();
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            ModifiedType.GetOptionalCustomModifiers();
+
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            ModifiedType.GetRequiredCustomModifiers();
 
         public sealed override string ToString()
         {
@@ -76,8 +92,12 @@ namespace System.Reflection.TypeLoading.Ecma
                 return disposedString;
 
             StringBuilder sb = new StringBuilder();
-            ISignatureTypeProvider<string, TypeContext> typeProvider = EcmaSignatureTypeProviderForToString.Instance;
-            MethodSignature<string> sig = PropertyDefinition.DecodeSignature(typeProvider, TypeContext);
+            ISignatureTypeProvider<string, TypeContext> typeProvider =
+                EcmaSignatureTypeProviderForToString.Instance;
+            MethodSignature<string> sig = PropertyDefinition.DecodeSignature(
+                typeProvider,
+                TypeContext
+            );
             sb.Append(sig.ReturnType);
             sb.Append(' ');
             sb.Append(Name);
@@ -95,14 +115,29 @@ namespace System.Reflection.TypeLoading.Ecma
             return sb.ToString();
         }
 
-        protected sealed override RoMethod? ComputeGetterMethod() => PropertyDefinition.GetAccessors().Getter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
-        protected sealed override RoMethod? ComputeSetterMethod() => PropertyDefinition.GetAccessors().Setter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+        protected sealed override RoMethod? ComputeGetterMethod() =>
+            PropertyDefinition
+                .GetAccessors()
+                .Getter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+
+        protected sealed override RoMethod? ComputeSetterMethod() =>
+            PropertyDefinition
+                .GetAccessors()
+                .Setter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => GetRoModule().Loader;
 
-        private ref readonly PropertyDefinition PropertyDefinition { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughPropertyDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly PropertyDefinition PropertyDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughPropertyDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly PropertyDefinition _neverAccessThisExceptThroughPropertyDefinitionProperty;
     }
 }

@@ -27,11 +27,18 @@ namespace System.ServiceModel.Channels
             this.hosts = hosts;
             this.bindingMonitors = new List<MsmqBindingMonitor>();
             this.addressing = addressing;
-            this.filter = new HostedBindingFilter(HostingEnvironment.ApplicationVirtualPath, addressing);
+            this.filter = new HostedBindingFilter(
+                HostingEnvironment.ApplicationVirtualPath,
+                addressing
+            );
 
             foreach (string host in this.hosts)
             {
-                MsmqBindingMonitor monitor = new MsmqBindingMonitor(host, TimeSpan.FromMinutes(5), true);
+                MsmqBindingMonitor monitor = new MsmqBindingMonitor(
+                    host,
+                    TimeSpan.FromMinutes(5),
+                    true
+                );
                 monitor.AddFilter(this.filter);
                 monitor.Open();
                 this.bindingMonitors.Add(monitor);
@@ -46,7 +53,10 @@ namespace System.ServiceModel.Channels
                 monitor.WaitForFirstRoundComplete();
             }
 
-            string absoluteVirtualPath = VirtualPathUtility.ToAbsolute(virtualPath, HostingEnvironment.ApplicationVirtualPath);
+            string absoluteVirtualPath = VirtualPathUtility.ToAbsolute(
+                virtualPath,
+                HostingEnvironment.ApplicationVirtualPath
+            );
 
             List<Uri> baseAddresses = new List<Uri>(this.hosts.Length);
             string queueName = absoluteVirtualPath.Substring(1);
@@ -109,7 +119,9 @@ namespace System.ServiceModel.Channels
 
         class HostedBindingFilter : MsmqBindingFilter
         {
-            Dictionary<string, string> privateMatches = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, string> privateMatches = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
             object thisLock = new object();
 
             public HostedBindingFilter(string path, MsmqUri.IAddressTranslator addressing)
@@ -121,7 +133,9 @@ namespace System.ServiceModel.Channels
             public override object MatchFound(string host, string name, bool isPrivate)
             {
                 string processedVirtualPath = CreateRelativeVirtualPath(host, name, isPrivate);
-                string relativeServiceFile = ServiceHostingEnvironment.NormalizeVirtualPath(processedVirtualPath);
+                string relativeServiceFile = ServiceHostingEnvironment.NormalizeVirtualPath(
+                    processedVirtualPath
+                );
 
                 // Compute the remainder path:
                 if (isPrivate)
@@ -133,7 +147,7 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                // Start the service on a different thread so we can complete 
+                // Start the service on a different thread so we can complete
                 // initialization
                 if (CheckServiceExists(relativeServiceFile))
                 {
@@ -153,7 +167,12 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public override void MatchLost(string host, string name, bool isPrivate, object callbackState)
+            public override void MatchLost(
+                string host,
+                string name,
+                bool isPrivate,
+                object callbackState
+            )
             {
                 // We don't do anything here - the service will stay alive,
                 // and if the queue ever comes back, then it will begin to
@@ -189,9 +208,15 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    return ((ServiceHostingEnvironment.IsConfigurationBasedService(serviceFile) 
-                             || HostingEnvironmentWrapper.ServiceFileExists(serviceFile)) 
-                             && AspNetEnvironment.Current.IsWithinApp(VirtualPathUtility.ToAbsolute(serviceFile)));
+                    return (
+                        (
+                            ServiceHostingEnvironment.IsConfigurationBasedService(serviceFile)
+                            || HostingEnvironmentWrapper.ServiceFileExists(serviceFile)
+                        )
+                        && AspNetEnvironment.Current.IsWithinApp(
+                            VirtualPathUtility.ToAbsolute(serviceFile)
+                        )
+                    );
                 }
                 catch (ArgumentException ex)
                 {

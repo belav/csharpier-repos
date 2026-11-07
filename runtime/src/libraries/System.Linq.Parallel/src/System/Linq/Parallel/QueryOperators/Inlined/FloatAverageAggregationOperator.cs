@@ -16,15 +16,15 @@ namespace System.Linq.Parallel
     /// <summary>
     /// An inlined average aggregation operator and its enumerator, for floats.
     /// </summary>
-    internal sealed class FloatAverageAggregationOperator : InlinedAggregationOperator<float, Pair<double, long>, float>
+    internal sealed class FloatAverageAggregationOperator
+        : InlinedAggregationOperator<float, Pair<double, long>, float>
     {
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of an average associative operator.
         //
 
-        internal FloatAverageAggregationOperator(IEnumerable<float> child) : base(child)
-        {
-        }
+        internal FloatAverageAggregationOperator(IEnumerable<float> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -40,7 +40,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<Pair<double, long>> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<Pair<double, long>> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Throw an error for empty results.
                 if (!enumerator.MoveNext())
@@ -71,10 +76,18 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<Pair<double, long>, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<float, TKey> source, object? sharedData,
-            CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<float, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new FloatAverageAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
+            return new FloatAverageAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -82,7 +95,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class FloatAverageAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<Pair<double, long>>
+        private sealed class FloatAverageAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<Pair<double, long>>
         {
             private readonly QueryOperatorEnumerator<float, TKey> _source; // The source data.
 
@@ -90,9 +104,12 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal FloatAverageAggregationOperatorEnumerator(QueryOperatorEnumerator<float, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal FloatAverageAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<float, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;
@@ -120,14 +137,12 @@ namespace System.Linq.Parallel
                     {
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
-
                         checked
                         {
                             sum += current;
                             count++;
                         }
-                    }
-                    while (source.MoveNext(ref current, ref keyUnused));
+                    } while (source.MoveNext(ref current, ref keyUnused));
 
                     currentElement = new Pair<double, long>(sum, count);
 

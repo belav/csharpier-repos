@@ -16,7 +16,10 @@ namespace System.Reflection.TypeLoading
             int numCoreTypes = (int)CoreType.NumCoreTypes;
             RoType?[] coreTypes = new RoType[numCoreTypes];
             Exception?[] exceptions = new Exception[numCoreTypes];
-            RoAssembly? coreAssembly = loader.TryGetCoreAssembly(coreAssemblyName, out Exception? e);
+            RoAssembly? coreAssembly = loader.TryGetCoreAssembly(
+                coreAssemblyName,
+                out Exception? e
+            );
             if (coreAssembly == null)
             {
                 // If the core assembly was not found, don't continue.
@@ -26,7 +29,10 @@ namespace System.Reflection.TypeLoading
             {
                 for (int i = 0; i < numCoreTypes; i++)
                 {
-                    ((CoreType)i).GetFullName(out ReadOnlySpan<byte> ns, out ReadOnlySpan<byte> name);
+                    ((CoreType)i).GetFullName(
+                        out ReadOnlySpan<byte> ns,
+                        out ReadOnlySpan<byte> name
+                    );
                     RoType? type = coreAssembly.GetTypeCore(ns, name, ignoreCase: false, out e);
                     coreTypes[i] = type;
                     if (type == null)
@@ -43,6 +49,7 @@ namespace System.Reflection.TypeLoading
         /// Returns null if the specific core type did not exist or could not be loaded. Call GetException(coreType) to get detailed info.
         /// </summary>
         public RoType? this[CoreType coreType] => _coreTypes[(int)coreType];
+
         public Exception? GetException(CoreType coreType) => _exceptions[(int)coreType];
     }
 }

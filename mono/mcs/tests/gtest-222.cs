@@ -1,16 +1,17 @@
-interface IFoo {}
-interface IBar : IFoo {}
+interface IFoo { }
 
-class Mona<T> where T : IFoo {}
+interface IBar : IFoo { }
+
+class Mona<T>
+    where T : IFoo { }
 
 class Test
 {
-        public Mona<K> GetMona<K> () where K : IBar
-        {
-                return new Mona<K> ();
-        }
+    public Mona<K> GetMona<K>()
+        where K : IBar
+    {
+        return new Mona<K>();
+    }
 
-        public static void Main () {}
+    public static void Main() { }
 }
-
-

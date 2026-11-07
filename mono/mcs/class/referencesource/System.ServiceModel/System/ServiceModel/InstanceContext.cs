@@ -10,14 +10,16 @@ namespace System.ServiceModel
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.ServiceModel.Diagnostics.Application;
 
     public sealed class InstanceContext : CommunicationObject, IExtensibleObject<InstanceContext>
     {
-        internal static InstanceContextEmptyCallback NotifyEmptyCallback = new InstanceContextEmptyCallback(InstanceContext.NotifyEmpty);
-        internal static InstanceContextIdleCallback NotifyIdleCallback = new InstanceContextIdleCallback(InstanceContext.NotifyIdle);
+        internal static InstanceContextEmptyCallback NotifyEmptyCallback =
+            new InstanceContextEmptyCallback(InstanceContext.NotifyEmpty);
+        internal static InstanceContextIdleCallback NotifyIdleCallback =
+            new InstanceContextIdleCallback(InstanceContext.NotifyIdle);
 
         bool autoClose;
         InstanceBehavior behavior;
@@ -37,21 +39,20 @@ namespace System.ServiceModel
         bool isUserCreated;
 
         public InstanceContext(object implementation)
-            : this(null, implementation)
-        {
-        }
+            : this(null, implementation) { }
 
         public InstanceContext(ServiceHostBase host, object implementation)
-            : this(host, implementation, true)
-        {
-        }
+            : this(host, implementation, true) { }
 
         internal InstanceContext(ServiceHostBase host, object implementation, bool isUserCreated)
-            : this(host, implementation, true, isUserCreated)
-        {
-        }
+            : this(host, implementation, true, isUserCreated) { }
 
-        internal InstanceContext(ServiceHostBase host, object implementation, bool wellKnown, bool isUserCreated)
+        internal InstanceContext(
+            ServiceHostBase host,
+            object implementation,
+            bool wellKnown,
+            bool isUserCreated
+        )
         {
             this.host = host;
             if (implementation != null)
@@ -65,15 +66,15 @@ namespace System.ServiceModel
         }
 
         public InstanceContext(ServiceHostBase host)
-            : this(host, true)
-        {
-        }
+            : this(host, true) { }
 
         internal InstanceContext(ServiceHostBase host, bool isUserCreated)
         {
             if (host == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("host"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("host")
+                );
             }
 
             this.host = host;
@@ -130,7 +131,12 @@ namespace System.ServiceModel
 
         internal static InstanceContext Current
         {
-            get { return OperationContext.Current != null ? OperationContext.Current.InstanceContext : null; }
+            get
+            {
+                return OperationContext.Current != null
+                    ? OperationContext.Current.InstanceContext
+                    : null;
+            }
         }
 
         protected override TimeSpan DefaultCloseTimeout
@@ -171,7 +177,10 @@ namespace System.ServiceModel
                 lock (this.ThisLock)
                 {
                     if (this.extensions == null)
-                        this.extensions = new ExtensionCollection<InstanceContext>(this, this.ThisLock);
+                        this.extensions = new ExtensionCollection<InstanceContext>(
+                            this,
+                            this.ThisLock
+                        );
                     return this.extensions;
                 }
             }
@@ -179,7 +188,11 @@ namespace System.ServiceModel
 
         internal bool HasTransaction
         {
-            get { return (this.transaction != null) && !object.Equals(this.transaction.Attached, null); }
+            get
+            {
+                return (this.transaction != null)
+                    && !object.Equals(this.transaction.Attached, null);
+            }
         }
 
         public ICollection<IChannel> IncomingChannels
@@ -205,8 +218,12 @@ namespace System.ServiceModel
         {
             get
             {
-                return ((this.behavior != null) &&
-                        InstanceContextProviderBase.IsProviderSingleton(this.behavior.InstanceContextProvider));
+                return (
+                    (this.behavior != null)
+                    && InstanceContextProviderBase.IsProviderSingleton(
+                        this.behavior.InstanceContextProvider
+                    )
+                );
             }
         }
 
@@ -265,7 +282,7 @@ namespace System.ServiceModel
             }
         }
 
-        new internal object ThisLock
+        internal new object ThisLock
         {
             get { return base.ThisLock; }
         }
@@ -316,7 +333,11 @@ namespace System.ServiceModel
             this.Unload();
         }
 
-        internal IAsyncResult BeginCloseInput(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginCloseInput(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channels.BeginCloseInput(timeout, callback, state);
         }
@@ -338,26 +359,34 @@ namespace System.ServiceModel
 
             // CSDMain 265783: Memory Leak on Chat Stress test scenario
             // There's a race condition while on one thread we received a new request from underlying sessionful channel
-            // and on another thread we just aborted the channel. So the channel will be added to the IncomingChannels list of 
+            // and on another thread we just aborted the channel. So the channel will be added to the IncomingChannels list of
             // ServiceChannelManager and never get a chance to be removed.
             if (proxy != null)
             {
                 CommunicationState state = channel.State;
-                if (state == CommunicationState.Closing
+                if (
+                    state == CommunicationState.Closing
                     || state == CommunicationState.Closed
-                    || state == CommunicationState.Faulted)
+                    || state == CommunicationState.Faulted
+                )
                 {
                     this.channels.RemoveChannel(proxy);
                 }
             }
         }
 
-
         void CloseIfNotBusy()
         {
-            if (!(this.State != CommunicationState.Created && this.State != CommunicationState.Opening))
+            if (
+                !(
+                    this.State != CommunicationState.Created
+                    && this.State != CommunicationState.Opening
+                )
+            )
             {
-                Fx.Assert("InstanceContext.CloseIfNotBusy: (this.State != CommunicationState.Created && this.State != CommunicationState.Opening)");
+                Fx.Assert(
+                    "InstanceContext.CloseIfNotBusy: (this.State != CommunicationState.Created && this.State != CommunicationState.Opening)"
+                );
             }
 
             if (this.State != CommunicationState.Opened)
@@ -415,20 +444,25 @@ namespace System.ServiceModel
             {
                 error = new Exception();
                 if (DiagnosticUtility.ShouldTraceInformation)
-                    TraceUtility.TraceEvent(TraceEventType.Information,
-                                                                    TraceCode.TxCompletionStatusAbortedOnSessionClose,
-                                                                    SR.GetString(SR.TraceCodeTxCompletionStatusAbortedOnSessionClose,
-                                                                                    transaction.Attached.TransactionInformation.LocalIdentifier)
-                                                                    );
-
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.TxCompletionStatusAbortedOnSessionClose,
+                        SR.GetString(
+                            SR.TraceCodeTxCompletionStatusAbortedOnSessionClose,
+                            transaction.Attached.TransactionInformation.LocalIdentifier
+                        )
+                    );
             }
             else if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                                                                TraceCode.TxCompletionStatusCompletedForTACOSC,
-                                                                SR.GetString(SR.TraceCodeTxCompletionStatusCompletedForTACOSC,
-                                                                                transaction.Attached.TransactionInformation.LocalIdentifier)
-                                                                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.TxCompletionStatusCompletedForTACOSC,
+                    SR.GetString(
+                        SR.TraceCodeTxCompletionStatusCompletedForTACOSC,
+                        transaction.Attached.TransactionInformation.LocalIdentifier
+                    )
+                );
             }
 
             transaction.CompletePendingTransaction(transaction.Attached, error);
@@ -441,7 +475,10 @@ namespace System.ServiceModel
             {
                 if (this.quotaThrottle == null)
                 {
-                    this.quotaThrottle = new QuotaThrottle(ImmutableDispatchRuntime.GotDynamicInstanceContext, this.ThisLock);
+                    this.quotaThrottle = new QuotaThrottle(
+                        ImmutableDispatchRuntime.GotDynamicInstanceContext,
+                        this.ThisLock
+                    );
                     this.quotaThrottle.Owner = "InstanceContext";
                 }
                 return this.quotaThrottle;
@@ -473,7 +510,9 @@ namespace System.ServiceModel
 
                 if (this.behavior == null)
                 {
-                    Exception error = new InvalidOperationException(SR.GetString(SR.SFxInstanceNotInitialized));
+                    Exception error = new InvalidOperationException(
+                        SR.GetString(SR.SFxInstanceNotInitialized)
+                    );
                     if (message != null)
                     {
                         throw TraceUtility.ThrowHelperError(error, message);
@@ -533,7 +572,11 @@ namespace System.ServiceModel
             instanceContext.CloseIfNotBusy();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult(timeout, callback, state, this);
         }
@@ -543,7 +586,11 @@ namespace System.ServiceModel
             CloseAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -608,7 +655,11 @@ namespace System.ServiceModel
             {
                 object oldUserObject = Interlocked.Exchange(ref this.userObject, newUserObject);
 
-                if ((oldUserObject != null) && (this.host != null) && !Object.Equals(oldUserObject, this.host.DisposableInstance))
+                if (
+                    (oldUserObject != null)
+                    && (this.host != null)
+                    && !Object.Equals(oldUserObject, this.host.DisposableInstance)
+                )
                 {
                     this.behavior.ReleaseInstance(this, oldUserObject);
                 }
@@ -643,12 +694,21 @@ namespace System.ServiceModel
             InstanceContext instanceContext;
             TimeoutHelper timeoutHelper;
 
-            public CloseAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, InstanceContext instanceContext)
+            public CloseAsyncResult(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state,
+                InstanceContext instanceContext
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
                 this.instanceContext = instanceContext;
-                IAsyncResult result = this.instanceContext.channels.BeginClose(this.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(new AsyncCompletion(CloseChannelsCallback)), this);
+                IAsyncResult result = this.instanceContext.channels.BeginClose(
+                    this.timeoutHelper.RemainingTime(),
+                    PrepareAsyncCompletion(new AsyncCompletion(CloseChannelsCallback)),
+                    this
+                );
                 if (result.CompletedSynchronously && CloseChannelsCallback(result))
                 {
                     base.Complete(true);
@@ -662,7 +722,10 @@ namespace System.ServiceModel
 
             bool CloseChannelsCallback(IAsyncResult result)
             {
-                Fx.Assert(object.ReferenceEquals(this, result.AsyncState), "AsyncState should be this");
+                Fx.Assert(
+                    object.ReferenceEquals(this, result.AsyncState),
+                    "AsyncState should be this"
+                );
                 this.instanceContext.channels.EndClose(result);
                 this.instanceContext.Unload();
                 return true;

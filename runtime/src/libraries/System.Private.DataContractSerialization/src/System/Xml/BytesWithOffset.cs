@@ -16,18 +16,12 @@ namespace System.Xml
 
         public byte[] Bytes
         {
-            get
-            {
-                return _bytes;
-            }
+            get { return _bytes; }
         }
 
         public int Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
         }
     }
 }

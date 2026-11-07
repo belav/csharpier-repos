@@ -7,7 +7,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Dsa.Tests
 {
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on Browser/iOS/tvOS/MacCatalyst")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+        "Not supported on Browser/iOS/tvOS/MacCatalyst"
+    )]
     public static class DSAKeyPemTests
     {
         private const string AmbiguousExceptionMarker = "multiple keys";
@@ -20,7 +23,9 @@ namespace System.Security.Cryptography.Dsa.Tests
             using (DSA dsa = DSAFactory.Create())
             {
                 string pem = "pem? what pem? there is no pem here.";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => dsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    dsa.ImportFromPem(pem)
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
@@ -30,7 +35,8 @@ namespace System.Security.Cryptography.Dsa.Tests
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PRIVATE KEY-----
 MIHGAgEAMIGoBgcqhkjOOAQBMIGcAkEA1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWN
 IHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV
@@ -50,7 +56,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN EC PRIVATE KEY-----
 MHcCAQEEIHChLC2xaEXtVv9oz8IaRys/BNfWhRv2NJ8tfVs0UrOKoAoGCCqGSM49
 AwEHoUQDQgAEgQHs5HRkpurXDPaabivT2IaRoyYtIsuk92Ner/JmgKjYoSumHVmS
@@ -75,7 +82,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN CERTIFICATE-----
 MII=
 -----END CERTIFICATE-----
@@ -98,7 +106,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN CERTIFICATE-----
 $$$ BAD PEM
 -----END CERTIFICATE-----
@@ -121,7 +130,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PUBLIC KEY-----
 MIHxMIGoBgcqhkjOOAQBMIGcAkEA1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRn
 QNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV1eFk
@@ -133,7 +143,10 @@ PKRWBQ==
                 dsa.ImportFromPem(pem);
                 DSAParameters dsaParameters = dsa.ExportParameters(false);
 
-                DSAImportExport.AssertKeyEquals(DSATestData.Dsa512Parameters.ToPublic(), dsaParameters);
+                DSAImportExport.AssertKeyEquals(
+                    DSATestData.Dsa512Parameters.ToPublic(),
+                    dsaParameters
+                );
             }
         }
 
@@ -142,7 +155,8 @@ PKRWBQ==
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PRIVATE KEY-----
 MIHGAgEAMIGoBgcqhkjOOAQBMIGcAkEA1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWN
 IHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV
@@ -157,7 +171,9 @@ IHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV
 fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
 55aYKyKwy5i8
 -----END PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => dsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    dsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -167,7 +183,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PUBLIC KEY-----
 MIHxMIGoBgcqhkjOOAQBMIGcAkEA1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRn
 QNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV1eFk
@@ -183,7 +200,9 @@ IHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV
 fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
 55aYKyKwy5i8
 -----END PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => dsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    dsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -193,7 +212,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBIDBLBgkqhkiG9w0BBQ0wPjApBgkqhkiG9w0BBQwwHAQIkM/kCKe6rYsCAggA
 MAwGCCqGSIb3DQIJBQAwEQYFKw4DAgcECBOccveL65bDBIHQiCcCqwxJs93g1+16
@@ -210,7 +230,9 @@ IHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV
 fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
 55aYKyKwy5i8
 -----END PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => dsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    dsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -220,7 +242,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBIDBLBgkqhkiG9w0BBQ0wPjApBgkqhkiG9w0BBQwwHAQIkM/kCKe6rYsCAggA
 MAwGCCqGSIb3DQIJBQAwEQYFKw4DAgcECBOccveL65bDBIHQiCcCqwxJs93g1+16
@@ -230,7 +253,9 @@ MGHbpaaShD6iJfoGMRX0frr0mMCtuOOZkkjBF9pSpkhaH0TDSq1PrVLxcM0/S4Vs
 dVYwfovccu8ktEAwk5XAOo0r+5CCw2lDDw/hbDeO87BToC5Cc5nu3F5LxAUj8Flc
 v8pi3w==
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => dsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    dsa.ImportFromPem(pem)
+                );
                 Assert.Contains(EncryptedExceptionMarker, ae.Message);
             }
         }
@@ -240,7 +265,8 @@ v8pi3w==
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 The below key is for an RSA SPKI
 -----BEGIN PUBLIC KEY-----
 MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALc/WfXui9VeJLf/AprRaoVDyW0lPlQx
@@ -255,7 +281,8 @@ m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBIDBLBgkqhkiG9w0BBQ0wPjApBgkqhkiG9w0BBQwwHAQIkM/kCKe6rYsCAggA
 MAwGCCqGSIb3DQIJBQAwEQYFKw4DAgcECBOccveL65bDBIHQiCcCqwxJs93g1+16
@@ -277,7 +304,8 @@ v8pi3w==
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBLDBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIfcoipdEY/C4CAggA
 MAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAECBBC9heEphj00fB89aP6chSOjBIHQ
@@ -300,7 +328,8 @@ xTL6VO9mx52x6h5WDAQAisMVeMkBoxQUWLANXiw1zSfVbsmB7mDknsRcvD3tcgMs
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBLDBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIfcoipdEY/C4CAggA
 MAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAECBBC9heEphj00fB89aP6chSOjBIHQ
@@ -320,7 +349,8 @@ dVYwfovccu8ktEAwk5XAOo0r+5CCw2lDDw/hbDeO87BToC5Cc5nu3F5LxAUj8Flc
 v8pi3w==
 -----END ENCRYPTED PRIVATE KEY-----";
                 ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    dsa.ImportFromEncryptedPem(pem, "test"u8));
+                    dsa.ImportFromEncryptedPem(pem, "test"u8)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -332,7 +362,8 @@ v8pi3w==
             {
                 string pem = "";
                 ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    dsa.ImportFromEncryptedPem(pem, "test"u8));
+                    dsa.ImportFromEncryptedPem(pem, "test"u8)
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
@@ -344,7 +375,8 @@ v8pi3w==
             {
                 string pem = "";
                 ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    dsa.ImportFromEncryptedPem(pem, (ReadOnlySpan<char>)""));
+                    dsa.ImportFromEncryptedPem(pem, (ReadOnlySpan<char>)"")
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
@@ -354,7 +386,8 @@ v8pi3w==
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PRIVATE KEY-----
 MIHGAgEAMIGoBgcqhkjOOAQBMIGcAkEA1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWN
 IHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQIVAPq19iXV
@@ -363,7 +396,8 @@ fve77OGaTv4qbZwinTYAg86p9yHzmwW6+XBS3vxnpYorBBYCFC49eoTIW2Z4Xh9v
 55aYKyKwy5i8
 -----END PRIVATE KEY-----";
                 ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    dsa.ImportFromEncryptedPem(pem, (ReadOnlySpan<char>)""));
+                    dsa.ImportFromEncryptedPem(pem, (ReadOnlySpan<char>)"")
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }

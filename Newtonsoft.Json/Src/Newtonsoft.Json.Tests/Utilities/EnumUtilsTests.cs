@@ -145,9 +145,21 @@ namespace Newtonsoft.Json.Tests.Utilities
             yield return new object[] { "B", SimpleEnum.B };
             yield return new object[] { "B,B", SimpleEnum.B };
             yield return new object[] { " Red , Blue ", SimpleEnum.Red | SimpleEnum.Blue };
-            yield return new object[] { "Blue,Red,Green", SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green };
-            yield return new object[] { "Blue,Red,Red,Red,Green", SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green };
-            yield return new object[] { "Red,Blue,   Green", SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green };
+            yield return new object[]
+            {
+                "Blue,Red,Green",
+                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green,
+            };
+            yield return new object[]
+            {
+                "Blue,Red,Red,Red,Green",
+                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green,
+            };
+            yield return new object[]
+            {
+                "Red,Blue,   Green",
+                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green,
+            };
             yield return new object[] { "1", SimpleEnum.Red };
             yield return new object[] { " 1 ", SimpleEnum.Red };
             yield return new object[] { "2", SimpleEnum.Blue };
@@ -171,15 +183,40 @@ namespace Newtonsoft.Json.Tests.Utilities
             yield return new object[] { typeof(SimpleEnum), "Red,", typeof(ArgumentException) };
             yield return new object[] { typeof(SimpleEnum), "B,", typeof(ArgumentException) };
             yield return new object[] { typeof(SimpleEnum), " , , ,", typeof(ArgumentException) };
-            yield return new object[] { typeof(SimpleEnum), "Red,Blue,", typeof(ArgumentException) };
-            yield return new object[] { typeof(SimpleEnum), "Red,,Blue", typeof(ArgumentException) };
-            yield return new object[] { typeof(SimpleEnum), "Red,Blue, ", typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(SimpleEnum),
+                "Red,Blue,",
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                typeof(SimpleEnum),
+                "Red,,Blue",
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                typeof(SimpleEnum),
+                "Red,Blue, ",
+                typeof(ArgumentException),
+            };
             yield return new object[] { typeof(SimpleEnum), "Red Blue", typeof(ArgumentException) };
             yield return new object[] { typeof(SimpleEnum), "1,Blue", typeof(ArgumentException) };
             yield return new object[] { typeof(SimpleEnum), "Blue,1", typeof(ArgumentException) };
             yield return new object[] { typeof(SimpleEnum), "Blue, 1", typeof(ArgumentException) };
-            yield return new object[] { typeof(SimpleEnum), "2147483649", typeof(OverflowException) };
-            yield return new object[] { typeof(SimpleEnum), "2147483648", typeof(OverflowException) };
+            yield return new object[]
+            {
+                typeof(SimpleEnum),
+                "2147483649",
+                typeof(OverflowException),
+            };
+            yield return new object[]
+            {
+                typeof(SimpleEnum),
+                "2147483648",
+                typeof(OverflowException),
+            };
         }
 
         // test data from https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
@@ -229,7 +266,11 @@ namespace Newtonsoft.Json.Tests.Utilities
             yield return new object[] { (SimpleEnum)99, null };
             yield return new object[] { (SimpleEnum)0, null };
 
-            yield return new object[] { AttributeTargets.Class | AttributeTargets.Delegate, "Class, Delegate" };
+            yield return new object[]
+            {
+                AttributeTargets.Class | AttributeTargets.Delegate,
+                "Class, Delegate",
+            };
         }
         #endregion
     }
@@ -241,7 +282,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         Green = 3,
         Green_a = 3,
         Green_b = 3,
-        B = 4
+        B = 4,
     }
 
     public enum ByteEnum : byte

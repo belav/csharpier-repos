@@ -4,26 +4,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GlobalMonitoredCharacterCollection : ReadonlyCollection<int>
-{
-}
+public class GlobalMonitoredCharacterCollection : ReadonlyCollection<int> { }
 
 public class ReadonlyCollection<T> : IReadonlyCollection<T>
 {
-	protected List<T> m_items;
-	protected ReadonlyCollection () { m_items = new List<T> (); }
+    protected List<T> m_items;
 
-	IEnumerator<T> IEnumerable<T>.GetEnumerator ()
-	{
-		return m_items.GetEnumerator ();
-	}
+    protected ReadonlyCollection()
+    {
+        m_items = new List<T>();
+    }
 
-	IEnumerator IEnumerable.GetEnumerator ()
-	{
-		return m_items.GetEnumerator ();
-	}
+    IEnumerator<T> IEnumerable<T>.GetEnumerator()
+    {
+        return m_items.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return m_items.GetEnumerator();
+    }
 }
 
-public interface IReadonlyCollection<T> : IEnumerable<T>
-{
-}
+public interface IReadonlyCollection<T> : IEnumerable<T> { }

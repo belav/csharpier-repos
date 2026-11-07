@@ -120,9 +120,8 @@ public class MediaTypeTest
     public void Constructor_NegativeOffset_Throws(int offset)
     {
         // Arrange, Act and Assert
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "offset",
-            () => new MediaType("media", offset, 5)
+        Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+            new MediaType("media", offset, 5)
         );
     }
 

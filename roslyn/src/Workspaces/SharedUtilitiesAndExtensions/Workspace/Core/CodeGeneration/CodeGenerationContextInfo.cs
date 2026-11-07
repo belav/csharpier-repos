@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Context = context;
         }
 
-        public CodeGenerationContextInfo WithContext(CodeGenerationContext value)
-            => WithContextImpl(value);
+        public CodeGenerationContextInfo WithContext(CodeGenerationContext value) =>
+            WithContextImpl(value);
 
         public SyntaxGenerator Generator => GeneratorImpl;
         public CodeGenerationOptions Options => OptionsImpl;

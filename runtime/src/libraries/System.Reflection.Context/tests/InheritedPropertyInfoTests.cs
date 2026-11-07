@@ -12,7 +12,8 @@ namespace System.Reflection.Context.Tests
 {
     public class InheritedPropertyInfoTests
     {
-        private readonly CustomReflectionContext _customReflectionContext = new VirtualPropertyInfoCustomReflectionContext();
+        private readonly CustomReflectionContext _customReflectionContext =
+            new VirtualPropertyInfoCustomReflectionContext();
         private TypeInfo _customTypeInfo;
         private TypeInfo _customTypeInfoToCheckForEquality;
         private PropertyInfo[] _propertyInfos;
@@ -30,7 +31,9 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetCustomAttributes_WithType_ReturnsVirtualAttribute()
         {
-            object[] attributes = _propertyInfos.FirstOrDefault(x => x.Name == "number").GetCustomAttributes(typeof(TestPropertyAttribute), true);
+            object[] attributes = _propertyInfos
+                .FirstOrDefault(x => x.Name == "number")
+                .GetCustomAttributes(typeof(TestPropertyAttribute), true);
             Assert.Single(attributes);
             Assert.IsType<TestPropertyAttribute>(attributes[0]);
         }
@@ -59,14 +62,18 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetHashCode_DifferentObjectSameType_AreEqual()
         {
-            PropertyInfo differentObjectSameType = _customTypeInfoToCheckForEquality.GetProperty("number");
+            PropertyInfo differentObjectSameType = _customTypeInfoToCheckForEquality.GetProperty(
+                "number"
+            );
             Assert.Equal(differentObjectSameType.GetHashCode(), _propertyInfo.GetHashCode());
         }
 
         [Fact]
         public void Equals_DifferentObjectSameType_ReturnsTrue()
         {
-            PropertyInfo differentObjectSameType = _customTypeInfoToCheckForEquality.GetProperty("number");
+            PropertyInfo differentObjectSameType = _customTypeInfoToCheckForEquality.GetProperty(
+                "number"
+            );
             Assert.True(_propertyInfo.Equals(differentObjectSameType));
         }
 

@@ -46,17 +46,15 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] [FromServi
         // runtime.
         if (IsGeneratorEnabled)
         {
-            Assert.Contains(
-                result.Value.Diagnostics,
-                diagnostic =>
-                    diagnostic.Id
-                    == DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported.Id
+            Assert.Contains(result.Value.Diagnostics, diagnostic =>
+                diagnostic.Id
+                == DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported.Id
             );
         }
 
         // Throw during endpoint construction
-        var exception = Assert.Throws<NotSupportedException>(
-            () => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
+        var exception = Assert.Throws<NotSupportedException>(() =>
+            GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
         );
         Assert.Equal(
             $"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IFromServiceMetadata)}.",
@@ -143,8 +141,8 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await endpoint.RequestDelegate(httpContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Equal(

@@ -1,4 +1,5 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -6,20 +7,33 @@
     using System.IO;
     using System.Web.Script.Serialization;
 
-    public sealed class JsonValueProviderFactory : ValueProviderFactory {
-
-        private static void AddToBackingStore(Dictionary<string, object> backingStore, string prefix, object value) {
+    public sealed class JsonValueProviderFactory : ValueProviderFactory
+    {
+        private static void AddToBackingStore(
+            Dictionary<string, object> backingStore,
+            string prefix,
+            object value
+        )
+        {
             IDictionary<string, object> d = value as IDictionary<string, object>;
-            if (d != null) {
-                foreach (KeyValuePair<string, object> entry in d) {
-                    AddToBackingStore(backingStore, MakePropertyKey(prefix, entry.Key), entry.Value);
+            if (d != null)
+            {
+                foreach (KeyValuePair<string, object> entry in d)
+                {
+                    AddToBackingStore(
+                        backingStore,
+                        MakePropertyKey(prefix, entry.Key),
+                        entry.Value
+                    );
                 }
                 return;
             }
 
             IList l = value as IList;
-            if (l != null) {
-                for (int i = 0; i < l.Count; i++) {
+            if (l != null)
+            {
+                for (int i = 0; i < l.Count; i++)
+                {
                     AddToBackingStore(backingStore, MakeArrayKey(prefix, i), l[i]);
                 }
                 return;
@@ -29,15 +43,25 @@
             backingStore[prefix] = value;
         }
 
-        private static object GetDeserializedObject(ControllerContext controllerContext) {
-            if (!controllerContext.HttpContext.Request.ContentType.StartsWith("application/json", StringComparison.OrdinalIgnoreCase)) {
+        private static object GetDeserializedObject(ControllerContext controllerContext)
+        {
+            if (
+                !controllerContext.HttpContext.Request.ContentType.StartsWith(
+                    "application/json",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
+            {
                 // not JSON request
                 return null;
             }
 
-            StreamReader reader = new StreamReader(controllerContext.HttpContext.Request.InputStream);
+            StreamReader reader = new StreamReader(
+                controllerContext.HttpContext.Request.InputStream
+            );
             string bodyText = reader.ReadToEnd();
-            if (String.IsNullOrEmpty(bodyText)) {
+            if (String.IsNullOrEmpty(bodyText))
+            {
                 // no JSON data
                 return null;
             }
@@ -47,26 +71,33 @@
             return jsonData;
         }
 
-        public override IValueProvider GetValueProvider(ControllerContext controllerContext) {
-            if (controllerContext == null) {
+        public override IValueProvider GetValueProvider(ControllerContext controllerContext)
+        {
+            if (controllerContext == null)
+            {
                 throw new ArgumentNullException("controllerContext");
             }
 
             object jsonData = GetDeserializedObject(controllerContext);
-            if (jsonData == null) {
+            if (jsonData == null)
+            {
                 return null;
             }
 
-            Dictionary<string, object> backingStore = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, object> backingStore = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
             AddToBackingStore(backingStore, String.Empty, jsonData);
             return new DictionaryValueProvider<object>(backingStore, CultureInfo.CurrentCulture);
         }
 
-        private static string MakeArrayKey(string prefix, int index) {
+        private static string MakeArrayKey(string prefix, int index)
+        {
             return prefix + "[" + index.ToString(CultureInfo.InvariantCulture) + "]";
         }
 
-        private static string MakePropertyKey(string prefix, string propertyName) {
+        private static string MakePropertyKey(string prefix, string propertyName)
+        {
             return (String.IsNullOrEmpty(prefix)) ? propertyName : prefix + "." + propertyName;
         }
     }

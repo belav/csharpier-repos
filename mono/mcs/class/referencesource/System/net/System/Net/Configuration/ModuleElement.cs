@@ -18,12 +18,9 @@ namespace System.Net.Configuration
             this.properties.Add(this.type);
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Type)]
@@ -35,12 +32,11 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty type = 
-            new ConfigurationProperty(ConfigurationStrings.Type, 
-                                      typeof(string), 
-                                      null, 
-                                      ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty type = new ConfigurationProperty(
+            ConfigurationStrings.Type,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
     }
 }
-

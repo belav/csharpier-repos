@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesignerSerializationService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel.Design.Serialization {
+namespace System.ComponentModel.Design.Serialization
+{
     using System.Collections;
     using System.ComponentModel;
 
@@ -23,8 +24,8 @@ namespace System.ComponentModel.Design.Serialization {
     ///     technique to convert a collection of components into a single
     ///     opaque object that does support runtime serialization.
     /// </devdoc>
-    public interface IDesignerSerializationService {
-    
+    public interface IDesignerSerializationService
+    {
         /// <devdoc>
         ///    <para>
         ///     Deserializes the provided serialization data object and
@@ -33,10 +34,10 @@ namespace System.ComponentModel.Design.Serialization {
         ///    </para>
         /// </devdoc>
         ICollection Deserialize(object serializationData);
-        
+
         /// <devdoc>
         ///    <para>
-        ///     Serializes the given collection of objects and 
+        ///     Serializes the given collection of objects and
         ///     stores them in an opaque serialization data object.
         ///     The returning object fully supports runtime serialization.
         ///    </para>
@@ -44,4 +45,3 @@ namespace System.ComponentModel.Design.Serialization {
         object Serialize(ICollection objects);
     }
 }
-

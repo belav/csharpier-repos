@@ -3,35 +3,37 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.CodeDom.Compiler;
-    using System.Reflection;
     using System.ComponentModel.Design.Serialization;
-    using System.Xml;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security.Policy;
     using System.Text;
-    using System.Diagnostics;
     using System.Text.RegularExpressions;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Security.Policy;
-    using System.Runtime.Versioning;
-    using System.Configuration;
-    using System.Collections.ObjectModel;
+    using System.Xml;
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
 
     #endregion
 
     #region WorkflowMarkupSourceAttribute Class
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowMarkupSourceAttribute : Attribute
     {
         private string fileName;
@@ -45,24 +47,20 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public string FileName
         {
-            get
-            {
-                return this.fileName;
-            }
+            get { return this.fileName; }
         }
 
         public string MD5Digest
         {
-            get
-            {
-                return this.md5Digest;
-            }
+            get { return this.md5Digest; }
         }
     }
     #endregion
 
     #region Interface IWorkflowCompilerOptionsService
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IWorkflowCompilerOptionsService
     {
         string RootNamespace { get; }
@@ -70,45 +68,37 @@ namespace System.Workflow.ComponentModel.Compiler
         bool CheckTypes { get; }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowCompilerOptionsService : IWorkflowCompilerOptionsService
     {
         internal const string DefaultLanguage = "CSharp";
 
         public virtual string RootNamespace
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
         public virtual string Language
         {
-            get
-            {
-                return WorkflowCompilerOptionsService.DefaultLanguage;
-            }
+            get { return WorkflowCompilerOptionsService.DefaultLanguage; }
         }
         public virtual bool CheckTypes
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
         public virtual string TargetFrameworkMoniker
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
     }
     #endregion
 
     #region WorkflowCompilationContext
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowCompilationContext
     {
         [ThreadStatic]
@@ -124,44 +114,26 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public static WorkflowCompilationContext Current
         {
-            get
-            {
-                return WorkflowCompilationContext.current;
-            }
-            private set
-            {
-                WorkflowCompilationContext.current = value;
-            }
+            get { return WorkflowCompilationContext.current; }
+            private set { WorkflowCompilationContext.current = value; }
         }
 
         public string RootNamespace
         {
-            get
-            {
-                return this.scope.RootNamespace;
-            }
+            get { return this.scope.RootNamespace; }
         }
         public string Language
         {
-            get
-            {
-                return this.scope.Language;
-            }
+            get { return this.scope.Language; }
         }
         public bool CheckTypes
         {
-            get
-            {
-                return this.scope.CheckTypes;
-            }
+            get { return this.scope.CheckTypes; }
         }
 
         internal FrameworkName TargetFramework
         {
-            get
-            {
-                return this.scope.TargetFramework;
-            }
+            get { return this.scope.TargetFramework; }
         }
         internal Version TargetFrameworkVersion
         {
@@ -180,10 +152,7 @@ namespace System.Workflow.ComponentModel.Compiler
         }
         internal IServiceProvider ServiceProvider
         {
-            get
-            {
-                return this.scope;
-            }
+            get { return this.scope; }
         }
 
         public static IDisposable CreateScope(IServiceProvider serviceProvider)
@@ -193,7 +162,9 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("serviceProvider");
             }
 
-            IWorkflowCompilerOptionsService optionsService = serviceProvider.GetService(typeof(IWorkflowCompilerOptionsService)) as IWorkflowCompilerOptionsService;
+            IWorkflowCompilerOptionsService optionsService =
+                serviceProvider.GetService(typeof(IWorkflowCompilerOptionsService))
+                as IWorkflowCompilerOptionsService;
             if (optionsService != null)
             {
                 return CreateScope(serviceProvider, optionsService);
@@ -213,7 +184,9 @@ namespace System.Workflow.ComponentModel.Compiler
                     IList<AuthorizedType> authorizedTypes;
 
                     IDictionary<string, IList<AuthorizedType>> authorizedTypesDictionary =
-                        ConfigurationManager.GetSection("System.Workflow.ComponentModel.WorkflowCompiler/authorizedTypes") as IDictionary<string, IList<AuthorizedType>>;
+                        ConfigurationManager.GetSection(
+                            "System.Workflow.ComponentModel.WorkflowCompiler/authorizedTypes"
+                        ) as IDictionary<string, IList<AuthorizedType>>;
                     Version targetVersion = null;
                     FrameworkName framework = this.scope.TargetFramework;
                     if (framework != null)
@@ -225,28 +198,45 @@ namespace System.Workflow.ComponentModel.Compiler
                         targetVersion = MultiTargetingInfo.DefaultTargetFramework;
                     }
 
-                    string normalizedVersionString = string.Format(CultureInfo.InvariantCulture, "v{0}.{1}", targetVersion.Major, targetVersion.Minor);
+                    string normalizedVersionString = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "v{0}.{1}",
+                        targetVersion.Major,
+                        targetVersion.Minor
+                    );
 
-                    if (authorizedTypesDictionary.TryGetValue(normalizedVersionString, out authorizedTypes))
+                    if (
+                        authorizedTypesDictionary.TryGetValue(
+                            normalizedVersionString,
+                            out authorizedTypes
+                        )
+                    )
                     {
-                        this.authorizedTypes = new ReadOnlyCollection<AuthorizedType>(authorizedTypes);
+                        this.authorizedTypes = new ReadOnlyCollection<AuthorizedType>(
+                            authorizedTypes
+                        );
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return this.authorizedTypes;
         }
 
-        internal static IDisposable CreateScope(IServiceProvider serviceProvider, WorkflowCompilerParameters parameters)
+        internal static IDisposable CreateScope(
+            IServiceProvider serviceProvider,
+            WorkflowCompilerParameters parameters
+        )
         {
             return new ParametersContextScope(serviceProvider, parameters);
         }
 
-        static IDisposable CreateScope(IServiceProvider serviceProvider, IWorkflowCompilerOptionsService optionsService)
+        static IDisposable CreateScope(
+            IServiceProvider serviceProvider,
+            IWorkflowCompilerOptionsService optionsService
+        )
         {
-            WorkflowCompilerOptionsService standardService = optionsService as WorkflowCompilerOptionsService;
+            WorkflowCompilerOptionsService standardService =
+                optionsService as WorkflowCompilerOptionsService;
             if (standardService != null)
             {
                 return new StandardContextScope(serviceProvider, standardService);
@@ -269,6 +259,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.currentContext = WorkflowCompilationContext.Current;
                 WorkflowCompilationContext.Current = new WorkflowCompilationContext(this);
             }
+
             ~ContextScope()
             {
                 DisposeImpl();
@@ -284,6 +275,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 DisposeImpl();
                 GC.SuppressFinalize(this);
             }
+
             public object GetService(Type serviceType)
             {
                 return this.serviceProvider.GetService(serviceType);
@@ -298,11 +290,15 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
             }
         }
+
         class InterfaceContextScope : ContextScope
         {
             IWorkflowCompilerOptionsService service;
 
-            public InterfaceContextScope(IServiceProvider serviceProvider, IWorkflowCompilerOptionsService service)
+            public InterfaceContextScope(
+                IServiceProvider serviceProvider,
+                IWorkflowCompilerOptionsService service
+            )
                 : base(serviceProvider)
             {
                 this.service = service;
@@ -310,39 +306,31 @@ namespace System.Workflow.ComponentModel.Compiler
 
             public override string RootNamespace
             {
-                get
-                {
-                    return this.service.RootNamespace;
-                }
+                get { return this.service.RootNamespace; }
             }
             public override string Language
             {
-                get
-                {
-                    return this.service.Language;
-                }
+                get { return this.service.Language; }
             }
             public override bool CheckTypes
             {
-                get
-                {
-                    return this.service.CheckTypes;
-                }
+                get { return this.service.CheckTypes; }
             }
             public override FrameworkName TargetFramework
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
         }
+
         class StandardContextScope : ContextScope
         {
             WorkflowCompilerOptionsService service;
             FrameworkName fxName;
 
-            public StandardContextScope(IServiceProvider serviceProvider, WorkflowCompilerOptionsService service)
+            public StandardContextScope(
+                IServiceProvider serviceProvider,
+                WorkflowCompilerOptionsService service
+            )
                 : base(serviceProvider)
             {
                 this.service = service;
@@ -350,24 +338,15 @@ namespace System.Workflow.ComponentModel.Compiler
 
             public override string RootNamespace
             {
-                get
-                {
-                    return this.service.RootNamespace;
-                }
+                get { return this.service.RootNamespace; }
             }
             public override string Language
             {
-                get
-                {
-                    return this.service.Language;
-                }
+                get { return this.service.Language; }
             }
             public override bool CheckTypes
             {
-                get
-                {
-                    return this.service.CheckTypes;
-                }
+                get { return this.service.CheckTypes; }
             }
             public override FrameworkName TargetFramework
             {
@@ -385,11 +364,15 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
             }
         }
+
         class ParametersContextScope : ContextScope
         {
             WorkflowCompilerParameters parameters;
 
-            public ParametersContextScope(IServiceProvider serviceProvider, WorkflowCompilerParameters parameters)
+            public ParametersContextScope(
+                IServiceProvider serviceProvider,
+                WorkflowCompilerParameters parameters
+            )
                 : base(serviceProvider)
             {
                 this.parameters = parameters;
@@ -397,25 +380,16 @@ namespace System.Workflow.ComponentModel.Compiler
 
             public override string RootNamespace
             {
-                get
-                {
-                    return WorkflowCompilerParameters.ExtractRootNamespace(this.parameters);
-                }
+                get { return WorkflowCompilerParameters.ExtractRootNamespace(this.parameters); }
             }
             public override string Language
             {
-                get
-                {
-                    return this.parameters.LanguageToUse;
-                }
+                get { return this.parameters.LanguageToUse; }
             }
 
             public override bool CheckTypes
             {
-                get
-                {
-                    return this.parameters.CheckTypes;
-                }
+                get { return this.parameters.CheckTypes; }
             }
             public override FrameworkName TargetFramework
             {
@@ -432,40 +406,27 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
             }
         }
+
         class DefaultContextScope : ContextScope
         {
             public DefaultContextScope(IServiceProvider serviceProvider)
-                : base(serviceProvider)
-            {
-            }
+                : base(serviceProvider) { }
 
             public override string RootNamespace
             {
-                get
-                {
-                    return string.Empty;
-                }
+                get { return string.Empty; }
             }
             public override string Language
             {
-                get
-                {
-                    return WorkflowCompilerOptionsService.DefaultLanguage;
-                }
+                get { return WorkflowCompilerOptionsService.DefaultLanguage; }
             }
             public override bool CheckTypes
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
             public override FrameworkName TargetFramework
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
         }
     }
@@ -474,10 +435,15 @@ namespace System.Workflow.ComponentModel.Compiler
 
     #region Class WorkflowCompiler
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowCompiler
     {
-        public WorkflowCompilerResults Compile(WorkflowCompilerParameters parameters, params string[] files)
+        public WorkflowCompilerResults Compile(
+            WorkflowCompilerParameters parameters,
+            params string[] files
+        )
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
@@ -516,8 +482,11 @@ namespace System.Workflow.ComponentModel.Compiler
                             {
                                 tries++;
                                 createdDirectoryName = Path.GetTempPath() + "\\" + Guid.NewGuid();
-                                DirectoryInfo info = Directory.CreateDirectory(createdDirectoryName);
-                                parameters.OutputAssembly = info.FullName + "\\" + parameters.OutputAssembly;
+                                DirectoryInfo info = Directory.CreateDirectory(
+                                    createdDirectoryName
+                                );
+                                parameters.OutputAssembly =
+                                    info.FullName + "\\" + parameters.OutputAssembly;
                                 break;
                             }
                             catch
@@ -534,12 +503,18 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                 }
 
-                WorkflowCompilerInternal compiler = (WorkflowCompilerInternal)compilerDomain.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, typeof(WorkflowCompilerInternal).FullName);
+                WorkflowCompilerInternal compiler = (WorkflowCompilerInternal)
+                    compilerDomain.CreateInstanceAndUnwrap(
+                        Assembly.GetExecutingAssembly().FullName,
+                        typeof(WorkflowCompilerInternal).FullName
+                    );
                 WorkflowCompilerResults results = compiler.Compile(parameters, files);
 
                 if (generateInMemory && !results.Errors.HasErrors)
                 {
-                    results.CompiledAssembly = Assembly.Load(File.ReadAllBytes(results.PathToAssembly));
+                    results.CompiledAssembly = Assembly.Load(
+                        File.ReadAllBytes(results.PathToAssembly)
+                    );
                     results.PathToAssembly = null;
                 }
 
@@ -578,8 +553,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             Directory.Delete(createdDirectoryName, true);
                         }
                     }
-                    catch
-                    { }
+                    catch { }
                 }
             }
         }
@@ -602,7 +576,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region File based compilation
 
-        public WorkflowCompilerResults Compile(WorkflowCompilerParameters parameters, string[] allFiles)
+        public WorkflowCompilerResults Compile(
+            WorkflowCompilerParameters parameters,
+            string[] allFiles
+        )
         {
             WorkflowCompilerResults results = new WorkflowCompilerResults(parameters.TempFiles);
 
@@ -627,23 +604,42 @@ namespace System.Workflow.ComponentModel.Compiler
             MultiTargetingInfo mtInfo = parameters.MultiTargetingInformation;
             if (mtInfo == null)
             {
-                XomlCompilerHelper.FixReferencedAssemblies(parameters, results, parameters.LibraryPaths);
+                XomlCompilerHelper.FixReferencedAssemblies(
+                    parameters,
+                    results,
+                    parameters.LibraryPaths
+                );
             }
             string mscorlibName = Path.GetFileName(mscorlibPath);
 
             // Add assembly resolver.
-            ReferencedAssemblyResolver resolver = new ReferencedAssemblyResolver(parameters.ReferencedAssemblies, parameters.LocalAssembly);
+            ReferencedAssemblyResolver resolver = new ReferencedAssemblyResolver(
+                parameters.ReferencedAssemblies,
+                parameters.LocalAssembly
+            );
             AppDomain.CurrentDomain.AssemblyResolve += resolver.ResolveEventHandler;
 
             // prepare service container
             TypeProvider typeProvider = new TypeProvider(new ServiceContainer());
             int mscorlibIndex = -1;
-            if ((parameters.ReferencedAssemblies != null) && (parameters.ReferencedAssemblies.Count > 0))
+            if (
+                (parameters.ReferencedAssemblies != null)
+                && (parameters.ReferencedAssemblies.Count > 0)
+            )
             {
                 for (int i = 0; i < parameters.ReferencedAssemblies.Count; i++)
                 {
                     string assemblyPath = parameters.ReferencedAssemblies[i];
-                    if ((mscorlibIndex == -1) && (string.Compare(mscorlibName, Path.GetFileName(assemblyPath), StringComparison.OrdinalIgnoreCase) == 0))
+                    if (
+                        (mscorlibIndex == -1)
+                        && (
+                            string.Compare(
+                                mscorlibName,
+                                Path.GetFileName(assemblyPath),
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
                     {
                         mscorlibIndex = i;
                         mscorlibPath = assemblyPath;
@@ -671,7 +667,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             serviceContainer.AddService(typeof(ITypeProvider), typeProvider);
-            
+
             TempFileCollection intermediateTempFiles = null;
             string localAssemblyPath = string.Empty;
             string createdDirectoryName = null;
@@ -680,7 +676,15 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 using (WorkflowCompilationContext.CreateScope(serviceContainer, parameters))
                 {
-                    parameters.LocalAssembly = GenerateLocalAssembly(files, codeFiles, parameters, results, out intermediateTempFiles, out localAssemblyPath, out createdDirectoryName);
+                    parameters.LocalAssembly = GenerateLocalAssembly(
+                        files,
+                        codeFiles,
+                        parameters,
+                        results,
+                        out intermediateTempFiles,
+                        out localAssemblyPath,
+                        out createdDirectoryName
+                    );
                     if (parameters.LocalAssembly != null)
                     {
                         // WinOE Bug 17591: we must set the local assembly here,
@@ -693,13 +697,29 @@ namespace System.Workflow.ComponentModel.Compiler
                         typeProvider.AddAssembly(parameters.LocalAssembly);
 
                         results.Errors.Clear();
-                        XomlCompilerHelper.InternalCompileFromDomBatch(files, codeFiles, parameters, results, localAssemblyPath);
+                        XomlCompilerHelper.InternalCompileFromDomBatch(
+                            files,
+                            codeFiles,
+                            parameters,
+                            results,
+                            localAssemblyPath
+                        );
                     }
                 }
             }
             catch (Exception e)
             {
-                results.Errors.Add(new WorkflowCompilerError(String.Empty, -1, -1, ErrorNumbers.Error_UnknownCompilerException.ToString(CultureInfo.InvariantCulture), SR.GetString(SR.Error_CompilationFailed, e.Message)));
+                results.Errors.Add(
+                    new WorkflowCompilerError(
+                        String.Empty,
+                        -1,
+                        -1,
+                        ErrorNumbers.Error_UnknownCompilerException.ToString(
+                            CultureInfo.InvariantCulture
+                        ),
+                        SR.GetString(SR.Error_CompilationFailed, e.Message)
+                    )
+                );
             }
             finally
             {
@@ -712,9 +732,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             System.IO.File.Delete(file);
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
 
                     try
@@ -726,9 +744,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             Directory.Delete(createdDirectoryName, true);
                         }
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
 
@@ -739,7 +755,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region Code for Generating Local Assembly
 
-        private static ValidationErrorCollection ValidateIdentifiers(IServiceProvider serviceProvider, Activity activity)
+        private static ValidationErrorCollection ValidateIdentifiers(
+            IServiceProvider serviceProvider,
+            Activity activity
+        )
         {
             ValidationErrorCollection validationErrors = new ValidationErrorCollection();
             Dictionary<string, int> names = new Dictionary<string, int>();
@@ -760,7 +779,15 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     if (names[currentActivity.QualifiedName] != 1)
                     {
-                        identifierError = new ValidationError(SR.GetString(SR.Error_DuplicatedActivityID, currentActivity.QualifiedName), ErrorNumbers.Error_DuplicatedActivityID, false, "Name");
+                        identifierError = new ValidationError(
+                            SR.GetString(
+                                SR.Error_DuplicatedActivityID,
+                                currentActivity.QualifiedName
+                            ),
+                            ErrorNumbers.Error_DuplicatedActivityID,
+                            false,
+                            "Name"
+                        );
                         identifierError.UserData[typeof(Activity)] = currentActivity;
                         validationErrors.Add(identifierError);
                         names[currentActivity.QualifiedName] = 1;
@@ -772,7 +799,11 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (!string.IsNullOrEmpty(currentActivity.Name))
                 {
                     names[currentActivity.Name] = 0;
-                    identifierError = ValidationHelpers.ValidateIdentifier("Name", serviceProvider, currentActivity.Name);
+                    identifierError = ValidationHelpers.ValidateIdentifier(
+                        "Name",
+                        serviceProvider,
+                        currentActivity.Name
+                    );
                     if (identifierError != null)
                     {
                         identifierError.UserData[typeof(Activity)] = currentActivity;
@@ -785,31 +816,51 @@ namespace System.Workflow.ComponentModel.Compiler
             return validationErrors;
         }
 
-        private Assembly GenerateLocalAssembly(string[] files, string[] codeFiles, WorkflowCompilerParameters parameters, WorkflowCompilerResults results, out TempFileCollection tempFiles2, out string localAssemblyPath, out string createdDirectoryName)
+        private Assembly GenerateLocalAssembly(
+            string[] files,
+            string[] codeFiles,
+            WorkflowCompilerParameters parameters,
+            WorkflowCompilerResults results,
+            out TempFileCollection tempFiles2,
+            out string localAssemblyPath,
+            out string createdDirectoryName
+        )
         {
             localAssemblyPath = string.Empty;
             createdDirectoryName = null;
             tempFiles2 = null;
 
             // Generate code for the markup files.
-            CodeCompileUnit markupCompileUnit = GenerateCodeFromFileBatch(files, parameters, results);
+            CodeCompileUnit markupCompileUnit = GenerateCodeFromFileBatch(
+                files,
+                parameters,
+                results
+            );
             if (results.Errors.HasErrors)
                 return null;
 
-            SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(parameters.LanguageToUse);
+            SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(
+                parameters.LanguageToUse
+            );
 
             // Convert all compile units to source files.
-            CodeDomProvider codeDomProvider = CompilerHelpers.GetCodeDomProvider(language, parameters.CompilerVersion);
+            CodeDomProvider codeDomProvider = CompilerHelpers.GetCodeDomProvider(
+                language,
+                parameters.CompilerVersion
+            );
 
             // Clone the parameters.
-            CompilerParameters clonedParams = XomlCompilerHelper.CloneCompilerParameters(parameters);
+            CompilerParameters clonedParams = XomlCompilerHelper.CloneCompilerParameters(
+                parameters
+            );
             clonedParams.TempFiles.KeepFiles = true;
             tempFiles2 = clonedParams.TempFiles;
 
             clonedParams.GenerateInMemory = true;
 
             if (string.IsNullOrEmpty(parameters.OutputAssembly))
-                localAssemblyPath = clonedParams.OutputAssembly = clonedParams.TempFiles.AddExtension("dll");
+                localAssemblyPath = clonedParams.OutputAssembly =
+                    clonedParams.TempFiles.AddExtension("dll");
             else
             {
                 string tempAssemblyDirectory = clonedParams.TempFiles.BasePath;
@@ -836,9 +887,9 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         tempAssemblyDirectory = clonedParams.TempFiles.BasePath + postfix++;
                     }
-                    
                 }
-                localAssemblyPath = clonedParams.OutputAssembly = tempAssemblyDirectory + "\\" + Path.GetFileName(clonedParams.OutputAssembly);
+                localAssemblyPath = clonedParams.OutputAssembly =
+                    tempAssemblyDirectory + "\\" + Path.GetFileName(clonedParams.OutputAssembly);
                 clonedParams.TempFiles.AddFile(localAssemblyPath, true);
 
                 // Working around the fact that when the OutputAssembly is specified, the
@@ -849,7 +900,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 // We need to add the pdb file to the clonedParameters.TempFiles collection so that
                 // it gets deleted, even in the case where we didn't end up creating the tempAssemblyDirectory above.
                 string pdbFilename = Path.GetFileNameWithoutExtension(localAssemblyPath) + ".pdb";
-                clonedParams.TempFiles.AddFile(Path.GetDirectoryName(localAssemblyPath) + "\\" + pdbFilename, true);
+                clonedParams.TempFiles.AddFile(
+                    Path.GetDirectoryName(localAssemblyPath) + "\\" + pdbFilename,
+                    true
+                );
             }
 
             // Explictily ignore warnings (in case the user set this property in the project options).
@@ -860,7 +914,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 // Need to remove /delaysign option together with the /keyfile or /keycontainer
                 // the temp assembly should not be signed or we'll have problems loading it.
 
-                // Custom splitting: need to take strings like '"one two"' into account 
+                // Custom splitting: need to take strings like '"one two"' into account
                 // even though it has a space inside, it should not be split.
 
                 string source = clonedParams.CompilerOptions;
@@ -906,10 +960,12 @@ namespace System.Workflow.ComponentModel.Compiler
                 clonedParams.CompilerOptions = string.Empty;
                 foreach (string option in options)
                 {
-                    if (option.Length > 0 &&
-                        !option.StartsWith("/delaysign", StringComparison.OrdinalIgnoreCase) &&
-                        !option.StartsWith("/keyfile", StringComparison.OrdinalIgnoreCase) &&
-                        !option.StartsWith("/keycontainer", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        option.Length > 0
+                        && !option.StartsWith("/delaysign", StringComparison.OrdinalIgnoreCase)
+                        && !option.StartsWith("/keyfile", StringComparison.OrdinalIgnoreCase)
+                        && !option.StartsWith("/keycontainer", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         clonedParams.CompilerOptions += " " + option;
                     }
@@ -917,7 +973,10 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             // Disable compiler optimizations, but include debug information.
-            clonedParams.CompilerOptions = (clonedParams.CompilerOptions == null) ? "/optimize-" : clonedParams.CompilerOptions + " /optimize-";
+            clonedParams.CompilerOptions =
+                (clonedParams.CompilerOptions == null)
+                    ? "/optimize-"
+                    : clonedParams.CompilerOptions + " /optimize-";
             clonedParams.IncludeDebugInformation = true;
 
             if (language == SupportedLanguages.CSharp)
@@ -928,21 +987,33 @@ namespace System.Workflow.ComponentModel.Compiler
             ccus.Add(markupCompileUnit);
             ArrayList userCodeFiles = new ArrayList();
             userCodeFiles.AddRange(codeFiles);
-            userCodeFiles.AddRange(XomlCompilerHelper.GenerateFiles(codeDomProvider, clonedParams, (CodeCompileUnit[])ccus.ToArray(typeof(CodeCompileUnit))));
+            userCodeFiles.AddRange(
+                XomlCompilerHelper.GenerateFiles(
+                    codeDomProvider,
+                    clonedParams,
+                    (CodeCompileUnit[])ccus.ToArray(typeof(CodeCompileUnit))
+                )
+            );
 
             // Generate the temporary assembly.
-            CompilerResults results2 = codeDomProvider.CompileAssemblyFromFile(clonedParams, (string[])userCodeFiles.ToArray(typeof(string)));
+            CompilerResults results2 = codeDomProvider.CompileAssemblyFromFile(
+                clonedParams,
+                (string[])userCodeFiles.ToArray(typeof(string))
+            );
             if (results2.Errors.HasErrors)
             {
                 results.AddCompilerErrorsFromCompilerResults(results2);
                 return null;
             }
 
-
             return results2.CompiledAssembly;
         }
 
-        internal static CodeCompileUnit GenerateCodeFromFileBatch(string[] files, WorkflowCompilerParameters parameters, WorkflowCompilerResults results)
+        internal static CodeCompileUnit GenerateCodeFromFileBatch(
+            string[] files,
+            WorkflowCompilerParameters parameters,
+            WorkflowCompilerResults results
+        )
         {
             WorkflowCompilationContext context = WorkflowCompilationContext.Current;
             if (context == null)
@@ -954,14 +1025,21 @@ namespace System.Workflow.ComponentModel.Compiler
                 Activity rootActivity = null;
                 try
                 {
-                    DesignerSerializationManager manager = new DesignerSerializationManager(context.ServiceProvider);
+                    DesignerSerializationManager manager = new DesignerSerializationManager(
+                        context.ServiceProvider
+                    );
                     using (manager.CreateSession())
                     {
-                        WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(manager);
+                        WorkflowMarkupSerializationManager xomlSerializationManager =
+                            new WorkflowMarkupSerializationManager(manager);
                         xomlSerializationManager.WorkflowMarkupStack.Push(parameters);
                         xomlSerializationManager.LocalAssembly = parameters.LocalAssembly;
                         using (XmlReader reader = XmlReader.Create(fileName))
-                            rootActivity = WorkflowMarkupSerializationHelpers.LoadXomlDocument(xomlSerializationManager, reader, fileName);
+                            rootActivity = WorkflowMarkupSerializationHelpers.LoadXomlDocument(
+                                xomlSerializationManager,
+                                reader,
+                                fileName
+                            );
 
                         if (parameters.LocalAssembly != null)
                         {
@@ -969,63 +1047,134 @@ namespace System.Workflow.ComponentModel.Compiler
                             {
                                 if (error is WorkflowMarkupSerializationException)
                                 {
-                                    results.Errors.Add(new WorkflowCompilerError(fileName, (WorkflowMarkupSerializationException)error));
+                                    results.Errors.Add(
+                                        new WorkflowCompilerError(
+                                            fileName,
+                                            (WorkflowMarkupSerializationException)error
+                                        )
+                                    );
                                 }
                                 else
                                 {
-                                    results.Errors.Add(new WorkflowCompilerError(fileName, -1, -1, ErrorNumbers.Error_SerializationError.ToString(CultureInfo.InvariantCulture), error.ToString()));
+                                    results.Errors.Add(
+                                        new WorkflowCompilerError(
+                                            fileName,
+                                            -1,
+                                            -1,
+                                            ErrorNumbers.Error_SerializationError.ToString(
+                                                CultureInfo.InvariantCulture
+                                            ),
+                                            error.ToString()
+                                        )
+                                    );
                                 }
                             }
                         }
-
                     }
                 }
                 catch (WorkflowMarkupSerializationException xomlSerializationException)
                 {
-                    results.Errors.Add(new WorkflowCompilerError(fileName, xomlSerializationException));
+                    results.Errors.Add(
+                        new WorkflowCompilerError(fileName, xomlSerializationException)
+                    );
                     continue;
                 }
                 catch (Exception e)
                 {
-                    results.Errors.Add(new WorkflowCompilerError(fileName, -1, -1, ErrorNumbers.Error_SerializationError.ToString(CultureInfo.InvariantCulture), SR.GetString(SR.Error_CompilationFailed, e.Message)));
+                    results.Errors.Add(
+                        new WorkflowCompilerError(
+                            fileName,
+                            -1,
+                            -1,
+                            ErrorNumbers.Error_SerializationError.ToString(
+                                CultureInfo.InvariantCulture
+                            ),
+                            SR.GetString(SR.Error_CompilationFailed, e.Message)
+                        )
+                    );
                     continue;
                 }
 
                 if (rootActivity == null)
                 {
-                    results.Errors.Add(new WorkflowCompilerError(fileName, 1, 1, ErrorNumbers.Error_SerializationError.ToString(CultureInfo.InvariantCulture), SR.GetString(SR.Error_RootActivityTypeInvalid)));
+                    results.Errors.Add(
+                        new WorkflowCompilerError(
+                            fileName,
+                            1,
+                            1,
+                            ErrorNumbers.Error_SerializationError.ToString(
+                                CultureInfo.InvariantCulture
+                            ),
+                            SR.GetString(SR.Error_RootActivityTypeInvalid)
+                        )
+                    );
                     continue;
                 }
 
-                bool createNewClass = (!string.IsNullOrEmpty(rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string));
+                bool createNewClass = (
+                    !string.IsNullOrEmpty(
+                        rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string
+                    )
+                );
                 if (!createNewClass)
                 {
-                    results.Errors.Add(new WorkflowCompilerError(fileName, 1, 1, ErrorNumbers.Error_SerializationError.ToString(CultureInfo.InvariantCulture), SR.GetString(SR.Error_CannotCompile_No_XClass)));
+                    results.Errors.Add(
+                        new WorkflowCompilerError(
+                            fileName,
+                            1,
+                            1,
+                            ErrorNumbers.Error_SerializationError.ToString(
+                                CultureInfo.InvariantCulture
+                            ),
+                            SR.GetString(SR.Error_CannotCompile_No_XClass)
+                        )
+                    );
                     continue;
                 }
 
                 //NOTE: CompileWithNoCode is meaningless now. It means no x:Code in a XOML file. It exists until the FP migration is done
                 //Ideally FP should just use XOML files w/o X:Class and run them w/o ever compiling them
-                if ((parameters.CompileWithNoCode) && XomlCompilerHelper.HasCodeWithin(rootActivity))
+                if (
+                    (parameters.CompileWithNoCode) && XomlCompilerHelper.HasCodeWithin(rootActivity)
+                )
                 {
-                    ValidationError error = new ValidationError(SR.GetString(SR.Error_CodeWithinNotAllowed), ErrorNumbers.Error_CodeWithinNotAllowed);
+                    ValidationError error = new ValidationError(
+                        SR.GetString(SR.Error_CodeWithinNotAllowed),
+                        ErrorNumbers.Error_CodeWithinNotAllowed
+                    );
                     error.UserData[typeof(Activity)] = rootActivity;
-                    results.Errors.Add(XomlCompilerHelper.CreateXomlCompilerError(error, parameters));
+                    results.Errors.Add(
+                        XomlCompilerHelper.CreateXomlCompilerError(error, parameters)
+                    );
                 }
 
                 ValidationErrorCollection errors = new ValidationErrorCollection();
 
                 errors = ValidateIdentifiers(context.ServiceProvider, rootActivity);
                 foreach (ValidationError error in errors)
-                    results.Errors.Add(XomlCompilerHelper.CreateXomlCompilerError(error, parameters));
+                    results.Errors.Add(
+                        XomlCompilerHelper.CreateXomlCompilerError(error, parameters)
+                    );
 
                 if (results.Errors.HasErrors)
                     continue;
 
-                codeCompileUnit.Namespaces.AddRange(WorkflowMarkupSerializationHelpers.GenerateCodeFromXomlDocument(rootActivity, fileName, context.RootNamespace, CompilerHelpers.GetSupportedLanguage(context.Language), context.ServiceProvider));
+                codeCompileUnit.Namespaces.AddRange(
+                    WorkflowMarkupSerializationHelpers.GenerateCodeFromXomlDocument(
+                        rootActivity,
+                        fileName,
+                        context.RootNamespace,
+                        CompilerHelpers.GetSupportedLanguage(context.Language),
+                        context.ServiceProvider
+                    )
+                );
             }
 
-            WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(codeCompileUnit.Namespaces, context.RootNamespace, CompilerHelpers.GetSupportedLanguage(context.Language));
+            WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(
+                codeCompileUnit.Namespaces,
+                context.RootNamespace,
+                CompilerHelpers.GetSupportedLanguage(context.Language)
+            );
             return codeCompileUnit;
         }
         #endregion

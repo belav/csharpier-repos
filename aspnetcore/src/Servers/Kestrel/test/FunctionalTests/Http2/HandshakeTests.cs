@@ -50,27 +50,22 @@ public class HandshakeTests : LoggedTest
     // Win7 SslStream is missing ALPN support.
     public void TlsAndHttp2NotSupportedOnWin7()
     {
-        var ex = Assert.Throws<NotSupportedException>(
-            () =>
-                new TestServer(
-                    context =>
+        var ex = Assert.Throws<NotSupportedException>(() =>
+            new TestServer(
+                context =>
+                {
+                    throw new NotImplementedException();
+                },
+                new TestServiceContext(LoggerFactory),
+                kestrelOptions =>
+                {
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
                     {
-                        throw new NotImplementedException();
-                    },
-                    new TestServiceContext(LoggerFactory),
-                    kestrelOptions =>
-                    {
-                        kestrelOptions.Listen(
-                            IPAddress.Loopback,
-                            0,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http2;
-                                listenOptions.UseHttps(_x509Certificate2);
-                            }
-                        );
-                    }
-                )
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
+                }
+            )
         );
 
         Assert.Equal(
@@ -102,15 +97,11 @@ public class HandshakeTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         )
@@ -143,15 +134,11 @@ public class HandshakeTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         )

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -30,12 +30,10 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DbLinq.Util;
-
 using DbLinq.Data.Linq.Mapping;
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.Expressions;
-
+using DbLinq.Util;
 #if MONO_STRICT
 using DataContext = System.Data.Linq.DataContext;
 #else
@@ -46,7 +44,6 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 {
     internal partial class ExpressionDispatcher
     {
-
         /// <summary>
         /// Returns a registered column, or null if not found
         /// This method requires the table to be already registered
@@ -55,13 +52,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="name"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual ColumnExpression GetRegisteredColumn(TableExpression table, string name,
-                                                               BuilderContext builderContext)
+        protected virtual ColumnExpression GetRegisteredColumn(
+            TableExpression table,
+            string name,
+            BuilderContext builderContext
+        )
         {
-            return
-                (from queryColumn in builderContext.EnumerateScopeColumns()
-                 where queryColumn.Table.IsEqualTo(table) && queryColumn.Name == name
-                 select queryColumn).SingleOrDefault();
+            return (
+                from queryColumn in builderContext.EnumerateScopeColumns()
+                where queryColumn.Table.IsEqualTo(table) && queryColumn.Name == name
+                select queryColumn
+            ).SingleOrDefault();
         }
 
         /// <summary>
@@ -70,12 +71,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="tableExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns>A registered table or the current newly registered one</returns>
-        public virtual TableExpression RegisterTable(TableExpression tableExpression, BuilderContext builderContext)
+        public virtual TableExpression RegisterTable(
+            TableExpression tableExpression,
+            BuilderContext builderContext
+        )
         {
             // 1. Find the table in current scope
-            var foundTableExpression = (from t in builderContext.EnumerateScopeTables()
-                                        where t.IsEqualTo(tableExpression)
-                                        select t).SingleOrDefault();
+            var foundTableExpression = (
+                from t in builderContext.EnumerateScopeTables()
+                where t.IsEqualTo(tableExpression)
+                select t
+            ).SingleOrDefault();
             if (foundTableExpression != null)
                 return foundTableExpression;
             // 2. Find it in all scopes, and promote it to current scope.
@@ -93,7 +99,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="tableExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual TableExpression PromoteTable(TableExpression tableExpression, BuilderContext builderContext)
+        protected virtual TableExpression PromoteTable(
+            TableExpression tableExpression,
+            BuilderContext builderContext
+        )
         {
             int currentIndex = 0;
             SelectExpression oldSelect = null;
@@ -110,7 +119,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     commonScope = FindCommonScope(oldSelect, builderContext.CurrentSelect);
                     if (commonScope != null)
                         // if a common scope exists, look for an equivalent table in that select
-                        for (int tableIndex = 0; tableIndex < oldSelect.Tables.Count && foundTable == null; tableIndex++)
+                        for (
+                            int tableIndex = 0;
+                            tableIndex < oldSelect.Tables.Count && foundTable == null;
+                            tableIndex++
+                        )
                         {
                             if (oldSelect.Tables[tableIndex].IsEqualTo(tableExpression))
                             {
@@ -120,8 +133,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         }
                 }
                 ++currentIndex;
-            }
-            while (currentIndex < builderContext.SelectExpressions.Count && foundTable == null);
+            } while (currentIndex < builderContext.SelectExpressions.Count && foundTable == null);
 
             if (foundTable != null)
             {
@@ -159,9 +171,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="name"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public ColumnExpression RegisterColumn(TableExpression table,
-                                               MemberInfo memberInfo, string name,
-                                               BuilderContext builderContext)
+        public ColumnExpression RegisterColumn(
+            TableExpression table,
+            MemberInfo memberInfo,
+            string name,
+            BuilderContext builderContext
+        )
         {
             if (memberInfo == null)
                 return null;
@@ -182,20 +197,34 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="memberInfo"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public ColumnExpression RegisterColumn(TableExpression tableExpression, MemberInfo memberInfo,
-                                               BuilderContext builderContext)
+        public ColumnExpression RegisterColumn(
+            TableExpression tableExpression,
+            MemberInfo memberInfo,
+            BuilderContext builderContext
+        )
         {
-            var dataMember = builderContext.QueryContext.DataContext.Mapping.GetTable(tableExpression.Type).RowType
-                .GetDataMember(memberInfo);
+            var dataMember = builderContext
+                .QueryContext.DataContext.Mapping.GetTable(tableExpression.Type)
+                .RowType.GetDataMember(memberInfo);
             if (dataMember == null)
                 return null;
-            return RegisterColumn(tableExpression, memberInfo, dataMember.MappedName, builderContext);
+            return RegisterColumn(
+                tableExpression,
+                memberInfo,
+                dataMember.MappedName,
+                builderContext
+            );
         }
 
-        public ColumnExpression CreateColumn(TableExpression table, MemberInfo memberInfo, BuilderContext builderContext)
+        public ColumnExpression CreateColumn(
+            TableExpression table,
+            MemberInfo memberInfo,
+            BuilderContext builderContext
+        )
         {
-            var dataMember = builderContext.QueryContext.DataContext.Mapping.GetTable(table.Type).RowType
-                .GetDataMember(memberInfo);
+            var dataMember = builderContext
+                .QueryContext.DataContext.Mapping.GetTable(table.Type)
+                .RowType.GetDataMember(memberInfo);
             if (dataMember == null)
                 return null;
             return new ColumnExpression(table, dataMember);
@@ -209,7 +238,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <returns></returns>
         public virtual TableExpression CreateTable(Type tableType, BuilderContext builderContext)
         {
-            return new TableExpression(tableType, DataMapper.GetTableName(tableType, builderContext.QueryContext.DataContext));
+            return new TableExpression(
+                tableType,
+                DataMapper.GetTableName(tableType, builderContext.QueryContext.DataContext)
+            );
         }
 
         /// <summary>
@@ -220,24 +252,41 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="otherType"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual TableExpression RegisterAssociation(TableExpression tableExpression, MemberInfo tableMemberInfo,
-                                                           Type otherType, BuilderContext builderContext)
+        public virtual TableExpression RegisterAssociation(
+            TableExpression tableExpression,
+            MemberInfo tableMemberInfo,
+            Type otherType,
+            BuilderContext builderContext
+        )
         {
             IList<MemberInfo> otherKeys;
             TableJoinType joinType;
             string joinID;
-            var theseKeys = DataMapper.GetAssociation(tableExpression, tableMemberInfo, otherType, out otherKeys,
-                                                      out joinType, out joinID, builderContext.QueryContext.DataContext);
+            var theseKeys = DataMapper.GetAssociation(
+                tableExpression,
+                tableMemberInfo,
+                otherType,
+                out otherKeys,
+                out joinType,
+                out joinID,
+                builderContext.QueryContext.DataContext
+            );
             // if the memberInfo has no corresponding association, we get a null, that we propagate
             if (theseKeys == null)
                 return null;
 
             // the current table has the foreign key, the other table the referenced (usually primary) key
             if (theseKeys.Count != otherKeys.Count)
-                throw Error.BadArgument("S0128: Association arguments (FK and ref'd PK) don't match");
+                throw Error.BadArgument(
+                    "S0128: Association arguments (FK and ref'd PK) don't match"
+                );
 
             // we first create the table, with the JoinID, and we MUST complete the table later, with the Join() method
-            var otherTableExpression = new TableExpression(otherType, DataMapper.GetTableName(otherType, builderContext.QueryContext.DataContext), joinID);
+            var otherTableExpression = new TableExpression(
+                otherType,
+                DataMapper.GetTableName(otherType, builderContext.QueryContext.DataContext),
+                joinID
+            );
 
             Expression joinExpression = null;
 
@@ -245,9 +294,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             for (int keyIndex = 0; keyIndex < theseKeys.Count; keyIndex++)
             {
                 // joinedKey is registered, even if unused by final select (required columns will be filtered anyway)
-                Expression otherKey = RegisterColumn(otherTableExpression, otherKeys[keyIndex], builderContext);
+                Expression otherKey = RegisterColumn(
+                    otherTableExpression,
+                    otherKeys[keyIndex],
+                    builderContext
+                );
                 // foreign is created, we will store it later if this assocation is registered too
-                Expression thisKey = CreateColumn(tableExpression, theseKeys[keyIndex], builderContext);
+                Expression thisKey = CreateColumn(
+                    tableExpression,
+                    theseKeys[keyIndex],
+                    builderContext
+                );
                 createdColumns.Add((ColumnExpression)thisKey);
 
                 // if the key is nullable, then convert it
@@ -271,10 +328,14 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
             // our table is created, with the expressions
             // now check if we didn't register exactly the same
-            var existingTable = (from t in builderContext.EnumerateScopeTables() where t.IsEqualTo(otherTableExpression) select t).SingleOrDefault();
+            var existingTable = (
+                from t in builderContext.EnumerateScopeTables()
+                where t.IsEqualTo(otherTableExpression)
+                select t
+            ).SingleOrDefault();
             if (existingTable != null)
                 return existingTable;
- 
+
             builderContext.CurrentSelect.Tables.Add(otherTableExpression);
             foreach (var createdColumn in createdColumns)
                 builderContext.CurrentSelect.Columns.Add(createdColumn);
@@ -291,14 +352,21 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="alias"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual InputParameterExpression RegisterParameter(Expression expression, string alias, BuilderContext builderContext)
+        public virtual InputParameterExpression RegisterParameter(
+            Expression expression,
+            string alias,
+            BuilderContext builderContext
+        )
         {
             var queryParameterExpression = new InputParameterExpression(expression, alias);
             builderContext.ExpressionQuery.Parameters.Add(queryParameterExpression);
             return queryParameterExpression;
         }
 
-        public virtual void UnregisterParameter(InputParameterExpression expression, BuilderContext builderContext)
+        public virtual void UnregisterParameter(
+            InputParameterExpression expression,
+            BuilderContext builderContext
+        )
         {
             builderContext.ExpressionQuery.Parameters.Remove(expression);
         }
@@ -310,8 +378,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="aliases"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual MetaTableExpression RegisterMetaTable(Type metaTableType, IDictionary<MemberInfo, MutableExpression> aliases,
-                                                             BuilderContext builderContext)
+        public virtual MetaTableExpression RegisterMetaTable(
+            Type metaTableType,
+            IDictionary<MemberInfo, MutableExpression> aliases,
+            BuilderContext builderContext
+        )
         {
             MetaTableExpression metaTableExpression;
             if (!builderContext.MetaTables.TryGetValue(metaTableType, out metaTableExpression))
@@ -338,9 +409,16 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="tableExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual IEnumerable<ColumnExpression> RegisterAllColumns(TableExpression tableExpression, BuilderContext builderContext)
+        public virtual IEnumerable<ColumnExpression> RegisterAllColumns(
+            TableExpression tableExpression,
+            BuilderContext builderContext
+        )
         {
-            foreach (var metaMember in builderContext.QueryContext.DataContext.Mapping.GetTable(tableExpression.Type).RowType.PersistentDataMembers)
+            foreach (
+                var metaMember in builderContext
+                    .QueryContext.DataContext.Mapping.GetTable(tableExpression.Type)
+                    .RowType.PersistentDataMembers
+            )
             {
                 yield return RegisterColumn(tableExpression, metaMember.Member, builderContext);
             }
@@ -353,7 +431,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression">The expression to be registered</param>
         /// <param name="builderContext"></param>
         /// <returns>Expression index</returns>
-        public virtual int RegisterOutputParameter(Expression expression, BuilderContext builderContext)
+        public virtual int RegisterOutputParameter(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             var scope = builderContext.CurrentSelect;
             var operands = scope.Operands.ToList();
@@ -382,20 +463,32 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="mappingContextParameter"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression GetOutputTableReader(TableExpression tableExpression,
-                                                          ParameterExpression dataRecordParameter, ParameterExpression mappingContextParameter,
-                                                          BuilderContext builderContext)
+        protected virtual Expression GetOutputTableReader(
+            TableExpression tableExpression,
+            ParameterExpression dataRecordParameter,
+            ParameterExpression mappingContextParameter,
+            BuilderContext builderContext
+        )
         {
             var bindings = new List<MemberBinding>();
-            
-            foreach (ColumnExpression columnExpression in RegisterAllColumns(tableExpression, builderContext))
+
+            foreach (
+                ColumnExpression columnExpression in RegisterAllColumns(
+                    tableExpression,
+                    builderContext
+                )
+            )
             {
                 MemberInfo memberInfo = columnExpression.StorageInfo ?? columnExpression.MemberInfo;
                 PropertyInfo propertyInfo = memberInfo as PropertyInfo;
                 if (propertyInfo == null || propertyInfo.CanWrite)
                 {
-                    var parameterColumn = GetOutputValueReader(columnExpression,
-                                                               dataRecordParameter, mappingContextParameter, builderContext);
+                    var parameterColumn = GetOutputValueReader(
+                        columnExpression,
+                        dataRecordParameter,
+                        mappingContextParameter,
+                        builderContext
+                    );
                     var binding = Expression.Bind(memberInfo, parameterColumn);
                     bindings.Add(binding);
                 }
@@ -412,30 +505,50 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual LambdaExpression BuildTableReader(Type tableType, IList<string> parameters, BuilderContext builderContext)
+        public virtual LambdaExpression BuildTableReader(
+            Type tableType,
+            IList<string> parameters,
+            BuilderContext builderContext
+        )
         {
             var dataRecordParameter = Expression.Parameter(typeof(IDataRecord), "dataRecord");
-            var mappingContextParameter = Expression.Parameter(typeof(MappingContext), "mappingContext");
+            var mappingContextParameter = Expression.Parameter(
+                typeof(MappingContext),
+                "mappingContext"
+            );
             //var table = builderContext.QueryContext.DataContext.Mapping.GetTable(tableType);
             var bindings = new List<MemberBinding>();
             for (int parameterIndex = 0; parameterIndex < parameters.Count; parameterIndex++)
             {
-				var parameter = parameters[parameterIndex];
-				var memberInfo = tableType.GetTableColumnMember(parameter);
+                var parameter = parameters[parameterIndex];
+                var memberInfo = tableType.GetTableColumnMember(parameter);
                 if (memberInfo == null)
                 {
-                    memberInfo = tableType.GetSingleMember(parameter, BindingFlags.Public | BindingFlags.NonPublic
-                                                                      | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                    memberInfo = tableType.GetSingleMember(
+                        parameter,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.IgnoreCase
+                    );
                 }
                 // TODO real error
                 if (memberInfo == null)
                     throw new ArgumentException(string.Format("Invalid column '{0}'", parameter));
                 //var column = DataMapper.GetColumnName(tableType, memberInfo, builderContext.QueryContext.DataContext);
                 //var columnName = DataMapper.GetColumnName(tableType, memberInfo, builderContext.QueryContext.DataContext);
-                var invoke = GetOutputValueReader(memberInfo.GetMemberType(), parameterIndex, //GetTableIndex(parameters, columnName),
-                                                  dataRecordParameter, mappingContextParameter);
-                var parameterColumn = GetOutputValueReader(invoke, dataRecordParameter, mappingContextParameter,
-                                                           builderContext);
+                var invoke = GetOutputValueReader(
+                    memberInfo.GetMemberType(),
+                    parameterIndex, //GetTableIndex(parameters, columnName),
+                    dataRecordParameter,
+                    mappingContextParameter
+                );
+                var parameterColumn = GetOutputValueReader(
+                    invoke,
+                    dataRecordParameter,
+                    mappingContextParameter,
+                    builderContext
+                );
                 var binding = Expression.Bind(memberInfo, parameterColumn);
                 bindings.Add(binding);
             }
@@ -467,17 +580,22 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="mappingContextParameter"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression GetEntitySetBuilder(EntitySetExpression expression,
-                                                          ParameterExpression dataRecordParameter, ParameterExpression mappingContextParameter,
-                                                          BuilderContext builderContext)
+        protected virtual Expression GetEntitySetBuilder(
+            EntitySetExpression expression,
+            ParameterExpression dataRecordParameter,
+            ParameterExpression mappingContextParameter,
+            BuilderContext builderContext
+        )
         {
             var entityType = expression.EntitySetType.GetGenericArguments()[0];
             List<ElementInit> members = new List<ElementInit>();
-            var add = expression.EntitySetType.GetMethod("Add", 
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    new Type[] { typeof(KeyValuePair<object, MemberInfo>) },
-                    null);
+            var add = expression.EntitySetType.GetMethod(
+                "Add",
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                null,
+                new Type[] { typeof(KeyValuePair<object, MemberInfo>) },
+                null
+            );
 
             foreach (var info in expression.Columns)
             {
@@ -487,25 +605,42 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 PropertyInfo propertyInfo = memberInfo as PropertyInfo;
                 if (propertyInfo == null || propertyInfo.CanWrite)
                 {
-                    var parameterColumn = GetOutputValueReader(column,
-                            dataRecordParameter, mappingContextParameter, builderContext);
-                    members.Add(Expression.ElementInit(add, 
-                            new Expression[]{
-                                Expression.New(typeof(KeyValuePair<object, MemberInfo>).GetConstructor(new Type[]{typeof(object), typeof(MemberInfo)}),
-                                    Expression.Convert(parameterColumn, typeof(object)), 
-                                    Expression.Constant(tk.Member, typeof(MemberInfo)))}));
+                    var parameterColumn = GetOutputValueReader(
+                        column,
+                        dataRecordParameter,
+                        mappingContextParameter,
+                        builderContext
+                    );
+                    members.Add(
+                        Expression.ElementInit(
+                            add,
+                            new Expression[]
+                            {
+                                Expression.New(
+                                    typeof(KeyValuePair<object, MemberInfo>).GetConstructor(
+                                        new Type[] { typeof(object), typeof(MemberInfo) }
+                                    ),
+                                    Expression.Convert(parameterColumn, typeof(object)),
+                                    Expression.Constant(tk.Member, typeof(MemberInfo))
+                                ),
+                            }
+                        )
+                    );
                 }
             }
 
             return Expression.ListInit(
-                    Expression.New(
-                        expression.EntitySetType.GetConstructor(
-                            BindingFlags.NonPublic | BindingFlags.Instance,
-                            null,
-                            new[] { typeof(DataContext) },
-                            null),
-                        Expression.Constant(builderContext.QueryContext.DataContext)),
-                    members);
+                Expression.New(
+                    expression.EntitySetType.GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        new[] { typeof(DataContext) },
+                        null
+                    ),
+                    Expression.Constant(builderContext.QueryContext.DataContext)
+                ),
+                members
+            );
         }
 
         /// <summary>
@@ -516,12 +651,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="mappingContextParameter"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression GetOutputValueReader(Expression expression,
-                                                          ParameterExpression dataRecordParameter, ParameterExpression mappingContextParameter,
-                                                          BuilderContext builderContext)
+        protected virtual Expression GetOutputValueReader(
+            Expression expression,
+            ParameterExpression dataRecordParameter,
+            ParameterExpression mappingContextParameter,
+            BuilderContext builderContext
+        )
         {
             int valueIndex = RegisterOutputParameter(expression, builderContext);
-            return GetOutputValueReader(expression.Type, valueIndex, dataRecordParameter, mappingContextParameter);
+            return GetOutputValueReader(
+                expression.Type,
+                valueIndex,
+                dataRecordParameter,
+                mappingContextParameter
+            );
         }
 
         /// <summary>
@@ -532,15 +675,23 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="mappingContextParameter"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression GetOutputValueReader(ColumnExpression expression,
-                                                          ParameterExpression dataRecordParameter, ParameterExpression mappingContextParameter,
-                                                          BuilderContext builderContext)
+        protected virtual Expression GetOutputValueReader(
+            ColumnExpression expression,
+            ParameterExpression dataRecordParameter,
+            ParameterExpression mappingContextParameter,
+            BuilderContext builderContext
+        )
         {
             int valueIndex = RegisterOutputParameter(expression, builderContext);
-            Type storageType = expression.StorageInfo != null ? expression.StorageInfo.GetMemberType() : null;
-            return GetOutputValueReader(storageType ?? expression.Type, valueIndex, dataRecordParameter, mappingContextParameter);
+            Type storageType =
+                expression.StorageInfo != null ? expression.StorageInfo.GetMemberType() : null;
+            return GetOutputValueReader(
+                storageType ?? expression.Type,
+                valueIndex,
+                dataRecordParameter,
+                mappingContextParameter
+            );
         }
-
 
         /// <summary>
         /// Registers the expression as returned column
@@ -550,12 +701,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="dataRecordParameter"></param>
         /// <param name="mappingContextParameter"></param>
         /// <returns></returns>
-        protected virtual Expression GetOutputValueReader(Type columnType, int valueIndex, ParameterExpression dataRecordParameter,
-                                                          ParameterExpression mappingContextParameter)
+        protected virtual Expression GetOutputValueReader(
+            Type columnType,
+            int valueIndex,
+            ParameterExpression dataRecordParameter,
+            ParameterExpression mappingContextParameter
+        )
         {
             var propertyReaderLambda = DataRecordReader.GetPropertyReader(columnType);
-            Expression invoke = new ParameterBinder().BindParams(propertyReaderLambda,
-                dataRecordParameter, mappingContextParameter, Expression.Constant(valueIndex));
+            Expression invoke = new ParameterBinder().BindParams(
+                propertyReaderLambda,
+                dataRecordParameter,
+                mappingContextParameter,
+                Expression.Constant(valueIndex)
+            );
             if (!columnType.IsNullable())
                 invoke = Expression.Convert(invoke, columnType);
             return invoke;

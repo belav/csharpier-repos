@@ -28,12 +28,10 @@ namespace Microsoft.CodeAnalysis.Collections
             readonly object? IEnumerator.Current => ((IEnumerator)_enumerator).Current;
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator.Dispose()"/>
-            public readonly void Dispose()
-                => _enumerator.Dispose();
+            public readonly void Dispose() => _enumerator.Dispose();
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator.MoveNext()"/>
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator.Reset()"/>
             public void Reset()

@@ -3,16 +3,18 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Property,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class DataMemberAttribute : Attribute
     {
         private string? _name;
         private bool _isNameSetExplicitly;
         private int _order = -1;
 
-        public DataMemberAttribute()
-        {
-        }
+        public DataMemberAttribute() { }
 
         public string? Name
         {

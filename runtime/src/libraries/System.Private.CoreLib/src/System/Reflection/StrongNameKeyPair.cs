@@ -7,7 +7,11 @@ using System.Runtime.Serialization;
 
 namespace System.Reflection
 {
-    [Obsolete(Obsoletions.StrongNameKeyPairMessage, DiagnosticId = Obsoletions.StrongNameKeyPairDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.StrongNameKeyPairMessage,
+        DiagnosticId = Obsoletions.StrongNameKeyPairDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class StrongNameKeyPair : IDeserializationCallback, ISerializable
     {
         public StrongNameKeyPair(FileStream keyPairFile) =>
@@ -16,7 +20,11 @@ namespace System.Reflection
         public StrongNameKeyPair(byte[] keyPairArray) =>
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_StrongNameSigning);
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected StrongNameKeyPair(SerializationInfo info, StreamingContext context) =>
             throw new PlatformNotSupportedException();

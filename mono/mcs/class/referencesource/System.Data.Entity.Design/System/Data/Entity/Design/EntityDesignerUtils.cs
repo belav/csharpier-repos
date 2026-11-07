@@ -7,11 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping;
 
 namespace System.Data.Entity.Design
 {
@@ -23,26 +23,26 @@ namespace System.Data.Entity.Design
         internal const string EdmxNamespaceUriV3 = "http://schemas.microsoft.com/ado/2009/11/edmx";
 
         private static readonly EFNamespaceSet v1Namespaces = new EFNamespaceSet
-                                        { 
-                                            Edmx = EdmxNamespaceUriV1,
-                                            Csdl = XmlConstants.ModelNamespace_1,
-                                            Msl =  StorageMslConstructs.NamespaceUriV1,
-                                            Ssdl = XmlConstants.TargetNamespace_1,
-                                        };
+        {
+            Edmx = EdmxNamespaceUriV1,
+            Csdl = XmlConstants.ModelNamespace_1,
+            Msl = StorageMslConstructs.NamespaceUriV1,
+            Ssdl = XmlConstants.TargetNamespace_1,
+        };
         private static readonly EFNamespaceSet v2Namespaces = new EFNamespaceSet
-                                        { 
-                                            Edmx = EdmxNamespaceUriV2,
-                                            Csdl = XmlConstants.ModelNamespace_2,
-                                            Msl =  StorageMslConstructs.NamespaceUriV2,
-                                            Ssdl = XmlConstants.TargetNamespace_2,
-                                        };
+        {
+            Edmx = EdmxNamespaceUriV2,
+            Csdl = XmlConstants.ModelNamespace_2,
+            Msl = StorageMslConstructs.NamespaceUriV2,
+            Ssdl = XmlConstants.TargetNamespace_2,
+        };
         private static readonly EFNamespaceSet v3Namespaces = new EFNamespaceSet
-                                        {
-                                            Edmx = EdmxNamespaceUriV3,
-                                            Csdl = XmlConstants.ModelNamespace_3,
-                                            Msl = StorageMslConstructs.NamespaceUriV3,
-                                            Ssdl = XmlConstants.TargetNamespace_3,
-                                        };
+        {
+            Edmx = EdmxNamespaceUriV3,
+            Csdl = XmlConstants.ModelNamespace_3,
+            Msl = StorageMslConstructs.NamespaceUriV3,
+            Ssdl = XmlConstants.TargetNamespace_3,
+        };
         internal static readonly string _edmxFileExtension = ".edmx";
 
         /// <summary>
@@ -53,8 +53,13 @@ namespace System.Data.Entity.Design
         /// <param name="mappingNode"></param>
         /// <param name="storageSchemaNode"></param>
         ///
-        internal static void ExtractConceptualMappingAndStorageNodes(StreamReader edmxInputStream,
-            out XmlElement conceptualSchemaNode, out XmlElement mappingNode, out XmlElement storageSchemaNode, out string metadataArtifactProcessingValue)
+        internal static void ExtractConceptualMappingAndStorageNodes(
+            StreamReader edmxInputStream,
+            out XmlElement conceptualSchemaNode,
+            out XmlElement mappingNode,
+            out XmlElement storageSchemaNode,
+            out string metadataArtifactProcessingValue
+        )
         {
             // load up an XML document representing the edmx file
             XmlDocument xmlDocument = new XmlDocument();
@@ -80,22 +85,33 @@ namespace System.Data.Entity.Design
             nsMgr.AddNamespace("map", set.Msl);
 
             // find the ConceptualModel Schema node
-            conceptualSchemaNode = (XmlElement)xmlDocument.SelectSingleNode(
-                "/edmx:Edmx/edmx:Runtime/edmx:ConceptualModels/edm:Schema", nsMgr);
+            conceptualSchemaNode = (XmlElement)
+                xmlDocument.SelectSingleNode(
+                    "/edmx:Edmx/edmx:Runtime/edmx:ConceptualModels/edm:Schema",
+                    nsMgr
+                );
 
             // find the StorageModel Schema node
-            storageSchemaNode = (XmlElement)xmlDocument.SelectSingleNode(
-                "/edmx:Edmx/edmx:Runtime/edmx:StorageModels/ssdl:Schema", nsMgr);
+            storageSchemaNode = (XmlElement)
+                xmlDocument.SelectSingleNode(
+                    "/edmx:Edmx/edmx:Runtime/edmx:StorageModels/ssdl:Schema",
+                    nsMgr
+                );
 
             // find the Mapping node
-            mappingNode = (XmlElement)xmlDocument.SelectSingleNode(
-                "/edmx:Edmx/edmx:Runtime/edmx:Mappings/map:Mapping", nsMgr);
+            mappingNode = (XmlElement)
+                xmlDocument.SelectSingleNode(
+                    "/edmx:Edmx/edmx:Runtime/edmx:Mappings/map:Mapping",
+                    nsMgr
+                );
 
             // find the Connection node
 
             metadataArtifactProcessingValue = String.Empty;
             XmlNodeList connectionProperties = xmlDocument.SelectNodes(
-                "/edmx:Edmx/edmx:Designer/edmx:Connection/edmx:DesignerInfoPropertySet/edmx:DesignerProperty", nsMgr);
+                "/edmx:Edmx/edmx:Designer/edmx:Connection/edmx:DesignerInfoPropertySet/edmx:DesignerProperty",
+                nsMgr
+            );
             if (connectionProperties != null)
             {
                 foreach (XmlNode propertyNode in connectionProperties)
@@ -103,7 +119,13 @@ namespace System.Data.Entity.Design
                     foreach (XmlAttribute a in propertyNode.Attributes)
                     {
                         // treat attribute names case-sensitive (since it is xml), but attribute value case-insensitive to be accommodating .
-                        if (a.Name.Equals("Name", StringComparison.Ordinal) && a.Value.Equals("MetadataArtifactProcessing", StringComparison.OrdinalIgnoreCase))
+                        if (
+                            a.Name.Equals("Name", StringComparison.Ordinal)
+                            && a.Value.Equals(
+                                "MetadataArtifactProcessing",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             foreach (XmlAttribute a2 in propertyNode.Attributes)
                             {
@@ -141,7 +163,10 @@ namespace System.Data.Entity.Design
             }
             finally
             {
-                if (writer != null) { writer.Close(); }
+                if (writer != null)
+                {
+                    writer.Close();
+                }
             }
         }
 

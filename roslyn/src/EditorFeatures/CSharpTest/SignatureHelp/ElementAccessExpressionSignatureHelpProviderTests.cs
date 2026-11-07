@@ -16,10 +16,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
 {
     [Trait(Traits.Feature, Traits.Features.SignatureHelp)]
-    public class ElementAccessExpressionSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+    public class ElementAccessExpressionSignatureHelpProviderTests
+        : AbstractCSharpSignatureHelpProviderTests
     {
-        internal override Type GetSignatureHelpProviderType()
-            => typeof(ElementAccessExpressionSignatureHelpProvider);
+        internal override Type GetSignatureHelpProviderType() =>
+            typeof(ElementAccessExpressionSignatureHelpProvider);
 
         #region "Regular tests"
 
@@ -47,7 +48,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -70,7 +78,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("ref int C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "ref int C[int a]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -93,7 +108,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("ref readonly int C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "ref readonly int C[int a]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -122,7 +144,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -155,7 +184,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a]", "Summary for this.", "Param a", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a]",
+                    "Summary for this.",
+                    "Param a",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -183,7 +219,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a, bool b]", string.Empty, string.Empty, currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a, bool b]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -217,7 +260,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a, bool b]", "Summary for this.", "Param b", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a, bool b]",
+                    "Summary for this.",
+                    "Param b",
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -225,8 +275,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         [Fact]
         public async Task TestInvocationWithoutClosingBracketWithParameters()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     public string this[int a]
@@ -247,7 +296,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -276,7 +332,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a, bool b]", string.Empty, string.Empty, currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a, bool b]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -339,7 +402,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -368,7 +438,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a, bool b]", string.Empty, string.Empty, currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "string C[int a, bool b]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -438,14 +515,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                referencedCode: referencedCode,
-                                                expectedOrderedItemsMetadataReference: expectedOrderedItems,
-                                                expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                sourceLanguage: LanguageNames.CSharp,
-                                                referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItems,
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
@@ -473,14 +559,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItemsMetadataReference = new List<SignatureHelpTestItem>();
-            expectedOrderedItemsMetadataReference.Add(new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItemsMetadataReference.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                referencedCode: referencedCode,
-                                                expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
-                                                expectedOrderedItemsSameSolution: expectedOrderedItemsMetadataReference,
-                                                sourceLanguage: LanguageNames.CSharp,
-                                                referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
+                expectedOrderedItemsSameSolution: expectedOrderedItemsMetadataReference,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
@@ -508,23 +603,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
                 referencedCode: referencedCode,
                 expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
                 expectedOrderedItemsSameSolution: expectedOrderedItems,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: true);
+                hideAdvancedMembers: true
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
                 referencedCode: referencedCode,
                 expectedOrderedItemsMetadataReference: expectedOrderedItems,
                 expectedOrderedItemsSameSolution: expectedOrderedItems,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: false);
+                hideAdvancedMembers: false
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
@@ -559,20 +665,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var expectedOrderedItemsMetadataReference = new List<SignatureHelpTestItem>();
-            expectedOrderedItemsMetadataReference.Add(new SignatureHelpTestItem("int Goo[double d]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItemsMetadataReference.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[double d]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             var expectedOrderedItemsSameSolution = new List<SignatureHelpTestItem>
             {
-                new SignatureHelpTestItem("int Goo[double d]", string.Empty, string.Empty, currentParameterIndex: 0),
-                new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0),
+                new SignatureHelpTestItem(
+                    "int Goo[double d]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                ),
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                ),
             };
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                referencedCode: referencedCode,
-                                                expectedOrderedItemsMetadataReference: expectedOrderedItemsMetadataReference,
-                                                expectedOrderedItemsSameSolution: expectedOrderedItemsSameSolution,
-                                                sourceLanguage: LanguageNames.CSharp,
-                                                referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItemsMetadataReference,
+                expectedOrderedItemsSameSolution: expectedOrderedItemsSameSolution,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
@@ -600,14 +725,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                referencedCode: referencedCode,
-                                                expectedOrderedItemsMetadataReference: expectedOrderedItems,
-                                                expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                sourceLanguage: LanguageNames.CSharp,
-                                                referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItems,
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
@@ -635,14 +769,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                referencedCode: referencedCode,
-                                                expectedOrderedItemsMetadataReference: expectedOrderedItems,
-                                                expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                sourceLanguage: LanguageNames.CSharp,
-                                                referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItems,
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
@@ -671,14 +814,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("int Goo[int x]", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "int Goo[int x]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                referencedCode: referencedCode,
-                                                expectedOrderedItemsMetadataReference: expectedOrderedItems,
-                                                expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                sourceLanguage: LanguageNames.CSharp,
-                                                referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItems,
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         #endregion
@@ -730,17 +882,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 """;
 
             var metadataItems = new List<SignatureHelpTestItem>();
-            metadataItems.Add(new SignatureHelpTestItem("string CCC.IndexProp[int p1]", string.Empty, string.Empty, currentParameterIndex: 0));
+            metadataItems.Add(
+                new SignatureHelpTestItem(
+                    "string CCC.IndexProp[int p1]",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             var projectReferenceItems = new List<SignatureHelpTestItem>();
-            projectReferenceItems.Add(new SignatureHelpTestItem("string CCC.IndexProp[int p1]", "An index property from VB", "p1 is an integer index", currentParameterIndex: 0));
+            projectReferenceItems.Add(
+                new SignatureHelpTestItem(
+                    "string CCC.IndexProp[int p1]",
+                    "An index property from VB",
+                    "p1 is an integer index",
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                               referencedCode: referencedCode,
-                                               expectedOrderedItemsMetadataReference: metadataItems,
-                                               expectedOrderedItemsSameSolution: projectReferenceItems,
-                                               sourceLanguage: LanguageNames.CSharp,
-                                               referencedLanguage: LanguageNames.VisualBasic);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: metadataItems,
+                expectedOrderedItemsSameSolution: projectReferenceItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.VisualBasic
+            );
         }
 
         #endregion
@@ -776,7 +944,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                     </Project>
                 </Workspace>
                 """;
-            var expectedDescription = new SignatureHelpTestItem($"int C[int z]\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj2", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}", currentParameterIndex: 0);
+            var expectedDescription = new SignatureHelpTestItem(
+                $"int C[int z]\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj2", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}",
+                currentParameterIndex: 0
+            );
             await VerifyItemWithReferenceWorkerAsync(markup, new[] { expectedDescription }, false);
         }
 
@@ -818,15 +989,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 </Workspace>
                 """;
 
-            var expectedDescription = new SignatureHelpTestItem($"int C[int z]\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj3", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}", currentParameterIndex: 0);
+            var expectedDescription = new SignatureHelpTestItem(
+                $"int C[int z]\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj3", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}",
+                currentParameterIndex: 0
+            );
             await VerifyItemWithReferenceWorkerAsync(markup, new[] { expectedDescription }, false);
         }
 
         [Trait(Traits.Feature, Traits.Features.SignatureHelp)]
-        public class IncompleteElementAccessExpressionSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+        public class IncompleteElementAccessExpressionSignatureHelpProviderTests
+            : AbstractCSharpSignatureHelpProviderTests
         {
-            internal override Type GetSignatureHelpProviderType()
-                => typeof(ElementAccessExpressionSignatureHelpProvider);
+            internal override Type GetSignatureHelpProviderType() =>
+                typeof(ElementAccessExpressionSignatureHelpProvider);
 
             [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/636117")]
             public async Task TestInvocation()
@@ -852,7 +1027,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                     """;
 
                 var expectedOrderedItems = new List<SignatureHelpTestItem>();
-                expectedOrderedItems.Add(new SignatureHelpTestItem("string C[int a]", string.Empty, string.Empty, currentParameterIndex: 0));
+                expectedOrderedItems.Add(
+                    new SignatureHelpTestItem(
+                        "string C[int a]",
+                        string.Empty,
+                        string.Empty,
+                        currentParameterIndex: 0
+                    )
+                );
 
                 await TestAsync(markup, expectedOrderedItems);
             }
@@ -880,7 +1062,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                     """;
 
                 var expectedOrderedItems = new List<SignatureHelpTestItem>();
-                expectedOrderedItems.Add(new SignatureHelpTestItem("int P[int z]", string.Empty, string.Empty, currentParameterIndex: 0));
+                expectedOrderedItems.Add(
+                    new SignatureHelpTestItem(
+                        "int P[int z]",
+                        string.Empty,
+                        string.Empty,
+                        currentParameterIndex: 0
+                    )
+                );
 
                 await TestAsync(markup, expectedOrderedItems);
             }
@@ -897,7 +1086,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         {
                             ""?[$$ }
                     }
-                    """, expected); // inline with a string literal
+                    """,
+                    expected
+                ); // inline with a string literal
                 await TestAsync(
                     """
                     class C
@@ -906,7 +1097,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         {
                             ""?[/**/$$ }
                     }
-                    """, expected); // inline with a string literal and multiline comment
+                    """,
+                    expected
+                ); // inline with a string literal and multiline comment
                 await TestAsync(
                     """
                     class C
@@ -915,7 +1108,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         {
                             ("")?[$$ }
                     }
-                    """, expected); // parenthesized expression
+                    """,
+                    expected
+                ); // parenthesized expression
                 await TestAsync(
                     """
                     class C
@@ -924,7 +1119,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         {
                             new System.String(' ', 1)?[$$ }
                     }
-                    """, expected); // new object expression
+                    """,
+                    expected
+                ); // new object expression
 
                 // more complicated parenthesized expression
                 await TestAsync(
@@ -935,7 +1132,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         {
                             (null as System.Collections.Generic.List<int>)?[$$ }
                     }
-                    """, new[] { new SignatureHelpTestItem("int System.Collections.Generic.List<int>[int index]") });
+                    """,
+                    new[]
+                    {
+                        new SignatureHelpTestItem(
+                            "int System.Collections.Generic.List<int>[int index]"
+                        ),
+                    }
+                );
             }
 
             [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1067933")]
@@ -968,7 +1172,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         }
                     }
                     """;
-                await TestAsync(markup, new[] { new SignatureHelpTestItem("int WithIndexer[int index]") }, usePreviousCharAsTrigger: true);
+                await TestAsync(
+                    markup,
+                    new[] { new SignatureHelpTestItem("int WithIndexer[int index]") },
+                    usePreviousCharAsTrigger: true
+                );
             }
 
             [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20507")]
@@ -988,7 +1196,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         }
                     }
                     """;
-                await TestAsync(markup, new[] { new SignatureHelpTestItem("Indexable Indexable[int x]") }, usePreviousCharAsTrigger: false);
+                await TestAsync(
+                    markup,
+                    new[] { new SignatureHelpTestItem("Indexable Indexable[int x]") },
+                    usePreviousCharAsTrigger: false
+                );
             }
 
             [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20507")]
@@ -1008,7 +1220,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         }
                     }
                     """;
-                await TestAsync(markup, new[] { new SignatureHelpTestItem("Indexable Indexable[int x]") }, usePreviousCharAsTrigger: false);
+                await TestAsync(
+                    markup,
+                    new[] { new SignatureHelpTestItem("Indexable Indexable[int x]") },
+                    usePreviousCharAsTrigger: false
+                );
             }
         }
     }

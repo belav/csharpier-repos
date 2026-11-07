@@ -13,10 +13,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
     internal interface IUnitTestingSolutionCrawlerService : IWorkspaceService
     {
         /// <summary>
-        /// Ask solution crawler to re-analyze given <see cref="ProjectId"/>s or/and <see cref="DocumentId"/>s 
+        /// Ask solution crawler to re-analyze given <see cref="ProjectId"/>s or/and <see cref="DocumentId"/>s
         /// in given <see cref="Workspace"/> with given <see cref="IUnitTestingIncrementalAnalyzer"/>.
         /// </summary>
-        void Reanalyze(string? workspaceKind, SolutionServices services, IUnitTestingIncrementalAnalyzer analyzer, IEnumerable<ProjectId>? projectIds = null, IEnumerable<DocumentId>? documentIds = null, bool highPriority = false);
+        void Reanalyze(
+            string? workspaceKind,
+            SolutionServices services,
+            IUnitTestingIncrementalAnalyzer analyzer,
+            IEnumerable<ProjectId>? projectIds = null,
+            IEnumerable<DocumentId>? documentIds = null,
+            bool highPriority = false
+        );
 
         /// <summary>
         /// Get <see cref="IUnitTestingSolutionCrawlerProgressReporter"/> for the given <see cref="Workspace"/>

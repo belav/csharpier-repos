@@ -13,10 +13,28 @@ namespace System.Linq.Expressions.Tests
             {
                 return new[]
                 {
-                    typeof(bool), typeof(byte), typeof(char), typeof(DateTime), typeof(decimal), typeof(double), typeof(short),
-                    typeof(int), typeof(long), typeof(object), typeof(sbyte), typeof(float), typeof(string), typeof(ushort),
-                    typeof(uint), typeof(ulong), typeof(ParameterExpressionTests), typeof(ExpressionType), typeof(Uri),
-                    typeof(DateTimeOffset), typeof(Exception), typeof(InvalidOperationException)
+                    typeof(bool),
+                    typeof(byte),
+                    typeof(char),
+                    typeof(DateTime),
+                    typeof(decimal),
+                    typeof(double),
+                    typeof(short),
+                    typeof(int),
+                    typeof(long),
+                    typeof(object),
+                    typeof(sbyte),
+                    typeof(float),
+                    typeof(string),
+                    typeof(ushort),
+                    typeof(uint),
+                    typeof(ulong),
+                    typeof(ParameterExpressionTests),
+                    typeof(ExpressionType),
+                    typeof(Uri),
+                    typeof(DateTimeOffset),
+                    typeof(Exception),
+                    typeof(InvalidOperationException),
                 };
             }
         }
@@ -31,10 +49,7 @@ namespace System.Linq.Expressions.Tests
 
         private static IEnumerable<Type> ByRefTypes
         {
-            get
-            {
-                return ValidTypes.Select(i => i.MakeByRefType());
-            }
+            get { return ValidTypes.Select(i => i.MakeByRefType()); }
         }
 
         public static IEnumerable<object[]> ValidTypeData()
@@ -53,8 +68,21 @@ namespace System.Linq.Expressions.Tests
             {
                 return new object[]
                 {
-                    true, false, (byte)3, '!', DateTime.MinValue, 23, 23m, 23.0, 23U, new object(), 23L, DateTimeOffset.MaxValue,
-                    new Uri("http://example.net"), "1Q84", ExpressionType.Parameter
+                    true,
+                    false,
+                    (byte)3,
+                    '!',
+                    DateTime.MinValue,
+                    23,
+                    23m,
+                    23.0,
+                    23U,
+                    new object(),
+                    23L,
+                    DateTimeOffset.MaxValue,
+                    new Uri("http://example.net"),
+                    "1Q84",
+                    ExpressionType.Parameter,
                 };
             }
         }

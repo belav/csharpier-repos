@@ -3,21 +3,23 @@ namespace System.Workflow.ComponentModel.Design
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Serialization;
     using System.ComponentModel.Design.Serialization;
-    using System.IO;
-    using System.Windows.Forms;
     using System.Drawing.Design;
+    using System.IO;
     using System.Security.Permissions;
-    using System.Xml;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Collections.ObjectModel;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     #region Class WorkflowDesignerLoader
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class WorkflowDesignerLoader : BasicDesignerLoader
     {
         #region Members, Construction and Dispose
@@ -30,7 +32,10 @@ namespace System.Workflow.ComponentModel.Design
 
         static WorkflowDesignerLoader()
         {
-            ComponentDispenser.RegisterComponentExtenders(typeof(CustomActivityDesignerAdapter), new IExtenderProvider[] { new CustomActivityPropertyExtender() });
+            ComponentDispenser.RegisterComponentExtenders(
+                typeof(CustomActivityDesignerAdapter),
+                new IExtenderProvider[] { new CustomActivityPropertyExtender() }
+            );
         }
 
         protected override void Initialize()
@@ -42,7 +47,10 @@ namespace System.Workflow.ComponentModel.Design
             //Please refer to file WorkflowInlining.cs
             Type invokeWorkflowType = Type.GetType(InvokeWorkflowDesigner.InvokeWorkflowRef);
             if (invokeWorkflowType != null)
-                TypeDescriptor.AddAttributes(invokeWorkflowType, new DesignerAttribute(typeof(InvokeWorkflowDesigner), typeof(IDesigner)));
+                TypeDescriptor.AddAttributes(
+                    invokeWorkflowType,
+                    new DesignerAttribute(typeof(InvokeWorkflowDesigner), typeof(IDesigner))
+                );
 
             //Add all the services, it is important to make sure that if user pushes the services then we honor
             //those services
@@ -67,7 +75,8 @@ namespace System.Workflow.ComponentModel.Design
 
             //Add all the extenders, the extenders are responsible to add the extended properties which are not
             //actual properties on activity
-            IExtenderProviderService extenderProviderService = GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
+            IExtenderProviderService extenderProviderService =
+                GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
             if (extenderProviderService != null)
             {
                 foreach (IExtenderProvider extender in ComponentDispenser.Extenders)
@@ -91,7 +100,8 @@ namespace System.Workflow.ComponentModel.Design
                 this.customActivityDesignerAdapter = null;
             }
 
-            IExtenderProviderService extenderProviderService = GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
+            IExtenderProviderService extenderProviderService =
+                GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
             if (extenderProviderService != null)
             {
                 foreach (IExtenderProvider extender in ComponentDispenser.Extenders)
@@ -136,26 +146,25 @@ namespace System.Workflow.ComponentModel.Design
 
         public virtual bool InDebugMode
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         protected virtual TypeDescriptionProvider TargetFrameworkTypeDescriptionProvider
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         void AddTargetFrameworkProvider(IComponent component)
         {
-            TypeDescriptionProviderService typeDescriptionProviderService = GetService(typeof(TypeDescriptionProviderService)) as TypeDescriptionProviderService;
+            TypeDescriptionProviderService typeDescriptionProviderService =
+                GetService(typeof(TypeDescriptionProviderService))
+                as TypeDescriptionProviderService;
             if (typeDescriptionProviderService != null && component != null)
             {
-                TypeDescriptor.AddProvider(typeDescriptionProviderService.GetProvider(component), component);
+                TypeDescriptor.AddProvider(
+                    typeDescriptionProviderService.GetProvider(component),
+                    component
+                );
             }
         }
 
@@ -166,12 +175,18 @@ namespace System.Workflow.ComponentModel.Design
 
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                );
 
             if (activity.Parent == null && designerHost.RootComponent == null)
             {
-                string fullClassName = activity.GetValue(WorkflowMarkupSerializer.XClassProperty) as String;
-                string rootSiteName = (!string.IsNullOrEmpty(fullClassName)) ? Helpers.GetClassName(fullClassName) : Helpers.GetClassName(activity.GetType().FullName);
+                string fullClassName =
+                    activity.GetValue(WorkflowMarkupSerializer.XClassProperty) as String;
+                string rootSiteName =
+                    (!string.IsNullOrEmpty(fullClassName))
+                        ? Helpers.GetClassName(fullClassName)
+                        : Helpers.GetClassName(activity.GetType().FullName);
                 designerHost.Container.Add(activity, rootSiteName);
                 AddTargetFrameworkProvider(activity);
             }
@@ -183,7 +198,9 @@ namespace System.Workflow.ComponentModel.Design
 
             if (activity is CompositeActivity)
             {
-                foreach (Activity activity2 in Helpers.GetNestedActivities(activity as CompositeActivity))
+                foreach (
+                    Activity activity2 in Helpers.GetNestedActivities(activity as CompositeActivity)
+                )
                 {
                     designerHost.Container.Add(activity2, activity2.QualifiedName);
                     AddTargetFrameworkProvider(activity2);
@@ -198,21 +215,23 @@ namespace System.Workflow.ComponentModel.Design
 
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                );
 
             designerHost.DestroyComponent(activity);
             if (activity is CompositeActivity)
             {
-                foreach (Activity activity2 in Helpers.GetNestedActivities(activity as CompositeActivity))
+                foreach (
+                    Activity activity2 in Helpers.GetNestedActivities(activity as CompositeActivity)
+                )
                     designerHost.DestroyComponent(activity2);
             }
         }
         #endregion
 
         #region Protected Methods and Properties
-        protected override void PerformLoad(IDesignerSerializationManager serializationManager)
-        {
-        }
+        protected override void PerformLoad(IDesignerSerializationManager serializationManager) { }
 
         protected override void PerformFlush(IDesignerSerializationManager serializationManager)
         {
@@ -227,7 +246,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 //We initialize the events coordinator only once when loading of the designer is complete
                 ActivityDesigner rootDesigner = ActivityDesigner.GetRootDesigner(LoaderHost);
-                if (this.eventsCoordinator == null && (rootDesigner == null || rootDesigner.ParentDesigner == null))
+                if (
+                    this.eventsCoordinator == null
+                    && (rootDesigner == null || rootDesigner.ParentDesigner == null)
+                )
                     this.eventsCoordinator = new WorkflowDesignerEventsCoordinator(LoaderHost);
 
                 try
@@ -238,7 +260,13 @@ namespace System.Workflow.ComponentModel.Design
                     IList layoutErrors = null;
                     if (File.Exists(layoutFileName))
                         LoadDesignerLayout(out layoutErrors);
-                    else if (InDebugMode || (ActivityDesigner.GetRootDesigner(LoaderHost) != null && ActivityDesigner.GetRootDesigner(LoaderHost).ParentDesigner != null))
+                    else if (
+                        InDebugMode
+                        || (
+                            ActivityDesigner.GetRootDesigner(LoaderHost) != null
+                            && ActivityDesigner.GetRootDesigner(LoaderHost).ParentDesigner != null
+                        )
+                    )
                         LoadDesignerLayoutFromResource(out layoutErrors);
 
                     if (layoutErrors != null)
@@ -260,7 +288,11 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        protected void LoadDesignerLayoutFromResource(Type type, string manifestResourceName, out IList errors)
+        protected void LoadDesignerLayoutFromResource(
+            Type type,
+            string manifestResourceName,
+            out IList errors
+        )
         {
             if (type == null)
                 throw new ArgumentNullException("type");
@@ -269,11 +301,17 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("manifestResourceName");
 
             if (manifestResourceName.Length == 0)
-                throw new ArgumentException(SR.GetString(SR.Error_ParameterCannotBeEmpty), "manifestResourceName");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_ParameterCannotBeEmpty),
+                    "manifestResourceName"
+                );
 
             errors = new ArrayList();
 
-            Stream stream = type.Module.Assembly.GetManifestResourceStream(type, manifestResourceName);
+            Stream stream = type.Module.Assembly.GetManifestResourceStream(
+                type,
+                manifestResourceName
+            );
             if (stream == null)
                 stream = type.Module.Assembly.GetManifestResourceStream(manifestResourceName);
 
@@ -298,25 +336,38 @@ namespace System.Workflow.ComponentModel.Design
             ActivityDesigner rootDesigner = null;
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost != null && designerHost.RootComponent != null)
-                rootDesigner = designerHost.GetDesigner(designerHost.RootComponent) as ActivityDesigner;
+                rootDesigner =
+                    designerHost.GetDesigner(designerHost.RootComponent) as ActivityDesigner;
 
             if (rootDesigner != null)
             {
                 if (rootDesigner.SupportsLayoutPersistence)
                 {
-                    DesignerSerializationManager serializationManager = new DesignerSerializationManager(LoaderHost);
+                    DesignerSerializationManager serializationManager =
+                        new DesignerSerializationManager(LoaderHost);
                     using (serializationManager.CreateSession())
                     {
-                        WorkflowMarkupSerializationManager layoutSerializationManager = new WorkflowMarkupSerializationManager(serializationManager);
-                        layoutSerializationManager.AddSerializationProvider(new ActivityDesignerLayoutSerializerProvider());
+                        WorkflowMarkupSerializationManager layoutSerializationManager =
+                            new WorkflowMarkupSerializationManager(serializationManager);
+                        layoutSerializationManager.AddSerializationProvider(
+                            new ActivityDesignerLayoutSerializerProvider()
+                        );
 
                         try
                         {
-                            new WorkflowMarkupSerializer().Deserialize(layoutSerializationManager, layoutReader);
+                            new WorkflowMarkupSerializer().Deserialize(
+                                layoutSerializationManager,
+                                layoutReader
+                            );
                         }
                         catch (Exception e)
                         {
-                            errors.Add(new WorkflowMarkupSerializationException(SR.GetString(SR.Error_LayoutDeserialization), e));
+                            errors.Add(
+                                new WorkflowMarkupSerializationException(
+                                    SR.GetString(SR.Error_LayoutDeserialization),
+                                    e
+                                )
+                            );
                         }
                         finally
                         {
@@ -327,16 +378,28 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 else
                 {
-                    errors.Add(new WorkflowMarkupSerializationException(SR.GetString(SR.Error_LayoutSerializationPersistenceSupport)));
+                    errors.Add(
+                        new WorkflowMarkupSerializationException(
+                            SR.GetString(SR.Error_LayoutSerializationPersistenceSupport)
+                        )
+                    );
                 }
             }
             else
             {
-                errors.Add(new WorkflowMarkupSerializationException(SR.GetString(SR.Error_LayoutSerializationRootDesignerNotFound)));
+                errors.Add(
+                    new WorkflowMarkupSerializationException(
+                        SR.GetString(SR.Error_LayoutSerializationRootDesignerNotFound)
+                    )
+                );
             }
         }
 
-        protected void SaveDesignerLayout(XmlWriter layoutWriter, ActivityDesigner rootDesigner, out IList layoutSaveErrors)
+        protected void SaveDesignerLayout(
+            XmlWriter layoutWriter,
+            ActivityDesigner rootDesigner,
+            out IList layoutSaveErrors
+        )
         {
             if (layoutWriter == null)
                 throw new ArgumentNullException("layoutWriter");
@@ -349,19 +412,32 @@ namespace System.Workflow.ComponentModel.Design
 
             if (rootDesigner.SupportsLayoutPersistence)
             {
-                DesignerSerializationManager serializationManager = new DesignerSerializationManager(LoaderHost);
+                DesignerSerializationManager serializationManager =
+                    new DesignerSerializationManager(LoaderHost);
                 using (serializationManager.CreateSession())
                 {
-                    WorkflowMarkupSerializationManager layoutSerializationManager = new WorkflowMarkupSerializationManager(serializationManager);
-                    layoutSerializationManager.AddSerializationProvider(new ActivityDesignerLayoutSerializerProvider());
+                    WorkflowMarkupSerializationManager layoutSerializationManager =
+                        new WorkflowMarkupSerializationManager(serializationManager);
+                    layoutSerializationManager.AddSerializationProvider(
+                        new ActivityDesignerLayoutSerializerProvider()
+                    );
 
                     try
                     {
-                        new WorkflowMarkupSerializer().Serialize(layoutSerializationManager, layoutWriter, rootDesigner);
+                        new WorkflowMarkupSerializer().Serialize(
+                            layoutSerializationManager,
+                            layoutWriter,
+                            rootDesigner
+                        );
                     }
                     catch (Exception e)
                     {
-                        errors.Add(new WorkflowMarkupSerializationException(SR.GetString(SR.Error_LayoutSerialization), e));
+                        errors.Add(
+                            new WorkflowMarkupSerializationException(
+                                SR.GetString(SR.Error_LayoutSerialization),
+                                e
+                            )
+                        );
                     }
                     finally
                     {
@@ -372,7 +448,11 @@ namespace System.Workflow.ComponentModel.Design
             }
             else
             {
-                errors.Add(new WorkflowMarkupSerializationException(SR.GetString(SR.Error_LayoutSerializationPersistenceSupport)));
+                errors.Add(
+                    new WorkflowMarkupSerializationException(
+                        SR.GetString(SR.Error_LayoutSerializationPersistenceSupport)
+                    )
+                );
             }
         }
         #endregion
@@ -387,20 +467,34 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        internal static void AddActivityToDesigner(IServiceProvider serviceProvider, Activity activity)
+        internal static void AddActivityToDesigner(
+            IServiceProvider serviceProvider,
+            Activity activity
+        )
         {
-            WorkflowDesignerLoader workflowLoader = serviceProvider.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            WorkflowDesignerLoader workflowLoader =
+                serviceProvider.GetService(typeof(WorkflowDesignerLoader))
+                as WorkflowDesignerLoader;
             if (workflowLoader == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(WorkflowDesignerLoader).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(WorkflowDesignerLoader).FullName)
+                );
 
             workflowLoader.AddActivityToDesigner(activity);
         }
 
-        internal static void RemoveActivityFromDesigner(IServiceProvider serviceProvider, Activity activity)
+        internal static void RemoveActivityFromDesigner(
+            IServiceProvider serviceProvider,
+            Activity activity
+        )
         {
-            WorkflowDesignerLoader workflowLoader = serviceProvider.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            WorkflowDesignerLoader workflowLoader =
+                serviceProvider.GetService(typeof(WorkflowDesignerLoader))
+                as WorkflowDesignerLoader;
             if (workflowLoader == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(WorkflowDesignerLoader).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(WorkflowDesignerLoader).FullName)
+                );
 
             workflowLoader.RemoveActivityFromDesigner(activity);
         }
@@ -434,6 +528,7 @@ namespace System.Workflow.ComponentModel.Design
 
             return createdService;
         }
+
         private void OnDisposeService(Type serviceType, object service)
         {
             if (serviceType == typeof(IReferenceService))
@@ -455,7 +550,8 @@ namespace System.Workflow.ComponentModel.Design
                 return;
 
             Type rootActivityType = rootDesigner.Component.GetType();
-            string resourceName = rootActivityType.Name + WorkflowDesignerLoader.DesignerLayoutFileExtension;
+            string resourceName =
+                rootActivityType.Name + WorkflowDesignerLoader.DesignerLayoutFileExtension;
 
             LoadDesignerLayoutFromResource(rootActivityType, resourceName, out layoutErrors);
         }
@@ -466,7 +562,11 @@ namespace System.Workflow.ComponentModel.Design
 
             string layoutFileName = DesignerLayoutFileName;
             IWorkflowRootDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(LoaderHost);
-            if (rootDesigner == null || !rootDesigner.SupportsLayoutPersistence || !File.Exists(layoutFileName))
+            if (
+                rootDesigner == null
+                || !rootDesigner.SupportsLayoutPersistence
+                || !File.Exists(layoutFileName)
+            )
                 return;
 
             using (TextReader layoutReader = GetFileReader(layoutFileName))
@@ -483,7 +583,11 @@ namespace System.Workflow.ComponentModel.Design
         {
             string layoutFileName = DesignerLayoutFileName;
             ActivityDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(LoaderHost);
-            if (String.IsNullOrEmpty(layoutFileName) || rootDesigner == null || !rootDesigner.SupportsLayoutPersistence)
+            if (
+                String.IsNullOrEmpty(layoutFileName)
+                || rootDesigner == null
+                || !rootDesigner.SupportsLayoutPersistence
+            )
                 return;
 
             using (TextWriter layoutWriter = GetFileWriter(layoutFileName))
@@ -504,7 +608,10 @@ namespace System.Workflow.ComponentModel.Design
                 string layoutFileName = FileName;
                 if (!String.IsNullOrEmpty(layoutFileName))
                 {
-                    layoutFileName = Path.Combine(Path.GetDirectoryName(layoutFileName), Path.GetFileNameWithoutExtension(layoutFileName));
+                    layoutFileName = Path.Combine(
+                        Path.GetDirectoryName(layoutFileName),
+                        Path.GetFileNameWithoutExtension(layoutFileName)
+                    );
                     layoutFileName += WorkflowDesignerLoader.DesignerLayoutFileExtension;
                 }
                 return layoutFileName;
@@ -517,11 +624,14 @@ namespace System.Workflow.ComponentModel.Design
     #region Class DesignerVerbProviderService
     internal sealed class DesignerVerbProviderService : IDesignerVerbProviderService
     {
-        private List<IDesignerVerbProvider> designerVerbProviders = new List<IDesignerVerbProvider>();
+        private List<IDesignerVerbProvider> designerVerbProviders =
+            new List<IDesignerVerbProvider>();
 
         public DesignerVerbProviderService()
         {
-            ((IDesignerVerbProviderService)this).AddVerbProvider(new FreeFormDesignerVerbProvider());
+            ((IDesignerVerbProviderService)this).AddVerbProvider(
+                new FreeFormDesignerVerbProvider()
+            );
         }
 
         #region IDesignerVerbProviderService Implementation
@@ -538,10 +648,7 @@ namespace System.Workflow.ComponentModel.Design
 
         ReadOnlyCollection<IDesignerVerbProvider> IDesignerVerbProviderService.VerbProviders
         {
-            get
-            {
-                return this.designerVerbProviders.AsReadOnly();
-            }
+            get { return this.designerVerbProviders.AsReadOnly(); }
         }
         #endregion
     }
@@ -569,30 +676,45 @@ namespace System.Workflow.ComponentModel.Design
 
             //Listen to the events so that we are sure that we appropriately refresh the designer actions and tasks when the types
             //change
-            IDesignerEventService designerEventService = this.serviceProvider.GetService(typeof(IDesignerEventService)) as IDesignerEventService;
+            IDesignerEventService designerEventService =
+                this.serviceProvider.GetService(typeof(IDesignerEventService))
+                as IDesignerEventService;
             if (designerEventService != null)
-                designerEventService.ActiveDesignerChanged += new ActiveDesignerEventHandler(OnActiveDesignerChanged);
+                designerEventService.ActiveDesignerChanged += new ActiveDesignerEventHandler(
+                    OnActiveDesignerChanged
+                );
 
-            ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider != null)
                 typeProvider.TypesChanged += new EventHandler(OnTypeSystemTypesChanged);
 
-            ISelectionService selectionService = this.serviceProvider.GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                this.serviceProvider.GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
                 selectionService.SelectionChanged += new EventHandler(OnSelectionChanged);
 
-            IComponentChangeService componentChangedService = this.serviceProvider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            IComponentChangeService componentChangedService =
+                this.serviceProvider.GetService(typeof(IComponentChangeService))
+                as IComponentChangeService;
             if (componentChangedService != null)
-                componentChangedService.ComponentChanged += new ComponentChangedEventHandler(OnComponentChanged);
+                componentChangedService.ComponentChanged += new ComponentChangedEventHandler(
+                    OnComponentChanged
+                );
 
-            IPropertyValueUIService propertyValueService = this.serviceProvider.GetService(typeof(IPropertyValueUIService)) as IPropertyValueUIService;
+            IPropertyValueUIService propertyValueService =
+                this.serviceProvider.GetService(typeof(IPropertyValueUIService))
+                as IPropertyValueUIService;
             if (propertyValueService != null)
-                propertyValueService.AddPropertyValueUIHandler(new PropertyValueUIHandler(OnPropertyGridAdornments));
+                propertyValueService.AddPropertyValueUIHandler(
+                    new PropertyValueUIHandler(OnPropertyGridAdornments)
+                );
         }
 
         void IDisposable.Dispose()
         {
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
             {
                 if (this.refreshTypesHandler != null)
@@ -609,29 +731,44 @@ namespace System.Workflow.ComponentModel.Design
             this.refreshDesignerActionsHandler = null;
             this.refreshTasksHandler = null;
 
-            IExtendedUIService extUIService = this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            IExtendedUIService extUIService =
+                this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (extUIService != null)
                 extUIService.RemoveDesignerActions();
 
-            IPropertyValueUIService propertyValueService = this.serviceProvider.GetService(typeof(IPropertyValueUIService)) as IPropertyValueUIService;
+            IPropertyValueUIService propertyValueService =
+                this.serviceProvider.GetService(typeof(IPropertyValueUIService))
+                as IPropertyValueUIService;
             if (propertyValueService != null)
-                propertyValueService.RemovePropertyValueUIHandler(new PropertyValueUIHandler(OnPropertyGridAdornments));
+                propertyValueService.RemovePropertyValueUIHandler(
+                    new PropertyValueUIHandler(OnPropertyGridAdornments)
+                );
 
-            IComponentChangeService componentChangedService = this.serviceProvider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            IComponentChangeService componentChangedService =
+                this.serviceProvider.GetService(typeof(IComponentChangeService))
+                as IComponentChangeService;
             if (componentChangedService != null)
-                componentChangedService.ComponentChanged -= new ComponentChangedEventHandler(OnComponentChanged);
+                componentChangedService.ComponentChanged -= new ComponentChangedEventHandler(
+                    OnComponentChanged
+                );
 
-            ISelectionService selectionService = this.serviceProvider.GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                this.serviceProvider.GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
                 selectionService.SelectionChanged -= new EventHandler(OnSelectionChanged);
 
-            ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider != null)
                 typeProvider.TypesChanged -= new EventHandler(OnTypeSystemTypesChanged);
 
-            IDesignerEventService designerEventService = this.serviceProvider.GetService(typeof(IDesignerEventService)) as IDesignerEventService;
+            IDesignerEventService designerEventService =
+                this.serviceProvider.GetService(typeof(IDesignerEventService))
+                as IDesignerEventService;
             if (designerEventService != null)
-                designerEventService.ActiveDesignerChanged -= new ActiveDesignerEventHandler(OnActiveDesignerChanged);
+                designerEventService.ActiveDesignerChanged -= new ActiveDesignerEventHandler(
+                    OnActiveDesignerChanged
+                );
 
             this.serviceProvider.LoadComplete -= new EventHandler(OnDesignerReloaded);
         }
@@ -658,14 +795,23 @@ namespace System.Workflow.ComponentModel.Design
             this.typeSystemTypesChanged = true;
 
             //If the current designer is not active designer then we need to wait for it to be active before we update the types
-            IDesignerEventService designerEventService = this.serviceProvider.GetService(typeof(IDesignerEventService)) as IDesignerEventService;
-            if (designerEventService != null && designerEventService.ActiveDesigner == this.serviceProvider.GetService(typeof(IDesignerHost)))
+            IDesignerEventService designerEventService =
+                this.serviceProvider.GetService(typeof(IDesignerEventService))
+                as IDesignerEventService;
+            if (
+                designerEventService != null
+                && designerEventService.ActiveDesigner
+                    == this.serviceProvider.GetService(typeof(IDesignerHost))
+            )
                 RefreshTypes();
         }
 
         private void OnActiveDesignerChanged(object sender, ActiveDesignerEventArgs e)
         {
-            if (e.NewDesigner == this.serviceProvider.GetService(typeof(IDesignerHost)) && this.typeSystemTypesChanged)
+            if (
+                e.NewDesigner == this.serviceProvider.GetService(typeof(IDesignerHost))
+                && this.typeSystemTypesChanged
+            )
                 RefreshTypes();
             else
                 RefreshTasks();
@@ -680,7 +826,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.refreshTypesHandler == null && this.typeSystemTypesChanged)
             {
-                WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                WorkflowView workflowView =
+                    this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                 {
                     this.refreshTypesHandler = new EventHandler(OnRefreshTypes);
@@ -695,39 +842,53 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.refreshTypesHandler != null)
             {
-                WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                WorkflowView workflowView =
+                    this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                     workflowView.Idle -= this.refreshTypesHandler;
                 this.refreshTypesHandler = null;
             }
 
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            Activity rootActivity = (designerHost != null) ? designerHost.RootComponent as Activity : null;
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            Activity rootActivity =
+                (designerHost != null) ? designerHost.RootComponent as Activity : null;
             if (rootActivity == null)
                 return;
 
             //Now Refresh the types as well as the designer actions
-            ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider != null)
             {
                 Walker walker = new Walker();
                 walker.FoundProperty += delegate(Walker w, WalkerEventArgs args)
                 {
-                    if (args.CurrentValue != null &&
-                        args.CurrentProperty != null &&
-                        args.CurrentProperty.PropertyType == typeof(System.Type) &&
-                        args.CurrentValue is System.Type)
+                    if (
+                        args.CurrentValue != null
+                        && args.CurrentProperty != null
+                        && args.CurrentProperty.PropertyType == typeof(System.Type)
+                        && args.CurrentValue is System.Type
+                    )
                     {
                         Type updatedType = typeProvider.GetType(((Type)args.CurrentValue).FullName);
                         if (updatedType != null)
                         {
-                            args.CurrentProperty.SetValue(args.CurrentPropertyOwner, updatedType, null);
+                            args.CurrentProperty.SetValue(
+                                args.CurrentPropertyOwner,
+                                updatedType,
+                                null
+                            );
 
                             if (args.CurrentActivity != null)
                                 TypeDescriptor.Refresh(args.CurrentActivity);
                         }
                     }
-                    else if (args.CurrentProperty == null && args.CurrentValue is DependencyObject && !(args.CurrentValue is Activity))
+                    else if (
+                        args.CurrentProperty == null
+                        && args.CurrentValue is DependencyObject
+                        && !(args.CurrentValue is Activity)
+                    )
                     {
                         walker.WalkProperties(args.CurrentActivity, args.CurrentValue);
                     }
@@ -738,11 +899,14 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         TypeDescriptor.Refresh(args.CurrentActivity);
 
-                        ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(args.CurrentActivity);
+                        ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                            args.CurrentActivity
+                        );
                         if (activityDesigner != null)
                             activityDesigner.RefreshDesignerActions();
 
-                        InvokeWorkflowDesigner invokeWorkflowDesigner = activityDesigner as InvokeWorkflowDesigner;
+                        InvokeWorkflowDesigner invokeWorkflowDesigner =
+                            activityDesigner as InvokeWorkflowDesigner;
                         if (invokeWorkflowDesigner != null)
                             invokeWorkflowDesigner.RefreshTargetWorkflowType();
                     }
@@ -751,7 +915,9 @@ namespace System.Workflow.ComponentModel.Design
                 walker.Walk(rootActivity);
             }
 
-            IPropertyValueUIService propertyValueService = this.serviceProvider.GetService(typeof(IPropertyValueUIService)) as IPropertyValueUIService;
+            IPropertyValueUIService propertyValueService =
+                this.serviceProvider.GetService(typeof(IPropertyValueUIService))
+                as IPropertyValueUIService;
             if (propertyValueService != null)
                 propertyValueService.NotifyPropertyValueUIItemsChanged();
 
@@ -763,7 +929,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.refreshDesignerActionsHandler == null)
             {
-                WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                WorkflowView workflowView =
+                    this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                 {
                     this.refreshDesignerActionsHandler = new EventHandler(OnRefreshDesignerActions);
@@ -782,7 +949,7 @@ namespace System.Workflow.ComponentModel.Design
             //PROBLEM: ConfigErrors appearing on the entire design surface
             //This is due to a race condition between the validation triggered during painting
             //logic and validation triggered when we try to access the DesignerActions from RefreshTask handler
-            //In the validation logic we try to get to the types while doing so we Refresh the code compile unit 
+            //In the validation logic we try to get to the types while doing so we Refresh the code compile unit
             //in typesystem which in turn triggers CodeDomLoader.Refresh. In this we remove types, call refresh handler
             //and add new types. While doing this after the remove types but before addtypes, call is made to the drawing
             //logic in which we try to grab the designer actions which triggers another set of validations hence now we
@@ -791,7 +958,8 @@ namespace System.Workflow.ComponentModel.Design
             //THE PROBLEM CAN BE ALSO FIXED BY TRIGGERING VALIDATION IN RefreshDesignerActions ITSELF
             //FOR NOW THE REFRESH FIX WILL CAUSE MINIMAL IMPACT IN THE LIGHT OF M3
 
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (this.refreshDesignerActionsHandler != null)
             {
                 if (workflowView != null)
@@ -801,7 +969,9 @@ namespace System.Workflow.ComponentModel.Design
 
             DesignerHelpers.RefreshDesignerActions(this.serviceProvider);
 
-            IPropertyValueUIService propertyValueService = this.serviceProvider.GetService(typeof(IPropertyValueUIService)) as IPropertyValueUIService;
+            IPropertyValueUIService propertyValueService =
+                this.serviceProvider.GetService(typeof(IPropertyValueUIService))
+                as IPropertyValueUIService;
             if (propertyValueService != null)
                 propertyValueService.NotifyPropertyValueUIItemsChanged();
 
@@ -810,7 +980,8 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnSelectionChanged(object sender, EventArgs e)
         {
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
                 workflowView.Invalidate();
 
@@ -822,7 +993,8 @@ namespace System.Workflow.ComponentModel.Design
             if (this.refreshTasksHandler == null)
             {
                 //Listen to the next idle event to populate the tasks; this should happen on selection changed as well as active designer changed if the current designer is active
-                WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                WorkflowView workflowView =
+                    this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                 {
                     this.refreshTasksHandler = new EventHandler(OnRefreshTasks);
@@ -833,7 +1005,8 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnRefreshTasks(object sender, EventArgs e)
         {
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (this.refreshTasksHandler != null)
             {
                 if (workflowView != null)
@@ -841,15 +1014,22 @@ namespace System.Workflow.ComponentModel.Design
                 this.refreshTasksHandler = null;
             }
 
-            ISelectionService selectionService = this.serviceProvider.GetService(typeof(ISelectionService)) as ISelectionService;
-            IExtendedUIService extendedUIService = this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            ISelectionService selectionService =
+                this.serviceProvider.GetService(typeof(ISelectionService)) as ISelectionService;
+            IExtendedUIService extendedUIService =
+                this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (selectionService != null && extendedUIService != null)
             {
                 extendedUIService.RemoveDesignerActions();
 
                 //Only if the current designer is active designer we add the designer actions to the task list
-                IDesignerEventService designerEventService = (IDesignerEventService)this.serviceProvider.GetService(typeof(IDesignerEventService));
-                if (designerEventService != null && designerEventService.ActiveDesigner == this.serviceProvider.GetService(typeof(IDesignerHost)))
+                IDesignerEventService designerEventService = (IDesignerEventService)
+                    this.serviceProvider.GetService(typeof(IDesignerEventService));
+                if (
+                    designerEventService != null
+                    && designerEventService.ActiveDesigner
+                        == this.serviceProvider.GetService(typeof(IDesignerHost))
+                )
                 {
                     foreach (object obj in selectionService.GetSelectedComponents())
                     {
@@ -860,7 +1040,9 @@ namespace System.Workflow.ComponentModel.Design
                             activityDesigner = ActivityDesigner.GetDesigner(obj as Activity);
 
                         if (activityDesigner != null)
-                            extendedUIService.AddDesignerActions(new List<DesignerAction>(activityDesigner.DesignerActions).ToArray());
+                            extendedUIService.AddDesignerActions(
+                                new List<DesignerAction>(activityDesigner.DesignerActions).ToArray()
+                            );
                     }
                 }
             }
@@ -869,31 +1051,61 @@ namespace System.Workflow.ComponentModel.Design
                 workflowView.Invalidate();
         }
 
-        private void OnPropertyGridAdornments(ITypeDescriptorContext context, PropertyDescriptor propDesc, ArrayList valueUIItemList)
+        private void OnPropertyGridAdornments(
+            ITypeDescriptorContext context,
+            PropertyDescriptor propDesc,
+            ArrayList valueUIItemList
+        )
         {
             IComponent component = null;
-            IReferenceService referenceService = this.serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
+            IReferenceService referenceService =
+                this.serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
             if (referenceService != null)
                 component = referenceService.GetComponent(context.Instance);
 
             string fullAliasName = string.Empty;
             //this attribue is set to overcome issue with the TypedVariableDeclarationTypeConverter
-            //not returning Name property at all. we alias that property to the VariableDeclaration itself 
-            DefaultPropertyAttribute aliasPropertyNameAttribute = propDesc.Attributes[typeof(DefaultPropertyAttribute)] as DefaultPropertyAttribute;
-            if (aliasPropertyNameAttribute != null && aliasPropertyNameAttribute.Name != null && aliasPropertyNameAttribute.Name.Length > 0)
+            //not returning Name property at all. we alias that property to the VariableDeclaration itself
+            DefaultPropertyAttribute aliasPropertyNameAttribute =
+                propDesc.Attributes[typeof(DefaultPropertyAttribute)] as DefaultPropertyAttribute;
+            if (
+                aliasPropertyNameAttribute != null
+                && aliasPropertyNameAttribute.Name != null
+                && aliasPropertyNameAttribute.Name.Length > 0
+            )
                 fullAliasName = propDesc.Name + "." + aliasPropertyNameAttribute.Name;
 
             if (component != null)
             {
-                ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(component as Activity);
+                ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                    component as Activity
+                );
                 if (activityDesigner != null)
                 {
-                    if (!activityDesigner.IsLocked && ActivityBindPropertyDescriptor.IsBindableProperty(propDesc) && !propDesc.IsReadOnly)
-                        valueUIItemList.Add(new PropertyValueUIItem(DR.GetImage(DR.Bind), OnBindProperty, DR.GetString(DR.BindProperty)));
+                    if (
+                        !activityDesigner.IsLocked
+                        && ActivityBindPropertyDescriptor.IsBindableProperty(propDesc)
+                        && !propDesc.IsReadOnly
+                    )
+                        valueUIItemList.Add(
+                            new PropertyValueUIItem(
+                                DR.GetImage(DR.Bind),
+                                OnBindProperty,
+                                DR.GetString(DR.BindProperty)
+                            )
+                        );
 
                     string fullComponentName = referenceService.GetName(component); //schedule1.send1
                     string fullPropertyName = referenceService.GetName(context.Instance); //schedule1.send1.message
-                    fullPropertyName = (fullPropertyName.Length > fullComponentName.Length) ? fullPropertyName.Substring(fullComponentName.Length + 1, fullPropertyName.Length - fullComponentName.Length - 1) + "." + propDesc.Name : string.Empty;
+                    fullPropertyName =
+                        (fullPropertyName.Length > fullComponentName.Length)
+                            ? fullPropertyName.Substring(
+                                fullComponentName.Length + 1,
+                                fullPropertyName.Length - fullComponentName.Length - 1
+                            )
+                                + "."
+                                + propDesc.Name
+                            : string.Empty;
 
                     foreach (DesignerAction action in activityDesigner.DesignerActions)
                     {
@@ -901,10 +1113,21 @@ namespace System.Workflow.ComponentModel.Design
                         if (actionPropertyName == null || actionPropertyName.Length == 0)
                             continue;
 
-                        if (actionPropertyName == propDesc.Name || (actionPropertyName == fullPropertyName) || (actionPropertyName == fullAliasName))
+                        if (
+                            actionPropertyName == propDesc.Name
+                            || (actionPropertyName == fullPropertyName)
+                            || (actionPropertyName == fullAliasName)
+                        )
                         {
-                            PropertyValueUIItemHandler propValueUIItemhandler = new PropertyValueUIItemHandler(action);
-                            valueUIItemList.Add(new PropertyValueUIItem(action.Image, propValueUIItemhandler.OnFixPropertyError, action.Text));
+                            PropertyValueUIItemHandler propValueUIItemhandler =
+                                new PropertyValueUIItemHandler(action);
+                            valueUIItemList.Add(
+                                new PropertyValueUIItem(
+                                    action.Image,
+                                    propValueUIItemhandler.OnFixPropertyError,
+                                    action.Text
+                                )
+                            );
                             break;
                         }
                     }
@@ -912,7 +1135,11 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        private void OnBindProperty(ITypeDescriptorContext context, PropertyDescriptor descriptor, PropertyValueUIItem invokedItem)
+        private void OnBindProperty(
+            ITypeDescriptorContext context,
+            PropertyDescriptor descriptor,
+            PropertyValueUIItem invokedItem
+        )
         {
             BindUITypeEditor.EditValue(context);
         }
@@ -921,11 +1148,17 @@ namespace System.Workflow.ComponentModel.Design
         private class PropertyValueUIItemHandler
         {
             DesignerAction action = null;
+
             internal PropertyValueUIItemHandler(DesignerAction action)
             {
                 this.action = action;
             }
-            internal void OnFixPropertyError(ITypeDescriptorContext context, PropertyDescriptor descriptor, PropertyValueUIItem invokedItem)
+
+            internal void OnFixPropertyError(
+                ITypeDescriptorContext context,
+                PropertyDescriptor descriptor,
+                PropertyValueUIItem invokedItem
+            )
             {
                 action.Invoke();
             }

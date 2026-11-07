@@ -8,10 +8,12 @@ namespace System.ServiceModel.Web
     {
         internal static bool IsDefined(WebMessageBodyStyle style)
         {
-            return (style == WebMessageBodyStyle.Bare
+            return (
+                style == WebMessageBodyStyle.Bare
                 || style == WebMessageBodyStyle.Wrapped
                 || style == WebMessageBodyStyle.WrappedRequest
-                || style == WebMessageBodyStyle.WrappedResponse);
+                || style == WebMessageBodyStyle.WrappedResponse
+            );
         }
     }
 }

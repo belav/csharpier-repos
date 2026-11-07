@@ -13,13 +13,16 @@ public class MultipleAssembliesWithSamePInvokeTest
     [Fact]
     public static int TestEntryPoint()
     {
-        try{
+        try
+        {
             Assert.Equal(24, GetInt());
             Assert.Equal(24, ManagedDll1.Class1.GetInt());
             Assert.Equal(24, ManagedDll2.Class2.GetInt());
 
             return 100;
-        } catch (Exception e){
+        }
+        catch (Exception e)
+        {
             Console.WriteLine($"Test Failure: {e}");
             return 101;
         }

@@ -11,8 +11,8 @@ using Xunit;
 
 public class Runtime_35724
 {
-	[MethodImpl(MethodImplOptions.NoInlining)]
-	static Vector2 Test()
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static Vector2 Test()
     {
         Vector2 a = new Vector2(1);
         Vector2 b = new Vector2(2);
@@ -21,7 +21,7 @@ public class Runtime_35724
         Console.WriteLine(c.X + d.Y);
         return a / b;
     }
-	
+
     [Fact]
     public static void TestEntryPoint()
     {

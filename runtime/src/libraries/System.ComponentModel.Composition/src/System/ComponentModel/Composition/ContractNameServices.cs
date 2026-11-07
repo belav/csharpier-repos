@@ -30,10 +30,7 @@ namespace System.ComponentModel.Composition
 
         private static Dictionary<Type, string> TypeIdentityCache
         {
-            get
-            {
-                return typeIdentityCache ??= new Dictionary<Type, string>();
-            }
+            get { return typeIdentityCache ??= new Dictionary<Type, string>(); }
         }
 
         internal static string GetTypeIdentity(Type type)
@@ -98,14 +95,22 @@ namespace System.ComponentModel.Composition
                     methodNameStringBuilder.Append(',');
                 }
 
-                WriteTypeWithNamespace(methodNameStringBuilder, parameters[i].ParameterType, formatGenericName);
+                WriteTypeWithNamespace(
+                    methodNameStringBuilder,
+                    parameters[i].ParameterType,
+                    formatGenericName
+                );
             }
             methodNameStringBuilder.Append(')');
 
             return methodNameStringBuilder.ToString();
         }
 
-        private static void WriteTypeWithNamespace(StringBuilder typeName, Type type, bool formatGenericName)
+        private static void WriteTypeWithNamespace(
+            StringBuilder typeName,
+            Type type,
+            bool formatGenericName
+        )
         {
             // Writes type with namesapce
             if (!string.IsNullOrEmpty(type.Namespace))
@@ -126,7 +131,13 @@ namespace System.ComponentModel.Composition
                 // These arguments are placed in a queue and are written out based on generic arity (`X) of each type
                 //
                 Queue<Type> genericTypeArguments = new Queue<Type>(type.GetGenericArguments());
-                WriteGenericType(typeName, type, type.IsGenericTypeDefinition, genericTypeArguments, formatGenericName);
+                WriteGenericType(
+                    typeName,
+                    type,
+                    type.IsGenericTypeDefinition,
+                    genericTypeArguments,
+                    formatGenericName
+                );
                 if (genericTypeArguments.Count != 0)
                 {
                     throw new Exception(SR.Expecting_Empty_Queue);
@@ -138,7 +149,11 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        private static void WriteNonGenericType(StringBuilder typeName, Type type, bool formatGenericName)
+        private static void WriteNonGenericType(
+            StringBuilder typeName,
+            Type type,
+            bool formatGenericName
+        )
         {
             //
             // Writes non-generic type
@@ -166,7 +181,11 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        private static void WriteArrayType(StringBuilder typeName, Type type, bool formatGenericName)
+        private static void WriteArrayType(
+            StringBuilder typeName,
+            Type type,
+            bool formatGenericName
+        )
         {
             //
             // Writes array type  e.g <TypeName>[]
@@ -180,11 +199,14 @@ namespace System.ComponentModel.Composition
             do
             {
                 WriteArrayTypeDimensions(typeName, elementType);
-            }
-            while ((elementType = elementType.GetElementType()) != null && elementType.IsArray);
+            } while ((elementType = elementType.GetElementType()) != null && elementType.IsArray);
         }
 
-        private static void WritePointerType(StringBuilder typeName, Type type, bool formatGenericName)
+        private static void WritePointerType(
+            StringBuilder typeName,
+            Type type,
+            bool formatGenericName
+        )
         {
             //
             // Writes pointer type  e.g <TypeName>*
@@ -193,7 +215,11 @@ namespace System.ComponentModel.Composition
             typeName.Append(PointerSymbol);
         }
 
-        private static void WriteByRefType(StringBuilder typeName, Type type, bool formatGenericName)
+        private static void WriteByRefType(
+            StringBuilder typeName,
+            Type type,
+            bool formatGenericName
+        )
         {
             //
             // Writes by ref type e.g <TypeName>&
@@ -216,7 +242,13 @@ namespace System.ComponentModel.Composition
             typeName.Append(ArrayClosingBracket);
         }
 
-        private static void WriteGenericType(StringBuilder typeName, Type type, bool isDefinition, Queue<Type> genericTypeArguments, bool formatGenericName)
+        private static void WriteGenericType(
+            StringBuilder typeName,
+            Type type,
+            bool isDefinition,
+            Queue<Type> genericTypeArguments,
+            bool formatGenericName
+        )
         {
             //
             // Writes generic type including parent generic types
@@ -227,7 +259,13 @@ namespace System.ComponentModel.Composition
             {
                 if (type.DeclaringType.IsGenericType)
                 {
-                    WriteGenericType(typeName, type.DeclaringType, isDefinition, genericTypeArguments, formatGenericName);
+                    WriteGenericType(
+                        typeName,
+                        type.DeclaringType,
+                        isDefinition,
+                        genericTypeArguments,
+                        formatGenericName
+                    );
                 }
                 else
                 {
@@ -235,10 +273,22 @@ namespace System.ComponentModel.Composition
                 }
                 typeName.Append(NestedClassSeparator);
             }
-            WriteGenericTypeName(typeName, type, isDefinition, genericTypeArguments, formatGenericName);
+            WriteGenericTypeName(
+                typeName,
+                type,
+                isDefinition,
+                genericTypeArguments,
+                formatGenericName
+            );
         }
 
-        private static void WriteGenericTypeName(StringBuilder typeName, Type type, bool isDefinition, Queue<Type> genericTypeArguments, bool formatGenericName)
+        private static void WriteGenericTypeName(
+            StringBuilder typeName,
+            Type type,
+            bool isDefinition,
+            Queue<Type> genericTypeArguments,
+            bool formatGenericName
+        )
         {
             //
             // Writes generic type name, e.g. generic name and generic arguments
@@ -250,10 +300,22 @@ namespace System.ComponentModel.Composition
             int genericArity = GetGenericArity(type);
             string genericTypeName = FindGenericTypeName(type.GetGenericTypeDefinition().Name);
             typeName.Append(genericTypeName);
-            WriteTypeArgumentsString(typeName, genericArity, isDefinition, genericTypeArguments, formatGenericName);
+            WriteTypeArgumentsString(
+                typeName,
+                genericArity,
+                isDefinition,
+                genericTypeArguments,
+                formatGenericName
+            );
         }
 
-        private static void WriteTypeArgumentsString(StringBuilder typeName, int argumentsCount, bool isDefinition, Queue<Type> genericTypeArguments, bool formatGenericName)
+        private static void WriteTypeArgumentsString(
+            StringBuilder typeName,
+            int argumentsCount,
+            bool isDefinition,
+            Queue<Type> genericTypeArguments,
+            bool formatGenericName
+        )
         {
             //
             // Writes type arguments in brackets, e.g. (<contract_name1>, <contract_name2>, ...)
@@ -276,7 +338,12 @@ namespace System.ComponentModel.Composition
             typeName.Append(ContractNameGenericClosingBracket);
         }
 
-        private static void WriteTypeArgument(StringBuilder typeName, bool isDefinition, Type genericTypeArgument, bool formatGenericName)
+        private static void WriteTypeArgument(
+            StringBuilder typeName,
+            bool isDefinition,
+            Type genericTypeArgument,
+            bool formatGenericName
+        )
         {
             if (!isDefinition && !genericTypeArgument.IsGenericParameter)
             {
@@ -293,7 +360,12 @@ namespace System.ComponentModel.Composition
         }
 
         //internal for testability
-        internal static void WriteCustomModifiers(StringBuilder typeName, string customKeyword, Type[] types, bool formatGenericName)
+        internal static void WriteCustomModifiers(
+            StringBuilder typeName,
+            string customKeyword,
+            Type[] types,
+            bool formatGenericName
+        )
         {
             //
             // Writes custom modifiers in the format: customKeyword(<contract_name>,<contract_name>,...)
@@ -301,7 +373,13 @@ namespace System.ComponentModel.Composition
             typeName.Append(CustomModifiersSeparator);
             typeName.Append(customKeyword);
             Queue<Type> typeArguments = new Queue<Type>(types);
-            WriteTypeArgumentsString(typeName, types.Length, false, typeArguments, formatGenericName);
+            WriteTypeArgumentsString(
+                typeName,
+                types.Length,
+                false,
+                typeArguments,
+                formatGenericName
+            );
             if (typeArguments.Count != 0)
             {
                 throw new Exception(SR.Expecting_Empty_Queue);

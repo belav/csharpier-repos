@@ -42,14 +42,11 @@ public class FilterFactoryTest
         var filterResult = FilterFactory.GetAllFilters(new[] { filterProvider }, actionContext);
 
         // Assert
-        Assert.Collection(
-            filterResult.CacheableFilters,
-            f =>
-            {
-                Assert.Null(f.Filter);
-                Assert.False(f.IsReusable);
-            }
-        );
+        Assert.Collection(filterResult.CacheableFilters, f =>
+        {
+            Assert.Null(f.Filter);
+            Assert.False(f.IsReusable);
+        });
         Assert.Empty(filterResult.Filters);
     }
 

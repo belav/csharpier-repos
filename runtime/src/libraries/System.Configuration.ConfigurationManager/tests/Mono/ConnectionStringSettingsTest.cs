@@ -117,7 +117,10 @@ namespace MonoTests.System.Configuration
         public void ToStringTest()
         {
             ConnectionStringSettings s = new ConnectionStringSettings(
-                "name", "connectionString", "provider");
+                "name",
+                "connectionString",
+                "provider"
+            );
             Assert.Equal("connectionString", s.ToString());
         }
     }

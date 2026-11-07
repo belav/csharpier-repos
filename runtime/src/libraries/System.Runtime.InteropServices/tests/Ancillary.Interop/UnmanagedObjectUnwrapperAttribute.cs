@@ -10,7 +10,5 @@ namespace System.Runtime.InteropServices.Marshalling
     // from the unmanaged "this" pointer. If we decide to not expose VirtualMethodIndexAttribute, we don't need to expose this.
     [AttributeUsage(AttributeTargets.Interface)]
     public class UnmanagedObjectUnwrapperAttribute<TMapper> : Attribute
-        where TMapper : IUnmanagedObjectUnwrapper
-    {
-    }
+        where TMapper : IUnmanagedObjectUnwrapper { }
 }

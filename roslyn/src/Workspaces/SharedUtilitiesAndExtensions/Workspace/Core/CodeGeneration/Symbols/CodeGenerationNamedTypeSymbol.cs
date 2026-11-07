@@ -9,7 +9,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Roslyn.Utilities;
-
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.Internal.Editing;
 #else
@@ -40,8 +39,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             NullableAnnotation nullableAnnotation,
             ImmutableArray<ISymbol> members,
             ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers,
-            INamedTypeSymbol enumUnderlyingType)
-            : base(containingAssembly, containingType, attributes, declaredAccessibility, modifiers, name, specialType, nullableAnnotation, typeMembers)
+            INamedTypeSymbol enumUnderlyingType
+        )
+            : base(
+                containingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                specialType,
+                nullableAnnotation,
+                typeMembers
+            )
         {
             IsRecord = isRecord;
             TypeKind = typeKind;
@@ -54,13 +64,28 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             this.OriginalDefinition = this;
         }
 
-        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(NullableAnnotation nullableAnnotation)
+        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
+            NullableAnnotation nullableAnnotation
+        )
         {
             return new CodeGenerationNamedTypeSymbol(
-                this.ContainingAssembly, this.ContainingType, this.GetAttributes(), this.DeclaredAccessibility,
-                this.Modifiers, this.IsRecord, this.TypeKind, this.Name, _typeParameters, this.BaseType,
-                _interfaces, this.SpecialType, nullableAnnotation, _members, this.TypeMembers,
-                this.EnumUnderlyingType);
+                this.ContainingAssembly,
+                this.ContainingType,
+                this.GetAttributes(),
+                this.DeclaredAccessibility,
+                this.Modifiers,
+                this.IsRecord,
+                this.TypeKind,
+                this.Name,
+                _typeParameters,
+                this.BaseType,
+                _interfaces,
+                this.SpecialType,
+                nullableAnnotation,
+                _members,
+                this.TypeMembers,
+                this.EnumUnderlyingType
+            );
         }
 
         public override bool IsRecord { get; }
@@ -73,10 +98,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override bool IsGenericType
         {
-            get
-            {
-                return this.Arity > 0;
-            }
+            get { return this.Arity > 0; }
         }
 
         public override bool IsUnboundGenericType => false;
@@ -87,10 +109,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override IEnumerable<string> MemberNames
         {
-            get
-            {
-                return this.GetMembers().Select(m => m.Name).ToList();
-            }
+            get { return this.GetMembers().Select(m => m.Name).ToList(); }
         }
 
         public override IMethodSymbol DelegateInvokeMethod
@@ -98,7 +117,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             get
             {
                 return this.TypeKind == TypeKind.Delegate
-                    ? this.GetMembers(WellKnownMemberNames.DelegateInvokeName).OfType<IMethodSymbol>().FirstOrDefault()
+                    ? this.GetMembers(WellKnownMemberNames.DelegateInvokeName)
+                        .OfType<IMethodSymbol>()
+                        .FirstOrDefault()
                     : null;
             }
         }
@@ -107,29 +128,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected override CodeGenerationNamedTypeSymbol ConstructedFrom
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
-        public override INamedTypeSymbol ConstructUnboundGenericType()
-            => null;
+        public override INamedTypeSymbol ConstructUnboundGenericType() => null;
 
         public static ImmutableArray<ISymbol> CandidateSymbols
         {
-            get
-            {
-                return ImmutableArray.Create<ISymbol>();
-            }
+            get { return ImmutableArray.Create<ISymbol>(); }
         }
 
         public override ImmutableArray<ITypeSymbol> TypeArguments
         {
-            get
-            {
-                return this.TypeParameters.As<ITypeSymbol>();
-            }
+            get { return this.TypeParameters.As<ITypeSymbol>(); }
         }
 
         public override ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations
@@ -143,27 +154,21 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override ImmutableArray<ITypeParameterSymbol> TypeParameters
         {
-            get
-            {
-                return ImmutableArray.CreateRange(_typeParameters);
-            }
+            get { return ImmutableArray.CreateRange(_typeParameters); }
         }
 
         public override INamedTypeSymbol BaseType { get; }
 
         public override ImmutableArray<INamedTypeSymbol> Interfaces
         {
-            get
-            {
-                return ImmutableArray.CreateRange(_interfaces);
-            }
+            get { return ImmutableArray.CreateRange(_interfaces); }
         }
 
-        public override ImmutableArray<ISymbol> GetMembers()
-            => ImmutableArray.CreateRange(_members.Concat(this.TypeMembers));
+        public override ImmutableArray<ISymbol> GetMembers() =>
+            ImmutableArray.CreateRange(_members.Concat(this.TypeMembers));
 
-        public override ImmutableArray<INamedTypeSymbol> GetTypeMembers()
-            => ImmutableArray.CreateRange(this.TypeMembers.Cast<INamedTypeSymbol>());
+        public override ImmutableArray<INamedTypeSymbol> GetTypeMembers() =>
+            ImmutableArray.CreateRange(this.TypeMembers.Cast<INamedTypeSymbol>());
 
         public override ImmutableArray<IMethodSymbol> InstanceConstructors
         {
@@ -171,7 +176,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             {
                 // NOTE(cyrusn): remember to Construct the result if we implement this.
                 return ImmutableArray.CreateRange(
-                    this.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind == MethodKind.Constructor && !m.IsStatic));
+                    this.GetMembers()
+                        .OfType<IMethodSymbol>()
+                        .Where(m => m.MethodKind == MethodKind.Constructor && !m.IsStatic)
+                );
             }
         }
 
@@ -181,16 +189,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             {
                 // NOTE(cyrusn): remember to Construct the result if we implement this.
                 return ImmutableArray.CreateRange(
-                    this.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind == MethodKind.StaticConstructor && m.IsStatic));
+                    this.GetMembers()
+                        .OfType<IMethodSymbol>()
+                        .Where(m => m.MethodKind == MethodKind.StaticConstructor && m.IsStatic)
+                );
             }
         }
 
         public override ImmutableArray<IMethodSymbol> Constructors
         {
-            get
-            {
-                return InstanceConstructors.AddRange(StaticConstructors);
-            }
+            get { return InstanceConstructors.AddRange(StaticConstructors); }
         }
     }
 }

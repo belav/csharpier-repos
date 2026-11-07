@@ -114,13 +114,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 kind = SyntaxFacts.GetContextualKeywordKind(token.ValueText);
             }
 
-            Debug.Assert(result == AttributeLocation.None ^ SyntaxFacts.IsAttributeTargetSpecifier(kind));
+            Debug.Assert(
+                result == AttributeLocation.None ^ SyntaxFacts.IsAttributeTargetSpecifier(kind)
+            );
 #endif
 
             return result;
         }
 
-        internal static AttributeLocation ToAttributeLocation(this Syntax.InternalSyntax.SyntaxToken token)
+        internal static AttributeLocation ToAttributeLocation(
+            this Syntax.InternalSyntax.SyntaxToken token
+        )
         {
             // NOTE: to match dev10, we're using the value text, rather
             // than the actual text.  For example, "@return" is equivalent

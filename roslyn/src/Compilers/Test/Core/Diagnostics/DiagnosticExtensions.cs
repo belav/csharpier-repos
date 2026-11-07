@@ -28,52 +28,91 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// This is obsolete. Use Verify instead.
         /// </summary>
-        public static void VerifyErrorCodes(this IEnumerable<Diagnostic> actual, params DiagnosticDescription[] expected)
+        public static void VerifyErrorCodes(
+            this IEnumerable<Diagnostic> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             Verify(actual, expected, errorCodeOnly: true);
         }
 
-        public static void VerifyErrorCodes(this ImmutableArray<Diagnostic> actual, params DiagnosticDescription[] expected)
+        public static void VerifyErrorCodes(
+            this ImmutableArray<Diagnostic> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             VerifyErrorCodes((IEnumerable<Diagnostic>)actual, expected);
         }
 
-        internal static void Verify(this DiagnosticBag actual, params DiagnosticDescription[] expected)
+        internal static void Verify(
+            this DiagnosticBag actual,
+            params DiagnosticDescription[] expected
+        )
         {
             Verify(actual.AsEnumerable(), expected, errorCodeOnly: false);
         }
 
-        public static void Verify(this IEnumerable<Diagnostic> actual, params DiagnosticDescription[] expected)
+        public static void Verify(
+            this IEnumerable<Diagnostic> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             Verify(actual, expected, errorCodeOnly: false);
         }
 
-        public static void Verify(this IEnumerable<Diagnostic> actual, bool fallbackToErrorCodeOnlyForNonEnglish, params DiagnosticDescription[] expected)
+        public static void Verify(
+            this IEnumerable<Diagnostic> actual,
+            bool fallbackToErrorCodeOnlyForNonEnglish,
+            params DiagnosticDescription[] expected
+        )
         {
-            Verify(actual, expected, errorCodeOnly: fallbackToErrorCodeOnlyForNonEnglish && EnsureEnglishUICulture.PreferredOrNull != null);
+            Verify(
+                actual,
+                expected,
+                errorCodeOnly: fallbackToErrorCodeOnlyForNonEnglish
+                    && EnsureEnglishUICulture.PreferredOrNull != null
+            );
         }
 
-        public static void VerifyWithFallbackToErrorCodeOnlyForNonEnglish(this IEnumerable<Diagnostic> actual, params DiagnosticDescription[] expected)
+        public static void VerifyWithFallbackToErrorCodeOnlyForNonEnglish(
+            this IEnumerable<Diagnostic> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             Verify(actual, true, expected);
         }
 
-        public static void Verify(this ImmutableArray<Diagnostic> actual, params DiagnosticDescription[] expected)
+        public static void Verify(
+            this ImmutableArray<Diagnostic> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             Verify((IEnumerable<Diagnostic>)actual, expected);
         }
 
-        private static void Verify(IEnumerable<Diagnostic> actual, DiagnosticDescription[] expected, bool errorCodeOnly)
+        private static void Verify(
+            IEnumerable<Diagnostic> actual,
+            DiagnosticDescription[] expected,
+            bool errorCodeOnly
+        )
         {
             if (expected == null)
             {
                 throw new ArgumentException("Must specify expected errors.", nameof(expected));
             }
 
-            var includeDefaultSeverity = expected.Any() && expected.All(e => e.DefaultSeverity != null);
-            var includeEffectiveSeverity = expected.Any() && expected.All(e => e.EffectiveSeverity != null);
-            var unmatchedActualDescription = actual.Select(d => new DiagnosticDescription(d, errorCodeOnly, includeDefaultSeverity, includeEffectiveSeverity))
-                                  .ToList();
+            var includeDefaultSeverity =
+                expected.Any() && expected.All(e => e.DefaultSeverity != null);
+            var includeEffectiveSeverity =
+                expected.Any() && expected.All(e => e.EffectiveSeverity != null);
+            var unmatchedActualDescription = actual
+                .Select(d => new DiagnosticDescription(
+                    d,
+                    errorCodeOnly,
+                    includeDefaultSeverity,
+                    includeEffectiveSeverity
+                ))
+                .ToList();
             var unmatchedActualIndex = actual.Select((_, i) => i).ToList();
             var unmatchedExpected = ArrayBuilder<DiagnosticDescription>.GetInstance();
 
@@ -95,14 +134,24 @@ namespace Microsoft.CodeAnalysis
 
             if (unmatchedActualDescription.Count > 0 || unmatchedExpected.Count > 0)
             {
-                var text = DiagnosticDescription.GetAssertText(expected, actual, unmatchedExpected.ToArray(), actual.Select((a, i) => (a, i)).Join(unmatchedActualIndex, ai => ai.i, i => i, (ai, _) => ai.a));
+                var text = DiagnosticDescription.GetAssertText(
+                    expected,
+                    actual,
+                    unmatchedExpected.ToArray(),
+                    actual
+                        .Select((a, i) => (a, i))
+                        .Join(unmatchedActualIndex, ai => ai.i, i => i, (ai, _) => ai.a)
+                );
                 Assert.True(false, text);
             }
 
             unmatchedExpected.Free();
         }
 
-        public static TCompilation VerifyDiagnostics<TCompilation>(this TCompilation c, params DiagnosticDescription[] expected)
+        public static TCompilation VerifyDiagnostics<TCompilation>(
+            this TCompilation c,
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
             var diagnostics = c.GetDiagnostics();
@@ -113,7 +162,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         private static void VerifyAssemblyIds<TCompilation>(
-            TCompilation c, ImmutableArray<Diagnostic> diagnostics) where TCompilation : Compilation
+            TCompilation c,
+            ImmutableArray<Diagnostic> diagnostics
+        )
+            where TCompilation : Compilation
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -143,10 +195,14 @@ namespace Microsoft.CodeAnalysis
             this TCompilation c,
             DiagnosticAnalyzer[] analyzers,
             int expectedCount,
-            Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null)
+            Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null
+        )
             where TCompilation : Compilation
         {
-            Assert.Equal(expectedCount, c.GetAnalyzerDiagnostics(analyzers, null, onAnalyzerException).Length);
+            Assert.Equal(
+                expectedCount,
+                c.GetAnalyzerDiagnostics(analyzers, null, onAnalyzerException).Length
+            );
         }
 
         public static TCompilation VerifyAnalyzerDiagnostics<TCompilation>(
@@ -154,10 +210,18 @@ namespace Microsoft.CodeAnalysis
             DiagnosticAnalyzer[] analyzers,
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
-            params DiagnosticDescription[] expected)
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
-            return VerifyAnalyzerDiagnostics(c, analyzers, reportSuppressedDiagnostics: false, options, onAnalyzerException, expected);
+            return VerifyAnalyzerDiagnostics(
+                c,
+                analyzers,
+                reportSuppressedDiagnostics: false,
+                options,
+                onAnalyzerException,
+                expected
+            );
         }
 
         public static TCompilation VerifyAnalyzerDiagnostics<TCompilation>(
@@ -166,10 +230,19 @@ namespace Microsoft.CodeAnalysis
             bool reportSuppressedDiagnostics,
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
-            params DiagnosticDescription[] expected)
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
-            var newCompilation = c.GetCompilationWithAnalyzerDiagnostics(analyzers, options, onAnalyzerException, reportSuppressedDiagnostics, includeCompilerDiagnostics: false, CancellationToken.None, out var diagnostics);
+            var newCompilation = c.GetCompilationWithAnalyzerDiagnostics(
+                analyzers,
+                options,
+                onAnalyzerException,
+                reportSuppressedDiagnostics,
+                includeCompilerDiagnostics: false,
+                CancellationToken.None,
+                out var diagnostics
+            );
             diagnostics.Verify(expected);
             return newCompilation;
         }
@@ -179,10 +252,18 @@ namespace Microsoft.CodeAnalysis
             DiagnosticAnalyzer[] analyzers,
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
             where TCompilation : Compilation
         {
-            return GetAnalyzerDiagnostics(c, analyzers, reportSuppressedDiagnostics: false, options, onAnalyzerException, cancellationToken);
+            return GetAnalyzerDiagnostics(
+                c,
+                analyzers,
+                reportSuppressedDiagnostics: false,
+                options,
+                onAnalyzerException,
+                cancellationToken
+            );
         }
 
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics<TCompilation>(
@@ -191,10 +272,20 @@ namespace Microsoft.CodeAnalysis
             bool reportSuppressedDiagnostics,
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
             where TCompilation : Compilation
         {
-            _ = GetCompilationWithAnalyzerDiagnostics(c, analyzers, options, onAnalyzerException, reportSuppressedDiagnostics, includeCompilerDiagnostics: false, cancellationToken, out var diagnostics);
+            _ = GetCompilationWithAnalyzerDiagnostics(
+                c,
+                analyzers,
+                options,
+                onAnalyzerException,
+                reportSuppressedDiagnostics,
+                includeCompilerDiagnostics: false,
+                cancellationToken,
+                out var diagnostics
+            );
             return diagnostics;
         }
 
@@ -204,19 +295,36 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             CancellationToken cancellationToken = default,
-            params DiagnosticDescription[] expected)
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
             // Verify suppression is unaffected by toggling /warnaserror.
             // Only perform this additional verification if the caller hasn't
             // explicitly overridden specific or general diagnostic options.
-            if (c.Options.GeneralDiagnosticOption == ReportDiagnostic.Default &&
-                c.Options.SpecificDiagnosticOptions.IsEmpty)
+            if (
+                c.Options.GeneralDiagnosticOption == ReportDiagnostic.Default
+                && c.Options.SpecificDiagnosticOptions.IsEmpty
+            )
             {
-                _ = c.VerifySuppressedDiagnostics(toggleWarnAsError: true, analyzers, options, onAnalyzerException, expected, cancellationToken);
+                _ = c.VerifySuppressedDiagnostics(
+                    toggleWarnAsError: true,
+                    analyzers,
+                    options,
+                    onAnalyzerException,
+                    expected,
+                    cancellationToken
+                );
             }
 
-            return c.VerifySuppressedDiagnostics(toggleWarnAsError: false, analyzers, options, onAnalyzerException, expected, cancellationToken);
+            return c.VerifySuppressedDiagnostics(
+                toggleWarnAsError: false,
+                analyzers,
+                options,
+                onAnalyzerException,
+                expected,
+                cancellationToken
+            );
         }
 
         private static TCompilation VerifySuppressedDiagnostics<TCompilation>(
@@ -226,27 +334,34 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException,
             DiagnosticDescription[] expectedDiagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
             where TCompilation : Compilation
         {
             if (toggleWarnAsError)
             {
-                var toggledOption = c.Options.GeneralDiagnosticOption == ReportDiagnostic.Error ?
-                    ReportDiagnostic.Default :
-                    ReportDiagnostic.Error;
-                c = (TCompilation)c.WithOptions(c.Options.WithGeneralDiagnosticOption(toggledOption));
+                var toggledOption =
+                    c.Options.GeneralDiagnosticOption == ReportDiagnostic.Error
+                        ? ReportDiagnostic.Default
+                        : ReportDiagnostic.Error;
+                c = (TCompilation)
+                    c.WithOptions(c.Options.WithGeneralDiagnosticOption(toggledOption));
 
-                var builder = ArrayBuilder<DiagnosticDescription>.GetInstance(expectedDiagnostics.Length);
+                var builder = ArrayBuilder<DiagnosticDescription>.GetInstance(
+                    expectedDiagnostics.Length
+                );
                 foreach (var expected in expectedDiagnostics)
                 {
                     // Toggle warnaserror and effective severity if following are true:
                     //  1. Default severity is not specified or specified as Warning
                     //  2. Effective severity is not specified or specified as Warning or Error
-                    var defaultSeverityCheck = !expected.DefaultSeverity.HasValue ||
-                        expected.DefaultSeverity.Value == DiagnosticSeverity.Warning;
-                    var effectiveSeverityCheck = !expected.EffectiveSeverity.HasValue ||
-                         expected.EffectiveSeverity.Value == DiagnosticSeverity.Warning ||
-                         expected.EffectiveSeverity.Value == DiagnosticSeverity.Error;
+                    var defaultSeverityCheck =
+                        !expected.DefaultSeverity.HasValue
+                        || expected.DefaultSeverity.Value == DiagnosticSeverity.Warning;
+                    var effectiveSeverityCheck =
+                        !expected.EffectiveSeverity.HasValue
+                        || expected.EffectiveSeverity.Value == DiagnosticSeverity.Warning
+                        || expected.EffectiveSeverity.Value == DiagnosticSeverity.Error;
 
                     DiagnosticDescription newExpected;
                     if (defaultSeverityCheck && effectiveSeverityCheck)
@@ -255,9 +370,10 @@ namespace Microsoft.CodeAnalysis
 
                         if (expected.EffectiveSeverity.HasValue)
                         {
-                            var newEffectiveSeverity = expected.EffectiveSeverity.Value == DiagnosticSeverity.Error ?
-                                DiagnosticSeverity.Warning :
-                                DiagnosticSeverity.Error;
+                            var newEffectiveSeverity =
+                                expected.EffectiveSeverity.Value == DiagnosticSeverity.Error
+                                    ? DiagnosticSeverity.Warning
+                                    : DiagnosticSeverity.Error;
                             newExpected = newExpected.WithEffectiveSeverity(newEffectiveSeverity);
                         }
                     }
@@ -272,7 +388,15 @@ namespace Microsoft.CodeAnalysis
                 expectedDiagnostics = builder.ToArrayAndFree();
             }
 
-            c = c.GetCompilationWithAnalyzerDiagnostics(analyzers, options, onAnalyzerException, reportSuppressedDiagnostics: true, includeCompilerDiagnostics: true, cancellationToken, out var diagnostics);
+            c = c.GetCompilationWithAnalyzerDiagnostics(
+                analyzers,
+                options,
+                onAnalyzerException,
+                reportSuppressedDiagnostics: true,
+                includeCompilerDiagnostics: true,
+                cancellationToken,
+                out var diagnostics
+            );
             diagnostics = diagnostics.WhereAsArray(d => d.IsSuppressed);
             diagnostics.Verify(expectedDiagnostics);
             return c; // note this is a new compilation
@@ -283,12 +407,21 @@ namespace Microsoft.CodeAnalysis
             DiagnosticAnalyzer[] analyzers,
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
             where TCompilation : Compilation
         {
             // Verify suppressed diagnostics are filtered when reportSuppressedDiagnostics is false.
             // The actual verification is handled in GetCompilationWithAnalyzerDiagnostics.
-            c = c.GetCompilationWithAnalyzerDiagnostics(analyzers, options, onAnalyzerException, reportSuppressedDiagnostics: false, includeCompilerDiagnostics: true, cancellationToken, out var diagnostics);
+            c = c.GetCompilationWithAnalyzerDiagnostics(
+                analyzers,
+                options,
+                onAnalyzerException,
+                reportSuppressedDiagnostics: false,
+                includeCompilerDiagnostics: true,
+                cancellationToken,
+                out var diagnostics
+            );
             return c; // note this is a new compilation
         }
 
@@ -300,26 +433,46 @@ namespace Microsoft.CodeAnalysis
             bool reportSuppressedDiagnostics,
             bool includeCompilerDiagnostics,
             CancellationToken cancellationToken,
-            out ImmutableArray<Diagnostic> diagnostics)
+            out ImmutableArray<Diagnostic> diagnostics
+        )
             where TCompilation : Compilation
         {
             var analyzersArray = analyzers.ToImmutableArray();
             if (reportSuppressedDiagnostics != c.Options.ReportSuppressedDiagnostics)
             {
-                c = (TCompilation)c.WithOptions(c.Options.WithReportSuppressedDiagnostics(reportSuppressedDiagnostics));
+                c = (TCompilation)
+                    c.WithOptions(
+                        c.Options.WithReportSuppressedDiagnostics(reportSuppressedDiagnostics)
+                    );
             }
 
             var analyzerManager = new AnalyzerManager(analyzersArray);
-            var driver = AnalyzerDriver.CreateAndAttachToCompilation(c, analyzersArray, options, analyzerManager, onAnalyzerException,
-                analyzerExceptionFilter: null, reportAnalyzer: false, severityFilter: SeverityFilter.None, trackSuppressedDiagnosticIds: false,
-                out var newCompilation, cancellationToken);
+            var driver = AnalyzerDriver.CreateAndAttachToCompilation(
+                c,
+                analyzersArray,
+                options,
+                analyzerManager,
+                onAnalyzerException,
+                analyzerExceptionFilter: null,
+                reportAnalyzer: false,
+                severityFilter: SeverityFilter.None,
+                trackSuppressedDiagnosticIds: false,
+                out var newCompilation,
+                cancellationToken
+            );
             Debug.Assert(newCompilation.SemanticModelProvider != null);
             var compilerDiagnostics = newCompilation.GetDiagnostics(cancellationToken);
-            var analyzerDiagnostics = driver.GetDiagnosticsAsync(newCompilation, cancellationToken).Result;
-            var allDiagnostics = includeCompilerDiagnostics ?
-                compilerDiagnostics.AddRange(analyzerDiagnostics) :
-                analyzerDiagnostics;
-            diagnostics = driver.ApplyProgrammaticSuppressionsAndFilterDiagnostics(allDiagnostics, newCompilation, cancellationToken);
+            var analyzerDiagnostics = driver
+                .GetDiagnosticsAsync(newCompilation, cancellationToken)
+                .Result;
+            var allDiagnostics = includeCompilerDiagnostics
+                ? compilerDiagnostics.AddRange(analyzerDiagnostics)
+                : analyzerDiagnostics;
+            diagnostics = driver.ApplyProgrammaticSuppressionsAndFilterDiagnostics(
+                allDiagnostics,
+                newCompilation,
+                cancellationToken
+            );
 
             if (!reportSuppressedDiagnostics)
             {
@@ -336,7 +489,10 @@ namespace Microsoft.CodeAnalysis
         /// 3) Diagnostic suppression through applied <see cref="System.Diagnostics.CodeAnalysis.SuppressMessageAttribute"/>.
         /// 4) Pragma directives for the given <paramref name="compilation"/>.
         /// </summary>
-        public static IEnumerable<Diagnostic> GetEffectiveDiagnostics(this Compilation compilation, IEnumerable<Diagnostic> diagnostics)
+        public static IEnumerable<Diagnostic> GetEffectiveDiagnostics(
+            this Compilation compilation,
+            IEnumerable<Diagnostic> diagnostics
+        )
         {
             return CompilationWithAnalyzers.GetEffectiveDiagnostics(diagnostics, compilation);
         }
@@ -344,13 +500,22 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through options.
         /// </summary>
-        [Obsolete("This API is no longer supported. See https://github.com/dotnet/roslyn/issues/67592 for details")]
-        public static bool IsDiagnosticAnalyzerSuppressed(this DiagnosticAnalyzer analyzer, CompilationOptions options)
+        [Obsolete(
+            "This API is no longer supported. See https://github.com/dotnet/roslyn/issues/67592 for details"
+        )]
+        public static bool IsDiagnosticAnalyzerSuppressed(
+            this DiagnosticAnalyzer analyzer,
+            CompilationOptions options
+        )
         {
             return CompilationWithAnalyzers.IsDiagnosticAnalyzerSuppressed(analyzer, options);
         }
 
-        public static TCompilation VerifyEmitDiagnostics<TCompilation>(this TCompilation c, EmitOptions options, params DiagnosticDescription[] expected)
+        public static TCompilation VerifyEmitDiagnostics<TCompilation>(
+            this TCompilation c,
+            EmitOptions options,
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
             c.GetEmitDiagnostics(options: options).Verify(expected);
@@ -360,26 +525,44 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<Diagnostic> GetEmitDiagnostics<TCompilation>(
             this TCompilation c,
             EmitOptions options = null,
-            IEnumerable<ResourceDescription> manifestResources = null)
+            IEnumerable<ResourceDescription> manifestResources = null
+        )
             where TCompilation : Compilation
         {
-            var pdbStream = MonoHelpers.IsRunningOnMono() || options?.EmitMetadataOnly == true ? null : new MemoryStream();
-            return c.Emit(new MemoryStream(), pdbStream: pdbStream, options: options, manifestResources: manifestResources).Diagnostics;
+            var pdbStream =
+                MonoHelpers.IsRunningOnMono() || options?.EmitMetadataOnly == true
+                    ? null
+                    : new MemoryStream();
+            return c.Emit(
+                new MemoryStream(),
+                pdbStream: pdbStream,
+                options: options,
+                manifestResources: manifestResources
+            ).Diagnostics;
         }
 
-        public static TCompilation VerifyEmitDiagnostics<TCompilation>(this TCompilation c, params DiagnosticDescription[] expected)
+        public static TCompilation VerifyEmitDiagnostics<TCompilation>(
+            this TCompilation c,
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
             return VerifyEmitDiagnostics(c, EmitOptions.Default, expected);
         }
 
-        public static ImmutableArray<Diagnostic> GetEmitDiagnostics<TCompilation>(this TCompilation c)
+        public static ImmutableArray<Diagnostic> GetEmitDiagnostics<TCompilation>(
+            this TCompilation c
+        )
             where TCompilation : Compilation
         {
             return GetEmitDiagnostics(c, EmitOptions.Default);
         }
 
-        public static TCompilation VerifyEmitDiagnostics<TCompilation>(this TCompilation c, IEnumerable<ResourceDescription> manifestResources, params DiagnosticDescription[] expected)
+        public static TCompilation VerifyEmitDiagnostics<TCompilation>(
+            this TCompilation c,
+            IEnumerable<ResourceDescription> manifestResources,
+            params DiagnosticDescription[] expected
+        )
             where TCompilation : Compilation
         {
             c.GetEmitDiagnostics(manifestResources: manifestResources).Verify(expected);
@@ -388,35 +571,68 @@ namespace Microsoft.CodeAnalysis
 
         public static string Concat(this string[] str)
         {
-            return str.Aggregate(new StringBuilder(), (sb, s) => sb.AppendLine(s), sb => sb.ToString());
+            return str.Aggregate(
+                new StringBuilder(),
+                (sb, s) => sb.AppendLine(s),
+                sb => sb.ToString()
+            );
         }
 
         public static DiagnosticAnalyzer GetCompilerDiagnosticAnalyzer(string languageName)
         {
-            return languageName == LanguageNames.CSharp ?
-                (DiagnosticAnalyzer)new Diagnostics.CSharp.CSharpCompilerDiagnosticAnalyzer() :
-                new Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer();
+            return languageName == LanguageNames.CSharp
+                ? (DiagnosticAnalyzer)new Diagnostics.CSharp.CSharpCompilerDiagnosticAnalyzer()
+                : new Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer();
         }
 
-        public static ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>> GetCompilerDiagnosticAnalyzersMap()
+        public static ImmutableDictionary<
+            string,
+            ImmutableArray<DiagnosticAnalyzer>
+        > GetCompilerDiagnosticAnalyzersMap()
         {
-            var builder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<DiagnosticAnalyzer>>();
-            builder.Add(LanguageNames.CSharp, ImmutableArray.Create(GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp)));
-            builder.Add(LanguageNames.VisualBasic, ImmutableArray.Create(GetCompilerDiagnosticAnalyzer(LanguageNames.VisualBasic)));
+            var builder = ImmutableDictionary.CreateBuilder<
+                string,
+                ImmutableArray<DiagnosticAnalyzer>
+            >();
+            builder.Add(
+                LanguageNames.CSharp,
+                ImmutableArray.Create(GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp))
+            );
+            builder.Add(
+                LanguageNames.VisualBasic,
+                ImmutableArray.Create(GetCompilerDiagnosticAnalyzer(LanguageNames.VisualBasic))
+            );
             return builder.ToImmutable();
         }
 
         public static AnalyzerReference GetCompilerDiagnosticAnalyzerReference(string languageName)
         {
             var analyzer = GetCompilerDiagnosticAnalyzer(languageName);
-            return new AnalyzerImageReference(ImmutableArray.Create(analyzer), display: analyzer.GetType().FullName);
+            return new AnalyzerImageReference(
+                ImmutableArray.Create(analyzer),
+                display: analyzer.GetType().FullName
+            );
         }
 
-        public static ImmutableDictionary<string, ImmutableArray<AnalyzerReference>> GetCompilerDiagnosticAnalyzerReferencesMap()
+        public static ImmutableDictionary<
+            string,
+            ImmutableArray<AnalyzerReference>
+        > GetCompilerDiagnosticAnalyzerReferencesMap()
         {
-            var builder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<AnalyzerReference>>();
-            builder.Add(LanguageNames.CSharp, ImmutableArray.Create(GetCompilerDiagnosticAnalyzerReference(LanguageNames.CSharp)));
-            builder.Add(LanguageNames.VisualBasic, ImmutableArray.Create(GetCompilerDiagnosticAnalyzerReference(LanguageNames.VisualBasic)));
+            var builder = ImmutableDictionary.CreateBuilder<
+                string,
+                ImmutableArray<AnalyzerReference>
+            >();
+            builder.Add(
+                LanguageNames.CSharp,
+                ImmutableArray.Create(GetCompilerDiagnosticAnalyzerReference(LanguageNames.CSharp))
+            );
+            builder.Add(
+                LanguageNames.VisualBasic,
+                ImmutableArray.Create(
+                    GetCompilerDiagnosticAnalyzerReference(LanguageNames.VisualBasic)
+                )
+            );
             return builder.ToImmutable();
         }
 
@@ -428,7 +644,8 @@ namespace Microsoft.CodeAnalysis
             var expectedFileVersion = compiler.GetCompilerVersion();
             var expectedLanguage = compiler.GetCultureName();
 
-            return string.Format(@"{{
+            return string.Format(
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
   ""version"": ""1.0.0"",
   ""runs"": [
@@ -439,12 +656,20 @@ namespace Microsoft.CodeAnalysis
         ""fileVersion"": ""{2}"",
         ""semanticVersion"": ""{3}"",
         ""language"": ""{4}""
-      }},", expectedToolName, expectedVersion, expectedFileVersion, expectedSemanticVersion, expectedLanguage);
+      }},",
+                expectedToolName,
+                expectedVersion,
+                expectedFileVersion,
+                expectedSemanticVersion,
+                expectedLanguage
+            );
         }
 
-        public static string Inspect(this Diagnostic e)
-            => e.Location.IsInSource ? $"{e.Severity} {e.Id}: {e.GetMessage(CultureInfo.CurrentCulture)}" :
-               e.Location.IsInMetadata ? "metadata: " : "no location: ";
+        public static string Inspect(this Diagnostic e) =>
+            e.Location.IsInSource
+                ? $"{e.Severity} {e.Id}: {e.GetMessage(CultureInfo.CurrentCulture)}"
+            : e.Location.IsInMetadata ? "metadata: "
+            : "no location: ";
 
         public static string ToString(this Diagnostic d, IFormatProvider formatProvider)
         {

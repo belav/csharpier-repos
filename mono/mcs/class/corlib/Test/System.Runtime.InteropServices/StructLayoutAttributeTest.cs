@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,36 +27,35 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.InteropServices {
+namespace MonoTests.System.Runtime.InteropServices
+{
+    [TestFixture]
+    public class StructLayoutAttributeTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            var a = new StructLayoutAttribute(LayoutKind.Explicit);
+            Assert.AreEqual(LayoutKind.Explicit, a.Value);
 
-	[TestFixture]
-	public class StructLayoutAttributeTest
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new StructLayoutAttribute (LayoutKind.Explicit);
-			Assert.AreEqual (LayoutKind.Explicit, a.Value);
+            a = new StructLayoutAttribute(LayoutKind.Auto);
+            Assert.AreEqual(LayoutKind.Auto, a.Value);
+        }
 
-			a = new StructLayoutAttribute (LayoutKind.Auto);
-			Assert.AreEqual (LayoutKind.Auto, a.Value);
-		}
+        [Test]
+        public void FieldsTest()
+        {
+            var a = new StructLayoutAttribute(LayoutKind.Explicit);
 
-		[Test]
-		public void FieldsTest ()
-		{
-			var a = new StructLayoutAttribute (LayoutKind.Explicit);
-
-			Assert.AreEqual ((CharSet)0, a.CharSet);
-			Assert.AreEqual (0, a.Pack);
-			Assert.AreEqual (0, a.Size);
-		}
-	}
+            Assert.AreEqual((CharSet)0, a.CharSet);
+            Assert.AreEqual(0, a.Pack);
+            Assert.AreEqual(0, a.Size);
+        }
+    }
 }
-

@@ -27,10 +27,7 @@ namespace System.Configuration
         /// </summary>
         public string Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
     }
 }

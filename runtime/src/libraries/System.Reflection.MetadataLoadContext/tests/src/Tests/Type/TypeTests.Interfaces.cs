@@ -1,70 +1,93 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-using SampleMetadata;
 using System.Collections;
 using System.Collections.Generic;
+using SampleMetadata;
 using Xunit;
 
 namespace System.Reflection.Tests
 {
     public static partial class TypeTests
     {
-        public static IEnumerable<object[]> ImplementedInterfacesTestTheoryData => ImplementedInterfacesTestTypeData.Wrap();
+        public static IEnumerable<object[]> ImplementedInterfacesTestTheoryData =>
+            ImplementedInterfacesTestTypeData.Wrap();
 
         public static IEnumerable<object[]> ImplementedInterfacesTestTypeData
         {
             get
             {
-                yield return new object[] {
+                yield return new object[]
+                {
                     typeof(CInterfaceImplementerI1I2).Project(),
-                    new Type[] {
-                        typeof(Interface1).Project(),
-                        typeof(Interface2).Project() } };
+                    new Type[] { typeof(Interface1).Project(), typeof(Interface2).Project() },
+                };
 
-                yield return new object[] {
+                yield return new object[]
+                {
                     typeof(CInterfaceImplementerC12I2I3).Project(),
-                    new Type[] {
+                    new Type[]
+                    {
                         typeof(Interface1).Project(),
                         typeof(Interface2).Project(),
-                        typeof(Interface3).Project() } };
+                        typeof(Interface3).Project(),
+                    },
+                };
 
-                yield return new object[] {
+                yield return new object[]
+                {
                     typeof(CInterfaceImplementerI123).Project(),
-                    new Type[] {
+                    new Type[]
+                    {
                         typeof(Interface123).Project(),
                         typeof(Interface1).Project(),
                         typeof(Interface2).Project(),
-                        typeof(Interface3).Project() } };
+                        typeof(Interface3).Project(),
+                    },
+                };
 
-                yield return new object[] {
+                yield return new object[]
+                {
                     typeof(CInterfaceImplementerII5).Project(),
-                    new Type[] {
+                    new Type[]
+                    {
                         typeof(InterfaceII5).Project(),
                         typeof(InterfaceI5).Project(),
-                        typeof(Interface5).Project() } };
+                        typeof(Interface5).Project(),
+                    },
+                };
 
-                yield return new object[] {
+                yield return new object[]
+                {
                     typeof(GenericClass4<int, string>).Project(),
-                    new Type[] {
+                    new Type[]
+                    {
                         typeof(IGeneric1<int>).Project(),
-                        typeof(IGeneric2<string>).Project() } };
+                        typeof(IGeneric2<string>).Project(),
+                    },
+                };
 
-                yield return new object[] {
-                    typeof(GenericClassWithQuirkyConstraints1<,>).Project().GetTypeInfo().GenericTypeParameters[0],
-                    new Type[] {
-                        typeof(IConstrained1).Project() } };
+                yield return new object[]
+                {
+                    typeof(GenericClassWithQuirkyConstraints1<,>)
+                        .Project()
+                        .GetTypeInfo()
+                        .GenericTypeParameters[0],
+                    new Type[] { typeof(IConstrained1).Project() },
+                };
 
-                yield return new object[] {
+                yield return new object[]
+                {
                     typeof(int[]).Project(),
-                    new Type[] {
-                    typeof(IEnumerable).Project(),
-                    typeof(IEnumerable<int>).Project(),
-                    typeof(ICollection<int>).Project(),
-                    typeof(IList<int>).Project(),
-                    typeof(IReadOnlyList<int>).Project() } };
-
+                    new Type[]
+                    {
+                        typeof(IEnumerable).Project(),
+                        typeof(IEnumerable<int>).Project(),
+                        typeof(ICollection<int>).Project(),
+                        typeof(IList<int>).Project(),
+                        typeof(IReadOnlyList<int>).Project(),
+                    },
+                };
             }
         }
 
@@ -105,7 +128,7 @@ namespace System.Reflection.Tests
 
                 if (!expectedInterfaces.Contains(actualIfc))
                 {
-                    if (!t.IsArray)  // Don't bake in assumptions about what else arrays might expose
+                    if (!t.IsArray) // Don't bake in assumptions about what else arrays might expose
                     {
                         Assert.Fail("Unexpected interface found: " + actualIfc);
                     }

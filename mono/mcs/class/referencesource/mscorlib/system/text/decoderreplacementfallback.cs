@@ -17,9 +17,8 @@ namespace System.Text
         private String strDefault;
 
         // Construction.  Default replacement fallback uses no best fit and ? replacement string
-        public DecoderReplacementFallback() : this("?")
-        {
-        }
+        public DecoderReplacementFallback()
+            : this("?") { }
 
         public DecoderReplacementFallback(String replacement)
         {
@@ -28,18 +27,18 @@ namespace System.Text
             Contract.EndContractBlock();
 
             // Make sure it doesn't have bad surrogate pairs
-            bool bFoundHigh=false;
+            bool bFoundHigh = false;
             for (int i = 0; i < replacement.Length; i++)
             {
                 // Found a surrogate?
-                if (Char.IsSurrogate(replacement,i))
+                if (Char.IsSurrogate(replacement, i))
                 {
                     // High or Low?
                     if (Char.IsHighSurrogate(replacement, i))
                     {
                         // if already had a high one, stop
                         if (bFoundHigh)
-                            break;  // break & throw at the bFoundHIgh below
+                            break; // break & throw at the bFoundHIgh below
                         bFoundHigh = true;
                     }
                     else
@@ -61,17 +60,19 @@ namespace System.Text
                     break;
             }
             if (bFoundHigh)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidCharSequenceNoIndex", "replacement"));
+                throw new ArgumentException(
+                    Environment.GetResourceString(
+                        "Argument_InvalidCharSequenceNoIndex",
+                        "replacement"
+                    )
+                );
 
             strDefault = replacement;
         }
 
         public String DefaultString
         {
-             get
-             {
-                return strDefault;
-             }
+            get { return strDefault; }
         }
 
         public override DecoderFallbackBuffer CreateFallbackBuffer()
@@ -82,10 +83,7 @@ namespace System.Text
         // Maximum number of characters that this instance of this fallback could return
         public override int MaxCharCount
         {
-            get
-            {
-                return strDefault.Length;
-            }
+            get { return strDefault.Length; }
         }
 
         public override bool Equals(Object value)
@@ -103,8 +101,6 @@ namespace System.Text
             return strDefault.GetHashCode();
         }
     }
-
-
 
     public sealed class DecoderReplacementFallbackBuffer : DecoderFallbackBuffer
     {
@@ -159,10 +155,12 @@ namespace System.Text
             }
 
             // Now make sure its in the expected range
-            Contract.Assert(fallbackIndex < strDefault.Length && fallbackIndex >= 0,
-                            "Index exceeds buffer range");
+            Contract.Assert(
+                fallbackIndex < strDefault.Length && fallbackIndex >= 0,
+                "Index exceeds buffer range"
+            );
 
-            return strDefault[fallbackIndex];            
+            return strDefault[fallbackIndex];
         }
 
         public override bool MovePrevious()
@@ -190,7 +188,7 @@ namespace System.Text
         }
 
         // Clear the buffer
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public override unsafe void Reset()
         {
             fallbackCount = -1;
@@ -199,8 +197,8 @@ namespace System.Text
         }
 
         // This version just counts the fallback and doesn't actually copy anything.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal unsafe override int InternalFallback(byte[] bytes, byte* pBytes)
+        [System.Security.SecurityCritical] // auto-generated
+        internal override unsafe int InternalFallback(byte[] bytes, byte* pBytes)
         // Right now this has both bytes and bytes[], since we might have extra bytes, hence the
         // array, and we might need the index, hence the byte*
         {
@@ -209,4 +207,3 @@ namespace System.Text
         }
     }
 }
-

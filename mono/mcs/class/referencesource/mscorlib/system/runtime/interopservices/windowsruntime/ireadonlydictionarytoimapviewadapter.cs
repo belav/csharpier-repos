@@ -1,20 +1,20 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -25,7 +25,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not IReadOnlyDictionaryToIMapViewAdapter objects. Rather, they are of type
     // IReadOnlyDictionary<K, V>. No actual IReadOnlyDictionaryToIMapViewAdapter object is ever instantiated. Thus, you will
-    // see a lot of expressions that cast "this" to "IReadOnlyDictionary<K, V>". 
+    // see a lot of expressions that cast "this" to "IReadOnlyDictionary<K, V>".
     [DebuggerDisplay("Size = {Size}")]
     internal sealed class IReadOnlyDictionaryToIMapViewAdapter
     {
@@ -38,13 +38,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         internal V Lookup<K, V>(K key)
         {
-            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(this);
+            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(
+                this
+            );
             V value;
             bool keyFound = _this.TryGetValue(key, out value);
 
             if (!keyFound)
             {
-                Exception e = new KeyNotFoundException(Environment.GetResourceString("Arg_KeyNotFound"));
+                Exception e = new KeyNotFoundException(
+                    Environment.GetResourceString("Arg_KeyNotFound")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }
@@ -56,15 +60,19 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         internal uint Size<K, V>()
         {
-            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(this);
+            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(
+                this
+            );
             return (uint)_this.Count;
         }
-        
+
         // bool HasKey(K key)
         [SecurityCritical]
         internal bool HasKey<K, V>(K key)
         {
-            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(this);
+            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(
+                this
+            );
             return _this.ContainsKey(key);
         }
 
@@ -72,9 +80,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         internal void Split<K, V>(out IMapView<K, V> first, out IMapView<K, V> second)
         {
-            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(this);
+            IReadOnlyDictionary<K, V> _this = JitHelpers.UnsafeCast<IReadOnlyDictionary<K, V>>(
+                this
+            );
 
-            if (_this.Count < 2) {
+            if (_this.Count < 2)
+            {
                 first = null;
                 second = null;
                 return;

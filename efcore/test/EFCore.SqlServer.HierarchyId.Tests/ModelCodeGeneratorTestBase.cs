@@ -15,12 +15,15 @@ public abstract class ModelCodeGeneratorTestBase
     protected void Test(
         Action<ModelBuilder> buildModel,
         ModelCodeGenerationOptions options,
-        Action<ScaffoldedModel> assertScaffold)
+        Action<ScaffoldedModel> assertScaffold
+    )
     {
         var designServices = new ServiceCollection();
         AddModelServices(designServices);
 
-        var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(customServices: designServices);
+        var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(
+            customServices: designServices
+        );
         modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
         buildModel(modelBuilder);
 
@@ -29,16 +32,15 @@ public abstract class ModelCodeGeneratorTestBase
         var services = CreateServices();
         AddScaffoldingServices(services);
 
-        var generator = services.BuildServiceProvider(validateScopes: true)
+        var generator = services
+            .BuildServiceProvider(validateScopes: true)
             .GetRequiredService<IModelCodeGenerator>();
 
         options.ModelNamespace ??= "TestNamespace";
         options.ContextName = "TestDbContext";
         options.ConnectionString = "Initial Catalog=TestDatabase";
 
-        var scaffoldedModel = generator.GenerateModel(
-            model,
-            options);
+        var scaffoldedModel = generator.GenerateModel(model, options);
         assertScaffold(scaffoldedModel);
     }
 
@@ -46,21 +48,19 @@ public abstract class ModelCodeGeneratorTestBase
     {
         var testAssembly = typeof(ModelCodeGeneratorTestBase).Assembly;
         var reporter = new TestOperationReporter();
-        var services = new DesignTimeServicesBuilder(testAssembly, testAssembly, reporter, new string[0])
-            .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
+        var services = new DesignTimeServicesBuilder(
+            testAssembly,
+            testAssembly,
+            reporter,
+            new string[0]
+        ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
         return services;
     }
 
-    protected virtual void AddModelServices(IServiceCollection services)
-    {
-    }
+    protected virtual void AddModelServices(IServiceCollection services) { }
 
-    protected virtual void AddScaffoldingServices(IServiceCollection services)
-    {
-    }
+    protected virtual void AddScaffoldingServices(IServiceCollection services) { }
 
-    protected static void AssertFileContents(
-        string expectedCode,
-        ScaffoldedFile file)
-        => Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);
+    protected static void AssertFileContents(string expectedCode, ScaffoldedFile file) =>
+        Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);
 }

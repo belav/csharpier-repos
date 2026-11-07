@@ -36,35 +36,50 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioDefinitionsAndReferencesFactory(
             SVsServiceProvider serviceProvider,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _serviceProvider = serviceProvider;
             _threadingContext = threadingContext;
         }
 
         public override async Task<DefinitionItem?> GetThirdPartyDefinitionItemAsync(
-            Solution solution, DefinitionItem definitionItem, CancellationToken cancellationToken)
+            Solution solution,
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        )
         {
-            var symbolNavigationService = solution.Services.GetRequiredService<ISymbolNavigationService>();
-            var result = await symbolNavigationService.GetExternalNavigationSymbolLocationAsync(definitionItem, cancellationToken).ConfigureAwait(false);
+            var symbolNavigationService =
+                solution.Services.GetRequiredService<ISymbolNavigationService>();
+            var result = await symbolNavigationService
+                .GetExternalNavigationSymbolLocationAsync(definitionItem, cancellationToken)
+                .ConfigureAwait(false);
             if (result is not var (filePath, linePosition))
                 return null;
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             var displayParts = GetDisplayParts_MustCallOnUIThread(filePath, linePosition);
             return new ExternalDefinitionItem(
-                definitionItem.Tags, displayParts,
-                _serviceProvider, _threadingContext,
-                filePath, linePosition);
+                definitionItem.Tags,
+                displayParts,
+                _serviceProvider,
+                _threadingContext,
+                filePath,
+                linePosition
+            );
         }
 
         private ImmutableArray<TaggedText> GetDisplayParts_MustCallOnUIThread(
-            string filePath, LinePosition linePosition)
+            string filePath,
+            LinePosition linePosition
+        )
         {
-            var sourceLine = GetSourceLine_MustCallOnUIThread(filePath, linePosition.Line).Trim(' ', '\t');
+            var sourceLine = GetSourceLine_MustCallOnUIThread(filePath, linePosition.Line)
+                .Trim(' ', '\t');
 
             // Put the line in 1-based for the presentation of this item.
-            var formatted = $"{filePath} - ({linePosition.Line + 1}, {linePosition.Character + 1}) : {sourceLine}";
+            var formatted =
+                $"{filePath} - ({linePosition.Line + 1}, {linePosition.Character + 1}) : {sourceLine}";
 
             return ImmutableArray.Create(new TaggedText(TextTags.Text, formatted));
         }
@@ -72,10 +87,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
         private string GetSourceLine_MustCallOnUIThread(string filePath, int lineNumber)
         {
             using var invisibleEditor = new InvisibleEditor(
-                _serviceProvider, filePath, hierarchy: null, needsSave: false, needsUndoDisabled: false);
+                _serviceProvider,
+                filePath,
+                hierarchy: null,
+                needsSave: false,
+                needsUndoDisabled: false
+            );
             var vsTextLines = invisibleEditor.VsTextLines;
-            if (vsTextLines.GetLengthOfLine(lineNumber, out var lineLength) == VSConstants.S_OK &&
-                vsTextLines.GetLineText(lineNumber, 0, lineNumber, lineLength, out var lineText) == VSConstants.S_OK)
+            if (
+                vsTextLines.GetLengthOfLine(lineNumber, out var lineLength) == VSConstants.S_OK
+                && vsTextLines.GetLineText(lineNumber, 0, lineNumber, lineLength, out var lineText)
+                    == VSConstants.S_OK
+            )
             {
                 return lineText;
             }
@@ -98,15 +121,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                 IServiceProvider serviceProvider,
                 IThreadingContext threadingContext,
                 string filePath,
-                LinePosition linePosition)
-                : base(tags,
-                       displayParts,
-                       nameDisplayParts: ImmutableArray<TaggedText>.Empty,
-                       originationParts: default,
-                       sourceSpans: default,
-                       properties: null,
-                       displayableProperties: null,
-                       displayIfNoReferences: true)
+                LinePosition linePosition
+            )
+                : base(
+                    tags,
+                    displayParts,
+                    nameDisplayParts: ImmutableArray<TaggedText>.Empty,
+                    originationParts: default,
+                    sourceSpans: default,
+                    properties: null,
+                    displayableProperties: null,
+                    displayIfNoReferences: true
+                )
             {
                 _serviceProvider = serviceProvider;
                 _threadingContext = threadingContext;
@@ -114,22 +140,39 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                 _linePosition = linePosition;
             }
 
-            public override Task<INavigableLocation?> GetNavigableLocationAsync(Workspace workspace, CancellationToken cancellationToken)
+            public override Task<INavigableLocation?> GetNavigableLocationAsync(
+                Workspace workspace,
+                CancellationToken cancellationToken
+            )
             {
-                return Task.FromResult<INavigableLocation?>(new NavigableLocation(async (options, cancellationToken) =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                    return TryOpenFile() && TryNavigateToPosition();
-                }));
+                return Task.FromResult<INavigableLocation?>(
+                    new NavigableLocation(
+                        async (options, cancellationToken) =>
+                        {
+                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                cancellationToken
+                            );
+                            return TryOpenFile() && TryNavigateToPosition();
+                        }
+                    )
+                );
             }
 
             private bool TryOpenFile()
             {
-                var shellOpenDocument = (IVsUIShellOpenDocument)_serviceProvider.GetService(typeof(SVsUIShellOpenDocument));
+                var shellOpenDocument = (IVsUIShellOpenDocument)
+                    _serviceProvider.GetService(typeof(SVsUIShellOpenDocument));
                 var textViewGuid = VSConstants.LOGVIEWID.TextView_guid;
-                if (shellOpenDocument.OpenDocumentViaProject(
-                        _filePath, ref textViewGuid, out _,
-                        out _, out _, out var frame) == VSConstants.S_OK)
+                if (
+                    shellOpenDocument.OpenDocumentViaProject(
+                        _filePath,
+                        ref textViewGuid,
+                        out _,
+                        out _,
+                        out _,
+                        out var frame
+                    ) == VSConstants.S_OK
+                )
                 {
                     frame.Show();
                     return true;
@@ -140,9 +183,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
             private bool TryNavigateToPosition()
             {
-                var docTable = (IVsRunningDocumentTable)_serviceProvider.GetService(typeof(SVsRunningDocumentTable));
-                if (docTable.FindAndLockDocument((uint)_VSRDTFLAGS.RDT_NoLock, _filePath,
-                        out _, out _, out var bufferPtr, out _) != VSConstants.S_OK)
+                var docTable = (IVsRunningDocumentTable)
+                    _serviceProvider.GetService(typeof(SVsRunningDocumentTable));
+                if (
+                    docTable.FindAndLockDocument(
+                        (uint)_VSRDTFLAGS.RDT_NoLock,
+                        _filePath,
+                        out _,
+                        out _,
+                        out var bufferPtr,
+                        out _
+                    ) != VSConstants.S_OK
+                )
                 {
                     return false;
                 }
@@ -154,16 +206,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                         return false;
                     }
 
-                    var textManager = (IVsTextManager)_serviceProvider.GetService(typeof(SVsTextManager));
+                    var textManager = (IVsTextManager)
+                        _serviceProvider.GetService(typeof(SVsTextManager));
                     if (textManager == null)
                     {
                         return false;
                     }
 
                     return textManager.NavigateToLineAndColumn(
-                        lines, VSConstants.LOGVIEWID.TextView_guid,
-                        _linePosition.Line, _linePosition.Character,
-                        _linePosition.Line, _linePosition.Character) == VSConstants.S_OK;
+                            lines,
+                            VSConstants.LOGVIEWID.TextView_guid,
+                            _linePosition.Line,
+                            _linePosition.Character,
+                            _linePosition.Line,
+                            _linePosition.Character
+                        ) == VSConstants.S_OK;
                 }
                 finally
                 {

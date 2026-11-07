@@ -55,27 +55,19 @@ public class Startup
                             var basePort =
                                 context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
 
-                            options.Listen(
-                                IPAddress.Loopback,
-                                basePort,
-                                listenOptions =>
-                                {
-                                    // Uncomment the following to enable Nagle's algorithm for this endpoint.
-                                    //listenOptions.NoDelay = false;
+                            options.Listen(IPAddress.Loopback, basePort, listenOptions =>
+                            {
+                                // Uncomment the following to enable Nagle's algorithm for this endpoint.
+                                //listenOptions.NoDelay = false;
 
-                                    listenOptions.UseConnectionLogging();
-                                }
-                            );
+                                listenOptions.UseConnectionLogging();
+                            });
 
-                            options.Listen(
-                                IPAddress.Loopback,
-                                basePort + 1,
-                                listenOptions =>
-                                {
-                                    listenOptions.UseHttps();
-                                    listenOptions.UseConnectionLogging();
-                                }
-                            );
+                            options.Listen(IPAddress.Loopback, basePort + 1, listenOptions =>
+                            {
+                                listenOptions.UseHttps();
+                                listenOptions.UseConnectionLogging();
+                            });
 
                             options.UseSystemd();
 

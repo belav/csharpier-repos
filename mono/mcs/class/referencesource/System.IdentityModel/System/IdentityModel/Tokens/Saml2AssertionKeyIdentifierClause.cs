@@ -8,7 +8,7 @@ namespace System.IdentityModel.Tokens
 {
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// A SecurityKeyIdentifierClause for referencing SAML2-based security tokens.
     /// </summary>
@@ -19,9 +19,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="id">The id defining the clause to create.</param>
         public Saml2AssertionKeyIdentifierClause(string id)
-            : this(id, null, 0)
-        {
-        }
+            : this(id, null, 0) { }
 
         /// <summary>
         /// Creates a Saml2AssertionKeyIdentifierClause for a given id.
@@ -35,7 +33,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="derivationLength">The size of the derived key. Sets the value of the System.IdentityModel.Tokens.SecurityKeyIdentifierClause.DerivationLength
         /// property.
         /// </param>
-        public Saml2AssertionKeyIdentifierClause(string id, byte[] derivationNonce, int derivationLength)
+        public Saml2AssertionKeyIdentifierClause(
+            string id,
+            byte[] derivationNonce,
+            int derivationLength
+        )
             : base(null, derivationNonce, derivationLength)
         {
             if (string.IsNullOrEmpty(id))
@@ -52,7 +54,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="assertionId">Id of the assertion</param>
         /// <param name="keyIdentifierClause">A <see cref="SecurityKeyIdentifierClause"/> to match.</param>
         /// <returns>'True' if the keyIdentifier matches this. 'False' otherwise.</returns>
-        public static bool Matches(string assertionId, SecurityKeyIdentifierClause keyIdentifierClause)
+        public static bool Matches(
+            string assertionId,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             if (string.IsNullOrEmpty(assertionId))
             {
@@ -65,23 +70,28 @@ namespace System.IdentityModel.Tokens
             }
 
             // Prefer our own type
-            Saml2AssertionKeyIdentifierClause saml2Clause = keyIdentifierClause as Saml2AssertionKeyIdentifierClause;
+            Saml2AssertionKeyIdentifierClause saml2Clause =
+                keyIdentifierClause as Saml2AssertionKeyIdentifierClause;
             if (null != saml2Clause && StringComparer.Ordinal.Equals(assertionId, saml2Clause.Id))
             {
                 return true;
             }
 
             // For compatibility, match against the old WCF type.
-            // WCF will read SAML2-based key identifier clauses if our 
+            // WCF will read SAML2-based key identifier clauses if our
             // SecurityTokenSerializer doesn't get the chance. Unfortunately,
             // the TokenTypeUri and ValueType properties are internal, so
             // we can't check if they're for SAML2 or not. We're just going
             // to go with the fact that SAML Assertion IDs, in both versions,
-            // are supposed to be sufficiently random as to not intersect. 
-            // So, if the AssertionID matches our Id, we'll say that's good 
+            // are supposed to be sufficiently random as to not intersect.
+            // So, if the AssertionID matches our Id, we'll say that's good
             // enough.
-            SamlAssertionKeyIdentifierClause wcfClause = keyIdentifierClause as SamlAssertionKeyIdentifierClause;
-            if (null != wcfClause && StringComparer.Ordinal.Equals(assertionId, wcfClause.AssertionId))
+            SamlAssertionKeyIdentifierClause wcfClause =
+                keyIdentifierClause as SamlAssertionKeyIdentifierClause;
+            if (
+                null != wcfClause
+                && StringComparer.Ordinal.Equals(assertionId, wcfClause.AssertionId)
+            )
             {
                 return true;
             }

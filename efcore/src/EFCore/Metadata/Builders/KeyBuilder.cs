@@ -38,16 +38,14 @@ public class KeyBuilder : IInfrastructure<IConventionKeyBuilder>
     /// <summary>
     ///     The internal builder being used to configure the key.
     /// </summary>
-    IConventionKeyBuilder IInfrastructure<IConventionKeyBuilder>.Instance
-        => Builder;
+    IConventionKeyBuilder IInfrastructure<IConventionKeyBuilder>.Instance => Builder;
 
     private InternalKeyBuilder Builder { get; }
 
     /// <summary>
     ///     The key being configured.
     /// </summary>
-    public virtual IMutableKey Metadata
-        => Builder.Metadata;
+    public virtual IMutableKey Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the key. If an annotation with the key specified in
@@ -73,8 +71,7 @@ public class KeyBuilder : IInfrastructure<IConventionKeyBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -83,8 +80,7 @@ public class KeyBuilder : IInfrastructure<IConventionKeyBuilder>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -92,8 +88,7 @@ public class KeyBuilder : IInfrastructure<IConventionKeyBuilder>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

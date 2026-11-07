@@ -26,35 +26,49 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 {
     using Constants = ConvertSwitchStatementToExpressionConstants;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertSwitchStatementToExpression), Shared]
-    internal sealed partial class ConvertSwitchStatementToExpressionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertSwitchStatementToExpression
+        ),
+        Shared
+    ]
+    internal sealed partial class ConvertSwitchStatementToExpressionCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertSwitchStatementToExpressionCodeFixProvider()
-        {
-        }
+        public ConvertSwitchStatementToExpressionCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var switchLocation = context.Diagnostics.First().AdditionalLocations[0];
-            var switchStatement = (SwitchStatementSyntax)switchLocation.FindNode(getInnermostNodeForTie: true, context.CancellationToken);
+            var switchStatement = (SwitchStatementSyntax)
+                switchLocation.FindNode(getInnermostNodeForTie: true, context.CancellationToken);
             if (switchStatement.ContainsDirectives)
             {
                 // Avoid providing code fixes for switch statements containing directives
                 return Task.CompletedTask;
             }
 
-            RegisterCodeFix(context, CSharpAnalyzersResources.Convert_switch_statement_to_expression, nameof(CSharpAnalyzersResources.Convert_switch_statement_to_expression));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Convert_switch_statement_to_expression,
+                nameof(CSharpAnalyzersResources.Convert_switch_statement_to_expression)
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<TextSpan>.GetInstance(diagnostics.Length, out var spans);
             foreach (var diagnostic in diagnostics)
@@ -71,28 +85,46 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 spans.Add(switchLocation.SourceSpan);
 
                 var properties = diagnostic.Properties;
-                var nodeToGenerate = (SyntaxKind)int.Parse(properties[Constants.NodeToGenerateKey]!);
-                var shouldRemoveNextStatement = bool.Parse(properties[Constants.ShouldRemoveNextStatementKey]!);
+                var nodeToGenerate = (SyntaxKind)
+                    int.Parse(properties[Constants.NodeToGenerateKey]!);
+                var shouldRemoveNextStatement = bool.Parse(
+                    properties[Constants.ShouldRemoveNextStatementKey]!
+                );
 
-                var declaratorToRemoveLocation = diagnostic.AdditionalLocations.ElementAtOrDefault(1);
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var declaratorToRemoveLocation = diagnostic.AdditionalLocations.ElementAtOrDefault(
+                    1
+                );
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 VariableDeclaratorSyntax? declaratorToRemoveNode = null;
                 ITypeSymbol? declaratorToRemoveType = null;
 
                 if (declaratorToRemoveLocation != null)
                 {
-                    declaratorToRemoveNode = (VariableDeclaratorSyntax)declaratorToRemoveLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
-                    declaratorToRemoveType = semanticModel.GetDeclaredSymbol(declaratorToRemoveNode, cancellationToken).GetSymbolType();
+                    declaratorToRemoveNode = (VariableDeclaratorSyntax)
+                        declaratorToRemoveLocation.FindNode(
+                            getInnermostNodeForTie: true,
+                            cancellationToken
+                        );
+                    declaratorToRemoveType = semanticModel
+                        .GetDeclaredSymbol(declaratorToRemoveNode, cancellationToken)
+                        .GetSymbolType();
                 }
 
-                var switchStatement = (SwitchStatementSyntax)switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var switchStatement = (SwitchStatementSyntax)
+                    switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 var switchExpressionStatement = Rewriter.Rewrite(
-                   switchStatement, semanticModel, declaratorToRemoveType, nodeToGenerate,
-                   shouldMoveNextStatementToSwitchExpression: shouldRemoveNextStatement,
-                   generateDeclaration: declaratorToRemoveLocation is not null,
-                   cancellationToken);
+                    switchStatement,
+                    semanticModel,
+                    declaratorToRemoveType,
+                    nodeToGenerate,
+                    shouldMoveNextStatementToSwitchExpression: shouldRemoveNextStatement,
+                    generateDeclaration: declaratorToRemoveLocation is not null,
+                    cancellationToken
+                );
 
                 if (declaratorToRemoveNode is not null)
                 {
@@ -100,19 +132,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                     // If we are removing the declarator statement entirely, transfer its leading trivia to the
                     // expression-statement are converting to.
-                    if (declaratorToRemoveNode.Parent is VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax declStatement, Variables.Count: 1 })
-                        switchExpressionStatement = switchExpressionStatement.WithPrependedLeadingTrivia(declStatement.GetLeadingTrivia());
+                    if (
+                        declaratorToRemoveNode.Parent is VariableDeclarationSyntax
+                        {
+                            Parent: LocalDeclarationStatementSyntax declStatement,
+                            Variables.Count: 1
+                        }
+                    )
+                        switchExpressionStatement =
+                            switchExpressionStatement.WithPrependedLeadingTrivia(
+                                declStatement.GetLeadingTrivia()
+                            );
                 }
 
-                editor.ReplaceNode(switchStatement, switchExpressionStatement.WithAdditionalAnnotations(Formatter.Annotation));
+                editor.ReplaceNode(
+                    switchStatement,
+                    switchExpressionStatement.WithAdditionalAnnotations(Formatter.Annotation)
+                );
 
                 if (shouldRemoveNextStatement)
                 {
                     // Already morphed into the top-level switch expression.
                     var nextStatement = switchStatement.GetNextStatement();
                     Contract.ThrowIfNull(nextStatement);
-                    Debug.Assert(nextStatement.Kind() is SyntaxKind.ThrowStatement or SyntaxKind.ReturnStatement);
-                    editor.RemoveNode(nextStatement.IsParentKind(SyntaxKind.GlobalStatement) ? nextStatement.GetRequiredParent() : nextStatement);
+                    Debug.Assert(
+                        nextStatement.Kind()
+                            is SyntaxKind.ThrowStatement
+                                or SyntaxKind.ReturnStatement
+                    );
+                    editor.RemoveNode(
+                        nextStatement.IsParentKind(SyntaxKind.GlobalStatement)
+                            ? nextStatement.GetRequiredParent()
+                            : nextStatement
+                    );
                 }
             }
         }

@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -9,7 +9,7 @@
 //
 // <OWNER>Microsoft</OWNER>
 //
-// 
+//
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -20,7 +20,6 @@ using System.Threading;
 
 namespace System.Collections.Concurrent
 {
-
     /// <summary>
     /// Represents a particular manner of splitting an orderable data source into multiple partitions.
     /// </summary>
@@ -86,7 +85,11 @@ namespace System.Collections.Concurrent
         /// integers in the range [0 .. numberOfElements-1]. If false, order keys must still be dictinct, but
         /// only their relative order is considered, not their absolute values.
         /// </param>
-        protected OrderablePartitioner(bool keysOrderedInEachPartition, bool keysOrderedAcrossPartitions, bool keysNormalized)
+        protected OrderablePartitioner(
+            bool keysOrderedInEachPartition,
+            bool keysOrderedAcrossPartitions,
+            bool keysNormalized
+        )
         {
             KeysOrderedInEachPartition = keysOrderedInEachPartition;
             KeysOrderedAcrossPartitions = keysOrderedAcrossPartitions;
@@ -103,7 +106,9 @@ namespace System.Collections.Concurrent
         /// </remarks>
         /// <param name="partitionCount">The number of partitions to create.</param>
         /// <returns>A list containing <paramref name="partitionCount"/> enumerators.</returns>
-        public abstract IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(int partitionCount);
+        public abstract IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
+            int partitionCount
+        );
 
         /// <summary>
         /// Creates an object that can partition the underlying collection into a variable number of
@@ -132,7 +137,9 @@ namespace System.Collections.Concurrent
         /// partitioner.</exception>
         public virtual IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions()
         {
-            throw new NotSupportedException(Environment.GetResourceString("Partitioner_DynamicPartitionsNotSupported"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("Partitioner_DynamicPartitionsNotSupported")
+            );
         }
 
         /// <summary>
@@ -171,11 +178,14 @@ namespace System.Collections.Concurrent
         /// <returns>A list containing <paramref name="partitionCount"/> enumerators.</returns>
         public override IList<IEnumerator<TSource>> GetPartitions(int partitionCount)
         {
-            IList<IEnumerator<KeyValuePair<long, TSource>>> orderablePartitions = GetOrderablePartitions(partitionCount);
+            IList<IEnumerator<KeyValuePair<long, TSource>>> orderablePartitions =
+                GetOrderablePartitions(partitionCount);
 
             if (orderablePartitions.Count != partitionCount)
             {
-                throw new InvalidOperationException("OrderablePartitioner_GetPartitions_WrongNumberOfPartitions");
+                throw new InvalidOperationException(
+                    "OrderablePartitioner_GetPartitions_WrongNumberOfPartitions"
+                );
             }
 
             IEnumerator<TSource>[] partitions = new IEnumerator<TSource>[partitionCount];
@@ -212,7 +222,8 @@ namespace System.Collections.Concurrent
         /// partitioner.</exception>
         public override IEnumerable<TSource> GetDynamicPartitions()
         {
-            IEnumerable<KeyValuePair<long, TSource>> orderablePartitions = GetOrderableDynamicPartitions();
+            IEnumerable<KeyValuePair<long, TSource>> orderablePartitions =
+                GetOrderableDynamicPartitions();
             return new EnumerableDropIndices(orderablePartitions);
         }
 
@@ -222,18 +233,22 @@ namespace System.Collections.Concurrent
         private class EnumerableDropIndices : IEnumerable<TSource>, IDisposable
         {
             private readonly IEnumerable<KeyValuePair<long, TSource>> m_source;
+
             public EnumerableDropIndices(IEnumerable<KeyValuePair<long, TSource>> source)
             {
                 m_source = source;
             }
+
             public IEnumerator<TSource> GetEnumerator()
             {
                 return new EnumeratorDropIndices(m_source.GetEnumerator());
             }
+
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return ((EnumerableDropIndices)this).GetEnumerator();
             }
+
             public void Dispose()
             {
                 IDisposable d = m_source as IDisposable;
@@ -247,38 +262,35 @@ namespace System.Collections.Concurrent
         private class EnumeratorDropIndices : IEnumerator<TSource>
         {
             private readonly IEnumerator<KeyValuePair<long, TSource>> m_source;
+
             public EnumeratorDropIndices(IEnumerator<KeyValuePair<long, TSource>> source)
             {
                 m_source = source;
             }
+
             public bool MoveNext()
             {
                 return m_source.MoveNext();
             }
+
             public TSource Current
             {
-                get
-                {
-                    return m_source.Current.Value;
-                }
+                get { return m_source.Current.Value; }
             }
             Object IEnumerator.Current
             {
-                get
-                {
-                    return ((EnumeratorDropIndices)this).Current;
-                }
+                get { return ((EnumeratorDropIndices)this).Current; }
             }
+
             public void Dispose()
             {
                 m_source.Dispose();
             }
+
             public void Reset()
             {
                 m_source.Reset();
             }
         }
-
     }
-
 }

@@ -3,33 +3,33 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class GraphUpdatesSqlServerClientCascadeTest : GraphUpdatesSqlServerTestBase<
-    GraphUpdatesSqlServerClientCascadeTest.SqlServerFixture>
+public class GraphUpdatesSqlServerClientCascadeTest
+    : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerClientCascadeTest.SqlServerFixture>
 {
     public GraphUpdatesSqlServerClientCascadeTest(SqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqlServerFixture : GraphUpdatesSqlServerFixtureBase
     {
-        public override bool NoStoreCascades
-            => true;
+        public override bool NoStoreCascades => true;
 
-        protected override string StoreName
-            => "GraphClientCascadeUpdatesTest";
+        protected override string StoreName => "GraphClientCascadeUpdatesTest";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            foreach (var foreignKey in modelBuilder.Model
-                         .GetEntityTypes()
-                         .SelectMany(e => e.GetDeclaredForeignKeys())
-                         .Where(e => e.DeleteBehavior == DeleteBehavior.Cascade))
+            foreach (
+                var foreignKey in modelBuilder
+                    .Model.GetEntityTypes()
+                    .SelectMany(e => e.GetDeclaredForeignKeys())
+                    .Where(e => e.DeleteBehavior == DeleteBehavior.Cascade)
+            )
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.ClientCascade;
             }

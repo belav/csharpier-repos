@@ -28,13 +28,10 @@ app.MapGet("/hello", ([FromQuery]ParsableTodo[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=1&p=1");
@@ -54,13 +51,10 @@ app.MapGet("/hello", ([FromHeader]ParsableTodo[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers.Add("p", new StringValues(new string[] { "1", "1" }));
@@ -80,13 +74,10 @@ app.MapGet("/hello", ([FromHeader]string[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers.Add("p", new StringValues(new string[] { "1", "1" }));
@@ -106,13 +97,10 @@ app.MapGet("/hello", ([FromHeader]string?[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers.Add("p", new StringValues(new string[] { "1", "1" }));
@@ -263,13 +251,10 @@ app.MapGet("/hello", (HttpContext context, {{typeName}} tryParsable) => {
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = new QueryCollection(
@@ -292,13 +277,10 @@ app.MapGet("/hello", (ParsableTodo[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=1&p=1");
@@ -318,13 +300,10 @@ app.MapGet("/hello", ([FromQuery]string[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=Item1&p=Item2");
@@ -344,13 +323,10 @@ app.MapGet("/hello", (string[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=Item1&p=Item2");
@@ -370,13 +346,10 @@ app.MapGet("/hello", (string?[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
 
@@ -395,13 +368,10 @@ app.MapGet("/hello", (string?[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=&p=");
@@ -421,13 +391,10 @@ app.MapGet("/hello", ([FromQuery]string?[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=Item1&p=Item2");
@@ -447,13 +414,10 @@ app.MapGet("/hello", (string?[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=Item1&p=Item2");
@@ -473,13 +437,10 @@ app.MapPost("/hello", (string[] p) => p.Length);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapPost", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapPost", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=Item1&p=Item2");
@@ -499,13 +460,10 @@ app.MapPost("/hello", (string[] p) => p[0]);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapPost", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapPost", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
@@ -537,13 +495,10 @@ app.MapMethods("/hello", new [] { "POST" }, (string[] p) => p[0]);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapMethods", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapMethods", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
@@ -575,13 +530,10 @@ app.MapMethods("/hello", new [] { "GET" }, (string[] p) => p[0]);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapMethods", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapMethods", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
@@ -613,13 +565,10 @@ app.MapMethods("/hello", new [] { "POST", "GET" }, (string[] p) => p[0]);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapMethods", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapMethods", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
@@ -651,13 +600,10 @@ app.MapMethods("/hello", new [] { "POST", "PUT" }, (string[] p) => p[0]);
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapMethods", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapMethods", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(

@@ -28,15 +28,19 @@
 
 namespace System.Reflection.Metadata
 {
-	public static class AssemblyExtensions
-	{
-		//
-		// System.Runtime.Loader netstandard typeforwarders dependency
-		//
-		[CLSCompliant(false)]
-		public unsafe static bool TryGetRawMetadata (this System.Reflection.Assembly assembly, out byte* blob, out int length)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    public static class AssemblyExtensions
+    {
+        //
+        // System.Runtime.Loader netstandard typeforwarders dependency
+        //
+        [CLSCompliant(false)]
+        public static unsafe bool TryGetRawMetadata(
+            this System.Reflection.Assembly assembly,
+            out byte* blob,
+            out int length
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

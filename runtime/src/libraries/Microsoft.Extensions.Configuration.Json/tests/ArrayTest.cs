@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void ArraysAreConvertedToKeyValuePairs()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""ip"": [
                     ""1.2.3.4"",
                     ""7.8.9.10"",
@@ -22,7 +23,7 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource = new JsonConfigurationProvider(new JsonConfigurationSource());
             jsonConfigSource.Load(TestStreamHelpers.StringToStream(json));
-            
+
             Assert.Equal("1.2.3.4", jsonConfigSource.Get("ip:0"));
             Assert.Equal("7.8.9.10", jsonConfigSource.Get("ip:1"));
             Assert.Equal("11.12.13.14", jsonConfigSource.Get("ip:2"));
@@ -31,7 +32,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void ArrayOfObjects()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""ip"": [
                     {
                         ""address"": ""1.2.3.4"",
@@ -56,7 +58,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void NestedArrays()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""ip"": [
                     [ 
                         ""1.2.3.4"",
@@ -81,7 +84,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void ImplicitArrayItemReplacement()
         {
-            var json1 = @"{
+            var json1 =
+                @"{
                 ""ip"": [
                     ""1.2.3.4"",
                     ""7.8.9.10"",
@@ -89,14 +93,21 @@ namespace Microsoft.Extensions.Configuration.Json.Test
                 ]
             }";
 
-            var json2 = @"{
+            var json2 =
+                @"{
                 ""ip"": [
                     ""15.16.17.18""
                 ]
             }";
 
-            var jsonConfigSource1 = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json1) };
-            var jsonConfigSource2 = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json2) };
+            var jsonConfigSource1 = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json1),
+            };
+            var jsonConfigSource2 = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json2),
+            };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.Add(jsonConfigSource1);
@@ -112,7 +123,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void ExplicitArrayReplacement()
         {
-            var json1 = @"{
+            var json1 =
+                @"{
                 ""ip"": [
                     ""1.2.3.4"",
                     ""7.8.9.10"",
@@ -120,14 +132,21 @@ namespace Microsoft.Extensions.Configuration.Json.Test
                 ]
             }";
 
-            var json2 = @"{
+            var json2 =
+                @"{
                 ""ip"": {
                     ""1"": ""15.16.17.18""
                 }
             }";
 
-            var jsonConfigSource1 = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json1) };
-            var jsonConfigSource2 = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json2) };
+            var jsonConfigSource1 = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json1),
+            };
+            var jsonConfigSource2 = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json2),
+            };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.Add(jsonConfigSource1);
@@ -143,7 +162,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void ArrayMerge()
         {
-            var json1 = @"{
+            var json1 =
+                @"{
                 ""ip"": [
                     ""1.2.3.4"",
                     ""7.8.9.10"",
@@ -151,14 +171,21 @@ namespace Microsoft.Extensions.Configuration.Json.Test
                 ]
             }";
 
-            var json2 = @"{
+            var json2 =
+                @"{
                 ""ip"": {
                     ""3"": ""15.16.17.18""
                 }
             }";
 
-            var jsonConfigSource1 = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json1) };
-            var jsonConfigSource2 = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json2) };
+            var jsonConfigSource1 = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json1),
+            };
+            var jsonConfigSource2 = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json2),
+            };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.Add(jsonConfigSource1);
@@ -175,7 +202,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void ArraysAreKeptInFileOrder()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""setting"": [
                     ""b"",
                     ""a"",
@@ -183,7 +211,10 @@ namespace Microsoft.Extensions.Configuration.Json.Test
                 ]
             }";
 
-            var jsonConfigSource = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json) };
+            var jsonConfigSource = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json),
+            };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.Add(jsonConfigSource);
@@ -201,7 +232,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void PropertiesAreSortedByNumberOnlyFirst()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""setting"": {
                     ""hello"": ""a"",
                     ""bob"": ""b"",
@@ -212,7 +244,10 @@ namespace Microsoft.Extensions.Configuration.Json.Test
                 }
             }";
 
-            var jsonConfigSource = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json) };
+            var jsonConfigSource = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json),
+            };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.Add(jsonConfigSource);
@@ -233,7 +268,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void TrailingCommas()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""ip"": [
                     [ 
                         ""1.2.3.4"",
@@ -258,7 +294,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void EmptyArrayNotIgnored()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""ip"": {
                     ""array"": [
                     ],
@@ -267,7 +304,10 @@ namespace Microsoft.Extensions.Configuration.Json.Test
                 }
             }";
 
-            var jsonConfigSource = new JsonConfigurationSource { FileProvider = TestStreamHelpers.StringToFileProvider(json) };
+            var jsonConfigSource = new JsonConfigurationSource
+            {
+                FileProvider = TestStreamHelpers.StringToFileProvider(json),
+            };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.Add(jsonConfigSource);

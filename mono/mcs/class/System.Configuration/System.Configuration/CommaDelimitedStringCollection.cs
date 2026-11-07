@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,121 +29,131 @@
 using System;
 using System.Collections.Specialized;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    /* i really hate all these "new"s... maybe
+     * StringCollection marks these methods as virtual in
+     * 2.0? */
+    public sealed class CommaDelimitedStringCollection : StringCollection
+    {
+        bool modified;
+        bool readOnly;
+        int originalStringHash = 0;
 
-	/* i really hate all these "new"s... maybe
-	 * StringCollection marks these methods as virtual in
-	 * 2.0? */
-	public sealed class CommaDelimitedStringCollection : StringCollection {
+        public bool IsModified
+        {
+            get
+            {
+                if (modified)
+                    return true;
 
-		bool modified;
-		bool readOnly;
-		int originalStringHash = 0;
+                string str = ToString();
+                if (str == null)
+                    return false;
 
-		public bool IsModified {
-			get { 
-				if (modified)
-					return true;
+                return str.GetHashCode() != originalStringHash;
+            }
+        }
 
-				string str = ToString ();
-				if (str == null)
-					return false;
+        public new bool IsReadOnly
+        {
+            get { return readOnly; }
+        }
 
-				return str.GetHashCode () != originalStringHash;
-			}
-		}
+        public new string this[int index]
+        {
+            get { return base[index]; }
+            set
+            {
+                if (readOnly)
+                    throw new ConfigurationErrorsException("The configuration is read only");
 
-		public new bool IsReadOnly {
-			get { return readOnly; }
-		}
+                base[index] = value;
+                modified = true;
+            }
+        }
 
-		public new string this [int index] {
-			get { return base [index]; }
-			set {
-				if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+        public new void Add(string value)
+        {
+            if (readOnly)
+                throw new ConfigurationErrorsException("The configuration is read only");
 
-				base [index] = value;
-				modified = true;
-			}
-		}
+            base.Add(value);
+            modified = true;
+        }
 
-		public new void Add (string value)
-		{
-			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+        public new void AddRange(string[] range)
+        {
+            if (readOnly)
+                throw new ConfigurationErrorsException("The configuration is read only");
 
-			base.Add (value);
-			modified = true;
-		}
+            base.AddRange(range);
+            modified = true;
+        }
 
-		public new void AddRange (string[] range)
-		{
-			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+        public new void Clear()
+        {
+            if (readOnly)
+                throw new ConfigurationErrorsException("The configuration is read only");
 
-			base.AddRange (range);
-			modified = true;
-		}
+            base.Clear();
+            modified = true;
+        }
 
-		public new void Clear ()
-		{
-			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+        public CommaDelimitedStringCollection Clone()
+        {
+            CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
+            string[] contents = new string[this.Count];
+            CopyTo(contents, 0);
 
-			base.Clear ();
-			modified = true;
-		}
+            col.AddRange(contents);
+            col.originalStringHash = originalStringHash;
 
-		public CommaDelimitedStringCollection Clone ()
-		{
-			CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
-			string[] contents = new string[this.Count];
-			CopyTo (contents, 0);
-			
-			col.AddRange (contents);
-			col.originalStringHash = originalStringHash;
+            return col;
+        }
 
-			return col;
-		}
+        public new void Insert(int index, string value)
+        {
+            if (readOnly)
+                throw new ConfigurationErrorsException("The configuration is read only");
 
-		public new void Insert (int index, string value)
-		{
-			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+            base.Insert(index, value);
+            modified = true;
+        }
 
-			base.Insert (index, value);
-			modified = true;
-		}
+        public new void Remove(string value)
+        {
+            if (readOnly)
+                throw new ConfigurationErrorsException("The configuration is read only");
 
-		public new void Remove (string value)
-		{
-			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+            base.Remove(value);
+            modified = true;
+        }
 
-			base.Remove (value);
-			modified = true;
-		}
+        public void SetReadOnly()
+        {
+            readOnly = true;
+        }
 
-		public void SetReadOnly ()
-		{
-			readOnly = true;
-		}
+        public override string ToString()
+        {
+            if (this.Count == 0)
+                return null;
 
-		public override string ToString ()
-		{
-			if (this.Count == 0)
-				return null;
+            string[] contents = new string[this.Count];
 
-			string[] contents = new string[this.Count];
+            CopyTo(contents, 0);
 
-			CopyTo (contents, 0);
+            return String.Join(",", contents);
+        }
 
-			return String.Join (",", contents);
-		}
-
-		internal void UpdateStringHash ()
-		{
-			string str = ToString ();
-			if (str == null)
-				originalStringHash = 0;
-			else
-				originalStringHash = str.GetHashCode ();
-		}
-	}
-
+        internal void UpdateStringHash()
+        {
+            string str = ToString();
+            if (str == null)
+                originalStringHash = 0;
+            else
+                originalStringHash = str.GetHashCode();
+        }
+    }
 }

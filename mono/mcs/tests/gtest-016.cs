@@ -3,15 +3,12 @@
 
 class Stack<S>
 {
-	public static void Hello<T> (S s, T t)
-	{ }
+    public static void Hello<T>(S s, T t) { }
 }
 
 class X
 {
-	Stack<int> stack;
+    Stack<int> stack;
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

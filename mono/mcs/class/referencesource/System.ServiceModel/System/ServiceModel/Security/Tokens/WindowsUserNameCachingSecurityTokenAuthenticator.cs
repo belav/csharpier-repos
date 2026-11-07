@@ -28,7 +28,14 @@ namespace System.ServiceModel.Security.Tokens
         RNGCryptoServiceProvider random;
 
         public LogonTokenCache(int maxCachedLogonTokens, TimeSpan cachedLogonTokenLifetime)
-            : base((maxCachedLogonTokens * lowWaterMarkFactor) / 100, maxCachedLogonTokens, StringComparer.OrdinalIgnoreCase, PurgingMode.TimerBasedPurge, TimeSpan.FromTicks(cachedLogonTokenLifetime.Ticks >> 2), true)
+            : base(
+                (maxCachedLogonTokens * lowWaterMarkFactor) / 100,
+                maxCachedLogonTokens,
+                StringComparer.OrdinalIgnoreCase,
+                PurgingMode.TimerBasedPurge,
+                TimeSpan.FromTicks(cachedLogonTokenLifetime.Ticks >> 2),
+                true
+            )
         {
             this.cachedLogonTokenLifetime = cachedLogonTokenLifetime;
             this.random = new RNGCryptoServiceProvider();
@@ -40,7 +47,11 @@ namespace System.ServiceModel.Security.Tokens
             return token != null;
         }
 
-        public bool TryAddTokenCache(string userName, string password, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        public bool TryAddTokenCache(
+            string userName,
+            string password,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             byte[] salt = new byte[saltSize];
             this.random.GetBytes(salt);
@@ -96,12 +107,20 @@ namespace System.ServiceModel.Security.Tokens
         byte[] salt;
         ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies;
 
-        public LogonToken(string userName, string password, byte[] salt, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        public LogonToken(
+            string userName,
+            string password,
+            byte[] salt,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             this.userName = userName;
             this.passwordHash = ComputeHMACSHA256Hash(password, salt);
             this.salt = salt;
-            this.authorizationPolicies = System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(authorizationPolicies);
+            this.authorizationPolicies =
+                System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(
+                    authorizationPolicies
+                );
         }
 
         public bool PasswordEquals(string password)
@@ -117,12 +136,16 @@ namespace System.ServiceModel.Security.Tokens
 
         public ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies()
         {
-            return System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
+            return System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(
+                this.authorizationPolicies
+            );
         }
 
         public void Dispose()
         {
-            System.IdentityModel.SecurityUtils.DisposeAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
+            System.IdentityModel.SecurityUtils.DisposeAuthorizationPoliciesIfNecessary(
+                this.authorizationPolicies
+            );
         }
 
         static byte[] ComputeHMACSHA256Hash(string password, byte[] key)
@@ -134,14 +157,24 @@ namespace System.ServiceModel.Security.Tokens
         }
     }
 
-    class WindowsUserNameCachingSecurityTokenAuthenticator : WindowsUserNameSecurityTokenAuthenticator, ILogonTokenCacheManager, IDisposable
+    class WindowsUserNameCachingSecurityTokenAuthenticator
+        : WindowsUserNameSecurityTokenAuthenticator,
+            ILogonTokenCacheManager,
+            IDisposable
     {
         LogonTokenCache logonTokenCache;
 
-        public WindowsUserNameCachingSecurityTokenAuthenticator(bool includeWindowsGroups, int maxCachedLogonTokens, TimeSpan cachedLogonTokenLifetime)
+        public WindowsUserNameCachingSecurityTokenAuthenticator(
+            bool includeWindowsGroups,
+            int maxCachedLogonTokens,
+            TimeSpan cachedLogonTokenLifetime
+        )
             : base(includeWindowsGroups)
         {
-            this.logonTokenCache = new LogonTokenCache(maxCachedLogonTokens, cachedLogonTokenLifetime);
+            this.logonTokenCache = new LogonTokenCache(
+                maxCachedLogonTokens,
+                cachedLogonTokenLifetime
+            );
         }
 
         public void Dispose()
@@ -149,7 +182,10 @@ namespace System.ServiceModel.Security.Tokens
             FlushLogonTokenCache();
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(string userName, string password)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(
+            string userName,
+            string password
+        )
         {
             LogonToken token;
             if (this.logonTokenCache.TryGetTokenCache(userName, out token))
@@ -165,7 +201,8 @@ namespace System.ServiceModel.Security.Tokens
                 }
             }
 
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = base.ValidateUserNamePasswordCore(userName, password);
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                base.ValidateUserNamePasswordCore(userName, password);
             this.logonTokenCache.TryAddTokenCache(userName, password, authorizationPolicies);
             return authorizationPolicies;
         }

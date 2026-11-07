@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,59 +26,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.ComponentModel;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.ComponentModel;
 using System.Web.UI.Adapters;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.WebControls.Adapters
 {
-	public class WebControlAdapter : ControlAdapter
-	{
-		public WebControlAdapter ()
-		{
-		}
-		
-		internal WebControlAdapter (WebControl wc) : base (wc)
-		{
-		}
+    public class WebControlAdapter : ControlAdapter
+    {
+        public WebControlAdapter() { }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			RenderBeginTag (writer);
-			RenderContents (writer);
-			RenderEndTag (writer);
-		}
+        internal WebControlAdapter(WebControl wc)
+            : base(wc) { }
 
-		protected virtual void RenderBeginTag (HtmlTextWriter writer)
-		{
-			Control.RenderBeginTag (writer);
-		}
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            RenderBeginTag(writer);
+            RenderContents(writer);
+            RenderEndTag(writer);
+        }
 
-		protected virtual void RenderContents(HtmlTextWriter writer)
-		{
-			Control.RenderContents (writer);
-		}
+        protected virtual void RenderBeginTag(HtmlTextWriter writer)
+        {
+            Control.RenderBeginTag(writer);
+        }
 
-		protected virtual void RenderEndTag(HtmlTextWriter writer)
-		{
-			Control.RenderEndTag (writer);
-		}
+        protected virtual void RenderContents(HtmlTextWriter writer)
+        {
+            Control.RenderContents(writer);
+        }
 
-		protected new WebControl Control
-		{
-			get {
-				return (WebControl)control;
-			}
-		}
+        protected virtual void RenderEndTag(HtmlTextWriter writer)
+        {
+            Control.RenderEndTag(writer);
+        }
 
-		protected bool IsEnabled
-		{
-			get {
-				return Control.IsEnabled;
-			}
-		}
-	}
+        protected new WebControl Control
+        {
+            get { return (WebControl)control; }
+        }
+
+        protected bool IsEnabled
+        {
+            get { return Control.IsEnabled; }
+        }
+    }
 }
-

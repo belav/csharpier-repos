@@ -37,14 +37,23 @@ namespace System.ServiceModel.Diagnostics
             Guid guid = Guid.Empty;
             try
             {
-                if (message != null && message.State != MessageState.Closed && message.Headers != null)
+                if (
+                    message != null
+                    && message.State != MessageState.Closed
+                    && message.Headers != null
+                )
                 {
-                    int index = message.Headers.FindHeader(DiagnosticStrings.ActivityId, DiagnosticStrings.DiagnosticsNamespace);
+                    int index = message.Headers.FindHeader(
+                        DiagnosticStrings.ActivityId,
+                        DiagnosticStrings.DiagnosticsNamespace
+                    );
 
                     // Check the state again, in case the message was closed after we found the header
                     if (index >= 0)
                     {
-                        using (XmlDictionaryReader reader = message.Headers.GetReaderAtHeader(index))
+                        using (
+                            XmlDictionaryReader reader = message.Headers.GetReaderAtHeader(index)
+                        )
                         {
                             guid = reader.ReadElementContentAsGuid();
                         }
@@ -60,15 +69,24 @@ namespace System.ServiceModel.Diagnostics
                 }
                 if (DiagnosticUtility.ShouldTraceError)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.FailedToReadAnActivityIdHeader,
-                        SR.GetString(SR.TraceCodeFailedToReadAnActivityIdHeader), null, e);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Error,
+                        TraceCode.FailedToReadAnActivityIdHeader,
+                        SR.GetString(SR.TraceCodeFailedToReadAnActivityIdHeader),
+                        null,
+                        e
+                    );
                 }
             }
 
             return guid;
         }
 
-        internal static bool ExtractActivityAndCorrelationId(Message message, out Guid activityId, out Guid correlationId)
+        internal static bool ExtractActivityAndCorrelationId(
+            Message message,
+            out Guid activityId,
+            out Guid correlationId
+        )
         {
             if (message == null)
             {
@@ -81,14 +99,21 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (message.State != MessageState.Closed && message.Headers != null)
                 {
-                    int index = message.Headers.FindHeader(DiagnosticStrings.ActivityId, DiagnosticStrings.DiagnosticsNamespace);
+                    int index = message.Headers.FindHeader(
+                        DiagnosticStrings.ActivityId,
+                        DiagnosticStrings.DiagnosticsNamespace
+                    );
 
                     // Check the state again, in case the message was closed after we found the header
                     if (index >= 0)
                     {
-                        using (XmlDictionaryReader reader = message.Headers.GetReaderAtHeader(index))
+                        using (
+                            XmlDictionaryReader reader = message.Headers.GetReaderAtHeader(index)
+                        )
                         {
-                            correlationId = Fx.CreateGuid(reader.GetAttribute("CorrelationId", null));
+                            correlationId = Fx.CreateGuid(
+                                reader.GetAttribute("CorrelationId", null)
+                            );
                             activityId = reader.ReadElementContentAsGuid();
                             return activityId != Guid.Empty;
                         }
@@ -104,8 +129,13 @@ namespace System.ServiceModel.Diagnostics
                 }
                 if (DiagnosticUtility.ShouldTraceError)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.FailedToReadAnActivityIdHeader,
-                        SR.GetString(SR.TraceCodeFailedToReadAnActivityIdHeader), null, e);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Error,
+                        TraceCode.FailedToReadAnActivityIdHeader,
+                        SR.GetString(SR.TraceCodeFailedToReadAnActivityIdHeader),
+                        null,
+                        e
+                    );
                 }
             }
             return false;
@@ -117,9 +147,15 @@ namespace System.ServiceModel.Diagnostics
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             }
-            if (message.State != MessageState.Closed && message.Headers.MessageVersion.Envelope != EnvelopeVersion.None)
+            if (
+                message.State != MessageState.Closed
+                && message.Headers.MessageVersion.Envelope != EnvelopeVersion.None
+            )
             {
-                int index = message.Headers.FindHeader(DiagnosticStrings.ActivityId, DiagnosticStrings.DiagnosticsNamespace);
+                int index = message.Headers.FindHeader(
+                    DiagnosticStrings.ActivityId,
+                    DiagnosticStrings.DiagnosticsNamespace
+                );
                 if (index < 0)
                 {
                     message.Headers.Add(this);
@@ -127,7 +163,10 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             if (writer == null)
             {
@@ -136,6 +175,5 @@ namespace System.ServiceModel.Diagnostics
             writer.WriteAttributeString("CorrelationId", this.headerId.ToString());
             writer.WriteValue(this.guid);
         }
-
     }
 }

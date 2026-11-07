@@ -17,10 +17,10 @@ public class SqlServerModificationCommand : ModificationCommand
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerModificationCommand(in ModificationCommandParameters modificationCommandParameters)
-        : base(modificationCommandParameters)
-    {
-    }
+    public SqlServerModificationCommand(
+        in ModificationCommandParameters modificationCommandParameters
+    )
+        : base(modificationCommandParameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,8 +28,8 @@ public class SqlServerModificationCommand : ModificationCommand
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerModificationCommand(in NonTrackedModificationCommandParameters modificationCommandParameters)
-        : base(modificationCommandParameters)
-    {
-    }
+    public SqlServerModificationCommand(
+        in NonTrackedModificationCommandParameters modificationCommandParameters
+    )
+        : base(modificationCommandParameters) { }
 }

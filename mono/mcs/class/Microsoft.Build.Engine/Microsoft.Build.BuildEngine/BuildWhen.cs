@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -29,63 +29,84 @@ using System;
 using System.Collections;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	internal class BuildWhen {
-		//Project			parentProject;
-		GroupingCollection	groupingCollection;
-		XmlElement		whenElement;
-	
-		public BuildWhen (XmlElement whenElement, Project parentProject)
-		{
-			//this.parentProject = parentProject;
-			this.groupingCollection = new GroupingCollection (parentProject);
-			if (whenElement == null)
-				throw new ArgumentNullException ("whenElement");
-			this.whenElement = whenElement;
-			foreach (XmlNode node in whenElement.ChildNodes) {
-				switch (node.NodeType) {
-				case XmlNodeType.Element:
-					var xe = (XmlElement)node;
-					switch (xe.Name) {
-					case "ItemGroup":
-						BuildItemGroup big = new BuildItemGroup (xe, parentProject, null, true);
-							//big.BindToXml (xe);
-						groupingCollection.Add (big);
-						break;
-					case "PropertyGroup":
-						BuildPropertyGroup bpg = new BuildPropertyGroup (xe, parentProject, null, true);
-							//bpg.BindToXml (xe);
-						groupingCollection.Add (bpg);
-						break;
-					case "Choose":
-						BuildChoose bc = new BuildChoose (xe, parentProject);
-						groupingCollection.Add (bc);
-						break;
-					default:
-						throw new InvalidProjectFileException (string.Format ("Invalid element '{0}' in When.", xe.Name));
-					}
-					break;
-				case XmlNodeType.Comment:
-					break;
-				default:
-					throw new InvalidProjectFileException (string.Format ("Invalid element '{0}' in When Condition.", node.NodeType));
-				}
-			}
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    internal class BuildWhen
+    {
+        //Project			parentProject;
+        GroupingCollection groupingCollection;
+        XmlElement whenElement;
 
-		public void Evaluate()
-		{
-			groupingCollection.Evaluate ();
-		}
-		
-		public string Condition {
-			get { return whenElement.GetAttribute ("Condition"); }
-			set { whenElement.SetAttribute ("Condition", value); }
-		}
-		
-		public GroupingCollection GroupingCollection {
-			get { return groupingCollection; }
-			set { groupingCollection = value; }
-		}
-	}
+        public BuildWhen(XmlElement whenElement, Project parentProject)
+        {
+            //this.parentProject = parentProject;
+            this.groupingCollection = new GroupingCollection(parentProject);
+            if (whenElement == null)
+                throw new ArgumentNullException("whenElement");
+            this.whenElement = whenElement;
+            foreach (XmlNode node in whenElement.ChildNodes)
+            {
+                switch (node.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        var xe = (XmlElement)node;
+                        switch (xe.Name)
+                        {
+                            case "ItemGroup":
+                                BuildItemGroup big = new BuildItemGroup(
+                                    xe,
+                                    parentProject,
+                                    null,
+                                    true
+                                );
+                                //big.BindToXml (xe);
+                                groupingCollection.Add(big);
+                                break;
+                            case "PropertyGroup":
+                                BuildPropertyGroup bpg = new BuildPropertyGroup(
+                                    xe,
+                                    parentProject,
+                                    null,
+                                    true
+                                );
+                                //bpg.BindToXml (xe);
+                                groupingCollection.Add(bpg);
+                                break;
+                            case "Choose":
+                                BuildChoose bc = new BuildChoose(xe, parentProject);
+                                groupingCollection.Add(bc);
+                                break;
+                            default:
+                                throw new InvalidProjectFileException(
+                                    string.Format("Invalid element '{0}' in When.", xe.Name)
+                                );
+                        }
+                        break;
+                    case XmlNodeType.Comment:
+                        break;
+                    default:
+                        throw new InvalidProjectFileException(
+                            string.Format("Invalid element '{0}' in When Condition.", node.NodeType)
+                        );
+                }
+            }
+        }
+
+        public void Evaluate()
+        {
+            groupingCollection.Evaluate();
+        }
+
+        public string Condition
+        {
+            get { return whenElement.GetAttribute("Condition"); }
+            set { whenElement.SetAttribute("Condition", value); }
+        }
+
+        public GroupingCollection GroupingCollection
+        {
+            get { return groupingCollection; }
+            set { groupingCollection = value; }
+        }
+    }
 }

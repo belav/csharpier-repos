@@ -8,12 +8,12 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Runtime;
 
-    public sealed partial class IssuedTokenParametersEndpointAddressElement : EndpointAddressElementBase, IConfigurationContextProviderInternal
+    public sealed partial class IssuedTokenParametersEndpointAddressElement
+        : EndpointAddressElementBase,
+            IConfigurationContextProviderInternal
     {
         public IssuedTokenParametersEndpointAddressElement()
-            : base()
-        {
-        }
+            : base() { }
 
         [ConfigurationProperty(ConfigurationStrings.Binding, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
@@ -58,10 +58,12 @@ namespace System.ServiceModel.Configuration
 
             if (context != null && !String.IsNullOrEmpty(this.Binding))
             {
-                BindingsSection.ValidateBindingReference(this.Binding,
+                BindingsSection.ValidateBindingReference(
+                    this.Binding,
                     this.BindingConfiguration,
                     context,
-                    this);
+                    this
+                );
             }
         }
 
@@ -70,15 +72,15 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous =
-            "RequiresReview - the return value will be used for a security decision -- see comment in interface definition")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition"
+        )]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            Fx.Assert(
+                "Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext"
+            );
             return null;
         }
     }
 }
-
-
-

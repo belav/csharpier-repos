@@ -16,21 +16,22 @@ using Xunit.Abstractions;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.References;
+
 public class FindAllReferencesHandlerFeaturesTests : AbstractLanguageServerProtocolTests
 {
-    public FindAllReferencesHandlerFeaturesTests(ITestOutputHelper? testOutputHelper) : base(testOutputHelper)
-    {
-    }
+    public FindAllReferencesHandlerFeaturesTests(ITestOutputHelper? testOutputHelper)
+        : base(testOutputHelper) { }
 
-    protected override TestComposition Composition => EditorTestCompositions.LanguageServerProtocol
-        .AddParts(typeof(TestDocumentTrackingService))
-        .AddParts(typeof(TestWorkspaceRegistrationService));
+    protected override TestComposition Composition =>
+        EditorTestCompositions
+            .LanguageServerProtocol.AddParts(typeof(TestDocumentTrackingService))
+            .AddParts(typeof(TestWorkspaceRegistrationService));
 
     [Theory, CombinatorialData]
     public async Task TestFindAllReferencesAsync_DoesNotUseVSTypes(bool mutatingLspWorkspace)
     {
         var markup =
-@"class A
+            @"class A
 {
     public int {|reference:someInt|} = 1;
     void M()
@@ -46,9 +47,19 @@ class B
         var j = someInt + A.{|caret:|}{|reference:someInt|};
     }
 }";
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace, new LSP.ClientCapabilities());
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace,
+            new LSP.ClientCapabilities()
+        );
 
-        var results = await FindAllReferencesHandlerTests.RunFindAllReferencesAsync<LSP.Location>(testLspServer, testLspServer.GetLocations("caret").First());
-        AssertLocationsEqual(testLspServer.GetLocations("reference"), results.Select(result => result));
+        var results = await FindAllReferencesHandlerTests.RunFindAllReferencesAsync<LSP.Location>(
+            testLspServer,
+            testLspServer.GetLocations("caret").First()
+        );
+        AssertLocationsEqual(
+            testLspServer.GetLocations("reference"),
+            results.Select(result => result)
+        );
     }
 }

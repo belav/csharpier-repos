@@ -19,20 +19,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
     [Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
     public class IntroduceParameterTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpIntroduceParameterCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpIntroduceParameterCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
-        private OptionsCollection UseExpressionBody
-            => Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement);
+        private OptionsCollection UseExpressionBody =>
+            Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+            );
 
         [Fact]
         public async Task TestExpressionWithNoMethodCallsCase()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -43,8 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -60,8 +64,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithLocal()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -79,8 +82,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestBasicComplexExpressionCase()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -96,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -118,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithSingleMethodCall()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -135,8 +135,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -157,8 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestLocalDeclarationMultipleDeclarators()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -174,8 +172,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -197,8 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestDeclarationInForLoop()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -218,8 +214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithSingleMethodCallInLocalFunction()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -236,8 +231,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -259,8 +253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithSingleMethodCallInStaticLocalFunction()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -277,8 +270,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -300,8 +292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestHighlightIncompleteExpressionCaseWithSingleMethodCall()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -323,8 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithMultipleMethodCall()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -341,8 +331,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -364,8 +353,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionAllOccurrences()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -382,8 +370,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -405,8 +392,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestxpressionWithNoMethodCallTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -417,8 +403,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -433,14 +418,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -456,8 +446,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -477,14 +466,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallAndAccessorsTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -500,8 +494,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -521,14 +514,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallAndAccessorsConditionalTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -544,8 +542,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -565,14 +562,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallMultipleAccessorsTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -597,8 +599,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -627,14 +628,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallMultipleAccessorsConditionalTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -659,8 +665,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -689,14 +694,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallAccessorsMixedConditionalTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -721,8 +731,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -751,14 +760,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallTrampolineAllOccurrences()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -775,8 +789,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -796,14 +809,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(code, expected, index: 4, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 4,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithNoMethodCallOverload()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -814,8 +832,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -830,14 +847,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 2, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 2,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionWithSingleMethodCallOverload()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -853,8 +875,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -873,14 +894,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(code, expected, index: 2, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 2,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionBodiedMemberOverload()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -893,8 +919,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -908,14 +933,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 2, options: UseExpressionBody, parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 2,
+                options: UseExpressionBody,
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionBodiedMemberTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -928,8 +958,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -947,14 +976,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionCaseWithRecursiveCall()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -966,8 +1000,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -983,8 +1016,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithNestedRecursiveCall()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -996,8 +1028,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1013,8 +1044,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithParamsArg()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1036,8 +1066,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithOptionalParameters()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1054,8 +1083,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1076,8 +1104,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithOptionalParametersUsed()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1094,8 +1121,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1116,8 +1142,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithOptionalParametersUsedOverload()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1134,8 +1159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1161,8 +1185,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithOptionalParametersUsedTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1179,8 +1202,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1206,8 +1228,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithOptionalParametersUnusedTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1224,8 +1245,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1251,8 +1271,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithCancellationToken()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Threading;
                 class TestClass
@@ -1270,8 +1289,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading;
                 class TestClass
@@ -1293,8 +1311,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionCaseWithRecursiveCallTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1306,8 +1323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1322,14 +1338,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionCaseWithNestedRecursiveCallTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1341,8 +1362,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1357,14 +1377,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact]
         public async Task TestExpressionCaseInConstructor()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1379,8 +1404,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1402,8 +1426,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestLambdaCaseNormal()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1417,8 +1440,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestLambdaCaseTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1432,8 +1454,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestLambdaCaseOverload()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1447,8 +1468,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestTopLevelStatements()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 Math.Max(5 + 5, [|6 + 7|]);
                 """;
@@ -1459,8 +1479,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestFieldInitializer()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1473,8 +1492,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestIndexer()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class SampleCollection<T>
                 {
@@ -1489,8 +1507,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestPropertyGetter()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class TimePeriod
@@ -1509,8 +1526,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestPropertySetter()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class TimePeriod
@@ -1531,8 +1547,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestDestructor()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1548,8 +1563,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestExpressionInParameter()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1564,8 +1578,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestCrossLanguageInvocations()
         {
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language= "C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -1601,8 +1614,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 </Workspace>
                 """;
 
-            var expected =
-                """
+            var expected = """
                 <Workspace>
                     <Project Language= "C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -1642,8 +1654,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestConvertedTypeInExpression()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1654,8 +1665,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1671,8 +1681,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestConvertedTypeInExpressionTrampoline()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1683,8 +1692,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1705,8 +1713,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestThisKeywordInExpression()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1723,8 +1730,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1751,8 +1757,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestThisImplicitInExpression()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1769,8 +1774,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1797,8 +1801,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestStaticMethodCallInExpression()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1815,8 +1818,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1838,8 +1840,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestBaseKeywordInExpression()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class Net
                 {
@@ -1857,8 +1858,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Net
                 {
@@ -1886,8 +1886,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestFieldReferenceInOptionalParameter()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1904,8 +1903,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1926,8 +1924,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestNamedParameterNecessary()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1944,8 +1941,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -1966,8 +1962,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestHighlightReturnType()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -1988,8 +1983,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestTypeOfOnString()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 class TestClass
                 {
@@ -2000,8 +1994,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class TestClass
                 {
@@ -2017,8 +2010,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestClassObject()
         {
-            var code =
-                """
+            var code = """
                 class F
                 {
                     public int x;
@@ -2051,8 +2043,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestReferenceInDifferentDocumentWithUsings()
         {
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language= "C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -2089,8 +2080,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 </Workspace>
                 """;
 
-            var expected =
-                """
+            var expected = """
                 <Workspace>
                     <Project Language= "C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -2131,8 +2121,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestIntroduceParameterOnParameter()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class Program
@@ -2150,8 +2139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestIntroduceParameterOnExpressionContainingParameter()
         {
-            var code =
-                """
+            var code = """
                 public class C
                 {
                     public void M(string s)
@@ -2166,8 +2154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 public class C
                 {
                     public void M(string s)
@@ -2188,14 +2175,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestIntroduceParameterOnOverload()
         {
-            var code =
-                """
+            var code = """
                 M();
                 int M(int _) => M([|1234|]);
                 """;
 
-            var expected =
-                """
+            var expected = """
                 M();
                 int M(int _, int v) => M({|Rename:v|}, 1234);
                 """;
@@ -2206,8 +2191,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceParameter
         [Fact]
         public async Task TestIntroduceParameterOnAttributeArgument()
         {
-            var code =
-                """
+            var code = """
                 public class C
                 {
                     [Theory]

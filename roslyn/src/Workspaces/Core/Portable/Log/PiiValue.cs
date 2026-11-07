@@ -14,7 +14,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         public readonly object Value = value;
 
-        public override string? ToString()
-            => Value.ToString();
+        public override string? ToString() => Value.ToString();
     }
 }

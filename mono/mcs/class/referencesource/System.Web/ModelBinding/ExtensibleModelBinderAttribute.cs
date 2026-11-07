@@ -1,22 +1,21 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
     using System;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false, Inherited = true)]
-    public sealed class ExtensibleModelBinderAttribute : Attribute {
-
-        public ExtensibleModelBinderAttribute(Type binderType) {
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class ExtensibleModelBinderAttribute : Attribute
+    {
+        public ExtensibleModelBinderAttribute(Type binderType)
+        {
             BinderType = binderType;
         }
 
-        public Type BinderType {
-            get;
-            private set;
-        }
+        public Type BinderType { get; private set; }
 
-        public bool SuppressPrefixCheck {
-            get;
-            set;
-        }
-
+        public bool SuppressPrefixCheck { get; set; }
     }
 }

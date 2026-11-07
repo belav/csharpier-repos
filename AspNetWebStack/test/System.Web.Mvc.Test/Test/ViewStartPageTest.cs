@@ -16,7 +16,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             MockViewStartPage viewStart = new MockViewStartPage();
             var viewPage = new Mock<WebViewPage>() { CallBase = true };
-            var helper = new HtmlHelper<object>(new ViewContext() { ViewData = new ViewDataDictionary() }, viewPage.Object, new RouteCollection());
+            var helper = new HtmlHelper<object>(
+                new ViewContext() { ViewData = new ViewDataDictionary() },
+                viewPage.Object,
+                new RouteCollection()
+            );
             viewPage.Object.Html = helper;
             viewStart.ChildPage = viewPage.Object;
 
@@ -69,7 +73,13 @@ namespace System.Web.Mvc.Test
             viewStart.ChildPage = new Mock<WebPage>().Object;
 
             // Act + Assert
-            Assert.Throws<InvalidOperationException>(delegate() { var c = viewStart.ViewStartPageChild; }, "A ViewStartPage can be used only with with a page that derives from WebViewPage or another ViewStartPage.");
+            Assert.Throws<InvalidOperationException>(
+                delegate()
+                {
+                    var c = viewStart.ViewStartPageChild;
+                },
+                "A ViewStartPage can be used only with with a page that derives from WebViewPage or another ViewStartPage."
+            );
         }
 
         [Fact]
@@ -104,9 +114,7 @@ namespace System.Web.Mvc.Test
 
         class MockViewStartPage : ViewStartPage
         {
-            public override void Execute()
-            {
-            }
+            public override void Execute() { }
         }
     }
 }

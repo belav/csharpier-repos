@@ -14,18 +14,22 @@ namespace System.ServiceModel.Discovery
         public DefaultDiscoveryService(
             DiscoveryServiceExtension discoveryServiceExtension,
             DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator,
-            int duplicateMessageHistoryLength)
+            int duplicateMessageHistoryLength
+        )
             : base(discoveryMessageSequenceGenerator, duplicateMessageHistoryLength)
-
         {
-            Fx.Assert(discoveryServiceExtension != null, "The discoveryServiceExtension must be non null.");
+            Fx.Assert(
+                discoveryServiceExtension != null,
+                "The discoveryServiceExtension must be non null."
+            );
             this.publishedEndpoints = discoveryServiceExtension.PublishedEndpoints;
         }
 
         protected override IAsyncResult OnBeginFind(
-            FindRequestContext findRequestContext, 
-            AsyncCallback callback, 
-            object state)
+            FindRequestContext findRequestContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.Match(findRequestContext);
             return new CompletedAsyncResult(callback, state);
@@ -36,12 +40,17 @@ namespace System.ServiceModel.Discovery
             CompletedAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginResolve(ResolveCriteria resolveCriteria, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginResolve(
+            ResolveCriteria resolveCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult<EndpointDiscoveryMetadata>(
                 this.Match(resolveCriteria),
                 callback,
-                state);
+                state
+            );
         }
 
         protected override EndpointDiscoveryMetadata OnEndResolve(IAsyncResult result)
@@ -72,8 +81,9 @@ namespace System.ServiceModel.Discovery
             }
 
             CompiledScopeCriteria[] compiledScopeCriterias = ScopeCompiler.CompileMatchCriteria(
-                criteria.InternalScopes, 
-                criteria.ScopeMatchBy);
+                criteria.InternalScopes,
+                criteria.ScopeMatchBy
+            );
 
             int matchingEndpointCount = 0;
             for (int i = 0; i < this.publishedEndpoints.Count; i++)

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
 using Internal.IL;
 using Internal.TypeSystem;
 
@@ -20,15 +19,21 @@ namespace ILCompiler
         private readonly DebugInformationProvider _wrappedProvider;
         private readonly string _fileName;
         private readonly StreamWriter _tw;
-        private readonly Dictionary<MethodDesc, MethodDebugInformation> _generatedInfos = new Dictionary<MethodDesc, MethodDebugInformation>();
+        private readonly Dictionary<MethodDesc, MethodDebugInformation> _generatedInfos =
+            new Dictionary<MethodDesc, MethodDebugInformation>();
 
         private int _currentLine;
 
-        public ILAssemblyGeneratingMethodDebugInfoProvider(string fileName, DebugInformationProvider wrappedProvider = null)
+        public ILAssemblyGeneratingMethodDebugInfoProvider(
+            string fileName,
+            DebugInformationProvider wrappedProvider = null
+        )
         {
             _wrappedProvider = wrappedProvider;
             _fileName = fileName;
-            _tw = new StreamWriter(new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None));
+            _tw = new StreamWriter(
+                new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None)
+            );
         }
 
         public override MethodDebugInformation GetDebugInfo(MethodIL methodIL)
@@ -88,16 +93,20 @@ namespace ILCompiler
                     _tw.Write(", ");
                 _tw.Write(fmt.FormatName(owningMethod.Signature[i]));
             }
-            _tw.WriteLine(") cil managed"); _currentLine++;
+            _tw.WriteLine(") cil managed");
+            _currentLine++;
 
-            _tw.WriteLine("{"); _currentLine++;
+            _tw.WriteLine("{");
+            _currentLine++;
 
             _tw.Write("  // Code size: ");
             _tw.Write(disasm.CodeSize);
-            _tw.WriteLine(); _currentLine++;
+            _tw.WriteLine();
+            _currentLine++;
             _tw.Write("  .maxstack ");
             _tw.Write(methodIL.MaxStack);
-            _tw.WriteLine(); _currentLine++;
+            _tw.WriteLine();
+            _currentLine++;
 
             LocalVariableDefinition[] locals = methodIL.GetLocals();
             if (locals != null && locals.Length > 0)
@@ -112,7 +121,8 @@ namespace ILCompiler
                 {
                     if (i != 0)
                     {
-                        _tw.WriteLine(","); _currentLine++;
+                        _tw.WriteLine(",");
+                        _currentLine++;
                         _tw.Write("      ");
                     }
                     _tw.Write(fmt.FormatName(locals[i].Type));
@@ -122,9 +132,11 @@ namespace ILCompiler
                     _tw.Write("V_");
                     _tw.Write(i);
                 }
-                _tw.WriteLine(")"); _currentLine++;
+                _tw.WriteLine(")");
+                _currentLine++;
             }
-            _tw.WriteLine(); _currentLine++;
+            _tw.WriteLine();
+            _currentLine++;
 
             while (disasm.HasNextInstruction)
             {
@@ -135,8 +147,10 @@ namespace ILCompiler
                 sequencePoints.Add(new ILSequencePoint(offset, _fileName, _currentLine));
             }
 
-            _tw.WriteLine("}"); _currentLine++;
-            _tw.WriteLine(); _currentLine++;
+            _tw.WriteLine("}");
+            _currentLine++;
+            _tw.WriteLine();
+            _currentLine++;
 
             return new SyntheticMethodDebugInformation(sequencePoints.ToArray());
         }

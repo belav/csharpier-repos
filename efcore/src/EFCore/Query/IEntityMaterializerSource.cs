@@ -43,7 +43,8 @@ public interface IEntityMaterializerSource
     Expression CreateMaterializeExpression(
         IEntityType entityType,
         string entityInstanceName,
-        Expression materializationExpression);
+        Expression materializationExpression
+    );
 
     /// <summary>
     ///     <para>
@@ -60,10 +61,17 @@ public interface IEntityMaterializerSource
 #pragma warning disable CS0618
     Expression CreateMaterializeExpression(
         EntityMaterializerSourceParameters parameters,
-        Expression materializationExpression)
-        => parameters.StructuralType is IEntityType entityType
-            ? CreateMaterializeExpression(entityType, parameters.InstanceName, materializationExpression)
-            : throw new NotImplementedException(CoreStrings.ComplexTypesNotSupported(GetType().Name));
+        Expression materializationExpression
+    ) =>
+        parameters.StructuralType is IEntityType entityType
+            ? CreateMaterializeExpression(
+                entityType,
+                parameters.InstanceName,
+                materializationExpression
+            )
+            : throw new NotImplementedException(
+                CoreStrings.ComplexTypesNotSupported(GetType().Name)
+            );
 #pragma warning restore CS0618
 
     /// <summary>

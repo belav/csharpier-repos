@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 static class Y
 {
-    public static string ExCall (this X x)
+    public static string ExCall(this X x)
     {
         return null;
     }
@@ -10,26 +10,26 @@ static class Y
 
 class X
 {
-    static X Test (object o)
+    static X Test(object o)
     {
         return null;
     }
 
-    X Prop { get; set;}
+    X Prop { get; set; }
 
-    X Call ()
+    X Call()
     {
         return null;
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        var x = new X ();
-        x.Test ().Wait ();
+        var x = new X();
+        x.Test().Wait();
     }
 
-    async Task Test ()
+    async Task Test()
     {
-        var x = X.Test (await Task.FromResult (1))?.Prop?.ExCall ();
+        var x = X.Test(await Task.FromResult(1))?.Prop?.ExCall();
     }
 }

@@ -21,13 +21,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes.ErrorCases
             get { return ImmutableArray.Create(CodeFixServiceTests.MockFixer.Id); }
         }
 
-        public sealed override FixAllProvider GetFixAllProvider()
-            => throw new Exception($"Exception thrown in GetFixAllProvider of {nameof(ExceptionInGetFixAllProvider)}");
+        public sealed override FixAllProvider GetFixAllProvider() =>
+            throw new Exception(
+                $"Exception thrown in GetFixAllProvider of {nameof(ExceptionInGetFixAllProvider)}"
+            );
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
 #pragma warning disable RS0005 // Do not use generic CodeAction.Create to create CodeAction
-            context.RegisterCodeFix(CodeAction.Create("Do Nothing", token => Task.FromResult(context.Document)), context.Diagnostics[0]);
+            context.RegisterCodeFix(
+                CodeAction.Create("Do Nothing", token => Task.FromResult(context.Document)),
+                context.Diagnostics[0]
+            );
 #pragma warning restore RS0005 // Do not use generic CodeAction.Create to create CodeAction
             return Task.FromResult(true);
         }

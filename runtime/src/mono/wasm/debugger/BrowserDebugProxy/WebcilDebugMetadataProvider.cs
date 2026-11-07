@@ -19,11 +19,18 @@ public class WebcilDebugMetadataProvider : IDebugMetadataProvider
     {
         _webcilReader = webcilReader;
     }
-    public ImmutableArray<DebugDirectoryEntry> ReadDebugDirectory() => _webcilReader.ReadDebugDirectory();
 
-    public CodeViewDebugDirectoryData ReadCodeViewDebugDirectoryData(DebugDirectoryEntry entry) => _webcilReader.ReadCodeViewDebugDirectoryData(entry);
+    public ImmutableArray<DebugDirectoryEntry> ReadDebugDirectory() =>
+        _webcilReader.ReadDebugDirectory();
 
-    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(DebugDirectoryEntry entry) => _webcilReader.ReadPdbChecksumDebugDirectoryData(entry);
+    public CodeViewDebugDirectoryData ReadCodeViewDebugDirectoryData(DebugDirectoryEntry entry) =>
+        _webcilReader.ReadCodeViewDebugDirectoryData(entry);
 
-    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(DebugDirectoryEntry entry) => _webcilReader.ReadEmbeddedPortablePdbDebugDirectoryData(entry);
+    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(
+        DebugDirectoryEntry entry
+    ) => _webcilReader.ReadPdbChecksumDebugDirectoryData(entry);
+
+    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(
+        DebugDirectoryEntry entry
+    ) => _webcilReader.ReadEmbeddedPortablePdbDebugDirectoryData(entry);
 }

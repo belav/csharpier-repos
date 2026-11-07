@@ -11,14 +11,17 @@ namespace System.Web.Http.Routing
     {
         private static readonly Dictionary<string, object> data0 = null;
         private static readonly Dictionary<string, object> data1 = new Dictionary<string, object>();
-        private static readonly Dictionary<string, object> data2 = new Dictionary<string, object> 
-            {
-                { "key1", "value1" },
-                { "key2", 2 },
-                { "key3", TimeSpan.FromDays(1) },
-            };
+        private static readonly Dictionary<string, object> data2 = new Dictionary<string, object>
+        {
+            { "key1", "value1" },
+            { "key2", 2 },
+            { "key3", TimeSpan.FromDays(1) },
+        };
 
-        public static TheoryDataSet<Dictionary<string, object>, Dictionary<string, object>> DictionaryConstructorData
+        public static TheoryDataSet<
+            Dictionary<string, object>,
+            Dictionary<string, object>
+        > DictionaryConstructorData
         {
             get
             {
@@ -43,16 +46,27 @@ namespace System.Web.Http.Routing
                     { null, data1 },
                     { data0, data1 },
                     { data1, data1 },
-                    { new { }, data1},
+                    { new { }, data1 },
                     { data2, data2 },
-                    { new { key1 = "value1", key2 = 2, key3 = TimeSpan.FromDays(1) }, data2},
+                    {
+                        new
+                        {
+                            key1 = "value1",
+                            key2 = 2,
+                            key3 = TimeSpan.FromDays(1),
+                        },
+                        data2
+                    },
                 };
             }
         }
 
         [Theory]
         [PropertyData("DictionaryConstructorData")]
-        public void Constructor_AcceptsDictionaryValues(Dictionary<string, object> input, Dictionary<string, object> expectedOutput)
+        public void Constructor_AcceptsDictionaryValues(
+            Dictionary<string, object> input,
+            Dictionary<string, object> expectedOutput
+        )
         {
             HttpRouteValueDictionary routeValues = new HttpRouteValueDictionary(input);
             Assert.True(expectedOutput.SequenceEqual(routeValues));
@@ -60,7 +74,10 @@ namespace System.Web.Http.Routing
 
         [Theory]
         [PropertyData("ObjectConstructorData")]
-        public void Constructor_AcceptsObjectValues(object input, Dictionary<string, object> expectedOutput)
+        public void Constructor_AcceptsObjectValues(
+            object input,
+            Dictionary<string, object> expectedOutput
+        )
         {
             HttpRouteValueDictionary routeValues = new HttpRouteValueDictionary(input);
             Assert.True(expectedOutput.SequenceEqual(routeValues));

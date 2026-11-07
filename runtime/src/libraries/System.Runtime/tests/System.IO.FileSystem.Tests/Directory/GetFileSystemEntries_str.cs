@@ -11,8 +11,14 @@ namespace System.IO.Tests
         #region Utilities
 
 
-        protected virtual bool TestFiles { get { return true; } }       // True if the virtual GetEntries mmethod returns files
-        protected virtual bool TestDirectories { get { return true; } } // True if the virtual GetEntries mmethod returns Directories
+        protected virtual bool TestFiles
+        {
+            get { return true; }
+        } // True if the virtual GetEntries mmethod returns files
+        protected virtual bool TestDirectories
+        {
+            get { return true; }
+        } // True if the virtual GetEntries mmethod returns Directories
 
         public virtual string[] GetEntries(string dirName)
         {
@@ -168,7 +174,9 @@ namespace System.IO.Tests
             Directory.CreateDirectory(Path.Combine(testDir.FullName, GetTestFileName()));
             using (File.Create(Path.Combine(testDir.FullName, GetTestFileName())))
             {
-                string[] strArr = GetEntries(testDir.FullName + new string(Path.DirectorySeparatorChar, 5));
+                string[] strArr = GetEntries(
+                    testDir.FullName + new string(Path.DirectorySeparatorChar, 5)
+                );
                 Assert.NotNull(strArr);
                 Assert.NotEmpty(strArr);
             }
@@ -180,10 +188,14 @@ namespace System.IO.Tests
             // Note that APIs that take EnumerationOptions do NOT find hidden files by default
 
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
-            FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
+            FileInfo fileOne = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
 
             // Put a period in front to make it hidden on Unix
-            FileInfo fileTwo = new FileInfo(Path.Combine(testDirectory.FullName, "." + GetTestFileName()));
+            FileInfo fileTwo = new FileInfo(
+                Path.Combine(testDirectory.FullName, "." + GetTestFileName())
+            );
             fileOne.Create().Dispose();
             fileTwo.Create().Dispose();
             if (PlatformDetection.IsWindows)
@@ -191,7 +203,10 @@ namespace System.IO.Tests
 
             if (TestFiles)
             {
-                FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, GetEntries(testDirectory.FullName));
+                FSAssert.EqualWhenOrdered(
+                    new string[] { fileOne.FullName, fileTwo.FullName },
+                    GetEntries(testDirectory.FullName)
+                );
             }
             else
             {
@@ -226,20 +241,14 @@ namespace System.IO.Tests
             }
         }
 
-        [Theory,
-            InlineData("         "),
-            InlineData(" ")]
+        [Theory, InlineData("         "), InlineData(" ")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsWhitespaceOnlyPath(string invalid)
         {
             Assert.Throws<ArgumentException>(() => GetEntries(invalid));
         }
 
-        [Theory,
-            InlineData("\n"),
-            InlineData(">"),
-            InlineData("<"),
-            InlineData("\t")]
+        [Theory, InlineData("\n"), InlineData(">"), InlineData("<"), InlineData("\t")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsInvalidCharsPath_Core(string invalid)
         {
@@ -250,31 +259,35 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsRelativeToCurrentDrivePath()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                string testRootDir = GetTestFilePath();
-                Directory.CreateDirectory(testRootDir);
-                Directory.SetCurrentDirectory(testRootDir);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    string testRootDir = GetTestFilePath();
+                    Directory.CreateDirectory(testRootDir);
+                    Directory.SetCurrentDirectory(testRootDir);
 
-                const string TestSubdir = "foo";
-                Directory.CreateDirectory(Path.Combine(testRootDir, TestSubdir));
+                    const string TestSubdir = "foo";
+                    Directory.CreateDirectory(Path.Combine(testRootDir, TestSubdir));
 
-                string currentDrive = testRootDir.Substring(0, 2);
-                string[] results = GetEntries(currentDrive);
+                    string currentDrive = testRootDir.Substring(0, 2);
+                    string[] results = GetEntries(currentDrive);
 
-                string result = Assert.Single(results);
-                Assert.Equal(currentDrive + TestSubdir, result);
-            }).Dispose();
+                    string result = Assert.Single(results);
+                    Assert.Equal(currentDrive + TestSubdir, result);
+                })
+                .Dispose();
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("         "),
             InlineData(" "),
             InlineData("\n"),
             InlineData(">"),
             InlineData("<"),
-            InlineData("\t")]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Unix-only valid chars in file path
+            InlineData("\t")
+        ]
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Unix-only valid chars in file path
         public void UnixValidCharsFilePath(string valid)
         {
             if (TestFiles)
@@ -288,14 +301,16 @@ namespace System.IO.Tests
             }
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("         "),
             InlineData(" "),
             InlineData("\n"),
             InlineData(">"),
             InlineData("<"),
-            InlineData("\t")]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Windows-only invalid chars in directory path
+            InlineData("\t")
+        ]
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Windows-only invalid chars in directory path
         public void UnixValidCharsDirectoryPath(string valid)
         {
             if (TestDirectories)
@@ -322,40 +337,136 @@ namespace System.IO.Tests
             Directory.CreateDirectory(testDir);
             File.WriteAllText(Path.Combine(testDir, GetTestFileName()), "cat");
             Directory.CreateDirectory(Path.Combine(testDir, GetTestFileName()));
-            RemoteExecutor.Invoke((testDirectory) =>
-            {
-                Directory.SetCurrentDirectory(testDirectory);
+            RemoteExecutor
+                .Invoke(
+                    (testDirectory) =>
+                    {
+                        Directory.SetCurrentDirectory(testDirectory);
 
-                Assert.NotEmpty(Directory.GetFileSystemEntries(Directory.GetCurrentDirectory()));
-                Assert.NotEmpty(Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*"));
-                Assert.NotEmpty(Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories));
-                Assert.NotEmpty(Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*", SearchOption.TopDirectoryOnly));
+                        Assert.NotEmpty(
+                            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory())
+                        );
+                        Assert.NotEmpty(
+                            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*")
+                        );
+                        Assert.NotEmpty(
+                            Directory.GetFileSystemEntries(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.AllDirectories
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.GetFileSystemEntries(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.TopDirectoryOnly
+                            )
+                        );
 
-                Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory()));
-                Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory(), "*"));
-                Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories));
-                Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.TopDirectoryOnly));
+                        Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory()));
+                        Assert.NotEmpty(
+                            Directory.GetDirectories(Directory.GetCurrentDirectory(), "*")
+                        );
+                        Assert.NotEmpty(
+                            Directory.GetDirectories(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.AllDirectories
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.GetDirectories(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.TopDirectoryOnly
+                            )
+                        );
 
-                Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory()));
-                Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory(), "*"));
-                Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories));
-                Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory(), "*", SearchOption.TopDirectoryOnly));
+                        Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory()));
+                        Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory(), "*"));
+                        Assert.NotEmpty(
+                            Directory.GetFiles(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.AllDirectories
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.GetFiles(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.TopDirectoryOnly
+                            )
+                        );
 
-                Assert.NotEmpty(Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory()));
-                Assert.NotEmpty(Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory(), "*"));
-                Assert.NotEmpty(Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories));
-                Assert.NotEmpty(Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory(), "*", SearchOption.TopDirectoryOnly));
+                        Assert.NotEmpty(
+                            Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory())
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateFileSystemEntries(
+                                Directory.GetCurrentDirectory(),
+                                "*"
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateFileSystemEntries(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.AllDirectories
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateFileSystemEntries(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.TopDirectoryOnly
+                            )
+                        );
 
-                Assert.NotEmpty(Directory.EnumerateDirectories(Directory.GetCurrentDirectory()));
-                Assert.NotEmpty(Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), "*"));
-                Assert.NotEmpty(Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories));
-                Assert.NotEmpty(Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.TopDirectoryOnly));
+                        Assert.NotEmpty(
+                            Directory.EnumerateDirectories(Directory.GetCurrentDirectory())
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), "*")
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateDirectories(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.AllDirectories
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateDirectories(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.TopDirectoryOnly
+                            )
+                        );
 
-                Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory()));
-                Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*"));
-                Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories));
-                Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*", SearchOption.TopDirectoryOnly));
-            }, testDir).Dispose();
+                        Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory()));
+                        Assert.NotEmpty(
+                            Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*")
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateFiles(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.AllDirectories
+                            )
+                        );
+                        Assert.NotEmpty(
+                            Directory.EnumerateFiles(
+                                Directory.GetCurrentDirectory(),
+                                "*",
+                                SearchOption.TopDirectoryOnly
+                            )
+                        );
+                    },
+                    testDir
+                )
+                .Dispose();
         }
     }
 }

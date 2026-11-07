@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,34 +32,41 @@
 
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    [Serializable]
+    public class EventLogPermissionEntry
+    {
+        private EventLogPermissionAccess permissionAccess;
+        private string machineName;
 
-	[Serializable]
-	public class EventLogPermissionEntry {
+        public EventLogPermissionEntry(
+            EventLogPermissionAccess permissionAccess,
+            string machineName
+        )
+        {
+            ResourcePermissionBase.ValidateMachineName(machineName);
 
-		private EventLogPermissionAccess permissionAccess;
-		private string machineName;
+            this.permissionAccess = permissionAccess;
+            this.machineName = machineName;
+        }
 
-		public EventLogPermissionEntry (EventLogPermissionAccess permissionAccess, string machineName)
-		{
-			ResourcePermissionBase.ValidateMachineName (machineName);
+        public string MachineName
+        {
+            get { return machineName; }
+        }
 
-			this.permissionAccess = permissionAccess;
-			this.machineName = machineName;
-		}
+        public EventLogPermissionAccess PermissionAccess
+        {
+            get { return permissionAccess; }
+        }
 
-		public string MachineName {
-			get { return machineName; }
-		}
-
-		public EventLogPermissionAccess PermissionAccess {
-			get { return permissionAccess; }
-		}
-
-		internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry ()
-		{
-			return new ResourcePermissionBaseEntry ((int) permissionAccess, new string[] { machineName });
-		} 
-	}
+        internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry()
+        {
+            return new ResourcePermissionBaseEntry(
+                (int)permissionAccess,
+                new string[] { machineName }
+            );
+        }
+    }
 }
-

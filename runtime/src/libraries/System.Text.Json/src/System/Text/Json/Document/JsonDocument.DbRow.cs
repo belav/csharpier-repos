@@ -44,10 +44,10 @@ namespace System.Text.Json
             /// </summary>
             internal bool HasComplexChildren => _sizeOrLengthUnion < 0;
 
-            internal int NumberOfRows =>
-                _numberOfRowsAndTypeUnion & 0x0FFFFFFF; // Number of rows that the current JSON element occupies within the database
+            internal int NumberOfRows => _numberOfRowsAndTypeUnion & 0x0FFFFFFF; // Number of rows that the current JSON element occupies within the database
 
-            internal JsonTokenType TokenType => (JsonTokenType)(unchecked((uint)_numberOfRowsAndTypeUnion) >> 28);
+            internal JsonTokenType TokenType =>
+                (JsonTokenType)(unchecked((uint)_numberOfRowsAndTypeUnion) >> 28);
 
             internal const int UnknownSize = -1;
 
@@ -60,7 +60,9 @@ namespace System.Text.Json
 
             internal DbRow(JsonTokenType jsonTokenType, int location, int sizeOrLength)
             {
-                Debug.Assert(jsonTokenType > JsonTokenType.None && jsonTokenType <= JsonTokenType.Null);
+                Debug.Assert(
+                    jsonTokenType > JsonTokenType.None && jsonTokenType <= JsonTokenType.Null
+                );
                 Debug.Assert((byte)jsonTokenType < 1 << 4);
                 Debug.Assert(location >= 0);
                 Debug.Assert(sizeOrLength >= UnknownSize);

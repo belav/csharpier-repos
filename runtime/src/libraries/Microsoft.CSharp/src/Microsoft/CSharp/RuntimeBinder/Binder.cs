@@ -16,7 +16,9 @@ namespace Microsoft.CSharp.RuntimeBinder
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class Binder
     {
-        internal const string TrimmerWarning = "Using dynamic types might cause types or members to be removed by trimmer.";
+        internal const string TrimmerWarning =
+            "Using dynamic types might cause types or members to be removed by trimmer.";
+
         //////////////////////////////////////////////////////////////////////
 
         /// <summary>
@@ -32,7 +34,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             ExpressionType operation,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
             bool isLogical = (flags & CSharpBinderFlags.BinaryOperationLogical) != 0;
@@ -43,7 +46,13 @@ namespace Microsoft.CSharp.RuntimeBinder
                 binaryOperationFlags |= CSharpBinaryOperationFlags.LogicalOperation;
             }
 
-            return new CSharpBinaryOperationBinder(operation, isChecked, binaryOperationFlags, context, argumentInfo).TryGetExisting();
+            return new CSharpBinaryOperationBinder(
+                operation,
+                isChecked,
+                binaryOperationFlags,
+                context,
+                argumentInfo
+            ).TryGetExisting();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -56,22 +65,23 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="context">The <see cref="Type"/> that indicates where this operation is used.</param>
         /// <returns>Returns a new CSharp convert binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
-        public static CallSiteBinder Convert(
-            CSharpBinderFlags flags,
-            Type type,
-            Type? context)
+        public static CallSiteBinder Convert(CSharpBinderFlags flags, Type type, Type? context)
         {
             CSharpConversionKind conversionKind =
-                ((flags & CSharpBinderFlags.ConvertExplicit) != 0) ?
-                    CSharpConversionKind.ExplicitConversion :
-                    ((flags & CSharpBinderFlags.ConvertArrayIndex) != 0) ?
-                        CSharpConversionKind.ArrayCreationConversion :
-                        CSharpConversionKind.ImplicitConversion;
+                ((flags & CSharpBinderFlags.ConvertExplicit) != 0)
+                    ? CSharpConversionKind.ExplicitConversion
+                : ((flags & CSharpBinderFlags.ConvertArrayIndex) != 0)
+                    ? CSharpConversionKind.ArrayCreationConversion
+                : CSharpConversionKind.ImplicitConversion;
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
 
-            return new CSharpConvertBinder(type, conversionKind, isChecked, context).TryGetExisting();
+            return new CSharpConvertBinder(
+                type,
+                conversionKind,
+                isChecked,
+                context
+            ).TryGetExisting();
         }
-
 
         //////////////////////////////////////////////////////////////////////
 
@@ -86,7 +96,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public static CallSiteBinder GetIndex(
             CSharpBinderFlags flags,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
             return new CSharpGetIndexBinder(context, argumentInfo).TryGetExisting();
         }
@@ -106,10 +117,16 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             string name,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
             bool allowCallables = (flags & CSharpBinderFlags.ResultIndexed) != 0;
-            return new CSharpGetMemberBinder(name, allowCallables, context, argumentInfo).TryGetExisting();
+            return new CSharpGetMemberBinder(
+                name,
+                allowCallables,
+                context,
+                argumentInfo
+            ).TryGetExisting();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -125,7 +142,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public static CallSiteBinder Invoke(
             CSharpBinderFlags flags,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
             bool resultDiscarded = (flags & CSharpBinderFlags.ResultDiscarded) != 0;
 
@@ -155,7 +173,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name,
             IEnumerable<Type>? typeArguments,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
             bool invokeSimpleName = (flags & CSharpBinderFlags.InvokeSimpleName) != 0;
             bool invokeSpecialName = (flags & CSharpBinderFlags.InvokeSpecialName) != 0;
@@ -175,7 +194,13 @@ namespace Microsoft.CSharp.RuntimeBinder
                 callFlags |= CSharpCallFlags.ResultDiscarded;
             }
 
-            return new CSharpInvokeMemberBinder(callFlags, name, context, typeArguments, argumentInfo).TryGetExisting();
+            return new CSharpInvokeMemberBinder(
+                callFlags,
+                name,
+                context,
+                typeArguments,
+                argumentInfo
+            ).TryGetExisting();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -191,9 +216,14 @@ namespace Microsoft.CSharp.RuntimeBinder
         public static CallSiteBinder InvokeConstructor(
             CSharpBinderFlags flags,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
-            return new CSharpInvokeConstructorBinder(CSharpCallFlags.None, context, argumentInfo).TryGetExisting();
+            return new CSharpInvokeConstructorBinder(
+                CSharpCallFlags.None,
+                context,
+                argumentInfo
+            ).TryGetExisting();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -206,10 +236,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
         /// <returns>Returns a new CSharp is event binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
-        public static CallSiteBinder IsEvent(
-            CSharpBinderFlags flags,
-            string name,
-            Type? context)
+        public static CallSiteBinder IsEvent(CSharpBinderFlags flags, string name, Type? context)
         {
             return new CSharpIsEventBinder(name, context).TryGetExisting();
         }
@@ -227,11 +254,18 @@ namespace Microsoft.CSharp.RuntimeBinder
         public static CallSiteBinder SetIndex(
             CSharpBinderFlags flags,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
-            bool isCompoundAssignment = (flags & CSharpBinderFlags.ValueFromCompoundAssignment) != 0;
+            bool isCompoundAssignment =
+                (flags & CSharpBinderFlags.ValueFromCompoundAssignment) != 0;
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
-            return new CSharpSetIndexBinder(isCompoundAssignment, isChecked, context, argumentInfo).TryGetExisting();
+            return new CSharpSetIndexBinder(
+                isCompoundAssignment,
+                isChecked,
+                context,
+                argumentInfo
+            ).TryGetExisting();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -249,11 +283,19 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             string name,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
-            bool isCompoundAssignment = (flags & CSharpBinderFlags.ValueFromCompoundAssignment) != 0;
+            bool isCompoundAssignment =
+                (flags & CSharpBinderFlags.ValueFromCompoundAssignment) != 0;
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
-            return new CSharpSetMemberBinder(name, isCompoundAssignment, isChecked, context, argumentInfo).TryGetExisting();
+            return new CSharpSetMemberBinder(
+                name,
+                isCompoundAssignment,
+                isChecked,
+                context,
+                argumentInfo
+            ).TryGetExisting();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -271,10 +313,16 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             ExpressionType operation,
             Type? context,
-            IEnumerable<CSharpArgumentInfo>? argumentInfo)
+            IEnumerable<CSharpArgumentInfo>? argumentInfo
+        )
         {
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
-            return new CSharpUnaryOperationBinder(operation, isChecked, context, argumentInfo).TryGetExisting();
+            return new CSharpUnaryOperationBinder(
+                operation,
+                isChecked,
+                context,
+                argumentInfo
+            ).TryGetExisting();
         }
     }
 }

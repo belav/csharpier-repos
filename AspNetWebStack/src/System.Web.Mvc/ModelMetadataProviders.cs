@@ -11,10 +11,13 @@ namespace System.Web.Mvc
 
         internal ModelMetadataProviders(IResolver<ModelMetadataProvider> resolver = null)
         {
-            _resolver = resolver ?? new SingleServiceResolver<ModelMetadataProvider>(
-                                        () => _currentProvider,
-                                        new CachedDataAnnotationsModelMetadataProvider(),
-                                        "ModelMetadataProviders.Current");
+            _resolver =
+                resolver
+                ?? new SingleServiceResolver<ModelMetadataProvider>(
+                    () => _currentProvider,
+                    new CachedDataAnnotationsModelMetadataProvider(),
+                    "ModelMetadataProviders.Current"
+                );
         }
 
         public static ModelMetadataProvider Current

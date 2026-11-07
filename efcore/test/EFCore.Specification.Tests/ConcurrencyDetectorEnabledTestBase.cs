@@ -6,31 +6,31 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract class ConcurrencyDetectorEnabledTestBase<TFixture> : ConcurrencyDetectorTestBase<TFixture>
+public abstract class ConcurrencyDetectorEnabledTestBase<TFixture>
+    : ConcurrencyDetectorTestBase<TFixture>
     where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
 {
     protected ConcurrencyDetectorEnabledTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task SaveChanges(bool async)
     {
-        await ConcurrencyDetectorTest(
-            async c =>
-            {
-                c.Products.Add(new Product { Id = 2, Name = "Unicorn Replacement Horn Pack" });
-                return async ? await c.SaveChangesAsync() : c.SaveChanges();
-            });
+        await ConcurrencyDetectorTest(async c =>
+        {
+            c.Products.Add(new Product { Id = 2, Name = "Unicorn Replacement Horn Pack" });
+            return async ? await c.SaveChangesAsync() : c.SaveChanges();
+        });
 
         using var ctx = CreateContext();
         var newProduct = await ctx.Products.SingleOrDefaultAsync(p => p.Id == 2);
         Assert.Null(newProduct);
     }
 
-    protected override async Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test)
+    protected override async Task ConcurrencyDetectorTest(
+        Func<ConcurrencyDetectorDbContext, Task<object>> test
+    )
     {
         using var context = CreateContext();
 

@@ -16,7 +16,8 @@ namespace System.Dynamic
         /// <summary>
         /// Represents an empty array of type <see cref="DynamicMetaObject"/>. This field is read-only.
         /// </summary>
-        public static readonly DynamicMetaObject[] EmptyMetaObjects = Array.Empty<DynamicMetaObject>();
+        public static readonly DynamicMetaObject[] EmptyMetaObjects =
+            Array.Empty<DynamicMetaObject>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicMetaObject"/> class.
@@ -38,7 +39,11 @@ namespace System.Dynamic
         /// <param name="expression">The expression representing this <see cref="DynamicMetaObject"/> during the dynamic binding process.</param>
         /// <param name="restrictions">The set of binding restrictions under which the binding is valid.</param>
         /// <param name="value">The runtime value represented by the <see cref="DynamicMetaObject"/>.</param>
-        public DynamicMetaObject(Expression expression, BindingRestrictions restrictions, object value)
+        public DynamicMetaObject(
+            Expression expression,
+            BindingRestrictions restrictions,
+            object value
+        )
             : this(expression, restrictions)
         {
             _value = value;
@@ -127,7 +132,10 @@ namespace System.Dynamic
         /// <param name="binder">An instance of the <see cref="SetMemberBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set member operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
+        public virtual DynamicMetaObject BindSetMember(
+            SetMemberBinder binder,
+            DynamicMetaObject value
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackSetMember(this, value);
@@ -150,7 +158,10 @@ namespace System.Dynamic
         /// <param name="binder">An instance of the <see cref="GetIndexBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="indexes">An array of <see cref="DynamicMetaObject"/> instances - indexes for the get index operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindGetIndex(GetIndexBinder binder, DynamicMetaObject[] indexes)
+        public virtual DynamicMetaObject BindGetIndex(
+            GetIndexBinder binder,
+            DynamicMetaObject[] indexes
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackGetIndex(this, indexes);
@@ -163,7 +174,11 @@ namespace System.Dynamic
         /// <param name="indexes">An array of <see cref="DynamicMetaObject"/> instances - indexes for the set index operation.</param>
         /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set index operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindSetIndex(SetIndexBinder binder, DynamicMetaObject[] indexes, DynamicMetaObject value)
+        public virtual DynamicMetaObject BindSetIndex(
+            SetIndexBinder binder,
+            DynamicMetaObject[] indexes,
+            DynamicMetaObject value
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackSetIndex(this, indexes, value);
@@ -175,7 +190,10 @@ namespace System.Dynamic
         /// <param name="binder">An instance of the <see cref="DeleteIndexBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="indexes">An array of <see cref="DynamicMetaObject"/> instances - indexes for the delete index operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindDeleteIndex(DeleteIndexBinder binder, DynamicMetaObject[] indexes)
+        public virtual DynamicMetaObject BindDeleteIndex(
+            DeleteIndexBinder binder,
+            DynamicMetaObject[] indexes
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackDeleteIndex(this, indexes);
@@ -187,7 +205,10 @@ namespace System.Dynamic
         /// <param name="binder">An instance of the <see cref="InvokeMemberBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the invoke member operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args)
+        public virtual DynamicMetaObject BindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackInvokeMember(this, args);
@@ -211,7 +232,10 @@ namespace System.Dynamic
         /// <param name="binder">An instance of the <see cref="CreateInstanceBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the create instance operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindCreateInstance(CreateInstanceBinder binder, DynamicMetaObject[] args)
+        public virtual DynamicMetaObject BindCreateInstance(
+            CreateInstanceBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackCreateInstance(this, args);
@@ -234,7 +258,10 @@ namespace System.Dynamic
         /// <param name="binder">An instance of the <see cref="BinaryOperationBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="arg">An instance of the <see cref="DynamicMetaObject"/> representing the right hand side of the binary operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public virtual DynamicMetaObject BindBinaryOperation(BinaryOperationBinder binder, DynamicMetaObject arg)
+        public virtual DynamicMetaObject BindBinaryOperation(
+            BinaryOperationBinder binder,
+            DynamicMetaObject arg
+        )
         {
             ArgumentNullException.ThrowIfNull(binder);
             return binder.FallbackBinaryOperation(this, arg);
@@ -261,7 +288,10 @@ namespace System.Dynamic
                 DynamicMetaObject mo = objects[i];
                 ArgumentNullException.ThrowIfNull(mo, nameof(objects));
                 Expression expr = mo.Expression;
-                Debug.Assert(expr != null, "Unexpected null expression; ctor should have caught this.");
+                Debug.Assert(
+                    expr != null,
+                    "Unexpected null expression; ctor should have caught this."
+                );
                 res[i] = expr;
             }
 
@@ -286,10 +316,12 @@ namespace System.Dynamic
             {
                 var idoMetaObject = ido.GetMetaObject(expression);
 
-                if (idoMetaObject == null ||
-                    !idoMetaObject.HasValue ||
-                    idoMetaObject.Value == null ||
-                    (object)idoMetaObject.Expression != (object)expression)
+                if (
+                    idoMetaObject == null
+                    || !idoMetaObject.HasValue
+                    || idoMetaObject.Value == null
+                    || (object)idoMetaObject.Expression != (object)expression
+                )
                 {
                     throw System.Linq.Expressions.Error.InvalidMetaObjectCreated(ido.GetType());
                 }

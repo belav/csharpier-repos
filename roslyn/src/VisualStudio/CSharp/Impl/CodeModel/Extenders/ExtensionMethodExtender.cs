@@ -22,8 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.Extenders
 
         private readonly bool _isExtension;
 
-        private ExtensionMethodExtender(bool isExtension)
-            => _isExtension = isExtension;
+        private ExtensionMethodExtender(bool isExtension) => _isExtension = isExtension;
 
         public bool IsExtension
         {

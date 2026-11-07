@@ -41,9 +41,15 @@ namespace System.Runtime.InteropServices
             // ensure we OOM for this scenario (which can occur for `nuint.MaxValue`) and so we have to check the adjusted size.
 
             nuint adjustedAlignment = Math.Max(alignment, (uint)sizeof(void*));
-            nuint adjustedByteCount = (byteCount != 0) ? (byteCount + (adjustedAlignment - 1)) & ~(adjustedAlignment - 1) : adjustedAlignment;
+            nuint adjustedByteCount =
+                (byteCount != 0)
+                    ? (byteCount + (adjustedAlignment - 1)) & ~(adjustedAlignment - 1)
+                    : adjustedAlignment;
 
-            void* result = (adjustedByteCount < byteCount) ? null : Interop.Sys.AlignedAlloc(adjustedAlignment, adjustedByteCount);
+            void* result =
+                (adjustedByteCount < byteCount)
+                    ? null
+                    : Interop.Sys.AlignedAlloc(adjustedAlignment, adjustedByteCount);
 
             if (result == null)
             {
@@ -102,9 +108,15 @@ namespace System.Runtime.InteropServices
             // ensure we OOM for this scenario (which can occur for `nuint.MaxValue`) and so we have to check the adjusted size.
 
             nuint adjustedAlignment = Math.Max(alignment, (uint)sizeof(void*));
-            nuint adjustedByteCount = (byteCount != 0) ? (byteCount + (adjustedAlignment - 1)) & ~(adjustedAlignment - 1) : adjustedAlignment;
+            nuint adjustedByteCount =
+                (byteCount != 0)
+                    ? (byteCount + (adjustedAlignment - 1)) & ~(adjustedAlignment - 1)
+                    : adjustedAlignment;
 
-            void* result = (adjustedByteCount < byteCount) ? null : Interop.Sys.AlignedRealloc(ptr, adjustedAlignment, adjustedByteCount);
+            void* result =
+                (adjustedByteCount < byteCount)
+                    ? null
+                    : Interop.Sys.AlignedRealloc(ptr, adjustedAlignment, adjustedByteCount);
 
             if (result == null)
             {

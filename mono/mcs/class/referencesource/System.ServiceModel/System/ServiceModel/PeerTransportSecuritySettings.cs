@@ -13,7 +13,8 @@ namespace System.ServiceModel
 
     public sealed class PeerTransportSecuritySettings
     {
-        internal const PeerTransportCredentialType DefaultCredentialType = PeerTransportCredentialType.Password;
+        internal const PeerTransportCredentialType DefaultCredentialType =
+            PeerTransportCredentialType.Password;
 
         PeerTransportCredentialType credentialType;
 
@@ -39,7 +40,13 @@ namespace System.ServiceModel
             {
                 if (!PeerTransportCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value, typeof(PeerTransportCredentialType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(PeerTransportCredentialType)
+                        )
+                    );
                 }
                 this.credentialType = value;
             }
@@ -47,9 +54,12 @@ namespace System.ServiceModel
 
         internal void OnImportPolicy(MetadataImporter importer, PolicyConversionContext context)
         {
-            XmlElement element = PolicyConversionContext.FindAssertion(context.GetBindingAssertions(),
-                                    PeerTransportPolicyConstants.PeerTransportCredentialType,
-                                    TransportPolicyConstants.PeerTransportUri, true);
+            XmlElement element = PolicyConversionContext.FindAssertion(
+                context.GetBindingAssertions(),
+                PeerTransportPolicyConstants.PeerTransportCredentialType,
+                TransportPolicyConstants.PeerTransportUri,
+                true
+            );
             PeerTransportCredentialType credentialType = PeerTransportCredentialType.Password;
             if (element != null)
             {
@@ -81,12 +91,16 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("Unsupported value for PeerTransportSecuritySettings.CredentialType");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             XmlDocument doc = new XmlDocument();
-            XmlElement element = doc.CreateElement(PeerTransportPolicyConstants.PeerTransportPrefix,
-                                                   PeerTransportPolicyConstants.PeerTransportCredentialType,
-                                                   TransportPolicyConstants.PeerTransportUri);
+            XmlElement element = doc.CreateElement(
+                PeerTransportPolicyConstants.PeerTransportPrefix,
+                PeerTransportPolicyConstants.PeerTransportCredentialType,
+                TransportPolicyConstants.PeerTransportUri
+            );
             element.InnerText = assertion;
             context.GetBindingAssertions().Add(element);
         }

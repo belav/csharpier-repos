@@ -15,15 +15,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructReadOnly;
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpMakeStructReadOnlyDiagnosticAnalyzer,
-    CSharpMakeStructReadOnlyCodeFixProvider>;
+    CSharpMakeStructReadOnlyCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructReadOnly)]
 public class MakeStructReadOnlyTests
 {
-    private static Task TestMissingAsync(string testCode, LanguageVersion version = LanguageVersion.CSharp12)
-        => TestAsync(testCode, testCode, version);
+    private static Task TestMissingAsync(
+        string testCode,
+        LanguageVersion version = LanguageVersion.CSharp12
+    ) => TestAsync(testCode, testCode, version);
 
-    private static async Task TestAsync(string testCode, string fixedCode, LanguageVersion version = LanguageVersion.CSharp12)
+    private static async Task TestAsync(
+        string testCode,
+        string fixedCode,
+        LanguageVersion version = LanguageVersion.CSharp12
+    )
     {
         await new VerifyCS.Test
         {
@@ -43,7 +50,9 @@ public class MakeStructReadOnlyTests
             {
                 readonly int i;
             }
-            """, LanguageVersion.CSharp7_1);
+            """,
+            LanguageVersion.CSharp7_1
+        );
     }
 
     [Fact]
@@ -62,7 +71,8 @@ public class MakeStructReadOnlyTests
                 readonly int i;
             }
             """,
-LanguageVersion.CSharp7_2);
+            LanguageVersion.CSharp7_2
+        );
     }
 
     [Fact]
@@ -74,7 +84,8 @@ LanguageVersion.CSharp7_2);
             {
                 readonly int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -86,7 +97,8 @@ LanguageVersion.CSharp7_2);
             {
                 readonly int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -98,7 +110,8 @@ LanguageVersion.CSharp7_2);
             {
                 int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -110,7 +123,8 @@ LanguageVersion.CSharp7_2);
             {
                 int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -123,7 +137,8 @@ LanguageVersion.CSharp7_2);
                 int i;
                 readonly int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -136,7 +151,8 @@ LanguageVersion.CSharp7_2);
                 int i;
                 readonly int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -148,17 +164,19 @@ LanguageVersion.CSharp7_2);
             {
                 int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableAndReadOnlyFieldStruct2()
     {
         await TestMissingAsync(
-@"struct S(int j)
+            @"struct S(int j)
 {
     int i;
-}");
+}"
+        );
     }
 
     [Fact]
@@ -170,7 +188,8 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -182,7 +201,8 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -194,17 +214,19 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutablePropertyStruct2()
     {
         await TestMissingAsync(
-@"struct S(int q)
+            @"struct S(int q)
 {
     int P { get; set; }
-}");
+}"
+        );
     }
 
     [Fact]
@@ -215,7 +237,8 @@ LanguageVersion.CSharp7_2);
             struct S
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -226,7 +249,8 @@ LanguageVersion.CSharp7_2);
             record struct S
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -237,16 +261,18 @@ LanguageVersion.CSharp7_2);
             record struct S()
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestMissingWithEmptyStructPrimaryConstructor()
     {
         await TestMissingAsync(
-@"struct S()
+            @"struct S()
 {
-}");
+}"
+        );
     }
 
     [Fact]
@@ -262,7 +288,8 @@ LanguageVersion.CSharp7_2);
             readonly partial struct S
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -280,7 +307,8 @@ LanguageVersion.CSharp7_2);
             {
                 readonly int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -298,7 +326,8 @@ LanguageVersion.CSharp7_2);
             {
                 readonly int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -316,7 +345,8 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -334,7 +364,8 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -352,7 +383,8 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; init; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -370,7 +402,8 @@ LanguageVersion.CSharp7_2);
             {
                 int P { get; init; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -388,7 +421,8 @@ LanguageVersion.CSharp7_2);
             {
                 readonly int i;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -399,16 +433,18 @@ LanguageVersion.CSharp7_2);
             record struct S(int i)
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestMissingStructWithPrimaryConstructor()
     {
         await TestMissingAsync(
-@"struct S(int i)
+            @"struct S(int i)
 {
-}");
+}"
+        );
     }
 
     [Fact]
@@ -420,22 +456,24 @@ LanguageVersion.CSharp7_2);
             {
                 readonly int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestOnStructWithPrimaryConstructorAndReadonlyField()
     {
         await TestAsync(
-@"struct [|S|](int i)
+            @"struct [|S|](int i)
 {
     readonly int i;
 }",
-@"readonly struct S(int i)
+            @"readonly struct S(int i)
 {
     readonly int i;
 }",
-LanguageVersion.CSharp12);
+            LanguageVersion.CSharp12
+        );
     }
 
     [Fact]
@@ -463,7 +501,8 @@ LanguageVersion.CSharp12);
                     readonly int j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -491,7 +530,8 @@ LanguageVersion.CSharp12);
                     int j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -519,7 +559,8 @@ LanguageVersion.CSharp12);
                     readonly int j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -557,7 +598,8 @@ LanguageVersion.CSharp12);
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -577,7 +619,8 @@ LanguageVersion.CSharp12);
             {
                 readonly int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -603,7 +646,8 @@ LanguageVersion.CSharp12);
                     readonly int j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -621,7 +665,8 @@ LanguageVersion.CSharp12);
             {
                 readonly int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -645,7 +690,8 @@ LanguageVersion.CSharp12);
                     readonly int j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -667,7 +713,8 @@ LanguageVersion.CSharp12);
 
                 int P { set { } }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -681,7 +728,8 @@ LanguageVersion.CSharp12);
 
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -698,7 +746,8 @@ LanguageVersion.CSharp12);
                     this = default;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -720,7 +769,8 @@ LanguageVersion.CSharp12);
             {
                 public static void ByRef(ref this S s) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -739,7 +789,8 @@ LanguageVersion.CSharp12);
 
                 void Goo(ref S s) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -758,7 +809,8 @@ LanguageVersion.CSharp12);
 
                 void Goo(out S s) { s = default; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -775,7 +827,8 @@ LanguageVersion.CSharp12);
                     ref S s = ref this;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -794,7 +847,8 @@ LanguageVersion.CSharp12);
 
                 public static S operator++(S s) => default;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -826,7 +880,8 @@ LanguageVersion.CSharp12);
 
                 void Goo(in S s) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -858,7 +913,8 @@ LanguageVersion.CSharp12);
 
                 void Goo() { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -896,7 +952,8 @@ LanguageVersion.CSharp12);
             {
                 public static void Goo(this S s) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -924,7 +981,8 @@ LanguageVersion.CSharp12);
                     ref readonly S s = ref this;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69994")]
@@ -940,7 +998,8 @@ LanguageVersion.CSharp12);
 
                 public readonly int MyInt;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69994")]
@@ -966,7 +1025,8 @@ LanguageVersion.CSharp12);
 
                 public readonly int MyInt;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69994")]
@@ -993,12 +1053,13 @@ LanguageVersion.CSharp12);
             public readonly struct MyStruct
             {
                 private readonly List<Action> actions = new();
-            
+
                 public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
-            
+
                 public MyStruct() { }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69994")]
@@ -1014,9 +1075,10 @@ LanguageVersion.CSharp12);
                 private List<Action> actions = new();
 
                 public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
-            
+
                 public MyStruct() { }
             }
-            """);
+            """
+        );
     }
 }

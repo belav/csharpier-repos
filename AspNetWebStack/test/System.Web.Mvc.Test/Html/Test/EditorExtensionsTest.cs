@@ -17,21 +17,26 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => MvcHelper.GetHtmlHelper().Editor(expression: null),
-                "expression");
+                "expression"
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
-        public void BooleanTemplate_AttributeEncodes_AddedHtmlAttributes(string text, string htmlEncodedText)
+        public void BooleanTemplate_AttributeEncodes_AddedHtmlAttributes(
+            string text,
+            string htmlEncodedText
+        )
         {
             // Arrange
-            var expectedResult = "<input attribute=\"" +
-                htmlEncodedText +
-                "\" checked=\"checked\" class=\"check-box\" id=\"Prefix\" name=\"Prefix\" type=\"checkbox\" " +
-                "value=\"true\" />" +
-                "<input name=\"Prefix\" type=\"hidden\" value=\"false\" />";
+            var expectedResult =
+                "<input attribute=\""
+                + htmlEncodedText
+                + "\" checked=\"checked\" class=\"check-box\" id=\"Prefix\" name=\"Prefix\" type=\"checkbox\" "
+                + "value=\"true\" />"
+                + "<input name=\"Prefix\" type=\"hidden\" value=\"false\" />";
             var viewData = new ViewDataDictionary<bool>(true);
-            viewData.Add("htmlAttributes", new { attribute = text, });
+            viewData.Add("htmlAttributes", new { attribute = text });
             viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
             var html = MvcHelper.GetHtmlHelper(viewData);
@@ -63,14 +68,15 @@ namespace System.Web.Mvc.Html.Test
         public void CollectionTemplateWrappingObjectTemplate_EncodesSimpleDisplayTextOfItems_IfHtmlEncode(
             string text,
             bool htmlEncode,
-            string expectedResult)
+            string expectedResult
+        )
         {
             // Arrange
             var innerModel = new ObjectTemplateModel
             {
-                Property1 = text,           // SimpleDisplayText uses first property by default.
+                Property1 = text, // SimpleDisplayText uses first property by default.
             };
-            var model = new[] { innerModel, innerModel, };
+            var model = new[] { innerModel, innerModel };
             var viewData = new ViewDataDictionary<ObjectTemplateModel[]>(model);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -82,7 +88,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Developers might need to do something similar (including MetadataOverrideScope or another approach
             // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(ObjectTemplateModel));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(ObjectTemplateModel)
+            );
             metadata.HtmlEncode = htmlEncode;
 
             string editorResult;
@@ -107,13 +116,17 @@ namespace System.Web.Mvc.Html.Test
 
         // Inconsistent but long-standing behavior.
         [Theory]
-        [PropertyData("ConditionallyHtmlEncodedData_NoEncodedText", PropertyType = typeof(EncodedDataSets))]
+        [PropertyData(
+            "ConditionallyHtmlEncodedData_NoEncodedText",
+            PropertyType = typeof(EncodedDataSets)
+        )]
         public void CollectionTemplateWrappingObjectTemplate_DoesNotEncodeNullDisplayText_IfNull(
             string text,
-            bool htmlEncode)
+            bool htmlEncode
+        )
         {
             // Arrange
-            var model = new[] { (ObjectTemplateModel)null, };
+            var model = new[] { (ObjectTemplateModel)null };
             var viewData = new ViewDataDictionary<ObjectTemplateModel[]>(model);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -125,7 +138,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Developers might need to do something similar (including MetadataOverrideScope or another approach
             // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(ObjectTemplateModel));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(ObjectTemplateModel)
+            );
             metadata.HtmlEncode = htmlEncode;
             metadata.NullDisplayText = text;
 
@@ -151,14 +167,18 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("AttributeEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
-        public void StringTemplate_AttributeEncodes_AddedHtmlAttributes(string text, string htmlEncodedText)
+        public void StringTemplate_AttributeEncodes_AddedHtmlAttributes(
+            string text,
+            string htmlEncodedText
+        )
         {
             // Arrange
-            var expectedResult = "<input attribute=\"" +
-                htmlEncodedText +
-                "\" class=\"text-box single-line\" id=\"Prefix\" name=\"Prefix\" type=\"text\" value=\"string\" />";
+            var expectedResult =
+                "<input attribute=\""
+                + htmlEncodedText
+                + "\" class=\"text-box single-line\" id=\"Prefix\" name=\"Prefix\" type=\"text\" value=\"string\" />";
             var viewData = new ViewDataDictionary<string>("string");
-            viewData.Add("htmlAttributes", new { attribute = text, });
+            viewData.Add("htmlAttributes", new { attribute = text });
             viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
             var html = MvcHelper.GetHtmlHelper(viewData);
@@ -191,9 +211,9 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             var expectedResult =
-                "<input class=\"text-box single-line\" id=\"Prefix\" name=\"Prefix\" type=\"text\" value=\"" +
-                    htmlEncodedText +
-                    "\" />";
+                "<input class=\"text-box single-line\" id=\"Prefix\" name=\"Prefix\" type=\"text\" value=\""
+                + htmlEncodedText
+                + "\" />";
             var viewData = new ViewDataDictionary<string>(text);
             viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
@@ -245,7 +265,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 "<input class=\"text-box single-line\" id=\"Property1\" name=\"Property1\" type=\"text\" value=\"ViewData string\" />",
-                result.ToString());
+                result.ToString()
+            );
         }
 
         [Fact]
@@ -271,7 +292,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 "<input class=\"text-box single-line\" id=\"Property1\" name=\"Property1\" type=\"text\" value=\"Model string\" />",
-                result.ToString());
+                result.ToString()
+            );
         }
 
         [Fact]
@@ -297,7 +319,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 "<input class=\"text-box single-line\" id=\"Property1\" name=\"Property1\" type=\"text\" value=\"Model string\" />",
-                result.ToString());
+                result.ToString()
+            );
         }
 
         [Fact]
@@ -323,7 +346,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 "<input class=\"text-box single-line\" id=\"Property1\" name=\"Property1\" type=\"text\" value=\"\" />",
-                result.ToString());
+                result.ToString()
+            );
         }
 
         private class ObjectTemplateModel

@@ -40,31 +40,36 @@ public class StringTypeMapping : RelationalTypeMapping
         string storeType,
         DbType? dbType,
         bool unicode = false,
-        int? size = null)
+        int? size = null
+    )
         : base(
             new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(
-                    typeof(string), jsonValueReaderWriter: JsonStringReaderWriter.Instance), storeType, StoreTypePostfix.None, dbType,
-                unicode, size))
-    {
-    }
+                    typeof(string),
+                    jsonValueReaderWriter: JsonStringReaderWriter.Instance
+                ),
+                storeType,
+                StoreTypePostfix.None,
+                dbType,
+                unicode,
+                size
+            )
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="StringTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected StringTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new StringTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new StringTypeMapping(parameters);
 
     /// <summary>
     ///     Generates the escaped SQL representation of a literal value.
@@ -73,8 +78,7 @@ public class StringTypeMapping : RelationalTypeMapping
     /// <returns>
     ///     The generated string.
     /// </returns>
-    protected virtual string EscapeSqlLiteral(string literal)
-        => literal.Replace("'", "''");
+    protected virtual string EscapeSqlLiteral(string literal) => literal.Replace("'", "''");
 
     /// <summary>
     ///     Generates the SQL representation of a literal value.
@@ -83,6 +87,6 @@ public class StringTypeMapping : RelationalTypeMapping
     /// <returns>
     ///     The generated string.
     /// </returns>
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => $"'{EscapeSqlLiteral((string)value)}'";
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        $"'{EscapeSqlLiteral((string)value)}'";
 }

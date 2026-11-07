@@ -4,13 +4,13 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
-    using System.Diagnostics;
 
     abstract class DurableInstanceContextProvider : IInstanceContextProvider
     {
@@ -30,7 +30,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (serviceHostBase.Description.Behaviors.Find<ServiceThrottlingBehavior>() == null)
             {
-                serviceHostBase.ServiceThrottle.MaxConcurrentInstances = (new ServiceThrottlingBehavior()).MaxConcurrentInstances;
+                serviceHostBase.ServiceThrottle.MaxConcurrentInstances = (
+                    new ServiceThrottlingBehavior()
+                ).MaxConcurrentInstances;
             }
             this.contextCache = new ContextCache();
             this.isPerCall = isPerCall;
@@ -38,13 +40,13 @@ namespace System.ServiceModel.Dispatcher
 
         protected ContextCache Cache
         {
-            get
-            {
-                return this.contextCache;
-            }
+            get { return this.contextCache; }
         }
 
-        public virtual InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
+        public virtual InstanceContext GetExistingInstanceContext(
+            Message message,
+            IContextChannel channel
+        )
         {
             if (message == null)
             {
@@ -64,7 +66,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     lock (result.ThisLock)
                     {
-                        if (!string.IsNullOrEmpty(channel.SessionId) && !result.IncomingChannels.Contains(channel))
+                        if (
+                            !string.IsNullOrEmpty(channel.SessionId)
+                            && !result.IncomingChannels.Contains(channel)
+                        )
                         {
                             result.IncomingChannels.Add(channel);
                         }
@@ -80,7 +85,11 @@ namespace System.ServiceModel.Dispatcher
             return this.Cache.GetReferenceCount(instanceId);
         }
 
-        public virtual void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
+        public virtual void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        )
         {
             if (instanceContext == null)
             {
@@ -101,14 +110,19 @@ namespace System.ServiceModel.Dispatcher
             {
                 instanceId = Guid.NewGuid();
                 durableInstance = this.OnCreateNewInstance(instanceId);
-                message.Properties[DurableMessageDispatchInspector.NewDurableInstanceIdPropertyName] = instanceId;
+                message.Properties[
+                    DurableMessageDispatchInspector.NewDurableInstanceIdPropertyName
+                ] = instanceId;
             }
             else
             {
                 durableInstance = this.OnGetExistingInstance(instanceId);
             }
 
-            Fx.Assert(durableInstance != null, "Durable instance should never be null at this point.");
+            Fx.Assert(
+                durableInstance != null,
+                "Durable instance should never be null at this point."
+            );
             durableInstance.Open();
 
             instanceContext.Extensions.Add(durableInstance);
@@ -123,10 +137,14 @@ namespace System.ServiceModel.Dispatcher
             if (DiagnosticUtility.ShouldTraceInformation)
             {
                 string traceText = SR.GetString(SR.TraceCodeDICPInstanceContextCached, instanceId);
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.DICPInstanceContextCached, SR.GetString(SR.TraceCodeDICPInstanceContextCached), 
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.DICPInstanceContextCached,
+                    SR.GetString(SR.TraceCodeDICPInstanceContextCached),
                     new StringTraceRecord("InstanceDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
         }
 
@@ -145,34 +163,47 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.RequiredInstanceContextExtensionNotFound,
-                    typeof(DurableInstance).Name)));
+                        SR2.GetString(
+                            SR2.RequiredInstanceContextExtensionNotFound,
+                            typeof(DurableInstance).Name
+                        )
+                    )
+                );
             }
 
             lock (instanceContext.ThisLock)
             {
                 if (instanceContext.IncomingChannels.Count == 0)
                 {
-                    removed = contextCache.RemoveIfNotBusy(durableInstance.InstanceId, instanceContext);
+                    removed = contextCache.RemoveIfNotBusy(
+                        durableInstance.InstanceId,
+                        instanceContext
+                    );
                 }
             }
 
             if (removed && DiagnosticUtility.ShouldTraceInformation)
             {
-                string traceText = SR.GetString(SR.TraceCodeDICPInstanceContextRemovedFromCache, durableInstance.InstanceId);
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.DICPInstanceContextRemovedFromCache, SR.GetString(SR.TraceCodeDICPInstanceContextRemovedFromCache), 
+                string traceText = SR.GetString(
+                    SR.TraceCodeDICPInstanceContextRemovedFromCache,
+                    durableInstance.InstanceId
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.DICPInstanceContextRemovedFromCache,
+                    SR.GetString(SR.TraceCodeDICPInstanceContextRemovedFromCache),
                     new StringTraceRecord("InstanceDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
             return removed;
         }
 
-        public virtual void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
-        {
-
-        }
+        public virtual void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        ) { }
 
         //Called by MessageInspector.BeforeReply
         internal void DecrementActivityCount(Guid instanceId)
@@ -202,7 +233,12 @@ namespace System.ServiceModel.Dispatcher
 
                 if (ContextMessageProperty.TryGet(message, out contextProperties))
                 {
-                    if (contextProperties.Context.TryGetValue(WellKnownContextProperties.InstanceId, out instanceId))
+                    if (
+                        contextProperties.Context.TryGetValue(
+                            WellKnownContextProperties.InstanceId,
+                            out instanceId
+                        )
+                    )
                     {
                         return Fx.CreateGuid(instanceId);
                     }
@@ -244,11 +280,19 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceInformation && referenceCount.HasValue)
                 {
-                    string traceText = SR2.GetString(SR2.DurableInstanceRefCountToInstanceContext, instanceId, referenceCount.Value);
-                    TraceUtility.TraceEvent(TraceEventType.Information,
-                        TraceCode.InstanceContextBoundToDurableInstance, SR.GetString(SR.TraceCodeInstanceContextBoundToDurableInstance), 
+                    string traceText = SR2.GetString(
+                        SR2.DurableInstanceRefCountToInstanceContext,
+                        instanceId,
+                        referenceCount.Value
+                    );
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.InstanceContextBoundToDurableInstance,
+                        SR.GetString(SR.TraceCodeInstanceContextBoundToDurableInstance),
                         new StringTraceRecord("InstanceDetail", traceText),
-                        this, null);
+                        this,
+                        null
+                    );
                 }
             }
 
@@ -301,11 +345,19 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    string traceText = SR2.GetString(SR2.DurableInstanceRefCountToInstanceContext, instanceId, referenceCount);
-                    TraceUtility.TraceEvent(TraceEventType.Information,
-                        TraceCode.InstanceContextDetachedFromDurableInstance, SR.GetString(SR.TraceCodeInstanceContextDetachedFromDurableInstance),
+                    string traceText = SR2.GetString(
+                        SR2.DurableInstanceRefCountToInstanceContext,
+                        instanceId,
+                        referenceCount
+                    );
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.InstanceContextDetachedFromDurableInstance,
+                        SR.GetString(SR.TraceCodeInstanceContextDetachedFromDurableInstance),
                         new StringTraceRecord("InstanceDetail", traceText),
-                        this, null);
+                        this,
+                        null
+                    );
                 }
             }
 
@@ -373,17 +425,24 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        string traceText = SR2.GetString(SR2.DurableInstanceRefCountToInstanceContext, instanceId, referenceCount);
-                        TraceUtility.TraceEvent(TraceEventType.Information,
-                            TraceCode.InstanceContextBoundToDurableInstance, SR.GetString(SR.TraceCodeInstanceContextBoundToDurableInstance),
+                        string traceText = SR2.GetString(
+                            SR2.DurableInstanceRefCountToInstanceContext,
+                            instanceId,
+                            referenceCount
+                        );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.InstanceContextBoundToDurableInstance,
+                            SR.GetString(SR.TraceCodeInstanceContextBoundToDurableInstance),
                             new StringTraceRecord("InstanceDetail", traceText),
-                            this, null);
+                            this,
+                            null
+                        );
                     }
                 }
                 instanceContext = contextItem.InstanceContext;
                 return true;
             }
-
 
             class ContextItem
             {
@@ -401,10 +460,7 @@ namespace System.ServiceModel.Dispatcher
 
                 public bool HasOutstandingReference
                 {
-                    get
-                    {
-                        return this.referenceCount > 0;
-                    }
+                    get { return this.referenceCount > 0; }
                 }
 
                 public InstanceContext InstanceContext
@@ -428,7 +484,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (value == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                                "value"
+                            );
                         }
                         this.context = value;
                         lock (this.lockObject)
@@ -440,10 +498,7 @@ namespace System.ServiceModel.Dispatcher
 
                 public int ReferenceCount
                 {
-                    get
-                    {
-                        return this.referenceCount;
-                    }
+                    get { return this.referenceCount; }
                 }
 
                 public int AddReference()

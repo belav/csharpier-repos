@@ -14,7 +14,8 @@ namespace System.Data.Odbc
 
         private readonly string? _expandedConnectionString;
 
-        internal OdbcConnectionString(string connectionString, bool validate) : base(connectionString, null, true)
+        internal OdbcConnectionString(string connectionString, bool validate)
+            : base(connectionString, null, true)
         {
             if (!validate)
             {

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,29 +32,42 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-	[Serializable]
-	public class FilterInvalidBodyAccessException : InvalidBodyAccessException
-	{
-		Collection<MessageFilter> filters;
+    [Serializable]
+    public class FilterInvalidBodyAccessException : InvalidBodyAccessException
+    {
+        Collection<MessageFilter> filters;
 
-		public FilterInvalidBodyAccessException () : base ("Not allowed to navigate to body.") {}
-		public FilterInvalidBodyAccessException (string message) : base (message) {}
-		public FilterInvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}		
-		protected FilterInvalidBodyAccessException (SerializationInfo info, StreamingContext context)
-			: base (info, context) {}
+        public FilterInvalidBodyAccessException()
+            : base("Not allowed to navigate to body.") { }
 
-		public FilterInvalidBodyAccessException (string message, Collection<MessageFilter> filters)
-			: base (message)
-		{
-			this.filters = filters;
-		}
+        public FilterInvalidBodyAccessException(string message)
+            : base(message) { }
 
-		public FilterInvalidBodyAccessException (string message, Exception innerException, Collection<MessageFilter> filters)
-			: base (message, innerException)
-		{
-			this.filters = filters;
-		}
-		
-		public Collection<MessageFilter> Filters { get { return filters; } }
-	}
+        public FilterInvalidBodyAccessException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        protected FilterInvalidBodyAccessException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+
+        public FilterInvalidBodyAccessException(string message, Collection<MessageFilter> filters)
+            : base(message)
+        {
+            this.filters = filters;
+        }
+
+        public FilterInvalidBodyAccessException(
+            string message,
+            Exception innerException,
+            Collection<MessageFilter> filters
+        )
+            : base(message, innerException)
+        {
+            this.filters = filters;
+        }
+
+        public Collection<MessageFilter> Filters
+        {
+            get { return filters; }
+        }
+    }
 }

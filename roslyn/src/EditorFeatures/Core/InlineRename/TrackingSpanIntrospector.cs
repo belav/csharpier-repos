@@ -9,14 +9,13 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal sealed class TrackingSpanIntrospector(ITextSnapshot snapshot) : IIntervalIntrospector<ITrackingSpan>
+    internal sealed class TrackingSpanIntrospector(ITextSnapshot snapshot)
+        : IIntervalIntrospector<ITrackingSpan>
     {
         private readonly ITextSnapshot _snapshot = snapshot;
 
-        public int GetStart(ITrackingSpan value)
-            => value.GetStartPoint(_snapshot);
+        public int GetStart(ITrackingSpan value) => value.GetStartPoint(_snapshot);
 
-        public int GetLength(ITrackingSpan value)
-            => value.GetSpan(_snapshot).Length;
+        public int GetLength(ITrackingSpan value) => value.GetSpan(_snapshot).Length;
     }
 }

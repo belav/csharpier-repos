@@ -49,7 +49,8 @@ namespace System.IO.Tests
 
         private void CreateLargeFile(string path)
         {
-            const string sentence = "A very large file used for testing StreamReader cancellation. 0123456789012345678901234567890123456789.";
+            const string sentence =
+                "A very large file used for testing StreamReader cancellation. 0123456789012345678901234567890123456789.";
             const int repeatCount = 10_000_000;
             Encoding encoding = Encoding.UTF8;
 
@@ -62,7 +63,9 @@ namespace System.IO.Tests
             }
             catch (IOException)
             {
-                throw new SkipTestException($"Unable to run {ReadToEndAsync_WithCancellation} due to lack of available disk space");
+                throw new SkipTestException(
+                    $"Unable to run {ReadToEndAsync_WithCancellation} due to lack of available disk space"
+                );
             }
 
             using StreamWriter streamWriter = new StreamWriter(fs, encoding);

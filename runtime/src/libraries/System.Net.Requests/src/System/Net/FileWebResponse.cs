@@ -32,11 +32,21 @@ namespace System.Net
                 }
                 else
                 {
-                    _stream = new WebFileStream(request, uri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, DefaultFileStreamBufferSize, useAsync);
+                    _stream = new WebFileStream(
+                        request,
+                        uri.LocalPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        DefaultFileStreamBufferSize,
+                        useAsync
+                    );
                     _contentLength = _stream.Length;
                 }
                 _headers = new WebHeaderCollection();
-                _headers[HttpKnownHeaderNames.ContentLength] = _contentLength.ToString(NumberFormatInfo.InvariantInfo);
+                _headers[HttpKnownHeaderNames.ContentLength] = _contentLength.ToString(
+                    NumberFormatInfo.InvariantInfo
+                );
                 _headers[HttpKnownHeaderNames.ContentType] = DefaultFileContentType;
                 _uri = uri;
             }
@@ -48,19 +58,29 @@ namespace System.Net
 
         [Obsolete("Serialization has been deprecated for FileWebResponse.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected FileWebResponse(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        protected FileWebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }
 
         [Obsolete("Serialization has been deprecated for FileWebResponse.")]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
         [Obsolete("Serialization has been deprecated for FileWebResponse.")]
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }

@@ -47,8 +47,8 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> IsClustered<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        bool clustered = true)
-        => (IndexBuilder<TEntity>)IsClustered((IndexBuilder)indexBuilder, clustered);
+        bool clustered = true
+    ) => (IndexBuilder<TEntity>)IsClustered((IndexBuilder)indexBuilder, clustered);
 
     /// <summary>
     ///     Configures whether the index is clustered when targeting SQL Server.
@@ -68,7 +68,8 @@ public static class SqlServerIndexBuilderExtensions
     public static IConventionIndexBuilder? IsClustered(
         this IConventionIndexBuilder indexBuilder,
         bool? clustered,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetIsClustered(clustered, fromDataAnnotation))
         {
@@ -94,8 +95,13 @@ public static class SqlServerIndexBuilderExtensions
     public static bool CanSetIsClustered(
         this IConventionIndexBuilder indexBuilder,
         bool? clustered,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.Clustered, clustered, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        indexBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.Clustered,
+            clustered,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures index include properties when targeting SQL Server.
@@ -108,7 +114,10 @@ public static class SqlServerIndexBuilderExtensions
     /// <param name="indexBuilder">The builder for the index being configured.</param>
     /// <param name="propertyNames">An array of property names to be used in 'include' clause.</param>
     /// <returns>A builder to further configure the index.</returns>
-    public static IndexBuilder IncludeProperties(this IndexBuilder indexBuilder, params string[] propertyNames)
+    public static IndexBuilder IncludeProperties(
+        this IndexBuilder indexBuilder,
+        params string[] propertyNames
+    )
     {
         Check.NotNull(propertyNames, nameof(propertyNames));
 
@@ -130,7 +139,8 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> IncludeProperties<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        params string[] propertyNames)
+        params string[] propertyNames
+    )
     {
         Check.NotNull(propertyNames, nameof(propertyNames));
 
@@ -161,13 +171,18 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> IncludeProperties<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        Expression<Func<TEntity, object?>> includeExpression)
+        Expression<Func<TEntity, object?>> includeExpression
+    )
     {
         Check.NotNull(includeExpression, nameof(includeExpression));
 
         IncludeProperties(
             indexBuilder,
-            includeExpression.GetMemberAccessList().Select(EntityFrameworkMemberInfoExtensions.GetSimpleMemberName).ToArray());
+            includeExpression
+                .GetMemberAccessList()
+                .Select(EntityFrameworkMemberInfoExtensions.GetSimpleMemberName)
+                .ToArray()
+        );
 
         return indexBuilder;
     }
@@ -190,7 +205,8 @@ public static class SqlServerIndexBuilderExtensions
     public static IConventionIndexBuilder? IncludeProperties(
         this IConventionIndexBuilder indexBuilder,
         IReadOnlyList<string>? propertyNames,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetIncludeProperties(propertyNames, fromDataAnnotation))
         {
@@ -217,12 +233,20 @@ public static class SqlServerIndexBuilderExtensions
     public static bool CanSetIncludeProperties(
         this IConventionIndexBuilder indexBuilder,
         IReadOnlyList<string>? propertyNames,
-        bool fromDataAnnotation = false)
-        => (fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
-            .Overrides(indexBuilder.Metadata.GetIncludePropertiesConfigurationSource())
-            || indexBuilder.Metadata.GetIncludeProperties() is var currentProperties
-            && ((propertyNames is null && currentProperties is null)
-                || (propertyNames is not null && currentProperties is not null && propertyNames.SequenceEqual(currentProperties)));
+        bool fromDataAnnotation = false
+    ) =>
+        (
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        ).Overrides(indexBuilder.Metadata.GetIncludePropertiesConfigurationSource())
+        || indexBuilder.Metadata.GetIncludeProperties() is var currentProperties
+            && (
+                (propertyNames is null && currentProperties is null)
+                || (
+                    propertyNames is not null
+                    && currentProperties is not null
+                    && propertyNames.SequenceEqual(currentProperties)
+                )
+            );
 
     /// <summary>
     ///     Configures whether the index is created with online option when targeting SQL Server.
@@ -235,7 +259,10 @@ public static class SqlServerIndexBuilderExtensions
     /// <param name="indexBuilder">The builder for the index being configured.</param>
     /// <param name="createdOnline">A value indicating whether the index is created with online option.</param>
     /// <returns>A builder to further configure the index.</returns>
-    public static IndexBuilder IsCreatedOnline(this IndexBuilder indexBuilder, bool createdOnline = true)
+    public static IndexBuilder IsCreatedOnline(
+        this IndexBuilder indexBuilder,
+        bool createdOnline = true
+    )
     {
         indexBuilder.Metadata.SetIsCreatedOnline(createdOnline);
 
@@ -255,8 +282,8 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> IsCreatedOnline<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        bool createdOnline = true)
-        => (IndexBuilder<TEntity>)IsCreatedOnline((IndexBuilder)indexBuilder, createdOnline);
+        bool createdOnline = true
+    ) => (IndexBuilder<TEntity>)IsCreatedOnline((IndexBuilder)indexBuilder, createdOnline);
 
     /// <summary>
     ///     Configures whether the index is created with online option when targeting SQL Server.
@@ -276,7 +303,8 @@ public static class SqlServerIndexBuilderExtensions
     public static IConventionIndexBuilder? IsCreatedOnline(
         this IConventionIndexBuilder indexBuilder,
         bool? createdOnline,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetIsCreatedOnline(createdOnline, fromDataAnnotation))
         {
@@ -307,8 +335,13 @@ public static class SqlServerIndexBuilderExtensions
     public static bool CanSetIsCreatedOnline(
         this IConventionIndexBuilder indexBuilder,
         bool? createdOnline,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.CreatedOnline, createdOnline, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        indexBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.CreatedOnline,
+            createdOnline,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures whether the index is created with fill factor option when targeting SQL Server.
@@ -341,8 +374,8 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> HasFillFactor<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        int fillFactor)
-        => (IndexBuilder<TEntity>)HasFillFactor((IndexBuilder)indexBuilder, fillFactor);
+        int fillFactor
+    ) => (IndexBuilder<TEntity>)HasFillFactor((IndexBuilder)indexBuilder, fillFactor);
 
     /// <summary>
     ///     Configures whether the index is created with fill factor option when targeting SQL Server.
@@ -362,7 +395,8 @@ public static class SqlServerIndexBuilderExtensions
     public static IConventionIndexBuilder? HasFillFactor(
         this IConventionIndexBuilder indexBuilder,
         int? fillFactor,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetFillFactor(fillFactor, fromDataAnnotation))
         {
@@ -389,8 +423,13 @@ public static class SqlServerIndexBuilderExtensions
     public static bool CanSetFillFactor(
         this IConventionIndexBuilder indexBuilder,
         int? fillFactor,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.FillFactor, fillFactor, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        indexBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.FillFactor,
+            fillFactor,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures whether the index is created with sort in tempdb option when targeting SQL Server.
@@ -403,7 +442,10 @@ public static class SqlServerIndexBuilderExtensions
     /// <param name="indexBuilder">The builder for the index being configured.</param>
     /// <param name="sortInTempDb">A value indicating whether the index is created with sort in tempdb option.</param>
     /// <returns>A builder to further configure the index.</returns>
-    public static IndexBuilder SortInTempDb(this IndexBuilder indexBuilder, bool sortInTempDb = true)
+    public static IndexBuilder SortInTempDb(
+        this IndexBuilder indexBuilder,
+        bool sortInTempDb = true
+    )
     {
         indexBuilder.Metadata.SetSortInTempDb(sortInTempDb);
 
@@ -423,8 +465,8 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> SortInTempDb<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        bool sortInTempDb = true)
-        => (IndexBuilder<TEntity>)SortInTempDb((IndexBuilder)indexBuilder, sortInTempDb);
+        bool sortInTempDb = true
+    ) => (IndexBuilder<TEntity>)SortInTempDb((IndexBuilder)indexBuilder, sortInTempDb);
 
     /// <summary>
     ///     Configures whether the index is created with sort in tempdb option when targeting SQL Server.
@@ -444,7 +486,8 @@ public static class SqlServerIndexBuilderExtensions
     public static IConventionIndexBuilder? SortInTempDb(
         this IConventionIndexBuilder indexBuilder,
         bool? sortInTempDb,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetSortInTempDb(sortInTempDb, fromDataAnnotation))
         {
@@ -475,8 +518,13 @@ public static class SqlServerIndexBuilderExtensions
     public static bool CanSetSortInTempDb(
         this IConventionIndexBuilder indexBuilder,
         bool? sortInTempDb,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.SortInTempDb, sortInTempDb, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        indexBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.SortInTempDb,
+            sortInTempDb,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures whether the index is created with data compression option when targeting SQL Server.
@@ -489,7 +537,10 @@ public static class SqlServerIndexBuilderExtensions
     /// <param name="indexBuilder">The builder for the index being configured.</param>
     /// <param name="dataCompressionType">A value indicating the data compression option to be used.</param>
     /// <returns>A builder to further configure the index.</returns>
-    public static IndexBuilder UseDataCompression(this IndexBuilder indexBuilder, DataCompressionType dataCompressionType)
+    public static IndexBuilder UseDataCompression(
+        this IndexBuilder indexBuilder,
+        DataCompressionType dataCompressionType
+    )
     {
         indexBuilder.Metadata.SetDataCompression(dataCompressionType);
 
@@ -509,8 +560,8 @@ public static class SqlServerIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> UseDataCompression<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        DataCompressionType dataCompressionType)
-        => (IndexBuilder<TEntity>)UseDataCompression((IndexBuilder)indexBuilder, dataCompressionType);
+        DataCompressionType dataCompressionType
+    ) => (IndexBuilder<TEntity>)UseDataCompression((IndexBuilder)indexBuilder, dataCompressionType);
 
     /// <summary>
     ///     Configures whether the index is created with data compression option when targeting SQL Server.
@@ -530,7 +581,8 @@ public static class SqlServerIndexBuilderExtensions
     public static IConventionIndexBuilder? UseDataCompression(
         this IConventionIndexBuilder indexBuilder,
         DataCompressionType? dataCompressionType,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetDataCompression(dataCompressionType, fromDataAnnotation))
         {
@@ -561,6 +613,11 @@ public static class SqlServerIndexBuilderExtensions
     public static bool CanSetDataCompression(
         this IConventionIndexBuilder indexBuilder,
         DataCompressionType? dataCompressionType,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.DataCompression, dataCompressionType, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        indexBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.DataCompression,
+            dataCompressionType,
+            fromDataAnnotation
+        );
 }

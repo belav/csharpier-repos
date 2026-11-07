@@ -14,8 +14,10 @@ namespace System.Reflection.Metadata.Tests
                 foreach (TypeDefinitionHandle handle in reader.TypeDefinitions)
                 {
                     TypeDefinition definition = reader.GetTypeDefinition(handle);
-                    if (reader.StringComparer.Equals(definition.Namespace, type.Namespace) &&
-                        reader.StringComparer.Equals(definition.Name, type.Name))
+                    if (
+                        reader.StringComparer.Equals(definition.Namespace, type.Namespace)
+                        && reader.StringComparer.Equals(definition.Name, type.Name)
+                    )
                     {
                         return handle;
                     }

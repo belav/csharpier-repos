@@ -44,7 +44,7 @@ namespace System.ServiceModel.ComIntegration
         ACTIVATE_64_BIT_SERVER = 0x80000,
         INPROC = INPROC_SERVER | INPROC_HANDLER,
         SERVER = INPROC_SERVER | LOCAL_SERVER | REMOTE_SERVER,
-        ALL = SERVER | INPROC_HANDLER
+        ALL = SERVER | INPROC_HANDLER,
     }
 
     [Flags]
@@ -54,9 +54,9 @@ namespace System.ServiceModel.ComIntegration
         EXECUTE_LOCAL = 0x02,
         EXECUTE_REMOTE = 0x04,
         ACTIVATE_LOCAL = 0x08,
-        ACTIVATE_REMOTE = 0x10
+        ACTIVATE_REMOTE = 0x10,
     }
-    
+
     enum TOKEN_INFORMATION_CLASS
     {
         TokenUser = 1,
@@ -73,7 +73,7 @@ namespace System.ServiceModel.ComIntegration
         TokenSessionId,
         TokenGroupsAndPrivileges,
         TokenSessionReference,
-        TokenSandBoxInert
+        TokenSandBoxInert,
     }
 
     enum SecurityImpersonationLevel
@@ -87,7 +87,7 @@ namespace System.ServiceModel.ComIntegration
     enum TokenType
     {
         TokenPrimary = 1,
-        TokenImpersonation
+        TokenImpersonation,
     }
 
     enum Win32Error
@@ -110,7 +110,7 @@ namespace System.ServiceModel.ComIntegration
         NameUserPrincipalName = 8,
         NameCanonicalEx = 9,
         NameServicePrincipalName = 10,
-        NameDnsDomainName = 12
+        NameDnsDomainName = 12,
     }
 
     [Flags]
@@ -185,7 +185,9 @@ namespace System.ServiceModel.ComIntegration
 
     static class InterfaceID
     {
-        public static readonly Guid idISupportErrorInfo = new Guid("{df0b3d60-548f-101b-8e65-08002b2bd119}");
+        public static readonly Guid idISupportErrorInfo = new Guid(
+            "{df0b3d60-548f-101b-8e65-08002b2bd119}"
+        );
         public static readonly Guid idIDispatch = new Guid("00020400-0000-0000-C000-000000000046");
     }
 
@@ -195,7 +197,6 @@ namespace System.ServiceModel.ComIntegration
         internal uint LowPart;
         internal int HighPart;
     }
-
 
     [StructLayout(LayoutKind.Sequential)]
     struct TOKEN_STATISTICS
@@ -271,49 +272,54 @@ namespace System.ServiceModel.ComIntegration
         internal const int KEY_ENUMERATE_SUB_KEYS = 0x0008;
         internal const int KEY_NOTIFY = 0x0010;
         internal const int KEY_CREATE_LINK = 0x0020;
-        internal const int KEY_READ = ((STANDARD_RIGHTS_READ |
-                                                           KEY_QUERY_VALUE |
-                                                           KEY_ENUMERATE_SUB_KEYS |
-                                                           KEY_NOTIFY)
-                                                          &
-                                                          (~SYNCHRONIZE));
+        internal const int KEY_READ = (
+            (STANDARD_RIGHTS_READ | KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS | KEY_NOTIFY)
+            & (~SYNCHRONIZE)
+        );
 
-        internal const int KEY_WRITE = STANDARD_RIGHTS_WRITE |
-                                                           KEY_SET_VALUE |
-                                                           KEY_CREATE_SUB_KEY;
+        internal const int KEY_WRITE = STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY;
 
-        internal const int REG_NONE = 0;     // No value type
-        internal const int REG_SZ = 1;     // Unicode nul terminated string
-        internal const int REG_EXPAND_SZ = 2;     // Unicode nul terminated string
+        internal const int REG_NONE = 0; // No value type
+        internal const int REG_SZ = 1; // Unicode nul terminated string
+        internal const int REG_EXPAND_SZ = 2; // Unicode nul terminated string
         internal const int KEY_WOW64_32KEY = (0x0200);
         internal const int KEY_WOW64_64KEY = (0x0100);
 
-
         // (with environment variable references)
-        internal const int REG_BINARY = 3;     // Free form binary
-        internal const int REG_DWORD = 4;     // 32-bit number
-        internal const int REG_DWORD_LITTLE_ENDIAN = 4;     // 32-bit number (same as REG_DWORD)
-        internal const int REG_DWORD_BIG_ENDIAN = 5;     // 32-bit number
-        internal const int REG_LINK = 6;     // Symbolic Link (unicode)
-        internal const int REG_MULTI_SZ = 7;     // Multiple Unicode strings
-        internal const int REG_RESOURCE_LIST = 8;     // Resource list in the resource map
-        internal const int REG_FULL_RESOURCE_DESCRIPTOR = 9;   // Resource list in the hardware description
+        internal const int REG_BINARY = 3; // Free form binary
+        internal const int REG_DWORD = 4; // 32-bit number
+        internal const int REG_DWORD_LITTLE_ENDIAN = 4; // 32-bit number (same as REG_DWORD)
+        internal const int REG_DWORD_BIG_ENDIAN = 5; // 32-bit number
+        internal const int REG_LINK = 6; // Symbolic Link (unicode)
+        internal const int REG_MULTI_SZ = 7; // Multiple Unicode strings
+        internal const int REG_RESOURCE_LIST = 8; // Resource list in the resource map
+        internal const int REG_FULL_RESOURCE_DESCRIPTOR = 9; // Resource list in the hardware description
         internal const int REG_RESOURCE_REQUIREMENTS_LIST = 10;
-        internal const int REG_QWORD = 11;    // 64-bit number
+        internal const int REG_QWORD = 11; // 64-bit number
 
         internal const int HWND_BROADCAST = 0xffff;
         internal const int WM_SETTINGCHANGE = 0x001A;
 
-
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static extern int RegOpenKeyEx(RegistryHandle hKey, String lpSubKey,
-                    int ulOptions, int samDesired, out RegistryHandle hkResult);
+        internal static extern int RegOpenKeyEx(
+            RegistryHandle hKey,
+            String lpSubKey,
+            int ulOptions,
+            int samDesired,
+            out RegistryHandle hkResult
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int RegSetValueEx(RegistryHandle hKey, String lpValueName,
-                    int Reserved, int dwType, String val, int cbData);
+        internal static extern int RegSetValueEx(
+            RegistryHandle hKey,
+            String lpValueName,
+            int Reserved,
+            int dwType,
+            String val,
+            int cbData
+        );
 
         [DllImport(ADVAPI32, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
@@ -321,34 +327,42 @@ namespace System.ServiceModel.ComIntegration
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int RegQueryValueEx(RegistryHandle hKey, String lpValueName,
-                    int[] lpReserved, ref int lpType, [Out] byte[] lpData,
-                    ref int lpcbData);
+        internal static extern int RegQueryValueEx(
+            RegistryHandle hKey,
+            String lpValueName,
+            int[] lpReserved,
+            ref int lpType,
+            [Out] byte[] lpData,
+            ref int lpcbData
+        );
+
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int RegEnumKey(RegistryHandle hKey, int index, StringBuilder lpName, ref int len);
+        internal static extern int RegEnumKey(
+            RegistryHandle hKey,
+            int index,
+            StringBuilder lpName,
+            ref int len
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int RegDeleteKey(RegistryHandle hKey, String lpValueName);
 
-
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        DuplicateTokenEx(
+        internal static extern bool DuplicateTokenEx(
             [In] SafeCloseHandle ExistingToken,
             [In] TokenAccessLevels DesiredAccess,
             [In] IntPtr TokenAttributes,
             [In] SecurityImpersonationLevel ImpersonationLevel,
             [In] TokenType TokenType,
-            [Out] out SafeCloseHandle NewToken);
-
+            [Out] out SafeCloseHandle NewToken
+        );
 
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        AccessCheck(
+        internal static extern bool AccessCheck(
             [In] byte[] SecurityDescriptor,
             [In] SafeCloseHandle ClientToken,
             [In] int DesiredAccess,
@@ -356,68 +370,64 @@ namespace System.ServiceModel.ComIntegration
             [Out] out PRIVILEGE_SET PrivilegeSet,
             [In, Out] ref uint PrivilegeSetLength,
             [Out] out uint GrantedAccess,
-            [Out] out bool AccessStatus);
-
+            [Out] out bool AccessStatus
+        );
 
         [DllImport(ADVAPI32, SetLastError = true, EntryPoint = "ImpersonateAnonymousToken")]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        ImpersonateAnonymousUserOnCurrentThread(
-            [In] IntPtr CurrentThread);
+        internal static extern bool ImpersonateAnonymousUserOnCurrentThread(
+            [In] IntPtr CurrentThread
+        );
 
         [DllImport(ADVAPI32, SetLastError = true, EntryPoint = "OpenThreadToken")]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        OpenCurrentThreadToken(
+        internal static extern bool OpenCurrentThreadToken(
             [In] IntPtr ThreadHandle,
             [In] TokenAccessLevels DesiredAccess,
             [In] bool OpenAsSelf,
-            [Out] out SafeCloseHandle TokenHandle);
+            [Out] out SafeCloseHandle TokenHandle
+        );
 
         [DllImport(ADVAPI32, SetLastError = true, EntryPoint = "SetThreadToken")]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        SetCurrentThreadToken(
+        internal static extern bool SetCurrentThreadToken(
             [In] IntPtr ThreadHandle,
-            [In] SafeCloseHandle TokenHandle);
+            [In] SafeCloseHandle TokenHandle
+        );
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern IntPtr
-        GetCurrentThread();
+        internal static extern IntPtr GetCurrentThread();
 
         [DllImport(KERNEL32, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int
-        GetCurrentThreadId();
+        internal static extern int GetCurrentThreadId();
 
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        RevertToSelf();
+        internal static extern bool RevertToSelf();
 
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        GetTokenInformation(
+        internal static extern bool GetTokenInformation(
             [In] SafeCloseHandle TokenHandle,
             [In] TOKEN_INFORMATION_CLASS TokenInformationClass,
             [In] SafeHandle TokenInformation,
             [Out] uint TokenInformationLength,
-            [Out] out uint ReturnLength);
+            [Out] out uint ReturnLength
+        );
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern IntPtr
-        GetCurrentProcess();
+        internal static extern IntPtr GetCurrentProcess();
 
         [DllImport(ADVAPI32, SetLastError = true, EntryPoint = "OpenProcessToken")]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool
-        GetCurrentProcessToken(
-            [In]IntPtr ProcessHandle,
-            [In]TokenAccessLevels DesiredAccess,
-            [Out]out SafeCloseHandle TokenHandle);
+        internal static extern bool GetCurrentProcessToken(
+            [In] IntPtr ProcessHandle,
+            [In] TokenAccessLevels DesiredAccess,
+            [Out] out SafeCloseHandle TokenHandle
+        );
 
         [DllImport(OLE32, ExactSpelling = true, PreserveSig = false)]
         [return: MarshalAs(UnmanagedType.Interface)]
@@ -426,14 +436,16 @@ namespace System.ServiceModel.ComIntegration
             [In, MarshalAs(UnmanagedType.LPStruct)] Guid rclsid,
             [In, MarshalAs(UnmanagedType.IUnknown)] object pUnkOuter,
             [In] CLSCTX dwClsContext,
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid
+        );
 
         [DllImport(OLE32, ExactSpelling = true, PreserveSig = false)]
         [return: MarshalAs(UnmanagedType.Interface)]
         [ResourceExposure(ResourceScope.None)]
         public static extern IStream CreateStreamOnHGlobal(
             [In] SafeHGlobalHandle hGlobal,
-            [In, MarshalAs(UnmanagedType.Bool)] bool fDeleteOnRelease);
+            [In, MarshalAs(UnmanagedType.Bool)] bool fDeleteOnRelease
+        );
 
         [DllImport(OLE32, ExactSpelling = true, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
@@ -443,14 +455,16 @@ namespace System.ServiceModel.ComIntegration
         [return: MarshalAs(UnmanagedType.Interface)]
         [ResourceExposure(ResourceScope.None)]
         public static extern object CoGetObjectContext(
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid
+        );
 
         [DllImport(COMSVCS, ExactSpelling = true, PreserveSig = false)]
         [return: MarshalAs(UnmanagedType.Interface)]
         [ResourceExposure(ResourceScope.None)]
         public static extern object CoCreateActivity(
             [In, MarshalAs(UnmanagedType.IUnknown)] object pIUnknown,
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid
+        );
 
         [DllImport(OLE32, ExactSpelling = true, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
@@ -469,61 +483,58 @@ namespace System.ServiceModel.ComIntegration
         [ResourceExposure(ResourceScope.None)]
         internal static extern IntPtr GlobalSize(SafeHGlobalHandle hGlobal);
 
-        [DllImport(OLEAUT32,
-           ExactSpelling = true,
-           CharSet = CharSet.Unicode,
-           PreserveSig = true)]
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int LoadRegTypeLib(ref Guid rguid, ushort major, ushort minor, int lcid,
-             [MarshalAs(UnmanagedType.Interface)] out object typeLib);
+        internal static extern int LoadRegTypeLib(
+            ref Guid rguid,
+            ushort major,
+            ushort minor,
+            int lcid,
+            [MarshalAs(UnmanagedType.Interface)] out object typeLib
+        );
 
-        [DllImport(OLEAUT32,
-            ExactSpelling = true,
-            CharSet = CharSet.Unicode,
-            PreserveSig = true)]
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int SafeArrayGetDim(IntPtr pSafeArray);
 
-        [DllImport(OLEAUT32,
-            ExactSpelling = true,
-            CharSet = CharSet.Unicode,
-            PreserveSig = true)]
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int SafeArrayGetElemsize(IntPtr pSafeArray);
 
-        [DllImport(OLEAUT32,
-            ExactSpelling = true,
-            CharSet = CharSet.Unicode,
-            PreserveSig = false)]
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int SafeArrayGetLBound(IntPtr pSafeArray, int cDims);
-        [DllImport(OLEAUT32,
-            ExactSpelling = true,
-            CharSet = CharSet.Unicode,
-            PreserveSig = false)]
+
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int SafeArrayGetUBound(IntPtr pSafeArray, int cDims);
 
-        [DllImport(OLEAUT32,
-            ExactSpelling = true,
-            CharSet = CharSet.Unicode,
-            PreserveSig = false)]
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern IntPtr SafeArrayAccessData(IntPtr pSafeArray);
 
-        [DllImport(OLEAUT32,
-            ExactSpelling = true,
-            CharSet = CharSet.Unicode,
-            PreserveSig = false)]
+        [DllImport(OLEAUT32, ExactSpelling = true, CharSet = CharSet.Unicode, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern void SafeArrayUnaccessData(IntPtr pSafeArray);
 
         [DllImport(SECUR32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.U1)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool TranslateName(string input, EXTENDED_NAME_FORMAT inputFormat, EXTENDED_NAME_FORMAT outputFormat, StringBuilder outputString, out uint size);
+        internal static extern bool TranslateName(
+            string input,
+            EXTENDED_NAME_FORMAT inputFormat,
+            EXTENDED_NAME_FORMAT outputFormat,
+            StringBuilder outputString,
+            out uint size
+        );
 
-        [DllImport(NETAPI32, ExactSpelling = true, EntryPoint = "DsGetDcNameW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            NETAPI32,
+            ExactSpelling = true,
+            EntryPoint = "DsGetDcNameW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int DsGetDcName(
             [In] string computerName,
@@ -531,7 +542,8 @@ namespace System.ServiceModel.ComIntegration
             [In] IntPtr domainGuid,
             [In] string siteName,
             [In] uint flags,
-            [Out] out IntPtr domainControllerInfo);
+            [Out] out IntPtr domainControllerInfo
+        );
 
         [DllImport(NETAPI32)]
         [ResourceExposure(ResourceScope.None)]
@@ -546,7 +558,9 @@ namespace System.ServiceModel.ComIntegration
             IntPtr pUnk = Marshal.GetIUnknownForObject(obj);
             if (IntPtr.Zero == pUnk)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk))
+                );
             }
 
             IntPtr ppv = IntPtr.Zero;
@@ -565,50 +579,90 @@ namespace System.ServiceModel.ComIntegration
 
     internal class RegistryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal static readonly RegistryHandle HKEY_CLASSES_ROOT = new RegistryHandle(new IntPtr(unchecked((int)0x80000000)), false);
-        internal static readonly RegistryHandle HKEY_CURRENT_USER = new RegistryHandle(new IntPtr(unchecked((int)0x80000001)), false);
-        internal static readonly RegistryHandle HKEY_LOCAL_MACHINE = new RegistryHandle(new IntPtr(unchecked((int)0x80000002)), false);
-        internal static readonly RegistryHandle HKEY_USERS = new RegistryHandle(new IntPtr(unchecked((int)0x80000003)), false);
-        internal static readonly RegistryHandle HKEY_PERFORMANCE_DATA = new RegistryHandle(new IntPtr(unchecked((int)0x80000004)), false);
-        internal static readonly RegistryHandle HKEY_CURRENT_CONFIG = new RegistryHandle(new IntPtr(unchecked((int)0x80000005)), false);
-        internal static readonly RegistryHandle HKEY_DYN_DATA = new RegistryHandle(new IntPtr(unchecked((int)0x80000006)), false);
+        internal static readonly RegistryHandle HKEY_CLASSES_ROOT = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000000)),
+            false
+        );
+        internal static readonly RegistryHandle HKEY_CURRENT_USER = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000001)),
+            false
+        );
+        internal static readonly RegistryHandle HKEY_LOCAL_MACHINE = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000002)),
+            false
+        );
+        internal static readonly RegistryHandle HKEY_USERS = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000003)),
+            false
+        );
+        internal static readonly RegistryHandle HKEY_PERFORMANCE_DATA = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000004)),
+            false
+        );
+        internal static readonly RegistryHandle HKEY_CURRENT_CONFIG = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000005)),
+            false
+        );
+        internal static readonly RegistryHandle HKEY_DYN_DATA = new RegistryHandle(
+            new IntPtr(unchecked((int)0x80000006)),
+            false
+        );
 
         [ResourceConsumption(ResourceScope.Machine)]
         static RegistryHandle GetHKCR()
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, @"Software\Classes", 0, SafeNativeMethods.KEY_READ, out regHandle);
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                @"Software\Classes",
+                0,
+                SafeNativeMethods.KEY_READ,
+                out regHandle
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("GetHKCR: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
+                );
             }
 
             return regHandle;
         }
 
-
         [ResourceConsumption(ResourceScope.Machine)]
         static RegistryHandle Get64bitHKCR()
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, @"Software\Classes", 0, SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_64KEY, out regHandle);
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                @"Software\Classes",
+                0,
+                SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_64KEY,
+                out regHandle
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("Get64bitHKCR: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
+                );
             }
 
             return regHandle;
@@ -618,24 +672,34 @@ namespace System.ServiceModel.ComIntegration
         static RegistryHandle Get32bitHKCR()
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, @"Software\Classes", 0, SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_32KEY, out regHandle);
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                @"Software\Classes",
+                0,
+                SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_32KEY,
+                out regHandle
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("Get64bitHKCR: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
+                );
             }
             return regHandle;
         }
 
         static RegistryHandle GetCorrectBitnessHive(bool is64bit)
         {
-            if (is64bit && IntPtr.Size == 8) // No worries we are trying to open up a 64 bit hive just return 
+            if (is64bit && IntPtr.Size == 8) // No worries we are trying to open up a 64 bit hive just return
                 return GetHKCR();
             else if (is64bit && IntPtr.Size == 4) // we are running under wow get the 64 bit hive
                 return Get64bitHKCR();
@@ -644,7 +708,9 @@ namespace System.ServiceModel.ComIntegration
             else if (!is64bit && IntPtr.Size == 4)
                 return GetHKCR();
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED)
+            );
         }
 
         public static RegistryHandle GetBitnessHKCR(bool is64bit)
@@ -654,7 +720,7 @@ namespace System.ServiceModel.ComIntegration
 
         public static RegistryHandle GetCorrectBitnessHKLMSubkey(bool is64bit, string key)
         {
-            if (is64bit && IntPtr.Size == 8) // No worries we are trying to open up a 64 bit hive just return 
+            if (is64bit && IntPtr.Size == 8) // No worries we are trying to open up a 64 bit hive just return
                 return GetHKLMSubkey(key);
             else if (is64bit && IntPtr.Size == 4) // we are running under wow get the 64 bit hive
                 return Get64bitHKLMSubkey(key);
@@ -663,45 +729,67 @@ namespace System.ServiceModel.ComIntegration
             else if (!is64bit && IntPtr.Size == 4)
                 return GetHKLMSubkey(key);
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED)
+            );
         }
-
 
         [ResourceConsumption(ResourceScope.Machine)]
         static RegistryHandle GetHKLMSubkey(string key)
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, key, 0, SafeNativeMethods.KEY_READ, out regHandle);
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                key,
+                0,
+                SafeNativeMethods.KEY_READ,
+                out regHandle
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("GetHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
+                );
             }
             return regHandle;
-
         }
 
         [ResourceConsumption(ResourceScope.Machine)]
         static RegistryHandle Get64bitHKLMSubkey(string key)
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, key, 0, SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_64KEY, out regHandle);
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                key,
+                0,
+                SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_64KEY,
+                out regHandle
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
-                Fx.Assert("Get64bitHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle.");
+                Fx.Assert(
+                    "Get64bitHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle."
+                );
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
+                );
             }
             return regHandle;
         }
@@ -710,17 +798,29 @@ namespace System.ServiceModel.ComIntegration
         static RegistryHandle Get32bitHKLMSubkey(string key)
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, key, 0, SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_32KEY, out regHandle);
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                key,
+                0,
+                SafeNativeMethods.KEY_READ | SafeNativeMethods.KEY_WOW64_32KEY,
+                out regHandle
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
-                Fx.Assert("Get32bitHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle.");
+                Fx.Assert(
+                    "Get32bitHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle."
+                );
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
+                );
             }
             return regHandle;
         }
@@ -736,8 +836,18 @@ namespace System.ServiceModel.ComIntegration
                 samDesired |= SafeNativeMethods.KEY_WRITE;
             }
 
-            int status = SafeNativeMethods.RegOpenKeyEx(HKEY_LOCAL_MACHINE, subKey, 0, samDesired, out regHandle);
-            if (status != SafeNativeMethods.ERROR_SUCCESS || regHandle == null || regHandle.IsInvalid)
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                HKEY_LOCAL_MACHINE,
+                subKey,
+                0,
+                samDesired,
+                out regHandle
+            );
+            if (
+                status != SafeNativeMethods.ERROR_SUCCESS
+                || regHandle == null
+                || regHandle.IsInvalid
+            )
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
                 return null;
@@ -752,9 +862,7 @@ namespace System.ServiceModel.ComIntegration
         }
 
         public RegistryHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         public bool DeleteKey(string key)
         {
@@ -767,17 +875,36 @@ namespace System.ServiceModel.ComIntegration
 
         public void SetValue(string valName, string value)
         {
-            int status = SafeNativeMethods.RegSetValueEx(this, valName, 0, SafeNativeMethods.REG_SZ, value, (value.Length * 2) + 2);
+            int status = SafeNativeMethods.RegSetValueEx(
+                this,
+                valName,
+                0,
+                SafeNativeMethods.REG_SZ,
+                value,
+                (value.Length * 2) + 2
+            );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(status)
+                );
         }
 
         [ResourceConsumption(ResourceScope.Machine)]
         public RegistryHandle OpenSubKey(string subkey)
         {
             RegistryHandle regHandle = null;
-            int status = SafeNativeMethods.RegOpenKeyEx(this, subkey, 0, SafeNativeMethods.KEY_READ, out regHandle);
-            if (status != SafeNativeMethods.ERROR_SUCCESS || regHandle == null || regHandle.IsInvalid)
+            int status = SafeNativeMethods.RegOpenKeyEx(
+                this,
+                subkey,
+                0,
+                SafeNativeMethods.KEY_READ,
+                out regHandle
+            );
+            if (
+                status != SafeNativeMethods.ERROR_SUCCESS
+                || regHandle == null
+                || regHandle.IsInvalid
+            )
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
                 return null;
@@ -789,17 +916,32 @@ namespace System.ServiceModel.ComIntegration
         {
             int type = 0;
             int datasize = 0;
-            int ret = SafeNativeMethods.RegQueryValueEx(this, valName, null, ref type, (byte[])null, ref datasize);
+            int ret = SafeNativeMethods.RegQueryValueEx(
+                this,
+                valName,
+                null,
+                ref type,
+                (byte[])null,
+                ref datasize
+            );
             if (ret == SafeNativeMethods.ERROR_SUCCESS)
                 if (type == SafeNativeMethods.REG_SZ)
                 {
                     byte[] blob = new byte[datasize];
-                    ret = SafeNativeMethods.RegQueryValueEx(this, valName, null, ref type, (byte[])blob, ref datasize);
+                    ret = SafeNativeMethods.RegQueryValueEx(
+                        this,
+                        valName,
+                        null,
+                        ref type,
+                        (byte[])blob,
+                        ref datasize
+                    );
                     UnicodeEncoding unicode = new UnicodeEncoding();
                     return unicode.GetString(blob);
                 }
             return null;
         }
+
         public StringCollection GetSubKeyNames()
         {
             int ret = 0;
@@ -817,22 +959,35 @@ namespace System.ServiceModel.ComIntegration
                         keyNames.Add(keyName.ToString());
                 }
                 index++;
-            }
-            while (ret == SafeNativeMethods.ERROR_SUCCESS);
+            } while (ret == SafeNativeMethods.ERROR_SUCCESS);
             return keyNames;
-
         }
+
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         internal unsafe object GetValue(string valName)
         {
             object retVal = null;
             int type = 0;
             int datasize = 0;
-            int ret = SafeNativeMethods.RegQueryValueEx(this, valName, null, ref type, (byte[])null, ref datasize);
+            int ret = SafeNativeMethods.RegQueryValueEx(
+                this,
+                valName,
+                null,
+                ref type,
+                (byte[])null,
+                ref datasize
+            );
             if (SafeNativeMethods.ERROR_SUCCESS == ret)
             {
                 byte[] blob = new byte[datasize];
-                ret = SafeNativeMethods.RegQueryValueEx(this, valName, null, ref type, (byte[])blob, ref datasize);
+                ret = SafeNativeMethods.RegQueryValueEx(
+                    this,
+                    valName,
+                    null,
+                    ref type,
+                    (byte[])blob,
+                    ref datasize
+                );
 
                 if (SafeNativeMethods.ERROR_SUCCESS == ret)
                 {
@@ -853,7 +1008,10 @@ namespace System.ServiceModel.ComIntegration
                             break;
 
                         case (SafeNativeMethods.REG_MULTI_SZ):
-                            retVal = stringVal.Split(new char[] { '\0' }, StringSplitOptions.RemoveEmptyEntries);
+                            retVal = stringVal.Split(
+                                new char[] { '\0' },
+                                StringSplitOptions.RemoveEmptyEntries
+                            );
                             break;
 
                         case (SafeNativeMethods.REG_QWORD):
@@ -877,6 +1035,7 @@ namespace System.ServiceModel.ComIntegration
 
             return retVal;
         }
+
         protected override bool ReleaseHandle()
         {
             if (SafeNativeMethods.RegCloseKey(handle) == SafeNativeMethods.ERROR_SUCCESS)

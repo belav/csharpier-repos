@@ -1,34 +1,34 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventLogWatcher
 **
-** Purpose: 
-** This public class is used for subscribing to event record 
-** notifications from event log. 
+** Purpose:
+** This public class is used for subscribing to event record
+** notifications from event log.
 **
 ============================================================*/
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Threading;
+using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 using Microsoft.Win32;
 
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
-    /// Used for subscribing to event record notifications from 
-    /// event log. 
+    /// Used for subscribing to event record notifications from
+    /// event log.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public class EventLogWatcher : IDisposable {
-
+    public class EventLogWatcher : IDisposable
+    {
         public event EventHandler<EventRecordWrittenEventArgs> EventRecordWritten;
 
         private EventLogQuery eventQuery;
@@ -46,7 +46,7 @@ namespace System.Diagnostics.Eventing.Reader {
         RegisteredWaitHandle registeredWaitHandle;
 
         /// <summary>
-        /// Maintains cached display / metadata information returned from 
+        /// Maintains cached display / metadata information returned from
         /// EventRecords that were obtained from this reader.
         /// </summary>
         ProviderMetadataCachedInformation cachedMetadataInformation;
@@ -54,19 +54,20 @@ namespace System.Diagnostics.Eventing.Reader {
         EventLogException asyncException;
 
         public EventLogWatcher(string path)
-            : this(new EventLogQuery(path, PathType.LogName), null, false) {
-        }
+            : this(new EventLogQuery(path, PathType.LogName), null, false) { }
 
         public EventLogWatcher(EventLogQuery eventQuery)
-            : this(eventQuery, null, false) {
-        }
+            : this(eventQuery, null, false) { }
 
         public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark)
-            : this(eventQuery, bookmark, false) {
-        }
+            : this(eventQuery, bookmark, false) { }
 
-        public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark, bool readExistingEvents) {
-
+        public EventLogWatcher(
+            EventLogQuery eventQuery,
+            EventBookmark bookmark,
+            bool readExistingEvents
+        )
+        {
             if (eventQuery == null)
                 throw new ArgumentNullException("eventQuery");
 
@@ -81,77 +82,87 @@ namespace System.Diagnostics.Eventing.Reader {
                 throw new InvalidOperationException();
 
             this.eventsBuffer = new IntPtr[64];
-            this.cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, null, 50);
+            this.cachedMetadataInformation = new ProviderMetadataCachedInformation(
+                eventQuery.Session,
+                null,
+                50
+            );
             this.bookmark = bookmark;
         }
 
-        public bool Enabled {
-            get {
-                return isSubscribing;
-            }
-            set {
-                if (value && !isSubscribing) {
+        public bool Enabled
+        {
+            get { return isSubscribing; }
+            set
+            {
+                if (value && !isSubscribing)
+                {
                     StartSubscribing();
                 }
-                else if (!value && isSubscribing) {
+                else if (!value && isSubscribing)
+                {
                     StopSubscribing();
                 }
             }
         }
 
         [System.Security.SecuritySafeCritical]
-        internal void StopSubscribing() {
-
+        internal void StopSubscribing()
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
             //
             // need to set isSubscribing to false before waiting for completion of callback.
-            // 
+            //
             this.isSubscribing = false;
 
-            if (this.registeredWaitHandle != null) {
+            if (this.registeredWaitHandle != null)
+            {
+                this.registeredWaitHandle.Unregister(this.unregisterDoneHandle);
 
-                this.registeredWaitHandle.Unregister( this.unregisterDoneHandle );
-
-                if (this.callbackThreadId != Thread.CurrentThread.ManagedThreadId) {
+                if (this.callbackThreadId != Thread.CurrentThread.ManagedThreadId)
+                {
                     //
-                    // not calling Stop from within callback - wait for 
+                    // not calling Stop from within callback - wait for
                     // any outstanding callbacks to complete.
-                    // 
-                    if ( this.unregisterDoneHandle != null )
+                    //
+                    if (this.unregisterDoneHandle != null)
                         this.unregisterDoneHandle.WaitOne();
                 }
-   
+
                 this.registeredWaitHandle = null;
             }
 
-            if (this.unregisterDoneHandle != null) {
+            if (this.unregisterDoneHandle != null)
+            {
                 this.unregisterDoneHandle.Close();
                 this.unregisterDoneHandle = null;
             }
 
-            if (this.subscriptionWaitHandle != null) {
+            if (this.subscriptionWaitHandle != null)
+            {
                 this.subscriptionWaitHandle.Close();
                 this.subscriptionWaitHandle = null;
             }
 
-            for (int i = 0; i < this.numEventsInBuffer; i++) {
-
-                if (eventsBuffer[i] != IntPtr.Zero) {
+            for (int i = 0; i < this.numEventsInBuffer; i++)
+            {
+                if (eventsBuffer[i] != IntPtr.Zero)
+                {
                     NativeWrapper.EvtClose(eventsBuffer[i]);
                     eventsBuffer[i] = IntPtr.Zero;
                 }
             }
 
             this.numEventsInBuffer = 0;
-            
+
             if (handle != null && !handle.IsInvalid)
                 handle.Dispose();
         }
 
         [System.Security.SecuritySafeCritical]
-        internal void StartSubscribing() {
-
+        internal void StartSubscribing()
+        {
             if (this.isSubscribing)
                 throw new InvalidOperationException();
 
@@ -174,16 +185,18 @@ namespace System.Diagnostics.Eventing.Reader {
 
             EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark);
 
-            using (bookmarkHandle) {
-
-                handle = NativeWrapper.EvtSubscribe(this.eventQuery.Session.Handle,
+            using (bookmarkHandle)
+            {
+                handle = NativeWrapper.EvtSubscribe(
+                    this.eventQuery.Session.Handle,
                     this.subscriptionWaitHandle.SafeWaitHandle,
                     this.eventQuery.Path,
                     this.eventQuery.Query,
                     bookmarkHandle,
                     IntPtr.Zero,
                     IntPtr.Zero,
-                    flag);
+                    flag
+                );
             }
 
             this.isSubscribing = true;
@@ -195,93 +208,116 @@ namespace System.Diagnostics.Eventing.Reader {
                 new WaitOrTimerCallback(SubscribedEventsAvailableCallback),
                 null,
                 -1,
-                false);          
+                false
+            );
         }
 
-        internal void SubscribedEventsAvailableCallback(object state, bool timedOut) {
+        internal void SubscribedEventsAvailableCallback(object state, bool timedOut)
+        {
             this.callbackThreadId = Thread.CurrentThread.ManagedThreadId;
-            try {
+            try
+            {
                 RequestEvents();
             }
-            finally {
+            finally
+            {
                 this.callbackThreadId = -1;
             }
         }
 
         [System.Security.SecuritySafeCritical]
-        private void RequestEvents() {
-
+        private void RequestEvents()
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
             this.asyncException = null;
-            Debug.Assert(this. numEventsInBuffer == 0);
+            Debug.Assert(this.numEventsInBuffer == 0);
 
             bool results = false;
 
-            do {
-
+            do
+            {
                 if (!this.isSubscribing)
                     break;
 
-                try {
-
-                    results = NativeWrapper.EvtNext(this.handle, this.eventsBuffer.Length, this.eventsBuffer, 0, 0, ref this. numEventsInBuffer);
+                try
+                {
+                    results = NativeWrapper.EvtNext(
+                        this.handle,
+                        this.eventsBuffer.Length,
+                        this.eventsBuffer,
+                        0,
+                        0,
+                        ref this.numEventsInBuffer
+                    );
 
                     if (!results)
                         return;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     this.asyncException = new EventLogException();
-                    this.asyncException.Data.Add("RealException", e);                    
+                    this.asyncException.Data.Add("RealException", e);
                 }
 
                 HandleEventsRequestCompletion();
-
             } while (results);
         }
 
-        private void IssueCallback(EventRecordWrittenEventArgs eventArgs) {
-            
-            if (EventRecordWritten != null) {
+        private void IssueCallback(EventRecordWrittenEventArgs eventArgs)
+        {
+            if (EventRecordWritten != null)
+            {
                 EventRecordWritten(this, eventArgs);
             }
         }
 
         // marked as SecurityCritical because allocates SafeHandles.
         [System.Security.SecurityCritical]
-        private void HandleEventsRequestCompletion() {
-
-            if (this.asyncException != null) {
-                EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(this.asyncException.Data["RealException"] as Exception);             
+        private void HandleEventsRequestCompletion()
+        {
+            if (this.asyncException != null)
+            {
+                EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(
+                    this.asyncException.Data["RealException"] as Exception
+                );
                 IssueCallback(args);
             }
 
-            for (int i = 0; i < this. numEventsInBuffer; i++) {
+            for (int i = 0; i < this.numEventsInBuffer; i++)
+            {
                 if (!this.isSubscribing)
                     break;
-                EventLogRecord record = new EventLogRecord(new EventLogHandle(this.eventsBuffer[i], true), this.eventQuery.Session, this.cachedMetadataInformation);
+                EventLogRecord record = new EventLogRecord(
+                    new EventLogHandle(this.eventsBuffer[i], true),
+                    this.eventQuery.Session,
+                    this.cachedMetadataInformation
+                );
                 EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(record);
-                this.eventsBuffer[i] = IntPtr.Zero;  // user is responsible for calling Dispose().
+                this.eventsBuffer[i] = IntPtr.Zero; // user is responsible for calling Dispose().
                 IssueCallback(args);
             }
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         [System.Security.SecuritySafeCritical]
-        protected virtual void Dispose(bool disposing) {
-
-            if (disposing) {
-                    StopSubscribing();
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                StopSubscribing();
                 return;
             }
 
-            for (int i = 0; i < this.numEventsInBuffer; i++) {
-
-                if (eventsBuffer[i] != IntPtr.Zero) {
+            for (int i = 0; i < this.numEventsInBuffer; i++)
+            {
+                if (eventsBuffer[i] != IntPtr.Zero)
+                {
                     NativeWrapper.EvtClose(eventsBuffer[i]);
                     eventsBuffer[i] = IntPtr.Zero;
                 }

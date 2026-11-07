@@ -9,8 +9,11 @@ namespace System.Web.Http.Hosting
 {
     internal static class HttpMessageHandlerExtensions
     {
-        public static Task<HttpResponseMessage> SendAsync(this HttpMessageHandler handler, HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> SendAsync(
+            this HttpMessageHandler handler,
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler, false);
             return invoker.SendAsync(request, cancellationToken);

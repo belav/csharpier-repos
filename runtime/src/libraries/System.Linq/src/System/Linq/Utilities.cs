@@ -17,7 +17,10 @@ namespace System.Linq
         /// <param name="left">The first comparer.</param>
         /// <param name="right">The second comparer.</param>
         /// <returns><c>true</c> if the equality comparers are equal; otherwise, <c>false</c>.</returns>
-        public static bool AreEqualityComparersEqual<TSource>(IEqualityComparer<TSource>? left, IEqualityComparer<TSource>? right)
+        public static bool AreEqualityComparersEqual<TSource>(
+            IEqualityComparer<TSource>? left,
+            IEqualityComparer<TSource>? right
+        )
         {
             if (left == right)
             {
@@ -53,8 +56,10 @@ namespace System.Linq
         /// second predicates return true. If the first predicate returns <c>false</c>,
         /// the second predicate will not be run.
         /// </returns>
-        public static Func<TSource, bool> CombinePredicates<TSource>(Func<TSource, bool> predicate1, Func<TSource, bool> predicate2) =>
-            x => predicate1(x) && predicate2(x);
+        public static Func<TSource, bool> CombinePredicates<TSource>(
+            Func<TSource, bool> predicate1,
+            Func<TSource, bool> predicate2
+        ) => x => predicate1(x) && predicate2(x);
 
         /// <summary>
         /// Combines two selectors.
@@ -67,7 +72,9 @@ namespace System.Linq
         /// <returns>
         /// A new selector that represents the composition of the first selector with the second selector.
         /// </returns>
-        public static Func<TSource, TResult> CombineSelectors<TSource, TMiddle, TResult>(Func<TSource, TMiddle> selector1, Func<TMiddle, TResult> selector2) =>
-            x => selector2(selector1(x));
+        public static Func<TSource, TResult> CombineSelectors<TSource, TMiddle, TResult>(
+            Func<TSource, TMiddle> selector1,
+            Func<TMiddle, TResult> selector2
+        ) => x => selector2(selector1(x));
     }
 }

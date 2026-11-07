@@ -129,7 +129,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TChannel[] channels = GetChannels();
             List<ICommunicationObject> collection = new List<ICommunicationObject>();
@@ -156,11 +160,13 @@ namespace System.ServiceModel.Channels
             get { return ServiceDefaults.OpenTimeout; }
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }

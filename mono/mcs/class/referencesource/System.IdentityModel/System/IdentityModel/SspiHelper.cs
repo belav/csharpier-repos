@@ -28,7 +28,7 @@ namespace System.IdentityModel
         X509NdrEncoding = unchecked((int)0x00000002),
         Pkcs7AsnEncoding = unchecked((int)0x00010000),
         Pkcs7NdrEncoding = unchecked((int)0x00020000),
-        AnyAsnEncoding = X509AsnEncoding | Pkcs7AsnEncoding
+        AnyAsnEncoding = X509AsnEncoding | Pkcs7AsnEncoding,
     }
 
     internal enum BufferType
@@ -88,17 +88,22 @@ namespace System.IdentityModel
         Lifespan = 0x02,
         DceInfo = 0x03,
         StreamSizes = 0x04,
+
         //KeyInfo             = 0x05, must not be used, see ConnectionInfo instead
         Authority = 0x06,
+
         // SECPKG_ATTR_PROTO_INFO          = 7,
         // SECPKG_ATTR_PASSWORD_EXPIRY     = 8,
         SessionKey = 0x09,
         PackageInfo = 0x0A,
+
         // SECPKG_ATTR_USER_FLAGS          = 11,
         NegotiationInfo = 0x0C,
+
         // SECPKG_ATTR_NATIVE_NAMES        = 13,
         // SECPKG_ATTR_FLAGS               = 14,
         Flags = 0x0E,
+
         // SECPKG_ATTR_USE_VALIDATED       = 15,
         // SECPKG_ATTR_CREDENTIAL_NAME     = 16,
         // SECPKG_ATTR_TARGET_INFORMATION  = 17,
@@ -112,7 +117,7 @@ namespace System.IdentityModel
         RootStore = 0x55,
         IssuerListInfoEx = 0x59,
         ConnectionInfo = 0x5A,
-        EapKey = 0x5B
+        EapKey = 0x5B,
     }
 
     internal enum CredentialStatus
@@ -163,7 +168,12 @@ namespace System.IdentityModel
         // sspi.h: #define SEC_WINNT_AUTH_IDENTITY_VERSION 0x200
         static readonly int WinNTAuthIdentityVersion = 0x200;
 
-        internal AuthIdentityEx(string userName, string password, string domain, params string[] additionalPackages)
+        internal AuthIdentityEx(
+            string userName,
+            string password,
+            string domain,
+            params string[] additionalPackages
+        )
         {
             Version = WinNTAuthIdentityVersion;
             Length = Marshal.SizeOf(typeof(AuthIdentityEx));
@@ -174,7 +184,7 @@ namespace System.IdentityModel
             Domain = domain;
             DomainLength = domain == null ? 0 : domain.Length;
 
-            // Flags are 2 for Unicode and 1 for ANSI. We use 2 on NT 
+            // Flags are 2 for Unicode and 1 for ANSI. We use 2 on NT
             Flags = 2;
 
             if (null == additionalPackages)
@@ -245,11 +255,15 @@ namespace System.IdentityModel
             NoNameCheck = 0x04,
             ValidateManual = 0x08,
             NoDefaultCred = 0x10,
-            ValidateAuto = 0x20
+            ValidateAuto = 0x20,
         }
 
-        public SecureCredential(int version, X509Certificate2 certificate,
-            SecureCredential.Flags flags, SchProtocols protocols)
+        public SecureCredential(
+            int version,
+            X509Certificate2 certificate,
+            SecureCredential.Flags flags,
+            SchProtocols protocols
+        )
         {
             //Setting default values
             rootStore = phMappers = palgSupportedAlgs = certContextArray = IntPtr.Zero;
@@ -272,22 +286,22 @@ namespace System.IdentityModel
     {
         private const string KERNEL32 = "kernel32.dll";
 
-        //internal static bool IsZero(IntPtr a) 
+        //internal static bool IsZero(IntPtr a)
         //{
         //    return ((long) a)==0;
         //}
 
-        //internal static IntPtr Add(IntPtr a, IntPtr b) 
+        //internal static IntPtr Add(IntPtr a, IntPtr b)
         //{
         //    return (IntPtr) ((long) a + (long) b);
         //}
 
-        //internal static IntPtr Add(IntPtr a, long b) 
+        //internal static IntPtr Add(IntPtr a, long b)
         //{
         //    return (IntPtr) ((long) a + b);
         //}
 
-        //internal static IntPtr Add(long a, IntPtr b) 
+        //internal static IntPtr Add(long a, IntPtr b)
         //{
         //    return (IntPtr) (a + (long) b);
         //}
@@ -297,7 +311,7 @@ namespace System.IdentityModel
             return (IntPtr)((long)a + (long)b);
         }
 
-        //internal static IntPtr Add(int a, IntPtr b) 
+        //internal static IntPtr Add(int a, IntPtr b)
         //{
         //    return (IntPtr) ((long) a + (long) b);
         //}

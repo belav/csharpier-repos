@@ -18,10 +18,18 @@ namespace System.Collections.Immutable.Tests
             Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<Guid?>(null).IsDefault);
             Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<string>(null).IsDefault);
             Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<CustomClass>(null).IsDefault);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<ManagedCustomStruct>(null).IsDefault);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<ManagedCustomStruct?>(null).IsDefault);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<UnmanagedCustomStruct>(null).IsDefault);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray<UnmanagedCustomStruct?>(null).IsDefault);
+            Assert.True(
+                ImmutableCollectionsMarshal.AsImmutableArray<ManagedCustomStruct>(null).IsDefault
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal.AsImmutableArray<ManagedCustomStruct?>(null).IsDefault
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal.AsImmutableArray<UnmanagedCustomStruct>(null).IsDefault
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal.AsImmutableArray<UnmanagedCustomStruct?>(null).IsDefault
+            );
         }
 
         [Fact]
@@ -31,12 +39,32 @@ namespace System.Collections.Immutable.Tests
             Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<int?>()).IsEmpty);
             Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<Guid>()).IsEmpty);
             Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<Guid?>()).IsEmpty);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<string>()).IsEmpty);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<CustomClass>()).IsEmpty);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<ManagedCustomStruct>()).IsEmpty);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<ManagedCustomStruct?>()).IsEmpty);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<UnmanagedCustomStruct>()).IsEmpty);
-            Assert.True(ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<UnmanagedCustomStruct?>()).IsEmpty);
+            Assert.True(
+                ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<string>()).IsEmpty
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal.AsImmutableArray(Array.Empty<CustomClass>()).IsEmpty
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal
+                    .AsImmutableArray(Array.Empty<ManagedCustomStruct>())
+                    .IsEmpty
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal
+                    .AsImmutableArray(Array.Empty<ManagedCustomStruct?>())
+                    .IsEmpty
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal
+                    .AsImmutableArray(Array.Empty<UnmanagedCustomStruct>())
+                    .IsEmpty
+            );
+            Assert.True(
+                ImmutableCollectionsMarshal
+                    .AsImmutableArray(Array.Empty<UnmanagedCustomStruct?>())
+                    .IsEmpty
+            );
         }
 
         [Fact]
@@ -45,7 +73,9 @@ namespace System.Collections.Immutable.Tests
             static void Test<T>()
             {
                 T[] array = new T[17];
-                ImmutableArray<T> immutableArray = ImmutableCollectionsMarshal.AsImmutableArray(array);
+                ImmutableArray<T> immutableArray = ImmutableCollectionsMarshal.AsImmutableArray(
+                    array
+                );
 
                 Assert.False(immutableArray.IsDefault);
                 Assert.Equal(17, immutableArray.Length);

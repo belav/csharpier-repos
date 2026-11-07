@@ -22,12 +22,21 @@ namespace System.Net.Security
         public ReadOnlyCollection<X509Certificate2> IntermediateCertificates { get; }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SslStreamCertificateContext Create(X509Certificate2 target, X509Certificate2Collection? additionalCertificates, bool offline)
+        public static SslStreamCertificateContext Create(
+            X509Certificate2 target,
+            X509Certificate2Collection? additionalCertificates,
+            bool offline
+        )
         {
             return Create(target, additionalCertificates, offline, null);
         }
 
-        public static SslStreamCertificateContext Create(X509Certificate2 target, X509Certificate2Collection? additionalCertificates, bool offline = false, SslCertificateTrust? trust = null)
+        public static SslStreamCertificateContext Create(
+            X509Certificate2 target,
+            X509Certificate2Collection? additionalCertificates,
+            bool offline = false,
+            SslCertificateTrust? trust = null
+        )
         {
             return Create(target, additionalCertificates, offline, trust, noOcspFetch: false);
         }
@@ -37,7 +46,8 @@ namespace System.Net.Security
             X509Certificate2Collection? additionalCertificates,
             bool offline,
             SslCertificateTrust? trust,
-            bool noOcspFetch)
+            bool noOcspFetch
+        )
         {
             if (!target.HasPrivateKey)
             {
@@ -107,9 +117,9 @@ namespace System.Net.Security
 
                     // Dispose of the certificates that we do not need. If we are holding on to the root,
                     // don't dispose of it.
-                    int stopDisposingChainPosition = root is null ?
-                        chain.ChainElements.Count :
-                        chain.ChainElements.Count - 1;
+                    int stopDisposingChainPosition = root is null
+                        ? chain.ChainElements.Count
+                        : chain.ChainElements.Count - 1;
 
                     for (int i = count + 1; i < stopDisposingChainPosition; i++)
                     {
@@ -118,7 +128,11 @@ namespace System.Net.Security
                 }
             }
 
-            SslStreamCertificateContext ctx = new SslStreamCertificateContext(target, new ReadOnlyCollection<X509Certificate2>(intermediates), trust);
+            SslStreamCertificateContext ctx = new SslStreamCertificateContext(
+                target,
+                new ReadOnlyCollection<X509Certificate2>(intermediates),
+                trust
+            );
 
             // On Linux, AddRootCertificate will start a background download of an OCSP response,
             // unless this context was built "offline", or this came from the internal Create(X509Certificate2)
@@ -135,12 +149,20 @@ namespace System.Net.Security
             return ctx;
         }
 
-        partial void AddRootCertificate(X509Certificate2? rootCertificate, ref bool transferredOwnership);
+        partial void AddRootCertificate(
+            X509Certificate2? rootCertificate,
+            ref bool transferredOwnership
+        );
+
         partial void SetNoOcspFetch(bool noOcspFetch);
 
         internal SslStreamCertificateContext Duplicate()
         {
-            return new SslStreamCertificateContext(new X509Certificate2(TargetCertificate), IntermediateCertificates, Trust);
+            return new SslStreamCertificateContext(
+                new X509Certificate2(TargetCertificate),
+                IntermediateCertificates,
+                Trust
+            );
         }
     }
 }

@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Internal.TypeSystem;
 using Internal.JitInterface;
-using Internal.Text;
 using Internal.ReadyToRunConstants;
+using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -19,14 +19,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public DelegateCtorSignature(
             TypeDesc delegateType,
             IMethodNode targetMethod,
-            MethodWithToken methodToken)
+            MethodWithToken methodToken
+        )
         {
             _delegateType = delegateType;
             _targetMethod = targetMethod;
             _methodToken = methodToken;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)delegateType.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)
+                delegateType.Context;
             compilerContext.EnsureLoadableType(delegateType);
             compilerContext.EnsureLoadableMethod(targetMethod.Method);
         }
@@ -40,14 +42,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (!relocsOnly)
             {
-                SignatureContext innerContext = builder.EmitFixup(factory, ReadyToRunFixupKind.DelegateCtor, _methodToken.Token.Module, factory.SignatureContext);
+                SignatureContext innerContext = builder.EmitFixup(
+                    factory,
+                    ReadyToRunFixupKind.DelegateCtor,
+                    _methodToken.Token.Module,
+                    factory.SignatureContext
+                );
 
                 bool needsInstantiatingStub = _targetMethod.Method.HasInstantiation;
                 if (_targetMethod.Method.IsVirtual && _targetMethod.Method.Signature.IsStatic)
                 {
                     // For static virtual methods, we always require an instantiating stub as the method may resolve to a canonical representation
                     // at runtime without us being able to detect that at compile time.
-                    needsInstantiatingStub |= (_targetMethod.Method.OwningType.HasInstantiation || _methodToken.ConstrainedType != null);
+                    needsInstantiatingStub |= (
+                        _targetMethod.Method.OwningType.HasInstantiation
+                        || _methodToken.ConstrainedType != null
+                    );
                 }
 
                 builder.EmitMethodSignature(
@@ -55,7 +65,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     enforceDefEncoding: false,
                     enforceOwningType: false,
                     innerContext,
-                    isInstantiatingStub: needsInstantiatingStub);
+                    isInstantiatingStub: needsInstantiatingStub
+                );
 
                 builder.EmitTypeSignature(_delegateType, innerContext);
             }
@@ -68,7 +79,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return new DependencyList(
                 new DependencyListEntry[]
                 {
-                    new DependencyListEntry(_targetMethod, "Delegate target method")
+                    new DependencyListEntry(_targetMethod, "Delegate target method"),
                 }
             );
         }

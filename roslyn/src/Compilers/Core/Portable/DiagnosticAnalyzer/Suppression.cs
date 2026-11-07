@@ -17,13 +17,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private Suppression(SuppressionDescriptor descriptor, Diagnostic suppressedDiagnostic)
         {
             Descriptor = descriptor ?? throw new ArgumentNullException(nameof(descriptor));
-            SuppressedDiagnostic = suppressedDiagnostic ?? throw new ArgumentNullException(nameof(suppressedDiagnostic));
+            SuppressedDiagnostic =
+                suppressedDiagnostic
+                ?? throw new ArgumentNullException(nameof(suppressedDiagnostic));
             Debug.Assert(suppressedDiagnostic.ProgrammaticSuppressionInfo == null);
 
             if (descriptor.SuppressedDiagnosticId != suppressedDiagnostic.Id)
             {
                 // Suppressed diagnostic ID '{0}' does not match suppressable ID '{1}' for the given suppression descriptor.
-                var message = string.Format(CodeAnalysisResources.InvalidDiagnosticSuppressionReported, suppressedDiagnostic.Id, descriptor.SuppressedDiagnosticId);
+                var message = string.Format(
+                    CodeAnalysisResources.InvalidDiagnosticSuppressionReported,
+                    suppressedDiagnostic.Id,
+                    descriptor.SuppressedDiagnosticId
+                );
                 throw new ArgumentException(message);
             }
         }
@@ -38,8 +44,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="suppressedDiagnostic">
         /// <see cref="Diagnostic"/> to be suppressed, which must be from <see cref="SuppressionAnalysisContext.ReportedDiagnostics"/>
         /// for the suppression context in which this suppression is being created.</param>
-        public static Suppression Create(SuppressionDescriptor descriptor, Diagnostic suppressedDiagnostic)
-            => new Suppression(descriptor, suppressedDiagnostic);
+        public static Suppression Create(
+            SuppressionDescriptor descriptor,
+            Diagnostic suppressedDiagnostic
+        ) => new Suppression(descriptor, suppressedDiagnostic);
 
         /// <summary>
         /// Descriptor for this suppression.
@@ -63,21 +71,27 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public override bool Equals(object? obj)
         {
-            return obj is Suppression suppression
-                && Equals(suppression);
+            return obj is Suppression suppression && Equals(suppression);
         }
 
         public bool Equals(Suppression other)
         {
-            return EqualityComparer<SuppressionDescriptor>.Default.Equals(Descriptor, other.Descriptor)
-                && EqualityComparer<Diagnostic>.Default.Equals(SuppressedDiagnostic, other.SuppressedDiagnostic);
+            return EqualityComparer<SuppressionDescriptor>.Default.Equals(
+                    Descriptor,
+                    other.Descriptor
+                )
+                && EqualityComparer<Diagnostic>.Default.Equals(
+                    SuppressedDiagnostic,
+                    other.SuppressedDiagnostic
+                );
         }
 
         public override int GetHashCode()
         {
             return Hash.Combine(
                 EqualityComparer<SuppressionDescriptor>.Default.GetHashCode(Descriptor),
-                EqualityComparer<Diagnostic>.Default.GetHashCode(SuppressedDiagnostic));
+                EqualityComparer<Diagnostic>.Default.GetHashCode(SuppressedDiagnostic)
+            );
         }
     }
 }

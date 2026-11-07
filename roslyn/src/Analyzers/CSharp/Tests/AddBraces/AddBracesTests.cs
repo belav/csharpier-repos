@@ -20,12 +20,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
     public partial class AddBracesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddBracesTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpAddBracesDiagnosticAnalyzer(), new CSharpAddBracesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpAddBracesDiagnosticAnalyzer(), new CSharpAddBracesCodeFixProvider());
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None)]
@@ -46,7 +45,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -72,7 +78,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -94,7 +107,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -116,7 +136,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -138,7 +165,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -160,7 +194,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -183,7 +224,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -213,7 +261,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -250,7 +305,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -273,7 +335,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -296,7 +365,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -318,7 +394,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -353,7 +436,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -372,7 +456,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -386,14 +469,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/57770")]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfWithoutBracesTopLevel(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfWithoutBracesTopLevel(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -406,14 +493,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForElseWithoutBracesButHasContextBraces(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForElseWithoutBracesButHasContextBraces(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -426,7 +517,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -441,7 +531,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -461,7 +552,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -476,14 +566,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForStandaloneElseWithoutBraces(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForStandaloneElseWithoutBraces(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -496,7 +590,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -510,14 +603,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfNestedInElseWithoutBraces(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfNestedInElseWithoutBraces(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -530,7 +627,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -545,14 +641,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext1(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext1(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -569,7 +669,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -588,14 +687,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext2(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext2(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -614,7 +717,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -635,14 +737,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext3(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext3(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -661,7 +767,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -681,14 +786,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext4(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext4(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -707,7 +816,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -727,7 +835,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
 #pragma warning disable CA1200 // Avoid using cref tags with a prefix - Remove the suppression when https://github.com/dotnet/roslyn/issues/42611 is fixed.
@@ -742,7 +851,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext5(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext5(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -761,7 +873,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -781,7 +892,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -800,7 +912,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -814,14 +925,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForMultilineForWithoutBraces1(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForMultilineForWithoutBraces1(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -835,7 +950,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -851,14 +965,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForMultilineForWithoutBraces2(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForMultilineForWithoutBraces2(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -871,7 +989,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -886,14 +1003,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForMultilineForWithoutBraces3(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForMultilineForWithoutBraces3(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -907,7 +1028,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -922,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -941,7 +1062,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -955,7 +1075,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -974,7 +1095,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -988,7 +1108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1007,7 +1128,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1022,7 +1142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1043,7 +1164,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1058,14 +1178,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForMultilineDoWhileWithoutBraces1(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForMultilineDoWhileWithoutBraces1(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1078,7 +1202,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1094,7 +1217,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1122,7 +1246,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1144,14 +1267,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForUsingWithoutBracesNestedInUsing(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForUsingWithoutBracesNestedInUsing(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1181,7 +1308,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1212,14 +1338,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForMultilineUsingWithoutBracesNestedInUsing1(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForMultilineUsingWithoutBracesNestedInUsing1(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1250,7 +1380,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1282,14 +1411,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForMultilineUsingWithoutBracesNestedInUsing2(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForMultilineUsingWithoutBracesNestedInUsing2(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1320,7 +1453,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1352,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1373,7 +1506,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1388,14 +1520,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
         [InlineData((int)PreferBracesPreference.None, false)]
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
-        public async Task FireForLockWithoutBracesNestedInLock(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForLockWithoutBracesNestedInLock(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1412,7 +1548,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -1430,7 +1565,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1454,7 +1590,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -1478,7 +1621,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -1504,7 +1654,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, (PreferBracesPreference)bracesPreference, NotificationOption2.Silent)));
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        (PreferBracesPreference)bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                )
+            );
         }
 
         [Theory]
@@ -1512,7 +1669,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task OnlyFireForIfWithIntercedingDirectiveInElseAroundIf(int bracesPreference, bool expectDiagnostic)
+        public async Task OnlyFireForIfWithIntercedingDirectiveInElseAroundIf(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1530,7 +1690,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1549,7 +1708,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1557,7 +1717,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task OnlyFireForElseWithIntercedingDirectiveInIfAroundElse(int bracesPreference, bool expectDiagnostic)
+        public async Task OnlyFireForElseWithIntercedingDirectiveInIfAroundElse(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1575,7 +1738,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1594,7 +1756,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1602,7 +1765,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task OnlyFireForElseWithIntercedingDirectiveInIf(int bracesPreference, bool expectDiagnostic)
+        public async Task OnlyFireForElseWithIntercedingDirectiveInIf(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1620,7 +1786,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1639,7 +1804,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1647,7 +1813,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task OnlyFireForIfWithIntercedingDirectiveInElse(int bracesPreference, bool expectDiagnostic)
+        public async Task OnlyFireForIfWithIntercedingDirectiveInElse(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1665,7 +1834,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1684,7 +1852,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1692,7 +1861,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task FireForIfElseWithDirectiveAroundIf(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfElseWithDirectiveAroundIf(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1712,7 +1884,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1733,7 +1904,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1741,7 +1913,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task FireForIfElseWithDirectiveAroundElse(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfElseWithDirectiveAroundElse(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1761,7 +1936,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1782,7 +1956,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1790,7 +1965,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task FireForIfWithoutIntercedingDirective(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfWithoutIntercedingDirective(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1806,7 +1984,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1823,7 +2000,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1831,7 +2009,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task FireForIfWithDirectiveAfterEmbeddedStatement(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForIfWithDirectiveAfterEmbeddedStatement(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1847,7 +2028,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1864,7 +2044,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1872,7 +2053,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, false)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task FireForInnerNestedStatementWhenDirectiveEntirelyInside(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForInnerNestedStatementWhenDirectiveEntirelyInside(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1889,7 +2073,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1907,7 +2090,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
         [Theory]
@@ -1915,7 +2099,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [InlineData((int)PreferBracesPreference.WhenMultiline, true)]
         [InlineData((int)PreferBracesPreference.Always, true)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/32480")]
-        public async Task FireForOuterNestedStatementWhenDirectiveEntirelyInside(int bracesPreference, bool expectDiagnostic)
+        public async Task FireForOuterNestedStatementWhenDirectiveEntirelyInside(
+            int bracesPreference,
+            bool expectDiagnostic
+        )
         {
             await TestAsync(
                 """
@@ -1932,7 +2119,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                     }
                 }
                 """,
-
                 """
                 #define test
                 class Program
@@ -1950,18 +2136,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
-                expectDiagnostic);
+                expectDiagnostic
+            );
         }
 
-        private async Task TestAsync(string initialMarkup, string expectedMarkup, PreferBracesPreference bracesPreference, bool expectDiagnostic)
+        private async Task TestAsync(
+            string initialMarkup,
+            string expectedMarkup,
+            PreferBracesPreference bracesPreference,
+            bool expectDiagnostic
+        )
         {
             if (expectDiagnostic)
             {
-                await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: Option(CSharpCodeStyleOptions.PreferBraces, bracesPreference, NotificationOption2.Silent));
+                await TestInRegularAndScriptAsync(
+                    initialMarkup,
+                    expectedMarkup,
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferBraces,
+                        bracesPreference,
+                        NotificationOption2.Silent
+                    )
+                );
             }
             else
             {
-                await TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferBraces, bracesPreference, NotificationOption2.Silent)));
+                await TestMissingInRegularAndScriptAsync(
+                    initialMarkup,
+                    new TestParameters(
+                        options: Option(
+                            CSharpCodeStyleOptions.PreferBraces,
+                            bracesPreference,
+                            NotificationOption2.Silent
+                        )
+                    )
+                );
             }
         }
     }

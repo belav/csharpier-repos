@@ -29,17 +29,21 @@ namespace System.Net.Http
 
         public static ConstructorInfo GetConstructor(this Type type, Type[] types)
         {
-            return type.GetTypeInfo().DeclaredConstructors
-                                     .Where(c => c.IsPublic)
-                                     .SingleOrDefault(c => c.GetParameters()
-                                                            .Select(p => p.ParameterType).ToArray().EqualTo(types));
+            return type.GetTypeInfo()
+                .DeclaredConstructors.Where(c => c.IsPublic)
+                .SingleOrDefault(c =>
+                    c.GetParameters().Select(p => p.ParameterType).ToArray().EqualTo(types)
+                );
         }
 #endif
 
         public static Type ExtractGenericInterface(this Type queryType, Type interfaceType)
         {
-            Func<Type, bool> matchesInterface = t => t.IsGenericType() && t.GetGenericTypeDefinition() == interfaceType;
-            return (matchesInterface(queryType)) ? queryType : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
+            Func<Type, bool> matchesInterface = t =>
+                t.IsGenericType() && t.GetGenericTypeDefinition() == interfaceType;
+            return (matchesInterface(queryType))
+                ? queryType
+                : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
         }
 
 #if NETSTANDARD1_3

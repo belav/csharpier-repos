@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,14 +26,16 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	public enum RichTextBoxScrollBars {
-		None		= 0,
-		Horizontal	= 1,
-		Vertical	= 2,
-		Both		= 3,
-		ForcedHorizontal= 17,
-		ForcedVertical	= 18,
-		ForcedBoth	= 19
-	}
+namespace System.Windows.Forms
+{
+    public enum RichTextBoxScrollBars
+    {
+        None = 0,
+        Horizontal = 1,
+        Vertical = 2,
+        Both = 3,
+        ForcedHorizontal = 17,
+        ForcedVertical = 18,
+        ForcedBoth = 19,
+    }
 }

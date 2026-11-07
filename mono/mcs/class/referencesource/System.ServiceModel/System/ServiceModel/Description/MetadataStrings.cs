@@ -8,7 +8,7 @@ namespace System.ServiceModel.Description
         public static class MetadataExchangeStrings
         {
             /*
-             * This file has a counterpart XmlStrings.cs in the svcutil codebase. 
+             * This file has a counterpart XmlStrings.cs in the svcutil codebase.
              * When making chnages here, please consider whether they should be made there as well
              */
             public const string Prefix = "wsx";
@@ -18,15 +18,15 @@ namespace System.ServiceModel.Description
             public const string HttpsBindingName = "MetadataExchangeHttpsBinding";
             public const string TcpBindingName = "MetadataExchangeTcpBinding";
             public const string NamedPipeBindingName = "MetadataExchangeNamedPipeBinding";
-            public const string BindingNamespace = "http://schemas.microsoft.com/ws/2005/02/mex/bindings";
-    
+            public const string BindingNamespace =
+                "http://schemas.microsoft.com/ws/2005/02/mex/bindings";
+
             public const string Metadata = "Metadata";
             public const string MetadataSection = "MetadataSection";
             public const string Dialect = "Dialect";
             public const string Identifier = "Identifier";
             public const string MetadataReference = "MetadataReference";
             public const string Location = "Location";
-
         }
 
         public static class WSTransfer
@@ -44,7 +44,7 @@ namespace System.ServiceModel.Description
             public const string Definitions = "definitions";
             public const string ArrayType = "arrayType";
         }
-        
+
         public static class XmlSchema
         {
             public const string Schema = "schema";
@@ -59,7 +59,6 @@ namespace System.ServiceModel.Description
             {
                 public const string Id = "id";
             }
-                
         }
 
         public static class Addressing200408
@@ -114,9 +113,11 @@ namespace System.ServiceModel.Description
         public static class Wsu
         {
             public const string Prefix = "wsu";
-            public const string NamespaceUri = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+            public const string NamespaceUri =
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+
             public static class Attributes
-            {    
+            {
                 public const string Id = "Id";
             }
         }
@@ -134,6 +135,7 @@ namespace System.ServiceModel.Description
                 public const string URI = "URI";
                 public const string TargetNamespace = "TargetNamespace";
             }
+
             public static class Elements
             {
                 public const string PolicyReference = "PolicyReference";
@@ -142,6 +144,5 @@ namespace System.ServiceModel.Description
                 public const string Policy = "Policy";
             }
         }
-
     }
 }

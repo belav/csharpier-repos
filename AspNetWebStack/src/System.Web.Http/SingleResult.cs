@@ -10,7 +10,9 @@ namespace System.Web.Http
     /// Represents an <see cref="IQueryable"/> containing zero or one entities. Use together with an
     /// <c>[EnableQuery]</c> from the System.Web.Http.OData or System.Web.OData namespace.
     /// </summary>
-    [TypeForwardedFrom("System.Web.Http.OData, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.Web.Http.OData, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public abstract class SingleResult
     {
         /// <summary>

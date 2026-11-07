@@ -10,9 +10,7 @@ namespace System.Activities.Tracking
     {
         IDictionary<string, string> queryAnnotations;
 
-        protected TrackingQuery()
-        {
-        }
+        protected TrackingQuery() { }
 
         public IDictionary<string, string> QueryAnnotations
         {
@@ -28,10 +26,7 @@ namespace System.Activities.Tracking
 
         internal bool HasAnnotations
         {
-            get
-            {
-                return this.queryAnnotations != null && this.queryAnnotations.Count > 0;
-            }
+            get { return this.queryAnnotations != null && this.queryAnnotations.Count > 0; }
         }
     }
 }

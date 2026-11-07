@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         [Fact]
         public async Task GenerateConstructorSimpleResult()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -26,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -35,8 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     public C
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -48,14 +45,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorTypedPrivateWithoutIntentData()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -63,8 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -72,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     private C
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -85,14 +85,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorTypedPrivateWithIntentData()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -100,8 +105,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -109,8 +113,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     private C
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -125,14 +128,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             // lang=json
             var intentData = @"{ ""accessibility"": ""Private""}";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, expectedText, intentData: intentData).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    expectedText,
+                    intentData: intentData
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorTypedPrivateProtectedWithIntentData()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -140,8 +149,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -149,8 +157,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     private protected C
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -165,21 +172,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             // lang=json
             var intentData = @"{ ""accessibility"": ""ProtectedAndInternal""}";
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, expectedText, intentData: intentData).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    expectedText,
+                    intentData: intentData
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithFieldsInPartial()
         {
-            var initialText =
-                """
+            var initialText = """
                 partial class C
                 {
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 partial class C
                 {
                     public C
@@ -188,14 +200,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var additionalDocuments = new string[]
             {
                 """
-                partial class C
-                {
-                    private readonly int _someInt;
-                }
-                """
+                    partial class C
+                    {
+                        private readonly int _someInt;
+                    }
+                    """,
             };
-            var expectedText =
-                """
+            var expectedText = """
                 partial class C
                 {
                     public C(int someInt)
@@ -205,14 +216,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, additionalDocuments, [expectedText]).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    additionalDocuments,
+                    [expectedText]
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithReferenceType()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly object _someObject;
@@ -220,8 +237,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly object _someObject;
@@ -229,8 +245,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     public C
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly object _someObject;
@@ -242,14 +257,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithExpressionBodyOption()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -257,8 +277,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     {|priorSelection:|}
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -266,8 +285,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     public C
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -276,11 +294,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.GenerateConstructor, initialText, currentText, expectedText,
-                options: new OptionsCollection(LanguageNames.CSharp)
-                {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement }
-                }).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.GenerateConstructor,
+                    initialText,
+                    currentText,
+                    expectedText,
+                    options: new OptionsCollection(LanguageNames.CSharp)
+                    {
+                        {
+                            CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                            CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                        },
+                    }
+                )
+                .ConfigureAwait(false);
         }
     }
 }

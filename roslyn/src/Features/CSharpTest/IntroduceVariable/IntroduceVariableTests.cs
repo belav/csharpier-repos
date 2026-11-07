@@ -21,30 +21,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Introd
 [Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceVariable)]
 public class IntroduceVariableTests : AbstractCSharpCodeActionTest
 {
-    protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-        => new IntroduceVariableCodeRefactoringProvider();
+    protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+        Workspace workspace,
+        TestParameters parameters
+    ) => new IntroduceVariableCodeRefactoringProvider();
 
-    protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-        => GetNestedActions(actions);
+    protected override ImmutableArray<CodeAction> MassageActions(
+        ImmutableArray<CodeAction> actions
+    ) => GetNestedActions(actions);
 
-    private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion);
+    private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(
+        true,
+        NotificationOption2.Suggestion
+    );
 
     // specify all options explicitly to override defaults.
-    private OptionsCollection ImplicitTypingEverywhere()
-        => new(GetLanguage())
+    private OptionsCollection ImplicitTypingEverywhere() =>
+        new(GetLanguage())
         {
             { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
             { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
             { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
         };
 
-    // Workaround to mimic awaitable `ValueTask` type from the runtime 
+    // Workaround to mimic awaitable `ValueTask` type from the runtime
     private const string ValueTaskDeclaration = """
         namespace System.Runtime.CompilerServices
         {
             public class AsyncMethodBuilderAttribute : System.Attribute { }
         }
-        
+
         namespace System.Threading.Tasks
         {
             [System.Runtime.CompilerServices.AsyncMethodBuilder]
@@ -76,7 +82,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                     M(action1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -103,7 +110,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                     var x = v + 3;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -119,7 +127,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                     var x = [||]a;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -146,7 +155,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                     M(value);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -174,7 +184,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 2);
+            index: 2
+        );
     }
 
     [Fact]
@@ -202,14 +213,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 3);
+            index: 3
+        );
     }
 
     [Fact]
     public async Task TestMethodFix3()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 void Goo()
@@ -220,8 +231,7 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 void Goo()
@@ -239,8 +249,7 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact]
     public async Task TestMethodFix4()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 void Goo()
@@ -251,8 +260,7 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 void Goo()
@@ -270,8 +278,7 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact]
     public async Task TestThrowExpression()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 void M(bool b)
@@ -306,14 +313,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 1);
+            index: 1
+        );
     }
 
     [Fact]
     public async Task TestThrowStatement()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 void M()
@@ -328,16 +335,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact]
     public async Task TestFieldFix1()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 int i = ([|1 + 1|]) + (1 + 1);
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V|} = 1 + 1;
@@ -351,16 +356,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact]
     public async Task TestFieldFix2()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 int i = ([|1 + 1|]) + (1 + 1);
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V|} = 1 + 1;
@@ -374,16 +377,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21747")]
     public async Task TestTriviaFieldFix1()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 int i = (/* CommentLeading */ [|1 + 1|] /* CommentTrailing */) + (1 + 1);
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V|} = 1 + 1;
@@ -397,16 +398,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21747")]
     public async Task TestTriviaFieldFix2()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 int i = (/* CommentLeading */ [|1 + /*CommentEmbedded*/ 1|] /* CommentTrailing */) + (1 + 1);
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V|} = 1 + /*CommentEmbedded*/ 1;
@@ -420,16 +419,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact]
     public async Task TestConstFieldFix1()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 const int i = ([|1 + 1|]) + (1 + 1);
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V|} = 1 + 1;
@@ -443,16 +440,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     [Fact]
     public async Task TestConstFieldFix2()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 const int i = ([|1 + 1|]) + (1 + 1);
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V|} = 1 + 1;
@@ -485,7 +480,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 0);
+            index: 0
+        );
     }
 
     [Fact]
@@ -510,7 +506,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 1);
+            index: 1
+        );
     }
 
     [Fact]
@@ -535,7 +532,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 0);
+            index: 0
+        );
     }
 
     [Fact]
@@ -560,7 +558,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 1);
+            index: 1
+        );
     }
 
     [Fact]
@@ -587,7 +586,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 0);
+            index: 0
+        );
     }
 
     [Fact]
@@ -614,7 +614,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 1);
+            index: 1
+        );
     }
 
     [Fact]
@@ -644,14 +645,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 2);
+            index: 2
+        );
     }
 
     [Fact]
     public async Task TestFieldExistingName1()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 int V;
@@ -660,8 +661,7 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private const int {|Rename:V2|} = 1 + 1;
@@ -671,10 +671,7 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
             }
             """;
 
-        await TestInRegularAndScriptAsync(
-            code,
-            expected,
-            index: 0);
+        await TestInRegularAndScriptAsync(code, expected, index: 0);
     }
 
     [Fact]
@@ -707,7 +704,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
             }
             """,
             index: 0,
-            options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
@@ -739,7 +737,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 0);
+            index: 0
+        );
     }
 
     [Fact]
@@ -764,7 +763,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-            index: 0);
+            index: 0
+        );
     }
 
     [Fact]
@@ -804,7 +804,8 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
@@ -843,7 +844,8 @@ options: ImplicitTypingEverywhere());
                     d.Invoke(v);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -891,7 +893,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
@@ -938,7 +941,8 @@ options: ImplicitTypingEverywhere());
                     G<int>.Add(@class);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -980,7 +984,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
@@ -1021,7 +1026,8 @@ options: ImplicitTypingEverywhere());
                     G<int>.Add(@class);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540078")]
@@ -1040,7 +1046,8 @@ options: ImplicitTypingEverywhere());
                 private const int {|Rename:V|} = 10;
                 int[] array = new int[V];
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540079")]
@@ -1066,7 +1073,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540468")]
@@ -1100,7 +1108,8 @@ index: 2);
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540468")]
@@ -1120,7 +1129,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-count: 2);
+            count: 2
+        );
     }
 
     [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/552389")]
@@ -1141,7 +1151,8 @@ count: 2);
                 private const int p = 10;
                 fixed int buffer[p];
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540486")]
@@ -1167,7 +1178,8 @@ count: 2);
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact]
@@ -1193,7 +1205,8 @@ index: 2);
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542699")]
@@ -1229,7 +1242,8 @@ index: 2);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542781")]
@@ -1246,7 +1260,8 @@ index: 1);
                     i = 3;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542780")]
@@ -1283,7 +1298,8 @@ index: 1);
                                 select v;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542780")]
@@ -1322,7 +1338,8 @@ index: 1);
                                 select i + j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1364,7 +1381,8 @@ index: 1);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact]
@@ -1406,7 +1424,8 @@ index: 1);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact]
@@ -1457,7 +1476,8 @@ index: 1);
                                 select i + j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1509,7 +1529,8 @@ index: 1);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact]
@@ -1560,7 +1581,8 @@ index: 1);
                                 select i + j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1612,7 +1634,8 @@ index: 1);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact, WorkItem(10742, "DevDiv_Projects/Roslyn")]
@@ -1627,7 +1650,8 @@ index: 1);
                     var a = new { [|A = 0|] };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem(10743, "DevDiv_Projects/Roslyn")]
@@ -1652,7 +1676,8 @@ index: 1);
                     var a = value;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543477")]
@@ -1680,7 +1705,8 @@ index: 1);
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543832")]
@@ -1700,7 +1726,8 @@ options: ImplicitTypingEverywhere());
                     return default(R);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543941")]
@@ -1725,7 +1752,8 @@ options: ImplicitTypingEverywhere());
                     WriteLine(value);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544099")]
@@ -1741,7 +1769,8 @@ options: ImplicitTypingEverywhere());
                 [DllImport("user32.dll", [|CharSet|] = CharSet.Auto)]
                 public static extern IntPtr FindWindow(string className, string windowTitle);
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544162")]
@@ -1757,7 +1786,8 @@ options: ImplicitTypingEverywhere());
                 [DllImport("user32.dll", CharSet = CharSet.[|Auto|])]
                 public static extern IntPtr FindWindow(string className, string windowTitle);
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544209")]
@@ -1778,7 +1808,8 @@ options: ImplicitTypingEverywhere());
             class Goo
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544264")]
@@ -1794,7 +1825,8 @@ options: ImplicitTypingEverywhere());
                     [|x[1]|] = 2;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544577")]
@@ -1810,7 +1842,8 @@ options: ImplicitTypingEverywhere());
             {
                 static Expression<Func<int?, char?>> e1 = c => [|null|];
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544915")]
@@ -1827,7 +1860,8 @@ options: ImplicitTypingEverywhere());
                     int[,] array2Da = new [|int[1, 2]|] { { 1, 2 } };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544610")]
@@ -1886,7 +1920,9 @@ options: ImplicitTypingEverywhere());
 
                 private const int {|Rename:V|} = 1 + 1;
             }
-            """, parameters: new TestParameters(Options.Regular));
+            """,
+            parameters: new TestParameters(Options.Regular)
+        );
     }
 
     [Fact]
@@ -1919,7 +1955,8 @@ options: ImplicitTypingEverywhere());
             #line hidden
             }
             #line default
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1934,7 +1971,9 @@ options: ImplicitTypingEverywhere());
             #line hidden
             }
             #line default
-            """, new TestParameters(Options.Regular));
+            """,
+            new TestParameters(Options.Regular)
+        );
     }
 
     [Fact]
@@ -1948,7 +1987,9 @@ options: ImplicitTypingEverywhere());
             #line hidden
             }
             #line default
-            """, new TestParameters(Options.Regular));
+            """,
+            new TestParameters(Options.Regular)
+        );
     }
 
     [Fact]
@@ -1965,7 +2006,9 @@ options: ImplicitTypingEverywhere());
             #line hidden
             }
             #line default
-            """, new TestParameters(Options.Regular));
+            """,
+            new TestParameters(Options.Regular)
+        );
     }
 
     [Fact]
@@ -1982,7 +2025,9 @@ options: ImplicitTypingEverywhere());
             #line hidden
             }
             #line default
-            """, new TestParameters(Options.Regular));
+            """,
+            new TestParameters(Options.Regular)
+        );
     }
 
     [Fact]
@@ -2003,7 +2048,9 @@ options: ImplicitTypingEverywhere());
                             select [|x + x|];
                 }
             }
-            """, new TestParameters(Options.Regular));
+            """,
+            new TestParameters(Options.Regular)
+        );
     }
 
     [Fact]
@@ -2047,7 +2094,8 @@ options: ImplicitTypingEverywhere());
             }
             #line default
             """,
-parseOptions: Options.Regular);
+            parseOptions: Options.Regular
+        );
     }
 
     [Fact]
@@ -2062,7 +2110,8 @@ parseOptions: Options.Regular);
                     [|System|].Console.WriteLine(4);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2077,7 +2126,8 @@ parseOptions: Options.Regular);
                     [|System.Console|].WriteLine(4);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2092,7 +2142,8 @@ parseOptions: Options.Regular);
                     [|base|].ToString();
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2110,14 +2161,14 @@ parseOptions: Options.Regular);
             #line hidden
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestVenusGeneration2()
     {
-        var code =
-            """
+        var code = """
             class Program
             {
                 void Main ( )
@@ -2133,9 +2184,13 @@ parseOptions: Options.Regular);
             }
             """;
 
-        await TestExactActionSetOfferedAsync(code, new[] { string.Format(FeaturesResources.Introduce_local_constant_for_0, "5") });
+        await TestExactActionSetOfferedAsync(
+            code,
+            new[] { string.Format(FeaturesResources.Introduce_local_constant_for_0, "5") }
+        );
 
-        await TestInRegularAndScriptAsync(code,
+        await TestInRegularAndScriptAsync(
+            code,
             """
             class Program
             {
@@ -2151,14 +2206,14 @@ parseOptions: Options.Regular);
             #line hidden
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestVenusGeneration3()
     {
-        var code =
-            """
+        var code = """
             class Program
             {
             #line 1 "goo"
@@ -2174,8 +2229,17 @@ parseOptions: Options.Regular);
             }
             """;
 
-        await TestExactActionSetOfferedAsync(code,
-            new[] { string.Format(FeaturesResources.Introduce_local_constant_for_0, "5"), string.Format(FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0, "5") });
+        await TestExactActionSetOfferedAsync(
+            code,
+            new[]
+            {
+                string.Format(FeaturesResources.Introduce_local_constant_for_0, "5"),
+                string.Format(
+                    FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0,
+                    "5"
+                ),
+            }
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529795")]
@@ -2190,7 +2254,8 @@ parseOptions: Options.Regular);
                     long x = -[|9223372036854775808|];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546091")]
@@ -2202,7 +2267,8 @@ parseOptions: Options.Regular);
             public interface I
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546095")]
@@ -2216,7 +2282,8 @@ parseOptions: Options.Regular);
             public class Button
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2242,7 +2309,8 @@ parseOptions: Options.Regular);
                     var s2 = V + "World";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2269,7 +2337,8 @@ parseOptions: Options.Regular);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2295,7 +2364,8 @@ index: 1);
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2321,7 +2391,8 @@ index: 2);
                 }
             }
             """,
-index: 3);
+            index: 3
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2348,7 +2419,8 @@ index: 3);
                     var s2 = V;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2376,7 +2448,8 @@ index: 3);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2405,7 +2478,8 @@ index: 1);
                     var s2 = V;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2435,7 +2509,8 @@ index: 1);
                 }
             }
             """,
-index: 1);
+            index: 1
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2465,7 +2540,8 @@ index: 1);
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530109")]
@@ -2495,7 +2571,8 @@ index: 2);
                 }
             }
             """,
-index: 3);
+            index: 3
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/606347")]
@@ -2522,7 +2599,6 @@ index: 3);
                 }
             }
             """,
-
             """
             using System;
 
@@ -2543,8 +2619,8 @@ index: 3);
                 }
             }
             """,
-
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/606347")]
@@ -2571,7 +2647,6 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-
             """
             using System;
 
@@ -2591,10 +2666,15 @@ options: ImplicitTypingEverywhere());
                     Outer(y => Inner(x => { string {|Rename:v|} = Goo(x); v.ToString(); }, y), (object)null);
                 }
             }
-            """);
+            """
+        );
     }
 
-    [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/606347"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/714632")]
+    [
+        Fact,
+        WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/606347"),
+        WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/714632")
+    ]
     public async Task InsertNeededCast2()
     {
         await TestInRegularAndScriptAsync(
@@ -2613,7 +2693,6 @@ options: ImplicitTypingEverywhere());
                 static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
             }
             """,
-
             """
             using System;
 
@@ -2629,7 +2708,8 @@ options: ImplicitTypingEverywhere());
                 static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
                 static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546512")]
@@ -2667,7 +2747,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact]
@@ -2709,7 +2790,8 @@ index: 2);
                 }
             }
             """,
-index: 3);
+            index: 3
+        );
     }
 
     [Fact]
@@ -2751,7 +2833,8 @@ index: 3);
                 }
             }
             """,
-index: 3);
+            index: 3
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530480")]
@@ -2784,7 +2867,8 @@ index: 3);
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530480")]
@@ -2817,7 +2901,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530480")]
@@ -2850,7 +2935,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530480")]
@@ -2882,7 +2968,8 @@ options: ImplicitTypingEverywhere());
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530480")]
@@ -2914,7 +3001,8 @@ options: ImplicitTypingEverywhere());
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530721")]
@@ -2945,7 +3033,8 @@ options: ImplicitTypingEverywhere());
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530919")]
@@ -2975,7 +3064,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530919")]
@@ -3004,7 +3094,8 @@ options: ImplicitTypingEverywhere());
                     v.GetValueOrDefault();
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/830885")]
@@ -3036,7 +3127,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/655498")]
@@ -3056,7 +3148,6 @@ options: ImplicitTypingEverywhere());
                 static Action Bar;
             }
             """,
-
             """
             using System;
 
@@ -3070,7 +3161,8 @@ options: ImplicitTypingEverywhere());
 
                 static Action Bar;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/682683")]
@@ -3088,7 +3180,6 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-
             """
             using System;
 
@@ -3101,7 +3192,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-index: 2);
+            index: 2
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/828108")]
@@ -3123,7 +3215,6 @@ index: 2);
                 }
             }
             """,
-
             """
             using System;
             using System.Collections.Generic;
@@ -3140,7 +3231,8 @@ index: 2);
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/884961")]
@@ -3170,7 +3262,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/884961")]
@@ -3199,7 +3292,8 @@ options: ImplicitTypingEverywhere());
                     var l = new List<int>() { tickCount };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/854662")]
@@ -3233,7 +3327,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/884961")]
@@ -3263,7 +3358,8 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-options: ImplicitTypingEverywhere());
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/884961")]
@@ -3292,7 +3388,8 @@ options: ImplicitTypingEverywhere());
                     var a = new int[] { tickCount };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1022447")]
@@ -3330,15 +3427,15 @@ options: ImplicitTypingEverywhere());
                 }
             }
             """,
-index: 1,
-options: ImplicitTypingEverywhere());
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939259")]
     public async Task TestIntroduceLocalWithTriviaInMultiLineStatements()
     {
-        var code =
-"""
+        var code = """
 class C
 {
     void Goo()
@@ -3350,8 +3447,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 class C
 {
     void Goo()
@@ -3370,8 +3466,7 @@ class C
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939259")]
     public async Task TestIntroduceLocalWithTriviaInMultiLineStatements2()
     {
-        var code =
-"""
+        var code = """
 class C
 {
     void Goo()
@@ -3383,8 +3478,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 class C
 {
     void Goo()
@@ -3403,8 +3497,7 @@ class C
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064803")]
     public async Task TestIntroduceLocalInStringInterpolation()
     {
-        var code =
-"""
+        var code = """
 class C
 {
     void Goo()
@@ -3414,8 +3507,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 class C
 {
     void Goo()
@@ -3432,7 +3524,8 @@ class C
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1037057")]
     public async Task TestIntroduceLocalWithBlankLine()
     {
-        await TestInRegularAndScriptAsync("""
+        await TestInRegularAndScriptAsync(
+            """
             class C
             {
                 void M()
@@ -3443,7 +3536,8 @@ class C
                     int y = [|(x + 5)|] * (x + 5);
                 }
             }
-            """, """
+            """,
+            """
             class C
             {
                 void M()
@@ -3455,13 +3549,16 @@ class C
                     int y = v * (x + 5);
                 }
             }
-            """, options: ImplicitTypingEverywhere());
+            """,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
     public async Task TestIntroduceLocalWithBlankLine_AllOccurencesMultiStatement()
     {
-        await TestInRegularAndScriptAsync("""
+        await TestInRegularAndScriptAsync(
+            """
             class C
             {
                 void M()
@@ -3473,7 +3570,8 @@ class C
                     int z = (x + 5);
                 }
             }
-            """, """
+            """,
+            """
             class C
             {
                 void M()
@@ -3486,78 +3584,87 @@ class C
                     int z = v;
                 }
             }
-            """, options: ImplicitTypingEverywhere(), index: 1);
+            """,
+            options: ImplicitTypingEverywhere(),
+            index: 1
+        );
     }
 
     [Fact]
-    public Task TestIntroduceLocal_NullableType_FlowStateNonNull()
-    => TestInRegularAndScriptAsync("""
-        #nullable enable
+    public Task TestIntroduceLocal_NullableType_FlowStateNonNull() =>
+        TestInRegularAndScriptAsync(
+            """
+            #nullable enable
 
-        class C
-        {
-            void M()
+            class C
             {
-                string? s = string.Empty;
-                M2([|s|]);
-            }
+                void M()
+                {
+                    string? s = string.Empty;
+                    M2([|s|]);
+                }
 
-            void M2(string? s)
-            {
+                void M2(string? s)
+                {
+                }
             }
-        }
-        """, """
-        #nullable enable
+            """,
+            """
+            #nullable enable
 
-        class C
-        {
-            void M()
+            class C
             {
-                string? s = string.Empty;
-                string {|Rename:s1|} = s;
-                M2(s1);
-            }
+                void M()
+                {
+                    string? s = string.Empty;
+                    string {|Rename:s1|} = s;
+                    M2(s1);
+                }
 
-            void M2(string? s)
-            {
+                void M2(string? s)
+                {
+                }
             }
-        }
-        """);
+            """
+        );
 
     [Fact]
-    public Task TestIntroduceLocal_NullableType_FlowStateNull()
-    => TestInRegularAndScriptAsync("""
-        #nullable enable
+    public Task TestIntroduceLocal_NullableType_FlowStateNull() =>
+        TestInRegularAndScriptAsync(
+            """
+            #nullable enable
 
-        class C
-        {
-            void M()
+            class C
             {
-                string? s = null;
-                M2([|s|]);
-            }
+                void M()
+                {
+                    string? s = null;
+                    M2([|s|]);
+                }
 
-            void M2(string? s)
-            {
+                void M2(string? s)
+                {
+                }
             }
-        }
-        """, """
-        #nullable enable
+            """,
+            """
+            #nullable enable
 
-        class C
-        {
-            void M()
+            class C
             {
-                string? s = null;
-                string? {|Rename:s1|} = s;
-                M2(s1);
-            }
+                void M()
+                {
+                    string? s = null;
+                    string? {|Rename:s1|} = s;
+                    M2(s1);
+                }
 
-            void M2(string? s)
-            {
+                void M2(string? s)
+                {
+                }
             }
-        }
-        """);
+            """
+        );
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1065661")]
     public async Task TestIntroduceVariableTextDoesntSpanLines1()
@@ -3575,10 +3682,14 @@ class C
                 }
             }
             """,
-string.Format(FeaturesResources.Introduce_local_constant_for_0, """
+            string.Format(
+                FeaturesResources.Introduce_local_constant_for_0,
+                """
 @"a b c"
-"""),
-index: 2);
+"""
+            ),
+            index: 2
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1065661")]
@@ -3597,16 +3708,19 @@ index: 2);
                 }
             }
             """,
-string.Format(FeaturesResources.Introduce_constant_for_0, """
+            string.Format(
+                FeaturesResources.Introduce_constant_for_0,
+                """
 $@"a b c"
-"""));
+"""
+            )
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097147")]
     public async Task TestSmartNameForNullablesInConditionalAccessExpressionContext()
     {
-        var code =
-"""
+        var code = """
 using System;
 class C
 {
@@ -3617,8 +3731,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class C
 {
@@ -3636,8 +3749,7 @@ class C
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097147")]
     public async Task TestSmartNameForNullablesInConditionalAccessExpressionContext2()
     {
-        var code =
-"""
+        var code = """
 using System;
 class C
 {
@@ -3648,8 +3760,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class C
 {
@@ -3667,8 +3778,7 @@ class C
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097147")]
     public async Task TestSmartNameForNullablesInConditionalAccessExpressionContext3()
     {
-        var code =
-"""
+        var code = """
 using System;
 class Program
 {
@@ -3688,8 +3798,7 @@ class B
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class Program
 {
@@ -3716,8 +3825,7 @@ class B
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097147")]
     public async Task TestSmartNameForNullablesInConditionalAccessExpressionContext4()
     {
-        var code =
-"""
+        var code = """
 using System;
 class Program
 {
@@ -3738,8 +3846,7 @@ class B
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class Program
 {
@@ -3767,8 +3874,7 @@ class B
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceFieldInExpressionBodiedMethod()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3777,8 +3883,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -3794,8 +3899,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceLocalInExpressionBodiedNonVoidMethod()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3804,8 +3908,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -3824,8 +3927,7 @@ class T
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31012")]
     public async Task TestIntroduceLocalInArgumentList()
     {
-        var code =
-            """
+        var code = """
             using System;
             public interface IResolver { int Resolve(); }
             public class Test
@@ -3838,8 +3940,7 @@ class T
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             using System;
             public interface IResolver { int Resolve(); }
             public class Test
@@ -3862,8 +3963,7 @@ class T
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24807")]
     public async Task TestIntroduceLocalInExpressionBodiedVoidMethod()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3872,8 +3972,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -3892,8 +3991,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedConstructor()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3902,8 +4000,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -3919,8 +4016,7 @@ class T
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24807")]
     public async Task TestIntroduceLocalInExpressionBodiedConstructor()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3929,8 +4025,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -3949,8 +4044,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedDestructor()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3959,8 +4053,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -3976,8 +4069,7 @@ class T
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24807")]
     public async Task TestIntroduceLocalInExpressionBodiedDestructor()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -3986,8 +4078,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4006,8 +4097,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceFieldInExpressionBodiedOperator()
     {
-        var code =
-"""
+        var code = """
 using System;
 class Complex
 {
@@ -4021,8 +4111,7 @@ class Complex
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class Complex
 {
@@ -4043,8 +4132,7 @@ class Complex
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceLocalInExpressionBodiedOperator()
     {
-        var code =
-"""
+        var code = """
 using System;
 class Complex
 {
@@ -4058,8 +4146,7 @@ class Complex
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class Complex
 {
@@ -4083,8 +4170,7 @@ class Complex
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceFieldInExpressionBodiedConversionOperator()
     {
-        var code =
-"""
+        var code = """
 using System;
 public struct DBBool
 {
@@ -4100,8 +4186,7 @@ public struct DBBool
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 public struct DBBool
 {
@@ -4124,8 +4209,7 @@ public struct DBBool
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedConversionOperator()
     {
-        var code =
-"""
+        var code = """
 using System;
 public struct DBBool
 {
@@ -4141,8 +4225,7 @@ public struct DBBool
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 public struct DBBool
 {
@@ -4168,8 +4251,7 @@ public struct DBBool
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceFieldInExpressionBodiedProperty()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4177,8 +4259,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4194,8 +4275,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceLocalInExpressionBodiedProperty()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4203,8 +4283,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4225,8 +4304,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceFieldInExpressionBodiedIndexer()
     {
-        var code =
-"""
+        var code = """
 using System;
 class SampleCollection<T>
 {
@@ -4235,8 +4313,7 @@ class SampleCollection<T>
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class SampleCollection<T>
 {
@@ -4252,8 +4329,7 @@ class SampleCollection<T>
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceLocalInExpressionBodiedIndexer()
     {
-        var code =
-"""
+        var code = """
 using System;
 class SampleCollection<T>
 {
@@ -4262,8 +4338,7 @@ class SampleCollection<T>
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class SampleCollection<T>
 {
@@ -4285,8 +4360,7 @@ class SampleCollection<T>
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedPropertyGetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4297,8 +4371,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4317,8 +4390,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedPropertyGetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4329,8 +4401,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4351,8 +4422,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedPropertySetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4363,8 +4433,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4383,8 +4452,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedPropertySetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4395,8 +4463,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4417,8 +4484,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedIndexerGetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4429,8 +4495,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4449,8 +4514,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedIndexerGetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4461,8 +4525,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4483,8 +4546,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedIndexerSetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4495,8 +4557,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4515,8 +4576,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedIndexerSetter()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4527,8 +4587,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4549,8 +4608,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedEventAdder()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4562,8 +4620,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4583,8 +4640,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedEventAdder()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4596,8 +4652,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4619,8 +4674,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedEventRemover()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4632,8 +4686,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4653,8 +4706,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedEventRemover()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4666,8 +4718,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4689,8 +4740,7 @@ class T
     [Fact]
     public async Task TestIntroduceFieldInExpressionBodiedLocalFunction()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4701,8 +4751,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4721,8 +4770,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedNonVoidLocalFunction()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4733,8 +4781,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4755,8 +4802,7 @@ class T
     [Fact]
     public async Task TestIntroduceLocalInExpressionBodiedVoidLocalFunction()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4767,8 +4813,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4789,8 +4834,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestTrailingTriviaOnExpressionBodiedMethodRewrites()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4801,8 +4845,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4823,8 +4866,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestLeadingTriviaOnExpressionBodiedMethodRewrites()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4833,8 +4875,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4853,8 +4894,7 @@ class T
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestTriviaAroundArrowTokenInExpressionBodiedMemberSyntax()
     {
-        var code =
-"""
+        var code = """
 using System;
 class T
 {
@@ -4863,8 +4903,7 @@ class T
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class T
 {
@@ -4884,8 +4923,7 @@ class T
     [WorkItem("http://github.com/dotnet/roslyn/issues/971")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithBlockBodiedAnonymousMethodExpression()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -4896,8 +4934,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -4916,8 +4953,7 @@ class TestClass
     [WorkItem("http://github.com/dotnet/roslyn/issues/971")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithSingleLineBlockBodiedAnonymousMethodExpression()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -4925,8 +4961,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -4941,8 +4976,7 @@ class TestClass
     [WorkItem("http://github.com/dotnet/roslyn/issues/971")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithBlockBodiedSimpleLambdaExpression()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -4953,8 +4987,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -4972,8 +5005,7 @@ class TestClass
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithExpressionBodiedSimpleLambdaExpression()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -4981,8 +5013,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5001,8 +5032,7 @@ class TestClass
     [WorkItem("http://github.com/dotnet/roslyn/issues/971")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithBlockBodiedParenthesizedLambdaExpression()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -5013,8 +5043,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5032,8 +5061,7 @@ class TestClass
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/528")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithExpressionBodiedParenthesizedLambdaExpression()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -5041,8 +5069,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5061,8 +5088,7 @@ class TestClass
     [WorkItem("http://github.com/dotnet/roslyn/issues/971")]
     public async Task TestIntroduceLocalInExpressionBodiedMethodWithBlockBodiedAnonymousMethodExpressionInMethodArgs()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -5073,8 +5099,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5092,8 +5117,7 @@ class TestClass
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/976")]
     public async Task TestNoConstantForInterpolatedStrings()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -5104,8 +5128,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5123,8 +5146,7 @@ class TestClass
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/976")]
     public async Task TestConstantForInterpolatedStrings()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -5136,8 +5158,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5151,14 +5172,18 @@ class TestClass
 }
 """;
 
-        await TestInRegularAndScriptAsync(code, expected, index: 1, options: ImplicitTypingEverywhere());
+        await TestInRegularAndScriptAsync(
+            code,
+            expected,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
     public async Task TestConstantForInterpolatedStringsNested()
     {
-        var code =
-            """
+        var code = """
             using System;
             class TestClass
             {
@@ -5170,8 +5195,7 @@ class TestClass
             }
             """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5185,14 +5209,18 @@ class TestClass
 }
 """;
 
-        await TestInRegularAndScriptAsync(code, expected, index: 1, options: ImplicitTypingEverywhere());
+        await TestInRegularAndScriptAsync(
+            code,
+            expected,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact]
     public async Task TestConstantForInterpolatedStringsInvalid()
     {
-        var code =
-"""
+        var code = """
 using System;
 class TestClass
 {
@@ -5204,8 +5232,7 @@ class TestClass
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class TestClass
 {
@@ -5218,7 +5245,12 @@ class TestClass
 }
 """;
 
-        await TestInRegularAndScriptAsync(code, expected, index: 1, options: ImplicitTypingEverywhere());
+        await TestInRegularAndScriptAsync(
+            code,
+            expected,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/909152")]
@@ -5242,14 +5274,14 @@ class TestClass
                     C2 c2 = null;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1130990")]
     public async Task InParentConditionalAccessExpressions()
     {
-        var code =
-"""
+        var code = """
 using System;
 class C
 {
@@ -5261,8 +5293,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class C
 {
@@ -5281,8 +5312,7 @@ class C
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1130990")]
     public async Task InParentConditionalAccessExpression2()
     {
-        var code =
-"""
+        var code = """
 using System;
 class C
 {
@@ -5294,8 +5324,7 @@ class C
 }
 """;
 
-        var expected =
-"""
+        var expected = """
 using System;
 class C
 {
@@ -5327,7 +5356,8 @@ class C
                     return x;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1130990")]
@@ -5345,7 +5375,8 @@ class C
                     return x;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1130990")]
@@ -5362,42 +5393,47 @@ class C
                     var l = s?.[|Length|] ?? 0;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3147")]
     public async Task HandleFormattableStringTargetTyping1()
     {
-        const string code = CodeSnippets.FormattableStringType + """
-            namespace N
-            {
-                using System;
-
-                class C
+        const string code =
+            CodeSnippets.FormattableStringType
+            + """
+                namespace N
                 {
-                    public async Task M()
+                    using System;
+
+                    class C
                     {
-                        var f = FormattableString.Invariant([|$""|]);
+                        public async Task M()
+                        {
+                            var f = FormattableString.Invariant([|$""|]);
+                        }
                     }
                 }
-            }
-            """;
+                """;
 
-        const string expected = CodeSnippets.FormattableStringType + """
-            namespace N
-            {
-                using System;
-
-                class C
+        const string expected =
+            CodeSnippets.FormattableStringType
+            + """
+                namespace N
                 {
-                    public async Task M()
+                    using System;
+
+                    class C
                     {
-                        FormattableString {|Rename:formattable|} = $"";
-                        var f = FormattableString.Invariant(formattable);
+                        public async Task M()
+                        {
+                            FormattableString {|Rename:formattable|} = $"";
+                            var f = FormattableString.Invariant(formattable);
+                        }
                     }
                 }
-            }
-            """;
+                """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -5444,16 +5480,14 @@ class C
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/936")]
     public async Task InAutoPropertyInitializer()
     {
-        var code =
-            """
+        var code = """
             using System;
             class C
             {
                 int Prop1 { get; } = [|1 + 2|];
             }
             """;
-        var expected =
-            """
+        var expected = """
             using System;
             class C
             {
@@ -5468,16 +5502,14 @@ class C
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/936")]
     public async Task InAutoPropertyInitializer2()
     {
-        var code =
-            """
+        var code = """
             using System;
             class C
             {
                 public DateTime TimeStamp { get; } = [|DateTime.UtcNow|];
             }
             """;
-        var expected =
-            """
+        var expected = """
             using System;
             class C
             {
@@ -5492,16 +5524,14 @@ class C
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/936")]
     public async Task BlockContextPreferredOverAutoPropertyInitializerContext()
     {
-        var code =
-            """
+        var code = """
             using System;
             class C
             {
                 Func<int, int> X { get; } = a => { return [|7|]; };
             }
             """;
-        var expected =
-            """
+        var expected = """
             using System;
             class C
             {
@@ -5514,63 +5544,60 @@ class C
     [Fact]
     public async Task Tuple_TuplesDisabled()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(1, "hello")|].ToString();
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            private static readonly (int, string) {|Rename:value|} = (1, "hello");
-            var i = value.ToString();
-        }
-        """;
+        var expected = """
+            class C
+            {
+                private static readonly (int, string) {|Rename:value|} = (1, "hello");
+                var i = value.ToString();
+            }
+            """;
 
-        await TestAsync(code, expected, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6));
+        await TestAsync(
+            code,
+            expected,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+        );
     }
 
     [Fact]
     public async Task ElementOfTuple()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = (1, [|"hello"|]).ToString();
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            private const string {|Rename:V|} = "hello";
-            var i = (1, V).ToString();
-        }
-        """;
+        var expected = """
+            class C
+            {
+                private const string {|Rename:V|} = "hello";
+                var i = (1, V).ToString();
+            }
+            """;
 
-        await TestInRegularAndScriptAsync(
-            code, expected);
+        await TestInRegularAndScriptAsync(code, expected);
     }
 
     [Fact]
     public async Task Tuple_IntroduceConstant()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(1, "hello")|].ToString();
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private static readonly (int, string) {|Rename:value|} = (1, "hello");
@@ -5584,16 +5611,14 @@ class C
     [Fact]
     public async Task TupleWithNames_IntroduceConstant()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(a: 1, b: "hello")|].ToString();
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private static readonly (int a, string b) {|Rename:value|} = (a: 1, b: "hello");
@@ -5607,16 +5632,14 @@ class C
     [Fact]
     public async Task Tuple_IntroduceConstantForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(1, "hello")|].ToString() + (1, "hello").ToString();
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private static readonly (int, string) {|Rename:value|} = (1, "hello");
@@ -5630,16 +5653,14 @@ class C
     [Fact]
     public async Task TupleWithNames_IntroduceConstantForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(a: 1, b: "hello")|].ToString() + (a: 1, b: "hello").ToString();
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private static readonly (int a, string b) {|Rename:value|} = (a: 1, b: "hello");
@@ -5653,16 +5674,14 @@ class C
     [Fact]
     public async Task TupleWithDifferentNames_IntroduceConstantForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(a: 1, b: "hello")|].ToString() + (c: 1, d: "hello").ToString();
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private static readonly (int a, string b) {|Rename:value|} = (a: 1, b: "hello");
@@ -5676,16 +5695,14 @@ class C
     [Fact]
     public async Task TupleWithOneName_IntroduceConstantForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 var i = [|(a: 1, "hello")|].ToString() + (a: 1, "hello").ToString();
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 private static readonly (int a, string) {|Rename:value|} = (a: 1, "hello");
@@ -5696,7 +5713,11 @@ class C
         await TestInRegularAndScriptAsync(code, expected, index: 1);
 
         // no third action available
-        await TestActionCountAsync(code, count: 2, parameters: new TestParameters(TestOptions.Regular));
+        await TestActionCountAsync(
+            code,
+            count: 2,
+            parameters: new TestParameters(TestOptions.Regular)
+        );
     }
 
     [Fact]
@@ -5713,7 +5734,9 @@ class C
                     Bar((1, "hello");
                 }
             }
-            """, count: 2);
+            """,
+            count: 2
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11777")]
@@ -5750,14 +5773,14 @@ class C
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TupleWithInferredName_LeaveExplicitName()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5769,28 +5792,30 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int a = 1;
-                int {|Rename:y1|} = C.y;
-                var t = (a, x: y1);
+                static int y = 2;
+                void M()
+                {
+                    int a = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = (a, x: y1);
+                }
             }
-        }
-        """;
+            """;
 
-        await TestAsync(code, expected, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest));
+        await TestAsync(
+            code,
+            expected,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)
+        );
     }
 
     [Fact]
     public async Task TupleWithInferredName_InferredNameBecomesExplicit()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5802,28 +5827,30 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int x = 1;
-                int {|Rename:y1|} = C.y;
-                var t = (x, y: y1);
+                static int y = 2;
+                void M()
+                {
+                    int x = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = (x, y: y1);
+                }
             }
-        }
-        """;
+            """;
 
-        await TestAsync(code, expected, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest));
+        await TestAsync(
+            code,
+            expected,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)
+        );
     }
 
     [Fact]
     public async Task TupleWithInferredName_AllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5836,28 +5863,31 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int x = 1;
-                int {|Rename:y1|} = C.y;
-                var t = (x, y: y1);
-                var t2 = (y: y1, x);
+                static int y = 2;
+                void M()
+                {
+                    int x = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = (x, y: y1);
+                    var t2 = (y: y1, x);
+                }
             }
-        }
-        """;
-        await TestAsync(code, expected, index: 1, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest));
+            """;
+        await TestAsync(
+            code,
+            expected,
+            index: 1,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)
+        );
     }
 
     [Fact]
     public async Task TupleWithInferredName_NoDuplicateNames()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5869,27 +5899,25 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int x = 1;
-                int {|Rename:y1|} = C.y;
-                var t = (y1, y1);
+                static int y = 2;
+                void M()
+                {
+                    int x = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = (y1, y1);
+                }
             }
-        }
-        """;
+            """;
         await TestInRegularAndScriptAsync(code, expected, index: 1);
     }
 
     [Fact]
     public async Task AnonymousTypeWithInferredName_LeaveExplicitName()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5901,19 +5929,18 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int a = 1;
-                int {|Rename:y1|} = C.y;
-                var t = new { a, x= y1 };
+                static int y = 2;
+                void M()
+                {
+                    int a = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = new { a, x= y1 };
+                }
             }
-        }
-        """;
+            """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -5921,8 +5948,7 @@ class C
     [Fact]
     public async Task AnonymousTypeWithInferredName_InferredNameBecomesExplicit()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5934,19 +5960,18 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int x = 1;
-                int {|Rename:y1|} = C.y;
-                var t = new { x, y = y1 };
+                static int y = 2;
+                void M()
+                {
+                    int x = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = new { x, y = y1 };
+                }
             }
-        }
-        """;
+            """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -5954,8 +5979,7 @@ class C
     [Fact]
     public async Task AnonymousTypeWithInferredName_NoDuplicatesAllowed()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 static int y = 2;
@@ -5967,19 +5991,18 @@ class C
             }
             """;
 
-        var expected =
-        """
-        class C
-        {
-            static int y = 2;
-            void M()
+        var expected = """
+            class C
             {
-                int x = 1;
-                int {|Rename:y1|} = C.y;
-                var t = new { y= y1, y= y1 }; // this is an error already
+                static int y = 2;
+                void M()
+                {
+                    int x = 1;
+                    int {|Rename:y1|} = C.y;
+                    var t = new { y= y1, y= y1 }; // this is an error already
+                }
             }
-        }
-        """;
+            """;
 
         await TestInRegularAndScriptAsync(code, expected, index: 1);
     }
@@ -5987,8 +6010,7 @@ class C
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31795")]
     public async Task TestInAnonymousObjectMemberDeclaratorWithInferredType()
     {
-        var code =
-            """
+        var code = """
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -6005,8 +6027,7 @@ class C
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -6065,7 +6086,8 @@ class C
 
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2423")]
@@ -6106,7 +6128,8 @@ class C
 
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21665")]
@@ -6135,7 +6158,9 @@ class C
                     var tuple = (id: 1, date: date);
                 }
             }
-            """, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest));
+            """,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21665")]
@@ -6165,7 +6190,10 @@ class C
                     var tuple = (key: 1, value: Value);
                 }
             }
-            """, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), index: 0);
+            """,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+            index: 0
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21665")]
@@ -6194,7 +6222,10 @@ class C
                     var tuple = (key: 1, value: Value);
                 }
             }
-            """, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), index: 2);
+            """,
+            parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+            index: 2
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21373")]
@@ -6220,7 +6251,8 @@ class C
                 [Example(V)]
                 public string Bar { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21687")]
@@ -6252,7 +6284,8 @@ class C
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6277,7 +6310,8 @@ class C
                     System.Console.Write(a1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6292,7 +6326,8 @@ class C
                     System.Console.Write([||]a);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6318,7 +6353,8 @@ class C
                     System.Console.Write(parameter1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6345,7 +6381,8 @@ class C
                     System.Console.Write(a1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6372,7 +6409,8 @@ class C
                     System.Console.Write(a1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6401,7 +6439,8 @@ class C
                     System.Console.Write(a1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6417,7 +6456,8 @@ class C
                     System.Console.Write([|C.|]a);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6433,7 +6473,8 @@ class C
                     System.Console.Write(C.[|a|]);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10123")]
@@ -6449,7 +6490,8 @@ class C
                     System.Console.Write(C.[||]a);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25990")]
@@ -6479,7 +6521,8 @@ class C
                         ;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25990")]
@@ -6509,7 +6552,8 @@ class C
                         ;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25990")]
@@ -6526,7 +6570,8 @@ class C
                         ;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25990")]
@@ -6558,7 +6603,7 @@ class C
                 }
             }
             """
-);
+        );
     }
 
     [Fact]
@@ -6566,7 +6611,8 @@ class C
     {
         // This test indicates that ref-expressions are l-values and
         // introduce local still introduces a local, not a ref-local.
-        await TestInRegularAndScriptAsync("""
+        await TestInRegularAndScriptAsync(
+            """
             class C
             {
                 void M(int x)
@@ -6576,7 +6622,8 @@ class C
                 }
                 void M2(int p) { }
             }
-            """, """
+            """,
+            """
             class C
             {
                 void M(int x)
@@ -6587,14 +6634,16 @@ class C
                 }
                 void M2(int p) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestIntroduceLocalInRefCallRefExpression()
     {
         // Cannot extract expressions passed by ref
-        await TestMissingInRegularAndScriptAsync("""
+        await TestMissingInRegularAndScriptAsync(
+            """
             class C
             {
                 void M(int x)
@@ -6604,7 +6653,8 @@ class C
                 }
                 void M2(ref int p) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28266")]
@@ -6630,7 +6680,8 @@ class C
                     Bar(V, 2);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28266")]
@@ -6656,7 +6707,8 @@ class C
                     Bar(1, V);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28266")]
@@ -6682,7 +6734,8 @@ class C
                     Bar(1, V);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28266")]
@@ -6708,24 +6761,28 @@ class C
                     Bar(1, Bar(V));
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27949")]
     public async Task TestWhitespaceSpanInAssignment()
     {
-        await TestMissingAsync("""
+        await TestMissingAsync(
+            """
             class C
             {
                 int x = [| |] 0;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28665")]
     public async Task TestWhitespaceSpanInAttribute()
     {
-        await TestMissingAsync("""
+        await TestMissingAsync(
+            """
             class C
             {
                 [Example( [| |] )]
@@ -6733,7 +6790,8 @@ class C
                 {
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28941")]
@@ -6762,32 +6820,37 @@ class C
                     var goo = bytes[0];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestIndexExpression()
     {
-        var code = TestSources.Index + """
-            class Program
-            {
-                static void Main(string[] args)
+        var code =
+            TestSources.Index
+            + """
+                class Program
                 {
-                    System.Console.WriteLine([|^1|]);
+                    static void Main(string[] args)
+                    {
+                        System.Console.WriteLine([|^1|]);
+                    }
                 }
-            }
-            """;
+                """;
 
-        var expected = TestSources.Index + """
-            class Program
-            {
-                static void Main(string[] args)
+        var expected =
+            TestSources.Index
+            + """
+                class Program
                 {
-                    System.Index {|Rename:value|} = ^1;
-                    System.Console.WriteLine(value);
+                    static void Main(string[] args)
+                    {
+                        System.Index {|Rename:value|} = ^1;
+                        System.Console.WriteLine(value);
+                    }
                 }
-            }
-            """;
+                """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -6795,26 +6858,32 @@ class C
     [Fact]
     public async Task TestRangeExpression_None()
     {
-        var code = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var code =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Console.WriteLine([|..|]);
+                    static void Main(string[] args)
+                    {
+                        System.Console.WriteLine([|..|]);
+                    }
                 }
-            }
-            """;
+                """;
 
-        var expected = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var expected =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Range {|Rename:value|} = ..;
-                    System.Console.WriteLine(value);
+                    static void Main(string[] args)
+                    {
+                        System.Range {|Rename:value|} = ..;
+                        System.Console.WriteLine(value);
+                    }
                 }
-            }
-            """;
+                """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -6822,26 +6891,32 @@ class C
     [Fact]
     public async Task TestRangeExpression_Right()
     {
-        var code = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var code =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Console.WriteLine([|..1|]);
+                    static void Main(string[] args)
+                    {
+                        System.Console.WriteLine([|..1|]);
+                    }
                 }
-            }
-            """;
+                """;
 
-        var expected = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var expected =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Range {|Rename:value|} = ..1;
-                    System.Console.WriteLine(value);
+                    static void Main(string[] args)
+                    {
+                        System.Range {|Rename:value|} = ..1;
+                        System.Console.WriteLine(value);
+                    }
                 }
-            }
-            """;
+                """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -6849,26 +6924,32 @@ class C
     [Fact]
     public async Task TestRangeExpression_Left()
     {
-        var code = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var code =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Console.WriteLine([|1..|]);
+                    static void Main(string[] args)
+                    {
+                        System.Console.WriteLine([|1..|]);
+                    }
                 }
-            }
-            """;
+                """;
 
-        var expected = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var expected =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Range {|Rename:value|} = 1..;
-                    System.Console.WriteLine(value);
+                    static void Main(string[] args)
+                    {
+                        System.Range {|Rename:value|} = 1..;
+                        System.Console.WriteLine(value);
+                    }
                 }
-            }
-            """;
+                """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -6876,26 +6957,32 @@ class C
     [Fact]
     public async Task TestRangeExpression_Both()
     {
-        var code = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var code =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Console.WriteLine([|1..2|]);
+                    static void Main(string[] args)
+                    {
+                        System.Console.WriteLine([|1..2|]);
+                    }
                 }
-            }
-            """;
+                """;
 
-        var expected = TestSources.Index + TestSources.Range + """
-            class Program
-            {
-                static void Main(string[] args)
+        var expected =
+            TestSources.Index
+            + TestSources.Range
+            + """
+                class Program
                 {
-                    System.Range {|Rename:value|} = 1..2;
-                    System.Console.WriteLine(value);
+                    static void Main(string[] args)
+                    {
+                        System.Range {|Rename:value|} = 1..2;
+                        System.Console.WriteLine(value);
+                    }
                 }
-            }
-            """;
+                """;
 
         await TestInRegularAndScriptAsync(code, expected);
     }
@@ -6903,8 +6990,7 @@ class C
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/30207")]
     public async Task TestImplicitRecursiveInstanceMemberAccess_ForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 C c;
@@ -6915,8 +7001,7 @@ class C
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 C c;
@@ -6934,8 +7019,7 @@ class C
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/30207")]
     public async Task TestExplicitRecursiveInstanceMemberAccess_ForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 C c;
@@ -6946,8 +7030,7 @@ class C
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 C c;
@@ -6965,8 +7048,7 @@ class C
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/30207")]
     public async Task TestExplicitInstanceMemberAccess_ForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 C c;
@@ -6977,8 +7059,7 @@ class C
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 C c;
@@ -6996,8 +7077,7 @@ class C
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/30207")]
     public async Task TestImplicitInstanceMemberAccess_ForAllOccurrences()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 C c;
@@ -7008,8 +7088,7 @@ class C
             }
             """;
 
-        var expected =
-            """
+        var expected = """
             class C
             {
                 C c;
@@ -7027,8 +7106,7 @@ class C
     [Fact, WorkItem("http://github.com/dotnet/roslyn/issues/30207")]
     public async Task TestExpressionOfUndeclaredType()
     {
-        var code =
-            """
+        var code = """
             class C
             {
                 void Test()
@@ -7077,7 +7155,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7124,7 +7205,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7177,7 +7261,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7222,7 +7309,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7267,7 +7357,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7318,7 +7411,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7353,7 +7449,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7390,7 +7489,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40209")]
@@ -7427,7 +7529,10 @@ class C
                     }
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7476,7 +7581,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7525,7 +7633,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7578,7 +7689,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7633,7 +7747,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7694,7 +7811,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7763,7 +7883,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7828,7 +7951,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7879,7 +8005,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7926,7 +8055,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -7973,7 +8105,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40374")]
@@ -8052,7 +8187,10 @@ class C
             {
                 public void Local() { }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40381")]
@@ -8101,7 +8239,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40381")]
@@ -8148,7 +8289,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40381")]
@@ -8197,7 +8341,10 @@ class C
                     throw new NotImplementedException();
                 }
             }
-            """, index: 1, options: ImplicitTypingEverywhere());
+            """,
+            index: 1,
+            options: ImplicitTypingEverywhere()
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/561")]
@@ -8232,7 +8379,8 @@ class C
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12591")]
@@ -8273,7 +8421,8 @@ class C
                 {
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56")]
@@ -8318,7 +8467,8 @@ class C
                     return new[] { 1, 2, 3 };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15770")]
@@ -8346,7 +8496,8 @@ class C
                 }
             }
             """,
-            index: 3);
+            index: 3
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40745")]
@@ -8380,7 +8531,8 @@ class C
                     });
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40745")]
@@ -8411,7 +8563,8 @@ class C
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40745")]
@@ -8442,7 +8595,8 @@ class C
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40745")]
@@ -8484,7 +8638,8 @@ class C
                 {
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40745")]
@@ -8538,7 +8693,8 @@ class C
                 {
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -8582,7 +8738,8 @@ class C
                     return 0;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40745")]
@@ -8638,7 +8795,8 @@ class C
                     return 0;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44291")]
@@ -8686,13 +8844,15 @@ class C
                     s.Bar(V);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44656")]
     public async Task ImplicitObjectCreation()
     {
-        await TestInRegularAndScriptAsync("""
+        await TestInRegularAndScriptAsync(
+            """
             class A
             {
                 public void Create(A a, B b)
@@ -8707,7 +8867,8 @@ class C
                     new A().Create(new A(), [|new(1)|]);
                 }
             }
-            """, """
+            """,
+            """
             class A
             {
                 public void Create(A a, B b)
@@ -8723,13 +8884,15 @@ class C
                     new A().Create(new A(), b);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52833")]
     public async Task UniqueParameterName()
     {
-        await TestInRegularAndScriptAsync("""
+        await TestInRegularAndScriptAsync(
+            """
             using System.IO;
 
             public class SomeClass
@@ -8761,7 +8924,9 @@ class C
                 {
                 }
             }
-            """, 2);
+            """,
+            2
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47772")]
@@ -8776,7 +8941,8 @@ class C
                     const int foo = [|10|];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47772")]
@@ -8788,7 +8954,8 @@ class C
             {
                 const int foo = [|10|];
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47772")]
@@ -8800,7 +8967,8 @@ class C
             {
                 const int foo = ([|10|]);
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47772")]
@@ -8826,7 +8994,8 @@ class C
                 }
             }
             """,
-        index: 2);
+            index: 2
+        );
     }
 
     [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
@@ -8836,7 +9005,7 @@ class C
     public async Task IntroduceLocal_DoNotReturnForVoidTaskLikeTypes(string taskType)
     {
         await TestInRegularAndScriptAsync(
-$$"""
+            $$"""
 using System;
 using System.Threading.Tasks;
 
@@ -8852,7 +9021,7 @@ namespace ConsoleApp1
     }
 }
 """ + ValueTaskDeclaration,
-$$"""
+            $$"""
 using System;
 using System.Threading.Tasks;
 
@@ -8871,7 +9040,8 @@ namespace ConsoleApp1
         private Task ConsumeAsync(object value) => throw new NotImplementedException();
     }
 }
-""" + ValueTaskDeclaration);
+""" + ValueTaskDeclaration
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28730")]
@@ -8885,7 +9055,8 @@ namespace ConsoleApp1
                     [||]this.s = s;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -8918,7 +9089,8 @@ namespace ConsoleApp1
 
                 static void H(Delegate d) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -8951,7 +9123,8 @@ namespace ConsoleApp1
 
                 static void H(Delegate d) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/71042")]
@@ -8966,7 +9139,8 @@ namespace ConsoleApp1
                 [Example([|new int[] { 2+2 }|])]
                 public string Bar { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/71042")]
@@ -8981,6 +9155,7 @@ namespace ConsoleApp1
                 [Example([|typeof(C)|])]
                 public string Bar { get; set; }
             }
-            """);
+            """
+        );
     }
 }

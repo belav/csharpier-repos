@@ -20,38 +20,52 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             public readonly int MatchCount;
             public readonly ArrayBuilder<TextSpan> MatchedSpansInReverse;
 
-            public CamelCaseResult(bool fromStart, bool contiguous, int matchCount, ArrayBuilder<TextSpan> matchedSpansInReverse)
+            public CamelCaseResult(
+                bool fromStart,
+                bool contiguous,
+                int matchCount,
+                ArrayBuilder<TextSpan> matchedSpansInReverse
+            )
             {
                 FromStart = fromStart;
                 Contiguous = contiguous;
                 MatchCount = matchCount;
                 MatchedSpansInReverse = matchedSpansInReverse;
 
-                Debug.Assert(matchedSpansInReverse == null || matchedSpansInReverse.Count == matchCount);
+                Debug.Assert(
+                    matchedSpansInReverse == null || matchedSpansInReverse.Count == matchCount
+                );
             }
 
-            public void Free()
-                => MatchedSpansInReverse?.Free();
+            public void Free() => MatchedSpansInReverse?.Free();
 
-            public CamelCaseResult WithFromStart(bool fromStart)
-                => new(fromStart, Contiguous, MatchCount, MatchedSpansInReverse);
+            public CamelCaseResult WithFromStart(bool fromStart) =>
+                new(fromStart, Contiguous, MatchCount, MatchedSpansInReverse);
 
             public CamelCaseResult WithAddedMatchedSpan(TextSpan value)
             {
                 MatchedSpansInReverse?.Add(value);
-                return new CamelCaseResult(FromStart, Contiguous, MatchCount + 1, MatchedSpansInReverse);
+                return new CamelCaseResult(
+                    FromStart,
+                    Contiguous,
+                    MatchCount + 1,
+                    MatchedSpansInReverse
+                );
             }
         }
 
-        private static PatternMatchKind GetCamelCaseKind(CamelCaseResult result, in TemporaryArray<TextSpan> candidateHumps)
+        private static PatternMatchKind GetCamelCaseKind(
+            CamelCaseResult result,
+            in TemporaryArray<TextSpan> candidateHumps
+        )
         {
             var toEnd = result.MatchCount == candidateHumps.Count;
             if (result.FromStart)
             {
                 if (result.Contiguous)
                 {
-                    // We contiguously matched humps from the start of this candidate.  If we 
-                    // matched all the humps, then this was an exact match, otherwise it was a 
+                    // We contiguously matched humps from the start of this candidate.  If we
+                    // matched all the humps, then this was an exact match, otherwise it was a
                     // contiguous prefix match
                     return toEnd
                         ? PatternMatchKind.CamelCaseExact

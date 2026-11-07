@@ -9,6 +9,6 @@ namespace System.Activities.DurableInstancing
         LoadOrCreateByKey = 0,
         LoadOrCreateByInstance = 1,
         LoadByKey = 2,
-        LoadByInstance = 3
+        LoadByInstance = 3,
     }
 }

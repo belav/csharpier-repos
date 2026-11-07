@@ -20,10 +20,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
         private IMemoryCache CreateCache(ISystemClock clock)
         {
-            return new MemoryCache(new MemoryCacheOptions()
-            {
-                Clock = clock,
-            });
+            return new MemoryCache(new MemoryCacheOptions() { Clock = clock });
         }
 
         [Fact]
@@ -50,7 +47,11 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             var value = new object();
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = false };
-            cache.Set(key, value, new MemoryCacheEntryOptions().AddExpirationToken(expirationToken));
+            cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+            );
 
             Assert.True(expirationToken.HasChangedWasCalled);
             Assert.True(expirationToken.ActiveChangeCallbacksWasCalled);
@@ -65,14 +66,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
-            cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-                {
-                    // TODO: Verify params
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                }, state: callbackInvoked));
+            cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
+                    .RegisterPostEvictionCallback(
+                        (subkey, subValue, reason, state) =>
+                        {
+                            // TODO: Verify params
+                            var localCallbackInvoked = (ManualResetEvent)state;
+                            localCallbackInvoked.Set();
+                        },
+                        state: callbackInvoked
+                    )
+            );
 
             expirationToken.Fire();
 
@@ -90,14 +98,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = false };
-            cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-                {
-                    // TODO: Verify params
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                }, state: callbackInvoked));
+            cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
+                    .RegisterPostEvictionCallback(
+                        (subkey, subValue, reason, state) =>
+                        {
+                            // TODO: Verify params
+                            var localCallbackInvoked = (ManualResetEvent)state;
+                            localCallbackInvoked.Set();
+                        },
+                        state: callbackInvoked
+                    )
+            );
 
             var found = cache.TryGetValue(key, out value);
             Assert.True(found);
@@ -119,14 +134,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = false };
-            cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-            {
-                // TODO: Verify params
-                var localCallbackInvoked = (ManualResetEvent)state;
-                localCallbackInvoked.Set();
-            }, state: callbackInvoked));
+            cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
+                    .RegisterPostEvictionCallback(
+                        (subkey, subValue, reason, state) =>
+                        {
+                            // TODO: Verify params
+                            var localCallbackInvoked = (ManualResetEvent)state;
+                            localCallbackInvoked.Set();
+                        },
+                        state: callbackInvoked
+                    )
+            );
             var found = cache.TryGetValue(key, out value);
             Assert.True(found);
 
@@ -147,14 +169,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
-            cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-            {
-                // TODO: Verify params
-                var localCallbackInvoked = (ManualResetEvent)state;
-                localCallbackInvoked.Set();
-            }, state: callbackInvoked));
+            cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
+                    .RegisterPostEvictionCallback(
+                        (subkey, subValue, reason, state) =>
+                        {
+                            // TODO: Verify params
+                            var localCallbackInvoked = (ManualResetEvent)state;
+                            localCallbackInvoked.Set();
+                        },
+                        state: callbackInvoked
+                    )
+            );
             cache.Remove(key);
 
             Assert.NotNull(expirationToken.Registration);
@@ -170,13 +199,20 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
-            cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-                {
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                }, state: callbackInvoked));
+            cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
+                    .RegisterPostEvictionCallback(
+                        (subkey, subValue, reason, state) =>
+                        {
+                            var localCallbackInvoked = (ManualResetEvent)state;
+                            localCallbackInvoked.Set();
+                        },
+                        state: callbackInvoked
+                    )
+            );
             cache.Clear();
 
             Assert.Equal(0, cache.Count);
@@ -193,14 +229,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestExpirationToken() { HasChanged = true };
-            var result = cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-            {
-                // TODO: Verify params
-                var localCallbackInvoked = (ManualResetEvent)state;
-                localCallbackInvoked.Set();
-            }, state: callbackInvoked));
+            var result = cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
+                    .RegisterPostEvictionCallback(
+                        (subkey, subValue, reason, state) =>
+                        {
+                            // TODO: Verify params
+                            var localCallbackInvoked = (ManualResetEvent)state;
+                            localCallbackInvoked.Set();
+                        },
+                        state: callbackInvoked
+                    )
+            );
             Assert.Same(value, result); // The created item should be returned, but not cached.
 
             Assert.True(expirationToken.HasChangedWasCalled);
@@ -220,8 +263,13 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestToken(callbackInvoked);
-            var task = Task.Run(() => cache.Set(key, value, new MemoryCacheEntryOptions()
-                .AddExpirationToken(expirationToken)));
+            var task = Task.Run(() =>
+                cache.Set(
+                    key,
+                    value,
+                    new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                )
+            );
             callbackInvoked.WaitOne(TimeSpan.FromSeconds(30));
             var result = task.Result;
 
@@ -239,18 +287,23 @@ namespace Microsoft.Extensions.Caching.Memory
             var cts = new CancellationTokenSource();
             var callbackInvoked = new ManualResetEvent(false);
 
-            cache.Set(key, new object(), new MemoryCacheEntryOptions
-            {
-                ExpirationTokens = { new CancellationChangeToken(cts.Token) },
-                PostEvictionCallbacks =
+            cache.Set(
+                key,
+                new object(),
+                new MemoryCacheEntryOptions
                 {
-                    new PostEvictionCallbackRegistration()
+                    ExpirationTokens = { new CancellationChangeToken(cts.Token) },
+                    PostEvictionCallbacks =
                     {
-                        EvictionCallback = (key, value, reason, state) => ((ManualResetEvent)state).Set(),
-                        State = callbackInvoked
-                    }
+                        new PostEvictionCallbackRegistration()
+                        {
+                            EvictionCallback = (key, value, reason, state) =>
+                                ((ManualResetEvent)state).Set(),
+                            State = callbackInvoked,
+                        },
+                    },
                 }
-            });
+            );
 
             Assert.True(cache.TryGetValue(key, out _));
 
@@ -271,18 +324,12 @@ namespace Microsoft.Extensions.Caching.Memory
 
             public bool ActiveChangeCallbacks
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public bool HasChanged
             {
-                get
-                {
-                    return _hasChanged;
-                }
+                get { return _hasChanged; }
             }
 
             public IDisposable RegisterChangeCallback(Action<object> callback, object state)
@@ -296,9 +343,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
         internal class TestDisposable : IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

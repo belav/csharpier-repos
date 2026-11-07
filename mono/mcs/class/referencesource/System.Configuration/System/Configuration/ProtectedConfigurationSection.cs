@@ -8,10 +8,10 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Xml;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Xml;
 
     public sealed class ProtectedConfigurationSection : ConfigurationSection
     {
@@ -19,8 +19,11 @@ namespace System.Configuration
         {
             ProviderSettings ps = Providers[providerName];
 
-            if (ps == null) {
-                throw new Exception(SR.GetString(SR.ProtectedConfigurationProvider_not_found, providerName));
+            if (ps == null)
+            {
+                throw new Exception(
+                    SR.GetString(SR.ProtectedConfigurationProvider_not_found, providerName)
+                );
             }
 
             return InstantiateProvider(ps);
@@ -28,22 +31,33 @@ namespace System.Configuration
 
         internal ProtectedConfigurationProviderCollection GetAllProviders()
         {
-            ProtectedConfigurationProviderCollection coll = new ProtectedConfigurationProviderCollection();
-            foreach(ProviderSettings ps in Providers)
+            ProtectedConfigurationProviderCollection coll =
+                new ProtectedConfigurationProviderCollection();
+            foreach (ProviderSettings ps in Providers)
             {
                 coll.Add(InstantiateProvider(ps));
             }
             return coll;
         }
 
-        [PermissionSet(SecurityAction.Assert, Unrestricted=true)]
-        [SuppressMessage("Microsoft.Security", "CA2106:SecureAsserts", Justification = "This assert is potentially dangerous and shouldn't be present but is necessary for back-compat.")]
-        private ProtectedConfigurationProvider CreateAndInitializeProviderWithAssert(Type t, ProviderSettings pn) {
-            ProtectedConfigurationProvider provider = (ProtectedConfigurationProvider)TypeUtil.CreateInstanceWithReflectionPermission(t);
+        [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Justification = "This assert is potentially dangerous and shouldn't be present but is necessary for back-compat."
+        )]
+        private ProtectedConfigurationProvider CreateAndInitializeProviderWithAssert(
+            Type t,
+            ProviderSettings pn
+        )
+        {
+            ProtectedConfigurationProvider provider = (ProtectedConfigurationProvider)
+                TypeUtil.CreateInstanceWithReflectionPermission(t);
             NameValueCollection pars = pn.Parameters;
             NameValueCollection cloneParams = new NameValueCollection(pars.Count);
 
-            foreach (string key in pars) {
+            foreach (string key in pars)
+            {
                 cloneParams[key] = pars[key];
             }
 
@@ -54,12 +68,14 @@ namespace System.Configuration
         private ProtectedConfigurationProvider InstantiateProvider(ProviderSettings pn)
         {
             Type t = TypeUtil.GetTypeWithReflectionPermission(pn.Type, true);
-            if (!typeof(ProtectedConfigurationProvider).IsAssignableFrom(t)) {
+            if (!typeof(ProtectedConfigurationProvider).IsAssignableFrom(t))
+            {
                 throw new Exception(SR.GetString(SR.WrongType_of_Protected_provider));
             }
 
             // Needs to check APTCA bit.  See VSWhidbey 429996.
-            if (!TypeUtil.IsTypeAllowedInConfig(t)) {
+            if (!TypeUtil.IsTypeAllowedInConfig(t))
+            {
                 throw new Exception(SR.GetString(SR.Type_from_untrusted_assembly, t.FullName));
             }
 
@@ -67,25 +83,40 @@ namespace System.Configuration
             return CreateAndInitializeProviderWithAssert(t, pn);
         }
 
-        internal static string DecryptSection(string encryptedXml, ProtectedConfigurationProvider provider) {
+        internal static string DecryptSection(
+            string encryptedXml,
+            ProtectedConfigurationProvider provider
+        )
+        {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(encryptedXml);
             XmlNode resultNode = provider.Decrypt(doc.DocumentElement);
             return resultNode.OuterXml;
         }
 
-        private const string    EncryptedSectionTemplate = "<{0} {1}=\"{2}\"> {3} </{0}>";
+        private const string EncryptedSectionTemplate = "<{0} {1}=\"{2}\"> {3} </{0}>";
 
-        internal static string FormatEncryptedSection(string encryptedXml, string sectionName, string providerName) {
-            return String.Format(CultureInfo.InvariantCulture, EncryptedSectionTemplate,
-                        sectionName,    // The section to encrypt
-                        BaseConfigurationRecord.KEYWORD_PROTECTION_PROVIDER, // protectionProvider keyword
-                        providerName,  // The provider name
-                        encryptedXml   // the encrypted xml
-                        );
+        internal static string FormatEncryptedSection(
+            string encryptedXml,
+            string sectionName,
+            string providerName
+        )
+        {
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                EncryptedSectionTemplate,
+                sectionName, // The section to encrypt
+                BaseConfigurationRecord.KEYWORD_PROTECTION_PROVIDER, // protectionProvider keyword
+                providerName, // The provider name
+                encryptedXml // the encrypted xml
+            );
         }
-        
-        internal static string EncryptSection(string clearXml, ProtectedConfigurationProvider provider) {
+
+        internal static string EncryptSection(
+            string clearXml,
+            ProtectedConfigurationProvider provider
+        )
+        {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.PreserveWhitespace = true;
             xmlDocument.LoadXml(clearXml);
@@ -94,26 +125,28 @@ namespace System.Configuration
             return encNode.OuterXml;
         }
 
-
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
 
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty("providers", 
-                                        typeof(ProtectedProviderSettings), 
-                                        new ProtectedProviderSettings(), 
-                                        ConfigurationPropertyOptions.None);
-        
+        private static readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            "providers",
+            typeof(ProtectedProviderSettings),
+            new ProtectedProviderSettings(),
+            ConfigurationPropertyOptions.None
+        );
+
         private static readonly ConfigurationProperty _propDefaultProvider =
-            new ConfigurationProperty("defaultProvider", 
-                                        typeof(string), 
-                                        "RsaProtectedConfigurationProvider", 
-                                        null,
-                                        ConfigurationProperty.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "defaultProvider",
+                typeof(string),
+                "RsaProtectedConfigurationProvider",
+                null,
+                ConfigurationProperty.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.None
+            );
 
         static ProtectedConfigurationSection()
         {
@@ -123,47 +156,32 @@ namespace System.Configuration
             _properties.Add(_propDefaultProvider);
         }
 
-        public ProtectedConfigurationSection()
-        {
-        }
+        public ProtectedConfigurationSection() { }
 
         protected internal override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
         private ProtectedProviderSettings _Providers
         {
-            get
-            {
-                return (ProtectedProviderSettings)base[_propProviders];
-            }
+            get { return (ProtectedProviderSettings)base[_propProviders]; }
         }
 
         [ConfigurationProperty("providers")]
         public ProviderSettingsCollection Providers
         {
-            get
-            {
-                return _Providers.Providers;
-            }
+            get { return _Providers.Providers; }
         }
 
-        [ConfigurationProperty("defaultProvider", DefaultValue = "RsaProtectedConfigurationProvider")]
+        [ConfigurationProperty(
+            "defaultProvider",
+            DefaultValue = "RsaProtectedConfigurationProvider"
+        )]
         public string DefaultProvider
         {
-            get
-            {
-                return (string)base[_propDefaultProvider];
-            }
-            set
-            {
-                base[_propDefaultProvider] = value;
-            }
+            get { return (string)base[_propDefaultProvider]; }
+            set { base[_propDefaultProvider] = value; }
         }
-
     }
 }

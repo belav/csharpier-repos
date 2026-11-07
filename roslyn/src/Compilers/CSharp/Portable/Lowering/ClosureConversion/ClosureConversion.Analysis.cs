@@ -32,10 +32,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// True if the method signature can be rewritten to contain ref/out parameters.
             /// </summary>
-            public bool CanTakeRefParameters(MethodSymbol function)
-                => !function.IsAsync && !function.IsIterator
-                    // We can't rewrite delegate signatures
-                    && !MethodsConvertedToDelegates.Contains(function);
+            public bool CanTakeRefParameters(MethodSymbol function) =>
+                !function.IsAsync
+                && !function.IsIterator
+                // We can't rewrite delegate signatures
+                && !MethodsConvertedToDelegates.Contains(function);
 
             /// <summary>
             /// The root of the scope tree for this method.
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MethodSymbol topLevelMethod,
                 int topLevelMethodOrdinal,
                 VariableSlotAllocator slotAllocatorOpt,
-                TypeCompilationState compilationState)
+                TypeCompilationState compilationState
+            )
             {
                 ScopeTree = scopeTree;
                 MethodsConvertedToDelegates = methodsConvertedToDelegates;
@@ -69,14 +71,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int topLevelMethodOrdinal,
                 VariableSlotAllocator slotAllocatorOpt,
                 TypeCompilationState compilationState,
-                DiagnosticBag diagnostics)
+                DiagnosticBag diagnostics
+            )
             {
                 var methodsConvertedToDelegates = PooledHashSet<MethodSymbol>.GetInstance();
                 var scopeTree = ScopeTreeBuilder.Build(
                     node,
                     method,
                     methodsConvertedToDelegates,
-                    diagnostics);
+                    diagnostics
+                );
                 Debug.Assert(scopeTree != null);
 
                 var analysis = new Analysis(
@@ -85,11 +89,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     method,
                     topLevelMethodOrdinal,
                     slotAllocatorOpt,
-                    compilationState);
+                    compilationState
+                );
 
                 analysis.MakeAndAssignEnvironments();
                 analysis.ComputeLambdaScopesAndFrameCaptures();
-                if (compilationState.Compilation.Options.OptimizationLevel == OptimizationLevel.Release)
+                if (
+                    compilationState.Compilation.Options.OptimizationLevel
+                    == OptimizationLevel.Release
+                )
                 {
                     // This can affect when a variable is in scope whilst debugging, so only do this in release mode.
                     analysis.MergeEnvironments();
@@ -131,7 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Must be called only after <see cref="NestedFunction.CapturedEnvironments"/>
             /// has been calculated.
             ///
-            /// Finds the most optimal capture environment to place a closure in. 
+            /// Finds the most optimal capture environment to place a closure in.
             /// This roughly corresponds to the 'highest' Scope in the tree where all
             /// the captured variables for this closure are in scope. This minimizes
             /// the number of indirections we may have to traverse to access captured
@@ -189,7 +197,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
 
                         capturedEnvs.Free();
-
                     }
                 });
             }
@@ -204,8 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void InlineThisOnlyEnvironments()
             {
                 // First make sure 'this' even exists
-                if (!_topLevelMethod.TryGetThisParameter(out var thisParam) ||
-                    thisParam == null)
+                if (!_topLevelMethod.TryGetThisParameter(out var thisParam) || thisParam == null)
                 {
                     return;
                 }
@@ -219,8 +225,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // The environment must contain only 'this' to be inlined
-                if (env.CapturedVariables.Count > 1 ||
-                    !env.CapturedVariables.Contains(thisParam))
+                if (env.CapturedVariables.Count > 1 || !env.CapturedVariables.Contains(thisParam))
                 {
                     return;
                 }
@@ -231,8 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // lives in the containing type, we can remove the env
                     bool cantRemove = CheckNestedFunctions(ScopeTree, (scope, closure) =>
                     {
-                        return closure.CapturedEnvironments.Contains(env) &&
-                            closure.ContainingEnvironmentOpt != null;
+                        return closure.CapturedEnvironments.Contains(env)
+                            && closure.ContainingEnvironmentOpt != null;
                     });
 
                     if (!cantRemove)
@@ -240,7 +245,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         RemoveEnv();
                     }
                 }
-                // If we are in a variant interface, runtime might not consider the 
+                // If we are in a variant interface, runtime might not consider the
                 // method synthesized directly within the interface as variant safe.
                 // For simplicity we do not perform precise analysis whether this would
                 // definitely be the case. If we are in a variant interface, we always force
@@ -299,12 +304,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // be needed. This will also decide if the environment is a struct
                     // or a class.
 
-                    // If we are in a variant interface, runtime might not consider the 
+                    // If we are in a variant interface, runtime might not consider the
                     // method synthesized directly within the interface as variant safe.
                     // For simplicity we do not perform precise analysis whether this would
                     // definitely be the case. If we are in a variant interface, we always force
                     // creation of a display class.
-                    bool isStruct = VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is null;
+                    bool isStruct =
+                        VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is null;
                     var closures = new SetWithInsertionOrder<NestedFunction>();
                     bool addedItem;
 
@@ -322,9 +328,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         addedItem = false;
                         VisitNestedFunctions(scope, (closureScope, closure) =>
                         {
-                            if (!closures.Contains(closure) &&
-                                (closure.CapturedVariables.Overlaps(scope.DeclaredVariables) ||
-                                 closure.CapturedVariables.Overlaps(closures.Select(c => c.OriginalMethodSymbol))))
+                            if (
+                                !closures.Contains(closure)
+                                && (
+                                    closure.CapturedVariables.Overlaps(scope.DeclaredVariables)
+                                    || closure.CapturedVariables.Overlaps(
+                                        closures.Select(c => c.OriginalMethodSymbol)
+                                    )
+                                )
+                            )
                             {
                                 closures.Add(closure);
                                 addedItem = true;
@@ -354,19 +366,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Calculates all functions which directly or indirectly capture a scope's variables.
             /// </summary>
             /// <returns></returns>
-            private PooledDictionary<Scope, PooledHashSet<NestedFunction>> CalculateFunctionsCapturingScopeVariables()
+            private PooledDictionary<
+                Scope,
+                PooledHashSet<NestedFunction>
+            > CalculateFunctionsCapturingScopeVariables()
             {
-                var closuresCapturingScopeVariables = PooledDictionary<Scope, PooledHashSet<NestedFunction>>.GetInstance();
+                var closuresCapturingScopeVariables = PooledDictionary<
+                    Scope,
+                    PooledHashSet<NestedFunction>
+                >.GetInstance();
 
                 // calculate functions which directly capture a scope
 
-                var environmentsToScopes = PooledDictionary<ClosureEnvironment, Scope>.GetInstance();
+                var environmentsToScopes = PooledDictionary<
+                    ClosureEnvironment,
+                    Scope
+                >.GetInstance();
 
                 VisitScopeTree(ScopeTree, scope =>
                 {
                     if (!(scope.DeclaredEnvironment is null))
                     {
-                        closuresCapturingScopeVariables[scope] = PooledHashSet<NestedFunction>.GetInstance();
+                        closuresCapturingScopeVariables[scope] =
+                            PooledHashSet<NestedFunction>.GetInstance();
                         environmentsToScopes[scope.DeclaredEnvironment] = scope;
                     }
 
@@ -393,7 +415,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         continue;
 
                     var currentScope = scope;
-                    while (currentScope.DeclaredEnvironment is null || currentScope.DeclaredEnvironment.CapturesParent)
+                    while (
+                        currentScope.DeclaredEnvironment is null
+                        || currentScope.DeclaredEnvironment.CapturesParent
+                    )
                     {
                         currentScope = currentScope.Parent;
 
@@ -402,8 +427,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             throw ExceptionUtilities.Unreachable();
                         }
 
-                        if (currentScope.DeclaredEnvironment is null ||
-                            currentScope.DeclaredEnvironment.IsStruct)
+                        if (
+                            currentScope.DeclaredEnvironment is null
+                            || currentScope.DeclaredEnvironment.IsStruct
+                        )
                         {
                             continue;
                         }
@@ -417,10 +444,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             /// <summary>
             /// Must be called only after <see cref="MakeAndAssignEnvironments"/> and <see cref="ComputeLambdaScopesAndFrameCaptures"/>.
-            /// 
+            ///
             /// In order to reduce allocations, merge environments into a parent environment when it is safe to do so.
             /// This must be done whilst preserving semantics.
-            /// 
+            ///
             /// We also have to make sure not to extend the life of any variable.
             /// This means that we can only merge an environment into its parent if exactly the same closures directly or indirectly reference both environments.
             /// </summary>
@@ -463,10 +490,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                             continue;
                         }
 
-                        var closuresCapturingParentScope = closuresCapturingScopeVariables[parentScope];
+                        var closuresCapturingParentScope = closuresCapturingScopeVariables[
+                            parentScope
+                        ];
 
                         // if more closures reference one scope's environments than the other scope's environments,
-                        // then merging the two environments would increase the number of objects referencing some variables, 
+                        // then merging the two environments would increase the number of objects referencing some variables,
                         // which may prevent the variables being garbage collected.
                         if (!closuresCapturingParentScope.SetEquals(closuresCapturingScope))
                             break;
@@ -517,25 +546,41 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             internal DebugId GetTopLevelMethodId()
             {
-                return _slotAllocatorOpt?.MethodId ?? new DebugId(_topLevelMethodOrdinal, _compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal);
+                return _slotAllocatorOpt?.MethodId
+                    ?? new DebugId(
+                        _topLevelMethodOrdinal,
+                        _compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal
+                    );
             }
 
-            internal DebugId GetClosureId(SyntaxNode syntax, ArrayBuilder<ClosureDebugInfo> closureDebugInfo)
+            internal DebugId GetClosureId(
+                SyntaxNode syntax,
+                ArrayBuilder<ClosureDebugInfo> closureDebugInfo
+            )
             {
                 Debug.Assert(syntax != null);
 
                 DebugId closureId;
                 DebugId previousClosureId;
-                if (_slotAllocatorOpt != null && _slotAllocatorOpt.TryGetPreviousClosure(syntax, out previousClosureId))
+                if (
+                    _slotAllocatorOpt != null
+                    && _slotAllocatorOpt.TryGetPreviousClosure(syntax, out previousClosureId)
+                )
                 {
                     closureId = previousClosureId;
                 }
                 else
                 {
-                    closureId = new DebugId(closureDebugInfo.Count, _compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal);
+                    closureId = new DebugId(
+                        closureDebugInfo.Count,
+                        _compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal
+                    );
                 }
 
-                int syntaxOffset = _topLevelMethod.CalculateLocalSyntaxOffset(LambdaUtilities.GetDeclaratorPosition(syntax), syntax.SyntaxTree);
+                int syntaxOffset = _topLevelMethod.CalculateLocalSyntaxOffset(
+                    LambdaUtilities.GetDeclaratorPosition(syntax),
+                    syntax.SyntaxTree
+                );
                 closureDebugInfo.Add(new ClosureDebugInfo(syntaxOffset, closureId));
 
                 return closureId;
@@ -626,7 +671,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <returns>
             /// A tuple of the found <see cref="NestedFunction"/> and the <see cref="Scope"/> it was found in.
             /// </returns>
-            public static (NestedFunction, Scope) GetVisibleNestedFunction(Scope startingScope, MethodSymbol functionSymbol)
+            public static (NestedFunction, Scope) GetVisibleNestedFunction(
+                Scope startingScope,
+                MethodSymbol functionSymbol
+            )
             {
                 var currentScope = startingScope;
                 while (currentScope != null)
@@ -646,7 +694,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// Finds a <see cref="NestedFunction"/> with a matching original symbol somewhere in the given scope or nested scopes.
             /// </summary>
-            public static NestedFunction GetNestedFunctionInTree(Scope treeRoot, MethodSymbol functionSymbol)
+            public static NestedFunction GetNestedFunctionInTree(
+                Scope treeRoot,
+                MethodSymbol functionSymbol
+            )
             {
                 return helper(treeRoot) ?? throw ExceptionUtilities.Unreachable();
 

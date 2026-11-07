@@ -34,7 +34,7 @@ namespace System.Tests
         [Fact]
         public void FromDouble()
         {
-            double[] testValues = { 1000.0, 100.0, 0.0, 0.001, -1000.0, -100.0, };
+            double[] testValues = { 1000.0, 100.0, 0.0, 0.001, -1000.0, -100.0 };
             decimal[] expectedValues = { 1000.0m, 100.0m, 0.0m, 0.001m, -1000.0m, -100.0m };
             Verify(Convert.ToDecimal, testValues, expectedValues);
 
@@ -74,7 +74,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToDecimal, Convert.ToDecimal, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToDecimal, Convert.ToDecimal, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToDecimal,
+                Convert.ToDecimal,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -99,15 +103,43 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { Int32.MaxValue.ToString(), Int64.MaxValue.ToString(), Decimal.MaxValue.ToString(), Decimal.MinValue.ToString(), "0", null };
-            decimal[] expectedValues = { int.MaxValue, long.MaxValue, decimal.MaxValue, decimal.MinValue, 0, 0 };
+            string[] testValues =
+            {
+                Int32.MaxValue.ToString(),
+                Int64.MaxValue.ToString(),
+                Decimal.MaxValue.ToString(),
+                Decimal.MinValue.ToString(),
+                "0",
+                null,
+            };
+            decimal[] expectedValues =
+            {
+                int.MaxValue,
+                long.MaxValue,
+                decimal.MaxValue,
+                decimal.MinValue,
+                0,
+                0,
+            };
             VerifyFromString(Convert.ToDecimal, Convert.ToDecimal, testValues, expectedValues);
 
-            string[] overflowValues = { "1" + Decimal.MaxValue.ToString(), Decimal.MinValue.ToString() + "1" };
-            VerifyFromStringThrows<OverflowException>(Convert.ToDecimal, Convert.ToDecimal, overflowValues);
+            string[] overflowValues =
+            {
+                "1" + Decimal.MaxValue.ToString(),
+                Decimal.MinValue.ToString() + "1",
+            };
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToDecimal,
+                Convert.ToDecimal,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "100E12" };
-            VerifyFromStringThrows<FormatException>(Convert.ToDecimal, Convert.ToDecimal, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToDecimal,
+                Convert.ToDecimal,
+                formatExceptionValues
+            );
         }
 
         [Fact]

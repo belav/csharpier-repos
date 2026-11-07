@@ -31,12 +31,13 @@ namespace System.Net.Security
         internal unsafe SafeChannelBindingHandle(ChannelBindingKind kind)
         {
             Debug.Assert(kind == ChannelBindingKind.Endpoint || kind == ChannelBindingKind.Unique);
-            ReadOnlySpan<byte> cbtPrefix = kind == ChannelBindingKind.Endpoint ?
-                "tls-server-end-point:"u8 :
-                "tls-unique:"u8;
+            ReadOnlySpan<byte> cbtPrefix =
+                kind == ChannelBindingKind.Endpoint ? "tls-server-end-point:"u8 : "tls-unique:"u8;
 
             _cbtPrefixByteArraySize = cbtPrefix.Length;
-            handle = Marshal.AllocHGlobal(s_secChannelBindingSize + _cbtPrefixByteArraySize + CertHashMaxSize);
+            handle = Marshal.AllocHGlobal(
+                s_secChannelBindingSize + _cbtPrefixByteArraySize + CertHashMaxSize
+            );
             IntPtr cbtPrefixPtr = handle + s_secChannelBindingSize;
             cbtPrefix.CopyTo(new Span<byte>((byte*)cbtPrefixPtr, cbtPrefix.Length));
             CertHashPtr = cbtPrefixPtr + _cbtPrefixByteArraySize;
@@ -51,7 +52,7 @@ namespace System.Net.Security
             SecChannelBindings channelBindings = new SecChannelBindings()
             {
                 ApplicationDataLength = cbtLength,
-                ApplicationDataOffset = s_secChannelBindingSize
+                ApplicationDataOffset = s_secChannelBindingSize,
             };
             Marshal.StructureToPtr(channelBindings, handle, true);
         }

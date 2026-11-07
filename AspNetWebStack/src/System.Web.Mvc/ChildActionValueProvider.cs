@@ -10,9 +10,7 @@ namespace System.Web.Mvc
         private static string _childActionValuesKey = Guid.NewGuid().ToString();
 
         public ChildActionValueProvider(ControllerContext controllerContext)
-            : base(controllerContext.RouteData.Values, CultureInfo.InvariantCulture)
-        {
-        }
+            : base(controllerContext.RouteData.Values, CultureInfo.InvariantCulture) { }
 
         internal static string ChildActionValuesKey
         {
@@ -29,7 +27,8 @@ namespace System.Web.Mvc
             ValueProviderResult explicitValues = base.GetValue(ChildActionValuesKey);
             if (explicitValues != null)
             {
-                DictionaryValueProvider<object> rawExplicitValues = explicitValues.RawValue as DictionaryValueProvider<object>;
+                DictionaryValueProvider<object> rawExplicitValues =
+                    explicitValues.RawValue as DictionaryValueProvider<object>;
                 if (rawExplicitValues != null)
                 {
                     return rawExplicitValues.GetValue(key);

@@ -18,9 +18,9 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
     internal readonly struct ManagedExceptionRegionUpdate(
         ManagedModuleMethodId method,
         int delta,
-        SourceSpan newSpan)
+        SourceSpan newSpan
+    )
     {
-
         /// <summary>
         /// Method ID. It has the token for the method that contains the exception region
         /// and the version when the change was made.
@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 
         /// <summary>
         /// The delta is the total of lines modified after the update. This value is inverse:
-        /// 
+        ///
         ///   OldSpan = NewSpan + Delta
         ///   NewSpan = OldSpan - Delta
         ///

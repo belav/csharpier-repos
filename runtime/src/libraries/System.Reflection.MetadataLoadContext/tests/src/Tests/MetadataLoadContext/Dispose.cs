@@ -13,7 +13,11 @@ namespace System.Reflection.Tests
         {
             using (TempFile tf = TempFile.Create(TestData.s_SimpleAssemblyImage))
             {
-                using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+                using (
+                    MetadataLoadContext lc = new MetadataLoadContext(
+                        new EmptyCoreMetadataAssemblyResolver()
+                    )
+                )
                 {
                     lc.LoadFromAssemblyPath(tf.Path);
                 }
@@ -24,7 +28,9 @@ namespace System.Reflection.Tests
                 }
                 catch (Exception)
                 {
-                    Assert.Fail("PE image file still locked after disposing MetadataLoadContext: " + tf.Path);
+                    Assert.Fail(
+                        "PE image file still locked after disposing MetadataLoadContext: " + tf.Path
+                    );
                 }
             }
         }
@@ -32,7 +38,9 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ExtraDisposesIgnored()
         {
-            MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver());
+            MetadataLoadContext lc = new MetadataLoadContext(
+                new EmptyCoreMetadataAssemblyResolver()
+            );
             lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
             lc.Dispose();
             lc.Dispose();
@@ -42,14 +50,22 @@ namespace System.Reflection.Tests
         [Fact]
         public static void MetadataLoadContextApisAfterDispose()
         {
-            MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver());
+            MetadataLoadContext lc = new MetadataLoadContext(
+                new EmptyCoreMetadataAssemblyResolver()
+            );
             lc.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => lc.LoadFromAssemblyName(new AssemblyName("Foo")));
+            Assert.Throws<ObjectDisposedException>(() =>
+                lc.LoadFromAssemblyName(new AssemblyName("Foo"))
+            );
             Assert.Throws<ObjectDisposedException>(() => lc.LoadFromAssemblyName("Foo"));
             Assert.Throws<ObjectDisposedException>(() => lc.LoadFromAssemblyPath("Foo"));
-            Assert.Throws<ObjectDisposedException>(() => lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage));
-            Assert.Throws<ObjectDisposedException>(() => lc.LoadFromStream(new MemoryStream(TestData.s_SimpleAssemblyImage)));
+            Assert.Throws<ObjectDisposedException>(() =>
+                lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage)
+            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                lc.LoadFromStream(new MemoryStream(TestData.s_SimpleAssemblyImage))
+            );
             Assert.Throws<ObjectDisposedException>(() => lc.CoreAssembly);
             Assert.Throws<ObjectDisposedException>(() => lc.GetAssemblies());
         }
@@ -58,7 +74,11 @@ namespace System.Reflection.Tests
         public static void MetadataLoadContextDispensedObjectsAfterDispose()
         {
             Assembly a;
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
                 a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
             }

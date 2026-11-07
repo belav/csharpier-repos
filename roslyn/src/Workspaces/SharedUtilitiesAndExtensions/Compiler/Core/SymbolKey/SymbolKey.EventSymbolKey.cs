@@ -17,19 +17,33 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IEventSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IEventSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 var metadataName = reader.ReadString();
-                var containingTypeResolution = reader.ReadSymbolKey(contextualSymbol?.ContainingType, out var containingTypeFailureReason);
+                var containingTypeResolution = reader.ReadSymbolKey(
+                    contextualSymbol?.ContainingType,
+                    out var containingTypeFailureReason
+                );
 
                 if (containingTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(EventSymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(EventSymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
                     return default;
                 }
 
-                using var result = GetMembersOfNamedType<IEventSymbol>(containingTypeResolution, metadataName);
-                return CreateResolution(result, $"({nameof(EventSymbolKey)} '{metadataName}' not found)", out failureReason);
+                using var result = GetMembersOfNamedType<IEventSymbol>(
+                    containingTypeResolution,
+                    metadataName
+                );
+                return CreateResolution(
+                    result,
+                    $"({nameof(EventSymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
         }
     }

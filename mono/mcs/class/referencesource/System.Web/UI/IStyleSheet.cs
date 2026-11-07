@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Web.UI.WebControls;
@@ -14,15 +14,13 @@ namespace System.Web.UI {
     /// IStyleSheet represents the core functionality of a style sheet, i.e.
     /// a collection of named styles.
     /// </devdoc>
-    public interface IStyleSheet {
-
-
+    public interface IStyleSheet
+    {
         /// <devdoc>
         /// Creates a style rule for the specified selector.  Multiple rules are allowed of the
         /// same selector
         /// </devdoc>
         void CreateStyleRule(Style style, IUrlResolutionService urlResolver, string selector);
-
 
         /// <devdoc>
         /// Adds a new style rule to the style sheet and associates it with an

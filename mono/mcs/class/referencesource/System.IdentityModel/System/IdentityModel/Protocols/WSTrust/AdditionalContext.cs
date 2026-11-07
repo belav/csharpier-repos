@@ -18,25 +18,23 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <summary>
         /// Initializes an instance of <see cref="AdditionalContext"/>
         /// </summary>
-        public AdditionalContext()
-        {
-        }
+        public AdditionalContext() { }
 
         /// <summary>
         /// Initializes an instance of <see cref="AdditionalContext"/>
         /// </summary>
         /// <param name="items">Collection of ContextItems</param>
         /// <exception cref="ArgumentNullException">Input argument 'items' is null.</exception>
-        public AdditionalContext( IEnumerable<ContextItem> items )
+        public AdditionalContext(IEnumerable<ContextItem> items)
         {
-            if ( items == null )
+            if (items == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "items" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("items");
             }
 
-            foreach ( ContextItem item in items )
+            foreach (ContextItem item in items)
             {
-                _contextItems.Add( item );
+                _contextItems.Add(item);
             }
         }
 

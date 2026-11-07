@@ -1,32 +1,40 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     #region StateMachineDesignerPaint
 
     internal static class StateMachineDesignerPaint
     {
         // same as AmbientTheme.FadeBrush
-        internal static readonly Brush FadeBrush = new SolidBrush(Color.FromArgb(120, 255, 255, 255));
+        internal static readonly Brush FadeBrush = new SolidBrush(
+            Color.FromArgb(120, 255, 255, 255)
+        );
 
-        internal static Size MeasureString(Graphics graphics, Font font, string text, StringAlignment alignment, Size maxSize)
+        internal static Size MeasureString(
+            Graphics graphics,
+            Font font,
+            string text,
+            StringAlignment alignment,
+            Size maxSize
+        )
         {
             // copied from DesignerHelpers.cs
             SizeF textSize = SizeF.Empty;
@@ -41,11 +49,20 @@ namespace System.Workflow.Activities
                 format.LineAlignment = StringAlignment.Center;
                 format.Trimming = StringTrimming.EllipsisCharacter;
                 format.FormatFlags = StringFormatFlags.LineLimit;
-                textSize = graphics.MeasureString(text, font, new SizeF(maxSize.Width, maxSize.Height), format);
+                textSize = graphics.MeasureString(
+                    text,
+                    font,
+                    new SizeF(maxSize.Width, maxSize.Height),
+                    format
+                );
             }
 
-            return new Size(Convert.ToInt32(Math.Ceiling(textSize.Width)), Convert.ToInt32(Math.Ceiling(textSize.Height)));
+            return new Size(
+                Convert.ToInt32(Math.Ceiling(textSize.Width)),
+                Convert.ToInt32(Math.Ceiling(textSize.Height))
+            );
         }
+
         /// <summary>
         /// Makes sure that rectangle is completely contained in the bounds rectangle
         /// </summary>
@@ -91,8 +108,7 @@ namespace System.Workflow.Activities
                 p1 = p2;
                 p2 = p3;
                 p3 = points[i];
-                if ((p1.X == p2.X) && (p2.X == p3.X) ||
-                    (p1.Y == p2.Y) && (p2.Y == p3.Y))
+                if ((p1.X == p2.X) && (p2.X == p3.X) || (p1.Y == p2.Y) && (p2.Y == p3.Y))
                     continue;
 
                 optimized.Add(p2);
@@ -105,7 +121,15 @@ namespace System.Workflow.Activities
             return optimized.ToArray();
         }
 
-        internal static void DrawConnector(Graphics graphics, Pen pen, Point[] points, Size connectorCapSize, Size maxCapSize, LineAnchor startConnectorCap, LineAnchor endConnectorCap)
+        internal static void DrawConnector(
+            Graphics graphics,
+            Pen pen,
+            Point[] points,
+            Size connectorCapSize,
+            Size maxCapSize,
+            LineAnchor startConnectorCap,
+            LineAnchor endConnectorCap
+        )
         {
             if (points.GetLength(0) < 2)
                 return;
@@ -118,22 +142,36 @@ namespace System.Workflow.Activities
             if (startConnectorCap != LineAnchor.None)
             {
                 Point[] startSegment = new Point[] { points[0], points[1] };
-                int capSize = (startSegment[0].Y == startSegment[1].Y) ? connectorCapSize.Width : connectorCapSize.Height;
+                int capSize =
+                    (startSegment[0].Y == startSegment[1].Y)
+                        ? connectorCapSize.Width
+                        : connectorCapSize.Height;
                 capSize += (capSize % 2);
                 capSize = Math.Min(Math.Min(capSize, maxCapSize.Width), maxCapSize.Height);
                 startCap = GetLineCap(startConnectorCap, capSize, out startCapInset);
 
                 //Now if user has requested us to fill the line cap then we do so
-                //THIS IS A WORKAROUND IN FILLING THE CUSTOM CAPS AS GDI+ HAS A 
-                bool fill = (startCap != null && (((int)startConnectorCap % 2) == 0) && (startSegment[0].X == startSegment[1].X || startSegment[0].Y == startSegment[1].Y));
+                //THIS IS A WORKAROUND IN FILLING THE CUSTOM CAPS AS GDI+ HAS A
+                bool fill = (
+                    startCap != null
+                    && (((int)startConnectorCap % 2) == 0)
+                    && (
+                        startSegment[0].X == startSegment[1].X
+                        || startSegment[0].Y == startSegment[1].Y
+                    )
+                );
                 if (fill)
                 {
                     Matrix oldTransform = graphics.Transform;
                     graphics.TranslateTransform(startSegment[0].X, startSegment[0].Y);
                     if (startSegment[0].Y == startSegment[1].Y)
-                        graphics.RotateTransform((startSegment[0].X < startSegment[1].X) ? 90.0f : 270.0f);
+                        graphics.RotateTransform(
+                            (startSegment[0].X < startSegment[1].X) ? 90.0f : 270.0f
+                        );
                     else
-                        graphics.RotateTransform((startSegment[0].Y < startSegment[1].Y) ? 180.0f : 0.0f);
+                        graphics.RotateTransform(
+                            (startSegment[0].Y < startSegment[1].Y) ? 180.0f : 0.0f
+                        );
                     using (Brush penBrush = new SolidBrush(pen.Color))
                         graphics.FillPath(penBrush, startCap);
                     graphics.Transform = (oldTransform != null) ? oldTransform : new Matrix();
@@ -144,23 +182,38 @@ namespace System.Workflow.Activities
             float endCapInset = 0.0f;
             if (endConnectorCap != LineAnchor.None)
             {
-                Point[] endSegment = new Point[] { points[points.GetLength(0) - 2], points[points.GetLength(0) - 1] };
-                int capSize = (endSegment[0].Y == endSegment[1].Y) ? connectorCapSize.Width : connectorCapSize.Height;
+                Point[] endSegment = new Point[]
+                {
+                    points[points.GetLength(0) - 2],
+                    points[points.GetLength(0) - 1],
+                };
+                int capSize =
+                    (endSegment[0].Y == endSegment[1].Y)
+                        ? connectorCapSize.Width
+                        : connectorCapSize.Height;
                 capSize += (capSize % 2);
                 capSize = Math.Min(Math.Min(capSize, maxCapSize.Width), maxCapSize.Height);
                 endCap = GetLineCap(endConnectorCap, capSize, out endCapInset);
 
                 //Now if user has requested us to fill the line cap then we do so,
-                //THIS IS A WORKAROUND IN FILLING THE CUSTOM CAPS AS GDI+ HAS A 
-                bool fill = (endCap != null && (((int)endConnectorCap % 2) == 0) && (endSegment[0].X == endSegment[1].X || endSegment[0].Y == endSegment[1].Y));
+                //THIS IS A WORKAROUND IN FILLING THE CUSTOM CAPS AS GDI+ HAS A
+                bool fill = (
+                    endCap != null
+                    && (((int)endConnectorCap % 2) == 0)
+                    && (endSegment[0].X == endSegment[1].X || endSegment[0].Y == endSegment[1].Y)
+                );
                 if (fill)
                 {
                     Matrix oldTransform = graphics.Transform;
                     graphics.TranslateTransform(endSegment[1].X, endSegment[1].Y);
                     if (endSegment[0].Y == endSegment[1].Y)
-                        graphics.RotateTransform((endSegment[0].X < endSegment[1].X) ? 270.0f : 90.0f);
+                        graphics.RotateTransform(
+                            (endSegment[0].X < endSegment[1].X) ? 270.0f : 90.0f
+                        );
                     else
-                        graphics.RotateTransform((endSegment[0].Y < endSegment[1].Y) ? 0.0f : 180.0f);
+                        graphics.RotateTransform(
+                            (endSegment[0].Y < endSegment[1].Y) ? 0.0f : 180.0f
+                        );
                     using (Brush penBrush = new SolidBrush(pen.Color))
                         graphics.FillPath(penBrush, endCap);
                     graphics.Transform = (oldTransform != null) ? oldTransform : new Matrix();
@@ -183,7 +236,12 @@ namespace System.Workflow.Activities
                 pen.CustomEndCap = customEndCap;
             }
 
-            using (GraphicsPath path = GetRoundedPath(points, StateDesignerConnector.ConnectorPadding / 2))
+            using (
+                GraphicsPath path = GetRoundedPath(
+                    points,
+                    StateDesignerConnector.ConnectorPadding / 2
+                )
+            )
             {
                 graphics.DrawPath(pen, path);
             }
@@ -246,20 +304,42 @@ namespace System.Workflow.Activities
                 nextConnectorSize = GetDistance(p2, p3);
                 if (currentConnectorSize >= diameter && nextConnectorSize >= diameter)
                 {
-                    AddSegment(path, radius, p1, p2, (previousConnectorSize >= diameter), true, direction1);
+                    AddSegment(
+                        path,
+                        radius,
+                        p1,
+                        p2,
+                        (previousConnectorSize >= diameter),
+                        true,
+                        direction1
+                    );
                     AddRoundedCorner(path, diameter, p2, direction1, direction2);
                 }
                 else
                 {
-                    AddSegment(path, radius, p1, p2, (previousConnectorSize >= diameter), false, direction1);
+                    AddSegment(
+                        path,
+                        radius,
+                        p1,
+                        p2,
+                        (previousConnectorSize >= diameter),
+                        false,
+                        direction1
+                    );
                 }
 
                 i++;
             }
 
-            AddSegment(path, radius, p2, p3,
+            AddSegment(
+                path,
+                radius,
+                p2,
+                p3,
                 (currentConnectorSize >= diameter && nextConnectorSize >= diameter),
-                false, direction2);
+                false,
+                direction2
+            );
 
             return path;
         }
@@ -272,7 +352,15 @@ namespace System.Workflow.Activities
                 return Math.Abs(p1.X - p2.X);
         }
 
-        private static void AddSegment(GraphicsPath path, int radius, Point p1, Point p2, bool roundP1, bool roundP2, ArrowDirection direction)
+        private static void AddSegment(
+            GraphicsPath path,
+            int radius,
+            Point p1,
+            Point p2,
+            bool roundP1,
+            bool roundP2,
+            ArrowDirection direction
+        )
         {
             if (roundP1)
             {
@@ -313,7 +401,13 @@ namespace System.Workflow.Activities
             path.AddLine(p1, p2);
         }
 
-        private static void AddRoundedCorner(GraphicsPath path, int diameter, Point midPoint, ArrowDirection direction1, ArrowDirection direction2)
+        private static void AddRoundedCorner(
+            GraphicsPath path,
+            int diameter,
+            Point midPoint,
+            ArrowDirection direction1,
+            ArrowDirection direction2
+        )
         {
             switch (direction1)
             {
@@ -321,25 +415,67 @@ namespace System.Workflow.Activities
                     if (direction2 == ArrowDirection.Down)
                         path.AddArc(midPoint.X, midPoint.Y, diameter, diameter, 270f, -90f);
                     else
-                        path.AddArc(midPoint.X, midPoint.Y - diameter, diameter, diameter, 90f, 90f);
+                        path.AddArc(
+                            midPoint.X,
+                            midPoint.Y - diameter,
+                            diameter,
+                            diameter,
+                            90f,
+                            90f
+                        );
                     break;
                 case ArrowDirection.Right:
                     if (direction2 == ArrowDirection.Down)
-                        path.AddArc(midPoint.X - diameter, midPoint.Y, diameter, diameter, 270f, 90f);
+                        path.AddArc(
+                            midPoint.X - diameter,
+                            midPoint.Y,
+                            diameter,
+                            diameter,
+                            270f,
+                            90f
+                        );
                     else
-                        path.AddArc(midPoint.X - diameter, midPoint.Y - diameter, diameter, diameter, 90f, -90f);
+                        path.AddArc(
+                            midPoint.X - diameter,
+                            midPoint.Y - diameter,
+                            diameter,
+                            diameter,
+                            90f,
+                            -90f
+                        );
                     break;
                 case ArrowDirection.Up:
                     if (direction2 == ArrowDirection.Left)
-                        path.AddArc(midPoint.X - diameter, midPoint.Y, diameter, diameter, 0f, -90f);
+                        path.AddArc(
+                            midPoint.X - diameter,
+                            midPoint.Y,
+                            diameter,
+                            diameter,
+                            0f,
+                            -90f
+                        );
                     else
                         path.AddArc(midPoint.X, midPoint.Y, diameter, diameter, 180f, 90f);
                     break;
                 default:
                     if (direction2 == ArrowDirection.Left)
-                        path.AddArc(midPoint.X - diameter, midPoint.Y - diameter, diameter, diameter, 0f, 90f);
+                        path.AddArc(
+                            midPoint.X - diameter,
+                            midPoint.Y - diameter,
+                            diameter,
+                            diameter,
+                            0f,
+                            90f
+                        );
                     else
-                        path.AddArc(midPoint.X, midPoint.Y - diameter, diameter, diameter, 180f, -90f);
+                        path.AddArc(
+                            midPoint.X,
+                            midPoint.Y - diameter,
+                            diameter,
+                            diameter,
+                            180f,
+                            -90f
+                        );
                     break;
             }
         }
@@ -358,16 +494,14 @@ namespace System.Workflow.Activities
                     // Bottom to Top
                     return ArrowDirection.Up;
             else
-                // horizontal
-                if (start.X < end.X)
-                    // left to right
-                    return ArrowDirection.Right;
-                else
-                    // right to left
-                    return ArrowDirection.Left;
+            // horizontal
+            if (start.X < end.X)
+                // left to right
+                return ArrowDirection.Right;
+            else
+                // right to left
+                return ArrowDirection.Left;
         }
-
-
 
         //
 
@@ -386,8 +520,18 @@ namespace System.Workflow.Activities
                     int arcRadius = capSize.Height / 3;
                     lineCapPath.AddLine(capSize.Width / 2, -capSize.Height, 0, 0);
                     lineCapPath.AddLine(0, 0, -capSize.Width / 2, -capSize.Height);
-                    lineCapPath.AddLine(-capSize.Width / 2, -capSize.Height, 0, -capSize.Height + arcRadius);
-                    lineCapPath.AddLine(0, -capSize.Height + arcRadius, capSize.Width / 2, -capSize.Height);
+                    lineCapPath.AddLine(
+                        -capSize.Width / 2,
+                        -capSize.Height,
+                        0,
+                        -capSize.Height + arcRadius
+                    );
+                    lineCapPath.AddLine(
+                        0,
+                        -capSize.Height + arcRadius,
+                        capSize.Width / 2,
+                        -capSize.Height
+                    );
                     capinset = capSize.Height - arcRadius;
                     break;
 
@@ -396,23 +540,53 @@ namespace System.Workflow.Activities
                     lineCapPath.AddLine(0, -capSize.Height, capSize.Width / 2, -capSize.Height / 2);
                     lineCapPath.AddLine(capSize.Width / 2, -capSize.Height / 2, 0, 0);
                     lineCapPath.AddLine(0, 0, -capSize.Width / 2, -capSize.Height / 2);
-                    lineCapPath.AddLine(-capSize.Width / 2, -capSize.Height / 2, 0, -capSize.Height);
+                    lineCapPath.AddLine(
+                        -capSize.Width / 2,
+                        -capSize.Height / 2,
+                        0,
+                        -capSize.Height
+                    );
                     break;
 
                 case LineAnchor.Round:
                 case LineAnchor.RoundAnchor:
-                    lineCapPath.AddEllipse(new Rectangle(-capSize.Width / 2, -capSize.Height, capSize.Width, capSize.Height));
+                    lineCapPath.AddEllipse(
+                        new Rectangle(
+                            -capSize.Width / 2,
+                            -capSize.Height,
+                            capSize.Width,
+                            capSize.Height
+                        )
+                    );
                     break;
 
                 case LineAnchor.Rectangle:
                 case LineAnchor.RectangleAnchor:
-                    lineCapPath.AddRectangle(new Rectangle(-capSize.Width / 2, -capSize.Height, capSize.Width, capSize.Height));
+                    lineCapPath.AddRectangle(
+                        new Rectangle(
+                            -capSize.Width / 2,
+                            -capSize.Height,
+                            capSize.Width,
+                            capSize.Height
+                        )
+                    );
                     break;
 
                 case LineAnchor.RoundedRectangle:
                 case LineAnchor.RoundedRectangleAnchor:
                     arcRadius = capSize.Height / 4;
-                    lineCapPath.AddPath(ActivityDesignerPaint.GetRoundedRectanglePath(new Rectangle(-capSize.Width / 2, -capSize.Height, capSize.Width, capSize.Height), arcRadius), true);
+                    lineCapPath.AddPath(
+                        ActivityDesignerPaint.GetRoundedRectanglePath(
+                            new Rectangle(
+                                -capSize.Width / 2,
+                                -capSize.Height,
+                                capSize.Width,
+                                capSize.Height
+                            ),
+                            arcRadius
+                        ),
+                        true
+                    );
                     break;
             }
 
@@ -420,11 +594,18 @@ namespace System.Workflow.Activities
             return lineCapPath;
         }
 
-        internal static GraphicsPath GetDesignerPath(ActivityDesigner designer, Rectangle bounds, ActivityDesignerTheme designerTheme)
+        internal static GraphicsPath GetDesignerPath(
+            ActivityDesigner designer,
+            Rectangle bounds,
+            ActivityDesignerTheme designerTheme
+        )
         {
             GraphicsPath designerPath = new GraphicsPath();
 
-            if (designer == GetSafeRootDesigner(designer.Activity.Site) && ((IWorkflowRootDesigner)designer).InvokingDesigner == null)
+            if (
+                designer == GetSafeRootDesigner(designer.Activity.Site)
+                && ((IWorkflowRootDesigner)designer).InvokingDesigner == null
+            )
             {
                 designerPath.AddRectangle(bounds);
             }
@@ -433,8 +614,14 @@ namespace System.Workflow.Activities
                 // Work around: This should come from AmbientTheme.ArcDiameter
                 // but it is internal
                 int arcDiameter = 8;
-                if (designerTheme != null && designerTheme.DesignerGeometry == DesignerGeometry.RoundedRectangle)
-                    designerPath.AddPath(ActivityDesignerPaint.GetRoundedRectanglePath(bounds, arcDiameter), true);
+                if (
+                    designerTheme != null
+                    && designerTheme.DesignerGeometry == DesignerGeometry.RoundedRectangle
+                )
+                    designerPath.AddPath(
+                        ActivityDesignerPaint.GetRoundedRectanglePath(bounds, arcDiameter),
+                        true
+                    );
                 else
                     designerPath.AddRectangle(bounds);
             }
@@ -444,7 +631,9 @@ namespace System.Workflow.Activities
 
         internal static ActivityDesigner GetSafeRootDesigner(IServiceProvider serviceProvider)
         {
-            return (serviceProvider != null) ? ActivityDesigner.GetRootDesigner(serviceProvider) : null;
+            return (serviceProvider != null)
+                ? ActivityDesigner.GetRootDesigner(serviceProvider)
+                : null;
         }
     }
     #endregion

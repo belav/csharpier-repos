@@ -12,13 +12,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.EnableNulla
 {
     public class EnableNullableFixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new EnableNullableCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new EnableNullableCodeRefactoringProvider();
 
         [Fact]
         public async Task EnableNullable_FixAllInSolution()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -55,7 +58,8 @@ class Example4
         </Document>
     </Project>
 </Workspace>
-", @"
+",
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -95,7 +99,8 @@ class Example4
         </Document>
     </Project>
 </Workspace>
-");
+"
+            );
         }
 
         [Theory]
@@ -105,7 +110,8 @@ class Example4
         [InlineData("FixAllInContainingType")]
         public async Task EnableNullable_UnsupportedFixAllScopes(string fixAllScope)
         {
-            await TestMissingInRegularAndScriptAsync($@"
+            await TestMissingInRegularAndScriptAsync(
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -142,7 +148,8 @@ class Example4
         </Document>
     </Project>
 </Workspace>
-");
+"
+            );
         }
     }
 }

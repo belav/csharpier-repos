@@ -28,16 +28,21 @@ namespace Test
     public class BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(string arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg); return; }
+        public BaseClass(string arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg);
+            return;
+        }
     }
 
     public class DerivedClass<T> : BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(int selector) : this((selector < 4) ? "LessThan4" : "AtLeast4") { }
+        public DerivedClass(int selector)
+            : this((selector < 4) ? "LessThan4" : "AtLeast4") { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private DerivedClass(string arg) : base(arg) { }
+        private DerivedClass(string arg)
+            : base(arg) { }
     }
 }
-

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,13 +13,14 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.CompilerServices {
+namespace System.Runtime.CompilerServices
+{
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime.Remoting;
-    using System.Security.Permissions;
     using System.Diagnostics.Contracts;
-        
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+
     [Serializable]
     public sealed class RuntimeWrappedException : Exception
     {
@@ -27,20 +28,24 @@ namespace System.Runtime.CompilerServices {
         public
 #endif
         RuntimeWrappedException(Object thrownObject)
-            : base(Environment.GetResourceString("RuntimeWrappedException")) {
+            : base(Environment.GetResourceString("RuntimeWrappedException"))
+        {
             SetErrorCode(System.__HResults.COR_E_RUNTIMEWRAPPED);
             m_wrappedException = thrownObject;
         }
-    
-        public Object WrappedException {
+
+        public Object WrappedException
+        {
             get { return m_wrappedException; }
         }
 
         private Object m_wrappedException;
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
-            if (info==null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
@@ -49,9 +54,9 @@ namespace System.Runtime.CompilerServices {
         }
 
         internal RuntimeWrappedException(SerializationInfo info, StreamingContext context)
-            : base(info, context) {
+            : base(info, context)
+        {
             m_wrappedException = info.GetValue("WrappedException", typeof(Object));
         }
     }
 }
-

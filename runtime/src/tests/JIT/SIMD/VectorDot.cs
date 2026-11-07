@@ -11,7 +11,8 @@ public partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorDotTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorDotTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorDot(T left, T right, T checkResult)
         {
@@ -99,33 +100,54 @@ public partial class VectorTest
     public static int TestEntryPoint()
     {
         int returnVal = Pass;
-        if (VectorDotTest<float>.VectorDot(3f, 2f, 6f * Vector<float>.Count) != Pass) returnVal = Fail;
-        if (VectorDotTest<double>.VectorDot(3d, 2d, 6d * Vector<double>.Count) != Pass) returnVal = Fail;
-        if (VectorDotTest<int>.VectorDot(3, 2, 6 * Vector<int>.Count) != Pass) returnVal = Fail;
-        if (VectorDotTest<long>.VectorDot(3, 2, (long)(6 * Vector<long>.Count)) != Pass) returnVal = Fail;
-        if (Vector4Test.VectorDot(3f, 2f, 24f) != Pass) returnVal = Fail;
-        if (Vector3Test.VectorDot(3f, 2f, 18f) != Pass) returnVal = Fail;
-        if (Vector2Test.VectorDot(3f, 2f, 12f) != Pass) returnVal = Fail;
-        if (VectorDotTest<ushort>.VectorDot(3, 2, (ushort)(6 * Vector<ushort>.Count)) != Pass) returnVal = Fail;
-        if (VectorDotTest<byte>.VectorDot(3, 2, (byte)(6 * Vector<byte>.Count)) != Pass) returnVal = Fail;
-        if (VectorDotTest<short>.VectorDot(3, 2, (short)(6 * Vector<short>.Count)) != Pass) returnVal = Fail;
-        if (VectorDotTest<sbyte>.VectorDot(3, 2, (sbyte)(6 * Vector<sbyte>.Count)) != Pass) returnVal = Fail;
-        if (VectorDotTest<uint>.VectorDot(3u, 2u, (uint)(6 * Vector<uint>.Count)) != Pass) returnVal = Fail;
-        if (VectorDotTest<ulong>.VectorDot(3ul, 2ul, 6ul * (ulong)Vector<ulong>.Count) != Pass) returnVal = Fail;
-        if (VectorDotTest<nint>.VectorDot(3, 2, 6 * Vector<nint>.Count) != Pass) returnVal = Fail;
-        if (VectorDotTest<nuint>.VectorDot(3u, 2u, (nuint)(6 * Vector<nuint>.Count)) != Pass) returnVal = Fail;
+        if (VectorDotTest<float>.VectorDot(3f, 2f, 6f * Vector<float>.Count) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<double>.VectorDot(3d, 2d, 6d * Vector<double>.Count) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<int>.VectorDot(3, 2, 6 * Vector<int>.Count) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<long>.VectorDot(3, 2, (long)(6 * Vector<long>.Count)) != Pass)
+            returnVal = Fail;
+        if (Vector4Test.VectorDot(3f, 2f, 24f) != Pass)
+            returnVal = Fail;
+        if (Vector3Test.VectorDot(3f, 2f, 18f) != Pass)
+            returnVal = Fail;
+        if (Vector2Test.VectorDot(3f, 2f, 12f) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<ushort>.VectorDot(3, 2, (ushort)(6 * Vector<ushort>.Count)) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<byte>.VectorDot(3, 2, (byte)(6 * Vector<byte>.Count)) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<short>.VectorDot(3, 2, (short)(6 * Vector<short>.Count)) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<sbyte>.VectorDot(3, 2, (sbyte)(6 * Vector<sbyte>.Count)) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<uint>.VectorDot(3u, 2u, (uint)(6 * Vector<uint>.Count)) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<ulong>.VectorDot(3ul, 2ul, 6ul * (ulong)Vector<ulong>.Count) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<nint>.VectorDot(3, 2, 6 * Vector<nint>.Count) != Pass)
+            returnVal = Fail;
+        if (VectorDotTest<nuint>.VectorDot(3u, 2u, (nuint)(6 * Vector<nuint>.Count)) != Pass)
+            returnVal = Fail;
 
         JitLog jitLog = new JitLog();
         // Dot is only recognized as an intrinsic for floating point element types
         // and Vector<int> on AVX.
-        if (!jitLog.Check("Dot", "Single")) returnVal = Fail;
-        if (!jitLog.Check("Dot", "Double")) returnVal = Fail;
-        if (!jitLog.Check("System.Numerics.Vector4:Dot")) returnVal = Fail;
-        if (!jitLog.Check("System.Numerics.Vector3:Dot")) returnVal = Fail;
-        if (!jitLog.Check("System.Numerics.Vector2:Dot")) returnVal = Fail;
+        if (!jitLog.Check("Dot", "Single"))
+            returnVal = Fail;
+        if (!jitLog.Check("Dot", "Double"))
+            returnVal = Fail;
+        if (!jitLog.Check("System.Numerics.Vector4:Dot"))
+            returnVal = Fail;
+        if (!jitLog.Check("System.Numerics.Vector3:Dot"))
+            returnVal = Fail;
+        if (!jitLog.Check("System.Numerics.Vector2:Dot"))
+            returnVal = Fail;
         if (Vector<int>.Count == 8)
         {
-            if (!jitLog.Check("Dot", "Int32")) returnVal = Fail;
+            if (!jitLog.Check("Dot", "Int32"))
+                returnVal = Fail;
         }
         jitLog.Dispose();
 

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,39 +33,35 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Description
 {
-	public class OperationDescriptionCollection
-		: Collection<OperationDescription>
-	{
-		internal OperationDescriptionCollection ()
-		{
-		}
+    public class OperationDescriptionCollection : Collection<OperationDescription>
+    {
+        internal OperationDescriptionCollection() { }
 
-		public OperationDescription Find (string name)
-		{
-			foreach (OperationDescription d in this)
-				if (d.Name == name)
-					return d;
-			return null;
-		}
+        public OperationDescription Find(string name)
+        {
+            foreach (OperationDescription d in this)
+                if (d.Name == name)
+                    return d;
+            return null;
+        }
 
-		public Collection<OperationDescription> FindAll (string name)
-		{
-			Collection<OperationDescription> ret =
-				new Collection<OperationDescription> ();
-			foreach (OperationDescription d in this)
-				if (d.Name == name)
-					ret.Add (d);
-			return ret;
-		}
+        public Collection<OperationDescription> FindAll(string name)
+        {
+            Collection<OperationDescription> ret = new Collection<OperationDescription>();
+            foreach (OperationDescription d in this)
+                if (d.Name == name)
+                    ret.Add(d);
+            return ret;
+        }
 
-		protected override void InsertItem (int index, OperationDescription item)
-		{
-			base.InsertItem (index, item);
-		}
+        protected override void InsertItem(int index, OperationDescription item)
+        {
+            base.InsertItem(index, item);
+        }
 
-		protected override void SetItem (int index, OperationDescription item)
-		{
-			base.SetItem (index, item);
-		}
-	}
+        protected override void SetItem(int index, OperationDescription item)
+        {
+            base.SetItem(index, item);
+        }
+    }
 }

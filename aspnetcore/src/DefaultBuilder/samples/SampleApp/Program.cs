@@ -33,9 +33,8 @@ public class Program
     {
         // Changing the listening URL
         using (
-            WebHost.Start(
-                "http://localhost:8080",
-                context => context.Response.WriteAsync("Hello, World!")
+            WebHost.Start("http://localhost:8080", context =>
+                context.Response.WriteAsync("Hello, World!")
             )
         )
         {
@@ -53,23 +52,17 @@ public class Program
         using (
             WebHost.Start(router =>
                 router
-                    .MapGet(
-                        "hello/{name}",
-                        (req, res, data) => res.WriteAsync($"Hello, {data.Values["name"]}")
+                    .MapGet("hello/{name}", (req, res, data) =>
+                        res.WriteAsync($"Hello, {data.Values["name"]}")
                     )
-                    .MapGet(
-                        "goodbye/{name}",
-                        (req, res, data) => res.WriteAsync($"Goodbye, {data.Values["name"]}")
+                    .MapGet("goodbye/{name}", (req, res, data) =>
+                        res.WriteAsync($"Goodbye, {data.Values["name"]}")
                     )
-                    .MapGet(
-                        "throw/{message?}",
-                        (req, res, data) =>
-                            throw new Exception((string)data.Values["message"] ?? "Uh oh!")
+                    .MapGet("throw/{message?}", (req, res, data) =>
+                        throw new Exception((string)data.Values["message"] ?? "Uh oh!")
                     )
-                    .MapGet(
-                        "{greeting}/{name}",
-                        (req, res, data) =>
-                            res.WriteAsync($"{data.Values["greeting"]}, {data.Values["name"]}")
+                    .MapGet("{greeting}/{name}", (req, res, data) =>
+                        res.WriteAsync($"{data.Values["greeting"]}, {data.Values["name"]}")
                     )
                     .MapGet("", (req, res, data) => res.WriteAsync($"Hello, World!"))
             )

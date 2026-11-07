@@ -7,8 +7,8 @@
 namespace System.Net
 {
     using System;
-    using System.Net.Sockets;
     using System.IO;
+    using System.Net.Sockets;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -17,8 +17,8 @@ namespace System.Net
         Stream stream;
         NetworkStream netStream;
 
-        protected DelegatedStream() {
-        }
+        protected DelegatedStream() { }
+
         protected DelegatedStream(Stream stream)
         {
             if (stream == null)
@@ -30,34 +30,22 @@ namespace System.Net
 
         protected Stream BaseStream
         {
-            get
-            {
-                return this.stream;
-            }
+            get { return this.stream; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return this.stream.CanRead;
-            }
+            get { return this.stream.CanRead; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return this.stream.CanSeek;
-            }
+            get { return this.stream.CanSeek; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return this.stream.CanWrite;
-            }
+            get { return this.stream.CanWrite; }
         }
 
         public override long Length
@@ -89,34 +77,50 @@ namespace System.Net
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (!CanRead)
                 throw new NotSupportedException(SR.GetString(SR.ReadNotSupported));
 
             IAsyncResult result = null;
-            
-            if(netStream != null){
-                result = this.netStream.UnsafeBeginRead (buffer, offset, count, callback, state);
+
+            if (netStream != null)
+            {
+                result = this.netStream.UnsafeBeginRead(buffer, offset, count, callback, state);
             }
-            else{
-                result = this.stream.BeginRead (buffer, offset, count, callback, state);
+            else
+            {
+                result = this.stream.BeginRead(buffer, offset, count, callback, state);
             }
             return result;
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (!CanWrite)
                 throw new NotSupportedException(SR.GetString(SR.WriteNotSupported));
-            
+
             IAsyncResult result = null;
 
-            if(netStream != null){
+            if (netStream != null)
+            {
                 result = this.netStream.UnsafeBeginWrite(buffer, offset, count, callback, state);
             }
-            else{
-                result = this.stream.BeginWrite (buffer, offset, count, callback, state);
+            else
+            {
+                result = this.stream.BeginWrite(buffer, offset, count, callback, state);
             }
             return result;
         }
@@ -133,7 +137,7 @@ namespace System.Net
             if (!CanRead)
                 throw new NotSupportedException(SR.GetString(SR.ReadNotSupported));
 
-            int read = this.stream.EndRead (asyncResult);
+            int read = this.stream.EndRead(asyncResult);
             return read;
         }
 
@@ -142,7 +146,7 @@ namespace System.Net
             if (!CanWrite)
                 throw new NotSupportedException(SR.GetString(SR.WriteNotSupported));
 
-            this.stream.EndWrite (asyncResult);
+            this.stream.EndWrite(asyncResult);
         }
 
         public override void Flush()
@@ -164,7 +168,12 @@ namespace System.Net
             return read;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (!CanRead)
                 throw new NotSupportedException(SR.GetString(SR.ReadNotSupported));
@@ -197,7 +206,12 @@ namespace System.Net
             this.stream.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (!CanWrite)
                 throw new NotSupportedException(SR.GetString(SR.WriteNotSupported));

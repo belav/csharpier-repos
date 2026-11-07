@@ -3,49 +3,50 @@ using System.Collections.Generic;
 
 class Test
 {
-	public static int Counter = 0;
-	
-	public struct Nested : IDisposable
-	{
-		public int Current { get { return 1; } }
-		public bool MoveNext ()
-		{
-			return false;
-		}
-		
-		public void Reset ()
-		{
-		}
+    public static int Counter = 0;
 
-		void IDisposable.Dispose()
-		{
-			Counter++;
-		}
+    public struct Nested : IDisposable
+    {
+        public int Current
+        {
+            get { return 1; }
+        }
 
-		public void Dispose()
-		{
-			throw new ApplicationException ("error");
-		}
-	}
+        public bool MoveNext()
+        {
+            return false;
+        }
 
-	public Nested GetEnumerator ()
-	{
-		return new Nested ();
-	}
+        public void Reset() { }
+
+        void IDisposable.Dispose()
+        {
+            Counter++;
+        }
+
+        public void Dispose()
+        {
+            throw new ApplicationException("error");
+        }
+    }
+
+    public Nested GetEnumerator()
+    {
+        return new Nested();
+    }
 }
 
 public static class Program
 {
-	public static int Main ()
-	{
-		Test t = new Test ();
-		
-		foreach (int i in t) {
-		}
-		
-		if (Test.Counter != 1)
-			return 1;
-		
-		return 0;
-	}
+    public static int Main()
+    {
+        Test t = new Test();
+
+        foreach (int i in t) { }
+
+        if (Test.Counter != 1)
+            return 1;
+
+        return 0;
+    }
 }

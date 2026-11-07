@@ -21,6 +21,9 @@ namespace Microsoft.CodeAnalysis.Navigation
         /// <param name="assemblyName">The name of the assembly the symbol was defined in. Can be used by the
         /// receiver to quickly filter down to the project/compilation search for the symbol.</param>
         Task<INavigableLocation?> TryGetNavigableLocationAsync(
-            string assemblyName, string documentationCommentId, CancellationToken cancellationToken);
+            string assemblyName,
+            string documentationCommentId,
+            CancellationToken cancellationToken
+        );
     }
 }

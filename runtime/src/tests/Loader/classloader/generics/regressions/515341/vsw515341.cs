@@ -8,36 +8,37 @@ using System;
 using Xunit;
 
 public interface GenI<T> { }
+
 public struct GenS<T> : GenI<T> { }
 
 public class C
 {
-	public void Meth2<T>() where T : GenI<C> { }
-}	 
+    public void Meth2<T>()
+        where T : GenI<C> { }
+}
 
 public class Test_vsw515341
 {
-	public static void RunTest()
-	{
-		C c = new C();
-		c.Meth2<GenS<C>>();	
-	}
-	
-	[Fact]
-	public static int TestEntryPoint()
-	{
-		try
-		{
-			RunTest();
-			
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		catch (Exception e)
-		{	
-			Console.WriteLine("FAIL: Caught unexpected exception: " + e);
-			return 101;
-		}
-	}
-}
+    public static void RunTest()
+    {
+        C c = new C();
+        c.Meth2<GenS<C>>();
+    }
 
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        try
+        {
+            RunTest();
+
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL: Caught unexpected exception: " + e);
+            return 101;
+        }
+    }
+}

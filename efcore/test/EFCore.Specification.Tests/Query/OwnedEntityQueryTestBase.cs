@@ -7,36 +7,36 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 {
-    protected override string StoreName
-        => "OwnedEntityQueryTests";
+    protected override string StoreName => "OwnedEntityQueryTests";
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Multiple_single_result_in_projection_containing_owned_types(bool async)
+    public virtual async Task Multiple_single_result_in_projection_containing_owned_types(
+        bool async
+    )
     {
         var contextFactory = await InitializeAsync<Context20277>();
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.AsNoTracking().Select(
-                e => new
+            var query = context
+                .Entities.AsNoTracking()
+                .Select(e => new
                 {
                     e.Id,
-                    FirstChild = e.Children
-                        .Where(c => c.Type == 1)
+                    FirstChild = e
+                        .Children.Where(c => c.Type == 1)
                         .AsQueryable()
                         .Select(_project)
                         .FirstOrDefault(),
-                    SecondChild = e.Children
-                        .Where(c => c.Type == 2)
+                    SecondChild = e
+                        .Children.Where(c => c.Type == 2)
                         .AsQueryable()
                         .Select(_project)
                         .FirstOrDefault(),
                 });
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
         }
     }
 
@@ -50,26 +50,24 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     protected class Context20277 : DbContext
     {
         public Context20277(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        public DbSet<Entity20277> Entities
-            => Set<Entity20277>();
+        public DbSet<Entity20277> Entities => Set<Entity20277>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Entity20277>(
-                cfg =>
-                {
-                    cfg.OwnsMany(
-                        e => e.Children, inner =>
-                        {
-                            inner.OwnsOne(e => e.Owned);
-                        });
-                });
+            modelBuilder.Entity<Entity20277>(cfg =>
+            {
+                cfg.OwnsMany(
+                    e => e.Children,
+                    inner =>
+                    {
+                        inner.OwnsOne(e => e.Owned);
+                    }
+                );
+            });
         }
     }
 
@@ -100,8 +98,12 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = await context.Contacts.Select(
-                    contact => new ContactDto22089 { Id = contact.Id, Names = contact.Names.Select(name => new NameDto22089()).ToArray() })
+            var results = await context
+                .Contacts.Select(contact => new ContactDto22089
+                {
+                    Id = contact.Id,
+                    Names = contact.Names.Select(name => new NameDto22089()).ToArray(),
+                })
                 .ToListAsync();
         }
     }
@@ -133,16 +135,16 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     protected class SomeDbContext22089 : DbContext
     {
         public SomeDbContext22089(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Contact22089> Contacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Contact22089>().HasKey(c => c.Id);
-            modelBuilder.Entity<Contact22089>().OwnsMany(c => c.Names, names => names.WithOwner().HasForeignKey(n => n.ContactId));
+            modelBuilder
+                .Entity<Contact22089>()
+                .OwnsMany(c => c.Names, names => names.WithOwner().HasForeignKey(n => n.ContactId));
         }
     }
 
@@ -153,38 +155,39 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext24133>();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Set<Blog24133>()
-            .Select(
-                b => new BlogDto24133
+        var query = context
+            .Set<Blog24133>()
+            .Select(b => new BlogDto24133
+            {
+                Id = b.Id,
+                TotalComments = b.Posts.Sum(p => p.CommentsCount),
+                Posts = b.Posts.Select(p => new PostDto24133
                 {
-                    Id = b.Id,
-                    TotalComments = b.Posts.Sum(p => p.CommentsCount),
-                    Posts = b.Posts.Select(p => new PostDto24133 { Title = p.Title, CommentsCount = p.CommentsCount })
-                });
+                    Title = p.Title,
+                    CommentsCount = p.CommentsCount,
+                }),
+            });
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
     }
 
     protected class MyContext24133 : DbContext
     {
         public MyContext24133(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Blog24133>(
-                blog =>
-                {
-                    blog.OwnsMany(
-                        b => b.Posts, p =>
-                        {
-                            p.WithOwner().HasForeignKey("BlogId");
-                            p.Property("BlogId").HasMaxLength(40);
-                        });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Blog24133>(blog =>
+            {
+                blog.OwnsMany(
+                    b => b.Posts,
+                    p =>
+                    {
+                        p.WithOwner().HasForeignKey("BlogId");
+                        p.Property("BlogId").HasMaxLength(40);
+                    }
+                );
+            });
     }
 
     protected class Blog24133
@@ -193,11 +196,10 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
         private List<Post24133> _posts = new();
 
-        public static Blog24133 Create(IEnumerable<Post24133> posts)
-            => new() { _posts = posts.ToList() };
+        public static Blog24133 Create(IEnumerable<Post24133> posts) =>
+            new() { _posts = posts.ToList() };
 
-        public IReadOnlyCollection<Post24133> Posts
-            => new ReadOnlyCollection<Post24133>(_posts);
+        public IReadOnlyCollection<Post24133> Posts => new ReadOnlyCollection<Post24133>(_posts);
     }
 
     protected class Post24133
@@ -226,15 +228,17 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext18582>(seed: c => c.Seed());
 
         using var context = contextFactory.CreateContext();
-        var query = context.Warehouses.Select(
-            x => new WarehouseModel
+        var query = context
+            .Warehouses.Select(x => new WarehouseModel
             {
-                WarehouseCode = x.WarehouseCode, DestinationCountryCodes = x.DestinationCountries.Select(c => c.CountryCode).ToArray()
-            }).AsNoTracking();
+                WarehouseCode = x.WarehouseCode,
+                DestinationCountryCodes = x
+                    .DestinationCountries.Select(c => c.CountryCode)
+                    .ToArray(),
+            })
+            .AsNoTracking();
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         var warehouseModel = Assert.Single(result);
         Assert.Equal("W001", warehouseModel.WarehouseCode);
@@ -244,9 +248,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     protected class MyContext18582 : DbContext
     {
         public MyContext18582(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Warehouse> Warehouses { get; set; }
 
@@ -259,15 +261,17 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
                     DestinationCountries =
                     {
                         new WarehouseDestinationCountry { Id = "1", CountryCode = "US" },
-                        new WarehouseDestinationCountry { Id = "2", CountryCode = "CA" }
-                    }
-                });
+                        new WarehouseDestinationCountry { Id = "2", CountryCode = "CA" },
+                    },
+                }
+            );
 
             SaveChanges();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Warehouse>()
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<Warehouse>()
                 .OwnsMany(x => x.DestinationCountries)
                 .WithOwner()
                 .HasForeignKey(x => x.WarehouseCode)
@@ -278,7 +282,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     {
         public int Id { get; set; }
         public string WarehouseCode { get; set; }
-        public ICollection<WarehouseDestinationCountry> DestinationCountries { get; set; } = new HashSet<WarehouseDestinationCountry>();
+        public ICollection<WarehouseDestinationCountry> DestinationCountries { get; set; } =
+            new HashSet<WarehouseDestinationCountry>();
     }
 
     protected class WarehouseDestinationCountry
@@ -297,12 +302,14 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected virtual async Task Owned_references_on_same_level_expanded_at_different_times_around_take_helper(
         MyContext26592Base context,
-        bool async)
+        bool async
+    )
     {
-        var query = context.Companies.Where(e => e.CustomerData != null).OrderBy(e => e.Id).Take(10);
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var query = context
+            .Companies.Where(e => e.CustomerData != null)
+            .OrderBy(e => e.Id)
+            .Take(10);
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         var company = Assert.Single(result);
         Assert.Equal("Acme Inc.", company.Name);
@@ -312,12 +319,14 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected virtual async Task Owned_references_on_same_level_nested_expanded_at_different_times_around_take_helper(
         MyContext26592Base context,
-        bool async)
+        bool async
+    )
     {
-        var query = context.Owners.Where(e => e.OwnedEntity.CustomerData != null).OrderBy(e => e.Id).Take(10);
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var query = context
+            .Owners.Where(e => e.OwnedEntity.CustomerData != null)
+            .OrderBy(e => e.Id)
+            .Take(10);
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         var owner = Assert.Single(result);
         Assert.Equal("Owner1", owner.Name);
@@ -329,9 +338,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     protected abstract class MyContext26592Base : DbContext
     {
         protected MyContext26592Base(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Owner> Owners { get; set; }
@@ -343,8 +350,9 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
                 {
                     Name = "Acme Inc.",
                     CustomerData = new CustomerData { AdditionalCustomerData = "Regular" },
-                    SupplierData = new SupplierData { AdditionalSupplierData = "Free shipping" }
-                });
+                    SupplierData = new SupplierData { AdditionalSupplierData = "Free shipping" },
+                }
+            );
 
             Add(
                 new Owner
@@ -354,9 +362,13 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
                     {
                         Name = "Intermediate1",
                         CustomerData = new CustomerData { AdditionalCustomerData = "IM Regular" },
-                        SupplierData = new SupplierData { AdditionalSupplierData = "IM Free shipping" }
-                    }
-                });
+                        SupplierData = new SupplierData
+                        {
+                            AdditionalSupplierData = "IM Free shipping",
+                        },
+                    },
+                }
+            );
 
             SaveChanges();
         }

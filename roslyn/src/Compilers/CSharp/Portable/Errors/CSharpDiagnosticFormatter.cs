@@ -6,15 +6,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public class CSharpDiagnosticFormatter : DiagnosticFormatter
     {
-        internal CSharpDiagnosticFormatter()
-        {
-        }
+        internal CSharpDiagnosticFormatter() { }
 
-        public static new CSharpDiagnosticFormatter Instance { get; } = new CSharpDiagnosticFormatter();
+        public static new CSharpDiagnosticFormatter Instance { get; } =
+            new CSharpDiagnosticFormatter();
 
         internal override bool HasDefaultHelpLinkUri(Diagnostic diagnostic)
         {
-            return diagnostic.Descriptor.HelpLinkUri == ErrorFacts.GetHelpLink((ErrorCode)diagnostic.Code);
+            return diagnostic.Descriptor.HelpLinkUri
+                == ErrorFacts.GetHelpLink((ErrorCode)diagnostic.Code);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace System.Data
     {
         IDbConnection? Connection { get; set; }
         IDbTransaction? Transaction { get; set; }
+
         [AllowNull]
         string CommandText { get; set; }
         int CommandTimeout { get; set; }

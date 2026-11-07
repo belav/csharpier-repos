@@ -17,10 +17,7 @@ public partial class ParserTests
         {
             var command = new CliCommand("outer")
             {
-                new CliCommand("inner")
-                {
-                    new CliOption<string>("-x")
-                }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result1 = command.Parse(Split("inner -x hello"));
@@ -28,25 +25,28 @@ public partial class ParserTests
 
             result1.Diagram().Should().Be(result2.Diagram());
         }
-        
+
         [Fact]
         public void When_parsing_a_string_array_input_then_a_full_path_to_an_executable_is_not_matched_by_the_root_command()
         {
             var command = new CliRootCommand
             {
-                new CliCommand("inner")
-                {
-                    new CliOption<string>("-x")
-                }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             command.Parse(Split("inner -x hello")).Errors.Should().BeEmpty();
 
-            var parserResult = command.Parse(Split($"\"{CliRootCommand.ExecutablePath}\" inner -x hello"));
+            var parserResult = command.Parse(
+                Split($"\"{CliRootCommand.ExecutablePath}\" inner -x hello")
+            );
             parserResult
-               .Errors
-               .Should()
-               .ContainSingle(e => e.Message == LocalizationResources.UnrecognizedCommandOrArgument(CliRootCommand.ExecutablePath));
+                .Errors.Should()
+                .ContainSingle(e =>
+                    e.Message
+                    == LocalizationResources.UnrecognizedCommandOrArgument(
+                        CliRootCommand.ExecutablePath
+                    )
+                );
         }
 
         [Fact]
@@ -54,10 +54,7 @@ public partial class ParserTests
         {
             var command = new CliCommand("outer")
             {
-                new CliCommand("inner")
-                {
-                    new CliOption<string>("-x")
-                }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result1 = command.Parse("inner -x hello");
@@ -71,15 +68,14 @@ public partial class ParserTests
         {
             var command = new CliRootCommand
             {
-                new CliCommand("inner")
-                {
-                    new CliOption<string>("-x")
-                }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result2 = command.Parse($"\"{CliRootCommand.ExecutablePath}\" inner -x hello");
 
-            result2.RootCommandResult.IdentifierToken.Value.Should().Be(CliRootCommand.ExecutablePath);
+            result2
+                .RootCommandResult.IdentifierToken.Value.Should()
+                .Be(CliRootCommand.ExecutablePath);
         }
 
         [Fact]
@@ -87,10 +83,7 @@ public partial class ParserTests
         {
             var rootCommand = new CliCommand("outer")
             {
-                new CliCommand("inner")
-                {
-                    new CliOption<string>("-x")
-                }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result1 = rootCommand.Parse("inner -x hello");

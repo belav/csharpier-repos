@@ -16,9 +16,18 @@ namespace System.Tests
             yield return new object[] { new string[] { "singleArg" } };
             yield return new object[] { new string[] { "Arg1", "Arg2" } };
             yield return new object[] { new string[] { "\"Arg With Quotes\"" } };
-            yield return new object[] { new string[] { "\"Arg1 With Quotes\"", "\"Arg2 With Quotes\"" } };
-            yield return new object[] { new string[] { "\"Arg1 With Quotes\"", "Arg2", "\"Arg3 With Quotes\"" } };
-            yield return new object[] { new string[] { "arg1", @"\\\\\" + "\"alpha", @"\" + "\"arg3" } };
+            yield return new object[]
+            {
+                new string[] { "\"Arg1 With Quotes\"", "\"Arg2 With Quotes\"" },
+            };
+            yield return new object[]
+            {
+                new string[] { "\"Arg1 With Quotes\"", "Arg2", "\"Arg3 With Quotes\"" },
+            };
+            yield return new object[]
+            {
+                new string[] { "arg1", @"\\\\\" + "\"alpha", @"\" + "\"arg3" },
+            };
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -28,22 +37,37 @@ namespace System.Tests
             switch (args.Length)
             {
                 case 1:
-                    RemoteExecutor.Invoke((arg) => CheckCommandLineArgs(new string[] { arg }), args[0]).Dispose();
+                    RemoteExecutor
+                        .Invoke((arg) => CheckCommandLineArgs(new string[] { arg }), args[0])
+                        .Dispose();
                     break;
 
                 case 2:
-                    RemoteExecutor.Invoke((arg1, arg2) => CheckCommandLineArgs(new string[] { arg1, arg2 }), args[0], args[1]).Dispose();
+                    RemoteExecutor
+                        .Invoke(
+                            (arg1, arg2) => CheckCommandLineArgs(new string[] { arg1, arg2 }),
+                            args[0],
+                            args[1]
+                        )
+                        .Dispose();
                     break;
 
                 case 3:
-                    RemoteExecutor.Invoke((arg1, arg2, arg3) => CheckCommandLineArgs(new string[] { arg1, arg2, arg3 }), args[0], args[1], args[2]).Dispose();
+                    RemoteExecutor
+                        .Invoke(
+                            (arg1, arg2, arg3) =>
+                                CheckCommandLineArgs(new string[] { arg1, arg2, arg3 }),
+                            args[0],
+                            args[1],
+                            args[2]
+                        )
+                        .Dispose();
                     break;
 
                 default:
                     Assert.Fail("Unexpected number of args passed to test");
                     break;
             }
-
         }
 
         public static int CheckCommandLineArgs(string[] args)
@@ -74,9 +98,11 @@ namespace System.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void GetCommandLineArgs_Fallback_Returns()
         {
-            if (PlatformDetection.IsNotMonoRuntime
+            if (
+                PlatformDetection.IsNotMonoRuntime
                 && PlatformDetection.IsNotNativeAot
-                && PlatformDetection.IsWindows)
+                && PlatformDetection.IsWindows
+            )
             {
                 // Currently fallback command line is only implemented on Windows coreclr
                 RemoteExecutor.Invoke(CheckCommandLineArgsFallback).Dispose();
@@ -88,7 +114,10 @@ namespace System.Tests
             string[] oldArgs = Environment.GetCommandLineArgs();
 
             // Clear the command line args set for managed entry point
-            var field = typeof(Environment).GetField("s_commandLineArgs", BindingFlags.Static | BindingFlags.NonPublic);
+            var field = typeof(Environment).GetField(
+                "s_commandLineArgs",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             Assert.NotNull(field);
             field.SetValue(null, null);
 
@@ -104,8 +133,8 @@ namespace System.Tests
             return RemoteExecutor.SuccessExitCode;
         }
 
-        public static bool IsWindowsCoreCLRJit
-            => PlatformDetection.IsWindows
+        public static bool IsWindowsCoreCLRJit =>
+            PlatformDetection.IsWindows
             && PlatformDetection.IsNotMonoRuntime
             && PlatformDetection.IsNotNativeAot;
 
@@ -119,13 +148,19 @@ namespace System.Tests
         [InlineData(@"""\\Some Server\cmd"" ""arg", new[] { @"\\Some Server\cmd", "arg" })]
         public static unsafe void CheckCommandLineParser(string cmdLine, string[] args)
         {
-            var method = typeof(Environment).GetMethod("SegmentCommandLine", BindingFlags.Static | BindingFlags.NonPublic);
+            var method = typeof(Environment).GetMethod(
+                "SegmentCommandLine",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             Assert.NotNull(method);
 
             var span = cmdLine.AsSpan(); // Workaround
             fixed (char* p = span)
             {
-                Assert.Equal(args, method.Invoke(null, new object[] { Pointer.Box(p, typeof(char*)) }));
+                Assert.Equal(
+                    args,
+                    method.Invoke(null, new object[] { Pointer.Box(p, typeof(char*)) })
+                );
             }
         }
     }

@@ -16,10 +16,12 @@ public class TestClass
         public Vector64<short> v64_short_0;
         public ulong ulong_1;
     }
+
     public struct S2
     {
         public S1 s1_3;
     }
+
     static float s_float_13 = -1f;
     static uint s_uint_16 = 1;
     static ulong s_ulong_17 = 5;
@@ -32,7 +34,40 @@ public class TestClass
     static Vector128<float> s_v128_float_36 = Vector128.CreateScalar(0.1f);
     static Vector128<double> s_v128_double_37 = Vector128.Create(1.0235294117647058, 2);
     static Vector256<byte> s_v256_byte_38 = Vector256.CreateScalar((byte)5);
-    static Vector256<sbyte> s_v256_sbyte_39 = Vector256.Create(1, 0, -2, 2, 97, 97, -2, -5, 5, 5, -5, 1, 2, 1, 5, -2, 97, 2, 6, 2, 5, -5, 1, -2, 97, 2, 5, 5, 2, -2, 2, 5);
+    static Vector256<sbyte> s_v256_sbyte_39 = Vector256.Create(
+        1,
+        0,
+        -2,
+        2,
+        97,
+        97,
+        -2,
+        -5,
+        5,
+        5,
+        -5,
+        1,
+        2,
+        1,
+        5,
+        -2,
+        97,
+        2,
+        6,
+        2,
+        5,
+        -5,
+        1,
+        -2,
+        97,
+        2,
+        5,
+        5,
+        2,
+        -2,
+        2,
+        5
+    );
     static Vector256<short> s_v256_short_40 = Vector256.CreateScalar((short)2);
     static Vector256<ushort> s_v256_ushort_41 = Vector256.Create((ushort)97);
     static Vector256<int> s_v256_int_42 = Vector256<int>.Zero;
@@ -74,9 +109,14 @@ public class TestClass
     [MethodImpl(MethodImplOptions.NoInlining)]
     public Vector256<int> Method31()
     {
-            byte byte_929 = 2;
-            return s_v256_int_42 += v256_int_101 | v256_int_101 ^ v256_int_101 | 
-                Vector256<int>.AllBitsSet & s_v256_int_42 ^ (s_v256_int_42 *= v256_int_101) - (v256_int_101 ^ Vector256<int>.Zero) & (v256_int_101 *= v256_int_101) - Avx2.ShiftRightLogical(v256_int_101, byte_929);
+        byte byte_929 = 2;
+        return s_v256_int_42 +=
+            v256_int_101
+            | v256_int_101 ^ v256_int_101
+            | Vector256<int>.AllBitsSet & s_v256_int_42
+                ^ (s_v256_int_42 *= v256_int_101) - (v256_int_101 ^ Vector256<int>.Zero)
+                    & (v256_int_101 *= v256_int_101)
+                        - Avx2.ShiftRightLogical(v256_int_101, byte_929);
     }
 
     [Fact]

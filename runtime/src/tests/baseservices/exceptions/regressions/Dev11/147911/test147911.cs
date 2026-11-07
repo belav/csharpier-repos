@@ -5,7 +5,6 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-
 public class Class1
 {
     [DllImport("fpcw.dll")]
@@ -16,6 +15,6 @@ public class Class1
     {
         int retVal = RaiseFPException();
 
-        return ( retVal==100 ) ? 100 : 101;
+        return (retVal == 100) ? 100 : 101;
     }
 }

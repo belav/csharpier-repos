@@ -17,19 +17,29 @@ public class IndexTest
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { property })).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { property }))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { property }, "Name")).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    entityType.AddIndex(new[] { property }, "Name")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => entityType.RemoveIndex(index)).Message);
+            Assert.Throws<InvalidOperationException>(() => entityType.RemoveIndex(index)).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => index.IsUnique = false).Message);
+            Assert.Throws<InvalidOperationException>(() => index.IsUnique = false).Message
+        );
     }
 
     [ConditionalFact]
@@ -98,12 +108,13 @@ public class IndexTest
         var index = entityType.AddIndex(new[] { property1, property2 });
         var exception = Assert.Throws<ArgumentException>(() => index.IsDescending = new[] { true });
         Assert.Equal(
-            CoreStrings.InvalidNumberOfIndexSortOrderValues("{'Id', 'Name'}", 1, 2) + " (Parameter 'descending')",
-            exception.Message);
+            CoreStrings.InvalidNumberOfIndexSortOrderValues("{'Id', 'Name'}", 1, 2)
+                + " (Parameter 'descending')",
+            exception.Message
+        );
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 
     private class Customer
     {

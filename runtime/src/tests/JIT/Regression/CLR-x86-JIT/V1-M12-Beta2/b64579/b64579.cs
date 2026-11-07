@@ -3,14 +3,20 @@
 
 using System;
 using Xunit;
+
 public class Padre
 {
     private double _x = 10;
+
     public virtual void Incrementa(double a)
     {
         _x = _x + a;
     }
-    public void print() { Console.WriteLine(_x); }
+
+    public void print()
+    {
+        Console.WriteLine(_x);
+    }
 }
 
 public class Hijo : Padre
@@ -23,6 +29,7 @@ public class Hijo : Padre
         base.Incrementa(b);
     }
 }
+
 public class Test_b64579
 {
     [Fact]

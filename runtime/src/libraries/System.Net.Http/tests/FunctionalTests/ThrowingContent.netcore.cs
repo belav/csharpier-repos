@@ -9,7 +9,11 @@ namespace System.Net.Http.Functional.Tests
 {
     public partial class ThrowingContent : HttpContent
     {
-        protected override void SerializeToStream(Stream stream, TransportContext context, CancellationToken cancellationToken)
+        protected override void SerializeToStream(
+            Stream stream,
+            TransportContext context,
+            CancellationToken cancellationToken
+        )
         {
             throw _exnFactory();
         }

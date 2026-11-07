@@ -39,8 +39,10 @@ namespace Test_refarg_f8_cs
         ~AA()
         {
             CheckFields();
-            if (self1 != null) self1.CheckFields();
-            if (self2 != null) self2.CheckFields();
+            if (self1 != null)
+                self1.CheckFields();
+            if (self2 != null)
+                self2.CheckFields();
         }
     }
 
@@ -48,6 +50,7 @@ namespace Test_refarg_f8_cs
     {
         private static AA s_aa = new AA(0);
         public static int exitCode = 1;
+
         private static void Litter()
         {
             GC.Collect();

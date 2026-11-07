@@ -13,7 +13,8 @@ namespace System.Text.Json.Serialization.Tests
         /// Demonstrates a <see cref="Dictionary{int, string}"> converter using a JSON array containing KeyValuePair objects.
         /// Sample JSON: [{"Key":1,"Value":"One"},{"Key":2,"Value":"Two"}]
         /// </summary>
-        internal class DictionaryInt32StringKeyValueConverter : JsonConverter<Dictionary<int, string>>
+        internal class DictionaryInt32StringKeyValueConverter
+            : JsonConverter<Dictionary<int, string>>
         {
             private JsonConverter<KeyValuePair<int, string>> _intToStringConverter;
 
@@ -24,13 +25,19 @@ namespace System.Text.Json.Serialization.Tests
                     throw new ArgumentNullException(nameof(options));
                 }
 
-                _intToStringConverter = (JsonConverter<KeyValuePair<int, string>>)options.GetConverter(typeof(KeyValuePair<int, string>));
+                _intToStringConverter =
+                    (JsonConverter<KeyValuePair<int, string>>)
+                        options.GetConverter(typeof(KeyValuePair<int, string>));
 
                 // KeyValuePair<> converter is built-in.
                 Debug.Assert(_intToStringConverter != null);
             }
 
-            public override Dictionary<int, string> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Dictionary<int, string> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
@@ -46,7 +53,11 @@ namespace System.Text.Json.Serialization.Tests
                         return value;
                     }
 
-                    KeyValuePair<int, string> kvpair = _intToStringConverter.Read(ref reader, typeof(KeyValuePair<int, string>), options);
+                    KeyValuePair<int, string> kvpair = _intToStringConverter.Read(
+                        ref reader,
+                        typeof(KeyValuePair<int, string>),
+                        options
+                    );
 
                     value.Add(kvpair.Key, kvpair.Value);
                 }
@@ -54,7 +65,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Dictionary<int, string> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Dictionary<int, string> value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartArray();
 
@@ -70,12 +85,15 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void VerifyDictionaryInt32StringKeyValueConverter()
         {
-            const string json = @"[{""Key"":1,""Value"":""ValueOne""},{""Key"":2,""Value"":""ValueTwo""}]";
+            const string json =
+                @"[{""Key"":1,""Value"":""ValueOne""},{""Key"":2,""Value"":""ValueTwo""}]";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryInt32StringKeyValueConverter(options));
 
-            Dictionary<int, string> dictionary = JsonSerializer.Deserialize<Dictionary<int, string>>(json, options);
+            Dictionary<int, string> dictionary = JsonSerializer.Deserialize<
+                Dictionary<int, string>
+            >(json, options);
             Assert.Equal("ValueOne", dictionary[1]);
             Assert.Equal("ValueTwo", dictionary[2]);
 

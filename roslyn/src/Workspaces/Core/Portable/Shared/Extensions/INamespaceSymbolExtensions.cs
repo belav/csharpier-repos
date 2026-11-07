@@ -13,11 +13,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class INamespaceSymbolExtensions
     {
-        private static readonly ConditionalWeakTable<INamespaceSymbol, List<string>> s_namespaceToNameMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            INamespaceSymbol,
+            List<string>
+        > s_namespaceToNameMap = new();
 
         public static readonly Comparison<INamespaceSymbol> CompareNamespaces = CompareTo;
-        public static readonly IEqualityComparer<INamespaceSymbol> EqualityComparer = new Comparer();
+        public static readonly IEqualityComparer<INamespaceSymbol> EqualityComparer =
+            new Comparer();
 
         private static List<string> GetNameParts(INamespaceSymbol? namespaceSymbol)
         {
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static IEnumerable<INamespaceOrTypeSymbol> GetAllNamespacesAndTypes(
             this INamespaceSymbol namespaceSymbol,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stack = new Stack<INamespaceOrTypeSymbol>();
             stack.Push(namespaceSymbol);
@@ -81,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static IEnumerable<INamespaceSymbol> GetAllNamespaces(
             this INamespaceSymbol namespaceSymbol,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stack = new Stack<INamespaceSymbol>();
             stack.Push(namespaceSymbol);
@@ -100,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static IEnumerable<INamedTypeSymbol> GetAllTypes(
             this IEnumerable<INamespaceSymbol> namespaceSymbols,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return namespaceSymbols.SelectMany(n => n.GetAllTypes(cancellationToken));
         }
@@ -111,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<INamespaceSymbol> FindNamespaces(
             this INamespaceSymbol namespaceSymbol,
             string namespaceName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -135,23 +142,29 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool ContainsAccessibleTypesOrNamespaces(
             this INamespaceSymbol namespaceSymbol,
-            IAssemblySymbol assembly)
+            IAssemblySymbol assembly
+        )
         {
-            using var namespaceQueue = SharedPools.Default<Queue<INamespaceOrTypeSymbol>>().GetPooledObject();
-            return ContainsAccessibleTypesOrNamespacesWorker(namespaceSymbol, assembly, namespaceQueue.Object);
+            using var namespaceQueue = SharedPools
+                .Default<Queue<INamespaceOrTypeSymbol>>()
+                .GetPooledObject();
+            return ContainsAccessibleTypesOrNamespacesWorker(
+                namespaceSymbol,
+                assembly,
+                namespaceQueue.Object
+            );
         }
 
         public static INamespaceSymbol? GetQualifiedNamespace(
             this INamespaceSymbol globalNamespace,
-            string namespaceName)
+            string namespaceName
+        )
         {
             var namespaceSymbol = globalNamespace;
             foreach (var name in namespaceName.Split('.'))
             {
                 var members = namespaceSymbol.GetMembers(name);
-                namespaceSymbol = members.Count() == 1
-                        ? members.First() as INamespaceSymbol
-                        : null;
+                namespaceSymbol = members.Count() == 1 ? members.First() as INamespaceSymbol : null;
 
                 if (namespaceSymbol is null)
                 {
@@ -165,9 +178,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool ContainsAccessibleTypesOrNamespacesWorker(
             this INamespaceSymbol namespaceSymbol,
             IAssemblySymbol assembly,
-            Queue<INamespaceOrTypeSymbol> namespaceQueue)
+            Queue<INamespaceOrTypeSymbol> namespaceQueue
+        )
         {
-            // Note: we only store INamespaceSymbols in here, even though we type it as 
+            // Note: we only store INamespaceSymbols in here, even though we type it as
             // INamespaceOrTypeSymbol.  This is because when we call GetMembers below we
             // want it to return an ImmutableArray so we don't incur any costs to iterate
             // over it.

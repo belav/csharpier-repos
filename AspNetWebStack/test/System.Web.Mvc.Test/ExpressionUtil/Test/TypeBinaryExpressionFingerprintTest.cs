@@ -17,7 +17,11 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type expectedTypeOperand = typeof(object);
 
             // Act
-            TypeBinaryExpressionFingerprint fingerprint = new TypeBinaryExpressionFingerprint(expectedNodeType, expectedType, expectedTypeOperand);
+            TypeBinaryExpressionFingerprint fingerprint = new TypeBinaryExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedTypeOperand
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -34,8 +38,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type typeOperand = typeof(object);
 
             // Act
-            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(nodeType, type, typeOperand);
-            TypeBinaryExpressionFingerprint fingerprint2 = new TypeBinaryExpressionFingerprint(nodeType, type, typeOperand);
+            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                type,
+                typeOperand
+            );
+            TypeBinaryExpressionFingerprint fingerprint2 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                type,
+                typeOperand
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -51,8 +63,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type typeOperand = typeof(object);
 
             // Act
-            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(nodeType, type, typeOperand);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                type,
+                typeOperand
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -67,8 +86,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type typeOperand = typeof(object);
 
             // Act
-            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(nodeType, type, typeOperand);
-            TypeBinaryExpressionFingerprint fingerprint2 = new TypeBinaryExpressionFingerprint(nodeType, type, typeof(string) /* typeOperand */);
+            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                type,
+                typeOperand
+            );
+            TypeBinaryExpressionFingerprint fingerprint2 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                type,
+                typeof(string) /* typeOperand */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -83,8 +110,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type typeOperand = typeof(object);
 
             // Act
-            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(nodeType, type, typeOperand);
-            TypeBinaryExpressionFingerprint fingerprint2 = new TypeBinaryExpressionFingerprint(nodeType, typeof(object), typeOperand);
+            TypeBinaryExpressionFingerprint fingerprint1 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                type,
+                typeOperand
+            );
+            TypeBinaryExpressionFingerprint fingerprint2 = new TypeBinaryExpressionFingerprint(
+                nodeType,
+                typeof(object),
+                typeOperand
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

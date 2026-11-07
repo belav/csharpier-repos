@@ -22,7 +22,8 @@ namespace System.Reflection.Internal
     /// Rationale:
     ///    If there is no intent for reusing the object, do not use pool - just use "new".
     /// </summary>
-    internal sealed class ObjectPool<T> where T : class
+    internal sealed class ObjectPool<T>
+        where T : class
     {
         private struct Element
         {
@@ -37,10 +38,8 @@ namespace System.Reflection.Internal
         // than "new T()".
         private readonly Func<T> _factory;
 
-
         internal ObjectPool(Func<T> factory)
-            : this(factory, Environment.ProcessorCount * 2)
-        { }
+            : this(factory, Environment.ProcessorCount * 2) { }
 
         internal ObjectPool(Func<T> factory, int size)
         {
@@ -83,7 +82,7 @@ namespace System.Reflection.Internal
             }
 
             inst = CreateInstance();
-        gotInstance:
+            gotInstance:
 
             return inst;
         }

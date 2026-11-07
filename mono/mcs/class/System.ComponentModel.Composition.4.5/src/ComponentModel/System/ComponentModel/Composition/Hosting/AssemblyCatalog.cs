@@ -38,7 +38,7 @@ namespace System.ComponentModel.Composition.Hosting
 
 #if FEATURE_REFLECTIONFILEIO
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified code base.
         /// </summary>
         /// <param name="codeBase">
@@ -49,14 +49,14 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="codeBase"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space, 
+        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space,
         ///     or contains one or more invalid characters as defined by <see cref="Path.InvalidPathChars"/>.
         /// </exception>
         /// <exception cref="PathTooLongException">
-        ///     The specified path, file name, or both exceed the system-defined maximum length. 
+        ///     The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
         /// <exception cref="SecurityException">
-        ///     The caller does not have path discovery permission. 
+        ///     The caller does not have path discovery permission.
         /// </exception>
         /// <exception cref="FileNotFoundException">
         ///     <paramref name="codeBase"/> is not found.
@@ -70,9 +70,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="BadImageFormatException">
         ///     <paramref name="codeBase"/> is not a valid assembly
-        ///     -or- 
-        ///     Version 2.0 or later of the common language runtime is currently loaded 
-        ///     and <paramref name="codeBase"/> was compiled with a later version. 
+        ///     -or-
+        ///     Version 2.0 or later of the common language runtime is currently loaded
+        ///     and <paramref name="codeBase"/> was compiled with a later version.
         /// </exception>
         /// <remarks>
         ///     The assembly referenced by <paramref langword="codeBase"/> is loaded into the Load context.
@@ -88,7 +88,7 @@ namespace System.ComponentModel.Composition.Hosting
 
 #if FEATURE_REFLECTIONCONTEXT
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified code base.
         /// </summary>
         /// <param name="codeBase">
@@ -96,7 +96,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     attributed <see cref="Type"/> objects to add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="reflectionContext">
-        ///     The <see cref="ReflectionContext"/> a context used by the catalog when 
+        ///     The <see cref="ReflectionContext"/> a context used by the catalog when
         ///     interpreting the types to inject attributes into the type definition<see cref="AssemblyCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -107,14 +107,14 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="reflectionContext"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space, 
+        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space,
         ///     or contains one or more invalid characters as defined by <see cref="Path.InvalidPathChars"/>.
         /// </exception>
         /// <exception cref="PathTooLongException">
-        ///     The specified path, file name, or both exceed the system-defined maximum length. 
+        ///     The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
         /// <exception cref="SecurityException">
-        ///     The caller does not have path discovery permission. 
+        ///     The caller does not have path discovery permission.
         /// </exception>
         /// <exception cref="FileNotFoundException">
         ///     <paramref name="codeBase"/> is not found.
@@ -128,9 +128,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="BadImageFormatException">
         ///     <paramref name="codeBase"/> is not a valid assembly
-        ///     -or- 
-        ///     Version 2.0 or later of the common language runtime is currently loaded 
-        ///     and <paramref name="codeBase"/> was compiled with a later version. 
+        ///     -or-
+        ///     Version 2.0 or later of the common language runtime is currently loaded
+        ///     and <paramref name="codeBase"/> was compiled with a later version.
         /// </exception>
         /// <remarks>
         ///     The assembly referenced by <paramref langword="codeBase"/> is loaded into the Load context.
@@ -148,7 +148,7 @@ namespace System.ComponentModel.Composition.Hosting
 
 #if FEATURE_REFLECTIONFILEIO
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified code base.
         /// </summary>
         /// <param name="codeBase">
@@ -166,14 +166,14 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="definitionOrigin"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space, 
+        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space,
         ///     or contains one or more invalid characters as defined by <see cref="Path.InvalidPathChars"/>.
         /// </exception>
         /// <exception cref="PathTooLongException">
-        ///     The specified path, file name, or both exceed the system-defined maximum length. 
+        ///     The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
         /// <exception cref="SecurityException">
-        ///     The caller does not have path discovery permission. 
+        ///     The caller does not have path discovery permission.
         /// </exception>
         /// <exception cref="FileNotFoundException">
         ///     <paramref name="codeBase"/> is not found.
@@ -187,9 +187,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="BadImageFormatException">
         ///     <paramref name="codeBase"/> is not a valid assembly
-        ///     -or- 
-        ///     Version 2.0 or later of the common language runtime is currently loaded 
-        ///     and <paramref name="codeBase"/> was compiled with a later version. 
+        ///     -or-
+        ///     Version 2.0 or later of the common language runtime is currently loaded
+        ///     and <paramref name="codeBase"/> was compiled with a later version.
         /// </exception>
         /// <remarks>
         ///     The assembly referenced by <paramref langword="codeBase"/> is loaded into the Load context.
@@ -206,7 +206,7 @@ namespace System.ComponentModel.Composition.Hosting
 
 #if FEATURE_REFLECTIONFILEIO && FEATURE_REFLECTIONCONTEXT
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified code base.
         /// </summary>
         /// <param name="codeBase">
@@ -214,7 +214,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     attributed <see cref="Type"/> objects to add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="reflectionContext">
-        ///     The <see cref="ReflectionContext"/> a context used by the catalog when 
+        ///     The <see cref="ReflectionContext"/> a context used by the catalog when
         ///     interpreting the types to inject attributes into the type definition<see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="definitionOrigin">
@@ -232,14 +232,14 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="definitionOrigin"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space, 
+        ///     <paramref name="codeBase"/> is a zero-length string, contains only white space,
         ///     or contains one or more invalid characters as defined by <see cref="Path.InvalidPathChars"/>.
         /// </exception>
         /// <exception cref="PathTooLongException">
-        ///     The specified path, file name, or both exceed the system-defined maximum length. 
+        ///     The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
         /// <exception cref="SecurityException">
-        ///     The caller does not have path discovery permission. 
+        ///     The caller does not have path discovery permission.
         /// </exception>
         /// <exception cref="FileNotFoundException">
         ///     <paramref name="codeBase"/> is not found.
@@ -253,14 +253,18 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="BadImageFormatException">
         ///     <paramref name="codeBase"/> is not a valid assembly
-        ///     -or- 
-        ///     Version 2.0 or later of the common language runtime is currently loaded 
-        ///     and <paramref name="codeBase"/> was compiled with a later version. 
+        ///     -or-
+        ///     Version 2.0 or later of the common language runtime is currently loaded
+        ///     and <paramref name="codeBase"/> was compiled with a later version.
         /// </exception>
         /// <remarks>
         ///     The assembly referenced by <paramref langword="codeBase"/> is loaded into the Load context.
         /// </remarks>
-        public AssemblyCatalog(string codeBase, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public AssemblyCatalog(
+            string codeBase,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNullOrEmpty(codeBase, "codeBase");
             Requires.NotNull(reflectionContext, "reflectionContext");
@@ -274,26 +278,26 @@ namespace System.ComponentModel.Composition.Hosting
 
 #if FEATURE_REFLECTIONCONTEXT
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified assembly and reflection context.
         /// </summary>
         /// <param name="assembly">
-        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to 
+        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to
         ///     add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="reflectionContext">
-        ///     The <see cref="ReflectionContext"/> a context used by the catalog when 
+        ///     The <see cref="ReflectionContext"/> a context used by the catalog when
         ///     interpreting the types to inject attributes into the type definition.
         /// </param>
         /// <exception cref="ArgumentException">
         ///     <paramref name="assembly"/> is <see langword="null"/>.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="assembly"/> was loaded in the reflection-only context.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="reflectionContext"/> is <see langword="null"/>.
         /// </exception>
         public AssemblyCatalog(Assembly assembly, ReflectionContext reflectionContext)
@@ -307,15 +311,15 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified assembly, reflectionContext and definitionOrigin.
         /// </summary>
         /// <param name="assembly">
-        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to 
+        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to
         ///     add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="reflectionContext">
-        ///     The <see cref="ReflectionContext"/> a context used by the catalog when 
+        ///     The <see cref="ReflectionContext"/> a context used by the catalog when
         ///     interpreting the types to inject attributes into the type definition.
         /// </param>
         /// <param name="definitionOrigin">
@@ -325,18 +329,22 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="assembly"/> is <see langword="null"/>.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="assembly"/> was loaded in the reflection-only context.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="reflectionContext"/> is <see langword="null"/>.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="definitionOrigin"/> is <see langword="null"/>.
         /// </exception>
-        public AssemblyCatalog(Assembly assembly, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public AssemblyCatalog(
+            Assembly assembly,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNull(assembly, "assembly");
             Requires.NotNull(reflectionContext, "reflectionContext");
@@ -349,18 +357,18 @@ namespace System.ComponentModel.Composition.Hosting
 #endif //FEATURE_REFLECTIONCONTEXT
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified assembly.
         /// </summary>
         /// <param name="assembly">
-        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to 
+        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to
         ///     add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentException">
         ///     <paramref name="assembly"/> is <see langword="null"/>.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="assembly"/> was loaded in the reflection-only context.
         /// </exception>
         public AssemblyCatalog(Assembly assembly)
@@ -372,11 +380,11 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AssemblyCatalog"/> class
         ///     with the specified assembly.
         /// </summary>
         /// <param name="assembly">
-        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to 
+        ///     The <see cref="Assembly"/> containing the attributed <see cref="Type"/> objects to
         ///     add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="definitionOrigin">
@@ -386,11 +394,11 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="assembly"/> is <see langword="null"/>.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="assembly"/> was loaded in the reflection-only context.
         ///     <para>
         ///         -or-
-        ///     </para>    
+        ///     </para>
         ///     <paramref name="definitionOrigin"/> is <see langword="null"/>.
         /// </exception>
         public AssemblyCatalog(Assembly assembly, ICompositionElement definitionOrigin)
@@ -407,7 +415,14 @@ namespace System.ComponentModel.Composition.Hosting
 #if FEATURE_REFLECTIONONLY
             if (assembly.ReflectionOnly)
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.Argument_AssemblyReflectionOnly, "assembly"), "assembly");
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.Argument_AssemblyReflectionOnly,
+                        "assembly"
+                    ),
+                    "assembly"
+                );
             }
 #endif //FEATURE_REFLECTIONONLY
             this._assembly = assembly;
@@ -417,13 +432,13 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns the export definitions that match the constraint defined by the specified definition.
         /// </summary>
         /// <param name="definition">
-        ///     The <see cref="ImportDefinition"/> that defines the conditions of the 
+        ///     The <see cref="ImportDefinition"/> that defines the conditions of the
         ///     <see cref="ExportDefinition"/> objects to return.
         /// </param>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the 
-        ///     <see cref="ExportDefinition"/> objects and their associated 
-        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined 
+        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the
+        ///     <see cref="ExportDefinition"/> objects and their associated
+        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined
         ///     by <paramref name="definition"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -434,13 +449,19 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <remarks>
         ///     <note type="inheritinfo">
-        ///         Overriders of this property should never return <see langword="null"/>, if no 
-        ///         <see cref="ExportDefinition"/> match the conditions defined by 
+        ///         Overriders of this property should never return <see langword="null"/>, if no
+        ///         <see cref="ExportDefinition"/> match the conditions defined by
         ///         <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         ///     </note>
         /// </remarks>
-        [SuppressMessage("Microsoft.Contracts", "CC1055", Justification = "Precondition is being validated in the call to inner catalog")]  
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1055",
+            Justification = "Precondition is being validated in the call to inner catalog"
+        )]
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             return this.InnerCatalog.GetExports(definition);
         }
@@ -454,10 +475,14 @@ namespace System.ComponentModel.Composition.Hosting
                 if (this._innerCatalog == null)
                 {
 #if FEATURE_REFLECTIONCONTEXT
-                    var catalogReflectionContextAttribute = this._assembly.GetFirstAttribute<CatalogReflectionContextAttribute>();
-                    var assembly = (catalogReflectionContextAttribute != null) 
-                        ? catalogReflectionContextAttribute.CreateReflectionContext().MapAssembly(this._assembly)
-                        : this._assembly;
+                    var catalogReflectionContextAttribute =
+                        this._assembly.GetFirstAttribute<CatalogReflectionContextAttribute>();
+                    var assembly =
+                        (catalogReflectionContextAttribute != null)
+                            ? catalogReflectionContextAttribute
+                                .CreateReflectionContext()
+                                .MapAssembly(this._assembly)
+                            : this._assembly;
 #else
                     var assembly = this._assembly;
 #endif //FEATURE_REFLECTIONCONTEXT
@@ -466,11 +491,19 @@ namespace System.ComponentModel.Composition.Hosting
                         if (this._innerCatalog == null)
                         {
 #if FEATURE_REFLECTIONCONTEXT
-                            var catalog = (this._reflectionContext != null) 
-                                ? new TypeCatalog(assembly.GetTypes(), this._reflectionContext, this._definitionOrigin)
-                                : new TypeCatalog(assembly.GetTypes(), this._definitionOrigin);
+                            var catalog =
+                                (this._reflectionContext != null)
+                                    ? new TypeCatalog(
+                                        assembly.GetTypes(),
+                                        this._reflectionContext,
+                                        this._definitionOrigin
+                                    )
+                                    : new TypeCatalog(assembly.GetTypes(), this._definitionOrigin);
 #else
-                            var catalog = new TypeCatalog(assembly.GetTypes(), this._definitionOrigin);
+                            var catalog = new TypeCatalog(
+                                assembly.GetTypes(),
+                                this._definitionOrigin
+                            );
 #endif //FEATURE_REFLECTIONCONTEXT
                             Thread.MemoryBarrier();
                             this._innerCatalog = catalog;
@@ -491,11 +524,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// </value>
         public Assembly Assembly
         {
-            get 
+            get
             {
                 Contract.Ensures(Contract.Result<Assembly>() != null);
-                
-                return this._assembly; 
+
+                return this._assembly;
             }
         }
 
@@ -523,7 +556,6 @@ namespace System.ComponentModel.Composition.Hosting
             get { return null; }
         }
 
-
         /// <summary>
         ///     Returns a string representation of the assembly catalog.
         /// </summary>
@@ -535,9 +567,8 @@ namespace System.ComponentModel.Composition.Hosting
             return this.GetDisplayName();
         }
 
-
         protected override void Dispose(bool disposing)
-        {                
+        {
             try
             {
                 if (Interlocked.CompareExchange(ref this._isDisposed, 1, 0) == 0)
@@ -572,10 +603,12 @@ namespace System.ComponentModel.Composition.Hosting
 
         private string GetDisplayName()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-                                "{0} (Assembly=\"{1}\")",   // NOLOC
-                                GetType().Name, 
-                                this.Assembly.FullName);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0} (Assembly=\"{1}\")", // NOLOC
+                GetType().Name,
+                this.Assembly.FullName
+            );
         }
 
 #if FEATURE_REFLECTIONFILEIO

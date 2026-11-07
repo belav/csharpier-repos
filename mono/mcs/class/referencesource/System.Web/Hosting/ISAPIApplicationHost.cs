@@ -1,28 +1,29 @@
 //------------------------------------------------------------------------------
 // <copyright file="ISAPIApplicationHost.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Application host for IIS 5.0 and 6.0
- * 
+ *
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.Hosting {
-    using Microsoft.Win32;
+namespace System.Web.Hosting
+{
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
     using System.Web;
     using System.Web.Configuration;
-    using System.Web.Util;
     using System.Web.Management;
-    using System.Diagnostics.CodeAnalysis;
-
+    using System.Web.Util;
+    using Microsoft.Win32;
 
     // helper class to implement AppHost based on ISAPI
-    internal class ISAPIApplicationHost : MarshalByRefObject, IApplicationHost {
+    internal class ISAPIApplicationHost : MarshalByRefObject, IApplicationHost
+    {
         private String _appId;
         private String _siteID;
         private String _siteName;
@@ -36,7 +37,14 @@ namespace System.Web.Hosting {
         private const string DEFAULT_SITEID = "1";
         private const string DEFAULT_APPID_PREFIX = "/LM/W3SVC/1/ROOT";
 
-        internal ISAPIApplicationHost(string appIdOrVirtualPath, string physicalPath, bool validatePhysicalPath, IProcessHostSupportFunctions functions, string iisVersion = null) {
+        internal ISAPIApplicationHost(
+            string appIdOrVirtualPath,
+            string physicalPath,
+            bool validatePhysicalPath,
+            IProcessHostSupportFunctions functions,
+            string iisVersion = null
+        )
+        {
             _iisVersion = iisVersion;
             // appIdOrVirtualPath is either a full metabase path, or just a virtual path
             // e.g. /LM/W3SVC/1/Root/MyApp ot /MyApp
@@ -44,13 +52,16 @@ namespace System.Web.Hosting {
             _functions = functions;
 
             // make sure the functions are set in the default domain
-            if (null == _functions) {
+            if (null == _functions)
+            {
                 ProcessHost h = ProcessHost.DefaultHost;
 
-                if (null != h) {
+                if (null != h)
+                {
                     _functions = h.SupportFunctions;
 
-                    if (null != _functions) {
+                    if (null != _functions)
+                    {
                         HostingEnvironment.SupportFunctions = _functions;
                     }
                 }
@@ -58,13 +69,15 @@ namespace System.Web.Hosting {
 
             IServerConfig serverConfig = ServerConfig.GetDefaultDomainInstance(_iisVersion);
 
-            if (StringUtil.StringStartsWithIgnoreCase(appIdOrVirtualPath, LMW3SVC_PREFIX)) {
+            if (StringUtil.StringStartsWithIgnoreCase(appIdOrVirtualPath, LMW3SVC_PREFIX))
+            {
                 _appId = appIdOrVirtualPath;
                 _virtualPath = VirtualPath.Create(ExtractVPathFromAppId(_appId));
                 _siteID = ExtractSiteIdFromAppId(_appId);
                 _siteName = serverConfig.GetSiteNameFromSiteID(_siteID);
             }
-            else {
+            else
+            {
                 _virtualPath = VirtualPath.Create(appIdOrVirtualPath);
                 _appId = GetDefaultAppIdFromVPath(_virtualPath.VirtualPathString);
                 _siteID = DEFAULT_SITEID;
@@ -72,43 +85,56 @@ namespace System.Web.Hosting {
             }
 
             // Get the physical path from the virtual path if it wasn't passed in
-            if (physicalPath == null) {
+            if (physicalPath == null)
+            {
                 _physicalPath = serverConfig.MapPath(this, _virtualPath);
             }
-            else {
+            else
+            {
                 _physicalPath = physicalPath;
             }
 
-            if (validatePhysicalPath) {
-                if (!Directory.Exists(_physicalPath)) {
+            if (validatePhysicalPath)
+            {
+                if (!Directory.Exists(_physicalPath))
+                {
                     throw new HttpException(SR.GetString(SR.Invalid_IIS_app, appIdOrVirtualPath));
                 }
             }
         }
 
-        internal ISAPIApplicationHost(string appIdOrVirtualPath, string physicalPath, bool validatePhysicalPath)
-            :this(appIdOrVirtualPath, physicalPath, validatePhysicalPath, null)
-        {}
+        internal ISAPIApplicationHost(
+            string appIdOrVirtualPath,
+            string physicalPath,
+            bool validatePhysicalPath
+        )
+            : this(appIdOrVirtualPath, physicalPath, validatePhysicalPath, null) { }
 
-        public override Object InitializeLifetimeService() {
+        public override Object InitializeLifetimeService()
+        {
             return null; // never expire lease
         }
 
         // IApplicationHost implementation
-        string IApplicationHost.GetVirtualPath() {
+        string IApplicationHost.GetVirtualPath()
+        {
             return _virtualPath.VirtualPathString;
         }
 
-        String IApplicationHost.GetPhysicalPath() {
+        String IApplicationHost.GetPhysicalPath()
+        {
             return _physicalPath;
         }
 
-        IConfigMapPathFactory IApplicationHost.GetConfigMapPathFactory() {
+        IConfigMapPathFactory IApplicationHost.GetConfigMapPathFactory()
+        {
             return new ISAPIConfigMapPathFactory();
         }
 
-        IntPtr IApplicationHost.GetConfigToken() {
-            if (null != _functions) {
+        IntPtr IApplicationHost.GetConfigToken()
+        {
+            if (null != _functions)
+            {
                 return _functions.GetConfigToken(_appId);
             }
             IntPtr token = IntPtr.Zero;
@@ -116,43 +142,55 @@ namespace System.Web.Hosting {
             String username;
             String password;
             IServerConfig serverConfig = ServerConfig.GetDefaultDomainInstance(_iisVersion);
-            bool hasUncUser = serverConfig.GetUncUser(this, _virtualPath, out username, out password);
-            if (hasUncUser) {
-                try {
+            bool hasUncUser = serverConfig.GetUncUser(
+                this,
+                _virtualPath,
+                out username,
+                out password
+            );
+            if (hasUncUser)
+            {
+                try
+                {
                     String error;
                     token = IdentitySection.CreateUserToken(username, password, out error);
                 }
-                catch {
-                }
+                catch { }
             }
 
             return token;
         }
 
-        String IApplicationHost.GetSiteName() {
+        String IApplicationHost.GetSiteName()
+        {
             return _siteName;
         }
 
-        String IApplicationHost.GetSiteID() {
+        String IApplicationHost.GetSiteID()
+        {
             return _siteID;
         }
 
-        void IApplicationHost.MessageReceived() {
-        // make this method call a no-op 
-        // it will be removed soon altogether
+        void IApplicationHost.MessageReceived()
+        {
+            // make this method call a no-op
+            // it will be removed soon altogether
         }
 
-        internal string AppId {
+        internal string AppId
+        {
             get { return _appId; }
         }
 
-        private static String ExtractVPathFromAppId(string id) {
+        private static String ExtractVPathFromAppId(string id)
+        {
             // app id is /LM/W3SVC/1/ROOT for root or /LM/W3SVC/1/ROOT/VDIR
 
             // find fifth / (assuming it starts with /)
             int si = 0;
-            for (int i = 1; i < 5; i++) {
-                si = id.IndexOf('/', si+1);
+            for (int i = 1; i < 5; i++)
+            {
+                si = id.IndexOf('/', si + 1);
                 if (si < 0)
                     break;
             }
@@ -163,16 +201,20 @@ namespace System.Web.Hosting {
                 return id.Substring(si);
         }
 
-        private static String GetDefaultAppIdFromVPath(string virtualPath) {
-            if (virtualPath.Length == 1 && virtualPath[0] == '/') {
+        private static String GetDefaultAppIdFromVPath(string virtualPath)
+        {
+            if (virtualPath.Length == 1 && virtualPath[0] == '/')
+            {
                 return DEFAULT_APPID_PREFIX;
             }
-            else {
+            else
+            {
                 return DEFAULT_APPID_PREFIX + virtualPath;
             }
         }
 
-        private static String ExtractSiteIdFromAppId(string id) {
+        private static String ExtractSiteIdFromAppId(string id)
+        {
             // app id is /LM/W3SVC/1/ROOT for root or /LM/W3SVC/1/ROOT/VDIR
             // the site id is right after prefix
             int offset = LMW3SVC_PREFIX.Length;
@@ -180,34 +222,39 @@ namespace System.Web.Hosting {
             return (si > 0) ? id.Substring(offset, si - offset) : DEFAULT_SITEID;
         }
 
-        internal IProcessHostSupportFunctions SupportFunctions {
-            get {
-                return _functions;
-            }
+        internal IProcessHostSupportFunctions SupportFunctions
+        {
+            get { return _functions; }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "This method's caller is trusted.")]
-        internal string ResolveRootWebConfigPath() {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "This method's caller is trusted."
+        )]
+        internal string ResolveRootWebConfigPath()
+        {
             string rootWebConfigPath = null;
 
-            if (null != _functions) {
+            if (null != _functions)
+            {
                 rootWebConfigPath = _functions.GetRootWebConfigFilename();
             }
 
             return rootWebConfigPath;
         }
-
-
     }
 
     //
     // Create an instance of IConfigMapPath in the worker appdomain.
     // By making the class Serializable, the call to IConfigMapPathFactory.Create()
     // will execute in the worker appdomain.
-    // 
+    //
     [Serializable()]
-    internal class ISAPIConfigMapPathFactory : IConfigMapPathFactory {
-        IConfigMapPath IConfigMapPathFactory.Create(string virtualPath, string physicalPath) {
+    internal class ISAPIConfigMapPathFactory : IConfigMapPathFactory
+    {
+        IConfigMapPath IConfigMapPathFactory.Create(string virtualPath, string physicalPath)
+        {
             return IISMapPath.GetInstance();
         }
     }

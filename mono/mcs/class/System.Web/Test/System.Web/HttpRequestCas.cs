@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,274 +26,310 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HttpRequestCas : AspNetHostingMinimal
+    {
+        private HttpRequest request;
+        private string tempfile;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpRequestCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            request = new HttpRequest(String.Empty, "http://localhost/", String.Empty);
+            tempfile = Path.GetTempFileName();
+        }
 
-		private HttpRequest request;
-		private string tempfile;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Properties_Deny_Unrestricted()
+        {
+            Assert.IsNull(request.AcceptTypes, "AcceptTypes");
+            Assert.IsNull(request.ApplicationPath, "ApplicationPath");
+            request.Browser = null;
+            try
+            {
+                Assert.IsNotNull(request.Browser, "Browser");
+            }
+            catch (NullReferenceException)
+            {
+                // ms
+            }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			request = new HttpRequest (String.Empty, "http://localhost/", String.Empty);
-			tempfile = Path.GetTempFileName ();
-		}
+            request.ContentEncoding = null;
+            try
+            {
+                Assert.IsNull(request.ContentEncoding, "ContentEncoding");
+            }
+            catch (NullReferenceException)
+            {
+                // ms
+            }
+            catch (HttpException)
+            {
+                // mono
+            }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Properties_Deny_Unrestricted ()
-		{
-			Assert.IsNull (request.AcceptTypes, "AcceptTypes");
-			Assert.IsNull (request.ApplicationPath, "ApplicationPath");
-			request.Browser = null;
-			try {
-				Assert.IsNotNull (request.Browser, "Browser");
-			}
-			catch (NullReferenceException) {
-				// ms
-			}
+            Assert.AreEqual(0, request.ContentLength, "ContentLength");
+            Assert.AreEqual(String.Empty, request.ContentType, "ContentType");
+            request.ContentType = null;
+            Assert.IsNotNull(request.Cookies, "Cookies");
 
-			request.ContentEncoding = null;
-			try {
-				Assert.IsNull (request.ContentEncoding, "ContentEncoding");
-			}
-			catch (NullReferenceException) {
-				// ms
-			}
-			catch (HttpException) {
-				// mono
-			}
+            try
+            {
+                Assert.AreEqual("/", request.CurrentExecutionFilePath, "CurrentExecutionFilePath");
+            }
+            catch (NullReferenceException)
+            {
+                // ms 1.x
+            }
 
-			Assert.AreEqual (0, request.ContentLength, "ContentLength");
-			Assert.AreEqual (String.Empty, request.ContentType, "ContentType");
-			request.ContentType = null;
-			Assert.IsNotNull (request.Cookies, "Cookies");
+            try
+            {
+                Assert.AreEqual("/", request.FilePath, "FilePath");
+            }
+            catch (NullReferenceException)
+            {
+                // ms 1.x
+            }
 
-			try {
-				Assert.AreEqual ("/", request.CurrentExecutionFilePath, "CurrentExecutionFilePath");
-			}
-			catch (NullReferenceException) {
-				// ms 1.x
-			}
+            Assert.IsNotNull(request.Files, "Files");
 
-			try {
-				Assert.AreEqual ("/", request.FilePath, "FilePath");
-			}
-			catch (NullReferenceException) {
-				// ms 1.x
-			}
+            Assert.IsNotNull(request.Filter, "Filter");
+            request.Filter = null;
 
-			Assert.IsNotNull (request.Files, "Files");
+            Assert.IsNotNull(request.Form, "Form");
+            Assert.IsNotNull(request.Headers, "Headers");
+            Assert.AreEqual("GET", request.HttpMethod, "HttpMethod");
+            Assert.IsNotNull(request.InputStream, "InputStream");
+            Assert.IsFalse(request.IsSecureConnection, "IsSecureConnection");
+            Assert.IsNotNull(request.Path, "Path");
 
-			Assert.IsNotNull (request.Filter, "Filter");
-			request.Filter = null;
+            try
+            {
+                Assert.IsNotNull(request.PathInfo, "PathInfo");
+            }
+            catch (NullReferenceException)
+            {
+                // ms 1.x
+            }
 
-			Assert.IsNotNull (request.Form, "Form");
-			Assert.IsNotNull (request.Headers, "Headers");
-			Assert.AreEqual ("GET", request.HttpMethod, "HttpMethod");
-			Assert.IsNotNull (request.InputStream, "InputStream");
-			Assert.IsFalse (request.IsSecureConnection, "IsSecureConnection");
-			Assert.IsNotNull (request.Path, "Path");
+            Assert.IsNotNull(request.QueryString, "QueryString");
+            Assert.IsNotNull(request.RawUrl, "RawUrl");
+            Assert.AreEqual("GET", request.RequestType, "RequestType");
+            request.RequestType = null;
+            Assert.AreEqual(0, request.TotalBytes, "TotalBytes");
+            Assert.IsNotNull(request.Url, "Url");
+            Assert.IsNull(request.UrlReferrer, "UrlReferrer");
+            Assert.IsNull(request.UserAgent, "UserAgent");
+            Assert.IsNull(request.UserHostAddress, "UserHostAddress");
+            Assert.IsNull(request.UserHostName, "UserHostName");
+            Assert.IsNull(request.UserLanguages, "UserLanguages");
+            Assert.IsFalse(request.IsLocal, "IsLocal");
+        }
 
-			try {
-				Assert.IsNotNull (request.PathInfo, "PathInfo");
-			}
-			catch (NullReferenceException) {
-				// ms 1.x
-			}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
+        [ExpectedException(typeof(SecurityException))]
+        public void ClientCertificate_Deny_Low()
+        {
+            Assert.IsNotNull(request.ClientCertificate, "ClientCertificate");
+        }
 
-			Assert.IsNotNull (request.QueryString, "QueryString");
-			Assert.IsNotNull (request.RawUrl, "RawUrl");
-			Assert.AreEqual ("GET", request.RequestType, "RequestType");
-			request.RequestType = null;
-			Assert.AreEqual (0, request.TotalBytes, "TotalBytes");
-			Assert.IsNotNull (request.Url, "Url");
-			Assert.IsNull (request.UrlReferrer, "UrlReferrer");
-			Assert.IsNull (request.UserAgent, "UserAgent");
-			Assert.IsNull (request.UserHostAddress, "UserHostAddress");
-			Assert.IsNull (request.UserHostName, "UserHostName");
-			Assert.IsNull (request.UserLanguages, "UserLanguages");
-			Assert.IsFalse (request.IsLocal, "IsLocal");
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Low
+        )]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ClientCertificate_PermitOnly_Low()
+        {
+            Assert.IsNotNull(request.ClientCertificate, "ClientCertificate");
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ClientCertificate_Deny_Low ()
-		{
-			Assert.IsNotNull (request.ClientCertificate, "ClientCertificate");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void IsAuthenticated_Deny_Unrestricted()
+        {
+            Assert.IsNull(request.IsAuthenticated, "IsAuthenticated");
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Low)]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void ClientCertificate_PermitOnly_Low ()
-		{
-			Assert.IsNotNull (request.ClientCertificate, "ClientCertificate");
-		}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Params_Deny_Low()
+        {
+            Assert.IsNotNull(request.Params, "Params");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void IsAuthenticated_Deny_Unrestricted ()
-		{
-			Assert.IsNull (request.IsAuthenticated, "IsAuthenticated");
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Low
+        )]
+        public void Params_PermitOnly_Low()
+        {
+            Assert.IsNotNull(request.Params, "Params");
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Params_Deny_Low ()
-		{
-			Assert.IsNotNull (request.Params, "Params");
-		}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
+        [ExpectedException(typeof(SecurityException))]
+        public void ServerVariables_Deny_Low()
+        {
+            Assert.IsNotNull(request.ServerVariables, "ServerVariables");
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Low)]
-		public void Params_PermitOnly_Low ()
-		{
-			Assert.IsNotNull (request.Params, "Params");
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Low
+        )]
+        public void ServerVariables_PermitOnly_Low()
+        {
+            Assert.IsNotNull(request.ServerVariables, "ServerVariables");
+            Assert.IsNull(request["mono"], "this[string]");
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ServerVariables_Deny_Low ()
-		{
-			Assert.IsNotNull (request.ServerVariables, "ServerVariables");
-		}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
+        [ExpectedException(typeof(SecurityException))]
+        public void This_Deny_Low()
+        {
+            Assert.IsNull(request["mono"], "this[string]");
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Low)]
-		public void ServerVariables_PermitOnly_Low ()
-		{
-			Assert.IsNotNull (request.ServerVariables, "ServerVariables");
-			Assert.IsNull (request["mono"], "this[string]");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        // default path is null [ExpectedException (typeof (SecurityException))]
+        public void PhysicalApplicationPath_Deny_FileIOPermission()
+        {
+            try
+            {
+                Assert.IsNull(request.PhysicalApplicationPath, "PhysicalApplicationPath");
+            }
+            catch (ArgumentNullException)
+            {
+                // ms 2.0
+            }
+            catch (TypeInitializationException)
+            {
+                // ms 1.x
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
-		[ExpectedException (typeof (SecurityException))]
-		public void This_Deny_Low ()
-		{
-			Assert.IsNull (request["mono"], "this[string]");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        // default path is null and mess up the security check
+        public void PhysicalApplicationPath_PermitOnly_FileIOPermission()
+        {
+            try
+            {
+                Assert.IsNull(request.PhysicalApplicationPath, "PhysicalApplicationPath");
+            }
+            catch (ArgumentNullException)
+            {
+                // ms 2.0
+            }
+            catch (TypeInitializationException)
+            {
+                // ms 1.x
+            }
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		// default path is null [ExpectedException (typeof (SecurityException))]
-		public void PhysicalApplicationPath_Deny_FileIOPermission ()
-		{
-			try {
-				Assert.IsNull (request.PhysicalApplicationPath, "PhysicalApplicationPath");
-			}
-			catch (ArgumentNullException) {
-				// ms 2.0
-			}
-			catch (TypeInitializationException) {
-				// ms 1.x
-			}
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        //[ExpectedException (typeof (ArgumentException))]
+        public void PhysicalPath_Deny_FileIOPermission()
+        {
+            // strange - must be a special case not to check (and fail) a
+            // FileIOPermission check (strangeest part being that this isn't
+            // done for PhysicalApplicationPath)
+            Assert.AreEqual(String.Empty, request.PhysicalPath, "PhysicalPath");
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		// default path is null and mess up the security check
-		public void PhysicalApplicationPath_PermitOnly_FileIOPermission ()
-		{
-			try {
-				Assert.IsNull (request.PhysicalApplicationPath, "PhysicalApplicationPath");
-			}
-			catch (ArgumentNullException) {
-				// ms 2.0
-			}
-			catch (TypeInitializationException) {
-				// ms 1.x
-			}
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PhysicalPath_PermitOnly_FileIOPermission()
+        {
+            Assert.IsNotNull(request.PhysicalPath, "PhysicalPath");
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		//[ExpectedException (typeof (ArgumentException))]
-		public void PhysicalPath_Deny_FileIOPermission ()
-		{
-			// strange - must be a special case not to check (and fail) a 
-			// FileIOPermission check (strangeest part being that this isn't
-			// done for PhysicalApplicationPath)
-			Assert.AreEqual (String.Empty, request.PhysicalPath, "PhysicalPath");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Methods_Deny_Unrestricted()
+        {
+            Assert.IsNotNull(request.BinaryRead(0), "BinaryRead");
+            Assert.IsNull(request.MapImageCoordinates("mono"), "MapImageCoordinates");
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PhysicalPath_PermitOnly_FileIOPermission ()
-		{
-			Assert.IsNotNull (request.PhysicalPath, "PhysicalPath");
-		}
+            try
+            {
+                Assert.IsNull(request.MapPath("/mono"), "MapPath");
+            }
+            catch (NullReferenceException)
+            {
+                // ms 1.x fails
+            }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Methods_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (request.BinaryRead (0), "BinaryRead");
-			Assert.IsNull (request.MapImageCoordinates ("mono"), "MapImageCoordinates");
+            try
+            {
+                request.MapPath("/mono", "/", true);
+            }
+            catch (HttpException)
+            {
+                // ms 2.0
+            }
+            catch (TypeInitializationException)
+            {
+                // ms 1.0
+            }
 
-			try {
-				Assert.IsNull (request.MapPath ("/mono"), "MapPath");
-			}
-			catch (NullReferenceException) {
-				// ms 1.x fails
-			}
+            request.ValidateInput();
+        }
 
-			try {
-				request.MapPath ("/mono", "/", true);
-			}
-			catch (HttpException) {
-				// ms 2.0
-			}
-			catch (TypeInitializationException) {
-				// ms 1.0
-			}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void SaveAs_Deny_Write()
+        {
+            request.SaveAs(tempfile, true);
+        }
 
-			request.ValidateInput ();
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void SaveAs_PermitOnly_Write()
+        {
+            request.SaveAs(tempfile, true);
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void SaveAs_Deny_Write ()
-		{
-			request.SaveAs (tempfile, true);
-		}
+        // LinkDemand
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void SaveAs_PermitOnly_Write ()
-		{
-			request.SaveAs (tempfile, true);
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[3] { typeof(string), typeof(string), typeof(string) }
+            );
+            Assert.IsNotNull(ci, ".ctor(string,string,string)");
+            return ci.Invoke(new object[3] { String.Empty, "http://localhost/", String.Empty });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[3] { typeof (string), typeof (string), typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(string,string,string)");
-			return ci.Invoke (new object[3] { String.Empty, "http://localhost/", String.Empty });
-		}
-
-		public override Type Type {
-			get { return typeof (HttpRequest); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HttpRequest); }
+        }
+    }
 }

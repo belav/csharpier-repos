@@ -21,10 +21,15 @@ namespace System.Text.Unicode
         /// On other-endian architectures, caller must convert each 32-bit integer to native endianness
         /// before using the data.
         /// </summary>
-        internal static ReadOnlySpan<byte> GetDefinedBmpCodePointsBitmapLittleEndian() => DefinedCharsBitmapSpan;
+        internal static ReadOnlySpan<byte> GetDefinedBmpCodePointsBitmapLittleEndian() =>
+            DefinedCharsBitmapSpan;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void GetUtf16SurrogatePairFromAstralScalarValue(uint scalar, out char highSurrogate, out char lowSurrogate)
+        internal static void GetUtf16SurrogatePairFromAstralScalarValue(
+            uint scalar,
+            out char highSurrogate,
+            out char lowSurrogate
+        )
         {
             Debug.Assert(0x10000 <= scalar && scalar <= UNICODE_LAST_CODEPOINT);
 

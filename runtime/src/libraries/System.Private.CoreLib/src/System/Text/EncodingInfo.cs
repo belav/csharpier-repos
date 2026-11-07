@@ -15,7 +15,13 @@ namespace System.Text
         /// <param name="name">The encoding name</param>
         /// <param name="displayName">The encoding display name</param>
         /// <returns></returns>
-        public EncodingInfo(EncodingProvider provider, int codePage, string name, string displayName) : this(codePage, name, displayName)
+        public EncodingInfo(
+            EncodingProvider provider,
+            int codePage,
+            string name,
+            string displayName
+        )
+            : this(codePage, name, displayName)
         {
             ArgumentNullException.ThrowIfNull(provider);
             ArgumentNullException.ThrowIfNull(name);
@@ -53,14 +59,16 @@ namespace System.Text
         /// Get the <see cref="Encoding"/> object match the information in the <see cref="EncodingInfo"/> object
         /// </summary>
         /// <returns>The <see cref="Encoding"/> object</returns>
-        public Encoding GetEncoding() => Provider?.GetEncoding(CodePage) ?? Encoding.GetEncoding(CodePage);
+        public Encoding GetEncoding() =>
+            Provider?.GetEncoding(CodePage) ?? Encoding.GetEncoding(CodePage);
 
         /// <summary>
         /// Compare this <see cref="EncodingInfo"/> object to other object.
         /// </summary>
         /// <param name="value">The other object to compare with this object</param>
         /// <returns>True if the value object is EncodingInfo object and has a codepage equals to this EncodingInfo object codepage. Otherwise, it returns False</returns>
-        public override bool Equals([NotNullWhen(true)] object? value) => value is EncodingInfo that && CodePage == that.CodePage;
+        public override bool Equals([NotNullWhen(true)] object? value) =>
+            value is EncodingInfo that && CodePage == that.CodePage;
 
         /// <summary>
         /// Get a hashcode representing the current EncodingInfo object.

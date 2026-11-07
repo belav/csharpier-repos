@@ -8,9 +8,8 @@ using Xunit;
 
 namespace StructInClass
 {
-    internal class StructInClass
-    {
-    }
+    internal class StructInClass { }
+
     public class TestClass
     {
         public struct TheStruct

@@ -12,10 +12,7 @@ public class ValueTypesTests
     [Fact]
     public void Invalid()
     {
-        var secondModel = new SecondModel
-        {
-            P4 = "1234",
-        };
+        var secondModel = new SecondModel { P4 = "1234" };
 
         var firstModel = new FirstModel
         {
@@ -34,10 +31,7 @@ public class ValueTypesTests
     [Fact]
     public void Valid()
     {
-        var secondModel = new SecondModel
-        {
-            P4 = "12345",
-        };
+        var secondModel = new SecondModel { P4 = "12345" };
 
         var firstModel = new FirstModel
         {

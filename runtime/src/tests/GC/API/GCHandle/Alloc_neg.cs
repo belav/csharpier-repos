@@ -4,7 +4,7 @@
 // Negative Test for GCHandle.Alloc() .. trying to allocated a handle to a null object.
 
 /*************************************************************************************
- This is allowed because Pinning happens whenever a GC occurs. So if a GC occurs and 
+ This is allowed because Pinning happens whenever a GC occurs. So if a GC occurs and
  there is an object in the handle, we will pin it. It is quite reasonable to create
  the handle now and fill in the object later.
 **************************************************************************************/

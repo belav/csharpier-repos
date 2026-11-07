@@ -31,14 +31,11 @@ public class ShortCircuitTests
                         );
                         app.UseEndpoints(b =>
                         {
-                            b.Map(
-                                    "/shortcircuit",
-                                    context =>
-                                    {
-                                        context.Response.Headers["Set"] = "Yes!";
-                                        return Task.CompletedTask;
-                                    }
-                                )
+                            b.Map("/shortcircuit", context =>
+                                {
+                                    context.Response.Headers["Set"] = "Yes!";
+                                    return Task.CompletedTask;
+                                })
                                 .ShortCircuit();
                         });
                     })

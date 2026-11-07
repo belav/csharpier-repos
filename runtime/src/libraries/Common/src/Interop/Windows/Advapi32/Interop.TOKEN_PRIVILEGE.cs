@@ -12,7 +12,8 @@ internal static partial class Interop
         internal struct TOKEN_PRIVILEGE
         {
             public uint PrivilegeCount;
-            public LUID_AND_ATTRIBUTES Privileges /*[ANYSIZE_ARRAY]*/;
+            public LUID_AND_ATTRIBUTES Privileges /*[ANYSIZE_ARRAY]*/
+            ;
         }
     }
 }

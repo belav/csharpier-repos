@@ -19,7 +19,8 @@ namespace System.Text.RegularExpressions.Symbolic
             _minterms = minterms;
             _classifier = new MintermClassifier(minterms, solver);
 
-            Full = minterms.Length == 64 ? ulong.MaxValue : ulong.MaxValue >> (64 - minterms.Length);
+            Full =
+                minterms.Length == 64 ? ulong.MaxValue : ulong.MaxValue >> (64 - minterms.Length);
         }
 
         public ulong Empty => 0;
@@ -30,7 +31,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
         public bool IsEmpty(ulong set) => set == 0;
 
-        public List<ulong> GenerateMinterms(HashSet<ulong> constraints) => MintermGenerator<ulong>.GenerateMinterms(this, constraints);
+        public List<ulong> GenerateMinterms(HashSet<ulong> constraints) =>
+            MintermGenerator<ulong>.GenerateMinterms(this, constraints);
 
         public ulong And(ulong set1, ulong set2) => set1 & set2;
 
@@ -91,7 +93,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
 #if DEBUG
         /// <summary>Pretty print the bitvector bv as the character set it represents.</summary>
-        public string PrettyPrint(ulong bv, CharSetSolver solver) => solver.PrettyPrint(ConvertToBDD(bv, solver));
+        public string PrettyPrint(ulong bv, CharSetSolver solver) =>
+            solver.PrettyPrint(ConvertToBDD(bv, solver));
 
         public BDD ConvertToBDD(ulong set, CharSetSolver solver)
         {

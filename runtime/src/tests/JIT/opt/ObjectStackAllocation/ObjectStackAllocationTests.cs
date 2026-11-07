@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xunit;
 
@@ -37,7 +37,8 @@ namespace ObjectStackAllocation
     {
         public object o;
 
-        public SimpleClassWithGCField(int f1, int f2, object o) : base(f1, f2)
+        public SimpleClassWithGCField(int f1, int f2, object o)
+            : base(f1, f2)
         {
             this.o = o;
         }
@@ -85,7 +86,7 @@ namespace ObjectStackAllocation
     {
         Heap,
         Stack,
-        Undefined
+        Undefined,
     }
 
     public class Tests
@@ -108,11 +109,13 @@ namespace ObjectStackAllocation
         public static int TestEntryPoint()
         {
             AllocationKind expectedAllocationKind = AllocationKind.Stack;
-            if (GCStressEnabled()) {
+            if (GCStressEnabled())
+            {
                 Console.WriteLine("GCStress is enabled");
                 expectedAllocationKind = AllocationKind.Undefined;
             }
-            else if (!SPCOptimizationsEnabled() && !Crossgen2Test()) {
+            else if (!SPCOptimizationsEnabled() && !Crossgen2Test())
+            {
                 Console.WriteLine("System.Private.CoreLib.dll optimizations are disabled");
                 expectedAllocationKind = AllocationKind.Heap;
             }
@@ -127,38 +130,79 @@ namespace ObjectStackAllocation
             str3 = "str_three";
             str4 = "str_four";
 
-            CallTestAndVerifyAllocation(AllocateSimpleClassAndAddFields, 12, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassAndAddFields,
+                12,
+                expectedAllocationKind
+            );
 
-            CallTestAndVerifyAllocation(AllocateSimpleClassesAndEQCompareThem, 0, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassesAndEQCompareThem,
+                0,
+                expectedAllocationKind
+            );
 
-            CallTestAndVerifyAllocation(AllocateSimpleClassesAndNECompareThem, 1, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassesAndNECompareThem,
+                1,
+                expectedAllocationKind
+            );
 
             CallTestAndVerifyAllocation(AllocateSimpleClassAndGetField, 7, expectedAllocationKind);
 
-            CallTestAndVerifyAllocation(AllocateClassWithNestedStructAndGetField, 5, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateClassWithNestedStructAndGetField,
+                5,
+                expectedAllocationKind
+            );
 
-            CallTestAndVerifyAllocation(AllocateClassWithNestedStructAndAddFields, 24, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateClassWithNestedStructAndAddFields,
+                24,
+                expectedAllocationKind
+            );
 
-            CallTestAndVerifyAllocation(AllocateSimpleClassWithGCFieldAndAddFields, 12, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassWithGCFieldAndAddFields,
+                12,
+                expectedAllocationKind
+            );
 
-            CallTestAndVerifyAllocation(AllocateSimpleClassAndAssignRefToAField, 12, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassAndAssignRefToAField,
+                12,
+                expectedAllocationKind
+            );
 
-            CallTestAndVerifyAllocation(TestMixOfReportingAndWriteBarriers, 34, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                TestMixOfReportingAndWriteBarriers,
+                34,
+                expectedAllocationKind
+            );
 
             // The object is currently allocated on the stack when this method is jitted and on the heap when it's R2R-compiled.
             // The reason is that we always do the type check via helper in R2R mode, which blocks stack allocation.
             // We don't have to use a helper in this case (even for R2R), https://github.com/dotnet/runtime/issues/11850 tracks fixing that.
-            CallTestAndVerifyAllocation(AllocateSimpleClassAndCheckTypeNoHelper, 1, AllocationKind.Undefined);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassAndCheckTypeNoHelper,
+                1,
+                AllocationKind.Undefined
+            );
 
             CallTestAndVerifyAllocation(AllocateClassWithGcFieldAndInt, 5, expectedAllocationKind);
 
             // The remaining tests currently never allocate on the stack
-            if (expectedAllocationKind == AllocationKind.Stack) {
+            if (expectedAllocationKind == AllocationKind.Stack)
+            {
                 expectedAllocationKind = AllocationKind.Heap;
             }
 
             // This test calls CORINFO_HELP_ISINSTANCEOFCLASS
-            CallTestAndVerifyAllocation(AllocateSimpleClassAndCheckTypeHelper, 1, expectedAllocationKind);
+            CallTestAndVerifyAllocation(
+                AllocateSimpleClassAndCheckTypeHelper,
+                1,
+                expectedAllocationKind
+            );
 
             // This test calls CORINFO_HELP_CHKCASTCLASS_SPECIAL
             CallTestAndVerifyAllocation(AllocateSimpleClassAndCast, 7, expectedAllocationKind);
@@ -172,8 +216,10 @@ namespace ObjectStackAllocation
         static bool SPCOptimizationsEnabled()
         {
             Assembly objectAssembly = Assembly.GetAssembly(typeof(object));
-            object[] attribs = objectAssembly.GetCustomAttributes(typeof(DebuggableAttribute),
-                                                        false);
+            object[] attribs = objectAssembly.GetCustomAttributes(
+                typeof(DebuggableAttribute),
+                false
+            );
             DebuggableAttribute debuggableAttribute = attribs[0] as DebuggableAttribute;
             return ((debuggableAttribute == null) || !debuggableAttribute.IsJITOptimizerDisabled);
         }
@@ -189,26 +235,44 @@ namespace ObjectStackAllocation
             return Environment.GetEnvironmentVariable("RunCrossGen2") != null;
         }
 
-        static void CallTestAndVerifyAllocation(Test test, int expectedResult, AllocationKind expectedAllocationsKind)
+        static void CallTestAndVerifyAllocation(
+            Test test,
+            int expectedResult,
+            AllocationKind expectedAllocationsKind
+        )
         {
             long allocatedBytesBefore = GC.GetAllocatedBytesForCurrentThread();
             int testResult = test();
             long allocatedBytesAfter = GC.GetAllocatedBytesForCurrentThread();
             string methodName = test.Method.Name;
 
-            if (testResult != expectedResult) {
-                Console.WriteLine($"FAILURE ({methodName}): expected {expectedResult}, got {testResult}");
+            if (testResult != expectedResult)
+            {
+                Console.WriteLine(
+                    $"FAILURE ({methodName}): expected {expectedResult}, got {testResult}"
+                );
                 methodResult = -1;
             }
-            else if ((expectedAllocationsKind == AllocationKind.Stack) && (allocatedBytesBefore != allocatedBytesAfter)) {
-                Console.WriteLine($"FAILURE ({methodName}): unexpected allocation of {allocatedBytesAfter - allocatedBytesBefore} bytes");
+            else if (
+                (expectedAllocationsKind == AllocationKind.Stack)
+                && (allocatedBytesBefore != allocatedBytesAfter)
+            )
+            {
+                Console.WriteLine(
+                    $"FAILURE ({methodName}): unexpected allocation of {allocatedBytesAfter - allocatedBytesBefore} bytes"
+                );
                 methodResult = -1;
             }
-            else if ((expectedAllocationsKind == AllocationKind.Heap) && (allocatedBytesBefore == allocatedBytesAfter)) {
+            else if (
+                (expectedAllocationsKind == AllocationKind.Heap)
+                && (allocatedBytesBefore == allocatedBytesAfter)
+            )
+            {
                 Console.WriteLine($"FAILURE ({methodName}): unexpected stack allocation");
                 methodResult = -1;
             }
-            else {
+            else
+            {
                 Console.WriteLine($"SUCCESS ({methodName})");
             }
         }
@@ -242,7 +306,8 @@ namespace ObjectStackAllocation
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int AllocateSimpleClassAndCheckTypeNoHelper()
         {
-            object o = (f1 == 0) ? (object)new SimpleClassB(f1, f2) : (object)new SimpleClassA(f1, f2);
+            object o =
+                (f1 == 0) ? (object)new SimpleClassB(f1, f2) : (object)new SimpleClassA(f1, f2);
             GC.Collect();
             return (o is SimpleClassB) ? 0 : 1;
         }
@@ -250,7 +315,8 @@ namespace ObjectStackAllocation
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int AllocateSimpleClassAndCheckTypeHelper()
         {
-            object o = (f1 == 0) ? (object)new SimpleClassB(f1, f2) : (object)new SimpleClassA(f1, f2);
+            object o =
+                (f1 == 0) ? (object)new SimpleClassB(f1, f2) : (object)new SimpleClassA(f1, f2);
             GC.Collect();
             return !(o is SimpleClassA) ? 0 : 1;
         }
@@ -258,7 +324,8 @@ namespace ObjectStackAllocation
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int AllocateSimpleClassAndCast()
         {
-            object o = (f1 == 0) ? (object)new SimpleClassB(f1, f2) : (object)new SimpleClassA(f2, f1);
+            object o =
+                (f1 == 0) ? (object)new SimpleClassB(f1, f2) : (object)new SimpleClassA(f2, f1);
             GC.Collect();
             return ((SimpleClassA)o).f1;
         }
@@ -343,7 +410,10 @@ namespace ObjectStackAllocation
             c3.o = str3;
             c4.o = str4;
 
-            return c1.o.ToString().Length + c2.o.ToString().Length + c3.o.ToString().Length + c4.o.ToString().Length;
+            return c1.o.ToString().Length
+                + c2.o.ToString().Length
+                + c3.o.ToString().Length
+                + c4.o.ToString().Length;
         }
 
         static int AllocateClassWithGcFieldAndInt()

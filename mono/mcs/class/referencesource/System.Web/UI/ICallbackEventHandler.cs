@@ -4,9 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    public interface ICallbackEventHandler {
-
+namespace System.Web.UI
+{
+    public interface ICallbackEventHandler
+    {
         /// <devdoc>
         /// Process the eventargs that this control wanted fired from an out-of-band callback
         /// </devdoc>

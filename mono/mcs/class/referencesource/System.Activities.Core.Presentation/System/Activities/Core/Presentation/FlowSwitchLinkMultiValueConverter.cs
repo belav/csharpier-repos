@@ -11,7 +11,12 @@ namespace System.Activities.Core.Presentation
 
     sealed class FlowSwitchLinkMultiValueConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(
+            object[] values,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             bool isDefaultCase = (bool)values[1];
             if (isDefaultCase)
@@ -22,11 +27,16 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                return GenericFlowSwitchHelper.GetString(values[0], (Type) parameter);
+                return GenericFlowSwitchHelper.GetString(values[0], (Type)parameter);
             }
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object[] ConvertBack(
+            object value,
+            Type[] targetTypes,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }

@@ -7,9 +7,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-
 using Microsoft.CodeAnalysis;
-
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
@@ -47,7 +45,8 @@ internal readonly struct GeneratorAttributeSyntaxContext
         SyntaxNode targetNode,
         ISymbol targetSymbol,
         SemanticModel semanticModel,
-        ImmutableArray<AttributeData> attributes)
+        ImmutableArray<AttributeData> attributes
+    )
     {
         TargetNode = targetNode;
         TargetSymbol = targetSymbol;
@@ -90,7 +89,8 @@ internal static partial class SyntaxValueProviderExtensions
         IncrementalGeneratorInitializationContext context,
         string fullyQualifiedMetadataName,
         Func<SyntaxNode, CancellationToken, bool> predicate,
-        Func<GeneratorAttributeSyntaxContext, CancellationToken, T> transform)
+        Func<GeneratorAttributeSyntaxContext, CancellationToken, T> transform
+    )
     {
 #if false
 
@@ -109,55 +109,78 @@ internal static partial class SyntaxValueProviderExtensions
         Debug.Assert(lastDotIndex > 0);
         var unmangledTypeName = fullyQualifiedMetadataName.Substring(lastDotIndex + 1);
 
-        var nodesWithAttributesMatchingSimpleName = @this.ForAttributeWithSimpleName(context, unmangledTypeName, predicate);
+        var nodesWithAttributesMatchingSimpleName = @this.ForAttributeWithSimpleName(
+            context,
+            unmangledTypeName,
+            predicate
+        );
 
 #endif
 
-        var compilationAndGroupedNodesProvider = nodesWithAttributesMatchingSimpleName
-            .Combine(context.CompilationProvider)
-            /*.WithTrackingName("compilationAndGroupedNodes_ForAttributeWithMetadataName")*/;
+        var compilationAndGroupedNodesProvider = nodesWithAttributesMatchingSimpleName.Combine(
+            context.CompilationProvider
+        )
+        /*.WithTrackingName("compilationAndGroupedNodes_ForAttributeWithMetadataName")*/;
 
         var syntaxHelper = CSharpSyntaxHelper.Instance;
-        var finalProvider = compilationAndGroupedNodesProvider.SelectMany((tuple, cancellationToken) =>
-        {
-            var ((syntaxTree, syntaxNodes), compilation) = tuple;
-            Debug.Assert(syntaxNodes.All(n => n.SyntaxTree == syntaxTree));
-
-            using var result = new ValueListBuilder<T>(Span<T>.Empty);
-            if (!syntaxNodes.IsEmpty)
+        var finalProvider = compilationAndGroupedNodesProvider.SelectMany(
+            (tuple, cancellationToken) =>
             {
-                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                var ((syntaxTree, syntaxNodes), compilation) = tuple;
+                Debug.Assert(syntaxNodes.All(n => n.SyntaxTree == syntaxTree));
 
-                foreach (var targetNode in syntaxNodes)
+                using var result = new ValueListBuilder<T>(Span<T>.Empty);
+                if (!syntaxNodes.IsEmpty)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-                    var targetSymbol =
-                        targetNode is ICompilationUnitSyntax compilationUnit ? semanticModel.Compilation.Assembly :
-                        syntaxHelper.IsLambdaExpression(targetNode) ? semanticModel.GetSymbolInfo(targetNode, cancellationToken).Symbol :
-                        semanticModel.GetDeclaredSymbol(targetNode, cancellationToken);
-                    if (targetSymbol is null)
-                        continue;
-
-                    var attributes = getMatchingAttributes(targetNode, targetSymbol, fullyQualifiedMetadataName);
-                    if (attributes.Length > 0)
+                    foreach (var targetNode in syntaxNodes)
                     {
-                        result.Append(transform(
-                            new GeneratorAttributeSyntaxContext(targetNode, targetSymbol, semanticModel, attributes),
-                            cancellationToken));
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        var targetSymbol =
+                            targetNode is ICompilationUnitSyntax compilationUnit
+                                ? semanticModel.Compilation.Assembly
+                            : syntaxHelper.IsLambdaExpression(targetNode)
+                                ? semanticModel.GetSymbolInfo(targetNode, cancellationToken).Symbol
+                            : semanticModel.GetDeclaredSymbol(targetNode, cancellationToken);
+                        if (targetSymbol is null)
+                            continue;
+
+                        var attributes = getMatchingAttributes(
+                            targetNode,
+                            targetSymbol,
+                            fullyQualifiedMetadataName
+                        );
+                        if (attributes.Length > 0)
+                        {
+                            result.Append(
+                                transform(
+                                    new GeneratorAttributeSyntaxContext(
+                                        targetNode,
+                                        targetSymbol,
+                                        semanticModel,
+                                        attributes
+                                    ),
+                                    cancellationToken
+                                )
+                            );
+                        }
                     }
                 }
-            }
 
-            return result.AsSpan().ToImmutableArray();
-        })/*.WithTrackingName("result_ForAttributeWithMetadataName")*/;
+                return result.AsSpan().ToImmutableArray();
+            }
+        ) /*.WithTrackingName("result_ForAttributeWithMetadataName")*/
+        ;
 
         return finalProvider;
 
         static ImmutableArray<AttributeData> getMatchingAttributes(
             SyntaxNode attributeTarget,
             ISymbol symbol,
-            string fullyQualifiedMetadataName)
+            string fullyQualifiedMetadataName
+        )
         {
             var targetSyntaxTree = attributeTarget.SyntaxTree;
             var result = new ValueListBuilder<AttributeData>(Span<AttributeData>.Empty);
@@ -165,7 +188,10 @@ internal static partial class SyntaxValueProviderExtensions
             try
             {
                 addMatchingAttributes(ref result, symbol.GetAttributes());
-                addMatchingAttributes(ref result, (symbol as IMethodSymbol)?.GetReturnTypeAttributes());
+                addMatchingAttributes(
+                    ref result,
+                    (symbol as IMethodSymbol)?.GetReturnTypeAttributes()
+                );
 
                 if (symbol is IAssemblySymbol assemblySymbol)
                 {
@@ -182,15 +208,19 @@ internal static partial class SyntaxValueProviderExtensions
 
             void addMatchingAttributes(
                 ref ValueListBuilder<AttributeData> result,
-                ImmutableArray<AttributeData>? attributes)
+                ImmutableArray<AttributeData>? attributes
+            )
             {
                 if (!attributes.HasValue)
                     return;
 
                 foreach (var attribute in attributes.Value)
                 {
-                    if (attribute.ApplicationSyntaxReference?.SyntaxTree == targetSyntaxTree &&
-                        attribute.AttributeClass?.ToDisplayString(/*s_metadataDisplayFormat*/) == fullyQualifiedMetadataName)
+                    if (
+                        attribute.ApplicationSyntaxReference?.SyntaxTree == targetSyntaxTree
+                        && attribute.AttributeClass?.ToDisplayString( /*s_metadataDisplayFormat*/
+                        ) == fullyQualifiedMetadataName
+                    )
                     {
                         result.Append(attribute);
                     }

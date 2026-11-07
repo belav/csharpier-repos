@@ -16,16 +16,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     // This is an unusual implementation of a mutable set. We sometimes have to take
     // the unions or intersections of sets using a custom equality comparator.
-    // If the comparison says that two items are "equal" we nevertheless may 
+    // If the comparison says that two items are "equal" we nevertheless may
     // express a preference for one or the other to be the one that "wins" and
-    // ultimately ends up in the set. All equal items are equal, but some are more 
+    // ultimately ends up in the set. All equal items are equal, but some are more
     // equal than others.
     //
     // In particular, we may have to make an arbitrary choice amongst several
     // possibilities, and it does not matter to the user which choice we make.
     // However, whichever choice we make should be *repeatable*. Compiling the
     // same program twice should produce the same errors, even if some of those
-    // errors were chosen arbitrarily. 
+    // errors were chosen arbitrarily.
     //
     // For example, when a lambda has been bound a dozen ways and it has failed
     // each time with "no method Blah on int", "... on string", "... on double",
@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public FirstAmongEqualsSet(
             IEnumerable<T> items,
             IEqualityComparer<T> equalityComparer,
-            Func<T, T, int> canonicalComparer)
+            Func<T, T, int> canonicalComparer
+        )
         {
             _canonicalComparer = canonicalComparer;
             _dictionary = new Dictionary<T, T>(equalityComparer);
@@ -76,14 +77,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(_hashSet.Count == 0);
 
             // Make a copy of the input for quick indexing.
-            // (As an optimization, we could check to see if the sequence already 
+            // (As an optimization, we could check to see if the sequence already
             // is a hash set; in practice it will not typically be.)
             _hashSet.UnionWith(items);
 
             // Remove from the dictionary all items that are not
             // in the input item set.
 
-            // Make a copy of the keys so that we are not changing the 
+            // Make a copy of the keys so that we are not changing the
             // dictionary as we enumerate it.
             foreach (var key in _dictionary.Keys.ToList())
             {

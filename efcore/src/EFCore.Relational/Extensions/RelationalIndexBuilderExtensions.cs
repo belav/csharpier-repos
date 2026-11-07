@@ -40,8 +40,8 @@ public static class RelationalIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     [Obsolete("Use HasDatabaseName() instead.")] // DO NOT REMOVE
     // Used in model snapshot. See issue#18557
-    public static IndexBuilder HasName(this IndexBuilder indexBuilder, string? name)
-        => HasDatabaseName(indexBuilder, name);
+    public static IndexBuilder HasName(this IndexBuilder indexBuilder, string? name) =>
+        HasDatabaseName(indexBuilder, name);
 
     /// <summary>
     ///     Configures the name of the index in the database when targeting a relational database.
@@ -55,7 +55,8 @@ public static class RelationalIndexBuilderExtensions
     /// <returns>A builder to further configure the index.</returns>
     public static IndexBuilder<TEntity> HasDatabaseName<TEntity>(
         this IndexBuilder<TEntity> indexBuilder,
-        string? name)
+        string? name
+    )
     {
         indexBuilder.Metadata.SetDatabaseName(name);
 
@@ -78,7 +79,8 @@ public static class RelationalIndexBuilderExtensions
     public static IConventionIndexBuilder? HasDatabaseName(
         this IConventionIndexBuilder indexBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetDatabaseName(name, fromDataAnnotation))
         {
@@ -102,8 +104,8 @@ public static class RelationalIndexBuilderExtensions
     public static bool CanSetDatabaseName(
         this IConventionIndexBuilder indexBuilder,
         string? name,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) => indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
 
     /// <summary>
     ///     Configures the filter expression for the index.
@@ -133,8 +135,10 @@ public static class RelationalIndexBuilderExtensions
     /// <param name="indexBuilder">The builder for the index being configured.</param>
     /// <param name="sql">The filter expression for the index.</param>
     /// <returns>A builder to further configure the index.</returns>
-    public static IndexBuilder<TEntity> HasFilter<TEntity>(this IndexBuilder<TEntity> indexBuilder, string? sql)
-        => (IndexBuilder<TEntity>)HasFilter((IndexBuilder)indexBuilder, sql);
+    public static IndexBuilder<TEntity> HasFilter<TEntity>(
+        this IndexBuilder<TEntity> indexBuilder,
+        string? sql
+    ) => (IndexBuilder<TEntity>)HasFilter((IndexBuilder)indexBuilder, sql);
 
     /// <summary>
     ///     Configures the filter expression for the index.
@@ -152,7 +156,8 @@ public static class RelationalIndexBuilderExtensions
     public static IConventionIndexBuilder? HasFilter(
         this IConventionIndexBuilder indexBuilder,
         string? sql,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (indexBuilder.CanSetFilter(sql, fromDataAnnotation))
         {
@@ -176,6 +181,6 @@ public static class RelationalIndexBuilderExtensions
     public static bool CanSetFilter(
         this IConventionIndexBuilder indexBuilder,
         string? sql,
-        bool fromDataAnnotation = false)
-        => indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Filter, sql, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) => indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Filter, sql, fromDataAnnotation);
 }

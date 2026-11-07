@@ -19,7 +19,12 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "ActionNotFound", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "ActionNotFound",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
@@ -34,12 +39,20 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act & assert
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "ActionThrowsExceptionAndIsHandled", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "ActionThrowsExceptionAndIsHandled",
+                null,
+                null
+            );
             Assert.Null(((TestController)controllerContext.Controller).Log); // Result filter shouldn't have executed yet
 
             bool retVal = invoker.EndInvokeAction(asyncResult);
             Assert.True(retVal);
-            Assert.Equal("From exception filter", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From exception filter",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -51,8 +64,17 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.Throws<Exception>(
-                delegate { invoker.BeginInvokeAction(controllerContext, "ActionThrowsExceptionAndIsNotHandled", null, null); },
-                @"Some exception text.");
+                delegate
+                {
+                    invoker.BeginInvokeAction(
+                        controllerContext,
+                        "ActionThrowsExceptionAndIsNotHandled",
+                        null,
+                        null
+                    );
+                },
+                @"Some exception text."
+            );
         }
 
         [Fact]
@@ -64,7 +86,16 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.Throws<ThreadAbortException>(
-                delegate { invoker.BeginInvokeAction(controllerContext, "ActionCallsThreadAbort", null, null); });
+                delegate
+                {
+                    invoker.BeginInvokeAction(
+                        controllerContext,
+                        "ActionCallsThreadAbort",
+                        null,
+                        null
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -75,12 +106,20 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "AuthenticationFilterShortCircuits", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "AuthenticationFilterShortCircuits",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
             Assert.True(retVal);
-            Assert.Equal("From authentication filter", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From authentication filter",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -91,12 +130,20 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "AuthenticationFilterChallenges", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "AuthenticationFilterChallenges",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
             Assert.True(retVal);
-            Assert.Equal("From authentication filter challenge", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From authentication filter challenge",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -107,12 +154,20 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "AuthenticationFilterShortCircuitsAndChallenges", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "AuthenticationFilterShortCircuitsAndChallenges",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
             Assert.True(retVal);
-            Assert.Equal("From authentication filter challenge", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From authentication filter challenge",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -123,12 +178,20 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "AuthorizationFilterShortCircuits", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "AuthorizationFilterShortCircuits",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
             Assert.True(retVal);
-            Assert.Equal("From authorization filter", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From authorization filter",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -139,12 +202,20 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "AuthorizationFilterShortCircuitsAndChallenges", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "AuthorizationFilterShortCircuitsAndChallenges",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
             Assert.True(retVal);
-            Assert.Equal("From authentication filter challenge", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From authentication filter challenge",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -155,7 +226,12 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "NormalAction", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "NormalAction",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
@@ -168,10 +244,16 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             ControllerContext controllerContext = GetControllerContext();
-            AsyncControllerActionInvoker invoker = new AsyncControllerActionInvokerWithCustomFindAction();
+            AsyncControllerActionInvoker invoker =
+                new AsyncControllerActionInvokerWithCustomFindAction();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, actionName: "Non-ExistantAction", callback: null, state: null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                actionName: "Non-ExistantAction",
+                callback: null,
+                state: null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             // Assert
@@ -183,12 +265,18 @@ namespace System.Web.Mvc.Async.Test
         public void InvokeAction_RequestValidationFails()
         {
             // Arrange
-            ControllerContext controllerContext = GetControllerContext(passesRequestValidation: false);
+            ControllerContext controllerContext = GetControllerContext(
+                passesRequestValidation: false
+            );
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act & assert
             Assert.Throws<HttpRequestValidationException>(
-                delegate { invoker.BeginInvokeAction(controllerContext, "NormalAction", null, null); });
+                delegate
+                {
+                    invoker.BeginInvokeAction(controllerContext, "NormalAction", null, null);
+                }
+            );
         }
 
         [Fact]
@@ -199,11 +287,19 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act & assert
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "ResultThrowsExceptionAndIsHandled", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "ResultThrowsExceptionAndIsHandled",
+                null,
+                null
+            );
             bool retVal = invoker.EndInvokeAction(asyncResult);
 
             Assert.True(retVal);
-            Assert.Equal("From exception filter", ((TestController)controllerContext.Controller).Log);
+            Assert.Equal(
+                "From exception filter",
+                ((TestController)controllerContext.Controller).Log
+            );
         }
 
         [Fact]
@@ -214,10 +310,19 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act & assert
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "ResultThrowsExceptionAndIsNotHandled", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "ResultThrowsExceptionAndIsNotHandled",
+                null,
+                null
+            );
             Assert.Throws<Exception>(
-                delegate { invoker.EndInvokeAction(asyncResult); },
-                @"Some exception text.");
+                delegate
+                {
+                    invoker.EndInvokeAction(asyncResult);
+                },
+                @"Some exception text."
+            );
         }
 
         [Fact]
@@ -228,9 +333,18 @@ namespace System.Web.Mvc.Async.Test
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act & assert
-            IAsyncResult asyncResult = invoker.BeginInvokeAction(controllerContext, "ResultCallsThreadAbort", null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeAction(
+                controllerContext,
+                "ResultCallsThreadAbort",
+                null,
+                null
+            );
             Assert.Throws<ThreadAbortException>(
-                delegate { invoker.EndInvokeAction(asyncResult); });
+                delegate
+                {
+                    invoker.EndInvokeAction(asyncResult);
+                }
+            );
         }
 
         [Fact]
@@ -241,7 +355,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { invoker.BeginInvokeAction(new ControllerContext(), "", null, null); }, "actionName");
+                delegate
+                {
+                    invoker.BeginInvokeAction(new ControllerContext(), "", null, null);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -252,7 +371,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { invoker.BeginInvokeAction(new ControllerContext(), null, null, null); }, "actionName");
+                delegate
+                {
+                    invoker.BeginInvokeAction(new ControllerContext(), null, null, null);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -263,7 +387,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { invoker.BeginInvokeAction(null, "someAction", null, null); }, "controllerContext");
+                delegate
+                {
+                    invoker.BeginInvokeAction(null, "someAction", null, null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -276,14 +405,32 @@ namespace System.Web.Mvc.Async.Test
             {
                 ActionResult expectedResult = new ViewResult();
 
-                Mock<AsyncActionDescriptor> mockActionDescriptor = new Mock<AsyncActionDescriptor>();
-                mockActionDescriptor.Setup(d => d.BeginExecute(controllerContext, parameters, It.IsAny<AsyncCallback>(), It.IsAny<object>())).Returns(innerAsyncResult);
-                mockActionDescriptor.Setup(d => d.EndExecute(innerAsyncResult)).Returns(expectedResult);
+                Mock<AsyncActionDescriptor> mockActionDescriptor =
+                    new Mock<AsyncActionDescriptor>();
+                mockActionDescriptor
+                    .Setup(d =>
+                        d.BeginExecute(
+                            controllerContext,
+                            parameters,
+                            It.IsAny<AsyncCallback>(),
+                            It.IsAny<object>()
+                        )
+                    )
+                    .Returns(innerAsyncResult);
+                mockActionDescriptor
+                    .Setup(d => d.EndExecute(innerAsyncResult))
+                    .Returns(expectedResult);
 
                 AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
                 // Act
-                IAsyncResult asyncResult = invoker.BeginInvokeActionMethod(controllerContext, mockActionDescriptor.Object, parameters, null, null);
+                IAsyncResult asyncResult = invoker.BeginInvokeActionMethod(
+                    controllerContext,
+                    mockActionDescriptor.Object,
+                    parameters,
+                    null,
+                    null
+                );
                 ActionResult returnedResult = invoker.EndInvokeActionMethod(asyncResult);
 
                 // Assert
@@ -300,12 +447,20 @@ namespace System.Web.Mvc.Async.Test
             ActionResult expectedResult = new ViewResult();
 
             Mock<ActionDescriptor> mockActionDescriptor = new Mock<ActionDescriptor>();
-            mockActionDescriptor.Setup(d => d.Execute(controllerContext, parameters)).Returns(expectedResult);
+            mockActionDescriptor
+                .Setup(d => d.Execute(controllerContext, parameters))
+                .Returns(expectedResult);
 
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
 
             // Act
-            IAsyncResult asyncResult = invoker.BeginInvokeActionMethod(controllerContext, mockActionDescriptor.Object, parameters, null, null);
+            IAsyncResult asyncResult = invoker.BeginInvokeActionMethod(
+                controllerContext,
+                mockActionDescriptor.Object,
+                parameters,
+                null,
+                null
+            );
             ActionResult returnedResult = invoker.EndInvokeActionMethod(asyncResult);
 
             // Assert
@@ -322,14 +477,17 @@ namespace System.Web.Mvc.Async.Test
             bool onActionExecutedWasCalled = false;
             ActionFilterImpl actionFilter = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = filterContext => { onActionExecutingWasCalled = true; },
+                OnActionExecutingImpl = filterContext =>
+                {
+                    onActionExecutingWasCalled = true;
+                },
                 OnActionExecutedImpl = filterContext =>
                 {
                     onActionExecutedWasCalled = true;
                     Assert.Same(expectedException, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                     filterContext.Result = expectedResult;
-                }
+                },
             };
             Func<IAsyncResult> beginExecute = delegate
             {
@@ -337,7 +495,10 @@ namespace System.Web.Mvc.Async.Test
             };
 
             // Act
-            ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(beginExecute, actionFilter);
+            ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(
+                beginExecute,
+                actionFilter
+            );
 
             // Assert
             Assert.True(onActionExecutingWasCalled);
@@ -359,26 +520,49 @@ namespace System.Web.Mvc.Async.Test
             };
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting1"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting1");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actionLog.Add("OnActionExecuted1");
                     Assert.Same(exception, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                     filterContext.Result = expectedResult;
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting2"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted2"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting2");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted2");
+                },
             };
 
             // Act
-            ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(beginExecute, filter1, filter2);
+            ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(
+                beginExecute,
+                filter1,
+                filter2
+            );
 
             // Assert
-            Assert.Equal(new[] { "OnActionExecuting1", "OnActionExecuting2", "BeginExecute", "OnActionExecuted2", "OnActionExecuted1" }, actionLog.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    "OnActionExecuting1",
+                    "OnActionExecuting2",
+                    "BeginExecute",
+                    "OnActionExecuted2",
+                    "OnActionExecuted1",
+                },
+                actionLog.ToArray()
+            );
             Assert.Equal(expectedResult, result);
         }
 
@@ -396,26 +580,49 @@ namespace System.Web.Mvc.Async.Test
             };
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting1"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted1"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting1");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted1");
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting2"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting2");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actionLog.Add("OnActionExecuted2");
                     Assert.Same(exception, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                     filterContext.Result = expectedResult;
-                }
+                },
             };
 
             // Act
-            ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(beginExecute, filter1, filter2);
+            ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(
+                beginExecute,
+                filter1,
+                filter2
+            );
 
             // Assert
-            Assert.Equal(new[] { "OnActionExecuting1", "OnActionExecuting2", "BeginExecute", "OnActionExecuted2", "OnActionExecuted1" }, actionLog.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    "OnActionExecuting1",
+                    "OnActionExecuting2",
+                    "BeginExecute",
+                    "OnActionExecuted2",
+                    "OnActionExecuted1",
+                },
+                actionLog.ToArray()
+            );
             Assert.Equal(expectedResult, result);
         }
 
@@ -429,8 +636,14 @@ namespace System.Web.Mvc.Async.Test
             bool onActionExecutedWasCalled = false;
             ActionFilterImpl actionFilter = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = filterContext => { onActionExecutingWasCalled = true; },
-                OnActionExecutedImpl = filterContext => { onActionExecutedWasCalled = true; }
+                OnActionExecutingImpl = filterContext =>
+                {
+                    onActionExecutingWasCalled = true;
+                },
+                OnActionExecutedImpl = filterContext =>
+                {
+                    onActionExecutedWasCalled = true;
+                },
             };
             Func<IAsyncResult> beginExecute = delegate
             {
@@ -443,7 +656,8 @@ namespace System.Web.Mvc.Async.Test
                 {
                     BeginInvokeActionMethodWithFiltersBeginTester(beginExecute, actionFilter);
                 },
-                expectedExceptionText);
+                expectedExceptionText
+            );
 
             // Assert
             Assert.True(onActionExecutingWasCalled);
@@ -458,12 +672,15 @@ namespace System.Web.Mvc.Async.Test
             bool onActionExecutedWasCalled = false;
             ActionFilterImpl actionFilter = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = filterContext => { onActionExecutingWasCalled = true; },
+                OnActionExecutingImpl = filterContext =>
+                {
+                    onActionExecutingWasCalled = true;
+                },
                 OnActionExecutedImpl = filterContext =>
                 {
                     onActionExecutedWasCalled = true;
                     Thread.ResetAbort();
-                }
+                },
             };
             Func<IAsyncResult> beginExecute = delegate
             {
@@ -476,7 +693,8 @@ namespace System.Web.Mvc.Async.Test
                 delegate
                 {
                     BeginInvokeActionMethodWithFiltersBeginTester(beginExecute, actionFilter);
-                });
+                }
+            );
 
             // Assert
             Assert.True(onActionExecutingWasCalled);
@@ -499,7 +717,7 @@ namespace System.Web.Mvc.Async.Test
                     Assert.Same(exepctedException, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                     filterContext.Result = expectedResult;
-                }
+                },
             };
             Func<ActionResult> action = () =>
             {
@@ -510,7 +728,11 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, actionFilter);
+                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(
+                    mockResult,
+                    action,
+                    actionFilter
+                );
 
                 // Assert
                 Assert.True(actionCalled);
@@ -530,32 +752,55 @@ namespace System.Web.Mvc.Async.Test
             {
                 actionLog.Add("EndExecute");
                 throw exception;
-
             };
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting1"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting1");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actionLog.Add("OnActionExecuted1");
                     Assert.Same(exception, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                     filterContext.Result = expectedResult;
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting2"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted2"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting2");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted2");
+                },
             };
 
             using (var mockResult = new MockAsyncResult())
             {
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, filter1, filter2);
+                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(
+                    mockResult,
+                    action,
+                    filter1,
+                    filter2
+                );
 
                 // Assert
-                Assert.Equal(new[] { "OnActionExecuting1", "OnActionExecuting2", "EndExecute", "OnActionExecuted2", "OnActionExecuted1" }, actionLog.ToArray());
+                Assert.Equal(
+                    new[]
+                    {
+                        "OnActionExecuting1",
+                        "OnActionExecuting2",
+                        "EndExecute",
+                        "OnActionExecuted2",
+                        "OnActionExecuted1",
+                    },
+                    actionLog.ToArray()
+                );
                 Assert.Equal(expectedResult, result);
             }
         }
@@ -571,32 +816,55 @@ namespace System.Web.Mvc.Async.Test
             {
                 actionLog.Add("EndExecute");
                 throw exception;
-
             };
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting1"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted1"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting1");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted1");
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting2"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting2");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actionLog.Add("OnActionExecuted2");
                     Assert.Same(exception, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                     filterContext.Result = expectedResult;
-                }
+                },
             };
 
             using (var mockResult = new MockAsyncResult())
             {
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, filter1, filter2);
+                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(
+                    mockResult,
+                    action,
+                    filter1,
+                    filter2
+                );
 
                 // Assert
-                Assert.Equal(new[] { "OnActionExecuting1", "OnActionExecuting2", "EndExecute", "OnActionExecuted2", "OnActionExecuted1" }, actionLog.ToArray());
+                Assert.Equal(
+                    new[]
+                    {
+                        "OnActionExecuting1",
+                        "OnActionExecuting2",
+                        "EndExecute",
+                        "OnActionExecuted2",
+                        "OnActionExecuted1",
+                    },
+                    actionLog.ToArray()
+                );
                 Assert.Equal(expectedResult, result);
             }
         }
@@ -609,7 +877,10 @@ namespace System.Web.Mvc.Async.Test
             string expectedExceptionText = "Some exception text.";
             ActionFilterImpl actionFilter = new ActionFilterImpl()
             {
-                OnActionExecutedImpl = filterContext => { onActionExecutedWasCalled = true; }
+                OnActionExecutedImpl = filterContext =>
+                {
+                    onActionExecutedWasCalled = true;
+                },
             };
             Func<ActionResult> action = delegate
             {
@@ -620,8 +891,14 @@ namespace System.Web.Mvc.Async.Test
             {
                 // Act & assert
                 Assert.Throws<Exception>(
-                    () => BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, actionFilter),
-                    expectedExceptionText);
+                    () =>
+                        BeginInvokeActionMethodWithFiltersEndTester(
+                            mockResult,
+                            action,
+                            actionFilter
+                        ),
+                    expectedExceptionText
+                );
 
                 // Assert
                 Assert.True(onActionExecutedWasCalled);
@@ -639,7 +916,7 @@ namespace System.Web.Mvc.Async.Test
                 {
                     onActionExecutedWasCalled = true;
                     Thread.ResetAbort();
-                }
+                },
             };
             Func<ActionResult> action = delegate
             {
@@ -650,8 +927,9 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 // Act & assert
-                Assert.Throws<ThreadAbortException>(
-                    () => BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, actionFilter));
+                Assert.Throws<ThreadAbortException>(() =>
+                    BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, actionFilter)
+                );
 
                 // Assert
                 Assert.True(onActionExecutedWasCalled);
@@ -668,8 +946,14 @@ namespace System.Web.Mvc.Async.Test
             {
                 ActionFilterImpl actionFilter = new ActionFilterImpl()
                 {
-                    OnActionExecutingImpl = _ => { onActionExecutingWasCalled = true; },
-                    OnActionExecutedImpl = _ => { onActionExecutedWasCalled = true; }
+                    OnActionExecutingImpl = _ =>
+                    {
+                        onActionExecutingWasCalled = true;
+                    },
+                    OnActionExecutedImpl = _ =>
+                    {
+                        onActionExecutedWasCalled = true;
+                    },
                 };
                 Func<IAsyncResult> beginExecute = delegate
                 {
@@ -677,7 +961,10 @@ namespace System.Web.Mvc.Async.Test
                 };
 
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(beginExecute, actionFilter);
+                ActionResult result = BeginInvokeActionMethodWithFiltersBeginTester(
+                    beginExecute,
+                    actionFilter
+                );
 
                 // Assert
                 Assert.True(onActionExecutingWasCalled);
@@ -700,7 +987,10 @@ namespace System.Web.Mvc.Async.Test
                     onActionExecutingWasCalled = true;
                     filterContext.Result = expectedResult;
                 },
-                OnActionExecutedImpl = _ => { onActionExecutedWasCalled = true; }
+                OnActionExecutedImpl = _ =>
+                {
+                    onActionExecutedWasCalled = true;
+                },
             };
             Func<ActionResult> endExecute = delegate
             {
@@ -710,7 +1000,13 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersTester(() => mockResult, endExecute, checkBegin: false, checkEnd: false, filters: new IActionFilter[] { actionFilter });
+                ActionResult result = BeginInvokeActionMethodWithFiltersTester(
+                    () => mockResult,
+                    endExecute,
+                    checkBegin: false,
+                    checkEnd: false,
+                    filters: new IActionFilter[] { actionFilter }
+                );
 
                 // Assert
                 Assert.True(onActionExecutingWasCalled);
@@ -729,26 +1025,52 @@ namespace System.Web.Mvc.Async.Test
             {
                 actionLog.Add("Continuation");
                 return actionResult;
-
             };
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting1"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted1"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting1");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted1");
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting2"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted2"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting2");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted2");
+                },
             };
 
             using (var mockResult = new MockAsyncResult())
             {
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(mockResult, continuation, filter1, filter2);
+                ActionResult result = BeginInvokeActionMethodWithFiltersEndTester(
+                    mockResult,
+                    continuation,
+                    filter1,
+                    filter2
+                );
 
                 // Assert
-                Assert.Equal(new[] { "OnActionExecuting1", "OnActionExecuting2", "Continuation", "OnActionExecuted2", "OnActionExecuted1" }, actionLog.ToArray());
+                Assert.Equal(
+                    new[]
+                    {
+                        "OnActionExecuting1",
+                        "OnActionExecuting2",
+                        "Continuation",
+                        "OnActionExecuted2",
+                        "OnActionExecuted1",
+                    },
+                    actionLog.ToArray()
+                );
                 Assert.Equal(actionResult, result);
             }
         }
@@ -762,8 +1084,14 @@ namespace System.Web.Mvc.Async.Test
             ActionResult executeResult = new ViewResult();
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actionLog.Add("OnActionExecuting1"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted1"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuting1");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted1");
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -772,7 +1100,10 @@ namespace System.Web.Mvc.Async.Test
                     actionLog.Add("OnActionExecuting2");
                     filterContext.Result = shortCircuitResult;
                 },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actionLog.Add("OnActionExecuted2"); }
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actionLog.Add("OnActionExecuted2");
+                },
             };
             Func<ActionResult> endExecute = () =>
             {
@@ -783,25 +1114,59 @@ namespace System.Web.Mvc.Async.Test
             using (var asyncResult = new MockAsyncResult())
             {
                 // Act
-                ActionResult result = BeginInvokeActionMethodWithFiltersTester(() => asyncResult, endExecute, checkBegin: false, checkEnd: false, filters: new IActionFilter[] { filter1, filter2 });
+                ActionResult result = BeginInvokeActionMethodWithFiltersTester(
+                    () => asyncResult,
+                    endExecute,
+                    checkBegin: false,
+                    checkEnd: false,
+                    filters: new IActionFilter[] { filter1, filter2 }
+                );
 
                 // Assert
-                Assert.Equal(new[] { "OnActionExecuting1", "OnActionExecuting2", "OnActionExecuted1" }, actionLog.ToArray());
+                Assert.Equal(
+                    new[] { "OnActionExecuting1", "OnActionExecuting2", "OnActionExecuted1" },
+                    actionLog.ToArray()
+                );
                 Assert.Equal(shortCircuitResult, result);
             }
         }
 
-        private ActionResult BeginInvokeActionMethodWithFiltersBeginTester(Func<IAsyncResult> beginFunction, params IActionFilter[] filters)
+        private ActionResult BeginInvokeActionMethodWithFiltersBeginTester(
+            Func<IAsyncResult> beginFunction,
+            params IActionFilter[] filters
+        )
         {
-            return BeginInvokeActionMethodWithFiltersTester(beginFunction, () => new Mock<ActionResult>().Object, checkBegin: true, checkEnd: false, filters: filters);
+            return BeginInvokeActionMethodWithFiltersTester(
+                beginFunction,
+                () => new Mock<ActionResult>().Object,
+                checkBegin: true,
+                checkEnd: false,
+                filters: filters
+            );
         }
 
-        private ActionResult BeginInvokeActionMethodWithFiltersEndTester(IAsyncResult asyncResult, Func<ActionResult> endFunction, params IActionFilter[] filters)
+        private ActionResult BeginInvokeActionMethodWithFiltersEndTester(
+            IAsyncResult asyncResult,
+            Func<ActionResult> endFunction,
+            params IActionFilter[] filters
+        )
         {
-            return BeginInvokeActionMethodWithFiltersTester(() => asyncResult, endFunction, checkBegin: true, checkEnd: true, filters: filters);
+            return BeginInvokeActionMethodWithFiltersTester(
+                () => asyncResult,
+                endFunction,
+                checkBegin: true,
+                checkEnd: true,
+                filters: filters
+            );
         }
 
-        private ActionResult BeginInvokeActionMethodWithFiltersTester(Func<IAsyncResult> beginFunction, Func<ActionResult> endFunction, bool checkBegin, bool checkEnd, IActionFilter[] filters)
+        private ActionResult BeginInvokeActionMethodWithFiltersTester(
+            Func<IAsyncResult> beginFunction,
+            Func<ActionResult> endFunction,
+            bool checkBegin,
+            bool checkEnd,
+            IActionFilter[] filters
+        )
         {
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
             ControllerContext controllerContext = new ControllerContext();
@@ -820,13 +1185,31 @@ namespace System.Web.Mvc.Async.Test
                 return beginFunction();
             };
 
-            mockActionDescriptor.Setup(d => d.BeginExecute(controllerContext, parameters, It.IsAny<AsyncCallback>(), It.IsAny<object>())).Returns(beingExecute);
-            mockActionDescriptor.Setup(d => d.EndExecute(It.IsAny<IAsyncResult>())).Returns(endExecute);
+            mockActionDescriptor
+                .Setup(d =>
+                    d.BeginExecute(
+                        controllerContext,
+                        parameters,
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+                )
+                .Returns(beingExecute);
+            mockActionDescriptor
+                .Setup(d => d.EndExecute(It.IsAny<IAsyncResult>()))
+                .Returns(endExecute);
 
             IAsyncResult outerAsyncResult = null;
             try
             {
-                outerAsyncResult = invoker.BeginInvokeActionMethodWithFilters(controllerContext, filters, mockActionDescriptor.Object, parameters, null, null);
+                outerAsyncResult = invoker.BeginInvokeActionMethodWithFilters(
+                    controllerContext,
+                    filters,
+                    mockActionDescriptor.Object,
+                    parameters,
+                    null,
+                    null
+                );
             }
             catch (Exception ex)
             {
@@ -845,7 +1228,9 @@ namespace System.Web.Mvc.Async.Test
             Assert.Equal(checkBegin, beginExecuteCalled);
             Assert.False(endExecuteCalled);
 
-            ActionExecutedContext postContext = invoker.EndInvokeActionMethodWithFilters(outerAsyncResult);
+            ActionExecutedContext postContext = invoker.EndInvokeActionMethodWithFilters(
+                outerAsyncResult
+            );
 
             Assert.NotNull(postContext);
             if (checkEnd)
@@ -857,7 +1242,11 @@ namespace System.Web.Mvc.Async.Test
 
         private static ActionExecutingContext GetActionExecutingContext()
         {
-            return new ActionExecutingContext(new ControllerContext(), new Mock<ActionDescriptor>().Object, new Dictionary<string, object>());
+            return new ActionExecutingContext(
+                new ControllerContext(),
+                new Mock<ActionDescriptor>().Object,
+                new Dictionary<string, object>()
+            );
         }
 
         private static ControllerContext GetControllerContext(bool passesRequestValidation = true)
@@ -871,13 +1260,15 @@ namespace System.Web.Mvc.Async.Test
             }
             else
             {
-                mockHttpContext.Setup(o => o.Request.ValidateInput()).Throws(new HttpRequestValidationException());
+                mockHttpContext
+                    .Setup(o => o.Request.ValidateInput())
+                    .Throws(new HttpRequestValidationException());
             }
 
             return new ControllerContext()
             {
                 Controller = new TestController(),
-                HttpContext = mockHttpContext.Object
+                HttpContext = mockHttpContext.Object,
             };
         }
 
@@ -931,92 +1322,182 @@ namespace System.Web.Mvc.Async.Test
                 DescriptorCache = new ControllerDescriptorCache();
             }
 
-            protected override ControllerDescriptor GetControllerDescriptor(ControllerContext controllerContext)
+            protected override ControllerDescriptor GetControllerDescriptor(
+                ControllerContext controllerContext
+            )
             {
                 return PublicGetControllerDescriptor(controllerContext);
             }
 
-            public virtual ControllerDescriptor PublicGetControllerDescriptor(ControllerContext controllerContext)
+            public virtual ControllerDescriptor PublicGetControllerDescriptor(
+                ControllerContext controllerContext
+            )
             {
                 return base.GetControllerDescriptor(controllerContext);
             }
 
-            protected override ExceptionContext InvokeExceptionFilters(ControllerContext controllerContext, IList<IExceptionFilter> filters, Exception exception)
+            protected override ExceptionContext InvokeExceptionFilters(
+                ControllerContext controllerContext,
+                IList<IExceptionFilter> filters,
+                Exception exception
+            )
             {
                 return PublicInvokeExceptionFilters(controllerContext, filters, exception);
             }
 
-            public virtual ExceptionContext PublicInvokeExceptionFilters(ControllerContext controllerContext, IList<IExceptionFilter> filters, Exception exception)
+            public virtual ExceptionContext PublicInvokeExceptionFilters(
+                ControllerContext controllerContext,
+                IList<IExceptionFilter> filters,
+                Exception exception
+            )
             {
                 return base.InvokeExceptionFilters(controllerContext, filters, exception);
             }
 
-            protected override void InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+            protected override void InvokeActionResult(
+                ControllerContext controllerContext,
+                ActionResult actionResult
+            )
             {
                 PublicInvokeActionResult(controllerContext, actionResult);
             }
 
-            public virtual void PublicInvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+            public virtual void PublicInvokeActionResult(
+                ControllerContext controllerContext,
+                ActionResult actionResult
+            )
             {
                 base.InvokeActionResult(controllerContext, actionResult);
             }
 
-            protected override FilterInfo GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            protected override FilterInfo GetFilters(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return PublicGetFilters(controllerContext, actionDescriptor);
             }
 
-            public virtual FilterInfo PublicGetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            public virtual FilterInfo PublicGetFilters(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return base.GetFilters(controllerContext, actionDescriptor);
             }
 
-            public virtual AuthenticationContext PublicInvokeAuthenticationFilters(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor)
+            public virtual AuthenticationContext PublicInvokeAuthenticationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return base.InvokeAuthenticationFilters(controllerContext, filters, actionDescriptor);
+                return base.InvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            protected override AuthenticationContext InvokeAuthenticationFilters(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor)
+            protected override AuthenticationContext InvokeAuthenticationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return PublicInvokeAuthenticationFilters(controllerContext, filters, actionDescriptor);
+                return PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            public virtual AuthenticationChallengeContext PublicInvokeAuthenticationFiltersChallenge(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor, ActionResult result)
+            public virtual AuthenticationChallengeContext PublicInvokeAuthenticationFiltersChallenge(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor,
+                ActionResult result
+            )
             {
-                return base.InvokeAuthenticationFiltersChallenge(controllerContext, filters, actionDescriptor, result);
+                return base.InvokeAuthenticationFiltersChallenge(
+                    controllerContext,
+                    filters,
+                    actionDescriptor,
+                    result
+                );
             }
 
-            protected override AuthenticationChallengeContext InvokeAuthenticationFiltersChallenge(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor, ActionResult result)
+            protected override AuthenticationChallengeContext InvokeAuthenticationFiltersChallenge(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor,
+                ActionResult result
+            )
             {
-                return PublicInvokeAuthenticationFiltersChallenge(controllerContext, filters, actionDescriptor, result);
+                return PublicInvokeAuthenticationFiltersChallenge(
+                    controllerContext,
+                    filters,
+                    actionDescriptor,
+                    result
+                );
             }
 
-            protected override AuthorizationContext InvokeAuthorizationFilters(ControllerContext controllerContext, IList<IAuthorizationFilter> filters, ActionDescriptor actionDescriptor)
+            protected override AuthorizationContext InvokeAuthorizationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthorizationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return PublicInvokeAuthorizationFilters(controllerContext, filters, actionDescriptor);
+                return PublicInvokeAuthorizationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            public virtual AuthorizationContext PublicInvokeAuthorizationFilters(ControllerContext controllerContext, IList<IAuthorizationFilter> filters, ActionDescriptor actionDescriptor)
+            public virtual AuthorizationContext PublicInvokeAuthorizationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthorizationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return base.InvokeAuthorizationFilters(controllerContext, filters, actionDescriptor);
+                return base.InvokeAuthorizationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            protected override ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+            protected override ActionDescriptor FindAction(
+                ControllerContext controllerContext,
+                ControllerDescriptor controllerDescriptor,
+                string actionName
+            )
             {
                 return PublicFindAction(controllerContext, controllerDescriptor, actionName);
             }
 
-            public virtual ActionDescriptor PublicFindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+            public virtual ActionDescriptor PublicFindAction(
+                ControllerContext controllerContext,
+                ControllerDescriptor controllerDescriptor,
+                string actionName
+            )
             {
                 return base.FindAction(controllerContext, controllerDescriptor, actionName);
             }
 
-            protected override IDictionary<string, object> GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            protected override IDictionary<string, object> GetParameterValues(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return PublicGetParameterValues(controllerContext, actionDescriptor);
             }
 
-            public virtual IDictionary<string, object> PublicGetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            public virtual IDictionary<string, object> PublicGetParameterValues(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return base.GetParameterValues(controllerContext, actionDescriptor);
             }
@@ -1024,7 +1505,11 @@ namespace System.Web.Mvc.Async.Test
 
         public class AsyncControllerActionInvokerWithCustomFindAction : AsyncControllerActionInvoker
         {
-            protected override ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+            protected override ActionDescriptor FindAction(
+                ControllerContext controllerContext,
+                ControllerDescriptor controllerDescriptor,
+                string actionName
+            )
             {
                 return base.FindAction(controllerContext, controllerDescriptor, "NormalAction");
             }
@@ -1057,31 +1542,21 @@ namespace System.Web.Mvc.Async.Test
             }
 
             [AuthenticationFilterReturnsResult]
-            public void AuthenticationFilterShortCircuits()
-            {
-            }
+            public void AuthenticationFilterShortCircuits() { }
 
             [AuthenticationFilterChallengeSetsResult]
-            public void AuthenticationFilterChallenges()
-            {
-            }
+            public void AuthenticationFilterChallenges() { }
 
             [AuthenticationFilterReturnsResult]
             [AuthenticationFilterChallengeSetsResult]
-            public void AuthenticationFilterShortCircuitsAndChallenges()
-            {
-            }
+            public void AuthenticationFilterShortCircuitsAndChallenges() { }
 
             [AuthorizationFilterReturnsResult]
-            public void AuthorizationFilterShortCircuits()
-            {
-            }
+            public void AuthorizationFilterShortCircuits() { }
 
             [AuthenticationFilterChallengeSetsResult]
             [AuthorizationFilterReturnsResult]
-            public void AuthorizationFilterShortCircuitsAndChallenges()
-            {
-            }
+            public void AuthorizationFilterShortCircuitsAndChallenges() { }
 
             [CustomExceptionFilterHandlesError]
             public void ActionThrowsExceptionAndIsHandledAsync()
@@ -1089,9 +1564,7 @@ namespace System.Web.Mvc.Async.Test
                 throw new Exception("Some exception text.");
             }
 
-            public void ActionThrowsExceptionAndIsHandledCompleted()
-            {
-            }
+            public void ActionThrowsExceptionAndIsHandledCompleted() { }
 
             [CustomExceptionFilterDoesNotHandleError]
             public void ActionThrowsExceptionAndIsNotHandledAsync()
@@ -1099,9 +1572,7 @@ namespace System.Web.Mvc.Async.Test
                 throw new Exception("Some exception text.");
             }
 
-            public void ActionThrowsExceptionAndIsNotHandledCompleted()
-            {
-            }
+            public void ActionThrowsExceptionAndIsNotHandledCompleted() { }
 
             [CustomExceptionFilterHandlesError]
             public ActionResult ResultThrowsExceptionAndIsHandled()
@@ -1115,31 +1586,37 @@ namespace System.Web.Mvc.Async.Test
                 return new ActionResultWhichThrowsException();
             }
 
-            private class AuthenticationFilterChallengeSetsResultAttribute : FilterAttribute, IAuthenticationFilter
+            private class AuthenticationFilterChallengeSetsResultAttribute
+                : FilterAttribute,
+                    IAuthenticationFilter
             {
-                public void OnAuthentication(AuthenticationContext filterContext)
-                {
-                }
+                public void OnAuthentication(AuthenticationContext filterContext) { }
 
                 public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
                 {
-                    filterContext.Result = new LoggingActionResult("From authentication filter challenge");
+                    filterContext.Result = new LoggingActionResult(
+                        "From authentication filter challenge"
+                    );
                 }
             }
 
-            private class AuthenticationFilterReturnsResultAttribute : FilterAttribute, IAuthenticationFilter
+            private class AuthenticationFilterReturnsResultAttribute
+                : FilterAttribute,
+                    IAuthenticationFilter
             {
                 public void OnAuthentication(AuthenticationContext filterContext)
                 {
                     filterContext.Result = new LoggingActionResult("From authentication filter");
                 }
 
-                public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
-                {
-                }
+                public void OnAuthenticationChallenge(
+                    AuthenticationChallengeContext filterContext
+                ) { }
             }
 
-            private class AuthorizationFilterReturnsResultAttribute : FilterAttribute, IAuthorizationFilter
+            private class AuthorizationFilterReturnsResultAttribute
+                : FilterAttribute,
+                    IAuthorizationFilter
             {
                 public void OnAuthorization(AuthorizationContext filterContext)
                 {
@@ -1147,14 +1624,16 @@ namespace System.Web.Mvc.Async.Test
                 }
             }
 
-            private class CustomExceptionFilterDoesNotHandleErrorAttribute : FilterAttribute, IExceptionFilter
+            private class CustomExceptionFilterDoesNotHandleErrorAttribute
+                : FilterAttribute,
+                    IExceptionFilter
             {
-                public void OnException(ExceptionContext filterContext)
-                {
-                }
+                public void OnException(ExceptionContext filterContext) { }
             }
 
-            private class CustomExceptionFilterHandlesErrorAttribute : FilterAttribute, IExceptionFilter
+            private class CustomExceptionFilterHandlesErrorAttribute
+                : FilterAttribute,
+                    IExceptionFilter
             {
                 public void OnException(ExceptionContext filterContext)
                 {

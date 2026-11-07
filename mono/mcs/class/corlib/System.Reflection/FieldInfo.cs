@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,108 +33,127 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection {
+namespace System.Reflection
+{
+    [Serializable]
+    partial class FieldInfo : MemberInfo
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern FieldInfo internal_from_handle_type(
+            IntPtr field_handle,
+            IntPtr type_handle
+        );
 
-	[Serializable]
-	partial class FieldInfo : MemberInfo {
+        public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle)
+        {
+            if (handle.Value == IntPtr.Zero)
+                throw new ArgumentException("The handle is invalid.");
+            return internal_from_handle_type(handle.Value, IntPtr.Zero);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private static extern FieldInfo internal_from_handle_type (IntPtr field_handle, IntPtr type_handle);
+        [ComVisible(false)]
+        public static FieldInfo GetFieldFromHandle(
+            RuntimeFieldHandle handle,
+            RuntimeTypeHandle declaringType
+        )
+        {
+            if (handle.Value == IntPtr.Zero)
+                throw new ArgumentException("The handle is invalid.");
+            FieldInfo fi = internal_from_handle_type(handle.Value, declaringType.Value);
+            if (fi == null)
+                throw new ArgumentException(
+                    "The field handle and the type handle are incompatible."
+                );
+            return fi;
+        }
 
-		public static FieldInfo GetFieldFromHandle (RuntimeFieldHandle handle)
-		{
-			if (handle.Value == IntPtr.Zero)
-				throw new ArgumentException ("The handle is invalid.");
-			return internal_from_handle_type (handle.Value, IntPtr.Zero);
-		}
+        internal virtual int GetFieldOffset()
+        {
+            throw new SystemException("This method should not be called");
+        }
 
-		[ComVisible (false)]
-		public static FieldInfo GetFieldFromHandle (RuntimeFieldHandle handle, RuntimeTypeHandle declaringType)
-		{
-			if (handle.Value == IntPtr.Zero)
-				throw new ArgumentException ("The handle is invalid.");
-			FieldInfo fi = internal_from_handle_type (handle.Value, declaringType.Value);
-			if (fi == null)
-				throw new ArgumentException ("The field handle and the type handle are incompatible.");
-			return fi;
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern MarshalAsAttribute get_marshal_info();
 
-		internal virtual int GetFieldOffset ()
-		{
-			throw new SystemException ("This method should not be called");
-		}
+        internal object[] GetPseudoCustomAttributes()
+        {
+            int count = 0;
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private extern MarshalAsAttribute get_marshal_info ();
+            if (IsNotSerialized)
+                count++;
 
-		internal object[] GetPseudoCustomAttributes ()
-		{
-			int count = 0;
+            if (DeclaringType.IsExplicitLayout)
+                count++;
 
-			if (IsNotSerialized)
-				count ++;
+            MarshalAsAttribute marshalAs = get_marshal_info();
+            if (marshalAs != null)
+                count++;
 
-			if (DeclaringType.IsExplicitLayout)
-				count ++;
+            if (count == 0)
+                return null;
+            object[] attrs = new object[count];
+            count = 0;
 
-			MarshalAsAttribute marshalAs = get_marshal_info ();
-			if (marshalAs != null)
-				count ++;
+            if (IsNotSerialized)
+                attrs[count++] = new NonSerializedAttribute();
+            if (DeclaringType.IsExplicitLayout)
+                attrs[count++] = new FieldOffsetAttribute(GetFieldOffset());
+            if (marshalAs != null)
+                attrs[count++] = marshalAs;
 
-			if (count == 0)
-				return null;
-			object[] attrs = new object [count];
-			count = 0;
+            return attrs;
+        }
 
-			if (IsNotSerialized)
-				attrs [count ++] = new NonSerializedAttribute ();
-			if (DeclaringType.IsExplicitLayout)
-				attrs [count ++] = new FieldOffsetAttribute (GetFieldOffset ());
-			if (marshalAs != null)
-				attrs [count ++] = marshalAs;
+        internal CustomAttributeData[] GetPseudoCustomAttributesData()
+        {
+            int count = 0;
 
-			return attrs;
-		}
+            if (IsNotSerialized)
+                count++;
 
-		internal CustomAttributeData[] GetPseudoCustomAttributesData ()
-		{
-			int count = 0;
+            if (DeclaringType.IsExplicitLayout)
+                count++;
 
-			if (IsNotSerialized)
-				count++;
+            MarshalAsAttribute marshalAs = get_marshal_info();
+            if (marshalAs != null)
+                count++;
 
-			if (DeclaringType.IsExplicitLayout)
-				count++;
+            if (count == 0)
+                return null;
+            CustomAttributeData[] attrsData = new CustomAttributeData[count];
+            count = 0;
 
-			MarshalAsAttribute marshalAs = get_marshal_info ();
-			if (marshalAs != null)
-				count++;
+            if (IsNotSerialized)
+                attrsData[count++] = new CustomAttributeData(
+                    (typeof(NonSerializedAttribute)).GetConstructor(Type.EmptyTypes)
+                );
+            if (DeclaringType.IsExplicitLayout)
+            {
+                var ctorArgs = new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(typeof(int), GetFieldOffset()),
+                };
+                attrsData[count++] = new CustomAttributeData(
+                    (typeof(FieldOffsetAttribute)).GetConstructor(new[] { typeof(int) }),
+                    ctorArgs,
+                    EmptyArray<CustomAttributeNamedArgument>.Value
+                );
+            }
 
-			if (count == 0)
-				return null;
-			CustomAttributeData[] attrsData = new CustomAttributeData [count];
-			count = 0;
+            if (marshalAs != null)
+            {
+                var ctorArgs = new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value),
+                };
+                attrsData[count++] = new CustomAttributeData(
+                    (typeof(MarshalAsAttribute)).GetConstructor(new[] { typeof(UnmanagedType) }),
+                    ctorArgs,
+                    EmptyArray<CustomAttributeNamedArgument>.Value
+                ); //FIXME Get named params
+            }
 
-			if (IsNotSerialized)
-				attrsData [count++] = new CustomAttributeData ((typeof (NonSerializedAttribute)).GetConstructor (Type.EmptyTypes));
-			if (DeclaringType.IsExplicitLayout) {
-				var ctorArgs = new CustomAttributeTypedArgument[] { new CustomAttributeTypedArgument (typeof (int), GetFieldOffset ()) };
-				attrsData [count++] = new CustomAttributeData (
-					(typeof (FieldOffsetAttribute)).GetConstructor (new[] { typeof (int) }),
-					ctorArgs,
-					EmptyArray<CustomAttributeNamedArgument>.Value);
-			}
-
-			if (marshalAs != null) {
-				var ctorArgs = new CustomAttributeTypedArgument[] { new CustomAttributeTypedArgument (typeof (UnmanagedType), marshalAs.Value) };
-				attrsData [count++] = new CustomAttributeData (
-					(typeof (MarshalAsAttribute)).GetConstructor (new[] { typeof (UnmanagedType) }),
-					ctorArgs,
-					EmptyArray<CustomAttributeNamedArgument>.Value);//FIXME Get named params
-			}
-
-			return attrsData;
-		}
-
-	}
+            return attrsData;
+        }
+    }
 }

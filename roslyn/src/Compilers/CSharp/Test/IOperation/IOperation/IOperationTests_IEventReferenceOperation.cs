@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void IEventReference_AddEvent_StaticEventAccessOnClass()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -30,25 +31,34 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 'C.Event')
   Instance Receiver: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0067: The event 'C.Event' is never used
                 //     static event EventHandler Event;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("C.Event").WithLocation(7, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(7, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IEventReference_AddEvent_InstanceEventAccessOnClass()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -62,28 +72,39 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventReferenceOperation: event System.EventHandler C.Event (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 'C.Event')
   Instance Receiver: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0120: An object reference is required for the non-static field, method, or property 'C.Event'
                 //         /*<bind>*/C.Event/*</bind>*/ += (sender, args) => { };
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "C.Event").WithArguments("C.Event").WithLocation(11, 19),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "C.Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(11, 19),
                 // CS0067: The event 'C.Event' is never used
                 //     event EventHandler Event;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("C.Event").WithLocation(7, 24)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(7, 24),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IEventReference_AddEvent_StaticEventWithInstanceReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -98,28 +119,39 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 'c.Event')
   Instance Receiver: 
     ILocalReferenceOperation: c (OperationKind.LocalReference, Type: C, IsInvalid) (Syntax: 'c')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0176: Member 'C.Event' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         /*<bind>*/c.Event/*</bind>*/ += (sender, args) => { };
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event").WithArguments("C.Event").WithLocation(12, 19),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(12, 19),
                 // CS0067: The event 'C.Event' is never used
                 //     static event EventHandler Event;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("C.Event").WithLocation(7, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(7, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IEventReference_AccessEvent_StaticEventAccessOnClass()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -132,21 +164,27 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 'C.Event')
   Instance Receiver: 
     null
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IEventReference_AccessEvent_InstanceEventAccessOnClass()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -159,25 +197,34 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventReferenceOperation: event System.EventHandler C.Event (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 'C.Event')
   Instance Receiver: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0120: An object reference is required for the non-static field, method, or property 'C.Event'
                 //         /*<bind>*/C.Event/*</bind>*/(null, null);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "C.Event").WithArguments("C.Event").WithLocation(10, 19)
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "C.Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(10, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IEventReference_AccessEvent_StaticEventWithInstanceReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -191,18 +238,26 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 'c.Event')
   Instance Receiver: 
     ILocalReferenceOperation: c (OperationKind.LocalReference, Type: C, IsInvalid) (Syntax: 'c')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0176: Member 'C.Event' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         /*<bind>*/c.Event/*</bind>*/(null, null);
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event").WithArguments("C.Event").WithLocation(11, 19)
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event")
+                    .WithArguments("C.Event")
+                    .WithLocation(11, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -210,7 +265,8 @@ IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationK
         public void EventReference_NoControlFlow()
         {
             // Verify event references with different kinds of instance references.
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -228,7 +284,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -272,14 +329,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventReference_ControlFlowInReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -294,7 +356,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -372,14 +435,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventReference_ControlFlowInReceiver_StaticEvent()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -395,7 +463,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -427,16 +496,25 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(12,20): error CS0176: Member 'C.Event1' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         handler1 = c1.Event1;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.Event1").WithArguments("C.Event1").WithLocation(12, 20),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.Event1")
+                    .WithArguments("C.Event1")
+                    .WithLocation(12, 20),
                 // file.cs(13,20): error CS0176: Member 'C.Event1' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         handler2 = (c1 ?? c2).Event1;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).Event1").WithArguments("C.Event1").WithLocation(13, 20)
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).Event1")
+                    .WithArguments("C.Event1")
+                    .WithLocation(13, 20),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

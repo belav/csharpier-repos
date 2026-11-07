@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     [DataContract, StructLayout(LayoutKind.Explicit, Size = HashSize)]
     internal readonly partial record struct Checksum(
-        [field: FieldOffset(0)][property: DataMember(Order = 0)] long Data1,
-        [field: FieldOffset(8)][property: DataMember(Order = 1)] long Data2)
+        [field: FieldOffset(0)] [property: DataMember(Order = 0)] long Data1,
+        [field: FieldOffset(8)] [property: DataMember(Order = 1)] long Data2
+    )
     {
         /// <summary>
-        /// The intended size of the <see cref="Checksum"/> structure. 
+        /// The intended size of the <see cref="Checksum"/> structure.
         /// </summary>
         public const int HashSize = 16;
 
@@ -39,20 +40,21 @@ namespace Microsoft.CodeAnalysis
         /// Create Checksum from given byte array. if byte array is bigger than <see cref="HashSize"/>, it will be
         /// truncated to the size.
         /// </summary>
-        public static Checksum From(byte[] checksum)
-            => From(checksum.AsSpan());
+        public static Checksum From(byte[] checksum) => From(checksum.AsSpan());
 
         /// <summary>
         /// Create Checksum from given byte array. if byte array is bigger than <see cref="HashSize"/>, it will be
         /// truncated to the size.
         /// </summary>
-        public static Checksum From(ImmutableArray<byte> checksum)
-            => From(checksum.AsSpan());
+        public static Checksum From(ImmutableArray<byte> checksum) => From(checksum.AsSpan());
 
         public static Checksum From(ReadOnlySpan<byte> checksum)
         {
             if (checksum.Length < HashSize)
-                throw new ArgumentException($"checksum must be equal or bigger than the hash size: {HashSize}", nameof(checksum));
+                throw new ArgumentException(
+                    $"checksum must be equal or bigger than the hash size: {HashSize}",
+                    nameof(checksum)
+                );
 
             Contract.ThrowIfFalse(MemoryMarshal.TryRead(checksum, out Checksum result));
             return result;
@@ -71,11 +73,10 @@ namespace Microsoft.CodeAnalysis
 #endif
         }
 
-        public static Checksum FromBase64String(string value)
-            => From(Convert.FromBase64String(value));
+        public static Checksum FromBase64String(string value) =>
+            From(Convert.FromBase64String(value));
 
-        public override string ToString()
-            => ToBase64String();
+        public override string ToString() => ToBase64String();
 
         public void WriteTo(ObjectWriter writer)
         {
@@ -89,22 +90,22 @@ namespace Microsoft.CodeAnalysis
             Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(span), this);
         }
 
-        public static Checksum ReadFrom(ObjectReader reader)
-            => new(reader.ReadInt64(), reader.ReadInt64());
+        public static Checksum ReadFrom(ObjectReader reader) =>
+            new(reader.ReadInt64(), reader.ReadInt64());
 
-        public static Func<Checksum, string> GetChecksumLogInfo { get; }
-            = checksum => checksum.ToString();
+        public static Func<Checksum, string> GetChecksumLogInfo { get; } =
+            checksum => checksum.ToString();
 
-        public static Func<IEnumerable<Checksum>, string> GetChecksumsLogInfo { get; }
-            = checksums => string.Join("|", checksums.Select(c => c.ToString()));
+        public static Func<IEnumerable<Checksum>, string> GetChecksumsLogInfo { get; } =
+            checksums => string.Join("|", checksums.Select(c => c.ToString()));
 
-        public static Func<ProjectStateChecksums, string> GetProjectChecksumsLogInfo { get; }
-            = checksums => checksums.Checksum.ToString();
+        public static Func<ProjectStateChecksums, string> GetProjectChecksumsLogInfo { get; } =
+            checksums => checksums.Checksum.ToString();
 
         // Explicitly implement this method as default jit for records on netfx doesn't properly devirtualize the
         // standard calls to EqualityComparer<long>.Default.Equals
-        public bool Equals(Checksum other)
-            => this.Data1 == other.Data1 && this.Data2 == other.Data2;
+        public bool Equals(Checksum other) =>
+            this.Data1 == other.Data1 && this.Data2 == other.Data2;
 
         // Directly override to any overhead that records add when hashing things like the EqualityContract
         public override int GetHashCode()

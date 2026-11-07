@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Xunit;
-
 using static System.Globalization.Tests.GregorianCalendarTestUtilities;
 
 namespace System.Globalization.Tests

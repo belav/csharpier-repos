@@ -7,10 +7,15 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public abstract class FilterAttribute : Attribute, IMvcFilter
     {
-        private static readonly ConcurrentDictionary<Type, bool> _multiuseAttributeCache = new ConcurrentDictionary<Type, bool>();
+        private static readonly ConcurrentDictionary<Type, bool> _multiuseAttributeCache =
+            new ConcurrentDictionary<Type, bool>();
         private int _order = Filter.DefaultOrder;
 
         public bool AllowMultiple
@@ -25,7 +30,10 @@ namespace System.Web.Mvc
             {
                 if (value < Filter.DefaultOrder)
                 {
-                    throw new ArgumentOutOfRangeException("value", MvcResources.FilterAttribute_OrderOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        MvcResources.FilterAttribute_OrderOutOfRange
+                    );
                 }
                 _order = value;
             }
@@ -33,12 +41,12 @@ namespace System.Web.Mvc
 
         private static bool AllowsMultiple(Type attributeType)
         {
-            return _multiuseAttributeCache.GetOrAdd(
-                attributeType,
-                type => type.GetCustomAttributes(typeof(AttributeUsageAttribute), true)
-                            .Cast<AttributeUsageAttribute>()
-                            .First()
-                            .AllowMultiple);
+            return _multiuseAttributeCache.GetOrAdd(attributeType, type =>
+                type.GetCustomAttributes(typeof(AttributeUsageAttribute), true)
+                    .Cast<AttributeUsageAttribute>()
+                    .First()
+                    .AllowMultiple
+            );
         }
     }
 }

@@ -31,71 +31,68 @@ using System.Threading.Tasks;
 
 namespace System.Web
 {
-	sealed class TaskAsyncResult : IAsyncResult
-	{
-		static readonly Action<Task, object> invokeCallback = InvokeCallback;
-		readonly Task task;
-		readonly AsyncCallback callback;
+    sealed class TaskAsyncResult : IAsyncResult
+    {
+        static readonly Action<Task, object> invokeCallback = InvokeCallback;
+        readonly Task task;
+        readonly AsyncCallback callback;
 
-		public object AsyncState {
-			get;
-			private set;
-		}
+        public object AsyncState { get; private set; }
 
-		public WaitHandle AsyncWaitHandle {
-			get { return ((IAsyncResult) task).AsyncWaitHandle; }
-		}
+        public WaitHandle AsyncWaitHandle
+        {
+            get { return ((IAsyncResult)task).AsyncWaitHandle; }
+        }
 
-		public bool CompletedSynchronously {
-			get;
-			private set;
-		}
+        public bool CompletedSynchronously { get; private set; }
 
-		public bool IsCompleted {
-			get { return task.IsCompleted; }
-		}
+        public bool IsCompleted
+        {
+            get { return task.IsCompleted; }
+        }
 
-		TaskAsyncResult (Task task, AsyncCallback callback, object state)
-		{
-			this.task = task;
-			this.callback = callback;
-			this.AsyncState = state;
-			this.CompletedSynchronously = task.IsCompleted;
-		}
+        TaskAsyncResult(Task task, AsyncCallback callback, object state)
+        {
+            this.task = task;
+            this.callback = callback;
+            this.AsyncState = state;
+            this.CompletedSynchronously = task.IsCompleted;
+        }
 
-		public static IAsyncResult GetAsyncResult (Task task, AsyncCallback callback, object state)
-		{
-			if (task == null)
-				return null;
+        public static IAsyncResult GetAsyncResult(Task task, AsyncCallback callback, object state)
+        {
+            if (task == null)
+                return null;
 
-			var result = new TaskAsyncResult (task, callback, state);
+            var result = new TaskAsyncResult(task, callback, state);
 
-			if (callback != null) {
-				if (result.CompletedSynchronously)
-					callback (result);
-				else
-					task.ContinueWith (invokeCallback, result);
-			}
+            if (callback != null)
+            {
+                if (result.CompletedSynchronously)
+                    callback(result);
+                else
+                    task.ContinueWith(invokeCallback, result);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		public static void Wait (IAsyncResult result)
-		{
-			if (result == null)
-				throw new ArgumentNullException ("result");
+        public static void Wait(IAsyncResult result)
+        {
+            if (result == null)
+                throw new ArgumentNullException("result");
 
-			var taskAsyncResult = result as TaskAsyncResult;
-			if (taskAsyncResult == null)
-				throw new ArgumentException ("The provided IAsyncResult is invalid.", "result");
+            var taskAsyncResult = result as TaskAsyncResult;
+            if (taskAsyncResult == null)
+                throw new ArgumentException("The provided IAsyncResult is invalid.", "result");
 
-			taskAsyncResult.task.GetAwaiter ().GetResult ();
-		}
+            taskAsyncResult.task.GetAwaiter().GetResult();
+        }
 
-		static void InvokeCallback (Task task, object state)
-		{
-			var result = (TaskAsyncResult) state;
-			result.callback (result);
-		}
-	}
+        static void InvokeCallback(Task task, object state)
+        {
+            var result = (TaskAsyncResult)state;
+            result.callback(result);
+        }
+    }
 }

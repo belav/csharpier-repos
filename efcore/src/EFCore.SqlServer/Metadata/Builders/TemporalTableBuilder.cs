@@ -34,8 +34,7 @@ public class TemporalTableBuilder
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public virtual TemporalTableBuilder UseHistoryTable(string name)
-        => UseHistoryTable(name, null);
+    public virtual TemporalTableBuilder UseHistoryTable(string name) => UseHistoryTable(name, null);
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -96,10 +95,9 @@ public class TemporalTableBuilder
     private IMutableProperty ConfigurePeriodProperty(string propertyName)
     {
         // TODO: Configure the property explicitly, but remove it if it's no longer used, issue #15898
-        var conventionPropertyBuilder = _entityTypeBuilder.GetInfrastructure().Property(
-            typeof(DateTime),
-            propertyName,
-            setTypeConfigurationSource: false);
+        var conventionPropertyBuilder = _entityTypeBuilder
+            .GetInfrastructure()
+            .Property(typeof(DateTime), propertyName, setTypeConfigurationSource: false);
 
         // if convention builder is null, it means the property with this name exists, but it has incorrect type
         // we will throw in the model validation
@@ -118,8 +116,7 @@ public class TemporalTableBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -127,16 +124,14 @@ public class TemporalTableBuilder
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

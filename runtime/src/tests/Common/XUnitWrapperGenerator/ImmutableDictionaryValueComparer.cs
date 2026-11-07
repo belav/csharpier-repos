@@ -8,7 +8,8 @@ using System.Text;
 
 namespace XUnitWrapperGenerator;
 
-internal sealed class ImmutableDictionaryValueComparer<TKey, TValue> : IEqualityComparer<ImmutableDictionary<TKey, TValue>>
+internal sealed class ImmutableDictionaryValueComparer<TKey, TValue>
+    : IEqualityComparer<ImmutableDictionary<TKey, TValue>>
     where TKey : notnull
 {
     private readonly IEqualityComparer<TValue> _valueComparer;
@@ -27,7 +28,10 @@ internal sealed class ImmutableDictionaryValueComparer<TKey, TValue> : IEquality
 
         foreach (var pair in x)
         {
-            if (!y.TryGetValue(pair.Key, out TValue? value) || !_valueComparer.Equals(value, pair.Value))
+            if (
+                !y.TryGetValue(pair.Key, out TValue? value)
+                || !_valueComparer.Equals(value, pair.Value)
+            )
             {
                 return false;
             }
@@ -35,5 +39,6 @@ internal sealed class ImmutableDictionaryValueComparer<TKey, TValue> : IEquality
         return true;
     }
 
-    public int GetHashCode(ImmutableDictionary<TKey, TValue> obj) => throw new NotImplementedException();
+    public int GetHashCode(ImmutableDictionary<TKey, TValue> obj) =>
+        throw new NotImplementedException();
 }

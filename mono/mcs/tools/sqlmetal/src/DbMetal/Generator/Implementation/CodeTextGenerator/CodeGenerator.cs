@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,6 @@ using DbLinq.Schema.Dbml;
 using DbLinq.Schema.Dbml.Adapter;
 using DbLinq.Util;
 using Type = System.Type;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #endif
@@ -72,8 +71,8 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             }
 
             context["namespace"] = string.IsNullOrEmpty(context.Parameters.Namespace)
-                                       ? dbSchema.ContextNamespace
-                                       : context.Parameters.Namespace;
+                ? dbSchema.ContextNamespace
+                : context.Parameters.Namespace;
             context["database"] = dbSchema.Name;
             context["generationTime"] = context.Parameters.GenerateTimestamps
                 ? DateTime.Now.ToString("u")
@@ -120,10 +119,16 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
 
         private void WriteBanner(CodeWriter writer, GenerationContext context)
         {
-            using (writer.WriteRegion(context.Evaluate("Auto-generated classes for ${database} database on ${generationTime}")))
+            using (
+                writer.WriteRegion(
+                    context.Evaluate(
+                        "Auto-generated classes for ${database} database on ${generationTime}"
+                    )
+                )
+            )
             {
                 // http://www.network-science.de/ascii/
-                // http://www.network-science.de/ascii/ascii.php?TEXT=MetalSequel&x=14&y=14&FONT=_all+fonts+with+your+text_&RICH=no&FORM=left&STRE=no&WIDT=80 
+                // http://www.network-science.de/ascii/ascii.php?TEXT=MetalSequel&x=14&y=14&FONT=_all+fonts+with+your+text_&RICH=no&FORM=left&STRE=no&WIDT=80
                 writer.WriteCommentLines(
                     @"
  ____  _     __  __      _        _ 
@@ -131,8 +136,11 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
 | | | | '_ \| |\/| |/ _ \ __/ _` | |
 | |_| | |_) | |  | |  __/ || (_| | |
 |____/|_.__/|_|  |_|\___|\__\__,_|_|
-");
-                writer.WriteCommentLines(context.Evaluate("Auto-generated from ${database} on ${generationTime}"));
+"
+                );
+                writer.WriteCommentLines(
+                    context.Evaluate("Auto-generated from ${database} on ${generationTime}")
+                );
                 writer.WriteCommentLines("Please visit http://linq.to/db for more information");
             }
         }
@@ -218,7 +226,6 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                 return;
             }
 
-
             string contextBase = schema.BaseType;
             var contextBaseType = string.IsNullOrEmpty(contextBase)
                 ? typeof(DataContext)
@@ -243,7 +250,11 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             }
         }
 
-        private void WriteDataContextTables(CodeWriter writer, Database schema, GenerationContext context)
+        private void WriteDataContextTables(
+            CodeWriter writer,
+            Database schema,
+            GenerationContext context
+        )
         {
             foreach (var table in schema.Tables)
                 WriteDataContextTable(writer, table);
@@ -279,32 +290,32 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         {
             switch (literalType)
             {
-            case "string":
-                return typeof(string);
-            case "long":
-                return typeof(long);
-            case "short":
-                return typeof(short);
-            case "int":
-                return typeof(int);
-            case "char":
-                return typeof(char);
-            case "byte":
-                return typeof(byte);
-            case "float":
-                return typeof(float);
-            case "double":
-                return typeof(double);
-            case "decimal":
-                return typeof(decimal);
-            case "bool":
-                return typeof(bool);
-            case "DateTime":
-                return typeof(DateTime);
-            case "object":
-                return typeof(object);
-            default:
-                return Type.GetType(literalType);
+                case "string":
+                    return typeof(string);
+                case "long":
+                    return typeof(long);
+                case "short":
+                    return typeof(short);
+                case "int":
+                    return typeof(int);
+                case "char":
+                    return typeof(char);
+                case "byte":
+                    return typeof(byte);
+                case "float":
+                    return typeof(float);
+                case "double":
+                    return typeof(double);
+                case "decimal":
+                    return typeof(decimal);
+                case "bool":
+                    return typeof(bool);
+                case "DateTime":
+                    return typeof(DateTime);
+                case "object":
+                    return typeof(object);
+                default:
+                    return Type.GetType(literalType);
             }
         }
 
@@ -314,7 +325,10 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             string literalAttribute = typeof(T).Name;
             string end = "Attribute";
             if (literalAttribute.EndsWith(end))
-                literalAttribute = literalAttribute.Substring(0, literalAttribute.Length - end.Length);
+                literalAttribute = literalAttribute.Substring(
+                    0,
+                    literalAttribute.Length - end.Length
+                );
             return literalAttribute;
         }
 
@@ -324,7 +338,10 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return new AttributeDefinition(GetAttributeShortName<T>());
         }
 
-        protected IDisposable WriteAttributes(CodeWriter writer, params AttributeDefinition[] definitions)
+        protected IDisposable WriteAttributes(
+            CodeWriter writer,
+            params AttributeDefinition[] definitions
+        )
         {
             var massDisposer = new MassDisposer();
             foreach (var definition in definitions)
@@ -340,52 +357,58 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return WriteAttributes(writer, attributeDefinitions.ToArray());
         }
 
-        protected virtual SpecificationDefinition GetSpecificationDefinition(AccessModifier accessModifier)
+        protected virtual SpecificationDefinition GetSpecificationDefinition(
+            AccessModifier accessModifier
+        )
         {
             switch (accessModifier)
             {
-            case AccessModifier.Public:
-                return SpecificationDefinition.Public;
-            case AccessModifier.Internal:
-                return SpecificationDefinition.Internal;
-            case AccessModifier.Protected:
-                return SpecificationDefinition.Protected;
-            case AccessModifier.ProtectedInternal:
-                return SpecificationDefinition.Protected | SpecificationDefinition.Internal;
-            case AccessModifier.Private:
-                return SpecificationDefinition.Private;
-            default:
-                throw new ArgumentOutOfRangeException("accessModifier");
+                case AccessModifier.Public:
+                    return SpecificationDefinition.Public;
+                case AccessModifier.Internal:
+                    return SpecificationDefinition.Internal;
+                case AccessModifier.Protected:
+                    return SpecificationDefinition.Protected;
+                case AccessModifier.ProtectedInternal:
+                    return SpecificationDefinition.Protected | SpecificationDefinition.Internal;
+                case AccessModifier.Private:
+                    return SpecificationDefinition.Private;
+                default:
+                    throw new ArgumentOutOfRangeException("accessModifier");
             }
         }
 
-        protected virtual SpecificationDefinition GetSpecificationDefinition(ClassModifier classModifier)
+        protected virtual SpecificationDefinition GetSpecificationDefinition(
+            ClassModifier classModifier
+        )
         {
             switch (classModifier)
             {
-            case ClassModifier.Sealed:
-                return SpecificationDefinition.Sealed;
-            case ClassModifier.Abstract:
-                return SpecificationDefinition.Abstract;
-            default:
-                throw new ArgumentOutOfRangeException("classModifier");
+                case ClassModifier.Sealed:
+                    return SpecificationDefinition.Sealed;
+                case ClassModifier.Abstract:
+                    return SpecificationDefinition.Abstract;
+                default:
+                    throw new ArgumentOutOfRangeException("classModifier");
             }
         }
 
-        protected virtual SpecificationDefinition GetSpecificationDefinition(MemberModifier memberModifier)
+        protected virtual SpecificationDefinition GetSpecificationDefinition(
+            MemberModifier memberModifier
+        )
         {
             switch (memberModifier)
             {
-            case MemberModifier.Virtual:
-                return SpecificationDefinition.Virtual;
-            case MemberModifier.Override:
-                return SpecificationDefinition.Override;
-            case MemberModifier.New:
-                return SpecificationDefinition.New;
-            case MemberModifier.NewVirtual:
-                return SpecificationDefinition.New | SpecificationDefinition.Virtual;
-            default:
-                throw new ArgumentOutOfRangeException("memberModifier");
+                case MemberModifier.Virtual:
+                    return SpecificationDefinition.Virtual;
+                case MemberModifier.Override:
+                    return SpecificationDefinition.Override;
+                case MemberModifier.New:
+                    return SpecificationDefinition.New;
+                case MemberModifier.NewVirtual:
+                    return SpecificationDefinition.New | SpecificationDefinition.Virtual;
+                default:
+                    throw new ArgumentOutOfRangeException("memberModifier");
             }
         }
 
@@ -397,7 +420,12 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         /// <param name="table"></param>
         /// <param name="schema"></param>
         /// <param name="context"></param>
-        protected virtual void WriteCustomTypes(CodeWriter writer, Table table, Database schema, GenerationContext context)
+        protected virtual void WriteCustomTypes(
+            CodeWriter writer,
+            Table table,
+            Database schema,
+            GenerationContext context
+        )
         {
             // detect required custom types
             foreach (var column in table.Type.Columns)
@@ -409,7 +437,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                     context.ExtendedTypes[column] = new GenerationContext.ExtendedTypeAndName
                     {
                         Type = column.ExtendedType,
-                        Table = table
+                        Table = table,
                     };
                 }
             }
@@ -427,7 +455,13 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                     string name = extendedTypePair.Key.Member + "Type";
                     for (; ; )
                     {
-                        if ((from t in context.ExtendedTypes.Values where t.Type.Name == name select t).FirstOrDefault() == null)
+                        if (
+                            (
+                                from t in context.ExtendedTypes.Values
+                                where t.Type.Name == name
+                                select t
+                            ).FirstOrDefault() == null
+                        )
                         {
                             extendedTypePair.Value.Type.Name = name;
                             break;
@@ -442,7 +476,14 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             // write custom types
             if (customTypesNames.Count > 0)
             {
-                using (writer.WriteRegion(string.Format("Custom type definition for {0}", string.Join(", ", customTypesNames.ToArray()))))
+                using (
+                    writer.WriteRegion(
+                        string.Format(
+                            "Custom type definition for {0}",
+                            string.Join(", ", customTypesNames.ToArray())
+                        )
+                    )
+                )
                 {
                     // write types
                     foreach (var extendedTypePair in context.ExtendedTypes)
@@ -455,8 +496,11 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
 
                         if (enumValue != null)
                         {
-                            writer.WriteEnum(GetSpecificationDefinition(extendedTypePair.Key.AccessModifier),
-                                             enumValue.Name, enumValue);
+                            writer.WriteEnum(
+                                GetSpecificationDefinition(extendedTypePair.Key.AccessModifier),
+                                enumValue.Name,
+                                enumValue
+                            );
                         }
                     }
                 }

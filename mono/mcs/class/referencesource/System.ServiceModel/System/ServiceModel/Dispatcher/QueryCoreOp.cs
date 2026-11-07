@@ -10,9 +10,7 @@ namespace System.ServiceModel.Dispatcher
     class PushContextNodeOpcode : Opcode
     {
         internal PushContextNodeOpcode()
-            : base(OpcodeID.PushContextNode)
-        {
-        }
+            : base(OpcodeID.PushContextNode) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -32,9 +30,7 @@ namespace System.ServiceModel.Dispatcher
     class PushContextPositionOpcode : Opcode
     {
         internal PushContextPositionOpcode()
-            : base(OpcodeID.PushPosition)
-        {
-        }
+            : base(OpcodeID.PushPosition) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -46,9 +42,7 @@ namespace System.ServiceModel.Dispatcher
     class PopSequenceToValueStackOpcode : Opcode
     {
         internal PopSequenceToValueStackOpcode()
-            : base(OpcodeID.PopSequenceToValueStack)
-        {
-        }
+            : base(OpcodeID.PopSequenceToValueStack) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -60,9 +54,7 @@ namespace System.ServiceModel.Dispatcher
     class PopSequenceToSequenceStackOpcode : Opcode
     {
         internal PopSequenceToSequenceStackOpcode()
-            : base(OpcodeID.PopSequenceToSequenceStack)
-        {
-        }
+            : base(OpcodeID.PopSequenceToSequenceStack) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -75,9 +67,7 @@ namespace System.ServiceModel.Dispatcher
     internal class PushContextCopy : Opcode
     {
         internal PushContextCopy()
-            : base(OpcodeID.PushContextCopy)
-        {
-        }
+            : base(OpcodeID.PushContextCopy) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -100,9 +90,7 @@ namespace System.ServiceModel.Dispatcher
     class PopContextNodes : Opcode
     {
         internal PopContextNodes()
-            : base(OpcodeID.PopContextNodes)
-        {
-        }
+            : base(OpcodeID.PopContextNodes) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -115,9 +103,7 @@ namespace System.ServiceModel.Dispatcher
     internal class PopValueFrameOpcode : Opcode
     {
         internal PopValueFrameOpcode()
-            : base(OpcodeID.PopValueFrame)
-        {
-        }
+            : base(OpcodeID.PopValueFrame) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -270,7 +256,15 @@ namespace System.ServiceModel.Dispatcher
                     break;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidType, SR.GetString(SR.QueryVariableTypeNotSupported, this.variable.VariableType.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryCompileException(
+                            QueryCompileError.InvalidType,
+                            SR.GetString(
+                                SR.QueryVariableTypeNotSupported,
+                                this.variable.VariableType.ToString()
+                            )
+                        )
+                    );
             }
         }
 
@@ -296,7 +290,12 @@ namespace System.ServiceModel.Dispatcher
                 object o = this.variable.Evaluate(this.xsltContext);
                 if (o == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryVariableNull)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryProcessingException(
+                            QueryProcessingError.Unexpected,
+                            SR.GetString(SR.QueryVariableNull)
+                        )
+                    );
                 }
 
                 switch (this.type)
@@ -325,14 +324,27 @@ namespace System.ServiceModel.Dispatcher
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryMustBeSeekable)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new QueryProcessingException(
+                                        QueryProcessingError.Unexpected,
+                                        SR.GetString(SR.QueryMustBeSeekable)
+                                    )
+                                );
                             }
                         }
                         context.Push(seq, count);
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryVariableTypeNotSupported, this.variable.VariableType.ToString())));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                            new QueryProcessingException(
+                                QueryProcessingError.Unexpected,
+                                SR.GetString(
+                                    SR.QueryVariableTypeNotSupported,
+                                    this.variable.VariableType.ToString()
+                                )
+                            )
+                        );
                 }
             }
             return this.next;
@@ -341,7 +353,11 @@ namespace System.ServiceModel.Dispatcher
 #if DEBUG_FILTER
         public override string ToString()
         {
-            return string.Format("{0} IXsltContextVariable: {1}", base.ToString(), this.variable.ToString());
+            return string.Format(
+                "{0} IXsltContextVariable: {1}",
+                base.ToString(),
+                this.variable.ToString()
+            );
         }
 #endif
     }

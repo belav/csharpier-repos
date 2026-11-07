@@ -14,16 +14,16 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         Default,
 
-        // <summary> 
-        // Marks a control yield point for emitted await operator; is processed by codegen; 
+        // <summary>
+        // Marks a control yield point for emitted await operator; is processed by codegen;
         // only allowed inside MoveNext methods generated for Async methods
         // </summary>
         AwaitYieldPoint,
 
-        // <summary> 
-        // Marks a control resume point for emitted await operator; is processed by codegen; 
+        // <summary>
+        // Marks a control resume point for emitted await operator; is processed by codegen;
         // only allowed inside MoveNext methods generated for Async methods
         // </summary>
-        AwaitResumePoint
+        AwaitResumePoint,
     }
 }

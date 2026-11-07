@@ -28,6 +28,10 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         /// and <see cref="FixAllScope.ContainingType"/>.
         /// </summary>
         Task<ImmutableDictionary<Document, ImmutableArray<TextSpan>>> GetFixAllSpansAsync(
-            Document document, TextSpan triggerSpan, FixAllScope fixAllScope, CancellationToken cancellationToken);
+            Document document,
+            TextSpan triggerSpan,
+            FixAllScope fixAllScope,
+            CancellationToken cancellationToken
+        );
     }
 }

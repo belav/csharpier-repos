@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -20,6 +19,7 @@ internal static partial class Interop
             IntPtr pszPolicyOID,
             SafeX509ChainHandle pChainContext,
             ref CERT_CHAIN_POLICY_PARA pPolicyPara,
-            ref CERT_CHAIN_POLICY_STATUS pPolicyStatus);
+            ref CERT_CHAIN_POLICY_STATUS pPolicyStatus
+        );
     }
 }

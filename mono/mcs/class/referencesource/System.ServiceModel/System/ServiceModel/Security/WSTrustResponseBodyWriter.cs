@@ -26,22 +26,28 @@ namespace System.ServiceModel.Security
         /// <param name="serializer">Serializer to use for serializing the RSTR.</param>
         /// <param name="context">The <see cref="WSTrustSerializationContext"/> of this request.</param>
         /// <exception cref="ArgumentNullException">serializer parameter is null.</exception>
-        public WSTrustResponseBodyWriter(RSTR requestSecurityTokenResponse, WSTrustResponseSerializer serializer, WSTrustSerializationContext context)
-            : base( true )
+        public WSTrustResponseBodyWriter(
+            RSTR requestSecurityTokenResponse,
+            WSTrustResponseSerializer serializer,
+            WSTrustSerializationContext context
+        )
+            : base(true)
         {
-            if ( serializer == null )
+            if (serializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "serializer" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
             }
 
-            if ( requestSecurityTokenResponse == null )
+            if (requestSecurityTokenResponse == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("requestSecurityTokenResponse");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "requestSecurityTokenResponse"
+                );
             }
 
-            if ( context == null )
+            if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "context" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
             _serializer = serializer;
@@ -53,9 +59,9 @@ namespace System.ServiceModel.Security
         /// Override of the base class method. Serializes the RSTR to the outgoing stream.
         /// </summary>
         /// <param name="writer">Writer to which the RSTR should be written.</param>
-        protected override void OnWriteBodyContents( XmlDictionaryWriter writer )
+        protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
         {
-            _serializer.WriteXml( _rstr, writer, _context );
+            _serializer.WriteXml(_rstr, writer, _context);
         }
     }
 }

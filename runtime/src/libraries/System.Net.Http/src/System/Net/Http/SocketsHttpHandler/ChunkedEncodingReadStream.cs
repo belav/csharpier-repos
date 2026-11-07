@@ -16,11 +16,16 @@ namespace System.Net.Http
         {
             /// <summary>The number of bytes remaining in the chunk.</summary>
             private ulong _chunkBytesRemaining;
+
             /// <summary>The current state of the parsing state machine for the chunked response.</summary>
             private ParsingState _state = ParsingState.ExpectChunkHeader;
             private readonly HttpResponseMessage _response;
 
-            public ChunkedEncodingReadStream(HttpConnection connection, HttpResponseMessage response) : base(connection)
+            public ChunkedEncodingReadStream(
+                HttpConnection connection,
+                HttpResponseMessage response
+            )
+                : base(connection)
             {
                 Debug.Assert(response != null, "The HttpResponseMessage cannot be null.");
                 _response = response;
@@ -44,7 +49,10 @@ namespace System.Net.Http
                 else
                 {
                     // Try to consume from data we already have in the buffer.
-                    int bytesRead = ReadChunksFromConnectionBuffer(buffer, cancellationRegistration: default);
+                    int bytesRead = ReadChunksFromConnectionBuffer(
+                        buffer,
+                        cancellationRegistration: default
+                    );
                     if (bytesRead > 0)
                     {
                         return bytesRead;
@@ -60,9 +68,11 @@ namespace System.Net.Http
                         return 0;
                     }
 
-                    if (_state == ParsingState.ExpectChunkData &&
-                        buffer.Length >= _connection.ReadBufferSize &&
-                        _chunkBytesRemaining >= (ulong)_connection.ReadBufferSize)
+                    if (
+                        _state == ParsingState.ExpectChunkData
+                        && buffer.Length >= _connection.ReadBufferSize
+                        && _chunkBytesRemaining >= (ulong)_connection.ReadBufferSize
+                    )
                     {
                         // As an optimization, we skip going through the connection's read buffer if both
                         // the remaining chunk data and the buffer are both at least as large
@@ -70,10 +80,21 @@ namespace System.Net.Http
                         // the maximum amount we'd otherwise read at a time.
                         Debug.Assert(_connection.RemainingBuffer.Length == 0);
                         Debug.Assert(buffer.Length != 0);
-                        int bytesRead = _connection.Read(buffer.Slice(0, (int)Math.Min((ulong)buffer.Length, _chunkBytesRemaining)));
+                        int bytesRead = _connection.Read(
+                            buffer.Slice(
+                                0,
+                                (int)Math.Min((ulong)buffer.Length, _chunkBytesRemaining)
+                            )
+                        );
                         if (bytesRead == 0)
                         {
-                            throw new HttpIOException(HttpRequestError.ResponseEnded, SR.Format(SR.net_http_invalid_response_premature_eof_bytecount, _chunkBytesRemaining));
+                            throw new HttpIOException(
+                                HttpRequestError.ResponseEnded,
+                                SR.Format(
+                                    SR.net_http_invalid_response_premature_eof_bytecount,
+                                    _chunkBytesRemaining
+                                )
+                            );
                         }
                         _chunkBytesRemaining -= (ulong)bytesRead;
                         if (_chunkBytesRemaining == 0)
@@ -107,7 +128,10 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        int bytesCopied = ReadChunksFromConnectionBuffer(buffer, cancellationRegistration: default);
+                        int bytesCopied = ReadChunksFromConnectionBuffer(
+                            buffer,
+                            cancellationRegistration: default
+                        );
                         if (bytesCopied > 0)
                         {
                             return bytesCopied;
@@ -116,7 +140,10 @@ namespace System.Net.Http
                 }
             }
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -140,7 +167,10 @@ namespace System.Net.Http
                 else
                 {
                     // Try to consume from data we already have in the buffer.
-                    int bytesRead = ReadChunksFromConnectionBuffer(buffer.Span, cancellationRegistration: default);
+                    int bytesRead = ReadChunksFromConnectionBuffer(
+                        buffer.Span,
+                        cancellationRegistration: default
+                    );
                     if (bytesRead > 0)
                     {
                         return new ValueTask<int>(bytesRead);
@@ -159,13 +189,18 @@ namespace System.Net.Http
                 return ReadAsyncCore(buffer, cancellationToken);
             }
 
-            private async ValueTask<int> ReadAsyncCore(Memory<byte> buffer, CancellationToken cancellationToken)
+            private async ValueTask<int> ReadAsyncCore(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 // Should only be called if ReadChunksFromConnectionBuffer returned 0.
 
                 Debug.Assert(_connection != null);
 
-                CancellationTokenRegistration ctr = _connection.RegisterCancellation(cancellationToken);
+                CancellationTokenRegistration ctr = _connection.RegisterCancellation(
+                    cancellationToken
+                );
                 try
                 {
                     while (true)
@@ -176,9 +211,11 @@ namespace System.Net.Http
                             return 0;
                         }
 
-                        if (_state == ParsingState.ExpectChunkData &&
-                            buffer.Length >= _connection.ReadBufferSize &&
-                            _chunkBytesRemaining >= (ulong)_connection.ReadBufferSize)
+                        if (
+                            _state == ParsingState.ExpectChunkData
+                            && buffer.Length >= _connection.ReadBufferSize
+                            && _chunkBytesRemaining >= (ulong)_connection.ReadBufferSize
+                        )
                         {
                             // As an optimization, we skip going through the connection's read buffer if both
                             // the remaining chunk data and the buffer are both at least as large
@@ -186,10 +223,23 @@ namespace System.Net.Http
                             // the maximum amount we'd otherwise read at a time.
                             Debug.Assert(_connection.RemainingBuffer.Length == 0);
                             Debug.Assert(buffer.Length != 0);
-                            int bytesRead = await _connection.ReadAsync(buffer.Slice(0, (int)Math.Min((ulong)buffer.Length, _chunkBytesRemaining))).ConfigureAwait(false);
+                            int bytesRead = await _connection
+                                .ReadAsync(
+                                    buffer.Slice(
+                                        0,
+                                        (int)Math.Min((ulong)buffer.Length, _chunkBytesRemaining)
+                                    )
+                                )
+                                .ConfigureAwait(false);
                             if (bytesRead == 0)
                             {
-                                throw new HttpIOException(HttpRequestError.ResponseEnded, SR.Format(SR.net_http_invalid_response_premature_eof_bytecount, _chunkBytesRemaining));
+                                throw new HttpIOException(
+                                    HttpRequestError.ResponseEnded,
+                                    SR.Format(
+                                        SR.net_http_invalid_response_premature_eof_bytecount,
+                                        _chunkBytesRemaining
+                                    )
+                                );
                             }
                             _chunkBytesRemaining -= (ulong)bytesRead;
                             if (_chunkBytesRemaining == 0)
@@ -231,9 +281,17 @@ namespace System.Net.Http
                         }
                     }
                 }
-                catch (Exception exc) when (CancellationHelper.ShouldWrapInOperationCanceledException(exc, cancellationToken))
+                catch (Exception exc)
+                    when (CancellationHelper.ShouldWrapInOperationCanceledException(
+                            exc,
+                            cancellationToken
+                        )
+                    )
                 {
-                    throw CancellationHelper.CreateOperationCanceledException(exc, cancellationToken);
+                    throw CancellationHelper.CreateOperationCanceledException(
+                        exc,
+                        cancellationToken
+                    );
                 }
                 finally
                 {
@@ -241,30 +299,45 @@ namespace System.Net.Http
                 }
             }
 
-            public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+            public override Task CopyToAsync(
+                Stream destination,
+                int bufferSize,
+                CancellationToken cancellationToken
+            )
             {
                 ValidateCopyToArguments(destination, bufferSize);
 
-                return
-                    cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-                    _connection == null ? Task.CompletedTask :
-                    CopyToAsyncCore(destination, cancellationToken);
+                return cancellationToken.IsCancellationRequested
+                        ? Task.FromCanceled(cancellationToken)
+                    : _connection == null ? Task.CompletedTask
+                    : CopyToAsyncCore(destination, cancellationToken);
             }
 
-            private async Task CopyToAsyncCore(Stream destination, CancellationToken cancellationToken)
+            private async Task CopyToAsyncCore(
+                Stream destination,
+                CancellationToken cancellationToken
+            )
             {
-                CancellationTokenRegistration ctr = _connection!.RegisterCancellation(cancellationToken);
+                CancellationTokenRegistration ctr = _connection!.RegisterCancellation(
+                    cancellationToken
+                );
                 try
                 {
                     while (true)
                     {
                         while (true)
                         {
-                            if (ReadChunkFromConnectionBuffer(int.MaxValue, ctr) is not ReadOnlyMemory<byte> bytesRead || bytesRead.Length == 0)
+                            if (
+                                ReadChunkFromConnectionBuffer(int.MaxValue, ctr)
+                                    is not ReadOnlyMemory<byte> bytesRead
+                                || bytesRead.Length == 0
+                            )
                             {
                                 break;
                             }
-                            await destination.WriteAsync(bytesRead, cancellationToken).ConfigureAwait(false);
+                            await destination
+                                .WriteAsync(bytesRead, cancellationToken)
+                                .ConfigureAwait(false);
                         }
 
                         if (_connection == null)
@@ -276,9 +349,17 @@ namespace System.Net.Http
                         await FillAsync().ConfigureAwait(false);
                     }
                 }
-                catch (Exception exc) when (CancellationHelper.ShouldWrapInOperationCanceledException(exc, cancellationToken))
+                catch (Exception exc)
+                    when (CancellationHelper.ShouldWrapInOperationCanceledException(
+                            exc,
+                            cancellationToken
+                        )
+                    )
                 {
-                    throw CancellationHelper.CreateOperationCanceledException(exc, cancellationToken);
+                    throw CancellationHelper.CreateOperationCanceledException(
+                        exc,
+                        cancellationToken
+                    );
                 }
                 finally
                 {
@@ -288,16 +369,26 @@ namespace System.Net.Http
 
             private bool PeekChunkFromConnectionBuffer()
             {
-                return ReadChunkFromConnectionBuffer(maxBytesToRead: 0, cancellationRegistration: default).HasValue;
+                return ReadChunkFromConnectionBuffer(
+                    maxBytesToRead: 0,
+                    cancellationRegistration: default
+                ).HasValue;
             }
 
-            private int ReadChunksFromConnectionBuffer(Span<byte> buffer, CancellationTokenRegistration cancellationRegistration)
+            private int ReadChunksFromConnectionBuffer(
+                Span<byte> buffer,
+                CancellationTokenRegistration cancellationRegistration
+            )
             {
                 Debug.Assert(buffer.Length > 0);
                 int totalBytesRead = 0;
                 while (buffer.Length > 0)
                 {
-                    if (ReadChunkFromConnectionBuffer(buffer.Length, cancellationRegistration) is not ReadOnlyMemory<byte> bytesRead || bytesRead.Length == 0)
+                    if (
+                        ReadChunkFromConnectionBuffer(buffer.Length, cancellationRegistration)
+                            is not ReadOnlyMemory<byte> bytesRead
+                        || bytesRead.Length == 0
+                    )
                     {
                         break;
                     }
@@ -310,7 +401,10 @@ namespace System.Net.Http
                 return totalBytesRead;
             }
 
-            private ReadOnlyMemory<byte>? ReadChunkFromConnectionBuffer(int maxBytesToRead, CancellationTokenRegistration cancellationRegistration)
+            private ReadOnlyMemory<byte>? ReadChunkFromConnectionBuffer(
+                int maxBytesToRead,
+                CancellationTokenRegistration cancellationRegistration
+            )
             {
                 Debug.Assert(_connection != null);
 
@@ -320,7 +414,10 @@ namespace System.Net.Http
                     switch (_state)
                     {
                         case ParsingState.ExpectChunkHeader:
-                            Debug.Assert(_chunkBytesRemaining == 0, $"Expected {nameof(_chunkBytesRemaining)} == 0, got {_chunkBytesRemaining}");
+                            Debug.Assert(
+                                _chunkBytesRemaining == 0,
+                                $"Expected {nameof(_chunkBytesRemaining)} == 0, got {_chunkBytesRemaining}"
+                            );
 
                             // Read the chunk header line.
                             if (!_connection.TryReadNextChunkedLine(out currentLine))
@@ -330,9 +427,22 @@ namespace System.Net.Http
                             }
 
                             // Parse the hex value from it.
-                            if (!Utf8Parser.TryParse(currentLine, out ulong chunkSize, out int bytesConsumed, 'X'))
+                            if (
+                                !Utf8Parser.TryParse(
+                                    currentLine,
+                                    out ulong chunkSize,
+                                    out int bytesConsumed,
+                                    'X'
+                                )
+                            )
                             {
-                                throw new HttpIOException(HttpRequestError.InvalidResponse, SR.Format(SR.net_http_invalid_response_chunk_header_invalid, BitConverter.ToString(currentLine.ToArray())));
+                                throw new HttpIOException(
+                                    HttpRequestError.InvalidResponse,
+                                    SR.Format(
+                                        SR.net_http_invalid_response_chunk_header_invalid,
+                                        BitConverter.ToString(currentLine.ToArray())
+                                    )
+                                );
                             }
                             _chunkBytesRemaining = chunkSize;
 
@@ -364,7 +474,10 @@ namespace System.Net.Http
                                 return default;
                             }
 
-                            int bytesToConsume = Math.Min(maxBytesToRead, (int)Math.Min((ulong)connectionBuffer.Length, _chunkBytesRemaining));
+                            int bytesToConsume = Math.Min(
+                                maxBytesToRead,
+                                (int)Math.Min((ulong)connectionBuffer.Length, _chunkBytesRemaining)
+                            );
                             Debug.Assert(bytesToConsume > 0 || maxBytesToRead == 0);
 
                             _connection.ConsumeFromRemainingBuffer(bytesToConsume);
@@ -377,7 +490,10 @@ namespace System.Net.Http
                             return connectionBuffer.Slice(0, bytesToConsume);
 
                         case ParsingState.ExpectChunkTerminator:
-                            Debug.Assert(_chunkBytesRemaining == 0, $"Expected {nameof(_chunkBytesRemaining)} == 0, got {_chunkBytesRemaining}");
+                            Debug.Assert(
+                                _chunkBytesRemaining == 0,
+                                $"Expected {nameof(_chunkBytesRemaining)} == 0, got {_chunkBytesRemaining}"
+                            );
 
                             if (!_connection.TryReadNextChunkedLine(out currentLine))
                             {
@@ -386,18 +502,32 @@ namespace System.Net.Http
 
                             if (currentLine.Length != 0)
                             {
-                                throw new HttpIOException(HttpRequestError.InvalidResponse, SR.Format(SR.net_http_invalid_response_chunk_terminator_invalid, Encoding.ASCII.GetString(currentLine)));
+                                throw new HttpIOException(
+                                    HttpRequestError.InvalidResponse,
+                                    SR.Format(
+                                        SR.net_http_invalid_response_chunk_terminator_invalid,
+                                        Encoding.ASCII.GetString(currentLine)
+                                    )
+                                );
                             }
 
                             _state = ParsingState.ExpectChunkHeader;
                             goto case ParsingState.ExpectChunkHeader;
 
                         case ParsingState.ConsumeTrailers:
-                            Debug.Assert(_chunkBytesRemaining == 0, $"Expected {nameof(_chunkBytesRemaining)} == 0, got {_chunkBytesRemaining}");
+                            Debug.Assert(
+                                _chunkBytesRemaining == 0,
+                                $"Expected {nameof(_chunkBytesRemaining)} == 0, got {_chunkBytesRemaining}"
+                            );
 
                             // Consume the receive buffer. If the stream is disposed, pass a null response to avoid
                             // processing headers for a connection returned to the pool.
-                            if (_connection.ParseHeaders(IsDisposed ? null : _response, isFromTrailer: true))
+                            if (
+                                _connection.ParseHeaders(
+                                    IsDisposed ? null : _response,
+                                    isFromTrailer: true
+                                )
+                            )
                             {
                                 // Dispose of the registration and then check whether cancellation has been
                                 // requested. This is necessary to make deterministic a race condition between
@@ -407,7 +537,9 @@ namespace System.Net.Http
                                 // (e.g. if a timer is used and has already queued its callback but the
                                 // callback hasn't yet run).
                                 cancellationRegistration.Dispose();
-                                CancellationHelper.ThrowIfCancellationRequested(cancellationRegistration.Token);
+                                CancellationHelper.ThrowIfCancellationRequested(
+                                    cancellationRegistration.Token
+                                );
 
                                 _state = ParsingState.Done;
                                 _connection.CompleteResponse();
@@ -449,7 +581,13 @@ namespace System.Net.Http
                     }
                     else if (c != ' ' && c != '\t') // not called out in the RFC, but WinHTTP allows it
                     {
-                        throw new HttpIOException(HttpRequestError.InvalidResponse, SR.Format(SR.net_http_invalid_response_chunk_extension_invalid, BitConverter.ToString(lineAfterChunkSize.ToArray())));
+                        throw new HttpIOException(
+                            HttpRequestError.InvalidResponse,
+                            SR.Format(
+                                SR.net_http_invalid_response_chunk_extension_invalid,
+                                BitConverter.ToString(lineAfterChunkSize.ToArray())
+                            )
+                        );
                     }
                 }
             }
@@ -460,7 +598,7 @@ namespace System.Net.Http
                 ExpectChunkData,
                 ExpectChunkTerminator,
                 ConsumeTrailers,
-                Done
+                Done,
             }
 
             public override bool NeedsDrain => CanReadFromConnection;
@@ -479,7 +617,11 @@ namespace System.Net.Http
                         drainedBytes += _connection.RemainingBuffer.Length;
                         while (true)
                         {
-                            if (ReadChunkFromConnectionBuffer(int.MaxValue, ctr) is not ReadOnlyMemory<byte> bytesRead || bytesRead.Length == 0)
+                            if (
+                                ReadChunkFromConnectionBuffer(int.MaxValue, ctr)
+                                    is not ReadOnlyMemory<byte> bytesRead
+                                || bytesRead.Length == 0
+                            )
                             {
                                 break;
                             }
@@ -509,7 +651,10 @@ namespace System.Net.Http
                             if (drainTime != Timeout.InfiniteTimeSpan)
                             {
                                 cts = new CancellationTokenSource((int)drainTime.TotalMilliseconds);
-                                ctr = cts.Token.Register(static s => ((HttpConnection)s!).Dispose(), _connection);
+                                ctr = cts.Token.Register(
+                                    static s => ((HttpConnection)s!).Dispose(),
+                                    _connection
+                                );
                             }
                         }
 
@@ -526,9 +671,10 @@ namespace System.Net.Http
             private void Fill()
             {
                 Debug.Assert(_connection is not null);
-                ValueTask fillTask = _state == ParsingState.ConsumeTrailers
-                    ? _connection.FillForHeadersAsync(async: false)
-                    : _connection.FillAsync(async: false);
+                ValueTask fillTask =
+                    _state == ParsingState.ConsumeTrailers
+                        ? _connection.FillForHeadersAsync(async: false)
+                        : _connection.FillAsync(async: false);
                 Debug.Assert(fillTask.IsCompleted);
                 fillTask.GetAwaiter().GetResult();
             }

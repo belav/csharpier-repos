@@ -10,21 +10,29 @@ using Microsoft.CodeAnalysis.ImplementAbstractClass;
 
 namespace Microsoft.CodeAnalysis.CSharp.ImplementAbstractClass
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ImplementAbstractClass), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ImplementAbstractClass
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.GenerateType)]
-    internal class CSharpImplementAbstractClassCodeFixProvider :
-        AbstractImplementAbstractClassCodeFixProvider<TypeDeclarationSyntax>
+    internal class CSharpImplementAbstractClassCodeFixProvider
+        : AbstractImplementAbstractClassCodeFixProvider<TypeDeclarationSyntax>
     {
         private const string CS0534 = nameof(CS0534); // 'Program' does not implement inherited abstract member 'Goo.bar()'
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public CSharpImplementAbstractClassCodeFixProvider()
-            : base(CS0534)
-        {
-        }
+            : base(CS0534) { }
 
-        protected override SyntaxToken GetClassIdentifier(TypeDeclarationSyntax classNode)
-            => classNode.Identifier;
+        protected override SyntaxToken GetClassIdentifier(TypeDeclarationSyntax classNode) =>
+            classNode.Identifier;
     }
 }

@@ -7,17 +7,15 @@
  *      Differs from thdtree in a way that the nodes of the binary trees grow during the lifetime.
  */
 
-
-
-namespace DefaultNamespace {
-    using System.Threading;
+namespace DefaultNamespace
+{
     using System;
     using System.IO;
+    using System.Threading;
 
     public class ThdTreeGrowingObj
     {
-
-        public static int Main (System.String[] Args)
+        public static int Main(System.String[] Args)
         {
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             // console sync Console.SetOut(TextWriter.Synchronized(Console.Out));
@@ -26,7 +24,7 @@ namespace DefaultNamespace {
 
             if (Args.Length == 1)
             {
-                if (!Int32.TryParse( Args[0], out iNofThread ))
+                if (!Int32.TryParse(Args[0], out iNofThread))
                 {
                     iNofThread = 2;
                 }
@@ -36,14 +34,13 @@ namespace DefaultNamespace {
                 iNofThread = 2;
             }
 
-            int[] count = {300, 1000, -350, 0, 71, 200};
+            int[] count = { 300, 1000, -350, 0, 71, 200 };
             TreeThread Mv_TreeThread;
             for (int i = 0; i < iNofThread; i++)
             {
-                Mv_TreeThread = new TreeThread(i, TreeType.Growing, count);              //Each treethread object launches a thread
+                Mv_TreeThread = new TreeThread(i, TreeType.Growing, count); //Each treethread object launches a thread
             }
             return 100;
         }
-
     }
 }

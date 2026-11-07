@@ -14,16 +14,18 @@ using System.Web.Http.ValueProviders.Providers;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Describes a parameter that gets bound via ModelBinding.  
+    /// Describes a parameter that gets bound via ModelBinding.
     /// </summary>
     public class ModelBinderParameterBinding : HttpParameterBinding, IValueProviderParameterBinding
     {
         private readonly ValueProviderFactory[] _valueProviderFactories;
         private readonly IModelBinder _binder;
 
-        public ModelBinderParameterBinding(HttpParameterDescriptor descriptor,
+        public ModelBinderParameterBinding(
+            HttpParameterDescriptor descriptor,
             IModelBinder modelBinder,
-            IEnumerable<ValueProviderFactory> valueProviderFactories)
+            IEnumerable<ValueProviderFactory> valueProviderFactories
+        )
             : base(descriptor)
         {
             if (modelBinder == null)
@@ -49,7 +51,11 @@ namespace System.Web.Http.ModelBinding
             get { return _binder; }
         }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             ModelBindingContext ctx = GetModelBindingContext(metadataProvider, actionContext);
 
@@ -60,14 +66,20 @@ namespace System.Web.Http.ModelBinding
             return TaskHelpers.Completed();
         }
 
-        private ModelBindingContext GetModelBindingContext(ModelMetadataProvider metadataProvider, HttpActionContext actionContext)
+        private ModelBindingContext GetModelBindingContext(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext
+        )
         {
             string name = Descriptor.ParameterName;
             Type type = Descriptor.ParameterType;
 
             string prefix = Descriptor.Prefix;
 
-            IValueProvider vp = CompositeValueProviderFactory.GetValueProvider(actionContext, _valueProviderFactories);
+            IValueProvider vp = CompositeValueProviderFactory.GetValueProvider(
+                actionContext,
+                _valueProviderFactories
+            );
 
             ModelBindingContext ctx = new ModelBindingContext()
             {
@@ -75,7 +87,7 @@ namespace System.Web.Http.ModelBinding
                 FallbackToEmptyPrefix = prefix == null, // only fall back if prefix not specified
                 ModelMetadata = metadataProvider.GetMetadataForType(null, type),
                 ModelState = actionContext.ModelState,
-                ValueProvider = vp
+                ValueProvider = vp,
             };
 
             return ctx;

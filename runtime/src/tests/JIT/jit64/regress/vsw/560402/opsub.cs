@@ -14,9 +14,7 @@ public unsafe class Test
         {
             i = 100 / (uint)(v + 1);
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
         finally
         {
             i = (uint)v + 0x7FFFFFE8;

@@ -150,7 +150,7 @@ namespace System.ComponentModel.Tests
             var bindingList = new BindingList<object>();
 
             bool calledListChanged = false;
-            bindingList.ListChanged += delegate (object sender, ListChangedEventArgs e)
+            bindingList.ListChanged += delegate(object sender, ListChangedEventArgs e)
             {
                 calledListChanged = true;
                 Assert.Equal(-1, e.NewIndex);
@@ -306,7 +306,7 @@ namespace System.ComponentModel.Tests
             var bindingList = new BindingList<object>();
 
             bool calledAddingNew = false;
-            bindingList.AddingNew += delegate (object sender, AddingNewEventArgs e)
+            bindingList.AddingNew += delegate(object sender, AddingNewEventArgs e)
             {
                 calledAddingNew = true;
                 Assert.Null(e.NewObject);
@@ -455,12 +455,12 @@ namespace System.ComponentModel.Tests
             ListChangedType listChangedType = ListChangedType.Reset;
             int listChangedIndex = -1;
 
-            list.AddingNew += delegate (object sender, AddingNewEventArgs e)
+            list.AddingNew += delegate(object sender, AddingNewEventArgs e)
             {
                 calledAddingNew = true;
                 Assert.Null(e.NewObject);
             };
-            list.ListChanged += delegate (object sender, ListChangedEventArgs e)
+            list.ListChanged += delegate(object sender, ListChangedEventArgs e)
             {
                 calledListChanged = true;
                 listChangedType = e.ListChangedType;
@@ -542,11 +542,13 @@ namespace System.ComponentModel.Tests
             var bindingList = new BindingList<int>();
 
             bool calledAddingNew = false;
-            AddingNewEventHandler handler = (object sender, AddingNewEventArgs e) => calledAddingNew = true;
+            AddingNewEventHandler handler = (object sender, AddingNewEventArgs e) =>
+                calledAddingNew = true;
             bindingList.AddingNew += handler;
 
             bool calledListChanged = false;
-            bindingList.ListChanged += (object sender, ListChangedEventArgs e) => calledListChanged = true;
+            bindingList.ListChanged += (object sender, ListChangedEventArgs e) =>
+                calledListChanged = true;
 
             // Make sure removing the handler was successful.
             bindingList.AddingNew -= handler;
@@ -565,7 +567,8 @@ namespace System.ComponentModel.Tests
             var bindingList = new BindingList<string>();
 
             bool calledAddingNew = false;
-            AddingNewEventHandler handler = (object sender, AddingNewEventArgs e) => calledAddingNew = true;
+            AddingNewEventHandler handler = (object sender, AddingNewEventArgs e) =>
+                calledAddingNew = true;
             bindingList.AddingNew += handler;
 
             bool calledListChanged = false;
@@ -590,7 +593,8 @@ namespace System.ComponentModel.Tests
             var bindingList = new BindingList<int>();
 
             bool calledListChanged = false;
-            ListChangedEventHandler handler = (object sender, ListChangedEventArgs e) => calledListChanged = true;
+            ListChangedEventHandler handler = (object sender, ListChangedEventArgs e) =>
+                calledListChanged = true;
             bindingList.ListChanged += handler;
 
             // Make sure removing the handler was successful.
@@ -756,7 +760,9 @@ namespace System.ComponentModel.Tests
         public void ApplySort_Invoke_ThrowsNotSupportedException()
         {
             IBindingList bindingList = new BindingList<object>();
-            Assert.Throws<NotSupportedException>(() => bindingList.ApplySort(null, ListSortDirection.Descending));
+            Assert.Throws<NotSupportedException>(() =>
+                bindingList.ApplySort(null, ListSortDirection.Descending)
+            );
         }
 
         [Fact]
@@ -836,7 +842,9 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(InvalidEventArgs_TestData))]
-        public void ItemPropertyChanged_InvalidEventArgs_InvokesReset(PropertyChangedEventArgs eventArgs)
+        public void ItemPropertyChanged_InvalidEventArgs_InvokesReset(
+            PropertyChangedEventArgs eventArgs
+        )
         {
             var item = new Item();
             var bindingList = new BindingList<Item> { item };
@@ -880,7 +888,8 @@ namespace System.ComponentModel.Tests
             bindingList.RaiseListChangedEvents = false;
 
             bool calledListChanged = false;
-            bindingList.ListChanged += (object sender, ListChangedEventArgs e) => calledListChanged = true;
+            bindingList.ListChanged += (object sender, ListChangedEventArgs e) =>
+                calledListChanged = true;
 
             item.Name = "name";
             Assert.False(calledListChanged);
@@ -996,8 +1005,13 @@ namespace System.ComponentModel.Tests
 
         private class SubBindingList : BindingList<object>
         {
-            protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction) { }
+            protected override void ApplySortCore(
+                PropertyDescriptor prop,
+                ListSortDirection direction
+            ) { }
+
             protected override void RemoveSortCore() { }
+
             protected override int FindCore(PropertyDescriptor prop, object key) => 200;
         }
     }

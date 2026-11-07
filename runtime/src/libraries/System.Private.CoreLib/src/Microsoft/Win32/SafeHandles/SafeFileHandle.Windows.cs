@@ -18,15 +18,15 @@ namespace Microsoft.Win32.SafeHandles
         private volatile FileOptions _fileOptions = (FileOptions)(-1);
         private volatile int _fileType = -1;
 
-        public SafeFileHandle() : base(true)
-        {
-        }
+        public SafeFileHandle()
+            : base(true) { }
 
         public bool IsAsync => (GetFileOptions() & FileOptions.Asynchronous) != 0;
 
         internal bool IsNoBuffering => (GetFileOptions() & NoBuffering) != 0;
 
-        internal bool CanSeek => !IsClosed && GetFileType() == Interop.Kernel32.FileTypes.FILE_TYPE_DISK;
+        internal bool CanSeek =>
+            !IsClosed && GetFileType() == Interop.Kernel32.FileTypes.FILE_TYPE_DISK;
 
         internal ThreadPoolBoundHandle? ThreadPoolBinding { get; set; }
 
@@ -36,7 +36,15 @@ namespace Microsoft.Win32.SafeHandles
             return _lengthCanBeCached && cachedLength >= 0;
         }
 
-        internal static unsafe SafeFileHandle Open(string fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, UnixFileMode? unixCreateMode = null)
+        internal static unsafe SafeFileHandle Open(
+            string fullPath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode? unixCreateMode = null
+        )
         {
             Debug.Assert(!unixCreateMode.HasValue);
 
@@ -61,7 +69,13 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        private static unsafe SafeFileHandle CreateFile(string fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+        private static unsafe SafeFileHandle CreateFile(
+            string fullPath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options
+        )
         {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
             if ((share & FileShare.Inheritable) != 0)
@@ -69,13 +83,21 @@ namespace Microsoft.Win32.SafeHandles
                 secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    bInheritHandle = Interop.BOOL.TRUE
+                    bInheritHandle = Interop.BOOL.TRUE,
                 };
             }
 
             int fAccess =
-                ((access & FileAccess.Read) == FileAccess.Read ? Interop.Kernel32.GenericOperations.GENERIC_READ : 0) |
-                ((access & FileAccess.Write) == FileAccess.Write ? Interop.Kernel32.GenericOperations.GENERIC_WRITE : 0);
+                (
+                    (access & FileAccess.Read) == FileAccess.Read
+                        ? Interop.Kernel32.GenericOperations.GENERIC_READ
+                        : 0
+                )
+                | (
+                    (access & FileAccess.Write) == FileAccess.Write
+                        ? Interop.Kernel32.GenericOperations.GENERIC_WRITE
+                        : 0
+                );
 
             // Our Inheritable bit was stolen from Windows, but should be set in
             // the security attributes class.  Don't leave this bit set.
@@ -93,9 +115,20 @@ namespace Microsoft.Win32.SafeHandles
             // make sure we always call CreateFile with SECURITY_ANONYMOUS so that the
             // named pipe server can't impersonate a high privileged client security context
             // (note that this is the effective default on CreateFile2)
-            flagsAndAttributes |= (Interop.Kernel32.SecurityOptions.SECURITY_SQOS_PRESENT | Interop.Kernel32.SecurityOptions.SECURITY_ANONYMOUS);
+            flagsAndAttributes |= (
+                Interop.Kernel32.SecurityOptions.SECURITY_SQOS_PRESENT
+                | Interop.Kernel32.SecurityOptions.SECURITY_ANONYMOUS
+            );
 
-            SafeFileHandle fileHandle = Interop.Kernel32.CreateFile(fullPath, fAccess, share, &secAttrs, mode, flagsAndAttributes, IntPtr.Zero);
+            SafeFileHandle fileHandle = Interop.Kernel32.CreateFile(
+                fullPath,
+                fAccess,
+                share,
+                &secAttrs,
+                mode,
+                flagsAndAttributes,
+                IntPtr.Zero
+            );
             if (fileHandle.IsInvalid)
             {
                 // Return a meaningful exception with the full path.
@@ -105,7 +138,10 @@ namespace Microsoft.Win32.SafeHandles
                 // probably be consistent w/ every other directory.
                 int errorCode = Marshal.GetLastPInvokeError();
 
-                if (errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND && fullPath!.Length == PathInternal.GetRootLength(fullPath))
+                if (
+                    errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND
+                    && fullPath!.Length == PathInternal.GetRootLength(fullPath)
+                )
                 {
                     errorCode = Interop.Errors.ERROR_ACCESS_DENIED;
                 }
@@ -116,38 +152,53 @@ namespace Microsoft.Win32.SafeHandles
 
             fileHandle._path = fullPath;
             fileHandle._fileOptions = options;
-            fileHandle._lengthCanBeCached = (share & FileShare.Write) == 0 && (access & FileAccess.Write) == 0;
+            fileHandle._lengthCanBeCached =
+                (share & FileShare.Write) == 0 && (access & FileAccess.Write) == 0;
             return fileHandle;
         }
 
-        private static unsafe void Preallocate(string fullPath, long preallocationSize, SafeFileHandle fileHandle)
+        private static unsafe void Preallocate(
+            string fullPath,
+            long preallocationSize,
+            SafeFileHandle fileHandle
+        )
         {
             var allocationInfo = new Interop.Kernel32.FILE_ALLOCATION_INFO
             {
-                AllocationSize = preallocationSize
+                AllocationSize = preallocationSize,
             };
 
-            if (!Interop.Kernel32.SetFileInformationByHandle(
-                fileHandle,
-                Interop.Kernel32.FileAllocationInfo,
-                &allocationInfo,
-                (uint)sizeof(Interop.Kernel32.FILE_ALLOCATION_INFO)))
+            if (
+                !Interop.Kernel32.SetFileInformationByHandle(
+                    fileHandle,
+                    Interop.Kernel32.FileAllocationInfo,
+                    &allocationInfo,
+                    (uint)sizeof(Interop.Kernel32.FILE_ALLOCATION_INFO)
+                )
+            )
             {
                 int errorCode = Marshal.GetLastPInvokeError();
 
                 // Only throw for errors that indicate there is not enough space.
-                if (errorCode == Interop.Errors.ERROR_DISK_FULL ||
-                    errorCode == Interop.Errors.ERROR_FILE_TOO_LARGE)
+                if (
+                    errorCode == Interop.Errors.ERROR_DISK_FULL
+                    || errorCode == Interop.Errors.ERROR_FILE_TOO_LARGE
+                )
                 {
                     fileHandle.Dispose();
 
                     // Delete the file we've created.
                     Interop.Kernel32.DeleteFile(fullPath);
 
-                    throw new IOException(SR.Format(errorCode == Interop.Errors.ERROR_DISK_FULL
-                                                        ? SR.IO_DiskFull_Path_AllocationSize
-                                                        : SR.IO_FileTooLarge_Path_AllocationSize,
-                                            fullPath, preallocationSize));
+                    throw new IOException(
+                        SR.Format(
+                            errorCode == Interop.Errors.ERROR_DISK_FULL
+                                ? SR.IO_DiskFull_Path_AllocationSize
+                                : SR.IO_FileTooLarge_Path_AllocationSize,
+                            fullPath,
+                            preallocationSize
+                        )
+                    );
                 }
             }
         }
@@ -213,7 +264,8 @@ namespace Microsoft.Win32.SafeHandles
                 IoStatusBlock: out _,
                 FileInformation: &options,
                 Length: sizeof(uint),
-                FileInformationClass: Interop.NtDll.FileModeInformation);
+                FileInformationClass: Interop.NtDll.FileModeInformation
+            );
 
             if (ntStatus != Interop.StatusOptions.STATUS_SUCCESS)
             {
@@ -223,7 +275,15 @@ namespace Microsoft.Win32.SafeHandles
 
             FileOptions result = FileOptions.None;
 
-            if ((options & (Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_ALERT | Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT)) == 0)
+            if (
+                (
+                    options
+                    & (
+                        Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_ALERT
+                        | Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT
+                    )
+                ) == 0
+            )
             {
                 result |= FileOptions.Asynchronous;
             }
@@ -258,10 +318,12 @@ namespace Microsoft.Win32.SafeHandles
             {
                 _fileType = fileType = Interop.Kernel32.GetFileType(this);
 
-                Debug.Assert(fileType == Interop.Kernel32.FileTypes.FILE_TYPE_DISK
-                    || fileType == Interop.Kernel32.FileTypes.FILE_TYPE_PIPE
-                    || fileType == Interop.Kernel32.FileTypes.FILE_TYPE_CHAR,
-                    $"Unknown file type: {fileType}");
+                Debug.Assert(
+                    fileType == Interop.Kernel32.FileTypes.FILE_TYPE_DISK
+                        || fileType == Interop.Kernel32.FileTypes.FILE_TYPE_PIPE
+                        || fileType == Interop.Kernel32.FileTypes.FILE_TYPE_CHAR,
+                    $"Unknown file type: {fileType}"
+                );
             }
 
             return fileType;
@@ -287,7 +349,14 @@ namespace Microsoft.Win32.SafeHandles
             {
                 Interop.Kernel32.FILE_STANDARD_INFO info;
 
-                if (Interop.Kernel32.GetFileInformationByHandleEx(this, Interop.Kernel32.FileStandardInfo, &info, (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)))
+                if (
+                    Interop.Kernel32.GetFileInformationByHandleEx(
+                        this,
+                        Interop.Kernel32.FileStandardInfo,
+                        &info,
+                        (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
+                    )
+                )
                 {
                     return info.EndOfFile;
                 }
@@ -312,7 +381,8 @@ namespace Microsoft.Win32.SafeHandles
                     lpOutBuffer: &storageReadCapacity,
                     nOutBufferSize: (uint)sizeof(Interop.Kernel32.STORAGE_READ_CAPACITY),
                     out uint bytesReturned,
-                    IntPtr.Zero);
+                    IntPtr.Zero
+                );
 
                 if (!success)
                 {

@@ -10,7 +10,10 @@ namespace ILCompiler.DependencyAnalysis
     /// <summary>
     /// Represents a node containing information necessary at runtime to locate type's thread static base.
     /// </summary>
-    public class TypeThreadStaticIndexNode : DehydratableObjectNode, ISymbolDefinitionNode, ISortableSymbolNode
+    public class TypeThreadStaticIndexNode
+        : DehydratableObjectNode,
+            ISymbolDefinitionNode,
+            ISortableSymbolNode
     {
         private MetadataType _type;
         private ThreadStaticsNode _inlinedThreadStatics;
@@ -29,7 +32,9 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         public int Offset => 0;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory)
         {
@@ -44,15 +49,16 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            ISymbolDefinitionNode node = _inlinedThreadStatics ?? factory.TypeThreadStaticsSymbol(_type);
+            ISymbolDefinitionNode node =
+                _inlinedThreadStatics ?? factory.TypeThreadStaticsSymbol(_type);
 
-            return new DependencyList
-            {
-                new DependencyListEntry(node, "Thread static storage")
-            };
+            return new DependencyList { new DependencyListEntry(node, "Thread static storage") };
         }
 
-        protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly = false)
+        protected override ObjectData GetDehydratableData(
+            NodeFactory factory,
+            bool relocsOnly = false
+        )
         {
             ObjectDataBuilder objData = new ObjectDataBuilder(factory, relocsOnly);
 
@@ -68,7 +74,10 @@ namespace ILCompiler.DependencyAnalysis
                     // an index in the containing storage.
                     // We use a negative index to indicate that. Any negative value would work.
                     // For the purpose of natvis we will encode the offset of the type storage within the block.
-                    typeTlsIndex = - (_inlinedThreadStatics.GetTypeStorageOffset(_type) + factory.Target.PointerSize);
+                    typeTlsIndex = -(
+                        _inlinedThreadStatics.GetTypeStorageOffset(_type)
+                        + factory.Target.PointerSize
+                    );
 
                     // the type of the storage block for inlined threadstatics, if present,
                     // is serialized as the item #0 among other storage block types.

@@ -8,9 +8,7 @@ namespace System.Activities.Statements
 
     public abstract class TimerExtension
     {
-        protected TimerExtension()
-        {
-        }
+        protected TimerExtension() { }
 
         public void RegisterTimer(TimeSpan timeout, Bookmark bookmark)
         {

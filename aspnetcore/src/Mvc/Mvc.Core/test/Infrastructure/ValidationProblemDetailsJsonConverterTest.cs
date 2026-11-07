@@ -39,14 +39,11 @@ public class ValidationProblemDetailsJsonConverterTest
         Assert.Equal(status, problemDetails.Status);
         Assert.Equal(instance, problemDetails.Instance);
         Assert.Equal(detail, problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal(traceId, kvp.Value.ToString());
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal(traceId, kvp.Value.ToString());
+        });
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -85,14 +82,11 @@ public class ValidationProblemDetailsJsonConverterTest
         Assert.Equal(type, problemDetails.Type);
         Assert.Equal(title, problemDetails.Title);
         Assert.Equal(status, problemDetails.Status);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal(traceId, kvp.Value.ToString());
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal(traceId, kvp.Value.ToString());
+        });
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -129,14 +123,11 @@ public class ValidationProblemDetailsJsonConverterTest
         Assert.Equal(type, problemDetails.Type);
         Assert.Equal(title, problemDetails.Title);
         Assert.Equal(status, problemDetails.Status);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal(traceId, kvp.Value.ToString());
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal(traceId, kvp.Value.ToString());
+        });
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
             kvp =>

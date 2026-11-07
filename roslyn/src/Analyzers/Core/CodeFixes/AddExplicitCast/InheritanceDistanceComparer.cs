@@ -17,27 +17,30 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
     /// class Base { }
     /// class Derived1 : Base { }
     /// class Derived2 : Derived1 { }
-    /// 
+    ///
     /// void Foo(Derived1 d1) { }
     /// void Foo(Derived2 d2) { }
-    /// 
+    ///
     /// Base b = new Derived1();
     /// Foo([||]b);
-    /// 
+    ///
     /// operations:
     /// 1. Convert type to 'Derived1'
     /// 2. Convert type to 'Derived2'
-    /// 
+    ///
     /// 'Derived1' is less specific than 'Derived2' compared to 'Base'
     /// </summary>
-    internal sealed class InheritanceDistanceComparer<TExpressionSyntax>(SemanticModel semanticModel)
-    : IComparer<(TExpressionSyntax syntax, ITypeSymbol symbol)>
-    where TExpressionSyntax : SyntaxNode
+    internal sealed class InheritanceDistanceComparer<TExpressionSyntax>(
+        SemanticModel semanticModel
+    ) : IComparer<(TExpressionSyntax syntax, ITypeSymbol symbol)>
+        where TExpressionSyntax : SyntaxNode
     {
         private readonly SemanticModel _semanticModel = semanticModel;
 
-        public int Compare((TExpressionSyntax syntax, ITypeSymbol symbol) x,
-            (TExpressionSyntax syntax, ITypeSymbol symbol) y)
+        public int Compare(
+            (TExpressionSyntax syntax, ITypeSymbol symbol) x,
+            (TExpressionSyntax syntax, ITypeSymbol symbol) y
+        )
         {
             // if the argument is different, keep the original order
             if (!x.syntax.Equals(y.syntax))
@@ -56,7 +59,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
         /// <summary>
         /// Calculate the inheritance distance between baseType and derivedType.
         /// </summary>
-        private static int GetInheritanceDistanceRecursive(ITypeSymbol baseType, ITypeSymbol? derivedType)
+        private static int GetInheritanceDistanceRecursive(
+            ITypeSymbol baseType,
+            ITypeSymbol? derivedType
+        )
         {
             if (derivedType == null)
                 return int.MaxValue;
@@ -69,7 +75,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             {
                 foreach (var interfaceType in derivedType.Interfaces)
                 {
-                    distance = Math.Min(GetInheritanceDistanceRecursive(baseType, interfaceType), distance);
+                    distance = Math.Min(
+                        GetInheritanceDistanceRecursive(baseType, interfaceType),
+                        distance
+                    );
                 }
             }
 
@@ -85,11 +94,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             if (baseType is null)
                 return 0;
 
-            var conversion = _semanticModel.Compilation.ClassifyCommonConversion(baseType, castType);
+            var conversion = _semanticModel.Compilation.ClassifyCommonConversion(
+                baseType,
+                castType
+            );
 
             // If the node has the explicit conversion operator, then it has the shortest distance
-            // since explicit conversion operator is defined by users and has the highest priority 
-            var distance = conversion.IsUserDefined ? 0 : GetInheritanceDistanceRecursive(baseType, castType);
+            // since explicit conversion operator is defined by users and has the highest priority
+            var distance = conversion.IsUserDefined
+                ? 0
+                : GetInheritanceDistanceRecursive(baseType, castType);
             return distance;
         }
     }

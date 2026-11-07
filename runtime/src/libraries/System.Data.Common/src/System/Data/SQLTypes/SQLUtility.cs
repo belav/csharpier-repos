@@ -13,7 +13,7 @@ namespace System.Data.SqlTypes
         EQ,
         GE,
         GT,
-        NE
+        NE,
     }
 
     // This enumeration is used to inquire about internal storage of a SqlBytes or SqlChars instance:
@@ -21,35 +21,46 @@ namespace System.Data.SqlTypes
     {
         Buffer = 0,
         Stream = 1,
-        UnmanagedBuffer = 2
+        UnmanagedBuffer = 2,
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SqlTypeException : SystemException
     {
-        public SqlTypeException() : this(SR.SqlMisc_SqlTypeMessage, null)
-        {
-        }
+        public SqlTypeException()
+            : this(SR.SqlMisc_SqlTypeMessage, null) { }
 
         // Creates a new SqlTypeException with its message string set to message.
-        public SqlTypeException(string? message) : this(message, null)
-        {
-        }
+        public SqlTypeException(string? message)
+            : this(message, null) { }
 
-        public SqlTypeException(string? message, Exception? e) : base(message, e)
+        public SqlTypeException(string? message, Exception? e)
+            : base(message, e)
         {
             HResult = HResults.SqlType;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected SqlTypeException(SerializationInfo si, StreamingContext sc) : base(SqlTypeExceptionSerialization(si, sc), sc)
-        {
-        }
+        protected SqlTypeException(SerializationInfo si, StreamingContext sc)
+            : base(SqlTypeExceptionSerialization(si, sc), sc) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private static SerializationInfo SqlTypeExceptionSerialization(SerializationInfo? si, StreamingContext sc)
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private static SerializationInfo SqlTypeExceptionSerialization(
+            SerializationInfo? si,
+            StreamingContext sc
+        )
         {
             if ((null != si) && (1 == si.MemberCount))
             {
@@ -62,32 +73,43 @@ namespace System.Data.SqlTypes
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class SqlNullValueException : SqlTypeException
     {
         // Creates a new SqlNullValueException with its message string set to the common string.
-        public SqlNullValueException() : this(SQLResource.NullValueMessage, null)
-        {
-        }
+        public SqlNullValueException()
+            : this(SQLResource.NullValueMessage, null) { }
 
         // Creates a new NullValueException with its message string set to message.
-        public SqlNullValueException(string? message) : this(message, null)
-        {
-        }
+        public SqlNullValueException(string? message)
+            : this(message, null) { }
 
-        public SqlNullValueException(string? message, Exception? e) : base(message, e)
+        public SqlNullValueException(string? message, Exception? e)
+            : base(message, e)
         {
             HResult = HResults.SqlNullValue;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private SqlNullValueException(SerializationInfo si, StreamingContext sc) : base(SqlNullValueExceptionSerialization(si, sc), sc)
-        {
-        }
+        private SqlNullValueException(SerializationInfo si, StreamingContext sc)
+            : base(SqlNullValueExceptionSerialization(si, sc), sc) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private static SerializationInfo SqlNullValueExceptionSerialization(SerializationInfo si, StreamingContext sc)
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private static SerializationInfo SqlNullValueExceptionSerialization(
+            SerializationInfo si,
+            StreamingContext sc
+        )
         {
             if ((null != si) && (1 == si.MemberCount))
             {
@@ -100,32 +122,43 @@ namespace System.Data.SqlTypes
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class SqlTruncateException : SqlTypeException
     {
         // Creates a new SqlTruncateException with its message string set to the empty string.
-        public SqlTruncateException() : this(SQLResource.TruncationMessage, null)
-        {
-        }
+        public SqlTruncateException()
+            : this(SQLResource.TruncationMessage, null) { }
 
         // Creates a new SqlTruncateException with its message string set to message.
-        public SqlTruncateException(string? message) : this(message, null)
-        {
-        }
+        public SqlTruncateException(string? message)
+            : this(message, null) { }
 
-        public SqlTruncateException(string? message, Exception? e) : base(message, e)
+        public SqlTruncateException(string? message, Exception? e)
+            : base(message, e)
         {
             HResult = HResults.SqlTruncate;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private SqlTruncateException(SerializationInfo si, StreamingContext sc) : base(SqlTruncateExceptionSerialization(si, sc), sc)
-        {
-        }
+        private SqlTruncateException(SerializationInfo si, StreamingContext sc)
+            : base(SqlTruncateExceptionSerialization(si, sc), sc) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private static SerializationInfo SqlTruncateExceptionSerialization(SerializationInfo si, StreamingContext sc)
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private static SerializationInfo SqlTruncateExceptionSerialization(
+            SerializationInfo si,
+            StreamingContext sc
+        )
         {
             if ((null != si) && (1 == si.MemberCount))
             {
@@ -138,52 +171,60 @@ namespace System.Data.SqlTypes
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class SqlNotFilledException : SqlTypeException
     {
         // Creates a new SqlNotFilledException with its message string set to the common string.
-        public SqlNotFilledException() : this(SQLResource.NotFilledMessage, null)
-        {
-        }
+        public SqlNotFilledException()
+            : this(SQLResource.NotFilledMessage, null) { }
 
         // Creates a new NullValueException with its message string set to message.
-        public SqlNotFilledException(string? message) : this(message, null)
-        {
-        }
+        public SqlNotFilledException(string? message)
+            : this(message, null) { }
 
-        public SqlNotFilledException(string? message, Exception? e) : base(message, e)
+        public SqlNotFilledException(string? message, Exception? e)
+            : base(message, e)
         {
             HResult = HResults.SqlNullValue;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private SqlNotFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private SqlNotFilledException(SerializationInfo si, StreamingContext sc)
+            : base(si, sc) { }
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class SqlAlreadyFilledException : SqlTypeException
     {
         // Creates a new SqlNotFilledException with its message string set to the common string.
-        public SqlAlreadyFilledException() : this(SQLResource.AlreadyFilledMessage, null)
-        {
-        }
+        public SqlAlreadyFilledException()
+            : this(SQLResource.AlreadyFilledMessage, null) { }
 
         // Creates a new NullValueException with its message string set to message.
-        public SqlAlreadyFilledException(string? message) : this(message, null)
-        {
-        }
+        public SqlAlreadyFilledException(string? message)
+            : this(message, null) { }
 
-        public SqlAlreadyFilledException(string? message, Exception? e) : base(message, e)
+        public SqlAlreadyFilledException(string? message, Exception? e)
+            : base(message, e)
         {
             HResult = HResults.SqlNullValue;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private SqlAlreadyFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private SqlAlreadyFilledException(SerializationInfo si, StreamingContext sc)
+            : base(si, sc) { }
     }
 }

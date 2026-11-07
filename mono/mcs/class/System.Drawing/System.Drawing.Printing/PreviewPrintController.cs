@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,69 +36,75 @@ using System.Drawing.Imaging;
 
 namespace System.Drawing.Printing
 {
-	public class PreviewPrintController : PrintController
-	{
-		bool useantialias;
-		ArrayList pageInfoList;
+    public class PreviewPrintController : PrintController
+    {
+        bool useantialias;
+        ArrayList pageInfoList;
 
-		public PreviewPrintController()
-		{
-			pageInfoList = new ArrayList ();
-		}
-		public override bool IsPreview { 
-			get { return true; }
-		}
+        public PreviewPrintController()
+        {
+            pageInfoList = new ArrayList();
+        }
 
-		[MonoTODO]
-		public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
-		{
-		}
+        public override bool IsPreview
+        {
+            get { return true; }
+        }
 
-		[MonoTODO]
-		public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
-		{
-			if (!document.PrinterSettings.IsValid)
-				throw new InvalidPrinterException(document.PrinterSettings);
-		
-			/* maybe we should reuse the images, and clear them? */
-			foreach (PreviewPageInfo pi in pageInfoList)
-				pi.Image.Dispose ();
+        [MonoTODO]
+        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
 
-			pageInfoList.Clear ();
-		}
+        [MonoTODO]
+        public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
+        {
+            if (!document.PrinterSettings.IsValid)
+                throw new InvalidPrinterException(document.PrinterSettings);
 
-		[MonoTODO]
-		public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
-		{
-		}
+            /* maybe we should reuse the images, and clear them? */
+            foreach (PreviewPageInfo pi in pageInfoList)
+                pi.Image.Dispose();
 
-		[MonoTODO]
-		public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
-		{
-			Image image = new Bitmap (e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height);
+            pageInfoList.Clear();
+        }
 
-			PreviewPageInfo info = new PreviewPageInfo (image, new Size (e.PageSettings.PaperSize.Width,
-										     e.PageSettings.PaperSize.Height));
-			
-			pageInfoList.Add (info);
+        [MonoTODO]
+        public override void OnEndPrint(PrintDocument document, PrintEventArgs e) { }
 
-			Graphics g = Graphics.FromImage (info.Image);
-			g.FillRectangle (new SolidBrush (Color.White), new Rectangle (new Point (0,0), new Size (image.Width, image.Height)));
+        [MonoTODO]
+        public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            Image image = new Bitmap(
+                e.PageSettings.PaperSize.Width,
+                e.PageSettings.PaperSize.Height
+            );
 
-			return g;
-		}
-		
-		public virtual bool UseAntiAlias {
-			get{ return useantialias; }
-			set{ useantialias = value; }
-		}
+            PreviewPageInfo info = new PreviewPageInfo(
+                image,
+                new Size(e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height)
+            );
 
-		public PreviewPageInfo [] GetPreviewPageInfo()
-		{
-			PreviewPageInfo [] pi = new PreviewPageInfo[pageInfoList.Count];
-			pageInfoList.CopyTo (pi);
-			return pi;
-		}
+            pageInfoList.Add(info);
 
-	}
+            Graphics g = Graphics.FromImage(info.Image);
+            g.FillRectangle(
+                new SolidBrush(Color.White),
+                new Rectangle(new Point(0, 0), new Size(image.Width, image.Height))
+            );
+
+            return g;
+        }
+
+        public virtual bool UseAntiAlias
+        {
+            get { return useantialias; }
+            set { useantialias = value; }
+        }
+
+        public PreviewPageInfo[] GetPreviewPageInfo()
+        {
+            PreviewPageInfo[] pi = new PreviewPageInfo[pageInfoList.Count];
+            pageInfoList.CopyTo(pi);
+            return pi;
+        }
+    }
 }

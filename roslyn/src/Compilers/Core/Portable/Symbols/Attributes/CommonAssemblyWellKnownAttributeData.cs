@@ -5,17 +5,19 @@
 #nullable disable
 
 using System;
-using System.Reflection;
-using Microsoft.CodeAnalysis.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Information decoded from well-known custom attributes applied on an assembly.
     /// </summary>
-    internal class CommonAssemblyWellKnownAttributeData<TNamedTypeSymbol> : WellKnownAttributeData, ISecurityAttributeTarget
+    internal class CommonAssemblyWellKnownAttributeData<TNamedTypeSymbol>
+        : WellKnownAttributeData,
+            ISecurityAttributeTarget
     {
         #region AssemblySignatureKeyAttributeSetting
         private string _assemblySignatureKeyAttributeSetting;
@@ -432,10 +434,7 @@ namespace Microsoft.CodeAnalysis
         private HashSet<TNamedTypeSymbol> _forwardedTypes;
         public HashSet<TNamedTypeSymbol> ForwardedTypes
         {
-            get
-            {
-                return _forwardedTypes;
-            }
+            get { return _forwardedTypes; }
             set
             {
                 VerifySealed(expected: false);
@@ -446,13 +445,16 @@ namespace Microsoft.CodeAnalysis
         #endregion
 
         #region ExperimentalAttribute
-        private ObsoleteAttributeData _experimentalAttributeData = ObsoleteAttributeData.Uninitialized;
+        private ObsoleteAttributeData _experimentalAttributeData =
+            ObsoleteAttributeData.Uninitialized;
         public ObsoleteAttributeData ExperimentalAttributeData
         {
             get
             {
                 VerifySealed(expected: true);
-                return _experimentalAttributeData.IsUninitialized ? null : _experimentalAttributeData;
+                return _experimentalAttributeData.IsUninitialized
+                    ? null
+                    : _experimentalAttributeData;
             }
             set
             {

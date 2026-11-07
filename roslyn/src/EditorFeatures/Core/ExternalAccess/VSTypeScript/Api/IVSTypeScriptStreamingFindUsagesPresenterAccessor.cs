@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     internal interface IVSTypeScriptStreamingFindUsagesPresenterAccessor
     {
         (IVSTypeScriptFindUsagesContext context, CancellationToken cancellationToken) StartSearch(
-            string title, bool supportsReferences);
+            string title,
+            bool supportsReferences
+        );
 
         void ClearAll();
     }

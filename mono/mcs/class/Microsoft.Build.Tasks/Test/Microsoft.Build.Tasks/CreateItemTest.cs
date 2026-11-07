@@ -34,31 +34,33 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class CreateItemTest
+    {
+        [Test]
+        public void TestAssignment()
+        {
+            CreateItem ci = new CreateItem();
 
-	[TestFixture]
-	public class CreateItemTest {
-		[Test]
-		public void TestAssignment ()
-		{
-			CreateItem ci = new CreateItem ();
+            ci.AdditionalMetadata = new string[1] { "a=1" };
+            ci.Include = new ITaskItem[1] { new TaskItem("1") };
+            ci.Exclude = new ITaskItem[1] { new TaskItem("2") };
 
-			ci.AdditionalMetadata = new string [1] { "a=1" };
-			ci.Include = new ITaskItem [1] { new TaskItem ("1") };
-			ci.Exclude = new ITaskItem [1] { new TaskItem ("2") };
+            Assert.AreEqual("a=1", ci.AdditionalMetadata[0], "A1");
+            Assert.AreEqual("1", ci.Include[0].ItemSpec, "A2");
+            Assert.AreEqual("2", ci.Exclude[0].ItemSpec, "A3");
+        }
 
-			Assert.AreEqual ("a=1", ci.AdditionalMetadata [0], "A1");
-			Assert.AreEqual ("1", ci.Include [0].ItemSpec, "A2");
-			Assert.AreEqual ("2", ci.Exclude [0].ItemSpec, "A3");
-		}
+        [Test]
+        public void TestExecution1()
+        {
+            Engine engine;
+            Project project;
 
-		[Test]
-		public void TestExecution1 ()
-		{
-			Engine engine;
-			Project project;
-
-			string documentString = @"
+            string documentString =
+                @"
 								<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<A Include='1;2'>
@@ -86,28 +88,39 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			BuildItemGroup include = project.GetEvaluatedItemsByName ("NewItem");
-			Assert.AreEqual (2, include.Count, "A2");
+            BuildItemGroup include = project.GetEvaluatedItemsByName("NewItem");
+            Assert.AreEqual(2, include.Count, "A2");
 
-			string [,] additional_metadata = new string [,] { { "a", "1" }, { "b", "2" }, { "Sub", "fooA" } };
-			CheckBuildItem (include [0], "NewItem", additional_metadata, "2", "A");
+            string[,] additional_metadata = new string[,]
+            {
+                { "a", "1" },
+                { "b", "2" },
+                { "Sub", "fooA" },
+            };
+            CheckBuildItem(include[0], "NewItem", additional_metadata, "2", "A");
 
-			additional_metadata = new string [,] { { "a", "1" }, { "b", "2" }, { "Sub", "fooC" } };
-			CheckBuildItem (include [1], "NewItem", additional_metadata, "4", "B");
-		}
+            additional_metadata = new string[,]
+            {
+                { "a", "1" },
+                { "b", "2" },
+                { "Sub", "fooC" },
+            };
+            CheckBuildItem(include[1], "NewItem", additional_metadata, "4", "B");
+        }
 
-		[Test]
-		public void TestExcludeAndCondition ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestExcludeAndCondition()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<A Include='1;2;5'>
@@ -136,27 +149,33 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			BuildItemGroup include = project.GetEvaluatedItemsByName ("NewItem");
-			Assert.AreEqual (3, include.Count, "A2");
+            BuildItemGroup include = project.GetEvaluatedItemsByName("NewItem");
+            Assert.AreEqual(3, include.Count, "A2");
 
-			string [,] additional_metadata = new string [,] { { "a", "1" }, {"b", "2"}, {"Sub", "fooA" } };
-			CheckBuildItem (include [0], "NewItem", additional_metadata, "1", "A");
-			CheckBuildItem (include [1], "NewItem", additional_metadata, "2", "B");
-			CheckBuildItem (include [2], "NewItem", additional_metadata, "5", "C");
-		}
+            string[,] additional_metadata = new string[,]
+            {
+                { "a", "1" },
+                { "b", "2" },
+                { "Sub", "fooA" },
+            };
+            CheckBuildItem(include[0], "NewItem", additional_metadata, "1", "A");
+            CheckBuildItem(include[1], "NewItem", additional_metadata, "2", "B");
+            CheckBuildItem(include[2], "NewItem", additional_metadata, "5", "C");
+        }
 
-		[Test]
-		public void TestNullFields ()
-		{
-		    Engine engine;
-		    Project project;
+        [Test]
+        public void TestNullFields()
+        {
+            Engine engine;
+            Project project;
 
-		    string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<A Include='1;2;5'>
@@ -173,27 +192,28 @@ namespace MonoTests.Microsoft.Build.Tasks {
 					</Target>
 				</Project>";
 
-		    engine = new Engine (Consts.BinPath);
-		    project = engine.CreateNewProject ();
-		    project.LoadXml (documentString);
-		    Assert.IsTrue (project.Build ("1"), "A1, Build failed");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1, Build failed");
 
-		    BuildItemGroup include = project.GetEvaluatedItemsByName ("NewItem");
-		    Assert.AreEqual (3, include.Count, "A2");
+            BuildItemGroup include = project.GetEvaluatedItemsByName("NewItem");
+            Assert.AreEqual(3, include.Count, "A2");
 
-		    string [,] additional_metadata = new string [0, 0];
-		    CheckBuildItem (include [0], "NewItem", additional_metadata, "1", "A");
-		    CheckBuildItem (include [1], "NewItem", additional_metadata, "2", "B");
-		    CheckBuildItem (include [2], "NewItem", additional_metadata, "5", "C");
-		}
+            string[,] additional_metadata = new string[0, 0];
+            CheckBuildItem(include[0], "NewItem", additional_metadata, "1", "A");
+            CheckBuildItem(include[1], "NewItem", additional_metadata, "2", "B");
+            CheckBuildItem(include[2], "NewItem", additional_metadata, "5", "C");
+        }
 
-		[Test]
-		public void TestVariableExpansion ()
-		{
-		    Engine engine;
-		    Project project;
+        [Test]
+        public void TestVariableExpansion()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 				<PropertyGroup>
 					<P1>FooP1</P1>
@@ -226,57 +246,62 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			TestMessageLogger testLogger = new TestMessageLogger ();
-			engine.RegisterLogger (testLogger);
+            TestMessageLogger testLogger = new TestMessageLogger();
+            engine.RegisterLogger(testLogger);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			if (!project.Build ("1")) {
-				testLogger.DumpMessages ();
-				Assert.Fail ("Build failed");
-			}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            if (!project.Build("1"))
+            {
+                testLogger.DumpMessages();
+                Assert.Fail("Build failed");
+            }
 
-			BuildItemGroup include = project.GetEvaluatedItemsByName ("Items");
-			Assert.AreEqual (5, include.Count, "A2");
+            BuildItemGroup include = project.GetEvaluatedItemsByName("Items");
+            Assert.AreEqual(5, include.Count, "A2");
 
-			Assert.AreEqual ("Abc", include [0].FinalItemSpec, "A#3");
-			Assert.AreEqual ("FooP1", include[1].FinalItemSpec, "A#4");
-			Assert.AreEqual ("FooP2", include[2].FinalItemSpec, "A#5");
-			Assert.AreEqual ("Eight", include[3].FinalItemSpec, "A#6");
-			Assert.AreEqual ("Nine", include[4].FinalItemSpec, "A#7");
+            Assert.AreEqual("Abc", include[0].FinalItemSpec, "A#3");
+            Assert.AreEqual("FooP1", include[1].FinalItemSpec, "A#4");
+            Assert.AreEqual("FooP2", include[2].FinalItemSpec, "A#5");
+            Assert.AreEqual("Eight", include[3].FinalItemSpec, "A#6");
+            Assert.AreEqual("Nine", include[4].FinalItemSpec, "A#7");
 
-			testLogger.CheckLoggedMessageHead ("C: Abc;FooP1;FooP2;Eight;Nine", "A#9");
-			testLogger.CheckLoggedMessageHead ("items: Abc;FooP1;FooP2;Eight;Nine", "A#10");
+            testLogger.CheckLoggedMessageHead("C: Abc;FooP1;FooP2;Eight;Nine", "A#9");
+            testLogger.CheckLoggedMessageHead("items: Abc;FooP1;FooP2;Eight;Nine", "A#10");
+        }
 
-		}
+        [Test]
+        public void TestItemsWithWildcards()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
+            TestMessageLogger logger = new TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-		[Test]
-		public void TestItemsWithWildcards () {
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
-			TestMessageLogger logger = new TestMessageLogger ();
-			engine.RegisterLogger (logger);
+            // Setup
 
-			// Setup
+            string projectdir = Path.Combine("Test", "resources");
+            string basedir = "dir";
+            string aaa = PathCombine(basedir, "a", "aa", "aaa");
+            string bb = PathCombine(basedir, "b", "bb");
+            string c = PathCombine(basedir, "c");
 
-			string projectdir = Path.Combine ("Test", "resources");
-			string basedir = "dir";
-			string aaa = PathCombine (basedir, "a", "aa", "aaa");
-			string bb = PathCombine (basedir, "b", "bb");
-			string c = PathCombine (basedir, "c");
+            string[] dirs = { aaa, bb, c };
+            string[] files =
+            {
+                PathCombine(aaa, "foo.dll"),
+                PathCombine(bb, "bar.dll"),
+                PathCombine(bb, "sample.txt"),
+                Path.Combine(basedir, "xyz.dll"),
+            };
 
-			string[] dirs = { aaa, bb, c };
-			string[] files = {
-								PathCombine (aaa, "foo.dll"),
-								PathCombine (bb, "bar.dll"),
-								PathCombine (bb, "sample.txt"),
-								Path.Combine (basedir, "xyz.dll")
-							  };
-
-			string documentString = @"
-				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" " + Consts.ToolsVersionString + @">
+            string documentString =
+                @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" "
+                + Consts.ToolsVersionString
+                + @">
 					<Target Name='Main'>
 						<CreateItem Include='dir\**'>
 							<Output TaskParameter='Include' ItemName='CI1' />
@@ -285,45 +310,55 @@ namespace MonoTests.Microsoft.Build.Tasks {
 					</Target>
 				</Project>";
 
-			try {
-				CreateDirectoriesAndFiles (projectdir, dirs, files);
-				File.WriteAllText (Path.Combine (projectdir, "wild1.proj"), documentString);
-				proj.Load (Path.Combine (projectdir, "wild1.proj"));
-				if (!proj.Build ("Main"))
-					Assert.Fail ("Build failed");
+            try
+            {
+                CreateDirectoriesAndFiles(projectdir, dirs, files);
+                File.WriteAllText(Path.Combine(projectdir, "wild1.proj"), documentString);
+                proj.Load(Path.Combine(projectdir, "wild1.proj"));
+                if (!proj.Build("Main"))
+                    Assert.Fail("Build failed");
 
-				string full_base_dir = Path.GetFullPath (basedir);
-			} catch (AssertionException) {
-				logger.DumpMessages ();
-				throw;
-			} finally {
-				Directory.Delete (Path.Combine (projectdir, basedir), true);
-			}
-		}
+                string full_base_dir = Path.GetFullPath(basedir);
+            }
+            catch (AssertionException)
+            {
+                logger.DumpMessages();
+                throw;
+            }
+            finally
+            {
+                Directory.Delete(Path.Combine(projectdir, basedir), true);
+            }
+        }
 
-		[Test]
-		public void TestItemsWithWildcards2 () {
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
-			TestMessageLogger logger = new TestMessageLogger ();
-			engine.RegisterLogger (logger);
+        [Test]
+        public void TestItemsWithWildcards2()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
+            TestMessageLogger logger = new TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-			// Setup
+            // Setup
 
-			string basedir = PathCombine ("Test", "resources", "dir");
-			string aaa = PathCombine ("a", "aa", "aaa");
-			string bb = Path.Combine ("b", "bb");
+            string basedir = PathCombine("Test", "resources", "dir");
+            string aaa = PathCombine("a", "aa", "aaa");
+            string bb = Path.Combine("b", "bb");
 
-			string[] dirs = { aaa, bb, "c" };
-			string[] files = {
-								PathCombine (aaa, "foo.dll"),
-								PathCombine (bb, "bar.dll"),
-								PathCombine (bb, "sample.txt"),
-								PathCombine ("xyz.dll")
-							  };
+            string[] dirs = { aaa, bb, "c" };
+            string[] files =
+            {
+                PathCombine(aaa, "foo.dll"),
+                PathCombine(bb, "bar.dll"),
+                PathCombine(bb, "sample.txt"),
+                PathCombine("xyz.dll"),
+            };
 
-			string documentString = @"
-				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" " + Consts.ToolsVersionString + @">
+            string documentString =
+                @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" "
+                + Consts.ToolsVersionString
+                + @">
 					<PropertyGroup>
 						<WC>dir\**\*.dll</WC>
 						<ExWC>*\x*.dll</ExWC>
@@ -343,61 +378,96 @@ namespace MonoTests.Microsoft.Build.Tasks {
 					</Target>
 				</Project>";
 
-			try {
-				CreateDirectoriesAndFiles (basedir, dirs, files);
-				string projectdir = Path.Combine ("Test", "resources");
-				File.WriteAllText (Path.Combine (projectdir, "wild1.proj"), documentString);
-				proj.Load (Path.Combine (projectdir, "wild1.proj"));
-				if (!proj.Build ("Main"))
-					Assert.Fail ("Build failed");
+            try
+            {
+                CreateDirectoriesAndFiles(basedir, dirs, files);
+                string projectdir = Path.Combine("Test", "resources");
+                File.WriteAllText(Path.Combine(projectdir, "wild1.proj"), documentString);
+                proj.Load(Path.Combine(projectdir, "wild1.proj"));
+                if (!proj.Build("Main"))
+                    Assert.Fail("Build failed");
 
-				string full_base_dir = Path.GetFullPath (basedir);
-				foreach (string prefix in new string[] { "CI1: ", "CI2: " }) {
-					logger.CheckLoggedAny (prefix + PathCombine (full_base_dir, aaa, "foo.dll"),
-										MessageImportance.Normal, "A1");
-					logger.CheckLoggedAny (prefix + PathCombine (full_base_dir, bb, "bar.dll"), MessageImportance.Normal, "A2");
-					logger.CheckLoggedAny (prefix + PathCombine (full_base_dir, "abc.dll"),
-										MessageImportance.Normal, "A3");
+                string full_base_dir = Path.GetFullPath(basedir);
+                foreach (string prefix in new string[] { "CI1: ", "CI2: " })
+                {
+                    logger.CheckLoggedAny(
+                        prefix + PathCombine(full_base_dir, aaa, "foo.dll"),
+                        MessageImportance.Normal,
+                        "A1"
+                    );
+                    logger.CheckLoggedAny(
+                        prefix + PathCombine(full_base_dir, bb, "bar.dll"),
+                        MessageImportance.Normal,
+                        "A2"
+                    );
+                    logger.CheckLoggedAny(
+                        prefix + PathCombine(full_base_dir, "abc.dll"),
+                        MessageImportance.Normal,
+                        "A3"
+                    );
+                }
+            }
+            catch (AssertionException)
+            {
+                logger.DumpMessages();
+                throw;
+            }
+            finally
+            {
+                Directory.Delete(basedir, true);
+            }
+        }
 
-				}
-			} catch (AssertionException) {
-				logger.DumpMessages ();
-				throw;
-			} finally {
-				Directory.Delete (basedir, true);
-			}
-		}
+        void CreateDirectoriesAndFiles(string basedir, string[] dirs, string[] files)
+        {
+            foreach (string dir in dirs)
+                Directory.CreateDirectory(Path.Combine(basedir, dir));
 
-		void CreateDirectoriesAndFiles (string basedir, string[] dirs, string[] files) {
-			foreach (string dir in dirs)
-				Directory.CreateDirectory (Path.Combine (basedir, dir));
+            foreach (string file in files)
+                File.WriteAllText(Path.Combine(basedir, file), String.Empty);
+        }
 
-			foreach (string file in files)
-				File.WriteAllText (Path.Combine (basedir, file), String.Empty);
-		}
+        string PathCombine(string path1, params string[] parts)
+        {
+            if (parts == null || parts.Length == 0)
+                return path1;
 
-		string PathCombine (string path1, params string[] parts) {
-			if (parts == null || parts.Length == 0)
-				return path1;
+            string final_path = path1;
+            foreach (string part in parts)
+                final_path = Path.Combine(final_path, part);
 
-			string final_path = path1;
-			foreach (string part in parts)
-				final_path = Path.Combine (final_path, part);
+            return final_path;
+        }
 
-			return final_path;
-		}
-
-		public static void CheckBuildItem (BuildItem item, string name, string [,] metadata, string finalItemSpec, string prefix)
-		{
-			Assert.AreEqual (name, item.Name, prefix + "#1");
-			for (int i = 0; i < metadata.GetLength (0); i ++) {
-				string key = metadata [i, 0];
-				string val = metadata [i, 1];
-				Assert.IsTrue (item.HasMetadata (key), String.Format ("{0}#2: Expected metadata '{1}' not found", prefix, key));
-				Assert.AreEqual (val, item.GetMetadata (key), String.Format ("{0}#3: Value for metadata {1}", prefix, key));
-				Assert.AreEqual (val, item.GetEvaluatedMetadata (key), String.Format ("{0}#4: Value for evaluated metadata {1}", prefix, key));
-			}
-			Assert.AreEqual (finalItemSpec, item.FinalItemSpec, prefix + "#5");
-		}
-	}
+        public static void CheckBuildItem(
+            BuildItem item,
+            string name,
+            string[,] metadata,
+            string finalItemSpec,
+            string prefix
+        )
+        {
+            Assert.AreEqual(name, item.Name, prefix + "#1");
+            for (int i = 0; i < metadata.GetLength(0); i++)
+            {
+                string key = metadata[i, 0];
+                string val = metadata[i, 1];
+                Assert.IsTrue(
+                    item.HasMetadata(key),
+                    String.Format("{0}#2: Expected metadata '{1}' not found", prefix, key)
+                );
+                Assert.AreEqual(
+                    val,
+                    item.GetMetadata(key),
+                    String.Format("{0}#3: Value for metadata {1}", prefix, key)
+                );
+                Assert.AreEqual(
+                    val,
+                    item.GetEvaluatedMetadata(key),
+                    String.Format("{0}#4: Value for evaluated metadata {1}", prefix, key)
+                );
+            }
+            Assert.AreEqual(finalItemSpec, item.FinalItemSpec, prefix + "#5");
+        }
+    }
 }

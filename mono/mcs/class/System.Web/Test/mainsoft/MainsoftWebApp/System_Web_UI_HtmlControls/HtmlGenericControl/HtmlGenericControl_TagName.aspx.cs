@@ -30,81 +30,80 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-	public class HtmlGenericControl_TagName
-		: GHTBaseWeb 
-	{
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected GHTWebControls.GHTSubTest Ghtsubtest3;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl myDiv;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl myUnknown1;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl myUnknown2;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class HtmlGenericControl_TagName : GHTBaseWeb
+    {
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected GHTWebControls.GHTSubTest Ghtsubtest3;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl myDiv;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl myUnknown1;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl myUnknown2;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				myDiv.TagName = "span";
-				GHTSubTestAddResult(myDiv.TagName);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			GHTActiveSubTest = GHTSubTest2;
-			try 
-			{
-				myUnknown1.TagName = "unknown";
-				GHTSubTestAddResult(myUnknown1.TagName);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                myDiv.TagName = "span";
+                GHTSubTestAddResult(myDiv.TagName);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest3;
-			try 
-			{
-				myUnknown2.TagName = "";
-				GHTSubTestAddResult(myUnknown2.TagName);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest2;
+            try
+            {
+                myUnknown1.TagName = "unknown";
+                GHTSubTestAddResult(myUnknown1.TagName);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
-	}
+            GHTActiveSubTest = Ghtsubtest3;
+            try
+            {
+                myUnknown2.TagName = "";
+                GHTSubTestAddResult(myUnknown2.TagName);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+
+            GHTTestEnd();
+        }
+    }
 }

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_FactorialRec
 {
     const int Pass = 100;
@@ -29,7 +29,8 @@ public class BringUpTest_FactorialRec
     public static int TestEntryPoint()
     {
         int s = FactorialRec(5);
-        if (s != 120) return Fail;
+        if (s != 120)
+            return Fail;
         return Pass;
     }
 }

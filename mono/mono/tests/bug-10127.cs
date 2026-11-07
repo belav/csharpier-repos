@@ -1,101 +1,106 @@
 using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace WeakReferenceTest
 {
-	public static class Cache {
-		static GCHandle[] table = new GCHandle[1024 * 1024];
+    public static class Cache
+    {
+        static GCHandle[] table = new GCHandle[1024 * 1024];
 
-		public static T Probe<T>(int hc) where T : class
-		{
-			int index = hc & (table.Length - 1);
-			lock (table)
-			{
-				var wr = table[index];
-				if (!wr.IsAllocated)
-					return null;
-				return wr.Target as T;
-			}
-		}
+        public static T Probe<T>(int hc)
+            where T : class
+        {
+            int index = hc & (table.Length - 1);
+            lock (table)
+            {
+                var wr = table[index];
+                if (!wr.IsAllocated)
+                    return null;
+                return wr.Target as T;
+            }
+        }
 
-		public static T Add<T>(T obj, int hc) where T : class 
-		{
-			int index = hc & (table.Length - 1);
-			lock (table)
-			{
-				table[index] = GCHandle.Alloc (obj, GCHandleType.Weak);
-			}
-			return obj;
-		}
+        public static T Add<T>(T obj, int hc)
+            where T : class
+        {
+            int index = hc & (table.Length - 1);
+            lock (table)
+            {
+                table[index] = GCHandle.Alloc(obj, GCHandleType.Weak);
+            }
+            return obj;
+        }
+    }
 
-	}
+    public class Tester
+    {
+        public static readonly int seed = unchecked(DateTime.Now.Ticks.GetHashCode());
 
-	public class Tester {
-		public static readonly int seed = unchecked(DateTime.Now.Ticks.GetHashCode());
+        Random rand = new Random(seed);
 
-		Random rand = new Random(seed);
+        volatile bool alive;
+        Thread thread;
 
-		volatile bool alive;
-		Thread thread;
+        public void Start()
+        {
+            alive = true;
+            thread = new Thread(new ThreadStart(Work));
+            thread.Start();
+        }
 
-		public void Start()
-		{
-			alive = true;
-			thread = new Thread(new ThreadStart(Work));
-			thread.Start();
-		}
+        void Work()
+        {
+            do
+            {
+                var item = rand.Next();
+                var probed = Cache.Probe<object>(item.GetHashCode());
 
-		void Work()
-		{
-			do {
+                if (probed == null)
+                {
+                    Cache.Add<object>(item, item.GetHashCode());
+                }
 
-				var item = rand.Next ();
-				var probed = Cache.Probe<object>(item.GetHashCode());
+                if (rand.NextDouble() <= 0.1)
+                {
+                    GC.Collect();
+                }
+            } while (alive);
+        }
 
-				if (probed == null) {
-					Cache.Add<object>(item, item.GetHashCode());
-				}
+        public void Stop()
+        {
+            alive = false;
+        }
+    }
 
-				if (rand.NextDouble() <= 0.1) {
-					GC.Collect();
-				}
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Starting cache testers");
+            Console.WriteLine("Thread seed: " + Tester.seed);
+            List<Tester> testers = new List<Tester>();
+            for (int count = 0; count < 10; count++)
+            {
+                testers.Add(new Tester());
+            }
 
-			} while (alive);
-		}
+            foreach (var tester in testers)
+            {
+                tester.Start();
+            }
 
-		public void Stop ()
-		{
-			alive = false;
-		}
+            for (int i = 0; i < 4; ++i)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+            }
 
-	}
-
-	class MainClass
-	{
-		public static void Main (string[] args)
-		{
-			Console.WriteLine("Starting cache testers");
-			Console.WriteLine("Thread seed: " + Tester.seed);
-			List<Tester> testers = new List<Tester>();
-			for (int count = 0; count < 10; count++) {
-				testers.Add(new Tester());
-			}
-
-			foreach (var tester in testers) {
-				tester.Start();
-			}
-
-			for (int i = 0; i < 4; ++i)
-			{
-				Thread.Sleep(TimeSpan.FromSeconds(1));
-			}
-
-			foreach (var tester in testers)
-			{
-				tester.Stop ();
-			}
-		}
-	}
+            foreach (var tester in testers)
+            {
+                tester.Stop();
+            }
+        }
+    }
 }

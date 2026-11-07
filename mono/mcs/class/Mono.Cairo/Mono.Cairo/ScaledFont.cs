@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,98 +26,105 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Cairo {
-   
-	public class ScaledFont : IDisposable
-	{
-		protected IntPtr handle = IntPtr.Zero;
+namespace Cairo
+{
+    public class ScaledFont : IDisposable
+    {
+        protected IntPtr handle = IntPtr.Zero;
 
-		internal ScaledFont (IntPtr handle, bool owner)
-		{
-			this.handle = handle;
-			if (!owner)
-				NativeMethods.cairo_scaled_font_reference (handle);
-			if (CairoDebug.Enabled)
-				CairoDebug.OnAllocated (handle);
-		}
+        internal ScaledFont(IntPtr handle, bool owner)
+        {
+            this.handle = handle;
+            if (!owner)
+                NativeMethods.cairo_scaled_font_reference(handle);
+            if (CairoDebug.Enabled)
+                CairoDebug.OnAllocated(handle);
+        }
 
-		public ScaledFont (FontFace fontFace, Matrix matrix, Matrix ctm, FontOptions options)
-			: this (NativeMethods.cairo_scaled_font_create (fontFace.Handle, matrix, ctm, options.Handle), true)
-		{
-		}
+        public ScaledFont(FontFace fontFace, Matrix matrix, Matrix ctm, FontOptions options)
+            : this(
+                NativeMethods.cairo_scaled_font_create(
+                    fontFace.Handle,
+                    matrix,
+                    ctm,
+                    options.Handle
+                ),
+                true
+            ) { }
 
-		~ScaledFont ()
-		{
-			Dispose (false);
-		}
+        ~ScaledFont()
+        {
+            Dispose(false);
+        }
 
-		public IntPtr Handle {
-			get {
-				return handle;
-			}
-		}
+        public IntPtr Handle
+        {
+            get { return handle; }
+        }
 
-		public FontExtents FontExtents {
-			get {
-				FontExtents extents;
-				NativeMethods.cairo_scaled_font_extents (handle, out extents);
-				return extents;
-			}
-		}
+        public FontExtents FontExtents
+        {
+            get
+            {
+                FontExtents extents;
+                NativeMethods.cairo_scaled_font_extents(handle, out extents);
+                return extents;
+            }
+        }
 
-		public Matrix FontMatrix {
-			get {
-				Matrix m;
-				NativeMethods.cairo_scaled_font_get_font_matrix (handle, out m);
-				return m;
-			}
-		}
+        public Matrix FontMatrix
+        {
+            get
+            {
+                Matrix m;
+                NativeMethods.cairo_scaled_font_get_font_matrix(handle, out m);
+                return m;
+            }
+        }
 
-		public FontType FontType {
-			get {
-				return NativeMethods.cairo_scaled_font_get_type (handle);
-			}
-		}
+        public FontType FontType
+        {
+            get { return NativeMethods.cairo_scaled_font_get_type(handle); }
+        }
 
-		public TextExtents GlyphExtents (Glyph[] glyphs)
-		{
-			IntPtr ptr = Context.FromGlyphToUnManagedMemory (glyphs);
-			TextExtents extents;
+        public TextExtents GlyphExtents(Glyph[] glyphs)
+        {
+            IntPtr ptr = Context.FromGlyphToUnManagedMemory(glyphs);
+            TextExtents extents;
 
-			NativeMethods.cairo_scaled_font_glyph_extents (handle, ptr, glyphs.Length, out extents);
+            NativeMethods.cairo_scaled_font_glyph_extents(handle, ptr, glyphs.Length, out extents);
 
-			Marshal.FreeHGlobal (ptr);
-			return extents;
-		}
-	
-		public Status Status
-		{
-			get { return NativeMethods.cairo_scaled_font_status (handle); }
-		}
+            Marshal.FreeHGlobal(ptr);
+            return extents;
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public Status Status
+        {
+            get { return NativeMethods.cairo_scaled_font_status(handle); }
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!disposing || CairoDebug.Enabled)
-				CairoDebug.OnDisposed<ScaledFont> (handle, disposing);
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-			if (!disposing|| handle == IntPtr.Zero)
-				return;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing || CairoDebug.Enabled)
+                CairoDebug.OnDisposed<ScaledFont>(handle, disposing);
 
-			NativeMethods.cairo_scaled_font_destroy (handle);
-			handle = IntPtr.Zero;
-		}
+            if (!disposing || handle == IntPtr.Zero)
+                return;
 
-		[Obsolete]
-		protected void Reference ()
-		{
-			NativeMethods.cairo_scaled_font_reference (handle);
-		}
-	}
+            NativeMethods.cairo_scaled_font_destroy(handle);
+            handle = IntPtr.Zero;
+        }
+
+        [Obsolete]
+        protected void Reference()
+        {
+            NativeMethods.cairo_scaled_font_reference(handle);
+        }
+    }
 }
-

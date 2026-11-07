@@ -1,6 +1,6 @@
-//------------------------------------------------------------  
-// Copyright (c) Microsoft Corporation.  All rights reserved.   
-//------------------------------------------------------------  
+//------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------
 
 namespace System.ServiceModel.Channels
 {
@@ -25,39 +25,52 @@ namespace System.ServiceModel.Channels
         const int initialCertificateSize = 4096;
 
         public MsmqInputMessage()
-            : this(0, maxSize)
-        {
-        }
+            : this(0, maxSize) { }
 
         public MsmqInputMessage(int maxBufferSize)
-            : this(0, maxBufferSize)
-        {
-        }
+            : this(0, maxBufferSize) { }
 
         protected MsmqInputMessage(int additionalPropertyCount, int maxBufferSize)
-            : this(additionalPropertyCount, new SizeQuota(maxBufferSize))
-        {
-        }
+            : this(additionalPropertyCount, new SizeQuota(maxBufferSize)) { }
 
         protected MsmqInputMessage(int additionalPropertyCount, SizeQuota bufferSizeQuota)
             : base(12 + additionalPropertyCount)
         {
             this.maxBufferSize = bufferSizeQuota.MaxSize;
-            this.body = new BufferProperty(this, UnsafeNativeMethods.PROPID_M_BODY,
-                bufferSizeQuota.AllocIfAvailable(initialBodySize));
+            this.body = new BufferProperty(
+                this,
+                UnsafeNativeMethods.PROPID_M_BODY,
+                bufferSizeQuota.AllocIfAvailable(initialBodySize)
+            );
             this.bodyLength = new IntProperty(this, UnsafeNativeMethods.PROPID_M_BODY_SIZE);
-            this.messageId = new BufferProperty(this, UnsafeNativeMethods.PROPID_M_MSGID,
-                UnsafeNativeMethods.PROPID_M_MSGID_SIZE);
+            this.messageId = new BufferProperty(
+                this,
+                UnsafeNativeMethods.PROPID_M_MSGID,
+                UnsafeNativeMethods.PROPID_M_MSGID_SIZE
+            );
             this.lookupId = new LongProperty(this, UnsafeNativeMethods.PROPID_M_LOOKUPID);
             this.cls = new ShortProperty(this, UnsafeNativeMethods.PROPID_M_CLASS);
-            this.senderId = new BufferProperty(this, UnsafeNativeMethods.PROPID_M_SENDERID, initialSenderIdSize);
+            this.senderId = new BufferProperty(
+                this,
+                UnsafeNativeMethods.PROPID_M_SENDERID,
+                initialSenderIdSize
+            );
             this.senderIdLength = new IntProperty(this, UnsafeNativeMethods.PROPID_M_SENDERID_LEN);
-            this.senderCertificate = new BufferProperty(this, UnsafeNativeMethods.PROPID_M_SENDER_CERT,
-                bufferSizeQuota.AllocIfAvailable(initialCertificateSize));
-            this.senderCertificateLength = new IntProperty(this, UnsafeNativeMethods.PROPID_M_SENDER_CERT_LEN);
+            this.senderCertificate = new BufferProperty(
+                this,
+                UnsafeNativeMethods.PROPID_M_SENDER_CERT,
+                bufferSizeQuota.AllocIfAvailable(initialCertificateSize)
+            );
+            this.senderCertificateLength = new IntProperty(
+                this,
+                UnsafeNativeMethods.PROPID_M_SENDER_CERT_LEN
+            );
             if (Msmq.IsAdvancedPoisonHandlingSupported)
             {
-                this.lastMovedTime = new IntProperty(this, UnsafeNativeMethods.PROPID_M_LAST_MOVE_TIME);
+                this.lastMovedTime = new IntProperty(
+                    this,
+                    UnsafeNativeMethods.PROPID_M_LAST_MOVE_TIME
+                );
                 this.abortCount = new IntProperty(this, UnsafeNativeMethods.PROPID_M_ABORT_COUNT);
                 this.moveCount = new IntProperty(this, UnsafeNativeMethods.PROPID_M_MOVE_COUNT);
             }
@@ -160,7 +173,11 @@ namespace System.ServiceModel.Channels
             {
                 if (requiredSize > this.remainingSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(this.maxSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                            this.maxSize
+                        )
+                    );
                 }
                 this.remainingSize -= requiredSize;
             }

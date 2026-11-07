@@ -15,9 +15,14 @@ namespace System.Reflection.Metadata.Ecma335
     {
         private readonly InstructionEncoder _encoder;
 
-        private readonly int _ilOffset, _instructionEnd;
+        private readonly int _ilOffset,
+            _instructionEnd;
 
-        internal SwitchInstructionEncoder(InstructionEncoder encoder, int ilOffset, int instructionEnd)
+        internal SwitchInstructionEncoder(
+            InstructionEncoder encoder,
+            int ilOffset,
+            int instructionEnd
+        )
         {
             Debug.Assert(encoder.ControlFlowBuilder is not null);
             _encoder = encoder;
@@ -34,7 +39,12 @@ namespace System.Reflection.Metadata.Ecma335
         public void Branch(LabelHandle label)
         {
             _encoder.ControlFlowBuilder!.SwitchBranchAdded();
-            _encoder.LabelOperand(ILOpCode.Switch, label, _instructionEnd - _encoder.Offset, _ilOffset);
+            _encoder.LabelOperand(
+                ILOpCode.Switch,
+                label,
+                _instructionEnd - _encoder.Offset,
+                _ilOffset
+            );
         }
     }
 }

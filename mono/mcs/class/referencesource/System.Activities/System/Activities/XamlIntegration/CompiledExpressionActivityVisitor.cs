@@ -11,11 +11,7 @@ namespace System.Activities.XamlIntegration
 
     internal abstract class CompiledExpressionActivityVisitor
     {
-        protected bool ForImplementation
-        {
-            get;
-            private set;
-        }
+        protected bool ForImplementation { get; private set; }
 
         public void Visit(Activity activity, bool forImplementation)
         {
@@ -103,7 +99,10 @@ namespace System.Activities.XamlIntegration
             exit = false;
         }
 
-        protected virtual void VisitRootImplementationArgument(RuntimeArgument runtimeArgument, out bool exit)
+        protected virtual void VisitRootImplementationArgument(
+            RuntimeArgument runtimeArgument,
+            out bool exit
+        )
         {
             if (runtimeArgument.IsBound)
             {
@@ -177,7 +176,7 @@ namespace System.Activities.XamlIntegration
                 return;
             }
         }
-   
+
         protected virtual void VisitITextExpression(Activity activity, out bool exit)
         {
             exit = false;
@@ -273,9 +272,14 @@ namespace System.Activities.XamlIntegration
             }
         }
 
-        protected virtual void VisitDelegateArguments(ActivityDelegate activityDelegate, out bool exit)
+        protected virtual void VisitDelegateArguments(
+            ActivityDelegate activityDelegate,
+            out bool exit
+        )
         {
-            foreach (RuntimeDelegateArgument delegateArgument in activityDelegate.RuntimeDelegateArguments)
+            foreach (
+                RuntimeDelegateArgument delegateArgument in activityDelegate.RuntimeDelegateArguments
+            )
             {
                 if (delegateArgument.BoundArgument != null)
                 {
@@ -291,7 +295,10 @@ namespace System.Activities.XamlIntegration
             exit = false;
         }
 
-        protected virtual void VisitDelegateArgument(RuntimeDelegateArgument delegateArgument, out bool exit)
+        protected virtual void VisitDelegateArgument(
+            RuntimeDelegateArgument delegateArgument,
+            out bool exit
+        )
         {
             //
             // Nothing further to walk into here, this is just a stub for implementors to override
@@ -309,7 +316,10 @@ namespace System.Activities.XamlIntegration
             exit = false;
         }
 
-        protected virtual void VisitVariableScopeArgument(RuntimeArgument runtimeArgument, out bool exit)
+        protected virtual void VisitVariableScopeArgument(
+            RuntimeArgument runtimeArgument,
+            out bool exit
+        )
         {
             VisitArgument(runtimeArgument, out exit);
             if (exit)
@@ -381,7 +391,7 @@ namespace System.Activities.XamlIntegration
             {
                 return;
             }
-            
+
             VisitRootImplementationScope(activity, out exit);
 
             if (activity.ImplementationChildren != null)
@@ -437,7 +447,7 @@ namespace System.Activities.XamlIntegration
             }
             exit = false;
         }
-        
+
         delegate void VisitArgumentDelegate(RuntimeArgument runtimeArgument, out bool exit);
     }
 }

@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             StateMachineStatesDebugInfo stateMachineStatesDebugInfo,
             StateMachineMoveNextBodyDebugInfo stateMachineMoveNextDebugInfoOpt,
             ImmutableArray<SourceSpan> codeCoverageSpans,
-            bool isPrimaryConstructor)
+            bool isPrimaryConstructor
+        )
         {
             Debug.Assert(!locals.IsDefault);
             Debug.Assert(!exceptionHandlers.IsDefault);
@@ -100,7 +101,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             _isPrimaryConstructor = isPrimaryConstructor;
         }
 
-        private static ImmutableArray<Cci.SequencePoint> GetSequencePoints(SequencePointList? sequencePoints, DebugDocumentProvider debugDocumentProvider)
+        private static ImmutableArray<Cci.SequencePoint> GetSequencePoints(
+            SequencePointList? sequencePoints,
+            DebugDocumentProvider debugDocumentProvider
+        )
         {
             if (sequencePoints == null || sequencePoints.IsEmpty)
             {
@@ -114,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         ImmutableArray<SourceSpan> Cci.IMethodBody.CodeCoverageSpans => _codeCoverageSpans;
 
-        ImmutableArray<Cci.ExceptionHandlerRegion> Cci.IMethodBody.ExceptionRegions => _exceptionHandlers;
+        ImmutableArray<Cci.ExceptionHandlerRegion> Cci.IMethodBody.ExceptionRegions =>
+            _exceptionHandlers;
 
         bool Cci.IMethodBody.AreLocalsZeroed => _areLocalsZeroed;
 
@@ -122,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         Cci.IMethodDefinition Cci.IMethodBody.MethodDefinition => _parent;
 
-        StateMachineMoveNextBodyDebugInfo Cci.IMethodBody.MoveNextBodyInfo => _stateMachineMoveNextDebugInfoOpt;
+        StateMachineMoveNextBodyDebugInfo Cci.IMethodBody.MoveNextBodyInfo =>
+            _stateMachineMoveNextDebugInfoOpt;
 
         ushort Cci.IMethodBody.MaxStack => _maxStack;
 
@@ -139,14 +145,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         string Cci.IMethodBody.StateMachineTypeName => _stateMachineTypeNameOpt;
 
-        ImmutableArray<StateMachineHoistedLocalScope> Cci.IMethodBody.StateMachineHoistedLocalScopes
-            => _stateMachineHoistedLocalScopes;
+        ImmutableArray<StateMachineHoistedLocalScope> Cci.IMethodBody.StateMachineHoistedLocalScopes =>
+            _stateMachineHoistedLocalScopes;
 
-        ImmutableArray<EncHoistedLocalInfo> Cci.IMethodBody.StateMachineHoistedLocalSlots
-            => _stateMachineHoistedLocalSlots;
+        ImmutableArray<EncHoistedLocalInfo> Cci.IMethodBody.StateMachineHoistedLocalSlots =>
+            _stateMachineHoistedLocalSlots;
 
-        ImmutableArray<Cci.ITypeReference?> Cci.IMethodBody.StateMachineAwaiterSlots
-            => _stateMachineAwaiterSlots;
+        ImmutableArray<Cci.ITypeReference?> Cci.IMethodBody.StateMachineAwaiterSlots =>
+            _stateMachineAwaiterSlots;
 
         bool Cci.IMethodBody.HasDynamicLocalVariables => _hasDynamicLocalVariables;
 
@@ -156,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public ImmutableArray<ClosureDebugInfo> ClosureDebugInfo => _closureDebugInfo;
 
-        public StateMachineStatesDebugInfo StateMachineStatesDebugInfo => _stateMachineStatesDebugInfo;
+        public StateMachineStatesDebugInfo StateMachineStatesDebugInfo =>
+            _stateMachineStatesDebugInfo;
 
         /// <summary>
         /// True if there's a stackalloc somewhere in the method.

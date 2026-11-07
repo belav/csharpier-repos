@@ -10,13 +10,17 @@ namespace WebMatrix.Data
 {
     internal class SqlCeDbFileHandler : IDbFileHandler
     {
-        private const string SqlCeConnectionStringFormat = @"Data Source={0};File Access Retry Timeout=10";
+        private const string SqlCeConnectionStringFormat =
+            @"Data Source={0};File Access Retry Timeout=10";
 
         public IConnectionConfiguration GetConnectionConfiguration(string fileName)
         {
             // Get the default provider name
             string providerName = Database.GetDefaultProviderName();
-            Debug.Assert(!String.IsNullOrEmpty(providerName), "Provider name should not be null or empty");
+            Debug.Assert(
+                !String.IsNullOrEmpty(providerName),
+                "Provider name should not be null or empty"
+            );
 
             string connectionString = GetConnectionString(fileName);
             return new ConnectionConfiguration(providerName, connectionString);
@@ -26,12 +30,20 @@ namespace WebMatrix.Data
         {
             if (Path.IsPathRooted(fileName))
             {
-                return String.Format(CultureInfo.InvariantCulture, SqlCeConnectionStringFormat, fileName);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    SqlCeConnectionStringFormat,
+                    fileName
+                );
             }
 
             // Use |DataDirectory| if the path isn't rooted
             string dataSource = @"|DataDirectory|\" + Path.GetFileName(fileName);
-            return String.Format(CultureInfo.InvariantCulture, SqlCeConnectionStringFormat, dataSource);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                SqlCeConnectionStringFormat,
+                dataSource
+            );
         }
     }
 }

@@ -16,25 +16,29 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 {
     public class TrailingHeadersTest : HttpClientHandlerTestBase
     {
-        public TrailingHeadersTest(ITestOutputHelper output) : base(output)
-        { }
+        public TrailingHeadersTest(ITestOutputHelper output)
+            : base(output) { }
 
         // Build number suggested by the WinHttp team.
         // It can be reduced after the backport of WINHTTP_QUERY_FLAG_TRAILERS is finished,
         // and the patches are rolled out to CI machines.
-        public static bool OsSupportsWinHttpTrailingHeaders => Environment.OSVersion.Version >= new Version(10, 0, 19622, 0);
+        public static bool OsSupportsWinHttpTrailingHeaders =>
+            Environment.OSVersion.Version >= new Version(10, 0, 19622, 0);
 
-        public static bool TestsEnabled => OsSupportsWinHttpTrailingHeaders && PlatformDetection.SupportsAlpn;
+        public static bool TestsEnabled =>
+            OsSupportsWinHttpTrailingHeaders && PlatformDetection.SupportsAlpn;
 
         protected override Version UseVersion => new Version(2, 0);
 
         protected static byte[] DataBytes = "data"u8.ToArray();
 
-        protected static readonly IList<HttpHeaderData> TrailingHeaders = new HttpHeaderData[] {
+        protected static readonly IList<HttpHeaderData> TrailingHeaders = new HttpHeaderData[]
+        {
             new HttpHeaderData("MyCoolTrailerHeader", "amazingtrailer"),
             new HttpHeaderData("EmptyHeader", ""),
             new HttpHeaderData("Accept-Encoding", "identity,gzip"),
-            new HttpHeaderData("Hello", "World") };
+            new HttpHeaderData("Hello", "World"),
+        };
 
         protected static Frame MakeDataFrame(int streamId, byte[] data, bool endStream = false) =>
             new DataFrame(data, (endStream ? FrameFlags.EndStream : FrameFlags.None), 0, streamId);
@@ -55,7 +59,9 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 await connection.SendDefaultResponseHeadersAsync(streamId);
 
                 // Response data.
-                await connection.WriteFrameAsync(MakeDataFrame(streamId, DataBytes, endStream: true));
+                await connection.WriteFrameAsync(
+                    MakeDataFrame(streamId, DataBytes, endStream: true)
+                );
 
                 // Server doesn't send trailing header frame.
                 HttpResponseMessage response = await sendTask;
@@ -70,7 +76,9 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         [InlineData(false)]
         [InlineData(true)]
         [ConditionalTheory(nameof(TestsEnabled))]
-        public async Task Http2GetAsync_MissingTrailer_TrailingHeadersAccepted(bool responseHasContentLength)
+        public async Task Http2GetAsync_MissingTrailer_TrailingHeadersAccepted(
+            bool responseHasContentLength
+        )
         {
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
@@ -84,7 +92,14 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 // Response header.
                 if (responseHasContentLength)
                 {
-                    await connection.SendResponseHeadersAsync(streamId, endStream: false, headers: new[] { new HttpHeaderData("Content-Length", DataBytes.Length.ToString()) });
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        headers: new[]
+                        {
+                            new HttpHeaderData("Content-Length", DataBytes.Length.ToString()),
+                        }
+                    );
                 }
                 else
                 {
@@ -95,7 +110,12 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 await connection.WriteFrameAsync(MakeDataFrame(streamId, DataBytes));
 
                 // Additional trailing header frame.
-                await connection.SendResponseHeadersAsync(streamId, isTrailingHeader: true, headers: TrailingHeaders, endStream: true);
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    isTrailingHeader: true,
+                    headers: TrailingHeaders,
+                    endStream: true
+                );
 
                 HttpResponseMessage response = await sendTask;
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -110,12 +130,17 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         [InlineData(false)]
         [InlineData(true)]
         [ConditionalTheory(nameof(TestsEnabled))]
-        public async Task Http2GetAsyncResponseHeadersReadOption_TrailingHeaders_Available(bool responseHasContentLength)
+        public async Task Http2GetAsyncResponseHeadersReadOption_TrailingHeaders_Available(
+            bool responseHasContentLength
+        )
         {
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                Task<HttpResponseMessage> sendTask = client.GetAsync(server.Address, HttpCompletionOption.ResponseHeadersRead);
+                Task<HttpResponseMessage> sendTask = client.GetAsync(
+                    server.Address,
+                    HttpCompletionOption.ResponseHeadersRead
+                );
 
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
 
@@ -124,7 +149,14 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 // Response header.
                 if (responseHasContentLength)
                 {
-                    await connection.SendResponseHeadersAsync(streamId, endStream: false, headers: new[] { new HttpHeaderData("Content-Length", DataBytes.Length.ToString()) });
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        headers: new[]
+                        {
+                            new HttpHeaderData("Content-Length", DataBytes.Length.ToString()),
+                        }
+                    );
                 }
                 else
                 {
@@ -151,10 +183,16 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 
                 // Finish data stream and write out trailing headers.
                 await connection.WriteFrameAsync(MakeDataFrame(streamId, DataBytes));
-                await connection.SendResponseHeadersAsync(streamId, endStream: true, isTrailingHeader: true, headers: TrailingHeaders);
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    endStream: true,
+                    isTrailingHeader: true,
+                    headers: TrailingHeaders
+                );
 
                 // Read data until EOF is reached
-                while (stream.Read(data, 0, data.Length) != 0) ;
+                while (stream.Read(data, 0, data.Length) != 0)
+                    ;
 
                 trailingHeaders = GetTrailingHeaders(response);
                 Assert.Equal(TrailingHeaders.Count, trailingHeaders.Count());
@@ -183,7 +221,12 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 
                 // Response header.
                 await connection.SendDefaultResponseHeadersAsync(streamId);
-                await connection.SendResponseHeadersAsync(streamId, endStream: true, isTrailingHeader: true, headers: TrailingHeaders);
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    endStream: true,
+                    isTrailingHeader: true,
+                    headers: TrailingHeaders
+                );
 
                 HttpResponseMessage response = await sendTask;
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -213,11 +256,18 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 // No data.
 
                 // Response trailing headers
-                await connection.SendResponseHeadersAsync(streamId, isTrailingHeader: true, headers: TrailingHeaders);
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    isTrailingHeader: true,
+                    headers: TrailingHeaders
+                );
 
                 HttpResponseMessage response = await sendTask;
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal<byte>(Array.Empty<byte>(), await response.Content.ReadAsByteArrayAsync());
+                Assert.Equal<byte>(
+                    Array.Empty<byte>(),
+                    await response.Content.ReadAsByteArrayAsync()
+                );
 
                 var trailingHeaders = GetTrailingHeaders(response);
                 Assert.Contains("amazingtrailer", trailingHeaders.GetValues("MyCoolTrailerHeader"));
@@ -231,7 +281,10 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             return responseMessage.TrailingHeaders;
 #else
 #pragma warning disable CS0618 // Type or member is obsolete
-            responseMessage.RequestMessage.Properties.TryGetValue("__ResponseTrailers", out object trailers);
+            responseMessage.RequestMessage.Properties.TryGetValue(
+                "__ResponseTrailers",
+                out object trailers
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             return (HttpHeaders)trailers;
 #endif

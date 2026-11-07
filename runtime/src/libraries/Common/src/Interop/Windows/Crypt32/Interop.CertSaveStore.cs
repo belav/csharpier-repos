@@ -16,6 +16,7 @@ internal static partial class Interop
             CertStoreSaveAs dwSaveAs,
             CertStoreSaveTo dwSaveTo,
             ref DATA_BLOB pvSaveToPara,
-            int dwFlags);
+            int dwFlags
+        );
     }
 }

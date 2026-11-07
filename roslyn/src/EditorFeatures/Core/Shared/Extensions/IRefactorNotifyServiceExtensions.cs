@@ -14,11 +14,20 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEnumerable<DocumentId> changedDocuments,
             ISymbol symbol,
             string newName,
-            bool throwOnFailure)
+            bool throwOnFailure
+        )
         {
             foreach (var refactorNotifyService in refactorNotifyServices)
             {
-                if (!refactorNotifyService.TryOnBeforeGlobalSymbolRenamed(workspace, changedDocuments, symbol, newName, throwOnFailure))
+                if (
+                    !refactorNotifyService.TryOnBeforeGlobalSymbolRenamed(
+                        workspace,
+                        changedDocuments,
+                        symbol,
+                        newName,
+                        throwOnFailure
+                    )
+                )
                 {
                     return false;
                 }
@@ -33,11 +42,20 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEnumerable<DocumentId> changedDocuments,
             ISymbol symbol,
             string newName,
-            bool throwOnFailure)
+            bool throwOnFailure
+        )
         {
             foreach (var refactorNotifyService in refactorNotifyServices)
             {
-                if (!refactorNotifyService.TryOnAfterGlobalSymbolRenamed(workspace, changedDocuments, symbol, newName, throwOnFailure))
+                if (
+                    !refactorNotifyService.TryOnAfterGlobalSymbolRenamed(
+                        workspace,
+                        changedDocuments,
+                        symbol,
+                        newName,
+                        throwOnFailure
+                    )
+                )
                 {
                     return false;
                 }

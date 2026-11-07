@@ -10,9 +10,7 @@ namespace System.Net.NetworkInformation
         private readonly List<UnicastIPAddressInformation> _addresses =
             new List<UnicastIPAddressInformation>();
 
-        protected internal UnicastIPAddressInformationCollection()
-        {
-        }
+        protected internal UnicastIPAddressInformationCollection() { }
 
         public virtual void CopyTo(UnicastIPAddressInformation[] array, int offset)
         {
@@ -21,18 +19,12 @@ namespace System.Net.NetworkInformation
 
         public virtual int Count
         {
-            get
-            {
-                return _addresses.Count;
-            }
+            get { return _addresses.Count; }
         }
 
         public virtual bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public virtual void Add(UnicastIPAddressInformation address)
@@ -62,10 +54,7 @@ namespace System.Net.NetworkInformation
 
         public virtual UnicastIPAddressInformation this[int index]
         {
-            get
-            {
-                return _addresses[index];
-            }
+            get { return _addresses[index]; }
         }
 
         public virtual bool Remove(UnicastIPAddressInformation address)

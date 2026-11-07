@@ -15,6 +15,6 @@ namespace System.Runtime
         Resume = 7,
         Suspend = 8,
         Send = 9,
-        Receive = 240
+        Receive = 240,
     }
 }

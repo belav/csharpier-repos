@@ -16,14 +16,16 @@ internal interface IConvertStringProvider
         ExpressionSyntax expression,
         SyntaxFormattingOptions formattingOptions,
         out CanConvertParams convertParams,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 
     ExpressionSyntax Convert(
         ParsedDocument document,
         ExpressionSyntax expression,
         ConvertToRawKind kind,
         SyntaxFormattingOptions formattingOptions,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 }
 
 internal abstract class AbstractConvertStringProvider<TStringExpression> : IConvertStringProvider
@@ -31,15 +33,33 @@ internal abstract class AbstractConvertStringProvider<TStringExpression> : IConv
 {
     protected abstract bool CheckSyntax(TStringExpression expression);
 
-    public bool CanConvert(ParsedDocument document, ExpressionSyntax expression, SyntaxFormattingOptions formattingOptions, out CanConvertParams convertParams, CancellationToken cancellationToken)
+    public bool CanConvert(
+        ParsedDocument document,
+        ExpressionSyntax expression,
+        SyntaxFormattingOptions formattingOptions,
+        out CanConvertParams convertParams,
+        CancellationToken cancellationToken
+    )
     {
         convertParams = default;
-        return expression is TStringExpression stringExpression &&
-            CheckSyntax(stringExpression) &&
-            CanConvert(document, stringExpression, formattingOptions, out convertParams, cancellationToken);
+        return expression is TStringExpression stringExpression
+            && CheckSyntax(stringExpression)
+            && CanConvert(
+                document,
+                stringExpression,
+                formattingOptions,
+                out convertParams,
+                cancellationToken
+            );
     }
 
-    public ExpressionSyntax Convert(ParsedDocument document, ExpressionSyntax expression, ConvertToRawKind kind, SyntaxFormattingOptions formattingOptions, CancellationToken cancellationToken)
+    public ExpressionSyntax Convert(
+        ParsedDocument document,
+        ExpressionSyntax expression,
+        ConvertToRawKind kind,
+        SyntaxFormattingOptions formattingOptions,
+        CancellationToken cancellationToken
+    )
     {
         var stringExpression = (TStringExpression)expression;
 
@@ -53,12 +73,14 @@ internal abstract class AbstractConvertStringProvider<TStringExpression> : IConv
         TStringExpression expression,
         SyntaxFormattingOptions formattingOptions,
         out CanConvertParams convertParams,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 
     protected abstract TStringExpression Convert(
         ParsedDocument document,
         TStringExpression expression,
         ConvertToRawKind kind,
         SyntaxFormattingOptions formattingOptions,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 }

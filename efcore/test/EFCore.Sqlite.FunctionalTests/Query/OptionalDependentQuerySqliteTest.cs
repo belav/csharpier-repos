@@ -3,9 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class OptionalDependentQuerySqliteTest : OptionalDependentQueryTestBase<OptionalDependentQuerySqliteFixture>
+public class OptionalDependentQuerySqliteTest
+    : OptionalDependentQueryTestBase<OptionalDependentQuerySqliteFixture>
 {
-    public OptionalDependentQuerySqliteTest(OptionalDependentQuerySqliteFixture fixture, ITestOutputHelper testOutputHelper)
+    public OptionalDependentQuerySqliteTest(
+        OptionalDependentQuerySqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -17,10 +21,11 @@ public class OptionalDependentQuerySqliteTest : OptionalDependentQueryTestBase<O
         await base.Basic_projection_entity_with_all_optional(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesAllOptional" AS "e"
-""");
+"""
+        );
     }
 
     public override async Task Basic_projection_entity_with_some_required(bool async)
@@ -28,108 +33,133 @@ FROM "EntitiesAllOptional" AS "e"
         await base.Basic_projection_entity_with_some_required(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesSomeRequired" AS "e"
-""");
+"""
+        );
     }
 
-    public override async Task Filter_optional_dependent_with_all_optional_compared_to_null(bool async)
+    public override async Task Filter_optional_dependent_with_all_optional_compared_to_null(
+        bool async
+    )
     {
         await base.Filter_optional_dependent_with_all_optional_compared_to_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesAllOptional" AS "e"
 WHERE "e"."Json" IS NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_optional_dependent_with_all_optional_compared_to_not_null(bool async)
+    public override async Task Filter_optional_dependent_with_all_optional_compared_to_not_null(
+        bool async
+    )
     {
         await base.Filter_optional_dependent_with_all_optional_compared_to_not_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesAllOptional" AS "e"
 WHERE "e"."Json" IS NOT NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_optional_dependent_with_some_required_compared_to_null(bool async)
+    public override async Task Filter_optional_dependent_with_some_required_compared_to_null(
+        bool async
+    )
     {
         await base.Filter_optional_dependent_with_some_required_compared_to_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesSomeRequired" AS "e"
 WHERE "e"."Json" IS NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_optional_dependent_with_some_required_compared_to_not_null(bool async)
+    public override async Task Filter_optional_dependent_with_some_required_compared_to_not_null(
+        bool async
+    )
     {
         await base.Filter_optional_dependent_with_some_required_compared_to_not_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesSomeRequired" AS "e"
 WHERE "e"."Json" IS NOT NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_nested_optional_dependent_with_all_optional_compared_to_null(bool async)
+    public override async Task Filter_nested_optional_dependent_with_all_optional_compared_to_null(
+        bool async
+    )
     {
         await base.Filter_nested_optional_dependent_with_all_optional_compared_to_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesAllOptional" AS "e"
 WHERE "e"."Json" ->> 'OpNav1' IS NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_nested_optional_dependent_with_all_optional_compared_to_not_null(bool async)
+    public override async Task Filter_nested_optional_dependent_with_all_optional_compared_to_not_null(
+        bool async
+    )
     {
         await base.Filter_nested_optional_dependent_with_all_optional_compared_to_not_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesAllOptional" AS "e"
 WHERE "e"."Json" ->> 'OpNav2' IS NOT NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_nested_optional_dependent_with_some_required_compared_to_null(bool async)
+    public override async Task Filter_nested_optional_dependent_with_some_required_compared_to_null(
+        bool async
+    )
     {
         await base.Filter_nested_optional_dependent_with_some_required_compared_to_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesSomeRequired" AS "e"
 WHERE "e"."Json" ->> 'ReqNav1' IS NULL
-""");
+"""
+        );
     }
 
-    public override async Task Filter_nested_optional_dependent_with_some_required_compared_to_not_null(bool async)
+    public override async Task Filter_nested_optional_dependent_with_some_required_compared_to_not_null(
+        bool async
+    )
     {
         await base.Filter_nested_optional_dependent_with_some_required_compared_to_not_null(async);
 
         AssertSql(
-"""
+            """
 SELECT "e"."Id", "e"."Name", "e"."Json"
 FROM "EntitiesSomeRequired" AS "e"
 WHERE "e"."Json" ->> 'ReqNav2' IS NOT NULL
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

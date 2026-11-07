@@ -7,7 +7,7 @@ namespace System.Activities.Statements
 
     static class CompensationActivityStrings
     {
-        public const string WorkflowImplicitCompensationBehavior = "Activities.Compensation.WorkflowImplicitCompensationBehavior";
+        public const string WorkflowImplicitCompensationBehavior =
+            "Activities.Compensation.WorkflowImplicitCompensationBehavior";
     }
-
 }

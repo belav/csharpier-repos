@@ -6,16 +6,15 @@ namespace System.Workflow.Activities
 {
     using System.Collections;
     using System.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Reflection;
-    using System.Workflow.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Workflow.Activities.Design;
     using System.ServiceModel;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Windows.Forms;
-
+    using System.Workflow.Activities.Design;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [ActivityDesignerTheme(typeof(SendActivityDesignerTheme))]
     class SendActivityDesigner : ActivityDesigner
@@ -23,13 +22,9 @@ namespace System.Workflow.Activities
         static ActivityComparer<SendActivity> matchByContractCallback;
         static ActivityComparer<SendActivity> matchByOperationCallback;
 
-
         public override Size MinimumSize
         {
-            get
-            {
-                return new Size(150, 80);
-            }
+            get { return new Size(150, 80); }
         }
 
         public override string Text
@@ -58,12 +53,20 @@ namespace System.Workflow.Activities
                     verbs.Add(verb);
                 }
 
-                ActivityDesignerVerb findSimilarOperationsVerb = new FindSimilarActivitiesVerb<SendActivity>(
-                    this, MatchByOperationCallback, SR2.GetString(SR2.ShowActivitiesWithSameOperation));
+                ActivityDesignerVerb findSimilarOperationsVerb =
+                    new FindSimilarActivitiesVerb<SendActivity>(
+                        this,
+                        MatchByOperationCallback,
+                        SR2.GetString(SR2.ShowActivitiesWithSameOperation)
+                    );
                 verbs.Add(findSimilarOperationsVerb);
 
-                ActivityDesignerVerb findSimilarContractVerb = new FindSimilarActivitiesVerb<SendActivity>(
-                    this, MatchByContractCallback, SR2.GetString(SR2.ShowActivitiesWithSameContract));
+                ActivityDesignerVerb findSimilarContractVerb =
+                    new FindSimilarActivitiesVerb<SendActivity>(
+                        this,
+                        MatchByContractCallback,
+                        SR2.GetString(SR2.ShowActivitiesWithSameContract)
+                    );
                 verbs.Add(findSimilarContractVerb);
 
                 return verbs;
@@ -97,7 +100,6 @@ namespace System.Workflow.Activities
         SendActivity SendActivity
         {
             get { return this.Activity as SendActivity; }
-
         }
 
         protected override void OnActivityChanged(ActivityChangedEventArgs e)
@@ -123,9 +125,23 @@ namespace System.Workflow.Activities
             }
 
             OperationInfoBase pickedServiceOperation = null;
-            if (ServiceOperationUIEditor.TryPickOperation(this.Activity.Site, this.Activity, this.SendActivity.ServiceOperationInfo, out pickedServiceOperation))
+            if (
+                ServiceOperationUIEditor.TryPickOperation(
+                    this.Activity.Site,
+                    this.Activity,
+                    this.SendActivity.ServiceOperationInfo,
+                    out pickedServiceOperation
+                )
+            )
             {
-                PropertyDescriptorUtils.SetPropertyValue(this.Activity.Site, ServiceOperationHelpers.GetServiceOperationInfoPropertyDescriptor(this.Activity), this.Activity, pickedServiceOperation);
+                PropertyDescriptorUtils.SetPropertyValue(
+                    this.Activity.Site,
+                    ServiceOperationHelpers.GetServiceOperationInfoPropertyDescriptor(
+                        this.Activity
+                    ),
+                    this.Activity,
+                    pickedServiceOperation
+                );
             }
         }
 
@@ -133,11 +149,20 @@ namespace System.Workflow.Activities
         {
             base.OnPaint(e);
 
-            Rectangle outgoingArrowRect = new Rectangle(this.Location.X + this.Size.Width - 24, this.Location.Y + 10, 24, 24);
-            Rectangle incomingArrowRect = new Rectangle(this.Location.X + this.Size.Width, this.Location.Y + this.Size.Height - 35, -24, 24);
+            Rectangle outgoingArrowRect = new Rectangle(
+                this.Location.X + this.Size.Width - 24,
+                this.Location.Y + 10,
+                24,
+                24
+            );
+            Rectangle incomingArrowRect = new Rectangle(
+                this.Location.X + this.Size.Width,
+                this.Location.Y + this.Size.Height - 35,
+                -24,
+                24
+            );
             e.Graphics.DrawImage(ImageResources.Arrow, outgoingArrowRect);
             bool isOneWay = false;
-
 
             if (SendActivity.ServiceOperationInfo != null)
             {
@@ -151,6 +176,7 @@ namespace System.Workflow.Activities
                 e.Graphics.DrawImage(ImageResources.Arrow, incomingArrowRect);
             }
         }
+
         protected override void PreFilterProperties(IDictionary properties)
         {
             base.PreFilterProperties(properties);
@@ -162,14 +188,18 @@ namespace System.Workflow.Activities
 
         static bool MatchByContract(SendActivity source, SendActivity target)
         {
-            return ReceiveActivityDesigner.MatchByContract(source.ServiceOperationInfo, target.ServiceOperationInfo);
+            return ReceiveActivityDesigner.MatchByContract(
+                source.ServiceOperationInfo,
+                target.ServiceOperationInfo
+            );
         }
 
         static bool MatchByOperation(SendActivity source, SendActivity target)
         {
-            return ReceiveActivityDesigner.MatchByOperation(source.ServiceOperationInfo, target.ServiceOperationInfo);
+            return ReceiveActivityDesigner.MatchByOperation(
+                source.ServiceOperationInfo,
+                target.ServiceOperationInfo
+            );
         }
-
     }
-
 }

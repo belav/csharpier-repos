@@ -24,8 +24,8 @@ public readonly struct MultiSnapshot : ISnapshot
         _snapshots = snapshots;
     }
 
-    internal static readonly ConstructorInfo Constructor
-        = typeof(MultiSnapshot).GetDeclaredConstructor(new[] { typeof(ISnapshot[]) })!;
+    internal static readonly ConstructorInfo Constructor =
+        typeof(MultiSnapshot).GetDeclaredConstructor(new[] { typeof(ISnapshot[]) })!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,8 +33,8 @@ public readonly struct MultiSnapshot : ISnapshot
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => _snapshots[index / Snapshot.MaxGenericTypes].GetValue<T>(index % Snapshot.MaxGenericTypes);
+    public T GetValue<T>(int index) =>
+        _snapshots[index / Snapshot.MaxGenericTypes].GetValue<T>(index % Snapshot.MaxGenericTypes);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,6 +45,7 @@ public readonly struct MultiSnapshot : ISnapshot
     public object? this[int index]
     {
         get => _snapshots[index / Snapshot.MaxGenericTypes][index % Snapshot.MaxGenericTypes];
-        set => _snapshots[index / Snapshot.MaxGenericTypes][index % Snapshot.MaxGenericTypes] = value;
+        set =>
+            _snapshots[index / Snapshot.MaxGenericTypes][index % Snapshot.MaxGenericTypes] = value;
     }
 }

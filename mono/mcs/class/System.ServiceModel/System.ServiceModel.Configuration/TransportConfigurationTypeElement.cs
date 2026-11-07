@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,71 +49,76 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class TransportConfigurationTypeElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty name;
-		static ConfigurationProperty transport_configuration_type;
+    [MonoTODO]
+    public sealed partial class TransportConfigurationTypeElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty name;
+        static ConfigurationProperty transport_configuration_type;
 
-		static TransportConfigurationTypeElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			name = new ConfigurationProperty ("name",
-				typeof (string), null, new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static TransportConfigurationTypeElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            name = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                null,
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			transport_configuration_type = new ConfigurationProperty ("transportConfigurationType",
-				typeof (string), null, new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired);
+            transport_configuration_type = new ConfigurationProperty(
+                "transportConfigurationType",
+                typeof(string),
+                null,
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired
+            );
 
-			properties.Add (name);
-			properties.Add (transport_configuration_type);
-		}
+            properties.Add(name);
+            properties.Add(transport_configuration_type);
+        }
 
-		public TransportConfigurationTypeElement ()
-		{
-		}
+        public TransportConfigurationTypeElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "name",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Name
+        {
+            get { return (string)base[name]; }
+            set { base[name] = value; }
+        }
 
-		[ConfigurationProperty ("name",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Name {
-			get { return (string) base [name]; }
-			set { base [name] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("transportConfigurationType",
-			 Options = ConfigurationPropertyOptions.IsRequired,
-			IsRequired = true)]
-		public string TransportConfigurationType {
-			get { return (string) base [transport_configuration_type]; }
-			set { base [transport_configuration_type] = value; }
-		}
-
-
-	}
-
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "transportConfigurationType",
+            Options = ConfigurationPropertyOptions.IsRequired,
+            IsRequired = true
+        )]
+        public string TransportConfigurationType
+        {
+            get { return (string)base[transport_configuration_type]; }
+            set { base[transport_configuration_type] = value; }
+        }
+    }
 }

@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="License.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
-    using Microsoft.Win32;
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <include file='doc\License.uex' path='docs/doc[@for="License"]/*' />
     /// <devdoc>
@@ -19,7 +19,6 @@ namespace System.ComponentModel {
     [HostProtection(SharedState = true)]
     public abstract class License : IDisposable
     {
-
         /// <include file='doc\License.uex' path='docs/doc[@for="License.LicenseKey"]/*' />
         /// <devdoc>
         ///    <para>When overridden in a derived class, gets the license key granted to this component.</para>

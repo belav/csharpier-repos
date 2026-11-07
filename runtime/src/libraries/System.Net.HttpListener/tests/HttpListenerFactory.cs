@@ -23,7 +23,11 @@ namespace System.Net.Tests
         private readonly string _path;
         private readonly int _port;
 
-        internal HttpListenerFactory(string hostname = "localhost", string path = null, AuthenticationSchemes? authenticationSchemes = null)
+        internal HttpListenerFactory(
+            string hostname = "localhost",
+            string path = null,
+            AuthenticationSchemes? authenticationSchemes = null
+        )
         {
             // Find a URL prefix that is not in use on this machine *and* uses a port that's not in use.
             // Once we find this prefix, keep a listener on it for the duration of the process, so other processes
@@ -72,9 +76,14 @@ namespace System.Net.Tests
                         // If we can't access the host (e.g. if it is '+' or '*' and the current user is the administrator)
                         // then throw.
                         const int ERROR_ACCESS_DENIED = 5;
-                        if (listenerException.ErrorCode == ERROR_ACCESS_DENIED && (hostname == "*" || hostname == "+"))
+                        if (
+                            listenerException.ErrorCode == ERROR_ACCESS_DENIED
+                            && (hostname == "*" || hostname == "+")
+                        )
                         {
-                            throw new InvalidOperationException($"Access denied for host {hostname}");
+                            throw new InvalidOperationException(
+                                $"Access denied for host {hostname}"
+                            );
                         }
                     }
                     else if (!(e is SocketException))
@@ -97,7 +106,10 @@ namespace System.Net.Tests
             {
                 if (_port == 0)
                 {
-                    throw new Exception("Could not reserve a port for HttpListener", _processPrefixException);
+                    throw new Exception(
+                        "Could not reserve a port for HttpListener",
+                        _processPrefixException
+                    );
                 }
 
                 return _port;
@@ -110,7 +122,10 @@ namespace System.Net.Tests
             {
                 if (_processPrefix == null)
                 {
-                    throw new Exception("Could not reserve a port for HttpListener", _processPrefixException);
+                    throw new Exception(
+                        "Could not reserve a port for HttpListener",
+                        _processPrefixException
+                    );
                 }
 
                 return _processPrefix;
@@ -144,13 +159,17 @@ namespace System.Net.Tests
             }
         }
 
-        public HttpListener GetListener() => _processPrefixListener ?? throw new Exception("Could not reserve a port for HttpListener", _processPrefixException);
+        public HttpListener GetListener() =>
+            _processPrefixListener
+            ?? throw new Exception(
+                "Could not reserve a port for HttpListener",
+                _processPrefixException
+            );
 
         public void Dispose() => _processPrefixListener?.Close();
 
         public Socket GetConnectedSocket()
         {
-
             if (_processPrefixException != null)
             {
                 throw new Exception("Could not create HttpListener", _processPrefixException);
@@ -161,20 +180,33 @@ namespace System.Net.Tests
             // Some platforms or distributions require IPv6 sockets if the OS supports IPv6. Others (e.g. Ubuntu) don't.
             try
             {
-                AddressFamily addressFamily = Socket.OSSupportsIPv6 ? AddressFamily.InterNetworkV6 : AddressFamily.InterNetwork;
+                AddressFamily addressFamily = Socket.OSSupportsIPv6
+                    ? AddressFamily.InterNetworkV6
+                    : AddressFamily.InterNetwork;
                 Socket socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp);
                 socket.Connect(hostname, Port);
                 return socket;
             }
             catch
             {
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Socket socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 socket.Connect(hostname, Port);
                 return socket;
             }
         }
 
-        public byte[] GetContent(string httpVersion, string requestType, string query, string text, IEnumerable<string> headers, bool headerOnly)
+        public byte[] GetContent(
+            string httpVersion,
+            string requestType,
+            string query,
+            string text,
+            IEnumerable<string> headers,
+            bool headerOnly
+        )
         {
             headers = headers ?? Enumerable.Empty<string>();
 
@@ -188,9 +220,12 @@ namespace System.Net.Tests
             string content = $"{requestType} {rawUrl} HTTP/{httpVersion}\r\n";
             if (!headers.Any(header => header.ToLower().StartsWith("host:")))
             {
-                content += $"Host: { listeningUri.Host}\r\n";
+                content += $"Host: {listeningUri.Host}\r\n";
             }
-            if (text != null && !headers.Any(header => header.ToLower().StartsWith("content-length:")))
+            if (
+                text != null
+                && !headers.Any(header => header.ToLower().StartsWith("content-length:"))
+            )
             {
                 content += $"Content-Length: {text.Length}\r\n";
             }
@@ -210,7 +245,14 @@ namespace System.Net.Tests
 
         public byte[] GetContent(string requestType, string text, bool headerOnly)
         {
-            return GetContent("1.1", requestType, query: null, text: text, headers: null, headerOnly: headerOnly);
+            return GetContent(
+                "1.1",
+                requestType,
+                query: null,
+                text: text,
+                headers: null,
+                headerOnly: headerOnly
+            );
         }
 
         private static int GetNextPort()

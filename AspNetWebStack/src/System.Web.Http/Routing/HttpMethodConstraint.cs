@@ -21,7 +21,13 @@ namespace System.Web.Http.Routing
 
         public Collection<HttpMethod> AllowedMethods { get; private set; }
 
-        protected virtual bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
+        protected virtual bool Match(
+            HttpRequestMessage request,
+            IHttpRoute route,
+            string parameterName,
+            IDictionary<string, object> values,
+            HttpRouteDirection routeDirection
+        )
         {
             if (request == null)
             {
@@ -70,11 +76,21 @@ namespace System.Web.Http.Routing
                     return AllowedMethods.Contains(constraint);
 
                 default:
-                    throw Error.InvalidEnumArgument(String.Empty, (int)routeDirection, typeof(HttpRouteDirection));
+                    throw Error.InvalidEnumArgument(
+                        String.Empty,
+                        (int)routeDirection,
+                        typeof(HttpRouteDirection)
+                    );
             }
         }
 
-        bool IHttpRouteConstraint.Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
+        bool IHttpRouteConstraint.Match(
+            HttpRequestMessage request,
+            IHttpRoute route,
+            string parameterName,
+            IDictionary<string, object> values,
+            HttpRouteDirection routeDirection
+        )
         {
             return Match(request, route, parameterName, values, routeDirection);
         }

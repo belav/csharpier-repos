@@ -20,10 +20,7 @@ namespace System.Activities.Statements
 
         public int Count
         {
-            get
-            {
-                return this.executionOrderedList.Count;
-            }
+            get { return this.executionOrderedList.Count; }
         }
 
         [DataMember(Name = "executionOrderedList")]

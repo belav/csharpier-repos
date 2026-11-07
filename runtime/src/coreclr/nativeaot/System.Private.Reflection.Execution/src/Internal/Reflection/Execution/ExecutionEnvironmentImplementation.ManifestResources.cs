@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-
 using Internal.NativeFormat;
 using Internal.Reflection.Core.Execution;
 using Internal.Runtime;
@@ -20,14 +19,21 @@ namespace Internal.Reflection.Execution
     //==========================================================================================================
     internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
-        public sealed override ManifestResourceInfo GetManifestResourceInfo(Assembly assembly, string resourceName)
+        public sealed override ManifestResourceInfo GetManifestResourceInfo(
+            Assembly assembly,
+            string resourceName
+        )
         {
             LowLevelList<ResourceInfo> resourceInfos = GetExtractedResources(assembly);
             for (int i = 0; i < resourceInfos.Count; i++)
             {
                 if (resourceName == resourceInfos[i].Name)
                 {
-                    return new ManifestResourceInfo(null, null, ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile);
+                    return new ManifestResourceInfo(
+                        null,
+                        null,
+                        ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile
+                    );
                 }
             }
             return null;
@@ -68,19 +74,30 @@ namespace Internal.Reflection.Execution
             byte* pBlob;
             uint cbBlob;
 
-            if (!resourceInfo.Module.TryFindBlob((int)ReflectionMapBlob.BlobIdResourceData, out pBlob, out cbBlob))
+            if (
+                !resourceInfo.Module.TryFindBlob(
+                    (int)ReflectionMapBlob.BlobIdResourceData,
+                    out pBlob,
+                    out cbBlob
+                )
+            )
             {
                 throw new BadImageFormatException();
             }
 
             // resourceInfo is read from the executable image, so check it only in debug builds
-            Debug.Assert(resourceInfo.Index >= 0 && resourceInfo.Length >= 0 && (uint)(resourceInfo.Index + resourceInfo.Length) <= cbBlob);
+            Debug.Assert(
+                resourceInfo.Index >= 0
+                    && resourceInfo.Length >= 0
+                    && (uint)(resourceInfo.Index + resourceInfo.Length) <= cbBlob
+            );
             return new UnmanagedMemoryStream(pBlob + resourceInfo.Index, resourceInfo.Length);
         }
 
         private static LowLevelList<ResourceInfo> GetExtractedResources(Assembly assembly)
         {
-            LowLevelDictionary<string, LowLevelList<ResourceInfo>> extractedResourceDictionary = ExtractedResourceDictionary;
+            LowLevelDictionary<string, LowLevelList<ResourceInfo>> extractedResourceDictionary =
+                ExtractedResourceDictionary;
             string assemblyName = assembly.GetName().FullName;
             LowLevelList<ResourceInfo> resourceInfos;
             if (!extractedResourceDictionary.TryGetValue(assemblyName, out resourceInfos))
@@ -88,7 +105,10 @@ namespace Internal.Reflection.Execution
             return resourceInfos;
         }
 
-        private static LowLevelDictionary<string, LowLevelList<ResourceInfo>> ExtractedResourceDictionary
+        private static LowLevelDictionary<
+            string,
+            LowLevelList<ResourceInfo>
+        > ExtractedResourceDictionary
         {
             get
             {
@@ -97,12 +117,19 @@ namespace Internal.Reflection.Execution
                     // Lazily create the extracted resource dictionary. If two threads race here, we may construct two dictionaries
                     // and overwrite one - this is ok since the dictionaries are read-only once constructed and they contain the identical data.
 
-                    LowLevelDictionary<string, LowLevelList<ResourceInfo>> dict = new LowLevelDictionary<string, LowLevelList<ResourceInfo>>();
+                    LowLevelDictionary<string, LowLevelList<ResourceInfo>> dict =
+                        new LowLevelDictionary<string, LowLevelList<ResourceInfo>>();
 
                     foreach (NativeFormatModuleInfo module in ModuleList.EnumerateModules())
                     {
                         NativeReader reader;
-                        if (!TryGetNativeReaderForBlob(module, ReflectionMapBlob.BlobIdResourceIndex, out reader))
+                        if (
+                            !TryGetNativeReaderForBlob(
+                                module,
+                                ReflectionMapBlob.BlobIdResourceIndex,
+                                out reader
+                            )
+                        )
                         {
                             continue;
                         }
@@ -118,7 +145,12 @@ namespace Internal.Reflection.Execution
                             int resourceOffset = (int)entryParser.GetUnsigned();
                             int resourceLength = (int)entryParser.GetUnsigned();
 
-                            ResourceInfo resourceInfo = new ResourceInfo(resourceName, resourceOffset, resourceLength, module);
+                            ResourceInfo resourceInfo = new ResourceInfo(
+                                resourceName,
+                                resourceOffset,
+                                resourceLength,
+                                module
+                            );
 
                             LowLevelList<ResourceInfo> assemblyResources;
                             if (!dict.TryGetValue(assemblyName, out assemblyResources))
@@ -144,7 +176,10 @@ namespace Internal.Reflection.Execution
         /// The dictionary's key is a Fusion-style assembly name.
         /// The dictionary's value is a list of (resourcename,index) tuples.
         /// </summary>
-        private static volatile LowLevelDictionary<string, LowLevelList<ResourceInfo>> s_extractedResourceDictionary;
+        private static volatile LowLevelDictionary<
+            string,
+            LowLevelList<ResourceInfo>
+        > s_extractedResourceDictionary;
 
         private struct ResourceInfo
         {

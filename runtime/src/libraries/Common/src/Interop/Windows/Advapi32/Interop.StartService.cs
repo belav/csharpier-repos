@@ -11,6 +11,10 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, EntryPoint = "StartServiceW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool StartService(SafeServiceHandle serviceHandle, int argNum, IntPtr argPtrs);
+        internal static partial bool StartService(
+            SafeServiceHandle serviceHandle,
+            int argNum,
+            IntPtr argPtrs
+        );
     }
 }

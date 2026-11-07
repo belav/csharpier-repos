@@ -14,7 +14,10 @@ namespace System.Reflection.Metadata.Ecma335
     [DebuggerDisplay("Count = {Count}")]
     internal readonly struct BlobDictionary
     {
-        private readonly Dictionary<int, KeyValuePair<ImmutableArray<byte>, BlobHandle>> _dictionary;
+        private readonly Dictionary<
+            int,
+            KeyValuePair<ImmutableArray<byte>, BlobHandle>
+        > _dictionary;
 
         // A simple LCG. Constants taken from
         // https://github.com/imneme/pcg-c/blob/83252d9c23df9c82ecb42210afed61a7b42402d7/include/pcg_variants.h#L276-L284
@@ -22,12 +25,19 @@ namespace System.Reflection.Metadata.Ecma335
             (int)((uint)dictionaryKey * 747796405 + 2891336453);
 
 #if NET
-        private unsafe ref KeyValuePair<ImmutableArray<byte>, BlobHandle> GetValueRefOrAddDefault(ReadOnlySpan<byte> key, out bool exists)
+        private unsafe ref KeyValuePair<ImmutableArray<byte>, BlobHandle> GetValueRefOrAddDefault(
+            ReadOnlySpan<byte> key,
+            out bool exists
+        )
         {
             int dictionaryKey = Hash.GetFNVHashCode(key);
             while (true)
             {
-                ref var entry = ref CollectionsMarshal.GetValueRefOrAddDefault(_dictionary, dictionaryKey, out exists);
+                ref var entry = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                    _dictionary,
+                    dictionaryKey,
+                    out exists
+                );
                 if (!exists || entry.Key.AsSpan().SequenceEqual(key))
                 {
 #pragma warning disable CS9082 // Local is returned by reference but was initialized to a value that cannot be returned by reference
@@ -40,7 +50,12 @@ namespace System.Reflection.Metadata.Ecma335
             }
         }
 
-        public BlobHandle GetOrAdd(ReadOnlySpan<byte> key, ImmutableArray<byte> immutableKey, BlobHandle value, out bool exists)
+        public BlobHandle GetOrAdd(
+            ReadOnlySpan<byte> key,
+            ImmutableArray<byte> immutableKey,
+            BlobHandle value,
+            out bool exists
+        )
         {
             ref var entry = ref GetValueRefOrAddDefault(key, out exists);
             if (exists)
@@ -62,14 +77,21 @@ namespace System.Reflection.Metadata.Ecma335
             return value;
         }
 #else
-        public BlobHandle GetOrAdd(ReadOnlySpan<byte> key, ImmutableArray<byte> immutableKey, BlobHandle value, out bool exists)
+        public BlobHandle GetOrAdd(
+            ReadOnlySpan<byte> key,
+            ImmutableArray<byte> immutableKey,
+            BlobHandle value,
+            out bool exists
+        )
         {
             int dictionarykey = Hash.GetFNVHashCode(key);
             KeyValuePair<ImmutableArray<byte>, BlobHandle> entry;
             while (true)
             {
-                if (!(exists = _dictionary.TryGetValue(dictionarykey, out entry))
-                    || entry.Key.AsSpan().SequenceEqual(key))
+                if (
+                    !(exists = _dictionary.TryGetValue(dictionarykey, out entry))
+                    || entry.Key.AsSpan().SequenceEqual(key)
+                )
                 {
                     break;
                 }
@@ -103,7 +125,9 @@ namespace System.Reflection.Metadata.Ecma335
 
         public int Count => _dictionary.Count;
 
-        public Dictionary<int, KeyValuePair<ImmutableArray<byte>, BlobHandle>>.Enumerator GetEnumerator() =>
-            _dictionary.GetEnumerator();
+        public Dictionary<
+            int,
+            KeyValuePair<ImmutableArray<byte>, BlobHandle>
+        >.Enumerator GetEnumerator() => _dictionary.GetEnumerator();
     }
 }

@@ -8,18 +8,18 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Runtime.Versioning;
+using System.Text;
 
 namespace System.Data.Entity.Design
 {
     /// <summary>
     /// This class is responsible for abstracting the knowledge
     /// of whether the user provided a TextWriter or a FilePath.
-    /// 
+    ///
     /// If the user gave us a filePath we try not to create the TextWriter
     /// till we absolutely need it in order to prevent the file from being created
     /// in error cases.
@@ -48,8 +48,8 @@ namespace System.Data.Entity.Design
         }
 
         [ResourceExposure(ResourceScope.None)] //The resource( target file path) is not exposed to the callers of this method
-        [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)] //For StreamWriter constructor and we pick 
-                                                                            //the target file path from class variable.
+        [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)] //For StreamWriter constructor and we pick
+        //the target file path from class variable.
         internal TextWriter GetOrCreateTextWriter()
         {
             if (_writer == null)

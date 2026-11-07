@@ -23,7 +23,9 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         static partial void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup);
+
         static partial void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup);
+
         static partial void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup);
 
         internal abstract RSASignaturePadding? SignaturePadding { get; }
@@ -40,7 +42,8 @@ namespace System.Security.Cryptography.Pkcs
             string? digestAlgorithmOid,
             HashAlgorithmName digestAlgorithmName,
             ReadOnlyMemory<byte>? signatureParameters,
-            X509Certificate2 certificate);
+            X509Certificate2 certificate
+        );
 
         protected abstract bool Sign(
 #if NETCOREAPP || NETSTANDARD2_1
@@ -54,12 +57,14 @@ namespace System.Security.Cryptography.Pkcs
             bool silent,
             [NotNullWhen(true)] out string? signatureAlgorithm,
             [NotNullWhen(true)] out byte[]? signatureValue,
-            out byte[]? signatureParameters);
+            out byte[]? signatureParameters
+        );
 
         internal static CmsSignature? ResolveAndVerifyKeyType(
             string signatureAlgorithmOid,
             AsymmetricAlgorithm? key,
-            RSASignaturePadding? rsaSignaturePadding)
+            RSASignaturePadding? rsaSignaturePadding
+        )
         {
             // Rules:
             // RSASignaturePadding 'wins' if specified if the signatureAlgorithmOid is any RSA OID.
@@ -124,9 +129,14 @@ namespace System.Security.Cryptography.Pkcs
             RSASignaturePadding? rsaSignaturePadding,
             out string? oid,
             out ReadOnlyMemory<byte> signatureValue,
-            out ReadOnlyMemory<byte> signatureParameters)
+            out ReadOnlyMemory<byte> signatureParameters
+        )
         {
-            CmsSignature? processor = ResolveAndVerifyKeyType(certificate.GetKeyAlgorithm(), key, rsaSignaturePadding);
+            CmsSignature? processor = ResolveAndVerifyKeyType(
+                certificate.GetKeyAlgorithm(),
+                key,
+                rsaSignaturePadding
+            );
 
             if (processor == null)
             {
@@ -144,7 +154,8 @@ namespace System.Security.Cryptography.Pkcs
                 silent,
                 out oid,
                 out byte[]? signature,
-                out byte[]? parameters);
+                out byte[]? parameters
+            );
 
             signatureValue = signature;
             signatureParameters = parameters;
@@ -153,13 +164,15 @@ namespace System.Security.Cryptography.Pkcs
 
         private static bool DsaDerToIeee(
             ReadOnlyMemory<byte> derSignature,
-            Span<byte> ieeeSignature)
+            Span<byte> ieeeSignature
+        )
         {
             int fieldSize = ieeeSignature.Length / 2;
 
             Debug.Assert(
                 fieldSize * 2 == ieeeSignature.Length,
-                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even");
+                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even"
+            );
 
             try
             {
@@ -218,7 +231,8 @@ namespace System.Security.Cryptography.Pkcs
 
             Debug.Assert(
                 fieldSize * 2 == ieeeSignature.Length,
-                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even");
+                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even"
+            );
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             {
@@ -229,7 +243,8 @@ namespace System.Security.Cryptography.Pkcs
                 BigInteger val = new BigInteger(
                     ieeeSignature.Slice(0, fieldSize),
                     isUnsigned: true,
-                    isBigEndian: true);
+                    isBigEndian: true
+                );
 
                 writer.WriteInteger(val);
 
@@ -237,7 +252,8 @@ namespace System.Security.Cryptography.Pkcs
                 val = new BigInteger(
                     ieeeSignature.Slice(fieldSize, fieldSize),
                     isUnsigned: true,
-                    isBigEndian: true);
+                    isBigEndian: true
+                );
 
                 writer.WriteInteger(val);
 #else

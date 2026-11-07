@@ -62,14 +62,8 @@ namespace System.Composition.Hosting.Core
 
         public object this[string key]
         {
-            get
-            {
-                return ActualMetadata[key];
-            }
-            set
-            {
-                ActualMetadata[key] = value;
-            }
+            get { return ActualMetadata[key]; }
+            set { ActualMetadata[key] = value; }
         }
 
         public void Add(KeyValuePair<string, object> item)

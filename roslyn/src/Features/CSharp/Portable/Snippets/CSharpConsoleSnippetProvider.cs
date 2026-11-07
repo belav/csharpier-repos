@@ -30,9 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConsoleSnippetProvider()
-        {
-        }
+        public CSharpConsoleSnippetProvider() { }
 
         protected override SyntaxNode? GetAsyncSupportingDeclaration(SyntaxToken token)
         {

@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// A MergedNamespaceSymbol represents a namespace that merges the contents of two or more other
     /// namespaces. Any sub-namespaces with the same names are also merged if they have two or more
     /// instances.
-    /// 
+    ///
     /// Merged namespaces are used to merge the symbols from multiple metadata modules and the
     /// source "module" into a single symbol tree that represents all the available symbols. The
     /// compiler resolves names against this merged set of symbols.
-    /// 
+    ///
     /// Typically there will not be very many merged namespaces in a Compilation: only the root
     /// namespaces and namespaces that are used in multiple referenced modules. (Microsoft, System,
     /// System.Xml, System.Diagnostics, System.Threading, ...)
@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceExtent extent,
             NamespaceSymbol containingNamespace,
             ImmutableArray<NamespaceSymbol> namespacesToMerge,
-            string nameOpt = null)
+            string nameOpt = null
+        )
         {
             // Currently, if we are just merging 1 namespace, we just return the namespace itself.
             // This is by far the most efficient, because it means that we don't create merged
@@ -84,16 +85,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return (namespacesToMerge.Length == 1 && nameOpt == null)
                 ? namespacesToMerge[0]
-                : new MergedNamespaceSymbol(extent, containingNamespace, namespacesToMerge, nameOpt);
+                : new MergedNamespaceSymbol(
+                    extent,
+                    containingNamespace,
+                    namespacesToMerge,
+                    nameOpt
+                );
         }
 
         // Constructor. Use static Create method to create instances.
-        private MergedNamespaceSymbol(NamespaceExtent extent, NamespaceSymbol containingNamespace, ImmutableArray<NamespaceSymbol> namespacesToMerge, string nameOpt)
+        private MergedNamespaceSymbol(
+            NamespaceExtent extent,
+            NamespaceSymbol containingNamespace,
+            ImmutableArray<NamespaceSymbol> namespacesToMerge,
+            string nameOpt
+        )
         {
             _extent = extent;
             _namespacesToMerge = namespacesToMerge;
             _containingNamespace = containingNamespace;
-            _cachedLookup = new CachingDictionary<ReadOnlyMemory<char>, Symbol>(SlowGetChildrenOfName, SlowGetChildNames, ReadOnlyMemoryOfCharComparer.Instance);
+            _cachedLookup = new CachingDictionary<ReadOnlyMemory<char>, Symbol>(
+                SlowGetChildrenOfName,
+                SlowGetChildNames,
+                ReadOnlyMemoryOfCharComparer.Instance
+            );
             _nameOpt = nameOpt;
 
 #if DEBUG
@@ -119,7 +134,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return null;
         }
 
-        internal override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var part in _namespacesToMerge)
             {
@@ -144,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (childSymbol.Kind == SymbolKind.Namespace)
                     {
-                        namespaceSymbols = namespaceSymbols ?? ArrayBuilder<NamespaceSymbol>.GetInstance();
+                        namespaceSymbols =
+                            namespaceSymbols ?? ArrayBuilder<NamespaceSymbol>.GetInstance();
                         namespaceSymbols.Add((NamespaceSymbol)childSymbol);
                     }
                     else
@@ -156,7 +175,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (namespaceSymbols != null)
             {
-                otherSymbols.Add(MergedNamespaceSymbol.Create(_extent, this, namespaceSymbols.ToImmutableAndFree()));
+                otherSymbols.Add(
+                    MergedNamespaceSymbol.Create(
+                        _extent,
+                        this,
+                        namespaceSymbols.ToImmutableAndFree()
+                    )
+                );
             }
 
             return otherSymbols.ToImmutableAndFree();
@@ -166,7 +191,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Method that is called from the CachingLookup to get all child names. Looks in all
         /// constituent namespaces.
         /// </summary>
-        private SegmentedHashSet<ReadOnlyMemory<char>> SlowGetChildNames(IEqualityComparer<ReadOnlyMemory<char>> comparer)
+        private SegmentedHashSet<ReadOnlyMemory<char>> SlowGetChildNames(
+            IEqualityComparer<ReadOnlyMemory<char>> comparer
+        )
         {
             // compute an upper bound for the final capacity of the set we'll return, to reduce heap churn
             int childCount = 0;
@@ -191,26 +218,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _nameOpt ?? _namespacesToMerge[0].Name;
-            }
+            get { return _nameOpt ?? _namespacesToMerge[0].Name; }
         }
 
         internal override NamespaceExtent Extent
         {
-            get
-            {
-                return _extent;
-            }
+            get { return _extent; }
         }
 
         public override ImmutableArray<NamespaceSymbol> ConstituentNamespaces
         {
-            get
-            {
-                return _namespacesToMerge;
-            }
+            get { return _namespacesToMerge; }
         }
 
         public override ImmutableArray<Symbol> GetMembers()
@@ -233,26 +251,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembersUnordered()
         {
-            return ImmutableArray.CreateRange<NamedTypeSymbol>(GetMembersUnordered().OfType<NamedTypeSymbol>());
+            return ImmutableArray.CreateRange<NamedTypeSymbol>(
+                GetMembersUnordered().OfType<NamedTypeSymbol>()
+            );
         }
 
         public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
         {
-            return ImmutableArray.CreateRange<NamedTypeSymbol>(GetMembers().OfType<NamedTypeSymbol>());
+            return ImmutableArray.CreateRange<NamedTypeSymbol>(
+                GetMembers().OfType<NamedTypeSymbol>()
+            );
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name)
         {
             // TODO - This is really inefficient. Creating a new array on each lookup needs to fixed!
-            return ImmutableArray.CreateRange<NamedTypeSymbol>(_cachedLookup[name].OfType<NamedTypeSymbol>());
+            return ImmutableArray.CreateRange<NamedTypeSymbol>(
+                _cachedLookup[name].OfType<NamedTypeSymbol>()
+            );
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingNamespace;
-            }
+            get { return _containingNamespace; }
         }
 
         public override AssemblySymbol ContainingAssembly
@@ -280,7 +301,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 //TODO: cache
-                return _namespacesToMerge.SelectMany(namespaceSymbol => namespaceSymbol.Locations).AsImmutable();
+                return _namespacesToMerge
+                    .SelectMany(namespaceSymbol => namespaceSymbol.Locations)
+                    .AsImmutable();
             }
         }
 
@@ -288,11 +311,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return _namespacesToMerge.SelectMany(namespaceSymbol => namespaceSymbol.DeclaringSyntaxReferences).AsImmutable();
+                return _namespacesToMerge
+                    .SelectMany(namespaceSymbol => namespaceSymbol.DeclaringSyntaxReferences)
+                    .AsImmutable();
             }
         }
 
-        internal override void GetExtensionMethods(ArrayBuilder<MethodSymbol> methods, string name, int arity, LookupOptions options)
+        internal override void GetExtensionMethods(
+            ArrayBuilder<MethodSymbol> methods,
+            string name,
+            int arity,
+            LookupOptions options
+        )
         {
             foreach (NamespaceSymbol namespaceSymbol in _namespacesToMerge)
             {

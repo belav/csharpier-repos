@@ -23,7 +23,8 @@ public static class RelationalTriggerBuilderExtensions
     public static IConventionTriggerBuilder? HasDatabaseName(
         this IConventionTriggerBuilder triggerBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!triggerBuilder.CanSetDatabaseName(name, fromDataAnnotation))
         {
@@ -41,8 +42,11 @@ public static class RelationalTriggerBuilderExtensions
     /// <param name="name">The database name of the trigger.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the database name can be set for the trigger.</returns>
-    public static bool CanSetDatabaseName(this IConventionTriggerBuilder triggerBuilder, string? name, bool fromDataAnnotation = false)
-        => triggerBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
+    public static bool CanSetDatabaseName(
+        this IConventionTriggerBuilder triggerBuilder,
+        string? name,
+        bool fromDataAnnotation = false
+    ) => triggerBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
 
     /// <summary>
     ///     Sets name of the table on which this trigger is defined.
@@ -54,7 +58,8 @@ public static class RelationalTriggerBuilderExtensions
     public static IConventionTriggerBuilder? HasTableName(
         this IConventionTriggerBuilder triggerBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!triggerBuilder.CanSetTableName(name, fromDataAnnotation))
         {
@@ -72,8 +77,16 @@ public static class RelationalTriggerBuilderExtensions
     /// <param name="name">The name of the table on which this trigger is defined.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the table name can be set for the trigger.</returns>
-    public static bool CanSetTableName(this IConventionTriggerBuilder triggerBuilder, string? name, bool fromDataAnnotation = false)
-        => triggerBuilder.CanSetAnnotation(RelationalAnnotationNames.TableName, name, fromDataAnnotation);
+    public static bool CanSetTableName(
+        this IConventionTriggerBuilder triggerBuilder,
+        string? name,
+        bool fromDataAnnotation = false
+    ) =>
+        triggerBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.TableName,
+            name,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Sets the schema of the table on which this trigger is defined.
@@ -85,7 +98,8 @@ public static class RelationalTriggerBuilderExtensions
     public static IConventionTriggerBuilder? HasTableSchema(
         this IConventionTriggerBuilder triggerBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!triggerBuilder.CanSetTableSchema(schema, fromDataAnnotation))
         {
@@ -103,6 +117,14 @@ public static class RelationalTriggerBuilderExtensions
     /// <param name="schema">The schema of the table on which this trigger is defined.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the database name can be set for the trigger.</returns>
-    public static bool CanSetTableSchema(this IConventionTriggerBuilder triggerBuilder, string? schema, bool fromDataAnnotation = false)
-        => triggerBuilder.CanSetAnnotation(RelationalAnnotationNames.Schema, schema, fromDataAnnotation);
+    public static bool CanSetTableSchema(
+        this IConventionTriggerBuilder triggerBuilder,
+        string? schema,
+        bool fromDataAnnotation = false
+    ) =>
+        triggerBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.Schema,
+            schema,
+            fromDataAnnotation
+        );
 }

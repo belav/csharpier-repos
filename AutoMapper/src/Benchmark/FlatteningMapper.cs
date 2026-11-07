@@ -1,9 +1,11 @@
 using AutoMapper;
+
 namespace Benchmark.Flattening;
 
 static class Config
 {
     public static readonly IMapper Mapper = CreateMapper();
+
     class DeepTypeProfile : Profile
     {
         public DeepTypeProfile()
@@ -13,6 +15,7 @@ static class Config
             CreateMap<Customer, CustomerDTO>();
         }
     }
+
     class ComplexTypesProfile : Profile
     {
         public ComplexTypesProfile()
@@ -21,10 +24,12 @@ static class Config
             CreateMap<InnerFoo, InnerFooDest>();
         }
     }
+
     class ConstructorProfile : Profile
     {
         public ConstructorProfile() => CreateMap<Model11, Dto11>();
     }
+
     class FlatteningProfile : Profile
     {
         public FlatteningProfile()
@@ -42,6 +47,7 @@ static class Config
             CreateMap<Model10, Dto10>();
         }
     }
+
     private static IMapper CreateMapper()
     {
         var config = new MapperConfiguration(cfg =>
@@ -54,35 +60,77 @@ static class Config
         //config.AssertConfigurationIsValid();
         return config.CreateMapper();
     }
-    public static TDestination Map<TSource, TDestination>(TSource source) => Mapper.Map<TSource, TDestination>(source);
+
+    public static TDestination Map<TSource, TDestination>(TSource source) =>
+        Mapper.Map<TSource, TDestination>(source);
 }
+
 public class DeepTypeMapper : IObjectToObjectMapper
 {
     private Customer _customer;
     public string Name { get; } = "Deep Types";
+
     public void Initialize()
     {
         _customer = new Customer()
         {
-            Address = new Address() { City = "istanbul", Country = "turkey", Id = 1, Street = "istiklal cad." },
-            HomeAddress = new Address() { City = "istanbul", Country = "turkey", Id = 2, Street = "istiklal cad." },
+            Address = new Address()
+            {
+                City = "istanbul",
+                Country = "turkey",
+                Id = 1,
+                Street = "istiklal cad.",
+            },
+            HomeAddress = new Address()
+            {
+                City = "istanbul",
+                Country = "turkey",
+                Id = 2,
+                Street = "istiklal cad.",
+            },
             Id = 1,
             Name = "Eduardo Najera",
             Credit = 234.7m,
             WorkAddresses = new List<Address>()
             {
-                new Address() {City = "istanbul", Country = "turkey", Id = 5, Street = "istiklal cad."},
-                new Address() {City = "izmir", Country = "turkey", Id = 6, Street = "konak"}
+                new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 5,
+                    Street = "istiklal cad.",
+                },
+                new Address()
+                {
+                    City = "izmir",
+                    Country = "turkey",
+                    Id = 6,
+                    Street = "konak",
+                },
             },
             Addresses = new List<Address>()
             {
-                new Address() {City = "istanbul", Country = "turkey", Id = 3, Street = "istiklal cad."},
-                new Address() {City = "izmir", Country = "turkey", Id = 4, Street = "konak"}
-            }.ToArray()
+                new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 3,
+                    Street = "istiklal cad.",
+                },
+                new Address()
+                {
+                    City = "izmir",
+                    Country = "turkey",
+                    Id = 4,
+                    Street = "konak",
+                },
+            }.ToArray(),
         };
     }
+
     public object Map() => Config.Map<Customer, CustomerDTO>(_customer);
 }
+
 public class Address
 {
     public int Id { get; set; }
@@ -119,29 +167,67 @@ public class CustomerDTO
     public List<AddressDTO> WorkAddresses { get; set; }
     public string AddressCity { get; set; }
 }
+
 public class ManualDeepTypeMapper : IObjectToObjectMapper
 {
     private Customer _customer;
     public string Name { get; } = "Manual Deep Types";
+
     public void Initialize()
     {
         _customer = new Customer()
         {
-            Address = new Address() { City = "istanbul", Country = "turkey", Id = 1, Street = "istiklal cad." },
-            HomeAddress = new Address() { City = "istanbul", Country = "turkey", Id = 2, Street = "istiklal cad." },
+            Address = new Address()
+            {
+                City = "istanbul",
+                Country = "turkey",
+                Id = 1,
+                Street = "istiklal cad.",
+            },
+            HomeAddress = new Address()
+            {
+                City = "istanbul",
+                Country = "turkey",
+                Id = 2,
+                Street = "istiklal cad.",
+            },
             Id = 1,
             Name = "Eduardo Najera",
             Credit = 234.7m,
             WorkAddresses = new List<Address>()
             {
-                new Address() {City = "istanbul", Country = "turkey", Id = 5, Street = "istiklal cad."},
-                new Address() {City = "izmir", Country = "turkey", Id = 6, Street = "konak"}
+                new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 5,
+                    Street = "istiklal cad.",
+                },
+                new Address()
+                {
+                    City = "izmir",
+                    Country = "turkey",
+                    Id = 6,
+                    Street = "konak",
+                },
             },
             Addresses = new List<Address>()
             {
-                new Address() {City = "istanbul", Country = "turkey", Id = 3, Street = "istiklal cad."},
-                new Address() {City = "izmir", Country = "turkey", Id = 4, Street = "konak"}
-            }.ToArray()
+                new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 3,
+                    Street = "istiklal cad.",
+                },
+                new Address()
+                {
+                    City = "izmir",
+                    Country = "turkey",
+                    Id = 4,
+                    Street = "konak",
+                },
+            }.ToArray(),
         };
     }
 
@@ -153,32 +239,58 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
         dto.Name = _customer.Name;
         dto.AddressCity = _customer.Address.City;
 
-        dto.Address = new Address() { Id = _customer.Address.Id, Street = _customer.Address.Street, Country = _customer.Address.Country, City = _customer.Address.City };
+        dto.Address = new Address()
+        {
+            Id = _customer.Address.Id,
+            Street = _customer.Address.Street,
+            Country = _customer.Address.Country,
+            City = _customer.Address.City,
+        };
 
-        dto.HomeAddress = new AddressDTO() { Id = _customer.HomeAddress.Id, Country = _customer.HomeAddress.Country, City = _customer.HomeAddress.City };
+        dto.HomeAddress = new AddressDTO()
+        {
+            Id = _customer.HomeAddress.Id,
+            Country = _customer.HomeAddress.Country,
+            City = _customer.HomeAddress.City,
+        };
 
         dto.Addresses = new AddressDTO[_customer.Addresses.Length];
         for (int i = 0; i < _customer.Addresses.Length; i++)
         {
-            dto.Addresses[i] = new AddressDTO() { Id = _customer.Addresses[i].Id, Country = _customer.Addresses[i].Country, City = _customer.Addresses[i].City };
+            dto.Addresses[i] = new AddressDTO()
+            {
+                Id = _customer.Addresses[i].Id,
+                Country = _customer.Addresses[i].Country,
+                City = _customer.Addresses[i].City,
+            };
         }
 
         dto.WorkAddresses = new List<AddressDTO>();
         foreach (var workAddress in _customer.WorkAddresses)
         {
-            dto.WorkAddresses.Add(new AddressDTO() { Id = workAddress.Id, Country = workAddress.Country, City = workAddress.City });
+            dto.WorkAddresses.Add(
+                new AddressDTO()
+                {
+                    Id = workAddress.Id,
+                    Country = workAddress.Country,
+                    City = workAddress.City,
+                }
+            );
         }
         return dto;
     }
 }
+
 public class ComplexTypeMapper : IObjectToObjectMapper
 {
     private Foo _foo;
     public string Name { get; } = "Complex Types";
+
     public void Initialize()
     {
         _foo = Foo.New();
     }
+
     public object Map()
     {
         var dest = Config.Map<Foo, FooDest>(_foo);
@@ -188,30 +300,46 @@ public class ComplexTypeMapper : IObjectToObjectMapper
 
 public class Foo
 {
-    public static Foo New() => new Foo
-    {
-        Name = "foo",
-        Int32 = 12,
-        Int64 = 123123,
-        NullInt = 16,
-        DateTime = DateTime.Now,
-        Doublen = 2312112,
-        Foo1 = new InnerFoo { Name = "foo one" },
-        Foos = new List<InnerFoo>
+    public static Foo New() =>
+        new Foo
+        {
+            Name = "foo",
+            Int32 = 12,
+            Int64 = 123123,
+            NullInt = 16,
+            DateTime = DateTime.Now,
+            Doublen = 2312112,
+            Foo1 = new InnerFoo { Name = "foo one" },
+            Foos = new List<InnerFoo>
             {
-                new InnerFoo {Name = "j1", Int64 = 123, NullInt = 321},
-                new InnerFoo {Name = "j2", Int32 = 12345, NullInt = 54321},
-                new InnerFoo {Name = "j3", Int32 = 12345, NullInt = 54321},
+                new InnerFoo
+                {
+                    Name = "j1",
+                    Int64 = 123,
+                    NullInt = 321,
+                },
+                new InnerFoo
+                {
+                    Name = "j2",
+                    Int32 = 12345,
+                    NullInt = 54321,
+                },
+                new InnerFoo
+                {
+                    Name = "j3",
+                    Int32 = 12345,
+                    NullInt = 54321,
+                },
             },
-        FooArr = new[]
+            FooArr = new[]
             {
-                new InnerFoo {Name = "a1"},
-                new InnerFoo {Name = "a2"},
-                new InnerFoo {Name = "a3"},
+                new InnerFoo { Name = "a1" },
+                new InnerFoo { Name = "a2" },
+                new InnerFoo { Name = "a3" },
             },
-        IntArr = new[] { 1, 2, 3, 4, 5 },
-        Ints = new[] { 7, 8, 9 },
-    };
+            IntArr = new[] { 1, 2, 3, 4, 5 },
+            Ints = new[] { 7, 8, 9 },
+        };
 
     public string Name { get; set; }
 
@@ -307,38 +435,58 @@ public class ManualComplexTypeMapper : IObjectToObjectMapper
             IntArr = new int[_foo.IntArr.Length],
             Ints = _foo.Ints.ToArray(),
         };
-        foreach(var foo in _foo.Foos)
+        foreach (var foo in _foo.Foos)
         {
-            dest.Foos.Add(new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt });
+            dest.Foos.Add(
+                new InnerFooDest
+                {
+                    Name = foo.Name,
+                    Int64 = foo.Int64,
+                    NullInt = foo.NullInt,
+                }
+            );
         }
         ;
-        for(int index = 0; index < _foo.Foos.Count; index++)
+        for (int index = 0; index < _foo.Foos.Count; index++)
         {
             var foo = _foo.Foos[index];
-            dest.FooArr[index] = new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt };
+            dest.FooArr[index] = new InnerFooDest
+            {
+                Name = foo.Name,
+                Int64 = foo.Int64,
+                NullInt = foo.NullInt,
+            };
         }
         Array.Copy(_foo.IntArr, dest.IntArr, _foo.IntArr.Length);
         return dest;
     }
 }
+
 public class CtorMapper : IObjectToObjectMapper
 {
     private Model11 _model;
     public string Name => "CtorMapper";
+
     public void Initialize() => _model = new Model11 { Value = 5 };
+
     public object Map() => Config.Map<Model11, Dto11>(_model);
 }
+
 public class ManualCtorMapper : IObjectToObjectMapper
 {
     private Model11 _model;
     public string Name => "ManualCtorMapper";
+
     public void Initialize() => _model = new Model11 { Value = 5 };
+
     public object Map() => new Dto11(_model.Value);
 }
+
 public class FlatteningMapper : IObjectToObjectMapper
 {
     private ModelObject _source;
     public string Name => "AutoMapper";
+
     public void Initialize()
     {
         _source = new ModelObject
@@ -347,28 +495,22 @@ public class FlatteningMapper : IObjectToObjectMapper
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject
-                {
-                    IAmACoolProperty = "Cool daddy-o"
-                }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
-            Sub2 = new ModelSubObject
-            {
-                ProperName = "Sub 2 name"
-            },
-            SubWithExtraName = new ModelSubObject
-            {
-                ProperName = "Some other name"
-            },
+            Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
+            SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
         };
         var mapper = Config.Mapper;
     }
+
     public object Map() => Config.Map<ModelObject, ModelDto>(_source);
 }
+
 public class ManualMapper : IObjectToObjectMapper
 {
     private ModelObject _source;
     public string Name => "Manual";
+
     public void Initialize()
     {
         _source = new ModelObject
@@ -377,21 +519,13 @@ public class ManualMapper : IObjectToObjectMapper
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject
-                {
-                    IAmACoolProperty = "Cool daddy-o"
-                }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
-            Sub2 = new ModelSubObject
-            {
-                ProperName = "Sub 2 name"
-            },
-            SubWithExtraName = new ModelSubObject
-            {
-                ProperName = "Some other name"
-            },
+            Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
+            SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
         };
     }
+
     public object Map()
     {
         return new ModelDto
@@ -400,10 +534,11 @@ public class ManualMapper : IObjectToObjectMapper
             Sub2ProperName = _source.Sub2.ProperName,
             SubProperName = _source.Sub.ProperName,
             SubSubSubIAmACoolProperty = _source.Sub.SubSub.IAmACoolProperty,
-            SubWithExtraNameProperName = _source.SubWithExtraName.ProperName
+            SubWithExtraNameProperName = _source.SubWithExtraName.ProperName,
         };
     }
 }
+
 public class Model1
 {
     public int Value { get; set; }

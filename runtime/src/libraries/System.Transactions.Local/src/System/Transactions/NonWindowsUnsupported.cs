@@ -15,36 +15,35 @@ namespace System.Transactions.Oletx
     {
         internal object? NodeName { get; set; }
 
-        internal OletxTransactionManager(string nodeName)
-        {
-        }
+        internal OletxTransactionManager(string nodeName) { }
 
         internal IPromotedEnlistment ReenlistTransaction(
             Guid resourceManagerIdentifier,
             byte[] resourceManagerRecoveryInformation,
-            RecoveringInternalEnlistment internalEnlistment)
-            => throw NotSupported();
+            RecoveringInternalEnlistment internalEnlistment
+        ) => throw NotSupported();
 
-        internal OletxCommittableTransaction CreateTransaction(TransactionOptions options)
-            => throw NotSupported();
+        internal OletxCommittableTransaction CreateTransaction(TransactionOptions options) =>
+            throw NotSupported();
 
-        internal void ResourceManagerRecoveryComplete(Guid resourceManagerIdentifier)
-            => throw NotSupported();
+        internal void ResourceManagerRecoveryComplete(Guid resourceManagerIdentifier) =>
+            throw NotSupported();
 
-        internal static byte[] GetWhereabouts()
-            => throw NotSupported();
+        internal static byte[] GetWhereabouts() => throw NotSupported();
 
-        internal static Transaction GetTransactionFromDtcTransaction(IDtcTransaction transactionNative)
-            => throw NotSupported();
+        internal static Transaction GetTransactionFromDtcTransaction(
+            IDtcTransaction transactionNative
+        ) => throw NotSupported();
 
-        internal static OletxTransaction GetTransactionFromExportCookie(byte[] cookie, Guid txId)
-            => throw NotSupported();
+        internal static OletxTransaction GetTransactionFromExportCookie(byte[] cookie, Guid txId) =>
+            throw NotSupported();
 
-        internal static OletxTransaction GetOletxTransactionFromTransmitterPropagationToken(byte[] propagationToken)
-            => throw NotSupported();
+        internal static OletxTransaction GetOletxTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        ) => throw NotSupported();
 
-        internal static Exception NotSupported()
-            => new PlatformNotSupportedException(SR.DistributedNotSupported);
+        internal static Exception NotSupported() =>
+            new PlatformNotSupportedException(SR.DistributedNotSupported);
     }
 
     /// <summary>
@@ -60,9 +59,7 @@ namespace System.Transactions.Oletx
     /// </summary>
     internal class OletxTransaction : ISerializable
     {
-        internal OletxTransaction()
-        {
-        }
+        internal OletxTransaction() { }
 
         protected OletxTransaction(SerializationInfo serializationInfo, StreamingContext context)
         {
@@ -84,35 +81,30 @@ namespace System.Transactions.Oletx
 
         internal IPromotedEnlistment EnlistVolatile(
             InternalEnlistment internalEnlistment,
-            EnlistmentOptions enlistmentOptions)
-            => throw NotSupported();
+            EnlistmentOptions enlistmentOptions
+        ) => throw NotSupported();
 
         internal IPromotedEnlistment EnlistDurable(
             Guid resourceManagerIdentifier,
             DurableInternalEnlistment internalEnlistment,
             bool v,
-            EnlistmentOptions enlistmentOptions)
-            => throw NotSupported();
+            EnlistmentOptions enlistmentOptions
+        ) => throw NotSupported();
 
-        internal void Rollback()
-            => throw NotSupported();
+        internal void Rollback() => throw NotSupported();
 
-        internal OletxDependentTransaction DependentClone(bool delayCommit)
-            => throw NotSupported();
+        internal OletxDependentTransaction DependentClone(bool delayCommit) => throw NotSupported();
 
         internal IPromotedEnlistment EnlistVolatile(
             VolatileDemultiplexer volatileDemux,
-            EnlistmentOptions enlistmentOptions)
-            => throw NotSupported();
+            EnlistmentOptions enlistmentOptions
+        ) => throw NotSupported();
 
-        internal static byte[] GetExportCookie(byte[] whereaboutsCopy)
-            => throw NotSupported();
+        internal static byte[] GetExportCookie(byte[] whereaboutsCopy) => throw NotSupported();
 
-        internal static byte[] GetTransmitterPropagationToken()
-            => throw NotSupported();
+        internal static byte[] GetTransmitterPropagationToken() => throw NotSupported();
 
-        internal static IDtcTransaction GetDtcTransaction()
-            => throw NotSupported();
+        internal static IDtcTransaction GetDtcTransaction() => throw NotSupported();
 
         public void GetObjectData(SerializationInfo serializationInfo, StreamingContext context)
         {
@@ -126,12 +118,10 @@ namespace System.Transactions.Oletx
             throw new PlatformNotSupportedException();
         }
 
-        internal void Dispose()
-        {
-        }
+        internal void Dispose() { }
 
-        internal static Exception NotSupported()
-            => new PlatformNotSupportedException(SR.DistributedNotSupported);
+        internal static Exception NotSupported() =>
+            new PlatformNotSupportedException(SR.DistributedNotSupported);
 
         internal sealed class RealOletxTransaction
         {

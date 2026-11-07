@@ -27,17 +27,18 @@ namespace System.Security.Cryptography
 
         public override byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
-            PbeParameters pbeParameters) =>
-            _wrapped.ExportEncryptedPkcs8PrivateKey(passwordBytes, pbeParameters);
+            PbeParameters pbeParameters
+        ) => _wrapped.ExportEncryptedPkcs8PrivateKey(passwordBytes, pbeParameters);
 
         public override byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
-            PbeParameters pbeParameters) =>
-            _wrapped.ExportEncryptedPkcs8PrivateKey(password, pbeParameters);
+            PbeParameters pbeParameters
+        ) => _wrapped.ExportEncryptedPkcs8PrivateKey(password, pbeParameters);
 
         public override byte[] ExportPkcs8PrivateKey() => _wrapped.ExportPkcs8PrivateKey();
 
-        public override byte[] ExportSubjectPublicKeyInfo() => _wrapped.ExportSubjectPublicKeyInfo();
+        public override byte[] ExportSubjectPublicKeyInfo() =>
+            _wrapped.ExportSubjectPublicKeyInfo();
 
         public override void FromXmlString(string xmlString) => _wrapped.FromXmlString(xmlString);
 
@@ -47,59 +48,70 @@ namespace System.Security.Cryptography
         public override RSAParameters ExportParameters(bool includePrivateParameters) =>
             _wrapped.ExportParameters(includePrivateParameters);
 
-        public override void ImportParameters(RSAParameters parameters) => _wrapped.ImportParameters(parameters);
+        public override void ImportParameters(RSAParameters parameters) =>
+            _wrapped.ImportParameters(parameters);
 
-        public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) => _wrapped.Encrypt(data, padding);
+        public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) =>
+            _wrapped.Encrypt(data, padding);
 
-        public override byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) => _wrapped.Decrypt(data, padding);
+        public override byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) =>
+            _wrapped.Decrypt(data, padding);
 
         public override byte[] SignHash(
             byte[] hash,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding) =>
-            _wrapped.SignHash(hash, hashAlgorithm, padding);
+            RSASignaturePadding padding
+        ) => _wrapped.SignHash(hash, hashAlgorithm, padding);
 
         public override bool VerifyHash(
             byte[] hash,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding) =>
-            _wrapped.VerifyHash(hash, signature, hashAlgorithm, padding);
+            RSASignaturePadding padding
+        ) => _wrapped.VerifyHash(hash, signature, hashAlgorithm, padding);
 
         public override bool TryDecrypt(
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             RSAEncryptionPadding padding,
-            out int bytesWritten) =>
-            _wrapped.TryDecrypt(data, destination, padding, out bytesWritten);
+            out int bytesWritten
+        ) => _wrapped.TryDecrypt(data, destination, padding, out bytesWritten);
 
         public override bool TryEncrypt(
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             RSAEncryptionPadding padding,
-            out int bytesWritten) =>
-            _wrapped.TryEncrypt(data, destination, padding, out bytesWritten);
+            out int bytesWritten
+        ) => _wrapped.TryEncrypt(data, destination, padding, out bytesWritten);
 
         public override bool TrySignHash(
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding,
-            out int bytesWritten) =>
-            _wrapped.TrySignHash(hash, destination, hashAlgorithm, padding, out bytesWritten);
+            out int bytesWritten
+        ) => _wrapped.TrySignHash(hash, destination, hashAlgorithm, padding, out bytesWritten);
 
         public override bool VerifyHash(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding) =>
-            _wrapped.VerifyHash(hash, signature, hashAlgorithm, padding);
+            RSASignaturePadding padding
+        ) => _wrapped.VerifyHash(hash, signature, hashAlgorithm, padding);
 
-        [Obsolete(Obsoletions.RsaEncryptDecryptValueMessage, DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RsaEncryptDecryptValueMessage,
+            DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override byte[] DecryptValue(byte[] rgb) => _wrapped.DecryptValue(rgb);
 
-        [Obsolete(Obsoletions.RsaEncryptDecryptValueMessage, DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RsaEncryptDecryptValueMessage,
+            DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override byte[] EncryptValue(byte[] rgb) => _wrapped.EncryptValue(rgb);
 
@@ -108,19 +120,22 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding) =>
-            _wrapped.SignData(data, offset, count, hashAlgorithm, padding);
+            RSASignaturePadding padding
+        ) => _wrapped.SignData(data, offset, count, hashAlgorithm, padding);
 
-        public override byte[] SignData(Stream data, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            _wrapped.SignData(data, hashAlgorithm, padding);
+        public override byte[] SignData(
+            Stream data,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => _wrapped.SignData(data, hashAlgorithm, padding);
 
         public override bool TrySignData(
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding,
-            out int bytesWritten) =>
-            _wrapped.TrySignData(data, destination, hashAlgorithm, padding, out bytesWritten);
+            out int bytesWritten
+        ) => _wrapped.TrySignData(data, destination, hashAlgorithm, padding, out bytesWritten);
 
         public override bool VerifyData(
             byte[] data,
@@ -128,15 +143,15 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding) =>
-            _wrapped.VerifyData(data, offset, count, signature, hashAlgorithm, padding);
+            RSASignaturePadding padding
+        ) => _wrapped.VerifyData(data, offset, count, signature, hashAlgorithm, padding);
 
         public override bool VerifyData(
             ReadOnlySpan<byte> data,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding) =>
-            _wrapped.VerifyData(data, signature, hashAlgorithm, padding);
+            RSASignaturePadding padding
+        ) => _wrapped.VerifyData(data, signature, hashAlgorithm, padding);
 
         public override byte[] ExportRSAPrivateKey() => _wrapped.ExportRSAPrivateKey();
 
@@ -148,28 +163,46 @@ namespace System.Security.Cryptography
         public override bool TryExportRSAPublicKey(Span<byte> destination, out int bytesWritten) =>
             _wrapped.TryExportRSAPublicKey(destination, out bytesWritten);
 
-        public override bool TryExportSubjectPublicKeyInfo(Span<byte> destination, out int bytesWritten) =>
-            _wrapped.TryExportSubjectPublicKeyInfo(destination, out bytesWritten);
+        public override bool TryExportSubjectPublicKeyInfo(
+            Span<byte> destination,
+            out int bytesWritten
+        ) => _wrapped.TryExportSubjectPublicKeyInfo(destination, out bytesWritten);
 
-        public override bool TryExportPkcs8PrivateKey(Span<byte> destination, out int bytesWritten) =>
-            _wrapped.TryExportPkcs8PrivateKey(destination, out bytesWritten);
+        public override bool TryExportPkcs8PrivateKey(
+            Span<byte> destination,
+            out int bytesWritten
+        ) => _wrapped.TryExportPkcs8PrivateKey(destination, out bytesWritten);
 
         public override bool TryExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten) =>
-            _wrapped.TryExportEncryptedPkcs8PrivateKey(password, pbeParameters, destination, out bytesWritten);
+            out int bytesWritten
+        ) =>
+            _wrapped.TryExportEncryptedPkcs8PrivateKey(
+                password,
+                pbeParameters,
+                destination,
+                out bytesWritten
+            );
 
         public override bool TryExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten) =>
-            _wrapped.TryExportEncryptedPkcs8PrivateKey(passwordBytes, pbeParameters, destination, out bytesWritten);
+            out int bytesWritten
+        ) =>
+            _wrapped.TryExportEncryptedPkcs8PrivateKey(
+                passwordBytes,
+                pbeParameters,
+                destination,
+                out bytesWritten
+            );
 
-        public override void ImportSubjectPublicKeyInfo(ReadOnlySpan<byte> source, out int bytesRead) =>
-            _wrapped.ImportSubjectPublicKeyInfo(source, out bytesRead);
+        public override void ImportSubjectPublicKeyInfo(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        ) => _wrapped.ImportSubjectPublicKeyInfo(source, out bytesRead);
 
         public override void ImportRSAPublicKey(ReadOnlySpan<byte> source, out int bytesRead) =>
             _wrapped.ImportRSAPublicKey(source, out bytesRead);
@@ -183,23 +216,27 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead) =>
-            _wrapped.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
+            out int bytesRead
+        ) => _wrapped.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
 
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead) =>
-            _wrapped.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
+            out int bytesRead
+        ) => _wrapped.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
 
         public override void ImportFromPem(ReadOnlySpan<char> input) =>
             _wrapped.ImportFromPem(input);
 
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<char> password) =>
-            _wrapped.ImportFromEncryptedPem(input, password);
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<char> password
+        ) => _wrapped.ImportFromEncryptedPem(input, password);
 
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<byte> passwordBytes) =>
-            _wrapped.ImportFromEncryptedPem(input, passwordBytes);
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<byte> passwordBytes
+        ) => _wrapped.ImportFromEncryptedPem(input, passwordBytes);
 
         public override string? KeyExchangeAlgorithm => _wrapped.KeyExchangeAlgorithm;
 

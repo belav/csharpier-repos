@@ -6,16 +6,12 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class FindSqliteTest : FindTestBase<FindSqliteTest.FindSqliteFixture>
 {
     protected FindSqliteTest(FindSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class FindSqliteTestSet : FindSqliteTest
     {
         public FindSqliteTestSet(FindSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         protected override TestFinder Finder { get; } = new FindViaSetFinder();
     }
@@ -23,9 +19,7 @@ public abstract class FindSqliteTest : FindTestBase<FindSqliteTest.FindSqliteFix
     public class FindSqliteTestContext : FindSqliteTest
     {
         public FindSqliteTestContext(FindSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         protected override TestFinder Finder { get; } = new FindViaContextFinder();
     }
@@ -33,16 +27,13 @@ public abstract class FindSqliteTest : FindTestBase<FindSqliteTest.FindSqliteFix
     public class FindSqliteTestNonGeneric : FindSqliteTest
     {
         public FindSqliteTestNonGeneric(FindSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         protected override TestFinder Finder { get; } = new FindViaNonGenericContextFinder();
     }
 
     public class FindSqliteFixture : FindFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

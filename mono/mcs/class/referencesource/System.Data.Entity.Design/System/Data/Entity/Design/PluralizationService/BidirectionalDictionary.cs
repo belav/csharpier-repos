@@ -8,9 +8,9 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
 
 namespace System.Data.Entity.Design.PluralizationServices
 {
@@ -29,7 +29,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             this.SecondToFirstDictionary = new Dictionary<TSecond, TFirst>();
         }
 
-        internal BidirectionalDictionary(Dictionary<TFirst,TSecond> firstToSecondDictionary) : this()
+        internal BidirectionalDictionary(Dictionary<TFirst, TSecond> firstToSecondDictionary)
+            : this()
         {
             foreach (var key in firstToSecondDictionary.Keys)
             {
@@ -92,37 +93,46 @@ namespace System.Data.Entity.Design.PluralizationServices
 
     internal class StringBidirectionalDictionary : BidirectionalDictionary<string, string>
     {
-
         internal StringBidirectionalDictionary()
-            : base()
-        { }
-        internal StringBidirectionalDictionary(Dictionary<string, string> firstToSecondDictionary)
-            : base(firstToSecondDictionary)
-        { }
+            : base() { }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        internal StringBidirectionalDictionary(Dictionary<string, string> firstToSecondDictionary)
+            : base(firstToSecondDictionary) { }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         internal override bool ExistsInFirst(string value)
         {
             return base.ExistsInFirst(value.ToLowerInvariant());
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         internal override bool ExistsInSecond(string value)
         {
             return base.ExistsInSecond(value.ToLowerInvariant());
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         internal override string GetFirstValue(string value)
         {
             return base.GetFirstValue(value.ToLowerInvariant());
         }
-        
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         internal override string GetSecondValue(string value)
         {
             return base.GetSecondValue(value.ToLowerInvariant());
         }
- 
     }
 }

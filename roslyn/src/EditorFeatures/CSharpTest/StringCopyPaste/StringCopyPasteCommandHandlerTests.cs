@@ -32,31 +32,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         internal sealed class StringCopyPasteTestState : AbstractCommandHandlerTestState
         {
             private static readonly TestComposition s_composition =
-                EditorTestCompositions.EditorFeaturesWpf
-                    .AddParts(typeof(StringCopyPasteCommandHandler));
+                EditorTestCompositions.EditorFeaturesWpf.AddParts(
+                    typeof(StringCopyPasteCommandHandler)
+                );
 
             private static readonly TestComposition s_compositionWithMockCopyPasteService =
-                EditorTestCompositions.EditorFeaturesWpf
-                    .RemoveExcludedPartTypes(typeof(WpfStringCopyPasteService))
+                EditorTestCompositions
+                    .EditorFeaturesWpf.RemoveExcludedPartTypes(typeof(WpfStringCopyPasteService))
                     .AddParts(typeof(TestStringCopyPasteService))
                     .AddParts(typeof(StringCopyPasteCommandHandler));
 
             public readonly StringCopyPasteCommandHandler CommandHandler;
 
             public StringCopyPasteTestState(XElement workspaceElement, bool mockCopyPasteService)
-                : base(workspaceElement, mockCopyPasteService
-                      ? s_compositionWithMockCopyPasteService
-                      : s_composition)
+                : base(
+                    workspaceElement,
+                    mockCopyPasteService ? s_compositionWithMockCopyPasteService : s_composition
+                )
             {
-                CommandHandler = (StringCopyPasteCommandHandler)GetExportedValues<ICommandHandler>().
-                    Single(c => c is StringCopyPasteCommandHandler);
+                CommandHandler = (StringCopyPasteCommandHandler)
+                    GetExportedValues<ICommandHandler>()
+                        .Single(c => c is StringCopyPasteCommandHandler);
             }
 
-            public static StringCopyPasteTestState CreateTestState(string? copyFileMarkup, string pasteFileMarkup, bool mockCopyPasteService)
-                => new(GetWorkspaceXml(copyFileMarkup, pasteFileMarkup), mockCopyPasteService);
+            public static StringCopyPasteTestState CreateTestState(
+                string? copyFileMarkup,
+                string pasteFileMarkup,
+                bool mockCopyPasteService
+            ) => new(GetWorkspaceXml(copyFileMarkup, pasteFileMarkup), mockCopyPasteService);
 
-            public static XElement GetWorkspaceXml(string? copyFileMarkup, string pasteFileMarkup)
-                => XElement.Parse(($@"
+            public static XElement GetWorkspaceXml(
+                string? copyFileMarkup,
+                string pasteFileMarkup
+            ) =>
+                XElement.Parse(
+                    (
+                        $@"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document Markup=""SpansOnly"">{pasteFileMarkup}</Document>
@@ -65,46 +76,75 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
     <Project Language=""C#"" CommonReferences=""true"">
         <Document Markup=""SpansOnly"">{copyFileMarkup}</Document>
     </Project>")}
-</Workspace>"));
+</Workspace>"
+                    )
+                );
 
             internal void AssertCodeIs(string expectedCode)
             {
                 TestFileMarkupParser.GetPositionAndSpans(
-                    expectedCode, out var massaged, out int? caretPosition, out ImmutableDictionary<string, ImmutableArray<TextSpan>> spans);
+                    expectedCode,
+                    out var massaged,
+                    out int? caretPosition,
+                    out ImmutableDictionary<string, ImmutableArray<TextSpan>> spans
+                );
                 Assert.Equal(massaged, TextView.TextSnapshot.GetText());
                 Assert.Equal(caretPosition, TextView.Caret.Position.BufferPosition.Position);
 
-                var virtualSpaces = spans.SingleOrDefault(kvp => kvp.Key.StartsWith("VirtualSpaces#"));
+                var virtualSpaces = spans.SingleOrDefault(kvp =>
+                    kvp.Key.StartsWith("VirtualSpaces#")
+                );
                 if (virtualSpaces.Key != null)
                 {
                     var virtualOffset = int.Parse(virtualSpaces.Key["VirtualSpaces-".Length..]);
                     Assert.True(TextView.Caret.InVirtualSpace);
-                    Assert.Equal(virtualOffset, TextView.Caret.Position.VirtualBufferPosition.VirtualSpaces);
+                    Assert.Equal(
+                        virtualOffset,
+                        TextView.Caret.Position.VirtualBufferPosition.VirtualSpaces
+                    );
                 }
             }
 
-            public void TestCopyPaste(string expectedMarkup, string? pasteText, bool pasteTextIsKnown, string afterUndoMarkup)
+            public void TestCopyPaste(
+                string expectedMarkup,
+                string? pasteText,
+                bool pasteTextIsKnown,
+                string afterUndoMarkup
+            )
             {
                 var workspace = this.Workspace;
 
                 // Ensure we clear out the clipboard so that a prior copy/paste doesn't corrupt the test.
-                var service = workspace.Services.GetRequiredService<IStringCopyPasteService>() as TestStringCopyPasteService;
+                var service =
+                    workspace.Services.GetRequiredService<IStringCopyPasteService>()
+                    as TestStringCopyPasteService;
                 service?.TrySetClipboardData(StringCopyPasteCommandHandler.KeyAndVersion, "");
 
-                var copyDocument = this.Workspace.Documents.FirstOrDefault(d => d.AnnotatedSpans.ContainsKey("Copy"));
+                var copyDocument = this.Workspace.Documents.FirstOrDefault(d =>
+                    d.AnnotatedSpans.ContainsKey("Copy")
+                );
                 if (copyDocument != null)
                 {
                     Assert.Null(pasteText);
                     var copySpans = copyDocument.AnnotatedSpans["Copy"];
 
-                    SetSelection(copyDocument, copySpans, out var copyTextView, out var copyTextBuffer);
+                    SetSelection(
+                        copyDocument,
+                        copySpans,
+                        out var copyTextView,
+                        out var copyTextBuffer
+                    );
 
                     CommandHandler.ExecuteCommand(
-                        new CopyCommandArgs(copyTextView, copyTextBuffer), () =>
+                        new CopyCommandArgs(copyTextView, copyTextBuffer),
+                        () =>
                         {
-                            var copyEditorOperations = GetService<IEditorOperationsFactoryService>().GetEditorOperations(copyTextView);
+                            var copyEditorOperations = GetService<IEditorOperationsFactoryService>()
+                                .GetEditorOperations(copyTextView);
                             Assert.True(copyEditorOperations.CopySelection());
-                        }, TestCommandExecutionContext.Create());
+                        },
+                        TestCommandExecutionContext.Create()
+                    );
                 }
                 else
                 {
@@ -116,7 +156,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 {
                     // if the user didn't supply text to paste, then just paste in what we put in the clipboard above.
                     CommandHandler.ExecuteCommand(
-                        new PasteCommandArgs(this.TextView, this.SubjectBuffer), () => EditorOperations.Paste(), TestCommandExecutionContext.Create());
+                        new PasteCommandArgs(this.TextView, this.SubjectBuffer),
+                        () => EditorOperations.Paste(),
+                        TestCommandExecutionContext.Create()
+                    );
                 }
                 else
                 {
@@ -126,16 +169,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                     {
                         // we were given text to directly place on the clipboard without needing to do a copy.
                         Contract.ThrowIfNull(pasteText);
-                        var json = new StringCopyPasteData(ImmutableArray.Create(StringCopyPasteContent.ForText(pasteText))).ToJson();
+                        var json = new StringCopyPasteData(
+                            ImmutableArray.Create(StringCopyPasteContent.ForText(pasteText))
+                        ).ToJson();
                         Contract.ThrowIfNull(json);
-                        service!.TrySetClipboardData(StringCopyPasteCommandHandler.KeyAndVersion, json);
+                        service!.TrySetClipboardData(
+                            StringCopyPasteCommandHandler.KeyAndVersion,
+                            json
+                        );
                     }
 
                     CommandHandler.ExecuteCommand(
-                        new PasteCommandArgs(this.TextView, this.SubjectBuffer), () =>
+                        new PasteCommandArgs(this.TextView, this.SubjectBuffer),
+                        () =>
                         {
                             EditorOperations.ReplaceSelection(pasteText);
-                        }, TestCommandExecutionContext.Create());
+                        },
+                        TestCommandExecutionContext.Create()
+                    );
                 }
 
                 ValidateBefore(expectedMarkup);
@@ -154,7 +205,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 Assert.Equal(caretPosition, this.TextView.Caret.Position.BufferPosition.Position);
             }
 
-            private static void GetCodeAndCaretPosition(string expectedMarkup, out string expected, out int caretPosition)
+            private static void GetCodeAndCaretPosition(
+                string expectedMarkup,
+                out string expected,
+                out int caretPosition
+            )
             {
                 // Used so test can contain `$$` (for raw interpolations) without us thinking that it is an actual caret
                 // position
@@ -180,14 +235,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
 
             private static void SetSelection(
                 TestHostDocument document,
-                ImmutableArray<TextSpan> copySpans, out IWpfTextView textView, out ITextBuffer2 textBuffer2)
+                ImmutableArray<TextSpan> copySpans,
+                out IWpfTextView textView,
+                out ITextBuffer2 textBuffer2
+            )
             {
                 textView = document.GetTextView();
                 var textBuffer = document.GetTextBuffer();
                 textBuffer2 = textBuffer;
                 var broker = textView.GetMultiSelectionBroker();
 
-                var selections = copySpans.Select(s => new Selection(s.ToSnapshotSpan(textBuffer.CurrentSnapshot))).ToArray();
+                var selections = copySpans
+                    .Select(s => new Selection(s.ToSnapshotSpan(textBuffer.CurrentSnapshot)))
+                    .ToArray();
                 broker.SetSelectionRange(selections, selections.First());
             }
         }

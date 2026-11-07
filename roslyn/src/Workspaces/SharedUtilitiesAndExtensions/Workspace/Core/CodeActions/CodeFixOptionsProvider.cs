@@ -37,7 +37,11 @@ internal readonly struct CodeFixOptionsProvider
     /// </summary>
     private readonly CodeActionOptionsProvider _fallbackOptions;
 
-    public CodeFixOptionsProvider(IOptionsReader options, CodeActionOptionsProvider fallbackOptions, HostLanguageServices languageServices)
+    public CodeFixOptionsProvider(
+        IOptionsReader options,
+        CodeActionOptionsProvider fallbackOptions,
+        HostLanguageServices languageServices
+    )
     {
         _options = options;
         _fallbackOptions = fallbackOptions;
@@ -46,48 +50,77 @@ internal readonly struct CodeFixOptionsProvider
 
     // LineFormattingOptions
 
-    public string NewLine => GetOption(FormattingOptions2.NewLine, FallbackLineFormattingOptions.NewLine);
+    public string NewLine =>
+        GetOption(FormattingOptions2.NewLine, FallbackLineFormattingOptions.NewLine);
 
-    public LineFormattingOptions GetLineFormattingOptions()
-        => _options.GetLineFormattingOptions(_languageServices.Language, FallbackLineFormattingOptions);
+    public LineFormattingOptions GetLineFormattingOptions() =>
+        _options.GetLineFormattingOptions(
+            _languageServices.Language,
+            FallbackLineFormattingOptions
+        );
 
     // SyntaxFormattingOptions
 
-    public SyntaxFormattingOptions GetFormattingOptions(ISyntaxFormatting formatting)
-        => formatting.GetFormattingOptions(_options, FallbackSyntaxFormattingOptions);
+    public SyntaxFormattingOptions GetFormattingOptions(ISyntaxFormatting formatting) =>
+        formatting.GetFormattingOptions(_options, FallbackSyntaxFormattingOptions);
 
-    public AccessibilityModifiersRequired AccessibilityModifiersRequired => _options.GetOptionValue(CodeStyleOptions2.AccessibilityModifiersRequired, _languageServices.Language, FallbackCommonSyntaxFormattingOptions.AccessibilityModifiersRequired);
+    public AccessibilityModifiersRequired AccessibilityModifiersRequired =>
+        _options.GetOptionValue(
+            CodeStyleOptions2.AccessibilityModifiersRequired,
+            _languageServices.Language,
+            FallbackCommonSyntaxFormattingOptions.AccessibilityModifiersRequired
+        );
 
-    private TValue GetOption<TValue>(PerLanguageOption2<TValue> option, TValue defaultValue)
-        => _options.GetOption(option, _languageServices.Language, defaultValue);
+    private TValue GetOption<TValue>(PerLanguageOption2<TValue> option, TValue defaultValue) =>
+        _options.GetOption(option, _languageServices.Language, defaultValue);
 
     private LineFormattingOptions FallbackLineFormattingOptions
 #if CODE_STYLE
         => LineFormattingOptions.Default;
 #else
-        => _fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.FormattingOptions.LineFormatting;
+        =>
+        _fallbackOptions
+            .GetOptions(_languageServices.LanguageServices)
+            .CleanupOptions.FormattingOptions.LineFormatting;
 #endif
 
     private SyntaxFormattingOptions? FallbackSyntaxFormattingOptions
 #if CODE_STYLE
         => null;
 #else
-        => _fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.FormattingOptions;
+        =>
+        _fallbackOptions
+            .GetOptions(_languageServices.LanguageServices)
+            .CleanupOptions.FormattingOptions;
 #endif
 
     private SyntaxFormattingOptions FallbackCommonSyntaxFormattingOptions
 #if CODE_STYLE
-        => SyntaxFormattingOptions.CommonDefaults;
+        =>
+        SyntaxFormattingOptions.CommonDefaults;
 #else
-        => _fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.FormattingOptions;
+        =>
+        _fallbackOptions
+            .GetOptions(_languageServices.LanguageServices)
+            .CleanupOptions.FormattingOptions;
 #endif
 }
 
 internal static class CodeFixOptionsProviders
 {
-    public static async ValueTask<CodeFixOptionsProvider> GetCodeFixOptionsAsync(this Document document, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+    public static async ValueTask<CodeFixOptionsProvider> GetCodeFixOptionsAsync(
+        this Document document,
+        CodeActionOptionsProvider fallbackOptions,
+        CancellationToken cancellationToken
+    )
     {
-        var configOptions = await document.GetAnalyzerConfigOptionsAsync(cancellationToken).ConfigureAwait(false);
-        return new CodeFixOptionsProvider(configOptions.GetOptionsReader(), fallbackOptions, document.Project.GetExtendedLanguageServices());
+        var configOptions = await document
+            .GetAnalyzerConfigOptionsAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return new CodeFixOptionsProvider(
+            configOptions.GetOptionsReader(),
+            fallbackOptions,
+            document.Project.GetExtendedLanguageServices()
+        );
     }
 }

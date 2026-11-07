@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -18,16 +18,16 @@
 namespace System.Reflection
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.Versioning;
     using Microsoft.Win32;
-    using System.Diagnostics.Contracts;
 #if !FEATURE_CORECLR
     using Microsoft.Runtime.Hosting;
 #endif
@@ -35,7 +35,7 @@ namespace System.Reflection
 #if FEATURE_CORECLR
     // Dummy type to avoid ifdefs in signature definitions
     public class StrongNameKeyPair
-    {       
+    {
         private StrongNameKeyPair()
         {
             throw new NotSupportedException();
@@ -43,18 +43,21 @@ namespace System.Reflection
     }
 #else
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public class StrongNameKeyPair : IDeserializationCallback, ISerializable 
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class StrongNameKeyPair : IDeserializationCallback, ISerializable
     {
-        private bool    _keyPairExported;
-        private byte[]  _keyPairArray;
-        private String  _keyPairContainer;
-        private byte[]  _publicKey;
+        private bool _keyPairExported;
+        private byte[] _keyPairArray;
+        private String _keyPairContainer;
+        private byte[] _publicKey;
 
         // Build key pair from file.
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #pragma warning disable 618
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
 #pragma warning restore 618
         public StrongNameKeyPair(FileStream keyPairFile)
         {
@@ -70,9 +73,12 @@ namespace System.Reflection
         }
 
         // Build key pair from byte array in memory.
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #pragma warning disable 618
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
 #pragma warning restore 618
         public StrongNameKeyPair(byte[] keyPairArray)
         {
@@ -87,9 +93,12 @@ namespace System.Reflection
         }
 
         // Reference key pair in named key container.
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #pragma warning disable 618
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
 #pragma warning restore 618
         public StrongNameKeyPair(String keyPairContainer)
         {
@@ -102,21 +111,25 @@ namespace System.Reflection
             _keyPairExported = false;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #pragma warning disable 618
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
 #pragma warning restore 618
-        protected StrongNameKeyPair (SerializationInfo info, StreamingContext context) {
-            _keyPairExported = (bool) info.GetValue("_keyPairExported", typeof(bool));
-            _keyPairArray = (byte[]) info.GetValue("_keyPairArray", typeof(byte[]));
-            _keyPairContainer = (string) info.GetValue("_keyPairContainer", typeof(string));
-            _publicKey = (byte[]) info.GetValue("_publicKey", typeof(byte[]));
+        protected StrongNameKeyPair(SerializationInfo info, StreamingContext context)
+        {
+            _keyPairExported = (bool)info.GetValue("_keyPairExported", typeof(bool));
+            _keyPairArray = (byte[])info.GetValue("_keyPairArray", typeof(byte[]));
+            _keyPairContainer = (string)info.GetValue("_keyPairContainer", typeof(string));
+            _publicKey = (byte[])info.GetValue("_publicKey", typeof(byte[]));
         }
 
         // Get the public portion of the key pair.
         public byte[] PublicKey
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             get
             {
                 if (_publicKey == null)
@@ -131,15 +144,14 @@ namespace System.Reflection
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private unsafe byte[] ComputePublicKey()
         {
             byte[] publicKey = null;
 
             // Make sure pbPublicKey is not leaked with async exceptions
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
-            }
+            try { }
             finally
             {
                 IntPtr pbPublicKey = IntPtr.Zero;
@@ -150,16 +162,28 @@ namespace System.Reflection
                     bool result;
                     if (_keyPairExported)
                     {
-                        result = StrongNameHelpers.StrongNameGetPublicKey(null, _keyPairArray, _keyPairArray.Length,
-                            out pbPublicKey, out cbPublicKey);
+                        result = StrongNameHelpers.StrongNameGetPublicKey(
+                            null,
+                            _keyPairArray,
+                            _keyPairArray.Length,
+                            out pbPublicKey,
+                            out cbPublicKey
+                        );
                     }
                     else
                     {
-                        result = StrongNameHelpers.StrongNameGetPublicKey(_keyPairContainer, null, 0,
-                            out pbPublicKey, out cbPublicKey);
+                        result = StrongNameHelpers.StrongNameGetPublicKey(
+                            _keyPairContainer,
+                            null,
+                            0,
+                            out pbPublicKey,
+                            out cbPublicKey
+                        );
                     }
                     if (!result)
-                        throw new ArgumentException(Environment.GetResourceString("Argument_StrongNameGetPublicKey"));
+                        throw new ArgumentException(
+                            Environment.GetResourceString("Argument_StrongNameGetPublicKey")
+                        );
 
                     publicKey = new byte[cbPublicKey];
                     Buffer.Memcpy(publicKey, 0, (byte*)(pbPublicKey.ToPointer()), 0, cbPublicKey);
@@ -176,7 +200,8 @@ namespace System.Reflection
 #if FEATURE_SERIALIZATION
         /// <internalonly/>
         [System.Security.SecurityCritical]
-        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context) {
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             info.AddValue("_keyPairExported", _keyPairExported);
             info.AddValue("_keyPairArray", _keyPairArray);
             info.AddValue("_keyPairContainer", _keyPairContainer);
@@ -184,7 +209,7 @@ namespace System.Reflection
         }
 
         /// <internalonly/>
-        void IDeserializationCallback.OnDeserialization (Object sender) {}
+        void IDeserializationCallback.OnDeserialization(Object sender) { }
 #endif
 
         // Internal routine used to retrieve key pair info from unmanaged code.

@@ -14,21 +14,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     internal sealed class TypeParameterChecker : AbstractTypeParameterChecker
     {
         [Conditional("DEBUG")]
-        public static void Check(Symbol symbol, ImmutableArray<TypeParameterSymbol> acceptableTypeParameters)
+        public static void Check(
+            Symbol symbol,
+            ImmutableArray<TypeParameterSymbol> acceptableTypeParameters
+        )
         {
             new TypeParameterChecker(acceptableTypeParameters).Visit(symbol.GetPublicSymbol());
         }
 
         [Conditional("DEBUG")]
-        public static void Check(BoundNode node, ImmutableArray<TypeParameterSymbol> acceptableTypeParameters)
+        public static void Check(
+            BoundNode node,
+            ImmutableArray<TypeParameterSymbol> acceptableTypeParameters
+        )
         {
             new BlockChecker(new TypeParameterChecker(acceptableTypeParameters)).Visit(node);
         }
 
         private TypeParameterChecker(ImmutableArray<TypeParameterSymbol> acceptableTypeParameters)
-            : base(acceptableTypeParameters.GetPublicSymbols())
-        {
-        }
+            : base(acceptableTypeParameters.GetPublicSymbols()) { }
 
         public override IParameterSymbol GetThisParameter(IMethodSymbol method)
         {

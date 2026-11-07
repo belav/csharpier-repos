@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,30 +27,29 @@
 //
 
 using System;
-
 #if (CONFIGURATION_DEP)
 using System.Configuration.Provider;
 #endif
 
 namespace System.Configuration
 {
-	public abstract class SettingsProvider
+    public abstract class SettingsProvider
 #if (CONFIGURATION_DEP)
-		: ProviderBase
+        : ProviderBase
 #endif
-	{
-		protected SettingsProvider ()
-		{
-		}
+    {
+        protected SettingsProvider() { }
 
-		public abstract SettingsPropertyValueCollection GetPropertyValues (SettingsContext context,
-										   SettingsPropertyCollection collection);
+        public abstract SettingsPropertyValueCollection GetPropertyValues(
+            SettingsContext context,
+            SettingsPropertyCollection collection
+        );
 
-		public abstract void SetPropertyValues (SettingsContext context,
-							SettingsPropertyValueCollection collection);
+        public abstract void SetPropertyValues(
+            SettingsContext context,
+            SettingsPropertyValueCollection collection
+        );
 
-		public abstract string ApplicationName { get; set; }
-	}
-
+        public abstract string ApplicationName { get; set; }
+    }
 }
-

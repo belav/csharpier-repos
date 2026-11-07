@@ -6,7 +6,10 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 {
-    internal readonly struct DocumentToUpdate(Document document, ImmutableArray<SyntaxNode> nodesToUpdate)
+    internal readonly struct DocumentToUpdate(
+        Document document,
+        ImmutableArray<SyntaxNode> nodesToUpdate
+    )
     {
         /// <summary>
         /// The document to update.

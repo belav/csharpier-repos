@@ -24,7 +24,7 @@ namespace System.Threading
 #elif TARGET_32BIT
         private const short DefaultMaxWorkerThreadCount = 1023;
 #else
-        #error Unknown platform
+#error Unknown platform
 #endif
 
         private const int CpuUtilizationHigh = 95;
@@ -37,11 +37,20 @@ namespace System.Threading
 #endif
 
         private static readonly short ForcedMinWorkerThreads =
-            AppContextConfigHelper.GetInt16Config("System.Threading.ThreadPool.MinThreads", 0, false);
+            AppContextConfigHelper.GetInt16Config(
+                "System.Threading.ThreadPool.MinThreads",
+                0,
+                false
+            );
         private static readonly short ForcedMaxWorkerThreads =
-            AppContextConfigHelper.GetInt16Config("System.Threading.ThreadPool.MaxThreads", 0, false);
+            AppContextConfigHelper.GetInt16Config(
+                "System.Threading.ThreadPool.MaxThreads",
+                0,
+                false
+            );
 
-        private static readonly int ThreadPoolThreadTimeoutMs = DetermineThreadPoolThreadTimeoutMs();
+        private static readonly int ThreadPoolThreadTimeoutMs =
+            DetermineThreadPoolThreadTimeoutMs();
 
         private static int DetermineThreadPoolThreadTimeoutMs()
         {
@@ -50,11 +59,11 @@ namespace System.Threading
             // The amount of time in milliseconds a thread pool thread waits without having done any work before timing out and
             // exiting. Set to -1 to disable the timeout. Applies to worker threads and wait threads. Also see the
             // ThreadsToKeepAlive config value for relevant information.
-            int timeoutMs =
-                AppContextConfigHelper.GetInt32Config(
-                    "System.Threading.ThreadPool.ThreadTimeoutMs",
-                    "DOTNET_ThreadPool_ThreadTimeoutMs",
-                    DefaultThreadPoolThreadTimeoutMs);
+            int timeoutMs = AppContextConfigHelper.GetInt32Config(
+                "System.Threading.ThreadPool.ThreadTimeoutMs",
+                "DOTNET_ThreadPool_ThreadTimeoutMs",
+                DefaultThreadPoolThreadTimeoutMs
+            );
             return timeoutMs >= -1 ? timeoutMs : DefaultThreadPoolThreadTimeoutMs;
         }
 
@@ -84,19 +93,23 @@ namespace System.Threading
 
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3)]
             public int priorCompletionCount;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3 + sizeof(int))]
             public int priorCompletedWorkRequestsTime;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3 + sizeof(int) * 2)]
             public int nextCompletedWorkRequestsTime;
 
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 4)]
             public volatile int numRequestedWorkers;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 4 + sizeof(int))]
             public int gateThreadRunningState;
         }
 
         private long _currentSampleStartTime;
-        private readonly ThreadInt64PersistentCounter _completionCounter = new ThreadInt64PersistentCounter();
+        private readonly ThreadInt64PersistentCounter _completionCounter =
+            new ThreadInt64PersistentCounter();
         private int _threadAdjustmentIntervalMs;
 
         private short _numBlockedThreads;
@@ -117,13 +130,17 @@ namespace System.Threading
 
         private PortableThreadPool()
         {
-            _minThreads = HasForcedMinThreads ? ForcedMinWorkerThreads : (short)Environment.ProcessorCount;
+            _minThreads = HasForcedMinThreads
+                ? ForcedMinWorkerThreads
+                : (short)Environment.ProcessorCount;
             if (_minThreads > MaxPossibleThreadCount)
             {
                 _minThreads = MaxPossibleThreadCount;
             }
 
-            _maxThreads = HasForcedMaxThreads ? ForcedMaxWorkerThreads : DefaultMaxWorkerThreadCount;
+            _maxThreads = HasForcedMaxThreads
+                ? ForcedMaxWorkerThreads
+                : DefaultMaxWorkerThreadCount;
             if (_maxThreads > MaxPossibleThreadCount)
             {
                 _maxThreads = MaxPossibleThreadCount;
@@ -142,7 +159,8 @@ namespace System.Threading
                     (ushort)_minThreads,
                     (ushort)_maxThreads,
                     (ushort)_legacy_minIOCompletionThreads,
-                    (ushort)_legacy_maxIOCompletionThreads);
+                    (ushort)_legacy_maxIOCompletionThreads
+                );
             }
 
             _separated.counts.NumThreadsGoal = _minThreads;
@@ -153,9 +171,11 @@ namespace System.Threading
         }
 
         private static bool HasForcedMinThreads =>
-            ForcedMinWorkerThreads > 0 && (ForcedMaxWorkerThreads <= 0 || ForcedMinWorkerThreads <= ForcedMaxWorkerThreads);
+            ForcedMinWorkerThreads > 0
+            && (ForcedMaxWorkerThreads <= 0 || ForcedMinWorkerThreads <= ForcedMaxWorkerThreads);
         private static bool HasForcedMaxThreads =>
-            ForcedMaxWorkerThreads > 0 && (ForcedMinWorkerThreads <= 0 || ForcedMinWorkerThreads <= ForcedMaxWorkerThreads);
+            ForcedMaxWorkerThreads > 0
+            && (ForcedMinWorkerThreads <= 0 || ForcedMinWorkerThreads <= ForcedMaxWorkerThreads);
 
         public bool SetMinThreads(int workerThreads, int ioCompletionThreads)
         {
@@ -218,7 +238,8 @@ namespace System.Threading
                         (ushort)_minThreads,
                         (ushort)_maxThreads,
                         (ushort)_legacy_minIOCompletionThreads,
-                        (ushort)_legacy_maxIOCompletionThreads);
+                        (ushort)_legacy_maxIOCompletionThreads
+                    );
                 }
             }
             finally
@@ -268,7 +289,8 @@ namespace System.Threading
                     return false;
                 }
 
-                _legacy_maxIOCompletionThreads = (short)Math.Min(ioCompletionThreads, MaxPossibleThreadCount);
+                _legacy_maxIOCompletionThreads = (short)
+                    Math.Min(ioCompletionThreads, MaxPossibleThreadCount);
 
                 short newMaxThreads = (short)Math.Min(workerThreads, MaxPossibleThreadCount);
                 if (newMaxThreads == _maxThreads)
@@ -288,7 +310,8 @@ namespace System.Threading
                         (ushort)_minThreads,
                         (ushort)_maxThreads,
                         (ushort)_legacy_minIOCompletionThreads,
-                        (ushort)_legacy_maxIOCompletionThreads);
+                        (ushort)_legacy_maxIOCompletionThreads
+                    );
                 }
                 return true;
             }
@@ -322,12 +345,16 @@ namespace System.Threading
         {
             Debug.Assert(t_completionCountObject == null);
 
-            object threadLocalCompletionCountObject = _completionCounter.CreateThreadLocalCountObject();
+            object threadLocalCompletionCountObject =
+                _completionCounter.CreateThreadLocalCountObject();
             t_completionCountObject = threadLocalCompletionCountObject;
             return threadLocalCompletionCountObject;
         }
 
-        private void NotifyWorkItemProgress(object threadLocalCompletionCountObject, int currentTimeMs)
+        private void NotifyWorkItemProgress(
+            object threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             ThreadInt64PersistentCounter.Increment(threadLocalCompletionCountObject);
             _separated.lastDequeueTime = currentTimeMs;
@@ -339,9 +366,15 @@ namespace System.Threading
         }
 
         internal void NotifyWorkItemProgress() =>
-            NotifyWorkItemProgress(GetOrCreateThreadLocalCompletionCountObject(), Environment.TickCount);
+            NotifyWorkItemProgress(
+                GetOrCreateThreadLocalCompletionCountObject(),
+                Environment.TickCount
+            );
 
-        internal bool NotifyWorkItemComplete(object? threadLocalCompletionCountObject, int currentTimeMs)
+        internal bool NotifyWorkItemComplete(
+            object? threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             Debug.Assert(threadLocalCompletionCountObject != null);
 
@@ -367,14 +400,18 @@ namespace System.Threading
             {
                 // Repeated checks from ShouldAdjustMaxWorkersActive() inside the lock
                 ThreadCounts counts = _separated.counts;
-                if (counts.NumProcessingWork > counts.NumThreadsGoal ||
-                    _pendingBlockingAdjustment != PendingBlockingAdjustment.None)
+                if (
+                    counts.NumProcessingWork > counts.NumThreadsGoal
+                    || _pendingBlockingAdjustment != PendingBlockingAdjustment.None
+                )
                 {
                     return;
                 }
 
                 long endTime = Stopwatch.GetTimestamp();
-                double elapsedSeconds = Stopwatch.GetElapsedTime(_currentSampleStartTime, endTime).TotalSeconds;
+                double elapsedSeconds = Stopwatch
+                    .GetElapsedTime(_currentSampleStartTime, endTime)
+                    .TotalSeconds;
 
                 if (elapsedSeconds * 1000 >= _threadAdjustmentIntervalMs / 2)
                 {
@@ -385,7 +422,11 @@ namespace System.Threading
                     short oldNumThreadsGoal = counts.NumThreadsGoal;
                     int newNumThreadsGoal;
                     (newNumThreadsGoal, _threadAdjustmentIntervalMs) =
-                        HillClimbing.ThreadPoolHillClimber.Update(oldNumThreadsGoal, elapsedSeconds, numCompletions);
+                        HillClimbing.ThreadPoolHillClimber.Update(
+                            oldNumThreadsGoal,
+                            elapsedSeconds,
+                            numCompletions
+                        );
                     if (oldNumThreadsGoal != (short)newNumThreadsGoal)
                     {
                         _separated.counts.InterlockedSetNumThreadsGoal((short)newNumThreadsGoal);
@@ -403,7 +444,8 @@ namespace System.Threading
                     }
 
                     _separated.priorCompletionCount = totalNumCompletions;
-                    _separated.nextCompletedWorkRequestsTime = currentTicks + _threadAdjustmentIntervalMs;
+                    _separated.nextCompletedWorkRequestsTime =
+                        currentTicks + _threadAdjustmentIntervalMs;
                     Volatile.Write(ref _separated.priorCompletedWorkRequestsTime, currentTicks);
                     _currentSampleStartTime = endTime;
                 }
@@ -472,17 +514,21 @@ namespace System.Threading
             // memory usage may cause blocking adjustment to fall back to slower adjustments sooner than necessary.
             GCMemoryInfo gcMemoryInfo = GC.GetGCMemoryInfo();
             _memoryLimitBytes = gcMemoryInfo.HighMemoryLoadThresholdBytes;
-            _memoryUsageBytes = Math.Min(gcMemoryInfo.MemoryLoadBytes, gcMemoryInfo.HighMemoryLoadThresholdBytes);
+            _memoryUsageBytes = Math.Min(
+                gcMemoryInfo.MemoryLoadBytes,
+                gcMemoryInfo.HighMemoryLoadThresholdBytes
+            );
             return true; // continue receiving gen 2 GC callbacks
         }
 
         internal static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle waitObject,
-             WaitOrTimerCallback callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle waitObject,
+            WaitOrTimerCallback callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             ArgumentNullException.ThrowIfNull(waitObject);
             ArgumentNullException.ThrowIfNull(callBack);
@@ -491,7 +537,8 @@ namespace System.Threading
                 waitObject,
                 new _ThreadPoolWaitOrTimerCallback(callBack, state, flowExecutionContext),
                 (int)millisecondsTimeOutInterval,
-                !executeOnlyOnce);
+                !executeOnlyOnce
+            );
 
             PortableThreadPool.ThreadPoolInstance.RegisterWaitHandle(registeredWaitHandle);
 

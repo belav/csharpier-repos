@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Collections.Tests;
 using System.Collections.Generic;
+using System.Collections.Tests;
 
 namespace System.Collections.Concurrent.Tests
 {
@@ -34,25 +34,32 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         protected override object CreateTValue(int seed) => CreateTKey(seed);
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => false;
 
-        protected override bool Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
 
-        protected override bool IDictionary_NonGeneric_Keys_Values_ModifyingTheDictionaryUpdatesTheCollection => false;
+        protected override bool IDictionary_NonGeneric_Keys_Values_ModifyingTheDictionaryUpdatesTheCollection =>
+            false;
 
         protected override bool ICollection_NonGeneric_SupportsSyncRoot => false;
 
-        protected override bool IDictionary_NonGeneric_Keys_Values_ParentDictionaryModifiedInvalidates => false;
+        protected override bool IDictionary_NonGeneric_Keys_Values_ParentDictionaryModifiedInvalidates =>
+            false;
 
         protected override bool ResetImplemented => true;
 
-        protected override bool IDictionary_NonGeneric_Keys_Values_Enumeration_ResetImplemented => true;
+        protected override bool IDictionary_NonGeneric_Keys_Values_Enumeration_ResetImplemented =>
+            true;
 
         protected override bool SupportsSerialization => false;
 
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(ArrayTypeMismatchException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(ArrayTypeMismatchException);
 
         #endregion
     }

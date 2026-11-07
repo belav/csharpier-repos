@@ -15,7 +15,7 @@ namespace System.Data
     /// <summary>
     /// metadata exception class
     /// </summary>
-    /// 
+    ///
     [Serializable]
     public sealed class MetadataException : EntityException
     {
@@ -56,9 +56,7 @@ namespace System.Data
         /// <param name="info"></param>
         /// <param name="context"></param>
         private MetadataException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
         #endregion
     }
 }

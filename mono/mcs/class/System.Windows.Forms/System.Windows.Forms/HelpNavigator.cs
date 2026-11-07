@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,14 +26,16 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	public enum HelpNavigator {
-		Topic		= -2147483647,
-		TableOfContents	= -2147483646,
-		Index		= -2147483645,
-		Find		= -2147483644,
-		AssociateIndex	= -2147483643,
-		KeywordIndex	= -2147483642,
-		TopicId		= -2147483641
-	}
+namespace System.Windows.Forms
+{
+    public enum HelpNavigator
+    {
+        Topic = -2147483647,
+        TableOfContents = -2147483646,
+        Index = -2147483645,
+        Find = -2147483644,
+        AssociateIndex = -2147483643,
+        KeywordIndex = -2147483642,
+        TopicId = -2147483641,
+    }
 }

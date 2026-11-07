@@ -21,9 +21,14 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             _baseDirectory = baseDirectory;
         }
 
-        protected override string PreparePathToLoad(string fullPath, ImmutableHashSet<string> cultureNames)
+        protected override string PreparePathToLoad(
+            string fullPath,
+            ImmutableHashSet<string> cultureNames
+        )
         {
-            var fixedPath = Path.GetFullPath(Path.Combine(_baseDirectory, Path.GetFileName(fullPath)));
+            var fixedPath = Path.GetFullPath(
+                Path.Combine(_baseDirectory, Path.GetFileName(fullPath))
+            );
             return File.Exists(fixedPath) ? fixedPath : fullPath;
         }
     }

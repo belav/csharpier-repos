@@ -13,7 +13,11 @@ namespace System.Threading.Tasks
     //
     internal sealed class TaskReplicator
     {
-        public delegate void ReplicatableUserAction<TState>(ref TState replicaState, long timeout, out bool yieldedBeforeCompletion);
+        public delegate void ReplicatableUserAction<TState>(
+            ref TState replicaState,
+            long timeout,
+            out bool yieldedBeforeCompletion
+        );
 
         private readonly TaskScheduler _scheduler;
         private readonly bool _stopOnFirstFailure;
@@ -76,7 +80,12 @@ namespace System.Threading.Tasks
 
                     if (userActionYieldedBeforeCompletion)
                     {
-                        _pendingTask = new Task(s => ((Replica)s!).Execute(), this, CancellationToken.None, TaskCreationOptions.None);
+                        _pendingTask = new Task(
+                            s => ((Replica)s!).Execute(),
+                            this,
+                            CancellationToken.None,
+                            TaskCreationOptions.None
+                        );
                         _pendingTask.Start(_replicator._scheduler);
                     }
                     else
@@ -103,7 +112,12 @@ namespace System.Threading.Tasks
             private readonly ReplicatableUserAction<TState> _action;
             private TState _state = default!;
 
-            public Replica(TaskReplicator replicator, int maxConcurrency, long timeout, ReplicatableUserAction<TState> action)
+            public Replica(
+                TaskReplicator replicator,
+                int maxConcurrency,
+                long timeout,
+                ReplicatableUserAction<TState> action
+            )
                 : base(replicator, maxConcurrency, timeout)
             {
                 _action = action;
@@ -111,7 +125,12 @@ namespace System.Threading.Tasks
 
             protected override void CreateNewReplica()
             {
-                Replica<TState> newReplica = new Replica<TState>(_replicator, _remainingConcurrency, GenerateCooperativeMultitaskingTaskTimeout(), _action);
+                Replica<TState> newReplica = new Replica<TState>(
+                    _replicator,
+                    _remainingConcurrency,
+                    GenerateCooperativeMultitaskingTaskTimeout(),
+                    _action
+                );
                 newReplica._pendingTask!.Start(_replicator._scheduler);
             }
 
@@ -127,7 +146,11 @@ namespace System.Threading.Tasks
             _stopOnFirstFailure = stopOnFirstFailure;
         }
 
-        public static void Run<TState>(ReplicatableUserAction<TState> action, ParallelOptions options, bool stopOnFirstFailure)
+        public static void Run<TState>(
+            ReplicatableUserAction<TState> action,
+            ParallelOptions options,
+            bool stopOnFirstFailure
+        )
         {
             // Browser hosts do not support synchronous Wait so we want to run the
             //  replicated task directly instead of going through Task infrastructure
@@ -140,15 +163,25 @@ namespace System.Threading.Tasks
 
                 action(ref state, timeout, out bool yieldedBeforeCompletion);
                 if (yieldedBeforeCompletion)
-                    throw new Exception("Replicated tasks cannot yield in this single-threaded browser environment");
+                    throw new Exception(
+                        "Replicated tasks cannot yield in this single-threaded browser environment"
+                    );
             }
             else
 #endif
             {
-                int maxConcurrencyLevel = (options.EffectiveMaxConcurrencyLevel > 0) ? options.EffectiveMaxConcurrencyLevel : int.MaxValue;
+                int maxConcurrencyLevel =
+                    (options.EffectiveMaxConcurrencyLevel > 0)
+                        ? options.EffectiveMaxConcurrencyLevel
+                        : int.MaxValue;
 
                 TaskReplicator replicator = new TaskReplicator(options, stopOnFirstFailure);
-                new Replica<TState>(replicator, maxConcurrencyLevel, timeout: long.MaxValue, action).Start();
+                new Replica<TState>(
+                    replicator,
+                    maxConcurrencyLevel,
+                    timeout: long.MaxValue,
+                    action
+                ).Start();
 
                 Replica? nextReplica;
                 while (replicator._pendingReplicas.TryDequeue(out nextReplica))

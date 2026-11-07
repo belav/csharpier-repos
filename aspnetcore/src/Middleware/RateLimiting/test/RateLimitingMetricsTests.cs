@@ -73,14 +73,11 @@ public class RateLimitingMetricsTests
         Assert.Empty(leaseRequestDurationCollector.GetMeasurementSnapshot());
         Assert.Empty(currentRequestsQueuedCollector.GetMeasurementSnapshot());
         Assert.Empty(queuedRequestDurationCollector.GetMeasurementSnapshot());
-        Assert.Collection(
-            rateLimitingRequestsCollector.GetMeasurementSnapshot(),
-            m =>
-            {
-                Assert.Equal(1, m.Value);
-                Assert.Equal("global_limiter", (string)m.Tags["aspnetcore.rate_limiting.result"]);
-            }
-        );
+        Assert.Collection(rateLimitingRequestsCollector.GetMeasurementSnapshot(), m =>
+        {
+            Assert.Equal(1, m.Value);
+            Assert.Equal("global_limiter", (string)m.Tags["aspnetcore.rate_limiting.result"]);
+        });
     }
 
     [Fact]
@@ -140,9 +137,8 @@ public class RateLimitingMetricsTests
 
         await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
-        Assert.Collection(
-            currentLeaseRequestsCollector.GetMeasurementSnapshot(),
-            m => AssertCounter(m, 1, null)
+        Assert.Collection(currentLeaseRequestsCollector.GetMeasurementSnapshot(), m =>
+            AssertCounter(m, 1, null)
         );
         Assert.Empty(leaseRequestDurationCollector.GetMeasurementSnapshot());
 
@@ -158,19 +154,15 @@ public class RateLimitingMetricsTests
             m => AssertCounter(m, 1, null),
             m => AssertCounter(m, -1, null)
         );
-        Assert.Collection(
-            leaseRequestDurationCollector.GetMeasurementSnapshot(),
-            m => AssertDuration(m, null)
+        Assert.Collection(leaseRequestDurationCollector.GetMeasurementSnapshot(), m =>
+            AssertDuration(m, null)
         );
         Assert.Empty(currentRequestsQueuedCollector.GetMeasurementSnapshot());
         Assert.Empty(queuedRequestDurationCollector.GetMeasurementSnapshot());
-        Assert.Collection(
-            rateLimitingRequestsCollector.GetMeasurementSnapshot(),
-            m =>
-            {
-                Assert.Equal("acquired", (string)m.Tags["aspnetcore.rate_limiting.result"]);
-            }
-        );
+        Assert.Collection(rateLimitingRequestsCollector.GetMeasurementSnapshot(), m =>
+        {
+            Assert.Equal("acquired", (string)m.Tags["aspnetcore.rate_limiting.result"]);
+        });
     }
 
     [Fact]
@@ -238,9 +230,8 @@ public class RateLimitingMetricsTests
         Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
 
         Assert.Empty(currentLeaseRequestsCollector.GetMeasurementSnapshot());
-        Assert.Collection(
-            leaseRequestDurationCollector.GetMeasurementSnapshot(),
-            m => AssertDuration(m, null)
+        Assert.Collection(leaseRequestDurationCollector.GetMeasurementSnapshot(), m =>
+            AssertDuration(m, null)
         );
     }
 
@@ -255,15 +246,12 @@ public class RateLimitingMetricsTests
         var services = new ServiceCollection();
 
         services.AddRateLimiter(_ =>
-            _.AddConcurrencyLimiter(
-                policyName: "concurrencyPolicy",
-                options =>
-                {
-                    options.PermitLimit = 1;
-                    options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-                    options.QueueLimit = 1;
-                }
-            )
+            _.AddConcurrencyLimiter(policyName: "concurrencyPolicy", options =>
+            {
+                options.PermitLimit = 1;
+                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                options.QueueLimit = 1;
+            })
         );
         var serviceProvider = services.BuildServiceProvider();
 
@@ -327,9 +315,8 @@ public class RateLimitingMetricsTests
         var middlewareTask2 = middleware.Invoke(context1);
 
         // Assert second request is queued.
-        Assert.Collection(
-            currentRequestsQueuedCollector.GetMeasurementSnapshot(),
-            m => AssertCounter(m, 1, "concurrencyPolicy")
+        Assert.Collection(currentRequestsQueuedCollector.GetMeasurementSnapshot(), m =>
+            AssertCounter(m, 1, "concurrencyPolicy")
         );
         Assert.Empty(queuedRequestDurationCollector.GetMeasurementSnapshot());
 
@@ -344,14 +331,11 @@ public class RateLimitingMetricsTests
             m => AssertCounter(m, 1, "concurrencyPolicy"),
             m => AssertCounter(m, -1, "concurrencyPolicy")
         );
-        Assert.Collection(
-            queuedRequestDurationCollector.GetMeasurementSnapshot(),
-            m =>
-            {
-                AssertDuration(m, "concurrencyPolicy");
-                Assert.Equal("acquired", (string)m.Tags["aspnetcore.rate_limiting.result"]);
-            }
-        );
+        Assert.Collection(queuedRequestDurationCollector.GetMeasurementSnapshot(), m =>
+        {
+            AssertDuration(m, "concurrencyPolicy");
+            Assert.Equal("acquired", (string)m.Tags["aspnetcore.rate_limiting.result"]);
+        });
     }
 
     [Fact]
@@ -365,15 +349,12 @@ public class RateLimitingMetricsTests
         var services = new ServiceCollection();
 
         services.AddRateLimiter(_ =>
-            _.AddConcurrencyLimiter(
-                policyName: "concurrencyPolicy",
-                options =>
-                {
-                    options.PermitLimit = 1;
-                    options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-                    options.QueueLimit = 1;
-                }
-            )
+            _.AddConcurrencyLimiter(policyName: "concurrencyPolicy", options =>
+            {
+                options.PermitLimit = 1;
+                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                options.QueueLimit = 1;
+            })
         );
         var serviceProvider = services.BuildServiceProvider();
 
@@ -448,9 +429,8 @@ public class RateLimitingMetricsTests
         await middlewareTask2.DefaultTimeout();
 
         Assert.Empty(currentRequestsQueuedCollector.GetMeasurementSnapshot());
-        Assert.Collection(
-            queuedRequestDurationCollector.GetMeasurementSnapshot(),
-            m => AssertDuration(m, "concurrencyPolicy")
+        Assert.Collection(queuedRequestDurationCollector.GetMeasurementSnapshot(), m =>
+            AssertDuration(m, "concurrencyPolicy")
         );
     }
 

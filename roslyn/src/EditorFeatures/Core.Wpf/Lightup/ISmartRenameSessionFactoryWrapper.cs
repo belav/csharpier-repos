@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.EditorFeatures.Lightup;
 [Obsolete("Class has not been finalized and may change without warning.")]
 internal readonly struct ISmartRenameSessionFactoryWrapper
 {
-    internal const string WrappedTypeName = "Microsoft.VisualStudio.Text.Editor.SmartRename.ISmartRenameSessionFactory";
+    internal const string WrappedTypeName =
+        "Microsoft.VisualStudio.Text.Editor.SmartRename.ISmartRenameSessionFactory";
     private static readonly Type s_wrappedType;
 
     private static readonly Func<object, SnapshotSpan, object?> s_createSmartRenameSession;
@@ -22,9 +23,22 @@ internal readonly struct ISmartRenameSessionFactoryWrapper
 
     static ISmartRenameSessionFactoryWrapper()
     {
-        s_wrappedType = typeof(AggregateFocusInterceptor).Assembly.GetType(WrappedTypeName, throwOnError: false, ignoreCase: false);
+        s_wrappedType = typeof(AggregateFocusInterceptor).Assembly.GetType(
+            WrappedTypeName,
+            throwOnError: false,
+            ignoreCase: false
+        );
 
-        s_createSmartRenameSession = LightupHelpers.CreateFunctionAccessor<object, SnapshotSpan, object?>(s_wrappedType, nameof(CreateSmartRenameSession), typeof(SnapshotSpan), SpecializedTasks.Null<object>());
+        s_createSmartRenameSession = LightupHelpers.CreateFunctionAccessor<
+            object,
+            SnapshotSpan,
+            object?
+        >(
+            s_wrappedType,
+            nameof(CreateSmartRenameSession),
+            typeof(SnapshotSpan),
+            SpecializedTasks.Null<object>()
+        );
     }
 
     private ISmartRenameSessionFactoryWrapper(object instance)
@@ -41,7 +55,9 @@ internal readonly struct ISmartRenameSessionFactoryWrapper
 
         if (!IsInstance(instance))
         {
-            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException(
+                $"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'"
+            );
         }
 
         return new ISmartRenameSessionFactoryWrapper(instance);

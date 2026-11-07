@@ -31,8 +31,8 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedSet<ForeignKeyConstraint> ForeignKeyConstraints { get; }
-        = new(ForeignKeyConstraintComparer.Instance);
+    public virtual SortedSet<ForeignKeyConstraint> ForeignKeyConstraints { get; } =
+        new(ForeignKeyConstraintComparer.Instance);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +40,8 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedSet<ForeignKeyConstraint> ReferencingForeignKeyConstraints { get; }
-        = new(ForeignKeyConstraintComparer.Instance);
+    public virtual SortedSet<ForeignKeyConstraint> ReferencingForeignKeyConstraints { get; } =
+        new(ForeignKeyConstraintComparer.Instance);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,8 +97,7 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedDictionary<string, UniqueConstraint> UniqueConstraints { get; }
-        = new();
+    public virtual SortedDictionary<string, UniqueConstraint> UniqueConstraints { get; } = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -106,12 +105,10 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual UniqueConstraint? FindUniqueConstraint(string name)
-        => PrimaryKey != null && PrimaryKey.Name == name
-            ? PrimaryKey
-            : UniqueConstraints.TryGetValue(name, out var constraint)
-                ? constraint
-                : null;
+    public virtual UniqueConstraint? FindUniqueConstraint(string name) =>
+        PrimaryKey != null && PrimaryKey.Name == name ? PrimaryKey
+        : UniqueConstraints.TryGetValue(name, out var constraint) ? constraint
+        : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -119,8 +116,7 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedDictionary<string, TableIndex> Indexes { get; }
-        = new();
+    public virtual SortedDictionary<string, TableIndex> Indexes { get; } = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -128,8 +124,7 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedDictionary<string, CheckConstraint> CheckConstraints { get; }
-        = new();
+    public virtual SortedDictionary<string, CheckConstraint> CheckConstraints { get; } = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,17 +132,18 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedDictionary<string, ITrigger> Triggers { get; }
-        = new();
+    public virtual SortedDictionary<string, ITrigger> Triggers { get; } = new();
 
     /// <inheritdoc />
-    public virtual bool IsExcludedFromMigrations
-        => ((IEntityType)EntityTypeMappings.First().TypeBase)
-            .IsTableExcludedFromMigrations(StoreObjectIdentifier.Table(Name, Schema));
+    public virtual bool IsExcludedFromMigrations =>
+        ((IEntityType)EntityTypeMappings.First().TypeBase).IsTableExcludedFromMigrations(
+            StoreObjectIdentifier.Table(Name, Schema)
+        );
 
     /// <inheritdoc />
-    public override IColumnBase? FindColumn(IProperty property)
-        => property.GetTableColumnMappings()
+    public override IColumnBase? FindColumn(IProperty property) =>
+        property
+            .GetTableColumnMappings()
             .FirstOrDefault(cm => cm.TableMapping.Table == this)
             ?.Column;
 
@@ -157,8 +153,7 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public new virtual Column? FindColumn(string name)
-        => (Column?)base.FindColumn(name);
+    public new virtual Column? FindColumn(string name) => (Column?)base.FindColumn(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -166,8 +161,8 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((ITable)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ITable)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
     IEnumerable<ITableMapping> ITable.EntityTypeMappings
@@ -221,9 +216,10 @@ public class Table : TableBase, ITable
     IEnumerable<ICheckConstraint> ITable.CheckConstraints
     {
         [DebuggerStepThrough]
-        get => EntityTypeMappings.First().TypeBase is RuntimeEntityType
-            ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
-            : CheckConstraints.Values;
+        get =>
+            EntityTypeMappings.First().TypeBase is RuntimeEntityType
+                ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
+                : CheckConstraints.Values;
     }
 
     /// <inheritdoc />
@@ -235,11 +231,9 @@ public class Table : TableBase, ITable
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IColumn? ITable.FindColumn(string name)
-        => (IColumn?)base.FindColumn(name);
+    IColumn? ITable.FindColumn(string name) => (IColumn?)base.FindColumn(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IColumn? ITable.FindColumn(IProperty property)
-        => (IColumn?)FindColumn(property);
+    IColumn? ITable.FindColumn(IProperty property) => (IColumn?)FindColumn(property);
 }

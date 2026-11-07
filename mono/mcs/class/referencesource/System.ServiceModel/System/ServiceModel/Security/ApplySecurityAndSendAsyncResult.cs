@@ -18,8 +18,13 @@ namespace System.ServiceModel.Security
         SecurityProtocolCorrelationState newCorrelationState;
         TimeoutHelper timeoutHelper;
 
-        public ApplySecurityAndSendAsyncResult(SecurityProtocol binding, MessageSenderType channel, TimeSpan timeout,
-            AsyncCallback callback, object state)
+        public ApplySecurityAndSendAsyncResult(
+            SecurityProtocol binding,
+            MessageSenderType channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.binding = binding;
@@ -31,7 +36,7 @@ namespace System.ServiceModel.Security
         {
             get { return newCorrelationState; }
         }
-        
+
         protected SecurityProtocol SecurityProtocol
         {
             get { return this.binding; }
@@ -39,7 +44,13 @@ namespace System.ServiceModel.Security
 
         protected void Begin(Message message, SecurityProtocolCorrelationState correlationState)
         {
-            IAsyncResult result = this.binding.BeginSecureOutgoingMessage(message, timeoutHelper.RemainingTime(), correlationState, sharedCallback, this);
+            IAsyncResult result = this.binding.BeginSecureOutgoingMessage(
+                message,
+                timeoutHelper.RemainingTime(),
+                correlationState,
+                sharedCallback,
+                this
+            );
             if (result.CompletedSynchronously)
             {
                 this.binding.EndSecureOutgoingMessage(result, out message, out newCorrelationState);
@@ -60,10 +71,18 @@ namespace System.ServiceModel.Security
         {
             if (message == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("message")
+                );
             }
             this.secureOutgoingMessageDone = true;
-            IAsyncResult result = BeginSendCore(this.channel, message, timeoutHelper.RemainingTime(), sharedCallback, this);
+            IAsyncResult result = BeginSendCore(
+                this.channel,
+                message,
+                timeoutHelper.RemainingTime(),
+                sharedCallback,
+                this
+            );
             if (!result.CompletedSynchronously)
             {
                 return false;
@@ -72,7 +91,13 @@ namespace System.ServiceModel.Security
             return this.OnSendComplete();
         }
 
-        protected abstract IAsyncResult BeginSendCore(MessageSenderType channel, Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult BeginSendCore(
+            MessageSenderType channel,
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         protected abstract void EndSendCore(MessageSenderType channel, IAsyncResult result);
 
@@ -88,16 +113,21 @@ namespace System.ServiceModel.Security
         {
             if (result == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("result"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("result")
+                );
             }
             if (result.CompletedSynchronously)
             {
                 return;
             }
-            ApplySecurityAndSendAsyncResult<MessageSenderType> self = result.AsyncState as ApplySecurityAndSendAsyncResult<MessageSenderType>;
+            ApplySecurityAndSendAsyncResult<MessageSenderType> self =
+                result.AsyncState as ApplySecurityAndSendAsyncResult<MessageSenderType>;
             if (self == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                );
             }
 
             bool completeSelf = false;
@@ -107,7 +137,11 @@ namespace System.ServiceModel.Security
                 if (!self.secureOutgoingMessageDone)
                 {
                     Message message;
-                    self.binding.EndSecureOutgoingMessage(result, out message, out self.newCorrelationState);
+                    self.binding.EndSecureOutgoingMessage(
+                        result,
+                        out message,
+                        out self.newCorrelationState
+                    );
                     completeSelf = self.OnSecureOutgoingMessageComplete(message);
                 }
                 else
@@ -134,4 +168,3 @@ namespace System.ServiceModel.Security
         }
     }
 }
-

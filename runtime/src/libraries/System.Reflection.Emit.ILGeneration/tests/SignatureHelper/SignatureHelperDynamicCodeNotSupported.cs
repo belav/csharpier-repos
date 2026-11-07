@@ -12,20 +12,38 @@ namespace System.Reflection.Emit.Tests
         public static void ThrowsWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", false.ToString());
+            options.RuntimeConfigurationOptions.Add(
+                "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+                false.ToString()
+            );
 
-            using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(static () =>
-            {
-                Assert.Throws<PlatformNotSupportedException>(() => SignatureHelper.GetFieldSigHelper(null));
-                Assert.Throws<PlatformNotSupportedException>(() => SignatureHelper.GetLocalVarSigHelper());
-                Assert.Throws<PlatformNotSupportedException>(() => SignatureHelper.GetMethodSigHelper(CallingConventions.Any, typeof(int)));
-
-                // Mono always throws NotImplementedException - https://github.com/dotnet/runtime/issues/37794
-                if (!PlatformDetection.IsMonoRuntime)
+            using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
+                static () =>
                 {
-                    Assert.Throws<PlatformNotSupportedException>(() => SignatureHelper.GetPropertySigHelper(null, typeof(string), new Type[] { typeof(string), typeof(int) }));
-                }
-            }, options);
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        SignatureHelper.GetFieldSigHelper(null)
+                    );
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        SignatureHelper.GetLocalVarSigHelper()
+                    );
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        SignatureHelper.GetMethodSigHelper(CallingConventions.Any, typeof(int))
+                    );
+
+                    // Mono always throws NotImplementedException - https://github.com/dotnet/runtime/issues/37794
+                    if (!PlatformDetection.IsMonoRuntime)
+                    {
+                        Assert.Throws<PlatformNotSupportedException>(() =>
+                            SignatureHelper.GetPropertySigHelper(
+                                null,
+                                typeof(string),
+                                new Type[] { typeof(string), typeof(int) }
+                            )
+                        );
+                    }
+                },
+                options
+            );
         }
     }
 }

@@ -8,7 +8,10 @@ namespace System.Web.WebPages.Test
 {
     public static class LatestRazorVersion
     {
-        private static readonly Version LatestVersion = VersionTestHelper.GetVersionFromAssembly("System.Web.Razor", typeof(ParserResults));
+        private static readonly Version LatestVersion = VersionTestHelper.GetVersionFromAssembly(
+            "System.Web.Razor",
+            typeof(ParserResults)
+        );
 
         public static readonly string MajorMinor = LatestVersion.Major + "." + LatestVersion.Minor;
     }

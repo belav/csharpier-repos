@@ -37,7 +37,5 @@ public abstract class ModelCodeGenerator : IModelCodeGenerator
     /// <param name="model">The model.</param>
     /// <param name="options">The options to use during generation.</param>
     /// <returns>The generated model.</returns>
-    public abstract ScaffoldedModel GenerateModel(
-        IModel model,
-        ModelCodeGenerationOptions options);
+    public abstract ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options);
 }

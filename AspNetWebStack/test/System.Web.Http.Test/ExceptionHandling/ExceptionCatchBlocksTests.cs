@@ -14,8 +14,11 @@ namespace System.Web.Http.ExceptionHandling
             ExceptionContextCatchBlock catchBlock = ExceptionCatchBlocks.HttpBatchHandler;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpBatchHandler", isTopLevel: false, callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpBatchHandler",
+                isTopLevel: false,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -39,8 +42,11 @@ namespace System.Web.Http.ExceptionHandling
             ExceptionContextCatchBlock catchBlock = ExceptionCatchBlocks.HttpControllerDispatcher;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpControllerDispatcher", isTopLevel: false, callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpControllerDispatcher",
+                isTopLevel: false,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -64,8 +70,11 @@ namespace System.Web.Http.ExceptionHandling
             ExceptionContextCatchBlock catchBlock = ExceptionCatchBlocks.HttpServer;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpServer", isTopLevel: true, callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpServer",
+                isTopLevel: true,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -89,8 +98,11 @@ namespace System.Web.Http.ExceptionHandling
             ExceptionContextCatchBlock catchBlock = ExceptionCatchBlocks.IExceptionFilter;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("IExceptionFilter", isTopLevel: false, callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "IExceptionFilter",
+                isTopLevel: false,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -107,7 +119,10 @@ namespace System.Web.Http.ExceptionHandling
             Assert.Same(first, second);
         }
 
-        private static void AssertEqual(ExceptionContextCatchBlock expected, ExceptionContextCatchBlock actual)
+        private static void AssertEqual(
+            ExceptionContextCatchBlock expected,
+            ExceptionContextCatchBlock actual
+        )
         {
             if (expected == null)
             {

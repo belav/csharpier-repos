@@ -29,9 +29,8 @@ public static class PageConventionCollectionExtensions
         ArgumentNullException.ThrowIfNull(conventions);
         ArgumentNullException.ThrowIfNull(factory);
 
-        return conventions.AddFolderApplicationModelConvention(
-            "/",
-            model => model.Filters.Add(factory(model))
+        return conventions.AddFolderApplicationModelConvention("/", model =>
+            model.Filters.Add(factory(model))
         );
     }
 
@@ -91,20 +90,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddPageApplicationModelConvention(
-            pageName,
-            model =>
+        conventions.AddPageApplicationModelConvention(pageName, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
-                }
-                else
-                {
-                    model.Filters.Add(new AllowAnonymousFilter());
-                }
+                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
             }
-        );
+            else
+            {
+                model.Filters.Add(new AllowAnonymousFilter());
+            }
+        });
         return conventions;
     }
 
@@ -139,21 +135,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddAreaPageApplicationModelConvention(
-            areaName,
-            pageName,
-            model =>
+        conventions.AddAreaPageApplicationModelConvention(areaName, pageName, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
-                }
-                else
-                {
-                    model.Filters.Add(new AllowAnonymousFilter());
-                }
+                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
             }
-        );
+            else
+            {
+                model.Filters.Add(new AllowAnonymousFilter());
+            }
+        });
         return conventions;
     }
 
@@ -175,20 +167,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddFolderApplicationModelConvention(
-            folderPath,
-            model =>
+        conventions.AddFolderApplicationModelConvention(folderPath, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
-                }
-                else
-                {
-                    model.Filters.Add(new AllowAnonymousFilter());
-                }
+                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
             }
-        );
+            else
+            {
+                model.Filters.Add(new AllowAnonymousFilter());
+            }
+        });
         return conventions;
     }
 
@@ -223,21 +212,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddAreaFolderApplicationModelConvention(
-            areaName,
-            folderPath,
-            model =>
+        conventions.AddAreaFolderApplicationModelConvention(areaName, folderPath, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
-                }
-                else
-                {
-                    model.Filters.Add(new AllowAnonymousFilter());
-                }
+                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
             }
-        );
+            else
+            {
+                model.Filters.Add(new AllowAnonymousFilter());
+            }
+        });
         return conventions;
     }
 
@@ -261,20 +246,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddPageApplicationModelConvention(
-            pageName,
-            model =>
+        conventions.AddPageApplicationModelConvention(pageName, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
-                }
-                else
-                {
-                    model.Filters.Add(new AuthorizeFilter(policy));
-                }
+                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
             }
-        );
+            else
+            {
+                model.Filters.Add(new AuthorizeFilter(policy));
+            }
+        });
         return conventions;
     }
 
@@ -341,21 +323,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddAreaPageApplicationModelConvention(
-            areaName,
-            pageName,
-            model =>
+        conventions.AddAreaPageApplicationModelConvention(areaName, pageName, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
-                }
-                else
-                {
-                    model.Filters.Add(new AuthorizeFilter(policy));
-                }
+                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
             }
-        );
+            else
+            {
+                model.Filters.Add(new AuthorizeFilter(policy));
+            }
+        });
         return conventions;
     }
 
@@ -379,20 +357,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddFolderApplicationModelConvention(
-            folderPath,
-            model =>
+        conventions.AddFolderApplicationModelConvention(folderPath, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
-                }
-                else
-                {
-                    model.Filters.Add(new AuthorizeFilter(policy));
-                }
+                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
             }
-        );
+            else
+            {
+                model.Filters.Add(new AuthorizeFilter(policy));
+            }
+        });
         return conventions;
     }
 
@@ -459,21 +434,17 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddAreaFolderApplicationModelConvention(
-            areaName,
-            folderPath,
-            model =>
+        conventions.AddAreaFolderApplicationModelConvention(areaName, folderPath, model =>
+        {
+            if (conventions.MvcOptions.EnableEndpointRouting)
             {
-                if (conventions.MvcOptions.EnableEndpointRouting)
-                {
-                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
-                }
-                else
-                {
-                    model.Filters.Add(new AuthorizeFilter(policy));
-                }
+                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
             }
-        );
+            else
+            {
+                model.Filters.Add(new AuthorizeFilter(policy));
+            }
+        });
         return conventions;
     }
 

@@ -7,7 +7,7 @@ namespace System.Activities.XamlIntegration
     using System;
     using System.Activities.DynamicUpdate;
     using System.ComponentModel;
-    using System.Globalization;    
+    using System.Globalization;
 
     public class DynamicUpdateMapItemConverter : TypeConverter
     {
@@ -16,7 +16,11 @@ namespace System.Activities.XamlIntegration
             return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string stringValue = value as string;
             if (stringValue != null)
@@ -33,12 +37,15 @@ namespace System.Activities.XamlIntegration
                 }
                 else if (strArray.Length == 2)
                 {
-                    if (int.TryParse(strArray[0], NumberStyles.Integer, culture, out result1) && int.TryParse(strArray[1], NumberStyles.Integer, culture, out result2))
+                    if (
+                        int.TryParse(strArray[0], NumberStyles.Integer, culture, out result1)
+                        && int.TryParse(strArray[1], NumberStyles.Integer, culture, out result2)
+                    )
                     {
                         return new DynamicUpdateMapItem(result1, result2);
                     }
-                }                
-            }            
+                }
+            }
 
             return base.ConvertFrom(context, culture, value);
         }
@@ -48,7 +55,12 @@ namespace System.Activities.XamlIntegration
             return destinationType == typeof(string);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             DynamicUpdateMapItem objectInfo = value as DynamicUpdateMapItem;
             if (destinationType == typeof(string) && objectInfo != null)
@@ -57,7 +69,9 @@ namespace System.Activities.XamlIntegration
                 {
                     // MapItem for Variable is converted to a string with its owner Id plus the variable index delimeted by "."
                     // Assumption:  No culture uses "." in its Int32 string representation
-                    return objectInfo.OriginalVariableOwnerId.ToString(culture) + "." + objectInfo.OriginalId.ToString(culture);
+                    return objectInfo.OriginalVariableOwnerId.ToString(culture)
+                        + "."
+                        + objectInfo.OriginalId.ToString(culture);
                 }
                 return objectInfo.OriginalId.ToString(culture);
             }

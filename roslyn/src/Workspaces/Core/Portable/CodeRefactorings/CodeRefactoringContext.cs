@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             {
                 if (TextDocument is not Document document)
                 {
-                    throw new InvalidOperationException(WorkspacesResources.Use_TextDocument_property_instead_of_Document_property_as_the_provider_supports_non_source_text_documents);
+                    throw new InvalidOperationException(
+                        WorkspacesResources.Use_TextDocument_property_instead_of_Document_property_as_the_provider_supports_non_source_text_documents
+                    );
                 }
 
                 return document;
@@ -66,9 +68,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Document document,
             TextSpan span,
             Action<CodeAction> registerRefactoring,
-            CancellationToken cancellationToken)
-            : this(document, span, (action, textSpan) => registerRefactoring(action), CodeActionOptions.DefaultProvider, cancellationToken)
-        { }
+            CancellationToken cancellationToken
+        )
+            : this(
+                document,
+                span,
+                (action, textSpan) => registerRefactoring(action),
+                CodeActionOptions.DefaultProvider,
+                cancellationToken
+            ) { }
 
         /// <summary>
         /// Creates a code refactoring context to be passed into <see cref="CodeRefactoringProvider.ComputeRefactoringsAsync(CodeRefactoringContext)"/> method.
@@ -77,9 +85,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextDocument document,
             TextSpan span,
             Action<CodeAction> registerRefactoring,
-            CancellationToken cancellationToken)
-            : this(document, span, (action, textSpan) => registerRefactoring(action), CodeActionOptions.DefaultProvider, cancellationToken)
-        { }
+            CancellationToken cancellationToken
+        )
+            : this(
+                document,
+                span,
+                (action, textSpan) => registerRefactoring(action),
+                CodeActionOptions.DefaultProvider,
+                cancellationToken
+            ) { }
 
         /// <summary>
         /// Creates a code refactoring context to be passed into <see cref="CodeRefactoringProvider.ComputeRefactoringsAsync(CodeRefactoringContext)"/> method.
@@ -89,13 +103,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan span,
             Action<CodeAction, TextSpan?> registerRefactoring,
             CodeActionOptionsProvider options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // NOTE/TODO: Don't make this overload public & obsolete the `Action<CodeAction> registerRefactoring`
             // overload to stop leaking the Lambda implementation detail.
             TextDocument = document ?? throw new ArgumentNullException(nameof(document));
             Span = span;
-            _registerRefactoring = registerRefactoring ?? throw new ArgumentNullException(nameof(registerRefactoring));
+            _registerRefactoring =
+                registerRefactoring ?? throw new ArgumentNullException(nameof(registerRefactoring));
             Options = options;
             CancellationToken = cancellationToken;
         }
@@ -104,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// Add supplied <paramref name="action"/> to the list of refactorings that will be offered to the user.
         /// </summary>
         /// <param name="action">The <see cref="CodeAction"/> that will be invoked to apply the refactoring.</param>
-        public void RegisterRefactoring(CodeAction action) => RegisterRefactoring(action, applicableToSpan: null); // We could pass this.Span as applicableToSpan instead but that would cause these refactorings to always be closest to current selection
+        public void RegisterRefactoring(CodeAction action) =>
+            RegisterRefactoring(action, applicableToSpan: null); // We could pass this.Span as applicableToSpan instead but that would cause these refactorings to always be closest to current selection
 
         /// <summary>
         /// Add supplied <paramref name="action"/> applicable to <paramref name="applicableToSpan"/> to the list of refactorings that will be offered to the user.
@@ -112,10 +129,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <param name="action">The <see cref="CodeAction"/> that will be invoked to apply the refactoring.</param>
         /// <param name="applicableToSpan">The <see cref="TextSpan"/> within original document the <paramref name="action"/> is applicable to.</param>
         /// <remarks>
-        /// <paramref name="applicableToSpan"/> should represent a logical section within the original document that the <paramref name="action"/> is 
+        /// <paramref name="applicableToSpan"/> should represent a logical section within the original document that the <paramref name="action"/> is
         /// applicable to. It doesn't have to precisely represent the exact <see cref="TextSpan"/> that will get changed.
         /// </remarks>
-        internal void RegisterRefactoring(CodeAction action, TextSpan applicableToSpan) => RegisterRefactoring(action, new Nullable<TextSpan>(applicableToSpan));
+        internal void RegisterRefactoring(CodeAction action, TextSpan applicableToSpan) =>
+            RegisterRefactoring(action, new Nullable<TextSpan>(applicableToSpan));
 
         private void RegisterRefactoring(CodeAction action, TextSpan? applicableToSpan)
         {
@@ -127,7 +145,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             _registerRefactoring(action, applicableToSpan);
         }
 
-        internal void Deconstruct(out Document document, out TextSpan span, out CancellationToken cancellationToken)
+        internal void Deconstruct(
+            out Document document,
+            out TextSpan span,
+            out CancellationToken cancellationToken
+        )
         {
             document = Document;
             span = Span;

@@ -11,18 +11,24 @@ namespace SharedTypes.ComInterfaces
     {
         void Method(
             [MarshalUsing(CountElementName = nameof(size))] StatefulCollection<int> p,
-            int size);
+            int size
+        );
         void MethodIn(
             [MarshalUsing(CountElementName = nameof(size))] in StatefulCollection<int> pIn,
-            in int size);
+            in int size
+        );
         void MethodRef(
             [MarshalUsing(CountElementName = nameof(size))] ref StatefulCollection<int> pRef,
-            int size);
+            int size
+        );
         void MethodOut(
             [MarshalUsing(CountElementName = nameof(size))] out StatefulCollection<int> pOut,
-            out int size);
+            out int size
+        );
+
         [return: MarshalUsing(CountElementName = nameof(size))]
         StatefulCollection<int> Return(int size);
+
         [PreserveSig]
         [return: MarshalUsing(CountElementName = nameof(size))]
         StatefulCollection<int> ReturnPreserveSig(int size);

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;                        //TextWriter
-using System.Text;                      //Encoding
+using System.IO; //TextWriter
+using System.Text; //Encoding
 
 namespace Microsoft.Test.ModuleCore
 {
@@ -34,14 +34,8 @@ namespace Microsoft.Test.ModuleCore
         //Accessors
         public static ITestLog Internal
         {
-            set
-            {
-                s_pinternal = value;
-            }
-            get
-            {
-                return s_pinternal;
-            }
+            set { s_pinternal = value; }
+            get { return s_pinternal; }
         }
 
         public static TraceLevel Level
@@ -207,7 +201,12 @@ namespace Microsoft.Test.ModuleCore
             throw new TestFailedException(message, actual, expected, null);
         }
 
-        public static bool Compare(object actual, object expected1, object expected2, string message)
+        public static bool Compare(
+            object actual,
+            object expected1,
+            object expected2,
+            string message
+        )
         {
             if (InternalEquals(actual, expected1) || InternalEquals(actual, expected2))
                 return true;
@@ -226,7 +225,16 @@ namespace Microsoft.Test.ModuleCore
             if (InternalEquals(actual, expected))
                 return true;
 
-            TestLog.Error(TestResult.Failed, actual, expected, null, message, new Exception().StackTrace, null, 0);
+            TestLog.Error(
+                TestResult.Failed,
+                actual,
+                expected,
+                null,
+                message,
+                new Exception().StackTrace,
+                null,
+                0
+            );
 
             return false;
         }
@@ -285,21 +293,31 @@ namespace Microsoft.Test.ModuleCore
             return expected.Equals(actual);
         }
 
-        public static void Error(TestResult result, object actual, object expected, string source, string message, string stack, string filename, int lineno)
+        public static void Error(
+            TestResult result,
+            object actual,
+            object expected,
+            string source,
+            string message,
+            string stack,
+            string filename,
+            int lineno
+        )
         {
             //Log the error
             if (Internal != null)
             {
-                Internal.Error(result,
-                            TestLogFlags.Text,         //flags
-                            StringEx.Format(actual),   //actual
-                            StringEx.Format(expected), //expected
-                            source,                    //source
-                            message,                   //message
-                            stack,                     //stack
-                            filename,                  //filename
-                            lineno                     //line
-                        );
+                Internal.Error(
+                    result,
+                    TestLogFlags.Text, //flags
+                    StringEx.Format(actual), //actual
+                    StringEx.Format(expected), //expected
+                    source, //source
+                    message, //message
+                    stack, //stack
+                    filename, //filename
+                    lineno //line
+                );
             }
             else
             {
@@ -319,10 +337,14 @@ namespace Microsoft.Test.ModuleCore
             TestResult result = TestResult.Failed;
             Exception inner = e;
 
-            if (!(inner is TestException) ||
-                       ((inner as TestException).Result != TestResult.Skipped &&
-                        (inner as TestException).Result != TestResult.Passed &&
-                        (inner as TestException).Result != TestResult.Warning))
+            if (
+                !(inner is TestException)
+                || (
+                    (inner as TestException).Result != TestResult.Skipped
+                    && (inner as TestException).Result != TestResult.Passed
+                    && (inner as TestException).Result != TestResult.Warning
+                )
+            )
                 inner = e; //start over so we do not loose the stack trace
 
             while (inner != null)
@@ -370,7 +392,8 @@ namespace Microsoft.Test.ModuleCore
         private static string FixupXml(string value)
         {
             bool escapeXmlStuff = false;
-            if (value == null) return null;
+            if (value == null)
+                return null;
 
             StringBuilder b = new StringBuilder();
             for (int i = 0; i < value.Length; i++)
@@ -378,19 +401,34 @@ namespace Microsoft.Test.ModuleCore
                 switch (value[i])
                 {
                     case '&':
-                        if (escapeXmlStuff) b.Append("&amp;"); else b.Append('&');
+                        if (escapeXmlStuff)
+                            b.Append("&amp;");
+                        else
+                            b.Append('&');
                         break;
                     case '<':
-                        if (escapeXmlStuff) b.Append("&lt;"); else b.Append('<');
+                        if (escapeXmlStuff)
+                            b.Append("&lt;");
+                        else
+                            b.Append('<');
                         break;
                     case '>':
-                        if (escapeXmlStuff) b.Append("&gt;"); else b.Append('>');
+                        if (escapeXmlStuff)
+                            b.Append("&gt;");
+                        else
+                            b.Append('>');
                         break;
                     case '"':
-                        if (escapeXmlStuff) b.Append("&quot;"); else b.Append('"');
+                        if (escapeXmlStuff)
+                            b.Append("&quot;");
+                        else
+                            b.Append('"');
                         break;
                     case '\'':
-                        if (escapeXmlStuff) b.Append("&apos;"); else b.Append('\'');
+                        if (escapeXmlStuff)
+                            b.Append("&apos;");
+                        else
+                            b.Append('\'');
                         break;
                     case '\t':
                         b.Append('\t');
@@ -511,9 +549,7 @@ namespace Microsoft.Test.ModuleCore
         protected bool pshouldthrow = false;
 
         //Constructor
-        public TestLogAssertHandler()
-        {
-        }
+        public TestLogAssertHandler() { }
 
         //Accessors
         public virtual bool ShouldThrow
@@ -534,15 +570,20 @@ namespace Microsoft.Test.ModuleCore
             if (this.ShouldThrow)
                 throw e;
 
-            TestLog.Error(TestResult.Assert, details, null, "Debug.Assert", message, new Exception().StackTrace, null, 0);
+            TestLog.Error(
+                TestResult.Assert,
+                details,
+                null,
+                "Debug.Assert",
+                message,
+                new Exception().StackTrace,
+                null,
+                0
+            );
         }
 
-        public void Write(string strText)
-        {
-        }
+        public void Write(string strText) { }
 
-        public void WriteLine(string strText)
-        {
-        }
+        public void WriteLine(string strText) { }
     }
 }

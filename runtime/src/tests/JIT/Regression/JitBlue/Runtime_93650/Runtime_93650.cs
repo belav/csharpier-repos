@@ -9,9 +9,11 @@ using Xunit;
 public struct Holder
 {
     internal StringBuilder.AppendInterpolatedStringHandler _h;
+
     public Holder() => _h = new(0, 0, new());
 
-    internal StringBuilder GetBuilder() => Unsafe.As<StringBuilder.AppendInterpolatedStringHandler, StringBuilder>(ref _h);
+    internal StringBuilder GetBuilder() =>
+        Unsafe.As<StringBuilder.AppendInterpolatedStringHandler, StringBuilder>(ref _h);
 }
 
 public static class Runtime_93650

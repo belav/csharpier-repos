@@ -26,7 +26,8 @@ namespace System.Net.Http.Headers
         private const string publicString = "public";
         private const string sharedMaxAgeString = "s-maxage";
 
-        private static readonly GenericHeaderParser s_nameValueListParser = GenericHeaderParser.MultipleValueNameValueParser;
+        private static readonly GenericHeaderParser s_nameValueListParser =
+            GenericHeaderParser.MultipleValueNameValueParser;
 
         [Flags]
         private enum Flags : int
@@ -84,7 +85,8 @@ namespace System.Net.Http.Headers
             set => SetFlag(Flags.NoCache, value);
         }
 
-        public ICollection<string> NoCacheHeaders => _noCacheHeaders ??= new TokenObjectCollection();
+        public ICollection<string> NoCacheHeaders =>
+            _noCacheHeaders ??= new TokenObjectCollection();
 
         public bool NoStore
         {
@@ -146,7 +148,8 @@ namespace System.Net.Http.Headers
             set => SetFlag(Flags.Private, value);
         }
 
-        public ICollection<string> PrivateHeaders => _privateHeaders ??= new TokenObjectCollection();
+        public ICollection<string> PrivateHeaders =>
+            _privateHeaders ??= new TokenObjectCollection();
 
         public bool MustRevalidate
         {
@@ -160,11 +163,10 @@ namespace System.Net.Http.Headers
             set => SetFlag(Flags.ProxyRevalidate, value);
         }
 
-        public ICollection<NameValueHeaderValue> Extensions => _extensions ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
+        public ICollection<NameValueHeaderValue> Extensions =>
+            _extensions ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
-        public CacheControlHeaderValue()
-        {
-        }
+        public CacheControlHeaderValue() { }
 
         private CacheControlHeaderValue(CacheControlHeaderValue source)
         {
@@ -305,15 +307,23 @@ namespace System.Net.Http.Headers
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is CacheControlHeaderValue other &&
-            _flags == other._flags &&
-            _maxAge == other._maxAge &&
-            _sharedMaxAge == other._sharedMaxAge &&
-            _maxStaleLimit == other._maxStaleLimit &&
-            _minFresh == other._minFresh &&
-            HeaderUtilities.AreEqualCollections(_noCacheHeaders, other._noCacheHeaders, StringComparer.OrdinalIgnoreCase) &&
-            HeaderUtilities.AreEqualCollections(_privateHeaders, other._privateHeaders, StringComparer.OrdinalIgnoreCase) &&
-            HeaderUtilities.AreEqualCollections(_extensions, other._extensions);
+            obj is CacheControlHeaderValue other
+            && _flags == other._flags
+            && _maxAge == other._maxAge
+            && _sharedMaxAge == other._sharedMaxAge
+            && _maxStaleLimit == other._maxStaleLimit
+            && _minFresh == other._minFresh
+            && HeaderUtilities.AreEqualCollections(
+                _noCacheHeaders,
+                other._noCacheHeaders,
+                StringComparer.OrdinalIgnoreCase
+            )
+            && HeaderUtilities.AreEqualCollections(
+                _privateHeaders,
+                other._privateHeaders,
+                StringComparer.OrdinalIgnoreCase
+            )
+            && HeaderUtilities.AreEqualCollections(_extensions, other._extensions);
 
         public override int GetHashCode() =>
             HashCode.Combine(
@@ -322,22 +332,43 @@ namespace System.Net.Http.Headers
                 _sharedMaxAge,
                 _maxStaleLimit,
                 _minFresh,
-                (_noCacheHeaders is null ? 0 : _noCacheHeaders.GetHashCode(StringComparer.OrdinalIgnoreCase)),
-                (_privateHeaders is null ? 0 : _privateHeaders.GetHashCode(StringComparer.OrdinalIgnoreCase)),
-                NameValueHeaderValue.GetHashCode(_extensions));
+                (
+                    _noCacheHeaders is null
+                        ? 0
+                        : _noCacheHeaders.GetHashCode(StringComparer.OrdinalIgnoreCase)
+                ),
+                (
+                    _privateHeaders is null
+                        ? 0
+                        : _privateHeaders.GetHashCode(StringComparer.OrdinalIgnoreCase)
+                ),
+                NameValueHeaderValue.GetHashCode(_extensions)
+            );
 
         public static CacheControlHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (CacheControlHeaderValue)CacheControlHeaderParser.Parser.ParseValue(input, null, ref index) ?? new CacheControlHeaderValue();
+            return (CacheControlHeaderValue)
+                    CacheControlHeaderParser.Parser.ParseValue(input, null, ref index)
+                ?? new CacheControlHeaderValue();
         }
 
-        public static bool TryParse(string? input, [NotNullWhen(true)] out CacheControlHeaderValue? parsedValue)
+        public static bool TryParse(
+            string? input,
+            [NotNullWhen(true)] out CacheControlHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (CacheControlHeaderParser.Parser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                CacheControlHeaderParser.Parser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (CacheControlHeaderValue?)output ?? new CacheControlHeaderValue();
                 return true;
@@ -345,8 +376,12 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetCacheControlLength(string? input, int startIndex, CacheControlHeaderValue? storeValue,
-            out CacheControlHeaderValue? parsedValue)
+        internal static int GetCacheControlLength(
+            string? input,
+            int startIndex,
+            CacheControlHeaderValue? storeValue,
+            out CacheControlHeaderValue? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -363,7 +398,14 @@ namespace System.Net.Http.Headers
             List<NameValueHeaderValue> nameValueList = new List<NameValueHeaderValue>();
             while (current < input.Length)
             {
-                if (!s_nameValueListParser.TryParseValue(input, null, ref current, out object? nameValue))
+                if (
+                    !s_nameValueListParser.TryParseValue(
+                        input,
+                        null,
+                        ref current,
+                        out object? nameValue
+                    )
+                )
                 {
                     return 0;
                 }
@@ -397,7 +439,10 @@ namespace System.Net.Http.Headers
             return input.Length - startIndex;
         }
 
-        private static bool TrySetCacheControlValues(CacheControlHeaderValue cc, List<NameValueHeaderValue> nameValueList)
+        private static bool TrySetCacheControlValues(
+            CacheControlHeaderValue cc,
+            List<NameValueHeaderValue> nameValueList
+        )
         {
             foreach (NameValueHeaderValue nameValue in nameValueList)
             {
@@ -486,7 +531,10 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TrySetOptionalTokenList(NameValueHeaderValue nameValue, ref TokenObjectCollection? destination)
+        private static bool TrySetOptionalTokenList(
+            NameValueHeaderValue nameValue,
+            ref TokenObjectCollection? destination
+        )
         {
             Debug.Assert(nameValue != null);
 
@@ -498,7 +546,11 @@ namespace System.Net.Http.Headers
             // We need the string to be at least 3 chars long: 2x quotes and at least 1 character. Also make sure we
             // have a quoted string. Note that NameValueHeaderValue will never have leading/trailing whitespace.
             string valueString = nameValue.Value;
-            if ((valueString.Length < 3) || !valueString.StartsWith('\"') || !valueString.EndsWith('\"'))
+            if (
+                (valueString.Length < 3)
+                || !valueString.StartsWith('\"')
+                || !valueString.EndsWith('\"')
+            )
             {
                 return false;
             }
@@ -509,8 +561,12 @@ namespace System.Net.Http.Headers
             int originalValueCount = destination == null ? 0 : destination.Count;
             while (current < maxLength)
             {
-                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(valueString, current, true,
-                    out _);
+                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                    valueString,
+                    current,
+                    true,
+                    out _
+                );
 
                 if (current == maxLength)
                 {

@@ -30,94 +30,103 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-	class MonoChunkStream : WebReadStream
-	{
-		protected WebHeaderCollection Headers {
-			get;
-		}
+    class MonoChunkStream : WebReadStream
+    {
+        protected WebHeaderCollection Headers { get; }
 
-		protected MonoChunkParser Decoder {
-			get;
-		}
+        protected MonoChunkParser Decoder { get; }
 
-		public MonoChunkStream (WebOperation operation, Stream innerStream,
-		                        WebHeaderCollection headers)
-			: base (operation, innerStream)
-		{
-			Headers = headers;
+        public MonoChunkStream(
+            WebOperation operation,
+            Stream innerStream,
+            WebHeaderCollection headers
+        )
+            : base(operation, innerStream)
+        {
+            Headers = headers;
 
-			Decoder = new MonoChunkParser (headers);
-		}
+            Decoder = new MonoChunkParser(headers);
+        }
 
-		protected override async Task<int> ProcessReadAsync (
-			byte[] buffer, int offset, int size,
-			CancellationToken cancellationToken)
-		{
-			cancellationToken.ThrowIfCancellationRequested ();
+        protected override async Task<int> ProcessReadAsync(
+            byte[] buffer,
+            int offset,
+            int size,
+            CancellationToken cancellationToken
+        )
+        {
+            cancellationToken.ThrowIfCancellationRequested();
 
-			if (Decoder.DataAvailable)
-				return Decoder.Read (buffer, offset, size);
+            if (Decoder.DataAvailable)
+                return Decoder.Read(buffer, offset, size);
 
-			int ret = 0;
-			byte[] moreBytes = null;
-			while (ret == 0 && Decoder.WantMore) {
-				int localSize = Decoder.ChunkLeft;
-				if (localSize <= 0) // not read chunk size yet
-					localSize = 1024;
-				else if (localSize > 16384)
-					localSize = 16384;
+            int ret = 0;
+            byte[] moreBytes = null;
+            while (ret == 0 && Decoder.WantMore)
+            {
+                int localSize = Decoder.ChunkLeft;
+                if (localSize <= 0) // not read chunk size yet
+                    localSize = 1024;
+                else if (localSize > 16384)
+                    localSize = 16384;
 
-				if (moreBytes == null || moreBytes.Length < localSize)
-					moreBytes = new byte[localSize];
+                if (moreBytes == null || moreBytes.Length < localSize)
+                    moreBytes = new byte[localSize];
 
-				ret = await InnerStream.ReadAsync (
-					moreBytes, 0, localSize, cancellationToken).ConfigureAwait (false);
+                ret = await InnerStream
+                    .ReadAsync(moreBytes, 0, localSize, cancellationToken)
+                    .ConfigureAwait(false);
 
-				if (ret <= 0)
-					return ret;
+                if (ret <= 0)
+                    return ret;
 
-				Decoder.Write (moreBytes, 0, ret);
-				ret = Decoder.Read (buffer, offset, size);
-			}
+                Decoder.Write(moreBytes, 0, ret);
+                ret = Decoder.Read(buffer, offset, size);
+            }
 
-			return ret;
-		}
+            return ret;
+        }
 
-		internal override async Task FinishReading (CancellationToken cancellationToken)
-		{
-			await base.FinishReading (cancellationToken).ConfigureAwait (false);
+        internal override async Task FinishReading(CancellationToken cancellationToken)
+        {
+            await base.FinishReading(cancellationToken).ConfigureAwait(false);
 
-			cancellationToken.ThrowIfCancellationRequested ();
+            cancellationToken.ThrowIfCancellationRequested();
 
-			/*
-			 * We are expecting the chunk trailer, but no more data.
-			 */
-			if (Decoder.DataAvailable)
-				ThrowExpectingChunkTrailer ();
+            /*
+             * We are expecting the chunk trailer, but no more data.
+             */
+            if (Decoder.DataAvailable)
+                ThrowExpectingChunkTrailer();
 
-			/*
-			 * Need to loop here since there might be header fields after
-			 * the chunk trailer.
-			 */
-			while (Decoder.WantMore) {
-				var buffer = new byte[256];
-				int ret = await InnerStream.ReadAsync (
-					buffer, 0, buffer.Length, cancellationToken).ConfigureAwait (false);
-				if (ret <= 0)
-					ThrowExpectingChunkTrailer ();
+            /*
+             * Need to loop here since there might be header fields after
+             * the chunk trailer.
+             */
+            while (Decoder.WantMore)
+            {
+                var buffer = new byte[256];
+                int ret = await InnerStream
+                    .ReadAsync(buffer, 0, buffer.Length, cancellationToken)
+                    .ConfigureAwait(false);
+                if (ret <= 0)
+                    ThrowExpectingChunkTrailer();
 
-				Decoder.Write (buffer, 0, ret);
-				ret = Decoder.Read (buffer, 0, 1);
-				if (ret != 0)
-					ThrowExpectingChunkTrailer ();
-			}
-		}
+                Decoder.Write(buffer, 0, ret);
+                ret = Decoder.Read(buffer, 0, 1);
+                if (ret != 0)
+                    ThrowExpectingChunkTrailer();
+            }
+        }
 
-		static void ThrowExpectingChunkTrailer ()
-		{
-			throw new WebException (
-				"Expecting chunk trailer.", null,
-				WebExceptionStatus.ServerProtocolViolation, null);
-		}
-	}
+        static void ThrowExpectingChunkTrailer()
+        {
+            throw new WebException(
+                "Expecting chunk trailer.",
+                null,
+                WebExceptionStatus.ServerProtocolViolation,
+                null
+            );
+        }
+    }
 }

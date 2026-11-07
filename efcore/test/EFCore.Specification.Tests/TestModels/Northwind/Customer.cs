@@ -11,9 +11,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 public class Customer : IComparable<Customer>
 {
-    public Customer()
-    {
-    }
+    public Customer() { }
 
     // Custom ctor binding
     public Customer(DbContext context, ILazyLoader lazyLoader, string customerID)
@@ -63,11 +61,9 @@ public class Customer : IComparable<Customer>
     public NorthwindContext Context { get; set; }
 
     [NotMapped]
-    public bool IsLondon
-        => City == "London";
+    public bool IsLondon => City == "London";
 
-    protected bool Equals(Customer other)
-        => string.Equals(CustomerID, other.CustomerID);
+    protected bool Equals(Customer other) => string.Equals(CustomerID, other.CustomerID);
 
     public override bool Equals(object obj)
     {
@@ -78,22 +74,17 @@ public class Customer : IComparable<Customer>
 
         return ReferenceEquals(this, obj)
             ? true
-            : obj.GetType() == GetType()
-            && Equals((Customer)obj);
+            : obj.GetType() == GetType() && Equals((Customer)obj);
     }
 
-    public static bool operator ==(Customer left, Customer right)
-        => Equals(left, right);
+    public static bool operator ==(Customer left, Customer right) => Equals(left, right);
 
-    public static bool operator !=(Customer left, Customer right)
-        => !Equals(left, right);
+    public static bool operator !=(Customer left, Customer right) => !Equals(left, right);
 
-    public int CompareTo(Customer other)
-        => other == null ? 1 : CustomerID.CompareTo(other.CustomerID);
+    public int CompareTo(Customer other) =>
+        other == null ? 1 : CustomerID.CompareTo(other.CustomerID);
 
-    public override int GetHashCode()
-        => CustomerID.GetHashCode();
+    public override int GetHashCode() => CustomerID.GetHashCode();
 
-    public override string ToString()
-        => "Customer " + CustomerID;
+    public override string ToString() => "Customer " + CustomerID;
 }

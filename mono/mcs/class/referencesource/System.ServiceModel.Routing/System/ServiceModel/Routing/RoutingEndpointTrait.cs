@@ -8,34 +8,27 @@ namespace System.ServiceModel.Routing
 
     sealed class RoutingEndpointTrait
     {
-        public RoutingEndpointTrait(Type routerContract, ServiceEndpoint endpoint, OperationContext operationContext)
+        public RoutingEndpointTrait(
+            Type routerContract,
+            ServiceEndpoint endpoint,
+            OperationContext operationContext
+        )
         {
             if (routerContract == typeof(IDuplexSessionRouter))
             {
-                IDuplexRouterCallback callbackSession = operationContext.GetCallbackChannel<IDuplexRouterCallback>();
+                IDuplexRouterCallback callbackSession =
+                    operationContext.GetCallbackChannel<IDuplexRouterCallback>();
                 this.CallbackInstance = callbackSession;
             }
             this.Endpoint = endpoint;
             this.RouterContract = routerContract;
         }
 
-        public IDuplexRouterCallback CallbackInstance
-        {
-            get;
-            private set;
-        }
+        public IDuplexRouterCallback CallbackInstance { get; private set; }
 
-        public ServiceEndpoint Endpoint
-        {
-            get;
-            private set;
-        }
+        public ServiceEndpoint Endpoint { get; private set; }
 
-        public Type RouterContract
-        {
-            get;
-            private set;
-        }
+        public Type RouterContract { get; private set; }
 
         public override bool Equals(object obj)
         {
@@ -73,7 +66,11 @@ namespace System.ServiceModel.Routing
 
         public override string ToString()
         {
-            return this.Endpoint.Name + ";" + this.Endpoint.Binding.Name + ";" + this.Endpoint.Address.Uri.ToString();
+            return this.Endpoint.Name
+                + ";"
+                + this.Endpoint.Binding.Name
+                + ";"
+                + this.Endpoint.Address.Uri.ToString();
         }
     }
 }

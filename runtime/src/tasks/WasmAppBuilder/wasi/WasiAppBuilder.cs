@@ -18,8 +18,14 @@ public class WasiAppBuilder : WasmAppBuilderBaseTask
         if (!base.ValidateArguments())
             return false;
 
-        if (!InvariantGlobalization && !IsSingleFileBundle && (IcuDataFileNames == null || IcuDataFileNames.Length == 0))
-            throw new LogAsErrorException($"{nameof(IcuDataFileNames)} property shouldn't be empty when {nameof(InvariantGlobalization)}=false");
+        if (
+            !InvariantGlobalization
+            && !IsSingleFileBundle
+            && (IcuDataFileNames == null || IcuDataFileNames.Length == 0)
+        )
+            throw new LogAsErrorException(
+                $"{nameof(IcuDataFileNames)} property shouldn't be empty when {nameof(InvariantGlobalization)}=false"
+            );
 
         if (Assemblies.Length == 0 && !IsSingleFileBundle)
             throw new LogAsErrorException("Cannot build Wasm app without any assemblies");
@@ -28,14 +34,18 @@ public class WasiAppBuilder : WasmAppBuilderBaseTask
         {
             if (ExtraFilesToDeploy.Length > 0)
             {
-                throw new LogAsErrorException($"$({nameof(ExtraFilesToDeploy)}) is not supported for single file bundles. " +
-                                              $"Value: {string.Join(",", ExtraFilesToDeploy.Select(e => e.GetMetadata("FullPath")))}");
+                throw new LogAsErrorException(
+                    $"$({nameof(ExtraFilesToDeploy)}) is not supported for single file bundles. "
+                        + $"Value: {string.Join(",", ExtraFilesToDeploy.Select(e => e.GetMetadata("FullPath")))}"
+                );
             }
 
             if (FilesToIncludeInFileSystem.Length > 0)
             {
-                throw new LogAsErrorException($"$({nameof(FilesToIncludeInFileSystem)}) is not supported for single file bundles. " +
-                                              $"Value: {string.Join(",", FilesToIncludeInFileSystem.Select(e => e.ItemSpec))}");
+                throw new LogAsErrorException(
+                    $"$({nameof(FilesToIncludeInFileSystem)}) is not supported for single file bundles. "
+                        + $"Value: {string.Join(",", FilesToIncludeInFileSystem.Select(e => e.ItemSpec))}"
+                );
             }
         }
 
@@ -64,13 +74,21 @@ public class WasiAppBuilder : WasmAppBuilderBaseTask
             Directory.CreateDirectory(asmRootPath);
             foreach (string assembly in _assemblies)
             {
-                FileCopyChecked(assembly, Path.Combine(asmRootPath, Path.GetFileName(assembly)), "Assemblies");
+                FileCopyChecked(
+                    assembly,
+                    Path.Combine(asmRootPath, Path.GetFileName(assembly)),
+                    "Assemblies"
+                );
 
                 if (DebugLevel != 0)
                 {
                     string pdb = Path.ChangeExtension(assembly, ".pdb");
                     if (File.Exists(pdb))
-                        FileCopyChecked(pdb, Path.Combine(asmRootPath, Path.GetFileName(pdb)), "Assemblies");
+                        FileCopyChecked(
+                            pdb,
+                            Path.Combine(asmRootPath, Path.GetFileName(pdb)),
+                            "Assemblies"
+                        );
                 }
             }
         }
@@ -127,10 +145,13 @@ public class WasiAppBuilder : WasmAppBuilderBaseTask
 
             return true;
         }
-
     }
 
-    protected override void AddToRuntimeConfig(JsonObject wasmHostProperties, JsonArray runtimeArgsArray, JsonArray perHostConfigs)
+    protected override void AddToRuntimeConfig(
+        JsonObject wasmHostProperties,
+        JsonArray runtimeArgsArray,
+        JsonArray perHostConfigs
+    )
     {
         if (IsSingleFileBundle)
             wasmHostProperties["singleFileBundle"] = true;

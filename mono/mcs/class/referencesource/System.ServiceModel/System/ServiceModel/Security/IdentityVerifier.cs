@@ -4,23 +4,23 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Net;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Net.Sockets;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.IdentityModel.Selectors;
+    using System.Globalization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.Security.Principal;
-    using System.ServiceModel.Security.Tokens;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.ServiceModel.Diagnostics;    
-    using System.ServiceModel.Diagnostics.Application;
+    using System.Net;
+    using System.Net.Sockets;
     using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
+    using System.ServiceModel.Security.Tokens;
 
     public abstract class IdentityVerifier
     {
@@ -49,15 +49,27 @@ namespace System.ServiceModel.Security
             if (message.Properties != null)
                 securityContextProperty = message.Properties.Security;
 
-            if (securityContextProperty == null || securityContextProperty.ServiceSecurityContext == null)
+            if (
+                securityContextProperty == null
+                || securityContextProperty.ServiceSecurityContext == null
+            )
                 return false;
 
-            return this.CheckAccess(identity, securityContextProperty.ServiceSecurityContext.AuthorizationContext);
+            return this.CheckAccess(
+                identity,
+                securityContextProperty.ServiceSecurityContext.AuthorizationContext
+            );
         }
 
-        public abstract bool CheckAccess(EndpointIdentity identity, AuthorizationContext authContext);
+        public abstract bool CheckAccess(
+            EndpointIdentity identity,
+            AuthorizationContext authContext
+        );
 
-        public abstract bool TryGetIdentity(EndpointAddress reference, out EndpointIdentity identity);
+        public abstract bool TryGetIdentity(
+            EndpointAddress reference,
+            out EndpointIdentity identity
+        );
 
         static void AdjustAddress(ref EndpointAddress reference, Uri via)
         {
@@ -68,71 +80,125 @@ namespace System.ServiceModel.Security
             }
         }
 
-        internal bool TryGetIdentity(EndpointAddress reference, Uri via, out EndpointIdentity identity)
+        internal bool TryGetIdentity(
+            EndpointAddress reference,
+            Uri via,
+            out EndpointIdentity identity
+        )
         {
             AdjustAddress(ref reference, via);
             return this.TryGetIdentity(reference, out identity);
         }
 
-        internal void EnsureIncomingIdentity(EndpointAddress serviceReference, AuthorizationContext authorizationContext)
+        internal void EnsureIncomingIdentity(
+            EndpointAddress serviceReference,
+            AuthorizationContext authorizationContext
+        )
         {
-            EnsureIdentity(serviceReference, authorizationContext, SR.IdentityCheckFailedForIncomingMessage);
+            EnsureIdentity(
+                serviceReference,
+                authorizationContext,
+                SR.IdentityCheckFailedForIncomingMessage
+            );
         }
 
-        internal void EnsureOutgoingIdentity(EndpointAddress serviceReference, Uri via, AuthorizationContext authorizationContext)
+        internal void EnsureOutgoingIdentity(
+            EndpointAddress serviceReference,
+            Uri via,
+            AuthorizationContext authorizationContext
+        )
         {
             AdjustAddress(ref serviceReference, via);
-            this.EnsureIdentity(serviceReference, authorizationContext, SR.IdentityCheckFailedForOutgoingMessage);
+            this.EnsureIdentity(
+                serviceReference,
+                authorizationContext,
+                SR.IdentityCheckFailedForOutgoingMessage
+            );
         }
 
-        internal void EnsureOutgoingIdentity(EndpointAddress serviceReference, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        internal void EnsureOutgoingIdentity(
+            EndpointAddress serviceReference,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationPolicies");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationPolicies"
+                );
             }
-            AuthorizationContext ac = AuthorizationContext.CreateDefaultAuthorizationContext(authorizationPolicies);
+            AuthorizationContext ac = AuthorizationContext.CreateDefaultAuthorizationContext(
+                authorizationPolicies
+            );
             EnsureIdentity(serviceReference, ac, SR.IdentityCheckFailedForOutgoingMessage);
         }
 
-        void EnsureIdentity(EndpointAddress serviceReference, AuthorizationContext authorizationContext, String errorString)
+        void EnsureIdentity(
+            EndpointAddress serviceReference,
+            AuthorizationContext authorizationContext,
+            String errorString
+        )
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationContext"
+                );
             }
             EndpointIdentity identity;
             if (!TryGetIdentity(serviceReference, out identity))
             {
-                SecurityTraceRecordHelper.TraceIdentityVerificationFailure(identity, authorizationContext, this.GetType());
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(errorString, identity, serviceReference)));
+                SecurityTraceRecordHelper.TraceIdentityVerificationFailure(
+                    identity,
+                    authorizationContext,
+                    this.GetType()
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new MessageSecurityException(
+                        SR.GetString(errorString, identity, serviceReference)
+                    )
+                );
             }
             else
             {
                 if (!CheckAccess(identity, authorizationContext))
                 {
                     // CheckAccess performs a Trace on failure, no need to do it twice
-                    Exception e = CreateIdentityCheckException(identity, authorizationContext, errorString, serviceReference);
+                    Exception e = CreateIdentityCheckException(
+                        identity,
+                        authorizationContext,
+                        errorString,
+                        serviceReference
+                    );
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(e);
                 }
             }
         }
 
-        Exception CreateIdentityCheckException(EndpointIdentity identity, AuthorizationContext authorizationContext, string errorString, EndpointAddress serviceReference)
+        Exception CreateIdentityCheckException(
+            EndpointIdentity identity,
+            AuthorizationContext authorizationContext,
+            string errorString,
+            EndpointAddress serviceReference
+        )
         {
             Exception result;
 
-            if (identity.IdentityClaim != null
+            if (
+                identity.IdentityClaim != null
                 && identity.IdentityClaim.ClaimType == ClaimTypes.Dns
                 && identity.IdentityClaim.Right == Rights.PossessProperty
-                && identity.IdentityClaim.Resource is string)
+                && identity.IdentityClaim.Resource is string
+            )
             {
                 string expectedDnsName = (string)identity.IdentityClaim.Resource;
                 string actualDnsName = null;
                 for (int i = 0; i < authorizationContext.ClaimSets.Count; ++i)
                 {
                     ClaimSet claimSet = authorizationContext.ClaimSets[i];
-                    foreach (Claim claim in claimSet.FindClaims(ClaimTypes.Dns, Rights.PossessProperty))
+                    foreach (
+                        Claim claim in claimSet.FindClaims(ClaimTypes.Dns, Rights.PossessProperty)
+                    )
                     {
                         if (claim.Resource is string)
                         {
@@ -149,32 +215,58 @@ namespace System.ServiceModel.Security
                 {
                     if (actualDnsName == null)
                     {
-                        result = new MessageSecurityException(SR.GetString(SR.DnsIdentityCheckFailedForIncomingMessageLackOfDnsClaim, expectedDnsName));
+                        result = new MessageSecurityException(
+                            SR.GetString(
+                                SR.DnsIdentityCheckFailedForIncomingMessageLackOfDnsClaim,
+                                expectedDnsName
+                            )
+                        );
                     }
                     else
                     {
-                        result = new MessageSecurityException(SR.GetString(SR.DnsIdentityCheckFailedForIncomingMessage, expectedDnsName, actualDnsName));
+                        result = new MessageSecurityException(
+                            SR.GetString(
+                                SR.DnsIdentityCheckFailedForIncomingMessage,
+                                expectedDnsName,
+                                actualDnsName
+                            )
+                        );
                     }
                 }
                 else if (SR.IdentityCheckFailedForOutgoingMessage.Equals(errorString))
                 {
                     if (actualDnsName == null)
                     {
-                        result = new MessageSecurityException(SR.GetString(SR.DnsIdentityCheckFailedForOutgoingMessageLackOfDnsClaim, expectedDnsName));
+                        result = new MessageSecurityException(
+                            SR.GetString(
+                                SR.DnsIdentityCheckFailedForOutgoingMessageLackOfDnsClaim,
+                                expectedDnsName
+                            )
+                        );
                     }
                     else
                     {
-                        result = new MessageSecurityException(SR.GetString(SR.DnsIdentityCheckFailedForOutgoingMessage, expectedDnsName, actualDnsName));
+                        result = new MessageSecurityException(
+                            SR.GetString(
+                                SR.DnsIdentityCheckFailedForOutgoingMessage,
+                                expectedDnsName,
+                                actualDnsName
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    result = new MessageSecurityException(SR.GetString(errorString, identity, serviceReference));
+                    result = new MessageSecurityException(
+                        SR.GetString(errorString, identity, serviceReference)
+                    );
                 }
             }
             else
             {
-                result = new MessageSecurityException(SR.GetString(errorString, identity, serviceReference));
+                result = new MessageSecurityException(
+                    SR.GetString(errorString, identity, serviceReference)
+                );
             }
 
             return result;
@@ -189,7 +281,10 @@ namespace System.ServiceModel.Security
                 get { return instance; }
             }
 
-            public override bool TryGetIdentity(EndpointAddress reference, out EndpointIdentity identity)
+            public override bool TryGetIdentity(
+                EndpointAddress reference,
+                out EndpointIdentity identity
+            )
             {
                 if (reference == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reference");
@@ -203,12 +298,19 @@ namespace System.ServiceModel.Security
 
                 if (identity == null)
                 {
-                    SecurityTraceRecordHelper.TraceIdentityDeterminationFailure(reference, typeof(DefaultIdentityVerifier));
+                    SecurityTraceRecordHelper.TraceIdentityDeterminationFailure(
+                        reference,
+                        typeof(DefaultIdentityVerifier)
+                    );
                     return false;
                 }
                 else
                 {
-                    SecurityTraceRecordHelper.TraceIdentityDeterminationSuccess(reference, identity, typeof(DefaultIdentityVerifier));
+                    SecurityTraceRecordHelper.TraceIdentityDeterminationSuccess(
+                        reference,
+                        identity,
+                        typeof(DefaultIdentityVerifier)
+                    );
                     return true;
                 }
             }
@@ -237,10 +339,18 @@ namespace System.ServiceModel.Security
             Claim CheckDnsEquivalence(ClaimSet claimSet, string expectedSpn)
             {
                 // host/<machine-name> satisfies the DNS identity claim
-                IEnumerable<Claim> claims = claimSet.FindClaims(ClaimTypes.Spn, Rights.PossessProperty);
+                IEnumerable<Claim> claims = claimSet.FindClaims(
+                    ClaimTypes.Spn,
+                    Rights.PossessProperty
+                );
                 foreach (Claim claim in claims)
                 {
-                    if (expectedSpn.Equals((string)claim.Resource, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        expectedSpn.Equals(
+                            (string)claim.Resource,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return claim;
                     }
@@ -264,7 +374,10 @@ namespace System.ServiceModel.Security
                 return null;
             }
 
-            public override bool CheckAccess(EndpointIdentity identity, AuthorizationContext authContext)
+            public override bool CheckAccess(
+                EndpointIdentity identity,
+                AuthorizationContext authContext
+            )
             {
                 EventTraceActivity eventTraceActivity = null;
 
@@ -274,10 +387,13 @@ namespace System.ServiceModel.Security
                 if (authContext == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authContext");
 
-
                 if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled)
                 {
-                    eventTraceActivity = EventTraceActivityHelper.TryExtractActivity((OperationContext.Current != null) ? OperationContext.Current.IncomingMessage : null);
+                    eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                        (OperationContext.Current != null)
+                            ? OperationContext.Current.IncomingMessage
+                            : null
+                    );
                 }
 
                 for (int i = 0; i < authContext.ClaimSets.Count; ++i)
@@ -285,7 +401,12 @@ namespace System.ServiceModel.Security
                     ClaimSet claimSet = authContext.ClaimSets[i];
                     if (claimSet.ContainsClaim(identity.IdentityClaim))
                     {
-                        SecurityTraceRecordHelper.TraceIdentityVerificationSuccess(eventTraceActivity, identity, identity.IdentityClaim, this.GetType());
+                        SecurityTraceRecordHelper.TraceIdentityVerificationSuccess(
+                            eventTraceActivity,
+                            identity,
+                            identity.IdentityClaim,
+                            this.GetType()
+                        );
                         return true;
                     }
 
@@ -293,11 +414,20 @@ namespace System.ServiceModel.Security
                     string expectedSpn = null;
                     if (ClaimTypes.Dns.Equals(identity.IdentityClaim.ClaimType))
                     {
-                        expectedSpn = string.Format(CultureInfo.InvariantCulture, "host/{0}", (string)identity.IdentityClaim.Resource);
+                        expectedSpn = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "host/{0}",
+                            (string)identity.IdentityClaim.Resource
+                        );
                         Claim claim = CheckDnsEquivalence(claimSet, expectedSpn);
                         if (claim != null)
                         {
-                            SecurityTraceRecordHelper.TraceIdentityVerificationSuccess(eventTraceActivity, identity, claim, this.GetType());
+                            SecurityTraceRecordHelper.TraceIdentityVerificationSuccess(
+                                eventTraceActivity,
+                                identity,
+                                claim,
+                                this.GetType()
+                            );
                             return true;
                         }
                     }
@@ -324,12 +454,21 @@ namespace System.ServiceModel.Security
                         Claim claim = CheckSidEquivalence(identitySid, claimSet);
                         if (claim != null)
                         {
-                            SecurityTraceRecordHelper.TraceIdentityVerificationSuccess(eventTraceActivity, identity, claim, this.GetType());
+                            SecurityTraceRecordHelper.TraceIdentityVerificationSuccess(
+                                eventTraceActivity,
+                                identity,
+                                claim,
+                                this.GetType()
+                            );
                             return true;
                         }
                     }
                 }
-                SecurityTraceRecordHelper.TraceIdentityVerificationFailure(identity, authContext, this.GetType());
+                SecurityTraceRecordHelper.TraceIdentityVerificationFailure(
+                    identity,
+                    authContext,
+                    this.GetType()
+                );
                 if (TD.SecurityIdentityVerificationFailureIsEnabled())
                 {
                     TD.SecurityIdentityVerificationFailure(eventTraceActivity);

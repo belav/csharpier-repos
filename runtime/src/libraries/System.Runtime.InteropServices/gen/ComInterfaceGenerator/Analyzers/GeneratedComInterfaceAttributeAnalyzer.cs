@@ -17,36 +17,59 @@ namespace Microsoft.Interop.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class GeneratedComInterfaceAttributeAnalyzer : DiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
-            = ImmutableArray.Create(GeneratorDiagnostics.InterfaceTypeNotSupported);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(GeneratorDiagnostics.InterfaceTypeNotSupported);
 
-        public static readonly ImmutableArray<ComInterfaceType> SupportedComInterfaceTypes = ImmutableArray.Create(ComInterfaceType.InterfaceIsIUnknown);
+        public static readonly ImmutableArray<ComInterfaceType> SupportedComInterfaceTypes =
+            ImmutableArray.Create(ComInterfaceType.InterfaceIsIUnknown);
 
         public override void Initialize(AnalysisContext context)
         {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            context.RegisterSymbolAction((context) =>
-            {
-                INamedTypeSymbol typeSymbol = (INamedTypeSymbol)context.Symbol;
-                if (typeSymbol.TypeKind != TypeKind.Interface)
-                    return;
-
-                ImmutableArray<AttributeData> customAttributes = typeSymbol.GetAttributes();
-                if (customAttributes.Length == 0)
-                    return;
-
-                // Interfaces with both GeneratedComInterfaceAttribute and InterfaceTypeAttribute should only have [InterfaceTypeAttribute(InterfaceIsIUnknown)]
-                if (GetAttribute(typeSymbol, TypeNames.GeneratedComInterfaceAttribute, out _)
-                    && GetAttribute(typeSymbol, TypeNames.InterfaceTypeAttribute, out AttributeData? comInterfaceAttribute)
-                    && !InterfaceTypeAttributeIsSupported(comInterfaceAttribute, out string unsupportedValue))
+            context.RegisterSymbolAction(
+                (context) =>
                 {
-                    context.ReportDiagnostic(comInterfaceAttribute.CreateDiagnosticInfo(GeneratorDiagnostics.InterfaceTypeNotSupported, unsupportedValue).ToDiagnostic());
-                }
-            }, SymbolKind.NamedType);
+                    INamedTypeSymbol typeSymbol = (INamedTypeSymbol)context.Symbol;
+                    if (typeSymbol.TypeKind != TypeKind.Interface)
+                        return;
+
+                    ImmutableArray<AttributeData> customAttributes = typeSymbol.GetAttributes();
+                    if (customAttributes.Length == 0)
+                        return;
+
+                    // Interfaces with both GeneratedComInterfaceAttribute and InterfaceTypeAttribute should only have [InterfaceTypeAttribute(InterfaceIsIUnknown)]
+                    if (
+                        GetAttribute(typeSymbol, TypeNames.GeneratedComInterfaceAttribute, out _)
+                        && GetAttribute(
+                            typeSymbol,
+                            TypeNames.InterfaceTypeAttribute,
+                            out AttributeData? comInterfaceAttribute
+                        )
+                        && !InterfaceTypeAttributeIsSupported(
+                            comInterfaceAttribute,
+                            out string unsupportedValue
+                        )
+                    )
+                    {
+                        context.ReportDiagnostic(
+                            comInterfaceAttribute
+                                .CreateDiagnosticInfo(
+                                    GeneratorDiagnostics.InterfaceTypeNotSupported,
+                                    unsupportedValue
+                                )
+                                .ToDiagnostic()
+                        );
+                    }
+                },
+                SymbolKind.NamedType
+            );
         }
 
-        private static bool InterfaceTypeAttributeIsSupported(AttributeData comInterfaceAttribute, out string argument)
+        private static bool InterfaceTypeAttributeIsSupported(
+            AttributeData comInterfaceAttribute,
+            out string argument
+        )
         {
             if (comInterfaceAttribute.ConstructorArguments.IsEmpty)
             {
@@ -73,7 +96,11 @@ namespace Microsoft.Interop.Analyzers
             return SupportedComInterfaceTypes.Contains(interfaceType);
         }
 
-        private static bool GetAttribute(ISymbol symbol, string attributeDisplayName, [NotNullWhen(true)] out AttributeData? attribute)
+        private static bool GetAttribute(
+            ISymbol symbol,
+            string attributeDisplayName,
+            [NotNullWhen(true)] out AttributeData? attribute
+        )
         {
             foreach (AttributeData attr in symbol.GetAttributes())
             {

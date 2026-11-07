@@ -55,41 +55,38 @@ internal partial class OpaqueRedirection
 
     public static void AddBlazorOpaqueRedirectionEndpoint(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet(
-            $"/{RedirectionEndpointBaseRelativeUrl}",
-            httpContext =>
+        endpoints.MapGet($"/{RedirectionEndpointBaseRelativeUrl}", httpContext =>
+        {
+            if (!httpContext.Request.Query.TryGetValue("url", out var protectedUrl))
             {
-                if (!httpContext.Request.Query.TryGetValue("url", out var protectedUrl))
-                {
-                    httpContext.Response.StatusCode = 400;
-                    return Task.CompletedTask;
-                }
-
-                var protector = CreateProtector(httpContext);
-                string url;
-
-                try
-                {
-                    url = protector.Unprotect(protectedUrl[0]!);
-                }
-                catch (CryptographicException ex)
-                {
-                    if (
-                        httpContext.RequestServices.GetService<ILogger<OpaqueRedirection>>() is
-                        { } logger
-                    )
-                    {
-                        Log.OpaqueUrlUnprotectionFailed(logger, ex);
-                    }
-
-                    httpContext.Response.StatusCode = 400;
-                    return Task.CompletedTask;
-                }
-
-                httpContext.Response.Redirect(url);
+                httpContext.Response.StatusCode = 400;
                 return Task.CompletedTask;
             }
-        );
+
+            var protector = CreateProtector(httpContext);
+            string url;
+
+            try
+            {
+                url = protector.Unprotect(protectedUrl[0]!);
+            }
+            catch (CryptographicException ex)
+            {
+                if (
+                    httpContext.RequestServices.GetService<ILogger<OpaqueRedirection>>() is
+                    { } logger
+                )
+                {
+                    Log.OpaqueUrlUnprotectionFailed(logger, ex);
+                }
+
+                httpContext.Response.StatusCode = 400;
+                return Task.CompletedTask;
+            }
+
+            httpContext.Response.Redirect(url);
+            return Task.CompletedTask;
+        });
     }
 
     private static ITimeLimitedDataProtector CreateProtector(HttpContext httpContext)

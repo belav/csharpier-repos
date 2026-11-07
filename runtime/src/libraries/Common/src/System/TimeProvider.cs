@@ -23,9 +23,7 @@ namespace System
         /// <summary>
         /// Initializes the <see cref="TimeProvider"/>.
         /// </summary>
-        protected TimeProvider()
-        {
-        }
+        protected TimeProvider() { }
 
         /// <summary>
         /// Gets a <see cref="DateTimeOffset"/> value whose date and time are set to the current
@@ -51,9 +49,13 @@ namespace System
             if (zoneInfo is null)
             {
 #if SYSTEM_PRIVATE_CORELIB
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_TimeProviderNullLocalTimeZone);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_TimeProviderNullLocalTimeZone
+                );
 #else
-                throw new InvalidOperationException(SR.InvalidOperation_TimeProviderNullLocalTimeZone);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_TimeProviderNullLocalTimeZone
+                );
 #endif // SYSTEM_PRIVATE_CORELIB
             }
             TimeSpan offset = zoneInfo.GetUtcOffset(utcDateTime);
@@ -108,13 +110,22 @@ namespace System
             if (timestampFrequency <= 0)
             {
 #if SYSTEM_PRIVATE_CORELIB
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_TimeProviderInvalidTimestampFrequency);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_TimeProviderInvalidTimestampFrequency
+                );
 #else
-                throw new InvalidOperationException(SR.InvalidOperation_TimeProviderInvalidTimestampFrequency);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_TimeProviderInvalidTimestampFrequency
+                );
 #endif // SYSTEM_PRIVATE_CORELIB
             }
 
-            return new TimeSpan((long)((endingTimestamp - startingTimestamp) * ((double)TimeSpan.TicksPerSecond / timestampFrequency)));
+            return new TimeSpan(
+                (long)(
+                    (endingTimestamp - startingTimestamp)
+                    * ((double)TimeSpan.TicksPerSecond / timestampFrequency)
+                )
+            );
         }
 
         /// <summary>
@@ -122,7 +133,8 @@ namespace System
         /// </summary>
         /// <param name="startingTimestamp">The timestamp marking the beginning of the time period.</param>
         /// <returns>A <see cref="TimeSpan"/> for the elapsed time between the starting timestamp and the time of this call./></returns>
-        public TimeSpan GetElapsedTime(long startingTimestamp) => GetElapsedTime(startingTimestamp, GetTimestamp());
+        public TimeSpan GetElapsedTime(long startingTimestamp) =>
+            GetElapsedTime(startingTimestamp, GetTimestamp());
 
         /// <summary>Creates a new <see cref="ITimer"/> instance, using <see cref="TimeSpan"/> values to measure time intervals.</summary>
         /// <param name="callback">
@@ -157,7 +169,12 @@ namespace System
         /// each time it's called. That capture can be suppressed with <see cref="ExecutionContext.SuppressFlow"/>.
         /// </para>
         /// </remarks>
-        public virtual ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
+        public virtual ITimer CreateTimer(
+            TimerCallback callback,
+            object? state,
+            TimeSpan dueTime,
+            TimeSpan period
+        )
         {
 #if SYSTEM_PRIVATE_CORELIB
             ArgumentNullException.ThrowIfNull(callback);
@@ -185,20 +202,37 @@ namespace System
 #else
             private readonly Timer _timer;
 #endif // SYSTEM_PRIVATE_CORELIB
-            public SystemTimeProviderTimer(TimeSpan dueTime, TimeSpan period, TimerCallback callback, object? state)
+
+            public SystemTimeProviderTimer(
+                TimeSpan dueTime,
+                TimeSpan period,
+                TimerCallback callback,
+                object? state
+            )
             {
 #if SYSTEM_PRIVATE_CORELIB
-                _timer = new TimerQueueTimer(callback, state, dueTime, period, flowExecutionContext: true);
+                _timer = new TimerQueueTimer(
+                    callback,
+                    state,
+                    dueTime,
+                    period,
+                    flowExecutionContext: true
+                );
 #else
                 // We need to ensure the timer roots itself. Timer created with a duration and period argument
                 // only roots the state object, so to root the timer we need the state object to reference the
                 // timer recursively.
                 var timerState = new TimerState(callback, state);
-                timerState.Timer = _timer = new Timer(static s =>
-                {
-                    TimerState ts = (TimerState)s!;
-                    ts.Callback(ts.State);
-                }, timerState, dueTime, period);
+                timerState.Timer = _timer = new Timer(
+                    static s =>
+                    {
+                        TimerState ts = (TimerState)s!;
+                        ts.Callback(ts.State);
+                    },
+                    timerState,
+                    dueTime,
+                    period
+                );
 #endif // SYSTEM_PRIVATE_CORELIB
             }
 
@@ -225,7 +259,6 @@ namespace System
 
             public void Dispose() => _timer.Dispose();
 
-
 #if SYSTEM_PRIVATE_CORELIB
             public ValueTask DisposeAsync() => _timer.DisposeAsync();
 #else
@@ -244,9 +277,8 @@ namespace System
         private sealed class SystemTimeProvider : TimeProvider
         {
             /// <summary>Initializes the instance.</summary>
-            internal SystemTimeProvider() : base()
-            {
-            }
+            internal SystemTimeProvider()
+                : base() { }
         }
     }
 }

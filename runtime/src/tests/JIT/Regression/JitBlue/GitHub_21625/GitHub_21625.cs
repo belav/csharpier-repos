@@ -17,9 +17,9 @@ namespace GitHub_21625
             {
                 return Sse2.ConvertScalarToVector128UInt32(value).AsUInt16();
             }
- 
+
             return SoftwareFallback(value);
- 
+
             Vector128<ushort> SoftwareFallback(ushort x)
             {
                 var result = Vector128<ushort>.Zero;

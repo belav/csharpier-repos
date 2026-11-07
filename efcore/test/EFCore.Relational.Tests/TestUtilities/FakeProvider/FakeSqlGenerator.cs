@@ -6,38 +6,54 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 public class FakeSqlGenerator : UpdateSqlGenerator
 {
     public FakeSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     public override ResultSetMapping AppendInsertOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         AppendInsertOperationCalls++;
-        return base.AppendInsertOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        return base.AppendInsertOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
     }
 
     public override ResultSetMapping AppendUpdateOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         AppendUpdateOperationCalls++;
-        return base.AppendUpdateOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        return base.AppendUpdateOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
     }
 
     public override ResultSetMapping AppendDeleteOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         AppendDeleteOperationCalls++;
-        return base.AppendDeleteOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        return base.AppendDeleteOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
     }
 
     public int AppendBatchHeaderCalls { get; set; }

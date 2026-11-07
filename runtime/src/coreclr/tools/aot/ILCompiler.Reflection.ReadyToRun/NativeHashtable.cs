@@ -200,7 +200,8 @@ namespace ILCompiler.Reflection.ReadyToRun
 
         private NativeParser GetParserForBucket(uint bucket, out uint endOffset)
         {
-            uint start, end;
+            uint start,
+                end;
 
             if (_entryIndexSize == 0)
             {
@@ -281,14 +282,16 @@ namespace ILCompiler.Reflection.ReadyToRun
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"NativeCuckooFilter Size: {(_filterEndOffset - _filterStartOffset) / 16}");
+            sb.AppendLine(
+                $"NativeCuckooFilter Size: {(_filterEndOffset - _filterStartOffset) / 16}"
+            );
             int bucket = 0;
-            foreach (ushort [] bucketContents in GetBuckets())
+            foreach (ushort[] bucketContents in GetBuckets())
             {
                 sb.Append($"Bucket: {bucket} [");
                 for (int i = 0; i < 8; i++)
                 {
-                    sb.Append($"{bucketContents[i],4:X} ");
+                    sb.Append($"{bucketContents[i], 4:X} ");
                 }
                 sb.AppendLine("]");
                 bucket++;

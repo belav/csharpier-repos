@@ -42,17 +42,25 @@ namespace System.Web.Helpers.Test
             byte[] retVal = CryptoUtil.ComputeSHA256(new string[0]);
 
             // Assert
-            Assert.Equal("47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=", Convert.ToBase64String(retVal));
+            Assert.Equal(
+                "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+                Convert.ToBase64String(retVal)
+            );
         }
 
         [Fact]
         public void TestVectors_NonEmpty()
         {
             // Act
-            byte[] retVal = CryptoUtil.ComputeSHA256(new string[] { "a parameter", "another parameter" });
+            byte[] retVal = CryptoUtil.ComputeSHA256(
+                new string[] { "a parameter", "another parameter" }
+            );
 
             // Assert
-            Assert.Equal("Bez9yYh4Zq9jK1H5jD21wh04HTZi/vgxp6yDE7Y6cfo=", Convert.ToBase64String(retVal));
+            Assert.Equal(
+                "Bez9yYh4Zq9jK1H5jD21wh04HTZi/vgxp6yDE7Y6cfo=",
+                Convert.ToBase64String(retVal)
+            );
         }
     }
 }

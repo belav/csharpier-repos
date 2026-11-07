@@ -1,4 +1,3 @@
-
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -9,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,61 +33,64 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
 
-namespace System.Reflection {
-
-	abstract class RtFieldInfo : FieldInfo {
-		internal abstract object UnsafeGetValue (object obj);
-		internal abstract void UnsafeSetValue (Object obj, Object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture);
+namespace System.Reflection
+{
+    abstract class RtFieldInfo : FieldInfo
+    {
+        internal abstract object UnsafeGetValue(object obj);
+        internal abstract void UnsafeSetValue(
+            Object obj,
+            Object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        );
         internal abstract void CheckConsistency(Object target);
-	}
+    }
 
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential)]
-	class RuntimeFieldInfo : RtFieldInfo
-	, ISerializable
-	{
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    class RuntimeFieldInfo : RtFieldInfo, ISerializable
+    {
 #pragma warning disable 649
-		internal IntPtr klass;
-		internal RuntimeFieldHandle fhandle;
-		string name;
-		Type type;
-		FieldAttributes attrs;
+        internal IntPtr klass;
+        internal RuntimeFieldHandle fhandle;
+        string name;
+        Type type;
+        FieldAttributes attrs;
 #pragma warning restore 649
 
-		internal BindingFlags BindingFlags {
-			get {
-				return 0;
-			}
-		}
+        internal BindingFlags BindingFlags
+        {
+            get { return 0; }
+        }
 
-		public override Module Module {
-			get {
-				return GetRuntimeModule ();
-			}
-		}
+        public override Module Module
+        {
+            get { return GetRuntimeModule(); }
+        }
 
-		internal RuntimeType GetDeclaringTypeInternal ()
-		{
-			return (RuntimeType) DeclaringType;
-		}
+        internal RuntimeType GetDeclaringTypeInternal()
+        {
+            return (RuntimeType)DeclaringType;
+        }
 
-		RuntimeType ReflectedTypeInternal {
-			get {
-				return (RuntimeType) ReflectedType;
-			}
-		}
+        RuntimeType ReflectedTypeInternal
+        {
+            get { return (RuntimeType)ReflectedType; }
+        }
 
-		internal RuntimeModule GetRuntimeModule ()
-		{
-			return GetDeclaringTypeInternal ().GetRuntimeModule ();
-		}
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return GetDeclaringTypeInternal().GetRuntimeModule();
+        }
 
         #region ISerializable Implementation
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -101,12 +103,13 @@ namespace System.Reflection {
                 Name,
                 ReflectedTypeInternal,
                 ToString(),
-                MemberTypes.Field);
+                MemberTypes.Field
+            );
         }
         #endregion
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		internal override extern object UnsafeGetValue (object obj);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern override object UnsafeGetValue(object obj);
 
         internal override void CheckConsistency(Object target)
         {
@@ -119,41 +122,73 @@ namespace System.Reflection {
                     {
 #if FEATURE_LEGACYNETCF
                         if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
-                            throw new ArgumentNullException(Environment.GetResourceString("RFLCT.Targ_StatFldReqTarg"));
+                            throw new ArgumentNullException(
+                                Environment.GetResourceString("RFLCT.Targ_StatFldReqTarg")
+                            );
                         else
 #endif
-                        throw new TargetException(Environment.GetResourceString("RFLCT.Targ_StatFldReqTarg"));
+                        throw new TargetException(
+                            Environment.GetResourceString("RFLCT.Targ_StatFldReqTarg")
+                        );
                     }
                     else
                     {
                         throw new ArgumentException(
-                            String.Format(CultureInfo.CurrentUICulture, Environment.GetResourceString("Arg_FieldDeclTarget"),
-                                Name, DeclaringType, target.GetType()));
+                            String.Format(
+                                CultureInfo.CurrentUICulture,
+                                Environment.GetResourceString("Arg_FieldDeclTarget"),
+                                Name,
+                                DeclaringType,
+                                target.GetType()
+                            )
+                        );
                     }
                 }
             }
         }
 
-		[DebuggerStepThroughAttribute]
-		[Diagnostics.DebuggerHidden]
-		internal override void UnsafeSetValue (Object obj, Object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
-		{
-			bool domainInitialized = false;
-			RuntimeFieldHandle.SetValue (this, obj, value, null, Attributes, null, ref domainInitialized);
-		}
+        [DebuggerStepThroughAttribute]
+        [Diagnostics.DebuggerHidden]
+        internal override void UnsafeSetValue(
+            Object obj,
+            Object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
+        {
+            bool domainInitialized = false;
+            RuntimeFieldHandle.SetValue(
+                this,
+                obj,
+                value,
+                null,
+                Attributes,
+                null,
+                ref domainInitialized
+            );
+        }
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
         public override void SetValueDirect(TypedReference obj, Object value)
         {
             if (obj.IsNull)
-                throw new ArgumentException(Environment.GetResourceString("Arg_TypedReference_Null"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_TypedReference_Null")
+                );
             Contract.EndContractBlock();
 
             unsafe
             {
                 // Passing TypedReference by reference is easier to make correct in native code
-                RuntimeFieldHandle.SetValueDirect(this, (RuntimeType)FieldType, &obj, value, (RuntimeType)DeclaringType);
+                RuntimeFieldHandle.SetValueDirect(
+                    this,
+                    (RuntimeType)FieldType,
+                    &obj,
+                    value,
+                    (RuntimeType)DeclaringType
+                );
             }
         }
 
@@ -162,185 +197,221 @@ namespace System.Reflection {
         public override Object GetValueDirect(TypedReference obj)
         {
             if (obj.IsNull)
-                throw new ArgumentException(Environment.GetResourceString("Arg_TypedReference_Null"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_TypedReference_Null")
+                );
             Contract.EndContractBlock();
 
             unsafe
             {
                 // Passing TypedReference by reference is easier to make correct in native code
-                return RuntimeFieldHandle.GetValueDirect(this, (RuntimeType)FieldType, &obj, (RuntimeType)DeclaringType);
+                return RuntimeFieldHandle.GetValueDirect(
+                    this,
+                    (RuntimeType)FieldType,
+                    &obj,
+                    (RuntimeType)DeclaringType
+                );
             }
         }
-		
-		public override FieldAttributes Attributes {
-			get {
-				return attrs;
-			}
-		}
-		public override RuntimeFieldHandle FieldHandle {
-			get {
-				return fhandle;
-			}
-		}
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern Type ResolveType ();
+        public override FieldAttributes Attributes
+        {
+            get { return attrs; }
+        }
+        public override RuntimeFieldHandle FieldHandle
+        {
+            get { return fhandle; }
+        }
 
-		public override Type FieldType { 
-			get {
-				if (type == null)
-					type = ResolveType ();
-				return type;
-			}
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern Type ResolveType();
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private extern Type GetParentType (bool declaring);
+        public override Type FieldType
+        {
+            get
+            {
+                if (type == null)
+                    type = ResolveType();
+                return type;
+            }
+        }
 
-		public override Type ReflectedType {
-			get {
-				return GetParentType (false);
-			}
-		}
-		public override Type DeclaringType {
-			get {
-				return GetParentType (true);
-			}
-		}
-		public override string Name {
-			get {
-				return name;
-			}
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern Type GetParentType(bool declaring);
 
-		public override bool IsDefined (Type attributeType, bool inherit) {
-			return MonoCustomAttrs.IsDefined (this, attributeType, inherit);
-		}
+        public override Type ReflectedType
+        {
+            get { return GetParentType(false); }
+        }
+        public override Type DeclaringType
+        {
+            get { return GetParentType(true); }
+        }
+        public override string Name
+        {
+            get { return name; }
+        }
 
-		public override object[] GetCustomAttributes( bool inherit) {
-			return MonoCustomAttrs.GetCustomAttributes (this, inherit);
-		}
-		public override object[] GetCustomAttributes( Type attributeType, bool inherit) {
-			return MonoCustomAttrs.GetCustomAttributes (this, attributeType, inherit);
-		}
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return MonoCustomAttrs.IsDefined(this, attributeType, inherit);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		internal override extern int GetFieldOffset ();
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return MonoCustomAttrs.GetCustomAttributes(this, inherit);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private extern object GetValueInternal (object obj);
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return MonoCustomAttrs.GetCustomAttributes(this, attributeType, inherit);
+        }
 
-		public override object GetValue (object obj)
-		{
-			if (!IsStatic) {
-				if (obj == null)
-					throw new TargetException ("Non-static field requires a target");
-				if (!DeclaringType.IsAssignableFrom (obj.GetType ()))
-					throw new ArgumentException (string.Format (
-						"Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-					 	Name, DeclaringType, obj.GetType ()),
-					 	"obj");
-			}
-			
-			if (!IsLiteral)
-				CheckGeneric ();
-			return GetValueInternal (obj);
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern override int GetFieldOffset();
 
-		public override string ToString () {
-			return String.Format ("{0} {1}", FieldType, name);
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern object GetValueInternal(object obj);
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private static extern void SetValueInternal (FieldInfo fi, object obj, object value);
+        public override object GetValue(object obj)
+        {
+            if (!IsStatic)
+            {
+                if (obj == null)
+                    throw new TargetException("Non-static field requires a target");
+                if (!DeclaringType.IsAssignableFrom(obj.GetType()))
+                    throw new ArgumentException(
+                        string.Format(
+                            "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                            Name,
+                            DeclaringType,
+                            obj.GetType()
+                        ),
+                        "obj"
+                    );
+            }
 
-		public override void SetValue (object obj, object val, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
-		{
-			if (!IsStatic) {
-				if (obj == null)
-					throw new TargetException ("Non-static field requires a target");
-				if (!DeclaringType.IsAssignableFrom (obj.GetType ()))
-					throw new ArgumentException (string.Format (
-						"Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-					 	Name, DeclaringType, obj.GetType ()),
-					 	"obj");
-			}
-			if (IsLiteral)
-				throw new FieldAccessException ("Cannot set a constant field");
-			if (binder == null)
-				binder = Type.DefaultBinder;
-			CheckGeneric ();
-			if (val != null) {
-				RuntimeType fieldType = (RuntimeType) FieldType;
-				val = fieldType.CheckValue (val, binder, culture, invokeAttr);
-			}
-			SetValueInternal (this, obj, val);
-		}
-		
-		internal RuntimeFieldInfo Clone (string newName)
-		{
-			RuntimeFieldInfo field = new RuntimeFieldInfo ();
-			field.name = newName;
-			field.type = type;
-			field.attrs = attrs;
-			field.klass = klass;
-			field.fhandle = fhandle;
-			return field;
-		}
+            if (!IsLiteral)
+                CheckGeneric();
+            return GetValueInternal(obj);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public override extern object GetRawConstantValue ();
+        public override string ToString()
+        {
+            return String.Format("{0} {1}", FieldType, name);
+        }
 
-		public override IList<CustomAttributeData> GetCustomAttributesData () {
-			return CustomAttributeData.GetCustomAttributes (this);
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern void SetValueInternal(FieldInfo fi, object obj, object value);
 
-		void CheckGeneric () {
-			if (DeclaringType.ContainsGenericParameters)
-				throw new InvalidOperationException ("Late bound operations cannot be performed on fields with types for which Type.ContainsGenericParameters is true.");
-	    }
+        public override void SetValue(
+            object obj,
+            object val,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
+        {
+            if (!IsStatic)
+            {
+                if (obj == null)
+                    throw new TargetException("Non-static field requires a target");
+                if (!DeclaringType.IsAssignableFrom(obj.GetType()))
+                    throw new ArgumentException(
+                        string.Format(
+                            "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                            Name,
+                            DeclaringType,
+                            obj.GetType()
+                        ),
+                        "obj"
+                    );
+            }
+            if (IsLiteral)
+                throw new FieldAccessException("Cannot set a constant field");
+            if (binder == null)
+                binder = Type.DefaultBinder;
+            CheckGeneric();
+            if (val != null)
+            {
+                RuntimeType fieldType = (RuntimeType)FieldType;
+                val = fieldType.CheckValue(val, binder, culture, invokeAttr);
+            }
+            SetValueInternal(this, obj, val);
+        }
+
+        internal RuntimeFieldInfo Clone(string newName)
+        {
+            RuntimeFieldInfo field = new RuntimeFieldInfo();
+            field.name = newName;
+            field.type = type;
+            field.attrs = attrs;
+            field.klass = klass;
+            field.fhandle = fhandle;
+            return field;
+        }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern override object GetRawConstantValue();
+
+        public override IList<CustomAttributeData> GetCustomAttributesData()
+        {
+            return CustomAttributeData.GetCustomAttributes(this);
+        }
+
+        void CheckGeneric()
+        {
+            if (DeclaringType.ContainsGenericParameters)
+                throw new InvalidOperationException(
+                    "Late bound operations cannot be performed on fields with types for which Type.ContainsGenericParameters is true."
+                );
+        }
 
 #if MOBILE
-		static int get_core_clr_security_level ()
-		{
-			return 1;
-		}
+        static int get_core_clr_security_level()
+        {
+            return 1;
+        }
 #else
-		//seclevel { transparent = 0, safe-critical = 1, critical = 2}
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public extern int get_core_clr_security_level ();
+        //seclevel { transparent = 0, safe-critical = 1, critical = 2}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern int get_core_clr_security_level();
 
-		public override bool IsSecurityTransparent {
-			get { return get_core_clr_security_level () == 0; }
-		}
+        public override bool IsSecurityTransparent
+        {
+            get { return get_core_clr_security_level() == 0; }
+        }
 
-		public override bool IsSecurityCritical {
-			get { return get_core_clr_security_level () > 0; }
-		}
+        public override bool IsSecurityCritical
+        {
+            get { return get_core_clr_security_level() > 0; }
+        }
 
-		public override bool IsSecuritySafeCritical {
-			get { return get_core_clr_security_level () == 1; }
-		}
+        public override bool IsSecuritySafeCritical
+        {
+            get { return get_core_clr_security_level() == 1; }
+        }
 #endif
 
-		public sealed override bool HasSameMetadataDefinitionAs (MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeFieldInfo> (other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
 
-		public override int MetadataToken {
-			get {
-				return get_metadata_token (this);
-			}
-		}
-		
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal static extern int get_metadata_token (RuntimeFieldInfo monoField);
+        public override int MetadataToken
+        {
+            get { return get_metadata_token(this); }
+        }
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern Type[] GetTypeModifiers (bool optional);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern int get_metadata_token(RuntimeFieldInfo monoField);
 
-		public override Type[] GetOptionalCustomModifiers () => GetCustomModifiers (true);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern Type[] GetTypeModifiers(bool optional);
 
-		public override Type[] GetRequiredCustomModifiers () => GetCustomModifiers (false);
+        public override Type[] GetOptionalCustomModifiers() => GetCustomModifiers(true);
 
-		private Type[] GetCustomModifiers (bool optional) => GetTypeModifiers (optional) ?? Type.EmptyTypes;
-	}
+        public override Type[] GetRequiredCustomModifiers() => GetCustomModifiers(false);
+
+        private Type[] GetCustomModifiers(bool optional) =>
+            GetTypeModifiers(optional) ?? Type.EmptyTypes;
+    }
 }

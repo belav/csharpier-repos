@@ -24,7 +24,8 @@ namespace System.Reflection.Metadata
             StandaloneSignatureHandle localSignatureHandle,
             MemoryBlock il,
             ImmutableArray<ExceptionRegion> exceptionRegions,
-            int size)
+            int size
+        )
         {
             Debug.Assert(!exceptionRegions.IsDefault);
 
@@ -125,7 +126,9 @@ namespace System.Reflection.Metadata
             byte headByte2 = reader.ReadByte();
             if ((headByte2 >> ILFatFormatHeaderSizeShift) != ILFatFormatHeaderSize)
             {
-                throw new BadImageFormatException(SR.Format(SR.InvalidMethodHeader2, headByte, headByte2));
+                throw new BadImageFormatException(
+                    SR.Format(SR.InvalidMethodHeader2, headByte, headByte2)
+                );
             }
 
             bool localsInitialized = (headByte & ILInitLocals) == ILInitLocals;
@@ -142,11 +145,15 @@ namespace System.Reflection.Metadata
             }
             else if ((localSignatureToken & TokenTypeIds.TypeMask) == TokenTypeIds.Signature)
             {
-                localSignatureHandle = StandaloneSignatureHandle.FromRowId((int)((uint)localSignatureToken & TokenTypeIds.RIDMask));
+                localSignatureHandle = StandaloneSignatureHandle.FromRowId(
+                    (int)((uint)localSignatureToken & TokenTypeIds.RIDMask)
+                );
             }
             else
             {
-                throw new BadImageFormatException(SR.Format(SR.InvalidLocalSignatureToken, unchecked((uint)localSignatureToken)));
+                throw new BadImageFormatException(
+                    SR.Format(SR.InvalidLocalSignatureToken, unchecked((uint)localSignatureToken))
+                );
             }
 
             var ilBlock = reader.GetMemoryBlockAt(0, ilSize);
@@ -186,10 +193,14 @@ namespace System.Reflection.Metadata
                 localSignatureHandle,
                 ilBlock,
                 exceptionHandlers,
-                reader.Offset - startOffset);
+                reader.Offset - startOffset
+            );
         }
 
-        private static ImmutableArray<ExceptionRegion> ReadSmallExceptionHandlers(ref BlobReader memReader, int count)
+        private static ImmutableArray<ExceptionRegion> ReadSmallExceptionHandlers(
+            ref BlobReader memReader,
+            int count
+        )
         {
             var result = new ExceptionRegion[count];
             for (int i = 0; i < result.Length; i++)
@@ -200,13 +211,23 @@ namespace System.Reflection.Metadata
                 var handlerOffset = memReader.ReadUInt16();
                 var handlerLength = memReader.ReadByte();
                 var classTokenOrFilterOffset = memReader.ReadInt32();
-                result[i] = new ExceptionRegion(kind, tryOffset, tryLength, handlerOffset, handlerLength, classTokenOrFilterOffset);
+                result[i] = new ExceptionRegion(
+                    kind,
+                    tryOffset,
+                    tryLength,
+                    handlerOffset,
+                    handlerLength,
+                    classTokenOrFilterOffset
+                );
             }
 
             return ImmutableArray.Create(result);
         }
 
-        private static ImmutableArray<ExceptionRegion> ReadFatExceptionHandlers(ref BlobReader memReader, int count)
+        private static ImmutableArray<ExceptionRegion> ReadFatExceptionHandlers(
+            ref BlobReader memReader,
+            int count
+        )
         {
             var result = new ExceptionRegion[count];
             for (int i = 0; i < result.Length; i++)
@@ -217,7 +238,14 @@ namespace System.Reflection.Metadata
                 int handlerOffset = memReader.ReadInt32();
                 int handlerLength = memReader.ReadInt32();
                 int classTokenOrFilterOffset = memReader.ReadInt32();
-                result[i] = new ExceptionRegion(sehFlags, tryOffset, tryLength, handlerOffset, handlerLength, classTokenOrFilterOffset);
+                result[i] = new ExceptionRegion(
+                    sehFlags,
+                    tryOffset,
+                    tryLength,
+                    handlerOffset,
+                    handlerLength,
+                    classTokenOrFilterOffset
+                );
             }
 
             return ImmutableArray.Create(result);

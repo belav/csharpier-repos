@@ -19,14 +19,16 @@ namespace System.Reflection.Metadata
             ImportDefinitionKind kind,
             BlobHandle alias = default(BlobHandle),
             AssemblyReferenceHandle assembly = default(AssemblyReferenceHandle),
-            Handle typeOrNamespace = default(Handle))
+            Handle typeOrNamespace = default(Handle)
+        )
         {
             Debug.Assert(
-                typeOrNamespace.IsNil ||
-                typeOrNamespace.Kind == HandleKind.Blob ||
-                typeOrNamespace.Kind == HandleKind.TypeDefinition ||
-                typeOrNamespace.Kind == HandleKind.TypeReference ||
-                typeOrNamespace.Kind == HandleKind.TypeSpecification);
+                typeOrNamespace.IsNil
+                    || typeOrNamespace.Kind == HandleKind.Blob
+                    || typeOrNamespace.Kind == HandleKind.TypeDefinition
+                    || typeOrNamespace.Kind == HandleKind.TypeReference
+                    || typeOrNamespace.Kind == HandleKind.TypeSpecification
+            );
 
             Kind = kind;
             Alias = alias;

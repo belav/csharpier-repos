@@ -4,8 +4,6 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-using Roslyn.Test.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -13,12 +11,19 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Roslyn.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 {
     public abstract class FunctionResolverTestBase : CSharpTestBase
     {
-        internal static void Resolve(Process process, Resolver resolver, RequestSignature signature, string[] expectedSignatures)
+        internal static void Resolve(
+            Process process,
+            Resolver resolver,
+            RequestSignature signature,
+            string[] expectedSignatures
+        )
         {
             var request = new Request(null, signature);
             resolver.EnableResolution(process, request);
@@ -27,7 +32,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 
         internal static void VerifySignatures(Request request, params string[] expectedSignatures)
         {
-            var actualSignatures = request.GetResolvedAddresses().Select(a => GetMethodSignature(a.Module, a.Token));
+            var actualSignatures = request
+                .GetResolvedAddresses()
+                .Select(a => GetMethodSignature(a.Module, a.Token));
             AssertEx.Equal(expectedSignatures, actualSignatures);
         }
 
@@ -37,7 +44,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return GetMethodSignature(reader, MetadataTokens.MethodDefinitionHandle(token));
         }
 
-        private static string GetMethodSignature(MetadataReader reader, MethodDefinitionHandle handle)
+        private static string GetMethodSignature(
+            MetadataReader reader,
+            MethodDefinitionHandle handle
+        )
         {
             var methodDef = reader.GetMethodDefinition(handle);
             var builder = new StringBuilder();
@@ -47,12 +57,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             builder.Append('.');
             builder.Append(reader.GetString(methodDef.Name));
             var methodTypeParameters = methodDef.GetGenericParameters();
-            AppendTypeParameters(builder, DecodeTypeParameters(reader, offset: 0, typeParameters: methodTypeParameters));
+            AppendTypeParameters(
+                builder,
+                DecodeTypeParameters(reader, offset: 0, typeParameters: methodTypeParameters)
+            );
             var decoder = new MetadataDecoder(
                 reader,
                 GetTypeParameterNames(reader, allTypeParameters),
                 0,
-                GetTypeParameterNames(reader, methodTypeParameters));
+                GetTypeParameterNames(reader, methodTypeParameters)
+            );
             try
             {
                 AppendParameters(builder, decoder.DecodeParameters(methodDef));
@@ -64,12 +78,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return builder.ToString();
         }
 
-        private static ImmutableArray<string> GetTypeParameterNames(MetadataReader reader, GenericParameterHandleCollection handles)
+        private static ImmutableArray<string> GetTypeParameterNames(
+            MetadataReader reader,
+            GenericParameterHandleCollection handles
+        )
         {
-            return ImmutableArray.CreateRange(handles.Select(h => reader.GetString(reader.GetGenericParameter(h).Name)));
+            return ImmutableArray.CreateRange(
+                handles.Select(h => reader.GetString(reader.GetGenericParameter(h).Name))
+            );
         }
 
-        private static void AppendTypeName(StringBuilder builder, MetadataReader reader, TypeDefinition typeDef)
+        private static void AppendTypeName(
+            StringBuilder builder,
+            MetadataReader reader,
+            TypeDefinition typeDef
+        )
         {
             var declaringTypeHandle = typeDef.GetDeclaringType();
             int declaringTypeArity;
@@ -97,10 +120,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 typeName = typeName.Substring(0, index);
             }
             builder.Append(typeName);
-            AppendTypeParameters(builder, DecodeTypeParameters(reader, declaringTypeArity, typeDef.GetGenericParameters()));
+            AppendTypeParameters(
+                builder,
+                DecodeTypeParameters(reader, declaringTypeArity, typeDef.GetGenericParameters())
+            );
         }
 
-        private static void AppendTypeParameters(StringBuilder builder, ImmutableArray<string> typeParameters)
+        private static void AppendTypeParameters(
+            StringBuilder builder,
+            ImmutableArray<string> typeParameters
+        )
         {
             if (typeParameters.Length > 0)
             {
@@ -110,7 +139,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             }
         }
 
-        private static void AppendParameters(StringBuilder builder, ImmutableArray<ParameterSignature> parameters)
+        private static void AppendParameters(
+            StringBuilder builder,
+            ImmutableArray<ParameterSignature> parameters
+        )
         {
             builder.Append('(');
             AppendCommaSeparatedList(builder, parameters, AppendParameter);
@@ -167,7 +199,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             }
         }
 
-        private static void AppendTypeArguments(StringBuilder builder, ImmutableArray<TypeSignature> typeArguments)
+        private static void AppendTypeArguments(
+            StringBuilder builder,
+            ImmutableArray<TypeSignature> typeArguments
+        )
         {
             if (typeArguments.Length > 0)
             {
@@ -177,7 +212,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             }
         }
 
-        private static void AppendCommaSeparatedList<T>(StringBuilder builder, ImmutableArray<T> items, Action<StringBuilder, T> appendItem)
+        private static void AppendCommaSeparatedList<T>(
+            StringBuilder builder,
+            ImmutableArray<T> items,
+            Action<StringBuilder, T> appendItem
+        )
         {
             bool any = false;
             foreach (var item in items)
@@ -191,7 +230,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             }
         }
 
-        private static ImmutableArray<string> DecodeTypeParameters(MetadataReader reader, int offset, GenericParameterHandleCollection typeParameters)
+        private static ImmutableArray<string> DecodeTypeParameters(
+            MetadataReader reader,
+            int offset,
+            GenericParameterHandleCollection typeParameters
+        )
         {
             int arity = typeParameters.Count - offset;
             Debug.Assert(arity >= 0);

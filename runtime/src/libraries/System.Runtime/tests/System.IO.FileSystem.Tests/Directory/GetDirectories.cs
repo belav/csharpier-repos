@@ -8,8 +8,14 @@ namespace System.IO.Tests
 {
     public class Directory_GetDirectories_str : Directory_GetFileSystemEntries_str
     {
-        protected override bool TestFiles { get { return false; } }
-        protected override bool TestDirectories { get { return true; } }
+        protected override bool TestFiles
+        {
+            get { return false; }
+        }
+        protected override bool TestDirectories
+        {
+            get { return true; }
+        }
 
         public override string[] GetEntries(string path)
         {
@@ -26,7 +32,9 @@ namespace System.IO.Tests
             {
                 // Create a symlink to a folder that exists
                 string linkPath = Path.Combine(containingFolder.FullName, GetRandomLinkName());
-                Assert.True(MountHelper.CreateSymbolicLink(linkPath, targetDir.FullName, isDirectory: true));
+                Assert.True(
+                    MountHelper.CreateSymbolicLink(linkPath, targetDir.FullName, isDirectory: true)
+                );
 
                 Assert.True(Directory.Exists(linkPath));
                 Assert.Equal(1, GetEntries(containingFolder.FullName).Count());
@@ -50,8 +58,14 @@ namespace System.IO.Tests
 
     public class Directory_GetDirectories_str_str : Directory_GetFileSystemEntries_str_str
     {
-        protected override bool TestFiles { get { return false; } }
-        protected override bool TestDirectories { get { return true; } }
+        protected override bool TestFiles
+        {
+            get { return false; }
+        }
+        protected override bool TestDirectories
+        {
+            get { return true; }
+        }
 
         public override string[] GetEntries(string path)
         {
@@ -66,8 +80,14 @@ namespace System.IO.Tests
 
     public class Directory_GetDirectories_str_str_so : Directory_GetFileSystemEntries_str_str_so
     {
-        protected override bool TestFiles { get { return false; } }
-        protected override bool TestDirectories { get { return true; } }
+        protected override bool TestFiles
+        {
+            get { return false; }
+        }
+        protected override bool TestDirectories
+        {
+            get { return true; }
+        }
 
         public override string[] GetEntries(string path)
         {

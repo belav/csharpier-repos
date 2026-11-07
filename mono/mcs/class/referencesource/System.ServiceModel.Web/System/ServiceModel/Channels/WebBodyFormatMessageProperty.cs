@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //----------------------------------------------------------------------------
 using System.Globalization;
+
 namespace System.ServiceModel.Channels
 {
     public sealed class WebBodyFormatMessageProperty : IMessageProperty
@@ -16,7 +17,11 @@ namespace System.ServiceModel.Channels
         {
             if (format == WebContentFormat.Default)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR2.GetString(SR2.DefaultContentFormatNotAllowedInProperty)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR2.GetString(SR2.DefaultContentFormatNotAllowedInProperty)
+                    )
+                );
             }
             this.format = format;
         }
@@ -69,7 +74,10 @@ namespace System.ServiceModel.Channels
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, SR2.GetString(SR2.WebBodyFormatPropertyToString, this.Format.ToString()));
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                SR2.GetString(SR2.WebBodyFormatPropertyToString, this.Format.ToString())
+            );
         }
     }
 }

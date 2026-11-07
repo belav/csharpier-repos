@@ -32,12 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal abstract class AbstractVsTextViewFilter : AbstractOleCommandTarget, IVsTextViewFilter
     {
-        public AbstractVsTextViewFilter(
-            IWpfTextView wpfTextView,
-            IComponentModel componentModel)
-            : base(wpfTextView, componentModel)
-        {
-        }
+        public AbstractVsTextViewFilter(IWpfTextView wpfTextView, IComponentModel componentModel)
+            : base(wpfTextView, componentModel) { }
 
         int IVsTextViewFilter.GetDataTipText(TextSpan[] pSpan, out string pbstrText)
         {
@@ -69,7 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return GetDataTipTextImpl(subjectBuffer, pSpan, out pbstrText);
         }
 
-        protected int GetDataTipTextImpl(ITextBuffer subjectBuffer, TextSpan[] pSpan, out string pbstrText)
+        protected int GetDataTipTextImpl(
+            ITextBuffer subjectBuffer,
+            TextSpan[] pSpan,
+            out string pbstrText
+        )
         {
             pbstrText = null;
 
@@ -81,7 +81,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return VSConstants.E_FAIL;
             }
 
-            using (Logger.LogBlock(FunctionId.Debugging_VsLanguageDebugInfo_GetDataTipText, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Debugging_VsLanguageDebugInfo_GetDataTipText,
+                    CancellationToken.None
+                )
+            )
             {
                 pbstrText = null;
                 if (pSpan == null || pSpan.Length != 1)
@@ -92,48 +97,70 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var result = VSConstants.E_FAIL;
                 string pbstrTextInternal = null;
 
-                var uiThreadOperationExecutor = ComponentModel.GetService<IUIThreadOperationExecutor>();
+                var uiThreadOperationExecutor =
+                    ComponentModel.GetService<IUIThreadOperationExecutor>();
                 uiThreadOperationExecutor.Execute(
                     title: ServicesVSResources.Debugger,
                     defaultDescription: ServicesVSResources.Getting_DataTip_text,
                     allowCancellation: true,
                     showProgress: false,
                     action: context =>
-                {
-                    IServiceProvider serviceProvider = ComponentModel.GetService<SVsServiceProvider>();
-                    var debugger = (IVsDebugger)serviceProvider.GetService(typeof(SVsShellDebugger));
-                    var debugMode = new DBGMODE[1];
-
-                    var cancellationToken = context.UserCancellationToken;
-                    if (ErrorHandler.Succeeded(debugger.GetMode(debugMode)) && debugMode[0] != DBGMODE.DBGMODE_Design)
                     {
-                        var textSpan = pSpan[0];
+                        IServiceProvider serviceProvider =
+                            ComponentModel.GetService<SVsServiceProvider>();
+                        var debugger = (IVsDebugger)
+                            serviceProvider.GetService(typeof(SVsShellDebugger));
+                        var debugMode = new DBGMODE[1];
 
-                        var textSnapshot = subjectBuffer.CurrentSnapshot;
-                        var document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges();
-
-                        if (document != null)
+                        var cancellationToken = context.UserCancellationToken;
+                        if (
+                            ErrorHandler.Succeeded(debugger.GetMode(debugMode))
+                            && debugMode[0] != DBGMODE.DBGMODE_Design
+                        )
                         {
-                            var languageDebugInfo = document.Project.Services.GetService<ILanguageDebugInfoService>();
-                            if (languageDebugInfo != null)
-                            {
-                                var spanOpt = textSnapshot.TryGetSpan(textSpan);
-                                if (spanOpt.HasValue)
-                                {
-                                    var dataTipInfo = languageDebugInfo.GetDataTipInfoAsync(document, spanOpt.Value.Start, cancellationToken).WaitAndGetResult(cancellationToken);
-                                    if (!dataTipInfo.IsDefault)
-                                    {
-                                        var resultSpan = dataTipInfo.Span.ToSnapshotSpan(textSnapshot);
-                                        var textOpt = dataTipInfo.Text;
+                            var textSpan = pSpan[0];
 
-                                        pSpan[0] = resultSpan.ToVsTextSpan();
-                                        result = debugger.GetDataTipValue((IVsTextLines)vsBuffer, pSpan, textOpt, out pbstrTextInternal);
+                            var textSnapshot = subjectBuffer.CurrentSnapshot;
+                            var document =
+                                textSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+
+                            if (document != null)
+                            {
+                                var languageDebugInfo =
+                                    document.Project.Services.GetService<ILanguageDebugInfoService>();
+                                if (languageDebugInfo != null)
+                                {
+                                    var spanOpt = textSnapshot.TryGetSpan(textSpan);
+                                    if (spanOpt.HasValue)
+                                    {
+                                        var dataTipInfo = languageDebugInfo
+                                            .GetDataTipInfoAsync(
+                                                document,
+                                                spanOpt.Value.Start,
+                                                cancellationToken
+                                            )
+                                            .WaitAndGetResult(cancellationToken);
+                                        if (!dataTipInfo.IsDefault)
+                                        {
+                                            var resultSpan = dataTipInfo.Span.ToSnapshotSpan(
+                                                textSnapshot
+                                            );
+                                            var textOpt = dataTipInfo.Text;
+
+                                            pSpan[0] = resultSpan.ToVsTextSpan();
+                                            result = debugger.GetDataTipValue(
+                                                (IVsTextLines)vsBuffer,
+                                                pSpan,
+                                                textOpt,
+                                                out pbstrTextInternal
+                                            );
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                });
+                );
 
                 pbstrText = pbstrTextInternal;
                 return result;
@@ -145,12 +172,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             try
             {
                 var result = VSConstants.S_OK;
-                ComponentModel.GetService<IUIThreadOperationExecutor>().Execute(
-                    "Intellisense",
-                    defaultDescription: "",
-                    allowCancellation: true,
-                    showProgress: false,
-                    action: c => result = GetPairExtentsWorker(iLine, iIndex, pSpan, c.UserCancellationToken));
+                ComponentModel
+                    .GetService<IUIThreadOperationExecutor>()
+                    .Execute(
+                        "Intellisense",
+                        defaultDescription: "",
+                        allowCancellation: true,
+                        showProgress: false,
+                        action: c =>
+                            result = GetPairExtentsWorker(
+                                iLine,
+                                iIndex,
+                                pSpan,
+                                c.UserCancellationToken
+                            )
+                    );
 
                 return result;
             }
@@ -160,7 +196,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
         }
 
-        private int GetPairExtentsWorker(int iLine, int iIndex, TextSpan[] pSpan, CancellationToken cancellationToken)
+        private int GetPairExtentsWorker(
+            int iLine,
+            int iIndex,
+            TextSpan[] pSpan,
+            CancellationToken cancellationToken
+        )
         {
             var braceMatcher = ComponentModel.GetService<IBraceMatchingService>();
             var globalOptions = ComponentModel.GetService<IGlobalOptionService>();
@@ -171,40 +212,71 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 iLine,
                 iIndex,
                 pSpan,
-                (VSConstants.VSStd2KCmdID)this.CurrentlyExecutingCommand == VSConstants.VSStd2KCmdID.GOTOBRACE_EXT,
-                cancellationToken);
+                (VSConstants.VSStd2KCmdID)this.CurrentlyExecutingCommand
+                    == VSConstants.VSStd2KCmdID.GOTOBRACE_EXT,
+                cancellationToken
+            );
         }
 
         // Internal for testing purposes
-        internal static int GetPairExtentsWorker(ITextView textView, IBraceMatchingService braceMatcher, IGlobalOptionService globalOptions, int iLine, int iIndex, TextSpan[] pSpan, bool extendSelection, CancellationToken cancellationToken)
+        internal static int GetPairExtentsWorker(
+            ITextView textView,
+            IBraceMatchingService braceMatcher,
+            IGlobalOptionService globalOptions,
+            int iLine,
+            int iIndex,
+            TextSpan[] pSpan,
+            bool extendSelection,
+            CancellationToken cancellationToken
+        )
         {
             pSpan[0].iStartLine = pSpan[0].iEndLine = iLine;
             pSpan[0].iStartIndex = pSpan[0].iEndIndex = iIndex;
 
-            var pointInViewBuffer = textView.TextSnapshot.GetLineFromLineNumber(iLine).Start + iIndex;
+            var pointInViewBuffer =
+                textView.TextSnapshot.GetLineFromLineNumber(iLine).Start + iIndex;
 
             var subjectBuffer = textView.GetBufferContainingCaret();
             if (subjectBuffer != null)
             {
                 // PointTrackingMode and PositionAffinity chosen arbitrarily.
-                var positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(pointInViewBuffer, PointTrackingMode.Positive, subjectBuffer, PositionAffinity.Successor);
+                var positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(
+                    pointInViewBuffer,
+                    PointTrackingMode.Positive,
+                    subjectBuffer,
+                    PositionAffinity.Successor
+                );
                 if (!positionInSubjectBuffer.HasValue)
                 {
-                    positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(pointInViewBuffer, PointTrackingMode.Positive, subjectBuffer, PositionAffinity.Predecessor);
+                    positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(
+                        pointInViewBuffer,
+                        PointTrackingMode.Positive,
+                        subjectBuffer,
+                        PositionAffinity.Predecessor
+                    );
                 }
 
                 if (positionInSubjectBuffer.HasValue)
                 {
                     var position = positionInSubjectBuffer.Value;
-                    var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document =
+                        subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
-                        var options = globalOptions.GetBraceMatchingOptions(document.Project.Language);
-                        var matchingSpan = braceMatcher.FindMatchingSpanAsync(document, position, options, cancellationToken).WaitAndGetResult(cancellationToken);
+                        var options = globalOptions.GetBraceMatchingOptions(
+                            document.Project.Language
+                        );
+                        var matchingSpan = braceMatcher
+                            .FindMatchingSpanAsync(document, position, options, cancellationToken)
+                            .WaitAndGetResult(cancellationToken);
 
                         if (matchingSpan.HasValue)
                         {
-                            var resultsInView = textView.GetSpanInView(matchingSpan.Value.ToSnapshotSpan(subjectBuffer.CurrentSnapshot)).ToList();
+                            var resultsInView = textView
+                                .GetSpanInView(
+                                    matchingSpan.Value.ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
+                                )
+                                .ToList();
                             if (resultsInView.Count == 1)
                             {
                                 var vsTextSpan = resultsInView[0].ToVsTextSpan();
@@ -224,7 +296,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                     //      this.SetSelection(textSpan.iStartLine, textSpan.iStartIndex, textSpan.iEndLine, textSpan.iEndIndex);
                                     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                     // Notice a couple of things: it arbitrarily increments EndIndex by 1 and does nothing similar for StartIndex.
-                                    // So, if we're extending selection: 
+                                    // So, if we're extending selection:
                                     //    case a: set EndIndex to left of closing parenthesis -- ^}
                                     //            this adjustment is for any of the four cases where caret could be. left or right of open or close parenthesis -- ^{^ ^}^
                                     //    case b: set StartIndex to left of opening parenthesis -- ^{
@@ -234,8 +306,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                     if (extendSelection)
                                     {
                                         // case a.
-                                        var closingSpans = braceMatcher.FindMatchingSpanAsync(document, matchingSpan.Value.Start, options, cancellationToken).WaitAndGetResult(cancellationToken);
-                                        var vsClosingSpans = textView.GetSpanInView(closingSpans.Value.ToSnapshotSpan(subjectBuffer.CurrentSnapshot)).First().ToVsTextSpan();
+                                        var closingSpans = braceMatcher
+                                            .FindMatchingSpanAsync(
+                                                document,
+                                                matchingSpan.Value.Start,
+                                                options,
+                                                cancellationToken
+                                            )
+                                            .WaitAndGetResult(cancellationToken);
+                                        var vsClosingSpans = textView
+                                            .GetSpanInView(
+                                                closingSpans.Value.ToSnapshotSpan(
+                                                    subjectBuffer.CurrentSnapshot
+                                                )
+                                            )
+                                            .First()
+                                            .ToVsTextSpan();
                                         pSpan[0].iEndIndex = vsClosingSpans.iStartIndex;
                                     }
 
@@ -253,8 +339,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                         pSpan[0].iEndIndex = vsTextSpan.iStartIndex;
 
                                         // case b.
-                                        var openingSpans = braceMatcher.FindMatchingSpanAsync(document, matchingSpan.Value.End, options, cancellationToken).WaitAndGetResult(cancellationToken);
-                                        var vsOpeningSpans = textView.GetSpanInView(openingSpans.Value.ToSnapshotSpan(subjectBuffer.CurrentSnapshot)).First().ToVsTextSpan();
+                                        var openingSpans = braceMatcher
+                                            .FindMatchingSpanAsync(
+                                                document,
+                                                matchingSpan.Value.End,
+                                                options,
+                                                cancellationToken
+                                            )
+                                            .WaitAndGetResult(cancellationToken);
+                                        var vsOpeningSpans = textView
+                                            .GetSpanInView(
+                                                openingSpans.Value.ToSnapshotSpan(
+                                                    subjectBuffer.CurrentSnapshot
+                                                )
+                                            )
+                                            .First()
+                                            .ToVsTextSpan();
                                         pSpan[0].iStartIndex = vsOpeningSpans.iStartIndex;
                                     }
 
@@ -269,7 +369,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return VSConstants.S_FALSE;
         }
 
-        int IVsTextViewFilter.GetWordExtent(int iLine, int iIndex, uint dwFlags, TextSpan[] pSpan)
-            => VSConstants.E_NOTIMPL;
+        int IVsTextViewFilter.GetWordExtent(
+            int iLine,
+            int iIndex,
+            uint dwFlags,
+            TextSpan[] pSpan
+        ) => VSConstants.E_NOTIMPL;
     }
 }

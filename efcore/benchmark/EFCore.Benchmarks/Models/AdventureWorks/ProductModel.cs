@@ -12,7 +12,8 @@ public class ProductModel
     {
         Product = new HashSet<Product>();
         ProductModelIllustration = new HashSet<ProductModelIllustration>();
-        ProductModelProductDescriptionCulture = new HashSet<ProductModelProductDescriptionCulture>();
+        ProductModelProductDescriptionCulture =
+            new HashSet<ProductModelProductDescriptionCulture>();
     }
 
     public int ProductModelID { get; set; }

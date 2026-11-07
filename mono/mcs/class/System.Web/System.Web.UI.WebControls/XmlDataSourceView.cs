@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,51 +35,56 @@ using System.Xml;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class XmlDataSourceView : DataSourceView
-	{
-		ArrayList nodes;
-		XmlDataSource owner;
+    public sealed class XmlDataSourceView : DataSourceView
+    {
+        ArrayList nodes;
+        XmlDataSource owner;
 
-		public XmlDataSourceView (XmlDataSource owner, string name)
-			: base (owner, name)
-		{
-			this.owner = owner;
-		}
-		
-		public IEnumerable Select (DataSourceSelectArguments arguments)
-		{
-			return ExecuteSelect (arguments);
-		}
-		
-		void DoXPathSelect ()
-		{
-			XmlNodeList selected_nodes = owner.GetXmlDocument ().SelectNodes (owner.XPath != "" ? owner.XPath : "/*/*");
+        public XmlDataSourceView(XmlDataSource owner, string name)
+            : base(owner, name)
+        {
+            this.owner = owner;
+        }
 
-			nodes = new ArrayList (selected_nodes.Count);
-			
-			foreach (XmlNode node in selected_nodes) {
-				if (node.NodeType == XmlNodeType.Element)
-					nodes.Add (node);
-			}
-		}
+        public IEnumerable Select(DataSourceSelectArguments arguments)
+        {
+            return ExecuteSelect(arguments);
+        }
 
-		protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
-		{
-			if (nodes == null)
-				DoXPathSelect();
+        void DoXPathSelect()
+        {
+            XmlNodeList selected_nodes = owner
+                .GetXmlDocument()
+                .SelectNodes(owner.XPath != "" ? owner.XPath : "/*/*");
 
-			ArrayList list = new ArrayList ();
-			int max = arguments.StartRowIndex + (arguments.MaximumRows > 0 ? arguments.MaximumRows : nodes.Count);
-			if (max > nodes.Count) max = nodes.Count;
+            nodes = new ArrayList(selected_nodes.Count);
 
-			for (int n = arguments.StartRowIndex; n < max; n++)
-				list.Add (new XmlDataSourceNodeDescriptor ((XmlElement) nodes [n]));
-				
-			if (arguments.RetrieveTotalRowCount)
-				arguments.TotalRowCount = nodes.Count;
+            foreach (XmlNode node in selected_nodes)
+            {
+                if (node.NodeType == XmlNodeType.Element)
+                    nodes.Add(node);
+            }
+        }
 
-			return list;
-		}		
-	}
+        protected internal override IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
+        {
+            if (nodes == null)
+                DoXPathSelect();
+
+            ArrayList list = new ArrayList();
+            int max =
+                arguments.StartRowIndex
+                + (arguments.MaximumRows > 0 ? arguments.MaximumRows : nodes.Count);
+            if (max > nodes.Count)
+                max = nodes.Count;
+
+            for (int n = arguments.StartRowIndex; n < max; n++)
+                list.Add(new XmlDataSourceNodeDescriptor((XmlElement)nodes[n]));
+
+            if (arguments.RetrieveTotalRowCount)
+                arguments.TotalRowCount = nodes.Count;
+
+            return list;
+        }
+    }
 }
-

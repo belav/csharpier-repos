@@ -15,8 +15,12 @@ namespace System.Net.Tests
         [Fact]
         public void Authenticate_NotSupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => AuthenticationManager.Authenticate(null, null, null));
-            Assert.Throws<PlatformNotSupportedException>(() => AuthenticationManager.PreAuthenticate(null, null));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                AuthenticationManager.Authenticate(null, null, null)
+            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                AuthenticationManager.PreAuthenticate(null, null)
+            );
         }
 
         [Fact]
@@ -28,34 +32,42 @@ namespace System.Net.Tests
         [Fact]
         public void Unregister_Null_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => AuthenticationManager.Unregister((IAuthenticationModule)null));
-            Assert.Throws<ArgumentNullException>(() => AuthenticationManager.Unregister((string)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                AuthenticationManager.Unregister((IAuthenticationModule)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                AuthenticationManager.Unregister((string)null)
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Register_Unregister_ModuleCountUnchanged()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                int initialCount = GetModuleCount();
-                IAuthenticationModule module = new CustomModule();
-                AuthenticationManager.Register(module);
-                AuthenticationManager.Unregister(module);
-                Assert.Equal(initialCount, GetModuleCount());
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    int initialCount = GetModuleCount();
+                    IAuthenticationModule module = new CustomModule();
+                    AuthenticationManager.Register(module);
+                    AuthenticationManager.Unregister(module);
+                    Assert.Equal(initialCount, GetModuleCount());
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Register_UnregisterByScheme_ModuleCountUnchanged()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                int initialCount = GetModuleCount();
-                IAuthenticationModule module = new CustomModule();
-                AuthenticationManager.Register(module);
-                AuthenticationManager.Unregister("custom");
-                Assert.Equal(initialCount, GetModuleCount());
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    int initialCount = GetModuleCount();
+                    IAuthenticationModule module = new CustomModule();
+                    AuthenticationManager.Register(module);
+                    AuthenticationManager.Unregister("custom");
+                    Assert.Equal(initialCount, GetModuleCount());
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -63,7 +75,8 @@ namespace System.Net.Tests
         {
             int count = 0;
             IEnumerator modules = AuthenticationManager.RegisteredModules;
-            while (modules.MoveNext()) count++;
+            while (modules.MoveNext())
+                count++;
             Assert.Equal(0, count);
         }
 
@@ -72,15 +85,17 @@ namespace System.Net.Tests
         {
             Assert.Null(AuthenticationManager.CredentialPolicy);
 
-            RemoteExecutor.Invoke(() =>
-            {
-                ICredentialPolicy cp = new DummyCredentialPolicy();
-                AuthenticationManager.CredentialPolicy = cp;
-                Assert.Same(cp, AuthenticationManager.CredentialPolicy);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    ICredentialPolicy cp = new DummyCredentialPolicy();
+                    AuthenticationManager.CredentialPolicy = cp;
+                    Assert.Same(cp, AuthenticationManager.CredentialPolicy);
 
-                AuthenticationManager.CredentialPolicy = null;
-                Assert.Null(AuthenticationManager.CredentialPolicy);
-            }).Dispose();
+                    AuthenticationManager.CredentialPolicy = null;
+                    Assert.Null(AuthenticationManager.CredentialPolicy);
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -88,53 +103,65 @@ namespace System.Net.Tests
         {
             Assert.NotNull(AuthenticationManager.CustomTargetNameDictionary);
             Assert.Empty(AuthenticationManager.CustomTargetNameDictionary);
-            Assert.Same(AuthenticationManager.CustomTargetNameDictionary, AuthenticationManager.CustomTargetNameDictionary);
+            Assert.Same(
+                AuthenticationManager.CustomTargetNameDictionary,
+                AuthenticationManager.CustomTargetNameDictionary
+            );
 
-            RemoteExecutor.Invoke(() =>
-            {
-                string theKey = "http://www.contoso.com";
-                string theValue = "HTTP/www.contoso.com";
-                AuthenticationManager.CustomTargetNameDictionary.Add(theKey, theValue);
-                Assert.Equal(theValue, AuthenticationManager.CustomTargetNameDictionary[theKey]);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    string theKey = "http://www.contoso.com";
+                    string theValue = "HTTP/www.contoso.com";
+                    AuthenticationManager.CustomTargetNameDictionary.Add(theKey, theValue);
+                    Assert.Equal(
+                        theValue,
+                        AuthenticationManager.CustomTargetNameDictionary[theKey]
+                    );
 
-                AuthenticationManager.CustomTargetNameDictionary.Clear();
-                Assert.Equal(0, AuthenticationManager.CustomTargetNameDictionary.Count);
-            }).Dispose();
+                    AuthenticationManager.CustomTargetNameDictionary.Clear();
+                    Assert.Equal(0, AuthenticationManager.CustomTargetNameDictionary.Count);
+                })
+                .Dispose();
         }
 
         private static int GetModuleCount()
         {
             int count = 0;
             IEnumerator modules = AuthenticationManager.RegisteredModules;
-            while (modules.MoveNext()) count++;
+            while (modules.MoveNext())
+                count++;
 
             return count;
         }
 
         private sealed class DummyCredentialPolicy : ICredentialPolicy
         {
-            public bool ShouldSendCredential(Uri challengeUri, WebRequest request, NetworkCredential credential, IAuthenticationModule authenticationModule) => true;
+            public bool ShouldSendCredential(
+                Uri challengeUri,
+                WebRequest request,
+                NetworkCredential credential,
+                IAuthenticationModule authenticationModule
+            ) => true;
         }
 
         private sealed class CustomModule : IAuthenticationModule
         {
             public bool CanPreAuthenticate
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public string AuthenticationType
             {
-                get
-                {
-                    return "custom";
-                }
+                get { return "custom"; }
             }
 
-            public Authorization Authenticate(string challenge, WebRequest request, ICredentials credentials)
+            public Authorization Authenticate(
+                string challenge,
+                WebRequest request,
+                ICredentials credentials
+            )
             {
                 throw new NotImplementedException();
             }

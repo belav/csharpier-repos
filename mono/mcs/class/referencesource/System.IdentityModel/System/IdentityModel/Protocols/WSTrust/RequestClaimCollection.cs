@@ -18,23 +18,15 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <summary>
         /// Instantiates an empty requested claim collection.
         /// </summary>
-        public RequestClaimCollection()
-        {
-        }
+        public RequestClaimCollection() { }
 
         /// <summary>
         /// Gets or sets the Claims dialect attribute.
         /// </summary>
         public string Dialect
         {
-            get 
-            { 
-                return _dialect; 
-            }
-            set 
-            { 
-                _dialect = value; 
-            }
+            get { return _dialect; }
+            set { _dialect = value; }
         }
     }
 }

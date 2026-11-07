@@ -32,25 +32,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics
 {
-	[TestFixture]
-	public class DebuggerTypeProxyAttributeTest
-	{
-		[Test]
-		public void Constructor_Type ()
-		{
-			var dtp = new DebuggerTypeProxyAttribute (typeof (string));
-			Assert.IsNull (dtp.Target, "#1");
-			Assert.AreEqual (typeof (string).AssemblyQualifiedName, dtp.ProxyTypeName, "#2");
-		}
+    [TestFixture]
+    public class DebuggerTypeProxyAttributeTest
+    {
+        [Test]
+        public void Constructor_Type()
+        {
+            var dtp = new DebuggerTypeProxyAttribute(typeof(string));
+            Assert.IsNull(dtp.Target, "#1");
+            Assert.AreEqual(typeof(string).AssemblyQualifiedName, dtp.ProxyTypeName, "#2");
+        }
 
-		[Test]
-		public void Constructor_Type_Invalid ()
-		{
-			try {
-				new DebuggerTypeProxyAttribute (null as Type);
-				Assert.Fail ();
-			} catch (ArgumentNullException) {			
-			}
-		}
-	}
+        [Test]
+        public void Constructor_Type_Invalid()
+        {
+            try
+            {
+                new DebuggerTypeProxyAttribute(null as Type);
+                Assert.Fail();
+            }
+            catch (ArgumentNullException) { }
+        }
+    }
 }

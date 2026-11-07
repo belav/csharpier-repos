@@ -56,8 +56,10 @@ namespace System.Diagnostics
     public partial class Activity : IDisposable
     {
 #pragma warning disable CA1825 // Array.Empty<T>() doesn't exist in all configurations
-        private static readonly IEnumerable<KeyValuePair<string, string?>> s_emptyBaggageTags = new KeyValuePair<string, string?>[0];
-        private static readonly IEnumerable<KeyValuePair<string, object?>> s_emptyTagObjects = new KeyValuePair<string, object?>[0];
+        private static readonly IEnumerable<KeyValuePair<string, string?>> s_emptyBaggageTags =
+            new KeyValuePair<string, string?>[0];
+        private static readonly IEnumerable<KeyValuePair<string, object?>> s_emptyTagObjects =
+            new KeyValuePair<string, object?>[0];
         private static readonly IEnumerable<ActivityLink> s_emptyLinks = new ActivityLink[0];
         private static readonly IEnumerable<ActivityEvent> s_emptyEvents = new ActivityEvent[0];
 #pragma warning restore CA1825
@@ -89,11 +91,12 @@ namespace System.Diagnostics
 
         private string? _traceState;
         private State _state;
-        private int _currentChildId;  // A unique number for all children of this activity.
+        private int _currentChildId; // A unique number for all children of this activity.
 
         // State associated with ID.
         private string? _id;
         private string? _rootId;
+
         // State associated with ParentId.
         private string? _parentId;
 
@@ -224,15 +227,23 @@ namespace System.Diagnostics
                 {
                     // Convert flags to binary.
                     Span<char> flagsChars = stackalloc char[2];
-                    HexConverter.ToCharsBuffer((byte)((~ActivityTraceFlagsIsSet) & _w3CIdFlags), flagsChars, 0, HexConverter.Casing.Lower);
+                    HexConverter.ToCharsBuffer(
+                        (byte)((~ActivityTraceFlagsIsSet) & _w3CIdFlags),
+                        flagsChars,
+                        0,
+                        HexConverter.Casing.Lower
+                    );
                     string id =
 #if NET6_0_OR_GREATER
-                        string.Create(null, stackalloc char[128], $"00-{_traceId}-{_spanId}-{flagsChars}");
+                    string.Create(
+                        null,
+                        stackalloc char[128],
+                        $"00-{_traceId}-{_spanId}-{flagsChars}"
+                    );
 #else
                         "00-" + _traceId + "-" + _spanId + "-" + flagsChars.ToString();
 #endif
                     Interlocked.CompareExchange(ref _id, id, null);
-
                 }
                 return _id;
             }
@@ -256,10 +267,19 @@ namespace System.Diagnostics
                     if (_parentSpanId != null)
                     {
                         Span<char> flagsChars = stackalloc char[2];
-                        HexConverter.ToCharsBuffer((byte)((~ActivityTraceFlagsIsSet) & _parentTraceFlags), flagsChars, 0, HexConverter.Casing.Lower);
+                        HexConverter.ToCharsBuffer(
+                            (byte)((~ActivityTraceFlagsIsSet) & _parentTraceFlags),
+                            flagsChars,
+                            0,
+                            HexConverter.Casing.Lower
+                        );
                         string parentId =
 #if NET6_0_OR_GREATER
-                            string.Create(null, stackalloc char[128], $"00-{_traceId}-{_parentSpanId}-{flagsChars}");
+                        string.Create(
+                            null,
+                            stackalloc char[128],
+                            $"00-{_traceId}-{_parentSpanId}-{flagsChars}"
+                        );
 #else
                             "00-" + _traceId + "-" + _parentSpanId + "-" + flagsChars.ToString();
 #endif
@@ -377,7 +397,13 @@ namespace System.Diagnostics
                     {
                         if (activity._baggage != null)
                         {
-                            for (DiagNode<KeyValuePair<string, string?>>? current = activity._baggage.First; current != null; current = current.Next)
+                            for (
+                                DiagNode<KeyValuePair<string, string?>>? current = activity
+                                    ._baggage
+                                    .First;
+                                current != null;
+                                current = current.Next
+                            )
                             {
                                 yield return current.Value;
                             }
@@ -393,19 +419,22 @@ namespace System.Diagnostics
         /// Enumerate the tags attached to this Activity object.
         /// </summary>
         /// <returns><see cref="Enumerator{T}"/>.</returns>
-        public Enumerator<KeyValuePair<string, object?>> EnumerateTagObjects() => new Enumerator<KeyValuePair<string, object?>>(_tags?.First);
+        public Enumerator<KeyValuePair<string, object?>> EnumerateTagObjects() =>
+            new Enumerator<KeyValuePair<string, object?>>(_tags?.First);
 
         /// <summary>
         /// Enumerate the <see cref="ActivityEvent" /> objects attached to this Activity object.
         /// </summary>
         /// <returns><see cref="Enumerator{T}"/>.</returns>
-        public Enumerator<ActivityEvent> EnumerateEvents() => new Enumerator<ActivityEvent>(_events?.First);
+        public Enumerator<ActivityEvent> EnumerateEvents() =>
+            new Enumerator<ActivityEvent>(_events?.First);
 
         /// <summary>
         /// Enumerate the <see cref="ActivityLink" /> objects attached to this Activity object.
         /// </summary>
         /// <returns><see cref="Enumerator{T}"/>.</returns>
-        public Enumerator<ActivityLink> EnumerateLinks() => new Enumerator<ActivityLink>(_links?.First);
+        public Enumerator<ActivityLink> EnumerateLinks() =>
+            new Enumerator<ActivityLink>(_links?.First);
 
         /// <summary>
         /// Returns the value of the key-value pair added to the activity with <see cref="AddBaggage(string, string)"/>.
@@ -456,7 +485,7 @@ namespace System.Diagnostics
         /// <returns><see langword="this" /> for convenient chaining.</returns>
         /// <param name="key">The tag key name</param>
         /// <param name="value">The tag value mapped to the input key</param>
-        public Activity AddTag(string key, string? value) => AddTag(key, (object?) value);
+        public Activity AddTag(string key, string? value) => AddTag(key, (object?)value);
 
         /// <summary>
         /// Update the Activity to have a tag with an additional 'key' and value 'value'.
@@ -470,7 +499,10 @@ namespace System.Diagnostics
         {
             KeyValuePair<string, object?> kvp = new KeyValuePair<string, object?>(key, value);
 
-            if (_tags != null || Interlocked.CompareExchange(ref _tags, new TagsLinkedList(kvp), null) != null)
+            if (
+                _tags != null
+                || Interlocked.CompareExchange(ref _tags, new TagsLinkedList(kvp), null) != null
+            )
             {
                 _tags.Add(kvp);
             }
@@ -494,7 +526,11 @@ namespace System.Diagnostics
         {
             KeyValuePair<string, object?> kvp = new KeyValuePair<string, object?>(key, value);
 
-            if (_tags != null || Interlocked.CompareExchange(ref _tags, new TagsLinkedList(kvp, set: true), null) != null)
+            if (
+                _tags != null
+                || Interlocked.CompareExchange(ref _tags, new TagsLinkedList(kvp, set: true), null)
+                    != null
+            )
             {
                 _tags.Set(kvp);
             }
@@ -509,7 +545,14 @@ namespace System.Diagnostics
         /// <returns><see langword="this" /> for convenient chaining.</returns>
         public Activity AddEvent(ActivityEvent e)
         {
-            if (_events != null || Interlocked.CompareExchange(ref _events, new DiagLinkedList<ActivityEvent>(e), null) != null)
+            if (
+                _events != null
+                || Interlocked.CompareExchange(
+                    ref _events,
+                    new DiagLinkedList<ActivityEvent>(e),
+                    null
+                ) != null
+            )
             {
                 _events.Add(e);
             }
@@ -530,7 +573,11 @@ namespace System.Diagnostics
         {
             KeyValuePair<string, string?> kvp = new KeyValuePair<string, string?>(key, value);
 
-            if (_baggage != null || Interlocked.CompareExchange(ref _baggage, new BaggageLinkedList(kvp), null) != null)
+            if (
+                _baggage != null
+                || Interlocked.CompareExchange(ref _baggage, new BaggageLinkedList(kvp), null)
+                    != null
+            )
             {
                 _baggage.Add(kvp);
             }
@@ -554,7 +601,14 @@ namespace System.Diagnostics
         {
             KeyValuePair<string, string?> kvp = new KeyValuePair<string, string?>(key, value);
 
-            if (_baggage != null || Interlocked.CompareExchange(ref _baggage, new BaggageLinkedList(kvp, set: true), null) != null)
+            if (
+                _baggage != null
+                || Interlocked.CompareExchange(
+                    ref _baggage,
+                    new BaggageLinkedList(kvp, set: true),
+                    null
+                ) != null
+            )
             {
                 _baggage.Set(kvp);
             }
@@ -601,7 +655,11 @@ namespace System.Diagnostics
         /// Set the parent ID using the W3C convention using a TraceId and a SpanId. This
         /// constructor has the advantage that no string manipulation is needed to set the ID.
         /// </summary>
-        public Activity SetParentId(ActivityTraceId traceId, ActivitySpanId spanId, ActivityTraceFlags activityTraceFlags = ActivityTraceFlags.None)
+        public Activity SetParentId(
+            ActivityTraceId traceId,
+            ActivitySpanId spanId,
+            ActivityTraceFlags activityTraceFlags = ActivityTraceFlags.None
+        )
         {
             if (_id != null || _spanId != null)
             {
@@ -618,10 +676,10 @@ namespace System.Diagnostics
             }
             else
             {
-                _traceId = traceId.ToHexString();     // The child will share the parent's traceId.
+                _traceId = traceId.ToHexString(); // The child will share the parent's traceId.
                 _parentSpanId = spanId.ToHexString();
                 ActivityTraceFlags = activityTraceFlags;
-                _parentTraceFlags = (byte) activityTraceFlags;
+                _parentTraceFlags = (byte)activityTraceFlags;
             }
             return this;
         }
@@ -670,7 +728,8 @@ namespace System.Diagnostics
         /// Get the context of the activity. Context becomes valid only if the activity has been started.
         /// otherwise will default context.
         /// </summary>
-        public ActivityContext Context => new ActivityContext(TraceId, SpanId, ActivityTraceFlags, TraceStateString);
+        public ActivityContext Context =>
+            new ActivityContext(TraceId, SpanId, ActivityTraceFlags, TraceStateString);
 
         /// <summary>
         /// Starts activity
@@ -712,12 +771,12 @@ namespace System.Diagnostics
                 {
                     // Figure out what format to use.
                     IdFormat =
-                        ForceDefaultIdFormat ? DefaultIdFormat :
-                        Parent != null ? Parent.IdFormat :
-                        _parentSpanId != null ? ActivityIdFormat.W3C :
-                        _parentId == null ? DefaultIdFormat :
-                        IsW3CId(_parentId) ? ActivityIdFormat.W3C :
-                        ActivityIdFormat.Hierarchical;
+                        ForceDefaultIdFormat ? DefaultIdFormat
+                        : Parent != null ? Parent.IdFormat
+                        : _parentSpanId != null ? ActivityIdFormat.W3C
+                        : _parentId == null ? DefaultIdFormat
+                        : IsW3CId(_parentId) ? ActivityIdFormat.W3C
+                        : ActivityIdFormat.Hierarchical;
                 }
 
                 // Generate the ID in the appropriate format.
@@ -789,10 +848,7 @@ namespace System.Diagnostics
                 }
                 return null;
             }
-            set
-            {
-                _traceState = value;
-            }
+            set { _traceState = value; }
         }
 
         /// <summary>
@@ -807,7 +863,9 @@ namespace System.Diagnostics
                 {
                     if (_id != null && IdFormat == ActivityIdFormat.W3C)
                     {
-                        ActivitySpanId activitySpanId = ActivitySpanId.CreateFromString(_id.AsSpan(36, 16));
+                        ActivitySpanId activitySpanId = ActivitySpanId.CreateFromString(
+                            _id.AsSpan(36, 16)
+                        );
                         string spanId = activitySpanId.ToHexString();
 
                         Interlocked.CompareExchange(ref _spanId, spanId, null);
@@ -837,13 +895,16 @@ namespace System.Diagnostics
         /// <summary>
         /// True if the W3CIdFlags.Recorded flag is set.
         /// </summary>
-        public bool Recorded { get => (ActivityTraceFlags & ActivityTraceFlags.Recorded) != 0; }
+        public bool Recorded
+        {
+            get => (ActivityTraceFlags & ActivityTraceFlags.Recorded) != 0;
+        }
 
         /// <summary>
         /// Indicate if the this Activity object should be populated with all the propagation info and also all other
         /// properties such as Links, Tags, and Events.
         /// </summary>
-        public bool IsAllDataRequested { get; set;}
+        public bool IsAllDataRequested { get; set; }
 
         /// <summary>
         /// Return the flags (defined by the W3C ID specification) associated with the activity.
@@ -858,10 +919,7 @@ namespace System.Diagnostics
                 }
                 return (ActivityTraceFlags)((~ActivityTraceFlagsIsSet) & _w3CIdFlags);
             }
-            set
-            {
-                _w3CIdFlags = (byte)(ActivityTraceFlagsIsSet | (byte)value);
-            }
+            set { _w3CIdFlags = (byte)(ActivityTraceFlagsIsSet | (byte)value); }
         }
 
         /// <summary>
@@ -879,7 +937,9 @@ namespace System.Diagnostics
                     {
                         try
                         {
-                            parentSpanId = ActivitySpanId.CreateFromString(_parentId.AsSpan(36, 16)).ToHexString();
+                            parentSpanId = ActivitySpanId
+                                .CreateFromString(_parentId.AsSpan(36, 16))
+                                .ToHexString();
                         }
                         catch { }
                     }
@@ -922,7 +982,9 @@ namespace System.Diagnostics
                 if (s_defaultIdFormat == ActivityIdFormat.Unknown)
                 {
 #if W3C_DEFAULT_ID_FORMAT
-                    s_defaultIdFormat = LocalAppContextSwitches.DefaultActivityIdFormatIsHierarchial ? ActivityIdFormat.Hierarchical : ActivityIdFormat.W3C;
+                    s_defaultIdFormat = LocalAppContextSwitches.DefaultActivityIdFormatIsHierarchial
+                        ? ActivityIdFormat.Hierarchical
+                        : ActivityIdFormat.W3C;
 #else
                     s_defaultIdFormat = ActivityIdFormat.Hierarchical;
 #endif // W3C_DEFAULT_ID_FORMAT
@@ -969,13 +1031,18 @@ namespace System.Diagnostics
             //  * 2 hex chars flags
             //  = 55 chars (see https://w3c.github.io/trace-context)
             // The version (00-fe) is used to indicate that this is a WC3 ID.
-            return id.Length == 55 &&
-                   ('0' <= id[0] && id[0] <= '9' || 'a' <= id[0] && id[0] <= 'f') &&
-                   ('0' <= id[1] && id[1] <= '9' || 'a' <= id[1] && id[1] <= 'f') &&
-                   (id[0] != 'f' || id[1] != 'f');
+            return id.Length == 55
+                && ('0' <= id[0] && id[0] <= '9' || 'a' <= id[0] && id[0] <= 'f')
+                && ('0' <= id[1] && id[1] <= '9' || 'a' <= id[1] && id[1] <= 'f')
+                && (id[0] != 'f' || id[1] != 'f');
         }
 
-        internal static bool TryConvertIdToContext(string traceParent, string? traceState, bool isRemote, out ActivityContext context)
+        internal static bool TryConvertIdToContext(
+            string traceParent,
+            string? traceState,
+            bool isRemote,
+            out ActivityContext context
+        )
         {
             context = default;
             if (!IsW3CId(traceParent))
@@ -983,21 +1050,27 @@ namespace System.Diagnostics
                 return false;
             }
 
-            ReadOnlySpan<char> traceIdSpan = traceParent.AsSpan(3,  32);
-            ReadOnlySpan<char> spanIdSpan  = traceParent.AsSpan(36, 16);
+            ReadOnlySpan<char> traceIdSpan = traceParent.AsSpan(3, 32);
+            ReadOnlySpan<char> spanIdSpan = traceParent.AsSpan(36, 16);
 
-            if (!ActivityTraceId.IsLowerCaseHexAndNotAllZeros(traceIdSpan) || !ActivityTraceId.IsLowerCaseHexAndNotAllZeros(spanIdSpan) ||
-                !HexConverter.IsHexLowerChar(traceParent[53]) || !HexConverter.IsHexLowerChar(traceParent[54]))
+            if (
+                !ActivityTraceId.IsLowerCaseHexAndNotAllZeros(traceIdSpan)
+                || !ActivityTraceId.IsLowerCaseHexAndNotAllZeros(spanIdSpan)
+                || !HexConverter.IsHexLowerChar(traceParent[53])
+                || !HexConverter.IsHexLowerChar(traceParent[54])
+            )
             {
                 return false;
             }
 
             context = new ActivityContext(
-                            new ActivityTraceId(traceIdSpan.ToString()),
-                            new ActivitySpanId(spanIdSpan.ToString()),
-                            (ActivityTraceFlags) ActivityTraceId.HexByteFromChars(traceParent[53], traceParent[54]),
-                            traceState,
-                            isRemote);
+                new ActivityTraceId(traceIdSpan.ToString()),
+                new ActivitySpanId(spanIdSpan.ToString()),
+                (ActivityTraceFlags)
+                    ActivityTraceId.HexByteFromChars(traceParent[53], traceParent[54]),
+                traceState,
+                isRemote
+            );
 
             return true;
         }
@@ -1016,10 +1089,7 @@ namespace System.Diagnostics
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         /// <summary>
         /// SetCustomProperty allow attaching any custom object to this Activity object.
@@ -1031,7 +1101,11 @@ namespace System.Diagnostics
         {
             if (_customProperties == null)
             {
-                Interlocked.CompareExchange(ref _customProperties, new Dictionary<string, object>(), null);
+                Interlocked.CompareExchange(
+                    ref _customProperties,
+                    new Dictionary<string, object>(),
+                    null
+                );
             }
 
             lock (_customProperties)
@@ -1070,9 +1144,21 @@ namespace System.Diagnostics
             return ret;
         }
 
-        internal static Activity Create(ActivitySource source, string name, ActivityKind kind, string? parentId, ActivityContext parentContext,
-                                        IEnumerable<KeyValuePair<string, object?>>? tags, IEnumerable<ActivityLink>? links, DateTimeOffset startTime,
-                                        ActivityTagsCollection? samplerTags, ActivitySamplingResult request, bool startIt, ActivityIdFormat idFormat, string? traceState)
+        internal static Activity Create(
+            ActivitySource source,
+            string name,
+            ActivityKind kind,
+            string? parentId,
+            ActivityContext parentContext,
+            IEnumerable<KeyValuePair<string, object?>>? tags,
+            IEnumerable<ActivityLink>? links,
+            DateTimeOffset startTime,
+            ActivityTagsCollection? samplerTags,
+            ActivitySamplingResult request,
+            bool startIt,
+            ActivityIdFormat idFormat,
+            string? traceState
+        )
         {
             Activity activity = new Activity(name);
 
@@ -1129,11 +1215,13 @@ namespace System.Diagnostics
                 }
 
                 activity.ActivityTraceFlags = parentContext.TraceFlags;
-                activity._parentTraceFlags = (byte) parentContext.TraceFlags;
+                activity._parentTraceFlags = (byte)parentContext.TraceFlags;
                 activity.HasRemoteParent = parentContext.IsRemote;
             }
 
-            activity.IsAllDataRequested = request == ActivitySamplingResult.AllData || request == ActivitySamplingResult.AllDataAndRecorded;
+            activity.IsAllDataRequested =
+                request == ActivitySamplingResult.AllData
+                || request == ActivitySamplingResult.AllDataAndRecorded;
 
             if (request == ActivitySamplingResult.AllDataAndRecorded)
             {
@@ -1167,7 +1255,10 @@ namespace System.Diagnostics
                 if (!TrySetTraceIdFromParent())
                 {
                     Func<ActivityTraceId>? traceIdGenerator = TraceIdGenerator;
-                    ActivityTraceId id = traceIdGenerator == null ? ActivityTraceId.CreateRandom() : traceIdGenerator();
+                    ActivityTraceId id =
+                        traceIdGenerator == null
+                            ? ActivityTraceId.CreateRandom()
+                            : traceIdGenerator();
                     _traceId = id.ToHexString();
                 }
             }
@@ -1206,7 +1297,11 @@ namespace System.Diagnostics
             {
                 // Normal start within the process
                 Debug.Assert(!string.IsNullOrEmpty(Parent.Id));
-                ret = AppendSuffix(Parent.Id, Interlocked.Increment(ref Parent._currentChildId).ToString(), '.');
+                ret = AppendSuffix(
+                    Parent.Id,
+                    Interlocked.Increment(ref Parent._currentChildId).ToString(),
+                    '.'
+                );
             }
             else if (ParentId != null)
             {
@@ -1223,7 +1318,11 @@ namespace System.Diagnostics
                     parentId += '.';
                 }
 
-                ret = AppendSuffix(parentId, Interlocked.Increment(ref s_currentRootId).ToString("x"), '_');
+                ret = AppendSuffix(
+                    parentId,
+                    Interlocked.Increment(ref s_currentRootId).ToString("x"),
+                    '_'
+                );
             }
             else
             {
@@ -1310,11 +1409,11 @@ namespace System.Diagnostics
             {
                 try
                 {
-                    _traceId = ActivityTraceId.CreateFromString(_parentId.AsSpan(3, 32)).ToHexString();
+                    _traceId = ActivityTraceId
+                        .CreateFromString(_parentId.AsSpan(3, 32))
+                        .ToHexString();
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
             return _traceId != null;
@@ -1332,9 +1431,15 @@ namespace System.Diagnostics
                 }
                 else if (_parentId != null && IsW3CId(_parentId))
                 {
-                    if (HexConverter.IsHexLowerChar(_parentId[53]) && HexConverter.IsHexLowerChar(_parentId[54]))
+                    if (
+                        HexConverter.IsHexLowerChar(_parentId[53])
+                        && HexConverter.IsHexLowerChar(_parentId[54])
+                    )
                     {
-                        _w3CIdFlags = (byte)(ActivityTraceId.HexByteFromChars(_parentId[53], _parentId[54]) | ActivityTraceFlagsIsSet);
+                        _w3CIdFlags = (byte)(
+                            ActivityTraceId.HexByteFromChars(_parentId[53], _parentId[54])
+                            | ActivityTraceFlagsIsSet
+                        );
                     }
                     else
                     {
@@ -1377,7 +1482,9 @@ namespace System.Diagnostics
         public ActivityIdFormat IdFormat
         {
             get => (ActivityIdFormat)(_state & State.FormatFlags);
-            private set => _state = (_state & ~State.FormatFlags) | (State)((byte)value & (byte)State.FormatFlags);
+            private set =>
+                _state =
+                    (_state & ~State.FormatFlags) | (State)((byte)value & (byte)State.FormatFlags);
         }
 
         /// <summary>
@@ -1433,13 +1540,20 @@ namespace System.Diagnostics
         {
             private DiagNode<KeyValuePair<string, string?>>? _first;
 
-            public BaggageLinkedList(KeyValuePair<string, string?> firstValue, bool set = false) => _first = ((set && firstValue.Value == null) ? null : new DiagNode<KeyValuePair<string, string?>>(firstValue));
+            public BaggageLinkedList(KeyValuePair<string, string?> firstValue, bool set = false) =>
+                _first = (
+                    (set && firstValue.Value == null)
+                        ? null
+                        : new DiagNode<KeyValuePair<string, string?>>(firstValue)
+                );
 
             public DiagNode<KeyValuePair<string, string?>>? First => _first;
 
             public void Add(KeyValuePair<string, string?> value)
             {
-                DiagNode<KeyValuePair<string, string?>> newNode = new DiagNode<KeyValuePair<string, string?>>(value);
+                DiagNode<KeyValuePair<string, string?>> newNode = new DiagNode<
+                    KeyValuePair<string, string?>
+                >(value);
 
                 lock (this)
                 {
@@ -1470,7 +1584,9 @@ namespace System.Diagnostics
                         current = current.Next;
                     }
 
-                    DiagNode<KeyValuePair<string, string?>> newNode = new DiagNode<KeyValuePair<string, string?>>(value);
+                    DiagNode<KeyValuePair<string, string?>> newNode = new DiagNode<
+                        KeyValuePair<string, string?>
+                    >(value);
                     newNode.Next = _first;
                     _first = newNode;
                 }
@@ -1505,8 +1621,13 @@ namespace System.Diagnostics
                 }
             }
 
-            public DiagEnumerator<KeyValuePair<string, string?>> GetEnumerator() => new DiagEnumerator<KeyValuePair<string, string?>>(_first);
-            IEnumerator<KeyValuePair<string, string?>> IEnumerable<KeyValuePair<string, string?>>.GetEnumerator() => GetEnumerator();
+            public DiagEnumerator<KeyValuePair<string, string?>> GetEnumerator() =>
+                new DiagEnumerator<KeyValuePair<string, string?>>(_first);
+
+            IEnumerator<KeyValuePair<string, string?>> IEnumerable<
+                KeyValuePair<string, string?>
+            >.GetEnumerator() => GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
@@ -1517,7 +1638,12 @@ namespace System.Diagnostics
 
             private StringBuilder? _stringBuilder;
 
-            public TagsLinkedList(KeyValuePair<string, object?> firstValue, bool set = false) => _last = _first = ((set && firstValue.Value == null) ? null : new DiagNode<KeyValuePair<string, object?>>(firstValue));
+            public TagsLinkedList(KeyValuePair<string, object?> firstValue, bool set = false) =>
+                _last = _first = (
+                    (set && firstValue.Value == null)
+                        ? null
+                        : new DiagNode<KeyValuePair<string, object?>>(firstValue)
+                );
 
             public TagsLinkedList(IEnumerator<KeyValuePair<string, object?>> e)
             {
@@ -1562,7 +1688,9 @@ namespace System.Diagnostics
 
             public void Add(KeyValuePair<string, object?> value)
             {
-                DiagNode<KeyValuePair<string, object?>> newNode = new DiagNode<KeyValuePair<string, object?>>(value);
+                DiagNode<KeyValuePair<string, object?>> newNode = new DiagNode<
+                    KeyValuePair<string, object?>
+                >(value);
 
                 lock (this)
                 {
@@ -1654,7 +1782,9 @@ namespace System.Diagnostics
                         current = current.Next;
                     }
 
-                    DiagNode<KeyValuePair<string, object?>> newNode = new DiagNode<KeyValuePair<string, object?>>(value);
+                    DiagNode<KeyValuePair<string, object?>> newNode = new DiagNode<
+                        KeyValuePair<string, object?>
+                    >(value);
                     if (_first == null)
                     {
                         _first = _last = newNode;
@@ -1668,8 +1798,13 @@ namespace System.Diagnostics
                 }
             }
 
-            public DiagEnumerator<KeyValuePair<string, object?>> GetEnumerator() => new DiagEnumerator<KeyValuePair<string, object?>>(_first);
-            IEnumerator<KeyValuePair<string, object?>> IEnumerable<KeyValuePair<string, object?>>.GetEnumerator() => GetEnumerator();
+            public DiagEnumerator<KeyValuePair<string, object?>> GetEnumerator() =>
+                new DiagEnumerator<KeyValuePair<string, object?>>(_first);
+
+            IEnumerator<KeyValuePair<string, object?>> IEnumerable<
+                KeyValuePair<string, object?>
+            >.GetEnumerator() => GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             public IEnumerable<KeyValuePair<string, string?>> EnumerateStringValues()
@@ -1680,11 +1815,15 @@ namespace System.Diagnostics
                 {
                     if (current.Value.Value is string || current.Value.Value == null)
                     {
-                        yield return new KeyValuePair<string, string?>(current.Value.Key, (string?)current.Value.Value);
+                        yield return new KeyValuePair<string, string?>(
+                            current.Value.Key,
+                            (string?)current.Value.Value
+                        );
                     }
 
                     current = current.Next;
-                };
+                }
+                ;
             }
 
             public override string ToString()
@@ -1748,9 +1887,9 @@ namespace System.Diagnostics
     /// </summary>
     public enum ActivityIdFormat
     {
-        Unknown = 0,      // ID format is not known.
+        Unknown = 0, // ID format is not known.
         Hierarchical = 1, //|XXXX.XX.X_X ... see https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.DiagnosticSource/src/ActivityUserGuide.md#id-format
-        W3C = 2,          // 00-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX-XX see https://w3c.github.io/trace-context/
+        W3C = 2, // 00-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX-XX see https://w3c.github.io/trace-context/
     };
 
     /// <summary>
@@ -1777,6 +1916,7 @@ namespace System.Diagnostics
             SetToRandomBytes(span);
             return CreateFromBytes(span);
         }
+
         public static ActivityTraceId CreateFromBytes(ReadOnlySpan<byte> idData)
         {
             if (idData.Length != 16)
@@ -1788,7 +1928,9 @@ namespace System.Diagnostics
             return new ActivityTraceId(HexConverter.ToString(idData, HexConverter.Casing.Lower));
 #endif
         }
-        public static ActivityTraceId CreateFromUtf8String(ReadOnlySpan<byte> idData) => new ActivityTraceId(idData);
+
+        public static ActivityTraceId CreateFromUtf8String(ReadOnlySpan<byte> idData) =>
+            new ActivityTraceId(idData);
 
         public static ActivityTraceId CreateFromString(ReadOnlySpan<char> idData)
         {
@@ -1815,20 +1957,24 @@ namespace System.Diagnostics
         {
             return traceId1._hexString == traceId2._hexString;
         }
+
         public static bool operator !=(ActivityTraceId traceId1, ActivityTraceId traceId2)
         {
             return traceId1._hexString != traceId2._hexString;
         }
+
         public bool Equals(ActivityTraceId traceId)
         {
             return _hexString == traceId._hexString;
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj is ActivityTraceId traceId)
                 return _hexString == traceId._hexString;
             return false;
         }
+
         public override int GetHashCode()
         {
             return ToHexString().GetHashCode();
@@ -1868,7 +2014,10 @@ namespace System.Diagnostics
 #if NET9_0_OR_GREATER
             _hexString = Convert.ToHexStringLower(MemoryMarshal.AsBytes(span));
 #else
-            _hexString = HexConverter.ToString(MemoryMarshal.AsBytes(span), HexConverter.Casing.Lower);
+            _hexString = HexConverter.ToString(
+                MemoryMarshal.AsBytes(span),
+                HexConverter.Casing.Lower
+            );
 #endif
         }
 
@@ -1889,11 +2038,11 @@ namespace System.Diagnostics
             Debug.Assert(outBytes.Length == 16 || outBytes.Length == 8);
             RandomNumberGenerator r = RandomNumberGenerator.Current;
 
-            Unsafe.WriteUnaligned(ref outBytes[0],  r.Next());
+            Unsafe.WriteUnaligned(ref outBytes[0], r.Next());
 
             if (outBytes.Length == 16)
             {
-                Unsafe.WriteUnaligned(ref outBytes[8],  r.Next());
+                Unsafe.WriteUnaligned(ref outBytes[8], r.Next());
             }
         }
 
@@ -1907,6 +2056,7 @@ namespace System.Diagnostics
             for (int i = 0; i < outBytes.Length; i++)
                 outBytes[i] = HexByteFromChars(charData[i * 2], charData[i * 2 + 1]);
         }
+
         internal static byte HexByteFromChars(char char1, char char2)
         {
             int hi = HexConverter.FromLowerChar(char1);
@@ -1965,11 +2115,19 @@ namespace System.Diagnostics
             ulong id;
             ActivityTraceId.SetToRandomBytes(new Span<byte>(&id, sizeof(ulong)));
 #if NET9_0_OR_GREATER
-            return new ActivitySpanId(Convert.ToHexStringLower(new ReadOnlySpan<byte>(&id, sizeof(ulong))));
+            return new ActivitySpanId(
+                Convert.ToHexStringLower(new ReadOnlySpan<byte>(&id, sizeof(ulong)))
+            );
 #else
-            return new ActivitySpanId(HexConverter.ToString(new ReadOnlySpan<byte>(&id, sizeof(ulong)), HexConverter.Casing.Lower));
+            return new ActivitySpanId(
+                HexConverter.ToString(
+                    new ReadOnlySpan<byte>(&id, sizeof(ulong)),
+                    HexConverter.Casing.Lower
+                )
+            );
 #endif
         }
+
         public static ActivitySpanId CreateFromBytes(ReadOnlySpan<byte> idData)
         {
             if (idData.Length != 8)
@@ -1981,7 +2139,9 @@ namespace System.Diagnostics
             return new ActivitySpanId(HexConverter.ToString(idData, HexConverter.Casing.Lower));
 #endif
         }
-        public static ActivitySpanId CreateFromUtf8String(ReadOnlySpan<byte> idData) => new ActivitySpanId(idData);
+
+        public static ActivitySpanId CreateFromUtf8String(ReadOnlySpan<byte> idData) =>
+            new ActivitySpanId(idData);
 
         public static ActivitySpanId CreateFromString(ReadOnlySpan<char> idData)
         {
@@ -2009,20 +2169,24 @@ namespace System.Diagnostics
         {
             return spanId1._hexString == spandId2._hexString;
         }
+
         public static bool operator !=(ActivitySpanId spanId1, ActivitySpanId spandId2)
         {
             return spanId1._hexString != spandId2._hexString;
         }
+
         public bool Equals(ActivitySpanId spanId)
         {
             return _hexString == spanId._hexString;
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj is ActivitySpanId spanId)
                 return _hexString == spanId._hexString;
             return false;
         }
+
         public override int GetHashCode()
         {
             return ToHexString().GetHashCode();
@@ -2050,7 +2214,10 @@ namespace System.Diagnostics
 #if NET9_0_OR_GREATER
             _hexString = Convert.ToHexStringLower(new ReadOnlySpan<byte>(&id, sizeof(ulong)));
 #else
-            _hexString = HexConverter.ToString(new ReadOnlySpan<byte>(&id, sizeof(ulong)), HexConverter.Casing.Lower);
+            _hexString = HexConverter.ToString(
+                new ReadOnlySpan<byte>(&id, sizeof(ulong)),
+                HexConverter.Casing.Lower
+            );
 #endif
         }
 

@@ -16,7 +16,14 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private ReplicationCursor() { }
 
-        internal ReplicationCursor(DirectoryServer server, string partition, Guid guid, long filter, long time, IntPtr dn)
+        internal ReplicationCursor(
+            DirectoryServer server,
+            string partition,
+            Guid guid,
+            long filter,
+            long time,
+            IntPtr dn
+        )
         {
             PartitionName = partition;
             SourceInvocationId = guid;
@@ -55,7 +62,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 // get the source server name if we are on win2k, or above win2k and serverDN is not NULL (means KCC translation is successful)
                 if (!_advanced || (_advanced && _serverDN != null))
                 {
-                    _sourceServer = Utils.GetServerNameFromInvocationID(_serverDN, SourceInvocationId, _server);
+                    _sourceServer = Utils.GetServerNameFromInvocationID(
+                        _serverDN,
+                        SourceInvocationId,
+                        _server
+                    );
                 }
 
                 return _sourceServer;
@@ -71,7 +82,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 else
                 {
                     // win2k client machine does not support this
-                    if ((Environment.OSVersion.Version.Major == 5) && (Environment.OSVersion.Version.Minor == 0))
+                    if (
+                        (Environment.OSVersion.Version.Major == 5)
+                        && (Environment.OSVersion.Version.Minor == 0)
+                    )
                         throw new PlatformNotSupportedException(SR.DSNotSupportOnClient);
                     else
                         throw new PlatformNotSupportedException(SR.DSNotSupportOnDC);

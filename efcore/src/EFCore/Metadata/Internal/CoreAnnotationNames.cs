@@ -250,7 +250,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string InverseNavigations = "InversePropertyAttributeConvention:InverseNavigations";
+    public const string InverseNavigations =
+        "InversePropertyAttributeConvention:InverseNavigations";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -258,7 +259,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string InverseNavigationsNoAttribute = "RelationshipDiscoveryConvention:InverseNavigationsNoAttribute";
+    public const string InverseNavigationsNoAttribute =
+        "RelationshipDiscoveryConvention:InverseNavigationsNoAttribute";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -266,7 +268,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string NavigationCandidates = "RelationshipDiscoveryConvention:NavigationCandidates";
+    public const string NavigationCandidates =
+        "RelationshipDiscoveryConvention:NavigationCandidates";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -274,7 +277,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string NavigationCandidatesNoAttribute = "RelationshipDiscoveryConvention:NavigationCandidatesNoAttribute";
+    public const string NavigationCandidatesNoAttribute =
+        "RelationshipDiscoveryConvention:NavigationCandidatesNoAttribute";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -298,7 +302,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string AmbiguousNavigations = "RelationshipDiscoveryConvention:AmbiguousNavigations";
+    public const string AmbiguousNavigations =
+        "RelationshipDiscoveryConvention:AmbiguousNavigations";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -314,7 +319,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string DuplicateServiceProperties = "ServicePropertyDiscoveryConvention:DuplicateServiceProperties";
+    public const string DuplicateServiceProperties =
+        "ServicePropertyDiscoveryConvention:DuplicateServiceProperties";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -322,7 +328,8 @@ public static class CoreAnnotationNames
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public const string FullChangeTrackingNotificationsRequired = "ModelValidator.FullChangeTrackingNotificationsRequired";
+    public const string FullChangeTrackingNotificationsRequired =
+        "ModelValidator.FullChangeTrackingNotificationsRequired";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -399,6 +406,6 @@ public static class CoreAnnotationNames
         FullChangeTrackingNotificationsRequired,
         AdHocModel,
         JsonValueReaderWriterType,
-        ElementType
+        ElementType,
     };
 }

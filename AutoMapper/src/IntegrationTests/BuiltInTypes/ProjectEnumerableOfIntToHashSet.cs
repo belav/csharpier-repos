@@ -1,6 +1,7 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
-public class ProjectEnumerableOfIntToHashSet : IntegrationTest<ProjectEnumerableOfIntToHashSet.DatabaseInitializer>
+public class ProjectEnumerableOfIntToHashSet
+    : IntegrationTest<ProjectEnumerableOfIntToHashSet.DatabaseInitializer>
 {
     public class Customer
     {
@@ -33,21 +34,25 @@ public class ProjectEnumerableOfIntToHashSet : IntegrationTest<ProjectEnumerable
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Items = new List<Item>(new[] { new Item(), new Item(), new Item() })
-            });
+            context.Customers.Add(
+                new Customer
+                {
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Items = new List<Item>(new[] { new Item(), new Item(), new Item() }),
+                }
+            );
 
             base.Seed(context);
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.ItemsIds, o => o.MapFrom(s => s.Items.Select(i => i.Id)));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(d => d.ItemsIds, o => o.MapFrom(s => s.Items.Select(i => i.Id)));
+        });
 
     [Fact]
     public void Can_map_with_projection()

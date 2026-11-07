@@ -49,7 +49,9 @@ namespace System.Formats.Tar.Tests
         {
             if (length < 10)
             {
-                throw new ArgumentException("Length must be at least 10 to append 5 bytes of dummy data at the beginning and end.");
+                throw new ArgumentException(
+                    "Length must be at least 10 to append 5 bytes of dummy data at the beginning and end."
+                );
             }
 
             _length = length;
@@ -57,8 +59,8 @@ namespace System.Formats.Tar.Tests
 
         public override void Flush() { }
 
-        public override int Read(byte[] buffer, int offset, int count)
-            => Read(buffer.AsSpan(offset, count));
+        public override int Read(byte[] buffer, int offset, int count) =>
+            Read(buffer.AsSpan(offset, count));
 
         public override int Read(Span<byte> buffer)
         {
@@ -101,10 +103,12 @@ namespace System.Formats.Tar.Tests
             return bytesToConsume;
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         public override void SetLength(long value) => throw new NotSupportedException();
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
     }
 }

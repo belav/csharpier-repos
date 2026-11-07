@@ -248,9 +248,8 @@ app.MapPost("/", (AddsCustomParameterMetadata param1) => { });
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
     }
 
@@ -268,9 +267,8 @@ app.MapPost("/", () => new AddsCustomEndpointMetadataResult());
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -288,9 +286,8 @@ app.MapPost("/", () => Task.FromResult(new AddsCustomEndpointMetadataResult()));
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -308,9 +305,8 @@ app.MapPost("/", () => ValueTask.FromResult(new AddsCustomEndpointMetadataResult
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -461,9 +457,8 @@ app.MapPost("/", () => new CountsDefaultEndpointMetadataResult()).WithMetadata(n
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Differs from RDF test because we end up with more metadata in RDG.
         Assert.Contains(endpoint.Metadata, m => m is MetadataCountMetadata { Count: > 1 });
@@ -483,9 +478,8 @@ app.MapPost("/", () => Task.FromResult(new CountsDefaultEndpointMetadataResult()
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Differs from RDF test because we end up with more metadata in RDG.
         Assert.Contains(endpoint.Metadata, m => m is MetadataCountMetadata { Count: > 1 });
@@ -505,9 +499,8 @@ app.MapPost("/", () => ValueTask.FromResult(new CountsDefaultEndpointMetadataRes
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Differs from RDF test because we end up with more metadata in RDG.
         Assert.Contains(endpoint.Metadata, m => m is MetadataCountMetadata { Count: > 1 });
@@ -527,9 +520,8 @@ app.MapPost("/", (AddsCustomParameterMetadata param1) => "Hello").WithMetadata(n
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" });
     }
@@ -548,13 +540,11 @@ app.MapPost("/", (AddsCustomParameterMetadata param1) => "Hello").WithMetadata(n
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
     }
 
@@ -572,13 +562,11 @@ app.MapPost("/", (AddsCustomParameterMetadata param1, HttpContext context) => "H
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
     }
 
@@ -596,9 +584,8 @@ app.MapPost("/test/pattern", (AddsRoutePatternMetadata param1) => {});
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is RoutePatternMetadata { RoutePattern: "/test/pattern" }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is RoutePatternMetadata { RoutePattern: "/test/pattern" }
         );
     }
 
@@ -671,18 +658,15 @@ app.MapPost("/test/pattern", ([AsParameters] AddsCustomParameterMetadata param1)
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
         Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" });
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Property }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Property }
         );
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is ParameterNameMetadata { Name: nameof(AddsCustomParameterMetadata.Data) }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is ParameterNameMetadata { Name: nameof(AddsCustomParameterMetadata.Data) }
         );
     }
 }

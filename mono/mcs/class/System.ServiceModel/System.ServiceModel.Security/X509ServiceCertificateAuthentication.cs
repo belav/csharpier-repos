@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,48 +27,50 @@
 //
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Selectors;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.IdentityModel.Selectors;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public class X509ServiceCertificateAuthentication
-	{
-		public X509ServiceCertificateAuthentication ()
-		{
-		}
+    [MonoTODO]
+    public class X509ServiceCertificateAuthentication
+    {
+        public X509ServiceCertificateAuthentication() { }
 
-		X509CertificateValidationMode validation_mode;
-		X509CertificateValidator custom_validator;
-		X509RevocationMode revocation_mode;
-		StoreLocation trusted_store_loc;
+        X509CertificateValidationMode validation_mode;
+        X509CertificateValidator custom_validator;
+        X509RevocationMode revocation_mode;
+        StoreLocation trusted_store_loc;
 
-		internal X509ServiceCertificateAuthentication Clone ()
-		{
-			return (X509ServiceCertificateAuthentication) MemberwiseClone ();
-		}
+        internal X509ServiceCertificateAuthentication Clone()
+        {
+            return (X509ServiceCertificateAuthentication)MemberwiseClone();
+        }
 
-		public X509CertificateValidationMode CertificateValidationMode {
-			get { return validation_mode; }
-			set { validation_mode = value; }
-		}
+        public X509CertificateValidationMode CertificateValidationMode
+        {
+            get { return validation_mode; }
+            set { validation_mode = value; }
+        }
 
-		public X509CertificateValidator CustomCertificateValidator {
-			get { return custom_validator; }
-			set { custom_validator = value; }
-		}
+        public X509CertificateValidator CustomCertificateValidator
+        {
+            get { return custom_validator; }
+            set { custom_validator = value; }
+        }
 
-		public X509RevocationMode RevocationMode {
-			get { return revocation_mode; }
-			set { revocation_mode = value; }
-		}
+        public X509RevocationMode RevocationMode
+        {
+            get { return revocation_mode; }
+            set { revocation_mode = value; }
+        }
 
-		public StoreLocation TrustedStoreLocation { 
-			get { return trusted_store_loc; }
-			set { trusted_store_loc = value; }
-		}
-	}
+        public StoreLocation TrustedStoreLocation
+        {
+            get { return trusted_store_loc; }
+            set { trusted_store_loc = value; }
+        }
+    }
 }

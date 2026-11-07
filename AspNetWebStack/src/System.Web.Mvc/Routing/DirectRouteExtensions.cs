@@ -142,7 +142,10 @@ namespace System.Web.Mvc.Routing
         /// </summary>
         public static ActionDescriptor[] GetTargetActionDescriptors(this RouteData routeData)
         {
-            return GetRouteDataTokenValue<ActionDescriptor[]>(routeData, RouteDataTokenKeys.Actions);
+            return GetRouteDataTokenValue<ActionDescriptor[]>(
+                routeData,
+                RouteDataTokenKeys.Actions
+            );
         }
 
         /// <summary>
@@ -156,7 +159,10 @@ namespace System.Web.Mvc.Routing
         /// <summary>
         /// Sets the target actions that can be matched if this route is matched.
         /// </summary>
-        public static void SetTargetActionDescriptors(this Route route, ActionDescriptor[] actionDescriptors)
+        public static void SetTargetActionDescriptors(
+            this Route route,
+            ActionDescriptor[] actionDescriptors
+        )
         {
             if (actionDescriptors == null || actionDescriptors.Length == 0)
             {
@@ -178,10 +184,16 @@ namespace System.Web.Mvc.Routing
 
         public static IEnumerable<RouteData> GetDirectRouteMatches(this RouteData routeData)
         {
-            return GetRouteDataValue<IEnumerable<RouteData>>(routeData, RouteDataTokenKeys.DirectRouteMatches) ?? Enumerable.Empty<RouteData>();
+            return GetRouteDataValue<IEnumerable<RouteData>>(
+                    routeData,
+                    RouteDataTokenKeys.DirectRouteMatches
+                ) ?? Enumerable.Empty<RouteData>();
         }
 
-        public static void SetDirectRouteMatches(this RouteData routeData, IEnumerable<RouteData> matches)
+        public static void SetDirectRouteMatches(
+            this RouteData routeData,
+            IEnumerable<RouteData> matches
+        )
         {
             if (matches == null || !matches.Any())
             {

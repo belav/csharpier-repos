@@ -6,28 +6,62 @@ public class NonNullableToNullable : AutoMapperSpecBase
     {
         public int Id { get; set; }
     }
+
     class Destination
     {
         public int? Id { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateProjection<Source, Destination>());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c => c.CreateProjection<Source, Destination>());
+
     [Fact]
-    public void Should_project() => ProjectTo<Destination>(new[] { new Source() }.AsQueryable()).First().Id.ShouldBe(0);
+    public void Should_project() =>
+        ProjectTo<Destination>(new[] { new Source() }.AsQueryable()).First().Id.ShouldBe(0);
 }
+
 public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(
+                    d => d.Price,
+                    o =>
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        )
+                );
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_cache_the_subquery()
     {
-        var products = new[] { new Product { Id = 1, ECommercePublished = true, Articles = new[] { new Article { Id = 1, IsDefault = true, NationId = 1, ProductId = 1 } } } }.AsQueryable();
+        var products = new[]
+        {
+            new Product
+            {
+                Id = 1,
+                ECommercePublished = true,
+                Articles = new[]
+                {
+                    new Article
+                    {
+                        Id = 1,
+                        IsDefault = true,
+                        NationId = 1,
+                        ProductId = 1,
+                    },
+                },
+            },
+        }.AsQueryable();
         var projection = products.ProjectTo<ProductModel>(Configuration);
         var productModel = projection.First();
         productModel.Price.RegionId.ShouldBe((short)1);

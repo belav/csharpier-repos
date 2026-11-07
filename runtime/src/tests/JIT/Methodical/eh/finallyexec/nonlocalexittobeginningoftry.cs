@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // try/finally embedded in a try catch with a nonlocal exit to the beginning of try block
-// to make sure that we don't execute the finally unnecessarily 
+// to make sure that we don't execute the finally unnecessarily
 using System;
 using Xunit;
 
@@ -29,7 +29,7 @@ namespace hello_nonlocalexittobeginningoftry_finallyexec_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -38,7 +38,8 @@ namespace hello_nonlocalexittobeginningoftry_finallyexec_cs
             {
                 begintry1:
                 Console.WriteLine("in try1");
-                if (i > 0) goto done;
+                if (i > 0)
+                    goto done;
                 try
                 {
                     i++;
@@ -62,7 +63,5 @@ namespace hello_nonlocalexittobeginningoftry_finallyexec_cs
 
             return testLog.VerifyOutput();
         }
-
     }
 }
-

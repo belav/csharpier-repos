@@ -60,7 +60,10 @@ namespace System.Diagnostics.Tests
         [InlineData("TargetTypeName")]
         public void TargetTypeName_Set_GetReturnsExpected(string targetTypeName)
         {
-            var attribute = new DebuggerDisplayAttribute("Value") { TargetTypeName = targetTypeName };
+            var attribute = new DebuggerDisplayAttribute("Value")
+            {
+                TargetTypeName = targetTypeName,
+            };
             Assert.Equal(targetTypeName, attribute.TargetTypeName);
         }
     }

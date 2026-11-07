@@ -10,24 +10,27 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Linq.Expressions;
     using System.Net;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Administration;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Text;
-    using System.Runtime.Diagnostics;
     using System.Threading;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Reflection;
-    using System.Linq.Expressions;
 
-    public abstract class ServiceHostBase : CommunicationObject, IExtensibleObject<ServiceHostBase>, IDisposable
+    public abstract class ServiceHostBase
+        : CommunicationObject,
+            IExtensibleObject<ServiceHostBase>,
+            IDisposable
     {
         internal static readonly Uri EmptyUri = new Uri(string.Empty, UriKind.RelativeOrAbsolute);
 
@@ -47,7 +50,10 @@ namespace System.ServiceModel
         ServiceCredentials readOnlyCredentials;
         ServiceAuthorizationBehavior readOnlyAuthorization;
         ServiceAuthenticationBehavior readOnlyAuthentication;
-        Dictionary<DispatcherBuilder.ListenUriInfo, Collection<ServiceEndpoint>> endpointsByListenUriInfo;
+        Dictionary<
+            DispatcherBuilder.ListenUriInfo,
+            Collection<ServiceEndpoint>
+        > endpointsByListenUriInfo;
         int busyCount;
         EventTraceActivity eventTraceActivity;
 
@@ -67,18 +73,17 @@ namespace System.ServiceModel
             this.Faulted += new EventHandler(OnServiceHostFaulted);
         }
 
-
         internal EventTraceActivity EventTraceActivity
         {
-            get 
+            get
             {
                 if (this.eventTraceActivity == null)
                 {
                     this.eventTraceActivity = new EventTraceActivity();
                 }
 
-                return eventTraceActivity; 
-            }            
+                return eventTraceActivity;
+            }
         }
 
         public ServiceAuthorizationBehavior Authorization
@@ -89,7 +94,10 @@ namespace System.ServiceModel
                 {
                     return null;
                 }
-                else if (this.State == CommunicationState.Created || this.State == CommunicationState.Opening)
+                else if (
+                    this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening
+                )
                 {
                     return EnsureAuthorization(this.Description);
                 }
@@ -108,7 +116,10 @@ namespace System.ServiceModel
                 {
                     return null;
                 }
-                else if (this.State == CommunicationState.Created || this.State == CommunicationState.Opening)
+                else if (
+                    this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening
+                )
                 {
                     return EnsureAuthentication(this.Description);
                 }
@@ -123,7 +134,9 @@ namespace System.ServiceModel
         {
             get
             {
-                externalBaseAddresses = new ReadOnlyCollection<Uri>(new List<Uri>(this.baseAddresses));
+                externalBaseAddresses = new ReadOnlyCollection<Uri>(
+                    new List<Uri>(this.baseAddresses)
+                );
                 return externalBaseAddresses;
             }
         }
@@ -141,11 +154,18 @@ namespace System.ServiceModel
                 if (value < TimeSpan.Zero)
                 {
                     string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", message));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value", message)
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -158,10 +178,7 @@ namespace System.ServiceModel
 
         internal ServicePerformanceCountersBase Counters
         {
-            get
-            {
-                return this.servicePerformanceCounters;
-            }
+            get { return this.servicePerformanceCounters; }
             set
             {
                 this.servicePerformanceCounters = value;
@@ -171,14 +188,8 @@ namespace System.ServiceModel
 
         internal DefaultPerformanceCounters DefaultCounters
         {
-            get
-            {
-                return this.defaultPerformanceCounters;
-            }
-            set
-            {
-                this.defaultPerformanceCounters = value;
-            }
+            get { return this.defaultPerformanceCounters; }
+            set { this.defaultPerformanceCounters = value; }
         }
 
         public ServiceCredentials Credentials
@@ -189,7 +200,10 @@ namespace System.ServiceModel
                 {
                     return null;
                 }
-                else if (this.State == CommunicationState.Created || this.State == CommunicationState.Opening)
+                else if (
+                    this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening
+                )
                 {
                     return EnsureCredentials(this.Description);
                 }
@@ -244,11 +258,18 @@ namespace System.ServiceModel
                 if (value < TimeSpan.Zero)
                 {
                     string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", message));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value", message)
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -261,21 +282,18 @@ namespace System.ServiceModel
 
         internal ServiceThrottle ServiceThrottle
         {
-            get
-            {
-                return this.serviceThrottle;
-            }
+            get { return this.serviceThrottle; }
         }
 
         internal virtual object DisposableInstance
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
-        internal Dictionary<DispatcherBuilder.ListenUriInfo, Collection<ServiceEndpoint>> EndpointsByListenUriInfo
+        internal Dictionary<
+            DispatcherBuilder.ListenUriInfo,
+            Collection<ServiceEndpoint>
+        > EndpointsByListenUriInfo
         {
             get
             {
@@ -287,12 +305,20 @@ namespace System.ServiceModel
             }
         }
 
-        Dictionary<DispatcherBuilder.ListenUriInfo, Collection<ServiceEndpoint>> GetEndpointsByListenUriInfo()
+        Dictionary<
+            DispatcherBuilder.ListenUriInfo,
+            Collection<ServiceEndpoint>
+        > GetEndpointsByListenUriInfo()
         {
-            Dictionary<DispatcherBuilder.ListenUriInfo, Collection<ServiceEndpoint>> endpointDictionary = new Dictionary<DispatcherBuilder.ListenUriInfo, Collection<ServiceEndpoint>>();
+            Dictionary<
+                DispatcherBuilder.ListenUriInfo,
+                Collection<ServiceEndpoint>
+            > endpointDictionary =
+                new Dictionary<DispatcherBuilder.ListenUriInfo, Collection<ServiceEndpoint>>();
             foreach (ServiceEndpoint endpoint in this.Description.Endpoints)
             {
-                DispatcherBuilder.ListenUriInfo listenUriInfo = DispatcherBuilder.GetListenUriInfoForEndpoint(this, endpoint);
+                DispatcherBuilder.ListenUriInfo listenUriInfo =
+                    DispatcherBuilder.GetListenUriInfoForEndpoint(this, endpoint);
                 if (!endpointDictionary.ContainsKey(listenUriInfo))
                 {
                     endpointDictionary.Add(listenUriInfo, new Collection<ServiceEndpoint>());
@@ -306,25 +332,41 @@ namespace System.ServiceModel
         {
             if (this.initializeDescriptionHasFinished)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SFxCannotCallAddBaseAddress)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxCannotCallAddBaseAddress))
+                );
             }
             this.baseAddresses.Add(baseAddress);
         }
 
-        public ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, string address)
+        public ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            string address
+        )
         {
             return this.AddServiceEndpoint(implementedContract, binding, address, (Uri)null);
         }
 
-        public ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, string address, Uri listenUri)
+        public ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            string address,
+            Uri listenUri
+        )
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("address"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("address")
+                );
             }
 
-            ServiceEndpoint endpoint = this.AddServiceEndpoint(implementedContract, binding, new Uri(address, UriKind.RelativeOrAbsolute));
+            ServiceEndpoint endpoint = this.AddServiceEndpoint(
+                implementedContract,
+                binding,
+                new Uri(address, UriKind.RelativeOrAbsolute)
+            );
             if (listenUri != null)
             {
                 endpoint.UnresolvedListenUri = listenUri;
@@ -334,44 +376,79 @@ namespace System.ServiceModel
             return endpoint;
         }
 
-        public ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, Uri address)
+        public ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            Uri address
+        )
         {
             return this.AddServiceEndpoint(implementedContract, binding, address, (Uri)null);
         }
 
-        public ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, Uri address, Uri listenUri)
+        public ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            Uri address,
+            Uri listenUri
+        )
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("address"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("address")
+                );
             }
 
             if (binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("binding"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("binding")
+                );
             }
 
             if (implementedContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("implementedContract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("implementedContract")
+                );
             }
 
-            if (this.State != CommunicationState.Created && this.State != CommunicationState.Opening)
+            if (
+                this.State != CommunicationState.Created
+                && this.State != CommunicationState.Opening
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
+                    )
+                );
             }
 
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
+                    )
+                );
             }
 
             Uri via = this.MakeAbsoluteUri(address, binding);
 
-            ConfigLoader configLoader = new ConfigLoader(GetContractResolver(this.implementedContracts));
-            ContractDescription contract = configLoader.LookupContract(implementedContract, this.Description.Name);
+            ConfigLoader configLoader = new ConfigLoader(
+                GetContractResolver(this.implementedContracts)
+            );
+            ContractDescription contract = configLoader.LookupContract(
+                implementedContract,
+                this.Description.Name
+            );
 
-            ServiceEndpoint serviceEndpoint = new ServiceEndpoint(contract, binding, new EndpointAddress(via));
+            ServiceEndpoint serviceEndpoint = new ServiceEndpoint(
+                contract,
+                binding,
+                new EndpointAddress(via)
+            );
             this.Description.Endpoints.Add(serviceEndpoint);
             serviceEndpoint.UnresolvedAddress = address;
 
@@ -390,29 +467,51 @@ namespace System.ServiceModel
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
             }
-            if (this.State != CommunicationState.Created && this.State != CommunicationState.Opening)
+            if (
+                this.State != CommunicationState.Created
+                && this.State != CommunicationState.Opening
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
+                    )
+                );
             }
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
+                    )
+                );
             }
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxEndpointAddressNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxEndpointAddressNotSpecified)
+                );
             }
             if (endpoint.Contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxEndpointContractNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxEndpointContractNotSpecified)
+                );
             }
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxEndpointBindingNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxEndpointBindingNotSpecified)
+                );
             }
-            if (!endpoint.IsSystemEndpoint || endpoint.Contract.ContractType == typeof(IMetadataExchange))
+            if (
+                !endpoint.IsSystemEndpoint
+                || endpoint.Contract.ContractType == typeof(IMetadataExchange)
+            )
             {
-                ConfigLoader loader = new ConfigLoader(GetContractResolver(this.implementedContracts));
+                ConfigLoader loader = new ConfigLoader(
+                    GetContractResolver(this.implementedContracts)
+                );
                 loader.LookupContract(endpoint.Contract.ConfigurationName, this.Description.Name);
             }
             this.Description.Endpoints.Add(endpoint);
@@ -430,9 +529,14 @@ namespace System.ServiceModel
             }
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxEndpointBindingNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxEndpointBindingNotSpecified)
+                );
             }
-            Uri absoluteUri = MakeAbsoluteUri(new Uri(relativeAddress, UriKind.Relative), endpoint.Binding);
+            Uri absoluteUri = MakeAbsoluteUri(
+                new Uri(relativeAddress, UriKind.Relative),
+                endpoint.Binding
+            );
             endpoint.Address = new EndpointAddress(absoluteUri);
         }
 
@@ -441,19 +545,36 @@ namespace System.ServiceModel
             return MakeAbsoluteUri(relativeOrAbsoluteUri, binding, this.InternalBaseAddresses);
         }
 
-        internal static Uri MakeAbsoluteUri(Uri relativeOrAbsoluteUri, Binding binding, UriSchemeKeyedCollection baseAddresses)
+        internal static Uri MakeAbsoluteUri(
+            Uri relativeOrAbsoluteUri,
+            Binding binding,
+            UriSchemeKeyedCollection baseAddresses
+        )
         {
             Uri result = relativeOrAbsoluteUri;
             if (!result.IsAbsoluteUri)
             {
                 if (binding.Scheme == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCustomBindingWithoutTransport)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxCustomBindingWithoutTransport)
+                        )
+                    );
                 }
                 result = GetVia(binding.Scheme, result, baseAddresses);
                 if (result == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxEndpointNoMatchingScheme, binding.Scheme, binding.Name, GetBaseAddressSchemes(baseAddresses))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxEndpointNoMatchingScheme,
+                                binding.Scheme,
+                                binding.Name,
+                                GetBaseAddressSchemes(baseAddresses)
+                            )
+                        )
+                    );
                 }
             }
             return result;
@@ -463,13 +584,23 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                        )
+                    )
+                );
             }
 
             ConfigLoader configLoader = new ConfigLoader(GetContractResolver(implementedContracts));
 
             // Call the overload of LoadConfigurationSectionInternal which looks up the serviceElement from ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-            LoadConfigurationSectionInternal(configLoader, this.Description, this.Description.ConfigurationName);
+            LoadConfigurationSectionInternal(
+                configLoader,
+                this.Description,
+                this.Description.ConfigurationName
+            );
 
             EnsureAuthenticationAuthorizationDebug(this.Description);
         }
@@ -486,17 +617,29 @@ namespace System.ServiceModel
             List<ServiceEndpoint> defaultEndpoints = new List<ServiceEndpoint>();
             foreach (Uri baseAddress in this.InternalBaseAddresses)
             {
-                ProtocolMappingItem protocolMappingItem = ConfigLoader.LookupProtocolMapping(baseAddress.Scheme);
+                ProtocolMappingItem protocolMappingItem = ConfigLoader.LookupProtocolMapping(
+                    baseAddress.Scheme
+                );
                 if (protocolMappingItem != null)
                 {
-                    Binding defaultBinding = ConfigLoader.LookupBinding(protocolMappingItem.Binding, protocolMappingItem.BindingConfiguration);
+                    Binding defaultBinding = ConfigLoader.LookupBinding(
+                        protocolMappingItem.Binding,
+                        protocolMappingItem.BindingConfiguration
+                    );
                     if (defaultBinding != null)
                     {
                         AddDefaultEndpoints(defaultBinding, defaultEndpoints);
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Exception(SR.GetString(SR.BindingProtocolMappingNotDefined, baseAddress.Scheme)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Exception(
+                                SR.GetString(
+                                    SR.BindingProtocolMappingNotDefined,
+                                    baseAddress.Scheme
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -504,14 +647,20 @@ namespace System.ServiceModel
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 dictionary["ServiceConfigurationName"] = this.description.ConfigurationName;
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.DefaultEndpointsAdded, SR.GetString(SR.TraceCodeDefaultEndpointsAdded), new DictionaryTraceRecord(dictionary));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.DefaultEndpointsAdded,
+                    SR.GetString(SR.TraceCodeDefaultEndpointsAdded),
+                    new DictionaryTraceRecord(dictionary)
+                );
             }
             return new ReadOnlyCollection<ServiceEndpoint>(defaultEndpoints);
         }
 
-        internal virtual void AddDefaultEndpoints(Binding defaultBinding, List<ServiceEndpoint> defaultEndpoints)
-        {
-        }
+        internal virtual void AddDefaultEndpoints(
+            Binding defaultBinding,
+            List<ServiceEndpoint> defaultEndpoints
+        ) { }
 
         internal virtual void BindInstance(InstanceContext instance)
         {
@@ -533,13 +682,19 @@ namespace System.ServiceModel
             Close();
         }
 
-        protected abstract ServiceDescription CreateDescription(out IDictionary<string, ContractDescription> implementedContracts);
+        protected abstract ServiceDescription CreateDescription(
+            out IDictionary<string, ContractDescription> implementedContracts
+        );
 
         protected virtual void InitializeRuntime()
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotInitializeRuntimeWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxServiceHostBaseCannotInitializeRuntimeWithoutDescription)
+                    )
+                );
             }
 
             if (this.Description.Endpoints.Count == 0)
@@ -555,11 +710,13 @@ namespace System.ServiceModel
             SecurityValidationBehavior.Instance.AfterBuildTimeValidation(description);
         }
 
-        internal virtual void AfterInitializeRuntime(TimeSpan timeout)
-        {
-        }
+        internal virtual void AfterInitializeRuntime(TimeSpan timeout) { }
 
-        internal virtual IAsyncResult BeginAfterInitializeRuntime(TimeSpan timeout, AsyncCallback callback, object state)
+        internal virtual IAsyncResult BeginAfterInitializeRuntime(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -571,8 +728,13 @@ namespace System.ServiceModel
 
         ServiceAuthorizationBehavior EnsureAuthorization(ServiceDescription description)
         {
-            Fx.Assert(this.State == CommunicationState.Created || this.State == CommunicationState.Opening, "");
-            ServiceAuthorizationBehavior a = description.Behaviors.Find<ServiceAuthorizationBehavior>();
+            Fx.Assert(
+                this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening,
+                ""
+            );
+            ServiceAuthorizationBehavior a =
+                description.Behaviors.Find<ServiceAuthorizationBehavior>();
 
             if (a == null)
             {
@@ -585,8 +747,13 @@ namespace System.ServiceModel
 
         ServiceAuthenticationBehavior EnsureAuthentication(ServiceDescription description)
         {
-            Fx.Assert(this.State == CommunicationState.Created || this.State == CommunicationState.Opening, "");
-            ServiceAuthenticationBehavior a = description.Behaviors.Find<ServiceAuthenticationBehavior>();
+            Fx.Assert(
+                this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening,
+                ""
+            );
+            ServiceAuthenticationBehavior a =
+                description.Behaviors.Find<ServiceAuthenticationBehavior>();
 
             if (a == null)
             {
@@ -598,7 +765,11 @@ namespace System.ServiceModel
 
         ServiceDebugBehavior EnsureDebug(ServiceDescription description)
         {
-            Fx.Assert(this.State == CommunicationState.Created || this.State == CommunicationState.Opening, "");
+            Fx.Assert(
+                this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening,
+                ""
+            );
             ServiceDebugBehavior m = description.Behaviors.Find<ServiceDebugBehavior>();
 
             if (m == null)
@@ -612,7 +783,11 @@ namespace System.ServiceModel
 
         ServiceCredentials EnsureCredentials(ServiceDescription description)
         {
-            Fx.Assert(this.State == CommunicationState.Created || this.State == CommunicationState.Opening, "");
+            Fx.Assert(
+                this.State == CommunicationState.Created
+                    || this.State == CommunicationState.Opening,
+                ""
+            );
             ServiceCredentials c = description.Behaviors.Find<ServiceCredentials>();
 
             if (c == null)
@@ -634,7 +809,9 @@ namespace System.ServiceModel
             return GetBaseAddressSchemes(baseAddresses);
         }
 
-        internal static String GetBaseAddressSchemes(UriSchemeKeyedCollection uriSchemeKeyedCollection)
+        internal static String GetBaseAddressSchemes(
+            UriSchemeKeyedCollection uriSchemeKeyedCollection
+        )
         {
             StringBuilder buffer = new StringBuilder();
             bool firstScheme = true;
@@ -647,7 +824,9 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    buffer.Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator).Append(address.Scheme);
+                    buffer
+                        .Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator)
+                        .Append(address.Scheme);
                 }
             }
             return buffer.ToString();
@@ -665,7 +844,12 @@ namespace System.ServiceModel
             {
                 endpoints = new Collection<ServiceEndpoint>();
             }
-            else if (!this.EndpointsByListenUriInfo.TryGetValue(DispatcherBuilder.GetListenUriInfoForEndpoint(this, inputEndpoint), out endpoints) || !endpoints.Contains(inputEndpoint))
+            else if (
+                !this.EndpointsByListenUriInfo.TryGetValue(
+                    DispatcherBuilder.GetListenUriInfoForEndpoint(this, inputEndpoint),
+                    out endpoints
+                ) || !endpoints.Contains(inputEndpoint)
+            )
             {
                 endpoints = new Collection<ServiceEndpoint>();
                 endpoints.Add(inputEndpoint);
@@ -674,7 +858,9 @@ namespace System.ServiceModel
             return DispatcherBuilder.GetBindingParameters(this, endpoints);
         }
 
-        internal BindingParameterCollection GetBindingParameters(Collection<ServiceEndpoint> endpoints)
+        internal BindingParameterCollection GetBindingParameters(
+            Collection<ServiceEndpoint> endpoints
+        )
         {
             return DispatcherBuilder.GetBindingParameters(this, endpoints);
         }
@@ -684,10 +870,16 @@ namespace System.ServiceModel
             return Array.AsReadOnly<InstanceContext>(this.instances.ToArray());
         }
 
-        internal virtual IContractResolver GetContractResolver(IDictionary<string, ContractDescription> implementedContracts)
+        internal virtual IContractResolver GetContractResolver(
+            IDictionary<string, ContractDescription> implementedContracts
+        )
         {
-            ServiceAndBehaviorsContractResolver resolver = new ServiceAndBehaviorsContractResolver(new ImplementedContractsContractResolver(implementedContracts));
-            resolver.AddBehaviorContractsToResolver(this.description == null ? null : this.description.Behaviors);
+            ServiceAndBehaviorsContractResolver resolver = new ServiceAndBehaviorsContractResolver(
+                new ImplementedContractsContractResolver(implementedContracts)
+            );
+            resolver.AddBehaviorContractsToResolver(
+                this.description == null ? null : this.description.Behaviors
+            );
             return resolver;
         }
 
@@ -698,7 +890,10 @@ namespace System.ServiceModel
 
         internal static Uri GetUri(Uri baseUri, string path)
         {
-            if (path.StartsWith("/", StringComparison.Ordinal) || path.StartsWith("\\", StringComparison.Ordinal))
+            if (
+                path.StartsWith("/", StringComparison.Ordinal)
+                || path.StartsWith("\\", StringComparison.Ordinal)
+            )
             {
                 int i = 1;
                 for (; i < path.Length; ++i)
@@ -727,7 +922,11 @@ namespace System.ServiceModel
             return ServiceHost.GetVia(scheme, address, InternalBaseAddresses);
         }
 
-        internal static Uri GetVia(string scheme, Uri address, UriSchemeKeyedCollection baseAddresses)
+        internal static Uri GetVia(
+            string scheme,
+            Uri address,
+            UriSchemeKeyedCollection baseAddresses
+        )
         {
             Uri via = address;
             if (!via.IsAbsoluteUri)
@@ -770,10 +969,18 @@ namespace System.ServiceModel
             }
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotLoadConfigurationSectionWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxServiceHostBaseCannotLoadConfigurationSectionWithoutDescription
+                        )
+                    )
+                );
             }
 
-            ConfigLoader configLoader = new ConfigLoader(GetContractResolver(this.ImplementedContracts));
+            ConfigLoader configLoader = new ConfigLoader(
+                GetContractResolver(this.ImplementedContracts)
+            );
             LoadConfigurationSectionInternal(configLoader, this.Description, serviceSection);
         }
 
@@ -782,22 +989,39 @@ namespace System.ServiceModel
             this.AddBaseAddress(baseAddress);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls LookupService which is critical.",
-            Safe = "Doesn't leak ServiceElement out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls LookupService which is critical.",
+            Safe = "Doesn't leak ServiceElement out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        void LoadConfigurationSectionInternal(ConfigLoader configLoader, ServiceDescription description, string configurationName)
+        void LoadConfigurationSectionInternal(
+            ConfigLoader configLoader,
+            ServiceDescription description,
+            string configurationName
+        )
         {
             ServiceElement serviceSection = configLoader.LookupService(configurationName);
             LoadConfigurationSectionInternal(configLoader, description, serviceSection);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles a ServiceElement, which should not be leaked out of SecurityCritical code.",
-            Safe = "Doesn't leak ServiceElement out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles a ServiceElement, which should not be leaked out of SecurityCritical code.",
+            Safe = "Doesn't leak ServiceElement out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        void LoadConfigurationSectionInternal(ConfigLoader configLoader, ServiceDescription description, ServiceElement serviceSection)
+        void LoadConfigurationSectionInternal(
+            ConfigLoader configLoader,
+            ServiceDescription description,
+            ServiceElement serviceSection
+        )
         {
             // caller must validate arguments before calling
-            configLoader.LoadServiceDescription(this, description, serviceSection, this.LoadConfigurationSectionHelper);
+            configLoader.LoadServiceDescription(
+                this,
+                description,
+                serviceSection,
+                this.LoadConfigurationSectionHelper
+            );
         }
 
         protected override void OnAbort()
@@ -824,8 +1048,12 @@ namespace System.ServiceModel
                 channelDispatcher.Faulted += new EventHandler(OnChannelDispatcherFaulted);
             }
         }
-       
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult(timeout, callback, state, this);
         }
@@ -838,15 +1066,28 @@ namespace System.ServiceModel
             InitializeRuntime();
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnBeginOpen();
             return new OpenAsyncResult(this, timeout, callback, state);
         }
 
-        IAsyncResult BeginOpenChannelDispatchers(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginOpenChannelDispatchers(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new OpenCollectionAsyncResult(timeout, callback, state, this.SnapshotChannelDispatchers());
+            return new OpenCollectionAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.SnapshotChannelDispatchers()
+            );
         }
 
         protected override void OnClose(TimeSpan timeout)
@@ -901,11 +1142,16 @@ namespace System.ServiceModel
                 }
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.ServiceHostTimeoutOnClose, SR.GetString(SR.TraceCodeServiceHostTimeoutOnClose), this, e);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.ServiceHostTimeoutOnClose,
+                        SR.GetString(SR.TraceCodeServiceHostTimeoutOnClose),
+                        this,
+                        e
+                    );
                 }
                 this.Abort();
             }
-
         }
 
         protected override void OnClosed()
@@ -929,14 +1175,20 @@ namespace System.ServiceModel
 
         void TraceBaseAddresses()
         {
-            if (DiagnosticUtility.ShouldTraceInformation && this.baseAddresses != null
-                && this.baseAddresses.Count > 0)
+            if (
+                DiagnosticUtility.ShouldTraceInformation
+                && this.baseAddresses != null
+                && this.baseAddresses.Count > 0
+            )
             {
-                TraceUtility.TraceEvent(TraceEventType.Information,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
                     TraceCode.ServiceHostBaseAddresses,
                     SR.GetString(SR.TraceCodeServiceHostBaseAddresses),
                     new CollectionTraceRecord("BaseAddresses", "Address", this.baseAddresses),
-                    this, null);
+                    this,
+                    null
+                );
             }
         }
 
@@ -964,8 +1216,13 @@ namespace System.ServiceModel
                 }
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.ServiceHostTimeoutOnClose,
-                        SR.GetString(SR.TraceCodeServiceHostTimeoutOnClose), this, e);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.ServiceHostTimeoutOnClose,
+                        SR.GetString(SR.TraceCodeServiceHostTimeoutOnClose),
+                        this,
+                        e
+                    );
                 }
                 this.Abort();
             }
@@ -990,37 +1247,57 @@ namespace System.ServiceModel
 
             //Exit immediately when not hosted in IIS or if VirtualPathExtension is not set. VirtualPathExtension is used as a flag to indicate whether a ServiceHost
             // is webhosted (WsDualHttpBinding-ChannelFactory is using HttpListener instead of IIS even when running in IIS)
-            if (!AspNetEnvironment.Enabled ||
-                this.Extensions.Find<VirtualPathExtension>() == null)
+            if (!AspNetEnvironment.Enabled || this.Extensions.Find<VirtualPathExtension>() == null)
             {
                 return;
             }
 
             foreach (ServiceEndpoint serviceEndpoint in this.Description.Endpoints)
             {
-                if (serviceEndpoint.Binding != null &&
-                    serviceEndpoint.ListenUri != null &&
-                    ("http".Equals(serviceEndpoint.ListenUri.Scheme, StringComparison.OrdinalIgnoreCase) || "https".Equals(serviceEndpoint.ListenUri.Scheme, StringComparison.OrdinalIgnoreCase)) &&
-                    this.baseAddresses.Contains(serviceEndpoint.ListenUri.Scheme))
+                if (
+                    serviceEndpoint.Binding != null
+                    && serviceEndpoint.ListenUri != null
+                    && (
+                        "http".Equals(
+                            serviceEndpoint.ListenUri.Scheme,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || "https".Equals(
+                            serviceEndpoint.ListenUri.Scheme,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    && this.baseAddresses.Contains(serviceEndpoint.ListenUri.Scheme)
+                )
                 {
-                    HttpTransportBindingElement httpTransportBindingElement = serviceEndpoint.Binding.CreateBindingElements().Find<HttpTransportBindingElement>();
+                    HttpTransportBindingElement httpTransportBindingElement = serviceEndpoint
+                        .Binding.CreateBindingElements()
+                        .Find<HttpTransportBindingElement>();
 
                     if (httpTransportBindingElement != null)
                     {
-                        AuthenticationSchemes hostSupportedAuthenticationSchemes = AspNetEnvironment.Current.GetAuthenticationSchemes(this.baseAddresses[serviceEndpoint.ListenUri.Scheme]);
+                        AuthenticationSchemes hostSupportedAuthenticationSchemes =
+                            AspNetEnvironment.Current.GetAuthenticationSchemes(
+                                this.baseAddresses[serviceEndpoint.ListenUri.Scheme]
+                            );
 
                         if (hostSupportedAuthenticationSchemes != AuthenticationSchemes.None)
                         {
                             //If no authentication schemes are explicitly defined for the ServiceHost...
-                            if (this.Authentication.AuthenticationSchemes == AuthenticationSchemes.None)
+                            if (
+                                this.Authentication.AuthenticationSchemes
+                                == AuthenticationSchemes.None
+                            )
                             {
                                 //Inherit authentication schemes from IIS
-                                this.Authentication.AuthenticationSchemes = hostSupportedAuthenticationSchemes;
+                                this.Authentication.AuthenticationSchemes =
+                                    hostSupportedAuthenticationSchemes;
                             }
                             else
                             {
                                 // Build intersection between authenticationSchemes on the ServiceHost and in IIS
-                                this.Authentication.AuthenticationSchemes &= hostSupportedAuthenticationSchemes;
+                                this.Authentication.AuthenticationSchemes &=
+                                    hostSupportedAuthenticationSchemes;
                             }
                         }
                     }
@@ -1056,7 +1333,8 @@ namespace System.ServiceModel
                     this.readOnlyCredentials = credentialsCopy;
                 }
 
-                ServiceAuthorizationBehavior authorization = description.Behaviors.Find<ServiceAuthorizationBehavior>();
+                ServiceAuthorizationBehavior authorization =
+                    description.Behaviors.Find<ServiceAuthorizationBehavior>();
                 if (authorization != null)
                 {
                     ServiceAuthorizationBehavior authorizationCopy = authorization.Clone();
@@ -1064,7 +1342,8 @@ namespace System.ServiceModel
                     this.readOnlyAuthorization = authorizationCopy;
                 }
 
-                ServiceAuthenticationBehavior authentication = description.Behaviors.Find<ServiceAuthenticationBehavior>();
+                ServiceAuthenticationBehavior authentication =
+                    description.Behaviors.Find<ServiceAuthenticationBehavior>();
                 if (authentication != null)
                 {
                     ServiceAuthenticationBehavior authenticationCopy = authentication.Clone();
@@ -1111,8 +1390,12 @@ namespace System.ServiceModel
 
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.ServiceHostFaulted,
-                    SR.GetString(SR.TraceCodeServiceHostFaulted), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.ServiceHostFaulted,
+                    SR.GetString(SR.TraceCodeServiceHostFaulted),
+                    this
+                );
             }
 
             foreach (ICommunicationObject channelDispatcher in this.SnapshotChannelDispatchers())
@@ -1173,7 +1456,9 @@ namespace System.ServiceModel
         {
             lock (this.ThisLock)
             {
-                ICommunicationObject[] array = new ICommunicationObject[this.ChannelDispatchers.Count];
+                ICommunicationObject[] array = new ICommunicationObject[
+                    this.ChannelDispatchers.Count
+                ];
                 for (int i = 0; i < array.Length; i++)
                 {
                     array[i] = this.ChannelDispatchers[i];
@@ -1233,21 +1518,27 @@ namespace System.ServiceModel
 
         internal int BusyCount
         {
-            get
-            {
-                return this.busyCount;
-            }
+            get { return this.busyCount; }
         }
 
         class OpenAsyncResult : AsyncResult
         {
-            static AsyncCompletion handleEndAfterInitializeRuntime = new AsyncCompletion(HandleEndAfterInitializeRuntime);
-            static AsyncCompletion handleEndOpenChannelDispatchers = new AsyncCompletion(HandleEndOpenChannelDispatchers);
+            static AsyncCompletion handleEndAfterInitializeRuntime = new AsyncCompletion(
+                HandleEndAfterInitializeRuntime
+            );
+            static AsyncCompletion handleEndOpenChannelDispatchers = new AsyncCompletion(
+                HandleEndOpenChannelDispatchers
+            );
 
             TimeoutHelper timeoutHelper;
             ServiceHostBase host;
 
-            public OpenAsyncResult(ServiceHostBase host, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                ServiceHostBase host,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -1262,7 +1553,10 @@ namespace System.ServiceModel
             bool ProcessAfterInitializeRuntime()
             {
                 IAsyncResult result = this.host.BeginAfterInitializeRuntime(
-                    this.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleEndAfterInitializeRuntime), this);
+                    this.timeoutHelper.RemainingTime(),
+                    PrepareAsyncCompletion(handleEndAfterInitializeRuntime),
+                    this
+                );
 
                 return SyncContinue(result);
             }
@@ -1278,7 +1572,10 @@ namespace System.ServiceModel
             bool ProcessOpenChannelDispatchers()
             {
                 IAsyncResult result = this.host.BeginOpenChannelDispatchers(
-                    this.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleEndOpenChannelDispatchers), this);
+                    this.timeoutHelper.RemainingTime(),
+                    PrepareAsyncCompletion(handleEndOpenChannelDispatchers),
+                    this
+                );
 
                 return SyncContinue(result);
             }
@@ -1302,7 +1599,12 @@ namespace System.ServiceModel
             ServiceHostBase serviceHost;
             TimeoutHelper timeoutHelper;
 
-            public CloseAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, ServiceHostBase serviceHost)
+            public CloseAsyncResult(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state,
+                ServiceHostBase serviceHost
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -1403,7 +1705,11 @@ namespace System.ServiceModel
                         dispatcher.CloseInput(this.timeoutHelper.RemainingTime());
                     }
 
-                    result = this.serviceHost.instances.BeginCloseInput(this.timeoutHelper.RemainingTime(), callback, this);
+                    result = this.serviceHost.instances.BeginCloseInput(
+                        this.timeoutHelper.RemainingTime(),
+                        callback,
+                        this
+                    );
                 }
                 catch (Exception e)
                 {
@@ -1530,14 +1836,20 @@ namespace System.ServiceModel
 
             void CloseChannelDispatchers(bool completedSynchronously)
             {
-                IList<ICommunicationObject> channelDispatchers = this.serviceHost.SnapshotChannelDispatchers();
+                IList<ICommunicationObject> channelDispatchers =
+                    this.serviceHost.SnapshotChannelDispatchers();
                 AsyncCallback callback = Fx.ThunkCallback(this.CloseChannelDispatchersCallback);
                 TimeSpan timeout = this.timeoutHelper.RemainingTime();
                 Exception exception = null;
                 IAsyncResult result = null;
                 try
                 {
-                    result = new CloseCollectionAsyncResult(timeout, callback, this, channelDispatchers);
+                    result = new CloseCollectionAsyncResult(
+                        timeout,
+                        callback,
+                        this,
+                        channelDispatchers
+                    );
                 }
                 catch (Exception e)
                 {
@@ -1562,7 +1874,10 @@ namespace System.ServiceModel
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ((CloseAsyncResult)result.AsyncState).FinishCloseChannelDispatchers(result, false);
+                    ((CloseAsyncResult)result.AsyncState).FinishCloseChannelDispatchers(
+                        result,
+                        false
+                    );
                 }
             }
 
@@ -1600,14 +1915,20 @@ namespace System.ServiceModel
         {
             IDictionary<string, ContractDescription> implementedContracts;
 
-            public ImplementedContractsContractResolver(IDictionary<string, ContractDescription> implementedContracts)
+            public ImplementedContractsContractResolver(
+                IDictionary<string, ContractDescription> implementedContracts
+            )
             {
                 this.implementedContracts = implementedContracts;
             }
 
             public ContractDescription ResolveContract(string contractName)
             {
-                return this.implementedContracts != null && this.implementedContracts.ContainsKey(contractName) ? this.implementedContracts[contractName] : null;
+                return
+                    this.implementedContracts != null
+                    && this.implementedContracts.ContainsKey(contractName)
+                    ? this.implementedContracts[contractName]
+                    : null;
             }
         }
 
@@ -1633,13 +1954,17 @@ namespace System.ServiceModel
 
                 if (contract == null)
                 {
-                    contract = this.behaviorContracts.ContainsKey(contractName) ? this.behaviorContracts[contractName] : null;
+                    contract = this.behaviorContracts.ContainsKey(contractName)
+                        ? this.behaviorContracts[contractName]
+                        : null;
                 }
 
                 return contract;
             }
 
-            public void AddBehaviorContractsToResolver(KeyedByTypeCollection<IServiceBehavior> behaviors)
+            public void AddBehaviorContractsToResolver(
+                KeyedByTypeCollection<IServiceBehavior> behaviors
+            )
             {
                 // It would be nice to make this loop over all Behaviors... someday.
                 if (behaviors != null && behaviors.Contains(typeof(ServiceMetadataBehavior)))
@@ -1657,23 +1982,31 @@ namespace System.ServiceModel
         ReflectedContractCollection reflectedContracts;
         IDisposable disposableInstance;
 
-        protected ServiceHost()
-        {
-        }
+        protected ServiceHost() { }
 
         public ServiceHost(Type serviceType, params Uri[] baseAddresses)
         {
             if (serviceType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceType")
+                );
             }
 
             this.serviceType = serviceType;
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructServiceHost, serviceType.FullName), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityConstructServiceHost, serviceType.FullName),
+                        ActivityType.Construct
+                    );
                 }
 
                 InitializeDescription(serviceType, new UriSchemeKeyedCollection(baseAddresses));
@@ -1689,46 +2022,66 @@ namespace System.ServiceModel
 
             this.singletonInstance = singletonInstance;
             this.serviceType = singletonInstance.GetType();
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructServiceHost, serviceType.FullName), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityConstructServiceHost, serviceType.FullName),
+                        ActivityType.Construct
+                    );
                 }
 
-                InitializeDescription(singletonInstance, new UriSchemeKeyedCollection(baseAddresses));
+                InitializeDescription(
+                    singletonInstance,
+                    new UriSchemeKeyedCollection(baseAddresses)
+                );
             }
         }
 
         public object SingletonInstance
         {
-            get
-            {
-                return this.singletonInstance;
-            }
+            get { return this.singletonInstance; }
         }
 
         internal override object DisposableInstance
         {
-            get
-            {
-                return this.disposableInstance;
-            }
+            get { return this.disposableInstance; }
         }
 
-        public ServiceEndpoint AddServiceEndpoint(Type implementedContract, Binding binding, string address)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type implementedContract,
+            Binding binding,
+            string address
+        )
         {
             return this.AddServiceEndpoint(implementedContract, binding, address, (Uri)null);
         }
 
-        public ServiceEndpoint AddServiceEndpoint(Type implementedContract, Binding binding, string address, Uri listenUri)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type implementedContract,
+            Binding binding,
+            string address,
+            Uri listenUri
+        )
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("address"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("address")
+                );
             }
 
-            ServiceEndpoint endpoint = this.AddServiceEndpoint(implementedContract, binding, new Uri(address, UriKind.RelativeOrAbsolute));
+            ServiceEndpoint endpoint = this.AddServiceEndpoint(
+                implementedContract,
+                binding,
+                new Uri(address, UriKind.RelativeOrAbsolute)
+            );
             if (listenUri != null)
             {
                 listenUri = MakeAbsoluteUri(listenUri, binding);
@@ -1737,42 +2090,93 @@ namespace System.ServiceModel
             return endpoint;
         }
 
-        public ServiceEndpoint AddServiceEndpoint(Type implementedContract, Binding binding, Uri address)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type implementedContract,
+            Binding binding,
+            Uri address
+        )
         {
             return this.AddServiceEndpoint(implementedContract, binding, address, (Uri)null);
         }
 
-        void ValidateContractType(Type implementedContract, ReflectedAndBehaviorContractCollection reflectedAndBehaviorContracts)
+        void ValidateContractType(
+            Type implementedContract,
+            ReflectedAndBehaviorContractCollection reflectedAndBehaviorContracts
+        )
         {
             if (!implementedContract.IsDefined(typeof(ServiceContractAttribute), false))
             {
 #pragma warning suppress 56506 // implementedContract is never null at this point
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxServiceContractAttributeNotFound, implementedContract.FullName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SfxServiceContractAttributeNotFound,
+                            implementedContract.FullName
+                        )
+                    )
+                );
             }
             if (!reflectedAndBehaviorContracts.Contains(implementedContract))
             {
                 if (implementedContract == typeof(IMetadataExchange))
 #pragma warning suppress 56506 // ServiceType is never null at this point
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractKeyNotFoundIMetadataExchange, this.serviceType.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxReflectedContractKeyNotFoundIMetadataExchange,
+                                this.serviceType.FullName
+                            )
+                        )
+                    );
                 else
 #pragma warning suppress 56506 // implementedContract and ServiceType are never null at this point
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractKeyNotFound2, implementedContract.FullName, this.serviceType.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxReflectedContractKeyNotFound2,
+                                implementedContract.FullName,
+                                this.serviceType.FullName
+                            )
+                        )
+                    );
             }
         }
 
-        public ServiceEndpoint AddServiceEndpoint(Type implementedContract, Binding binding, Uri address, Uri listenUri)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type implementedContract,
+            Binding binding,
+            Uri address,
+            Uri listenUri
+        )
         {
             if (implementedContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("implementedContract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("implementedContract")
+                );
             }
             if (this.reflectedContracts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractsNotInitialized1, implementedContract.FullName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SfxReflectedContractsNotInitialized1,
+                            implementedContract.FullName
+                        )
+                    )
+                );
             }
-            ReflectedAndBehaviorContractCollection reflectedAndBehaviorContracts = new ReflectedAndBehaviorContractCollection(this.reflectedContracts, this.Description.Behaviors);
+            ReflectedAndBehaviorContractCollection reflectedAndBehaviorContracts =
+                new ReflectedAndBehaviorContractCollection(
+                    this.reflectedContracts,
+                    this.Description.Behaviors
+                );
             ValidateContractType(implementedContract, reflectedAndBehaviorContracts);
-            ServiceEndpoint endpoint = AddServiceEndpoint(reflectedAndBehaviorContracts.GetConfigKey(implementedContract), binding, address);
+            ServiceEndpoint endpoint = AddServiceEndpoint(
+                reflectedAndBehaviorContracts.GetConfigKey(implementedContract),
+                binding,
+                address
+            );
             if (listenUri != null)
             {
                 listenUri = MakeAbsoluteUri(listenUri, binding);
@@ -1781,7 +2185,10 @@ namespace System.ServiceModel
             return endpoint;
         }
 
-        internal override void AddDefaultEndpoints(Binding defaultBinding, List<ServiceEndpoint> defaultEndpoints)
+        internal override void AddDefaultEndpoints(
+            Binding defaultBinding,
+            List<ServiceEndpoint> defaultEndpoints
+        )
         {
             // don't generate endpoints for contracts that serve as the base type for other reflected contracts
             List<ContractDescription> mostSpecificContracts = new List<ContractDescription>();
@@ -1815,7 +2222,11 @@ namespace System.ServiceModel
 
             foreach (ContractDescription contract in mostSpecificContracts)
             {
-                ServiceEndpoint endpoint = AddServiceEndpoint(contract.ConfigurationName, defaultBinding, string.Empty);
+                ServiceEndpoint endpoint = AddServiceEndpoint(
+                    contract.ConfigurationName,
+                    defaultBinding,
+                    string.Empty
+                );
                 ConfigLoader.LoadDefaultEndpointBehaviors(endpoint);
                 defaultEndpoints.Add(endpoint);
             }
@@ -1832,8 +2243,14 @@ namespace System.ServiceModel
                 if (configure != null)
                 {
                     // load <host> config
-                    ConfigLoader configLoader = new ConfigLoader(GetContractResolver(this.ImplementedContracts));
-                    LoadHostConfigurationInternal(configLoader, this.Description, this.Description.ConfigurationName);
+                    ConfigLoader configLoader = new ConfigLoader(
+                        GetContractResolver(this.ImplementedContracts)
+                    );
+                    LoadHostConfigurationInternal(
+                        configLoader,
+                        this.Description,
+                        this.Description.ConfigurationName
+                    );
 
                     // Invoke configure method for service
                     ServiceConfiguration configuration = new ServiceConfiguration(this);
@@ -1851,7 +2268,7 @@ namespace System.ServiceModel
         static MethodInfo GetConfigureMethod(Type serviceType)
         {
             // Use recursion instead of BindingFlags.FlattenHierarchy because we require return type to be void
-            
+
             // base case: all Types are rooted in object eventually
             if (serviceType == typeof(object))
             {
@@ -1859,7 +2276,13 @@ namespace System.ServiceModel
             }
 
             // signature: "public static void Configure(ServiceConfiguration)"
-            MethodInfo configure = serviceType.GetMethod("Configure", BindingFlags.Static | BindingFlags.Public, null, new[] { typeof(ServiceConfiguration) }, null);
+            MethodInfo configure = serviceType.GetMethod(
+                "Configure",
+                BindingFlags.Static | BindingFlags.Public,
+                null,
+                new[] { typeof(ServiceConfiguration) },
+                null
+            );
 
             if (configure != null && configure.ReturnType == typeof(void))
             {
@@ -1873,7 +2296,9 @@ namespace System.ServiceModel
 
         static void InvokeConfigure(MethodInfo configureMethod, ServiceConfiguration configuration)
         {
-            Action<ServiceConfiguration> call = Delegate.CreateDelegate(typeof(Action<ServiceConfiguration>), configureMethod) as Action<ServiceConfiguration>;
+            Action<ServiceConfiguration> call =
+                Delegate.CreateDelegate(typeof(Action<ServiceConfiguration>), configureMethod)
+                as Action<ServiceConfiguration>;
             call(configuration);
         }
 
@@ -1882,13 +2307,25 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                        )
+                    )
+                );
             }
 
-            ConfigLoader configLoader = new ConfigLoader(GetContractResolver(this.ImplementedContracts));
+            ConfigLoader configLoader = new ConfigLoader(
+                GetContractResolver(this.ImplementedContracts)
+            );
 
             // Call the overload of LoadConfigurationSectionInternal which looks up the serviceElement from ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-            LoadConfigurationSectionExceptHostInternal(configLoader, this.Description, this.Description.ConfigurationName);
+            LoadConfigurationSectionExceptHostInternal(
+                configLoader,
+                this.Description,
+                this.Description.ConfigurationName
+            );
             EnsureAuthenticationAuthorizationDebug(this.Description);
         }
 
@@ -1897,42 +2334,82 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                        )
+                    )
+                );
             }
 
-            ConfigLoader configLoader = new ConfigLoader(GetContractResolver(this.ImplementedContracts));
+            ConfigLoader configLoader = new ConfigLoader(
+                GetContractResolver(this.ImplementedContracts)
+            );
 
             // Look up the serviceElement explicitly on configuration, then call the overload of LoadConfigurationSectionInternal that loads the rest of the config from the same configuration as serviceElement
-            ServicesSection servicesSection = (ServicesSection)configuration.GetSection(ConfigurationStrings.ServicesSectionPath);
-            ServiceElement serviceElement = configLoader.LookupService(this.Description.ConfigurationName, servicesSection);
-            configLoader.LoadServiceDescription(this, this.Description, serviceElement, this.LoadConfigurationSectionHelper, skipHost: true);
+            ServicesSection servicesSection = (ServicesSection)
+                configuration.GetSection(ConfigurationStrings.ServicesSectionPath);
+            ServiceElement serviceElement = configLoader.LookupService(
+                this.Description.ConfigurationName,
+                servicesSection
+            );
+            configLoader.LoadServiceDescription(
+                this,
+                this.Description,
+                serviceElement,
+                this.LoadConfigurationSectionHelper,
+                skipHost: true
+            );
 
             EnsureAuthenticationAuthorizationDebug(this.Description);
         }
 
         // Load only "host" section within "service" tag
-        [Fx.Tag.SecurityNote(Critical = "Calls LookupService which is critical.",
-            Safe = "Doesn't leak ServiceElement out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls LookupService which is critical.",
+            Safe = "Doesn't leak ServiceElement out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        void LoadHostConfigurationInternal(ConfigLoader configLoader, ServiceDescription description, string configurationName)
+        void LoadHostConfigurationInternal(
+            ConfigLoader configLoader,
+            ServiceDescription description,
+            string configurationName
+        )
         {
             ServiceElement serviceSection = configLoader.LookupService(configurationName);
             if (serviceSection != null)
             {
-                configLoader.LoadHostConfig(serviceSection, this, (addr => this.InternalBaseAddresses.Add(addr)));
+                configLoader.LoadHostConfig(
+                    serviceSection,
+                    this,
+                    (addr => this.InternalBaseAddresses.Add(addr))
+                );
             }
         }
 
         // Load service description for service from config, but skip "host" section within "service" tag
-        [Fx.Tag.SecurityNote(Critical = "Calls LookupService which is critical.",
-            Safe = "Doesn't leak ServiceElement out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls LookupService which is critical.",
+            Safe = "Doesn't leak ServiceElement out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        void LoadConfigurationSectionExceptHostInternal(ConfigLoader configLoader, ServiceDescription description, string configurationName)
+        void LoadConfigurationSectionExceptHostInternal(
+            ConfigLoader configLoader,
+            ServiceDescription description,
+            string configurationName
+        )
         {
             ServiceElement serviceSection = configLoader.LookupService(configurationName);
-            configLoader.LoadServiceDescription(this, description, serviceSection, this.LoadConfigurationSectionHelper, skipHost: true);
+            configLoader.LoadServiceDescription(
+                this,
+                description,
+                serviceSection,
+                this.LoadConfigurationSectionHelper,
+                skipHost: true
+            );
         }
-        
+
         internal override string CloseActivityName
         {
             get { return SR.GetString(SR.ActivityCloseServiceHost, this.serviceType.FullName); }
@@ -1943,11 +2420,17 @@ namespace System.ServiceModel
             get { return SR.GetString(SR.ActivityOpenServiceHost, this.serviceType.FullName); }
         }
 
-        protected override ServiceDescription CreateDescription(out IDictionary<string, ContractDescription> implementedContracts)
+        protected override ServiceDescription CreateDescription(
+            out IDictionary<string, ContractDescription> implementedContracts
+        )
         {
             if (this.serviceType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceHostCannotCreateDescriptionWithoutServiceType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxServiceHostCannotCreateDescriptionWithoutServiceType)
+                    )
+                );
             }
 
             ServiceDescription description;
@@ -1959,7 +2442,8 @@ namespace System.ServiceModel
             {
                 description = ServiceDescription.GetService(this.serviceType);
             }
-            ServiceBehaviorAttribute serviceBehavior = description.Behaviors.Find<ServiceBehaviorAttribute>();
+            ServiceBehaviorAttribute serviceBehavior =
+                description.Behaviors.Find<ServiceBehaviorAttribute>();
             object serviceInstanceUsedAsABehavior = serviceBehavior.GetWellKnownSingleton();
             if (serviceInstanceUsedAsABehavior == null)
             {
@@ -1967,10 +2451,17 @@ namespace System.ServiceModel
                 this.disposableInstance = serviceInstanceUsedAsABehavior as IDisposable;
             }
 
-            if ((typeof(IServiceBehavior).IsAssignableFrom(this.serviceType) || typeof(IContractBehavior).IsAssignableFrom(this.serviceType))
-                && serviceInstanceUsedAsABehavior == null)
+            if (
+                (
+                    typeof(IServiceBehavior).IsAssignableFrom(this.serviceType)
+                    || typeof(IContractBehavior).IsAssignableFrom(this.serviceType)
+                )
+                && serviceInstanceUsedAsABehavior == null
+            )
             {
-                serviceInstanceUsedAsABehavior = ServiceDescription.CreateImplementation(this.serviceType);
+                serviceInstanceUsedAsABehavior = ServiceDescription.CreateImplementation(
+                    this.serviceType
+                );
                 this.disposableInstance = serviceInstanceUsedAsABehavior as IDisposable;
             }
 
@@ -1992,7 +2483,10 @@ namespace System.ServiceModel
                     ContractDescription contract = null;
                     if (serviceInstanceUsedAsABehavior != null)
                     {
-                        contract = ContractDescription.GetContract(contractType, serviceInstanceUsedAsABehavior);
+                        contract = ContractDescription.GetContract(
+                            contractType,
+                            serviceInstanceUsedAsABehavior
+                        );
                     }
                     else
                     {
@@ -2000,7 +2494,8 @@ namespace System.ServiceModel
                     }
 
                     reflectedContracts.Add(contract);
-                    Collection<ContractDescription> inheritedContracts = contract.GetInheritedContracts();
+                    Collection<ContractDescription> inheritedContracts =
+                        contract.GetInheritedContracts();
                     for (int j = 0; j < inheritedContracts.Count; j++)
                     {
                         ContractDescription inheritedContract = inheritedContracts[j];
@@ -2017,7 +2512,10 @@ namespace System.ServiceModel
             return description;
         }
 
-        protected void InitializeDescription(object singletonInstance, UriSchemeKeyedCollection baseAddresses)
+        protected void InitializeDescription(
+            object singletonInstance,
+            UriSchemeKeyedCollection baseAddresses
+        )
         {
             if (singletonInstance == null)
             {
@@ -2028,11 +2526,16 @@ namespace System.ServiceModel
             InitializeDescription(singletonInstance.GetType(), baseAddresses);
         }
 
-        protected void InitializeDescription(Type serviceType, UriSchemeKeyedCollection baseAddresses)
+        protected void InitializeDescription(
+            Type serviceType,
+            UriSchemeKeyedCollection baseAddresses
+        )
         {
             if (serviceType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceType")
+                );
             }
 
             this.serviceType = serviceType;
@@ -2052,9 +2555,7 @@ namespace System.ServiceModel
         class ReflectedContractCollection : KeyedCollection<Type, ContractDescription>
         {
             public ReflectedContractCollection()
-                : base(null, 4)
-            {
-            }
+                : base(null, 4) { }
 
             protected override Type GetKeyForItem(ContractDescription item)
             {
@@ -2066,7 +2567,8 @@ namespace System.ServiceModel
 
             public IDictionary<string, ContractDescription> ToImplementedContracts()
             {
-                Dictionary<string, ContractDescription> implementedContracts = new Dictionary<string, ContractDescription>();
+                Dictionary<string, ContractDescription> implementedContracts =
+                    new Dictionary<string, ContractDescription>();
                 foreach (ContractDescription contract in this.Items)
                 {
                     implementedContracts.Add(GetConfigKey(contract), contract);
@@ -2084,7 +2586,11 @@ namespace System.ServiceModel
         {
             ReflectedContractCollection reflectedContracts;
             KeyedByTypeCollection<IServiceBehavior> behaviors;
-            public ReflectedAndBehaviorContractCollection(ReflectedContractCollection reflectedContracts, KeyedByTypeCollection<IServiceBehavior> behaviors)
+
+            public ReflectedAndBehaviorContractCollection(
+                ReflectedContractCollection reflectedContracts,
+                KeyedByTypeCollection<IServiceBehavior> behaviors
+            )
             {
                 this.reflectedContracts = reflectedContracts;
                 this.behaviors = behaviors;
@@ -2097,7 +2603,10 @@ namespace System.ServiceModel
                     return true;
                 }
 
-                if (this.behaviors.Contains(typeof(ServiceMetadataBehavior)) && ServiceMetadataBehavior.IsMetadataImplementedType(implementedContract))
+                if (
+                    this.behaviors.Contains(typeof(ServiceMetadataBehavior))
+                    && ServiceMetadataBehavior.IsMetadataImplementedType(implementedContract)
+                )
                 {
                     return true;
                 }
@@ -2109,18 +2618,30 @@ namespace System.ServiceModel
             {
                 if (this.reflectedContracts.Contains(implementedContract))
                 {
-                    return ReflectedContractCollection.GetConfigKey(reflectedContracts[implementedContract]);
+                    return ReflectedContractCollection.GetConfigKey(
+                        reflectedContracts[implementedContract]
+                    );
                 }
 
-                if (this.behaviors.Contains(typeof(ServiceMetadataBehavior)) && ServiceMetadataBehavior.IsMetadataImplementedType(implementedContract))
+                if (
+                    this.behaviors.Contains(typeof(ServiceMetadataBehavior))
+                    && ServiceMetadataBehavior.IsMetadataImplementedType(implementedContract)
+                )
                 {
                     return ServiceMetadataBehavior.MexContractName;
                 }
 
                 Fx.Assert("Calls to GetConfigKey are preceeded by calls to Contains.");
 #pragma warning suppress 56506 // implementedContract is never null at this point
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractKeyNotFound2, implementedContract.FullName, string.Empty)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SfxReflectedContractKeyNotFound2,
+                            implementedContract.FullName,
+                            string.Empty
+                        )
+                    )
+                );
             }
         }
     }

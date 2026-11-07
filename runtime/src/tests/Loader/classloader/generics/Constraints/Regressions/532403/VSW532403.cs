@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // this test is regression test for VSW 532403.
-// the first test is directly from the bug. The rest of the tests were 
+// the first test is directly from the bug. The rest of the tests were
 // added to add better coverage for this area where base type has a special
 // constraint and the child has recursion in inheritance.
 
@@ -11,94 +11,83 @@ using Xunit;
 
 public class Test1
 {
-    public class Base<T> where T : new()
-    {
-    }
-    public class Derived<T> : Base<Derived<T>>
-    {
-    }
- 
+    public class Base<T>
+        where T : new() { }
+
+    public class Derived<T> : Base<Derived<T>> { }
+
     public static void Test()
     {
         Derived<int> m = new Derived<int>();
-    Base<Derived<int>> m2 = new Derived<int>();
+        Base<Derived<int>> m2 = new Derived<int>();
     }
 }
 
 public class Test2
 {
-    public class Base<T> where T : class
-    {
-    }
-    public class Derived<T> : Base<Derived<T>>
-    {
-    }
- 
+    public class Base<T>
+        where T : class { }
+
+    public class Derived<T> : Base<Derived<T>> { }
+
     public static void Test()
     {
         Derived<int> m = new Derived<int>();
-    Base<Derived<int>> m2 = new Derived<int>();
+        Base<Derived<int>> m2 = new Derived<int>();
     }
 }
 
 public class Test3
 {
-        public interface Base<T> where T : struct
-        {
-        }
-        public struct Derived<T> : Base<Derived<T>>
-        {
-        }
- 
-        public static void Test()
+    public interface Base<T>
+        where T : struct { }
+
+    public struct Derived<T> : Base<Derived<T>> { }
+
+    public static void Test()
     {
-        #pragma warning disable 219
-            Derived<int> m = new Derived<int>();
+#pragma warning disable 219
+        Derived<int> m = new Derived<int>();
         Base<Derived<int>> m2 = new Derived<int>();
-        #pragma warning restore 219
-        }
+#pragma warning restore 219
+    }
 }
 
 public class Test4
 {
-    public class Base<T> where T : class, new()
-    {
-    }
-    public class Derived<T> : Base<Derived<T>>
-    {
-    }
- 
+    public class Base<T>
+        where T : class, new() { }
+
+    public class Derived<T> : Base<Derived<T>> { }
+
     public static void Test()
     {
         Derived<int> m = new Derived<int>();
-    Base<Derived<int>> m2 = new Derived<int>();
+        Base<Derived<int>> m2 = new Derived<int>();
     }
 }
 
 public class RunTests
 {
-
     static bool pass;
 
     delegate void Case();
-       
-    static void Check(Case mytest, string testName)
-        {
 
+    static void Check(Case mytest, string testName)
+    {
         Console.Write(testName);
 
         try
         {
             mytest();
-            
+
             Console.WriteLine("PASS");
         }
-        catch (Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine("FAIL: Caught unexpected exception: " + e);
             pass = false;
         }
-
     }
 
     [Fact]

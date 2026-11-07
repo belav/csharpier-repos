@@ -5,14 +5,14 @@
 namespace System.Runtime.Serialization.Json
 {
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Reflection;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Xml;
 
 #if USE_REFEMIT
     public class JsonDataContract
@@ -20,21 +20,27 @@ namespace System.Runtime.Serialization.Json
     class JsonDataContract
 #endif
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         JsonDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         protected JsonDataContract(DataContract traditionalDataContract)
         {
             this.helper = new JsonDataContractCriticalHelper(traditionalDataContract);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         protected JsonDataContract(JsonDataContractCriticalHelper helper)
         {
@@ -48,37 +54,48 @@ namespace System.Runtime.Serialization.Json
 
         protected JsonDataContractCriticalHelper Helper
         {
-            [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-                + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                    + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+            )]
             [SecurityCritical]
             get { return helper; }
         }
 
         protected DataContract TraditionalDataContract
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical TraditionalDataContract from the helper.",
-                Safe = "TraditionalDataContract only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical TraditionalDataContract from the helper.",
+                Safe = "TraditionalDataContract only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.TraditionalDataContract; }
         }
 
         Dictionary<XmlQualifiedName, DataContract> KnownDataContracts
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical KnownDataContracts from the helper.",
-                Safe = "KnownDataContracts only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical KnownDataContracts from the helper.",
+                Safe = "KnownDataContracts only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.KnownDataContracts; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Fetches the critical JsonDataContract from the helper.",
-            Safe = "JsonDataContract only needs to be protected for write.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Fetches the critical JsonDataContract from the helper.",
+            Safe = "JsonDataContract only needs to be protected for write."
+        )]
         [SecuritySafeCritical]
         public static JsonDataContract GetJsonDataContract(DataContract traditionalDataContract)
         {
             return JsonDataContractCriticalHelper.GetJsonDataContract(traditionalDataContract);
         }
 
-        public object ReadJsonValue(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public object ReadJsonValue(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             PushKnownDataContracts(context);
             object deserializedObject = ReadJsonValueCore(jsonReader, context);
@@ -86,19 +103,32 @@ namespace System.Runtime.Serialization.Json
             return deserializedObject;
         }
 
-        public virtual object ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public virtual object ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             return TraditionalDataContract.ReadXmlValue(jsonReader, context);
         }
 
-        public void WriteJsonValue(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson context, RuntimeTypeHandle declaredTypeHandle)
+        public void WriteJsonValue(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             PushKnownDataContracts(context);
             WriteJsonValueCore(jsonWriter, obj, context, declaredTypeHandle);
             PopKnownDataContracts(context);
         }
 
-        public virtual void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson context, RuntimeTypeHandle declaredTypeHandle)
+        public virtual void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             TraditionalDataContract.WriteXmlValue(jsonWriter, obj, context);
         }
@@ -111,7 +141,10 @@ namespace System.Runtime.Serialization.Json
 
         protected static bool TryReadNullAtTopLevel(XmlReaderDelegator reader)
         {
-            while (reader.MoveToAttribute(JsonGlobals.typeString) && (reader.Value == JsonGlobals.nullString))
+            while (
+                reader.MoveToAttribute(JsonGlobals.typeString)
+                && (reader.Value == JsonGlobals.nullString)
+            )
             {
                 reader.Skip();
                 reader.MoveToElement();
@@ -138,8 +171,10 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for (de)serializing types."
-            + "Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for (de)serializing types."
+                + "Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
 #pragma warning disable 618 // have not moved to the v4 security model yet
         [SecurityCritical(SecurityCriticalScope.Everything)]
@@ -151,7 +186,6 @@ namespace System.Runtime.Serialization.Json
         internal class JsonDataContractCriticalHelper
 #endif
         {
-
             static object cacheLock = new object();
             static object createDataContractLock = new object();
 
@@ -159,7 +193,10 @@ namespace System.Runtime.Serialization.Json
             static int dataContractID = 0;
 
             static TypeHandleRef typeHandleRef = new TypeHandleRef();
-            static Dictionary<TypeHandleRef, IntRef> typeToIDCache = new Dictionary<TypeHandleRef, IntRef>(new TypeHandleRefEqualityComparer());
+            static Dictionary<TypeHandleRef, IntRef> typeToIDCache = new Dictionary<
+                TypeHandleRef,
+                IntRef
+            >(new TypeHandleRefEqualityComparer());
             Dictionary<XmlQualifiedName, DataContract> knownDataContracts;
             DataContract traditionalDataContract;
             string typeName;
@@ -168,7 +205,15 @@ namespace System.Runtime.Serialization.Json
             {
                 this.traditionalDataContract = traditionalDataContract;
                 AddCollectionItemContractsToKnownDataContracts();
-                this.typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value) ? traditionalDataContract.Name.Value : string.Concat(traditionalDataContract.Name.Value, JsonGlobals.NameValueSeparatorString, XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(traditionalDataContract.Namespace.Value));
+                this.typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
+                    ? traditionalDataContract.Name.Value
+                    : string.Concat(
+                        traditionalDataContract.Name.Value,
+                        JsonGlobals.NameValueSeparatorString,
+                        XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(
+                            traditionalDataContract.Namespace.Value
+                        )
+                    );
             }
 
             internal Dictionary<XmlQualifiedName, DataContract> KnownDataContracts
@@ -188,7 +233,9 @@ namespace System.Runtime.Serialization.Json
 
             public static JsonDataContract GetJsonDataContract(DataContract traditionalDataContract)
             {
-                int id = JsonDataContractCriticalHelper.GetId(traditionalDataContract.UnderlyingType.TypeHandle);
+                int id = JsonDataContractCriticalHelper.GetId(
+                    traditionalDataContract.UnderlyingType.TypeHandle
+                );
                 JsonDataContract dataContract = dataContractCache[id];
                 if (dataContract == null)
                 {
@@ -213,7 +260,17 @@ namespace System.Runtime.Serialization.Json
                             if (newSize <= value)
                             {
                                 Fx.Assert("DataContract cache overflow");
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(System.Runtime.Serialization.SR.GetString(System.Runtime.Serialization.SR.DataContractCacheOverflow)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new SerializationException(
+                                        System.Runtime.Serialization.SR.GetString(
+                                            System
+                                                .Runtime
+                                                .Serialization
+                                                .SR
+                                                .DataContractCacheOverflow
+                                        )
+                                    )
+                                );
                             }
                             Array.Resize<JsonDataContract>(ref dataContractCache, newSize);
                         }
@@ -228,14 +285,20 @@ namespace System.Runtime.Serialization.Json
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
+                                ex.Message,
+                                ex
+                            );
                         }
                     }
                     return id.Value;
                 }
             }
 
-            static JsonDataContract CreateJsonDataContract(int id, DataContract traditionalDataContract)
+            static JsonDataContract CreateJsonDataContract(
+                int id,
+                DataContract traditionalDataContract
+            )
             {
                 lock (createDataContractLock)
                 {
@@ -249,50 +312,76 @@ namespace System.Runtime.Serialization.Json
                         }
                         else if (traditionalDataContractType == typeof(StringDataContract))
                         {
-                            dataContract = new JsonStringDataContract((StringDataContract)traditionalDataContract);
+                            dataContract = new JsonStringDataContract(
+                                (StringDataContract)traditionalDataContract
+                            );
                         }
                         else if (traditionalDataContractType == typeof(UriDataContract))
                         {
-                            dataContract = new JsonUriDataContract((UriDataContract)traditionalDataContract);
+                            dataContract = new JsonUriDataContract(
+                                (UriDataContract)traditionalDataContract
+                            );
                         }
                         else if (traditionalDataContractType == typeof(QNameDataContract))
                         {
-                            dataContract = new JsonQNameDataContract((QNameDataContract)traditionalDataContract);
+                            dataContract = new JsonQNameDataContract(
+                                (QNameDataContract)traditionalDataContract
+                            );
                         }
                         else if (traditionalDataContractType == typeof(ByteArrayDataContract))
                         {
-                            dataContract = new JsonByteArrayDataContract((ByteArrayDataContract)traditionalDataContract);
+                            dataContract = new JsonByteArrayDataContract(
+                                (ByteArrayDataContract)traditionalDataContract
+                            );
                         }
-                        else if (traditionalDataContract.IsPrimitive ||
-                            traditionalDataContract.UnderlyingType == Globals.TypeOfXmlQualifiedName)
+                        else if (
+                            traditionalDataContract.IsPrimitive
+                            || traditionalDataContract.UnderlyingType
+                                == Globals.TypeOfXmlQualifiedName
+                        )
                         {
                             dataContract = new JsonDataContract(traditionalDataContract);
                         }
                         else if (traditionalDataContractType == typeof(ClassDataContract))
                         {
-                            dataContract = new JsonClassDataContract((ClassDataContract)traditionalDataContract);
+                            dataContract = new JsonClassDataContract(
+                                (ClassDataContract)traditionalDataContract
+                            );
                         }
                         else if (traditionalDataContractType == typeof(EnumDataContract))
                         {
-                            dataContract = new JsonEnumDataContract((EnumDataContract)traditionalDataContract);
+                            dataContract = new JsonEnumDataContract(
+                                (EnumDataContract)traditionalDataContract
+                            );
                         }
-                        else if ((traditionalDataContractType == typeof(GenericParameterDataContract)) ||
-                            (traditionalDataContractType == typeof(SpecialTypeDataContract)))
+                        else if (
+                            (traditionalDataContractType == typeof(GenericParameterDataContract))
+                            || (traditionalDataContractType == typeof(SpecialTypeDataContract))
+                        )
                         {
                             dataContract = new JsonDataContract(traditionalDataContract);
                         }
                         else if (traditionalDataContractType == typeof(CollectionDataContract))
                         {
-                            dataContract = new JsonCollectionDataContract((CollectionDataContract)traditionalDataContract);
+                            dataContract = new JsonCollectionDataContract(
+                                (CollectionDataContract)traditionalDataContract
+                            );
                         }
                         else if (traditionalDataContractType == typeof(XmlDataContract))
                         {
-                            dataContract = new JsonXmlDataContract((XmlDataContract)traditionalDataContract);
+                            dataContract = new JsonXmlDataContract(
+                                (XmlDataContract)traditionalDataContract
+                            );
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("traditionalDataContract",
-                                SR.GetString(SR.JsonTypeNotSupportedByDataContractJsonSerializer, traditionalDataContract.UnderlyingType));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                                "traditionalDataContract",
+                                SR.GetString(
+                                    SR.JsonTypeNotSupportedByDataContractJsonSerializer,
+                                    traditionalDataContract.UnderlyingType
+                                )
+                            );
                         }
                     }
                     return dataContract;
@@ -303,17 +392,24 @@ namespace System.Runtime.Serialization.Json
             {
                 if (traditionalDataContract.KnownDataContracts != null)
                 {
-                    foreach (KeyValuePair<XmlQualifiedName, DataContract> knownDataContract in traditionalDataContract.KnownDataContracts)
+                    foreach (
+                        KeyValuePair<
+                            XmlQualifiedName,
+                            DataContract
+                        > knownDataContract in traditionalDataContract.KnownDataContracts
+                    )
                     {
                         if (!object.ReferenceEquals(knownDataContract, null))
                         {
-                            CollectionDataContract collectionDataContract = knownDataContract.Value as CollectionDataContract;
+                            CollectionDataContract collectionDataContract =
+                                knownDataContract.Value as CollectionDataContract;
                             while (collectionDataContract != null)
                             {
                                 DataContract itemContract = collectionDataContract.ItemContract;
                                 if (knownDataContracts == null)
                                 {
-                                    knownDataContracts = new Dictionary<XmlQualifiedName, DataContract>();
+                                    knownDataContracts =
+                                        new Dictionary<XmlQualifiedName, DataContract>();
                                 }
 
                                 if (!knownDataContracts.ContainsKey(itemContract.StableName))
@@ -321,13 +417,25 @@ namespace System.Runtime.Serialization.Json
                                     knownDataContracts.Add(itemContract.StableName, itemContract);
                                 }
 
-                                if (collectionDataContract.ItemType.IsGenericType
-                                    && collectionDataContract.ItemType.GetGenericTypeDefinition() == typeof(KeyValue<,>))
+                                if (
+                                    collectionDataContract.ItemType.IsGenericType
+                                    && collectionDataContract.ItemType.GetGenericTypeDefinition()
+                                        == typeof(KeyValue<,>)
+                                )
                                 {
-                                    DataContract itemDataContract = DataContract.GetDataContract(Globals.TypeOfKeyValuePair.MakeGenericType(collectionDataContract.ItemType.GetGenericArguments()));
-                                    if (!knownDataContracts.ContainsKey(itemDataContract.StableName))
+                                    DataContract itemDataContract = DataContract.GetDataContract(
+                                        Globals.TypeOfKeyValuePair.MakeGenericType(
+                                            collectionDataContract.ItemType.GetGenericArguments()
+                                        )
+                                    );
+                                    if (
+                                        !knownDataContracts.ContainsKey(itemDataContract.StableName)
+                                    )
                                     {
-                                        knownDataContracts.Add(itemDataContract.StableName, itemDataContract);
+                                        knownDataContracts.Add(
+                                            itemDataContract.StableName,
+                                            itemDataContract
+                                        );
                                     }
                                 }
 
@@ -342,6 +450,5 @@ namespace System.Runtime.Serialization.Json
                 }
             }
         }
-
     }
 }

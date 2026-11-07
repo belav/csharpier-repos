@@ -12,9 +12,7 @@ namespace System.DirectoryServices
         private string? _propertyName;
         private SortDirection _sortDirection;
 
-        public SortOption()
-        {
-        }
+        public SortOption() { }
 
         public SortOption(string propertyName, SortDirection direction)
         {
@@ -38,7 +36,11 @@ namespace System.DirectoryServices
             {
                 if (value < SortDirection.Ascending || value > SortDirection.Descending)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(SortDirection));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(SortDirection)
+                    );
                 }
 
                 _sortDirection = value;

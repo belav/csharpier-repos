@@ -51,7 +51,11 @@ namespace Microsoft.Extensions.Primitives
             // Validate arguments, check is minimal instructions with reduced branching for inlinable fast-path
             // Negative values discovered though conversion to high values when converted to unsigned
             // Failure should be rare and location determination and message is delegated to failure functions
-            if (buffer == null || (uint)offset > (uint)buffer.Length || (uint)length > (uint)(buffer.Length - offset))
+            if (
+                buffer == null
+                || (uint)offset > (uint)buffer.Length
+                || (uint)length > (uint)(buffer.Length - offset)
+            )
             {
                 ThrowInvalidArguments(buffer, offset, length);
             }
@@ -235,7 +239,11 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="b">The second <see cref="StringSegment"/> to compare.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies the rules for the comparison.</param>
         /// <returns><see langword="true" /> if the objects are equal; otherwise, <see langword="false" />.</returns>
-        public static bool Equals(StringSegment a, StringSegment b, StringComparison comparisonType) => a.Equals(b, comparisonType);
+        public static bool Equals(
+            StringSegment a,
+            StringSegment b,
+            StringComparison comparisonType
+        ) => a.Equals(b, comparisonType);
 
         /// <summary>
         /// Checks if the specified <see cref="string"/> is equal to the current <see cref="StringSegment"/>.
@@ -289,7 +297,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The first <see cref="StringSegment"/> to compare, or <see langword="null" />.</param>
         /// <param name="right">The second <see cref="StringSegment"/> to compare, or <see langword="null" />.</param>
         /// <returns><see langword="true" /> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <see langword="false" />.</returns>
-        public static bool operator ==(StringSegment left, StringSegment right) => left.Equals(right);
+        public static bool operator ==(StringSegment left, StringSegment right) =>
+            left.Equals(right);
 
         /// <summary>
         /// Checks if two specified <see cref="StringSegment"/> have different values.
@@ -297,7 +306,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The first <see cref="StringSegment"/> to compare, or <see langword="null" />.</param>
         /// <param name="right">The second <see cref="StringSegment"/> to compare, or <see langword="null" />.</param>
         /// <returns><see langword="true" /> if the value of <paramref name="left"/> is different from the value of <paramref name="right"/>; otherwise, <see langword="false" />.</returns>
-        public static bool operator !=(StringSegment left, StringSegment right) => !left.Equals(right);
+        public static bool operator !=(StringSegment left, StringSegment right) =>
+            !left.Equals(right);
 
         // PERF: Do NOT add a implicit converter from StringSegment to String. That would negate most of the perf safety.
         /// <summary>
@@ -310,13 +320,15 @@ namespace Microsoft.Extensions.Primitives
         /// Creates a see <see cref="ReadOnlySpan{T}"/> from the given <see cref="StringSegment"/>.
         /// </summary>
         /// <param name="segment">The <see cref="StringSegment"/> to convert to a <see cref="ReadOnlySpan{T}"/>.</param>
-        public static implicit operator ReadOnlySpan<char>(StringSegment segment) => segment.AsSpan();
+        public static implicit operator ReadOnlySpan<char>(StringSegment segment) =>
+            segment.AsSpan();
 
         /// <summary>
         /// Creates a see <see cref="ReadOnlyMemory{T}"/> from the given <see cref="StringSegment"/>.
         /// </summary>
         /// <param name="segment">The <see cref="StringSegment"/> to convert to a <see cref="ReadOnlyMemory{T}"/>.</param>
-        public static implicit operator ReadOnlyMemory<char>(StringSegment segment) => segment.AsMemory();
+        public static implicit operator ReadOnlyMemory<char>(StringSegment segment) =>
+            segment.AsMemory();
 
         /// <summary>
         /// Checks if the beginning of this <see cref="StringSegment"/> matches the specified <see cref="string"/> when compared using the specified <paramref name="comparisonType"/>.
@@ -696,7 +708,9 @@ namespace Microsoft.Extensions.Primitives
                     return ThrowHelper.GetArgumentOutOfRangeException(ExceptionArgument.length);
                 }
 
-                return ThrowHelper.GetArgumentException(ExceptionResource.Argument_InvalidOffsetLength);
+                return ThrowHelper.GetArgumentException(
+                    ExceptionResource.Argument_InvalidOffsetLength
+                );
             }
         }
 
@@ -722,7 +736,9 @@ namespace Microsoft.Extensions.Primitives
                     return ThrowHelper.GetArgumentOutOfRangeException(ExceptionArgument.length);
                 }
 
-                return ThrowHelper.GetArgumentException(ExceptionResource.Argument_InvalidOffsetLengthStringSegment);
+                return ThrowHelper.GetArgumentException(
+                    ExceptionResource.Argument_InvalidOffsetLengthStringSegment
+                );
             }
         }
     }

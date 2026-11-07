@@ -45,7 +45,8 @@ public interface IUpdateSqlGenerator
     void AppendNextSequenceValueOperation(
         StringBuilder commandStringBuilder,
         string name,
-        string? schema);
+        string? schema
+    );
 
     /// <summary>
     ///     Generates SQL that will obtain the next value in the given sequence.
@@ -65,7 +66,8 @@ public interface IUpdateSqlGenerator
     void AppendObtainNextSequenceValueOperation(
         StringBuilder commandStringBuilder,
         string name,
-        string? schema);
+        string? schema
+    );
 
     /// <summary>
     ///     Appends a SQL fragment for the start of a batch to
@@ -92,7 +94,8 @@ public interface IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction);
+        out bool requiresTransaction
+    );
 
     /// <summary>
     ///     Appends a SQL command for deleting a row to the commands being built.
@@ -104,8 +107,8 @@ public interface IUpdateSqlGenerator
     ResultSetMapping AppendDeleteOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
-        int commandPosition)
-        => AppendDeleteOperation(commandStringBuilder, command, commandPosition, out _);
+        int commandPosition
+    ) => AppendDeleteOperation(commandStringBuilder, command, commandPosition, out _);
 
     /// <summary>
     ///     Appends a SQL command for inserting a row to the commands being built.
@@ -119,7 +122,8 @@ public interface IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction);
+        out bool requiresTransaction
+    );
 
     /// <summary>
     ///     Appends a SQL command for inserting a row to the commands being built.
@@ -131,8 +135,8 @@ public interface IUpdateSqlGenerator
     ResultSetMapping AppendInsertOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
-        int commandPosition)
-        => AppendInsertOperation(commandStringBuilder, command, commandPosition, out _);
+        int commandPosition
+    ) => AppendInsertOperation(commandStringBuilder, command, commandPosition, out _);
 
     /// <summary>
     ///     Appends a SQL command for updating a row to the commands being built.
@@ -146,7 +150,8 @@ public interface IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction);
+        out bool requiresTransaction
+    );
 
     /// <summary>
     ///     Appends a SQL command for updating a row to the commands being built.
@@ -158,8 +163,8 @@ public interface IUpdateSqlGenerator
     ResultSetMapping AppendUpdateOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
-        int commandPosition)
-        => AppendUpdateOperation(commandStringBuilder, command, commandPosition, out _);
+        int commandPosition
+    ) => AppendUpdateOperation(commandStringBuilder, command, commandPosition, out _);
 
     /// <summary>
     ///     Appends SQL for calling a stored procedure.
@@ -173,5 +178,6 @@ public interface IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction);
+        out bool requiresTransaction
+    );
 }

@@ -32,7 +32,9 @@ namespace R2RTest
 
             if (options.OutputDirectory.IsParentOf(options.InputDirectory))
             {
-                Console.Error.WriteLine("Error: Input and output folders must be distinct, and the output directory (which gets deleted) better not be a parent of the input directory.");
+                Console.Error.WriteLine(
+                    "Error: Input and output folders must be distinct, and the output directory (which gets deleted) better not be a parent of the input directory."
+                );
                 return 1;
             }
 
@@ -40,22 +42,43 @@ namespace R2RTest
 
             if (!options.Exe)
             {
-                PathExtensions.DeleteOutputFolders(options.OutputDirectory.FullName, options.CoreRootDirectory.FullName, runners, recursive: false);
+                PathExtensions.DeleteOutputFolders(
+                    options.OutputDirectory.FullName,
+                    options.CoreRootDirectory.FullName,
+                    runners,
+                    recursive: false
+                );
             }
 
-            BuildFolder folder = BuildFolder.FromDirectory(options.InputDirectory.FullName, runners, options.OutputDirectory.FullName, options);
+            BuildFolder folder = BuildFolder.FromDirectory(
+                options.InputDirectory.FullName,
+                runners,
+                options.OutputDirectory.FullName,
+                options
+            );
             if (folder == null)
             {
-                Console.Error.WriteLine($"No managed app found in {options.InputDirectory.FullName}");
+                Console.Error.WriteLine(
+                    $"No managed app found in {options.InputDirectory.FullName}"
+                );
             }
 
-            BuildFolderSet folderSet = new BuildFolderSet(new BuildFolder[] { folder }, runners, options);
+            BuildFolderSet folderSet = new BuildFolderSet(
+                new BuildFolder[] { folder },
+                runners,
+                options
+            );
             bool success = folderSet.Build();
             folderSet.WriteLogs();
 
             if (!options.NoCleanup && !options.Exe)
             {
-                PathExtensions.DeleteOutputFolders(options.OutputDirectory.FullName, options.CoreRootDirectory.FullName, runners, recursive: false);
+                PathExtensions.DeleteOutputFolders(
+                    options.OutputDirectory.FullName,
+                    options.CoreRootDirectory.FullName,
+                    runners,
+                    recursive: false
+                );
             }
 
             return success ? 0 : 1;

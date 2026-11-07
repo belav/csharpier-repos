@@ -5,22 +5,20 @@ using System.Text;
 
 namespace ClassLibrary2
 {
-        public class List1<T> : List<T>
-        { }
+    public class List1<T> : List<T> { }
 
-        public class List2<T>
+    public class List2<T>
+    {
+        private List1<T> _List = new List1<T>();
+
+        public void AddItem(T item)
         {
-                private List1<T> _List = new List1<T>();
-                public void AddItem(T item)
-                {
-                        _List.Add(item);
-                }
+            _List.Add(item);
         }
+    }
 
-	class Foo
-	{
-		public static void Main () {}
-	}
+    class Foo
+    {
+        public static void Main() { }
+    }
 }
- 
-

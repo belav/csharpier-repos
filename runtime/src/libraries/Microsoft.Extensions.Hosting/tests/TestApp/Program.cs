@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ServerComparison.TestSites
 {
@@ -17,14 +17,17 @@ namespace ServerComparison.TestSites
             var builder = new HostBuilder()
                 .ConfigureHostConfiguration(configBuilder =>
                 {
-                    configBuilder.AddCommandLine(args)
-                        .AddEnvironmentVariables(prefix: "DOTNET_");
+                    configBuilder.AddCommandLine(args).AddEnvironmentVariables(prefix: "DOTNET_");
                 })
-                .ConfigureLogging((_, factory) =>
-                {
-                    factory.AddConsole();
-                    factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning);
-                });
+                .ConfigureLogging(
+                    (_, factory) =>
+                    {
+                        factory.AddConsole();
+                        factory.AddFilter<ConsoleLoggerProvider>(level =>
+                            level >= LogLevel.Warning
+                        );
+                    }
+                );
             using (var host = builder.Build())
             {
                 var config = host.Services.GetRequiredService<IConfiguration>();
@@ -62,4 +65,3 @@ namespace ServerComparison.TestSites
         }
     }
 }
-

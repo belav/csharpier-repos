@@ -7,10 +7,12 @@ namespace System.Diagnostics.SymbolStore
     {
         // Find a document. Language, vendor, and document type are
         // optional.
-        ISymbolDocument? GetDocument(string url,
-                                    Guid language,
-                                    Guid languageVendor,
-                                    Guid documentType);
+        ISymbolDocument? GetDocument(
+            string url,
+            Guid language,
+            Guid languageVendor,
+            Guid documentType
+        );
 
         // Return an array of all of the documents defined in the symbol
         // store.
@@ -37,9 +39,7 @@ namespace System.Diagnostics.SymbolStore
 
         // Given a position in a document, return the ISymbolMethod that
         // contains that position.
-        ISymbolMethod GetMethodFromDocumentPosition(ISymbolDocument document,
-                                                    int line,
-                                                    int column);
+        ISymbolMethod GetMethodFromDocumentPosition(ISymbolDocument document, int line, int column);
 
         // Gets a custom attribute based upon its name. Not to be
         // confused with Metadata custom attributes, these attributes are

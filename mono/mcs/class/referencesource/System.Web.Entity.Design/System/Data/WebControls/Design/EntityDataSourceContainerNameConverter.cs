@@ -14,14 +14,11 @@ using System.Diagnostics;
 using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design.WebControls
-{    
+{
     internal class EntityDataSourceContainerNameConverter : StringConverter
     {
-        
         public EntityDataSourceContainerNameConverter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
@@ -30,15 +27,24 @@ namespace System.Web.UI.Design.WebControls
             // Even if this value is set, it may not be possible to actually load the metadata, but at least we can try the lookup if requested
 
             EntityDataSource entityDataSource = context.Instance as EntityDataSource;
-            if (entityDataSource != null && !String.IsNullOrEmpty(entityDataSource.ConnectionString))
+            if (
+                entityDataSource != null
+                && !String.IsNullOrEmpty(entityDataSource.ConnectionString)
+            )
             {
-                List<EntityDataSourceContainerNameItem> containerNameItems = new EntityDataSourceDesignerHelper(entityDataSource, false /*interactiveMode*/).GetContainerNames(true /*sortResults*/);
+                List<EntityDataSourceContainerNameItem> containerNameItems =
+                    new EntityDataSourceDesignerHelper(
+                        entityDataSource,
+                        false /*interactiveMode*/
+                    ).GetContainerNames(
+                        true /*sortResults*/
+                    );
                 string[] containers = new string[containerNameItems.Count];
                 for (int i = 0; i < containerNameItems.Count; i++)
                 {
                     containers[i] = containerNameItems[i].ToString();
                 }
-                return new StandardValuesCollection(containers);                
+                return new StandardValuesCollection(containers);
             }
 
             return null;

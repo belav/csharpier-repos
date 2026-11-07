@@ -81,7 +81,8 @@ public interface IConventionPropertyBase : IReadOnlyPropertyBase, IConventionAnn
     /// <returns>The configured value.</returns>
     PropertyAccessMode? SetPropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyPropertyBase.GetPropertyAccessMode" />.

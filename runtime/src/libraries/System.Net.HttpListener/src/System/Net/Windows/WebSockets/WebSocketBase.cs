@@ -28,6 +28,7 @@ namespace System.Net.WebSockets
         // this object and another one is still using WaitAsync. According to Dev11 358715, this should be fine as long as we are not accessing the
         // AvailableWaitHandle on this SemaphoreSlim object.
         private readonly SemaphoreSlim _sendFrameThrottle;
+
         // locking _ThisLock protects access to
         // - State
         // - _closeAsyncStartedReceive
@@ -53,15 +54,21 @@ namespace System.Net.WebSockets
         private int _receiveState;
         private Exception? _pendingException;
 
-        protected WebSocketBase(Stream innerStream,
+        protected WebSocketBase(
+            Stream innerStream,
             string? subProtocol,
             TimeSpan keepAliveInterval,
-            WebSocketBuffer internalBuffer)
+            WebSocketBuffer internalBuffer
+        )
         {
             Debug.Assert(internalBuffer != null, "'internalBuffer' MUST NOT be NULL.");
             HttpWebSocket.ValidateInnerStream(innerStream);
-            HttpWebSocket.ValidateOptions(subProtocol, internalBuffer.ReceiveBufferSize,
-                internalBuffer.SendBufferSize, keepAliveInterval);
+            HttpWebSocket.ValidateOptions(
+                subProtocol,
+                internalBuffer.ReceiveBufferSize,
+                internalBuffer.SendBufferSize,
+                keepAliveInterval
+            );
 
             _thisLock = new object();
 
@@ -91,33 +98,27 @@ namespace System.Net.WebSockets
         {
             get
             {
-                Debug.Assert(_state != WebSocketState.None, "'_state' MUST NOT be 'WebSocketState.None'.");
+                Debug.Assert(
+                    _state != WebSocketState.None,
+                    "'_state' MUST NOT be 'WebSocketState.None'."
+                );
                 return _state;
             }
         }
 
         public override string? SubProtocol
         {
-            get
-            {
-                return _subProtocol;
-            }
+            get { return _subProtocol; }
         }
 
         public override WebSocketCloseStatus? CloseStatus
         {
-            get
-            {
-                return _closeStatus;
-            }
+            get { return _closeStatus; }
         }
 
         public override string? CloseStatusDescription
         {
-            get
-            {
-                return _closeStatusDescription;
-            }
+            get { return _closeStatusDescription; }
         }
 
         internal WebSocketBuffer InternalBuffer
@@ -142,15 +143,19 @@ namespace System.Net.WebSockets
         internal abstract SafeHandle SessionHandle { get; }
 
         // MultiThreading: ThreadSafe; At most one outstanding call to ReceiveAsync is allowed
-        public override Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer,
-            CancellationToken cancellationToken)
+        public override Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
             return ReceiveAsyncCore(buffer, cancellationToken);
         }
 
-        private async Task<WebSocketReceiveResult> ReceiveAsyncCore(ArraySegment<byte> buffer,
-            CancellationToken cancellationToken)
+        private async Task<WebSocketReceiveResult> ReceiveAsyncCore(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             WebSocketReceiveResult receiveResult;
 
@@ -162,8 +167,10 @@ namespace System.Net.WebSockets
             CancellationToken linkedCancellationToken = CancellationToken.None;
             try
             {
-                ownsCancellationTokenSource = _receiveOutstandingOperationHelper.TryStartOperation(cancellationToken,
-                    out linkedCancellationToken);
+                ownsCancellationTokenSource = _receiveOutstandingOperationHelper.TryStartOperation(
+                    cancellationToken,
+                    out linkedCancellationToken
+                );
                 if (!ownsCancellationTokenSource)
                 {
                     lock (_thisLock)
@@ -171,27 +178,50 @@ namespace System.Net.WebSockets
                         if (_closeAsyncStartedReceive)
                         {
                             throw new InvalidOperationException(
-                                SR.Format(SR.net_WebSockets_ReceiveAsyncDisallowedAfterCloseAsync, nameof(CloseAsync), nameof(CloseOutputAsync)));
+                                SR.Format(
+                                    SR.net_WebSockets_ReceiveAsyncDisallowedAfterCloseAsync,
+                                    nameof(CloseAsync),
+                                    nameof(CloseOutputAsync)
+                                )
+                            );
                         }
 
                         throw new InvalidOperationException(
-                            SR.Format(SR.net_Websockets_AlreadyOneOutstandingOperation, nameof(ReceiveAsync)));
+                            SR.Format(
+                                SR.net_Websockets_AlreadyOneOutstandingOperation,
+                                nameof(ReceiveAsync)
+                            )
+                        );
                     }
                 }
 
                 EnsureReceiveOperation();
-                receiveResult = (await _receiveOperation!.Process(buffer, linkedCancellationToken).ConfigureAwait(false))!;
+                receiveResult = (
+                    await _receiveOperation!
+                        .Process(buffer, linkedCancellationToken)
+                        .ConfigureAwait(false)
+                )!;
 
                 if (NetEventSource.Log.IsEnabled() && receiveResult.Count > 0)
                 {
-                    NetEventSource.DumpBuffer(this, buffer.Array!, buffer.Offset, receiveResult.Count);
+                    NetEventSource.DumpBuffer(
+                        this,
+                        buffer.Array!,
+                        buffer.Offset,
+                        receiveResult.Count
+                    );
                 }
             }
             catch (Exception exception)
             {
                 bool aborted = linkedCancellationToken.IsCancellationRequested;
                 Abort();
-                ThrowIfConvertibleException(nameof(ReceiveAsync), exception, cancellationToken, aborted);
+                ThrowIfConvertibleException(
+                    nameof(ReceiveAsync),
+                    exception,
+                    cancellationToken,
+                    aborted
+                );
                 throw;
             }
             finally
@@ -203,21 +233,29 @@ namespace System.Net.WebSockets
         }
 
         // MultiThreading: ThreadSafe; At most one outstanding call to SendAsync is allowed
-        public override Task SendAsync(ArraySegment<byte> buffer,
+        public override Task SendAsync(
+            ArraySegment<byte> buffer,
             WebSocketMessageType messageType,
             bool endOfMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (messageType != WebSocketMessageType.Binary &&
-                    messageType != WebSocketMessageType.Text)
+            if (
+                messageType != WebSocketMessageType.Binary
+                && messageType != WebSocketMessageType.Text
+            )
             {
-                throw new ArgumentException(SR.Format(SR.net_WebSockets_Argument_InvalidMessageType,
-                    messageType,
-                    nameof(SendAsync),
-                    WebSocketMessageType.Binary,
-                    WebSocketMessageType.Text,
-                    nameof(CloseOutputAsync)),
-                    nameof(messageType));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_WebSockets_Argument_InvalidMessageType,
+                        messageType,
+                        nameof(SendAsync),
+                        WebSocketMessageType.Binary,
+                        WebSocketMessageType.Text,
+                        nameof(CloseOutputAsync)
+                    ),
+                    nameof(messageType)
+                );
             }
 
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
@@ -225,13 +263,18 @@ namespace System.Net.WebSockets
             return SendAsyncCore(buffer, messageType, endOfMessage, cancellationToken);
         }
 
-        private async Task SendAsyncCore(ArraySegment<byte> buffer,
+        private async Task SendAsyncCore(
+            ArraySegment<byte> buffer,
             WebSocketMessageType messageType,
             bool endOfMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(messageType == WebSocketMessageType.Binary || messageType == WebSocketMessageType.Text,
-                "'messageType' MUST be either 'WebSocketMessageType.Binary' or 'WebSocketMessageType.Text'.");
+            Debug.Assert(
+                messageType == WebSocketMessageType.Binary
+                    || messageType == WebSocketMessageType.Text,
+                "'messageType' MUST be either 'WebSocketMessageType.Binary' or 'WebSocketMessageType.Text'."
+            );
             Debug.Assert(buffer.Array != null);
 
             ThrowIfPendingException();
@@ -242,7 +285,15 @@ namespace System.Net.WebSockets
 
             try
             {
-                while (!(ownsCancellationTokenSource = _sendOutstandingOperationHelper.TryStartOperation(cancellationToken, out linkedCancellationToken)))
+                while (
+                    !(
+                        ownsCancellationTokenSource =
+                            _sendOutstandingOperationHelper.TryStartOperation(
+                                cancellationToken,
+                                out linkedCancellationToken
+                            )
+                    )
+                )
                 {
                     Task? keepAliveTask;
 
@@ -255,15 +306,27 @@ namespace System.Net.WebSockets
                             // Check whether there is still another outstanding send operation
                             // Potentially the keepAlive operation has completed before this thread
                             // was able to enter the SessionHandle-lock.
-                            _sendOutstandingOperationHelper.CompleteOperation(ownsCancellationTokenSource);
-                            if (ownsCancellationTokenSource = _sendOutstandingOperationHelper.TryStartOperation(cancellationToken, out linkedCancellationToken))
+                            _sendOutstandingOperationHelper.CompleteOperation(
+                                ownsCancellationTokenSource
+                            );
+                            if (
+                                ownsCancellationTokenSource =
+                                    _sendOutstandingOperationHelper.TryStartOperation(
+                                        cancellationToken,
+                                        out linkedCancellationToken
+                                    )
+                            )
                             {
                                 break;
                             }
                             else
                             {
                                 throw new InvalidOperationException(
-                                    SR.Format(SR.net_Websockets_AlreadyOneOutstandingOperation, nameof(SendAsync)));
+                                    SR.Format(
+                                        SR.net_Websockets_AlreadyOneOutstandingOperation,
+                                        nameof(SendAsync)
+                                    )
+                                );
                             }
                         }
                     }
@@ -287,7 +350,12 @@ namespace System.Net.WebSockets
             {
                 bool aborted = linkedCancellationToken.IsCancellationRequested;
                 Abort();
-                ThrowIfConvertibleException(nameof(SendAsync), exception, cancellationToken, aborted);
+                ThrowIfConvertibleException(
+                    nameof(SendAsync),
+                    exception,
+                    cancellationToken,
+                    aborted
+                );
                 throw;
             }
             finally
@@ -296,7 +364,10 @@ namespace System.Net.WebSockets
             }
         }
 
-        private async Task SendFrameAsync(IList<ArraySegment<byte>> sendBuffers, CancellationToken cancellationToken)
+        private async Task SendFrameAsync(
+            IList<ArraySegment<byte>> sendBuffers,
+            CancellationToken cancellationToken
+        )
         {
             bool sendFrameLockTaken = false;
             try
@@ -304,29 +375,42 @@ namespace System.Net.WebSockets
                 await _sendFrameThrottle.WaitAsync(cancellationToken).ConfigureAwait(false);
                 sendFrameLockTaken = true;
 
-                if (sendBuffers.Count > 1 &&
-                    _innerStreamAsWebSocketStream != null &&
-                    _innerStreamAsWebSocketStream.SupportsMultipleWrite)
+                if (
+                    sendBuffers.Count > 1
+                    && _innerStreamAsWebSocketStream != null
+                    && _innerStreamAsWebSocketStream.SupportsMultipleWrite
+                )
                 {
-                    await _innerStreamAsWebSocketStream.MultipleWriteAsync(sendBuffers,
-                        cancellationToken).ConfigureAwait(false);
+                    await _innerStreamAsWebSocketStream
+                        .MultipleWriteAsync(sendBuffers, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
                     foreach (ArraySegment<byte> buffer in sendBuffers)
                     {
-                        await _innerStream.WriteAsync(buffer.Array!.AsMemory(buffer.Offset, buffer.Count),
-                            cancellationToken).ConfigureAwait(false);
+                        await _innerStream
+                            .WriteAsync(
+                                buffer.Array!.AsMemory(buffer.Offset, buffer.Count),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                throw new WebSocketException(WebSocketError.ConnectionClosedPrematurely, objectDisposedException);
+                throw new WebSocketException(
+                    WebSocketError.ConnectionClosedPrematurely,
+                    objectDisposedException
+                );
             }
             catch (NotSupportedException notSupportedException)
             {
-                throw new WebSocketException(WebSocketError.ConnectionClosedPrematurely, notSupportedException);
+                throw new WebSocketException(
+                    WebSocketError.ConnectionClosedPrematurely,
+                    notSupportedException
+                );
             }
             finally
             {
@@ -377,18 +461,22 @@ namespace System.Net.WebSockets
         }
 
         // MultiThreading: ThreadSafe; No-op if already in a terminal state
-        public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus,
+        public override Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
             string? statusDescription,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
 
             return CloseOutputAsyncCore(closeStatus, statusDescription!, cancellationToken);
         }
 
-        private async Task CloseOutputAsyncCore(WebSocketCloseStatus closeStatus,
+        private async Task CloseOutputAsyncCore(
+            WebSocketCloseStatus closeStatus,
             string statusDescription,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfPendingException();
             if (IsStateTerminal(State))
@@ -415,7 +503,11 @@ namespace System.Net.WebSockets
                 }
 
                 ThrowOnInvalidState(State, WebSocketState.Open, WebSocketState.CloseReceived);
-                ownsCloseOutputCancellationTokenSource = _closeOutputOutstandingOperationHelper.TryStartOperation(cancellationToken, out linkedCancellationToken);
+                ownsCloseOutputCancellationTokenSource =
+                    _closeOutputOutstandingOperationHelper.TryStartOperation(
+                        cancellationToken,
+                        out linkedCancellationToken
+                    );
                 if (!ownsCloseOutputCancellationTokenSource)
                 {
                     Task? closeOutputTask = _closeOutputTask;
@@ -430,9 +522,15 @@ namespace System.Net.WebSockets
                 else
                 {
                     needToCompleteSendOperation = true;
-                    while (!(ownsSendCancellationTokenSource =
-                        _sendOutstandingOperationHelper.TryStartOperation(cancellationToken,
-                            out linkedCancellationToken)))
+                    while (
+                        !(
+                            ownsSendCancellationTokenSource =
+                                _sendOutstandingOperationHelper.TryStartOperation(
+                                    cancellationToken,
+                                    out linkedCancellationToken
+                                )
+                        )
+                    )
                     {
                         if (_keepAliveTask != null)
                         {
@@ -447,16 +545,25 @@ namespace System.Net.WebSockets
                         else
                         {
                             throw new InvalidOperationException(
-                                SR.Format(SR.net_Websockets_AlreadyOneOutstandingOperation, nameof(SendAsync)));
+                                SR.Format(
+                                    SR.net_Websockets_AlreadyOneOutstandingOperation,
+                                    nameof(SendAsync)
+                                )
+                            );
                         }
 
-                        _sendOutstandingOperationHelper.CompleteOperation(ownsSendCancellationTokenSource);
+                        _sendOutstandingOperationHelper.CompleteOperation(
+                            ownsSendCancellationTokenSource
+                        );
                     }
 
                     EnsureCloseOutputOperation();
                     _closeOutputOperation!.CloseStatus = closeStatus;
                     _closeOutputOperation!.CloseReason = statusDescription;
-                    _closeOutputTask = _closeOutputOperation!.Process(null, linkedCancellationToken);
+                    _closeOutputTask = _closeOutputOperation!.Process(
+                        null,
+                        linkedCancellationToken
+                    );
 
                     ReleaseLocks(ref thisLockTaken, ref sessionHandleLockTaken);
                     await _closeOutputTask.ConfigureAwait(false);
@@ -469,7 +576,11 @@ namespace System.Net.WebSockets
                         try
                         {
                             callCompleteOnCloseCompleted = await StartOnCloseCompleted(
-                                thisLockTaken, sessionHandleLockTaken, linkedCancellationToken).ConfigureAwait(false);
+                                    thisLockTaken,
+                                    sessionHandleLockTaken,
+                                    linkedCancellationToken
+                                )
+                                .ConfigureAwait(false);
                         }
                         catch (Exception)
                         {
@@ -491,16 +602,25 @@ namespace System.Net.WebSockets
             {
                 bool aborted = linkedCancellationToken.IsCancellationRequested;
                 Abort();
-                ThrowIfConvertibleException(nameof(CloseOutputAsync), exception, cancellationToken, aborted);
+                ThrowIfConvertibleException(
+                    nameof(CloseOutputAsync),
+                    exception,
+                    cancellationToken,
+                    aborted
+                );
                 throw;
             }
             finally
             {
-                _closeOutputOutstandingOperationHelper.CompleteOperation(ownsCloseOutputCancellationTokenSource);
+                _closeOutputOutstandingOperationHelper.CompleteOperation(
+                    ownsCloseOutputCancellationTokenSource
+                );
 
                 if (needToCompleteSendOperation)
                 {
-                    _sendOutstandingOperationHelper.CompleteOperation(ownsSendCancellationTokenSource);
+                    _sendOutstandingOperationHelper.CompleteOperation(
+                        ownsSendCancellationTokenSource
+                    );
                 }
 
                 _closeOutputTask = null;
@@ -536,11 +656,16 @@ namespace System.Net.WebSockets
         // it always means the locks have been released already - so the caller has to retake the
         // locks in the catch-block.
         // This is ensured by enforcing a Task.Yield for IWebSocketStream.CloseNetowrkConnectionAsync
-        private async Task<bool> StartOnCloseCompleted(bool thisLockTakenSnapshot,
+        private async Task<bool> StartOnCloseCompleted(
+            bool thisLockTakenSnapshot,
             bool sessionHandleLockTakenSnapshot,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(thisLockTakenSnapshot, "'thisLockTakenSnapshot' MUST be 'true' at this point.");
+            Debug.Assert(
+                thisLockTakenSnapshot,
+                "'thisLockTakenSnapshot' MUST be 'true' at this point."
+            );
 
             if (IsStateTerminal(_state))
             {
@@ -557,7 +682,9 @@ namespace System.Net.WebSockets
                 try
                 {
                     _closeNetworkConnectionTask ??=
-                        _innerStreamAsWebSocketStream.CloseNetworkConnectionAsync(cancellationToken);
+                        _innerStreamAsWebSocketStream.CloseNetworkConnectionAsync(
+                            cancellationToken
+                        );
 
                     if (thisLockTaken && sessionHandleLockTaken)
                     {
@@ -574,10 +701,12 @@ namespace System.Net.WebSockets
                 {
                     if (!CanHandleExceptionDuringClose(closeNetworkConnectionTaskException))
                     {
-                        ThrowIfConvertibleException(nameof(StartOnCloseCompleted),
+                        ThrowIfConvertibleException(
+                            nameof(StartOnCloseCompleted),
                             closeNetworkConnectionTaskException,
                             cancellationToken,
-                            cancellationToken.IsCancellationRequested);
+                            cancellationToken.IsCancellationRequested
+                        );
                         throw;
                     }
                 }
@@ -593,17 +722,21 @@ namespace System.Net.WebSockets
         }
 
         // MultiThreading: ThreadSafe; No-op if already in a terminal state
-        public override Task CloseAsync(WebSocketCloseStatus closeStatus,
+        public override Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
             string? statusDescription,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
             return CloseAsyncCore(closeStatus, statusDescription, cancellationToken);
         }
 
-        private async Task CloseAsyncCore(WebSocketCloseStatus closeStatus,
+        private async Task CloseAsyncCore(
+            WebSocketCloseStatus closeStatus,
             string? statusDescription,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfPendingException();
             if (IsStateTerminal(State))
@@ -624,11 +757,19 @@ namespace System.Net.WebSockets
                     return;
                 }
                 ThrowIfDisposed();
-                ThrowOnInvalidState(State,
-                    WebSocketState.Open, WebSocketState.CloseReceived, WebSocketState.CloseSent);
+                ThrowOnInvalidState(
+                    State,
+                    WebSocketState.Open,
+                    WebSocketState.CloseReceived,
+                    WebSocketState.CloseSent
+                );
 
                 Task? closeOutputTask;
-                ownsCloseCancellationTokenSource = _closeOutstandingOperationHelper.TryStartOperation(cancellationToken, out linkedCancellationToken);
+                ownsCloseCancellationTokenSource =
+                    _closeOutstandingOperationHelper.TryStartOperation(
+                        cancellationToken,
+                        out linkedCancellationToken
+                    );
                 if (ownsCloseCancellationTokenSource)
                 {
                     closeOutputTask = _closeOutputTask;
@@ -636,14 +777,19 @@ namespace System.Net.WebSockets
                     {
                         _closeReceivedTaskCompletionSource ??= new TaskCompletionSource();
 
-                        closeOutputTask = CloseOutputAsync(closeStatus,
+                        closeOutputTask = CloseOutputAsync(
+                            closeStatus,
                             statusDescription,
-                            linkedCancellationToken);
+                            linkedCancellationToken
+                        );
                     }
                 }
                 else
                 {
-                    Debug.Assert(_closeReceivedTaskCompletionSource != null, "'_closeReceivedTaskCompletionSource' MUST NOT be NULL.");
+                    Debug.Assert(
+                        _closeReceivedTaskCompletionSource != null,
+                        "'_closeReceivedTaskCompletionSource' MUST NOT be NULL."
+                    );
                     closeOutputTask = _closeReceivedTaskCompletionSource.Task;
                 }
 
@@ -660,10 +806,12 @@ namespace System.Net.WebSockets
 
                         if (!CanHandleExceptionDuringClose(closeOutputError))
                         {
-                            ThrowIfConvertibleException(nameof(CloseOutputAsync),
+                            ThrowIfConvertibleException(
+                                nameof(CloseOutputAsync),
                                 closeOutputError,
                                 cancellationToken,
-                                linkedCancellationToken.IsCancellationRequested);
+                                linkedCancellationToken.IsCancellationRequested
+                            );
                             throw;
                         }
                     }
@@ -685,7 +833,11 @@ namespace System.Net.WebSockets
                         // linkedCancellationToken can be CancellationToken.None if ownsCloseCancellationTokenSource==false
                         // This is still ok because OnCloseOutputCompleted won't start any IO operation in this case
                         callCompleteOnCloseCompleted = await StartOnCloseCompleted(
-                            lockTaken, false, linkedCancellationToken).ConfigureAwait(false);
+                                lockTaken,
+                                false,
+                                linkedCancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                     catch (Exception)
                     {
@@ -709,15 +861,22 @@ namespace System.Net.WebSockets
 
                 linkedCancellationToken = CancellationToken.None;
 
-                bool ownsReceiveCancellationTokenSource = _receiveOutstandingOperationHelper.TryStartOperation(cancellationToken, out linkedCancellationToken);
+                bool ownsReceiveCancellationTokenSource =
+                    _receiveOutstandingOperationHelper.TryStartOperation(
+                        cancellationToken,
+                        out linkedCancellationToken
+                    );
                 if (ownsReceiveCancellationTokenSource)
                 {
                     _closeAsyncStartedReceive = true;
-                    ArraySegment<byte> closeMessageBuffer =
-                        new ArraySegment<byte>(new byte[HttpWebSocket.MinReceiveBufferSize]);
+                    ArraySegment<byte> closeMessageBuffer = new ArraySegment<byte>(
+                        new byte[HttpWebSocket.MinReceiveBufferSize]
+                    );
                     EnsureReceiveOperation();
-                    Task<WebSocketReceiveResult?> receiveAsyncTask = _receiveOperation!.Process(closeMessageBuffer,
-                        linkedCancellationToken);
+                    Task<WebSocketReceiveResult?> receiveAsyncTask = _receiveOperation!.Process(
+                        closeMessageBuffer,
+                        linkedCancellationToken
+                    );
                     ReleaseLock(_thisLock, ref lockTaken);
 
                     WebSocketReceiveResult? receiveResult = null;
@@ -731,10 +890,12 @@ namespace System.Net.WebSockets
 
                         if (!CanHandleExceptionDuringClose(receiveException))
                         {
-                            ThrowIfConvertibleException(nameof(CloseAsync),
+                            ThrowIfConvertibleException(
+                                nameof(CloseAsync),
                                 receiveException,
                                 cancellationToken,
-                                linkedCancellationToken.IsCancellationRequested);
+                                linkedCancellationToken.IsCancellationRequested
+                            );
                             throw;
                         }
                     }
@@ -747,22 +908,33 @@ namespace System.Net.WebSockets
                     {
                         if (NetEventSource.Log.IsEnabled() && receiveResult.Count > 0)
                         {
-                            NetEventSource.DumpBuffer(this, closeMessageBuffer.Array!, closeMessageBuffer.Offset, receiveResult.Count);
+                            NetEventSource.DumpBuffer(
+                                this,
+                                closeMessageBuffer.Array!,
+                                closeMessageBuffer.Offset,
+                                receiveResult.Count
+                            );
                         }
 
                         if (receiveResult.MessageType != WebSocketMessageType.Close)
                         {
-                            throw new WebSocketException(WebSocketError.InvalidMessageType,
-                                SR.Format(SR.net_WebSockets_InvalidMessageType,
+                            throw new WebSocketException(
+                                WebSocketError.InvalidMessageType,
+                                SR.Format(
+                                    SR.net_WebSockets_InvalidMessageType,
                                     nameof(WebSocket) + "." + nameof(CloseAsync),
                                     nameof(WebSocket) + "." + nameof(CloseOutputAsync),
-                                    receiveResult.MessageType));
+                                    receiveResult.MessageType
+                                )
+                            );
                         }
                     }
                 }
                 else
                 {
-                    _receiveOutstandingOperationHelper.CompleteOperation(ownsReceiveCancellationTokenSource);
+                    _receiveOutstandingOperationHelper.CompleteOperation(
+                        ownsReceiveCancellationTokenSource
+                    );
                     ReleaseLock(_thisLock, ref lockTaken);
                     await _closeReceivedTaskCompletionSource!.Task.ConfigureAwait(false);
                 }
@@ -781,8 +953,15 @@ namespace System.Net.WebSockets
                     {
                         // We know that the CloseFrame has been sent at this point. So no Send-operation is allowed anymore and we
                         // can hijack the _SendOutstandingOperationHelper to create a linkedCancellationToken
-                        ownsSendCancellationSource = _sendOutstandingOperationHelper.TryStartOperation(cancellationToken, out linkedCancellationToken);
-                        Debug.Assert(ownsSendCancellationSource, "'ownsSendCancellationSource' MUST be 'true' at this point.");
+                        ownsSendCancellationSource =
+                            _sendOutstandingOperationHelper.TryStartOperation(
+                                cancellationToken,
+                                out linkedCancellationToken
+                            );
+                        Debug.Assert(
+                            ownsSendCancellationSource,
+                            "'ownsSendCancellationSource' MUST be 'true' at this point."
+                        );
 
                         bool callCompleteOnCloseCompleted = false;
 
@@ -791,7 +970,11 @@ namespace System.Net.WebSockets
                             // linkedCancellationToken can be CancellationToken.None if ownsCloseCancellationTokenSource==false
                             // This is still ok because OnCloseOutputCompleted won't start any IO operation in this case
                             callCompleteOnCloseCompleted = await StartOnCloseCompleted(
-                                lockTaken, false, linkedCancellationToken).ConfigureAwait(false);
+                                    lockTaken,
+                                    false,
+                                    linkedCancellationToken
+                                )
+                                .ConfigureAwait(false);
                         }
                         catch (Exception)
                         {
@@ -809,7 +992,9 @@ namespace System.Net.WebSockets
                     }
                     finally
                     {
-                        _sendOutstandingOperationHelper.CompleteOperation(ownsSendCancellationSource);
+                        _sendOutstandingOperationHelper.CompleteOperation(
+                            ownsSendCancellationSource
+                        );
                     }
                 }
             }
@@ -817,12 +1002,19 @@ namespace System.Net.WebSockets
             {
                 bool aborted = linkedCancellationToken.IsCancellationRequested;
                 Abort();
-                ThrowIfConvertibleException(nameof(CloseAsync), exception, cancellationToken, aborted);
+                ThrowIfConvertibleException(
+                    nameof(CloseAsync),
+                    exception,
+                    cancellationToken,
+                    aborted
+                );
                 throw;
             }
             finally
             {
-                _closeOutstandingOperationHelper.CompleteOperation(ownsCloseCancellationTokenSource);
+                _closeOutstandingOperationHelper.CompleteOperation(
+                    ownsCloseCancellationTokenSource
+                );
                 ReleaseLock(_thisLock, ref lockTaken);
             }
         }
@@ -935,8 +1127,11 @@ namespace System.Net.WebSockets
                 {
                     if (_keepAliveOperation == null)
                     {
-                        WebSocketOperation.SendOperation keepAliveOperation = new WebSocketOperation.SendOperation(this);
-                        keepAliveOperation.BufferType = WebSocketProtocolComponent.BufferType.UnsolicitedPong;
+                        WebSocketOperation.SendOperation keepAliveOperation =
+                            new WebSocketOperation.SendOperation(this);
+                        keepAliveOperation.BufferType = WebSocketProtocolComponent
+                            .BufferType
+                            .UnsolicitedPong;
                         _keepAliveOperation = keepAliveOperation;
                     }
                 }
@@ -964,11 +1159,16 @@ namespace System.Net.WebSockets
             }
         }
 
-        private static WebSocketProtocolComponent.BufferType GetBufferType(WebSocketMessageType messageType,
-            bool endOfMessage)
+        private static WebSocketProtocolComponent.BufferType GetBufferType(
+            WebSocketMessageType messageType,
+            bool endOfMessage
+        )
         {
-            Debug.Assert(messageType == WebSocketMessageType.Binary || messageType == WebSocketMessageType.Text,
-                $"The value of 'messageType' ({messageType}) is invalid. Valid message types: '{WebSocketMessageType.Binary}, {WebSocketMessageType.Text}'");
+            Debug.Assert(
+                messageType == WebSocketMessageType.Binary
+                    || messageType == WebSocketMessageType.Text,
+                $"The value of 'messageType' ({messageType}) is invalid. Valid message types: '{WebSocketMessageType.Binary}, {WebSocketMessageType.Text}'"
+            );
 
             if (messageType == WebSocketMessageType.Text)
             {
@@ -990,7 +1190,9 @@ namespace System.Net.WebSockets
             }
         }
 
-        private static WebSocketMessageType GetMessageType(WebSocketProtocolComponent.BufferType bufferType)
+        private static WebSocketMessageType GetMessageType(
+            WebSocketProtocolComponent.BufferType bufferType
+        )
         {
             switch (bufferType)
             {
@@ -1007,21 +1209,27 @@ namespace System.Net.WebSockets
                     // because we currently don't support any WebSocket extensions and would
                     // not accept a Websocket handshake requesting extensions
                     Debug.Fail($"The value of 'bufferType' ({bufferType}) is invalid.");
-                    throw new WebSocketException(WebSocketError.NativeError,
-                        SR.Format(SR.net_WebSockets_InvalidBufferType,
+                    throw new WebSocketException(
+                        WebSocketError.NativeError,
+                        SR.Format(
+                            SR.net_WebSockets_InvalidBufferType,
                             bufferType,
                             WebSocketProtocolComponent.BufferType.Close,
                             WebSocketProtocolComponent.BufferType.BinaryFragment,
                             WebSocketProtocolComponent.BufferType.BinaryMessage,
                             WebSocketProtocolComponent.BufferType.UTF8Fragment,
-                            WebSocketProtocolComponent.BufferType.UTF8Message));
+                            WebSocketProtocolComponent.BufferType.UTF8Message
+                        )
+                    );
             }
         }
 
-        internal void ValidateNativeBuffers(WebSocketProtocolComponent.Action action,
+        internal void ValidateNativeBuffers(
+            WebSocketProtocolComponent.Action action,
             WebSocketProtocolComponent.BufferType bufferType,
             Interop.WebSocket.Buffer[] dataBuffers,
-            uint dataBufferCount)
+            uint dataBufferCount
+        )
         {
             _internalBuffer.ValidateNativeBuffers(action, bufferType, dataBuffers, dataBufferCount);
         }
@@ -1030,9 +1238,15 @@ namespace System.Net.WebSockets
         {
             if (aborted)
             {
-                throw new WebSocketException(WebSocketError.InvalidState,
-                    SR.Format(SR.net_WebSockets_InvalidState_ClosedOrAborted, GetType().FullName, WebSocketState.Aborted),
-                    innerException);
+                throw new WebSocketException(
+                    WebSocketError.InvalidState,
+                    SR.Format(
+                        SR.net_WebSockets_InvalidState_ClosedOrAborted,
+                        GetType().FullName,
+                        WebSocketState.Aborted
+                    ),
+                    innerException
+                );
             }
         }
 
@@ -1045,20 +1259,22 @@ namespace System.Net.WebSockets
                 return false;
             }
 
-            return error is OperationCanceledException ||
-                error is WebSocketException ||
-                error is SocketException ||
-                error is HttpListenerException ||
-                error is IOException;
+            return error is OperationCanceledException
+                || error is WebSocketException
+                || error is SocketException
+                || error is HttpListenerException
+                || error is IOException;
         }
 
         // We only want to throw an OperationCanceledException if the CancellationToken passed
         // down from the caller is canceled - not when Abort is called on another thread and
         // the linkedCancellationToken is canceled.
-        private void ThrowIfConvertibleException(string? methodName,
+        private void ThrowIfConvertibleException(
+            string? methodName,
             Exception exception,
             CancellationToken cancellationToken,
-            bool aborted)
+            bool aborted
+        )
         {
             Debug.Assert(exception != null, "'exception' MUST NOT be NULL.");
 
@@ -1067,11 +1283,11 @@ namespace System.Net.WebSockets
                 NetEventSource.Error(this, $"methodName: {methodName}, exception: {exception}");
             }
 
-            OperationCanceledException? operationCanceledException = exception as OperationCanceledException;
+            OperationCanceledException? operationCanceledException =
+                exception as OperationCanceledException;
             if (operationCanceledException != null)
             {
-                if (cancellationToken.IsCancellationRequested ||
-                    !aborted)
+                if (cancellationToken.IsCancellationRequested || !aborted)
                 {
                     return;
                 }
@@ -1089,13 +1305,19 @@ namespace System.Net.WebSockets
             SocketException? socketException = exception as SocketException;
             if (socketException != null)
             {
-                convertedException = new WebSocketException(socketException.NativeErrorCode, socketException);
+                convertedException = new WebSocketException(
+                    socketException.NativeErrorCode,
+                    socketException
+                );
             }
 
             HttpListenerException? httpListenerException = exception as HttpListenerException;
             if (httpListenerException != null)
             {
-                convertedException = new WebSocketException(httpListenerException.ErrorCode, httpListenerException);
+                convertedException = new WebSocketException(
+                    httpListenerException.ErrorCode,
+                    httpListenerException
+                );
             }
 
             IOException? ioException = exception as IOException;
@@ -1104,7 +1326,10 @@ namespace System.Net.WebSockets
                 socketException = exception.InnerException as SocketException;
                 if (socketException != null)
                 {
-                    convertedException = new WebSocketException(socketException.NativeErrorCode, ioException);
+                    convertedException = new WebSocketException(
+                        socketException.NativeErrorCode,
+                        ioException
+                    );
                 }
             }
 
@@ -1120,7 +1345,9 @@ namespace System.Net.WebSockets
             {
                 // Collapse possibly nested graph into a flat list.
                 // Empty inner exception list is unlikely but possible via public api.
-                ReadOnlyCollection<Exception> unwrappedExceptions = aggregateException.Flatten().InnerExceptions;
+                ReadOnlyCollection<Exception> unwrappedExceptions = aggregateException
+                    .Flatten()
+                    .InnerExceptions;
                 if (unwrappedExceptions.Count == 0)
                 {
                     return;
@@ -1128,7 +1355,12 @@ namespace System.Net.WebSockets
 
                 foreach (Exception unwrappedException in unwrappedExceptions)
                 {
-                    ThrowIfConvertibleException(null, unwrappedException, cancellationToken, aborted);
+                    ThrowIfConvertibleException(
+                        null,
+                        unwrappedException,
+                        cancellationToken,
+                        aborted
+                    );
                 }
             }
         }
@@ -1156,18 +1388,10 @@ namespace System.Net.WebSockets
                 {
                     _innerStream.Close();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
-                catch (IOException)
-                {
-                }
-                catch (SocketException)
-                {
-                }
-                catch (HttpListenerException)
-                {
-                }
+                catch (ObjectDisposedException) { }
+                catch (IOException) { }
+                catch (SocketException) { }
+                catch (HttpListenerException) { }
             }
 
             _keepAliveTracker.Dispose();
@@ -1175,7 +1399,10 @@ namespace System.Net.WebSockets
 
         private void OnBackgroundTaskException(Exception exception)
         {
-            if (Interlocked.CompareExchange<Exception>(ref _pendingException!, exception, null!) == null)
+            if (
+                Interlocked.CompareExchange<Exception>(ref _pendingException!, exception, null!)
+                == null
+            )
             {
                 if (NetEventSource.Log.IsEnabled())
                 {
@@ -1187,7 +1414,10 @@ namespace System.Net.WebSockets
 
         private void ThrowIfPendingException()
         {
-            Exception pendingException = Interlocked.Exchange<Exception>(ref _pendingException!, null!);
+            Exception pendingException = Interlocked.Exchange<Exception>(
+                ref _pendingException!,
+                null!
+            );
             if (pendingException != null)
             {
                 throw new WebSocketException(WebSocketError.Faulted, pendingException);
@@ -1202,9 +1432,14 @@ namespace System.Net.WebSockets
         private void UpdateReceiveState(int newReceiveState, int expectedReceiveState)
         {
             int receiveState;
-            if ((receiveState = Interlocked.Exchange(ref _receiveState, newReceiveState)) != expectedReceiveState)
+            if (
+                (receiveState = Interlocked.Exchange(ref _receiveState, newReceiveState))
+                != expectedReceiveState
+            )
             {
-                Debug.Fail($"'_receiveState' had an invalid value '{receiveState}'. The expected value was '{expectedReceiveState}'.");
+                Debug.Fail(
+                    $"'_receiveState' had an invalid value '{receiveState}'. The expected value was '{expectedReceiveState}'."
+                );
             }
         }
 
@@ -1234,21 +1469,30 @@ namespace System.Net.WebSockets
             return true;
         }
 
-        private void FinishOnCloseReceived(WebSocketCloseStatus closeStatus,
-            string? closeStatusDescription)
+        private void FinishOnCloseReceived(
+            WebSocketCloseStatus closeStatus,
+            string? closeStatusDescription
+        )
         {
             _closeReceivedTaskCompletionSource?.TrySetResult();
 
             _closeStatus = closeStatus;
             _closeStatusDescription = closeStatusDescription;
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"closeStatus: {closeStatus}, closeStatusDescription: {closeStatusDescription}, _State: {_state}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"closeStatus: {closeStatus}, closeStatusDescription: {closeStatusDescription}, _State: {_state}"
+                );
         }
 
         private static async void OnKeepAlive(object? sender)
         {
             Debug.Assert(sender != null, "'sender' MUST NOT be NULL.");
-            Debug.Assert((sender as WebSocketBase) != null, "'sender as WebSocketBase' MUST NOT be NULL.");
+            Debug.Assert(
+                (sender as WebSocketBase) != null,
+                "'sender as WebSocketBase' MUST NOT be NULL."
+            );
 
             WebSocketBase? thisPtr = (sender as WebSocketBase)!;
             bool lockTaken = false;
@@ -1258,9 +1502,11 @@ namespace System.Net.WebSockets
             {
                 Monitor.Enter(thisPtr.SessionHandle, ref lockTaken);
 
-                if (thisPtr._isDisposed ||
-                    thisPtr._state != WebSocketState.Open ||
-                    thisPtr._closeOutputTask != null)
+                if (
+                    thisPtr._isDisposed
+                    || thisPtr._state != WebSocketState.Open
+                    || thisPtr._closeOutputTask != null
+                )
                 {
                     return;
                 }
@@ -1270,11 +1516,18 @@ namespace System.Net.WebSockets
                     bool ownsCancellationTokenSource = false;
                     try
                     {
-                        ownsCancellationTokenSource = thisPtr._sendOutstandingOperationHelper.TryStartOperation(CancellationToken.None, out linkedCancellationToken);
+                        ownsCancellationTokenSource =
+                            thisPtr._sendOutstandingOperationHelper.TryStartOperation(
+                                CancellationToken.None,
+                                out linkedCancellationToken
+                            );
                         if (ownsCancellationTokenSource)
                         {
                             thisPtr.EnsureKeepAliveOperation();
-                            thisPtr._keepAliveTask = thisPtr._keepAliveOperation!.Process(null, linkedCancellationToken);
+                            thisPtr._keepAliveTask = thisPtr._keepAliveOperation!.Process(
+                                null,
+                                linkedCancellationToken
+                            );
                             ReleaseLock(thisPtr.SessionHandle, ref lockTaken);
                             await thisPtr._keepAliveTask!.ConfigureAwait(false);
                         }
@@ -1285,7 +1538,9 @@ namespace System.Net.WebSockets
                         {
                             Monitor.Enter(thisPtr.SessionHandle, ref lockTaken);
                         }
-                        thisPtr._sendOutstandingOperationHelper.CompleteOperation(ownsCancellationTokenSource);
+                        thisPtr._sendOutstandingOperationHelper.CompleteOperation(
+                            ownsCancellationTokenSource
+                        );
                         thisPtr._keepAliveTask = null;
                     }
 
@@ -1296,10 +1551,12 @@ namespace System.Net.WebSockets
             {
                 try
                 {
-                    thisPtr.ThrowIfConvertibleException(nameof(OnKeepAlive),
+                    thisPtr.ThrowIfConvertibleException(
+                        nameof(OnKeepAlive),
                         exception,
                         CancellationToken.None,
-                        linkedCancellationToken.IsCancellationRequested);
+                        linkedCancellationToken.IsCancellationRequested
+                    );
                     throw;
                 }
                 catch (Exception backgroundException)
@@ -1328,7 +1585,10 @@ namespace System.Net.WebSockets
             public WebSocketReceiveResult? ReceiveResult { get; protected set; }
             protected abstract int BufferCount { get; }
             protected abstract WebSocketProtocolComponent.ActionQueue ActionQueue { get; }
-            protected abstract void Initialize(Nullable<ArraySegment<byte>> buffer, CancellationToken cancellationToken);
+            protected abstract void Initialize(
+                Nullable<ArraySegment<byte>> buffer,
+                CancellationToken cancellationToken
+            );
             protected abstract bool ShouldContinue(CancellationToken cancellationToken);
 
             // Multi-Threading: This method has to be called under a SessionHandle-lock. It returns true if a
@@ -1342,17 +1602,23 @@ namespace System.Net.WebSockets
                 WebSocketProtocolComponent.Action action,
                 Interop.WebSocket.Buffer[] dataBuffers,
                 uint dataBufferCount,
-                IntPtr actionContext)
+                IntPtr actionContext
+            )
             {
                 throw new NotImplementedException();
             }
 
             protected abstract void Cleanup();
 
-            internal async Task<WebSocketReceiveResult?> Process(Nullable<ArraySegment<byte>> buffer,
-                CancellationToken cancellationToken)
+            internal async Task<WebSocketReceiveResult?> Process(
+                Nullable<ArraySegment<byte>> buffer,
+                CancellationToken cancellationToken
+            )
             {
-                Debug.Assert(BufferCount >= 1 && BufferCount <= 2, "'bufferCount' MUST ONLY BE '1' or '2'.");
+                Debug.Assert(
+                    BufferCount >= 1 && BufferCount <= 2,
+                    "'bufferCount' MUST ONLY BE '1' or '2'."
+                );
 
                 bool sessionHandleLockTaken = false;
                 AsyncOperationCompleted = false;
@@ -1372,19 +1638,22 @@ namespace System.Net.WebSockets
 
                         while (!completed)
                         {
-                            Interop.WebSocket.Buffer[] dataBuffers =
-                                new Interop.WebSocket.Buffer[BufferCount];
+                            Interop.WebSocket.Buffer[] dataBuffers = new Interop.WebSocket.Buffer[
+                                BufferCount
+                            ];
                             uint dataBufferCount = (uint)BufferCount;
                             IntPtr actionContext;
 
                             _webSocket.ThrowIfDisposed();
-                            WebSocketProtocolComponent.WebSocketGetAction(_webSocket,
+                            WebSocketProtocolComponent.WebSocketGetAction(
+                                _webSocket,
                                 ActionQueue,
                                 dataBuffers,
                                 ref dataBufferCount,
                                 out action,
                                 out bufferType,
-                                out actionContext);
+                                out actionContext
+                            );
 
                             switch (action)
                             {
@@ -1393,8 +1662,14 @@ namespace System.Net.WebSockets
                                     {
                                         // A close frame was received
 
-                                        Debug.Assert(ReceiveResult!.Count == 0, "'receiveResult.Count' MUST be 0.");
-                                        Debug.Assert(ReceiveResult.CloseStatus != null, "'receiveResult.CloseStatus' MUST NOT be NULL for message type 'Close'.");
+                                        Debug.Assert(
+                                            ReceiveResult!.Count == 0,
+                                            "'receiveResult.Count' MUST be 0."
+                                        );
+                                        Debug.Assert(
+                                            ReceiveResult.CloseStatus != null,
+                                            "'receiveResult.CloseStatus' MUST NOT be NULL for message type 'Close'."
+                                        );
                                         bool thisLockTaken = false;
                                         try
                                         {
@@ -1403,111 +1678,186 @@ namespace System.Net.WebSockets
                                                 // If StartOnCloseReceived returns true the WebSocket close handshake has been completed
                                                 // so there is no need to retake the SessionHandle-lock.
                                                 // _ThisLock lock is guaranteed to be taken by StartOnCloseReceived when returning true
-                                                ReleaseLock(_webSocket.SessionHandle, ref sessionHandleLockTaken);
+                                                ReleaseLock(
+                                                    _webSocket.SessionHandle,
+                                                    ref sessionHandleLockTaken
+                                                );
                                                 bool callCompleteOnCloseCompleted = false;
 
                                                 try
                                                 {
-                                                    callCompleteOnCloseCompleted = await _webSocket.StartOnCloseCompleted(
-                                                        thisLockTaken, sessionHandleLockTaken, cancellationToken).ConfigureAwait(false);
+                                                    callCompleteOnCloseCompleted = await _webSocket
+                                                        .StartOnCloseCompleted(
+                                                            thisLockTaken,
+                                                            sessionHandleLockTaken,
+                                                            cancellationToken
+                                                        )
+                                                        .ConfigureAwait(false);
                                                 }
                                                 catch (Exception)
                                                 {
                                                     // If an exception is thrown we know that the locks have been released,
                                                     // because we enforce IWebSocketStream.CloseNetworkConnectionAsync to yield
-                                                    ResetFlagAndTakeLock(_webSocket._thisLock, ref thisLockTaken);
+                                                    ResetFlagAndTakeLock(
+                                                        _webSocket._thisLock,
+                                                        ref thisLockTaken
+                                                    );
                                                     throw;
                                                 }
 
                                                 if (callCompleteOnCloseCompleted)
                                                 {
-                                                    ResetFlagAndTakeLock(_webSocket._thisLock, ref thisLockTaken);
+                                                    ResetFlagAndTakeLock(
+                                                        _webSocket._thisLock,
+                                                        ref thisLockTaken
+                                                    );
                                                     _webSocket.FinishOnCloseCompleted();
                                                 }
                                             }
-                                            _webSocket.FinishOnCloseReceived(ReceiveResult.CloseStatus.Value, ReceiveResult.CloseStatusDescription);
+                                            _webSocket.FinishOnCloseReceived(
+                                                ReceiveResult.CloseStatus.Value,
+                                                ReceiveResult.CloseStatusDescription
+                                            );
                                         }
                                         finally
                                         {
                                             if (thisLockTaken)
                                             {
-                                                ReleaseLock(_webSocket._thisLock, ref thisLockTaken);
+                                                ReleaseLock(
+                                                    _webSocket._thisLock,
+                                                    ref thisLockTaken
+                                                );
                                             }
                                         }
                                     }
                                     completed = true;
                                     break;
                                 case WebSocketProtocolComponent.Action.IndicateReceiveComplete:
-                                    ProcessAction_IndicateReceiveComplete(buffer,
+                                    ProcessAction_IndicateReceiveComplete(
+                                        buffer,
                                         bufferType,
                                         action,
                                         dataBuffers,
                                         dataBufferCount,
-                                        actionContext);
+                                        actionContext
+                                    );
                                     break;
                                 case WebSocketProtocolComponent.Action.ReceiveFromNetwork:
                                     int count = 0;
                                     try
                                     {
-                                        ArraySegment<byte> payload = _webSocket._internalBuffer.ConvertNativeBuffer(dataBuffers[0], bufferType);
+                                        ArraySegment<byte> payload =
+                                            _webSocket._internalBuffer.ConvertNativeBuffer(
+                                                dataBuffers[0],
+                                                bufferType
+                                            );
 
-                                        ReleaseLock(_webSocket.SessionHandle, ref sessionHandleLockTaken);
-                                        HttpWebSocket.ThrowIfConnectionAborted(_webSocket._innerStream, true);
+                                        ReleaseLock(
+                                            _webSocket.SessionHandle,
+                                            ref sessionHandleLockTaken
+                                        );
+                                        HttpWebSocket.ThrowIfConnectionAborted(
+                                            _webSocket._innerStream,
+                                            true
+                                        );
                                         try
                                         {
-                                            Task<int> readTask = _webSocket._innerStream.ReadAsync(payload.Array!,
+                                            Task<int> readTask = _webSocket._innerStream.ReadAsync(
+                                                payload.Array!,
                                                 payload.Offset,
                                                 payload.Count,
-                                                cancellationToken);
+                                                cancellationToken
+                                            );
                                             count = await readTask.ConfigureAwait(false);
                                             _webSocket._keepAliveTracker.OnDataReceived();
                                         }
                                         catch (ObjectDisposedException objectDisposedException)
                                         {
-                                            throw new WebSocketException(WebSocketError.ConnectionClosedPrematurely, objectDisposedException);
+                                            throw new WebSocketException(
+                                                WebSocketError.ConnectionClosedPrematurely,
+                                                objectDisposedException
+                                            );
                                         }
                                         catch (NotSupportedException notSupportedException)
                                         {
-                                            throw new WebSocketException(WebSocketError.ConnectionClosedPrematurely, notSupportedException);
+                                            throw new WebSocketException(
+                                                WebSocketError.ConnectionClosedPrematurely,
+                                                notSupportedException
+                                            );
                                         }
-                                        Monitor.Enter(_webSocket.SessionHandle, ref sessionHandleLockTaken);
+                                        Monitor.Enter(
+                                            _webSocket.SessionHandle,
+                                            ref sessionHandleLockTaken
+                                        );
                                         _webSocket.ThrowIfPendingException();
                                         // If the client unexpectedly closed the socket we throw an exception as we didn't get any close message
                                         if (count == 0)
                                         {
-                                            throw new WebSocketException(WebSocketError.ConnectionClosedPrematurely);
+                                            throw new WebSocketException(
+                                                WebSocketError.ConnectionClosedPrematurely
+                                            );
                                         }
                                     }
                                     finally
                                     {
-                                        WebSocketProtocolComponent.WebSocketCompleteAction(_webSocket,
+                                        WebSocketProtocolComponent.WebSocketCompleteAction(
+                                            _webSocket,
                                             actionContext,
-                                            count);
+                                            count
+                                        );
                                     }
                                     break;
                                 case WebSocketProtocolComponent.Action.IndicateSendComplete:
-                                    WebSocketProtocolComponent.WebSocketCompleteAction(_webSocket, actionContext, 0);
+                                    WebSocketProtocolComponent.WebSocketCompleteAction(
+                                        _webSocket,
+                                        actionContext,
+                                        0
+                                    );
                                     AsyncOperationCompleted = true;
-                                    ReleaseLock(_webSocket.SessionHandle, ref sessionHandleLockTaken);
-                                    await _webSocket._innerStream.FlushAsync(cancellationToken).ConfigureAwait(false);
-                                    Monitor.Enter(_webSocket.SessionHandle, ref sessionHandleLockTaken);
+                                    ReleaseLock(
+                                        _webSocket.SessionHandle,
+                                        ref sessionHandleLockTaken
+                                    );
+                                    await _webSocket
+                                        ._innerStream.FlushAsync(cancellationToken)
+                                        .ConfigureAwait(false);
+                                    Monitor.Enter(
+                                        _webSocket.SessionHandle,
+                                        ref sessionHandleLockTaken
+                                    );
                                     break;
                                 case WebSocketProtocolComponent.Action.SendToNetwork:
                                     int bytesSent = 0;
                                     try
                                     {
-                                        if (_webSocket.State != WebSocketState.CloseSent ||
-                                            (bufferType != WebSocketProtocolComponent.BufferType.PingPong &&
-                                            bufferType != WebSocketProtocolComponent.BufferType.UnsolicitedPong))
+                                        if (
+                                            _webSocket.State != WebSocketState.CloseSent
+                                            || (
+                                                bufferType
+                                                    != WebSocketProtocolComponent
+                                                        .BufferType
+                                                        .PingPong
+                                                && bufferType
+                                                    != WebSocketProtocolComponent
+                                                        .BufferType
+                                                        .UnsolicitedPong
+                                            )
+                                        )
                                         {
                                             if (dataBufferCount == 0)
                                             {
                                                 break;
                                             }
 
-                                            List<ArraySegment<byte>> sendBuffers = new List<ArraySegment<byte>>((int)dataBufferCount);
+                                            List<ArraySegment<byte>> sendBuffers = new List<
+                                                ArraySegment<byte>
+                                            >((int)dataBufferCount);
                                             int sendBufferSize = 0;
-                                            ArraySegment<byte> framingBuffer = _webSocket._internalBuffer.ConvertNativeBuffer(dataBuffers[0], bufferType);
+                                            ArraySegment<byte> framingBuffer =
+                                                _webSocket._internalBuffer.ConvertNativeBuffer(
+                                                    dataBuffers[0],
+                                                    bufferType
+                                                );
                                             sendBuffers.Add(framingBuffer);
                                             sendBufferSize += framingBuffer.Count;
 
@@ -1522,23 +1872,47 @@ namespace System.Net.WebSockets
                                                 // would be from (2).  Even if the payload is from a WebSocketSend operation, the buffer
                                                 // might be (1) only if no buffer copies were needed (in the case of no masking, for example).
                                                 // Or it might be (2).  So, we need to check.
-                                                if (_webSocket._internalBuffer.IsPinnedSendPayloadBuffer(dataBuffers[1], bufferType))
+                                                if (
+                                                    _webSocket._internalBuffer.IsPinnedSendPayloadBuffer(
+                                                        dataBuffers[1],
+                                                        bufferType
+                                                    )
+                                                )
                                                 {
-                                                    payload = _webSocket._internalBuffer.ConvertPinnedSendPayloadFromNative(dataBuffers[1], bufferType);
+                                                    payload =
+                                                        _webSocket._internalBuffer.ConvertPinnedSendPayloadFromNative(
+                                                            dataBuffers[1],
+                                                            bufferType
+                                                        );
                                                 }
                                                 else
                                                 {
-                                                    payload = _webSocket._internalBuffer.ConvertNativeBuffer(dataBuffers[1], bufferType);
+                                                    payload =
+                                                        _webSocket._internalBuffer.ConvertNativeBuffer(
+                                                            dataBuffers[1],
+                                                            bufferType
+                                                        );
                                                 }
 
                                                 sendBuffers.Add(payload);
                                                 sendBufferSize += payload.Count;
                                             }
 
-                                            ReleaseLock(_webSocket.SessionHandle, ref sessionHandleLockTaken);
-                                            HttpWebSocket.ThrowIfConnectionAborted(_webSocket._innerStream, false);
-                                            await _webSocket.SendFrameAsync(sendBuffers, cancellationToken).ConfigureAwait(false);
-                                            Monitor.Enter(_webSocket.SessionHandle, ref sessionHandleLockTaken);
+                                            ReleaseLock(
+                                                _webSocket.SessionHandle,
+                                                ref sessionHandleLockTaken
+                                            );
+                                            HttpWebSocket.ThrowIfConnectionAborted(
+                                                _webSocket._innerStream,
+                                                false
+                                            );
+                                            await _webSocket
+                                                .SendFrameAsync(sendBuffers, cancellationToken)
+                                                .ConfigureAwait(false);
+                                            Monitor.Enter(
+                                                _webSocket.SessionHandle,
+                                                ref sessionHandleLockTaken
+                                            );
                                             _webSocket.ThrowIfPendingException();
                                             bytesSent += sendBufferSize;
                                             _webSocket._keepAliveTracker.OnDataSent();
@@ -1546,14 +1920,18 @@ namespace System.Net.WebSockets
                                     }
                                     finally
                                     {
-                                        WebSocketProtocolComponent.WebSocketCompleteAction(_webSocket,
+                                        WebSocketProtocolComponent.WebSocketCompleteAction(
+                                            _webSocket,
                                             actionContext,
-                                            bytesSent);
+                                            bytesSent
+                                        );
                                     }
 
                                     break;
                                 default:
-                                    Debug.Fail($"Invalid action '{action}' returned from WebSocketGetAction.");
+                                    Debug.Fail(
+                                        $"Invalid action '{action}' returned from WebSocketGetAction."
+                                    );
                                     throw new InvalidOperationException();
                             }
                         }
@@ -1593,9 +1971,7 @@ namespace System.Net.WebSockets
                 private bool _receiveCompleted;
 
                 public ReceiveOperation(WebSocketBase webSocket)
-                    : base(webSocket)
-                {
-                }
+                    : base(webSocket) { }
 
                 protected override WebSocketProtocolComponent.ActionQueue ActionQueue
                 {
@@ -1607,15 +1983,21 @@ namespace System.Net.WebSockets
                     get { return 1; }
                 }
 
-                protected override void Initialize(Nullable<ArraySegment<byte>> buffer, CancellationToken cancellationToken)
+                protected override void Initialize(
+                    Nullable<ArraySegment<byte>> buffer,
+                    CancellationToken cancellationToken
+                )
                 {
                     Debug.Assert(buffer != null, "'buffer' MUST NOT be NULL.");
                     _pongReceived = false;
                     _receiveCompleted = false;
                     _webSocket.ThrowIfDisposed();
 
-                    int originalReceiveState = Interlocked.CompareExchange(ref _webSocket._receiveState,
-                        ReceiveState.Application, ReceiveState.Idle);
+                    int originalReceiveState = Interlocked.CompareExchange(
+                        ref _webSocket._receiveState,
+                        ReceiveState.Application,
+                        ReceiveState.Idle
+                    );
 
                     switch (originalReceiveState)
                     {
@@ -1623,13 +2005,23 @@ namespace System.Net.WebSockets
                             _receiveState = ReceiveState.Application;
                             break;
                         case ReceiveState.Application:
-                            Debug.Fail("'originalReceiveState' MUST NEVER be ReceiveState.Application at this point.");
+                            Debug.Fail(
+                                "'originalReceiveState' MUST NEVER be ReceiveState.Application at this point."
+                            );
                             break;
                         case ReceiveState.PayloadAvailable:
                             WebSocketReceiveResult receiveResult;
-                            if (!_webSocket._internalBuffer.ReceiveFromBufferedPayload(buffer.Value, out receiveResult))
+                            if (
+                                !_webSocket._internalBuffer.ReceiveFromBufferedPayload(
+                                    buffer.Value,
+                                    out receiveResult
+                                )
+                            )
                             {
-                                _webSocket.UpdateReceiveState(ReceiveState.Idle, ReceiveState.PayloadAvailable);
+                                _webSocket.UpdateReceiveState(
+                                    ReceiveState.Idle,
+                                    ReceiveState.PayloadAvailable
+                                );
                             }
                             ReceiveResult = receiveResult;
                             _receiveCompleted = true;
@@ -1640,9 +2032,7 @@ namespace System.Net.WebSockets
                     }
                 }
 
-                protected override void Cleanup()
-                {
-                }
+                protected override void Cleanup() { }
 
                 protected override bool ShouldContinue(CancellationToken cancellationToken)
                 {
@@ -1669,8 +2059,7 @@ namespace System.Net.WebSockets
                         return false;
                     }
 
-                    Debug.Assert(ReceiveResult != null,
-                        "'ReceiveResult' MUST NOT be NULL.");
+                    Debug.Assert(ReceiveResult != null, "'ReceiveResult' MUST NOT be NULL.");
                     _receiveCompleted = true;
 
                     if (ReceiveResult.MessageType == WebSocketMessageType.Close)
@@ -1687,7 +2076,8 @@ namespace System.Net.WebSockets
                     WebSocketProtocolComponent.Action action,
                     Interop.WebSocket.Buffer[] dataBuffers,
                     uint dataBufferCount,
-                    IntPtr actionContext)
+                    IntPtr actionContext
+                )
                 {
                     Debug.Assert(buffer != null, "'buffer MUST NOT be NULL.");
 
@@ -1698,9 +2088,11 @@ namespace System.Net.WebSockets
                     {
                         // ignoring received pong frame
                         _pongReceived = true;
-                        WebSocketProtocolComponent.WebSocketCompleteAction(_webSocket,
+                        WebSocketProtocolComponent.WebSocketCompleteAction(
+                            _webSocket,
                             actionContext,
-                            bytesTransferred);
+                            bytesTransferred
+                        );
                         return;
                     }
 
@@ -1714,23 +2106,40 @@ namespace System.Net.WebSockets
                         if (bufferType == WebSocketProtocolComponent.BufferType.Close)
                         {
                             payload = ArraySegment<byte>.Empty;
-                            _webSocket._internalBuffer.ConvertCloseBuffer(dataBuffers[0], out WebSocketCloseStatus closeStatus, out string? reason);
+                            _webSocket._internalBuffer.ConvertCloseBuffer(
+                                dataBuffers[0],
+                                out WebSocketCloseStatus closeStatus,
+                                out string? reason
+                            );
 
-                            receiveResult = new WebSocketReceiveResult(bytesTransferred,
-                                messageType, true, closeStatus, reason);
+                            receiveResult = new WebSocketReceiveResult(
+                                bytesTransferred,
+                                messageType,
+                                true,
+                                closeStatus,
+                                reason
+                            );
                         }
                         else
                         {
-                            payload = _webSocket._internalBuffer.ConvertNativeBuffer(dataBuffers[0], bufferType);
+                            payload = _webSocket._internalBuffer.ConvertNativeBuffer(
+                                dataBuffers[0],
+                                bufferType
+                            );
 
-                            bool endOfMessage = bufferType ==
-                                WebSocketProtocolComponent.BufferType.BinaryMessage ||
-                                bufferType == WebSocketProtocolComponent.BufferType.UTF8Message ||
-                                bufferType == WebSocketProtocolComponent.BufferType.Close;
+                            bool endOfMessage =
+                                bufferType == WebSocketProtocolComponent.BufferType.BinaryMessage
+                                || bufferType == WebSocketProtocolComponent.BufferType.UTF8Message
+                                || bufferType == WebSocketProtocolComponent.BufferType.Close;
 
                             if (payload.Count > buffer.Value.Count)
                             {
-                                _webSocket._internalBuffer.BufferPayload(payload, buffer.Value.Count, messageType, endOfMessage);
+                                _webSocket._internalBuffer.BufferPayload(
+                                    payload,
+                                    buffer.Value.Count,
+                                    messageType,
+                                    endOfMessage
+                                );
                                 newReceiveState = ReceiveState.PayloadAvailable;
                                 endOfMessage = false;
                             }
@@ -1738,23 +2147,31 @@ namespace System.Net.WebSockets
                             bytesTransferred = Math.Min(payload.Count, (int)buffer.Value.Count);
                             if (bytesTransferred > 0)
                             {
-                                Buffer.BlockCopy(payload.Array!,
+                                Buffer.BlockCopy(
+                                    payload.Array!,
                                     payload.Offset,
                                     buffer.Value.Array!,
                                     buffer.Value.Offset,
-                                    bytesTransferred);
+                                    bytesTransferred
+                                );
                             }
 
-                            receiveResult = new WebSocketReceiveResult(bytesTransferred, messageType, endOfMessage);
+                            receiveResult = new WebSocketReceiveResult(
+                                bytesTransferred,
+                                messageType,
+                                endOfMessage
+                            );
                         }
 
                         _webSocket.UpdateReceiveState(newReceiveState, _receiveState);
                     }
                     finally
                     {
-                        WebSocketProtocolComponent.WebSocketCompleteAction(_webSocket,
+                        WebSocketProtocolComponent.WebSocketCompleteAction(
+                            _webSocket,
                             actionContext,
-                            bytesTransferred);
+                            bytesTransferred
+                        );
                     }
 
                     ReceiveResult = receiveResult;
@@ -1766,9 +2183,7 @@ namespace System.Net.WebSockets
                 protected bool _BufferHasBeenPinned;
 
                 public SendOperation(WebSocketBase webSocket)
-                    : base(webSocket)
-                {
-                }
+                    : base(webSocket) { }
 
                 protected override WebSocketProtocolComponent.ActionQueue ActionQueue
                 {
@@ -1780,7 +2195,9 @@ namespace System.Net.WebSockets
                     get { return 2; }
                 }
 
-                protected virtual Nullable<Interop.WebSocket.Buffer> CreateBuffer(Nullable<ArraySegment<byte>> buffer)
+                protected virtual Nullable<Interop.WebSocket.Buffer> CreateBuffer(
+                    Nullable<ArraySegment<byte>> buffer
+                )
                 {
                     if (buffer == null)
                     {
@@ -1789,8 +2206,12 @@ namespace System.Net.WebSockets
 
                     Interop.WebSocket.Buffer payloadBuffer;
                     payloadBuffer = default;
-                    _webSocket._internalBuffer.PinSendBuffer(buffer.Value, out _BufferHasBeenPinned);
-                    payloadBuffer.Data.BufferData = _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(buffer.Value);
+                    _webSocket._internalBuffer.PinSendBuffer(
+                        buffer.Value,
+                        out _BufferHasBeenPinned
+                    );
+                    payloadBuffer.Data.BufferData =
+                        _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(buffer.Value);
                     payloadBuffer.Data.BufferLength = (uint)buffer.Value.Count;
                     return payloadBuffer;
                 }
@@ -1811,17 +2232,26 @@ namespace System.Net.WebSockets
 
                 internal WebSocketProtocolComponent.BufferType BufferType { get; set; }
 
-                protected override void Initialize(Nullable<ArraySegment<byte>> buffer,
-                    CancellationToken cancellationToken)
+                protected override void Initialize(
+                    Nullable<ArraySegment<byte>> buffer,
+                    CancellationToken cancellationToken
+                )
                 {
-                    Debug.Assert(!_BufferHasBeenPinned, "'_BufferHasBeenPinned' MUST NOT be pinned at this point.");
+                    Debug.Assert(
+                        !_BufferHasBeenPinned,
+                        "'_BufferHasBeenPinned' MUST NOT be pinned at this point."
+                    );
                     _webSocket.ThrowIfDisposed();
                     _webSocket.ThrowIfPendingException();
 
                     Nullable<Interop.WebSocket.Buffer> payloadBuffer = CreateBuffer(buffer);
                     if (payloadBuffer != null)
                     {
-                        WebSocketProtocolComponent.WebSocketSend(_webSocket, BufferType, payloadBuffer.Value);
+                        WebSocketProtocolComponent.WebSocketSend(
+                            _webSocket,
+                            BufferType,
+                            payloadBuffer.Value
+                        );
                     }
                     else
                     {
@@ -1853,7 +2283,9 @@ namespace System.Net.WebSockets
                 internal WebSocketCloseStatus CloseStatus { get; set; }
                 internal string? CloseReason { get; set; }
 
-                protected override Nullable<Interop.WebSocket.Buffer> CreateBuffer(Nullable<ArraySegment<byte>> buffer)
+                protected override Nullable<Interop.WebSocket.Buffer> CreateBuffer(
+                    Nullable<ArraySegment<byte>> buffer
+                )
                 {
                     Debug.Assert(buffer == null, "'buffer' MUST BE NULL.");
                     _webSocket.ThrowIfDisposed();
@@ -1868,11 +2300,23 @@ namespace System.Net.WebSockets
                     if (CloseReason != null)
                     {
                         byte[] blob = Encoding.UTF8.GetBytes(CloseReason);
-                        Debug.Assert(blob.Length <= WebSocketValidate.MaxControlFramePayloadLength,
-                            "The close reason is too long.");
-                        ArraySegment<byte> closeBuffer = new ArraySegment<byte>(blob, 0, Math.Min(WebSocketValidate.MaxControlFramePayloadLength, blob.Length));
-                        _webSocket._internalBuffer.PinSendBuffer(closeBuffer, out _BufferHasBeenPinned);
-                        payloadBuffer.CloseStatus.ReasonData = _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(closeBuffer);
+                        Debug.Assert(
+                            blob.Length <= WebSocketValidate.MaxControlFramePayloadLength,
+                            "The close reason is too long."
+                        );
+                        ArraySegment<byte> closeBuffer = new ArraySegment<byte>(
+                            blob,
+                            0,
+                            Math.Min(WebSocketValidate.MaxControlFramePayloadLength, blob.Length)
+                        );
+                        _webSocket._internalBuffer.PinSendBuffer(
+                            closeBuffer,
+                            out _BufferHasBeenPinned
+                        );
+                        payloadBuffer.CloseStatus.ReasonData =
+                            _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(
+                                closeBuffer
+                            );
                         payloadBuffer.CloseStatus.ReasonLength = (uint)closeBuffer.Count;
                     }
 
@@ -1905,35 +2349,26 @@ namespace System.Net.WebSockets
 
             private sealed class DisabledKeepAliveTracker : KeepAliveTracker
             {
-                public override void OnDataReceived()
-                {
-                }
+                public override void OnDataReceived() { }
 
-                public override void OnDataSent()
-                {
-                }
+                public override void OnDataSent() { }
 
-                public override void ResetTimer()
-                {
-                }
+                public override void ResetTimer() { }
 
-                public override void StartTimer(WebSocketBase webSocket)
-                {
-                }
+                public override void StartTimer(WebSocketBase webSocket) { }
 
                 public override bool ShouldSendKeepAlive()
                 {
                     return false;
                 }
 
-                public override void Dispose()
-                {
-                }
+                public override void Dispose() { }
             }
 
             private sealed class DefaultKeepAliveTracker : KeepAliveTracker
             {
-                private static readonly TimerCallback s_KeepAliveTimerElapsedCallback = new TimerCallback(OnKeepAlive);
+                private static readonly TimerCallback s_KeepAliveTimerElapsedCallback =
+                    new TimerCallback(OnKeepAlive);
                 private readonly TimeSpan _keepAliveInterval;
                 private long _lastSendActivityTimestamp;
                 private long _lastReceiveActivityTimestamp;
@@ -1962,17 +2397,26 @@ namespace System.Net.WebSockets
                 public override void StartTimer(WebSocketBase webSocket)
                 {
                     Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL.");
-                    Debug.Assert(webSocket._keepAliveTracker != null,
-                        "'webSocket._KeepAliveTracker' MUST NOT be NULL at this point.");
+                    Debug.Assert(
+                        webSocket._keepAliveTracker != null,
+                        "'webSocket._KeepAliveTracker' MUST NOT be NULL at this point."
+                    );
                     int keepAliveIntervalMilliseconds = (int)_keepAliveInterval.TotalMilliseconds;
-                    Debug.Assert(keepAliveIntervalMilliseconds > 0, "'keepAliveIntervalMilliseconds' MUST be POSITIVE.");
+                    Debug.Assert(
+                        keepAliveIntervalMilliseconds > 0,
+                        "'keepAliveIntervalMilliseconds' MUST be POSITIVE."
+                    );
 
                     // The correct pattern is to first initialize the Timer object, assign it to the member variable
                     // and only afterwards enable the Timer. This is required because the constructor, together with
                     // the assignment are not guaranteed to be an atomic operation, which creates a race between the
                     // assignment and the Timer callback.
-                    _keepAliveTimer = new Timer(s_KeepAliveTimerElapsedCallback, webSocket, Timeout.Infinite,
-                        Timeout.Infinite);
+                    _keepAliveTimer = new Timer(
+                        s_KeepAliveTimerElapsedCallback,
+                        webSocket,
+                        Timeout.Infinite,
+                        Timeout.Infinite
+                    );
 
                     _keepAliveTimer.Change(keepAliveIntervalMilliseconds, Timeout.Infinite);
                 }
@@ -2002,7 +2446,9 @@ namespace System.Net.WebSockets
                 private TimeSpan GetIdleTime()
                 {
                     TimeSpan sinceLastSendActivity = GetTimeElapsed(_lastSendActivityTimestamp);
-                    TimeSpan sinceLastReceiveActivity = GetTimeElapsed(_lastReceiveActivityTimestamp);
+                    TimeSpan sinceLastReceiveActivity = GetTimeElapsed(
+                        _lastReceiveActivityTimestamp
+                    );
 
                     if (sinceLastReceiveActivity < sinceLastSendActivity)
                     {
@@ -2012,9 +2458,8 @@ namespace System.Net.WebSockets
                     return sinceLastSendActivity;
                 }
 
-                private TimeSpan GetTimeElapsed(long timestamp) => timestamp != 0 ?
-                    Stopwatch.GetElapsedTime(timestamp) :
-                    _keepAliveInterval;
+                private TimeSpan GetTimeElapsed(long timestamp) =>
+                    timestamp != 0 ? Stopwatch.GetElapsedTime(timestamp) : _keepAliveInterval;
             }
         }
 
@@ -2025,7 +2470,10 @@ namespace System.Net.WebSockets
             private volatile bool _isDisposed;
             private readonly object _thisLock = new object();
 
-            public bool TryStartOperation(CancellationToken userCancellationToken, out CancellationToken linkedCancellationToken)
+            public bool TryStartOperation(
+                CancellationToken userCancellationToken,
+                out CancellationToken linkedCancellationToken
+            )
             {
                 linkedCancellationToken = CancellationToken.None;
                 ThrowIfDisposed();
@@ -2036,11 +2484,16 @@ namespace System.Net.WebSockets
 
                     if (operationsOutstanding == 1)
                     {
-                        linkedCancellationToken = CreateLinkedCancellationToken(userCancellationToken);
+                        linkedCancellationToken = CreateLinkedCancellationToken(
+                            userCancellationToken
+                        );
                         return true;
                     }
 
-                    Debug.Assert(operationsOutstanding >= 1, "'operationsOutstanding' must never be smaller than 1.");
+                    Debug.Assert(
+                        operationsOutstanding >= 1,
+                        "'operationsOutstanding' must never be smaller than 1."
+                    );
                     return false;
                 }
             }
@@ -2058,7 +2511,10 @@ namespace System.Net.WebSockets
                 lock (_thisLock)
                 {
                     --_operationsOutstanding;
-                    Debug.Assert(_operationsOutstanding >= 0, "'_OperationsOutstanding' must never be smaller than 0.");
+                    Debug.Assert(
+                        _operationsOutstanding >= 0,
+                        "'_OperationsOutstanding' must never be smaller than 0."
+                    );
 
                     if (ownsCancellationTokenSource)
                     {
@@ -2071,11 +2527,18 @@ namespace System.Net.WebSockets
             }
 
             // Has to be called under _ThisLock lock
-            private CancellationToken CreateLinkedCancellationToken(CancellationToken cancellationToken)
+            private CancellationToken CreateLinkedCancellationToken(
+                CancellationToken cancellationToken
+            )
             {
-                var linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                var linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                    cancellationToken
+                );
 
-                Debug.Assert(_cancellationTokenSource == null, "'_cancellationTokenSource' MUST be NULL.");
+                Debug.Assert(
+                    _cancellationTokenSource == null,
+                    "'_cancellationTokenSource' MUST be NULL."
+                );
                 _cancellationTokenSource = linkedCancellationTokenSource;
 
                 return linkedCancellationTokenSource.Token;
@@ -2147,7 +2610,10 @@ namespace System.Net.WebSockets
             void SwitchToOpaqueMode(WebSocketBase webSocket);
             void Abort();
             bool SupportsMultipleWrite { get; }
-            Task MultipleWriteAsync(IList<ArraySegment<byte>> buffers, CancellationToken cancellationToken);
+            Task MultipleWriteAsync(
+                IList<ArraySegment<byte>> buffers,
+                CancellationToken cancellationToken
+            );
 
             // Any implementation has to guarantee that no exception is thrown synchronously
             // for example by enforcing a Task.Yield at the beginning of the method

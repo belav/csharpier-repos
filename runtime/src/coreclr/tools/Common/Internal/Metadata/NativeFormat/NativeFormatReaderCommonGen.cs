@@ -32,7 +32,6 @@ namespace Internal.Metadata.NativeFormat
         /// Reserved.
         EnableJITcompileTracking = 0x8000,
     } // AssemblyFlags
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
 #endif
@@ -42,7 +41,6 @@ namespace Internal.Metadata.NativeFormat
         Reserved = 0x8003,
         SHA1 = 0x8004,
     } // AssemblyHashAlgorithm
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
 #endif
@@ -54,7 +52,6 @@ namespace Internal.Metadata.NativeFormat
         /// Represents a type parameter from a generic method.
         GenericMethodParameter = 0x1,
     } // GenericParameterKind
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
 #endif
@@ -66,7 +63,6 @@ namespace Internal.Metadata.NativeFormat
         /// Specifies the name of a field
         Field = 0x1,
     } // NamedArgumentMemberKind
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
 #endif
@@ -83,7 +79,6 @@ namespace Internal.Metadata.NativeFormat
         Unmanaged = 0x09,
         UnmanagedCallingConventionMask = 0x0F,
     } // SignatureCallingConvention
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
 #endif

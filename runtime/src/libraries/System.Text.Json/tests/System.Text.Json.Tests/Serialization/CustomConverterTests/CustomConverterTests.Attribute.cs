@@ -41,7 +41,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             const string json = @"{""Point1"":""1,2""}";
 
-            ClassWithPointConverterAttribute obj = JsonSerializer.Deserialize<ClassWithPointConverterAttribute>(json);
+            ClassWithPointConverterAttribute obj =
+                JsonSerializer.Deserialize<ClassWithPointConverterAttribute>(json);
             Assert.Equal(11, obj.Point1.X);
             Assert.Equal(12, obj.Point1.Y);
 
@@ -60,7 +61,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             const string json = @"{""Point1"":""1,2""}";
 
-            ClassWithJsonConverterAttribute obj = JsonSerializer.Deserialize<ClassWithJsonConverterAttribute>(json);
+            ClassWithJsonConverterAttribute obj =
+                JsonSerializer.Deserialize<ClassWithJsonConverterAttribute>(json);
             Assert.Equal(1, obj.Point1.X);
             Assert.Equal(2, obj.Point1.Y);
 
@@ -91,7 +93,11 @@ namespace System.Text.Json.Serialization.Tests
                 _offset = offset;
             }
 
-            public override AttributedPoint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override AttributedPoint Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.String)
                 {
@@ -105,7 +111,10 @@ namespace System.Text.Json.Serialization.Tests
                 }
 
                 AttributedPoint value = new AttributedPoint();
-                if (!int.TryParse(stringValues[0], out int x) || !int.TryParse(stringValues[1], out int y))
+                if (
+                    !int.TryParse(stringValues[0], out int x)
+                    || !int.TryParse(stringValues[1], out int y)
+                )
                 {
                     throw new JsonException();
                 }
@@ -116,7 +125,11 @@ namespace System.Text.Json.Serialization.Tests
                 return value;
             }
 
-            public override void Write(Utf8JsonWriter writer, AttributedPoint value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                AttributedPoint value,
+                JsonSerializerOptions options
+            )
             {
                 string stringValue = $"{value.X - _offset},{value.Y - _offset}";
                 writer.WriteStringValue(stringValue);
@@ -167,7 +180,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             const string json = @"{""Point1"":""1,2""}";
 
-            ClassWithJsonConverterAttributeOverride point = JsonSerializer.Deserialize<ClassWithJsonConverterAttributeOverride>(json);
+            ClassWithJsonConverterAttributeOverride point =
+                JsonSerializer.Deserialize<ClassWithJsonConverterAttributeOverride>(json);
 
             // The property attribute overrides the type attribute.
             Assert.Equal(101, point.Point1.X);
@@ -185,7 +199,8 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new AttributedPointConverter(200));
 
-            ClassWithJsonConverterAttributeOverride point = JsonSerializer.Deserialize<ClassWithJsonConverterAttributeOverride>(json);
+            ClassWithJsonConverterAttributeOverride point =
+                JsonSerializer.Deserialize<ClassWithJsonConverterAttributeOverride>(json);
 
             // The property attribute overrides the runtime.
             Assert.Equal(101, point.Point1.X);

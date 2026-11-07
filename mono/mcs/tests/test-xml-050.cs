@@ -7,55 +7,59 @@
 /// <see cref="B.Execute ()" />
 /// <see cref="B.Name" />
 /// </summary>
-public class EntryPoint {
-  static void Main () {
-  }
+public class EntryPoint
+{
+    static void Main() { }
 }
 
 /// <summary />
-public interface IA {
-  /// <summary />
-  string Name {
-    get;
-  }
+public interface IA
+{
+    /// <summary />
+    string Name { get; }
 
-  /// <summary />
-  string Execute ();
+    /// <summary />
+    string Execute();
 }
 
 /// <summary />
-public interface IB : IA {
-  /// <summary />
-  new int Name {
-    get;
-  }
+public interface IB : IA
+{
+    /// <summary />
+    new int Name { get; }
 
-  /// <summary />
-  new int Execute ();
+    /// <summary />
+    new int Execute();
 }
 
 /// <summary />
-public class A {
-  /// <summary />
-  public string Name {
-    get { return null; }
-  }
+public class A
+{
+    /// <summary />
+    public string Name
+    {
+        get { return null; }
+    }
 
-  /// <summary />
-  public string Execute () {
-    return null;
-  }
+    /// <summary />
+    public string Execute()
+    {
+        return null;
+    }
 }
 
 /// <summary />
-public class B : A {
-  /// <summary />
-  public new int Name {
-    get { return 0; }
-  }
+public class B : A
+{
+    /// <summary />
+    public new int Name
+    {
+        get { return 0; }
+    }
 
-  /// <summary />
-  public new int Execute () {
-    return 0;
-  }
+    /// <summary />
+    public new int Execute()
+    {
+        return 0;
+    }
 }

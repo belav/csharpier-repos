@@ -1,15 +1,16 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Composite
 {
     public class MockChangeToken : IChangeToken
     {
-        private readonly List<Tuple<Action<object>, object, MockDisposable>> _callbacks = new List<Tuple<Action<object>, object, MockDisposable>>();
+        private readonly List<Tuple<Action<object>, object, MockDisposable>> _callbacks =
+            new List<Tuple<Action<object>, object, MockDisposable>>();
 
         public bool ActiveChangeCallbacks { get; set; }
 
@@ -17,10 +18,7 @@ namespace Microsoft.Extensions.FileProviders.Composite
 
         public List<Tuple<Action<object>, object, MockDisposable>> Callbacks
         {
-            get
-            {
-                return _callbacks;
-            }
+            get { return _callbacks; }
         }
 
         public IDisposable RegisterChangeCallback(Action<object> callback, object state)

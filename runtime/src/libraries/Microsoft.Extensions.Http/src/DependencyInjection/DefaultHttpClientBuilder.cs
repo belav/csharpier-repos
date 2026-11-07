@@ -11,10 +11,17 @@ namespace Microsoft.Extensions.DependencyInjection
         public DefaultHttpClientBuilder(IServiceCollection services, string name)
         {
             // The tracker references a descriptor. It marks the position of where default services are added to the collection.
-            var tracker = (DefaultHttpClientConfigurationTracker?)services.Single(sd => sd.ServiceType == typeof(DefaultHttpClientConfigurationTracker)).ImplementationInstance;
+            var tracker = (DefaultHttpClientConfigurationTracker?)
+                services
+                    .Single(sd => sd.ServiceType == typeof(DefaultHttpClientConfigurationTracker))
+                    .ImplementationInstance;
             Debug.Assert(tracker != null);
 
-            Services = new DefaultHttpClientBuilderServiceCollection(services, name == null, tracker);
+            Services = new DefaultHttpClientBuilderServiceCollection(
+                services,
+                name == null,
+                tracker
+            );
             Name = name!;
         }
 

@@ -9,12 +9,18 @@ using System.Web.WebPages.Scope;
 
 namespace System.Web.WebPages
 {
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "This is a core class which needs to have references to many other classes")]
+    [SuppressMessage(
+        "Microsoft.Maintainability",
+        "CA1506:AvoidExcessiveClassCoupling",
+        Justification = "This is a core class which needs to have references to many other classes"
+    )]
     public abstract class WebPage : WebPageBase
     {
-        private static readonly List<IWebPageRequestExecutor> _executors = new List<IWebPageRequestExecutor>();
+        private static readonly List<IWebPageRequestExecutor> _executors =
+            new List<IWebPageRequestExecutor>();
 
         private HttpContextBase _context;
+
         // Expose the model as dynamic
         private dynamic _model;
 
@@ -68,7 +74,11 @@ namespace System.Web.WebPages
 
         public override void ExecutePageHierarchy()
         {
-            using (ScopeStorage.CreateTransientScope(new ScopeStorageDictionary(ScopeStorage.CurrentScope, PageData)))
+            using (
+                ScopeStorage.CreateTransientScope(
+                    new ScopeStorageDictionary(ScopeStorage.CurrentScope, PageData)
+                )
+            )
             {
                 ExecutePageHierarchy(_executors);
             }

@@ -20,5 +20,6 @@ public interface IEntityTypeRemovedConvention : IConvention
     void ProcessEntityTypeRemoved(
         IConventionModelBuilder modelBuilder,
         IConventionEntityType entityType,
-        IConventionContext<IConventionEntityType> context);
+        IConventionContext<IConventionEntityType> context
+    );
 }

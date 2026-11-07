@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Editing
 {
     /// <summary>
     /// Internal extensions to <see cref="SyntaxGenerator"/>.
-    /// 
+    ///
     /// This interface is available in the shared CodeStyle and Workspaces layer to allow
     /// sharing internal generator methods between them. Once the methods are ready to be
     /// made public APIs, they can be moved to <see cref="SyntaxGenerator"/>.
@@ -26,21 +26,31 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Creates a statement that declares a single local variable with an optional initializer.
         /// </summary>
         public abstract SyntaxNode LocalDeclarationStatement(
-            SyntaxNode? type, SyntaxToken identifier, SyntaxNode? initializer = null, bool isConst = false);
+            SyntaxNode? type,
+            SyntaxToken identifier,
+            SyntaxNode? initializer = null,
+            bool isConst = false
+        );
 
         /// <summary>
         /// Creates a statement that declares a single local variable.
         /// </summary>
-        public SyntaxNode LocalDeclarationStatement(SyntaxToken name, SyntaxNode initializer)
-            => LocalDeclarationStatement(null, name, initializer);
+        public SyntaxNode LocalDeclarationStatement(SyntaxToken name, SyntaxNode initializer) =>
+            LocalDeclarationStatement(null, name, initializer);
 
-        public abstract SyntaxNode WithInitializer(SyntaxNode variableDeclarator, SyntaxNode initializer);
+        public abstract SyntaxNode WithInitializer(
+            SyntaxNode variableDeclarator,
+            SyntaxNode initializer
+        );
 
         public abstract SyntaxNode EqualsValueClause(SyntaxToken operatorToken, SyntaxNode value);
 
         public abstract SyntaxToken Identifier(string identifier);
 
-        public abstract SyntaxNode ConditionalAccessExpression(SyntaxNode expression, SyntaxNode whenNotNull);
+        public abstract SyntaxNode ConditionalAccessExpression(
+            SyntaxNode expression,
+            SyntaxNode whenNotNull
+        );
 
         public abstract SyntaxNode MemberBindingExpression(SyntaxNode name);
 
@@ -49,7 +59,11 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Wraps with parens.
         /// </summary>
-        public abstract SyntaxNode AddParentheses(SyntaxNode expression, bool includeElasticTrivia = true, bool addSimplifierAnnotation = true);
+        public abstract SyntaxNode AddParentheses(
+            SyntaxNode expression,
+            bool includeElasticTrivia = true,
+            bool addSimplifierAnnotation = true
+        );
 
         /// <summary>
         /// Creates a statement that can be used to yield a value from an iterator method.
@@ -59,7 +73,7 @@ namespace Microsoft.CodeAnalysis.Editing
 
         /// <summary>
         /// <see langword="true"/> if the language requires a "TypeExpression"
-        /// (including <see langword="var"/>) to be stated when making a 
+        /// (including <see langword="var"/>) to be stated when making a
         /// <see cref="LocalDeclarationStatement(SyntaxNode, SyntaxToken, SyntaxNode, bool)"/>.
         /// <see langword="false"/> if the language allows the type node to be entirely elided.
         /// </summary>
@@ -68,7 +82,11 @@ namespace Microsoft.CodeAnalysis.Editing
         public abstract SyntaxToken InterpolatedStringTextToken(string content, string value);
         public abstract SyntaxNode InterpolatedStringText(SyntaxToken textToken);
         public abstract SyntaxNode Interpolation(SyntaxNode syntaxNode);
-        public abstract SyntaxNode InterpolatedStringExpression(SyntaxToken startToken, IEnumerable<SyntaxNode> content, SyntaxToken endToken);
+        public abstract SyntaxNode InterpolatedStringExpression(
+            SyntaxToken startToken,
+            IEnumerable<SyntaxNode> content,
+            SyntaxToken endToken
+        );
         public abstract SyntaxNode InterpolationAlignmentClause(SyntaxNode alignment);
         public abstract SyntaxNode InterpolationFormatClause(string format);
         public abstract SyntaxNode TypeParameterList(IEnumerable<string> typeParameterNames);
@@ -90,14 +108,24 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </remarks>
         public abstract SyntaxNode Type(ITypeSymbol typeSymbol, bool typeContext);
 
-        public abstract SyntaxNode NegateEquality(SyntaxGenerator generator, SyntaxNode binaryExpression, SyntaxNode left, BinaryOperatorKind negatedKind, SyntaxNode right);
+        public abstract SyntaxNode NegateEquality(
+            SyntaxGenerator generator,
+            SyntaxNode binaryExpression,
+            SyntaxNode left,
+            BinaryOperatorKind negatedKind,
+            SyntaxNode right
+        );
 
         public abstract SyntaxNode IsNotTypeExpression(SyntaxNode expression, SyntaxNode type);
 
         #region Patterns
 
         public abstract bool SupportsPatterns(ParseOptions options);
-        public abstract SyntaxNode IsPatternExpression(SyntaxNode expression, SyntaxToken isToken, SyntaxNode pattern);
+        public abstract SyntaxNode IsPatternExpression(
+            SyntaxNode expression,
+            SyntaxToken isToken,
+            SyntaxNode pattern
+        );
 
         public abstract SyntaxNode AndPattern(SyntaxNode left, SyntaxNode right);
         public abstract SyntaxNode ConstantPattern(SyntaxNode expression);

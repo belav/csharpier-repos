@@ -11,7 +11,13 @@ namespace System.Security.Cryptography.Xml
     {
         private bool _isInNodeSet;
 
-        public CanonicalXmlAttribute(string? prefix, string localName, string? namespaceURI, XmlDocument doc, bool defaultNodeSetInclusionState)
+        public CanonicalXmlAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            XmlDocument doc,
+            bool defaultNodeSetInclusionState
+        )
             : base(prefix, localName, namespaceURI, doc)
         {
             IsInNodeSet = defaultNodeSetInclusionState;
@@ -23,14 +29,22 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             strBuilder.Append($" {Name}=\"");
             strBuilder.Append(Utils.EscapeAttributeValue(Value));
             strBuilder.Append('"');
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             byte[] rgbData = Encoding.UTF8.GetBytes(" " + Name + "=\"");
             hash.TransformBlock(rgbData, 0, rgbData.Length, rgbData, 0);

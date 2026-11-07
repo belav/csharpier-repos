@@ -16,7 +16,9 @@ namespace System.ServiceModel.Channels
     using System.Threading;
     using System.Xml;
 
-    internal abstract class UdpChannelBase<QueueItemType> : InputQueueChannel<QueueItemType>, IUdpReceiveHandler
+    internal abstract class UdpChannelBase<QueueItemType>
+        : InputQueueChannel<QueueItemType>,
+            IUdpReceiveHandler
         where QueueItemType : class, IDisposable
     {
         private bool cleanedUp;
@@ -25,18 +27,19 @@ namespace System.ServiceModel.Channels
         private int maxReceivedMessageSize;
         private UdpRetransmissionSettings retransmitSettings;
         private Uri via;
-        
+
         protected UdpChannelBase(
-            ChannelManagerBase channelManager, 
-            MessageEncoder encoder, 
+            ChannelManagerBase channelManager,
+            MessageEncoder encoder,
             BufferManager bufferManager,
-            UdpSocket[] sockets, 
+            UdpSocket[] sockets,
             UdpRetransmissionSettings retransmissionSettings,
-            long maxPendingMessagesTotalSize, 
-            EndpointAddress localAddress, 
+            long maxPendingMessagesTotalSize,
+            EndpointAddress localAddress,
             Uri via,
             bool isMulticast,
-            int maxReceivedMessageSize)
+            int maxReceivedMessageSize
+        )
             : base(channelManager)
         {
             Fx.Assert(encoder != null, "encoder shouldn't be null");
@@ -49,7 +52,11 @@ namespace System.ServiceModel.Channels
             Fx.Assert(localAddress != null, "localAddress can't be null");
             Fx.Assert(via != null, "via can't be null");
 
-            this.maxPendingMessagesTotalSize = maxPendingMessagesTotalSize == UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize ? UdpConstants.Defaults.MaxPendingMessagesTotalSize : maxPendingMessagesTotalSize;
+            this.maxPendingMessagesTotalSize =
+                maxPendingMessagesTotalSize
+                == UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize
+                    ? UdpConstants.Defaults.MaxPendingMessagesTotalSize
+                    : maxPendingMessagesTotalSize;
             this.Encoder = encoder;
             this.Sockets = sockets;
             this.BufferManager = bufferManager;
@@ -63,11 +70,7 @@ namespace System.ServiceModel.Channels
             this.via = via;
         }
 
-        public EndpointAddress LocalAddress
-        {
-            get;
-            private set;
-        }
+        public EndpointAddress LocalAddress { get; private set; }
 
         public Uri Via
         {
@@ -87,33 +90,21 @@ namespace System.ServiceModel.Channels
 
         protected UdpSocketReceiveManager ReceiveManager { get; set; }
 
-        protected BufferManager BufferManager
-        {
-            get;
-            private set;
-        }
+        protected BufferManager BufferManager { get; private set; }
 
-        protected MessageEncoder Encoder
-        {
-            get;
-            private set;
-        }
+        protected MessageEncoder Encoder { get; private set; }
 
-        protected bool IsMulticast
-        {
-            get;
-            private set;
-        }
+        protected bool IsMulticast { get; private set; }
 
         protected UdpOutputChannel UdpOutputChannel { get; private set; }
 
-        protected UdpSocket[] Sockets
-        {
-            get;
-            private set;
-        }
+        protected UdpSocket[] Sockets { get; private set; }
 
-        [SuppressMessage("Microsoft.StyleCop.CSharp.ReadabilityRules", "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists", Justification = "StyleCop 4.5 does not validate this rule properly.")]
+        [SuppressMessage(
+            "Microsoft.StyleCop.CSharp.ReadabilityRules",
+            "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists",
+            Justification = "StyleCop 4.5 does not validate this rule properly."
+        )]
         public override T GetProperty<T>()
         {
             if (typeof(T) == typeof(IDuplexChannel))
@@ -137,7 +128,12 @@ namespace System.ServiceModel.Channels
         }
 
         // returns false if the message was dropped because the max pending message count was hit.
-        bool IUdpReceiveHandler.HandleDataReceived(ArraySegment<byte> data, EndPoint remoteEndpoint, int interfaceIndex, Action onMessageDequeuedCallback)
+        bool IUdpReceiveHandler.HandleDataReceived(
+            ArraySegment<byte> data,
+            EndPoint remoteEndpoint,
+            int interfaceIndex,
+            Action onMessageDequeuedCallback
+        )
         {
             bool returnBuffer = true;
             string messageHash = null;
@@ -149,19 +145,24 @@ namespace System.ServiceModel.Channels
                 IPEndPoint remoteIPEndPoint = (IPEndPoint)remoteEndpoint;
 
                 message = UdpUtility.DecodeMessage(
-                    this.DuplicateDetector, 
-                    this.Encoder, 
+                    this.DuplicateDetector,
+                    this.Encoder,
                     this.BufferManager,
-                    data, 
-                    remoteIPEndPoint, 
-                    interfaceIndex, 
-                    this.IgnoreSerializationException, 
-                    out messageHash);
+                    data,
+                    remoteIPEndPoint,
+                    interfaceIndex,
+                    this.IgnoreSerializationException,
+                    out messageHash
+                );
 
                 if (message != null)
                 {
                     // We pass in the length of the message buffer instead of the length of the message to keep track of the amount of memory that's been allocated
-                    continueReceiving = this.EnqueueMessage(message, data.Array.Length, onMessageDequeuedCallback);
+                    continueReceiving = this.EnqueueMessage(
+                        message,
+                        data.Array.Length,
+                        onMessageDequeuedCallback
+                    );
                     returnBuffer = !continueReceiving;
                 }
             }
@@ -183,7 +184,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.DuplicateDetector != null)
                         {
-                            Fx.Assert(messageHash != null, "message hash should always be available if duplicate detector is enabled");
+                            Fx.Assert(
+                                messageHash != null,
+                                "message hash should always be available if duplicate detector is enabled"
+                            );
                             this.DuplicateDetector.RemoveEntry(messageHash);
                         }
 
@@ -209,12 +213,15 @@ namespace System.ServiceModel.Channels
             this.EnqueueAndDispatch(UdpUtility.WrapAsyncException(ex), null, false);
         }
 
-        // Since ChannelListener and channel lifetimes can be different, we need a 
-        // way to transfer the socketReceiveManager and DuplicateMessageDetection 
-        // objects to the channel if the listener gets closed.  If this method succeeds, then 
-        // this also indicates that the bufferManager is no longer owned by the channel listener, 
+        // Since ChannelListener and channel lifetimes can be different, we need a
+        // way to transfer the socketReceiveManager and DuplicateMessageDetection
+        // objects to the channel if the listener gets closed.  If this method succeeds, then
+        // this also indicates that the bufferManager is no longer owned by the channel listener,
         // so we have to clean that up also.
-        internal bool TransferReceiveManagerOwnership(UdpSocketReceiveManager socketReceiveManager, DuplicateMessageDetector duplicateDetector)
+        internal bool TransferReceiveManagerOwnership(
+            UdpSocketReceiveManager socketReceiveManager,
+            DuplicateMessageDetector duplicateDetector
+        )
         {
             bool success = false;
             if (this.State == CommunicationState.Opened)
@@ -223,8 +230,14 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.State == CommunicationState.Opened)
                     {
-                        Fx.Assert(this.ReceiveManager == null, "ReceiveManager is already set to a non-null value");
-                        Fx.Assert(this.DuplicateDetector == null, "DuplicateDetector is already set to a non-null value");
+                        Fx.Assert(
+                            this.ReceiveManager == null,
+                            "ReceiveManager is already set to a non-null value"
+                        );
+                        Fx.Assert(
+                            this.DuplicateDetector == null,
+                            "DuplicateDetector is already set to a non-null value"
+                        );
 
                         this.ReceiveManager = socketReceiveManager;
                         this.OwnsBufferManager = true;
@@ -239,14 +252,21 @@ namespace System.ServiceModel.Channels
         }
 
         // returns false if the max pending messages total size was hit.
-        internal bool EnqueueMessage(Message message, int messageBufferSize, Action messageDequeuedCallback)
+        internal bool EnqueueMessage(
+            Message message,
+            int messageBufferSize,
+            Action messageDequeuedCallback
+        )
         {
             Action onMessageDequeuedCallback = () =>
             {
                 lock (this.ThisLock)
                 {
                     this.pendingMessagesTotalSize -= messageBufferSize;
-                    Fx.Assert(this.pendingMessagesTotalSize >= 0, "pendingMessagesTotalSize should not be negative.");
+                    Fx.Assert(
+                        this.pendingMessagesTotalSize >= 0,
+                        "pendingMessagesTotalSize should not be negative."
+                    );
                 }
 
                 messageDequeuedCallback();
@@ -255,7 +275,10 @@ namespace System.ServiceModel.Channels
             bool success = false;
             lock (this.ThisLock)
             {
-                if (this.pendingMessagesTotalSize + messageBufferSize <= this.maxPendingMessagesTotalSize)
+                if (
+                    this.pendingMessagesTotalSize + messageBufferSize
+                    <= this.maxPendingMessagesTotalSize
+                )
                 {
                     message.Properties.Via = this.Via;
                     this.pendingMessagesTotalSize += messageBufferSize;
@@ -279,11 +302,21 @@ namespace System.ServiceModel.Channels
                         string messageIdString = string.Empty;
                         if (message.Headers.MessageId != null)
                         {
-                            messageIdString = string.Format(CultureInfo.CurrentCulture, "'{0}' ", message.Headers.MessageId.ToString());
+                            messageIdString = string.Format(
+                                CultureInfo.CurrentCulture,
+                                "'{0}' ",
+                                message.Headers.MessageId.ToString()
+                            );
                         }
 
-                        EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
-                        TD.MaxPendingMessagesTotalSizeReached(eventTraceActivity, messageIdString, this.maxPendingMessagesTotalSize, typeof(TransportBindingElement).FullName);
+                        EventTraceActivity eventTraceActivity =
+                            EventTraceActivityHelper.TryExtractActivity(message);
+                        TD.MaxPendingMessagesTotalSizeReached(
+                            eventTraceActivity,
+                            messageIdString,
+                            this.maxPendingMessagesTotalSize,
+                            typeof(TransportBindingElement).FullName
+                        );
                     }
                 }
             }
@@ -291,7 +324,11 @@ namespace System.ServiceModel.Channels
             return success;
         }
 
-        internal abstract void FinishEnqueueMessage(Message message, Action dequeuedCallback, bool canDispatchOnThisThread);
+        internal abstract void FinishEnqueueMessage(
+            Message message,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        );
 
         protected virtual void AddHeadersTo(Message message)
         {
@@ -309,7 +346,13 @@ namespace System.ServiceModel.Channels
                 if (this.retransmitSettings.Enabled == true)
                 {
                     // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
-                    throw FxTrace.Exception.AsError(new ProtocolException(SR.RetransmissionRequiresAddressingOnMessage(message.Version.Addressing.ToString())));
+                    throw FxTrace.Exception.AsError(
+                        new ProtocolException(
+                            SR.RetransmissionRequiresAddressingOnMessage(
+                                message.Version.Addressing.ToString()
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -320,7 +363,11 @@ namespace System.ServiceModel.Channels
             this.Cleanup(true, TimeSpan.Zero);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnOpen(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -336,15 +383,20 @@ namespace System.ServiceModel.Channels
             this.UdpOutputChannel.Open();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult<QueueItemType>(
-                this, 
-                new ChainedBeginHandler(base.OnBeginClose), 
+                this,
+                new ChainedBeginHandler(base.OnBeginClose),
                 new ChainedEndHandler(base.OnEndClose),
-                timeout, 
-                callback, 
-                state);
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -363,19 +415,22 @@ namespace System.ServiceModel.Channels
         protected void SetOutputChannel(UdpOutputChannel udpOutputChannel)
         {
             Fx.Assert(this.UdpOutputChannel == null, "this.UdpOutputChannel must be null");
-            Fx.Assert(udpOutputChannel != null, "udpOutputChannel can't be null, since SetOutputChannel should be called only once");
+            Fx.Assert(
+                udpOutputChannel != null,
+                "udpOutputChannel can't be null, since SetOutputChannel should be called only once"
+            );
 
             this.UdpOutputChannel = udpOutputChannel;
         }
 
-        // We're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once. 
+        // We're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once.
         protected void Cleanup(bool aborting, TimeSpan timeout)
-        {           
+        {
             if (this.cleanedUp)
             {
                 return;
             }
-                
+
             lock (ThisLock)
             {
                 if (this.cleanedUp)
@@ -391,7 +446,7 @@ namespace System.ServiceModel.Channels
                 {
                     this.UdpOutputChannel.Close(timeout);
                 }
-               
+
                 if (this.DuplicateDetector != null)
                 {
                     this.DuplicateDetector.Dispose();
@@ -417,23 +472,34 @@ namespace System.ServiceModel.Channels
         }
 
         // Control flow for async path
-        // We use this mechanism to avoid initializing two async objects as logically cleanup+close is one operation. 
-        // At any point in the Begin* methods, we may go async. The steps are: 
+        // We use this mechanism to avoid initializing two async objects as logically cleanup+close is one operation.
+        // At any point in the Begin* methods, we may go async. The steps are:
         // - Close inner UdpOutputChannel
         // - Cleanup channel
         // - Close channel
         private class CloseAsyncResult<T> : AsyncResult
             where T : class, IDisposable
         {
-            private static AsyncCompletion completeCloseOutputChannelCallback = new AsyncCompletion(CompleteCloseOutputChannel);
-            private static AsyncCompletion completeBaseCloseCallback = new AsyncCompletion(CompleteBaseClose);
+            private static AsyncCompletion completeCloseOutputChannelCallback = new AsyncCompletion(
+                CompleteCloseOutputChannel
+            );
+            private static AsyncCompletion completeBaseCloseCallback = new AsyncCompletion(
+                CompleteBaseClose
+            );
 
             private UdpChannelBase<T> channel;
             private TimeoutHelper timeoutHelper;
             private ChainedBeginHandler baseBeginClose;
             private ChainedEndHandler baseEndClose;
 
-            public CloseAsyncResult(UdpChannelBase<T> channel, ChainedBeginHandler baseBeginClose, ChainedEndHandler baseEndClose, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                UdpChannelBase<T> channel,
+                ChainedBeginHandler baseBeginClose,
+                ChainedEndHandler baseEndClose,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
@@ -454,7 +520,7 @@ namespace System.ServiceModel.Channels
 
             private static bool CompleteBaseClose(IAsyncResult result)
             {
-                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching exceptions for us. 
+                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching exceptions for us.
                 CloseAsyncResult<T> thisPtr = (CloseAsyncResult<T>)result.AsyncState;
 
                 // We are completing the base class close operation at this point.
@@ -465,7 +531,7 @@ namespace System.ServiceModel.Channels
 
             private static bool CompleteCloseOutputChannel(IAsyncResult result)
             {
-                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching exceptions for us. 
+                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching exceptions for us.
                 CloseAsyncResult<T> thisPtr = (CloseAsyncResult<T>)result.AsyncState;
 
                 // We are completing the base class close operation at this point.
@@ -478,19 +544,27 @@ namespace System.ServiceModel.Channels
 
             private bool BeginCloseOutputChannel()
             {
-                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching the exceptions for us. 
-                IAsyncResult result = this.channel.UdpOutputChannel.BeginClose(this.timeoutHelper.RemainingTime(), this.PrepareAsyncCompletion(completeCloseOutputChannelCallback), this);
-                
-                // SyncContinue calls CompleteCloseOutputChannel for us in sync case. 
+                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching the exceptions for us.
+                IAsyncResult result = this.channel.UdpOutputChannel.BeginClose(
+                    this.timeoutHelper.RemainingTime(),
+                    this.PrepareAsyncCompletion(completeCloseOutputChannelCallback),
+                    this
+                );
+
+                // SyncContinue calls CompleteCloseOutputChannel for us in sync case.
                 return this.SyncContinue(result);
             }
 
             private bool BeginBaseClose()
             {
-                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching the exceptions for us. 
-                IAsyncResult result = this.baseBeginClose(this.timeoutHelper.RemainingTime(), this.PrepareAsyncCompletion(completeBaseCloseCallback), this);
-                
-                // SyncContinue calls CompleteBaseClose for us in sync case. 
+                // AsyncResult.AsyncCompletionWrapperCallback takes care of catching the exceptions for us.
+                IAsyncResult result = this.baseBeginClose(
+                    this.timeoutHelper.RemainingTime(),
+                    this.PrepareAsyncCompletion(completeBaseCloseCallback),
+                    this
+                );
+
+                // SyncContinue calls CompleteBaseClose for us in sync case.
                 return this.SyncContinue(result);
             }
         }

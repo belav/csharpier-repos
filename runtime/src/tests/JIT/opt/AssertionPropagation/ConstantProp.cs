@@ -8,10 +8,13 @@ using Xunit;
 
 public class Sample1
 {
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static int func(int a)
     {
-        int x, y;
+        int x,
+            y;
         x = 5;
         y = a;
         if (a != 1)
@@ -19,6 +22,7 @@ public class Sample1
         else
             return y;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

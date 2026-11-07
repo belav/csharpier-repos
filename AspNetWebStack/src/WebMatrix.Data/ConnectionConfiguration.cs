@@ -9,13 +9,17 @@ namespace WebMatrix.Data
     internal class ConnectionConfiguration : IConnectionConfiguration
     {
         internal ConnectionConfiguration(string providerName, string connectionString)
-            : this(new DbProviderFactoryWrapper(providerName), connectionString)
-        {
-        }
+            : this(new DbProviderFactoryWrapper(providerName), connectionString) { }
 
-        internal ConnectionConfiguration(IDbProviderFactory providerFactory, string connectionString)
+        internal ConnectionConfiguration(
+            IDbProviderFactory providerFactory,
+            string connectionString
+        )
         {
-            Debug.Assert(!String.IsNullOrEmpty(connectionString), "connectionString should not be null");
+            Debug.Assert(
+                !String.IsNullOrEmpty(connectionString),
+                "connectionString should not be null"
+            );
 
             ProviderFactory = providerFactory;
             ConnectionString = connectionString;

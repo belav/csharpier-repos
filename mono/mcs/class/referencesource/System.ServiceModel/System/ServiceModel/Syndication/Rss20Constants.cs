@@ -34,6 +34,5 @@ namespace System.ServiceModel.Syndication
         public const string UrlTag = "url";
         public const string Version = "2.0";
         public const string VersionTag = "version";
-
     }
 }

@@ -18,7 +18,8 @@ internal static class TaskTestUtil
     public static void AssertCommandLine(
         ManagedToolTask task,
         MockEngine engine,
-        params string[] expected)
+        params string[] expected
+    )
     {
         var line = string.Join(" ", expected);
         var rsp = task.GenerateResponseFileContents();
@@ -26,10 +27,13 @@ internal static class TaskTestUtil
         Assert.Equal(expected, task.GenerateCommandLineArgsTaskItems(rsp).Select(x => x.ItemSpec));
 
 #if NETCOREAPP
-        Assert.Equal($"exec \"{task.PathToManagedTool}\"", task.GenerateCommandLineContents().Trim());
+        Assert.Equal(
+            $"exec \"{task.PathToManagedTool}\"",
+            task.GenerateCommandLineContents().Trim()
+        );
 
-        // Can only run the Execute path on .NET Core presently. The internal workings of ToolTask 
-        // will fail if it can't find the tool exe and we don't have csc.exe, vbc.exe, etc ... 
+        // Can only run the Execute path on .NET Core presently. The internal workings of ToolTask
+        // will fail if it can't find the tool exe and we don't have csc.exe, vbc.exe, etc ...
         // deployed in the unit tests. The .NET exe though is available hence Execute will run
         if (task is ManagedCompiler compilerTask)
         {
@@ -40,7 +44,10 @@ internal static class TaskTestUtil
 
             var message = engine.BuildMessages.OfType<TaskCommandLineEventArgs>().Single();
             var commandLine = message.CommandLine.Replace("  ", " ").Trim();
-            Assert.Equal($@"{RuntimeHostInfo.GetDotNetPathOrDefault()} exec ""{task.PathToManagedTool}"" {line}", commandLine);
+            Assert.Equal(
+                $@"{RuntimeHostInfo.GetDotNetPathOrDefault()} exec ""{task.PathToManagedTool}"" {line}",
+                commandLine
+            );
 
             compilerTask.NoConfig = true;
             Assert.Equal("/noconfig", compilerTask.GenerateToolArguments());

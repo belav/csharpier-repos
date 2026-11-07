@@ -10,11 +10,11 @@ namespace System.Runtime.Serialization.Json
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
+    using System.Text;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Xml;
 
     class XmlJsonWriter : XmlDictionaryWriter, IXmlJsonWriterInitializer
     {
@@ -27,17 +27,19 @@ namespace System.Runtime.Serialization.Json
         const char WHITESPACE = ' ';
         const char CARRIAGE_RETURN = '\r';
         const char NEWLINE = '\n';
-        const char BACKSPACE = '\b';  
-        const char FORM_FEED = '\f';  
-        const char HORIZONTAL_TABULATION = '\t';  
+        const char BACKSPACE = '\b';
+        const char FORM_FEED = '\f';
+        const char HORIZONTAL_TABULATION = '\t';
         const string xmlNamespace = "http://www.w3.org/XML/1998/namespace";
         const string xmlnsNamespace = "http://www.w3.org/2000/xmlns/";
 
-        [Fx.Tag.SecurityNote(Critical = "Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         static BinHexEncoding binHexEncoding;
-        
+
         // This array was part of a perf improvement for escaping characters < WHITESPACE.
         static char[] CharacterAbbrevs;
 
@@ -54,6 +56,7 @@ namespace System.Runtime.Serialization.Json
         JsonNodeWriter nodeWriter;
         JsonNodeType[] scopes;
         string serverTypeValue;
+
         // Do not use this field's value anywhere other than the WriteState property.
         // It's OK to set this field's value anywhere and then change the WriteState property appropriately.
         // If it's necessary to check the WriteState outside WriteState, use the WriteState property.
@@ -63,7 +66,8 @@ namespace System.Runtime.Serialization.Json
         string indentChars;
         int indentLevel;
 
-        public XmlJsonWriter() : this(false, null) { }
+        public XmlJsonWriter()
+            : this(false, null) { }
 
         public XmlJsonWriter(bool indent, string indentChars)
         {
@@ -77,7 +81,7 @@ namespace System.Runtime.Serialization.Json
                 this.indentChars = indentChars;
             }
             InitializeWriter();
-            
+
             if (CharacterAbbrevs == null)
             {
                 CharacterAbbrevs = GetCharacterAbbrevs();
@@ -87,16 +91,19 @@ namespace System.Runtime.Serialization.Json
         private static char[] GetCharacterAbbrevs()
         {
             var abbrevs = new char[WHITESPACE];
-            for(int i = 0; i < WHITESPACE; i++)
+            for (int i = 0; i < WHITESPACE; i++)
             {
                 char abbrev;
-                if (!LocalAppContextSwitches.DoNotUseEcmaScriptV6EscapeControlCharacter && TryEscapeControlCharacter((char)i, out abbrev)) 
+                if (
+                    !LocalAppContextSwitches.DoNotUseEcmaScriptV6EscapeControlCharacter
+                    && TryEscapeControlCharacter((char)i, out abbrev)
+                )
                 {
                     abbrevs[i] = abbrev;
                 }
                 else
                 {
-                    abbrevs[i] = (char) 0;
+                    abbrevs[i] = (char)0;
                 }
             }
 
@@ -104,7 +111,7 @@ namespace System.Runtime.Serialization.Json
         }
 
         private static bool TryEscapeControlCharacter(char ch, out char abbrev)
-        {            
+        {
             switch (ch)
             {
                 case BACKSPACE:
@@ -138,7 +145,7 @@ namespace System.Runtime.Serialization.Json
             Number,
             String,
             Object,
-            Array
+            Array,
         };
 
         [Flags]
@@ -154,7 +161,7 @@ namespace System.Runtime.Serialization.Json
         {
             // The XmlWriterSettings object used to create this writer instance.
             // If this writer was not created using the Create method, this property
-            // returns a null reference. 
+            // returns a null reference.
             get { return null; }
         }
 
@@ -198,8 +205,10 @@ namespace System.Runtime.Serialization.Json
 
         static BinHexEncoding BinHexEncoding
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical binHexEncoding field.",
-                Safe = "Get-only properties only need to be protected for write; initialized in getter if null.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical binHexEncoding field.",
+                Safe = "Get-only properties only need to be protected for write; initialized in getter if null."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -215,7 +224,12 @@ namespace System.Runtime.Serialization.Json
         {
             get
             {
-                return (isWritingDataTypeAttribute || isWritingServerTypeAttribute || IsWritingNameAttribute || isWritingXmlnsAttribute);
+                return (
+                    isWritingDataTypeAttribute
+                    || isWritingServerTypeAttribute
+                    || IsWritingNameAttribute
+                    || isWritingXmlnsAttribute
+                );
             }
         }
 
@@ -231,17 +245,29 @@ namespace System.Runtime.Serialization.Json
 
         bool IsWritingNameAttribute
         {
-            get { return (nameState & NameState.IsWritingNameAttribute) == NameState.IsWritingNameAttribute; }
+            get
+            {
+                return (nameState & NameState.IsWritingNameAttribute)
+                    == NameState.IsWritingNameAttribute;
+            }
         }
 
         bool IsWritingNameWithMapping
         {
-            get { return (nameState & NameState.IsWritingNameWithMapping) == NameState.IsWritingNameWithMapping; }
+            get
+            {
+                return (nameState & NameState.IsWritingNameWithMapping)
+                    == NameState.IsWritingNameWithMapping;
+            }
         }
 
         bool WrittenNameWithMapping
         {
-            get { return (nameState & NameState.WrittenNameWithMapping) == NameState.WrittenNameWithMapping; }
+            get
+            {
+                return (nameState & NameState.WrittenNameWithMapping)
+                    == NameState.WrittenNameWithMapping;
+            }
         }
 
         public override void Close()
@@ -328,104 +354,284 @@ namespace System.Runtime.Serialization.Json
             InitializeWriter();
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, bool[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, Int16[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            Int16[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, Int32[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            Int32[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, Int64[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            Int64[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, float[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, double[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, decimal[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, DateTime[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, Guid[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, string localName, string namespaceUri, TimeSpan[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, bool[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, decimal[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, double[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, float[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, int[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, long[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, short[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, DateTime[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, Guid[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
-        public override void WriteArray(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri, TimeSpan[] array, int offset, int count)
+        public override void WriteArray(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonWriteArrayNotSupported))
+            );
         }
 
         public override void WriteBase64(byte[] buffer, int index, int count)
@@ -439,20 +645,30 @@ namespace System.Runtime.Serialization.Json
             if (index < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "index",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
 
             if (count < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             if (count > buffer.Length - index)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count",
-                    SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace,
-                    buffer.Length - index)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - index)
+                    )
+                );
             }
 
             StartText();
@@ -470,20 +686,30 @@ namespace System.Runtime.Serialization.Json
             if (index < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "index",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
 
             if (count < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             if (count > buffer.Length - index)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count",
-                    SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace,
-                    buffer.Length - index)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - index)
+                    )
+                );
             }
 
             StartText();
@@ -511,20 +737,30 @@ namespace System.Runtime.Serialization.Json
             if (index < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "index",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
 
             if (count < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             if (count > buffer.Length - index)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count",
-                    SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace,
-                    buffer.Length - index)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - index)
+                    )
+                );
             }
 
             WriteString(new string(buffer, index, count));
@@ -532,14 +768,28 @@ namespace System.Runtime.Serialization.Json
 
         public override void WriteComment(string text)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteComment")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteComment"))
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "2#sysid", Justification = "This method is derived from the base")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "1#pubid", Justification = "This method is derived from the base")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "2#sysid",
+            Justification = "This method is derived from the base"
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "1#pubid",
+            Justification = "This method is derived from the base"
+        )]
         public override void WriteDocType(string name, string pubid, string sysid, string subset)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteDocType")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteDocType"))
+            );
         }
 
         public override void WriteEndAttribute()
@@ -551,54 +801,60 @@ namespace System.Runtime.Serialization.Json
             if (!HasOpenAttribute)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonNoMatchingStartAttribute)));
+                    new XmlException(SR.GetString(SR.JsonNoMatchingStartAttribute))
+                );
             }
 
-            Fx.Assert(!(isWritingDataTypeAttribute && isWritingServerTypeAttribute),
-                "Can not write type attribute and __type attribute at the same time.");
+            Fx.Assert(
+                !(isWritingDataTypeAttribute && isWritingServerTypeAttribute),
+                "Can not write type attribute and __type attribute at the same time."
+            );
 
             if (isWritingDataTypeAttribute)
             {
                 switch (attributeText)
                 {
                     case JsonGlobals.numberString:
-                        {
-                            ThrowIfServerTypeWritten(JsonGlobals.numberString);
-                            dataType = JsonDataType.Number;
-                            break;
-                        }
+                    {
+                        ThrowIfServerTypeWritten(JsonGlobals.numberString);
+                        dataType = JsonDataType.Number;
+                        break;
+                    }
                     case JsonGlobals.stringString:
-                        {
-                            ThrowIfServerTypeWritten(JsonGlobals.stringString);
-                            dataType = JsonDataType.String;
-                            break;
-                        }
+                    {
+                        ThrowIfServerTypeWritten(JsonGlobals.stringString);
+                        dataType = JsonDataType.String;
+                        break;
+                    }
                     case JsonGlobals.arrayString:
-                        {
-                            ThrowIfServerTypeWritten(JsonGlobals.arrayString);
-                            dataType = JsonDataType.Array;
-                            break;
-                        }
+                    {
+                        ThrowIfServerTypeWritten(JsonGlobals.arrayString);
+                        dataType = JsonDataType.Array;
+                        break;
+                    }
                     case JsonGlobals.objectString:
-                        {
-                            dataType = JsonDataType.Object;
-                            break;
-                        }
+                    {
+                        dataType = JsonDataType.Object;
+                        break;
+                    }
                     case JsonGlobals.nullString:
-                        {
-                            ThrowIfServerTypeWritten(JsonGlobals.nullString);
-                            dataType = JsonDataType.Null;
-                            break;
-                        }
+                    {
+                        ThrowIfServerTypeWritten(JsonGlobals.nullString);
+                        dataType = JsonDataType.Null;
+                        break;
+                    }
                     case JsonGlobals.booleanString:
-                        {
-                            ThrowIfServerTypeWritten(JsonGlobals.booleanString);
-                            dataType = JsonDataType.Boolean;
-                            break;
-                        }
+                    {
+                        ThrowIfServerTypeWritten(JsonGlobals.booleanString);
+                        dataType = JsonDataType.Boolean;
+                        break;
+                    }
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(SR.GetString(SR.JsonUnexpectedAttributeValue, attributeText)));
+                            new XmlException(
+                                SR.GetString(SR.JsonUnexpectedAttributeValue, attributeText)
+                            )
+                        );
                 }
 
                 attributeText = null;
@@ -616,7 +872,10 @@ namespace System.Runtime.Serialization.Json
                 isWritingServerTypeAttribute = false;
 
                 // we are writing __type after type="object" (enforced by WSE)
-                if ((!IsWritingNameWithMapping || WrittenNameWithMapping) && dataType == JsonDataType.Object)
+                if (
+                    (!IsWritingNameWithMapping || WrittenNameWithMapping)
+                    && dataType == JsonDataType.Object
+                )
                 {
                     WriteServerTypeAttribute();
                 }
@@ -632,7 +891,10 @@ namespace System.Runtime.Serialization.Json
             {
                 if (!string.IsNullOrEmpty(attributeText) && isWritingXmlnsAttributeDefaultNs)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("ns", SR.GetString(SR.JsonNamespaceMustBeEmpty, attributeText));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "ns",
+                        SR.GetString(SR.JsonNamespaceMustBeEmpty, attributeText)
+                    );
                 }
 
                 attributeText = null;
@@ -666,12 +928,16 @@ namespace System.Runtime.Serialization.Json
             if (depth == 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonEndElementNoOpenNodes)));
+                    new XmlException(SR.GetString(SR.JsonEndElementNoOpenNodes))
+                );
             }
             if (HasOpenAttribute)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonOpenAttributeMustBeClosedFirst, "WriteEndElement")));
+                    new XmlException(
+                        SR.GetString(SR.JsonOpenAttributeMustBeClosedFirst, "WriteEndElement")
+                    )
+                );
             }
 
             endElementBuffer = false;
@@ -705,8 +971,15 @@ namespace System.Runtime.Serialization.Json
                 if ((dataType == JsonDataType.None) && (serverTypeValue != null))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonMustSpecifyDataType,
-                        JsonGlobals.typeString, JsonGlobals.objectString, JsonGlobals.serverTypeString)));
+                        new XmlException(
+                            SR.GetString(
+                                SR.JsonMustSpecifyDataType,
+                                JsonGlobals.typeString,
+                                JsonGlobals.objectString,
+                                JsonGlobals.serverTypeString
+                            )
+                        )
+                    );
                 }
 
                 if (IsWritingNameWithMapping && !WrittenNameWithMapping)
@@ -714,13 +987,19 @@ namespace System.Runtime.Serialization.Json
                     // Ending </item> without writing item attribute
                     // Not providing a better error message because localization deadline has passed.
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonMustSpecifyDataType,
-                        JsonGlobals.itemString, string.Empty, JsonGlobals.itemString)));
+                        new XmlException(
+                            SR.GetString(
+                                SR.JsonMustSpecifyDataType,
+                                JsonGlobals.itemString,
+                                string.Empty,
+                                JsonGlobals.itemString
+                            )
+                        )
+                    );
                 }
 
-                // the element is empty, it does not have any content, 
-                if ((dataType == JsonDataType.None) ||
-                    (dataType == JsonDataType.String))
+                // the element is empty, it does not have any content,
+                if ((dataType == JsonDataType.None) || (dataType == JsonDataType.String))
                 {
                     nodeWriter.WriteText(JsonGlobals.QuoteChar);
                     nodeWriter.WriteText(JsonGlobals.QuoteChar);
@@ -730,8 +1009,13 @@ namespace System.Runtime.Serialization.Json
             {
                 // Assert on only StandaloneText and EndElement because preceding if
                 //    conditions take care of checking for QuotedText and Element.
-                Fx.Assert((nodeType == JsonNodeType.StandaloneText) || (nodeType == JsonNodeType.EndElement),
-                    "nodeType has invalid value " + nodeType + ". Expected it to be QuotedText, Element, StandaloneText, or EndElement.");
+                Fx.Assert(
+                    (nodeType == JsonNodeType.StandaloneText)
+                        || (nodeType == JsonNodeType.EndElement),
+                    "nodeType has invalid value "
+                        + nodeType
+                        + ". Expected it to be QuotedText, Element, StandaloneText, or EndElement."
+                );
             }
             if (depth != 0)
             {
@@ -771,7 +1055,9 @@ namespace System.Runtime.Serialization.Json
 
         public override void WriteEntityRef(string name)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteEntityRef")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteEntityRef"))
+            );
         }
 
         public override void WriteFullEndElement()
@@ -788,12 +1074,19 @@ namespace System.Runtime.Serialization.Json
 
             if (!name.Equals("xml", StringComparison.OrdinalIgnoreCase))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.JsonXmlProcessingInstructionNotSupported), "name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.JsonXmlProcessingInstructionNotSupported),
+                        "name"
+                    )
+                );
             }
 
             if (WriteState != WriteState.Start)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.JsonXmlInvalidDeclaration)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.JsonXmlInvalidDeclaration))
+                );
             }
         }
 
@@ -805,8 +1098,10 @@ namespace System.Runtime.Serialization.Json
             }
             if (localName.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("localName",
-                    SR.GetString(SR.JsonInvalidLocalNameEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "localName",
+                    SR.GetString(SR.JsonInvalidLocalNameEmpty)
+                );
             }
             if (ns == null)
             {
@@ -832,26 +1127,39 @@ namespace System.Runtime.Serialization.Json
             if (index < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "index",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
 
             if (count < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeNonNegative)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             if (count > buffer.Length - index)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count",
-                    SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace,
-                    buffer.Length - index)));
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - index)
+                    )
+                );
             }
 
             WriteString(new string(buffer, index, count));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")] // Microsoft, ToLowerInvariant is just used in Json error message
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )] // Microsoft, ToLowerInvariant is just used in Json error message
         public override void WriteStartAttribute(string prefix, string localName, string ns)
         {
             if (IsClosed)
@@ -864,17 +1172,34 @@ namespace System.Runtime.Serialization.Json
                 {
                     if (ns != null && ns != xmlnsNamespace)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(System.Runtime.Serialization.SR.GetString(System.Runtime.Serialization.SR.XmlPrefixBoundToNamespace, "xmlns", xmlnsNamespace, ns), "ns"));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(
+                                System.Runtime.Serialization.SR.GetString(
+                                    System.Runtime.Serialization.SR.XmlPrefixBoundToNamespace,
+                                    "xmlns",
+                                    xmlnsNamespace,
+                                    ns
+                                ),
+                                "ns"
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("prefix", SR.GetString(SR.JsonPrefixMustBeNullOrEmpty, prefix));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "prefix",
+                        SR.GetString(SR.JsonPrefixMustBeNullOrEmpty, prefix)
+                    );
                 }
             }
             else
             {
-                if (IsWritingNameWithMapping && ns == xmlnsNamespace && localName != JsonGlobals.xmlnsPrefix)
+                if (
+                    IsWritingNameWithMapping
+                    && ns == xmlnsNamespace
+                    && localName != JsonGlobals.xmlnsPrefix
+                )
                 {
                     prefix = JsonGlobals.xmlnsPrefix;
                 }
@@ -885,14 +1210,21 @@ namespace System.Runtime.Serialization.Json
                 {
                     prefix = JsonGlobals.xmlnsPrefix;
                 }
-                else if (string.IsNullOrEmpty(prefix) && localName == JsonGlobals.xmlnsPrefix && ns == xmlnsNamespace)
+                else if (
+                    string.IsNullOrEmpty(prefix)
+                    && localName == JsonGlobals.xmlnsPrefix
+                    && ns == xmlnsNamespace
+                )
                 {
                     prefix = JsonGlobals.xmlnsPrefix;
                     isWritingXmlnsAttributeDefaultNs = true;
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("ns", SR.GetString(SR.JsonNamespaceMustBeEmpty, ns));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "ns",
+                        SR.GetString(SR.JsonNamespaceMustBeEmpty, ns)
+                    );
                 }
             }
             if (localName == null)
@@ -901,16 +1233,24 @@ namespace System.Runtime.Serialization.Json
             }
             if (localName.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("localName", SR.GetString(SR.JsonInvalidLocalNameEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "localName",
+                    SR.GetString(SR.JsonInvalidLocalNameEmpty)
+                );
             }
             if ((nodeType != JsonNodeType.Element) && !wroteServerTypeAttribute)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.JsonAttributeMustHaveElement)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.JsonAttributeMustHaveElement))
+                );
             }
             if (HasOpenAttribute)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonOpenAttributeMustBeClosedFirst, "WriteStartAttribute")));
+                    new XmlException(
+                        SR.GetString(SR.JsonOpenAttributeMustBeClosedFirst, "WriteStartAttribute")
+                    )
+                );
             }
             if (prefix == JsonGlobals.xmlnsPrefix)
             {
@@ -921,7 +1261,10 @@ namespace System.Runtime.Serialization.Json
                 if (dataType != JsonDataType.None)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonAttributeAlreadyWritten, JsonGlobals.typeString)));
+                        new XmlException(
+                            SR.GetString(SR.JsonAttributeAlreadyWritten, JsonGlobals.typeString)
+                        )
+                    );
                 }
 
                 isWritingDataTypeAttribute = true;
@@ -931,14 +1274,28 @@ namespace System.Runtime.Serialization.Json
                 if (serverTypeValue != null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonAttributeAlreadyWritten, JsonGlobals.serverTypeString)));
+                        new XmlException(
+                            SR.GetString(
+                                SR.JsonAttributeAlreadyWritten,
+                                JsonGlobals.serverTypeString
+                            )
+                        )
+                    );
                 }
 
                 if ((dataType != JsonDataType.None) && (dataType != JsonDataType.Object))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonServerTypeSpecifiedForInvalidDataType,
-                        JsonGlobals.serverTypeString, JsonGlobals.typeString, dataType.ToString().ToLowerInvariant(), JsonGlobals.objectString)));
+                        new XmlException(
+                            SR.GetString(
+                                SR.JsonServerTypeSpecifiedForInvalidDataType,
+                                JsonGlobals.serverTypeString,
+                                JsonGlobals.typeString,
+                                dataType.ToString().ToLowerInvariant(),
+                                JsonGlobals.objectString
+                            )
+                        )
+                    );
                 }
 
                 isWritingServerTypeAttribute = true;
@@ -948,7 +1305,10 @@ namespace System.Runtime.Serialization.Json
                 if (WrittenNameWithMapping)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonAttributeAlreadyWritten, JsonGlobals.itemString)));
+                        new XmlException(
+                            SR.GetString(SR.JsonAttributeAlreadyWritten, JsonGlobals.itemString)
+                        )
+                    );
                 }
 
                 if (!IsWritingNameWithMapping)
@@ -956,26 +1316,30 @@ namespace System.Runtime.Serialization.Json
                     // Don't write attribute with local name "item" if <item> element is not open.
                     // Not providing a better error message because localization deadline has passed.
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonEndElementNoOpenNodes)));
+                        new XmlException(SR.GetString(SR.JsonEndElementNoOpenNodes))
+                    );
                 }
 
                 nameState |= NameState.IsWritingNameAttribute;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("localName", SR.GetString(SR.JsonUnexpectedAttributeLocalName, localName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "localName",
+                    SR.GetString(SR.JsonUnexpectedAttributeLocalName, localName)
+                );
             }
         }
 
         public override void WriteStartDocument(bool standalone)
         {
-            // In XML, writes the XML declaration with the version "1.0" and the standalone attribute. 
+            // In XML, writes the XML declaration with the version "1.0" and the standalone attribute.
             WriteStartDocument();
         }
 
         public override void WriteStartDocument()
         {
-            // In XML, writes the XML declaration with the version "1.0". 
+            // In XML, writes the XML declaration with the version "1.0".
             if (IsClosed)
             {
                 ThrowClosed();
@@ -984,7 +1348,13 @@ namespace System.Runtime.Serialization.Json
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new XmlException(
-                    SR.GetString(SR.JsonInvalidWriteState, "WriteStartDocument", WriteState.ToString())));
+                        SR.GetString(
+                            SR.JsonInvalidWriteState,
+                            "WriteStartDocument",
+                            WriteState.ToString()
+                        )
+                    )
+                );
             }
         }
 
@@ -996,21 +1366,29 @@ namespace System.Runtime.Serialization.Json
             }
             if (localName.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("localName",
-                    SR.GetString(SR.JsonInvalidLocalNameEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "localName",
+                    SR.GetString(SR.JsonInvalidLocalNameEmpty)
+                );
             }
             if (!string.IsNullOrEmpty(prefix))
             {
                 if (string.IsNullOrEmpty(ns) || !TrySetWritingNameWithMapping(localName, ns))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("prefix", SR.GetString(SR.JsonPrefixMustBeNullOrEmpty, prefix));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "prefix",
+                        SR.GetString(SR.JsonPrefixMustBeNullOrEmpty, prefix)
+                    );
                 }
             }
             if (!string.IsNullOrEmpty(ns))
             {
                 if (!TrySetWritingNameWithMapping(localName, ns))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("ns", SR.GetString(SR.JsonNamespaceMustBeEmpty, ns));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "ns",
+                        SR.GetString(SR.JsonNamespaceMustBeEmpty, ns)
+                    );
                 }
             }
             if (IsClosed)
@@ -1020,82 +1398,109 @@ namespace System.Runtime.Serialization.Json
             if (HasOpenAttribute)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonOpenAttributeMustBeClosedFirst, "WriteStartElement")));
+                    new XmlException(
+                        SR.GetString(SR.JsonOpenAttributeMustBeClosedFirst, "WriteStartElement")
+                    )
+                );
             }
             if ((nodeType != JsonNodeType.None) && depth == 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonMultipleRootElementsNotAllowedOnWriter)));
+                    new XmlException(SR.GetString(SR.JsonMultipleRootElementsNotAllowedOnWriter))
+                );
             }
 
             switch (nodeType)
             {
                 case JsonNodeType.None:
+                {
+                    if (!localName.Equals(JsonGlobals.rootString))
                     {
-                        if (!localName.Equals(JsonGlobals.rootString))
-                        {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(SR.GetString(SR.JsonInvalidRootElementName, localName, JsonGlobals.rootString)));
-                        }
-                        EnterScope(JsonNodeType.Element);
-                        break;
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.JsonInvalidRootElementName,
+                                    localName,
+                                    JsonGlobals.rootString
+                                )
+                            )
+                        );
                     }
+                    EnterScope(JsonNodeType.Element);
+                    break;
+                }
                 case JsonNodeType.Element:
+                {
+                    if ((dataType != JsonDataType.Array) && (dataType != JsonDataType.Object))
                     {
-                        if ((dataType != JsonDataType.Array) && (dataType != JsonDataType.Object))
-                        {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(SR.GetString(SR.JsonNodeTypeArrayOrObjectNotSpecified)));
-                        }
-                        if (indent)
-                        {
-                            WriteNewLine();
-                            WriteIndent();
-                        }
-                        if (!IsWritingCollection)
-                        {
-                            if (nameState != NameState.IsWritingNameWithMapping)
-                            {
-                                WriteJsonElementName(localName);
-                            }
-                        }
-                        else if (!localName.Equals(JsonGlobals.itemString))
-                        {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(SR.GetString(SR.JsonInvalidItemNameForArrayElement, localName, JsonGlobals.itemString)));
-                        }
-                        EnterScope(JsonNodeType.Element);
-                        break;
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.JsonNodeTypeArrayOrObjectNotSpecified))
+                        );
                     }
+                    if (indent)
+                    {
+                        WriteNewLine();
+                        WriteIndent();
+                    }
+                    if (!IsWritingCollection)
+                    {
+                        if (nameState != NameState.IsWritingNameWithMapping)
+                        {
+                            WriteJsonElementName(localName);
+                        }
+                    }
+                    else if (!localName.Equals(JsonGlobals.itemString))
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.JsonInvalidItemNameForArrayElement,
+                                    localName,
+                                    JsonGlobals.itemString
+                                )
+                            )
+                        );
+                    }
+                    EnterScope(JsonNodeType.Element);
+                    break;
+                }
                 case JsonNodeType.EndElement:
+                {
+                    if (endElementBuffer)
                     {
-                        if (endElementBuffer)
-                        {
-                            nodeWriter.WriteText(JsonGlobals.MemberSeparatorChar);
-                        }
-                        if (indent)
-                        {
-                            WriteNewLine();
-                            WriteIndent();
-                        }
-                        if (!IsWritingCollection)
-                        {
-                            if (nameState != NameState.IsWritingNameWithMapping)
-                            {
-                                WriteJsonElementName(localName);
-                            }
-                        }
-                        else if (!localName.Equals(JsonGlobals.itemString))
-                        {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(SR.GetString(SR.JsonInvalidItemNameForArrayElement, localName, JsonGlobals.itemString)));
-                        }
-                        EnterScope(JsonNodeType.Element);
-                        break;
+                        nodeWriter.WriteText(JsonGlobals.MemberSeparatorChar);
                     }
+                    if (indent)
+                    {
+                        WriteNewLine();
+                        WriteIndent();
+                    }
+                    if (!IsWritingCollection)
+                    {
+                        if (nameState != NameState.IsWritingNameWithMapping)
+                        {
+                            WriteJsonElementName(localName);
+                        }
+                    }
+                    else if (!localName.Equals(JsonGlobals.itemString))
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.JsonInvalidItemNameForArrayElement,
+                                    localName,
+                                    JsonGlobals.itemString
+                                )
+                            )
+                        );
+                    }
+                    EnterScope(JsonNodeType.Element);
+                    break;
+                }
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonInvalidStartElementCall)));
+                        new XmlException(SR.GetString(SR.JsonInvalidStartElementCall))
+                    );
             }
 
             isWritingDataTypeAttribute = false;
@@ -1121,7 +1526,15 @@ namespace System.Runtime.Serialization.Json
                 }
 
                 // do work only when not indenting whitespaces
-                if (!((this.dataType == JsonDataType.Array || this.dataType == JsonDataType.Object || this.nodeType == JsonNodeType.EndElement) && XmlConverter.IsWhitespace(text)))
+                if (
+                    !(
+                        (
+                            this.dataType == JsonDataType.Array
+                            || this.dataType == JsonDataType.Object
+                            || this.nodeType == JsonNodeType.EndElement
+                        ) && XmlConverter.IsWhitespace(text)
+                    )
+                )
                 {
                     StartText();
                     WriteEscapedJsonString(text);
@@ -1230,7 +1643,12 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Whitespace", Justification = "This method is derived from the base")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "Whitespace",
+            Justification = "This method is derived from the base"
+        )]
         public override void WriteWhitespace(string ws)
         {
             if (IsClosed)
@@ -1245,13 +1663,12 @@ namespace System.Runtime.Serialization.Json
             for (int i = 0; i < ws.Length; ++i)
             {
                 char c = ws[i];
-                if (c != ' ' &&
-                    c != '\t' &&
-                    c != '\n' &&
-                    c != '\r')
+                if (c != ' ' && c != '\t' && c != '\n' && c != '\r')
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("ws",
-                        SR.GetString(SR.JsonOnlyWhitespace, c.ToString(), "WriteWhitespace"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "ws",
+                        SR.GetString(SR.JsonOnlyWhitespace, c.ToString(), "WriteWhitespace")
+                    );
                 }
             }
 
@@ -1260,19 +1677,34 @@ namespace System.Runtime.Serialization.Json
 
         public override void WriteXmlAttribute(string localName, string value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteXmlAttribute")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR.GetString(SR.JsonMethodNotSupported, "WriteXmlAttribute")
+                )
+            );
         }
 
-        public override void WriteXmlAttribute(XmlDictionaryString localName, XmlDictionaryString value)
+        public override void WriteXmlAttribute(
+            XmlDictionaryString localName,
+            XmlDictionaryString value
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteXmlAttribute")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR.GetString(SR.JsonMethodNotSupported, "WriteXmlAttribute")
+                )
+            );
         }
 
         public override void WriteXmlnsAttribute(string prefix, string namespaceUri)
         {
             if (!IsWritingNameWithMapping)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteXmlnsAttribute")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.JsonMethodNotSupported, "WriteXmlnsAttribute")
+                    )
+                );
             }
         }
 
@@ -1280,21 +1712,30 @@ namespace System.Runtime.Serialization.Json
         {
             if (!IsWritingNameWithMapping)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.JsonMethodNotSupported, "WriteXmlnsAttribute")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.JsonMethodNotSupported, "WriteXmlnsAttribute")
+                    )
+                );
             }
         }
 
         internal static bool CharacterNeedsEscaping(char ch)
         {
-            return (ch == FORWARD_SLASH || ch == JsonGlobals.QuoteChar || ch < WHITESPACE || ch == BACK_SLASH
-                || (ch >= HIGH_SURROGATE_START && (ch <= LOW_SURROGATE_END || ch >= MAX_CHAR)));
+            return (
+                ch == FORWARD_SLASH
+                || ch == JsonGlobals.QuoteChar
+                || ch < WHITESPACE
+                || ch == BACK_SLASH
+                || (ch >= HIGH_SURROGATE_START && (ch <= LOW_SURROGATE_END || ch >= MAX_CHAR))
+            );
         }
-
 
         static void ThrowClosed()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.JsonWriterClosed)));
+                new InvalidOperationException(SR.GetString(SR.JsonWriterClosed))
+            );
         }
 
         void CheckText(JsonNodeType nextNodeType)
@@ -1307,15 +1748,21 @@ namespace System.Runtime.Serialization.Json
             {
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    System.Runtime.Serialization.SR.GetString(System.Runtime.Serialization.SR.XmlIllegalOutsideRoot)));
+                        System.Runtime.Serialization.SR.GetString(
+                            System.Runtime.Serialization.SR.XmlIllegalOutsideRoot
+                        )
+                    )
+                );
             }
 
-            if ((nextNodeType == JsonNodeType.StandaloneText) &&
-                (nodeType == JsonNodeType.QuotedText))
+            if (
+                (nextNodeType == JsonNodeType.StandaloneText)
+                && (nodeType == JsonNodeType.QuotedText)
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                    SR.GetString(SR.JsonCannotWriteStandaloneTextAfterQuotedText)));
+                    new XmlException(SR.GetString(SR.JsonCannotWriteStandaloneTextAfterQuotedText))
+                );
             }
         }
 
@@ -1382,14 +1829,25 @@ namespace System.Runtime.Serialization.Json
         {
             if (HasOpenAttribute)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.JsonMustUseWriteStringForWritingAttributeValues)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.JsonMustUseWriteStringForWritingAttributeValues)
+                    )
+                );
             }
 
             if ((dataType == JsonDataType.None) && (serverTypeValue != null))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonMustSpecifyDataType,
-                    JsonGlobals.typeString, JsonGlobals.objectString, JsonGlobals.serverTypeString)));
+                    new XmlException(
+                        SR.GetString(
+                            SR.JsonMustSpecifyDataType,
+                            JsonGlobals.typeString,
+                            JsonGlobals.objectString,
+                            JsonGlobals.serverTypeString
+                        )
+                    )
+                );
             }
 
             if (IsWritingNameWithMapping && !WrittenNameWithMapping)
@@ -1397,12 +1855,18 @@ namespace System.Runtime.Serialization.Json
                 // Don't write out any text content unless the local name has been written.
                 // Not providing a better error message because localization deadline has passed.
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonMustSpecifyDataType,
-                    JsonGlobals.itemString, string.Empty, JsonGlobals.itemString)));
+                    new XmlException(
+                        SR.GetString(
+                            SR.JsonMustSpecifyDataType,
+                            JsonGlobals.itemString,
+                            string.Empty,
+                            JsonGlobals.itemString
+                        )
+                    )
+                );
             }
 
-            if ((dataType == JsonDataType.String) ||
-                (dataType == JsonDataType.None))
+            if ((dataType == JsonDataType.String) || (dataType == JsonDataType.None))
             {
                 CheckText(JsonNodeType.QuotedText);
                 if (nodeType != JsonNodeType.QuotedText)
@@ -1411,8 +1875,7 @@ namespace System.Runtime.Serialization.Json
                 }
                 nodeType = JsonNodeType.QuotedText;
             }
-            else if ((dataType == JsonDataType.Number) ||
-                (dataType == JsonDataType.Boolean))
+            else if ((dataType == JsonDataType.Number) || (dataType == JsonDataType.Boolean))
             {
                 CheckText(JsonNodeType.StandaloneText);
                 nodeType = JsonNodeType.StandaloneText;
@@ -1428,24 +1891,41 @@ namespace System.Runtime.Serialization.Json
             if (serverTypeValue != null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonInvalidDataTypeSpecifiedForServerType,
-                    JsonGlobals.typeString, dataTypeSpecified, JsonGlobals.serverTypeString, JsonGlobals.objectString)));
+                    new XmlException(
+                        SR.GetString(
+                            SR.JsonInvalidDataTypeSpecifiedForServerType,
+                            JsonGlobals.typeString,
+                            dataTypeSpecified,
+                            JsonGlobals.serverTypeString,
+                            JsonGlobals.objectString
+                        )
+                    )
+                );
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")] // Microsoft, ToLowerInvariant is just used in Json error message
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )] // Microsoft, ToLowerInvariant is just used in Json error message
         void ThrowInvalidAttributeContent()
         {
             if (HasOpenAttribute)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonInvalidMethodBetweenStartEndAttribute)));
+                    new XmlException(SR.GetString(SR.JsonInvalidMethodBetweenStartEndAttribute))
+                );
             }
             else
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonCannotWriteTextAfterNonTextAttribute,
-                    dataType.ToString().ToLowerInvariant())));
+                    new XmlException(
+                        SR.GetString(
+                            SR.JsonCannotWriteTextAfterNonTextAttribute,
+                            dataType.ToString().ToLowerInvariant()
+                        )
+                    )
+                );
             }
         }
 
@@ -1466,24 +1946,24 @@ namespace System.Runtime.Serialization.Json
                 switch (dataType)
                 {
                     case JsonDataType.Array:
-                        {
-                            EnterScope(JsonNodeType.Collection);
-                            nodeWriter.WriteText(JsonGlobals.CollectionChar);
-                            indentLevel++;
-                            break;
-                        }
+                    {
+                        EnterScope(JsonNodeType.Collection);
+                        nodeWriter.WriteText(JsonGlobals.CollectionChar);
+                        indentLevel++;
+                        break;
+                    }
                     case JsonDataType.Object:
-                        {
-                            EnterScope(JsonNodeType.Object);
-                            nodeWriter.WriteText(JsonGlobals.ObjectChar);
-                            indentLevel++;
-                            break;
-                        }
+                    {
+                        EnterScope(JsonNodeType.Object);
+                        nodeWriter.WriteText(JsonGlobals.ObjectChar);
+                        indentLevel++;
+                        break;
+                    }
                     case JsonDataType.Null:
-                        {
-                            nodeWriter.WriteText(JsonGlobals.nullString);
-                            break;
-                        }
+                    {
+                        nodeWriter.WriteText(JsonGlobals.nullString);
+                        break;
+                    }
                     default:
                         break;
                 }
@@ -1507,7 +1987,7 @@ namespace System.Runtime.Serialization.Json
                 {
                     char ch = chars[j];
                     if (ch <= FORWARD_SLASH)
-                    {                        
+                    {
                         if (ch == FORWARD_SLASH || ch == JsonGlobals.QuoteChar)
                         {
                             nodeWriter.WriteChars(chars + i, j - i);
@@ -1522,14 +2002,16 @@ namespace System.Runtime.Serialization.Json
                             if (CharacterAbbrevs[ch] == 0)
                             {
                                 nodeWriter.WriteText('u');
-                                nodeWriter.WriteText(string.Format(CultureInfo.InvariantCulture, "{0:x4}", (int)ch));
+                                nodeWriter.WriteText(
+                                    string.Format(CultureInfo.InvariantCulture, "{0:x4}", (int)ch)
+                                );
                                 i = j + 1;
                             }
                             else
                             {
                                 nodeWriter.WriteText(CharacterAbbrevs[ch]);
                                 i = j + 1;
-                            }                      
+                            }
                         }
                     }
                     else if (ch == BACK_SLASH)
@@ -1539,12 +2021,17 @@ namespace System.Runtime.Serialization.Json
                         nodeWriter.WriteText(ch);
                         i = j + 1;
                     }
-                    else if ((ch >= HIGH_SURROGATE_START && (ch <= LOW_SURROGATE_END || ch >= MAX_CHAR)) || IsUnicodeNewlineCharacter(ch))
+                    else if (
+                        (ch >= HIGH_SURROGATE_START && (ch <= LOW_SURROGATE_END || ch >= MAX_CHAR))
+                        || IsUnicodeNewlineCharacter(ch)
+                    )
                     {
                         nodeWriter.WriteChars(chars + i, j - i);
                         nodeWriter.WriteText(BACK_SLASH);
                         nodeWriter.WriteText('u');
-                        nodeWriter.WriteText(string.Format(CultureInfo.InvariantCulture, "{0:x4}", (int)ch));
+                        nodeWriter.WriteText(
+                            string.Format(CultureInfo.InvariantCulture, "{0:x4}", (int)ch)
+                        );
                         i = j + 1;
                     }
                 }
@@ -1595,7 +2082,9 @@ namespace System.Runtime.Serialization.Json
 
             if (value == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("value")
+                );
             }
 
             if (value is ulong)
@@ -1652,7 +2141,9 @@ namespace System.Runtime.Serialization.Json
             }
             else if (value.GetType().IsArray)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.JsonNestedArraysNotSupported), "value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.JsonNestedArraysNotSupported), "value")
+                );
             }
             else
             {
@@ -1683,10 +2174,10 @@ namespace System.Runtime.Serialization.Json
         {
             // This method is called only if WriteValue(object) is called with an array
             // The contract for XmlWriter.WriteValue(object) requires that this object array be written out as a string.
-            // E.g. WriteValue(new int[] { 1, 2, 3}) should be equivalent to WriteString("1 2 3").             
+            // E.g. WriteValue(new int[] { 1, 2, 3}) should be equivalent to WriteString("1 2 3").
             JsonDataType oldDataType = dataType;
             // Set attribute mode to String because WritePrimitiveValue might write numerical text.
-            //  Calls to methods that write numbers can't be mixed with calls that write quoted text unless the attribute mode is explictly string.            
+            //  Calls to methods that write numbers can't be mixed with calls that write quoted text unless the attribute mode is explictly string.
             dataType = JsonDataType.String;
             StartText();
             for (int i = 0; i < array.Length; i++)

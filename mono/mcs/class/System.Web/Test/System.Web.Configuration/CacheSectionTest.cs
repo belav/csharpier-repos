@@ -1,5 +1,5 @@
 //
-// CacheSectionTest.cs 
+// CacheSectionTest.cs
 //	- unit tests for System.Web.Configuration.CacheSection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,46 +27,43 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class CacheSectionTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            CacheSection c = new CacheSection();
+            Assert.AreEqual(false, c.DisableExpiration, "A1");
+            Assert.AreEqual(false, c.DisableMemoryCollection, "A2");
+            Assert.AreEqual(0, c.PercentagePhysicalMemoryUsedLimit, "A3");
+            Assert.AreEqual(0, c.PrivateBytesLimit, "A4");
+            Assert.AreEqual(TimeSpan.FromMinutes(2), c.PrivateBytesPollTime, "A4");
+        }
 
-	[TestFixture]
-	public class CacheSectionTest  {
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void PercentagePhysicalMemoryUsedLimit_validationFailure()
+        {
+            CacheSection c = new CacheSection();
+            c.PercentagePhysicalMemoryUsedLimit = -1;
+        }
 
-		[Test]
-		public void Defaults ()
-		{
-			CacheSection c = new CacheSection ();
-			Assert.AreEqual (false, c.DisableExpiration, "A1");
-			Assert.AreEqual (false, c.DisableMemoryCollection, "A2");
-			Assert.AreEqual (0, c.PercentagePhysicalMemoryUsedLimit, "A3");
-			Assert.AreEqual (0, c.PrivateBytesLimit, "A4");
-			Assert.AreEqual (TimeSpan.FromMinutes (2), c.PrivateBytesPollTime, "A4");
-		}
-
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void PercentagePhysicalMemoryUsedLimit_validationFailure()
-		{
-			CacheSection c = new CacheSection ();
-			c.PercentagePhysicalMemoryUsedLimit = -1;
-		}
-
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void PrivateBytesLimit_validationFailure ()
-		{
-			CacheSection c = new CacheSection ();
-			c.PrivateBytesLimit = -1L;
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void PrivateBytesLimit_validationFailure()
+        {
+            CacheSection c = new CacheSection();
+            c.PrivateBytesLimit = -1L;
+        }
+    }
 }
-

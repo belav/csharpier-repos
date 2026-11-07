@@ -15,19 +15,17 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         string city;
         string state;
         int zip;
-        
+
         [NonSerialized]
         float privateData;
-        
-        public string Apartment 
-        { 
+
+        public string Apartment
+        {
             get { return null; }
             set { }
         }
 
-        public Address()
-        {
-        }
+        public Address() { }
     }
 
     [Serializable]
@@ -37,20 +35,17 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         string city;
         string state;
         int zip;
-        
+
         [NonSerialized]
         float privateData;
-
     }
-    
+
     [Serializable]
     public class Employee //: DataContractTypes.Person2
     {
-        ArrayTypes.Company company;    
+        ArrayTypes.Company company;
 
-        Employee(StreamingContext context)
-        {
-        }
+        Employee(StreamingContext context) { }
     }
 
     [Serializable]
@@ -63,5 +58,4 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     {
         object obj;
     }
-
 }

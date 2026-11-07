@@ -14,7 +14,7 @@ public class BringUpTest_Array3
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static int Array3()
     {
-        int[] a = {1, 2, 3, 4};
+        int[] a = { 1, 2, 3, 4 };
         a[1] = 5;
         return a[1];
     }
@@ -22,7 +22,8 @@ public class BringUpTest_Array3
     [Fact]
     public static int TestEntryPoint()
     {
-        if (Array3() != 5) return Fail;
+        if (Array3() != 5)
+            return Fail;
         return Pass;
     }
 }

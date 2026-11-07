@@ -20,8 +20,12 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                DirectoryRdnPrefixAttribute[] MyAttribute =
-                (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(_p.GetType(), typeof(DirectoryRdnPrefixAttribute), false);
+                DirectoryRdnPrefixAttribute[] MyAttribute = (DirectoryRdnPrefixAttribute[])
+                    Attribute.GetCustomAttributes(
+                        _p.GetType(),
+                        typeof(DirectoryRdnPrefixAttribute),
+                        false
+                    );
 
                 if (MyAttribute == null)
                     return null;
@@ -46,8 +50,12 @@ namespace System.DirectoryServices.AccountManagement
 
         internal static string ReadStructuralObjectClass(Type principalType)
         {
-            DirectoryObjectClassAttribute[] MyAttribute =
-            (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(principalType, typeof(DirectoryObjectClassAttribute), false);
+            DirectoryObjectClassAttribute[] MyAttribute = (DirectoryObjectClassAttribute[])
+                Attribute.GetCustomAttributes(
+                    principalType,
+                    typeof(DirectoryObjectClassAttribute),
+                    false
+                );
 
             if (MyAttribute == null)
                 return null;
@@ -75,8 +83,12 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                DirectoryObjectClassAttribute[] MyAttribute =
-                (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(_p.GetType(), typeof(DirectoryObjectClassAttribute), false);
+                DirectoryObjectClassAttribute[] MyAttribute = (DirectoryObjectClassAttribute[])
+                    Attribute.GetCustomAttributes(
+                        _p.GetType(),
+                        typeof(DirectoryObjectClassAttribute),
+                        false
+                    );
 
                 if (MyAttribute == null)
                     return null;
@@ -129,6 +141,5 @@ namespace System.DirectoryServices.AccountManagement
 
                 }
         */
-
     }
 }

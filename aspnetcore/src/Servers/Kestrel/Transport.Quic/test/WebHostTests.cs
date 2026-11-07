@@ -109,24 +109,16 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.Listen(
-                            IPAddress.Parse("127.0.0.1"),
-                            http3Port,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = Core.HttpProtocols.Http3;
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
-                        o.Listen(
-                            IPAddress.Parse("127.0.0.1"),
-                            http1Port,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = Core.HttpProtocols.Http1;
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        o.Listen(IPAddress.Parse("127.0.0.1"), http3Port, listenOptions =>
+                        {
+                            listenOptions.Protocols = Core.HttpProtocols.Http3;
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
+                        o.Listen(IPAddress.Parse("127.0.0.1"), http1Port, listenOptions =>
+                        {
+                            listenOptions.Protocols = Core.HttpProtocols.Http1;
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
                     })
                     .Configure(app =>
                     {
@@ -157,15 +149,11 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.Listen(
-                            IPAddress.Parse("127.0.0.1"),
-                            0,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        o.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
+                        {
+                            listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
                     })
                     .Configure(app =>
                     {
@@ -180,9 +168,8 @@ public class WebHostTests : LoggedTest
         using var host = builder.Build();
         await host.StartAsync().DefaultTimeout();
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.Message == CoreStrings.DynamicPortOnMultipleTransportsNotSupported
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message == CoreStrings.DynamicPortOnMultipleTransportsNotSupported
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -202,16 +189,12 @@ public class WebHostTests : LoggedTest
                         webHostBuilder
                             .UseKestrel(o =>
                             {
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    port,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols =
-                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
+                                o.Listen(IPAddress.Parse("127.0.0.1"), port, listenOptions =>
+                                {
+                                    listenOptions.Protocols =
+                                        Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                });
                             })
                             .Configure(app =>
                             {
@@ -248,16 +231,12 @@ public class WebHostTests : LoggedTest
                         webHostBuilder
                             .UseKestrel(o =>
                             {
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    port,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols =
-                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
+                                o.Listen(IPAddress.Parse("127.0.0.1"), port, listenOptions =>
+                                {
+                                    listenOptions.Protocols =
+                                        Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                });
                             })
                             .Configure(app =>
                             {
@@ -337,16 +316,12 @@ public class WebHostTests : LoggedTest
                                 {
                                     listenOptions.DisableAltSvcHeader = true;
                                 });
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    port,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols =
-                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
+                                o.Listen(IPAddress.Parse("127.0.0.1"), port, listenOptions =>
+                                {
+                                    listenOptions.Protocols =
+                                        Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                });
                             })
                             .Configure(app =>
                             {
@@ -455,14 +430,11 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenUnixSocket(
-                            "/test-path",
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = Core.HttpProtocols.Http3;
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        o.ListenUnixSocket("/test-path", listenOptions =>
+                        {
+                            listenOptions.Protocols = Core.HttpProtocols.Http3;
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
                     })
                     .Configure(app =>
                     {

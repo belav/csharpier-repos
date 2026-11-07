@@ -20,7 +20,7 @@ namespace System.Data
         /// <summary>
         /// A Comparer that compares a Key and a Row.
         /// </summary>
-        internal Func<object, DataRow, int>? comparerKeyRow;  // comparer for DataView.Find(..
+        internal Func<object, DataRow, int>? comparerKeyRow; // comparer for DataView.Find(..
 
         /// <summary>
         /// Builds the sort expression in case multiple selector/comparers are added.
@@ -33,11 +33,15 @@ namespace System.Data
         /// </summary>
         /// <param name="table">The input table from which LinkDataView is to be created.</param>
         /// <param name="sortExpressionBuilder">The sort expression builder in case multiple selectors/comparers are added.</param>
-        internal LinqDataView(DataTable table, SortExpressionBuilder<DataRow>? sortExpressionBuilder)
+        internal LinqDataView(
+            DataTable table,
+            SortExpressionBuilder<DataRow>? sortExpressionBuilder
+        )
             : base(table)
         {
             Debug.Assert(table != null, "null DataTable");
-            this.sortExpressionBuilder = sortExpressionBuilder ?? new SortExpressionBuilder<DataRow>();
+            this.sortExpressionBuilder =
+                sortExpressionBuilder ?? new SortExpressionBuilder<DataRow>();
         }
 
         /// <summary>
@@ -53,15 +57,13 @@ namespace System.Data
         /// <param name="comparerKeyRow">A comparer function that compares a Key value to DataRow.</param>
         /// <param name="sortExpressionBuilder">Combined sort expression build using mutiple sort expressions.</param>
         internal LinqDataView(
-                    DataTable table,
-                    Predicate<DataRow>? predicate_system,
-                    Comparison<DataRow>? comparison,
-                    Func<object, DataRow, int>? comparerKeyRow,
-                    SortExpressionBuilder<DataRow>? sortExpressionBuilder)
-            : base(table,
-                predicate_system,
-                comparison,
-                DataViewRowState.CurrentRows)
+            DataTable table,
+            Predicate<DataRow>? predicate_system,
+            Comparison<DataRow>? comparison,
+            Func<object, DataRow, int>? comparerKeyRow,
+            SortExpressionBuilder<DataRow>? sortExpressionBuilder
+        )
+            : base(table, predicate_system, comparison, DataViewRowState.CurrentRows)
         {
             this.sortExpressionBuilder = sortExpressionBuilder ?? this.sortExpressionBuilder;
             this.comparerKeyRow = comparerKeyRow;
@@ -74,7 +76,7 @@ namespace System.Data
         {
             get
             {
-                if (base.RowPredicate == null)// using string based filter or no filter
+                if (base.RowPredicate == null) // using string based filter or no filter
                 {
                     return base.RowFilter;
                 }
@@ -109,10 +111,12 @@ namespace System.Data
         internal override int FindByKey(object? key)
         {
             Debug.Assert(base.Sort != null);
-            Debug.Assert(!(!string.IsNullOrEmpty(base.Sort) && base.SortComparison != null),
-                "string and expression based sort cannot both be set");
+            Debug.Assert(
+                !(!string.IsNullOrEmpty(base.Sort) && base.SortComparison != null),
+                "string and expression based sort cannot both be set"
+            );
 
-            if (!string.IsNullOrEmpty(base.Sort))  // use find for DV's sort string
+            if (!string.IsNullOrEmpty(base.Sort)) // use find for DV's sort string
             {
                 return base.FindByKey(key);
             }
@@ -121,10 +125,12 @@ namespace System.Data
                 // This is the exception message from DataView that we want to use
                 throw ExceptionBuilder.IndexKeyLength(0, 0);
             }
-            else  // find for expression based sort
+            else // find for expression based sort
             {
                 if (sortExpressionBuilder!.Count != 1)
-                    throw DataSetUtil.InvalidOperation(SR.Format(SR.LDV_InvalidNumOfKeys, sortExpressionBuilder.Count));
+                    throw DataSetUtil.InvalidOperation(
+                        SR.Format(SR.LDV_InvalidNumOfKeys, sortExpressionBuilder.Count)
+                    );
 
                 Index.ComparisonBySelector<object, DataRow> compareDelg =
                     new Index.ComparisonBySelector<object, DataRow>(comparerKeyRow!);
@@ -152,7 +158,9 @@ namespace System.Data
             }
             else if (base.SortComparison != null && key.Length != sortExpressionBuilder!.Count)
             {
-                throw DataSetUtil.InvalidOperation(SR.Format(SR.LDV_InvalidNumOfKeys, sortExpressionBuilder.Count));
+                throw DataSetUtil.InvalidOperation(
+                    SR.Format(SR.LDV_InvalidNumOfKeys, sortExpressionBuilder.Count)
+                );
             }
 
             if (base.SortComparison == null)
@@ -174,7 +182,6 @@ namespace System.Data
                 Range range = FindRecords<object, DataRow>(compareDelg, keyList);
                 return (range.Count == 0) ? -1 : range.Min;
             }
-
         }
 
         /// <summary>
@@ -192,10 +199,12 @@ namespace System.Data
             }
             else if (base.SortComparison != null && key.Length != sortExpressionBuilder!.Count)
             {
-                throw DataSetUtil.InvalidOperation(SR.Format(SR.LDV_InvalidNumOfKeys, sortExpressionBuilder.Count));
+                throw DataSetUtil.InvalidOperation(
+                    SR.Format(SR.LDV_InvalidNumOfKeys, sortExpressionBuilder.Count)
+                );
             }
 
-            if (base.SortComparison == null)// using string to sort
+            if (base.SortComparison == null) // using string to sort
             {
                 return base.FindRowsByKey(key);
             }
@@ -203,7 +212,8 @@ namespace System.Data
             {
                 Range range = FindRecords<object, DataRow>(
                     new Index.ComparisonBySelector<object, DataRow>(comparerKeyRow!),
-                    new List<object?>(key));
+                    new List<object?>(key)
+                );
                 return base.GetDataRowViewFromRange(range);
             }
         }
@@ -215,10 +225,17 @@ namespace System.Data
         /// Overriding DataView's SetIndex to prevent users from setting RowState filter to anything other
         /// than CurrentRows.
         /// </summary>
-        internal override void SetIndex(string newSort, DataViewRowState newRowStates, IFilter? newRowFilter)
+        internal override void SetIndex(
+            string newSort,
+            DataViewRowState newRowStates,
+            IFilter? newRowFilter
+        )
         {
             // Throw only if expressions (filter or sort) are used and rowstate is not current rows
-            if ((base.SortComparison != null || base.RowPredicate != null) && newRowStates != DataViewRowState.CurrentRows)
+            if (
+                (base.SortComparison != null || base.RowPredicate != null)
+                && newRowStates != DataViewRowState.CurrentRows
+            )
             {
                 throw DataSetUtil.Argument(SR.LDVRowStateError);
             }
@@ -246,10 +263,7 @@ namespace System.Data
         /// </summary>
         PropertyDescriptor? IBindingList.SortProperty
         {
-            get
-            {
-                return (base.SortComparison == null) ? base.GetSortProperty() : null;
-            }
+            get { return (base.SortComparison == null) ? base.GetSortProperty() : null; }
         }
 
         /// <summary>
@@ -277,7 +291,7 @@ namespace System.Data
         bool IBindingList.IsSorted
         {
             get
-            {   // Sorted if either expression based sort or string based sort is set
+            { // Sorted if either expression based sort or string based sort is set
                 return !(base.SortComparison == null && base.Sort.Length == 0);
             }
         }

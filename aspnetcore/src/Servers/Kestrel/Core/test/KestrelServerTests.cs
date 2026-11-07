@@ -123,8 +123,8 @@ public class KestrelServerTests
         {
             server.Features.Get<IServerAddressesFeature>().Addresses.Add("http://127.0.0.1:0/base");
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => StartDummyApplication(server)
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                StartDummyApplication(server)
             );
 
             Assert.Equal(
@@ -241,8 +241,8 @@ public class KestrelServerTests
 
         using (var server = CreateServer(options, testLogger))
         {
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => StartDummyApplication(server)
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                StartDummyApplication(server)
             );
 
             Assert.Equal(
@@ -277,8 +277,8 @@ public class KestrelServerTests
 
         using (var server = CreateServer(options, testLogger))
         {
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => StartDummyApplication(server)
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                StartDummyApplication(server)
             );
 
             Assert.Equal(
@@ -311,13 +311,12 @@ public class KestrelServerTests
     [Fact]
     public void ConstructorWithNullTransportFactoryThrows()
     {
-        var exception = Assert.Throws<ArgumentNullException>(
-            () =>
-                new KestrelServer(
-                    Options.Create<KestrelServerOptions>(null),
-                    null,
-                    new LoggerFactory(new[] { new KestrelTestLoggerProvider() })
-                )
+        var exception = Assert.Throws<ArgumentNullException>(() =>
+            new KestrelServer(
+                Options.Create<KestrelServerOptions>(null),
+                null,
+                new LoggerFactory(new[] { new KestrelTestLoggerProvider() })
+            )
         );
 
         Assert.Equal("transportFactory", exception.ParamName);
@@ -354,13 +353,12 @@ public class KestrelServerTests
     [Fact]
     public void ConstructorWithNoTransportFactoriesThrows()
     {
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                CreateKestrelServer(
-                    options: null,
-                    new List<IConnectionListenerFactory>(),
-                    Array.Empty<IMultiplexedConnectionListenerFactory>()
-                )
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            CreateKestrelServer(
+                options: null,
+                new List<IConnectionListenerFactory>(),
+                Array.Empty<IMultiplexedConnectionListenerFactory>()
+            )
         );
 
         Assert.Equal(CoreStrings.TransportNotFound, exception.Message);
@@ -394,12 +392,11 @@ public class KestrelServerTests
             Array.Empty<IMultiplexedConnectionListenerFactory>()
         );
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await server.StartAsync(
-                    new DummyApplication(context => Task.CompletedTask),
-                    CancellationToken.None
-                )
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await server.StartAsync(
+                new DummyApplication(context => Task.CompletedTask),
+                CancellationToken.None
+            )
         );
 
         Assert.Equal(
@@ -432,9 +429,8 @@ public class KestrelServerTests
             CancellationToken.None
         );
 
-        Assert.Collection(
-            transportFactory.BoundEndPoints,
-            ep => Assert.Equal(endpoint, ep.OriginalEndPoint)
+        Assert.Collection(transportFactory.BoundEndPoints, ep =>
+            Assert.Equal(endpoint, ep.OriginalEndPoint)
         );
     }
 
@@ -442,14 +438,11 @@ public class KestrelServerTests
     public async Task StartWithNoValidTransportFactoryThrows_Http3()
     {
         var serverOptions = CreateServerOptions();
-        serverOptions.Listen(
-            new IPEndPoint(IPAddress.Loopback, 0),
-            c =>
-            {
-                c.Protocols = HttpProtocols.Http3;
-                c.UseHttps(TestResources.GetTestCertificate());
-            }
-        );
+        serverOptions.Listen(new IPEndPoint(IPAddress.Loopback, 0), c =>
+        {
+            c.Protocols = HttpProtocols.Http3;
+            c.UseHttps(TestResources.GetTestCertificate());
+        });
 
         using var server = CreateKestrelServer(
             serverOptions,
@@ -460,12 +453,11 @@ public class KestrelServerTests
             }
         );
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await server.StartAsync(
-                    new DummyApplication(context => Task.CompletedTask),
-                    CancellationToken.None
-                )
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await server.StartAsync(
+                new DummyApplication(context => Task.CompletedTask),
+                CancellationToken.None
+            )
         );
 
         Assert.Equal(
@@ -479,14 +471,11 @@ public class KestrelServerTests
     {
         var endpoint = new IPEndPoint(IPAddress.Loopback, 0);
         var serverOptions = CreateServerOptions();
-        serverOptions.Listen(
-            endpoint,
-            c =>
-            {
-                c.Protocols = HttpProtocols.Http3;
-                c.UseHttps(TestResources.GetTestCertificate());
-            }
-        );
+        serverOptions.Listen(endpoint, c =>
+        {
+            c.Protocols = HttpProtocols.Http3;
+            c.UseHttps(TestResources.GetTestCertificate());
+        });
 
         var transportFactory = new MockMultiplexedTransportFactory();
 
@@ -505,9 +494,8 @@ public class KestrelServerTests
             CancellationToken.None
         );
 
-        Assert.Collection(
-            transportFactory.BoundEndPoints,
-            ep => Assert.Equal(endpoint, ep.OriginalEndPoint)
+        Assert.Collection(transportFactory.BoundEndPoints, ep =>
+            Assert.Equal(endpoint, ep.OriginalEndPoint)
         );
     }
 
@@ -517,14 +505,11 @@ public class KestrelServerTests
         var options = CreateServerOptions();
 
         var customEndpoint = new UriEndPoint(new("http://localhost:5000"));
-        options.Listen(
-            customEndpoint,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
+        options.Listen(customEndpoint, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -553,14 +538,11 @@ public class KestrelServerTests
     public async Task ListenIPWithStaticPort_TransportsGetIPv6Any()
     {
         var options = CreateServerOptions();
-        options.ListenAnyIP(
-            5000,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
+        options.ListenAnyIP(5000, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -596,14 +578,11 @@ public class KestrelServerTests
     public async Task ListenIPWithEphemeralPort_TransportsGetIPv6Any()
     {
         var options = CreateServerOptions();
-        options.ListenAnyIP(
-            0,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http1AndHttp2;
-            }
-        );
+        options.ListenAnyIP(0, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http1AndHttp2;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -631,14 +610,11 @@ public class KestrelServerTests
     public async Task ListenIPWithEphemeralPort_MultiplexedTransportsGetIPv6Any()
     {
         var options = CreateServerOptions();
-        options.ListenAnyIP(
-            0,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http3;
-            }
-        );
+        options.ListenAnyIP(0, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http3;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -790,20 +766,20 @@ public class KestrelServerTests
         var timeout = TestConstants.DefaultTimeout;
         Assert.Same(
             unbindException,
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => stopTask1.TimeoutAfter(timeout)
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                stopTask1.TimeoutAfter(timeout)
             )
         );
         Assert.Same(
             unbindException,
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => stopTask2.TimeoutAfter(timeout)
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                stopTask2.TimeoutAfter(timeout)
             )
         );
         Assert.Same(
             unbindException,
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => stopTask3.TimeoutAfter(timeout)
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                stopTask3.TimeoutAfter(timeout)
             )
         );
 

@@ -24,19 +24,22 @@ namespace System.ServiceModel.Channels
 
         public static SelfSignedCertificate Create(string name, string password)
         {
-            return Create(name,
-                        password,
-                        DateTime.UtcNow,
-                        DateTime.UtcNow.AddYears(DefaultLifeSpanInYears),
-                        Guid.NewGuid().ToString());
+            return Create(
+                name,
+                password,
+                DateTime.UtcNow,
+                DateTime.UtcNow.AddYears(DefaultLifeSpanInYears),
+                Guid.NewGuid().ToString()
+            );
         }
 
         public static SelfSignedCertificate Create(
-                                    string name,
-                                    string password,
-                                    DateTime start,
-                                    DateTime expire,
-                                    string containerName)
+            string name,
+            string password,
+            DateTime start,
+            DateTime expire,
+            string containerName
+        )
         {
             SelfSignedCertificate cert = new SelfSignedCertificate(password, containerName);
             cert.GenerateKeys();
@@ -66,22 +69,28 @@ namespace System.ServiceModel.Channels
                 {
                     using (algorithmId)
                     {
-                        cert = CertCreateSelfSignCertificate(keyContainer,
-                                                                    nameBlob.GetMemoryForPinning(),
-                                                                    SelfSignFlags.None,
-                                                                    provInfo,
-                                                                    algorithmId,
-                                                                    ref beginTime,
-                                                                    ref expireTime,
-                                                                    IntPtr.Zero);
+                        cert = CertCreateSelfSignCertificate(
+                            keyContainer,
+                            nameBlob.GetMemoryForPinning(),
+                            SelfSignFlags.None,
+                            provInfo,
+                            algorithmId,
+                            ref beginTime,
+                            ref expireTime,
+                            IntPtr.Zero
+                        );
 
                         if (cert.IsInvalid)
-                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
+                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                                PeerExceptionHelper.GetLastException()
+                            );
 
                         //                        if (!CertSetCertificateContextProperty(cert, CERT_KEY_PROV_INFO_PROP_ID, 0, provInfo))
                         //                          PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
                         if (!CertSetCertificateContextProperty(cert, CERT_KEY_SPEC_PROP_ID, 0, key))
-                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
+                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                                PeerExceptionHelper.GetLastException()
+                            );
                     }
                 }
             }
@@ -102,22 +111,32 @@ namespace System.ServiceModel.Channels
             Fx.Assert(this.exportedBytes == null, "calling Export twice!!");
 
             // create a temporary store to export
-            using (CertificateStoreHandle store = CertOpenStore(new IntPtr(CERT_STORE_PROV_MEMORY),
-                                                                0,
-                                                                IntPtr.Zero,
-                                                                0,
-                                                                IntPtr.Zero))
+            using (
+                CertificateStoreHandle store = CertOpenStore(
+                    new IntPtr(CERT_STORE_PROV_MEMORY),
+                    0,
+                    IntPtr.Zero,
+                    0,
+                    IntPtr.Zero
+                )
+            )
             {
                 // add the certificate to the store
                 StoreCertificateHandle addedCert;
-                if (!CertAddCertificateContextToStore(store,
-                                                cert,
-                                                AddDisposition.ReplaceExisting,
-                                                out addedCert))
+                if (
+                    !CertAddCertificateContextToStore(
+                        store,
+                        cert,
+                        AddDisposition.ReplaceExisting,
+                        out addedCert
+                    )
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
                     Utility.CloseInvalidOutSafeHandle(addedCert);
-                    PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(new Win32Exception(error));
+                    PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                        new Win32Exception(error)
+                    );
                 }
 
                 using (addedCert)
@@ -130,16 +149,20 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         // first figure out the storage space necessary
-                        bool result = PFXExportCertStoreEx(store,
-                                                            pfxHandle.AddrOfPinnedObject(),
-                                                            password,
-                                                            IntPtr.Zero,
-                                                            PfxExportFlags.ExportPrivateKeys |
-                                                            PfxExportFlags.ReportNoPrivateKey |
-                                                            PfxExportFlags.ReportNotAbleToExportPrivateKey);
+                        bool result = PFXExportCertStoreEx(
+                            store,
+                            pfxHandle.AddrOfPinnedObject(),
+                            password,
+                            IntPtr.Zero,
+                            PfxExportFlags.ExportPrivateKeys
+                                | PfxExportFlags.ReportNoPrivateKey
+                                | PfxExportFlags.ReportNotAbleToExportPrivateKey
+                        );
 
                         if (!result)
-                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
+                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                                PeerExceptionHelper.GetLastException()
+                            );
 
                         int storageSize = blob.size;
                         pfxHandle.Free();
@@ -148,14 +171,20 @@ namespace System.ServiceModel.Channels
                         pfxHandle = GCHandle.Alloc(blob, GCHandleType.Pinned);
 
                         // now do the translation
-                        if (!PFXExportCertStoreEx(store,
-                                                    pfxHandle.AddrOfPinnedObject(),
-                                                    password,
-                                                    IntPtr.Zero,
-                                                    PfxExportFlags.ExportPrivateKeys |
-                                                    PfxExportFlags.ReportNoPrivateKey |
-                                                    PfxExportFlags.ReportNotAbleToExportPrivateKey))
-                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
+                        if (
+                            !PFXExportCertStoreEx(
+                                store,
+                                pfxHandle.AddrOfPinnedObject(),
+                                password,
+                                IntPtr.Zero,
+                                PfxExportFlags.ExportPrivateKeys
+                                    | PfxExportFlags.ReportNoPrivateKey
+                                    | PfxExportFlags.ReportNotAbleToExportPrivateKey
+                            )
+                        )
+                            PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                                PeerExceptionHelper.GetLastException()
+                            );
                         exportedBytes = pfxBlob.GetBytes();
                     }
                     finally
@@ -173,28 +202,40 @@ namespace System.ServiceModel.Channels
         void GenerateKeys()
         {
             // generate the key container to put the key in
-            if (!CryptAcquireContext(out keyContainer,
-                                        keyContainerName,
-                                        null,
-                                        ProviderType.RsaSecureChannel,
-                                        ContextFlags.NewKeySet | ContextFlags.Silent))
+            if (
+                !CryptAcquireContext(
+                    out keyContainer,
+                    keyContainerName,
+                    null,
+                    ProviderType.RsaSecureChannel,
+                    ContextFlags.NewKeySet | ContextFlags.Silent
+                )
+            )
             {
                 int error = Marshal.GetLastWin32Error();
                 Utility.CloseInvalidOutSafeHandle(keyContainer);
                 keyContainer = null;
-                PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(new Win32Exception(error));
+                PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                    new Win32Exception(error)
+                );
             }
 
             // generate the key
-            if (!CryptGenKey(keyContainer,
-                                AlgorithmType.KeyExchange,
-                                KeyFlags.Exportable2k,
-                                out key))
+            if (
+                !CryptGenKey(
+                    keyContainer,
+                    AlgorithmType.KeyExchange,
+                    KeyFlags.Exportable2k,
+                    out key
+                )
+            )
             {
                 int error = Marshal.GetLastWin32Error();
                 Utility.CloseInvalidOutSafeHandle(key);
                 key = null;
-                PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(new Win32Exception(error));
+                PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                    new Win32Exception(error)
+                );
             }
         }
 
@@ -210,11 +251,13 @@ namespace System.ServiceModel.Channels
                     keyContainer.Dispose();
                 if (keyContainerName != null)
                 {
-                    CryptAcquireContext(out keyContainer,
-                                        keyContainerName,
-                                        null,
-                                        ProviderType.RsaSecureChannel,
-                                        ContextFlags.DeleteKeySet);
+                    CryptAcquireContext(
+                        out keyContainer,
+                        keyContainerName,
+                        null,
+                        ProviderType.RsaSecureChannel,
+                        ContextFlags.DeleteKeySet
+                    );
                     Utility.CloseInvalidOutSafeHandle(keyContainer);
                 }
                 GC.SuppressFinalize(this);
@@ -233,4 +276,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

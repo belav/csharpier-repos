@@ -15,128 +15,133 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAfterWith()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = goo with $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"var q = goo with $$"));
         }
 
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestAfterExpr()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = goo $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var q = goo $$"));
         }
 
         [Fact]
         public async Task TestAfterDottedName()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = goo.Current $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var q = goo.Current $$"));
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543041")]
         public async Task TestNotAfterVarInForLoop()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"for (var $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"for (var $$"));
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestNotBeforeFirstStringHole()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var x = "\{0}$$\{1}\{2}"
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    var x = "\{0}$$\{1}\{2}"
+                    """
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestNotBetweenStringHoles()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var x = "\{0}\{1}$$\{2}"
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    var x = "\{0}\{1}$$\{2}"
+                    """
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestNotAfterStringHoles()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var x = "\{0}\{1}\{2}$$"
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    var x = "\{0}\{1}\{2}$$"
+                    """
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestAfterLastStringHole()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var x = ""\{0}\{1}\{2}"" $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var x = ""\{0}\{1}\{2}"" $$"));
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/1736")]
         public async Task TestNotWithinNumericLiteral()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var x = .$$0;"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"var x = .$$0;"));
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28586")]
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -170,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         var v = Console.WriteLine $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -183,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         Action a = delegate { } $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -196,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         Action b = (() => 0) $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -209,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         Action b = () => {} $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -224,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var x = 1$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -239,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var x = 1.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -254,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var x = 1. $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31367")]
@@ -277,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31367")]
@@ -303,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

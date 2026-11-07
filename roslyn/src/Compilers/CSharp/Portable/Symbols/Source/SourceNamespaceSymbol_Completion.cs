@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class SourceNamespaceSymbol
     {
-        internal override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {
@@ -26,86 +29,122 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         break;
 
                     case CompletionPart.MembersCompleted:
+                    {
+                        SingleNamespaceDeclaration targetDeclarationWithImports = null;
+
+                        // ensure relevant imports are complete.
+                        foreach (var declaration in _mergedDeclaration.Declarations)
                         {
-                            SingleNamespaceDeclaration targetDeclarationWithImports = null;
-
-                            // ensure relevant imports are complete.
-                            foreach (var declaration in _mergedDeclaration.Declarations)
+                            if (
+                                locationOpt == null
+                                || locationOpt.SourceTree == declaration.SyntaxReference.SyntaxTree
+                            )
                             {
-                                if (locationOpt == null || locationOpt.SourceTree == declaration.SyntaxReference.SyntaxTree)
+                                if (
+                                    declaration.HasGlobalUsings
+                                    || declaration.HasUsings
+                                    || declaration.HasExternAliases
+                                )
                                 {
-                                    if (declaration.HasGlobalUsings || declaration.HasUsings || declaration.HasExternAliases)
-                                    {
-                                        targetDeclarationWithImports = declaration;
-                                        GetAliasesAndUsings(declaration).Complete(this, declaration.SyntaxReference, cancellationToken);
-                                    }
+                                    targetDeclarationWithImports = declaration;
+                                    GetAliasesAndUsings(declaration)
+                                        .Complete(
+                                            this,
+                                            declaration.SyntaxReference,
+                                            cancellationToken
+                                        );
                                 }
-                            }
-
-                            if (IsGlobalNamespace && (locationOpt is null || targetDeclarationWithImports is object))
-                            {
-                                GetMergedGlobalAliasesAndUsings(basesBeingResolved: null, cancellationToken).Complete(this, cancellationToken);
-                            }
-
-                            var members = this.GetMembers();
-
-                            bool allCompleted = true;
-
-                            if (this.DeclaringCompilation.Options.ConcurrentBuild)
-                            {
-                                RoslynParallel.For(
-                                    0,
-                                    members.Length,
-                                    UICultureUtilities.WithCurrentUICulture<int>(i => ForceCompleteMemberByLocation(locationOpt, members[i], cancellationToken)),
-                                    cancellationToken);
-
-                                foreach (var member in members)
-                                {
-                                    if (!member.HasComplete(CompletionPart.All))
-                                    {
-                                        allCompleted = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                foreach (var member in members)
-                                {
-                                    ForceCompleteMemberByLocation(locationOpt, member, cancellationToken);
-                                    allCompleted = allCompleted && member.HasComplete(CompletionPart.All);
-                                }
-                            }
-
-                            if (allCompleted)
-                            {
-                                _state.NotePartComplete(CompletionPart.MembersCompleted);
-                                break;
-                            }
-                            else
-                            {
-                                // NOTE: we're going to kick out of the completion part loop after this,
-                                // so not making progress isn't a problem.
-                                goto done;
                             }
                         }
+
+                        if (
+                            IsGlobalNamespace
+                            && (locationOpt is null || targetDeclarationWithImports is object)
+                        )
+                        {
+                            GetMergedGlobalAliasesAndUsings(
+                                    basesBeingResolved: null,
+                                    cancellationToken
+                                )
+                                .Complete(this, cancellationToken);
+                        }
+
+                        var members = this.GetMembers();
+
+                        bool allCompleted = true;
+
+                        if (this.DeclaringCompilation.Options.ConcurrentBuild)
+                        {
+                            RoslynParallel.For(
+                                0,
+                                members.Length,
+                                UICultureUtilities.WithCurrentUICulture<int>(i =>
+                                    ForceCompleteMemberByLocation(
+                                        locationOpt,
+                                        members[i],
+                                        cancellationToken
+                                    )
+                                ),
+                                cancellationToken
+                            );
+
+                            foreach (var member in members)
+                            {
+                                if (!member.HasComplete(CompletionPart.All))
+                                {
+                                    allCompleted = false;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var member in members)
+                            {
+                                ForceCompleteMemberByLocation(
+                                    locationOpt,
+                                    member,
+                                    cancellationToken
+                                );
+                                allCompleted =
+                                    allCompleted && member.HasComplete(CompletionPart.All);
+                            }
+                        }
+
+                        if (allCompleted)
+                        {
+                            _state.NotePartComplete(CompletionPart.MembersCompleted);
+                            break;
+                        }
+                        else
+                        {
+                            // NOTE: we're going to kick out of the completion part loop after this,
+                            // so not making progress isn't a problem.
+                            goto done;
+                        }
+                    }
 
                     case CompletionPart.None:
                         return;
 
                     default:
                         // any other values are completion parts intended for other kinds of symbols
-                        _state.NotePartComplete(CompletionPart.All & ~CompletionPart.NamespaceSymbolAll);
+                        _state.NotePartComplete(
+                            CompletionPart.All & ~CompletionPart.NamespaceSymbolAll
+                        );
                         break;
                 }
 
                 _state.SpinWaitComplete(incompletePart, cancellationToken);
             }
 
-done:
-// Don't return until we've seen all of the CompletionParts. This ensures all
-// diagnostics have been reported (not necessarily on this thread).
-            CompletionPart allParts = (locationOpt == null) ? CompletionPart.NamespaceSymbolAll : CompletionPart.NamespaceSymbolAll & ~CompletionPart.MembersCompleted;
+            done:
+            // Don't return until we've seen all of the CompletionParts. This ensures all
+            // diagnostics have been reported (not necessarily on this thread).
+            CompletionPart allParts =
+                (locationOpt == null)
+                    ? CompletionPart.NamespaceSymbolAll
+                    : CompletionPart.NamespaceSymbolAll & ~CompletionPart.MembersCompleted;
             _state.SpinWaitComplete(allParts, cancellationToken);
         }
 

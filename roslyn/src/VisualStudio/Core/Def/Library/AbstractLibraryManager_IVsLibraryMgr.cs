@@ -50,8 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             throw new NotImplementedException();
         }
 
-        int IVsLibraryMgr.SetLibraryGroupEnabled(LIB_PERSISTTYPE lpt, int fEnable)
-            => VSConstants.E_NOTIMPL;
+        int IVsLibraryMgr.SetLibraryGroupEnabled(LIB_PERSISTTYPE lpt, int fEnable) =>
+            VSConstants.E_NOTIMPL;
 
         int IVsLibraryMgr.ToggleCheckAt(uint nLibIndex)
         {

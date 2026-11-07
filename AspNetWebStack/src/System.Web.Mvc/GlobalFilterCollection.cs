@@ -54,8 +54,10 @@ namespace System.Web.Mvc
             return _filters.GetEnumerator();
         }
 
-        IEnumerable<Filter> IFilterProvider.GetFilters(ControllerContext controllerContext,
-            ActionDescriptor actionDescriptor)
+        IEnumerable<Filter> IFilterProvider.GetFilters(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
             return this;
         }
@@ -67,19 +69,25 @@ namespace System.Web.Mvc
 
         private static void ValidateFilterInstance(object instance)
         {
-            if (instance != null && !(
-                instance is IActionFilter ||
-                instance is IAuthorizationFilter ||
-                instance is IExceptionFilter ||
-                instance is IResultFilter ||
-                instance is IAuthenticationFilter))
+            if (
+                instance != null
+                && !(
+                    instance is IActionFilter
+                    || instance is IAuthorizationFilter
+                    || instance is IExceptionFilter
+                    || instance is IResultFilter
+                    || instance is IAuthenticationFilter
+                )
+            )
             {
-                throw Error.InvalidOperation(MvcResources.GlobalFilterCollection_UnsupportedFilterInstance,
+                throw Error.InvalidOperation(
+                    MvcResources.GlobalFilterCollection_UnsupportedFilterInstance,
                     typeof(IAuthorizationFilter).FullName,
                     typeof(IActionFilter).FullName,
                     typeof(IResultFilter).FullName,
                     typeof(IExceptionFilter).FullName,
-                    typeof(IAuthenticationFilter).FullName);
+                    typeof(IAuthenticationFilter).FullName
+                );
             }
         }
     }

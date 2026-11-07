@@ -6,10 +6,10 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum UpdateRowSource {
-
+namespace System.Data
+{
+    public enum UpdateRowSource
+    {
         None = 0,
 
         OutputParameters = 1,

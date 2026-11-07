@@ -32,21 +32,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CommentSelection
         ITextUndoHistoryRegistry undoHistoryRegistry,
         IEditorOperationsFactoryService editorOperationsFactoryService,
         ITextStructureNavigatorSelectorService navigatorSelectorService,
-        EditorOptionsService editorOptionsService) :
-        ToggleBlockCommentCommandHandler(undoHistoryRegistry, editorOperationsFactoryService, navigatorSelectorService, editorOptionsService)
+        EditorOptionsService editorOptionsService
+    )
+        : ToggleBlockCommentCommandHandler(
+            undoHistoryRegistry,
+            editorOperationsFactoryService,
+            navigatorSelectorService,
+            editorOptionsService
+        )
     {
-
         /// <summary>
         /// Retrieves block comments near the selection in the document.
         /// Uses the CSharp syntax tree to find the commented spans.
         /// </summary>
-        protected override ImmutableArray<TextSpan> GetBlockCommentsInDocument(Document document, ITextSnapshot snapshot,
-            TextSpan linesContainingSelections, CommentSelectionInfo commentInfo, CancellationToken cancellationToken)
+        protected override ImmutableArray<TextSpan> GetBlockCommentsInDocument(
+            Document document,
+            ITextSnapshot snapshot,
+            TextSpan linesContainingSelections,
+            CommentSelectionInfo commentInfo,
+            CancellationToken cancellationToken
+        )
         {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             // Only search for block comments intersecting the lines in the selections.
             return root.DescendantTrivia(linesContainingSelections)
-                .Where(trivia => trivia.Kind() is SyntaxKind.MultiLineCommentTrivia or SyntaxKind.MultiLineDocumentationCommentTrivia)
+                .Where(trivia =>
+                    trivia.Kind()
+                        is SyntaxKind.MultiLineCommentTrivia
+                            or SyntaxKind.MultiLineDocumentationCommentTrivia
+                )
                 .SelectAsArray(blockCommentTrivia => blockCommentTrivia.Span);
         }
     }

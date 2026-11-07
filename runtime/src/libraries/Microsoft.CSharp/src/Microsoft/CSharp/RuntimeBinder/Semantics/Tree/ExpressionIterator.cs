@@ -40,11 +40,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class ExpressionIterator
     {
-        public ExpressionIterator(Expr pExpr) { Init(pExpr); }
+        public ExpressionIterator(Expr pExpr)
+        {
+            Init(pExpr);
+        }
 
-        public bool AtEnd() { return _pCurrent == null && _pList == null; }
+        public bool AtEnd()
+        {
+            return _pCurrent == null && _pList == null;
+        }
 
-        public Expr Current() { return _pCurrent; }
+        public Expr Current()
+        {
+            return _pCurrent;
+        }
 
         public void MoveNext()
         {

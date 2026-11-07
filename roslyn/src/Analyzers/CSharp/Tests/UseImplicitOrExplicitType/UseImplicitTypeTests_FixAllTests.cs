@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicit
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocumentScope_PreferImplicitTypeEverywhere()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -72,7 +73,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -133,7 +135,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject_PreferImplicitTypeEverywhere()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -186,7 +189,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -247,7 +251,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution_PreferImplicitTypeEverywhere()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -300,7 +305,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -361,7 +367,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocumentScope_PreferBuiltInTypes()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -382,7 +389,8 @@ class Program
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -403,7 +411,11 @@ class Program
     </Project>
 </Workspace>";
 
-            await TestInRegularAndScriptAsync(input, expected, options: ImplicitTypeButKeepIntrinsics());
+            await TestInRegularAndScriptAsync(
+                input,
+                expected,
+                options: ImplicitTypeButKeepIntrinsics()
+            );
         }
 
         #endregion

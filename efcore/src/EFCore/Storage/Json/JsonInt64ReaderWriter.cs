@@ -15,15 +15,15 @@ public sealed class JsonInt64ReaderWriter : JsonValueReaderWriter<long>
     /// </summary>
     public static JsonInt64ReaderWriter Instance { get; } = new();
 
-    private JsonInt64ReaderWriter()
-    {
-    }
+    private JsonInt64ReaderWriter() { }
 
     /// <inheritdoc />
-    public override long FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetInt64();
+    public override long FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetInt64();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, long value)
-        => writer.WriteNumberValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, long value) =>
+        writer.WriteNumberValue(value);
 }

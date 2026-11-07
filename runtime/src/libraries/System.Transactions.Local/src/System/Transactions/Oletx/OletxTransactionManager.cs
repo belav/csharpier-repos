@@ -69,7 +69,10 @@ internal sealed class OletxTransactionManager
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, $"{nameof(OletxTransactionManager)}.{nameof(ShimNotificationCallback)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                $"{nameof(OletxTransactionManager)}.{nameof(ShimNotificationCallback)}"
+            );
         }
 
         // This lock doesn't really protect any of our data.  It is here so that if an exception occurs
@@ -94,7 +97,8 @@ internal sealed class OletxTransactionManager
                             out isSinglePhase,
                             out abortingHint,
                             out holdingNotificationLock,
-                            out prepareInfoBuffer);
+                            out prepareInfoBuffer
+                        );
                     }
                     finally
                     {
@@ -136,194 +140,212 @@ internal sealed class OletxTransactionManager
                         switch (shimNotificationType)
                         {
                             case ShimNotificationType.Phase0RequestNotify:
+                            {
+                                if (
+                                    enlistment2
+                                    is OletxPhase0VolatileEnlistmentContainer ph0VolEnlistContainer
+                                )
                                 {
-                                    if (enlistment2 is OletxPhase0VolatileEnlistmentContainer ph0VolEnlistContainer)
+                                    ph0VolEnlistContainer.Phase0Request(abortingHint);
+                                }
+                                else
+                                {
+                                    if (enlistment2 is OletxEnlistment oletxEnlistment)
                                     {
-                                        ph0VolEnlistContainer.Phase0Request(abortingHint);
+                                        oletxEnlistment.Phase0Request(abortingHint);
                                     }
                                     else
                                     {
-                                        if (enlistment2 is OletxEnlistment oletxEnlistment)
-                                        {
-                                            oletxEnlistment.Phase0Request(abortingHint);
-                                        }
-                                        else
-                                        {
-                                            Environment.FailFast(SR.InternalError);
-                                        }
+                                        Environment.FailFast(SR.InternalError);
                                     }
-
-                                    break;
                                 }
+
+                                break;
+                            }
 
                             case ShimNotificationType.VoteRequestNotify:
+                            {
+                                if (
+                                    enlistment2
+                                    is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer
+                                )
                                 {
-                                    if (enlistment2 is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer)
-                                    {
-                                        ph1VolEnlistContainer.VoteRequest();
-                                    }
-                                    else
-                                    {
-                                        Environment.FailFast(SR.InternalError);
-                                    }
-
-                                    break;
+                                    ph1VolEnlistContainer.VoteRequest();
                                 }
-
-                            case ShimNotificationType.CommittedNotify:
-                                {
-                                    if (enlistment2 is OutcomeEnlistment outcomeEnlistment)
-                                    {
-                                        outcomeEnlistment.Committed();
-                                    }
-                                    else
-                                    {
-                                        if (enlistment2 is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer)
-                                        {
-                                            ph1VolEnlistContainer.Committed();
-                                        }
-                                        else
-                                        {
-                                            Environment.FailFast(SR.InternalError);
-                                        }
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.AbortedNotify:
-                                {
-                                    if (enlistment2 is OutcomeEnlistment outcomeEnlistment)
-                                    {
-                                        outcomeEnlistment.Aborted();
-                                    }
-                                    else
-                                    {
-                                        if (enlistment2 is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer)
-                                        {
-                                            ph1VolEnlistContainer.Aborted();
-                                        }
-                                        // else
-                                        // Voters may receive notifications even
-                                        // in cases where they therwise respond
-                                        // negatively to the vote request.  It is
-                                        // also not guaranteed that we will get a
-                                        // notification if we do respond negatively.
-                                        // The only safe thing to do is to free the
-                                        // Handle when we abort the transaction
-                                        // with a voter.  These two things together
-                                        // mean that we cannot guarantee that this
-                                        // Handle will be alive when we get this
-                                        // notification.
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.InDoubtNotify:
-                                {
-                                    if (enlistment2 is OutcomeEnlistment outcomeEnlistment)
-                                    {
-                                        outcomeEnlistment.InDoubt();
-                                    }
-                                    else
-                                    {
-                                        if (enlistment2 is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer)
-                                        {
-                                            ph1VolEnlistContainer.InDoubt();
-                                        }
-                                        else
-                                        {
-                                            Environment.FailFast(SR.InternalError);
-                                        }
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.PrepareRequestNotify:
-                                {
-                                    bool enlistmentDone = true;
-
-                                    if (enlistment2 is OletxEnlistment enlistment)
-                                    {
-                                        enlistmentDone = enlistment.PrepareRequest(isSinglePhase, prepareInfoBuffer!);
-                                    }
-                                    else
-                                    {
-                                        Environment.FailFast(SR.InternalError);
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.CommitRequestNotify:
-                                {
-                                    if (enlistment2 is OletxEnlistment enlistment)
-                                    {
-                                        enlistment.CommitRequest();
-                                    }
-                                    else
-                                    {
-                                        Environment.FailFast(SR.InternalError);
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.AbortRequestNotify:
-                                {
-                                    if (enlistment2 is OletxEnlistment enlistment)
-                                    {
-                                        enlistment.AbortRequest();
-                                    }
-                                    else
-                                    {
-                                        Environment.FailFast(SR.InternalError);
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.EnlistmentTmDownNotify:
-                                {
-                                    if (enlistment2 is OletxEnlistment enlistment)
-                                    {
-                                        enlistment.TMDown();
-                                    }
-                                    else
-                                    {
-                                        Environment.FailFast(SR.InternalError);
-                                    }
-
-                                    break;
-                                }
-
-                            case ShimNotificationType.ResourceManagerTmDownNotify:
-                                {
-                                    switch (enlistment2)
-                                    {
-                                        case OletxResourceManager resourceManager:
-                                            resourceManager.TMDown();
-                                            break;
-
-                                        case OletxInternalResourceManager internalResourceManager:
-                                            internalResourceManager.TMDown();
-                                            break;
-
-                                        default:
-                                            Environment.FailFast(SR.InternalError);
-                                            break;
-                                    }
-
-                                    break;
-                                }
-
-                            default:
+                                else
                                 {
                                     Environment.FailFast(SR.InternalError);
-                                    break;
                                 }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.CommittedNotify:
+                            {
+                                if (enlistment2 is OutcomeEnlistment outcomeEnlistment)
+                                {
+                                    outcomeEnlistment.Committed();
+                                }
+                                else
+                                {
+                                    if (
+                                        enlistment2
+                                        is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer
+                                    )
+                                    {
+                                        ph1VolEnlistContainer.Committed();
+                                    }
+                                    else
+                                    {
+                                        Environment.FailFast(SR.InternalError);
+                                    }
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.AbortedNotify:
+                            {
+                                if (enlistment2 is OutcomeEnlistment outcomeEnlistment)
+                                {
+                                    outcomeEnlistment.Aborted();
+                                }
+                                else
+                                {
+                                    if (
+                                        enlistment2
+                                        is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer
+                                    )
+                                    {
+                                        ph1VolEnlistContainer.Aborted();
+                                    }
+                                    // else
+                                    // Voters may receive notifications even
+                                    // in cases where they therwise respond
+                                    // negatively to the vote request.  It is
+                                    // also not guaranteed that we will get a
+                                    // notification if we do respond negatively.
+                                    // The only safe thing to do is to free the
+                                    // Handle when we abort the transaction
+                                    // with a voter.  These two things together
+                                    // mean that we cannot guarantee that this
+                                    // Handle will be alive when we get this
+                                    // notification.
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.InDoubtNotify:
+                            {
+                                if (enlistment2 is OutcomeEnlistment outcomeEnlistment)
+                                {
+                                    outcomeEnlistment.InDoubt();
+                                }
+                                else
+                                {
+                                    if (
+                                        enlistment2
+                                        is OletxPhase1VolatileEnlistmentContainer ph1VolEnlistContainer
+                                    )
+                                    {
+                                        ph1VolEnlistContainer.InDoubt();
+                                    }
+                                    else
+                                    {
+                                        Environment.FailFast(SR.InternalError);
+                                    }
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.PrepareRequestNotify:
+                            {
+                                bool enlistmentDone = true;
+
+                                if (enlistment2 is OletxEnlistment enlistment)
+                                {
+                                    enlistmentDone = enlistment.PrepareRequest(
+                                        isSinglePhase,
+                                        prepareInfoBuffer!
+                                    );
+                                }
+                                else
+                                {
+                                    Environment.FailFast(SR.InternalError);
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.CommitRequestNotify:
+                            {
+                                if (enlistment2 is OletxEnlistment enlistment)
+                                {
+                                    enlistment.CommitRequest();
+                                }
+                                else
+                                {
+                                    Environment.FailFast(SR.InternalError);
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.AbortRequestNotify:
+                            {
+                                if (enlistment2 is OletxEnlistment enlistment)
+                                {
+                                    enlistment.AbortRequest();
+                                }
+                                else
+                                {
+                                    Environment.FailFast(SR.InternalError);
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.EnlistmentTmDownNotify:
+                            {
+                                if (enlistment2 is OletxEnlistment enlistment)
+                                {
+                                    enlistment.TMDown();
+                                }
+                                else
+                                {
+                                    Environment.FailFast(SR.InternalError);
+                                }
+
+                                break;
+                            }
+
+                            case ShimNotificationType.ResourceManagerTmDownNotify:
+                            {
+                                switch (enlistment2)
+                                {
+                                    case OletxResourceManager resourceManager:
+                                        resourceManager.TMDown();
+                                        break;
+
+                                    case OletxInternalResourceManager internalResourceManager:
+                                        internalResourceManager.TMDown();
+                                        break;
+
+                                    default:
+                                        Environment.FailFast(SR.InternalError);
+                                        break;
+                                }
+
+                                break;
+                            }
+
+                            default:
+                            {
+                                Environment.FailFast(SR.InternalError);
+                                break;
+                            }
                         }
                     }
                 }
@@ -336,8 +358,7 @@ internal sealed class OletxTransactionManager
                         Monitor.Exit(ProxyShimFactory);
                     }
                 }
-            }
-            while (shimNotificationType != ShimNotificationType.None);
+            } while (shimNotificationType != ShimNotificationType.None);
         }
         finally
         {
@@ -353,7 +374,10 @@ internal sealed class OletxTransactionManager
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, $"{nameof(OletxTransactionManager)}.{nameof(ShimNotificationCallback)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                $"{nameof(OletxTransactionManager)}.{nameof(ShimNotificationCallback)}"
+            );
         }
     }
 
@@ -372,7 +396,8 @@ internal sealed class OletxTransactionManager
                     ShimNotificationCallback,
                     null,
                     -1,
-                    false);
+                    false
+                );
             }
         }
 
@@ -396,10 +421,12 @@ internal sealed class OletxTransactionManager
         }
 
         // Initialize the properties from config.
-        _configuredTransactionOptions.IsolationLevel = _isolationLevelProperty = TransactionManager.DefaultIsolationLevel;
-        _configuredTransactionOptions.Timeout = _timeoutProperty = TransactionManager.DefaultTimeout;
+        _configuredTransactionOptions.IsolationLevel = _isolationLevelProperty =
+            TransactionManager.DefaultIsolationLevel;
+        _configuredTransactionOptions.Timeout = _timeoutProperty =
+            TransactionManager.DefaultTimeout;
 
-        InternalResourceManager = new OletxInternalResourceManager( this );
+        InternalResourceManager = new OletxInternalResourceManager(this);
 
         DtcTransactionManagerLock.AcquireWriterLock(-1);
         try
@@ -439,7 +466,9 @@ internal sealed class OletxTransactionManager
         DtcTransactionManagerLock.AcquireReaderLock(-1);
         try
         {
-            OletxTransactionIsolationLevel oletxIsoLevel = ConvertIsolationLevel(properties.IsolationLevel);
+            OletxTransactionIsolationLevel oletxIsoLevel = ConvertIsolationLevel(
+                properties.IsolationLevel
+            );
             uint oletxTimeout = DtcTransactionManager.AdjustTimeout(properties.Timeout);
 
             outcomeEnlistment = new OutcomeEnlistment();
@@ -450,7 +479,8 @@ internal sealed class OletxTransactionManager
                     oletxIsoLevel,
                     outcomeEnlistment,
                     out txIdentifier,
-                    out transactionShim);
+                    out transactionShim
+                );
             }
             catch (COMException ex)
             {
@@ -463,13 +493,18 @@ internal sealed class OletxTransactionManager
                 transactionShim,
                 outcomeEnlistment,
                 txIdentifier,
-                oletxIsoLevel);
+                oletxIsoLevel
+            );
             tx = new OletxCommittableTransaction(realTransaction);
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.TransactionCreated(TraceSourceType.TraceSourceOleTx, tx.TransactionTraceId, "OletxTransaction");
+                etwLog.TransactionCreated(
+                    TraceSourceType.TraceSourceOleTx,
+                    tx.TransactionTraceId,
+                    "OletxTransaction"
+                );
             }
         }
         finally
@@ -483,13 +518,16 @@ internal sealed class OletxTransactionManager
     internal OletxEnlistment ReenlistTransaction(
         Guid resourceManagerIdentifier,
         byte[] recoveryInformation,
-        IEnlistmentNotificationInternal enlistmentNotification)
+        IEnlistmentNotificationInternal enlistmentNotification
+    )
     {
         ArgumentNullException.ThrowIfNull(recoveryInformation);
         ArgumentNullException.ThrowIfNull(enlistmentNotification);
 
         // Now go find the resource manager in the collection.
-        OletxResourceManager oletxResourceManager = RegisterResourceManager(resourceManagerIdentifier);
+        OletxResourceManager oletxResourceManager = RegisterResourceManager(
+            resourceManagerIdentifier
+        );
         if (oletxResourceManager == null)
         {
             throw new ArgumentException(SR.InvalidArgument, nameof(resourceManagerIdentifier));
@@ -501,7 +539,10 @@ internal sealed class OletxTransactionManager
         }
 
         // Now ask the resource manager to reenlist.
-        OletxEnlistment returnValue = oletxResourceManager.Reenlist(recoveryInformation, enlistmentNotification);
+        OletxEnlistment returnValue = oletxResourceManager.Reenlist(
+            recoveryInformation,
+            enlistmentNotification
+        );
 
         return returnValue;
     }
@@ -527,7 +568,8 @@ internal sealed class OletxTransactionManager
         try
         {
             // If this resource manager has already been registered, don't register it again.
-            oletxResourceManager = _resourceManagerHashTable![resourceManagerIdentifier] as OletxResourceManager;
+            oletxResourceManager =
+                _resourceManagerHashTable![resourceManagerIdentifier] as OletxResourceManager;
             if (oletxResourceManager != null)
             {
                 return oletxResourceManager;
@@ -545,8 +587,7 @@ internal sealed class OletxTransactionManager
         return oletxResourceManager;
     }
 
-    internal string? CreationNodeName
-        => _nodeNameField;
+    internal string? CreationNodeName => _nodeNameField;
 
     internal OletxResourceManager FindOrRegisterResourceManager(Guid resourceManagerIdentifier)
     {
@@ -560,7 +601,8 @@ internal sealed class OletxTransactionManager
         ResourceManagerHashTableLock.AcquireReaderLock(-1);
         try
         {
-            oletxResourceManager = _resourceManagerHashTable![resourceManagerIdentifier] as OletxResourceManager;
+            oletxResourceManager =
+                _resourceManagerHashTable![resourceManagerIdentifier] as OletxResourceManager;
         }
         finally
         {
@@ -579,7 +621,10 @@ internal sealed class OletxTransactionManager
     {
         get
         {
-            if (DtcTransactionManagerLock.IsReaderLockHeld ||DtcTransactionManagerLock.IsWriterLockHeld)
+            if (
+                DtcTransactionManagerLock.IsReaderLockHeld
+                || DtcTransactionManagerLock.IsWriterLockHeld
+            )
             {
                 if (_dtcTransactionManager == null)
                 {
@@ -594,34 +639,40 @@ internal sealed class OletxTransactionManager
         }
     }
 
-    internal string? NodeName
-        => _nodeNameField;
+    internal string? NodeName => _nodeNameField;
 
     internal static void ProxyException(COMException comException)
     {
-        if (comException.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN ||
-            comException.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+        if (
+            comException.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+            || comException.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+        )
         {
             throw TransactionManagerCommunicationException.Create(
                 SR.TransactionManagerCommunicationException,
-                comException);
+                comException
+            );
         }
         if (comException.ErrorCode == OletxHelper.XACT_E_NETWORK_TX_DISABLED)
         {
             throw TransactionManagerCommunicationException.Create(
                 SR.NetworkTransactionsDisabled,
-                comException);
+                comException
+            );
         }
         // Else if the error is a transaction oriented error, throw a TransactionException
-        if (comException.ErrorCode >= OletxHelper.XACT_E_FIRST &&
-            comException.ErrorCode <= OletxHelper.XACT_E_LAST)
+        if (
+            comException.ErrorCode >= OletxHelper.XACT_E_FIRST
+            && comException.ErrorCode <= OletxHelper.XACT_E_LAST
+        )
         {
             // Special casing XACT_E_NOTRANSACTION
             throw TransactionException.Create(
                 OletxHelper.XACT_E_NOTRANSACTION == comException.ErrorCode
                     ? SR.TransactionAlreadyOver
                     : comException.Message,
-                comException);
+                comException
+            );
         }
     }
 
@@ -640,28 +691,40 @@ internal sealed class OletxTransactionManager
         }
     }
 
-    internal static OletxTransactionIsolationLevel ConvertIsolationLevel(IsolationLevel isolationLevel)
-        => isolationLevel switch
+    internal static OletxTransactionIsolationLevel ConvertIsolationLevel(
+        IsolationLevel isolationLevel
+    ) =>
+        isolationLevel switch
         {
-            IsolationLevel.Serializable => OletxTransactionIsolationLevel.ISOLATIONLEVEL_SERIALIZABLE,
-            IsolationLevel.RepeatableRead => OletxTransactionIsolationLevel.ISOLATIONLEVEL_REPEATABLEREAD,
-            IsolationLevel.ReadCommitted => OletxTransactionIsolationLevel.ISOLATIONLEVEL_READCOMMITTED,
-            IsolationLevel.ReadUncommitted => OletxTransactionIsolationLevel.ISOLATIONLEVEL_READUNCOMMITTED,
+            IsolationLevel.Serializable =>
+                OletxTransactionIsolationLevel.ISOLATIONLEVEL_SERIALIZABLE,
+            IsolationLevel.RepeatableRead =>
+                OletxTransactionIsolationLevel.ISOLATIONLEVEL_REPEATABLEREAD,
+            IsolationLevel.ReadCommitted =>
+                OletxTransactionIsolationLevel.ISOLATIONLEVEL_READCOMMITTED,
+            IsolationLevel.ReadUncommitted =>
+                OletxTransactionIsolationLevel.ISOLATIONLEVEL_READUNCOMMITTED,
             IsolationLevel.Chaos => OletxTransactionIsolationLevel.ISOLATIONLEVEL_CHAOS,
             IsolationLevel.Unspecified => OletxTransactionIsolationLevel.ISOLATIONLEVEL_UNSPECIFIED,
-            _ => OletxTransactionIsolationLevel.ISOLATIONLEVEL_SERIALIZABLE
+            _ => OletxTransactionIsolationLevel.ISOLATIONLEVEL_SERIALIZABLE,
         };
 
-    internal static IsolationLevel ConvertIsolationLevelFromProxyValue(OletxTransactionIsolationLevel proxyIsolationLevel)
-        => proxyIsolationLevel switch
+    internal static IsolationLevel ConvertIsolationLevelFromProxyValue(
+        OletxTransactionIsolationLevel proxyIsolationLevel
+    ) =>
+        proxyIsolationLevel switch
         {
-            OletxTransactionIsolationLevel.ISOLATIONLEVEL_SERIALIZABLE => IsolationLevel.Serializable,
-            OletxTransactionIsolationLevel.ISOLATIONLEVEL_REPEATABLEREAD => IsolationLevel.RepeatableRead,
-            OletxTransactionIsolationLevel.ISOLATIONLEVEL_READCOMMITTED => IsolationLevel.ReadCommitted,
-            OletxTransactionIsolationLevel.ISOLATIONLEVEL_READUNCOMMITTED => IsolationLevel.ReadUncommitted,
+            OletxTransactionIsolationLevel.ISOLATIONLEVEL_SERIALIZABLE =>
+                IsolationLevel.Serializable,
+            OletxTransactionIsolationLevel.ISOLATIONLEVEL_REPEATABLEREAD =>
+                IsolationLevel.RepeatableRead,
+            OletxTransactionIsolationLevel.ISOLATIONLEVEL_READCOMMITTED =>
+                IsolationLevel.ReadCommitted,
+            OletxTransactionIsolationLevel.ISOLATIONLEVEL_READUNCOMMITTED =>
+                IsolationLevel.ReadUncommitted,
             OletxTransactionIsolationLevel.ISOLATIONLEVEL_UNSPECIFIED => IsolationLevel.Unspecified,
             OletxTransactionIsolationLevel.ISOLATIONLEVEL_CHAOS => IsolationLevel.Chaos,
-            _ => IsolationLevel.Serializable
+            _ => IsolationLevel.Serializable,
         };
 
     // Helper object for static synchronization
@@ -710,7 +773,11 @@ internal sealed class OletxInternalResourceManager
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxInternalResourceManager)}.{nameof(TMDown)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxInternalResourceManager)}.{nameof(TMDown)}"
+            );
         }
 
         // make a local copy of the hash table to avoid possible deadlocks when we lock both the global hash table
@@ -747,7 +814,9 @@ internal sealed class OletxInternalResourceManager
         Hashtable? rmHashTable = null;
         if (OletxTransactionManager._resourceManagerHashTable != null)
         {
-            OletxTransactionManager.ResourceManagerHashTableLock.AcquireReaderLock(Timeout.Infinite);
+            OletxTransactionManager.ResourceManagerHashTableLock.AcquireReaderLock(
+                Timeout.Infinite
+            );
             try
             {
                 rmHashTable = (Hashtable)OletxTransactionManager._resourceManagerHashTable.Clone();
@@ -784,10 +853,13 @@ internal sealed class OletxInternalResourceManager
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxInternalResourceManager)}.{nameof(TMDown)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxInternalResourceManager)}.{nameof(TMDown)}"
+            );
         }
     }
 
-    internal void CallReenlistComplete()
-        => ResourceManagerShim!.ReenlistComplete();
+    internal void CallReenlistComplete() => ResourceManagerShim!.ReenlistComplete();
 }

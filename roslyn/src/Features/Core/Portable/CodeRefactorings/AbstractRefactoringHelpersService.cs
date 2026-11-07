@@ -16,20 +16,40 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings
 {
-    internal abstract class AbstractRefactoringHelpersService<TExpressionSyntax, TArgumentSyntax, TExpressionStatementSyntax> : IRefactoringHelpersService
+    internal abstract class AbstractRefactoringHelpersService<
+        TExpressionSyntax,
+        TArgumentSyntax,
+        TExpressionStatementSyntax
+    > : IRefactoringHelpersService
         where TExpressionSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionStatementSyntax : SyntaxNode
     {
         protected abstract IHeaderFacts HeaderFacts { get; }
 
-        public abstract bool IsBetweenTypeMembers(SourceText sourceText, SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? typeDeclaration);
+        public abstract bool IsBetweenTypeMembers(
+            SourceText sourceText,
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? typeDeclaration
+        );
 
         public async Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
-            Document document, TextSpan selectionRaw, bool allowEmptyNodes, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            Document document,
+            TextSpan selectionRaw,
+            bool allowEmptyNodes,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             using var _1 = ArrayBuilder<TSyntaxNode>.GetInstance(out var relevantNodesBuilder);
-            await AddRelevantNodesAsync(document, selectionRaw, relevantNodesBuilder, cancellationToken).ConfigureAwait(false);
+            await AddRelevantNodesAsync(
+                    document,
+                    selectionRaw,
+                    relevantNodesBuilder,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (allowEmptyNodes)
                 return relevantNodesBuilder.ToImmutable();
@@ -46,18 +66,27 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         }
 
         private async Task AddRelevantNodesAsync<TSyntaxNode>(
-            Document document, TextSpan selectionRaw, ArrayBuilder<TSyntaxNode> relevantNodes, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            Document document,
+            TextSpan selectionRaw,
+            ArrayBuilder<TSyntaxNode> relevantNodes,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // Given selection is trimmed first to enable over-selection that spans multiple lines. Since trailing whitespace ends
             // at newline boundary over-selection to e.g. a line after LocalFunctionStatement would cause FindNode to find enclosing
-            // block's Node. That is because in addition to LocalFunctionStatement the selection would also contain trailing trivia 
+            // block's Node. That is because in addition to LocalFunctionStatement the selection would also contain trailing trivia
             // (whitespace) of following statement.
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var headerFacts = document.GetRequiredLanguageService<IHeaderFactsService>();
-            var selectionTrimmed = await CodeRefactoringHelpers.GetTrimmedTextSpanAsync(document, selectionRaw, cancellationToken).ConfigureAwait(false);
+            var selectionTrimmed = await CodeRefactoringHelpers
+                .GetTrimmedTextSpanAsync(document, selectionRaw, cancellationToken)
+                .ConfigureAwait(false);
 
             // If user selected only whitespace we don't want to return anything. We could do following:
             //  1) Consider token that owns (as its trivia) the whitespace.
@@ -70,8 +99,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             // Every time a Node is considered an extractNodes method is called to add all nodes around the original one
             // that should also be considered.
             //
-            // That enables us to e.g. return node `b` when Node `var a = b;` is being considered without a complex (and potentially 
-            // lang. & situation dependent) into Children descending code here.  We can't just try extracted Node because we might 
+            // That enables us to e.g. return node `b` when Node `var a = b;` is being considered without a complex (and potentially
+            // lang. & situation dependent) into Children descending code here.  We can't just try extracted Node because we might
             // want the whole node `var a = b;`
 
             // Handle selections:
@@ -79,13 +108,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             //   - The smallest node whose FullSpan includes the whole (trimmed) selection
             //   - Using FullSpan is important because it handles over-selection with comments
             //   - Travels upwards through same-sized (FullSpan) nodes, extracting
-            // - Token with wanted Node as direct parent is selected (e.g. IdentifierToken for LocalFunctionStatement: `C [|Fun|]() {}`) 
+            // - Token with wanted Node as direct parent is selected (e.g. IdentifierToken for LocalFunctionStatement: `C [|Fun|]() {}`)
             // Note: Whether we have selection or location has to be checked against original selection because selecting just
             // whitespace could collapse selectionTrimmed into and empty Location. But we don't want `[|   |]token`
             // registering as `   [||]token`.
             if (!selectionTrimmed.IsEmpty)
             {
-                AddRelevantNodesForSelection(syntaxFacts, root, selectionTrimmed, relevantNodes, cancellationToken);
+                AddRelevantNodesForSelection(
+                    syntaxFacts,
+                    root,
+                    selectionTrimmed,
+                    relevantNodes,
+                    cancellationToken
+                );
             }
             else
             {
@@ -97,12 +132,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 // touching the Method's Node (through the left edge, see below) which is something the user probably
                 // didn't want since they specifically selected only the return type.
                 //
-                // What the selection is touching is used in two ways. 
+                // What the selection is touching is used in two ways.
                 // - Firstly, it is used to handle situation where it touches a Token whose direct ancestor is wanted
                 //   Node. While having the (even empty) selection inside such token or to left of such Token is already
                 //   handle by code above touching it from right `C methodName[||](){}` isn't (the FindNode for that
                 //   returns Args node).
-                // 
+                //
                 // - Secondly, it is used for left/right edge climbing. E.g. `[||]C methodName(){}` the touching token's
                 //   direct ancestor is TypeNode for the return type but it is still reasonable to expect that the user
                 //   might want to be given refactorings for the whole method (as he has caret on the edge of it).
@@ -110,11 +145,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 //   consider such node & potentially continue traveling upwards. The situation for right edge (`C
                 //   methodName(){}[||]`) is analogical. E.g. for right edge `C methodName(){}[||]`: CloseBraceToken ->
                 //   BlockSyntax -> LocalFunctionStatement -> null (higher node doesn't end on position anymore) Note:
-                //   left-edge climbing needs to handle AttributeLists explicitly, see below for more information. 
+                //   left-edge climbing needs to handle AttributeLists explicitly, see below for more information.
                 //
                 // - Thirdly, if location isn't touching anything, we move the location to the token in whose trivia
                 //   location is in. more about that below.
-                // 
+                //
                 // - Fourthly, if we're in an expression / argument we consider touching a parent expression whenever
                 //   we're within it as long as it is on the first line of such expression (arbitrary heuristic).
 
@@ -122,27 +157,44 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 // higher level desired node once. We do that only for locations because otherwise `[|int|] A { get;
                 // set; }) would trigger all refactorings for Property Decl. We cannot check this any sooner because the
                 // above code could've changed current location.
-                AddNonHiddenCorrectTypeNodes(ExtractNodesInHeader(root, location, headerFacts), relevantNodes, cancellationToken);
+                AddNonHiddenCorrectTypeNodes(
+                    ExtractNodesInHeader(root, location, headerFacts),
+                    relevantNodes,
+                    cancellationToken
+                );
 
                 var (tokenToLeft, tokenToRight) = await GetTokensToLeftAndRightAsync(
-                    document, root, location, cancellationToken).ConfigureAwait(false);
+                        document,
+                        root,
+                        location,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // Add Nodes for touching tokens as described above.
-                AddNodesForTokenToRight(syntaxFacts, root, relevantNodes, tokenToRight, cancellationToken);
+                AddNodesForTokenToRight(
+                    syntaxFacts,
+                    root,
+                    relevantNodes,
+                    tokenToRight,
+                    cancellationToken
+                );
                 AddNodesForTokenToLeft(syntaxFacts, relevantNodes, tokenToLeft, cancellationToken);
 
                 // If the wanted node is an expression syntax -> traverse upwards even if location is deep within a SyntaxNode.
                 // We want to treat more types like expressions, e.g.: ArgumentSyntax should still trigger even if deep-in.
                 if (IsWantedTypeExpressionLike<TSyntaxNode>())
                 {
-                    // Reason to treat Arguments (and potentially others) as Expression-like: 
+                    // Reason to treat Arguments (and potentially others) as Expression-like:
                     // https://github.com/dotnet/roslyn/pull/37295#issuecomment-516145904
-                    await AddNodesDeepInAsync(document, location, relevantNodes, cancellationToken).ConfigureAwait(false);
+                    await AddNodesDeepInAsync(document, location, relevantNodes, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }
 
-        private static bool IsWantedTypeExpressionLike<TSyntaxNode>() where TSyntaxNode : SyntaxNode
+        private static bool IsWantedTypeExpressionLike<TSyntaxNode>()
+            where TSyntaxNode : SyntaxNode
         {
             var wantedType = typeof(TSyntaxNode);
 
@@ -150,9 +202,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             var argumentType = typeof(TArgumentSyntax);
             var expressionStatementType = typeof(TExpressionStatementSyntax);
 
-            return IsAEqualOrSubclassOfB(wantedType, expressionType) ||
-                IsAEqualOrSubclassOfB(wantedType, argumentType) ||
-                IsAEqualOrSubclassOfB(wantedType, expressionStatementType);
+            return IsAEqualOrSubclassOfB(wantedType, expressionType)
+                || IsAEqualOrSubclassOfB(wantedType, argumentType)
+                || IsAEqualOrSubclassOfB(wantedType, expressionStatementType);
 
             static bool IsAEqualOrSubclassOfB(Type a, Type b)
             {
@@ -160,17 +212,24 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             }
         }
 
-        private static async Task<(SyntaxToken tokenToLeft, SyntaxToken tokenToRight)> GetTokensToLeftAndRightAsync(
+        private static async Task<(
+            SyntaxToken tokenToLeft,
+            SyntaxToken tokenToRight
+        )> GetTokensToLeftAndRightAsync(
             Document document,
             SyntaxNode root,
             int location,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // get Token for current location
             var tokenOnLocation = root.FindToken(location);
 
             var syntaxKinds = document.GetRequiredLanguageService<ISyntaxKindsService>();
-            if (tokenOnLocation.RawKind == syntaxKinds.CommaToken && location >= tokenOnLocation.Span.End)
+            if (
+                tokenOnLocation.RawKind == syntaxKinds.CommaToken
+                && location >= tokenOnLocation.Span.End
+            )
             {
                 var commaToken = tokenOnLocation;
 
@@ -186,41 +245,46 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 // In this case, consider the user on the X node.
                 var nextToken = commaToken.GetNextToken();
                 var previousToken = commaToken.GetPreviousToken();
-                if (nextToken != default && !commaToken.TrailingTrivia.Any(t => t.RawKind == syntaxKinds.EndOfLineTrivia))
+                if (
+                    nextToken != default
+                    && !commaToken.TrailingTrivia.Any(t => t.RawKind == syntaxKinds.EndOfLineTrivia)
+                )
                 {
                     return (tokenToLeft: default, tokenToRight: nextToken);
                 }
-                else if (previousToken != default && previousToken.Span.End == commaToken.Span.Start)
+                else if (
+                    previousToken != default
+                    && previousToken.Span.End == commaToken.Span.Start
+                )
                 {
                     return (tokenToLeft: previousToken, tokenToRight: default);
                 }
             }
 
             // Gets a token that is directly to the right of current location or that encompasses current location (`[||]tokenToRightOrIn` or `tok[||]enToRightOrIn`)
-            var tokenToRight = tokenOnLocation.Span.Contains(location)
-                ? tokenOnLocation
-                : default;
+            var tokenToRight = tokenOnLocation.Span.Contains(location) ? tokenOnLocation : default;
 
-            // A token can be to the left only when there's either no tokenDirectlyToRightOrIn or there's one  directly starting at current location. 
+            // A token can be to the left only when there's either no tokenDirectlyToRightOrIn or there's one  directly starting at current location.
             // Otherwise (otherwise tokenToRightOrIn is also left from location, e.g: `tok[||]enToRightOrIn`)
             var tokenToLeft = default(SyntaxToken);
             if (tokenToRight == default || tokenToRight.FullSpan.Start == location)
             {
-                var previousToken = tokenOnLocation.Span.End == location
-                    ? tokenOnLocation
-                    : tokenOnLocation.GetPreviousToken(includeZeroWidth: true);
+                var previousToken =
+                    tokenOnLocation.Span.End == location
+                        ? tokenOnLocation
+                        : tokenOnLocation.GetPreviousToken(includeZeroWidth: true);
 
-                tokenToLeft = previousToken.Span.End == location
-                    ? previousToken
-                    : default;
+                tokenToLeft = previousToken.Span.End == location ? previousToken : default;
             }
 
             // If both tokens directly to left & right are empty -> we're somewhere in the middle of whitespace.
-            // Since there wouldn't be (m)any other refactorings we can try to offer at least the ones for (semantically) 
+            // Since there wouldn't be (m)any other refactorings we can try to offer at least the ones for (semantically)
             // closest token/Node. Thus, we move the location to the token in whose `.FullSpan` the original location was.
             if (tokenToLeft == default && tokenToRight == default)
             {
-                var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                var sourceText = await document
+                    .GetValueTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (IsAcceptableLineDistanceAway(sourceText, tokenOnLocation, location))
                 {
@@ -239,7 +303,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             return (tokenToLeft, tokenToRight);
 
             static bool IsAcceptableLineDistanceAway(
-                SourceText sourceText, SyntaxToken tokenOnLocation, int location)
+                SourceText sourceText,
+                SyntaxToken tokenOnLocation,
+                int location
+            )
             {
                 // assume non-trivia token can't span multiple lines
                 var tokenLine = sourceText.Lines.GetLineFromPosition(tokenOnLocation.Span.Start);
@@ -250,7 +317,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 if (lineDistance is not 0 and not 1)
                     return false;
 
-                // Note: being a line below a tokenOnLocation is impossible in current model as whitespace 
+                // Note: being a line below a tokenOnLocation is impossible in current model as whitespace
                 // trailing trivia ends on new line. Which is fine because if you're a line _after_ some node
                 // you usually don't want refactorings for what's above you.
 
@@ -272,7 +339,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             ISyntaxFactsService syntaxFacts,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
             SyntaxToken tokenToLeft,
-            CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var location = tokenToLeft.Span.End;
 
@@ -284,16 +353,22 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 {
                     // Consider either a Node that is:
                     // - Ancestor Node of such Token as long as their span ends on location (it's still on the edge)
-                    AddNonHiddenCorrectTypeNodes(ExtractNodesSimple(leftNode, syntaxFacts), relevantNodesBuilder, cancellationToken);
+                    AddNonHiddenCorrectTypeNodes(
+                        ExtractNodesSimple(leftNode, syntaxFacts),
+                        relevantNodesBuilder,
+                        cancellationToken
+                    );
 
                     leftNode = leftNode?.Parent;
                     if (leftNode is null)
                         break;
 
-                    if (leftNode.GetLastToken().Span.End != location && leftNode.Span.End != location)
+                    if (
+                        leftNode.GetLastToken().Span.End != location
+                        && leftNode.Span.End != location
+                    )
                         break;
-                }
-                while (true);
+                } while (true);
 
                 // as long as current tokenToLeft is empty -> its previous token is also tokenToLeft
                 tokenToLeft = tokenToLeft.Span.IsEmpty
@@ -307,7 +382,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             SyntaxNode root,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
             SyntaxToken tokenToRightOrIn,
-            CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var location = tokenToRightOrIn.Span.Start;
 
@@ -317,9 +394,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 do
                 {
                     // Consider either a Node that is:
-                    // - Parent of touched Token (location can be within) 
+                    // - Parent of touched Token (location can be within)
                     // - Ancestor Node of such Token as long as their span starts on location (it's still on the edge)
-                    AddNonHiddenCorrectTypeNodes(ExtractNodesSimple(rightNode, syntaxFacts), relevantNodesBuilder, cancellationToken);
+                    AddNonHiddenCorrectTypeNodes(
+                        ExtractNodesSimple(rightNode, syntaxFacts),
+                        relevantNodesBuilder,
+                        cancellationToken
+                    );
 
                     rightNode = rightNode?.Parent;
                     if (rightNode == null)
@@ -334,12 +415,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     // - On the left edge of the node sans AttributeLists (& as everywhere comments)
                     if (rightNode.Span.Start != location)
                     {
-                        var rightNodeSpanWithoutAttributes = syntaxFacts.GetSpanWithoutAttributes(root, rightNode);
+                        var rightNodeSpanWithoutAttributes = syntaxFacts.GetSpanWithoutAttributes(
+                            root,
+                            rightNode
+                        );
                         if (rightNodeSpanWithoutAttributes.Start != location)
                             break;
                     }
-                }
-                while (true);
+                } while (true);
             }
         }
 
@@ -348,13 +431,17 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             SyntaxNode root,
             TextSpan selectionTrimmed,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
-            CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var selectionNode = root.FindNode(selectionTrimmed, getInnermostNodeForTie: true);
             var prevNode = selectionNode;
             do
             {
-                var nonHiddenExtractedSelectedNodes = ExtractNodesSimple(selectionNode, syntaxFacts).OfType<TSyntaxNode>().Where(n => !n.OverlapsHiddenPosition(cancellationToken));
+                var nonHiddenExtractedSelectedNodes = ExtractNodesSimple(selectionNode, syntaxFacts)
+                    .OfType<TSyntaxNode>()
+                    .Where(n => !n.OverlapsHiddenPosition(cancellationToken));
                 foreach (var nonHiddenExtractedNode in nonHiddenExtractedSelectedNodes)
                 {
                     // For selections we need to handle an edge case where only AttributeLists are within selection (e.g. `Func([|[in][out]|] arg1);`).
@@ -362,7 +449,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     // if user selected only its attributes.
 
                     // Selection contains only AttributeLists -> don't consider current Node
-                    var spanWithoutAttributes = syntaxFacts.GetSpanWithoutAttributes(root, nonHiddenExtractedNode);
+                    var spanWithoutAttributes = syntaxFacts.GetSpanWithoutAttributes(
+                        root,
+                        nonHiddenExtractedNode
+                    );
                     if (!selectionTrimmed.IntersectsWith(spanWithoutAttributes))
                     {
                         break;
@@ -373,21 +463,23 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
                 prevNode = selectionNode;
                 selectionNode = selectionNode.Parent;
-            }
-            while (selectionNode != null && prevNode.FullWidth() == selectionNode.FullWidth());
+            } while (selectionNode != null && prevNode.FullWidth() == selectionNode.FullWidth());
         }
 
         /// <summary>
-        /// Extractor function that retrieves all nodes that should be considered for extraction of given current node. 
+        /// Extractor function that retrieves all nodes that should be considered for extraction of given current node.
         /// <para>
         /// The rationale is that when user selects e.g. entire local declaration statement [|var a = b;|] it is reasonable
         /// to provide refactoring for `b` node. Similarly for other types of refactorings.
         /// </para>
         /// </summary>
         /// <remark>
-        /// Should also return given node. 
+        /// Should also return given node.
         /// </remark>
-        protected virtual IEnumerable<SyntaxNode> ExtractNodesSimple(SyntaxNode? node, ISyntaxFactsService syntaxFacts)
+        protected virtual IEnumerable<SyntaxNode> ExtractNodesSimple(
+            SyntaxNode? node,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             if (node == null)
             {
@@ -397,22 +489,29 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             // First return the node itself so that it is considered
             yield return node;
 
-            // REMARKS: 
+            // REMARKS:
             // The set of currently attempted extractions is in no way exhaustive and covers only cases
             // that were found to be relevant for refactorings that were moved to `TryGetSelectedNodeAsync`.
-            // Feel free to extend it / refine current heuristics. 
+            // Feel free to extend it / refine current heuristics.
 
             // `var a = b;` | `var a = b`;
-            if (syntaxFacts.IsLocalDeclarationStatement(node) || syntaxFacts.IsLocalDeclarationStatement(node.Parent))
+            if (
+                syntaxFacts.IsLocalDeclarationStatement(node)
+                || syntaxFacts.IsLocalDeclarationStatement(node.Parent)
+            )
             {
-                var localDeclarationStatement = syntaxFacts.IsLocalDeclarationStatement(node) ? node : node.Parent!;
+                var localDeclarationStatement = syntaxFacts.IsLocalDeclarationStatement(node)
+                    ? node
+                    : node.Parent!;
 
                 // Check if there's only one variable being declared, otherwise following transformation
                 // would go through which isn't reasonable since we can't say the first one specifically
                 // is wanted.
                 // `var a = 1, `c = 2, d = 3`;
                 // -> `var a = 1`, c = 2, d = 3;
-                var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
+                var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
+                    localDeclarationStatement
+                );
                 if (variables.Count == 1)
                 {
                     var declaredVariable = variables.First();
@@ -421,7 +520,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     yield return declaredVariable;
 
                     // -> `b`
-                    var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(declaredVariable);
+                    var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(
+                        declaredVariable
+                    );
                     if (initializer != null)
                     {
                         var value = syntaxFacts.GetValueOfEqualsValueClause(initializer);
@@ -452,7 +553,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             // -> `b`
             if (syntaxFacts.IsSimpleAssignmentStatement(node))
             {
-                syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(node, out _, out _, out var rightSide);
+                syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(
+                    node,
+                    out _,
+                    out _,
+                    out var rightSide
+                );
                 yield return rightSide;
             }
 
@@ -474,10 +580,20 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <summary>
         /// Extractor function that checks and retrieves all nodes current location is in a header.
         /// </summary>
-        protected virtual IEnumerable<SyntaxNode> ExtractNodesInHeader(SyntaxNode root, int location, IHeaderFactsService headerFacts)
+        protected virtual IEnumerable<SyntaxNode> ExtractNodesInHeader(
+            SyntaxNode root,
+            int location,
+            IHeaderFactsService headerFacts
+        )
         {
             // Header: [Test] `public int a` { get; set; }
-            if (headerFacts.IsOnPropertyDeclarationHeader(root, location, out var propertyDeclaration))
+            if (
+                headerFacts.IsOnPropertyDeclarationHeader(
+                    root,
+                    location,
+                    out var propertyDeclaration
+                )
+            )
                 yield return propertyDeclaration;
 
             // Header: public C([Test]`int a = 42`) {}
@@ -512,14 +628,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Document document,
             int position,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
-            CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // If we're deep inside we don't have to deal with being on edges (that gets dealt by TryGetSelectedNodeAsync)
             // -> can simply FindToken -> proceed testing its ancestors
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             if (root is null)
             {
-                throw new NotSupportedException(WorkspacesResources.Document_does_not_support_syntax_trees);
+                throw new NotSupportedException(
+                    WorkspacesResources.Document_does_not_support_syntax_trees
+                );
             }
 
             var token = root.FindTokenOnRightOfPosition(position, true);
@@ -530,12 +650,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             {
                 if (ancestor is TSyntaxNode correctTypeNode)
                 {
-                    var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                    var sourceText = await document
+                        .GetValueTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
-                    var argumentStartLine = sourceText.Lines.GetLineFromPosition(correctTypeNode.Span.Start).LineNumber;
+                    var argumentStartLine = sourceText
+                        .Lines.GetLineFromPosition(correctTypeNode.Span.Start)
+                        .LineNumber;
                     var caretLine = sourceText.Lines.GetLineFromPosition(position).LineNumber;
 
-                    if (argumentStartLine == caretLine && !correctTypeNode.OverlapsHiddenPosition(cancellationToken))
+                    if (
+                        argumentStartLine == caretLine
+                        && !correctTypeNode.OverlapsHiddenPosition(cancellationToken)
+                    )
                     {
                         relevantNodesBuilder.Add(correctTypeNode);
                     }
@@ -551,38 +678,72 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         }
 
         private static void AddNonHiddenCorrectTypeNodes<TSyntaxNode>(
-            IEnumerable<SyntaxNode> nodes, ArrayBuilder<TSyntaxNode> resultBuilder, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            IEnumerable<SyntaxNode> nodes,
+            ArrayBuilder<TSyntaxNode> resultBuilder,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
-            var correctTypeNonHiddenNodes = nodes.OfType<TSyntaxNode>().Where(n => !n.OverlapsHiddenPosition(cancellationToken));
+            var correctTypeNonHiddenNodes = nodes
+                .OfType<TSyntaxNode>()
+                .Where(n => !n.OverlapsHiddenPosition(cancellationToken));
             foreach (var nodeToBeAdded in correctTypeNonHiddenNodes)
                 resultBuilder.Add(nodeToBeAdded);
         }
 
-        public bool IsOnTypeHeader(SyntaxNode root, int position, bool fullHeader, [NotNullWhen(true)] out SyntaxNode? typeDeclaration)
-            => HeaderFacts.IsOnTypeHeader(root, position, fullHeader, out typeDeclaration);
+        public bool IsOnTypeHeader(
+            SyntaxNode root,
+            int position,
+            bool fullHeader,
+            [NotNullWhen(true)] out SyntaxNode? typeDeclaration
+        ) => HeaderFacts.IsOnTypeHeader(root, position, fullHeader, out typeDeclaration);
 
-        public bool IsOnPropertyDeclarationHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? propertyDeclaration)
-            => HeaderFacts.IsOnPropertyDeclarationHeader(root, position, out propertyDeclaration);
+        public bool IsOnPropertyDeclarationHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? propertyDeclaration
+        ) => HeaderFacts.IsOnPropertyDeclarationHeader(root, position, out propertyDeclaration);
 
-        public bool IsOnParameterHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? parameter)
-            => HeaderFacts.IsOnParameterHeader(root, position, out parameter);
+        public bool IsOnParameterHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? parameter
+        ) => HeaderFacts.IsOnParameterHeader(root, position, out parameter);
 
-        public bool IsOnMethodHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? method)
-            => HeaderFacts.IsOnMethodHeader(root, position, out method);
+        public bool IsOnMethodHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? method
+        ) => HeaderFacts.IsOnMethodHeader(root, position, out method);
 
-        public bool IsOnLocalFunctionHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? localFunction)
-            => HeaderFacts.IsOnLocalFunctionHeader(root, position, out localFunction);
+        public bool IsOnLocalFunctionHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? localFunction
+        ) => HeaderFacts.IsOnLocalFunctionHeader(root, position, out localFunction);
 
-        public bool IsOnLocalDeclarationHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? localDeclaration)
-            => HeaderFacts.IsOnLocalDeclarationHeader(root, position, out localDeclaration);
+        public bool IsOnLocalDeclarationHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? localDeclaration
+        ) => HeaderFacts.IsOnLocalDeclarationHeader(root, position, out localDeclaration);
 
-        public bool IsOnIfStatementHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? ifStatement)
-            => HeaderFacts.IsOnIfStatementHeader(root, position, out ifStatement);
+        public bool IsOnIfStatementHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? ifStatement
+        ) => HeaderFacts.IsOnIfStatementHeader(root, position, out ifStatement);
 
-        public bool IsOnWhileStatementHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? whileStatement)
-            => HeaderFacts.IsOnWhileStatementHeader(root, position, out whileStatement);
+        public bool IsOnWhileStatementHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? whileStatement
+        ) => HeaderFacts.IsOnWhileStatementHeader(root, position, out whileStatement);
 
-        public bool IsOnForeachHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? foreachStatement)
-            => HeaderFacts.IsOnForeachHeader(root, position, out foreachStatement);
+        public bool IsOnForeachHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? foreachStatement
+        ) => HeaderFacts.IsOnForeachHeader(root, position, out foreachStatement);
     }
 }

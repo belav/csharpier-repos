@@ -15,10 +15,13 @@ namespace System.Activities.DurableInstancing
 
     sealed class QueryActivatableWorkflowAsyncResult : DetectActivatableWorkflowsAsyncResult
     {
-        static readonly string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[GetActivatableWorkflowsActivationParameters]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static readonly string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[GetActivatableWorkflowsActivationParameters]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
 
-        public QueryActivatableWorkflowAsyncResult
-            (
+        public QueryActivatableWorkflowAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -27,37 +30,51 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
-        {
-        }
+        )
+            : base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
+        { }
 
         protected override Exception ProcessSqlResult(SqlDataReader reader)
         {
-            Exception exception = StoreUtilities.GetNextResultSet(base.InstancePersistenceCommand.Name, reader);
+            Exception exception = StoreUtilities.GetNextResultSet(
+                base.InstancePersistenceCommand.Name,
+                reader
+            );
             if (exception == null)
             {
                 reader.NextResult();
-                List<IDictionary<XName, object>> activationParametersList = new List<IDictionary<XName, object>>();
-                if (reader.Read())//Activatable workflows were found
-                {                    
+                List<IDictionary<XName, object>> activationParametersList =
+                    new List<IDictionary<XName, object>>();
+                if (reader.Read()) //Activatable workflows were found
+                {
                     do
                     {
-                        IDictionary<XName, object> activationParameters = new Dictionary<XName, object>();
-                        activationParameters.Add(WorkflowServiceNamespace.SiteName, reader.GetString(0));
-                        activationParameters.Add(WorkflowServiceNamespace.RelativeApplicationPath, reader.GetString(1));
-                        activationParameters.Add(WorkflowServiceNamespace.RelativeServicePath, reader.GetString(2));
+                        IDictionary<XName, object> activationParameters =
+                            new Dictionary<XName, object>();
+                        activationParameters.Add(
+                            WorkflowServiceNamespace.SiteName,
+                            reader.GetString(0)
+                        );
+                        activationParameters.Add(
+                            WorkflowServiceNamespace.RelativeApplicationPath,
+                            reader.GetString(1)
+                        );
+                        activationParameters.Add(
+                            WorkflowServiceNamespace.RelativeServicePath,
+                            reader.GetString(2)
+                        );
 
                         activationParametersList.Add(activationParameters);
-                    }
-                    while (reader.Read());
+                    } while (reader.Read());
                 }
                 else
                 {
                     base.Store.UpdateEventStatus(false, HasActivatableWorkflowEvent.Value);
                     base.StoreLock.InstanceDetectionTask.ResetTimer(false);
                 }
-                base.InstancePersistenceContext.QueriedInstanceStore(new ActivatableWorkflowsQueryResult(activationParametersList));
+                base.InstancePersistenceContext.QueriedInstanceStore(
+                    new ActivatableWorkflowsQueryResult(activationParametersList)
+                );
             }
             return exception;
         }

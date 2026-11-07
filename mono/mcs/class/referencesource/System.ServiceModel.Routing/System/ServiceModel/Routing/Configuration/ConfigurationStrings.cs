@@ -22,6 +22,7 @@ namespace System.ServiceModel.Routing.Configuration
         internal const string FilterTableName = "filterTableName";
         internal const string FilterTables = "filterTables";
         internal const string FilterType = "filterType";
+
         //internal const string Impersonation = "impersonation";
         internal const string Name = "name";
         internal const string Namespace = "namespace";
@@ -31,7 +32,6 @@ namespace System.ServiceModel.Routing.Configuration
         internal const string ProcessMessages = "processMessages";
         internal const string RouteOnHeadersOnly = "routeOnHeadersOnly";
         internal const string SoapProcessingEnabled = "soapProcessingEnabled";
-        internal const string EnsureOrderedDispatch = "ensureOrderedDispatch";   
-
+        internal const string EnsureOrderedDispatch = "ensureOrderedDispatch";
     }
 }

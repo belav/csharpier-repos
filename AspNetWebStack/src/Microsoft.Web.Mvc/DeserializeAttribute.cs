@@ -10,9 +10,7 @@ namespace Microsoft.Web.Mvc
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     public sealed class DeserializeAttribute : CustomModelBinderAttribute
     {
-        public DeserializeAttribute()
-        {
-        }
+        public DeserializeAttribute() { }
 
         internal MvcSerializer Serializer { get; set; }
 
@@ -30,15 +28,25 @@ namespace Microsoft.Web.Mvc
                 _serializer = serializer ?? new MvcSerializer();
             }
 
-            [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)", Justification = "The target object should make the correct culture determination, not this method.")]
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            [SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1304:SpecifyCultureInfo",
+                MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)",
+                Justification = "The target object should make the correct culture determination, not this method."
+            )]
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 if (bindingContext == null)
                 {
                     throw new ArgumentNullException("bindingContext");
                 }
 
-                ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                    bindingContext.ModelName
+                );
                 if (valueProviderResult == null)
                 {
                     // nothing found

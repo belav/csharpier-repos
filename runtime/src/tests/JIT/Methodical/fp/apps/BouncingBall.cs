@@ -8,7 +8,6 @@ using Xunit;
 
 public class BouncingBall
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -32,7 +31,8 @@ public class BouncingBall
         while (FirstTime || B.Step())
         {
             output = "|";
-            for (int i = 0; i < (int)Math.Floor(inc * B.Height); i++) output += " ";
+            for (int i = 0; i < (int)Math.Floor(inc * B.Height); i++)
+                output += " ";
             output += "*";
             Console.WriteLine("{0}\r", output);
             FirstTime = false;

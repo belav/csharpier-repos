@@ -8,6 +8,6 @@ namespace Microsoft.CodeAnalysis.Interactive
     {
         Core = 1,
         Desktop32 = 2,
-        Desktop64 = 3
+        Desktop64 = 3,
     }
 }

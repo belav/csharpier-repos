@@ -17,6 +17,7 @@ namespace System.Threading
         public Lock() => _spinCount = s_maxSpinCount;
 
         private static TryLockResult LazyInitializeOrEnter() => TryLockResult.Spin;
+
         private static bool IsSingleProcessor => Environment.IsSingleProcessor;
 
         internal partial struct ThreadId
@@ -28,6 +29,7 @@ namespace System.Threading
             private ulong _id;
 
             public ThreadId(ulong id) => _id = id;
+
             public ulong Id => _id;
 #else
             [ThreadStatic]
@@ -36,6 +38,7 @@ namespace System.Threading
             private uint _id;
 
             public ThreadId(uint id) => _id = id;
+
             public uint Id => _id;
 #endif
 

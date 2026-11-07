@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace Mono.Debugger.Soft
 {
-	public abstract class Value : Mirror {
+    public abstract class Value : Mirror
+    {
+        // FIXME: Add a 'Value' field
 
-		// FIXME: Add a 'Value' field
-
-		internal Value (VirtualMachine vm, long id) : base (vm, id) {
-		}
-	}
+        internal Value(VirtualMachine vm, long id)
+            : base(vm, id) { }
+    }
 }
-

@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -20,14 +19,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunFixupKind fixupKind,
             MethodWithToken method,
             MethodWithGCInfo localMethod,
-            bool isInstantiatingStub) :
-            base (
-                factory,
-                factory.MethodSignature(
-                      fixupKind,
-                      method,
-                      isInstantiatingStub)
-            )
+            bool isInstantiatingStub
+        )
+            : base(factory, factory.MethodSignature(fixupKind, method, isInstantiatingStub))
         {
             _localMethod = localMethod;
             _method = method;
@@ -36,7 +30,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public MethodDesc Method => _method.Method;
 
         public MethodWithGCInfo MethodCodeNode => _localMethod;
-        
+
         public override int ClassCode => 30624770;
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
@@ -59,7 +53,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if ((_localMethod != null) && (((PrecodeMethodImport)other)._localMethod != null))
             {
-                int result = comparer.Compare(_localMethod, ((PrecodeMethodImport)other)._localMethod);
+                int result = comparer.Compare(
+                    _localMethod,
+                    ((PrecodeMethodImport)other)._localMethod
+                );
                 if (result != 0)
                     return result;
             }

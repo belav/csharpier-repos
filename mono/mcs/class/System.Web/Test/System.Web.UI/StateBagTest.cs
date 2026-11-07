@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,40 +27,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Drawing;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI {
-	[TestFixture]	
-	public class StateBagTest {
-		[Test]
-		public void SetValueToNull ()
-		{
-			StateBag sb = new StateBag ();
-			sb ["a"] = "a";
-			Assert.AreEqual ("a", sb ["a"], "#1");
-			sb ["a"] = null;
-			Assert.IsNull (sb ["a"], "#2");
-			Assert.AreEqual (0, sb.Count, "#3");
-		}
+namespace MonoTests.System.Web.UI
+{
+    [TestFixture]
+    public class StateBagTest
+    {
+        [Test]
+        public void SetValueToNull()
+        {
+            StateBag sb = new StateBag();
+            sb["a"] = "a";
+            Assert.AreEqual("a", sb["a"], "#1");
+            sb["a"] = null;
+            Assert.IsNull(sb["a"], "#2");
+            Assert.AreEqual(0, sb.Count, "#3");
+        }
 
-		[Test]
-		public void SetValueToNull2 ()
-		{
-			StateBag sb = new StateBag ();
-			sb ["a"] = "a";
-			Assert.AreEqual ("a", sb ["a"], "#1");
-			((IStateManager) sb).TrackViewState ();
-			sb ["a"] = null;
-			Assert.IsNull (sb ["a"], "#2");
-			Assert.AreEqual (1, sb.Count, "#3");
-		}
-	}
+        [Test]
+        public void SetValueToNull2()
+        {
+            StateBag sb = new StateBag();
+            sb["a"] = "a";
+            Assert.AreEqual("a", sb["a"], "#1");
+            ((IStateManager)sb).TrackViewState();
+            sb["a"] = null;
+            Assert.IsNull(sb["a"], "#2");
+            Assert.AreEqual(1, sb.Count, "#3");
+        }
+    }
 }

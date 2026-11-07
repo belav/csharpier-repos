@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -12,8 +13,15 @@ namespace Test
         bool m_bField3 = false;
         static double[] m_auForward3;
 
-        static uint[] Static1(ref double[] param1) { return null; }
-        static bool Static2() { return false; }
+        static uint[] Static1(ref double[] param1)
+        {
+            return null;
+        }
+
+        static bool Static2()
+        {
+            return false;
+        }
 
         static void Static4(ref double[] param1)
         {

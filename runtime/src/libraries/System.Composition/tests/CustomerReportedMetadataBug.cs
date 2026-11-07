@@ -18,16 +18,12 @@ namespace System.Composition.Lightweight.UnitTests
             public string Name { get; set; }
         }
 
-        public interface IService
-        {
-        }
+        public interface IService { }
 
         [Export(typeof(IService)), ExportMetadata("Name", "1")]
         public class SampleService1 : IService
         {
-            public SampleService1()
-            {
-            }
+            public SampleService1() { }
         }
 
         public class LooseImporter

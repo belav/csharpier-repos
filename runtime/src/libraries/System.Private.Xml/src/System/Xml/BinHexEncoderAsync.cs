@@ -18,7 +18,9 @@ namespace System.Xml
 
             static async Task Core(byte[] buffer, int index, int count, XmlWriter writer)
             {
-                char[] chars = new char[(count * 2) < CharsChunkSize ? (count * 2) : CharsChunkSize];
+                char[] chars = new char[
+                    (count * 2) < CharsChunkSize ? (count * 2) : CharsChunkSize
+                ];
                 int endIndex = index + count;
                 while (index < endIndex)
                 {

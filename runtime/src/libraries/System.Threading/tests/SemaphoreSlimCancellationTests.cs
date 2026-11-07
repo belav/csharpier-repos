@@ -33,26 +33,32 @@ namespace System.Threading.Tests
 
             SemaphoreSlim semaphoreSlim = new SemaphoreSlim(0); // semaphore that will block all waiters
 
-            Task.Run(
-                () =>
-                {
-                    for (int i = 0; i < 300; i++) ;
-                    cancellationTokenSource.Cancel();
-                });
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 300; i++)
+                    ;
+                cancellationTokenSource.Cancel();
+            });
 
             //Now wait.. the wait should abort and an exception should be thrown
             EnsureOperationCanceledExceptionThrown(
-               () => semaphoreSlim.Wait(cancellationToken),
-               cancellationToken);
+                () => semaphoreSlim.Wait(cancellationToken),
+                cancellationToken
+            );
 
             // the token should not have any listeners.
             // currently we don't expose this.. but it was verified manually
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
-        public static async Task Cancel_WaitAsync_ContinuationInvokedAsynchronously(bool withTimeout)
+        public static async Task Cancel_WaitAsync_ContinuationInvokedAsynchronously(
+            bool withTimeout
+        )
         {
             await Task.Run(async () => // escape xunit's SynchronizationContext
             {
@@ -62,14 +68,19 @@ namespace System.Threading.Tests
                 var sentinel = new object();
 
                 var sem = new SemaphoreSlim(0);
-                Task waitTask = withTimeout ?
-                    sem.WaitAsync(TimeSpan.FromDays(1), cts.Token) :
-                    sem.WaitAsync(cts.Token);
-                Task continuation = waitTask.ContinueWith(prev =>
-                {
-                    Assert.Equal(TaskStatus.Canceled, prev.Status);
-                    Assert.NotSame(sentinel, tl.Value);
-                }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                Task waitTask = withTimeout
+                    ? sem.WaitAsync(TimeSpan.FromDays(1), cts.Token)
+                    : sem.WaitAsync(cts.Token);
+                Task continuation = waitTask.ContinueWith(
+                    prev =>
+                    {
+                        Assert.Equal(TaskStatus.Canceled, prev.Status);
+                        Assert.NotSame(sentinel, tl.Value);
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
 
                 Assert.Equal(TaskStatus.WaitingForActivation, continuation.Status);
                 Assert.Equal(0, sem.CurrentCount);
@@ -82,7 +93,10 @@ namespace System.Threading.Tests
             });
         }
 
-        private static void EnsureOperationCanceledExceptionThrown(Action action, CancellationToken token)
+        private static void EnsureOperationCanceledExceptionThrown(
+            Action action,
+            CancellationToken token
+        )
         {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);

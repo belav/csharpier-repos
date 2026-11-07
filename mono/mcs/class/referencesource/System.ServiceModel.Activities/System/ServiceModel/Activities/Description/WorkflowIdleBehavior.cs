@@ -16,7 +16,10 @@ namespace System.ServiceModel.Activities.Description
         internal const string defaultTimeToPersistString = "Infinite";
         internal static TimeSpan defaultTimeToPersist = TimeSpan.MaxValue;
         internal const string defaultTimeToUnloadString = "00:01:00";
-        internal static TimeSpan defaultTimeToUnload = TimeSpan.Parse(defaultTimeToUnloadString, CultureInfo.InvariantCulture);
+        internal static TimeSpan defaultTimeToUnload = TimeSpan.Parse(
+            defaultTimeToUnloadString,
+            CultureInfo.InvariantCulture
+        );
 
         TimeSpan timeToPersist;
         TimeSpan timeToUnload;
@@ -34,7 +37,11 @@ namespace System.ServiceModel.Activities.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value, SR.ErrorTimeToPersistLessThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.ErrorTimeToPersistLessThanZero
+                    );
                 }
                 this.timeToPersist = value;
             }
@@ -47,17 +54,27 @@ namespace System.ServiceModel.Activities.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value, SR.ErrorTimeToUnloadLessThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.ErrorTimeToUnloadLessThanZero
+                    );
                 }
                 this.timeToUnload = value;
             }
         }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        public void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             WorkflowServiceHost workflowServiceHost = serviceHostBase as WorkflowServiceHost;
             if (workflowServiceHost != null)

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -131,7 +131,10 @@ namespace DbLinq.Data.Linq.Sql
                     var stringStatement = statement as string;
                     if (stringStatement != null)
                     {
-                        var parts = stringStatement.Split(new[] { literalIndex }, StringSplitOptions.None);
+                        var parts = stringStatement.Split(
+                            new[] { literalIndex },
+                            StringSplitOptions.None
+                        );
                         for (int partIndex = 0; partIndex < parts.Length; partIndex++)
                         {
                             if (partIndex > 0)
@@ -191,7 +194,11 @@ namespace DbLinq.Data.Linq.Sql
         /// <param name="sqlStatements"></param>
         public void Insert(int index, IList<SqlStatement> sqlStatements)
         {
-            for (int statementIndex = sqlStatements.Count - 1; statementIndex >= 0; statementIndex--)
+            for (
+                int statementIndex = sqlStatements.Count - 1;
+                statementIndex >= 0;
+                statementIndex--
+            )
             {
                 var sqlStatement = sqlStatements[statementIndex];
                 for (int partIndex = sqlStatement.Count - 1; partIndex >= 0; partIndex++)
@@ -211,7 +218,6 @@ namespace DbLinq.Data.Linq.Sql
         {
             Insert(index, (IList<SqlStatement>)sqlStatements);
         }
-
 #endif
 
         /// <summary>
@@ -241,7 +247,9 @@ namespace DbLinq.Data.Linq.Sql
                     // we know how to process only on literal strings
                     if (part is SqlLiteralPart)
                     {
-                        Parts[partIndex] = new SqlLiteralPart(part.Sql.ReplaceCase(oldText, newText, ignoreCase));
+                        Parts[partIndex] = new SqlLiteralPart(
+                            part.Sql.ReplaceCase(oldText, newText, ignoreCase)
+                        );
                     }
                 }
             }
@@ -250,9 +258,7 @@ namespace DbLinq.Data.Linq.Sql
         /// <summary>
         /// Initializes a new instance of the <see cref="SqlStatementBuilder"/> class.
         /// </summary>
-        public SqlStatementBuilder()
-        {
-        }
+        public SqlStatementBuilder() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SqlStatementBuilder"/> class.

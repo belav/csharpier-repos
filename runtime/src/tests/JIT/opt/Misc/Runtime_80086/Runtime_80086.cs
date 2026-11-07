@@ -66,5 +66,5 @@ namespace Runtime_80086
             s = Copy5(s);
             Assert.Equal(13, s[0]);
         }
-   }
+    }
 }

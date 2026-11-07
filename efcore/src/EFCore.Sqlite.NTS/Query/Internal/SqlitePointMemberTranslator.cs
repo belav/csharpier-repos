@@ -14,12 +14,15 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqlitePointMemberTranslator : IMemberTranslator
 {
-    private static readonly IDictionary<MemberInfo, string> MemberToFunctionName = new Dictionary<MemberInfo, string>
+    private static readonly IDictionary<MemberInfo, string> MemberToFunctionName = new Dictionary<
+        MemberInfo,
+        string
+    >
     {
         { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.M))!, "M" },
         { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.X))!, "X" },
         { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.Y))!, "Y" },
-        { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.Z))!, "Z" }
+        { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.Z))!, "Z" },
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -45,13 +48,15 @@ public class SqlitePointMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => MemberToFunctionName.TryGetValue(member, out var functionName)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        MemberToFunctionName.TryGetValue(member, out var functionName)
             ? _sqlExpressionFactory.Function(
                 functionName,
                 new[] { instance! },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true },
-                returnType)
+                returnType
+            )
             : null;
 }

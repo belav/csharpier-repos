@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,39 +28,40 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodeReturn: CodeStatement
-	{
-		CodeExpression retValue;
-		CodeBuilder codeBuilder;
-		
-		internal CodeReturn (CodeBuilder codeBuilder, CodeExpression retValue)
-		{
-			this.codeBuilder = codeBuilder;
-			this.retValue = retValue;
-		}
-		
-		internal CodeReturn (CodeBuilder codeBuilder)
-		{
-			this.codeBuilder = codeBuilder;
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			if (!object.ReferenceEquals (retValue, null))
-				retValue.Generate (gen);
+    public class CodeReturn : CodeStatement
+    {
+        CodeExpression retValue;
+        CodeBuilder codeBuilder;
 
-			gen.Emit (OpCodes.Br, codeBuilder.ReturnLabel);
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			if (object.ReferenceEquals (retValue, null))
-				cp.Write ("return");
-			else {
-				cp.Write ("return ");
-				retValue.PrintCode (cp);
-			}
-		}
-	}
+        internal CodeReturn(CodeBuilder codeBuilder, CodeExpression retValue)
+        {
+            this.codeBuilder = codeBuilder;
+            this.retValue = retValue;
+        }
+
+        internal CodeReturn(CodeBuilder codeBuilder)
+        {
+            this.codeBuilder = codeBuilder;
+        }
+
+        public override void Generate(ILGenerator gen)
+        {
+            if (!object.ReferenceEquals(retValue, null))
+                retValue.Generate(gen);
+
+            gen.Emit(OpCodes.Br, codeBuilder.ReturnLabel);
+        }
+
+        public override void PrintCode(CodeWriter cp)
+        {
+            if (object.ReferenceEquals(retValue, null))
+                cp.Write("return");
+            else
+            {
+                cp.Write("return ");
+                retValue.PrintCode(cp);
+            }
+        }
+    }
 }
 #endif

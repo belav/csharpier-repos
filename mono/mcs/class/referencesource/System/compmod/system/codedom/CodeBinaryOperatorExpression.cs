@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeBinaryOperatorExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a binary operator expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeBinaryOperatorExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeBinaryOperatorExpression : CodeExpression
+    {
         private CodeBinaryOperatorType op;
         private CodeExpression left;
         private CodeExpression right;
@@ -34,8 +31,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeBinaryOperatorExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeBinaryOperatorExpression() {
-        }
+        public CodeBinaryOperatorExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -44,7 +40,12 @@ namespace System.CodeDom {
         ///       parameters.
         ///    </para>
         /// </devdoc>
-        public CodeBinaryOperatorExpression(CodeExpression left, CodeBinaryOperatorType op, CodeExpression right) {
+        public CodeBinaryOperatorExpression(
+            CodeExpression left,
+            CodeBinaryOperatorType op,
+            CodeExpression right
+        )
+        {
             Right = right;
             Operator = op;
             Left = left;
@@ -56,13 +57,10 @@ namespace System.CodeDom {
         ///       the code expression on the right of the operator.
         ///    </para>
         /// </devdoc>
-        public CodeExpression Right {
-            get {
-                return right;
-            }
-            set {
-                right = value;
-            }
+        public CodeExpression Right
+        {
+            get { return right; }
+            set { right = value; }
         }
 
         /// <devdoc>
@@ -71,13 +69,10 @@ namespace System.CodeDom {
         ///       the code expression on the left of the operator.
         ///    </para>
         /// </devdoc>
-        public CodeExpression Left {
-            get {
-                return left;
-            }
-            set {
-                left = value;
-            }
+        public CodeExpression Left
+        {
+            get { return left; }
+            set { left = value; }
         }
 
         /// <devdoc>
@@ -86,13 +81,10 @@ namespace System.CodeDom {
         ///       the operator in the binary operator expression.
         ///    </para>
         /// </devdoc>
-        public CodeBinaryOperatorType Operator {
-            get {
-                return op;
-            }
-            set {
-                op = value;
-            }
+        public CodeBinaryOperatorType Operator
+        {
+            get { return op; }
+            set { op = value; }
         }
     }
 }

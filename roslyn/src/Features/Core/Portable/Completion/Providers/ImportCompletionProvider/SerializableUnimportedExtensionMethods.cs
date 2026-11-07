@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         bool isPartialResult,
         TimeSpan getSymbolsTime,
         TimeSpan createItemsTime,
-        TimeSpan? remoteAssetSyncTime)
+        TimeSpan? remoteAssetSyncTime
+    )
     {
         [DataMember(Order = 0)]
-        public readonly ImmutableArray<SerializableImportCompletionItem> CompletionItems = completionItems;
+        public readonly ImmutableArray<SerializableImportCompletionItem> CompletionItems =
+            completionItems;
 
         [DataMember(Order = 1)]
         public readonly bool IsPartialResult = isPartialResult;

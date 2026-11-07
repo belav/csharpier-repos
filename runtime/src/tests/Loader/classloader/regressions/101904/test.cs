@@ -8,21 +8,18 @@
 using System;
 using Xunit;
 
-public interface IFoo<T>{
-}
+public interface IFoo<T> { }
 
-public class MyBaseType<T> : IFoo<T>{
-}
+public class MyBaseType<T> : IFoo<T> { }
 
-public class MyType<S,T> : MyBaseType<S>, IFoo<T>{
-}
+public class MyType<S, T> : MyBaseType<S>, IFoo<T> { }
 
 public class CMain
 {
     [Fact]
     public static void TestEntryPoint()
     {
-        MyType<string,int> mt = new MyType<string,int>();
+        MyType<string, int> mt = new MyType<string, int>();
         IFoo<int> f = mt;
         Console.WriteLine("Found interface: {0}", f);
     }

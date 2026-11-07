@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,75 +34,74 @@ using System;
 using System.Collections;
 using System.Runtime.Remoting.Lifetime;
 
-namespace System.Runtime.Remoting.Lifetime {
+namespace System.Runtime.Remoting.Lifetime
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ClientSponsor : MarshalByRefObject, ISponsor
+    {
+        TimeSpan renewal_time;
+        Hashtable registered_objects = new Hashtable();
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ClientSponsor : MarshalByRefObject, ISponsor
-	{
-		TimeSpan renewal_time;
-		Hashtable registered_objects = new Hashtable ();
+        public ClientSponsor()
+        {
+            renewal_time = new TimeSpan(0, 2, 0); // default is 2 mins
+        }
 
-		public ClientSponsor ()
-		{
-			renewal_time = new TimeSpan (0, 2, 0); // default is 2 mins
-		}
+        public ClientSponsor(TimeSpan renewalTime)
+        {
+            renewal_time = renewalTime;
+        }
 
-		public ClientSponsor (TimeSpan renewalTime)
-		{
-			renewal_time = renewalTime;
-		}
+        public TimeSpan RenewalTime
+        {
+            get { return renewal_time; }
+            set { renewal_time = value; }
+        }
 
-		public TimeSpan RenewalTime {
-			get {
-				return renewal_time;
-			}
+        public void Close()
+        {
+            foreach (MarshalByRefObject obj in registered_objects.Values)
+            {
+                ILease lease = obj.GetLifetimeService() as ILease;
+                lease.Unregister(this);
+            }
+            registered_objects.Clear();
+        }
 
-			set {
-				renewal_time = value;
-			}
-		}
+        ~ClientSponsor()
+        {
+            Close();
+        }
 
-		public void Close ()
-		{
-			foreach (MarshalByRefObject obj in registered_objects.Values)
-			{
-				ILease lease = obj.GetLifetimeService () as ILease;
-				lease.Unregister (this);
-			}
-			registered_objects.Clear ();
-		}
+        public override object InitializeLifetimeService()
+        {
+            return base.InitializeLifetimeService();
+        }
 
-		~ClientSponsor ()
-		{
-			Close ();
-		}
+        public bool Register(MarshalByRefObject obj)
+        {
+            if (registered_objects.ContainsKey(obj))
+                return false;
+            ILease lease = obj.GetLifetimeService() as ILease;
+            if (lease == null)
+                return false;
+            lease.Register(this);
+            registered_objects.Add(obj, obj);
+            return true;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return base.InitializeLifetimeService ();
-		}
+        public TimeSpan Renewal(ILease lease)
+        {
+            return renewal_time;
+        }
 
-		public bool Register (MarshalByRefObject obj)
-		{
-			if (registered_objects.ContainsKey (obj)) return false;
-			ILease lease = obj.GetLifetimeService () as ILease;
-			if (lease == null) return false;
-			lease.Register (this);
-			registered_objects.Add (obj,obj);
-			return true;
-		}
-
-		public TimeSpan Renewal (ILease lease)
-		{
-			return renewal_time;
-		}
-		       
-		public void Unregister (MarshalByRefObject obj)
-		{
-			if (!registered_objects.ContainsKey (obj)) return;
-			ILease lease = obj.GetLifetimeService () as ILease;
-			lease.Unregister (this);
-			registered_objects.Remove (obj);
-		}
-	}
+        public void Unregister(MarshalByRefObject obj)
+        {
+            if (!registered_objects.ContainsKey(obj))
+                return;
+            ILease lease = obj.GetLifetimeService() as ILease;
+            lease.Unregister(this);
+            registered_objects.Remove(obj);
+        }
+    }
 }

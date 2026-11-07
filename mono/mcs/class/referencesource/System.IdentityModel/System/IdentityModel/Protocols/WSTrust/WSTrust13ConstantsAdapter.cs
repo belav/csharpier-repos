@@ -20,7 +20,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             NamespaceURI = WSTrust13Constants.NamespaceURI;
             Prefix = WSTrust13Constants.Prefix;
         }
-        
+
         internal static WSTrust13ConstantsAdapter Instance
         {
             get
@@ -102,8 +102,12 @@ namespace System.IdentityModel.Protocols.WSTrust
         internal class WSTrust13ElementNames : WSTrustElementNames
         {
             private string keyWrapAlgorithm = WSTrust13Constants.ElementNames.KeyWrapAlgorithm;
-            private string secondaryParameters = WSTrust13Constants.ElementNames.SecondaryParameters;
-            private string requestSecurityTokenResponseCollection = WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection;
+            private string secondaryParameters = WSTrust13Constants
+                .ElementNames
+                .SecondaryParameters;
+            private string requestSecurityTokenResponseCollection = WSTrust13Constants
+                .ElementNames
+                .RequestSecurityTokenResponseCollection;
             private string validateTarget = WSTrust13Constants.ElementNames.ValidateTarget;
 
             internal string KeyWrapAlgorithm
@@ -137,10 +141,18 @@ namespace System.IdentityModel.Protocols.WSTrust
                 IssueResponse = WSTrust13Constants.Actions.IssueResponse;
                 Renew = WSTrust13Constants.Actions.Renew;
                 RenewResponse = WSTrust13Constants.Actions.RenewResponse;
-                RequestSecurityContextToken = WSTrust13Constants.Actions.RequestSecurityContextToken;
-                RequestSecurityContextTokenCancel = WSTrust13Constants.Actions.RequestSecurityContextTokenCancel;
-                RequestSecurityContextTokenResponse = WSTrust13Constants.Actions.RequestSecurityContextTokenResponse;
-                RequestSecurityContextTokenResponseCancel = WSTrust13Constants.Actions.RequestSecurityContextTokenResponseCancel;
+                RequestSecurityContextToken = WSTrust13Constants
+                    .Actions
+                    .RequestSecurityContextToken;
+                RequestSecurityContextTokenCancel = WSTrust13Constants
+                    .Actions
+                    .RequestSecurityContextTokenCancel;
+                RequestSecurityContextTokenResponse = WSTrust13Constants
+                    .Actions
+                    .RequestSecurityContextTokenResponse;
+                RequestSecurityContextTokenResponseCancel = WSTrust13Constants
+                    .Actions
+                    .RequestSecurityContextTokenResponseCancel;
                 Validate = WSTrust13Constants.Actions.Validate;
                 ValidateResponse = WSTrust13Constants.Actions.ValidateResponse;
             }

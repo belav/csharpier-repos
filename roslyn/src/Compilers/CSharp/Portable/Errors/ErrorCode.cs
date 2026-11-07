@@ -16,23 +16,28 @@ namespace Microsoft.CodeAnalysis.CSharp
         //ERR_WarningAsError = 4,
         //ERR_MissingOptionArg = 5,
         ERR_NoMetadataFile = 6,
+
         //FTL_ComPlusInit = 7,
         //FTL_MetadataImportFailure = 8,    no longer used in Roslyn.
         FTL_MetadataCantOpenFile = 9,
+
         //ERR_FatalError = 10,
         //ERR_CantImportBase = 11,
         ERR_NoTypeDef = 12,
+
         //FTL_MetadataEmitFailure = 13,     Roslyn does not catch stream writing exceptions. Those are propagated to the caller.
         //FTL_RequiredFileNotFound = 14,
         //ERR_ClassNameTooLong = 15,    Deprecated in favor of ERR_MetadataNameTooLong.
         ERR_OutputWriteFailed = 16,
         ERR_MultipleEntryPoints = 17,
+
         //ERR_UnimplementedOp = 18,
         ERR_BadBinaryOps = 19,
         ERR_IntDivByZero = 20,
         ERR_BadIndexLHS = 21,
         ERR_BadIndexCount = 22,
         ERR_BadUnaryOp = 23,
+
         //ERR_NoStdLib = 25,        not used in Roslyn
         ERR_ThisInStaticMeth = 26,
         ERR_ThisInBadContext = 27,
@@ -44,10 +49,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_AmbigUnaryOp = 35,
         ERR_InAttrOnOutParam = 36,
         ERR_ValueCantBeNull = 37,
+
         //ERR_WrongNestedThis = 38,     No longer given in Roslyn. Less specific ERR_ObjectRequired "An object reference is required for the non-static..."
         ERR_NoExplicitBuiltinConv = 39, // Requires SymbolDistinguisher.
+
         //FTL_DebugInit = 40,           Not used in Roslyn. Roslyn gives FTL_DebugEmitFailure with specific error code info.
         FTL_DebugEmitFailure = 41,
+
         //FTL_DebugInitFile = 42,       Not used in Roslyn. Roslyn gives ERR_CantOpenFileWrite with specific error info.
         //FTL_BadPDBFormat = 43,        Not used in Roslyn. Roslyn gives FTL_DebugEmitFailure with specific error code info.
         ERR_BadVisReturnType = 50,
@@ -66,6 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_EventNotDelegate = 66,
         WRN_UnreferencedEvent = 67,
         ERR_InterfaceEventInitializer = 68,
+
         //ERR_EventPropertyInInterface = 69,
         ERR_BadEventUsage = 70,
         ERR_ExplicitEventFieldImpl = 71,
@@ -111,6 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_StaticConstParam = 132,
         ERR_NotConstantExpression = 133,
         ERR_NotNullConstRefField = 134,
+
         // ERR_NameIllegallyOverrides = 135, // Not used in Roslyn anymore due to 'Single Meaning' relaxation changes
         ERR_LocalIllegallyOverrides = 136,
         ERR_BadUsingNamespace = 138,
@@ -123,6 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadDelegateConstructor = 148,
         ERR_MethodNameExpected = 149,
         ERR_ConstantExpected = 150,
+
         // ERR_V6SwitchGoverningTypeValueExpected shares the same error code (CS0151) with ERR_IntegralTypeValueExpected in Dev10 compiler.
         // However ERR_IntegralTypeValueExpected is currently unused and hence being removed. If we need to generate this error in future
         // we can use error code CS0166. CS0166 was originally reserved for ERR_SwitchFallInto in Dev10, but was never used.
@@ -141,6 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_SwitchFallThrough = 163,
         WRN_UnreferencedLabel = 164,
         ERR_UseDefViolation = 165,
+
         //ERR_NoInvoke = 167,
         WRN_UnreferencedVar = 168,
         WRN_UnreferencedField = 169,
@@ -176,6 +188,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_TooManyLocals = 204,
         ERR_AbstractBaseCall = 205,
         ERR_RefProperty = 206,
+
         // WRN_OldWarning_UnsafeProp = 207,    // This error code is unused.
         ERR_ManagedAddr = 208,
         ERR_BadFixedInitType = 209,
@@ -195,6 +208,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ParamsMustBeArray = 225,
         ERR_IllegalArglist = 226,
         ERR_IllegalUnsafe = 227,
+
         //ERR_NoAccessibleMember = 228,
         ERR_AmbigMember = 229,
         ERR_BadForeachDecl = 230,
@@ -204,6 +218,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_FieldInitRefNonstatic = 236,
         ERR_SealedNonOverride = 238,
         ERR_CantOverrideSealed = 239,
+
         //ERR_NoDefaultArgs = 241,
         ERR_VoidError = 242,
         ERR_ConditionalOnOverride = 243,
@@ -235,6 +250,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_InaccessibleSetter = 272,
         ERR_InvalidPropertyAccessMod = 273,
         ERR_DuplicatePropertyAccessMods = 274,
+
         //ERR_PropertyAccessModInInterface = 275,
         ERR_AccessModMissingAccessor = 276,
         ERR_UnimplementedInterfaceAccessor = 277,
@@ -256,16 +272,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_GenericConstraintNotSatisfiedTyVar = 314, // Requires SymbolDistinguisher.
         ERR_GenericConstraintNotSatisfiedValType = 315, // Requires SymbolDistinguisher.
         ERR_DuplicateGeneratedName = 316,
+
         // unused 317-399
         ERR_GlobalSingleTypeNameNotFound = 400,
         ERR_NewBoundMustBeLast = 401,
         WRN_MainCantBeGeneric = 402,
         ERR_TypeVarCantBeNull = 403,
+
         // ERR_AttributeCantBeGeneric = 404,
         ERR_DuplicateBound = 405,
         ERR_ClassBoundNotFirst = 406,
         ERR_BadRetType = 407,
         ERR_DuplicateConstraintClause = 409,
+
         //ERR_WrongSignature = 410,     unused in Roslyn
         ERR_CantInferMethTypeArgs = 411,
         ERR_LocalSameNameAsTypeParam = 412,
@@ -277,12 +296,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_AbstractSealedStatic = 418,
         WRN_AmbiguousXMLReference = 419,
         WRN_VolatileByRef = 420,
+
         // WRN_IncrSwitchObsolete = 422,    // This error code is unused.
         ERR_ComImportWithImpl = 423,
         ERR_ComImportWithBase = 424,
         ERR_ImplBadConstraints = 425,
         ERR_DottedTypeNameNotFoundInAgg = 426,
         ERR_MethGrpToNonDel = 428,
+
         // WRN_UnreachableExpr = 429,       // This error code is unused.
         ERR_BadExternAlias = 430,
         ERR_ColColWithTypeAlias = 431,
@@ -298,9 +319,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_SealedStaticClass = 441,
         ERR_PrivateAbstractAccessor = 442,
         ERR_ValueExpected = 443,
+
         // WRN_UnexpectedPredefTypeLoc = 444,  // This error code is unused.
         ERR_UnboxNotLValue = 445,
         ERR_AnonMethGrpInForEach = 446,
+
         //ERR_AttrOnTypeArg = 447,      unused in Roslyn. The scenario for which this error exists should, and does generate a parse error.
         ERR_BadIncDecRetType = 448,
         ERR_TypeConstraintsMustBeUniqueAndFirst = 449,
@@ -313,6 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ConWithValCon = 456,
         ERR_AmbigUDConv = 457,
         WRN_AlwaysNull = 458,
+
         // ERR_AddrOnReadOnlyLocal = 459, // no longer an error
         ERR_OverrideWithConstraints = 460,
         ERR_AmbigOverride = 462,
@@ -320,13 +344,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_CmpAlwaysFalse = 464,
         WRN_FinalizeMethod = 465,
         ERR_ExplicitImplParams = 466,
+
         // WRN_AmbigLookupMeth = 467,      //no longer issued in Roslyn
         //ERR_SameFullNameThisAggThisAgg = 468, no longer used in Roslyn
         WRN_GotoCaseShouldConvert = 469,
         ERR_MethodImplementingAccessor = 470,
+
         //ERR_TypeArgsNotAllowedAmbig = 471,    no longer issued in Roslyn
         WRN_NubExprIsConstBool = 472,
         WRN_ExplicitImplCollision = 473,
+
         // unused 474-499
         ERR_AbstractHasBody = 500,
         ERR_ConcreteMissingBody = 501,
@@ -344,15 +371,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_RecursiveConstructorCall = 516,
         ERR_ObjectCallingBaseConstructor = 517,
         ERR_PredefinedTypeNotFound = 518,
+
         //ERR_PredefinedTypeBadType = 520,
         ERR_StructWithBaseConstructorCall = 522,
         ERR_StructLayoutCycle = 523,
+
         //ERR_InterfacesCannotContainTypes = 524,
         ERR_InterfacesCantContainFields = 525,
         ERR_InterfacesCantContainConstructors = 526,
         ERR_NonInterfaceInInterfaceList = 527,
         ERR_DuplicateInterfaceInBaseList = 528,
         ERR_CycleInInterfaceInheritance = 529,
+
         //ERR_InterfaceMemberHasBody = 531,
         ERR_HidingAbstractMethod = 533,
         ERR_UnimplementedAbstractMethod = 534,
@@ -384,11 +414,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadBinaryOperatorSignature = 563,
         ERR_BadShiftOperatorSignature = 564,
         ERR_InterfacesCantContainConversionOrEqualityOperators = 567,
+
         //ERR_StructsCantContainDefaultConstructor = 568,
         ERR_CantOverrideBogusMethod = 569,
         ERR_BindToBogus = 570,
         ERR_CantCallSpecialMethod = 571,
         ERR_BadTypeReference = 572,
+
         //ERR_FieldInitializerInStruct = 573,
         ERR_BadDestructorName = 574,
         ERR_OnlyClassesCanContainDestructors = 575,
@@ -397,6 +429,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ConditionalMustReturnVoid = 578,
         ERR_DuplicateAttribute = 579,
         ERR_ConditionalOnInterfaceMethod = 582,
+
         //ERR_ICE_Culprit = 583,            No ICE in Roslyn. All of these are unused
         //ERR_ICE_Symbol = 584,
         //ERR_ICE_Node = 585,
@@ -412,6 +445,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ComImportWithoutUuidAttribute = 596,
         ERR_InvalidNamedArgument = 599,
         ERR_DllImportOnInvalidMethod = 601,
+
         // WRN_FeatureDeprecated = 602,    // This error code is unused.
         // ERR_NameAttributeOnOverride = 609, // removed in Roslyn
         ERR_FieldCantBeRefAny = 610,
@@ -432,6 +466,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_InterfaceImplementedImplicitlyByVariadic = 630,
         ERR_IllegalRefParam = 631,
         ERR_BadArgumentToAttribute = 633,
+
         //ERR_MissingComTypeOrMarshaller = 635,
         ERR_StructOffsetOnBadStruct = 636,
         ERR_StructOffsetOnBadField = 637,
@@ -439,8 +474,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_PossibleMistakenNullStatement = 642,
         ERR_DuplicateNamedAttributeArgument = 643,
         ERR_DeriveFromEnumOrValueType = 644,
+
         //ERR_IdentifierTooLong = 645,    //not used in Roslyn. See ERR_MetadataNameTooLong
         ERR_DefaultMemberOnIndexedType = 646,
+
         //ERR_CustomAttributeError = 647,
         ERR_BogusType = 648,
         WRN_UnassignedInternalField = 649,
@@ -459,6 +496,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_LiteralDoubleCast = 664,
         WRN_IncorrectBooleanAssg = 665,
         ERR_ProtectedInStruct = 666,
+
         //ERR_FeatureDeprecated = 667,
         ERR_InconsistentIndexerNames = 668, // Named 'ERR_InconsistantIndexerNames' in native compiler
         ERR_ComImportWithUserCtor = 669,
@@ -469,6 +507,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_BitwiseOrSignExtend = 675,
         ERR_VolatileStruct = 677,
         ERR_VolatileAndReadonly = 678,
+
         // WRN_OldWarning_ProtectedInternal = 679,    // This error code is unused.
         // WRN_OldWarning_AccessibleReadonly = 680,    // This error code is unused.
         ERR_AbstractField = 681,
@@ -479,11 +518,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_AccessorImplementingMethod = 686,
         ERR_AliasQualAsExpression = 687,
         ERR_DerivingFromATyVar = 689,
+
         //FTL_MalformedMetadata = 690,
         ERR_DuplicateTypeParameter = 692,
         WRN_TypeParameterSameAsOuterTypeParameter = 693,
         ERR_TypeVariableSameAsParent = 694,
         ERR_UnifyingInterfaceInstantiations = 695,
+
         // ERR_GenericDerivingFromAttribute = 698,
         ERR_TyVarNotFoundInConstraint = 699,
         ERR_BadBoundType = 701,
@@ -508,13 +549,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ReturnTypeIsStaticClass = 722,
         ERR_VarDeclIsStaticClass = 723,
         ERR_BadEmptyThrowInFinally = 724,
+
         //ERR_InvalidDecl = 725,
         ERR_InvalidSpecifier = 726,
+
         //ERR_InvalidSpecifierUnk = 727,
         WRN_AssignmentToLockOrDispose = 728,
         ERR_ForwardedTypeInThisAssembly = 729,
         ERR_ForwardedTypeIsNested = 730,
         ERR_CycleInTypeForwarder = 731,
+
         //ERR_FwdedGeneric = 733,
         ERR_AssemblyNameOnNonModule = 734,
         ERR_InvalidFwdType = 735,
@@ -531,6 +575,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_InconsistentLambdaParameterUsage = 748,
         ERR_PartialMethodInvalidModifier = 750,
         ERR_PartialMethodOnlyInPartialClass = 751,
+
         // ERR_PartialMethodCannotHaveOutParameters = 752, Removed as part of 'extended partial methods' feature
         // ERR_PartialMethodOnlyMethods = 753, Removed as it is subsumed by ERR_PartialMisplaced
         ERR_PartialMethodNotExplicit = 754,
@@ -544,6 +589,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_PartialMethodStaticDifference = 763,
         ERR_PartialMethodUnsafeDifference = 764,
         ERR_PartialMethodInExpressionTree = 765,
+
         // ERR_PartialMethodMustReturnVoid = 766, Removed as part of 'extended partial methods' feature
         ERR_ExplicitImplCollisionOnRefOut = 767,
         ERR_IndirectRecursiveConstructorCall = 768,
@@ -559,13 +605,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         //ERR_UseAdditionalSquareBrackets = 807,
         //ERR_DotDotNotAssociative = 808,
         WRN_ObsoleteOverridingNonObsolete = 809,
-        WRN_DebugFullNameTooLong = 811,                                 // Dev11 name: ERR_DebugFullNameTooLong
-        ERR_ImplicitlyTypedVariableAssignedBadValue = 815,              // Dev10 name: ERR_ImplicitlyTypedLocalAssignedBadValue
-        ERR_ImplicitlyTypedVariableWithNoInitializer = 818,             // Dev10 name: ERR_ImplicitlyTypedLocalWithNoInitializer
-        ERR_ImplicitlyTypedVariableMultipleDeclarator = 819,            // Dev10 name: ERR_ImplicitlyTypedLocalMultipleDeclarator
-        ERR_ImplicitlyTypedVariableAssignedArrayInitializer = 820,      // Dev10 name: ERR_ImplicitlyTypedLocalAssignedArrayInitializer
+        WRN_DebugFullNameTooLong = 811, // Dev11 name: ERR_DebugFullNameTooLong
+        ERR_ImplicitlyTypedVariableAssignedBadValue = 815, // Dev10 name: ERR_ImplicitlyTypedLocalAssignedBadValue
+        ERR_ImplicitlyTypedVariableWithNoInitializer = 818, // Dev10 name: ERR_ImplicitlyTypedLocalWithNoInitializer
+        ERR_ImplicitlyTypedVariableMultipleDeclarator = 819, // Dev10 name: ERR_ImplicitlyTypedLocalMultipleDeclarator
+        ERR_ImplicitlyTypedVariableAssignedArrayInitializer = 820, // Dev10 name: ERR_ImplicitlyTypedLocalAssignedArrayInitializer
         ERR_ImplicitlyTypedLocalCannotBeFixed = 821,
-        ERR_ImplicitlyTypedVariableCannotBeConst = 822,                 // Dev10 name: ERR_ImplicitlyTypedLocalCannotBeConst
+        ERR_ImplicitlyTypedVariableCannotBeConst = 822, // Dev10 name: ERR_ImplicitlyTypedLocalCannotBeConst
         WRN_ExternCtorNoImplementation = 824,
         ERR_TypeVarNotFound = 825,
         ERR_ImplicitlyTypedArrayNoBestType = 826,
@@ -579,20 +625,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_LambdaInIsAs = 837,
         ERR_ExpressionTreeContainsMultiDimensionalArrayInitializer = 838,
         ERR_MissingArgument = 839,
+
         //ERR_AutoPropertiesMustHaveBothAccessors = 840,
         ERR_VariableUsedBeforeDeclaration = 841,
+
         //ERR_ExplicitLayoutAndAutoImplementedProperty = 842,
         ERR_UnassignedThisAutoPropertyUnsupportedVersion = 843,
         ERR_VariableUsedBeforeDeclarationAndHidesField = 844,
         ERR_ExpressionTreeContainsBadCoalesce = 845,
         ERR_ArrayInitializerExpected = 846,
         ERR_ArrayInitializerIncorrectLength = 847,
+
         // ERR_OverloadRefOutCtor = 851,                                Replaced By ERR_OverloadRefKind
         ERR_ExpressionTreeContainsNamedArgument = 853,
         ERR_ExpressionTreeContainsOptionalArgument = 854,
         ERR_ExpressionTreeContainsIndexedProperty = 855,
         ERR_IndexedPropertyRequiresParams = 856,
         ERR_IndexedPropertyMustHaveAllOptionalParams = 857,
+
         //ERR_FusionConfigFileNameTooLong = 858,    unused in Roslyn. We give ERR_CantReadConfigFile now.
         // unused 859-1000
         ERR_IdentifierExpected = 1001,
@@ -625,6 +675,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_WarningDirective = 1030,
         ERR_TypeExpected = 1031,
         ERR_PPDefFollowsToken = 1032,
+
         //ERR_TooManyLines = 1033,      unused in Roslyn.
         //ERR_LineTooLong = 1034,       unused in Roslyn.
         ERR_OpenEndedComment = 1035,
@@ -640,6 +691,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ProtectedInStatic = 1057,
         WRN_UnreachableGeneralCatch = 1058,
         ERR_IncrementLvalueExpected = 1059,
+
         // WRN_UninitializedField = 1060,  // unused in Roslyn.
         ERR_NoSuchMemberOrExtension = 1061,
         WRN_DeprecatedCollectionInitAddStr = 1062,
@@ -651,13 +703,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_GlobalSingleTypeNameNotFoundFwd = 1068,
         ERR_DottedTypeNameNotFoundInNSFwd = 1069,
         ERR_SingleTypeNameNotFoundFwd = 1070,
+
         //ERR_NoSuchMemberOnNoPIAType = 1071,   //EE
         WRN_IdentifierOrNumericLiteralExpected = 1072,
         ERR_UnexpectedToken = 1073,
+
         // unused 1074-1098
         // ERR_EOLExpected = 1099, // EE
         // ERR_NotSupportedinEE = 1100, // EE
         ERR_BadThisParam = 1100,
+
         // ERR_BadRefWithThis = 1101, replaced by ERR_BadParameterModifiers
         // ERR_BadOutWithThis = 1102, replaced by ERR_BadParameterModifiers
         ERR_BadTypeforThis = 1103,
@@ -665,12 +720,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadExtensionMeth = 1105,
         ERR_BadExtensionAgg = 1106,
         ERR_DupParamMod = 1107,
+
         // ERR_MultiParamMod = 1108, replaced by ERR_BadParameterModifiers
         ERR_ExtensionMethodsDecl = 1109,
         ERR_ExtensionAttrNotFound = 1110,
+
         //ERR_ExtensionTypeParam = 1111,
         ERR_ExplicitExtension = 1112,
         ERR_ValueTypeExtDelegate = 1113,
+
         // unused 1114-1199
         // Below five error codes are unused.
         // WRN_FeatureDeprecated2 = 1200,
@@ -680,6 +738,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         // WRN_OldWarning_FeatureDefaultDeprecated = 1204,
         // unused 1205-1500
         ERR_BadArgCount = 1501,
+
         //ERR_BadArgTypes = 1502,
         ERR_BadArgType = 1503,
         ERR_NoSourceFile = 1504,
@@ -693,6 +752,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_LbraceExpected = 1514,
         ERR_InExpected = 1515,
         ERR_InvalidPreprocExpr = 1517,
+
         //ERR_BadTokenInType = 1518,    unused in Roslyn
         ERR_InvalidMemberDecl = 1519,
         ERR_MemberNeedsType = 1520,
@@ -704,6 +764,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_NoNamespacePrivate = 1527,
         ERR_BadVarDecl = 1528,
         ERR_UsingAfterElements = 1529,
+
         //ERR_NoNewOnNamespaceElement = 1530, EDMAURER we now give BadMemberFlag which is only a little less specific than this.
         //ERR_DontUseInvoke = 1533,
         ERR_BadBinOpArgs = 1534,
@@ -711,29 +772,36 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_NoVoidParameter = 1536,
         ERR_DuplicateAlias = 1537,
         ERR_BadProtectedAccess = 1540,
+
         //ERR_CantIncludeDirectory = 1541,
         ERR_AddModuleAssembly = 1542,
         ERR_BindToBogusProp2 = 1545,
         ERR_BindToBogusProp1 = 1546,
         ERR_NoVoidHere = 1547,
+
         //ERR_CryptoFailed = 1548,
         //ERR_CryptoNotFound = 1549,
         ERR_IndexerNeedsParam = 1551,
         ERR_BadArraySyntax = 1552,
         ERR_BadOperatorSyntax = 1553,
+
         //ERR_BadOperatorSyntax2 = 1554,    Not used in Roslyn.
         ERR_MainClassNotFound = 1555,
         ERR_MainClassNotClass = 1556,
+
         //ERR_MainClassWrongFile = 1557,    Not used in Roslyn. This was used only when compiling and producing two outputs.
         ERR_NoMainInClass = 1558,
+
         //ERR_MainClassIsImport = 1559,     Not used in Roslyn. Scenario occurs so infrequently that it is not worth re-implementing.
         //ERR_FileNameTooLong = 1560,
         //ERR_OutputFileNameTooLong = 1561, Not used in Roslyn. We report a more generic error that doesn't mention "output file" but is fine.
         ERR_OutputNeedsName = 1562,
+
         //ERR_OutputNeedsInput = 1563,
         ERR_CantHaveWin32ResAndManifest = 1564,
         ERR_CantHaveWin32ResAndIcon = 1565,
         ERR_CantReadResource = 1566,
+
         //ERR_AutoResGen = 1567,
         ERR_DocFileGen = 1569,
         WRN_XMLParseError = 1570,
@@ -743,6 +811,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_BadXMLRef = 1574,
         ERR_BadStackAllocExpr = 1575,
         ERR_InvalidLineNumber = 1576,
+
         //ERR_ALinkFailed = 1577,               No alink usage in Roslyn
         ERR_MissingPPFile = 1578,
         ERR_ForEachMissingMember = 1579,
@@ -753,26 +822,31 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadModifierLocation = 1585,
         ERR_MissingArraySize = 1586,
         WRN_UnprocessedXMLComment = 1587,
+
         //ERR_CantGetCORSystemDir = 1588,
         WRN_FailedInclude = 1589,
         WRN_InvalidInclude = 1590,
         WRN_MissingXMLComment = 1591,
         WRN_XMLParseIncludeError = 1592,
         ERR_BadDelArgCount = 1593,
+
         //ERR_BadDelArgTypes = 1594,
         // WRN_OldWarning_MultipleTypeDefs = 1595,    // This error code is unused.
         // WRN_OldWarning_DocFileGenAndIncr = 1596,    // This error code is unused.
         ERR_UnexpectedSemicolon = 1597,
+
         // WRN_XMLParserNotFound = 1598, // No longer used (though, conceivably, we could report it if Linq to Xml is missing at compile time).
         ERR_MethodReturnCantBeRefAny = 1599,
         ERR_CompileCancelled = 1600,
         ERR_MethodArgCantBeRefAny = 1601,
         ERR_AssgReadonlyLocal = 1604,
         ERR_RefReadonlyLocal = 1605,
+
         //ERR_ALinkCloseFailed = 1606,
         WRN_ALinkWarn = 1607,
         ERR_CantUseRequiredAttribute = 1608,
         ERR_NoModifiersOnAccessor = 1609,
+
         // WRN_DeleteAutoResFailed = 1610, // Unused.
         ERR_ParamsCantBeWithModifier = 1611,
         ERR_ReturnNotLValue = 1612,
@@ -782,7 +856,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_CmdOptionConflictsSource = 1616,
         ERR_BadCompatMode = 1617,
         ERR_DelegateOnConditional = 1618,
-        ERR_CantMakeTempFile = 1619,    //changed to now accept only one argument
+        ERR_CantMakeTempFile = 1619, //changed to now accept only one argument
         ERR_BadArgRef = 1620,
         ERR_YieldInAnonMeth = 1621,
         ERR_ReturnInIterator = 1622,
@@ -793,6 +867,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_EmptyYield = 1627,
         ERR_AnonDelegateCantUse = 1628,
         ERR_IllegalInnerUnsafe = 1629,
+
         //ERR_BadWatsonMode = 1630,
         ERR_BadYieldInCatch = 1631,
         ERR_BadDelegateLeave = 1632,
@@ -801,15 +876,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_BadRestoreNumber = 1635,
         ERR_VarargsIterator = 1636,
         ERR_UnsafeIteratorArgType = 1637,
+
         //ERR_ReservedIdentifier = 1638,
         ERR_BadCoClassSig = 1639,
         ERR_MultipleIEnumOfT = 1640,
         ERR_FixedDimsRequired = 1641,
         ERR_FixedNotInStruct = 1642,
         ERR_AnonymousReturnExpected = 1643,
+
         //ERR_NonECMAFeature = 1644,
         WRN_NonECMAFeature = 1645,
         ERR_ExpectedVerbatimLiteral = 1646,
+
         //FTL_StackOverflow = 1647,
         ERR_AssgReadonly2 = 1648,
         ERR_RefReadonly2 = 1649,
@@ -820,6 +898,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_AssgReadonlyLocalCause = 1656,
         ERR_RefReadonlyLocalCause = 1657,
         WRN_ErrorOverride = 1658,
+
         // WRN_OldWarning_ReservedIdentifier = 1659,    // This error code is unused.
         ERR_AnonMethToNonDel = 1660,
         ERR_CantConvAnonMethParams = 1661,
@@ -836,6 +915,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadPlatformType = 1672,
         ERR_ThisStructNotInAnonMeth = 1673,
         ERR_NoConvToIDisp = 1674,
+
         // ERR_InvalidGenericEnum = 1675,    replaced with 7002
         ERR_BadParamRef = 1676,
         ERR_BadParamExtraRef = 1677,
@@ -843,6 +923,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadExternIdentifier = 1679,
         ERR_AliasMissingFile = 1680,
         ERR_GlobalExternAlias = 1681,
+
         // WRN_MissingTypeNested = 1682,   // unused in Roslyn.
         // In Roslyn, we generate errors ERR_MissingTypeInSource and ERR_MissingTypeInAssembly instead of warnings WRN_MissingTypeInSource and WRN_MissingTypeInAssembly respectively.
         // WRN_MissingTypeInSource = 1683,
@@ -853,12 +934,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_CantConvAnonMethNoParams = 1688,
         ERR_ConditionalOnNonAttributeClass = 1689,
         WRN_CallOnNonAgileField = 1690,
+
         // WRN_BadWarningNumber = 1691,    // we no longer generate this warning for an unrecognized warning ID specified as an argument to /nowarn or /warnaserror.
         WRN_InvalidNumber = 1692,
+
         // WRN_FileNameTooLong = 1694, //unused.
         WRN_IllegalPPChecksum = 1695,
         WRN_EndOfPPLineExpected = 1696,
         WRN_ConflictingChecksum = 1697,
+
         // WRN_AssumedMatchThis = 1698,     // This error code is unused.
         // WRN_UseSwitchInsteadOfAttribute = 1699,     // This error code is unused.
         WRN_InvalidAssemblyName = 1700,
@@ -867,13 +951,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_DuplicateImport = 1703,
         ERR_DuplicateImportSimple = 1704,
         ERR_AssemblyMatchBadVersion = 1705,
+
         //ERR_AnonMethNotAllowed = 1706,            Unused in Roslyn. Previously given when a lambda was supplied as an attribute argument.
         // WRN_DelegateNewMethBind = 1707,             // This error code is unused.
         ERR_FixedNeedsLvalue = 1708,
+
         // WRN_EmptyFileName = 1709,        // This error code is unused.
         WRN_DuplicateTypeParamTag = 1710,
         WRN_UnmatchedTypeParamTag = 1711,
         WRN_MissingTypeParamTag = 1712,
+
         //FTL_TypeNameBuilderError = 1713,
         //ERR_ImportBadBase = 1714,                 // This error code is unused and replaced with ERR_NoTypeDef
         ERR_CantChangeTypeOnOverride = 1715,
@@ -885,13 +972,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_NoMultipleInheritance = 1721,
         ERR_BaseClassMustBeFirst = 1722,
         WRN_BadXMLRefTypeVar = 1723,
+
         //ERR_InvalidDefaultCharSetValue = 1724,    Not used in Roslyn.
         ERR_FriendAssemblyBadArgs = 1725,
         ERR_FriendAssemblySNReq = 1726,
+
         //ERR_WatsonSendNotOptedIn = 1727,            We're not doing any custom Watson processing in Roslyn. In modern OSs, Watson behavior is configured with machine policy settings.
         ERR_DelegateOnNullable = 1728,
         ERR_BadCtorArgCount = 1729,
         ERR_GlobalAttributesNotFirst = 1730,
+
         //ERR_CantConvAnonMethReturnsNoDelegate = 1731,     Not used in Roslyn. When there is no delegate, we reuse the message that contains a substitution string for the delegate type.
         //ERR_ParameterExpected = 1732,             Not used in Roslyn.
         ERR_ExpressionExpected = 1733,
@@ -910,11 +1000,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadNamedArgumentForDelegateInvoke = 1746,
         ERR_NoPIAAssemblyMissingAttribute = 1747,
         ERR_NoCanonicalView = 1748,
+
         //ERR_TypeNotFoundForNoPIA = 1749,
         ERR_NoConversionForDefaultParam = 1750,
         ERR_DefaultValueForParamsParameter = 1751,
         ERR_NewCoClassOnLink = 1752,
         ERR_NoPIANestedType = 1754,
+
         //ERR_InvalidTypeIdentifierConstructor = 1755,
         ERR_InteropTypeMissingAttribute = 1756,
         ERR_InteropStructContainsMethods = 1757,
@@ -925,22 +1017,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_ReferencedAssemblyReferencesLinkedPIA = 1762,
         ERR_NotNullRefDefaultParameter = 1763,
         ERR_FixedLocalInLambda = 1764,
+
         // WRN_TypeNotFoundForNoPIAWarning = 1765,  // This error code is unused.
         ERR_MissingMethodOnSourceInterface = 1766,
         ERR_MissingSourceInterface = 1767,
         ERR_GenericsUsedInNoPIAType = 1768,
         ERR_GenericsUsedAcrossAssemblies = 1769,
         ERR_NoConversionForNubDefaultParam = 1770,
+
         //ERR_MemberWithGenericsUsedAcrossAssemblies = 1771,
         //ERR_GenericsUsedInBaseTypeAcrossAssemblies = 1772,
         ERR_InvalidSubsystemVersion = 1773,
         ERR_InteropMethodWithBody = 1774,
+
         // unused 1775-1899
         ERR_BadWarningLevel = 1900,
         ERR_BadDebugType = 1902,
+
         //ERR_UnknownTestSwitch = 1903,
         ERR_BadResourceVis = 1906,
         ERR_DefaultValueTypeMustMatch = 1908,
+
         //ERR_DefaultValueBadParamType = 1909, // Replaced by ERR_DefaultValueBadValueType in Roslyn.
         ERR_DefaultValueBadValueType = 1910,
         ERR_MemberAlreadyInitialized = 1912,
@@ -952,14 +1049,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_EmptyElementInitializer = 1920,
         ERR_InitializerAddHasWrongSignature = 1921,
         ERR_CollectionInitRequiresIEnumerable = 1922,
+
         //ERR_InvalidCollectionInitializerType = 1925,  unused in Roslyn. Occurs so infrequently in real usage that it is not worth reimplementing.
         ERR_CantOpenWin32Manifest = 1926,
         WRN_CantHaveManifestForModule = 1927,
+
         //ERR_BadExtensionArgTypes = 1928, unused in Roslyn (replaced by ERR_BadInstanceArgType)
         ERR_BadInstanceArgType = 1929,
         ERR_QueryDuplicateRangeVariable = 1930,
         ERR_QueryRangeVariableOverrides = 1931,
         ERR_QueryRangeVariableAssignedBadValue = 1932,
+
         //ERR_QueryNotAllowed = 1933,       unused in Roslyn. This specific message is not necessary for correctness and adds little.
         ERR_QueryNoProviderCastable = 1934,
         ERR_QueryNoProviderStandard = 1935,
@@ -980,6 +1080,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadArgTypesForCollectionAdd = 1950,
         ERR_ByRefParameterInExpressionTree = 1951,
         ERR_VarArgsInExpressionTree = 1952,
+
         // ERR_MemGroupInExpressionTree = 1953, unused in Roslyn (replaced by ERR_LambdaInIsAs)
         ERR_InitializerAddHasParamModifiers = 1954,
         ERR_NonInvocableMemberCalled = 1955,
@@ -1009,6 +1110,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadDynamicQuery = 1979,
         ERR_DynamicAttributeMissing = 1980,
         WRN_IsDynamicIsConfusing = 1981,
+
         //ERR_DynamicNotAllowedInAttribute = 1982,                    // Replaced by ERR_BadAttributeParamType in Roslyn.
         ERR_BadAsyncReturn = 1983,
         ERR_BadAwaitInFinally = 1984,
@@ -1016,9 +1118,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadAwaitArg = 1986,
         ERR_BadAsyncArgType = 1988,
         ERR_BadAsyncExpressionTree = 1989,
+
         //ERR_WindowsRuntimeTypesMissing = 1990, // unused in Roslyn
         ERR_MixingWinRTEventWithRegular = 1991,
         ERR_BadAwaitWithoutAsync = 1992,
+
         //ERR_MissingAsyncTypes = 1993, // unused in Roslyn
         ERR_BadAsyncLacksBody = 1994,
         ERR_BadAwaitInQuery = 1995,
@@ -1027,6 +1131,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_AsyncLacksAwaits = 1998,
         ERR_FileNotFound = 2001,
         WRN_FileAlreadyIncluded = 2002,
+
         //ERR_DuplicateResponseFile = 2003,
         ERR_NoFileSpec = 2005,
         ERR_SwitchNeedsString = 2006,
@@ -1035,20 +1140,26 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_OpenResponseFile = 2011,
         ERR_CantOpenFileWrite = 2012,
         ERR_BadBaseNumber = 2013,
+
         // WRN_UseNewSwitch = 2014,    //unused.
         ERR_BinaryFile = 2015,
         FTL_BadCodepage = 2016,
         ERR_NoMainOnDLL = 2017,
+
         //FTL_NoMessagesDLL = 2018,
         FTL_InvalidTarget = 2019,
+
         //ERR_BadTargetForSecondInputSet = 2020,    Roslyn doesn't support building two binaries at once!
         FTL_InvalidInputFileName = 2021,
+
         //ERR_NoSourcesInLastInputSet = 2022,       Roslyn doesn't support building two binaries at once!
         WRN_NoConfigNotOnCommandLine = 2023,
         ERR_InvalidFileAlignment = 2024,
+
         //ERR_NoDebugSwitchSourceMap = 2026,    no sourcemap support in Roslyn.
         //ERR_SourceMapFileBinary = 2027,
         WRN_DefineIdentifierRequired = 2029,
+
         //ERR_InvalidSourceMap = 2030,
         //ERR_NoSourceMapFile = 2031,
         //ERR_IllegalOptionChar = 2032,
@@ -1066,11 +1177,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_SourceLinkRequiresPdb = 2044,
         ERR_CannotEmbedWithoutPdb = 2045,
         ERR_BadSwitchValue = 2046,
+
         // unused 2047-2999
         WRN_CLS_NoVarArgs = 3000,
         WRN_CLS_BadArgType = 3001, // Requires SymbolDistinguisher.
         WRN_CLS_BadReturnType = 3002,
         WRN_CLS_BadFieldPropType = 3003,
+
         // WRN_CLS_BadUnicode = 3004, //unused
         WRN_CLS_BadIdentifierCase = 3005,
         WRN_CLS_OverloadRefOut = 3006,
@@ -1101,6 +1214,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         #region diagnostics introduced in C# 5
         // 4000 unused
         ERR_BadAwaitArgIntrinsic = 4001,
+
         // 4002 unused
         ERR_BadAwaitAsIdentifier = 4003,
         ERR_AwaitInUnsafeContext = 4004,
@@ -1134,6 +1248,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadAwaitWithoutAsyncMethod = 4032,
         ERR_BadAwaitWithoutVoidAsyncMethod = 4033,
         ERR_BadAwaitWithoutAsyncLambda = 4034,
+
         // ERR_BadAwaitWithoutAsyncAnonMeth = 4035,         Merged with ERR_BadAwaitWithoutAsyncLambda in Roslyn
         ERR_NoSuchMemberOrExtensionNeedUsing = 4036,
         #endregion diagnostics introduced in C# 5
@@ -1179,8 +1294,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_InvalidVersionFormat = 7034,
         WRN_InvalidVersionFormat = 7035,
         ERR_NoCorrespondingArgument = 7036,
+
         // Moot: WRN_DestructorIsNotFinalizer = 7037,
         ERR_ModuleEmitFailure = 7038,
+
         // ERR_NameIllegallyOverrides2 = 7039, // Not used anymore due to 'Single Meaning' relaxation changes
         // ERR_NameIllegallyOverrides3 = 7040, // Not used anymore due to 'Single Meaning' relaxation changes
         ERR_ResourceFileNameNotUnique = 7041,
@@ -1202,17 +1319,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_PermissionSetAttributeFileReadError = 7057,
         ERR_InvalidVersionFormat2 = 7058,
         ERR_InvalidAssemblyCultureForExe = 7059,
+
         //ERR_AsyncBeforeVersionFive = 7060,
         ERR_DuplicateAttributeInNetModule = 7061,
+
         //WRN_PDBConstantStringValueTooLong = 7063,     gave up on this warning
         ERR_CantOpenIcon = 7064,
         ERR_ErrorBuildingWin32Resources = 7065,
+
         // ERR_IteratorInInteractive = 7066,
         ERR_BadAttributeParamDefaultArgument = 7067,
         ERR_MissingTypeInSource = 7068,
         ERR_MissingTypeInAssembly = 7069,
         ERR_SecurityAttributeInvalidTarget = 7070,
         ERR_InvalidAssemblyName = 7071,
+
         //ERR_PartialTypesBeforeVersionTwo = 7072,
         //ERR_PartialMethodsBeforeVersionThree = 7073,
         //ERR_QueryBeforeVersionThree = 7074,
@@ -1226,6 +1347,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_CallerLineNumberPreferredOverCallerFilePath = 7082,
         ERR_InvalidDynamicCondition = 7083,
         ERR_WinRtEventPassedByRef = 7084,
+
         //ERR_ByRefReturnUnsupported = 7085,
         ERR_NetModuleNameMismatch = 7086,
         ERR_BadModuleName = 7087,
@@ -1238,6 +1360,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_BadAwaitInCatchFilter = 7094,
         WRN_FilterIsConstantTrue = 7095,
         ERR_EncNoPIAReference = 7096,
+
         //ERR_EncNoDynamicOperation = 7097,   // dynamic operations are now allowed
         ERR_LinkedNetmoduleMetadataMustProvideFullPEImage = 7098,
         ERR_MetadataReferencesNotSupported = 7099,
@@ -1271,11 +1394,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         HDN_UnusedUsingDirective = 8019,
         HDN_UnusedExternAlias = 8020,
         WRN_NoRuntimeMetadataVersion = 8021,
-        ERR_FeatureNotAvailableInVersion1 = 8022,        // Note: one per version to make telemetry easier
+        ERR_FeatureNotAvailableInVersion1 = 8022, // Note: one per version to make telemetry easier
         ERR_FeatureNotAvailableInVersion2 = 8023,
         ERR_FeatureNotAvailableInVersion3 = 8024,
         ERR_FeatureNotAvailableInVersion4 = 8025,
         ERR_FeatureNotAvailableInVersion5 = 8026,
+
         // ERR_FeatureNotAvailableInVersion6 is below
         ERR_FieldHasMultipleDistinctConstantValues = 8027,
         ERR_ComImportWithInitializers = 8028,
@@ -1287,27 +1411,34 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_UnableToLoadAnalyzer = 8034,
         ERR_CantReadRulesetFile = 8035,
         ERR_BadPdbData = 8036,
+
         // available 8037-8039
         INF_UnableToLoadSomeTypesInAnalyzer = 8040,
+
         // available 8041-8049
         ERR_InitializerOnNonAutoProperty = 8050,
         ERR_AutoPropertyMustHaveGetAccessor = 8051,
+
         // ERR_AutoPropertyInitializerInInterface = 8052,
         ERR_InstancePropertyInitializerInInterface = 8053,
         ERR_EnumsCantContainDefaultConstructor = 8054,
         ERR_EncodinglessSyntaxTree = 8055,
+
         // ERR_AccessorListAndExpressionBody = 8056, Deprecated in favor of ERR_BlockBodyAndExpressionBody
         ERR_BlockBodyAndExpressionBody = 8057,
         ERR_FeatureIsExperimental = 8058,
         ERR_FeatureNotAvailableInVersion6 = 8059,
+
         // available 8062-8069
         ERR_SwitchFallOut = 8070,
+
         // available = 8071,
         ERR_NullPropagatingOpInExpressionTree = 8072,
         WRN_NubExprIsConstBool2 = 8073,
         ERR_DictionaryInitializerInExpressionTree = 8074,
         ERR_ExtensionCollectionElementInitializerInExpressionTree = 8075,
         ERR_UnclosedExpressionHole = 8076,
+
         // This is now handled by the single ERR_NewlinesAreNotAllowedInsideANonVerbatimInterpolatedString error.
         // ERR_SingleLineCommentInExpressionHole = 8077,
         ERR_InsufficientStack = 8078,
@@ -1417,6 +1548,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_RefReturnReadonlyStatic = 8161,
         ERR_RefReturnReadonly2 = 8162,
         ERR_RefReturnReadonlyStatic2 = 8163,
+
         // ERR_RefReturnCall = 8164,                we use more general ERR_EscapeCall now
         // ERR_RefReturnCall2 = 8165,               we use more general ERR_EscapeCall2 now
         ERR_RefReturnParameter = 8166,
@@ -1440,6 +1572,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_NewWithTupleTypeSyntax = 8181,
         ERR_PredefinedValueTupleTypeMustBeStruct = 8182,
         ERR_DiscardTypeInferenceFailed = 8183,
+
         // ERR_MixedDeconstructionUnsupported = 8184,
         ERR_DeclarationExpressionNotPermitted = 8185,
         ERR_MustDeclareForeachIteration = 8186,
@@ -1464,11 +1597,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         #region more stragglers for C# 7
         ERR_VarInvocationLvalueReserved = 8199,
+
         //ERR_ExpressionVariableInConstructorOrFieldInitializer = 8200,
         //ERR_ExpressionVariableInQueryClause = 8201,
         ERR_PublicSignNetModule = 8202,
         ERR_BadAssemblyName = 8203,
         ERR_BadAsyncMethodBuilderTaskProperty = 8204,
+
         // ERR_AttributesInLocalFuncDecl = 8205,
         ERR_TypeForwardedToMultipleAssemblies = 8206,
         ERR_ExpressionTreeContainsDiscard = 8207,
@@ -1491,8 +1626,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_NoRefOutWhenRefOnly = 8308,
         ERR_NoNetModuleOutputWhenRefOutOrRefOnly = 8309,
         ERR_BadOpOnNullOrDefaultOrNew = 8310,
+
         // ERR_BadDynamicMethodArgDefaultLiteral = 8311,
         ERR_DefaultLiteralNotValid = 8312,
+
         // ERR_DefaultInSwitch = 8313,
         ERR_PatternWrongGenericTypeInVersion = 8314,
         ERR_AmbigBinaryOpsOnDefault = 8315,
@@ -1523,6 +1660,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_TypeReserved = 8336,
         ERR_RefExtensionMustBeValueTypeOrConstrainedToOne = 8337,
         ERR_InExtensionMustBeValueType = 8338,
+
         // ERR_BadParameterModifiersOrder = 8339,
 
         ERR_FieldsInRoStruct = 8340,
@@ -1565,6 +1703,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_RefAssignNarrower = 8374,
 
         ERR_NewBoundWithUnmanaged = 8375,
+
         //ERR_UnmanagedConstraintMustBeFirst = 8376,
         ERR_UnmanagedConstraintNotSatisfied = 8377,
         ERR_CantUseInOrOutInArglist = 8378,
@@ -1587,6 +1726,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         #region diagnostics introduced for C# 8.0
         ERR_FeatureNotAvailableInVersion8 = 8400,
         ERR_AltInterpolatedVerbatimStringsNotAvailable = 8401,
+
         // Unused 8402
         ERR_IteratorMustBeAsync = 8403,
 
@@ -1610,9 +1750,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_VarianceInterfaceNesting = 8427,
         ERR_ImplicitIndexIndexerWithName = 8428,
         ERR_ImplicitRangeIndexerWithName = 8429,
+
         // available range
 
         WRN_ManagedAddr = 8500,
+
         // available range
 
         #region diagnostics introduced for recursive patterns
@@ -1621,6 +1763,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_MissingPattern = 8504,
         ERR_DefaultPattern = 8505,
         ERR_SwitchExpressionNoBestType = 8506,
+
         // ERR_SingleElementPositionalPatternRequiresDisambiguation = 8507, // Retired C# 8 diagnostic
         ERR_VarMayNotBindToType = 8508,
         WRN_SwitchExpressionNotExhaustive = 8509,
@@ -1644,6 +1787,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         WRN_ThrowPossibleNull = 8597,
         ERR_IllegalSuppression = 8598,
+
         // available 8599,
         WRN_ConvertingNullableToNonNullable = 8600,
         WRN_NullReferenceAssignment = 8601,
@@ -1651,6 +1795,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_NullReferenceReturn = 8603,
         WRN_NullReferenceArgument = 8604,
         WRN_UnboxPossibleNull = 8605,
+
         // WRN_NullReferenceIterationVariable = 8606 (unavailable, may be used in warning suppressions in early C# 8.0 code)
         WRN_DisallowNullAttributeForbidsMaybeNullAssignment = 8607,
         WRN_NullabilityMismatchInTypeOnOverride = 8608,
@@ -1671,6 +1816,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_ExplicitNullableAttribute = 8623,
         WRN_NullabilityMismatchInArgumentForOutput = 8624,
         WRN_NullAsNonNullable = 8625,
+
         //WRN_AsOperatorMayReturnNull = 8626,
         ERR_NullableUnconstrainedTypeParameter = 8627,
         ERR_AnnotationDisallowedInObjectCreation = 8628,
@@ -1683,6 +1829,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_TripleDotNotAllowed = 8635,
         ERR_BadNullableContextOption = 8636,
         ERR_NullableDirectiveQualifierExpected = 8637,
+
         //WRN_ConditionalAccessMayReturnNull = 8638,
         ERR_BadNullableTypeof = 8639,
         ERR_ExpressionTreeCantContainRefStruct = 8640,
@@ -1698,6 +1845,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_IsNullableType = 8650,
         ERR_AsNullableType = 8651,
         ERR_FeatureInPreview = 8652,
+
         //WRN_DefaultExpressionMayIntroduceNullT = 8653,
         //WRN_NullLiteralMayIntroduceNullT = 8654,
         WRN_SwitchExpressionNotExhaustiveForNull = 8655,
@@ -1729,12 +1877,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         ERR_LanguageVersionDoesNotSupportInterfaceImplementationForMember = 8706,
 
         ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember = 8707,
+
         //ERR_NotBaseOrImplementedInterface = 8708,
         //ERR_NotImplementedInBase = 8709,
         //ERR_NotDeclaredInBase = 8710,
 
         ERR_DefaultInterfaceImplementationInNoPIAType = 8711,
         ERR_AbstractEventHasAccessors = 8712,
+
         //ERR_NotNullConstraintMustBeFirst = 8713,
         WRN_NullabilityMismatchInTypeParameterNotNullConstraint = 8714,
 
@@ -1996,6 +2146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_CallerArgumentExpressionParamForUnconsumedLocation = 8966,
         ERR_NewlinesAreNotAllowedInsideANonVerbatimInterpolatedString = 8967,
         ERR_AttrTypeArgCannotBeTypeVar = 8968,
+
         // WRN_AttrDependentTypeNotAllowed = 8969, // Backed out of of warning wave 6, may be reintroduced later
         ERR_AttrDependentTypeNotAllowed = 8970,
         WRN_InterpolatedStringHandlerArgumentAttributeIgnoredOnLambdaParameters = 8971,
@@ -2021,6 +2172,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_LowerCaseTypeName = 8981,
         ERR_RecordStructConstructorCallsDefaultConstructor = 8982,
         ERR_StructHasInitializersAndNoDeclaredConstructor = 8983,
+
         // ERR_EncUpdateFailedDelegateTypeChanged = 8984,
 
         ERR_ListPatternRequiresLength = 8985,
@@ -2030,6 +2182,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // param-nullchecking feature removed from C# 11
         ERR_ParameterNullCheckingNotSupported = 8989,
+
         // ERR_DiscardCannotBeNullChecked = 8990,
         // ERR_MustNullCheckInImplementation = 8991,
         // ERR_NonNullableValueTypeIsNullChecked = 8992,
@@ -2121,6 +2274,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         WRN_DuplicateAnalyzerReference = 9067,
         ERR_FileTypeNonUniquePath = 9068,
         ERR_FilePathCannotBeConvertedToUtf8 = 9069,
+
         //ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn = 9070,
         ERR_FileLocalDuplicateNameInNS = 9071,
         ERR_DeconstructVariableCannotBeByRef = 9072,

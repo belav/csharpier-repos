@@ -11,7 +11,9 @@ namespace System.Web.Http.ApiExplorer
     {
         public string GetDocumentation(HttpActionDescriptor actionDescriptor)
         {
-            var apiDocumentation = actionDescriptor.GetCustomAttributes<ApiDocumentationAttribute>().FirstOrDefault();
+            var apiDocumentation = actionDescriptor
+                .GetCustomAttributes<ApiDocumentationAttribute>()
+                .FirstOrDefault();
             if (apiDocumentation != null)
             {
                 return apiDocumentation.Description;
@@ -22,7 +24,9 @@ namespace System.Web.Http.ApiExplorer
 
         public string GetDocumentation(HttpParameterDescriptor parameterDescriptor)
         {
-            var parameterDocumentation = parameterDescriptor.ActionDescriptor.GetCustomAttributes<ApiParameterDocumentationAttribute>().FirstOrDefault(param => param.ParameterName == parameterDescriptor.ParameterName);
+            var parameterDocumentation = parameterDescriptor
+                .ActionDescriptor.GetCustomAttributes<ApiParameterDocumentationAttribute>()
+                .FirstOrDefault(param => param.ParameterName == parameterDescriptor.ParameterName);
             if (parameterDocumentation != null)
             {
                 return parameterDocumentation.Description;
@@ -33,7 +37,9 @@ namespace System.Web.Http.ApiExplorer
 
         public string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
         {
-            var apiDocumentation = controllerDescriptor.GetCustomAttributes<ApiDocumentationAttribute>().FirstOrDefault();
+            var apiDocumentation = controllerDescriptor
+                .GetCustomAttributes<ApiDocumentationAttribute>()
+                .FirstOrDefault();
             if (apiDocumentation != null)
             {
                 return apiDocumentation.Description;
@@ -41,10 +47,12 @@ namespace System.Web.Http.ApiExplorer
 
             return String.Empty;
         }
-        
+
         public string GetResponseDocumentation(HttpActionDescriptor actionDescriptor)
         {
-            var apiDocumentation = actionDescriptor.GetCustomAttributes<ApiResponseDocumentationAttribute>().FirstOrDefault();
+            var apiDocumentation = actionDescriptor
+                .GetCustomAttributes<ApiResponseDocumentationAttribute>()
+                .FirstOrDefault();
             if (apiDocumentation != null)
             {
                 return apiDocumentation.Description;

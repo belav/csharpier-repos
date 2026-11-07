@@ -18,9 +18,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColumnAttribute" /> class.
         /// </summary>
-        public ColumnAttribute()
-        {
-        }
+        public ColumnAttribute() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColumnAttribute" /> class.

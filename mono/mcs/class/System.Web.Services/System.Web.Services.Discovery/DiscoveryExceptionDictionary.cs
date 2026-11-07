@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.DiscoveryExceptionDictionary.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,56 +31,58 @@
 
 using System.Collections;
 
-namespace System.Web.Services.Discovery 
+namespace System.Web.Services.Discovery
 {
-	public sealed class DiscoveryExceptionDictionary : DictionaryBase 
-	{
-		#region Constructors
+    public sealed class DiscoveryExceptionDictionary : DictionaryBase
+    {
+        #region Constructors
 
-		public DiscoveryExceptionDictionary () 
-		{
-		}
-		
-		#endregion // Constructors
+        public DiscoveryExceptionDictionary() { }
 
-		#region Properties
+        #endregion // Constructors
 
-		public Exception this[string url] {
-			get { return (Exception) InnerHashtable [url]; }
-			set { 
-				if (url == null)
-					throw new ArgumentNullException ();
-				InnerHashtable [url] = value; 
-			}
-		}
-		
-		public ICollection Keys {
-			get { return InnerHashtable.Keys; }
-		}
-		
-		public ICollection Values {
-			get { return InnerHashtable.Values; }
-		}
-		
-		#endregion // Properties
+        #region Properties
 
-		#region Methods
+        public Exception this[string url]
+        {
+            get { return (Exception)InnerHashtable[url]; }
+            set
+            {
+                if (url == null)
+                    throw new ArgumentNullException();
+                InnerHashtable[url] = value;
+            }
+        }
 
-		public void Add (string url, Exception value)
-		{
-			InnerHashtable.Add (url, value);
-		}
+        public ICollection Keys
+        {
+            get { return InnerHashtable.Keys; }
+        }
 
-		public bool Contains (string url)
-		{
-			return InnerHashtable.Contains (url);
-		}
-		
-		public void Remove (string url)
-		{
-			InnerHashtable.Remove (url);
-		}
+        public ICollection Values
+        {
+            get { return InnerHashtable.Values; }
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Properties
+
+        #region Methods
+
+        public void Add(string url, Exception value)
+        {
+            InnerHashtable.Add(url, value);
+        }
+
+        public bool Contains(string url)
+        {
+            return InnerHashtable.Contains(url);
+        }
+
+        public void Remove(string url)
+        {
+            InnerHashtable.Remove(url);
+        }
+
+        #endregion // Methods
+    }
 }

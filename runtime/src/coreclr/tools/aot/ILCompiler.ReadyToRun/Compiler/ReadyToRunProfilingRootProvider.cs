@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Internal.JitInterface;
-using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
@@ -21,11 +21,16 @@ namespace ILCompiler
         private IEnumerable<MethodDesc> _profileData;
         private InstructionSetSupport _instructionSetSupport;
 
-        public ReadyToRunProfilingRootProvider(EcmaModule module, ProfileDataManager profileDataManager)
+        public ReadyToRunProfilingRootProvider(
+            EcmaModule module,
+            ProfileDataManager profileDataManager
+        )
         {
             _module = module;
             _profileData = profileDataManager.GetInputProfileDataMethodsForModule(module);
-            _instructionSetSupport = ((ReadyToRunCompilerContext)module.Context).InstructionSetSupport;
+            _instructionSetSupport = (
+                (ReadyToRunCompilerContext)module.Context
+            ).InstructionSetSupport;
         }
 
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
@@ -35,7 +40,10 @@ namespace ILCompiler
                 try
                 {
                     // Validate that this method is fully instantiated
-                    if (method.OwningType.IsGenericDefinition || method.OwningType.ContainsSignatureVariables())
+                    if (
+                        method.OwningType.IsGenericDefinition
+                        || method.OwningType.ContainsSignatureVariables()
+                    )
                     {
                         continue;
                     }
@@ -66,7 +74,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(_instructionSetSupport, method))
                     {
                         ReadyToRunLibraryRootProvider.CheckCanGenerateMethod(method);
-                        rootProvider.AddCompilationRoot(method, rootMinimalDependencies: true, reason: "Profile triggered method");
+                        rootProvider.AddCompilationRoot(
+                            method,
+                            rootMinimalDependencies: true,
+                            reason: "Profile triggered method"
+                        );
                     }
                 }
                 catch (TypeSystemException)

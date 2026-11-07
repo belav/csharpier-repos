@@ -10,6 +10,10 @@ internal static partial class Interop
     {
         [LibraryImport(Interop.Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CopySid(int destinationLength, IntPtr pSidDestination, IntPtr pSidSource);
+        internal static partial bool CopySid(
+            int destinationLength,
+            IntPtr pSidDestination,
+            IntPtr pSidSource
+        );
     }
 }

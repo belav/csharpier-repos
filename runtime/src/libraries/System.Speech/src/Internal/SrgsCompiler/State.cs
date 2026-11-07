@@ -28,9 +28,7 @@ namespace System.Speech.Internal.SrgsCompiler
         }
 
         internal State(Rule rule, uint hState)
-            : this(rule, hState, (int)hState)
-        {
-        }
+            : this(rule, hState, (int)hState) { }
 
         #endregion
 
@@ -45,7 +43,13 @@ namespace System.Speech.Internal.SrgsCompiler
 
         #endregion
 
-        internal void SerializeStateEntries(StreamMarshaler streamBuffer, bool tagsCannotSpanOverMultipleArcs, float[] pWeights, ref uint iArcOffset, ref int iOffset)
+        internal void SerializeStateEntries(
+            StreamMarshaler streamBuffer,
+            bool tagsCannotSpanOverMultipleArcs,
+            float[] pWeights,
+            ref uint iArcOffset,
+            ref int iOffset
+        )
         {
             // The arcs must be sorted before being written to disk.
             List<Arc> outArcs = _outArcs.ToList();
@@ -81,7 +85,12 @@ namespace System.Speech.Internal.SrgsCompiler
                     ++iArcOffset;
 
                     // more than one arc, create an epsilon transition
-                    pWeights[iOffset++] = Arc.SerializeExtraEpsilonWithTag(streamBuffer, arc, lastArc == arc, nextAvailableArc);
+                    pWeights[iOffset++] = Arc.SerializeExtraEpsilonWithTag(
+                        streamBuffer,
+                        arc,
+                        lastArc == arc,
+                        nextAvailableArc
+                    );
 
                     // reset the position of the next available slop for an arc
                     nextAvailableArc += (uint)cSemantics - 1;
@@ -111,14 +120,23 @@ namespace System.Speech.Internal.SrgsCompiler
                         nextAvailableArc++;
 
                         // create an epsilon transition
-                        pWeights[iOffset++] = Arc.SerializeExtraEpsilonWithTag(streamBuffer, arc, true, nextAvailableArc);
+                        pWeights[iOffset++] = Arc.SerializeExtraEpsilonWithTag(
+                            streamBuffer,
+                            arc,
+                            true,
+                            nextAvailableArc
+                        );
 
                         // update the position of the current arc
                         ++iArcOffset;
                     }
 
                     // Set the semantic property reference
-                    arc.SetArcIndexForTag(cSemantics - 1, iArcOffset, tagsCannotSpanOverMultipleArcs);
+                    arc.SetArcIndexForTag(
+                        cSemantics - 1,
+                        iArcOffset,
+                        tagsCannotSpanOverMultipleArcs
+                    );
 
                     // Add the real arc at the end
                     pWeights[iOffset++] = arc.Serialize(streamBuffer, true, iArcOffset++);
@@ -171,18 +189,12 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal State Next
         {
-            get
-            {
-                return _next;
-            }
+            get { return _next; }
         }
 
         internal State Prev
         {
-            get
-            {
-                return _prev;
-            }
+            get { return _prev; }
         }
 
         #endregion
@@ -243,24 +255,41 @@ namespace System.Speech.Internal.SrgsCompiler
             fReachedEndState = false;
             if ((int)(_recurseFlag & RecurFlag.RF_IN_LEFT_RECUR_CHECK) != 0)
             {
-                XmlParser.ThrowSrgsException(SRID.CircularRuleRef, _rule != null ? _rule._rule.Name : string.Empty);
+                XmlParser.ThrowSrgsException(
+                    SRID.CircularRuleRef,
+                    _rule != null ? _rule._rule.Name : string.Empty
+                );
             }
             else
             {
                 if ((_recurseFlag & RecurFlag.RF_CHECKED_LEFT_RECURSION) == 0)
                 {
-                    _recurseFlag |= RecurFlag.RF_CHECKED_LEFT_RECURSION | RecurFlag.RF_IN_LEFT_RECUR_CHECK;
+                    _recurseFlag |=
+                        RecurFlag.RF_CHECKED_LEFT_RECURSION | RecurFlag.RF_IN_LEFT_RECUR_CHECK;
                     foreach (Arc arc in _outArcs)
                     {
-                        bool fRuleReachedEndState = false;                  // Does the rule ref have epsilon path to the end?
+                        bool fRuleReachedEndState = false; // Does the rule ref have epsilon path to the end?
 
                         // Traverse any rule refs to check for circular rule reference.
                         if (arc.RuleRef != null && arc.RuleRef._firstState != null)
                         {
                             State pRuleFirstNode = arc.RuleRef._firstState;
 
-                            if (((int)(pRuleFirstNode._recurseFlag & RecurFlag.RF_IN_LEFT_RECUR_CHECK) != 0) ||   // Circular RuleRef
-                                ((int)(pRuleFirstNode._recurseFlag & RecurFlag.RF_CHECKED_LEFT_RECURSION) == 0))  // Untraversed rule
+                            if (
+                                (
+                                    (int)(
+                                        pRuleFirstNode._recurseFlag
+                                        & RecurFlag.RF_IN_LEFT_RECUR_CHECK
+                                    ) != 0
+                                )
+                                || // Circular RuleRef
+                                (
+                                    (int)(
+                                        pRuleFirstNode._recurseFlag
+                                        & RecurFlag.RF_CHECKED_LEFT_RECURSION
+                                    ) == 0
+                                )
+                            ) // Untraversed rule
                             {
                                 pRuleFirstNode.CheckLeftRecursion(out fRuleReachedEndState);
                             }
@@ -271,7 +300,10 @@ namespace System.Speech.Internal.SrgsCompiler
                         }
 
                         // Can transition be traversed by epsilon?
-                        if (fRuleReachedEndState || ((arc.RuleRef == null) && (arc.WordId == 0) && arc.WordId == 0))
+                        if (
+                            fRuleReachedEndState
+                            || ((arc.RuleRef == null) && (arc.WordId == 0) && arc.WordId == 0)
+                        )
                         {
                             if (arc.End != null)
                             {
@@ -337,46 +369,28 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal Rule Rule
         {
-            get
-            {
-                return _rule;
-            }
+            get { return _rule; }
         }
 
         internal uint Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
 
         internal ArcList OutArcs
         {
-            get
-            {
-                return _outArcs;
-            }
+            get { return _outArcs; }
         }
 
         internal ArcList InArcs
         {
-            get
-            {
-                return _inArcs;
-            }
+            get { return _inArcs; }
         }
 
         internal int SerializeId
         {
-            get
-            {
-                return _iSerialize;
-            }
-            set
-            {
-                _iSerialize = value;
-            }
+            get { return _iSerialize; }
+            set { _iSerialize = value; }
         }
 
         #endregion
@@ -404,10 +418,26 @@ namespace System.Speech.Internal.SrgsCompiler
                 else
                 {
                     // First returns null on empty collections
-                    Arc arc1 = state1._outArcs != null && !state1._outArcs.IsEmpty ? state1._outArcs.First : null;
-                    Arc arc2 = state2._outArcs != null && !state2._outArcs.IsEmpty ? state2._outArcs.First : null;
+                    Arc arc1 =
+                        state1._outArcs != null && !state1._outArcs.IsEmpty
+                            ? state1._outArcs.First
+                            : null;
+                    Arc arc2 =
+                        state2._outArcs != null && !state2._outArcs.IsEmpty
+                            ? state2._outArcs.First
+                            : null;
 
-                    int diff = (arc1 != null ? (arc1.RuleRef != null ? 0x1000000 : 0) + arc1.WordId : state1._iSerialize) - (arc2 != null ? (arc2.RuleRef != null ? 0x1000000 : 0) + arc2.WordId : state2._iSerialize);
+                    int diff =
+                        (
+                            arc1 != null
+                                ? (arc1.RuleRef != null ? 0x1000000 : 0) + arc1.WordId
+                                : state1._iSerialize
+                        )
+                        - (
+                            arc2 != null
+                                ? (arc2.RuleRef != null ? 0x1000000 : 0) + arc2.WordId
+                                : state2._iSerialize
+                        );
 
                     diff = diff != 0 ? diff : state1._iSerialize - state2._iSerialize;
                     //System.Diagnostics.Debug.Assert (diff != 0);
@@ -438,7 +468,11 @@ namespace System.Speech.Internal.SrgsCompiler
                         sb.Append("\x20\x25cf\x20");
                     }
                     sb.Append('#');
-                    sb.Append(arc.Start != null ? arc.Start._id.ToString(CultureInfo.InvariantCulture) : "S");
+                    sb.Append(
+                        arc.Start != null
+                            ? arc.Start._id.ToString(CultureInfo.InvariantCulture)
+                            : "S"
+                    );
                     sb.Append(' ');
                     sb.Append(arc.DebuggerDisplayTags());
                     first = false;
@@ -455,7 +489,9 @@ namespace System.Speech.Internal.SrgsCompiler
                         sb.Append("\x20\x25cf\x20");
                     }
                     sb.Append('#');
-                    sb.Append(arc.End != null ? arc.End._id.ToString(CultureInfo.InvariantCulture) : "E");
+                    sb.Append(
+                        arc.End != null ? arc.End._id.ToString(CultureInfo.InvariantCulture) : "E"
+                    );
                     sb.Append(' ');
                     sb.Append(arc.DebuggerDisplayTags());
                     first = false;
@@ -496,7 +532,7 @@ namespace System.Speech.Internal.SrgsCompiler
             RF_CHECKED_EPSILON = (1 << 0),
             RF_CHECKED_EXIT_PATH = (1 << 1),
             RF_CHECKED_LEFT_RECURSION = (1 << 2),
-            RF_IN_LEFT_RECUR_CHECK = (1 << 3)
+            RF_IN_LEFT_RECUR_CHECK = (1 << 3),
         };
 
         // Flags used by recursive algorithms

@@ -6,9 +6,9 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Text;
     using System.Windows.Forms;
-    using System.Drawing;
 
     internal class EditableLabelControl : Panel
     {
@@ -29,10 +29,7 @@ namespace System.Workflow.Activities.Design
 
         public override Font Font
         {
-            get
-            {
-                return base.Font;
-            }
+            get { return base.Font; }
             set
             {
                 base.Font = value;
@@ -42,10 +39,7 @@ namespace System.Workflow.Activities.Design
 
         public override Color ForeColor
         {
-            get
-            {
-                return base.ForeColor;
-            }
+            get { return base.ForeColor; }
             set
             {
                 base.ForeColor = value;
@@ -55,15 +49,11 @@ namespace System.Workflow.Activities.Design
 
         public override string Text
         {
-            get
-            {
-                return TextBox.Text;
-            }
+            get { return TextBox.Text; }
             set
             {
                 label.Text = value;
                 TextBox.Text = value;
-
             }
         }
 
@@ -101,7 +91,5 @@ namespace System.Workflow.Activities.Design
             DisableEditMode();
             this.Text = TextBox.Text;
         }
-
-
     }
 }

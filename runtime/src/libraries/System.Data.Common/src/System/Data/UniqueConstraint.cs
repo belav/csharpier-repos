@@ -11,8 +11,10 @@ namespace System.Data
     /// Represents a restriction on a set of columns in which all values must be unique.
     /// </summary>
     [DefaultProperty("ConstraintName")]
-    [Editor("Microsoft.VSDesigner.Data.Design.UniqueConstraintEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.UniqueConstraintEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class UniqueConstraint : Constraint
     {
         private DataKey _key;
@@ -117,10 +119,7 @@ namespace System.Data
         // design time serialization only
         internal string[] ColumnNames
         {
-            get
-            {
-                return _key.GetColumnNames();
-            }
+            get { return _key.GetColumnNames(); }
         }
 
         // Use constraint index only for search operations (and use key.GetSortIndex() when enumeration is needed and/or order is important)
@@ -145,7 +144,10 @@ namespace System.Data
             {
                 sortIndexColumns[i] = _constraintIndex._indexFields[i].Column;
             }
-            Debug.Assert(DataKey.ColumnsEqual(_key.ColumnsReference, sortIndexColumns), "UniqueConstraint index columns do not match the key sort index");
+            Debug.Assert(
+                DataKey.ColumnsEqual(_key.ColumnsReference, sortIndexColumns),
+                "UniqueConstraint index columns do not match the key sort index"
+            );
         }
 
         internal void ConstraintIndexClear()
@@ -178,21 +180,32 @@ namespace System.Data
             _key.CheckState();
         }
 
-        internal override void CheckCanAddToCollection(ConstraintCollection constraints)
-        {
-        }
+        internal override void CheckCanAddToCollection(ConstraintCollection constraints) { }
 
-        internal override bool CanBeRemovedFromCollection(ConstraintCollection constraints, bool fThrowException)
+        internal override bool CanBeRemovedFromCollection(
+            ConstraintCollection constraints,
+            bool fThrowException
+        )
         {
             if (Equals(constraints.Table._primaryKey))
             {
-                Debug.Assert(constraints.Table._primaryKey == this, "If the primary key and this are 'Equal', they should also be '=='");
+                Debug.Assert(
+                    constraints.Table._primaryKey == this,
+                    "If the primary key and this are 'Equal', they should also be '=='"
+                );
                 if (!fThrowException)
                     return false;
                 else
                     throw ExceptionBuilder.RemovePrimaryKey(constraints.Table);
             }
-            for (ParentForeignKeyConstraintEnumerator cs = new ParentForeignKeyConstraintEnumerator(Table!.DataSet, Table); cs.GetNext();)
+            for (
+                ParentForeignKeyConstraintEnumerator cs = new ParentForeignKeyConstraintEnumerator(
+                    Table!.DataSet,
+                    Table
+                );
+                cs.GetNext();
+
+            )
             {
                 ForeignKeyConstraint constraint = cs.GetForeignKeyConstraint();
                 if (!_key.ColumnsEqual(constraint.ParentKey))
@@ -229,7 +242,10 @@ namespace System.Data
                     if (1 < r.Count)
                     {
                         DataRow[] rows = index.GetRows(r);
-                        string error = ExceptionBuilder.UniqueConstraintViolationText(_key.ColumnsReference, (object[])uniqueKeys[i]);
+                        string error = ExceptionBuilder.UniqueConstraintViolationText(
+                            _key.ColumnsReference,
+                            (object[])uniqueKeys[i]
+                        );
                         for (int j = 0; j < rows.Length; j++)
                         {
                             rows[j].RowError = error;
@@ -247,10 +263,14 @@ namespace System.Data
 
         internal override void CheckConstraint(DataRow row, DataRowAction action)
         {
-            if (Table!.EnforceConstraints &&
-                (action == DataRowAction.Add ||
-                 action == DataRowAction.Change ||
-                 (action == DataRowAction.Rollback && row._tempRecord != -1)))
+            if (
+                Table!.EnforceConstraints
+                && (
+                    action == DataRowAction.Add
+                    || action == DataRowAction.Change
+                    || (action == DataRowAction.Rollback && row._tempRecord != -1)
+                )
+            )
             {
                 if (row.HaveValuesChanged(ColumnsReference))
                 {
@@ -343,18 +363,12 @@ namespace System.Data
         [ReadOnly(true)]
         public virtual DataColumn[] Columns
         {
-            get
-            {
-                return _key.ToArray();
-            }
+            get { return _key.ToArray(); }
         }
 
         internal DataColumn[] ColumnsReference
         {
-            get
-            {
-                return _key.ColumnsReference;
-            }
+            get { return _key.ColumnsReference; }
         }
 
         /// <summary>
@@ -416,10 +430,7 @@ namespace System.Data
 
         internal DataKey Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
 
         /// <summary>

@@ -17,14 +17,21 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureSeverity
 {
-    public sealed class VarForBuiltInTypesSeverityConfigurationTests : AbstractSuppressionDiagnosticTest
+    public sealed class VarForBuiltInTypesSeverityConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
         protected override ParseOptions GetScriptOptions() => Options.Regular;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => new(new CSharpUseImplicitTypeDiagnosticAnalyzer(), new ConfigureSeverityLevelCodeFixProvider());
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace) =>
+            new(
+                new CSharpUseImplicitTypeDiagnosticAnalyzer(),
+                new ConfigureSeverityLevelCodeFixProvider()
+            );
 
         protected override int CodeActionIndex => 0;
 
@@ -34,7 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             // make sure we start with an existing value of csharp_style_var_for_built_in_types option
             // specified in the editorconfig that's different from the default value:
             Assert.False(CSharpCodeStyleOptions.VarForBuiltInTypes.DefaultValue.Value);
-            Assert.Equal(NotificationOption2.Silent, CSharpCodeStyleOptions.VarForBuiltInTypes.DefaultValue.Notification);
+            Assert.Equal(
+                NotificationOption2.Silent,
+                CSharpCodeStyleOptions.VarForBuiltInTypes.DefaultValue.Notification
+            );
 
             var input = """
                 <Workspace>

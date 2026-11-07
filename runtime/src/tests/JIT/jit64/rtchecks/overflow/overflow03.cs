@@ -6,7 +6,7 @@ using Xunit;
 
 public class OVFTest
 {
-    static public volatile bool rtv;
+    public static volatile bool rtv;
 
     static OVFTest()
     {
@@ -22,11 +22,11 @@ public class OVFTest
 #if OP_DIV
                 a = (sbyte)(a / 0.5);
 #elif OP_ADD
-				a = (sbyte)(a + a);
+                a = (sbyte)(a + a);
 #elif OP_SUB
-				a = (sbyte)(-1 - a - a);
+                a = (sbyte)(-1 - a - a);
 #else
-				a = (sbyte)(a * 2);
+                a = (sbyte)(a * 2);
 #endif
                 return a;
             }
@@ -42,11 +42,11 @@ public class OVFTest
 #if OP_DIV
                 a = (sbyte)(a / 0.5);
 #elif OP_ADD
-				a = (sbyte)(a + a);
+                a = (sbyte)(a + a);
 #elif OP_SUB
-				a = (sbyte)(-1 - a - a);
+                a = (sbyte)(-1 - a - a);
 #else
-				a = (sbyte)(a * 2);
+                a = (sbyte)(a * 2);
 #endif
             }
         }
@@ -61,11 +61,11 @@ public class OVFTest
 #if OP_DIV
                 a = (byte)(a / 0.5);
 #elif OP_ADD
-				a = (byte)(a + a);
+                a = (byte)(a + a);
 #elif OP_SUB
-				a = (byte)(0 - a - a);
+                a = (byte)(0 - a - a);
 #else
-				a = (byte)(a * 2);
+                a = (byte)(a * 2);
 #endif
                 return a;
             }
@@ -81,11 +81,11 @@ public class OVFTest
 #if OP_DIV
                 a = (byte)(a / 0.5);
 #elif OP_ADD
-				a = (byte)(a + a);
+                a = (byte)(a + a);
 #elif OP_SUB
-				a = (byte)(0 - a - a);
+                a = (byte)(0 - a - a);
 #else
-				a = (byte)(a * 2);
+                a = (byte)(a * 2);
 #endif
             }
         }
@@ -100,11 +100,11 @@ public class OVFTest
 #if OP_DIV
                 a = (short)(a / 0.5);
 #elif OP_ADD
-				a = (short)(a + a);
+                a = (short)(a + a);
 #elif OP_SUB
-				a = (short)(-1 - a - a);
+                a = (short)(-1 - a - a);
 #else
-				a = (short)(a * 2);
+                a = (short)(a * 2);
 #endif
                 return a;
             }
@@ -120,11 +120,11 @@ public class OVFTest
 #if OP_DIV
                 a = (short)(a / 0.5);
 #elif OP_ADD
-				a = (short)(a + a);
+                a = (short)(a + a);
 #elif OP_SUB
-				a = (short)(-1 - a - a);
+                a = (short)(-1 - a - a);
 #else
-				a = (short)(a * 2);
+                a = (short)(a * 2);
 #endif
             }
         }
@@ -139,11 +139,11 @@ public class OVFTest
 #if OP_DIV
                 a = (ushort)(a / 0.5);
 #elif OP_ADD
-				a = (ushort)(a + a);
+                a = (ushort)(a + a);
 #elif OP_SUB
-				a = (ushort)(0 - a - a);
+                a = (ushort)(0 - a - a);
 #else
-				a = (ushort)(a * 2);
+                a = (ushort)(a * 2);
 #endif
                 return a;
             }
@@ -159,11 +159,11 @@ public class OVFTest
 #if OP_DIV
                 a = (ushort)(a / 0.5);
 #elif OP_ADD
-				a = (ushort)(a + a);
+                a = (ushort)(a + a);
 #elif OP_SUB
-				a = (ushort)(0 - a - a);
+                a = (ushort)(0 - a - a);
 #else
-				a = (ushort)(a * 2);
+                a = (ushort)(a * 2);
 #endif
             }
         }
@@ -178,11 +178,11 @@ public class OVFTest
 #if OP_DIV
                 a = (int)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = -1 - a - a;
+                a = -1 - a - a;
 #else
-				a = a * 2;
+                a = a * 2;
 #endif
                 return a;
             }
@@ -198,11 +198,11 @@ public class OVFTest
 #if OP_DIV
                 a = (int)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = -1 - a - a;
+                a = -1 - a - a;
 #else
-				a = a * 2;
+                a = a * 2;
 #endif
             }
         }
@@ -217,11 +217,11 @@ public class OVFTest
 #if OP_DIV
                 a = (uint)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = 0U - a - a;
+                a = 0U - a - a;
 #else
-				a = a * 2U;
+                a = a * 2U;
 #endif
                 return a;
             }
@@ -237,11 +237,11 @@ public class OVFTest
 #if OP_DIV
                 a = (uint)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = 0U - a - a;
+                a = 0U - a - a;
 #else
-				a = a * 2U;
+                a = a * 2U;
 #endif
             }
         }
@@ -256,11 +256,11 @@ public class OVFTest
 #if OP_DIV
                 a = (long)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = -1L - a - a;
+                a = -1L - a - a;
 #else
-				a = a * 2L;
+                a = a * 2L;
 #endif
                 return a;
             }
@@ -276,11 +276,11 @@ public class OVFTest
 #if OP_DIV
                 a = (long)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = -1L - a - a;
+                a = -1L - a - a;
 #else
-				a = a * 2L;
+                a = a * 2L;
 #endif
             }
         }
@@ -295,11 +295,11 @@ public class OVFTest
 #if OP_DIV
                 a = (ulong)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = 0UL - a - a;
+                a = 0UL - a - a;
 #else
-				a = a * 2UL;
+                a = a * 2UL;
 #endif
                 return a;
             }
@@ -315,11 +315,11 @@ public class OVFTest
 #if OP_DIV
                 a = (ulong)(a / 0.5);
 #elif OP_ADD
-				a = a + a;
+                a = a + a;
 #elif OP_SUB
-				a = 0UL - a - a;
+                a = 0UL - a - a;
 #else
-				a = a * 2UL;
+                a = a * 2UL;
 #endif
             }
         }
@@ -331,11 +331,11 @@ public class OVFTest
 #if OP_DIV
         const string op = "div.ovf";
 #elif OP_ADD
-		const string op = "add.ovf";
+        const string op = "add.ovf";
 #elif OP_SUB
-		const string op = "sub.ovf";
+        const string op = "sub.ovf";
 #else
-		const string op = "mul.ovf";
+        const string op = "mul.ovf";
 #endif
 
         Console.WriteLine("Runtime Checks [OP: {0}]", op);

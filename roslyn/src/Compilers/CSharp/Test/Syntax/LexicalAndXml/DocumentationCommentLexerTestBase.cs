@@ -112,17 +112,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <param name="text">Defaults to Syntax.GetText of (contextual) kind.</param>
         /// <param name="valueText">Defaults to the computed value of text.</param>
         /// <param name="contextualKind">Defaults to None.</param>
-        internal static TokenDescription Token(SyntaxKind kind, string text = null, string valueText = null, SyntaxKind contextualKind = SyntaxKind.None)
+        internal static TokenDescription Token(
+            SyntaxKind kind,
+            string text = null,
+            string valueText = null,
+            SyntaxKind contextualKind = SyntaxKind.None
+        )
         {
-            string canonicalText = contextualKind == SyntaxKind.None
-                ? SyntaxFacts.GetText(kind)
-                : SyntaxFacts.GetText(contextualKind);
+            string canonicalText =
+                contextualKind == SyntaxKind.None
+                    ? SyntaxFacts.GetText(kind)
+                    : SyntaxFacts.GetText(contextualKind);
             return new TokenDescription
             {
                 Kind = kind,
                 ContextualKind = contextualKind,
                 Text = text ?? canonicalText,
-                ValueText = valueText ?? text ?? canonicalText
+                ValueText = valueText ?? text ?? canonicalText,
             };
         }
 
@@ -135,7 +141,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             public override string ToString()
             {
-                return Kind + " (" + ContextualKind + ") '" + ValueText + "' (really '" + Text + "')";
+                return Kind
+                    + " ("
+                    + ContextualKind
+                    + ") '"
+                    + ValueText
+                    + "' (really '"
+                    + Text
+                    + "')";
             }
         }
 

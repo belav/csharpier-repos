@@ -8,20 +8,21 @@ namespace System.Runtime.Diagnostics
     using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
 
     abstract class DiagnosticTraceBase
     {
         //Diagnostics trace
         protected const string DefaultTraceListenerName = "Default";
-        protected const string TraceRecordVersion = "http://schemas.microsoft.com/2004/10/E2ETraceEvent/TraceRecord";
+        protected const string TraceRecordVersion =
+            "http://schemas.microsoft.com/2004/10/E2ETraceEvent/TraceRecord";
 
         protected static string AppDomainFriendlyName = AppDomain.CurrentDomain.FriendlyName;
         const ushort TracingEventLogCategory = 4;
@@ -33,6 +34,7 @@ namespace System.Runtime.Diagnostics
         SourceLevels level;
         protected string TraceSourceName;
         TraceSource traceSource;
+
         [Fx.Tag.SecurityNote(Critical = "This determines the event source name.")]
         [SecurityCritical]
         string eventSourceName;
@@ -46,10 +48,15 @@ namespace System.Runtime.Diagnostics
 
         protected DateTime LastFailure { get; set; }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecurityCritical method. Does not expose critical resources returned by methods with Link Demands")]
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are invoking TraceSource.Listeners which has a Link Demand for UnmanagedCode permission.",
-            Miscellaneous = "Asserting Unmanaged Code causes traceSource.Listeners to be successfully initiated and cached. But the Listeners property has a LinkDemand for UnmanagedCode, so it can't be read by partially trusted assemblies in heterogeneous appdomains")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "SecurityCritical method. Does not expose critical resources returned by methods with Link Demands"
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are invoking TraceSource.Listeners which has a Link Demand for UnmanagedCode permission.",
+            Miscellaneous = "Asserting Unmanaged Code causes traceSource.Listeners to be successfully initiated and cached. But the Listeners property has a LinkDemand for UnmanagedCode, so it can't be read by partially trusted assemblies in heterogeneous appdomains"
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         static void UnsafeRemoveDefaultTraceListener(TraceSource traceSource)
@@ -59,21 +66,19 @@ namespace System.Runtime.Diagnostics
 
         public TraceSource TraceSource
         {
-            get
-            {
-                return this.traceSource;
-            }
-
-            set
-            {
-                SetTraceSource(value);
-            }
+            get { return this.traceSource; }
+            set { SetTraceSource(value); }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "Does not expose critical resources returned by methods with Link Demands")]
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are invoking TraceSource.Listeners which has a Link Demand for UnmanagedCode permission.",
-            Safe = "Safe because are only retrieving the count of listeners and removing the default trace listener - we aren't leaking any critical resources.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "Does not expose critical resources returned by methods with Link Demands"
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are invoking TraceSource.Listeners which has a Link Demand for UnmanagedCode permission.",
+            Safe = "Safe because are only retrieving the count of listeners and removing the default trace listener - we aren't leaking any critical resources."
+        )]
         [SecuritySafeCritical]
         protected void SetTraceSource(TraceSource traceSource)
         {
@@ -87,10 +92,7 @@ namespace System.Runtime.Diagnostics
 
         public bool HaveListeners
         {
-            get
-            {
-                return this.haveListeners;
-            }
+            get { return this.haveListeners; }
         }
 
         SourceLevels FixLevel(SourceLevels level)
@@ -127,13 +129,16 @@ namespace System.Runtime.Diagnostics
             return level;
         }
 
-        protected virtual void OnSetLevel(SourceLevels level)
-        {
-        }
+        protected virtual void OnSetLevel(SourceLevels level) { }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "Does not expose critical resources returned by methods with Link Demands")]
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are invoking TraceSource.Listeners and SourceSwitch.Level which have Link Demands for UnmanagedCode permission.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "Does not expose critical resources returned by methods with Link Demands"
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are invoking TraceSource.Listeners and SourceSwitch.Level which have Link Demands for UnmanagedCode permission."
+        )]
         [SecurityCritical]
         void SetLevel(SourceLevels level)
         {
@@ -174,45 +179,35 @@ namespace System.Runtime.Diagnostics
 
                 return this.level;
             }
-
             [Fx.Tag.SecurityNote(Critical = "Critical because we are invoking SetLevelTheadSafe.")]
             [SecurityCritical]
-            set
-            {
-                SetLevelThreadSafe(value);
-            }
+            set { SetLevelThreadSafe(value); }
         }
 
         protected string EventSourceName
         {
-            [Fx.Tag.SecurityNote(Critical = "Access critical eventSourceName field",
-                Safe = "Doesn't leak info\\resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical eventSourceName field",
+                Safe = "Doesn't leak info\\resources"
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return this.eventSourceName;
-            }
-
+            get { return this.eventSourceName; }
             [Fx.Tag.SecurityNote(Critical = "This determines the event source name.")]
             [SecurityCritical]
-            set
-            {
-                this.eventSourceName = value;
-            }
+            set { this.eventSourceName = value; }
         }
 
         public bool TracingEnabled
         {
-            get
-            {
-                return this.tracingEnabled && this.traceSource != null;
-            }
+            get { return this.tracingEnabled && this.traceSource != null; }
         }
 
         protected static string ProcessName
         {
-            [Fx.Tag.SecurityNote(Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
-            Safe = "Does not leak any resource and has been reviewed")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
+                Safe = "Does not leak any resource and has been reviewed"
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -227,8 +222,10 @@ namespace System.Runtime.Diagnostics
 
         protected static int ProcessId
         {
-            [Fx.Tag.SecurityNote(Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
-            Safe = "Does not leak any resource and has been reviewed")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
+                Safe = "Does not leak any resource and has been reviewed"
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -248,9 +245,10 @@ namespace System.Runtime.Diagnostics
 
         public bool ShouldTrace(TraceEventType type)
         {
-            return this.TracingEnabled && this.HaveListeners &&
-                (this.TraceSource != null) &&
-                0 != ((int)type & (int)this.Level);
+            return this.TracingEnabled
+                && this.HaveListeners
+                && (this.TraceSource != null)
+                && 0 != ((int)type & (int)this.Level);
         }
 
         public bool ShouldTraceToTraceSource(TraceEventLevel level)
@@ -291,11 +289,16 @@ namespace System.Runtime.Diagnostics
             return encodedText.ToString();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Sets global event handlers for the AppDomain",
-            Safe = "Doesn't leak resources\\Information")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Sets global event handlers for the AppDomain",
+            Safe = "Doesn't leak resources\\Information"
+        )]
         [SecuritySafeCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecuritySafeCritical method, Does not expose critical resources returned by methods with Link Demands")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "SecuritySafeCritical method, Does not expose critical resources returned by methods with Link Demands"
+        )]
         protected void AddDomainEventHandlersForCleanup()
         {
             AppDomain currentDomain = AppDomain.CurrentDomain;
@@ -307,7 +310,9 @@ namespace System.Runtime.Diagnostics
             this.tracingEnabled = this.haveListeners;
             if (this.TracingEnabled)
             {
-                currentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandledExceptionHandler);
+                currentDomain.UnhandledException += new UnhandledExceptionEventHandler(
+                    UnhandledExceptionHandler
+                );
                 this.SetLevel(this.TraceSource.Switch.Level);
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
                 currentDomain.DomainUnload += new EventHandler(ExitOrUnloadEventHandler);
@@ -348,19 +353,36 @@ namespace System.Runtime.Diagnostics
                 throw new ArgumentNullException("source");
             }
 
-            return String.Format(CultureInfo.CurrentCulture, "{0}/{1}", source.GetType().ToString(), source.GetHashCode());
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "{0}/{1}",
+                source.GetType().ToString(),
+                source.GetHashCode()
+            );
         }
 
         protected static void AddExceptionToTraceString(XmlWriter xml, Exception exception)
         {
-            xml.WriteElementString(DiagnosticStrings.ExceptionTypeTag, XmlEncode(exception.GetType().AssemblyQualifiedName));
+            xml.WriteElementString(
+                DiagnosticStrings.ExceptionTypeTag,
+                XmlEncode(exception.GetType().AssemblyQualifiedName)
+            );
             xml.WriteElementString(DiagnosticStrings.MessageTag, XmlEncode(exception.Message));
-            xml.WriteElementString(DiagnosticStrings.StackTraceTag, XmlEncode(StackTraceString(exception)));
-            xml.WriteElementString(DiagnosticStrings.ExceptionStringTag, XmlEncode(exception.ToString()));
+            xml.WriteElementString(
+                DiagnosticStrings.StackTraceTag,
+                XmlEncode(StackTraceString(exception))
+            );
+            xml.WriteElementString(
+                DiagnosticStrings.ExceptionStringTag,
+                XmlEncode(exception.ToString())
+            );
             Win32Exception win32Exception = exception as Win32Exception;
             if (win32Exception != null)
             {
-                xml.WriteElementString(DiagnosticStrings.NativeErrorCodeTag, win32Exception.NativeErrorCode.ToString("X", CultureInfo.InvariantCulture));
+                xml.WriteElementString(
+                    DiagnosticStrings.NativeErrorCodeTag,
+                    win32Exception.NativeErrorCode.ToString("X", CultureInfo.InvariantCulture)
+                );
             }
 
             if (exception.Data != null && exception.Data.Count > 0)
@@ -369,8 +391,14 @@ namespace System.Runtime.Diagnostics
                 foreach (object dataItem in exception.Data.Keys)
                 {
                     xml.WriteStartElement(DiagnosticStrings.DataTag);
-                    xml.WriteElementString(DiagnosticStrings.KeyTag, XmlEncode(dataItem.ToString()));
-                    xml.WriteElementString(DiagnosticStrings.ValueTag, XmlEncode(exception.Data[dataItem].ToString()));
+                    xml.WriteElementString(
+                        DiagnosticStrings.KeyTag,
+                        XmlEncode(dataItem.ToString())
+                    );
+                    xml.WriteElementString(
+                        DiagnosticStrings.ValueTag,
+                        XmlEncode(exception.Data[dataItem].ToString())
+                    );
                     xml.WriteEndElement();
                 }
                 xml.WriteEndElement();
@@ -432,11 +460,16 @@ namespace System.Runtime.Diagnostics
         }
 
         //CSDMain:109153, Duplicate code from System.ServiceModel.Diagnostics
-        [Fx.Tag.SecurityNote(Critical = "Calls unsafe methods, UnsafeCreateEventLogger and UnsafeLogEvent.",
-            Safe = "Event identities cannot be spoofed as they are constants determined inside the method, Demands the same permission that is asserted by the unsafe method.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls unsafe methods, UnsafeCreateEventLogger and UnsafeLogEvent.",
+            Safe = "Event identities cannot be spoofed as they are constants determined inside the method, Demands the same permission that is asserted by the unsafe method."
+        )]
         [SecuritySafeCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts,
-            Justification = "Should not demand permission that is asserted by the EtwProvider ctor.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "Should not demand permission that is asserted by the EtwProvider ctor."
+        )]
         protected void LogTraceFailure(string traceString, Exception exception)
         {
             const int FailureBlackoutDuration = 10;
@@ -449,17 +482,36 @@ namespace System.Runtime.Diagnostics
                     {
                         this.LastFailure = DateTime.UtcNow;
 #pragma warning disable 618
-                        EventLogger logger = EventLogger.UnsafeCreateEventLogger(this.eventSourceName, this);
+                        EventLogger logger = EventLogger.UnsafeCreateEventLogger(
+                            this.eventSourceName,
+                            this
+                        );
 #pragma warning restore 618
                         if (exception == null)
                         {
-                            logger.UnsafeLogEvent(TraceEventType.Error, TracingEventLogCategory, (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToTraceEvent, false,
-                                traceString);
+                            logger.UnsafeLogEvent(
+                                TraceEventType.Error,
+                                TracingEventLogCategory,
+                                (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToTraceEvent,
+                                false,
+                                traceString
+                            );
                         }
                         else
                         {
-                            logger.UnsafeLogEvent(TraceEventType.Error, TracingEventLogCategory, (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToTraceEventWithException, false,
-                                traceString, exception.ToString());
+                            logger.UnsafeLogEvent(
+                                TraceEventType.Error,
+                                TracingEventLogCategory,
+                                (uint)
+                                    System
+                                        .Runtime
+                                        .Diagnostics
+                                        .EventLogEventId
+                                        .FailedToTraceEventWithException,
+                                false,
+                                traceString,
+                                exception.ToString()
+                            );
                         }
                     }
                 }
@@ -500,32 +552,32 @@ namespace System.Runtime.Diagnostics
 
         protected bool CalledShutdown
         {
-            get
-            {
-                return this.calledShutdown;
-            }
+            get { return this.calledShutdown; }
         }
 
         public static Guid ActivityId
         {
-            [Fx.Tag.SecurityNote(Critical = "gets the CorrelationManager, which does a LinkDemand for UnmanagedCode",
-                Safe = "only uses the CM to get the ActivityId, which is not protected data, doesn't leak the CM")]
+            [Fx.Tag.SecurityNote(
+                Critical = "gets the CorrelationManager, which does a LinkDemand for UnmanagedCode",
+                Safe = "only uses the CM to get the ActivityId, which is not protected data, doesn't leak the CM"
+            )]
             [SecuritySafeCritical]
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecuritySafeCriticial method")]
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+                Justification = "SecuritySafeCriticial method"
+            )]
             get
             {
                 object id = Trace.CorrelationManager.ActivityId;
                 return id == null ? Guid.Empty : (Guid)id;
             }
-
-            [Fx.Tag.SecurityNote(Critical = "gets the CorrelationManager, which does a LinkDemand for UnmanagedCode",
-                Safe = "only uses the CM to get the ActivityId, which is not protected data, doesn't leak the CM")]
+            [Fx.Tag.SecurityNote(
+                Critical = "gets the CorrelationManager, which does a LinkDemand for UnmanagedCode",
+                Safe = "only uses the CM to get the ActivityId, which is not protected data, doesn't leak the CM"
+            )]
             [SecuritySafeCritical]
-            set
-            {
-                Trace.CorrelationManager.ActivityId = value;
-            }
+            set { Trace.CorrelationManager.ActivityId = value; }
         }
 
 #pragma warning restore 56500

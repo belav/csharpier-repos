@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis.Structure
             return false;
         }
 
-        internal static bool IsExpressionLevelConstruct(string type)
-            => type == Expression;
+        internal static bool IsExpressionLevelConstruct(string type) => type == Expression;
 
         internal static bool IsStatementLevelConstruct(string type)
         {
@@ -56,10 +55,10 @@ namespace Microsoft.CodeAnalysis.Structure
             return false;
         }
 
-        internal static bool IsCodeLevelConstruct(string type)
-            => IsExpressionLevelConstruct(type) || IsStatementLevelConstruct(type);
+        internal static bool IsCodeLevelConstruct(string type) =>
+            IsExpressionLevelConstruct(type) || IsStatementLevelConstruct(type);
 
-        internal static bool IsDeclarationLevelConstruct(string type)
-            => !IsCodeLevelConstruct(type) && !IsCommentOrPreprocessorRegion(type);
+        internal static bool IsDeclarationLevelConstruct(string type) =>
+            !IsCodeLevelConstruct(type) && !IsCommentOrPreprocessorRegion(type);
     }
 }

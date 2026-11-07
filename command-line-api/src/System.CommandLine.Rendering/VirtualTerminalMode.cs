@@ -13,9 +13,7 @@ namespace System.CommandLine.Rendering
         private readonly uint _originalOutputMode;
         private readonly uint _originalInputMode;
 
-        private VirtualTerminalMode(
-            bool isEnabled,
-            uint? error = null)
+        private VirtualTerminalMode(bool isEnabled, uint? error = null)
         {
             IsEnabled = isEnabled;
             Error = error;
@@ -25,7 +23,8 @@ namespace System.CommandLine.Rendering
             IntPtr stdOutHandle,
             uint originalOutputMode,
             IntPtr stdInHandle,
-            uint originalInputMode)
+            uint originalInputMode
+        )
         {
             IsEnabled = true;
 
@@ -59,9 +58,10 @@ namespace System.CommandLine.Rendering
                 // var requestedInputMode = originalInputMode |
                 //                          ENABLE_VIRTUAL_TERMINAL_INPUT;
 
-                var requestedOutputMode = originalOutputMode |
-                                          ENABLE_VIRTUAL_TERMINAL_PROCESSING |
-                                          DISABLE_NEWLINE_AUTO_RETURN;
+                var requestedOutputMode =
+                    originalOutputMode
+                    | ENABLE_VIRTUAL_TERMINAL_PROCESSING
+                    | DISABLE_NEWLINE_AUTO_RETURN;
 
                 if (!SetConsoleMode(stdOutHandle, requestedOutputMode))
                 {
@@ -73,16 +73,19 @@ namespace System.CommandLine.Rendering
                 //     return new VirtualTerminalMode(false, GetLastError());
                 // }
 
-                return new VirtualTerminalMode(stdOutHandle,
-                                               originalOutputMode,
-                                               stdInHandle,
-                                               originalInputMode);
+                return new VirtualTerminalMode(
+                    stdOutHandle,
+                    originalOutputMode,
+                    stdInHandle,
+                    originalInputMode
+                );
             }
 
             var terminalName = Environment.GetEnvironmentVariable("TERM");
 
-            var isXterm = !string.IsNullOrEmpty(terminalName)
-                          && terminalName.StartsWith("xterm", StringComparison.OrdinalIgnoreCase);
+            var isXterm =
+                !string.IsNullOrEmpty(terminalName)
+                && terminalName.StartsWith("xterm", StringComparison.OrdinalIgnoreCase);
 
             // TODO: Is this a reasonable default?
             return new VirtualTerminalMode(isXterm);

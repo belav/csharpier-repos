@@ -3,15 +3,44 @@
 
 using System.Collections.Generic;
 using Xunit;
-
 using static System.Globalization.Tests.GregorianCalendarTestUtilities;
 
 namespace System.Globalization.Tests
 {
     public class GregorianCalendarGetDaysInMonth
     {
-        private static readonly int[] s_daysInMonthInLeapYear = new int[] { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        private static readonly int[] s_daysInMonthInCommonYear = new int[] { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        private static readonly int[] s_daysInMonthInLeapYear = new int[]
+        {
+            0,
+            31,
+            29,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
+        };
+        private static readonly int[] s_daysInMonthInCommonYear = new int[]
+        {
+            0,
+            31,
+            28,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
+        };
 
         public static IEnumerable<object[]> GetDaysInMonth_TestData()
         {
@@ -48,7 +77,9 @@ namespace System.Globalization.Tests
         public void GetDaysInMonth(int year, int month)
         {
             GregorianCalendar calendar = new GregorianCalendar();
-            int expected = IsLeapYear(year) ? s_daysInMonthInLeapYear[month] : s_daysInMonthInCommonYear[month];
+            int expected = IsLeapYear(year)
+                ? s_daysInMonthInLeapYear[month]
+                : s_daysInMonthInCommonYear[month];
             Assert.Equal(expected, calendar.GetDaysInMonth(year, month));
             Assert.Equal(expected, calendar.GetDaysInMonth(year, month, 0));
             Assert.Equal(expected, calendar.GetDaysInMonth(year, month, 1));

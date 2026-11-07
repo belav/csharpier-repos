@@ -28,13 +28,16 @@ namespace System.Threading.Tasks
     {
         /// <summary>The task with which this holder is associated.</summary>
         private readonly Task m_task;
+
         /// <summary>
         /// The lazily-initialized list of faulting exceptions.  Volatile
         /// so that it may be read to determine whether any exceptions were stored.
         /// </summary>
         private volatile List<ExceptionDispatchInfo>? m_faultExceptions;
+
         /// <summary>An exception that triggered the task to cancel.</summary>
         private ExceptionDispatchInfo? m_cancellationException;
+
         /// <summary>Whether the holder was "observed" and thus doesn't cause finalization behavior.</summary>
         private volatile bool m_isHandled;
 
@@ -63,8 +66,11 @@ namespace System.Threading.Tasks
                 // Publish the unobserved exception and allow users to observe it
                 AggregateException exceptionToThrow = new AggregateException(
                     SR.TaskExceptionHolder_UnhandledException,
-                    m_faultExceptions);
-                UnobservedTaskExceptionEventArgs ueea = new UnobservedTaskExceptionEventArgs(exceptionToThrow);
+                    m_faultExceptions
+                );
+                UnobservedTaskExceptionEventArgs ueea = new UnobservedTaskExceptionEventArgs(
+                    exceptionToThrow
+                );
                 TaskScheduler.PublishUnobservedTaskException(m_task, ueea);
             }
         }
@@ -89,14 +95,22 @@ namespace System.Threading.Tasks
         /// </remarks>
         internal void Add(object exceptionObject, bool representsCancellation)
         {
-            Debug.Assert(exceptionObject != null, "TaskExceptionHolder.Add(): Expected a non-null exceptionObject");
             Debug.Assert(
-                exceptionObject is Exception || exceptionObject is IEnumerable<Exception> ||
-                exceptionObject is ExceptionDispatchInfo || exceptionObject is IEnumerable<ExceptionDispatchInfo>,
-                "TaskExceptionHolder.Add(): Expected Exception, IEnumerable<Exception>, ExceptionDispatchInfo, or IEnumerable<ExceptionDispatchInfo>");
+                exceptionObject != null,
+                "TaskExceptionHolder.Add(): Expected a non-null exceptionObject"
+            );
+            Debug.Assert(
+                exceptionObject is Exception
+                    || exceptionObject is IEnumerable<Exception>
+                    || exceptionObject is ExceptionDispatchInfo
+                    || exceptionObject is IEnumerable<ExceptionDispatchInfo>,
+                "TaskExceptionHolder.Add(): Expected Exception, IEnumerable<Exception>, ExceptionDispatchInfo, or IEnumerable<ExceptionDispatchInfo>"
+            );
 
-            if (representsCancellation) SetCancellationException(exceptionObject);
-            else AddFaultException(exceptionObject);
+            if (representsCancellation)
+                SetCancellationException(exceptionObject);
+            else
+                AddFaultException(exceptionObject);
         }
 
         /// <summary>Sets the cancellation exception.</summary>
@@ -108,13 +122,17 @@ namespace System.Threading.Tasks
         {
             Debug.Assert(exceptionObject != null, "Expected exceptionObject to be non-null.");
 
-            Debug.Assert(m_cancellationException == null,
-                "Expected SetCancellationException to be called only once.");
+            Debug.Assert(
+                m_cancellationException == null,
+                "Expected SetCancellationException to be called only once."
+            );
             // Breaking this assumption will overwrite a previously OCE,
             // and implies something may be wrong elsewhere, since there should only ever be one.
 
-            Debug.Assert(m_faultExceptions == null,
-                "Expected SetCancellationException to be called before any faults were added.");
+            Debug.Assert(
+                m_faultExceptions == null,
+                "Expected SetCancellationException to be called before any faults were added."
+            );
             // Breaking this assumption shouldn't hurt anything here, but it implies something may be wrong elsewhere.
             // If this changes, make sure to only conditionally mark as handled below.
 
@@ -126,8 +144,10 @@ namespace System.Threading.Tasks
             else
             {
                 var edi = exceptionObject as ExceptionDispatchInfo;
-                Debug.Assert(edi != null && edi.SourceException is OperationCanceledException,
-                    "Expected an OCE or an EDI that contained an OCE");
+                Debug.Assert(
+                    edi != null && edi.SourceException is OperationCanceledException,
+                    "Expected an OCE or an EDI that contained an OCE"
+                );
                 m_cancellationException = edi;
             }
 
@@ -142,10 +162,14 @@ namespace System.Threading.Tasks
         /// </remarks>
         private void AddFaultException(object exceptionObject)
         {
-            Debug.Assert(exceptionObject != null, "AddFaultException(): Expected a non-null exceptionObject");
+            Debug.Assert(
+                exceptionObject != null,
+                "AddFaultException(): Expected a non-null exceptionObject"
+            );
 
             // Initialize the exceptions list if necessary.  The list should be non-null iff it contains exceptions.
-            List<ExceptionDispatchInfo>? exceptions = m_faultExceptions ??= new List<ExceptionDispatchInfo>(1);
+            List<ExceptionDispatchInfo>? exceptions = m_faultExceptions ??=
+                new List<ExceptionDispatchInfo>(1);
 
             // Handle Exception by capturing it into an ExceptionDispatchInfo and storing that
             if (exceptionObject is Exception exception)
@@ -176,7 +200,10 @@ namespace System.Threading.Tasks
                             exceptions.Add(ExceptionDispatchInfo.Capture(exc));
                         }
 #if DEBUG
-                        Debug.Assert(numExceptions > 0, "Collection should contain at least one exception.");
+                        Debug.Assert(
+                            numExceptions > 0,
+                            "Collection should contain at least one exception."
+                        );
 #endif
                     }
                     else
@@ -186,7 +213,10 @@ namespace System.Threading.Tasks
                         {
                             exceptions.AddRange(ediColl);
 #if DEBUG
-                            Debug.Assert(exceptions.Count > 0, "There should be at least one dispatch info.");
+                            Debug.Assert(
+                                exceptions.Count > 0,
+                                "There should be at least one dispatch info."
+                            );
                             foreach (ExceptionDispatchInfo tmp in exceptions)
                             {
                                 Debug.Assert(tmp != null, "No dispatch infos should be null");
@@ -196,7 +226,10 @@ namespace System.Threading.Tasks
                         // Anything else is a programming error
                         else
                         {
-                            throw new ArgumentException(SR.TaskExceptionHolder_UnknownExceptionType, nameof(exceptionObject));
+                            throw new ArgumentException(
+                                SR.TaskExceptionHolder_UnknownExceptionType,
+                                nameof(exceptionObject)
+                            );
                         }
                     }
                 }
@@ -249,7 +282,10 @@ namespace System.Threading.Tasks
         /// <param name="calledFromFinalizer">Whether this is being called from a finalizer.</param>
         /// <param name="includeThisException">An extra exception to be included (optionally).</param>
         /// <returns>The aggregate exception to throw.</returns>
-        internal AggregateException CreateExceptionObject(bool calledFromFinalizer, Exception? includeThisException)
+        internal AggregateException CreateExceptionObject(
+            bool calledFromFinalizer,
+            Exception? includeThisException
+        )
         {
             List<ExceptionDispatchInfo>? exceptions = m_faultExceptions;
             Debug.Assert(exceptions != null, "Expected an initialized list.");
@@ -297,8 +333,10 @@ namespace System.Threading.Tasks
         internal ExceptionDispatchInfo? GetCancellationExceptionDispatchInfo()
         {
             ExceptionDispatchInfo? edi = m_cancellationException;
-            Debug.Assert(edi == null || edi.SourceException is OperationCanceledException,
-                "Expected the EDI to be for an OperationCanceledException");
+            Debug.Assert(
+                edi == null || edi.SourceException is OperationCanceledException,
+                "Expected the EDI to be for an OperationCanceledException"
+            );
             return edi;
         }
     }

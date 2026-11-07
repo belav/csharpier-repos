@@ -12,18 +12,17 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     public ref struct ArgIterator
     {
-        private IntPtr ArgCookie;               // Cookie from the EE.
+        private IntPtr ArgCookie; // Cookie from the EE.
 
         // The SigPointer structure consists of the following members.  (Note: this is an inline native SigPointer data type)
-        private IntPtr sigPtr;                  // Pointer to remaining signature.
-        private IntPtr sigPtrLen;               // Remaining length of the pointer
+        private IntPtr sigPtr; // Pointer to remaining signature.
+        private IntPtr sigPtrLen; // Remaining length of the pointer
 
         // Note, sigPtrLen is actually a DWORD, but on 64bit systems this structure becomes
         // 8-byte aligned, which requires us to pad it.
 
-        private IntPtr ArgPtr;                  // Pointer to remaining args.
-        private int RemainingArgs;           // # of remaining args.
-
+        private IntPtr ArgPtr; // Pointer to remaining args.
+        private int RemainingArgs; // # of remaining args.
 #if (TARGET_WINDOWS && !TARGET_ARM)   // Native Varargs are not supported on Unix (all architectures) and Windows ARM
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern ArgIterator(IntPtr arglist);
@@ -31,9 +30,8 @@ namespace System
         // create an arg iterator that points at the first argument that
         // is not statically declared (that is the first ... arg)
         // 'arglist' is the value returned by the ARGLIST instruction
-        public ArgIterator(RuntimeArgumentHandle arglist) : this(arglist.Value)
-        {
-        }
+        public ArgIterator(RuntimeArgumentHandle arglist)
+            : this(arglist.Value) { }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern unsafe ArgIterator(IntPtr arglist, void* ptr);
@@ -43,9 +41,8 @@ namespace System
         // This is much like the C va_start macro
 
         [CLSCompliant(false)]
-        public unsafe ArgIterator(RuntimeArgumentHandle arglist, void* ptr) : this(arglist.Value, ptr)
-        {
-        }
+        public unsafe ArgIterator(RuntimeArgumentHandle arglist, void* ptr)
+            : this(arglist.Value, ptr) { }
 
         // Fetch an argument as a typed referece, advance the iterator.
         // Throws an exception if past end of argument list
@@ -102,15 +99,12 @@ namespace System
             }
         }
 
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         // reference to TypedReference is banned, so have to pass result as void pointer
         private extern unsafe void InternalGetNextArg(void* result, RuntimeType rt);
 
         // This method should invalidate the iterator (va_end). It is not supported yet.
-        public void End()
-        {
-        }
+        public void End() { }
 
         // How many arguments are left in the list
         [MethodImpl(MethodImplOptions.InternalCall)]

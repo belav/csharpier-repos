@@ -28,14 +28,12 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// <summary>
     ///     The specified table name.
     /// </summary>
-    public virtual string? Name
-        => StoreObject?.Name;
+    public virtual string? Name => StoreObject?.Name;
 
     /// <summary>
     ///     The specified table schema.
     /// </summary>
-    public virtual string? Schema
-        => StoreObject?.Schema;
+    public virtual string? Schema => StoreObject?.Schema;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +47,7 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// <summary>
     ///     The entity type being configured.
     /// </summary>
-    public virtual IMutableEntityType Metadata
-        => EntityTypeBuilder.Metadata;
+    public virtual IMutableEntityType Metadata => EntityTypeBuilder.Metadata;
 
     private EntityTypeBuilder EntityTypeBuilder { get; }
 
@@ -98,9 +95,7 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// <param name="name">The name of the check constraint.</param>
     /// <param name="sql">The logical constraint sql used in the check constraint.</param>
     /// <returns>A builder to configure the check constraint.</returns>
-    public virtual CheckConstraintBuilder HasCheckConstraint(
-        string name,
-        string? sql)
+    public virtual CheckConstraintBuilder HasCheckConstraint(string name, string? sql)
     {
         Check.NotEmpty(name, nameof(name));
         Check.NullButNotEmpty(sql, nameof(sql));
@@ -109,7 +104,8 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
             (IConventionEntityType)EntityTypeBuilder.Metadata,
             name,
             sql,
-            ConfigurationSource.Explicit)!;
+            ConfigurationSource.Explicit
+        )!;
 
         return new CheckConstraintBuilder((IMutableCheckConstraint)checkConstraint);
     }
@@ -134,8 +130,8 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// </summary>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ColumnBuilder Property(string propertyName)
-        => new(GetStoreObjectIdentifier(), EntityTypeBuilder.Property(propertyName));
+    public virtual ColumnBuilder Property(string propertyName) =>
+        new(GetStoreObjectIdentifier(), EntityTypeBuilder.Property(propertyName));
 
     /// <summary>
     ///     Maps the property to a column on the current table and returns an object that can be used
@@ -144,8 +140,8 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ColumnBuilder<TProperty> Property<TProperty>(string propertyName)
-        => new(GetStoreObjectIdentifier(), EntityTypeBuilder.Property<TProperty>(propertyName));
+    public virtual ColumnBuilder<TProperty> Property<TProperty>(string propertyName) =>
+        new(GetStoreObjectIdentifier(), EntityTypeBuilder.Property<TProperty>(propertyName));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -154,11 +150,11 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual StoreObjectIdentifier GetStoreObjectIdentifier()
-        => StoreObject ?? throw new InvalidOperationException(RelationalStrings.MappingFragmentMissingName);
+    protected virtual StoreObjectIdentifier GetStoreObjectIdentifier() =>
+        StoreObject
+        ?? throw new InvalidOperationException(RelationalStrings.MappingFragmentMissingName);
 
-    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance => EntityTypeBuilder;
 
     #region Hidden System.Object members
 
@@ -167,8 +163,7 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -176,16 +171,14 @@ public class TableBuilder : IInfrastructure<EntityTypeBuilder>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

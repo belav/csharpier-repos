@@ -15,18 +15,23 @@ namespace System.Security
         private ArrayList? _children;
         internal ArrayList? _attributes;
 
-        private const int AttributesTypical = 4 * 2;  // 4 attributes, times 2 strings per attribute
+        private const int AttributesTypical = 4 * 2; // 4 attributes, times 2 strings per attribute
         private const int ChildrenTypical = 1;
 
         private const string EscapeChars = "<>\"'&";
         private static readonly string[] s_escapeStringPairs = new string[]
         {
             // these must be all once character escape sequences or a new escaping algorithm is needed
-            "<", "&lt;",
-            ">", "&gt;",
-            "\"", "&quot;",
-            "\'", "&apos;",
-            "&", "&amp;"
+            "<",
+            "&lt;",
+            ">",
+            "&gt;",
+            "\"",
+            "&quot;",
+            "\'",
+            "&apos;",
+            "&",
+            "&amp;",
         };
 
         //-------------------------- Constructors ---------------------------
@@ -84,7 +89,10 @@ namespace System.Security
                     Hashtable hashtable = new Hashtable(_attributes.Count / 2);
 
                     int iMax = _attributes.Count;
-                    Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+                    Debug.Assert(
+                        iMax % 2 == 0,
+                        "Odd number of strings means the attr/value pairs were not added correctly"
+                    );
 
                     for (int i = 0; i < iMax; i += 2)
                     {
@@ -94,7 +102,6 @@ namespace System.Security
                     return hashtable;
                 }
             }
-
             set
             {
                 if (value == null || value.Count == 0)
@@ -112,10 +119,14 @@ namespace System.Security
                         string? attrValue = (string?)enumerator.Value;
 
                         if (!IsValidAttributeName(attrName))
-                            throw new ArgumentException(SR.Format(SR.Argument_InvalidElementName, attrName));
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_InvalidElementName, attrName)
+                            );
 
                         if (!IsValidAttributeValue(attrValue))
-                            throw new ArgumentException(SR.Format(SR.Argument_InvalidElementValue, attrValue));
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_InvalidElementValue, attrValue)
+                            );
 
                         list.Add(attrName);
                         list.Add(attrValue);
@@ -138,7 +149,9 @@ namespace System.Security
                 else
                 {
                     if (!IsValidText(value))
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidElementTag, value));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_InvalidElementTag, value)
+                        );
 
                     _text = value;
                 }
@@ -147,11 +160,7 @@ namespace System.Security
 
         public ArrayList? Children
         {
-            get
-            {
-                return _children;
-            }
-
+            get { return _children; }
             set
             {
                 if (value != null && value.Contains(null))
@@ -173,7 +182,10 @@ namespace System.Security
             else
             {
                 int iMax = _attributes.Count;
-                Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+                Debug.Assert(
+                    iMax % 2 == 0,
+                    "Odd number of strings means the attr/value pairs were not added correctly"
+                );
 
                 for (int i = 0; i < iMax; i += 2)
                 {
@@ -234,7 +246,10 @@ namespace System.Security
             else
             {
                 int iMax = _attributes.Count;
-                Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+                Debug.Assert(
+                    iMax % 2 == 0,
+                    "Odd number of strings means the attr/value pairs were not added correctly"
+                );
 
                 // Maybe we can get away by only checking the number of attributes
                 if (iMax != other._attributes.Count)
@@ -266,7 +281,8 @@ namespace System.Security
                 IEnumerator lhs = _children.GetEnumerator();
                 IEnumerator rhs = other._children.GetEnumerator();
 
-                SecurityElement? e1, e2;
+                SecurityElement? e1,
+                    e2;
                 while (lhs.MoveNext())
                 {
                     rhs.MoveNext();
@@ -303,7 +319,10 @@ namespace System.Security
         private static string GetEscapeSequence(char c)
         {
             int iMax = s_escapeStringPairs.Length;
-            Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+            Debug.Assert(
+                iMax % 2 == 0,
+                "Odd number of strings means the attr/value pairs were not added correctly"
+            );
 
             for (int i = 0; i < iMax; i += 2)
             {
@@ -343,7 +362,10 @@ namespace System.Security
             int maxCompareLength = str.Length - index;
 
             int iMax = s_escapeStringPairs.Length;
-            Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+            Debug.Assert(
+                iMax % 2 == 0,
+                "Odd number of strings means the attr/value pairs were not added correctly"
+            );
 
             for (int i = 0; i < iMax; i += 2)
             {
@@ -352,7 +374,11 @@ namespace System.Security
 
                 int length = strEscValue.Length;
 
-                if (length <= maxCompareLength && string.Compare(strEscValue, 0, str, index, length, StringComparison.Ordinal) == 0)
+                if (
+                    length <= maxCompareLength
+                    && string.Compare(strEscValue, 0, str, index, length, StringComparison.Ordinal)
+                        == 0
+                )
                 {
                     newIndex = index + strEscValue.Length;
                     return strEscSeq;
@@ -418,7 +444,10 @@ namespace System.Security
                 write(obj, " ");
 
                 int iMax = _attributes.Count;
-                Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+                Debug.Assert(
+                    iMax % 2 == 0,
+                    "Odd number of strings means the attr/value pairs were not added correctly"
+                );
 
                 for (int i = 0; i < iMax; i += 2)
                 {
@@ -482,7 +511,10 @@ namespace System.Security
             // Go through all the attribute and see if we know about
             // the one we are asked for
             int iMax = _attributes.Count;
-            Debug.Assert(iMax % 2 == 0, "Odd number of strings means the attr/value pairs were not added correctly");
+            Debug.Assert(
+                iMax % 2 == 0,
+                "Odd number of strings means the attr/value pairs were not added correctly"
+            );
 
             for (int i = 0; i < iMax; i += 2)
             {

@@ -53,7 +53,8 @@ namespace Microsoft.Extensions.Configuration
             }
         }
 
-        public object? Value => _valueSet ? _setValue : _initialValue ??= _initialValueProvider?.Invoke();
+        public object? Value =>
+            _valueSet ? _setValue : _initialValue ??= _initialValueProvider?.Invoke();
 
         public void SetValue(object? newValue)
         {

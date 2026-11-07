@@ -29,20 +29,21 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 /// </remarks>
 public class RelationalValueGeneratorSelector : ValueGeneratorSelector
 {
-    private readonly TemporaryNumberValueGeneratorFactory _numberFactory
-        = new();
+    private readonly TemporaryNumberValueGeneratorFactory _numberFactory = new();
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="RelationalValueGeneratorSelector" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
     public RelationalValueGeneratorSelector(ValueGeneratorSelectorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
-    protected override ValueGenerator? FindForType(IProperty property, ITypeBase typeBase, Type clrType)
+    protected override ValueGenerator? FindForType(
+        IProperty property,
+        ITypeBase typeBase,
+        Type clrType
+    )
     {
         if (typeBase.IsMappedToJson() && property.IsOrdinalKeyProperty())
         {
@@ -51,10 +52,12 @@ public class RelationalValueGeneratorSelector : ValueGeneratorSelector
 
         if (property.ValueGenerated != ValueGenerated.Never)
         {
-            if (clrType.IsInteger()
+            if (
+                clrType.IsInteger()
                 || clrType == typeof(decimal)
                 || clrType == typeof(float)
-                || clrType == typeof(double))
+                || clrType == typeof(double)
+            )
             {
                 return _numberFactory.Create(property, typeBase);
             }

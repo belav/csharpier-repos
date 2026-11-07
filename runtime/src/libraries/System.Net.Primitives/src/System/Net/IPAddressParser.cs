@@ -24,7 +24,14 @@ namespace System.Net
                 // we don't support/parse a port specification at the end of an IPv4 address.
                 Span<ushort> numbers = stackalloc ushort[IPAddressParserStatics.IPv6AddressShorts];
                 numbers.Clear();
-                if (TryParseIPv6(ipSpan, numbers, IPAddressParserStatics.IPv6AddressShorts, out uint scope))
+                if (
+                    TryParseIPv6(
+                        ipSpan,
+                        numbers,
+                        IPAddressParserStatics.IPv6AddressShorts,
+                        out uint scope
+                    )
+                )
                 {
                     return new IPAddress(numbers, scope);
                 }
@@ -39,7 +46,10 @@ namespace System.Net
                 return null;
             }
 
-            throw new FormatException(SR.dns_bad_ip_address, new SocketException(SocketError.InvalidArgument));
+            throw new FormatException(
+                SR.dns_bad_ip_address,
+                new SocketException(SocketError.InvalidArgument)
+            );
         }
 
         private static unsafe bool TryParseIpv4(ReadOnlySpan<char> ipSpan, out long address)
@@ -49,7 +59,12 @@ namespace System.Net
 
             fixed (char* ipStringPtr = &MemoryMarshal.GetReference(ipSpan))
             {
-                tmpAddr = IPv4AddressHelper.ParseNonCanonical(ipStringPtr, 0, ref end, notImplicitFile: true);
+                tmpAddr = IPv4AddressHelper.ParseNonCanonical(
+                    ipStringPtr,
+                    0,
+                    ref end,
+                    notImplicitFile: true
+                );
             }
 
             if (tmpAddr != IPv4AddressHelper.Invalid && end == ipSpan.Length)
@@ -65,7 +80,12 @@ namespace System.Net
             return false;
         }
 
-        private static unsafe bool TryParseIPv6(ReadOnlySpan<char> ipSpan, Span<ushort> numbers, int numbersLength, out uint scope)
+        private static unsafe bool TryParseIPv6(
+            ReadOnlySpan<char> ipSpan,
+            Span<ushort> numbers,
+            int numbersLength,
+            out uint scope
+        )
         {
             Debug.Assert(numbers != null);
             Debug.Assert(numbersLength >= IPAddressParserStatics.IPv6AddressShorts);
@@ -84,7 +104,14 @@ namespace System.Net
 
                 if (scopeId?.Length > 1)
                 {
-                    if (uint.TryParse(scopeId.AsSpan(1), NumberStyles.None, CultureInfo.InvariantCulture, out scope))
+                    if (
+                        uint.TryParse(
+                            scopeId.AsSpan(1),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out scope
+                        )
+                    )
                     {
                         return true; // scopeId is a numeric value
                     }
@@ -108,7 +135,8 @@ namespace System.Net
             return false;
         }
 
-        internal static int FormatIPv4Address<TChar>(uint address, Span<TChar> addressString) where TChar : unmanaged, IBinaryInteger<TChar>
+        internal static int FormatIPv4Address<TChar>(uint address, Span<TChar> addressString)
+            where TChar : unmanaged, IBinaryInteger<TChar>
         {
             address = (uint)IPAddress.NetworkToHostOrder(unchecked((int)address));
 
@@ -129,7 +157,8 @@ namespace System.Net
 
                 if (number >= 10)
                 {
-                    uint hundreds, tens;
+                    uint hundreds,
+                        tens;
                     if (number >= 100)
                     {
                         (uint hundredsAndTens, number) = Math.DivRem(number, 10);
@@ -152,7 +181,12 @@ namespace System.Net
             }
         }
 
-        internal static int FormatIPv6Address<TChar>(ushort[] address, uint scopeId, Span<TChar> destination) where TChar : unmanaged, IBinaryInteger<TChar>
+        internal static int FormatIPv6Address<TChar>(
+            ushort[] address,
+            uint scopeId,
+            Span<TChar> destination
+        )
+            where TChar : unmanaged, IBinaryInteger<TChar>
         {
             int pos = 0;
 
@@ -187,8 +221,7 @@ namespace System.Net
                 {
                     (scopeId, uint digit) = Math.DivRem(scopeId, 10);
                     chars[--bytesPos] = TChar.CreateTruncating('0' + digit);
-                }
-                while (scopeId != 0);
+                } while (scopeId != 0);
                 Span<TChar> used = chars.Slice(bytesPos);
                 used.CopyTo(destination.Slice(pos));
                 pos += used.Length;
@@ -199,7 +232,11 @@ namespace System.Net
             // Appends each of the numbers in address in indexed range [fromInclusive, toExclusive),
             // while also replacing the longest sequence of 0s found in that range with "::", as long
             // as the sequence is more than one 0.
-            static void AppendSections(ReadOnlySpan<ushort> address, Span<TChar> destination, ref int offset)
+            static void AppendSections(
+                ReadOnlySpan<ushort> address,
+                Span<TChar> destination,
+                ref int offset
+            )
             {
                 // Find the longest sequence of zeros to be combined into a "::"
                 (int zeroStart, int zeroEnd) = IPv6AddressHelper.FindCompressionRange(address);
@@ -246,13 +283,19 @@ namespace System.Net
                     {
                         if ((value & 0xF000) != 0)
                         {
-                            destination[offset++] = TChar.CreateTruncating(HexConverter.ToCharLower(value >> 12));
+                            destination[offset++] = TChar.CreateTruncating(
+                                HexConverter.ToCharLower(value >> 12)
+                            );
                         }
 
-                        destination[offset++] = TChar.CreateTruncating(HexConverter.ToCharLower(value >> 8));
+                        destination[offset++] = TChar.CreateTruncating(
+                            HexConverter.ToCharLower(value >> 8)
+                        );
                     }
 
-                    destination[offset++] = TChar.CreateTruncating(HexConverter.ToCharLower(value >> 4));
+                    destination[offset++] = TChar.CreateTruncating(
+                        HexConverter.ToCharLower(value >> 4)
+                    );
                 }
 
                 destination[offset++] = TChar.CreateTruncating(HexConverter.ToCharLower(value));

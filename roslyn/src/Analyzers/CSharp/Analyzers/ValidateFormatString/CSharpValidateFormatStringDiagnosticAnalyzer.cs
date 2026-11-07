@@ -12,19 +12,22 @@ using Microsoft.CodeAnalysis.ValidateFormatString;
 namespace Microsoft.CodeAnalysis.CSharp.ValidateFormatString
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpValidateFormatStringDiagnosticAnalyzer :
-        AbstractValidateFormatStringDiagnosticAnalyzer<SyntaxKind>
+    internal class CSharpValidateFormatStringDiagnosticAnalyzer
+        : AbstractValidateFormatStringDiagnosticAnalyzer<SyntaxKind>
     {
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
         protected override SyntaxNode? TryGetMatchingNamedArgument(
             SeparatedSyntaxList<SyntaxNode> arguments,
-            string searchArgumentName)
+            string searchArgumentName
+        )
         {
             foreach (var argument in arguments.Cast<ArgumentSyntax>())
             {
-                if (argument.NameColon != null && argument.NameColon.Name.Identifier.ValueText.Equals(searchArgumentName))
+                if (
+                    argument.NameColon != null
+                    && argument.NameColon.Name.Identifier.ValueText.Equals(searchArgumentName)
+                )
                 {
                     return argument;
                 }
@@ -33,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ValidateFormatString
             return null;
         }
 
-        protected override SyntaxNode GetArgumentExpression(SyntaxNode syntaxNode)
-            => ((ArgumentSyntax)syntaxNode).Expression;
+        protected override SyntaxNode GetArgumentExpression(SyntaxNode syntaxNode) =>
+            ((ArgumentSyntax)syntaxNode).Expression;
     }
 }

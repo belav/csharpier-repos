@@ -5,18 +5,17 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Globalization;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.Configuration;
-    using System.Collections.Generic;
-    using System.Globalization;
 
     public sealed partial class MessageLoggingElement : ConfigurationElement
     {
-        // These three constructors are used by the configuration system. 
-        public MessageLoggingElement() : base()
-        {
-        }
+        // These three constructors are used by the configuration system.
+        public MessageLoggingElement()
+            : base() { }
 
         [ConfigurationProperty(ConfigurationStrings.LogEntireMessage, DefaultValue = false)]
         public bool LogEntireMessage
@@ -39,14 +38,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.LogMalformedMessages] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.LogMessagesAtServiceLevel, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.LogMessagesAtServiceLevel,
+            DefaultValue = false
+        )]
         public bool LogMessagesAtServiceLevel
         {
             get { return (bool)base[ConfigurationStrings.LogMessagesAtServiceLevel]; }
             set { base[ConfigurationStrings.LogMessagesAtServiceLevel] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.LogMessagesAtTransportLevel, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.LogMessagesAtTransportLevel,
+            DefaultValue = false
+        )]
         public bool LogMessagesAtTransportLevel
         {
             get { return (bool)base[ConfigurationStrings.LogMessagesAtTransportLevel]; }
@@ -69,13 +74,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxSizeOfMessageToLog] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Filters, DefaultValue  = null)]
+        [ConfigurationProperty(ConfigurationStrings.Filters, DefaultValue = null)]
         public XPathMessageFilterElementCollection Filters
         {
             get { return (XPathMessageFilterElementCollection)base[ConfigurationStrings.Filters]; }
         }
     }
 }
-
-
-

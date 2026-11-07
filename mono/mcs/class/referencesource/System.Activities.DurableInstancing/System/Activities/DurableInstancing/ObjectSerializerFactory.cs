@@ -8,7 +8,9 @@ namespace System.Activities.DurableInstancing
 
     static class ObjectSerializerFactory
     {
-        public static IObjectSerializer GetObjectSerializer(InstanceEncodingOption instanceEncodingOption)
+        public static IObjectSerializer GetObjectSerializer(
+            InstanceEncodingOption instanceEncodingOption
+        )
         {
             IObjectSerializer result = null;
 
@@ -21,8 +23,11 @@ namespace System.Activities.DurableInstancing
                     result = new GZipObjectSerializer();
                     break;
                 default:
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(
-                        SR.UnknownCompressionOption(instanceEncodingOption)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.UnknownCompressionOption(instanceEncodingOption)
+                        )
+                    );
             }
 
             return result;

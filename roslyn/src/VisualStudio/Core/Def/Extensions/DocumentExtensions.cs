@@ -17,7 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
 {
     internal static class DocumentExtensions
     {
-        public static IList<Tuple<TextSpan, uint>> GetVisibleCodeBlocks(this Document document, CancellationToken cancellationToken)
+        public static IList<Tuple<TextSpan, uint>> GetVisibleCodeBlocks(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             var codeBlocks = new List<Tuple<TextSpan, uint>>();
 
@@ -29,7 +32,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
 
             foreach (var line in text.Lines)
             {
-                var trivia = document.GetSyntaxRootSynchronously(cancellationToken).FindTrivia(line.Start);
+                var trivia = document
+                    .GetSyntaxRootSynchronously(cancellationToken)
+                    .FindTrivia(line.Start);
 
                 // We should only see structured trivia here
                 if (trivia.HasStructure)
@@ -54,7 +59,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
                                 // If the #region and #endregion are on consecutive lines, we don't want to end up with
                                 // end before start.
                                 var end = Math.Max(start, previousLine.End);
-                                codeBlocks.Add(Tuple.Create(TextSpan.FromBounds(start, end), cookie));
+                                codeBlocks.Add(
+                                    Tuple.Create(TextSpan.FromBounds(start, end), cookie)
+                                );
                             }
                         }
                     }

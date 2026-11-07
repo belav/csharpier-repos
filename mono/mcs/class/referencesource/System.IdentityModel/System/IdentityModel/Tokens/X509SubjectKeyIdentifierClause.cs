@@ -13,14 +13,10 @@ namespace System.IdentityModel.Tokens
         const int SkiDataOffset = 2;
 
         public X509SubjectKeyIdentifierClause(byte[] ski)
-            : this(ski, true)
-        {
-        }
+            : this(ski, true) { }
 
         internal X509SubjectKeyIdentifierClause(byte[] ski, bool cloneBuffer)
-            : base(null, ski, cloneBuffer)
-        {
-        }
+            : base(null, ski, cloneBuffer) { }
 
         static byte[] GetSkiRawData(X509Certificate2 certificate)
         {
@@ -28,7 +24,8 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
 
             X509SubjectKeyIdentifierExtension skiExtension =
-                certificate.Extensions[SubjectKeyIdentifierOid] as X509SubjectKeyIdentifierExtension;
+                certificate.Extensions[SubjectKeyIdentifierOid]
+                as X509SubjectKeyIdentifierExtension;
             if (skiExtension != null)
             {
                 return skiExtension.RawData;
@@ -53,13 +50,20 @@ namespace System.IdentityModel.Tokens
             return data != null && Matches(data, SkiDataOffset);
         }
 
-        public static bool TryCreateFrom(X509Certificate2 certificate, out X509SubjectKeyIdentifierClause keyIdentifierClause)
+        public static bool TryCreateFrom(
+            X509Certificate2 certificate,
+            out X509SubjectKeyIdentifierClause keyIdentifierClause
+        )
         {
             byte[] data = GetSkiRawData(certificate);
             keyIdentifierClause = null;
             if (data != null)
             {
-                byte[] ski = SecurityUtils.CloneBuffer(data, SkiDataOffset, data.Length - SkiDataOffset);
+                byte[] ski = SecurityUtils.CloneBuffer(
+                    data,
+                    SkiDataOffset,
+                    data.Length - SkiDataOffset
+                );
                 keyIdentifierClause = new X509SubjectKeyIdentifierClause(ski, false);
             }
             return keyIdentifierClause != null;
@@ -72,7 +76,11 @@ namespace System.IdentityModel.Tokens
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "X509SubjectKeyIdentifierClause(SKI = 0x{0})", ToHexString());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "X509SubjectKeyIdentifierClause(SKI = 0x{0})",
+                ToHexString()
+            );
         }
     }
 }

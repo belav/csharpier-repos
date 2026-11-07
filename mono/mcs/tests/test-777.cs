@@ -1,17 +1,11 @@
 public class MediaStore
 {
-	class Thing
-	{
-		public interface AudioColumns : MediaStore.MediaColumns
-		{
-		}
-	}
+    class Thing
+    {
+        public interface AudioColumns : MediaStore.MediaColumns { }
+    }
 
-	public interface MediaColumns
-	{
-	}
+    public interface MediaColumns { }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

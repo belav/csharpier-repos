@@ -13,11 +13,14 @@ internal static partial class Interop
         {
             None = 0,
             SkipCompletionPortOnSuccess = 1,
-            SkipSetEventOnHandle = 2
+            SkipSetEventOnHandle = 2,
         }
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetFileCompletionNotificationModes(SafeHandle handle, FileCompletionNotificationModes flags);
+        internal static partial bool SetFileCompletionNotificationModes(
+            SafeHandle handle,
+            FileCompletionNotificationModes flags
+        );
     }
 }

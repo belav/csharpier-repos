@@ -32,7 +32,8 @@ namespace System.Net
 
         private const int BlockSize = 16 * 1024;
 
-        public MultiArrayBuffer(int initialBufferSize) : this()
+        public MultiArrayBuffer(int initialBufferSize)
+            : this()
         {
             // 'initialBufferSize' is ignored for now. Some callers are passing useful info here that we might want to act on in the future.
             Debug.Assert(initialBufferSize >= 0);
@@ -61,14 +62,19 @@ namespace System.Net
 
         public bool IsEmpty => _activeStart == _availableStart;
 
-        public MultiMemory ActiveMemory => new MultiMemory(_blocks, _activeStart, _availableStart - _activeStart);
+        public MultiMemory ActiveMemory =>
+            new MultiMemory(_blocks, _activeStart, _availableStart - _activeStart);
 
-        public MultiMemory AvailableMemory => new MultiMemory(_blocks, _availableStart, _allocatedEnd - _availableStart);
+        public MultiMemory AvailableMemory =>
+            new MultiMemory(_blocks, _availableStart, _allocatedEnd - _availableStart);
 
         public void Discard(int byteCount)
         {
             Debug.Assert(byteCount >= 0);
-            Debug.Assert(byteCount <= ActiveMemory.Length, $"MultiArrayBuffer.Discard: Expected byteCount={byteCount} <= {ActiveMemory.Length}");
+            Debug.Assert(
+                byteCount <= ActiveMemory.Length,
+                $"MultiArrayBuffer.Discard: Expected byteCount={byteCount} <= {ActiveMemory.Length}"
+            );
 
             if (byteCount == ActiveMemory.Length)
             {
@@ -100,7 +106,6 @@ namespace System.Net
             _activeStart = _availableStart = _allocatedEnd = 0;
 
             CheckState();
-
         }
 
         private void FreeBlocks(uint startBlock, uint endBlock)
@@ -118,7 +123,10 @@ namespace System.Net
         public void Commit(int byteCount)
         {
             Debug.Assert(byteCount >= 0);
-            Debug.Assert(byteCount <= AvailableMemory.Length, $"MultiArrayBuffer.Commit: Expected byteCount={byteCount} <= {AvailableMemory.Length}");
+            Debug.Assert(
+                byteCount <= AvailableMemory.Length,
+                $"MultiArrayBuffer.Commit: Expected byteCount={byteCount} <= {AvailableMemory.Length}"
+            );
 
             uint ubyteCount = (uint)byteCount;
 
@@ -200,7 +208,9 @@ namespace System.Net
                         }
 
                         byte[]?[] newBlockArray = new byte[]?[blockArraySize];
-                        _blocks.AsSpan((int)unusedInitialBlocks, (int)usedBlocks).CopyTo(newBlockArray);
+                        _blocks
+                            .AsSpan((int)unusedInitialBlocks, (int)usedBlocks)
+                            .CopyTo(newBlockArray);
                         _blocks = newBlockArray;
                     }
                     else
@@ -217,7 +227,10 @@ namespace System.Net
                     _activeStart -= shift;
                     _availableStart -= shift;
 
-                    Debug.Assert(_activeStart / BlockSize == 0, $"Start is not in first block after move or resize?? _activeStart={_activeStart}");
+                    Debug.Assert(
+                        _activeStart / BlockSize == 0,
+                        $"Start is not in first block after move or resize?? _activeStart={_activeStart}"
+                    );
                 }
             }
 
@@ -254,7 +267,10 @@ namespace System.Net
                 Debug.Assert(_availableStart <= _allocatedEnd);
                 Debug.Assert(_allocatedEnd <= _blocks.Length * BlockSize);
 
-                Debug.Assert(_allocatedEnd % BlockSize == 0, $"_allocatedEnd={_allocatedEnd} not at block boundary?");
+                Debug.Assert(
+                    _allocatedEnd % BlockSize == 0,
+                    $"_allocatedEnd={_allocatedEnd} not at block boundary?"
+                );
 
                 uint firstAllocatedBlock = _activeStart / BlockSize;
                 uint firstUnallocatedBlock = _allocatedEnd / BlockSize;
@@ -276,7 +292,10 @@ namespace System.Net
 
                 if (_activeStart == _availableStart)
                 {
-                    Debug.Assert(_activeStart == 0, $"No active bytes but _activeStart={_activeStart}");
+                    Debug.Assert(
+                        _activeStart == 0,
+                        $"No active bytes but _activeStart={_activeStart}"
+                    );
                 }
             }
         }
@@ -316,6 +335,7 @@ namespace System.Net
         }
 
         private static uint GetBlockIndex(uint offset) => offset / BlockSize;
+
         private static uint GetOffsetInBlock(uint offset) => offset % BlockSize;
 
         public bool IsEmpty => _length == 0;
@@ -337,7 +357,8 @@ namespace System.Net
             }
         }
 
-        public int BlockCount => (int)(GetBlockIndex(_start + _length + (BlockSize - 1)) - GetBlockIndex(_start));
+        public int BlockCount =>
+            (int)(GetBlockIndex(_start + _length + (BlockSize - 1)) - GetBlockIndex(_start));
 
         public Memory<byte> GetBlock(int blockIndex)
         {
@@ -346,17 +367,37 @@ namespace System.Net
                 throw new IndexOutOfRangeException();
             }
 
-            Debug.Assert(_length > 0, "Length should never be 0 here because BlockCount would be 0");
+            Debug.Assert(
+                _length > 0,
+                "Length should never be 0 here because BlockCount would be 0"
+            );
             Debug.Assert(_blocks is not null);
 
             uint startInBlock = (blockIndex == 0 ? GetOffsetInBlock(_start) : 0);
-            uint endInBlock = (blockIndex == BlockCount - 1 ? GetOffsetInBlock(_start + _length - 1) + 1 : BlockSize);
+            uint endInBlock = (
+                blockIndex == BlockCount - 1
+                    ? GetOffsetInBlock(_start + _length - 1) + 1
+                    : BlockSize
+            );
 
-            Debug.Assert(0 <= startInBlock, $"Invalid startInBlock={startInBlock}. blockIndex={blockIndex}, _blocks.Length={_blocks.Length}, _start={_start}, _length={_length}");
-            Debug.Assert(startInBlock < endInBlock, $"Invalid startInBlock={startInBlock}, endInBlock={endInBlock}. blockIndex={blockIndex}, _blocks.Length={_blocks.Length}, _start={_start}, _length={_length}");
-            Debug.Assert(endInBlock <= BlockSize, $"Invalid endInBlock={endInBlock}. blockIndex={blockIndex}, _blocks.Length={_blocks.Length}, _start={_start}, _length={_length}");
+            Debug.Assert(
+                0 <= startInBlock,
+                $"Invalid startInBlock={startInBlock}. blockIndex={blockIndex}, _blocks.Length={_blocks.Length}, _start={_start}, _length={_length}"
+            );
+            Debug.Assert(
+                startInBlock < endInBlock,
+                $"Invalid startInBlock={startInBlock}, endInBlock={endInBlock}. blockIndex={blockIndex}, _blocks.Length={_blocks.Length}, _start={_start}, _length={_length}"
+            );
+            Debug.Assert(
+                endInBlock <= BlockSize,
+                $"Invalid endInBlock={endInBlock}. blockIndex={blockIndex}, _blocks.Length={_blocks.Length}, _start={_start}, _length={_length}"
+            );
 
-            return new Memory<byte>(_blocks[GetBlockIndex(_start) + blockIndex], (int)startInBlock, (int)(endInBlock - startInBlock));
+            return new Memory<byte>(
+                _blocks[GetBlockIndex(_start) + blockIndex],
+                (int)startInBlock,
+                (int)(endInBlock - startInBlock)
+            );
         }
 
         public MultiMemory Slice(int start)

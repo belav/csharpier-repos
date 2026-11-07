@@ -9,7 +9,9 @@ using System.Reflection;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal sealed partial class RuntimeConstructedGenericTypeInfo : RuntimeTypeInfo, IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
+    internal sealed partial class RuntimeConstructedGenericTypeInfo
+        : RuntimeTypeInfo,
+            IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
     {
         //
         // Key for unification.
@@ -25,7 +27,11 @@ namespace System.Reflection.Runtime.TypeInfos
             //    We allow it to ride along in the key object because the ConcurrentUnifier classes we use don't support passing "extra" parameters to
             //    their Factory methods.
             //
-            public UnificationKey(RuntimeTypeInfo genericTypeDefinition, RuntimeTypeInfo[] genericTypeArguments, RuntimeTypeHandle typeHandle)
+            public UnificationKey(
+                RuntimeTypeInfo genericTypeDefinition,
+                RuntimeTypeInfo[] genericTypeArguments,
+                RuntimeTypeHandle typeHandle
+            )
             {
                 GenericTypeDefinition = genericTypeDefinition;
                 GenericTypeArguments = genericTypeArguments;

@@ -25,6 +25,6 @@ namespace Microsoft.CodeAnalysis
         Retargetability = 1 << 8,
         ContentType = 1 << 9,
 
-        Unknown = 1 << 10
+        Unknown = 1 << 10,
     }
 }

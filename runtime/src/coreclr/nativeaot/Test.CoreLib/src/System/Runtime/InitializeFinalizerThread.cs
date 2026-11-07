@@ -9,8 +9,6 @@ namespace System.Runtime
     {
         // Here, we are subscribing to a callback from the runtime.  This callback is made from the finalizer
         // thread before any objects are finalized.
-        public static void DoInitialize()
-        {
-        }
+        public static void DoInitialize() { }
     }
 }

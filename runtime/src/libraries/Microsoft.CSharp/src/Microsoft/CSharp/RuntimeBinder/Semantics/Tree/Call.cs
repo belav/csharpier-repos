@@ -7,12 +7,27 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprCall : ExprWithArgs
     {
-        public ExprCall(CType type, EXPRFLAG flags, Expr arguments, ExprMemberGroup member, MethWithInst method)
+        public ExprCall(
+            CType type,
+            EXPRFLAG flags,
+            Expr arguments,
+            ExprMemberGroup member,
+            MethWithInst method
+        )
             : base(ExpressionKind.Call, type)
         {
             Debug.Assert(
-                (flags & ~(EXPRFLAG.EXF_NEWOBJCALL | EXPRFLAG.EXF_CONSTRAINED
-                           | EXPRFLAG.EXF_NEWSTRUCTASSG | EXPRFLAG.EXF_IMPLICITSTRUCTASSG | EXPRFLAG.EXF_MASK_ANY)) == 0);
+                (
+                    flags
+                    & ~(
+                        EXPRFLAG.EXF_NEWOBJCALL
+                        | EXPRFLAG.EXF_CONSTRAINED
+                        | EXPRFLAG.EXF_NEWSTRUCTASSG
+                        | EXPRFLAG.EXF_IMPLICITSTRUCTASSG
+                        | EXPRFLAG.EXF_MASK_ANY
+                    )
+                ) == 0
+            );
             Flags = flags;
             OptionalArguments = arguments;
             MemberGroup = member;

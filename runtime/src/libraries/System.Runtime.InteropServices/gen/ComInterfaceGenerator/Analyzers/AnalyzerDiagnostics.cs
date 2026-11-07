@@ -28,7 +28,11 @@ namespace Microsoft.Interop.Analyzers
 
         private static LocalizableResourceString GetResourceString(string resourceName)
         {
-            return new LocalizableResourceString(resourceName, SR.ResourceManager, typeof(FxResources.Microsoft.Interop.ComInterfaceGenerator.SR));
+            return new LocalizableResourceString(
+                resourceName,
+                SR.ResourceManager,
+                typeof(FxResources.Microsoft.Interop.ComInterfaceGenerator.SR)
+            );
         }
 
         public static readonly DiagnosticDescriptor ConvertToGeneratedComInterface =
@@ -39,7 +43,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Info,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConvertToGeneratedComInterfaceDescription)));
+                description: GetResourceString(nameof(SR.ConvertToGeneratedComInterfaceDescription))
+            );
 
         public static readonly DiagnosticDescriptor AddGeneratedComClassAttribute =
             DiagnosticDescriptorHelper.Create(
@@ -49,7 +54,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Info,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.AddGeneratedComClassAttributeDescription)));
+                description: GetResourceString(nameof(SR.AddGeneratedComClassAttributeDescription))
+            );
 
         public static readonly DiagnosticDescriptor ComHostingDoesNotSupportGeneratedComInterface =
             DiagnosticDescriptorHelper.Create(
@@ -59,7 +65,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ComHostingDoesNotSupportGeneratedComInterfaceDescription)));
+                description: GetResourceString(
+                    nameof(SR.ComHostingDoesNotSupportGeneratedComInterfaceDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor RuntimeComApisDoNotSupportSourceGeneratedCom =
             DiagnosticDescriptorHelper.Create(
@@ -69,16 +78,26 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.RuntimeComApisDoNotSupportSourceGeneratedComDescription)));
+                description: GetResourceString(
+                    nameof(SR.RuntimeComApisDoNotSupportSourceGeneratedComDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor CastsBetweenRuntimeComAndSourceGeneratedComNotSupported =
             DiagnosticDescriptorHelper.Create(
                 Ids.RuntimeComAndGeneratedComDoNotMix,
-                GetResourceString(nameof(SR.CastsBetweenRuntimeComAndSourceGeneratedComNotSupportedTitle)),
-                GetResourceString(nameof(SR.CastsBetweenRuntimeComAndSourceGeneratedComNotSupportedMessage)),
+                GetResourceString(
+                    nameof(SR.CastsBetweenRuntimeComAndSourceGeneratedComNotSupportedTitle)
+                ),
+                GetResourceString(
+                    nameof(SR.CastsBetweenRuntimeComAndSourceGeneratedComNotSupportedMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.CastsBetweenRuntimeComAndSourceGeneratedComNotSupportedDescription)));
+                description: GetResourceString(
+                    nameof(SR.CastsBetweenRuntimeComAndSourceGeneratedComNotSupportedDescription)
+                )
+            );
     }
 }

@@ -9,15 +9,15 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 #region Grammar
 //
 // Grammar (left-factored with empty productions removed):
 // ----------------------------------------------------------
-// 
+//
 // condition    -->     binary-expression
 //
 // binary-expression    --> unary-expresssion binary-expression-tail
@@ -34,10 +34,10 @@ using System.Workflow.Activities.Common;
 //                              --> 5:{ <  >  <=  >= }
 //                              --> 6:{ +  - }
 //                              --> 7:{ *  /  %  MOD }
-//              
+//
 // unary-expression     -->     unary-operator unary-expression
 //                      -->     postfix-expression
-//              
+//
 // unary-operator       --> -
 //                      --> !
 //                      --> NOT
@@ -62,7 +62,7 @@ using System.Workflow.Activities.Common;
 //
 // expression-list-tail --> ,  logical-expression  expression-list-tail
 //                      --> ,  logical-expression
-//              
+//
 // method-call-arguments    --> ( argument-list )
 //                          --> ( )
 //
@@ -71,14 +71,14 @@ using System.Workflow.Activities.Common;
 //
 // argument-list-tail   --> , argument argument-list-tail
 //                      --> , argument
-//              
+//
 // argument     -->     direction logical-expression
 //              -->     logical-expression
-//              
+//
 // direction    -->     IN
-//              -->     OUT 
-//              -->     REF 
-//              
+//              -->     OUT
+//              -->     REF
+//
 // primary-expression --> ( logical-expression )
 //                    --> IDENTIFIER
 //                    --> IDENTIFIER  method-call-arguments
@@ -218,6 +218,7 @@ namespace System.Workflow.Activities.Rules
         {
             return currentToken;
         }
+
         internal void RestoreCurrentToken(int tokenValue)
         {
             currentToken = tokenValue;
@@ -232,7 +233,12 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal void SetTypeMemberCompletions(Type computedType, Type thisType, bool isStatic, RuleValidation validation)
+        internal void SetTypeMemberCompletions(
+            Type computedType,
+            Type thisType,
+            bool isStatic,
+            RuleValidation validation
+        )
         {
             BindingFlags flags = BindingFlags.Public;
             if (isStatic)
@@ -265,7 +271,14 @@ namespace System.Workflow.Activities.Rules
             foreach (ExtensionMethodInfo extension in ext)
             {
                 ValidationError error;
-                if (RuleValidation.TypesAreAssignable(computedType, extension.AssumedDeclaringType, null, out error))
+                if (
+                    RuleValidation.TypesAreAssignable(
+                        computedType,
+                        extension.AssumedDeclaringType,
+                        null,
+                        out error
+                    )
+                )
                 {
                     members.Add(extension);
                 }
@@ -288,7 +301,11 @@ namespace System.Workflow.Activities.Rules
                         {
                             // Add all members of this's type, but only non-private members
                             // of other types.
-                            if (method.DeclaringType == thisType || IsNonPrivate(method, thisType) || (method is ExtensionMethodInfo))
+                            if (
+                                method.DeclaringType == thisType
+                                || IsNonPrivate(method, thisType)
+                                || (method is ExtensionMethodInfo)
+                            )
                                 filteredMembers[member.Name] = member;
                         }
                         break;
@@ -298,7 +315,10 @@ namespace System.Workflow.Activities.Rules
                         // Only add nested types if "isStatic" is true.
                         if (isStatic)
                         {
-                            if (member.DeclaringType == thisType || IsNonPrivate((Type)member, thisType))
+                            if (
+                                member.DeclaringType == thisType
+                                || IsNonPrivate((Type)member, thisType)
+                            )
                             {
                                 filteredMembers[member.Name] = member;
                             }
@@ -308,7 +328,10 @@ namespace System.Workflow.Activities.Rules
                     case MemberTypes.Field:
                         // Add all members of this's type, but only non-private members
                         // of other types.
-                        if (member.DeclaringType == thisType || IsNonPrivate((FieldInfo)member, thisType))
+                        if (
+                            member.DeclaringType == thisType
+                            || IsNonPrivate((FieldInfo)member, thisType)
+                        )
                             filteredMembers[member.Name] = member;
                         break;
 
@@ -319,10 +342,15 @@ namespace System.Workflow.Activities.Rules
                         {
                             // If the property has arguments, it can only be accessed by directly calling
                             // its accessor methods.
-                            MethodInfo[] accessors = prop.GetAccessors((flags & BindingFlags.NonPublic) != 0);
+                            MethodInfo[] accessors = prop.GetAccessors(
+                                (flags & BindingFlags.NonPublic) != 0
+                            );
                             foreach (MethodInfo accessor in accessors)
                             {
-                                if (accessor.DeclaringType == thisType || IsNonPrivate(accessor, thisType))
+                                if (
+                                    accessor.DeclaringType == thisType
+                                    || IsNonPrivate(accessor, thisType)
+                                )
                                     filteredMembers[accessor.Name] = accessor;
                             }
                         }
@@ -336,7 +364,9 @@ namespace System.Workflow.Activities.Rules
                             else
                             {
                                 // Add the property if at least one of its accessors is non-private.
-                                MethodInfo[] accessors = prop.GetAccessors((flags & BindingFlags.NonPublic) != 0);
+                                MethodInfo[] accessors = prop.GetAccessors(
+                                    (flags & BindingFlags.NonPublic) != 0
+                                );
                                 foreach (MethodInfo accessor in accessors)
                                 {
                                     if (IsNonPrivate(accessor, thisType))
@@ -361,7 +391,8 @@ namespace System.Workflow.Activities.Rules
 
         internal void SetConstructorCompletions(Type computedType, Type thisType)
         {
-            BindingFlags flags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
+            BindingFlags flags =
+                BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
             if (computedType.Assembly == thisType.Assembly)
                 flags |= BindingFlags.NonPublic;
 
@@ -373,7 +404,8 @@ namespace System.Workflow.Activities.Rules
 
         internal void SetNestedClassCompletions(Type computedType, Type thisType)
         {
-            BindingFlags flags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
+            BindingFlags flags =
+                BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
             if (computedType.Assembly == thisType.Assembly)
                 flags |= BindingFlags.NonPublic;
 
@@ -391,7 +423,10 @@ namespace System.Workflow.Activities.Rules
                 {
                     case MemberTypes.NestedType:
                     case MemberTypes.TypeInfo:
-                        if (member.DeclaringType == thisType || IsNonPrivate((Type)member, thisType))
+                        if (
+                            member.DeclaringType == thisType
+                            || IsNonPrivate((Type)member, thisType)
+                        )
                         {
                             filteredMembers[member.Name] = member;
                         }
@@ -406,7 +441,14 @@ namespace System.Workflow.Activities.Rules
             completions = filteredMembers.Values;
         }
 
-        internal void SetMethodCompletions(Type computedType, Type thisType, string methodName, bool includeStatic, bool includeInstance, RuleValidation validation)
+        internal void SetMethodCompletions(
+            Type computedType,
+            Type thisType,
+            string methodName,
+            bool includeStatic,
+            bool includeInstance,
+            RuleValidation validation
+        )
         {
             BindingFlags flags = BindingFlags.Public;
             if (computedType.Assembly == thisType.Assembly)
@@ -447,8 +489,17 @@ namespace System.Workflow.Activities.Rules
             {
                 // does it have the right name and is the type compatible
                 ValidationError error;
-                if ((extension.Name == methodName) &&
-                    (RuleValidation.TypesAreAssignable(computedType, extension.AssumedDeclaringType, null, out error)))
+                if (
+                    (extension.Name == methodName)
+                    && (
+                        RuleValidation.TypesAreAssignable(
+                            computedType,
+                            extension.AssumedDeclaringType,
+                            null,
+                            out error
+                        )
+                    )
+                )
                 {
                     candidateMethods.Add(extension);
                 }
@@ -463,7 +514,10 @@ namespace System.Workflow.Activities.Rules
             {
                 for (int m = 0; m < methods.Length; ++m)
                 {
-                    System.Diagnostics.Debug.Assert(methods[m].MemberType == MemberTypes.Method, "expect methods only");
+                    System.Diagnostics.Debug.Assert(
+                        methods[m].MemberType == MemberTypes.Method,
+                        "expect methods only"
+                    );
                     MethodInfo method = (MethodInfo)methods[m];
 
                     if (!method.IsGenericMethod) // Skip generic methods.
@@ -472,32 +526,32 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        internal static bool IsNonPrivate(
-            MethodInfo methodInfo, Type thisType)
+        internal static bool IsNonPrivate(MethodInfo methodInfo, Type thisType)
         {
             return methodInfo.IsPublic
                 || methodInfo.IsFamily
                 || methodInfo.IsFamilyOrAssembly
                 || (methodInfo.IsAssembly || methodInfo.IsFamilyAndAssembly)
-                && (methodInfo.DeclaringType.Assembly == thisType.Assembly);
+                    && (methodInfo.DeclaringType.Assembly == thisType.Assembly);
         }
 
-        internal static bool IsNonPrivate(
-            FieldInfo fieldInfo, Type thisType)
+        internal static bool IsNonPrivate(FieldInfo fieldInfo, Type thisType)
         {
             return fieldInfo.IsPublic
                 || fieldInfo.IsFamily
                 || fieldInfo.IsFamilyOrAssembly
                 || (fieldInfo.IsAssembly || fieldInfo.IsFamilyAndAssembly)
-                && (fieldInfo.DeclaringType.Assembly == thisType.Assembly);
+                    && (fieldInfo.DeclaringType.Assembly == thisType.Assembly);
         }
 
-        internal static bool IsNonPrivate(
-            Type type, Type thisType)
+        internal static bool IsNonPrivate(Type type, Type thisType)
         {
-            return (type.IsPublic || type.IsNestedPublic
+            return (
+                type.IsPublic
+                || type.IsNestedPublic
                 || (type.IsNestedAssembly || type.IsNestedFamANDAssem || type.IsNestedFamORAssem)
-                && (type.Assembly == thisType.Assembly));
+                    && (type.Assembly == thisType.Assembly)
+            );
         }
 
         internal int NumTokens
@@ -518,19 +572,41 @@ namespace System.Workflow.Activities.Rules
             private TokenID token;
             private CodeBinaryOperatorType codeDomOperator;
 
-            internal BinaryOperationDescriptor(TokenID token, CodeBinaryOperatorType codeDomOperator)
+            internal BinaryOperationDescriptor(
+                TokenID token,
+                CodeBinaryOperatorType codeDomOperator
+            )
             {
                 this.token = token;
                 this.codeDomOperator = codeDomOperator;
             }
 
-            internal TokenID Token { get { return token; } }
-
-            internal virtual CodeBinaryOperatorExpression CreateBinaryExpression(CodeExpression left, CodeExpression right, int operatorPosition, Parser parser, ParserContext parserContext, bool assignIsEquality)
+            internal TokenID Token
             {
-                CodeBinaryOperatorExpression binaryExpr = new CodeBinaryOperatorExpression(left, codeDomOperator, right);
+                get { return token; }
+            }
+
+            internal virtual CodeBinaryOperatorExpression CreateBinaryExpression(
+                CodeExpression left,
+                CodeExpression right,
+                int operatorPosition,
+                Parser parser,
+                ParserContext parserContext,
+                bool assignIsEquality
+            )
+            {
+                CodeBinaryOperatorExpression binaryExpr = new CodeBinaryOperatorExpression(
+                    left,
+                    codeDomOperator,
+                    right
+                );
                 parserContext.exprPositions[binaryExpr] = operatorPosition;
-                parser.ValidateExpression(parserContext, binaryExpr, assignIsEquality, ValueCheck.Read);
+                parser.ValidateExpression(
+                    parserContext,
+                    binaryExpr,
+                    assignIsEquality,
+                    ValueCheck.Read
+                );
                 return binaryExpr;
             }
         }
@@ -539,22 +615,41 @@ namespace System.Workflow.Activities.Rules
         {
             internal NotEqualOperationDescriptor(TokenID token)
                 : base(token, CodeBinaryOperatorType.IdentityInequality) // kludge
-            {
-            }
+            { }
 
-            internal override CodeBinaryOperatorExpression CreateBinaryExpression(CodeExpression left, CodeExpression right, int operatorPosition, Parser parser, ParserContext parserContext, bool assignIsEquality)
+            internal override CodeBinaryOperatorExpression CreateBinaryExpression(
+                CodeExpression left,
+                CodeExpression right,
+                int operatorPosition,
+                Parser parser,
+                ParserContext parserContext,
+                bool assignIsEquality
+            )
             {
                 CodePrimitiveExpression falseExpr = new CodePrimitiveExpression(false);
                 parserContext.exprPositions[falseExpr] = operatorPosition;
 
                 // Compare the comperands using "value-equality"
-                CodeBinaryOperatorExpression binaryExpr = new CodeBinaryOperatorExpression(left, CodeBinaryOperatorType.ValueEquality, right);
+                CodeBinaryOperatorExpression binaryExpr = new CodeBinaryOperatorExpression(
+                    left,
+                    CodeBinaryOperatorType.ValueEquality,
+                    right
+                );
                 parserContext.exprPositions[binaryExpr] = operatorPosition;
 
                 // Compare the result of that with false to simulate "value-inequality"
-                binaryExpr = new CodeBinaryOperatorExpression(binaryExpr, CodeBinaryOperatorType.ValueEquality, falseExpr);
+                binaryExpr = new CodeBinaryOperatorExpression(
+                    binaryExpr,
+                    CodeBinaryOperatorType.ValueEquality,
+                    falseExpr
+                );
                 parserContext.exprPositions[binaryExpr] = operatorPosition;
-                parser.ValidateExpression(parserContext, binaryExpr, assignIsEquality, ValueCheck.Read);
+                parser.ValidateExpression(
+                    parserContext,
+                    binaryExpr,
+                    assignIsEquality,
+                    ValueCheck.Read
+                );
 
                 return binaryExpr;
             }
@@ -581,30 +676,60 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        private static readonly BinaryPrecedenceDescriptor[] precedences = new BinaryPrecedenceDescriptor[] {
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.Or, CodeBinaryOperatorType.BooleanOr)),
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.And, CodeBinaryOperatorType.BooleanAnd)),
-
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.BitOr, CodeBinaryOperatorType.BitwiseOr)),
-
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.BitAnd, CodeBinaryOperatorType.BitwiseAnd)),
-
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.Equal, CodeBinaryOperatorType.ValueEquality),
-                                           new BinaryOperationDescriptor(TokenID.Assign, CodeBinaryOperatorType.ValueEquality),
-                                           new NotEqualOperationDescriptor(TokenID.NotEqual)),
-
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.Less, CodeBinaryOperatorType.LessThan),
-                                           new BinaryOperationDescriptor(TokenID.LessEqual, CodeBinaryOperatorType.LessThanOrEqual),
-                                           new BinaryOperationDescriptor(TokenID.Greater, CodeBinaryOperatorType.GreaterThan),
-                                           new BinaryOperationDescriptor(TokenID.GreaterEqual, CodeBinaryOperatorType.GreaterThanOrEqual)),
-
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.Plus, CodeBinaryOperatorType.Add),
-                                           new BinaryOperationDescriptor(TokenID.Minus, CodeBinaryOperatorType.Subtract)),
-
-            new BinaryPrecedenceDescriptor(new BinaryOperationDescriptor(TokenID.Multiply, CodeBinaryOperatorType.Multiply),
-                                           new BinaryOperationDescriptor(TokenID.Divide, CodeBinaryOperatorType.Divide),
-                                           new BinaryOperationDescriptor(TokenID.Modulus, CodeBinaryOperatorType.Modulus))
-        };
+        private static readonly BinaryPrecedenceDescriptor[] precedences =
+            new BinaryPrecedenceDescriptor[]
+            {
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(TokenID.Or, CodeBinaryOperatorType.BooleanOr)
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(TokenID.And, CodeBinaryOperatorType.BooleanAnd)
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(TokenID.BitOr, CodeBinaryOperatorType.BitwiseOr)
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(TokenID.BitAnd, CodeBinaryOperatorType.BitwiseAnd)
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(
+                        TokenID.Equal,
+                        CodeBinaryOperatorType.ValueEquality
+                    ),
+                    new BinaryOperationDescriptor(
+                        TokenID.Assign,
+                        CodeBinaryOperatorType.ValueEquality
+                    ),
+                    new NotEqualOperationDescriptor(TokenID.NotEqual)
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(TokenID.Less, CodeBinaryOperatorType.LessThan),
+                    new BinaryOperationDescriptor(
+                        TokenID.LessEqual,
+                        CodeBinaryOperatorType.LessThanOrEqual
+                    ),
+                    new BinaryOperationDescriptor(
+                        TokenID.Greater,
+                        CodeBinaryOperatorType.GreaterThan
+                    ),
+                    new BinaryOperationDescriptor(
+                        TokenID.GreaterEqual,
+                        CodeBinaryOperatorType.GreaterThanOrEqual
+                    )
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(TokenID.Plus, CodeBinaryOperatorType.Add),
+                    new BinaryOperationDescriptor(TokenID.Minus, CodeBinaryOperatorType.Subtract)
+                ),
+                new BinaryPrecedenceDescriptor(
+                    new BinaryOperationDescriptor(
+                        TokenID.Multiply,
+                        CodeBinaryOperatorType.Multiply
+                    ),
+                    new BinaryOperationDescriptor(TokenID.Divide, CodeBinaryOperatorType.Divide),
+                    new BinaryOperationDescriptor(TokenID.Modulus, CodeBinaryOperatorType.Modulus)
+                ),
+            };
 
         #endregion
 
@@ -618,7 +743,7 @@ namespace System.Workflow.Activities.Rules
         {
             Unknown = 0,
             Read = 1,
-            Write = 2
+            Write = 2,
         }
 
         #region Constructor
@@ -651,12 +776,12 @@ namespace System.Workflow.Activities.Rules
                 allTypes = provider.GetTypes();
             }
 
-
             // Go through all the known types and gather namespace information.
             // Also note which types are uniquely named; these can be looked up without
             // qualification.
 
-            Dictionary<string, NamespaceSymbol> rootNamespaces = new Dictionary<string, NamespaceSymbol>();
+            Dictionary<string, NamespaceSymbol> rootNamespaces =
+                new Dictionary<string, NamespaceSymbol>();
             Dictionary<string, object> duplicateNames = new Dictionary<string, object>();
             NamespaceSymbol nsSym = null;
             Symbol existingSymbol = null;
@@ -672,7 +797,10 @@ namespace System.Workflow.Activities.Rules
 
                 // Skip types that are not visible.
                 // (If type.Assembly == null, we assume it's a design-time type, and let it through.)
-                if (type.IsNotPublic && (type.Assembly != null && type.Assembly != validation.ThisType.Assembly))
+                if (
+                    type.IsNotPublic
+                    && (type.Assembly != null && type.Assembly != validation.ThisType.Assembly)
+                )
                     continue;
 
                 // Skip nested types.
@@ -784,7 +912,9 @@ namespace System.Workflow.Activities.Rules
                             {
                                 TypeSymbolBase existingTypeSymBase = (TypeSymbolBase)existingSymbol;
                                 TypeSymbolBase typeSymBase = (TypeSymbolBase)nestedSym;
-                                OverloadedTypeSymbol overloadSym = existingTypeSymBase.OverloadType(typeSymBase);
+                                OverloadedTypeSymbol overloadSym = existingTypeSymBase.OverloadType(
+                                    typeSymBase
+                                );
                                 if (overloadSym == null)
                                     duplicateNames[name] = null; // Couldn't overload it.
                                 else
@@ -803,7 +933,6 @@ namespace System.Workflow.Activities.Rules
             foreach (string name in duplicateNames.Keys)
                 globalUniqueSymbols.Remove(name);
 
-
             // Finally, deal with the members of "this".
             //
             // Nested types override/hide items in the global unique symbols list.
@@ -813,13 +942,22 @@ namespace System.Workflow.Activities.Rules
             // In contexts where the parser is only looking for types and/or namespaces, local
             // symbols do NOT hide global ones.
             Type thisType = validation.ThisType;
-            MemberInfo[] members = thisType.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            MemberInfo[] members = thisType.GetMembers(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.FlattenHierarchy
+            );
             foreach (MemberInfo mi in members)
             {
                 switch (mi.MemberType)
                 {
                     case MemberTypes.Field:
-                        if (mi.DeclaringType == thisType || ParserContext.IsNonPrivate((FieldInfo)mi, thisType))
+                        if (
+                            mi.DeclaringType == thisType
+                            || ParserContext.IsNonPrivate((FieldInfo)mi, thisType)
+                        )
                             localUniqueSymbols[mi.Name] = new MemberSymbol(mi);
                         break;
 
@@ -833,7 +971,10 @@ namespace System.Workflow.Activities.Rules
                             MethodInfo[] accessors = prop.GetAccessors(true);
                             foreach (MethodInfo accessor in accessors)
                             {
-                                if (accessor.DeclaringType == thisType || ParserContext.IsNonPrivate(accessor, thisType))
+                                if (
+                                    accessor.DeclaringType == thisType
+                                    || ParserContext.IsNonPrivate(accessor, thisType)
+                                )
                                     localUniqueSymbols[mi.Name] = new MemberSymbol(accessor);
                             }
                         }
@@ -864,7 +1005,10 @@ namespace System.Workflow.Activities.Rules
                         MethodInfo method = (MethodInfo)mi;
                         if (!method.IsSpecialName && !method.IsGenericMethod)
                         {
-                            if (mi.DeclaringType == thisType || ParserContext.IsNonPrivate(method, thisType))
+                            if (
+                                mi.DeclaringType == thisType
+                                || ParserContext.IsNonPrivate(method, thisType)
+                            )
                             {
                                 // These simply hide anything else of the same name.
                                 localUniqueSymbols[mi.Name] = new MemberSymbol(mi);
@@ -883,16 +1027,24 @@ namespace System.Workflow.Activities.Rules
                             if (existingTypeSymBase != null)
                             {
                                 // Try to overload.
-                                OverloadedTypeSymbol overloadSym = existingTypeSymBase.OverloadType(memberSym);
+                                OverloadedTypeSymbol overloadSym = existingTypeSymBase.OverloadType(
+                                    memberSym
+                                );
                                 if (overloadSym == null)
                                 {
-                                    if (mi.DeclaringType == thisType || ParserContext.IsNonPrivate(miType, thisType))
+                                    if (
+                                        mi.DeclaringType == thisType
+                                        || ParserContext.IsNonPrivate(miType, thisType)
+                                    )
                                     {
                                         // We couldn't overload it, so hide it.
                                         globalUniqueSymbols[memberSym.Name] = memberSym;
                                     }
                                 }
-                                else if (mi.DeclaringType == thisType || ParserContext.IsNonPrivate(miType, thisType))
+                                else if (
+                                    mi.DeclaringType == thisType
+                                    || ParserContext.IsNonPrivate(miType, thisType)
+                                )
                                 {
                                     globalUniqueSymbols[memberSym.Name] = overloadSym;
                                 }
@@ -901,13 +1053,19 @@ namespace System.Workflow.Activities.Rules
                             {
                                 // The name clashed with something that wasn't a type name.
                                 // Hide the outer one.
-                                if (mi.DeclaringType == thisType || ParserContext.IsNonPrivate((Type)mi, thisType))
+                                if (
+                                    mi.DeclaringType == thisType
+                                    || ParserContext.IsNonPrivate((Type)mi, thisType)
+                                )
                                     globalUniqueSymbols[memberSym.Name] = memberSym;
                             }
                         }
                         else
                         {
-                            if (mi.DeclaringType == thisType || ParserContext.IsNonPrivate(miType, thisType))
+                            if (
+                                mi.DeclaringType == thisType
+                                || ParserContext.IsNonPrivate(miType, thisType)
+                            )
                             {
                                 globalUniqueSymbols[memberSym.Name] = memberSym;
                             }
@@ -944,7 +1102,9 @@ namespace System.Workflow.Activities.Rules
                     if (parserContext.NumTokens == 2 && token.TokenID == TokenID.Identifier)
                     {
                         string ident = (string)token.Value;
-                        System.Diagnostics.Debug.Assert(parserContext.NextToken().TokenID == TokenID.EndOfInput);
+                        System.Diagnostics.Debug.Assert(
+                            parserContext.NextToken().TokenID == TokenID.EndOfInput
+                        );
 
                         if (ident.Length == 1)
                         {
@@ -1021,12 +1181,25 @@ namespace System.Workflow.Activities.Rules
             ParserContext parserContext = new ParserContext(expressionString);
 
             if (parserContext.CurrentToken.TokenID == TokenID.EndOfInput)
-                throw new RuleSyntaxException(ErrorNumbers.Error_EmptyExpression, Messages.Parser_EmptyExpression, parserContext.CurrentToken.StartPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_EmptyExpression,
+                    Messages.Parser_EmptyExpression,
+                    parserContext.CurrentToken.StartPosition
+                );
 
-            CodeExpression exprResult = ParseBinaryExpression(parserContext, 0, true, ValueCheck.Read); //ParseLogicalExpression();
+            CodeExpression exprResult = ParseBinaryExpression(
+                parserContext,
+                0,
+                true,
+                ValueCheck.Read
+            ); //ParseLogicalExpression();
 
             if (parserContext.CurrentToken.TokenID != TokenID.EndOfInput)
-                throw new RuleSyntaxException(ErrorNumbers.Error_ExtraCharactersIgnored, Messages.Parser_ExtraCharactersIgnored, parserContext.CurrentToken.StartPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_ExtraCharactersIgnored,
+                    Messages.Parser_ExtraCharactersIgnored,
+                    parserContext.CurrentToken.StartPosition
+                );
 
             if (exprResult == null)
                 return null;
@@ -1037,7 +1210,11 @@ namespace System.Workflow.Activities.Rules
 
             Type resultType = exprInfo.ExpressionType;
             if (!RuleValidation.IsValidBooleanResult(resultType))
-                throw new RuleSyntaxException(ErrorNumbers.Error_ConditionMustBeBoolean, Messages.ConditionMustBeBoolean, 0);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_ConditionMustBeBoolean,
+                    Messages.ConditionMustBeBoolean,
+                    0
+                );
 
             return new RuleExpressionCondition(exprResult);
         }
@@ -1050,7 +1227,11 @@ namespace System.Workflow.Activities.Rules
             ParserContext parserContext = new ParserContext(statementString);
             RuleAction result = ParseStatement(parserContext);
             if (parserContext.CurrentToken.TokenID != TokenID.EndOfInput)
-                throw new RuleSyntaxException(ErrorNumbers.Error_ExtraCharactersIgnored, Messages.Parser_ExtraCharactersIgnored, parserContext.CurrentToken.StartPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_ExtraCharactersIgnored,
+                    Messages.Parser_ExtraCharactersIgnored,
+                    parserContext.CurrentToken.StartPosition
+                );
 
             return result;
         }
@@ -1116,8 +1297,16 @@ namespace System.Workflow.Activities.Rules
 
                 if (parserContext.CurrentToken.TokenID != TokenID.LParen)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_MissingLparenAfterCommand, "UPDATE");
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingLparenAfterCommand, message, parserContext.CurrentToken.StartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_MissingLparenAfterCommand,
+                        "UPDATE"
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingLparenAfterCommand,
+                        message,
+                        parserContext.CurrentToken.StartPosition
+                    );
                 }
 
                 parserContext.NextToken(); // Eat the "("
@@ -1133,7 +1322,11 @@ namespace System.Workflow.Activities.Rules
                 }
                 else
                 {
-                    CodeExpression pathExpr = ParsePostfixExpression(parserContext, true, ValueCheck.Read);
+                    CodeExpression pathExpr = ParsePostfixExpression(
+                        parserContext,
+                        true,
+                        ValueCheck.Read
+                    );
 
                     RuleAnalysis analysis = new RuleAnalysis(validation, true);
                     RuleExpressionWalker.AnalyzeUsage(analysis, pathExpr, false, true, null);
@@ -1142,7 +1335,11 @@ namespace System.Workflow.Activities.Rules
                     if (paths.Count == 0 || paths.Count > 1)
                     {
                         // The expression did not modify anything, or it modified more than one.
-                        throw new RuleSyntaxException(ErrorNumbers.Error_InvalidUpdateExpression, Messages.Parser_InvalidUpdateExpression, updateArgToken.StartPosition);
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_InvalidUpdateExpression,
+                            Messages.Parser_InvalidUpdateExpression,
+                            updateArgToken.StartPosition
+                        );
                     }
                     else
                     {
@@ -1153,7 +1350,11 @@ namespace System.Workflow.Activities.Rules
                 }
 
                 if (parserContext.CurrentToken.TokenID != TokenID.RParen)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingRParenAfterArgumentList, Messages.Parser_MissingRParenAfterArgumentList, parserContext.CurrentToken.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingRParenAfterArgumentList,
+                        Messages.Parser_MissingRParenAfterArgumentList,
+                        parserContext.CurrentToken.StartPosition
+                    );
 
                 parserContext.NextToken(); // Eat the ")"
 
@@ -1169,9 +1370,11 @@ namespace System.Workflow.Activities.Rules
 
                 Type type = TryParseTypeSpecifier(parserContext, false);
 
-                if (type != null &&
-                    parserContext.CurrentToken.TokenID == TokenID.LParen &&
-                    TypeProvider.IsAssignable(typeof(RuleAction), type))
+                if (
+                    type != null
+                    && parserContext.CurrentToken.TokenID == TokenID.LParen
+                    && TypeProvider.IsAssignable(typeof(RuleAction), type)
+                )
                 {
                     // The statement started with a "type (", and the type derived from RuleAction.
                     // This is a custom rule action.
@@ -1219,7 +1422,11 @@ namespace System.Workflow.Activities.Rules
             CodeStatement result = null;
 
             // Parse the postfix-expression
-            CodeExpression postfixExpr = ParsePostfixExpression(parserContext, false, ValueCheck.Read);
+            CodeExpression postfixExpr = ParsePostfixExpression(
+                parserContext,
+                false,
+                ValueCheck.Read
+            );
 
             // See if we need to parse the assignment statement.
             Token token = parserContext.CurrentToken;
@@ -1228,7 +1435,12 @@ namespace System.Workflow.Activities.Rules
                 int assignPosition = token.StartPosition;
                 parserContext.NextToken(); // eat the '='
 
-                CodeExpression rhsExpr = ParseBinaryExpression(parserContext, 0, true, ValueCheck.Read);
+                CodeExpression rhsExpr = ParseBinaryExpression(
+                    parserContext,
+                    0,
+                    true,
+                    ValueCheck.Read
+                );
 
                 result = new CodeAssignStatement(postfixExpr, rhsExpr);
                 parserContext.exprPositions[result] = assignPosition;
@@ -1263,39 +1475,61 @@ namespace System.Workflow.Activities.Rules
         //
         // This method is still recursive descent, but parses each precedence group by using the operator precedence
         // tables defined in this class.
-        private CodeExpression ParseBinaryExpression(ParserContext parserContext, int precedence, bool assignIsEquality, ValueCheck check)
+        private CodeExpression ParseBinaryExpression(
+            ParserContext parserContext,
+            int precedence,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             // Must parse at least one left-hand operand.
-            CodeExpression leftResult = (precedence == precedences.Length - 1) ? ParseUnaryExpression(parserContext, assignIsEquality, check) : ParseBinaryExpression(parserContext, precedence + 1, assignIsEquality, check);
+            CodeExpression leftResult =
+                (precedence == precedences.Length - 1)
+                    ? ParseUnaryExpression(parserContext, assignIsEquality, check)
+                    : ParseBinaryExpression(parserContext, precedence + 1, assignIsEquality, check);
             if (leftResult != null)
             {
-                for (;;)
+                for (; ; )
                 {
                     Token operatorToken = parserContext.CurrentToken;
 
                     BinaryPrecedenceDescriptor precedenceDescriptor = precedences[precedence];
 
-                    BinaryOperationDescriptor operationDescriptor = precedenceDescriptor.FindOperation(operatorToken.TokenID);
+                    BinaryOperationDescriptor operationDescriptor =
+                        precedenceDescriptor.FindOperation(operatorToken.TokenID);
                     if (operationDescriptor == null)
                         break; // we're finished; no applicable binary operator token at this precedence level.
 
                     parserContext.NextToken();
 
                     // Parse the right-hand side now.
-                    CodeExpression rightResult = (precedence == precedences.Length - 1) ? ParseUnaryExpression(parserContext, true, check) : ParseBinaryExpression(parserContext, precedence + 1, true, check);
+                    CodeExpression rightResult =
+                        (precedence == precedences.Length - 1)
+                            ? ParseUnaryExpression(parserContext, true, check)
+                            : ParseBinaryExpression(parserContext, precedence + 1, true, check);
 
-                    leftResult = operationDescriptor.CreateBinaryExpression(leftResult, rightResult, operatorToken.StartPosition, this, parserContext, assignIsEquality);
+                    leftResult = operationDescriptor.CreateBinaryExpression(
+                        leftResult,
+                        rightResult,
+                        operatorToken.StartPosition,
+                        this,
+                        parserContext,
+                        assignIsEquality
+                    );
                 }
             }
 
             return leftResult;
         }
 
-
         // Parse:
         //              unary-expression --> unary-operator unary-expression
         //                               --> postfix-expression
-        private CodeExpression ParseUnaryExpression(ParserContext parserContext, bool assignIsEquality, ValueCheck check)
+        private CodeExpression ParseUnaryExpression(
+            ParserContext parserContext,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             Token currentToken = parserContext.CurrentToken;
 
@@ -1308,7 +1542,11 @@ namespace System.Workflow.Activities.Rules
                 unaryResult = ParseUnaryExpression(parserContext, true, check);
 
                 // This becomes "subExpr == false"
-                unaryResult = new CodeBinaryOperatorExpression(unaryResult, CodeBinaryOperatorType.ValueEquality, new CodePrimitiveExpression(false));
+                unaryResult = new CodeBinaryOperatorExpression(
+                    unaryResult,
+                    CodeBinaryOperatorType.ValueEquality,
+                    new CodePrimitiveExpression(false)
+                );
                 parserContext.exprPositions[unaryResult] = notPosition;
                 ValidateExpression(parserContext, unaryResult, assignIsEquality, check);
             }
@@ -1320,7 +1558,11 @@ namespace System.Workflow.Activities.Rules
                 unaryResult = ParseUnaryExpression(parserContext, true, check);
 
                 // This becomes "0 - subExpr"
-                unaryResult = new CodeBinaryOperatorExpression(new CodePrimitiveExpression(0), CodeBinaryOperatorType.Subtract, unaryResult);
+                unaryResult = new CodeBinaryOperatorExpression(
+                    new CodePrimitiveExpression(0),
+                    CodeBinaryOperatorType.Subtract,
+                    unaryResult
+                );
                 parserContext.exprPositions[unaryResult] = negativePosition;
                 ValidateExpression(parserContext, unaryResult, assignIsEquality, check);
             }
@@ -1352,7 +1594,11 @@ namespace System.Workflow.Activities.Rules
                 {
                     // It is a cast.  It must have a balancing ')'.
                     if (parserContext.CurrentToken.TokenID != TokenID.RParen)
-                        throw new RuleSyntaxException(ErrorNumbers.Error_MissingRParenInSubexpression, Messages.Parser_MissingRParenInSubexpression, parserContext.CurrentToken.StartPosition);
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_MissingRParenInSubexpression,
+                            Messages.Parser_MissingRParenInSubexpression,
+                            parserContext.CurrentToken.StartPosition
+                        );
 
                     parserContext.NextToken();
 
@@ -1383,15 +1629,29 @@ namespace System.Workflow.Activities.Rules
         //
         //              postfix-operator --> member-operator
         //                               --> element-operator
-        private CodeExpression ParsePostfixExpression(ParserContext parserContext, bool assignIsEquality, ValueCheck check)
+        private CodeExpression ParsePostfixExpression(
+            ParserContext parserContext,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             CodeExpression resultExpr = ParsePrimaryExpression(parserContext, assignIsEquality);
 
-            CodeExpression postfixExpr = TryParsePostfixOperator(parserContext, resultExpr, assignIsEquality, check);
+            CodeExpression postfixExpr = TryParsePostfixOperator(
+                parserContext,
+                resultExpr,
+                assignIsEquality,
+                check
+            );
             while (postfixExpr != null)
             {
                 resultExpr = postfixExpr;
-                postfixExpr = TryParsePostfixOperator(parserContext, resultExpr, assignIsEquality, check);
+                postfixExpr = TryParsePostfixOperator(
+                    parserContext,
+                    resultExpr,
+                    assignIsEquality,
+                    check
+                );
             }
 
             return resultExpr;
@@ -1400,13 +1660,23 @@ namespace System.Workflow.Activities.Rules
         // Parse:
         //              postfix-operator --> member-operator
         //                               --> element-operator
-        private CodeExpression TryParsePostfixOperator(ParserContext parserContext, CodeExpression primaryExpr, bool assignIsEquality, ValueCheck check)
+        private CodeExpression TryParsePostfixOperator(
+            ParserContext parserContext,
+            CodeExpression primaryExpr,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             CodeExpression postfixExpr = null;
 
             if (parserContext.CurrentToken.TokenID == TokenID.Dot)
             {
-                postfixExpr = ParseMemberOperator(parserContext, primaryExpr, assignIsEquality, check);
+                postfixExpr = ParseMemberOperator(
+                    parserContext,
+                    primaryExpr,
+                    assignIsEquality,
+                    check
+                );
             }
             else if (parserContext.CurrentToken.TokenID == TokenID.LBracket)
             {
@@ -1418,7 +1688,11 @@ namespace System.Workflow.Activities.Rules
 
         // Parse:
         //              element-operator --> [  expression-list  ]
-        private CodeExpression ParseElementOperator(ParserContext parserContext, CodeExpression primaryExpr, bool assignIsEquality)
+        private CodeExpression ParseElementOperator(
+            ParserContext parserContext,
+            CodeExpression primaryExpr,
+            bool assignIsEquality
+        )
         {
             System.Diagnostics.Debug.Assert(parserContext.CurrentToken.TokenID == TokenID.LBracket);
             int lbracketPosition = parserContext.CurrentToken.StartPosition;
@@ -1458,7 +1732,12 @@ namespace System.Workflow.Activities.Rules
         {
             List<CodeExpression> indexList = new List<CodeExpression>();
 
-            CodeExpression indexExpr = ParseBinaryExpression(parserContext, 0, true, ValueCheck.Read); //ParseLogicalExpression();
+            CodeExpression indexExpr = ParseBinaryExpression(
+                parserContext,
+                0,
+                true,
+                ValueCheck.Read
+            ); //ParseLogicalExpression();
             indexList.Add(indexExpr);
 
             while (parserContext.CurrentToken.TokenID == TokenID.Comma)
@@ -1470,7 +1749,11 @@ namespace System.Workflow.Activities.Rules
             }
 
             if (parserContext.CurrentToken.TokenID != TokenID.RBracket)
-                throw new RuleSyntaxException(ErrorNumbers.Error_MissingCloseSquareBracket, Messages.Parser_MissingCloseSquareBracket, parserContext.CurrentToken.StartPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_MissingCloseSquareBracket,
+                    Messages.Parser_MissingCloseSquareBracket,
+                    parserContext.CurrentToken.StartPosition
+                );
 
             parserContext.NextToken(); // consume the ']'
 
@@ -1480,7 +1763,7 @@ namespace System.Workflow.Activities.Rules
         // Parse:
         //              member-operator --> . IDENTIFIER method-call-arguments
         //                              --> . IDENTIFIER
-        //              
+        //
         //              method-call-arguments --> ( argument-list )
         //                                    --> ( )
         //
@@ -1489,7 +1772,12 @@ namespace System.Workflow.Activities.Rules
         //
         //              argument-list-tail --> , argument argument-list-tail
         //                                 --> , argument
-        private CodeExpression ParseMemberOperator(ParserContext parserContext, CodeExpression primaryExpr, bool assignIsEquality, ValueCheck check)
+        private CodeExpression ParseMemberOperator(
+            ParserContext parserContext,
+            CodeExpression primaryExpr,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             System.Diagnostics.Debug.Assert(parserContext.CurrentToken.TokenID == TokenID.Dot);
 
@@ -1498,12 +1786,21 @@ namespace System.Workflow.Activities.Rules
             {
                 if (parserContext.provideIntellisense && token.TokenID == TokenID.EndOfInput)
                 {
-                    parserContext.SetTypeMemberCompletions(validation.ExpressionInfo(primaryExpr).ExpressionType, validation.ThisType, primaryExpr is CodeTypeReferenceExpression, validation);
+                    parserContext.SetTypeMemberCompletions(
+                        validation.ExpressionInfo(primaryExpr).ExpressionType,
+                        validation.ThisType,
+                        primaryExpr is CodeTypeReferenceExpression,
+                        validation
+                    );
                     return null;
                 }
                 else
                 {
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingIdentifierAfterDot, Messages.Parser_MissingIdentifierAfterDot, parserContext.CurrentToken.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingIdentifierAfterDot,
+                        Messages.Parser_MissingIdentifierAfterDot,
+                        parserContext.CurrentToken.StartPosition
+                    );
                 }
             }
 
@@ -1518,13 +1815,25 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                postfixExpr = ParseFieldOrProperty(parserContext, primaryExpr, idName, idPosition, assignIsEquality, check);
+                postfixExpr = ParseFieldOrProperty(
+                    parserContext,
+                    primaryExpr,
+                    idName,
+                    idPosition,
+                    assignIsEquality,
+                    check
+                );
             }
 
             return postfixExpr;
         }
 
-        private CodeExpression ParseMethodInvoke(ParserContext parserContext, CodeExpression postfixExpr, string methodName, bool assignIsEquality)
+        private CodeExpression ParseMethodInvoke(
+            ParserContext parserContext,
+            CodeExpression postfixExpr,
+            string methodName,
+            bool assignIsEquality
+        )
         {
             System.Diagnostics.Debug.Assert(parserContext.CurrentToken.TokenID == TokenID.LParen);
 
@@ -1533,16 +1842,30 @@ namespace System.Workflow.Activities.Rules
 
             parserContext.NextToken();
 
-            if (parserContext.CurrentToken.TokenID == TokenID.EndOfInput && parserContext.provideIntellisense)
+            if (
+                parserContext.CurrentToken.TokenID == TokenID.EndOfInput
+                && parserContext.provideIntellisense
+            )
             {
                 bool isStatic = postfixExpr is CodeTypeReferenceExpression;
-                parserContext.SetMethodCompletions(validation.ExpressionInfo(postfixExpr).ExpressionType, validation.ThisType, methodName, isStatic, !isStatic, validation);
+                parserContext.SetMethodCompletions(
+                    validation.ExpressionInfo(postfixExpr).ExpressionType,
+                    validation.ThisType,
+                    methodName,
+                    isStatic,
+                    !isStatic,
+                    validation
+                );
                 return null;
             }
 
             List<CodeExpression> arguments = ParseArgumentList(parserContext);
 
-            postfixExpr = new CodeMethodInvokeExpression(postfixExpr, methodName, arguments.ToArray());
+            postfixExpr = new CodeMethodInvokeExpression(
+                postfixExpr,
+                methodName,
+                arguments.ToArray()
+            );
             parserContext.exprPositions[postfixExpr] = lparenPosition;
             ValidateExpression(parserContext, postfixExpr, assignIsEquality, ValueCheck.Read);
 
@@ -1566,7 +1889,11 @@ namespace System.Workflow.Activities.Rules
                 }
 
                 if (parserContext.CurrentToken.TokenID != TokenID.RParen)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingRParenAfterArgumentList, Messages.Parser_MissingRParenAfterArgumentList, parserContext.CurrentToken.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingRParenAfterArgumentList,
+                        Messages.Parser_MissingRParenAfterArgumentList,
+                        parserContext.CurrentToken.StartPosition
+                    );
             }
 
             parserContext.NextToken(); // consume the ')'
@@ -1574,7 +1901,14 @@ namespace System.Workflow.Activities.Rules
             return argList;
         }
 
-        private CodeExpression ParseFieldOrProperty(ParserContext parserContext, CodeExpression postfixExpr, string name, int namePosition, bool assignIsEquality, ValueCheck check)
+        private CodeExpression ParseFieldOrProperty(
+            ParserContext parserContext,
+            CodeExpression postfixExpr,
+            string name,
+            int namePosition,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             CodeExpression fieldOrPropExpr = null;
 
@@ -1585,8 +1919,17 @@ namespace System.Workflow.Activities.Rules
             {
                 // We could not find the field or property.
                 Type type = Validator.ExpressionInfo(postfixExpr).ExpressionType;
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownFieldOrProperty, name, RuleDecompiler.DecompileType(type));
-                throw new RuleSyntaxException(ErrorNumbers.Error_UnknownFieldOrProperty, message, namePosition);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownFieldOrProperty,
+                    name,
+                    RuleDecompiler.DecompileType(type)
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_UnknownFieldOrProperty,
+                    message,
+                    namePosition
+                );
             }
             else
             {
@@ -1602,7 +1945,12 @@ namespace System.Workflow.Activities.Rules
             return fieldOrPropExpr;
         }
 
-        private CodeExpression ParseUnadornedFieldOrProperty(ParserContext parserContext, string name, int namePosition, bool assignIsEquality)
+        private CodeExpression ParseUnadornedFieldOrProperty(
+            ParserContext parserContext,
+            string name,
+            int namePosition,
+            bool assignIsEquality
+        )
         {
             Type thisType = Validator.ThisType;
 
@@ -1612,8 +1960,17 @@ namespace System.Workflow.Activities.Rules
             if (member == null)
             {
                 // We could not find the field or property.
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownFieldOrProperty, name, RuleDecompiler.DecompileType(thisType));
-                throw new RuleSyntaxException(ErrorNumbers.Error_UnknownFieldOrProperty, message, namePosition);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownFieldOrProperty,
+                    name,
+                    RuleDecompiler.DecompileType(thisType)
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_UnknownFieldOrProperty,
+                    message,
+                    namePosition
+                );
             }
 
             bool isStatic = false;
@@ -1661,7 +2018,11 @@ namespace System.Workflow.Activities.Rules
             return fieldOrPropExpr;
         }
 
-        private CodeExpression ParseUnadornedMethodInvoke(ParserContext parserContext, string methodName, bool assignIsEquality)
+        private CodeExpression ParseUnadornedMethodInvoke(
+            ParserContext parserContext,
+            string methodName,
+            bool assignIsEquality
+        )
         {
             System.Diagnostics.Debug.Assert(parserContext.CurrentToken.TokenID == TokenID.LParen);
 
@@ -1671,9 +2032,19 @@ namespace System.Workflow.Activities.Rules
             int lparenPosition = parserContext.CurrentToken.StartPosition;
             parserContext.NextToken();
 
-            if (parserContext.CurrentToken.TokenID == TokenID.EndOfInput && parserContext.provideIntellisense)
+            if (
+                parserContext.CurrentToken.TokenID == TokenID.EndOfInput
+                && parserContext.provideIntellisense
+            )
             {
-                parserContext.SetMethodCompletions(thisType, thisType, methodName, true, true, validation);
+                parserContext.SetMethodCompletions(
+                    thisType,
+                    thisType,
+                    methodName,
+                    true,
+                    true,
+                    validation
+                );
                 return null;
             }
 
@@ -1681,9 +2052,20 @@ namespace System.Workflow.Activities.Rules
 
             // Binding flags include all public & non-public, all instance, and all static.
             // All are possible candidates for unadorned method references.
-            BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
+            BindingFlags bindingFlags =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Static
+                | BindingFlags.FlattenHierarchy
+                | BindingFlags.Instance;
             ValidationError error = null;
-            RuleMethodInvokeExpressionInfo methodInvokeInfo = validation.ResolveMethod(thisType, methodName, bindingFlags, arguments, out error);
+            RuleMethodInvokeExpressionInfo methodInvokeInfo = validation.ResolveMethod(
+                thisType,
+                methodName,
+                bindingFlags,
+                arguments,
+                out error
+            );
 
             if (methodInvokeInfo == null)
                 throw new RuleSyntaxException(error.ErrorNumber, error.ErrorText, lparenPosition);
@@ -1696,7 +2078,11 @@ namespace System.Workflow.Activities.Rules
             else
                 primaryExpr = new CodeThisReferenceExpression();
 
-            CodeExpression postfixExpr = new CodeMethodInvokeExpression(primaryExpr, methodName, arguments.ToArray());
+            CodeExpression postfixExpr = new CodeMethodInvokeExpression(
+                primaryExpr,
+                methodName,
+                arguments.ToArray()
+            );
             parserContext.exprPositions[postfixExpr] = lparenPosition;
             ValidateExpression(parserContext, postfixExpr, assignIsEquality, ValueCheck.Read);
 
@@ -1706,10 +2092,10 @@ namespace System.Workflow.Activities.Rules
         // Parse:
         //              argument --> direction logical-expression
         //                       --> logical-expression
-        //              
+        //
         //              direction --> IN
-        //                        --> OUT 
-        //                        --> REF 
+        //                        --> OUT
+        //                        --> REF
         private CodeExpression ParseArgument(ParserContext parserContext, bool assignIsEquality)
         {
             CodeExpression argResult = null;
@@ -1750,7 +2136,7 @@ namespace System.Workflow.Activities.Rules
         // Parse:
         // primary-expression   --> ( logical-expression )
         //                      --> IDENTIFIER
-        //                      --> IDENTIFIER  method-call-arguments  
+        //                      --> IDENTIFIER  method-call-arguments
         //                      --> type-name
         //                      --> object-creation-expression
         //                      --> array-creation-expression
@@ -1763,7 +2149,10 @@ namespace System.Workflow.Activities.Rules
         //                      --> THIS
         //                      --> TRUE
         //                      --> FALSE
-        private CodeExpression ParsePrimaryExpression(ParserContext parserContext, bool assignIsEquality)
+        private CodeExpression ParsePrimaryExpression(
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
             CodeExpression primaryExpr = null;
 
@@ -1775,12 +2164,21 @@ namespace System.Workflow.Activities.Rules
                     // A parenthesized subexpression
                     parserContext.NextToken();
 
-                    primaryExpr = ParseBinaryExpression(parserContext, 0, assignIsEquality, ValueCheck.Read);
+                    primaryExpr = ParseBinaryExpression(
+                        parserContext,
+                        0,
+                        assignIsEquality,
+                        ValueCheck.Read
+                    );
                     parserContext.exprPositions[primaryExpr] = token.StartPosition;
 
                     token = parserContext.CurrentToken;
                     if (token.TokenID != TokenID.RParen)
-                        throw new RuleSyntaxException(ErrorNumbers.Error_MissingRParenInSubexpression, Messages.Parser_MissingRParenInSubexpression, parserContext.CurrentToken.StartPosition);
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_MissingRParenInSubexpression,
+                            Messages.Parser_MissingRParenInSubexpression,
+                            parserContext.CurrentToken.StartPosition
+                        );
 
                     parserContext.NextToken(); // eat the ')'
                     break;
@@ -1794,7 +2192,12 @@ namespace System.Workflow.Activities.Rules
 
                     primaryExpr = new CodeThisReferenceExpression();
                     parserContext.exprPositions[primaryExpr] = token.StartPosition;
-                    ValidateExpression(parserContext, primaryExpr, assignIsEquality, ValueCheck.Read);
+                    ValidateExpression(
+                        parserContext,
+                        primaryExpr,
+                        assignIsEquality,
+                        ValueCheck.Read
+                    );
                     break;
 
                 case TokenID.TypeName:
@@ -1806,7 +2209,12 @@ namespace System.Workflow.Activities.Rules
 
                     primaryExpr = new CodeTypeReferenceExpression(typeRef);
                     parserContext.exprPositions[primaryExpr] = token.StartPosition;
-                    ValidateExpression(parserContext, primaryExpr, assignIsEquality, ValueCheck.Read);
+                    ValidateExpression(
+                        parserContext,
+                        primaryExpr,
+                        assignIsEquality,
+                        ValueCheck.Read
+                    );
                     break;
 
                 case TokenID.New:
@@ -1826,14 +2234,27 @@ namespace System.Workflow.Activities.Rules
 
                     primaryExpr = new CodePrimitiveExpression(token.Value);
                     parserContext.exprPositions[primaryExpr] = token.StartPosition;
-                    ValidateExpression(parserContext, primaryExpr, assignIsEquality, ValueCheck.Read);
+                    ValidateExpression(
+                        parserContext,
+                        primaryExpr,
+                        assignIsEquality,
+                        ValueCheck.Read
+                    );
                     break;
 
                 case TokenID.EndOfInput:
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingOperand, Messages.Parser_MissingOperand, token.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingOperand,
+                        Messages.Parser_MissingOperand,
+                        token.StartPosition
+                    );
 
                 default:
-                    throw new RuleSyntaxException(ErrorNumbers.Error_UnknownLiteral, Messages.Parser_UnknownLiteral, token.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_UnknownLiteral,
+                        Messages.Parser_UnknownLiteral,
+                        token.StartPosition
+                    );
             }
 
             return primaryExpr;
@@ -1843,15 +2264,25 @@ namespace System.Workflow.Activities.Rules
         //     object-creation-expression --> NEW type-name method-call-arguments
         //     array-creation-expression --> NEW array-spec
         //                               --> NEW array-spec array-initializer
-        private CodeExpression ParseObjectCreation(ParserContext parserContext, bool assignIsEquality)
+        private CodeExpression ParseObjectCreation(
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
             CodeExpression primaryExpr = null;
             Token token = parserContext.CurrentToken;
             CodeExpression size;
-            Type type = TryParseTypeSpecifierWithOptionalSize(parserContext, assignIsEquality, out size);
+            Type type = TryParseTypeSpecifierWithOptionalSize(
+                parserContext,
+                assignIsEquality,
+                out size
+            );
 
             // handle intellisense, regardless of whether we get a type back or not
-            if (parserContext.provideIntellisense && parserContext.CurrentToken.TokenID == TokenID.EndOfInput)
+            if (
+                parserContext.provideIntellisense
+                && parserContext.CurrentToken.TokenID == TokenID.EndOfInput
+            )
             {
                 // if we have a type, get only nested classes for it
                 // if we don't have a type, then take whatever is already set for completions
@@ -1861,7 +2292,11 @@ namespace System.Workflow.Activities.Rules
             }
 
             if (type == null)
-                throw new RuleSyntaxException(ErrorNumbers.Error_InvalidTypeArgument, Messages.Parser_InvalidTypeArgument, token.StartPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_InvalidTypeArgument,
+                    Messages.Parser_InvalidTypeArgument,
+                    token.StartPosition
+                );
 
             if (size == null)
             {
@@ -1869,7 +2304,11 @@ namespace System.Workflow.Activities.Rules
                 if (parserContext.CurrentToken.TokenID != TokenID.LParen)
                 {
                     // [] are already handled by TryParseTypeSpecifierWithOptionalSize
-                    throw new RuleSyntaxException(ErrorNumbers.Error_InvalidTypeArgument, Messages.Parser_InvalidNew, token.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_InvalidTypeArgument,
+                        Messages.Parser_InvalidNew,
+                        token.StartPosition
+                    );
                 }
                 primaryExpr = ParseConstructorArguments(parserContext, type, assignIsEquality);
             }
@@ -1885,7 +2324,9 @@ namespace System.Workflow.Activities.Rules
                     {
                         // both specified
                         primaryExpr = new CodeArrayCreateExpression(type, size);
-                        ((CodeArrayCreateExpression)primaryExpr).Initializers.AddRange(initializers.ToArray());
+                        ((CodeArrayCreateExpression)primaryExpr).Initializers.AddRange(
+                            initializers.ToArray()
+                        );
                     }
                 }
                 else
@@ -1896,9 +2337,11 @@ namespace System.Workflow.Activities.Rules
                     else
                     {
                         // neither specified, so error
-                        throw new RuleSyntaxException(ErrorNumbers.Error_NoArrayCreationSize,
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_NoArrayCreationSize,
                             Messages.Parser_NoArrayCreationSize,
-                            parserContext.CurrentToken.StartPosition);
+                            parserContext.CurrentToken.StartPosition
+                        );
                     }
                 }
                 ValidateExpression(parserContext, primaryExpr, assignIsEquality, ValueCheck.Read);
@@ -1907,7 +2350,11 @@ namespace System.Workflow.Activities.Rules
             return primaryExpr;
         }
 
-        private CodeExpression ParseConstructorArguments(ParserContext parserContext, Type type, bool assignIsEquality)
+        private CodeExpression ParseConstructorArguments(
+            ParserContext parserContext,
+            Type type,
+            bool assignIsEquality
+        )
         {
             System.Diagnostics.Debug.Assert(parserContext.CurrentToken.TokenID == TokenID.LParen);
 
@@ -1915,7 +2362,10 @@ namespace System.Workflow.Activities.Rules
             int lparenPosition = parserContext.CurrentToken.StartPosition;
             parserContext.NextToken();
 
-            if (parserContext.CurrentToken.TokenID == TokenID.EndOfInput && parserContext.provideIntellisense)
+            if (
+                parserContext.CurrentToken.TokenID == TokenID.EndOfInput
+                && parserContext.provideIntellisense
+            )
             {
                 parserContext.SetConstructorCompletions(type, Validator.ThisType);
                 return null;
@@ -1930,23 +2380,39 @@ namespace System.Workflow.Activities.Rules
             else if (type.IsAbstract)
             {
                 // this is not allowed
-                string message = string.Format(CultureInfo.CurrentCulture,
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
                     Messages.UnknownConstructor,
-                    RuleDecompiler.DecompileType(type));
-                throw new RuleSyntaxException(ErrorNumbers.Error_MethodNotExists, message, lparenPosition);
+                    RuleDecompiler.DecompileType(type)
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_MethodNotExists,
+                    message,
+                    lparenPosition
+                );
             }
             else
             {
                 // Binding flags include all public & non-public, all instance, and all static.
                 // All are possible candidates for unadorned method references.
-                BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
+                BindingFlags bindingFlags =
+                    BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
                 if (type.Assembly == validation.ThisType.Assembly)
                     bindingFlags |= BindingFlags.NonPublic;
                 ValidationError error = null;
-                RuleConstructorExpressionInfo constructorInvokeInfo = validation.ResolveConstructor(type, bindingFlags, arguments, out error);
+                RuleConstructorExpressionInfo constructorInvokeInfo = validation.ResolveConstructor(
+                    type,
+                    bindingFlags,
+                    arguments,
+                    out error
+                );
 
                 if (constructorInvokeInfo == null)
-                    throw new RuleSyntaxException(error.ErrorNumber, error.ErrorText, lparenPosition);
+                    throw new RuleSyntaxException(
+                        error.ErrorNumber,
+                        error.ErrorText,
+                        lparenPosition
+                    );
             }
 
             CodeExpression postfixExpr = new CodeObjectCreateExpression(type, arguments.ToArray());
@@ -1970,7 +2436,7 @@ namespace System.Workflow.Activities.Rules
                 return null;
 
             List<CodeExpression> initializers = new List<CodeExpression>();
-            parserContext.NextToken();     // skip '{'
+            parserContext.NextToken(); // skip '{'
 
             if (parserContext.CurrentToken.TokenID != TokenID.RCurlyBrace)
             {
@@ -1982,12 +2448,14 @@ namespace System.Workflow.Activities.Rules
                 }
 
                 if (parserContext.CurrentToken.TokenID != TokenID.RCurlyBrace)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingRCurlyAfterInitializers,
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingRCurlyAfterInitializers,
                         Messages.Parser_MissingRCurlyAfterInitializers,
-                        parserContext.CurrentToken.StartPosition);
+                        parserContext.CurrentToken.StartPosition
+                    );
             }
 
-            parserContext.NextToken();     // eat the '}'
+            parserContext.NextToken(); // eat the '}'
             return initializers;
         }
 
@@ -2004,7 +2472,10 @@ namespace System.Workflow.Activities.Rules
         //      2. A nested type within the type of this.
         //      2. An unqualified type name
         //      3. A namespace name.
-        private CodeExpression ParseRootIdentifier(ParserContext parserContext, bool assignIsEquality)
+        private CodeExpression ParseRootIdentifier(
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
             Token token = parserContext.CurrentToken;
             string name = (string)token.Value;
@@ -2020,8 +2491,16 @@ namespace System.Workflow.Activities.Rules
             if (sym == null)
             {
                 // We couldn't find it in either location.  This is an error.
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_UnknownIdentifier, name);
-                throw new RuleSyntaxException(ErrorNumbers.Error_UnknownIdentifier, message, token.StartPosition);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.Parser_UnknownIdentifier,
+                    name
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_UnknownIdentifier,
+                    message,
+                    token.StartPosition
+                );
             }
 
             return sym.ParseRootIdentifier(this, parserContext, assignIsEquality);
@@ -2030,9 +2509,13 @@ namespace System.Workflow.Activities.Rules
         // Parser:
         //      primary-expr --> ...
         //                   --> IDENTIFIER
-        //                   --> IDENTIFIER  method-call-arguments  
+        //                   --> IDENTIFIER  method-call-arguments
         //                   --> ...
-        internal CodeExpression ParseUnadornedMemberIdentifier(ParserContext parserContext, MemberSymbol symbol, bool assignIsEquality)
+        internal CodeExpression ParseUnadornedMemberIdentifier(
+            ParserContext parserContext,
+            MemberSymbol symbol,
+            bool assignIsEquality
+        )
         {
             // This is an implicit member reference off "this", so add the "this".  (Or an implicit
             // static member reference of the type of "this", so add the type name.)
@@ -2045,7 +2528,12 @@ namespace System.Workflow.Activities.Rules
             if (parserContext.CurrentToken.TokenID == TokenID.LParen)
                 primaryExpr = ParseUnadornedMethodInvoke(parserContext, symbol.Name, true);
             else
-                primaryExpr = ParseUnadornedFieldOrProperty(parserContext, symbol.Name, namePosition, assignIsEquality);
+                primaryExpr = ParseUnadornedFieldOrProperty(
+                    parserContext,
+                    symbol.Name,
+                    namePosition,
+                    assignIsEquality
+                );
 
             return primaryExpr;
         }
@@ -2056,7 +2544,11 @@ namespace System.Workflow.Activities.Rules
         //                                    --> TYPE-NAME
         //
         //      namespace-qualifier-tail --> . NAMESPACE-NAME namespace-qualifier-tail
-        internal CodeExpression ParseRootNamespaceIdentifier(ParserContext parserContext, NamespaceSymbol nsSym, bool assignIsEquality)
+        internal CodeExpression ParseRootNamespaceIdentifier(
+            ParserContext parserContext,
+            NamespaceSymbol nsSym,
+            bool assignIsEquality
+        )
         {
             // Loop through all the namespace qualifiers until we find something that's not a namespace.
             Symbol nestedSym = null;
@@ -2064,7 +2556,11 @@ namespace System.Workflow.Activities.Rules
             {
                 Token token = parserContext.NextToken();
                 if (token.TokenID != TokenID.Dot)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingDotAfterNamespace, Messages.Parser_MissingDotAfterNamespace, token.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingDotAfterNamespace,
+                        Messages.Parser_MissingDotAfterNamespace,
+                        token.StartPosition
+                    );
 
                 token = parserContext.NextToken();
                 if (token.TokenID != TokenID.Identifier)
@@ -2076,7 +2572,11 @@ namespace System.Workflow.Activities.Rules
                     }
                     else
                     {
-                        throw new RuleSyntaxException(ErrorNumbers.Error_MissingIdentifierAfterDot, Messages.Parser_MissingIdentifierAfterDot, token.StartPosition);
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_MissingIdentifierAfterDot,
+                            Messages.Parser_MissingIdentifierAfterDot,
+                            token.StartPosition
+                        );
                     }
                 }
 
@@ -2084,8 +2584,17 @@ namespace System.Workflow.Activities.Rules
                 nestedSym = nsSym.FindMember(name);
                 if (nestedSym == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_UnknownNamespaceMember, name, nsSym.GetQualifiedName());
-                    throw new RuleSyntaxException(ErrorNumbers.Error_UnknownNamespaceMember, message, token.StartPosition);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_UnknownNamespaceMember,
+                        name,
+                        nsSym.GetQualifiedName()
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_UnknownNamespaceMember,
+                        message,
+                        token.StartPosition
+                    );
                 }
 
                 nsSym = nestedSym as NamespaceSymbol;
@@ -2095,7 +2604,11 @@ namespace System.Workflow.Activities.Rules
             return nestedSym.ParseRootIdentifier(this, parserContext, assignIsEquality);
         }
 
-        internal CodeExpression ParseRootTypeIdentifier(ParserContext parserContext, TypeSymbol typeSym, bool assignIsEquality)
+        internal CodeExpression ParseRootTypeIdentifier(
+            ParserContext parserContext,
+            TypeSymbol typeSym,
+            bool assignIsEquality
+        )
         {
             string message = null;
             int typePosition = parserContext.CurrentToken.StartPosition;
@@ -2105,8 +2618,16 @@ namespace System.Workflow.Activities.Rules
             if (typeSym.GenericArgCount > 0 && token.TokenID != TokenID.Less)
             {
                 // This is a generic type, but no argument list was provided.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_MissingTypeArguments, typeSym.Name);
-                throw new RuleSyntaxException(ErrorNumbers.Error_MissingTypeArguments, message, token.StartPosition);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.Parser_MissingTypeArguments,
+                    typeSym.Name
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_MissingTypeArguments,
+                    message,
+                    token.StartPosition
+                );
             }
 
             Type type = typeSym.Type;
@@ -2116,19 +2637,35 @@ namespace System.Workflow.Activities.Rules
                 // Start of a generic argument list... the type had better be generic.
                 if (typeSym.GenericArgCount == 0)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_NotAGenericType, RuleDecompiler.DecompileType(type));
-                    throw new RuleSyntaxException(ErrorNumbers.Error_NotAGenericType, message, token.StartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_NotAGenericType,
+                        RuleDecompiler.DecompileType(type)
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_NotAGenericType,
+                        message,
+                        token.StartPosition
+                    );
                 }
 
                 Type[] typeArgs = ParseGenericTypeArgList(parserContext);
 
                 if (typeArgs.Length != typeSym.GenericArgCount)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_BadTypeArgCount, RuleDecompiler.DecompileType(type));
-                    throw new RuleSyntaxException(ErrorNumbers.Error_BadTypeArgCount, message, parserContext.CurrentToken.StartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_BadTypeArgCount,
+                        RuleDecompiler.DecompileType(type)
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_BadTypeArgCount,
+                        message,
+                        parserContext.CurrentToken.StartPosition
+                    );
                 }
 
-                // if we are creating generics with design-time types, then the generic needs to be 
+                // if we are creating generics with design-time types, then the generic needs to be
                 // a wrapped type to create the generic properly, so we look up the generic to get back the wrapper
                 type = Validator.ResolveType(type.AssemblyQualifiedName);
                 type = type.MakeGenericType(typeArgs);
@@ -2145,7 +2682,11 @@ namespace System.Workflow.Activities.Rules
             return ParseTypeRef(parserContext, type, typePosition, assignIsEquality);
         }
 
-        internal CodeExpression ParseRootOverloadedTypeIdentifier(ParserContext parserContext, List<TypeSymbol> candidateTypeSymbols, bool assignIsEquality)
+        internal CodeExpression ParseRootOverloadedTypeIdentifier(
+            ParserContext parserContext,
+            List<TypeSymbol> candidateTypeSymbols,
+            bool assignIsEquality
+        )
         {
             Token token = parserContext.CurrentToken;
             string typeName = (string)token.Value;
@@ -2170,12 +2711,25 @@ namespace System.Workflow.Activities.Rules
             else
             {
                 // See if there's a non-generic candidate.
-                TypeSymbol typeSym = candidateTypeSymbols.Find(delegate(TypeSymbol s) { return s.GenericArgCount == 0; });
+                TypeSymbol typeSym = candidateTypeSymbols.Find(
+                    delegate(TypeSymbol s)
+                    {
+                        return s.GenericArgCount == 0;
+                    }
+                );
                 if (typeSym == null)
                 {
                     // No argument list was provided, but there's no non-generic overload.
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_MissingTypeArguments, typeName);
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingTypeArguments, message, namePosition);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_MissingTypeArguments,
+                        typeName
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingTypeArguments,
+                        message,
+                        namePosition
+                    );
                 }
 
                 type = typeSym.Type;
@@ -2191,7 +2745,12 @@ namespace System.Workflow.Activities.Rules
             return ParseTypeRef(parserContext, type, namePosition, assignIsEquality);
         }
 
-        private CodeExpression ParseTypeRef(ParserContext parserContext, Type type, int typePosition, bool assignIsEquality)
+        private CodeExpression ParseTypeRef(
+            ParserContext parserContext,
+            Type type,
+            int typePosition,
+            bool assignIsEquality
+        )
         {
             CodeExpression result = null;
 
@@ -2240,12 +2799,21 @@ namespace System.Workflow.Activities.Rules
                 {
                     if (parserContext.provideIntellisense && token.TokenID == TokenID.EndOfInput)
                     {
-                        parserContext.SetTypeMemberCompletions(currentType, validation.ThisType, true, validation);
+                        parserContext.SetTypeMemberCompletions(
+                            currentType,
+                            validation.ThisType,
+                            true,
+                            validation
+                        );
                         return null;
                     }
                     else
                     {
-                        throw new RuleSyntaxException(ErrorNumbers.Error_MissingIdentifierAfterDot, Messages.Parser_MissingIdentifierAfterDot, parserContext.CurrentToken.StartPosition);
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_MissingIdentifierAfterDot,
+                            Messages.Parser_MissingIdentifierAfterDot,
+                            parserContext.CurrentToken.StartPosition
+                        );
                     }
                 }
 
@@ -2285,7 +2853,14 @@ namespace System.Workflow.Activities.Rules
                 {
                     // Might be a non-generic type.
                     MemberInfo[] mi = currentType.GetMember(name, bindingFlags);
-                    if (mi == null || mi.Length != 1 || (mi[0].MemberType != MemberTypes.NestedType && mi[0].MemberType != MemberTypes.TypeInfo))
+                    if (
+                        mi == null
+                        || mi.Length != 1
+                        || (
+                            mi[0].MemberType != MemberTypes.NestedType
+                            && mi[0].MemberType != MemberTypes.TypeInfo
+                        )
+                    )
                     {
                         // We went too far, reset the state.
                         parserContext.RestoreCurrentToken(savedTokenState);
@@ -2310,7 +2885,11 @@ namespace System.Workflow.Activities.Rules
             return nestedType;
         }
 
-        private Type ParseGenericType(ParserContext parserContext, List<Type> candidateGenericTypes, string typeName)
+        private Type ParseGenericType(
+            ParserContext parserContext,
+            List<Type> candidateGenericTypes,
+            string typeName
+        )
         {
             System.Diagnostics.Debug.Assert(parserContext.CurrentToken.TokenID == TokenID.Less);
 
@@ -2324,8 +2903,16 @@ namespace System.Workflow.Activities.Rules
             }
 
             // No valid candidate found.
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_BadTypeArgCount, typeName);
-            throw new RuleSyntaxException(ErrorNumbers.Error_BadTypeArgCount, message, parserContext.CurrentToken.StartPosition);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.Parser_BadTypeArgCount,
+                typeName
+            );
+            throw new RuleSyntaxException(
+                ErrorNumbers.Error_BadTypeArgCount,
+                message,
+                parserContext.CurrentToken.StartPosition
+            );
         }
 
         private Type[] ParseGenericTypeArgList(ParserContext parserContext)
@@ -2342,13 +2929,21 @@ namespace System.Workflow.Activities.Rules
 
                 Type type = TryParseTypeSpecifier(parserContext, true);
                 if (type == null)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_InvalidTypeArgument, Messages.Parser_InvalidTypeArgument, token.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_InvalidTypeArgument,
+                        Messages.Parser_InvalidTypeArgument,
+                        token.StartPosition
+                    );
 
                 typeArgs.Add(type);
             } while (parserContext.CurrentToken.TokenID == TokenID.Comma);
 
             if (parserContext.CurrentToken.TokenID != TokenID.Greater)
-                throw new RuleSyntaxException(ErrorNumbers.Error_MissingCloseAngleBracket, Messages.Parser_MissingCloseAngleBracket, parserContext.CurrentToken.StartPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_MissingCloseAngleBracket,
+                    Messages.Parser_MissingCloseAngleBracket,
+                    parserContext.CurrentToken.StartPosition
+                );
             parserContext.NextToken(); // Eat the '>'
 
             return typeArgs.ToArray();
@@ -2381,7 +2976,11 @@ namespace System.Workflow.Activities.Rules
                 Symbol sym = null;
                 if (globalUniqueSymbols.TryGetValue((string)currentToken.Value, out sym))
                 {
-                    CodeExpression identExpr = sym.ParseRootIdentifier(this, parserContext, assignIsEquality);
+                    CodeExpression identExpr = sym.ParseRootIdentifier(
+                        this,
+                        parserContext,
+                        assignIsEquality
+                    );
 
                     if (identExpr is CodeTypeReferenceExpression)
                         type = validation.ExpressionInfo(identExpr).ExpressionType;
@@ -2399,7 +2998,11 @@ namespace System.Workflow.Activities.Rules
         //                --> type-name  array-rank-specifiers
         //     array-rank-specifiers -->  [  binary-expression  ]
         //                           -->  [  ]
-        private Type TryParseTypeSpecifierWithOptionalSize(ParserContext parserContext, bool assignIsEquality, out CodeExpression size)
+        private Type TryParseTypeSpecifierWithOptionalSize(
+            ParserContext parserContext,
+            bool assignIsEquality,
+            out CodeExpression size
+        )
         {
             Type type = null;
             size = null;
@@ -2410,7 +3013,7 @@ namespace System.Workflow.Activities.Rules
             // see if size specified
             if ((type != null) && (parserContext.CurrentToken.TokenID == TokenID.LBracket))
             {
-                Token next = parserContext.NextToken();    // skip '['
+                Token next = parserContext.NextToken(); // skip '['
                 // get the size, if specified
                 if (next.TokenID != TokenID.RBracket)
                     size = ParseBinaryExpression(parserContext, 0, false, ValueCheck.Read);
@@ -2418,11 +3021,13 @@ namespace System.Workflow.Activities.Rules
                     size = defaultSize;
 
                 if (parserContext.CurrentToken.TokenID != TokenID.RBracket)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingCloseSquareBracket,
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingCloseSquareBracket,
                         Messages.Parser_MissingCloseSquareBracket1,
-                        parserContext.CurrentToken.StartPosition);
+                        parserContext.CurrentToken.StartPosition
+                    );
 
-                parserContext.NextToken();     // Eat the ']'
+                parserContext.NextToken(); // Eat the ']'
             }
 
             return type;
@@ -2454,7 +3059,11 @@ namespace System.Workflow.Activities.Rules
                 if (parserContext.CurrentToken.TokenID == TokenID.RBracket)
                     parserContext.NextToken(); // Eat the ']'
                 else
-                    throw new RuleSyntaxException(ErrorNumbers.Error_MissingCloseSquareBracket, Messages.Parser_MissingCloseSquareBracket, parserContext.CurrentToken.StartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_MissingCloseSquareBracket,
+                        Messages.Parser_MissingCloseSquareBracket,
+                        parserContext.CurrentToken.StartPosition
+                    );
 
                 if (rank == 1)
                     type = type.MakeArrayType();
@@ -2473,7 +3082,11 @@ namespace System.Workflow.Activities.Rules
             private object[] ctorArgs;
             private bool isExpandedMatch;
 
-            internal CandidateConstructor(ConstructorInfo ctor, object[] ctorArgs, bool isExpandedMatch)
+            internal CandidateConstructor(
+                ConstructorInfo ctor,
+                object[] ctorArgs,
+                bool isExpandedMatch
+            )
             {
                 this.ctor = ctor;
                 this.ctorArgs = ctorArgs;
@@ -2501,7 +3114,7 @@ namespace System.Workflow.Activities.Rules
                 }
                 else if (this.isExpandedMatch && other.isExpandedMatch)
                 {
-                    // Both candidates matched in their expanded forms.  
+                    // Both candidates matched in their expanded forms.
 
                     int thisParameterCount = this.ctor.GetParameters().Length;
                     int otherParameterCount = other.ctor.GetParameters().Length;
@@ -2547,7 +3160,14 @@ namespace System.Workflow.Activities.Rules
                 {
                     ValidationError error = null;
                     Type argPrimitiveType = validation.ExpressionInfo(argPrimitive).ExpressionType;
-                    if (RuleValidation.TypesAreAssignable(argPrimitiveType, parameterType, argPrimitive, out error))
+                    if (
+                        RuleValidation.TypesAreAssignable(
+                            argPrimitiveType,
+                            parameterType,
+                            argPrimitive,
+                            out error
+                        )
+                    )
                     {
                         // The constant expression's type matched the parameter, so
                         // use the actual primitive's value as the argument.
@@ -2559,7 +3179,10 @@ namespace System.Workflow.Activities.Rules
             return null;
         }
 
-        private List<CandidateConstructor> GetCandidateConstructors(ConstructorInfo[] allCtors, List<CodeExpression> arguments)
+        private List<CandidateConstructor> GetCandidateConstructors(
+            ConstructorInfo[] allCtors,
+            List<CodeExpression> arguments
+        )
         {
             if (allCtors == null || allCtors.Length == 0)
                 return null;
@@ -2589,7 +3212,10 @@ namespace System.Workflow.Activities.Rules
                     ParameterInfo lastParm = parms[parameterCount - 1];
                     if (lastParm.ParameterType.IsArray)
                     {
-                        object[] attrs = lastParm.GetCustomAttributes(typeof(ParamArrayAttribute), false);
+                        object[] attrs = lastParm.GetCustomAttributes(
+                            typeof(ParamArrayAttribute),
+                            false
+                        );
                         if (attrs != null && attrs.Length > 0)
                             fixedParameterCount -= 1;
                     }
@@ -2642,7 +3268,11 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            if (numArgs == fixedParameterCount + 1 && validation.ExpressionInfo(arguments[p]).ExpressionType == typeof(NullLiteral))
+                            if (
+                                numArgs == fixedParameterCount + 1
+                                && validation.ExpressionInfo(arguments[p]).ExpressionType
+                                    == typeof(NullLiteral)
+                            )
                             {
                                 // Another special case.  The last argument, which matches the "params" array,
                                 // is the null literal.  That's all it is allowed to be, since we allow no other
@@ -2652,10 +3282,21 @@ namespace System.Workflow.Activities.Rules
                             else
                             {
                                 Type paramType = parms[p].ParameterType;
-                                System.Diagnostics.Debug.Assert(paramType.IsArray, "last parameter in 'params' list must have an array type");
+                                System.Diagnostics.Debug.Assert(
+                                    paramType.IsArray,
+                                    "last parameter in 'params' list must have an array type"
+                                );
                                 Type elementType = paramType.GetElementType();
 
-                                Array paramsArgs = (Array)paramType.InvokeMember(paramType.Name, BindingFlags.CreateInstance, null, null, new object[] { numArgs - fixedParameterCount }, CultureInfo.CurrentCulture);
+                                Array paramsArgs = (Array)
+                                    paramType.InvokeMember(
+                                        paramType.Name,
+                                        BindingFlags.CreateInstance,
+                                        null,
+                                        null,
+                                        new object[] { numArgs - fixedParameterCount },
+                                        CultureInfo.CurrentCulture
+                                    );
                                 ctorArgs[fixedParameterCount] = paramsArgs;
 
                                 // Try matching the rest of the arguments to the params array element type.
@@ -2676,7 +3317,13 @@ namespace System.Workflow.Activities.Rules
                                 }
 
                                 // We passed all the tests, it's a candidate.
-                                candidates.Add(new CandidateConstructor(ctor, ctorArgs, fixedParameterCount != parameterCount));
+                                candidates.Add(
+                                    new CandidateConstructor(
+                                        ctor,
+                                        ctorArgs,
+                                        fixedParameterCount != parameterCount
+                                    )
+                                );
                             }
                         }
                     }
@@ -2703,7 +3350,7 @@ namespace System.Workflow.Activities.Rules
                 CandidateConstructor newCandidate = candidates[i];
 
                 // Compare this new candidate one if the current "best" ones.  (If there
-                // is currently more than one best candidate, then so far its ambiguous, which 
+                // is currently more than one best candidate, then so far its ambiguous, which
                 // means all the best ones are equally good.  Thus if this new candidate
                 // is better than one, it's better than all.
                 CandidateConstructor bestCandidate = bestCandidates[0];
@@ -2734,19 +3381,33 @@ namespace System.Workflow.Activities.Rules
             return null;
         }
 
-
-        private object ConstructCustomType(Type type, List<CodeExpression> arguments, int lparenPosition)
+        private object ConstructCustomType(
+            Type type,
+            List<CodeExpression> arguments,
+            int lparenPosition
+        )
         {
             string message;
 
             // Build a list of candidate constructors.
 
-            ConstructorInfo[] ctors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            ConstructorInfo[] ctors = type.GetConstructors(
+                BindingFlags.Public | BindingFlags.Instance
+            );
             List<CandidateConstructor> candidates = GetCandidateConstructors(ctors, arguments);
             if (candidates == null || candidates.Count == 0)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownMethod, type.Name, RuleDecompiler.DecompileType(type));
-                throw new RuleSyntaxException(ErrorNumbers.Error_MethodNotExists, message, lparenPosition);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownMethod,
+                    type.Name,
+                    RuleDecompiler.DecompileType(type)
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_MethodNotExists,
+                    message,
+                    lparenPosition
+                );
             }
 
             // Select the best constructor from the list of candidates.
@@ -2756,8 +3417,16 @@ namespace System.Workflow.Activities.Rules
             if (bestCandidate == null)
             {
                 // It was ambiguous.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.AmbiguousConstructor, type.Name);
-                throw new RuleSyntaxException(ErrorNumbers.Error_CannotResolveMember, message, lparenPosition);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.AmbiguousConstructor,
+                    type.Name
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_CannotResolveMember,
+                    message,
+                    lparenPosition
+                );
             }
 
             // Invoke the constructor.
@@ -2772,7 +3441,11 @@ namespace System.Workflow.Activities.Rules
                     throw; // just rethrow this one in the unlikely case the inner one is null.
 
                 // Rethrow the inner exception's message as a RuleSyntaxException.
-                throw new RuleSyntaxException(ErrorNumbers.Error_MethodNotExists, invokeEx.InnerException.Message, lparenPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_MethodNotExists,
+                    invokeEx.InnerException.Message,
+                    lparenPosition
+                );
             }
 
             return result;
@@ -2783,7 +3456,12 @@ namespace System.Workflow.Activities.Rules
 
         #region Validation Helpers
 
-        private void ValidateExpression(ParserContext parserContext, CodeExpression expression, bool assignIsEquality, ValueCheck check)
+        private void ValidateExpression(
+            ParserContext parserContext,
+            CodeExpression expression,
+            bool assignIsEquality,
+            ValueCheck check
+        )
         {
             // If the current token is an assignment operator, then make sure the expression is validated
             // correctly (written-to).  Note that because we allow "=" (Token.Assign) as a synonym for
@@ -2820,7 +3498,10 @@ namespace System.Workflow.Activities.Rules
 
         private void ValidateStatement(ParserContext parserContext, CodeStatement statement)
         {
-            if (!CodeDomStatementWalker.Validate(Validator, statement) && Validator.Errors.Count > 0)
+            if (
+                !CodeDomStatementWalker.Validate(Validator, statement)
+                && Validator.Errors.Count > 0
+            )
             {
                 // Choose the first one and throw it.
                 ValidationError error = Validator.Errors[0];

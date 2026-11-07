@@ -7,8 +7,11 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class DocumentOrderQuery : CacheOutputQuery
     {
-        public DocumentOrderQuery(Query qyParent) : base(qyParent) { }
-        private DocumentOrderQuery(DocumentOrderQuery other) : base(other) { }
+        public DocumentOrderQuery(Query qyParent)
+            : base(qyParent) { }
+
+        private DocumentOrderQuery(DocumentOrderQuery other)
+            : base(other) { }
 
         public override object Evaluate(XPathNodeIterator context)
         {
@@ -28,6 +31,9 @@ namespace MS.Internal.Xml.XPath
             return input.MatchNode(context);
         }
 
-        public override XPathNodeIterator Clone() { return new DocumentOrderQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new DocumentOrderQuery(this);
+        }
     }
 }

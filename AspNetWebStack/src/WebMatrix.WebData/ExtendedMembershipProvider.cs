@@ -27,7 +27,11 @@ namespace WebMatrix.WebData
         /// <param name="provider">The provider.</param>
         /// <param name="providerUserId">The provider userid.</param>
         /// <param name="userName">The username.</param>
-        public virtual void CreateOrUpdateOAuthAccount(string provider, string providerUserId, string userName)
+        public virtual void CreateOrUpdateOAuthAccount(
+            string provider,
+            string providerUserId,
+            string userName
+        )
         {
             throw new NotImplementedException();
         }
@@ -91,7 +95,11 @@ namespace WebMatrix.WebData
         /// <param name="requestToken">The request token.</param>
         /// <param name="accessToken">The access token.</param>
         /// <param name="accessTokenSecret">The access token secret.</param>
-        public virtual void ReplaceOAuthRequestTokenWithAccessToken(string requestToken, string accessToken, string accessTokenSecret)
+        public virtual void ReplaceOAuthRequestTokenWithAccessToken(
+            string requestToken,
+            string accessToken,
+            string accessTokenSecret
+        )
         {
             throw new NotImplementedException();
         }
@@ -114,37 +122,70 @@ namespace WebMatrix.WebData
 
         public virtual string CreateUserAndAccount(string userName, string password)
         {
-            return CreateUserAndAccount(userName, password, requireConfirmation: false, values: null);
+            return CreateUserAndAccount(
+                userName,
+                password,
+                requireConfirmation: false,
+                values: null
+            );
         }
 
-        public virtual string CreateUserAndAccount(string userName, string password, bool requireConfirmation)
+        public virtual string CreateUserAndAccount(
+            string userName,
+            string password,
+            bool requireConfirmation
+        )
         {
             return CreateUserAndAccount(userName, password, requireConfirmation, values: null);
         }
 
-        public virtual string CreateUserAndAccount(string userName, string password, IDictionary<string, object> values)
+        public virtual string CreateUserAndAccount(
+            string userName,
+            string password,
+            IDictionary<string, object> values
+        )
         {
-            return CreateUserAndAccount(userName, password, requireConfirmation: false, values: values);
+            return CreateUserAndAccount(
+                userName,
+                password,
+                requireConfirmation: false,
+                values: values
+            );
         }
 
-        public abstract string CreateUserAndAccount(string userName, string password, bool requireConfirmation, IDictionary<string, object> values);
+        public abstract string CreateUserAndAccount(
+            string userName,
+            string password,
+            bool requireConfirmation,
+            IDictionary<string, object> values
+        );
 
         public virtual string CreateAccount(string userName, string password)
         {
             return CreateAccount(userName, password, requireConfirmationToken: false);
         }
 
-        public abstract string CreateAccount(string userName, string password, bool requireConfirmationToken);
+        public abstract string CreateAccount(
+            string userName,
+            string password,
+            bool requireConfirmationToken
+        );
         public abstract bool ConfirmAccount(string userName, string accountConfirmationToken);
         public abstract bool ConfirmAccount(string accountConfirmationToken);
         public abstract bool DeleteAccount(string userName);
 
         public virtual string GeneratePasswordResetToken(string userName)
         {
-            return GeneratePasswordResetToken(userName, tokenExpirationInMinutesFromNow: OneDayInMinutes);
+            return GeneratePasswordResetToken(
+                userName,
+                tokenExpirationInMinutesFromNow: OneDayInMinutes
+            );
         }
 
-        public abstract string GeneratePasswordResetToken(string userName, int tokenExpirationInMinutesFromNow);
+        public abstract string GeneratePasswordResetToken(
+            string userName,
+            int tokenExpirationInMinutesFromNow
+        );
         public abstract int GetUserIdFromPasswordResetToken(string token);
         public abstract bool IsConfirmed(string userName);
         public abstract bool ResetPasswordWithToken(string token, string newPassword);
@@ -153,8 +194,6 @@ namespace WebMatrix.WebData
         public abstract DateTime GetPasswordChangedDate(string userName);
         public abstract DateTime GetLastPasswordFailureDate(string userName);
 
-        internal virtual void VerifyInitialized()
-        {
-        }
+        internal virtual void VerifyInitialized() { }
     }
 }

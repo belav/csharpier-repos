@@ -5,8 +5,8 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Objects.DataClasses;
+using System.Text;
 
 namespace System.Data.Objects.Internal
 {
@@ -16,7 +16,8 @@ namespace System.Data.Objects.Internal
     /// </summary>
     internal sealed class SnapshotChangeTrackingStrategy : IChangeTrackingStrategy
     {
-        private static SnapshotChangeTrackingStrategy _instance = new SnapshotChangeTrackingStrategy();
+        private static SnapshotChangeTrackingStrategy _instance =
+            new SnapshotChangeTrackingStrategy();
 
         /// <summary>
         /// Returns the single static instance of this class; a single instance is all that is needed
@@ -24,16 +25,11 @@ namespace System.Data.Objects.Internal
         /// </summary>
         public static SnapshotChangeTrackingStrategy Instance
         {
-            get
-            {
-                return _instance;
-            }
+            get { return _instance; }
         }
 
         // Private constructor to help prevent additional instances being created.
-        private SnapshotChangeTrackingStrategy()
-        {
-        }
+        private SnapshotChangeTrackingStrategy() { }
 
         // See IChangeTrackingStrategy documentation
         public void SetChangeTracker(IEntityChangeTracker changeTracker)
@@ -51,7 +47,13 @@ namespace System.Data.Objects.Internal
         }
 
         // See IChangeTrackingStrategy documentation
-        public void SetCurrentValue(EntityEntry entry, StateManagerMemberMetadata member, int ordinal, object target, object value)
+        public void SetCurrentValue(
+            EntityEntry entry,
+            StateManagerMemberMetadata member,
+            int ordinal,
+            object target,
+            object value
+        )
         {
             // If the target is the entity, then this is a change to a member on the entity itself rather than
             // a change to some complex type property defined on the entity.  In this case we can use the change tracking

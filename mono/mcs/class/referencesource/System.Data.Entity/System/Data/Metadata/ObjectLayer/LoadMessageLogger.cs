@@ -17,7 +17,8 @@ namespace System.Data.Metadata.Edm
     internal class LoadMessageLogger
     {
         private Action<String> _logLoadMessage;
-        private Dictionary<EdmType, StringBuilder> _messages = new Dictionary<EdmType, StringBuilder>();
+        private Dictionary<EdmType, StringBuilder> _messages =
+            new Dictionary<EdmType, StringBuilder>();
 
         internal LoadMessageLogger(Action<String> logLoadMessage)
         {
@@ -34,10 +35,14 @@ namespace System.Data.Metadata.Edm
             LogMessagesWithTypeInfo(message, relatedType);
         }
 
-        internal string CreateErrorMessageWithTypeSpecificLoadLogs(string errorMessage, EdmType relatedType)
+        internal string CreateErrorMessageWithTypeSpecificLoadLogs(
+            string errorMessage,
+            EdmType relatedType
+        )
         {
-                return new StringBuilder(errorMessage)
-                    .AppendLine(this.GetTypeRelatedLogMessage(relatedType)).ToString();
+            return new StringBuilder(errorMessage)
+                .AppendLine(this.GetTypeRelatedLogMessage(relatedType))
+                .ToString();
         }
 
         private string GetTypeRelatedLogMessage(EdmType relatedType)
@@ -49,7 +54,8 @@ namespace System.Data.Metadata.Edm
                 return new StringBuilder()
                     .AppendLine()
                     .AppendLine(Strings.ExtraInfo)
-                    .AppendLine(this._messages[relatedType].ToString()).ToString();
+                    .AppendLine(this._messages[relatedType].ToString())
+                    .ToString();
             }
             else
             {

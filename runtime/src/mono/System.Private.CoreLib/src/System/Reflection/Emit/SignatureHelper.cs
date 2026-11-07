@@ -48,10 +48,10 @@ namespace System.Reflection.Emit
             HELPER_FIELD,
             HELPER_LOCAL,
             HELPER_METHOD,
-            HELPER_PROPERTY
+            HELPER_PROPERTY,
         }
 
-#region Sync with MonoReflectionSigHelper in object-internals.h
+        #region Sync with MonoReflectionSigHelper in object-internals.h
         private ModuleBuilder? module;
         private Type[]? arguments;
         private SignatureHelperType type;
@@ -60,9 +60,9 @@ namespace System.Reflection.Emit
         private CallingConvention unmanagedCallConv;
         private Type[][]? modreqs;
         private Type[][]? modopts;
-#endregion
+        #endregion
 
-        [DynamicDependency(nameof(modopts))]  // Automatically keeps all previous fields too due to StructLayout
+        [DynamicDependency(nameof(modopts))] // Automatically keeps all previous fields too due to StructLayout
         internal SignatureHelper(ModuleBuilder? module, SignatureHelperType type)
         {
             AssemblyBuilder.EnsureDynamicCodeSupported();
@@ -92,57 +92,114 @@ namespace System.Reflection.Emit
             return new SignatureHelper(null, SignatureHelperType.HELPER_LOCAL);
         }
 
-        public static SignatureHelper GetMethodSigHelper(CallingConventions callingConvention, Type? returnType)
+        public static SignatureHelper GetMethodSigHelper(
+            CallingConventions callingConvention,
+            Type? returnType
+        )
         {
-            return GetMethodSigHelper(null, callingConvention, (CallingConvention)0, returnType, null);
+            return GetMethodSigHelper(
+                null,
+                callingConvention,
+                (CallingConvention)0,
+                returnType,
+                null
+            );
         }
 
-        internal static SignatureHelper GetMethodSigHelper(CallingConvention unmanagedCallingConvention, Type? returnType)
+        internal static SignatureHelper GetMethodSigHelper(
+            CallingConvention unmanagedCallingConvention,
+            Type? returnType
+        )
         {
-            return GetMethodSigHelper(null, CallingConventions.Standard, unmanagedCallingConvention, returnType, null);
+            return GetMethodSigHelper(
+                null,
+                CallingConventions.Standard,
+                unmanagedCallingConvention,
+                returnType,
+                null
+            );
         }
 
-        public static SignatureHelper GetMethodSigHelper(Module? mod, CallingConventions callingConvention, Type? returnType)
+        public static SignatureHelper GetMethodSigHelper(
+            Module? mod,
+            CallingConventions callingConvention,
+            Type? returnType
+        )
         {
-            return GetMethodSigHelper(mod, callingConvention, (CallingConvention)0, returnType, null);
+            return GetMethodSigHelper(
+                mod,
+                callingConvention,
+                (CallingConvention)0,
+                returnType,
+                null
+            );
         }
 
-        internal static SignatureHelper GetMethodSigHelper(Module? mod, CallingConvention unmanagedCallConv, Type? returnType)
+        internal static SignatureHelper GetMethodSigHelper(
+            Module? mod,
+            CallingConvention unmanagedCallConv,
+            Type? returnType
+        )
         {
-            return GetMethodSigHelper(mod, CallingConventions.Standard, unmanagedCallConv, returnType, null);
+            return GetMethodSigHelper(
+                mod,
+                CallingConventions.Standard,
+                unmanagedCallConv,
+                returnType,
+                null
+            );
         }
 
-        public static SignatureHelper GetMethodSigHelper(Module? mod, Type? returnType, Type[]? parameterTypes)
+        public static SignatureHelper GetMethodSigHelper(
+            Module? mod,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
-            return GetMethodSigHelper(mod, CallingConventions.Standard, (CallingConvention)0, returnType, parameterTypes);
+            return GetMethodSigHelper(
+                mod,
+                CallingConventions.Standard,
+                (CallingConvention)0,
+                returnType,
+                parameterTypes
+            );
         }
 
         // FIXME: "Not implemented"
-        public static SignatureHelper GetPropertySigHelper(Module? mod, Type? returnType, Type[]? parameterTypes)
+        public static SignatureHelper GetPropertySigHelper(
+            Module? mod,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             throw new NotImplementedException();
         }
 
         // FIXME: "Not implemented"
-        public static SignatureHelper GetPropertySigHelper(Module? mod, Type? returnType,
-                                    Type[]? requiredReturnTypeCustomModifiers,
-                                    Type[]? optionalReturnTypeCustomModifiers,
-                                    Type[]? parameterTypes,
-                                    Type[][]? requiredParameterTypeCustomModifiers,
-                                    Type[][]? optionalParameterTypeCustomModifiers)
+        public static SignatureHelper GetPropertySigHelper(
+            Module? mod,
+            Type? returnType,
+            Type[]? requiredReturnTypeCustomModifiers,
+            Type[]? optionalReturnTypeCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? requiredParameterTypeCustomModifiers,
+            Type[][]? optionalParameterTypeCustomModifiers
+        )
         {
             throw new NotImplementedException();
         }
 
         // FIXME: "Not implemented"
-        public static SignatureHelper GetPropertySigHelper(Module? mod,
-                                    CallingConventions callingConvention,
-                                    Type? returnType,
-                                    Type[]? requiredReturnTypeCustomModifiers,
-                                    Type[]? optionalReturnTypeCustomModifiers,
-                                    Type[]? parameterTypes,
-                                    Type[][]? requiredParameterTypeCustomModifiers,
-                                    Type[][]? optionalParameterTypeCustomModifiers)
+        public static SignatureHelper GetPropertySigHelper(
+            Module? mod,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? requiredReturnTypeCustomModifiers,
+            Type[]? optionalReturnTypeCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? requiredParameterTypeCustomModifiers,
+            Type[][]? optionalParameterTypeCustomModifiers
+        )
         {
             throw new NotImplementedException();
         }
@@ -206,7 +263,12 @@ namespace System.Reflection.Emit
                 return;
 
             if (custom_modifiers.Length != n)
-                throw new ArgumentException(SR.Format(SR.Argument_CustomModifierLengthInvalidLength, custom_modifiers.Length));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_CustomModifierLengthInvalidLength,
+                        custom_modifiers.Length
+                    )
+                );
 
             foreach (Type[] parameter_modifiers in custom_modifiers)
             {
@@ -223,7 +285,11 @@ namespace System.Reflection.Emit
         }
 
         // FIXME: "Currently we ignore requiredCustomModifiers and optionalCustomModifiers"
-        public void AddArguments(Type[]? arguments, Type[][]? requiredCustomModifiers, Type[][]? optionalCustomModifiers)
+        public void AddArguments(
+            Type[]? arguments,
+            Type[][]? requiredCustomModifiers,
+            Type[][]? optionalCustomModifiers
+        )
         {
             ArgumentNullException.ThrowIfNull(arguments);
 
@@ -233,8 +299,16 @@ namespace System.Reflection.Emit
                 throw MissingFeature();
             }
 
-            ValidateCustomModifier(arguments.Length, requiredCustomModifiers, "requiredCustomModifiers");
-            ValidateCustomModifier(arguments.Length, optionalCustomModifiers, "optionalCustomModifiers");
+            ValidateCustomModifier(
+                arguments.Length,
+                requiredCustomModifiers,
+                "requiredCustomModifiers"
+            );
+            ValidateCustomModifier(
+                arguments.Length,
+                optionalCustomModifiers,
+                "optionalCustomModifiers"
+            );
 
             for (int i = 0; i < arguments.Length; i++)
             {
@@ -248,7 +322,11 @@ namespace System.Reflection.Emit
             AddArgument(argument);
         }
 
-        public void AddArgument(Type argument, Type[]? requiredCustomModifiers, Type[]? optionalCustomModifiers)
+        public void AddArgument(
+            Type argument,
+            Type[]? requiredCustomModifiers,
+            Type[]? optionalCustomModifiers
+        )
         {
             ArgumentNullException.ThrowIfNull(argument);
 
@@ -334,10 +412,12 @@ namespace System.Reflection.Emit
             if (other == null)
                 return false;
 
-            if (other.module != module ||
-                other.returnType != returnType ||
-                other.callConv != callConv ||
-                other.unmanagedCallConv != unmanagedCallConv)
+            if (
+                other.module != module
+                || other.returnType != returnType
+                || other.callConv != callConv
+                || other.unmanagedCallConv != unmanagedCallConv
+            )
                 return false;
 
             if (arguments != null)
@@ -387,8 +467,13 @@ namespace System.Reflection.Emit
             return "SignatureHelper";
         }
 
-        internal static SignatureHelper GetMethodSigHelper(Module? mod, CallingConventions callingConvention, CallingConvention unmanagedCallingConvention, Type? returnType,
-                                                           Type[]? parameters)
+        internal static SignatureHelper GetMethodSigHelper(
+            Module? mod,
+            CallingConventions callingConvention,
+            CallingConvention unmanagedCallingConvention,
+            Type? returnType,
+            Type[]? parameters
+        )
         {
             if (mod != null && !(mod is ModuleBuilder))
                 throw new NotSupportedException(SR.NotSupported_MustBeModuleBuilder);
@@ -396,16 +481,22 @@ namespace System.Reflection.Emit
             returnType ??= typeof(void);
 
             if (returnType.IsUserType)
-                throw new NotSupportedException(SR.PlatformNotSupported_UserDefinedSubclassesOfType);
+                throw new NotSupportedException(
+                    SR.PlatformNotSupported_UserDefinedSubclassesOfType
+                );
             if (parameters != null)
             {
                 for (int i = 0; i < parameters.Length; ++i)
                     if (parameters[i].IsUserType)
-                        throw new NotSupportedException(SR.PlatformNotSupported_UserDefinedSubclassesOfType);
-
+                        throw new NotSupportedException(
+                            SR.PlatformNotSupported_UserDefinedSubclassesOfType
+                        );
             }
 
-            SignatureHelper helper = new SignatureHelper((ModuleBuilder?)mod, SignatureHelperType.HELPER_METHOD);
+            SignatureHelper helper = new SignatureHelper(
+                (ModuleBuilder?)mod,
+                SignatureHelperType.HELPER_METHOD
+            );
             helper.returnType = returnType;
             helper.callConv = callingConvention;
             helper.unmanagedCallConv = unmanagedCallingConvention;

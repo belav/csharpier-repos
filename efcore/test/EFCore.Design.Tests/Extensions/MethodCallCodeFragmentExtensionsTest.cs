@@ -13,18 +13,29 @@ namespace Microsoft.EntityFrameworkCore.Extensions
         public void GetRequiredUsings_works()
         {
             var methodCall = new MethodCallCodeFragment(
-                typeof(TestExtensions1)
-                    .GetRuntimeMethod(
-                        nameof(TestExtensions1.Extension1),
-                        new[] { typeof(MethodCallCodeFragmentExtensionsTest), typeof(Action<MethodCallCodeFragmentExtensionsTest>) }),
+                typeof(TestExtensions1).GetRuntimeMethod(
+                    nameof(TestExtensions1.Extension1),
+                    new[]
+                    {
+                        typeof(MethodCallCodeFragmentExtensionsTest),
+                        typeof(Action<MethodCallCodeFragmentExtensionsTest>),
+                    }
+                ),
                 new NestedClosureCodeFragment(
                     "x",
                     new MethodCallCodeFragment(
-                        typeof(TestExtensions2)
-                            .GetRuntimeMethod(
-                                nameof(TestExtensions2.Extension2),
-                                new[] { typeof(MethodCallCodeFragmentExtensionsTest), typeof(TestArgument) }),
-                        new TestArgument())));
+                        typeof(TestExtensions2).GetRuntimeMethod(
+                            nameof(TestExtensions2.Extension2),
+                            new[]
+                            {
+                                typeof(MethodCallCodeFragmentExtensionsTest),
+                                typeof(TestArgument),
+                            }
+                        ),
+                        new TestArgument()
+                    )
+                )
+            );
 
             var usings = methodCall.GetRequiredUsings();
 
@@ -33,9 +44,10 @@ namespace Microsoft.EntityFrameworkCore.Extensions
                 {
                     "Microsoft.EntityFrameworkCore.Extensions.Namespace1",
                     "Microsoft.EntityFrameworkCore.Extensions.Namespace2",
-                    "Microsoft.EntityFrameworkCore.Extensions.Namespace3"
+                    "Microsoft.EntityFrameworkCore.Extensions.Namespace3",
                 },
-                usings);
+                usings
+            );
         }
     }
 
@@ -45,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Extensions
         {
             public static void Extension1(
                 this MethodCallCodeFragmentExtensionsTest extendedObject,
-                Action<MethodCallCodeFragmentExtensionsTest> closure)
-                => throw new NotImplementedException();
+                Action<MethodCallCodeFragmentExtensionsTest> closure
+            ) => throw new NotImplementedException();
         }
     }
 
@@ -56,15 +68,13 @@ namespace Microsoft.EntityFrameworkCore.Extensions
         {
             public static void Extension2(
                 this MethodCallCodeFragmentExtensionsTest extendedObject,
-                TestArgument argument)
-                => throw new NotImplementedException();
+                TestArgument argument
+            ) => throw new NotImplementedException();
         }
     }
 
     namespace Namespace3
     {
-        internal class TestArgument
-        {
-        }
+        internal class TestArgument { }
     }
 }

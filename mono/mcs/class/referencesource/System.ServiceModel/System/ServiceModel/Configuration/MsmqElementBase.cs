@@ -11,15 +11,20 @@ namespace System.ServiceModel.Configuration
 
     public abstract partial class MsmqElementBase : TransportElement
     {
-
-        [ConfigurationProperty(ConfigurationStrings.CustomDeadLetterQueue, DefaultValue = MsmqDefaults.CustomDeadLetterQueue)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CustomDeadLetterQueue,
+            DefaultValue = MsmqDefaults.CustomDeadLetterQueue
+        )]
         public Uri CustomDeadLetterQueue
         {
             get { return (Uri)base[ConfigurationStrings.CustomDeadLetterQueue]; }
             set { base[ConfigurationStrings.CustomDeadLetterQueue] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DeadLetterQueue, DefaultValue = MsmqDefaults.DeadLetterQueue)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DeadLetterQueue,
+            DefaultValue = MsmqDefaults.DeadLetterQueue
+        )]
         [ServiceModelEnumValidator(typeof(DeadLetterQueueHelper))]
         public DeadLetterQueue DeadLetterQueue
         {
@@ -34,14 +39,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.Durable] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ExactlyOnce, DefaultValue = MsmqDefaults.ExactlyOnce)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ExactlyOnce,
+            DefaultValue = MsmqDefaults.ExactlyOnce
+        )]
         public bool ExactlyOnce
         {
             get { return (bool)base[ConfigurationStrings.ExactlyOnce]; }
             set { base[ConfigurationStrings.ExactlyOnce] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxRetryCycles, DefaultValue = MsmqDefaults.MaxRetryCycles)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxRetryCycles,
+            DefaultValue = MsmqDefaults.MaxRetryCycles
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxRetryCycles
         {
@@ -49,14 +60,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxRetryCycles] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveContextEnabled, DefaultValue = MsmqDefaults.ReceiveContextEnabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveContextEnabled,
+            DefaultValue = MsmqDefaults.ReceiveContextEnabled
+        )]
         public bool ReceiveContextEnabled
         {
             get { return (bool)base[ConfigurationStrings.ReceiveContextEnabled]; }
             set { base[ConfigurationStrings.ReceiveContextEnabled] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveErrorHandling, DefaultValue = MsmqDefaults.ReceiveErrorHandling)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveErrorHandling,
+            DefaultValue = MsmqDefaults.ReceiveErrorHandling
+        )]
         [ServiceModelEnumValidator(typeof(ReceiveErrorHandlingHelper))]
         public ReceiveErrorHandling ReceiveErrorHandling
         {
@@ -64,7 +81,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ReceiveErrorHandling] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveRetryCount, DefaultValue = MsmqDefaults.ReceiveRetryCount)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveRetryCount,
+            DefaultValue = MsmqDefaults.ReceiveRetryCount
+        )]
         [IntegerValidator(MinValue = 0)]
         public int ReceiveRetryCount
         {
@@ -72,7 +92,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ReceiveRetryCount] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.RetryCycleDelay, DefaultValue = MsmqDefaults.RetryCycleDelayString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.RetryCycleDelay,
+            DefaultValue = MsmqDefaults.RetryCycleDelayString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan RetryCycleDelay
@@ -84,10 +107,17 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.MsmqTransportSecurity)]
         public MsmqTransportSecurityElement MsmqTransportSecurity
         {
-            get { return (MsmqTransportSecurityElement)base[ConfigurationStrings.MsmqTransportSecurity]; }
+            get
+            {
+                return (MsmqTransportSecurityElement)
+                    base[ConfigurationStrings.MsmqTransportSecurity];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TimeToLive, DefaultValue = MsmqDefaults.TimeToLiveString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TimeToLive,
+            DefaultValue = MsmqDefaults.TimeToLiveString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan TimeToLive
@@ -96,21 +126,30 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.TimeToLive] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseSourceJournal, DefaultValue = MsmqDefaults.UseSourceJournal)]
+        [ConfigurationProperty(
+            ConfigurationStrings.UseSourceJournal,
+            DefaultValue = MsmqDefaults.UseSourceJournal
+        )]
         public bool UseSourceJournal
         {
             get { return (bool)base[ConfigurationStrings.UseSourceJournal]; }
             set { base[ConfigurationStrings.UseSourceJournal] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseMsmqTracing, DefaultValue = MsmqDefaults.UseMsmqTracing)]
+        [ConfigurationProperty(
+            ConfigurationStrings.UseMsmqTracing,
+            DefaultValue = MsmqDefaults.UseMsmqTracing
+        )]
         public bool UseMsmqTracing
         {
             get { return (bool)base[ConfigurationStrings.UseMsmqTracing]; }
             set { base[ConfigurationStrings.UseMsmqTracing] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ValidityDuration, DefaultValue = MsmqDefaults.ValidityDurationString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ValidityDuration,
+            DefaultValue = MsmqDefaults.ValidityDurationString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan ValidityDuration
@@ -123,7 +162,8 @@ namespace System.ServiceModel.Configuration
         {
             base.ApplyConfiguration(bindingElement);
 
-            System.ServiceModel.Channels.MsmqBindingElementBase binding = bindingElement as System.ServiceModel.Channels.MsmqBindingElementBase;
+            System.ServiceModel.Channels.MsmqBindingElementBase binding =
+                bindingElement as System.ServiceModel.Channels.MsmqBindingElementBase;
             if (null != binding)
             {
                 if (null != this.CustomDeadLetterQueue)
@@ -165,10 +205,18 @@ namespace System.ServiceModel.Configuration
                 this.UseSourceJournal = source.UseSourceJournal;
                 this.UseMsmqTracing = source.UseMsmqTracing;
                 this.ValidityDuration = source.ValidityDuration;
-                this.MsmqTransportSecurity.MsmqAuthenticationMode = source.MsmqTransportSecurity.MsmqAuthenticationMode;
-                this.MsmqTransportSecurity.MsmqProtectionLevel = source.MsmqTransportSecurity.MsmqProtectionLevel;
-                this.MsmqTransportSecurity.MsmqEncryptionAlgorithm = source.MsmqTransportSecurity.MsmqEncryptionAlgorithm;
-                this.MsmqTransportSecurity.MsmqSecureHashAlgorithm = source.MsmqTransportSecurity.MsmqSecureHashAlgorithm;
+                this.MsmqTransportSecurity.MsmqAuthenticationMode = source
+                    .MsmqTransportSecurity
+                    .MsmqAuthenticationMode;
+                this.MsmqTransportSecurity.MsmqProtectionLevel = source
+                    .MsmqTransportSecurity
+                    .MsmqProtectionLevel;
+                this.MsmqTransportSecurity.MsmqEncryptionAlgorithm = source
+                    .MsmqTransportSecurity
+                    .MsmqEncryptionAlgorithm;
+                this.MsmqTransportSecurity.MsmqSecureHashAlgorithm = source
+                    .MsmqTransportSecurity
+                    .MsmqSecureHashAlgorithm;
             }
         }
 
@@ -176,24 +224,58 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
 
-            System.ServiceModel.Channels.MsmqBindingElementBase binding = bindingElement as System.ServiceModel.Channels.MsmqBindingElementBase;
+            System.ServiceModel.Channels.MsmqBindingElementBase binding =
+                bindingElement as System.ServiceModel.Channels.MsmqBindingElementBase;
 
             if (null != binding)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.CustomDeadLetterQueue, binding.CustomDeadLetterQueue);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.DeadLetterQueue, binding.DeadLetterQueue);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.CustomDeadLetterQueue,
+                    binding.CustomDeadLetterQueue
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.DeadLetterQueue,
+                    binding.DeadLetterQueue
+                );
                 SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Durable, binding.Durable);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ExactlyOnce, binding.ExactlyOnce);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxRetryCycles, binding.MaxRetryCycles);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReceiveErrorHandling, binding.ReceiveErrorHandling);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReceiveRetryCount, binding.ReceiveRetryCount);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RetryCycleDelay, binding.RetryCycleDelay);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TimeToLive, binding.TimeToLive);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseSourceJournal, binding.UseSourceJournal);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReceiveContextEnabled, binding.ReceiveContextEnabled);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseMsmqTracing, binding.UseMsmqTracing);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.ExactlyOnce,
+                    binding.ExactlyOnce
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.MaxRetryCycles,
+                    binding.MaxRetryCycles
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.ReceiveErrorHandling,
+                    binding.ReceiveErrorHandling
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.ReceiveRetryCount,
+                    binding.ReceiveRetryCount
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.RetryCycleDelay,
+                    binding.RetryCycleDelay
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.TimeToLive,
+                    binding.TimeToLive
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.UseSourceJournal,
+                    binding.UseSourceJournal
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.ReceiveContextEnabled,
+                    binding.ReceiveContextEnabled
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.UseMsmqTracing,
+                    binding.UseMsmqTracing
+                );
 
-                // SetPropertyValueIfNotDefaultValue won't detect defaults correctly through type conversion, check explicitly            
+                // SetPropertyValueIfNotDefaultValue won't detect defaults correctly through type conversion, check explicitly
                 if (binding.ValidityDuration != MsmqDefaults.ValidityDuration)
                 {
                     this.ValidityDuration = binding.ValidityDuration;
@@ -204,6 +286,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

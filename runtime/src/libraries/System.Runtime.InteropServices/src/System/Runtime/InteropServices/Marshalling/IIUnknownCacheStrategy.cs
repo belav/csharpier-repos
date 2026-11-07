@@ -21,10 +21,12 @@ namespace System.Runtime.InteropServices.Marshalling
             /// The <c>this</c> pointer of the unmanaged interface.
             /// </summary>
             public void* ThisPtr { get; init; }
+
             /// <summary>
             /// A pointer to the virtual method table for this unmanaged interface.
             /// </summary>
             public void** Table { get; init; }
+
             /// <summary>
             /// The managed type that provides a managed projection of the unmanaged interface.
             /// </summary>
@@ -38,7 +40,11 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="interfaceDetails">An <see cref="IIUnknownDerivedDetails"/> instance</param>
         /// <param name="ptr">Pointer to the instance to query</param>
         /// <returns>The constructed <see cref="TableInfo"/> instance for the provided information.</returns>
-        TableInfo ConstructTableInfo(RuntimeTypeHandle handle, IIUnknownDerivedDetails interfaceDetails, void* ptr);
+        TableInfo ConstructTableInfo(
+            RuntimeTypeHandle handle,
+            IIUnknownDerivedDetails interfaceDetails,
+            void* ptr
+        );
 
         /// <summary>
         /// Get associated <see cref="TableInfo"/>.

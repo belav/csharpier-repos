@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime;
-    using System.Collections.ObjectModel;
     using System.Activities.Validation;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
 
     public struct CodeActivityMetadata
     {
@@ -15,7 +15,11 @@ namespace System.Activities
         LocationReferenceEnvironment environment;
         bool createEmptyBindings;
 
-        internal CodeActivityMetadata(Activity activity, LocationReferenceEnvironment environment, bool createEmptyBindings)
+        internal CodeActivityMetadata(
+            Activity activity,
+            LocationReferenceEnvironment environment,
+            bool createEmptyBindings
+        )
         {
             this.activity = activity;
             this.environment = environment;
@@ -24,26 +28,17 @@ namespace System.Activities
 
         internal bool CreateEmptyBindings
         {
-            get
-            {
-                return this.createEmptyBindings;
-            }
+            get { return this.createEmptyBindings; }
         }
 
         public LocationReferenceEnvironment Environment
         {
-            get
-            {
-                return this.environment;
-            }
+            get { return this.environment; }
         }
 
         internal Activity CurrentActivity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
 
         public bool HasViolations
@@ -79,7 +74,8 @@ namespace System.Activities
             }
 
             CodeActivityMetadata other = (CodeActivityMetadata)obj;
-            return other.activity == this.activity && other.Environment == this.Environment
+            return other.activity == this.activity
+                && other.Environment == this.Environment
                 && other.CreateEmptyBindings == this.CreateEmptyBindings;
         }
 
@@ -174,7 +170,10 @@ namespace System.Activities
             }
             if (extensionType.IsValueType)
             {
-                throw FxTrace.Exception.Argument("extensionType", SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName));
+                throw FxTrace.Exception.Argument(
+                    "extensionType",
+                    SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName)
+                );
             }
             this.activity.RequireExtension(extensionType);
         }

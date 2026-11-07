@@ -10,10 +10,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities;
 /// This is a marker attribute used to define that all tests in this assembly
 /// should run in a single partition without other assemblies due to state sharing concerns.
 /// For example, Microsoft.CodeAnalysis.CSharp.EndToEnd.UnitTests
-/// 
+///
 /// RunTests uses this attribute when partitioning tests.
 /// </summary>
 [AttributeUsage(AttributeTargets.Assembly)]
-public sealed class RunTestsInSinglePartitionAttribute : Attribute
-{
-}
+public sealed class RunTestsInSinglePartitionAttribute : Attribute { }

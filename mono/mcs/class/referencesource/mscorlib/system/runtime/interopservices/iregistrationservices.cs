@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -14,43 +14,43 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
-    
+namespace System.Runtime.InteropServices
+{
     using System;
     using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
 
     [Flags()]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum AssemblyRegistrationFlags
     {
-        None                    = 0x00000000,
-        SetCodeBase             = 0x00000001,
+        None = 0x00000000,
+        SetCodeBase = 0x00000001,
     }
 
     [Guid("CCBD682C-73A5-4568-B8B0-C7007E11ABA2")]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IRegistrationServices
     {
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         bool RegisterAssembly(Assembly assembly, AssemblyRegistrationFlags flags);
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         bool UnregisterAssembly(Assembly assembly);
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         Type[] GetRegistrableTypesInAssembly(Assembly assembly);
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         String GetProgIdForType(Type type);
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void RegisterTypeForComClients(Type type, ref Guid g);
 
         Guid GetManagedCategoryGuid();
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         bool TypeRequiresRegistration(Type type);
 
         bool TypeRepresentsComType(Type type);

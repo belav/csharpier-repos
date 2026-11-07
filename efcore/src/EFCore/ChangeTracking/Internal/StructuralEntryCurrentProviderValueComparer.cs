@@ -19,9 +19,7 @@ public class StructuralEntryCurrentProviderValueComparer : StructuralEntryCurren
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public StructuralEntryCurrentProviderValueComparer(
-        IProperty property,
-        ValueConverter converter)
+    public StructuralEntryCurrentProviderValueComparer(IProperty property, ValueConverter converter)
         : base(property)
     {
         _converter = converter;
@@ -33,6 +31,6 @@ public class StructuralEntryCurrentProviderValueComparer : StructuralEntryCurren
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override object? GetPropertyValue(IUpdateEntry entry)
-        => _converter.ConvertToProvider(base.GetPropertyValue(entry));
+    protected override object? GetPropertyValue(IUpdateEntry entry) =>
+        _converter.ConvertToProvider(base.GetPropertyValue(entry));
 }

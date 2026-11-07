@@ -6,11 +6,8 @@ using System;
 /// </summary>
 namespace Testing
 {
-	public class A
-	{		
-		public static void Main ()
-		{
-		}
-	}
+    public class A
+    {
+        public static void Main() { }
+    }
 }
-

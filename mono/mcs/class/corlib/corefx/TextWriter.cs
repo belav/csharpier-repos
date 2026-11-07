@@ -5,7 +5,5 @@
 namespace System.IO
 {
     // Adds IAsyncDisposable to TextWriter
-    partial class TextWriter : IAsyncDisposable
-    {
-    }
+    partial class TextWriter : IAsyncDisposable { }
 }

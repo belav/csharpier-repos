@@ -11,11 +11,16 @@ namespace System.Threading.Channels
     internal static class ChannelUtilities
     {
         /// <summary>Sentinel object used to indicate being done writing.</summary>
-        internal static readonly Exception s_doneWritingSentinel = new Exception(nameof(s_doneWritingSentinel));
+        internal static readonly Exception s_doneWritingSentinel = new Exception(
+            nameof(s_doneWritingSentinel)
+        );
+
         /// <summary>A cached task with a Boolean true result.</summary>
         internal static readonly Task<bool> s_trueTask = Task.FromResult(result: true);
+
         /// <summary>A cached task with a Boolean false result.</summary>
         internal static readonly Task<bool> s_falseTask = Task.FromResult(result: false);
+
         /// <summary>A cached task that never completes.</summary>
         internal static readonly Task s_neverCompletingTask = new TaskCompletionSource<bool>().Task;
 
@@ -59,14 +64,23 @@ namespace System.Threading.Channels
             Debug.Assert(error != null);
 
             Task<T> t =
-                error == s_doneWritingSentinel ? Task.FromException<T>(CreateInvalidCompletionException()) :
-                error is OperationCanceledException oce ? Task.FromCanceled<T>(oce.CancellationToken.IsCancellationRequested ? oce.CancellationToken : new CancellationToken(true)) :
-                Task.FromException<T>(CreateInvalidCompletionException(error));
+                error == s_doneWritingSentinel
+                    ? Task.FromException<T>(CreateInvalidCompletionException())
+                : error is OperationCanceledException oce
+                    ? Task.FromCanceled<T>(
+                        oce.CancellationToken.IsCancellationRequested
+                            ? oce.CancellationToken
+                            : new CancellationToken(true)
+                    )
+                : Task.FromException<T>(CreateInvalidCompletionException(error));
 
             return new ValueTask<T>(t);
         }
 
-        internal static void QueueWaiter(ref AsyncOperation<bool>? tail, AsyncOperation<bool> waiter)
+        internal static void QueueWaiter(
+            ref AsyncOperation<bool>? tail,
+            AsyncOperation<bool> waiter
+        )
         {
             AsyncOperation<bool>? c = tail;
             if (c == null)
@@ -81,7 +95,11 @@ namespace System.Threading.Channels
             tail = waiter;
         }
 
-        internal static void WakeUpWaiters(ref AsyncOperation<bool>? listTail, bool result, Exception? error = null)
+        internal static void WakeUpWaiters(
+            ref AsyncOperation<bool>? listTail,
+            bool result,
+            Exception? error = null
+        )
         {
             AsyncOperation<bool>? tail = listTail;
             if (tail != null)
@@ -95,19 +113,20 @@ namespace System.Threading.Channels
                     AsyncOperation<bool> next = c.Next!;
                     c.Next = null;
 
-                    bool completed = error != null ? c.TrySetException(error) : c.TrySetResult(result);
+                    bool completed =
+                        error != null ? c.TrySetException(error) : c.TrySetResult(result);
                     Debug.Assert(completed || c.CancellationToken.CanBeCanceled);
 
                     c = next;
-                }
-                while (c != head);
+                } while (c != head);
             }
         }
 
         /// <summary>Removes all operations from the queue, failing each.</summary>
         /// <param name="operations">The queue of operations to complete.</param>
         /// <param name="error">The error with which to complete each operations.</param>
-        internal static void FailOperations<T, TInner>(Deque<T> operations, Exception error) where T : AsyncOperation<TInner>
+        internal static void FailOperations<T, TInner>(Deque<T> operations, Exception error)
+            where T : AsyncOperation<TInner>
         {
             Debug.Assert(error != null);
             while (!operations.IsEmpty)
@@ -118,8 +137,8 @@ namespace System.Threading.Channels
 
         /// <summary>Creates and returns an exception object to indicate that a channel has been closed.</summary>
         internal static Exception CreateInvalidCompletionException(Exception? inner = null) =>
-            inner is OperationCanceledException ? inner :
-            inner != null && inner != s_doneWritingSentinel ? new ChannelClosedException(inner) :
-            new ChannelClosedException();
+            inner is OperationCanceledException ? inner
+            : inner != null && inner != s_doneWritingSentinel ? new ChannelClosedException(inner)
+            : new ChannelClosedException();
     }
 }

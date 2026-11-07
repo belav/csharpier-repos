@@ -19,10 +19,12 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Security;
-    
+
     class DispatchOperationRuntime
     {
-        static AsyncCallback invokeCallback = Fx.ThunkCallback(new AsyncCallback(DispatchOperationRuntime.InvokeCallback));
+        static AsyncCallback invokeCallback = Fx.ThunkCallback(
+            new AsyncCallback(DispatchOperationRuntime.InvokeCallback)
+        );
         readonly string action;
         readonly ICallContextInitializer[] callContextInitializers;
         readonly IDispatchFaultFormatter faultFormatter;
@@ -48,7 +50,10 @@ namespace System.ServiceModel.Dispatcher
         readonly bool bufferedReceiveEnabled;
         readonly bool isInsideTransactedReceiveScope;
 
-        internal DispatchOperationRuntime(DispatchOperation operation, ImmutableDispatchRuntime parent)
+        internal DispatchOperationRuntime(
+            DispatchOperation operation,
+            ImmutableDispatchRuntime parent
+        )
         {
             if (operation == null)
             {
@@ -60,13 +65,21 @@ namespace System.ServiceModel.Dispatcher
             }
             if (operation.Invoker == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.RuntimeRequiresInvoker0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.RuntimeRequiresInvoker0))
+                );
             }
 
-            this.disposeParameters = ((operation.AutoDisposeParameters) && (!operation.HasNoDisposableParameters));
+            this.disposeParameters = (
+                (operation.AutoDisposeParameters) && (!operation.HasNoDisposableParameters)
+            );
             this.parent = parent;
-            this.callContextInitializers = EmptyArray<ICallContextInitializer>.ToArray(operation.CallContextInitializers);
-            this.inspectors = EmptyArray<IParameterInspector>.ToArray(operation.ParameterInspectors);
+            this.callContextInitializers = EmptyArray<ICallContextInitializer>.ToArray(
+                operation.CallContextInitializers
+            );
+            this.inspectors = EmptyArray<IParameterInspector>.ToArray(
+                operation.ParameterInspectors
+            );
             this.faultFormatter = operation.FaultFormatter;
             this.impersonation = operation.Impersonation;
             this.deserializeRequest = operation.DeserializeRequest;
@@ -102,7 +115,11 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.formatter == null && (deserializeRequest || serializeReply))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.DispatchRuntimeRequiresFormatter0, this.name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.DispatchRuntimeRequiresFormatter0, this.name)
+                    )
+                );
             }
 
             if ((operation.Parent.InstanceProvider == null) && (operation.Parent.Type != null))
@@ -261,8 +278,8 @@ namespace System.ServiceModel.Dispatcher
                 }
                 try
                 {
-                    // If the field is true, then this operation is to be invoked at the time the service 
-                    // channel is opened. The incoming message is created at ChannelHandler level with no 
+                    // If the field is true, then this operation is to be invoked at the time the service
+                    // channel is opened. The incoming message is created at ChannelHandler level with no
                     // content, so we don't need to deserialize the message.
                     if (!this.isSessionOpenNotificationEnabled)
                     {
@@ -330,7 +347,11 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < rpc.Operation.CallContextInitializers.Length; i++)
                 {
                     ICallContextInitializer initializer = this.CallContextInitializers[i];
-                    rpc.Correlation[offset + i] = initializer.BeforeInvoke(rpc.InstanceContext, channel, rpc.Request);
+                    rpc.Correlation[offset + i] = initializer.BeforeInvoke(
+                        rpc.InstanceContext,
+                        channel,
+                        rpc.Request
+                    );
                 }
             }
             catch (Exception e)
@@ -371,7 +392,14 @@ namespace System.ServiceModel.Dispatcher
             catch (Exception e)
             {
                 // thread-local storage may be corrupt
-                DiagnosticUtility.FailFast(string.Format(CultureInfo.InvariantCulture, "ICallContextInitializer.BeforeInvoke threw an exception of type {0}: {1}", e.GetType(), e.Message));
+                DiagnosticUtility.FailFast(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "ICallContextInitializer.BeforeInvoke threw an exception of type {0}: {1}",
+                        e.GetType(),
+                        e.Message
+                    )
+                );
             }
         }
 
@@ -393,7 +421,10 @@ namespace System.ServiceModel.Dispatcher
                 rpc.Correlation[offset + i] = inspector.BeforeCall(this.Name, rpc.InputParameters);
                 if (TD.ParameterInspectorBeforeCallInvokedIsEnabled())
                 {
-                    TD.ParameterInspectorBeforeCallInvoked(rpc.EventTraceActivity, this.ParameterInspectors[i].GetType().FullName);
+                    TD.ParameterInspectorBeforeCallInvoked(
+                        rpc.EventTraceActivity,
+                        this.ParameterInspectors[i].GetType().FullName
+                    );
                 }
             }
         }
@@ -413,16 +444,26 @@ namespace System.ServiceModel.Dispatcher
             for (int i = this.ParameterInspectors.Length - 1; i >= 0; i--)
             {
                 IParameterInspector inspector = this.ParameterInspectors[i];
-                inspector.AfterCall(this.Name, rpc.OutputParameters, rpc.ReturnParameter, rpc.Correlation[offset + i]);
+                inspector.AfterCall(
+                    this.Name,
+                    rpc.OutputParameters,
+                    rpc.ReturnParameter,
+                    rpc.Correlation[offset + i]
+                );
                 if (TD.ParameterInspectorAfterCallInvokedIsEnabled())
                 {
-                    TD.ParameterInspectorAfterCallInvoked(rpc.EventTraceActivity, this.ParameterInspectors[i].GetType().FullName);
+                    TD.ParameterInspectorAfterCallInvoked(
+                        rpc.EventTraceActivity,
+                        this.ParameterInspectors[i].GetType().FullName
+                    );
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method StartImpersonation.",
-            Safe = "Manages the result of impersonation and properly Disposes it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method StartImpersonation.",
+            Safe = "Manages the result of impersonation and properly Disposes it."
+        )]
         [DebuggerStepperBoundary]
         [SecuritySafeCritical]
         internal void InvokeBegin(ref MessageRpc rpc)
@@ -450,12 +491,18 @@ namespace System.ServiceModel.Dispatcher
                         {
                             SetClaimsPrincipalToOperationContext(rpc);
                         }
-                       
+
                         if (this.parent.SecurityImpersonation != null)
                         {
-                            this.parent.SecurityImpersonation.StartImpersonation(ref rpc, out impersonationContext, out originalPrincipal, out isThreadPrincipalSet);
+                            this.parent.SecurityImpersonation.StartImpersonation(
+                                ref rpc,
+                                out impersonationContext,
+                                out originalPrincipal,
+                                out isThreadPrincipalSet
+                            );
                         }
-                        IManualConcurrencyOperationInvoker manualInvoker = this.Invoker as IManualConcurrencyOperationInvoker;
+                        IManualConcurrencyOperationInvoker manualInvoker =
+                            this.Invoker as IManualConcurrencyOperationInvoker;
 
                         if (this.isSynchronous)
                         {
@@ -464,27 +511,44 @@ namespace System.ServiceModel.Dispatcher
                                 if (this.bufferedReceiveEnabled)
                                 {
                                     rpc.OperationContext.IncomingMessageProperties.Add(
-                                        BufferedReceiveMessageProperty.Name, new BufferedReceiveMessageProperty(ref rpc));
+                                        BufferedReceiveMessageProperty.Name,
+                                        new BufferedReceiveMessageProperty(ref rpc)
+                                    );
                                 }
-                                rpc.ReturnParameter = manualInvoker.Invoke(target, rpc.InputParameters, rpc.InvokeNotification, out rpc.OutputParameters);
+                                rpc.ReturnParameter = manualInvoker.Invoke(
+                                    target,
+                                    rpc.InputParameters,
+                                    rpc.InvokeNotification,
+                                    out rpc.OutputParameters
+                                );
                             }
                             else
                             {
-                                rpc.ReturnParameter = this.Invoker.Invoke(target, rpc.InputParameters, out rpc.OutputParameters);
+                                rpc.ReturnParameter = this.Invoker.Invoke(
+                                    target,
+                                    rpc.InputParameters,
+                                    out rpc.OutputParameters
+                                );
                             }
                         }
                         else
                         {
                             bool isBeginSuccessful = false;
 
-                            if (manualInvoker != null && isConcurrent && this.bufferedReceiveEnabled)
+                            if (
+                                manualInvoker != null
+                                && isConcurrent
+                                && this.bufferedReceiveEnabled
+                            )
                             {
                                 // This will modify the rpc, it has to be done before rpc.Pause
                                 // since IResumeMessageRpc implementation keeps reference of rpc.
                                 // This is to ensure consistent rpc whether or not InvokeBegin completed
                                 // synchronously or asynchronously.
                                 rpc.OperationContext.IncomingMessageProperties.Add(
-                                    BufferedReceiveMessageProperty.Name, new BufferedReceiveMessageProperty(ref rpc));
+                                    BufferedReceiveMessageProperty.Name,
+                                    new BufferedReceiveMessageProperty(ref rpc)
+                                );
                             }
 
                             IResumeMessageRpc resumeRpc = rpc.Pause();
@@ -492,15 +556,26 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (manualInvoker != null && isConcurrent)
                                 {
-                                    result = manualInvoker.InvokeBegin(target, rpc.InputParameters, rpc.InvokeNotification, invokeCallback, resumeRpc);
+                                    result = manualInvoker.InvokeBegin(
+                                        target,
+                                        rpc.InputParameters,
+                                        rpc.InvokeNotification,
+                                        invokeCallback,
+                                        resumeRpc
+                                    );
                                 }
                                 else
                                 {
-                                    result = this.Invoker.InvokeBegin(target, rpc.InputParameters, invokeCallback, resumeRpc);
+                                    result = this.Invoker.InvokeBegin(
+                                        target,
+                                        rpc.InputParameters,
+                                        invokeCallback,
+                                        resumeRpc
+                                    );
                                 }
 
                                 isBeginSuccessful = true;
-                                // if the call above actually went async, then responsibility to call 
+                                // if the call above actually went async, then responsibility to call
                                 // ProcessMessage{6,7,Cleanup} has been transferred to InvokeCallback
                             }
                             finally
@@ -518,7 +593,12 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (this.parent.SecurityImpersonation != null)
                             {
-                                this.parent.SecurityImpersonation.StopImpersonation(ref rpc, impersonationContext, originalPrincipal, isThreadPrincipalSet);
+                                this.parent.SecurityImpersonation.StopImpersonation(
+                                    ref rpc,
+                                    impersonationContext,
+                                    originalPrincipal,
+                                    isThreadPrincipalSet
+                                );
                             }
                         }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -546,7 +626,10 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (result == null)
                         {
-                            throw TraceUtility.ThrowHelperError(new ArgumentNullException("IOperationInvoker.BeginDispatch"), rpc.Request);
+                            throw TraceUtility.ThrowHelperError(
+                                new ArgumentNullException("IOperationInvoker.BeginDispatch"),
+                                rpc.Request
+                            );
                         }
 
                         if (result.CompletedSynchronously)
@@ -559,7 +642,10 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 #pragma warning suppress 56500 // covered by FxCOP
-                catch { throw; } // Make sure user Exception filters are not impersonated.
+                catch
+                {
+                    throw;
+                } // Make sure user Exception filters are not impersonated.
                 finally
                 {
                     this.UninitializeCallContext(ref rpc);
@@ -582,7 +668,12 @@ namespace System.ServiceModel.Dispatcher
             if (securityContext != null)
             {
                 object principal;
-                if (securityContext.AuthorizationContext.Properties.TryGetValue(AuthorizationPolicy.ClaimsPrincipalKey, out principal))
+                if (
+                    securityContext.AuthorizationContext.Properties.TryGetValue(
+                        AuthorizationPolicy.ClaimsPrincipalKey,
+                        out principal
+                    )
+                )
                 {
                     ClaimsPrincipal claimsPrincipal = principal as ClaimsPrincipal;
                     if (claimsPrincipal != null)
@@ -594,7 +685,11 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
+                            )
+                        );
                     }
                 }
             }
@@ -611,14 +706,18 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxInvalidAsyncResultState0)
+                );
             }
 
             resume.SignalConditionalResume(result);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method StartImpersonation.",
-            Safe = "Manages the result of impersonation and properly Disposes it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method StartImpersonation.",
+            Safe = "Manages the result of impersonation and properly Disposes it."
+        )]
         [DebuggerStepperBoundary]
         [SecuritySafeCritical]
         internal void InvokeEnd(ref MessageRpc rpc)
@@ -642,10 +741,19 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.parent.SecurityImpersonation != null)
                         {
-                            this.parent.SecurityImpersonation.StartImpersonation(ref rpc, out impersonationContext, out originalPrincipal, out isThreadPrincipalSet);
+                            this.parent.SecurityImpersonation.StartImpersonation(
+                                ref rpc,
+                                out impersonationContext,
+                                out originalPrincipal,
+                                out isThreadPrincipalSet
+                            );
                         }
 
-                        rpc.ReturnParameter = this.Invoker.InvokeEnd(rpc.Instance, out rpc.OutputParameters, rpc.AsyncResult);
+                        rpc.ReturnParameter = this.Invoker.InvokeEnd(
+                            rpc.Instance,
+                            out rpc.OutputParameters,
+                            rpc.AsyncResult
+                        );
                     }
                     finally
                     {
@@ -653,7 +761,12 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (this.parent.SecurityImpersonation != null)
                             {
-                                this.parent.SecurityImpersonation.StopImpersonation(ref rpc, impersonationContext, originalPrincipal, isThreadPrincipalSet);
+                                this.parent.SecurityImpersonation.StopImpersonation(
+                                    ref rpc,
+                                    impersonationContext,
+                                    originalPrincipal,
+                                    isThreadPrincipalSet
+                                );
                             }
                         }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -676,7 +789,10 @@ namespace System.ServiceModel.Dispatcher
                     this.SerializeOutputs(ref rpc);
                 }
 #pragma warning suppress 56500 // covered by FxCOP
-                catch { throw; } // Make sure user Exception filters are not impersonated.
+                catch
+                {
+                    throw;
+                } // Make sure user Exception filters are not impersonated.
                 finally
                 {
                     this.UninitializeCallContext(ref rpc);
@@ -697,9 +813,13 @@ namespace System.ServiceModel.Dispatcher
                         {
                             TD.DispatchFormatterSerializeReplyStart(rpc.EventTraceActivity);
                         }
-                        
-                        reply = this.Formatter.SerializeReply(rpc.RequestVersion, rpc.OutputParameters, rpc.ReturnParameter);
-                        
+
+                        reply = this.Formatter.SerializeReply(
+                            rpc.RequestVersion,
+                            rpc.OutputParameters,
+                            rpc.ReturnParameter
+                        );
+
                         if (TD.DispatchFormatterSerializeReplyStopIsEnabled())
                         {
                             TD.DispatchFormatterSerializeReplyStop(rpc.EventTraceActivity);
@@ -720,23 +840,45 @@ namespace System.ServiceModel.Dispatcher
 
                     if (reply == null)
                     {
-                        string message = SR.GetString(SR.SFxNullReplyFromFormatter2, this.Formatter.GetType().ToString(), (this.name ?? ""));
+                        string message = SR.GetString(
+                            SR.SFxNullReplyFromFormatter2,
+                            this.Formatter.GetType().ToString(),
+                            (this.name ?? "")
+                        );
                         ErrorBehavior.ThrowAndCatch(new InvalidOperationException(message));
                     }
                 }
                 else
                 {
-                    if ((rpc.ReturnParameter == null) && (rpc.OperationContext.RequestContext != null))
+                    if (
+                        (rpc.ReturnParameter == null)
+                        && (rpc.OperationContext.RequestContext != null)
+                    )
                     {
-                        string message = SR.GetString(SR.SFxDispatchRuntimeMessageCannotBeNull, this.name);
+                        string message = SR.GetString(
+                            SR.SFxDispatchRuntimeMessageCannotBeNull,
+                            this.name
+                        );
                         ErrorBehavior.ThrowAndCatch(new InvalidOperationException(message));
                     }
 
                     reply = (Message)rpc.ReturnParameter;
 
-                    if ((reply != null) && (!ProxyOperationRuntime.IsValidAction(reply, this.ReplyAction)))
+                    if (
+                        (reply != null)
+                        && (!ProxyOperationRuntime.IsValidAction(reply, this.ReplyAction))
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidReplyAction, this.Name, reply.Headers.Action ?? "{NULL}", this.ReplyAction)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxInvalidReplyAction,
+                                    this.Name,
+                                    reply.Headers.Action ?? "{NULL}",
+                                    this.ReplyAction
+                                )
+                            )
+                        );
                     }
                 }
 
@@ -748,7 +890,11 @@ namespace System.ServiceModel.Dispatcher
                         TraceUtility.AddActivityHeader(reply);
                     }
                 }
-                else if (TraceUtility.ShouldPropagateActivity && reply != null && rpc.ResponseActivityId != Guid.Empty)
+                else if (
+                    TraceUtility.ShouldPropagateActivity
+                    && reply != null
+                    && rpc.ResponseActivityId != Guid.Empty
+                )
                 {
                     ActivityIdHeader header = new ActivityIdHeader(rpc.ResponseActivityId);
                     header.AddTo(reply);
@@ -758,9 +904,15 @@ namespace System.ServiceModel.Dispatcher
                 if (TraceUtility.MessageFlowTracingOnly)
                 {
                     //Guard against MEX scenarios where the message is closed by now
-                    if (null != rpc.OperationContext.IncomingMessage && MessageState.Closed != rpc.OperationContext.IncomingMessage.State)
+                    if (
+                        null != rpc.OperationContext.IncomingMessage
+                        && MessageState.Closed != rpc.OperationContext.IncomingMessage.State
+                    )
                     {
-                        FxTrace.Trace.SetAndTraceTransfer(TraceUtility.GetReceivedActivityId(rpc.OperationContext), true);
+                        FxTrace.Trace.SetAndTraceTransfer(
+                            TraceUtility.GetReceivedActivityId(rpc.OperationContext),
+                            true
+                        );
                     }
                     else
                     {
@@ -777,17 +929,27 @@ namespace System.ServiceModel.Dispatcher
 
                 if (reply != null && this.parent.IsImpersonationEnabledOnSerializingReply)
                 {
-                    bool shouldImpersonate = this.parent.SecurityImpersonation != null && this.parent.SecurityImpersonation.IsImpersonationEnabledOnCurrentOperation(ref rpc);
+                    bool shouldImpersonate =
+                        this.parent.SecurityImpersonation != null
+                        && this.parent.SecurityImpersonation.IsImpersonationEnabledOnCurrentOperation(
+                            ref rpc
+                        );
                     if (shouldImpersonate)
                     {
-                        reply.Properties.Add(ImpersonateOnSerializingReplyMessageProperty.Name, new ImpersonateOnSerializingReplyMessageProperty(ref rpc));
+                        reply.Properties.Add(
+                            ImpersonateOnSerializingReplyMessageProperty.Name,
+                            new ImpersonateOnSerializingReplyMessageProperty(ref rpc)
+                        );
                         reply = new ImpersonatingMessage(reply);
                     }
                 }
 
                 if (MessageLogger.LoggingEnabled && null != reply)
                 {
-                    MessageLogger.LogMessage(ref reply, MessageLoggingSource.ServiceLevelSendReply | MessageLoggingSource.LastChance);
+                    MessageLogger.LogMessage(
+                        ref reply,
+                        MessageLoggingSource.ServiceLevelSendReply | MessageLoggingSource.LastChance
+                    );
                 }
                 rpc.Reply = reply;
             }
@@ -797,11 +959,15 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!method.DeclaringType.IsAssignableFrom(type))
             {
-                string message = SR.GetString(SR.SFxMethodNotSupportedByType2,
-                                              type.FullName,
-                                              method.DeclaringType.FullName);
+                string message = SR.GetString(
+                    SR.SFxMethodNotSupportedByType2,
+                    type.FullName,
+                    method.DeclaringType.FullName
+                );
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(message));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(message)
+                );
             }
         }
 
@@ -813,7 +979,11 @@ namespace System.ServiceModel.Dispatcher
                 if (rpc.NotUnderstoodHeaders != null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MustUnderstandSoapException(rpc.NotUnderstoodHeaders, rpc.Request.Version.Envelope));
+                        new MustUnderstandSoapException(
+                            rpc.NotUnderstoodHeaders,
+                            rpc.Request.Version.Envelope
+                        )
+                    );
                 }
             }
         }

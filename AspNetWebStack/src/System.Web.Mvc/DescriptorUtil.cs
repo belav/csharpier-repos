@@ -62,14 +62,23 @@ namespace System.Web.Mvc
             return builder.ToString();
         }
 
-        public static TDescriptor[] LazilyFetchOrCreateDescriptors<TReflection, TDescriptor, TArgument>(
+        public static TDescriptor[] LazilyFetchOrCreateDescriptors<
+            TReflection,
+            TDescriptor,
+            TArgument
+        >(
             ref TDescriptor[] cacheLocation,
             Func<TArgument, TReflection[]> initializer,
             Func<TReflection, TArgument, TDescriptor> converter,
-            TArgument state)
+            TArgument state
+        )
         {
             // did we already calculate this once?
-            TDescriptor[] existingCache = Interlocked.CompareExchange(ref cacheLocation, null, null);
+            TDescriptor[] existingCache = Interlocked.CompareExchange(
+                ref cacheLocation,
+                null,
+                null
+            );
             if (existingCache != null)
             {
                 return existingCache;
@@ -90,7 +99,11 @@ namespace System.Web.Mvc
             }
             TDescriptor[] descriptors = descriptorsList.ToArray();
 
-            TDescriptor[] updatedCache = Interlocked.CompareExchange(ref cacheLocation, descriptors, null);
+            TDescriptor[] updatedCache = Interlocked.CompareExchange(
+                ref cacheLocation,
+                descriptors,
+                null
+            );
             return updatedCache ?? descriptors;
         }
     }

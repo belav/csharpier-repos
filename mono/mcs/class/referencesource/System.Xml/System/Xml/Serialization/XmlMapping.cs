@@ -2,19 +2,21 @@
 // <copyright file="XmlMapping.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
     using System.ComponentModel;
     using System.Globalization;
 
     [Flags]
-    public enum XmlMappingAccess {
+    public enum XmlMappingAccess
+    {
         None = 0x00,
         Read = 0x01,
-        Write = 0x02,        
+        Write = 0x02,
     }
 
     /// <include file='doc\XmlMapping.uex' path='docs/doc[@for="XmlMapping"]/*' />
@@ -22,7 +24,8 @@ namespace System.Xml.Serialization {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class XmlMapping {
+    public abstract class XmlMapping
+    {
         TypeScope scope;
         bool generateSerializer = false;
         bool isSoap;
@@ -31,21 +34,24 @@ namespace System.Xml.Serialization {
         bool shallow = false;
         XmlMappingAccess access;
 
-        internal XmlMapping(TypeScope scope, ElementAccessor accessor) : this(scope, accessor, XmlMappingAccess.Read | XmlMappingAccess.Write){
-        }
+        internal XmlMapping(TypeScope scope, ElementAccessor accessor)
+            : this(scope, accessor, XmlMappingAccess.Read | XmlMappingAccess.Write) { }
 
-        internal XmlMapping(TypeScope scope, ElementAccessor accessor, XmlMappingAccess access) {
+        internal XmlMapping(TypeScope scope, ElementAccessor accessor, XmlMappingAccess access)
+        {
             this.scope = scope;
             this.accessor = accessor;
             this.access = access;
             this.shallow = scope == null;
         }
 
-        internal ElementAccessor Accessor {
+        internal ElementAccessor Accessor
+        {
             get { return accessor; }
         }
 
-        internal TypeScope Scope {
+        internal TypeScope Scope
+        {
             get { return scope; }
         }
 
@@ -53,7 +59,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ElementName { 
+        public string ElementName
+        {
             get { return System.Xml.Serialization.Accessor.UnescapeName(Accessor.Name); }
         }
 
@@ -61,7 +68,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string XsdElementName { 
+        public string XsdElementName
+        {
             get { return Accessor.Name; }
         }
 
@@ -69,55 +77,77 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return accessor.Namespace; }
         }
 
-        internal bool GenerateSerializer {
+        internal bool GenerateSerializer
+        {
             get { return generateSerializer; }
             set { generateSerializer = value; }
         }
 
-        internal bool IsReadable {
+        internal bool IsReadable
+        {
             get { return ((access & XmlMappingAccess.Read) != 0); }
         }
 
-        internal bool IsWriteable {
+        internal bool IsWriteable
+        {
             get { return ((access & XmlMappingAccess.Write) != 0); }
         }
 
-        internal bool IsSoap {
+        internal bool IsSoap
+        {
             get { return isSoap; }
             set { isSoap = value; }
         }
 
         /// <include file='doc\XmlMapping.uex' path='docs/doc[@for="XmlMapping.SetKey"]/*' />
         ///<internalonly/>
-        public void SetKey(string key){
+        public void SetKey(string key)
+        {
             SetKeyInternal(key);
         }
 
         /// <include file='doc\XmlMapping.uex' path='docs/doc[@for="XmlMapping.SetKeyInternal"]/*' />
         ///<internalonly/>
-        internal void SetKeyInternal(string key){
+        internal void SetKeyInternal(string key)
+        {
             this.key = key;
         }
 
-        internal static string GenerateKey(Type type, XmlRootAttribute root, string ns) {
-            if (root == null) {
+        internal static string GenerateKey(Type type, XmlRootAttribute root, string ns)
+        {
+            if (root == null)
+            {
                 root = (XmlRootAttribute)XmlAttributes.GetAttr(type, typeof(XmlRootAttribute));
             }
-            return type.FullName + ":" + (root == null ? String.Empty : root.Key) + ":" + (ns == null ? String.Empty : ns);
+            return type.FullName
+                + ":"
+                + (root == null ? String.Empty : root.Key)
+                + ":"
+                + (ns == null ? String.Empty : ns);
         }
 
-        internal string Key { get { return key; } }
-        internal void CheckShallow() {
-            if (shallow) {
-                throw new InvalidOperationException(Res.GetString(Res.XmlMelformMapping)); 
+        internal string Key
+        {
+            get { return key; }
+        }
+
+        internal void CheckShallow()
+        {
+            if (shallow)
+            {
+                throw new InvalidOperationException(Res.GetString(Res.XmlMelformMapping));
             }
         }
-        internal static bool IsShallow(XmlMapping[] mappings) {
-            for (int i = 0; i < mappings.Length; i++) {
+
+        internal static bool IsShallow(XmlMapping[] mappings)
+        {
+            for (int i = 0; i < mappings.Length; i++)
+            {
                 if (mappings[i] == null || mappings[i].shallow)
                     return true;
             }

@@ -30,15 +30,25 @@ internal sealed class LoadedProject : IDisposable
     /// </summary>
     private ProjectFileInfo? _mostRecentFileInfo;
     private IWatchedFile? _mostRecentProjectAssetsFileWatcher;
-    private ImmutableArray<CommandLineReference> _mostRecentMetadataReferences = ImmutableArray<CommandLineReference>.Empty;
-    private ImmutableArray<CommandLineAnalyzerReference> _mostRecentAnalyzerReferences = ImmutableArray<CommandLineAnalyzerReference>.Empty;
+    private ImmutableArray<CommandLineReference> _mostRecentMetadataReferences =
+        ImmutableArray<CommandLineReference>.Empty;
+    private ImmutableArray<CommandLineAnalyzerReference> _mostRecentAnalyzerReferences =
+        ImmutableArray<CommandLineAnalyzerReference>.Empty;
 
-    public LoadedProject(ProjectSystemProject projectSystemProject, SolutionServices solutionServices, IFileChangeWatcher fileWatcher, ProjectTargetFrameworkManager targetFrameworkManager)
+    public LoadedProject(
+        ProjectSystemProject projectSystemProject,
+        SolutionServices solutionServices,
+        IFileChangeWatcher fileWatcher,
+        ProjectTargetFrameworkManager targetFrameworkManager
+    )
     {
         Contract.ThrowIfNull(projectSystemProject.FilePath);
 
         _projectSystemProject = projectSystemProject;
-        _optionsProcessor = new ProjectSystemProjectOptionsProcessor(projectSystemProject, solutionServices);
+        _optionsProcessor = new ProjectSystemProjectOptionsProcessor(
+            projectSystemProject,
+            solutionServices
+        );
         _targetFrameworkManager = targetFrameworkManager;
 
         // We'll watch the directory for all source file changes
@@ -48,7 +58,7 @@ internal sealed class LoadedProject : IDisposable
         {
             new(projectDirectory, ".cs"),
             new(projectDirectory, ".cshtml"),
-            new(projectDirectory, ".razor")
+            new(projectDirectory, ".razor"),
         };
 
         _fileChangeContext = fileWatcher.CreateContext(watchedDirectories);
@@ -67,7 +77,10 @@ internal sealed class LoadedProject : IDisposable
 
     public string? GetTargetFramework()
     {
-        Contract.ThrowIfNull(_mostRecentFileInfo, "We haven't been given a loaded project yet, so we can't provide the existing TFM.");
+        Contract.ThrowIfNull(
+            _mostRecentFileInfo,
+            "We haven't been given a loaded project yet, so we can't provide the existing TFM."
+        );
         return _mostRecentFileInfo.TargetFramework;
     }
 
@@ -77,13 +90,18 @@ internal sealed class LoadedProject : IDisposable
         _projectSystemProject.RemoveFromWorkspace();
     }
 
-    public async ValueTask<(ImmutableArray<CommandLineReference>, OutputKind)> UpdateWithNewProjectInfoAsync(ProjectFileInfo newProjectInfo, ILogger logger)
+    public async ValueTask<(
+        ImmutableArray<CommandLineReference>,
+        OutputKind
+    )> UpdateWithNewProjectInfoAsync(ProjectFileInfo newProjectInfo, ILogger logger)
     {
         if (_mostRecentFileInfo != null)
         {
             // We should never be changing the fundamental identity of this project; if this happens we really should have done a full unload/reload.
             Contract.ThrowIfFalse(newProjectInfo.FilePath == _mostRecentFileInfo.FilePath);
-            Contract.ThrowIfFalse(newProjectInfo.TargetFramework == _mostRecentFileInfo.TargetFramework);
+            Contract.ThrowIfFalse(
+                newProjectInfo.TargetFramework == _mostRecentFileInfo.TargetFramework
+            );
         }
 
         await using var batch = _projectSystemProject.CreateBatchScope();
@@ -104,7 +122,10 @@ internal sealed class LoadedProject : IDisposable
 
         if (newProjectInfo.TargetFrameworkIdentifier != null)
         {
-            _targetFrameworkManager.UpdateIdentifierForProject(_projectSystemProject.Id, newProjectInfo.TargetFrameworkIdentifier);
+            _targetFrameworkManager.UpdateIdentifierForProject(
+                _projectSystemProject.Id,
+                newProjectInfo.TargetFrameworkIdentifier
+            );
         }
 
         _optionsProcessor.SetCommandLine(newProjectInfo.CommandLineArgs);
@@ -114,40 +135,70 @@ internal sealed class LoadedProject : IDisposable
             newProjectInfo.Documents,
             _mostRecentFileInfo?.Documents,
             DocumentFileInfoComparer.Instance,
-            document => _projectSystemProject.AddSourceFile(document.FilePath, folders: document.Folders),
+            document =>
+                _projectSystemProject.AddSourceFile(document.FilePath, folders: document.Folders),
             document => _projectSystemProject.RemoveSourceFile(document.FilePath),
-            "Project {0} now has {1} source file(s).");
+            "Project {0} now has {1} source file(s)."
+        );
 
-        var relativePathResolver = new RelativePathResolver(commandLineArguments.ReferencePaths, commandLineArguments.BaseDirectory);
-        var metadataReferences = commandLineArguments.MetadataReferences.Select(cr =>
-        {
-            // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees that generally the path returned
-            // is to an actual file on disk. And it needs to call File.Exists() in some cases if there are reference paths to have to search. But as a fallback
-            // we'll accept the resolved path since in the common case it's a file that just might not exist on disk yet.
-            var absolutePath =
-                relativePathResolver.ResolvePath(cr.Reference, baseFilePath: null) ??
-                FileUtilities.ResolveRelativePath(cr.Reference, commandLineArguments.BaseDirectory);
+        var relativePathResolver = new RelativePathResolver(
+            commandLineArguments.ReferencePaths,
+            commandLineArguments.BaseDirectory
+        );
+        var metadataReferences = commandLineArguments
+            .MetadataReferences.Select(cr =>
+            {
+                // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees that generally the path returned
+                // is to an actual file on disk. And it needs to call File.Exists() in some cases if there are reference paths to have to search. But as a fallback
+                // we'll accept the resolved path since in the common case it's a file that just might not exist on disk yet.
+                var absolutePath =
+                    relativePathResolver.ResolvePath(cr.Reference, baseFilePath: null)
+                    ?? FileUtilities.ResolveRelativePath(
+                        cr.Reference,
+                        commandLineArguments.BaseDirectory
+                    );
 
-            return absolutePath is not null ? new CommandLineReference(absolutePath, cr.Properties) : default;
-        }).Where(static cr => cr.Reference is not null).ToImmutableArray();
+                return absolutePath is not null
+                    ? new CommandLineReference(absolutePath, cr.Properties)
+                    : default;
+            })
+            .Where(static cr => cr.Reference is not null)
+            .ToImmutableArray();
 
         UpdateProjectSystemProjectCollection(
             metadataReferences,
             _mostRecentMetadataReferences,
             EqualityComparer<CommandLineReference>.Default, // CommandLineReference already implements equality
-            reference => _projectSystemProject.AddMetadataReference(reference.Reference, reference.Properties),
-            reference => _projectSystemProject.RemoveMetadataReference(reference.Reference, reference.Properties),
-            "Project {0} now has {1} reference(s).");
+            reference =>
+                _projectSystemProject.AddMetadataReference(
+                    reference.Reference,
+                    reference.Properties
+                ),
+            reference =>
+                _projectSystemProject.RemoveMetadataReference(
+                    reference.Reference,
+                    reference.Properties
+                ),
+            "Project {0} now has {1} reference(s)."
+        );
 
         // Now that we've updated it hold onto the old list of references so we can remove them if there's a later update
         _mostRecentMetadataReferences = metadataReferences;
 
-        var analyzerReferences = commandLineArguments.AnalyzerReferences.Select(cr =>
-        {
-            // Note that unlike regular references, we do not resolve these with the relative path resolver that searches reference paths
-            var absolutePath = FileUtilities.ResolveRelativePath(cr.FilePath, commandLineArguments.BaseDirectory);
-            return absolutePath is not null ? new CommandLineAnalyzerReference(absolutePath) : default;
-        }).Where(static cr => cr.FilePath is not null).ToImmutableArray();
+        var analyzerReferences = commandLineArguments
+            .AnalyzerReferences.Select(cr =>
+            {
+                // Note that unlike regular references, we do not resolve these with the relative path resolver that searches reference paths
+                var absolutePath = FileUtilities.ResolveRelativePath(
+                    cr.FilePath,
+                    commandLineArguments.BaseDirectory
+                );
+                return absolutePath is not null
+                    ? new CommandLineAnalyzerReference(absolutePath)
+                    : default;
+            })
+            .Where(static cr => cr.FilePath is not null)
+            .ToImmutableArray();
 
         UpdateProjectSystemProjectCollection(
             analyzerReferences,
@@ -155,7 +206,8 @@ internal sealed class LoadedProject : IDisposable
             EqualityComparer<CommandLineAnalyzerReference>.Default, // CommandLineAnalyzerReference already implements equality
             reference => _projectSystemProject.AddAnalyzerReference(reference.FilePath),
             reference => _projectSystemProject.RemoveAnalyzerReference(reference.FilePath),
-            "Project {0} now has {1} analyzer reference(s).");
+            "Project {0} now has {1} analyzer reference(s)."
+        );
 
         _mostRecentAnalyzerReferences = analyzerReferences;
 
@@ -165,7 +217,8 @@ internal sealed class LoadedProject : IDisposable
             DocumentFileInfoComparer.Instance,
             document => _projectSystemProject.AddAdditionalFile(document.FilePath),
             document => _projectSystemProject.RemoveAdditionalFile(document.FilePath),
-            "Project {0} now has {1} additional file(s).");
+            "Project {0} now has {1} additional file(s)."
+        );
 
         UpdateProjectSystemProjectCollection(
             newProjectInfo.AnalyzerConfigDocuments,
@@ -173,26 +226,42 @@ internal sealed class LoadedProject : IDisposable
             DocumentFileInfoComparer.Instance,
             document => _projectSystemProject.AddAnalyzerConfigFile(document.FilePath),
             document => _projectSystemProject.RemoveAnalyzerConfigFile(document.FilePath),
-            "Project {0} now has {1} analyzer config file(s).");
+            "Project {0} now has {1} analyzer config file(s)."
+        );
 
         UpdateProjectSystemProjectCollection(
             newProjectInfo.AdditionalDocuments.Where(TreatAsIsDynamicFile),
             _mostRecentFileInfo?.AdditionalDocuments.Where(TreatAsIsDynamicFile),
             DocumentFileInfoComparer.Instance,
-            document => _projectSystemProject.AddDynamicSourceFile(document.FilePath, folders: ImmutableArray<string>.Empty),
+            document =>
+                _projectSystemProject.AddDynamicSourceFile(
+                    document.FilePath,
+                    folders: ImmutableArray<string>.Empty
+                ),
             document => _projectSystemProject.RemoveDynamicSourceFile(document.FilePath),
-            "Project {0} now has {1} dynamic file(s).");
+            "Project {0} now has {1} dynamic file(s)."
+        );
 
         WatchProjectAssetsFile(newProjectInfo, _fileChangeContext);
 
         _mostRecentFileInfo = newProjectInfo;
 
-        Contract.ThrowIfNull(_projectSystemProject.CompilationOptions, "Compilation options cannot be null for C#/VB project");
+        Contract.ThrowIfNull(
+            _projectSystemProject.CompilationOptions,
+            "Compilation options cannot be null for C#/VB project"
+        );
         var outputKind = _projectSystemProject.CompilationOptions.OutputKind;
         return (metadataReferences, outputKind);
 
         // logMessage should be a string with two placeholders; the first is the project name, the second is the number of items.
-        void UpdateProjectSystemProjectCollection<T>(IEnumerable<T> loadedCollection, IEnumerable<T>? oldLoadedCollection, IEqualityComparer<T> comparer, Action<T> addItem, Action<T> removeItem, string logMessage)
+        void UpdateProjectSystemProjectCollection<T>(
+            IEnumerable<T> loadedCollection,
+            IEnumerable<T>? oldLoadedCollection,
+            IEqualityComparer<T> comparer,
+            Action<T> addItem,
+            Action<T> removeItem,
+            string logMessage
+        )
         {
             var newItems = new HashSet<T>(loadedCollection, comparer);
             var oldItems = new HashSet<T>(comparer);
@@ -220,9 +289,15 @@ internal sealed class LoadedProject : IDisposable
                 logger.LogTrace(logMessage, projectFullPathWithTargetFramework, newItems.Count);
         }
 
-        void WatchProjectAssetsFile(ProjectFileInfo currentProjectInfo, IFileChangeContext fileChangeContext)
+        void WatchProjectAssetsFile(
+            ProjectFileInfo currentProjectInfo,
+            IFileChangeContext fileChangeContext
+        )
         {
-            if (_mostRecentFileInfo?.ProjectAssetsFilePath == currentProjectInfo.ProjectAssetsFilePath)
+            if (
+                _mostRecentFileInfo?.ProjectAssetsFilePath
+                == currentProjectInfo.ProjectAssetsFilePath
+            )
             {
                 // The file path hasn't changed, just keep using the same watcher.
                 return;
@@ -234,7 +309,9 @@ internal sealed class LoadedProject : IDisposable
             IWatchedFile? currentWatcher = null;
             if (currentProjectInfo.ProjectAssetsFilePath != null)
             {
-                currentWatcher = fileChangeContext.EnqueueWatchingFile(currentProjectInfo.ProjectAssetsFilePath);
+                currentWatcher = fileChangeContext.EnqueueWatchingFile(
+                    currentProjectInfo.ProjectAssetsFilePath
+                );
             }
 
             _mostRecentProjectAssetsFileWatcher = currentWatcher;
@@ -251,9 +328,7 @@ internal sealed class LoadedProject : IDisposable
     {
         public static IEqualityComparer<DocumentFileInfo> Instance = new DocumentFileInfoComparer();
 
-        private DocumentFileInfoComparer()
-        {
-        }
+        private DocumentFileInfoComparer() { }
 
         public bool Equals(DocumentFileInfo? x, DocumentFileInfo? y)
         {

@@ -10,110 +10,199 @@ namespace Internal.TypeSystem.Ecma
 {
     public static class MetadataExtensions
     {
-        public static CustomAttributeValue<TypeDesc>? GetDecodedCustomAttribute(this EcmaType This,
-            string attributeNamespace, string attributeName)
+        public static CustomAttributeValue<TypeDesc>? GetDecodedCustomAttribute(
+            this EcmaType This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
 
-            var attributeHandle = metadataReader.GetCustomAttributeHandle(metadataReader.GetTypeDefinition(This.Handle).GetCustomAttributes(),
-                attributeNamespace, attributeName);
+            var attributeHandle = metadataReader.GetCustomAttributeHandle(
+                metadataReader.GetTypeDefinition(This.Handle).GetCustomAttributes(),
+                attributeNamespace,
+                attributeName
+            );
 
             if (attributeHandle.IsNil)
                 return null;
 
-            return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This.EcmaModule));
+            return metadataReader
+                .GetCustomAttribute(attributeHandle)
+                .DecodeValue(new CustomAttributeTypeProvider(This.EcmaModule));
         }
 
-        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(this EcmaType This,
-            string attributeNamespace, string attributeName)
+        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(
+            this EcmaType This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
-            var attributeHandles = metadataReader.GetTypeDefinition(This.Handle).GetCustomAttributes();
+            var attributeHandles = metadataReader
+                .GetTypeDefinition(This.Handle)
+                .GetCustomAttributes();
             foreach (var attributeHandle in attributeHandles)
             {
-                if (IsEqualCustomAttributeName(attributeHandle, metadataReader, attributeNamespace, attributeName))
+                if (
+                    IsEqualCustomAttributeName(
+                        attributeHandle,
+                        metadataReader,
+                        attributeNamespace,
+                        attributeName
+                    )
+                )
                 {
-                    yield return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This.EcmaModule));
+                    yield return metadataReader
+                        .GetCustomAttribute(attributeHandle)
+                        .DecodeValue(new CustomAttributeTypeProvider(This.EcmaModule));
                 }
             }
         }
 
-        public static CustomAttributeValue<TypeDesc>? GetDecodedCustomAttribute(this EcmaMethod This,
-            string attributeNamespace, string attributeName)
+        public static CustomAttributeValue<TypeDesc>? GetDecodedCustomAttribute(
+            this EcmaMethod This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
 
-            var attributeHandle = metadataReader.GetCustomAttributeHandle(metadataReader.GetMethodDefinition(This.Handle).GetCustomAttributes(),
-                attributeNamespace, attributeName);
+            var attributeHandle = metadataReader.GetCustomAttributeHandle(
+                metadataReader.GetMethodDefinition(This.Handle).GetCustomAttributes(),
+                attributeNamespace,
+                attributeName
+            );
 
             if (attributeHandle.IsNil)
                 return null;
 
-            return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This.Module));
+            return metadataReader
+                .GetCustomAttribute(attributeHandle)
+                .DecodeValue(new CustomAttributeTypeProvider(This.Module));
         }
 
-        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(this EcmaMethod This,
-            string attributeNamespace, string attributeName)
+        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(
+            this EcmaMethod This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
-            var attributeHandles = metadataReader.GetMethodDefinition(This.Handle).GetCustomAttributes();
+            var attributeHandles = metadataReader
+                .GetMethodDefinition(This.Handle)
+                .GetCustomAttributes();
             foreach (var attributeHandle in attributeHandles)
             {
-                if (IsEqualCustomAttributeName(attributeHandle, metadataReader, attributeNamespace, attributeName))
+                if (
+                    IsEqualCustomAttributeName(
+                        attributeHandle,
+                        metadataReader,
+                        attributeNamespace,
+                        attributeName
+                    )
+                )
                 {
-                    yield return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This.Module));
+                    yield return metadataReader
+                        .GetCustomAttribute(attributeHandle)
+                        .DecodeValue(new CustomAttributeTypeProvider(This.Module));
                 }
             }
         }
 
-        public static CustomAttributeValue<TypeDesc>? GetDecodedCustomAttribute(this EcmaField This,
-            string attributeNamespace, string attributeName)
+        public static CustomAttributeValue<TypeDesc>? GetDecodedCustomAttribute(
+            this EcmaField This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
 
-            var attributeHandle = metadataReader.GetCustomAttributeHandle(metadataReader.GetFieldDefinition(This.Handle).GetCustomAttributes(),
-                attributeNamespace, attributeName);
+            var attributeHandle = metadataReader.GetCustomAttributeHandle(
+                metadataReader.GetFieldDefinition(This.Handle).GetCustomAttributes(),
+                attributeNamespace,
+                attributeName
+            );
 
             if (attributeHandle.IsNil)
                 return null;
 
-            return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This.Module));
+            return metadataReader
+                .GetCustomAttribute(attributeHandle)
+                .DecodeValue(new CustomAttributeTypeProvider(This.Module));
         }
 
-        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(this EcmaField This,
-            string attributeNamespace, string attributeName)
+        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(
+            this EcmaField This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
-            var attributeHandles = metadataReader.GetFieldDefinition(This.Handle).GetCustomAttributes();
+            var attributeHandles = metadataReader
+                .GetFieldDefinition(This.Handle)
+                .GetCustomAttributes();
             foreach (var attributeHandle in attributeHandles)
             {
-                if (IsEqualCustomAttributeName(attributeHandle, metadataReader, attributeNamespace, attributeName))
+                if (
+                    IsEqualCustomAttributeName(
+                        attributeHandle,
+                        metadataReader,
+                        attributeNamespace,
+                        attributeName
+                    )
+                )
                 {
-                    yield return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This.Module));
+                    yield return metadataReader
+                        .GetCustomAttribute(attributeHandle)
+                        .DecodeValue(new CustomAttributeTypeProvider(This.Module));
                 }
             }
         }
 
-        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(this EcmaAssembly This,
-            string attributeNamespace, string attributeName)
+        public static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(
+            this EcmaAssembly This,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             var metadataReader = This.MetadataReader;
             var attributeHandles = metadataReader.GetAssemblyDefinition().GetCustomAttributes();
             foreach (var attributeHandle in attributeHandles)
             {
-                if (IsEqualCustomAttributeName(attributeHandle, metadataReader, attributeNamespace, attributeName))
+                if (
+                    IsEqualCustomAttributeName(
+                        attributeHandle,
+                        metadataReader,
+                        attributeNamespace,
+                        attributeName
+                    )
+                )
                 {
-                    yield return metadataReader.GetCustomAttribute(attributeHandle).DecodeValue(new CustomAttributeTypeProvider(This));
+                    yield return metadataReader
+                        .GetCustomAttribute(attributeHandle)
+                        .DecodeValue(new CustomAttributeTypeProvider(This));
                 }
             }
         }
 
-        public static CustomAttributeHandle GetCustomAttributeHandle(this MetadataReader metadataReader, CustomAttributeHandleCollection customAttributes,
-            string attributeNamespace, string attributeName)
+        public static CustomAttributeHandle GetCustomAttributeHandle(
+            this MetadataReader metadataReader,
+            CustomAttributeHandleCollection customAttributes,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             foreach (var attributeHandle in customAttributes)
             {
-                if (IsEqualCustomAttributeName(attributeHandle, metadataReader, attributeNamespace, attributeName))
+                if (
+                    IsEqualCustomAttributeName(
+                        attributeHandle,
+                        metadataReader,
+                        attributeNamespace,
+                        attributeName
+                    )
+                )
                 {
                     return attributeHandle;
                 }
@@ -122,44 +211,79 @@ namespace Internal.TypeSystem.Ecma
             return default(CustomAttributeHandle);
         }
 
-        public static bool IsEqualCustomAttributeName(CustomAttributeHandle attributeHandle, MetadataReader metadataReader,
-            string attributeNamespace, string attributeName)
+        public static bool IsEqualCustomAttributeName(
+            CustomAttributeHandle attributeHandle,
+            MetadataReader metadataReader,
+            string attributeNamespace,
+            string attributeName
+        )
         {
-            StringHandle namespaceHandle, nameHandle;
-            if (!metadataReader.GetAttributeNamespaceAndName(attributeHandle, out namespaceHandle, out nameHandle))
+            StringHandle namespaceHandle,
+                nameHandle;
+            if (
+                !metadataReader.GetAttributeNamespaceAndName(
+                    attributeHandle,
+                    out namespaceHandle,
+                    out nameHandle
+                )
+            )
                 return false;
 
             return metadataReader.StringComparer.Equals(namespaceHandle, attributeNamespace)
                 && metadataReader.StringComparer.Equals(nameHandle, attributeName);
         }
 
-        public static bool GetAttributeNamespaceAndName(this MetadataReader metadataReader, CustomAttributeHandle attributeHandle,
-            out StringHandle namespaceHandle, out StringHandle nameHandle)
+        public static bool GetAttributeNamespaceAndName(
+            this MetadataReader metadataReader,
+            CustomAttributeHandle attributeHandle,
+            out StringHandle namespaceHandle,
+            out StringHandle nameHandle
+        )
         {
             EntityHandle attributeType;
-            if (!GetAttributeTypeAndConstructor(metadataReader, attributeHandle, out attributeType, out _))
+            if (
+                !GetAttributeTypeAndConstructor(
+                    metadataReader,
+                    attributeHandle,
+                    out attributeType,
+                    out _
+                )
+            )
             {
                 namespaceHandle = default(StringHandle);
                 nameHandle = default(StringHandle);
                 return false;
             }
 
-            return GetAttributeTypeNamespaceAndName(metadataReader, attributeType, out namespaceHandle, out nameHandle);
+            return GetAttributeTypeNamespaceAndName(
+                metadataReader,
+                attributeType,
+                out namespaceHandle,
+                out nameHandle
+            );
         }
 
-        public static bool GetAttributeTypeAndConstructor(this MetadataReader metadataReader, CustomAttributeHandle attributeHandle,
-            out EntityHandle attributeType, out EntityHandle attributeCtor)
+        public static bool GetAttributeTypeAndConstructor(
+            this MetadataReader metadataReader,
+            CustomAttributeHandle attributeHandle,
+            out EntityHandle attributeType,
+            out EntityHandle attributeCtor
+        )
         {
             attributeCtor = metadataReader.GetCustomAttribute(attributeHandle).Constructor;
 
             if (attributeCtor.Kind == HandleKind.MemberReference)
             {
-                attributeType = metadataReader.GetMemberReference((MemberReferenceHandle)attributeCtor).Parent;
+                attributeType = metadataReader
+                    .GetMemberReference((MemberReferenceHandle)attributeCtor)
+                    .Parent;
                 return true;
             }
             else if (attributeCtor.Kind == HandleKind.MethodDefinition)
             {
-                attributeType = metadataReader.GetMethodDefinition((MethodDefinitionHandle)attributeCtor).GetDeclaringType();
+                attributeType = metadataReader
+                    .GetMethodDefinition((MethodDefinitionHandle)attributeCtor)
+                    .GetDeclaringType();
                 return true;
             }
             else
@@ -170,19 +294,28 @@ namespace Internal.TypeSystem.Ecma
             }
         }
 
-        public static bool GetAttributeTypeNamespaceAndName(this MetadataReader metadataReader, EntityHandle attributeType,
-            out StringHandle namespaceHandle, out StringHandle nameHandle)
+        public static bool GetAttributeTypeNamespaceAndName(
+            this MetadataReader metadataReader,
+            EntityHandle attributeType,
+            out StringHandle namespaceHandle,
+            out StringHandle nameHandle
+        )
         {
             namespaceHandle = default(StringHandle);
             nameHandle = default(StringHandle);
 
             if (attributeType.Kind == HandleKind.TypeReference)
             {
-                TypeReference typeRefRow = metadataReader.GetTypeReference((TypeReferenceHandle)attributeType);
+                TypeReference typeRefRow = metadataReader.GetTypeReference(
+                    (TypeReferenceHandle)attributeType
+                );
                 HandleKind handleType = typeRefRow.ResolutionScope.Kind;
 
                 // Nested type?
-                if (handleType == HandleKind.TypeReference || handleType == HandleKind.TypeDefinition)
+                if (
+                    handleType == HandleKind.TypeReference
+                    || handleType == HandleKind.TypeDefinition
+                )
                     return false;
 
                 nameHandle = typeRefRow.Name;
@@ -218,7 +351,9 @@ namespace Internal.TypeSystem.Ecma
             }
 
             var customAttributeValue = type.GetDecodedCustomAttribute(
-                               "System.Runtime.InteropServices", "UnmanagedFunctionPointerAttribute");
+                "System.Runtime.InteropServices",
+                "UnmanagedFunctionPointerAttribute"
+            );
 
             if (customAttributeValue == null)
             {
@@ -232,18 +367,22 @@ namespace Internal.TypeSystem.Ecma
 
             if (customAttributeValue.Value.FixedArguments.Length == 1)
             {
-                CallingConvention callingConvention = (CallingConvention)customAttributeValue.Value.FixedArguments[0].Value;
+                CallingConvention callingConvention = (CallingConvention)
+                    customAttributeValue.Value.FixedArguments[0].Value;
 
                 switch (callingConvention)
                 {
                     case CallingConvention.StdCall:
-                        flags.UnmanagedCallingConvention = MethodSignatureFlags.UnmanagedCallingConventionStdCall;
+                        flags.UnmanagedCallingConvention =
+                            MethodSignatureFlags.UnmanagedCallingConventionStdCall;
                         break;
                     case CallingConvention.Cdecl:
-                        flags.UnmanagedCallingConvention = MethodSignatureFlags.UnmanagedCallingConventionCdecl;
+                        flags.UnmanagedCallingConvention =
+                            MethodSignatureFlags.UnmanagedCallingConventionCdecl;
                         break;
                     case CallingConvention.ThisCall:
-                        flags.UnmanagedCallingConvention = MethodSignatureFlags.UnmanagedCallingConventionThisCall;
+                        flags.UnmanagedCallingConvention =
+                            MethodSignatureFlags.UnmanagedCallingConventionThisCall;
                         break;
                     case CallingConvention.Winapi:
                         // Platform default
@@ -296,17 +435,26 @@ namespace Internal.TypeSystem.Ecma
             return (flags & MethodAttributes.MemberAccessMask) == MethodAttributes.Public;
         }
 
-        public static unsafe byte* GetTypeNamePointer(this MetadataReader reader, TypeDefinitionHandle handle)
+        public static unsafe byte* GetTypeNamePointer(
+            this MetadataReader reader,
+            TypeDefinitionHandle handle
+        )
         {
             return reader.GetBlobReader(reader.GetTypeDefinition(handle).Name).CurrentPointer;
         }
 
-        public static unsafe byte* GetTypeNamespacePointer(this MetadataReader reader, TypeDefinitionHandle handle)
+        public static unsafe byte* GetTypeNamespacePointer(
+            this MetadataReader reader,
+            TypeDefinitionHandle handle
+        )
         {
             return reader.GetBlobReader(reader.GetTypeDefinition(handle).Namespace).CurrentPointer;
         }
 
-        public static unsafe byte* GetMethodNamePointer(this MetadataReader reader, MethodDefinitionHandle handle)
+        public static unsafe byte* GetMethodNamePointer(
+            this MetadataReader reader,
+            MethodDefinitionHandle handle
+        )
         {
             return reader.GetBlobReader(reader.GetMethodDefinition(handle).Name).CurrentPointer;
         }

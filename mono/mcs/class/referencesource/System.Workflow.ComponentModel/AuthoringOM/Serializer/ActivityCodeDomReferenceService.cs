@@ -2,20 +2,20 @@ namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Collections;
-    using System.Resources;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
-    using Microsoft.CSharp;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.CodeDom.Compiler;
+    using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-    using System.Diagnostics;
+    using System.Resources;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using Microsoft.CSharp;
 
     #region Class ActivityCodeDomReferenceService
     /// <summary>
@@ -85,5 +85,4 @@ namespace System.Workflow.ComponentModel.Serialization
         }
     }
     #endregion
-
 }

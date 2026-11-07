@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ActiveDocumentEvent.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -18,9 +19,16 @@ namespace System.ComponentModel.Design {
     /// event.</para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name="FullTrust")]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name="FullTrust")]
-    public class ActiveDesignerEventArgs : EventArgs {
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Name = "FullTrust"
+    )]
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Name = "FullTrust"
+    )]
+    public class ActiveDesignerEventArgs : EventArgs
+    {
         /// <devdoc>
         ///     The document that is losing activation.
         /// </devdoc>
@@ -35,7 +43,8 @@ namespace System.ComponentModel.Design {
         /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Design.ActiveDesignerEventArgs'/>
         /// class.</para>
         /// </devdoc>
-        public ActiveDesignerEventArgs(IDesignerHost oldDesigner, IDesignerHost newDesigner) {
+        public ActiveDesignerEventArgs(IDesignerHost oldDesigner, IDesignerHost newDesigner)
+        {
             this.oldDesigner = oldDesigner;
             this.newDesigner = newDesigner;
         }
@@ -46,10 +55,9 @@ namespace System.ComponentModel.Design {
         ///       sets the document that is losing activation.
         ///    </para>
         /// </devdoc>
-        public IDesignerHost OldDesigner {
-            get {
-                return oldDesigner;
-            }
+        public IDesignerHost OldDesigner
+        {
+            get { return oldDesigner; }
         }
 
         /// <devdoc>
@@ -58,11 +66,9 @@ namespace System.ComponentModel.Design {
         ///       sets the document that is gaining activation.
         ///    </para>
         /// </devdoc>
-        public IDesignerHost NewDesigner {
-            get {
-                return newDesigner;
-            }
+        public IDesignerHost NewDesigner
+        {
+            get { return newDesigner; }
         }
-
     }
 }

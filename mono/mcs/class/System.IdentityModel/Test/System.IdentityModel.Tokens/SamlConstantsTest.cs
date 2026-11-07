@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,22 +37,38 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-	[TestFixture]
-	public class SamlConstantsTest
-	{
-		[Test]
-		public void Constants ()
-		{
-			Assert.AreEqual ("EmailName", SamlConstants.EmailName, "#1");
-			Assert.AreEqual ("urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", SamlConstants.EmailNamespace, "#2");
-			Assert.AreEqual ("urn:oasis:names:tc:SAML:1.0:cm:holder-of-key", SamlConstants.HolderOfKey, "#3");
-			Assert.AreEqual (1, SamlConstants.MajorVersionValue, "#4");
-			Assert.AreEqual (1, SamlConstants.MinorVersionValue, "#5");
-			Assert.AreEqual ("urn:oasis:names:tc:SAML:1.0:assertion", SamlConstants.Namespace, "#6");
-			Assert.AreEqual ("urn:oasis:names:tc:SAML:1.0:cm:sender-vouches", SamlConstants.SenderVouches, "#7");
-			Assert.AreEqual ("UserName", SamlConstants.UserName, "#8");
-			Assert.AreEqual ("urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName", SamlConstants.UserNameNamespace, "#9");
-		}
-	}
+    [TestFixture]
+    public class SamlConstantsTest
+    {
+        [Test]
+        public void Constants()
+        {
+            Assert.AreEqual("EmailName", SamlConstants.EmailName, "#1");
+            Assert.AreEqual(
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+                SamlConstants.EmailNamespace,
+                "#2"
+            );
+            Assert.AreEqual(
+                "urn:oasis:names:tc:SAML:1.0:cm:holder-of-key",
+                SamlConstants.HolderOfKey,
+                "#3"
+            );
+            Assert.AreEqual(1, SamlConstants.MajorVersionValue, "#4");
+            Assert.AreEqual(1, SamlConstants.MinorVersionValue, "#5");
+            Assert.AreEqual("urn:oasis:names:tc:SAML:1.0:assertion", SamlConstants.Namespace, "#6");
+            Assert.AreEqual(
+                "urn:oasis:names:tc:SAML:1.0:cm:sender-vouches",
+                SamlConstants.SenderVouches,
+                "#7"
+            );
+            Assert.AreEqual("UserName", SamlConstants.UserName, "#8");
+            Assert.AreEqual(
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName",
+                SamlConstants.UserNameNamespace,
+                "#9"
+            );
+        }
+    }
 }
 #endif

@@ -4,16 +4,18 @@
 //------------------------------------------------------------
 
 using System;
-using System.Text;
-using System.Workflow.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class EventQueueName : IComparable
     {
         Type interfaceType;
@@ -39,7 +41,6 @@ namespace System.Workflow.Activities
             }
         }
 
-
         public EventQueueName(Type interfaceType, string operation)
         {
             if (interfaceType == null)
@@ -51,7 +52,11 @@ namespace System.Workflow.Activities
             this.operation = operation;
         }
 
-        public EventQueueName(Type interfaceType, string operation, ICollection<CorrelationProperty> propertyValues)
+        public EventQueueName(
+            Type interfaceType,
+            string operation,
+            ICollection<CorrelationProperty> propertyValues
+        )
             : this(interfaceType, operation)
         {
             if (propertyValues != null)
@@ -70,18 +75,12 @@ namespace System.Workflow.Activities
         // properties
         public Type InterfaceType
         {
-            get
-            {
-                return this.interfaceType;
-            }
+            get { return this.interfaceType; }
         }
 
         public string MethodName
         {
-            get
-            {
-                return this.operation;
-            }
+            get { return this.operation; }
         }
 
         public CorrelationProperty[] GetCorrelationValues()
@@ -104,34 +103,52 @@ namespace System.Workflow.Activities
                 return -1;
 
             // compare operation
-            int compared = StringComparer.Ordinal.Compare(this.MethodName, eventQueueName.MethodName);
+            int compared = StringComparer.Ordinal.Compare(
+                this.MethodName,
+                eventQueueName.MethodName
+            );
 
             if (compared == 0)
             {
                 // compare type names
 #pragma warning disable 56506
-                compared = StringComparer.Ordinal.Compare(AssemblyQualifiedName, eventQueueName.AssemblyQualifiedName);
+                compared = StringComparer.Ordinal.Compare(
+                    AssemblyQualifiedName,
+                    eventQueueName.AssemblyQualifiedName
+                );
 #pragma warning restore 56506
 
                 if (compared == 0)
                 {
                     if (this.correlationValues != null)
                     {
-                        compared = (eventQueueName.correlationValues != null) ? (this.correlationValues.Length - eventQueueName.correlationValues.Length) : -1;
+                        compared =
+                            (eventQueueName.correlationValues != null)
+                                ? (
+                                    this.correlationValues.Length
+                                    - eventQueueName.correlationValues.Length
+                                )
+                                : -1;
 
                         if (compared == 0)
                         {
                             // compare correlation values
                             for (int i = 0; i < this.correlationValues.Length; i++)
                             {
-                                if (this.correlationValues[i] == null || eventQueueName.correlationValues[i] == null)
+                                if (
+                                    this.correlationValues[i] == null
+                                    || eventQueueName.correlationValues[i] == null
+                                )
                                 {
                                     compared = -1;
                                     break; // match failed
                                 }
 
                                 object leftValue = this.correlationValues[i].Value;
-                                object rightValue = FindCorrelationValue(this.correlationValues[i].Name, eventQueueName.correlationValues);
+                                object rightValue = FindCorrelationValue(
+                                    this.correlationValues[i].Name,
+                                    eventQueueName.correlationValues
+                                );
 
 #pragma warning suppress 56506
                                 if (leftValue == null && rightValue == null)
@@ -231,7 +248,11 @@ namespace System.Workflow.Activities
             if (String.IsNullOrEmpty(this.activityId))
                 return (AssemblyQualifiedName.GetHashCode() ^ this.operation.GetHashCode());
 
-            return (AssemblyQualifiedName.GetHashCode() ^ this.operation.GetHashCode() ^ this.activityId.GetHashCode());
+            return (
+                AssemblyQualifiedName.GetHashCode()
+                ^ this.operation.GetHashCode()
+                ^ this.activityId.GetHashCode()
+            );
         }
 
         public override string ToString()

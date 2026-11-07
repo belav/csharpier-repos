@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.ModuleInitializers
         [Fact]
         public void MustNotBeGenericMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -33,14 +34,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8798: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric, "ModuleInitializer").WithArguments("M").WithLocation(6, 6)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void MustNotBeContainedInGenericType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C<T>
@@ -55,14 +62,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8798: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric, "ModuleInitializer").WithArguments("M").WithLocation(6, 6)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void MustNotBeGenericAndContainedInGenericType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C<T>
@@ -77,14 +90,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8816: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric, "ModuleInitializer").WithArguments("M").WithLocation(6, 6)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void MustNotBeContainedInGenericTypeWithParametersDeclaredByContainingGenericType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C<T>
@@ -102,8 +121,13 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (8,10): error CS8798: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric, "ModuleInitializer").WithArguments("M").WithLocation(8, 10)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                        "ModuleInitializer"
+                    )
+                    .WithArguments("M")
+                    .WithLocation(8, 10)
+            );
         }
     }
 }

@@ -31,33 +31,39 @@ using System.Threading;
 
 namespace System.Web.Caching
 {
-	class CacheItem
-	{
-		public object Value;
-		public string Key;
-		public CacheDependency Dependency;
-		public DateTime AbsoluteExpiration;
-		public TimeSpan SlidingExpiration;
-		public CacheItemPriority Priority;
-		public CacheItemRemovedCallback OnRemoveCallback;
-		public CacheItemUpdateCallback OnUpdateCallback;
-		public DateTime LastChange;
-		public long ExpiresAt;
-		public bool Disabled;
-		public bool IsTimedItem;
-		public int PriorityQueueIndex = -1;
+    class CacheItem
+    {
+        public object Value;
+        public string Key;
+        public CacheDependency Dependency;
+        public DateTime AbsoluteExpiration;
+        public TimeSpan SlidingExpiration;
+        public CacheItemPriority Priority;
+        public CacheItemRemovedCallback OnRemoveCallback;
+        public CacheItemUpdateCallback OnUpdateCallback;
+        public DateTime LastChange;
+        public long ExpiresAt;
+        public bool Disabled;
+        public bool IsTimedItem;
+        public int PriorityQueueIndex = -1;
 #if DEBUG
-		public Guid Guid;
+        public Guid Guid;
 
-		public CacheItem ()
-		{
-			Guid = Guid.NewGuid ();
-		}
+        public CacheItem()
+        {
+            Guid = Guid.NewGuid();
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("CacheItem [{0}]\n[{1}][{2}][{3}]", this.Guid, Key, Disabled, ExpiresAt > 0 ? new DateTime (ExpiresAt).ToString () : "0");
-		}
+        public override string ToString()
+        {
+            return String.Format(
+                "CacheItem [{0}]\n[{1}][{2}][{3}]",
+                this.Guid,
+                Key,
+                Disabled,
+                ExpiresAt > 0 ? new DateTime(ExpiresAt).ToString() : "0"
+            );
+        }
 #endif
-	}
+    }
 }

@@ -22,7 +22,7 @@ namespace System.ComponentModel.Design
         /// Indicates that the given command is enabled. An enabled command may
         /// be selected by the user (it's not greyed out).
         /// </summary>
-        private const int ENABLED = 0x02;  //tagOLECMDF.OLECMDF_ENABLED;
+        private const int ENABLED = 0x02; //tagOLECMDF.OLECMDF_ENABLED;
 
         /// <summary>
         /// Indicates that the given command is not visible on the command bar.
@@ -113,7 +113,6 @@ namespace System.ComponentModel.Design
         /// Occurs when the menu command changes.
         /// </summary>
         public event EventHandler? CommandChanged;
-
 
         /// <summary>
         /// Gets the <see cref='System.ComponentModel.Design.CommandID'/> associated with this menu command.

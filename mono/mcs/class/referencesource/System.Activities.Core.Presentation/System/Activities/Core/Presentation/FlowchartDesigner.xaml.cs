@@ -32,30 +32,88 @@ namespace System.Activities.Core.Presentation
     [ActivityDesignerOptions(AlwaysCollapseChildren = true)]
     partial class FlowchartDesigner : IAutoConnectContainer, IAutoSplitContainer
     {
-        public static readonly DependencyProperty ConnectionPointsProperty = DependencyProperty.RegisterAttached("ConnectionPoints", typeof(List<ConnectionPoint>), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
-        public static readonly DependencyProperty LinkModelItemProperty = DependencyProperty.RegisterAttached("LinkModelItem", typeof(ModelItem), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
-        public static readonly DependencyProperty FlowElementModelItemProperty = DependencyProperty.RegisterAttached("FlowElementModelItem", typeof(ModelItem), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty ConnectionPointsProperty =
+            DependencyProperty.RegisterAttached(
+                "ConnectionPoints",
+                typeof(List<ConnectionPoint>),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
+        public static readonly DependencyProperty LinkModelItemProperty =
+            DependencyProperty.RegisterAttached(
+                "LinkModelItem",
+                typeof(ModelItem),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
+        public static readonly DependencyProperty FlowElementModelItemProperty =
+            DependencyProperty.RegisterAttached(
+                "FlowElementModelItem",
+                typeof(ModelItem),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
 
-        public static readonly DependencyProperty FlowchartWidthProperty = DependencyProperty.Register("FlowchartWidth", typeof(double), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
-        public static readonly DependencyProperty FlowchartHeightProperty = DependencyProperty.Register("FlowchartHeight", typeof(double), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty FlowchartWidthProperty =
+            DependencyProperty.Register(
+                "FlowchartWidth",
+                typeof(double),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
+        public static readonly DependencyProperty FlowchartHeightProperty =
+            DependencyProperty.Register(
+                "FlowchartHeight",
+                typeof(double),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
 
-        public static readonly DependencyProperty TrueConnectionPointProperty = DependencyProperty.RegisterAttached("TrueConnectionPoint", typeof(ConnectionPoint), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
-        public static readonly DependencyProperty FalseConnectionPointProperty = DependencyProperty.RegisterAttached("FalseConnectionPoint", typeof(ConnectionPoint), typeof(FlowchartDesigner), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty TrueConnectionPointProperty =
+            DependencyProperty.RegisterAttached(
+                "TrueConnectionPoint",
+                typeof(ConnectionPoint),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
+        public static readonly DependencyProperty FalseConnectionPointProperty =
+            DependencyProperty.RegisterAttached(
+                "FalseConnectionPoint",
+                typeof(ConnectionPoint),
+                typeof(FlowchartDesigner),
+                new FrameworkPropertyMetadata()
+            );
 
-        public static readonly DependencyProperty ShowAllConditionsProperty = DependencyProperty.Register("ShowAllConditions", typeof(bool), typeof(FlowchartDesigner));
+        public static readonly DependencyProperty ShowAllConditionsProperty =
+            DependencyProperty.Register(
+                "ShowAllConditions",
+                typeof(bool),
+                typeof(FlowchartDesigner)
+            );
 
-        public static readonly RoutedCommand SetAsStartNodeCommand = new RoutedCommand("SetAsStartNode", typeof(FlowchartDesigner));
+        public static readonly RoutedCommand SetAsStartNodeCommand = new RoutedCommand(
+            "SetAsStartNode",
+            typeof(FlowchartDesigner)
+        );
+
         //public static readonly RoutedCommand ConnectNodesCommand = new RoutedCommand("ConnectNodes", typeof(FlowchartDesigner));
-        public static readonly RoutedCommand ShowAllConditionsCommand = new RoutedCommand("ShowAllConditionsCommand", typeof(FlowchartDesigner));
-        public static readonly RoutedCommand HideAllConditionsCommand = new RoutedCommand("HideAllConditionsCommand", typeof(FlowchartDesigner));
+        public static readonly RoutedCommand ShowAllConditionsCommand = new RoutedCommand(
+            "ShowAllConditionsCommand",
+            typeof(FlowchartDesigner)
+        );
+        public static readonly RoutedCommand HideAllConditionsCommand = new RoutedCommand(
+            "HideAllConditionsCommand",
+            typeof(FlowchartDesigner)
+        );
 
         const double flowElementCaptionFontSize = 11;
         const double DebugTimeMaxConnectorShapeDist = 10;
         static readonly FontFamily flowElementCaptionFontFamily = new FontFamily("Tohoma");
         static readonly FontStyle flowElementCaptionFontStyle = new FontStyle();
         static readonly Typeface flowElementCaptionTypeface = new Typeface("Tohoma");
-        
+
         internal Dictionary<ModelItem, UIElement> modelElement;
+
         //Consider FlowStep.Action = SomeActivity. FlowStep modelItem is referred as FlowNodeMI, SomeActivity modelItem is shapeMI and the designer for SomeActivity is the shape on canvas.
         //To go from the FlowNodeMI to the shape on canvas, we can use the path: FlowNodeMI(FlowStep.Action)-> shapeMI (modelElement Dictionary)-> Actual UIElement shape
         //However this path does not always work.  For instance in delete case: FlowStep.Action is set to null to update the ModelItem.Parents property on the shapeMI
@@ -72,13 +130,16 @@ namespace System.Activities.Core.Presentation
         const string ConnectorViewStateKey = "ConnectorLocation";
         static Color ConnectionPointColor = Colors.LightGray;
         UIElement lastConnectionPointMouseUpElement = null;
+
         //shapeLocations is useful to avoid pasting on existing shapes.
         //This is populated in 2 cases 1. When the shape with existing Viewstate is added 2. On ViewState changed.
         HashSet<Point> shapeLocations = null;
+
         //selectedConnector is a placeholder for the last connector selected.
         //This removes the need for a dictionary mapping modelitem to connector for deletion.
         //This will change if in future we plan to support multi-select + delete.
         Connector selectedConnector;
+
         //srcConnectionPoint is required for link addition gesture to store the source of the link.
         ConnectionPoint srcConnectionPoint;
         ConnectionPoint srcConnectionPointForAutoConnect;
@@ -114,18 +175,25 @@ namespace System.Activities.Core.Presentation
                 {
                     ((ICompositeViewEvents)this).RegisterDefaultCompositeView(this);
                 }
-                DesignerView designerView = this.Context.Services.GetService<DesignerView>() as DesignerView;
+                DesignerView designerView =
+                    this.Context.Services.GetService<DesignerView>() as DesignerView;
                 if (!designerView.ContextMenu.Items.Contains(setAsStartNode))
                 {
                     designerView.ContextMenu.Items.Add(setAsStartNode);
                 }
 
-                WorkflowCommandExtensionItem item = this.Context.Items.GetValue<WorkflowCommandExtensionItem>();
+                WorkflowCommandExtensionItem item =
+                    this.Context.Items.GetValue<WorkflowCommandExtensionItem>();
                 if (item != null)
                 {
                     if (item.CommandExtensionCallback is DefaultCommandExtensionCallback)
                     {
-                        this.InputBindings.Add(new KeyBinding(FlowchartDesignerCommands.ConnectNodesCommand, new DefaultCommandExtensionCallback.ChordKeyGesture(Key.E, Key.F)));
+                        this.InputBindings.Add(
+                            new KeyBinding(
+                                FlowchartDesignerCommands.ConnectNodesCommand,
+                                new DefaultCommandExtensionCallback.ChordKeyGesture(Key.E, Key.F)
+                            )
+                        );
                     }
                 }
 
@@ -140,7 +208,8 @@ namespace System.Activities.Core.Presentation
                 {
                     ((ICompositeViewEvents)this).UnregisterDefaultCompositeView(this);
                 }
-                DesignerView designerView = this.Context.Services.GetService<DesignerView>() as DesignerView;
+                DesignerView designerView =
+                    this.Context.Services.GetService<DesignerView>() as DesignerView;
                 designerView.ContextMenu.Items.Remove(setAsStartNode);
 
                 Selection.Unsubscribe(Context, OnSelectionChanged);
@@ -216,7 +285,10 @@ namespace System.Activities.Core.Presentation
         void OnSetAsStartNodeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             ModelItem selection = this.Context.Items.GetValue<Selection>().PrimarySelection;
-            Fx.Assert(this.modelElement.ContainsKey(selection), "Selection is not contained in this container");
+            Fx.Assert(
+                this.modelElement.ContainsKey(selection),
+                "Selection is not contained in this container"
+            );
             this.ModelItem.Properties["StartNode"].SetValue(this.GetFlowElementMI(selection));
             e.Handled = true;
         }
@@ -229,7 +301,10 @@ namespace System.Activities.Core.Presentation
             setAsStartNode.Visibility = Visibility.Collapsed;
             setAsStartNode.Loaded += new RoutedEventHandler(OnSetAsStartNodeLoaded);
             //AutomationProperties
-            setAsStartNode.SetValue(System.Windows.Automation.AutomationProperties.AutomationIdProperty, "SetAsStartNodeMenuItem");
+            setAsStartNode.SetValue(
+                System.Windows.Automation.AutomationProperties.AutomationIdProperty,
+                "SetAsStartNodeMenuItem"
+            );
         }
 
         string SetAsStartNodeMenuItemHeader
@@ -242,7 +317,10 @@ namespace System.Activities.Core.Presentation
             MenuItem setAsStartNodeMenuItem = sender as MenuItem;
             setAsStartNodeMenuItem.Visibility = Visibility.Collapsed;
             Selection selection = this.Context.Items.GetValue<Selection>();
-            if (selection.SelectionCount == 1 && this.modelElement.ContainsKey(selection.PrimarySelection))
+            if (
+                selection.SelectionCount == 1
+                && this.modelElement.ContainsKey(selection.PrimarySelection)
+            )
             {
                 setAsStartNodeMenuItem.Visibility = Visibility.Visible;
             }
@@ -259,17 +337,31 @@ namespace System.Activities.Core.Presentation
             builder.AddCustomAttributes(type, new FeatureAttribute(typeof(FlowchartSizeFeature)));
 
             PropertyInfo nodesProperty = type.GetProperty("Nodes");
-            builder.AddCustomAttributes(type, nodesProperty, new ShowPropertyInOutlineViewAttribute());
+            builder.AddCustomAttributes(
+                type,
+                nodesProperty,
+                new ShowPropertyInOutlineViewAttribute()
+            );
 
             type = typeof(FlowStep);
             builder.AddCustomAttributes(type, type.GetProperty("Action"), BrowsableAttribute.No);
             builder.AddCustomAttributes(type, type.GetProperty("Next"), BrowsableAttribute.No);
 
-            builder.AddCustomAttributes(type, new ShowInOutlineViewAttribute() { PromotedProperty = "Action" });
-            builder.AddCustomAttributes(type, type.GetProperty("Next"), new ShowPropertyInOutlineViewAsSiblingAttribute());
+            builder.AddCustomAttributes(
+                type,
+                new ShowInOutlineViewAttribute() { PromotedProperty = "Action" }
+            );
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Next"),
+                new ShowPropertyInOutlineViewAsSiblingAttribute()
+            );
 
             builder.AddCustomAttributes(typeof(FlowNode), new ShowInOutlineViewAttribute());
-            builder.AddCustomAttributes(typeof(Collection<FlowNode>), new ShowInOutlineViewAttribute());
+            builder.AddCustomAttributes(
+                typeof(Collection<FlowNode>),
+                new ShowInOutlineViewAttribute()
+            );
 
             CutCopyPasteHelper.AddDisallowedTypeForCopy(typeof(StartNode));
         }
@@ -286,14 +378,24 @@ namespace System.Activities.Core.Presentation
                 element.MouseEnter -= new MouseEventHandler(ChildElement_MouseEnter);
                 element.MouseLeave -= new MouseEventHandler(ChildElement_MouseLeave);
             }
-            this.panel.LocationChanged -= new LocationChangedEventHandler(OnFreeFormPanelLocationChanged);
-            this.panel.ConnectorMoved -= new ConnectorMovedEventHandler(OnFreeFormPanelConnectorMoved);
+            this.panel.LocationChanged -= new LocationChangedEventHandler(
+                OnFreeFormPanelLocationChanged
+            );
+            this.panel.ConnectorMoved -= new ConnectorMovedEventHandler(
+                OnFreeFormPanelConnectorMoved
+            );
             this.panel.LayoutUpdated -= new EventHandler(OnFreeFormPanelLayoutUpdated);
-            this.panel.RequiredSizeChanged -= new RequiredSizeChangedEventHandler(OnFreeFormPanelRequiredSizeChanged);
+            this.panel.RequiredSizeChanged -= new RequiredSizeChangedEventHandler(
+                OnFreeFormPanelRequiredSizeChanged
+            );
             this.panel = null;
             ModelTreeManager modelTreeManager = (this.ModelItem as IModelTreeItem).ModelTreeManager;
-            modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(ModelTreeManager_EditingScopeCompleted);
-            this.ViewStateService.ViewStateChanged -= new ViewStateChangedEventHandler(OnViewStateChanged);
+            modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(
+                ModelTreeManager_EditingScopeCompleted
+            );
+            this.ViewStateService.ViewStateChanged -= new ViewStateChangedEventHandler(
+                OnViewStateChanged
+            );
         }
 
         void OnFreeFormPanelLoaded(object sender, RoutedEventArgs eventArgs)
@@ -320,18 +422,32 @@ namespace System.Activities.Core.Presentation
 
         void PopulateFlowchartChildren()
         {
-            Fx.Assert(this.ShowExpanded, "This method should be called only when the flowchart designer is shown expanded.");
+            Fx.Assert(
+                this.ShowExpanded,
+                "This method should be called only when the flowchart designer is shown expanded."
+            );
             Fx.Assert(this.panel != null, "panel cannot be null");
-            this.panel.LocationChanged += new LocationChangedEventHandler(OnFreeFormPanelLocationChanged);
-            this.panel.ConnectorMoved += new ConnectorMovedEventHandler(OnFreeFormPanelConnectorMoved);
+            this.panel.LocationChanged += new LocationChangedEventHandler(
+                OnFreeFormPanelLocationChanged
+            );
+            this.panel.ConnectorMoved += new ConnectorMovedEventHandler(
+                OnFreeFormPanelConnectorMoved
+            );
             this.panel.LayoutUpdated += new EventHandler(OnFreeFormPanelLayoutUpdated);
-            this.panel.RequiredSizeChanged += new RequiredSizeChangedEventHandler(OnFreeFormPanelRequiredSizeChanged);
+            this.panel.RequiredSizeChanged += new RequiredSizeChangedEventHandler(
+                OnFreeFormPanelRequiredSizeChanged
+            );
 
-            DesignerPerfEventProvider perfEventProvider = this.Context.Services.GetService<DesignerPerfEventProvider>();
+            DesignerPerfEventProvider perfEventProvider =
+                this.Context.Services.GetService<DesignerPerfEventProvider>();
             perfEventProvider.FlowchartDesignerLoadStart();
             ModelTreeManager modelTreeManager = (this.ModelItem as IModelTreeItem).ModelTreeManager;
-            modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(ModelTreeManager_EditingScopeCompleted);
-            this.ViewStateService.ViewStateChanged += new ViewStateChangedEventHandler(OnViewStateChanged);
+            modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(
+                ModelTreeManager_EditingScopeCompleted
+            );
+            this.ViewStateService.ViewStateChanged += new ViewStateChangedEventHandler(
+                OnViewStateChanged
+            );
 
             this.startNodeAdded = false;
             panel.Children.Clear();
@@ -339,8 +455,14 @@ namespace System.Activities.Core.Presentation
             this.flowNodeToUIElement.Clear();
             this.shapeLocations.Clear();
 
-            this.FlowchartWidth = (double)TypeDescriptor.GetProperties(this.ModelItem)[FlowchartSizeFeature.WidthPropertyName].GetValue(this.ModelItem);
-            this.FlowchartHeight = (double)TypeDescriptor.GetProperties(this.ModelItem)[FlowchartSizeFeature.HeightPropertyName].GetValue(this.ModelItem);
+            this.FlowchartWidth = (double)
+                TypeDescriptor
+                    .GetProperties(this.ModelItem)[FlowchartSizeFeature.WidthPropertyName]
+                    .GetValue(this.ModelItem);
+            this.FlowchartHeight = (double)
+                TypeDescriptor
+                    .GetProperties(this.ModelItem)[FlowchartSizeFeature.HeightPropertyName]
+                    .GetValue(this.ModelItem);
 
             CreateStartSymbol();
             AddFlowElementsToDesigner(this.ModelItem.Properties["Nodes"].Collection, true);
@@ -404,7 +526,10 @@ namespace System.Activities.Core.Presentation
 
         ModelItem GetFlowElementMI(ModelItem shapeModelItem)
         {
-            Fx.Assert(this.modelElement.ContainsKey(shapeModelItem), "The ModelItem does not exist.");
+            Fx.Assert(
+                this.modelElement.ContainsKey(shapeModelItem),
+                "The ModelItem does not exist."
+            );
             UIElement element = this.modelElement[shapeModelItem];
             ModelItem flowElementMI = FlowchartDesigner.GetFlowElementModelItem(element);
             Fx.Assert(flowElementMI != null, "FlowNode dependency property not set.");
@@ -420,8 +545,10 @@ namespace System.Activities.Core.Presentation
         ModelItem GetCorrespondingElementOnCanvas(ModelItem model)
         {
             ModelItem destModelItem = model;
-            if (typeof(FlowStep).IsAssignableFrom(model.ItemType)
-                && model.Properties["Action"].Value != null)
+            if (
+                typeof(FlowStep).IsAssignableFrom(model.ItemType)
+                && model.Properties["Action"].Value != null
+            )
             {
                 destModelItem = model.Properties["Action"].Value;
             }
@@ -438,7 +565,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (!this.isRightToLeft.HasValue)
                 {
-                    this.isRightToLeft = FreeFormPanelUtilities.IsRightToLeft(this.flowchartContentPresenter);
+                    this.isRightToLeft = FreeFormPanelUtilities.IsRightToLeft(
+                        this.flowchartContentPresenter
+                    );
                 }
 
                 return this.isRightToLeft.Value;
@@ -447,7 +576,11 @@ namespace System.Activities.Core.Presentation
 
         private void OnFlowchartGridMouseLeave(object sender, MouseEventArgs e)
         {
-            bool endLinkCreation = !IsVisualHit(sender as UIElement, sender as UIElement, e.GetPosition(sender as IInputElement));
+            bool endLinkCreation = !IsVisualHit(
+                sender as UIElement,
+                sender as UIElement,
+                e.GetPosition(sender as IInputElement)
+            );
             if (endLinkCreation)
             {
                 RemoveAdorner(this.panel, typeof(ConnectorCreationAdorner));
@@ -470,13 +603,17 @@ namespace System.Activities.Core.Presentation
                 //Remove the previous adorner.
                 RemoveAdorner(this.panel, typeof(ConnectorCreationAdorner));
                 //Add new adorner.
-                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.srcConnectionPoint.ParentDesigner);
+                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(
+                    this.srcConnectionPoint.ParentDesigner
+                );
                 Fx.Assert(adornerLayer != null, "Adorner Layer does not exist");
-                ConnectorCreationAdorner newAdorner = new ConnectorCreationAdorner(this.panel, segments);
+                ConnectorCreationAdorner newAdorner = new ConnectorCreationAdorner(
+                    this.panel,
+                    segments
+                );
                 adornerLayer.Add(newAdorner);
                 e.Handled = true;
             }
-
         }
 
         private void OnFlowchartGridMouseUp(object sender, MouseButtonEventArgs e)
@@ -488,12 +625,13 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-
-        static void SetConnectionPoints(DependencyObject obj, List<ConnectionPoint> connectionPoints)
+        static void SetConnectionPoints(
+            DependencyObject obj,
+            List<ConnectionPoint> connectionPoints
+        )
         {
             obj.SetValue(FlowchartDesigner.ConnectionPointsProperty, connectionPoints);
         }
-
 
         static void SetFalseConnectionPoint(DependencyObject obj, ConnectionPoint connectionPoint)
         {
@@ -518,7 +656,8 @@ namespace System.Activities.Core.Presentation
         void ChildElement_MouseEnter(object sender, MouseEventArgs e)
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
-            VirtualizedContainerService.VirtualizingContainer senderElement = sender as VirtualizedContainerService.VirtualizingContainer;
+            VirtualizedContainerService.VirtualizingContainer senderElement =
+                sender as VirtualizedContainerService.VirtualizingContainer;
             if ((senderElement != null || sender is StartSymbol) && !this.IsReadOnly)
             {
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer((Visual)sender);
@@ -526,12 +665,25 @@ namespace System.Activities.Core.Presentation
                 ConnectionPointsAdorner adorner = null;
                 if (sender is StartSymbol)
                 {
-                    adorner = new FlowchartConnectionPointsAdorner((UIElement)sender, ConnectionPointsToShow((UIElement)sender, this.ModelItem), false, this.IsRightToLeft);
+                    adorner = new FlowchartConnectionPointsAdorner(
+                        (UIElement)sender,
+                        ConnectionPointsToShow((UIElement)sender, this.ModelItem),
+                        false,
+                        this.IsRightToLeft
+                    );
                 }
                 else
                 {
-                    bool isSenderElementSelected = (((Selection)this.Context.Items.GetValue<Selection>()).SelectedObjects as ICollection<ModelItem>).Contains(senderElement.ModelItem);
-                    adorner = new FlowchartConnectionPointsAdorner(senderElement, ConnectionPointsToShow(senderElement, senderElement.ModelItem), isSenderElementSelected, this.IsRightToLeft);
+                    bool isSenderElementSelected = (
+                        ((Selection)this.Context.Items.GetValue<Selection>()).SelectedObjects
+                        as ICollection<ModelItem>
+                    ).Contains(senderElement.ModelItem);
+                    adorner = new FlowchartConnectionPointsAdorner(
+                        senderElement,
+                        ConnectionPointsToShow(senderElement, senderElement.ModelItem),
+                        isSenderElementSelected,
+                        this.IsRightToLeft
+                    );
                 }
                 adornerLayer.Add(adorner);
                 adorner.MouseDown += new MouseButtonEventHandler(ConnectionPoint_MouseDown);
@@ -540,14 +692,19 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-
         //This method returns which connection points should be shown on hover of a shape.
         List<ConnectionPoint> ConnectionPointsToShow(UIElement element, ModelItem model)
         {
             bool isInComingConnection = false;
 
             //This condition checks if it is an incoming connection.
-            if (this.srcConnectionPoint != null || (this.panel.connectorEditor != null && this.panel.connectorEditor.IsConnectorEndBeingMoved))
+            if (
+                this.srcConnectionPoint != null
+                || (
+                    this.panel.connectorEditor != null
+                    && this.panel.connectorEditor.IsConnectorEndBeingMoved
+                )
+            )
             {
                 isInComingConnection = true;
             }
@@ -568,7 +725,10 @@ namespace System.Activities.Core.Presentation
                     connectionPointsToShow.Add(FlowchartDesigner.GetTrueConnectionPoint(element));
                     connectionPointsToShow.Add(FlowchartDesigner.GetFalseConnectionPoint(element));
                     List<Connector> outGoingConnectors = GetOutGoingConnectors(element);
-                    if (this.panel.connectorEditor != null && this.panel.connectorEditor.IsConnectorStartBeingMoved)
+                    if (
+                        this.panel.connectorEditor != null
+                        && this.panel.connectorEditor.IsConnectorStartBeingMoved
+                    )
                     {
                         //If the start of an outgoing connector is moved, its not an outgoing connector any more.
                         outGoingConnectors.Remove(this.panel.connectorEditor.Connector);
@@ -576,11 +736,13 @@ namespace System.Activities.Core.Presentation
                     //Do not show True/False connection point if a link already exists.
                     foreach (Connector connector in outGoingConnectors)
                     {
-                        connectionPointsToShow.Remove(FreeFormPanel.GetSourceConnectionPoint(connector));
+                        connectionPointsToShow.Remove(
+                            FreeFormPanel.GetSourceConnectionPoint(connector)
+                        );
                     }
                 }
             }
-            else// Case where only one out going connector is allowed - Start and FlowStep.
+            else // Case where only one out going connector is allowed - Start and FlowStep.
             {
                 ConnectionPointKind allowedType = ConnectionPointKind.Default;
                 bool isConnectionAllowed = false;
@@ -592,7 +754,10 @@ namespace System.Activities.Core.Presentation
                 else
                 {
                     List<Connector> outGoingConnectors = GetOutGoingConnectors(element);
-                    if (this.panel.connectorEditor != null && this.panel.connectorEditor.IsConnectorStartBeingMoved)
+                    if (
+                        this.panel.connectorEditor != null
+                        && this.panel.connectorEditor.IsConnectorStartBeingMoved
+                    )
                     {
                         outGoingConnectors.Remove(this.panel.connectorEditor.Connector);
                     }
@@ -606,9 +771,14 @@ namespace System.Activities.Core.Presentation
 
                 if (isConnectionAllowed)
                 {
-                    foreach (ConnectionPoint connPoint in FlowchartDesigner.GetConnectionPoints(element))
+                    foreach (
+                        ConnectionPoint connPoint in FlowchartDesigner.GetConnectionPoints(element)
+                    )
                     {
-                        if (connPoint.PointType == allowedType || connPoint.PointType == ConnectionPointKind.Default)
+                        if (
+                            connPoint.PointType == allowedType
+                            || connPoint.PointType == ConnectionPointKind.Default
+                        )
                         {
                             connectionPointsToShow.Add(connPoint);
                         }
@@ -618,12 +788,15 @@ namespace System.Activities.Core.Presentation
             //Do not show the connection points of a selected connector.
             if (this.selectedConnector != null)
             {
-                connectionPointsToShow.Remove(FreeFormPanel.GetSourceConnectionPoint(this.selectedConnector));
-                connectionPointsToShow.Remove(FreeFormPanel.GetDestinationConnectionPoint(this.selectedConnector));
+                connectionPointsToShow.Remove(
+                    FreeFormPanel.GetSourceConnectionPoint(this.selectedConnector)
+                );
+                connectionPointsToShow.Remove(
+                    FreeFormPanel.GetDestinationConnectionPoint(this.selectedConnector)
+                );
             }
             return connectionPointsToShow;
         }
-
 
         void ChildElement_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -631,7 +804,9 @@ namespace System.Activities.Core.Presentation
             bool removeConnectionPointsAdorner = true;
             if (Mouse.DirectlyOver != null)
             {
-                removeConnectionPointsAdorner = !typeof(ConnectionPointsAdorner).IsAssignableFrom(Mouse.DirectlyOver.GetType());
+                removeConnectionPointsAdorner = !typeof(ConnectionPointsAdorner).IsAssignableFrom(
+                    Mouse.DirectlyOver.GetType()
+                );
             }
             if (removeConnectionPointsAdorner)
             {
@@ -639,11 +814,11 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-
         void ChildSizeChanged(object sender, SizeChangedEventArgs e)
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
-            VirtualizedContainerService.VirtualizingContainer container = sender as VirtualizedContainerService.VirtualizingContainer;
+            VirtualizedContainerService.VirtualizingContainer container =
+                sender as VirtualizedContainerService.VirtualizingContainer;
             if (container != null || sender is StartSymbol)
             {
                 this.internalViewStateChange = true;
@@ -653,7 +828,11 @@ namespace System.Activities.Core.Presentation
                 {
                     storageModelItem = GetFlowElementMI(container.ModelItem);
                 }
-                this.ViewStateService.StoreViewState(storageModelItem, shapeSize, ((UIElement)sender).DesiredSize);
+                this.ViewStateService.StoreViewState(
+                    storageModelItem,
+                    shapeSize,
+                    ((UIElement)sender).DesiredSize
+                );
                 this.internalViewStateChange = false;
             }
         }
@@ -672,7 +851,6 @@ namespace System.Activities.Core.Presentation
             RemoveAdorner(adornedElement, typeof(ConnectionPointsAdorner));
         }
 
-
         void ConnectionPoint_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
@@ -680,11 +858,24 @@ namespace System.Activities.Core.Presentation
             Fx.Assert(dest != null, "Adorned element is not a UIElement");
             if (this.srcConnectionPoint != null)
             {
-                ConnectionPoint destConnectionPoint = ConnectionPointHitTest(dest, e.GetPosition(this.panel));
-                if (destConnectionPoint != null && !this.srcConnectionPoint.Equals(destConnectionPoint))
+                ConnectionPoint destConnectionPoint = ConnectionPointHitTest(
+                    dest,
+                    e.GetPosition(this.panel)
+                );
+                if (
+                    destConnectionPoint != null
+                    && !this.srcConnectionPoint.Equals(destConnectionPoint)
+                )
                 {
                     string errorMessage = string.Empty;
-                    if (!CreateLinkGesture(this.srcConnectionPoint, destConnectionPoint, out errorMessage, null) && !errorMessage.Equals(string.Empty))
+                    if (
+                        !CreateLinkGesture(
+                            this.srcConnectionPoint,
+                            destConnectionPoint,
+                            out errorMessage,
+                            null
+                        ) && !errorMessage.Equals(string.Empty)
+                    )
                     {
                         ErrorReporting.ShowErrorMessage(errorMessage);
                     }
@@ -706,11 +897,16 @@ namespace System.Activities.Core.Presentation
             Dispatcher.BeginInvoke(() =>
             {
                 // Access the view state dictionary directly to avoid generating an undo item because of ViewStateAttachedPropertyFeature implementation.
-                Dictionary<string, object> viewState = WorkflowViewStateService.GetViewState(this.ModelItem.GetCurrentValue());
+                Dictionary<string, object> viewState = WorkflowViewStateService.GetViewState(
+                    this.ModelItem.GetCurrentValue()
+                );
                 if (viewState == null)
                 {
                     viewState = new Dictionary<string, object>();
-                    WorkflowViewStateService.SetViewState(this.ModelItem.GetCurrentValue(), viewState);
+                    WorkflowViewStateService.SetViewState(
+                        this.ModelItem.GetCurrentValue(),
+                        viewState
+                    );
                 }
 
                 if (e.NewRequiredSize.Width > this.FlowchartWidth)
@@ -727,7 +923,10 @@ namespace System.Activities.Core.Presentation
             });
         }
 
-        void OnFreeFormPanelLocationChanged(object sender, System.Activities.Presentation.FreeFormEditing.LocationChangedEventArgs e)
+        void OnFreeFormPanelLocationChanged(
+            object sender,
+            System.Activities.Presentation.FreeFormEditing.LocationChangedEventArgs e
+        )
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
             Fx.Assert(sender is UIElement, "Sender should be of type UIElement");
@@ -741,9 +940,17 @@ namespace System.Activities.Core.Presentation
                 ConnectionPoint source = FreeFormPanel.GetSourceConnectionPoint(movedConnector);
                 string viewStateKey = GetConnectorViewStateKey(linkModelItem, source);
                 ModelItem storageModelItem = GetConnectorViewStateStorageModelItem(linkModelItem);
-                PointCollection existingVS = this.ViewStateService.RetrieveViewState(storageModelItem, viewStateKey) as PointCollection;
-                if (existingVS != null && existingVS.Count > 0 && movedConnector.Points.Count > 0
-                    && existingVS[0].Equals(movedConnector.Points[0]) && existingVS[existingVS.Count - 1].Equals(movedConnector.Points[movedConnector.Points.Count - 1]))
+                PointCollection existingVS =
+                    this.ViewStateService.RetrieveViewState(storageModelItem, viewStateKey)
+                    as PointCollection;
+                if (
+                    existingVS != null
+                    && existingVS.Count > 0
+                    && movedConnector.Points.Count > 0
+                    && existingVS[0].Equals(movedConnector.Points[0])
+                    && existingVS[existingVS.Count - 1]
+                        .Equals(movedConnector.Points[movedConnector.Points.Count - 1])
+                )
                 {
                     isUndoableViewState = true;
                 }
@@ -753,7 +960,8 @@ namespace System.Activities.Core.Presentation
             {
                 //Save the location property of each shape on the CFx object for serialization and viewstate maintenance.
                 //This is called only when a shape without viewstate is autolayed out by the freeform panel.
-                VirtualizedContainerService.VirtualizingContainer container = sender as VirtualizedContainerService.VirtualizingContainer;
+                VirtualizedContainerService.VirtualizingContainer container =
+                    sender as VirtualizedContainerService.VirtualizingContainer;
                 if (container != null)
                 {
                     StoreShapeViewState(container, e.NewLocation);
@@ -761,8 +969,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-
-        void UpdateFlowchartOnLinkVisualMoved(ConnectionPoint knownConnectionPoint, Point newPoint, Connector movedConnector, bool isSourceKnown)
+        void UpdateFlowchartOnLinkVisualMoved(
+            ConnectionPoint knownConnectionPoint,
+            Point newPoint,
+            Connector movedConnector,
+            bool isSourceKnown
+        )
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
             HitTestResult hitTestResult = VisualTreeHelper.HitTest(this.panel, newPoint);
@@ -777,7 +989,10 @@ namespace System.Activities.Core.Presentation
             //The case where the link is dropped on a connectionpoint.
             if (this.lastConnectionPointMouseUpElement != null)
             {
-                newConnectionPoint = this.ConnectionPointHitTest(this.lastConnectionPointMouseUpElement, newPoint);
+                newConnectionPoint = this.ConnectionPointHitTest(
+                    this.lastConnectionPointMouseUpElement,
+                    newPoint
+                );
                 if (newConnectionPoint != null)
                 {
                     newViewElement = this.lastConnectionPointMouseUpElement;
@@ -786,10 +1001,15 @@ namespace System.Activities.Core.Presentation
             //The case where the link is dropped on a shape.
             if (newViewElement == null)
             {
-                newViewElement = VisualTreeUtils.FindVisualAncestor<StartSymbol>(hitTestResult.VisualHit);
+                newViewElement = VisualTreeUtils.FindVisualAncestor<StartSymbol>(
+                    hitTestResult.VisualHit
+                );
                 if (newViewElement == null)
                 {
-                    newViewElement = VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(hitTestResult.VisualHit);
+                    newViewElement =
+                        VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                            hitTestResult.VisualHit
+                        );
                 }
             }
             if (newViewElement != null)
@@ -808,24 +1028,52 @@ namespace System.Activities.Core.Presentation
                         {
                             if (newConnectionPoint == null)
                             {
-                                linkCreated = CreateLinkGesture(knownConnectionPoint, newViewElement, newPoint, out errorMessage, true, oldCaseKey);
+                                linkCreated = CreateLinkGesture(
+                                    knownConnectionPoint,
+                                    newViewElement,
+                                    newPoint,
+                                    out errorMessage,
+                                    true,
+                                    oldCaseKey
+                                );
                             }
                             else
                             {
-                                linkCreated = CreateLinkGesture(knownConnectionPoint, newConnectionPoint, out errorMessage, true, oldCaseKey);
+                                linkCreated = CreateLinkGesture(
+                                    knownConnectionPoint,
+                                    newConnectionPoint,
+                                    out errorMessage,
+                                    true,
+                                    oldCaseKey
+                                );
                             }
                         }
                         else
                         {
                             //If the Link source is dropped onto itself, we need to set the isLinkValidDueToLinkMove flag.
-                            bool isLinkValidDueToLinkMove = FreeFormPanel.GetSourceConnectionPoint(movedConnector).ParentDesigner.Equals(newViewElement);
+                            bool isLinkValidDueToLinkMove = FreeFormPanel
+                                .GetSourceConnectionPoint(movedConnector)
+                                .ParentDesigner.Equals(newViewElement);
                             if (newConnectionPoint == null)
                             {
-                                linkCreated = CreateLinkGesture(newViewElement, knownConnectionPoint, newPoint, out errorMessage, isLinkValidDueToLinkMove, oldCaseKey);
+                                linkCreated = CreateLinkGesture(
+                                    newViewElement,
+                                    knownConnectionPoint,
+                                    newPoint,
+                                    out errorMessage,
+                                    isLinkValidDueToLinkMove,
+                                    oldCaseKey
+                                );
                             }
                             else
                             {
-                                linkCreated = CreateLinkGesture(newConnectionPoint, knownConnectionPoint, out errorMessage, isLinkValidDueToLinkMove, oldCaseKey);
+                                linkCreated = CreateLinkGesture(
+                                    newConnectionPoint,
+                                    knownConnectionPoint,
+                                    out errorMessage,
+                                    isLinkValidDueToLinkMove,
+                                    oldCaseKey
+                                );
                             }
                         }
                         if (!linkCreated)
@@ -858,13 +1106,25 @@ namespace System.Activities.Core.Presentation
                 if (!e.NewConnectorLocation[0].Equals(movedConnector.Points[0]))
                 {
                     //srcMoved
-                    ConnectionPoint destConnPoint = FreeFormPanel.GetDestinationConnectionPoint(movedConnector);
-                    UpdateFlowchartOnLinkVisualMoved(destConnPoint, e.NewConnectorLocation[0], movedConnector, false);
+                    ConnectionPoint destConnPoint = FreeFormPanel.GetDestinationConnectionPoint(
+                        movedConnector
+                    );
+                    UpdateFlowchartOnLinkVisualMoved(
+                        destConnPoint,
+                        e.NewConnectorLocation[0],
+                        movedConnector,
+                        false
+                    );
                 }
-                else if (!e.NewConnectorLocation[newEndConnectorPointIndex].Equals(movedConnector.Points[movedEndConnectorPointIndex]))
+                else if (
+                    !e.NewConnectorLocation[newEndConnectorPointIndex]
+                        .Equals(movedConnector.Points[movedEndConnectorPointIndex])
+                )
                 {
                     //DestMoved
-                    ConnectionPoint srcConnPoint = FreeFormPanel.GetSourceConnectionPoint(movedConnector);
+                    ConnectionPoint srcConnPoint = FreeFormPanel.GetSourceConnectionPoint(
+                        movedConnector
+                    );
                     Point destPoint = e.NewConnectorLocation[newEndConnectorPointIndex];
                     UpdateFlowchartOnLinkVisualMoved(srcConnPoint, destPoint, movedConnector, true);
                 }
@@ -873,7 +1133,11 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        MultiBinding GetConnectionPointBinding(FrameworkElement element, double widthFraction, double heightFraction)
+        MultiBinding GetConnectionPointBinding(
+            FrameworkElement element,
+            double widthFraction,
+            double heightFraction
+        )
         {
             Fx.Assert(element != null, "FrameworkElement is null.");
             MultiBinding bindings = new MultiBinding();
@@ -886,12 +1150,20 @@ namespace System.Activities.Core.Presentation
             bindings.Bindings.Add(sizeBinding);
             bindings.Bindings.Add(locationBinding);
             bindings.Converter = new ConnectionPointConverter();
-            bindings.ConverterParameter = new List<Object> { widthFraction, heightFraction, element.Margin };
+            bindings.ConverterParameter = new List<Object>
+            {
+                widthFraction,
+                heightFraction,
+                element.Margin,
+            };
             return bindings;
         }
 
-
-        Connector GetConnector(ModelItem linkModelItem, ConnectionPoint srcConnPoint, ConnectionPoint destConnPoint)
+        Connector GetConnector(
+            ModelItem linkModelItem,
+            ConnectionPoint srcConnPoint,
+            ConnectionPoint destConnPoint
+        )
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
             ConnectorWithoutStartDot connector = new ConnectorWithoutStartDot();
@@ -900,8 +1172,12 @@ namespace System.Activities.Core.Presentation
             DesignerView.SetCommandMenuMode(connector, CommandMenuMode.NoCommandMenu);
             SetConnectorLabel(connector, srcConnPoint, linkModelItem);
 
-            connector.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(OnConnectorGotKeyboardFocus);
-            connector.RequestBringIntoView += new RequestBringIntoViewEventHandler(OnConnectorRequestBringIntoView);
+            connector.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(
+                OnConnectorGotKeyboardFocus
+            );
+            connector.RequestBringIntoView += new RequestBringIntoViewEventHandler(
+                OnConnectorRequestBringIntoView
+            );
             connector.MouseDown += new MouseButtonEventHandler(OnConnectorMouseDown);
             connector.GotFocus += new RoutedEventHandler(OnConnectorGotFocus);
             SetConnectorSrcDestConnectionPoints(connector, srcConnPoint, destConnPoint);
@@ -917,19 +1193,35 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
         }
 
-        void SetConnectorLabel(Connector connector, ConnectionPoint srcConnPoint, ModelItem linkModelItem)
+        void SetConnectorLabel(
+            Connector connector,
+            ConnectionPoint srcConnPoint,
+            ModelItem linkModelItem
+        )
         {
             BindingBase labelBinding = null;
 
             if (typeof(FlowDecision).IsAssignableFrom(linkModelItem.ItemType))
             {
-                if (FlowchartDesigner.GetTrueConnectionPoint(srcConnPoint.ParentDesigner).Equals(srcConnPoint))
+                if (
+                    FlowchartDesigner
+                        .GetTrueConnectionPoint(srcConnPoint.ParentDesigner)
+                        .Equals(srcConnPoint)
+                )
                 {
-                    labelBinding = new Binding { Source = linkModelItem, Path = new PropertyPath("TrueLabel") };
+                    labelBinding = new Binding
+                    {
+                        Source = linkModelItem,
+                        Path = new PropertyPath("TrueLabel"),
+                    };
                 }
                 else
                 {
-                    labelBinding = new Binding { Source = linkModelItem, Path = new PropertyPath("FalseLabel") };
+                    labelBinding = new Binding
+                    {
+                        Source = linkModelItem,
+                        Path = new PropertyPath("FalseLabel"),
+                    };
                 }
 
                 SetConnectorLabelToolTip(connector, labelBinding);
@@ -953,7 +1245,12 @@ namespace System.Activities.Core.Presentation
         void OnConnectorUnloaded(object sender, RoutedEventArgs e)
         {
             ModelItem primarySelection = this.Context.Items.GetValue<Selection>().PrimarySelection;
-            if (object.Equals(primarySelection, FlowchartDesigner.GetLinkModelItem(sender as DependencyObject)))
+            if (
+                object.Equals(
+                    primarySelection,
+                    FlowchartDesigner.GetLinkModelItem(sender as DependencyObject)
+                )
+            )
             {
                 if (primarySelection != null)
                 {
@@ -970,10 +1267,13 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
         }
 
-
-
         //Returns a new connector if viewstate exists, null otherwise.
-        Connector GetConnectorViewState(UIElement source, UIElement dest, ModelItem linkModelItem, ConnectionPoint sourceConnectionPoint)
+        Connector GetConnectorViewState(
+            UIElement source,
+            UIElement dest,
+            ModelItem linkModelItem,
+            ConnectionPoint sourceConnectionPoint
+        )
         {
             Fx.Assert(this.panel != null, "This code should not be hit if panel is null");
             Connector connector = null;
@@ -981,13 +1281,23 @@ namespace System.Activities.Core.Presentation
             if (typeof(FlowDecision).IsAssignableFrom(linkModelItem.ItemType))
             {
                 Fx.Assert(sourceConnectionPoint != null, "Source connection point is null.");
-                if (sourceConnectionPoint.Equals(FlowchartDesigner.GetTrueConnectionPoint(this.modelElement[linkModelItem])))
+                if (
+                    sourceConnectionPoint.Equals(
+                        FlowchartDesigner.GetTrueConnectionPoint(this.modelElement[linkModelItem])
+                    )
+                )
                 {
-                    connectorLocation = this.ViewStateService.RetrieveViewState(linkModelItem, TrueConnectorViewStateKey);
+                    connectorLocation = this.ViewStateService.RetrieveViewState(
+                        linkModelItem,
+                        TrueConnectorViewStateKey
+                    );
                 }
                 else
                 {
-                    connectorLocation = this.ViewStateService.RetrieveViewState(linkModelItem, FalseConnectorViewStateKey);
+                    connectorLocation = this.ViewStateService.RetrieveViewState(
+                        linkModelItem,
+                        FalseConnectorViewStateKey
+                    );
                 }
             }
             else if (typeof(IFlowSwitchLink).IsAssignableFrom(linkModelItem.ItemType))
@@ -1003,18 +1313,28 @@ namespace System.Activities.Core.Presentation
                     key = link.CaseName + CaseViewStateKeyAppendString;
                 }
                 //Transitioning from fake ModelItem world to real ModelItem world.
-                ModelItem realFSModelItem = (this.ModelItem as IModelTreeItem).ModelTreeManager.WrapAsModelItem(link.ParentFlowSwitch);
+                ModelItem realFSModelItem = (
+                    this.ModelItem as IModelTreeItem
+                ).ModelTreeManager.WrapAsModelItem(link.ParentFlowSwitch);
                 connectorLocation = this.ViewStateService.RetrieveViewState(realFSModelItem, key);
             }
             else
             {
-                connectorLocation = this.ViewStateService.RetrieveViewState(linkModelItem, ConnectorViewStateKey);
+                connectorLocation = this.ViewStateService.RetrieveViewState(
+                    linkModelItem,
+                    ConnectorViewStateKey
+                );
             }
             PointCollection locationPts = connectorLocation as PointCollection;
             if (locationPts != null)
             {
-                ConnectionPoint srcConnPoint, destConnPoint;
-                System.Diagnostics.Debug.WriteLine(this.isLoaded ? "About to call ConnectionPointHitTest - Loaded" : "About to call ConnectionPointHitTest - Not Loaded");
+                ConnectionPoint srcConnPoint,
+                    destConnPoint;
+                System.Diagnostics.Debug.WriteLine(
+                    this.isLoaded
+                        ? "About to call ConnectionPointHitTest - Loaded"
+                        : "About to call ConnectionPointHitTest - Not Loaded"
+                );
                 srcConnPoint = ConnectionPointHitTest(source, locationPts[0]);
                 destConnPoint = ConnectionPointHitTest(dest, locationPts[locationPts.Count - 1]);
                 //In Debug mode, the size of the designer changes due to the debug adorner(border). Because of this connection points will move and
@@ -1029,16 +1349,32 @@ namespace System.Activities.Core.Presentation
                     double dist;
                     if (srcConnPoint == null)
                     {
-                        pt = FindClosestConnectionPoint(locationPts[0], FlowchartDesigner.GetConnectionPoints(source), out dist);
-                        if (pt != null && pt.PointType != ConnectionPointKind.Incoming && dist <= DebugTimeMaxConnectorShapeDist)
+                        pt = FindClosestConnectionPoint(
+                            locationPts[0],
+                            FlowchartDesigner.GetConnectionPoints(source),
+                            out dist
+                        );
+                        if (
+                            pt != null
+                            && pt.PointType != ConnectionPointKind.Incoming
+                            && dist <= DebugTimeMaxConnectorShapeDist
+                        )
                         {
                             srcConnPoint = pt;
                         }
                     }
                     if (destConnPoint == null)
                     {
-                        pt = FindClosestConnectionPoint(locationPts[locationPts.Count - 1], FlowchartDesigner.GetConnectionPoints(dest), out dist);
-                        if (pt != null && pt.PointType != ConnectionPointKind.Outgoing && dist <= DebugTimeMaxConnectorShapeDist)
+                        pt = FindClosestConnectionPoint(
+                            locationPts[locationPts.Count - 1],
+                            FlowchartDesigner.GetConnectionPoints(dest),
+                            out dist
+                        );
+                        if (
+                            pt != null
+                            && pt.PointType != ConnectionPointKind.Outgoing
+                            && dist <= DebugTimeMaxConnectorShapeDist
+                        )
                         {
                             destConnPoint = pt;
                         }
@@ -1052,7 +1388,6 @@ namespace System.Activities.Core.Presentation
             }
             return connector;
         }
-
 
         //Marking e.Handled true for the case where a connector is clicked on.
         //This is to prevent WorkflowViewElement class from making Flowchart as the current selection.
@@ -1068,8 +1403,10 @@ namespace System.Activities.Core.Presentation
 
             if (!designerView.IsMultipleSelectionMode)
             {
-
-                if (this.panel.connectorEditor == null || !clickedLine.Equals(this.panel.connectorEditor.Connector))
+                if (
+                    this.panel.connectorEditor == null
+                    || !clickedLine.Equals(this.panel.connectorEditor.Connector)
+                )
                 {
                     this.panel.RemoveConnectorEditor();
                     this.panel.connectorEditor = new ConnectorEditor(this.panel, clickedLine);
@@ -1097,20 +1434,37 @@ namespace System.Activities.Core.Presentation
         {
             // If selection changed, remove ConnectorEditor if existed.
             // Only if the selection changed is caused by adding ConnectorEditor when OnConnectorGotFocus, ignore.
-            if (!this.updatingSelectedConnector && this.panel != null && this.panel.connectorEditor != null)
+            if (
+                !this.updatingSelectedConnector
+                && this.panel != null
+                && this.panel.connectorEditor != null
+            )
             {
                 this.panel.RemoveConnectorEditor();
             }
         }
 
         //widthFraction, heightFraction determine location of connectionpoint on the shape.
-        ConnectionPoint CreateConnectionPoint(UIElement element, double widthFraction, double heightFraction, EdgeLocation location)
+        ConnectionPoint CreateConnectionPoint(
+            UIElement element,
+            double widthFraction,
+            double heightFraction,
+            EdgeLocation location
+        )
         {
             ConnectionPoint connectionPoint = new ConnectionPoint();
             connectionPoint.EdgeLocation = location;
             connectionPoint.PointType = ConnectionPointKind.Default;
             connectionPoint.ParentDesigner = element;
-            BindingOperations.SetBinding(connectionPoint, ConnectionPoint.LocationProperty, GetConnectionPointBinding(element as FrameworkElement, widthFraction, heightFraction));
+            BindingOperations.SetBinding(
+                connectionPoint,
+                ConnectionPoint.LocationProperty,
+                GetConnectionPointBinding(
+                    element as FrameworkElement,
+                    widthFraction,
+                    heightFraction
+                )
+            );
             return connectionPoint;
         }
 
@@ -1118,48 +1472,57 @@ namespace System.Activities.Core.Presentation
         {
             element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             List<ConnectionPoint> connectionPoints;
-            if (model != null &&
-                GenericFlowSwitchHelper.IsGenericFlowSwitch(model.ItemType))
+            if (model != null && GenericFlowSwitchHelper.IsGenericFlowSwitch(model.ItemType))
             {
                 connectionPoints = new List<ConnectionPoint>
-                    {
-                        //Top edge
-                        CreateConnectionPoint(element, 0.25, 0, EdgeLocation.Top),
-                        CreateConnectionPoint(element, 0.5, 0, EdgeLocation.Top),
-                        CreateConnectionPoint(element, 0.75, 0, EdgeLocation.Top),
-                        //Right edge
-                        CreateConnectionPoint(element, 1, 0.25, EdgeLocation.Right),
-                        CreateConnectionPoint(element, 1, 0.50, EdgeLocation.Right),
-                        CreateConnectionPoint(element, 1, 0.75, EdgeLocation.Right),
-                        //Bottom edge
-                        CreateConnectionPoint(element, 0.25, 1, EdgeLocation.Bottom),
-                        CreateConnectionPoint(element, 0.5, 1, EdgeLocation.Bottom),
-                        CreateConnectionPoint(element, 0.75, 1, EdgeLocation.Bottom),
-                        //Left edge
-                        CreateConnectionPoint(element, 0, 0.25, EdgeLocation.Left),
-                        CreateConnectionPoint(element, 0, 0.50, EdgeLocation.Left),
-                        CreateConnectionPoint(element, 0, 0.75, EdgeLocation.Left),
-                    };
+                {
+                    //Top edge
+                    CreateConnectionPoint(element, 0.25, 0, EdgeLocation.Top),
+                    CreateConnectionPoint(element, 0.5, 0, EdgeLocation.Top),
+                    CreateConnectionPoint(element, 0.75, 0, EdgeLocation.Top),
+                    //Right edge
+                    CreateConnectionPoint(element, 1, 0.25, EdgeLocation.Right),
+                    CreateConnectionPoint(element, 1, 0.50, EdgeLocation.Right),
+                    CreateConnectionPoint(element, 1, 0.75, EdgeLocation.Right),
+                    //Bottom edge
+                    CreateConnectionPoint(element, 0.25, 1, EdgeLocation.Bottom),
+                    CreateConnectionPoint(element, 0.5, 1, EdgeLocation.Bottom),
+                    CreateConnectionPoint(element, 0.75, 1, EdgeLocation.Bottom),
+                    //Left edge
+                    CreateConnectionPoint(element, 0, 0.25, EdgeLocation.Left),
+                    CreateConnectionPoint(element, 0, 0.50, EdgeLocation.Left),
+                    CreateConnectionPoint(element, 0, 0.75, EdgeLocation.Left),
+                };
             }
             else if (model != null && typeof(FlowDecision).IsAssignableFrom(model.ItemType))
             {
-                ConnectionPoint trueConnectionPoint = CreateConnectionPoint(element, 0, 0.50, EdgeLocation.Left);
+                ConnectionPoint trueConnectionPoint = CreateConnectionPoint(
+                    element,
+                    0,
+                    0.50,
+                    EdgeLocation.Left
+                );
                 trueConnectionPoint.PointType = ConnectionPointKind.Outgoing;
                 FlowchartDesigner.SetTrueConnectionPoint(element, trueConnectionPoint);
 
-                ConnectionPoint falseConnectionPoint = CreateConnectionPoint(element, 1, 0.50, EdgeLocation.Right);
+                ConnectionPoint falseConnectionPoint = CreateConnectionPoint(
+                    element,
+                    1,
+                    0.50,
+                    EdgeLocation.Right
+                );
                 falseConnectionPoint.PointType = ConnectionPointKind.Outgoing;
                 FlowchartDesigner.SetFalseConnectionPoint(element, falseConnectionPoint);
 
                 connectionPoints = new List<ConnectionPoint>
-                    {
-                        //Top edge
-                        CreateConnectionPoint(element, 0.25, 0, EdgeLocation.Top),
-                        CreateConnectionPoint(element, 0.5, 0, EdgeLocation.Top),
-                        CreateConnectionPoint(element, 0.75, 0, EdgeLocation.Top),
-                        //Bottom edge
-                        CreateConnectionPoint(element, 0.5, 1, EdgeLocation.Bottom),
-                    };
+                {
+                    //Top edge
+                    CreateConnectionPoint(element, 0.25, 0, EdgeLocation.Top),
+                    CreateConnectionPoint(element, 0.5, 0, EdgeLocation.Top),
+                    CreateConnectionPoint(element, 0.75, 0, EdgeLocation.Top),
+                    //Bottom edge
+                    CreateConnectionPoint(element, 0.5, 1, EdgeLocation.Bottom),
+                };
                 connectionPoints.ForEach((point) => point.PointType = ConnectionPointKind.Incoming);
             }
             else
@@ -1167,12 +1530,12 @@ namespace System.Activities.Core.Presentation
                 //First adding top, right, bottom and left default connection points in that order on all shapes other than flowswitch.
                 //For shapes that do not need any of the points, we will remove that point explicitly.
                 connectionPoints = new List<ConnectionPoint>
-                    {
-                        CreateConnectionPoint(element, 0.5, 0, EdgeLocation.Top),
-                        CreateConnectionPoint(element, 1, 0.5, EdgeLocation.Right),
-                        CreateConnectionPoint(element, 0.5, 1, EdgeLocation.Bottom),
-                        CreateConnectionPoint(element, 0, 0.5, EdgeLocation.Left)
-                    };
+                {
+                    CreateConnectionPoint(element, 0.5, 0, EdgeLocation.Top),
+                    CreateConnectionPoint(element, 1, 0.5, EdgeLocation.Right),
+                    CreateConnectionPoint(element, 0.5, 1, EdgeLocation.Bottom),
+                    CreateConnectionPoint(element, 0, 0.5, EdgeLocation.Left),
+                };
             }
 
             if (model == null) // Start symbol: model = null
@@ -1194,8 +1557,10 @@ namespace System.Activities.Core.Presentation
                 //Select the right FlowStep ModelItem out of view.ModelItem.Parents.
                 foreach (ModelItem parentModelItem in flowElementMI.Parents)
                 {
-                    if (IsFlowNode(parentModelItem)
-                        && this.ModelItem.Properties["Nodes"].Collection.Contains(parentModelItem))
+                    if (
+                        IsFlowNode(parentModelItem)
+                        && this.ModelItem.Properties["Nodes"].Collection.Contains(parentModelItem)
+                    )
                     {
                         flowStepMI = parentModelItem;
                         break;
@@ -1206,7 +1571,6 @@ namespace System.Activities.Core.Presentation
             Fx.Assert(flowElementMI != null, "Non FlowNode present on Flowchart");
             FlowchartDesigner.SetFlowElementModelItem(view as DependencyObject, flowElementMI);
             this.flowNodeToUIElement[flowElementMI] = view;
-
         }
 
         UIElement ProcessAndGetModelView(ModelItem model)
@@ -1215,7 +1579,8 @@ namespace System.Activities.Core.Presentation
             UIElement container;
             if (!this.modelElement.TryGetValue(model, out container))
             {
-                VirtualizedContainerService containerService = this.Context.Services.GetService<VirtualizedContainerService>();
+                VirtualizedContainerService containerService =
+                    this.Context.Services.GetService<VirtualizedContainerService>();
                 Fx.Assert(this.ViewService != null, "ViewService is null");
                 container = containerService.GetContainer(model, this);
                 //WorkflowViewElement view = (WorkflowViewElement)this.ViewService.GetView(model);
@@ -1227,15 +1592,23 @@ namespace System.Activities.Core.Presentation
                 container.MouseEnter += new MouseEventHandler(ChildElement_MouseEnter);
                 container.MouseLeave += new MouseEventHandler(ChildElement_MouseLeave);
 
-                ((FrameworkElement)container).SizeChanged += new SizeChangedEventHandler(ChildSizeChanged);
+                ((FrameworkElement)container).SizeChanged += new SizeChangedEventHandler(
+                    ChildSizeChanged
+                );
                 this.modelElement.Add(model, container);
                 PopulateConnectionPoints(container, model);
                 this.SetFlowElementModelItem(container, model);
 
                 //Getting the View state information.
                 ModelItem flowElementMI = GetFlowElementMI(model);
-                object locationOfShape = this.ViewStateService.RetrieveViewState(flowElementMI, shapeLocation);
-                object sizeOfShape = this.ViewStateService.RetrieveViewState(flowElementMI, shapeSize);
+                object locationOfShape = this.ViewStateService.RetrieveViewState(
+                    flowElementMI,
+                    shapeLocation
+                );
+                object sizeOfShape = this.ViewStateService.RetrieveViewState(
+                    flowElementMI,
+                    shapeSize
+                );
                 if (locationOfShape != null)
                 {
                     Point locationPt = (Point)locationOfShape;
@@ -1246,81 +1619,135 @@ namespace System.Activities.Core.Presentation
                 {
                     Size size = (Size)sizeOfShape;
                     FreeFormPanel.SetChildSize(container, size);
-                    VirtualizedContainerService.VirtualizingContainer virtualizingContainer = container as VirtualizedContainerService.VirtualizingContainer;
+                    VirtualizedContainerService.VirtualizingContainer virtualizingContainer =
+                        container as VirtualizedContainerService.VirtualizingContainer;
                     if (virtualizingContainer != null)
                     {
                         virtualizingContainer.MinWidth = size.Width;
                         virtualizingContainer.MinHeight = size.Height;
                     }
-
                 }
             }
             return container;
         }
 
-        void GetSrcDestConnectionPoints(UIElement source, UIElement dest, out ConnectionPoint srcConnPoint, out ConnectionPoint destConnPoint, out string errorMessage)
+        void GetSrcDestConnectionPoints(
+            UIElement source,
+            UIElement dest,
+            out ConnectionPoint srcConnPoint,
+            out ConnectionPoint destConnPoint,
+            out string errorMessage
+        )
         {
             srcConnPoint = null;
             destConnPoint = null;
             errorMessage = string.Empty;
-            VirtualizedContainerService.VirtualizingContainer sourceContainer = source as VirtualizedContainerService.VirtualizingContainer;
-            if (sourceContainer != null && typeof(FlowDecision).IsAssignableFrom(sourceContainer.ModelItem.ItemType))
+            VirtualizedContainerService.VirtualizingContainer sourceContainer =
+                source as VirtualizedContainerService.VirtualizingContainer;
+            if (
+                sourceContainer != null
+                && typeof(FlowDecision).IsAssignableFrom(sourceContainer.ModelItem.ItemType)
+            )
             {
                 srcConnPoint = FindFlowDecisionSrcConnectionPoint(source, out errorMessage);
                 if (srcConnPoint != null)
                 {
-                    destConnPoint = FindBestMatchDestConnectionPoint(srcConnPoint, dest, out errorMessage);
+                    destConnPoint = FindBestMatchDestConnectionPoint(
+                        srcConnPoint,
+                        dest,
+                        out errorMessage
+                    );
                 }
             }
             else
             {
-
-                List<ConnectionPoint> srcConnectionPoints = FlowchartDesigner.GetConnectionPoints(source);
-                List<ConnectionPoint> destConnectionPoints = FlowchartDesigner.GetConnectionPoints(dest);
-                if (sourceContainer != null && GenericFlowSwitchHelper.IsGenericFlowSwitch(sourceContainer.ModelItem.ItemType))
+                List<ConnectionPoint> srcConnectionPoints = FlowchartDesigner.GetConnectionPoints(
+                    source
+                );
+                List<ConnectionPoint> destConnectionPoints = FlowchartDesigner.GetConnectionPoints(
+                    dest
+                );
+                if (
+                    sourceContainer != null
+                    && GenericFlowSwitchHelper.IsGenericFlowSwitch(
+                        sourceContainer.ModelItem.ItemType
+                    )
+                )
                 {
-                    FindBestMatchConnectionPointPair(srcConnectionPoints, destConnectionPoints, out srcConnPoint, out destConnPoint);
+                    FindBestMatchConnectionPointPair(
+                        srcConnectionPoints,
+                        destConnectionPoints,
+                        out srcConnPoint,
+                        out destConnPoint
+                    );
                 }
                 else
                 {
                     // Flowstep
-                    FindBestMatchConnectionPointPair(srcConnectionPoints, destConnectionPoints, out srcConnPoint, out destConnPoint);
+                    FindBestMatchConnectionPointPair(
+                        srcConnectionPoints,
+                        destConnectionPoints,
+                        out srcConnPoint,
+                        out destConnPoint
+                    );
                 }
             }
         }
 
         //This returns the closest non-outgoing connectionPoint on dest. Return value will be different than sourceConnectionPoint.
-        ConnectionPoint ClosestDestConnectionPoint(ConnectionPoint sourceConnectionPoint, UIElement dest, out string errorMessage)
+        ConnectionPoint ClosestDestConnectionPoint(
+            ConnectionPoint sourceConnectionPoint,
+            UIElement dest,
+            out string errorMessage
+        )
         {
             ConnectionPoint destConnectionPoint = null;
             errorMessage = string.Empty;
             if (sourceConnectionPoint.PointType != ConnectionPointKind.Incoming)
             {
-                destConnectionPoint = FindClosestConnectionPointNotOfType(sourceConnectionPoint, FlowchartDesigner.GetConnectionPoints(dest), ConnectionPointKind.Outgoing);
+                destConnectionPoint = FindClosestConnectionPointNotOfType(
+                    sourceConnectionPoint,
+                    FlowchartDesigner.GetConnectionPoints(dest),
+                    ConnectionPointKind.Outgoing
+                );
             }
             else
             {
                 errorMessage = SR.FCInvalidLink;
             }
             return destConnectionPoint;
-
         }
 
         //This returns the closest non-Incoming connectionPoint on source. Return value will be different than destConnectionPoint.
-        ConnectionPoint ClosestSrcConnectionPoint(UIElement src, ConnectionPoint destConnectionPoint, out string errorMessage)
+        ConnectionPoint ClosestSrcConnectionPoint(
+            UIElement src,
+            ConnectionPoint destConnectionPoint,
+            out string errorMessage
+        )
         {
             ConnectionPoint sourceConnectionPoint = null;
             errorMessage = string.Empty;
             if (destConnectionPoint.PointType != ConnectionPointKind.Outgoing)
             {
-                VirtualizedContainerService.VirtualizingContainer srcContainer = src as VirtualizedContainerService.VirtualizingContainer;
-                if (srcContainer != null && typeof(FlowDecision).IsAssignableFrom(srcContainer.ModelItem.ItemType))
+                VirtualizedContainerService.VirtualizingContainer srcContainer =
+                    src as VirtualizedContainerService.VirtualizingContainer;
+                if (
+                    srcContainer != null
+                    && typeof(FlowDecision).IsAssignableFrom(srcContainer.ModelItem.ItemType)
+                )
                 {
-                    sourceConnectionPoint = FindFlowDecisionSrcConnectionPoint(src, out errorMessage);
+                    sourceConnectionPoint = FindFlowDecisionSrcConnectionPoint(
+                        src,
+                        out errorMessage
+                    );
                 }
                 else
                 {
-                    sourceConnectionPoint = FindClosestConnectionPointNotOfType(destConnectionPoint, FlowchartDesigner.GetConnectionPoints(src), ConnectionPointKind.Incoming);
+                    sourceConnectionPoint = FindClosestConnectionPointNotOfType(
+                        destConnectionPoint,
+                        FlowchartDesigner.GetConnectionPoints(src),
+                        ConnectionPointKind.Incoming
+                    );
                 }
             }
             else
@@ -1331,12 +1758,19 @@ namespace System.Activities.Core.Presentation
         }
 
         //Priority of selection: 1st true then false.
-        ConnectionPoint FindFlowDecisionSrcConnectionPoint(UIElement decisionDesigner, out string errorMessage)
+        ConnectionPoint FindFlowDecisionSrcConnectionPoint(
+            UIElement decisionDesigner,
+            out string errorMessage
+        )
         {
             ConnectionPoint sourceConnectionPoint = null;
             errorMessage = string.Empty;
-            ConnectionPoint trueConnPoint = FlowchartDesigner.GetTrueConnectionPoint(decisionDesigner);
-            ConnectionPoint falseConnPoint = FlowchartDesigner.GetFalseConnectionPoint(decisionDesigner);
+            ConnectionPoint trueConnPoint = FlowchartDesigner.GetTrueConnectionPoint(
+                decisionDesigner
+            );
+            ConnectionPoint falseConnPoint = FlowchartDesigner.GetFalseConnectionPoint(
+                decisionDesigner
+            );
             if (trueConnPoint.AttachedConnectors.Count == 0)
             {
                 sourceConnectionPoint = trueConnPoint;
@@ -1352,7 +1786,11 @@ namespace System.Activities.Core.Presentation
             return sourceConnectionPoint;
         }
 
-        void SetConnectorSrcDestConnectionPoints(Connector connector, ConnectionPoint sourceConnectionPoint, ConnectionPoint destConnectionPoint)
+        void SetConnectorSrcDestConnectionPoints(
+            Connector connector,
+            ConnectionPoint sourceConnectionPoint,
+            ConnectionPoint destConnectionPoint
+        )
         {
             FreeFormPanel.SetSourceConnectionPoint(connector, sourceConnectionPoint);
             FreeFormPanel.SetDestinationConnectionPoint(connector, destConnectionPoint);
@@ -1361,18 +1799,32 @@ namespace System.Activities.Core.Presentation
         }
 
         //Save the connector.Points property on the CFx object for serialization and viewstate maintenance.
-        void StoreConnectorViewState(ModelItem linkModelItem, PointCollection viewState, ConnectionPoint srcConnPoint, bool isUndoableViewState)
+        void StoreConnectorViewState(
+            ModelItem linkModelItem,
+            PointCollection viewState,
+            ConnectionPoint srcConnPoint,
+            bool isUndoableViewState
+        )
         {
             ModelItem storageModelItem = GetConnectorViewStateStorageModelItem(linkModelItem);
             string viewStateKey = GetConnectorViewStateKey(linkModelItem, srcConnPoint);
             StoreConnectorViewState(storageModelItem, viewStateKey, viewState, isUndoableViewState);
         }
 
-        void StoreConnectorViewState(ModelItem storageModelItem, string viewStateKey, PointCollection viewState, bool isUndoableViewState)
+        void StoreConnectorViewState(
+            ModelItem storageModelItem,
+            string viewStateKey,
+            PointCollection viewState,
+            bool isUndoableViewState
+        )
         {
             if (isUndoableViewState)
             {
-                this.ViewStateService.StoreViewStateWithUndo(storageModelItem, viewStateKey, viewState);
+                this.ViewStateService.StoreViewStateWithUndo(
+                    storageModelItem,
+                    viewStateKey,
+                    viewState
+                );
             }
             else
             {
@@ -1380,7 +1832,11 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        void StoreConnectorViewState(ModelItem linkModelItem, PointCollection viewState, ConnectionPoint srcConnPoint)
+        void StoreConnectorViewState(
+            ModelItem linkModelItem,
+            PointCollection viewState,
+            ConnectionPoint srcConnPoint
+        )
         {
             StoreConnectorViewState(linkModelItem, viewState, srcConnPoint, true);
         }
@@ -1391,7 +1847,12 @@ namespace System.Activities.Core.Presentation
             //Such location changed events are a result of changes already commited in the UI. Hence we do not want to react to such view state changes.
             //Using internalViewStateChange flag for that purpose.
             this.internalViewStateChange = true;
-            this.StoreConnectorViewState(FlowchartDesigner.GetLinkModelItem(connector), connector.Points, FreeFormPanel.GetSourceConnectionPoint(connector), isUndoableViewState);
+            this.StoreConnectorViewState(
+                FlowchartDesigner.GetLinkModelItem(connector),
+                connector.Points,
+                FreeFormPanel.GetSourceConnectionPoint(connector),
+                isUndoableViewState
+            );
             this.internalViewStateChange = false;
         }
 
@@ -1400,7 +1861,11 @@ namespace System.Activities.Core.Presentation
             string viewStateKey = ConnectorViewStateKey;
             if ((typeof(FlowDecision).IsAssignableFrom(linkModelItem.ItemType)))
             {
-                if (srcConnPoint.Equals(FlowchartDesigner.GetTrueConnectionPoint(this.modelElement[linkModelItem])))
+                if (
+                    srcConnPoint.Equals(
+                        FlowchartDesigner.GetTrueConnectionPoint(this.modelElement[linkModelItem])
+                    )
+                )
                 {
                     viewStateKey = TrueConnectorViewStateKey;
                 }
@@ -1432,11 +1897,12 @@ namespace System.Activities.Core.Presentation
                 IFlowSwitchLink link = (IFlowSwitchLink)linkModelItem.GetCurrentValue();
                 //Getting FlowSwitch ModelItem since there is no CFx object for linkModelItem.
                 IModelTreeItem modelTreeItem = this.ModelItem as IModelTreeItem;
-                storageModelItem = modelTreeItem.ModelTreeManager.WrapAsModelItem(link.ParentFlowSwitch);
+                storageModelItem = modelTreeItem.ModelTreeManager.WrapAsModelItem(
+                    link.ParentFlowSwitch
+                );
             }
             return storageModelItem;
         }
-
 
         //Save the shape location on the CFx object for serialization and viewstate maintenance.
         void StoreShapeViewState(UIElement movedElement, Point newLocation)
@@ -1448,7 +1914,9 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                ModelItem model = ((VirtualizedContainerService.VirtualizingContainer)movedElement).ModelItem;
+                ModelItem model = (
+                    (VirtualizedContainerService.VirtualizingContainer)movedElement
+                ).ModelItem;
                 storageModelItem = GetFlowElementMI(model);
             }
             StoreShapeViewState(storageModelItem, newLocation);
@@ -1458,7 +1926,11 @@ namespace System.Activities.Core.Presentation
         {
             if (this.ViewStateService.RetrieveViewState(storageModelItem, shapeLocation) != null)
             {
-                this.ViewStateService.StoreViewStateWithUndo(storageModelItem, shapeLocation, newLocation);
+                this.ViewStateService.StoreViewStateWithUndo(
+                    storageModelItem,
+                    shapeLocation,
+                    newLocation
+                );
             }
             else
             {
@@ -1466,8 +1938,13 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        void PerformInternalMove(UIElement movedElement, Point newPoint, Point? shapeAnchorPoint,
-            AutoConnectDirections autoConnectDirection, Connector connectorToSplit)
+        void PerformInternalMove(
+            UIElement movedElement,
+            Point newPoint,
+            Point? shapeAnchorPoint,
+            AutoConnectDirections autoConnectDirection,
+            Connector connectorToSplit
+        )
         {
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.FCLinkMove))
             {
@@ -1476,21 +1953,36 @@ namespace System.Activities.Core.Presentation
                 Size size = FreeFormPanel.GetChildSize(movedElement);
                 if (autoConnectDirection != AutoConnectDirections.None)
                 {
-                    shapeLocation = this.CalculateDropLocationForAutoConnect(autoConnectDirection, size);
+                    shapeLocation = this.CalculateDropLocationForAutoConnect(
+                        autoConnectDirection,
+                        size
+                    );
                 }
                 else if (shapeAnchorPoint.HasValue)
                 {
-                    shapeLocation = SnapVisualToGrid(movedElement, newPoint, shapeAnchorPoint.Value, true);
+                    shapeLocation = SnapVisualToGrid(
+                        movedElement,
+                        newPoint,
+                        shapeAnchorPoint.Value,
+                        true
+                    );
                 }
                 else
                 {
-                    Fx.Assert(newPoint.X.IsNoLessThan(0) && newPoint.Y.IsNoLessThan(0),
-                        "newPoint is negative");
+                    Fx.Assert(
+                        newPoint.X.IsNoLessThan(0) && newPoint.Y.IsNoLessThan(0),
+                        "newPoint is negative"
+                    );
                     shapeLocation = newPoint;
                 }
                 if (connectorToSplit != null)
                 {
-                    shapeLocation = this.CalculateDropLocationForAutoSplit(newPoint, shapeLocation, connectorToSplit, size);
+                    shapeLocation = this.CalculateDropLocationForAutoSplit(
+                        newPoint,
+                        shapeLocation,
+                        connectorToSplit,
+                        size
+                    );
                 }
                 StoreShapeViewState(movedElement, shapeLocation);
                 RerouteAttachedConnectors(movedElement);
@@ -1513,14 +2005,23 @@ namespace System.Activities.Core.Presentation
 
             //Nulling out the PointCollection so that it doesn't interfere in line routing.
             connector.Points = new PointCollection();
-            PointCollection viewState = new PointCollection(ConnectorRouter.Route(this.panel, source, destination));
-            StoreConnectorViewState(FlowchartDesigner.GetLinkModelItem(connector), viewState, source, withUndo);
+            PointCollection viewState = new PointCollection(
+                ConnectorRouter.Route(this.panel, source, destination)
+            );
+            StoreConnectorViewState(
+                FlowchartDesigner.GetLinkModelItem(connector),
+                viewState,
+                source,
+                withUndo
+            );
         }
 
-
-
         // Returns the last dropped item - used for auto-connect and auto-split where only one item is allowed
-        ModelItem DoFlowchartGridDrop(DragEventArgs e, AutoConnectDirections autoConnectDirection, Connector connectorToSplit)
+        ModelItem DoFlowchartGridDrop(
+            DragEventArgs e,
+            AutoConnectDirections autoConnectDirection,
+            Connector connectorToSplit
+        )
         {
             ModelItem droppedModelItem = null;
             ModelItem newFlowStepMI = null;
@@ -1530,15 +2031,18 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
             List<WorkflowViewElement> movedViewElements = new List<WorkflowViewElement>();
             ShapeOffsetter shapeOffsetter = new ShapeOffsetter();
-            Dictionary<WorkflowViewElement, Point> relativeLocations = DragDropHelper.GetDraggedViewElementRelativeLocations(e);
+            Dictionary<WorkflowViewElement, Point> relativeLocations =
+                DragDropHelper.GetDraggedViewElementRelativeLocations(e);
             ModelItem modelItemDroppedFromToolBox = null;
             Dictionary<object, FlowNode> objToNewFlowNodeMap = null;
             Dictionary<FlowNode, ModelItem> flowNodeModelItemMap = null;
             Dictionary<FlowNode, FlowNode> oldNewFlowNodeMap = null;
-            this.PrepareForDrop(droppedObjects,
+            this.PrepareForDrop(
+                droppedObjects,
                 out objToNewFlowNodeMap,
                 out flowNodeModelItemMap,
-                out oldNewFlowNodeMap);
+                out oldNewFlowNodeMap
+            );
             bool shouldStoreCurrentSizeViewState = true;
             foreach (object droppedObject in droppedObjects)
             {
@@ -1551,24 +2055,24 @@ namespace System.Activities.Core.Presentation
                 // archor point
                 Point anchorPoint = DragDropHelper.GetDragDropAnchorPoint(e);
 
-
-                ICompositeView srcContainer = droppedModelItem != null
-                    ? DragDropHelper.GetCompositeView(droppedModelItem.View as WorkflowViewElement) as ICompositeView
-                    : null;
+                ICompositeView srcContainer =
+                    droppedModelItem != null
+                        ? DragDropHelper.GetCompositeView(
+                            droppedModelItem.View as WorkflowViewElement
+                        ) as ICompositeView
+                        : null;
                 bool keepRelativePosition = srcContainer is FlowchartDesigner;
                 // This is the case of dragging from toolbox
                 if (anchorPoint.X < 0 && anchorPoint.Y < 0)
                 {
                     keepRelativePosition = false;
                 }
-
                 // This is the case of dragging from the designer surface
                 else if (droppedModelItem != null)
                 {
                     WorkflowViewElement view = (WorkflowViewElement)droppedModelItem.View;
                     anchorPoint.Offset(-relativeLocations[view].X, -relativeLocations[view].Y);
                 }
-
 
                 if (droppedModelItem != null && srcContainer != null && srcContainer.Equals(this))
                 {
@@ -1579,16 +2083,23 @@ namespace System.Activities.Core.Presentation
                         shouldStoreCurrentSizeViewState = false;
                     }
                     //InternalMove
-                    PerformInternalMove(modelElement[droppedModelItem], e.GetPosition(this.panel), anchorPoint, autoConnectDirection, connectorToSplit);
+                    PerformInternalMove(
+                        modelElement[droppedModelItem],
+                        e.GetPosition(this.panel),
+                        anchorPoint,
+                        autoConnectDirection,
+                        connectorToSplit
+                    );
                 }
                 else
                 {
                     //External model Item drop.
                     if (droppedModelItem != null)
                     {
-                        if ((IsFlowStepAction(droppedModelItem)
-                            || IsFlowNode(droppedModelItem))
-                            && !IsParentOf(droppedModelItem, this.ModelItem))
+                        if (
+                            (IsFlowStepAction(droppedModelItem) || IsFlowNode(droppedModelItem))
+                            && !IsParentOf(droppedModelItem, this.ModelItem)
+                        )
                         {
                             if (shouldStoreCurrentSizeViewState)
                             {
@@ -1601,14 +2112,16 @@ namespace System.Activities.Core.Presentation
                             ModelItem flowElementMI;
                             if (flowNodeModelItemMap.TryGetValue(flowElement, out flowElementMI))
                             {
-                                // FlowNode comes from some other flowchart. 
+                                // FlowNode comes from some other flowchart.
                                 this.ModelItem.Properties["Nodes"].Collection.Add(flowElementMI);
                             }
                             else
                             {
                                 // FlowNode is a new created one, which means this is an Activity dragged
                                 // from somewhere else, outside of Flowchart.
-                                flowElementMI = this.ModelItem.Properties["Nodes"].Collection.Add(flowElement);
+                                flowElementMI = this
+                                    .ModelItem.Properties["Nodes"]
+                                    .Collection.Add(flowElement);
                                 flowNodeModelItemMap[flowElement] = flowElementMI;
                             }
                             newFlowStepMI = flowElementMI;
@@ -1634,7 +2147,10 @@ namespace System.Activities.Core.Presentation
                         // dropped object (i.e. Bug 198290).  Therefore, when the object is dropped externally
                         // the FC should erases its previous hint size, forcing the FC to recompute an appropriate
                         // size based on the workflowelementview size.
-                        VirtualizedContainerService.SetHintSize(droppedModelItem.GetCurrentValue(), null);
+                        VirtualizedContainerService.SetHintSize(
+                            droppedModelItem.GetCurrentValue(),
+                            null
+                        );
                     }
                     //Tool box drop.
                     else
@@ -1650,7 +2166,9 @@ namespace System.Activities.Core.Presentation
                                 shouldStoreCurrentSizeViewState = false;
                             }
 
-                            newFlowStepMI = this.ModelItem.Properties["Nodes"].Collection.Add(flowStep);
+                            newFlowStepMI = this
+                                .ModelItem.Properties["Nodes"]
+                                .Collection.Add(flowStep);
                             droppedModelItem = newFlowStepMI.Properties["Action"].Value;
                         }
                         else if (typeof(FlowNode).IsAssignableFrom(droppedObject.GetType()))
@@ -1661,7 +2179,9 @@ namespace System.Activities.Core.Presentation
                                 this.StoreCurrentSizeViewStateWithUndo();
                                 shouldStoreCurrentSizeViewState = false;
                             }
-                            droppedModelItem = this.ModelItem.Properties["Nodes"].Collection.Add(droppedObject);
+                            droppedModelItem = this
+                                .ModelItem.Properties["Nodes"]
+                                .Collection.Add(droppedObject);
                             newFlowStepMI = droppedModelItem;
                         }
 
@@ -1669,7 +2189,7 @@ namespace System.Activities.Core.Presentation
                         // If multi-drop from tool box, use an array here.
                         modelItemDroppedFromToolBox = droppedModelItem;
                         keepRelativePosition = false;
-                    } // tool box 
+                    } // tool box
 
                     WorkflowViewElement view = droppedModelItem.View as WorkflowViewElement;
                     if (view == null || view.ExpandState)
@@ -1681,14 +2201,16 @@ namespace System.Activities.Core.Presentation
 
                     if (view != null)
                     {
-                        PostDropUpdateViewState(view,
+                        PostDropUpdateViewState(
+                            view,
                             newFlowStepMI,
                             autoConnectDirection,
                             connectorToSplit,
                             e.GetPosition(this.panel),
                             anchorPoint,
                             keepRelativePosition,
-                            shapeOffsetter);
+                            shapeOffsetter
+                        );
                     }
                 } // external move
             } // foreach
@@ -1697,9 +2219,9 @@ namespace System.Activities.Core.Presentation
             // The re-map here is different from the remaping in copy/paste.
             // In copy paste, all the values are copied. but here, some value are
             // set by Properties["key"].SetValue().
-            // Don't move this into PrepareMove. Some value setting is added to 
+            // Don't move this into PrepareMove. Some value setting is added to
             // Change. So the operation here will decide the order of Change.Apply().
-            // PropertyChange in some case, must happen after ModelItem is moved to 
+            // PropertyChange in some case, must happen after ModelItem is moved to
             // new places.
             foreach (FlowNode flowNode in oldNewFlowNodeMap.Keys)
             {
@@ -1707,27 +2229,32 @@ namespace System.Activities.Core.Presentation
             }
 
             DragDropHelper.SetDragDropMovedViewElements(e, movedViewElements);
-            
+
             //Backward compatibility for 4.0
             if (droppedObjects.Count() == 1 && movedViewElements.Count == 1)
             {
-                #pragma warning disable 618
+#pragma warning disable 618
                 DragDropHelper.SetDragDropCompletedEffects(e, DragDropEffects.Move);
-                #pragma warning restore 618
+#pragma warning restore 618
             }
 
             if (modelItemDroppedFromToolBox != null)
             {
                 // if it is dropped from toolbox, select
-                this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (Action)(() =>
-                {
-                    UIElement view = (UIElement)(modelItemDroppedFromToolBox.View);
-                    if (view != null)
-                    {
-                        Keyboard.Focus(view);
-                        Selection.SelectOnly(this.Context, modelItemDroppedFromToolBox);
-                    }
-                }));
+                this.Dispatcher.BeginInvoke(
+                    DispatcherPriority.ApplicationIdle,
+                    (Action)(
+                        () =>
+                        {
+                            UIElement view = (UIElement)(modelItemDroppedFromToolBox.View);
+                            if (view != null)
+                            {
+                                Keyboard.Focus(view);
+                                Selection.SelectOnly(this.Context, modelItemDroppedFromToolBox);
+                            }
+                        }
+                    )
+                );
             }
 
             if (droppedModelItem != null)
@@ -1753,42 +2280,67 @@ namespace System.Activities.Core.Presentation
             return null;
         }
 
-        Point CalculateDropLocationForAutoConnect(AutoConnectDirections autoConnectDirection, Size droppedSize)
+        Point CalculateDropLocationForAutoConnect(
+            AutoConnectDirections autoConnectDirection,
+            Size droppedSize
+        )
         {
-            return AutoConnectHelper.CalculateDropLocation(droppedSize, this.panel.CurrentAutoConnectTarget, autoConnectDirection, this.shapeLocations);
+            return AutoConnectHelper.CalculateDropLocation(
+                droppedSize,
+                this.panel.CurrentAutoConnectTarget,
+                autoConnectDirection,
+                this.shapeLocations
+            );
         }
 
-        Point CalculateDropLocationForAutoSplit(Point mousePosition, Point originalDropLocation, Connector connector, Size droppedSize)
+        Point CalculateDropLocationForAutoSplit(
+            Point mousePosition,
+            Point originalDropLocation,
+            Connector connector,
+            Size droppedSize
+        )
         {
-            return AutoSplitHelper.CalculateDropLocation(mousePosition, originalDropLocation, connector, droppedSize, this.shapeLocations);
+            return AutoSplitHelper.CalculateDropLocation(
+                mousePosition,
+                originalDropLocation,
+                connector,
+                droppedSize,
+                this.shapeLocations
+            );
         }
 
         private void OnFlowchartGridDrop(object sender, DragEventArgs e)
         {
-            ModelItemHelper.TryCreateImmediateEditingScopeAndExecute(this.ModelItem.GetEditingContext(), System.Activities.Presentation.SR.CollectionAddEditingScopeDescription, (es) =>
+            ModelItemHelper.TryCreateImmediateEditingScopeAndExecute(
+                this.ModelItem.GetEditingContext(),
+                System.Activities.Presentation.SR.CollectionAddEditingScopeDescription,
+                (es) =>
                 {
                     this.DoFlowchartGridDrop(e, AutoConnectDirections.None, null);
                     if (es != null)
                     {
                         es.Complete();
                     }
-                });
+                }
+            );
         }
 
         // Prepare some maps for drag/drop in Flowchart
-        // objToNewFlowNodeMap : 
+        // objToNewFlowNodeMap :
         //    <DroppedObject, FlowNodeToBeDropInDestFlowchart>
-        // flowNodeNewModelItemMap : 
+        // flowNodeNewModelItemMap :
         //    <OldFlowNode, NewModelItemInDestFlowchart>
         //    For FlowSwitch/FlowDecision: NewModelItemINDestFlowchart is the source ModelItem.
         //    For FlowStep, leeve NewModeItemInDestFlowchart Null, this value could not be decided here.
-        // flowNodeMovingMap: 
+        // flowNodeMovingMap:
         //    <OldFlowNode, NewFlowNode>
         //    If a droppedObject is not a flownode, say it is from tool box, this value is empty.
-        private void PrepareForDrop(IEnumerable<object> objects,
-                out Dictionary<object, FlowNode> objToNewFlowNodeMap,
-                out Dictionary<FlowNode, ModelItem> flowNodeNewModelItemMap,
-                out Dictionary<FlowNode, FlowNode> oldNewFlowNodeMap)
+        private void PrepareForDrop(
+            IEnumerable<object> objects,
+            out Dictionary<object, FlowNode> objToNewFlowNodeMap,
+            out Dictionary<FlowNode, ModelItem> flowNodeNewModelItemMap,
+            out Dictionary<FlowNode, FlowNode> oldNewFlowNodeMap
+        )
         {
             Fx.Assert(objects != null, "dropping null objects");
             objToNewFlowNodeMap = new Dictionary<object, FlowNode>();
@@ -1811,7 +2363,9 @@ namespace System.Activities.Core.Presentation
                     continue;
                 }
 
-                ICompositeView compositeView = DragDropHelper.GetCompositeView(modelItem.View as WorkflowViewElement) as ICompositeView;
+                ICompositeView compositeView =
+                    DragDropHelper.GetCompositeView(modelItem.View as WorkflowViewElement)
+                    as ICompositeView;
                 if (compositeView == null)
                 {
                     continue;
@@ -1824,12 +2378,12 @@ namespace System.Activities.Core.Presentation
                     continue;
                 }
 
-                if (!IsFlowStepAction(modelItem)
-                    && !IsFlowNode(modelItem))
+                if (!IsFlowStepAction(modelItem) && !IsFlowNode(modelItem))
                 {
-
-                    Fx.Assert(modelItem.ItemType.Equals(typeof(StartNode)),
-                        "should not happen. Not a Activity, FlowNode or StartSymbol");
+                    Fx.Assert(
+                        modelItem.ItemType.Equals(typeof(StartNode)),
+                        "should not happen. Not a Activity, FlowNode or StartSymbol"
+                    );
                     // don't do anything if the dropped object is either an Activity or
                     // Flownode.
                     continue;
@@ -1851,7 +2405,7 @@ namespace System.Activities.Core.Presentation
                 }
                 else
                 {
-                    // The object is moved from somewhere else, say Sequence. 
+                    // The object is moved from somewhere else, say Sequence.
                     // We create a FlowStep for it.
                     FlowStep flowStep = new FlowStep();
                     flowStep.Action = (Activity)modelItem.GetCurrentValue();
@@ -1862,25 +2416,37 @@ namespace System.Activities.Core.Presentation
         }
 
         // Move the object to correct position after drop
-        private void PostDropUpdateViewState(WorkflowViewElement view,
+        private void PostDropUpdateViewState(
+            WorkflowViewElement view,
             ModelItem flownodeMI,
             AutoConnectDirections autoConnectDirection,
             Connector connectorToSplit,
             Point newPoint,
             Point anchorPoint,
             bool keepRelativePosition,
-            ShapeOffsetter shapeOffsetter)
+            ShapeOffsetter shapeOffsetter
+        )
         {
-            Fx.Assert((view != null && flownodeMI != null),
-            "movedItem != null && flownodeMI != null");
+            Fx.Assert(
+                (view != null && flownodeMI != null),
+                "movedItem != null && flownodeMI != null"
+            );
             Point shapeLocationPtr;
             if (autoConnectDirection != AutoConnectDirections.None)
             {
-                shapeLocationPtr = this.CalculateDropLocationForAutoConnect(autoConnectDirection, view.DesiredSize);
+                shapeLocationPtr = this.CalculateDropLocationForAutoConnect(
+                    autoConnectDirection,
+                    view.DesiredSize
+                );
             }
             else
             {
-                shapeLocationPtr = SnapVisualToGrid(view, newPoint, anchorPoint, keepRelativePosition);
+                shapeLocationPtr = SnapVisualToGrid(
+                    view,
+                    newPoint,
+                    anchorPoint,
+                    keepRelativePosition
+                );
                 if (!keepRelativePosition)
                 {
                     // To avoid overlaps
@@ -1890,10 +2456,15 @@ namespace System.Activities.Core.Presentation
 
             if (connectorToSplit != null)
             {
-                shapeLocationPtr = this.CalculateDropLocationForAutoSplit(newPoint, shapeLocationPtr, connectorToSplit, view.DesiredSize);
+                shapeLocationPtr = this.CalculateDropLocationForAutoSplit(
+                    newPoint,
+                    shapeLocationPtr,
+                    connectorToSplit,
+                    view.DesiredSize
+                );
             }
 
-            // 
+            //
             if (keepRelativePosition)
             {
                 this.OffsetDroppedItemToNewPosition(flownodeMI, shapeLocationPtr);
@@ -1906,7 +2477,10 @@ namespace System.Activities.Core.Presentation
 
         private void OffsetDroppedItemToNewPosition(ModelItem flownodeMI, Point newLocationPtr)
         {
-            object locationOfShape = this.ViewStateService.RetrieveViewState(flownodeMI, shapeLocation);
+            object locationOfShape = this.ViewStateService.RetrieveViewState(
+                flownodeMI,
+                shapeLocation
+            );
             if (locationOfShape == null)
             {
                 return;
@@ -1928,7 +2502,13 @@ namespace System.Activities.Core.Presentation
 
         private bool IsDropAllowed(DragEventArgs e)
         {
-            return DragDropHelper.AllowDrop(e.Data, this.Context, typeof(Activity), typeof(FlowNode), typeof(StartNode));
+            return DragDropHelper.AllowDrop(
+                e.Data,
+                this.Context,
+                typeof(Activity),
+                typeof(FlowNode),
+                typeof(StartNode)
+            );
         }
 
         private void OnFlowchartGridDrag(object sender, DragEventArgs e)
@@ -1945,11 +2525,13 @@ namespace System.Activities.Core.Presentation
 
         static bool IsLinkModelItemSelectable(ModelItem linkModelItem)
         {
-            return linkModelItem != null &&
+            return linkModelItem != null
+                &&
                 // link from FlowDecision
-                   !typeof(FlowDecision).IsAssignableFrom(linkModelItem.ItemType) &&
+                !typeof(FlowDecision).IsAssignableFrom(linkModelItem.ItemType)
+                &&
                 // link from StartNode
-                   !typeof(Flowchart).IsAssignableFrom(linkModelItem.ItemType);
+                !typeof(Flowchart).IsAssignableFrom(linkModelItem.ItemType);
         }
 
         private void OnFlowchartGridKeyDown(object sender, KeyEventArgs e)
@@ -1962,22 +2544,37 @@ namespace System.Activities.Core.Presentation
             }
 
             Selection currentSelection = this.Context.Items.GetValue<Selection>();
-            if (e.Key == Key.Delete && this.selectedConnector != null && currentSelection.SelectionCount <= 1)
+            if (
+                e.Key == Key.Delete
+                && this.selectedConnector != null
+                && currentSelection.SelectionCount <= 1
+            )
             {
                 // process the delete if only the connector is selected
                 ModelItem primarySelection = currentSelection.PrimarySelection;
                 //Delete connector
-                ModelItem linkModelItem = FlowchartDesigner.GetLinkModelItem(this.selectedConnector);
-                if ((primarySelection == null && !IsLinkModelItemSelectable(linkModelItem)) ||
-                    object.Equals(primarySelection, linkModelItem))
+                ModelItem linkModelItem = FlowchartDesigner.GetLinkModelItem(
+                    this.selectedConnector
+                );
+                if (
+                    (primarySelection == null && !IsLinkModelItemSelectable(linkModelItem))
+                    || object.Equals(primarySelection, linkModelItem)
+                )
                 {
                     DeleteLink(this.selectedConnector);
                     this.selectedConnector = null;
                     e.Handled = true;
                 }
             }
-            else if ((new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
-                && currentSelection.SelectedObjects.All<ModelItem>((p) => { return this.modelElement.ContainsKey(p); }))
+            else if (
+                (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
+                && currentSelection.SelectedObjects.All<ModelItem>(
+                    (p) =>
+                    {
+                        return this.modelElement.ContainsKey(p);
+                    }
+                )
+            )
             {
                 KeyboardMove(e.Key);
                 e.Handled = true;
@@ -2003,7 +2600,11 @@ namespace System.Activities.Core.Presentation
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
                 bool shouldStoreCurrentSizeViewState = true;
-                foreach (ModelItem selectedModelItem in this.Context.Items.GetValue<Selection>().SelectedObjects)
+                foreach (
+                    ModelItem selectedModelItem in this
+                        .Context.Items.GetValue<Selection>()
+                        .SelectedObjects
+                )
                 {
                     UIElement shapeToMove = this.modelElement[selectedModelItem];
                     Point currentLocation = FreeFormPanel.GetLocation(shapeToMove);
@@ -2024,7 +2625,13 @@ namespace System.Activities.Core.Presentation
                         this.StoreCurrentSizeViewStateWithUndo();
                         shouldStoreCurrentSizeViewState = false;
                     }
-                    PerformInternalMove(shapeToMove, newLocation, null, AutoConnectDirections.None, null);
+                    PerformInternalMove(
+                        shapeToMove,
+                        newLocation,
+                        null,
+                        AutoConnectDirections.None,
+                        null
+                    );
                 }
                 es.Complete();
             }
@@ -2039,13 +2646,25 @@ namespace System.Activities.Core.Presentation
         {
             if (this.srcConnectionPoint != null)
             {
-                UIElement destElement = VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(e.OriginalSource as DependencyObject);
+                UIElement destElement =
+                    VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                        e.OriginalSource as DependencyObject
+                    );
                 if (destElement != null && this.panel.Children.Contains(destElement))
                 {
                     string errorMessage = string.Empty;
                     Point mouseUpLocation = e.GetPosition(sender as IInputElement);
 
-                    if (!CreateLinkGesture(this.srcConnectionPoint, destElement, mouseUpLocation, out errorMessage, false, null) && !errorMessage.Equals(string.Empty))
+                    if (
+                        !CreateLinkGesture(
+                            this.srcConnectionPoint,
+                            destElement,
+                            mouseUpLocation,
+                            out errorMessage,
+                            false,
+                            null
+                        ) && !errorMessage.Equals(string.Empty)
+                    )
                     {
                         ErrorReporting.ShowErrorMessage(errorMessage);
                     }
@@ -2060,7 +2679,8 @@ namespace System.Activities.Core.Presentation
 
         enum ConnectorType
         {
-            Default = 0, ErrorConnector = 1
+            Default = 0,
+            ErrorConnector = 1,
         };
 
         void OnConnectNodesCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2086,7 +2706,9 @@ namespace System.Activities.Core.Presentation
         {
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.FCCreateLink))
             {
-                List<ModelItem> selectedFlowchartItems = new List<ModelItem>(this.Context.Items.GetValue<Selection>().SelectedObjects);
+                List<ModelItem> selectedFlowchartItems = new List<ModelItem>(
+                    this.Context.Items.GetValue<Selection>().SelectedObjects
+                );
                 selectedFlowchartItems.Reverse();
                 CreateLinks(selectedFlowchartItems);
                 es.Complete();
@@ -2117,7 +2739,12 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
         }
 
-        internal static void DropActivityBelow(ViewStateService viewStateService, ModelItem modelItem, Activity activity, double interval)
+        internal static void DropActivityBelow(
+            ViewStateService viewStateService,
+            ModelItem modelItem,
+            Activity activity,
+            double interval
+        )
         {
             // Extracting information
             ModelItem flowStep = modelItem.Parent;
@@ -2134,7 +2761,9 @@ namespace System.Activities.Core.Presentation
             Point point = (Point)viewStateService.RetrieveViewState(flowStep, shapeLocation);
             point.Y += (((WorkflowViewElement)modelItem.View).ActualHeight + interval);
             viewStateService.StoreViewState(activityModelItem, shapeLocation, point);
-            flowchartDesigner.UpdateViewStateToAvoidOverlapOnPaste(new List<ModelItem> { activityModelItem });
+            flowchartDesigner.UpdateViewStateToAvoidOverlapOnPaste(
+                new List<ModelItem> { activityModelItem }
+            );
 
             // Add it to the model tree
             nodes.Add(activityModelItem);
@@ -2157,7 +2786,9 @@ namespace System.Activities.Core.Presentation
                 adornerList.Add((Adorner)logicalChild);
             }
             Adorner[] adorners = adornerList.ToArray();
-            if (FlowchartDesigner.Pack(adorners, (adorner => adorner is FlowchartExpressionAdorner)))
+            if (
+                FlowchartDesigner.Pack(adorners, (adorner => adorner is FlowchartExpressionAdorner))
+            )
             {
                 foreach (Adorner adorner in adorners)
                 {
@@ -2177,42 +2808,79 @@ namespace System.Activities.Core.Presentation
         }
 
         // Within the connection points with least number of connectors, get the one closest to the midpoint.
-        private static ConnectionPoint GetConnectionPointForAutoConnect(List<ConnectionPoint> availableConnectionPoints)
+        private static ConnectionPoint GetConnectionPointForAutoConnect(
+            List<ConnectionPoint> availableConnectionPoints
+        )
         {
-            int minConnectorCount = availableConnectionPoints.Min<ConnectionPoint>((p) =>
+            int minConnectorCount = availableConnectionPoints.Min<ConnectionPoint>(
+                (p) =>
                 {
                     return p.AttachedConnectors.Count;
-                });
+                }
+            );
 
-            List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>(availableConnectionPoints.Where<ConnectionPoint>((p) =>
-                {
-                    return p.AttachedConnectors.Count == minConnectorCount;
-                }));
+            List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>(
+                availableConnectionPoints.Where<ConnectionPoint>(
+                    (p) =>
+                    {
+                        return p.AttachedConnectors.Count == minConnectorCount;
+                    }
+                )
+            );
 
-            ConnectionPoint midPoint = availableConnectionPoints[availableConnectionPoints.Count / 2];
+            ConnectionPoint midPoint = availableConnectionPoints[
+                availableConnectionPoints.Count / 2
+            ];
             if (connectionPoints.Contains(midPoint))
             {
                 return midPoint;
             }
             double dist;
-            return ConnectionPoint.GetClosestConnectionPoint(connectionPoints, midPoint.Location, out dist);
+            return ConnectionPoint.GetClosestConnectionPoint(
+                connectionPoints,
+                midPoint.Location,
+                out dist
+            );
         }
 
-        private ConnectionPoint GetSourceConnectionPointForAutoConnect(UIElement designer, EdgeLocation edgeLocation)
+        private ConnectionPoint GetSourceConnectionPointForAutoConnect(
+            UIElement designer,
+            EdgeLocation edgeLocation
+        )
         {
-            List<ConnectionPoint> connectionPoints = FlowchartDesigner.GetAllConnectionPoints(designer);
-            connectionPoints = new List<ConnectionPoint>(connectionPoints.Where<ConnectionPoint>((p) =>
-            {
-                return p != null && p.PointType != ConnectionPointKind.Incoming && p.EdgeLocation == edgeLocation;
-            }));
-            Fx.Assert(connectionPoints.Count > 0, "There should be at least one src connection point available");
+            List<ConnectionPoint> connectionPoints = FlowchartDesigner.GetAllConnectionPoints(
+                designer
+            );
+            connectionPoints = new List<ConnectionPoint>(
+                connectionPoints.Where<ConnectionPoint>(
+                    (p) =>
+                    {
+                        return p != null
+                            && p.PointType != ConnectionPointKind.Incoming
+                            && p.EdgeLocation == edgeLocation;
+                    }
+                )
+            );
+            Fx.Assert(
+                connectionPoints.Count > 0,
+                "There should be at least one src connection point available"
+            );
             return FlowchartDesigner.GetConnectionPointForAutoConnect(connectionPoints);
         }
 
-        internal static ConnectionPoint GetDestinationConnectionPointForAutoConnect(UIElement dest, ConnectionPoint srcConnPoint)
+        internal static ConnectionPoint GetDestinationConnectionPointForAutoConnect(
+            UIElement dest,
+            ConnectionPoint srcConnPoint
+        )
         {
             EdgeLocation destEdgeLocation = EdgeLocation.Top;
-            if (!((dest is VirtualizedContainerService.VirtualizingContainer) && ((VirtualizedContainerService.VirtualizingContainer)dest).ModelItem.ItemType == typeof(FlowDecision)))
+            if (
+                !(
+                    (dest is VirtualizedContainerService.VirtualizingContainer)
+                    && ((VirtualizedContainerService.VirtualizingContainer)dest).ModelItem.ItemType
+                        == typeof(FlowDecision)
+                )
+            )
             {
                 switch (srcConnPoint.EdgeLocation)
                 {
@@ -2230,11 +2898,21 @@ namespace System.Activities.Core.Presentation
                         break;
                 }
             }
-            List<ConnectionPoint> destConnectionPoints = new List<ConnectionPoint>(FlowchartDesigner.GetConnectionPoints(dest).Where<ConnectionPoint>((p) =>
-            {
-                return p.PointType != ConnectionPointKind.Outgoing && p.EdgeLocation == destEdgeLocation;
-            }));
-            Fx.Assert(destConnectionPoints.Count > 0, "There should be at least one dest connection point available");
+            List<ConnectionPoint> destConnectionPoints = new List<ConnectionPoint>(
+                FlowchartDesigner
+                    .GetConnectionPoints(dest)
+                    .Where<ConnectionPoint>(
+                        (p) =>
+                        {
+                            return p.PointType != ConnectionPointKind.Outgoing
+                                && p.EdgeLocation == destEdgeLocation;
+                        }
+                    )
+            );
+            Fx.Assert(
+                destConnectionPoints.Count > 0,
+                "There should be at least one dest connection point available"
+            );
             return FlowchartDesigner.GetConnectionPointForAutoConnect(destConnectionPoints);
         }
 
@@ -2247,12 +2925,17 @@ namespace System.Activities.Core.Presentation
             }
             else if (sourceElement is VirtualizedContainerService.VirtualizingContainer)
             {
-                sourceModelItem = ((VirtualizedContainerService.VirtualizingContainer)sourceElement).ModelItem;
+                sourceModelItem = (
+                    (VirtualizedContainerService.VirtualizingContainer)sourceElement
+                ).ModelItem;
             }
             if (sourceModelItem != null && IsFlowStepAction(sourceModelItem))
             {
                 sourceModelItem = this.GetParentFlowStepModelItem(sourceModelItem);
-                Fx.Assert(typeof(FlowStep).IsAssignableFrom(sourceModelItem.ItemType), "The parent should be FlowNode");
+                Fx.Assert(
+                    typeof(FlowStep).IsAssignableFrom(sourceModelItem.ItemType),
+                    "The parent should be FlowNode"
+                );
             }
             return sourceModelItem;
         }
@@ -2272,18 +2955,27 @@ namespace System.Activities.Core.Presentation
             return null;
         }
 
-        public void DoAutoConnect(DragEventArgs e, UIElement targetElement, AutoConnectDirections direction)
+        public void DoAutoConnect(
+            DragEventArgs e,
+            UIElement targetElement,
+            AutoConnectDirections direction
+        )
         {
             UIElement sourceElement = targetElement;
             bool immediatelyCommit = ModelItemHelper.CanCreateImmediateEditingScope(this.ModelItem);
 
-            using (EditingScope scope = (EditingScope)this.ModelItem.BeginEdit(SR.AutoConnect, immediatelyCommit))
+            using (
+                EditingScope scope = (EditingScope)
+                    this.ModelItem.BeginEdit(SR.AutoConnect, immediatelyCommit)
+            )
             {
                 ModelItem droppedModelItem = this.DoFlowchartGridDrop(e, direction, null);
                 bool autoConnected = false;
                 if (droppedModelItem != null)
                 {
-                    ModelItem sourceModelItem = this.GetSourceModelItemForAutoConnect(sourceElement);
+                    ModelItem sourceModelItem = this.GetSourceModelItemForAutoConnect(
+                        sourceElement
+                    );
                     if (sourceModelItem != null)
                     {
                         if (sourceModelItem.ItemType == typeof(FlowStep))
@@ -2304,10 +2996,19 @@ namespace System.Activities.Core.Presentation
                                 autoConnected = true;
                             }
                         }
-                        else if (GenericFlowSwitchHelper.IsGenericFlowSwitch(sourceModelItem.ItemType))
+                        else if (
+                            GenericFlowSwitchHelper.IsGenericFlowSwitch(sourceModelItem.ItemType)
+                        )
                         {
                             string message = string.Empty;
-                            autoConnected = this.CreateFlowSwitchLink(this.srcConnectionPointForAutoConnect, sourceModelItem, droppedModelItem, null, null, ref message);
+                            autoConnected = this.CreateFlowSwitchLink(
+                                this.srcConnectionPointForAutoConnect,
+                                sourceModelItem,
+                                droppedModelItem,
+                                null,
+                                null,
+                                ref message
+                            );
                         }
                         else if (sourceModelItem.ItemType == typeof(StartNode))
                         {
@@ -2318,7 +3019,11 @@ namespace System.Activities.Core.Presentation
                 }
                 if (autoConnected)
                 {
-                    this.srcConnectionPointForAutoConnect = this.GetSourceConnectionPointForAutoConnect(sourceElement, AutoConnectHelper.AutoConnectDirection2EdgeLocation(direction));
+                    this.srcConnectionPointForAutoConnect =
+                        this.GetSourceConnectionPointForAutoConnect(
+                            sourceElement,
+                            AutoConnectHelper.AutoConnectDirection2EdgeLocation(direction)
+                        );
                     scope.Complete();
                 }
                 else
@@ -2336,9 +3041,11 @@ namespace System.Activities.Core.Presentation
                 return AutoConnectDirections.None;
             }
             Type draggedType = draggedTypes[0];
-            if (!typeof(Activity).IsAssignableFrom(draggedType) &&
-                  !typeof(FlowNode).IsAssignableFrom(draggedType) &&
-                  !IsActivityTemplateFactory(draggedType))
+            if (
+                !typeof(Activity).IsAssignableFrom(draggedType)
+                && !typeof(FlowNode).IsAssignableFrom(draggedType)
+                && !IsActivityTemplateFactory(draggedType)
+            )
             {
                 return AutoConnectDirections.None;
             }
@@ -2373,7 +3080,10 @@ namespace System.Activities.Core.Presentation
                     }
                 }
             }
-            return AutoConnectDirections.Top | AutoConnectDirections.Bottom | AutoConnectDirections.Left | AutoConnectDirections.Right;
+            return AutoConnectDirections.Top
+                | AutoConnectDirections.Bottom
+                | AutoConnectDirections.Left
+                | AutoConnectDirections.Right;
         }
 
         public bool CanAutoSplit(DragEventArgs e)
@@ -2382,7 +3092,8 @@ namespace System.Activities.Core.Presentation
             {
                 return false;
             }
-            ModelItem draggedModelItem = e.Data.GetData(DragDropHelper.ModelItemDataFormat) as ModelItem;
+            ModelItem draggedModelItem =
+                e.Data.GetData(DragDropHelper.ModelItemDataFormat) as ModelItem;
 
             // The start node
             if (draggedModelItem is FakeModelItemImpl)
@@ -2429,9 +3140,16 @@ namespace System.Activities.Core.Presentation
         {
             bool immediatelyCommit = ModelItemHelper.CanCreateImmediateEditingScope(this.ModelItem);
 
-            using (EditingScope scope = (EditingScope)this.ModelItem.BeginEdit(SR.AutoSplit, immediatelyCommit))
+            using (
+                EditingScope scope = (EditingScope)
+                    this.ModelItem.BeginEdit(SR.AutoSplit, immediatelyCommit)
+            )
             {
-                ModelItem droppedModelItem = this.DoFlowchartGridDrop(e, AutoConnectDirections.None, connector);
+                ModelItem droppedModelItem = this.DoFlowchartGridDrop(
+                    e,
+                    AutoConnectDirections.None,
+                    connector
+                );
                 bool autoSplit = false;
                 ModelItem sourceModelItem = null;
                 ModelItem destinationModelItem = null;
@@ -2442,8 +3160,12 @@ namespace System.Activities.Core.Presentation
 
                     bool linkCreated = true;
                     string message = string.Empty;
-                    UIElement srcDesigner = FreeFormPanel.GetSourceConnectionPoint(connector).ParentDesigner;
-                    UIElement destDesigner = FreeFormPanel.GetDestinationConnectionPoint(connector).ParentDesigner;
+                    UIElement srcDesigner = FreeFormPanel
+                        .GetSourceConnectionPoint(connector)
+                        .ParentDesigner;
+                    UIElement destDesigner = FreeFormPanel
+                        .GetDestinationConnectionPoint(connector)
+                        .ParentDesigner;
                     if (srcDesigner is StartSymbol)
                     {
                         sourceModelItem = this.ModelItem;
@@ -2451,49 +3173,86 @@ namespace System.Activities.Core.Presentation
                     }
                     else if (srcDesigner is VirtualizedContainerService.VirtualizingContainer)
                     {
-                        sourceModelItem = ((VirtualizedContainerService.VirtualizingContainer)srcDesigner).ModelItem;
+                        sourceModelItem = (
+                            (VirtualizedContainerService.VirtualizingContainer)srcDesigner
+                        ).ModelItem;
                         ModelItem srcFlowNodeModelItem = sourceModelItem;
                         if (!IsFlowNode(srcFlowNodeModelItem))
                         {
-                            srcFlowNodeModelItem = this.GetParentFlowStepModelItem(srcFlowNodeModelItem);
+                            srcFlowNodeModelItem = this.GetParentFlowStepModelItem(
+                                srcFlowNodeModelItem
+                            );
                         }
-                        Fx.Assert(IsFlowNode(srcFlowNodeModelItem), "srcFlowNodeModelItem should be a FlowNode");
+                        Fx.Assert(
+                            IsFlowNode(srcFlowNodeModelItem),
+                            "srcFlowNodeModelItem should be a FlowNode"
+                        );
 
                         if (typeof(FlowStep) == srcFlowNodeModelItem.ItemType)
                         {
                             srcFlowNodeModelItem.Properties["Next"].SetValue(droppedModelItem);
                         }
-                        else if (typeof(FlowDecision) == srcFlowNodeModelItem.ItemType && FreeFormPanel.GetSourceConnectionPoint(connector).Equals(GetTrueConnectionPoint(srcDesigner)))
+                        else if (
+                            typeof(FlowDecision) == srcFlowNodeModelItem.ItemType
+                            && FreeFormPanel
+                                .GetSourceConnectionPoint(connector)
+                                .Equals(GetTrueConnectionPoint(srcDesigner))
+                        )
                         {
                             srcFlowNodeModelItem.Properties["True"].SetValue(droppedModelItem);
                         }
-                        else if (typeof(FlowDecision) == srcFlowNodeModelItem.ItemType && FreeFormPanel.GetSourceConnectionPoint(connector).Equals(GetFalseConnectionPoint(srcDesigner)))
+                        else if (
+                            typeof(FlowDecision) == srcFlowNodeModelItem.ItemType
+                            && FreeFormPanel
+                                .GetSourceConnectionPoint(connector)
+                                .Equals(GetFalseConnectionPoint(srcDesigner))
+                        )
                         {
                             srcFlowNodeModelItem.Properties["False"].SetValue(droppedModelItem);
                         }
-                        else if (GenericFlowSwitchHelper.IsGenericFlowSwitch(srcFlowNodeModelItem.ItemType))
+                        else if (
+                            GenericFlowSwitchHelper.IsGenericFlowSwitch(
+                                srcFlowNodeModelItem.ItemType
+                            )
+                        )
                         {
-                            linkCreated = CreateFlowSwitchLink(FreeFormPanel.GetSourceConnectionPoint(connector), srcFlowNodeModelItem, droppedModelItem, flowSwitchLink, null, ref message);
+                            linkCreated = CreateFlowSwitchLink(
+                                FreeFormPanel.GetSourceConnectionPoint(connector),
+                                srcFlowNodeModelItem,
+                                droppedModelItem,
+                                flowSwitchLink,
+                                null,
+                                ref message
+                            );
                         }
                     }
 
                     if (linkCreated && string.IsNullOrEmpty(message))
                     {
-                        destinationModelItem = ((VirtualizedContainerService.VirtualizingContainer)destDesigner).ModelItem;
+                        destinationModelItem = (
+                            (VirtualizedContainerService.VirtualizingContainer)destDesigner
+                        ).ModelItem;
                         ModelItem destFlowNodeModelItem = destinationModelItem;
                         if (!IsFlowNode(destFlowNodeModelItem))
                         {
-                            destFlowNodeModelItem = this.GetParentFlowStepModelItem(destFlowNodeModelItem);
+                            destFlowNodeModelItem = this.GetParentFlowStepModelItem(
+                                destFlowNodeModelItem
+                            );
                         }
 
-                        Fx.Assert(IsFlowNode(destFlowNodeModelItem), "destFlowNodeModelItem should be a FlowNode");
+                        Fx.Assert(
+                            IsFlowNode(destFlowNodeModelItem),
+                            "destFlowNodeModelItem should be a FlowNode"
+                        );
 
                         if (droppedModelItem.ItemType == typeof(FlowStep))
                         {
                             droppedModelItem.Properties["Next"].SetValue(destFlowNodeModelItem);
                             autoSplit = true;
                         }
-                        else if (GenericFlowSwitchHelper.IsGenericFlowSwitch(droppedModelItem.ItemType))
+                        else if (
+                            GenericFlowSwitchHelper.IsGenericFlowSwitch(droppedModelItem.ItemType)
+                        )
                         {
                             droppedModelItem.Properties["Default"].SetValue(destFlowNodeModelItem);
                             autoSplit = true;
@@ -2511,16 +3270,33 @@ namespace System.Activities.Core.Presentation
                     Fx.Assert(sourceModelItem != null, "sourceModelItem != null");
                     Fx.Assert(destinationModelItem != null, "destinationModelItem != null");
 
-                    int srcIndex = GetConnectionPointIndex(this.GetView(sourceModelItem), FreeFormPanel.GetSourceConnectionPoint(connector));
-                    int desIndex = GetConnectionPointIndex(this.GetView(destinationModelItem), FreeFormPanel.GetDestinationConnectionPoint(connector));
+                    int srcIndex = GetConnectionPointIndex(
+                        this.GetView(sourceModelItem),
+                        FreeFormPanel.GetSourceConnectionPoint(connector)
+                    );
+                    int desIndex = GetConnectionPointIndex(
+                        this.GetView(destinationModelItem),
+                        FreeFormPanel.GetDestinationConnectionPoint(connector)
+                    );
 
                     EdgeLocation entryEdgeForAutoSplit;
                     EdgeLocation exitEdgeForAutoSplit;
-                    AutoSplitHelper.CalculateEntryExitEdges(e.GetPosition(this.panel),
-                        connector, out entryEdgeForAutoSplit, out exitEdgeForAutoSplit);
+                    AutoSplitHelper.CalculateEntryExitEdges(
+                        e.GetPosition(this.panel),
+                        connector,
+                        out entryEdgeForAutoSplit,
+                        out exitEdgeForAutoSplit
+                    );
 
                     FlowchartDesigner.SetAutoSplitDataWithUndo(
-                        this.ModelItem, sourceModelItem, destinationModelItem, srcIndex, desIndex, entryEdgeForAutoSplit, exitEdgeForAutoSplit);
+                        this.ModelItem,
+                        sourceModelItem,
+                        destinationModelItem,
+                        srcIndex,
+                        desIndex,
+                        entryEdgeForAutoSplit,
+                        exitEdgeForAutoSplit
+                    );
 
                     scope.Complete();
                 }
@@ -2531,13 +3307,26 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        private ConnectionPoint GetEmptyEdgeMidConnectionPointNotOfType(UIElement designer, EdgeLocation edgeLocation, ConnectionPointKind invalidType)
+        private ConnectionPoint GetEmptyEdgeMidConnectionPointNotOfType(
+            UIElement designer,
+            EdgeLocation edgeLocation,
+            ConnectionPointKind invalidType
+        )
         {
-            List<ConnectionPoint> connectionPoints = FlowchartDesigner.GetAllConnectionPoints(designer);
-            connectionPoints = new List<ConnectionPoint>(connectionPoints.Where<ConnectionPoint>((p) =>
-            {
-                return p != null && p.PointType != invalidType && p.AttachedConnectors.Count == 0 && p.EdgeLocation == edgeLocation;
-            }));
+            List<ConnectionPoint> connectionPoints = FlowchartDesigner.GetAllConnectionPoints(
+                designer
+            );
+            connectionPoints = new List<ConnectionPoint>(
+                connectionPoints.Where<ConnectionPoint>(
+                    (p) =>
+                    {
+                        return p != null
+                            && p.PointType != invalidType
+                            && p.AttachedConnectors.Count == 0
+                            && p.EdgeLocation == edgeLocation;
+                    }
+                )
+            );
 
             if (connectionPoints.Count > 0)
             {
@@ -2547,31 +3336,61 @@ namespace System.Activities.Core.Presentation
             return null;
         }
 
-        private ConnectionPoint GetDestinationConnectionPointForAutoSplit(ConnectionPoint srcConnPoint, UIElement destDesigner)
+        private ConnectionPoint GetDestinationConnectionPointForAutoSplit(
+            ConnectionPoint srcConnPoint,
+            UIElement destDesigner
+        )
         {
             this.MeasureView(destDesigner);
-            ConnectionPoint point = this.GetEmptyEdgeMidConnectionPointNotOfType(destDesigner, this.entryEdgeForAutoSplit, ConnectionPointKind.Outgoing);
+            ConnectionPoint point = this.GetEmptyEdgeMidConnectionPointNotOfType(
+                destDesigner,
+                this.entryEdgeForAutoSplit,
+                ConnectionPointKind.Outgoing
+            );
             if (point == null)
             {
-                point = this.FindClosestConnectionPointNotOfType(srcConnPoint, new List<ConnectionPoint>(FlowchartDesigner.GetConnectionPoints(destDesigner).Where<ConnectionPoint>(p =>
-                {
-                    return p.AttachedConnectors.Count == 0;
-                })), ConnectionPointKind.Outgoing);
+                point = this.FindClosestConnectionPointNotOfType(
+                    srcConnPoint,
+                    new List<ConnectionPoint>(
+                        FlowchartDesigner
+                            .GetConnectionPoints(destDesigner)
+                            .Where<ConnectionPoint>(p =>
+                            {
+                                return p.AttachedConnectors.Count == 0;
+                            })
+                    ),
+                    ConnectionPointKind.Outgoing
+                );
             }
 
             return point;
         }
 
-        private ConnectionPoint GetSourceConnectionPointForAutoSplit(ConnectionPoint destConnPoint, UIElement srcDesigner)
+        private ConnectionPoint GetSourceConnectionPointForAutoSplit(
+            ConnectionPoint destConnPoint,
+            UIElement srcDesigner
+        )
         {
             this.MeasureView(srcDesigner);
-            ConnectionPoint point = this.GetEmptyEdgeMidConnectionPointNotOfType(srcDesigner, this.exitEdgeForAutoSplit, ConnectionPointKind.Incoming);
+            ConnectionPoint point = this.GetEmptyEdgeMidConnectionPointNotOfType(
+                srcDesigner,
+                this.exitEdgeForAutoSplit,
+                ConnectionPointKind.Incoming
+            );
             if (point == null)
             {
-                point = this.FindClosestConnectionPointNotOfType(destConnPoint, new List<ConnectionPoint>(FlowchartDesigner.GetConnectionPoints(srcDesigner).Where<ConnectionPoint>(p =>
-                {
-                    return p.AttachedConnectors.Count == 0;
-                })), ConnectionPointKind.Incoming);
+                point = this.FindClosestConnectionPointNotOfType(
+                    destConnPoint,
+                    new List<ConnectionPoint>(
+                        FlowchartDesigner
+                            .GetConnectionPoints(srcDesigner)
+                            .Where<ConnectionPoint>(p =>
+                            {
+                                return p.AttachedConnectors.Count == 0;
+                            })
+                    ),
+                    ConnectionPointKind.Incoming
+                );
             }
 
             return point;
@@ -2598,7 +3417,10 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                Fx.Assert(false, "The view should either be un-rooted or contained in the FreeFormPanel");
+                Fx.Assert(
+                    false,
+                    "The view should either be un-rooted or contained in the FreeFormPanel"
+                );
             }
         }
 
@@ -2607,26 +3429,34 @@ namespace System.Activities.Core.Presentation
             this.ViewStateService.StoreViewStateWithUndo(
                 this.ModelItem,
                 FlowchartSizeFeature.WidthPropertyName,
-                this.ViewStateService.RetrieveViewState(this.ModelItem, FlowchartSizeFeature.WidthPropertyName));
+                this.ViewStateService.RetrieveViewState(
+                    this.ModelItem,
+                    FlowchartSizeFeature.WidthPropertyName
+                )
+            );
 
             this.ViewStateService.StoreViewStateWithUndo(
                 this.ModelItem,
                 FlowchartSizeFeature.HeightPropertyName,
-                this.ViewStateService.RetrieveViewState(this.ModelItem, FlowchartSizeFeature.HeightPropertyName));
+                this.ViewStateService.RetrieveViewState(
+                    this.ModelItem,
+                    FlowchartSizeFeature.HeightPropertyName
+                )
+            );
         }
 
-        static private bool IsFlowStepAction(ModelItem modelItem)
+        private static bool IsFlowStepAction(ModelItem modelItem)
         {
             // modelItem.CurrentValue is an Activity which is an Action of a FlowStep
             return typeof(Activity).IsAssignableFrom(modelItem.ItemType);
         }
 
-        static private bool IsFlowNode(ModelItem modelItem)
+        private static bool IsFlowNode(ModelItem modelItem)
         {
             return typeof(FlowNode).IsAssignableFrom(modelItem.ItemType);
         }
 
-        sealed private class ShapeOffsetter
+        private sealed class ShapeOffsetter
         {
             private Point lastShape;
             private bool isFirstShape = true;
@@ -2646,12 +3476,14 @@ namespace System.Activities.Core.Presentation
                 if (detX < 0 || detY < 0)
                 {
                     // overlapped
-                    // then offset shapeLocation. 
+                    // then offset shapeLocation.
                     // offsetX and offsetY must be from Integer * FreeFormPanel.GridSize, because
-                    // shapeLocation is aligned to grid, and we expect after the offset, it is 
+                    // shapeLocation is aligned to grid, and we expect after the offset, it is
                     // still aligned.
-                    Double offsetX = Math.Ceiling(-detX / FreeFormPanel.GridSize) * FreeFormPanel.GridSize;
-                    Double offsetY = Math.Ceiling(-detY / FreeFormPanel.GridSize) * FreeFormPanel.GridSize;
+                    Double offsetX =
+                        Math.Ceiling(-detX / FreeFormPanel.GridSize) * FreeFormPanel.GridSize;
+                    Double offsetY =
+                        Math.Ceiling(-detY / FreeFormPanel.GridSize) * FreeFormPanel.GridSize;
                     shapeLocation.Offset(offsetX, offsetY);
                 }
                 this.lastShape = shapeLocation;
@@ -2666,7 +3498,8 @@ namespace System.Activities.Core.Presentation
             int srcIndex,
             int destIndex,
             EdgeLocation entryEdgeForAutoSplit,
-            EdgeLocation exitEdgeForAutoSplit)
+            EdgeLocation exitEdgeForAutoSplit
+        )
         {
             using (EditingScope es = (EditingScope)fcModelItem.BeginEdit(SR.AutoSplit, false))
             {
@@ -2679,20 +3512,21 @@ namespace System.Activities.Core.Presentation
                         destIndex,
                         entryEdgeForAutoSplit,
                         exitEdgeForAutoSplit
-                        ));
+                    )
+                );
                 es.Complete();
             }
         }
 
         private static bool IsActivityTemplateFactory(Type type)
         {
-            return type.GetInterface(typeof(IActivityTemplateFactory).FullName) != null ||
-                   type.GetInterface(typeof(IActivityTemplateFactory<>).FullName) != null;
+            return type.GetInterface(typeof(IActivityTemplateFactory).FullName) != null
+                || type.GetInterface(typeof(IActivityTemplateFactory<>).FullName) != null;
         }
 
         // In AutoSplit, a mark,this.SrcConnPntAutoSplit & this.DestConnPntAutoSplit,
         // is set telling the CreateLink, which is called later in Complete(), to use AutoSplit
-        // way to route the connector. 
+        // way to route the connector.
         // SetAutoSplitConnectionPointChange makes sure the mark is set during Redo.
         // This Change does nothing in Undo.
         private class SetAutoSplitConnectionPointChange : Change
@@ -2715,7 +3549,7 @@ namespace System.Activities.Core.Presentation
                 int destIndex,
                 EdgeLocation entryEdgeForAutoSplit,
                 EdgeLocation exitEdgeForAutoSplit
-                )
+            )
             {
                 this.Owner = fcModelItem;
                 this.SrcModelItem = srcModelItem;
@@ -2727,9 +3561,7 @@ namespace System.Activities.Core.Presentation
                 this.IsUndo = false;
             }
 
-            private SetAutoSplitConnectionPointChange()
-            {
-            }
+            private SetAutoSplitConnectionPointChange() { }
 
             public override string Description
             {
@@ -2746,8 +3578,14 @@ namespace System.Activities.Core.Presentation
                 Fx.Assert(designer != null, "null designer");
                 UIElement srcElem = designer.GetView(this.SrcModelItem);
                 UIElement desElem = designer.GetView(this.DestModelItem);
-                ConnectionPoint srcConnPnt = GetConnectionPointFromIndex(srcElem, this.SrcConnPntIndex);
-                ConnectionPoint desConnPnt = GetConnectionPointFromIndex(desElem, this.DestConnPntIndex);
+                ConnectionPoint srcConnPnt = GetConnectionPointFromIndex(
+                    srcElem,
+                    this.SrcConnPntIndex
+                );
+                ConnectionPoint desConnPnt = GetConnectionPointFromIndex(
+                    desElem,
+                    this.DestConnPntIndex
+                );
                 Fx.Assert(srcConnPnt != null, "srcConnPnt");
                 Fx.Assert(desConnPnt != null, "desConnPnt");
 
@@ -2770,7 +3608,7 @@ namespace System.Activities.Core.Presentation
                     SrcModelItem = this.SrcModelItem,
                     DestModelItem = this.DestModelItem,
                     SrcConnPntIndex = this.SrcConnPntIndex,
-                    DestConnPntIndex = this.DestConnPntIndex
+                    DestConnPntIndex = this.DestConnPntIndex,
                 };
             }
         }

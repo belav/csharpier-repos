@@ -19,19 +19,29 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         public sealed class Suppressor : DiagnosticSuppressor
         {
-            private const string Justification = "The target method has been intercepted by a generated static variant.";
+            private const string Justification =
+                "The target method has been intercepted by a generated static variant.";
 
             /// <summary>
             /// Suppression descriptor for IL2026: Members attributed with RequiresUnreferencedCode may break when trimming.
             /// </summary>
-            private static readonly SuppressionDescriptor RUCDiagnostic = new(id: "SYSLIBSUPPRESS0002", suppressedDiagnosticId: "IL2026", Justification);
+            private static readonly SuppressionDescriptor RUCDiagnostic = new(
+                id: "SYSLIBSUPPRESS0002",
+                suppressedDiagnosticId: "IL2026",
+                Justification
+            );
 
             /// <summary>
             /// Suppression descriptor for IL3050: Avoid calling members annotated with 'RequiresDynamicCodeAttribute' when publishing as native AOT.
             /// </summary>
-            private static readonly SuppressionDescriptor RDCDiagnostic = new(id: "SYSLIBSUPPRESS0003", suppressedDiagnosticId: "IL3050", Justification);
+            private static readonly SuppressionDescriptor RDCDiagnostic = new(
+                id: "SYSLIBSUPPRESS0003",
+                suppressedDiagnosticId: "IL3050",
+                Justification
+            );
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions => ImmutableArray.Create(RUCDiagnostic, RDCDiagnostic);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(RUCDiagnostic, RDCDiagnostic);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
@@ -39,29 +49,42 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 {
                     string diagnosticId = diagnostic.Id;
 
-                    if (diagnosticId != RDCDiagnostic.SuppressedDiagnosticId && diagnosticId != RUCDiagnostic.SuppressedDiagnosticId)
+                    if (
+                        diagnosticId != RDCDiagnostic.SuppressedDiagnosticId
+                        && diagnosticId != RUCDiagnostic.SuppressedDiagnosticId
+                    )
                     {
                         continue;
                     }
 
-                    Location location = diagnostic.AdditionalLocations.Count > 0
-                        ? diagnostic.AdditionalLocations[0]
-                        : diagnostic.Location;
+                    Location location =
+                        diagnostic.AdditionalLocations.Count > 0
+                            ? diagnostic.AdditionalLocations[0]
+                            : diagnostic.Location;
 
                     bool shouldSuppressDiagnostic =
-                        location.SourceTree is SyntaxTree sourceTree &&
-                        sourceTree.GetRoot().FindNode(location.SourceSpan) is SyntaxNode syntaxNode &&
-                        BinderInvocation.IsCandidateSyntaxNode(syntaxNode) &&
-                        context.GetSemanticModel(sourceTree)
-                            .GetOperation((InvocationExpressionSyntax)syntaxNode, context.CancellationToken) is IInvocationOperation operation &&
-                        BinderInvocation.IsBindingOperation(operation);
+                        location.SourceTree is SyntaxTree sourceTree
+                        && sourceTree.GetRoot().FindNode(location.SourceSpan)
+                            is SyntaxNode syntaxNode
+                        && BinderInvocation.IsCandidateSyntaxNode(syntaxNode)
+                        && context
+                            .GetSemanticModel(sourceTree)
+                            .GetOperation(
+                                (InvocationExpressionSyntax)syntaxNode,
+                                context.CancellationToken
+                            )
+                            is IInvocationOperation operation
+                        && BinderInvocation.IsBindingOperation(operation);
 
                     if (shouldSuppressDiagnostic)
                     {
-                        SuppressionDescriptor targetSuppression = diagnosticId == RUCDiagnostic.SuppressedDiagnosticId
+                        SuppressionDescriptor targetSuppression =
+                            diagnosticId == RUCDiagnostic.SuppressedDiagnosticId
                                 ? RUCDiagnostic
                                 : RDCDiagnostic;
-                        context.ReportSuppression(Suppression.Create(targetSuppression, diagnostic));
+                        context.ReportSuppression(
+                            Suppression.Create(targetSuppression, diagnostic)
+                        );
                     }
                 }
             }

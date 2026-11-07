@@ -14,7 +14,10 @@ namespace ILCompiler.Dataflow
         public TypeSystemEntity Entity { init; get; }
         public MessageOrigin Origin { init; get; }
 
-        internal TrimAnalysisGenericInstantiationAccessPattern(TypeSystemEntity entity, MessageOrigin origin)
+        internal TrimAnalysisGenericInstantiationAccessPattern(
+            TypeSystemEntity entity,
+            MessageOrigin origin
+        )
         {
             Entity = entity;
             Origin = origin;
@@ -27,23 +30,45 @@ namespace ILCompiler.Dataflow
         {
             var diagnosticContext = new DiagnosticContext(
                 Origin,
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresUnreferencedCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresDynamicCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresAssemblyFilesAttribute),
-                logger);
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresDynamicCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresAssemblyFilesAttribute
+                ),
+                logger
+            );
 
             switch (Entity)
             {
                 case TypeDesc type:
-                    GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(diagnosticContext, reflectionMarker, type);
+                    GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(
+                        diagnosticContext,
+                        reflectionMarker,
+                        type
+                    );
                     break;
 
                 case MethodDesc method:
-                    GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(diagnosticContext, reflectionMarker, method);
+                    GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(
+                        diagnosticContext,
+                        reflectionMarker,
+                        method
+                    );
                     break;
 
                 case FieldDesc field:
-                    GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(diagnosticContext, reflectionMarker, field);
+                    GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(
+                        diagnosticContext,
+                        reflectionMarker,
+                        field
+                    );
                     break;
             }
         }

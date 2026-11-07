@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
     internal static class EnforceOnBuildExtensions
     {
-        public static string ToCustomTag(this EnforceOnBuild enforceOnBuild)
-            => $"{nameof(EnforceOnBuild)}_{enforceOnBuild}";
+        public static string ToCustomTag(this EnforceOnBuild enforceOnBuild) =>
+            $"{nameof(EnforceOnBuild)}_{enforceOnBuild}";
     }
 }

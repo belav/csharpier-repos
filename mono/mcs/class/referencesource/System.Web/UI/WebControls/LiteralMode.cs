@@ -1,20 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="Literal.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
 
-
-    public enum LiteralMode {
-
+    public enum LiteralMode
+    {
         Transform,
 
         PassThrough,
 
-        Encode
+        Encode,
     }
 }

@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeParameterDeclarationExpressionTests : CodeObjectTestBase<CodeParameterDeclarationExpression>
+    public class CodeParameterDeclarationExpressionTests
+        : CodeObjectTestBase<CodeParameterDeclarationExpression>
     {
         [Fact]
         public void Ctor_Default()
@@ -99,11 +100,17 @@ namespace System.CodeDom.Tests
 
             CodeAttributeDeclaration attribute1 = new CodeAttributeDeclaration("Name1");
             parameter.CustomAttributes.Add(attribute1);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1 }, parameter.CustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1 },
+                parameter.CustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
 
             CodeAttributeDeclaration attribute2 = new CodeAttributeDeclaration("Name2");
             parameter.CustomAttributes.Add(attribute2);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1, attribute2 }, parameter.CustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1, attribute2 },
+                parameter.CustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
         }
 
         [Theory]

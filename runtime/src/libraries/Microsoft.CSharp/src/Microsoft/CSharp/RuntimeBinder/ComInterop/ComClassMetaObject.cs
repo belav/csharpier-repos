@@ -11,22 +11,28 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal ComClassMetaObject(Expression expression, ComTypeClassDesc cls)
-            : base(expression, BindingRestrictions.Empty, cls)
-        {
-        }
+            : base(expression, BindingRestrictions.Empty, cls) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject BindCreateInstance(CreateInstanceBinder binder, DynamicMetaObject[] args)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject BindCreateInstance(
+            CreateInstanceBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             return new DynamicMetaObject(
                 Expression.Call(
                     Helpers.Convert(Expression, typeof(ComTypeClassDesc)),
                     typeof(ComTypeClassDesc).GetMethod(nameof(ComTypeClassDesc.CreateInstance))
                 ),
-                BindingRestrictions.Combine(args).Merge(
-                    BindingRestrictions.GetTypeRestriction(Expression, typeof(ComTypeClassDesc))
-                )
+                BindingRestrictions
+                    .Combine(args)
+                    .Merge(
+                        BindingRestrictions.GetTypeRestriction(Expression, typeof(ComTypeClassDesc))
+                    )
             );
         }
     }

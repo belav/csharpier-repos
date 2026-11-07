@@ -3,10 +3,10 @@
 
 using System;
 using System.Reflection;
-using System.Text;
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
+using Xunit;
 
 unsafe class CdeclMemberFunctionNative
 {
@@ -45,7 +45,7 @@ unsafe class CdeclMemberFunctionNative
 
     public enum E : uint
     {
-        Value = 42
+        Value = 42,
     }
 
     [DllImport(nameof(CdeclMemberFunctionNative))]
@@ -53,12 +53,16 @@ unsafe class CdeclMemberFunctionNative
 
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern SizeF GetSizeFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern Width GetWidthFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern IntWrapper GetHeightAsIntFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern E GetEFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern CLong GetWidthAsLongFromManaged(C* c);
 }
@@ -72,7 +76,10 @@ public unsafe class CdeclMemberFunctionTest
         {
             float width = 1.0f;
             float height = 2.0f;
-            CdeclMemberFunctionNative.C* instance = CdeclMemberFunctionNative.CreateInstanceOfC(width, height);
+            CdeclMemberFunctionNative.C* instance = CdeclMemberFunctionNative.CreateInstanceOfC(
+                width,
+                height
+            );
             Test8ByteHFA(instance);
             Test4ByteHFA(instance);
             Test4ByteNonHFA(instance);
@@ -148,7 +155,8 @@ public unsafe class CdeclMemberFunctionTest
     private static void Test4ByteNonHFAUnmanagedCallersOnly()
     {
         CdeclMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        CdeclMemberFunctionNative.IntWrapper result = CdeclMemberFunctionNative.GetHeightAsIntFromManaged(&c);
+        CdeclMemberFunctionNative.IntWrapper result =
+            CdeclMemberFunctionNative.GetHeightAsIntFromManaged(&c);
 
         Assert.Equal((int)c.height, result.i);
     }
@@ -169,14 +177,17 @@ public unsafe class CdeclMemberFunctionTest
         Assert.Equal((nint)c.width, result.Value);
     }
 
-    private static CdeclMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(float width, float height)
+    private static CdeclMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(
+        float width,
+        float height
+    )
     {
         return new CdeclMemberFunctionNative.C
         {
             vtable = UnmanagedCallersOnlyVtable,
             dummy = CdeclMemberFunctionNative.E.Value,
             width = width,
-            height = height
+            height = height,
         };
     }
 
@@ -188,7 +199,8 @@ public unsafe class CdeclMemberFunctionTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable = (CdeclMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(sizeof(CdeclMemberFunctionNative.C.VtableLayout));
+                unmanagedCallersOnlyVtable = (CdeclMemberFunctionNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(sizeof(CdeclMemberFunctionNative.C.VtableLayout));
                 unmanagedCallersOnlyVtable->getSize = &GetSize;
                 unmanagedCallersOnlyVtable->getWidth = &GetWidth;
                 unmanagedCallersOnlyVtable->getHeightAsInt = &GetHeightAsInt;
@@ -199,41 +211,46 @@ public unsafe class CdeclMemberFunctionTest
         }
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvCdecl), typeof(CallConvMemberFunction)})]
-    private static CdeclMemberFunctionNative.SizeF GetSize(CdeclMemberFunctionNative.C* c, int unused)
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvMemberFunction) }
+    )]
+    private static CdeclMemberFunctionNative.SizeF GetSize(
+        CdeclMemberFunctionNative.C* c,
+        int unused
+    )
     {
-        return new CdeclMemberFunctionNative.SizeF
-        {
-            width = c->width,
-            height = c->height
-        };
+        return new CdeclMemberFunctionNative.SizeF { width = c->width, height = c->height };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvCdecl), typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvMemberFunction) }
+    )]
     private static CdeclMemberFunctionNative.Width GetWidth(CdeclMemberFunctionNative.C* c)
     {
-        return new CdeclMemberFunctionNative.Width
-        {
-            width = c->width
-        };
+        return new CdeclMemberFunctionNative.Width { width = c->width };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvCdecl), typeof(CallConvMemberFunction)})]
-    private static CdeclMemberFunctionNative.IntWrapper GetHeightAsInt(CdeclMemberFunctionNative.C* c)
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvMemberFunction) }
+    )]
+    private static CdeclMemberFunctionNative.IntWrapper GetHeightAsInt(
+        CdeclMemberFunctionNative.C* c
+    )
     {
-        return new CdeclMemberFunctionNative.IntWrapper
-        {
-            i = (int)c->height
-        };
+        return new CdeclMemberFunctionNative.IntWrapper { i = (int)c->height };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvCdecl), typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvMemberFunction) }
+    )]
     private static CdeclMemberFunctionNative.E GetE(CdeclMemberFunctionNative.C* c)
     {
         return c->dummy;
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvCdecl), typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvMemberFunction) }
+    )]
     private static CLong GetWidthAsLong(CdeclMemberFunctionNative.C* c)
     {
         return new CLong((nint)c->width);

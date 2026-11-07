@@ -10,13 +10,13 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
 using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.ErrorReporting;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         [ExportWorkspaceService(typeof(IEditAndContinueWorkspaceService)), Shared]
         [method: ImportingConstructor]
         [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        internal sealed class WorkspaceService(IEditAndContinueService service) : IEditAndContinueWorkspaceService
+        internal sealed class WorkspaceService(IEditAndContinueService service)
+            : IEditAndContinueWorkspaceService
         {
             public IEditAndContinueService Service { get; } = service;
         }
@@ -69,7 +70,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             try
             {
-                var path = Environment.GetEnvironmentVariable("Microsoft_CodeAnalysis_EditAndContinue_LogDir");
+                var path = Environment.GetEnvironmentVariable(
+                    "Microsoft_CodeAnalysis_EditAndContinue_LogDir"
+                );
                 if (string.IsNullOrWhiteSpace(path))
                 {
                     return null;
@@ -94,7 +97,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             // The Project System doesn't always indicate whether we emit PDB, what kind of PDB we emit nor the path of the PDB.
             // To work around we look for the PDB on the path specified in the PDB debug directory.
             // https://github.com/dotnet/roslyn/issues/35065
-            return new CompilationOutputFilesWithImplicitPdbPath(project.CompilationOutputInfo.AssemblyPath);
+            return new CompilationOutputFilesWithImplicitPdbPath(
+                project.CompilationOutputInfo.AssemblyPath
+            );
         }
 
         private DebuggingSession? TryGetDebuggingSession(DebuggingSessionId sessionId)
@@ -128,29 +133,55 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<DocumentId> captureMatchingDocuments,
             bool captureAllMatchingDocuments,
             bool reportDiagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                Contract.ThrowIfTrue(captureAllMatchingDocuments && !captureMatchingDocuments.IsEmpty);
+                Contract.ThrowIfTrue(
+                    captureAllMatchingDocuments && !captureMatchingDocuments.IsEmpty
+                );
 
-                IEnumerable<KeyValuePair<DocumentId, CommittedSolution.DocumentState>> initialDocumentStates;
+                IEnumerable<
+                    KeyValuePair<DocumentId, CommittedSolution.DocumentState>
+                > initialDocumentStates;
 
                 if (captureAllMatchingDocuments || !captureMatchingDocuments.IsEmpty)
                 {
                     var documentsByProject = captureAllMatchingDocuments
-                        ? solution.Projects.Select(project => (project, project.State.DocumentStates.States.Values))
+                        ? solution.Projects.Select(project =>
+                            (project, project.State.DocumentStates.States.Values)
+                        )
                         : GetDocumentStatesGroupedByProject(solution, captureMatchingDocuments);
 
-                    initialDocumentStates = await CommittedSolution.GetMatchingDocumentsAsync(documentsByProject, _compilationOutputsProvider, sourceTextProvider, cancellationToken).ConfigureAwait(false);
+                    initialDocumentStates = await CommittedSolution
+                        .GetMatchingDocumentsAsync(
+                            documentsByProject,
+                            _compilationOutputsProvider,
+                            sourceTextProvider,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    initialDocumentStates = SpecializedCollections.EmptyEnumerable<KeyValuePair<DocumentId, CommittedSolution.DocumentState>>();
+                    initialDocumentStates = SpecializedCollections.EmptyEnumerable<
+                        KeyValuePair<DocumentId, CommittedSolution.DocumentState>
+                    >();
                 }
 
-                var sessionId = new DebuggingSessionId(Interlocked.Increment(ref s_debuggingSessionId));
-                var session = new DebuggingSession(sessionId, solution, debuggerService, _compilationOutputsProvider, sourceTextProvider, initialDocumentStates, reportDiagnostics);
+                var sessionId = new DebuggingSessionId(
+                    Interlocked.Increment(ref s_debuggingSessionId)
+                );
+                var session = new DebuggingSession(
+                    sessionId,
+                    solution,
+                    debuggerService,
+                    _compilationOutputsProvider,
+                    sourceTextProvider,
+                    initialDocumentStates,
+                    reportDiagnostics
+                );
 
                 lock (_debuggingSessions)
                 {
@@ -159,27 +190,44 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 Log.Write("Session #{0} started.", sessionId.Ordinal);
                 return sessionId;
-
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable();
             }
         }
 
-        private static IEnumerable<(Project, IEnumerable<DocumentState>)> GetDocumentStatesGroupedByProject(Solution solution, ImmutableArray<DocumentId> documentIds)
-            => from documentId in documentIds
-               where solution.ContainsDocument(documentId)
-               group documentId by documentId.ProjectId into projectDocumentIds
-               let project = solution.GetRequiredProject(projectDocumentIds.Key)
-               select (project, from documentId in projectDocumentIds select project.State.DocumentStates.GetState(documentId));
+        private static IEnumerable<(
+            Project,
+            IEnumerable<DocumentState>
+        )> GetDocumentStatesGroupedByProject(
+            Solution solution,
+            ImmutableArray<DocumentId> documentIds
+        ) =>
+            from documentId in documentIds
+            where solution.ContainsDocument(documentId)
+            group documentId by documentId.ProjectId into projectDocumentIds
+            let project = solution.GetRequiredProject(projectDocumentIds.Key)
+            select (
+                project,
+                from documentId in projectDocumentIds
+                select project.State.DocumentStates.GetState(documentId)
+            );
 
-        public void EndDebuggingSession(DebuggingSessionId sessionId, out ImmutableArray<DocumentId> documentsToReanalyze)
+        public void EndDebuggingSession(
+            DebuggingSessionId sessionId,
+            out ImmutableArray<DocumentId> documentsToReanalyze
+        )
         {
             DebuggingSession? debuggingSession;
             lock (_debuggingSessions)
             {
-                _debuggingSessions.TryRemoveFirst((s, sessionId) => s.Id == sessionId, sessionId, out debuggingSession);
+                _debuggingSessions.TryRemoveFirst(
+                    (s, sessionId) => s.Id == sessionId,
+                    sessionId,
+                    out debuggingSession
+                );
             }
 
             Contract.ThrowIfNull(debuggingSession, "Debugging session has not started.");
@@ -189,26 +237,45 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Log.Write("Session #{0} ended.", debuggingSession.Id.Ordinal);
         }
 
-        public void BreakStateOrCapabilitiesChanged(DebuggingSessionId sessionId, bool? inBreakState, out ImmutableArray<DocumentId> documentsToReanalyze)
+        public void BreakStateOrCapabilitiesChanged(
+            DebuggingSessionId sessionId,
+            bool? inBreakState,
+            out ImmutableArray<DocumentId> documentsToReanalyze
+        )
         {
             var debuggingSession = TryGetDebuggingSession(sessionId);
             Contract.ThrowIfNull(debuggingSession);
-            debuggingSession.BreakStateOrCapabilitiesChanged(inBreakState, out documentsToReanalyze);
+            debuggingSession.BreakStateOrCapabilitiesChanged(
+                inBreakState,
+                out documentsToReanalyze
+            );
         }
 
-        public ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, ActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken)
+        public ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(
+            Document document,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        )
         {
-            return GetDiagnosticReportingDebuggingSessions().SelectManyAsArrayAsync(
-                (s, arg, cancellationToken) => s.GetDocumentDiagnosticsAsync(arg.document, arg.activeStatementSpanProvider, cancellationToken),
-                (document, activeStatementSpanProvider),
-                cancellationToken);
+            return GetDiagnosticReportingDebuggingSessions()
+                .SelectManyAsArrayAsync(
+                    (s, arg, cancellationToken) =>
+                        s.GetDocumentDiagnosticsAsync(
+                            arg.document,
+                            arg.activeStatementSpanProvider,
+                            cancellationToken
+                        ),
+                    (document, activeStatementSpanProvider),
+                    cancellationToken
+                );
         }
 
         public ValueTask<EmitSolutionUpdateResults> EmitSolutionUpdateAsync(
             DebuggingSessionId sessionId,
             Solution solution,
             ActiveStatementSpanProvider activeStatementSpanProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var debuggingSession = TryGetDebuggingSession(sessionId);
             if (debuggingSession == null)
@@ -216,10 +283,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return ValueTaskFactory.FromResult(EmitSolutionUpdateResults.Empty);
             }
 
-            return debuggingSession.EmitSolutionUpdateAsync(solution, activeStatementSpanProvider, cancellationToken);
+            return debuggingSession.EmitSolutionUpdateAsync(
+                solution,
+                activeStatementSpanProvider,
+                cancellationToken
+            );
         }
 
-        public void CommitSolutionUpdate(DebuggingSessionId sessionId, out ImmutableArray<DocumentId> documentsToReanalyze)
+        public void CommitSolutionUpdate(
+            DebuggingSessionId sessionId,
+            out ImmutableArray<DocumentId> documentsToReanalyze
+        )
         {
             var debuggingSession = TryGetDebuggingSession(sessionId);
             Contract.ThrowIfNull(debuggingSession);
@@ -235,7 +309,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             debuggingSession.DiscardSolutionUpdate();
         }
 
-        public ValueTask<ImmutableArray<ImmutableArray<ActiveStatementSpan>>> GetBaseActiveStatementSpansAsync(DebuggingSessionId sessionId, Solution solution, ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken)
+        public ValueTask<
+            ImmutableArray<ImmutableArray<ActiveStatementSpan>>
+        > GetBaseActiveStatementSpansAsync(
+            DebuggingSessionId sessionId,
+            Solution solution,
+            ImmutableArray<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        )
         {
             var debuggingSession = TryGetDebuggingSession(sessionId);
             if (debuggingSession == null)
@@ -243,10 +324,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return default;
             }
 
-            return debuggingSession.GetBaseActiveStatementSpansAsync(solution, documentIds, cancellationToken);
+            return debuggingSession.GetBaseActiveStatementSpansAsync(
+                solution,
+                documentIds,
+                cancellationToken
+            );
         }
 
-        public ValueTask<ImmutableArray<ActiveStatementSpan>> GetAdjustedActiveStatementSpansAsync(DebuggingSessionId sessionId, TextDocument mappedDocument, ActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken)
+        public ValueTask<ImmutableArray<ActiveStatementSpan>> GetAdjustedActiveStatementSpansAsync(
+            DebuggingSessionId sessionId,
+            TextDocument mappedDocument,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        )
         {
             var debuggingSession = TryGetDebuggingSession(sessionId);
             if (debuggingSession == null)
@@ -254,25 +344,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return ValueTaskFactory.FromResult(ImmutableArray<ActiveStatementSpan>.Empty);
             }
 
-            return debuggingSession.GetAdjustedActiveStatementSpansAsync(mappedDocument, activeStatementSpanProvider, cancellationToken);
+            return debuggingSession.GetAdjustedActiveStatementSpansAsync(
+                mappedDocument,
+                activeStatementSpanProvider,
+                cancellationToken
+            );
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor(EditAndContinueService service)
         {
             private readonly EditAndContinueService _service = service;
 
-            public void SetOutputProvider(Func<Project, CompilationOutputs> value)
-                => _service._compilationOutputsProvider = value;
+            public void SetOutputProvider(Func<Project, CompilationOutputs> value) =>
+                _service._compilationOutputsProvider = value;
 
-            public DebuggingSession GetDebuggingSession(DebuggingSessionId id)
-                => _service.TryGetDebuggingSession(id) ?? throw ExceptionUtilities.UnexpectedValue(id);
+            public DebuggingSession GetDebuggingSession(DebuggingSessionId id) =>
+                _service.TryGetDebuggingSession(id) ?? throw ExceptionUtilities.UnexpectedValue(id);
 
-            public ImmutableArray<DebuggingSession> GetActiveDebuggingSessions()
-                => _service.GetActiveDebuggingSessions();
-
+            public ImmutableArray<DebuggingSession> GetActiveDebuggingSessions() =>
+                _service.GetActiveDebuggingSessions();
         }
     }
 }

@@ -18,9 +18,9 @@ namespace Microsoft.CodeAnalysis
     {
         /// <summary>
         /// If this field serves as a backing variable for an automatically generated
-        /// property or a field-like event, returns that 
+        /// property or a field-like event, returns that
         /// property/event. Otherwise returns null.
-        /// Note, the set of possible associated symbols might be expanded in the future to 
+        /// Note, the set of possible associated symbols might be expanded in the future to
         /// reflect changes in the languages.
         /// </summary>
         ISymbol? AssociatedSymbol { get; }
@@ -32,12 +32,12 @@ namespace Microsoft.CodeAnalysis
         bool IsConst { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "readonly". 
+        /// Returns true if this field was declared as "readonly".
         /// </summary>
         bool IsReadOnly { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "volatile". 
+        /// Returns true if this field was declared as "volatile".
         /// </summary>
         bool IsVolatile { get; }
 
@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// A tuple type will always have default elements such as Item1, Item2, Item3...
-        /// This API allows matching a field that represents a named element, such as "Alice" 
+        /// This API allows matching a field that represents a named element, such as "Alice"
         /// to the corresponding default element field such as "Item1"
         /// </remarks>
         IFieldSymbol? CorrespondingTupleField { get; }

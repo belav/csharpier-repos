@@ -11,10 +11,11 @@ namespace System.Net.NetworkInformation
     public partial class NetworkChange
     {
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
-        public NetworkChange()
-        {
-        }
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
+        public NetworkChange() { }
 
         [UnsupportedOSPlatform("illumos")]
         [UnsupportedOSPlatform("solaris")]
@@ -33,7 +34,10 @@ namespace System.Net.NetworkInformation
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         public static void RegisterNetworkChange(NetworkChange nc) { }
     }
 }

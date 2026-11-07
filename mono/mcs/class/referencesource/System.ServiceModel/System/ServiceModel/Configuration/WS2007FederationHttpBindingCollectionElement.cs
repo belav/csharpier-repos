@@ -5,16 +5,21 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
 
-    public partial class WS2007FederationHttpBindingCollectionElement : StandardBindingCollectionElement<WS2007FederationHttpBinding, WS2007FederationHttpBindingElement>
+    public partial class WS2007FederationHttpBindingCollectionElement
+        : StandardBindingCollectionElement<
+            WS2007FederationHttpBinding,
+            WS2007FederationHttpBindingElement
+        >
     {
         internal static WS2007FederationHttpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (WS2007FederationHttpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName);
+            return (WS2007FederationHttpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName
+                );
         }
-
     }
 }
-

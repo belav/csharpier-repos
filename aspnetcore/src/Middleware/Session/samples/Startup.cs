@@ -41,21 +41,18 @@ public class Startup
     {
         app.UseSession();
 
-        app.Map(
-            "/session",
-            subApp =>
+        app.Map("/session", subApp =>
+        {
+            subApp.Run(async context =>
             {
-                subApp.Run(async context =>
-                {
-                    int visits = 0;
-                    visits = context.Session.GetInt32("visits") ?? 0;
-                    context.Session.SetInt32("visits", ++visits);
-                    await context.Response.WriteAsync(
-                        "Counting: You have visited our page this many times: " + visits
-                    );
-                });
-            }
-        );
+                int visits = 0;
+                visits = context.Session.GetInt32("visits") ?? 0;
+                context.Session.SetInt32("visits", ++visits);
+                await context.Response.WriteAsync(
+                    "Counting: You have visited our page this many times: " + visits
+                );
+            });
+        });
 
         app.Run(async context =>
         {

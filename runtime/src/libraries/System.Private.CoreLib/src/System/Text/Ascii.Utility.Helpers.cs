@@ -38,9 +38,14 @@ namespace System.Text
         /// contain all-ASCII data.)
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static uint CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(uint value)
+        internal static uint CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(
+            uint value
+        )
         {
-            Debug.Assert(!AllBytesInUInt32AreAscii(value), "Caller shouldn't provide an all-ASCII value.");
+            Debug.Assert(
+                !AllBytesInUInt32AreAscii(value),
+                "Caller shouldn't provide an all-ASCII value."
+            );
 
             if (BitConverter.IsLittleEndian)
             {

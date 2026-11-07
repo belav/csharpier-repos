@@ -11,18 +11,30 @@ internal class Point
     public int x;
     public int y;
 
-    public Point(int _x, int _y) { x = _x; y = _y; }
+    public Point(int _x, int _y)
+    {
+        x = _x;
+        y = _y;
+    }
 
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-    public int Distance() { return x * x + y * y; }
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
+    public int Distance()
+    {
+        return x * x + y * y;
+    }
 }
 
 public class Sample5
 {
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static int func(Point p1, Point p2, Point p3)
     {
-        int h, t;
+        int h,
+            t;
 
         h = p1.Distance();
 

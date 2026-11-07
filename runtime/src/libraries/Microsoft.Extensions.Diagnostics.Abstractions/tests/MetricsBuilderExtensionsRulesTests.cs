@@ -81,8 +81,9 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         {
             var services = new ServiceCollection();
             services.AddOptions();
-            services.Configure<MetricsOptions>(options
-                => options.EnableMetrics("meter", "instrument", "listener", MeterScope.Global));
+            services.Configure<MetricsOptions>(options =>
+                options.EnableMetrics("meter", "instrument", "listener", MeterScope.Global)
+            );
 
             var container = services.BuildServiceProvider();
             var options = container.GetRequiredService<IOptions<MetricsOptions>>();
@@ -166,8 +167,9 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         {
             var services = new ServiceCollection();
             services.AddOptions();
-            services.Configure<MetricsOptions>(options
-                => options.DisableMetrics("meter", "instrument", "listener", MeterScope.Global));
+            services.Configure<MetricsOptions>(options =>
+                options.DisableMetrics("meter", "instrument", "listener", MeterScope.Global)
+            );
 
             var container = services.BuildServiceProvider();
             var options = container.GetRequiredService<IOptions<MetricsOptions>>();

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,48 +49,52 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ServiceBehaviorElement),
-		 AddItemName = "behavior",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class ServiceBehaviorElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<ServiceBehaviorElement>,  ICollection,  IEnumerable
-	{
-		public ServiceBehaviorElementCollection ()
-		{
-			AddElementName = "behavior";
-		}
+    [ConfigurationCollection(
+        typeof(ServiceBehaviorElement),
+        AddItemName = "behavior",
+        RemoveItemName = "remove",
+        ClearItemsName = "clear",
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class ServiceBehaviorElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ServiceBehaviorElement>,
+            ICollection,
+            IEnumerable
+    {
+        public ServiceBehaviorElementCollection()
+        {
+            AddElementName = "behavior";
+        }
 
+        // Properties
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((ServiceBehaviorElement)element).Name;
+        }
 
-		// Properties
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((ServiceBehaviorElement) element).Name;
-		}
+        protected override bool ThrowOnDuplicate
+        {
+            get { return true; }
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return true; }
-		}
+        [MonoTODO]
+        protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
+        {
+            base.DeserializeElement(reader, serializeCollectionKey);
+        }
 
-		[MonoTODO]
-		protected override void DeserializeElement (
-			XmlReader reader, bool serializeCollectionKey) {
-			base.DeserializeElement (reader, serializeCollectionKey);
-		}
-		protected override void BaseAdd (ConfigurationElement element)
-		{
-			var sbe = element as ServiceBehaviorElement;
-			if (sbe != null && sbe.Name == null)
-				sbe.Name = String.Empty;
+        protected override void BaseAdd(ConfigurationElement element)
+        {
+            var sbe = element as ServiceBehaviorElement;
+            if (sbe != null && sbe.Name == null)
+                sbe.Name = String.Empty;
 
-			base.BaseAdd (sbe);
-		}
-	}
-
+            base.BaseAdd(sbe);
+        }
+    }
 }

@@ -30,8 +30,7 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     ///     Gets the entity type that this property belongs to.
     /// </summary>
     [Obsolete("Use DeclaringType and cast to IConventionEntityType or IConventionComplexType")]
-    new IConventionEntityType DeclaringEntityType
-        => (IConventionEntityType)DeclaringType;
+    new IConventionEntityType DeclaringEntityType => (IConventionEntityType)DeclaringType;
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyPropertyBase.ClrType" />.
@@ -69,7 +68,10 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    ValueGenerated? SetValueGenerated(ValueGenerated? valueGenerated, bool fromDataAnnotation = false);
+    ValueGenerated? SetValueGenerated(
+        ValueGenerated? valueGenerated,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.ValueGenerated" />.
@@ -102,25 +104,24 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     ///     Returns a value indicating whether the property was created implicitly and isn't based on the CLR model.
     /// </summary>
     /// <returns>A value indicating whether the property was created implicitly and isn't based on the CLR model.</returns>
-    bool IsImplicitlyCreated()
-        => (IsShadowProperty() || (DeclaringType.IsPropertyBag && IsIndexerProperty()))
-            && GetConfigurationSource() == ConfigurationSource.Convention;
+    bool IsImplicitlyCreated() =>
+        (IsShadowProperty() || (DeclaringType.IsPropertyBag && IsIndexerProperty()))
+        && GetConfigurationSource() == ConfigurationSource.Convention;
 
     /// <summary>
     ///     Finds the first principal property that the given property is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The first associated principal property, or <see langword="null" /> if none exists.</returns>
-    new IConventionProperty? FindFirstPrincipal()
-        => (IConventionProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
+    new IConventionProperty? FindFirstPrincipal() =>
+        (IConventionProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
     /// <summary>
     ///     Finds the list of principal properties including the given property that the given property is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The list of all associated principal properties including the given property.</returns>
-    new IReadOnlyList<IConventionProperty> GetPrincipals()
-        => GetPrincipals<IConventionProperty>();
+    new IReadOnlyList<IConventionProperty> GetPrincipals() => GetPrincipals<IConventionProperty>();
 
     /// <summary>
     ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
@@ -147,8 +148,8 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// <returns>
     ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
     /// </returns>
-    new IConventionKey? FindContainingPrimaryKey()
-        => (IConventionKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
+    new IConventionKey? FindContainingPrimaryKey() =>
+        (IConventionKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
     /// <summary>
     ///     Gets all primary or alternate keys that use this property (including composite keys in which this property
@@ -255,7 +256,10 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    PropertySaveBehavior? SetBeforeSaveBehavior(PropertySaveBehavior? beforeSaveBehavior, bool fromDataAnnotation = false);
+    PropertySaveBehavior? SetBeforeSaveBehavior(
+        PropertySaveBehavior? beforeSaveBehavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetBeforeSaveBehavior" />.
@@ -283,7 +287,10 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    PropertySaveBehavior? SetAfterSaveBehavior(PropertySaveBehavior? afterSaveBehavior, bool fromDataAnnotation = false);
+    PropertySaveBehavior? SetAfterSaveBehavior(
+        PropertySaveBehavior? afterSaveBehavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetAfterSaveBehavior" />.
@@ -320,7 +327,8 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// <returns>The configured value.</returns>
     Func<IProperty, ITypeBase, ValueGenerator>? SetValueGeneratorFactory(
         Func<IProperty, ITypeBase, ValueGenerator>? valueGeneratorFactory,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the factory to use for generating values for this property, or <see langword="null" /> to clear any previously set factory.
@@ -337,8 +345,9 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// <returns>The configured value.</returns>
     Type? SetValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactory,
-        bool fromDataAnnotation = false);
+            Type? valueGeneratorFactory,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueGeneratorFactory" />.
@@ -364,8 +373,9 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// <returns>The configured value.</returns>
     Type? SetValueConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation = false);
+            Type? converterType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueConverter" />.
@@ -403,11 +413,14 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     Type? SetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueComparer" />.
@@ -421,7 +434,10 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// <param name="comparer">The comparer, or <see langword="null" /> to remove any previously set comparer.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    ValueComparer? SetProviderValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+    ValueComparer? SetProviderValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the custom <see cref="ValueComparer" /> to use for the provider values for this property.
@@ -431,11 +447,14 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     Type? SetProviderValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetProviderValueComparer" />.
@@ -481,6 +500,5 @@ public interface IConventionProperty : IReadOnlyProperty, IConventionPropertyBas
     ConfigurationSource? GetElementTypeConfigurationSource();
 
     /// <inheritdoc />
-    IReadOnlyElementType? IReadOnlyProperty.GetElementType()
-        => GetElementType();
+    IReadOnlyElementType? IReadOnlyProperty.GetElementType() => GetElementType();
 }

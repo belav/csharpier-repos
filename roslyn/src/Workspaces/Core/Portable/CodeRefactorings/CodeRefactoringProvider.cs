@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <remarks>
         /// TODO: Make public, tracked with https://github.com/dotnet/roslyn/issues/60703
         /// </remarks>
-        internal virtual FixAllProvider? GetFixAllProvider()
-            => null;
+        internal virtual FixAllProvider? GetFixAllProvider() => null;
 
         /// <summary>
         /// Computes the <see cref="CodeActionRequestPriority"/> group this provider should be considered to run at. Legal values
@@ -42,8 +41,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// cref="CodeActionRequestPriority.High"/> may be downgraded to <see cref="CodeActionRequestPriority.Default"/> as they
         /// poorly behaving high-priority providers can cause a negative user experience.
         /// </remarks>
-        protected virtual CodeActionRequestPriority ComputeRequestPriority()
-            => CodeActionRequestPriority.Default;
+        protected virtual CodeActionRequestPriority ComputeRequestPriority() =>
+            CodeActionRequestPriority.Default;
 
         /// <summary>
         /// Priority class this refactoring provider should run at. Returns <see
@@ -55,7 +54,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             get
             {
                 var priority = ComputeRequestPriority();
-                Debug.Assert(priority is CodeActionRequestPriority.Low or CodeActionRequestPriority.Default or CodeActionRequestPriority.High, "Provider returned invalid priority");
+                Debug.Assert(
+                    priority
+                        is CodeActionRequestPriority.Low
+                            or CodeActionRequestPriority.Default
+                            or CodeActionRequestPriority.High,
+                    "Provider returned invalid priority"
+                );
                 return priority.Clamp(this.CustomTags);
             }
         }

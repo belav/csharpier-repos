@@ -8,17 +8,17 @@ namespace System.ServiceModel
         Fault,
         Drop,
         Reject,
-        Move
+        Move,
     }
 
     static class ReceiveErrorHandlingHelper
     {
         internal static bool IsDefined(ReceiveErrorHandling value)
         {
-            return value == ReceiveErrorHandling.Fault ||
-                value == ReceiveErrorHandling.Drop ||
-                value == ReceiveErrorHandling.Reject ||
-                value == ReceiveErrorHandling.Move;
+            return value == ReceiveErrorHandling.Fault
+                || value == ReceiveErrorHandling.Drop
+                || value == ReceiveErrorHandling.Reject
+                || value == ReceiveErrorHandling.Move;
         }
     }
 }

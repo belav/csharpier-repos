@@ -20,7 +20,8 @@ public class RelationalMaxIdentifierLengthConvention : IModelInitializedConventi
     public RelationalMaxIdentifierLengthConvention(
         int maxIdentifierLength,
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         MaxIdentifierLength = maxIdentifierLength;
         Dependencies = dependencies;
@@ -49,6 +50,6 @@ public class RelationalMaxIdentifierLengthConvention : IModelInitializedConventi
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessModelInitialized(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
-        => modelBuilder.Metadata.Builder.HasMaxIdentifierLength(MaxIdentifierLength);
+        IConventionContext<IConventionModelBuilder> context
+    ) => modelBuilder.Metadata.Builder.HasMaxIdentifierLength(MaxIdentifierLength);
 }

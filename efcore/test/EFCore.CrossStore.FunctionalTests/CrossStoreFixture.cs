@@ -7,18 +7,24 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class CrossStoreFixture : FixtureBase
 {
-    public DbContextOptions CreateOptions(TestStore testStore)
-        => AddOptions(testStore.AddProviderOptions(new DbContextOptionsBuilder()))
+    public DbContextOptions CreateOptions(TestStore testStore) =>
+        AddOptions(testStore.AddProviderOptions(new DbContextOptionsBuilder()))
             .UseInternalServiceProvider(testStore.ServiceProvider)
             .Options;
 
-    public CrossStoreContext CreateContext(TestStore testStore)
-        => new(CreateOptions(testStore));
+    public CrossStoreContext CreateContext(TestStore testStore) => new(CreateOptions(testStore));
 
-    public TestStore CreateTestStore(ITestStoreFactory testStoreFactory, string storeName, Action<CrossStoreContext> seed = null)
-        => testStoreFactory.GetOrCreate(storeName)
+    public TestStore CreateTestStore(
+        ITestStoreFactory testStoreFactory,
+        string storeName,
+        Action<CrossStoreContext> seed = null
+    ) =>
+        testStoreFactory
+            .GetOrCreate(storeName)
             .Initialize(
-                AddServices(testStoreFactory.AddProviderServices(new ServiceCollection())).BuildServiceProvider(validateScopes: true),
+                AddServices(testStoreFactory.AddProviderServices(new ServiceCollection()))
+                    .BuildServiceProvider(validateScopes: true),
                 CreateContext,
-                seed);
+                seed
+            );
 }

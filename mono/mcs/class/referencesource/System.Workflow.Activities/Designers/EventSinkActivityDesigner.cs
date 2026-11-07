@@ -1,18 +1,18 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     #region Class HandleExternalEventActivityDesigner
     [ActivityDesignerTheme(typeof(EventSinkDesignerTheme))]
@@ -37,12 +37,22 @@ namespace System.Workflow.Activities
             eventSink.GetParameterPropertyDescriptors(properties);
         }
 
-        private void AddRemoveCorrelationToken(Type interfaceType, IDictionary properties, object corrRefProperty)
+        private void AddRemoveCorrelationToken(
+            Type interfaceType,
+            IDictionary properties,
+            object corrRefProperty
+        )
         {
             if (interfaceType != null)
             {
-                object[] corrProvAttribs = interfaceType.GetCustomAttributes(typeof(CorrelationProviderAttribute), false);
-                object[] corrParamAttribs = interfaceType.GetCustomAttributes(typeof(CorrelationParameterAttribute), false);
+                object[] corrProvAttribs = interfaceType.GetCustomAttributes(
+                    typeof(CorrelationProviderAttribute),
+                    false
+                );
+                object[] corrParamAttribs = interfaceType.GetCustomAttributes(
+                    typeof(CorrelationParameterAttribute),
+                    false
+                );
                 if (corrProvAttribs.Length != 0 || corrParamAttribs.Length != 0)
                 {
                     if (!properties.Contains("CorrelationToken"))
@@ -66,23 +76,43 @@ namespace System.Workflow.Activities
                     {
                         Type interfaceType = e.NewValue as Type;
                         if (interfaceType != null)
-                            new ExternalDataExchangeInterfaceTypeFilterProvider(Activity.Site).CanFilterType(interfaceType, true);
+                            new ExternalDataExchangeInterfaceTypeFilterProvider(
+                                Activity.Site
+                            ).CanFilterType(interfaceType, true);
 
-                        HandleExternalEventActivity eventSinkActivity = e.Activity as HandleExternalEventActivity;
-                        PropertyDescriptorUtils.SetPropertyValue(Activity.Site, TypeDescriptor.GetProperties(Activity)["EventName"], Activity, String.Empty);
+                        HandleExternalEventActivity eventSinkActivity =
+                            e.Activity as HandleExternalEventActivity;
+                        PropertyDescriptorUtils.SetPropertyValue(
+                            Activity.Site,
+                            TypeDescriptor.GetProperties(Activity)["EventName"],
+                            Activity,
+                            String.Empty
+                        );
 
-                        IExtendedUIService extUIService = (IExtendedUIService)Activity.Site.GetService(typeof(IExtendedUIService));
+                        IExtendedUIService extUIService = (IExtendedUIService)
+                            Activity.Site.GetService(typeof(IExtendedUIService));
                         if (extUIService == null)
-                            throw new Exception(SR.GetString(SR.General_MissingService, typeof(IExtendedUIService).FullName));
+                            throw new Exception(
+                                SR.GetString(
+                                    SR.General_MissingService,
+                                    typeof(IExtendedUIService).FullName
+                                )
+                            );
                     }
                 }
-                else if ((e.Member.Name == "EventName")
-                    && e.Activity is HandleExternalEventActivity)
+                else if (
+                    (e.Member.Name == "EventName")
+                    && e.Activity is HandleExternalEventActivity
+                )
                 {
                     (e.Activity as HandleExternalEventActivity).ParameterBindings.Clear();
                 }
 
-                if (e.Member.Name == "InterfaceType" || e.Member.Name == "EventName" || e.Member.Name == "CorrelationToken")
+                if (
+                    e.Member.Name == "InterfaceType"
+                    || e.Member.Name == "EventName"
+                    || e.Member.Name == "CorrelationToken"
+                )
                     TypeDescriptor.Refresh(e.Activity);
             }
         }

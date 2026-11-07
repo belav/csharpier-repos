@@ -20,8 +20,7 @@ public static class InfrastructureExtensions
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public static TService GetService<TService>(IInfrastructure<IServiceProvider> accessor)
-        where TService : class
-        => (TService)GetService(accessor, typeof(TService));
+        where TService : class => (TService)GetService(accessor, typeof(TService));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,16 +32,19 @@ public static class InfrastructureExtensions
     {
         var internalServiceProvider = accessor.Instance;
 
-        var service = internalServiceProvider.GetService(serviceType)
-            ?? internalServiceProvider.GetService<IDbContextOptions>()
-                ?.Extensions.OfType<CoreOptionsExtension>().FirstOrDefault()
-                ?.ApplicationServiceProvider
-                ?.GetService(serviceType);
+        var service =
+            internalServiceProvider.GetService(serviceType)
+            ?? internalServiceProvider
+                .GetService<IDbContextOptions>()
+                ?.Extensions.OfType<CoreOptionsExtension>()
+                .FirstOrDefault()
+                ?.ApplicationServiceProvider?.GetService(serviceType);
 
         if (service == null)
         {
             throw new InvalidOperationException(
-                CoreStrings.NoProviderConfiguredFailedToResolveService(serviceType.DisplayName()));
+                CoreStrings.NoProviderConfiguredFailedToResolveService(serviceType.DisplayName())
+            );
         }
 
         return service;

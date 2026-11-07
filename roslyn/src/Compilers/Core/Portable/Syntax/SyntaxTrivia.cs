@@ -92,7 +92,10 @@ namespace Microsoft.CodeAnalysis
             get
             {
                 return UnderlyingNode != null
-                    ? new TextSpan(Position + UnderlyingNode.GetLeadingTriviaWidth(), UnderlyingNode.Width)
+                    ? new TextSpan(
+                        Position + UnderlyingNode.GetLeadingTriviaWidth(),
+                        UnderlyingNode.Width
+                    )
                     : default(TextSpan);
             }
         }
@@ -119,7 +122,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public TextSpan FullSpan
         {
-            get { return UnderlyingNode != null ? new TextSpan(Position, UnderlyingNode.FullWidth) : default(TextSpan); }
+            get
+            {
+                return UnderlyingNode != null
+                    ? new TextSpan(Position, UnderlyingNode.FullWidth)
+                    : default(TextSpan);
+            }
         }
 
         /// <summary>
@@ -197,7 +205,8 @@ namespace Microsoft.CodeAnalysis
         public bool IsDirective => UnderlyingNode?.IsDirective ?? false;
 
         internal bool IsSkippedTokensTrivia => UnderlyingNode?.IsSkippedTokensTrivia ?? false;
-        internal bool IsDocumentationCommentTrivia => UnderlyingNode?.IsDocumentationCommentTrivia ?? false;
+        internal bool IsDocumentationCommentTrivia =>
+            UnderlyingNode?.IsDocumentationCommentTrivia ?? false;
 
         /// <summary>
         /// Returns the child non-terminal node representing the syntax tree structure under this structured trivia.
@@ -215,7 +224,7 @@ namespace Microsoft.CodeAnalysis
             return structure is object;
         }
 
-        /// <summary> 
+        /// <summary>
         /// Returns the string representation of this trivia. If this trivia is structured trivia then the returned string
         /// will not include any leading or trailing trivia present on the StructuredTriviaSyntax node of this trivia.
         /// </summary>
@@ -226,7 +235,7 @@ namespace Microsoft.CodeAnalysis
             return UnderlyingNode != null ? UnderlyingNode.ToString() : string.Empty;
         }
 
-        /// <summary> 
+        /// <summary>
         /// Returns the full string representation of this trivia. If this trivia is structured trivia then the returned string will
         /// include any leading or trailing trivia present on the StructuredTriviaSyntax node of this trivia.
         /// </summary>
@@ -267,7 +276,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool Equals(SyntaxTrivia other)
         {
-            return Token == other.Token && UnderlyingNode == other.UnderlyingNode && Position == other.Position && Index == other.Index;
+            return Token == other.Token
+                && UnderlyingNode == other.UnderlyingNode
+                && Position == other.Position
+                && Index == other.Index;
         }
 
         /// <summary>
@@ -284,10 +296,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public override int GetHashCode()
         {
-            return Hash.Combine(Token.GetHashCode(), Hash.Combine(UnderlyingNode, Hash.Combine(Position, Index)));
+            return Hash.Combine(
+                Token.GetHashCode(),
+                Hash.Combine(UnderlyingNode, Hash.Combine(Position, Index))
+            );
         }
 
-        #region Annotations 
+        #region Annotations
         /// <summary>
         /// Creates a new SyntaxTrivia with the specified annotations.
         /// </summary>
@@ -311,7 +326,9 @@ namespace Microsoft.CodeAnalysis
                 return new SyntaxTrivia(
                     token: default(SyntaxToken),
                     triviaNode: this.UnderlyingNode.WithAdditionalAnnotationsGreen(annotations),
-                    position: 0, index: 0);
+                    position: 0,
+                    index: 0
+                );
             }
 
             return default(SyntaxTrivia);
@@ -340,7 +357,9 @@ namespace Microsoft.CodeAnalysis
                 return new SyntaxTrivia(
                     token: default(SyntaxToken),
                     triviaNode: this.UnderlyingNode.WithoutAnnotationsGreen(annotations),
-                    position: 0, index: 0);
+                    position: 0,
+                    index: 0
+                );
             }
 
             return default(SyntaxTrivia);
@@ -388,7 +407,9 @@ namespace Microsoft.CodeAnalysis
             return new SyntaxTrivia(
                 token: default(SyntaxToken),
                 triviaNode: trivia.UnderlyingNode.WithAdditionalAnnotationsGreen(annotations),
-                position: 0, index: 0);
+                position: 0,
+                index: 0
+            );
         }
         #endregion
 
@@ -397,10 +418,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public SyntaxTree? SyntaxTree
         {
-            get
-            {
-                return Token.SyntaxTree;
-            }
+            get { return Token.SyntaxTree; }
         }
 
         /// <summary>
@@ -428,9 +446,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool IsEquivalentTo(SyntaxTrivia trivia)
         {
-            return
-                (UnderlyingNode == null && trivia.UnderlyingNode == null) ||
-                (UnderlyingNode != null && trivia.UnderlyingNode != null && UnderlyingNode.IsEquivalentTo(trivia.UnderlyingNode));
+            return (UnderlyingNode == null && trivia.UnderlyingNode == null)
+                || (
+                    UnderlyingNode != null
+                    && trivia.UnderlyingNode != null
+                    && UnderlyingNode.IsEquivalentTo(trivia.UnderlyingNode)
+                );
         }
     }
 }

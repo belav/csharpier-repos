@@ -18,6 +18,10 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
         /// and their relative folder path.
         /// </summary>
         Task<Solution> SyncNamespacesAsync(
-            ImmutableArray<Project> projects, CodeActionOptionsProvider options, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken);
+            ImmutableArray<Project> projects,
+            CodeActionOptionsProvider options,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        );
     }
 }

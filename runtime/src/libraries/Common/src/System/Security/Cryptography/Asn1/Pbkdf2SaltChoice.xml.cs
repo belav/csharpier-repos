@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -61,7 +63,10 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static Pbkdf2SaltChoice Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static Pbkdf2SaltChoice Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -77,7 +82,11 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out Pbkdf2SaltChoice decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out Pbkdf2SaltChoice decoded
+        )
         {
             try
             {
@@ -89,7 +98,11 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out Pbkdf2SaltChoice decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out Pbkdf2SaltChoice decoded
+        )
         {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
@@ -99,23 +112,26 @@ namespace System.Security.Cryptography.Asn1
 
             if (tag.HasSameClassAndValue(Asn1Tag.PrimitiveOctetString))
             {
-
                 if (reader.TryReadPrimitiveOctetString(out tmpSpan))
                 {
-                    decoded.Specified = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.Specified = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
                     decoded.Specified = reader.ReadOctetString();
                 }
-
             }
             else if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn tmpOtherSource;
-                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref reader, rebind, out tmpOtherSource);
+                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                    ref reader,
+                    rebind,
+                    out tmpOtherSource
+                );
                 decoded.OtherSource = tmpOtherSource;
-
             }
             else
             {

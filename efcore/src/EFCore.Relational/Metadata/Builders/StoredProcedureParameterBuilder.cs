@@ -25,7 +25,8 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     [EntityFrameworkInternal]
     public StoredProcedureParameterBuilder(
         InternalStoredProcedureParameterBuilder builder,
-        PropertyBuilder? propertyBuilder)
+        PropertyBuilder? propertyBuilder
+    )
     {
         Builder = builder;
         PropertyBuilder = propertyBuilder;
@@ -34,8 +35,7 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     /// <summary>
     ///     The stored procedure parameter being configured.
     /// </summary>
-    public virtual IMutableStoredProcedureParameter Metadata
-        => Builder.Metadata;
+    public virtual IMutableStoredProcedureParameter Metadata => Builder.Metadata;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -113,8 +113,7 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
         return this;
     }
 
-    PropertyBuilder? IInfrastructure<PropertyBuilder?>.Instance
-        => PropertyBuilder;
+    PropertyBuilder? IInfrastructure<PropertyBuilder?>.Instance => PropertyBuilder;
 
     #region Hidden System.Object members
 
@@ -123,8 +122,7 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -133,8 +131,7 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -142,8 +139,7 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

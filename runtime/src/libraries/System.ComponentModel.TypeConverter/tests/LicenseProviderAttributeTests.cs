@@ -25,7 +25,10 @@ namespace System.ComponentModel.Tests
         public void Ctor_String(string typeName)
         {
             var attribute = new LicenseProviderAttribute(typeName);
-            Assert.Equal(typeName == null ? null : Type.GetType(typeName), attribute.LicenseProvider);
+            Assert.Equal(
+                typeName == null ? null : Type.GetType(typeName),
+                attribute.LicenseProvider
+            );
             Assert.Same(attribute.LicenseProvider, attribute.LicenseProvider);
             Assert.False(attribute.IsDefaultAttribute());
         }
@@ -53,14 +56,29 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> TypeId_TestData()
         {
-            yield return new object[] { new LicenseProviderAttribute((string)null), "System.ComponentModel.LicenseProviderAttribute" };
-            yield return new object[] { new LicenseProviderAttribute("typeName"), "System.ComponentModel.LicenseProviderAttributetypeName" };
-            yield return new object[] { new LicenseProviderAttribute(typeof(int)), "System.ComponentModel.LicenseProviderAttributeSystem.Int32" };
+            yield return new object[]
+            {
+                new LicenseProviderAttribute((string)null),
+                "System.ComponentModel.LicenseProviderAttribute",
+            };
+            yield return new object[]
+            {
+                new LicenseProviderAttribute("typeName"),
+                "System.ComponentModel.LicenseProviderAttributetypeName",
+            };
+            yield return new object[]
+            {
+                new LicenseProviderAttribute(typeof(int)),
+                "System.ComponentModel.LicenseProviderAttributeSystem.Int32",
+            };
         }
 
         [Theory]
         [MemberData(nameof(TypeId_TestData))]
-        public void TypeId_ValidDesignerBaseTypeName_ReturnsExcepted(LicenseProviderAttribute attribute, object expected)
+        public void TypeId_ValidDesignerBaseTypeName_ReturnsExcepted(
+            LicenseProviderAttribute attribute,
+            object expected
+        )
         {
             Assert.Equal(expected, attribute.TypeId);
         }
@@ -70,13 +88,48 @@ namespace System.ComponentModel.Tests
             var attribute = new LicenseProviderAttribute(typeof(int));
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new LicenseProviderAttribute(typeof(int)), true };
-            yield return new object[] { attribute, new LicenseProviderAttribute(new TypeDelegator(typeof(int))), true };
-            yield return new object[] { attribute, new LicenseProviderAttribute(typeof(bool)), false };
-            yield return new object[] { attribute, new LicenseProviderAttribute(new TypeDelegator(typeof(bool))), false };
-            yield return new object[] { attribute, new LicenseProviderAttribute((Type)null), false };
-            yield return new object[] { attribute, new LicenseProviderAttribute("typeName"), false };
-            yield return new object[] { attribute, new LicenseProviderAttribute((string)null), false };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute(typeof(int)),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute(new TypeDelegator(typeof(int))),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute(typeof(bool)),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute(new TypeDelegator(typeof(bool))),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute((Type)null),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute("typeName"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new LicenseProviderAttribute((string)null),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -84,7 +137,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(LicenseProviderAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            LicenseProviderAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is LicenseProviderAttribute otherAttribute)

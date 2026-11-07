@@ -31,41 +31,43 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-	public class HttpMessageInvoker : IDisposable
-	{
-		protected private HttpMessageHandler handler;
-		readonly bool disposeHandler;
-		
-		public HttpMessageInvoker (HttpMessageHandler handler)
-			: this (handler, true)
-		{
-		}
+    public class HttpMessageInvoker : IDisposable
+    {
+        private protected HttpMessageHandler handler;
+        readonly bool disposeHandler;
 
-		public HttpMessageInvoker (HttpMessageHandler handler, bool disposeHandler)
-		{
-			if (handler == null)
-				throw new ArgumentNullException ("handler");
+        public HttpMessageInvoker(HttpMessageHandler handler)
+            : this(handler, true) { }
 
-			this.handler = handler;
-			this.disposeHandler = disposeHandler;
-		}
+        public HttpMessageInvoker(HttpMessageHandler handler, bool disposeHandler)
+        {
+            if (handler == null)
+                throw new ArgumentNullException("handler");
 
-		public void Dispose ()
-		{
-			Dispose (true);
-		}
+            this.handler = handler;
+            this.disposeHandler = disposeHandler;
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (disposing && disposeHandler && handler != null) {
-				handler.Dispose ();
-				handler = null;
-			}
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+        }
 
-		public virtual Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
-		{
-			return handler.SendAsync (request, cancellationToken);
-		}
-	}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && disposeHandler && handler != null)
+            {
+                handler.Dispose();
+                handler = null;
+            }
+        }
+
+        public virtual Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
+        {
+            return handler.SendAsync(request, cancellationToken);
+        }
+    }
 }

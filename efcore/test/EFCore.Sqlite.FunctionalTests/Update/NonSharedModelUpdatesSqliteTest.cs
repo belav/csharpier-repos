@@ -75,10 +75,13 @@ RETURNING 1;
 DELETE FROM "Author"
 WHERE "Id" = @p0
 RETURNING 1;
-""");
+"""
+        );
     }
 
-    public override async Task DbUpdateException_Entries_is_correct_with_multiple_inserts(bool async)
+    public override async Task DbUpdateException_Entries_is_correct_with_multiple_inserts(
+        bool async
+    )
     {
         await base.DbUpdateException_Entries_is_correct_with_multiple_inserts(async);
 
@@ -105,12 +108,12 @@ RETURNING "Id";
 INSERT INTO "Blog" ("Name")
 VALUES (@p0)
 RETURNING "Id";
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

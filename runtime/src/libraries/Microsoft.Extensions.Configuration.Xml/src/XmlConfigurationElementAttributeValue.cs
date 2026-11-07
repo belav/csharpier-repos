@@ -7,7 +7,12 @@ namespace Microsoft.Extensions.Configuration.Xml
 {
     internal sealed class XmlConfigurationElementAttributeValue
     {
-        public XmlConfigurationElementAttributeValue(string attribute, string value, int? lineNumber, int? linePosition)
+        public XmlConfigurationElementAttributeValue(
+            string attribute,
+            string value,
+            int? lineNumber,
+            int? linePosition
+        )
         {
             ThrowHelper.ThrowIfNull(attribute);
             ThrowHelper.ThrowIfNull(value);

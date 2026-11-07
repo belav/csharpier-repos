@@ -15,7 +15,7 @@ using System.Text;
 namespace System.Data.Common.Utils
 {
     /// <summary>
-    /// Represents a node in a hierarchical collection of information strings. 
+    /// Represents a node in a hierarchical collection of information strings.
     /// Intended as a common way mechanism to represent tree structures for debugging (using the TreePrinter class).
     /// A node consists of a string (represented as a StringBuilder), its collection of child nodes, and an optional Tag value.
     /// </summary>
@@ -62,21 +62,31 @@ namespace System.Data.Common.Utils
                 _children.AddRange(children);
             }
         }
-                
+
         // 'public' properties
 
         /// <summary>
         /// The current text of this node.
         /// </summary>
-        internal StringBuilder Text { get { return _text; } }
+        internal StringBuilder Text
+        {
+            get { return _text; }
+        }
 
         /// <summary>
         /// The collection of child nodes for this node, which may be empty.
         /// </summary>
-        internal IList<TreeNode> Children { get { return _children; } }
+        internal IList<TreeNode> Children
+        {
+            get { return _children; }
+        }
 
         // Used only by the TreePrinter when generating the output string
-        internal int Position { get { return _position; } set { _position = value; } }
+        internal int Position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
     }
 
     /// <summary>
@@ -104,7 +114,7 @@ namespace System.Data.Common.Utils
         /// <returns>A string representation of the specified tree</returns>
         internal virtual string Print(TreeNode node)
         {
-             this.PreProcess(node);
+            this.PreProcess(node);
 
             StringBuilder text = new StringBuilder();
             PrintNode(text, node);
@@ -119,7 +129,7 @@ namespace System.Data.Common.Utils
         internal TreePrinter() { }
 
         // 'protected' API that may be overriden to customize printing
-        
+
         /// <summary>
         /// Called once on the root of the tree before printing begins
         /// </summary>
@@ -151,7 +161,7 @@ namespace System.Data.Common.Utils
         internal virtual void PrintNode(StringBuilder text, TreeNode node)
         {
             IndentLine(text);
-            
+
             this.BeforeAppend(node, text);
             text.Append(node.Text.ToString());
             this.AfterAppend(node, text);
@@ -188,7 +198,13 @@ namespace System.Data.Common.Utils
             for (int scopeIdx = 0; scopeIdx < _scopes.Count; scopeIdx++)
             {
                 TreeNode parentScope = _scopes[scopeIdx];
-                if (!_showLines || (parentScope.Position == parentScope.Children.Count && scopeIdx != _scopes.Count - 1))
+                if (
+                    !_showLines
+                    || (
+                        parentScope.Position == parentScope.Children.Count
+                        && scopeIdx != _scopes.Count - 1
+                    )
+                )
                 {
                     text.Append(' ');
                 }

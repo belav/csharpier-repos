@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,295 +31,323 @@
 
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MX = MonoSecurity::Mono.Security.X509;
 #else
 using MX = Mono.Security.X509;
 #endif
 
-using System.Security.Permissions;
+using System.Security.Permissions;using MX = MonoSecurity::Mono.Security.X509;
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509Store : IDisposable
+    {
+        private string _name;
+        private StoreLocation _location;
+        private X509Certificate2Collection list;
+        private OpenFlags _flags;
+        private MX.X509Store store;
 
-	public sealed class X509Store : IDisposable {
+        // constructors
 
-		private string _name;
-		private StoreLocation _location;
-		private X509Certificate2Collection list;
-		private OpenFlags _flags;
-		private MX.X509Store store;
+        // BUG: MY when using this constructor - My when using StoreName.My
+        public X509Store()
+            : this("MY", StoreLocation.CurrentUser) { }
 
-		// constructors
+        public X509Store(string storeName)
+            : this(storeName, StoreLocation.CurrentUser) { }
 
-		// BUG: MY when using this constructor - My when using StoreName.My
-		public X509Store () 
-			: this ("MY", StoreLocation.CurrentUser) 
-		{
-		}
+        public X509Store(StoreName storeName)
+            : this(storeName, StoreLocation.CurrentUser) { }
 
-		public X509Store (string storeName) 
-			: this (storeName, StoreLocation.CurrentUser) 
-		{
-		}
+        public X509Store(StoreLocation storeLocation)
+            : this("MY", storeLocation) { }
 
-		public X509Store (StoreName storeName) 
-			: this (storeName, StoreLocation.CurrentUser)
-		{
-		}
+        public X509Store(StoreName storeName, StoreLocation storeLocation)
+        {
+            if ((storeName < StoreName.AddressBook) || (storeName > StoreName.TrustedPublisher))
+                throw new ArgumentException("storeName");
+            if (
+                (storeLocation < StoreLocation.CurrentUser)
+                || (storeLocation > StoreLocation.LocalMachine)
+            )
+                throw new ArgumentException("storeLocation");
 
-		public X509Store (StoreLocation storeLocation) 
-			: this ("MY", storeLocation)
-		{
-		}
+            switch (storeName)
+            {
+                case StoreName.CertificateAuthority:
+                    _name = "CA";
+                    break;
+                default:
+                    _name = storeName.ToString();
+                    break;
+            }
+            _location = storeLocation;
+        }
 
-		public X509Store (StoreName storeName, StoreLocation storeLocation)
-		{
-			if ((storeName < StoreName.AddressBook) || (storeName > StoreName.TrustedPublisher))
-				throw new ArgumentException ("storeName");
-			if ((storeLocation < StoreLocation.CurrentUser) || (storeLocation > StoreLocation.LocalMachine))
-				throw new ArgumentException ("storeLocation");
+        public X509Store(StoreName storeName, StoreLocation storeLocation, OpenFlags openFlags)
+            : this(storeName, storeLocation)
+        {
+            _flags = openFlags;
+        }
 
-			switch (storeName) {
-			case StoreName.CertificateAuthority:
-				_name = "CA";
-				break;
-			default:
-				_name = storeName.ToString ();
-				break;
-			}
-			_location = storeLocation;
-		}
+        public X509Store(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+            : this(storeName, storeLocation)
+        {
+            _flags = openFlags;
+        }
 
-		public X509Store (StoreName storeName, StoreLocation storeLocation, OpenFlags openFlags) 
-			: this (storeName, storeLocation)
-		{
-			_flags = openFlags;
-		}
+        [MonoTODO("Mono's stores are fully managed. All handles are invalid.")]
+        [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
+        public X509Store(IntPtr storeHandle)
+        {
+            if (storeHandle == IntPtr.Zero)
+                throw new ArgumentNullException("storeHandle");
+            throw new CryptographicException("Invalid handle.");
+        }
 
-		public X509Store (string storeName, StoreLocation storeLocation, OpenFlags openFlags) 
-			: this (storeName, storeLocation)
-		{
-			_flags = openFlags;
-		}
+        public X509Store(string storeName, StoreLocation storeLocation)
+        {
+            if (
+                (storeLocation < StoreLocation.CurrentUser)
+                || (storeLocation > StoreLocation.LocalMachine)
+            )
+                throw new ArgumentException("storeLocation");
 
-		[MonoTODO ("Mono's stores are fully managed. All handles are invalid.")]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode=true)]
-		public X509Store (IntPtr storeHandle)
-		{
-			if (storeHandle == IntPtr.Zero)
-				throw new ArgumentNullException ("storeHandle");
-			throw new CryptographicException ("Invalid handle.");
-		}
+            _name = storeName;
+            _location = storeLocation;
+        }
 
-		public X509Store (string storeName, StoreLocation storeLocation)
-		{
-			if ((storeLocation < StoreLocation.CurrentUser) || (storeLocation > StoreLocation.LocalMachine))
-				throw new ArgumentException ("storeLocation");
+        // properties
 
-			_name = storeName;
-			_location = storeLocation;
-		}
+        public X509Certificate2Collection Certificates
+        {
+            get
+            {
+                if (list == null)
+                    list = new X509Certificate2Collection();
+                else if (store == null)
+                    list.Clear();
 
-		// properties
+                return list;
+            }
+        }
 
-		public X509Certificate2Collection Certificates {
-			get {
-				if (list == null)
-					list = new X509Certificate2Collection ();
-				else if (store == null)
-					list.Clear ();
+        public StoreLocation Location
+        {
+            get { return _location; }
+        }
 
-				return list;
-			}
-		} 
+        public string Name
+        {
+            get { return _name; }
+        }
 
-		public StoreLocation Location {
-			get { return _location; }
-		}
+        private MX.X509Stores Factory
+        {
+            get
+            {
+                if (_location == StoreLocation.CurrentUser)
+                    return MX.X509StoreManager.CurrentUser;
+                else
+                    return MX.X509StoreManager.LocalMachine;
+            }
+        }
 
-		public string Name {
-			get { return _name; }
-		}
+        public bool IsOpen
+        {
+            get { return (store != null); }
+        }
 
-		private MX.X509Stores Factory {
-			get {
-				if (_location == StoreLocation.CurrentUser)
-					return MX.X509StoreManager.CurrentUser;
-				else
-					return MX.X509StoreManager.LocalMachine;
-			}
-		}
+        private bool IsReadOnly
+        {
+            get { return ((_flags & OpenFlags.ReadWrite) == OpenFlags.ReadOnly); }
+        }
 
-		public bool IsOpen {
-			get { return (store != null); }
-		}
+        internal MX.X509Store Store
+        {
+            get { return store; }
+        }
 
-		private bool IsReadOnly {
-			get { return ((_flags & OpenFlags.ReadWrite) == OpenFlags.ReadOnly); }
-		}
+        [MonoTODO("Mono's stores are fully managed. Always returns IntPtr.Zero.")]
+        public IntPtr StoreHandle
+        {
+            get { return IntPtr.Zero; }
+        }
 
-		internal MX.X509Store Store {
-			get { return store; }
-		}
+        // methods
 
-		[MonoTODO ("Mono's stores are fully managed. Always returns IntPtr.Zero.")]
-		public IntPtr StoreHandle {
-			get { return IntPtr.Zero; }
-		}
+        public void Add(X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            if (!IsOpen)
+                throw new CryptographicException(Locale.GetText("Store isn't opened."));
+            if (IsReadOnly)
+                throw new CryptographicException(Locale.GetText("Store is read-only."));
 
-		// methods
+            if (!Exists(certificate))
+            {
+                try
+                {
+                    store.Import(new MX.X509Certificate(certificate.RawData));
+                }
+                finally
+                {
+                    Certificates.Add(certificate);
+                }
+            }
+        }
 
-		public void Add (X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			if (!IsOpen)
-				throw new CryptographicException (Locale.GetText ("Store isn't opened."));
-			if (IsReadOnly)
-				throw new CryptographicException (Locale.GetText ("Store is read-only."));
+        [MonoTODO("Method isn't transactional (like documented)")]
+        public void AddRange(X509Certificate2Collection certificates)
+        {
+            if (certificates == null)
+                throw new ArgumentNullException("certificates");
 
-			if (!Exists (certificate)) {
-				try {
-					store.Import (new MX.X509Certificate (certificate.RawData));
-				}
-				finally {
-					Certificates.Add (certificate);
-				}
-			}
-		}
+            if (certificates.Count == 0)
+                return;
 
-		[MonoTODO ("Method isn't transactional (like documented)")]
-		public void AddRange (X509Certificate2Collection certificates)
-		{
-			if (certificates == null)
-				throw new ArgumentNullException ("certificates");
+            if (!IsOpen)
+                throw new CryptographicException(Locale.GetText("Store isn't opened."));
+            if (IsReadOnly)
+                throw new CryptographicException(Locale.GetText("Store is read-only."));
 
-			if (certificates.Count == 0)
-				return;
+            foreach (X509Certificate2 certificate in certificates)
+            {
+                if (!Exists(certificate))
+                {
+                    try
+                    {
+                        store.Import(new MX.X509Certificate(certificate.RawData));
+                    }
+                    finally
+                    {
+                        Certificates.Add(certificate);
+                    }
+                }
+            }
+        }
 
-			if (!IsOpen)
-				throw new CryptographicException (Locale.GetText ("Store isn't opened."));
-			if (IsReadOnly)
-				throw new CryptographicException (Locale.GetText ("Store is read-only."));
+        public void Close()
+        {
+            store = null;
+            if (list != null)
+                list.Clear();
+        }
 
-			foreach (X509Certificate2 certificate in certificates) {
-				if (!Exists (certificate)) {
-					try {
-						store.Import (new MX.X509Certificate (certificate.RawData));
-					}
-					finally {
-						Certificates.Add (certificate);
-					}
-				}
-			}
-		}
+        public void Dispose()
+        {
+            Close();
+        }
 
-		public void Close () 
-		{
-			store = null;
-			if (list != null)
-				list.Clear ();
-		}
+        public void Open(OpenFlags flags)
+        {
+            if (String.IsNullOrEmpty(_name))
+                throw new CryptographicException(
+                    Locale.GetText("Invalid store name (null or empty).")
+                );
 
-		public void Dispose ()
-		{
-			Close ();
-		}
+            /* keep existing Mono installations (pre 2.0) compatible with new stuff */
+            string name;
+            switch (_name)
+            {
+                case "Root":
+                    name = "Trust";
+                    break;
+                default:
+                    name = _name;
+                    break;
+            }
 
-		public void Open (OpenFlags flags)
-		{
-			if (String.IsNullOrEmpty (_name))
-				throw new CryptographicException (Locale.GetText ("Invalid store name (null or empty)."));
+            bool create = ((flags & OpenFlags.OpenExistingOnly) != OpenFlags.OpenExistingOnly);
+            store = Factory.Open(name, create);
+            if (store == null)
+                throw new CryptographicException(
+                    Locale.GetText("Store {0} doesn't exists.", _name)
+                );
+            _flags = flags;
 
-			/* keep existing Mono installations (pre 2.0) compatible with new stuff */
-			string name;
-			switch (_name) {
-			case "Root":
-				name = "Trust";
-				break;
-			default:
-				name = _name;
-				break;
-			}
+            foreach (MX.X509Certificate x in store.Certificates)
+            {
+                var cert2 = new X509Certificate2(x.RawData);
+                cert2.Impl.PrivateKey = x.RSA;
+                Certificates.Add(cert2);
+            }
+        }
 
-			bool create = ((flags & OpenFlags.OpenExistingOnly) != OpenFlags.OpenExistingOnly);
-			store = Factory.Open (name, create);
-			if (store == null)
-				throw new CryptographicException (Locale.GetText ("Store {0} doesn't exists.", _name));
-			_flags = flags;
+        public void Remove(X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            if (!IsOpen)
+                throw new CryptographicException(Locale.GetText("Store isn't opened."));
 
-			foreach (MX.X509Certificate x in store.Certificates) {
-				var cert2 = new X509Certificate2 (x.RawData);
-				cert2.Impl.PrivateKey = x.RSA;
-				Certificates.Add (cert2);
-			}
-		}
+            if (!Exists(certificate))
+                return;
 
-		public void Remove (X509Certificate2 certificate) 
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			if (!IsOpen)
-				throw new CryptographicException (Locale.GetText ("Store isn't opened."));
+            if (IsReadOnly)
+                throw new CryptographicException(Locale.GetText("Store is read-only."));
 
-			if (!Exists (certificate))
-				return;
+            try
+            {
+                store.Remove(new MX.X509Certificate(certificate.RawData));
+            }
+            finally
+            {
+                Certificates.Remove(certificate);
+            }
+        }
 
-			if (IsReadOnly)
-				throw new CryptographicException (Locale.GetText ("Store is read-only."));
+        [MonoTODO("Method isn't transactional (like documented)")]
+        public void RemoveRange(X509Certificate2Collection certificates)
+        {
+            if (certificates == null)
+                throw new ArgumentNullException("certificates");
 
-			try {
-				store.Remove (new MX.X509Certificate (certificate.RawData));
-			}
-			finally {
-				Certificates.Remove (certificate);
-			}
-		}
+            if (certificates.Count == 0)
+                return;
 
-		[MonoTODO ("Method isn't transactional (like documented)")]
-		public void RemoveRange (X509Certificate2Collection certificates) 
-		{
-			if (certificates == null)
-				throw new ArgumentNullException ("certificates");
+            if (!IsOpen)
+                throw new CryptographicException(Locale.GetText("Store isn't opened."));
 
-			if (certificates.Count == 0)
-				return;
+            bool delete = false;
+            foreach (X509Certificate2 certificate in certificates)
+            {
+                if (Exists(certificate))
+                    delete = true;
+            }
+            if (!delete)
+                return;
 
-			if (!IsOpen)
-				throw new CryptographicException (Locale.GetText ("Store isn't opened."));
+            if (IsReadOnly)
+                throw new CryptographicException(Locale.GetText("Store is read-only."));
 
-			bool delete = false;
-			foreach (X509Certificate2 certificate in certificates) {
-				if (Exists (certificate))
-					delete = true;
-			}
-			if (!delete)
-				return;
+            try
+            {
+                foreach (X509Certificate2 certificate in certificates)
+                    store.Remove(new MX.X509Certificate(certificate.RawData));
+            }
+            finally
+            {
+                Certificates.RemoveRange(certificates);
+            }
+        }
 
-			if (IsReadOnly)
-				throw new CryptographicException (Locale.GetText ("Store is read-only."));
+        private bool Exists(X509Certificate2 certificate)
+        {
+            if ((store == null) || (list == null) || (certificate == null))
+                return false;
 
-			try {
-				foreach (X509Certificate2 certificate in certificates)
-					store.Remove (new MX.X509Certificate (certificate.RawData));
-			}
-			finally {
-				Certificates.RemoveRange (certificates);
-			}
-		}
-
-		private bool Exists (X509Certificate2 certificate)
-		{
-			if ((store == null) || (list == null) || (certificate == null))
-				return false;
-
-			foreach (X509Certificate2 c in list) {
-				if (certificate.Equals (c)) {
-					return true;
-				}
-			}
-			return false;
-		}
-	}
+            foreach (X509Certificate2 c in list)
+            {
+                if (certificate.Equals(c))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
 
 #endif

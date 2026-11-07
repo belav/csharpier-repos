@@ -38,8 +38,8 @@ public class ComponentTagHelperTest
         // Assert
         var prerenderer =
             viewContext.HttpContext.RequestServices.GetRequiredService<IComponentPrerenderer>();
-        var content = await prerenderer.Dispatcher.InvokeAsync(
-            () => HtmlContentUtilities.HtmlContentToString(output.Content)
+        var content = await prerenderer.Dispatcher.InvokeAsync(() =>
+            HtmlContentUtilities.HtmlContentToString(output.Content)
         );
         Assert.Equal("Hello from the component", content);
         Assert.Null(output.TagName);
@@ -54,8 +54,8 @@ public class ComponentTagHelperTest
         var output = GetTagHelperOutput();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output)
         );
         Assert.Equal(
             "A value for the 'render-mode' attribute must be supplied to the 'component' tag helper.",
@@ -75,10 +75,8 @@ public class ComponentTagHelperTest
 
     private static TagHelperOutput GetTagHelperOutput()
     {
-        return new TagHelperOutput(
-            "component",
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        return new TagHelperOutput("component", new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
     }
 

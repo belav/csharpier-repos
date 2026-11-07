@@ -4,12 +4,11 @@
 
 using System;
 
-
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// This class defines the encrypting credentials which can be used to 
-    /// encrypt the proof key. It is very similar to SigningCredentials class defined 
+    /// This class defines the encrypting credentials which can be used to
+    /// encrypt the proof key. It is very similar to SigningCredentials class defined
     /// in System.IdentityModel.dll
     /// </summary>
     public class EncryptingCredentials
@@ -21,9 +20,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Constructor for easy subclassing.
         /// </summary>
-        public EncryptingCredentials()
-        {
-        }
+        public EncryptingCredentials() { }
 
         /// <summary>
         /// Constructs an EncryptingCredentials with a security key, a security key identifier and
@@ -35,7 +32,11 @@ namespace System.IdentityModel.Tokens
         /// <exception cref="ArgumentNullException">When key is null.</exception>
         /// <exception cref="ArgumentNullException">When key identifier is null.</exception>
         /// <exception cref="ArgumentNullException">When algorithm is null.</exception>
-        public EncryptingCredentials(SecurityKey key, SecurityKeyIdentifier keyIdentifier, string algorithm)
+        public EncryptingCredentials(
+            SecurityKey key,
+            SecurityKeyIdentifier keyIdentifier,
+            string algorithm
+        )
         {
             if (key == null)
             {
@@ -53,8 +54,8 @@ namespace System.IdentityModel.Tokens
             }
 
             //
-            // It is possible that keyIdentifier is pointing to a token which 
-            // is not capable of doing the given algorithm, we have no way verify 
+            // It is possible that keyIdentifier is pointing to a token which
+            // is not capable of doing the given algorithm, we have no way verify
             // that at this level.
             //
             _algorithm = algorithm;
@@ -67,10 +68,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string Algorithm
         {
-            get
-            {
-                return _algorithm;
-            }
+            get { return _algorithm; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -87,10 +85,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public SecurityKey SecurityKey
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
             set
             {
                 if (value == null)
@@ -107,10 +102,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public SecurityKeyIdentifier SecurityKeyIdentifier
         {
-            get
-            {
-                return _keyIdentifier;
-            }
+            get { return _keyIdentifier; }
             set
             {
                 if (value == null)

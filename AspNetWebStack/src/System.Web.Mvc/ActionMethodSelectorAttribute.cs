@@ -14,6 +14,9 @@ namespace System.Web.Mvc
         /// <param name="controllerContext">The controller context.</param>
         /// <param name="methodInfo">Information about the action method.</param>
         /// <returns><see langword="true"/> if the action method selection is valid for the specified controller context; otherwise, <see langword="false"/>.</returns>
-        public abstract bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo);
+        public abstract bool IsValidForRequest(
+            ControllerContext controllerContext,
+            MethodInfo methodInfo
+        );
     }
 }

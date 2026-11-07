@@ -13,53 +13,56 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 public abstract class SaveChangesInterceptor : ISaveChangesInterceptor
 {
     /// <inheritdoc />
-    public virtual InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
-        => result;
+    public virtual InterceptionResult<int> SavingChanges(
+        DbContextEventData eventData,
+        InterceptionResult<int> result
+    ) => result;
 
     /// <inheritdoc />
-    public virtual int SavedChanges(SaveChangesCompletedEventData eventData, int result)
-        => result;
+    public virtual int SavedChanges(SaveChangesCompletedEventData eventData, int result) => result;
 
     /// <inheritdoc />
-    public virtual void SaveChangesFailed(DbContextErrorEventData eventData)
-    {
-    }
+    public virtual void SaveChangesFailed(DbContextErrorEventData eventData) { }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <inheritdoc />
     public virtual ValueTask<int> SavedChangesAsync(
         SaveChangesCompletedEventData eventData,
         int result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <inheritdoc />
-    public virtual Task SaveChangesFailedAsync(DbContextErrorEventData eventData, CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+    public virtual Task SaveChangesFailedAsync(
+        DbContextErrorEventData eventData,
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <inheritdoc />
-    public virtual void SaveChangesCanceled(DbContextEventData eventData)
-    {
-    }
+    public virtual void SaveChangesCanceled(DbContextEventData eventData) { }
 
     /// <inheritdoc />
-    public virtual Task SaveChangesCanceledAsync(DbContextEventData eventData, CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+    public virtual Task SaveChangesCanceledAsync(
+        DbContextEventData eventData,
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <inheritdoc />
-    public virtual InterceptionResult ThrowingConcurrencyException(ConcurrencyExceptionEventData eventData, InterceptionResult result)
-        => result;
+    public virtual InterceptionResult ThrowingConcurrencyException(
+        ConcurrencyExceptionEventData eventData,
+        InterceptionResult result
+    ) => result;
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult> ThrowingConcurrencyExceptionAsync(
         ConcurrencyExceptionEventData eventData,
         InterceptionResult result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 }

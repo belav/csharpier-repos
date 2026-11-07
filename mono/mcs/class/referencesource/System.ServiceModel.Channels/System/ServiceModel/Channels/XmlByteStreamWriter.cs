@@ -13,7 +13,7 @@ namespace System.ServiceModel.Channels
 
     sealed class XmlByteStreamWriter : XmlDictionaryWriter
     {
-        bool ownsStream; 
+        bool ownsStream;
         ByteStreamWriterState state;
         Stream stream;
         XmlWriterSettings settings;
@@ -38,12 +38,13 @@ namespace System.ServiceModel.Channels
             {
                 if (settings == null)
                 {
-                    XmlWriterSettings newSettings = new XmlWriterSettings()
-                    {
-                        Async = true
-                    };
+                    XmlWriterSettings newSettings = new XmlWriterSettings() { Async = true };
 
-                    Interlocked.CompareExchange<XmlWriterSettings>(ref this.settings, newSettings, null);
+                    Interlocked.CompareExchange<XmlWriterSettings>(
+                        ref this.settings,
+                        newSettings,
+                        null
+                    );
                 }
 
                 return this.settings;
@@ -74,26 +75,36 @@ namespace System.ServiceModel.Channels
             ThrowIfClosed();
             ByteStreamMessageUtility.EnsureByteBoundaries(buffer, index, count, false);
 
-            if (this.state != ByteStreamWriterState.Content && this.state != ByteStreamWriterState.StartElement)
+            if (
+                this.state != ByteStreamWriterState.Content
+                && this.state != ByteStreamWriterState.StartElement
+            )
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.XmlWriterMustBeInElement(ByteStreamWriterStateToWriteState(this.state))));
+                    new InvalidOperationException(
+                        SR.XmlWriterMustBeInElement(ByteStreamWriterStateToWriteState(this.state))
+                    )
+                );
             }
         }
 
         public override void Flush()
         {
-            ThrowIfClosed(); 
+            ThrowIfClosed();
             this.stream.Flush();
         }
 
         void InternalWriteEndElement()
         {
             ThrowIfClosed();
-            if (this.state != ByteStreamWriterState.StartElement && this.state != ByteStreamWriterState.Content)
+            if (
+                this.state != ByteStreamWriterState.StartElement
+                && this.state != ByteStreamWriterState.Content
+            )
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.XmlUnexpectedEndElement));
+                    new InvalidOperationException(SR.XmlUnexpectedEndElement)
+                );
             }
             this.state = ByteStreamWriterState.EndElement;
         }
@@ -127,31 +138,57 @@ namespace System.ServiceModel.Channels
 
         public override Task WriteBase64Async(byte[] buffer, int index, int count)
         {
-            return Task.Factory.FromAsync(this.BeginWriteBase64, this.EndWriteBase64, buffer, index, count, null);
+            return Task.Factory.FromAsync(
+                this.BeginWriteBase64,
+                this.EndWriteBase64,
+                buffer,
+                index,
+                count,
+                null
+            );
         }
 
-        internal IAsyncResult BeginWriteBase64(byte[] buffer, int index, int count, AsyncCallback callback, object state)
+        internal IAsyncResult BeginWriteBase64(
+            byte[] buffer,
+            int index,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            EnsureWriteBase64State(buffer, index, count); 
-            return new WriteBase64AsyncResult(buffer, index, count, this, callback, state); 
+            EnsureWriteBase64State(buffer, index, count);
+            return new WriteBase64AsyncResult(buffer, index, count, this, callback, state);
         }
 
         internal void EndWriteBase64(IAsyncResult result)
         {
-            WriteBase64AsyncResult.End(result); 
+            WriteBase64AsyncResult.End(result);
         }
 
         class WriteBase64AsyncResult : AsyncResult
         {
             XmlByteStreamWriter writer;
 
-            public WriteBase64AsyncResult(byte[] buffer, int index, int count, XmlByteStreamWriter writer, AsyncCallback callback, object state)
+            public WriteBase64AsyncResult(
+                byte[] buffer,
+                int index,
+                int count,
+                XmlByteStreamWriter writer,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.writer = writer;
 
-                IAsyncResult result = writer.stream.BeginWrite(buffer, index, count, PrepareAsyncCompletion(HandleWriteBase64), this);
-                bool completeSelf = SyncContinue(result); 
+                IAsyncResult result = writer.stream.BeginWrite(
+                    buffer,
+                    index,
+                    count,
+                    PrepareAsyncCompletion(HandleWriteBase64),
+                    this
+                );
+                bool completeSelf = SyncContinue(result);
 
                 if (completeSelf)
                 {
@@ -161,16 +198,16 @@ namespace System.ServiceModel.Channels
 
             static bool HandleWriteBase64(IAsyncResult result)
             {
-                WriteBase64AsyncResult thisPtr = (WriteBase64AsyncResult)result.AsyncState; 
+                WriteBase64AsyncResult thisPtr = (WriteBase64AsyncResult)result.AsyncState;
                 thisPtr.writer.stream.EndWrite(result);
                 thisPtr.writer.state = ByteStreamWriterState.Content;
 
-                return true; 
+                return true;
             }
 
             public static void End(IAsyncResult result)
             {
-                AsyncResult.End<WriteBase64AsyncResult>(result); 
+                AsyncResult.End<WriteBase64AsyncResult>(result);
             }
         }
 
@@ -260,20 +297,31 @@ namespace System.ServiceModel.Channels
             if (this.state != ByteStreamWriterState.Start)
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ByteStreamWriteStartElementAlreadyCalled));
+                    new InvalidOperationException(SR.ByteStreamWriteStartElementAlreadyCalled)
+                );
             }
 
-            if (!string.IsNullOrEmpty(prefix) || !string.IsNullOrEmpty(ns) || localName != ByteStreamMessageUtility.StreamElementName)
+            if (
+                !string.IsNullOrEmpty(prefix)
+                || !string.IsNullOrEmpty(ns)
+                || localName != ByteStreamMessageUtility.StreamElementName
+            )
             {
                 throw FxTrace.Exception.AsError(
-                    new XmlException(SR.XmlStartElementNameExpected(ByteStreamMessageUtility.StreamElementName, localName)));
+                    new XmlException(
+                        SR.XmlStartElementNameExpected(
+                            ByteStreamMessageUtility.StreamElementName,
+                            localName
+                        )
+                    )
+                );
             }
             this.state = ByteStreamWriterState.StartElement;
         }
 
         public override void WriteString(string text)
         {
-            // no state checks here - WriteBase64 will take care of this. 
+            // no state checks here - WriteBase64 will take care of this.
             byte[] buffer = Convert.FromBase64String(text);
             WriteBase64(buffer, 0, buffer.Length);
         }
@@ -292,12 +340,13 @@ namespace System.ServiceModel.Channels
         {
             if (this.state == ByteStreamWriterState.Closed)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.XmlWriterClosed));
+                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.XmlWriterClosed));
             }
         }
 
-        static WriteState ByteStreamWriterStateToWriteState(ByteStreamWriterState byteStreamWriterState)
+        static WriteState ByteStreamWriterStateToWriteState(
+            ByteStreamWriterState byteStreamWriterState
+        )
         {
             // Converts the internal ByteStreamWriterState to an Xml WriteState
             switch (byteStreamWriterState)
@@ -323,7 +372,7 @@ namespace System.ServiceModel.Channels
             StartElement,
             Content,
             EndElement,
-            Closed
+            Closed,
         }
     }
 }

@@ -8,7 +8,5 @@ namespace Microsoft.EntityFrameworkCore.Tools;
 internal class WrappedXunitException : XunitException
 {
     public WrappedXunitException(WrappedException ex)
-        : base("(See error message)", ex)
-    {
-    }
+        : base("(See error message)", ex) { }
 }

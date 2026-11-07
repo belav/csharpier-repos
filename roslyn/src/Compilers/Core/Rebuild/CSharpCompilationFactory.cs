@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             string assemblyFileName,
             CompilationOptionsReader optionsReader,
             CSharpParseOptions parseOptions,
-            CSharpCompilationOptions compilationOptions)
+            CSharpCompilationOptions compilationOptions
+        )
             : base(assemblyFileName, optionsReader)
         {
             Debug.Assert(optionsReader.GetLanguageName() == LanguageNames.CSharp);
@@ -34,31 +35,55 @@ namespace Microsoft.CodeAnalysis.Rebuild
             CompilationOptions = compilationOptions;
         }
 
-        internal static new CSharpCompilationFactory Create(string assemblyFileName, CompilationOptionsReader optionsReader)
+        internal static new CSharpCompilationFactory Create(
+            string assemblyFileName,
+            CompilationOptionsReader optionsReader
+        )
         {
             Debug.Assert(optionsReader.GetLanguageName() == LanguageNames.CSharp);
-            var (compilationOptions, parseOptions) = CreateCSharpCompilationOptions(assemblyFileName, optionsReader);
-            return new CSharpCompilationFactory(assemblyFileName, optionsReader, parseOptions, compilationOptions);
+            var (compilationOptions, parseOptions) = CreateCSharpCompilationOptions(
+                assemblyFileName,
+                optionsReader
+            );
+            return new CSharpCompilationFactory(
+                assemblyFileName,
+                optionsReader,
+                parseOptions,
+                compilationOptions
+            );
         }
 
-        public override SyntaxTree CreateSyntaxTree(string filePath, SourceText sourceText)
-            => CSharpSyntaxTree.ParseText(sourceText, ParseOptions, filePath);
+        public override SyntaxTree CreateSyntaxTree(string filePath, SourceText sourceText) =>
+            CSharpSyntaxTree.ParseText(sourceText, ParseOptions, filePath);
 
         public override Compilation CreateCompilation(
             ImmutableArray<SyntaxTree> syntaxTrees,
-            ImmutableArray<MetadataReference> metadataReferences)
-            => CSharpCompilation.Create(
+            ImmutableArray<MetadataReference> metadataReferences
+        ) =>
+            CSharpCompilation.Create(
                 Path.GetFileNameWithoutExtension(AssemblyFileName),
                 syntaxTrees: syntaxTrees,
                 references: metadataReferences,
-                options: CompilationOptions);
+                options: CompilationOptions
+            );
 
-        private static (CSharpCompilationOptions, CSharpParseOptions) CreateCSharpCompilationOptions(string assemblyFileName, CompilationOptionsReader optionsReader)
+        private static (
+            CSharpCompilationOptions,
+            CSharpParseOptions
+        ) CreateCSharpCompilationOptions(
+            string assemblyFileName,
+            CompilationOptionsReader optionsReader
+        )
         {
             var pdbOptions = optionsReader.GetMetadataCompilationOptions();
 
-            var langVersionString = pdbOptions.GetUniqueOption(CompilationOptionNames.LanguageVersion);
-            pdbOptions.TryGetUniqueOption(CompilationOptionNames.Optimization, out var optimization);
+            var langVersionString = pdbOptions.GetUniqueOption(
+                CompilationOptionNames.LanguageVersion
+            );
+            pdbOptions.TryGetUniqueOption(
+                CompilationOptionNames.Optimization,
+                out var optimization
+            );
             pdbOptions.TryGetUniqueOption(CompilationOptionNames.Platform, out var platform);
 
             // TODO: Check portability policy if needed
@@ -70,11 +95,13 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
             CS.LanguageVersionFacts.TryParse(langVersionString, out var langVersion);
 
-            var preprocessorSymbols = define == null
-                ? ImmutableArray<string>.Empty
-                : define.Split(',').ToImmutableArray();
+            var preprocessorSymbols =
+                define == null
+                    ? ImmutableArray<string>.Empty
+                    : define.Split(',').ToImmutableArray();
 
-            var parseOptions = CSharpParseOptions.Default.WithLanguageVersion(langVersion)
+            var parseOptions = CSharpParseOptions
+                .Default.WithLanguageVersion(langVersion)
                 .WithPreprocessorSymbols(preprocessorSymbols);
 
             var (optimizationLevel, plus) = GetOptimizationLevel(optimization);
@@ -84,9 +111,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 : (NullableContextOptions)Enum.Parse(typeof(NullableContextOptions), nullable);
 
             var compilationOptions = new CSharpCompilationOptions(
-                pdbOptions.OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind) ?? OutputKind.DynamicallyLinkedLibrary,
+                pdbOptions.OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind)
+                    ?? OutputKind.DynamicallyLinkedLibrary,
                 reportSuppressedDiagnostics: false,
-
                 moduleName: assemblyFileName,
                 mainTypeName: optionsReader.GetMainTypeName(),
                 scriptClassName: null,
@@ -99,25 +126,21 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 cryptoPublicKey: optionsReader.GetPublicKey()?.ToImmutableArray() ?? default,
                 delaySign: null,
                 GetPlatform(platform),
-
                 // presence of diagnostics is expected to not affect emit.
                 ReportDiagnostic.Suppress,
                 warningLevel: 4,
                 specificDiagnosticOptions: null,
-
                 concurrentBuild: true,
                 deterministic: true,
-
                 xmlReferenceResolver: null,
                 sourceReferenceResolver: RebuildSourceReferenceResolver.Instance,
                 metadataReferenceResolver: null,
-
                 assemblyIdentityComparer: null,
                 strongNameProvider: null,
                 publicSign: false,
-
                 metadataImportOptions: MetadataImportOptions.Public,
-                nullableContextOptions: nullableOptions);
+                nullableContextOptions: nullableOptions
+            );
             compilationOptions.DebugPlusMode = plus;
 
             return (compilationOptions, parseOptions);

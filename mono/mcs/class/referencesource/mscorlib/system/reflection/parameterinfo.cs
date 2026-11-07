@@ -1,25 +1,25 @@
 // ==++==
-// 
+//
 //   Copyright(c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Reflection
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
-#if FEATURE_REMOTING
-    using System.Runtime.Remoting.Metadata;
-#endif //FEATURE_REMOTING
     using System.Security.Permissions;
     using System.Threading;
     using MdToken = System.Reflection.MetadataToken;
+#if FEATURE_REMOTING
+    using System.Runtime.Remoting.Metadata;
+#endif //FEATURE_REMOTING
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]
@@ -28,10 +28,10 @@ namespace System.Reflection
     public class ParameterInfo : _ParameterInfo, ICustomAttributeProvider, IObjectReference
     {
         #region Legacy Protected Members
-        protected String NameImpl; 
-        protected Type ClassImpl; 
-        protected int PositionImpl; 
-        protected ParameterAttributes AttrsImpl; 
+        protected String NameImpl;
+        protected Type ClassImpl;
+        protected int PositionImpl;
+        protected ParameterAttributes AttrsImpl;
         protected Object DefaultValueImpl; // cannot cache this as it may be non agile user defined enum
         protected MemberInfo MemberImpl;
         #endregion
@@ -43,73 +43,99 @@ namespace System.Reflection
 #pragma warning disable 169
         [OptionalField]
         private IntPtr _importer;
+
         [OptionalField]
         private int _token;
+
         [OptionalField]
         private bool bExtraConstChecked;
 #pragma warning restore 169
         #endregion
 
         #region Constructor
-        protected ParameterInfo() 
-        { 
-        }         
+        protected ParameterInfo() { }
         #endregion
 
         #region Internal Members
         // this is an internal api for DynamicMethod. A better solution is to change the relationship
         // between ParameterInfo and ParameterBuilder so that a ParameterBuilder can be seen as a writer
         // api over a ParameterInfo. However that is a possible breaking change so it needs to go through some process first
-        internal void SetName(String name) 
+        internal void SetName(String name)
         {
             NameImpl = name;
         }
-        
-        internal void SetAttributes(ParameterAttributes attributes) 
+
+        internal void SetAttributes(ParameterAttributes attributes)
         {
             AttrsImpl = attributes;
         }
         #endregion
 
         #region Public Methods
-        public virtual Type ParameterType 
-        { 
-            get 
-            {
-                return ClassImpl;
-            } 
-        }            
-        
-        public virtual String Name 
-        { 
-            get 
-            {
-                return NameImpl;
-            } 
+        public virtual Type ParameterType
+        {
+            get { return ClassImpl; }
         }
 
-        public virtual bool HasDefaultValue { get { throw new NotImplementedException(); }  }
+        public virtual String Name
+        {
+            get { return NameImpl; }
+        }
 
-        public virtual Object DefaultValue { get { throw new NotImplementedException(); } }
-        public virtual Object RawDefaultValue  { get { throw new NotImplementedException(); } } 
+        public virtual bool HasDefaultValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-        public virtual int Position { get { return PositionImpl; } }                                    
-        public virtual ParameterAttributes Attributes { get { return AttrsImpl; } }
+        public virtual Object DefaultValue
+        {
+            get { throw new NotImplementedException(); }
+        }
+        public virtual Object RawDefaultValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-        public virtual MemberInfo Member {
-            get {
+        public virtual int Position
+        {
+            get { return PositionImpl; }
+        }
+        public virtual ParameterAttributes Attributes
+        {
+            get { return AttrsImpl; }
+        }
+
+        public virtual MemberInfo Member
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<MemberInfo>() != null);
                 return MemberImpl;
             }
         }
 
-        public bool IsIn { get { return((Attributes & ParameterAttributes.In) != 0); } }        
-        public bool IsOut { get { return((Attributes & ParameterAttributes.Out) != 0); } }  
-#if FEATURE_USE_LCID        
-        public bool IsLcid { get { return((Attributes & ParameterAttributes.Lcid) != 0); } }        
+        public bool IsIn
+        {
+            get { return ((Attributes & ParameterAttributes.In) != 0); }
+        }
+        public bool IsOut
+        {
+            get { return ((Attributes & ParameterAttributes.Out) != 0); }
+        }
+#if FEATURE_USE_LCID
+        public bool IsLcid
+        {
+            get { return ((Attributes & ParameterAttributes.Lcid) != 0); }
+        }
 #endif
-        public bool IsRetval { get { return((Attributes & ParameterAttributes.Retval) != 0); } }        
-        public bool IsOptional { get { return((Attributes & ParameterAttributes.Optional) != 0); } }
+        public bool IsRetval
+        {
+            get { return ((Attributes & ParameterAttributes.Retval) != 0); }
+        }
+        public bool IsOptional
+        {
+            get { return ((Attributes & ParameterAttributes.Optional) != 0); }
+        }
 
         public virtual int MetadataToken
         {
@@ -127,12 +153,12 @@ namespace System.Reflection
             }
         }
 
-        public virtual Type[] GetRequiredCustomModifiers() 
+        public virtual Type[] GetRequiredCustomModifiers()
         {
             return EmptyArray<Type>.Value;
         }
 
-        public virtual Type[] GetOptionalCustomModifiers() 
+        public virtual Type[] GetOptionalCustomModifiers()
         {
             return EmptyArray<Type>.Value;
         }
@@ -147,11 +173,9 @@ namespace System.Reflection
 
         public virtual IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return GetCustomAttributesData();
-            }
+            get { return GetCustomAttributesData(); }
         }
+
         #region ICustomAttributeProvider
         public virtual Object[] GetCustomAttributes(bool inherit)
         {
@@ -195,12 +219,27 @@ namespace System.Reflection
             throw new NotImplementedException();
         }
 
-        void _ParameterInfo.GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _ParameterInfo.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
             throw new NotImplementedException();
         }
 
-        void _ParameterInfo.Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _ParameterInfo.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
             throw new NotImplementedException();
         }
@@ -209,7 +248,7 @@ namespace System.Reflection
         #endregion
 
         #region IObjectReference
-        // In V4 RuntimeParameterInfo is introduced. 
+        // In V4 RuntimeParameterInfo is introduced.
         // To support deserializing ParameterInfo instances serialized in earlier versions
         // we need to implement IObjectReference.
         [System.Security.SecurityCritical]
@@ -221,7 +260,9 @@ namespace System.Reflection
             // instance based on just two of them (MemberImpl and PositionImpl).
 
             if (MemberImpl == null)
-                throw new SerializationException(Environment.GetResourceString(ResId.Serialization_InsufficientState));
+                throw new SerializationException(
+                    Environment.GetResourceString(ResId.Serialization_InsufficientState)
+                );
 
             ParameterInfo[] args = null;
 
@@ -234,7 +275,9 @@ namespace System.Reflection
                         if (MemberImpl.MemberType == MemberTypes.Method)
                             return ((MethodInfo)MemberImpl).ReturnParameter;
                         else
-                            throw new SerializationException(Environment.GetResourceString(ResId.Serialization_BadParameterInfo));
+                            throw new SerializationException(
+                                Environment.GetResourceString(ResId.Serialization_BadParameterInfo)
+                            );
                     }
                     else
                     {
@@ -243,7 +286,9 @@ namespace System.Reflection
                         if (args != null && PositionImpl < args.Length)
                             return args[PositionImpl];
                         else
-                            throw new SerializationException(Environment.GetResourceString(ResId.Serialization_BadParameterInfo));
+                            throw new SerializationException(
+                                Environment.GetResourceString(ResId.Serialization_BadParameterInfo)
+                            );
                     }
 
                 case MemberTypes.Property:
@@ -252,21 +297,29 @@ namespace System.Reflection
                     if (args != null && PositionImpl > -1 && PositionImpl < args.Length)
                         return args[PositionImpl];
                     else
-                        throw new SerializationException(Environment.GetResourceString(ResId.Serialization_BadParameterInfo));
+                        throw new SerializationException(
+                            Environment.GetResourceString(ResId.Serialization_BadParameterInfo)
+                        );
 
                 default:
-                    throw new SerializationException(Environment.GetResourceString(ResId.Serialization_NoParameterInfo));
+                    throw new SerializationException(
+                        Environment.GetResourceString(ResId.Serialization_NoParameterInfo)
+                    );
             }
         }
         #endregion
     }
 
     [Serializable]
-    internal unsafe sealed class RuntimeParameterInfo : ParameterInfo, ISerializable
+    internal sealed unsafe class RuntimeParameterInfo : ParameterInfo, ISerializable
     {
         #region Static Members
-        [System.Security.SecurityCritical]  // auto-generated
-        internal unsafe static ParameterInfo[] GetParameters(IRuntimeMethodInfo method, MemberInfo member, Signature sig)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe ParameterInfo[] GetParameters(
+            IRuntimeMethodInfo method,
+            MemberInfo member,
+            Signature sig
+        )
         {
             Contract.Assert(method is RuntimeMethodInfo || method is RuntimeConstructorInfo);
 
@@ -274,8 +327,12 @@ namespace System.Reflection
             return GetParameters(method, member, sig, out dummy, false);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal unsafe static ParameterInfo GetReturnParameter(IRuntimeMethodInfo method, MemberInfo member, Signature sig)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe ParameterInfo GetReturnParameter(
+            IRuntimeMethodInfo method,
+            MemberInfo member,
+            Signature sig
+        )
         {
             Contract.Assert(method is RuntimeMethodInfo || method is RuntimeConstructorInfo);
 
@@ -284,9 +341,14 @@ namespace System.Reflection
             return returnParameter;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal unsafe static ParameterInfo[] GetParameters(
-            IRuntimeMethodInfo methodHandle, MemberInfo member, Signature sig, out ParameterInfo returnParameter, bool fetchReturnParameter)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe ParameterInfo[] GetParameters(
+            IRuntimeMethodInfo methodHandle,
+            MemberInfo member,
+            Signature sig,
+            out ParameterInfo returnParameter,
+            bool fetchReturnParameter
+        )
         {
             returnParameter = null;
             int sigArgCount = sig.Arguments.Length;
@@ -296,26 +358,34 @@ namespace System.Reflection
             int cParamDefs = 0;
 
             // Not all methods have tokens. Arrays, pointers and byRef types do not have tokens as they
-            // are generated on the fly by the runtime. 
+            // are generated on the fly by the runtime.
             if (!MdToken.IsNullToken(tkMethodDef))
             {
-                MetadataImport scope = RuntimeTypeHandle.GetMetadataImport(RuntimeMethodHandle.GetDeclaringType(methodHandle));
+                MetadataImport scope = RuntimeTypeHandle.GetMetadataImport(
+                    RuntimeMethodHandle.GetDeclaringType(methodHandle)
+                );
 
                 MetadataEnumResult tkParamDefs;
                 scope.EnumParams(tkMethodDef, out tkParamDefs);
 
                 cParamDefs = tkParamDefs.Length;
 
-                // Not all parameters have tokens. Parameters may have no token 
+                // Not all parameters have tokens. Parameters may have no token
                 // if they have no name and no attributes.
-                if (cParamDefs > sigArgCount + 1 /* return type */)
-                    throw new BadImageFormatException(Environment.GetResourceString("BadImageFormat_ParameterSignatureMismatch"));
+                if (
+                    cParamDefs
+                    > sigArgCount + 1 /* return type */
+                )
+                    throw new BadImageFormatException(
+                        Environment.GetResourceString("BadImageFormat_ParameterSignatureMismatch")
+                    );
 
                 for (int i = 0; i < cParamDefs; i++)
                 {
                     #region Populate ParameterInfos
                     ParameterAttributes attr;
-                    int position, tkParamDef = tkParamDefs[i];
+                    int position,
+                        tkParamDef = tkParamDefs[i];
 
                     scope.GetParamDefProps(tkParamDef, out position, out attr);
 
@@ -325,17 +395,39 @@ namespace System.Reflection
                     {
                         // more than one return parameter?
                         if (returnParameter != null)
-                            throw new BadImageFormatException(Environment.GetResourceString("BadImageFormat_ParameterSignatureMismatch"));
+                            throw new BadImageFormatException(
+                                Environment.GetResourceString(
+                                    "BadImageFormat_ParameterSignatureMismatch"
+                                )
+                            );
 
-                        returnParameter = new RuntimeParameterInfo(sig, scope, tkParamDef, position, attr, member);
+                        returnParameter = new RuntimeParameterInfo(
+                            sig,
+                            scope,
+                            tkParamDef,
+                            position,
+                            attr,
+                            member
+                        );
                     }
                     else if (fetchReturnParameter == false && position >= 0)
                     {
                         // position beyong sigArgCount?
                         if (position >= sigArgCount)
-                            throw new BadImageFormatException(Environment.GetResourceString("BadImageFormat_ParameterSignatureMismatch"));
+                            throw new BadImageFormatException(
+                                Environment.GetResourceString(
+                                    "BadImageFormat_ParameterSignatureMismatch"
+                                )
+                            );
 
-                        args[position] = new RuntimeParameterInfo(sig, scope, tkParamDef, position, attr, member);
+                        args[position] = new RuntimeParameterInfo(
+                            sig,
+                            scope,
+                            tkParamDef,
+                            position,
+                            attr,
+                            member
+                        );
                     }
                     #endregion
                 }
@@ -346,7 +438,14 @@ namespace System.Reflection
             {
                 if (returnParameter == null)
                 {
-                    returnParameter = new RuntimeParameterInfo(sig, MetadataImport.EmptyImport, 0, -1, (ParameterAttributes)0, member);
+                    returnParameter = new RuntimeParameterInfo(
+                        sig,
+                        MetadataImport.EmptyImport,
+                        0,
+                        -1,
+                        (ParameterAttributes)0,
+                        member
+                    );
                 }
             }
             else
@@ -358,7 +457,14 @@ namespace System.Reflection
                         if (args[i] != null)
                             continue;
 
-                        args[i] = new RuntimeParameterInfo(sig, MetadataImport.EmptyImport, 0, i, (ParameterAttributes)0, member);
+                        args[i] = new RuntimeParameterInfo(
+                            sig,
+                            MetadataImport.EmptyImport,
+                            0,
+                            i,
+                            (ParameterAttributes)0,
+                            member
+                        );
                     }
                 }
             }
@@ -368,24 +474,32 @@ namespace System.Reflection
         #endregion
 
         #region Private Statics
-        private static readonly Type s_DecimalConstantAttributeType = typeof(DecimalConstantAttribute);
-        private static readonly Type s_CustomConstantAttributeType = typeof(CustomConstantAttribute);
+        private static readonly Type s_DecimalConstantAttributeType =
+            typeof(DecimalConstantAttribute);
+        private static readonly Type s_CustomConstantAttributeType =
+            typeof(CustomConstantAttribute);
         #endregion
 
         #region Private Data Members
         // These are new in Whidbey, so we cannot serialize them directly or we break backwards compatibility.
         [NonSerialized]
         private int m_tkParamDef;
+
         [NonSerialized]
         private MetadataImport m_scope;
+
         [NonSerialized]
         private Signature m_signature;
+
         [NonSerialized]
         private volatile bool m_nameIsCached = false;
+
         [NonSerialized]
         private readonly bool m_noMetadata = false;
+
         [NonSerialized]
         private bool m_noDefaultValue = false;
+
         [NonSerialized]
         private MethodBase m_originalMember = null;
         #endregion
@@ -395,7 +509,8 @@ namespace System.Reflection
         {
             get
             {
-                MethodBase result = m_originalMember != null ? m_originalMember : MemberImpl as MethodBase;
+                MethodBase result =
+                    m_originalMember != null ? m_originalMember : MemberImpl as MethodBase;
                 Contract.Assert(result != null);
                 return result;
             }
@@ -450,8 +565,8 @@ namespace System.Reflection
         {
             // Change ownership
             MemberImpl = member;
-            
-            // The original owner should always be a method, because this method is only used to 
+
+            // The original owner should always be a method, because this method is only used to
             // change the owner from a method to a property.
             m_originalMember = accessor.MemberImpl as MethodBase;
             Contract.Assert(m_originalMember != null);
@@ -465,22 +580,36 @@ namespace System.Reflection
 
             // Strictly speeking, property's don't contain paramter tokens
             // However we need this to make ca's work... oh well...
-            m_tkParamDef = MdToken.IsNullToken(accessor.MetadataToken) ? (int)MetadataTokenType.ParamDef : accessor.MetadataToken;
+            m_tkParamDef = MdToken.IsNullToken(accessor.MetadataToken)
+                ? (int)MetadataTokenType.ParamDef
+                : accessor.MetadataToken;
             m_scope = accessor.m_scope;
         }
 
         private RuntimeParameterInfo(
-            Signature signature, MetadataImport scope, int tkParamDef,
-            int position, ParameterAttributes attributes, MemberInfo member)
+            Signature signature,
+            MetadataImport scope,
+            int tkParamDef,
+            int position,
+            ParameterAttributes attributes,
+            MemberInfo member
+        )
         {
             Contract.Requires(member != null);
-            Contract.Assert(MdToken.IsNullToken(tkParamDef) == scope.Equals(MetadataImport.EmptyImport));
-            Contract.Assert(MdToken.IsNullToken(tkParamDef) || MdToken.IsTokenOfType(tkParamDef, MetadataTokenType.ParamDef));
+            Contract.Assert(
+                MdToken.IsNullToken(tkParamDef) == scope.Equals(MetadataImport.EmptyImport)
+            );
+            Contract.Assert(
+                MdToken.IsNullToken(tkParamDef)
+                    || MdToken.IsTokenOfType(tkParamDef, MetadataTokenType.ParamDef)
+            );
 
             PositionImpl = position;
             MemberImpl = member;
             m_signature = signature;
-            m_tkParamDef = MdToken.IsNullToken(tkParamDef) ? (int)MetadataTokenType.ParamDef : tkParamDef;
+            m_tkParamDef = MdToken.IsNullToken(tkParamDef)
+                ? (int)MetadataTokenType.ParamDef
+                : tkParamDef;
             m_scope = scope;
             AttrsImpl = attributes;
 
@@ -489,7 +618,12 @@ namespace System.Reflection
         }
 
         // ctor for no metadata MethodInfo in the DynamicMethod and RuntimeMethodInfo cases
-        internal RuntimeParameterInfo(MethodInfo owner, String name, Type parameterType, int position)
+        internal RuntimeParameterInfo(
+            MethodInfo owner,
+            String name,
+            Type parameterType,
+            int position
+        )
         {
             MemberImpl = owner;
             NameImpl = name;
@@ -528,7 +662,7 @@ namespace System.Reflection
 
         public override String Name
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             get
             {
                 if (!m_nameIsCached)
@@ -563,8 +697,14 @@ namespace System.Reflection
             }
         }
 
-        public override Object DefaultValue { get { return GetDefaultValue(false); } }
-        public override Object RawDefaultValue { get { return GetDefaultValue(true); } }
+        public override Object DefaultValue
+        {
+            get { return GetDefaultValue(false); }
+        }
+        public override Object RawDefaultValue
+        {
+            get { return GetDefaultValue(true); }
+        }
 
         private Object GetDefaultValue(bool raw)
         {
@@ -607,10 +747,10 @@ namespace System.Reflection
 
             object defaultValue = null;
 
-            // Why check the parameter type only for DateTime and only for the ctor arguments? 
+            // Why check the parameter type only for DateTime and only for the ctor arguments?
             // No check on the parameter type is done for named args and for Decimal.
 
-            // We should move this after MdToken.IsNullToken(m_tkParamDef) and combine it 
+            // We should move this after MdToken.IsNullToken(m_tkParamDef) and combine it
             // with the other custom attribute logic. But will that be a breaking change?
             // For a DateTime parameter on which both an md constant and a ca constant are set,
             // which one should win?
@@ -618,9 +758,11 @@ namespace System.Reflection
             {
                 if (raw)
                 {
-                    CustomAttributeTypedArgument value =
-                        CustomAttributeData.Filter(
-                            CustomAttributeData.GetCustomAttributes(this), typeof(DateTimeConstantAttribute), 0);
+                    CustomAttributeTypedArgument value = CustomAttributeData.Filter(
+                        CustomAttributeData.GetCustomAttributes(this),
+                        typeof(DateTimeConstantAttribute),
+                        0
+                    );
 
                     if (value.ArgumentType != null)
                         return new DateTime((long)value.Value);
@@ -637,7 +779,12 @@ namespace System.Reflection
             if (!MdToken.IsNullToken(m_tkParamDef))
             {
                 // This will return DBNull.Value if no constant value is defined on m_tkParamDef in the metadata.
-                defaultValue = MdConstant.GetValue(m_scope, m_tkParamDef, ParameterType.GetTypeHandleInternal(), raw);
+                defaultValue = MdConstant.GetValue(
+                    m_scope,
+                    m_tkParamDef,
+                    ParameterType.GetTypeHandleInternal(),
+                    raw
+                );
             }
             #endregion
 
@@ -646,7 +793,9 @@ namespace System.Reflection
                 #region Look for a default value in the custom attributes
                 if (raw)
                 {
-                    foreach (CustomAttributeData attr in CustomAttributeData.GetCustomAttributes(this))
+                    foreach (
+                        CustomAttributeData attr in CustomAttributeData.GetCustomAttributes(this)
+                    )
                     {
                         Type attrType = attr.Constructor.DeclaringType;
 
@@ -666,7 +815,10 @@ namespace System.Reflection
                 }
                 else
                 {
-                    Object[] CustomAttrs = GetCustomAttributes(s_CustomConstantAttributeType, false);
+                    Object[] CustomAttrs = GetCustomAttributes(
+                        s_CustomConstantAttributeType,
+                        false
+                    );
                     if (CustomAttrs.Length != 0)
                     {
                         defaultValue = ((CustomConstantAttribute)CustomAttrs[0]).Value;
@@ -707,10 +859,7 @@ namespace System.Reflection
 
         public override int MetadataToken
         {
-            get
-            {
-                return m_tkParamDef; 
-            }
+            get { return m_tkParamDef; }
         }
 
         public override Type[] GetRequiredCustomModifiers()
@@ -746,12 +895,15 @@ namespace System.Reflection
             RuntimeType attributeRuntimeType = attributeType.UnderlyingSystemType as RuntimeType;
 
             if (attributeRuntimeType == null)
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeType"), "attributeType");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeType"),
+                    "attributeType"
+                );
 
             return CustomAttribute.GetCustomAttributes(this, attributeRuntimeType);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public override bool IsDefined(Type attributeType, bool inherit)
         {
             if (attributeType == null)
@@ -764,7 +916,10 @@ namespace System.Reflection
             RuntimeType attributeRuntimeType = attributeType.UnderlyingSystemType as RuntimeType;
 
             if (attributeRuntimeType == null)
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeType"), "attributeType");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeType"),
+                    "attributeType"
+                );
 
             return CustomAttribute.IsDefined(this, attributeRuntimeType);
         }
@@ -791,7 +946,11 @@ namespace System.Reflection
                 if (cache == null)
                 {
                     cache = new RemotingParameterCachedData(this);
-                    RemotingParameterCachedData ret = Interlocked.CompareExchange(ref m_cachedData, cache, null);
+                    RemotingParameterCachedData ret = Interlocked.CompareExchange(
+                        ref m_cachedData,
+                        cache,
+                        null
+                    );
                     if (ret != null)
                         cache = ret;
                 }

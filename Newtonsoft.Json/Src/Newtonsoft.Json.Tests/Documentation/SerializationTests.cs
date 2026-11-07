@@ -56,15 +56,14 @@ namespace Newtonsoft.Json.Tests.Documentation
     {
         public class StreamWriter : OriginalStreamWriter
         {
-            public StreamWriter(string path) : base(TestFixtureBase.ResolvePath(Path.GetFileName(path)))
-            {
-            }
+            public StreamWriter(string path)
+                : base(TestFixtureBase.ResolvePath(Path.GetFileName(path))) { }
         }
 
         [Test]
         public void SerializeObject()
         {
-            #region SerializeObject
+#region SerializeObject
             Product product = new Product();
 
             product.Name = "Apple";
@@ -85,7 +84,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //}
 
             Product deserializedProduct = JsonConvert.DeserializeObject<Product>(output);
-            #endregion
+#endregion
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
         }
@@ -93,7 +92,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void JsonSerializerToStream()
         {
-            #region JsonSerializerToStream
+#region JsonSerializerToStream
             Product product = new Product();
             product.ExpiryDate = new DateTime(2008, 12, 28);
 
@@ -107,10 +106,10 @@ namespace Newtonsoft.Json.Tests.Documentation
                 serializer.Serialize(writer, product);
                 // {"ExpiryDate":new Date(1230375600000),"Price":0}
             }
-            #endregion
+#endregion
         }
 
-        #region SerializationAttributes
+#region SerializationAttributes
         [JsonObject(MemberSerialization.OptIn)]
         public class Person
         {
@@ -129,20 +128,20 @@ namespace Newtonsoft.Json.Tests.Documentation
             // not serialized because mode is opt-in
             public string Department { get; set; }
         }
-        #endregion
+#endregion
 
-        #region SerializationCallbacksObject
+#region SerializationCallbacksObject
         public class SerializationEventTestObject
         {
             // 2222
             // This member is serialized and deserialized with no change.
             public int Member1 { get; set; }
 
-            // The value of this field is set and reset during and 
+            // The value of this field is set and reset during and
             // after serialization.
             public string Member2 { get; set; }
 
-            // This field is not serialized. The OnDeserializedAttribute 
+            // This field is not serialized. The OnDeserializedAttribute
             // is used to set the member value after serialization.
             [JsonIgnore]
             public string Member3 { get; set; }
@@ -182,12 +181,12 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Member4 = "This value was set after deserialization.";
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void SerializationCallbacksExample()
         {
-            #region SerializationCallbacksExample
+#region SerializationCallbacksExample
             SerializationEventTestObject obj = new SerializationEventTestObject();
 
             Console.WriteLine(obj.Member1);
@@ -225,7 +224,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // This value was set during deserialization
             Console.WriteLine(obj.Member4);
             // This value was set after deserialization.
-            #endregion
+#endregion
 
             Assert.AreEqual(11, obj.Member1);
         }
@@ -233,10 +232,11 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializationErrorHandling()
         {
-            #region SerializationErrorHandling
+#region SerializationErrorHandling
             List<string> errors = new List<string>();
 
-            List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(@"[
+            List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(
+                @"[
                   '2009-09-09T00:00:00Z',
                   'I am not a date and will error!',
                   [
@@ -253,8 +253,9 @@ namespace Newtonsoft.Json.Tests.Documentation
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
                     },
-                    Converters = { new IsoDateTimeConverter() }
-                });
+                    Converters = { new IsoDateTimeConverter() },
+                }
+            );
 
             // 2009-09-09T00:00:00Z
             // 1977-02-20T00:00:00Z
@@ -263,7 +264,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // The string was not recognized as a valid DateTime. There is a unknown word starting at index 0.
             // Unexpected token parsing date. Expected String, got StartArray.
             // Cannot convert null value to System.DateTime.
-            #endregion
+#endregion
 
             Assert.AreEqual(new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc), c[0]);
         }
@@ -271,7 +272,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializationErrorHandlingWithParent()
         {
-            #region SerializationErrorHandlingWithParent
+#region SerializationErrorHandlingWithParent
             List<string> errors = new List<string>();
 
             JsonSerializer serializer = new JsonSerializer();
@@ -283,10 +284,10 @@ namespace Newtonsoft.Json.Tests.Documentation
                     errors.Add(args.ErrorContext.Error.Message);
                 }
             };
-            #endregion
+#endregion
         }
 
-        #region SerializationErrorHandlingAttributeObject
+#region SerializationErrorHandlingAttributeObject
         public class PersonError
         {
             private List<string> _roles;
@@ -316,18 +317,18 @@ namespace Newtonsoft.Json.Tests.Documentation
                 errorContext.Handled = true;
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void SerializationErrorHandlingAttributeExample()
         {
-            #region SerializationErrorHandlingAttributeExample
+#region SerializationErrorHandlingAttributeExample
             PersonError person = new PersonError
             {
                 Name = "George Michael Bluth",
                 Age = 16,
                 Roles = null,
-                Title = "Mister Manager"
+                Title = "Mister Manager",
             };
 
             string json = JsonConvert.SerializeObject(person, Formatting.Indented);
@@ -338,24 +339,27 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  "Age": 16,
             //  "Title": "Mister Manager"
             //}
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""George Michael Bluth"",
   ""Age"": 16,
   ""Title"": ""Mister Manager""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void PreservingObjectReferencesOff()
         {
-            #region PreservingObjectReferencesOff
+#region PreservingObjectReferencesOff
             Person p = new Person
             {
                 BirthDate = new DateTime(1980, 12, 23, 0, 0, 0, DateTimeKind.Utc),
                 LastModified = new DateTime(2009, 2, 20, 12, 59, 21, DateTimeKind.Utc),
-                Name = "James"
+                Name = "James",
             };
 
             List<Person> people = new List<Person>();
@@ -375,9 +379,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    "LastModified": "2009-02-20T12:59:21Z"
             //  }
             //]
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""James"",
     ""BirthDate"": ""1980-12-23T00:00:00Z"",
@@ -388,25 +393,26 @@ namespace Newtonsoft.Json.Tests.Documentation
     ""BirthDate"": ""1980-12-23T00:00:00Z"",
     ""LastModified"": ""2009-02-20T12:59:21Z""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void PreservingObjectReferencesOn()
         {
-            Person p = new Person
-            {
-                Name = "James"
-            };
-            List<Person> people = new List<Person>
-            {
-                p,
-                p
-            };
+            Person p = new Person { Name = "James" };
+            List<Person> people = new List<Person> { p, p };
 
-            #region PreservingObjectReferencesOn
-            string json = JsonConvert.SerializeObject(people, Formatting.Indented,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+#region PreservingObjectReferencesOn
+            string json = JsonConvert.SerializeObject(
+                people,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                }
+            );
 
             //[
             //  {
@@ -420,8 +426,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  }
             //]
 
-            List<Person> deserializedPeople = JsonConvert.DeserializeObject<List<Person>>(json,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            List<Person> deserializedPeople = JsonConvert.DeserializeObject<List<Person>>(
+                json,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                }
+            );
 
             Console.WriteLine(deserializedPeople.Count);
             // 2
@@ -436,21 +447,21 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             bool equal = Object.ReferenceEquals(p1, p2);
             // true
-            #endregion
+#endregion
 
             Assert.AreEqual(true, equal);
         }
 
-        #region PreservingObjectReferencesAttribute
+#region PreservingObjectReferencesAttribute
         [JsonObject(IsReference = true)]
         public class EmployeeReference
         {
             public string Name { get; set; }
             public EmployeeReference Manager { get; set; }
         }
-        #endregion
+#endregion
 
-        #region CustomCreationConverterObject
+#region CustomCreationConverterObject
         public interface IPerson
         {
             string FirstName { get; set; }
@@ -475,12 +486,13 @@ namespace Newtonsoft.Json.Tests.Documentation
                 return new Employee();
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void CustomCreationConverterExample()
         {
-            string json = @"[
+            string json =
+                @"[
   {
     ""FirstName"": ""Maurice"",
     ""LastName"": ""Moss"",
@@ -497,7 +509,7 @@ namespace Newtonsoft.Json.Tests.Documentation
   }
 ]";
 
-            #region CustomCreationConverterExample
+#region CustomCreationConverterExample
             //[
             //  {
             //    "FirstName": "Maurice",
@@ -515,7 +527,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  }
             //]
 
-            List<IPerson> people = JsonConvert.DeserializeObject<List<IPerson>>(json, new PersonConverter());
+            List<IPerson> people = JsonConvert.DeserializeObject<List<IPerson>>(
+                json,
+                new PersonConverter()
+            );
 
             IPerson person = people[0];
 
@@ -529,7 +544,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             Console.WriteLine(employee.JobTitle);
             // Support
-            #endregion
+#endregion
 
             Assert.AreEqual("Support", employee.JobTitle);
         }
@@ -537,21 +552,23 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void ContractResolver()
         {
-            #region ContractResolver
+#region ContractResolver
             Product product = new Product
             {
                 ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
-                Sizes = new[] { "Small", "Medium", "Large" }
+                Sizes = new[] { "Small", "Medium", "Large" },
             };
 
-            string json =
-                JsonConvert.SerializeObject(
-                    product,
-                    Formatting.Indented,
-                    new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }
-                    );
+            string json = JsonConvert.SerializeObject(
+                product,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                }
+            );
 
             //{
             //  "name": "Widget",
@@ -563,9 +580,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    "Large"
             //  ]
             //}
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Widget"",
   ""expiryDate"": ""2010-12-20T18:01:00Z"",
   ""price"": 9.99,
@@ -574,13 +592,15 @@ namespace Newtonsoft.Json.Tests.Documentation
     ""Medium"",
     ""Large""
   ]
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void SerializingCollectionsSerializing()
         {
-            #region SerializingCollectionsSerializing
+#region SerializingCollectionsSerializing
             Product p1 = new Product
             {
                 Name = "Product 1",
@@ -613,9 +633,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    "Sizes": null
             //  }
             //]
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Product 1"",
     ""ExpiryDate"": ""2000-12-29T00:00:00Z"",
@@ -628,14 +649,17 @@ namespace Newtonsoft.Json.Tests.Documentation
     ""Price"": 12.50,
     ""Sizes"": null
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void SerializingCollectionsDeserializing()
         {
-            #region SerializingCollectionsDeserializing
-            string json = @"[
+#region SerializingCollectionsDeserializing
+            string json =
+                @"[
               {
                 'Name': 'Product 1',
                 'ExpiryDate': '2000-12-29T00:00Z',
@@ -659,7 +683,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             Console.WriteLine(p1.Name);
             // Product 1
-            #endregion
+#endregion
 
             Assert.AreEqual("Product 1", p1.Name);
         }
@@ -667,22 +691,24 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializingCollectionsDeserializingDictionaries()
         {
-            #region SerializingCollectionsDeserializingDictionaries
+#region SerializingCollectionsDeserializingDictionaries
             string json = @"{""key1"":""value1"",""key2"":""value2""}";
 
-            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<
+                Dictionary<string, string>
+            >(json);
 
             Console.WriteLine(values.Count);
             // 2
 
             Console.WriteLine(values["key1"]);
             // value1
-            #endregion
+#endregion
 
             Assert.AreEqual("value1", values["key1"]);
         }
 
-        #region SerializingDatesInJson
+#region SerializingDatesInJson
         public class LogEntry
         {
             public string Details { get; set; }
@@ -695,7 +721,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             LogEntry entry = new LogEntry
             {
                 LogDate = new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc),
-                Details = "Application started."
+                Details = "Application started.",
             };
 
             // default as of Json.NET 4.5
@@ -704,17 +730,20 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             JsonSerializerSettings microsoftDateFormatSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
             };
             string microsoftJson = JsonConvert.SerializeObject(entry, microsoftDateFormatSettings);
             // {"Details":"Application started.","LogDate":"\/Date(1234656000000)\/"}
 
-            string javascriptJson = JsonConvert.SerializeObject(entry, new JavaScriptDateTimeConverter());
+            string javascriptJson = JsonConvert.SerializeObject(
+                entry,
+                new JavaScriptDateTimeConverter()
+            );
             // {"Details":"Application started.","LogDate":new Date(1234656000000)}
         }
-        #endregion
+#endregion
 
-        #region ReducingSerializedJsonSizeOptOut
+#region ReducingSerializedJsonSizeOptOut
         public class Car
         {
             // included in JSON
@@ -726,9 +755,9 @@ namespace Newtonsoft.Json.Tests.Documentation
             [JsonIgnore]
             public DateTime LastModified { get; set; }
         }
-        #endregion
+#endregion
 
-        #region ReducingSerializedJsonSizeOptIn
+#region ReducingSerializedJsonSizeOptIn
         [DataContract]
         public class Computer
         {
@@ -745,9 +774,9 @@ namespace Newtonsoft.Json.Tests.Documentation
             public decimal WholeSalePrice { get; set; }
             public DateTime NextShipmentDate { get; set; }
         }
-        #endregion
+#endregion
 
-        #region ReducingSerializedJsonSizeNullValueHandlingObject
+#region ReducingSerializedJsonSizeNullValueHandlingObject
         public class Movie
         {
             public string Name { get; set; }
@@ -757,19 +786,21 @@ namespace Newtonsoft.Json.Tests.Documentation
             public DateTime? ReleaseDate { get; set; }
             public List<string> ReleaseCountries { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void ReducingSerializedJsonSizeNullValueHandlingExample()
         {
-            #region ReducingSerializedJsonSizeNullValueHandlingExample
+#region ReducingSerializedJsonSizeNullValueHandlingExample
             Movie movie = new Movie();
             movie.Name = "Bad Boys III";
             movie.Description = "It's no Bad Boys";
 
-            string included = JsonConvert.SerializeObject(movie,
+            string included = JsonConvert.SerializeObject(
+                movie,
                 Formatting.Indented,
-                new JsonSerializerSettings { });
+                new JsonSerializerSettings { }
+            );
 
             // {
             //   "Name": "Bad Boys III",
@@ -780,32 +811,40 @@ namespace Newtonsoft.Json.Tests.Documentation
             //   "ReleaseCountries": null
             // }
 
-            string ignored = JsonConvert.SerializeObject(movie,
+            string ignored = JsonConvert.SerializeObject(
+                movie,
                 Formatting.Indented,
-                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }
+            );
 
             // {
             //   "Name": "Bad Boys III",
             //   "Description": "It's no Bad Boys"
             // }
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Bad Boys III"",
   ""Description"": ""It's no Bad Boys"",
   ""Classification"": null,
   ""Studio"": null,
   ""ReleaseDate"": null,
   ""ReleaseCountries"": null
-}", included);
+}",
+                included
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Bad Boys III"",
   ""Description"": ""It's no Bad Boys""
-}", ignored);
+}",
+                ignored
+            );
         }
 
-        #region ReducingSerializedJsonSizeDefaultValueHandlingObject
+#region ReducingSerializedJsonSizeDefaultValueHandlingObject
         public class Invoice
         {
             public string Company { get; set; }
@@ -813,6 +852,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             // false is default value of bool
             public bool Paid { get; set; }
+
             // null is default value of nullable
             public DateTime? PaidDate { get; set; }
 
@@ -823,12 +863,12 @@ namespace Newtonsoft.Json.Tests.Documentation
             [DefaultValue("")]
             public string FollowUpEmailAddress { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void ReducingSerializedJsonSizeDefaultValueHandlingExample()
         {
-            #region ReducingSerializedJsonSizeDefaultValueHandlingExample
+#region ReducingSerializedJsonSizeDefaultValueHandlingExample
             Invoice invoice = new Invoice
             {
                 Company = "Acme Ltd.",
@@ -836,12 +876,14 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Paid = false,
                 FollowUpDays = 30,
                 FollowUpEmailAddress = string.Empty,
-                PaidDate = null
+                PaidDate = null,
             };
 
-            string included = JsonConvert.SerializeObject(invoice,
+            string included = JsonConvert.SerializeObject(
+                invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings { });
+                new JsonSerializerSettings { }
+            );
 
             // {
             //   "Company": "Acme Ltd.",
@@ -852,32 +894,40 @@ namespace Newtonsoft.Json.Tests.Documentation
             //   "FollowUpEmailAddress": ""
             // }
 
-            string ignored = JsonConvert.SerializeObject(invoice,
+            string ignored = JsonConvert.SerializeObject(
+                invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
+            );
 
             // {
             //   "Company": "Acme Ltd.",
             //   "Amount": 50.0
             // }
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Company"": ""Acme Ltd."",
   ""Amount"": 50.0,
   ""Paid"": false,
   ""PaidDate"": null,
   ""FollowUpDays"": 30,
   ""FollowUpEmailAddress"": """"
-}", included);
+}",
+                included
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Company"": ""Acme Ltd."",
   ""Amount"": 50.0
-}", ignored);
+}",
+                ignored
+            );
         }
 
-        #region ReducingSerializedJsonSizeContractResolverObject
+#region ReducingSerializedJsonSizeContractResolverObject
         public class DynamicContractResolver : DefaultContractResolver
         {
             private readonly char _startingWithChar;
@@ -887,13 +937,17 @@ namespace Newtonsoft.Json.Tests.Documentation
                 _startingWithChar = startingWithChar;
             }
 
-            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+            protected override IList<JsonProperty> CreateProperties(
+                Type type,
+                MemberSerialization memberSerialization
+            )
             {
                 IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
 
                 // only serializer properties that start with the specified character
-                properties =
-                    properties.Where(p => p.PropertyName.StartsWith(_startingWithChar.ToString())).ToList();
+                properties = properties
+                    .Where(p => p.PropertyName.StartsWith(_startingWithChar.ToString()))
+                    .ToList();
 
                 return properties;
             }
@@ -907,23 +961,26 @@ namespace Newtonsoft.Json.Tests.Documentation
             public int AuthorAge { get; set; }
             public string AuthorCountry { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void ReducingSerializedJsonSizeContractResolverExample()
         {
-            #region ReducingSerializedJsonSizeContractResolverExample
+#region ReducingSerializedJsonSizeContractResolverExample
             Book book = new Book
             {
                 BookName = "The Gathering Storm",
                 BookPrice = 16.19m,
                 AuthorName = "Brandon Sanderson",
                 AuthorAge = 34,
-                AuthorCountry = "United States of America"
+                AuthorCountry = "United States of America",
             };
 
-            string startingWithA = JsonConvert.SerializeObject(book, Formatting.Indented,
-                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('A') });
+            string startingWithA = JsonConvert.SerializeObject(
+                book,
+                Formatting.Indented,
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('A') }
+            );
 
             // {
             //   "AuthorName": "Brandon Sanderson",
@@ -931,41 +988,51 @@ namespace Newtonsoft.Json.Tests.Documentation
             //   "AuthorCountry": "United States of America"
             // }
 
-            string startingWithB = JsonConvert.SerializeObject(book, Formatting.Indented,
-                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('B') });
+            string startingWithB = JsonConvert.SerializeObject(
+                book,
+                Formatting.Indented,
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('B') }
+            );
 
             // {
             //   "BookName": "The Gathering Storm",
             //   "BookPrice": 16.19
             // }
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""AuthorName"": ""Brandon Sanderson"",
   ""AuthorAge"": 34,
   ""AuthorCountry"": ""United States of America""
-}", startingWithA);
+}",
+                startingWithA
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""BookName"": ""The Gathering Storm"",
   ""BookPrice"": 16.19
-}", startingWithB);
+}",
+                startingWithB
+            );
         }
 
-        #region SerializingPartialJsonFragmentsObject
+#region SerializingPartialJsonFragmentsObject
         public class SearchResult
         {
             public string Title { get; set; }
             public string Content { get; set; }
             public string Url { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void SerializingPartialJsonFragmentsExample()
         {
-            #region SerializingPartialJsonFragmentsExample
-            string googleSearchText = @"{
+#region SerializingPartialJsonFragmentsExample
+            string googleSearchText =
+                @"{
               'responseData': {
                 'results': [
                   {
@@ -1038,9 +1105,12 @@ namespace Newtonsoft.Json.Tests.Documentation
             // Title = <b>Paris Hilton</b>
             // Content = Self: Zoolander. Socialite <b>Paris Hilton</b>...
             // Url = http://www.imdb.com/name/nm0385296/
-            #endregion
+#endregion
 
-            Assert.AreEqual("<b>Paris Hilton</b> - Wikipedia, the free encyclopedia", searchResults[0].Title);
+            Assert.AreEqual(
+                "<b>Paris Hilton</b> - Wikipedia, the free encyclopedia",
+                searchResults[0].Title
+            );
         }
 
         [Test]
@@ -1051,7 +1121,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 { "Adam", "Eve" },
                 { "Bonnie", "Clyde" },
                 { "Donald", "Daisy" },
-                { "Han", "Leia" }
+                { "Han", "Leia" },
             };
 
             string json = JsonConvert.SerializeObject(famousCouples, Formatting.Indented);

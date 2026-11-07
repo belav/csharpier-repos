@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         internal static class PrivateInterlocked
         {
-            internal static ImmutableSegmentedHashSet<T> VolatileRead(in ImmutableSegmentedHashSet<T> location)
+            internal static ImmutableSegmentedHashSet<T> VolatileRead(
+                in ImmutableSegmentedHashSet<T> location
+            )
             {
                 var set = Volatile.Read(ref Unsafe.AsRef(in location._set));
                 if (set is null)
@@ -23,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 return new ImmutableSegmentedHashSet<T>(set);
             }
 
-            internal static ImmutableSegmentedHashSet<T> InterlockedExchange(ref ImmutableSegmentedHashSet<T> location, ImmutableSegmentedHashSet<T> value)
+            internal static ImmutableSegmentedHashSet<T> InterlockedExchange(
+                ref ImmutableSegmentedHashSet<T> location,
+                ImmutableSegmentedHashSet<T> value
+            )
             {
                 var set = Interlocked.Exchange(ref Unsafe.AsRef(in location._set), value._set);
                 if (set is null)
@@ -32,9 +37,17 @@ namespace Microsoft.CodeAnalysis.Collections
                 return new ImmutableSegmentedHashSet<T>(set);
             }
 
-            internal static ImmutableSegmentedHashSet<T> InterlockedCompareExchange(ref ImmutableSegmentedHashSet<T> location, ImmutableSegmentedHashSet<T> value, ImmutableSegmentedHashSet<T> comparand)
+            internal static ImmutableSegmentedHashSet<T> InterlockedCompareExchange(
+                ref ImmutableSegmentedHashSet<T> location,
+                ImmutableSegmentedHashSet<T> value,
+                ImmutableSegmentedHashSet<T> comparand
+            )
             {
-                var set = Interlocked.CompareExchange(ref Unsafe.AsRef(in location._set), value._set, comparand._set);
+                var set = Interlocked.CompareExchange(
+                    ref Unsafe.AsRef(in location._set),
+                    value._set,
+                    comparand._set
+                );
                 if (set is null)
                     return default;
 

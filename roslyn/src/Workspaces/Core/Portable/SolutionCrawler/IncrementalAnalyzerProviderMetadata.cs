@@ -18,11 +18,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public IncrementalAnalyzerProviderMetadata(IDictionary<string, object> data)
             : base(data)
         {
-            this.HighPriorityForActiveFile = (bool)data.GetValueOrDefault("HighPriorityForActiveFile");
+            this.HighPriorityForActiveFile = (bool)
+                data.GetValueOrDefault("HighPriorityForActiveFile");
             this.Name = (string)data.GetValueOrDefault("Name");
         }
 
-        public IncrementalAnalyzerProviderMetadata(string name, bool highPriorityForActiveFile, params string[] workspaceKinds)
+        public IncrementalAnalyzerProviderMetadata(
+            string name,
+            bool highPriorityForActiveFile,
+            params string[] workspaceKinds
+        )
             : base(workspaceKinds)
         {
             this.HighPriorityForActiveFile = highPriorityForActiveFile;

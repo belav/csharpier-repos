@@ -5,14 +5,16 @@
 // IsAlive=false if GC occurs on object with only a weakreference.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
-public class Test_IsAlive_neg {
+public class Test_IsAlive_neg
+{
     public static int[] array;
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void CreateArray() {
+    public static void CreateArray()
+    {
         array = new int[50];
     }
 
@@ -21,13 +23,15 @@ public class Test_IsAlive_neg {
     {
         return new WeakReference(array);
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void DestroyArray() {
+    public static void DestroyArray()
+    {
         array = null;
     }
 
-    public static int Main() {
+    public static int Main()
+    {
         CreateArray();
 
         WeakReference weak = CreateArrayWeakReference(); // array has ONLY a weakreference
@@ -40,11 +44,13 @@ public class Test_IsAlive_neg {
         bool ans = weak.IsAlive;
         Console.WriteLine(ans);
 
-        if(ans == false) {
+        if (ans == false)
+        {
             Console.WriteLine("Negative Test for WeakReference.IsAlive passed!");
             return 100;
         }
-        else {
+        else
+        {
             Console.WriteLine("Negative Test for WeakReference.IsAlive failed!");
             return 1;
         }

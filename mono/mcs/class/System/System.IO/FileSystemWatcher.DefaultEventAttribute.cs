@@ -10,7 +10,5 @@ namespace System.IO
 {
     // Add DefaultEventAdttribute for NS2.1 support
     [System.ComponentModel.DefaultEventAttribute("Changed")]
-    public partial class FileSystemWatcher
-    {
-    }
+    public partial class FileSystemWatcher { }
 }

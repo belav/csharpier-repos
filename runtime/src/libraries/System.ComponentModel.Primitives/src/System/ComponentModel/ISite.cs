@@ -39,6 +39,13 @@ namespace System.ComponentModel
         /// When implemented by a class, gets or sets the name of the component
         /// associated with the <see cref='System.ComponentModel.ISite'/>.
         /// </summary>
-        string? Name { get; [RequiresUnreferencedCode("The Type of components in the container cannot be statically discovered to validate the name.")] set; }
+        string? Name
+        {
+            get;
+            [RequiresUnreferencedCode(
+                "The Type of components in the container cannot be statically discovered to validate the name."
+            )]
+            set;
+        }
     }
 }

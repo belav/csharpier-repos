@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.SoapFaultBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,57 +32,62 @@ using System.ComponentModel;
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("fault", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (FaultBinding))]
-	public class SoapFaultBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension("fault", "http://schemas.xmlsoap.org/wsdl/soap/", typeof(FaultBinding))]
+    public class SoapFaultBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        string encoding;
+        string ns;
+        SoapBindingUse use;
+        string name;
 
-		string encoding;
-		string ns;
-		SoapBindingUse use;
-		string name;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public SoapFaultBinding ()
-		{
-			encoding = String.Empty;
-			ns = String.Empty;
-			use = SoapBindingUse.Default;
-		}
-		
-		#endregion // Constructors
+        public SoapFaultBinding()
+        {
+            encoding = String.Empty;
+            ns = String.Empty;
+            use = SoapBindingUse.Default;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[DefaultValue ("")]
-		[XmlAttribute ("encodingStyle")]
-		public string Encoding {
-			get { return encoding; }
-			set { encoding = value; }
-		}
-	
-		[XmlAttribute ("namespace")]	
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        #region Properties
 
-		[DefaultValue (SoapBindingUse.Default)]
-		[XmlAttribute ("use")]
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        [DefaultValue("")]
+        [XmlAttribute("encodingStyle")]
+        public string Encoding
+        {
+            get { return encoding; }
+            set { encoding = value; }
+        }
 
-		[XmlAttribute ("name")]
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-		#endregion // Properties
-	}
+        [XmlAttribute("namespace")]
+        public string Namespace
+        {
+            get { return ns; }
+            set { ns = value; }
+        }
+
+        [DefaultValue(SoapBindingUse.Default)]
+        [XmlAttribute("use")]
+        public SoapBindingUse Use
+        {
+            get { return use; }
+            set { use = value; }
+        }
+
+        [XmlAttribute("name")]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        #endregion // Properties
+    }
 }

@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class OverloadResolution
     {
-        // During overload resolution we need to map arguments to their corresponding 
+        // During overload resolution we need to map arguments to their corresponding
         // parameters, but most of the time that map is going to be trivial:
         // argument 0 corresponds to parameter 0, argument 1 corresponds to parameter 1,
         // and so on. Only when the call involves named arguments, optional parameters or
@@ -36,9 +36,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _length = length;
             }
 
-            public bool IsTrivial { get { return _parameters == null; } }
+            public bool IsTrivial
+            {
+                get { return _parameters == null; }
+            }
 
-            public int Length { get { return _length; } }
+            public int Length
+            {
+                get { return _length; }
+            }
 
             public int this[int argument]
             {
@@ -59,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             AnalyzedArguments arguments,
             bool isMethodGroupConversion,
-            bool expanded)
+            bool expanded
+        )
         {
             Debug.Assert((object)symbol != null);
             Debug.Assert(arguments != null);
@@ -70,7 +77,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // The easy out is that we have no named arguments and are in normal form.
             if (!expanded && arguments.Names.Count == 0)
             {
-                return AnalyzeArgumentsForNormalFormNoNamedArguments(parameters, arguments, isMethodGroupConversion, isVararg);
+                return AnalyzeArgumentsForNormalFormNoNamedArguments(
+                    parameters,
+                    arguments,
+                    isMethodGroupConversion,
+                    isVararg
+                );
             }
 
             // We simulate an additional non-optional parameter for a vararg method.
@@ -89,8 +101,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // We use -1 as a sentinel to mean that no parameter was found that corresponded to this argument.
                 bool isNamedArgument;
-                int parameterPosition = CorrespondsToAnyParameter(parameters, expanded, arguments, argumentPosition,
-                    isVararg, out isNamedArgument, ref seenNamedParams, ref seenOutOfPositionNamedArgument) ?? -1;
+                int parameterPosition =
+                    CorrespondsToAnyParameter(
+                        parameters,
+                        expanded,
+                        arguments,
+                        argumentPosition,
+                        isVararg,
+                        out isNamedArgument,
+                        ref seenNamedParams,
+                        ref seenOutOfPositionNamedArgument
+                    ) ?? -1;
 
                 if (parameterPosition == -1 && unmatchedArgumentIndex == null)
                 {
@@ -115,7 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ParameterMap argsToParameters = new ParameterMap(parametersPositions, argumentCount);
 
-            // We have analyzed every argument and tried to make it correspond to a particular parameter. 
+            // We have analyzed every argument and tried to make it correspond to a particular parameter.
             // We must now answer the following questions:
             //
             // (1) Is there any named argument used out-of-position and followed by unnamed arguments?
@@ -127,16 +148,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             // If the answer to any of these questions is "yes" then the method is not applicable.
             // It is possible that the answer to any number of these questions is "yes", and so
-            // we must decide which error condition to prioritize when reporting the error, 
+            // we must decide which error condition to prioritize when reporting the error,
             // should we need to report why a given method is not applicable. We prioritize
             // them in the given order.
 
             // (1) Is there any named argument used out-of-position and followed by unnamed arguments?
 
-            int? badNonTrailingNamedArgument = CheckForBadNonTrailingNamedArgument(arguments, argsToParameters);
+            int? badNonTrailingNamedArgument = CheckForBadNonTrailingNamedArgument(
+                arguments,
+                argsToParameters
+            );
             if (badNonTrailingNamedArgument != null)
             {
-                return ArgumentAnalysisResult.BadNonTrailingNamedArgument(badNonTrailingNamedArgument.Value);
+                return ArgumentAnalysisResult.BadNonTrailingNamedArgument(
+                    badNonTrailingNamedArgument.Value
+                );
             }
 
             // (2) Is there any argument without a corresponding parameter?
@@ -145,11 +171,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (unmatchedArgumentIsNamed.Value)
                 {
-                    return ArgumentAnalysisResult.NoCorrespondingNamedParameter(unmatchedArgumentIndex.Value);
+                    return ArgumentAnalysisResult.NoCorrespondingNamedParameter(
+                        unmatchedArgumentIndex.Value
+                    );
                 }
                 else
                 {
-                    return ArgumentAnalysisResult.NoCorrespondingParameter(unmatchedArgumentIndex.Value);
+                    return ArgumentAnalysisResult.NoCorrespondingParameter(
+                        unmatchedArgumentIndex.Value
+                    );
                 }
             }
 
@@ -164,10 +194,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // (4) Is there any non-optional parameter without a corresponding argument?
 
-            int? requiredParameterMissing = CheckForMissingRequiredParameter(argsToParameters, parameters, isMethodGroupConversion, expanded);
+            int? requiredParameterMissing = CheckForMissingRequiredParameter(
+                argsToParameters,
+                parameters,
+                isMethodGroupConversion,
+                expanded
+            );
             if (requiredParameterMissing != null)
             {
-                return ArgumentAnalysisResult.RequiredParameterMissing(requiredParameterMissing.Value);
+                return ArgumentAnalysisResult.RequiredParameterMissing(
+                    requiredParameterMissing.Value
+                );
             }
 
             // __arglist cannot be used with named arguments (as it doesn't have a name)
@@ -186,12 +223,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // We're good; this one might be applicable in the given form.
 
-            return expanded ?
-                ArgumentAnalysisResult.ExpandedForm(argsToParameters.ToImmutableArray()) :
-                ArgumentAnalysisResult.NormalForm(argsToParameters.ToImmutableArray());
+            return expanded
+                ? ArgumentAnalysisResult.ExpandedForm(argsToParameters.ToImmutableArray())
+                : ArgumentAnalysisResult.NormalForm(argsToParameters.ToImmutableArray());
         }
 
-        private static int? CheckForBadNonTrailingNamedArgument(AnalyzedArguments arguments, ParameterMap argsToParameters)
+        private static int? CheckForBadNonTrailingNamedArgument(
+            AnalyzedArguments arguments,
+            ParameterMap argsToParameters
+        )
         {
             // Is there any named argument used out-of-position and followed by unnamed arguments?
 
@@ -237,17 +277,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isVararg,
             out bool isNamedArgument,
             ref bool seenNamedParams,
-            ref bool seenOutOfPositionNamedArgument)
+            ref bool seenOutOfPositionNamedArgument
+        )
         {
             // Spec 7.5.1.1: Corresponding parameters:
             // For each argument in an argument list there has to be a corresponding parameter in
             // the function member or delegate being invoked. The parameter list used in the
             // following is determined as follows:
-            // - For virtual methods and indexers defined in classes, the parameter list is picked from the most specific 
+            // - For virtual methods and indexers defined in classes, the parameter list is picked from the most specific
             //   declaration or override of the function member, starting with the static type of the receiver, and searching through its base classes.
-            // - For interface methods and indexers, the parameter list is picked form the most specific definition of the member, 
-            //   starting with the interface type and searching through the base interfaces. If no unique parameter list is found, 
-            //   a parameter list with inaccessible names and no optional parameters is constructed, so that invocations cannot use 
+            // - For interface methods and indexers, the parameter list is picked form the most specific definition of the member,
+            //   starting with the interface type and searching through the base interfaces. If no unique parameter list is found,
+            //   a parameter list with inaccessible names and no optional parameters is constructed, so that invocations cannot use
             //   named parameters or omit optional arguments.
             // - For partial methods, the parameter list of the defining partial method declaration is used.
             // - For all other function members and delegates there is only a single parameter list, which is the one used.
@@ -256,10 +297,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // parameters preceding it in the argument list or parameter list.
             //
             // The corresponding parameters for function member arguments are established as follows:
-            // 
+            //
             // Arguments in the argument-list of instance constructors, methods, indexers and delegates:
 
-            isNamedArgument = arguments.Names.Count > argumentPosition && arguments.Names[argumentPosition] != null;
+            isNamedArgument =
+                arguments.Names.Count > argumentPosition
+                && arguments.Names[argumentPosition] != null;
 
             if (!isNamedArgument)
             {
@@ -296,18 +339,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                // SPEC: A named argument corresponds to the parameter of the same name in the parameter list. 
+                // SPEC: A named argument corresponds to the parameter of the same name in the parameter list.
 
                 // SPEC VIOLATION: The intention of this line of the specification, when contrasted with
                 // SPEC VIOLATION: the lines on positional arguments quoted above, was to disallow a named
-                // SPEC VIOLATION: argument from corresponding to an element of a parameter array when 
+                // SPEC VIOLATION: argument from corresponding to an element of a parameter array when
                 // SPEC VIOLATION: the method was invoked in its expanded form. That is to say that in
-                // SPEC VIOLATION: this case:  M(params int[] x) ... M(x : 1234); the named argument 
+                // SPEC VIOLATION: this case:  M(params int[] x) ... M(x : 1234); the named argument
                 // SPEC VIOLATION: corresponds to x in the normal form (and is then inapplicable), but
                 // SPEC VIOLATION: the named argument does *not* correspond to a member of params array
                 // SPEC VIOLATION: x in the expanded form.
-                // SPEC VIOLATION: Sadly that is not what we implemented in C# 4, and not what we are 
-                // SPEC VIOLATION: implementing here. If you do that, we make x correspond to the 
+                // SPEC VIOLATION: Sadly that is not what we implemented in C# 4, and not what we are
+                // SPEC VIOLATION: implementing here. If you do that, we make x correspond to the
                 // SPEC VIOLATION: parameter array and allow the candidate to be applicable in its
                 // SPEC VIOLATION: expanded form.
 
@@ -341,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             AnalyzedArguments arguments,
             bool isMethodGroupConversion,
-            bool isVararg)
+            bool isVararg
+        )
         {
             Debug.Assert(!parameters.IsDefault);
             Debug.Assert(arguments != null);
@@ -354,15 +398,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If there are no named arguments then analyzing the argument and parameter
             // matching in normal form is simple: each argument corresponds exactly to
             // the matching parameter, and if there are not enough arguments then the
-            // unmatched parameters had better all be optional. If there are too 
-            // few parameters then one of the arguments has no matching parameter. 
+            // unmatched parameters had better all be optional. If there are too
+            // few parameters then one of the arguments has no matching parameter.
             // Otherwise, everything is just right.
 
             if (argumentCount < parameterCount)
             {
-                for (int parameterPosition = argumentCount; parameterPosition < parameterCount; ++parameterPosition)
+                for (
+                    int parameterPosition = argumentCount;
+                    parameterPosition < parameterCount;
+                    ++parameterPosition
+                )
                 {
-                    if (parameters.Length == parameterPosition || !CanBeOptional(parameters[parameterPosition], isMethodGroupConversion))
+                    if (
+                        parameters.Length == parameterPosition
+                        || !CanBeOptional(parameters[parameterPosition], isMethodGroupConversion)
+                    )
                     {
                         return ArgumentAnalysisResult.RequiredParameterMissing(parameterPosition);
                     }
@@ -386,7 +437,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             //     normal form (§7.5.3.1), and do not omit any optional parameters. Thus, candidate methods
             //     are ignored if they are applicable only in their expanded form, or if one or more of their
             //     optional parameters do not have a corresponding parameter in the targeted delegate type.
-            //   
+            //
             // Therefore, no parameters are optional when performing method group conversion.  Alternatively,
             // we could eliminate methods based on the number of arguments, but then we wouldn't be able to
             // fall back on them if no other candidates were available.
@@ -394,11 +445,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return !isMethodGroupConversion && parameter.IsOptional;
         }
 
-        private static int? NameUsedForPositional(AnalyzedArguments arguments, ParameterMap argsToParameters)
+        private static int? NameUsedForPositional(
+            AnalyzedArguments arguments,
+            ParameterMap argsToParameters
+        )
         {
             // Was there a named argument used for a previously-supplied positional argument?
 
-            // If the map is trivial then clearly not. 
+            // If the map is trivial then clearly not.
             if (argsToParameters.IsTrivial)
             {
                 return null;
@@ -407,7 +461,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // PERFORMANCE: This is an O(n-squared) algorithm, but n will typically be small.  We could rewrite this
             // PERFORMANCE: as a linear algorithm if we wanted to allocate more memory.
 
-            for (int argumentPosition = 0; argumentPosition < argsToParameters.Length; ++argumentPosition)
+            for (
+                int argumentPosition = 0;
+                argumentPosition < argsToParameters.Length;
+                ++argumentPosition
+            )
             {
                 if (arguments.Name(argumentPosition) != null)
                 {
@@ -417,7 +475,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (argsToParameters[argumentPosition] == argsToParameters[i])
                             {
-                                // Error; we've got a named argument that corresponds to 
+                                // Error; we've got a named argument that corresponds to
                                 // a previously-given positional argument.
                                 return argumentPosition;
                             }
@@ -433,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterMap argsToParameters,
             ImmutableArray<ParameterSymbol> parameters,
             bool isMethodGroupConversion,
-            bool expanded)
+            bool expanded
+        )
         {
             Debug.Assert(!(expanded && isMethodGroupConversion));
 
@@ -443,7 +502,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             int count = expanded ? parameters.Length - 1 : parameters.Length;
 
             // We'll take an early out here. If the map from arguments to parameters is trivial
-            // and there are as many arguments as parameters in that map, then clearly no 
+            // and there are as many arguments as parameters in that map, then clearly no
             // required parameter is missing.
 
             if (argsToParameters.IsTrivial && count <= argsToParameters.Length)

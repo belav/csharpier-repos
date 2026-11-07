@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ImmutableArray<AbstractFormattingRule> formattingRules,
         int index,
         SyntaxNode node,
-        List<AnchorIndentationOperation> list)
+        List<AnchorIndentationOperation> list
+    )
     {
-        private NextAnchorIndentationOperationAction NextAction
-            => new(formattingRules, index + 1, node, list);
+        private NextAnchorIndentationOperationAction NextAction =>
+            new(formattingRules, index + 1, node, list);
 
         public void Invoke()
         {

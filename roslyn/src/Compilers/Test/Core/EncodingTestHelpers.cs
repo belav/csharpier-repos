@@ -32,14 +32,14 @@ public static class EncodingTestHelpers
             yield return info.GetEncoding();
         }
 #else
-            yield return Encoding.ASCII;
-            yield return Encoding.GetEncoding("SJIS");
-            yield return Encoding.GetEncoding(1250);
+        yield return Encoding.ASCII;
+        yield return Encoding.GetEncoding("SJIS");
+        yield return Encoding.GetEncoding(1250);
 #endif
     }
 
-    public static IEnumerable<object?[]> GetEncodingTestCases()
-        => GetEncodings().Select(e => new object?[] { e });
+    public static IEnumerable<object?[]> GetEncodingTestCases() =>
+        GetEncodings().Select(e => new object?[] { e });
 
     public static void AssertEncodingsEqual(Encoding? expected, Encoding? actual)
     {

@@ -29,7 +29,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             /// </summary>
             public readonly CompilationDifference? CompilationDifference;
 
-            public GenerationInfo(Compilation compilation, MetadataReader reader, CompilationDifference? diff, CompilationVerifier? compilationVerifier, EmitBaseline baseline, Action<GenerationVerifier> verifier)
+            public GenerationInfo(
+                Compilation compilation,
+                MetadataReader reader,
+                CompilationDifference? diff,
+                CompilationVerifier? compilationVerifier,
+                EmitBaseline baseline,
+                Action<GenerationVerifier> verifier
+            )
             {
                 Debug.Assert(diff is null ^ compilationVerifier is null);
 

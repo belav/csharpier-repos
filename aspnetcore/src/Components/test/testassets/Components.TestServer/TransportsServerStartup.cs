@@ -20,65 +20,56 @@ public class TransportsServerStartup : ServerStartup
             app.UseDeveloperExceptionPage();
         }
 
-        app.Map(
-            "/defaultTransport",
-            app =>
+        app.Map("/defaultTransport", app =>
+        {
+            app.UseStaticFiles();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseStaticFiles();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_ServerHost");
+            });
+        });
 
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapBlazorHub();
-                    endpoints.MapFallbackToPage("/_ServerHost");
-                });
-            }
-        );
+        app.Map("/longPolling", app =>
+        {
+            app.UseStaticFiles();
 
-        app.Map(
-            "/longPolling",
-            app =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseStaticFiles();
-
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+                endpoints.MapBlazorHub(configureOptions: options =>
                 {
-                    endpoints.MapBlazorHub(configureOptions: options =>
-                    {
-                        options.Transports = Microsoft
-                            .AspNetCore
-                            .Http
-                            .Connections
-                            .HttpTransportType
-                            .LongPolling;
-                    });
-                    endpoints.MapFallbackToPage("/_ServerHost");
+                    options.Transports = Microsoft
+                        .AspNetCore
+                        .Http
+                        .Connections
+                        .HttpTransportType
+                        .LongPolling;
                 });
-            }
-        );
+                endpoints.MapFallbackToPage("/_ServerHost");
+            });
+        });
 
-        app.Map(
-            "/webSockets",
-            app =>
+        app.Map("/webSockets", app =>
+        {
+            app.UseStaticFiles();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseStaticFiles();
-
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+                endpoints.MapBlazorHub(configureOptions: options =>
                 {
-                    endpoints.MapBlazorHub(configureOptions: options =>
-                    {
-                        options.Transports = Microsoft
-                            .AspNetCore
-                            .Http
-                            .Connections
-                            .HttpTransportType
-                            .WebSockets;
-                    });
-                    endpoints.MapFallbackToPage("/_ServerHost");
+                    options.Transports = Microsoft
+                        .AspNetCore
+                        .Http
+                        .Connections
+                        .HttpTransportType
+                        .WebSockets;
                 });
-            }
-        );
+                endpoints.MapFallbackToPage("/_ServerHost");
+            });
+        });
     }
 }

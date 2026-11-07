@@ -22,11 +22,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return int.MinValue;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -39,7 +35,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return int.MaxValue;
             }
-
             set
             {
                 if (value == int.MaxValue)
@@ -72,8 +67,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.hide002.hide002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -83,9 +76,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(29,18\).*CS0108</Expects>
-    public class C
-    {
-    }
+    public class C { }
 
     public class Base
     {
@@ -97,11 +88,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return float.NaN;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -114,7 +101,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return float.NegativeInfinity;
             }
-
             set
             {
                 if (value == float.NegativeInfinity)
@@ -147,8 +133,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.hide003.hide003
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -157,9 +141,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
-    {
-    }
+    public class C { }
 
     public class Base
     {
@@ -171,11 +153,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return decimal.One;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -188,11 +166,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return decimal.Zero;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -220,8 +194,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload001.overload001
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -240,7 +212,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return decimal.MinValue;
             }
-
             set
             {
                 if (value == decimal.MinValue)
@@ -258,11 +229,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return decimal.MaxValue;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -291,8 +258,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload002.overload002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -311,11 +276,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 'a';
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -328,7 +289,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 'b';
             }
-
             set
             {
                 if (value == 'b')
@@ -361,8 +321,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload003.overload003
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -380,18 +338,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
             get
             {
                 Base.Status = 1;
-                return new string[]
-                {
-                "foo"
-                }
-
-                ;
+                return new string[] { "foo" };
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -402,14 +351,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
             get
             {
                 Base.Status = 3;
-                return new string[]
-                {
-                string.Empty
-                }
-
-                ;
+                return new string[] { string.Empty };
             }
-
             set
             {
                 if (value.Length == 1 && value[0] == string.Empty)
@@ -442,8 +385,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload004.overload004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -463,7 +404,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return byte.MinValue;
             }
-
             set
             {
                 if (value == byte.MinValue)
@@ -481,11 +421,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return byte.MaxValue;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -513,8 +449,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload005.overload005
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -534,7 +468,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return "foo";
             }
-
             set
             {
                 if (value == "foo")
@@ -552,11 +485,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return string.Empty;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -584,8 +513,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload006.overload006
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -605,11 +532,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return float.NegativeInfinity;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -622,7 +545,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return float.NaN;
             }
-
             set
             {
                 if (float.IsNaN(value))
@@ -655,8 +577,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload007.overload007
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -676,11 +596,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 'a';
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -693,11 +609,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 'b';
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -725,8 +637,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.overload008.overload008
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -746,11 +656,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 0;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
 
         public int this[short x]
@@ -760,11 +666,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return int.MinValue;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -777,7 +679,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return int.MaxValue;
             }
-
             set
             {
                 if (value == int.MaxValue)
@@ -810,8 +711,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr001.ovr001
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -830,11 +729,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return string.Empty;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -847,11 +742,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return "foo";
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public string this[long l]
@@ -861,11 +752,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return "bar";
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -893,8 +780,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr002.ovr002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -913,11 +798,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return int.MaxValue;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -930,11 +811,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return int.MinValue;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[long l]
@@ -944,11 +821,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 0;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -976,8 +849,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr003.ovr003
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -996,11 +867,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return string.Empty;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1013,11 +880,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return "foo";
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public string this[object o]
@@ -1027,11 +890,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return "bar";
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1059,8 +918,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr004.ovr004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1069,13 +926,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
-    {
-    }
+    public class C { }
 
-    public class D : C
-    {
-    }
+    public class D : C { }
 
     public class Base
     {
@@ -1087,11 +940,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return int.MaxValue;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1104,11 +953,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return int.MinValue;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[C o]
@@ -1118,11 +963,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 0;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1150,8 +991,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr005.ovr005
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1160,13 +999,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
-    {
-    }
+    public class C { }
 
-    public class D : C
-    {
-    }
+    public class D : C { }
 
     public class Base
     {
@@ -1178,11 +1013,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return int.MaxValue;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1195,11 +1026,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return int.MinValue;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[C o]
@@ -1209,11 +1036,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 0;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1241,8 +1064,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr006.ovr006
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1251,13 +1072,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
-    {
-    }
+    public class C { }
 
-    public class D : C
-    {
-    }
+    public class D : C { }
 
     public class Base
     {
@@ -1269,11 +1086,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1286,11 +1099,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[C o]
@@ -1300,11 +1109,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1332,8 +1137,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr007.ovr007
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1342,13 +1145,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
-    {
-    }
+    public class C { }
 
-    public class D : C
-    {
-    }
+    public class D : C { }
 
     public class Base
     {
@@ -1360,11 +1159,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1377,11 +1172,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[string o]
@@ -1391,11 +1182,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1423,8 +1210,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr008.ovr008
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1433,9 +1218,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
-    {
-    }
+    public class C { }
 
     public class Base
     {
@@ -1447,11 +1230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1464,11 +1243,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[C o]
@@ -1478,11 +1253,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1510,8 +1281,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr009.ovr009
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1523,7 +1292,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     public enum E
     {
         first,
-        second
+        second,
     }
 
     public class Base
@@ -1536,11 +1305,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1553,11 +1318,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[E o]
@@ -1567,11 +1328,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1599,8 +1356,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr010.ovr010
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1611,7 +1366,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <Code>
     public class C
     {
-        public static implicit operator int (C c)
+        public static implicit operator int(C c)
         {
             return 0;
         }
@@ -1627,11 +1382,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1644,11 +1395,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[int o]
@@ -1658,11 +1405,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1689,8 +1432,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr011.ovr011
 {
@@ -1702,7 +1443,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <Code>
     public class C
     {
-        public static implicit operator int (C c)
+        public static implicit operator int(C c)
         {
             return 0;
         }
@@ -1718,11 +1459,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1735,11 +1472,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
 
         public int this[long o]
@@ -1749,11 +1482,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1780,8 +1509,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovr012.ovr012
 {
@@ -1801,11 +1528,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
 
         public virtual int this[long y]
@@ -1815,11 +1538,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 3;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -1832,11 +1551,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 5;
                 return 5;
             }
-
-            set
-            {
-                Base.Status = 6;
-            }
+            set { Base.Status = 6; }
         }
     }
 
@@ -1849,11 +1564,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 7;
                 return 7;
             }
-
-            set
-            {
-                Base.Status = 8;
-            }
+            set { Base.Status = 8; }
         }
     }
 
@@ -1881,8 +1592,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovrdynamic001.ovrdynamic001
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1901,11 +1610,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1918,11 +1623,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 2;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 
@@ -1950,8 +1651,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Indexers.Twoclass2indexers.ovrdynamic002.ovrdynamic002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1970,11 +1669,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 1;
                 return 1;
             }
-
-            set
-            {
-                Base.Status = 2;
-            }
+            set { Base.Status = 2; }
         }
     }
 
@@ -1987,11 +1682,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
                 Base.Status = 3;
                 return 2;
             }
-
-            set
-            {
-                Base.Status = 4;
-            }
+            set { Base.Status = 4; }
         }
     }
 

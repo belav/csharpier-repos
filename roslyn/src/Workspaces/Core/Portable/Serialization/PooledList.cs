@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Serialization
     /// </summary>
     internal static class Creator
     {
-        public static PooledObject<HashSet<Checksum>> CreateChecksumSet(ImmutableArray<Checksum> checksums)
+        public static PooledObject<HashSet<Checksum>> CreateChecksumSet(
+            ImmutableArray<Checksum> checksums
+        )
         {
             var items = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
 
@@ -33,10 +35,12 @@ namespace Microsoft.CodeAnalysis.Serialization
             return items;
         }
 
-        public static PooledObject<List<T>> CreateList<T>()
-            => SharedPools.Default<List<T>>().GetPooledObject();
+        public static PooledObject<List<T>> CreateList<T>() =>
+            SharedPools.Default<List<T>>().GetPooledObject();
 
-        public static PooledObject<Dictionary<Checksum, object>> CreateResultMap(out Dictionary<Checksum, object> result)
+        public static PooledObject<Dictionary<Checksum, object>> CreateResultMap(
+            out Dictionary<Checksum, object> result
+        )
         {
             var pooled = SharedPools.Default<Dictionary<Checksum, object>>().GetPooledObject();
             result = pooled.Object;

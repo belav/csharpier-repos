@@ -10,35 +10,26 @@ namespace System.Activities
 
     public abstract class LocationReference
     {
-        protected LocationReference()
-        {
-        }
+        protected LocationReference() { }
 
         public string Name
         {
-            get
-            {
-                return this.NameCore;
-            }
+            get { return this.NameCore; }
         }
 
-        [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.PropertyNamesShouldNotMatchGetMethods,
-            Justification = "Workflow normalizes on Type for Type properties")]
+        [SuppressMessage(
+            FxCop.Category.Naming,
+            FxCop.Rule.PropertyNamesShouldNotMatchGetMethods,
+            Justification = "Workflow normalizes on Type for Type properties"
+        )]
         public Type Type
         {
-            get
-            {
-                return this.TypeCore;
-            }
+            get { return this.TypeCore; }
         }
 
         // internal Id use for arguments/variables/delegate arguments, and accessed
         // by our mapping pieces
-        internal int Id
-        {
-            get;
-            set;
-        }
+        internal int Id { get; set; }
 
         protected abstract string NameCore { get; }
         protected abstract Type TypeCore { get; }

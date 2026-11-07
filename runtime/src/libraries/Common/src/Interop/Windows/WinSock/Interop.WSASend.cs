@@ -19,7 +19,8 @@ internal static partial class Interop
             out int bytesTransferred,
             SocketFlags socketFlags,
             NativeOverlapped* overlapped,
-            IntPtr completionRoutine);
+            IntPtr completionRoutine
+        );
 
         internal static unsafe SocketError WSASend(
             SafeHandle socketHandle,
@@ -28,12 +29,21 @@ internal static partial class Interop
             out int bytesTransferred,
             SocketFlags socketFlags,
             NativeOverlapped* overlapped,
-            IntPtr completionRoutine)
+            IntPtr completionRoutine
+        )
         {
             Debug.Assert(!buffers.IsEmpty);
             fixed (WSABuffer* buffersPtr = &MemoryMarshal.GetReference(buffers))
             {
-                return WSASend(socketHandle, buffersPtr, bufferCount, out bytesTransferred, socketFlags, overlapped, completionRoutine);
+                return WSASend(
+                    socketHandle,
+                    buffersPtr,
+                    bufferCount,
+                    out bytesTransferred,
+                    socketFlags,
+                    overlapped,
+                    completionRoutine
+                );
             }
         }
     }

@@ -18,7 +18,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ExceptionContext(controllerContext, exception); }, "exception");
+                delegate
+                {
+                    new ExceptionContext(controllerContext, exception);
+                },
+                "exception"
+            );
         }
 
         [Fact]
@@ -42,7 +47,12 @@ namespace System.Web.Mvc.Test
             ExceptionContext exceptionContext = new Mock<ExceptionContext>().Object;
 
             // Act & assert
-            MemberHelper.TestPropertyWithDefaultInstance(exceptionContext, "Result", new ViewResult(), EmptyResult.Instance);
+            MemberHelper.TestPropertyWithDefaultInstance(
+                exceptionContext,
+                "Result",
+                new ViewResult(),
+                EmptyResult.Instance
+            );
         }
     }
 }

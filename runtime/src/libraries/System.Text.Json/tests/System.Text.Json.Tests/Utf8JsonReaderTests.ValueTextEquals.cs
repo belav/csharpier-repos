@@ -16,16 +16,26 @@ namespace System.Text.Json.Tests
             bool foundValue = false;
             bool foundArrayValue = false;
 
-            var json = new Utf8JsonReader("{\"conne\\u0063tionId\":\"123\",\"availableTransports\":[\"My name is \\\"Ahson\\\"\"]}"u8, isFinalBlock: true, state: default);
+            var json = new Utf8JsonReader(
+                "{\"conne\\u0063tionId\":\"123\",\"availableTransports\":[\"My name is \\\"Ahson\\\"\"]}"u8,
+                isFinalBlock: true,
+                state: default
+            );
             while (json.Read())
             {
                 if (json.TokenType == JsonTokenType.PropertyName)
                 {
-                    if (json.ValueTextEquals("connectionId"u8) && json.ValueTextEquals("connectionId".AsSpan()))
+                    if (
+                        json.ValueTextEquals("connectionId"u8)
+                        && json.ValueTextEquals("connectionId".AsSpan())
+                    )
                     {
                         foundId = true;
                     }
-                    else if (json.ValueTextEquals("availableTransports"u8) && json.ValueTextEquals("availableTransports".AsSpan()))
+                    else if (
+                        json.ValueTextEquals("availableTransports"u8)
+                        && json.ValueTextEquals("availableTransports".AsSpan())
+                    )
                     {
                         foundTransports = true;
                     }
@@ -36,7 +46,10 @@ namespace System.Text.Json.Tests
                     {
                         foundValue = true;
                     }
-                    else if (json.ValueTextEquals("My name is \"Ahson\""u8) && json.ValueTextEquals("My name is \"Ahson\"".AsSpan()))
+                    else if (
+                        json.ValueTextEquals("My name is \"Ahson\""u8)
+                        && json.ValueTextEquals("My name is \"Ahson\"".AsSpan())
+                    )
                     {
                         foundArrayValue = true;
                     }
@@ -96,7 +109,11 @@ namespace System.Text.Json.Tests
         [InlineData("{\"na\\u006de\": 1234}", "namee", false)]
         [InlineData("{\"na\\u006de\": 1234}", "na\\u006de", false)]
         [InlineData("{\"na\\u006de\": 1234}", "", false)]
-        public static void TestTextEquals(string jsonString, string lookUpString, bool expectedFound)
+        public static void TestTextEquals(
+            string jsonString,
+            string lookUpString,
+            bool expectedFound
+        )
         {
             byte[] lookup = Encoding.UTF8.GetBytes(lookUpString);
             byte[] utf8Data = Encoding.UTF8.GetBytes(jsonString);
@@ -107,9 +124,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.PropertyName)
                 {
-                    if (json.ValueTextEquals(lookup) &&
-                        json.ValueTextEquals(lookUpString) &&
-                        json.ValueTextEquals(lookUpString.AsSpan()))
+                    if (
+                        json.ValueTextEquals(lookup)
+                        && json.ValueTextEquals(lookUpString)
+                        && json.ValueTextEquals(lookUpString.AsSpan())
+                    )
                     {
                         found = true;
                         break;
@@ -127,9 +146,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.PropertyName)
                 {
-                    if (json.ValueTextEquals(lookup) &&
-                        json.ValueTextEquals(lookUpString) &&
-                        json.ValueTextEquals(lookUpString.AsSpan()))
+                    if (
+                        json.ValueTextEquals(lookup)
+                        && json.ValueTextEquals(lookUpString)
+                        && json.ValueTextEquals(lookUpString.AsSpan())
+                    )
                     {
                         found = true;
                         break;
@@ -152,7 +173,11 @@ namespace System.Text.Json.Tests
         [InlineData("{\"name\": \"Joh\\u006e\"}", "Johna", false)]
         [InlineData("{\"name\": \"Joh\\u006e\"}", "Joh\\u006e", false)]
         [InlineData("{\"name\": \"Joh\\u006e\"}", "", false)]
-        public static void TestTextEqualsValue(string jsonString, string lookUpString, bool expectedFound)
+        public static void TestTextEqualsValue(
+            string jsonString,
+            string lookUpString,
+            bool expectedFound
+        )
         {
             byte[] lookup = Encoding.UTF8.GetBytes(lookUpString);
             byte[] utf8Data = Encoding.UTF8.GetBytes(jsonString);
@@ -163,9 +188,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(lookup) &&
-                        json.ValueTextEquals(lookUpString) &&
-                        json.ValueTextEquals(lookUpString.AsSpan()))
+                    if (
+                        json.ValueTextEquals(lookup)
+                        && json.ValueTextEquals(lookUpString)
+                        && json.ValueTextEquals(lookUpString.AsSpan())
+                    )
                     {
                         found = true;
                         break;
@@ -183,9 +210,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(lookup) &&
-                        json.ValueTextEquals(lookUpString) &&
-                        json.ValueTextEquals(lookUpString.AsSpan()))
+                    if (
+                        json.ValueTextEquals(lookup)
+                        && json.ValueTextEquals(lookUpString)
+                        && json.ValueTextEquals(lookUpString.AsSpan())
+                    )
                     {
                         found = true;
                         break;
@@ -199,13 +228,13 @@ namespace System.Text.Json.Tests
         [Fact]
         public static void TestTextEqualsLargeMatch()
         {
-            var jsonChars = new char[320];  // Some value larger than 256 (stack threshold)
+            var jsonChars = new char[320]; // Some value larger than 256 (stack threshold)
             jsonChars.AsSpan().Fill('a');
             byte[] lookup = Encoding.UTF8.GetBytes(jsonChars);
 
             ReadOnlySpan<char> escapedA = new char[6] { '\\', 'u', '0', '0', '6', '1' };
 
-            ReadOnlySpan<byte> lookupSpan = lookup.AsSpan(0, lookup.Length - escapedA.Length + 1);   // remove extra characters that were replaced by escaped bytes
+            ReadOnlySpan<byte> lookupSpan = lookup.AsSpan(0, lookup.Length - escapedA.Length + 1); // remove extra characters that were replaced by escaped bytes
             Span<char> lookupChars = new char[jsonChars.Length];
             jsonChars.CopyTo(lookupChars);
             lookupChars = lookupChars.Slice(0, lookupChars.Length - escapedA.Length + 1);
@@ -226,9 +255,11 @@ namespace System.Text.Json.Tests
                 {
                     if (json.TokenType == JsonTokenType.String)
                     {
-                        if (json.ValueTextEquals(lookupSpan) &&
-                            json.ValueTextEquals(lookupChars) &&
-                            json.ValueTextEquals(new string(lookupChars.ToArray())))
+                        if (
+                            json.ValueTextEquals(lookupSpan)
+                            && json.ValueTextEquals(lookupChars)
+                            && json.ValueTextEquals(new string(lookupChars.ToArray()))
+                        )
                         {
                             found = true;
                             break;
@@ -246,9 +277,11 @@ namespace System.Text.Json.Tests
                 {
                     if (json.TokenType == JsonTokenType.String)
                     {
-                        if (json.ValueTextEquals(lookupSpan) &&
-                            json.ValueTextEquals(lookupChars) &&
-                            json.ValueTextEquals(new string(lookupChars.ToArray())))
+                        if (
+                            json.ValueTextEquals(lookupSpan)
+                            && json.ValueTextEquals(lookupChars)
+                            && json.ValueTextEquals(new string(lookupChars.ToArray()))
+                        )
                         {
                             found = true;
                             break;
@@ -256,14 +289,17 @@ namespace System.Text.Json.Tests
                     }
                 }
 
-                Assert.True(found, $"Json String: {jsonString}  | Look up: {Encoding.UTF8.GetString(lookupSpan.ToArray())}");
+                Assert.True(
+                    found,
+                    $"Json String: {jsonString}  | Look up: {Encoding.UTF8.GetString(lookupSpan.ToArray())}"
+                );
             }
         }
 
         [Fact]
         public static void TestTextEqualsLargeMismatch()
         {
-            var jsonChars = new char[320];  // Some value larger than 256 (stack threshold)
+            var jsonChars = new char[320]; // Some value larger than 256 (stack threshold)
             jsonChars.AsSpan().Fill('a');
             ReadOnlySpan<char> escapedA = new char[6] { '\\', 'u', '0', '0', '6', '1' };
 
@@ -283,11 +319,11 @@ namespace System.Text.Json.Tests
                 {
                     Span<byte> lookup = new byte[originalLookup.Length];
                     originalLookup.CopyTo(lookup);
-                    lookup = lookup.Slice(0, lookup.Length - escapedA.Length + 1);    // remove extra characters that were replaced by escaped bytes
+                    lookup = lookup.Slice(0, lookup.Length - escapedA.Length + 1); // remove extra characters that were replaced by escaped bytes
 
                     Span<char> lookupChars = new char[originalLookupChars.Length];
                     originalLookupChars.CopyTo(lookupChars);
-                    lookupChars = lookupChars.Slice(0, lookupChars.Length - escapedA.Length + 1);    // remove extra characters that were replaced by escaped bytes
+                    lookupChars = lookupChars.Slice(0, lookupChars.Length - escapedA.Length + 1); // remove extra characters that were replaced by escaped bytes
 
                     switch (j)
                     {
@@ -312,9 +348,11 @@ namespace System.Text.Json.Tests
                     {
                         if (json.TokenType == JsonTokenType.String)
                         {
-                            if (json.ValueTextEquals(lookup) ||
-                                json.ValueTextEquals(lookupChars) ||
-                                json.ValueTextEquals(new string(lookupChars.ToArray())))
+                            if (
+                                json.ValueTextEquals(lookup)
+                                || json.ValueTextEquals(lookupChars)
+                                || json.ValueTextEquals(new string(lookupChars.ToArray()))
+                            )
                             {
                                 found = true;
                                 break;
@@ -332,9 +370,11 @@ namespace System.Text.Json.Tests
                     {
                         if (json.TokenType == JsonTokenType.String)
                         {
-                            if (json.ValueTextEquals(lookup) ||
-                                json.ValueTextEquals(lookupChars) ||
-                                json.ValueTextEquals(new string(lookupChars.ToArray())))
+                            if (
+                                json.ValueTextEquals(lookup)
+                                || json.ValueTextEquals(lookupChars)
+                                || json.ValueTextEquals(new string(lookupChars.ToArray()))
+                            )
                             {
                                 found = true;
                                 break;
@@ -361,9 +401,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(new byte[] { (byte)'a' }) ||
-                        json.ValueTextEquals(new char[] { 'a' }) ||
-                        json.ValueTextEquals("a"))
+                    if (
+                        json.ValueTextEquals(new byte[] { (byte)'a' })
+                        || json.ValueTextEquals(new char[] { 'a' })
+                        || json.ValueTextEquals("a")
+                    )
                     {
                         found = true;
                         break;
@@ -381,9 +423,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(new byte[] { (byte)'a' }) ||
-                        json.ValueTextEquals(new char[] { 'a' }) ||
-                        json.ValueTextEquals("a"))
+                    if (
+                        json.ValueTextEquals(new byte[] { (byte)'a' })
+                        || json.ValueTextEquals(new char[] { 'a' })
+                        || json.ValueTextEquals("a")
+                    )
                     {
                         found = true;
                         break;
@@ -410,9 +454,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString)) ||
-                        json.ValueTextEquals(lookupString.AsSpan()) ||
-                        json.ValueTextEquals(lookupString))
+                    if (
+                        json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString))
+                        || json.ValueTextEquals(lookupString.AsSpan())
+                        || json.ValueTextEquals(lookupString)
+                    )
                     {
                         found = true;
                         break;
@@ -430,9 +476,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString)) ||
-                        json.ValueTextEquals(lookupString.AsSpan()) ||
-                        json.ValueTextEquals(lookupString))
+                    if (
+                        json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString))
+                        || json.ValueTextEquals(lookupString.AsSpan())
+                        || json.ValueTextEquals(lookupString)
+                    )
                     {
                         found = true;
                         break;
@@ -457,9 +505,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString)) ||
-                        json.ValueTextEquals(lookupString.AsSpan()) ||
-                        json.ValueTextEquals(lookupString))
+                    if (
+                        json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString))
+                        || json.ValueTextEquals(lookupString.AsSpan())
+                        || json.ValueTextEquals(lookupString)
+                    )
                     {
                         found = true;
                         break;
@@ -477,9 +527,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString)) ||
-                        json.ValueTextEquals(lookupString.AsSpan()) ||
-                        json.ValueTextEquals(lookupString))
+                    if (
+                        json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString))
+                        || json.ValueTextEquals(lookupString.AsSpan())
+                        || json.ValueTextEquals(lookupString)
+                    )
                     {
                         found = true;
                         break;
@@ -504,9 +556,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString)) ||
-                        json.ValueTextEquals(lookupString.AsSpan()) ||
-                        json.ValueTextEquals(lookupString))
+                    if (
+                        json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString))
+                        || json.ValueTextEquals(lookupString.AsSpan())
+                        || json.ValueTextEquals(lookupString)
+                    )
                     {
                         found = true;
                         break;
@@ -524,9 +578,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString)) ||
-                        json.ValueTextEquals(lookupString.AsSpan()) ||
-                        json.ValueTextEquals(lookupString))
+                    if (
+                        json.ValueTextEquals(Encoding.UTF8.GetBytes(lookupString))
+                        || json.ValueTextEquals(lookupString.AsSpan())
+                        || json.ValueTextEquals(lookupString)
+                    )
                     {
                         found = true;
                         break;
@@ -552,9 +608,11 @@ namespace System.Text.Json.Tests
             {
                 if (json.TokenType == JsonTokenType.String)
                 {
-                    if (json.ValueTextEquals("Hello, \"Ahson\""u8) ||
-                        json.ValueTextEquals("Hello, \"Ahson\"".AsSpan()) ||
-                        json.ValueTextEquals("Hello, \"Ahson\""))
+                    if (
+                        json.ValueTextEquals("Hello, \"Ahson\""u8)
+                        || json.ValueTextEquals("Hello, \"Ahson\"".AsSpan())
+                        || json.ValueTextEquals("Hello, \"Ahson\"")
+                    )
                     {
                         found = true;
                         break;
@@ -566,8 +624,8 @@ namespace System.Text.Json.Tests
         }
 
         [Theory]
-        [InlineData("\"hello\"", new char[1] { (char)0xDC01 })]    // low surrogate - invalid
-        [InlineData("\"hello\"", new char[1] { (char)0xD801 })]    // high surrogate - missing pair
+        [InlineData("\"hello\"", new char[1] { (char)0xDC01 })] // low surrogate - invalid
+        [InlineData("\"hello\"", new char[1] { (char)0xD801 })] // high surrogate - missing pair
         public static void InvalidUTF16Search(string jsonString, char[] lookup)
         {
             byte[] utf8Data = Encoding.UTF8.GetBytes(jsonString);
@@ -640,10 +698,11 @@ namespace System.Text.Json.Tests
             try
             {
                 json.ValueTextEquals(jsonString.AsSpan(1, jsonString.Length - 2));
-                Assert.Fail($"Expected OverflowException was not thrown when calling ValueTextEquals with large lookup string");
+                Assert.Fail(
+                    $"Expected OverflowException was not thrown when calling ValueTextEquals with large lookup string"
+                );
             }
-            catch (OverflowException)
-            { }
+            catch (OverflowException) { }
         }
 
         [Theory]
@@ -652,58 +711,66 @@ namespace System.Text.Json.Tests
         {
             byte[] utf8Data = Encoding.UTF8.GetBytes(jsonString);
 
-            var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow });
+            var state = new JsonReaderState(
+                options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
+            );
             var json = new Utf8JsonReader(utf8Data, isFinalBlock: true, state);
 
             try
             {
                 json.ValueTextEquals(default(ReadOnlySpan<byte>));
-                Assert.Fail($"Expected InvalidOperationException was not thrown when calling ValueTextEquals with TokenType = {json.TokenType}");
+                Assert.Fail(
+                    $"Expected InvalidOperationException was not thrown when calling ValueTextEquals with TokenType = {json.TokenType}"
+                );
             }
-            catch (InvalidOperationException)
-            { }
+            catch (InvalidOperationException) { }
 
             try
             {
                 json.ValueTextEquals(default(ReadOnlySpan<char>));
-                Assert.Fail($"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}");
+                Assert.Fail(
+                    $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
+                );
             }
-            catch (InvalidOperationException)
-            { }
+            catch (InvalidOperationException) { }
 
             try
             {
                 json.ValueTextEquals(default(string));
-                Assert.Fail($"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}");
+                Assert.Fail(
+                    $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
+                );
             }
-            catch (InvalidOperationException)
-            { }
+            catch (InvalidOperationException) { }
 
             while (json.Read())
             {
                 try
                 {
                     json.ValueTextEquals(default(ReadOnlySpan<byte>));
-                    Assert.Fail($"Expected InvalidOperationException was not thrown when calling ValueTextEquals with TokenType = {json.TokenType}");
+                    Assert.Fail(
+                        $"Expected InvalidOperationException was not thrown when calling ValueTextEquals with TokenType = {json.TokenType}"
+                    );
                 }
-                catch (InvalidOperationException)
-                { }
+                catch (InvalidOperationException) { }
 
                 try
                 {
                     json.ValueTextEquals(default(ReadOnlySpan<char>));
-                    Assert.Fail($"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}");
+                    Assert.Fail(
+                        $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
+                    );
                 }
-                catch (InvalidOperationException)
-                { }
+                catch (InvalidOperationException) { }
 
                 try
                 {
                     json.ValueTextEquals(default(string));
-                    Assert.Fail($"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}");
+                    Assert.Fail(
+                        $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
+                    );
                 }
-                catch (InvalidOperationException)
-                { }
+                catch (InvalidOperationException) { }
             }
 
             Assert.Equal(utf8Data.Length, json.BytesConsumed);

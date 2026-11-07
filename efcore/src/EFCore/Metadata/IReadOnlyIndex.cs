@@ -46,8 +46,7 @@ public interface IReadOnlyIndex : IReadOnlyAnnotatable
     /// </summary>
     /// <returns>The display name.</returns>
     [DebuggerStepThrough]
-    string DisplayName()
-        => Name is null ? Properties.Format() : $"'{Name}'";
+    string DisplayName() => Name is null ? Properties.Format() : $"'{Name}'";
 
     /// <summary>
     ///     <para>
@@ -61,7 +60,10 @@ public interface IReadOnlyIndex : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
@@ -74,13 +76,14 @@ public interface IReadOnlyIndex : IReadOnlyAnnotatable
             builder.Append("Index: ");
         }
 
-        builder
-            .AppendJoin(
-                ", ",
-                Properties.Select(
-                    p => singleLine
-                        ? p.DeclaringType.DisplayName(omitSharedType: true) + "." + p.Name
-                        : p.Name));
+        builder.AppendJoin(
+            ", ",
+            Properties.Select(p =>
+                singleLine
+                    ? p.DeclaringType.DisplayName(omitSharedType: true) + "." + p.Name
+                    : p.Name
+            )
+        );
 
         if (Name != null)
         {
@@ -92,8 +95,7 @@ public interface IReadOnlyIndex : IReadOnlyAnnotatable
             builder.Append(" Unique");
         }
 
-        if (!singleLine
-            && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
+        if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
         {
             builder.Append(AnnotationsToDebugString(indent + 2));
         }

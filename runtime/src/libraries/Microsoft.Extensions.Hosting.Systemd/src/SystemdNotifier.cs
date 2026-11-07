@@ -20,9 +20,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// <summary>
         /// Instantiates a new <see cref="SystemdNotifier"/> and sets the notify socket path.
         /// </summary>
-        public SystemdNotifier() :
-            this(GetNotifySocketPath())
-        { }
+        public SystemdNotifier()
+            : this(GetNotifySocketPath()) { }
 
         // For testing
         internal SystemdNotifier(string? socketPath)
@@ -41,7 +40,13 @@ namespace Microsoft.Extensions.Hosting.Systemd
                 return;
             }
 
-            using (var socket = new Socket(AddressFamily.Unix, SocketType.Dgram, ProtocolType.Unspecified))
+            using (
+                var socket = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Dgram,
+                    ProtocolType.Unspecified
+                )
+            )
             {
                 var endPoint = new UnixDomainSocketEndPoint(_socketPath!);
                 socket.Connect(endPoint);

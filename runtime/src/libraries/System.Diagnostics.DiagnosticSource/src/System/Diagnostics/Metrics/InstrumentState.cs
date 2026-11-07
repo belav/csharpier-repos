@@ -10,12 +10,17 @@ namespace System.Diagnostics.Metrics
     {
         // This can be called concurrently with Collect()
         [SecuritySafeCritical]
-        public abstract void Update(double measurement, ReadOnlySpan<KeyValuePair<string, object?>> labels);
+        public abstract void Update(
+            double measurement,
+            ReadOnlySpan<KeyValuePair<string, object?>> labels
+        );
 
         // This can be called concurrently with Update()
-        public abstract void Collect(Instrument instrument, Action<LabeledAggregationStatistics> aggregationVisitFunc);
+        public abstract void Collect(
+            Instrument instrument,
+            Action<LabeledAggregationStatistics> aggregationVisitFunc
+        );
     }
-
 
     internal sealed class InstrumentState<TAggregator> : InstrumentState
         where TAggregator : Aggregator
@@ -27,13 +32,19 @@ namespace System.Diagnostics.Metrics
             _aggregatorStore = new AggregatorStore<TAggregator>(createAggregatorFunc);
         }
 
-        public override void Collect(Instrument instrument, Action<LabeledAggregationStatistics> aggregationVisitFunc)
+        public override void Collect(
+            Instrument instrument,
+            Action<LabeledAggregationStatistics> aggregationVisitFunc
+        )
         {
             _aggregatorStore.Collect(aggregationVisitFunc);
         }
 
         [SecuritySafeCritical]
-        public override void Update(double measurement, ReadOnlySpan<KeyValuePair<string, object?>> labels)
+        public override void Update(
+            double measurement,
+            ReadOnlySpan<KeyValuePair<string, object?>> labels
+        )
         {
             TAggregator? aggregator = _aggregatorStore.GetAggregator(labels);
             aggregator?.Update(measurement);

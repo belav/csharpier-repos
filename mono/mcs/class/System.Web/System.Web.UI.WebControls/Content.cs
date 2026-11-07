@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,61 +33,74 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	[ToolboxItem (false)]
-	[DesignerAttribute ("System.Web.UI.Design.WebControls.ContentDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	[ControlBuilder(typeof(ContentBuilderInternal))]
-	public class Content: Control, INamingContainer, INonBindingContainer
-	{
-		[ThemeableAttribute (false)]
-		[DefaultValueAttribute ("")]
-		[WebCategoryAttribute ("Behavior")]
-		[IDReferencePropertyAttribute (typeof(ContentPlaceHolder))]
-		public string ContentPlaceHolderID {
-			get { return String.Empty; }
-			set { throw new NotSupportedException (); }
-		}
+    [ToolboxItem(false)]
+    [DesignerAttribute(
+        "System.Web.UI.Design.WebControls.ContentDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ControlBuilder(typeof(ContentBuilderInternal))]
+    public class Content : Control, INamingContainer, INonBindingContainer
+    {
+        [ThemeableAttribute(false)]
+        [DefaultValueAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        [IDReferencePropertyAttribute(typeof(ContentPlaceHolder))]
+        public string ContentPlaceHolderID
+        {
+            get { return String.Empty; }
+            set { throw new NotSupportedException(); }
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public new event EventHandler DataBinding {
-			add { base.DataBinding += value; }
-			remove { base.DataBinding -= value; }
-		}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public new event EventHandler DataBinding
+        {
+            add { base.DataBinding += value; }
+            remove { base.DataBinding -= value; }
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public new event EventHandler Disposed {
-			add { base.Disposed += value; }
-			remove { base.Disposed -= value; }
-		}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public new event EventHandler Disposed
+        {
+            add { base.Disposed += value; }
+            remove { base.Disposed -= value; }
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public new event EventHandler Init {
-			add { base.Init += value; }
-			remove { base.Init -= value; }
-		}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public new event EventHandler Init
+        {
+            add { base.Init += value; }
+            remove { base.Init -= value; }
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public new event EventHandler Load {
-			add { base.Load += value; }
-			remove { base.Load -= value; }
-		}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public new event EventHandler Load
+        {
+            add { base.Load += value; }
+            remove { base.Load -= value; }
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public new event EventHandler PreRender {
-			add { base.PreRender += value; }
-			remove { base.PreRender -= value; }
-		}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public new event EventHandler PreRender
+        {
+            add { base.PreRender += value; }
+            remove { base.PreRender -= value; }
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public new event EventHandler Unload {
-			add { base.Unload += value; ; }
-			remove { base.Unload -= value; }
-		}
-	}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public new event EventHandler Unload
+        {
+            add
+            {
+                base.Unload += value;
+                ;
+            }
+            remove { base.Unload -= value; }
+        }
+    }
 }
-

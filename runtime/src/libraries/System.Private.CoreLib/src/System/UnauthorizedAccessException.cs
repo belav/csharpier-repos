@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when the operating system denies access because of an I/O error or a specific type of security error.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class UnauthorizedAccessException : SystemException
     {
         public UnauthorizedAccessException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_UNAUTHORIZEDACCESS;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected UnauthorizedAccessException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected UnauthorizedAccessException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

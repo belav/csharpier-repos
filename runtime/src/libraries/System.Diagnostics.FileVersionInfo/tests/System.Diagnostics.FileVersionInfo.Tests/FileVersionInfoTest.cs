@@ -9,11 +9,13 @@ namespace System.Diagnostics.Tests
 {
     public partial class FileVersionInfoTest : FileCleanupTestBase
     {
-        private const string TestAssemblyFileName = "System.Diagnostics.FileVersionInfo.TestAssembly.dll";
+        private const string TestAssemblyFileName =
+            "System.Diagnostics.FileVersionInfo.TestAssembly.dll";
+
         // On Unix the internal name's extension is .exe if OutputType is exe even though the TargetExt is .dll.
-        private readonly string OriginalTestAssemblyInternalName = PlatformDetection.IsWindows ?
-            "System.Diagnostics.FileVersionInfo.TestAssembly.dll" :
-            "System.Diagnostics.FileVersionInfo.TestAssembly.exe";
+        private readonly string OriginalTestAssemblyInternalName = PlatformDetection.IsWindows
+            ? "System.Diagnostics.FileVersionInfo.TestAssembly.dll"
+            : "System.Diagnostics.FileVersionInfo.TestAssembly.exe";
         private const string TestCsFileName = "Assembly1.cs";
         private const string TestNotFoundFileName = "notfound.dll";
 
@@ -21,92 +23,105 @@ namespace System.Diagnostics.Tests
         public void FileVersionInfo_CustomManagedAssembly()
         {
             // Assembly1.dll
-            VerifyVersionInfo(Path.Combine(Directory.GetCurrentDirectory(), TestAssemblyFileName), new MyFVI()
-            {
-                Comments = "Have you played a Contoso amusement device today?",
-                CompanyName = "The name of the company.",
-                FileBuildPart = 2,
-                FileDescription = "My File",
-                FileMajorPart = 4,
-                FileMinorPart = 3,
-                FileName = Path.Combine(Directory.GetCurrentDirectory(), TestAssemblyFileName),
-                FilePrivatePart = 1,
-                FileVersion = "4.3.2.1",
-                InternalName = OriginalTestAssemblyInternalName,
-                IsDebug = false,
-                IsPatched = false,
-                IsPrivateBuild = false,
-                IsPreRelease = false,
-                IsSpecialBuild = false,
-                Language = GetFileVersionLanguage(0x0000),
-                LegalCopyright = "Copyright, you betcha!",
-                LegalTrademarks = "TM",
-                OriginalFilename = OriginalTestAssemblyInternalName,
-                PrivateBuild = "",
-                ProductBuildPart = 3,
-                ProductMajorPart = 1,
-                ProductMinorPart = 2,
-                ProductName = "The greatest product EVER",
-                ProductPrivatePart = 0,
-                ProductVersion = "1.2.3-beta.4",
-                SpecialBuild = "",
-            });
+            VerifyVersionInfo(
+                Path.Combine(Directory.GetCurrentDirectory(), TestAssemblyFileName),
+                new MyFVI()
+                {
+                    Comments = "Have you played a Contoso amusement device today?",
+                    CompanyName = "The name of the company.",
+                    FileBuildPart = 2,
+                    FileDescription = "My File",
+                    FileMajorPart = 4,
+                    FileMinorPart = 3,
+                    FileName = Path.Combine(Directory.GetCurrentDirectory(), TestAssemblyFileName),
+                    FilePrivatePart = 1,
+                    FileVersion = "4.3.2.1",
+                    InternalName = OriginalTestAssemblyInternalName,
+                    IsDebug = false,
+                    IsPatched = false,
+                    IsPrivateBuild = false,
+                    IsPreRelease = false,
+                    IsSpecialBuild = false,
+                    Language = GetFileVersionLanguage(0x0000),
+                    LegalCopyright = "Copyright, you betcha!",
+                    LegalTrademarks = "TM",
+                    OriginalFilename = OriginalTestAssemblyInternalName,
+                    PrivateBuild = "",
+                    ProductBuildPart = 3,
+                    ProductMajorPart = 1,
+                    ProductMinorPart = 2,
+                    ProductName = "The greatest product EVER",
+                    ProductPrivatePart = 0,
+                    ProductVersion = "1.2.3-beta.4",
+                    SpecialBuild = "",
+                }
+            );
         }
 
         [Fact]
         public void FileVersionInfo_EmptyFVI()
         {
             // Assembly1.cs
-            VerifyVersionInfo(Path.Combine(Directory.GetCurrentDirectory(), TestCsFileName), new MyFVI()
-            {
-                Comments = null,
-                CompanyName = null,
-                FileBuildPart = 0,
-                FileDescription = null,
-                FileMajorPart = 0,
-                FileMinorPart = 0,
-                FileName = Path.Combine(Directory.GetCurrentDirectory(), TestCsFileName),
-                FilePrivatePart = 0,
-                FileVersion = null,
-                InternalName = null,
-                IsDebug = false,
-                IsPatched = false,
-                IsPrivateBuild = false,
-                IsPreRelease = false,
-                IsSpecialBuild = false,
-                Language = null,
-                LegalCopyright = null,
-                LegalTrademarks = null,
-                OriginalFilename = null,
-                PrivateBuild = null,
-                ProductBuildPart = 0,
-                ProductMajorPart = 0,
-                ProductMinorPart = 0,
-                ProductName = null,
-                ProductPrivatePart = 0,
-                ProductVersion = null,
-                SpecialBuild = null,
-            });
+            VerifyVersionInfo(
+                Path.Combine(Directory.GetCurrentDirectory(), TestCsFileName),
+                new MyFVI()
+                {
+                    Comments = null,
+                    CompanyName = null,
+                    FileBuildPart = 0,
+                    FileDescription = null,
+                    FileMajorPart = 0,
+                    FileMinorPart = 0,
+                    FileName = Path.Combine(Directory.GetCurrentDirectory(), TestCsFileName),
+                    FilePrivatePart = 0,
+                    FileVersion = null,
+                    InternalName = null,
+                    IsDebug = false,
+                    IsPatched = false,
+                    IsPrivateBuild = false,
+                    IsPreRelease = false,
+                    IsSpecialBuild = false,
+                    Language = null,
+                    LegalCopyright = null,
+                    LegalTrademarks = null,
+                    OriginalFilename = null,
+                    PrivateBuild = null,
+                    ProductBuildPart = 0,
+                    ProductMajorPart = 0,
+                    ProductMinorPart = 0,
+                    ProductName = null,
+                    ProductPrivatePart = 0,
+                    ProductVersion = null,
+                    SpecialBuild = null,
+                }
+            );
         }
 
         [Fact]
         public void FileVersionInfo_CurrentDirectory_FileNotFound()
         {
             Assert.Throws<FileNotFoundException>(() =>
-            FileVersionInfo.GetVersionInfo(Directory.GetCurrentDirectory()));
+                FileVersionInfo.GetVersionInfo(Directory.GetCurrentDirectory())
+            );
         }
 
         [Fact]
         public void FileVersionInfo_NonExistentFile_FileNotFound()
         {
             Assert.Throws<FileNotFoundException>(() =>
-                FileVersionInfo.GetVersionInfo(Path.Combine(Directory.GetCurrentDirectory(), TestNotFoundFileName)));
+                FileVersionInfo.GetVersionInfo(
+                    Path.Combine(Directory.GetCurrentDirectory(), TestNotFoundFileName)
+                )
+            );
         }
 
         [Fact]
         public void FileVersionInfo_RelativePath_CorrectFilePath()
         {
-            string rootPath = (PlatformDetection.IsiOS || PlatformDetection.IstvOS) ? Path.GetTempPath() : string.Empty;
+            string rootPath =
+                (PlatformDetection.IsiOS || PlatformDetection.IstvOS)
+                    ? Path.GetTempPath()
+                    : string.Empty;
             string kernelBasePath = Path.Combine(rootPath, "kernelbase.dll");
 
             try
@@ -162,20 +177,48 @@ namespace System.Diagnostics.Tests
 
             //ToString
             string nl = Environment.NewLine;
-            Assert.Equal("File:             " + fvi.FileName + nl +
-                      "InternalName:     " + fvi.InternalName + nl +
-                      "OriginalFilename: " + fvi.OriginalFilename + nl +
-                      "FileVersion:      " + fvi.FileVersion + nl +
-                      "FileDescription:  " + fvi.FileDescription + nl +
-                      "Product:          " + fvi.ProductName + nl +
-                      "ProductVersion:   " + fvi.ProductVersion + nl +
-                      "Debug:            " + fvi.IsDebug.ToString() + nl +
-                      "Patched:          " + fvi.IsPatched.ToString() + nl +
-                      "PreRelease:       " + fvi.IsPreRelease.ToString() + nl +
-                      "PrivateBuild:     " + fvi.IsPrivateBuild.ToString() + nl +
-                      "SpecialBuild:     " + fvi.IsSpecialBuild.ToString() + nl +
-                      "Language:         " + fvi.Language + nl,
-                        fvi.ToString());
+            Assert.Equal(
+                "File:             "
+                    + fvi.FileName
+                    + nl
+                    + "InternalName:     "
+                    + fvi.InternalName
+                    + nl
+                    + "OriginalFilename: "
+                    + fvi.OriginalFilename
+                    + nl
+                    + "FileVersion:      "
+                    + fvi.FileVersion
+                    + nl
+                    + "FileDescription:  "
+                    + fvi.FileDescription
+                    + nl
+                    + "Product:          "
+                    + fvi.ProductName
+                    + nl
+                    + "ProductVersion:   "
+                    + fvi.ProductVersion
+                    + nl
+                    + "Debug:            "
+                    + fvi.IsDebug.ToString()
+                    + nl
+                    + "Patched:          "
+                    + fvi.IsPatched.ToString()
+                    + nl
+                    + "PreRelease:       "
+                    + fvi.IsPreRelease.ToString()
+                    + nl
+                    + "PrivateBuild:     "
+                    + fvi.IsPrivateBuild.ToString()
+                    + nl
+                    + "SpecialBuild:     "
+                    + fvi.IsSpecialBuild.ToString()
+                    + nl
+                    + "Language:         "
+                    + fvi.Language
+                    + nl,
+                fvi.ToString()
+            );
         }
 
         internal class MyFVI

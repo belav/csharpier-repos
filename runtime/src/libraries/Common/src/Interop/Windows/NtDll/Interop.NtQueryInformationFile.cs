@@ -14,7 +14,8 @@ internal static partial class Interop
             out IO_STATUS_BLOCK IoStatusBlock,
             void* FileInformation,
             uint Length,
-            uint FileInformationClass);
+            uint FileInformationClass
+        );
 
         internal const uint FileModeInformation = 16;
 

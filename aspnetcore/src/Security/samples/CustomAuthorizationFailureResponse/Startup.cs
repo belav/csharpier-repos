@@ -38,19 +38,16 @@ public class Startup
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(
-                SamplePolicyNames.CustomPolicy,
-                policy => policy.AddRequirements(new SampleRequirement())
+            options.AddPolicy(SamplePolicyNames.CustomPolicy, policy =>
+                policy.AddRequirements(new SampleRequirement())
             );
 
-            options.AddPolicy(
-                SamplePolicyNames.FailureReasonPolicy,
-                policy => policy.AddRequirements(new SampleFailReasonRequirement())
+            options.AddPolicy(SamplePolicyNames.FailureReasonPolicy, policy =>
+                policy.AddRequirements(new SampleFailReasonRequirement())
             );
 
-            options.AddPolicy(
-                SamplePolicyNames.CustomPolicyWithCustomForbiddenMessage,
-                policy => policy.AddRequirements(new SampleWithCustomMessageRequirement())
+            options.AddPolicy(SamplePolicyNames.CustomPolicyWithCustomForbiddenMessage, policy =>
+                policy.AddRequirements(new SampleWithCustomMessageRequirement())
             );
         });
 

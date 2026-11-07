@@ -51,7 +51,8 @@ public sealed record ShapedQueryCompilingExpressionVisitorDependencies
         IEntityMaterializerSource entityMaterializerSource,
         ITypeMappingSource typeMappingSource,
         IMemoryCache memoryCache,
-        ICoreSingletonOptions coreSingletonOptions)
+        ICoreSingletonOptions coreSingletonOptions
+    )
     {
         EntityMaterializerSource = entityMaterializerSource;
         TypeMappingSource = typeMappingSource;

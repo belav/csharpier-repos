@@ -8,7 +8,6 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
-
     sealed class ConfigurationEndpointTrait<TChannel> : EndpointTrait<TChannel>
         where TChannel : class
     {
@@ -16,9 +15,11 @@ namespace System.ServiceModel
         EndpointAddress remoteAddress;
         InstanceContext callbackInstance;
 
-        public ConfigurationEndpointTrait(string endpointConfigurationName,
+        public ConfigurationEndpointTrait(
+            string endpointConfigurationName,
             EndpointAddress remoteAddress,
-            InstanceContext callbackInstance)
+            InstanceContext callbackInstance
+        )
         {
             this.endpointConfigurationName = endpointConfigurationName;
             this.remoteAddress = remoteAddress;
@@ -27,13 +28,20 @@ namespace System.ServiceModel
 
         public override bool Equals(object obj)
         {
-            ConfigurationEndpointTrait<TChannel> trait1 = obj as ConfigurationEndpointTrait<TChannel>;
-            if (trait1 == null) return false;
+            ConfigurationEndpointTrait<TChannel> trait1 =
+                obj as ConfigurationEndpointTrait<TChannel>;
+            if (trait1 == null)
+                return false;
 
             if (!object.ReferenceEquals(this.callbackInstance, trait1.callbackInstance))
                 return false;
 
-            if (string.CompareOrdinal(this.endpointConfigurationName, trait1.endpointConfigurationName) != 0)
+            if (
+                string.CompareOrdinal(
+                    this.endpointConfigurationName,
+                    trait1.endpointConfigurationName
+                ) != 0
+            )
             {
                 return false;
             }
@@ -53,7 +61,10 @@ namespace System.ServiceModel
                 hashCode ^= this.callbackInstance.GetHashCode();
             }
 
-            Fx.Assert(this.endpointConfigurationName != null, "endpointConfigurationName should not be null.");
+            Fx.Assert(
+                this.endpointConfigurationName != null,
+                "endpointConfigurationName should not be null."
+            );
             hashCode ^= this.endpointConfigurationName.GetHashCode();
 
             if (this.remoteAddress != null)
@@ -76,21 +87,30 @@ namespace System.ServiceModel
         {
             if (this.remoteAddress != null)
             {
-                return new DuplexChannelFactory<TChannel>(this.callbackInstance, this.endpointConfigurationName, this.remoteAddress);
+                return new DuplexChannelFactory<TChannel>(
+                    this.callbackInstance,
+                    this.endpointConfigurationName,
+                    this.remoteAddress
+                );
             }
 
-            return new DuplexChannelFactory<TChannel>(this.callbackInstance, this.endpointConfigurationName);
+            return new DuplexChannelFactory<TChannel>(
+                this.callbackInstance,
+                this.endpointConfigurationName
+            );
         }
 
         ChannelFactory<TChannel> CreateSimplexFactory()
         {
             if (this.remoteAddress != null)
             {
-                return new ChannelFactory<TChannel>(this.endpointConfigurationName, this.remoteAddress);
+                return new ChannelFactory<TChannel>(
+                    this.endpointConfigurationName,
+                    this.remoteAddress
+                );
             }
 
             return new ChannelFactory<TChannel>(this.endpointConfigurationName);
         }
     }
-
 }

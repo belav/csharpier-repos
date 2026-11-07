@@ -17,7 +17,12 @@ namespace System.Net.Http.Handlers
             long? totalBytes = 10L * 1024 * 1024 * 1024;
 
             // Act
-            HttpProgressEventArgs args = new HttpProgressEventArgs(progressPercentage, userState, bytesTransferred, totalBytes);
+            HttpProgressEventArgs args = new HttpProgressEventArgs(
+                progressPercentage,
+                userState,
+                bytesTransferred,
+                totalBytes
+            );
 
             // Assert
             Assert.Equal(progressPercentage, args.ProgressPercentage);

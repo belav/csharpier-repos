@@ -19,7 +19,13 @@ namespace System.Text.Tests
             return _decoder.GetCharCount(bytes, index, count);
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             return _decoder.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
@@ -51,10 +57,32 @@ namespace System.Text.Tests
             int bytesUsed;
             int charsUsed;
             bool completed;
-            decoder.Convert(bytes, 0, bytes.Length, chars, 0, chars.Length, true, out bytesUsed, out charsUsed, out completed);
+            decoder.Convert(
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                true,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
             decoder.Reset();
 
-            decoder.Convert(bytes, 0, bytes.Length, chars, 0, chars.Length, false, out bytesUsed, out charsUsed, out completed);
+            decoder.Convert(
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                false,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
             decoder.Reset();
         }
 
@@ -73,10 +101,32 @@ namespace System.Text.Tests
             int bytesUsed;
             int charsUsed;
             bool completed;
-            decoder.Convert(bytes, 0, bytes.Length, chars, 0, chars.Length, true, out bytesUsed, out charsUsed, out completed);
+            decoder.Convert(
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                true,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
             decoder.Reset();
 
-            decoder.Convert(bytes, 0, bytes.Length, chars, 0, chars.Length, false, out bytesUsed, out charsUsed, out completed);
+            decoder.Convert(
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                false,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
             decoder.Reset();
         }
 
@@ -97,9 +147,37 @@ namespace System.Text.Tests
                 expected[i] = (char)('\0' + i);
             }
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, true, bytes.Length, chars.Length, true, expected, "003.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                true,
+                bytes.Length,
+                chars.Length,
+                true,
+                expected,
+                "003.1"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, false, bytes.Length, chars.Length, true, expected, "003.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                false,
+                bytes.Length,
+                chars.Length,
+                true,
+                expected,
+                "003.2"
+            );
             decoder.Reset();
         }
 
@@ -121,9 +199,37 @@ namespace System.Text.Tests
 
             Decoder decoder = new DecoderConvert2Decoder();
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, true, bytes.Length, chars.Length, true, expected, "004.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                true,
+                bytes.Length,
+                chars.Length,
+                true,
+                expected,
+                "004.1"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, false, bytes.Length, chars.Length, true, expected, "004.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                false,
+                bytes.Length,
+                chars.Length,
+                true,
+                expected,
+                "004.2"
+            );
             decoder.Reset();
         }
 
@@ -146,9 +252,35 @@ namespace System.Text.Tests
             decoder.Reset();
 
             // Verify maxBytes is large than character count
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length - 1, false, bytes.Length - 1, chars.Length - 1, false, "005.3");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length - 1,
+                false,
+                bytes.Length - 1,
+                chars.Length - 1,
+                false,
+                "005.3"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length - 1, true, bytes.Length - 1, chars.Length - 1, false, "005.4");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length - 1,
+                true,
+                bytes.Length - 1,
+                chars.Length - 1,
+                false,
+                "005.4"
+            );
             decoder.Reset();
         }
 
@@ -164,10 +296,36 @@ namespace System.Text.Tests
             }
 
             Decoder decoder = Encoding.Unicode.GetDecoder();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, false, bytes.Length, chars.Length / 2, true, "006.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                false,
+                bytes.Length,
+                chars.Length / 2,
+                true,
+                "006.1"
+            );
             decoder.Reset();
             // There will be 1 byte left unconverted after previous statement, and set flush = false should left this 1 byte in the buffer.
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, true, bytes.Length, chars.Length / 2 + 1, true, "006.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                true,
+                bytes.Length,
+                chars.Length / 2 + 1,
+                true,
+                "006.2"
+            );
             decoder.Reset();
         }
 
@@ -188,9 +346,35 @@ namespace System.Text.Tests
             VerificationHelper(decoder, bytes, 0, 2, chars, 0, 1, true, 2, 1, true, "007.2");
             decoder.Reset();
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, 1, false, 2, 1, false, "007.3");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                1,
+                false,
+                2,
+                1,
+                false,
+                "007.3"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, 1, true, 2, 1, false, "007.4");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                1,
+                true,
+                2,
+                1,
+                false,
+                "007.4"
+            );
             decoder.Reset();
         }
 
@@ -199,26 +383,41 @@ namespace System.Text.Tests
         public void PosTest8()
         {
             char[] expected = "\u8FD9\u4E2A\u4E00\u4E2A\u6D4B\u8BD5".ToCharArray();
-            byte[] bytes = new byte[] {
-                217,
-                143,
-                42,
-                78,
-                0,
-                78,
-                42,
-                78,
-                75,
-                109,
-                213,
-                139
-            };
+            byte[] bytes = new byte[] { 217, 143, 42, 78, 0, 78, 42, 78, 75, 109, 213, 139 };
             char[] chars = new char[expected.Length];
             Decoder decoder = Encoding.Unicode.GetDecoder();
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, false, bytes.Length, chars.Length, true, expected, "008.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                false,
+                bytes.Length,
+                chars.Length,
+                true,
+                expected,
+                "008.1"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, chars.Length, true, bytes.Length, chars.Length, true, expected, "008.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                chars.Length,
+                true,
+                bytes.Length,
+                chars.Length,
+                true,
+                expected,
+                "008.2"
+            );
             decoder.Reset();
         }
 
@@ -228,30 +427,73 @@ namespace System.Text.Tests
         {
             char[] expected = "\u8FD9".ToCharArray();
             char[] chars = new char[expected.Length];
-            byte[] bytes = new byte[] {
-                217,
-                143,
-                42,
-                78,
-                0,
-                78,
-                42,
-                78,
-                75,
-                109,
-                213,
-                139
-            };
+            byte[] bytes = new byte[] { 217, 143, 42, 78, 0, 78, 42, 78, 75, 109, 213, 139 };
             Decoder decoder = Encoding.Unicode.GetDecoder();
 
-            VerificationHelper(decoder, bytes, 0, 2, chars, 0, 1, false, 2, 1, true, expected, "009.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                2,
+                chars,
+                0,
+                1,
+                false,
+                2,
+                1,
+                true,
+                expected,
+                "009.1"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, 2, chars, 0, 1, true, 2, 1, true, expected, "009.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                2,
+                chars,
+                0,
+                1,
+                true,
+                2,
+                1,
+                true,
+                expected,
+                "009.2"
+            );
             decoder.Reset();
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, 1, false, 2, 1, false, expected, "009.3");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                1,
+                false,
+                2,
+                1,
+                false,
+                expected,
+                "009.3"
+            );
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, 1, true, 2, 1, false, expected, "009.4");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                1,
+                true,
+                2,
+                1,
+                false,
+                expected,
+                "009.4"
+            );
             decoder.Reset();
         }
 
@@ -269,7 +511,20 @@ namespace System.Text.Tests
 
             VerificationHelper(decoder, bytes, 0, 0, chars, 0, 0, false, 0, 0, true, "010.1");
             decoder.Reset();
-            VerificationHelper(decoder, bytes, 0, 0, chars, 0, chars.Length, true, 0, 0, true, "010.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                0,
+                chars,
+                0,
+                chars.Length,
+                true,
+                0,
+                0,
+                true,
+                "010.2"
+            );
             decoder.Reset();
         }
 
@@ -279,9 +534,15 @@ namespace System.Text.Tests
         {
             byte[] bytes = new byte[]
             {
-                0xC4, 0xB3, // U+0133 LATIN SMALL LIGATURE IJ
-                0xE2, 0x86, 0x98, // U+2198 SOUTH EAST ARROW
-                0xF0, 0x9F, 0x8E, 0xAE, // U+1F3AE VIDEO GAME
+                0xC4,
+                0xB3, // U+0133 LATIN SMALL LIGATURE IJ
+                0xE2,
+                0x86,
+                0x98, // U+2198 SOUTH EAST ARROW
+                0xF0,
+                0x9F,
+                0x8E,
+                0xAE, // U+1F3AE VIDEO GAME
                 0xC2, // invalid sequence - no trailing byte
             };
             char[] chars = new char[32];
@@ -296,7 +557,9 @@ namespace System.Text.Tests
             Assert.Equal("\u0133\u2198\U0001F3AE\ufffd", new string(chars, 0, 5));
         }
 
-        private void VerificationHelper(Decoder decoder, byte[] bytes,
+        private void VerificationHelper(
+            Decoder decoder,
+            byte[] bytes,
             int byteIndex,
             int byteCount,
             char[] chars,
@@ -306,21 +569,34 @@ namespace System.Text.Tests
             int desiredBytesUsed,
             int desiredCharsUsed,
             bool desiredCompleted,
-            string errorno)
+            string errorno
+        )
         {
             int bytesUsed;
             int charsUsed;
             bool completed;
 
-            decoder.Convert(bytes, byteIndex, byteCount, chars, charIndex, charCount, flush, out bytesUsed,
-                out charsUsed, out completed);
+            decoder.Convert(
+                bytes,
+                byteIndex,
+                byteCount,
+                chars,
+                charIndex,
+                charCount,
+                flush,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
 
             Assert.Equal(desiredBytesUsed, bytesUsed);
             Assert.Equal(desiredCharsUsed, charsUsed);
             Assert.Equal(desiredCompleted, completed);
         }
 
-        private void VerificationHelper(Decoder decoder, byte[] bytes,
+        private void VerificationHelper(
+            Decoder decoder,
+            byte[] bytes,
             int byteIndex,
             int byteCount,
             char[] chars,
@@ -331,10 +607,23 @@ namespace System.Text.Tests
             int desiredCharsUsed,
             bool desiredCompleted,
             char[] desiredChars,
-            string errorno)
+            string errorno
+        )
         {
-            VerificationHelper(decoder, bytes, byteIndex, byteCount, chars, charIndex, charCount, flush, desiredBytesUsed,
-                desiredCharsUsed, desiredCompleted, errorno + ".1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                byteIndex,
+                byteCount,
+                chars,
+                charIndex,
+                charCount,
+                flush,
+                desiredBytesUsed,
+                desiredCharsUsed,
+                desiredCompleted,
+                errorno + ".1"
+            );
 
             Assert.Equal(desiredChars.Length, chars.Length);
 

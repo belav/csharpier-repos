@@ -6,14 +6,16 @@ namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ServiceModel;
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.Text;
     using System.Threading;
 
-    abstract class TransportChannelFactory<TChannel> : ChannelFactoryBase<TChannel>, ITransportFactorySettings
+    abstract class TransportChannelFactory<TChannel>
+        : ChannelFactoryBase<TChannel>,
+            ITransportFactorySettings
     {
         BufferManager bufferManager;
         long maxBufferPoolSize;
@@ -22,29 +24,36 @@ namespace System.ServiceModel.Channels
         bool manualAddressing;
         MessageVersion messageVersion;
 
-        protected TransportChannelFactory(TransportBindingElement bindingElement, BindingContext context)
-            : this(bindingElement, context, TransportDefaults.GetDefaultMessageEncoderFactory())
-        {
-        }
+        protected TransportChannelFactory(
+            TransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : this(bindingElement, context, TransportDefaults.GetDefaultMessageEncoderFactory()) { }
 
-        protected TransportChannelFactory(TransportBindingElement bindingElement, BindingContext context,
-                                          MessageEncoderFactory defaultMessageEncoderFactory)
+        protected TransportChannelFactory(
+            TransportBindingElement bindingElement,
+            BindingContext context,
+            MessageEncoderFactory defaultMessageEncoderFactory
+        )
             : base(context.Binding)
         {
             this.manualAddressing = bindingElement.ManualAddressing;
             this.maxBufferPoolSize = bindingElement.MaxBufferPoolSize;
             this.maxReceivedMessageSize = bindingElement.MaxReceivedMessageSize;
 
-            Collection<MessageEncodingBindingElement> messageEncoderBindingElements
-                = context.BindingParameters.FindAll<MessageEncodingBindingElement>();
+            Collection<MessageEncodingBindingElement> messageEncoderBindingElements =
+                context.BindingParameters.FindAll<MessageEncodingBindingElement>();
 
             if (messageEncoderBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleMebesInParameters)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MultipleMebesInParameters))
+                );
             }
             else if (messageEncoderBindingElements.Count == 1)
             {
-                this.messageEncoderFactory = messageEncoderBindingElements[0].CreateMessageEncoderFactory();
+                this.messageEncoderFactory = messageEncoderBindingElements[0]
+                    .CreateMessageEncoderFactory();
                 context.BindingParameters.Remove<MessageEncodingBindingElement>();
             }
             else
@@ -60,50 +69,32 @@ namespace System.ServiceModel.Channels
 
         public BufferManager BufferManager
         {
-            get
-            {
-                return this.bufferManager;
-            }
+            get { return this.bufferManager; }
         }
 
         public long MaxBufferPoolSize
         {
-            get
-            {
-                return this.maxBufferPoolSize;
-            }
+            get { return this.maxBufferPoolSize; }
         }
 
         public long MaxReceivedMessageSize
         {
-            get
-            {
-                return maxReceivedMessageSize;
-            }
+            get { return maxReceivedMessageSize; }
         }
 
         public MessageEncoderFactory MessageEncoderFactory
         {
-            get
-            {
-                return this.messageEncoderFactory;
-            }
+            get { return this.messageEncoderFactory; }
         }
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return this.messageVersion;
-            }
+            get { return this.messageVersion; }
         }
 
         public bool ManualAddressing
         {
-            get
-            {
-                return this.manualAddressing;
-            }
+            get { return this.manualAddressing; }
         }
 
         public abstract string Scheme { get; }
@@ -131,14 +122,17 @@ namespace System.ServiceModel.Channels
             return base.GetProperty<T>();
         }
 
-
         protected override void OnAbort()
         {
             OnCloseOrAbort();
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnCloseOrAbort();
             return base.OnBeginClose(timeout, callback, state);
@@ -169,7 +163,10 @@ namespace System.ServiceModel.Channels
         protected override void OnOpening()
         {
             base.OnOpening();
-            this.bufferManager = BufferManager.CreateBufferManager(MaxBufferPoolSize, GetMaxBufferSize());
+            this.bufferManager = BufferManager.CreateBufferManager(
+                MaxBufferPoolSize,
+                GetMaxBufferSize()
+            );
         }
 
         internal void ValidateScheme(Uri via)
@@ -177,10 +174,14 @@ namespace System.ServiceModel.Channels
             if (via.Scheme != this.Scheme)
             {
                 // URI schemes are case-insensitive, so try a case insensitive compare now
-                if (string.Compare(via.Scheme, this.Scheme, StringComparison.OrdinalIgnoreCase) != 0)
+                if (
+                    string.Compare(via.Scheme, this.Scheme, StringComparison.OrdinalIgnoreCase) != 0
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("via", SR.GetString(SR.InvalidUriScheme,
-                        via.Scheme, this.Scheme));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "via",
+                        SR.GetString(SR.InvalidUriScheme, via.Scheme, this.Scheme)
+                    );
                 }
             }
         }

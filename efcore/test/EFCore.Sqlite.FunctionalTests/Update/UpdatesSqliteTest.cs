@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Update;
 public class UpdatesSqliteTest : UpdatesRelationalTestBase<UpdatesSqliteTest.UpdatesSqliteFixture>
 {
     public UpdatesSqliteTest(UpdatesSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public override void Save_with_shared_foreign_key()
     {
@@ -21,26 +19,28 @@ public class UpdatesSqliteTest : UpdatesRelationalTestBase<UpdatesSqliteTest.Upd
     {
         using var context = CreateContext();
         var entityType = context.Model.FindEntityType(
-            typeof(
-                LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
-            ));
+            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+        );
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly",
-            entityType.GetTableName());
+            entityType.GetTableName()
+        );
         Assert.Equal(
             "PK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly",
-            entityType.GetKeys().Single().GetName());
+            entityType.GetKeys().Single().GetName()
+        );
         Assert.Equal(
             "FK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly_Profile_ProfileId_ProfileId1_ProfileId3_ProfileId4_ProfileId5_ProfileId6_ProfileId7_ProfileId8_ProfileId9_ProfileId10_ProfileId11_ProfileId12_ProfileId13_ProfileId14",
-            entityType.GetForeignKeys().Single().GetConstraintName());
+            entityType.GetForeignKeys().Single().GetConstraintName()
+        );
         Assert.Equal(
             "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly_ProfileId_ProfileId1_ProfileId3_ProfileId4_ProfileId5_ProfileId6_ProfileId7_ProfileId8_ProfileId9_ProfileId10_ProfileId11_ProfileId12_ProfileId13_ProfileId14_ExtraProperty",
-            entityType.GetIndexes().Single().GetDatabaseName());
+            entityType.GetIndexes().Single().GetDatabaseName()
+        );
     }
 
     public class UpdatesSqliteFixture : UpdatesRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

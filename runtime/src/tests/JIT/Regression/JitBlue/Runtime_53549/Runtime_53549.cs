@@ -17,9 +17,9 @@ public class Runtime_53549 : I
 
     public Decimal F() => z;
 
-    public static bool G(object o) 
+    public static bool G(object o)
     {
-        return ((decimal) o).Equals(100M);
+        return ((decimal)o).Equals(100M);
     }
 
     // This method will have bad codegen if
@@ -46,6 +46,3 @@ public class Runtime_53549 : I
         return H(x);
     }
 }
-
-
-    

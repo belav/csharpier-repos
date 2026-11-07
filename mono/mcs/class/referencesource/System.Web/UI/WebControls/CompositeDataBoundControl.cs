@@ -4,38 +4,41 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
 
-    public abstract class CompositeDataBoundControl : DataBoundControl, INamingContainer {
-
+    public abstract class CompositeDataBoundControl : DataBoundControl, INamingContainer
+    {
         internal const string ItemCountViewStateKey = "_!ItemCount";
 
         private string _updateMethod;
         private string _insertMethod;
         private string _deleteMethod;
 
-        protected override bool IsUsingModelBinders {
-            get {
-                return !String.IsNullOrEmpty(SelectMethod) ||
-                       !String.IsNullOrEmpty(UpdateMethod) ||
-                       !String.IsNullOrEmpty(DeleteMethod) ||
-                       !String.IsNullOrEmpty(InsertMethod);
+        protected override bool IsUsingModelBinders
+        {
+            get
+            {
+                return !String.IsNullOrEmpty(SelectMethod)
+                    || !String.IsNullOrEmpty(UpdateMethod)
+                    || !String.IsNullOrEmpty(DeleteMethod)
+                    || !String.IsNullOrEmpty(InsertMethod);
             }
         }
 
         /// <summary>
         /// The name of the method on the page which is called when this Control does an update operation.
         /// </summary>
-        protected internal string UpdateMethod {
-            get {
-                return _updateMethod ?? String.Empty;
-            }
-            set {
-                if (!String.Equals(_updateMethod, value, StringComparison.OrdinalIgnoreCase)) {
+        protected internal string UpdateMethod
+        {
+            get { return _updateMethod ?? String.Empty; }
+            set
+            {
+                if (!String.Equals(_updateMethod, value, StringComparison.OrdinalIgnoreCase))
+                {
                     _updateMethod = value;
                     OnDataPropertyChanged();
                 }
@@ -45,12 +48,13 @@ namespace System.Web.UI.WebControls {
         /// <summary>
         /// The name of the method on the page which is called when this Control does a delete operation.
         /// </summary>
-        protected internal string DeleteMethod {
-            get {
-                return _deleteMethod ?? String.Empty;
-            }
-            set {
-                if (!String.Equals(_deleteMethod, value, StringComparison.OrdinalIgnoreCase)) {
+        protected internal string DeleteMethod
+        {
+            get { return _deleteMethod ?? String.Empty; }
+            set
+            {
+                if (!String.Equals(_deleteMethod, value, StringComparison.OrdinalIgnoreCase))
+                {
                     _deleteMethod = value;
                     OnDataPropertyChanged();
                 }
@@ -60,20 +64,23 @@ namespace System.Web.UI.WebControls {
         /// <summary>
         /// The name of the method on the page which is called when this Control does an insert operation.
         /// </summary>
-        protected internal string InsertMethod {
-            get {
-                return _insertMethod ?? String.Empty;
-            }
-            set {
-                if (!String.Equals(_insertMethod, value, StringComparison.OrdinalIgnoreCase)) {
+        protected internal string InsertMethod
+        {
+            get { return _insertMethod ?? String.Empty; }
+            set
+            {
+                if (!String.Equals(_insertMethod, value, StringComparison.OrdinalIgnoreCase))
+                {
                     _insertMethod = value;
                     OnDataPropertyChanged();
                 }
             }
         }
 
-        public override ControlCollection Controls {
-            get {
+        public override ControlCollection Controls
+        {
+            get
+            {
                 EnsureChildControls();
                 return base.Controls;
             }
@@ -86,21 +93,23 @@ namespace System.Web.UI.WebControls {
         /// exist, it calls CreateChildControls with a dummy (empty) data source
         /// which is usable for enumeration purposes only.
         /// </summary>
-        protected internal override void CreateChildControls() {
+        protected internal override void CreateChildControls()
+        {
             Controls.Clear();
             object controlCount = ViewState[ItemCountViewStateKey];
 
-            if (controlCount == null && RequiresDataBinding) {
+            if (controlCount == null && RequiresDataBinding)
+            {
                 EnsureDataBound();
             }
 
-            if (controlCount != null && ((int)controlCount) != -1) {
+            if (controlCount != null && ((int)controlCount) != -1)
+            {
                 DummyDataSource dummyDataSource = new DummyDataSource((int)controlCount);
                 CreateChildControls(dummyDataSource, false);
                 ClearChildViewState();
             }
         }
-
 
         /// <summary>
         /// Performs the work of creating the control hierarchy based on a data source.
@@ -123,9 +132,7 @@ namespace System.Web.UI.WebControls {
         /// The number of items created based on the data source. Put another way, its
         /// the number of items enumerated from the data source.
         /// </returns>
-        protected abstract int CreateChildControls(IEnumerable dataSource,
-                                                   bool dataBinding);
-
+        protected abstract int CreateChildControls(IEnumerable dataSource, bool dataBinding);
 
         /// <summary>
         /// Overriden by DataBoundControl to use its properties to determine the real
@@ -142,7 +149,8 @@ namespace System.Web.UI.WebControls {
         /// In this second alternative, DataMember is used to extract the appropriate
         /// list if the control has been handed an IListSource as a data source.
         /// </summary>
-        protected internal override void PerformDataBinding(IEnumerable data) {
+        protected internal override void PerformDataBinding(IEnumerable data)
+        {
             base.PerformDataBinding(data);
 
             Controls.Clear();
@@ -156,4 +164,3 @@ namespace System.Web.UI.WebControls {
         }
     }
 }
-

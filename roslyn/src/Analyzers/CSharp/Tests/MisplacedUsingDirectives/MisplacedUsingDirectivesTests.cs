@@ -19,27 +19,35 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirectives
 {
-    public class MisplacedUsingDirectivesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class MisplacedUsingDirectivesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public MisplacedUsingDirectivesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new MisplacedUsingDirectivesDiagnosticAnalyzer(), new MisplacedUsingDirectivesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new MisplacedUsingDirectivesDiagnosticAnalyzer(),
+                new MisplacedUsingDirectivesCodeFixProvider()
+            );
 
         internal static readonly CodeStyleOption2<AddImportPlacement> OutsidePreferPreservationOption =
-           new(AddImportPlacement.OutsideNamespace, NotificationOption2.None);
+            new(AddImportPlacement.OutsideNamespace, NotificationOption2.None);
 
         internal static readonly CodeStyleOption2<AddImportPlacement> InsidePreferPreservationOption =
             new(AddImportPlacement.InsideNamespace, NotificationOption2.None);
 
-        internal static readonly CodeStyleOption2<AddImportPlacement> InsideNamespaceOption =
-            new(AddImportPlacement.InsideNamespace, NotificationOption2.Error);
+        internal static readonly CodeStyleOption2<AddImportPlacement> InsideNamespaceOption = new(
+            AddImportPlacement.InsideNamespace,
+            NotificationOption2.Error
+        );
 
-        internal static readonly CodeStyleOption2<AddImportPlacement> OutsideNamespaceOption =
-            new(AddImportPlacement.OutsideNamespace, NotificationOption2.Error);
+        internal static readonly CodeStyleOption2<AddImportPlacement> OutsideNamespaceOption = new(
+            AddImportPlacement.OutsideNamespace,
+            NotificationOption2.Error
+        );
 
         protected const string ClassDefinition = """
             public class TestClass
@@ -68,24 +76,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
 
         protected const string DelegateDefinition = @"public delegate void TestDelegate();";
 
-        private TestParameters GetTestParameters(CodeStyleOption2<AddImportPlacement> preferredPlacementOption)
-            => new(options: new OptionsCollection(GetLanguage()) { { CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, preferredPlacementOption } });
+        private TestParameters GetTestParameters(
+            CodeStyleOption2<AddImportPlacement> preferredPlacementOption
+        ) =>
+            new(
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                        preferredPlacementOption
+                    },
+                }
+            );
 
-        private protected Task TestDiagnosticMissingAsync(string initialMarkup, CodeStyleOption2<AddImportPlacement> preferredPlacementOption)
-            => TestDiagnosticMissingAsync(initialMarkup, GetTestParameters(preferredPlacementOption));
+        private protected Task TestDiagnosticMissingAsync(
+            string initialMarkup,
+            CodeStyleOption2<AddImportPlacement> preferredPlacementOption
+        ) => TestDiagnosticMissingAsync(initialMarkup, GetTestParameters(preferredPlacementOption));
 
-        private protected Task TestMissingAsync(string initialMarkup, CodeStyleOption2<AddImportPlacement> preferredPlacementOption)
-            => TestMissingAsync(initialMarkup, GetTestParameters(preferredPlacementOption));
+        private protected Task TestMissingAsync(
+            string initialMarkup,
+            CodeStyleOption2<AddImportPlacement> preferredPlacementOption
+        ) => TestMissingAsync(initialMarkup, GetTestParameters(preferredPlacementOption));
 
-        private protected Task TestInRegularAndScriptAsync(string initialMarkup, string expectedMarkup, CodeStyleOption2<AddImportPlacement> preferredPlacementOption, bool placeSystemNamespaceFirst)
+        private protected Task TestInRegularAndScriptAsync(
+            string initialMarkup,
+            string expectedMarkup,
+            CodeStyleOption2<AddImportPlacement> preferredPlacementOption,
+            bool placeSystemNamespaceFirst
+        )
         {
             var options = new OptionsCollection(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, preferredPlacementOption },
+                {
+                    CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                    preferredPlacementOption
+                },
                 { GenerationOptions.PlaceSystemNamespaceFirst, placeSystemNamespaceFirst },
             };
             return TestInRegularAndScriptAsync(
-                initialMarkup, expectedMarkup, options: options, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
+                initialMarkup,
+                expectedMarkup,
+                options: options,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp10
+                )
+            );
         }
 
         #region Test Preserve
@@ -149,9 +185,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
         [InlineData(InterfaceDefinition)]
         [InlineData(EnumDefinition)]
         [InlineData(DelegateDefinition)]
-        public Task WhenPreserve_UsingsInCompilationUnitWithTypeDefinition_ValidUsingStatements(string typeDefinition)
+        public Task WhenPreserve_UsingsInCompilationUnitWithTypeDefinition_ValidUsingStatements(
+            string typeDefinition
+        )
         {
-            var testCode = $@"[|using System;|]
+            var testCode =
+                $@"[|using System;|]
 
 {typeDefinition}
 ";
@@ -244,9 +283,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
         [InlineData(InterfaceDefinition)]
         [InlineData(EnumDefinition)]
         [InlineData(DelegateDefinition)]
-        public Task WhenOutsidePreferred_UsingsInCompilationUnitWithMember_ValidUsingStatements(string typeDefinition)
+        public Task WhenOutsidePreferred_UsingsInCompilationUnitWithMember_ValidUsingStatements(
+            string typeDefinition
+        )
         {
-            var testCode = $@"[|using System;|]
+            var testCode =
+                $@"[|using System;|]
 
 {typeDefinition}
 ";
@@ -276,7 +318,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact]
@@ -296,7 +343,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
 
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -323,7 +375,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -350,7 +407,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -379,7 +441,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -411,7 +478,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -440,7 +512,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact]
@@ -474,7 +551,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact]
@@ -520,7 +602,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact]
@@ -566,7 +653,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: false);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: false
+            );
         }
 
         /// <summary>
@@ -605,7 +697,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -645,7 +742,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -687,7 +789,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61773")]
@@ -699,8 +806,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                     [|global using System;|]
                 }
                 """;
-            var fixedTestCode =
-                """
+            var fixedTestCode = """
                 {|Warning:global using System;|}
 
                 namespace N1
@@ -708,7 +814,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, OutsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                OutsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         #endregion
@@ -755,9 +866,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
         [InlineData(InterfaceDefinition)]
         [InlineData(EnumDefinition)]
         [InlineData(DelegateDefinition)]
-        public Task WhenInsidePreferred_UsingsInCompilationUnitWithTypeDefinition_ValidUsingStatements(string typeDefinition)
+        public Task WhenInsidePreferred_UsingsInCompilationUnitWithTypeDefinition_ValidUsingStatements(
+            string typeDefinition
+        )
         {
-            var testCode = $@"[|using System;|]
+            var testCode =
+                $@"[|using System;|]
 
 {typeDefinition}
 ";
@@ -832,7 +946,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -881,7 +1000,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: false);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: false
+            );
         }
 
         /// <summary>
@@ -909,7 +1033,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -935,7 +1064,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact]
@@ -956,7 +1090,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 using System;
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -990,7 +1129,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -1042,7 +1186,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -1072,7 +1221,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         /// <summary>
@@ -1102,7 +1256,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedTestCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedTestCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61773")]
@@ -1140,7 +1299,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
                 }
                 """;
 
-            return TestInRegularAndScriptAsync(testCode, fixedCode, InsideNamespaceOption, placeSystemNamespaceFirst: true);
+            return TestInRegularAndScriptAsync(
+                testCode,
+                fixedCode,
+                InsideNamespaceOption,
+                placeSystemNamespaceFirst: true
+            );
         }
 
         #endregion

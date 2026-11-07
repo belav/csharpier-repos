@@ -23,19 +23,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
         public InlayHintRefreshQueueFactory(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
-            IGlobalOptionService globalOptionService)
+            IGlobalOptionService globalOptionService
+        )
         {
             _asyncListenerProvider = asynchronousOperationListenerProvider;
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
             _globalOptionService = globalOptionService;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
-            var notificationManager = lspServices.GetRequiredService<IClientLanguageServerManager>();
+            var notificationManager =
+                lspServices.GetRequiredService<IClientLanguageServerManager>();
             var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
 
-            return new InlayHintRefreshQueue(_asyncListenerProvider, _lspWorkspaceRegistrationService, _globalOptionService, lspWorkspaceManager, notificationManager);
+            return new InlayHintRefreshQueue(
+                _asyncListenerProvider,
+                _lspWorkspaceRegistrationService,
+                _globalOptionService,
+                lspWorkspaceManager,
+                notificationManager
+            );
         }
     }
 }

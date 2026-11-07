@@ -19,9 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             internal readonly ImmutableArray<SyntaxTree> SyntaxTrees; // In ordinal order.
             internal readonly ImmutableDictionary<SyntaxTree, int> OrdinalMap; // Inverse of syntaxTrees array (i.e. maps tree to index)
-            internal readonly ImmutableDictionary<SyntaxTree, ImmutableArray<LoadDirective>> LoadDirectiveMap;
+            internal readonly ImmutableDictionary<
+                SyntaxTree,
+                ImmutableArray<LoadDirective>
+            > LoadDirectiveMap;
             internal readonly ImmutableDictionary<string, SyntaxTree> LoadedSyntaxTreeMap;
-            internal readonly ImmutableDictionary<SyntaxTree, Lazy<RootSingleNamespaceDeclaration>> RootNamespaces;
+            internal readonly ImmutableDictionary<
+                SyntaxTree,
+                Lazy<RootSingleNamespaceDeclaration>
+            > RootNamespaces;
 
             /// <summary>
             /// Mapping from a syntax tree to the last fully computed member names for each the types (in lexical order)
@@ -36,11 +42,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// (esp. for very large types). The value is stored as a <see cref="OneOrMany"/> as the most common case
             /// for most files is a single type declaration.
             /// <para/>
-            /// We store this with weak references so that we can obtain this optimization in the common case where the 
+            /// We store this with weak references so that we can obtain this optimization in the common case where the
             /// old declaration is still around rooting the old names.  If the decls are gone though, the names are subject
             /// to being cleaned up by the GC and we may not be able to use them.
             /// </remarks>
-            internal readonly ImmutableDictionary<SyntaxTree, OneOrMany<WeakReference<StrongBox<ImmutableSegmentedHashSet<string>>>>> LastComputedMemberNames;
+            internal readonly ImmutableDictionary<
+                SyntaxTree,
+                OneOrMany<WeakReference<StrongBox<ImmutableSegmentedHashSet<string>>>>
+            > LastComputedMemberNames;
             internal readonly DeclarationTable DeclarationTable;
 
             internal State(
@@ -48,12 +57,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableDictionary<SyntaxTree, int> syntaxTreeOrdinalMap,
                 ImmutableDictionary<SyntaxTree, ImmutableArray<LoadDirective>> loadDirectiveMap,
                 ImmutableDictionary<string, SyntaxTree> loadedSyntaxTreeMap,
-                ImmutableDictionary<SyntaxTree, Lazy<RootSingleNamespaceDeclaration>> rootNamespaces,
-                ImmutableDictionary<SyntaxTree, OneOrMany<WeakReference<StrongBox<ImmutableSegmentedHashSet<string>>>>> lastComputedMemberNames,
-                DeclarationTable declarationTable)
+                ImmutableDictionary<
+                    SyntaxTree,
+                    Lazy<RootSingleNamespaceDeclaration>
+                > rootNamespaces,
+                ImmutableDictionary<
+                    SyntaxTree,
+                    OneOrMany<WeakReference<StrongBox<ImmutableSegmentedHashSet<string>>>>
+                > lastComputedMemberNames,
+                DeclarationTable declarationTable
+            )
             {
-                Debug.Assert(syntaxTrees.All(tree => syntaxTrees[syntaxTreeOrdinalMap[tree]] == tree));
-                Debug.Assert(syntaxTrees.SetEquals(rootNamespaces.Keys.AsImmutable(), EqualityComparer<SyntaxTree>.Default));
+                Debug.Assert(
+                    syntaxTrees.All(tree => syntaxTrees[syntaxTreeOrdinalMap[tree]] == tree)
+                );
+                Debug.Assert(
+                    syntaxTrees.SetEquals(
+                        rootNamespaces.Keys.AsImmutable(),
+                        EqualityComparer<SyntaxTree>.Default
+                    )
+                );
 
                 this.SyntaxTrees = syntaxTrees;
                 this.OrdinalMap = syntaxTreeOrdinalMap;

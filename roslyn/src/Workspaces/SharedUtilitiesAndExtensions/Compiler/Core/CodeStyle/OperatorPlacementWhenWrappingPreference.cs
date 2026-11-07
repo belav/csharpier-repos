@@ -16,17 +16,24 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private const string beginning_of_line = "beginning_of_line";
 
         // Default to beginning_of_line if we don't know the value.
-        public static string GetEditorConfigString(OperatorPlacementWhenWrappingPreference value)
-            => value == OperatorPlacementWhenWrappingPreference.EndOfLine ? end_of_line : beginning_of_line;
+        public static string GetEditorConfigString(OperatorPlacementWhenWrappingPreference value) =>
+            value == OperatorPlacementWhenWrappingPreference.EndOfLine
+                ? end_of_line
+                : beginning_of_line;
 
-        public static Optional<OperatorPlacementWhenWrappingPreference> Parse(string optionString, OperatorPlacementWhenWrappingPreference defaultValue)
+        public static Optional<OperatorPlacementWhenWrappingPreference> Parse(
+            string optionString,
+            OperatorPlacementWhenWrappingPreference defaultValue
+        )
         {
             if (CodeStyleHelpers.TryGetCodeStyleValue(optionString, out var value))
             {
                 switch (value)
                 {
-                    case end_of_line: return OperatorPlacementWhenWrappingPreference.EndOfLine;
-                    case beginning_of_line: return OperatorPlacementWhenWrappingPreference.BeginningOfLine;
+                    case end_of_line:
+                        return OperatorPlacementWhenWrappingPreference.EndOfLine;
+                    case beginning_of_line:
+                        return OperatorPlacementWhenWrappingPreference.BeginningOfLine;
                 }
             }
 

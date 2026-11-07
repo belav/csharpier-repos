@@ -30,44 +30,46 @@ using System;
 using System.Data.Services;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
-	[TestFixture]
-	public class DataServiceExceptionTests {
-		[Test]
-		public void CtorMessage()
-		{
-			var ex = new DataServiceException ("message");
-			Assert.AreEqual ("message", ex.Message);
-			Assert.IsNull (ex.InnerException);
-		}
+namespace MonoTests.System.Data.Services
+{
+    [TestFixture]
+    public class DataServiceExceptionTests
+    {
+        [Test]
+        public void CtorMessage()
+        {
+            var ex = new DataServiceException("message");
+            Assert.AreEqual("message", ex.Message);
+            Assert.IsNull(ex.InnerException);
+        }
 
-		[Test]
-		public void CtorMessageAndInner()
-		{
-			Exception inner = new Exception ("inner");
-			var ex = new DataServiceException ("message", inner);
+        [Test]
+        public void CtorMessageAndInner()
+        {
+            Exception inner = new Exception("inner");
+            var ex = new DataServiceException("message", inner);
 
-			Assert.AreEqual ("message", ex.Message);
-			Assert.AreEqual (inner, ex.InnerException);
-		}
+            Assert.AreEqual("message", ex.Message);
+            Assert.AreEqual(inner, ex.InnerException);
+        }
 
-		[Test]
-		public void CtorStatusAndMessage()
-		{
-			var ex = new DataServiceException (404, "message");
-			Assert.AreEqual (404, ex.StatusCode);
-			Assert.AreEqual ("message", ex.Message);
-		}
+        [Test]
+        public void CtorStatusAndMessage()
+        {
+            var ex = new DataServiceException(404, "message");
+            Assert.AreEqual(404, ex.StatusCode);
+            Assert.AreEqual("message", ex.Message);
+        }
 
-		[Test]
-		public void CtorStatusAndErrorMessageLanguageException()
-		{
-			Exception inner = new Exception ("inner");
-			var ex = new DataServiceException (404, "error", "message", "language", inner);
-			Assert.AreEqual ("message", ex.Message);
-			Assert.AreEqual (404, ex.StatusCode);
-			Assert.AreEqual ("language", ex.MessageLanguage);
-			Assert.AreEqual (inner, ex.InnerException);
-		}
-	}
+        [Test]
+        public void CtorStatusAndErrorMessageLanguageException()
+        {
+            Exception inner = new Exception("inner");
+            var ex = new DataServiceException(404, "error", "message", "language", inner);
+            Assert.AreEqual("message", ex.Message);
+            Assert.AreEqual(404, ex.StatusCode);
+            Assert.AreEqual("language", ex.MessageLanguage);
+            Assert.AreEqual(inner, ex.InnerException);
+        }
+    }
 }

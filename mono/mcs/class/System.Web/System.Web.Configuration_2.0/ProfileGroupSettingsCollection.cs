@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,132 +28,145 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (ProfileGroupSettings), AddItemName="group", CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class ProfileGroupSettingsCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
-		
-		static ProfileGroupSettingsCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
-		
-		public void Add (ProfileGroupSettings group)
-		{
-			BaseAdd (group);
-		}
+    [ConfigurationCollection(
+        typeof(ProfileGroupSettings),
+        AddItemName = "group",
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class ProfileGroupSettingsCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		public string[] AllKeys {
-			get {
-				string[] ret = new string [Count];
-				for (int i = 0; i < Count; i++)
-					ret [i] = this [i].Name;
+        static ProfileGroupSettingsCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-				return ret;
-			}
-		}
+        public void Add(ProfileGroupSettings group)
+        {
+            BaseAdd(group);
+        }
 
-		// Why override?
-		protected internal override bool IsModified ()
-		{
-			return base.IsModified ();
-		}
+        public string[] AllKeys
+        {
+            get
+            {
+                string[] ret = new string[Count];
+                for (int i = 0; i < Count; i++)
+                    ret[i] = this[i].Name;
 
-		// Why override?
-		protected internal override void ResetModified ()
-		{
-			base.ResetModified ();
-		}
-		
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+                return ret;
+            }
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new ProfileGroupSettings ();
-		}
+        // Why override?
+        protected internal override bool IsModified()
+        {
+            return base.IsModified();
+        }
 
-		public ProfileGroupSettings Get (int index)
-		{
-			return (ProfileGroupSettings) BaseGet (index);
-		}
+        // Why override?
+        protected internal override void ResetModified()
+        {
+            base.ResetModified();
+        }
 
-		public ProfileGroupSettings Get (string name)
-		{
-			return (ProfileGroupSettings) BaseGet (name);
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((ProfileGroupSettings) element).Name;
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new ProfileGroupSettings();
+        }
 
-		public string GetKey (int index)
-		{
-			return (string)BaseGetKey (index);
-		}
+        public ProfileGroupSettings Get(int index)
+        {
+            return (ProfileGroupSettings)BaseGet(index);
+        }
 
-		public int IndexOf (ProfileGroupSettings group)
-		{
-			return BaseIndexOf (group);
-		}
+        public ProfileGroupSettings Get(string name)
+        {
+            return (ProfileGroupSettings)BaseGet(name);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((ProfileGroupSettings)element).Name;
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public string GetKey(int index)
+        {
+            return (string)BaseGetKey(index);
+        }
 
-		public void Set (ProfileGroupSettings group)
-		{
-			ProfileGroupSettings existing = Get (group.Name);
+        public int IndexOf(ProfileGroupSettings group)
+        {
+            return BaseIndexOf(group);
+        }
 
-			if (existing == null) {
-				Add (group);
-			}
-			else {
-				int index = BaseIndexOf (existing);
-				RemoveAt (index);
-				BaseAdd (index, group);
-			}
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public ProfileGroupSettings this[int index] {
-			get { return Get (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		public new ProfileGroupSettings this[string name] {
-			get { return (ProfileGroupSettings) BaseGet (name); }
-		}
+        public void Set(ProfileGroupSettings group)
+        {
+            ProfileGroupSettings existing = Get(group.Name);
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-		
-		internal void ResetInternal (ConfigurationElement parentElement)
-		{
-			Reset (parentElement);
-		}
+            if (existing == null)
+            {
+                Add(group);
+            }
+            else
+            {
+                int index = BaseIndexOf(existing);
+                RemoveAt(index);
+                BaseAdd(index, group);
+            }
+        }
 
-		internal void AddNewSettings (ProfileGroupSettings newSettings)
-		{
-			// allow overriding - no exception should be thrown
-			BaseAdd (newSettings, false);
-		}
-	}
+        public ProfileGroupSettings this[int index]
+        {
+            get { return Get(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
+        public new ProfileGroupSettings this[string name]
+        {
+            get { return (ProfileGroupSettings)BaseGet(name); }
+        }
+
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+
+        internal void ResetInternal(ConfigurationElement parentElement)
+        {
+            Reset(parentElement);
+        }
+
+        internal void AddNewSettings(ProfileGroupSettings newSettings)
+        {
+            // allow overriding - no exception should be thrown
+            BaseAdd(newSettings, false);
+        }
+    }
 }
-

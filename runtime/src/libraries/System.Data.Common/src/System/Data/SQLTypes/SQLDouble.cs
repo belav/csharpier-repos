@@ -18,7 +18,9 @@ namespace System.Data.SqlTypes
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public struct SqlDouble : INullable, IComparable, IXmlSerializable, IEquatable<SqlDouble>
     {
         private bool m_fNotNull; // false if null. Do not rename (binary serialization)
@@ -88,13 +90,11 @@ namespace System.Data.SqlTypes
                 return new SqlDouble(double.Parse(s, CultureInfo.InvariantCulture));
         }
 
-
         // Unary operators
         public static SqlDouble operator -(SqlDouble x)
         {
             return x.IsNull ? Null : new SqlDouble(-x.m_value);
         }
-
 
         // Binary operators
 
@@ -219,7 +219,9 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlDouble x, SqlDouble y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value == y.m_value);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         public static SqlBoolean operator !=(SqlDouble x, SqlDouble y)
@@ -239,12 +241,16 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <=(SqlDouble x, SqlDouble y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value <= y.m_value);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         public static SqlBoolean operator >=(SqlDouble x, SqlDouble y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value >= y.m_value);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------
@@ -256,6 +262,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlDouble Subtract(SqlDouble x, SqlDouble y)
         {
@@ -382,8 +389,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -395,13 +404,15 @@ namespace System.Data.SqlTypes
         /// <param name="other">An instance to compare with this instance.</param>
         /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
         public bool Equals(SqlDouble other) =>
-            other.IsNull || IsNull ? other.IsNull && IsNull :
-            (this == other).Value;
+            other.IsNull || IsNull ? other.IsNull && IsNull : (this == other).Value;
 
         // For hashing purpose
         public override int GetHashCode() => IsNull ? 0 : Value.GetHashCode();
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

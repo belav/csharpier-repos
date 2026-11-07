@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,17 +21,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.ComponentModel;
 using System.Reflection;
+using System.Text;
 using DbLinq;
 using DbLinq.Util;
 
@@ -41,7 +41,14 @@ namespace System.Data.Linq
 namespace DbLinq.Data.Linq
 #endif
 {
-    public sealed class EntitySet<TEntity> : ICollection, ICollection<TEntity>, IEnumerable, IEnumerable<TEntity>, IList, IList<TEntity>, IListSource
+    public sealed class EntitySet<TEntity>
+        : ICollection,
+            ICollection<TEntity>,
+            IEnumerable,
+            IEnumerable<TEntity>,
+            IList,
+            IList<TEntity>,
+            IListSource
         where TEntity : class
     {
         private readonly Action<TEntity> onAdd;
@@ -49,7 +56,7 @@ namespace DbLinq.Data.Linq
 
         private IEnumerable<TEntity> deferredSource;
         private bool deferred;
-		private bool assignedValues;
+        private bool assignedValues;
         private List<TEntity> source;
         private List<TEntity> Source
         {
@@ -62,13 +69,19 @@ namespace DbLinq.Data.Linq
                 if (nestedQueryPredicate != null && context != null)
                 {
                     var otherTable = context.GetTable(typeof(TEntity));
-                    var query = (IQueryable<TEntity>) context.GetOtherTableQuery(nestedQueryPredicate, nestedQueryParam, typeof(TEntity), otherTable);
+                    var query =
+                        (IQueryable<TEntity>)
+                            context.GetOtherTableQuery(
+                                nestedQueryPredicate,
+                                nestedQueryParam,
+                                typeof(TEntity),
+                                otherTable
+                            );
                     return source = query.ToList();
                 }
                 return source = new List<TEntity>();
             }
         }
-
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance has loaded or assigned values.
@@ -78,7 +91,7 @@ namespace DbLinq.Data.Linq
         /// </value>
         public bool HasAssignedValues
         {
-			get { return assignedValues; }
+            get { return assignedValues; }
         }
 
         public bool HasLoadedValues
@@ -113,11 +126,10 @@ namespace DbLinq.Data.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="EntitySet&lt;TEntity&gt;"/> class.
         /// </summary>
-        public EntitySet()
-        {
-        }
+        public EntitySet() { }
 
         DataContext context;
+
         internal EntitySet(DataContext context)
             : this()
         {
@@ -165,17 +177,21 @@ namespace DbLinq.Data.Linq
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            if (Source.Contains (entity))
+            if (Source.Contains(entity))
                 return;
             Source.Add(entity);
             OnAdd(entity);
             ListChangedEventHandler handler = ListChanged;
             if (!deferred && deferredSource != null && handler != null)
-                handler(this, new ListChangedEventArgs(ListChangedType.ItemAdded, Source.Count - 1));
+                handler(
+                    this,
+                    new ListChangedEventArgs(ListChangedType.ItemAdded, Source.Count - 1)
+                );
         }
 
         ParameterExpression nestedQueryParam;
         BinaryExpression nestedQueryPredicate;
+
         internal void Add(KeyValuePair<object, MemberInfo> info)
         {
             var value = info.Key;
@@ -186,20 +202,24 @@ namespace DbLinq.Data.Linq
             BinaryExpression comp;
             if (!propType.IsNullable())
             {
-                comp = Expression.Equal(Expression.Constant(value),
-                        Expression.MakeMemberAccess(nestedQueryParam, member));
+                comp = Expression.Equal(
+                    Expression.Constant(value),
+                    Expression.MakeMemberAccess(nestedQueryParam, member)
+                );
             }
             else
             {
                 var valueProp = propType.GetProperty("Value");
-                comp = Expression.Equal(Expression.Constant(value),
-                        Expression.MakeMemberAccess(
-                            Expression.MakeMemberAccess(nestedQueryParam, member),
-                            valueProp));
+                comp = Expression.Equal(
+                    Expression.Constant(value),
+                    Expression.MakeMemberAccess(
+                        Expression.MakeMemberAccess(nestedQueryParam, member),
+                        valueProp
+                    )
+                );
             }
-            nestedQueryPredicate = nestedQueryPredicate == null
-                ? comp
-                : Expression.And(nestedQueryPredicate, comp);
+            nestedQueryPredicate =
+                nestedQueryPredicate == null ? comp : Expression.And(nestedQueryPredicate, comp);
         }
 
         [DbLinqToDo]
@@ -210,8 +230,8 @@ namespace DbLinq.Data.Linq
 
         IList IListSource.GetList()
         {
-			//It seems that Microsoft is doing a similar thing in L2SQL, matter of fact, after doing a GetList().Add(new TEntity()), HasAssignedValues continues to be false
-			//This seems like a bug on their end, but we'll do the same for consistency
+            //It seems that Microsoft is doing a similar thing in L2SQL, matter of fact, after doing a GetList().Add(new TEntity()), HasAssignedValues continues to be false
+            //This seems like a bug on their end, but we'll do the same for consistency
             return this;
         }
 
@@ -297,7 +317,7 @@ namespace DbLinq.Data.Linq
         {
             ListChangedEventHandler handler = ListChanged;
             deferred = false;
-			assignedValues = true;
+            assignedValues = true;
             if (deferredSource != null && handler != null)
             {
                 foreach (var item in Source)
@@ -364,7 +384,7 @@ namespace DbLinq.Data.Linq
         public bool Remove(TEntity entity)
         {
             int i = Source.IndexOf(entity);
-            if(i < 0)
+            if (i < 0)
                 return false;
             deferred = false;
             Source.Remove(entity);
@@ -435,14 +455,8 @@ namespace DbLinq.Data.Linq
 
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
-            set
-            {
-                this[index] = value as TEntity;
-            }
+            get { return this[index]; }
+            set { this[index] = value as TEntity; }
         }
 
         #endregion
@@ -525,8 +539,10 @@ namespace DbLinq.Data.Linq
             Console.WriteLine("# EntitySet<{0}>.SetSource: HashCode={1}; Stack={2}", typeof(TEntity).Name,
                 GetHashCode(), new System.Diagnostics.StackTrace());
 #endif
-            if(HasLoadedOrAssignedValues)
-                throw new InvalidOperationException("The EntitySet is already loaded and the source cannot be changed.");
+            if (HasLoadedOrAssignedValues)
+                throw new InvalidOperationException(
+                    "The EntitySet is already loaded and the source cannot be changed."
+                );
             deferred = true;
             deferredSource = entitySource;
         }
@@ -558,17 +574,18 @@ namespace DbLinq.Data.Linq
         /// <param name="entity">The entity.</param>
         private void OnAdd(TEntity entity)
         {
-			assignedValues = true;
+            assignedValues = true;
             if (onAdd != null)
                 onAdd(entity);
         }
+
         /// <summary>
         /// Called when entity is removed
         /// </summary>
         /// <param name="entity">The entity.</param>
         private void OnRemove(TEntity entity)
         {
-			assignedValues = true;
+            assignedValues = true;
             if (onRemove != null)
                 onRemove(entity);
         }

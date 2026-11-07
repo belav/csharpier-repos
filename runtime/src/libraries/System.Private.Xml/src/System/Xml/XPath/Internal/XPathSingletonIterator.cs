@@ -17,7 +17,8 @@ namespace MS.Internal.Xml.XPath
             _nav = nav;
         }
 
-        public XPathSingletonIterator(XPathNavigator nav, bool moved) : this(nav)
+        public XPathSingletonIterator(XPathNavigator nav, bool moved)
+            : this(nav)
         {
             if (moved)
             {

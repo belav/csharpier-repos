@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,146 +34,138 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design.WebControls
 {
-	public class DataBoundControlDesigner : BaseDataBoundControlDesigner, IDataBindingSchemaProvider, IDataSourceProvider
-	{
-		[MonoNotSupported ("")]
-		public DataBoundControlDesigner ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class DataBoundControlDesigner
+        : BaseDataBoundControlDesigner,
+            IDataBindingSchemaProvider,
+            IDataSourceProvider
+    {
+        [MonoNotSupported("")]
+        public DataBoundControlDesigner()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public override DesignerActionListCollection ActionLists {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public override DesignerActionListCollection ActionLists
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public string DataMember {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
+        [MonoNotSupported("")]
+        public string DataMember
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+            [MonoNotSupported("")]
+            set { throw new NotImplementedException(); }
+        }
 
-			[MonoNotSupported ("")]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public IDataSourceDesigner DataSourceDesigner
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public IDataSourceDesigner DataSourceDesigner {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public DesignerDataSourceView DesignerView
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public DesignerDataSourceView DesignerView {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        protected virtual int SampleRowCount
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		protected virtual int SampleRowCount {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		[MonoNotSupported ("")]
-		protected virtual bool UseDataSourcePickerActionList {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        protected virtual bool UseDataSourcePickerActionList
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		protected override void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected override void Dispose(bool disposing)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected override bool ConnectToDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected override bool ConnectToDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected override void CreateDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected override void CreateDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected override void DataBind (BaseDataBoundControl dataBoundControl)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected override void DataBind(BaseDataBoundControl dataBoundControl)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected override void DisconnectFromDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected override void DisconnectFromDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected virtual IEnumerable GetDesignTimeDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected virtual IEnumerable GetDesignTimeDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected virtual IEnumerable GetSampleDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected virtual IEnumerable GetSampleDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		protected override void PreFilterProperties (IDictionary properties)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        protected override void PreFilterProperties(IDictionary properties)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		void IDataBindingSchemaProvider.RefreshSchema (bool preferSilent)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        void IDataBindingSchemaProvider.RefreshSchema(bool preferSilent)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		IEnumerable IDataSourceProvider.GetResolvedSelectedDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        IEnumerable IDataSourceProvider.GetResolvedSelectedDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		Object IDataSourceProvider.GetSelectedDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        Object IDataSourceProvider.GetSelectedDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		bool IDataBindingSchemaProvider.CanRefreshSchema {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        bool IDataBindingSchemaProvider.CanRefreshSchema
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		IDataSourceViewSchema IDataBindingSchemaProvider.Schema {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        [MonoNotSupported("")]
+        IDataSourceViewSchema IDataBindingSchemaProvider.Schema
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

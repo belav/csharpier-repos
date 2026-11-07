@@ -14,9 +14,7 @@ namespace System.Data.Common
         private DateTimeOffset[] _values = default!; // Late-initialized
 
         internal DateTimeOffsetStorage(DataColumn column)
-        : base(column, typeof(DateTimeOffset), s_defaultValue, StorageType.DateTimeOffset)
-        {
-        }
+            : base(column, typeof(DateTimeOffset), s_defaultValue, StorageType.DateTimeOffset) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -32,7 +30,10 @@ namespace System.Data.Common
                             int record = records[i];
                             if (HasValue(record))
                             {
-                                min = (DateTimeOffset.Compare(_values[record], min) < 0) ? _values[record] : min;
+                                min =
+                                    (DateTimeOffset.Compare(_values[record], min) < 0)
+                                        ? _values[record]
+                                        : min;
                                 hasData = true;
                             }
                         }
@@ -49,7 +50,10 @@ namespace System.Data.Common
                             int record = records[i];
                             if (HasValue(record))
                             {
-                                max = (DateTimeOffset.Compare(_values[record], max) >= 0) ? _values[record] : max;
+                                max =
+                                    (DateTimeOffset.Compare(_values[record], max) >= 0)
+                                        ? _values[record]
+                                        : max;
                                 hasData = true;
                             }
                         }
@@ -189,7 +193,12 @@ namespace System.Data.Common
             return new DateTimeOffset[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             DateTimeOffset[] typedStore = (DateTimeOffset[])store;
             typedStore[storeIndex] = _values[record];

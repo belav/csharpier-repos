@@ -7,7 +7,7 @@ using Xunit;
 
 public class GitHub_26417
 {
-    static int   _a;
+    static int _a;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void MyWriteLine(int v)
@@ -23,7 +23,7 @@ public class GitHub_26417
     static void Test()
     {
         _a = 1;
-        
+
         while (_a == 1)
         {
             MyWriteLine(_a);
@@ -35,7 +35,8 @@ public class GitHub_26417
     public static int TestEntryPoint()
     {
         int result = 100;
-        try {
+        try
+        {
             Test();
         }
         catch (Exception)

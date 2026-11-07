@@ -43,9 +43,7 @@ namespace System.Linq.Expressions
             return Expression.Bind(Member, expression);
         }
 
-        internal override void ValidateAsDefinedHere(int index)
-        {
-        }
+        internal override void ValidateAsDefinedHere(int index) { }
     }
 
     public partial class Expression
@@ -84,7 +82,10 @@ namespace System.Linq.Expressions
             return Bind(GetProperty(propertyAccessor, nameof(propertyAccessor)), expression);
         }
 
-        private static void ValidateSettableFieldOrPropertyMember(MemberInfo member, out Type memberType)
+        private static void ValidateSettableFieldOrPropertyMember(
+            MemberInfo member,
+            out Type memberType
+        )
         {
             Type? decType = member.DeclaringType;
             if (decType == null)

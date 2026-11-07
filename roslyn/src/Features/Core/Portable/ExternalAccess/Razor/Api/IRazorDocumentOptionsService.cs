@@ -9,6 +9,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
 {
     internal interface IRazorDocumentOptionsService
     {
-        Task<IRazorDocumentOptions> GetOptionsForDocumentAsync(Document document, CancellationToken cancellationToken);
+        Task<IRazorDocumentOptions> GetOptionsForDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

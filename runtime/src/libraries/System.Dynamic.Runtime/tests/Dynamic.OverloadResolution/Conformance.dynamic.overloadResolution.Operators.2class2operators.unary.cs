@@ -48,8 +48,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.unary.overload002.overload002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -94,8 +92,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.unary.overload003.overload003
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -108,6 +104,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static Base operator ++(Base x)
         {
             x.Field = 3;
@@ -145,8 +142,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.unary.overload004.overload004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -159,6 +154,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static Base operator --(Base x)
         {
             x.Field = 3;
@@ -196,8 +192,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.unary.overload005.overload005
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -210,6 +204,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public static int Status;
+
         public static bool operator true(Base x)
         {
             Base.Status = 1;
@@ -255,8 +250,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.unary.overload008.overload008
 {
@@ -304,8 +297,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.unary.overload009.overload009
 {

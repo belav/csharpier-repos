@@ -36,9 +36,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">dataspace in which the simple type belongs to</param>
         /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version arguments are null</exception>
         internal SimpleType(string name, string namespaceName, DataSpace dataSpace)
-            : base(name, namespaceName, dataSpace)
-        {
-        }
+            : base(name, namespaceName, dataSpace) { }
         #endregion
     }
 }

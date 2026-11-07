@@ -1,4 +1,4 @@
-// 
+//
 // Fault12.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,120 +44,115 @@
 //
 
 using System;
+using System.Collections;
+using System.Globalization;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Text;
-using System.Collections;
-using System.Globalization;
 
 namespace System.Web.Services.Protocols
 {
-	[XmlRoot ("Fault", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-	[XmlType ("Fault", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-	internal class Soap12Fault
-	{
-		// dummy constructor to not be rejected by genxs.
-		public Soap12Fault ()
-		{
-		}
+    [XmlRoot("Fault", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+    [XmlType("Fault", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+    internal class Soap12Fault
+    {
+        // dummy constructor to not be rejected by genxs.
+        public Soap12Fault() { }
 
-		public static XmlSerializer Serializer =
-			new Fault12Serializer ();
+        public static XmlSerializer Serializer = new Fault12Serializer();
 
+        public Soap12Fault(SoapException ex)
+        {
+            Code = new Soap12FaultCode();
+            Code.Value = ex.Code;
+            if (ex.SubCode != null)
+                Code.Subcode = CreateFaultCode(ex.SubCode);
+            Node = ex.Node;
+            Role = ex.Role;
+            Reason = new Soap12FaultReason();
+            Soap12FaultReasonText text = new Soap12FaultReasonText();
+            text.XmlLang = ex.Lang;
+            text.Value = ex.Message;
+            Reason.Texts = new Soap12FaultReasonText[] { text };
+            if (ex.Detail != null)
+            {
+                Detail = new Soap12FaultDetail();
+                if (ex.Detail.NodeType == XmlNodeType.Attribute)
+                    Detail.Attributes = new XmlAttribute[] { (XmlAttribute)ex.Detail };
+                else if (ex.Detail.NodeType == XmlNodeType.Element)
+                    Detail.Children = new XmlElement[] { (XmlElement)ex.Detail };
+                else
+                    Detail.Text = ex.Detail.Value;
+            }
+        }
 
-		public Soap12Fault (SoapException ex) 
-		{
-			Code = new Soap12FaultCode ();
-			Code.Value = ex.Code;
-			if (ex.SubCode != null)
-				Code.Subcode = CreateFaultCode (ex.SubCode);
-			Node = ex.Node;
-			Role = ex.Role;
-			Reason = new Soap12FaultReason ();
-			Soap12FaultReasonText text =
-				new Soap12FaultReasonText ();
-			text.XmlLang = ex.Lang;
-			text.Value = ex.Message;
-			Reason.Texts = new Soap12FaultReasonText [] {text};
-			if (ex.Detail != null) {
-				Detail = new Soap12FaultDetail ();
-				if (ex.Detail.NodeType == XmlNodeType.Attribute)
-					Detail.Attributes = new XmlAttribute [] {
-						(XmlAttribute) ex.Detail};
-				else if (ex.Detail.NodeType == XmlNodeType.Element)
-					Detail.Children = new XmlElement [] {
-						(XmlElement) ex.Detail};
-				else
-					Detail.Text = ex.Detail.Value;
-			}
-		}
+        static Soap12FaultCode CreateFaultCode(SoapFaultSubCode code)
+        {
+            if (code == null)
+                throw new ArgumentNullException("code");
+            Soap12FaultCode ret = new Soap12FaultCode();
+            ret.Value = code.Code;
+            if (code.SubCode != null)
+                ret.Subcode = CreateFaultCode(code.SubCode);
+            return ret;
+        }
 
-		static Soap12FaultCode CreateFaultCode (SoapFaultSubCode code)
-		{
-			if (code == null)
-				throw new ArgumentNullException ("code");
-			Soap12FaultCode ret = new Soap12FaultCode ();
-			ret.Value = code.Code;
-			if (code.SubCode != null)
-				ret.Subcode = CreateFaultCode (code.SubCode);
-			return ret;
-		}
+        public static SoapFaultSubCode GetSoapFaultSubCode(Soap12FaultCode src)
+        {
+            return (src == null)
+                ? null
+                : new SoapFaultSubCode(src.Value, GetSoapFaultSubCode(src.Subcode));
+        }
 
-		public static SoapFaultSubCode GetSoapFaultSubCode (Soap12FaultCode src)
-		{
-			return (src == null) ? null :
-				new SoapFaultSubCode (src.Value, GetSoapFaultSubCode (src.Subcode));
-		}
+        public Soap12FaultCode Code;
 
-		public Soap12FaultCode Code;
+        public Soap12FaultReason Reason;
 
-		public Soap12FaultReason Reason;
+        [XmlElement(DataType = "anyURI")]
+        public string Node;
 
-		[XmlElement (DataType = "anyURI")]
-		public string Node;
+        [XmlElement(DataType = "anyURI")]
+        public string Role;
 
-		[XmlElement (DataType = "anyURI")]
-		public string Role;
+        public Soap12FaultDetail Detail;
+    }
 
-		public Soap12FaultDetail Detail;
-	}
+    [XmlType("Code", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+    internal class Soap12FaultCode
+    {
+        public XmlQualifiedName Value;
 
-	[XmlType ("Code", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-	internal class Soap12FaultCode
-	{
-		public XmlQualifiedName Value;
+        public Soap12FaultCode Subcode;
+    }
 
-		public Soap12FaultCode Subcode;
-	}
+    [XmlType("Reason", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+    internal class Soap12FaultReason
+    {
+        [XmlElement("Text", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+        public Soap12FaultReasonText[] Texts;
+    }
 
-	[XmlType ("Reason", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-	internal class Soap12FaultReason
-	{
-		[XmlElement ("Text", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-		public Soap12FaultReasonText [] Texts;
-	}
+    [XmlType("Text", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+    internal class Soap12FaultReasonText
+    {
+        [XmlAttribute("lang", Namespace = "http://www.w3.org/XML/1998/namespace")]
+        public string XmlLang;
 
-	[XmlType ("Text", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-	internal class Soap12FaultReasonText
-	{
-		[XmlAttribute ("lang", Namespace = "http://www.w3.org/XML/1998/namespace")]
-		public string XmlLang;
+        [XmlText]
+        public string Value;
+    }
 
-		[XmlText]
-		public string Value;
-	}
+    [XmlType("Detail", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
+    internal class Soap12FaultDetail
+    {
+        [XmlAnyAttribute]
+        public XmlAttribute[] Attributes;
 
-	[XmlType ("Detail", Namespace = "http://www.w3.org/2003/05/soap-envelope")]
-	internal class Soap12FaultDetail
-	{
-		[XmlAnyAttribute]
-		public XmlAttribute [] Attributes;
+        [XmlAnyElement]
+        public XmlElement[] Children;
 
-		[XmlAnyElement]
-		public XmlElement [] Children;
-
-		[XmlText]
-		public string Text;
-	}
+        [XmlText]
+        public string Text;
+    }
 }

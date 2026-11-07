@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
 using Debug = System.Diagnostics.Debug;
-using Internal.TypeSystem.Ecma;
 
 namespace Internal.IL.Stubs
 {
@@ -22,9 +21,17 @@ namespace Internal.IL.Stubs
         private readonly PInvokeFlags _flags;
         private readonly InteropStateManager _interopStateManager;
 
-        private PInvokeILEmitter(MethodDesc targetMethod, PInvokeILEmitterConfiguration pinvokeILEmitterConfiguration, InteropStateManager interopStateManager)
+        private PInvokeILEmitter(
+            MethodDesc targetMethod,
+            PInvokeILEmitterConfiguration pinvokeILEmitterConfiguration,
+            InteropStateManager interopStateManager
+        )
         {
-            Debug.Assert(targetMethod.IsPInvoke || targetMethod is DelegateMarshallingMethodThunk || targetMethod is CalliMarshallingMethodThunk);
+            Debug.Assert(
+                targetMethod.IsPInvoke
+                    || targetMethod is DelegateMarshallingMethodThunk
+                    || targetMethod is CalliMarshallingMethodThunk
+            );
             _targetMethod = targetMethod;
             _pInvokeILEmitterConfiguration = pinvokeILEmitterConfiguration;
             _pInvokeMetadata = targetMethod.GetPInvokeMethodMetadata();
@@ -37,7 +44,9 @@ namespace Internal.IL.Stubs
             //
             if (_targetMethod is DelegateMarshallingMethodThunk delegateMethod)
             {
-                _flags = ((EcmaType)delegateMethod.DelegateType.GetTypeDefinition()).GetDelegatePInvokeFlags();
+                _flags = (
+                    (EcmaType)delegateMethod.DelegateType.GetTypeDefinition()
+                ).GetDelegatePInvokeFlags();
             }
             else
             {
@@ -46,7 +55,11 @@ namespace Internal.IL.Stubs
             _marshallers = InitializeMarshallers(targetMethod, interopStateManager, _flags);
         }
 
-        private static Marshaller[] InitializeMarshallers(MethodDesc targetMethod, InteropStateManager interopStateManager, PInvokeFlags flags)
+        private static Marshaller[] InitializeMarshallers(
+            MethodDesc targetMethod,
+            InteropStateManager interopStateManager,
+            PInvokeFlags flags
+        )
         {
             MarshalDirection direction = MarshalDirection.Forward;
             MethodSignature methodSig;
@@ -56,7 +69,9 @@ namespace Internal.IL.Stubs
                 case DelegateMarshallingMethodThunk delegateMethod:
                     methodSig = delegateMethod.DelegateSignature;
                     direction = delegateMethod.Direction;
-                    runtimeMarshallingEnabled = MarshalHelpers.IsRuntimeMarshallingEnabled(delegateMethod.DelegateType.Module);
+                    runtimeMarshallingEnabled = MarshalHelpers.IsRuntimeMarshallingEnabled(
+                        delegateMethod.DelegateType.Module
+                    );
                     break;
                 case CalliMarshallingMethodThunk calliMethod:
                     methodSig = calliMethod.TargetSignature;
@@ -64,7 +79,9 @@ namespace Internal.IL.Stubs
                     break;
                 default:
                     methodSig = targetMethod.Signature;
-                    runtimeMarshallingEnabled = MarshalHelpers.IsRuntimeMarshallingEnabled(((MetadataType)targetMethod.OwningType).Module);
+                    runtimeMarshallingEnabled = MarshalHelpers.IsRuntimeMarshallingEnabled(
+                        ((MetadataType)targetMethod.OwningType).Module
+                    );
                     break;
             }
             int indexOffset = 0;
@@ -81,11 +98,21 @@ namespace Internal.IL.Stubs
 
             for (int i = 0; i < marshallers.Length; i++)
             {
-                Debug.Assert(parameterIndex == parameterMetadataArray.Length || i <= parameterMetadataArray[parameterIndex].Index);
-                if (parameterIndex == parameterMetadataArray.Length || i < parameterMetadataArray[parameterIndex].Index)
+                Debug.Assert(
+                    parameterIndex == parameterMetadataArray.Length
+                        || i <= parameterMetadataArray[parameterIndex].Index
+                );
+                if (
+                    parameterIndex == parameterMetadataArray.Length
+                    || i < parameterMetadataArray[parameterIndex].Index
+                )
                 {
                     // if we don't have metadata for the parameter, create a dummy one
-                    parameterMetadata = new ParameterMetadata(i, ParameterMetadataAttributes.None, null);
+                    parameterMetadata = new ParameterMetadata(
+                        i,
+                        ParameterMetadataAttributes.None,
+                        null
+                    );
                 }
                 else
                 {
@@ -115,20 +142,21 @@ namespace Internal.IL.Stubs
 
                 if (runtimeMarshallingEnabled)
                 {
-                    marshallers[i] = Marshaller.CreateMarshaller(parameterType,
-                                                        parameterIndex,
-                                                        methodSig.GetEmbeddedSignatureData(),
-                                                        MarshallerType.Argument,
-                                                        parameterMetadata.MarshalAsDescriptor,
-                                                        direction,
-                                                        marshallers,
-                                                        interopStateManager,
-                                                        indexOffset + parameterMetadata.Index,
-                                                        flags,
-                                                        parameterMetadata.In,
-                                                        isHRSwappedRetVal ? true : parameterMetadata.Out,
-                                                        isHRSwappedRetVal ? false : parameterMetadata.Return
-                                                        );
+                    marshallers[i] = Marshaller.CreateMarshaller(
+                        parameterType,
+                        parameterIndex,
+                        methodSig.GetEmbeddedSignatureData(),
+                        MarshallerType.Argument,
+                        parameterMetadata.MarshalAsDescriptor,
+                        direction,
+                        marshallers,
+                        interopStateManager,
+                        indexOffset + parameterMetadata.Index,
+                        flags,
+                        parameterMetadata.In,
+                        isHRSwappedRetVal ? true : parameterMetadata.Out,
+                        isHRSwappedRetVal ? false : parameterMetadata.Return
+                    );
                 }
                 else
                 {
@@ -139,14 +167,18 @@ namespace Internal.IL.Stubs
                         marshallers,
                         indexOffset + parameterMetadata.Index,
                         flags,
-                        parameterMetadata.Return);
+                        parameterMetadata.Return
+                    );
                 }
             }
 
             return marshallers;
         }
 
-        private void EmitDelegateCall(DelegateMarshallingMethodThunk delegateMethod, PInvokeILCodeStreams ilCodeStreams)
+        private void EmitDelegateCall(
+            DelegateMarshallingMethodThunk delegateMethod,
+            PInvokeILCodeStreams ilCodeStreams
+        )
         {
             ILEmitter emitter = ilCodeStreams.Emitter;
             ILCodeStream fnptrLoadStream = ilCodeStreams.FunctionPointerLoadStream;
@@ -170,14 +202,27 @@ namespace Internal.IL.Stubs
                 }
 
                 MethodSignature managedSignature = new MethodSignature(
-                    MethodSignatureFlags.Static, 0, _marshallers[0].ManagedParameterType, parameters);
+                    MethodSignatureFlags.Static,
+                    0,
+                    _marshallers[0].ManagedParameterType,
+                    parameters
+                );
 
-                fnptrLoadStream.Emit(ILOpcode.call, emitter.NewToken(
-                    delegateMethod.Context.GetHelperType("InteropHelpers").GetKnownMethod(
-                        "GetCurrentCalleeOpenStaticDelegateFunctionPointer", null)));
+                fnptrLoadStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        delegateMethod
+                            .Context.GetHelperType("InteropHelpers")
+                            .GetKnownMethod(
+                                "GetCurrentCalleeOpenStaticDelegateFunctionPointer",
+                                null
+                            )
+                    )
+                );
 
                 ILLocalVariable vDelegateStub = emitter.NewLocal(
-                    delegateMethod.Context.GetWellKnownType(WellKnownType.IntPtr));
+                    delegateMethod.Context.GetWellKnownType(WellKnownType.IntPtr)
+                );
 
                 fnptrLoadStream.EmitStLoc(vDelegateStub);
                 callsiteSetupCodeStream.EmitLdLoc(vDelegateStub);
@@ -191,37 +236,55 @@ namespace Internal.IL.Stubs
                 // which returns the delegate. Do a CallVirt on the invoke method.
                 //
                 MethodDesc instantiatedHelper = delegateMethod.Context.GetInstantiatedMethod(
-                    delegateMethod.Context.GetHelperType("InteropHelpers")
-                    .GetKnownMethod("GetCurrentCalleeDelegate", null),
-                        new Instantiation((delegateMethod.DelegateType)));
+                    delegateMethod
+                        .Context.GetHelperType("InteropHelpers")
+                        .GetKnownMethod("GetCurrentCalleeDelegate", null),
+                    new Instantiation((delegateMethod.DelegateType))
+                );
 
                 fnptrLoadStream.Emit(ILOpcode.call, emitter.NewToken(instantiatedHelper));
 
                 ILLocalVariable vDelegateStub = emitter.NewLocal(delegateMethod.DelegateType);
                 fnptrLoadStream.EmitStLoc(vDelegateStub);
                 marshallingCodeStream.EmitLdLoc(vDelegateStub);
-                MethodDesc invokeMethod = delegateMethod.DelegateType.GetKnownMethod("Invoke", null);
+                MethodDesc invokeMethod = delegateMethod.DelegateType.GetKnownMethod(
+                    "Invoke",
+                    null
+                );
                 callsiteSetupCodeStream.Emit(ILOpcode.callvirt, emitter.NewToken(invokeMethod));
             }
-            else if (delegateMethod.Kind == DelegateMarshallingMethodThunkKind.ForwardNativeFunctionWrapper)
+            else if (
+                delegateMethod.Kind
+                == DelegateMarshallingMethodThunkKind.ForwardNativeFunctionWrapper
+            )
             {
                 // if the SetLastError flag is set in UnmanagedFunctionPointerAttribute, clear the error code before doing P/Invoke
                 if (_flags.SetLastError)
                 {
-                    callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                                InteropTypes.GetPInvokeMarshal(context).GetKnownMethod("ClearLastError", null)));
+                    callsiteSetupCodeStream.Emit(
+                        ILOpcode.call,
+                        emitter.NewToken(
+                            InteropTypes
+                                .GetPInvokeMarshal(context)
+                                .GetKnownMethod("ClearLastError", null)
+                        )
+                    );
                 }
 
                 //
                 // For NativeFunctionWrapper we need to load the native function and call it
                 //
                 fnptrLoadStream.EmitLdArg(0);
-                fnptrLoadStream.Emit(ILOpcode.call, emitter.NewToken(InteropTypes
-                    .GetNativeFunctionPointerWrapper(context)
-                    .GetMethod("get_NativeFunctionPointer", null)));
+                fnptrLoadStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        InteropTypes
+                            .GetNativeFunctionPointerWrapper(context)
+                            .GetMethod("get_NativeFunctionPointer", null)
+                    )
+                );
 
-                var fnPtr = emitter.NewLocal(
-                    context.GetWellKnownType(WellKnownType.IntPtr));
+                var fnPtr = emitter.NewLocal(context.GetWellKnownType(WellKnownType.IntPtr));
 
                 fnptrLoadStream.EmitStLoc(fnPtr);
                 callsiteSetupCodeStream.EmitLdLoc(fnPtr);
@@ -239,7 +302,11 @@ namespace Internal.IL.Stubs
                     unmanagedCallingConvention = MethodSignatureFlags.UnmanagedCallingConvention;
 
                 MethodSignature nativeSig = new MethodSignature(
-                    MethodSignatureFlags.Static | unmanagedCallingConvention, 0, nativeReturnType, nativeParameterTypes);
+                    MethodSignatureFlags.Static | unmanagedCallingConvention,
+                    0,
+                    nativeReturnType,
+                    nativeParameterTypes
+                );
 
                 callsiteSetupCodeStream.Emit(ILOpcode.calli, emitter.NewToken(nativeSig));
 
@@ -247,9 +314,14 @@ namespace Internal.IL.Stubs
                 // so that last error can be used later by calling Marshal.GetLastPInvokeError
                 if (_flags.SetLastError)
                 {
-                    callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                                InteropTypes.GetPInvokeMarshal(context)
-                                .GetKnownMethod("SaveLastError", null)));
+                    callsiteSetupCodeStream.Emit(
+                        ILOpcode.call,
+                        emitter.NewToken(
+                            InteropTypes
+                                .GetPInvokeMarshal(context)
+                                .GetKnownMethod("SaveLastError", null)
+                        )
+                    );
                 }
             }
             else
@@ -265,11 +337,18 @@ namespace Internal.IL.Stubs
             ILCodeStream callsiteSetupCodeStream = ilCodeStreams.CallsiteSetupCodeStream;
             TypeSystemContext context = _targetMethod.Context;
 
-            bool isHRSwappedRetVal = !_flags.PreserveSig && !_targetMethod.Signature.ReturnType.IsVoid;
-            TypeDesc nativeReturnType = _flags.PreserveSig ? _marshallers[0].NativeParameterType : context.GetWellKnownType(WellKnownType.Int32);
-            TypeDesc[] nativeParameterTypes = new TypeDesc[isHRSwappedRetVal ? _marshallers.Length : _marshallers.Length - 1];
+            bool isHRSwappedRetVal =
+                !_flags.PreserveSig && !_targetMethod.Signature.ReturnType.IsVoid;
+            TypeDesc nativeReturnType = _flags.PreserveSig
+                ? _marshallers[0].NativeParameterType
+                : context.GetWellKnownType(WellKnownType.Int32);
+            TypeDesc[] nativeParameterTypes = new TypeDesc[
+                isHRSwappedRetVal ? _marshallers.Length : _marshallers.Length - 1
+            ];
 
-            bool runtimeMarshallingEnabled = MarshalHelpers.IsRuntimeMarshallingEnabled(((MetadataType)_targetMethod.OwningType).Module);
+            bool runtimeMarshallingEnabled = MarshalHelpers.IsRuntimeMarshallingEnabled(
+                ((MetadataType)_targetMethod.OwningType).Module
+            );
 
             // if the SetLastError flag is set in DllImport, clear the error code before doing P/Invoke
             if (_flags.SetLastError)
@@ -279,8 +358,14 @@ namespace Internal.IL.Stubs
                     // When runtime marshalling is disabled, we don't support SetLastError
                     throw new NotSupportedException();
                 }
-                callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                            InteropTypes.GetPInvokeMarshal(context).GetKnownMethod("ClearLastError", null)));
+                callsiteSetupCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        InteropTypes
+                            .GetPInvokeMarshal(context)
+                            .GetKnownMethod("ClearLastError", null)
+                    )
+                );
             }
 
             for (int i = 1; i < _marshallers.Length; i++)
@@ -301,18 +386,29 @@ namespace Internal.IL.Stubs
             if (!_pInvokeILEmitterConfiguration.GenerateDirectCall(_targetMethod, out _))
             {
                 MetadataType lazyHelperType = context.GetHelperType("InteropHelpers");
-                FieldDesc lazyDispatchCell = _interopStateManager.GetPInvokeLazyFixupField(_targetMethod);
+                FieldDesc lazyDispatchCell = _interopStateManager.GetPInvokeLazyFixupField(
+                    _targetMethod
+                );
 
                 fnptrLoadStream.Emit(ILOpcode.ldsflda, emitter.NewToken(lazyDispatchCell));
-                fnptrLoadStream.Emit(ILOpcode.call, emitter.NewToken(lazyHelperType
-                    .GetKnownMethod("ResolvePInvoke", null)));
+                fnptrLoadStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(lazyHelperType.GetKnownMethod("ResolvePInvoke", null))
+                );
 
                 MethodSignature nativeSig = new MethodSignature(
-                    MethodSignatureFlags.Static | MethodSignatureFlags.UnmanagedCallingConvention, 0, nativeReturnType, nativeParameterTypes,
-                    _targetMethod.GetPInvokeMethodCallingConventions().EncodeAsEmbeddedSignatureData(context));
+                    MethodSignatureFlags.Static | MethodSignatureFlags.UnmanagedCallingConvention,
+                    0,
+                    nativeReturnType,
+                    nativeParameterTypes,
+                    _targetMethod
+                        .GetPInvokeMethodCallingConventions()
+                        .EncodeAsEmbeddedSignatureData(context)
+                );
 
-                ILLocalVariable vNativeFunctionPointer = emitter.NewLocal(context
-                    .GetWellKnownType(WellKnownType.IntPtr));
+                ILLocalVariable vNativeFunctionPointer = emitter.NewLocal(
+                    context.GetWellKnownType(WellKnownType.IntPtr)
+                );
 
                 fnptrLoadStream.EmitStLoc(vNativeFunctionPointer);
                 callsiteSetupCodeStream.EmitLdLoc(vNativeFunctionPointer);
@@ -322,39 +418,60 @@ namespace Internal.IL.Stubs
             {
                 // Eager call
                 MethodSignature nativeSig = new MethodSignature(
-                    _targetMethod.Signature.Flags, 0, nativeReturnType, nativeParameterTypes);
+                    _targetMethod.Signature.Flags,
+                    0,
+                    nativeReturnType,
+                    nativeParameterTypes
+                );
 
-                MethodDesc nativeMethod =
-                    new PInvokeTargetNativeMethod(_targetMethod, nativeSig);
+                MethodDesc nativeMethod = new PInvokeTargetNativeMethod(_targetMethod, nativeSig);
 
                 callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(nativeMethod));
             }
 
             if (!_flags.PreserveSig)
             {
-                callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                    InteropTypes.GetMarshal(context)
-                    .GetKnownMethod("ThrowExceptionForHR", null)));
+                callsiteSetupCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        InteropTypes.GetMarshal(context).GetKnownMethod("ThrowExceptionForHR", null)
+                    )
+                );
             }
 
             // if the SetLastError flag is set in DllImport, call the PInvokeMarshal.SaveLastError
             // so that last error can be used later by calling Marshal.GetLastPInvokeError
             if (_flags.SetLastError)
             {
-                callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                            InteropTypes.GetPInvokeMarshal(context)
-                            .GetKnownMethod("SaveLastError", null)));
+                callsiteSetupCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        InteropTypes
+                            .GetPInvokeMarshal(context)
+                            .GetKnownMethod("SaveLastError", null)
+                    )
+                );
             }
 
             if (MarshalHelpers.ShouldCheckForPendingException(context.Target, _pInvokeMetadata))
             {
-                MetadataType lazyHelperType = context.SystemModule.GetKnownType("System.Runtime.InteropServices.ObjectiveC", "ObjectiveCMarshal");
-                callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(lazyHelperType
-                    .GetKnownMethod("ThrowPendingExceptionObject", null)));
+                MetadataType lazyHelperType = context.SystemModule.GetKnownType(
+                    "System.Runtime.InteropServices.ObjectiveC",
+                    "ObjectiveCMarshal"
+                );
+                callsiteSetupCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        lazyHelperType.GetKnownMethod("ThrowPendingExceptionObject", null)
+                    )
+                );
             }
         }
 
-        private void EmitCalli(PInvokeILCodeStreams ilCodeStreams, CalliMarshallingMethodThunk calliThunk)
+        private void EmitCalli(
+            PInvokeILCodeStreams ilCodeStreams,
+            CalliMarshallingMethodThunk calliThunk
+        )
         {
             ILEmitter emitter = ilCodeStreams.Emitter;
             ILCodeStream callsiteSetupCodeStream = ilCodeStreams.CallsiteSetupCodeStream;
@@ -368,8 +485,12 @@ namespace Internal.IL.Stubs
             }
 
             MethodSignature nativeSig = new MethodSignature(
-                calliThunk.TargetSignature.Flags, 0, nativeReturnType,
-                nativeParameterTypes, calliThunk.TargetSignature.GetEmbeddedSignatureData());
+                calliThunk.TargetSignature.Flags,
+                0,
+                nativeReturnType,
+                nativeParameterTypes,
+                calliThunk.TargetSignature.GetEmbeddedSignatureData()
+            );
 
             callsiteSetupCodeStream.EmitLdArg(calliThunk.TargetSignature.Length);
             callsiteSetupCodeStream.Emit(ILOpcode.calli, emitter.NewToken(nativeSig));
@@ -377,7 +498,12 @@ namespace Internal.IL.Stubs
 
         private PInvokeILStubMethodIL EmitIL()
         {
-            if (_targetMethod.HasCustomAttribute("System.Runtime.InteropServices", "LCIDConversionAttribute"))
+            if (
+                _targetMethod.HasCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "LCIDConversionAttribute"
+                )
+            )
                 throw new NotSupportedException();
 
             PInvokeILCodeStreams pInvokeILCodeStreams = new PInvokeILCodeStreams();
@@ -393,7 +519,8 @@ namespace Internal.IL.Stubs
             cleanupCodestream.BeginHandler(tryFinally);
 
             // Marshal the arguments
-            bool isHRSwappedRetVal = !_flags.PreserveSig && !_targetMethod.Signature.ReturnType.IsVoid;
+            bool isHRSwappedRetVal =
+                !_flags.PreserveSig && !_targetMethod.Signature.ReturnType.IsVoid;
             for (int i = isHRSwappedRetVal ? 1 : 0; i < _marshallers.Length; i++)
             {
                 _marshallers[i].EmitMarshallingIL(pInvokeILCodeStreams);
@@ -430,22 +557,32 @@ namespace Internal.IL.Stubs
             _marshallers[0].LoadReturnValue(cleanupCodestream);
             cleanupCodestream.Emit(ILOpcode.ret);
 
-            return new PInvokeILStubMethodIL((ILStubMethodIL)emitter.Link(_targetMethod), IsStubRequired());
+            return new PInvokeILStubMethodIL(
+                (ILStubMethodIL)emitter.Link(_targetMethod),
+                IsStubRequired()
+            );
         }
 
-        public static MethodIL EmitIL(MethodDesc method,
+        public static MethodIL EmitIL(
+            MethodDesc method,
             PInvokeILEmitterConfiguration pinvokeILEmitterConfiguration,
-            InteropStateManager interopStateManager)
+            InteropStateManager interopStateManager
+        )
         {
             try
             {
-                return new PInvokeILEmitter(method, pinvokeILEmitterConfiguration, interopStateManager)
-                    .EmitIL();
+                return new PInvokeILEmitter(
+                    method,
+                    pinvokeILEmitterConfiguration,
+                    interopStateManager
+                ).EmitIL();
             }
             catch (NotSupportedException)
             {
-                string message = "Method '" + method.ToString() +
-                    "' requires marshalling that is not yet supported by this compiler.";
+                string message =
+                    "Method '"
+                    + method.ToString()
+                    + "' requires marshalling that is not yet supported by this compiler.";
                 return MarshalHelpers.EmitExceptionBody(message, method);
             }
             catch (InvalidProgramException ex)
@@ -457,7 +594,11 @@ namespace Internal.IL.Stubs
 
         private bool IsStubRequired()
         {
-            Debug.Assert(_targetMethod.IsPInvoke || _targetMethod is DelegateMarshallingMethodThunk || _targetMethod is CalliMarshallingMethodThunk);
+            Debug.Assert(
+                _targetMethod.IsPInvoke
+                    || _targetMethod is DelegateMarshallingMethodThunk
+                    || _targetMethod is CalliMarshallingMethodThunk
+            );
 
             if (_targetMethod is DelegateMarshallingMethodThunk)
             {
@@ -495,7 +636,9 @@ namespace Internal.IL.Stubs
     public sealed class PInvokeILStubMethodIL : ILStubMethodIL
     {
         public bool IsStubRequired { get; }
-        public PInvokeILStubMethodIL(ILStubMethodIL methodIL, bool isStubRequired) : base(methodIL)
+
+        public PInvokeILStubMethodIL(ILStubMethodIL methodIL, bool isStubRequired)
+            : base(methodIL)
         {
             IsStubRequired = isStubRequired;
         }

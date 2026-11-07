@@ -25,7 +25,10 @@ namespace System.Xml.Xsl
     {
         private readonly bool _exclude;
         private const string wildcard = "*";
-        private static readonly XmlQualifiedNameTest s_wc = XmlQualifiedNameTest.New(wildcard, wildcard);
+        private static readonly XmlQualifiedNameTest s_wc = XmlQualifiedNameTest.New(
+            wildcard,
+            wildcard
+        );
 
         /// <summary>
         /// Full wildcard
@@ -38,7 +41,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Constructor
         /// </summary>
-        private XmlQualifiedNameTest(string? name, string? ns, bool exclude) : base(name, ns)
+        private XmlQualifiedNameTest(string? name, string? ns, bool exclude)
+            : base(name, ns)
         {
             _exclude = exclude;
         }
@@ -108,7 +112,8 @@ namespace System.Xml.Xsl
         /// </summary>
         public bool HasIntersection(XmlQualifiedNameTest other)
         {
-            return (IsNamespaceSubsetOf(other) || other.IsNamespaceSubsetOf(this)) && (IsNameSubsetOf(other) || other.IsNameSubsetOf(this));
+            return (IsNamespaceSubsetOf(other) || other.IsNamespaceSubsetOf(this))
+                && (IsNameSubsetOf(other) || other.IsNameSubsetOf(this));
         }
 
         /// <summary>
@@ -145,11 +150,14 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Construct new from XmlQualifiedName. Returns singleton Wildcard in case full wildcard
         /// </summary>
-        public static XmlQualifiedNameTest New(XmlQualifiedName name) {
-            if (name.IsEmpty) {
+        public static XmlQualifiedNameTest New(XmlQualifiedName name)
+        {
+            if (name.IsEmpty)
+            {
                 return Wildcard;
             }
-            else {
+            else
+            {
                 return new XmlQualifiedNameTest(name.Name, name.Namespace, false);
             }
         }
@@ -157,7 +165,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Construct new "exclusion" name test
         /// </summary>
-        public static XmlQualifiedNameTest New(string ns, bool exclude) {
+        public static XmlQualifiedNameTest New(string ns, bool exclude)
+        {
             Debug.Assert(ns != null);
             return new XmlQualifiedNameTest(wildcard, ns, exclude);
         }
@@ -165,37 +174,58 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Return the result of intersection with other
         /// </summary>
-        public XmlQualifiedNameTest Intersect(XmlQualifiedNameTest other) {
+        public XmlQualifiedNameTest Intersect(XmlQualifiedNameTest other)
+        {
             // Namespace
             // this\other   ~y                          *               y
             //        ~x    x=y ? this|other : null     this            x!=y ? other : null
             //         *    other                       this|other      other
             //         x    x!=y ? this : null          this            x=y ? this|other : null
-            XmlQualifiedNameTest namespaceFrom = IsNamespaceSubsetOf(other) ? this : other.IsNamespaceSubsetOf(this) ? other : null;
-            XmlQualifiedNameTest nameFrom = IsNameSubsetOf(other) ? this : other.IsNameSubsetOf(this) ? other : null;
+            XmlQualifiedNameTest namespaceFrom =
+                IsNamespaceSubsetOf(other) ? this
+                : other.IsNamespaceSubsetOf(this) ? other
+                : null;
+            XmlQualifiedNameTest nameFrom =
+                IsNameSubsetOf(other) ? this
+                : other.IsNameSubsetOf(this) ? other
+                : null;
 
-            if ((object)namespaceFrom == (object)nameFrom) {
+            if ((object)namespaceFrom == (object)nameFrom)
+            {
                 return namespaceFrom;
             }
-            else if (namespaceFrom == null || nameFrom == null) {
+            else if (namespaceFrom == null || nameFrom == null)
+            {
                 return null;
             }
-            else {
-                return new XmlQualifiedNameTest(nameFrom.Name, namespaceFrom.Namespace, namespaceFrom.ExcludeNamespace);
+            else
+            {
+                return new XmlQualifiedNameTest(
+                    nameFrom.Name,
+                    namespaceFrom.Namespace,
+                    namespaceFrom.ExcludeNamespace
+                );
             }
         }
 
         /// <summary>
         /// True if neither name nor namespace is a wildcard
         /// </summary>
-        public bool IsSingleName {
-            get { return (object)this.Name != (object)wildcard && (object)this.Namespace != (object)wildcard  && this.exclude == false; }
+        public bool IsSingleName
+        {
+            get
+            {
+                return (object)this.Name != (object)wildcard
+                    && (object)this.Namespace != (object)wildcard
+                    && this.exclude == false;
+            }
         }
 
         /// <summary>
         /// True if matches any namespace other then this.Namespace
         /// </summary>
-        public bool ExcludeNamespace {
+        public bool ExcludeNamespace
+        {
             get { return this.exclude; }
         }
 #endif

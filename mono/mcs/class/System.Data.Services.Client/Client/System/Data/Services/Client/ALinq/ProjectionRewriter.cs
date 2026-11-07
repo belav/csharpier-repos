@@ -1,14 +1,13 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -41,10 +40,22 @@ namespace System.Data.Services.Client
 
         #region Internal methods.
 
-        internal static LambdaExpression TryToRewrite(LambdaExpression le, Type proposedParameterType)
+        internal static LambdaExpression TryToRewrite(
+            LambdaExpression le,
+            Type proposedParameterType
+        )
         {
             LambdaExpression result;
-            if (!ResourceBinder.PatternRules.MatchSingleArgumentLambda(le, out le) ||                ClientType.CheckElementTypeIsEntity(le.Parameters[0].Type) ||                !(le.Parameters[0].Type.GetProperties().Any(p => p.PropertyType == proposedParameterType)))            {
+            if (
+                !ResourceBinder.PatternRules.MatchSingleArgumentLambda(le, out le)
+                || ClientType.CheckElementTypeIsEntity(le.Parameters[0].Type)
+                || !(
+                    le.Parameters[0]
+                        .Type.GetProperties()
+                        .Any(p => p.PropertyType == proposedParameterType)
+                )
+            )
+            {
                 result = le;
             }
             else
@@ -64,11 +75,21 @@ namespace System.Data.Services.Client
             Expression body = this.Visit(lambda.Body);
             if (this.sucessfulRebind)
             {
-                Type delegateType = typeof(Func<,>).MakeGenericType(new Type[] { newLambdaParameter.Type, lambda.Body.Type });
+                Type delegateType = typeof(Func<,>).MakeGenericType(
+                    new Type[] { newLambdaParameter.Type, lambda.Body.Type }
+                );
 #if ASTORIA_LIGHT
-                return ExpressionHelpers.CreateLambda(delegateType, body, new ParameterExpression[] { this.newLambdaParameter });
+                return ExpressionHelpers.CreateLambda(
+                    delegateType,
+                    body,
+                    new ParameterExpression[] { this.newLambdaParameter }
+                );
 #else
-                return Expression.Lambda(delegateType, body, new ParameterExpression[] { this.newLambdaParameter });
+                return Expression.Lambda(
+                    delegateType,
+                    body,
+                    new ParameterExpression[] { this.newLambdaParameter }
+                );
 #endif
             }
             else

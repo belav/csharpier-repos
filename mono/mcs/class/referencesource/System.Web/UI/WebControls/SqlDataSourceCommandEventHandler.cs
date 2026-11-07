@@ -1,14 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="SqlDataSourceCommandEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
 
-
-    public delegate void SqlDataSourceCommandEventHandler(object sender, SqlDataSourceCommandEventArgs e);
+    public delegate void SqlDataSourceCommandEventHandler(
+        object sender,
+        SqlDataSourceCommandEventArgs e
+    );
 }
-

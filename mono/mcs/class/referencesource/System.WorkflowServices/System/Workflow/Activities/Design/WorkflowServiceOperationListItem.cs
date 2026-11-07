@@ -19,22 +19,13 @@ namespace System.Workflow.Activities.Design
 
         public override String ContractName
         {
-            get
-            {
-                return this.operation.ContractName;
-            }
+            get { return this.operation.ContractName; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.operation.Name;
-            }
-            set
-            {
-                this.operation.Name = value;
-            }
+            get { return this.operation.Name; }
+            set { this.operation.Name = value; }
         }
         public OperationInfo Operation
         {

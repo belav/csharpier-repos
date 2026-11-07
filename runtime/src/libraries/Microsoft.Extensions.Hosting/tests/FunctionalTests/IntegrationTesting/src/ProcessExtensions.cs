@@ -11,7 +11,9 @@ namespace Microsoft.Extensions.Internal
 {
     internal static class ProcessExtensions
     {
-        private static readonly bool _isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        private static readonly bool _isWindows = RuntimeInformation.IsOSPlatform(
+            OSPlatform.Windows
+        );
         private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(30);
 
         public static void KillTree(this Process process) => process.KillTree(_defaultTimeout);
@@ -21,11 +23,7 @@ namespace Microsoft.Extensions.Internal
             var pid = process.Id;
             if (_isWindows)
             {
-                RunProcessAndWaitForExit(
-                    "taskkill",
-                    $"/T /F /PID {pid}",
-                    timeout,
-                    out var _);
+                RunProcessAndWaitForExit("taskkill", $"/T /F /PID {pid}", timeout, out var _);
             }
             else
             {
@@ -41,11 +39,7 @@ namespace Microsoft.Extensions.Internal
 
         private static void GetAllChildIdsUnix(int parentId, ISet<int> children, TimeSpan timeout)
         {
-            RunProcessAndWaitForExit(
-                "pgrep",
-                $"-P {parentId}",
-                timeout,
-                out var stdout);
+            RunProcessAndWaitForExit("pgrep", $"-P {parentId}", timeout, out var stdout);
 
             if (!string.IsNullOrEmpty(stdout))
             {
@@ -72,14 +66,15 @@ namespace Microsoft.Extensions.Internal
 
         private static void KillProcessUnix(int processId, TimeSpan timeout)
         {
-            RunProcessAndWaitForExit(
-                "kill",
-                $"-TERM {processId}",
-                timeout,
-                out var stdout);
+            RunProcessAndWaitForExit("kill", $"-TERM {processId}", timeout, out var stdout);
         }
 
-        private static void RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string stdout)
+        private static void RunProcessAndWaitForExit(
+            string fileName,
+            string arguments,
+            TimeSpan timeout,
+            out string stdout
+        )
         {
             var startInfo = new ProcessStartInfo
             {

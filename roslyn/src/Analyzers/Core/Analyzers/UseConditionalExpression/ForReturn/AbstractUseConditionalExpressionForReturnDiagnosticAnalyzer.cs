@@ -8,27 +8,41 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.UseConditionalExpression
 {
-    internal abstract class AbstractUseConditionalExpressionForReturnDiagnosticAnalyzer<
-        TIfStatementSyntax>
+    internal abstract class AbstractUseConditionalExpressionForReturnDiagnosticAnalyzer<TIfStatementSyntax>
         : AbstractUseConditionalExpressionDiagnosticAnalyzer<TIfStatementSyntax>
         where TIfStatementSyntax : SyntaxNode
     {
         protected AbstractUseConditionalExpressionForReturnDiagnosticAnalyzer(
-            LocalizableResourceString message)
-            : base(IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId,
-                   EnforceOnBuildValues.UseConditionalExpressionForReturn,
-                   message,
-                   CodeStyleOptions2.PreferConditionalExpressionOverReturn)
-        {
-        }
+            LocalizableResourceString message
+        )
+            : base(
+                IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId,
+                EnforceOnBuildValues.UseConditionalExpressionForReturn,
+                message,
+                CodeStyleOptions2.PreferConditionalExpressionOverReturn
+            ) { }
 
-        protected sealed override CodeStyleOption2<bool> GetStylePreference(OperationAnalysisContext context)
-            => context.GetAnalyzerOptions().PreferConditionalExpressionOverReturn;
+        protected sealed override CodeStyleOption2<bool> GetStylePreference(
+            OperationAnalysisContext context
+        ) => context.GetAnalyzerOptions().PreferConditionalExpressionOverReturn;
 
-        protected override (bool matched, bool canSimplify) TryMatchPattern(IConditionalOperation ifOperation, ISymbol containingSymbol)
+        protected override (bool matched, bool canSimplify) TryMatchPattern(
+            IConditionalOperation ifOperation,
+            ISymbol containingSymbol
+        )
         {
-            if (!UseConditionalExpressionForReturnHelpers.TryMatchPattern(
-                    GetSyntaxFacts(), ifOperation, containingSymbol, out var isRef, out var trueStatement, out var falseStatement, out var trueReturn, out var falseReturn))
+            if (
+                !UseConditionalExpressionForReturnHelpers.TryMatchPattern(
+                    GetSyntaxFacts(),
+                    ifOperation,
+                    containingSymbol,
+                    out var isRef,
+                    out var trueStatement,
+                    out var falseStatement,
+                    out var trueReturn,
+                    out var falseReturn
+                )
+            )
             {
                 return default;
             }
@@ -37,7 +51,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 trueReturn?.ReturnedValue ?? trueStatement,
                 falseReturn?.ReturnedValue ?? falseStatement,
                 isRef,
-                out _);
+                out _
+            );
 
             return (matched: true, canSimplify);
         }

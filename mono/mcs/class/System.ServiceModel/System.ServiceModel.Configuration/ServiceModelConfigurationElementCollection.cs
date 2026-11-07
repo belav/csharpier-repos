@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,93 +30,104 @@ using System.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract class ServiceModelConfigurationElementCollection<ConfigurationElementType> : ConfigurationElementCollection
-		where ConfigurationElementType : ConfigurationElement, new()
-	{
-		internal ServiceModelConfigurationElementCollection ()
-			: base (StringComparer.Ordinal)
-		{
-		}
+    public abstract class ServiceModelConfigurationElementCollection<ConfigurationElementType>
+        : ConfigurationElementCollection
+        where ConfigurationElementType : ConfigurationElement, new()
+    {
+        internal ServiceModelConfigurationElementCollection()
+            : base(StringComparer.Ordinal) { }
 
-		public ConfigurationElementType this [int index] {
-			get { return (ConfigurationElementType) base.BaseGet (index); }
-			set {
-				if (Count <= index)
-					throw new ArgumentOutOfRangeException (String.Format ("Index is out of range: {0}", index), "index");
-				BaseRemoveAt (index);
-				BaseAdd (index, value);
-			}
-		}
+        public ConfigurationElementType this[int index]
+        {
+            get { return (ConfigurationElementType)base.BaseGet(index); }
+            set
+            {
+                if (Count <= index)
+                    throw new ArgumentOutOfRangeException(
+                        String.Format("Index is out of range: {0}", index),
+                        "index"
+                    );
+                BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
-		public virtual ConfigurationElementType this [object key] {
-			get {
-				return (ConfigurationElementType) BaseGet (key);
-			}
-			set {
-				if (!GetElementKey(value).Equals (key))
-					throw new ArgumentException (String.Format ("The key '{0}' does not match the element key '{1}'", key, GetElementKey(value)));
-				Add (value);
-			}
-		}
+        public virtual ConfigurationElementType this[object key]
+        {
+            get { return (ConfigurationElementType)BaseGet(key); }
+            set
+            {
+                if (!GetElementKey(value).Equals(key))
+                    throw new ArgumentException(
+                        String.Format(
+                            "The key '{0}' does not match the element key '{1}'",
+                            key,
+                            GetElementKey(value)
+                        )
+                    );
+                Add(value);
+            }
+        }
 
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.AddRemoveClearMap; }
-		}
+        public override ConfigurationElementCollectionType CollectionType
+        {
+            get { return ConfigurationElementCollectionType.AddRemoveClearMap; }
+        }
 
-		protected override string ElementName {
-			get {
-				return AddElementName;
-			}
-		}
+        protected override string ElementName
+        {
+            get { return AddElementName; }
+        }
 
-		public void Add (ConfigurationElementType element)
-		{
-			BaseAdd (element);
-		}
+        public void Add(ConfigurationElementType element)
+        {
+            BaseAdd(element);
+        }
 
-		protected override void BaseAdd (ConfigurationElement element)
-		{
-			BaseAdd (element, false);
-		}
+        protected override void BaseAdd(ConfigurationElement element)
+        {
+            BaseAdd(element, false);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		public virtual bool ContainsKey (object key)
-		{
-			return BaseGet (key) != null;
-		}
+        public virtual bool ContainsKey(object key)
+        {
+            return BaseGet(key) != null;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return (ConfigurationElement) Activator.CreateInstance (typeof (ConfigurationElementType), new object [0]);
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return (ConfigurationElement)
+                Activator.CreateInstance(typeof(ConfigurationElementType), new object[0]);
+        }
 
-		public void CopyTo (ConfigurationElementType [] array, int start)
-		{
-			base.CopyTo (array, start);
-		}
+        public void CopyTo(ConfigurationElementType[] array, int start)
+        {
+            base.CopyTo(array, start);
+        }
 
-		public int IndexOf (ConfigurationElementType element)
-		{
-			return BaseIndexOf (element);
-		}
+        public int IndexOf(ConfigurationElementType element)
+        {
+            return BaseIndexOf(element);
+        }
 
-		public void Remove (ConfigurationElementType element)
-		{
-			BaseRemove (GetElementKey (element));
-		}
+        public void Remove(ConfigurationElementType element)
+        {
+            BaseRemove(GetElementKey(element));
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		public void RemoveAt (object key)
-		{
-			BaseRemove (key);
-		}
-	}
+        public void RemoveAt(object key)
+        {
+            BaseRemove(key);
+        }
+    }
 }

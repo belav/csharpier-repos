@@ -28,29 +28,17 @@ internal static partial class Interop
             void SetSize(ulong libNewSize);
 
             // pcbRead and pcbWritten are optional
-            unsafe HRESULT CopyTo(
-                IntPtr pstm,
-                ulong cb,
-                ulong* pcbRead,
-                ulong* pcbWritten);
+            unsafe HRESULT CopyTo(IntPtr pstm, ulong cb, ulong* pcbRead, ulong* pcbWritten);
 
             void Commit(uint grfCommitFlags);
 
             void Revert();
 
-            HRESULT LockRegion(
-                ulong libOffset,
-                ulong cb,
-                uint dwLockType);
+            HRESULT LockRegion(ulong libOffset, ulong cb, uint dwLockType);
 
-            HRESULT UnlockRegion(
-                ulong libOffset,
-                ulong cb,
-                uint dwLockType);
+            HRESULT UnlockRegion(ulong libOffset, ulong cb, uint dwLockType);
 
-            unsafe void Stat(
-                STATSTG* pstatstg,
-                STATFLAG grfStatFlag);
+            unsafe void Stat(STATSTG* pstatstg, STATFLAG grfStatFlag);
 
             unsafe HRESULT Clone(IntPtr* ppstm);
         }

@@ -60,7 +60,6 @@ namespace Microsoft.Win32.RegistryTests
         {
             new object[] { @"Foo", @"Foo" },
             new object[] { @"Foo\Bar", @"Foo\Bar" },
-
             // Multiple/trailing slashes should be removed.
             new object[] { @"Foo", @"Foo\" },
             new object[] { @"Foo", @"Foo\\" },
@@ -77,7 +76,6 @@ namespace Microsoft.Win32.RegistryTests
             new object[] { @"Foo\Bar", @"Foo\\Bar\\\" },
             new object[] { @"Foo\Bar", @"Foo\\\Bar\\\" },
             new object[] { @"Foo\Bar", @"Foo\\\\Bar\\\\" },
-
             // The name fix-up implementation uses a mark-and-sweep approach.
             // If there are multiple slashes, any extra slash chars will be
             // replaced with a marker char ('\uffff'), and then all '\uffff'
@@ -115,7 +113,6 @@ namespace Microsoft.Win32.RegistryTests
             InsertMarkerChar(@"Foo\Bar", @"Foo\Bar\\{0}"),
             InsertMarkerChar(@"Foo\Bar", @"Fo{0}o\B{0}ar\\"),
             InsertMarkerChar(@"Foo\Bar", @"{0}Fo{0}o{0}\{0}B{0}ar{0}\\{0}"),
-
             // If there aren't multiple slashes, any '\uffff' chars should remain.
             InsertMarkerChar(@"{0}Foo"),
             InsertMarkerChar(@"Foo{0}"),

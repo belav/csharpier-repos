@@ -13,7 +13,10 @@ class Program
 {
     static int Main(string[] args)
     {
-        TypeDescriptor.AddAttributes(typeof(string), new TypeConverterAttribute(typeof(MyStringConverter)));
+        TypeDescriptor.AddAttributes(
+            typeof(string),
+            new TypeConverterAttribute(typeof(MyStringConverter))
+        );
 
         var attribute = new DefaultValueAttribute(typeof(string), "Hello, world!");
         return (string)attribute.Value == "Hello, world!trivia" ? 100 : -1;
@@ -24,7 +27,11 @@ class Program
         /// <summary>
         /// Converts the specified value object to a string object.
         /// </summary>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string)
             {

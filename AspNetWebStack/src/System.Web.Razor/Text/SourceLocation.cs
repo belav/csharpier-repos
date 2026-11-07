@@ -42,7 +42,13 @@ namespace System.Web.Razor.Text
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, "({0}:{1},{2})", AbsoluteIndex, LineIndex, CharacterIndex);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "({0}:{1},{2})",
+                AbsoluteIndex,
+                LineIndex,
+                CharacterIndex
+            );
         }
 
         public override bool Equals(object obj)
@@ -58,9 +64,9 @@ namespace System.Web.Razor.Text
 
         public bool Equals(SourceLocation other)
         {
-            return AbsoluteIndex == other.AbsoluteIndex &&
-                   LineIndex == other.LineIndex &&
-                   CharacterIndex == other.CharacterIndex;
+            return AbsoluteIndex == other.AbsoluteIndex
+                && LineIndex == other.LineIndex
+                && CharacterIndex == other.CharacterIndex;
         }
 
         public int CompareTo(SourceLocation other)
@@ -80,19 +86,31 @@ namespace System.Web.Razor.Text
             if (right.LineIndex > 0)
             {
                 // Column index doesn't matter
-                return new SourceLocation(left.AbsoluteIndex + right.AbsoluteIndex, left.LineIndex + right.LineIndex, right.CharacterIndex);
+                return new SourceLocation(
+                    left.AbsoluteIndex + right.AbsoluteIndex,
+                    left.LineIndex + right.LineIndex,
+                    right.CharacterIndex
+                );
             }
             else
             {
-                return new SourceLocation(left.AbsoluteIndex + right.AbsoluteIndex, left.LineIndex + right.LineIndex, left.CharacterIndex + right.CharacterIndex);
+                return new SourceLocation(
+                    left.AbsoluteIndex + right.AbsoluteIndex,
+                    left.LineIndex + right.LineIndex,
+                    left.CharacterIndex + right.CharacterIndex
+                );
             }
         }
 
         public static SourceLocation Subtract(SourceLocation left, SourceLocation right)
         {
-            return new SourceLocation(left.AbsoluteIndex - right.AbsoluteIndex,
-                                      left.LineIndex - right.LineIndex,
-                                      left.LineIndex != right.LineIndex ? left.CharacterIndex : left.CharacterIndex - right.CharacterIndex);
+            return new SourceLocation(
+                left.AbsoluteIndex - right.AbsoluteIndex,
+                left.LineIndex - right.LineIndex,
+                left.LineIndex != right.LineIndex
+                    ? left.CharacterIndex
+                    : left.CharacterIndex - right.CharacterIndex
+            );
         }
 
         private static SourceLocation CreateUndefined()

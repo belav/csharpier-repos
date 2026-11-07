@@ -52,9 +52,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 //  * The owner window has the WS_POPUP style
                 // GetWindow with GW_OWNER specified will return the owner window, but not the parent window
                 // GetAncestor with GA_PARENT specified will return the parent window, but not the owner window
-                if ((NativeMethods.GetParent(topLevelWindow) == parentWindow) ||
-                    (NativeMethods.GetWindow(topLevelWindow, NativeMethods.GW_OWNER) == parentWindow) ||
-                    (NativeMethods.GetAncestor(topLevelWindow, NativeMethods.GA_PARENT) == parentWindow))
+                if (
+                    (NativeMethods.GetParent(topLevelWindow) == parentWindow)
+                    || (
+                        NativeMethods.GetWindow(topLevelWindow, NativeMethods.GW_OWNER)
+                        == parentWindow
+                    )
+                    || (
+                        NativeMethods.GetAncestor(topLevelWindow, NativeMethods.GA_PARENT)
+                        == parentWindow
+                    )
+                )
                 {
                     return topLevelWindow;
                 }
@@ -71,7 +79,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </remarks>
         public static string GetTitleForWindow(IntPtr window)
         {
-            var titleLength = NativeMethods.SendMessage(window, NativeMethods.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+            var titleLength = NativeMethods.SendMessage(
+                window,
+                NativeMethods.WM_GETTEXTLENGTH,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
 
             if (titleLength == IntPtr.Zero)
             {
@@ -80,7 +93,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             var title = new StringBuilder(titleLength.ToInt32() + 1);
 
-            NativeMethods.SendMessage(window, NativeMethods.WM_GETTEXT, (IntPtr)(title.Capacity), title);
+            NativeMethods.SendMessage(
+                window,
+                NativeMethods.WM_GETTEXT,
+                (IntPtr)(title.Capacity),
+                title
+            );
             return title.ToString();
         }
 
@@ -88,11 +106,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             var topLevelWindows = new List<IntPtr>();
 
-            var enumFunc = new NativeMethods.WNDENUMPROC((hWnd, lParam) =>
-            {
-                topLevelWindows.Add(hWnd);
-                return true;
-            });
+            var enumFunc = new NativeMethods.WNDENUMPROC(
+                (hWnd, lParam) =>
+                {
+                    topLevelWindows.Add(hWnd);
+                    return true;
+                }
+            );
 
             var success = NativeMethods.EnumWindows(enumFunc, IntPtr.Zero);
 

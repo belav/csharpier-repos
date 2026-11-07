@@ -43,7 +43,11 @@ namespace System.Activities.DurableInstancing
             using (MemoryStream memoryStream = new MemoryStream(4096))
             {
                 this.SerializePropertyBag(memoryStream, value);
-                return new ArraySegment<byte>(memoryStream.GetBuffer(), 0, Convert.ToInt32(memoryStream.Length));
+                return new ArraySegment<byte>(
+                    memoryStream.GetBuffer(),
+                    0,
+                    Convert.ToInt32(memoryStream.Length)
+                );
             }
         }
 
@@ -52,13 +56,22 @@ namespace System.Activities.DurableInstancing
             using (MemoryStream memoryStream = new MemoryStream(4096))
             {
                 this.SerializeValue(memoryStream, value);
-                return new ArraySegment<byte>(memoryStream.GetBuffer(), 0, Convert.ToInt32(memoryStream.Length));
+                return new ArraySegment<byte>(
+                    memoryStream.GetBuffer(),
+                    0,
+                    Convert.ToInt32(memoryStream.Length)
+                );
             }
         }
 
         protected virtual Dictionary<XName, object> DeserializePropertyBag(Stream stream)
         {
-            using (XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateBinaryReader(stream, XmlDictionaryReaderQuotas.Max))
+            using (
+                XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateBinaryReader(
+                    stream,
+                    XmlDictionaryReaderQuotas.Max
+                )
+            )
             {
                 Dictionary<XName, object> propertyBag = new Dictionary<XName, object>();
 
@@ -67,10 +80,11 @@ namespace System.Activities.DurableInstancing
                     do
                     {
                         dictionaryReader.Read();
-                        KeyValuePair<XName, object> property = (KeyValuePair<XName, object>) this.serializer.ReadObject(dictionaryReader);
+                        KeyValuePair<XName, object> property =
+                            (KeyValuePair<XName, object>)
+                                this.serializer.ReadObject(dictionaryReader);
                         propertyBag.Add(property.Key, property.Value);
-                    }
-                    while (dictionaryReader.ReadToNextSibling("Property"));
+                    } while (dictionaryReader.ReadToNextSibling("Property"));
                 }
 
                 return propertyBag;
@@ -79,15 +93,30 @@ namespace System.Activities.DurableInstancing
 
         protected virtual object DeserializeValue(Stream stream)
         {
-            using (XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateBinaryReader(stream, XmlDictionaryReaderQuotas.Max))
+            using (
+                XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateBinaryReader(
+                    stream,
+                    XmlDictionaryReaderQuotas.Max
+                )
+            )
             {
                 return this.serializer.ReadObject(dictionaryReader);
             }
         }
 
-        protected virtual void SerializePropertyBag(Stream stream, Dictionary<XName, object> propertyBag)
+        protected virtual void SerializePropertyBag(
+            Stream stream,
+            Dictionary<XName, object> propertyBag
+        )
         {
-            using (XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateBinaryWriter(stream, null, null, false))
+            using (
+                XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateBinaryWriter(
+                    stream,
+                    null,
+                    null,
+                    false
+                )
+            )
             {
                 dictionaryWriter.WriteStartElement("Properties");
 
@@ -104,7 +133,14 @@ namespace System.Activities.DurableInstancing
 
         protected virtual void SerializeValue(Stream stream, object value)
         {
-            using (XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateBinaryWriter(stream, null, null, false))
+            using (
+                XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateBinaryWriter(
+                    stream,
+                    null,
+                    null,
+                    false
+                )
+            )
             {
                 this.serializer.WriteObject(dictionaryWriter, value);
             }

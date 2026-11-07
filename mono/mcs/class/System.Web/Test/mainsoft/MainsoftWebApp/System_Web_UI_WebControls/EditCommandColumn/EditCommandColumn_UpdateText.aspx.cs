@@ -28,163 +28,178 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class EditCommandColumn_UpdateText
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.DataGrid DataGrid2;
-		protected GHTWebControls.GHTSubTest Ghtsubtest2;
-		protected System.Web.UI.WebControls.DataGrid DataGrid3;
-		protected GHTWebControls.GHTSubTest Ghtsubtest3;
-		protected System.Web.UI.WebControls.DataGrid DataGrid4;
-		protected GHTWebControls.GHTSubTest Ghtsubtest4;
-		protected System.Web.UI.WebControls.DataGrid DataGrid5;
-		protected GHTWebControls.GHTSubTest Ghtsubtest5;
-		protected System.Web.UI.WebControls.DataGrid DataGrid6;
-		protected GHTWebControls.GHTSubTest Ghtsubtest6;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class EditCommandColumn_UpdateText : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
+        protected GHTWebControls.GHTSubTest Ghtsubtest2;
+        protected System.Web.UI.WebControls.DataGrid DataGrid3;
+        protected GHTWebControls.GHTSubTest Ghtsubtest3;
+        protected System.Web.UI.WebControls.DataGrid DataGrid4;
+        protected GHTWebControls.GHTSubTest Ghtsubtest4;
+        protected System.Web.UI.WebControls.DataGrid DataGrid5;
+        protected GHTWebControls.GHTSubTest Ghtsubtest5;
+        protected System.Web.UI.WebControls.DataGrid DataGrid6;
+        protected GHTWebControls.GHTSubTest Ghtsubtest6;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
-				System.Web.UI.WebControls.EditCommandColumn c_edit = new System.Web.UI.WebControls.EditCommandColumn();
-				System.Web.UI.WebControls.BoundColumn c_company = new System.Web.UI.WebControls.BoundColumn();
-				c_edit.EditText = "edit this row";
-				c_edit.UpdateText = "";
-				c_edit.ButtonType = ButtonColumnType.LinkButton;
-				c_company.DataField = "Company";
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-				DataGrid1.Columns.Add(c_edit);
-				DataGrid1.Columns.Add(c_company);
-				DataGrid1.EditItemIndex = 2;
-				DataGrid1.DataBind();;
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
+                System.Web.UI.WebControls.EditCommandColumn c_edit =
+                    new System.Web.UI.WebControls.EditCommandColumn();
+                System.Web.UI.WebControls.BoundColumn c_company =
+                    new System.Web.UI.WebControls.BoundColumn();
+                c_edit.EditText = "edit this row";
+                c_edit.UpdateText = "";
+                c_edit.ButtonType = ButtonColumnType.LinkButton;
+                c_company.DataField = "Company";
 
-				GHTSubTestAddResult(c_edit.UpdateText);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+                DataGrid1.Columns.Add(c_edit);
+                DataGrid1.Columns.Add(c_company);
+                DataGrid1.EditItemIndex = 2;
+                DataGrid1.DataBind();
+                ;
 
-			GHTActiveSubTest = Ghtsubtest2;
-			try 
-			{
-				DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable();
-				System.Web.UI.WebControls.EditCommandColumn c_edit = new System.Web.UI.WebControls.EditCommandColumn();
-				System.Web.UI.WebControls.BoundColumn c_company = new System.Web.UI.WebControls.BoundColumn();
-				c_edit.EditText = "edit this row";
-				c_edit.UpdateText = "update edit this row";
-				c_company.DataField = "Company";
+                GHTSubTestAddResult(c_edit.UpdateText);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-				DataGrid2.Columns.Add(c_edit);
-				DataGrid2.Columns.Add(c_company);
-				DataGrid2.EditItemIndex = 2;
-				DataGrid2.DataBind();;
-				GHTSubTestAddResult(c_edit.UpdateText);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest2;
+            try
+            {
+                DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable();
+                System.Web.UI.WebControls.EditCommandColumn c_edit =
+                    new System.Web.UI.WebControls.EditCommandColumn();
+                System.Web.UI.WebControls.BoundColumn c_company =
+                    new System.Web.UI.WebControls.BoundColumn();
+                c_edit.EditText = "edit this row";
+                c_edit.UpdateText = "update edit this row";
+                c_company.DataField = "Company";
 
-			GHTActiveSubTest = Ghtsubtest3;
-			try 
-			{
-				DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable();
-				System.Web.UI.WebControls.EditCommandColumn c_edit = new System.Web.UI.WebControls.EditCommandColumn();
-				System.Web.UI.WebControls.BoundColumn c_company = new System.Web.UI.WebControls.BoundColumn();
-				c_edit.EditText = "edit this row";
-				c_edit.UpdateText = "update text with !@#$%^&*()_+_+";
-				c_company.DataField = "Company";
+                DataGrid2.Columns.Add(c_edit);
+                DataGrid2.Columns.Add(c_company);
+                DataGrid2.EditItemIndex = 2;
+                DataGrid2.DataBind();
+                ;
+                GHTSubTestAddResult(c_edit.UpdateText);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-				DataGrid3.Columns.Add(c_edit);
-				DataGrid3.Columns.Add(c_company);
-				DataGrid3.EditItemIndex = 2;
-				DataGrid3.DataBind();;
-				GHTSubTestAddResult(c_edit.UpdateText);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest3;
+            try
+            {
+                DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable();
+                System.Web.UI.WebControls.EditCommandColumn c_edit =
+                    new System.Web.UI.WebControls.EditCommandColumn();
+                System.Web.UI.WebControls.BoundColumn c_company =
+                    new System.Web.UI.WebControls.BoundColumn();
+                c_edit.EditText = "edit this row";
+                c_edit.UpdateText = "update text with !@#$%^&*()_+_+";
+                c_company.DataField = "Company";
 
-			GHTActiveSubTest = Ghtsubtest4;
-			try 
-			{
-				DataGrid4.DataSource = GHTTests.GHDataSources.DSDataTable();
-				DataGrid4.EditItemIndex = 2;
-				DataGrid4.DataBind();;
-				GHTSubTestAddResult(( (System.Web.UI.WebControls.EditCommandColumn)DataGrid4.Columns[0]).UpdateText);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+                DataGrid3.Columns.Add(c_edit);
+                DataGrid3.Columns.Add(c_company);
+                DataGrid3.EditItemIndex = 2;
+                DataGrid3.DataBind();
+                ;
+                GHTSubTestAddResult(c_edit.UpdateText);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest5;
-			try 
-			{
-				DataGrid5.DataSource = GHTTests.GHDataSources.DSDataTable();
-				DataGrid5.EditItemIndex = 2;
-				DataGrid5.DataBind();
-				GHTSubTestAddResult(( (System.Web.UI.WebControls.EditCommandColumn)DataGrid5.Columns[0]).UpdateText);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest4;
+            try
+            {
+                DataGrid4.DataSource = GHTTests.GHDataSources.DSDataTable();
+                DataGrid4.EditItemIndex = 2;
+                DataGrid4.DataBind();
+                ;
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.EditCommandColumn)DataGrid4.Columns[0]).UpdateText
+                );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest6;
-			try 
-			{
-				DataGrid6.DataSource = GHTTests.GHDataSources.DSDataTable();
-				DataGrid6.EditItemIndex = 2;
-				DataGrid6.DataBind();
-				GHTSubTestAddResult(( (System.Web.UI.WebControls.EditCommandColumn)DataGrid6.Columns[0]).UpdateText);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest5;
+            try
+            {
+                DataGrid5.DataSource = GHTTests.GHDataSources.DSDataTable();
+                DataGrid5.EditItemIndex = 2;
+                DataGrid5.DataBind();
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.EditCommandColumn)DataGrid5.Columns[0]).UpdateText
+                );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
-	}
+            GHTActiveSubTest = Ghtsubtest6;
+            try
+            {
+                DataGrid6.DataSource = GHTTests.GHDataSources.DSDataTable();
+                DataGrid6.EditItemIndex = 2;
+                DataGrid6.DataBind();
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.EditCommandColumn)DataGrid6.Columns[0]).UpdateText
+                );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+
+            GHTTestEnd();
+        }
+    }
 }

@@ -13,25 +13,31 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.AddPackage
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddPackage), Shared]
-    internal class CSharpAddSpecificPackageCodeFixProvider : AbstractAddSpecificPackageCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddPackage
+        ),
+        Shared
+    ]
+    internal class CSharpAddSpecificPackageCodeFixProvider
+        : AbstractAddSpecificPackageCodeFixProvider
     {
         private const string CS8179 = nameof(CS8179); // Predefined type 'System.ValueTuple`2' is not defined or imported
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddSpecificPackageCodeFixProvider()
-        {
-        }
+        public CSharpAddSpecificPackageCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(CS8179);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8179);
 
         protected override string GetAssemblyName(string id)
         {
             switch (id)
             {
-                case CS8179: return "System.ValueTuple";
+                case CS8179:
+                    return "System.ValueTuple";
             }
 
             return null;

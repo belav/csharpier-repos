@@ -4,13 +4,13 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.Collections;
+    using System.IO;
     using System.ServiceModel.Channels;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Collections;
-    using System.Text;
-    using System.IO;
 
     [XmlSchemaProvider("GetSchema")]
     [XmlRoot(AddressingStrings.EndpointReference, Namespace = Addressing200408Strings.Namespace)]
@@ -47,12 +47,18 @@ namespace System.ServiceModel
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            this.address = EndpointAddress.ReadFrom(AddressingVersion.WSAddressingAugust2004, XmlDictionaryReader.CreateDictionaryReader(reader));
+            this.address = EndpointAddress.ReadFrom(
+                AddressingVersion.WSAddressingAugust2004,
+                XmlDictionaryReader.CreateDictionaryReader(reader)
+            );
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            this.address.WriteContentsTo(AddressingVersion.WSAddressingAugust2004, XmlDictionaryWriter.CreateDictionaryWriter(writer));
+            this.address.WriteContentsTo(
+                AddressingVersion.WSAddressingAugust2004,
+                XmlDictionaryWriter.CreateDictionaryWriter(writer)
+            );
         }
 
         static XmlQualifiedName EprType
@@ -60,14 +66,22 @@ namespace System.ServiceModel
             get
             {
                 if (eprType == null)
-                    eprType = new XmlQualifiedName(AddressingStrings.EndpointReferenceType, Addressing200408Strings.Namespace);
+                    eprType = new XmlQualifiedName(
+                        AddressingStrings.EndpointReferenceType,
+                        Addressing200408Strings.Namespace
+                    );
                 return eprType;
             }
         }
 
         static XmlSchema GetEprSchema()
         {
-            using (XmlTextReader reader = new XmlTextReader(new StringReader(Schema)) { DtdProcessing = DtdProcessing.Prohibit })
+            using (
+                XmlTextReader reader = new XmlTextReader(new StringReader(Schema))
+                {
+                    DtdProcessing = DtdProcessing.Prohibit,
+                }
+            )
             {
                 return XmlSchema.Read(reader, null);
             }
@@ -113,7 +127,7 @@ namespace System.ServiceModel
         }
 
         const string Schema =
-@"<xs:schema targetNamespace=""http://schemas.xmlsoap.org/ws/2004/08/addressing"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:wsa=""http://schemas.xmlsoap.org/ws/2004/08/addressing"" elementFormDefault=""qualified"" blockDefault=""#all"">
+            @"<xs:schema targetNamespace=""http://schemas.xmlsoap.org/ws/2004/08/addressing"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:wsa=""http://schemas.xmlsoap.org/ws/2004/08/addressing"" elementFormDefault=""qualified"" blockDefault=""#all"">
   <!-- //////////////////// WS-Addressing //////////////////// -->
   <!-- Endpoint reference -->
   <xs:element name=""EndpointReference"" type=""wsa:EndpointReferenceType""/>

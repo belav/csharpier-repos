@@ -12,16 +12,13 @@ public class Startup
 {
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
     {
-        app.Map(
-            "/throwexception",
-            subApp =>
+        app.Map("/throwexception", subApp =>
+        {
+            subApp.Run(context =>
             {
-                subApp.Run(context =>
-                {
-                    throw new ApplicationException("Application exception");
-                });
-            }
-        );
+                throw new ApplicationException("Application exception");
+            });
+        });
 
         app.Run(ctx =>
         {

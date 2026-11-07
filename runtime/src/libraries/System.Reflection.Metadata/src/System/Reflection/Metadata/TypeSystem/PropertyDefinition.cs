@@ -30,31 +30,29 @@ namespace System.Reflection.Metadata
 
         public StringHandle Name
         {
-            get
-            {
-                return _reader.PropertyTable.GetName(Handle);
-            }
+            get { return _reader.PropertyTable.GetName(Handle); }
         }
 
         public PropertyAttributes Attributes
         {
-            get
-            {
-                return _reader.PropertyTable.GetFlags(Handle);
-            }
+            get { return _reader.PropertyTable.GetFlags(Handle); }
         }
 
         public BlobHandle Signature
         {
-            get
-            {
-                return _reader.PropertyTable.GetSignature(Handle);
-            }
+            get { return _reader.PropertyTable.GetSignature(Handle); }
         }
 
-        public MethodSignature<TType> DecodeSignature<TType, TGenericContext>(ISignatureTypeProvider<TType, TGenericContext> provider, TGenericContext genericContext)
+        public MethodSignature<TType> DecodeSignature<TType, TGenericContext>(
+            ISignatureTypeProvider<TType, TGenericContext> provider,
+            TGenericContext genericContext
+        )
         {
-            var decoder = new SignatureDecoder<TType, TGenericContext>(provider, _reader, genericContext);
+            var decoder = new SignatureDecoder<TType, TGenericContext>(
+                provider,
+                _reader,
+                genericContext
+            );
             var blobReader = _reader.GetBlobReader(Signature);
             return decoder.DecodeMethodSignature(ref blobReader);
         }
@@ -76,7 +74,10 @@ namespace System.Reflection.Metadata
             ImmutableArray<MethodDefinitionHandle>.Builder? other = null;
 
             ushort methodCount;
-            int firstRowId = _reader.MethodSemanticsTable.FindSemanticMethodsForProperty(Handle, out methodCount);
+            int firstRowId = _reader.MethodSemanticsTable.FindSemanticMethodsForProperty(
+                Handle,
+                out methodCount
+            );
             for (ushort i = 0; i < methodCount; i++)
             {
                 int rowId = firstRowId + i;
@@ -98,7 +99,8 @@ namespace System.Reflection.Metadata
                 }
             }
 
-            var otherAccessors = other?.ToImmutable() ?? ImmutableArray<MethodDefinitionHandle>.Empty;
+            var otherAccessors =
+                other?.ToImmutable() ?? ImmutableArray<MethodDefinitionHandle>.Empty;
             return new PropertyAccessors(getter, setter, otherAccessors);
         }
     }

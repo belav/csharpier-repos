@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,181 +32,207 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [Serializable]
+    public sealed class ReflectionPermission
+        : CodeAccessPermission,
+            IUnrestrictedPermission,
+            IBuiltInPermission
+    {
+        private const int version = 1;
 
-	[ComVisible (true)]
-	[Serializable]
-	public sealed class ReflectionPermission : CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission {
+        ReflectionPermissionFlag flags;
 
-		private const int version = 1;
+        public ReflectionPermission(PermissionState state)
+        {
+            if (CheckPermissionState(state, true) == PermissionState.Unrestricted)
+                flags = ReflectionPermissionFlag.AllFlags;
+            else
+                flags = ReflectionPermissionFlag.NoFlags;
+        }
 
-		ReflectionPermissionFlag flags;
+        public ReflectionPermission(ReflectionPermissionFlag flag)
+        {
+            // reuse validation by the Flags property
+            Flags = flag;
+        }
 
+        public ReflectionPermissionFlag Flags
+        {
+            get { return flags; }
+            set
+            {
+                const ReflectionPermissionFlag all_flags =
+                    ReflectionPermissionFlag.AllFlags
+                    | ReflectionPermissionFlag.RestrictedMemberAccess;
 
-		public ReflectionPermission (PermissionState state)
-		{
-			if (CheckPermissionState (state, true) == PermissionState.Unrestricted)
-				flags = ReflectionPermissionFlag.AllFlags;
-			else
-				flags = ReflectionPermissionFlag.NoFlags;
-		}
+                if ((value & all_flags) != value)
+                {
+                    string msg = String.Format(Locale.GetText("Invalid flags {0}"), value);
+                    throw new ArgumentException(msg, "ReflectionPermissionFlag");
+                }
 
-		public ReflectionPermission (ReflectionPermissionFlag flag)
-		{
-			// reuse validation by the Flags property
-			Flags = flag;
-		}
+                flags = value;
+            }
+        }
 
+        public override IPermission Copy()
+        {
+            return new ReflectionPermission(flags);
+        }
 
-		public ReflectionPermissionFlag Flags {
-			get { return flags; }
-			set {
-				const ReflectionPermissionFlag all_flags = ReflectionPermissionFlag.AllFlags | ReflectionPermissionFlag.RestrictedMemberAccess;
+        public override void FromXml(SecurityElement esd)
+        {
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(esd, "esd", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-				if ((value & all_flags) != value) {
-					string msg = String.Format (Locale.GetText ("Invalid flags {0}"), value);
-					throw new ArgumentException (msg, "ReflectionPermissionFlag");
-				}
+            if (IsUnrestricted(esd))
+            {
+                flags = ReflectionPermissionFlag.AllFlags;
+            }
+            else
+            {
+                flags = ReflectionPermissionFlag.NoFlags;
+                string xmlFlags = (esd.Attributes["Flags"] as string);
+                if (xmlFlags.IndexOf("MemberAccess") >= 0)
+                    flags |= ReflectionPermissionFlag.MemberAccess;
+                if (xmlFlags.IndexOf("ReflectionEmit") >= 0)
+                    flags |= ReflectionPermissionFlag.ReflectionEmit;
+                if (xmlFlags.IndexOf("TypeInformation") >= 0)
+                    flags |= ReflectionPermissionFlag.TypeInformation;
+            }
+        }
 
-				flags = value;
-			}
-		}
+        public override IPermission Intersect(IPermission target)
+        {
+            ReflectionPermission rp = Cast(target);
+            if (rp == null)
+                return null;
 
+            if (IsUnrestricted())
+            {
+                if (rp.Flags == ReflectionPermissionFlag.NoFlags)
+                    return null;
+                else
+                    return rp.Copy();
+            }
+            if (rp.IsUnrestricted())
+            {
+                if (flags == ReflectionPermissionFlag.NoFlags)
+                    return null;
+                else
+                    return Copy();
+            }
 
-		public override IPermission Copy ()
-		{
-			return new ReflectionPermission (flags);
-		}
+            ReflectionPermission p = (ReflectionPermission)rp.Copy();
+            p.Flags &= flags;
+            return ((p.Flags == ReflectionPermissionFlag.NoFlags) ? null : p);
+        }
 
-		public override void FromXml (SecurityElement esd)
-		{
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (esd, "esd", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+        public override bool IsSubsetOf(IPermission target)
+        {
+            ReflectionPermission rp = Cast(target);
+            if (rp == null)
+                return (flags == ReflectionPermissionFlag.NoFlags);
 
-			if (IsUnrestricted (esd)) {
-				flags = ReflectionPermissionFlag.AllFlags;
-			}
-			else {
-				flags = ReflectionPermissionFlag.NoFlags;
-				string xmlFlags = (esd.Attributes ["Flags"] as string);
-				if (xmlFlags.IndexOf ("MemberAccess") >= 0)
-					flags |= ReflectionPermissionFlag.MemberAccess;
-				if (xmlFlags.IndexOf ("ReflectionEmit") >= 0)
-					flags |= ReflectionPermissionFlag.ReflectionEmit;
-				if (xmlFlags.IndexOf ("TypeInformation") >= 0)
-					flags |= ReflectionPermissionFlag.TypeInformation;
-			}
-		}
+            if (IsUnrestricted())
+                return rp.IsUnrestricted();
+            else if (rp.IsUnrestricted())
+                return true;
 
-		public override IPermission Intersect (IPermission target)
-		{
-			ReflectionPermission rp = Cast (target);
-			if (rp == null)
-				return null;
+            return ((flags & rp.Flags) == flags);
+        }
 
-			if (IsUnrestricted ()) {
-				if (rp.Flags == ReflectionPermissionFlag.NoFlags)
-					return null;
-				else
-					return rp.Copy ();
-			}
-			if (rp.IsUnrestricted ()) {
-				if (flags == ReflectionPermissionFlag.NoFlags)
-					return null;
-				else
-					return Copy ();
-			}
+        public bool IsUnrestricted()
+        {
+            return (flags == ReflectionPermissionFlag.AllFlags);
+        }
 
-			ReflectionPermission p = (ReflectionPermission) rp.Copy ();
-			p.Flags &= flags;
-			return ((p.Flags == ReflectionPermissionFlag.NoFlags) ? null : p);
-		}
+        public override SecurityElement ToXml()
+        {
+            SecurityElement se = Element(version);
+            if (IsUnrestricted())
+            {
+                se.AddAttribute("Unrestricted", "true");
+            }
+            else
+            {
+                if (flags == ReflectionPermissionFlag.NoFlags)
+                    se.AddAttribute("Flags", "NoFlags");
+                else if (
+                    (flags & ReflectionPermissionFlag.AllFlags) == ReflectionPermissionFlag.AllFlags
+                )
+                    se.AddAttribute("Flags", "AllFlags");
+                else
+                {
+                    string xmlFlags = "";
+                    if (
+                        (flags & ReflectionPermissionFlag.MemberAccess)
+                        == ReflectionPermissionFlag.MemberAccess
+                    )
+                        xmlFlags = "MemberAccess";
+                    if (
+                        (flags & ReflectionPermissionFlag.ReflectionEmit)
+                        == ReflectionPermissionFlag.ReflectionEmit
+                    )
+                    {
+                        if (xmlFlags.Length > 0)
+                            xmlFlags += ", ";
+                        xmlFlags += "ReflectionEmit";
+                    }
+                    if (
+                        (flags & ReflectionPermissionFlag.TypeInformation)
+                        == ReflectionPermissionFlag.TypeInformation
+                    )
+                    {
+                        if (xmlFlags.Length > 0)
+                            xmlFlags += ", ";
+                        xmlFlags += "TypeInformation";
+                    }
+                    se.AddAttribute("Flags", xmlFlags);
+                }
+            }
+            return se;
+        }
 
-		public override bool IsSubsetOf (IPermission target)
-		{
-			ReflectionPermission rp = Cast (target);
-			if (rp == null)
-				return (flags == ReflectionPermissionFlag.NoFlags);
+        public override IPermission Union(IPermission other)
+        {
+            ReflectionPermission rp = Cast(other);
+            if (other == null)
+                return Copy();
 
-			if (IsUnrestricted ())
-				return rp.IsUnrestricted ();
-			else if (rp.IsUnrestricted ())
-				return true;
+            if (IsUnrestricted() || rp.IsUnrestricted())
+                return new ReflectionPermission(PermissionState.Unrestricted);
 
-			return ((flags & rp.Flags) == flags);
-		}
+            ReflectionPermission p = (ReflectionPermission)rp.Copy();
+            p.Flags |= flags;
+            return p;
+        }
 
-		public bool IsUnrestricted ()
-		{
-			return (flags == ReflectionPermissionFlag.AllFlags);
-		}
+        // IBuiltInPermission
+        int IBuiltInPermission.GetTokenIndex()
+        {
+            return (int)BuiltInToken.Reflection;
+        }
 
-		public override SecurityElement ToXml ()
-		{
-			SecurityElement se = Element (version);
-			if (IsUnrestricted ()) {
-				se.AddAttribute ("Unrestricted", "true");
-			}
-			else {
-				if (flags == ReflectionPermissionFlag.NoFlags)
-					se.AddAttribute ("Flags", "NoFlags");
-				else if ((flags & ReflectionPermissionFlag.AllFlags) == ReflectionPermissionFlag.AllFlags)
-					se.AddAttribute ("Flags", "AllFlags");
-				else {
-					string xmlFlags = "";
-					if ((flags & ReflectionPermissionFlag.MemberAccess) == ReflectionPermissionFlag.MemberAccess)
-						xmlFlags = "MemberAccess";
-					if ((flags & ReflectionPermissionFlag.ReflectionEmit) == ReflectionPermissionFlag.ReflectionEmit) {
-						if (xmlFlags.Length > 0)
-							xmlFlags += ", ";
-						xmlFlags += "ReflectionEmit";
-					}
-					if ((flags & ReflectionPermissionFlag.TypeInformation) == ReflectionPermissionFlag.TypeInformation) {
-						if (xmlFlags.Length > 0)
-							xmlFlags += ", ";
-						xmlFlags += "TypeInformation";
-					}
-					se.AddAttribute ("Flags", xmlFlags);
-				}
-			}
-			return se;
-		}
+        // helpers
 
-		public override IPermission Union (IPermission other)
-		{
-			ReflectionPermission rp = Cast (other);
-			if (other == null)
-				return Copy ();
+        private ReflectionPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-			if (IsUnrestricted () || rp.IsUnrestricted ())
-				return new ReflectionPermission (PermissionState.Unrestricted);
+            ReflectionPermission rp = (target as ReflectionPermission);
+            if (rp == null)
+            {
+                ThrowInvalidPermission(target, typeof(ReflectionPermission));
+            }
 
-			ReflectionPermission p = (ReflectionPermission) rp.Copy ();
-			p.Flags |= flags;
-			return p;
-		}
-
-		// IBuiltInPermission
-		int IBuiltInPermission.GetTokenIndex ()
-		{
-			return (int) BuiltInToken.Reflection;
-		}
-
-		// helpers
-
-		private ReflectionPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
-
-			ReflectionPermission rp = (target as ReflectionPermission);
-			if (rp == null) {
-				ThrowInvalidPermission (target, typeof (ReflectionPermission));
-			}
-
-			return rp;
-		}
-	}
+            return rp;
+        }
+    }
 }

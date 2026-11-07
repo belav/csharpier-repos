@@ -11,11 +11,7 @@ public abstract class DebuggerProxyBase
 {
     public RunLoopExitState? ExitState { get; set; }
 
-    public virtual void Shutdown()
-    {
-    }
+    public virtual void Shutdown() { }
 
-    public virtual void Fail(Exception ex)
-    {
-    }
+    public virtual void Fail(Exception ex) { }
 }

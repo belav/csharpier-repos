@@ -10,6 +10,6 @@ namespace System.ServiceModel.Activities
     public enum SerializerOption
     {
         DataContractSerializer,
-        XmlSerializer
+        XmlSerializer,
     };
 }

@@ -36,14 +36,26 @@ internal partial class XmlSnippetParser
 
     internal abstract record SnippetPart(string DefaultText);
 
-    internal record SnippetFieldPart(string FieldName, string DefaultText, int? EditIndex) : SnippetPart(DefaultText);
+    internal record SnippetFieldPart(string FieldName, string DefaultText, int? EditIndex)
+        : SnippetPart(DefaultText);
 
-    internal record SnippetFunctionPart(string FieldName, string DefaultText, int? EditIndex, string FunctionName, string? FunctionParam)
-        : SnippetFieldPart(FieldName, DefaultText, EditIndex)
+    internal record SnippetFunctionPart(
+        string FieldName,
+        string DefaultText,
+        int? EditIndex,
+        string FunctionName,
+        string? FunctionParam
+    ) : SnippetFieldPart(FieldName, DefaultText, EditIndex)
     {
-        public async Task<SnippetFunctionPart> WithSnippetFunctionResultAsync(Document documentWithSnippet, TextSpan fieldSpan, SimplifierOptions simplifierOptions, CancellationToken cancellationToken)
+        public async Task<SnippetFunctionPart> WithSnippetFunctionResultAsync(
+            Document documentWithSnippet,
+            TextSpan fieldSpan,
+            SimplifierOptions simplifierOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var snippetFunctionService = documentWithSnippet.Project.GetRequiredLanguageService<SnippetFunctionService>();
+            var snippetFunctionService =
+                documentWithSnippet.Project.GetRequiredLanguageService<SnippetFunctionService>();
             switch (FunctionName)
             {
                 case "SimpleTypeName":
@@ -52,21 +64,41 @@ internal partial class XmlSnippetParser
                         return this;
                     }
 
-                    var simplifiedTypeName = await SnippetFunctionService.GetSimplifiedTypeNameAsync(documentWithSnippet, fieldSpan, FunctionParam, simplifierOptions, cancellationToken).ConfigureAwait(false);
+                    var simplifiedTypeName = await SnippetFunctionService
+                        .GetSimplifiedTypeNameAsync(
+                            documentWithSnippet,
+                            fieldSpan,
+                            FunctionParam,
+                            simplifierOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (simplifiedTypeName == null)
                     {
                         return this;
                     }
 
-                    return this with { DefaultText = simplifiedTypeName };
+                    return this with
+                    {
+                        DefaultText = simplifiedTypeName,
+                    };
                 case "ClassName":
-                    var className = await snippetFunctionService.GetContainingClassNameAsync(documentWithSnippet, fieldSpan.Start, cancellationToken).ConfigureAwait(false);
+                    var className = await snippetFunctionService
+                        .GetContainingClassNameAsync(
+                            documentWithSnippet,
+                            fieldSpan.Start,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (className == null)
                     {
                         return this;
                     }
 
-                    return this with { DefaultText = className };
+                    return this with
+                    {
+                        DefaultText = className,
+                    };
                 case "GenerateSwitchCases":
                     // Generate switch cases requires a multi-step snippet interaction, where the snippet is inserted first then the
                     // client calls back to on commit so that we can generate the cases for the specified switch value.

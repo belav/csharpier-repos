@@ -31,9 +31,12 @@ namespace System.Web.Mvc.Test
         {
             AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName("MvcAssembly1"),
-                AssemblyBuilderAccess.Save);
+                AssemblyBuilderAccess.Save
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
-                "MvcAssembly1", "MvcAssembly1.dll");
+                "MvcAssembly1",
+                "MvcAssembly1.dll"
+            );
 
             CreateController(moduleBuilder, "NS1a.NS1b.C1Controller");
             CreateController(moduleBuilder, "NS2a.NS2b.C2Controller");
@@ -45,9 +48,12 @@ namespace System.Web.Mvc.Test
         {
             AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName("MvcAssembly2"),
-                AssemblyBuilderAccess.Save);
+                AssemblyBuilderAccess.Save
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
-                "MvcAssembly2", "MvcAssembly2.dll");
+                "MvcAssembly2",
+                "MvcAssembly2.dll"
+            );
 
             CreateController(moduleBuilder, "NS3a.NS3b.C3Controller");
             CreateController(moduleBuilder, "NS4a.NS4b.C4Controller");
@@ -59,9 +65,12 @@ namespace System.Web.Mvc.Test
         {
             AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName("MvcAssembly3"),
-                AssemblyBuilderAccess.Save);
+                AssemblyBuilderAccess.Save
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
-                "MvcAssembly3", "MvcAssembly3.dll");
+                "MvcAssembly3",
+                "MvcAssembly3.dll"
+            );
 
             // Type names (but not namespaces) are the same as those in TestAssembly1
             CreateController(moduleBuilder, "NS3a.NS3b.C1Controller");
@@ -74,9 +83,12 @@ namespace System.Web.Mvc.Test
         {
             AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName("MvcAssembly4"),
-                AssemblyBuilderAccess.Save);
+                AssemblyBuilderAccess.Save
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
-                "MvcAssembly4", "MvcAssembly4.dll");
+                "MvcAssembly4",
+                "MvcAssembly4.dll"
+            );
 
             // Namespaces and type names are the same as those in TestAssembly1
             CreateController(moduleBuilder, "NS1a.NS1b.C1Controller");
@@ -95,10 +107,25 @@ namespace System.Web.Mvc.Test
             //    }
             //}
 
-            TypeBuilder controllerTypeBuilder = moduleBuilder.DefineType(typeName, TypeAttributes.Class | TypeAttributes.Public, typeof(ControllerBase));
-            MethodBuilder executeMethodBuilder = controllerTypeBuilder.DefineMethod("ExecuteCore", MethodAttributes.Family | MethodAttributes.Virtual, typeof(void), Type.EmptyTypes);
+            TypeBuilder controllerTypeBuilder = moduleBuilder.DefineType(
+                typeName,
+                TypeAttributes.Class | TypeAttributes.Public,
+                typeof(ControllerBase)
+            );
+            MethodBuilder executeMethodBuilder = controllerTypeBuilder.DefineMethod(
+                "ExecuteCore",
+                MethodAttributes.Family | MethodAttributes.Virtual,
+                typeof(void),
+                Type.EmptyTypes
+            );
             executeMethodBuilder.GetILGenerator().Emit(OpCodes.Ret);
-            controllerTypeBuilder.DefineMethodOverride(executeMethodBuilder, typeof(ControllerBase).GetMethod("ExecuteCore", BindingFlags.Instance | BindingFlags.NonPublic));
+            controllerTypeBuilder.DefineMethodOverride(
+                executeMethodBuilder,
+                typeof(ControllerBase).GetMethod(
+                    "ExecuteCore",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
             controllerTypeBuilder.CreateType();
         }
     }

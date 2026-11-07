@@ -57,13 +57,22 @@ namespace System.Runtime.CompilerServices
             Buffer.Memmove(
                 ref MemoryMarshal.GetArrayDataReference(dest),
                 ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), offset),
-                (uint)length);
+                (uint)length
+            );
 
             return dest;
         }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, object? userData)
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void ExecuteCodeWithGuaranteedCleanup(
+            TryCode code,
+            CleanupCode backoutCode,
+            object? userData
+        )
         {
             ArgumentNullException.ThrowIfNull(code);
             ArgumentNullException.ThrowIfNull(backoutCode);
@@ -81,29 +90,38 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void PrepareContractedDelegate(Delegate d)
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void PrepareContractedDelegate(Delegate d) { }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void ProbeForSufficientStack()
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void ProbeForSufficientStack() { }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void PrepareConstrainedRegions()
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void PrepareConstrainedRegions() { }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void PrepareConstrainedRegionsNoOP()
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void PrepareConstrainedRegionsNoOP() { }
 
         internal static bool IsPrimitiveType(this CorElementType et)
             // COR_ELEMENT_TYPE_I1,I2,I4,I8,U1,U2,U4,U8,R4,R8,I,U,CHAR,BOOLEAN
-            => ((1 << (int)et) & 0b_0011_0000_0000_0011_1111_1111_1100) != 0;
+            =>
+            ((1 << (int)et) & 0b_0011_0000_0000_0011_1111_1111_1100) != 0;
 
         /// <summary>Provide a fast way to access constant data stored in a module as a ReadOnlySpan{T}</summary>
         /// <param name="fldHandle">A field handle that specifies the location of the data to be referred to by the ReadOnlySpan{T}. The Rva of the field must be aligned on a natural boundary of type T</param>
@@ -111,8 +129,11 @@ namespace System.Runtime.CompilerServices
         /// <exception cref="ArgumentException"><paramref name="fldHandle"/> does not refer to a field which is an Rva, is misaligned, or T is of an invalid type.</exception>
         /// <remarks>This method is intended for compiler use rather than use directly in code. T must be one of byte, sbyte, bool, char, short, ushort, int, uint, long, ulong, float, or double.</remarks>
         [Intrinsic]
-        public static unsafe ReadOnlySpan<T> CreateSpan<T>(RuntimeFieldHandle fldHandle) => new ReadOnlySpan<T>(GetSpanDataFrom(fldHandle, typeof(T).TypeHandle, out int length), length);
-
+        public static unsafe ReadOnlySpan<T> CreateSpan<T>(RuntimeFieldHandle fldHandle) =>
+            new ReadOnlySpan<T>(
+                GetSpanDataFrom(fldHandle, typeof(T).TypeHandle, out int length),
+                length
+            );
 
         // The following intrinsics return true if input is a compile-time constant
         // Feel free to add more overloads on demand

@@ -42,7 +42,8 @@ namespace System.Text.Json
             Stream utf8Json,
             TValue value,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -72,7 +73,8 @@ namespace System.Text.Json
         public static void Serialize<TValue>(
             Stream utf8Json,
             TValue value,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (utf8Json is null)
             {
@@ -109,7 +111,8 @@ namespace System.Text.Json
             object? value,
             Type inputType,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -144,7 +147,8 @@ namespace System.Text.Json
             Stream utf8Json,
             object? value,
             Type inputType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (utf8Json is null)
             {
@@ -172,7 +176,8 @@ namespace System.Text.Json
             Stream utf8Json,
             TValue value,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -200,7 +205,8 @@ namespace System.Text.Json
         public static void Serialize<TValue>(
             Stream utf8Json,
             TValue value,
-            JsonTypeInfo<TValue> jsonTypeInfo)
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (utf8Json is null)
             {
@@ -233,7 +239,8 @@ namespace System.Text.Json
             Stream utf8Json,
             object? value,
             JsonTypeInfo jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -260,10 +267,7 @@ namespace System.Text.Json
         /// <exception cref="InvalidCastException">
         /// <paramref name="value"/> does not match the type of <paramref name="jsonTypeInfo"/>.
         /// </exception>
-        public static void Serialize(
-            Stream utf8Json,
-            object? value,
-            JsonTypeInfo jsonTypeInfo)
+        public static void Serialize(Stream utf8Json, object? value, JsonTypeInfo jsonTypeInfo)
         {
             if (utf8Json is null)
             {
@@ -302,7 +306,8 @@ namespace System.Text.Json
             object? value,
             Type inputType,
             JsonSerializerContext context,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -339,7 +344,8 @@ namespace System.Text.Json
             Stream utf8Json,
             object? value,
             Type inputType,
-            JsonSerializerContext context)
+            JsonSerializerContext context
+        )
         {
             if (utf8Json is null)
             {

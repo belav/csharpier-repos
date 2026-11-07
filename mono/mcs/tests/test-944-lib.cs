@@ -2,8 +2,8 @@
 
 public class Class1
 {
-	public byte[] Finalize ()
-	{
-		return null;
-	}
+    public byte[] Finalize()
+    {
+        return null;
+    }
 }

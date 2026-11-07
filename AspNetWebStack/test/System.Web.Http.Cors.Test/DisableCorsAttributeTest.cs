@@ -15,7 +15,10 @@ namespace System.Web.Http.Cors.Test
         public async Task GetCorsPolicyAsync_ReturnsNull()
         {
             DisableCorsAttribute disableCors = new DisableCorsAttribute();
-            CorsPolicy corsPolicy = await disableCors.GetCorsPolicyAsync(new HttpRequestMessage(), CancellationToken.None);
+            CorsPolicy corsPolicy = await disableCors.GetCorsPolicyAsync(
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             Assert.Null(corsPolicy);
         }

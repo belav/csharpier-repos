@@ -11,15 +11,23 @@ namespace System.ComponentModel.Composition.Hosting
         {
             private readonly CatalogExportProvider _catalogExportProvider;
 
-            public PartCreatorExport(CatalogExportProvider catalogExportProvider, ComposablePartDefinition partDefinition, ExportDefinition exportDefinition) :
-                base(partDefinition, exportDefinition)
+            public PartCreatorExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition exportDefinition
+            )
+                : base(partDefinition, exportDefinition)
             {
                 _catalogExportProvider = catalogExportProvider;
             }
 
             public override Export CreateExportProduct()
             {
-                return new NonSharedCatalogExport(_catalogExportProvider, UnderlyingPartDefinition, UnderlyingExportDefinition);
+                return new NonSharedCatalogExport(
+                    _catalogExportProvider,
+                    UnderlyingPartDefinition,
+                    UnderlyingExportDefinition
+                );
             }
         }
     }

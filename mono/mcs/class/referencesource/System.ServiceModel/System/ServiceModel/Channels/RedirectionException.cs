@@ -7,35 +7,60 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime;
     using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Permissions;
     using System.ServiceModel;
     using System.Text;
     using System.Xml;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
 
     [Serializable]
     public class RedirectionException : CommunicationException
     {
-        public RedirectionException(RedirectionType type, RedirectionDuration duration, RedirectionScope scope, params RedirectionLocation[] locations)
-            : this(GetDefaultMessage(type, locations), type, duration, scope, null, locations)
-        {
-        }
+        public RedirectionException(
+            RedirectionType type,
+            RedirectionDuration duration,
+            RedirectionScope scope,
+            params RedirectionLocation[] locations
+        )
+            : this(GetDefaultMessage(type, locations), type, duration, scope, null, locations) { }
 
-        public RedirectionException(RedirectionType type, RedirectionDuration duration, RedirectionScope scope, Exception innerException, params RedirectionLocation[] locations)
-            : this(GetDefaultMessage(type, locations), type, duration, scope, innerException, locations)
-        {
-        }
+        public RedirectionException(
+            RedirectionType type,
+            RedirectionDuration duration,
+            RedirectionScope scope,
+            Exception innerException,
+            params RedirectionLocation[] locations
+        )
+            : this(
+                GetDefaultMessage(type, locations),
+                type,
+                duration,
+                scope,
+                innerException,
+                locations
+            ) { }
 
-        public RedirectionException(string message, RedirectionType type, RedirectionDuration duration, RedirectionScope scope, params RedirectionLocation[] locations)
-            : this(message, type, duration, scope, null, locations)
-        {
-        }
+        public RedirectionException(
+            string message,
+            RedirectionType type,
+            RedirectionDuration duration,
+            RedirectionScope scope,
+            params RedirectionLocation[] locations
+        )
+            : this(message, type, duration, scope, null, locations) { }
 
-        public RedirectionException(string message, RedirectionType type, RedirectionDuration duration, RedirectionScope scope, Exception innerException, params RedirectionLocation[] locations)
+        public RedirectionException(
+            string message,
+            RedirectionType type,
+            RedirectionDuration duration,
+            RedirectionScope scope,
+            Exception innerException,
+            params RedirectionLocation[] locations
+        )
             : base(message, innerException)
         {
             if (type == null)
@@ -49,27 +74,42 @@ namespace System.ServiceModel.Channels
             }
             else if (message.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("message",
-                    SR.GetString(SR.ParameterCannotBeEmpty));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "message",
+                    SR.GetString(SR.ParameterCannotBeEmpty)
+                );
             }
 
-            if (type.InternalType == RedirectionType.InternalRedirectionType.UseIntermediary
-                || type.InternalType == RedirectionType.InternalRedirectionType.Resource)
+            if (
+                type.InternalType == RedirectionType.InternalRedirectionType.UseIntermediary
+                || type.InternalType == RedirectionType.InternalRedirectionType.Resource
+            )
             {
                 if (locations == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("locations", SR.GetString(SR.RedirectMustProvideLocation));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "locations",
+                        SR.GetString(SR.RedirectMustProvideLocation)
+                    );
                 }
                 else if (locations.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("locations", SR.GetString(SR.RedirectMustProvideLocation));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "locations",
+                        SR.GetString(SR.RedirectMustProvideLocation)
+                    );
                 }
             }
 
-            if (type.InternalType == RedirectionType.InternalRedirectionType.Cache && locations != null && locations.Length > 0)
+            if (
+                type.InternalType == RedirectionType.InternalRedirectionType.Cache
+                && locations != null
+                && locations.Length > 0
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.RedirectCacheNoLocationAllowed));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.RedirectCacheNoLocationAllowed)
+                );
             }
 
             if (locations == null)
@@ -85,22 +125,31 @@ namespace System.ServiceModel.Channels
         }
 
         // Serialization
-        private RedirectionException() : base() { }
+        private RedirectionException()
+            : base() { }
 
         protected RedirectionException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             this.Type = (RedirectionType)info.GetValue("Type", typeof(RedirectionType));
-            this.Duration = (RedirectionDuration)info.GetValue("Duration", typeof(RedirectionDuration));
+            this.Duration = (RedirectionDuration)
+                info.GetValue("Duration", typeof(RedirectionDuration));
             this.Scope = (RedirectionScope)info.GetValue("Scope", typeof(RedirectionScope));
-            RedirectionLocation[] locations = (RedirectionLocation[])info.GetValue("Locations", typeof(RedirectionLocation[]));
+            RedirectionLocation[] locations = (RedirectionLocation[])
+                info.GetValue("Locations", typeof(RedirectionLocation[]));
             this.Locations = new ReadOnlyCollection<RedirectionLocation>(locations);
         }
 
-        // The analysis tool used for the security signoff (runcodeanalysis /sdl) is getting confused, reporting that we need 
+        // The analysis tool used for the security signoff (runcodeanalysis /sdl) is getting confused, reporting that we need
         // to put the [SecurityCritical] attribute here, when we have it already and it matches the attribute from the base class.
-        [SuppressMessage(FxCop.Category.Security, "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "The SecurityCritical attribute is used.")]
-        [Fx.Tag.SecurityNote(Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "The SecurityCritical attribute is used."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method."
+        )]
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -108,7 +157,11 @@ namespace System.ServiceModel.Channels
             info.AddValue("Type", this.Type, typeof(RedirectionType));
             info.AddValue("Duration", this.Duration, typeof(RedirectionDuration));
             info.AddValue("Scope", this.Scope, typeof(RedirectionScope));
-            info.AddValue("Locations", this.Locations.ToArray<RedirectionLocation>(), typeof(RedirectionLocation[]));
+            info.AddValue(
+                "Locations",
+                this.Locations.ToArray<RedirectionLocation>(),
+                typeof(RedirectionLocation[])
+            );
         }
 
         public RedirectionDuration Duration { get; private set; }
@@ -156,7 +209,9 @@ namespace System.ServiceModel.Channels
                 {
                     message = SR.GetString(SR.RedirectResource, FormatLocations(locations));
                 }
-                else if (type.InternalType == RedirectionType.InternalRedirectionType.UseIntermediary)
+                else if (
+                    type.InternalType == RedirectionType.InternalRedirectionType.UseIntermediary
+                )
                 {
                     message = SR.GetString(SR.RedirectUseIntermediary, FormatLocations(locations));
                 }

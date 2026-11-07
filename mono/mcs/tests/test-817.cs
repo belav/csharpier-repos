@@ -1,16 +1,16 @@
 namespace System
 {
-	public struct Int32
-	{
-		public int Value;
-	}
+    public struct Int32
+    {
+        public int Value;
+    }
 
-	class Program
-	{
-		public static void Main ()
-		{
-			Int32 a = new Int32 ();
-			a.Value = 6;
-		}
-	}
+    class Program
+    {
+        public static void Main()
+        {
+            Int32 a = new Int32();
+            a.Value = 6;
+        }
+    }
 }

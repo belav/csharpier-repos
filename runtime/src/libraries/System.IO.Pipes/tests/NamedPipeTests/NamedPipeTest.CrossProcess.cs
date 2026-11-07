@@ -14,16 +14,33 @@ namespace System.IO.Pipes.Tests
     public sealed class NamedPipeTest_CrossProcess
     {
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
         public void InheritHandles_AvailableInChildProcess()
         {
             string pipeName = PipeStreamConformanceTests.GetUniquePipeName();
 
             using (var server = new NamedPipeServerStream(pipeName, PipeDirection.In))
-            using (var client = new NamedPipeClientStream(".", pipeName, PipeDirection.Out, PipeOptions.None, TokenImpersonationLevel.None, HandleInheritability.Inheritable))
+            using (
+                var client = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.Out,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.None,
+                    HandleInheritability.Inheritable
+                )
+            )
             {
                 Task.WaitAll(server.WaitForConnectionAsync(), client.ConnectAsync());
-                using (RemoteExecutor.Invoke(new Action<string>(ChildFunc), client.SafePipeHandle.DangerousGetHandle().ToString()))
+                using (
+                    RemoteExecutor.Invoke(
+                        new Action<string>(ChildFunc),
+                        client.SafePipeHandle.DangerousGetHandle().ToString()
+                    )
+                )
                 {
                     client.Dispose();
                     for (int i = 0; i < 5; i++)
@@ -35,7 +52,17 @@ namespace System.IO.Pipes.Tests
 
             void ChildFunc(string handle)
             {
-                using (var childClient = new NamedPipeClientStream(PipeDirection.Out, isAsync: false, isConnected: true, new SafePipeHandle((IntPtr)long.Parse(handle, CultureInfo.InvariantCulture), ownsHandle: true)))
+                using (
+                    var childClient = new NamedPipeClientStream(
+                        PipeDirection.Out,
+                        isAsync: false,
+                        isConnected: true,
+                        new SafePipeHandle(
+                            (IntPtr)long.Parse(handle, CultureInfo.InvariantCulture),
+                            ownsHandle: true
+                        )
+                    )
+                )
                 {
                     for (int i = 0; i < 5; i++)
                     {
@@ -46,7 +73,10 @@ namespace System.IO.Pipes.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
         public void PingPong_Sync()
         {
             // Create names for two pipes
@@ -57,7 +87,13 @@ namespace System.IO.Pipes.Tests
             // another process with which to communicate
             using (var outbound = new NamedPipeServerStream(outName, PipeDirection.Out))
             using (var inbound = new NamedPipeClientStream(".", inName, PipeDirection.In))
-            using (RemoteExecutor.Invoke(new Action<string, string>(PingPong_OtherProcess), outName, inName))
+            using (
+                RemoteExecutor.Invoke(
+                    new Action<string, string>(PingPong_OtherProcess),
+                    outName,
+                    inName
+                )
+            )
             {
                 // Wait for both pipes to be connected
                 Task.WaitAll(outbound.WaitForConnectionAsync(), inbound.ConnectAsync());
@@ -73,7 +109,10 @@ namespace System.IO.Pipes.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
         public async Task PingPong_Async()
         {
             // Create names for two pipes
@@ -84,7 +123,13 @@ namespace System.IO.Pipes.Tests
             // another process with which to communicate
             using (var outbound = new NamedPipeServerStream(outName, PipeDirection.Out))
             using (var inbound = new NamedPipeClientStream(".", inName, PipeDirection.In))
-            using (RemoteExecutor.Invoke(new Action<string, string>(PingPong_OtherProcess), outName, inName))
+            using (
+                RemoteExecutor.Invoke(
+                    new Action<string, string>(PingPong_OtherProcess),
+                    outName,
+                    inName
+                )
+            )
             {
                 // Wait for both pipes to be connected
                 await Task.WhenAll(outbound.WaitForConnectionAsync(), inbound.ConnectAsync());
@@ -104,19 +149,43 @@ namespace System.IO.Pipes.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
         public void NamedPipeOptionsFirstPipeInstance_Throws_WhenNameIsUsedAcrossProcesses()
         {
             var uniqueServerName = PipeStreamConformanceTests.GetUniquePipeName();
-            using (var firstServer = new NamedPipeServerStream(uniqueServerName, PipeDirection.In, 2, PipeTransmissionMode.Byte, PipeOptions.FirstPipeInstance))
+            using (
+                var firstServer = new NamedPipeServerStream(
+                    uniqueServerName,
+                    PipeDirection.In,
+                    2,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.FirstPipeInstance
+                )
+            )
             {
-                RemoteExecutor.Invoke(new Action<string>(CreateFirstPipeInstance_OtherProcess), uniqueServerName).Dispose();
+                RemoteExecutor
+                    .Invoke(
+                        new Action<string>(CreateFirstPipeInstance_OtherProcess),
+                        uniqueServerName
+                    )
+                    .Dispose();
             }
         }
 
         private static void CreateFirstPipeInstance_OtherProcess(string uniqueServerName)
         {
-            Assert.Throws<UnauthorizedAccessException>(() => new NamedPipeServerStream(uniqueServerName, PipeDirection.In, 2, PipeTransmissionMode.Byte, PipeOptions.FirstPipeInstance));
+            Assert.Throws<UnauthorizedAccessException>(() =>
+                new NamedPipeServerStream(
+                    uniqueServerName,
+                    PipeDirection.In,
+                    2,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.FirstPipeInstance
+                )
+            );
         }
 
         private static void PingPong_OtherProcess(string inName, string outName)

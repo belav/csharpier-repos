@@ -18,13 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MethodDeclarationOrganizer()
-        {
-        }
+        public MethodDeclarationOrganizer() { }
 
         protected override MethodDeclarationSyntax Organize(
             MethodDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return syntax.Update(
                 attributeLists: syntax.AttributeLists,
@@ -37,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 constraintClauses: syntax.ConstraintClauses,
                 body: syntax.Body,
                 expressionBody: syntax.ExpressionBody,
-                semicolonToken: syntax.SemicolonToken);
+                semicolonToken: syntax.SemicolonToken
+            );
         }
     }
 }

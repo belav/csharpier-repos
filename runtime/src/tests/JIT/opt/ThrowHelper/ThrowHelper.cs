@@ -10,20 +10,30 @@ class TestException : Exception
     int x;
     string y;
 
-    public TestException() {}
-    public TestException(int _x) { x = _x; }
-    public TestException(string _y) { y = _y; }
+    public TestException() { }
+
+    public TestException(int _x)
+    {
+        x = _x;
+    }
+
+    public TestException(string _y)
+    {
+        y = _y;
+    }
 }
 
 public class TestCases
 {
     static void Throw() => throw new TestException();
+
     static void Throw(int x) => throw new TestException(x);
+
     static void Throw(string y) => throw new TestException(y);
 
-    static int MayThrow(int x) 
+    static int MayThrow(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             throw new TestException(x);
         }
@@ -34,7 +44,7 @@ public class TestCases
 
     public static int OneThrowHelper(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             Throw();
         }
@@ -44,7 +54,7 @@ public class TestCases
 
     internal static void OneThrowHelperTail(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             Throw();
             return;
@@ -53,7 +63,7 @@ public class TestCases
 
     public static int OneMayThrowHelper(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             MayThrow(x);
         }
@@ -63,7 +73,7 @@ public class TestCases
 
     public static int OneMayThrowHelperTail(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             MayThrow(x);
             return 0;
@@ -74,7 +84,7 @@ public class TestCases
 
     public static int OneReturnThrowHelper(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             return ReturnThrow();
         }
@@ -84,7 +94,7 @@ public class TestCases
 
     public static int OneReturnThrowHelperTail(int x)
     {
-        if (x > 0) 
+        if (x > 0)
         {
             return ReturnThrow();
         }
@@ -94,12 +104,12 @@ public class TestCases
 
     public static int TwoIdenticalThrowHelpers_If(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             Throw();
         }
-        
-        if (x == 1) 
+
+        if (x == 1)
         {
             Throw();
         }
@@ -109,13 +119,13 @@ public class TestCases
 
     internal static void TwoIdenticalThrowHelpers_IfOneTail(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             Throw();
             return;
         }
-        
-        if (x == 1) 
+
+        if (x == 1)
         {
             Throw();
         }
@@ -123,13 +133,13 @@ public class TestCases
 
     internal static void TwoIdenticalThrowHelpers_IfTwoTail(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             Throw();
             return;
         }
-        
-        if (x == 1) 
+
+        if (x == 1)
         {
             Throw();
             return;
@@ -138,17 +148,17 @@ public class TestCases
 
     internal static int ThreeIdenticalThrowHelpers_If(int x)
     {
-        if (x == 0) 
-        {
-            Throw();
-        }
-        
-        if (x == 1) 
+        if (x == 0)
         {
             Throw();
         }
 
-        if (x == 2) 
+        if (x == 1)
+        {
+            Throw();
+        }
+
+        if (x == 2)
         {
             Throw();
         }
@@ -158,18 +168,18 @@ public class TestCases
 
     internal static void ThreeIdenticalThrowHelpers_IfOneTail(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             Throw();
             return;
         }
-        
-        if (x == 1) 
+
+        if (x == 1)
         {
             Throw();
         }
 
-        if (x == 2) 
+        if (x == 2)
         {
             Throw();
         }
@@ -177,19 +187,19 @@ public class TestCases
 
     internal static void ThreeIdenticalThrowHelpers_IfTwoTail(int x)
     {
-        if (x == 0) 
-        {
-            Throw();
-            return;
-        }
-        
-        if (x == 1) 
+        if (x == 0)
         {
             Throw();
             return;
         }
 
-        if (x == 2) 
+        if (x == 1)
+        {
+            Throw();
+            return;
+        }
+
+        if (x == 2)
         {
             Throw();
         }
@@ -197,19 +207,19 @@ public class TestCases
 
     internal static void ThreeIdenticalThrowHelpers_IfThreeTail(int x)
     {
-        if (x == 0) 
-        {
-            Throw();
-            return;
-        }
-        
-        if (x == 1) 
+        if (x == 0)
         {
             Throw();
             return;
         }
 
-        if (x == 2) 
+        if (x == 1)
+        {
+            Throw();
+            return;
+        }
+
+        if (x == 2)
         {
             Throw();
             return;
@@ -218,63 +228,63 @@ public class TestCases
 
     public static int TwoIdenticalThrowHelpers_Goto(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             goto L1;
         }
 
-        if (x == 1) 
-        { 
+        if (x == 1)
+        {
             goto L2;
         }
 
         return x;
- L1:
+        L1:
         Throw();
- L2:
+        L2:
         Throw();
-        
+
         return x;
     }
 
     internal static void TwoIdenticalThrowHelpers_GotoOneTail(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             goto L1;
         }
 
-        if (x == 1) 
-        { 
+        if (x == 1)
+        {
             goto L2;
         }
 
         return;
 
- L1:
+        L1:
         Throw();
- L2:
+        L2:
         Throw();
     }
 
     internal static void TwoIdenticalThrowHelpers_GotoTwoTail(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             goto L1;
         }
 
-        if (x == 1) 
-        { 
+        if (x == 1)
+        {
             goto L2;
         }
 
         return;
- L1:
+        L1:
         Throw();
         return;
 
- L2:
+        L2:
         Throw();
     }
 
@@ -282,17 +292,17 @@ public class TestCases
     {
         switch (x)
         {
-            case 0: 
-            {
-                Throw();
-            }
-            break;
-        
+            case 0:
+                {
+                    Throw();
+                }
+                break;
+
             case 1:
-            {
-                Throw();
-            }
-            break;
+                {
+                    Throw();
+                }
+                break;
         }
 
         return x;
@@ -302,17 +312,17 @@ public class TestCases
     {
         switch (x)
         {
-            case 0: 
+            case 0:
             {
                 Throw();
                 return;
             }
-        
+
             case 1:
-            {
-                Throw();
-            }
-            break;
+                {
+                    Throw();
+                }
+                break;
         }
     }
 
@@ -320,12 +330,12 @@ public class TestCases
     {
         switch (x)
         {
-            case 0: 
+            case 0:
             {
                 Throw();
                 return;
             }
-        
+
             case 1:
             {
                 Throw();
@@ -338,11 +348,11 @@ public class TestCases
     {
         switch (x)
         {
-            case 0: 
+            case 0:
             {
                 goto L1;
             }
-        
+
             case 1:
             {
                 goto L2;
@@ -351,11 +361,11 @@ public class TestCases
 
         return x;
 
- L1:
+        L1:
         Throw();
- L2:
+        L2:
         Throw();
-        
+
         return x;
     }
 
@@ -363,11 +373,11 @@ public class TestCases
     {
         switch (x)
         {
-            case 0: 
+            case 0:
             {
                 goto L1;
             }
-        
+
             case 1:
             {
                 goto L2;
@@ -376,9 +386,9 @@ public class TestCases
 
         return;
 
- L1:
+        L1:
         Throw();
- L2:
+        L2:
         Throw();
     }
 
@@ -386,11 +396,11 @@ public class TestCases
     {
         switch (x)
         {
-            case 0: 
+            case 0:
             {
                 goto L1;
             }
-        
+
             case 1:
             {
                 goto L2;
@@ -399,21 +409,21 @@ public class TestCases
 
         return;
 
- L1:
-        Throw();        
+        L1:
+        Throw();
         return;
- L2:
+        L2:
         Throw();
     }
 
     public static int TwoDifferentThrowHelpers(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             Throw();
         }
 
-        if (x == 1) 
+        if (x == 1)
         {
             Throw(1);
         }
@@ -423,12 +433,12 @@ public class TestCases
 
     public static int TwoIdenticalThrowHelpersDifferentArgs(int x)
     {
-        if (x == 0) 
+        if (x == 0)
         {
             Throw(0);
         }
 
-        if (x == 1) 
+        if (x == 1)
         {
             Throw(1);
         }
@@ -464,7 +474,6 @@ public class TestCases
         return x;
     }
 
-
     static int testNumber = 0;
     static bool failed = false;
 
@@ -495,7 +504,7 @@ public class TestCases
     {
         testNumber++;
 
-        try 
+        try
         {
             f(-1);
         }

@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class CommandInterceptionSqliteTestBase : CommandInterceptionTestBase
 {
     protected CommandInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public override async Task<string> Intercept_query_passively(bool async, bool inject)
     {
@@ -16,7 +14,8 @@ public abstract class CommandInterceptionSqliteTestBase : CommandInterceptionTes
             """
 SELECT "s"."Id", "s"."Type" FROM "Singularity" AS "s"
 """,
-            await base.Intercept_query_passively(async, inject));
+            await base.Intercept_query_passively(async, inject)
+        );
 
         return null;
     }
@@ -27,7 +26,8 @@ SELECT "s"."Id", "s"."Type" FROM "Singularity" AS "s"
             """
 SELECT "s"."Id", "s"."Type" FROM "Brane" AS "s"
 """,
-            await base.QueryMutationTest<TInterceptor>(async, inject));
+            await base.QueryMutationTest<TInterceptor>(async, inject)
+        );
 
         return null;
     }
@@ -38,52 +38,51 @@ SELECT "s"."Id", "s"."Type" FROM "Brane" AS "s"
             """
 SELECT "s"."Id", "s"."Type" FROM "Singularity" AS "s"
 """,
-            await base.Intercept_query_to_replace_execution(async, inject));
+            await base.Intercept_query_to_replace_execution(async, inject)
+        );
 
         return null;
     }
 
     public abstract class InterceptionSqliteFixtureBase : InterceptionFixtureBase
     {
-        protected override string StoreName
-            => "CommandInterception";
+        protected override string StoreName => "CommandInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlite(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlite(),
+                injectedInterceptors
+            );
     }
 
     public class CommandInterceptionSqliteTest
-        : CommandInterceptionSqliteTestBase, IClassFixture<CommandInterceptionSqliteTest.InterceptionSqliteFixture>
+        : CommandInterceptionSqliteTestBase,
+            IClassFixture<CommandInterceptionSqliteTest.InterceptionSqliteFixture>
     {
         public CommandInterceptionSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
     public class CommandInterceptionWithDiagnosticsSqliteTest
-        : CommandInterceptionSqliteTestBase, IClassFixture<CommandInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
+        : CommandInterceptionSqliteTestBase,
+            IClassFixture<CommandInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
     {
         public CommandInterceptionWithDiagnosticsSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

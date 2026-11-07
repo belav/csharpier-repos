@@ -100,31 +100,30 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeList()
         {
-            IList<DateOnly> d = new List<DateOnly>
-            {
-                new DateOnly(2000, 12, 29)
-            };
+            IList<DateOnly> d = new List<DateOnly> { new DateOnly(2000, 12, 29) };
             string json = JsonConvert.SerializeObject(d, Formatting.Indented);
 
-            Assert.AreEqual(@"[
+            Assert.AreEqual(
+                @"[
   ""2000-12-29""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void SerializeList_Nullable()
         {
-            IList<DateOnly?> d = new List<DateOnly?>
-            {
-                new DateOnly(2000, 12, 29),
-                null
-            };
+            IList<DateOnly?> d = new List<DateOnly?> { new DateOnly(2000, 12, 29), null };
             string json = JsonConvert.SerializeObject(d, Formatting.Indented);
 
-            Assert.AreEqual(@"[
+            Assert.AreEqual(
+                @"[
   ""2000-12-29"",
   null
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -178,9 +177,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeList()
         {
-            var l = JsonConvert.DeserializeObject<IList<DateOnly>>(@"[
+            var l = JsonConvert.DeserializeObject<IList<DateOnly>>(
+                @"[
   ""2000-12-29""
-]");
+]"
+            );
 
             Assert.AreEqual(1, l.Count);
             Assert.AreEqual(new DateOnly(2000, 12, 29), l[0]);
@@ -189,10 +190,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeList_Nullable()
         {
-            var l = JsonConvert.DeserializeObject<IList<DateOnly?>>(@"[
+            var l = JsonConvert.DeserializeObject<IList<DateOnly?>>(
+                @"[
   ""2000-12-29"",
   null
-]");
+]"
+            );
 
             Assert.AreEqual(2, l.Count);
             Assert.AreEqual(new DateOnly(2000, 12, 29), l[0]);

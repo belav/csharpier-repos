@@ -10,7 +10,8 @@ namespace System.Net.NetworkInformation
             PingOptions? options,
             IPStatus ipStatus,
             long rtt,
-            byte[] buffer)
+            byte[] buffer
+        )
         {
             Address = address;
             Options = options;

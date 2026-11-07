@@ -74,6 +74,7 @@ public class Runtime_71601
         public Wrap FieldTwo;
 
         public static ref Wrap GetFieldOne(ref WrapTuple t) => ref Unsafe.Add(ref t.FieldTwo, -1);
+
         public static ref Wrap GetFieldTwo(ref WrapTuple t) => ref Unsafe.Add(ref t.FieldOne, 1);
     }
 

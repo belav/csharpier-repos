@@ -23,13 +23,16 @@ internal sealed partial class CSharpUseCollectionExpressionForCreateDiagnosticAn
         ImmutableDictionary<string, string?>.Empty.Add(UnwrapArgument, UnwrapArgument);
 
     public CSharpUseCollectionExpressionForCreateDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseCollectionExpressionForCreateDiagnosticId,
-               EnforceOnBuildValues.UseCollectionExpressionForCreate)
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseCollectionExpressionForCreateDiagnosticId,
+            EnforceOnBuildValues.UseCollectionExpressionForCreate
+        ) { }
 
-    protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context)
-        => context.RegisterSyntaxNodeAction(AnalyzeInvocationExpression, SyntaxKind.InvocationExpression);
+    protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context) =>
+        context.RegisterSyntaxNodeAction(
+            AnalyzeInvocationExpression,
+            SyntaxKind.InvocationExpression
+        );
 
     private void AnalyzeInvocationExpression(SyntaxNodeAnalysisContext context)
     {
@@ -43,35 +46,60 @@ internal sealed partial class CSharpUseCollectionExpressionForCreateDiagnosticAn
             return;
 
         var invocationExpression = (InvocationExpressionSyntax)context.Node;
-        if (!IsCollectionFactoryCreate(semanticModel, invocationExpression, out var memberAccess, out var unwrapArgument, cancellationToken))
+        if (
+            !IsCollectionFactoryCreate(
+                semanticModel,
+                invocationExpression,
+                out var memberAccess,
+                out var unwrapArgument,
+                cancellationToken
+            )
+        )
             return;
 
         // Make sure we can actually use a collection expression in place of the full invocation.
-        if (!CanReplaceWithCollectionExpression(semanticModel, invocationExpression, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !CanReplaceWithCollectionExpression(
+                semanticModel,
+                invocationExpression,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
             return;
 
         var locations = ImmutableArray.Create(invocationExpression.GetLocation());
         var properties = unwrapArgument ? s_unwrapArgumentProperties : null;
 
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            memberAccess.Name.Identifier.GetLocation(),
-            option.Notification,
-            additionalLocations: locations,
-            properties));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                memberAccess.Name.Identifier.GetLocation(),
+                option.Notification,
+                additionalLocations: locations,
+                properties
+            )
+        );
 
         var additionalUnnecessaryLocations = ImmutableArray.Create(
-            syntaxTree.GetLocation(TextSpan.FromBounds(
-                invocationExpression.SpanStart,
-                invocationExpression.ArgumentList.OpenParenToken.Span.End)),
-            invocationExpression.ArgumentList.CloseParenToken.GetLocation());
+            syntaxTree.GetLocation(
+                TextSpan.FromBounds(
+                    invocationExpression.SpanStart,
+                    invocationExpression.ArgumentList.OpenParenToken.Span.End
+                )
+            ),
+            invocationExpression.ArgumentList.CloseParenToken.GetLocation()
+        );
 
-        context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-            UnnecessaryCodeDescriptor,
-            additionalUnnecessaryLocations[0],
-            NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
-            additionalLocations: locations,
-            additionalUnnecessaryLocations: additionalUnnecessaryLocations,
-            properties));
+        context.ReportDiagnostic(
+            DiagnosticHelper.CreateWithLocationTags(
+                UnnecessaryCodeDescriptor,
+                additionalUnnecessaryLocations[0],
+                NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
+                additionalLocations: locations,
+                additionalUnnecessaryLocations: additionalUnnecessaryLocations,
+                properties
+            )
+        );
     }
 }

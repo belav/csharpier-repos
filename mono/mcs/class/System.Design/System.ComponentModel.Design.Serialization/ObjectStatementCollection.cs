@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.Serialization.ObjectStatementCollection
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,53 +27,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.Collections;
 using System.CodeDom;
+using System.Collections;
 
 namespace System.ComponentModel.Design.Serialization
 {
-	public sealed class ObjectStatementCollection : IEnumerable
-	{
+    public sealed class ObjectStatementCollection : IEnumerable
+    {
+        private Hashtable _statements;
 
-		private Hashtable _statements;
+        internal ObjectStatementCollection()
+        {
+            _statements = new Hashtable();
+        }
 
-		internal ObjectStatementCollection ()
-		{
-			_statements = new Hashtable ();
-		}
+        public bool ContainsKey(object statementOwner)
+        {
+            return _statements.ContainsKey(statementOwner);
+        }
 
-		public bool ContainsKey (object statementOwner)
-		{
-			return _statements.ContainsKey (statementOwner);
-		}
+        public IDictionaryEnumerator GetEnumerator()
+        {
+            return _statements.GetEnumerator();
+        }
 
-		public IDictionaryEnumerator GetEnumerator()
-		{
-			return _statements.GetEnumerator ();
-		}
+        public CodeStatementCollection this[object statementOwner]
+        {
+            get { return _statements[statementOwner] as CodeStatementCollection; }
+        }
 
-		public CodeStatementCollection this[object statementOwner]
-		{
-			get { return _statements[statementOwner] as CodeStatementCollection; }
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator ();
-		}
-	
-		public void Populate (object owner)
-		{
-			if (_statements[owner] == null)
-				_statements[owner] = null;
-		}
-	
-		public void Populate (ICollection statementOwners)
-		{
-			foreach (object o in statementOwners)
-				this.Populate (o);
-		}
-	}
+        public void Populate(object owner)
+        {
+            if (_statements[owner] == null)
+                _statements[owner] = null;
+        }
+
+        public void Populate(ICollection statementOwners)
+        {
+            foreach (object o in statementOwners)
+                this.Populate(o);
+        }
+    }
 }

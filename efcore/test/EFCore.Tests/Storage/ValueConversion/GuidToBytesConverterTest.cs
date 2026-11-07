@@ -13,12 +13,32 @@ public class GuidToBytesConverterTest
         var converter = _guidToBytes.ConvertToProviderExpression.Compile();
 
         Assert.Equal(
-            new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180, 98 },
-            converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462")));
+            new byte[]
+            {
+                180,
+                39,
+                238,
+                150,
+                139,
+                134,
+                73,
+                64,
+                186,
+                103,
+                203,
+                184,
+                60,
+                229,
+                180,
+                98,
+            },
+            converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
+        );
 
         Assert.Equal(
             new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            converter(Guid.Empty));
+            converter(Guid.Empty)
+        );
     }
 
     [ConditionalFact]
@@ -27,20 +47,60 @@ public class GuidToBytesConverterTest
         var converter = _guidToBytes.ConvertToProvider;
 
         Assert.Equal(
-            new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180, 98 },
-            converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462")));
+            new byte[]
+            {
+                180,
+                39,
+                238,
+                150,
+                139,
+                134,
+                73,
+                64,
+                186,
+                103,
+                203,
+                184,
+                60,
+                229,
+                180,
+                98,
+            },
+            converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
+        );
 
         Assert.Equal(
             new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            converter(Guid.Empty));
+            converter(Guid.Empty)
+        );
 
         Assert.Equal(
-            new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180, 98 },
-            converter((Guid?)new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462")));
+            new byte[]
+            {
+                180,
+                39,
+                238,
+                150,
+                139,
+                134,
+                73,
+                64,
+                186,
+                103,
+                203,
+                184,
+                60,
+                229,
+                180,
+                98,
+            },
+            converter((Guid?)new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
+        );
 
         Assert.Equal(
             new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            converter((Guid?)Guid.Empty));
+            converter((Guid?)Guid.Empty)
+        );
 
         Assert.Null(converter(null));
     }
@@ -52,23 +112,72 @@ public class GuidToBytesConverterTest
 
         Assert.Equal(
             new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"),
-            converter(new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180, 98 }));
+            converter(
+                new byte[]
+                {
+                    180,
+                    39,
+                    238,
+                    150,
+                    139,
+                    134,
+                    73,
+                    64,
+                    186,
+                    103,
+                    203,
+                    184,
+                    60,
+                    229,
+                    180,
+                    98,
+                }
+            )
+        );
 
         Assert.Equal(
             Guid.Empty,
-            converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
+            converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
+        );
 
-        Assert.Throws<ArgumentException>(
-            () => converter(new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180, 98, 0 }));
+        Assert.Throws<ArgumentException>(() =>
+            converter(
+                new byte[]
+                {
+                    180,
+                    39,
+                    238,
+                    150,
+                    139,
+                    134,
+                    73,
+                    64,
+                    186,
+                    103,
+                    203,
+                    184,
+                    60,
+                    229,
+                    180,
+                    98,
+                    0,
+                }
+            )
+        );
 
-        Assert.Throws<ArgumentException>(
-            () => converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
+        Assert.Throws<ArgumentException>(() =>
+            converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
+        );
 
-        Assert.Throws<ArgumentException>(
-            () => converter(new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180 }));
+        Assert.Throws<ArgumentException>(() =>
+            converter(
+                new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180 }
+            )
+        );
 
-        Assert.Throws<ArgumentException>(
-            () => converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
+        Assert.Throws<ArgumentException>(() =>
+            converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
+        );
 
         Assert.Throws<ArgumentNullException>(() => converter(null));
     }
@@ -80,11 +189,33 @@ public class GuidToBytesConverterTest
 
         Assert.Equal(
             new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"),
-            converter(new byte[] { 180, 39, 238, 150, 139, 134, 73, 64, 186, 103, 203, 184, 60, 229, 180, 98 }));
+            converter(
+                new byte[]
+                {
+                    180,
+                    39,
+                    238,
+                    150,
+                    139,
+                    134,
+                    73,
+                    64,
+                    186,
+                    103,
+                    203,
+                    184,
+                    60,
+                    229,
+                    180,
+                    98,
+                }
+            )
+        );
 
         Assert.Equal(
             Guid.Empty,
-            converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
+            converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
+        );
 
         Assert.Null(converter(null));
     }

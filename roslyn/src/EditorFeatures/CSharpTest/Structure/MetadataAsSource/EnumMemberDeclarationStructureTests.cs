@@ -12,21 +12,24 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource;
 
 [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
-public class EnumMemberDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<EnumMemberDeclarationSyntax>
+public class EnumMemberDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<EnumMemberDeclarationSyntax>
 {
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new EnumMemberDeclarationStructureProvider();
+
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new EnumMemberDeclarationStructureProvider();
 
     [Fact]
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                enum E
-                {
-                    $$Goo,
-                    Bar
-                }
-                """;
+            enum E
+            {
+                $$Goo,
+                Bar
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -35,33 +38,37 @@ public class EnumMemberDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
     public async Task WithAttributes()
     {
         var code = """
-                enum E
-                {
-                    {|hint:{|textspan:[Blah]
-                    |}$$Goo|},
-                    Bar
-                }
-                """;
+            enum E
+            {
+                {|hint:{|textspan:[Blah]
+                |}$$Goo|},
+                Bar
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                enum E
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Blah]
-                    |}$$Goo|},
-                    Bar
-                }
-                """;
+            enum E
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Blah]
+                |}$$Goo|},
+                Bar
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

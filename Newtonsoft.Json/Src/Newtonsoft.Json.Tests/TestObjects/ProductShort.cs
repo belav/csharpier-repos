@@ -31,6 +31,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public string Name;
         public DateTime ExpiryDate;
+
         //public decimal Price;
         public string[] Sizes;
     }

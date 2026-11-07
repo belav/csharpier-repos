@@ -13,7 +13,10 @@ namespace System.Data.Common
         private readonly DbSchemaTable _schemaTable;
         private readonly DataRow _dataRow;
 
-        internal static DbSchemaRow[] GetSortedSchemaRows(DataTable dataTable, bool returnProviderSpecificTypes)
+        internal static DbSchemaRow[] GetSortedSchemaRows(
+            DataTable dataTable,
+            bool returnProviderSpecificTypes
+        )
         {
             DataColumn? sortindex = dataTable.Columns[SchemaMappingUnsortedIndex];
             if (null == sortindex)
@@ -25,9 +28,9 @@ namespace System.Data.Common
             for (int i = 0; i < count; ++i)
             {
                 dataTable.Rows[i][sortindex] = i;
-            };
+            }
+            ;
             DbSchemaTable schemaTable = new DbSchemaTable(dataTable, returnProviderSpecificTypes);
-
 
             DataRow[] dataRows = SelectRows(dataTable);
             Debug.Assert(null != dataRows, "GetSchemaRows: unexpected null dataRows");
@@ -41,11 +44,17 @@ namespace System.Data.Common
             return schemaRows;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Filter expression is null.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Filter expression is null."
+        )]
         private static DataRow[] SelectRows(DataTable dataTable)
         {
-            const DataViewRowState rowStates = DataViewRowState.Unchanged | DataViewRowState.Added | DataViewRowState.ModifiedCurrent;
+            const DataViewRowState rowStates =
+                DataViewRowState.Unchanged
+                | DataViewRowState.Added
+                | DataViewRowState.ModifiedCurrent;
             return dataTable.Select(null, "ColumnOrdinal ASC", rowStates);
         }
 
@@ -57,10 +66,7 @@ namespace System.Data.Common
 
         internal DataRow DataRow
         {
-            get
-            {
-                return _dataRow;
-            }
+            get { return _dataRow; }
         }
 
         internal string ColumnName
@@ -122,7 +128,6 @@ namespace System.Data.Common
                 return string.Empty;
             }
         }
-
 
         internal string BaseCatalogName
         {
@@ -335,10 +340,7 @@ namespace System.Data.Common
 
         internal int UnsortedIndex
         {
-            get
-            {
-                return (int)_dataRow[_schemaTable.UnsortedIndex!, DataRowVersion.Default];
-            }
+            get { return (int)_dataRow[_schemaTable.UnsortedIndex!, DataRowVersion.Default]; }
         }
     }
 }

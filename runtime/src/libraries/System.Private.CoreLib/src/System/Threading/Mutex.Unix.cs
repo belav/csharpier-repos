@@ -14,10 +14,19 @@ namespace System.Threading
         {
             if (name != null)
             {
-                SafeWaitHandle? safeWaitHandle = WaitSubsystem.CreateNamedMutex(initiallyOwned, name, out createdNew);
+                SafeWaitHandle? safeWaitHandle = WaitSubsystem.CreateNamedMutex(
+                    initiallyOwned,
+                    name,
+                    out createdNew
+                );
                 if (safeWaitHandle == null)
                 {
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
                 }
                 SafeWaitHandle = safeWaitHandle;
                 return;
@@ -31,7 +40,10 @@ namespace System.Threading
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
 
-            OpenExistingResult status = WaitSubsystem.OpenNamedMutex(name, out SafeWaitHandle? safeWaitHandle);
+            OpenExistingResult status = WaitSubsystem.OpenNamedMutex(
+                name,
+                out SafeWaitHandle? safeWaitHandle
+            );
             result = status == OpenExistingResult.Success ? new Mutex(safeWaitHandle!) : null;
             return status;
         }

@@ -15,11 +15,11 @@
 namespace System
 {
     using System;
-    using System.Threading;
-    using System.Security;
     using System.Diagnostics.Contracts;
-    using System.Runtime.Versioning;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Threading;
 
 #if FEATURE_LEGACYNETCFFAS
     [System.Security.SecurityCritical]
@@ -46,10 +46,8 @@ namespace System
         }
 
         [System.Security.SecurityCritical]
-        static AppDomainPauseManager()
-        {
-        }
-        
+        static AppDomainPauseManager() { }
+
         static readonly AppDomainPauseManager instance = new AppDomainPauseManager();
         internal static AppDomainPauseManager Instance
         {
@@ -61,16 +59,14 @@ namespace System
         // currently there is nothing we do here as the implementation
         // of updating pause times have been moved to native CorHost2
         [System.Security.SecurityCritical]
-        public void Pausing()
-        {
-        }
+        public void Pausing() { }
 
         [System.Security.SecurityCritical]
         public void Paused()
         {
             Contract.Assert(!isPaused);
 
-            if(ResumeEvent == null)
+            if (ResumeEvent == null)
                 ResumeEvent = new ManualResetEvent(false);
             else
                 ResumeEvent.Reset();
@@ -96,7 +92,7 @@ namespace System
         {
             Timer.Resume();
         }
-   
+
         private static volatile bool isPaused;
 
         internal static bool IsPaused
@@ -108,7 +104,7 @@ namespace System
         internal static ManualResetEvent ResumeEvent
         {
             [System.Security.SecurityCritical]
-            get; 
+            get;
             [System.Security.SecurityCritical]
             set;
         }

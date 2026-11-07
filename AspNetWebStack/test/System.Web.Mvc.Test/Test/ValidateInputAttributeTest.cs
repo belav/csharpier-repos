@@ -58,7 +58,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnAuthorization(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnAuthorization(null);
+                },
+                "filterContext"
+            );
         }
 
         private static AuthorizationContext GetAuthorizationContext(ControllerBase controller)
@@ -68,8 +73,6 @@ namespace System.Web.Mvc.Test
             return mockAuthContext.Object;
         }
 
-        private class EmptyController : Controller
-        {
-        }
+        private class EmptyController : Controller { }
     }
 }

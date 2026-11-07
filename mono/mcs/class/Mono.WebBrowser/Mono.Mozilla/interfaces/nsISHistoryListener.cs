@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,59 +26,65 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("3b07f591-e8e1-11d4-9882-00c04fa02f40")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsISHistoryListener
+    {
+        #region nsISHistoryListener
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryNewEntry([MarshalAs(UnmanagedType.Interface)] nsIURI aNewURI);
 
-	[Guid ("3b07f591-e8e1-11d4-9882-00c04fa02f40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsISHistoryListener {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryGoBack([MarshalAs(UnmanagedType.Interface)] nsIURI aBackURI, out bool ret);
 
-#region nsISHistoryListener
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryNewEntry (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aNewURI);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryGoForward(
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aForwardURI,
+            out bool ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryGoBack (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBackURI, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryReload(
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aReloadURI,
+            uint aReloadFlags,
+            out bool ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryGoForward (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aForwardURI, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryGotoIndex(
+            int aIndex,
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aGotoURI,
+            out bool ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryReload (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aReloadURI,
-				   uint aReloadFlags, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryPurge(int aNumEntries, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryGotoIndex (
-				   int aIndex,
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aGotoURI, out bool ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryPurge (
-				   int aNumEntries, out bool ret);
-
-#endregion
-	}
-
-
-	internal class nsSHistoryListener {
-		public static nsISHistoryListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsISHistoryListener obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsISHistoryListener).GUID, obj);
-			return o as nsISHistoryListener;
-		}
-	}
+    internal class nsSHistoryListener
+    {
+        public static nsISHistoryListener GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsISHistoryListener obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsISHistoryListener).GUID, obj);
+            return o as nsISHistoryListener;
+        }
+    }
 }

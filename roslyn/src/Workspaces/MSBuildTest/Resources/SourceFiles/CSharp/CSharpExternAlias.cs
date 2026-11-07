@@ -9,6 +9,7 @@ class Program
 {
     static Sys1.System.Uri f1 = null;
     static Sys2::System.Uri f2;
+
     static void Main()
     {
         f2 = f1;

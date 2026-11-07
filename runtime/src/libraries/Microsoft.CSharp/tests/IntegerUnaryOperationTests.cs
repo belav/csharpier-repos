@@ -12,57 +12,91 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 {
     public class IntegerUnaryOperationTests
     {
-        private static CallSite<Func<CallSite, object, object>> GetUnaryOperationCallSite(ExpressionType operation, bool checkedContext, bool constantArgument)
+        private static CallSite<Func<CallSite, object, object>> GetUnaryOperationCallSite(
+            ExpressionType operation,
+            bool checkedContext,
+            bool constantArgument
+        )
         {
-            CSharpArgumentInfo x = CSharpArgumentInfo.Create(constantArgument ? CSharpArgumentInfoFlags.Constant : CSharpArgumentInfoFlags.None, null);
-            CallSiteBinder binder =
-                Binder.UnaryOperation(
-                    checkedContext ? CSharpBinderFlags.CheckedContext : CSharpBinderFlags.None, operation,
-                    typeof(IntegerBinaryOperationTests), new[] { x });
+            CSharpArgumentInfo x = CSharpArgumentInfo.Create(
+                constantArgument ? CSharpArgumentInfoFlags.Constant : CSharpArgumentInfoFlags.None,
+                null
+            );
+            CallSiteBinder binder = Binder.UnaryOperation(
+                checkedContext ? CSharpBinderFlags.CheckedContext : CSharpBinderFlags.None,
+                operation,
+                typeof(IntegerBinaryOperationTests),
+                new[] { x }
+            );
             return CallSite<Func<CallSite, object, object>>.Create(binder);
         }
 
         private static readonly int[] TestInt32Values = { 0, 1, -1, 3, int.MinValue, int.MaxValue };
 
-        public static IEnumerable<object[]> Int32TestNegations
-            => from x in TestInt32Values select new object[] {x, ExpressionType.Negate, unchecked(-x), x != int.MinValue};
+        public static IEnumerable<object[]> Int32TestNegations =>
+            from x in TestInt32Values
+            select new object[] { x, ExpressionType.Negate, unchecked(-x), x != int.MinValue };
 
-        public static IEnumerable<object[]> Int32TestUnaryPluses
-            => from x in TestInt32Values select new object[] {x, ExpressionType.UnaryPlus, x, true};
+        public static IEnumerable<object[]> Int32TestUnaryPluses =>
+            from x in TestInt32Values
+            select new object[] { x, ExpressionType.UnaryPlus, x, true };
 
-        public static IEnumerable<object[]> Int32TestOnesComplements
-            => from x in TestInt32Values select new object[] {x, ExpressionType.OnesComplement, ~x, true};
+        public static IEnumerable<object[]> Int32TestOnesComplements =>
+            from x in TestInt32Values
+            select new object[] { x, ExpressionType.OnesComplement, ~x, true };
 
         private static readonly uint[] TestUInt32Values = { 0, 1, 3, int.MaxValue, uint.MaxValue };
 
-        public static IEnumerable<object[]> UInt32TestNegations
-            => from x in TestUInt32Values select new object[] {x, ExpressionType.Negate, -x, true};
+        public static IEnumerable<object[]> UInt32TestNegations =>
+            from x in TestUInt32Values
+            select new object[] { x, ExpressionType.Negate, -x, true };
 
-        public static IEnumerable<object[]> UInt32TestUnaryPluses
-            => from x in TestUInt32Values select new object[] {x, ExpressionType.UnaryPlus, x, true};
+        public static IEnumerable<object[]> UInt32TestUnaryPluses =>
+            from x in TestUInt32Values
+            select new object[] { x, ExpressionType.UnaryPlus, x, true };
 
-        public static IEnumerable<object[]> UInt32TestOnesComplements
-            => from x in TestUInt32Values select new object[] {x, ExpressionType.OnesComplement, ~x, true};
+        public static IEnumerable<object[]> UInt32TestOnesComplements =>
+            from x in TestUInt32Values
+            select new object[] { x, ExpressionType.OnesComplement, ~x, true };
 
-        private static readonly long[] TestInt64Values = { 0, 1, -1, 3, long.MinValue, long.MaxValue };
+        private static readonly long[] TestInt64Values =
+        {
+            0,
+            1,
+            -1,
+            3,
+            long.MinValue,
+            long.MaxValue,
+        };
 
-        public static IEnumerable<object[]> Int64TestNegations
-            => from x in TestInt64Values select new object[] {x, ExpressionType.Negate, unchecked(-x), x != long.MinValue};
+        public static IEnumerable<object[]> Int64TestNegations =>
+            from x in TestInt64Values
+            select new object[] { x, ExpressionType.Negate, unchecked(-x), x != long.MinValue };
 
-        public static IEnumerable<object[]> Int64TestUnaryPluses
-            => from x in TestInt64Values select new object[] {x, ExpressionType.UnaryPlus, x, true};
+        public static IEnumerable<object[]> Int64TestUnaryPluses =>
+            from x in TestInt64Values
+            select new object[] { x, ExpressionType.UnaryPlus, x, true };
 
-        public static IEnumerable<object[]> Int64TestOnesComplements
-            => from x in TestInt64Values
-               select new object[] { x, ExpressionType.OnesComplement, ~x, true };
+        public static IEnumerable<object[]> Int64TestOnesComplements =>
+            from x in TestInt64Values
+            select new object[] { x, ExpressionType.OnesComplement, ~x, true };
 
-        private static readonly ulong[] TestUInt64Values = { 0, 1, 3, long.MaxValue, ulong.MaxValue };
+        private static readonly ulong[] TestUInt64Values =
+        {
+            0,
+            1,
+            3,
+            long.MaxValue,
+            ulong.MaxValue,
+        };
 
-        public static IEnumerable<object[]> UInt64TestUnaryPluses
-            => from x in TestUInt64Values select new object[] {x, ExpressionType.UnaryPlus, x, true};
+        public static IEnumerable<object[]> UInt64TestUnaryPluses =>
+            from x in TestUInt64Values
+            select new object[] { x, ExpressionType.UnaryPlus, x, true };
 
-        public static IEnumerable<object[]> UInt64TestOnesComplements
-            => from x in TestUInt64Values select new object[] {x, ExpressionType.OnesComplement, ~x, true};
+        public static IEnumerable<object[]> UInt64TestOnesComplements =>
+            from x in TestUInt64Values
+            select new object[] { x, ExpressionType.OnesComplement, ~x, true };
 
         [Theory]
         [MemberData(nameof(Int32TestNegations))]
@@ -76,7 +110,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [MemberData(nameof(Int64TestOnesComplements))]
         [MemberData(nameof(UInt64TestUnaryPluses))]
         [MemberData(nameof(UInt64TestOnesComplements))]
-        public void RuntimeExpressions(object x, ExpressionType type, object result, bool shouldSucceedChecked)
+        public void RuntimeExpressions(
+            object x,
+            ExpressionType type,
+            object result,
+            bool shouldSucceedChecked
+        )
         {
             var callsite = GetUnaryOperationCallSite(type, false, false);
             Assert.Equal(result, callsite.Target(callsite, x));
@@ -103,8 +142,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [MemberData(nameof(Int64TestOnesComplements))]
         [MemberData(nameof(UInt64TestUnaryPluses))]
         [MemberData(nameof(UInt64TestOnesComplements))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
-        public void ConstantExpressions(object x, ExpressionType type, object result, bool shouldSucceedChecked)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
+        public void ConstantExpressions(
+            object x,
+            ExpressionType type,
+            object result,
+            bool shouldSucceedChecked
+        )
         {
             var callsite = GetUnaryOperationCallSite(type, false, true);
             Assert.Equal(result, callsite.Target(callsite, x));

@@ -12,54 +12,69 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ExternKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
+        {
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.NewKeyword,
+            SyntaxKind.OverrideKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.ProtectedKeyword,
+            SyntaxKind.SealedKeyword,
+            SyntaxKind.StaticKeyword,
+            SyntaxKind.UnsafeKeyword,
+            SyntaxKind.VirtualKeyword,
+        };
+
+        private static readonly ISet<SyntaxKind> s_validGlobalModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
+        {
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.NewKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.StaticKeyword,
+            SyntaxKind.UnsafeKeyword,
+        };
+
+        private static readonly ISet<SyntaxKind> s_validLocalFunctionModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
             {
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.NewKeyword,
-                SyntaxKind.OverrideKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.PrivateKeyword,
-                SyntaxKind.ProtectedKeyword,
-                SyntaxKind.SealedKeyword,
                 SyntaxKind.StaticKeyword,
                 SyntaxKind.UnsafeKeyword,
-                SyntaxKind.VirtualKeyword,
-            };
-
-        private static readonly ISet<SyntaxKind> s_validGlobalModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.NewKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.PrivateKeyword,
-                SyntaxKind.StaticKeyword,
-                SyntaxKind.UnsafeKeyword,
-            };
-
-        private static readonly ISet<SyntaxKind> s_validLocalFunctionModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.StaticKeyword,
-                SyntaxKind.UnsafeKeyword
             };
 
         public ExternKeywordRecommender()
-            : base(SyntaxKind.ExternKeyword)
-        {
-        }
+            : base(SyntaxKind.ExternKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                IsExternAliasContext(context) ||
-                (context.IsGlobalStatementContext && syntaxTree.IsScript()) ||
-                syntaxTree.IsGlobalMemberDeclarationContext(position, s_validGlobalModifiers, cancellationToken) ||
-                context.IsMemberDeclarationContext(
+            return IsExternAliasContext(context)
+                || (context.IsGlobalStatementContext && syntaxTree.IsScript())
+                || syntaxTree.IsGlobalMemberDeclarationContext(
+                    position,
+                    s_validGlobalModifiers,
+                    cancellationToken
+                )
+                || context.IsMemberDeclarationContext(
                     validModifiers: s_validModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken) ||
-                context.SyntaxTree.IsLocalFunctionDeclarationContext(position, s_validLocalFunctionModifiers, cancellationToken);
+                    cancellationToken: cancellationToken
+                )
+                || context.SyntaxTree.IsLocalFunctionDeclarationContext(
+                    position,
+                    s_validLocalFunctionModifiers,
+                    cancellationToken
+                );
         }
 
         private static bool IsExternAliasContext(CSharpSyntaxContext context)
@@ -87,24 +102,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 return true;
             }
 
-            if (token.Kind() == SyntaxKind.OpenBraceToken &&
-                token.Parent.IsKind(SyntaxKind.NamespaceDeclaration))
+            if (
+                token.Kind() == SyntaxKind.OpenBraceToken
+                && token.Parent.IsKind(SyntaxKind.NamespaceDeclaration)
+            )
             {
                 return true;
             }
 
             // namespace N;
             // |
-            if (token.Kind() == SyntaxKind.SemicolonToken &&
-                token.Parent.IsKind(SyntaxKind.FileScopedNamespaceDeclaration))
+            if (
+                token.Kind() == SyntaxKind.SemicolonToken
+                && token.Parent.IsKind(SyntaxKind.FileScopedNamespaceDeclaration)
+            )
             {
                 return true;
             }
 
             // extern alias a;
             // |
-            if (token.Kind() == SyntaxKind.SemicolonToken &&
-                token.Parent.IsKind(SyntaxKind.ExternAliasDirective))
+            if (
+                token.Kind() == SyntaxKind.SemicolonToken
+                && token.Parent.IsKind(SyntaxKind.ExternAliasDirective)
+            )
             {
                 return true;
             }

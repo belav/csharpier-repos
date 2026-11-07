@@ -22,23 +22,61 @@ internal sealed class RemoteBuildHost
         _client = client;
     }
 
-    public Task<bool> HasUsableMSBuildAsync(string projectOrSolutionFilePath, CancellationToken cancellationToken)
-        => _client.InvokeAsync<bool>(BuildHostTargetObject, nameof(BuildHost.HasUsableMSBuild), parameters: [projectOrSolutionFilePath], cancellationToken);
+    public Task<bool> HasUsableMSBuildAsync(
+        string projectOrSolutionFilePath,
+        CancellationToken cancellationToken
+    ) =>
+        _client.InvokeAsync<bool>(
+            BuildHostTargetObject,
+            nameof(BuildHost.HasUsableMSBuild),
+            parameters: [projectOrSolutionFilePath],
+            cancellationToken
+        );
 
-    public Task<ImmutableArray<(string ProjectPath, string ProjectGuid)>> GetProjectsInSolutionAsync(string solutionFilePath, CancellationToken cancellationToken)
-        => _client.InvokeAsync<ImmutableArray<(string ProjectPath, string ProjectGuid)>>(BuildHostTargetObject, nameof(BuildHost.GetProjectsInSolution), parameters: [solutionFilePath], cancellationToken);
+    public Task<
+        ImmutableArray<(string ProjectPath, string ProjectGuid)>
+    > GetProjectsInSolutionAsync(string solutionFilePath, CancellationToken cancellationToken) =>
+        _client.InvokeAsync<ImmutableArray<(string ProjectPath, string ProjectGuid)>>(
+            BuildHostTargetObject,
+            nameof(BuildHost.GetProjectsInSolution),
+            parameters: [solutionFilePath],
+            cancellationToken
+        );
 
-    public async Task<RemoteProjectFile> LoadProjectFileAsync(string projectFilePath, string languageName, CancellationToken cancellationToken)
+    public async Task<RemoteProjectFile> LoadProjectFileAsync(
+        string projectFilePath,
+        string languageName,
+        CancellationToken cancellationToken
+    )
     {
-        var remoteProjectFileTargetObject = await _client.InvokeAsync<int>(BuildHostTargetObject, nameof(BuildHost.LoadProjectFileAsync), parameters: [projectFilePath, languageName], cancellationToken).ConfigureAwait(false);
+        var remoteProjectFileTargetObject = await _client
+            .InvokeAsync<int>(
+                BuildHostTargetObject,
+                nameof(BuildHost.LoadProjectFileAsync),
+                parameters: [projectFilePath, languageName],
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         return new RemoteProjectFile(_client, remoteProjectFileTargetObject);
     }
 
-    public Task<string?> TryGetProjectOutputPathAsync(string projectFilePath, CancellationToken cancellationToken)
-        => _client.InvokeNullableAsync<string>(BuildHostTargetObject, nameof(BuildHost.TryGetProjectOutputPathAsync), parameters: [projectFilePath], cancellationToken);
+    public Task<string?> TryGetProjectOutputPathAsync(
+        string projectFilePath,
+        CancellationToken cancellationToken
+    ) =>
+        _client.InvokeNullableAsync<string>(
+            BuildHostTargetObject,
+            nameof(BuildHost.TryGetProjectOutputPathAsync),
+            parameters: [projectFilePath],
+            cancellationToken
+        );
 
-    public Task ShutdownAsync(CancellationToken cancellationToken)
-        => _client.InvokeAsync(BuildHostTargetObject, nameof(BuildHost.ShutdownAsync), parameters: [], cancellationToken);
-
+    public Task ShutdownAsync(CancellationToken cancellationToken) =>
+        _client.InvokeAsync(
+            BuildHostTargetObject,
+            nameof(BuildHost.ShutdownAsync),
+            parameters: [],
+            cancellationToken
+        );
 }

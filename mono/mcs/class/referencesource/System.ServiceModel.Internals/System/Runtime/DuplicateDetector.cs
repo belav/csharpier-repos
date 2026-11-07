@@ -42,7 +42,10 @@ namespace System.Runtime
 
         void Add(T value)
         {
-            Fx.Assert(this.items.Count == this.fifoList.Count, "The items and fifoList must be synchronized.");
+            Fx.Assert(
+                this.items.Count == this.fifoList.Count,
+                "The items and fifoList must be synchronized."
+            );
 
             if (this.items.Count == this.capacity)
             {

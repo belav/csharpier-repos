@@ -16,14 +16,29 @@ namespace Algorithms
 
         protected FractalRenderer(Action<int, int, int> draw, Func<bool> checkAbort)
         {
-            _drawPixel = draw; _abort = checkAbort;
+            _drawPixel = draw;
+            _abort = checkAbort;
         }
 
-        protected Action<int, int, int> DrawPixel { get { return _drawPixel; } }
+        protected Action<int, int, int> DrawPixel
+        {
+            get { return _drawPixel; }
+        }
 
-        public bool Abort { get { return _abort(); } }
+        public bool Abort
+        {
+            get { return _abort(); }
+        }
 
-        public static Render SelectRender(Action<int, int, int> draw, Func<bool> abort, bool useVectorTypes, bool doublePrecision, bool isMultiThreaded, bool useAbstractDataType, bool dontUseIntTypes = true)
+        public static Render SelectRender(
+            Action<int, int, int> draw,
+            Func<bool> abort,
+            bool useVectorTypes,
+            bool doublePrecision,
+            bool isMultiThreaded,
+            bool useAbstractDataType,
+            bool dontUseIntTypes = true
+        )
         {
             if (useVectorTypes && doublePrecision)
             {

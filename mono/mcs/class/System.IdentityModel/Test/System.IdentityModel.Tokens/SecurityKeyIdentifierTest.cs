@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,31 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-	[TestFixture]
-	public class SecurityKeyIdentifierTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FindEmpty ()
-		{
-			new SecurityKeyIdentifier ().Find<X509ThumbprintKeyIdentifierClause> ();
-		}
+    [TestFixture]
+    public class SecurityKeyIdentifierTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FindEmpty()
+        {
+            new SecurityKeyIdentifier().Find<X509ThumbprintKeyIdentifierClause>();
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CreateKeyEmpty ()
-		{
-			new SecurityKeyIdentifier ().Find<X509ThumbprintKeyIdentifierClause> ();
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateKeyEmpty()
+        {
+            new SecurityKeyIdentifier().Find<X509ThumbprintKeyIdentifierClause>();
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void ReadOnlyAdd ()
-		{
-			SecurityKeyIdentifier ki = new SecurityKeyIdentifier ();
-			ki.MakeReadOnly ();
-			ki.Add (new LocalIdKeyIdentifierClause ("foo"));
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ReadOnlyAdd()
+        {
+            SecurityKeyIdentifier ki = new SecurityKeyIdentifier();
+            ki.MakeReadOnly();
+            ki.Add(new LocalIdKeyIdentifierClause("foo"));
+        }
+    }
 }
 #endif

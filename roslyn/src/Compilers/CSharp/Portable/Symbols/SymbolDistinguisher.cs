@@ -4,11 +4,11 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Roslyn.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -86,10 +86,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void MakeDescriptions()
         {
-            if (!_lazyDescriptions.IsDefault) return;
+            if (!_lazyDescriptions.IsDefault)
+                return;
 
-            string description0 = _symbol0.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageNoParameterNamesFormat);
-            string description1 = _symbol1.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageNoParameterNamesFormat);
+            string description0 = _symbol0.ToDisplayString(
+                SymbolDisplayFormat.CSharpErrorMessageNoParameterNamesFormat
+            );
+            string description1 = _symbol1.ToDisplayString(
+                SymbolDisplayFormat.CSharpErrorMessageNoParameterNamesFormat
+            );
 
             if (description0 == description1)
             {
@@ -132,9 +137,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            if (!_lazyDescriptions.IsDefault) return;
+            if (!_lazyDescriptions.IsDefault)
+                return;
 
-            ImmutableInterlocked.InterlockedInitialize(ref _lazyDescriptions, ImmutableArray.Create(description0, description1));
+            ImmutableInterlocked.InterlockedInitialize(
+                ref _lazyDescriptions,
+                ImmutableArray.Create(description0, description1)
+            );
         }
 
         private static Symbol UnwrapSymbol(Symbol symbol)
@@ -158,16 +167,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private static string GetLocationString(CSharpCompilation compilation, Symbol unwrappedSymbol)
+        private static string GetLocationString(
+            CSharpCompilation compilation,
+            Symbol unwrappedSymbol
+        )
         {
             Debug.Assert((object)unwrappedSymbol == UnwrapSymbol(unwrappedSymbol));
 
-            ImmutableArray<SyntaxReference> syntaxReferences = unwrappedSymbol.DeclaringSyntaxReferences;
+            ImmutableArray<SyntaxReference> syntaxReferences =
+                unwrappedSymbol.DeclaringSyntaxReferences;
             if (syntaxReferences.Length > 0)
             {
                 var tree = syntaxReferences[0].SyntaxTree;
                 var span = syntaxReferences[0].Span;
-                string path = tree.GetDisplayPath(span, (compilation != null) ? compilation.Options.SourceReferenceResolver : null);
+                string path = tree.GetDisplayPath(
+                    span,
+                    (compilation != null) ? compilation.Options.SourceReferenceResolver : null
+                );
                 if (!string.IsNullOrEmpty(path))
                 {
                     return $"{path}({tree.GetDisplayLineNumber(span)})";
@@ -179,7 +195,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (compilation != null)
                 {
-                    PortableExecutableReference metadataReference = compilation.GetMetadataReference(containingAssembly) as PortableExecutableReference;
+                    PortableExecutableReference metadataReference =
+                        compilation.GetMetadataReference(containingAssembly)
+                        as PortableExecutableReference;
                     if (metadataReference != null)
                     {
                         string path = metadataReference.FilePath;
@@ -193,7 +211,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return containingAssembly.Identity.ToString();
             }
 
-            Debug.Assert(unwrappedSymbol.Kind == SymbolKind.DynamicType || unwrappedSymbol.Kind == SymbolKind.ErrorType || unwrappedSymbol.Kind == SymbolKind.FunctionPointerType);
+            Debug.Assert(
+                unwrappedSymbol.Kind == SymbolKind.DynamicType
+                    || unwrappedSymbol.Kind == SymbolKind.ErrorType
+                    || unwrappedSymbol.Kind == SymbolKind.FunctionPointerType
+            );
             return null;
         }
 
@@ -222,9 +244,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override bool Equals(object obj)
             {
                 var other = obj as Description;
-                return other != null &&
-                    _distinguisher._compilation == other._distinguisher._compilation &&
-                    GetSymbol() == other.GetSymbol();
+                return other != null
+                    && _distinguisher._compilation == other._distinguisher._compilation
+                    && GetSymbol() == other.GetSymbol();
             }
 
             public override int GetHashCode()

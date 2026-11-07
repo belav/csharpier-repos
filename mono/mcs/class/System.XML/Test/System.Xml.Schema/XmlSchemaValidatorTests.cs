@@ -7,97 +7,106 @@
 // (C) 2008 Novell Inc.
 //
 
-
 using System;
 using System.Collections;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-	[TestFixture]
-	public class XmlSchemaValidatorTests
-	{
-		void Validate (string xml, string xsd)
-		{
-			XmlSchema schema = XmlSchema.Read (new StringReader (xsd), null);
-			XmlReaderSettings settings = new XmlReaderSettings ();
-			settings.ValidationType = ValidationType.Schema;
-			settings.Schemas.Add (schema);
-			XmlReader reader = XmlReader.Create (new StringReader (xml), settings);
-			while (reader.Read ())
-				;
-		}
+    [TestFixture]
+    public class XmlSchemaValidatorTests
+    {
+        void Validate(string xml, string xsd)
+        {
+            XmlSchema schema = XmlSchema.Read(new StringReader(xsd), null);
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.Schemas.Add(schema);
+            XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
+            while (reader.Read())
+                ;
+        }
 
-		[Test]
-		public void XsdAnyToSkipAttributeValidation ()
-		{
-			// bug #358408
-			XmlSchemaSet schemas = new XmlSchemaSet ();
-			schemas.Add (null, TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/358408.xsd"));
-			XmlSchemaValidator v = new XmlSchemaValidator (
-				new NameTable (),
-				schemas,
-				new XmlNamespaceManager (new NameTable ()),
-				XmlSchemaValidationFlags.ProcessIdentityConstraints);
-			v.Initialize ();
-			v.ValidateWhitespace (" ");
-			XmlSchemaInfo info = new XmlSchemaInfo ();
-			ArrayList list = new ArrayList ();
+        [Test]
+        public void XsdAnyToSkipAttributeValidation()
+        {
+            // bug #358408
+            XmlSchemaSet schemas = new XmlSchemaSet();
+            schemas.Add(
+                null,
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/358408.xsd")
+            );
+            XmlSchemaValidator v = new XmlSchemaValidator(
+                new NameTable(),
+                schemas,
+                new XmlNamespaceManager(new NameTable()),
+                XmlSchemaValidationFlags.ProcessIdentityConstraints
+            );
+            v.Initialize();
+            v.ValidateWhitespace(" ");
+            XmlSchemaInfo info = new XmlSchemaInfo();
+            ArrayList list = new ArrayList();
 
-			v.ValidateElement ("configuration", "", info, null, null, null, null);
-			v.GetUnspecifiedDefaultAttributes (list);
-			v.ValidateEndOfAttributes (info);
+            v.ValidateElement("configuration", "", info, null, null, null, null);
+            v.GetUnspecifiedDefaultAttributes(list);
+            v.ValidateEndOfAttributes(info);
 
-			v.ValidateWhitespace (" ");
+            v.ValidateWhitespace(" ");
 
-			v.ValidateElement ("host", "", info, null, null, null, null);
-			v.ValidateAttribute ("auto-start", "", "true", info);
-			list.Clear ();
-			v.GetUnspecifiedDefaultAttributes (list);
-			v.ValidateEndOfAttributes (info);
-			v.ValidateEndElement (null);//info);
+            v.ValidateElement("host", "", info, null, null, null, null);
+            v.ValidateAttribute("auto-start", "", "true", info);
+            list.Clear();
+            v.GetUnspecifiedDefaultAttributes(list);
+            v.ValidateEndOfAttributes(info);
+            v.ValidateEndElement(null); //info);
 
-			v.ValidateWhitespace (" ");
+            v.ValidateWhitespace(" ");
 
-			v.ValidateElement ("service-managers", "", info, null, null, null, null);
-			list.Clear ();
-			v.GetUnspecifiedDefaultAttributes (list);
-			v.ValidateEndOfAttributes (info);
+            v.ValidateElement("service-managers", "", info, null, null, null, null);
+            list.Clear();
+            v.GetUnspecifiedDefaultAttributes(list);
+            v.ValidateEndOfAttributes(info);
 
-			v.ValidateWhitespace (" ");
+            v.ValidateWhitespace(" ");
 
-			v.ValidateElement ("service-manager", "", info, null, null, null, null);
-			list.Clear ();
-			v.GetUnspecifiedDefaultAttributes (list);
-			v.ValidateEndOfAttributes (info);
+            v.ValidateElement("service-manager", "", info, null, null, null, null);
+            list.Clear();
+            v.GetUnspecifiedDefaultAttributes(list);
+            v.ValidateEndOfAttributes(info);
 
-			v.ValidateWhitespace (" ");
+            v.ValidateWhitespace(" ");
 
-			v.ValidateElement ("foo", "", info, null, null, null, null);
-			v.ValidateAttribute ("bar", "", "", info);
-		}
+            v.ValidateElement("foo", "", info, null, null, null, null);
+            v.ValidateAttribute("bar", "", "", info);
+        }
 
-		[Test]
-		public void SkipInvolved () // bug #422581
-		{
-			XmlReader schemaReader = XmlReader.Create (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/422581.xsd"));
-			XmlSchema schema = XmlSchema.Read (schemaReader, null);
-			XmlReaderSettings settings = new XmlReaderSettings ();
-			settings.ValidationType = ValidationType.Schema;
-			settings.Schemas.Add (schema);
-			XmlReader reader = XmlReader.Create (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/422581.xml"), settings);
-			while (reader.Read ());
-		}
+        [Test]
+        public void SkipInvolved() // bug #422581
+        {
+            XmlReader schemaReader = XmlReader.Create(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/422581.xsd")
+            );
+            XmlSchema schema = XmlSchema.Read(schemaReader, null);
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.Schemas.Add(schema);
+            XmlReader reader = XmlReader.Create(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/422581.xml"),
+                settings
+            );
+            while (reader.Read())
+                ;
+        }
 
-		[Test]
-		public void Bug433774 ()
-		{
-			string xsd = @"<xs:schema targetNamespace='urn:foo' xmlns='urn:foo' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+        [Test]
+        public void Bug433774()
+        {
+            string xsd =
+                @"<xs:schema targetNamespace='urn:foo' xmlns='urn:foo' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='Root'>
     <xs:complexType>
       <xs:sequence></xs:sequence>
@@ -105,20 +114,21 @@ namespace MonoTests.System.Xml
     </xs:complexType>
   </xs:element>
 </xs:schema>";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml ("<Root version='3' xmlns='urn:foo'/>");
-			XmlSchemaSet schemaSet = new XmlSchemaSet();
-			schemaSet.Add (XmlSchema.Read (XmlReader.Create (new StringReader (xsd)), null));
-			doc.Schemas = schemaSet;
-			XmlNode root = doc.DocumentElement;
-			doc.Validate (null, root);
-		}
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml("<Root version='3' xmlns='urn:foo'/>");
+            XmlSchemaSet schemaSet = new XmlSchemaSet();
+            schemaSet.Add(XmlSchema.Read(XmlReader.Create(new StringReader(xsd)), null));
+            doc.Schemas = schemaSet;
+            XmlNode root = doc.DocumentElement;
+            doc.Validate(null, root);
+        }
 
-		[Test]
-		[ExpectedException (typeof (XmlSchemaValidationException))]
-		public void Bug435206 ()
-		{
-			string xsd = @"<xs:schema attributeFormDefault='unqualified' elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+        [Test]
+        [ExpectedException(typeof(XmlSchemaValidationException))]
+        public void Bug435206()
+        {
+            string xsd =
+                @"<xs:schema attributeFormDefault='unqualified' elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='myDoc'>
     <xs:complexType>
       <xs:attribute name='foo' type='xs:unsignedLong' use='required' />
@@ -126,14 +136,15 @@ namespace MonoTests.System.Xml
     </xs:complexType>
   </xs:element>
 </xs:schema>";
-			string xml = @"<myDoc foo='12' bar='January 1st 1900'/>";
-			Validate (xml, xsd);
-		}
+            string xml = @"<myDoc foo='12' bar='January 1st 1900'/>";
+            Validate(xml, xsd);
+        }
 
-		[Test]
-		public void Bug469713 ()
-		{
-			string xsd = @"<xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+        [Test]
+        public void Bug469713()
+        {
+            string xsd =
+                @"<xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='Message'>
     <xs:complexType>
       <xs:all>
@@ -142,24 +153,34 @@ namespace MonoTests.System.Xml
     </xs:complexType>
   </xs:element>
 </xs:schema>";
-			string xml = @"<Message xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='test.xsd'>
+            string xml =
+                @"<Message xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='test.xsd'>
         <MyDateTime xsi:nil='true'></MyDateTime>
 </Message>";
-			Validate (xml, xsd);
-		}
+            Validate(xml, xsd);
+        }
 
-		[Test]
-		public void Bug496192_496205 ()
-		{
-			using (var xmlr = new StreamReader (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/496192.xml")))
-				using (var xsdr = new StreamReader (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/496192.xsd")))
-					Validate (xmlr.ReadToEnd (), xsdr.ReadToEnd ());
-		}
-		
-		[Test]		
-		public void Bug501666 ()
-		{
-			string xsd = @"
+        [Test]
+        public void Bug496192_496205()
+        {
+            using (
+                var xmlr = new StreamReader(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/496192.xml")
+                )
+            )
+            using (
+                var xsdr = new StreamReader(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/496192.xsd")
+                )
+            )
+                Validate(xmlr.ReadToEnd(), xsdr.ReadToEnd());
+        }
+
+        [Test]
+        public void Bug501666()
+        {
+            string xsd =
+                @"
 			<xs:schema id='Settings'
 				targetNamespace='foo'                
 				xmlns='foo'
@@ -179,17 +200,18 @@ namespace MonoTests.System.Xml
 				</xs:simpleType>
 			</xs:schema>";
 
-			string xml = @"<Settings port='1337' xmlns='foo'/>";
+            string xml = @"<Settings port='1337' xmlns='foo'/>";
 
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (xml);
-			doc.Schemas.Add (XmlSchema.Read (XmlReader.Create (new StringReader (xsd)), null));
-			doc.Validate (null);
-		}
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+            doc.Schemas.Add(XmlSchema.Read(XmlReader.Create(new StringReader(xsd)), null));
+            doc.Validate(null);
+        }
 
-		public void Bug502251 ()
-		{
-			string xsd = @"
+        public void Bug502251()
+        {
+            string xsd =
+                @"
    <xs:schema id='foo' targetNamespace='foo' 
      elementFormDefault='qualified' 
      xmlns='foo'     
@@ -248,23 +270,26 @@ namespace MonoTests.System.Xml
  <xs:element name='Layout' type='Layout' />
 </xs:schema>";
 
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (@"<Layout xmlns='foo'>
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(
+                @"<Layout xmlns='foo'>
   <Rows>
     <Row><Conditional/></Row>     
   </Rows>
-</Layout>");
+</Layout>"
+            );
 
-			XmlSchema schema = XmlSchema.Read (XmlReader.Create (new StringReader (xsd)), null);
+            XmlSchema schema = XmlSchema.Read(XmlReader.Create(new StringReader(xsd)), null);
 
-			doc.Schemas.Add (schema);
-			doc.Validate (null);
-		}
+            doc.Schemas.Add(schema);
+            doc.Validate(null);
+        }
 
-		[Test]
-		public void Bug557452 ()
-		{
-			string xsd = @"
+        [Test]
+        public void Bug557452()
+        {
+            string xsd =
+                @"
 			<xs:schema id='Settings'
 				targetNamespace='foo'
 				xmlns='foo'
@@ -284,25 +309,41 @@ namespace MonoTests.System.Xml
 				</xs:simpleType>
 			</xs:schema>";
 
-			string xml = @"<Settings port='1337' xmlns='foo'/>";
+            string xml = @"<Settings port='1337' xmlns='foo'/>";
 
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (xml);
-			doc.Schemas.Add (XmlSchema.Read (XmlReader.Create (new StringReader (xsd)), null));
-			doc.Validate (null);
-		}
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+            doc.Schemas.Add(XmlSchema.Read(XmlReader.Create(new StringReader(xsd)), null));
+            doc.Validate(null);
+        }
 
-		[Test]
-		public void Bug584664 ()
-		{
-			Validate (File.ReadAllText (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/584664a.xml")), File.ReadAllText (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/584664a.xsd")));
-			Validate (File.ReadAllText (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/584664b.xml")), File.ReadAllText (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/xsd/584664b.xsd")));
-		}
+        [Test]
+        public void Bug584664()
+        {
+            Validate(
+                File.ReadAllText(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/584664a.xml")
+                ),
+                File.ReadAllText(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/584664a.xsd")
+                )
+            );
+            Validate(
+                File.ReadAllText(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/584664b.xml")
+                ),
+                File.ReadAllText(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/584664b.xsd")
+                )
+            );
+        }
 
-		[Test]
-		public void MultipleMissingIds ()
-		{
-			var schema = XmlSchema.Read (new StringReader (@"<?xml version=""1.0"" encoding=""utf-8""?>
+        [Test]
+        public void MultipleMissingIds()
+        {
+            var schema = XmlSchema.Read(
+                new StringReader(
+                    @"<?xml version=""1.0"" encoding=""utf-8""?>
 <xs:schema targetNamespace=""urn:multiple-ids"" elementFormDefault=""qualified"" xmlns=""urn:multiple-ids"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
 	<xs:element name=""root"">
 		<xs:complexType>
@@ -316,69 +357,98 @@ namespace MonoTests.System.Xml
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-</xs:schema>"), null);
-			var xml = @"<?xml version=""1.0"" encoding=""utf-8""?>
+</xs:schema>"
+                ),
+                null
+            );
+            var xml =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root xmlns=""urn:multiple-ids"">
 	<item id=""id2"" parent=""id1"" />
 	<item id=""id3"" parent=""id1"" />
 	<item id=""id1"" parent=""id1"" />
 </root>";
-			var document = new XmlDocument ();
-			document.LoadXml (xml);
-			document.Schemas = new XmlSchemaSet ();
-			document.Schemas.Add (schema);
-			document.Validate (null);
-		}
+            var document = new XmlDocument();
+            document.LoadXml(xml);
+            document.Schemas = new XmlSchemaSet();
+            document.Schemas.Add(schema);
+            document.Validate(null);
+        }
 
-		[Test]
-		public void FacetsOnBaseSimpleContentRestriction ()
-		{
-			XmlReaderSettings settings = new XmlReaderSettings ();
-			settings.Schemas.Add (null, TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/595947.xsd"));
-			settings.ValidationType = ValidationType.Schema;
-			settings.Schemas.Compile ();
+        [Test]
+        public void FacetsOnBaseSimpleContentRestriction()
+        {
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.Schemas.Add(
+                null,
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/595947.xsd")
+            );
+            settings.ValidationType = ValidationType.Schema;
+            settings.Schemas.Compile();
 
-			Validate ("TEST 1.1", 1, "0123456789", "0123456789", settings, false);
-			Validate ("TEST 1.2", 1, "0123456789***", "0123456789", settings, true);
-			Validate ("TEST 1.3", 1, "0123456789", "0123456789***", settings, true);
+            Validate("TEST 1.1", 1, "0123456789", "0123456789", settings, false);
+            Validate("TEST 1.2", 1, "0123456789***", "0123456789", settings, true);
+            Validate("TEST 1.3", 1, "0123456789", "0123456789***", settings, true);
 
-			Validate ("TEST 2.1", 2, "0123456789", "0123456789", settings, false);
-			Validate ("TEST 2.2", 2, "0123456789***", "0123456789", settings, true);
-			Validate ("TEST 2.3", 2, "0123456789", "0123456789***", settings, true);
+            Validate("TEST 2.1", 2, "0123456789", "0123456789", settings, false);
+            Validate("TEST 2.2", 2, "0123456789***", "0123456789", settings, true);
+            Validate("TEST 2.3", 2, "0123456789", "0123456789***", settings, true);
 
-			Validate ("TEST 3.1", 3, "0123456789", "0123456789", settings, false);
-			Validate ("TEST 3.2", 3, "0123456789***", "0123456789", settings, true);
-			Validate ("TEST 3.3", 3, "0123456789", "0123456789***", settings, true);
-		}
+            Validate("TEST 3.1", 3, "0123456789", "0123456789", settings, false);
+            Validate("TEST 3.2", 3, "0123456789***", "0123456789", settings, true);
+            Validate("TEST 3.3", 3, "0123456789", "0123456789***", settings, true);
+        }
 
-		void Validate (string testName, int testNumber, string idValue, string elementValue, XmlReaderSettings settings, bool shouldFail)
-		{
-			string content = string.Format ("<MyTest{0} Id=\"{1}\">{2}</MyTest{0}>", testNumber, idValue, elementValue);
-			try
-			{
-				XmlReader reader = XmlReader.Create (new StringReader (content), settings);
-				XmlDocument document = new XmlDocument ();
-				document.Load (reader);
-				document.Validate (null);
-			} catch (Exception) {
-				if (!shouldFail)
-					throw;
-				return;
-			}
-			if (shouldFail)
-				Assert.Fail (testName + " should fail");
-		}
+        void Validate(
+            string testName,
+            int testNumber,
+            string idValue,
+            string elementValue,
+            XmlReaderSettings settings,
+            bool shouldFail
+        )
+        {
+            string content = string.Format(
+                "<MyTest{0} Id=\"{1}\">{2}</MyTest{0}>",
+                testNumber,
+                idValue,
+                elementValue
+            );
+            try
+            {
+                XmlReader reader = XmlReader.Create(new StringReader(content), settings);
+                XmlDocument document = new XmlDocument();
+                document.Load(reader);
+                document.Validate(null);
+            }
+            catch (Exception)
+            {
+                if (!shouldFail)
+                    throw;
+                return;
+            }
+            if (shouldFail)
+                Assert.Fail(testName + " should fail");
+        }
 
-		[Test]
-		public void Bug676993 ()
-		{
-			Validate (File.ReadAllText (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/676993.xml")), File.ReadAllText (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/676993.xsd")));
-		}
-		
-		[Test]
-		public void Bug10245 ()
-		{
-			string xsd = @"
+        [Test]
+        public void Bug676993()
+        {
+            Validate(
+                File.ReadAllText(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/676993.xml")
+                ),
+                File.ReadAllText(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/676993.xsd")
+                )
+            );
+        }
+
+        [Test]
+        public void Bug10245()
+        {
+            string xsd =
+                @"
 	<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:foo'>
 	  <xs:element name='root'>
 		<xs:complexType>
@@ -386,27 +456,29 @@ namespace MonoTests.System.Xml
 		</xs:complexType>
 	  </xs:element>
 	</xs:schema>";
-			string xml = "<root xmlns='urn:foo' />";
-			var xrs = new XmlReaderSettings () { ValidationType = ValidationType.Schema };
-			xrs.Schemas.Add (XmlSchema.Read (new StringReader (xsd), null));
-			var xr = XmlReader.Create (new StringReader (xml), xrs);
-			xr.Read ();
-			bool more;
-			Assert.AreEqual (2, xr.AttributeCount, "#1");
-			int i = 0;
-			for (more = xr.MoveToFirstAttribute (); more; more = xr.MoveToNextAttribute ())
-				i++;
-			Assert.AreEqual (2, i, "#2");
-		}
-		
-		[Test]
-		public void Bug12035 ()
-		{
-			string xml = @"<UserSettings
+            string xml = "<root xmlns='urn:foo' />";
+            var xrs = new XmlReaderSettings() { ValidationType = ValidationType.Schema };
+            xrs.Schemas.Add(XmlSchema.Read(new StringReader(xsd), null));
+            var xr = XmlReader.Create(new StringReader(xml), xrs);
+            xr.Read();
+            bool more;
+            Assert.AreEqual(2, xr.AttributeCount, "#1");
+            int i = 0;
+            for (more = xr.MoveToFirstAttribute(); more; more = xr.MoveToNextAttribute())
+                i++;
+            Assert.AreEqual(2, i, "#2");
+        }
+
+        [Test]
+        public void Bug12035()
+        {
+            string xml =
+                @"<UserSettings
   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
   xmlns:xsd='http://www.w3.org/2001/XMLSchema'
   xmlns='http://schema/test'><Enabled>false</Enabled><Time xsi:nil='true' /></UserSettings>";
-			string xsd = @"<?xml version='1.0' encoding='utf-8'?>
+            string xsd =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema
   targetNamespace='http://schema/test'
   xmlns='http://schema/test'
@@ -427,31 +499,34 @@ namespace MonoTests.System.Xml
     </xs:sequence>
   </xs:complexType>
 </xs:schema>";
-			var schema = XmlSchema.Read (new StringReader (xsd), null);
-			var schemaSet = new XmlSchemaSet ();
-			schemaSet.Add (schema);
-			var xmlReaderSettings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
-			xmlReaderSettings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
-			xmlReaderSettings.Schemas.Add (schemaSet);
-			
-			using (var configStream = new StringReader (xml)) {
-				using (var validatingReader = XmlReader.Create (configStream, xmlReaderSettings)) {
-					// Read the XML, throwing an exception if a validation error occurs
-					while (validatingReader.Read()) {
-					}
-				}
-			}
-		}
-		
-		[Test]
-		public void IgnoresInvalidBaseUri ()
-		{
-			var source = new StringReader (@"<?xml version='1.0' encoding='utf-8'?><Test></Test>");
-			var readerSettings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
-			var reader = XmlReader.Create (source, readerSettings, "invalidBaseUri");
+            var schema = XmlSchema.Read(new StringReader(xsd), null);
+            var schemaSet = new XmlSchemaSet();
+            schemaSet.Add(schema);
+            var xmlReaderSettings = new XmlReaderSettings
+            {
+                ValidationType = ValidationType.Schema,
+            };
+            xmlReaderSettings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+            xmlReaderSettings.Schemas.Add(schemaSet);
 
-			Assert.IsNotNull (reader);
-		}
-	}
+            using (var configStream = new StringReader(xml))
+            {
+                using (var validatingReader = XmlReader.Create(configStream, xmlReaderSettings))
+                {
+                    // Read the XML, throwing an exception if a validation error occurs
+                    while (validatingReader.Read()) { }
+                }
+            }
+        }
+
+        [Test]
+        public void IgnoresInvalidBaseUri()
+        {
+            var source = new StringReader(@"<?xml version='1.0' encoding='utf-8'?><Test></Test>");
+            var readerSettings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
+            var reader = XmlReader.Create(source, readerSettings, "invalidBaseUri");
+
+            Assert.IsNotNull(reader);
+        }
+    }
 }
-

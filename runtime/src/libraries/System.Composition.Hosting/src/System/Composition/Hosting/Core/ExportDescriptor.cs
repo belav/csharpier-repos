@@ -28,7 +28,10 @@ namespace System.Composition.Hosting.Core
         /// <param name="activator">The activator used to retrieve instances of the export.</param>
         /// <param name="metadata">The Export Metadata associated with the export.</param>
         /// <returns>The export descriptor.</returns>
-        public static ExportDescriptor Create(CompositeActivator activator, IDictionary<string, object> metadata)
+        public static ExportDescriptor Create(
+            CompositeActivator activator,
+            IDictionary<string, object> metadata
+        )
         {
             return new DirectExportDescriptor(activator, metadata);
         }

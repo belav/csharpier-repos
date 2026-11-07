@@ -23,64 +23,122 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void GenericMethodCallInArgumentList_ToComparisons1()
         {
-            VerifyReplace(@"class C { void M() { F(G<A, B>", "(7)", ");} }", "7", expectedArgumentCount: 2);
+            VerifyReplace(
+                @"class C { void M() { F(G<A, B>",
+                "(7)",
+                ");} }",
+                "7",
+                expectedArgumentCount: 2
+            );
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_ToComparisons2()
         {
-            VerifyReplace(@"class C { void M() { F(G<A, B>", "(7)", ");} }", "a", expectedArgumentCount: 2);
+            VerifyReplace(
+                @"class C { void M() { F(G<A, B>",
+                "(7)",
+                ");} }",
+                "a",
+                expectedArgumentCount: 2
+            );
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_StaysCall1()
         {
-            foreach (var r in new[] { "(", ")", "]", "}", ":", ";", ",", ".", "?", "==", "!=", "|", "^" })
+            foreach (
+                var r in new[] { "(", ")", "]", "}", ":", ";", ",", ".", "?", "==", "!=", "|", "^" }
+            )
             {
-                VerifyReplace(@"class C { void M() { F(G<A, B>", "(7)", ");} }", r, expectedArgumentCount: 1);
+                VerifyReplace(
+                    @"class C { void M() { F(G<A, B>",
+                    "(7)",
+                    ");} }",
+                    r,
+                    expectedArgumentCount: 1
+                );
             }
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_StaysCall2()
         {
-            foreach (var r in new[] { "&&", "||", })
+            foreach (var r in new[] { "&&", "||" })
             {
-                VerifyReplace(@"class C { void M() { F(G<A, B>", "(7)", ");} }", r, expectedArgumentCount: 1);
+                VerifyReplace(
+                    @"class C { void M() { F(G<A, B>",
+                    "(7)",
+                    ");} }",
+                    r,
+                    expectedArgumentCount: 1
+                );
             }
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_ToCall1()
         {
-            VerifyReplace(@"class C { void M() { F(G<A, B>", "7", ");} }", "(7)", expectedArgumentCount: 1);
+            VerifyReplace(
+                @"class C { void M() { F(G<A, B>",
+                "7",
+                ");} }",
+                "(7)",
+                expectedArgumentCount: 1
+            );
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_ToCall2()
         {
-            VerifyReplace(@"class C { void M() { F(G<A, B>", "7", ");} }", "(a)", expectedArgumentCount: 1);
+            VerifyReplace(
+                @"class C { void M() { F(G<A, B>",
+                "7",
+                ");} }",
+                "(a)",
+                expectedArgumentCount: 1
+            );
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_ToCall3()
         {
-            foreach (var r in new[] { "(", ")", "]", "}", ":", ";", ",", ".", "?", "==", "!=", "|", "^" })
+            foreach (
+                var r in new[] { "(", ")", "]", "}", ":", ";", ",", ".", "?", "==", "!=", "|", "^" }
+            )
             {
-                VerifyReplace(@"class C { void M() { F(G<A, B>", "7", ");} }", r, expectedArgumentCount: 1);
+                VerifyReplace(
+                    @"class C { void M() { F(G<A, B>",
+                    "7",
+                    ");} }",
+                    r,
+                    expectedArgumentCount: 1
+                );
             }
         }
 
         [Fact]
         public void GenericMethodCallInArgumentList_ToCall4()
         {
-            foreach (var r in new[] { "&&", "||", })
+            foreach (var r in new[] { "&&", "||" })
             {
-                VerifyReplace(@"class C { void M() { F(G<A, B>", "7", ");} }", r, expectedArgumentCount: 1);
+                VerifyReplace(
+                    @"class C { void M() { F(G<A, B>",
+                    "7",
+                    ");} }",
+                    r,
+                    expectedArgumentCount: 1
+                );
             }
         }
 
-        private void VerifyReplace(string codeBefore, string codeToBeReplaced, string codeAfter, string replacement, int expectedArgumentCount)
+        private void VerifyReplace(
+            string codeBefore,
+            string codeToBeReplaced,
+            string codeAfter,
+            string replacement,
+            int expectedArgumentCount
+        )
         {
             var start = codeBefore.Length;
             var length = codeToBeReplaced.Length;
@@ -106,16 +164,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             AssertNodesAreEquivalent(parsedRoot, incrementalRoot);
         }
 
-        private void AssertNodesAreEquivalent(SyntaxNodeOrToken expectedNode, SyntaxNodeOrToken actualNode)
+        private void AssertNodesAreEquivalent(
+            SyntaxNodeOrToken expectedNode,
+            SyntaxNodeOrToken actualNode
+        )
         {
             Assert.Equal(expectedNode.Kind(), actualNode.Kind());
             Assert.Equal(expectedNode.FullSpan, actualNode.FullSpan);
-            Assert.Equal(expectedNode.ChildNodesAndTokens().Count, actualNode.ChildNodesAndTokens().Count);
+            Assert.Equal(
+                expectedNode.ChildNodesAndTokens().Count,
+                actualNode.ChildNodesAndTokens().Count
+            );
 
             for (var i = 0; i < expectedNode.ChildNodesAndTokens().Count; i++)
             {
-                AssertNodesAreEquivalent(expectedNode.ChildNodesAndTokens()[i],
-                    actualNode.ChildNodesAndTokens()[i]);
+                AssertNodesAreEquivalent(
+                    expectedNode.ChildNodesAndTokens()[i],
+                    actualNode.ChildNodesAndTokens()[i]
+                );
             }
         }
     }

@@ -23,7 +23,9 @@ namespace System.Threading
         {
             if (hostExecutionContext == null)
             {
-                throw new InvalidOperationException(SR.HostExecutionContextManager_InvalidOperation_NotNewCaptureContext);
+                throw new InvalidOperationException(
+                    SR.HostExecutionContextManager_InvalidOperation_NotNewCaptureContext
+                );
             }
 
             var switcher = new HostExecutionContextSwitcher(hostExecutionContext);
@@ -37,13 +39,19 @@ namespace System.Threading
             if (switcher == null)
             {
                 throw new InvalidOperationException(
-                    SR.HostExecutionContextManager_InvalidOperation_CannotOverrideSetWithoutRevert);
+                    SR.HostExecutionContextManager_InvalidOperation_CannotOverrideSetWithoutRevert
+                );
             }
 
-            if (t_currentContext != switcher._currentContext || switcher._asyncLocal == null || !switcher._asyncLocal.Value)
+            if (
+                t_currentContext != switcher._currentContext
+                || switcher._asyncLocal == null
+                || !switcher._asyncLocal.Value
+            )
             {
                 throw new InvalidOperationException(
-                    SR.HostExecutionContextManager_InvalidOperation_CannotUseSwitcherOtherThread);
+                    SR.HostExecutionContextManager_InvalidOperation_CannotUseSwitcherOtherThread
+                );
             }
             switcher._asyncLocal = null; // cannot be reused
 

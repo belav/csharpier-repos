@@ -16,10 +16,15 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpUseInferredMemberNameDiagnosticAnalyzer : AbstractUseInferredMemberNameDiagnosticAnalyzer
+    internal sealed class CSharpUseInferredMemberNameDiagnosticAnalyzer
+        : AbstractUseInferredMemberNameDiagnosticAnalyzer
     {
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.NameColon, SyntaxKind.NameEquals);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeSyntax,
+                SyntaxKind.NameColon,
+                SyntaxKind.NameEquals
+            );
 
         protected override void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -34,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             }
         }
 
-        private void ReportDiagnosticsIfNeeded(NameColonSyntax nameColon, SyntaxNodeAnalysisContext context)
+        private void ReportDiagnosticsIfNeeded(
+            NameColonSyntax nameColon,
+            SyntaxNodeAnalysisContext context
+        )
         {
             if (nameColon.Parent is not ArgumentSyntax argument)
             {
@@ -44,25 +52,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             var syntaxTree = context.Node.SyntaxTree;
             var parseOptions = (CSharpParseOptions)syntaxTree.Options;
             var preference = context.GetAnalyzerOptions().PreferInferredTupleNames;
-            if (!preference.Value
+            if (
+                !preference.Value
                 || ShouldSkipAnalysis(context, preference.Notification)
-                || !CSharpInferredMemberNameSimplifier.CanSimplifyTupleElementName(argument, parseOptions))
+                || !CSharpInferredMemberNameSimplifier.CanSimplifyTupleElementName(
+                    argument,
+                    parseOptions
+                )
+            )
             {
                 return;
             }
 
             // Create a normal diagnostic
-            var fadeSpan = TextSpan.FromBounds(nameColon.Name.SpanStart, nameColon.ColonToken.Span.End);
+            var fadeSpan = TextSpan.FromBounds(
+                nameColon.Name.SpanStart,
+                nameColon.ColonToken.Span.End
+            );
             context.ReportDiagnostic(
                 DiagnosticHelper.CreateWithLocationTags(
                     Descriptor,
                     nameColon.GetLocation(),
                     preference.Notification,
                     additionalLocations: ImmutableArray<Location>.Empty,
-                    additionalUnnecessaryLocations: ImmutableArray.Create(syntaxTree.GetLocation(fadeSpan))));
+                    additionalUnnecessaryLocations: ImmutableArray.Create(
+                        syntaxTree.GetLocation(fadeSpan)
+                    )
+                )
+            );
         }
 
-        private void ReportDiagnosticsIfNeeded(NameEqualsSyntax nameEquals, SyntaxNodeAnalysisContext context)
+        private void ReportDiagnosticsIfNeeded(
+            NameEqualsSyntax nameEquals,
+            SyntaxNodeAnalysisContext context
+        )
         {
             if (nameEquals.Parent is not AnonymousObjectMemberDeclaratorSyntax anonCtor)
             {
@@ -70,21 +93,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             }
 
             var preference = context.GetAnalyzerOptions().PreferInferredAnonymousTypeMemberNames;
-            if (!preference.Value ||
-                !CSharpInferredMemberNameSimplifier.CanSimplifyAnonymousTypeMemberName(anonCtor))
+            if (
+                !preference.Value
+                || !CSharpInferredMemberNameSimplifier.CanSimplifyAnonymousTypeMemberName(anonCtor)
+            )
             {
                 return;
             }
 
             // Create a normal diagnostic
-            var fadeSpan = TextSpan.FromBounds(nameEquals.Name.SpanStart, nameEquals.EqualsToken.Span.End);
+            var fadeSpan = TextSpan.FromBounds(
+                nameEquals.Name.SpanStart,
+                nameEquals.EqualsToken.Span.End
+            );
             context.ReportDiagnostic(
                 DiagnosticHelper.CreateWithLocationTags(
                     Descriptor,
                     nameEquals.GetLocation(),
                     preference.Notification,
                     additionalLocations: ImmutableArray<Location>.Empty,
-                    additionalUnnecessaryLocations: ImmutableArray.Create(context.Node.SyntaxTree.GetLocation(fadeSpan))));
+                    additionalUnnecessaryLocations: ImmutableArray.Create(
+                        context.Node.SyntaxTree.GetLocation(fadeSpan)
+                    )
+                )
+            );
         }
     }
 }

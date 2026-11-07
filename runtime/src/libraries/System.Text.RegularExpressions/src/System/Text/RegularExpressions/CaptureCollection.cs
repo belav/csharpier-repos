@@ -69,7 +69,11 @@ namespace System.Text.RegularExpressions
             _captures = new Capture[_capcount];
             for (int j = 0; j < _capcount - 1; j++)
             {
-                _captures[j] = new Capture(_group.Text, _group._caps[j * 2], _group._caps[j * 2 + 1]);
+                _captures[j] = new Capture(
+                    _group.Text,
+                    _group._caps[j * 2],
+                    _group._caps[j * 2 + 1]
+                );
             }
         }
 
@@ -151,8 +155,7 @@ namespace System.Text.RegularExpressions
         int IList.Add(object? value) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
-        void IList.Clear() =>
-            throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        void IList.Clear() => throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
         bool IList.Contains(object? value) =>
             value is Capture other && ((ICollection<Capture>)this).Contains(other);

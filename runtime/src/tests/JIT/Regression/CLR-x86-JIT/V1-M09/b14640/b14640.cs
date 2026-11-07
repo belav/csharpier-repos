@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -19,7 +20,7 @@ namespace DefaultNamespace
             Char.IsWhiteSpace(b);
 
             //Console.Write( "Y"+    "Y" );  // This line causes no bug.
-            Console.Write("Y" + b + "Y");  // This line causes the bug!  JIT InLiner problem.
+            Console.Write("Y" + b + "Y"); // This line causes the bug!  JIT InLiner problem.
         }
     }
 }

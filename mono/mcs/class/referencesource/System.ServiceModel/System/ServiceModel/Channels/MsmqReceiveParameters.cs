@@ -16,13 +16,14 @@ namespace System.ServiceModel.Channels
         MsmqReceiveContextSettings receiveContextSettings;
         bool useMsmqTracing;
         bool useSourceJournal;
-        
-        internal MsmqReceiveParameters(MsmqBindingElementBase bindingElement)
-            : this(bindingElement, bindingElement.AddressTranslator)
-        {
-        }
 
-        internal MsmqReceiveParameters(MsmqBindingElementBase bindingElement, MsmqUri.IAddressTranslator addressTranslator)
+        internal MsmqReceiveParameters(MsmqBindingElementBase bindingElement)
+            : this(bindingElement, bindingElement.AddressTranslator) { }
+
+        internal MsmqReceiveParameters(
+            MsmqBindingElementBase bindingElement,
+            MsmqUri.IAddressTranslator addressTranslator
+        )
         {
             this.addressTranslator = addressTranslator;
             this.durable = bindingElement.Durable;
@@ -31,10 +32,14 @@ namespace System.ServiceModel.Channels
             this.receiveErrorHandling = bindingElement.ReceiveErrorHandling;
             this.receiveRetryCount = bindingElement.ReceiveRetryCount;
             this.retryCycleDelay = bindingElement.RetryCycleDelay;
-            this.transportSecurity = new MsmqTransportSecurity(bindingElement.MsmqTransportSecurity);
+            this.transportSecurity = new MsmqTransportSecurity(
+                bindingElement.MsmqTransportSecurity
+            );
             this.useMsmqTracing = bindingElement.UseMsmqTracing;
             this.useSourceJournal = bindingElement.UseSourceJournal;
-            this.receiveContextSettings = new MsmqReceiveContextSettings(bindingElement.ReceiveContextSettings);
+            this.receiveContextSettings = new MsmqReceiveContextSettings(
+                bindingElement.ReceiveContextSettings
+            );
         }
 
         internal MsmqReceiveContextSettings ReceiveContextSettings
@@ -81,7 +86,7 @@ namespace System.ServiceModel.Channels
         {
             get { return this.transportSecurity; }
         }
-        
+
         internal bool UseMsmqTracing
         {
             get { return this.useMsmqTracing; }

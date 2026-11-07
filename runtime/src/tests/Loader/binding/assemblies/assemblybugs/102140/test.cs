@@ -23,10 +23,13 @@ public class test
         Console.WriteLine("Test4: new AssemblyName(\"server2, Culture=neutral, Version=0.0.0.0\")");
         AssemblyName asmN4 = new AssemblyName("server2, Culture=neutral, Version=0.0.0.0");
         ret = ret + Check(asmN4);
-        if(ret/numtests==100.0){
+        if (ret / numtests == 100.0)
+        {
             Console.WriteLine("All Passed!");
             return 100;
-        }else{
+        }
+        else
+        {
             Console.WriteLine("Failed!");
             return ret;
         }
@@ -36,25 +39,36 @@ public class test
     {
         String strVersion = asmN.ToString();
         int index = strVersion.ToLower().IndexOf("version=");
-        if(asmN.Version==null){
-            if(index==-1){
-                Console.WriteLine("Passed: both asmName.ToString() version and asmName.Version are null.");
+        if (asmN.Version == null)
+        {
+            if (index == -1)
+            {
+                Console.WriteLine(
+                    "Passed: both asmName.ToString() version and asmName.Version are null."
+                );
                 return 100;
-            }else{
+            }
+            else
+            {
                 Console.WriteLine("Failed: asmName.Version != asmName.ToString() Version");
-                Console.WriteLine ("\tasmName.Version = \"{0}\"", asmN.Version);
-                Console.WriteLine ("\tasmName.ToString() = \"{0}\"", strVersion);
+                Console.WriteLine("\tasmName.Version = \"{0}\"", asmN.Version);
+                Console.WriteLine("\tasmName.ToString() = \"{0}\"", strVersion);
                 return 101;
             }
-        }else{
-            strVersion = strVersion.Substring(index+8,7);
-            if(strVersion.Equals(asmN.Version.ToString())){
+        }
+        else
+        {
+            strVersion = strVersion.Substring(index + 8, 7);
+            if (strVersion.Equals(asmN.Version.ToString()))
+            {
                 Console.WriteLine("Passed: asmName.Version == asmName.ToString() Version");
                 return 100;
-            }else{
+            }
+            else
+            {
                 Console.WriteLine("Failed: asmName.Version != asmName.ToString() Version");
-                Console.WriteLine ("\tasmName.Version = \"{0}\"", asmN.Version);
-                Console.WriteLine ("\tasmName.ToString() = \"{0}\"", strVersion);
+                Console.WriteLine("\tasmName.Version = \"{0}\"", asmN.Version);
+                Console.WriteLine("\tasmName.ToString() = \"{0}\"", strVersion);
                 return 101;
             }
         }

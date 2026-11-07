@@ -150,7 +150,13 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingMethod.GetParameters();
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             return UnderlyingMethod.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
@@ -160,7 +166,9 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingMethod.IsDefined(attributeType, inherit);
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
             return UnderlyingMethod.MakeGenericMethod(typeArguments);

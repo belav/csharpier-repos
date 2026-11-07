@@ -24,12 +24,12 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle ("System.Drawing.Common")]
-[assembly: AssemblyDescription ("System.Drawing.Common")]
-[assembly: AssemblyDefaultAlias ("System.Drawing.Common")]
-[assembly: AssemblyCompany ("Mono development team")]
-[assembly: AssemblyProduct ("Mono Common Language Infrastructure")]
-[assembly: AssemblyCopyright ("(c) Various Mono authors")]
-[assembly: AssemblyVersion ("4.0.0.0")]
-[assembly: AssemblyInformationalVersion ("4.0.0.0")]
-[assembly: AssemblyFileVersion ("4.0.0.0")]
+[assembly: AssemblyTitle("System.Drawing.Common")]
+[assembly: AssemblyDescription("System.Drawing.Common")]
+[assembly: AssemblyDefaultAlias("System.Drawing.Common")]
+[assembly: AssemblyCompany("Mono development team")]
+[assembly: AssemblyProduct("Mono Common Language Infrastructure")]
+[assembly: AssemblyCopyright("(c) Various Mono authors")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]

@@ -11,7 +11,11 @@ namespace System.Runtime.InteropServices.Marshalling
     /// </summary>
     [CLSCompliant(false)]
     [CustomMarshaller(typeof(string), MarshalMode.Default, typeof(Utf8StringMarshaller))]
-    [CustomMarshaller(typeof(string), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
+    [CustomMarshaller(
+        typeof(string),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanagedIn)
+    )]
     public static unsafe class Utf8StringMarshaller
     {
         /// <summary>
@@ -26,7 +30,7 @@ namespace System.Runtime.InteropServices.Marshalling
 
             int exactByteCount = checked(Encoding.UTF8.GetByteCount(managed) + 1); // + 1 for null terminator
             byte* mem = (byte*)Marshal.AllocCoTaskMem(exactByteCount);
-            Span<byte> buffer = new (mem, exactByteCount);
+            Span<byte> buffer = new(mem, exactByteCount);
 
             int byteCount = Encoding.UTF8.GetBytes(managed, buffer);
             buffer[byteCount] = 0; // null-terminate
@@ -38,15 +42,14 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="unmanaged">The unmanaged string to convert.</param>
         /// <returns>A managed string.</returns>
-        public static string? ConvertToManaged(byte* unmanaged)
-            => Marshal.PtrToStringUTF8((IntPtr)unmanaged);
+        public static string? ConvertToManaged(byte* unmanaged) =>
+            Marshal.PtrToStringUTF8((IntPtr)unmanaged);
 
         /// <summary>
         /// Free the memory for a specified unmanaged string.
         /// </summary>
         /// <param name="unmanaged">The memory allocated for the unmanaged string.</param>
-        public static void Free(byte* unmanaged)
-            => Marshal.FreeCoTaskMem((IntPtr)unmanaged);
+        public static void Free(byte* unmanaged) => Marshal.FreeCoTaskMem((IntPtr)unmanaged);
 
         /// <summary>
         /// Custom marshaller to marshal a managed string as a UTF-8 unmanaged string.
@@ -86,7 +89,10 @@ namespace System.Runtime.InteropServices.Marshalling
                     int exactByteCount = checked(Encoding.UTF8.GetByteCount(managed) + 1); // + 1 for null terminator
                     if (exactByteCount > buffer.Length)
                     {
-                        buffer = new Span<byte>((byte*)NativeMemory.Alloc((nuint)exactByteCount), exactByteCount);
+                        buffer = new Span<byte>(
+                            (byte*)NativeMemory.Alloc((nuint)exactByteCount),
+                            exactByteCount
+                        );
                         _allocated = true;
                     }
                 }

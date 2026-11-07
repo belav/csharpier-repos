@@ -5,21 +5,21 @@
 //
 
 using System;
-using System.Xml;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
 
 // General Notes:
-// we use the same modem for our config here as we use for icorhost.exe.  There are 2 config files.  The 1st specifies the tests 
+// we use the same modem for our config here as we use for icorhost.exe.  There are 2 config files.  The 1st specifies the tests
 // that are available to the runtime.  The 2nd specifies our current setup based upon the settings in the 1st configuration file.
 
 public enum TestStartModeEnum
 {
     AppDomainLoader,
     ProcessLoader,
-    AssemblyLoadContextLoader
+    AssemblyLoadContextLoader,
 }
 
 public enum AppDomainLoaderMode
@@ -27,7 +27,7 @@ public enum AppDomainLoaderMode
     FullIsolation,
     Normal,
     RoundRobin,
-    Lazy
+    Lazy,
 }
 
 public enum AssemblyLoadContextLoaderMode
@@ -35,7 +35,7 @@ public enum AssemblyLoadContextLoaderMode
     FullIsolation,
     Normal,
     RoundRobin,
-    Lazy
+    Lazy,
 }
 
 [Flags]
@@ -51,20 +51,21 @@ public enum LoggingLevels
     TestStarter = 0x80,
     AssemblyLoadContext = 0x100,
 
-    All = (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x80 | 0x100)
+    All = (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x80 | 0x100),
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
 /// ReliabilityConfig is responsible for parsing the available XML configuration files (both the primary config file & the concurrent
-/// test config file.  We do not parse single test config files).  
+/// test config file.  We do not parse single test config files).
 /// </summary>
 public class ReliabilityConfig : IEnumerable, IEnumerator
 {
-    private ArrayList _testSet = new ArrayList();					// this is the set of <Test... > tags we find.  There may be multiple test runs in one
+    private ArrayList _testSet = new ArrayList(); // this is the set of <Test... > tags we find.  There may be multiple test runs in one
+
     // config file.
-    private ReliabilityTestSet _curTestSet;							// The test set we're currently filling in...
-    private int _index = -1;											// Current test set index
+    private ReliabilityTestSet _curTestSet; // The test set we're currently filling in...
+    private int _index = -1; // Current test set index
 
     // Toplevel tags for all config files
     private const string configHost = "Host";
@@ -74,12 +75,16 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     internal class RFConfigOptions
     {
         internal const string RFConfigOptions_Test_MinMaxTestsUseCPUCount = "minMaxTestUseCPUCount";
-        internal const string RFConfigOptions_Test_SuppressConsoleOutputFromTests = "suppressConsoleOutputFromTests";
+        internal const string RFConfigOptions_Test_SuppressConsoleOutputFromTests =
+            "suppressConsoleOutputFromTests";
         internal const string RFConfigOptions_Test_DebugBreakOnHang = "debugBreakOnTestHang";
         internal const string RFConfigOptions_Test_DebugBreakOnBadTest = "debugBreakOnBadTest";
-        internal const string RFConfigOptions_Test_DebugBreakOnOutOfMemory = "debugBreakOnOutOfMemory";
-        internal const string RFConfigOptions_Test_DebugBreakOnPathTooLong = "debugBreakOnPathTooLong";
-        internal const string RFConfigOptions_Test_DebugBreakOnMissingTest = "debugBreakOnMissingTest";
+        internal const string RFConfigOptions_Test_DebugBreakOnOutOfMemory =
+            "debugBreakOnOutOfMemory";
+        internal const string RFConfigOptions_Test_DebugBreakOnPathTooLong =
+            "debugBreakOnPathTooLong";
+        internal const string RFConfigOptions_Test_DebugBreakOnMissingTest =
+            "debugBreakOnMissingTest";
     }
 
     // Various tags for the concurrent test configuration file.
@@ -109,6 +114,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     private const string configAssemblyLoadContextLoaderMode = "assemblyLoadContextLoaderMode";
     private const string configRoundRobinAppDomainCount = "numAppDomains";
     private const string configRoundRobinAssemblyLoadContextCount = "numAssemblyLoadContexts";
+
     // Attributes for the <Assembly ...> tag
     private const string configAssemblyName = "id";
     private const string configAssemblyFilename = "filename";
@@ -119,8 +125,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     private const string configAssemblyBasePath = "basePath";
     private const string configAssemblyStatus = "status";
     private const string configAssemblyStatusDisabled = "disabled";
-    private const string configAssemblyDebugger = "debugger";                 // "none", "cdb.exe", "windbg.exe", etc...  only w/ Process.Start test starter
-    private const string configAssemblyDebuggerOptions = "debuggerOptions";   // cmd line options for debugger - only w/ Process.Start test starter
+    private const string configAssemblyDebugger = "debugger"; // "none", "cdb.exe", "windbg.exe", etc...  only w/ Process.Start test starter
+    private const string configAssemblyDebuggerOptions = "debuggerOptions"; // cmd line options for debugger - only w/ Process.Start test starter
     private const string configAssemblySmartNetGuid = "guid";
     private const string configAssemblyDuration = "expectedDuration";
     private const string configAssemblyRequiresSDK = "requiresSDK";
@@ -131,7 +137,6 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     private const string configAssemblyPreCommand = "precommand";
     private const string configAssemblyPostCommand = "postcommand";
     private const string configAssemblyCustomAction = "customAction";
-
 
     private const string configPercentPassIsPass = "percentPassIsPass";
 
@@ -163,7 +168,6 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     private const string configAssemblyLoadContextLoaderModeRoundRobin = "roundRobin";
     private const string configAssemblyLoadContextLoaderModeLazy = "lazy";
 
-
     /// <summary>
     /// The ReliabilityConfig constructor.  Takes 2 config files: The primary config & the test config file.  We then load these up
     /// and create all the properties on ourself so that the reliability harness knows what to do.
@@ -183,7 +187,9 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         {
             return false;
         }
-        throw new Exception(String.Format("Unknown option value for {0}: {1}", configSettingName, value));
+        throw new Exception(
+            String.Format("Unknown option value for {0}: {1}", configSettingName, value)
+        );
     }
 
     // returns time in minutes
@@ -211,28 +217,34 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
             }
             catch
             {
-                throw new Exception(String.Format("Bad time span {0} for maximum execution time", timeValue));
+                throw new Exception(
+                    String.Format("Bad time span {0} for maximum execution time", timeValue)
+                );
             }
         }
 
         return returnValue;
     }
 
-
     /// <summary>
     /// Given a test configfile we find the tests that we actually want to run.
     /// </summary>
     private void GetTestsToRun(string testConfig)
     {
-        int totalDepth = 0;							// used for debugging mode so we can keep proper indentation.
-        ArrayList foundTests = new ArrayList();		// the array of tests we've found.			
-        ArrayList discoveryPaths = new ArrayList();	// the array of discovery paths we've found.
-        Stack xmlFileStack = new Stack();			// this stack keeps track of our include files.  		
+        int totalDepth = 0; // used for debugging mode so we can keep proper indentation.
+        ArrayList foundTests = new ArrayList(); // the array of tests we've found.
+        ArrayList discoveryPaths = new ArrayList(); // the array of discovery paths we've found.
+        Stack xmlFileStack = new Stack(); // this stack keeps track of our include files.
         Stack testLevelStack = new Stack();
 
         try
         {
-            FileStream fs = new FileStream(testConfig, FileMode.Open, FileAccess.Read, FileShare.Read);
+            FileStream fs = new FileStream(
+                testConfig,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
             xmlFileStack.Push(XmlReader.Create(fs));
         }
         catch (FileNotFoundException e)
@@ -248,7 +260,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
             if (currentXML.Depth != 0)
             {
-                IndentToDepth(totalDepth + currentXML.Depth - 1);	// -1 because we haven't done a .Read on the includes tag yet.
+                IndentToDepth(totalDepth + currentXML.Depth - 1); // -1 because we haven't done a .Read on the includes tag yet.
                 XmlDebugOutLine("</" + configInclude + ">");
             }
 
@@ -265,28 +277,35 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                         switch (currentXML.Name)
                         {
-                            case configInclude:		// user included a file in this file.  
+                            case configInclude: // user included a file in this file.
                                 string filename = null;
                                 bool skipInclude = false;
 
                                 while (currentXML.MoveToNextAttribute())
                                 {
-                                    XmlDebugOut(" " + currentXML.Name + "=\"" + currentXML.Value + "\"");
+                                    XmlDebugOut(
+                                        " " + currentXML.Name + "=\"" + currentXML.Value + "\""
+                                    );
                                     switch (currentXML.Name)
                                     {
                                         case configIncludeFilename:
                                             filename = currentXML.Value;
                                             break;
-                                        case debugConfigIncludeInlined:	// so we can consume the XML we spit out in debug mode- 
+                                        case debugConfigIncludeInlined: // so we can consume the XML we spit out in debug mode-
                                             // we ignore this include tag if it's been inlined.
 
-                                            if (currentXML.Value.ToLower() == "true" || currentXML.Value == "1")
+                                            if (
+                                                currentXML.Value.ToLower() == "true"
+                                                || currentXML.Value == "1"
+                                            )
                                             {
                                                 skipInclude = true;
                                             }
                                             break;
                                         default:
-                                            throw new Exception("Unknown attribute on include tag!");
+                                            throw new Exception(
+                                                "Unknown attribute on include tag!"
+                                            );
                                     }
                                 }
                                 if (skipInclude)
@@ -299,20 +318,28 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                                 if (filename == null)
                                 {
-                                    throw new ArgumentException("Type or Filename not set on include file!  Both attributes must be set to properly include a file.");
+                                    throw new ArgumentException(
+                                        "Type or Filename not set on include file!  Both attributes must be set to properly include a file."
+                                    );
                                 }
 
-                                xmlFileStack.Push(currentXML);	// save our current file.
+                                xmlFileStack.Push(currentXML); // save our current file.
                                 totalDepth += currentXML.Depth;
 
-                                filename = ConvertPotentiallyRelativeFilenameToFullPath(stripFilenameFromPath(currentXML.BaseURI), filename);
+                                filename = ConvertPotentiallyRelativeFilenameToFullPath(
+                                    stripFilenameFromPath(currentXML.BaseURI),
+                                    filename
+                                );
                                 try
                                 {
                                     currentXML = XmlReader.Create(filename);
                                 }
                                 catch (FileNotFoundException e)
                                 {
-                                    Console.WriteLine("Could not open included config file: {0}", filename);
+                                    Console.WriteLine(
+                                        "Could not open included config file: {0}",
+                                        filename
+                                    );
                                     throw e;
                                 }
                                 continue;
@@ -338,7 +365,10 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             case "xmlns:xsd":
                                                 break;
                                             default:
-                                                throw new Exception("Unknown attribute on reliability tag: " + currentXML.Name);
+                                                throw new Exception(
+                                                    "Unknown attribute on reliability tag: "
+                                                        + currentXML.Name
+                                                );
                                         }
                                     }
                                 }
@@ -356,16 +386,27 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 }
                                 break;
                             case concurrentConfigTest:
-                                if (testLevelStack.Count != 0 && (string)testLevelStack.Peek() != configHost)
+                                if (
+                                    testLevelStack.Count != 0
+                                    && (string)testLevelStack.Peek() != configHost
+                                )
                                 {
-                                    throw new ArgumentException("The test tag can only appear as a child to the reliabilityFramework tag or a top level tag.");
+                                    throw new ArgumentException(
+                                        "The test tag can only appear as a child to the reliabilityFramework tag or a top level tag."
+                                    );
                                 }
 
                                 // save any info we've gathered about tests into the current test set
-                                if (_curTestSet != null && foundTests != null && foundTests.Count > 0)
+                                if (
+                                    _curTestSet != null
+                                    && foundTests != null
+                                    && foundTests.Count > 0
+                                )
                                 {
-                                    _curTestSet.Tests = (ReliabilityTest[])foundTests.ToArray(typeof(ReliabilityTest));
-                                    _curTestSet.DiscoveryPaths = (string[])discoveryPaths.ToArray(typeof(string));
+                                    _curTestSet.Tests = (ReliabilityTest[])
+                                        foundTests.ToArray(typeof(ReliabilityTest));
+                                    _curTestSet.DiscoveryPaths = (string[])
+                                        discoveryPaths.ToArray(typeof(string));
                                     discoveryPaths.Clear();
                                     foundTests.Clear();
                                 }
@@ -375,7 +416,9 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 _curTestSet = new ReliabilityTestSet();
 
                                 // when running as an ordinary test, limit run time to 10 min.
-                                bool limitTime = ReliabilityFramework.IsRunningAsUnitTest && !ReliabilityFramework.IsRunningLongGCTests;
+                                bool limitTime =
+                                    ReliabilityFramework.IsRunningAsUnitTest
+                                    && !ReliabilityFramework.IsRunningLongGCTests;
 
                                 if (limitTime)
                                 {
@@ -384,23 +427,29 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                                 while (currentXML.MoveToNextAttribute())
                                 {
-                                    XmlDebugOut(" " + currentXML.Name + "=\"" + currentXML.Value + "\"");
+                                    XmlDebugOut(
+                                        " " + currentXML.Name + "=\"" + currentXML.Value + "\""
+                                    );
                                     switch (currentXML.Name)
                                     {
                                         case "maximumTestRuns":
-                                            _curTestSet.MaximumLoops = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.MaximumLoops = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case "maximumExecutionTime":
                                             string timeValue = currentXML.Value;
 
                                             if (!limitTime)
                                             {
-                                                _curTestSet.MaximumTime = ConvertTimeValueToTestRunTime(timeValue);
+                                                _curTestSet.MaximumTime =
+                                                    ConvertTimeValueToTestRunTime(timeValue);
                                             }
 
                                             break;
                                         case "maximumWaitTime":
-                                            _curTestSet.MaximumWaitTime = ConvertTimeValueToTestRunTime(currentXML.Value);
+                                            _curTestSet.MaximumWaitTime =
+                                                ConvertTimeValueToTestRunTime(currentXML.Value);
                                             break;
                                         case "id":
                                             _curTestSet.FriendlyName = currentXML.Value;
@@ -409,82 +458,144 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         case "xmlns:xsd":
                                             break;
                                         case configTestMinimumMem:
-                                            _curTestSet.MinPercentMem = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.MinPercentMem = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configLoggingLevel:
-                                            _curTestSet.LoggingLevel = (LoggingLevels)Convert.ToInt32(currentXML.Value.ToString(), 16);
+                                            _curTestSet.LoggingLevel = (LoggingLevels)
+                                                Convert.ToInt32(currentXML.Value.ToString(), 16);
                                             break;
                                         case configTestMinimumCPUStaggered:
                                             _curTestSet.MinPercentCPUStaggered = currentXML.Value;
                                             break;
                                         case configTestMinimumCPU:
-                                            _curTestSet.MinPercentCPU = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.MinPercentCPU = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configInstallDetours:
-                                            if (currentXML.Value == "true" || currentXML.Value == "1" || currentXML.Value == "yes")
+                                            if (
+                                                currentXML.Value == "true"
+                                                || currentXML.Value == "1"
+                                                || currentXML.Value == "yes"
+                                            )
                                             {
                                                 _curTestSet.InstallDetours = true;
                                             }
-                                            else if (currentXML.Value == "false" || currentXML.Value == "0" || currentXML.Value == "no")
+                                            else if (
+                                                currentXML.Value == "false"
+                                                || currentXML.Value == "0"
+                                                || currentXML.Value == "no"
+                                            )
                                             {
                                                 _curTestSet.InstallDetours = false;
                                             }
                                             else
                                             {
-                                                throw new Exception("Unknown value for result reporting: " + currentXML.Value);
+                                                throw new Exception(
+                                                    "Unknown value for result reporting: "
+                                                        + currentXML.Value
+                                                );
                                             }
                                             break;
                                         case configTestMinimumTests:
-                                            _curTestSet.MinTestsRunning = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.MinTestsRunning = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
 
                                         case RFConfigOptions.RFConfigOptions_Test_MinMaxTestsUseCPUCount:
-                                            if (GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_MinMaxTestsUseCPUCount))
+                                            if (
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_MinMaxTestsUseCPUCount
+                                                )
+                                            )
                                             {
-                                                string numProcessors = Environment.GetEnvironmentVariable("NUMBER_OF_PROCESSORS");
+                                                string numProcessors =
+                                                    Environment.GetEnvironmentVariable(
+                                                        "NUMBER_OF_PROCESSORS"
+                                                    );
                                                 int cpuCount;
                                                 if (numProcessors == null)
                                                 {
-                                                    Console.WriteLine("NUMBER_OF_PROCESSORS environment variable not supplied, falling back to Environment");
+                                                    Console.WriteLine(
+                                                        "NUMBER_OF_PROCESSORS environment variable not supplied, falling back to Environment"
+                                                    );
                                                     cpuCount = Environment.ProcessorCount;
                                                 }
                                                 else
                                                 {
-                                                    cpuCount = Convert.ToInt32(Environment.GetEnvironmentVariable("NUMBER_OF_PROCESSORS"));
+                                                    cpuCount = Convert.ToInt32(
+                                                        Environment.GetEnvironmentVariable(
+                                                            "NUMBER_OF_PROCESSORS"
+                                                        )
+                                                    );
                                                 }
 
                                                 if (cpuCount <= 0)
-                                                    throw new Exception("Invalid Value when reading processor count: " + cpuCount);
+                                                    throw new Exception(
+                                                        "Invalid Value when reading processor count: "
+                                                            + cpuCount
+                                                    );
                                                 _curTestSet.MinTestsRunning = cpuCount;
                                                 _curTestSet.MaxTestsRunning = (int)(cpuCount * 1.5);
                                             }
                                             break;
                                         case RFConfigOptions.RFConfigOptions_Test_SuppressConsoleOutputFromTests:
-                                            _curTestSet.SuppressConsoleOutputFromTests = GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_SuppressConsoleOutputFromTests);
+                                            _curTestSet.SuppressConsoleOutputFromTests =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_SuppressConsoleOutputFromTests
+                                                );
                                             break;
 
                                         case RFConfigOptions.RFConfigOptions_Test_DebugBreakOnHang:
-                                            _curTestSet.DebugBreakOnTestHang = GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_DebugBreakOnHang);
+                                            _curTestSet.DebugBreakOnTestHang =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_DebugBreakOnHang
+                                                );
                                             break;
 
                                         case RFConfigOptions.RFConfigOptions_Test_DebugBreakOnBadTest:
-                                            _curTestSet.DebugBreakOnBadTest = GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_DebugBreakOnBadTest);
+                                            _curTestSet.DebugBreakOnBadTest =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_DebugBreakOnBadTest
+                                                );
                                             break;
 
                                         case RFConfigOptions.RFConfigOptions_Test_DebugBreakOnOutOfMemory:
-                                            _curTestSet.DebugBreakOnOutOfMemory = GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_DebugBreakOnOutOfMemory);
+                                            _curTestSet.DebugBreakOnOutOfMemory =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_DebugBreakOnOutOfMemory
+                                                );
                                             break;
 
                                         case RFConfigOptions.RFConfigOptions_Test_DebugBreakOnPathTooLong:
-                                            _curTestSet.DebugBreakOnPathTooLong = GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_DebugBreakOnPathTooLong);
+                                            _curTestSet.DebugBreakOnPathTooLong =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_DebugBreakOnPathTooLong
+                                                );
                                             break;
 
                                         case RFConfigOptions.RFConfigOptions_Test_DebugBreakOnMissingTest:
-                                            _curTestSet.DebugBreakOnMissingTest = GetTrueFalseOptionValue(currentXML.Value, RFConfigOptions.RFConfigOptions_Test_DebugBreakOnMissingTest);
+                                            _curTestSet.DebugBreakOnMissingTest =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    RFConfigOptions.RFConfigOptions_Test_DebugBreakOnMissingTest
+                                                );
                                             break;
 
                                         case configResultReporting:
-                                            _curTestSet.ReportResults = GetTrueFalseOptionValue(currentXML.Value, configResultReporting);
+                                            _curTestSet.ReportResults = GetTrueFalseOptionValue(
+                                                currentXML.Value,
+                                                configResultReporting
+                                            );
                                             break;
 
                                         case configResultReportingUrl:
@@ -493,125 +604,204 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         case configResultReportingBvtCategory:
                                             try
                                             {
-                                                _curTestSet.BvtCategory = new Guid(currentXML.Value);
+                                                _curTestSet.BvtCategory = new Guid(
+                                                    currentXML.Value
+                                                );
                                             }
                                             catch (FormatException)
                                             {
-                                                throw new Exception(String.Format("BVT Category Guid {0} is not in the correct form", currentXML.Value));
+                                                throw new Exception(
+                                                    String.Format(
+                                                        "BVT Category Guid {0} is not in the correct form",
+                                                        currentXML.Value
+                                                    )
+                                                );
                                             }
                                             break;
                                         case configTestMaximumTests:
-                                            _curTestSet.MaxTestsRunning = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.MaxTestsRunning = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configTestDisableLogging:
-                                            _curTestSet.DisableLogging = GetTrueFalseOptionValue(currentXML.Value, configTestDisableLogging);
+                                            _curTestSet.DisableLogging = GetTrueFalseOptionValue(
+                                                currentXML.Value,
+                                                configTestDisableLogging
+                                            );
                                             break;
 
                                         case configEnablePerfCounters:
-                                            _curTestSet.EnablePerfCounters = GetTrueFalseOptionValue(currentXML.Value, configEnablePerfCounters);
+                                            _curTestSet.EnablePerfCounters =
+                                                GetTrueFalseOptionValue(
+                                                    currentXML.Value,
+                                                    configEnablePerfCounters
+                                                );
                                             break;
 
                                         case configDefaultTestStartMode:
                                             switch (currentXML.Value)
                                             {
                                                 case configTestStartModeAppDomainLoader:
-                                                    if (null != _curTestSet.DefaultDebugger || null != _curTestSet.DefaultDebuggerOptions)
+                                                    if (
+                                                        null != _curTestSet.DefaultDebugger
+                                                        || null
+                                                            != _curTestSet.DefaultDebuggerOptions
+                                                    )
                                                     {
-                                                        throw new Exception(String.Format("{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
-                                                            configTestStartModeAppDomainLoader,
-                                                            configDefaultTestStartMode,
-                                                            configTestStartModeProcessLoader));
+                                                        throw new Exception(
+                                                            String.Format(
+                                                                "{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
+                                                                configTestStartModeAppDomainLoader,
+                                                                configDefaultTestStartMode,
+                                                                configTestStartModeProcessLoader
+                                                            )
+                                                        );
                                                     }
-                                                    _curTestSet.DefaultTestStartMode = TestStartModeEnum.AppDomainLoader;
+                                                    _curTestSet.DefaultTestStartMode =
+                                                        TestStartModeEnum.AppDomainLoader;
                                                     break;
                                                 case configTestStartModeAssemblyLoadContextLoader:
-                                                    _curTestSet.DefaultTestStartMode = TestStartModeEnum.AssemblyLoadContextLoader;
+                                                    _curTestSet.DefaultTestStartMode =
+                                                        TestStartModeEnum.AssemblyLoadContextLoader;
                                                     break;
                                                 case configTestStartModeProcessLoader:
-                                                    _curTestSet.DefaultTestStartMode = TestStartModeEnum.ProcessLoader;
+                                                    _curTestSet.DefaultTestStartMode =
+                                                        TestStartModeEnum.ProcessLoader;
                                                     break;
                                                 default:
-                                                    throw new Exception(String.Format("Unknown test starter {0} specified!", currentXML.Value));
+                                                    throw new Exception(
+                                                        String.Format(
+                                                            "Unknown test starter {0} specified!",
+                                                            currentXML.Value
+                                                        )
+                                                    );
                                             }
                                             break;
                                         case configRoundRobinAppDomainCount:
                                             try
                                             {
-                                                _curTestSet.NumAppDomains = Convert.ToInt32(currentXML.Value);
+                                                _curTestSet.NumAppDomains = Convert.ToInt32(
+                                                    currentXML.Value
+                                                );
                                                 if (_curTestSet.NumAppDomains <= 0)
                                                 {
-                                                    throw new Exception("Number of app domains must be greater than zero!");
+                                                    throw new Exception(
+                                                        "Number of app domains must be greater than zero!"
+                                                    );
                                                 }
                                             }
                                             catch
                                             {
-                                                throw new Exception(String.Format("The value {0} is not an integer", currentXML.Value));
+                                                throw new Exception(
+                                                    String.Format(
+                                                        "The value {0} is not an integer",
+                                                        currentXML.Value
+                                                    )
+                                                );
                                             }
                                             break;
                                         case configRoundRobinAssemblyLoadContextCount:
                                             try
                                             {
-                                                _curTestSet.NumAssemblyLoadContexts = Convert.ToInt32(currentXML.Value);
+                                                _curTestSet.NumAssemblyLoadContexts =
+                                                    Convert.ToInt32(currentXML.Value);
                                                 if (_curTestSet.NumAssemblyLoadContexts <= 0)
                                                 {
-                                                    throw new Exception("Number of AssemblyLoadContexts must be greater than zero!");
+                                                    throw new Exception(
+                                                        "Number of AssemblyLoadContexts must be greater than zero!"
+                                                    );
                                                 }
                                             }
                                             catch
                                             {
-                                                throw new Exception(String.Format("The value {0} is not an integer", currentXML.Value));
+                                                throw new Exception(
+                                                    String.Format(
+                                                        "The value {0} is not an integer",
+                                                        currentXML.Value
+                                                    )
+                                                );
                                             }
                                             break;
                                         case configAppDomainLoaderMode:
                                             switch (currentXML.Value)
                                             {
                                                 case configAppDomainLoaderModeFullIsolation:
-                                                    _curTestSet.AppDomainLoaderMode = AppDomainLoaderMode.FullIsolation;
+                                                    _curTestSet.AppDomainLoaderMode =
+                                                        AppDomainLoaderMode.FullIsolation;
                                                     break;
                                                 case configAppDomainLoaderModeNormal:
-                                                    _curTestSet.AppDomainLoaderMode = AppDomainLoaderMode.Normal;
+                                                    _curTestSet.AppDomainLoaderMode =
+                                                        AppDomainLoaderMode.Normal;
                                                     break;
                                                 case configAppDomainLoaderModeRoundRobin:
-                                                    _curTestSet.AppDomainLoaderMode = AppDomainLoaderMode.RoundRobin;
+                                                    _curTestSet.AppDomainLoaderMode =
+                                                        AppDomainLoaderMode.RoundRobin;
                                                     break;
                                                 case configAppDomainLoaderModeLazy:
-                                                    _curTestSet.AppDomainLoaderMode = AppDomainLoaderMode.Lazy;
+                                                    _curTestSet.AppDomainLoaderMode =
+                                                        AppDomainLoaderMode.Lazy;
                                                     break;
 
                                                 default:
-                                                    throw new Exception(String.Format("Unknown AD Loader mode {0} specified!", currentXML.Value));
+                                                    throw new Exception(
+                                                        String.Format(
+                                                            "Unknown AD Loader mode {0} specified!",
+                                                            currentXML.Value
+                                                        )
+                                                    );
                                             }
                                             break;
                                         case configAssemblyLoadContextLoaderMode:
                                             switch (currentXML.Value)
                                             {
                                                 case configAssemblyLoadContextLoaderModeFullIsolation:
-                                                    _curTestSet.AssemblyLoadContextLoaderMode = AssemblyLoadContextLoaderMode.FullIsolation;
+                                                    _curTestSet.AssemblyLoadContextLoaderMode =
+                                                        AssemblyLoadContextLoaderMode.FullIsolation;
                                                     break;
                                                 case configAssemblyLoadContextLoaderModeNormal:
-                                                    _curTestSet.AssemblyLoadContextLoaderMode = AssemblyLoadContextLoaderMode.Normal;
+                                                    _curTestSet.AssemblyLoadContextLoaderMode =
+                                                        AssemblyLoadContextLoaderMode.Normal;
                                                     break;
                                                 case configAssemblyLoadContextLoaderModeRoundRobin:
-                                                    _curTestSet.AssemblyLoadContextLoaderMode = AssemblyLoadContextLoaderMode.RoundRobin;
+                                                    _curTestSet.AssemblyLoadContextLoaderMode =
+                                                        AssemblyLoadContextLoaderMode.RoundRobin;
                                                     break;
                                                 case configAssemblyLoadContextLoaderModeLazy:
-                                                    _curTestSet.AssemblyLoadContextLoaderMode = AssemblyLoadContextLoaderMode.Lazy;
+                                                    _curTestSet.AssemblyLoadContextLoaderMode =
+                                                        AssemblyLoadContextLoaderMode.Lazy;
                                                     break;
 
                                                 default:
-                                                    throw new Exception(String.Format("Unknown ALC Loader mode {0} specified!", currentXML.Value));
+                                                    throw new Exception(
+                                                        String.Format(
+                                                            "Unknown ALC Loader mode {0} specified!",
+                                                            currentXML.Value
+                                                        )
+                                                    );
                                             }
                                             break;
                                         case configPercentPassIsPass:
-                                            _curTestSet.PercentPassIsPass = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.PercentPassIsPass = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
 
                                         case configDefaultDebugger:
-                                            if (currentXML.Value.Length >= 7 && currentXML.Value.Substring(currentXML.Value.Length - 7).ToLower() == "cdb.exe")
+                                            if (
+                                                currentXML.Value.Length >= 7
+                                                && currentXML
+                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .ToLower() == "cdb.exe"
+                                            )
                                             {
                                                 _curTestSet.DefaultDebugger = currentXML.Value;
                                             }
-                                            else if (currentXML.Value.Length >= 10 && currentXML.Value.Substring(currentXML.Value.Length - 7).ToLower() == "windbg.exe")
+                                            else if (
+                                                currentXML.Value.Length >= 10
+                                                && currentXML
+                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .ToLower() == "windbg.exe"
+                                            )
                                             {
                                                 _curTestSet.DefaultDebugger = currentXML.Value;
                                             }
@@ -621,63 +811,105 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             }
                                             else
                                             {
-                                                throw new Exception("Unknown default debugger specified (" + currentXML.Value + ")");
+                                                throw new Exception(
+                                                    "Unknown default debugger specified ("
+                                                        + currentXML.Value
+                                                        + ")"
+                                                );
                                             }
                                             break;
                                         case configDefaultDebuggerOptions:
-                                            _curTestSet.DefaultDebuggerOptions = Environment.ExpandEnvironmentVariables(currentXML.Value);
+                                            _curTestSet.DefaultDebuggerOptions =
+                                                Environment.ExpandEnvironmentVariables(
+                                                    currentXML.Value
+                                                );
                                             break;
                                         case configULAssemblyLoadPercent:
-                                            _curTestSet.ULAssemblyLoadPercent = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.ULAssemblyLoadPercent = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configULAppDomainUnloadPercent:
-                                            _curTestSet.ULAppDomainUnloadPercent = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.ULAppDomainUnloadPercent = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configULGeneralUnloadPercent:
-                                            _curTestSet.ULGeneralUnloadPercent = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.ULGeneralUnloadPercent = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configULWaitTime:
-                                            _curTestSet.ULWaitTime = Convert.ToInt32(currentXML.Value);
+                                            _curTestSet.ULWaitTime = Convert.ToInt32(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configCcFailMail:
                                             _curTestSet.CCFailMail = currentXML.Value;
                                             break;
                                         default:
-                                            throw new Exception("Unknown attribute (" + currentXML.Name + ") on " + concurrentConfigTest + " tag!");
+                                            throw new Exception(
+                                                "Unknown attribute ("
+                                                    + currentXML.Name
+                                                    + ") on "
+                                                    + concurrentConfigTest
+                                                    + " tag!"
+                                            );
                                     }
                                 }
 
                                 // Check to see if any of the test attribute environment variables are set,
                                 // If so, then use the environment variables.
-                                if ((Environment.GetEnvironmentVariable("TIMELIMIT") != null) && (Environment.GetEnvironmentVariable("TIMELIMIT") != ""))
-                                    _curTestSet.MaximumTime = ConvertTimeValueToTestRunTime(Environment.GetEnvironmentVariable("TIMELIMIT"));
+                                if (
+                                    (Environment.GetEnvironmentVariable("TIMELIMIT") != null)
+                                    && (Environment.GetEnvironmentVariable("TIMELIMIT") != "")
+                                )
+                                    _curTestSet.MaximumTime = ConvertTimeValueToTestRunTime(
+                                        Environment.GetEnvironmentVariable("TIMELIMIT")
+                                    );
 
-                                if ((Environment.GetEnvironmentVariable("MINCPU") != null) && (Environment.GetEnvironmentVariable("MINCPU") != ""))
-                                    _curTestSet.MinPercentCPU = Convert.ToInt32(Environment.GetEnvironmentVariable("MINCPU"));
-
+                                if (
+                                    (Environment.GetEnvironmentVariable("MINCPU") != null)
+                                    && (Environment.GetEnvironmentVariable("MINCPU") != "")
+                                )
+                                    _curTestSet.MinPercentCPU = Convert.ToInt32(
+                                        Environment.GetEnvironmentVariable("MINCPU")
+                                    );
 
                                 _testSet.Add(_curTestSet);
                                 break;
                             case configDiscovery:
-                                if (testLevelStack.Count == 0 || (string)testLevelStack.Peek() != concurrentConfigTest)
+                                if (
+                                    testLevelStack.Count == 0
+                                    || (string)testLevelStack.Peek() != concurrentConfigTest
+                                )
                                 {
-                                    throw new ArgumentException("The assembly tag can only appear as a child to the test tag (curent parent tag==" + (string)testLevelStack.Peek() + ").");
+                                    throw new ArgumentException(
+                                        "The assembly tag can only appear as a child to the test tag (curent parent tag=="
+                                            + (string)testLevelStack.Peek()
+                                            + ")."
+                                    );
                                 }
-
 
                                 testLevelStack.Push(configDiscovery);
 
                                 string path = null;
                                 while (currentXML.MoveToNextAttribute())
                                 {
-                                    XmlDebugOut(" " + currentXML.Name + "=\"" + currentXML.Value + "\"");
+                                    XmlDebugOut(
+                                        " " + currentXML.Name + "=\"" + currentXML.Value + "\""
+                                    );
                                     switch (currentXML.Name)
                                     {
                                         case configDiscoveryPath:
                                             path = currentXML.Value;
                                             break;
                                         default:
-                                            throw new Exception("Unknown attribute on include tag (\"" + currentXML.Name + "\")!");
+                                            throw new Exception(
+                                                "Unknown attribute on include tag (\""
+                                                    + currentXML.Name
+                                                    + "\")!"
+                                            );
                                     }
                                 }
                                 discoveryPaths.Add(Environment.ExpandEnvironmentVariables(path));
@@ -689,74 +921,109 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                                 bool disabled = false;
 
-                                if (testLevelStack.Count == 0 || (string)testLevelStack.Peek() != concurrentConfigTest)
+                                if (
+                                    testLevelStack.Count == 0
+                                    || (string)testLevelStack.Peek() != concurrentConfigTest
+                                )
                                 {
-                                    throw new ArgumentException("The assembly tag can only appear as a child to the test tag (curent parent tag==" + (string)testLevelStack.Peek() + ").");
+                                    throw new ArgumentException(
+                                        "The assembly tag can only appear as a child to the test tag (curent parent tag=="
+                                            + (string)testLevelStack.Peek()
+                                            + ")."
+                                    );
                                 }
                                 testLevelStack.Push(concurrentConfigAssembly);
 
-                                ReliabilityTest rt = new ReliabilityTest(_curTestSet.SuppressConsoleOutputFromTests);
+                                ReliabilityTest rt = new ReliabilityTest(
+                                    _curTestSet.SuppressConsoleOutputFromTests
+                                );
                                 rt.TestStartMode = _curTestSet.DefaultTestStartMode;
 
                                 // first we need to setup any default options which are set globally on
                                 // the test start mode.
                                 if (null != _curTestSet.DefaultDebugger)
                                 {
-                                    if (_curTestSet.DefaultTestStartMode != TestStartModeEnum.ProcessLoader)
+                                    if (
+                                        _curTestSet.DefaultTestStartMode
+                                        != TestStartModeEnum.ProcessLoader
+                                    )
                                     {
-                                        throw new Exception(String.Format("{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
-                                            configTestStartModeAppDomainLoader,
-                                            configDefaultTestStartMode,
-                                            configTestStartModeProcessLoader));
+                                        throw new Exception(
+                                            String.Format(
+                                                "{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
+                                                configTestStartModeAppDomainLoader,
+                                                configDefaultTestStartMode,
+                                                configTestStartModeProcessLoader
+                                            )
+                                        );
                                     }
                                     rt.Debugger = _curTestSet.DefaultDebugger;
                                 }
 
                                 if (null != _curTestSet.DefaultDebuggerOptions)
                                 {
-                                    if (_curTestSet.DefaultTestStartMode != TestStartModeEnum.ProcessLoader)
+                                    if (
+                                        _curTestSet.DefaultTestStartMode
+                                        != TestStartModeEnum.ProcessLoader
+                                    )
                                     {
-                                        throw new Exception(String.Format("{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
-                                            configTestStartModeAppDomainLoader,
-                                            configDefaultTestStartMode,
-                                            configTestStartModeProcessLoader));
+                                        throw new Exception(
+                                            String.Format(
+                                                "{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
+                                                configTestStartModeAppDomainLoader,
+                                                configDefaultTestStartMode,
+                                                configTestStartModeProcessLoader
+                                            )
+                                        );
                                     }
                                     rt.DebuggerOptions = _curTestSet.DefaultDebuggerOptions;
                                 }
 
-
                                 // then we need to process the individual options & overrides.
                                 while (currentXML.MoveToNextAttribute())
                                 {
-                                    XmlDebugOut(" " + currentXML.Name + "=\"" + currentXML.Value + "\"");
+                                    XmlDebugOut(
+                                        " " + currentXML.Name + "=\"" + currentXML.Value + "\""
+                                    );
                                     switch (currentXML.Name)
                                     {
                                         case configAssemblyName:
                                             rt.RefOrID = currentXML.Value;
                                             break;
                                         case configAssemblyBasePath:
-                                            rt.BasePath = Environment.ExpandEnvironmentVariables(currentXML.Value);
+                                            rt.BasePath = Environment.ExpandEnvironmentVariables(
+                                                currentXML.Value
+                                            );
                                             break;
                                         case configAssemblyRequiresSDK:
-                                            if (String.Compare(currentXML.Value, "true", true) == 0 ||
-                                                currentXML.Value == "1" ||
-                                                String.Compare(currentXML.Value, "yes", true) == 0)
+                                            if (
+                                                String.Compare(currentXML.Value, "true", true) == 0
+                                                || currentXML.Value == "1"
+                                                || String.Compare(currentXML.Value, "yes", true)
+                                                    == 0
+                                            )
                                             {
                                                 rt.RequiresSDK = true;
                                             }
-                                            else if (String.Compare(currentXML.Value, "false", true) == 0 ||
-                                                currentXML.Value == "0" ||
-                                                String.Compare(currentXML.Value, "no", true) == 0)
+                                            else if (
+                                                String.Compare(currentXML.Value, "false", true) == 0
+                                                || currentXML.Value == "0"
+                                                || String.Compare(currentXML.Value, "no", true) == 0
+                                            )
                                             {
                                                 rt.RequiresSDK = false;
                                             }
                                             else
                                             {
-                                                throw new Exception("RequiresSDK has illegal value.  Must be true, 1, yes, false, 0, or no");
+                                                throw new Exception(
+                                                    "RequiresSDK has illegal value.  Must be true, 1, yes, false, 0, or no"
+                                                );
                                             }
                                             break;
                                         case configAssemblyFilename:
-                                            rt.Assembly = Environment.ExpandEnvironmentVariables(currentXML.Value);
+                                            rt.Assembly = Environment.ExpandEnvironmentVariables(
+                                                currentXML.Value
+                                            );
                                             Console.WriteLine("test is " + rt.Assembly);
                                             break;
                                         case configAssemblySuccessCode:
@@ -767,7 +1034,10 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             break;
                                         case configAssemblyArguments:
                                             if (!string.IsNullOrEmpty(currentXML.Value))
-                                                rt.Arguments = Environment.ExpandEnvironmentVariables(currentXML.Value);
+                                                rt.Arguments =
+                                                    Environment.ExpandEnvironmentVariables(
+                                                        currentXML.Value
+                                                    );
                                             break;
                                         case configAssemblyConcurrentCopies:
                                             rt.ConcurrentCopies = Convert.ToInt32(currentXML.Value);
@@ -779,19 +1049,36 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             }
                                             break;
                                         case configAssemblyDebugger:
-                                            if (TestStartModeEnum.ProcessLoader != _curTestSet.DefaultTestStartMode)
+                                            if (
+                                                TestStartModeEnum.ProcessLoader
+                                                != _curTestSet.DefaultTestStartMode
+                                            )
                                             {
-                                                throw new Exception(String.Format("{0} can only be set for test sets with {1}=\"{2}\" set.",
-                                                    configAssemblyDebugger,
-                                                    configDefaultTestStartMode,
-                                                    configTestStartModeProcessLoader));
+                                                throw new Exception(
+                                                    String.Format(
+                                                        "{0} can only be set for test sets with {1}=\"{2}\" set.",
+                                                        configAssemblyDebugger,
+                                                        configDefaultTestStartMode,
+                                                        configTestStartModeProcessLoader
+                                                    )
+                                                );
                                             }
 
-                                            if (currentXML.Value.Length >= 7 && currentXML.Value.Substring(currentXML.Value.Length - 7).ToLower() == "cdb.exe")
+                                            if (
+                                                currentXML.Value.Length >= 7
+                                                && currentXML
+                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .ToLower() == "cdb.exe"
+                                            )
                                             {
                                                 rt.Debugger = currentXML.Value;
                                             }
-                                            else if (currentXML.Value.Length >= 10 && currentXML.Value.Substring(currentXML.Value.Length - 7).ToLower() == "windbg.exe")
+                                            else if (
+                                                currentXML.Value.Length >= 10
+                                                && currentXML
+                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .ToLower() == "windbg.exe"
+                                            )
                                             {
                                                 rt.Debugger = currentXML.Value;
                                             }
@@ -801,18 +1088,32 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             }
                                             else
                                             {
-                                                throw new Exception("Unknown debugger specified (" + currentXML.Value + ")");
+                                                throw new Exception(
+                                                    "Unknown debugger specified ("
+                                                        + currentXML.Value
+                                                        + ")"
+                                                );
                                             }
                                             break;
                                         case configAssemblyDebuggerOptions:
-                                            if (TestStartModeEnum.ProcessLoader != _curTestSet.DefaultTestStartMode)
+                                            if (
+                                                TestStartModeEnum.ProcessLoader
+                                                != _curTestSet.DefaultTestStartMode
+                                            )
                                             {
-                                                throw new Exception(String.Format("{0} can only be set for test sets with {1}=\"{2}\" set.",
-                                                    configAssemblyDebuggerOptions,
-                                                    configDefaultTestStartMode,
-                                                    configTestStartModeProcessLoader));
+                                                throw new Exception(
+                                                    String.Format(
+                                                        "{0} can only be set for test sets with {1}=\"{2}\" set.",
+                                                        configAssemblyDebuggerOptions,
+                                                        configDefaultTestStartMode,
+                                                        configTestStartModeProcessLoader
+                                                    )
+                                                );
                                             }
-                                            rt.DebuggerOptions = Environment.ExpandEnvironmentVariables(currentXML.Value);
+                                            rt.DebuggerOptions =
+                                                Environment.ExpandEnvironmentVariables(
+                                                    currentXML.Value
+                                                );
                                             break;
                                         case configAssemblySmartNetGuid:
                                             try
@@ -821,25 +1122,43 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             }
                                             catch (FormatException)
                                             {
-                                                throw new Exception(String.Format("The format for guid {0} on test {1} is invalid", currentXML.Value, rt.RefOrID));
+                                                throw new Exception(
+                                                    String.Format(
+                                                        "The format for guid {0} on test {1} is invalid",
+                                                        currentXML.Value,
+                                                        rt.RefOrID
+                                                    )
+                                                );
                                             }
                                             break;
                                         case configAssemblyDuration:
                                             if (currentXML.Value.IndexOf(":") == -1)
                                             {
                                                 // just a number of minutes
-                                                rt.ExpectedDuration = Convert.ToInt32(currentXML.Value);
+                                                rt.ExpectedDuration = Convert.ToInt32(
+                                                    currentXML.Value
+                                                );
                                             }
                                             else
                                             {
                                                 // time span
                                                 try
                                                 {
-                                                    rt.ExpectedDuration = unchecked((int)(TimeSpan.Parse(currentXML.Value).Ticks / TimeSpan.TicksPerMinute));
+                                                    rt.ExpectedDuration = unchecked(
+                                                        (int)(
+                                                            TimeSpan.Parse(currentXML.Value).Ticks
+                                                            / TimeSpan.TicksPerMinute
+                                                        )
+                                                    );
                                                 }
                                                 catch
                                                 {
-                                                    throw new Exception(String.Format("Bad time span {0} for expected duration.", currentXML.Value));
+                                                    throw new Exception(
+                                                        String.Format(
+                                                            "Bad time span {0} for expected duration.",
+                                                            currentXML.Value
+                                                        )
+                                                    );
                                                 }
                                             }
                                             break;
@@ -851,13 +1170,20 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 switch (attrs[j].ToLower())
                                                 {
                                                     case "requiressta":
-                                                        testAttrs |= TestAttributes.RequiresSTAThread;
+                                                        testAttrs |=
+                                                            TestAttributes.RequiresSTAThread;
                                                         break;
                                                     case "requiresmta":
-                                                        testAttrs |= TestAttributes.RequiresMTAThread;
+                                                        testAttrs |=
+                                                            TestAttributes.RequiresMTAThread;
                                                         break;
                                                     default:
-                                                        throw new Exception(String.Format("Unknown test attribute: {0}", attrs[j]));
+                                                        throw new Exception(
+                                                            String.Format(
+                                                                "Unknown test attribute: {0}",
+                                                                attrs[j]
+                                                            )
+                                                        );
                                                 }
                                             }
                                             rt.TestAttrs = testAttrs;
@@ -866,23 +1192,38 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             switch (currentXML.Value)
                                             {
                                                 case configTestStartModeAppDomainLoader:
-                                                    if (null != rt.Debugger || null != rt.DebuggerOptions)
+                                                    if (
+                                                        null != rt.Debugger
+                                                        || null != rt.DebuggerOptions
+                                                    )
                                                     {
-                                                        throw new Exception(String.Format("{0} specified with debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
-                                                            configTestStartModeAppDomainLoader,
-                                                            configDefaultTestStartMode,
-                                                            configTestStartModeProcessLoader));
+                                                        throw new Exception(
+                                                            String.Format(
+                                                                "{0} specified with debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
+                                                                configTestStartModeAppDomainLoader,
+                                                                configDefaultTestStartMode,
+                                                                configTestStartModeProcessLoader
+                                                            )
+                                                        );
                                                     }
-                                                    rt.TestStartMode = TestStartModeEnum.AppDomainLoader;
+                                                    rt.TestStartMode =
+                                                        TestStartModeEnum.AppDomainLoader;
                                                     break;
                                                 case configTestStartModeProcessLoader:
-                                                    rt.TestStartMode = TestStartModeEnum.ProcessLoader;
+                                                    rt.TestStartMode =
+                                                        TestStartModeEnum.ProcessLoader;
                                                     break;
                                                 case configTestStartModeAssemblyLoadContextLoader:
-                                                    rt.TestStartMode = TestStartModeEnum.AssemblyLoadContextLoader;
+                                                    rt.TestStartMode =
+                                                        TestStartModeEnum.AssemblyLoadContextLoader;
                                                     break;
                                                 default:
-                                                    throw new Exception(String.Format("Unknown test starter {0} specified!", currentXML.Value));
+                                                    throw new Exception(
+                                                        String.Format(
+                                                            "Unknown test starter {0} specified!",
+                                                            currentXML.Value
+                                                        )
+                                                    );
                                             }
                                             break;
                                         case configAssemblyTestOwner:
@@ -898,12 +1239,22 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             int i = 0;
                                             for (i = 0; i < foundTests.Count; i++)
                                             {
-                                                ReliabilityTest test = foundTests[i] as ReliabilityTest;
-                                                Debug.Assert(test != null, "Non reliability test in foundTests array!");
+                                                ReliabilityTest test =
+                                                    foundTests[i] as ReliabilityTest;
+                                                Debug.Assert(
+                                                    test != null,
+                                                    "Non reliability test in foundTests array!"
+                                                );
                                                 if (null != test.Group)
                                                 {
                                                     string curGroupName = test.Group[0].ToString();
-                                                    if (String.Compare(curGroupName, groupName, false) == 0)
+                                                    if (
+                                                        String.Compare(
+                                                            curGroupName,
+                                                            groupName,
+                                                            false
+                                                        ) == 0
+                                                    )
                                                     {
                                                         test.Group.Add(rt);
                                                         rt.Group = test.Group;
@@ -925,7 +1276,11 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 // first pre command on this test
                                                 rt.PostCommands = new List<string>();
                                             }
-                                            rt.PostCommands.Add(Environment.ExpandEnvironmentVariables(currentXML.Value));
+                                            rt.PostCommands.Add(
+                                                Environment.ExpandEnvironmentVariables(
+                                                    currentXML.Value
+                                                )
+                                            );
                                             break;
                                         case configAssemblyPreCommand:
                                             if (rt.PreCommands == null)
@@ -933,34 +1288,60 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 // first pre command on this test
                                                 rt.PreCommands = new List<string>();
                                             }
-                                            rt.PreCommands.Add(Environment.ExpandEnvironmentVariables(currentXML.Value));
+                                            rt.PreCommands.Add(
+                                                Environment.ExpandEnvironmentVariables(
+                                                    currentXML.Value
+                                                )
+                                            );
                                             break;
                                         case configAssemblyCustomAction:
                                             switch (currentXML.Value)
                                             {
                                                 case "LegacySecurityPolicy":
-                                                    rt.CustomAction = CustomActionType.LegacySecurityPolicy;
+                                                    rt.CustomAction =
+                                                        CustomActionType.LegacySecurityPolicy;
                                                     break;
                                                 default:
-                                                    throw new Exception(String.Format("Unknown custom action: {0}", currentXML.Value));
+                                                    throw new Exception(
+                                                        String.Format(
+                                                            "Unknown custom action: {0}",
+                                                            currentXML.Value
+                                                        )
+                                                    );
                                             }
                                             break;
                                         default:
-                                            throw new Exception("Unknown attribute on assembly tag (" + currentXML.Name + "=" + currentXML.Value + ")");
+                                            throw new Exception(
+                                                "Unknown attribute on assembly tag ("
+                                                    + currentXML.Name
+                                                    + "="
+                                                    + currentXML.Value
+                                                    + ")"
+                                            );
                                     }
                                 }
 
-                                // if the test is disabled or it requires the SDK to be installed & 
+                                // if the test is disabled or it requires the SDK to be installed &
                                 // we don't have the SDK installed then don't add it to our list
                                 // of tests to run.
-                                if (disabled || (rt.RequiresSDK == true && Environment.GetEnvironmentVariable("INSTALL_SDK") == null))
+                                if (
+                                    disabled
+                                    || (
+                                        rt.RequiresSDK == true
+                                        && Environment.GetEnvironmentVariable("INSTALL_SDK") == null
+                                    )
+                                )
                                 {
                                     break;
                                 }
 
                                 int testCopies = 1;
-                                if (_curTestSet.AppDomainLoaderMode == AppDomainLoaderMode.FullIsolation ||
-                                    _curTestSet.AssemblyLoadContextLoaderMode == AssemblyLoadContextLoaderMode.FullIsolation)
+                                if (
+                                    _curTestSet.AppDomainLoaderMode
+                                        == AppDomainLoaderMode.FullIsolation
+                                    || _curTestSet.AssemblyLoadContextLoaderMode
+                                        == AssemblyLoadContextLoaderMode.FullIsolation
+                                )
                                 {
                                     // in this mode each copy of the test is ran in it's own app domain or AssemblyLoadContext,
                                     // fully isolated from all other copies of the test.  If the user
@@ -968,8 +1349,12 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                     testCopies = rt.ConcurrentCopies;
                                     rt.ConcurrentCopies = 1;
                                 }
-                                else if (_curTestSet.AppDomainLoaderMode == AppDomainLoaderMode.RoundRobin ||
-                                         _curTestSet.AssemblyLoadContextLoaderMode == AssemblyLoadContextLoaderMode.RoundRobin)
+                                else if (
+                                    _curTestSet.AppDomainLoaderMode
+                                        == AppDomainLoaderMode.RoundRobin
+                                    || _curTestSet.AssemblyLoadContextLoaderMode
+                                        == AssemblyLoadContextLoaderMode.RoundRobin
+                                )
                                 {
                                     // In this mode each test is ran in an app domain w/ other tests.
                                     testCopies = rt.ConcurrentCopies;
@@ -1003,7 +1388,10 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         fRetry = false;
                                         for (int i = 0; i < foundTests.Count; i++)
                                         {
-                                            if (((ReliabilityTest)foundTests[i]).RefOrID == rt.RefOrID)
+                                            if (
+                                                ((ReliabilityTest)foundTests[i]).RefOrID
+                                                == rt.RefOrID
+                                            )
                                             {
                                                 rt.RefOrID = rt.RefOrID + "_" + i.ToString();
                                                 fRetry = true;
@@ -1017,7 +1405,15 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 }
                                 break;
                             default:
-                                throw new ArgumentException("Unknown node (\"" + currentXML.NodeType + "\") named \"" + currentXML.Name + "\"=\"" + currentXML.Value + "\" in config file!");
+                                throw new ArgumentException(
+                                    "Unknown node (\""
+                                        + currentXML.NodeType
+                                        + "\") named \""
+                                        + currentXML.Name
+                                        + "\"=\""
+                                        + currentXML.Value
+                                        + "\" in config file!"
+                                );
                         } // end of switch(currentXML.Name)
                         if (isEmpty)
                         {
@@ -1044,7 +1440,11 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                         // note: we never pop or push the includes tag.  It's a special 'hidden' tag
                         // we should also never have to pop a configInclude tag, but it might happen
-                        if (currentXML.Name != configIncludes && currentXML.Name != configInclude && currentXML.Name != configHost)
+                        if (
+                            currentXML.Name != configIncludes
+                            && currentXML.Name != configInclude
+                            && currentXML.Name != configHost
+                        )
                         {
                             testLevelStack.Pop();
                         }
@@ -1065,22 +1465,26 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// Filename processing helper functions.
     /// <summary>
-    /// given a base path & a potentially relative path we'll convert the potentially 
+    /// given a base path & a potentially relative path we'll convert the potentially
     /// </summary>
     public static string ConvertPotentiallyRelativeFilenameToFullPath(string basepath, string path)
     {
-        string trimmedPath = path.Trim();	// remove excess whitespace.
+        string trimmedPath = path.Trim(); // remove excess whitespace.
 
-        if (String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase) == 0)	// strip file:// from the front if it exists.
+        if (
+            String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase) == 0
+        ) // strip file:// from the front if it exists.
         {
             trimmedPath = trimmedPath.Substring(7);
         }
 
-        if (trimmedPath.Trim()[1] == ':' || (trimmedPath.Trim()[0] == '\\' && trimmedPath.Trim()[0] == '\\'))	// we have a drive & UNC
+        if (
+            trimmedPath.Trim()[1] == ':'
+            || (trimmedPath.Trim()[0] == '\\' && trimmedPath.Trim()[0] == '\\')
+        ) // we have a drive & UNC
         {
             return (path);
         }
-
 
         if (basepath.LastIndexOf(Path.PathSeparator) == (basepath.Length - 1))
         {
@@ -1103,9 +1507,12 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         {
             if (trimmedPath.LastIndexOf("/") == -1)
             {
-                return (trimmedPath);	// nothing to strip.
+                return (trimmedPath); // nothing to strip.
             }
-            if (String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
             {
                 return (trimmedPath.Substring(0, trimmedPath.LastIndexOf("/")));
             }
@@ -1114,7 +1521,6 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         }
         return (trimmedPath.Substring(0, trimmedPath.LastIndexOf("\\")));
     }
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Enumerator related - allow enumerating over multiple test runs within the config file.
@@ -1168,7 +1574,6 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         _index = 0;
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Debugging helper functions - these are only ever called when we compile with DEBUG_XML defined.
     //
@@ -1209,7 +1614,5 @@ public enum TestAttributes
 public enum CustomActionType
 {
     None,
-    LegacySecurityPolicy
+    LegacySecurityPolicy,
 }
-
-

@@ -64,7 +64,14 @@ namespace Microsoft.Web.Mvc.Resources
                 }
                 if (throwOnError)
                 {
-                    throw new HttpException((int)HttpStatusCode.UnsupportedMediaType, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedMediaType, request.ContentType));
+                    throw new HttpException(
+                        (int)HttpStatusCode.UnsupportedMediaType,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.Resources_UnsupportedMediaType,
+                            request.ContentType
+                        )
+                    );
                 }
                 return null;
             }
@@ -91,7 +98,8 @@ namespace Microsoft.Web.Mvc.Resources
             }
             else
             {
-                result = (IEnumerable<ContentType>)requestContext.HttpContext.Items[ResponseFormatKey];
+                result =
+                    (IEnumerable<ContentType>)requestContext.HttpContext.Items[ResponseFormatKey];
             }
             return result;
         }
@@ -195,7 +203,12 @@ namespace Microsoft.Web.Mvc.Resources
             {
                 // This may be a friendly name (for example, "xml" instead of "text/xml").
                 // if so, try mapping to a content type
-                if (!FormatManager.Current.TryMapFormatFriendlyName(contentTypeString, out contentType))
+                if (
+                    !FormatManager.Current.TryMapFormatFriendlyName(
+                        contentTypeString,
+                        out contentType
+                    )
+                )
                 {
                     return null;
                 }
@@ -264,7 +277,14 @@ namespace Microsoft.Web.Mvc.Resources
                 return false;
             }
             ContentType requestFormat = GetRequestFormat(request, false);
-            if (requestFormat == null || String.Compare(requestFormat.MediaType, FormatManager.UrlEncoded, StringComparison.OrdinalIgnoreCase) != 0)
+            if (
+                requestFormat == null
+                || String.Compare(
+                    requestFormat.MediaType,
+                    FormatManager.UrlEncoded,
+                    StringComparison.OrdinalIgnoreCase
+                ) != 0
+            )
             {
                 if (FormatManager.Current.CanDeserialize(requestFormat))
                 {
@@ -272,7 +292,11 @@ namespace Microsoft.Web.Mvc.Resources
                 }
             }
             HttpBrowserCapabilitiesBase browserCapabilities = request.Browser;
-            if (browserCapabilities != null && !String.IsNullOrEmpty(request.Browser.Browser) && request.Browser.Browser != "Unknown")
+            if (
+                browserCapabilities != null
+                && !String.IsNullOrEmpty(request.Browser.Browser)
+                && request.Browser.Browser != "Unknown"
+            )
             {
                 return true;
             }
@@ -281,16 +305,32 @@ namespace Microsoft.Web.Mvc.Resources
 
         private class AcceptHeaderElementComparer : IComparer<ContentType>
         {
-            [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "x, y",
-                Justification = "No need to fix this since this is a private class.")]
+            [SuppressMessage(
+                "StyleCop.CSharp.NamingRules",
+                "SA1305:FieldNamesMustNotUseHungarianNotation",
+                Target = "x, y",
+                Justification = "No need to fix this since this is a private class."
+            )]
             public int Compare(ContentType x, ContentType y)
             {
                 string[] xTypeSubType = x.MediaType.Split('/');
                 string[] yTypeSubType = y.MediaType.Split('/');
 
-                if (String.Equals(xTypeSubType[0], yTypeSubType[0], StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(
+                        xTypeSubType[0],
+                        yTypeSubType[0],
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    if (String.Equals(xTypeSubType[1], yTypeSubType[1], StringComparison.OrdinalIgnoreCase))
+                    if (
+                        String.Equals(
+                            xTypeSubType[1],
+                            yTypeSubType[1],
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // need to check the number of parameters to determine which is more specific
                         bool xHasParam = HasParameters(x);
@@ -344,8 +384,14 @@ namespace Microsoft.Web.Mvc.Resources
                 {
                     if (String.Equals(QualityFactor, key, StringComparison.OrdinalIgnoreCase))
                     {
-                        if (Decimal.TryParse(contentType.Parameters[key], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result) &&
-                            (result <= (decimal)1.0))
+                        if (
+                            Decimal.TryParse(
+                                contentType.Parameters[key],
+                                NumberStyles.AllowDecimalPoint,
+                                CultureInfo.InvariantCulture,
+                                out result
+                            ) && (result <= (decimal)1.0)
+                        )
                         {
                             return result;
                         }

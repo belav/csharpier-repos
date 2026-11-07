@@ -9,25 +9,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using System.Globalization;
-
-using System.Data.Common;
 using md = System.Data.Metadata.Edm;
 
 //
@@ -99,7 +98,7 @@ namespace System.Data.Query.PlanCompiler
         {
             return CreateNestedPropertyRef(new RelPropertyRef(p));
         }
-       
+
         /// <summary>
         /// The tostring method for easy debuggability
         /// </summary>
@@ -129,7 +128,10 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Gets the property metadata
         /// </summary>
-        internal md.EdmMember Property { get { return m_property; } }
+        internal md.EdmMember Property
+        {
+            get { return m_property; }
+        }
 
         /// <summary>
         /// Overrides the default equality function. Two SimplePropertyRefs are
@@ -140,9 +142,14 @@ namespace System.Data.Query.PlanCompiler
         public override bool Equals(object obj)
         {
             SimplePropertyRef other = obj as SimplePropertyRef;
-            return (other != null &&
-                InternalTrees.Command.EqualTypes(m_property.DeclaringType, other.m_property.DeclaringType) &&
-                other.m_property.Name.Equals(this.m_property.Name));
+            return (
+                other != null
+                && InternalTrees.Command.EqualTypes(
+                    m_property.DeclaringType,
+                    other.m_property.DeclaringType
+                )
+                && other.m_property.Name.Equals(this.m_property.Name)
+            );
         }
 
         /// <summary>
@@ -154,6 +161,7 @@ namespace System.Data.Query.PlanCompiler
         {
             return m_property.Name.GetHashCode();
         }
+
         /// <summary>
         ///
         /// </summary>
@@ -170,7 +178,8 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class TypeIdPropertyRef : PropertyRef
     {
-        private TypeIdPropertyRef() : base() { }
+        private TypeIdPropertyRef()
+            : base() { }
 
         /// <summary>
         /// Gets the default instance of this type
@@ -184,7 +193,6 @@ namespace System.Data.Query.PlanCompiler
         {
             return "TYPEID";
         }
-        
     }
 
     /// <summary>
@@ -195,7 +203,9 @@ namespace System.Data.Query.PlanCompiler
     internal class NullSentinelPropertyRef : PropertyRef
     {
         private static NullSentinelPropertyRef s_singleton = new NullSentinelPropertyRef();
-        private NullSentinelPropertyRef() : base() { }
+
+        private NullSentinelPropertyRef()
+            : base() { }
 
         /// <summary>
         /// Gets the singleton instance
@@ -204,6 +214,7 @@ namespace System.Data.Query.PlanCompiler
         {
             get { return s_singleton; }
         }
+
         /// <summary>
         ///
         /// </summary>
@@ -212,7 +223,6 @@ namespace System.Data.Query.PlanCompiler
         {
             return "NULLSENTINEL";
         }
-
     }
 
     /// <summary>
@@ -222,7 +232,8 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class EntitySetIdPropertyRef : PropertyRef
     {
-        private EntitySetIdPropertyRef() : base() { }
+        private EntitySetIdPropertyRef()
+            : base() { }
 
         /// <summary>
         /// Gets the singleton instance
@@ -237,7 +248,6 @@ namespace System.Data.Query.PlanCompiler
         {
             return "ENTITYSETID";
         }
-
     }
 
     /// <summary>
@@ -256,7 +266,10 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="outerProperty">the outer property</param>
         internal NestedPropertyRef(PropertyRef innerProperty, PropertyRef outerProperty)
         {
-            PlanCompiler.Assert(!(innerProperty is NestedPropertyRef), "innerProperty cannot be a NestedPropertyRef"); 
+            PlanCompiler.Assert(
+                !(innerProperty is NestedPropertyRef),
+                "innerProperty cannot be a NestedPropertyRef"
+            );
             m_inner = innerProperty;
             m_outer = outerProperty;
         }
@@ -264,12 +277,18 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// the nested property
         /// </summary>
-        internal PropertyRef OuterProperty { get { return m_outer; } }
+        internal PropertyRef OuterProperty
+        {
+            get { return m_outer; }
+        }
 
         /// <summary>
         /// the parent property
         /// </summary>
-        internal PropertyRef InnerProperty { get { return m_inner; } }
+        internal PropertyRef InnerProperty
+        {
+            get { return m_inner; }
+        }
 
         /// <summary>
         /// Overrides the default equality function. Two NestedPropertyRefs are
@@ -280,9 +299,9 @@ namespace System.Data.Query.PlanCompiler
         public override bool Equals(object obj)
         {
             NestedPropertyRef other = obj as NestedPropertyRef;
-            return (other != null &&
-                m_inner.Equals(other.m_inner) &&
-                m_outer.Equals(other.m_outer));
+            return (
+                other != null && m_inner.Equals(other.m_inner) && m_outer.Equals(other.m_outer)
+            );
         }
 
         /// <summary>
@@ -294,6 +313,7 @@ namespace System.Data.Query.PlanCompiler
         {
             return m_inner.GetHashCode() ^ m_outer.GetHashCode();
         }
+
         /// <summary>
         ///
         /// </summary>
@@ -309,7 +329,8 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class AllPropertyRef : PropertyRef
     {
-        private AllPropertyRef() : base() { }
+        private AllPropertyRef()
+            : base() { }
 
         /// <summary>
         /// Get the singleton instance
@@ -325,6 +346,7 @@ namespace System.Data.Query.PlanCompiler
         {
             return p;
         }
+
         /// <summary>
         ///
         /// </summary>
@@ -340,9 +362,9 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class RelPropertyRef : PropertyRef
     {
-#region private state
+        #region private state
         private InternalTrees.RelProperty m_property;
-#endregion
+        #endregion
 
         #region constructor
         /// <summary>
@@ -359,7 +381,10 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Gets the property metadata
         /// </summary>
-        internal InternalTrees.RelProperty Property { get { return m_property; } }
+        internal InternalTrees.RelProperty Property
+        {
+            get { return m_property; }
+        }
 
         /// <summary>
         /// Overrides the default equality function. Two RelPropertyRefs are
@@ -370,8 +395,7 @@ namespace System.Data.Query.PlanCompiler
         public override bool Equals(object obj)
         {
             RelPropertyRef other = obj as RelPropertyRef;
-            return (other != null &&
-                m_property.Equals(other.m_property));
+            return (other != null && m_property.Equals(other.m_property));
         }
 
         /// <summary>
@@ -411,7 +435,8 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Trivial constructor
         /// </summary>
-        internal PropertyRefList() : this(false) {}
+        internal PropertyRefList()
+            : this(false) { }
 
         private PropertyRefList(bool allProps)
         {
@@ -422,6 +447,7 @@ namespace System.Data.Query.PlanCompiler
                 MakeAllProperties();
             }
         }
+
         private void MakeAllProperties()
         {
             m_allProperties = true;
@@ -442,6 +468,7 @@ namespace System.Data.Query.PlanCompiler
             else
                 m_propertyReferences[property] = property;
         }
+
         /// <summary>
         /// Append an existing list of property references to myself
         /// </summary>
@@ -459,7 +486,10 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Do I contain "all" properties?
         /// </summary>
-        internal bool AllProperties { get { return m_allProperties; } }
+        internal bool AllProperties
+        {
+            get { return m_allProperties; }
+        }
 
         /// <summary>
         /// Create a clone of myself

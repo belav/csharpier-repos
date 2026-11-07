@@ -950,19 +950,15 @@ app.MapPost("/", TestAction);
 
         Assert.Equal(httpContext.Request.Form, formArgument);
         Assert.NotNull(formArgument);
-        Assert.Collection(
-            formArgument!,
-            (item) =>
-            {
-                Assert.Equal("name", item.Key);
-                Assert.Equal("foo", item.Value);
-            }
-        );
+        Assert.Collection(formArgument!, (item) =>
+        {
+            Assert.Equal("name", item.Key);
+            Assert.Equal("foo", item.Value);
+        });
 
         var allAcceptsMetadata = endpoint.Metadata.OfType<IAcceptsMetadata>();
-        Assert.Collection(
-            allAcceptsMetadata,
-            (m) => Assert.Equal(new[] { "multipart/form-data" }, m.ContentTypes)
+        Assert.Collection(allAcceptsMetadata, (m) =>
+            Assert.Equal(new[] { "multipart/form-data" }, m.ContentTypes)
         );
     }
 
@@ -1133,8 +1129,8 @@ app.MapPost("/", TestAction);
             new RequestBodyDetectionFeature(true)
         );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
-            () => endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+            endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);

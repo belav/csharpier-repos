@@ -22,10 +22,12 @@ namespace System.Globalization
         AllowInnerWhite = 0x00000004,
 
         AllowWhiteSpaces = AllowLeadingWhite | AllowInnerWhite | AllowTrailingWhite,
+
         // When parsing a date/time string, if all year/month/day are missing, set the default date
         // to 0001/1/1, instead of the current year/month/day.
 
         NoCurrentDateDefault = 0x00000008,
+
         // When parsing a date/time string, if a timezone specifier ("GMT","Z","+xxxx", "-xxxx" exists), we will
         // adjust the parsed time based to GMT.
 
@@ -34,6 +36,7 @@ namespace System.Globalization
         AssumeLocal = 0x00000020,
 
         AssumeUniversal = 0x00000040,
+
         // Attempt to preserve whether the input is unspecified, local or UTC
         RoundtripKind = 0x00000080,
     }

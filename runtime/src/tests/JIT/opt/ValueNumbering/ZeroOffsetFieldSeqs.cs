@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class ZeroOffsetFieldSeqs
@@ -86,6 +86,7 @@ struct UnionStruct
 {
     [FieldOffset(0)]
     public UnionPartOne UnionOne;
+
     [FieldOffset(0)]
     public UnionPartTwo UnionTwo;
 }
@@ -101,4 +102,3 @@ struct UnionPartTwo
     public long UnionTwoFldOne;
     public long UnionTwoFldTwo;
 }
-

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,124 +37,134 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-	[TestFixture]
-	public class SamlAuthorityBindingTest
-	{
-		XmlDictionaryWriter CreateWriter (StringWriter sw)
-		{
-			return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
-		}
+    [TestFixture]
+    public class SamlAuthorityBindingTest
+    {
+        XmlDictionaryWriter CreateWriter(StringWriter sw)
+        {
+            return XmlDictionaryWriter.CreateDictionaryWriter(XmlWriter.Create(sw));
+        }
 
-		[Test]
-		public void DefaultValues ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			Assert.IsNull (a.AuthorityKind, "#1");
-			Assert.IsNull (a.Binding, "#2");
-			Assert.IsNull (a.Location, "#3");
-		}
+        [Test]
+        public void DefaultValues()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            Assert.IsNull(a.AuthorityKind, "#1");
+            Assert.IsNull(a.Binding, "#2");
+            Assert.IsNull(a.Location, "#3");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorNullKind ()
-		{
-			new SamlAuthorityBinding (null, "binding", "location");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullKind()
+        {
+            new SamlAuthorityBinding(null, "binding", "location");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConstructorNullBinding ()
-		{
-			new SamlAuthorityBinding (new XmlQualifiedName ("local", "urn:ns"), null, "location");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorNullBinding()
+        {
+            new SamlAuthorityBinding(new XmlQualifiedName("local", "urn:ns"), null, "location");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConstructorNullLocation ()
-		{
-			new SamlAuthorityBinding (new XmlQualifiedName ("local", "urn:ns"), "binding", null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorNullLocation()
+        {
+            new SamlAuthorityBinding(new XmlQualifiedName("local", "urn:ns"), "binding", null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SetAuthorityKindEmptyName ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.AuthorityKind = XmlQualifiedName.Empty;
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SetAuthorityKindEmptyName()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.AuthorityKind = XmlQualifiedName.Empty;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SetLocationEmpty ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.Location = String.Empty;
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SetLocationEmpty()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.Location = String.Empty;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SetBindingEmpty ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.Binding = String.Empty;
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SetBindingEmpty()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.Binding = String.Empty;
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityTokenException))]
-		public void WriteXmlNoAuthorityKind ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.Binding = "binding";
-			a.Location = "location";
+        [Test]
+        [ExpectedException(typeof(SecurityTokenException))]
+        public void WriteXmlNoAuthorityKind()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.Binding = "binding";
+            a.Location = "location";
 
-			StringWriter sw = new StringWriter ();
-			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-				a.WriteXml (dw, new SamlSerializer (), null);
-			}
-		}
+            StringWriter sw = new StringWriter();
+            using (XmlDictionaryWriter dw = CreateWriter(sw))
+            {
+                a.WriteXml(dw, new SamlSerializer(), null);
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityTokenException))]
-		public void WriteXmlNoBinding ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.AuthorityKind = new XmlQualifiedName ("local", "urn:ns");
-			a.Location = "location";
+        [Test]
+        [ExpectedException(typeof(SecurityTokenException))]
+        public void WriteXmlNoBinding()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.AuthorityKind = new XmlQualifiedName("local", "urn:ns");
+            a.Location = "location";
 
-			StringWriter sw = new StringWriter ();
-			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-				a.WriteXml (dw, new SamlSerializer (), null);
-			}
-		}
+            StringWriter sw = new StringWriter();
+            using (XmlDictionaryWriter dw = CreateWriter(sw))
+            {
+                a.WriteXml(dw, new SamlSerializer(), null);
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityTokenException))]
-		public void WriteXmlNoLocation ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.AuthorityKind = new XmlQualifiedName ("local", "urn:ns");
-			a.Binding = "binding";
+        [Test]
+        [ExpectedException(typeof(SecurityTokenException))]
+        public void WriteXmlNoLocation()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.AuthorityKind = new XmlQualifiedName("local", "urn:ns");
+            a.Binding = "binding";
 
-			StringWriter sw = new StringWriter ();
-			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-				a.WriteXml (dw, new SamlSerializer (), null);
-			}
-		}
+            StringWriter sw = new StringWriter();
+            using (XmlDictionaryWriter dw = CreateWriter(sw))
+            {
+                a.WriteXml(dw, new SamlSerializer(), null);
+            }
+        }
 
-		[Test]
-		public void WriteXml1 ()
-		{
-			SamlAuthorityBinding a = new SamlAuthorityBinding ();
-			a.AuthorityKind = new XmlQualifiedName ("local", "urn:ns");
-			a.Binding = "binding";
-			a.Location = "location";
+        [Test]
+        public void WriteXml1()
+        {
+            SamlAuthorityBinding a = new SamlAuthorityBinding();
+            a.AuthorityKind = new XmlQualifiedName("local", "urn:ns");
+            a.Binding = "binding";
+            a.Location = "location";
 
-			StringWriter sw = new StringWriter ();
-			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-				a.WriteXml (dw, new SamlSerializer (), null);
-			}
-			Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:AuthorityBinding xmlns=\"urn:ns\" AuthorityKind=\"local\" Location=\"location\" Binding=\"binding\" xmlns:saml=\"{0}\" />", SamlConstants.Namespace), sw.ToString ());
-		}
-	}
+            StringWriter sw = new StringWriter();
+            using (XmlDictionaryWriter dw = CreateWriter(sw))
+            {
+                a.WriteXml(dw, new SamlSerializer(), null);
+            }
+            Assert.AreEqual(
+                String.Format(
+                    "<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:AuthorityBinding xmlns=\"urn:ns\" AuthorityKind=\"local\" Location=\"location\" Binding=\"binding\" xmlns:saml=\"{0}\" />",
+                    SamlConstants.Namespace
+                ),
+                sw.ToString()
+            );
+        }
+    }
 }
 #endif

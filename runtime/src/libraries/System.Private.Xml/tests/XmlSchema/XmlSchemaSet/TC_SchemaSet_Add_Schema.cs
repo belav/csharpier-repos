@@ -51,14 +51,18 @@ namespace System.Xml.XmlSchemaTests
         public void v2()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(new StreamReader(new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema Schema = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
             XmlSchema SchemaNew = sc.Add(Schema);
 
             Assert.Equal(1, sc.Count);
             Assert.True(sc.Contains(SchemaNew));
             Assert.False(sc.IsCompiled);
             Assert.True(Schema == SchemaNew);
-
         }
 
         //-----------------------------------------------------------------------------------
@@ -67,7 +71,12 @@ namespace System.Xml.XmlSchemaTests
         public void v3()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(new StreamReader(new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema Schema = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
             XmlSchema SchemaNew1 = sc.Add(Schema);
             XmlSchema SchemaNew2 = sc.Add(Schema);
 
@@ -91,7 +100,12 @@ namespace System.Xml.XmlSchemaTests
         public void v4()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(new StreamReader(new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema Schema = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._FileXSD1, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
             XmlSchema SchemaNew1 = sc.Add(Schema);
             XmlSchema SchemaNew2 = sc.Add("schema1.xsd", TestData._FileXSD1);
 
@@ -127,7 +141,12 @@ namespace System.Xml.XmlSchemaTests
         public void v5()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdAuthor, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema Schema = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(TestData._XsdAuthor, FileMode.Open, FileAccess.Read)
+                ),
+                null
+            );
             XmlSchema SchemaNew1 = sc.Add(Schema);
             XmlSchema SchemaNew2 = sc.Add(null, TestData._XsdAuthorNoNs);
 
@@ -154,7 +173,10 @@ namespace System.Xml.XmlSchemaTests
         public void v6()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)), null);
+            XmlSchema Schema = XmlSchema.Read(
+                new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)),
+                null
+            );
             XmlSchema SchemaNew1 = sc.Add(Schema);
             XmlSchema SchemaNew2 = sc.Add(null, TestData._XsdNoNs);
 
@@ -187,21 +209,42 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v7()
         {
-            Assert.Equal(0, AddSchema(Path.Combine(TestData._Root, "Bug430164_c_import.xsd"), Path.Combine(TestData._Root, "Bug430164.xsd"), 2));
+            Assert.Equal(
+                0,
+                AddSchema(
+                    Path.Combine(TestData._Root, "Bug430164_c_import.xsd"),
+                    Path.Combine(TestData._Root, "Bug430164.xsd"),
+                    2
+                )
+            );
         }
 
         //[Variation(Desc = "v8 - 430164_include Add(XmlSchema)")]
         [Fact]
         public void v8()
         {
-            Assert.Equal(0, AddSchema(Path.Combine(TestData._Root, "Bug430164_b_include.xsd"), Path.Combine(TestData._Root, "Bug430164.xsd"), 1));
+            Assert.Equal(
+                0,
+                AddSchema(
+                    Path.Combine(TestData._Root, "Bug430164_b_include.xsd"),
+                    Path.Combine(TestData._Root, "Bug430164.xsd"),
+                    1
+                )
+            );
         }
 
         //[Variation(Desc = "v9 - 430164_redefine Add(XmlSchema)")]
         [Fact]
         public void v9()
         {
-            Assert.Equal(0, AddSchema(Path.Combine(TestData._Root, "Bug430164_a_redefine.xsd"), Path.Combine(TestData._Root, "Bug430164.xsd"), 1));
+            Assert.Equal(
+                0,
+                AddSchema(
+                    Path.Combine(TestData._Root, "Bug430164_a_redefine.xsd"),
+                    Path.Combine(TestData._Root, "Bug430164.xsd"),
+                    1
+                )
+            );
         }
 
         private int AddSchema(string path1, string path2, int expCount)
@@ -250,11 +293,15 @@ namespace System.Xml.XmlSchemaTests
         public void v10()
         {
             XmlCachedSchemaSetResolver resolver = new XmlCachedSchemaSetResolver();
-            XmlTextReader r = new XmlTextReader(Path.Combine(TestData._Root, @"RedefineEmployee.xsd"));
+            XmlTextReader r = new XmlTextReader(
+                Path.Combine(TestData._Root, @"RedefineEmployee.xsd")
+            );
             XmlSchema s = XmlSchema.Read(r, null);
             resolver.Add(new Uri(s.SourceUri), s);
 
-            XmlTextReader r2 = new XmlTextReader(Path.Combine(TestData._Root, @"BaseEmployee2.xsd"));
+            XmlTextReader r2 = new XmlTextReader(
+                Path.Combine(TestData._Root, @"BaseEmployee2.xsd")
+            );
             XmlSchema s2 = XmlSchema.Read(r2, null);
             resolver.Add(new Uri(s2.SourceUri), s2);
 
@@ -278,7 +325,9 @@ namespace System.Xml.XmlSchemaTests
             Assert.True(set.Contains(s));
             Assert.True(set.IsCompiled);
 
-            XmlTextReader r3 = new XmlTextReader(Path.Combine(TestData._Root, @"BaseEmployee2.xsd"));
+            XmlTextReader r3 = new XmlTextReader(
+                Path.Combine(TestData._Root, @"BaseEmployee2.xsd")
+            );
             XmlSchema s3 = XmlSchema.Read(r3, null);
             resolver.Add(new Uri(s3.SourceUri), s3);
 
@@ -320,11 +369,15 @@ namespace System.Xml.XmlSchemaTests
         {
             XmlCachedSchemaSetResolver resolver = new XmlCachedSchemaSetResolver();
 
-            XmlTextReader r = new XmlTextReader(Path.Combine(TestData._Root, @"RedefineEmployee.xsd"));
+            XmlTextReader r = new XmlTextReader(
+                Path.Combine(TestData._Root, @"RedefineEmployee.xsd")
+            );
             XmlSchema s = XmlSchema.Read(r, null);
             resolver.Add(new Uri(s.SourceUri), s);
 
-            XmlTextReader r2 = new XmlTextReader(Path.Combine(TestData._Root, @"BaseEmployee2.xsd"));
+            XmlTextReader r2 = new XmlTextReader(
+                Path.Combine(TestData._Root, @"BaseEmployee2.xsd")
+            );
             XmlSchema s2 = XmlSchema.Read(r2, null);
             resolver.Add(new Uri(s2.SourceUri), s2);
 
@@ -350,11 +403,19 @@ namespace System.Xml.XmlSchemaTests
             settings.ValidationType = ValidationType.Schema;
             settings.Schemas = set;
 
-            using (XmlReader reader = XmlReader.Create(Path.Combine(TestData._Root, "EmployeesDefaultPrefix.xml"), settings))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    Path.Combine(TestData._Root, "EmployeesDefaultPrefix.xml"),
+                    settings
+                )
+            )
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
             }
-            XmlTextReader r3 = new XmlTextReader(Path.Combine(TestData._Root, @"BaseEmployee2.xsd"));
+            XmlTextReader r3 = new XmlTextReader(
+                Path.Combine(TestData._Root, @"BaseEmployee2.xsd")
+            );
             XmlSchema s3 = XmlSchema.Read(r3, null);
             resolver.Add(new Uri(s3.SourceUri), s3);
 
@@ -388,9 +449,15 @@ namespace System.Xml.XmlSchemaTests
 
             settings.Schemas = set2;
 
-            using (XmlReader reader = XmlReader.Create(Path.Combine(TestData._Root, "EmployeesDefaultPrefix.xml"), settings))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    Path.Combine(TestData._Root, "EmployeesDefaultPrefix.xml"),
+                    settings
+                )
+            )
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
             }
             Assert.Equal(0, errorCount);
         }
@@ -399,10 +466,16 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v12a()
         {
-            using (XmlReader r = XmlReader.Create(Path.Combine(TestData._Root, @"bug264908_v1.xsd")))
+            using (
+                XmlReader r = XmlReader.Create(Path.Combine(TestData._Root, @"bug264908_v1.xsd"))
+            )
             {
                 XmlSchema s = XmlSchema.Read(r, null);
-                using (XmlReader r2 = XmlReader.Create(Path.Combine(TestData._Root, @"bug264908_v1a.xsd")))
+                using (
+                    XmlReader r2 = XmlReader.Create(
+                        Path.Combine(TestData._Root, @"bug264908_v1a.xsd")
+                    )
+                )
                 {
                     XmlSchema s2 = XmlSchema.Read(r2, null);
                     XmlSchemaSet set = new XmlSchemaSet();

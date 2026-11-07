@@ -53,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             Document document,
             int positionForTypeBinding,
             IClassificationFormatMap classificationFormatMap,
-            ClassificationTypeMap classificationTypeMap)
+            ClassificationTypeMap classificationTypeMap
+        )
         {
             _originalParameterConfiguration = parameters;
             _document = document;
@@ -61,37 +62,56 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             _classificationFormatMap = classificationFormatMap;
             _classificationTypeMap = classificationTypeMap;
 
-            _notificationService = document.Project.Solution.Services.GetRequiredService<INotificationService>();
+            _notificationService =
+                document.Project.Solution.Services.GetRequiredService<INotificationService>();
 
             // This index is displayed to users. That is why we start it from 1.
             var initialDisplayIndex = 1;
 
             if (parameters.ThisParameter != null)
             {
-                _thisParameter = new ExistingParameterViewModel(this, parameters.ThisParameter, initialDisplayIndex++);
+                _thisParameter = new ExistingParameterViewModel(
+                    this,
+                    parameters.ThisParameter,
+                    initialDisplayIndex++
+                );
                 _disabledParameters.Add(_thisParameter);
             }
 
             _declarationParts = symbol.ToDisplayParts(s_symbolDeclarationDisplayFormat);
 
-            _parametersWithoutDefaultValues = CreateParameterViewModels(parameters.ParametersWithoutDefaultValues, ref initialDisplayIndex);
-            _parametersWithDefaultValues = CreateParameterViewModels(parameters.RemainingEditableParameters, ref initialDisplayIndex);
+            _parametersWithoutDefaultValues = CreateParameterViewModels(
+                parameters.ParametersWithoutDefaultValues,
+                ref initialDisplayIndex
+            );
+            _parametersWithDefaultValues = CreateParameterViewModels(
+                parameters.RemainingEditableParameters,
+                ref initialDisplayIndex
+            );
 
             if (parameters.ParamsParameter != null)
             {
-                _paramsParameter = new ExistingParameterViewModel(this, parameters.ParamsParameter, initialDisplayIndex++);
+                _paramsParameter = new ExistingParameterViewModel(
+                    this,
+                    parameters.ParamsParameter,
+                    initialDisplayIndex++
+                );
             }
 
             UpdateNameConflictMarkers();
 
             var selectedIndex = parameters.SelectedIndex;
-            // Currently, we do not support editing the ThisParameter. 
+            // Currently, we do not support editing the ThisParameter.
             // Therefore, if there is such parameter, we should move the selectedIndex.
             if (parameters.ThisParameter != null && selectedIndex == 0)
             {
                 // If we have at least one parameter after the ThisParameter, select the first one after This.
                 // Otherwise, do not select anything.
-                if (parameters.ParametersWithoutDefaultValues.Length + parameters.RemainingEditableParameters.Length > 0)
+                if (
+                    parameters.ParametersWithoutDefaultValues.Length
+                        + parameters.RemainingEditableParameters.Length
+                    > 0
+                )
                 {
                     this.SelectedIndex = 1;
                 }
@@ -142,10 +162,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             NotifyPropertyChanged(nameof(AllParameters));
         }
 
-        public AddParameterDialogViewModel CreateAddParameterDialogViewModel()
-            => new(_document, _positionForTypeBinding);
+        public AddParameterDialogViewModel CreateAddParameterDialogViewModel() =>
+            new(_document, _positionForTypeBinding);
 
-        private List<ParameterViewModel> CreateParameterViewModels(ImmutableArray<Parameter> parameters, ref int initialIndex)
+        private List<ParameterViewModel> CreateParameterViewModels(
+            ImmutableArray<Parameter> parameters,
+            ref int initialIndex
+        )
         {
             var list = new List<ParameterViewModel>();
             foreach (ExistingParameter existingParameter in parameters)
@@ -174,15 +197,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         public bool PreviewChanges
         {
-            get
-            {
-                return _previewChanges;
-            }
-
-            set
-            {
-                _previewChanges = value;
-            }
+            get { return _previewChanges; }
+            set { _previewChanges = value; }
         }
 
         public bool CanRemove
@@ -266,7 +282,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         {
             if (addedParameter.IsRequired)
             {
-                _parametersWithoutDefaultValues.Add(new AddedParameterViewModel(this, addedParameter));
+                _parametersWithoutDefaultValues.Add(
+                    new AddedParameterViewModel(this, addedParameter)
+                );
             }
             else
             {
@@ -292,38 +310,45 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         {
             return new ParameterConfiguration(
                 _originalParameterConfiguration.ThisParameter,
-                _parametersWithoutDefaultValues.Where(p => !p.IsRemoved).Select(p => p.Parameter).ToImmutableArray(),
-                _parametersWithDefaultValues.Where(p => !p.IsRemoved).Select(p => p.Parameter).ToImmutableArray(),
-                (_paramsParameter == null || _paramsParameter.IsRemoved) ? null : (ExistingParameter)_paramsParameter.Parameter,
-                selectedIndex: -1);
+                _parametersWithoutDefaultValues
+                    .Where(p => !p.IsRemoved)
+                    .Select(p => p.Parameter)
+                    .ToImmutableArray(),
+                _parametersWithDefaultValues
+                    .Where(p => !p.IsRemoved)
+                    .Select(p => p.Parameter)
+                    .ToImmutableArray(),
+                (_paramsParameter == null || _paramsParameter.IsRemoved)
+                    ? null
+                    : (ExistingParameter)_paramsParameter.Parameter,
+                selectedIndex: -1
+            );
         }
 
         private static readonly SymbolDisplayFormat s_symbolDeclarationDisplayFormat = new(
             genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-            miscellaneousOptions:
-                SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                SymbolDisplayMiscellaneousOptions.UseSpecialTypes |
-                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
             extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
-            memberOptions:
-                SymbolDisplayMemberOptions.IncludeType |
-                SymbolDisplayMemberOptions.IncludeExplicitInterface |
-                SymbolDisplayMemberOptions.IncludeAccessibility |
-                SymbolDisplayMemberOptions.IncludeModifiers |
-                SymbolDisplayMemberOptions.IncludeRef);
+            memberOptions: SymbolDisplayMemberOptions.IncludeType
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                | SymbolDisplayMemberOptions.IncludeAccessibility
+                | SymbolDisplayMemberOptions.IncludeModifiers
+                | SymbolDisplayMemberOptions.IncludeRef
+        );
 
         private static readonly SymbolDisplayFormat s_parameterDisplayFormat = new(
             genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-            miscellaneousOptions:
-                SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                SymbolDisplayMiscellaneousOptions.UseSpecialTypes |
-                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
-            parameterOptions:
-                SymbolDisplayParameterOptions.IncludeType |
-                SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                SymbolDisplayParameterOptions.IncludeDefaultValue |
-                SymbolDisplayParameterOptions.IncludeExtensionThis |
-                SymbolDisplayParameterOptions.IncludeName);
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeDefaultValue
+                | SymbolDisplayParameterOptions.IncludeExtensionThis
+                | SymbolDisplayParameterOptions.IncludeName
+        );
 
         public TextBlock SignatureDisplay
         {
@@ -332,7 +357,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 // TODO: Should probably use original syntax & formatting exactly instead of regenerating here
                 var displayParts = GetSignatureDisplayParts();
 
-                var textBlock = displayParts.ToTaggedText().ToTextBlock(_classificationFormatMap, _classificationTypeMap);
+                var textBlock = displayParts
+                    .ToTaggedText()
+                    .ToTextBlock(_classificationFormatMap, _classificationTypeMap);
 
                 foreach (var inline in textBlock.Inlines)
                 {
@@ -346,14 +373,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         public string SignaturePreviewAutomationText
         {
-            get
-            {
-                return GetSignatureDisplayParts().Select(sdp => sdp.ToString()).Join(" ");
-            }
+            get { return GetSignatureDisplayParts().Select(sdp => sdp.ToString()).Join(" "); }
         }
 
-        internal string TEST_GetSignatureDisplayText()
-            => GetSignatureDisplayParts().Select(p => p.ToString()).Join("");
+        internal string TEST_GetSignatureDisplayText() =>
+            GetSignatureDisplayParts().Select(p => p.ToString()).Join("");
 
         private List<SymbolDisplayPart> GetSignatureDisplayParts()
         {
@@ -367,7 +391,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             {
                 if (!first)
                 {
-                    displayParts.Add(new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, ","));
+                    displayParts.Add(
+                        new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, ",")
+                    );
                     displayParts.Add(new SymbolDisplayPart(SymbolDisplayPartKind.Space, null, " "));
                 }
 
@@ -376,12 +402,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 switch (parameter)
                 {
                     case ExistingParameterViewModel existingParameter:
-                        displayParts.AddRange(existingParameter.ParameterSymbol.ToDisplayParts(s_parameterDisplayFormat));
+                        displayParts.AddRange(
+                            existingParameter.ParameterSymbol.ToDisplayParts(
+                                s_parameterDisplayFormat
+                            )
+                        );
                         break;
 
                     case AddedParameterViewModel addedParameterViewModel:
-                        var languageService = _document.GetRequiredLanguageService<IChangeSignatureViewModelFactoryService>();
-                        displayParts.AddRange(languageService.GeneratePreviewDisplayParts(addedParameterViewModel));
+                        var languageService =
+                            _document.GetRequiredLanguageService<IChangeSignatureViewModelFactoryService>();
+                        displayParts.AddRange(
+                            languageService.GeneratePreviewDisplayParts(addedParameterViewModel)
+                        );
                         break;
 
                     default:
@@ -426,7 +459,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
                 var index = SelectedIndex.Value;
                 index = _thisParameter == null ? index : index - 1;
-                if (index <= 0 || index == _parametersWithoutDefaultValues.Count || index >= _parametersWithoutDefaultValues.Count + _parametersWithDefaultValues.Count)
+                if (
+                    index <= 0
+                    || index == _parametersWithoutDefaultValues.Count
+                    || index
+                        >= _parametersWithoutDefaultValues.Count
+                            + _parametersWithDefaultValues.Count
+                )
                 {
                     return false;
                 }
@@ -446,7 +485,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
                 var index = SelectedIndex.Value;
                 index = _thisParameter == null ? index : index - 1;
-                if (index < 0 || index == _parametersWithoutDefaultValues.Count - 1 || index >= _parametersWithoutDefaultValues.Count + _parametersWithDefaultValues.Count - 1)
+                if (
+                    index < 0
+                    || index == _parametersWithoutDefaultValues.Count - 1
+                    || index
+                        >= _parametersWithoutDefaultValues.Count
+                            + _parametersWithDefaultValues.Count
+                            - 1
+                )
                 {
                     return false;
                 }
@@ -461,7 +507,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
             var index = SelectedIndex!.Value;
             index = _thisParameter == null ? index : index - 1;
-            Move(index < _parametersWithoutDefaultValues.Count ? _parametersWithoutDefaultValues : _parametersWithDefaultValues, index < _parametersWithoutDefaultValues.Count ? index : index - _parametersWithoutDefaultValues.Count, delta: -1);
+            Move(
+                index < _parametersWithoutDefaultValues.Count
+                    ? _parametersWithoutDefaultValues
+                    : _parametersWithDefaultValues,
+                index < _parametersWithoutDefaultValues.Count
+                    ? index
+                    : index - _parametersWithoutDefaultValues.Count,
+                delta: -1
+            );
         }
 
         internal void MoveDown()
@@ -470,7 +524,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
             var index = SelectedIndex!.Value;
             index = _thisParameter == null ? index : index - 1;
-            Move(index < _parametersWithoutDefaultValues.Count ? _parametersWithoutDefaultValues : _parametersWithDefaultValues, index < _parametersWithoutDefaultValues.Count ? index : index - _parametersWithoutDefaultValues.Count, delta: 1);
+            Move(
+                index < _parametersWithoutDefaultValues.Count
+                    ? _parametersWithoutDefaultValues
+                    : _parametersWithDefaultValues,
+                index < _parametersWithoutDefaultValues.Count
+                    ? index
+                    : index - _parametersWithoutDefaultValues.Count,
+                delta: 1
+            );
         }
 
         private void Move(List<ParameterViewModel> list, int index, int delta)
@@ -488,10 +550,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         internal bool CanSubmit([NotNullWhen(false)] out string? message)
         {
-            var canSubmit = AllParameters.Any(p => p.IsRemoved) ||
-                AllParameters.Any(p => p is AddedParameterViewModel) ||
-                    !_parametersWithoutDefaultValues.OfType<ExistingParameterViewModel>().Select(p => p.ParameterSymbol).SequenceEqual(_originalParameterConfiguration.ParametersWithoutDefaultValues.Cast<ExistingParameter>().Select(p => p.Symbol)) ||
-                    !_parametersWithDefaultValues.OfType<ExistingParameterViewModel>().Select(p => p.ParameterSymbol).SequenceEqual(_originalParameterConfiguration.RemainingEditableParameters.Cast<ExistingParameter>().Select(p => p.Symbol));
+            var canSubmit =
+                AllParameters.Any(p => p.IsRemoved)
+                || AllParameters.Any(p => p is AddedParameterViewModel)
+                || !_parametersWithoutDefaultValues
+                    .OfType<ExistingParameterViewModel>()
+                    .Select(p => p.ParameterSymbol)
+                    .SequenceEqual(
+                        _originalParameterConfiguration
+                            .ParametersWithoutDefaultValues.Cast<ExistingParameter>()
+                            .Select(p => p.Symbol)
+                    )
+                || !_parametersWithDefaultValues
+                    .OfType<ExistingParameterViewModel>()
+                    .Select(p => p.ParameterSymbol)
+                    .SequenceEqual(
+                        _originalParameterConfiguration
+                            .RemainingEditableParameters.Cast<ExistingParameter>()
+                            .Select(p => p.Symbol)
+                    );
 
             if (!canSubmit)
             {
@@ -507,7 +584,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         {
             if (!CanSubmit(out var message))
             {
-                _notificationService.SendNotification(message, severity: NotificationSeverity.Information);
+                _notificationService.SendNotification(
+                    message,
+                    severity: NotificationSeverity.Information
+                );
                 return false;
             }
 
@@ -522,11 +602,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         private int? _selectedIndex;
         public int? SelectedIndex
         {
-            get
-            {
-                return _selectedIndex;
-            }
-
+            get { return _selectedIndex; }
             set
             {
                 var newSelectedIndex = value == -1 ? null : value;
@@ -557,7 +633,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Move_0_above_1, AllParameters[SelectedIndex!.Value].ShortAutomationText, AllParameters[SelectedIndex!.Value - 1].ShortAutomationText);
+                return string.Format(
+                    ServicesVSResources.Move_0_above_1,
+                    AllParameters[SelectedIndex!.Value].ShortAutomationText,
+                    AllParameters[SelectedIndex!.Value - 1].ShortAutomationText
+                );
             }
         }
 
@@ -570,7 +650,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Move_0_below_1, AllParameters[SelectedIndex!.Value].ShortAutomationText, AllParameters[SelectedIndex!.Value + 1].ShortAutomationText);
+                return string.Format(
+                    ServicesVSResources.Move_0_below_1,
+                    AllParameters[SelectedIndex!.Value].ShortAutomationText,
+                    AllParameters[SelectedIndex!.Value + 1].ShortAutomationText
+                );
             }
         }
 
@@ -583,7 +667,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Remove_0, AllParameters[SelectedIndex!.Value].ShortAutomationText);
+                return string.Format(
+                    ServicesVSResources.Remove_0,
+                    AllParameters[SelectedIndex!.Value].ShortAutomationText
+                );
             }
         }
 
@@ -596,7 +683,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Restore_0, AllParameters[SelectedIndex!.Value].ShortAutomationText);
+                return string.Format(
+                    ServicesVSResources.Restore_0,
+                    AllParameters[SelectedIndex!.Value].ShortAutomationText
+                );
             }
         }
     }

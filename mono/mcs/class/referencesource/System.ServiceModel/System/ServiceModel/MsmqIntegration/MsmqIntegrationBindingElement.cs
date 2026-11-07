@@ -3,11 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.MsmqIntegration
 {
+    using System.Collections.Generic;
     using System.Net.Security;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
-
 
     public sealed class MsmqIntegrationBindingElement : MsmqBindingElementBase
     {
@@ -29,17 +28,17 @@ namespace System.ServiceModel.MsmqIntegration
             }
         }
 
-        public override string Scheme { get { return "msmq.formatname"; } }
+        public override string Scheme
+        {
+            get { return "msmq.formatname"; }
+        }
 
         internal override MsmqUri.IAddressTranslator AddressTranslator
         {
-            get
-            {
-                return MsmqUri.FormatNameAddressTranslator;
-            }
+            get { return MsmqUri.FormatNameAddressTranslator; }
         }
 
-        // applicable on: client, server 
+        // applicable on: client, server
         public MsmqMessageSerializationFormat SerializationFormat
         {
             get { return this.serializationFormat; }
@@ -47,7 +46,9 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (!MsmqMessageSerializationFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.serializationFormat = value;
@@ -64,7 +65,6 @@ namespace System.ServiceModel.MsmqIntegration
                 else
                     return this.targetSerializationTypes.Clone() as Type[];
             }
-
             set
             {
                 if (null == value)
@@ -89,7 +89,9 @@ namespace System.ServiceModel.MsmqIntegration
             return typeof(TChannel) == typeof(IInputChannel);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -98,15 +100,23 @@ namespace System.ServiceModel.MsmqIntegration
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            MsmqChannelFactoryBase<IOutputChannel> factory = new MsmqIntegrationChannelFactory(this, context);
+            MsmqChannelFactoryBase<IOutputChannel> factory = new MsmqIntegrationChannelFactory(
+                this,
+                context
+            );
             MsmqVerifier.VerifySender<IOutputChannel>(factory);
             return (IChannelFactory<TChannel>)(object)factory;
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -115,11 +125,19 @@ namespace System.ServiceModel.MsmqIntegration
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            MsmqIntegrationReceiveParameters receiveParameters = new MsmqIntegrationReceiveParameters(this);
-            MsmqIntegrationChannelListener listener = new MsmqIntegrationChannelListener(this, context, receiveParameters);
+            MsmqIntegrationReceiveParameters receiveParameters =
+                new MsmqIntegrationReceiveParameters(this);
+            MsmqIntegrationChannelListener listener = new MsmqIntegrationChannelListener(
+                this,
+                context,
+                receiveParameters
+            );
             MsmqVerifier.VerifyReceiver(receiveParameters, listener.Uri);
 
             return (IChannelListener<TChannel>)(object)listener;
@@ -142,4 +160,3 @@ namespace System.ServiceModel.MsmqIntegration
         }
     }
 }
-

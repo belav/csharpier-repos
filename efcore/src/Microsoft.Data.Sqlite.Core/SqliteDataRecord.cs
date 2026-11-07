@@ -27,7 +27,12 @@ namespace Microsoft.Data.Sqlite
         private bool _alreadyThrown;
         private bool _alreadyAddedChanges;
 
-        public SqliteDataRecord(sqlite3_stmt stmt, bool hasRows, SqliteConnection connection, Action<int> addChanges)
+        public SqliteDataRecord(
+            sqlite3_stmt stmt,
+            bool hasRows,
+            SqliteConnection connection,
+            Action<int> addChanges
+        )
         {
             Handle = stmt;
             HasRows = hasRows;
@@ -35,37 +40,33 @@ namespace Microsoft.Data.Sqlite
             _addChanges = addChanges;
         }
 
-        public virtual object this[string name]
-            => GetValue(GetOrdinal(name));
+        public virtual object this[string name] => GetValue(GetOrdinal(name));
 
-        public virtual object this[int ordinal]
-            => GetValue(ordinal);
+        public virtual object this[int ordinal] => GetValue(ordinal);
 
-        public override int FieldCount
-            => sqlite3_column_count(Handle);
+        public override int FieldCount => sqlite3_column_count(Handle);
 
         public sqlite3_stmt Handle { get; }
 
         public bool HasRows { get; }
 
-        public override bool IsDBNull(int ordinal)
-            => !_stepped || sqlite3_data_count(Handle) == 0
+        public override bool IsDBNull(int ordinal) =>
+            !_stepped || sqlite3_data_count(Handle) == 0
                 ? throw new InvalidOperationException(Resources.NoData)
                 : base.IsDBNull(ordinal);
 
-        public override object GetValue(int ordinal)
-            => !_stepped || sqlite3_data_count(Handle) == 0
+        public override object GetValue(int ordinal) =>
+            !_stepped || sqlite3_data_count(Handle) == 0
                 ? throw new InvalidOperationException(Resources.NoData)
                 : base.GetValue(ordinal)!;
 
-        protected override double GetDoubleCore(int ordinal)
-            => sqlite3_column_double(Handle, ordinal);
+        protected override double GetDoubleCore(int ordinal) =>
+            sqlite3_column_double(Handle, ordinal);
 
-        protected override long GetInt64Core(int ordinal)
-            => sqlite3_column_int64(Handle, ordinal);
+        protected override long GetInt64Core(int ordinal) => sqlite3_column_int64(Handle, ordinal);
 
-        protected override string GetStringCore(int ordinal)
-            => sqlite3_column_text(Handle, ordinal).utf8_to_string();
+        protected override string GetStringCore(int ordinal) =>
+            sqlite3_column_text(Handle, ordinal).utf8_to_string();
 
         public override T GetFieldValue<T>(int ordinal)
         {
@@ -82,17 +83,15 @@ namespace Microsoft.Data.Sqlite
             return base.GetFieldValue<T>(ordinal)!;
         }
 
-        protected override byte[] GetBlob(int ordinal)
-            => base.GetBlob(ordinal)!;
+        protected override byte[] GetBlob(int ordinal) => base.GetBlob(ordinal)!;
 
-        protected override byte[] GetBlobCore(int ordinal)
-            => sqlite3_column_blob(Handle, ordinal).ToArray();
+        protected override byte[] GetBlobCore(int ordinal) =>
+            sqlite3_column_blob(Handle, ordinal).ToArray();
 
         protected override int GetSqliteType(int ordinal)
         {
             var type = sqlite3_column_type(Handle, ordinal);
-            if (type == SQLITE_NULL
-                && (ordinal < 0 || ordinal >= FieldCount))
+            if (type == SQLITE_NULL && (ordinal < 0 || ordinal >= FieldCount))
             {
                 // NB: Message is provided by the framework
                 throw new ArgumentOutOfRangeException(nameof(ordinal), ordinal, message: null);
@@ -101,16 +100,16 @@ namespace Microsoft.Data.Sqlite
             return type;
         }
 
-        protected override T GetNull<T>(int ordinal)
-            => typeof(T) == typeof(DBNull) || typeof(T) == typeof(object)
+        protected override T GetNull<T>(int ordinal) =>
+            typeof(T) == typeof(DBNull) || typeof(T) == typeof(object)
                 ? (T)(object)DBNull.Value
                 : throw new InvalidOperationException(GetOnNullErrorMsg(ordinal));
 
         public virtual string GetName(int ordinal)
         {
-            var name = _columnNameCache?[ordinal] ?? sqlite3_column_name(Handle, ordinal).utf8_to_string();
-            if (name == null
-                && (ordinal < 0 || ordinal >= FieldCount))
+            var name =
+                _columnNameCache?[ordinal] ?? sqlite3_column_name(Handle, ordinal).utf8_to_string();
+            if (name == null && (ordinal < 0 || ordinal >= FieldCount))
             {
                 // NB: Message is provided by the framework
                 throw new ArgumentOutOfRangeException(nameof(ordinal), ordinal, message: null);
@@ -146,7 +145,8 @@ namespace Microsoft.Data.Sqlite
                     if (match != null)
                     {
                         throw new InvalidOperationException(
-                            Resources.AmbiguousColumnName(name, match.Value.Key, item.Key));
+                            Resources.AmbiguousColumnName(name, match.Value.Key, item.Key)
+                        );
                     }
 
                     match = item;
@@ -171,9 +171,7 @@ namespace Microsoft.Data.Sqlite
             {
                 var i = typeName.IndexOf('(');
 
-                return i == -1
-                    ? typeName
-                    : typeName.Substring(0, i);
+                return i == -1 ? typeName : typeName.Substring(0, i);
             }
 
             var sqliteType = GetSqliteType(ordinal);
@@ -189,13 +187,19 @@ namespace Microsoft.Data.Sqlite
                     return "TEXT";
 
                 default:
-                    Debug.Assert(sqliteType is SQLITE_BLOB or SQLITE_NULL, "Unexpected column type: " + sqliteType);
+                    Debug.Assert(
+                        sqliteType is SQLITE_BLOB or SQLITE_NULL,
+                        "Unexpected column type: " + sqliteType
+                    );
                     return "BLOB";
             }
         }
 
 #if NET6_0_OR_GREATER
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
 #endif
         public virtual Type GetFieldType(int ordinal)
         {
@@ -214,7 +218,10 @@ namespace Microsoft.Data.Sqlite
         }
 
 #if NET6_0_OR_GREATER
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
 #endif
         internal static Type GetFieldTypeFromSqliteType(int sqliteType)
         {
@@ -230,13 +237,19 @@ namespace Microsoft.Data.Sqlite
                     return typeof(string);
 
                 default:
-                    Debug.Assert(sqliteType is SQLITE_BLOB or SQLITE_NULL, "Unexpected column type: " + sqliteType);
+                    Debug.Assert(
+                        sqliteType is SQLITE_BLOB or SQLITE_NULL,
+                        "Unexpected column type: " + sqliteType
+                    );
                     return typeof(byte[]);
             }
         }
 
 #if NET6_0_OR_GREATER
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
 #endif
         public static Type GetFieldType(string type)
         {
@@ -257,7 +270,13 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        public virtual long GetBytes(int ordinal, long dataOffset, byte[]? buffer, int bufferOffset, int length)
+        public virtual long GetBytes(
+            int ordinal,
+            long dataOffset,
+            byte[]? buffer,
+            int bufferOffset,
+            int length
+        )
         {
             using var stream = GetStream(ordinal);
 
@@ -271,7 +290,13 @@ namespace Microsoft.Data.Sqlite
             return stream.Read(buffer, bufferOffset, length);
         }
 
-        public virtual long GetChars(int ordinal, long dataOffset, char[]? buffer, int bufferOffset, int length)
+        public virtual long GetChars(
+            int ordinal,
+            long dataOffset,
+            char[]? buffer,
+            int bufferOffset,
+            int length
+        )
         {
             using var reader = new StreamReader(GetStream(ordinal), Encoding.UTF8);
 
@@ -292,7 +317,11 @@ namespace Microsoft.Data.Sqlite
                 if (reader.Read() == -1)
                 {
                     // NB: Message is provided by the framework
-                    throw new ArgumentOutOfRangeException(nameof(dataOffset), dataOffset, message: null);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(dataOffset),
+                        dataOffset,
+                        message: null
+                    );
                 }
             }
 
@@ -301,8 +330,7 @@ namespace Microsoft.Data.Sqlite
 
         public virtual Stream GetStream(int ordinal)
         {
-            if (ordinal < 0
-                || ordinal >= FieldCount)
+            if (ordinal < 0 || ordinal >= FieldCount)
             {
                 throw new ArgumentOutOfRangeException(nameof(ordinal), ordinal, message: null);
             }
@@ -350,16 +378,20 @@ namespace Microsoft.Data.Sqlite
                         out var collSeq,
                         out var notNull,
                         out var primaryKey,
-                        out var autoInc);
+                        out var autoInc
+                    );
                     SqliteException.ThrowExceptionForRC(rc, _connection.Handle);
-                    if (string.Equals(dataType, "INTEGER", StringComparison.OrdinalIgnoreCase)
-                        && primaryKey != 0)
+                    if (
+                        string.Equals(dataType, "INTEGER", StringComparison.OrdinalIgnoreCase)
+                        && primaryKey != 0
+                    )
                     {
                         if (pkColumns < 0L)
                         {
                             using (var command = _connection.CreateCommand())
                             {
-                                command.CommandText = "SELECT COUNT(*) FROM pragma_table_info($table) WHERE pk != 0;";
+                                command.CommandText =
+                                    "SELECT COUNT(*) FROM pragma_table_info($table) WHERE pk != 0;";
                                 command.Parameters.AddWithValue("$table", tableName);
 
                                 pkColumns = (long)command.ExecuteScalar()!;
@@ -385,11 +417,18 @@ namespace Microsoft.Data.Sqlite
             var blobColumnName = sqlite3_column_origin_name(Handle, ordinal).utf8_to_string();
             var rowid = GetInt64(_rowidOrdinal.Value);
 
-            return new SqliteBlob(_connection, blobDatabaseName, blobTableName, blobColumnName, rowid, readOnly: true);
+            return new SqliteBlob(
+                _connection,
+                blobDatabaseName,
+                blobTableName,
+                blobColumnName,
+                rowid,
+                readOnly: true
+            );
         }
 
-        public virtual TextReader GetTextReader(int ordinal)
-            => IsDBNull(ordinal)
+        public virtual TextReader GetTextReader(int ordinal) =>
+            IsDBNull(ordinal)
                 ? new StringReader(string.Empty)
                 : new StreamReader(GetStream(ordinal), Encoding.UTF8);
 
@@ -429,7 +468,7 @@ namespace Microsoft.Data.Sqlite
             {
                 return true;
             }
-            
+
             AddChanges();
             _alreadyAddedChanges = true;
 
@@ -463,8 +502,7 @@ namespace Microsoft.Data.Sqlite
 
         private byte[] GetCachedBlob(int ordinal)
         {
-            if (ordinal < 0
-                || ordinal >= FieldCount)
+            if (ordinal < 0 || ordinal >= FieldCount)
             {
                 // NB: Message is provided by the framework
                 throw new ArgumentOutOfRangeException(nameof(ordinal), ordinal, message: null);
@@ -492,23 +530,22 @@ namespace Microsoft.Data.Sqlite
             var typeRules = new Func<string, int?>[]
             {
                 name => Contains(name, "INT") ? SQLITE_INTEGER : (int?)null,
-                name => Contains(name, "CHAR")
-                    || Contains(name, "CLOB")
-                    || Contains(name, "TEXT")
+                name =>
+                    Contains(name, "CHAR") || Contains(name, "CLOB") || Contains(name, "TEXT")
                         ? SQLITE_TEXT
                         : (int?)null,
                 name => Contains(name, "BLOB") ? SQLITE_BLOB : (int?)null,
-                name => Contains(name, "REAL")
-                    || Contains(name, "FLOA")
-                    || Contains(name, "DOUB")
+                name =>
+                    Contains(name, "REAL") || Contains(name, "FLOA") || Contains(name, "DOUB")
                         ? SQLITE_FLOAT
-                        : (int?)null
+                        : (int?)null,
             };
 
-            return typeRules.Select(r => r(dataTypeName)).FirstOrDefault(r => r != null) ?? SQLITE_TEXT; // code NUMERICAL affinity as TEXT
+            return typeRules.Select(r => r(dataTypeName)).FirstOrDefault(r => r != null)
+                ?? SQLITE_TEXT; // code NUMERICAL affinity as TEXT
         }
 
-        private static bool Contains(string haystack, string needle)
-            => haystack.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
+        private static bool Contains(string haystack, string needle) =>
+            haystack.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

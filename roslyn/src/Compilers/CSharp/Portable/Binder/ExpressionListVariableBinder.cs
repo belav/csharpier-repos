@@ -4,12 +4,12 @@
 
 #nullable disable
 
+using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using System.Diagnostics;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly SeparatedSyntaxList<ExpressionSyntax> _expressions;
 
-        internal ExpressionListVariableBinder(SeparatedSyntaxList<ExpressionSyntax> expressions, Binder next) : base(next)
+        internal ExpressionListVariableBinder(
+            SeparatedSyntaxList<ExpressionSyntax> expressions,
+            Binder next
+        )
+            : base(next)
         {
             Debug.Assert(expressions.Count > 0);
             _expressions = expressions;
@@ -32,13 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _expressions[0];
-            }
+            get { return _expressions[0]; }
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {
@@ -48,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

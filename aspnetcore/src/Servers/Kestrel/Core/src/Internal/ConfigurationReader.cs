@@ -221,18 +221,15 @@ internal sealed class ConfigurationReader
             }
         }
 
-        return stringProtocols?.Aggregate(
-            SslProtocols.None,
-            (acc, current) =>
+        return stringProtocols?.Aggregate(SslProtocols.None, (acc, current) =>
+        {
+            if (Enum.TryParse(current, ignoreCase: true, out SslProtocols parsed))
             {
-                if (Enum.TryParse(current, ignoreCase: true, out SslProtocols parsed))
-                {
-                    return acc | parsed;
-                }
-
-                return acc;
+                return acc | parsed;
             }
-        );
+
+            return acc;
+        });
     }
 
     internal static void ThrowIfContainsHttpsOnlyConfiguration(EndpointConfig endpoint)

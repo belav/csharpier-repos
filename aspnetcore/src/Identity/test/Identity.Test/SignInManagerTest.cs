@@ -18,30 +18,26 @@ public class SignInManagerTest
     [Fact]
     public void ConstructorNullChecks()
     {
-        Assert.Throws<ArgumentNullException>(
-            "userManager",
-            () => new SignInManager<PocoUser>(null, null, null, null, null, null, null)
+        Assert.Throws<ArgumentNullException>("userManager", () =>
+            new SignInManager<PocoUser>(null, null, null, null, null, null, null)
         );
         var userManager = MockHelpers.MockUserManager<PocoUser>().Object;
-        Assert.Throws<ArgumentNullException>(
-            "contextAccessor",
-            () => new SignInManager<PocoUser>(userManager, null, null, null, null, null, null)
+        Assert.Throws<ArgumentNullException>("contextAccessor", () =>
+            new SignInManager<PocoUser>(userManager, null, null, null, null, null, null)
         );
         var contextAccessor = new Mock<IHttpContextAccessor>();
         var context = new Mock<HttpContext>();
         contextAccessor.Setup(a => a.HttpContext).Returns(context.Object);
-        Assert.Throws<ArgumentNullException>(
-            "claimsFactory",
-            () =>
-                new SignInManager<PocoUser>(
-                    userManager,
-                    contextAccessor.Object,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-                )
+        Assert.Throws<ArgumentNullException>("claimsFactory", () =>
+            new SignInManager<PocoUser>(
+                userManager,
+                contextAccessor.Object,
+                null,
+                null,
+                null,
+                null,
+                null
+            )
         );
     }
 

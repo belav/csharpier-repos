@@ -13,10 +13,10 @@ namespace System.CommandLine.Rendering
         public ConsoleRenderer(
             IConsole console,
             OutputMode mode = OutputMode.Auto,
-            bool resetAfterRender = false)
+            bool resetAfterRender = false
+        )
         {
-            _console = console ??
-                       throw new ArgumentNullException(nameof(console));
+            _console = console ?? throw new ArgumentNullException(nameof(console));
             _mode = mode;
 
             _terminal = console as ITerminal;
@@ -25,9 +25,7 @@ namespace System.CommandLine.Rendering
 
         public TextSpanFormatter Formatter { get; } = new TextSpanFormatter();
 
-        public void RenderToRegion(
-            object value,
-            Region region)
+        public void RenderToRegion(object value, Region region)
         {
             var formatted = Formatter.Format(value);
 
@@ -41,18 +39,14 @@ namespace System.CommandLine.Rendering
             Render(span);
         }
 
-        public void RenderToRegion(
-            FormattableString value,
-            Region region)
+        public void RenderToRegion(FormattableString value, Region region)
         {
             var formatted = Formatter.ParseToSpan(value);
 
             RenderToRegion(formatted, region);
         }
 
-        public void RenderToRegion(
-            TextSpan span,
-            Region region)
+        public void RenderToRegion(TextSpan span, Region region)
         {
             if (region == null)
             {
@@ -73,39 +67,31 @@ namespace System.CommandLine.Rendering
                 span = new ContainerSpan(
                     span,
                     ForegroundColorSpan.Reset(),
-                    BackgroundColorSpan.Reset());
+                    BackgroundColorSpan.Reset()
+                );
             }
 
             if (_mode == OutputMode.Auto)
             {
-                _mode = _terminal?.DetectOutputMode() ??
-                        OutputMode.PlainText;
+                _mode = _terminal?.DetectOutputMode() ?? OutputMode.PlainText;
             }
-
 
             TextSpanVisitor visitor;
             switch (_mode)
             {
                 case OutputMode.NonAnsi:
-                    visitor = new NonAnsiRenderingSpanVisitor(
-                        _terminal,
-                        region);
+                    visitor = new NonAnsiRenderingSpanVisitor(_terminal, region);
                     break;
 
                 case OutputMode.Ansi:
-                    visitor = new AnsiRenderingSpanVisitor(
-                        _console,
-                        region);
+                    visitor = new AnsiRenderingSpanVisitor(_console, region);
                     break;
 
                 case OutputMode.PlainText:
                     visitor = new FileRenderingSpanVisitor(
                         _console.Out,
-                        new Region(region.Left,
-                                   region.Top,
-                                   region.Width,
-                                   region.Height,
-                                   false));
+                        new Region(region.Left, region.Top, region.Width, region.Height, false)
+                    );
                     break;
 
                 default:
@@ -117,7 +103,9 @@ namespace System.CommandLine.Rendering
 
         internal static Size MeasureSpan(TextSpan span, Size maxSize)
         {
-            var measuringVisitor = new SpanMeasuringVisitor(new Region(0, 0, maxSize.Width, maxSize.Height));
+            var measuringVisitor = new SpanMeasuringVisitor(
+                new Region(0, 0, maxSize.Width, maxSize.Height)
+            );
             measuringVisitor.Visit(span);
             return new Size(measuringVisitor.Width, measuringVisitor.Height);
         }

@@ -9,113 +9,134 @@ using System.Text;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	internal class DerivedKeySecurityToken : SecurityToken
-	{
-		string algorithm;
-		SecurityKeyIdentifierClause reference;
-		SecurityToken resolved_token; // store resolved one.
-		int? generation, offset, length;
-		// properties
-		string id, name, label;
-		byte [] nonce;
-		ReadOnlyCollection<SecurityKey> keys;
-		ReferenceList reflist;
+    internal class DerivedKeySecurityToken : SecurityToken
+    {
+        string algorithm;
+        SecurityKeyIdentifierClause reference;
+        SecurityToken resolved_token; // store resolved one.
+        int? generation,
+            offset,
+            length;
 
-		public DerivedKeySecurityToken (string id, string algorithm,
-			SecurityKeyIdentifierClause reference,
-			SymmetricSecurityKey referencedKey,
-			string name,
-			int? generation,
-			int? offset,
-			int? length,
-			string label,
-			byte [] nonce)
-		{
-			algorithm = algorithm ?? SecurityAlgorithms.Psha1KeyDerivation;
+        // properties
+        string id,
+            name,
+            label;
+        byte[] nonce;
+        ReadOnlyCollection<SecurityKey> keys;
+        ReferenceList reflist;
 
-			this.id = id;
-			this.algorithm = algorithm;
-			this.reference = reference;
-			this.generation = generation;
-			this.offset = offset;
-			this.length = length;
-			this.nonce = nonce;
-			this.name = name;
-			this.label = label;
+        public DerivedKeySecurityToken(
+            string id,
+            string algorithm,
+            SecurityKeyIdentifierClause reference,
+            SymmetricSecurityKey referencedKey,
+            string name,
+            int? generation,
+            int? offset,
+            int? length,
+            string label,
+            byte[] nonce
+        )
+        {
+            algorithm = algorithm ?? SecurityAlgorithms.Psha1KeyDerivation;
 
-			SecurityKey key = new InMemorySymmetricSecurityKey (
-				referencedKey.GenerateDerivedKey (
-					algorithm,
-					Encoding.UTF8.GetBytes (label ?? Constants.WsscDefaultLabel),
-					nonce,
-					(length ?? 32) * 8,
-					offset ?? 0));
-			keys = new ReadOnlyCollection<SecurityKey> (
-				new SecurityKey [] {key});
-		}
+            this.id = id;
+            this.algorithm = algorithm;
+            this.reference = reference;
+            this.generation = generation;
+            this.offset = offset;
+            this.length = length;
+            this.nonce = nonce;
+            this.name = name;
+            this.label = label;
 
-		public override string Id {
-			get { return id; }
-		}
+            SecurityKey key = new InMemorySymmetricSecurityKey(
+                referencedKey.GenerateDerivedKey(
+                    algorithm,
+                    Encoding.UTF8.GetBytes(label ?? Constants.WsscDefaultLabel),
+                    nonce,
+                    (length ?? 32) * 8,
+                    offset ?? 0
+                )
+            );
+            keys = new ReadOnlyCollection<SecurityKey>(new SecurityKey[] { key });
+        }
 
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { return keys; }
-		}
+        public override string Id
+        {
+            get { return id; }
+        }
 
-		public override DateTime ValidFrom {
-			get { return resolved_token.ValidFrom; }
-		}
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get { return keys; }
+        }
 
-		public override DateTime ValidTo {
-			get { return resolved_token.ValidTo; }
-		}
+        public override DateTime ValidFrom
+        {
+            get { return resolved_token.ValidFrom; }
+        }
 
-		internal ReferenceList ReferenceList {
-			get { return reflist; }
-			set { reflist = value; }
-		}
+        public override DateTime ValidTo
+        {
+            get { return resolved_token.ValidTo; }
+        }
 
-		public SecurityKeyIdentifierClause TokenReference {
-			get { return reference; }
-		}
+        internal ReferenceList ReferenceList
+        {
+            get { return reflist; }
+            set { reflist = value; }
+        }
 
-		public int? Generation {
-			get { return generation; }
-		}
+        public SecurityKeyIdentifierClause TokenReference
+        {
+            get { return reference; }
+        }
 
-		public int? Length {
-			get { return length; }
-		}
+        public int? Generation
+        {
+            get { return generation; }
+        }
 
-		public int? Offset {
-			get { return offset; }
-		}
+        public int? Length
+        {
+            get { return length; }
+        }
 
-		public string Label {
-			get { return label; }
-		}
+        public int? Offset
+        {
+            get { return offset; }
+        }
 
-		public byte [] Nonce {
-			get { return nonce; }
-		}
+        public string Label
+        {
+            get { return label; }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public byte[] Nonce
+        {
+            get { return nonce; }
+        }
 
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			LocalIdKeyIdentifierClause l = keyIdentifierClause
-				as LocalIdKeyIdentifierClause;
-			return l != null && l.LocalId == Id;
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public override SecurityKey ResolveKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			return MatchesKeyIdentifierClause (keyIdentifierClause) ?
-				keys [0] : null;
-		}
-	}
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
+        {
+            LocalIdKeyIdentifierClause l = keyIdentifierClause as LocalIdKeyIdentifierClause;
+            return l != null && l.LocalId == Id;
+        }
+
+        public override SecurityKey ResolveKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
+        {
+            return MatchesKeyIdentifierClause(keyIdentifierClause) ? keys[0] : null;
+        }
+    }
 }

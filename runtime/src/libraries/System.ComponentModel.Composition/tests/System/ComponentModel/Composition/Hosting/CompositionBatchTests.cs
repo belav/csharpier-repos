@@ -29,8 +29,18 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_PropertiesShouldBeSetAndMatchArguments()
         {
-            ComposablePart[] partsToAdd = new ComposablePart[] { PartFactory.Create(), PartFactory.Create(), PartFactory.Create() };
-            ComposablePart[] partsToRemove = new ComposablePart[] { PartFactory.Create(), PartFactory.Create(), PartFactory.Create() };
+            ComposablePart[] partsToAdd = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                PartFactory.Create(),
+                PartFactory.Create(),
+            };
+            ComposablePart[] partsToRemove = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                PartFactory.Create(),
+                PartFactory.Create(),
+            };
 
             CompositionBatch batch = new CompositionBatch(partsToAdd, partsToRemove);
 
@@ -44,7 +54,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_PartsToAddAsNull_PartsToAddShouldBeEmpty()
         {
-            ComposablePart[] partsToRemove = new ComposablePart[] { PartFactory.Create(), PartFactory.Create(), PartFactory.Create() };
+            ComposablePart[] partsToRemove = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                PartFactory.Create(),
+                PartFactory.Create(),
+            };
 
             var batch = new CompositionBatch(null, partsToRemove);
 
@@ -55,7 +70,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_PartsToRemoveAsNull_PartsToRemoveShouldBeEmpty()
         {
-            ComposablePart[] partsToAdd = new ComposablePart[] { PartFactory.Create(), PartFactory.Create(), PartFactory.Create() };
+            ComposablePart[] partsToAdd = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                PartFactory.Create(),
+                PartFactory.Create(),
+            };
 
             var batch = new CompositionBatch(partsToAdd, null);
 
@@ -66,8 +86,18 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_PartsToAddHasNull_ShouldThrowArgumentNullException()
         {
-            ComposablePart[] partsToAdd = new ComposablePart[] { PartFactory.Create(), null, PartFactory.Create() };
-            ComposablePart[] partsToRemove = new ComposablePart[] { PartFactory.Create(), PartFactory.Create(), PartFactory.Create() };
+            ComposablePart[] partsToAdd = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                null,
+                PartFactory.Create(),
+            };
+            ComposablePart[] partsToRemove = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                PartFactory.Create(),
+                PartFactory.Create(),
+            };
 
             Assert.Throws<ArgumentException>("partsToAdd", () =>
             {
@@ -78,8 +108,18 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_PartsToRemoveHasNull_ShouldThrowArgumentNullException()
         {
-            ComposablePart[] partsToAdd = new ComposablePart[] { PartFactory.Create(), PartFactory.Create(), PartFactory.Create() };
-            ComposablePart[] partsToRemove = new ComposablePart[] { PartFactory.Create(), null, PartFactory.Create() };
+            ComposablePart[] partsToAdd = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                PartFactory.Create(),
+                PartFactory.Create(),
+            };
+            ComposablePart[] partsToRemove = new ComposablePart[]
+            {
+                PartFactory.Create(),
+                null,
+                PartFactory.Create(),
+            };
 
             Assert.Throws<ArgumentException>("partsToRemove", () =>
             {
@@ -271,7 +311,11 @@ namespace System.ComponentModel.Composition
         public void AddExport_ExportWithEmptyMetadata_IsExportedWithEmptyMetadata()
         {
             CompositionBatch batch = new CompositionBatch();
-            var export = ExportFactory.Create("Contract", "Value", new Dictionary<string, object>());
+            var export = ExportFactory.Create(
+                "Contract",
+                "Value",
+                new Dictionary<string, object>()
+            );
 
             Assert.Equal(0, export.Metadata.Count);
 
@@ -855,5 +899,4 @@ namespace System.ComponentModel.Composition
             return AttributedModelServices.GetContractName(typeof(T));
         }
     }
-
 }

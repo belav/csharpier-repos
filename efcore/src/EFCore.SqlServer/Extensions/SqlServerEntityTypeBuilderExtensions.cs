@@ -29,7 +29,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     [Obsolete("Configure this using ToTable(t => t.IsMemoryOptimized()) instead.")]
     public static EntityTypeBuilder IsMemoryOptimized(
         this EntityTypeBuilder entityTypeBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
     {
         entityTypeBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
 
@@ -50,9 +51,11 @@ public static class SqlServerEntityTypeBuilderExtensions
     [Obsolete("Configure this using ToTable(t => t.IsMemoryOptimized()) instead.")]
     public static EntityTypeBuilder<TEntity> IsMemoryOptimized<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        bool memoryOptimized = true)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)IsMemoryOptimized((EntityTypeBuilder)entityTypeBuilder, memoryOptimized);
+        bool memoryOptimized = true
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            IsMemoryOptimized((EntityTypeBuilder)entityTypeBuilder, memoryOptimized);
 
     /// <summary>
     ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
@@ -67,7 +70,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     [Obsolete("Configure this using ToTable(t => t.IsMemoryOptimized()) instead.")]
     public static OwnedNavigationBuilder IsMemoryOptimized(
         this OwnedNavigationBuilder collectionOwnershipBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
     {
         collectionOwnershipBuilder.OwnedEntityType.SetIsMemoryOptimized(memoryOptimized);
 
@@ -87,13 +91,17 @@ public static class SqlServerEntityTypeBuilderExtensions
     /// <param name="memoryOptimized">A value indicating whether the table is memory-optimized.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     [Obsolete("Configure this using ToTable(t => t.IsMemoryOptimized()) instead.")]
-    public static OwnedNavigationBuilder<TEntity, TRelatedEntity> IsMemoryOptimized<TEntity, TRelatedEntity>(
+    public static OwnedNavigationBuilder<TEntity, TRelatedEntity> IsMemoryOptimized<
+        TEntity,
+        TRelatedEntity
+    >(
         this OwnedNavigationBuilder<TEntity, TRelatedEntity> collectionOwnershipBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
         where TEntity : class
-        where TRelatedEntity : class
-        => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)IsMemoryOptimized(
-            (OwnedNavigationBuilder)collectionOwnershipBuilder, memoryOptimized);
+        where TRelatedEntity : class =>
+        (OwnedNavigationBuilder<TEntity, TRelatedEntity>)
+            IsMemoryOptimized((OwnedNavigationBuilder)collectionOwnershipBuilder, memoryOptimized);
 
     /// <summary>
     ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
@@ -112,7 +120,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? IsMemoryOptimized(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         bool? memoryOptimized,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (entityTypeBuilder.CanSetIsMemoryOptimized(memoryOptimized, fromDataAnnotation))
         {
@@ -137,8 +146,13 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static bool CanSetIsMemoryOptimized(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         bool? memoryOptimized,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(SqlServerAnnotationNames.MemoryOptimized, memoryOptimized, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.MemoryOptimized,
+            memoryOptimized,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the table as temporal.
@@ -157,7 +171,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? IsTemporal(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         bool temporal = true,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (entityTypeBuilder.CanSetIsTemporal(temporal, fromDataAnnotation))
         {
@@ -183,8 +198,13 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static bool CanSetIsTemporal(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         bool temporal = true,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(SqlServerAnnotationNames.IsTemporal, temporal, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.IsTemporal,
+            temporal,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures a history table name for the entity mapped to a temporal table.
@@ -203,7 +223,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? UseHistoryTableName(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (entityTypeBuilder.CanSetHistoryTableName(name, fromDataAnnotation))
         {
@@ -229,11 +250,16 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static bool CanSetHistoryTableName(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotNull(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(SqlServerAnnotationNames.TemporalHistoryTableName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.TemporalHistoryTableName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -253,7 +279,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? UseHistoryTableSchema(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (entityTypeBuilder.CanSetHistoryTableSchema(schema, fromDataAnnotation))
         {
@@ -279,8 +306,13 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static bool CanSetHistoryTableSchema(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(SqlServerAnnotationNames.TemporalHistoryTableSchema, schema, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.TemporalHistoryTableSchema,
+            schema,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures a period start property for the entity mapped to a temporal table.
@@ -299,7 +331,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasPeriodStart(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? propertyName,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (entityTypeBuilder.CanSetPeriodStart(propertyName, fromDataAnnotation))
         {
@@ -325,9 +358,13 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static bool CanSetPeriodStart(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? propertyName,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(
-            SqlServerAnnotationNames.TemporalPeriodStartPropertyName, propertyName, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.TemporalPeriodStartPropertyName,
+            propertyName,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures a period end property for the entity mapped to a temporal table.
@@ -346,7 +383,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasPeriodEnd(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? propertyName,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (entityTypeBuilder.CanSetPeriodEnd(propertyName, fromDataAnnotation))
         {
@@ -372,7 +410,11 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static bool CanSetPeriodEnd(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? propertyName,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(
-            SqlServerAnnotationNames.TemporalPeriodEndPropertyName, propertyName, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.TemporalPeriodEndPropertyName,
+            propertyName,
+            fromDataAnnotation
+        );
 }

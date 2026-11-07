@@ -21,7 +21,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             var list = new SegmentedList<int>(new int[] { 1, 2, 3 });
             var before = list.ToSegmentedList();
-            var after = list.ConvertAll((i) => { return 10 * i; });
+            var after = list.ConvertAll(
+                (i) =>
+                {
+                    return 10 * i;
+                }
+            );
 
             Assert.Equal(before.Count, list.Count);
             Assert.Equal(before.Count, after.Count);

@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="IHttpHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Synchronous Http request handler interface
- * 
+ *
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web {
-    
+namespace System.Web
+{
     using System.Security.Permissions;
 
     /// <devdoc>
@@ -21,14 +21,14 @@ namespace System.Web {
     ///       implement the ProcessRequest method to provide custom URL execution.
     ///    </para>
     /// </devdoc>
-    public interface IHttpHandler {
-
+    public interface IHttpHandler
+    {
         /// <devdoc>
         ///    <para>
         ///       Drives web processing execution.
         ///    </para>
         /// </devdoc>
-        void ProcessRequest(HttpContext context);   
+        void ProcessRequest(HttpContext context);
 
         /// <devdoc>
         ///    <para>
@@ -38,5 +38,4 @@ namespace System.Web {
         /// </devdoc>
         bool IsReusable { get; }
     }
-
 }

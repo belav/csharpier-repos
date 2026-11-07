@@ -16,7 +16,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : Mammal
+    public class Variance<T> : iVariance<T>
+        where T : Mammal
     {
         public T Boo()
         {
@@ -24,17 +25,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
         }
     }
 
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Mammal : Animal
-    {
-    }
+    public class Mammal : Animal { }
 
-    public class Tiger : Mammal
-    {
-    }
+    public class Tiger : Mammal { }
 
     public class C
     {
@@ -61,8 +56,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstraintegereger05.cnstraintegereger05
 {
     // <Title>Generic constraints</Title>
@@ -73,9 +66,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
 
     public class P
     {
-        public void Foo<T, S>() where T : S
-        {
-        }
+        public void Foo<T, S>()
+            where T : S { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -93,8 +85,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
         }
     }
 
-    public interface I<out T>
-    {
-    }
+    public interface I<out T> { }
     // </Code>
 }

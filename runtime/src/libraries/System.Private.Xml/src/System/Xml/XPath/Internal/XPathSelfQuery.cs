@@ -7,8 +7,11 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class XPathSelfQuery : BaseAxisQuery
     {
-        public XPathSelfQuery(Query qyInput, string Name, string Prefix, XPathNodeType Type) : base(qyInput, Name, Prefix, Type) { }
-        private XPathSelfQuery(XPathSelfQuery other) : base(other) { }
+        public XPathSelfQuery(Query qyInput, string Name, string Prefix, XPathNodeType Type)
+            : base(qyInput, Name, Prefix, Type) { }
+
+        private XPathSelfQuery(XPathSelfQuery other)
+            : base(other) { }
 
         public override XPathNavigator? Advance()
         {
@@ -23,6 +26,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new XPathSelfQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new XPathSelfQuery(this);
+        }
     }
 }

@@ -34,9 +34,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         IDiagnosticAnalyzerService analyzerService,
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>(threadingContext, diagnosticService, analyzerService, globalOptions, visibilityTracker, listenerProvider)
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>(
+            threadingContext,
+            diagnosticService,
+            analyzerService,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider
+        )
     {
-        protected override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(DiagnosticsOptionsStorage.Squiggles);
+        protected override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(DiagnosticsOptionsStorage.Squiggles);
 
         protected sealed override bool SupportsDiagnosticMode(DiagnosticMode mode)
         {
@@ -47,21 +57,28 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         protected sealed override bool IncludeDiagnostic(DiagnosticData diagnostic)
         {
-            var isUnnecessary = diagnostic.Severity == DiagnosticSeverity.Hidden && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
+            var isUnnecessary =
+                diagnostic.Severity == DiagnosticSeverity.Hidden
+                && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
 
-            return
-                (diagnostic.Severity == DiagnosticSeverity.Warning || diagnostic.Severity == DiagnosticSeverity.Error || isUnnecessary) &&
-                !string.IsNullOrWhiteSpace(diagnostic.Message);
+            return (
+                    diagnostic.Severity == DiagnosticSeverity.Warning
+                    || diagnostic.Severity == DiagnosticSeverity.Error
+                    || isUnnecessary
+                ) && !string.IsNullOrWhiteSpace(diagnostic.Message);
         }
 
-        protected sealed override IErrorTag? CreateTag(Workspace workspace, DiagnosticData diagnostic)
+        protected sealed override IErrorTag? CreateTag(
+            Workspace workspace,
+            DiagnosticData diagnostic
+        )
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(diagnostic.Message));
             var errorType = GetErrorTypeFromDiagnostic(diagnostic);
             if (errorType == null)
             {
                 // unknown diagnostic kind.
-                // we don't provide tagging for unknown diagnostic kind. 
+                // we don't provide tagging for unknown diagnostic kind.
                 //
                 // it should be provided by the one who introduced the new diagnostic kind.
                 return null;
@@ -78,14 +95,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return null;
             }
 
-            return GetErrorTypeFromDiagnosticTags(diagnostic) ??
-                   GetErrorTypeFromDiagnosticSeverity(diagnostic);
+            return GetErrorTypeFromDiagnosticTags(diagnostic)
+                ?? GetErrorTypeFromDiagnosticSeverity(diagnostic);
         }
 
         private static string? GetErrorTypeFromDiagnosticTags(DiagnosticData diagnostic)
         {
-            if (diagnostic.Severity == DiagnosticSeverity.Error &&
-                diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.EditAndContinue))
+            if (
+                diagnostic.Severity == DiagnosticSeverity.Error
+                && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.EditAndContinue)
+            )
             {
                 return EditAndContinueErrorTypeDefinition.Name;
             }

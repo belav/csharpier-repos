@@ -32,7 +32,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             bool encrypting,
             int feedbackSizeInBytes,
-            int paddingSizeInBytes)
+            int paddingSizeInBytes
+        )
         {
             int ret;
             int ccStatus;
@@ -52,7 +53,8 @@ namespace System.Security.Cryptography
                     pbIv,
                     Interop.AppleCrypto.PAL_SymmetricOptions.None,
                     out _cryptor,
-                    out ccStatus);
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -177,7 +179,8 @@ namespace System.Security.Cryptography
                     pOutput,
                     output.Length,
                     out bytesWritten,
-                    out ccStatus);
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -185,7 +188,10 @@ namespace System.Security.Cryptography
             return bytesWritten;
         }
 
-        private static PAL_ChainingMode GetPalChainMode(CipherMode cipherMode, int feedbackSizeInBytes)
+        private static PAL_ChainingMode GetPalChainMode(
+            CipherMode cipherMode,
+            int feedbackSizeInBytes
+        )
         {
             return cipherMode switch
             {
@@ -193,7 +199,9 @@ namespace System.Security.Cryptography
                 CipherMode.ECB => PAL_ChainingMode.ECB,
                 CipherMode.CFB when feedbackSizeInBytes == 1 => PAL_ChainingMode.CFB8,
                 CipherMode.CFB => PAL_ChainingMode.CFB,
-                _ => throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)),
+                _ => throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)
+                ),
             };
         }
 
@@ -208,10 +216,14 @@ namespace System.Security.Cryptography
             // Platform error
             if (functionReturnCode == 0)
             {
-                Debug.Assert(ccStatus != 0, "Interop function returned 0 but a system code of success");
+                Debug.Assert(
+                    ccStatus != 0,
+                    "Interop function returned 0 but a system code of success"
+                );
                 throw Interop.AppleCrypto.CreateExceptionForCCError(
                     ccStatus,
-                    Interop.AppleCrypto.CCCryptorStatus);
+                    Interop.AppleCrypto.CCCryptorStatus
+                );
             }
 
             // Usually this will be -1, a general indication of bad inputs.

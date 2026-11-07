@@ -37,9 +37,8 @@ public class NamedFormNoParentBindingContextTest
         Browser.Exists(By.Id("ready"));
 
         var form = Browser.Exists(By.CssSelector("form"));
-        Browser.Equal(
-            "named-form-handler",
-            () => form.FindElement(By.CssSelector("input[name=_handler]")).GetAttribute("value")
+        Browser.Equal("named-form-handler", () =>
+            form.FindElement(By.CssSelector("input[name=_handler]")).GetAttribute("value")
         );
 
         Browser.Click(By.Id("send"));

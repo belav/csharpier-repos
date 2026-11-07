@@ -40,10 +40,7 @@ namespace System.ServiceModel.Diagnostics
 
         internal override string EventId
         {
-            get
-            {
-                return TraceRecord.EventIdBase + "PeerNode" + TraceRecord.NamespaceSuffix;
-            }
+            get { return TraceRecord.EventIdBase + "PeerNode" + TraceRecord.NamespaceSuffix; }
         }
 
         internal override void WriteTo(XmlWriter writer)
@@ -56,7 +53,12 @@ namespace System.ServiceModel.Diagnostics
             }
             if (this.address != null)
             {
-                this.address.EndpointAddress.WriteTo(AddressingVersion.WSAddressing10, writer, "LocalAddress", "");
+                this.address.EndpointAddress.WriteTo(
+                    AddressingVersion.WSAddressing10,
+                    writer,
+                    "LocalAddress",
+                    ""
+                );
                 foreach (IPAddress address in this.address.IPAddresses)
                 {
                     writer.WriteElementString("IPAddress", address.ToString());
@@ -78,9 +80,18 @@ namespace System.ServiceModel.Diagnostics
         string attemptedState;
         string action;
 
-        public PeerNeighborTraceRecord(ulong remoteNodeId, ulong localNodeId,
-            PeerNodeAddress listenAddress, IPAddress connectIPAddress, int hashCode, bool initiator, string state,
-            string previousState, string attemptedState, string action)
+        public PeerNeighborTraceRecord(
+            ulong remoteNodeId,
+            ulong localNodeId,
+            PeerNodeAddress listenAddress,
+            IPAddress connectIPAddress,
+            int hashCode,
+            bool initiator,
+            string state,
+            string previousState,
+            string attemptedState,
+            string action
+        )
         {
             this.localNodeId = localNodeId;
             this.remoteNodeId = remoteNodeId;
@@ -96,10 +107,7 @@ namespace System.ServiceModel.Diagnostics
 
         internal override string EventId
         {
-            get
-            {
-                return TraceRecord.EventIdBase + "PeerNeighbor" + TraceRecord.NamespaceSuffix;
-            }
+            get { return TraceRecord.EventIdBase + "PeerNeighbor" + TraceRecord.NamespaceSuffix; }
         }
 
         internal override void WriteTo(XmlWriter writer)
@@ -109,11 +117,22 @@ namespace System.ServiceModel.Diagnostics
             writer.WriteValue(this.hashCode);
             writer.WriteEndElement();
             if (this.remoteNodeId != 0)
-                writer.WriteElementString("RemoteNodeId", this.remoteNodeId.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("LocalNodeId", this.localNodeId.ToString(CultureInfo.InvariantCulture));
+                writer.WriteElementString(
+                    "RemoteNodeId",
+                    this.remoteNodeId.ToString(CultureInfo.InvariantCulture)
+                );
+            writer.WriteElementString(
+                "LocalNodeId",
+                this.localNodeId.ToString(CultureInfo.InvariantCulture)
+            );
             if (this.listenAddress != null)
             {
-                this.listenAddress.EndpointAddress.WriteTo(AddressingVersion.WSAddressing10, writer, "ListenAddress", "");
+                this.listenAddress.EndpointAddress.WriteTo(
+                    AddressingVersion.WSAddressing10,
+                    writer,
+                    "ListenAddress",
+                    ""
+                );
                 foreach (IPAddress address in this.listenAddress.IPAddresses)
                 {
                     writer.WriteElementString("IPAddress", address.ToString());
@@ -148,12 +167,31 @@ namespace System.ServiceModel.Diagnostics
         string closeInitiator;
         string closeReason;
 
-        public PeerNeighborCloseTraceRecord(ulong remoteNodeId, ulong localNodeId,
-            PeerNodeAddress listenAddress, IPAddress connectIPAddress, int hashCode, bool initiator,
-            string state, string previousState, string attemptedState,
-            string closeInitiator, string closeReason)
-            : base(remoteNodeId, localNodeId, listenAddress, connectIPAddress, hashCode, initiator,
-                    state, previousState, attemptedState, null)
+        public PeerNeighborCloseTraceRecord(
+            ulong remoteNodeId,
+            ulong localNodeId,
+            PeerNodeAddress listenAddress,
+            IPAddress connectIPAddress,
+            int hashCode,
+            bool initiator,
+            string state,
+            string previousState,
+            string attemptedState,
+            string closeInitiator,
+            string closeReason
+        )
+            : base(
+                remoteNodeId,
+                localNodeId,
+                listenAddress,
+                connectIPAddress,
+                hashCode,
+                initiator,
+                state,
+                previousState,
+                attemptedState,
+                null
+            )
         {
             this.closeInitiator = closeInitiator;
             this.closeReason = closeReason;
@@ -194,7 +232,12 @@ namespace System.ServiceModel.Diagnostics
             {
                 foreach (PeerNodeAddress nodeAddress in addresses)
                 {
-                    nodeAddress.EndpointAddress.WriteTo(AddressingVersion.WSAddressing10, writer, "Address", "");
+                    nodeAddress.EndpointAddress.WriteTo(
+                        AddressingVersion.WSAddressing10,
+                        writer,
+                        "Address",
+                        ""
+                    );
                     foreach (IPAddress ipAddress in nodeAddress.IPAddresses)
                     {
                         writer.WriteElementString("IPAddress", ipAddress.ToString());
@@ -211,7 +254,12 @@ namespace System.ServiceModel.Diagnostics
         protected ClaimSet claimSet;
         Exception exception;
 
-        protected PeerSecurityTraceRecord(string meshId, string remoteAddress, ClaimSet claimSet, Exception exception)
+        protected PeerSecurityTraceRecord(
+            string meshId,
+            string remoteAddress,
+            ClaimSet claimSet,
+            Exception exception
+        )
         {
             this.meshId = meshId;
             this.remoteAddress = remoteAddress;
@@ -219,7 +267,8 @@ namespace System.ServiceModel.Diagnostics
             this.exception = exception;
         }
 
-        protected PeerSecurityTraceRecord(string meshId, string remoteAddress) : this(meshId, remoteAddress, null, null) { }
+        protected PeerSecurityTraceRecord(string meshId, string remoteAddress)
+            : this(meshId, remoteAddress, null, null) { }
 
         internal override void WriteTo(XmlWriter writer)
         {
@@ -228,10 +277,13 @@ namespace System.ServiceModel.Diagnostics
             writer.WriteElementString("RemoteAddress", remoteAddress);
             WriteClaimSet(writer, claimSet);
             if (exception != null)
-                writer.WriteElementString("Exception", exception.GetType().ToString() + ":" + exception.Message);
+                writer.WriteElementString(
+                    "Exception",
+                    exception.GetType().ToString() + ":" + exception.Message
+                );
         }
 
-        static internal void WriteClaimSet(XmlWriter writer, ClaimSet claimSet)
+        internal static void WriteClaimSet(XmlWriter writer, ClaimSet claimSet)
         {
             writer.WriteStartElement("NeighborCredentials");
             if (claimSet != null)
@@ -242,26 +294,36 @@ namespace System.ServiceModel.Diagnostics
                         writer.WriteElementString("Name", claim.Resource.ToString());
                     else if (claim.ClaimType == ClaimTypes.X500DistinguishedName)
                     {
-                        writer.WriteElementString("X500DistinguishedName", (claim.Resource as X500DistinguishedName).Name.ToString());
+                        writer.WriteElementString(
+                            "X500DistinguishedName",
+                            (claim.Resource as X500DistinguishedName).Name.ToString()
+                        );
                     }
                     else if (claim.ClaimType == ClaimTypes.Thumbprint)
                     {
-                        writer.WriteElementString("Thumbprint", Convert.ToBase64String(claim.Resource as byte[]));
+                        writer.WriteElementString(
+                            "Thumbprint",
+                            Convert.ToBase64String(claim.Resource as byte[])
+                        );
                     }
                 }
             }
             writer.WriteEndElement(); //"NeighborCredentials"
         }
-
     }
 
     class PeerAuthenticationFailureTraceRecord : PeerSecurityTraceRecord
     {
-
-        public PeerAuthenticationFailureTraceRecord(string meshId, string remoteAddress, ClaimSet claimSet, Exception e)
+        public PeerAuthenticationFailureTraceRecord(
+            string meshId,
+            string remoteAddress,
+            ClaimSet claimSet,
+            Exception e
+        )
             : base(meshId, remoteAddress, claimSet, e) { }
 
-        public PeerAuthenticationFailureTraceRecord(string meshId, string remoteAddress) : base(meshId, remoteAddress, null, null) { }
+        public PeerAuthenticationFailureTraceRecord(string meshId, string remoteAddress)
+            : base(meshId, remoteAddress, null, null) { }
 
         internal override string EventId
         {
@@ -275,7 +337,13 @@ namespace System.ServiceModel.Diagnostics
     class PeerSignatureFailureTraceRecord : PeerSecurityTraceRecord
     {
         Uri via;
-        public PeerSignatureFailureTraceRecord(string meshId, Uri via, ClaimSet claimSet, Exception exception)
+
+        public PeerSignatureFailureTraceRecord(
+            string meshId,
+            Uri via,
+            ClaimSet claimSet,
+            Exception exception
+        )
             : base(meshId, null, claimSet, exception)
         {
             this.via = via;
@@ -285,7 +353,9 @@ namespace System.ServiceModel.Diagnostics
         {
             get
             {
-                return TraceRecord.EventIdBase + "PeerSignatureFailure" + TraceRecord.NamespaceSuffix;
+                return TraceRecord.EventIdBase
+                    + "PeerSignatureFailure"
+                    + TraceRecord.NamespaceSuffix;
             }
         }
 
@@ -304,7 +374,8 @@ namespace System.ServiceModel.Diagnostics
 
         public PeerFlooderTraceRecord(string meshId, PeerNodeAddress fromAddress, Exception e)
         {
-            this.from = fromAddress != null ? fromAddress.EndpointAddress.Uri : new Uri("net.p2p://");
+            this.from =
+                fromAddress != null ? fromAddress.EndpointAddress.Uri : new Uri("net.p2p://");
             this.meshId = meshId;
             this.exception = e;
         }
@@ -313,7 +384,9 @@ namespace System.ServiceModel.Diagnostics
         {
             get
             {
-                return TraceRecord.EventIdBase + "PeerFlooderQuotaExceeded" + TraceRecord.NamespaceSuffix;
+                return TraceRecord.EventIdBase
+                    + "PeerFlooderQuotaExceeded"
+                    + TraceRecord.NamespaceSuffix;
             }
         }
 
@@ -341,7 +414,9 @@ namespace System.ServiceModel.Diagnostics
         {
             get
             {
-                return TraceRecord.EventIdBase + "PeerFlooderQuotaExceeded" + TraceRecord.NamespaceSuffix;
+                return TraceRecord.EventIdBase
+                    + "PeerFlooderQuotaExceeded"
+                    + TraceRecord.NamespaceSuffix;
             }
         }
 
@@ -359,7 +434,13 @@ namespace System.ServiceModel.Diagnostics
         IEnumerable<PnrpPeerResolver.PnrpRegistration> siteEntries;
         IEnumerable<PnrpPeerResolver.PnrpRegistration> linkEntries;
         PnrpPeerResolver.PnrpRegistration global;
-        public PnrpRegisterTraceRecord(string meshId, PnrpPeerResolver.PnrpRegistration global, IEnumerable<PnrpPeerResolver.PnrpRegistration> siteEntries, IEnumerable<PnrpPeerResolver.PnrpRegistration> linkEntries)
+
+        public PnrpRegisterTraceRecord(
+            string meshId,
+            PnrpPeerResolver.PnrpRegistration global,
+            IEnumerable<PnrpPeerResolver.PnrpRegistration> siteEntries,
+            IEnumerable<PnrpPeerResolver.PnrpRegistration> linkEntries
+        )
         {
             this.meshId = meshId;
             this.siteEntries = siteEntries;
@@ -413,6 +494,7 @@ namespace System.ServiceModel.Diagnostics
     class PeerMaintainerTraceRecord : TraceRecord
     {
         string activity;
+
         public PeerMaintainerTraceRecord(string activity)
         {
             this.activity = activity;
@@ -422,7 +504,9 @@ namespace System.ServiceModel.Diagnostics
         {
             get
             {
-                return TraceRecord.EventIdBase + "PeerMaintainerActivity" + TraceRecord.NamespaceSuffix;
+                return TraceRecord.EventIdBase
+                    + "PeerMaintainerActivity"
+                    + TraceRecord.NamespaceSuffix;
             }
         }
 
@@ -435,24 +519,31 @@ namespace System.ServiceModel.Diagnostics
 
     class PnrpResolveExceptionTraceRecord : TraceRecord
     {
-
         string peerName;
         string cloudName;
         Exception exception;
 
-        public PnrpResolveExceptionTraceRecord(string peerName, string cloudName, Exception exception)
+        public PnrpResolveExceptionTraceRecord(
+            string peerName,
+            string cloudName,
+            Exception exception
+        )
         {
             this.peerName = peerName;
             this.cloudName = cloudName;
             this.exception = exception;
         }
+
         internal override string EventId
         {
             get
             {
-                return TraceRecord.EventIdBase + "PnrpResolveException" + TraceRecord.NamespaceSuffix;
+                return TraceRecord.EventIdBase
+                    + "PnrpResolveException"
+                    + TraceRecord.NamespaceSuffix;
             }
         }
+
         internal override void WriteTo(XmlWriter writer)
         {
             base.WriteTo(writer);
@@ -460,8 +551,5 @@ namespace System.ServiceModel.Diagnostics
             writer.WriteElementString("CloudName", cloudName);
             writer.WriteElementString("Exception", exception.ToString());
         }
-
     }
-
-
 }

@@ -16,21 +16,21 @@ public class Runtime_83959
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void F() {}
+    static void F() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [SkipLocalsInit]
     static void WithOSR(int n, out char c)
     {
-        c = (char) 0;
+        c = (char)0;
         B(out byte b);
         for (int i = 0; i < n; i++)
         {
             F();
         }
         // This load of `b` must be a single byte
-        c = (char) b;
-        c += (char) 99;
+        c = (char)b;
+        c += (char)99;
     }
 
     // Ensure stack is filled with nonzero data
@@ -46,9 +46,9 @@ public class Runtime_83959
     [Fact]
     public static int TestEntryPoint()
     {
-        char c = (char) 0;
+        char c = (char)0;
         FillStack(100);
         WithOSR(50000, out c);
-        return (int) c;
+        return (int)c;
     }
 }

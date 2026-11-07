@@ -18,14 +18,21 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         private readonly IDocumentationCommentFormattingService _formattingService;
         private readonly CancellationToken _cancellationToken;
 
-        public static SyntaxNode ConvertToRegularComments(SyntaxNode node, IDocumentationCommentFormattingService formattingService, CancellationToken cancellationToken)
+        public static SyntaxNode ConvertToRegularComments(
+            SyntaxNode node,
+            IDocumentationCommentFormattingService formattingService,
+            CancellationToken cancellationToken
+        )
         {
             var converter = new DocCommentConverter(formattingService, cancellationToken);
 
             return converter.Visit(node);
         }
 
-        private DocCommentConverter(IDocumentationCommentFormattingService formattingService, CancellationToken cancellationToken)
+        private DocCommentConverter(
+            IDocumentationCommentFormattingService formattingService,
+            CancellationToken cancellationToken
+        )
             : base(visitIntoStructuredTrivia: false)
         {
             _formattingService = formattingService;
@@ -53,8 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 {
                     if (trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia)
                     {
-                        var structuredTrivia = (DocumentationCommentTriviaSyntax)trivia.GetStructure();
-                        var commentLines = ConvertDocCommentToRegularComment(structuredTrivia).ToSyntaxTriviaList();
+                        var structuredTrivia = (DocumentationCommentTriviaSyntax)
+                            trivia.GetStructure();
+                        var commentLines = ConvertDocCommentToRegularComment(structuredTrivia)
+                            .ToSyntaxTriviaList();
 
                         if (commentLines.Count > 0)
                         {
@@ -76,13 +85,21 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             return node;
         }
 
-        private IEnumerable<SyntaxTrivia> ConvertDocCommentToRegularComment(DocumentationCommentTriviaSyntax structuredTrivia)
+        private IEnumerable<SyntaxTrivia> ConvertDocCommentToRegularComment(
+            DocumentationCommentTriviaSyntax structuredTrivia
+        )
         {
-            var xmlFragment = DocumentationCommentUtilities.ExtractXMLFragment(structuredTrivia.ToFullString(), "///");
+            var xmlFragment = DocumentationCommentUtilities.ExtractXMLFragment(
+                structuredTrivia.ToFullString(),
+                "///"
+            );
 
             var docComment = DocumentationComment.FromXmlFragment(xmlFragment);
 
-            var commentLines = AbstractMetadataAsSourceService.DocCommentFormatter.Format(_formattingService, docComment);
+            var commentLines = AbstractMetadataAsSourceService.DocCommentFormatter.Format(
+                _formattingService,
+                docComment
+            );
 
             foreach (var line in commentLines)
             {

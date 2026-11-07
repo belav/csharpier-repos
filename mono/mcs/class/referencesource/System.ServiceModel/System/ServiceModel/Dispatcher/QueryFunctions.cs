@@ -54,9 +54,12 @@ namespace System.ServiceModel.Dispatcher
         IXsltContextFunction function;
         List<NodeSequenceIterator> iterList;
 
-
         // REFACTOR, Microsoft, make this a function on QueryValueModel
-        internal XsltFunctionCallOpcode(XsltContext context, IXsltContextFunction function, int argCount)
+        internal XsltFunctionCallOpcode(
+            XsltContext context,
+            IXsltContextFunction function,
+            int argCount
+        )
             : base(OpcodeID.XsltFunction)
         {
             Fx.Assert(null != context && null != function, "");
@@ -83,9 +86,16 @@ namespace System.ServiceModel.Dispatcher
                     break;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidType, SR.GetString(SR.QueryFunctionTypeNotSupported, this.function.ReturnType.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryCompileException(
+                            QueryCompileError.InvalidType,
+                            SR.GetString(
+                                SR.QueryFunctionTypeNotSupported,
+                                this.function.ReturnType.ToString()
+                            )
+                        )
+                    );
             }
-
         }
 
         internal override bool Equals(Opcode op)
@@ -132,7 +142,15 @@ namespace System.ServiceModel.Dispatcher
 
                         default:
                             // This should never be reached
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryFunctionTypeNotSupported, this.function.ReturnType.ToString())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                                new QueryProcessingException(
+                                    QueryProcessingError.Unexpected,
+                                    SR.GetString(
+                                        SR.QueryFunctionTypeNotSupported,
+                                        this.function.ReturnType.ToString()
+                                    )
+                                )
+                            );
                     }
                 }
             }
@@ -163,14 +181,24 @@ namespace System.ServiceModel.Dispatcher
                                 break;
 
                             case XPathResultType.NodeSet:
-                                NodeSequenceIterator iter = new NodeSequenceIterator(context.PeekSequence(arg[iteration]));
+                                NodeSequenceIterator iter = new NodeSequenceIterator(
+                                    context.PeekSequence(arg[iteration])
+                                );
                                 xsltArgs[i] = iter;
                                 this.iterList.Add(iter);
                                 break;
 
                             default:
                                 // This should never be reached
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryFunctionTypeNotSupported, this.function.ArgTypes[i].ToString())));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                                    new QueryProcessingException(
+                                        QueryProcessingError.Unexpected,
+                                        SR.GetString(
+                                            SR.QueryFunctionTypeNotSupported,
+                                            this.function.ArgTypes[i].ToString()
+                                        )
+                                    )
+                                );
                         }
                     }
 
@@ -188,15 +216,27 @@ namespace System.ServiceModel.Dispatcher
                     switch (this.function.ReturnType)
                     {
                         case XPathResultType.String:
-                            context.SetValue(context, context[this.argCount - 1][iteration], (string)ret);
+                            context.SetValue(
+                                context,
+                                context[this.argCount - 1][iteration],
+                                (string)ret
+                            );
                             break;
 
                         case XPathResultType.Number:
-                            context.SetValue(context, context[this.argCount - 1][iteration], (double)ret);
+                            context.SetValue(
+                                context,
+                                context[this.argCount - 1][iteration],
+                                (double)ret
+                            );
                             break;
 
                         case XPathResultType.Boolean:
-                            context.SetValue(context, context[this.argCount - 1][iteration], (bool)ret);
+                            context.SetValue(
+                                context,
+                                context[this.argCount - 1][iteration],
+                                (bool)ret
+                            );
                             break;
 
                         case XPathResultType.NodeSet:
@@ -208,7 +248,15 @@ namespace System.ServiceModel.Dispatcher
 
                         default:
                             // This should never be reached
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryFunctionTypeNotSupported, this.function.ReturnType.ToString())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                                new QueryProcessingException(
+                                    QueryProcessingError.Unexpected,
+                                    SR.GetString(
+                                        SR.QueryFunctionTypeNotSupported,
+                                        this.function.ReturnType.ToString()
+                                    )
+                                )
+                            );
                     }
                 }
 
@@ -231,7 +279,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum QueryFunctionFlag
     {
         None = 0x00000000,
-        UsesContextNode = 0x00000001
+        UsesContextNode = 0x00000001,
     }
 
     internal abstract class QueryFunction
@@ -243,21 +291,20 @@ namespace System.ServiceModel.Dispatcher
         ValueDataType returnType;
 
         internal QueryFunction(string name, ValueDataType returnType)
-            : this(name, returnType, QueryFunction.emptyParams, QueryFunctionFlag.None)
-        {
-        }
+            : this(name, returnType, QueryFunction.emptyParams, QueryFunctionFlag.None) { }
 
         internal QueryFunction(string name, ValueDataType returnType, QueryFunctionFlag flags)
-            : this(name, returnType, QueryFunction.emptyParams, flags)
-        {
-        }
+            : this(name, returnType, QueryFunction.emptyParams, flags) { }
 
         internal QueryFunction(string name, ValueDataType returnType, ValueDataType[] paramTypes)
-            : this(name, returnType, paramTypes, QueryFunctionFlag.None)
-        {
-        }
+            : this(name, returnType, paramTypes, QueryFunctionFlag.None) { }
 
-        internal QueryFunction(string name, ValueDataType returnType, ValueDataType[] paramTypes, QueryFunctionFlag flags)
+        internal QueryFunction(
+            string name,
+            ValueDataType returnType,
+            ValueDataType[] paramTypes,
+            QueryFunctionFlag flags
+        )
         {
             Fx.Assert(null != paramTypes, "");
             Fx.Assert(null != name, "");
@@ -270,28 +317,19 @@ namespace System.ServiceModel.Dispatcher
 
         internal ValueDataType[] ParamTypes
         {
-            get
-            {
-                return this.paramTypes;
-            }
+            get { return this.paramTypes; }
         }
 
         internal ValueDataType ReturnType
         {
-            get
-            {
-                return this.returnType;
-            }
+            get { return this.returnType; }
         }
 
         internal bool Bind(string name, XPathExprList args)
         {
             Fx.Assert(null != name && null != args, "");
 
-            if (
-                0 != string.CompareOrdinal(this.name, name)
-                || this.paramTypes.Length != args.Count
-                )
+            if (0 != string.CompareOrdinal(this.name, name) || this.paramTypes.Length != args.Count)
             {
                 return false;
             }
@@ -347,12 +385,14 @@ namespace System.ServiceModel.Dispatcher
         NameDefault,
         NamespaceUri,
         NamespaceUriDefault,
+
         // Boolean
         Boolean,
         Not,
         True,
         False,
         Lang,
+
         // Number
         Number,
         NumberDefault,
@@ -360,6 +400,7 @@ namespace System.ServiceModel.Dispatcher
         Floor,
         Round,
         Sum,
+
         // String
         String,
         StringDefault,
@@ -376,7 +417,7 @@ namespace System.ServiceModel.Dispatcher
         SubstringAfter,
         Substring,
         SubstringLimit,
-        Translate
+        Translate,
     }
 
     internal class XPathFunctionLibrary : IFunctionLibrary
@@ -385,52 +426,234 @@ namespace System.ServiceModel.Dispatcher
 
         static XPathFunctionLibrary()
         {
-            XPathFunctionLibrary.functionTable = new XPathFunction[] {
-                new XPathFunction(XPathFunctionID.Boolean, "boolean", ValueDataType.Boolean, new ValueDataType[] { ValueDataType.None }),
+            XPathFunctionLibrary.functionTable = new XPathFunction[]
+            {
+                new XPathFunction(
+                    XPathFunctionID.Boolean,
+                    "boolean",
+                    ValueDataType.Boolean,
+                    new ValueDataType[] { ValueDataType.None }
+                ),
                 new XPathFunction(XPathFunctionID.False, "false", ValueDataType.Boolean),
                 new XPathFunction(XPathFunctionID.True, "true", ValueDataType.Boolean),
-                new XPathFunction(XPathFunctionID.Not, "not", ValueDataType.Boolean, new ValueDataType[] { ValueDataType.Boolean }),
-                new XPathFunction(XPathFunctionID.Lang, "lang", ValueDataType.Boolean, new ValueDataType[] { ValueDataType.String }),
-
-                new XPathFunction(XPathFunctionID.Number, "number", ValueDataType.Double, new ValueDataType[] { ValueDataType.None }),
+                new XPathFunction(
+                    XPathFunctionID.Not,
+                    "not",
+                    ValueDataType.Boolean,
+                    new ValueDataType[] { ValueDataType.Boolean }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Lang,
+                    "lang",
+                    ValueDataType.Boolean,
+                    new ValueDataType[] { ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Number,
+                    "number",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.None }
+                ),
                 new XPathFunction(XPathFunctionID.NumberDefault, "number", ValueDataType.Double),
-                new XPathFunction(XPathFunctionID.Sum, "sum", ValueDataType.Double, new ValueDataType[] { ValueDataType.Sequence }),
-                new XPathFunction(XPathFunctionID.Floor, "floor", ValueDataType.Double, new ValueDataType[] { ValueDataType.Double }),
-                new XPathFunction(XPathFunctionID.Ceiling, "ceiling", ValueDataType.Double, new ValueDataType[] { ValueDataType.Double }),
-                new XPathFunction(XPathFunctionID.Round, "round", ValueDataType.Double, new ValueDataType[] { ValueDataType.Double }),
-
-                new XPathFunction(XPathFunctionID.String, "string", ValueDataType.String, new ValueDataType[] { ValueDataType.None }),
-                new XPathFunction(XPathFunctionID.StringDefault, "string", ValueDataType.String, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.ConcatTwo, "concat", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.ConcatThree, "concat", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.ConcatFour, "concat", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.String, ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.StartsWith, "starts-with", ValueDataType.Boolean, new ValueDataType[] { ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.NormalizeSpace, "normalize-space", ValueDataType.String, new ValueDataType[] { ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.NormalizeSpaceDefault, "normalize-space", ValueDataType.String, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.Contains, "contains", ValueDataType.Boolean, new ValueDataType[] { ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.SubstringBefore, "substring-before", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.SubstringAfter, "substring-after", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.Substring, "substring", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.Double }),
-                new XPathFunction(XPathFunctionID.SubstringLimit, "substring", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.Double, ValueDataType.Double }),
-                new XPathFunction(XPathFunctionID.StringLength, "string-length", ValueDataType.Double, new ValueDataType[] { ValueDataType.String }),
-                new XPathFunction(XPathFunctionID.StringLengthDefault, "string-length", ValueDataType.Double, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.Translate, "translate", ValueDataType.String, new ValueDataType[] { ValueDataType.String, ValueDataType.String, ValueDataType.String }),
-
-                new XPathFunction(XPathFunctionID.Last, "last", ValueDataType.Double, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.Position, "position", ValueDataType.Double, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.Count, "count", ValueDataType.Double, new ValueDataType[] { ValueDataType.Sequence }),
-                new XPathFunction(XPathFunctionID.LocalName, "local-name", ValueDataType.String, new ValueDataType[] { ValueDataType.Sequence }),
-                new XPathFunction(XPathFunctionID.LocalNameDefault, "local-name", ValueDataType.String, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.Name, "name", ValueDataType.String, new ValueDataType[] { ValueDataType.Sequence }),
-                new XPathFunction(XPathFunctionID.NameDefault, "name", ValueDataType.String, QueryFunctionFlag.UsesContextNode),
-                new XPathFunction(XPathFunctionID.NamespaceUri, "namespace-uri", ValueDataType.String, new ValueDataType[] { ValueDataType.Sequence }),
-                new XPathFunction(XPathFunctionID.NamespaceUriDefault, "namespace-uri", ValueDataType.String, QueryFunctionFlag.UsesContextNode)
+                new XPathFunction(
+                    XPathFunctionID.Sum,
+                    "sum",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.Sequence }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Floor,
+                    "floor",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.Double }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Ceiling,
+                    "ceiling",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.Double }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Round,
+                    "round",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.Double }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.String,
+                    "string",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.None }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.StringDefault,
+                    "string",
+                    ValueDataType.String,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.ConcatTwo,
+                    "concat",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.String, ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.ConcatThree,
+                    "concat",
+                    ValueDataType.String,
+                    new ValueDataType[]
+                    {
+                        ValueDataType.String,
+                        ValueDataType.String,
+                        ValueDataType.String,
+                    }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.ConcatFour,
+                    "concat",
+                    ValueDataType.String,
+                    new ValueDataType[]
+                    {
+                        ValueDataType.String,
+                        ValueDataType.String,
+                        ValueDataType.String,
+                        ValueDataType.String,
+                    }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.StartsWith,
+                    "starts-with",
+                    ValueDataType.Boolean,
+                    new ValueDataType[] { ValueDataType.String, ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.NormalizeSpace,
+                    "normalize-space",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.NormalizeSpaceDefault,
+                    "normalize-space",
+                    ValueDataType.String,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Contains,
+                    "contains",
+                    ValueDataType.Boolean,
+                    new ValueDataType[] { ValueDataType.String, ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.SubstringBefore,
+                    "substring-before",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.String, ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.SubstringAfter,
+                    "substring-after",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.String, ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Substring,
+                    "substring",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.String, ValueDataType.Double }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.SubstringLimit,
+                    "substring",
+                    ValueDataType.String,
+                    new ValueDataType[]
+                    {
+                        ValueDataType.String,
+                        ValueDataType.Double,
+                        ValueDataType.Double,
+                    }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.StringLength,
+                    "string-length",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.String }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.StringLengthDefault,
+                    "string-length",
+                    ValueDataType.Double,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Translate,
+                    "translate",
+                    ValueDataType.String,
+                    new ValueDataType[]
+                    {
+                        ValueDataType.String,
+                        ValueDataType.String,
+                        ValueDataType.String,
+                    }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Last,
+                    "last",
+                    ValueDataType.Double,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Position,
+                    "position",
+                    ValueDataType.Double,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Count,
+                    "count",
+                    ValueDataType.Double,
+                    new ValueDataType[] { ValueDataType.Sequence }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.LocalName,
+                    "local-name",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.Sequence }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.LocalNameDefault,
+                    "local-name",
+                    ValueDataType.String,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.Name,
+                    "name",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.Sequence }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.NameDefault,
+                    "name",
+                    ValueDataType.String,
+                    QueryFunctionFlag.UsesContextNode
+                ),
+                new XPathFunction(
+                    XPathFunctionID.NamespaceUri,
+                    "namespace-uri",
+                    ValueDataType.String,
+                    new ValueDataType[] { ValueDataType.Sequence }
+                ),
+                new XPathFunction(
+                    XPathFunctionID.NamespaceUriDefault,
+                    "namespace-uri",
+                    ValueDataType.String,
+                    QueryFunctionFlag.UsesContextNode
+                ),
             };
         }
 
-        internal XPathFunctionLibrary()
-        {
-        }
+        internal XPathFunctionLibrary() { }
 
         public QueryFunction Bind(string functionName, string functionNamespace, XPathExprList args)
         {
@@ -536,13 +759,23 @@ namespace System.ServiceModel.Dispatcher
             this.functionID = functionID;
         }
 
-        internal XPathFunction(XPathFunctionID functionID, string name, ValueDataType returnType, QueryFunctionFlag flags)
+        internal XPathFunction(
+            XPathFunctionID functionID,
+            string name,
+            ValueDataType returnType,
+            QueryFunctionFlag flags
+        )
             : base(name, returnType, flags)
         {
             this.functionID = functionID;
         }
 
-        internal XPathFunction(XPathFunctionID functionID, string name, ValueDataType returnType, ValueDataType[] argTypes)
+        internal XPathFunction(
+            XPathFunctionID functionID,
+            string name,
+            ValueDataType returnType,
+            ValueDataType[] argTypes
+        )
             : base(name, returnType, argTypes)
         {
             this.functionID = functionID;
@@ -550,10 +783,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal XPathFunctionID ID
         {
-            get
-            {
-                return this.functionID;
-            }
+            get { return this.functionID; }
         }
 
         internal override bool Equals(QueryFunction function)
@@ -585,7 +815,9 @@ namespace System.ServiceModel.Dispatcher
             switch (this.functionID)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.QueryNotImplemented, this.name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotImplementedException(SR.GetString(SR.QueryNotImplemented, this.name))
+                    );
 
                 case XPathFunctionID.IterateSequences:
                     XPathFunction.IterateAndPushSequences(context);
@@ -801,7 +1033,12 @@ namespace System.ServiceModel.Dispatcher
                     {
                         context.SetValue(context, langArg.basePtr++, true);
                     }
-                    else if (docLang.Length > 0 && lang.Length < docLang.Length && docLang.StartsWith(lang, StringComparison.Ordinal) && docLang[lang.Length] == '-')
+                    else if (
+                        docLang.Length > 0
+                        && lang.Length < docLang.Length
+                        && docLang.StartsWith(lang, StringComparison.Ordinal)
+                        && docLang[lang.Length] == '-'
+                    )
                     {
                         context.SetValue(context, langArg.basePtr++, true);
                     }
@@ -923,7 +1160,11 @@ namespace System.ServiceModel.Dispatcher
 
             while (arg.basePtr <= arg.endPtr)
             {
-                context.SetValue(context, arg.basePtr, Math.Ceiling(context.PeekDouble(arg.basePtr)));
+                context.SetValue(
+                    context,
+                    arg.basePtr,
+                    Math.Ceiling(context.PeekDouble(arg.basePtr))
+                );
                 arg.basePtr++;
             }
         }
@@ -963,7 +1204,11 @@ namespace System.ServiceModel.Dispatcher
             while (arg.basePtr <= arg.endPtr)
             {
                 double val = context.PeekDouble(arg.basePtr);
-                context.SetValue(context, arg.basePtr, QueryValueModel.Round(context.PeekDouble(arg.basePtr)));
+                context.SetValue(
+                    context,
+                    arg.basePtr,
+                    QueryValueModel.Round(context.PeekDouble(arg.basePtr))
+                );
                 arg.basePtr++;
             }
         }
@@ -1068,7 +1313,11 @@ namespace System.ServiceModel.Dispatcher
             {
                 string leftString = context.PeekString(arg1.basePtr);
                 string rightString = context.PeekString(arg2.basePtr);
-                context.SetValue(context, arg2.basePtr, (-1 != leftString.IndexOf(rightString, StringComparison.Ordinal)));
+                context.SetValue(
+                    context,
+                    arg2.basePtr,
+                    (-1 != leftString.IndexOf(rightString, StringComparison.Ordinal))
+                );
                 arg1.basePtr++;
                 arg2.basePtr++;
             }
@@ -1102,7 +1351,11 @@ namespace System.ServiceModel.Dispatcher
             {
                 string leftString = context.PeekString(arg1.basePtr);
                 string rightString = context.PeekString(arg2.basePtr);
-                context.SetValue(context, arg2.basePtr, leftString.StartsWith(rightString, StringComparison.Ordinal));
+                context.SetValue(
+                    context,
+                    arg2.basePtr,
+                    leftString.StartsWith(rightString, StringComparison.Ordinal)
+                );
                 arg1.basePtr++;
                 arg2.basePtr++;
             }
@@ -1120,7 +1373,11 @@ namespace System.ServiceModel.Dispatcher
                 string str1 = context.PeekString(arg1.basePtr);
                 string str2 = context.PeekString(arg2.basePtr);
                 int idx = str1.IndexOf(str2, StringComparison.Ordinal);
-                context.SetValue(context, arg2.basePtr, idx == -1 ? string.Empty : str1.Substring(0, idx));
+                context.SetValue(
+                    context,
+                    arg2.basePtr,
+                    idx == -1 ? string.Empty : str1.Substring(0, idx)
+                );
                 arg1.basePtr++;
                 arg2.basePtr++;
             }
@@ -1138,7 +1395,11 @@ namespace System.ServiceModel.Dispatcher
                 string str1 = context.PeekString(arg1.basePtr);
                 string str2 = context.PeekString(arg2.basePtr);
                 int idx = str1.IndexOf(str2, StringComparison.Ordinal);
-                context.SetValue(context, arg2.basePtr, idx == -1 ? string.Empty : str1.Substring(idx + str2.Length));
+                context.SetValue(
+                    context,
+                    arg2.basePtr,
+                    idx == -1 ? string.Empty : str1.Substring(idx + str2.Length)
+                );
                 arg1.basePtr++;
                 arg2.basePtr++;
             }
@@ -1159,7 +1420,11 @@ namespace System.ServiceModel.Dispatcher
                 {
                     startAt = 0;
                 }
-                context.SetValue(context, arg2.basePtr, (startAt >= str.Length) ? string.Empty : str.Substring(startAt));
+                context.SetValue(
+                    context,
+                    arg2.basePtr,
+                    (startAt >= str.Length) ? string.Empty : str.Substring(startAt)
+                );
                 arg1.basePtr++;
                 arg2.basePtr++;
             }
@@ -1283,6 +1548,7 @@ namespace System.ServiceModel.Dispatcher
             XPathFunction.ConvertFirstArg(context, ValueDataType.String);
             XPathFunction.NormalizeSpace(context);
         }
+
 #if NO
         internal static bool IsWhitespace(char c)
         {

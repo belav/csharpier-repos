@@ -8,12 +8,14 @@ namespace System.Web.Razor.Generator
 {
     public abstract class SpanCodeGenerator : ISpanCodeGenerator
     {
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "This class has no instance state")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "This class has no instance state"
+        )]
         public static readonly ISpanCodeGenerator Null = new NullSpanCodeGenerator();
 
-        public virtual void GenerateCode(Span target, CodeGeneratorContext context)
-        {
-        }
+        public virtual void GenerateCode(Span target, CodeGeneratorContext context) { }
 
         public override bool Equals(object obj)
         {
@@ -27,9 +29,7 @@ namespace System.Web.Razor.Generator
 
         private class NullSpanCodeGenerator : ISpanCodeGenerator
         {
-            public void GenerateCode(Span target, CodeGeneratorContext context)
-            {
-            }
+            public void GenerateCode(Span target, CodeGeneratorContext context) { }
 
             public override string ToString()
             {

@@ -13,13 +13,16 @@ namespace System.ComponentModel
     {
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private Type? _toolboxItemType;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private readonly string? _toolboxItemTypeName;
 
         /// <summary>
         /// Initializes a new instance of ToolboxItemAttribute and sets the type to
         /// </summary>
-        public static readonly ToolboxItemAttribute Default = new ToolboxItemAttribute("System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+        public static readonly ToolboxItemAttribute Default = new ToolboxItemAttribute(
+            "System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        );
 
         /// <summary>
         /// Initializes a new instance of ToolboxItemAttribute and sets the type to
@@ -39,14 +42,18 @@ namespace System.ComponentModel
         {
             if (defaultType)
             {
-                _toolboxItemTypeName = "System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+                _toolboxItemTypeName =
+                    "System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
             }
         }
 
         /// <summary>
         /// Initializes a new instance of ToolboxItemAttribute and specifies the name of the type.
         /// </summary>
-        public ToolboxItemAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string toolboxItemTypeName)
+        public ToolboxItemAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string toolboxItemTypeName
+        )
         {
             ArgumentNullException.ThrowIfNull(toolboxItemTypeName);
 
@@ -56,7 +63,10 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of ToolboxItemAttribute and specifies the type of the toolbox item.
         /// </summary>
-        public ToolboxItemAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type toolboxItemType)
+        public ToolboxItemAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type toolboxItemType
+        )
         {
             ArgumentNullException.ThrowIfNull(toolboxItemType);
 
@@ -82,7 +92,13 @@ namespace System.ComponentModel
                         }
                         catch (Exception ex)
                         {
-                            throw new ArgumentException(SR.Format(SR.ToolboxItemAttributeFailedGetType, _toolboxItemTypeName), ex);
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.ToolboxItemAttributeFailedGetType,
+                                    _toolboxItemTypeName
+                                ),
+                                ex
+                            );
                         }
                     }
                 }
@@ -100,7 +116,8 @@ namespace System.ComponentModel
                 return true;
             }
 
-            return (obj is ToolboxItemAttribute other) && (other.ToolboxItemTypeName == ToolboxItemTypeName);
+            return (obj is ToolboxItemAttribute other)
+                && (other.ToolboxItemTypeName == ToolboxItemTypeName);
         }
 
         public override int GetHashCode()

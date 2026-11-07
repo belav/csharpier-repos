@@ -8,7 +8,8 @@ namespace System.ServiceModel.Discovery
         public const string VersionNameDefault = Version11.Name;
 
         public const string XsNamespace = "http://www.w3.org/2001/XMLSchema";
-        public const string WsaNamespaceAugust2004 = "http://schemas.xmlsoap.org/ws/2004/08/addressing";
+        public const string WsaNamespaceAugust2004 =
+            "http://schemas.xmlsoap.org/ws/2004/08/addressing";
         public const string WsaNamespace10 = "http://www.w3.org/2005/08/addressing";
 
         public static class VersionApril2005
@@ -35,7 +36,7 @@ namespace System.ServiceModel.Discovery
         public static class VersionCD1
         {
             public const string Name = "WSDiscoveryCD1";
-            public const string Namespace = "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09";                                             
+            public const string Namespace = "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09";
 
             public const string AdhocAddress = "urn:docs-oasis-open-org:ws-dd:discovery:2008:09";
 
@@ -121,7 +122,7 @@ namespace System.ServiceModel.Discovery
 
         public static class TracingStrings
         {
-            public const string Bye = SchemaNames.ByeElement;                        
+            public const string Bye = SchemaNames.ByeElement;
             public const string FindOperation = "Find";
             public const string Hello = SchemaNames.HelloElement;
             public const string Probe = SchemaNames.ProbeElement;

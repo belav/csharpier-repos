@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     /// </summary>
     internal sealed class CSharpInstrumentationChecker : BaseInstrumentationChecker
     {
-        public string ExpectedOutput { get { return _consoleExpectations.ToString(); } }
+        public string ExpectedOutput
+        {
+            get { return _consoleExpectations.ToString(); }
+        }
 
         internal override void AddConsoleExpectation(string text)
         {
@@ -57,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
                 else
                 {
-                    output.Builder.AppendLine($"checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}");
+                    output.Builder.AppendLine(
+                        $"checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}"
+                    );
                 }
 
                 for (int index = 1; index < snippets.Length; index++)
@@ -81,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return (index == length - 1) ? ";" : "";
         }
 
-        public const string InstrumentationHelperSource = @"
+        public const string InstrumentationHelperSource =
+            @"
 namespace Microsoft.CodeAnalysis.Runtime
 {
     public static class Instrumentation
@@ -159,7 +165,10 @@ namespace Microsoft.CodeAnalysis.Runtime
     {
         private readonly string tab = "    ";
 
-        public XCData ExpectedOutput { get { return new XCData(_consoleExpectations.ToString()); } }
+        public XCData ExpectedOutput
+        {
+            get { return new XCData(_consoleExpectations.ToString()); }
+        }
 
         internal override void AddConsoleExpectation(string text)
         {
@@ -188,11 +197,15 @@ namespace Microsoft.CodeAnalysis.Runtime
                 var methodTermination = GetTermination(0, snippets.Length);
                 if (snippets[0] == null)
                 {
-                    output.Builder.AppendLine($"{tab}{tab}{tab}checker.Method({method}, 1){methodTermination}");
+                    output.Builder.AppendLine(
+                        $"{tab}{tab}{tab}checker.Method({method}, 1){methodTermination}"
+                    );
                 }
                 else
                 {
-                    output.Builder.AppendLine($"{tab}{tab}{tab}checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}");
+                    output.Builder.AppendLine(
+                        $"{tab}{tab}{tab}checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}"
+                    );
                 }
 
                 for (int index = 1; index < snippets.Length; index++)
@@ -204,7 +217,9 @@ namespace Microsoft.CodeAnalysis.Runtime
                     }
                     else
                     {
-                        output.Builder.AppendLine($"{tab}{tab}{tab}{tab}True(\"{snippets[index]}\"){termination}");
+                        output.Builder.AppendLine(
+                            $"{tab}{tab}{tab}{tab}True(\"{snippets[index]}\"){termination}"
+                        );
                     }
                 }
             }
@@ -216,8 +231,13 @@ namespace Microsoft.CodeAnalysis.Runtime
             return (index == length - 1) ? "" : ".";
         }
 
-        public static readonly XElement InstrumentationHelperSource = new XElement("file", new XAttribute("name", "c.vb"), InstrumentationHelperSourceStr);
-        public const string InstrumentationHelperSourceStr = @"
+        public static readonly XElement InstrumentationHelperSource = new XElement(
+            "file",
+            new XAttribute("name", "c.vb"),
+            InstrumentationHelperSourceStr
+        );
+        public const string InstrumentationHelperSourceStr =
+            @"
 Namespace Microsoft.CodeAnalysis.Runtime
 
     Public Class Instrumentation
@@ -276,7 +296,11 @@ End Namespace
     public abstract class BaseInstrumentationChecker
     {
         protected StringBuilder _consoleExpectations = new StringBuilder();
-        private readonly Dictionary<int /*method*/, MethodChecker> _spanExpectations = new Dictionary<int, MethodChecker>();
+        private readonly Dictionary<
+            int /*method*/
+            ,
+            MethodChecker
+        > _spanExpectations = new Dictionary<int, MethodChecker>();
 
         protected BaseInstrumentationChecker()
         {
@@ -294,7 +318,12 @@ End Namespace
         /// It will be verified against the start of the actual method source span.
         /// If no snippet is passed in, then snippet validation will be disabled for the whole method (subsequent calls to <c>True</c> or <c>False</c>).
         /// </param>
-        public MethodChecker Method(int method, int file, string snippet = null, bool expectBodySpan = true)
+        public MethodChecker Method(
+            int method,
+            int file,
+            string snippet = null,
+            bool expectBodySpan = true
+        )
         {
             AddConsoleExpectation($"Method {method}");
             AddConsoleExpectation($"File {file}");
@@ -319,9 +348,16 @@ End Namespace
         /// </summary>
         public void CompleteCheck(Compilation compilation, string source)
         {
-            var peImage = compilation.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var peImage = compilation.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
             string[] sourceLines = source.Split('\n');
 
             if (_spanExpectations.Count == 0)
@@ -335,7 +371,12 @@ End Namespace
                 var actualSnippets = GetActualSnippets(method, reader, sourceLines);
                 var expectedSnippets = _spanExpectations[method].SnippetExpectations;
 
-                AssertEx.Equal(expectedSnippets, actualSnippets, new SnippetComparer(), $"Validation of method {method} failed.");
+                AssertEx.Equal(
+                    expectedSnippets,
+                    actualSnippets,
+                    new SnippetComparer(),
+                    $"Validation of method {method} failed."
+                );
             }
         }
 
@@ -344,18 +385,27 @@ End Namespace
 
         internal abstract void AddConsoleExpectation(string text);
 
-        internal static ImmutableArray<string> GetActualSnippets(int method, DynamicAnalysisDataReader reader, string[] sourceLines)
+        internal static ImmutableArray<string> GetActualSnippets(
+            int method,
+            DynamicAnalysisDataReader reader,
+            string[] sourceLines
+        )
         {
             var actualSpans = reader.GetSpans(reader.Methods[method - 1].Blob);
 
-            return actualSpans.SelectAsArray((span, lines) =>
-            {
-                if (span.StartLine >= lines.Length)
+            return actualSpans.SelectAsArray(
+                (span, lines) =>
                 {
-                    return null;
-                }
-                return lines[span.StartLine].Substring(span.StartColumn).TrimEnd(new[] { '\r', '\n', ' ' });
-            }, sourceLines);
+                    if (span.StartLine >= lines.Length)
+                    {
+                        return null;
+                    }
+                    return lines[span.StartLine]
+                        .Substring(span.StartColumn)
+                        .TrimEnd(new[] { '\r', '\n', ' ' });
+                },
+                sourceLines
+            );
         }
 
         public class MethodChecker
@@ -373,7 +423,10 @@ End Namespace
                 }
             }
 
-            public string[] SnippetExpectations { get { return _snippetExpectations.ToArray(); } }
+            public string[] SnippetExpectations
+            {
+                get { return _snippetExpectations.ToArray(); }
+            }
 
             /// <summary>
             /// Records the expectation that the following span will be covered and resembles the provided snippet.
@@ -400,8 +453,10 @@ End Namespace
                 }
                 else
                 {
-                    Assert.True(expectedSourceSnippet == null,
-                        "You must pass a snippet when checking the method with M if you intend to verify snippets within the method.");
+                    Assert.True(
+                        expectedSourceSnippet == null,
+                        "You must pass a snippet when checking the method with M if you intend to verify snippets within the method."
+                    );
                 }
 
                 return this;

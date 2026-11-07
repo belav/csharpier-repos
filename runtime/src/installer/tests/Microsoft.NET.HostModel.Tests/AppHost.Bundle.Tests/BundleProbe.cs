@@ -25,11 +25,13 @@ namespace AppHost.Bundle.Tests
             var fixture = sharedTestState.TestFixture.Copy();
             string appExe = BundleHelper.GetHostPath(fixture);
 
-            Command.Create(appExe, "host_runtime_contract.bundle_probe")
+            Command
+                .Create(appExe, "host_runtime_contract.bundle_probe")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("host_runtime_contract.bundle_probe is not set");
         }
 
@@ -49,7 +51,11 @@ namespace AppHost.Bundle.Tests
                 (string.Empty, false),
             };
 
-            var result = Command.Create(singleFile, $"host_runtime_contract.bundle_probe {string.Join(" ", itemsToProbe.Select(i => i.Path))}")
+            var result = Command
+                .Create(
+                    singleFile,
+                    $"host_runtime_contract.bundle_probe {string.Join(" ", itemsToProbe.Select(i => i.Path))}"
+                )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute();

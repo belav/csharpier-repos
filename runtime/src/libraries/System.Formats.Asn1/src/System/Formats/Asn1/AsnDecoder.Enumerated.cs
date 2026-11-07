@@ -49,14 +49,16 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             return GetIntegerContents(
                 source,
                 ruleSet,
                 expectedTag ?? Asn1Tag.Enumerated,
                 UniversalTagNumber.Enumerated,
-                out bytesConsumed);
+                out bytesConsumed
+            );
         }
 
         /// <summary>
@@ -117,19 +119,17 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
             where TEnum : Enum
         {
             Type tEnum = typeof(TEnum);
 
-            return (TEnum)Enum.ToObject(
-                tEnum,
-                ReadEnumeratedValue(
-                    source,
-                    ruleSet,
+            return (TEnum)
+                Enum.ToObject(
                     tEnum,
-                    out bytesConsumed,
-                    expectedTag));
+                    ReadEnumeratedValue(source, ruleSet, tEnum, out bytesConsumed, expectedTag)
+                );
         }
 
         /// <summary>
@@ -191,7 +191,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             Type enumType,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             if (enumType == null)
                 throw new ArgumentNullException(nameof(enumType));
@@ -207,25 +208,31 @@ namespace System.Formats.Asn1
             {
                 throw new ArgumentException(
                     SR.Argument_EnumeratedValueRequiresNonFlagsEnum,
-                    nameof(enumType));
+                    nameof(enumType)
+                );
             }
 
             // T-REC-X.690-201508 sec 8.4 says the contents are the same as for integers.
             int sizeLimit = GetPrimitiveIntegerSize(backingType);
 
-            if (backingType == typeof(int) ||
-                backingType == typeof(long) ||
-                backingType == typeof(short) ||
-                backingType == typeof(sbyte))
+            if (
+                backingType == typeof(int)
+                || backingType == typeof(long)
+                || backingType == typeof(short)
+                || backingType == typeof(sbyte)
+            )
             {
-                if (!TryReadSignedInteger(
-                    source,
-                    ruleSet,
-                    sizeLimit,
-                    localTag,
-                    TagNumber,
-                    out long value,
-                    out int consumed))
+                if (
+                    !TryReadSignedInteger(
+                        source,
+                        ruleSet,
+                        sizeLimit,
+                        localTag,
+                        TagNumber,
+                        out long value,
+                        out int consumed
+                    )
+                )
                 {
                     throw new AsnContentException(SR.ContentException_EnumeratedValueTooBig);
                 }
@@ -234,19 +241,24 @@ namespace System.Formats.Asn1
                 return (Enum)Enum.ToObject(enumType, value);
             }
 
-            if (backingType == typeof(uint) ||
-                backingType == typeof(ulong) ||
-                backingType == typeof(ushort) ||
-                backingType == typeof(byte))
+            if (
+                backingType == typeof(uint)
+                || backingType == typeof(ulong)
+                || backingType == typeof(ushort)
+                || backingType == typeof(byte)
+            )
             {
-                if (!TryReadUnsignedInteger(
-                    source,
-                    ruleSet,
-                    sizeLimit,
-                    localTag,
-                    TagNumber,
-                    out ulong value,
-                    out int consumed))
+                if (
+                    !TryReadUnsignedInteger(
+                        source,
+                        ruleSet,
+                        sizeLimit,
+                        localTag,
+                        TagNumber,
+                        out ulong value,
+                        out int consumed
+                    )
+                )
                 {
                     throw new AsnContentException(SR.ContentException_EnumeratedValueTooBig);
                 }
@@ -256,9 +268,8 @@ namespace System.Formats.Asn1
             }
 
             throw new AsnContentException(
-                SR.Format(
-                    SR.Argument_EnumeratedValueBackingTypeNotSupported,
-                    backingType.FullName));
+                SR.Format(SR.Argument_EnumeratedValueBackingTypeNotSupported, backingType.FullName)
+            );
         }
     }
 
@@ -294,8 +305,12 @@ namespace System.Formats.Asn1
         /// <seealso cref="ReadEnumeratedValue{TEnum}"/>
         public ReadOnlyMemory<byte> ReadEnumeratedBytes(Asn1Tag? expectedTag = null)
         {
-            ReadOnlySpan<byte> bytes =
-                AsnDecoder.ReadEnumeratedBytes(_data.Span, RuleSet, out int consumed, expectedTag);
+            ReadOnlySpan<byte> bytes = AsnDecoder.ReadEnumeratedBytes(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
 
             ReadOnlyMemory<byte> memory = AsnDecoder.Slice(_data, bytes);
 
@@ -347,9 +362,15 @@ namespace System.Formats.Asn1
         ///   <paramref name="expectedTag"/>.<see cref="Asn1Tag.TagValue"/> is not correct for
         ///   the method.
         /// </exception>
-        public TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null) where TEnum : Enum
+        public TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null)
+            where TEnum : Enum
         {
-            TEnum ret = AsnDecoder.ReadEnumeratedValue<TEnum>(_data.Span, RuleSet, out int consumed, expectedTag);
+            TEnum ret = AsnDecoder.ReadEnumeratedValue<TEnum>(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
             _data = _data.Slice(consumed);
             return ret;
         }
@@ -403,7 +424,13 @@ namespace System.Formats.Asn1
         /// </exception>
         public Enum ReadEnumeratedValue(Type enumType, Asn1Tag? expectedTag = null)
         {
-            Enum ret = AsnDecoder.ReadEnumeratedValue(_data.Span, RuleSet, enumType, out int consumed, expectedTag);
+            Enum ret = AsnDecoder.ReadEnumeratedValue(
+                _data.Span,
+                RuleSet,
+                enumType,
+                out int consumed,
+                expectedTag
+            );
             _data = _data.Slice(consumed);
             return ret;
         }

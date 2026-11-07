@@ -17,7 +17,11 @@ namespace System.Net.Mime
         private const int InitialBufferSize = 1024;
 
         //use for encoding headers
-        internal static IEncodableStream GetEncoderForHeader(Encoding encoding, bool useBase64Encoding, int headerTextLength)
+        internal static IEncodableStream GetEncoderForHeader(
+            Encoding encoding,
+            bool useBase64Encoding,
+            int headerTextLength
+        )
         {
             byte[] header = CreateHeader(encoding, useBase64Encoding);
             byte[] footer = s_footer;
@@ -25,11 +29,23 @@ namespace System.Net.Mime
             WriteStateInfoBase writeState;
             if (useBase64Encoding)
             {
-                writeState = new Base64WriteStateInfo(InitialBufferSize, header, footer, DefaultMaxLineLength, headerTextLength);
+                writeState = new Base64WriteStateInfo(
+                    InitialBufferSize,
+                    header,
+                    footer,
+                    DefaultMaxLineLength,
+                    headerTextLength
+                );
                 return new Base64Stream((Base64WriteStateInfo)writeState);
             }
 
-            writeState = new WriteStateInfoBase(InitialBufferSize, header, footer, DefaultMaxLineLength, headerTextLength);
+            writeState = new WriteStateInfoBase(
+                InitialBufferSize,
+                header,
+                footer,
+                DefaultMaxLineLength,
+                headerTextLength
+            );
             return new QEncodedStream(writeState);
         }
 
@@ -37,7 +53,9 @@ namespace System.Net.Mime
         //based on the encoding type and if base64 encoding should be forced
         //sample header: =?utf-8?B?
         private static byte[] CreateHeader(Encoding encoding, bool useBase64Encoding) =>
-            Encoding.ASCII.GetBytes("=?" + encoding.HeaderName + "?" + (useBase64Encoding ? "B?" : "Q?"));
+            Encoding.ASCII.GetBytes(
+                "=?" + encoding.HeaderName + "?" + (useBase64Encoding ? "B?" : "Q?")
+            );
 
         //The footer that marks the end of a quoted string of some sort
         private static readonly byte[] s_footer = "?="u8.ToArray();

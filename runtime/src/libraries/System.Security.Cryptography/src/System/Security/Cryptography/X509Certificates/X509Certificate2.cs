@@ -24,9 +24,20 @@ namespace System.Security.Cryptography.X509Certificates
         private volatile PublicKey? _lazyPublicKey;
         private volatile AsymmetricAlgorithm? _lazyPrivateKey;
         private volatile X509ExtensionCollection? _lazyExtensions;
-        private static readonly string[] s_EcPublicKeyPrivateKeyLabels = { PemLabels.EcPrivateKey, PemLabels.Pkcs8PrivateKey };
-        private static readonly string[] s_RsaPublicKeyPrivateKeyLabels = { PemLabels.RsaPrivateKey, PemLabels.Pkcs8PrivateKey };
-        private static readonly string[] s_DsaPublicKeyPrivateKeyLabels = { PemLabels.Pkcs8PrivateKey };
+        private static readonly string[] s_EcPublicKeyPrivateKeyLabels =
+        {
+            PemLabels.EcPrivateKey,
+            PemLabels.Pkcs8PrivateKey,
+        };
+        private static readonly string[] s_RsaPublicKeyPrivateKeyLabels =
+        {
+            PemLabels.RsaPrivateKey,
+            PemLabels.Pkcs8PrivateKey,
+        };
+        private static readonly string[] s_DsaPublicKeyPrivateKeyLabels =
+        {
+            PemLabels.Pkcs8PrivateKey,
+        };
 
         public override void Reset()
         {
@@ -42,44 +53,44 @@ namespace System.Security.Cryptography.X509Certificates
             base.Reset();
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2()
-            : base()
-        {
-        }
+            : base() { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(byte[] rawData)
-            : base(rawData)
-        {
-        }
+            : base(rawData) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(byte[] rawData, string? password)
-            : base(rawData, password)
-        {
-        }
+            : base(rawData, password) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
         public X509Certificate2(byte[] rawData, SecureString? password)
-            : base(rawData, password)
-        {
-        }
+            : base(rawData, password) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(byte[] rawData, string? password, X509KeyStorageFlags keyStorageFlags)
-            : base(rawData, password, keyStorageFlags)
-        {
-        }
+        public X509Certificate2(
+            byte[] rawData,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
-        public X509Certificate2(byte[] rawData, SecureString? password, X509KeyStorageFlags keyStorageFlags)
-            : base(rawData, password, keyStorageFlags)
-        {
-        }
+        public X509Certificate2(
+            byte[] rawData,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Certificate2"/> class from certificate data.
@@ -90,9 +101,7 @@ namespace System.Security.Cryptography.X509Certificates
         /// <exception cref="CryptographicException">An error with the certificate occurs.</exception>
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(ReadOnlySpan<byte> rawData)
-            : base(rawData)
-        {
-        }
+            : base(rawData) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Certificate2"/> class from certificate data,
@@ -109,67 +118,67 @@ namespace System.Security.Cryptography.X509Certificates
         /// </param>
         /// <exception cref="CryptographicException">An error with the certificate occurs.</exception>
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(ReadOnlySpan<byte> rawData, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags = 0)
-            : base(rawData, password, keyStorageFlags)
-        {
-        }
+        public X509Certificate2(
+            ReadOnlySpan<byte> rawData,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(IntPtr handle)
-            : base(handle)
-        {
-        }
+            : base(handle) { }
 
         internal X509Certificate2(ICertificatePal pal)
-            : base(pal)
-        {
-        }
+            : base(pal) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(string fileName)
-            : base(fileName)
-        {
-        }
+            : base(fileName) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(string fileName, string? password)
-            : base(fileName, password)
-        {
-        }
+            : base(fileName, password) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
         public X509Certificate2(string fileName, SecureString? password)
-            : base(fileName, password)
-        {
-        }
+            : base(fileName, password) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(string fileName, string? password, X509KeyStorageFlags keyStorageFlags)
-            : base(fileName, password, keyStorageFlags)
-        {
-        }
+        public X509Certificate2(
+            string fileName,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
-        public X509Certificate2(string fileName, SecureString? password, X509KeyStorageFlags keyStorageFlags)
-            : base(fileName, password, keyStorageFlags)
-        {
-        }
+        public X509Certificate2(
+            string fileName,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(string fileName, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags = 0)
-            : base(fileName, password, keyStorageFlags)
-        {
-        }
+        public X509Certificate2(
+            string fileName,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(X509Certificate certificate)
-            : base(certificate)
-        {
-        }
+            : base(certificate) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected X509Certificate2(SerializationInfo info, StreamingContext context)
             : base(info, context)
@@ -187,7 +196,6 @@ namespace System.Security.Cryptography.X509Certificates
 
                 return Pal.Archived;
             }
-
             [SupportedOSPlatform("windows")]
             set
             {
@@ -234,7 +242,6 @@ namespace System.Security.Cryptography.X509Certificates
 
                 return Pal.FriendlyName;
             }
-
             [SupportedOSPlatform("windows")]
             set
             {
@@ -254,7 +261,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [Obsolete(Obsoletions.X509CertificatePrivateKeyMessage, DiagnosticId = Obsoletions.X509CertificatePrivateKeyDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificatePrivateKeyMessage,
+            DiagnosticId = Obsoletions.X509CertificatePrivateKeyDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public AsymmetricAlgorithm? PrivateKey
         {
             get
@@ -277,10 +288,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                 return _lazyPrivateKey;
             }
-            set
-            {
-                throw new PlatformNotSupportedException();
-            }
+            set { throw new PlatformNotSupportedException(); }
         }
 
         public X500DistinguishedName IssuerName
@@ -310,7 +318,11 @@ namespace System.Security.Cryptography.X509Certificates
                     byte[] parameters = Pal.KeyAlgorithmParameters;
                     byte[] keyValue = Pal.PublicKeyValue;
                     Oid oid = new Oid(keyAlgorithmOid);
-                    publicKey = _lazyPublicKey = new PublicKey(oid, new AsnEncodedData(oid, parameters), new AsnEncodedData(oid, keyValue));
+                    publicKey = _lazyPublicKey = new PublicKey(
+                        oid,
+                        new AsnEncodedData(oid, parameters),
+                        new AsnEncodedData(oid, keyValue)
+                    );
                 }
 
                 return publicKey;
@@ -360,10 +372,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public string Thumbprint
         {
-            get
-            {
-                return GetCertHashString();
-            }
+            get { return GetCertHashString(); }
         }
 
         public int Version
@@ -576,9 +585,7 @@ namespace System.Security.Cryptography.X509Certificates
                         }
                     }
                 }
-                catch (NotSupportedException)
-                {
-                }
+                catch (NotSupportedException) { }
 
                 sb.AppendLine();
                 sb.Append("  ");
@@ -589,9 +596,7 @@ namespace System.Security.Cryptography.X509Certificates
                 sb.Append("Parameters: ");
                 sb.Append(pubKey.EncodedParameters.Format(true));
             }
-            catch (CryptographicException)
-            {
-            }
+            catch (CryptographicException) { }
 
             // Private key
             Pal.AppendPrivateKeyInfo(sb);
@@ -618,9 +623,7 @@ namespace System.Security.Cryptography.X509Certificates
                         sb.Append("  ");
                         sb.Append(extension.Format(true));
                     }
-                    catch (CryptographicException)
-                    {
-                    }
+                    catch (CryptographicException) { }
                 }
             }
 
@@ -628,40 +631,80 @@ namespace System.Security.Cryptography.X509Certificates
             return sb.ToString();
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public override void Import(byte[] rawData)
         {
             base.Import(rawData);
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public override void Import(byte[] rawData, string? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public override void Import(
+            byte[] rawData,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             base.Import(rawData, password, keyStorageFlags);
         }
 
         [System.CLSCompliantAttribute(false)]
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public override void Import(byte[] rawData, SecureString? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public override void Import(
+            byte[] rawData,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             base.Import(rawData, password, keyStorageFlags);
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public override void Import(string fileName)
         {
             base.Import(fileName);
         }
 
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public override void Import(string fileName, string? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public override void Import(
+            string fileName,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             base.Import(fileName, password, keyStorageFlags);
         }
 
         [System.CLSCompliantAttribute(false)]
-        [Obsolete(Obsoletions.X509CertificateImmutableMessage, DiagnosticId = Obsoletions.X509CertificateImmutableDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public override void Import(string fileName, SecureString? password, X509KeyStorageFlags keyStorageFlags)
+        [Obsolete(
+            Obsoletions.X509CertificateImmutableMessage,
+            DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public override void Import(
+            string fileName,
+            SecureString? password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             base.Import(fileName, password, keyStorageFlags);
         }
@@ -756,9 +799,17 @@ namespace System.Security.Cryptography.X509Certificates
                     throw new ArgumentException(SR.Cryptography_PrivateKey_WrongAlgorithm);
                 }
 
-                if (!Helpers.AreSamePublicECParameters(publicKey.ExportParameters(false), privateKey.ExportParameters(false)))
+                if (
+                    !Helpers.AreSamePublicECParameters(
+                        publicKey.ExportParameters(false),
+                        privateKey.ExportParameters(false)
+                    )
+                )
                 {
-                    throw new ArgumentException(SR.Cryptography_PrivateKey_DoesNotMatch, nameof(privateKey));
+                    throw new ArgumentException(
+                        SR.Cryptography_PrivateKey_DoesNotMatch,
+                        nameof(privateKey)
+                    );
                 }
             }
 
@@ -822,12 +873,17 @@ namespace System.Security.Cryptography.X509Certificates
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static X509Certificate2 CreateFromPemFile(string certPemFilePath, string? keyPemFilePath = default)
+        public static X509Certificate2 CreateFromPemFile(
+            string certPemFilePath,
+            string? keyPemFilePath = default
+        )
         {
             ArgumentNullException.ThrowIfNull(certPemFilePath);
 
             ReadOnlySpan<char> certContents = File.ReadAllText(certPemFilePath);
-            ReadOnlySpan<char> keyContents = keyPemFilePath is null ? certContents : File.ReadAllText(keyPemFilePath);
+            ReadOnlySpan<char> keyContents = keyPemFilePath is null
+                ? certContents
+                : File.ReadAllText(keyPemFilePath);
 
             return CreateFromPem(certContents, keyContents);
         }
@@ -888,12 +944,18 @@ namespace System.Security.Cryptography.X509Certificates
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static X509Certificate2 CreateFromEncryptedPemFile(string certPemFilePath, ReadOnlySpan<char> password, string? keyPemFilePath = default)
+        public static X509Certificate2 CreateFromEncryptedPemFile(
+            string certPemFilePath,
+            ReadOnlySpan<char> password,
+            string? keyPemFilePath = default
+        )
         {
             ArgumentNullException.ThrowIfNull(certPemFilePath);
 
             ReadOnlySpan<char> certContents = File.ReadAllText(certPemFilePath);
-            ReadOnlySpan<char> keyContents = keyPemFilePath is null ? certContents : File.ReadAllText(keyPemFilePath);
+            ReadOnlySpan<char> keyContents = keyPemFilePath is null
+                ? certContents
+                : File.ReadAllText(keyPemFilePath);
 
             return CreateFromEncryptedPem(certContents, keyContents, password);
         }
@@ -938,7 +1000,10 @@ namespace System.Security.Cryptography.X509Certificates
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static X509Certificate2 CreateFromPem(ReadOnlySpan<char> certPem, ReadOnlySpan<char> keyPem)
+        public static X509Certificate2 CreateFromPem(
+            ReadOnlySpan<char> certPem,
+            ReadOnlySpan<char> keyPem
+        )
         {
             using (X509Certificate2 certificate = CreateFromPem(certPem))
             {
@@ -946,21 +1011,34 @@ namespace System.Security.Cryptography.X509Certificates
 
                 return keyAlgorithm switch
                 {
-                    Oids.Rsa => ExtractKeyFromPem<RSA>(keyPem, s_RsaPublicKeyPrivateKeyLabels, RSA.Create, certificate.CopyWithPrivateKey),
-                    Oids.Dsa when Helpers.IsDSASupported => ExtractKeyFromPem<DSA>(keyPem, s_DsaPublicKeyPrivateKeyLabels, DSA.Create, certificate.CopyWithPrivateKey),
-                    Oids.EcPublicKey when IsECDsa(certificate) =>
-                        ExtractKeyFromPem<ECDsa>(
-                            keyPem,
-                            s_EcPublicKeyPrivateKeyLabels,
-                            ECDsa.Create,
-                            certificate.CopyWithPrivateKey),
+                    Oids.Rsa => ExtractKeyFromPem<RSA>(
+                        keyPem,
+                        s_RsaPublicKeyPrivateKeyLabels,
+                        RSA.Create,
+                        certificate.CopyWithPrivateKey
+                    ),
+                    Oids.Dsa when Helpers.IsDSASupported => ExtractKeyFromPem<DSA>(
+                        keyPem,
+                        s_DsaPublicKeyPrivateKeyLabels,
+                        DSA.Create,
+                        certificate.CopyWithPrivateKey
+                    ),
+                    Oids.EcPublicKey when IsECDsa(certificate) => ExtractKeyFromPem<ECDsa>(
+                        keyPem,
+                        s_EcPublicKeyPrivateKeyLabels,
+                        ECDsa.Create,
+                        certificate.CopyWithPrivateKey
+                    ),
                     Oids.EcPublicKey when IsECDiffieHellman(certificate) =>
                         ExtractKeyFromPem<ECDiffieHellman>(
                             keyPem,
                             s_EcPublicKeyPrivateKeyLabels,
                             ECDiffieHellman.Create,
-                            certificate.CopyWithPrivateKey),
-                    _ => throw new CryptographicException(SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)),
+                            certificate.CopyWithPrivateKey
+                        ),
+                    _ => throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)
+                    ),
                 };
             }
         }
@@ -1009,7 +1087,11 @@ namespace System.Security.Cryptography.X509Certificates
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static X509Certificate2 CreateFromEncryptedPem(ReadOnlySpan<char> certPem, ReadOnlySpan<char> keyPem, ReadOnlySpan<char> password)
+        public static X509Certificate2 CreateFromEncryptedPem(
+            ReadOnlySpan<char> certPem,
+            ReadOnlySpan<char> keyPem,
+            ReadOnlySpan<char> password
+        )
         {
             using (X509Certificate2 certificate = CreateFromPem(certPem))
             {
@@ -1017,21 +1099,34 @@ namespace System.Security.Cryptography.X509Certificates
 
                 return keyAlgorithm switch
                 {
-                    Oids.Rsa => ExtractKeyFromEncryptedPem<RSA>(keyPem, password, RSA.Create, certificate.CopyWithPrivateKey),
-                    Oids.Dsa when Helpers.IsDSASupported => ExtractKeyFromEncryptedPem<DSA>(keyPem, password, DSA.Create, certificate.CopyWithPrivateKey),
-                    Oids.EcPublicKey when IsECDsa(certificate) =>
-                        ExtractKeyFromEncryptedPem<ECDsa>(
-                            keyPem,
-                            password,
-                            ECDsa.Create,
-                            certificate.CopyWithPrivateKey),
+                    Oids.Rsa => ExtractKeyFromEncryptedPem<RSA>(
+                        keyPem,
+                        password,
+                        RSA.Create,
+                        certificate.CopyWithPrivateKey
+                    ),
+                    Oids.Dsa when Helpers.IsDSASupported => ExtractKeyFromEncryptedPem<DSA>(
+                        keyPem,
+                        password,
+                        DSA.Create,
+                        certificate.CopyWithPrivateKey
+                    ),
+                    Oids.EcPublicKey when IsECDsa(certificate) => ExtractKeyFromEncryptedPem<ECDsa>(
+                        keyPem,
+                        password,
+                        ECDsa.Create,
+                        certificate.CopyWithPrivateKey
+                    ),
                     Oids.EcPublicKey when IsECDiffieHellman(certificate) =>
                         ExtractKeyFromEncryptedPem<ECDiffieHellman>(
                             keyPem,
                             password,
                             ECDiffieHellman.Create,
-                            certificate.CopyWithPrivateKey),
-                    _ => throw new CryptographicException(SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)),
+                            certificate.CopyWithPrivateKey
+                        ),
+                    _ => throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)
+                    ),
                 };
             }
         }
@@ -1084,14 +1179,26 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     byte[] certBytes = CryptoPool.Rent(fields.DecodedDataLength);
 
-                    if (!Convert.TryFromBase64Chars(contents[fields.Base64Data], certBytes, out int bytesWritten)
-                        || bytesWritten != fields.DecodedDataLength)
+                    if (
+                        !Convert.TryFromBase64Chars(
+                            contents[fields.Base64Data],
+                            certBytes,
+                            out int bytesWritten
+                        )
+                        || bytesWritten != fields.DecodedDataLength
+                    )
                     {
-                        Debug.Fail("The contents should have already been validated by the PEM reader.");
+                        Debug.Fail(
+                            "The contents should have already been validated by the PEM reader."
+                        );
                         throw new CryptographicException(SR.Cryptography_X509_NoPemCertificate);
                     }
 
-                    ReadOnlyMemory<byte> certData = new ReadOnlyMemory<byte>(certBytes, 0, bytesWritten);
+                    ReadOnlyMemory<byte> certData = new ReadOnlyMemory<byte>(
+                        certBytes,
+                        0,
+                        bytesWritten
+                    );
 
                     try
                     {
@@ -1167,7 +1274,12 @@ namespace System.Security.Cryptography.X509Certificates
         /// </remarks>
         public bool TryExportCertificatePem(Span<char> destination, out int charsWritten)
         {
-            return PemEncoding.TryWrite(PemLabels.X509Certificate, RawDataMemory.Span, destination, out charsWritten);
+            return PemEncoding.TryWrite(
+                PemLabels.X509Certificate,
+                RawDataMemory.Span,
+                destination,
+                out charsWritten
+            );
         }
 
         /// <summary>
@@ -1257,7 +1369,11 @@ namespace System.Security.Cryptography.X509Certificates
         /// </exception>
         /// <seealso cref="IPAddress.TryParse(string, out IPAddress)"/>
         /// <seealso cref="Uri.CheckHostName"/>
-        public bool MatchesHostname(string hostname, bool allowWildcards = true, bool allowCommonName = true)
+        public bool MatchesHostname(
+            string hostname,
+            bool allowWildcards = true,
+            bool allowCommonName = true
+        )
         {
             ArgumentNullException.ThrowIfNull(hostname);
             IPAddress? ipAddress;
@@ -1270,7 +1386,8 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     throw new ArgumentException(
                         SR.Argument_InvalidHostnameOrIPAddress,
-                        nameof(hostname));
+                        nameof(hostname)
+                    );
                 }
             }
 
@@ -1353,9 +1470,17 @@ namespace System.Security.Cryptography.X509Certificates
                             embeddedSpan = embeddedSpan.Slice(0, embeddedSpan.Length - 1);
                         }
 
-                        if (allowWildcards && embeddedSpan.StartsWith("*.") && embeddedSpan.Length > 2)
+                        if (
+                            allowWildcards
+                            && embeddedSpan.StartsWith("*.")
+                            && embeddedSpan.Length > 2
+                        )
                         {
-                            if (embeddedSpan.Slice(2).Equals(afterFirstDot, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                embeddedSpan
+                                    .Slice(2)
+                                    .Equals(afterFirstDot, StringComparison.OrdinalIgnoreCase)
+                            )
                             {
                                 return true;
                             }
@@ -1377,11 +1502,16 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 X500RelativeDistinguishedName? cn = null;
 
-                foreach (X500RelativeDistinguishedName rdn in SubjectName.EnumerateRelativeDistinguishedNames())
+                foreach (
+                    X500RelativeDistinguishedName rdn in SubjectName.EnumerateRelativeDistinguishedNames()
+                )
                 {
                     if (rdn.HasMultipleElements)
                     {
-                        AsnValueReader reader = new AsnValueReader(rdn.RawData.Span, AsnEncodingRules.DER);
+                        AsnValueReader reader = new AsnValueReader(
+                            rdn.RawData.Span,
+                            AsnEncodingRules.DER
+                        );
                         // Be lax with the sort order because Windows is
                         AsnValueReader set = reader.ReadSetOf(skipSortOrderValidation: true);
 
@@ -1415,7 +1545,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (cn is not null)
                 {
-                    return hostname.Equals(cn.GetSingleElementValue(), StringComparison.OrdinalIgnoreCase);
+                    return hostname.Equals(
+                        cn.GetSingleElementValue(),
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
             }
 
@@ -1426,7 +1559,9 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<char> keyPem,
             string[] labels,
             Func<TAlg> factory,
-            Func<TAlg, X509Certificate2> import) where TAlg : AsymmetricAlgorithm
+            Func<TAlg, X509Certificate2> import
+        )
+            where TAlg : AsymmetricAlgorithm
         {
             foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(keyPem))
             {
@@ -1446,7 +1581,10 @@ namespace System.Security.Cryptography.X509Certificates
                             }
                             catch (ArgumentException ae)
                             {
-                                throw new CryptographicException(SR.Cryptography_X509_NoOrMismatchedPemKey, ae);
+                                throw new CryptographicException(
+                                    SR.Cryptography_X509_NoOrMismatchedPemKey,
+                                    ae
+                                );
                             }
                         }
                     }
@@ -1460,7 +1598,9 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<char> keyPem,
             ReadOnlySpan<char> password,
             Func<TAlg> factory,
-            Func<TAlg, X509Certificate2> import) where TAlg : AsymmetricAlgorithm
+            Func<TAlg, X509Certificate2> import
+        )
+            where TAlg : AsymmetricAlgorithm
         {
             foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(keyPem))
             {
@@ -1477,9 +1617,11 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                     catch (ArgumentException ae)
                     {
-                        throw new CryptographicException(SR.Cryptography_X509_NoOrMismatchedPemKey, ae);
+                        throw new CryptographicException(
+                            SR.Cryptography_X509_NoOrMismatchedPemKey,
+                            ae
+                        );
                     }
-
                 }
             }
 
@@ -1492,7 +1634,9 @@ namespace System.Security.Cryptography.X509Certificates
         internal static X509Extension? CreateCustomExtensionIfAny(string? oidValue) =>
             oidValue switch
             {
-                Oids.BasicConstraints => X509Pal.Instance.SupportsLegacyBasicConstraintsExtension ? new X509BasicConstraintsExtension() : null,
+                Oids.BasicConstraints => X509Pal.Instance.SupportsLegacyBasicConstraintsExtension
+                    ? new X509BasicConstraintsExtension()
+                    : null,
                 Oids.BasicConstraints2 => new X509BasicConstraintsExtension(),
                 Oids.KeyUsage => new X509KeyUsageExtension(),
                 Oids.EnhancedKeyUsage => new X509EnhancedKeyUsageExtension(),

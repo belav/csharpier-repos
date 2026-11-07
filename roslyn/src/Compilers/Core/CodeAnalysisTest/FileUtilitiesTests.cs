@@ -27,13 +27,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.True(PathUtilities.IsAbsolute(@"C:/"));
             Assert.True(PathUtilities.IsAbsolute(@"C:\\"));
             Assert.False(PathUtilities.IsAbsolute(@"C\"));
-            Assert.True(PathUtilities.IsAbsolute(@"\\"));                // incomplete UNC 
-            Assert.True(PathUtilities.IsAbsolute(@"\\S"));               // incomplete UNC 
-            Assert.True(PathUtilities.IsAbsolute(@"\/C"));               // incomplete UNC 
-            Assert.True(PathUtilities.IsAbsolute(@"\/C\"));              // incomplete UNC 
-            Assert.True(PathUtilities.IsAbsolute(@"\\server"));          // incomplete UNC 
-            Assert.True(PathUtilities.IsAbsolute(@"\\server\share"));    // UNC
-            Assert.True(PathUtilities.IsAbsolute(@"\\?\C:\share"));      // long UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\\")); // incomplete UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\\S")); // incomplete UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\/C")); // incomplete UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\/C\")); // incomplete UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\\server")); // incomplete UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\\server\share")); // UNC
+            Assert.True(PathUtilities.IsAbsolute(@"\\?\C:\share")); // long UNC
             Assert.False(PathUtilities.IsAbsolute(@"\C"));
             Assert.False(PathUtilities.IsAbsolute(@"/C"));
         }
@@ -101,12 +101,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Null(PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\", @"C:goo"));
             Assert.Null(PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\", @"\goo"));
 
-            Assert.Equal(@"C:\x\y\goo", PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x\y", @"goo"));
-            Assert.Equal(@"C:\x/y\goo", PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"goo"));
-            Assert.Equal(@"C:\x/y\.\goo", PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @".\goo"));
-            Assert.Equal(@"C:\x/y\./goo", PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"./goo"));
-            Assert.Equal(@"C:\x/y\..\goo", PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"..\goo"));
-            Assert.Equal(@"C:\x/y\../goo", PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"../goo"));
+            Assert.Equal(
+                @"C:\x\y\goo",
+                PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x\y", @"goo")
+            );
+            Assert.Equal(
+                @"C:\x/y\goo",
+                PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"goo")
+            );
+            Assert.Equal(
+                @"C:\x/y\.\goo",
+                PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @".\goo")
+            );
+            Assert.Equal(
+                @"C:\x/y\./goo",
+                PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"./goo")
+            );
+            Assert.Equal(
+                @"C:\x/y\..\goo",
+                PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"..\goo")
+            );
+            Assert.Equal(
+                @"C:\x/y\../goo",
+                PathUtilities.CombineAbsoluteAndRelativePaths(@"C:\x/y", @"../goo")
+            );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -117,7 +135,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // absolute path:
             TestPath(@"C:\abc\def.dll", @"Q:\baz\x.csx", baseDir, noSearchPaths, @"C:\abc\def.dll");
-            TestPath(@"C:\abc\\\\\def.dll", @"Q:\baz\x.csx", baseDir, noSearchPaths, @"C:\abc\\\\\def.dll");
+            TestPath(
+                @"C:\abc\\\\\def.dll",
+                @"Q:\baz\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"C:\abc\\\\\def.dll"
+            );
 
             // root-relative path:
             TestPath(@"\abc\def.dll", @"Q:\baz\x.csx", baseDir, noSearchPaths, @"Q:\abc\def.dll");
@@ -131,34 +155,82 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestPath(@"/a/z.txt", null, @"?:\*\<>", noSearchPaths, @"?:\a/z.txt");
 
             // UNC path:
-            TestPath(@"\abc\def.dll", @"\\mymachine\root\x.csx", baseDir, noSearchPaths, @"\\mymachine\root\abc\def.dll");
-            TestPath(@"\abc\def.dll", null, @"\\mymachine\root\x.csx", noSearchPaths, @"\\mymachine\root\abc\def.dll");
-            TestPath(@"\\abc\def\baz.dll", null, @"\\mymachine\root\x.csx", noSearchPaths, @"\\abc\def\baz.dll");
+            TestPath(
+                @"\abc\def.dll",
+                @"\\mymachine\root\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"\\mymachine\root\abc\def.dll"
+            );
+            TestPath(
+                @"\abc\def.dll",
+                null,
+                @"\\mymachine\root\x.csx",
+                noSearchPaths,
+                @"\\mymachine\root\abc\def.dll"
+            );
+            TestPath(
+                @"\\abc\def\baz.dll",
+                null,
+                @"\\mymachine\root\x.csx",
+                noSearchPaths,
+                @"\\abc\def\baz.dll"
+            );
 
             // incomplete UNC paths (considered absolute and returned as they are):
             TestPath(@"\\", null, @"\\mymachine\root\x.csx", noSearchPaths, @"\\");
             TestPath(@"\\goo", null, @"\\mymachine\root\x.csx", noSearchPaths, @"\\goo");
 
             // long UNC path:
-            // TODO (tomat): 
+            // TODO (tomat):
             // Doesn't work since "?" in paths is not handled by BCL
             // TestPath(resolver, @"\abc\def.dll", @"\\?\C:\zzz\x.csx", @"\\?\C:\abc\def.dll");
 
             TestPath(@"./def.dll", @"Q:\abc\x.csx", baseDir, noSearchPaths, @"Q:\abc\./def.dll");
             TestPath(@"./def.dll", @"Q:\abc\x.csx", baseDir, noSearchPaths, @"Q:\abc\./def.dll");
             TestPath(@".", @"Q:\goo\x.csx", baseDir, noSearchPaths, @"Q:\goo");
-            TestPath(@"..", @"Q:\goo\x.csx", baseDir, noSearchPaths, @"Q:\goo\..");  // doesn't normalize
+            TestPath(@"..", @"Q:\goo\x.csx", baseDir, noSearchPaths, @"Q:\goo\.."); // doesn't normalize
             TestPath(@".\", @"Q:\goo\x.csx", baseDir, noSearchPaths, @"Q:\goo\.\");
             TestPath(@"..\", @"Q:\goo\x.csx", baseDir, noSearchPaths, @"Q:\goo\..\"); // doesn't normalize
 
             // relative base paths:
             TestPath(@".\y.dll", @"x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\.\y.dll");
-            TestPath(@".\y.dll", @"goo\x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\goo\.\y.dll");
-            TestPath(@".\y.dll", @".\goo\x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\.\goo\.\y.dll");
+            TestPath(
+                @".\y.dll",
+                @"goo\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"X:\rootdir\dir\goo\.\y.dll"
+            );
+            TestPath(
+                @".\y.dll",
+                @".\goo\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"X:\rootdir\dir\.\goo\.\y.dll"
+            );
             TestPath(@".\y.dll", @"..\x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\..\.\y.dll"); // doesn't normalize
-            TestPath(@".\\y.dll", @"..\x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\..\.\\y.dll"); // doesn't normalize
-            TestPath(@".\/y.dll", @"..\x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\..\.\/y.dll"); // doesn't normalize
-            TestPath(@"..\y.dll", @"..\x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\..\..\y.dll"); // doesn't normalize
+            TestPath(
+                @".\\y.dll",
+                @"..\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"X:\rootdir\dir\..\.\\y.dll"
+            ); // doesn't normalize
+            TestPath(
+                @".\/y.dll",
+                @"..\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"X:\rootdir\dir\..\.\/y.dll"
+            ); // doesn't normalize
+            TestPath(
+                @"..\y.dll",
+                @"..\x.csx",
+                baseDir,
+                noSearchPaths,
+                @"X:\rootdir\dir\..\..\y.dll"
+            ); // doesn't normalize
 
             // unqualified relative path, look in base directory:
             TestPath(@"y.dll", @"x.csx", baseDir, noSearchPaths, @"X:\rootdir\dir\y.dll");
@@ -182,7 +254,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(PathKind.RelativeToDriveDirectory, PathUtilities.GetPathKind(@"c::x.dll"));
             TestPath(@"c::x.dll", null, @"d:\", noSearchPaths, null);
 
-            Assert.Equal(PathKind.RelativeToCurrentDirectory, PathUtilities.GetPathKind(@".\:x.dll"));
+            Assert.Equal(
+                PathKind.RelativeToCurrentDirectory,
+                PathUtilities.GetPathKind(@".\:x.dll")
+            );
             TestPath(@".\:x.dll", null, @"d:\z", noSearchPaths, @"d:\z\.\:x.dll");
 
             Assert.Equal(PathKind.RelativeToCurrentParent, PathUtilities.GetPathKind(@"..\:x.dll"));
@@ -196,9 +271,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestPath(" \t\r\n ", @"c:\temp", @"d:\z", noSearchPaths, null);
         }
 
-        private void TestPath(string path, string basePath, string baseDirectory, IEnumerable<String> searchPaths, string expected)
+        private void TestPath(
+            string path,
+            string basePath,
+            string baseDirectory,
+            IEnumerable<String> searchPaths,
+            string expected
+        )
         {
-            string actual = FileUtilities.ResolveRelativePath(path, basePath, baseDirectory, searchPaths, p => true);
+            string actual = FileUtilities.ResolveRelativePath(
+                path,
+                basePath,
+                baseDirectory,
+                searchPaths,
+                p => true
+            );
 
             Assert.Equal(expected, actual, StringComparer.OrdinalIgnoreCase);
         }
@@ -289,13 +376,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [InlineData(@"\\.\C:\a\b.cs", @"\\.\C:\a\b.cs")]
         [InlineData(@"\\.\C:\a\..\b.cs", @"\\.\C:\a\..\b.cs")]
         [InlineData(@"\\?\C:\a\b.cs", @"\\?\C:\a\b.cs")]
-        [InlineData(@"\\.\Volume{00000000-0000-0000-0000-000000000000}\a\b.cs", @"\\.\Volume{00000000-0000-0000-0000-000000000000}\a\b.cs")]
+        [InlineData(
+            @"\\.\Volume{00000000-0000-0000-0000-000000000000}\a\b.cs",
+            @"\\.\Volume{00000000-0000-0000-0000-000000000000}\a\b.cs"
+        )]
         [InlineData(@"\", @"\")]
         [InlineData(@"\\", @"\\")]
         [InlineData(@"\\server", @"\\server")]
         [InlineData(@"x:", "x:")]
         [InlineData(@"x:\", @"x:/")]
-        public void TestExpandAbsolutePathWithRelativeParts_Windows(string input, string expected) => TestExpandAbsolutePathWithRelativeParts(input, expected);
+        public void TestExpandAbsolutePathWithRelativeParts_Windows(
+            string input,
+            string expected
+        ) => TestExpandAbsolutePathWithRelativeParts(input, expected);
 
         [Theory]
         [InlineData("/", "/")]

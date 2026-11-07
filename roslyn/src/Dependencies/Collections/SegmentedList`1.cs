@@ -56,7 +56,10 @@ namespace Microsoft.CodeAnalysis.Collections
         public SegmentedList(int capacity)
         {
             if (capacity < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.capacity,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (capacity == 0)
                 _items = s_emptyArray;
@@ -126,7 +129,10 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 if (value < _size)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value, ExceptionResource.ArgumentOutOfRange_SmallCapacity);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.value,
+                        ExceptionResource.ArgumentOutOfRange_SmallCapacity
+                    );
                 }
 
                 if (value != _items.Length)
@@ -176,7 +182,6 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
                 return _items[index];
             }
-
             set
             {
                 if ((uint)index >= (uint)_size)
@@ -264,11 +269,9 @@ namespace Microsoft.CodeAnalysis.Collections
         // required, the capacity of the list is increased to twice the previous
         // capacity or the new size, whichever is larger.
         //
-        public void AddRange(IEnumerable<T> collection)
-            => InsertRange(_size, collection);
+        public void AddRange(IEnumerable<T> collection) => InsertRange(_size, collection);
 
-        public ReadOnlyCollection<T> AsReadOnly()
-            => new(this);
+        public ReadOnlyCollection<T> AsReadOnly() => new(this);
 
         // Searches a section of the list for a given element using a binary search
         // algorithm. Elements of the list are compared to the search value using
@@ -295,18 +298,20 @@ namespace Microsoft.CodeAnalysis.Collections
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
             if (count < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (_size - index < count)
                 ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
 
             return SegmentedArray.BinarySearch<T>(_items, index, count, item, comparer);
         }
 
-        public int BinarySearch(T item)
-            => BinarySearch(0, Count, item, null);
+        public int BinarySearch(T item) => BinarySearch(0, Count, item, null);
 
-        public int BinarySearch(T item, IComparer<T>? comparer)
-            => BinarySearch(0, Count, item, comparer);
+        public int BinarySearch(T item, IComparer<T>? comparer) =>
+            BinarySearch(0, Count, item, comparer);
 
         // Clears the contents of SegmentedList.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -373,8 +378,7 @@ namespace Microsoft.CodeAnalysis.Collections
 
         // Copies this SegmentedList into array, which must be of a
         // compatible array type.
-        public void CopyTo(T[] array)
-            => CopyTo(array, 0);
+        public void CopyTo(T[] array) => CopyTo(array, 0);
 
         // Copies this SegmentedList into array, which must be of a
         // compatible array type.
@@ -437,8 +441,7 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        public bool Exists(Predicate<T> match)
-            => FindIndex(match) != -1;
+        public bool Exists(Predicate<T> match) => FindIndex(match) != -1;
 
         public T? Find(Predicate<T> match)
         {
@@ -475,11 +478,10 @@ namespace Microsoft.CodeAnalysis.Collections
             return list;
         }
 
-        public int FindIndex(Predicate<T> match)
-            => FindIndex(0, _size, match);
+        public int FindIndex(Predicate<T> match) => FindIndex(0, _size, match);
 
-        public int FindIndex(int startIndex, Predicate<T> match)
-            => FindIndex(startIndex, _size - startIndex, match);
+        public int FindIndex(int startIndex, Predicate<T> match) =>
+            FindIndex(startIndex, _size - startIndex, match);
 
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
@@ -524,11 +526,10 @@ namespace Microsoft.CodeAnalysis.Collections
             return default;
         }
 
-        public int FindLastIndex(Predicate<T> match)
-            => FindLastIndex(_size - 1, _size, match);
+        public int FindLastIndex(Predicate<T> match) => FindLastIndex(_size - 1, _size, match);
 
-        public int FindLastIndex(int startIndex, Predicate<T> match)
-            => FindLastIndex(startIndex, startIndex + 1, match);
+        public int FindLastIndex(int startIndex, Predicate<T> match) =>
+            FindLastIndex(startIndex, startIndex + 1, match);
 
         public int FindLastIndex(int startIndex, int count, Predicate<T> match)
         {
@@ -598,14 +599,11 @@ namespace Microsoft.CodeAnalysis.Collections
         // while an enumeration is in progress, the MoveNext and
         // GetObject methods of the enumerator will throw an exception.
         //
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => new Enumerator(this);
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => new Enumerator(this);
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => new Enumerator(this);
+        IEnumerator IEnumerable.GetEnumerator() => new Enumerator(this);
 
         public SegmentedList<T> GetRange(int index, int count)
         {
@@ -616,7 +614,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -638,8 +639,7 @@ namespace Microsoft.CodeAnalysis.Collections
         // This method uses the Array.IndexOf method to perform the
         // search.
         //
-        public int IndexOf(T item)
-            => SegmentedArray.IndexOf(_items, item, 0, _size);
+        public int IndexOf(T item) => SegmentedArray.IndexOf(_items, item, 0, _size);
 
         int IList.IndexOf(object? item)
         {
@@ -706,7 +706,10 @@ namespace Microsoft.CodeAnalysis.Collections
             // Note that insertions at the end are legal.
             if ((uint)index > (uint)_size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_ListInsert);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.index,
+                    ExceptionResource.ArgumentOutOfRange_ListInsert
+                );
             }
             if (_size == _items.Length)
                 EnsureCapacity(_size + 1);
@@ -767,7 +770,13 @@ namespace Microsoft.CodeAnalysis.Collections
                         // Copy first part of _items to insert location
                         SegmentedArray.Copy(_items, 0, _items, index, index);
                         // Copy last part of _items back to inserted location
-                        SegmentedArray.Copy(_items, index + count, _items, index * 2, _size - index);
+                        SegmentedArray.Copy(
+                            _items,
+                            index + count,
+                            _items,
+                            index * 2,
+                            _size - index
+                        );
                     }
                     else if (c is SegmentedList<T> list)
                     {
@@ -809,7 +818,7 @@ namespace Microsoft.CodeAnalysis.Collections
         public int LastIndexOf(T item)
         {
             if (_size == 0)
-            {  // Special case for empty list
+            { // Special case for empty list
                 return -1;
             }
             else
@@ -858,17 +867,26 @@ namespace Microsoft.CodeAnalysis.Collections
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (index >= _size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.index,
+                    ExceptionResource.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             if (count > index + 1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             return SegmentedArray.LastIndexOf(_items, item, index, count);
@@ -889,17 +907,26 @@ namespace Microsoft.CodeAnalysis.Collections
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (index >= _size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.index,
+                    ExceptionResource.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             if (count > index + 1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             return SegmentedArray.LastIndexOf(_items, item, index, count, comparer);
@@ -936,7 +963,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
-            var freeIndex = 0;   // the first free slot in items array
+            var freeIndex = 0; // the first free slot in items array
 
             // Find the first item which needs to be removed.
             while (freeIndex < _size && !match(_items[freeIndex]))
@@ -1003,7 +1030,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -1028,8 +1058,7 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         // Reverses the elements in this list.
-        public void Reverse()
-            => Reverse(0, Count);
+        public void Reverse() => Reverse(0, Count);
 
         // Reverses the elements in a range of this list. Following a call to this
         // method, an element in the range given by index and count
@@ -1045,7 +1074,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -1060,13 +1092,11 @@ namespace Microsoft.CodeAnalysis.Collections
 
         // Sorts the elements in this list.  Uses the default comparer and
         // Array.Sort.
-        public void Sort()
-            => Sort(0, Count, null);
+        public void Sort() => Sort(0, Count, null);
 
         // Sorts the elements in this list.  Uses Array.Sort with the
         // provided comparer.
-        public void Sort(IComparer<T>? comparer)
-            => Sort(0, Count, comparer);
+        public void Sort(IComparer<T>? comparer) => Sort(0, Count, comparer);
 
         // Sorts the elements in a section of this list. The sort compares the
         // elements to each other using the given IComparer interface. If
@@ -1085,7 +1115,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -1176,9 +1209,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 _current = default;
             }
 
-            public readonly void Dispose()
-            {
-            }
+            public readonly void Dispose() { }
 
             public bool MoveNext()
             {

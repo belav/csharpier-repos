@@ -23,7 +23,14 @@ namespace System.ServiceModel
         {
             ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
             DescriptionValue = rm.GetString(description);
-            Fx.Assert(DescriptionValue != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { description }));
+            Fx.Assert(
+                DescriptionValue != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { description }
+                )
+            );
         }
     }
 
@@ -33,9 +40,7 @@ namespace System.ServiceModel
         string resourceSet = String.Empty;
 
         public SR2CategoryAttribute(string category)
-            : base(category)
-        {
-        }
+            : base(category) { }
 
         public SR2CategoryAttribute(string category, string resourceSet)
             : base(category)
@@ -47,9 +52,19 @@ namespace System.ServiceModel
         {
             if (this.resourceSet.Length > 0)
             {
-                ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
+                ResourceManager rm = new ResourceManager(
+                    resourceSet,
+                    Assembly.GetExecutingAssembly()
+                );
                 String localizedString = rm.GetString(value);
-                Fx.Assert(localizedString != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { value }));
+                Fx.Assert(
+                    localizedString != null,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "String resource {0} not found.",
+                        new object[] { value }
+                    )
+                );
                 return localizedString;
             }
             else
@@ -71,7 +86,14 @@ namespace System.ServiceModel
         {
             ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
             DisplayNameValue = rm.GetString(name);
-            Fx.Assert(DisplayNameValue != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { name }));
+            Fx.Assert(
+                DisplayNameValue != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { name }
+                )
+            );
         }
     }
 
@@ -86,6 +108,7 @@ namespace System.ServiceModel
         {
             return GetString(resourceCulture, name, args);
         }
+
         internal static string GetString(CultureInfo culture, string name, params object[] args)
         {
             if (args != null && args.Length > 0)

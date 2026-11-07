@@ -215,11 +215,11 @@ namespace System.Security.Cryptography.EcDsa.OpenSsl.Tests
             {
                 SafeEvpPKeyHandle pkey = ecdsa.DuplicateKeyHandle();
 
-                using (pkey)
-                {
-                }
+                using (pkey) { }
 
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new ECDsaOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new ECDsaOpenSsl(pkey)
+                );
             }
         }
 
@@ -228,7 +228,9 @@ namespace System.Security.Cryptography.EcDsa.OpenSsl.Tests
         {
             using (SafeEvpPKeyHandle pkey = new SafeEvpPKeyHandle(IntPtr.Zero, false))
             {
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new ECDsaOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new ECDsaOpenSsl(pkey)
+                );
             }
         }
 
@@ -269,7 +271,8 @@ namespace System.Security.Cryptography.EcDsa.OpenSsl.Tests
         [Fact]
         public void LookupCurveByOidWithInvalidThrowsPlatformNotSupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => {
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
                 new ECDsaOpenSsl(ECCurve.CreateFromFriendlyName("Invalid"));
             });
         }

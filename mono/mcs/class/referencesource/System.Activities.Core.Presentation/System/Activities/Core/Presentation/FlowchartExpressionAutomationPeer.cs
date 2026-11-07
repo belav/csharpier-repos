@@ -14,7 +14,10 @@ namespace System.Activities.Core.Presentation
         const string ExpressionNotShown = "(null)";
         AutomationPeer wrappedAutomationPeer;
 
-        public FlowchartExpressionAutomationPeer(FrameworkElement owner, AutomationPeer wrappedAutomationPeer)
+        public FlowchartExpressionAutomationPeer(
+            FrameworkElement owner,
+            AutomationPeer wrappedAutomationPeer
+        )
             : base(owner)
         {
             this.wrappedAutomationPeer = wrappedAutomationPeer;
@@ -22,7 +25,10 @@ namespace System.Activities.Core.Presentation
 
         protected override string GetItemStatusCore()
         {
-            Fx.Assert(this.Owner != null, "FlowchartExpressionAutomationPeer should have this.Owner != null.");
+            Fx.Assert(
+                this.Owner != null,
+                "FlowchartExpressionAutomationPeer should have this.Owner != null."
+            );
             bool expressionShown = false;
             if (this.Owner is FlowDecisionDesigner)
             {
@@ -30,10 +36,15 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                Fx.Assert(this.Owner is FlowSwitchDesigner, "this.Owner should either be FlowDecisionDesigner or FlowSwitchDesigner.");
+                Fx.Assert(
+                    this.Owner is FlowSwitchDesigner,
+                    "this.Owner should either be FlowDecisionDesigner or FlowSwitchDesigner."
+                );
                 expressionShown = ((FlowSwitchDesigner)this.Owner).ExpressionShown;
             }
-            return expressionShown ? FlowchartExpressionAdorner.GetExpressionString(this.Owner) : ExpressionNotShown;
+            return expressionShown
+                ? FlowchartExpressionAdorner.GetExpressionString(this.Owner)
+                : ExpressionNotShown;
         }
 
         protected override string GetClassNameCore()

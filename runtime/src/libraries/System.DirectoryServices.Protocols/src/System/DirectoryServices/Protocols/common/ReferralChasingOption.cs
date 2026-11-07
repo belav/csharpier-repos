@@ -9,6 +9,6 @@ namespace System.DirectoryServices.Protocols
         None = 0,
         Subordinate = 0x20,
         External = 0x40,
-        All = Subordinate | External
+        All = Subordinate | External,
     }
 }

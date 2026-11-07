@@ -21,8 +21,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// in the least significant bits of the last element.
         /// </remarks>
         private readonly ulong[] _blocks;
+
         /// <summary>The number of bits represented by the BitVector.</summary>
         public readonly int Length;
+
         /// <summary>Lazily-computed hash code value.</summary>
         private int? _hashcode;
 
@@ -187,11 +189,18 @@ namespace System.Text.RegularExpressions.Symbolic
             obj is BitVector other && Equals(other);
 
         public bool Equals(BitVector other) =>
-            Length == other.Length &&
-            MemoryExtensions.SequenceEqual(new ReadOnlySpan<ulong>(_blocks), new ReadOnlySpan<ulong>(other._blocks));
+            Length == other.Length
+            && MemoryExtensions.SequenceEqual(
+                new ReadOnlySpan<ulong>(_blocks),
+                new ReadOnlySpan<ulong>(other._blocks)
+            );
 
         public int CompareTo(BitVector other) =>
-            Length != other.Length ? Length.CompareTo(other.Length) :
-            MemoryExtensions.SequenceCompareTo(new ReadOnlySpan<ulong>(_blocks), new ReadOnlySpan<ulong>(other._blocks));
+            Length != other.Length
+                ? Length.CompareTo(other.Length)
+                : MemoryExtensions.SequenceCompareTo(
+                    new ReadOnlySpan<ulong>(_blocks),
+                    new ReadOnlySpan<ulong>(other._blocks)
+                );
     }
 }

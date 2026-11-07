@@ -14,10 +14,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly bool _hasExternAliases;
 
         public SingleNamespaceDeclarationEx(
-            string name, bool hasUsings, bool hasExternAliases,
-            SyntaxReference syntaxReference, SourceLocation nameLocation,
+            string name,
+            bool hasUsings,
+            bool hasExternAliases,
+            SyntaxReference syntaxReference,
+            SourceLocation nameLocation,
             ImmutableArray<SingleNamespaceOrTypeDeclaration> children,
-            ImmutableArray<Diagnostic> diagnostics)
+            ImmutableArray<Diagnostic> diagnostics
+        )
             : base(name, syntaxReference, nameLocation, children, diagnostics)
         {
             _hasUsings = hasUsings;
@@ -26,18 +30,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override bool HasUsings
         {
-            get
-            {
-                return _hasUsings;
-            }
+            get { return _hasUsings; }
         }
 
         public override bool HasExternAliases
         {
-            get
-            {
-                return _hasExternAliases;
-            }
+            get { return _hasExternAliases; }
         }
     }
 }

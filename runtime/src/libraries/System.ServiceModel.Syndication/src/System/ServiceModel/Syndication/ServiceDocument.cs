@@ -12,9 +12,8 @@ namespace System.ServiceModel.Syndication
         private ExtensibleSyndicationObject _extensions;
         private Collection<Workspace> _workspaces;
 
-        public ServiceDocument() : this(null)
-        {
-        }
+        public ServiceDocument()
+            : this(null) { }
 
         public ServiceDocument(IEnumerable<Workspace> workspaces)
         {
@@ -28,11 +27,13 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Uri BaseUri { get; set; }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public string Language { get; set; }
 
@@ -46,9 +47,11 @@ namespace System.ServiceModel.Syndication
             return Load<ServiceDocument>(reader);
         }
 
-        public static TServiceDocument Load<TServiceDocument>(XmlReader reader) where TServiceDocument : ServiceDocument, new()
+        public static TServiceDocument Load<TServiceDocument>(XmlReader reader)
+            where TServiceDocument : ServiceDocument, new()
         {
-            AtomPub10ServiceDocumentFormatter<TServiceDocument> formatter = new AtomPub10ServiceDocumentFormatter<TServiceDocument>();
+            AtomPub10ServiceDocumentFormatter<TServiceDocument> formatter =
+                new AtomPub10ServiceDocumentFormatter<TServiceDocument>();
             formatter.ReadFrom(reader);
             return (TServiceDocument)formatter.Document;
         }
@@ -68,7 +71,12 @@ namespace System.ServiceModel.Syndication
             return new Workspace();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -88,7 +96,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

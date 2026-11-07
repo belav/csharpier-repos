@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using System.Workflow.ComponentModel;
-using System.ComponentModel.Design;
-using System.Workflow.ComponentModel.Compiler;
-using System.Reflection;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
 using System.Windows.Forms.Design;
-using System.Diagnostics.CodeAnalysis;
+using System.Workflow.ComponentModel;
+using System.Workflow.ComponentModel.Compiler;
 
 namespace System.Workflow.ComponentModel.Design
 {
@@ -64,19 +64,26 @@ namespace System.Workflow.ComponentModel.Design
                 this.Font = (Font)uisvc.Styles["DialogFont"];
 
             //add images to the tree-view's imagelist
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActivityBindForm));
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(ActivityBindForm));
 
             ActivityBindDialogTitleFormat = resources.GetString("ActivityBindDialogTitleFormat");
             PropertyAssignableFormat = resources.GetString("PropertyAssignableFormat");
             DescriptionFormat = resources.GetString("DescriptionFormat");
             EditIndex = resources.GetString("EditIndex");
-            PleaseSelectCorrectActivityProperty = resources.GetString("PleaseSelectCorrectActivityProperty");
+            PleaseSelectCorrectActivityProperty = resources.GetString(
+                "PleaseSelectCorrectActivityProperty"
+            );
             PleaseSelectActivityProperty = resources.GetString("PleaseSelectActivityProperty");
             IncorrectIndexChange = resources.GetString("IncorrectIndexChange");
             CreateNewMemberHelpFormat = resources.GetString("CreateNewMemberHelpFormat");
 
             this.memberTypes = new System.Windows.Forms.ImageList();
-            this.memberTypes.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("memberTypes.ImageStream")));
+            this.memberTypes.ImageStream = (
+                (System.Windows.Forms.ImageListStreamer)(
+                    resources.GetObject("memberTypes.ImageStream")
+                )
+            );
             this.memberTypes.TransparentColor = AmbientTheme.TransparentColor;
             //this.memberTypes.Images.SetKeyName(0, "Field_Public");
             //this.memberTypes.Images.SetKeyName(1, "Field_Internal");
@@ -105,52 +112,47 @@ namespace System.Workflow.ComponentModel.Design
 
             //preload custom properties before getting type from the type provider (as it would refresh the types)
             this.properties = CustomActivityDesignerHelper.GetCustomProperties(context);
-
         }
 
         #region return properties
         public ActivityBind Binding
         {
-            get
-            {
-                return this.binding;
-            }
+            get { return this.binding; }
         }
         public bool CreateNew
         {
-            get
-            {
-                return this.createNew;
-            }
+            get { return this.createNew; }
         }
         public bool CreateNewProperty
         {
-            get
-            {
-                return this.createNewProperty;
-            }
+            get { return this.createNewProperty; }
         }
         public string NewMemberName
         {
-            get
-            {
-                return this.newMemberName;
-            }
+            get { return this.newMemberName; }
         }
         #endregion
 
         private void ActivityBindForm_Load(object sender, EventArgs e)
         {
-            this.Text = string.Format(CultureInfo.CurrentCulture, ActivityBindDialogTitleFormat, context.PropertyDescriptor.Name);
-
+            this.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                ActivityBindDialogTitleFormat,
+                context.PropertyDescriptor.Name
+            );
 
             if (this.context.PropertyDescriptor is DynamicPropertyDescriptor)
-                this.boundType = PropertyDescriptorUtils.GetBaseType(this.context.PropertyDescriptor, PropertyDescriptorUtils.GetComponent(context), serviceProvider);
+                this.boundType = PropertyDescriptorUtils.GetBaseType(
+                    this.context.PropertyDescriptor,
+                    PropertyDescriptorUtils.GetComponent(context),
+                    serviceProvider
+                );
 
             if (this.boundType != null)
             {
                 //lets get the same type through the type provider (otherwise this type may mismatch with the one obtained from the design time types)
-                ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider != null)
                 {
                     Type designTimeType = typeProvider.GetType(this.boundType.FullName, false);
@@ -181,17 +183,25 @@ namespace System.Workflow.ComponentModel.Design
             Activity activity = PropertyDescriptorUtils.GetComponent(context) as Activity;
             if (activity == null)
             {
-                IReferenceService rs = this.context.GetService(typeof(IReferenceService)) as IReferenceService;
+                IReferenceService rs =
+                    this.context.GetService(typeof(IReferenceService)) as IReferenceService;
                 if (rs != null)
                     activity = rs.GetComponent(this.context.Instance) as Activity;
             }
 
-            ActivityBind previousBinding = context.PropertyDescriptor.GetValue(context.Instance) as ActivityBind;
+            ActivityBind previousBinding =
+                context.PropertyDescriptor.GetValue(context.Instance) as ActivityBind;
             if (activity != null && previousBinding != null)
             {
-                Activity previousBindActivity = Helpers.ParseActivity(Helpers.GetRootActivity(activity), previousBinding.Name);
+                Activity previousBindActivity = Helpers.ParseActivity(
+                    Helpers.GetRootActivity(activity),
+                    previousBinding.Name
+                );
                 if (previousBindActivity != null)
-                    this.workflowOutline.SelectActivity(previousBindActivity, ParseStringPath(GetActivityType(previousBindActivity), previousBinding.Path));
+                    this.workflowOutline.SelectActivity(
+                        previousBindActivity,
+                        ParseStringPath(GetActivityType(previousBindActivity), previousBinding.Path)
+                    );
             }
 
             if (this.properties != null)
@@ -201,17 +211,29 @@ namespace System.Workflow.ComponentModel.Design
                     customPropertyNames.Add(customProperty.Name);
 
                 // set default name
-                this.memberNameTextBox.Text = DesignerHelpers.GenerateUniqueIdentifier(this.serviceProvider, activity.Name + "_" + context.PropertyDescriptor.Name, customPropertyNames.ToArray());
+                this.memberNameTextBox.Text = DesignerHelpers.GenerateUniqueIdentifier(
+                    this.serviceProvider,
+                    activity.Name + "_" + context.PropertyDescriptor.Name,
+                    customPropertyNames.ToArray()
+                );
             }
 
-            this.newMemberHelpTextBox.Lines = string.Format(CultureInfo.CurrentCulture, CreateNewMemberHelpFormat, GetSimpleTypeFullName(this.boundType)).Split(new char[] { '\n' });
+            this.newMemberHelpTextBox.Lines = string.Format(
+                    CultureInfo.CurrentCulture,
+                    CreateNewMemberHelpFormat,
+                    GetSimpleTypeFullName(this.boundType)
+                )
+                .Split(new char[] { '\n' });
         }
 
         private void OKButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
 
-            this.createNew = (this.bindTabControl.SelectedIndex != this.bindTabControl.TabPages.IndexOf(this.existingMemberPage));
+            this.createNew = (
+                this.bindTabControl.SelectedIndex
+                != this.bindTabControl.TabPages.IndexOf(this.existingMemberPage)
+            );
             if (this.createNew)
             {
                 //
@@ -234,35 +256,58 @@ namespace System.Workflow.ComponentModel.Design
 
             if (activity == null || member == null)
             {
-                string message = SR.GetString(SR.Error_BindDialogNoValidPropertySelected, GetSimpleTypeFullName(this.boundType));
+                string message = SR.GetString(
+                    SR.Error_BindDialogNoValidPropertySelected,
+                    GetSimpleTypeFullName(this.boundType)
+                );
                 DesignerHelpers.ShowError(this.serviceProvider, message);
                 return DialogResult.None;
             }
 
             Type parsedPropertyType = member.PropertyType;
             //lets get the same type through the type provider (otherwise this type may mismatch with the one obtained from the design time types)
-            ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider != null && parsedPropertyType != null)
             {
-                Type designTimeParsedType = typeProvider.GetType(parsedPropertyType.FullName, false);
-                parsedPropertyType = (designTimeParsedType != null) ? designTimeParsedType : parsedPropertyType;
+                Type designTimeParsedType = typeProvider.GetType(
+                    parsedPropertyType.FullName,
+                    false
+                );
+                parsedPropertyType =
+                    (designTimeParsedType != null) ? designTimeParsedType : parsedPropertyType;
             }
 
-            if (this.boundType != parsedPropertyType && !TypeProvider.IsAssignable(this.boundType, parsedPropertyType))
+            if (
+                this.boundType != parsedPropertyType
+                && !TypeProvider.IsAssignable(this.boundType, parsedPropertyType)
+            )
             {
-                string message = SR.GetString(SR.Error_BindDialogWrongPropertyType, GetSimpleTypeFullName(parsedPropertyType), GetSimpleTypeFullName(this.boundType));
+                string message = SR.GetString(
+                    SR.Error_BindDialogWrongPropertyType,
+                    GetSimpleTypeFullName(parsedPropertyType),
+                    GetSimpleTypeFullName(this.boundType)
+                );
                 DesignerHelpers.ShowError(this.serviceProvider, message);
                 return DialogResult.None;
             }
 
             //this is the selected activity which property is being bound
-            Activity bindingActivity = PropertyDescriptorUtils.GetComponent(this.context) as Activity;
+            Activity bindingActivity =
+                PropertyDescriptorUtils.GetComponent(this.context) as Activity;
 
             //this is the name of the property we are binding
             string propertyName = context.PropertyDescriptor.Name;
-            if (bindingActivity == activity && member != null && member.Path.Equals(propertyName, StringComparison.Ordinal))
+            if (
+                bindingActivity == activity
+                && member != null
+                && member.Path.Equals(propertyName, StringComparison.Ordinal)
+            )
             {
-                DesignerHelpers.ShowError(this.serviceProvider, SR.GetString(SR.Error_BindDialogCanNotBindToItself));
+                DesignerHelpers.ShowError(
+                    this.serviceProvider,
+                    SR.GetString(SR.Error_BindDialogCanNotBindToItself)
+                );
                 return DialogResult.None;
             }
 
@@ -272,13 +317,24 @@ namespace System.Workflow.ComponentModel.Design
                 ActivityBind bind = new ActivityBind(activity.QualifiedName, propertyPath);
 
                 ValidationManager manager = new ValidationManager(this.serviceProvider);
-                PropertyValidationContext propertyValidationContext = new PropertyValidationContext(this.context.Instance, DependencyProperty.FromName(this.context.PropertyDescriptor.Name, this.context.Instance.GetType()));
+                PropertyValidationContext propertyValidationContext = new PropertyValidationContext(
+                    this.context.Instance,
+                    DependencyProperty.FromName(
+                        this.context.PropertyDescriptor.Name,
+                        this.context.Instance.GetType()
+                    )
+                );
                 manager.Context.Append(this.context.Instance); //
 
                 ValidationErrorCollection errors;
                 using (WorkflowCompilationContext.CreateScope(manager))
                 {
-                    errors = ValidationHelpers.ValidateProperty(manager, bindingActivity, bind, propertyValidationContext);
+                    errors = ValidationHelpers.ValidateProperty(
+                        manager,
+                        bindingActivity,
+                        bind,
+                        propertyValidationContext
+                    );
                 }
                 if (errors != null && errors.Count > 0 && errors.HasErrors)
                 {
@@ -286,7 +342,8 @@ namespace System.Workflow.ComponentModel.Design
                     for (int i = 0; i < errors.Count; i++)
                     {
                         ValidationError error = errors[i];
-                        message += error.ErrorText + ((i == errors.Count - 1) ? string.Empty : "; ");
+                        message +=
+                            error.ErrorText + ((i == errors.Count - 1) ? string.Empty : "; ");
                     }
 
                     message = SR.GetString(SR.Error_BindDialogBindNotValid) + message;
@@ -303,14 +360,19 @@ namespace System.Workflow.ComponentModel.Design
             return DialogResult.None;
         }
 
-
-        [SuppressMessage("Microsoft.Globalization", "CA130:UseOrdinalStringComparison", MessageId = "System.String.Compare(System.String,System.String,System.Boolean,System.Globalization.CultureInfo)", Justification = "This is a design time method and so there is no security issue")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA130:UseOrdinalStringComparison",
+            MessageId = "System.String.Compare(System.String,System.String,System.Boolean,System.Globalization.CultureInfo)",
+            Justification = "This is a design time method and so there is no security issue"
+        )]
         private DialogResult ValidateNewMemberBind(string newMemberName)
         {
             Activity activity = PropertyDescriptorUtils.GetComponent(context) as Activity;
             if (activity == null)
             {
-                IReferenceService rs = this.context.GetService(typeof(IReferenceService)) as IReferenceService;
+                IReferenceService rs =
+                    this.context.GetService(typeof(IReferenceService)) as IReferenceService;
                 if (rs != null)
                     activity = rs.GetComponent(this.context.Instance) as Activity;
             }
@@ -328,9 +390,23 @@ namespace System.Workflow.ComponentModel.Design
             // get all the members of the custom activity to ensure uniqueness
             Type customActivityType = CustomActivityDesignerHelper.GetCustomActivityType(context);
             SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(context);
-            foreach (MemberInfo memberInfo in customActivityType.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            foreach (
+                MemberInfo memberInfo in customActivityType.GetMembers(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+            )
             {
-                if (string.Compare(memberInfo.Name, newMemberName, language == SupportedLanguages.VB, CultureInfo.InvariantCulture) == 0)
+                if (
+                    string.Compare(
+                        memberInfo.Name,
+                        newMemberName,
+                        language == SupportedLanguages.VB,
+                        CultureInfo.InvariantCulture
+                    ) == 0
+                )
                 {
                     errorMsg = SR.GetString(SR.Failure_FieldAlreadyExist);
                     break;
@@ -338,15 +414,32 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             // ctor name should be checked separately
-            if (errorMsg == null && string.Compare(customActivityType.Name, newMemberName, language == SupportedLanguages.VB, CultureInfo.InvariantCulture) == 0)
+            if (
+                errorMsg == null
+                && string.Compare(
+                    customActivityType.Name,
+                    newMemberName,
+                    language == SupportedLanguages.VB,
+                    CultureInfo.InvariantCulture
+                ) == 0
+            )
                 errorMsg = SR.GetString(SR.Failure_FieldAlreadyExist);
 
             if (errorMsg == null)
             {
-                ActivityBind newBind = new ActivityBind(ActivityBind.GetRelativePathExpression(Helpers.GetRootActivity(activity), activity), newMemberName);
-                IDesignerHost host = this.context.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                ActivityBind newBind = new ActivityBind(
+                    ActivityBind.GetRelativePathExpression(
+                        Helpers.GetRootActivity(activity),
+                        activity
+                    ),
+                    newMemberName
+                );
+                IDesignerHost host =
+                    this.context.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 if (host == null)
-                    throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                    );
                 this.binding = newBind;
             }
             else
@@ -362,7 +455,11 @@ namespace System.Workflow.ComponentModel.Design
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void SelectedActivityChanged(Activity activity, PathInfo memberPathInfo, string path)
+        private void SelectedActivityChanged(
+            Activity activity,
+            PathInfo memberPathInfo,
+            string path
+        )
         {
             string helpMessage = string.Empty;
             string desiredType = GetSimpleTypeFullName(this.boundType);
@@ -371,7 +468,11 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (path == null || path.Length == 0)
                 {
-                    helpMessage = string.Format(CultureInfo.CurrentCulture, PleaseSelectActivityProperty, desiredType);
+                    helpMessage = string.Format(
+                        CultureInfo.CurrentCulture,
+                        PleaseSelectActivityProperty,
+                        desiredType
+                    );
                 }
                 else
                 {
@@ -380,16 +481,48 @@ namespace System.Workflow.ComponentModel.Design
                     string memberDescription = GetMemberDescription(memberPathInfo.MemberInfo);
 
                     if (TypeProvider.IsAssignable(this.boundType, memberPathInfo.PropertyType))
-                        helpMessage = string.Format(CultureInfo.CurrentCulture, PropertyAssignableFormat, memberType, desiredType) + ((memberDescription.Length > 0) ? string.Format(CultureInfo.CurrentCulture, DescriptionFormat, memberDescription) : string.Empty);
+                        helpMessage =
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                PropertyAssignableFormat,
+                                memberType,
+                                desiredType
+                            )
+                            + (
+                                (memberDescription.Length > 0)
+                                    ? string.Format(
+                                        CultureInfo.CurrentCulture,
+                                        DescriptionFormat,
+                                        memberDescription
+                                    )
+                                    : string.Empty
+                            );
                     else
-                        helpMessage = string.Format(CultureInfo.CurrentCulture, PleaseSelectCorrectActivityProperty, desiredType, memberType);
+                        helpMessage = string.Format(
+                            CultureInfo.CurrentCulture,
+                            PleaseSelectCorrectActivityProperty,
+                            desiredType,
+                            memberType
+                        );
 
-                    helpMessage += ((MemberActivityBindTreeNode.MemberName(path).IndexOfAny(new char[] { '[', ']' }) != -1) ? EditIndex : string.Empty);
+                    helpMessage += (
+                        (
+                            MemberActivityBindTreeNode
+                                .MemberName(path)
+                                .IndexOfAny(new char[] { '[', ']' }) != -1
+                        )
+                            ? EditIndex
+                            : string.Empty
+                    );
                 }
             }
             else
             {
-                helpMessage = string.Format(CultureInfo.CurrentCulture, PleaseSelectActivityProperty, desiredType);
+                helpMessage = string.Format(
+                    CultureInfo.CurrentCulture,
+                    PleaseSelectActivityProperty,
+                    desiredType
+                );
             }
 
             this.helpTextBox.Lines = helpMessage.Split(new char[] { '\n' });
@@ -410,11 +543,15 @@ namespace System.Workflow.ComponentModel.Design
         {
             Type activityType = null;
 
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            WorkflowDesignerLoader loader = this.serviceProvider.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            WorkflowDesignerLoader loader =
+                this.serviceProvider.GetService(typeof(WorkflowDesignerLoader))
+                as WorkflowDesignerLoader;
             if (designerHost != null && loader != null && activity.Parent == null)
             {
-                ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider != null)
                     activityType = typeProvider.GetType(designerHost.RootComponentClassName, false);
             }
@@ -440,7 +577,10 @@ namespace System.Workflow.ComponentModel.Design
 
         private void GetHelp()
         {
-            DesignerHelpers.ShowHelpFromKeyword(this.serviceProvider, typeof(ActivityBindForm).FullName + ".UI");
+            DesignerHelpers.ShowHelpFromKeyword(
+                this.serviceProvider,
+                typeof(ActivityBindForm).FullName + ".UI"
+            );
         }
         #endregion
 
@@ -462,11 +602,11 @@ namespace System.Workflow.ComponentModel.Design
             return paths.ToArray();
         }
 
-        private PathInfo[] GetArraySubProperties(Type propertyType, string currentPath)//(PathInfo pathInfo)
+        private PathInfo[] GetArraySubProperties(Type propertyType, string currentPath) //(PathInfo pathInfo)
         {
             List<PathInfo> paths = new List<PathInfo>();
 
-            if (propertyType != typeof(string))//ignore char item[int] on the string
+            if (propertyType != typeof(string)) //ignore char item[int] on the string
             {
                 List<MethodInfo> getterMethodInfos = new List<MethodInfo>();
                 MemberInfo[] arrayMembers = null;
@@ -481,8 +621,8 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 catch (ArgumentException)
                 {
-                    // This is a work-around for DevDiv Bugs 109401.  Type.GetDefaultMembers() can throw 
-                    // ArgumentException in certain circumstances.  In order to avoid crashing the designer host 
+                    // This is a work-around for DevDiv Bugs 109401.  Type.GetDefaultMembers() can throw
+                    // ArgumentException in certain circumstances.  In order to avoid crashing the designer host
                     // (typically VS), we must handle the exception and ignore the offending type.
                 }
                 if (arrayMembers != null && arrayMembers.Length > 0)
@@ -573,13 +713,26 @@ namespace System.Workflow.ComponentModel.Design
         PropertyInfo[] GetProperties(Type type)
         {
             List<PropertyInfo> members = new List<PropertyInfo>();
-            members.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.FlattenHierarchy));
+            members.AddRange(
+                type.GetProperties(
+                    BindingFlags.Public
+                        | BindingFlags.Static
+                        | BindingFlags.Instance
+                        | BindingFlags.FlattenHierarchy
+                )
+            );
             if (type.IsInterface)
             {
                 Type[] interfaces = type.GetInterfaces();
                 foreach (Type implementedInterface in interfaces)
                 {
-                    members.AddRange(implementedInterface.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy));
+                    members.AddRange(
+                        implementedInterface.GetProperties(
+                            BindingFlags.Public
+                                | BindingFlags.Instance
+                                | BindingFlags.FlattenHierarchy
+                        )
+                    );
                 }
             }
 
@@ -591,11 +744,18 @@ namespace System.Workflow.ComponentModel.Design
         {
             List<PathInfo> paths = new List<PathInfo>();
 
-            if (typeToGetPropertiesOn == typeof(string) || (TypeProvider.IsAssignable(typeof(System.Delegate), typeToGetPropertiesOn) && !this.boundType.IsSubclassOf(typeof(Delegate))))//ignore char item[int] on the string
+            if (
+                typeToGetPropertiesOn == typeof(string)
+                || (
+                    TypeProvider.IsAssignable(typeof(System.Delegate), typeToGetPropertiesOn)
+                    && !this.boundType.IsSubclassOf(typeof(Delegate))
+                )
+            ) //ignore char item[int] on the string
                 return paths.ToArray();
 
             currentPath = (string.IsNullOrEmpty(currentPath)) ? string.Empty : currentPath + ".";
-            ITypeProvider typeProvider = this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
 
             foreach (PropertyInfo property in GetProperties(typeToGetPropertiesOn))
             {
@@ -628,12 +788,18 @@ namespace System.Workflow.ComponentModel.Design
                 //    }
                 //}
 
-                //if it's a primitive and not equal to the desired type, skip it. 
+                //if it's a primitive and not equal to the desired type, skip it.
                 //skip properties of type object if the target property is not object
-                if (IsPropertyBrowsable(property) &&
-                    getterMethod != null && memberType != null &&
-                    (!IsTypePrimitive(memberType) || TypeProvider.IsAssignable(this.boundType, memberType)) &&
-                    !((this.boundType != typeof(object) && memberType == typeof(object))))
+                if (
+                    IsPropertyBrowsable(property)
+                    && getterMethod != null
+                    && memberType != null
+                    && (
+                        !IsTypePrimitive(memberType)
+                        || TypeProvider.IsAssignable(this.boundType, memberType)
+                    )
+                    && !((this.boundType != typeof(object) && memberType == typeof(object)))
+                )
                 {
                     //some properties are indexers... analyze the parameters on the getter method
                     // C#: at design time indexer property is called "this" while at runtime it gets renamed to "Item"
@@ -647,7 +813,14 @@ namespace System.Workflow.ComponentModel.Design
 
             //
 
-            foreach (FieldInfo field in typeToGetPropertiesOn.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy))//BindingFlags.Static is needed for the const fields
+            foreach (
+                FieldInfo field in typeToGetPropertiesOn.GetFields(
+                    BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.FlattenHierarchy
+                )
+            ) //BindingFlags.Static is needed for the const fields
             {
                 Type fieldType = BindHelpers.GetMemberType(field);
                 if (fieldType == null)
@@ -664,10 +837,21 @@ namespace System.Workflow.ComponentModel.Design
 
                 //if it's a primitive and not equal to the desired type, skip it.
                 //
-                if (IsPropertyBrowsable(field) && fieldType != null &&
-                    (!IsTypePrimitive(fieldType) || TypeProvider.IsAssignable(this.boundType, fieldType)) && //primitive fields should only be shown for primitive properties
-                    !(this.boundType != typeof(object) && fieldType == typeof(object)) && //fields of type object should only be shown for properties of type object
-                    !(!TypeProvider.IsAssignable(typeof(Delegate), this.boundType) && TypeProvider.IsAssignable(typeof(Delegate), fieldType)))//fields of type delegate should only be shown for delegate properties
+                if (
+                    IsPropertyBrowsable(field)
+                    && fieldType != null
+                    && (
+                        !IsTypePrimitive(fieldType)
+                        || TypeProvider.IsAssignable(this.boundType, fieldType)
+                    )
+                    && //primitive fields should only be shown for primitive properties
+                    !(this.boundType != typeof(object) && fieldType == typeof(object))
+                    && //fields of type object should only be shown for properties of type object
+                    !(
+                        !TypeProvider.IsAssignable(typeof(Delegate), this.boundType)
+                        && TypeProvider.IsAssignable(typeof(Delegate), fieldType)
+                    )
+                ) //fields of type delegate should only be shown for delegate properties
                 {
                     string fieldName = currentPath + field.Name;
                     paths.Add(new PathInfo(fieldName, field, BindHelpers.GetMemberType(field)));
@@ -676,9 +860,13 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             //we will populate events only if the target type is event (since it is always going to be the last valid entry in the path)
-            if (this.boundType.IsSubclassOf(typeof(Delegate)))//System.MulticastDelegate ???
+            if (this.boundType.IsSubclassOf(typeof(Delegate))) //System.MulticastDelegate ???
             {
-                foreach (EventInfo eventInfo in typeToGetPropertiesOn.GetEvents(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
+                foreach (
+                    EventInfo eventInfo in typeToGetPropertiesOn.GetEvents(
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy
+                    )
+                )
                 {
                     Type eventType = BindHelpers.GetMemberType(eventInfo);
                     if (eventType == null)
@@ -690,7 +878,11 @@ namespace System.Workflow.ComponentModel.Design
                         eventType = (designTimeEventType != null) ? designTimeEventType : eventType;
                     }
 
-                    if (IsPropertyBrowsable(eventInfo) && eventType != null && TypeProvider.IsAssignable(this.boundType, eventType))
+                    if (
+                        IsPropertyBrowsable(eventInfo)
+                        && eventType != null
+                        && TypeProvider.IsAssignable(this.boundType, eventType)
+                    )
                         paths.Add(new PathInfo(currentPath + eventInfo.Name, eventInfo, eventType));
                 }
             }
@@ -724,7 +916,13 @@ namespace System.Workflow.ComponentModel.Design
             pathWalker.MemberFound += delegate(object sender, PathMemberInfoEventArgs eventArgs)
             {
                 finalEventArgs = eventArgs; //store the latest args
-                pathInfoList.Add(new PathInfo(eventArgs.Path, eventArgs.MemberInfo, BindHelpers.GetMemberType(eventArgs.MemberInfo)));
+                pathInfoList.Add(
+                    new PathInfo(
+                        eventArgs.Path,
+                        eventArgs.MemberInfo,
+                        BindHelpers.GetMemberType(eventArgs.MemberInfo)
+                    )
+                );
             };
             pathWalker.PathErrorFound += delegate(object sender, PathErrorInfoEventArgs eventArgs)
             {
@@ -745,12 +943,18 @@ namespace System.Workflow.ComponentModel.Design
                     return attribute.Browsable;
                 else
                 {
-                    AttributeInfoAttribute attributeInfoAttribute = attributes[0] as AttributeInfoAttribute;
+                    AttributeInfoAttribute attributeInfoAttribute =
+                        attributes[0] as AttributeInfoAttribute;
                     if (attributeInfoAttribute != null)
                     {
-                        ReadOnlyCollection<object> argumentValues = attributeInfoAttribute.AttributeInfo.ArgumentValues;
+                        ReadOnlyCollection<object> argumentValues = attributeInfoAttribute
+                            .AttributeInfo
+                            .ArgumentValues;
                         if (argumentValues.Count > 0)
-                            return Convert.ToBoolean(argumentValues[0], CultureInfo.InvariantCulture);
+                            return Convert.ToBoolean(
+                                argumentValues[0],
+                                CultureInfo.InvariantCulture
+                            );
                     }
                 }
             }
@@ -761,7 +965,13 @@ namespace System.Workflow.ComponentModel.Design
         //primitive types - we dont expand them
         private static bool IsTypePrimitive(Type type)
         {
-            return type.IsPrimitive || type.IsEnum || type == typeof(Guid) || type == typeof(IntPtr) || type == typeof(string) || type == typeof(DateTime) || type == typeof(TimeSpan);
+            return type.IsPrimitive
+                || type.IsEnum
+                || type == typeof(Guid)
+                || type == typeof(IntPtr)
+                || type == typeof(string)
+                || type == typeof(DateTime)
+                || type == typeof(TimeSpan);
         }
 
         //
@@ -785,7 +995,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     foreach (Type parameterType in type.GetGenericArguments())
                     {
-                        typeName.Replace("[" + parameterType.AssemblyQualifiedName + "]", GetSimpleTypeFullName(parameterType));
+                        typeName.Replace(
+                            "[" + parameterType.AssemblyQualifiedName + "]",
+                            GetSimpleTypeFullName(parameterType)
+                        );
                         types.Push(parameterType);
                     }
                 }
@@ -797,27 +1010,33 @@ namespace System.Workflow.ComponentModel.Design
         #region Class ActivityBindFormWorkflowOutline
         internal enum BindMemberAccessKind
         {
-            Public = 0, Internal = 1, Protected = 2, Private = 3,
+            Public = 0,
+            Internal = 1,
+            Protected = 2,
+            Private = 3,
         }
 
         internal enum BindMemberKind
         {
-            Field = 0, Property = 4, Constant = 8, Event = 12, Delegate = 16, Index = 20 //Index doesnt have any image
+            Field = 0,
+            Property = 4,
+            Constant = 8,
+            Event = 12,
+            Delegate = 16,
+            Index = 20, //Index doesnt have any image
         };
 
         //tree node to be used in the activity bind form for activity nodes
         private class ActivityBindTreeNode : WorkflowOutlineNode
         {
             public ActivityBindTreeNode(Activity activity)
-                : base(activity)
-            { }
+                : base(activity) { }
         }
 
         private class DummyActivityBindTreeNode : WorkflowOutlineNode
         {
             public DummyActivityBindTreeNode(Activity activity)
-                : base(activity)
-            { }
+                : base(activity) { }
         }
 
         //used for members of activities or their nested members
@@ -839,12 +1058,15 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.pathInfo.MemberInfo is EventInfo)
                 {
                     this.kind = BindMemberKind.Event;
-                    this.accessKind = BindMemberAccessKind.Public; //this.accessKind = (this.pathInfo.MemberInfo as EventInfo).Attributes 
+                    this.accessKind = BindMemberAccessKind.Public; //this.accessKind = (this.pathInfo.MemberInfo as EventInfo).Attributes
                 }
                 else if (this.pathInfo.MemberInfo is FieldInfo)
                 {
                     FieldInfo fieldInfo = this.pathInfo.MemberInfo as FieldInfo;
-                    if ((fieldInfo.Attributes & FieldAttributes.Static) != 0 && (fieldInfo.Attributes & FieldAttributes.Literal) != 0)
+                    if (
+                        (fieldInfo.Attributes & FieldAttributes.Static) != 0
+                        && (fieldInfo.Attributes & FieldAttributes.Literal) != 0
+                    )
                     {
                         this.kind = BindMemberKind.Constant;
                     }
@@ -855,7 +1077,14 @@ namespace System.Workflow.ComponentModel.Design
                         else
                             this.kind = BindMemberKind.Field;
                     }
-                    this.accessKind = (fieldInfo.IsPublic) ? BindMemberAccessKind.Public : ((fieldInfo.IsFamily) ? BindMemberAccessKind.Internal : (fieldInfo.IsPrivate) ? BindMemberAccessKind.Private : BindMemberAccessKind.Protected);
+                    this.accessKind =
+                        (fieldInfo.IsPublic)
+                            ? BindMemberAccessKind.Public
+                            : (
+                                (fieldInfo.IsFamily) ? BindMemberAccessKind.Internal
+                                : (fieldInfo.IsPrivate) ? BindMemberAccessKind.Private
+                                : BindMemberAccessKind.Protected
+                            );
                 }
                 else if (this.pathInfo.MemberInfo is PropertyInfo)
                 {
@@ -884,14 +1113,8 @@ namespace System.Workflow.ComponentModel.Design
 
             public PathInfo PathInfo
             {
-                get
-                {
-                    return this.pathInfo;
-                }
-                set
-                {
-                    this.pathInfo = value;
-                }
+                get { return this.pathInfo; }
+                set { this.pathInfo = value; }
             }
 
             public bool MayHaveChildNodes
@@ -902,7 +1125,11 @@ namespace System.Workflow.ComponentModel.Design
                     if (memberType == null)
                         return false;
 
-                    if (IsTypePrimitive(memberType) || (TypeProvider.IsAssignable(typeof(System.Delegate), memberType)) || (memberType == typeof(object)))
+                    if (
+                        IsTypePrimitive(memberType)
+                        || (TypeProvider.IsAssignable(typeof(System.Delegate), memberType))
+                        || (memberType == typeof(object))
+                    )
                         return false;
 
                     return true;
@@ -911,18 +1138,12 @@ namespace System.Workflow.ComponentModel.Design
 
             public BindMemberKind MemberKind
             {
-                get
-                {
-                    return this.kind;
-                }
+                get { return this.kind; }
             }
 
             public BindMemberAccessKind MemberAccessKind
             {
-                get
-                {
-                    return this.accessKind;
-                }
+                get { return this.accessKind; }
             }
 
             internal static string MemberName(string path)
@@ -930,7 +1151,10 @@ namespace System.Workflow.ComponentModel.Design
                 string memberName = path;
                 //need to show just the latest portion of the path
                 int index = memberName.LastIndexOf('.');
-                memberName = (index != -1 && (index + 1) < memberName.Length) ? memberName.Substring(index + 1) : memberName;
+                memberName =
+                    (index != -1 && (index + 1) < memberName.Length)
+                        ? memberName.Substring(index + 1)
+                        : memberName;
                 return memberName;
             }
         }
@@ -941,16 +1165,25 @@ namespace System.Workflow.ComponentModel.Design
             private Activity selectedActivity = null;
             private PathInfo selectedPathInfo = null;
 
-            public ActivityBindFormWorkflowOutline(IServiceProvider serviceProvider, ActivityBindForm parent)
+            public ActivityBindFormWorkflowOutline(
+                IServiceProvider serviceProvider,
+                ActivityBindForm parent
+            )
                 : base(serviceProvider)
             {
                 this.parent = parent;
                 base.NeedsExpandAll = false;
 
-                this.Expanding += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
+                this.Expanding += new System.Windows.Forms.TreeViewCancelEventHandler(
+                    this.treeView1_BeforeExpand
+                );
 
-                base.TreeView.BeforeLabelEdit += new NodeLabelEditEventHandler(TreeView_BeforeLabelEdit);
-                base.TreeView.AfterLabelEdit += new NodeLabelEditEventHandler(TreeView_AfterLabelEdit);
+                base.TreeView.BeforeLabelEdit += new NodeLabelEditEventHandler(
+                    TreeView_BeforeLabelEdit
+                );
+                base.TreeView.AfterLabelEdit += new NodeLabelEditEventHandler(
+                    TreeView_AfterLabelEdit
+                );
                 base.TreeView.LabelEdit = true;
                 base.TreeView.KeyDown += new KeyEventHandler(TreeView_KeyDown);
             }
@@ -970,7 +1203,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 //allow editing the label only if it's an array member
                 MemberActivityBindTreeNode memberNode = e.Node as MemberActivityBindTreeNode;
-                e.CancelEdit = (memberNode == null) || !memberNode.Text.Contains("[") || !memberNode.Text.Contains("]");
+                e.CancelEdit =
+                    (memberNode == null)
+                    || !memberNode.Text.Contains("[")
+                    || !memberNode.Text.Contains("]");
             }
 
             void TreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
@@ -988,25 +1224,44 @@ namespace System.Workflow.ComponentModel.Design
 
                 bool incorrectChange = false;
                 //sanity check (member name has not been changed, still have opening/closing square brackets, same number of commas)
-                if (newLabel.IndexOf("[", StringComparison.Ordinal) == -1 || !newLabel.EndsWith("]", StringComparison.Ordinal))
+                if (
+                    newLabel.IndexOf("[", StringComparison.Ordinal) == -1
+                    || !newLabel.EndsWith("]", StringComparison.Ordinal)
+                )
                 {
                     incorrectChange = true;
                 }
                 else
                 {
-                    string oldMemberName = oldLabel.Substring(0, oldLabel.IndexOf("[", StringComparison.Ordinal));
-                    string newMemberName = newLabel.Substring(0, newLabel.IndexOf("[", StringComparison.Ordinal));
-                    incorrectChange = !oldMemberName.Equals(newMemberName, StringComparison.Ordinal);
+                    string oldMemberName = oldLabel.Substring(
+                        0,
+                        oldLabel.IndexOf("[", StringComparison.Ordinal)
+                    );
+                    string newMemberName = newLabel.Substring(
+                        0,
+                        newLabel.IndexOf("[", StringComparison.Ordinal)
+                    );
+                    incorrectChange = !oldMemberName.Equals(
+                        newMemberName,
+                        StringComparison.Ordinal
+                    );
                 }
 
                 //re-parse, update pathinfo member
                 if (!incorrectChange)
                 {
                     ActivityBindTreeNode parentNode = memberNode.Parent as ActivityBindTreeNode;
-                    MemberActivityBindTreeNode memberParentNode = parentNode as MemberActivityBindTreeNode;
-                    Type memberType = (memberParentNode != null) ? memberParentNode.PathInfo.PropertyType : this.parent.GetActivityType(parentNode.Activity);
+                    MemberActivityBindTreeNode memberParentNode =
+                        parentNode as MemberActivityBindTreeNode;
+                    Type memberType =
+                        (memberParentNode != null)
+                            ? memberParentNode.PathInfo.PropertyType
+                            : this.parent.GetActivityType(parentNode.Activity);
                     //we will try to parse just the latest member path since the previous is assumed to be valid
-                    List<PathInfo> reparsedPathInfoList = this.parent.ParseStringPath(memberType, newLabel);
+                    List<PathInfo> reparsedPathInfoList = this.parent.ParseStringPath(
+                        memberType,
+                        newLabel
+                    );
                     if (reparsedPathInfoList == null || reparsedPathInfoList.Count == 0)
                     {
                         incorrectChange = true;
@@ -1023,7 +1278,14 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (incorrectChange)
                 {
-                    DesignerHelpers.ShowError(this.parent.serviceProvider, string.Format(CultureInfo.CurrentCulture, this.parent.IncorrectIndexChange, newLabel));
+                    DesignerHelpers.ShowError(
+                        this.parent.serviceProvider,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            this.parent.IncorrectIndexChange,
+                            newLabel
+                        )
+                    );
                     e.CancelEdit = true;
                 }
             }
@@ -1038,11 +1300,17 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         //Poluate child members on this node...
                         MemberActivityBindTreeNode memberNode = node as MemberActivityBindTreeNode;
-                        List<PathInfo> members = this.parent.PopulateAutoCompleteList(node.Activity, (memberNode != null) ? memberNode.PathInfo : null);
+                        List<PathInfo> members = this.parent.PopulateAutoCompleteList(
+                            node.Activity,
+                            (memberNode != null) ? memberNode.PathInfo : null
+                        );
                         List<TreeNode> nodes = new List<TreeNode>();
                         foreach (PathInfo mamberPathInfo in members)
                         {
-                            MemberActivityBindTreeNode childMemberNode = CreateMemberNode(node.Activity, mamberPathInfo);
+                            MemberActivityBindTreeNode childMemberNode = CreateMemberNode(
+                                node.Activity,
+                                mamberPathInfo
+                            );
                             if (childMemberNode != null)
                             {
                                 RefreshNode(childMemberNode, false);
@@ -1069,7 +1337,10 @@ namespace System.Workflow.ComponentModel.Design
                 for (int i = 0; i < memberTypes.Images.Count; i++)
                 {
                     Image image = memberTypes.Images[i];
-                    this.TreeView.ImageList.Images.Add(string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, i), image); //member type key is non-localizable
+                    this.TreeView.ImageList.Images.Add(
+                        string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, i),
+                        image
+                    ); //member type key is non-localizable
                 }
             }
 
@@ -1084,9 +1355,15 @@ namespace System.Workflow.ComponentModel.Design
                 return treeNode;
             }
 
-            private MemberActivityBindTreeNode CreateMemberNode(Activity activity, PathInfo pathInfo)
+            private MemberActivityBindTreeNode CreateMemberNode(
+                Activity activity,
+                PathInfo pathInfo
+            )
             {
-                MemberActivityBindTreeNode memberNode = new MemberActivityBindTreeNode(activity, pathInfo);
+                MemberActivityBindTreeNode memberNode = new MemberActivityBindTreeNode(
+                    activity,
+                    pathInfo
+                );
                 if (memberNode.MayHaveChildNodes)
                     memberNode.Nodes.Add(new DummyActivityBindTreeNode(activity));
                 return memberNode;
@@ -1103,7 +1380,14 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     node.RefreshNode();
                     int imageNumber = (int)memberNode.MemberKind + (int)memberNode.MemberAccessKind;
-                    node.ImageIndex = node.SelectedImageIndex = this.TreeView.ImageList.Images.IndexOfKey(string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, imageNumber)); //it's non-localizable
+                    node.ImageIndex = node.SelectedImageIndex =
+                        this.TreeView.ImageList.Images.IndexOfKey(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                MemberTypeFormat,
+                                imageNumber
+                            )
+                        ); //it's non-localizable
                 }
                 else
                 {
@@ -1123,7 +1407,11 @@ namespace System.Workflow.ComponentModel.Design
                 MemberActivityBindTreeNode memberNode = node as MemberActivityBindTreeNode;
                 this.selectedPathInfo = (memberNode != null) ? memberNode.PathInfo : null;
                 string path = PropertyPath;
-                this.parent.SelectedActivityChanged(this.selectedActivity, this.selectedPathInfo, path);
+                this.parent.SelectedActivityChanged(
+                    this.selectedActivity,
+                    this.selectedPathInfo,
+                    path
+                );
             }
 
             public void SelectActivity(Activity activity, List<PathInfo> pathInfoList)
@@ -1150,12 +1438,22 @@ namespace System.Workflow.ComponentModel.Design
                             int indexOfOpenBracket = currentPathInfo.Path.IndexOf('[');
                             if (indexOfOpenBracket != -1)
                             {
-                                string indexPropertyName = currentPathInfo.Path.Substring(0, indexOfOpenBracket);
+                                string indexPropertyName = currentPathInfo.Path.Substring(
+                                    0,
+                                    indexOfOpenBracket
+                                );
                                 if (node.Text.Equals(indexPropertyName, StringComparison.Ordinal))
                                 {
                                     //need to get back to the parent and select a different child with an index
                                     //see if we need to get the properties on the parent node again...
-                                    if (i > 0 && pathInfoList[i - 1].Path.Equals(indexPropertyName, StringComparison.Ordinal))
+                                    if (
+                                        i > 0
+                                        && pathInfoList[i - 1]
+                                            .Path.Equals(
+                                                indexPropertyName,
+                                                StringComparison.Ordinal
+                                            )
+                                    )
                                         node = node.Parent as WorkflowOutlineNode;
                                 }
                             }
@@ -1163,8 +1461,12 @@ namespace System.Workflow.ComponentModel.Design
                             //find a child node with the same PathInfo member as the given one
                             foreach (TreeNode childNode in node.Nodes)
                             {
-                                MemberActivityBindTreeNode memberTreeNode = childNode as MemberActivityBindTreeNode;
-                                if (memberTreeNode != null && memberTreeNode.PathInfo.Equals(currentPathInfo))
+                                MemberActivityBindTreeNode memberTreeNode =
+                                    childNode as MemberActivityBindTreeNode;
+                                if (
+                                    memberTreeNode != null
+                                    && memberTreeNode.PathInfo.Equals(currentPathInfo)
+                                )
                                 {
                                     matchingChildNode = memberTreeNode;
                                     break;
@@ -1172,16 +1474,36 @@ namespace System.Workflow.ComponentModel.Design
 
                                 //actual indexes may be different from the default ones...
                                 //if it's a indexer property (this[]), indexes might mismatch
-                                if (memberTreeNode != null && memberTreeNode.Text.Contains("[") && currentPathInfo.Path.Contains("["))
+                                if (
+                                    memberTreeNode != null
+                                    && memberTreeNode.Text.Contains("[")
+                                    && currentPathInfo.Path.Contains("[")
+                                )
                                 {
                                     //need to compare parameter type index collections...
-                                    string currentPropertyName = GetMemberNameFromIndexerName(currentPathInfo.Path);
-                                    string treeNodePropertyName = GetMemberNameFromIndexerName(memberTreeNode.Text);
-                                    if (string.Equals(currentPropertyName, treeNodePropertyName, StringComparison.Ordinal) && IsSamePropertyIndexer(currentPathInfo.MemberInfo, memberTreeNode.PathInfo.MemberInfo))
+                                    string currentPropertyName = GetMemberNameFromIndexerName(
+                                        currentPathInfo.Path
+                                    );
+                                    string treeNodePropertyName = GetMemberNameFromIndexerName(
+                                        memberTreeNode.Text
+                                    );
+                                    if (
+                                        string.Equals(
+                                            currentPropertyName,
+                                            treeNodePropertyName,
+                                            StringComparison.Ordinal
+                                        )
+                                        && IsSamePropertyIndexer(
+                                            currentPathInfo.MemberInfo,
+                                            memberTreeNode.PathInfo.MemberInfo
+                                        )
+                                    )
                                     {
                                         matchingChildNode = memberTreeNode;
                                         memberTreeNode.PathInfo = currentPathInfo;
-                                        memberTreeNode.Text = MemberActivityBindTreeNode.MemberName(currentPathInfo.Path);
+                                        memberTreeNode.Text = MemberActivityBindTreeNode.MemberName(
+                                            currentPathInfo.Path
+                                        );
                                         break;
                                     }
                                 }
@@ -1239,10 +1561,22 @@ namespace System.Workflow.ComponentModel.Design
                 MethodInfo methodInfo1 = member1 as MethodInfo;
                 MethodInfo methodInfo2 = member2 as MethodInfo;
 
-                ParameterInfo[] parameters1 = (property1 != null) ? property1.GetIndexParameters() : (methodInfo1 != null) ? methodInfo1.GetParameters() : null;
-                ParameterInfo[] parameters2 = (property2 != null) ? property2.GetIndexParameters() : (methodInfo2 != null) ? methodInfo2.GetParameters() : null;
+                ParameterInfo[] parameters1 =
+                    (property1 != null) ? property1.GetIndexParameters()
+                    : (methodInfo1 != null) ? methodInfo1.GetParameters()
+                    : null;
+                ParameterInfo[] parameters2 =
+                    (property2 != null) ? property2.GetIndexParameters()
+                    : (methodInfo2 != null) ? methodInfo2.GetParameters()
+                    : null;
 
-                if (parameters1 == null || parameters1.Length == 0 || parameters2 == null || parameters2.Length == 0 || parameters1.Length != parameters2.Length)
+                if (
+                    parameters1 == null
+                    || parameters1.Length == 0
+                    || parameters2 == null
+                    || parameters2.Length == 0
+                    || parameters1.Length != parameters2.Length
+                )
                     return false;
 
                 for (int i = 0; i < parameters1.Length; i++)
@@ -1266,23 +1600,18 @@ namespace System.Workflow.ComponentModel.Design
 
             public Activity SelectedActivity
             {
-                get
-                {
-                    return this.selectedActivity;
-                }
+                get { return this.selectedActivity; }
             }
             public PathInfo SelectedMember
             {
-                get
-                {
-                    return this.selectedPathInfo;
-                }
+                get { return this.selectedPathInfo; }
             }
             public string PropertyPath
             {
                 get
                 {
-                    MemberActivityBindTreeNode memberNode = base.TreeView.SelectedNode as MemberActivityBindTreeNode;
+                    MemberActivityBindTreeNode memberNode =
+                        base.TreeView.SelectedNode as MemberActivityBindTreeNode;
                     string path = string.Empty;
                     while (memberNode != null)
                     {

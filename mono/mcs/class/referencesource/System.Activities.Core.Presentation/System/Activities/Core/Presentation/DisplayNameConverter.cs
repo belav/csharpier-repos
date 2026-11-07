@@ -11,7 +11,11 @@ namespace System.Activities.Core.Presentation
     using System.Globalization;
     using System.Windows.Data;
 
-    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Used in XAML")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1812:AvoidUninstantiatedInternalClasses",
+        Justification = "Used in XAML"
+    )]
     internal sealed class DisplayNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -29,7 +33,12 @@ namespace System.Activities.Core.Presentation
             return name;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }

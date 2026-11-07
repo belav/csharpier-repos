@@ -26,9 +26,7 @@ namespace Microsoft.Web.Mvc.Resources
         /// The content type of the response defaults to application/xml
         /// </summary>
         public DataContractXmlActionResult(object data)
-            : this(data, new ContentType("application/xml"))
-        {
-        }
+            : this(data, new ContentType("application/xml")) { }
 
         public DataContractXmlActionResult(object data, ContentType contentType)
         {
@@ -57,14 +55,26 @@ namespace Microsoft.Web.Mvc.Resources
                 }
                 catch (ArgumentException)
                 {
-                    throw new HttpException((int)HttpStatusCode.NotAcceptable, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedFormat, this.ContentType));
+                    throw new HttpException(
+                        (int)HttpStatusCode.NotAcceptable,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.Resources_UnsupportedFormat,
+                            this.ContentType
+                        )
+                    );
                 }
             }
             XmlWriterSettings settings = new XmlWriterSettings { Encoding = encoding };
             DataContractSerializer dcs = new DataContractSerializer(this.Data.GetType());
             this.ContentType.CharSet = settings.Encoding.HeaderName;
             context.HttpContext.Response.ContentType = this.ContentType.ToString();
-            using (XmlWriter writer = XmlWriter.Create(context.HttpContext.Response.OutputStream, settings))
+            using (
+                XmlWriter writer = XmlWriter.Create(
+                    context.HttpContext.Response.OutputStream,
+                    settings
+                )
+            )
             {
                 dcs.WriteObject(writer, this.Data);
                 writer.Flush();

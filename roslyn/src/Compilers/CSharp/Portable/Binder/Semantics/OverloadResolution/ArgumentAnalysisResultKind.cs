@@ -16,6 +16,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         DuplicateNamedArgument,
         RequiredParameterMissing,
         NameUsedForPositional,
-        BadNonTrailingNamedArgument // if a named argument refers to a different position, all following arguments must be named
+        BadNonTrailingNamedArgument, // if a named argument refers to a different position, all following arguments must be named
     }
 }

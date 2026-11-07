@@ -44,19 +44,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 
         private void SetCommandBindings()
         {
-            CommandBindings.Add(new CommandBinding(
-                new RoutedCommand(
-                    "SelectAllClickCommand",
-                    typeof(PickMembersDialog),
-                    new InputGestureCollection(new List<InputGesture> { new KeyGesture(Key.S, ModifierKeys.Alt) })),
-                Select_All_Click));
+            CommandBindings.Add(
+                new CommandBinding(
+                    new RoutedCommand(
+                        "SelectAllClickCommand",
+                        typeof(PickMembersDialog),
+                        new InputGestureCollection(
+                            new List<InputGesture> { new KeyGesture(Key.S, ModifierKeys.Alt) }
+                        )
+                    ),
+                    Select_All_Click
+                )
+            );
 
-            CommandBindings.Add(new CommandBinding(
-                new RoutedCommand(
-                    "DeselectAllClickCommand",
-                    typeof(PickMembersDialog),
-                    new InputGestureCollection(new List<InputGesture> { new KeyGesture(Key.D, ModifierKeys.Alt) })),
-                Deselect_All_Click));
+            CommandBindings.Add(
+                new CommandBinding(
+                    new RoutedCommand(
+                        "DeselectAllClickCommand",
+                        typeof(PickMembersDialog),
+                        new InputGestureCollection(
+                            new List<InputGesture> { new KeyGesture(Key.D, ModifierKeys.Alt) }
+                        )
+                    ),
+                    Deselect_All_Click
+                )
+            );
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -65,17 +77,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             Members.Items.Refresh();
         }
 
-        private void OK_Click(object sender, RoutedEventArgs e)
-            => DialogResult = true;
+        private void OK_Click(object sender, RoutedEventArgs e) => DialogResult = true;
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
-        private void Select_All_Click(object sender, RoutedEventArgs e)
-            => _viewModel.SelectAll();
+        private void Select_All_Click(object sender, RoutedEventArgs e) => _viewModel.SelectAll();
 
-        private void Deselect_All_Click(object sender, RoutedEventArgs e)
-            => _viewModel.DeselectAll();
+        private void Deselect_All_Click(object sender, RoutedEventArgs e) =>
+            _viewModel.DeselectAll();
 
         private void MoveUp_Click(object sender, EventArgs e)
         {
@@ -107,10 +116,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
         {
             if (Members.SelectedIndex >= 0)
             {
-                if (Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex) is not ListViewItem row)
+                if (
+                    Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)
+                    is not ListViewItem row
+                )
                 {
                     Members.ScrollIntoView(Members.SelectedItem);
-                    row = Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex) as ListViewItem;
+                    row =
+                        Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)
+                        as ListViewItem;
                 }
 
                 row?.Focus();
@@ -145,15 +159,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             }
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly PickMembersDialog _dialog;
 
-            public TestAccessor(PickMembersDialog dialog)
-                => _dialog = dialog;
+            public TestAccessor(PickMembersDialog dialog) => _dialog = dialog;
 
             public Button OKButton => _dialog.OKButton;
 

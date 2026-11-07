@@ -4,19 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration.Provider {
-    using  System.Collections;
-    using  System.Collections.Specialized;
-    using  System.Runtime.Serialization;
+namespace System.Configuration.Provider
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Runtime.Serialization;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-
     public class ProviderCollection : IEnumerable, ICollection //, ICloneable
     {
-        private Hashtable _Hashtable   = null;
-        private bool      _ReadOnly = false;
+        private Hashtable _Hashtable = null;
+        private bool _ReadOnly = false;
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
@@ -54,9 +54,7 @@ namespace System.Configuration.Provider {
         ////////////////////////////////////////////////////////////
         public ProviderBase this[string name]
         {
-            get {
-                return _Hashtable[name] as ProviderBase;
-            }
+            get { return _Hashtable[name] as ProviderBase; }
         }
 
         ////////////////////////////////////////////////////////////
@@ -65,6 +63,7 @@ namespace System.Configuration.Provider {
         {
             return _Hashtable.Values.GetEnumerator();
         }
+
         //public object Clone(){
         //    return new ProviderCollection(_Indices, _Values);
         //}
@@ -90,13 +89,22 @@ namespace System.Configuration.Provider {
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         // ICollection interface
-        public int      Count           { get { return _Hashtable.Count; }}
-        public bool     IsSynchronized  { get { return false; } }
-        public object   SyncRoot        { get { return this; } }
-
-        public void     CopyTo(ProviderBase[] array, int index)
+        public int Count
         {
-            ((ICollection) this).CopyTo(array, index);
+            get { return _Hashtable.Count; }
+        }
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+
+        public void CopyTo(ProviderBase[] array, int index)
+        {
+            ((ICollection)this).CopyTo(array, index);
         }
 
         void ICollection.CopyTo(Array array, int index)

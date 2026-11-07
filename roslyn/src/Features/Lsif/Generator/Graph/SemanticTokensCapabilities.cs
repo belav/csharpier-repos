@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     {
         public SemanticTokensCapabilities(
             IReadOnlyList<string>? tokenTypes,
-            IReadOnlyList<string>? tokenModifiers)
+            IReadOnlyList<string>? tokenModifiers
+        )
         {
             this.TokenTypes = tokenTypes;
             this.TokenModifiers = tokenModifiers;

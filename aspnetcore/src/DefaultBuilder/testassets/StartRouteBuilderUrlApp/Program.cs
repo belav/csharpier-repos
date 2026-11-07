@@ -19,19 +19,14 @@ public class Program
         var messageSent = new ManualResetEventSlim(false);
 
         using (
-            var host = WebHost.Start(
-                "http://127.0.0.1:0",
-                router =>
-                    router.MapGet(
-                        "route",
-                        async (req, res, data) =>
-                        {
-                            var env =
-                                req.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
-                            await res.WriteAsync(env.ApplicationName);
-                            messageSent.Set();
-                        }
-                    )
+            var host = WebHost.Start("http://127.0.0.1:0", router =>
+                router.MapGet("route", async (req, res, data) =>
+                {
+                    var env =
+                        req.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
+                    await res.WriteAsync(env.ApplicationName);
+                    messageSent.Set();
+                })
             )
         )
         {

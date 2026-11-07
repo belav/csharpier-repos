@@ -43,7 +43,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         Func<T, HashSet<T>> m_successorFunction;
         Func<T, bool, long> m_costFunction;
 
-        public FlowSmoothing(Dictionary<T, long> sampleData, T startBlock, Func<T, HashSet<T>> successorFunction, Func<T, bool, long> costFunction)
+        public FlowSmoothing(
+            Dictionary<T, long> sampleData,
+            T startBlock,
+            Func<T, HashSet<T>> successorFunction,
+            Func<T, bool, long> costFunction
+        )
         {
             m_sampleData = sampleData;
             m_startBlock = startBlock;
@@ -60,7 +65,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             CirculationGraph graph = new CirculationGraph();
 
             // Map each concrete block T to a pair of Nodes and an Edge in the circulation graph: entrance, exit, and backedge.
-            Dictionary<T, (Node entrance, Node exit, Edge back)> abstractNodeMap = new Dictionary<T, (Node entrance, Node exit, Edge back)>();
+            Dictionary<T, (Node entrance, Node exit, Edge back)> abstractNodeMap =
+                new Dictionary<T, (Node entrance, Node exit, Edge back)>();
 
             // Create privileged nodes source and target that will be connected to induce flow.
             Node source = new Node();
@@ -93,7 +99,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 // Add the edges for node-splitting with costs given by costFunction
                 new Edge(entryNode, exitNode, 0, long.MaxValue, m_costFunction(basicBlock, true));
-                Edge backEdge = new Edge(exitNode, entryNode, 0, blockWeight, m_costFunction(basicBlock, false));
+                Edge backEdge = new Edge(
+                    exitNode,
+                    entryNode,
+                    0,
+                    blockWeight,
+                    m_costFunction(basicBlock, false)
+                );
                 backEdge.AddFlow(blockWeight);
 
                 // Create the entry for basicBlock in abstractNodeMap.
@@ -114,7 +126,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 }
                 if (m_successorFunction(predecessorBlock).Count == 0)
                 {
-                    new Edge(abstractNodeMap[predecessorBlock].exit, abstractNodeMap[m_startBlock].entrance, 0, long.MaxValue, 0);
+                    new Edge(
+                        abstractNodeMap[predecessorBlock].exit,
+                        abstractNodeMap[m_startBlock].entrance,
+                        0,
+                        long.MaxValue,
+                        0
+                    );
                 }
             }
             // Add the entrance/exit nodes, as well as the source and target nodes, to the graph.
@@ -185,7 +203,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             // Keep a HashSet of which blocks are accessible from m_startBlock, traveling only over positive edges.
 
-            System.Collections.Generic.HashSet<T> reachableFromStart = new System.Collections.Generic.HashSet<T>();
+            System.Collections.Generic.HashSet<T> reachableFromStart =
+                new System.Collections.Generic.HashSet<T>();
             Queue<T> toExamine = new Queue<T>();
             reachableFromStart.Add(m_startBlock);
             toExamine.Enqueue(m_startBlock);
@@ -198,7 +217,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 foreach (T succBlock in m_successorFunction(predBlock))
                 {
-                    if (EdgeResults[(predBlock, succBlock)] > 0 && !reachableFromStart.Contains(succBlock))
+                    if (
+                        EdgeResults[(predBlock, succBlock)] > 0
+                        && !reachableFromStart.Contains(succBlock)
+                    )
                     {
                         reachableFromStart.Add(succBlock);
                         toExamine.Enqueue(succBlock);
@@ -212,7 +234,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 if (NodeResults[block] > 0 && !reachableFromStart.Contains(block))
                 {
-                    System.Collections.Generic.HashSet<T> stronglyConnectedComponent = new System.Collections.Generic.HashSet<T>();
+                    System.Collections.Generic.HashSet<T> stronglyConnectedComponent =
+                        new System.Collections.Generic.HashSet<T>();
                     stronglyConnectedComponent.Add(block);
                     toExamine.Enqueue(block);
 
@@ -225,7 +248,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                         foreach (T succBlock in m_successorFunction(predBlock))
                         {
-                            if (EdgeResults[(predBlock, succBlock)] > 0 && !stronglyConnectedComponent.Contains(succBlock))
+                            if (
+                                EdgeResults[(predBlock, succBlock)] > 0
+                                && !stronglyConnectedComponent.Contains(succBlock)
+                            )
                             {
                                 stronglyConnectedComponent.Add(succBlock);
                                 toExamine.Enqueue(succBlock);
@@ -237,7 +263,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     // Increment zero edges along the way along with their two ends.
                     // For now use DFS.
 
-                    System.Collections.Generic.HashSet<T> visited = new System.Collections.Generic.HashSet<T>();
+                    System.Collections.Generic.HashSet<T> visited =
+                        new System.Collections.Generic.HashSet<T>();
                     Stack<T> trace = new Stack<T>();
 
                     visited.Add(m_startBlock);
@@ -309,7 +336,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                     if (trace.Count == 0)
                     {
-                        Console.WriteLine("WARNING: No trace found to exit node. Light up all visited blocks");
+                        Console.WriteLine(
+                            "WARNING: No trace found to exit node. Light up all visited blocks"
+                        );
                         foreach (T predBlock in visited)
                         {
                             foreach (T succBlock in m_successorFunction(predBlock))
@@ -378,7 +407,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 if (NodeResults[predNode] != outFlow)
                 {
-                    Console.WriteLine(string.Format("WARNING: Node's count is {0}, but emits {1} flow to its successors", NodeResults[predNode], outFlow));
+                    Console.WriteLine(
+                        string.Format(
+                            "WARNING: Node's count is {0}, but emits {1} flow to its successors",
+                            NodeResults[predNode],
+                            outFlow
+                        )
+                    );
                 }
             }
             // Now check that the inFlow of each node adds up correctly.
@@ -387,19 +422,28 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 if (NodeResults[node] != inFlow[node])
                 {
-                    Console.WriteLine(string.Format("WARNING: Node's count is {0}, but accepts {1} from its predecessors", NodeResults[node], inFlow[node]));
+                    Console.WriteLine(
+                        string.Format(
+                            "WARNING: Node's count is {0}, but accepts {1} from its predecessors",
+                            NodeResults[node],
+                            inFlow[node]
+                        )
+                    );
                 }
             }
             // Preliminary check that the start node has positive count as long as any node in the graph has positive count.
 
             if (NodeResults[m_startBlock] == 0 && totalFlow > 0)
             {
-                Console.WriteLine("WARNING: Graph has positive flow somewhere but zero flow at the entry");
+                Console.WriteLine(
+                    "WARNING: Graph has positive flow somewhere but zero flow at the entry"
+                );
             }
             // Check in more detail whether the graph is feasible. That is, if for every non-zero count there is a positive trace
             // from the start to that block to an exit node. First check accessibility from the start using BFS.
 
-            System.Collections.Generic.HashSet<T> accessibleFromStart = new System.Collections.Generic.HashSet<T>();
+            System.Collections.Generic.HashSet<T> accessibleFromStart =
+                new System.Collections.Generic.HashSet<T>();
             Stack<T> toSee = new Stack<T>();
             toSee.Push(m_startBlock);
             accessibleFromStart.Add(m_startBlock);
@@ -409,7 +453,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 T predNode = toSee.Pop();
                 foreach (T succNode in m_successorFunction(predNode))
                 {
-                    if (EdgeResults[(predNode, succNode)] > 0 && !accessibleFromStart.Contains(succNode))
+                    if (
+                        EdgeResults[(predNode, succNode)] > 0
+                        && !accessibleFromStart.Contains(succNode)
+                    )
                     {
                         accessibleFromStart.Add(succNode);
                         toSee.Push(succNode);
@@ -421,7 +468,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 if (NodeResults[node] > 0 && !accessibleFromStart.Contains(node))
                 {
-                    Console.WriteLine("WARNING: Node has positive count but not accessible from start");
+                    Console.WriteLine(
+                        "WARNING: Node has positive count but not accessible from start"
+                    );
                 }
             }
             // Now, check for blocks that are hit but don't lead to exit nodes.
@@ -429,7 +478,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             Dictionary<T, List<T>> predMap = new Dictionary<T, List<T>>();
             Stack<T> exitableNodes = new Stack<T>();
-            System.Collections.Generic.HashSet<T> accessibleFromExit = new System.Collections.Generic.HashSet<T>();
+            System.Collections.Generic.HashSet<T> accessibleFromExit =
+                new System.Collections.Generic.HashSet<T>();
 
             // Initialize the predecessor map.
 
@@ -458,7 +508,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 T succNode = exitableNodes.Pop();
                 foreach (T predNode in predMap[succNode])
                 {
-                    if (EdgeResults[(predNode, succNode)] > 0 && !accessibleFromExit.Contains(predNode))
+                    if (
+                        EdgeResults[(predNode, succNode)] > 0
+                        && !accessibleFromExit.Contains(predNode)
+                    )
                     {
                         exitableNodes.Push(predNode);
                         accessibleFromExit.Add(predNode);
@@ -471,7 +524,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 if (NodeResults[node] > 0 && !accessibleFromExit.Contains(node))
                 {
-                    Console.WriteLine("WARNING: Node has positive count does not reach an exit node");
+                    Console.WriteLine(
+                        "WARNING: Node has positive count does not reach an exit node"
+                    );
                 }
             }
         }

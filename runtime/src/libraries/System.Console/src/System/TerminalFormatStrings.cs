@@ -11,33 +11,47 @@ internal sealed class TerminalFormatStrings
 {
     /// <summary>The format string to use to change the foreground color.</summary>
     public readonly string? Foreground;
+
     /// <summary>The format string to use to change the background color.</summary>
     public readonly string? Background;
+
     /// <summary>The format string to use to reset the foreground and background colors.</summary>
     public readonly string? Reset;
+
     /// <summary>The maximum number of colors supported by the terminal.</summary>
     public readonly int MaxColors;
+
     /// <summary>The number of columns in a format.</summary>
     public readonly int Columns;
+
     /// <summary>The number of lines in a format.</summary>
     public readonly int Lines;
+
     /// <summary>The format string to use to make cursor visible.</summary>
     public readonly string? CursorVisible;
+
     /// <summary>The format string to use to make cursor invisible</summary>
     public readonly string? CursorInvisible;
+
     /// <summary>The format string to use to set the window title.</summary>
     public readonly string? Title;
+
     /// <summary>The format string to use for an audible bell.</summary>
     public readonly string? Bell;
+
     /// <summary>The format string to use to clear the terminal.</summary>
     /// <remarks>If supported, this includes the format string for first clearing the terminal scrollback buffer.</remarks>
     public readonly string? Clear;
+
     /// <summary>The format string to use to set the position of the cursor.</summary>
     public readonly string? CursorAddress;
+
     /// <summary>The format string to use to move the cursor to the left.</summary>
     public readonly string? CursorLeft;
+
     /// <summary>The format string to use to clear to the end of line.</summary>
     public readonly string? ClrEol;
+
     /// <summary>The ANSI-compatible string for the Cursor Position report request.</summary>
     /// <remarks>
     /// This should really be in user string 7 in the terminfo file, but some terminfo databases
@@ -47,6 +61,7 @@ internal sealed class TerminalFormatStrings
     /// of outputting the sequence on some terminal that's not compatible.
     /// </remarks>
     public const string CursorPositionReport = "\x1B[6n";
+
     /// <summary>
     /// The dictionary of keystring to ConsoleKeyInfo.
     /// Only some members of the ConsoleKeyInfo are used; in particular, the actual char is ignored.
@@ -56,10 +71,13 @@ internal sealed class TerminalFormatStrings
 
     /// <summary> Max key length </summary>
     public readonly int MaxKeyFormatLength;
+
     /// <summary> Min key length </summary>
     public readonly int MinKeyFormatLength;
+
     /// <summary>The ANSI string used to enter "application" / "keypad transmit" mode.</summary>
     public readonly string? KeypadXmit;
+
     /// <summary>Indicates that it was created out of rxvt TERM</summary>
     public readonly bool IsRxvtTerm;
 
@@ -71,7 +89,9 @@ internal sealed class TerminalFormatStrings
         KeypadXmit = db.GetString(TermInfo.WellKnownStrings.KeypadXmit);
         Foreground = db.GetString(TermInfo.WellKnownStrings.SetAnsiForeground);
         Background = db.GetString(TermInfo.WellKnownStrings.SetAnsiBackground);
-        Reset = db.GetString(TermInfo.WellKnownStrings.OrigPairs) ?? db.GetString(TermInfo.WellKnownStrings.OrigColors);
+        Reset =
+            db.GetString(TermInfo.WellKnownStrings.OrigPairs)
+            ?? db.GetString(TermInfo.WellKnownStrings.OrigColors);
         Bell = db.GetString(TermInfo.WellKnownStrings.Bell);
         Clear = db.GetString(TermInfo.WellKnownStrings.Clear);
         if (db.GetExtendedString("E3") is string clearScrollbackBuffer)
@@ -86,18 +106,22 @@ internal sealed class TerminalFormatStrings
         CursorLeft = db.GetString(TermInfo.WellKnownStrings.CursorLeft);
         ClrEol = db.GetString(TermInfo.WellKnownStrings.ClrEol);
 
-        IsRxvtTerm = !string.IsNullOrEmpty(db.Term) && db.Term.Contains("rxvt", StringComparison.OrdinalIgnoreCase);
+        IsRxvtTerm =
+            !string.IsNullOrEmpty(db.Term)
+            && db.Term.Contains("rxvt", StringComparison.OrdinalIgnoreCase);
         Title = GetTitle(db);
 
-        Debug.WriteLineIf(db.GetString(TermInfo.WellKnownStrings.CursorPositionReport) != CursorPositionReport,
-            "Getting the cursor position will only work if the terminal supports the CPR sequence," +
-            "but the terminfo database does not contain an entry for it.");
+        Debug.WriteLineIf(
+            db.GetString(TermInfo.WellKnownStrings.CursorPositionReport) != CursorPositionReport,
+            "Getting the cursor position will only work if the terminal supports the CPR sequence,"
+                + "but the terminfo database does not contain an entry for it."
+        );
 
         int maxColors = db.GetNumber(TermInfo.WellKnownNumbers.MaxColors);
         MaxColors = // normalize to either the full range of all ANSI colors, just the dark ones, or none
-            maxColors >= 16 ? 16 :
-            maxColors >= 8 ? 8 :
-            0;
+            maxColors >= 16 ? 16
+            : maxColors >= 8 ? 8
+            : 0;
 
         AddKey(db, TermInfo.WellKnownStrings.KeyF1, ConsoleKey.F1);
         AddKey(db, TermInfo.WellKnownStrings.KeyF2, ConsoleKey.F2);
@@ -124,7 +148,14 @@ internal sealed class TerminalFormatStrings
         AddKey(db, TermInfo.WellKnownStrings.KeyF23, ConsoleKey.F23);
         AddKey(db, TermInfo.WellKnownStrings.KeyF24, ConsoleKey.F24);
         AddKey(db, TermInfo.WellKnownStrings.KeyBackspace, ConsoleKey.Backspace);
-        AddKey(db, TermInfo.WellKnownStrings.KeyBackTab, ConsoleKey.Tab, shift: true, alt: false, control: false);
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeyBackTab,
+            ConsoleKey.Tab,
+            shift: true,
+            alt: false,
+            control: false
+        );
         AddKey(db, TermInfo.WellKnownStrings.KeyBegin, ConsoleKey.Home);
         AddKey(db, TermInfo.WellKnownStrings.KeyClear, ConsoleKey.Clear);
         AddKey(db, TermInfo.WellKnownStrings.KeyDelete, ConsoleKey.Delete);
@@ -139,15 +170,71 @@ internal sealed class TerminalFormatStrings
         AddKey(db, TermInfo.WellKnownStrings.KeyPageUp, ConsoleKey.PageUp);
         AddKey(db, TermInfo.WellKnownStrings.KeyPrint, ConsoleKey.Print);
         AddKey(db, TermInfo.WellKnownStrings.KeyRight, ConsoleKey.RightArrow);
-        AddKey(db, TermInfo.WellKnownStrings.KeyScrollForward, ConsoleKey.PageDown, shift: true, alt: false, control: false);
-        AddKey(db, TermInfo.WellKnownStrings.KeyScrollReverse, ConsoleKey.PageUp, shift: true, alt: false, control: false);
-        AddKey(db, TermInfo.WellKnownStrings.KeySBegin, ConsoleKey.Home, shift: true, alt: false, control: false);
-        AddKey(db, TermInfo.WellKnownStrings.KeySDelete, ConsoleKey.Delete, shift: true, alt: false, control: false);
-        AddKey(db, TermInfo.WellKnownStrings.KeySHome, ConsoleKey.Home, shift: true, alt: false, control: false);
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeyScrollForward,
+            ConsoleKey.PageDown,
+            shift: true,
+            alt: false,
+            control: false
+        );
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeyScrollReverse,
+            ConsoleKey.PageUp,
+            shift: true,
+            alt: false,
+            control: false
+        );
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeySBegin,
+            ConsoleKey.Home,
+            shift: true,
+            alt: false,
+            control: false
+        );
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeySDelete,
+            ConsoleKey.Delete,
+            shift: true,
+            alt: false,
+            control: false
+        );
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeySHome,
+            ConsoleKey.Home,
+            shift: true,
+            alt: false,
+            control: false
+        );
         AddKey(db, TermInfo.WellKnownStrings.KeySelect, ConsoleKey.Select);
-        AddKey(db, TermInfo.WellKnownStrings.KeySLeft, ConsoleKey.LeftArrow, shift: true, alt: false, control: false);
-        AddKey(db, TermInfo.WellKnownStrings.KeySPrint, ConsoleKey.Print, shift: true, alt: false, control: false);
-        AddKey(db, TermInfo.WellKnownStrings.KeySRight, ConsoleKey.RightArrow, shift: true, alt: false, control: false);
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeySLeft,
+            ConsoleKey.LeftArrow,
+            shift: true,
+            alt: false,
+            control: false
+        );
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeySPrint,
+            ConsoleKey.Print,
+            shift: true,
+            alt: false,
+            control: false
+        );
+        AddKey(
+            db,
+            TermInfo.WellKnownStrings.KeySRight,
+            ConsoleKey.RightArrow,
+            shift: true,
+            alt: false,
+            control: false
+        );
         AddKey(db, TermInfo.WellKnownStrings.KeyUp, ConsoleKey.UpArrow);
         AddPrefixKey(db, "kLFT", ConsoleKey.LeftArrow);
         AddPrefixKey(db, "kRIT", ConsoleKey.RightArrow);
@@ -164,7 +251,9 @@ internal sealed class TerminalFormatStrings
             MaxKeyFormatLength = int.MinValue;
             MinKeyFormatLength = int.MaxValue;
 
-            foreach (KeyValuePair<ReadOnlyMemory<char>, ConsoleKeyInfo> entry in KeyFormatToConsoleKey)
+            foreach (
+                KeyValuePair<ReadOnlyMemory<char>, ConsoleKeyInfo> entry in KeyFormatToConsoleKey
+            )
             {
                 if (entry.Key.Length > MaxKeyFormatLength)
                 {
@@ -227,26 +316,46 @@ internal sealed class TerminalFormatStrings
         AddKey(db, keyId, key, shift: false, alt: false, control: false);
     }
 
-    private void AddKey(TermInfo.Database db, TermInfo.WellKnownStrings keyId, ConsoleKey key, bool shift, bool alt, bool control)
+    private void AddKey(
+        TermInfo.Database db,
+        TermInfo.WellKnownStrings keyId,
+        ConsoleKey key,
+        bool shift,
+        bool alt,
+        bool control
+    )
     {
         ReadOnlyMemory<char> keyFormat = db.GetString(keyId).AsMemory();
         if (!keyFormat.IsEmpty)
-            KeyFormatToConsoleKey[keyFormat] = new ConsoleKeyInfo(key == ConsoleKey.Enter ? '\r' : '\0', key, shift, alt, control);
+            KeyFormatToConsoleKey[keyFormat] = new ConsoleKeyInfo(
+                key == ConsoleKey.Enter ? '\r' : '\0',
+                key,
+                shift,
+                alt,
+                control
+            );
     }
 
     private void AddPrefixKey(TermInfo.Database db, string extendedNamePrefix, ConsoleKey key)
     {
         if (db.HasExtendedStrings) // avoid string concatenation in case when there are no Extended Strings (typical scenario)
         {
-            AddKey(db, extendedNamePrefix + "3", key, shift: false, alt: true,  control: false);
-            AddKey(db, extendedNamePrefix + "4", key, shift: true,  alt: true,  control: false);
+            AddKey(db, extendedNamePrefix + "3", key, shift: false, alt: true, control: false);
+            AddKey(db, extendedNamePrefix + "4", key, shift: true, alt: true, control: false);
             AddKey(db, extendedNamePrefix + "5", key, shift: false, alt: false, control: true);
-            AddKey(db, extendedNamePrefix + "6", key, shift: true,  alt: false, control: true);
+            AddKey(db, extendedNamePrefix + "6", key, shift: true, alt: false, control: true);
             AddKey(db, extendedNamePrefix + "7", key, shift: false, alt: false, control: true);
         }
     }
 
-    private void AddKey(TermInfo.Database db, string extendedName, ConsoleKey key, bool shift, bool alt, bool control)
+    private void AddKey(
+        TermInfo.Database db,
+        string extendedName,
+        ConsoleKey key,
+        bool shift,
+        bool alt,
+        bool control
+    )
     {
         ReadOnlyMemory<char> keyFormat = db.GetExtendedString(extendedName).AsMemory();
         if (!keyFormat.IsEmpty)
@@ -258,7 +367,6 @@ internal sealed class TerminalFormatStrings
         public bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y) =>
             x.Span.SequenceEqual(y.Span);
 
-        public int GetHashCode(ReadOnlyMemory<char> obj) =>
-            string.GetHashCode(obj.Span);
+        public int GetHashCode(ReadOnlyMemory<char> obj) => string.GetHashCode(obj.Span);
     }
 }

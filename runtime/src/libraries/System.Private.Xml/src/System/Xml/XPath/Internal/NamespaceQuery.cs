@@ -10,8 +10,11 @@ namespace MS.Internal.Xml.XPath
     {
         private bool _onNamespace;
 
-        public NamespaceQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type) : base(qyParent, Name, Prefix, Type) { }
-        private NamespaceQuery(NamespaceQuery other) : base(other)
+        public NamespaceQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type)
+            : base(qyParent, Name, Prefix, Type) { }
+
+        private NamespaceQuery(NamespaceQuery other)
+            : base(other)
         {
             _onNamespace = other._onNamespace;
         }
@@ -58,7 +61,10 @@ namespace MS.Internal.Xml.XPath
             Debug.Assert(e.NodeType == XPathNodeType.Namespace);
             if (e.Value.Length == 0)
             {
-                Debug.Assert(e.LocalName.Length == 0, "Only xmlns='' can have empty string as a value");
+                Debug.Assert(
+                    e.LocalName.Length == 0,
+                    "Only xmlns='' can have empty string as a value"
+                );
                 // Namespace axes never returns xmlns='',
                 // because it's not a NS declaration but rather undeclaration.
                 return false;
@@ -73,6 +79,9 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override XPathNodeIterator Clone() { return new NamespaceQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new NamespaceQuery(this);
+        }
     }
 }

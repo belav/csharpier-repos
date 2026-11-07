@@ -18,11 +18,19 @@ namespace System.Security.Cryptography
 
         protected HMAC() { }
 
-        [Obsolete(Obsoletions.DefaultCryptoAlgorithmsMessage, DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.DefaultCryptoAlgorithmsMessage,
+            DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static new HMAC Create() =>
             throw new PlatformNotSupportedException(SR.Cryptography_DefaultAlgorithm_NotSupported);
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfigForwarder.CreateFromNameUnreferencedCodeMessage)]
         public static new HMAC? Create(string algorithmName) =>
             CryptoConfigForwarder.CreateFromName<HMAC>(algorithmName);
@@ -56,8 +64,7 @@ namespace System.Security.Cryptography
             set => base.Key = value;
         }
 
-        protected override void Dispose(bool disposing) =>
-            base.Dispose(disposing);
+        protected override void Dispose(bool disposing) => base.Dispose(disposing);
 
         protected override void HashCore(byte[] rgb, int ib, int cb) =>
             throw new PlatformNotSupportedException(SR.CryptoConfigNotSupported);

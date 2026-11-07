@@ -14,16 +14,25 @@ namespace System.IO
         private FileInfo() { }
 
         public FileInfo(string fileName)
-            : this(fileName ?? throw new ArgumentNullException(nameof(fileName)), isNormalized: false)
-        {
-        }
+            : this(
+                fileName ?? throw new ArgumentNullException(nameof(fileName)),
+                isNormalized: false
+            ) { }
 
-        internal FileInfo(string originalPath, string? fullPath = null, string? fileName = null, bool isNormalized = false)
+        internal FileInfo(
+            string originalPath,
+            string? fullPath = null,
+            string? fileName = null,
+            bool isNormalized = false
+        )
         {
             OriginalPath = originalPath;
 
             fullPath ??= originalPath;
-            Debug.Assert(!isNormalized || !PathInternal.IsPartiallyQualified(fullPath.AsSpan()), "should be fully qualified if normalized");
+            Debug.Assert(
+                !isNormalized || !PathInternal.IsPartiallyQualified(fullPath.AsSpan()),
+                "should be fully qualified if normalized"
+            );
 
             FullPath = isNormalized ? fullPath ?? originalPath : Path.GetFullPath(fullPath);
             _name = fileName;
@@ -37,7 +46,10 @@ namespace System.IO
             {
                 if ((Attributes & FileAttributes.Directory) == FileAttributes.Directory)
                 {
-                    throw new FileNotFoundException(SR.Format(SR.IO_FileNotFound_FileName, FullPath), FullPath);
+                    throw new FileNotFoundException(
+                        SR.Format(SR.IO_FileNotFound_FileName, FullPath),
+                        FullPath
+                    );
                 }
                 return LengthCore;
             }
@@ -58,10 +70,7 @@ namespace System.IO
 
         public bool IsReadOnly
         {
-            get
-            {
-                return (Attributes & FileAttributes.ReadOnly) != 0;
-            }
+            get { return (Attributes & FileAttributes.ReadOnly) != 0; }
             set
             {
                 if (value)
@@ -77,14 +86,12 @@ namespace System.IO
         /// <remarks><see cref="FileStream(string,FileStreamOptions)"/> for information about exceptions.</remarks>
         public FileStream Open(FileStreamOptions options) => File.Open(NormalizedPath, options);
 
-        public StreamReader OpenText()
-            => new StreamReader(NormalizedPath, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+        public StreamReader OpenText() =>
+            new StreamReader(NormalizedPath, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
 
-        public StreamWriter CreateText()
-            => CreateStreamWriter(append: false);
+        public StreamWriter CreateText() => CreateStreamWriter(append: false);
 
-        public StreamWriter AppendText()
-            => CreateStreamWriter(append: true);
+        public StreamWriter AppendText() => CreateStreamWriter(append: true);
 
         public FileInfo CopyTo(string destFileName) => CopyTo(destFileName, overwrite: false);
 
@@ -125,20 +132,31 @@ namespace System.IO
             }
         }
 
-        public FileStream Open(FileMode mode)
-            => Open(mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite), FileShare.None);
+        public FileStream Open(FileMode mode) =>
+            Open(
+                mode,
+                (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+                FileShare.None
+            );
 
-        public FileStream Open(FileMode mode, FileAccess access)
-            => Open(mode, access, FileShare.None);
+        public FileStream Open(FileMode mode, FileAccess access) =>
+            Open(mode, access, FileShare.None);
 
-        public FileStream Open(FileMode mode, FileAccess access, FileShare share)
-            => new FileStream(NormalizedPath, mode, access, share);
+        public FileStream Open(FileMode mode, FileAccess access, FileShare share) =>
+            new FileStream(NormalizedPath, mode, access, share);
 
-        public FileStream OpenRead()
-            => new FileStream(NormalizedPath, FileMode.Open, FileAccess.Read, FileShare.Read, File.DefaultBufferSize, false);
+        public FileStream OpenRead() =>
+            new FileStream(
+                NormalizedPath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read,
+                File.DefaultBufferSize,
+                false
+            );
 
-        public FileStream OpenWrite()
-            => new FileStream(NormalizedPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+        public FileStream OpenWrite() =>
+            new FileStream(NormalizedPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
 
         // Moves a given file to a new location and potentially a new file name.
         // This method does work across volumes.
@@ -164,7 +182,10 @@ namespace System.IO
                 throw new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, FullName));
 
             if (!Exists)
-                throw new FileNotFoundException(SR.Format(SR.IO_FileNotFound_FileName, FullName), FullName);
+                throw new FileNotFoundException(
+                    SR.Format(SR.IO_FileNotFound_FileName, FullName),
+                    FullName
+                );
 
             FileSystem.MoveFile(FullPath, fullDestFileName, overwrite);
 
@@ -176,18 +197,25 @@ namespace System.IO
             Invalidate();
         }
 
-        public FileInfo Replace(string destinationFileName, string? destinationBackupFileName)
-            => Replace(destinationFileName, destinationBackupFileName, ignoreMetadataErrors: false);
+        public FileInfo Replace(string destinationFileName, string? destinationBackupFileName) =>
+            Replace(destinationFileName, destinationBackupFileName, ignoreMetadataErrors: false);
 
-        public FileInfo Replace(string destinationFileName, string? destinationBackupFileName, bool ignoreMetadataErrors)
+        public FileInfo Replace(
+            string destinationFileName,
+            string? destinationBackupFileName,
+            bool ignoreMetadataErrors
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationFileName);
 
             FileSystem.ReplaceFile(
                 FullPath,
                 Path.GetFullPath(destinationFileName),
-                destinationBackupFileName != null ? Path.GetFullPath(destinationBackupFileName) : null,
-                ignoreMetadataErrors);
+                destinationBackupFileName != null
+                    ? Path.GetFullPath(destinationBackupFileName)
+                    : null,
+                ignoreMetadataErrors
+            );
 
             return new FileInfo(destinationFileName);
         }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,140 +27,137 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.Text;
-using System.Configuration;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Text;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class SettingsPropertyValueCollectionTest
+    {
+        [Test]
+        public void Add()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
 
-	[TestFixture]
-	public class SettingsPropertyValueCollectionTest {
+            Assert.AreEqual(0, col.Count, "A1");
 
-		[Test]
-		public void Add ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
+            col.Add(val);
 
-			Assert.AreEqual (0, col.Count, "A1");
+            Assert.AreEqual(1, col.Count, "A2");
+        }
 
-			col.Add (val);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddDuplicate()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
 
-			Assert.AreEqual (1, col.Count, "A2");
-		}
+            col.Add(val);
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void AddDuplicate ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
+            Assert.AreEqual(1, col.Count, "A1");
 
-			col.Add (val);
+            col.Add(val);
 
-			Assert.AreEqual (1, col.Count, "A1");
+            Assert.AreEqual(1, col.Count, "A2");
+        }
 
-			col.Add (val);
+        [Test]
+        public void Remove()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
 
-			Assert.AreEqual (1, col.Count, "A2");
-		}
+            col.Add(val);
 
-		[Test]
-		public void Remove ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
+            Assert.AreEqual(1, col.Count, "A1");
 
-			col.Add (val);
+            col.Remove("test_prop");
 
-			Assert.AreEqual (1, col.Count, "A1");
+            Assert.AreEqual(0, col.Count, "A2");
+        }
 
-			col.Remove ("test_prop");
+        [Test]
+        public void Remove_NonExistant()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
 
-			Assert.AreEqual (0, col.Count, "A2");
-		}
+            col.Add(val);
 
-		[Test]
-		public void Remove_NonExistant ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
+            Assert.AreEqual(1, col.Count, "A1");
 
-			col.Add (val);
+            col.Remove("test_prop2");
 
-			Assert.AreEqual (1, col.Count, "A1");
+            Assert.AreEqual(1, col.Count, "A2");
+        }
 
-			col.Remove ("test_prop2");
+        [Test]
+        public void Clear()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
 
-			Assert.AreEqual (1, col.Count, "A2");
-		}
+            col.Add(val);
 
-		[Test]
-		public void Clear ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
+            Assert.AreEqual(1, col.Count, "A1");
 
-			col.Add (val);
+            col.Clear();
 
-			Assert.AreEqual (1, col.Count, "A1");
+            Assert.AreEqual(0, col.Count, "A2");
+        }
 
-			col.Clear ();
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ReadOnly_Add()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
 
-			Assert.AreEqual (0, col.Count, "A2");
-		}
+            col.SetReadOnly();
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ReadOnly_Add ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
+            col.Add(val);
+        }
 
-			col.SetReadOnly ();
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ReadOnly_Remove()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
 
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
-			col.Add (val);
-		}
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
+            col.Add(val);
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ReadOnly_Remove ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
+            col.SetReadOnly();
 
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
-			col.Add (val);
+            col.Remove("test_prop");
+        }
 
-			col.SetReadOnly ();
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ReadOnly_Clear()
+        {
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
 
-			col.Remove ("test_prop");
-		}
+            SettingsProperty test_prop = new SettingsProperty("test_prop");
+            SettingsPropertyValue val = new SettingsPropertyValue(test_prop);
+            col.Add(val);
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ReadOnly_Clear ()
-		{
-			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
+            col.SetReadOnly();
 
-			SettingsProperty test_prop = new SettingsProperty ("test_prop");
-			SettingsPropertyValue val = new SettingsPropertyValue (test_prop);
-			col.Add (val);
-
-			col.SetReadOnly ();
-
-			col.Clear ();
-		}
-	}
-
+            col.Clear();
+        }
+    }
 }
-

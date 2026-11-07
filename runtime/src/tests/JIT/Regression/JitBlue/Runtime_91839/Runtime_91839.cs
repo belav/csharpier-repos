@@ -34,34 +34,32 @@ public class Runtime_91839
         s_1 = new I0[] { new C0() };
     }
 
-    public interface I0
-    {
-    }
+    public interface I0 { }
 
-    public interface I2
-    {
-    }
+    public interface I2 { }
 
     public struct S0
     {
         public ulong F0;
         public long F2;
         public short F3;
-        public S0(long f2) : this()
+
+        public S0(long f2)
+            : this()
         {
             F2 = f2;
         }
     }
 
-    public class C0 : I0
-    {
-    }
+    public class C0 : I0 { }
 
     public struct S1
     {
         public S0 F4;
         public bool F5;
-        public S1(S0 f4) : this()
+
+        public S1(S0 f4)
+            : this()
         {
             F4 = f4;
         }

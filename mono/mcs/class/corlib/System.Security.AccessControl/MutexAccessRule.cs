@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,31 +27,32 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public sealed class MutexAccessRule : AccessRule
-	{
-		public MutexAccessRule (IdentityReference identity,
-					MutexRights eventRights,
-					AccessControlType type)
-			: base (identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-		{
+    public sealed class MutexAccessRule : AccessRule
+    {
+        public MutexAccessRule(
+            IdentityReference identity,
+            MutexRights eventRights,
+            AccessControlType type
+        )
+            : base(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-		}
+        public MutexAccessRule(string identity, MutexRights eventRights, AccessControlType type)
+            : this(new NTAccount(identity), eventRights, type) { }
 
-		public MutexAccessRule (string identity,
-					MutexRights eventRights,
-					AccessControlType type)
-			: this (new NTAccount (identity), eventRights, type)
-		{
-		}
-		
-		public MutexRights MutexRights {
-			get { return (MutexRights)AccessMask; }
-		}
-	}
+        public MutexRights MutexRights
+        {
+            get { return (MutexRights)AccessMask; }
+        }
+    }
 }
-

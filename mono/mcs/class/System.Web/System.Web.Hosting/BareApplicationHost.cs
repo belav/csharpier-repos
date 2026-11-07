@@ -1,6 +1,6 @@
 //
 // System.Web.Hosting.BareApplicationHost
-// 
+//
 // Author:
 //	Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,113 +27,122 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
-namespace System.Web.Hosting {
-	class RegisteredItem {
-		public IRegisteredObject Item;
-		public bool AutoClean;
-		public RegisteredItem (IRegisteredObject item, bool autoclean)
-		{
-			this.Item = item;
-			this.AutoClean = autoclean;
-		}
-	}
+namespace System.Web.Hosting
+{
+    class RegisteredItem
+    {
+        public IRegisteredObject Item;
+        public bool AutoClean;
 
-	sealed class BareApplicationHost : MarshalByRefObject {
-		string vpath;
-		string phys_path;
-		Dictionary<Type, RegisteredItem> hash;
-		internal ApplicationManager Manager;
-		internal string AppID;
+        public RegisteredItem(IRegisteredObject item, bool autoclean)
+        {
+            this.Item = item;
+            this.AutoClean = autoclean;
+        }
+    }
 
-		public BareApplicationHost ()
-		{
-			Init ();
-		}
+    sealed class BareApplicationHost : MarshalByRefObject
+    {
+        string vpath;
+        string phys_path;
+        Dictionary<Type, RegisteredItem> hash;
+        internal ApplicationManager Manager;
+        internal string AppID;
 
-		void Init ()
-		{
-			hash = new Dictionary<Type, RegisteredItem> ();
-			HostingEnvironment.Host = this;
-			AppDomain current = AppDomain.CurrentDomain;
-			current.DomainUnload += OnDomainUnload;
-			phys_path = (string) current.GetData (".appPath");
-			vpath = (string) current.GetData (".appVPath");
-		}
+        public BareApplicationHost()
+        {
+            Init();
+        }
 
-		public string VirtualPath {
-			get { return vpath; }
-		}
+        void Init()
+        {
+            hash = new Dictionary<Type, RegisteredItem>();
+            HostingEnvironment.Host = this;
+            AppDomain current = AppDomain.CurrentDomain;
+            current.DomainUnload += OnDomainUnload;
+            phys_path = (string)current.GetData(".appPath");
+            vpath = (string)current.GetData(".appVPath");
+        }
 
-		public string PhysicalPath {
-			get { return phys_path; }
-		}
+        public string VirtualPath
+        {
+            get { return vpath; }
+        }
 
-		public AppDomain Domain {
-			get { return AppDomain.CurrentDomain; }
-		}
+        public string PhysicalPath
+        {
+            get { return phys_path; }
+        }
 
-		public void Shutdown ()
-		{
-			HostingEnvironment.InitiateShutdown ();
-		}
+        public AppDomain Domain
+        {
+            get { return AppDomain.CurrentDomain; }
+        }
 
-		public void StopObject (Type type)
-		{
-			if (!hash.ContainsKey (type))
-				return;
+        public void Shutdown()
+        {
+            HostingEnvironment.InitiateShutdown();
+        }
 
-			RegisteredItem reg = hash [type];
-			reg.Item.Stop (false);
-		}
+        public void StopObject(Type type)
+        {
+            if (!hash.ContainsKey(type))
+                return;
 
-		public IRegisteredObject CreateInstance (Type type)
-		{
-			return (IRegisteredObject) Activator.CreateInstance (type, null);
-		}
+            RegisteredItem reg = hash[type];
+            reg.Item.Stop(false);
+        }
 
-		public void RegisterObject (IRegisteredObject obj, bool auto_clean)
-		{
-			hash [obj.GetType ()] = new RegisteredItem (obj, auto_clean);
-		}
+        public IRegisteredObject CreateInstance(Type type)
+        {
+            return (IRegisteredObject)Activator.CreateInstance(type, null);
+        }
 
-		public bool UnregisterObject (IRegisteredObject obj)
-		{
-			return hash.Remove (obj.GetType ());
-		}
+        public void RegisterObject(IRegisteredObject obj, bool auto_clean)
+        {
+            hash[obj.GetType()] = new RegisteredItem(obj, auto_clean);
+        }
 
-		public IRegisteredObject GetObject (Type type)
-		{
-			if (hash.ContainsKey (type))
-				return hash [type].Item;
+        public bool UnregisterObject(IRegisteredObject obj)
+        {
+            return hash.Remove(obj.GetType());
+        }
 
-			return null;
-		}
+        public IRegisteredObject GetObject(Type type)
+        {
+            if (hash.ContainsKey(type))
+                return hash[type].Item;
 
-		public string GetCodeGenDir ()
-		{
-			return AppDomain.CurrentDomain.SetupInformation.DynamicBase;
-		}
+            return null;
+        }
 
-		void OnDomainUnload (object sender, EventArgs args)
-		{
-			Manager.RemoveHost (AppID);
-			ICollection<RegisteredItem> values = hash.Values;
-			RegisteredItem [] objects = new RegisteredItem [hash.Count];
-			values.CopyTo (objects, 0);
+        public string GetCodeGenDir()
+        {
+            return AppDomain.CurrentDomain.SetupInformation.DynamicBase;
+        }
 
-			foreach (RegisteredItem reg in objects) {
-				try {
-					reg.Item.Stop (true); // Stop should call Unregister. It's ok if not.
-				} catch {
-					// Ignore or throw?
-				}
-			}
-			hash.Clear ();
-		}
-	}
+        void OnDomainUnload(object sender, EventArgs args)
+        {
+            Manager.RemoveHost(AppID);
+            ICollection<RegisteredItem> values = hash.Values;
+            RegisteredItem[] objects = new RegisteredItem[hash.Count];
+            values.CopyTo(objects, 0);
+
+            foreach (RegisteredItem reg in objects)
+            {
+                try
+                {
+                    reg.Item.Stop(true); // Stop should call Unregister. It's ok if not.
+                }
+                catch
+                {
+                    // Ignore or throw?
+                }
+            }
+            hash.Clear();
+        }
+    }
 }
-
-

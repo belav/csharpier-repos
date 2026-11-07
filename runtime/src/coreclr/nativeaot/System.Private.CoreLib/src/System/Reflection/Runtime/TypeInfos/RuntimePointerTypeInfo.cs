@@ -15,9 +15,7 @@ namespace System.Reflection.Runtime.TypeInfos
     internal sealed partial class RuntimePointerTypeInfo : RuntimeHasElementTypeInfo
     {
         private RuntimePointerTypeInfo(UnificationKey key)
-            : base(key)
-        {
-        }
+            : base(key) { }
 
         public sealed override bool IsArray => false;
         public sealed override bool IsSZArray => false;
@@ -27,10 +25,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
         protected sealed override string Suffix
         {
-            get
-            {
-                return "*";
-            }
+            get { return "*"; }
         }
     }
 }

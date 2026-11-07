@@ -10,7 +10,8 @@ namespace System.Collections.Immutable
     /// <content>
     /// Contains the inner <see cref="ImmutableSortedDictionary{TKey, TValue}.Builder"/> class.
     /// </content>
-    public sealed partial class ImmutableSortedDictionary<TKey, TValue> where TKey : notnull
+    public sealed partial class ImmutableSortedDictionary<TKey, TValue>
+        where TKey : notnull
     {
         /// <summary>
         /// A sorted dictionary that mutates with little or no memory allocations,
@@ -26,7 +27,10 @@ namespace System.Collections.Immutable
         /// </remarks>
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(typeof(ImmutableSortedDictionaryBuilderDebuggerProxy<,>))]
-        public sealed class Builder : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IDictionary
+        public sealed class Builder
+            : IDictionary<TKey, TValue>,
+                IReadOnlyDictionary<TKey, TValue>,
+                IDictionary
         {
             /// <summary>
             /// The binary tree used to store the contents of the map.  Contents are typically not entirely frozen.
@@ -144,11 +148,7 @@ namespace System.Collections.Immutable
             /// </summary>
             private Node Root
             {
-                get
-                {
-                    return _root;
-                }
-
+                get { return _root; }
                 set
                 {
                     // We *always* increment the version number because some mutations
@@ -183,13 +183,22 @@ namespace System.Collections.Immutable
                         return value;
                     }
 
-                    throw new KeyNotFoundException(SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString()));
+                    throw new KeyNotFoundException(
+                        SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString())
+                    );
                 }
-
                 set
                 {
-                    bool replacedExistingValue, mutated;
-                    this.Root = _root.SetItem(key, value, _keyComparer, _valueComparer, out replacedExistingValue, out mutated);
+                    bool replacedExistingValue,
+                        mutated;
+                    this.Root = _root.SetItem(
+                        key,
+                        value,
+                        _keyComparer,
+                        _valueComparer,
+                        out replacedExistingValue,
+                        out mutated
+                    );
                     if (mutated && !replacedExistingValue)
                     {
                         _count++;
@@ -268,7 +277,11 @@ namespace System.Collections.Immutable
                 {
                     if (_syncRoot == null)
                     {
-                        Threading.Interlocked.CompareExchange<object?>(ref _syncRoot, new object(), null);
+                        Threading.Interlocked.CompareExchange<object?>(
+                            ref _syncRoot,
+                            new object(),
+                            null
+                        );
                     }
 
                     return _syncRoot;
@@ -293,11 +306,7 @@ namespace System.Collections.Immutable
             /// </value>
             public IComparer<TKey> KeyComparer
             {
-                get
-                {
-                    return _keyComparer;
-                }
-
+                get { return _keyComparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
@@ -308,7 +317,13 @@ namespace System.Collections.Immutable
                         foreach (KeyValuePair<TKey, TValue> item in this)
                         {
                             bool mutated;
-                            newRoot = newRoot.Add(item.Key, item.Value, value, _valueComparer, out mutated);
+                            newRoot = newRoot.Add(
+                                item.Key,
+                                item.Value,
+                                value,
+                                _valueComparer,
+                                out mutated
+                            );
                             if (mutated)
                             {
                                 count++;
@@ -330,11 +345,7 @@ namespace System.Collections.Immutable
             /// </value>
             public IEqualityComparer<TValue> ValueComparer
             {
-                get
-                {
-                    return _valueComparer;
-                }
-
+                get { return _valueComparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
@@ -505,7 +516,10 @@ namespace System.Collections.Immutable
             /// <summary>
             /// See <see cref="IDictionary{TKey, TValue}"/>
             /// </summary>
-            void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+            void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+                KeyValuePair<TKey, TValue>[] array,
+                int arrayIndex
+            )
             {
                 this.Root.CopyTo(array, arrayIndex, this.Count);
             }
@@ -534,7 +548,9 @@ namespace System.Collections.Immutable
             /// <summary>
             /// See <see cref="IDictionary{TKey, TValue}"/>
             /// </summary>
-            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+                KeyValuePair<TKey, TValue>
+            >.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
@@ -645,10 +661,12 @@ namespace System.Collections.Immutable
             #endregion
         }
     }
+
     /// <summary>
     /// A simple view of the immutable collection that the debugger can show to the developer.
     /// </summary>
-    internal sealed class ImmutableSortedDictionaryBuilderDebuggerProxy<TKey, TValue> where TKey : notnull
+    internal sealed class ImmutableSortedDictionaryBuilderDebuggerProxy<TKey, TValue>
+        where TKey : notnull
     {
         /// <summary>
         /// The collection to be enumerated.
@@ -664,7 +682,9 @@ namespace System.Collections.Immutable
         /// Initializes a new instance of the <see cref="ImmutableSortedDictionaryBuilderDebuggerProxy{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="map">The collection to display in the debugger</param>
-        public ImmutableSortedDictionaryBuilderDebuggerProxy(ImmutableSortedDictionary<TKey, TValue>.Builder map)
+        public ImmutableSortedDictionaryBuilderDebuggerProxy(
+            ImmutableSortedDictionary<TKey, TValue>.Builder map
+        )
         {
             Requires.NotNull(map, nameof(map));
             _map = map;

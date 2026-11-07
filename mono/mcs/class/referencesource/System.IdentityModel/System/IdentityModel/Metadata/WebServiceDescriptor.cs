@@ -23,9 +23,7 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        protected WebServiceDescriptor()
-        {
-        }
+        protected WebServiceDescriptor() { }
 
         /// <summary>
         /// Gets a collection of <see cref="DisplayClaim"/> representing the claim types offered.

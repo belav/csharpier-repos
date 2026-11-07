@@ -20,7 +20,12 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             private readonly int _controlMaxWidth;
             private readonly IWpfTableControl[] _wpfTableControls;
 
-            public SearchHandler(IThreadingContext threadingContext, int controlMinWidth, int controlMaxWidth, IWpfTableControl[] wpfTableControls)
+            public SearchHandler(
+                IThreadingContext threadingContext,
+                int controlMinWidth,
+                int controlMaxWidth,
+                IWpfTableControl[] wpfTableControls
+            )
             {
                 _threadingContext = threadingContext;
                 _controlMinWidth = controlMinWidth;
@@ -28,8 +33,18 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 _wpfTableControls = wpfTableControls;
             }
 
-            public IVsSearchTask? CreateSearch(uint dwCookie, IVsSearchQuery pSearchQuery, IVsSearchCallback pSearchCallback)
-                => new SearchTask(dwCookie, pSearchQuery, pSearchCallback, _wpfTableControls, _threadingContext);
+            public IVsSearchTask? CreateSearch(
+                uint dwCookie,
+                IVsSearchQuery pSearchQuery,
+                IVsSearchCallback pSearchCallback
+            ) =>
+                new SearchTask(
+                    dwCookie,
+                    pSearchQuery,
+                    pSearchCallback,
+                    _wpfTableControls,
+                    _threadingContext
+                );
 
             public void ClearSearch()
             {

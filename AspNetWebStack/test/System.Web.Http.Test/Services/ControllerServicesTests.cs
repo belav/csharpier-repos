@@ -20,9 +20,11 @@ namespace System.Web.Http.Services
             ControllerServices cs = new ControllerServices(config.Services);
 
             // Act
-            IActionValueBinder localVal = (IActionValueBinder) cs.GetService(typeof(IActionValueBinder));
-            IActionValueBinder globalVal = (IActionValueBinder) config.Services.GetService(typeof(IActionValueBinder));
-            
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
+
             // Assert
             // Local controller didn't override, should get same value as global case.
             Assert.Same(localVal, globalVal);
@@ -33,13 +35,15 @@ namespace System.Web.Http.Services
         {
             HttpConfiguration config = new HttpConfiguration();
             ControllerServices cs = new ControllerServices(config.Services);
-                        
+
             IActionValueBinder newLocalService = new Mock<IActionValueBinder>().Object;
             cs.Replace(typeof(IActionValueBinder), newLocalService);
 
-            // Act            
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(typeof(IActionValueBinder));
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(typeof(IActionValueBinder));
+            // Act
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -50,25 +54,29 @@ namespace System.Web.Http.Services
         [Fact]
         public void Controller_Overrides_DependencyInjection()
         {
-            // Setting on Controller config overrides the DI container. 
+            // Setting on Controller config overrides the DI container.
             HttpConfiguration config = new HttpConfiguration();
 
             IActionValueBinder newDIService = new Mock<IActionValueBinder>().Object;
             var mockDependencyResolver = new Mock<IDependencyResolver>();
-            mockDependencyResolver.Setup(dr => dr.GetService(typeof(IActionValueBinder))).Returns(newDIService);
+            mockDependencyResolver
+                .Setup(dr => dr.GetService(typeof(IActionValueBinder)))
+                .Returns(newDIService);
             config.DependencyResolver = mockDependencyResolver.Object;
-            
+
             ControllerServices cs = new ControllerServices(config.Services);
 
             IActionValueBinder newLocalService = new Mock<IActionValueBinder>().Object;
             cs.Replace(typeof(IActionValueBinder), newLocalService);
 
-            // Act            
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(typeof(IActionValueBinder));
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(typeof(IActionValueBinder));
+            // Act
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             // Assert
-            // Local controller didn't override, should get same value as global case.            
+            // Local controller didn't override, should get same value as global case.
             Assert.Same(newDIService, globalVal); // asking the config will give back the DI service
             Assert.Same(newLocalService, localVal); // but asking locally will get back the local service.
         }
@@ -76,8 +84,8 @@ namespace System.Web.Http.Services
         [Fact]
         public void Controller_Appends_Inherited_List()
         {
-            // Controller Services has "copy on write" semantics for inherited list. 
-            // It can get the inherited list and mutate it. 
+            // Controller Services has "copy on write" semantics for inherited list.
+            // It can get the inherited list and mutate it.
 
             HttpConfiguration config = new HttpConfiguration();
             ServicesContainer global = config.Services;
@@ -112,8 +120,10 @@ namespace System.Web.Http.Services
             cs.Clear(typeof(IActionValueBinder));
 
             // Assert
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(typeof(IActionValueBinder));
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(typeof(IActionValueBinder));
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             Assert.Same(globalVal, localVal);
         }
@@ -127,12 +137,13 @@ namespace System.Web.Http.Services
             ControllerServices cs = new ControllerServices(config.Services);
 
             // Act
-            // Setting to null is not the same as clear. Clear() means fall through to global config. 
+            // Setting to null is not the same as clear. Clear() means fall through to global config.
             cs.Replace(typeof(IActionValueBinder), null);
 
             // Assert
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(typeof(IActionValueBinder));
-            
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+
             Assert.Null(localVal);
         }
     }

@@ -4,9 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    public enum AuthorizationRuleAction {
+namespace System.Web.Configuration
+{
+    public enum AuthorizationRuleAction
+    {
         Deny = 0,
         Allow = 1,
     }

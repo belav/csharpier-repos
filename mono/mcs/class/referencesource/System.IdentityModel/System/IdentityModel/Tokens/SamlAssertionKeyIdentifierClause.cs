@@ -16,16 +16,25 @@ namespace System.IdentityModel.Tokens
         readonly string authorityKind;
 
         public SamlAssertionKeyIdentifierClause(string assertionId)
-            : this(assertionId, null, 0)
-        {
-        }
+            : this(assertionId, null, 0) { }
 
-        public SamlAssertionKeyIdentifierClause(string assertionId, byte[] derivationNonce, int derivationLength)
-            : this(assertionId, derivationNonce, derivationLength, null, null, null, null, null)
-        {
-        }
+        public SamlAssertionKeyIdentifierClause(
+            string assertionId,
+            byte[] derivationNonce,
+            int derivationLength
+        )
+            : this(assertionId, derivationNonce, derivationLength, null, null, null, null, null) { }
 
-        internal SamlAssertionKeyIdentifierClause(string assertionId, byte[] derivationNonce, int derivationLength, string valueType, string tokenTypeUri, string binding, string location, string authorityKind)
+        internal SamlAssertionKeyIdentifierClause(
+            string assertionId,
+            byte[] derivationNonce,
+            int derivationLength,
+            string valueType,
+            string tokenTypeUri,
+            string binding,
+            string location,
+            string authorityKind
+        )
             : base(null, derivationNonce, derivationLength)
         {
             if (assertionId == null)
@@ -72,10 +81,11 @@ namespace System.IdentityModel.Tokens
 
         public override bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
         {
-            SamlAssertionKeyIdentifierClause that = keyIdentifierClause as SamlAssertionKeyIdentifierClause;
+            SamlAssertionKeyIdentifierClause that =
+                keyIdentifierClause as SamlAssertionKeyIdentifierClause;
 
             // PreSharp Bug: Parameter 'that' to this public method must be validated: A null-dereference can occur here.
-            #pragma warning suppress 56506
+#pragma warning suppress 56506
             return ReferenceEquals(this, that) || (that != null && that.Matches(this.assertionId));
         }
 
@@ -86,7 +96,11 @@ namespace System.IdentityModel.Tokens
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "SamlAssertionKeyIdentifierClause(AssertionId = '{0}')", this.AssertionId);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "SamlAssertionKeyIdentifierClause(AssertionId = '{0}')",
+                this.AssertionId
+            );
         }
     }
 }

@@ -9,7 +9,13 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.UnusedReferences
 {
     [DataContract]
-    internal class ReferenceInfo(ReferenceType referenceType, string itemSpecification, bool treatAsUsed, ImmutableArray<string> compilationAssemblies, ImmutableArray<ReferenceInfo> dependencies)
+    internal class ReferenceInfo(
+        ReferenceType referenceType,
+        string itemSpecification,
+        bool treatAsUsed,
+        ImmutableArray<string> compilationAssemblies,
+        ImmutableArray<ReferenceInfo> dependencies
+    )
     {
         /// <summary>
         /// Indicates the type of reference.
@@ -44,10 +50,16 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         [DataMember(Order = 4)]
         public ImmutableArray<ReferenceInfo> Dependencies { get; } = dependencies;
 
-        public ReferenceInfo WithItemSpecification(string itemSpecification)
-            => new(ReferenceType, itemSpecification, TreatAsUsed, CompilationAssemblies, Dependencies);
+        public ReferenceInfo WithItemSpecification(string itemSpecification) =>
+            new(ReferenceType, itemSpecification, TreatAsUsed, CompilationAssemblies, Dependencies);
 
-        public ReferenceInfo WithDependencies(IEnumerable<ReferenceInfo>? dependencies)
-            => new(ReferenceType, ItemSpecification, TreatAsUsed, CompilationAssemblies, dependencies.AsImmutableOrEmpty());
+        public ReferenceInfo WithDependencies(IEnumerable<ReferenceInfo>? dependencies) =>
+            new(
+                ReferenceType,
+                ItemSpecification,
+                TreatAsUsed,
+                CompilationAssemblies,
+                dependencies.AsImmutableOrEmpty()
+            );
     }
 }

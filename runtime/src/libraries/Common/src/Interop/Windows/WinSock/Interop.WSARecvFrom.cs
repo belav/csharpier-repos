@@ -21,7 +21,8 @@ internal static partial class Interop
             IntPtr socketAddressPointer,
             IntPtr socketAddressSizePointer,
             NativeOverlapped* overlapped,
-            IntPtr completionRoutine);
+            IntPtr completionRoutine
+        );
 
         internal static unsafe SocketError WSARecvFrom(
             SafeHandle socketHandle,
@@ -32,13 +33,24 @@ internal static partial class Interop
             IntPtr socketAddressPointer,
             IntPtr socketAddressSizePointer,
             NativeOverlapped* overlapped,
-            IntPtr completionRoutine)
+            IntPtr completionRoutine
+        )
         {
             // We intentionally do NOT copy this back after the function completes:
             // We don't want to cause a race in async scenarios.
             // The WSABuffer struct should be unchanged anyway.
             WSABuffer localBuffer = buffer;
-            return WSARecvFrom(socketHandle, &localBuffer, bufferCount, out bytesTransferred, ref socketFlags, socketAddressPointer, socketAddressSizePointer, overlapped, completionRoutine);
+            return WSARecvFrom(
+                socketHandle,
+                &localBuffer,
+                bufferCount,
+                out bytesTransferred,
+                ref socketFlags,
+                socketAddressPointer,
+                socketAddressSizePointer,
+                overlapped,
+                completionRoutine
+            );
         }
 
         internal static unsafe SocketError WSARecvFrom(
@@ -50,12 +62,23 @@ internal static partial class Interop
             IntPtr socketAddressPointer,
             IntPtr socketAddressSizePointer,
             NativeOverlapped* overlapped,
-            IntPtr completionRoutine)
+            IntPtr completionRoutine
+        )
         {
             Debug.Assert(buffers != null && buffers.Length > 0);
             fixed (WSABuffer* buffersPtr = &buffers[0])
             {
-                return WSARecvFrom(socketHandle, buffersPtr, bufferCount, out bytesTransferred, ref socketFlags, socketAddressPointer, socketAddressSizePointer, overlapped, completionRoutine);
+                return WSARecvFrom(
+                    socketHandle,
+                    buffersPtr,
+                    bufferCount,
+                    out bytesTransferred,
+                    ref socketFlags,
+                    socketAddressPointer,
+                    socketAddressSizePointer,
+                    overlapped,
+                    completionRoutine
+                );
             }
         }
     }

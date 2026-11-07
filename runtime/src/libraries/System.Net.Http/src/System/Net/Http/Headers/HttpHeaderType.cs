@@ -14,6 +14,6 @@ namespace System.Net.Http.Headers
         NonTrailing = 0b100000,
 
         All = 0b111111,
-        None = 0
+        None = 0,
     }
 }

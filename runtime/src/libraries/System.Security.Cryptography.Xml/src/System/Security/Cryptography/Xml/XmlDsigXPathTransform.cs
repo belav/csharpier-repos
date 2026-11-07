@@ -11,7 +11,12 @@ namespace System.Security.Cryptography.Xml
 
     public class XmlDsigXPathTransform : Transform
     {
-        private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlNodeList), typeof(XmlDocument) };
+        private readonly Type[] _inputTypes =
+        {
+            typeof(Stream),
+            typeof(XmlNodeList),
+            typeof(XmlDocument),
+        };
         private readonly Type[] _outputTypes = { typeof(XmlNodeList) };
         private string? _xpathexpr;
         private XmlDocument? _document;
@@ -86,7 +91,11 @@ namespace System.Security.Cryptography.Xml
         protected override XmlNodeList? GetInnerXml()
         {
             XmlDocument document = new XmlDocument();
-            XmlElement element = document.CreateElement(null, "XPath", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement element = document.CreateElement(
+                null,
+                "XPath",
+                SignedXml.XmlDsigNamespaceUrl
+            );
 
             if (_nsm != null)
             {
@@ -104,7 +113,10 @@ namespace System.Security.Cryptography.Xml
                         default:
                             // Ignore the default namespace
                             if (prefix != null && prefix.Length > 0)
-                                element.SetAttribute("xmlns:" + prefix, _nsm.LookupNamespace(prefix));
+                                element.SetAttribute(
+                                    "xmlns:" + prefix,
+                                    _nsm.LookupNamespace(prefix)
+                                );
                             break;
                     }
                 }
@@ -133,7 +145,9 @@ namespace System.Security.Cryptography.Xml
 
         private void LoadStreamInput(Stream stream)
         {
-            XmlResolver resolver = (ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver());
+            XmlResolver resolver = (
+                ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver()
+            );
             XmlReader valReader = Utils.PreProcessStreamInput(stream, resolver, BaseURI!);
             _document = new XmlDocument();
             _document.PreserveWhitespace = true;
@@ -143,7 +157,9 @@ namespace System.Security.Cryptography.Xml
         private void LoadXmlNodeListInput(XmlNodeList nodeList)
         {
             // Use C14N to get a document
-            XmlResolver resolver = (ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver());
+            XmlResolver resolver = (
+                ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver()
+            );
             CanonicalXml c14n = new CanonicalXml((XmlNodeList)nodeList, resolver, true);
             using (MemoryStream ms = new MemoryStream(c14n.GetBytes()))
             {
@@ -191,7 +207,10 @@ namespace System.Security.Cryptography.Xml
         public override object GetOutput(Type type)
         {
             if (type != typeof(XmlNodeList) && !type.IsSubclassOf(typeof(XmlNodeList)))
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
             return (XmlNodeList)GetOutput();
         }
     }

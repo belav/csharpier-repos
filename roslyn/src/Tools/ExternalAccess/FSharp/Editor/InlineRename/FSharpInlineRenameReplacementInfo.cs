@@ -32,9 +32,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// <summary>
         /// Returns all the replacements that need to be performed for the specified document.
         /// </summary>
-        public abstract IEnumerable<FSharpInlineRenameReplacement> GetReplacements(DocumentId documentId);
+        public abstract IEnumerable<FSharpInlineRenameReplacement> GetReplacements(
+            DocumentId documentId
+        );
 
-        IEnumerable<InlineRenameReplacement> IInlineRenameReplacementInfo.GetReplacements(DocumentId documentId)
-            => GetReplacements(documentId).Select(r => new InlineRenameReplacement(FSharpInlineRenameReplacementKindHelpers.ConvertTo(r.Kind), r.OriginalSpan, r.NewSpan));
+        IEnumerable<InlineRenameReplacement> IInlineRenameReplacementInfo.GetReplacements(
+            DocumentId documentId
+        ) =>
+            GetReplacements(documentId)
+                .Select(r => new InlineRenameReplacement(
+                    FSharpInlineRenameReplacementKindHelpers.ConvertTo(r.Kind),
+                    r.OriginalSpan,
+                    r.NewSpan
+                ));
     }
 }

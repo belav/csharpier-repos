@@ -33,7 +33,12 @@ namespace System.Security.Cryptography.X509Certificates
 
             SafeLocalAllocHandle cngBlobHandle;
             uint cngBlobLength;
-            bool result = CapiNative.DecodeObject(structType, asn.RawData, out cngBlobHandle, out cngBlobLength);
+            bool result = CapiNative.DecodeObject(
+                structType,
+                asn.RawData,
+                out cngBlobHandle,
+                out cngBlobLength
+            );
 
             if (!result)
             {
@@ -66,8 +71,16 @@ namespace System.Security.Cryptography.X509Certificates
                 return null;
             }
 
-            using (SafeCertContextHandle certificateContext = X509Native.GetCertificateContext(certificate))
-            using (SafeNCryptKeyHandle privateKeyHandle = X509Native.TryAcquireCngPrivateKey(certificateContext))
+            using (
+                SafeCertContextHandle certificateContext = X509Native.GetCertificateContext(
+                    certificate
+                )
+            )
+            using (
+                SafeNCryptKeyHandle privateKeyHandle = X509Native.TryAcquireCngPrivateKey(
+                    certificateContext
+                )
+            )
             {
                 if (privateKeyHandle == null)
                 {
@@ -75,8 +88,11 @@ namespace System.Security.Cryptography.X509Certificates
                         return (RSA)certificate.PrivateKey;
 
                     // fall back to CAPI if we cannot acquire the key using CNG.
-                    RSACryptoServiceProvider rsaCsp = (RSACryptoServiceProvider)certificate.PrivateKey;
-                    CspParameters cspParameters = DSACertificateExtensions.CopyCspParameters(rsaCsp);
+                    RSACryptoServiceProvider rsaCsp = (RSACryptoServiceProvider)
+                        certificate.PrivateKey;
+                    CspParameters cspParameters = DSACertificateExtensions.CopyCspParameters(
+                        rsaCsp
+                    );
                     RSACryptoServiceProvider clone = new RSACryptoServiceProvider(cspParameters);
                     return clone;
                 }
@@ -104,9 +120,13 @@ namespace System.Security.Cryptography.X509Certificates
         {
             using (SafeLocalAllocHandle oidHandle = X509Utils.StringToAnsiPtr(oid.Value))
             {
-                CapiNative.CRYPT_OID_INFO oidInfo = CapiNative.CryptFindOIDInfo(CapiNative.CRYPT_OID_INFO_OID_KEY, oidHandle, 0);
+                CapiNative.CRYPT_OID_INFO oidInfo = CapiNative.CryptFindOIDInfo(
+                    CapiNative.CRYPT_OID_INFO_OID_KEY,
+                    oidHandle,
+                    0
+                );
                 return oidInfo.Algid;
             }
-        }     
+        }
     }
 }

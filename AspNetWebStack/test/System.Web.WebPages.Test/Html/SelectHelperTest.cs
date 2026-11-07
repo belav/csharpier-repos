@@ -18,7 +18,10 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act and assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => helper.DropDownList(name: null, selectList: null), "name");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => helper.DropDownList(name: null, selectList: null),
+                "name"
+            );
         }
 
         [Fact]
@@ -32,12 +35,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -51,13 +59,19 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"\">select-one</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">select-one</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -67,16 +81,25 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.DropDownList("foo", GetSelectList(), new { attr = "attr-val", attr2 = "attr-val2" });
+            var html = helper.DropDownList(
+                "foo",
+                GetSelectList(),
+                new { attr = "attr-val", attr2 = "attr-val2" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" attr2=\"attr-val2\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" attr2=\"attr-val2\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -86,16 +109,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.DropDownList("foo", null, GetSelectList(), "B", new Dictionary<string, object> { { "attr", "attr-val" } });
+            var html = helper.DropDownList(
+                "foo",
+                null,
+                GetSelectList(),
+                "B",
+                new Dictionary<string, object> { { "attr", "attr-val" } }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -111,12 +145,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -128,16 +167,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create(modelState);
 
             // Act
-            var html = helper.DropDownList("foo", null, GetSelectList(), "B", new { attr = "attr-val" });
+            var html = helper.DropDownList(
+                "foo",
+                null,
+                GetSelectList(),
+                "B",
+                new { attr = "attr-val" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -153,12 +203,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -168,16 +223,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.DropDownList("foo", null, GetSelectList(), new List<int>(), new { attr = "attr-val" });
+            var html = helper.DropDownList(
+                "foo",
+                null,
+                GetSelectList(),
+                new List<int>(),
+                new { attr = "attr-val" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -193,12 +259,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select class=\"input-validation-error\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"input-validation-error\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -214,12 +285,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -235,12 +311,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -250,17 +331,28 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.DropDownList("foo", "Select One", GetSelectList(), new { @class = "my-class" });
+            var html = helper.DropDownList(
+                "foo",
+                "Select One",
+                GetSelectList(),
+                new { @class = "my-class" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select class=\"my-class\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"\">Select One</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"my-class\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">Select One</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -274,13 +366,19 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo_bar\" name=\"foo.bar\">" + Environment.NewLine
-              + "<option value=\"\">Select One</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo_bar\" name=\"foo.bar\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">Select One</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -289,35 +387,55 @@ namespace System.Web.WebPages.Test
             // Arrange
             const string fieldName = "name";
             var modelStateDictionary = new ModelStateDictionary();
-            var validationHelper = new ValidationHelper(new Mock<HttpContextBase>().Object, modelStateDictionary);
+            var validationHelper = new ValidationHelper(
+                new Mock<HttpContextBase>().Object,
+                modelStateDictionary
+            );
             HtmlHelper helper = HtmlHelperFactory.Create(modelStateDictionary, validationHelper);
 
             // Act
             validationHelper.RequireField(fieldName, "Please specify a valid Name.");
-            validationHelper.Add(fieldName, Validator.StringLength(30, errorMessage: "Name cannot exceed {0} characters"));
-            var html = helper.DropDownList(fieldName, GetSelectList(), htmlAttributes: new Dictionary<string, object> { { "data-some-val", "5" } });
+            validationHelper.Add(
+                fieldName,
+                Validator.StringLength(30, errorMessage: "Name cannot exceed {0} characters")
+            );
+            var html = helper.DropDownList(
+                fieldName,
+                GetSelectList(),
+                htmlAttributes: new Dictionary<string, object> { { "data-some-val", "5" } }
+            );
 
             // Assert
             Assert.Equal(
-                "<select data-some-val=\"5\" data-val=\"true\" data-val-length=\"Name cannot exceed 30 characters\" data-val-length-max=\"30\" data-val-required=\"Please specify a valid Name.\" id=\"name\" name=\"name\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToString());
+                "<select data-some-val=\"5\" data-val=\"true\" data-val-length=\"Name cannot exceed 30 characters\" data-val-length-max=\"30\" data-val-required=\"Please specify a valid Name.\" id=\"name\" name=\"name\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToString()
+            );
         }
 
         [Fact]
         public void DropDownWithAttributesFromAnonymousObject_WithUnderscoreInName_TransformsUnderscoresToDashs()
         {
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.DropDownList("foo", GetSelectList(), attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) => helper.DropDownList("foo", GetSelectList(), attributes)
+            );
 
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.DropDownList("foo", "val", GetSelectList(), attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) =>
+                    helper.DropDownList("foo", "val", GetSelectList(), attributes)
+            );
 
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.DropDownList("foo", "val", GetSelectList(), "val", attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) =>
+                    helper.DropDownList("foo", "val", GetSelectList(), "val", attributes)
+            );
         }
 
         // ListBox
@@ -329,7 +447,10 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act and assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => helper.ListBox(name: null, selectList: null), "name");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => helper.ListBox(name: null, selectList: null),
+                "name"
+            );
         }
 
         [Fact]
@@ -343,12 +464,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -362,13 +488,19 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"\">select-one</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">select-one</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -378,16 +510,25 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.ListBox("foo", GetSelectList(), new { attr = "attr-val", attr2 = "attr-val2" });
+            var html = helper.ListBox(
+                "foo",
+                GetSelectList(),
+                new { attr = "attr-val", attr2 = "attr-val2" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" attr2=\"attr-val2\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" attr2=\"attr-val2\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -397,16 +538,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.ListBox("foo", null, GetSelectList(), "B", new Dictionary<string, object> { { "attr", "attr-val" } });
+            var html = helper.ListBox(
+                "foo",
+                null,
+                GetSelectList(),
+                "B",
+                new Dictionary<string, object> { { "attr", "attr-val" } }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -422,12 +574,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -437,16 +594,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.ListBox("foo", null, GetSelectList(), new[] { "B", "C" }, new Dictionary<string, object> { { "attr", "attr-val" } });
+            var html = helper.ListBox(
+                "foo",
+                null,
+                GetSelectList(),
+                new[] { "B", "C" },
+                new Dictionary<string, object> { { "attr", "attr-val" } }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -460,12 +628,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -481,12 +654,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -504,12 +682,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -525,12 +708,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -544,12 +732,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -565,12 +758,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo\" multiple=\"multiple\" name=\"foo\" size=\"4\">"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -582,17 +780,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create(modelState);
 
             // Act
-            var html = helper.ListBox("foo", defaultOption: null, selectList: GetSelectList(),
-                                      selectedValues: "B", htmlAttributes: new { attr = "attr-val" });
+            var html = helper.ListBox(
+                "foo",
+                defaultOption: null,
+                selectList: GetSelectList(),
+                selectedValues: "B",
+                htmlAttributes: new { attr = "attr-val" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option selected=\"selected\" value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option selected=\"selected\" value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -609,13 +817,19 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo_bar\" name=\"foo.bar\">" + Environment.NewLine
-              + "<option value=\"\">Select One</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo_bar\" name=\"foo.bar\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">Select One</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -631,12 +845,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -646,16 +865,27 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.ListBox("foo", null, GetSelectList(), new List<int>(), new { attr = "attr-val" });
+            var html = helper.ListBox(
+                "foo",
+                null,
+                GetSelectList(),
+                new List<int>(),
+                new { attr = "attr-val" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select attr=\"attr-val\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -671,12 +901,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select class=\"input-validation-error\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"input-validation-error\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -692,12 +927,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -713,12 +953,17 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"input-validation-error my-class\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -728,17 +973,28 @@ namespace System.Web.WebPages.Test
             HtmlHelper helper = HtmlHelperFactory.Create();
 
             // Act
-            var html = helper.ListBox("foo", "Select One", GetSelectList(), new { @class = "my-class" });
+            var html = helper.ListBox(
+                "foo",
+                "Select One",
+                GetSelectList(),
+                new { @class = "my-class" }
+            );
 
             // Assert
             Assert.Equal(
-                "<select class=\"my-class\" id=\"foo\" name=\"foo\">" + Environment.NewLine
-              + "<option value=\"\">Select One</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select class=\"my-class\" id=\"foo\" name=\"foo\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">Select One</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -752,13 +1008,19 @@ namespace System.Web.WebPages.Test
 
             // Assert
             Assert.Equal(
-                "<select id=\"foo_bar\" name=\"foo.bar\">" + Environment.NewLine
-              + "<option value=\"\">Select One</option>" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToHtmlString());
+                "<select id=\"foo_bar\" name=\"foo.bar\">"
+                    + Environment.NewLine
+                    + "<option value=\"\">Select One</option>"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -767,35 +1029,55 @@ namespace System.Web.WebPages.Test
             // Arrange
             const string fieldName = "name";
             var modelStateDictionary = new ModelStateDictionary();
-            var validationHelper = new ValidationHelper(new Mock<HttpContextBase>().Object, modelStateDictionary);
+            var validationHelper = new ValidationHelper(
+                new Mock<HttpContextBase>().Object,
+                modelStateDictionary
+            );
             HtmlHelper helper = HtmlHelperFactory.Create(modelStateDictionary, validationHelper);
 
             // Act
             validationHelper.RequireField(fieldName, "Please specify a valid Name.");
-            validationHelper.Add(fieldName, Validator.StringLength(30, errorMessage: "Name cannot exceed {0} characters"));
-            var html = helper.ListBox(fieldName, GetSelectList(), htmlAttributes: new Dictionary<string, object> { { "data-some-val", "5" } });
+            validationHelper.Add(
+                fieldName,
+                Validator.StringLength(30, errorMessage: "Name cannot exceed {0} characters")
+            );
+            var html = helper.ListBox(
+                fieldName,
+                GetSelectList(),
+                htmlAttributes: new Dictionary<string, object> { { "data-some-val", "5" } }
+            );
 
             // Assert
             Assert.Equal(
-                "<select data-some-val=\"5\" data-val=\"true\" data-val-length=\"Name cannot exceed 30 characters\" data-val-length-max=\"30\" data-val-required=\"Please specify a valid Name.\" id=\"name\" name=\"name\">" + Environment.NewLine
-              + "<option value=\"A\">Alpha</option>" + Environment.NewLine
-              + "<option value=\"B\">Bravo</option>" + Environment.NewLine
-              + "<option value=\"C\">Charlie</option>" + Environment.NewLine
-              + "</select>",
-                html.ToString());
+                "<select data-some-val=\"5\" data-val=\"true\" data-val-length=\"Name cannot exceed 30 characters\" data-val-length-max=\"30\" data-val-required=\"Please specify a valid Name.\" id=\"name\" name=\"name\">"
+                    + Environment.NewLine
+                    + "<option value=\"A\">Alpha</option>"
+                    + Environment.NewLine
+                    + "<option value=\"B\">Bravo</option>"
+                    + Environment.NewLine
+                    + "<option value=\"C\">Charlie</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html.ToString()
+            );
         }
 
         [Fact]
         public void ListBoxWithAttributesFromAnonymousObject_WithUnderscoreInName_TransformsUnderscoresToDashs()
         {
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.ListBox("foo", GetSelectList(), attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) => helper.ListBox("foo", GetSelectList(), attributes)
+            );
 
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.ListBox("foo", "val", GetSelectList(), "val", attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) =>
+                    helper.ListBox("foo", "val", GetSelectList(), "val", attributes)
+            );
 
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.ListBox("foo", "val", GetSelectList(), "val", attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) =>
+                    helper.ListBox("foo", "val", GetSelectList(), "val", attributes)
+            );
         }
 
         private static IEnumerable<SelectListItem> GetSelectList()

@@ -12,7 +12,10 @@ namespace System.Reflection.Internal
     internal static class EnumerableExtensions
     {
         // used only in debugger display so we needn't get fancy with optimizations.
-        public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        public static IEnumerable<TResult> Select<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             foreach (var item in source)
             {

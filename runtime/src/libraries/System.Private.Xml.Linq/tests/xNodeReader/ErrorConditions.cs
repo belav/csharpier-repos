@@ -764,7 +764,11 @@ namespace CoreXml.Test.XLinq
                         using (XmlReader r = n.CreateReader())
                         {
                             r.Read();
-                            TestLog.Compare(r.ReadToDescendant(null, null), false, "Incorrect value returned");
+                            TestLog.Compare(
+                                r.ReadToDescendant(null, null),
+                                false,
+                                "Incorrect value returned"
+                            );
                         }
                     }
                 }
@@ -777,7 +781,11 @@ namespace CoreXml.Test.XLinq
                         using (XmlReader r = n.CreateReader())
                         {
                             r.Read();
-                            TestLog.Compare(r.ReadToDescendant("", ""), false, "Incorrect value returned");
+                            TestLog.Compare(
+                                r.ReadToDescendant("", ""),
+                                false,
+                                "Incorrect value returned"
+                            );
                         }
                     }
                 }
@@ -790,7 +798,11 @@ namespace CoreXml.Test.XLinq
                         using (XmlReader r = n.CreateReader())
                         {
                             r.Read();
-                            TestLog.Compare(r.ReadToFollowing(null, null), false, "Incorrect value returned");
+                            TestLog.Compare(
+                                r.ReadToFollowing(null, null),
+                                false,
+                                "Incorrect value returned"
+                            );
                         }
                     }
                 }
@@ -803,7 +815,11 @@ namespace CoreXml.Test.XLinq
                         using (XmlReader r = n.CreateReader())
                         {
                             r.Read();
-                            TestLog.Compare(r.ReadToFollowing("", ""), false, "Incorrect value returned");
+                            TestLog.Compare(
+                                r.ReadToFollowing("", ""),
+                                false,
+                                "Incorrect value returned"
+                            );
                         }
                     }
                 }
@@ -816,7 +832,11 @@ namespace CoreXml.Test.XLinq
                         using (XmlReader r = n.CreateReader())
                         {
                             r.Read();
-                            TestLog.Compare(r.ReadToNextSibling(null, null), false, "Incorrect value returned");
+                            TestLog.Compare(
+                                r.ReadToNextSibling(null, null),
+                                false,
+                                "Incorrect value returned"
+                            );
                         }
                     }
                 }
@@ -829,7 +849,11 @@ namespace CoreXml.Test.XLinq
                         using (XmlReader r = n.CreateReader())
                         {
                             r.Read();
-                            TestLog.Compare(r.ReadToNextSibling("", ""), false, "Incorrect value returned");
+                            TestLog.Compare(
+                                r.ReadToNextSibling("", ""),
+                                false,
+                                "Incorrect value returned"
+                            );
                         }
                     }
                 }
@@ -867,7 +891,8 @@ namespace CoreXml.Test.XLinq
                     {
                         using (XmlReader r = n.CreateReader())
                         {
-                            while (r.Read()) ;
+                            while (r.Read())
+                                ;
                             try
                             {
                                 r.ReadElementContentAsObject();
@@ -893,7 +918,8 @@ namespace CoreXml.Test.XLinq
                     {
                         using (XmlReader r = n.CreateReader())
                         {
-                            while (r.Read()) ;
+                            while (r.Read())
+                                ;
                             try
                             {
                                 r.ReadElementContentAsString();
@@ -917,13 +943,20 @@ namespace CoreXml.Test.XLinq
                 {
                     List<XNode> xNode = new List<XNode>();
 
-                    xNode.Add(new XDocument(new XDocumentType("root", "", "", "<!ELEMENT root ANY>"), new XElement("root")));
+                    xNode.Add(
+                        new XDocument(
+                            new XDocumentType("root", "", "", "<!ELEMENT root ANY>"),
+                            new XElement("root")
+                        )
+                    );
                     xNode.Add(new XElement("elem1"));
                     xNode.Add(new XText("text1"));
                     xNode.Add(new XComment("comment1"));
                     xNode.Add(new XProcessingInstruction("pi1", "pi1pi1pi1pi1pi1"));
                     xNode.Add(new XCData("cdata cdata"));
-                    xNode.Add(new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1"));
+                    xNode.Add(
+                        new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1")
+                    );
                     return xNode;
                 }
             }

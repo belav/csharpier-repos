@@ -12,8 +12,6 @@ using System.Xml;
 
 namespace System.Runtime.Serialization
 {
-
-
     public static class XPathQueryGenerator
     {
         private const string XPathSeparator = "/";
@@ -21,7 +19,11 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public static string CreateFromDataContractSerializer(Type type, MemberInfo[] pathToMember, out XmlNamespaceManager namespaces)
+        public static string CreateFromDataContractSerializer(
+            Type type,
+            MemberInfo[] pathToMember,
+            out XmlNamespaceManager namespaces
+        )
         {
             return CreateFromDataContractSerializer(type, pathToMember, null, out namespaces);
         }
@@ -29,7 +31,12 @@ namespace System.Runtime.Serialization
         // Here you can provide your own root element Xpath which will replace the Xpath of the top level element
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public static string CreateFromDataContractSerializer(Type type, MemberInfo[] pathToMember, StringBuilder? rootElementXpath, out XmlNamespaceManager namespaces)
+        public static string CreateFromDataContractSerializer(
+            Type type,
+            MemberInfo[] pathToMember,
+            StringBuilder? rootElementXpath,
+            out XmlNamespaceManager namespaces
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(pathToMember);
@@ -47,9 +54,17 @@ namespace System.Runtime.Serialization
                 context = new ExportContext(rootElementXpath);
             }
 
-            for (int pathToMemberIndex = 0; pathToMemberIndex < pathToMember.Length; pathToMemberIndex++)
+            for (
+                int pathToMemberIndex = 0;
+                pathToMemberIndex < pathToMember.Length;
+                pathToMemberIndex++
+            )
             {
-                currentContract = ProcessDataContract(currentContract, context, pathToMember[pathToMemberIndex]);
+                currentContract = ProcessDataContract(
+                    currentContract,
+                    context,
+                    pathToMember[pathToMemberIndex]
+                );
             }
 
             namespaces = context.Namespaces;
@@ -58,29 +73,44 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        private static DataContract ProcessDataContract(DataContract contract, ExportContext context, MemberInfo memberNode)
+        private static DataContract ProcessDataContract(
+            DataContract contract,
+            ExportContext context,
+            MemberInfo memberNode
+        )
         {
             if (contract is ClassDataContract)
             {
                 return ProcessClassDataContract((ClassDataContract)contract, context, memberNode);
             }
-            throw XmlObjectSerializer.CreateSerializationException(SR.QueryGeneratorPathToMemberNotFound);
+            throw XmlObjectSerializer.CreateSerializationException(
+                SR.QueryGeneratorPathToMemberNotFound
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        private static DataContract ProcessClassDataContract(ClassDataContract contract, ExportContext context, MemberInfo memberNode)
+        private static DataContract ProcessClassDataContract(
+            ClassDataContract contract,
+            ExportContext context,
+            MemberInfo memberNode
+        )
         {
             string prefix = context.SetNamespace(contract.Namespace!.Value);
             foreach (DataMember member in GetDataMembers(contract))
             {
-                if (member.MemberInfo.Name == memberNode.Name && member.MemberInfo.DeclaringType!.IsAssignableFrom(memberNode.DeclaringType))
+                if (
+                    member.MemberInfo.Name == memberNode.Name
+                    && member.MemberInfo.DeclaringType!.IsAssignableFrom(memberNode.DeclaringType)
+                )
                 {
                     context.WriteChildToContext(member, prefix);
                     return member.MemberTypeContract;
                 }
             }
-            throw XmlObjectSerializer.CreateSerializationException(SR.QueryGeneratorPathToMemberNotFound);
+            throw XmlObjectSerializer.CreateSerializationException(
+                SR.QueryGeneratorPathToMemberNotFound
+            );
         }
 
         private static IEnumerable<DataMember> GetDataMembers(ClassDataContract contract)
@@ -111,7 +141,12 @@ namespace System.Runtime.Serialization
             {
                 _namespaces = new XmlNamespaceManager(new NameTable());
                 string prefix = SetNamespace(rootContract.TopLevelElementNamespace!.Value);
-                _xPathBuilder = new StringBuilder(XPathQueryGenerator.XPathSeparator + prefix + XPathQueryGenerator.NsSeparator + rootContract.TopLevelElementName!.Value);
+                _xPathBuilder = new StringBuilder(
+                    XPathQueryGenerator.XPathSeparator
+                        + prefix
+                        + XPathQueryGenerator.NsSeparator
+                        + rootContract.TopLevelElementName!.Value
+                );
             }
 
             public ExportContext(StringBuilder rootContractXPath)
@@ -122,23 +157,22 @@ namespace System.Runtime.Serialization
 
             public void WriteChildToContext(DataMember contextMember, string prefix)
             {
-                _xPathBuilder.Append(XPathQueryGenerator.XPathSeparator + prefix + XPathQueryGenerator.NsSeparator + contextMember.Name);
+                _xPathBuilder.Append(
+                    XPathQueryGenerator.XPathSeparator
+                        + prefix
+                        + XPathQueryGenerator.NsSeparator
+                        + contextMember.Name
+                );
             }
 
             public XmlNamespaceManager Namespaces
             {
-                get
-                {
-                    return _namespaces;
-                }
+                get { return _namespaces; }
             }
 
             public string XPath
             {
-                get
-                {
-                    return _xPathBuilder.ToString();
-                }
+                get { return _xPathBuilder.ToString(); }
             }
 
             public string SetNamespace(string ns)

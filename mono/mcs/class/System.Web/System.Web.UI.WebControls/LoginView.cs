@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using System.ComponentModel;
 using System.Security.Permissions;
@@ -36,227 +35,247 @@ using System.Web.Security;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEvent ("ViewChanged")]
-	[DefaultProperty ("CurrentView")]
-	[Designer ("System.Web.UI.Design.WebControls.LoginViewDesigner," + Consts.AssemblySystem_Design)]
-	[ParseChildren (true)]
-	[PersistChildren (false)]
-	[Themeable (true)]
-	[Bindable (true)]
-	public class LoginView : Control, INamingContainer 
-	{
-		static readonly object viewChangedEvent = new object ();
-		static readonly object viewChangingEvent = new object ();
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEvent("ViewChanged")]
+    [DefaultProperty("CurrentView")]
+    [Designer("System.Web.UI.Design.WebControls.LoginViewDesigner," + Consts.AssemblySystem_Design)]
+    [ParseChildren(true)]
+    [PersistChildren(false)]
+    [Themeable(true)]
+    [Bindable(true)]
+    public class LoginView : Control, INamingContainer
+    {
+        static readonly object viewChangedEvent = new object();
+        static readonly object viewChangingEvent = new object();
 
-		ITemplate anonymousTemplate;
-		ITemplate loggedInTemplate;
-		bool isAuthenticated;
-		bool theming;
-		RoleGroupCollection coll;
+        ITemplate anonymousTemplate;
+        ITemplate loggedInTemplate;
+        bool isAuthenticated;
+        bool theming;
+        RoleGroupCollection coll;
 
-		public LoginView ()
-		{
-			theming = true;
-		}
+        public LoginView()
+        {
+            theming = true;
+        }
 
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateContainer(typeof(LoginView))]
+        public virtual ITemplate AnonymousTemplate
+        {
+            get { return anonymousTemplate; }
+            set { anonymousTemplate = value; }
+        }
 
-		[Browsable (false)]
-		[DefaultValue (null)]
-		[PersistenceMode (PersistenceMode.InnerProperty)]
-		[TemplateContainer (typeof (LoginView))]
-		public virtual ITemplate AnonymousTemplate {
-			get { return anonymousTemplate; }
-			set { anonymousTemplate = value; }
-		}
+        public override ControlCollection Controls
+        {
+            get
+            {
+                EnsureChildControls();
+                return base.Controls;
+            }
+        }
 
-		public override ControlCollection Controls {
-			get {
-				EnsureChildControls();
-				return base.Controls;
-			}
-		}
+        [Browsable(true)]
+        public override bool EnableTheming
+        {
+            get { return theming; }
+            set { theming = value; }
+        }
 
-		[Browsable (true)]
-		public override bool EnableTheming {
-			get { return theming; }
-			set { theming = value; }
-		}
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateContainer(typeof(LoginView))]
+        public virtual ITemplate LoggedInTemplate
+        {
+            get { return loggedInTemplate; }
+            set { loggedInTemplate = value; }
+        }
 
-		[Browsable (false)]
-		[DefaultValue (null)]
-		[PersistenceMode (PersistenceMode.InnerProperty)]
-		[TemplateContainer (typeof (LoginView))]
-		public virtual ITemplate LoggedInTemplate {
-			get { return loggedInTemplate; }
-			set { loggedInTemplate = value; }
-		}
+        [Filterable(false)]
+        [MergableProperty(false)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [Themeable(false)]
+        public RoleGroupCollection RoleGroups
+        {
+            get
+            {
+                if (coll == null)
+                    coll = new RoleGroupCollection();
+                return coll;
+            }
+        }
 
-		[Filterable (false)]
-		[MergableProperty (false)]
-		[PersistenceMode (PersistenceMode.InnerProperty)]
-		[Themeable (false)]
-		public RoleGroupCollection RoleGroups {
-			get {
-				if (coll == null)
-					coll = new RoleGroupCollection ();
-				return coll;
-			}
-		}
+        [Browsable(true)]
+        public override string SkinID
+        {
+            get { return base.SkinID; }
+            set { base.SkinID = value; }
+        }
 
-		[Browsable (true)]
-		public override string SkinID {
-			get { return base.SkinID; }
-			set { base.SkinID = value; }
-		}
+        bool IsAuthenticated
+        {
+            get { return isAuthenticated; }
+            set
+            {
+                if (value == isAuthenticated)
+                    return;
 
-		bool IsAuthenticated {
-			get {
-				return isAuthenticated;
-			}
-			set {
-				if (value == isAuthenticated)
-					return;
-				
-				isAuthenticated = value;
+                isAuthenticated = value;
 
-				OnViewChanging (EventArgs.Empty);
-				ChildControlsCreated = false;
-				OnViewChanged (EventArgs.Empty);
-			}
-		}
+                OnViewChanging(EventArgs.Empty);
+                ChildControlsCreated = false;
+                OnViewChanged(EventArgs.Empty);
+            }
+        }
 
-		ITemplate GetTemplateFromRoleGroup (RoleGroup rg, IPrincipal user)
-		{
-			if (user == null)
-				return null;
-			
-			foreach (string role in rg.Roles) {
-				if (user.IsInRole (role))
-					return rg.ContentTemplate;
-			}
-			
-			return null;
-		}
-		
-		protected internal override void CreateChildControls ()
-		{
-			Controls.Clear ();
-			Control c = new Control ();
-			ITemplate template = null;
-			
-			if (Page != null && Page.Request.IsAuthenticated) {
-				isAuthenticated = true;
+        ITemplate GetTemplateFromRoleGroup(RoleGroup rg, IPrincipal user)
+        {
+            if (user == null)
+                return null;
 
-				RoleGroupCollection rgc;
-				HttpContext ctx = HttpContext.Current;
-				IPrincipal user = ctx != null ? ctx.User : null;
+            foreach (string role in rg.Roles)
+            {
+                if (user.IsInRole(role))
+                    return rg.ContentTemplate;
+            }
 
-				if (Roles.Enabled && (rgc = RoleGroups) != null && rgc.Count > 0) {
-					foreach (RoleGroup rg in rgc) {
-						template = GetTemplateFromRoleGroup (rg, user);
-						if (template != null)
-							break;
-					}
-				}
+            return null;
+        }
 
-				if (template == null)
-					template = LoggedInTemplate;
-			} else {
-				isAuthenticated = false;
-				template = AnonymousTemplate;
-			}
+        protected internal override void CreateChildControls()
+        {
+            Controls.Clear();
+            Control c = new Control();
+            ITemplate template = null;
 
-			if (template != null)
-				template.InstantiateIn (c);
-			Controls.Add (c);
-		}
+            if (Page != null && Page.Request.IsAuthenticated)
+            {
+                isAuthenticated = true;
 
-		public override void DataBind ()
-		{
-			EventArgs args = EventArgs.Empty;
-			OnDataBinding (args);
-			EnsureChildControls ();
-			DataBindChildren ();
-		}
+                RoleGroupCollection rgc;
+                HttpContext ctx = HttpContext.Current;
+                IPrincipal user = ctx != null ? ctx.User : null;
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override void Focus ()
-		{
-			// LAMESPEC: throw new InvalidOperationException ();
-			throw new NotSupportedException ();
-		}
+                if (Roles.Enabled && (rgc = RoleGroups) != null && rgc.Count > 0)
+                {
+                    foreach (RoleGroup rg in rgc)
+                    {
+                        template = GetTemplateFromRoleGroup(rg, user);
+                        if (template != null)
+                            break;
+                    }
+                }
 
-		protected internal override void LoadControlState (object savedState)
-		{
-			if (savedState == null)
-				return;
+                if (template == null)
+                    template = LoggedInTemplate;
+            }
+            else
+            {
+                isAuthenticated = false;
+                template = AnonymousTemplate;
+            }
 
-			isAuthenticated = (bool) savedState;
-		}
+            if (template != null)
+                template.InstantiateIn(c);
+            Controls.Add(c);
+        }
 
-		protected internal override void OnInit (EventArgs e)
-		{
-			base.OnInit (e);
-			if (Page != null)
-				Page.RegisterRequiresControlState(this);
-		}
+        public override void DataBind()
+        {
+            EventArgs args = EventArgs.Empty;
+            OnDataBinding(args);
+            EnsureChildControls();
+            DataBindChildren();
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
-			if (Page != null)
-				IsAuthenticated = Page.Request.IsAuthenticated;
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void Focus()
+        {
+            // LAMESPEC: throw new InvalidOperationException ();
+            throw new NotSupportedException();
+        }
 
-		protected virtual void OnViewChanged (EventArgs e)
-		{
-			EventHandler h = (EventHandler)Events [viewChangedEvent];
-			if (h != null)
-				h (this, e);
-		}
+        protected internal override void LoadControlState(object savedState)
+        {
+            if (savedState == null)
+                return;
 
-		protected virtual void OnViewChanging (EventArgs e)
-		{
-			EventHandler h = (EventHandler)Events [viewChangingEvent];
-			if (h != null)
-				h (this, e);
-		}
+            isAuthenticated = (bool)savedState;
+        }
 
-		protected internal override void Render(HtmlTextWriter writer) {
-			EnsureChildControls();
-			base.Render (writer);
-		}
+        protected internal override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            if (Page != null)
+                Page.RegisterRequiresControlState(this);
+        }
 
-		protected internal override object SaveControlState ()
-		{
-			if (isAuthenticated)
-				return isAuthenticated;
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            if (Page != null)
+                IsAuthenticated = Page.Request.IsAuthenticated;
+        }
 
-			return null;
-		}
+        protected virtual void OnViewChanged(EventArgs e)
+        {
+            EventHandler h = (EventHandler)Events[viewChangedEvent];
+            if (h != null)
+                h(this, e);
+        }
 
-		[MonoTODO ("for design-time usage - no more details available")]
-		protected override void SetDesignModeState (IDictionary data)
-		{
-			base.SetDesignModeState (data);
-		}
+        protected virtual void OnViewChanging(EventArgs e)
+        {
+            EventHandler h = (EventHandler)Events[viewChangingEvent];
+            if (h != null)
+                h(this, e);
+        }
 
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            EnsureChildControls();
+            base.Render(writer);
+        }
 
-		// events
+        protected internal override object SaveControlState()
+        {
+            if (isAuthenticated)
+                return isAuthenticated;
 
-		public event EventHandler ViewChanged {
-			add { Events.AddHandler (viewChangedEvent, value); }
-			remove { Events.RemoveHandler (viewChangedEvent, value); }
-		}
+            return null;
+        }
 
-		public event EventHandler ViewChanging {
-			add { Events.AddHandler (viewChangingEvent, value); }
-			remove { Events.RemoveHandler (viewChangingEvent, value); }
-		}
-	}
+        [MonoTODO("for design-time usage - no more details available")]
+        protected override void SetDesignModeState(IDictionary data)
+        {
+            base.SetDesignModeState(data);
+        }
+
+        // events
+
+        public event EventHandler ViewChanged
+        {
+            add { Events.AddHandler(viewChangedEvent, value); }
+            remove { Events.RemoveHandler(viewChangedEvent, value); }
+        }
+
+        public event EventHandler ViewChanging
+        {
+            add { Events.AddHandler(viewChangingEvent, value); }
+            remove { Events.RemoveHandler(viewChangingEvent, value); }
+        }
+    }
 }
-

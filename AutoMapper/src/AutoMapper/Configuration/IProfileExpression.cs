@@ -26,7 +26,9 @@ public interface IProfileExpression
     /// <typeparam name="TDestination">Destination type</typeparam>
     /// <param name="memberList">Member list to validate</param>
     /// <returns>Mapping expression for more configuration options</returns>
-    IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>(MemberList memberList);
+    IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>(
+        MemberList memberList
+    );
 
     /// <summary>
     /// Creates a projection configuration from the <typeparamref name="TSource"/> type to the <typeparamref name="TDestination"/> type
@@ -44,7 +46,9 @@ public interface IProfileExpression
     /// <typeparam name="TDestination">Destination type</typeparam>
     /// <param name="memberList">Member list to validate</param>
     /// <returns>Mapping expression for more configuration options</returns>
-    IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>(MemberList memberList);
+    IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>(
+        MemberList memberList
+    );
 
     /// <summary>
     /// Create a mapping configuration from the source type to the destination type.
@@ -131,7 +135,7 @@ public interface IProfileExpression
     Func<FieldInfo, bool> ShouldMapField { get; set; }
     Func<MethodInfo, bool> ShouldMapMethod { get; set; }
     Func<ConstructorInfo, bool> ShouldUseConstructor { get; set; }
-    
+
     string ProfileName { get; }
 
     /// <summary>
@@ -145,6 +149,7 @@ public interface IProfileExpression
     /// </summary>
     List<ValueTransformerConfiguration> ValueTransformers { get; }
 }
+
 /// <summary>
 /// Member list to check for configuration validation
 /// </summary>
@@ -163,5 +168,5 @@ public enum MemberList
     /// <summary>
     /// Check neither source nor destination members, skipping validation
     /// </summary>
-    None = 2
+    None = 2,
 }

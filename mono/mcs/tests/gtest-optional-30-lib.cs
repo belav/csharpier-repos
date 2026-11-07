@@ -2,8 +2,8 @@
 
 public static class Lib
 {
-	public static T Foo<T> (T x = default (T))
-	{
-		return x;
-	}
+    public static T Foo<T>(T x = default(T))
+    {
+        return x;
+    }
 }

@@ -10,23 +10,24 @@ using Xunit;
 
 namespace Test_sealedCastVariance_cs
 {
-public static class Repro
-{
-    private static bool CheckType(Action<string> a)
+    public static class Repro
     {
-        return a.GetType() == typeof(Action<object>);
-    }
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        Action<string> a = (Action<object>)Console.WriteLine;
-        if (CheckType(a))
+        private static bool CheckType(Action<string> a)
         {
-            Console.WriteLine("pass");
-            return 100;
+            return a.GetType() == typeof(Action<object>);
         }
-        Console.WriteLine("FAIL");
-        return 101;
+
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            Action<string> a = (Action<object>)Console.WriteLine;
+            if (CheckType(a))
+            {
+                Console.WriteLine("pass");
+                return 100;
+            }
+            Console.WriteLine("FAIL");
+            return 101;
+        }
     }
-}
 }

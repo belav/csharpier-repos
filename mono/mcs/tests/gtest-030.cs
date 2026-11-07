@@ -3,33 +3,29 @@
 
 class Foo<T>
 {
-	public Foo ()
-	{ }
+    public Foo() { }
 
-	public void Hello (T t)
-	{ }
+    public void Hello(T t) { }
 }
 
-class Bar<T,U> : Foo<U>
+class Bar<T, U> : Foo<U>
 {
-	public Bar ()
-	{ }
+    public Bar() { }
 
-	public void Test (T t, U u)
-	{ }
+    public void Test(T t, U u) { }
 }
 
 class X
 {
-	static void Test (Bar<int,string> bar)
-	{
-		bar.Hello ("Test");
-		bar.Test (7, "Hello");
-	}
+    static void Test(Bar<int, string> bar)
+    {
+        bar.Hello("Test");
+        bar.Test(7, "Hello");
+    }
 
-	public static void Main ()
-	{
-		Bar<int,string> bar = new Bar<int,string> ();
-		Test (bar);
-	}
+    public static void Main()
+    {
+        Bar<int, string> bar = new Bar<int, string>();
+        Test(bar);
+    }
 }

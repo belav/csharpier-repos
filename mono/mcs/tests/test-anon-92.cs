@@ -1,25 +1,27 @@
 using System;
 using System.Collections;
 
-delegate void D ();
+delegate void D();
 
 class MainClass
 {
-	static void Test (IEnumerable a)
-	{
-		D d = delegate () {
-			foreach (object o in a) {
-				if (o == null)
-					return;
-			}
-		};
-		
-		d ();
-	}
-	
-    public static int Main ()
+    static void Test(IEnumerable a)
     {
-		Test (new string [] { "l", null});
-		return 0;
+        D d = delegate()
+        {
+            foreach (object o in a)
+            {
+                if (o == null)
+                    return;
+            }
+        };
+
+        d();
+    }
+
+    public static int Main()
+    {
+        Test(new string[] { "l", null });
+        return 0;
     }
 }

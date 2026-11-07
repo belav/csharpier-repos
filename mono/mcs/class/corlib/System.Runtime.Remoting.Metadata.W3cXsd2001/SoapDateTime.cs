@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,54 +34,54 @@
 using System;
 using System.Globalization;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapDateTime
-	{
-		static readonly string[] _datetimeFormats = new string[] {
-		  "yyyy-MM-ddTHH:mm:ss",
-		  "yyyy-MM-ddTHH:mm:ss.f",
-		  "yyyy-MM-ddTHH:mm:ss.ff",
-		  "yyyy-MM-ddTHH:mm:ss.fff",
-		  "yyyy-MM-ddTHH:mm:ss.ffff",
-		  "yyyy-MM-ddTHH:mm:ss.fffff",
-		  "yyyy-MM-ddTHH:mm:ss.ffffff",
-		  "yyyy-MM-ddTHH:mm:ss.fffffff",
-		  "yyyy-MM-ddTHH:mm:sszzz",
-		  "yyyy-MM-ddTHH:mm:ss.fzzz",
-		  "yyyy-MM-ddTHH:mm:ss.ffzzz",
-		  "yyyy-MM-ddTHH:mm:ss.fffzzz",
-		  "yyyy-MM-ddTHH:mm:ss.ffffzzz",
-		  "yyyy-MM-ddTHH:mm:ss.fffffzzz",
-		  "yyyy-MM-ddTHH:mm:ss.ffffffzzz",
-		  "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
-		  "yyyy-MM-ddTHH:mm:ssZ",
-		  "yyyy-MM-ddTHH:mm:ss.fZ",
-		  "yyyy-MM-ddTHH:mm:ss.ffZ",
-		  "yyyy-MM-ddTHH:mm:ss.fffZ",
-		  "yyyy-MM-ddTHH:mm:ss.ffffZ",
-		  "yyyy-MM-ddTHH:mm:ss.fffffZ",
-		  "yyyy-MM-ddTHH:mm:ss.ffffffZ",
-		  "yyyy-MM-ddTHH:mm:ss.fffffffZ"
-		};
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SoapDateTime
+    {
+        static readonly string[] _datetimeFormats = new string[]
+        {
+            "yyyy-MM-ddTHH:mm:ss",
+            "yyyy-MM-ddTHH:mm:ss.f",
+            "yyyy-MM-ddTHH:mm:ss.ff",
+            "yyyy-MM-ddTHH:mm:ss.fff",
+            "yyyy-MM-ddTHH:mm:ss.ffff",
+            "yyyy-MM-ddTHH:mm:ss.fffff",
+            "yyyy-MM-ddTHH:mm:ss.ffffff",
+            "yyyy-MM-ddTHH:mm:ss.fffffff",
+            "yyyy-MM-ddTHH:mm:sszzz",
+            "yyyy-MM-ddTHH:mm:ss.fzzz",
+            "yyyy-MM-ddTHH:mm:ss.ffzzz",
+            "yyyy-MM-ddTHH:mm:ss.fffzzz",
+            "yyyy-MM-ddTHH:mm:ss.ffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.fffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.ffffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
+            "yyyy-MM-ddTHH:mm:ssZ",
+            "yyyy-MM-ddTHH:mm:ss.fZ",
+            "yyyy-MM-ddTHH:mm:ss.ffZ",
+            "yyyy-MM-ddTHH:mm:ss.fffZ",
+            "yyyy-MM-ddTHH:mm:ss.ffffZ",
+            "yyyy-MM-ddTHH:mm:ss.fffffZ",
+            "yyyy-MM-ddTHH:mm:ss.ffffffZ",
+            "yyyy-MM-ddTHH:mm:ss.fffffffZ",
+        };
 
-		public SoapDateTime()
-		{
-		}
-		
-		public static string XsdType {
-			get { return "dateTime"; }
-		}
+        public SoapDateTime() { }
 
-		public static DateTime Parse (string value)
-		{
-			return DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
-		}
+        public static string XsdType
+        {
+            get { return "dateTime"; }
+        }
 
-		public static string ToString(DateTime value)
-		{
-			return value.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz", CultureInfo.InvariantCulture);
-		}
-	}
+        public static DateTime Parse(string value)
+        {
+            return DateTime.ParseExact(value, _datetimeFormats, null, DateTimeStyles.None);
+        }
+
+        public static string ToString(DateTime value)
+        {
+            return value.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz", CultureInfo.InvariantCulture);
+        }
+    }
 }

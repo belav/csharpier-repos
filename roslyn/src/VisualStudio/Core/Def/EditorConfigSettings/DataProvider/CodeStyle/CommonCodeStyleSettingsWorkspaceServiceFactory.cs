@@ -11,7 +11,10 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeStyle
 {
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<CodeStyleSetting>)), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<CodeStyleSetting>)),
+        Shared
+    ]
     internal sealed class CommonCodeStyleSettingsWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         private readonly IGlobalOptionService _globalOptions;
@@ -23,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             _globalOptions = globalOptions;
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new CommonCodeStyleSettingsProviderFactory(workspaceServices.Workspace, _globalOptions);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new CommonCodeStyleSettingsProviderFactory(workspaceServices.Workspace, _globalOptions);
     }
 }

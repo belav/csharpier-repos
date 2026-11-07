@@ -39,7 +39,8 @@ public sealed class DbContextPoolConfigurationSnapshot
         EventHandler<DetectChangesEventArgs>? detectingAllChanges,
         EventHandler<DetectedChangesEventArgs>? detectedAllChanges,
         EventHandler<DetectEntityChangesEventArgs>? detectingEntityChanges,
-        EventHandler<DetectedEntityChangesEventArgs>? detectedEntityChanges)
+        EventHandler<DetectedEntityChangesEventArgs>? detectedEntityChanges
+    )
     {
         HasDatabaseConfiguration = hasDatabaseConfiguration;
         HasStateManagerConfiguration = hasStateManagerConfiguration;

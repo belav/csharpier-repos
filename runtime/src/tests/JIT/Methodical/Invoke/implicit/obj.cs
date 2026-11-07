@@ -8,12 +8,18 @@ namespace JitTest_obj_implicit_cs
 {
     public class Base
     {
-        public override String ToString() { return "Base class"; }
+        public override String ToString()
+        {
+            return "Base class";
+        }
     }
 
     public class Test : Base
     {
-        public override String ToString() { return "Test class"; }
+        public override String ToString()
+        {
+            return "Test class";
+        }
 
         private static void TestFunc(Base obj)
         {

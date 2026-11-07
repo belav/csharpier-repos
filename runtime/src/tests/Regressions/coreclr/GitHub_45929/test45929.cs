@@ -38,7 +38,9 @@ namespace test45929
                 methodInfo = GetMethod("ExceptionDispatchInfoCaptureThrow");
                 if (methodInfo is null)
                 {
-                    throw new InvalidOperationException("The methodInfo object is missing or empty.");
+                    throw new InvalidOperationException(
+                        "The methodInfo object is missing or empty."
+                    );
                 }
             }
 
@@ -51,36 +53,42 @@ namespace test45929
                 bool done = false;
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
-                Console.WriteLine($"{DateTime.Now} : {progress * 100D / MaxCount:000.0}% : {stopwatch.ElapsedMilliseconds}");
+                Console.WriteLine(
+                    $"{DateTime.Now} : {progress * 100D / MaxCount:000.0}% : {stopwatch.ElapsedMilliseconds}"
+                );
 
                 Action<int> makeProgress = i =>
+                {
+                    if (done)
+                        return;
+                    long newProgress = Interlocked.Increment(ref progress);
+                    if (newProgress % increment == 0)
                     {
-                        if (done) return;
-                        long newProgress = Interlocked.Increment(ref progress);
-                        if (newProgress % increment == 0)
-                        {
-                            int newIncrement = (increment * 3) / 2;
-                            if (newIncrement > 10000)
-                                newIncrement = 10000;
-                            increment = newIncrement;
+                        int newIncrement = (increment * 3) / 2;
+                        if (newIncrement > 10000)
+                            newIncrement = 10000;
+                        increment = newIncrement;
 
-                            Console.WriteLine($"{DateTime.Now} : {newProgress * 100D / MaxCount:000.0}% : {stopwatch.ElapsedMilliseconds}");
-                            if (stopwatch.ElapsedMilliseconds > 150000)
-                            {
-                                Console.WriteLine($"Attempting to finish early");
-                                done = true;
-                            }
+                        Console.WriteLine(
+                            $"{DateTime.Now} : {newProgress * 100D / MaxCount:000.0}% : {stopwatch.ElapsedMilliseconds}"
+                        );
+                        if (stopwatch.ElapsedMilliseconds > 150000)
+                        {
+                            Console.WriteLine($"Attempting to finish early");
+                            done = true;
                         }
-                        test.Invoke();
-                    };
-                
+                    }
+                    test.Invoke();
+                };
+
                 makeProgress(0);
 
                 Parallel.For(
                     1,
                     MaxCount,
                     new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount },
-                    makeProgress);
+                    makeProgress
+                );
             }
 
             public void Invoke()
@@ -97,7 +105,11 @@ namespace test45929
 
             static MethodInfo GetMethod(string methodName)
             {
-                foreach (MethodInfo method in typeof(TestCore).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                foreach (
+                    MethodInfo method in typeof(TestCore).GetMethods(
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                    )
+                )
                 {
                     if (methodName == method.Name)
                     {

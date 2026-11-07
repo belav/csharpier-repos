@@ -65,7 +65,11 @@ namespace System.Text.Json
             AssertJsonEqualCore(expected, actual, new());
         }
 
-        private static void AssertJsonEqualCore(JsonElement expected, JsonElement actual, Stack<object> path)
+        private static void AssertJsonEqualCore(
+            JsonElement expected,
+            JsonElement actual,
+            Stack<object> path
+        )
         {
             JsonValueKind valueKind = expected.ValueKind;
             AssertTrue(passCondition: valueKind == actual.ValueKind);
@@ -87,18 +91,28 @@ namespace System.Text.Json
 
                     foreach (var property in expectedProperties.Except(actualProperties))
                     {
-                        AssertTrue(passCondition: false, $"Property \"{property}\" missing from actual object.");
+                        AssertTrue(
+                            passCondition: false,
+                            $"Property \"{property}\" missing from actual object."
+                        );
                     }
 
                     foreach (var property in actualProperties.Except(expectedProperties))
                     {
-                        AssertTrue(passCondition: false, $"Actual object defines additional property \"{property}\".");
+                        AssertTrue(
+                            passCondition: false,
+                            $"Actual object defines additional property \"{property}\"."
+                        );
                     }
 
                     foreach (string name in expectedProperties)
                     {
                         path.Push(name);
-                        AssertJsonEqualCore(expected.GetProperty(name), actual.GetProperty(name), path);
+                        AssertJsonEqualCore(
+                            expected.GetProperty(name),
+                            actual.GetProperty(name),
+                            path
+                        );
                         path.Pop();
                     }
                     break;
@@ -109,13 +123,23 @@ namespace System.Text.Json
                     int i = 0;
                     while (expectedEnumerator.MoveNext())
                     {
-                        AssertTrue(passCondition: actualEnumerator.MoveNext(), "Actual array contains fewer elements.");
+                        AssertTrue(
+                            passCondition: actualEnumerator.MoveNext(),
+                            "Actual array contains fewer elements."
+                        );
                         path.Push(i++);
-                        AssertJsonEqualCore(expectedEnumerator.Current, actualEnumerator.Current, path);
+                        AssertJsonEqualCore(
+                            expectedEnumerator.Current,
+                            actualEnumerator.Current,
+                            path
+                        );
                         path.Pop();
                     }
 
-                    AssertTrue(passCondition: !actualEnumerator.MoveNext(), "Actual array contains additional elements.");
+                    AssertTrue(
+                        passCondition: !actualEnumerator.MoveNext(),
+                        "Actual array contains additional elements."
+                    );
                     break;
                 case JsonValueKind.String:
                     AssertTrue(passCondition: expected.GetString() == actual.GetString());
@@ -136,7 +160,9 @@ namespace System.Text.Json
                 if (!passCondition)
                 {
                     message ??= "Expected JSON does not match actual value";
-                    Assert.Fail($"{message}\nExpected JSON: {expected}\n  Actual JSON: {actual}\n  in JsonPath: {BuildJsonPath(path)}");
+                    Assert.Fail(
+                        $"{message}\nExpected JSON: {expected}\n  Actual JSON: {actual}\n  in JsonPath: {BuildJsonPath(path)}"
+                    );
                 }
 
                 // TODO replace with JsonPath implementation for JsonElement
@@ -157,9 +183,16 @@ namespace System.Text.Json
             }
         }
 
-        public static void AssertOptionsEqual(JsonSerializerOptions expected, JsonSerializerOptions actual)
+        public static void AssertOptionsEqual(
+            JsonSerializerOptions expected,
+            JsonSerializerOptions actual
+        )
         {
-            foreach (PropertyInfo property in typeof(JsonSerializerOptions).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (
+                PropertyInfo property in typeof(JsonSerializerOptions).GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance
+                )
+            )
             {
                 Type propertyType = property.PropertyType;
 
@@ -193,7 +226,10 @@ namespace System.Text.Json
         /// <summary>
         /// Linq Cartesian product
         /// </summary>
-        public static IEnumerable<(TFirst First, TSecond Second)> CrossJoin<TFirst, TSecond>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second)
+        public static IEnumerable<(TFirst First, TSecond Second)> CrossJoin<TFirst, TSecond>(
+            this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second
+        )
         {
             TSecond[]? secondCached = null;
             foreach (TFirst f in first)
@@ -209,10 +245,11 @@ namespace System.Text.Json
         /// <summary>
         /// Linq Cartesian product
         /// </summary>
-        public static IEnumerable<(TFirst First, TSecond Second, TThird Third)> CrossJoin<TFirst, TSecond, TThird>(
-            this IEnumerable<TFirst> first,
-            IEnumerable<TSecond> second,
-            IEnumerable<TThird> third)
+        public static IEnumerable<(TFirst First, TSecond Second, TThird Third)> CrossJoin<
+            TFirst,
+            TSecond,
+            TThird
+        >(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, IEnumerable<TThird> third)
         {
             TSecond[]? secondCached = null;
             TThird[]? thirdCached = null;
@@ -234,8 +271,11 @@ namespace System.Text.Json
         /// <summary>
         /// Linq Cartesian product
         /// </summary>
-        public static IEnumerable<TResult> CrossJoin<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
-            => first.CrossJoin(second).Select(tuple => resultSelector(tuple.First, tuple.Second));
+        public static IEnumerable<TResult> CrossJoin<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector
+        ) => first.CrossJoin(second).Select(tuple => resultSelector(tuple.First, tuple.Second));
 
         /// <summary>
         /// Linq Cartesian product
@@ -244,8 +284,11 @@ namespace System.Text.Json
             this IEnumerable<TFirst> first,
             IEnumerable<TSecond> second,
             IEnumerable<TThird> third,
-            Func<TFirst, TSecond, TThird, TResult> resultSelector)
-            => first.CrossJoin(second, third).Select(tuple => resultSelector(tuple.First, tuple.Second, tuple.Third));
+            Func<TFirst, TSecond, TThird, TResult> resultSelector
+        ) =>
+            first
+                .CrossJoin(second, third)
+                .Select(tuple => resultSelector(tuple.First, tuple.Second, tuple.Third));
 
         public static async Task<List<T>> ToListAsync<T>(this IAsyncEnumerable<T> source)
         {
@@ -259,8 +302,8 @@ namespace System.Text.Json
 
         private static readonly Regex s_stripWhitespace = new Regex(@"\s+", RegexOptions.Compiled);
 
-        public static string StripWhitespace(this string value)
-            => s_stripWhitespace.Replace(value, string.Empty);
+        public static string StripWhitespace(this string value) =>
+            s_stripWhitespace.Replace(value, string.Empty);
     }
 
     /// <summary>
@@ -268,7 +311,10 @@ namespace System.Text.Json
     /// </summary>
     public abstract class TypeWitness
     {
-        public abstract TResult Accept<TState, TResult>(ITypeVisitor<TState, TResult> visitor, TState state);
+        public abstract TResult Accept<TState, TResult>(
+            ITypeVisitor<TState, TResult> visitor,
+            TState state
+        );
     }
 
     /// <summary>
@@ -276,7 +322,10 @@ namespace System.Text.Json
     /// </summary>
     public sealed class TypeWitness<T> : TypeWitness
     {
-        public override TResult Accept<TState, TResult>(ITypeVisitor<TState, TResult> visitor, TState state) => visitor.Visit<T>(state);
+        public override TResult Accept<TState, TResult>(
+            ITypeVisitor<TState, TResult> visitor,
+            TState state
+        ) => visitor.Visit<T>(state);
     }
 
     /// <summary>

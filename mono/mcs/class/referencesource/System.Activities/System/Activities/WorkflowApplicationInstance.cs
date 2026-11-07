@@ -22,9 +22,10 @@ namespace System.Activities
         private int state;
 
         internal WorkflowApplicationInstance(
-            WorkflowApplication.PersistenceManagerBase persistenceManager, 
-            IDictionary<XName, InstanceValue> values, 
-            WorkflowIdentity definitionIdentity)
+            WorkflowApplication.PersistenceManagerBase persistenceManager,
+            IDictionary<XName, InstanceValue> values,
+            WorkflowIdentity definitionIdentity
+        )
         {
             this.PersistenceManager = persistenceManager;
             this.Values = values;
@@ -36,42 +37,24 @@ namespace System.Activities
         {
             Initialized,
             Loaded,
-            Aborted
+            Aborted,
         }
 
-        public WorkflowIdentity DefinitionIdentity
-        {
-            get;
-            private set;
-        }
+        public WorkflowIdentity DefinitionIdentity { get; private set; }
 
         public InstanceStore InstanceStore
         {
-            get
-            {
-                return this.PersistenceManager.InstanceStore;
-            }
+            get { return this.PersistenceManager.InstanceStore; }
         }
 
         public Guid InstanceId
         {
-            get
-            {
-                return this.PersistenceManager.InstanceId;
-            }
+            get { return this.PersistenceManager.InstanceId; }
         }
 
-        internal WorkflowApplication.PersistenceManagerBase PersistenceManager
-        {
-            get;
-            private set;
-        }
+        internal WorkflowApplication.PersistenceManagerBase PersistenceManager { get; private set; }
 
-        internal IDictionary<XName, InstanceValue> Values
-        {
-            get;
-            private set;
-        }
+        internal IDictionary<XName, InstanceValue> Values { get; private set; }
 
         public void Abandon()
         {
@@ -96,7 +79,12 @@ namespace System.Activities
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
             this.MarkAsAbandoned();
-            return WorkflowApplication.BeginDiscardInstance(this.PersistenceManager, timeout, callback, state);
+            return WorkflowApplication.BeginDiscardInstance(
+                this.PersistenceManager,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public void EndAbandon(IAsyncResult asyncResult)
@@ -104,27 +92,45 @@ namespace System.Activities
             WorkflowApplication.EndDiscardInstance(asyncResult);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "Approved Design. Returning a bool makes the intent much clearer than something that just returns a list.")]
-        public bool CanApplyUpdate(DynamicUpdateMap updateMap, out IList<ActivityBlockingUpdate> activitiesBlockingUpdate)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Approved Design. Returning a bool makes the intent much clearer than something that just returns a list."
+        )]
+        public bool CanApplyUpdate(
+            DynamicUpdateMap updateMap,
+            out IList<ActivityBlockingUpdate> activitiesBlockingUpdate
+        )
         {
             if (updateMap == null)
             {
                 throw FxTrace.Exception.ArgumentNull("updateMap");
             }
 
-            activitiesBlockingUpdate = WorkflowApplication.GetActivitiesBlockingUpdate(this, updateMap);
+            activitiesBlockingUpdate = WorkflowApplication.GetActivitiesBlockingUpdate(
+                this,
+                updateMap
+            );
             return activitiesBlockingUpdate == null || activitiesBlockingUpdate.Count == 0;
         }
 
         internal void MarkAsLoaded()
         {
-            int oldState = Interlocked.CompareExchange(ref this.state, (int)State.Loaded, (int)State.Initialized);
+            int oldState = Interlocked.CompareExchange(
+                ref this.state,
+                (int)State.Loaded,
+                (int)State.Initialized
+            );
             this.ThrowIfLoadedOrAbandoned((State)oldState);
         }
 
         private void MarkAsAbandoned()
         {
-            int oldState = Interlocked.CompareExchange(ref this.state, (int)State.Aborted, (int)State.Initialized);
+            int oldState = Interlocked.CompareExchange(
+                ref this.state,
+                (int)State.Aborted,
+                (int)State.Initialized
+            );
             this.ThrowIfLoadedOrAbandoned((State)oldState);
         }
 
@@ -132,12 +138,16 @@ namespace System.Activities
         {
             if (oldState == State.Loaded)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WorkflowApplicationInstanceLoaded));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.WorkflowApplicationInstanceLoaded)
+                );
             }
 
             if (oldState == State.Aborted)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WorkflowApplicationInstanceAbandoned));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.WorkflowApplicationInstanceAbandoned)
+                );
             }
         }
     }

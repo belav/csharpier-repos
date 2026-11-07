@@ -16,7 +16,9 @@ namespace System.Diagnostics
             Debug.Assert(s_uniqSuffix.Length < 50); // Ensure stackalloc not too large
             Span<char> result = stackalloc char[1 + 16 + s_uniqSuffix.Length]; // max length needed
             result[0] = '|';
-            bool formatted = Interlocked.Increment(ref s_currentRootId).TryFormat(result.Slice(1), out int charsWritten, "x");
+            bool formatted = Interlocked
+                .Increment(ref s_currentRootId)
+                .TryFormat(result.Slice(1), out int charsWritten, "x");
             Debug.Assert(formatted);
             s_uniqSuffix.AsSpan().CopyTo(result.Slice(1 + charsWritten));
             return new string(result.Slice(0, 1 + charsWritten + s_uniqSuffix.Length));

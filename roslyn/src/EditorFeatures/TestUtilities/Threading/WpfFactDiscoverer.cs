@@ -15,29 +15,58 @@ namespace Roslyn.Test.Utilities
     {
         private readonly IMessageSink _diagnosticMessageSink;
 
-        public WpfFactDiscoverer(IMessageSink diagnosticMessageSink) : base(diagnosticMessageSink)
-            => _diagnosticMessageSink = diagnosticMessageSink;
+        public WpfFactDiscoverer(IMessageSink diagnosticMessageSink)
+            : base(diagnosticMessageSink) => _diagnosticMessageSink = diagnosticMessageSink;
 
-        protected override IXunitTestCase CreateTestCase(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
-            => new WpfTestCase(_diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), discoveryOptions.MethodDisplayOptionsOrDefault(), testMethod);
+        protected override IXunitTestCase CreateTestCase(
+            ITestFrameworkDiscoveryOptions discoveryOptions,
+            ITestMethod testMethod,
+            IAttributeInfo factAttribute
+        ) =>
+            new WpfTestCase(
+                _diagnosticMessageSink,
+                discoveryOptions.MethodDisplayOrDefault(),
+                discoveryOptions.MethodDisplayOptionsOrDefault(),
+                testMethod
+            );
     }
 
     public class WpfTheoryDiscoverer : TheoryDiscoverer
     {
         private readonly IMessageSink _diagnosticMessageSink;
 
-        public WpfTheoryDiscoverer(IMessageSink diagnosticMessageSink) : base(diagnosticMessageSink)
-            => _diagnosticMessageSink = diagnosticMessageSink;
+        public WpfTheoryDiscoverer(IMessageSink diagnosticMessageSink)
+            : base(diagnosticMessageSink) => _diagnosticMessageSink = diagnosticMessageSink;
 
-        protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute, object[] dataRow)
+        protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(
+            ITestFrameworkDiscoveryOptions discoveryOptions,
+            ITestMethod testMethod,
+            IAttributeInfo theoryAttribute,
+            object[] dataRow
+        )
         {
-            var testCase = new WpfTestCase(_diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), discoveryOptions.MethodDisplayOptionsOrDefault(), testMethod, dataRow);
+            var testCase = new WpfTestCase(
+                _diagnosticMessageSink,
+                discoveryOptions.MethodDisplayOrDefault(),
+                discoveryOptions.MethodDisplayOptionsOrDefault(),
+                testMethod,
+                dataRow
+            );
             return SpecializedCollections.SingletonEnumerable(testCase);
         }
 
-        protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
+        protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(
+            ITestFrameworkDiscoveryOptions discoveryOptions,
+            ITestMethod testMethod,
+            IAttributeInfo theoryAttribute
+        )
         {
-            var testCase = new WpfTheoryTestCase(_diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), discoveryOptions.MethodDisplayOptionsOrDefault(), testMethod);
+            var testCase = new WpfTheoryTestCase(
+                _diagnosticMessageSink,
+                discoveryOptions.MethodDisplayOrDefault(),
+                discoveryOptions.MethodDisplayOptionsOrDefault(),
+                testMethod
+            );
             return SpecializedCollections.SingletonEnumerable(testCase);
         }
     }

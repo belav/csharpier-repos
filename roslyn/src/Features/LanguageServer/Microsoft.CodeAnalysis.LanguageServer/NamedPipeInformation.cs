@@ -7,5 +7,4 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
 [DataContract]
-internal record NamedPipeInformation(
-    [property: DataMember(Name = "pipeName")] string PipeName);
+internal record NamedPipeInformation([property: DataMember(Name = "pipeName")] string PipeName);

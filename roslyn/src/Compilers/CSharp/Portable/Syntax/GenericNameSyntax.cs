@@ -14,10 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     {
         public bool IsUnboundGenericName
         {
-            get
-            {
-                return this.TypeArgumentList.Arguments.Any(SyntaxKind.OmittedTypeArgument);
-            }
+            get { return this.TypeArgumentList.Arguments.Any(SyntaxKind.OmittedTypeArgument); }
         }
 
         internal override string ErrorDisplayName()

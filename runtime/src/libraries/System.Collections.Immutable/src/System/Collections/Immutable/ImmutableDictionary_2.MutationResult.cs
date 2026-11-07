@@ -66,7 +66,9 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="priorMap">The prior version of the map.  Used to capture the equality comparer and previous count, when applicable.</param>
             /// <returns>The new collection.</returns>
-            internal ImmutableDictionary<TKey, TValue> Finalize(ImmutableDictionary<TKey, TValue> priorMap)
+            internal ImmutableDictionary<TKey, TValue> Finalize(
+                ImmutableDictionary<TKey, TValue> priorMap
+            )
             {
                 Requires.NotNull(priorMap, nameof(priorMap));
                 return priorMap.Wrap(this.Root, priorMap._count + this.CountAdjustment);

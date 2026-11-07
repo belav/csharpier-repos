@@ -48,7 +48,6 @@ namespace System.Xml.RwFactoryWriterTests
             _testModuleParams = new List<CXmlDriverParam>();
         }
 
-
         public void BuildTest()
         {
             DetermineTestCases();
@@ -59,9 +58,22 @@ namespace System.Xml.RwFactoryWriterTests
             AddTestCases("", specFile, null, DEFAULT_SECTION);
         }
 
-        public void AddTestCases(string testCaseNamePrefix, string specFile, string[] filters, string defaultSection)
+        public void AddTestCases(
+            string testCaseNamePrefix,
+            string specFile,
+            string[] filters,
+            string defaultSection
+        )
         {
-            ParseControlFileSafe(testCaseNamePrefix, specFile, filters, defaultSection, null, null, _testModuleParams);
+            ParseControlFileSafe(
+                testCaseNamePrefix,
+                specFile,
+                filters,
+                defaultSection,
+                null,
+                null,
+                _testModuleParams
+            );
         }
 
         private string BuildFilterFromMaxPriority(string maxPriority)
@@ -77,7 +89,10 @@ namespace System.Xml.RwFactoryWriterTests
             if (arr2 == null)
                 return arr1;
 
-            Array newArr = Array.CreateInstance(arr1.GetType().GetElementType(), arr1.Length + arr2.Length);
+            Array newArr = Array.CreateInstance(
+                arr1.GetType().GetElementType(),
+                arr1.Length + arr2.Length
+            );
             arr1.CopyTo(newArr, 0);
             arr2.CopyTo(newArr, arr1.Length);
             return newArr;
@@ -101,7 +116,12 @@ namespace System.Xml.RwFactoryWriterTests
                 string[] tmp1 = null;
                 string[] tmp2 = null;
                 if (CModCmdLine.CmdLine.ContainsKey(CMD_PRIORITY_FILTER_LTM_KEY))
-                    tmp1 = new string[] { BuildFilterFromMaxPriority((string)CModCmdLine.CmdLine[CMD_PRIORITY_FILTER_LTM_KEY]) };
+                    tmp1 = new string[]
+                    {
+                        BuildFilterFromMaxPriority(
+                            (string)CModCmdLine.CmdLine[CMD_PRIORITY_FILTER_LTM_KEY]
+                        ),
+                    };
                 if (CModCmdLine.CmdLine.ContainsKey(CMD_FILTER_LTM_KEY))
                     tmp2 = new string[] { (string)CModCmdLine.CmdLine[CMD_FILTER_LTM_KEY] };
                 string[] cmdFilters = (string[])CombineArrays(tmp1, tmp2);
@@ -111,40 +131,59 @@ namespace System.Xml.RwFactoryWriterTests
                 if (CModCmdLine.CmdLine.ContainsKey(CMD_SPEC_DEFAULT_SECTION))
                     cmdDefaultSection = (string)CModCmdLine.CmdLine[CMD_SPEC_DEFAULT_SECTION];
 
-
-                XmlDriverScenario XmlReaderScenario = new XmlDriverScenario("XmlReader", "ReaderCreateSpec.xml");
-                XmlDriverScenario XmlWriterScenario = new XmlDriverScenario("XmlWriter", "WriterCreateSpec.xml");
+                XmlDriverScenario XmlReaderScenario = new XmlDriverScenario(
+                    "XmlReader",
+                    "ReaderCreateSpec.xml"
+                );
+                XmlDriverScenario XmlWriterScenario = new XmlDriverScenario(
+                    "XmlWriter",
+                    "WriterCreateSpec.xml"
+                );
                 List<XmlDriverScenario> slist = new List<XmlDriverScenario>();
                 slist.Add(XmlReaderScenario);
                 slist.Add(XmlWriterScenario);
 
                 foreach (XmlDriverScenario scenarioAttr in slist)
                 {
-                    string specFile = (cmdSpecFile == null) ? scenarioAttr.ControlFile : cmdSpecFile;
+                    string specFile =
+                        (cmdSpecFile == null) ? scenarioAttr.ControlFile : cmdSpecFile;
                     string name = scenarioAttr.Name;
                     string[] filters = (string[])CombineArrays(cmdFilters, scenarioAttr.Filters);
-                    string defaultSection = (cmdDefaultSection == null) ? scenarioAttr.DefaultSection : cmdDefaultSection;
+                    string defaultSection =
+                        (cmdDefaultSection == null)
+                            ? scenarioAttr.DefaultSection
+                            : cmdDefaultSection;
 
                     if (specFile == null || specFile == string.Empty)
-                        throw new CXmlDriverException("Control File is not defined for TestCase \"" + scenarioAttr.Desc + "\"");
+                        throw new CXmlDriverException(
+                            "Control File is not defined for TestCase \"" + scenarioAttr.Desc + "\""
+                        );
 
                     // parse spec file and update testModule's param list
-                    ParseControlFile(name, specFile, filters, defaultSection, null, null, _testModuleParams);
+                    ParseControlFile(
+                        name,
+                        specFile,
+                        filters,
+                        defaultSection,
+                        null,
+                        null,
+                        _testModuleParams
+                    );
                 }
             }
-
             catch (Exception e)
             {
                 HandleException(e);
             }
         }
 
-
         private void HandleException(Exception e)
         {
             // There is no way to display an error message in the LTM output at this time due to TestConsole/Error is not set,
             // so create an "Error" test case that will show this error during test execution
-            _testModule.AddTestCase(new CXmlDriverErrorTestCase("Error! (" + e.Message + ")", e.Message, e, _testModule));
+            _testModule.AddTestCase(
+                new CXmlDriverErrorTestCase("Error! (" + e.Message + ")", e.Message, e, _testModule)
+            );
             _parseError = e;
         }
 
@@ -160,10 +199,11 @@ namespace System.Xml.RwFactoryWriterTests
         {
             XAttribute resNode = node.Attribute(attrName);
             if (resNode == null)
-                throw new CXmlDriverException("@" + attrName + " was not found for " + NodeName(node));
+                throw new CXmlDriverException(
+                    "@" + attrName + " was not found for " + NodeName(node)
+                );
             return resNode.Value;
         }
-
 
         private static string SelectValue(XElement node, string xpath, string defaultValue)
         {
@@ -173,7 +213,11 @@ namespace System.Xml.RwFactoryWriterTests
             return resNode.Value;
         }
 
-        private static string SelectAttributeValue(XElement node, string attrName, string defaultValue)
+        private static string SelectAttributeValue(
+            XElement node,
+            string attrName,
+            string defaultValue
+        )
         {
             XAttribute resNode = node.Attribute(attrName);
             if (resNode == null)
@@ -199,7 +243,6 @@ namespace System.Xml.RwFactoryWriterTests
             return arr;
         }
 
-
         private static string CombineXPath(string[] xpaths)
         {
             if (xpaths == null || xpaths.Length == 0)
@@ -208,7 +251,6 @@ namespace System.Xml.RwFactoryWriterTests
             string xpath = string.Empty;
             if (xpaths.Length == 1)
                 xpath = xpaths[0];
-
             else
                 foreach (string item in xpaths)
                 {
@@ -225,7 +267,10 @@ namespace System.Xml.RwFactoryWriterTests
         {
             // check whether or not the item is implemented,
             // don't use VirtualNode here to reduce total time for parsing the control file
-            string implemented = CXmlDriverParam.GetTopLevelAttributeValue_Inline(param, "Implemented");
+            string implemented = CXmlDriverParam.GetTopLevelAttributeValue_Inline(
+                param,
+                "Implemented"
+            );
             if (implemented != null && !bool.Parse(implemented))
                 return false;
 
@@ -238,11 +283,9 @@ namespace System.Xml.RwFactoryWriterTests
             return res;
         }
 
-
         private static string NodeName(XElement parent, XElement child)
         {
-            string name = NodeName(parent) +
-                (child == null ? "" : "/" + NodeName(child));
+            string name = NodeName(parent) + (child == null ? "" : "/" + NodeName(child));
             return name;
         }
 
@@ -270,7 +313,6 @@ namespace System.Xml.RwFactoryWriterTests
             return name;
         }
 
-
         private static void AppendAttributes(XElement res, XElement child)
         {
             foreach (XAttribute attr in child.Attributes())
@@ -284,7 +326,6 @@ namespace System.Xml.RwFactoryWriterTests
             }
         }
 
-
         private static XElement[] BuildElementList(XElement node, out int listCount)
         {
             XElement[] childList = Enumerable.ToArray(node.Elements());
@@ -292,17 +333,21 @@ namespace System.Xml.RwFactoryWriterTests
             return childList;
         }
 
-
         private static XElement[] BuildSectionList(XElement node, out int listCount)
         {
             int childNodesCount = Enumerable.Count(node.Elements());
-            XElement[] childList = new XElement[(MAX_SECTION_COUNT < childNodesCount) ? MAX_SECTION_COUNT : childNodesCount];
+            XElement[] childList = new XElement[
+                (MAX_SECTION_COUNT < childNodesCount) ? MAX_SECTION_COUNT : childNodesCount
+            ];
 
             listCount = 0;
             foreach (XElement cur in node.Elements())
             {
-                if (cur.NodeType != XmlNodeType.Element ||
-                    cur.Name.LocalName == "Description" || cur.Name.LocalName == "Owner")
+                if (
+                    cur.NodeType != XmlNodeType.Element
+                    || cur.Name.LocalName == "Description"
+                    || cur.Name.LocalName == "Owner"
+                )
                     continue;
 
                 // ignore any sections after <TestCase> or <Variation>
@@ -315,14 +360,17 @@ namespace System.Xml.RwFactoryWriterTests
             return childList;
         }
 
-
         private static bool HasChildElements(XElement node)
         {
             return node.Elements().Any();
         }
 
-
-        private static XElement FindElementAndRemoveIt(string name, int pos, XElement[] list, int listCount)
+        private static XElement FindElementAndRemoveIt(
+            string name,
+            int pos,
+            XElement[] list,
+            int listCount
+        )
         {
             XElement node = null;
             for (int curPos = 0, i = 0; i < listCount; i++)
@@ -344,7 +392,6 @@ namespace System.Xml.RwFactoryWriterTests
             return node;
         }
 
-
         private static void AppendElements(XElement node, XElement[] list, int listCount)
         {
             for (int i = 0; i < listCount; i++)
@@ -355,7 +402,6 @@ namespace System.Xml.RwFactoryWriterTests
                 node.Add(new XElement(cur));
             }
         }
-
 
         private static void MergeElements(XElement res, XElement parent, XElement child)
         {
@@ -370,7 +416,6 @@ namespace System.Xml.RwFactoryWriterTests
                     res.Add(new XElement(cur));
                 return;
             }
-
 
             // build child list
             int childListCount = 0;
@@ -387,12 +432,19 @@ namespace System.Xml.RwFactoryWriterTests
                 // check position,
                 // assume that number of elements is not big, so we could use liner search
                 int curPos = 0;
-                for (XElement prev = (XElement)cur.PreviousNode; prev != null; prev = (XElement)prev.PreviousNode)
+                for (
+                    XElement prev = (XElement)cur.PreviousNode;
+                    prev != null;
+                    prev = (XElement)prev.PreviousNode
+                )
                     if (prev.NodeType == XmlNodeType.Element && prev.Name.LocalName == curName)
                         curPos++;
 
                 // search for the element in the child
-                XElement childElement = childListCount == 0 ? null : FindElementAndRemoveIt(curName, curPos, childList, childListCount);
+                XElement childElement =
+                    childListCount == 0
+                        ? null
+                        : FindElementAndRemoveIt(curName, curPos, childList, childListCount);
 
                 // if not found
                 if (childElement == null)
@@ -414,7 +466,6 @@ namespace System.Xml.RwFactoryWriterTests
                 AppendElements(res, childList, childListCount);
         }
 
-
         private static XElement MergeSections(XElement parent, XElement child)
         {
             // check inheritance rules
@@ -430,23 +481,23 @@ namespace System.Xml.RwFactoryWriterTests
                 res.RemoveNodes();
                 MergeElements(res, parent, child);
             }
-
             else if (Inheritance == "FALSE")
                 res = new XElement(child);
-
             else if (Inheritance == "MERGE")
             {
                 res = new XElement(parent);
                 foreach (XElement node in child.Elements())
                     res.Add(new XElement(node));
             }
-
             else
-                throw new CXmlDriverException("Section " + NodeName(child) + " has invalid value for attribute @Inheritance. Expected 'true', 'false' or 'merge'");
+                throw new CXmlDriverException(
+                    "Section "
+                        + NodeName(child)
+                        + " has invalid value for attribute @Inheritance. Expected 'true', 'false' or 'merge'"
+                );
 
             return res;
         }
-
 
         internal static XElement BuildVirtualNode(XElement parent, XElement child)
         {
@@ -462,8 +513,11 @@ namespace System.Xml.RwFactoryWriterTests
             // select all top sections but Description, Owner, Variation, TestCase
             foreach (XElement curParentSection in parent.Elements())
             {
-                if (curParentSection.NodeType != XmlNodeType.Element ||
-                    curParentSection.Name == "Description" || curParentSection.Name == "Owner")
+                if (
+                    curParentSection.NodeType != XmlNodeType.Element
+                    || curParentSection.Name == "Description"
+                    || curParentSection.Name == "Owner"
+                )
                     continue;
 
                 // ignore any section after <TestCase> or <Variation>
@@ -473,7 +527,15 @@ namespace System.Xml.RwFactoryWriterTests
                 string curParentSectionName = curParentSection.Name.LocalName;
 
                 // search for the same section in the child
-                XElement curChildSection = childListCount == 0 ? null : FindElementAndRemoveIt(curParentSectionName, 0, childList, childListCount);
+                XElement curChildSection =
+                    childListCount == 0
+                        ? null
+                        : FindElementAndRemoveIt(
+                            curParentSectionName,
+                            0,
+                            childList,
+                            childListCount
+                        );
 
                 // child doesn't have a section with the same, just copy it from the parent
                 if (curChildSection == null)
@@ -494,7 +556,6 @@ namespace System.Xml.RwFactoryWriterTests
             return virtualNode;
         }
 
-
         private void AddBuiltInAttributes(XElement node)
         {
             CreateAttributeIfNotExists(node, "Implemented", DEFAULT_VAR_IMPLEMENTED.ToString());
@@ -505,16 +566,28 @@ namespace System.Xml.RwFactoryWriterTests
             CreateAttributeIfNotExists(node, "Language", DEFAULT_VAR_LANGUAGE.ToString());
         }
 
-        private void ProcessIncludes(string[] parentFilters, string defaultSection, XElement testModuleNode, MyDict<string, object> masterList, IList xmlDriverParams)
+        private void ProcessIncludes(
+            string[] parentFilters,
+            string defaultSection,
+            XElement testModuleNode,
+            MyDict<string, object> masterList,
+            IList xmlDriverParams
+        )
         {
             // loop through all includes cases
             foreach (XElement includeNode in testModuleNode.Elements("Include"))
             {
                 string includeName = SelectExistingAttributeValue(includeNode, "Name");
                 string includeControlFile = SelectExistingValue(includeNode, "ControlFile");
-                string includeDefaultSection = SelectValue(includeNode, "DefaultSection", defaultSection);
+                string includeDefaultSection = SelectValue(
+                    includeNode,
+                    "DefaultSection",
+                    defaultSection
+                );
                 if (masterList != null && masterList[includeControlFile] != null)
-                    throw new CXmlDriverException("Reference cycle is detected in the control file " + includeControlFile);
+                    throw new CXmlDriverException(
+                        "Reference cycle is detected in the control file " + includeControlFile
+                    );
 
                 IEnumerable<XElement> includeFilterNodes = includeNode.Elements("Filter");
 
@@ -532,10 +605,19 @@ namespace System.Xml.RwFactoryWriterTests
                 else
                     includeFilters = parentFilters;
 
-                MyDict<string, object> newMasterList = masterList == null ? new MyDict<string, object>() : masterList;
+                MyDict<string, object> newMasterList =
+                    masterList == null ? new MyDict<string, object>() : masterList;
                 newMasterList[includeControlFile] = true;
 
-                ParseControlFile(includeName, includeControlFile, includeFilters, includeDefaultSection, includeNode, masterList, xmlDriverParams);
+                ParseControlFile(
+                    includeName,
+                    includeControlFile,
+                    includeFilters,
+                    includeDefaultSection,
+                    includeNode,
+                    masterList,
+                    xmlDriverParams
+                );
             }
         }
 
@@ -548,12 +630,28 @@ namespace System.Xml.RwFactoryWriterTests
             }
         }
 
-        private void ParseControlFileSafe(string testCaseNamePrefix, string controlFile, string[] filters, string defaultSection, XElement topNode, MyDict<string, object> masterList, IList xmlDriverParams)
+        private void ParseControlFileSafe(
+            string testCaseNamePrefix,
+            string controlFile,
+            string[] filters,
+            string defaultSection,
+            XElement topNode,
+            MyDict<string, object> masterList,
+            IList xmlDriverParams
+        )
         {
             try
             {
                 _parseError = null;
-                ParseControlFile(testCaseNamePrefix, controlFile, filters, defaultSection, topNode, masterList, xmlDriverParams);
+                ParseControlFile(
+                    testCaseNamePrefix,
+                    controlFile,
+                    filters,
+                    defaultSection,
+                    topNode,
+                    masterList,
+                    xmlDriverParams
+                );
             }
             catch (Exception e)
             {
@@ -568,10 +666,12 @@ namespace System.Xml.RwFactoryWriterTests
                 return description;
 
             // rollback to old schema
-            _confirmanceErrors = _confirmanceErrors + NodeName(node.Parent, node) + ": Use @Desc attribute instead of <Desctipion> element.\n";
+            _confirmanceErrors =
+                _confirmanceErrors
+                + NodeName(node.Parent, node)
+                + ": Use @Desc attribute instead of <Desctipion> element.\n";
             return SelectExistingValue(node, "Description");
         }
-
 
         private string SelectPriority(XElement node)
         {
@@ -585,7 +685,10 @@ namespace System.Xml.RwFactoryWriterTests
                 return DEFAULT_VAR_PRIORITY.ToString(); // use default priority
 
             // rollback to old schema
-            _confirmanceErrors = _confirmanceErrors + NodeName(node.Parent, node) + ": Use @Pri attribute instead of @Priority.\n";
+            _confirmanceErrors =
+                _confirmanceErrors
+                + NodeName(node.Parent, node)
+                + ": Use @Pri attribute instead of @Priority.\n";
             return priority;
         }
 
@@ -596,11 +699,22 @@ namespace System.Xml.RwFactoryWriterTests
                 return null;
 
             // rollback to old schema
-            _confirmanceErrors = _confirmanceErrors + NodeName(node.Parent, node) + ": Use @Desc attribute instead of @Name.\n";
+            _confirmanceErrors =
+                _confirmanceErrors
+                + NodeName(node.Parent, node)
+                + ": Use @Desc attribute instead of @Name.\n";
             return name;
         }
 
-        private void ParseControlFile(string testCaseNamePrefix, string controlFile, string[] filters, string defaultSection, XElement topNode, MyDict<string, object> masterList, IList xmlDriverParams)
+        private void ParseControlFile(
+            string testCaseNamePrefix,
+            string controlFile,
+            string[] filters,
+            string defaultSection,
+            XElement topNode,
+            MyDict<string, object> masterList,
+            IList xmlDriverParams
+        )
         {
             // load the control file
             XDocument doc = LoadControlFile(controlFile);
@@ -608,14 +722,20 @@ namespace System.Xml.RwFactoryWriterTests
             // parse test module top node
             XElement testModuleNode = doc.Element("TestModule");
             AddBuiltInAttributes(testModuleNode);
-            XElement testModuleVirtualNode = (topNode == null) ? testModuleNode :
-                BuildVirtualNode(new XElement(topNode), testModuleNode);
+            XElement testModuleVirtualNode =
+                (topNode == null)
+                    ? testModuleNode
+                    : BuildVirtualNode(new XElement(topNode), testModuleNode);
             string testModuleName = SelectExistingAttributeValue(testModuleNode, "Name");
             string testModuleCreated = SelectExistingAttributeValue(testModuleNode, "Created");
             string testModuleModified = SelectExistingAttributeValue(testModuleNode, "Modified");
             string testModuleDescription = SelectDescription(testModuleNode);
 
-            CXmlDriverParamRawNodes testModuleParam = new CXmlDriverParamRawNodes_TestModule(testModuleNode, testModuleVirtualNode, null);
+            CXmlDriverParamRawNodes testModuleParam = new CXmlDriverParamRawNodes_TestModule(
+                testModuleNode,
+                testModuleVirtualNode,
+                null
+            );
             xmlDriverParams.Add(new CXmlDriverParam(testModuleParam, defaultSection));
 
             // process includes
@@ -633,10 +753,18 @@ namespace System.Xml.RwFactoryWriterTests
                 string testCaseDescription = SelectDescription(testCaseNode);
 
                 XElement testCaseVirtualNode = null;
-                CXmlDriverParamRawNodes testCaseParam = new CXmlDriverParamRawNodes_TestCase(testCaseNode, testCaseVirtualNode, testModuleParam);
+                CXmlDriverParamRawNodes testCaseParam = new CXmlDriverParamRawNodes_TestCase(
+                    testCaseNode,
+                    testCaseVirtualNode,
+                    testModuleParam
+                );
 
                 // create a test case class
-                CTestCase testCase = CreateTestCase(testCaseName, testCaseDescription, new CXmlDriverParam(testCaseParam, defaultSection));
+                CTestCase testCase = CreateTestCase(
+                    testCaseName,
+                    testCaseDescription,
+                    new CXmlDriverParam(testCaseParam, defaultSection)
+                );
 
                 // loop through all variations
                 int varCount = 0;
@@ -650,31 +778,47 @@ namespace System.Xml.RwFactoryWriterTests
                     XElement varVirtualNode = null;
 
                     // check filter
-                    CXmlDriverParamRawNodes varParam = new CXmlDriverParamRawNodes_Variation(varNode, varVirtualNode, testCaseParam);
+                    CXmlDriverParamRawNodes varParam = new CXmlDriverParamRawNodes_Variation(
+                        varNode,
+                        varVirtualNode,
+                        testCaseParam
+                    );
                     if (!CheckFilter(varParam, filterXPath))
                         continue;
 
                     // create a new variation and add it to the current testCase
                     actVarCount++;
                     string varDescription = SelectDescription(varNode);
-                    CXmlDriverVariation var = new CXmlDriverVariation((CXmlDriverScenario)testCase,
-                        varName, varDescription, int.Parse(varId), int.Parse(varPri),
-                        new CXmlDriverParam(varParam, defaultSection));
+                    CXmlDriverVariation var = new CXmlDriverVariation(
+                        (CXmlDriverScenario)testCase,
+                        varName,
+                        varDescription,
+                        int.Parse(varId),
+                        int.Parse(varPri),
+                        new CXmlDriverParam(varParam, defaultSection)
+                    );
                     testCase.AddVariation(var);
                 }
 
                 if (actVarCount == 0 && varCount > 0)
                     // no 'implemented' variations satisfying the filter
-                    testCase = new CXmlDriverEmptyTestCase(testCaseName, testCaseDescription,
-                        " no variations with @Implemented='True' " +
-                        (!string.IsNullOrEmpty(_requiredLanguage) ? " and @Language='" + _requiredLanguage + "'" : "") +
-                        (filterXPath == null ? "" : " and satisfying '" + filterXPath + "'"), _testModule);
+                    testCase = new CXmlDriverEmptyTestCase(
+                        testCaseName,
+                        testCaseDescription,
+                        " no variations with @Implemented='True' "
+                            + (
+                                !string.IsNullOrEmpty(_requiredLanguage)
+                                    ? " and @Language='" + _requiredLanguage + "'"
+                                    : ""
+                            )
+                            + (filterXPath == null ? "" : " and satisfying '" + filterXPath + "'"),
+                        _testModule
+                    );
 
                 // add test case
                 _testModule.AddTestCase(testCase);
             }
         }
-
 
         // Creates test case class
         private CXmlDriverScenario CreateTestCase(string name, string desc, CXmlDriverParam param)
@@ -693,11 +837,16 @@ namespace System.Xml.RwFactoryWriterTests
             }
             catch (Exception e)
             {
-                throw new CXmlDriverException("XmlDriver: CreateIntance failed for TestCase '" + "CRWFactoryDriverScenario"/*type.Name*/ + "' (" + e.ToString() + ")");
+                throw new CXmlDriverException(
+                    "XmlDriver: CreateIntance failed for TestCase '"
+                        + "CRWFactoryDriverScenario" /*type.Name*/
+                        + "' ("
+                        + e.ToString()
+                        + ")"
+                );
             }
             return tmp;
         }
-
 
         public CTestModule TestModule
         {
@@ -712,9 +861,14 @@ namespace System.Xml.RwFactoryWriterTests
                 if (_testModuleParams.Count == 0)
                     return null;
                 string moduleName = "";
-                if (((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute("Name") != null)
+                if (
+                    ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute("Name")
+                    != null
+                )
                 {
-                    moduleName = ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute("Name").Value;
+                    moduleName = ((CXmlDriverParam)_testModuleParams[0])
+                        .RawNodes.TestModule.Attribute("Name")
+                        .Value;
                 }
                 return moduleName;
             }
@@ -728,9 +882,15 @@ namespace System.Xml.RwFactoryWriterTests
                 if (_testModuleParams.Count == 0)
                     return null;
                 string moduleDesc = "";
-                if (((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute("Description") != null)
+                if (
+                    ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
+                        "Description"
+                    ) != null
+                )
                 {
-                    moduleDesc = ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute("Description").Value;
+                    moduleDesc = ((CXmlDriverParam)_testModuleParams[0])
+                        .RawNodes.TestModule.Attribute("Description")
+                        .Value;
                 }
                 return moduleDesc;
             }

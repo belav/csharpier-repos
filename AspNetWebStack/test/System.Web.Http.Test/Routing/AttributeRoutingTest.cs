@@ -96,9 +96,16 @@ namespace System.Web.Http.Routing
         [InlineData("GET", "routeprecedence/literal", "GetLiteral")]
         [InlineData("GET", "routeprecedence/name?id=20", "GetByNameAndId:name20")]
         [InlineData("GET", "constraint", "pass")]
-        public async Task AttributeRouting_RoutesToAction(string httpMethod, string uri, string responseBody)
+        public async Task AttributeRouting_RoutesToAction(
+            string httpMethod,
+            string uri,
+            string responseBody
+        )
         {
-            var request = new HttpRequestMessage(new HttpMethod(httpMethod), "http://localhost/" + uri);
+            var request = new HttpRequestMessage(
+                new HttpMethod(httpMethod),
+                "http://localhost/" + uri
+            );
 
             var response = await SubmitRequestAsync(request);
 
@@ -122,7 +129,11 @@ namespace System.Web.Http.Routing
         [InlineData("GET", "api/Default2/MethodNotFound", HttpStatusCode.NotFound)]
         // Ambiguous match
         [InlineData("GET", "apioverload/Fred?score=12&age=23", HttpStatusCode.InternalServerError)]
-        [InlineData("GET", "apiactionstress/ActionY/ActionX?useY=7&useX=8", HttpStatusCode.InternalServerError)]
+        [InlineData(
+            "GET",
+            "apiactionstress/ActionY/ActionX?useY=7&useX=8",
+            HttpStatusCode.InternalServerError
+        )]
         // Unreachable inherited controllerRouteFactories
         [InlineData("GET", "api/subclassroute", HttpStatusCode.NotFound)]
         [InlineData("GET", "api/subclassroute?id=9", HttpStatusCode.NotFound)]
@@ -134,9 +145,16 @@ namespace System.Web.Http.Routing
         [InlineData("GET", "apibadcontrollerx/int", HttpStatusCode.NotFound)]
         [InlineData("GET", "apibadcontrollerx/nullableint", HttpStatusCode.NotFound)]
         [InlineData("GET", "apibadcontrollerx/string", HttpStatusCode.NotFound)]
-        public async Task AttributeRouting_Failures(string httpMethod, string uri, HttpStatusCode failureCode)
+        public async Task AttributeRouting_Failures(
+            string httpMethod,
+            string uri,
+            HttpStatusCode failureCode
+        )
         {
-            var request = new HttpRequestMessage(new HttpMethod(httpMethod), "http://localhost/" + uri);
+            var request = new HttpRequestMessage(
+                new HttpMethod(httpMethod),
+                "http://localhost/" + uri
+            );
 
             var response = await SubmitRequestAsync(request);
 
@@ -147,7 +165,10 @@ namespace System.Web.Http.Routing
         [Fact]
         public async Task AttributeRouting_MultipleControllerMatches()
         {
-            var request = new HttpRequestMessage(new HttpMethod("GET"), "http://localhost/ambiguousmatch");
+            var request = new HttpRequestMessage(
+                new HttpMethod("GET"),
+                "http://localhost/ambiguousmatch"
+            );
 
             var response = await SubmitRequestAsync(request);
 
@@ -171,9 +192,16 @@ namespace System.Web.Http.Routing
         [InlineData("GET", "NS1Home/Introduction", "Home.Index()")]
         [InlineData("GET", "NS2Account/PeopleList", "Account.Index()")]
         [InlineData("GET", "CustomizedDefaultPrefix/Unknown", "Default.Index()")]
-        public async Task AttributeRouting_RoutesToAction_WithCustomizedRoutePrefix(string httpMethod, string uri, string responseBody)
+        public async Task AttributeRouting_RoutesToAction_WithCustomizedRoutePrefix(
+            string httpMethod,
+            string uri,
+            string responseBody
+        )
         {
-            var request = new HttpRequestMessage(new HttpMethod(httpMethod), "http://localhost/" + uri);
+            var request = new HttpRequestMessage(
+                new HttpMethod(httpMethod),
+                "http://localhost/" + uri
+            );
 
             var response = await SubmitRequestAsync(request);
 
@@ -186,18 +214,23 @@ namespace System.Web.Http.Routing
         {
             var controllerRoutes = new Dictionary<Type, IEnumerable<IDirectRouteFactory>>()
             {
-                { typeof(DirectRouteProviderController), new[] { new RouteAttribute("CoolRouteBro") } }
+                {
+                    typeof(DirectRouteProviderController),
+                    new[] { new RouteAttribute("CoolRouteBro") }
+                },
             };
 
             var routeProvider = new DirectRouteProvider(controllerRoutes, null);
-
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/CoolRouteBro");
 
             var response = await SubmitRequestAsync(request, routeProvider);
 
             Assert.True(response.IsSuccessStatusCode);
-            Assert.Equal("DirectRouteProviderController.Get239303030()", GetContentValue<string>(response));
+            Assert.Equal(
+                "DirectRouteProviderController.Get239303030()",
+                GetContentValue<string>(response)
+            );
         }
 
         [Fact]
@@ -205,13 +238,18 @@ namespace System.Web.Http.Routing
         {
             var controllerRoutes = new Dictionary<Type, IEnumerable<IDirectRouteFactory>>()
             {
-                { typeof(DirectRouteProviderController), new[] { new RouteAttribute("CoolRouteBro") } }
+                {
+                    typeof(DirectRouteProviderController),
+                    new[] { new RouteAttribute("CoolRouteBro") }
+                },
             };
 
             var routeProvider = new DirectRouteProvider(controllerRoutes, null);
 
-
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/DirectRouteProvider");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/DirectRouteProvider"
+            );
 
             var response = await SubmitRequestAsync(request, routeProvider);
 
@@ -224,21 +262,26 @@ namespace System.Web.Http.Routing
         {
             var actionRoutes = new Dictionary<string, IEnumerable<IDirectRouteFactory>>()
             {
-                { "Get239303030", new[] { new RouteAttribute("CoolRouteBro") } }
+                { "Get239303030", new[] { new RouteAttribute("CoolRouteBro") } },
             };
 
             var routeProvider = new DirectRouteProvider(null, actionRoutes);
-
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/CoolRouteBro");
 
             var response = await SubmitRequestAsync(request, routeProvider);
 
             Assert.True(response.IsSuccessStatusCode);
-            Assert.Equal("DirectRouteProviderController.Get239303030()", GetContentValue<string>(response));
+            Assert.Equal(
+                "DirectRouteProviderController.Get239303030()",
+                GetContentValue<string>(response)
+            );
         }
 
-        private static async Task<HttpResponseMessage> SubmitRequestAsync(HttpRequestMessage request, IDirectRouteProvider routeProvider = null)
+        private static async Task<HttpResponseMessage> SubmitRequestAsync(
+            HttpRequestMessage request,
+            IDirectRouteProvider routeProvider = null
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}");
@@ -270,25 +313,43 @@ namespace System.Web.Http.Routing
 
         private class DirectRouteProvider : DefaultDirectRouteProvider
         {
-            private readonly IDictionary<Type, IEnumerable<IDirectRouteFactory>> _controllerRouteFactories;
-            private readonly IDictionary<string, IEnumerable<IDirectRouteFactory>> _actionRouteFactories;
+            private readonly IDictionary<
+                Type,
+                IEnumerable<IDirectRouteFactory>
+            > _controllerRouteFactories;
+            private readonly IDictionary<
+                string,
+                IEnumerable<IDirectRouteFactory>
+            > _actionRouteFactories;
 
             public DirectRouteProvider(
                 IDictionary<Type, IEnumerable<IDirectRouteFactory>> controllerRouteFactories,
-                IDictionary<string, IEnumerable<IDirectRouteFactory>> actionRouteFactories)
+                IDictionary<string, IEnumerable<IDirectRouteFactory>> actionRouteFactories
+            )
             {
-                _controllerRouteFactories = controllerRouteFactories ?? new Dictionary<Type, IEnumerable<IDirectRouteFactory>>();
-                _actionRouteFactories = actionRouteFactories ?? new Dictionary<string, IEnumerable<IDirectRouteFactory>>();
+                _controllerRouteFactories =
+                    controllerRouteFactories
+                    ?? new Dictionary<Type, IEnumerable<IDirectRouteFactory>>();
+                _actionRouteFactories =
+                    actionRouteFactories
+                    ?? new Dictionary<string, IEnumerable<IDirectRouteFactory>>();
             }
 
-            protected override IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(HttpControllerDescriptor controllerDescriptor)
+            protected override IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(
+                HttpControllerDescriptor controllerDescriptor
+            )
             {
                 IEnumerable<IDirectRouteFactory> factories;
-                _controllerRouteFactories.TryGetValue(controllerDescriptor.ControllerType, out factories);
+                _controllerRouteFactories.TryGetValue(
+                    controllerDescriptor.ControllerType,
+                    out factories
+                );
                 return factories == null ? null : factories.ToList();
             }
 
-            protected override IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(HttpActionDescriptor actionDescriptor)
+            protected override IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(
+                HttpActionDescriptor actionDescriptor
+            )
             {
                 IEnumerable<IDirectRouteFactory> factories;
                 _actionRouteFactories.TryGetValue(actionDescriptor.ActionName, out factories);
@@ -382,7 +443,6 @@ namespace System.Web.Http.Routing
         {
             return "multi";
         }
-
     }
 
     // Routes have optional parameters, but signature says it's required.
@@ -413,9 +473,7 @@ namespace System.Web.Http.Routing
     public class PrefixedController : ApiController
     {
         // Should not be reachable be our routes since there's no route attribute.
-        public void Post()
-        {
-        }
+        public void Post() { }
 
         [Route("")]
         public string Get()
@@ -729,9 +787,7 @@ namespace System.Web.Http.Routing
         private class ConstrainedRouteAttribute : RouteFactoryAttribute
         {
             public ConstrainedRouteAttribute()
-                : base(null)
-            {
-            }
+                : base(null) { }
 
             public bool ConstraintMatches { get; set; }
 
@@ -741,7 +797,7 @@ namespace System.Web.Http.Routing
                 {
                     return new HttpRouteValueDictionary()
                     {
-                        { String.Empty, new Constraint(ConstraintMatches) }
+                        { String.Empty, new Constraint(ConstraintMatches) },
                     };
                 }
             }
@@ -755,8 +811,13 @@ namespace System.Web.Http.Routing
                     _matches = matches;
                 }
 
-                public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName,
-                    IDictionary<string, object> values, HttpRouteDirection routeDirection)
+                public bool Match(
+                    HttpRequestMessage request,
+                    IHttpRoute route,
+                    string parameterName,
+                    IDictionary<string, object> values,
+                    HttpRouteDirection routeDirection
+                )
                 {
                     return _matches;
                 }
@@ -818,7 +879,7 @@ namespace System.Web.Http.Routing
         public String Get()
         {
             return "Default.Index()";
-    }
+        }
     }
 
     [Route("ambiguousmatch")]

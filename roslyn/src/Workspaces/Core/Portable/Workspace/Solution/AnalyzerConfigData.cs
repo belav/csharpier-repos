@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis;
 /// </summary>
 internal readonly struct AnalyzerConfigData(AnalyzerConfigOptionsResult result)
 {
-    public readonly StructuredAnalyzerConfigOptions ConfigOptions = StructuredAnalyzerConfigOptions.Create(result.AnalyzerOptions);
+    public readonly StructuredAnalyzerConfigOptions ConfigOptions =
+        StructuredAnalyzerConfigOptions.Create(result.AnalyzerOptions);
     public readonly ImmutableDictionary<string, string> AnalyzerOptions = result.AnalyzerOptions;
     public readonly ImmutableDictionary<string, ReportDiagnostic> TreeOptions = result.TreeOptions;
 }

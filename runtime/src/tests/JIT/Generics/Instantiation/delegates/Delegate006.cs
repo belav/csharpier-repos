@@ -21,7 +21,8 @@ public class Test_Delegate006
     [Fact]
     public static int TestEntryPoint()
     {
-        int i, j;
+        int i,
+            j;
         Foo<int> inst = new Foo<int>();
         GenDelegate<int> MyDelegate = new GenDelegate<int>(inst.Function<int>);
         i = MyDelegate(10, out j);
@@ -36,4 +37,3 @@ public class Test_Delegate006
         return 100;
     }
 }
-

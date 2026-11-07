@@ -16,7 +16,11 @@ namespace System.IO.Compression
 
         internal void InitializeDecoder()
         {
-            _state = Interop.Brotli.BrotliDecoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+            _state = Interop.Brotli.BrotliDecoderCreateInstance(
+                IntPtr.Zero,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliDecoder_Create);
         }
@@ -52,7 +56,12 @@ namespace System.IO.Compression
         /// - <see cref="System.Buffers.OperationStatus.DestinationTooSmall" />: There is not enough space in <paramref name="destination" /> to decompress <paramref name="source" />.
         /// - <see cref="System.Buffers.OperationStatus.NeedMoreData" />: The decompression action is partially done at least one more byte is required to complete the decompression task. This method should be called again with more input to decompress.
         /// - <see cref="System.Buffers.OperationStatus.InvalidData" />: The data in <paramref name="source" /> is invalid and could not be decompressed.</remarks>
-        public OperationStatus Decompress(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesConsumed, out int bytesWritten)
+        public OperationStatus Decompress(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesConsumed,
+            out int bytesWritten
+        )
         {
             EnsureInitialized();
             Debug.Assert(_state != null);
@@ -73,7 +82,14 @@ namespace System.IO.Compression
                     fixed (byte* inBytes = &MemoryMarshal.GetReference(source))
                     fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
                     {
-                        int brotliResult = Interop.Brotli.BrotliDecoderDecompressStream(_state, ref availableInput, &inBytes, ref availableOutput, &outBytes, out _);
+                        int brotliResult = Interop.Brotli.BrotliDecoderDecompressStream(
+                            _state,
+                            ref availableInput,
+                            &inBytes,
+                            ref availableOutput,
+                            &outBytes,
+                            out _
+                        );
                         if (brotliResult == 0) // Error
                         {
                             return OperationStatus.InvalidData;
@@ -94,7 +110,9 @@ namespace System.IO.Compression
                             case 2: // NeedsMoreInput
                             default:
                                 source = source.Slice(source.Length - (int)availableInput);
-                                destination = destination.Slice(destination.Length - (int)availableOutput);
+                                destination = destination.Slice(
+                                    destination.Length - (int)availableOutput
+                                );
                                 if (brotliResult == 2 && source.Length == 0)
                                     return OperationStatus.NeedMoreData;
                                 break;
@@ -111,15 +129,27 @@ namespace System.IO.Compression
         /// <param name="bytesWritten">The total number of bytes that were written in the <paramref name="destination" />.</param>
         /// <returns><see langword="true" /> on success; <see langword="false" /> otherwise.</returns>
         /// <remarks>If this method returns <see langword="false" />, <paramref name="destination" /> may be empty or contain partially decompressed data, with <paramref name="bytesWritten" /> being zero or greater than zero but less than the expected total.</remarks>
-        public static unsafe bool TryDecompress(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static unsafe bool TryDecompress(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             fixed (byte* inBytes = &MemoryMarshal.GetReference(source))
             fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
             {
                 nuint availableOutput = (nuint)destination.Length;
-                bool success = Interop.Brotli.BrotliDecoderDecompress((nuint)source.Length, inBytes, &availableOutput, outBytes) != Interop.BOOL.FALSE;
+                bool success =
+                    Interop.Brotli.BrotliDecoderDecompress(
+                        (nuint)source.Length,
+                        inBytes,
+                        &availableOutput,
+                        outBytes
+                    ) != Interop.BOOL.FALSE;
 
-                Debug.Assert(success ? availableOutput <= (nuint)destination.Length : availableOutput == 0);
+                Debug.Assert(
+                    success ? availableOutput <= (nuint)destination.Length : availableOutput == 0
+                );
 
                 bytesWritten = (int)availableOutput;
                 return success;

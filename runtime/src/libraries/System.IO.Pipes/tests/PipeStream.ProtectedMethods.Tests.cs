@@ -7,9 +7,9 @@ namespace System.IO.Pipes.Tests
 {
     public class TestPipeStream : PipeStream
     {
-        public TestPipeStream() : base(PipeDirection.InOut, 512) // values don't matter for these tests.
-        {
-        }
+        public TestPipeStream()
+            : base(PipeDirection.InOut, 512) // values don't matter for these tests.
+        { }
 
         [Fact]
         public void TestInitializeHandle()
@@ -23,7 +23,7 @@ namespace System.IO.Pipes.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Null handle throws on Windows only
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Null handle throws on Windows only
         public void TestCheckPipePropertyOperations_Unix()
         {
             // handle is null - throws on Windows but not Unix.
@@ -31,7 +31,7 @@ namespace System.IO.Pipes.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Null handle throws on Windows only
+        [PlatformSpecific(TestPlatforms.Windows)] // Null handle throws on Windows only
         public void TestCheckPipePropertyOperations_Windows()
         {
             // handle is null - throws on Windows but not Unix

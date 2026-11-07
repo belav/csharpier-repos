@@ -10,19 +10,19 @@ namespace System.ServiceModel.Dispatcher
 
     class OperationInvokerBehavior : IOperationBehavior
     {
-        public OperationInvokerBehavior()
-        {
-        }
+        public OperationInvokerBehavior() { }
 
-        void IOperationBehavior.Validate(OperationDescription description)
-        {
-        }
+        void IOperationBehavior.Validate(OperationDescription description) { }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
-        {
-        }
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch)
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        )
         {
             if (dispatch == null)
             {
@@ -35,17 +35,27 @@ namespace System.ServiceModel.Dispatcher
 
             if (description.TaskMethod != null)
             {
-                dispatch.Invoker = new TaskMethodInvoker(description.TaskMethod, description.TaskTResult);
+                dispatch.Invoker = new TaskMethodInvoker(
+                    description.TaskMethod,
+                    description.TaskTResult
+                );
             }
             else if (description.SyncMethod != null)
             {
                 if (description.BeginMethod != null)
                 {
                     // both sync and async methods are present on the contract, check the preference
-                    OperationBehaviorAttribute operationBehaviorAttribue = description.Behaviors.Find<OperationBehaviorAttribute>();
-                    if ((operationBehaviorAttribue != null) && operationBehaviorAttribue.PreferAsyncInvocation)
+                    OperationBehaviorAttribute operationBehaviorAttribue =
+                        description.Behaviors.Find<OperationBehaviorAttribute>();
+                    if (
+                        (operationBehaviorAttribue != null)
+                        && operationBehaviorAttribue.PreferAsyncInvocation
+                    )
                     {
-                        dispatch.Invoker = new AsyncMethodInvoker(description.BeginMethod, description.EndMethod);
+                        dispatch.Invoker = new AsyncMethodInvoker(
+                            description.BeginMethod,
+                            description.EndMethod
+                        );
                     }
                     else
                     {
@@ -63,13 +73,17 @@ namespace System.ServiceModel.Dispatcher
                 if (description.BeginMethod != null)
                 {
                     // only async method is present on the contract
-                    dispatch.Invoker = new AsyncMethodInvoker(description.BeginMethod, description.EndMethod);
+                    dispatch.Invoker = new AsyncMethodInvoker(
+                        description.BeginMethod,
+                        description.EndMethod
+                    );
                 }
             }
         }
 
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription description, ClientOperation proxy)
-        {
-        }
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        ) { }
     }
 }

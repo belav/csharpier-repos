@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     public interface IEventSymbol : ISymbol
     {
         /// <summary>
-        /// The type of the event. 
+        /// The type of the event.
         /// </summary>
         ITypeSymbol Type { get; }
 
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// The original definition of the event. If the event is constructed from another
-        /// symbol by type substitution, OriginalDefinition gets the original symbol, as it was 
+        /// symbol by type substitution, OriginalDefinition gets the original symbol, as it was
         /// defined in source or metadata.
         /// </summary>
         new IEventSymbol OriginalDefinition { get; }

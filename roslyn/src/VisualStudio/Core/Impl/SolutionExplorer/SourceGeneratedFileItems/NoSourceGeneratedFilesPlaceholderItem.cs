@@ -10,9 +10,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     internal sealed class NoSourceGeneratedFilesPlaceholderItem : BaseItem
     {
         public NoSourceGeneratedFilesPlaceholderItem()
-            : base(SolutionExplorerShim.This_generator_is_not_generating_files)
-        {
-        }
+            : base(SolutionExplorerShim.This_generator_is_not_generating_files) { }
 
         public override ImageMoniker IconMoniker => KnownMonikers.StatusInformationNoColor;
     }

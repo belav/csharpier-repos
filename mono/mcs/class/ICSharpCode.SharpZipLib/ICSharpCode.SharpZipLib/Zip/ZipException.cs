@@ -23,7 +23,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -38,27 +38,25 @@
 
 using System;
 
-namespace ICSharpCode.SharpZipLib.Zip 
+namespace ICSharpCode.SharpZipLib.Zip
 {
-	
-	/// <summary>
-	/// Represents errors specific to Zip file handling
-	/// </summary>
-	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-	public class ZipException : SharpZipBaseException
-	{
-		/// <summary>
-		/// Initializes a new instance of the ZipException class.
-		/// </summary>
-		public ZipException()
-		{
-		}
-		
-		/// <summary>
-		/// Initializes a new instance of the ZipException class with a specified error message.
-		/// </summary>
-		public ZipException(string msg) : base(msg)
-		{
-		}
-	}
+    /// <summary>
+    /// Represents errors specific to Zip file handling
+    /// </summary>
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
+    public class ZipException : SharpZipBaseException
+    {
+        /// <summary>
+        /// Initializes a new instance of the ZipException class.
+        /// </summary>
+        public ZipException() { }
+
+        /// <summary>
+        /// Initializes a new instance of the ZipException class with a specified error message.
+        /// </summary>
+        public ZipException(string msg)
+            : base(msg) { }
+    }
 }

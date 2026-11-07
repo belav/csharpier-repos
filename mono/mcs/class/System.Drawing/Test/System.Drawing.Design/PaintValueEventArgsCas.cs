@@ -1,5 +1,5 @@
 //
-// PaintValueEventArgsCas.cs 
+// PaintValueEventArgsCas.cs
 //	- CAS unit tests for System.Drawing.Design.PaintValueEventArgs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Drawing;
 using System.Drawing.Design;
@@ -36,50 +34,51 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Drawing.Design {
+namespace MonoCasTests.System.Drawing.Design
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class PaintValueEventArgsCas
+    {
+        private ConstructorInfo ctor;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PaintValueEventArgsCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // this executes at fulltrust
+            ConstructorInfo[] infos = typeof(PaintValueEventArgs).GetConstructors();
+            ctor = infos[0];
+        }
 
-		private ConstructorInfo ctor;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			ConstructorInfo[] infos = typeof (PaintValueEventArgs).GetConstructors ();
-			ctor = infos[0];
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Create()
+        {
+            Rectangle r = new Rectangle();
+            new PaintValueEventArgs(null, null, Graphics.FromImage(new Bitmap(10, 10)), r);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        // we use reflection to call PaintValueEventArgs class as it's protected
+        // by a  LinkDemand (which will be converted into full demand, i.e. a
+        // stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Create ()
-		{
-			Rectangle r = new Rectangle ();
-			new PaintValueEventArgs (null, null, Graphics.FromImage (new Bitmap (10, 10)), r);
-		}
-
-		// we use reflection to call PaintValueEventArgs class as it's protected 
-		// by a  LinkDemand (which will be converted into full demand, i.e. a 
-		// stack walk) when reflection is used (i.e. it gets testable).
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Create_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (ctor, "constructor");
-			ctor.Invoke (new object[4]);
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, SkipVerification = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Create_LinkDemand()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull(ctor, "constructor");
+            ctor.Invoke(new object[4]);
+        }
+    }
 }

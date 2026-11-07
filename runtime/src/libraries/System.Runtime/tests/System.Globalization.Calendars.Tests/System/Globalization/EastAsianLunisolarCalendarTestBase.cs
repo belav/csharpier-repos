@@ -7,6 +7,7 @@ namespace System.Globalization.Tests
 {
     public abstract class EastAsianLunisolarCalendarTestBase : CalendarTestBase
     {
-        public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.LunisolarCalendar;
+        public override CalendarAlgorithmType AlgorithmType =>
+            CalendarAlgorithmType.LunisolarCalendar;
     }
 }

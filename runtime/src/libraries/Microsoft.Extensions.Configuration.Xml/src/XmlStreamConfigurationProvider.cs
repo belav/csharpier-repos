@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// Constructor.
         /// </summary>
         /// <param name="source">The <see cref="XmlStreamConfigurationSource"/>.</param>
-        public XmlStreamConfigurationProvider(XmlStreamConfigurationSource source) : base(source) { }
+        public XmlStreamConfigurationProvider(XmlStreamConfigurationSource source)
+            : base(source) { }
 
         /// <summary>
         /// Read a stream of XML values into a key/value dictionary.
@@ -36,14 +37,17 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// <param name="stream">The stream of XML data.</param>
         /// <param name="decryptor">The <see cref="XmlDocumentDecryptor"/> to use to decrypt.</param>
         /// <returns>The <see cref="IDictionary{String, String}"/> which was read from the stream.</returns>
-        public static IDictionary<string, string?> Read(Stream stream, XmlDocumentDecryptor decryptor)
+        public static IDictionary<string, string?> Read(
+            Stream stream,
+            XmlDocumentDecryptor decryptor
+        )
         {
             var readerSettings = new XmlReaderSettings()
             {
                 CloseInput = false, // caller will close the stream
                 DtdProcessing = DtdProcessing.Prohibit,
                 IgnoreComments = true,
-                IgnoreWhitespace = true
+                IgnoreWhitespace = true,
             };
 
             XmlConfigurationElement? root = null;
@@ -60,7 +64,10 @@ namespace Microsoft.Extensions.Configuration.Xml
                     switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            var element = new XmlConfigurationElement(reader.LocalName, GetName(reader));
+                            var element = new XmlConfigurationElement(
+                                reader.LocalName,
+                                GetName(reader)
+                            );
 
                             if (currentPath.Count == 0)
                             {
@@ -74,10 +81,18 @@ namespace Microsoft.Extensions.Configuration.Xml
                                 if (parent.ChildrenBySiblingName != null)
                                 {
                                     // check if this element has appeared before, elements are considered siblings if their SiblingName properties match
-                                    if (!parent.ChildrenBySiblingName.TryGetValue(element.SiblingName, out var siblings))
+                                    if (
+                                        !parent.ChildrenBySiblingName.TryGetValue(
+                                            element.SiblingName,
+                                            out var siblings
+                                        )
+                                    )
                                     {
                                         siblings = new List<XmlConfigurationElement>();
-                                        parent.ChildrenBySiblingName.Add(element.SiblingName, siblings);
+                                        parent.ChildrenBySiblingName.Add(
+                                            element.SiblingName,
+                                            siblings
+                                        );
                                     }
                                     siblings.Add(element);
                                 }
@@ -91,27 +106,47 @@ namespace Microsoft.Extensions.Configuration.Xml
                                     else
                                     {
                                         // If we encounter a second child after assigning "SingleChild", we clear SingleChild and initialize the dictionary
-                                        var children = new Dictionary<string, List<XmlConfigurationElement>>(StringComparer.OrdinalIgnoreCase);
+                                        var children = new Dictionary<
+                                            string,
+                                            List<XmlConfigurationElement>
+                                        >(StringComparer.OrdinalIgnoreCase);
 
                                         // Special case: the first and second child have the same sibling name
-                                        if (string.Equals(parent.SingleChild.SiblingName, element.SiblingName, StringComparison.OrdinalIgnoreCase))
+                                        if (
+                                            string.Equals(
+                                                parent.SingleChild.SiblingName,
+                                                element.SiblingName,
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
+                                        )
                                         {
-                                            children.Add(element.SiblingName, new List<XmlConfigurationElement>
-                                            {
-                                                parent.SingleChild,
-                                                element
-                                            });
+                                            children.Add(
+                                                element.SiblingName,
+                                                new List<XmlConfigurationElement>
+                                                {
+                                                    parent.SingleChild,
+                                                    element,
+                                                }
+                                            );
                                         }
                                         else
                                         {
-                                            children.Add(parent.SingleChild.SiblingName, new List<XmlConfigurationElement> { parent.SingleChild });
-                                            children.Add(element.SiblingName, new List<XmlConfigurationElement> { element });
+                                            children.Add(
+                                                parent.SingleChild.SiblingName,
+                                                new List<XmlConfigurationElement>
+                                                {
+                                                    parent.SingleChild,
+                                                }
+                                            );
+                                            children.Add(
+                                                element.SiblingName,
+                                                new List<XmlConfigurationElement> { element }
+                                            );
                                         }
 
                                         parent.ChildrenBySiblingName = children;
                                         parent.SingleChild = null;
                                     }
-
                                 }
                             }
 
@@ -137,7 +172,11 @@ namespace Microsoft.Extensions.Configuration.Xml
                                     var lineInfo = reader as IXmlLineInfo;
                                     var lineNumber = lineInfo?.LineNumber;
                                     var linePosition = lineInfo?.LinePosition;
-                                    parent.TextContent = new XmlConfigurationElementTextContent(string.Empty, linePosition, lineNumber);
+                                    parent.TextContent = new XmlConfigurationElementTextContent(
+                                        string.Empty,
+                                        linePosition,
+                                        lineNumber
+                                    );
                                 }
                             }
                             break;
@@ -152,7 +191,11 @@ namespace Microsoft.Extensions.Configuration.Xml
 
                                 XmlConfigurationElement parent = currentPath.Peek();
 
-                                parent.TextContent = new XmlConfigurationElementTextContent(reader.Value, linePosition, lineNumber);
+                                parent.TextContent = new XmlConfigurationElementTextContent(
+                                    reader.Value,
+                                    linePosition,
+                                    lineNumber
+                                );
                             }
                             break;
                         case XmlNodeType.XmlDeclaration:
@@ -163,7 +206,13 @@ namespace Microsoft.Extensions.Configuration.Xml
                             break;
 
                         default:
-                            throw new FormatException(SR.Format(SR.Error_UnsupportedNodeType, reader.NodeType, GetLineInfo(reader)));
+                            throw new FormatException(
+                                SR.Format(
+                                    SR.Error_UnsupportedNodeType,
+                                    reader.NodeType,
+                                    GetLineInfo(reader)
+                                )
+                            );
                     }
                     preNodeType = reader.NodeType;
 
@@ -192,8 +241,9 @@ namespace Microsoft.Extensions.Configuration.Xml
         private static string GetLineInfo(XmlReader reader)
         {
             var lineInfo = reader as IXmlLineInfo;
-            return lineInfo == null ? string.Empty :
-                SR.Format(SR.Msg_LineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
+            return lineInfo == null
+                ? string.Empty
+                : SR.Format(SR.Msg_LineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
         }
 
         private static void ReadAttributes(XmlReader reader, XmlConfigurationElement element)
@@ -215,10 +265,19 @@ namespace Microsoft.Extensions.Configuration.Xml
                 // If there is a namespace attached to current attribute
                 if (!string.IsNullOrEmpty(reader.NamespaceURI))
                 {
-                    throw new FormatException(SR.Format(SR.Error_NamespaceIsNotSupported, GetLineInfo(reader)));
+                    throw new FormatException(
+                        SR.Format(SR.Error_NamespaceIsNotSupported, GetLineInfo(reader))
+                    );
                 }
 
-                element.Attributes!.Add(new XmlConfigurationElementAttributeValue(reader.LocalName, reader.Value, lineNumber, linePosition));
+                element.Attributes!.Add(
+                    new XmlConfigurationElementAttributeValue(
+                        reader.LocalName,
+                        reader.Value,
+                        lineNumber,
+                        linePosition
+                    )
+                );
             }
 
             // Go back to the element containing the attributes we just processed
@@ -234,12 +293,20 @@ namespace Microsoft.Extensions.Configuration.Xml
 
             while (reader.MoveToNextAttribute())
             {
-                if (string.Equals(reader.LocalName, Consts.NameAttributeKey, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        reader.LocalName,
+                        Consts.NameAttributeKey,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // If there is a namespace attached to current attribute
                     if (!string.IsNullOrEmpty(reader.NamespaceURI))
                     {
-                        throw new FormatException(SR.Format(SR.Error_NamespaceIsNotSupported, GetLineInfo(reader)));
+                        throw new FormatException(
+                            SR.Format(SR.Error_NamespaceIsNotSupported, GetLineInfo(reader))
+                        );
                     }
                     name = reader.Value;
                     break;
@@ -252,7 +319,9 @@ namespace Microsoft.Extensions.Configuration.Xml
             return name;
         }
 
-        private static Dictionary<string, string?> ProvideConfiguration(XmlConfigurationElement? root)
+        private static Dictionary<string, string?> ProvideConfiguration(
+            XmlConfigurationElement? root
+        )
         {
             Dictionary<string, string?> configuration = new(StringComparer.OrdinalIgnoreCase);
 
@@ -295,7 +364,12 @@ namespace Microsoft.Extensions.Configuration.Xml
 
                         prefix.Push(attribute.Attribute);
 
-                        AddToConfiguration(prefix.AsString, attribute.Value, attribute.LineNumber, attribute.LinePosition);
+                        AddToConfiguration(
+                            prefix.AsString,
+                            attribute.Value,
+                            attribute.LineNumber,
+                            attribute.LinePosition
+                        );
 
                         prefix.Pop();
                     }
@@ -308,7 +382,12 @@ namespace Microsoft.Extensions.Configuration.Xml
                 if (element.TextContent != null)
                 {
                     var textContent = element.TextContent;
-                    AddToConfiguration(prefix.AsString, textContent.TextContent, textContent.LineNumber, textContent.LinePosition);
+                    AddToConfiguration(
+                        prefix.AsString,
+                        textContent.TextContent,
+                        textContent.LineNumber,
+                        textContent.LinePosition
+                    );
                 }
             }
 
@@ -391,17 +470,19 @@ namespace Microsoft.Extensions.Configuration.Xml
 #if NETSTANDARD2_1
                 if (!configuration.TryAdd(key, value))
                 {
-                    var lineInfo = lineNumber == null || linePosition == null
-                        ? string.Empty
-                        : SR.Format(SR.Msg_LineInfo, lineNumber.Value, linePosition.Value);
+                    var lineInfo =
+                        lineNumber == null || linePosition == null
+                            ? string.Empty
+                            : SR.Format(SR.Msg_LineInfo, lineNumber.Value, linePosition.Value);
                     throw new FormatException(SR.Format(SR.Error_KeyIsDuplicated, key, lineInfo));
                 }
 #else
                 if (configuration.ContainsKey(key))
                 {
-                    var lineInfo = lineNumber == null || linePosition == null
-                        ? string.Empty
-                        : SR.Format(SR.Msg_LineInfo, lineNumber.Value, linePosition.Value);
+                    var lineInfo =
+                        lineNumber == null || linePosition == null
+                            ? string.Empty
+                            : SR.Format(SR.Msg_LineInfo, lineNumber.Value, linePosition.Value);
                     throw new FormatException(SR.Format(SR.Error_KeyIsDuplicated, key, lineInfo));
                 }
 

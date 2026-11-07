@@ -16,13 +16,11 @@ public sealed partial class InternalEntityEntry
             _values = entry.EntityType.RelationshipSnapshotFactory(entry);
         }
 
-        public object? GetValue(InternalEntityEntry entry, IPropertyBase propertyBase)
-            => IsEmpty ? entry[propertyBase] : _values[propertyBase.GetRelationshipIndex()];
+        public object? GetValue(InternalEntityEntry entry, IPropertyBase propertyBase) =>
+            IsEmpty ? entry[propertyBase] : _values[propertyBase.GetRelationshipIndex()];
 
-        public T GetValue<T>(InternalEntityEntry entry, IPropertyBase propertyBase, int index)
-            => IsEmpty
-                ? entry.GetCurrentValue<T>(propertyBase)
-                : _values.GetValue<T>(index);
+        public T GetValue<T>(InternalEntityEntry entry, IPropertyBase propertyBase, int index) =>
+            IsEmpty ? entry.GetCurrentValue<T>(propertyBase) : _values.GetValue<T>(index);
 
         public void SetValue(IPropertyBase propertyBase, object? value)
         {
@@ -37,7 +35,8 @@ public sealed partial class InternalEntityEntry
             Check.DebugAssert(!IsEmpty, "relationship snapshot is empty");
             Check.DebugAssert(
                 propertyBase is not INavigation { IsCollection: true },
-                $"property {propertyBase} is is not reference navigation");
+                $"property {propertyBase} is is not reference navigation"
+            );
 
             _values[propertyBase.GetRelationshipIndex()] = SnapshotValue(propertyBase, value);
         }
@@ -77,7 +76,10 @@ public sealed partial class InternalEntityEntry
             }
         }
 
-        public void AddRangeToCollection(INavigationBase navigation, IEnumerable<object> addedEntities)
+        public void AddRangeToCollection(
+            INavigationBase navigation,
+            IEnumerable<object> addedEntities
+        )
         {
             var index = navigation.GetRelationshipIndex();
             if (index != -1)
@@ -103,7 +105,6 @@ public sealed partial class InternalEntityEntry
             return snapshot;
         }
 
-        public bool IsEmpty
-            => _values == null;
+        public bool IsEmpty => _values == null;
     }
 }

@@ -13,12 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteSubstrMethodTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo MethodInfo = typeof(SqliteDbFunctionsExtensions)
-        .GetMethod(nameof(SqliteDbFunctionsExtensions.Substr), new[] { typeof(DbFunctions), typeof(byte[]), typeof(int) })!;
+    private static readonly MethodInfo MethodInfo = typeof(SqliteDbFunctionsExtensions).GetMethod(
+        nameof(SqliteDbFunctionsExtensions.Substr),
+        new[] { typeof(DbFunctions), typeof(byte[]), typeof(int) }
+    )!;
 
-    private static readonly MethodInfo MethodInfoWithLength = typeof(SqliteDbFunctionsExtensions)
-        .GetMethod(
-            nameof(SqliteDbFunctionsExtensions.Substr), new[] { typeof(DbFunctions), typeof(byte[]), typeof(int), typeof(int) })!;
+    private static readonly MethodInfo MethodInfoWithLength =
+        typeof(SqliteDbFunctionsExtensions).GetMethod(
+            nameof(SqliteDbFunctionsExtensions.Substr),
+            new[] { typeof(DbFunctions), typeof(byte[]), typeof(int), typeof(int) }
+        )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -43,10 +47,10 @@ public class SqliteSubstrMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (method.Equals(MethodInfo)
-            || method.Equals(MethodInfoWithLength))
+        if (method.Equals(MethodInfo) || method.Equals(MethodInfoWithLength))
         {
             return _sqlExpressionFactory.Function(
                 "substr",
@@ -54,7 +58,8 @@ public class SqliteSubstrMethodTranslator : IMethodCallTranslator
                 nullable: true,
                 arguments.Skip(1).Select(_ => true).ToArray(),
                 typeof(byte[]),
-                arguments[1].TypeMapping);
+                arguments[1].TypeMapping
+            );
         }
 
         return null;

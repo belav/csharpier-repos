@@ -44,7 +44,12 @@ namespace System.IO.Pipes
                 access |= Interop.Kernel32.GenericOperations.GENERIC_WRITE;
             }
 
-            SafePipeHandle handle = CreateNamedPipeClient(_normalizedPipePath, ref secAttrs, _pipeFlags, access);
+            SafePipeHandle handle = CreateNamedPipeClient(
+                _normalizedPipePath,
+                ref secAttrs,
+                _pipeFlags,
+                access
+            );
 
             if (handle.IsInvalid)
             {
@@ -71,8 +76,11 @@ namespace System.IO.Pipes
                 {
                     errorCode = Marshal.GetLastPInvokeError();
 
-                    if (errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND || // server has been closed
-                        errorCode == Interop.Errors.ERROR_SEM_TIMEOUT)
+                    if (
+                        errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                        || // server has been closed
+                        errorCode == Interop.Errors.ERROR_SEM_TIMEOUT
+                    )
                     {
                         return false;
                     }
@@ -81,7 +89,12 @@ namespace System.IO.Pipes
                 }
 
                 // Pipe server should be free. Let's try to connect to it.
-                handle = CreateNamedPipeClient(_normalizedPipePath, ref secAttrs, _pipeFlags, access);
+                handle = CreateNamedPipeClient(
+                    _normalizedPipePath,
+                    ref secAttrs,
+                    _pipeFlags,
+                    access
+                );
 
                 if (handle.IsInvalid)
                 {
@@ -91,8 +104,11 @@ namespace System.IO.Pipes
 
                     // WaitNamedPipe: "A subsequent CreateFile call to the pipe can fail,
                     // because the instance was closed by the server or opened by another client."
-                    if (errorCode == Interop.Errors.ERROR_PIPE_BUSY || // opened by another client
-                        errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND) // server has been closed
+                    if (
+                        errorCode == Interop.Errors.ERROR_PIPE_BUSY
+                        || // opened by another client
+                        errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                    ) // server has been closed
                     {
                         return false;
                     }
@@ -107,8 +123,21 @@ namespace System.IO.Pipes
             ValidateRemotePipeUser();
             return true;
 
-            static SafePipeHandle CreateNamedPipeClient(string? path, ref Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs, int pipeFlags, int access)
-                => Interop.Kernel32.CreateNamedPipeClient(path, access, FileShare.None, ref secAttrs, FileMode.Open, pipeFlags, hTemplateFile: IntPtr.Zero);
+            static SafePipeHandle CreateNamedPipeClient(
+                string? path,
+                ref Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs,
+                int pipeFlags,
+                int access
+            ) =>
+                Interop.Kernel32.CreateNamedPipeClient(
+                    path,
+                    access,
+                    FileShare.None,
+                    ref secAttrs,
+                    FileMode.Open,
+                    pipeFlags,
+                    hTemplateFile: IntPtr.Zero
+                );
         }
 
         [SupportedOSPlatform("windows")]
@@ -124,7 +153,17 @@ namespace System.IO.Pipes
                 // access request before calling NTCreateFile, so all NamedPipeClientStreams can read
                 // this if they are created (on WinXP SP2 at least)]
                 uint numInstances;
-                if (!Interop.Kernel32.GetNamedPipeHandleStateW(InternalHandle!, null, &numInstances, null, null, null, 0))
+                if (
+                    !Interop.Kernel32.GetNamedPipeHandleStateW(
+                        InternalHandle!,
+                        null,
+                        &numInstances,
+                        null,
+                        null,
+                        null,
+                        0
+                    )
+                )
                 {
                     throw WinIOError(Marshal.GetLastPInvokeError());
                 }
@@ -146,7 +185,9 @@ namespace System.IO.Pipes
                 if (remoteOwnerSid != currentUserSid)
                 {
                     State = PipeState.Closed;
-                    throw new UnauthorizedAccessException(SR.UnauthorizedAccess_NotOwnedByCurrentUser);
+                    throw new UnauthorizedAccessException(
+                        SR.UnauthorizedAccess_NotOwnedByCurrentUser
+                    );
                 }
             }
         }

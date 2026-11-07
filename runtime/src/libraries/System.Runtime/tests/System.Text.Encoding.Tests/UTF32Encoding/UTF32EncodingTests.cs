@@ -12,7 +12,12 @@ namespace System.Text.Tests
         public void Ctor_Empty()
         {
             UTF32Encoding encoding = new UTF32Encoding();
-            VerifyUtf32Encoding(encoding, bigEndian: false, byteOrderMark: true, throwOnInvalidBytes: false);
+            VerifyUtf32Encoding(
+                encoding,
+                bigEndian: false,
+                byteOrderMark: true,
+                throwOnInvalidBytes: false
+            );
         }
 
         [Theory]
@@ -29,13 +34,26 @@ namespace System.Text.Tests
             Ctor_Bool_Bool_Bool(bigEndian, byteOrderMark, throwOnInvalidBytes: false);
         }
 
-        private static void Ctor_Bool_Bool_Bool(bool bigEndian, bool byteOrderMark, bool throwOnInvalidBytes)
+        private static void Ctor_Bool_Bool_Bool(
+            bool bigEndian,
+            bool byteOrderMark,
+            bool throwOnInvalidBytes
+        )
         {
-            UTF32Encoding encoding = new UTF32Encoding(bigEndian, byteOrderMark, throwOnInvalidBytes);
+            UTF32Encoding encoding = new UTF32Encoding(
+                bigEndian,
+                byteOrderMark,
+                throwOnInvalidBytes
+            );
             VerifyUtf32Encoding(encoding, bigEndian, byteOrderMark, throwOnInvalidBytes);
         }
 
-        private static void VerifyUtf32Encoding(UTF32Encoding encoding, bool bigEndian, bool byteOrderMark, bool throwOnInvalidBytes)
+        private static void VerifyUtf32Encoding(
+            UTF32Encoding encoding,
+            bool bigEndian,
+            bool byteOrderMark,
+            bool throwOnInvalidBytes
+        )
         {
             if (byteOrderMark)
             {
@@ -124,10 +142,30 @@ namespace System.Text.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new UTF32Encoding(), new UTF32Encoding(false, true, false), true };
-            yield return new object[] { new UTF32Encoding(), new UTF32Encoding(false, false, false), false };
-            yield return new object[] { new UTF32Encoding(), new UTF32Encoding(true, true, false), false };
-            yield return new object[] { new UTF32Encoding(), new UTF32Encoding(false, true, true), false };
+            yield return new object[]
+            {
+                new UTF32Encoding(),
+                new UTF32Encoding(false, true, false),
+                true,
+            };
+            yield return new object[]
+            {
+                new UTF32Encoding(),
+                new UTF32Encoding(false, false, false),
+                false,
+            };
+            yield return new object[]
+            {
+                new UTF32Encoding(),
+                new UTF32Encoding(true, true, false),
+                false,
+            };
+            yield return new object[]
+            {
+                new UTF32Encoding(),
+                new UTF32Encoding(false, true, true),
+                false,
+            };
 
             yield return new object[] { Encoding.UTF32, Encoding.UTF32, true };
             yield return new object[] { Encoding.UTF32, new UTF32Encoding(false, true), true };
@@ -135,8 +173,18 @@ namespace System.Text.Tests
             yield return new object[] { Encoding.UTF32, Encoding.GetEncoding("utf-32LE"), true };
             yield return new object[] { Encoding.UTF32, Encoding.GetEncoding("utf-32BE"), false };
 
-            yield return new object[] { Encoding.GetEncoding("utf-32BE"), new UTF32Encoding(true, true), true };
-            yield return new object[] { Encoding.GetEncoding("utf-32BE"), Encoding.GetEncoding("utf-32"), false };
+            yield return new object[]
+            {
+                Encoding.GetEncoding("utf-32BE"),
+                new UTF32Encoding(true, true),
+                true,
+            };
+            yield return new object[]
+            {
+                Encoding.GetEncoding("utf-32BE"),
+                Encoding.GetEncoding("utf-32"),
+                false,
+            };
 
             yield return new object[] { new UTF32Encoding(), new object(), false };
             yield return new object[] { new UTF32Encoding(), null, false };

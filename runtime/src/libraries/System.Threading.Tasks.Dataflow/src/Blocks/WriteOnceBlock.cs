@@ -22,36 +22,48 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T">Specifies the type of the data buffered by this dataflow block.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(WriteOnceBlock<>.DebugView))]
-    public sealed class WriteOnceBlock<T> : IPropagatorBlock<T, T>, IReceivableSourceBlock<T>, IDebuggerDisplay
+    public sealed class WriteOnceBlock<T>
+        : IPropagatorBlock<T, T>,
+            IReceivableSourceBlock<T>,
+            IDebuggerDisplay
     {
         /// <summary>A registry used to store all linked targets and information about them.</summary>
         private readonly TargetRegistry<T> _targetRegistry;
+
         /// <summary>The cloning function.</summary>
         private readonly Func<T, T>? _cloningFunction;
+
         /// <summary>The options used to configure this block's execution.</summary>
         private readonly DataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>Lazily initialized task completion source that produces the actual completion task when needed.</summary>
         private TaskCompletionSource<VoidResult>? _lazyCompletionTaskSource;
+
         /// <summary>Whether all future messages should be declined.</summary>
         private bool _decliningPermanently;
+
         /// <summary>Whether block completion is disallowed.</summary>
         private bool _completionReserved;
+
         /// <summary>The header of the singly-assigned value.</summary>
         private DataflowMessageHeader _header;
+
         /// <summary>The singly-assigned value.</summary>
         private T? _value;
 
         /// <summary>Gets the object used as the value lock.</summary>
-        private object ValueLock { get { return _targetRegistry; } }
+        private object ValueLock
+        {
+            get { return _targetRegistry; }
+        }
 
         /// <summary>Initializes the <see cref="WriteOnceBlock{T}"/>.</summary>
         /// <param name="cloningFunction">
         /// The function to use to clone the data when offered to other blocks.
         /// This may be null to indicate that no cloning need be performed.
         /// </param>
-        public WriteOnceBlock(Func<T, T>? cloningFunction) :
-            this(cloningFunction, DataflowBlockOptions.Default)
-        { }
+        public WriteOnceBlock(Func<T, T>? cloningFunction)
+            : this(cloningFunction, DataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="WriteOnceBlock{T}"/> with the specified <see cref="DataflowBlockOptions"/>.</summary>
         /// <param name="cloningFunction">
@@ -60,7 +72,10 @@ namespace System.Threading.Tasks.Dataflow
         /// </param>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="WriteOnceBlock{T}"/>.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
-        public WriteOnceBlock(Func<T, T>? cloningFunction, DataflowBlockOptions dataflowBlockOptions)
+        public WriteOnceBlock(
+            Func<T, T>? cloningFunction,
+            DataflowBlockOptions dataflowBlockOptions
+        )
         {
             if (dataflowBlockOptions is null)
             {
@@ -80,7 +95,9 @@ namespace System.Threading.Tasks.Dataflow
             // we need to initialize the completion task's TCS now.
             if (dataflowBlockOptions.CancellationToken.CanBeCanceled)
             {
-                _lazyCompletionTaskSource = new TaskCompletionSource<VoidResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+                _lazyCompletionTaskSource = new TaskCompletionSource<VoidResult>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 // If we've already had cancellation requested, do as little work as we have to
                 // in order to be done.
@@ -89,13 +106,19 @@ namespace System.Threading.Tasks.Dataflow
                     _completionReserved = _decliningPermanently = true;
 
                     // Cancel the completion task's TCS
-                    _lazyCompletionTaskSource.TrySetCanceled(dataflowBlockOptions.CancellationToken);
+                    _lazyCompletionTaskSource.TrySetCanceled(
+                        dataflowBlockOptions.CancellationToken
+                    );
                 }
                 else
                 {
                     // Handle async cancellation requests by declining on the target
                     Common.WireCancellationToComplete(
-                        dataflowBlockOptions.CancellationToken, _lazyCompletionTaskSource.Task, static (state, _) => ((WriteOnceBlock<T>)state!).Complete(), this);
+                        dataflowBlockOptions.CancellationToken,
+                        _lazyCompletionTaskSource.Task,
+                        static (state, _) => ((WriteOnceBlock<T>)state!).Complete(),
+                        this
+                    );
                 }
             }
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
@@ -111,8 +134,14 @@ namespace System.Threading.Tasks.Dataflow
         /// </remarks>
         private void CompleteBlockAsync(IList<Exception>? exceptions)
         {
-            Debug.Assert(_decliningPermanently, "We may get here only after we have started to decline permanently.");
-            Debug.Assert(_completionReserved, "We may get here only after we have reserved completion.");
+            Debug.Assert(
+                _decliningPermanently,
+                "We may get here only after we have started to decline permanently."
+            );
+            Debug.Assert(
+                _completionReserved,
+                "We may get here only after we have reserved completion."
+            );
             Common.ContractAssertMonitorStatus(ValueLock, held: false);
 
             // If there is no exceptions list, we offer the message around, and then complete.
@@ -120,29 +149,46 @@ namespace System.Threading.Tasks.Dataflow
             if (exceptions == null)
             {
                 // Offer the message to any linked targets and complete the block asynchronously to avoid blocking the caller
-                var taskForOutputProcessing = new Task(static state => ((WriteOnceBlock<T>)state!).OfferToTargetsAndCompleteBlock(), this,
-                                                        Common.GetCreationOptionsForTask());
+                var taskForOutputProcessing = new Task(
+                    static state => ((WriteOnceBlock<T>)state!).OfferToTargetsAndCompleteBlock(),
+                    this,
+                    Common.GetCreationOptionsForTask()
+                );
 
                 DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
                     etwLog.TaskLaunchedForMessageHandling(
-                        this, taskForOutputProcessing, DataflowEtwProvider.TaskLaunchedReason.OfferingOutputMessages, _header.IsValid ? 1 : 0);
+                        this,
+                        taskForOutputProcessing,
+                        DataflowEtwProvider.TaskLaunchedReason.OfferingOutputMessages,
+                        _header.IsValid ? 1 : 0
+                    );
                 }
 
                 // Start the task handling scheduling exceptions
-                Exception? exception = Common.StartTaskSafe(taskForOutputProcessing, _dataflowBlockOptions.TaskScheduler);
-                if (exception != null) CompleteCore(exception, storeExceptionEvenIfAlreadyCompleting: true);
+                Exception? exception = Common.StartTaskSafe(
+                    taskForOutputProcessing,
+                    _dataflowBlockOptions.TaskScheduler
+                );
+                if (exception != null)
+                    CompleteCore(exception, storeExceptionEvenIfAlreadyCompleting: true);
             }
             else
             {
                 // Complete the block asynchronously to avoid blocking the caller
-                Task.Factory.StartNew(static state =>
-                {
-                    Tuple<WriteOnceBlock<T>, IList<Exception>> blockAndList = (Tuple<WriteOnceBlock<T>, IList<Exception>>)state!;
-                    blockAndList.Item1.CompleteBlock(blockAndList.Item2);
-                },
-                Tuple.Create(this, exceptions), CancellationToken.None, Common.GetCreationOptionsForTask(), TaskScheduler.Default);
+                Task.Factory.StartNew(
+                    static state =>
+                    {
+                        Tuple<WriteOnceBlock<T>, IList<Exception>> blockAndList =
+                            (Tuple<WriteOnceBlock<T>, IList<Exception>>)state!;
+                        blockAndList.Item1.CompleteBlock(blockAndList.Item2);
+                    },
+                    Tuple.Create(this, exceptions),
+                    CancellationToken.None,
+                    Common.GetCreationOptionsForTask(),
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -170,7 +216,10 @@ namespace System.Threading.Tasks.Dataflow
             // has not been initialized yet and we may have to complete normally, because that would defeat the
             // sole purpose of the TCS being lazily initialized.
 
-            Debug.Assert(_lazyCompletionTaskSource == null || !_lazyCompletionTaskSource.Task.IsCompleted, "The task completion source must not be completed. This must be the only thread that ever completes the block.");
+            Debug.Assert(
+                _lazyCompletionTaskSource == null || !_lazyCompletionTaskSource.Task.IsCompleted,
+                "The task completion source must not be completed. This must be the only thread that ever completes the block."
+            );
 
             // Save the linked list of targets so that it could be traversed later to propagate completion
             TargetRegistry<T>.LinkedTargetInfo? linkedTargets = _targetRegistry.ClearEntryPoints();
@@ -190,7 +239,13 @@ namespace System.Threading.Tasks.Dataflow
                 // If our attempt succeeds (CompareExchange returns null), we have nothing more to do.
                 // If the completion task's TCS was already initialized (CompareExchange returns non-null),
                 // we have to complete that TCS instance.
-                if (Interlocked.CompareExchange(ref _lazyCompletionTaskSource, Common.CompletedVoidResultTaskCompletionSource, null) != null)
+                if (
+                    Interlocked.CompareExchange(
+                        ref _lazyCompletionTaskSource,
+                        Common.CompletedVoidResultTaskCompletionSource,
+                        null
+                    ) != null
+                )
                 {
                     _lazyCompletionTaskSource.TrySetResult(default(VoidResult));
                 }
@@ -224,14 +279,17 @@ namespace System.Threading.Tasks.Dataflow
 
         private void CompleteCore(Exception? exception, bool storeExceptionEvenIfAlreadyCompleting)
         {
-            Debug.Assert(exception != null || !storeExceptionEvenIfAlreadyCompleting,
-                            "When storeExceptionEvenIfAlreadyCompleting is set to true, an exception must be provided.");
+            Debug.Assert(
+                exception != null || !storeExceptionEvenIfAlreadyCompleting,
+                "When storeExceptionEvenIfAlreadyCompleting is set to true, an exception must be provided."
+            );
 
             bool thisThreadReservedCompletion = false;
             lock (ValueLock)
             {
                 // Faulting from outside is allowed until we start declining permanently
-                if (_decliningPermanently && !storeExceptionEvenIfAlreadyCompleting) return;
+                if (_decliningPermanently && !storeExceptionEvenIfAlreadyCompleting)
+                    return;
 
                 // Decline further messages
                 _decliningPermanently = true;
@@ -240,7 +298,8 @@ namespace System.Threading.Tasks.Dataflow
                 // If storeExceptionEvenIfAlreadyCompleting is true, we are here to fault the block,
                 // because we couldn't launch the offer-and-complete task.
                 // We have to retry to just complete. We do that by pretending completion wasn't reserved.
-                if (!_completionReserved || storeExceptionEvenIfAlreadyCompleting) thisThreadReservedCompletion = _completionReserved = true;
+                if (!_completionReserved || storeExceptionEvenIfAlreadyCompleting)
+                    thisThreadReservedCompletion = _completionReserved = true;
             }
 
             // This call caused us to start declining further messages,
@@ -335,26 +394,44 @@ namespace System.Threading.Tasks.Dataflow
 
             // If completion propagation has been requested, do it safely.
             // The Completion property will ensure the lazy TCS is initialized.
-            if (linkOptions.PropagateCompletion) Common.PropagateCompletionOnceCompleted(Completion, target);
+            if (linkOptions.PropagateCompletion)
+                Common.PropagateCompletionOnceCompleted(Completion, target);
 
             return Disposables.Nop;
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        public Task Completion { get { return CompletionTaskSource.Task; } }
+        public Task Completion
+        {
+            get { return CompletionTaskSource.Task; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
-        DataflowMessageStatus ITargetBlock<T>.OfferMessage(DataflowMessageHeader messageHeader, T messageValue, ISourceBlock<T>? source, bool consumeToAccept)
+        DataflowMessageStatus ITargetBlock<T>.OfferMessage(
+            DataflowMessageHeader messageHeader,
+            T messageValue,
+            ISourceBlock<T>? source,
+            bool consumeToAccept
+        )
         {
             // Validate arguments
-            if (!messageHeader.IsValid) throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
-            if (source == null && consumeToAccept) throw new ArgumentException(SR.Argument_CantConsumeFromANullSource, nameof(consumeToAccept));
+            if (!messageHeader.IsValid)
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
+            if (source == null && consumeToAccept)
+                throw new ArgumentException(
+                    SR.Argument_CantConsumeFromANullSource,
+                    nameof(consumeToAccept)
+                );
 
             bool thisThreadReservedCompletion = false;
             lock (ValueLock)
             {
                 // If we are declining messages, bail
-                if (_decliningPermanently) return DataflowMessageStatus.DecliningPermanently;
+                if (_decliningPermanently)
+                    return DataflowMessageStatus.DecliningPermanently;
 
                 // Consume the message from the source if necessary. We do this while holding ValueLock to prevent multiple concurrent
                 // offers from all succeeding.
@@ -362,7 +439,8 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     bool consumed;
                     messageValue = source!.ConsumeMessage(messageHeader, this, out consumed)!;
-                    if (!consumed) return DataflowMessageStatus.NotAvailable;
+                    if (!consumed)
+                        return DataflowMessageStatus.NotAvailable;
                 }
 
                 // Update the header and the value
@@ -373,22 +451,33 @@ namespace System.Threading.Tasks.Dataflow
                 _decliningPermanently = true;
 
                 // Reserve Completion
-                if (!_completionReserved) thisThreadReservedCompletion = _completionReserved = true;
+                if (!_completionReserved)
+                    thisThreadReservedCompletion = _completionReserved = true;
             }
 
             // Since this call to OfferMessage succeeded (and only one can ever), complete the block
             // (but asynchronously so as not to block the Post call while offering to
             // targets, running synchronous continuations off of the completion task, etc.)
-            if (thisThreadReservedCompletion) CompleteBlockAsync(exceptions: null);
+            if (thisThreadReservedCompletion)
+                CompleteBlockAsync(exceptions: null);
             return DataflowMessageStatus.Accepted;
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
-        T? ISourceBlock<T>.ConsumeMessage(DataflowMessageHeader messageHeader, ITargetBlock<T> target, out bool messageConsumed)
+        T? ISourceBlock<T>.ConsumeMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<T> target,
+            out bool messageConsumed
+        )
         {
             // Validate arguments
-            if (!messageHeader.IsValid) throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
-            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (!messageHeader.IsValid)
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
+            if (target == null)
+                throw new ArgumentNullException(nameof(target));
 
             // As long as the message being requested is the one we have, allow it to be consumed,
             // but make a copy using the provided cloning function.
@@ -405,11 +494,19 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
-        bool ISourceBlock<T>.ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<T> target)
+        bool ISourceBlock<T>.ReserveMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<T> target
+        )
         {
             // Validate arguments
-            if (!messageHeader.IsValid) throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
-            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (!messageHeader.IsValid)
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
+            if (target == null)
+                throw new ArgumentNullException(nameof(target));
 
             // As long as the message is the one we have, it can be "reserved."
             // Reservations on a WriteOnceBlock are not exclusive, because
@@ -418,14 +515,23 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
-        void ISourceBlock<T>.ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<T> target)
+        void ISourceBlock<T>.ReleaseReservation(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<T> target
+        )
         {
             // Validate arguments
-            if (!messageHeader.IsValid) throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
-            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (!messageHeader.IsValid)
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
+            if (target == null)
+                throw new ArgumentNullException(nameof(target));
 
             // As long as the message is the one we have, everything's fine.
-            if (_header.Id != messageHeader.Id) throw new InvalidOperationException(SR.InvalidOperation_MessageNotReservedByTarget);
+            if (_header.Id != messageHeader.Id)
+                throw new InvalidOperationException(SR.InvalidOperation_MessageNotReservedByTarget);
 
             // In other blocks, upon release we typically re-offer the message to all linked targets.
             // We need to do the same thing for WriteOnceBlock, in order to account for cases where the block
@@ -444,9 +550,7 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>The cloned item.</returns>
         private T CloneItem(T item)
         {
-            return _cloningFunction != null ?
-                _cloningFunction(item) :
-                item;
+            return _cloningFunction != null ? _cloningFunction(item) : item;
         }
 
         /// <summary>Offers the WriteOnceBlock's message to all targets.</summary>
@@ -499,7 +603,13 @@ namespace System.Threading.Tasks.Dataflow
                 // it remains the block's completion task.
                 if (_lazyCompletionTaskSource == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyCompletionTaskSource, new TaskCompletionSource<VoidResult>(TaskCreationOptions.RunContinuationsAsynchronously), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyCompletionTaskSource,
+                        new TaskCompletionSource<VoidResult>(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        ),
+                        null
+                    );
                 }
 
                 return _lazyCompletionTaskSource;
@@ -507,19 +617,32 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <summary>Gets whether the block is storing a value.</summary>
-        private bool HasValue { get { return _header.IsValid; } }
+        private bool HasValue
+        {
+            get { return _header.IsValid; }
+        }
+
         /// <summary>Gets the value being stored by the block.</summary>
-        private T? Value { get { return _header.IsValid ? _value : default(T); } }
+        private T? Value
+        {
+            get { return _header.IsValid ? _value : default(T); }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
-        public override string ToString() { return Common.GetNameForDebugger(this, _dataflowBlockOptions); }
+        public override string ToString()
+        {
+            return Common.GetNameForDebugger(this, _dataflowBlockOptions);
+        }
 
         /// <summary>The data to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent =>
             $"{Common.GetNameForDebugger(this, _dataflowBlockOptions)}, HasValue = {HasValue}, Value = {Value}";
 
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
-        object IDebuggerDisplay.Content { get { return DebuggerDisplayContent; } }
+        object IDebuggerDisplay.Content
+        {
+            get { return DebuggerDisplayContent; }
+        }
 
         /// <summary>Provides a debugger type proxy for WriteOnceBlock.</summary>
         private sealed class DebugView
@@ -531,24 +654,48 @@ namespace System.Threading.Tasks.Dataflow
             /// <param name="writeOnceBlock">The WriteOnceBlock to view.</param>
             public DebugView(WriteOnceBlock<T> writeOnceBlock)
             {
-                Debug.Assert(writeOnceBlock != null, "Need a block with which to construct the debug view.");
+                Debug.Assert(
+                    writeOnceBlock != null,
+                    "Need a block with which to construct the debug view."
+                );
                 _writeOnceBlock = writeOnceBlock;
             }
 
             /// <summary>Gets whether the WriteOnceBlock has completed.</summary>
-            public bool IsCompleted { get { return _writeOnceBlock.Completion.IsCompleted; } }
+            public bool IsCompleted
+            {
+                get { return _writeOnceBlock.Completion.IsCompleted; }
+            }
+
             /// <summary>Gets the block's Id.</summary>
-            public int Id { get { return Common.GetBlockId(_writeOnceBlock); } }
+            public int Id
+            {
+                get { return Common.GetBlockId(_writeOnceBlock); }
+            }
 
             /// <summary>Gets whether the WriteOnceBlock has a value.</summary>
-            public bool HasValue { get { return _writeOnceBlock.HasValue; } }
+            public bool HasValue
+            {
+                get { return _writeOnceBlock.HasValue; }
+            }
+
             /// <summary>Gets the WriteOnceBlock's value if it has one, or default(T) if it doesn't.</summary>
-            public T? Value { get { return _writeOnceBlock.Value; } }
+            public T? Value
+            {
+                get { return _writeOnceBlock.Value; }
+            }
 
             /// <summary>Gets the DataflowBlockOptions used to configure this block.</summary>
-            public DataflowBlockOptions DataflowBlockOptions { get { return _writeOnceBlock._dataflowBlockOptions; } }
+            public DataflowBlockOptions DataflowBlockOptions
+            {
+                get { return _writeOnceBlock._dataflowBlockOptions; }
+            }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public TargetRegistry<T> LinkedTargets { get { return _writeOnceBlock._targetRegistry; } }
+            public TargetRegistry<T> LinkedTargets
+            {
+                get { return _writeOnceBlock._targetRegistry; }
+            }
         }
     }
 }

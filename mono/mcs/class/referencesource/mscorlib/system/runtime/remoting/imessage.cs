@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,17 +12,18 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Messaging {
+namespace System.Runtime.Remoting.Messaging
+{
     using System;
-    using IDictionary = System.Collections.IDictionary;
     using System.Security.Permissions;
-    
-[System.Runtime.InteropServices.ComVisible(true)]
+    using IDictionary = System.Collections.IDictionary;
+
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IMessage
     {
-        IDictionary Properties     
+        IDictionary Properties
         {
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             get;
         }
     }

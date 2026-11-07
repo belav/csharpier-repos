@@ -14,7 +14,8 @@ namespace System
     /// </summary>
     public static partial class Activator
     {
-        private const BindingFlags ConstructorDefault = BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
+        private const BindingFlags ConstructorDefault =
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
 
         //
         // Note: CreateInstance returns null for Nullable<T>, e.g. CreateInstance(typeof(int?)) returns null.
@@ -22,34 +23,85 @@ namespace System
 
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static object? CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors | DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture) =>
-            CreateInstance(type, bindingAttr, binder, args, culture, null);
+        public static object? CreateInstance(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+            )]
+                Type type,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture
+        ) => CreateInstance(type, bindingAttr, binder, args, culture, null);
 
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static object? CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, params object?[]? args) =>
-            CreateInstance(type, ConstructorDefault, null, args, null, null);
+        public static object? CreateInstance(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type,
+            params object?[]? args
+        ) => CreateInstance(type, ConstructorDefault, null, args, null, null);
 
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static object? CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, object?[]? args, object?[]? activationAttributes) =>
-            CreateInstance(type, ConstructorDefault, null, args, null, activationAttributes);
+        public static object? CreateInstance(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type,
+            object?[]? args,
+            object?[]? activationAttributes
+        ) => CreateInstance(type, ConstructorDefault, null, args, null, activationAttributes);
 
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static object? CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type) =>
-            CreateInstance(type, nonPublic: false);
+        public static object? CreateInstance(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type
+        ) => CreateInstance(type, nonPublic: false);
 
         [RequiresUnreferencedCode("Type and its constructor could be removed")]
         public static ObjectHandle? CreateInstanceFrom(string assemblyFile, string typeName) =>
-            CreateInstanceFrom(assemblyFile, typeName, false, ConstructorDefault, null, null, null, null);
+            CreateInstanceFrom(
+                assemblyFile,
+                typeName,
+                false,
+                ConstructorDefault,
+                null,
+                null,
+                null,
+                null
+            );
 
         [RequiresUnreferencedCode("Type and its constructor could be removed")]
-        public static ObjectHandle? CreateInstanceFrom(string assemblyFile, string typeName, object?[]? activationAttributes) =>
-            CreateInstanceFrom(assemblyFile, typeName, false, ConstructorDefault, null, null, null, activationAttributes);
+        public static ObjectHandle? CreateInstanceFrom(
+            string assemblyFile,
+            string typeName,
+            object?[]? activationAttributes
+        ) =>
+            CreateInstanceFrom(
+                assemblyFile,
+                typeName,
+                false,
+                ConstructorDefault,
+                null,
+                null,
+                null,
+                activationAttributes
+            );
 
         [RequiresUnreferencedCode("Type and its constructor could be removed")]
-        public static ObjectHandle? CreateInstanceFrom(string assemblyFile, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture, object?[]? activationAttributes)
+        public static ObjectHandle? CreateInstanceFrom(
+            string assemblyFile,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture,
+            object?[]? activationAttributes
+        )
         {
             Assembly assembly = Assembly.LoadFrom(assemblyFile);
             Type t = assembly.GetType(typeName, throwOnError: true, ignoreCase)!;

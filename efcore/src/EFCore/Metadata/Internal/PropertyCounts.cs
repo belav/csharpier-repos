@@ -24,7 +24,8 @@ public class PropertyCounts
         int originalValueCount,
         int shadowCount,
         int relationshipCount,
-        int storeGeneratedCount)
+        int storeGeneratedCount
+    )
     {
         PropertyCount = propertyCount;
         NavigationCount = navigationCount;

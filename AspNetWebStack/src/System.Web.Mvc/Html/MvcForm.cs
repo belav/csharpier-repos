@@ -11,8 +11,16 @@ namespace System.Web.Mvc.Html
         private readonly ViewContext _viewContext;
         private bool _disposed;
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "httpResponse", Justification = "This method existed in MVC 1.0 and has been deprecated.")]
-        [Obsolete("This constructor is obsolete, because its functionality has been moved to MvcForm(ViewContext) now.", true /* error */)]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "httpResponse",
+            Justification = "This method existed in MVC 1.0 and has been deprecated."
+        )]
+        [Obsolete(
+            "This constructor is obsolete, because its functionality has been moved to MvcForm(ViewContext) now.",
+            true /* error */
+        )]
         public MvcForm(HttpResponseBase httpResponse)
         {
             throw new InvalidOperationException(MvcResources.MvcForm_ConstructorObsolete);
@@ -33,7 +41,9 @@ namespace System.Web.Mvc.Html
 
         public void Dispose()
         {
-            Dispose(true /* disposing */);
+            Dispose(
+                true /* disposing */
+            );
             GC.SuppressFinalize(this);
         }
 

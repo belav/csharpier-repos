@@ -12,40 +12,35 @@ namespace System.Runtime.DurableInstancing
     public class InstanceLockLostException : InstancePersistenceCommandException
     {
         public InstanceLockLostException()
-            : this(SRCore.InstanceLockLostDefault, null)
-        {
-        }
+            : this(SRCore.InstanceLockLostDefault, null) { }
 
         public InstanceLockLostException(string message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public InstanceLockLostException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceLockLostException(XName commandName, Guid instanceId)
-            : this(commandName, instanceId, null)
-        {
-        }
+            : this(commandName, instanceId, null) { }
 
-        public InstanceLockLostException(XName commandName, Guid instanceId, Exception innerException)
-            : this(commandName, instanceId, ToMessage(instanceId), innerException)
-        {
-        }
+        public InstanceLockLostException(
+            XName commandName,
+            Guid instanceId,
+            Exception innerException
+        )
+            : this(commandName, instanceId, ToMessage(instanceId), innerException) { }
 
-        public InstanceLockLostException(XName commandName, Guid instanceId, string message, Exception innerException)
-            : base(commandName, instanceId, message, innerException)
-        {
-        }
+        public InstanceLockLostException(
+            XName commandName,
+            Guid instanceId,
+            string message,
+            Exception innerException
+        )
+            : base(commandName, instanceId, message, innerException) { }
 
         [SecurityCritical]
         protected InstanceLockLostException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         static string ToMessage(Guid instanceId)
         {

@@ -31,20 +31,22 @@ namespace System.DirectoryServices.AccountManagement
 
         internal enum ConstraintType
         {
-            ContainerStringMatch = 0,  // match = the objects distinguishedName begins with the string supplied as constraintData,  i.e.  the object is under that container.
+            ContainerStringMatch = 0, // match = the objects distinguishedName begins with the string supplied as constraintData,  i.e.  the object is under that container.
             ResultValidatorDelegateMatch = 1, //match = the result object will be passed as an argument to the
-                                              //function supplied as constraintData and it should return true.
+            //function supplied as constraintData and it should return true.
         }
 
         internal ADDNConstraintLinkedAttrSet(
-                            ConstraintType constraint,
-                            object constraintData,
-                            string groupDN,
-                            IEnumerable[] members,
-                            string primaryGroupDN,
-                            DirectorySearcher queryMembersSearcher,
-                            bool recursive,
-                            ADStoreCtx storeCtx) : base(groupDN, members, primaryGroupDN, queryMembersSearcher, recursive, storeCtx)
+            ConstraintType constraint,
+            object constraintData,
+            string groupDN,
+            IEnumerable[] members,
+            string primaryGroupDN,
+            DirectorySearcher queryMembersSearcher,
+            bool recursive,
+            ADStoreCtx storeCtx
+        )
+            : base(groupDN, members, primaryGroupDN, queryMembersSearcher, recursive, storeCtx)
         {
             Debug.Assert(constraintData != null);
 
@@ -53,15 +55,23 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         internal ADDNConstraintLinkedAttrSet(
-                    ConstraintType constraint,
-                    object constraintData,
-                    string groupDN,
-                    DirectorySearcher[] membersSearcher,
-                    string primaryGroupDN,
-                    DirectorySearcher primaryGroupMembersSearcher,
-                    bool recursive,
-                    ADStoreCtx storeCtx)
-            : base(groupDN, membersSearcher, primaryGroupDN, primaryGroupMembersSearcher, recursive, storeCtx)
+            ConstraintType constraint,
+            object constraintData,
+            string groupDN,
+            DirectorySearcher[] membersSearcher,
+            string primaryGroupDN,
+            DirectorySearcher primaryGroupMembersSearcher,
+            bool recursive,
+            ADStoreCtx storeCtx
+        )
+            : base(
+                groupDN,
+                membersSearcher,
+                primaryGroupDN,
+                primaryGroupMembersSearcher,
+                recursive,
+                storeCtx
+            )
         {
             Debug.Assert(constraintData != null);
 
@@ -74,8 +84,17 @@ namespace System.DirectoryServices.AccountManagement
 
         internal override bool MoveNext()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADDNConstraintLinkedAttrSet", "Entering MoveNext");
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADDNConstraintLinkedAttrSet", "Filter {0}", _constraintData);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADDNConstraintLinkedAttrSet",
+                "Entering MoveNext"
+            );
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADDNConstraintLinkedAttrSet",
+                "Filter {0}",
+                _constraintData
+            );
             bool match = false;
             string dn = "NotSet";
 
@@ -93,42 +112,61 @@ namespace System.DirectoryServices.AccountManagement
                         case ConstraintType.ContainerStringMatch:
 
                             if (this.current is SearchResult)
-                                dn = ((SearchResult)this.current).Properties["distinguishedName"][0].ToString();
+                                dn = ((SearchResult)this.current)
+                                    .Properties["distinguishedName"][0]
+                                    .ToString();
                             else
-                                dn = ((DirectoryEntry)this.current).Properties["distinguishedName"].Value.ToString();
+                                dn = ((DirectoryEntry)this.current)
+                                    .Properties["distinguishedName"]
+                                    .Value.ToString();
 
                             if (dn.EndsWith((string)_constraintData, StringComparison.Ordinal))
                                 match = true;
 
                             break;
                         case ConstraintType.ResultValidatorDelegateMatch:
+                        {
+                            ResultValidator resultValidator = _constraintData as ResultValidator;
+                            if (resultValidator != null)
                             {
-                                ResultValidator resultValidator = _constraintData as ResultValidator;
-                                if (resultValidator != null)
+                                dSPropertyCollection resultPropCollection = null;
+                                if (this.current is SearchResult)
                                 {
-                                    dSPropertyCollection resultPropCollection = null;
-                                    if (this.current is SearchResult)
-                                    {
-                                        resultPropCollection = new dSPropertyCollection(((SearchResult)this.current).Properties);
-                                    }
-                                    else
-                                    {
-                                        resultPropCollection = new dSPropertyCollection(((DirectoryEntry)this.current).Properties);
-                                    }
-                                    match = resultValidator.Invoke(resultPropCollection);
+                                    resultPropCollection = new dSPropertyCollection(
+                                        ((SearchResult)this.current).Properties
+                                    );
                                 }
                                 else
                                 {
-                                    Debug.Fail("ADStoreCtx.ADDNConstraintLinkedAttrSet: Invalid constraint data. Expected: object of type ResultValidator");
+                                    resultPropCollection = new dSPropertyCollection(
+                                        ((DirectoryEntry)this.current).Properties
+                                    );
                                 }
-                                break;
+                                match = resultValidator.Invoke(resultPropCollection);
                             }
+                            else
+                            {
+                                Debug.Fail(
+                                    "ADStoreCtx.ADDNConstraintLinkedAttrSet: Invalid constraint data. Expected: object of type ResultValidator"
+                                );
+                            }
+                            break;
+                        }
                         default:
-                            Debug.Fail("ADStoreCtx.ADDNConstraintLinkedAttrSet: fell off end looking for " + _constraint.ToString());
+                            Debug.Fail(
+                                "ADStoreCtx.ADDNConstraintLinkedAttrSet: fell off end looking for "
+                                    + _constraint.ToString()
+                            );
                             break;
                     }
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADDNConstraintLinkedAttrSet", "Found {0} Match {1}", dn, match.ToString());
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADDNConstraintLinkedAttrSet",
+                        "Found {0} Match {1}",
+                        dn,
+                        match.ToString()
+                    );
 
                     if (!match)
                         if (!this.MoveNext())

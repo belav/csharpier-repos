@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,39 +30,39 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-	public sealed class MsmqTransportSecurity
-	{
-		MsmqAuthenticationMode auth = MsmqAuthenticationMode.WindowsDomain;
-		MsmqEncryptionAlgorithm enc;
-		MsmqSecureHashAlgorithm hash = MsmqSecureHashAlgorithm.Sha1;
-		ProtectionLevel protection_level = ProtectionLevel.Sign;
+    public sealed class MsmqTransportSecurity
+    {
+        MsmqAuthenticationMode auth = MsmqAuthenticationMode.WindowsDomain;
+        MsmqEncryptionAlgorithm enc;
+        MsmqSecureHashAlgorithm hash = MsmqSecureHashAlgorithm.Sha1;
+        ProtectionLevel protection_level = ProtectionLevel.Sign;
 
-		public MsmqTransportSecurity ()
-		{
-		}
+        public MsmqTransportSecurity() { }
 
-		public MsmqTransportSecurity (MsmqTransportSecurity other)
-		{
-		}
+        public MsmqTransportSecurity(MsmqTransportSecurity other) { }
 
-		public MsmqAuthenticationMode MsmqAuthenticationMode {
-			get { return auth; }
-			set { auth = value; }
-		}
+        public MsmqAuthenticationMode MsmqAuthenticationMode
+        {
+            get { return auth; }
+            set { auth = value; }
+        }
 
-		public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm {
-			get { return enc; }
-			set { enc = value; }
-		}
+        public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm
+        {
+            get { return enc; }
+            set { enc = value; }
+        }
 
-		public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm {
-			get { return hash; }
-			set { hash = value; }
-		}
+        public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm
+        {
+            get { return hash; }
+            set { hash = value; }
+        }
 
-		public ProtectionLevel MsmqProtectionLevel {
-			get { return protection_level; }
-			set { protection_level = value; }
-		}
-	}
+        public ProtectionLevel MsmqProtectionLevel
+        {
+            get { return protection_level; }
+            set { protection_level = value; }
+        }
+    }
 }

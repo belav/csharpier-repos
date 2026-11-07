@@ -16,10 +16,14 @@ namespace System.SpanTests
     public static partial class SpanTests
     {
         private static readonly Func<SearchValues<byte>, byte[]> s_getValuesByteMethod =
-            typeof(SearchValues<byte>).GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance).CreateDelegate<Func<SearchValues<byte>, byte[]>>();
+            typeof(SearchValues<byte>)
+                .GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance)
+                .CreateDelegate<Func<SearchValues<byte>, byte[]>>();
 
         private static readonly Func<SearchValues<char>, char[]> s_getValuesCharMethod =
-            typeof(SearchValues<char>).GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance).CreateDelegate<Func<SearchValues<char>, char[]>>();
+            typeof(SearchValues<char>)
+                .GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance)
+                .CreateDelegate<Func<SearchValues<char>, char[]>>();
 
         public static IEnumerable<object[]> Values_MemberData()
         {
@@ -88,7 +92,10 @@ namespace System.SpanTests
             Assert.Equal(0, haystackWithZeroes.IndexOfAny(needle));
             Assert.Equal(1, haystackWithZeroes.IndexOfAnyExcept(needle));
             Assert.Equal(needleContainsZero ? 8 : 6, haystackWithZeroes.LastIndexOfAny(needle));
-            Assert.Equal(needleContainsZero ? 7 : 8, haystackWithZeroes.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                needleContainsZero ? 7 : 8,
+                haystackWithZeroes.LastIndexOfAnyExcept(needle)
+            );
 
             Span<char> haystackWithOffsetNeedle = new char[100];
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i++)
@@ -99,7 +106,10 @@ namespace System.SpanTests
             Assert.Equal(-1, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
             Assert.Equal(-1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // Mix matching characters back in
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i += 3)
@@ -109,19 +119,30 @@ namespace System.SpanTests
 
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(1, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 2, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAny(needle)
+            );
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 2,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // With chars, the lower byte could be matching, but we have to check that the higher byte is also 0
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i++)
             {
-                haystackWithOffsetNeedle[i] = (char)(((i + 1) * 256) + needleValues[i % needleValues.Length]);
+                haystackWithOffsetNeedle[i] = (char)(
+                    ((i + 1) * 256) + needleValues[i % needleValues.Length]
+                );
             }
 
             Assert.Equal(-1, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
             Assert.Equal(-1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // Mix matching characters back in
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i += 3)
@@ -131,8 +152,14 @@ namespace System.SpanTests
 
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(1, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 2, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAny(needle)
+            );
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 2,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
         }
 
         [Theory]
@@ -154,7 +181,10 @@ namespace System.SpanTests
             Assert.Equal(0, haystackWithZeroes.IndexOfAny(needle));
             Assert.Equal(1, haystackWithZeroes.IndexOfAnyExcept(needle));
             Assert.Equal(needleContainsZero ? 8 : 6, haystackWithZeroes.LastIndexOfAny(needle));
-            Assert.Equal(needleContainsZero ? 7 : 8, haystackWithZeroes.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                needleContainsZero ? 7 : 8,
+                haystackWithZeroes.LastIndexOfAnyExcept(needle)
+            );
 
             Span<byte> haystackWithOffsetNeedle = new byte[100];
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i++)
@@ -165,7 +195,10 @@ namespace System.SpanTests
             Assert.Equal(-1, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
             Assert.Equal(-1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // Mix matching characters back in
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i += 3)
@@ -175,8 +208,14 @@ namespace System.SpanTests
 
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(1, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 2, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAny(needle)
+            );
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 2,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
         }
 
         [Theory]
@@ -186,7 +225,8 @@ namespace System.SpanTests
             Test(needle, SearchValues.Create(needle));
             Test(byteNeedle, SearchValues.Create(byteNeedle));
 
-            static void Test<T>(ReadOnlySpan<T> needle, SearchValues<T> values) where T : struct, INumber<T>, IMinMaxValue<T>
+            static void Test<T>(ReadOnlySpan<T> needle, SearchValues<T> values)
+                where T : struct, INumber<T>, IMinMaxValue<T>
             {
                 for (int i = int.CreateChecked(T.MaxValue); i >= 0; i--)
                 {
@@ -198,14 +238,23 @@ namespace System.SpanTests
 
         [Theory]
         [MemberData(nameof(Values_MemberData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/80875", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/80875",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public static void SearchValues_GetValues(string needle, byte[] byteNeedle)
         {
             char[] charValuesActual = s_getValuesCharMethod(SearchValues.Create(needle));
             byte[] byteValuesActual = s_getValuesByteMethod(SearchValues.Create(byteNeedle));
 
-            Assert.Equal(new HashSet<char>(needle).Order().ToArray(), new HashSet<char>(charValuesActual).Order().ToArray());
-            Assert.Equal(new HashSet<byte>(byteNeedle).Order().ToArray(), new HashSet<byte>(byteValuesActual).Order().ToArray());
+            Assert.Equal(
+                new HashSet<char>(needle).Order().ToArray(),
+                new HashSet<char>(charValuesActual).Order().ToArray()
+            );
+            Assert.Equal(
+                new HashSet<byte>(byteNeedle).Order().ToArray(),
+                new HashSet<byte>(byteValuesActual).Order().ToArray()
+            );
         }
 
         [Fact]
@@ -216,9 +265,13 @@ namespace System.SpanTests
                 expected: IndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAny(values),
                 searchValues: (searchSpace, values) => searchSpace.IndexOfAny(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values)
+            );
 
-            static int IndexOfAnyReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int IndexOfAnyReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -240,9 +293,13 @@ namespace System.SpanTests
                 expected: IndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAny(values),
                 searchValues: (searchSpace, values) => searchSpace.IndexOfAny(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values)
+            );
 
-            static int IndexOfAnyReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int IndexOfAnyReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -264,9 +321,13 @@ namespace System.SpanTests
                 expected: LastIndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAny(values),
                 searchValues: (searchSpace, values) => searchSpace.LastIndexOfAny(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values)
+            );
 
-            static int LastIndexOfAnyReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int LastIndexOfAnyReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -288,9 +349,13 @@ namespace System.SpanTests
                 expected: LastIndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAny(values),
                 searchValues: (searchSpace, values) => searchSpace.LastIndexOfAny(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAny(values)
+            );
 
-            static int LastIndexOfAnyReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int LastIndexOfAnyReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -312,9 +377,13 @@ namespace System.SpanTests
                 expected: IndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values),
                 searchValues: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values)
+            );
 
-            static int IndexOfAnyExceptReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int IndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -336,9 +405,13 @@ namespace System.SpanTests
                 expected: IndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values),
                 searchValues: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values)
+            );
 
-            static int IndexOfAnyExceptReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int IndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -360,9 +433,13 @@ namespace System.SpanTests
                 expected: LastIndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values),
                 searchValues: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values)
+            );
 
-            static int LastIndexOfAnyExceptReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int LastIndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -384,9 +461,13 @@ namespace System.SpanTests
                 expected: LastIndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values),
                 searchValues: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values),
-                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values));
+                searchValuesContains: (searchSpace, values) => searchSpace.ContainsAnyExcept(values)
+            );
 
-            static int LastIndexOfAnyExceptReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int LastIndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -437,26 +518,55 @@ namespace System.SpanTests
                 rng.NextBytes(s_randomBytes);
             }
 
-            public delegate int IndexOfAnySearchDelegate<T>(ReadOnlySpan<T> searchSpace, ReadOnlySpan<T> values) where T : IEquatable<T>?;
+            public delegate int IndexOfAnySearchDelegate<T>(
+                ReadOnlySpan<T> searchSpace,
+                ReadOnlySpan<T> values
+            )
+                where T : IEquatable<T>?;
 
-            public delegate int SearchValuesSearchDelegate<T>(ReadOnlySpan<T> searchSpace, SearchValues<T> values) where T : IEquatable<T>?;
+            public delegate int SearchValuesSearchDelegate<T>(
+                ReadOnlySpan<T> searchSpace,
+                SearchValues<T> values
+            )
+                where T : IEquatable<T>?;
 
-            public delegate bool SearchValuesContainsDelegate<T>(ReadOnlySpan<T> searchSpace, SearchValues<T> values) where T : IEquatable<T>?;
+            public delegate bool SearchValuesContainsDelegate<T>(
+                ReadOnlySpan<T> searchSpace,
+                SearchValues<T> values
+            )
+                where T : IEquatable<T>?;
 
             public static void TestRandomInputs(
                 IndexOfAnySearchDelegate<byte> expected,
                 IndexOfAnySearchDelegate<byte> indexOfAny,
                 SearchValuesSearchDelegate<byte> searchValues,
-                SearchValuesContainsDelegate<byte> searchValuesContains)
+                SearchValuesContainsDelegate<byte> searchValuesContains
+            )
             {
                 var rng = new Random(42);
 
                 for (int iterations = 0; iterations < 1_000_000; iterations++)
                 {
                     // There are more interesting corner cases with ASCII needles, test those more.
-                    Test(rng, s_randomBytes, s_randomAsciiBytes, expected, indexOfAny, searchValues, searchValuesContains);
+                    Test(
+                        rng,
+                        s_randomBytes,
+                        s_randomAsciiBytes,
+                        expected,
+                        indexOfAny,
+                        searchValues,
+                        searchValuesContains
+                    );
 
-                    Test(rng, s_randomBytes, s_randomBytes, expected, indexOfAny, searchValues, searchValuesContains);
+                    Test(
+                        rng,
+                        s_randomBytes,
+                        s_randomBytes,
+                        expected,
+                        indexOfAny,
+                        searchValues,
+                        searchValuesContains
+                    );
                 }
             }
 
@@ -464,67 +574,155 @@ namespace System.SpanTests
                 IndexOfAnySearchDelegate<char> expected,
                 IndexOfAnySearchDelegate<char> indexOfAny,
                 SearchValuesSearchDelegate<char> searchValues,
-                SearchValuesContainsDelegate<char> searchValuesContains)
+                SearchValuesContainsDelegate<char> searchValuesContains
+            )
             {
                 var rng = new Random(42);
 
                 for (int iterations = 0; iterations < 1_000_000; iterations++)
                 {
                     // There are more interesting corner cases with ASCII needles, test those more.
-                    Test(rng, s_randomChars, s_randomAsciiChars, expected, indexOfAny, searchValues, searchValuesContains);
+                    Test(
+                        rng,
+                        s_randomChars,
+                        s_randomAsciiChars,
+                        expected,
+                        indexOfAny,
+                        searchValues,
+                        searchValuesContains
+                    );
 
-                    Test(rng, s_randomChars, s_randomLatin1Chars, expected, indexOfAny, searchValues, searchValuesContains);
+                    Test(
+                        rng,
+                        s_randomChars,
+                        s_randomLatin1Chars,
+                        expected,
+                        indexOfAny,
+                        searchValues,
+                        searchValuesContains
+                    );
 
-                    Test(rng, s_randomChars, s_randomChars, expected, indexOfAny, searchValues, searchValuesContains);
+                    Test(
+                        rng,
+                        s_randomChars,
+                        s_randomChars,
+                        expected,
+                        indexOfAny,
+                        searchValues,
+                        searchValuesContains
+                    );
                 }
             }
 
-            private static void Test<T>(Random rng, ReadOnlySpan<T> haystackRandom, ReadOnlySpan<T> needleRandom,
-                IndexOfAnySearchDelegate<T> expected, IndexOfAnySearchDelegate<T> indexOfAny,
-                SearchValuesSearchDelegate<T> searchValues, SearchValuesContainsDelegate<T> searchValuesContains)
+            private static void Test<T>(
+                Random rng,
+                ReadOnlySpan<T> haystackRandom,
+                ReadOnlySpan<T> needleRandom,
+                IndexOfAnySearchDelegate<T> expected,
+                IndexOfAnySearchDelegate<T> indexOfAny,
+                SearchValuesSearchDelegate<T> searchValues,
+                SearchValuesContainsDelegate<T> searchValuesContains
+            )
                 where T : struct, INumber<T>, IMinMaxValue<T>
             {
                 ReadOnlySpan<T> haystack = GetRandomSlice(rng, haystackRandom, MaxHaystackLength);
                 ReadOnlySpan<T> needle = GetRandomSlice(rng, needleRandom, MaxNeedleLength);
 
-                SearchValues<T> searchValuesInstance = (SearchValues<T>)(object)(typeof(T) == typeof(byte)
-                    ? SearchValues.Create(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(needle)), needle.Length))
-                    : SearchValues.Create(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, char>(ref MemoryMarshal.GetReference(needle)), needle.Length)));
+                SearchValues<T> searchValuesInstance =
+                    (SearchValues<T>)
+                        (object)(
+                            typeof(T) == typeof(byte)
+                                ? SearchValues.Create(
+                                    MemoryMarshal.CreateReadOnlySpan(
+                                        ref Unsafe.As<T, byte>(
+                                            ref MemoryMarshal.GetReference(needle)
+                                        ),
+                                        needle.Length
+                                    )
+                                )
+                                : SearchValues.Create(
+                                    MemoryMarshal.CreateReadOnlySpan(
+                                        ref Unsafe.As<T, char>(
+                                            ref MemoryMarshal.GetReference(needle)
+                                        ),
+                                        needle.Length
+                                    )
+                                )
+                        );
 
                 int expectedIndex = expected(haystack, needle);
                 int indexOfAnyIndex = indexOfAny(haystack, needle);
                 int searchValuesIndex = searchValues(haystack, searchValuesInstance);
-                bool searchValuesContainsResult = searchValuesContains(haystack, searchValuesInstance);
+                bool searchValuesContainsResult = searchValuesContains(
+                    haystack,
+                    searchValuesInstance
+                );
 
                 if (expectedIndex != indexOfAnyIndex)
                 {
-                    AssertionFailed(haystack, needle, expectedIndex, indexOfAnyIndex, nameof(indexOfAny));
+                    AssertionFailed(
+                        haystack,
+                        needle,
+                        expectedIndex,
+                        indexOfAnyIndex,
+                        nameof(indexOfAny)
+                    );
                 }
 
                 if (expectedIndex != searchValuesIndex)
                 {
-                    AssertionFailed(haystack, needle, expectedIndex, searchValuesIndex, nameof(searchValues));
+                    AssertionFailed(
+                        haystack,
+                        needle,
+                        expectedIndex,
+                        searchValuesIndex,
+                        nameof(searchValues)
+                    );
                 }
 
                 if ((expectedIndex >= 0) != searchValuesContainsResult)
                 {
-                    AssertionFailed(haystack, needle, expectedIndex, searchValuesContainsResult ? 0 : -1, nameof(searchValuesContainsResult));
+                    AssertionFailed(
+                        haystack,
+                        needle,
+                        expectedIndex,
+                        searchValuesContainsResult ? 0 : -1,
+                        nameof(searchValuesContainsResult)
+                    );
                 }
             }
 
-            private static ReadOnlySpan<T> GetRandomSlice<T>(Random rng, ReadOnlySpan<T> span, int maxLength)
+            private static ReadOnlySpan<T> GetRandomSlice<T>(
+                Random rng,
+                ReadOnlySpan<T> span,
+                int maxLength
+            )
             {
                 ReadOnlySpan<T> slice = span.Slice(rng.Next(span.Length + 1));
                 return slice.Slice(0, Math.Min(slice.Length, rng.Next(maxLength + 1)));
             }
 
-            private static void AssertionFailed<T>(ReadOnlySpan<T> haystack, ReadOnlySpan<T> needle, int expected, int actual, string approach)
+            private static void AssertionFailed<T>(
+                ReadOnlySpan<T> haystack,
+                ReadOnlySpan<T> needle,
+                int expected,
+                int actual,
+                string approach
+            )
                 where T : INumber<T>
             {
-                string readableHaystack = string.Join(", ", haystack.ToArray().Select(c => int.CreateChecked(c)));
-                string readableNeedle = string.Join(", ", needle.ToArray().Select(c => int.CreateChecked(c)));
+                string readableHaystack = string.Join(
+                    ", ",
+                    haystack.ToArray().Select(c => int.CreateChecked(c))
+                );
+                string readableNeedle = string.Join(
+                    ", ",
+                    needle.ToArray().Select(c => int.CreateChecked(c))
+                );
 
-                Assert.Fail($"Expected {expected}, got {approach}={actual} for needle='{readableNeedle}', haystack='{readableHaystack}'");
+                Assert.Fail(
+                    $"Expected {expected}, got {approach}={actual} for needle='{readableNeedle}', haystack='{readableHaystack}'"
+                );
             }
         }
     }

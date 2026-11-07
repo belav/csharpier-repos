@@ -20,14 +20,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             OleMenuCommandService menuCommandService,
             IVsMonitorSelection monitorSelection,
             IComponentModel componentModel,
-            IThreadingContext threadingContext)
-            : base(ContentTypeNames.VisualBasicContentType, menuCommandService, monitorSelection, componentModel, threadingContext)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(
+                ContentTypeNames.VisualBasicContentType,
+                menuCommandService,
+                monitorSelection,
+                componentModel,
+                threadingContext
+            ) { }
 
         protected override string ProjectKind => VSLangProj.PrjKind.prjKindVBProject;
 
-        protected override CommandID GetResetInteractiveFromProjectCommandID()
-            => new(ID.InteractiveCommands.VisualBasicInteractiveCommandSetId, ID.InteractiveCommands.ResetInteractiveFromProject);
+        protected override CommandID GetResetInteractiveFromProjectCommandID() =>
+            new(
+                ID.InteractiveCommands.VisualBasicInteractiveCommandSetId,
+                ID.InteractiveCommands.ResetInteractiveFromProject
+            );
     }
 }

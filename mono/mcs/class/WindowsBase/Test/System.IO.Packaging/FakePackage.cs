@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,59 +23,63 @@
 //	Alan McGovern (amcgovern@novell.com)
 //
 
-
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
-using System.Collections.Generic;
 
-namespace MonoTests.System.IO.Packaging {
-	
-    public class FakePackage : Package {
+namespace MonoTests.System.IO.Packaging
+{
+    public class FakePackage : Package
+    {
         Dictionary<Uri, PackagePart> Parts { get; set; }
         public List<Uri> CreatedParts { get; private set; }
         public List<Uri> DeletedParts { get; private set; }
         public List<Uri> GotParts { get; private set; }
 
-        public FakePackage (FileAccess access, bool streaming)
-            : base (access, streaming)
+        public FakePackage(FileAccess access, bool streaming)
+            : base(access, streaming)
         {
-            CreatedParts = new List<Uri> ();
-            DeletedParts = new List<Uri> ();
+            CreatedParts = new List<Uri>();
+            DeletedParts = new List<Uri>();
             GotParts = new List<Uri>();
-            Parts = new Dictionary<Uri, PackagePart> ();
+            Parts = new Dictionary<Uri, PackagePart>();
         }
 
-        protected override PackagePart CreatePartCore (Uri partUri, string contentType, CompressionOption compressionOption)
+        protected override PackagePart CreatePartCore(
+            Uri partUri,
+            string contentType,
+            CompressionOption compressionOption
+        )
         {
-            FakePackagePart p = new FakePackagePart (this, partUri, contentType, compressionOption);
-            Parts.Add (p.Uri, p);
-            CreatedParts.Add (partUri);
+            FakePackagePart p = new FakePackagePart(this, partUri, contentType, compressionOption);
+            Parts.Add(p.Uri, p);
+            CreatedParts.Add(partUri);
             return p;
         }
 
-        protected override void DeletePartCore (Uri partUri)
+        protected override void DeletePartCore(Uri partUri)
         {
-            DeletedParts.Add (partUri);
-            Parts.Remove (partUri);
+            DeletedParts.Add(partUri);
+            Parts.Remove(partUri);
         }
 
-        protected override void FlushCore ()
+        protected override void FlushCore()
         {
             // Flush...
         }
-        
-        protected override PackagePart GetPartCore (Uri partUri)
+
+        protected override PackagePart GetPartCore(Uri partUri)
         {
-            if (!GotParts.Contains (partUri))
-                GotParts.Add (partUri);
-            return Parts.ContainsKey(partUri) ?  Parts [partUri] : null;
+            if (!GotParts.Contains(partUri))
+                GotParts.Add(partUri);
+            return Parts.ContainsKey(partUri) ? Parts[partUri] : null;
         }
 
-        protected override PackagePart [] GetPartsCore ()
+        protected override PackagePart[] GetPartsCore()
         {
-            PackagePart [] p = new PackagePart [Parts.Count];
-            Parts.Values.CopyTo (p, 0);
+            PackagePart[] p = new PackagePart[Parts.Count];
+            Parts.Values.CopyTo(p, 0);
             return p;
         }
     }

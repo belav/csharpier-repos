@@ -25,7 +25,12 @@ namespace Microsoft.Data.Sqlite
             AppDomain.CurrentDomain.DomainUnload += (_, _) => ClearPools();
             AppDomain.CurrentDomain.ProcessExit += (_, _) => ClearPools();
 
-            _pruneTimer = new Timer(PruneCallback, null, TimeSpan.FromMinutes(4), TimeSpan.FromSeconds(30));
+            _pruneTimer = new Timer(
+                PruneCallback,
+                null,
+                TimeSpan.FromMinutes(4),
+                TimeSpan.FromSeconds(30)
+            );
         }
 
         public SqliteConnectionInternal GetConnection(SqliteConnection outerConnection)
@@ -39,9 +44,10 @@ namespace Microsoft.Data.Sqlite
 
             var pool = poolGroup.GetPool();
 
-            var connection = pool == null
-                ? new SqliteConnectionInternal(outerConnection.ConnectionOptions)
-                : pool.GetConnection();
+            var connection =
+                pool == null
+                    ? new SqliteConnectionInternal(outerConnection.ConnectionOptions)
+                    : pool.GetConnection();
             connection.Activate(outerConnection);
 
             return connection;
@@ -53,9 +59,10 @@ namespace Microsoft.Data.Sqlite
 
             try
             {
-                if (!_poolGroups.TryGetValue(connectionString, out var poolGroup)
-                    || (poolGroup.IsDisabled
-                        && !poolGroup.IsNonPooled))
+                if (
+                    !_poolGroups.TryGetValue(connectionString, out var poolGroup)
+                    || (poolGroup.IsDisabled && !poolGroup.IsNonPooled)
+                )
                 {
                     var connectionOptions = new SqliteConnectionStringBuilder(connectionString);
 
@@ -65,12 +72,17 @@ namespace Microsoft.Data.Sqlite
                     {
                         if (!_poolGroups.TryGetValue(connectionString, out poolGroup))
                         {
-                            var isNonPooled = connectionOptions.DataSource == ":memory:"
+                            var isNonPooled =
+                                connectionOptions.DataSource == ":memory:"
                                 || connectionOptions.Mode == SqliteOpenMode.Memory
                                 || connectionOptions.DataSource.Length == 0
                                 || !connectionOptions.Pooling;
 
-                            poolGroup = new SqliteConnectionPoolGroup(connectionOptions, connectionString, isNonPooled);
+                            poolGroup = new SqliteConnectionPoolGroup(
+                                connectionOptions,
+                                connectionString,
+                                isNonPooled
+                            );
                             _poolGroups.Add(connectionString, poolGroup);
                         }
                     }
@@ -141,7 +153,6 @@ namespace Microsoft.Data.Sqlite
 
             try
             {
-
                 for (var i = _idlePoolGroups.Count - 1; i >= 0; i--)
                 {
                     var poolGroup = _idlePoolGroups[i];

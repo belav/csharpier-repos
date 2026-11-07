@@ -22,12 +22,9 @@ namespace System.ServiceModel.Security
             this.isReadOnly = other.isReadOnly;
         }
 
-        public bool AllowAnonymousLogons 
+        public bool AllowAnonymousLogons
         {
-            get
-            {
-                return this.allowAnonymousLogons;
-            }
+            get { return this.allowAnonymousLogons; }
             set
             {
                 ThrowIfImmutable();
@@ -35,12 +32,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public bool IncludeWindowsGroups 
+        public bool IncludeWindowsGroups
         {
-            get
-            {
-                return this.includeWindowsGroups;
-            }
+            get { return this.includeWindowsGroups; }
             set
             {
                 ThrowIfImmutable();
@@ -57,7 +51,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

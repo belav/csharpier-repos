@@ -10,7 +10,10 @@ namespace System.ComponentModel.Composition.Registration
 {
     public class PartBuilder
     {
-        private static readonly List<Attribute> s_importingConstructorList = new List<Attribute>() { new ImportingConstructorAttribute() };
+        private static readonly List<Attribute> s_importingConstructorList = new List<Attribute>()
+        {
+            new ImportingConstructorAttribute(),
+        };
         private static readonly Type s_exportAttributeType = typeof(ExportAttribute);
         private readonly List<ExportBuilder> _typeExportBuilders;
         private bool _setCreationPolicy;
@@ -25,9 +28,15 @@ namespace System.ComponentModel.Composition.Registration
         private Action<ParameterInfo, ImportBuilder> _configureConstructorImports;
 
         //Property Import/Export selection and configuration
-        private readonly List<Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type>> _propertyExports;
-        private readonly List<Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type>> _propertyImports;
-        private readonly List<Tuple<Predicate<Type>, Action<Type, ExportBuilder>>> _interfaceExports;
+        private readonly List<
+            Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type>
+        > _propertyExports;
+        private readonly List<
+            Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type>
+        > _propertyImports;
+        private readonly List<
+            Tuple<Predicate<Type>, Action<Type, ExportBuilder>>
+        > _interfaceExports;
 
         internal Predicate<Type> SelectType { get; private set; }
 
@@ -37,8 +46,14 @@ namespace System.ComponentModel.Composition.Registration
             _setCreationPolicy = false;
             _creationPolicy = CreationPolicy.Any;
             _typeExportBuilders = new List<ExportBuilder>();
-            _propertyExports = new List<Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type>>();
-            _propertyImports = new List<Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type>>();
+            _propertyExports =
+                new List<
+                    Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type>
+                >();
+            _propertyImports =
+                new List<
+                    Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type>
+                >();
             _interfaceExports = new List<Tuple<Predicate<Type>, Action<Type, ExportBuilder>>>();
         }
 
@@ -71,13 +86,17 @@ namespace System.ComponentModel.Composition.Registration
         }
 
         // Choose a constructor from all of the available constructors, then configure them
-        public PartBuilder SelectConstructor(Func<ConstructorInfo[], ConstructorInfo> constructorFilter)
+        public PartBuilder SelectConstructor(
+            Func<ConstructorInfo[], ConstructorInfo> constructorFilter
+        )
         {
             return SelectConstructor(constructorFilter, null);
         }
 
-        public PartBuilder SelectConstructor(Func<ConstructorInfo[], ConstructorInfo> constructorFilter,
-            Action<ParameterInfo, ImportBuilder> importConfiguration)
+        public PartBuilder SelectConstructor(
+            Func<ConstructorInfo[], ConstructorInfo> constructorFilter,
+            Action<ParameterInfo, ImportBuilder> importConfiguration
+        )
         {
             _constructorFilter = constructorFilter;
             _configureConstructorImports = importConfiguration;
@@ -96,8 +115,10 @@ namespace System.ComponentModel.Composition.Registration
             return ExportInterfaces(t => true, null);
         }
 
-        public PartBuilder ExportInterfaces(Predicate<Type> interfaceFilter,
-            Action<Type, ExportBuilder> exportConfiguration)
+        public PartBuilder ExportInterfaces(
+            Predicate<Type> interfaceFilter,
+            Action<Type, ExportBuilder> exportConfiguration
+        )
         {
             if (interfaceFilter is null)
             {
@@ -120,8 +141,10 @@ namespace System.ComponentModel.Composition.Registration
             return ExportProperties(propertyFilter, null);
         }
 
-        public PartBuilder ExportProperties(Predicate<PropertyInfo> propertyFilter,
-            Action<PropertyInfo, ExportBuilder> exportConfiguration)
+        public PartBuilder ExportProperties(
+            Predicate<PropertyInfo> propertyFilter,
+            Action<PropertyInfo, ExportBuilder> exportConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -144,8 +167,10 @@ namespace System.ComponentModel.Composition.Registration
             return ExportProperties<T>(propertyFilter, null);
         }
 
-        public PartBuilder ExportProperties<T>(Predicate<PropertyInfo> propertyFilter,
-            Action<PropertyInfo, ExportBuilder> exportConfiguration)
+        public PartBuilder ExportProperties<T>(
+            Predicate<PropertyInfo> propertyFilter,
+            Action<PropertyInfo, ExportBuilder> exportConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -168,8 +193,10 @@ namespace System.ComponentModel.Composition.Registration
             return ImportProperties(propertyFilter, null);
         }
 
-        public PartBuilder ImportProperties(Predicate<PropertyInfo> propertyFilter,
-            Action<PropertyInfo, ImportBuilder> importConfiguration)
+        public PartBuilder ImportProperties(
+            Predicate<PropertyInfo> propertyFilter,
+            Action<PropertyInfo, ImportBuilder> importConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -191,8 +218,10 @@ namespace System.ComponentModel.Composition.Registration
             return ImportProperties<T>(propertyFilter, null);
         }
 
-        public PartBuilder ImportProperties<T>(Predicate<PropertyInfo> propertyFilter,
-            Action<PropertyInfo, ImportBuilder> importConfiguration)
+        public PartBuilder ImportProperties<T>(
+            Predicate<PropertyInfo> propertyFilter,
+            Action<PropertyInfo, ImportBuilder> importConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -238,7 +267,10 @@ namespace System.ComponentModel.Composition.Registration
                 {
                     Type attrType = attr.GetType();
                     // Perf optimization, relies on short circuit evaluation, often a property attribute is an ExportAttribute
-                    if (attrType != s_exportAttributeType && attrType.IsDefined(typeof(MetadataAttributeAttribute), true))
+                    if (
+                        attrType != s_exportAttributeType
+                        && attrType.IsDefined(typeof(MetadataAttributeAttribute), true)
+                    )
                     {
                         return true;
                     }
@@ -253,7 +285,10 @@ namespace System.ComponentModel.Composition.Registration
 
             if (_typeExportBuilders != null)
             {
-                bool isConfigured = type.GetCustomAttributes(typeof(ExportAttribute), false).FirstOrDefault() != null || MemberHasExportMetadata(type);
+                bool isConfigured =
+                    type.GetCustomAttributes(typeof(ExportAttribute), false).FirstOrDefault()
+                        != null
+                    || MemberHasExportMetadata(type);
                 if (isConfigured)
                 {
                     CompositionTrace.Registration_TypeExportConventionOverridden(type);
@@ -272,7 +307,9 @@ namespace System.ComponentModel.Composition.Registration
                 // Check if there is already a PartCreationPolicyAttribute
                 // If found Trace a warning and do not add the registered part creationpolicy
                 // otherwise add new one
-                bool isConfigured = type.GetCustomAttributes(typeof(PartCreationPolicyAttribute), false).FirstOrDefault() != null;
+                bool isConfigured =
+                    type.GetCustomAttributes(typeof(PartCreationPolicyAttribute), false)
+                        .FirstOrDefault() != null;
                 if (isConfigured)
                 {
                     CompositionTrace.Registration_PartCreationConventionOverridden(type);
@@ -286,7 +323,9 @@ namespace System.ComponentModel.Composition.Registration
             //Add metadata attributes from direct specification
             if (_metadataItems != null)
             {
-                bool isConfigured = type.GetCustomAttributes(typeof(PartMetadataAttribute), false).FirstOrDefault() != null;
+                bool isConfigured =
+                    type.GetCustomAttributes(typeof(PartMetadataAttribute), false).FirstOrDefault()
+                    != null;
                 if (isConfigured)
                 {
                     CompositionTrace.Registration_PartMetadataConventionOverridden(type);
@@ -303,7 +342,9 @@ namespace System.ComponentModel.Composition.Registration
             //Add metadata attributes from func specification
             if (_metadataItemFuncs != null)
             {
-                bool isConfigured = type.GetCustomAttributes(typeof(PartMetadataAttribute), false).FirstOrDefault() != null;
+                bool isConfigured =
+                    type.GetCustomAttributes(typeof(PartMetadataAttribute), false).FirstOrDefault()
+                    != null;
                 if (isConfigured)
                 {
                     CompositionTrace.Registration_PartMetadataConventionOverridden(type);
@@ -323,7 +364,10 @@ namespace System.ComponentModel.Composition.Registration
             {
                 if (_typeExportBuilders != null)
                 {
-                    bool isConfigured = type.GetCustomAttributes(typeof(ExportAttribute), false).FirstOrDefault() != null || MemberHasExportMetadata(type);
+                    bool isConfigured =
+                        type.GetCustomAttributes(typeof(ExportAttribute), false).FirstOrDefault()
+                            != null
+                        || MemberHasExportMetadata(type);
                     if (isConfigured)
                     {
                         CompositionTrace.Registration_TypeExportConventionOverridden(type);
@@ -334,15 +378,26 @@ namespace System.ComponentModel.Composition.Registration
                         {
                             Type underlyingType = iface.UnderlyingSystemType;
 
-                            if (underlyingType == typeof(IDisposable) || underlyingType == typeof(IPartImportsSatisfiedNotification))
+                            if (
+                                underlyingType == typeof(IDisposable)
+                                || underlyingType == typeof(IPartImportsSatisfiedNotification)
+                            )
                             {
                                 continue;
                             }
 
                             // Run through the export specifications see if any match
-                            foreach (Tuple<Predicate<Type>, Action<Type, ExportBuilder>> exportSpecification in _interfaceExports)
+                            foreach (
+                                Tuple<
+                                    Predicate<Type>,
+                                    Action<Type, ExportBuilder>
+                                > exportSpecification in _interfaceExports
+                            )
                             {
-                                if (exportSpecification.Item1 != null && exportSpecification.Item1(underlyingType))
+                                if (
+                                    exportSpecification.Item1 != null
+                                    && exportSpecification.Item1(underlyingType)
+                                )
                                 {
                                     ExportBuilder exportBuilder = new ExportBuilder();
                                     exportBuilder.AsContractType((Type)iface);
@@ -352,14 +407,16 @@ namespace System.ComponentModel.Composition.Registration
                             }
                         }
                     }
-
                 }
             }
 
             return attributes;
         }
 
-        internal bool BuildConstructorAttributes(Type type, ref List<Tuple<object, List<Attribute>>> configuredMembers)
+        internal bool BuildConstructorAttributes(
+            Type type,
+            ref List<Tuple<object, List<Attribute>>> configuredMembers
+        )
         {
             ConstructorInfo[] constructors = type.GetConstructors();
 
@@ -367,7 +424,10 @@ namespace System.ComponentModel.Composition.Registration
             foreach (ConstructorInfo ci in constructors)
             {
                 // We have a constructor configuration we must log a warning then not bother with ConstructorAttributes
-                object[] attributes = ci.GetCustomAttributes(typeof(ImportingConstructorAttribute), false);
+                object[] attributes = ci.GetCustomAttributes(
+                    typeof(ImportingConstructorAttribute),
+                    false
+                );
                 if (attributes.Length != 0)
                 {
                     CompositionTrace.Registration_ConstructorConventionOverridden(type);
@@ -380,7 +440,11 @@ namespace System.ComponentModel.Composition.Registration
                 ConstructorInfo constructorInfo = _constructorFilter(constructors);
                 if (constructorInfo != null)
                 {
-                    ConfigureConstructorAttributes(constructorInfo, ref configuredMembers, _configureConstructorImports);
+                    ConfigureConstructorAttributes(
+                        constructorInfo,
+                        ref configuredMembers,
+                        _configureConstructorImports
+                    );
                 }
 
                 return true;
@@ -390,7 +454,11 @@ namespace System.ComponentModel.Composition.Registration
                 bool configured = false;
                 foreach (ConstructorInfo constructorInfo in FindLongestConstructors(constructors))
                 {
-                    ConfigureConstructorAttributes(constructorInfo, ref configuredMembers, _configureConstructorImports);
+                    ConfigureConstructorAttributes(
+                        constructorInfo,
+                        ref configuredMembers,
+                        _configureConstructorImports
+                    );
                     configured = true;
                 }
 
@@ -400,7 +468,10 @@ namespace System.ComponentModel.Composition.Registration
             return false;
         }
 
-        internal static void BuildDefaultConstructorAttributes(Type type, ref List<Tuple<object, List<Attribute>>> configuredMembers)
+        internal static void BuildDefaultConstructorAttributes(
+            Type type,
+            ref List<Tuple<object, List<Attribute>>> configuredMembers
+        )
         {
             ConstructorInfo[] constructors = type.GetConstructors();
 
@@ -410,21 +481,33 @@ namespace System.ComponentModel.Composition.Registration
             }
         }
 
-        private static void ConfigureConstructorAttributes(ConstructorInfo constructorInfo, ref List<Tuple<object, List<Attribute>>> configuredMembers, Action<ParameterInfo, ImportBuilder> configureConstructorImports)
+        private static void ConfigureConstructorAttributes(
+            ConstructorInfo constructorInfo,
+            ref List<Tuple<object, List<Attribute>>> configuredMembers,
+            Action<ParameterInfo, ImportBuilder> configureConstructorImports
+        )
         {
             configuredMembers ??= new List<Tuple<object, List<Attribute>>>();
 
             // Make its attribute
-            configuredMembers.Add(Tuple.Create((object)constructorInfo, s_importingConstructorList));
+            configuredMembers.Add(
+                Tuple.Create((object)constructorInfo, s_importingConstructorList)
+            );
 
             //Okay we have the constructor now we can configure the ImportBuilders
             ParameterInfo[] parameterInfos = constructorInfo.GetParameters();
             foreach (ParameterInfo pi in parameterInfos)
             {
-                bool isConfigured = pi.GetCustomAttributes(typeof(ImportAttribute), false).FirstOrDefault() != null || pi.GetCustomAttributes(typeof(ImportManyAttribute), false).FirstOrDefault() != null;
+                bool isConfigured =
+                    pi.GetCustomAttributes(typeof(ImportAttribute), false).FirstOrDefault() != null
+                    || pi.GetCustomAttributes(typeof(ImportManyAttribute), false).FirstOrDefault()
+                        != null;
                 if (isConfigured)
                 {
-                    CompositionTrace.Registration_ParameterImportConventionOverridden(pi, constructorInfo);
+                    CompositionTrace.Registration_ParameterImportConventionOverridden(
+                        pi,
+                        constructorInfo
+                    );
                 }
                 else
                 {
@@ -441,22 +524,37 @@ namespace System.ComponentModel.Composition.Registration
             }
         }
 
-        internal void BuildPropertyAttributes(Type type, ref List<Tuple<object, List<Attribute>>> configuredMembers)
+        internal void BuildPropertyAttributes(
+            Type type,
+            ref List<Tuple<object, List<Attribute>>> configuredMembers
+        )
         {
             if (_propertyImports.Count != 0 || _propertyExports.Count != 0)
             {
                 foreach (PropertyInfo pi in type.GetProperties())
                 {
                     List<Attribute> attributes = null;
-                    PropertyInfo declaredPi = pi.DeclaringType.UnderlyingSystemType.GetProperty(pi.Name, pi.PropertyType);
+                    PropertyInfo declaredPi = pi.DeclaringType.UnderlyingSystemType.GetProperty(
+                        pi.Name,
+                        pi.PropertyType
+                    );
                     int importsBuilt = 0;
                     bool checkedIfConfigured = false;
                     bool isConfigured = false;
 
                     // Run through the import specifications see if any match
-                    foreach (Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type> importSpecification in _propertyImports)
+                    foreach (
+                        Tuple<
+                            Predicate<PropertyInfo>,
+                            Action<PropertyInfo, ImportBuilder>,
+                            Type
+                        > importSpecification in _propertyImports
+                    )
                     {
-                        if (importSpecification.Item1 != null && importSpecification.Item1(declaredPi))
+                        if (
+                            importSpecification.Item1 != null
+                            && importSpecification.Item1(declaredPi)
+                        )
                         {
                             var importBuilder = new ImportBuilder();
 
@@ -469,24 +567,37 @@ namespace System.ComponentModel.Composition.Registration
 
                             if (!checkedIfConfigured)
                             {
-                                isConfigured = pi.GetCustomAttributes(typeof(ImportAttribute), false).FirstOrDefault() != null || pi.GetCustomAttributes(typeof(ImportManyAttribute), false).FirstOrDefault() != null;
+                                isConfigured =
+                                    pi.GetCustomAttributes(typeof(ImportAttribute), false)
+                                        .FirstOrDefault() != null
+                                    || pi.GetCustomAttributes(typeof(ImportManyAttribute), false)
+                                        .FirstOrDefault() != null;
                                 checkedIfConfigured = true;
                             }
 
                             if (isConfigured)
                             {
-                                CompositionTrace.Registration_MemberImportConventionOverridden(type, pi);
+                                CompositionTrace.Registration_MemberImportConventionOverridden(
+                                    type,
+                                    pi
+                                );
                                 break;
                             }
                             else
                             {
-                                importBuilder.BuildAttributes(declaredPi.PropertyType, ref attributes);
+                                importBuilder.BuildAttributes(
+                                    declaredPi.PropertyType,
+                                    ref attributes
+                                );
                                 ++importsBuilt;
                             }
                         }
                         if (importsBuilt > 1)
                         {
-                            CompositionTrace.Registration_MemberImportConventionMatchedTwice(type, pi);
+                            CompositionTrace.Registration_MemberImportConventionMatchedTwice(
+                                type,
+                                pi
+                            );
                         }
                     }
 
@@ -494,9 +605,18 @@ namespace System.ComponentModel.Composition.Registration
                     isConfigured = false;
 
                     // Run through the export specifications see if any match
-                    foreach (Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type> exportSpecification in _propertyExports)
+                    foreach (
+                        Tuple<
+                            Predicate<PropertyInfo>,
+                            Action<PropertyInfo, ExportBuilder>,
+                            Type
+                        > exportSpecification in _propertyExports
+                    )
                     {
-                        if (exportSpecification.Item1 != null && exportSpecification.Item1(declaredPi))
+                        if (
+                            exportSpecification.Item1 != null
+                            && exportSpecification.Item1(declaredPi)
+                        )
                         {
                             var exportBuilder = new ExportBuilder();
 
@@ -509,18 +629,27 @@ namespace System.ComponentModel.Composition.Registration
 
                             if (!checkedIfConfigured)
                             {
-                                isConfigured = pi.GetCustomAttributes(typeof(ExportAttribute), false).FirstOrDefault() != null || MemberHasExportMetadata(pi);
+                                isConfigured =
+                                    pi.GetCustomAttributes(typeof(ExportAttribute), false)
+                                        .FirstOrDefault() != null
+                                    || MemberHasExportMetadata(pi);
                                 checkedIfConfigured = true;
                             }
 
                             if (isConfigured)
                             {
-                                CompositionTrace.Registration_MemberExportConventionOverridden(type, pi);
+                                CompositionTrace.Registration_MemberExportConventionOverridden(
+                                    type,
+                                    pi
+                                );
                                 break;
                             }
                             else
                             {
-                                exportBuilder.BuildAttributes(declaredPi.PropertyType, ref attributes);
+                                exportBuilder.BuildAttributes(
+                                    declaredPi.PropertyType,
+                                    ref attributes
+                                );
                             }
                         }
                     }
@@ -535,7 +664,9 @@ namespace System.ComponentModel.Composition.Registration
             }
         }
 
-        private static IEnumerable<ConstructorInfo> FindLongestConstructors(ConstructorInfo[] constructors)
+        private static IEnumerable<ConstructorInfo> FindLongestConstructors(
+            ConstructorInfo[] constructors
+        )
         {
             ConstructorInfo longestConstructor = null;
             int argumentsCount = 0;

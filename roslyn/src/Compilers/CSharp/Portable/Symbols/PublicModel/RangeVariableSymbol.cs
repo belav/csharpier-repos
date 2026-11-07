@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitRangeVariable(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitRangeVariable(this, argument);
         }

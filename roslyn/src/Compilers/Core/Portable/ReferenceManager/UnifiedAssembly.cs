@@ -9,8 +9,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Assembly symbol referenced by a AssemblyRef for which we couldn't find a matching 
-    /// compilation reference but we found one that differs in version. 
+    /// Assembly symbol referenced by a AssemblyRef for which we couldn't find a matching
+    /// compilation reference but we found one that differs in version.
     /// Created only for assemblies that require runtime binding redirection policy,
     /// i.e. not for Framework assemblies.
     /// </summary>

@@ -18,26 +18,42 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object) { SuppressPrefixCheck = true });
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                {
+                    SuppressPrefixCheck = true,
+                }
+            );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext cc, ModelBindingContext mbc) =>
-                {
-                    Assert.Equal("someName.key", mbc.ModelName);
-                    mbc.Model = 42;
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext cc, ModelBindingContext mbc) =>
+                    {
+                        Assert.Equal("someName.key", mbc.ModelName);
+                        mbc.Model = 42;
+                        return true;
+                    }
+                );
 
             // Act
             int model;
-            bool retVal = context.TryBindStrongModel(bindingContext, "key", new EmptyModelMetadataProvider(), out model);
+            bool retVal = context.TryBindStrongModel(
+                bindingContext,
+                "key",
+                new EmptyModelMetadataProvider(),
+                out model
+            );
 
             // Assert
             Assert.True(retVal);
@@ -53,25 +69,41 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object) { SuppressPrefixCheck = true });
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                {
+                    SuppressPrefixCheck = true,
+                }
+            );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext cc, ModelBindingContext mbc) =>
-                {
-                    Assert.Equal("someName.key", mbc.ModelName);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext cc, ModelBindingContext mbc) =>
+                    {
+                        Assert.Equal("someName.key", mbc.ModelName);
+                        return true;
+                    }
+                );
 
             // Act
             int model;
-            bool retVal = context.TryBindStrongModel(bindingContext, "key", new EmptyModelMetadataProvider(), out model);
+            bool retVal = context.TryBindStrongModel(
+                bindingContext,
+                "key",
+                new EmptyModelMetadataProvider(),
+                out model
+            );
 
             // Assert
             Assert.True(retVal);
@@ -87,15 +119,23 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext context = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             // Act
             int model;
-            bool retVal = context.TryBindStrongModel(bindingContext, "key", new EmptyModelMetadataProvider(), out model);
+            bool retVal = context.TryBindStrongModel(
+                bindingContext,
+                "key",
+                new EmptyModelMetadataProvider(),
+                out model
+            );
 
             // Assert
             Assert.False(retVal);

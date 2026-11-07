@@ -10,50 +10,61 @@ namespace System.Net.Mail
     using System.Collections;
     using System.IO;
     using System.Net;
-    using System.Security.Permissions;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
 
-    // 
+    //
 
 #if MAKE_MAILCLIENT_PUBLIC
     internal
 #else
     internal
 #endif
-        class SmtpNtlmAuthenticationModule : ISmtpAuthenticationModule
+    class SmtpNtlmAuthenticationModule : ISmtpAuthenticationModule
     {
         Hashtable sessions = new Hashtable();
 
-        internal SmtpNtlmAuthenticationModule()
-        {
-        }
+        internal SmtpNtlmAuthenticationModule() { }
 
         #region ISmtpAuthenticationModule Members
 
         // Security this method will access NetworkCredential properties that demand UnmanagedCode and Environment Permission
-        [EnvironmentPermission(SecurityAction.Assert, Unrestricted=true)]
-        [SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
-        public Authorization Authenticate(string challenge, NetworkCredential credential, object sessionCookie, string spn, ChannelBinding channelBindingToken)
+        [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        public Authorization Authenticate(
+            string challenge,
+            NetworkCredential credential,
+            object sessionCookie,
+            string spn,
+            ChannelBinding channelBindingToken
+        )
         {
-            if(Logging.On)Logging.Enter(Logging.Web, this, "Authenticate", null);
-            try {
+            if (Logging.On)
+                Logging.Enter(Logging.Web, this, "Authenticate", null);
+            try
+            {
                 lock (this.sessions)
                 {
-                    NTAuthentication clientContext = this.sessions[sessionCookie] as NTAuthentication;
+                    NTAuthentication clientContext =
+                        this.sessions[sessionCookie] as NTAuthentication;
                     if (clientContext == null)
                     {
-                        if(credential == null){
+                        if (credential == null)
+                        {
                             return null;
                         }
 
-                        this.sessions[sessionCookie] =
-                            clientContext =
-                            new NTAuthentication(false, "Ntlm", credential, spn, ContextFlags.Connection, channelBindingToken);
-
+                        this.sessions[sessionCookie] = clientContext = new NTAuthentication(
+                            false,
+                            "Ntlm",
+                            credential,
+                            spn,
+                            ContextFlags.Connection,
+                            channelBindingToken
+                        );
                     }
 
                     string resp = clientContext.GetOutgoingBlob(challenge);
-
 
                     if (!clientContext.IsCompleted)
                     {
@@ -65,24 +76,25 @@ namespace System.Net.Mail
                         return new Authorization(resp, true);
                     }
                 }
-            } finally {
-                if(Logging.On)Logging.Exit(Logging.Web, this, "Authenticate", null);
+            }
+            finally
+            {
+                if (Logging.On)
+                    Logging.Exit(Logging.Web, this, "Authenticate", null);
             }
         }
 
         public string AuthenticationType
         {
-            get
-            {
-                return "ntlm";
-            }
+            get { return "ntlm"; }
         }
 
-        public void CloseContext(object sessionCookie) {
+        public void CloseContext(object sessionCookie)
+        {
             // This is a no-op since the context is not
             // kept open by this module beyond auth completion.
         }
-        
+
         #endregion
     }
 }

@@ -25,8 +25,8 @@ internal abstract class AbstractUseObjectInitializerCodeFixProvider<
     TAssignmentStatementSyntax,
     TLocalDeclarationStatementSyntax,
     TVariableDeclaratorSyntax,
-    TAnalyzer>
-    : ForkingSyntaxEditorBasedCodeFixProvider<TObjectCreationExpressionSyntax>
+    TAnalyzer
+> : ForkingSyntaxEditorBasedCodeFixProvider<TObjectCreationExpressionSyntax>
     where TSyntaxKind : struct
     where TExpressionSyntax : SyntaxNode
     where TStatementSyntax : SyntaxNode
@@ -36,29 +36,40 @@ internal abstract class AbstractUseObjectInitializerCodeFixProvider<
     where TLocalDeclarationStatementSyntax : TStatementSyntax
     where TVariableDeclaratorSyntax : SyntaxNode
     where TAnalyzer : AbstractUseNamedMemberInitializerAnalyzer<
-        TExpressionSyntax,
-        TStatementSyntax,
-        TObjectCreationExpressionSyntax,
-        TMemberAccessExpressionSyntax,
-        TAssignmentStatementSyntax,
-        TLocalDeclarationStatementSyntax,
-        TVariableDeclaratorSyntax,
-        TAnalyzer>, new()
+            TExpressionSyntax,
+            TStatementSyntax,
+            TObjectCreationExpressionSyntax,
+            TMemberAccessExpressionSyntax,
+            TAssignmentStatementSyntax,
+            TLocalDeclarationStatementSyntax,
+            TVariableDeclaratorSyntax,
+            TAnalyzer
+        >,
+        new()
 {
     protected AbstractUseObjectInitializerCodeFixProvider()
-        : base(AnalyzersResources.Object_initialization_can_be_simplified,
-               nameof(AnalyzersResources.Object_initialization_can_be_simplified))
-    {
-    }
+        : base(
+            AnalyzersResources.Object_initialization_can_be_simplified,
+            nameof(AnalyzersResources.Object_initialization_can_be_simplified)
+        ) { }
 
     protected abstract TAnalyzer GetAnalyzer();
 
     protected abstract TStatementSyntax GetNewStatement(
-        TStatementSyntax statement, TObjectCreationExpressionSyntax objectCreation,
-        ImmutableArray<Match<TExpressionSyntax, TStatementSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax>> matches);
+        TStatementSyntax statement,
+        TObjectCreationExpressionSyntax objectCreation,
+        ImmutableArray<
+            Match<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TMemberAccessExpressionSyntax,
+                TAssignmentStatementSyntax
+            >
+        > matches
+    );
 
-    public override ImmutableArray<string> FixableDiagnosticIds
-        => ImmutableArray.Create(IDEDiagnosticIds.UseObjectInitializerDiagnosticId);
+    public override ImmutableArray<string> FixableDiagnosticIds =>
+        ImmutableArray.Create(IDEDiagnosticIds.UseObjectInitializerDiagnosticId);
 
     protected override async Task FixAsync(
         Document document,
@@ -66,15 +77,25 @@ internal abstract class AbstractUseObjectInitializerCodeFixProvider<
         CodeActionOptionsProvider fallbackOptions,
         TObjectCreationExpressionSyntax objectCreation,
         ImmutableDictionary<string, string?> properties,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-        var currentRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var currentRoot = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         using var analyzer = GetAnalyzer();
 
-        var matches = analyzer.Analyze(semanticModel, syntaxFacts, objectCreation, cancellationToken);
+        var matches = analyzer.Analyze(
+            semanticModel,
+            syntaxFacts,
+            objectCreation,
+            cancellationToken
+        );
         if (matches.IsDefaultOrEmpty)
             return;
 

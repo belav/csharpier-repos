@@ -100,10 +100,8 @@ readonly struct QueryStringEnumerable
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
             ReadOnlySpan<char> span = chars.Span;
             return Uri.UnescapeDataString(
-                    string.Create(
-                        span.Length,
-                        (IntPtr)(&span),
-                        static (dest, ptr) => ((ReadOnlySpan<char>*)ptr)->Replace(dest, '+', ' ')
+                    string.Create(span.Length, (IntPtr)(&span), static (dest, ptr) =>
+                        ((ReadOnlySpan<char>*)ptr)->Replace(dest, '+', ' ')
                     )
                 )
                 .AsMemory();

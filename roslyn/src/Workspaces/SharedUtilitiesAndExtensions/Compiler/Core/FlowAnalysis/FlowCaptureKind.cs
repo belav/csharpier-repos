@@ -25,6 +25,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// Indicates both an R-Value and an L-Value flow capture, i.e. captures of a symbol's value and location/address.
         /// These are generated for left of a compound assignment operation, such that there is conditional code on the right side of the compound assignment.
         /// </summary>
-        LValueAndRValueCapture
+        LValueAndRValueCapture,
     }
 }

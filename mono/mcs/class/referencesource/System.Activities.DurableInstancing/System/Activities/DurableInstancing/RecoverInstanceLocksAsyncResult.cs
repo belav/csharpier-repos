@@ -13,10 +13,13 @@ namespace System.Activities.DurableInstancing
 
     sealed class RecoverInstanceLocksAsyncResult : SqlWorkflowInstanceStoreAsyncResult
     {
-        static readonly string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[RecoverInstanceLocks]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static readonly string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[RecoverInstanceLocks]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
 
-        public RecoverInstanceLocksAsyncResult
-            (
+        public RecoverInstanceLocksAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -25,25 +28,32 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, int.MaxValue, callback, state)
-        {
-        }
+        )
+            : base(
+                context,
+                command,
+                store,
+                storeLock,
+                currentTransaction,
+                timeout,
+                int.MaxValue,
+                callback,
+                state
+            ) { }
 
         protected override string ConnectionString
         {
             get
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(base.Store.CachedConnectionString);
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(
+                    base.Store.CachedConnectionString
+                );
                 builder.ApplicationName = SqlWorkflowInstanceStore.CommonConnectionPoolName;
                 return builder.ToString();
             }
         }
 
-        protected override void GenerateSqlCommand(SqlCommand sqlCommand)
-        {
-
-        }
+        protected override void GenerateSqlCommand(SqlCommand sqlCommand) { }
 
         protected override string GetSqlCommandText()
         {
@@ -57,7 +67,10 @@ namespace System.Activities.DurableInstancing
 
         protected override Exception ProcessSqlResult(SqlDataReader reader)
         {
-            return StoreUtilities.CheckRemainingResultSetForErrors(base.InstancePersistenceCommand.Name, reader);
+            return StoreUtilities.CheckRemainingResultSetForErrors(
+                base.InstancePersistenceCommand.Name,
+                reader
+            );
         }
     }
 }

@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -58,7 +58,11 @@ namespace DbLinq.Data.Linq.Sugar.ExpressionMutator
         /// <param name="operands"></param>
         /// <param name="checkForChanges"></param>
         /// <returns>A potentially new expression with new operands</returns>
-        public static T ChangeOperands<T>(this T expression, IList<Expression> operands, bool checkForChanges)
+        public static T ChangeOperands<T>(
+            this T expression,
+            IList<Expression> operands,
+            bool checkForChanges
+        )
             where T : Expression
         {
             bool haveOperandsChanged = checkForChanges && HaveOperandsChanged(expression, operands);
@@ -151,7 +155,10 @@ namespace DbLinq.Data.Linq.Sugar.ExpressionMutator
         /// <param name="expression">The original expression</param>
         /// <param name="analyzer"></param>
         /// <returns>A new QueryExpression or the original one</returns>
-        public static Expression Recurse(this Expression expression, Func<Expression, Expression> analyzer)
+        public static Expression Recurse(
+            this Expression expression,
+            Func<Expression, Expression> analyzer
+        )
         {
             var newOperands = new List<Expression>();
             // first, work on children (down)

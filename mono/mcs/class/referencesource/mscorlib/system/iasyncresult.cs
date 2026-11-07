@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -11,23 +11,20 @@
 **          operation
 **
 ===========================================================*/
-namespace System {
-    
+namespace System
+{
     using System;
     using System.Threading;
-[System.Runtime.InteropServices.ComVisible(true)]
+
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IAsyncResult
     {
         bool IsCompleted { get; }
 
         WaitHandle AsyncWaitHandle { get; }
 
+        Object AsyncState { get; }
 
-        Object     AsyncState      { get; }
-
-        bool       CompletedSynchronously { get; }
-   
-    
+        bool CompletedSynchronously { get; }
     }
-
 }

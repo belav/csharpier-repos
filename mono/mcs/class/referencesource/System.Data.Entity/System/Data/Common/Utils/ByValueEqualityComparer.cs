@@ -10,9 +10,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Common.Utils
 {
@@ -27,10 +27,8 @@ namespace System.Data.Common.Utils
         /// Provides by-value comparison for instances of the CLR equivalents of all EDM primitive types.
         /// </summary>
         internal static readonly ByValueEqualityComparer Default = new ByValueEqualityComparer();
-        
-        private ByValueEqualityComparer()
-        {
-        }
+
+        private ByValueEqualityComparer() { }
 
         public new bool Equals(object x, object y)
         {
@@ -38,7 +36,7 @@ namespace System.Data.Common.Utils
             {
                 return true;
             }
-                        
+
             // If x and y are both non-null byte arrays, then perform a by-value comparison
             // based on length and element values, otherwise defer to the default comparison.
             //
@@ -66,7 +64,7 @@ namespace System.Data.Common.Utils
             {
                 return 0;
             }
-            
+
             return obj.GetHashCode();
         }
 
@@ -84,7 +82,7 @@ namespace System.Data.Common.Utils
         internal static bool CompareBinaryValues(byte[] first, byte[] second)
         {
             Debug.Assert(first != null && second != null, "Arguments cannot be null");
-            
+
             if (first.Length != second.Length)
             {
                 return false;
@@ -110,6 +108,7 @@ namespace System.Data.Common.Utils
         internal static readonly IComparer Default = new ByValueComparer(Comparer<object>.Default);
 
         private readonly IComparer nonByValueComparer;
+
         private ByValueComparer(IComparer comparer)
         {
             Debug.Assert(comparer != null, "Non-ByValue comparer cannot be null");
@@ -123,9 +122,14 @@ namespace System.Data.Common.Utils
                 return 0;
             }
 
-            
             //We can convert DBNulls to nulls for the purposes of comparison.
-            Debug.Assert(!((object.ReferenceEquals(x, DBNull.Value)) && (object.ReferenceEquals(y,DBNull.Value))), "object.ReferenceEquals should catch the case when both values are dbnull");
+            Debug.Assert(
+                !(
+                    (object.ReferenceEquals(x, DBNull.Value))
+                    && (object.ReferenceEquals(y, DBNull.Value))
+                ),
+                "object.ReferenceEquals should catch the case when both values are dbnull"
+            );
             if (object.ReferenceEquals(x, DBNull.Value))
             {
                 x = null;
@@ -134,7 +138,7 @@ namespace System.Data.Common.Utils
             {
                 y = null;
             }
-            
+
             if (x != null && y != null)
             {
                 byte[] xAsBytes = x as byte[];

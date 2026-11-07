@@ -13,7 +13,8 @@ namespace System.Web.Mvc
 {
     public class ViewContext : ControllerContext
     {
-        private const string ClientValidationScript = @"<script type=""text/javascript"">
+        private const string ClientValidationScript =
+            @"<script type=""text/javascript"">
 //<![CDATA[
 if (!window.mvcClientValidationMetadata) {{ window.mvcClientValidationMetadata = []; }}
 window.mvcClientValidationMetadata.push({0});
@@ -21,9 +22,12 @@ window.mvcClientValidationMetadata.push({0});
 </script>";
 
         internal static readonly string ClientValidationKeyName = "ClientValidationEnabled";
-        internal static readonly string UnobtrusiveJavaScriptKeyName = "UnobtrusiveJavaScriptEnabled";
-        internal static readonly string ValidationSummaryMessageElementKeyName = "ValidationSummaryMessageElement";
-        internal static readonly string ValidationMessageElementKeyName = "ValidationMessageElement";
+        internal static readonly string UnobtrusiveJavaScriptKeyName =
+            "UnobtrusiveJavaScriptEnabled";
+        internal static readonly string ValidationSummaryMessageElementKeyName =
+            "ValidationSummaryMessageElement";
+        internal static readonly string ValidationMessageElementKeyName =
+            "ValidationMessageElement";
 
         // Some values have to be stored in HttpContext.Items in order to be propagated between calls
         // to RenderPartial(), RenderAction(), etc.
@@ -40,12 +44,20 @@ window.mvcClientValidationMetadata.push({0});
         private FormContext _defaultFormContext = new FormContext();
 
         // parameterless constructor used for mocking
-        public ViewContext()
-        {
-        }
+        public ViewContext() { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway.")]
-        public ViewContext(ControllerContext controllerContext, IView view, ViewDataDictionary viewData, TempDataDictionary tempData, TextWriter writer)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway."
+        )]
+        public ViewContext(
+            ControllerContext controllerContext,
+            IView view,
+            ViewDataDictionary viewData,
+            TempDataDictionary tempData,
+            TextWriter writer
+        )
             : base(controllerContext)
         {
             if (controllerContext == null)
@@ -128,7 +140,11 @@ window.mvcClientValidationMetadata.push({0});
             set { _scopeThunk = value; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "The property setter is only here to support mocking this type and should not be called at runtime.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "The property setter is only here to support mocking this type and should not be called at runtime."
+        )]
         public virtual TempDataDictionary TempData { get; set; }
 
         public virtual bool UnobtrusiveJavaScriptEnabled
@@ -187,7 +203,11 @@ window.mvcClientValidationMetadata.push({0});
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "The property setter is only here to support mocking this type and should not be called at runtime.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "The property setter is only here to support mocking this type and should not be called at runtime."
+        )]
         public virtual ViewDataDictionary ViewData { get; set; }
 
         public virtual TextWriter Writer { get; set; }
@@ -198,7 +218,10 @@ window.mvcClientValidationMetadata.push({0});
             return String.Format(CultureInfo.InvariantCulture, "form{0}", formNum);
         }
 
-        internal static bool GetClientValidationEnabled(IDictionary<object, object> scope = null, HttpContextBase httpContext = null)
+        internal static bool GetClientValidationEnabled(
+            IDictionary<object, object> scope = null,
+            HttpContextBase httpContext = null
+        )
         {
             return ScopeCache.Get(scope, httpContext).ClientValidationEnabled;
         }
@@ -208,21 +231,26 @@ window.mvcClientValidationMetadata.push({0});
             return (ClientValidationEnabled) ? FormContext : null;
         }
 
-        internal static bool GetUnobtrusiveJavaScriptEnabled(IDictionary<object, object> scope = null, HttpContextBase httpContext = null)
+        internal static bool GetUnobtrusiveJavaScriptEnabled(
+            IDictionary<object, object> scope = null,
+            HttpContextBase httpContext = null
+        )
         {
             return ScopeCache.Get(scope, httpContext).UnobtrusiveJavaScriptEnabled;
         }
 
         internal static string GetValidationSummaryMessageElement(
             IDictionary<object, object> scope = null,
-            HttpContextBase httpContext = null)
+            HttpContextBase httpContext = null
+        )
         {
             return ScopeCache.Get(scope, httpContext).ValidationSummaryMessageElement;
         }
 
         internal static string GetValidationMessageElement(
             IDictionary<object, object> scope = null,
-            HttpContextBase httpContext = null)
+            HttpContextBase httpContext = null
+        )
         {
             return ScopeCache.Get(scope, httpContext).ValidationMessageElement;
         }
@@ -243,19 +271,34 @@ window.mvcClientValidationMetadata.push({0});
                 return; // do nothing
             }
 
-            string scriptWithCorrectNewLines = ClientValidationScript.Replace("\r\n", Environment.NewLine);
+            string scriptWithCorrectNewLines = ClientValidationScript.Replace(
+                "\r\n",
+                Environment.NewLine
+            );
             string validationJson = formContext.GetJsonValidationMetadata();
-            string formatted = String.Format(CultureInfo.InvariantCulture, scriptWithCorrectNewLines, validationJson);
+            string formatted = String.Format(
+                CultureInfo.InvariantCulture,
+                scriptWithCorrectNewLines,
+                validationJson
+            );
 
             Writer.Write(formatted);
         }
 
-        internal static void SetClientValidationEnabled(bool enabled, IDictionary<object, object> scope = null, HttpContextBase httpContext = null)
+        internal static void SetClientValidationEnabled(
+            bool enabled,
+            IDictionary<object, object> scope = null,
+            HttpContextBase httpContext = null
+        )
         {
             ScopeCache.Get(scope, httpContext).ClientValidationEnabled = enabled;
         }
 
-        internal static void SetUnobtrusiveJavaScriptEnabled(bool enabled, IDictionary<object, object> scope = null, HttpContextBase httpContext = null)
+        internal static void SetUnobtrusiveJavaScriptEnabled(
+            bool enabled,
+            IDictionary<object, object> scope = null,
+            HttpContextBase httpContext = null
+        )
         {
             ScopeCache.Get(scope, httpContext).UnobtrusiveJavaScriptEnabled = enabled;
         }
@@ -263,7 +306,8 @@ window.mvcClientValidationMetadata.push({0});
         internal static void SetValidationSummaryMessageElement(
             string elementName,
             IDictionary<object, object> scope = null,
-            HttpContextBase httpContext = null)
+            HttpContextBase httpContext = null
+        )
         {
             ScopeCache.Get(scope, httpContext).ValidationSummaryMessageElement = elementName;
         }
@@ -271,17 +315,23 @@ window.mvcClientValidationMetadata.push({0});
         internal static void SetValidationMessageElement(
             string elementName,
             IDictionary<object, object> scope = null,
-            HttpContextBase httpContext = null)
+            HttpContextBase httpContext = null
+        )
         {
             ScopeCache.Get(scope, httpContext).ValidationMessageElement = elementName;
         }
 
-        private static TValue ScopeGet<TValue>(IDictionary<object, object> scope, string name, TValue defaultValue = default(TValue))
+        private static TValue ScopeGet<TValue>(
+            IDictionary<object, object> scope,
+            string name,
+            TValue defaultValue = default(TValue)
+        )
         {
             object result;
             if (scope.TryGetValue(name, out result))
             {
-                return (TValue)Convert.ChangeType(result, typeof(TValue), CultureInfo.InvariantCulture);
+                return (TValue)
+                    Convert.ChangeType(result, typeof(TValue), CultureInfo.InvariantCulture);
             }
             return defaultValue;
         }
@@ -300,9 +350,21 @@ window.mvcClientValidationMetadata.push({0});
                 _scope = scope;
 
                 _clientValidationEnabled = ScopeGet(scope, ClientValidationKeyName, false);
-                _unobtrusiveJavaScriptEnabled = ScopeGet(scope, UnobtrusiveJavaScriptKeyName, false);
-                _validationSummaryMessageElement = ScopeGet(scope, ValidationSummaryMessageElementKeyName, "span");
-                _validationMessageElement = ScopeGet(scope, ValidationMessageElementKeyName, "span");
+                _unobtrusiveJavaScriptEnabled = ScopeGet(
+                    scope,
+                    UnobtrusiveJavaScriptKeyName,
+                    false
+                );
+                _validationSummaryMessageElement = ScopeGet(
+                    scope,
+                    ValidationSummaryMessageElementKeyName,
+                    "span"
+                );
+                _validationMessageElement = ScopeGet(
+                    scope,
+                    ValidationMessageElementKeyName,
+                    "span"
+                );
             }
 
             public bool ClientValidationEnabled
@@ -345,7 +407,10 @@ window.mvcClientValidationMetadata.push({0});
                 }
             }
 
-            public static ScopeCache Get(IDictionary<object, object> scope, HttpContextBase httpContext)
+            public static ScopeCache Get(
+                IDictionary<object, object> scope,
+                HttpContextBase httpContext
+            )
             {
                 if (httpContext == null && Web.HttpContext.Current != null)
                 {

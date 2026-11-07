@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="IPEndPointCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 namespace System.Net
 {
@@ -14,6 +14,7 @@ namespace System.Net
     public class IPEndPointCollection : Collection<IPEndPoint>
     {
         public IPEndPointCollection() { }
+
         protected override void SetItem(int index, IPEndPoint item)
         {
             if (item == null)
@@ -22,6 +23,7 @@ namespace System.Net
             }
             base.SetItem(index, item);
         }
+
         protected override void InsertItem(int index, IPEndPoint item)
         {
             if (item == null)

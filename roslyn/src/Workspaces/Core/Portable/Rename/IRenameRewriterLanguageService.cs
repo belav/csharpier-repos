@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Rename
         void TryAddPossibleNameConflicts(
             ISymbol symbol,
             string newName,
-            ICollection<string> possibleNameConflicts);
+            ICollection<string> possibleNameConflicts
+        );
 
         /// <summary>
         /// Identifies the conflicts caused by the new declaration created during rename.
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution baseSolution,
             Solution newSolution,
             IDictionary<Location, Location> reverseMappedLocations,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Identifies the conflicts caused by implicitly referencing the renamed symbol.
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Rename
             ISymbol renameSymbol,
             ISymbol renamedSymbol,
             IEnumerable<ReferenceLocation> implicitReferenceLocations,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Identifies the conflicts caused by implicitly referencing the renamed symbol.
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Rename
             SemanticModel semanticModel,
             Location originalDeclarationLocation,
             int newDeclarationLocationStartingPosition,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Identifies potential Conflicts into the inner scope locals. This may give false positives.
@@ -96,9 +100,7 @@ namespace Microsoft.CodeAnalysis.Rename
         /// <param name="newReferencedSymbols">The symbols that this token binds to after the rename
         /// has been applied</param>
         /// <returns>Returns if there is a potential conflict</returns>
-        bool LocalVariableConflict(
-            SyntaxToken token,
-            IEnumerable<ISymbol> newReferencedSymbols);
+        bool LocalVariableConflict(SyntaxToken token, IEnumerable<ISymbol> newReferencedSymbols);
 
         /// <summary>
         /// Used to find if the replacement Identifier is valid
@@ -106,9 +108,7 @@ namespace Microsoft.CodeAnalysis.Rename
         /// <param name="replacementText"></param>
         /// <param name="syntaxFactsService"></param>
         /// <returns></returns>
-        bool IsIdentifierValid(
-            string replacementText,
-            ISyntaxFactsService syntaxFactsService);
+        bool IsIdentifierValid(string replacementText, ISyntaxFactsService syntaxFactsService);
 
         /// <summary>
         /// Gets the top most enclosing statement as target to call MakeExplicit on.
@@ -123,16 +123,49 @@ namespace Microsoft.CodeAnalysis.Rename
     internal abstract class AbstractRenameRewriterLanguageService : IRenameRewriterLanguageService
     {
         public abstract SyntaxNode AnnotateAndRename(RenameRewriterParameters parameters);
-        public abstract Task<ImmutableArray<Location>> ComputeDeclarationConflictsAsync(string replacementText, ISymbol renamedSymbol, ISymbol renameSymbol, IEnumerable<ISymbol> referencedSymbols, Solution baseSolution, Solution newSolution, IDictionary<Location, Location> reverseMappedLocations, CancellationToken cancellationToken);
-        public abstract Task<ImmutableArray<Location>> ComputeImplicitReferenceConflictsAsync(ISymbol renameSymbol, ISymbol renamedSymbol, IEnumerable<ReferenceLocation> implicitReferenceLocations, CancellationToken cancellationToken);
-        public abstract ImmutableArray<Location> ComputePossibleImplicitUsageConflicts(ISymbol renamedSymbol, SemanticModel semanticModel, Location originalDeclarationLocation, int newDeclarationLocationStartingPosition, CancellationToken cancellationToken);
+        public abstract Task<ImmutableArray<Location>> ComputeDeclarationConflictsAsync(
+            string replacementText,
+            ISymbol renamedSymbol,
+            ISymbol renameSymbol,
+            IEnumerable<ISymbol> referencedSymbols,
+            Solution baseSolution,
+            Solution newSolution,
+            IDictionary<Location, Location> reverseMappedLocations,
+            CancellationToken cancellationToken
+        );
+        public abstract Task<ImmutableArray<Location>> ComputeImplicitReferenceConflictsAsync(
+            ISymbol renameSymbol,
+            ISymbol renamedSymbol,
+            IEnumerable<ReferenceLocation> implicitReferenceLocations,
+            CancellationToken cancellationToken
+        );
+        public abstract ImmutableArray<Location> ComputePossibleImplicitUsageConflicts(
+            ISymbol renamedSymbol,
+            SemanticModel semanticModel,
+            Location originalDeclarationLocation,
+            int newDeclarationLocationStartingPosition,
+            CancellationToken cancellationToken
+        );
         public abstract SyntaxNode? GetExpansionTargetForLocation(SyntaxToken token);
-        public abstract bool IsIdentifierValid(string replacementText, ISyntaxFactsService syntaxFactsService);
-        public abstract bool LocalVariableConflict(SyntaxToken token, IEnumerable<ISymbol> newReferencedSymbols);
-        public abstract void TryAddPossibleNameConflicts(ISymbol symbol, string newName, ICollection<string> possibleNameConflicts);
+        public abstract bool IsIdentifierValid(
+            string replacementText,
+            ISyntaxFactsService syntaxFactsService
+        );
+        public abstract bool LocalVariableConflict(
+            SyntaxToken token,
+            IEnumerable<ISymbol> newReferencedSymbols
+        );
+        public abstract void TryAddPossibleNameConflicts(
+            ISymbol symbol,
+            string newName,
+            ICollection<string> possibleNameConflicts
+        );
 
         protected static void AddConflictingParametersOfProperties(
-            IEnumerable<ISymbol> properties, string newPropertyName, ArrayBuilder<Location> conflicts)
+            IEnumerable<ISymbol> properties,
+            string newPropertyName,
+            ArrayBuilder<Location> conflicts
+        )
         {
             // check if the new property name conflicts with any parameter of the properties.
             // Note: referencedSymbols come from the original solution, so there is no need to reverse map the locations of the parameters
@@ -140,8 +173,10 @@ namespace Microsoft.CodeAnalysis.Rename
             {
                 var prop = (IPropertySymbol)symbol;
 
-                var conflictingParameter = prop.Parameters.FirstOrDefault(
-                    param => string.Compare(param.Name, newPropertyName, StringComparison.OrdinalIgnoreCase) == 0);
+                var conflictingParameter = prop.Parameters.FirstOrDefault(param =>
+                    string.Compare(param.Name, newPropertyName, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                );
 
                 if (conflictingParameter != null)
                 {

@@ -14,24 +14,23 @@ namespace Microsoft.Interop.UnitTests.Verifiers
         where TAnalyzer : DiagnosticAnalyzer, new()
     {
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer}.Diagnostic()"/>
-        public static DiagnosticResult Diagnostic()
-            => AnalyzerVerifier<TAnalyzer>.Diagnostic();
+        public static DiagnosticResult Diagnostic() => AnalyzerVerifier<TAnalyzer>.Diagnostic();
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer}.Diagnostic(string)"/>
-        public static DiagnosticResult Diagnostic(string diagnosticId)
-            => AnalyzerVerifier<TAnalyzer>.Diagnostic(diagnosticId);
+        public static DiagnosticResult Diagnostic(string diagnosticId) =>
+            AnalyzerVerifier<TAnalyzer>.Diagnostic(diagnosticId);
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer}.Diagnostic(DiagnosticDescriptor)"/>
-        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor)
-            => AnalyzerVerifier<TAnalyzer>.Diagnostic(descriptor);
+        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+            AnalyzerVerifier<TAnalyzer>.Diagnostic(descriptor);
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
-        public static async Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
+        public static async Task VerifyAnalyzerAsync(
+            string source,
+            params DiagnosticResult[] expected
+        )
         {
-            var test = new Test
-            {
-                TestCode = source,
-            };
+            var test = new Test { TestCode = source };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
@@ -39,7 +38,6 @@ namespace Microsoft.Interop.UnitTests.Verifiers
 
         // Code fix tests support both analyzer and code fix testing. This test class is derived from the code fix test
         // to avoid the need to maintain duplicate copies of the customization work.
-        internal class Test : CSharpCodeFixVerifier<TAnalyzer, EmptyCodeFixProvider>.Test
-        { }
+        internal class Test : CSharpCodeFixVerifier<TAnalyzer, EmptyCodeFixProvider>.Test { }
     }
 }

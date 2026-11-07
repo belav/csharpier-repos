@@ -15,23 +15,13 @@ namespace MathCeilingDoubleTest
 
         public static double staticValue = 1.1;
 
-        public static double[] staticValueArray = new double[]
-        {
-            2.2,
-            3.3,
-            4.4
-        };
+        public static double[] staticValueArray = new double[] { 2.2, 3.3, 4.4 };
 
         public double instanceValue = 5.5;
 
-        public double[] instanceValueArray = new double[]
-        {
-            6.6,
-            7.7,
-            8.8
-        };
+        public double[] instanceValueArray = new double[] { 6.6, 7.7, 8.8 };
 
-        unsafe static int Main()
+        static unsafe int Main()
         {
             double localValue = 9.9;
 
@@ -80,19 +70,25 @@ namespace MathCeilingDoubleTest
             {
                 if (Math.Ceiling(pStaticValueArray[0]) != 3.0)
                 {
-                    Console.WriteLine("Math.Ceiling of a addressed static value array (index 0) failed");
+                    Console.WriteLine(
+                        "Math.Ceiling of a addressed static value array (index 0) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Ceiling(pStaticValueArray[1]) != 4.0)
                 {
-                    Console.WriteLine("Math.Ceiling of a addressed static value array (index 1) failed");
+                    Console.WriteLine(
+                        "Math.Ceiling of a addressed static value array (index 1) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Ceiling(pStaticValueArray[2]) != 5.0)
                 {
-                    Console.WriteLine("Math.Ceiling of a addressed static value array (index 2) failed");
+                    Console.WriteLine(
+                        "Math.Ceiling of a addressed static value array (index 2) failed"
+                    );
                     return Fail;
                 }
             }
@@ -134,19 +130,25 @@ namespace MathCeilingDoubleTest
             {
                 if (Math.Ceiling(pInstanceValueArray[0]) != 7.0)
                 {
-                    Console.WriteLine("Math.Ceiling of a addressed instance value array (index 0) failed");
+                    Console.WriteLine(
+                        "Math.Ceiling of a addressed instance value array (index 0) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Ceiling(pInstanceValueArray[1]) != 8.0)
                 {
-                    Console.WriteLine("Math.Ceiling of a addressed instance value array (index 1) failed");
+                    Console.WriteLine(
+                        "Math.Ceiling of a addressed instance value array (index 1) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Ceiling(pInstanceValueArray[2]) != 9.0)
                 {
-                    Console.WriteLine("Math.Ceiling of a addressed instance value array (index 2) failed");
+                    Console.WriteLine(
+                        "Math.Ceiling of a addressed instance value array (index 2) failed"
+                    );
                     return Fail;
                 }
             }

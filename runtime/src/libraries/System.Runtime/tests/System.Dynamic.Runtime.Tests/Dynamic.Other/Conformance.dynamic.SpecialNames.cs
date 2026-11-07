@@ -16,10 +16,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         public int result;
         public dynamic ProInt
         {
-            set
-            {
-                result = value;
-            }
+            set { result = value; }
         }
 
         public void set_ProInt(int value)
@@ -46,8 +43,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial003
 {
     // <Area>Dynamic bind to special name</Area>
@@ -60,10 +55,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     {
         public byte this[Test t]
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public byte get_Item(dynamic a)
@@ -92,8 +84,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial005
 {
     // <Area>Dynamic bind to special name</Area>
@@ -103,20 +93,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // <Code>
 
     public delegate void MyDel(int i);
+
     public class Test
     {
         public int flag = 0;
         public event MyDel Foo
         {
-            add
-            {
-                flag = 1;
-            }
-
-            remove
-            {
-                flag = 2;
-            }
+            add { flag = 1; }
+            remove { flag = 2; }
         }
 
         public void add_Foo(dynamic value)
@@ -158,14 +142,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
             return 0;
         }
 
-        public static void Method(int i)
-        {
-        }
+        public static void Method(int i) { }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial006
 {
@@ -181,7 +161,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         public enum MyEnum
         {
             First,
-            Second
+            Second,
         }
 
         [Fact]
@@ -193,12 +173,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         public static int MainMethod()
         {
             dynamic d = MyEnum.Second;
-            dynamic result = new List<int>()
-            {
-            d.value__
-            }
-
-            ;
+            dynamic result = new List<int>() { d.value__ };
             if (result.Count == 1 && result[0] == 1)
                 return 0;
             return 1;
@@ -206,8 +181,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial008
 {
@@ -258,7 +231,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "==", "Test", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    e.Message,
+                    "==",
+                    "Test",
+                    "int"
+                );
                 if (ret)
                     num++;
             }
@@ -271,7 +250,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "!=", "int", "Test");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    e.Message,
+                    "!=",
+                    "int",
+                    "Test"
+                );
                 if (ret)
                     num++;
             }
@@ -291,8 +276,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial009
 {
     // <Area>Dynamic bind to special name</Area>
@@ -304,14 +287,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test
     {
         public int Field;
+
         public static explicit operator Test(int[] i)
         {
-            return new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            return new Test() { Field = 10 };
         }
 
         public static long op_Implicit(Test p1)
@@ -321,12 +300,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static Test op_Explicit(object p1)
         {
-            return new Test()
-            {
-                Field = 0
-            }
-
-            ;
+            return new Test() { Field = 0 };
         }
 
         [Fact]
@@ -346,7 +320,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                ret &= ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "Test", "long");
+                ret &= ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    e.Message,
+                    "Test",
+                    "long"
+                );
             }
 
             dynamic d1 = new int[0];
@@ -358,8 +337,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial011
 {
     // <Area>Dynamic bind to special name</Area>
@@ -367,8 +344,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // <Description></Description>
     // <Expects status=success></Expects>
     // <Code>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class TestClass
     {
@@ -382,14 +359,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public struct Test
     {
         public int Field;
+
         public static Test op_Addition<T>(Test p1, T p2)
         {
-            return new Test()
-            {
-                Field = p1.Field
-            }
-
-            ;
+            return new Test() { Field = p1.Field };
         }
 
         public static int op_Addition<T>(T p1, int p2)
@@ -399,12 +372,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static Test operator +(Test p1, Test p2)
         {
-            return new Test()
-            {
-                Field = p1.Field + p2.Field
-            }
-
-            ;
+            return new Test() { Field = p1.Field + p2.Field };
         }
 
         public static long operator +(Test p1, int p2)
@@ -414,31 +382,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public int Method()
         {
-            dynamic t1 = new Test()
-            {
-                Field = 10
-            }
-
-            ;
-            dynamic t2 = new Test()
-            {
-                Field = 11
-            }
-
-            ;
-            List<int> list = new List<int>()
-            {
-            t1.Field, t2.Field, (t1 + t2).Field
-            }
-
-            ;
+            dynamic t1 = new Test() { Field = 10 };
+            dynamic t2 = new Test() { Field = 11 };
+            List<int> list = new List<int>() { t1.Field, t2.Field, (t1 + t2).Field };
             var d = list.Where(p => p == (t1 + t2).Field).ToArray();
-            dynamic t3 = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            dynamic t3 = new Test() { Field = 10 };
             int p2 = 20;
             // Test + int => long
             var v = t3 + p2;
@@ -461,8 +409,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial013
 {
     // <Area>Dynamic bind to special name</Area>
@@ -474,6 +420,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test
     {
         public int Field;
+
         public static dynamic operator >(Test p1, dynamic p2)
         {
             return 0;
@@ -509,20 +456,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static int MainMethod()
         {
-            dynamic t1 = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            dynamic t1 = new Test() { Field = 10 };
             dynamic t2 = 10;
             return Method(t1 < t2, t1 > t2);
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial014
 {
@@ -538,10 +478,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         {
             First,
             Second,
-            Third
+            Third,
         }
 
         public int Field;
+
         public static dynamic operator >=(Test p1, dynamic p2)
         {
             return 0;
@@ -566,19 +507,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         {
             get
             {
-                dynamic t1 = new Test()
-                {
-                    Field = 10
-                }
-
-                ;
+                dynamic t1 = new Test() { Field = 10 };
                 dynamic t2 = 10;
-                dynamic t = new[]
-                {
-                t1 >= t2, t1 <= t2
-                }
-
-                ;
+                dynamic t = new[] { t1 >= t2, t1 <= t2 };
                 if (t.Length == 2 && t[0] == 0 && t[1] == MyEnum.Second)
                     return 0;
                 return 1;
@@ -600,8 +531,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial015
 {
     // <Area>Dynamic bind to special name</Area>
@@ -614,12 +543,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     {
         public static dynamic operator +(Test p1)
         {
-            return new long[]
-            {
-            1, 2, 3, 4
-            }
-
-            ;
+            return new long[] { 1, 2, 3, 4 };
         }
 
         public static dynamic operator -(Test p1)
@@ -629,12 +553,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static dynamic op_UnaryPlus<T>(Test p1)
         {
-            return new string[]
-            {
-            null, string.Empty
-            }
-
-            ;
+            return new string[] { null, string.Empty };
         }
 
         public static Test op_UnaryNegation(dynamic p1)
@@ -672,8 +591,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial016
 {
     // <Area>Dynamic bind to special name</Area>
@@ -686,34 +603,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     {
         public static Test op_Multiply(Test t, dynamic p1)
         {
-            p1 = new Test()
-            {
-                Field = -1
-            }
-
-            ;
+            p1 = new Test() { Field = -1 };
             return p1;
         }
 
         public static dynamic op_Division(dynamic p1, Test t)
         {
-            t = new Test()
-            {
-                Field = -1
-            }
-
-            ;
+            t = new Test() { Field = -1 };
             return t;
         }
 
         public static Test op_Modulus(dynamic p1, dynamic t)
         {
-            t = new Test()
-            {
-                Field = -1
-            }
-
-            ;
+            t = new Test() { Field = -1 };
             return t;
         }
     }
@@ -721,36 +623,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test : Base
     {
         public int Field;
+
         public static Test operator *(Test t, dynamic p1)
         {
-            p1 = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            p1 = new Test() { Field = 10 };
             return p1;
         }
 
         public static dynamic operator /(dynamic p1, Test t)
         {
-            t = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            t = new Test() { Field = 10 };
             return t;
         }
 
         public static dynamic operator %(Test p1, dynamic t)
         {
-            t = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            t = new Test() { Field = 10 };
             return t;
         }
 
@@ -779,8 +667,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial017
 {
     // <Area>Dynamic bind to special name</Area>
@@ -792,6 +678,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test
     {
         public int Field;
+
         public static bool operator true(Test p1)
         {
             return true;
@@ -814,62 +701,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static Test operator &(Test p1, Test p2)
         {
-            return new Test()
-            {
-                Field = 3
-            }
-
-            ;
+            return new Test() { Field = 3 };
         }
 
         public static Test op_BitwiseAnd(dynamic p1, Test p2)
         {
-            return new Test()
-            {
-                Field = 5
-            }
-
-            ;
+            return new Test() { Field = 5 };
         }
 
         public static Test operator |(Test p1, Test p2)
         {
-            return new Test()
-            {
-                Field = 4
-            }
-
-            ;
+            return new Test() { Field = 4 };
         }
 
         public static Test op_BitwiseAnd(Test p1, dynamic p2)
         {
-            return new Test()
-            {
-                Field = 6
-            }
-
-            ;
+            return new Test() { Field = 6 };
         }
 
         public static dynamic operator ^(dynamic p1, Test p2)
         {
-            return new Test()
-            {
-                Field = 7
-            }
-
-            ;
+            return new Test() { Field = 7 };
         }
 
         public static Test op_ExclusiveOr(Test p1, dynamic p2)
         {
-            return new Test()
-            {
-                Field = 8
-            }
-
-            ;
+            return new Test() { Field = 8 };
         }
 
         [Fact]
@@ -880,18 +737,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static int MainMethod()
         {
-            dynamic t1 = new Test()
-            {
-                Field = 1
-            }
-
-            ;
-            dynamic t2 = new Test()
-            {
-                Field = 2
-            }
-
-            ;
+            dynamic t1 = new Test() { Field = 1 };
+            dynamic t2 = new Test() { Field = 2 };
             dynamic d1 = t1 && t2; //dy1 && dy2,   T.false(x) ? x : T.&(x, y)
             if (d1.Field != 3)
                 return 1;
@@ -927,8 +774,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial018
 {
     // <Area>Dynamic bind to special name</Area>
@@ -948,6 +793,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test : Base<Test>
     {
         public int Field;
+
         public static bool operator !(Test t)
         {
             return true;
@@ -967,8 +813,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial019
 {
@@ -994,24 +838,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test : Base<Test>
     {
         public int Field;
+
         public static Test operator ++(Test t)
         {
-            return new Test()
-            {
-                Field = t.Field + 1
-            }
-
-            ;
+            return new Test() { Field = t.Field + 1 };
         }
 
         public static Test operator --(Test t)
         {
-            return new Test()
-            {
-                Field = t.Field - 1
-            }
-
-            ;
+            return new Test() { Field = t.Field - 1 };
         }
 
         [Fact]
@@ -1022,12 +857,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static int MainMethod()
         {
-            dynamic d = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            dynamic d = new Test() { Field = 10 };
             if ((d++).Field == 10 && (++d).Field == 12 && (d--).Field == 12 && (--d).Field == 10)
                 return 0;
             return 1;
@@ -1035,8 +865,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial020
 {
@@ -1058,14 +886,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     {
         public int Field;
         public dynamic d = default(dynamic);
+
         public static Test operator ~(Test t)
         {
-            return new Test()
-            {
-                Field = -t.Field
-            }
-
-            ;
+            return new Test() { Field = -t.Field };
         }
 
         [Fact]
@@ -1077,19 +901,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         public static int MainMethod()
         {
             dynamic d = new Test();
-            d.d = new Test()
-            {
-                Field = 10
-            }
-
-            as Base;
+            d.d = new Test() { Field = 10 } as Base;
             return (~(d.d)).Field == -10 ? 0 : 1;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial021
 {
@@ -1115,24 +932,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public partial class Test
     {
         public int Field;
+
         public static Test operator >>(Test t, int i)
         {
-            return new Test()
-            {
-                Field = i + t.Field
-            }
-
-            ;
+            return new Test() { Field = i + t.Field };
         }
 
         public static Test operator <<(Test t, int i)
         {
-            return new Test()
-            {
-                Field = t.Field - i
-            }
-
-            ;
+            return new Test() { Field = t.Field - i };
         }
 
         [Fact]
@@ -1143,12 +951,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
         public static int MainMethod()
         {
-            dynamic d = new Test()
-            {
-                Field = 10
-            }
-
-            ;
+            dynamic d = new Test() { Field = 10 };
             byte b = 10;
             if ((d >> b).Field != 20 || (d << b).Field != 0)
                 return 1;

@@ -32,7 +32,8 @@ public interface ILazyLoader
     void SetLoaded(
         object entity,
         [CallerMemberName] string navigationName = "",
-        bool loaded = true);
+        bool loaded = true
+    );
 
     /// <summary>
     ///     Gets whether or not the given navigation as known to be completely loaded or known to be
@@ -41,9 +42,7 @@ public interface ILazyLoader
     /// <param name="entity">The entity on which the navigation property is located.</param>
     /// <param name="navigationName">The navigation property name.</param>
     /// <returns><see langword="true" />if the navigation is known to be loaded.</returns>
-    bool IsLoaded(
-        object entity,
-        [CallerMemberName] string navigationName = "");
+    bool IsLoaded(object entity, [CallerMemberName] string navigationName = "");
 
     /// <summary>
     ///     Loads a navigation property if it has not already been loaded.
@@ -65,7 +64,8 @@ public interface ILazyLoader
 #pragma warning restore CA1068 // CancellationToken parameters must come last
         object entity,
         CancellationToken cancellationToken = default,
-        [CallerMemberName] string navigationName = "");
+        [CallerMemberName] string navigationName = ""
+    );
 
     /// <summary>
     ///     Disposes the loader.

@@ -16,9 +16,13 @@ namespace System.Data.Common
         private SqlDateTime[] _values = default!; // Late-initialized
 
         public SqlDateTimeStorage(DataColumn column)
-        : base(column, typeof(SqlDateTime), SqlDateTime.Null, SqlDateTime.Null, StorageType.SqlDateTime)
-        {
-        }
+            : base(
+                column,
+                typeof(SqlDateTime),
+                SqlDateTime.Null,
+                SqlDateTime.Null,
+                StorageType.SqlDateTime
+            ) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -166,7 +170,12 @@ namespace System.Data.Common
             return new SqlDateTime[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlDateTime[] typedStore = (SqlDateTime[])store;
             typedStore[storeIndex] = _values[record];

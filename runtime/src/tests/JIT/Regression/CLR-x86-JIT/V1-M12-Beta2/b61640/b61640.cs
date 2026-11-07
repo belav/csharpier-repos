@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -45,10 +46,7 @@ namespace Test
                     }
                 }
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) { }
 
             return true;
         }

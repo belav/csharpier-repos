@@ -15,7 +15,9 @@ namespace System.Web.Http.ModelBinding.Binders
     {
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(
+                bindingContext
+            );
             if (valueProviderResult == null)
             {
                 return false; // conversion would have failed
@@ -30,15 +32,23 @@ namespace System.Web.Http.ModelBinding.Binders
                 HttpControllerContext controllerContext = actionContext.ControllerContext;
                 if (controllerContext == null)
                 {
-                    throw Error.Argument("actionContext", SRResources.TypePropertyMustNotBeNull,
-                        typeof(HttpActionContext).Name, "ControllerContext");
+                    throw Error.Argument(
+                        "actionContext",
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(HttpActionContext).Name,
+                        "ControllerContext"
+                    );
                 }
 
                 HttpConfiguration configuration = controllerContext.Configuration;
                 if (configuration == null)
                 {
-                    throw Error.Argument("actionContext", SRResources.TypePropertyMustNotBeNull,
-                        typeof(HttpControllerContext).Name, "Configuration");
+                    throw Error.Argument(
+                        "actionContext",
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(HttpControllerContext).Name,
+                        "Configuration"
+                    );
                 }
 
                 ServicesContainer services = configuration.Services;
@@ -48,24 +58,39 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadataProvider metadataProvider = services.GetModelMetadataProvider();
                 if (validator != null && metadataProvider != null)
                 {
-                    validator.Validate(model, bindingContext.ModelType, metadataProvider, actionContext, bindingContext.ModelName);
+                    validator.Validate(
+                        model,
+                        bindingContext.ModelType,
+                        metadataProvider,
+                        actionContext,
+                        bindingContext.ModelName
+                    );
                 }
             }
 
             return true;
         }
 
-        internal static ValueProviderResult GetCompatibleValueProviderResult(ModelBindingContext bindingContext)
+        internal static ValueProviderResult GetCompatibleValueProviderResult(
+            ModelBindingContext bindingContext
+        )
         {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
             if (valueProviderResult == null)
             {
                 return null; // the value doesn't exist
             }
 
-            if (!TypeHelper.IsCompatibleObject(bindingContext.ModelType, valueProviderResult.RawValue))
+            if (
+                !TypeHelper.IsCompatibleObject(
+                    bindingContext.ModelType,
+                    valueProviderResult.RawValue
+                )
+            )
             {
                 return null; // value is of incompatible type
             }

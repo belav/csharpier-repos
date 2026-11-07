@@ -11,7 +11,7 @@ namespace System.DirectoryServices.AccountManagement
         Domain = 1,
 #if TESTHOOK
         ApplicationDirectory = 2,
-        Test            =   3
+        Test = 3
 #else
         ApplicationDirectory = 2
 #endif // TESTHOOK

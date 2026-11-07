@@ -20,7 +20,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -38,26 +38,24 @@ using ICSharpCode.SharpZipLib;
 
 namespace ICSharpCode.SharpZipLib.BZip2
 {
-	/// <summary>
-	/// BZip2Exception represents exceptions specific to Bzip2 algorithm
-	/// </summary>
-	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-	public class BZip2Exception : SharpZipBaseException
-	{
-		/// <summary>
-		/// Initialise a new instance of BZip2Exception.
-		/// </summary>
-		public BZip2Exception()
-		{
-		}
-		
-		/// <summary>
-		/// Initialise a new instance of BZip2Exception with its message set to message.
-		/// </summary>
-		/// <param name="message">The message describing the error.</param>
-		public BZip2Exception(string message) : base(message)
-		{
-		}
-		
-	}
+    /// <summary>
+    /// BZip2Exception represents exceptions specific to Bzip2 algorithm
+    /// </summary>
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
+    public class BZip2Exception : SharpZipBaseException
+    {
+        /// <summary>
+        /// Initialise a new instance of BZip2Exception.
+        /// </summary>
+        public BZip2Exception() { }
+
+        /// <summary>
+        /// Initialise a new instance of BZip2Exception with its message set to message.
+        /// </summary>
+        /// <param name="message">The message describing the error.</param>
+        public BZip2Exception(string message)
+            : base(message) { }
+    }
 }

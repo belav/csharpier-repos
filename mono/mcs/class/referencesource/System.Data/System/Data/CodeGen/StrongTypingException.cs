@@ -7,7 +7,8 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.Collections;
     using System.Data;
@@ -18,25 +19,32 @@ namespace System.Data {
     ///    <para>DEV: The exception that is throwing from strong typed DataSet when user access to DBNull value.</para>
     /// </devdoc>
     [Serializable]
-    public class StrongTypingException : DataException {
+    public class StrongTypingException : DataException
+    {
         protected StrongTypingException(SerializationInfo info, StreamingContext context)
-        : base(info, context) {
-        }
+            : base(info, context) { }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public StrongTypingException() : base() {
+        public StrongTypingException()
+            : base()
+        {
             HResult = HResults.StrongTyping;
         }
 
-        public StrongTypingException(string message)  : base(message) {
+        public StrongTypingException(string message)
+            : base(message)
+        {
             HResult = HResults.StrongTyping;
         }
-        
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public StrongTypingException(string s, Exception innerException) : base(s, innerException) {
+        public StrongTypingException(string s, Exception innerException)
+            : base(s, innerException)
+        {
             HResult = HResults.StrongTyping;
         }
     }
@@ -46,17 +54,21 @@ namespace System.Data {
     ///    <para>DEV: The exception that is throwing in generating strong typed DataSet when name conflict happens.</para>
     /// </devdoc>
     [Serializable]
-    public class TypedDataSetGeneratorException : DataException {
+    public class TypedDataSetGeneratorException : DataException
+    {
         private ArrayList errorList;
         private string KEY_ARRAYCOUNT = "KEY_ARRAYCOUNT";
         private string KEY_ARRAYVALUES = "KEY_ARRAYVALUES";
 
         protected TypedDataSetGeneratorException(SerializationInfo info, StreamingContext context)
-        : base(info, context) {
-            int count = (int) info.GetValue(KEY_ARRAYCOUNT, typeof(System.Int32));
-            if (count > 0) {
+            : base(info, context)
+        {
+            int count = (int)info.GetValue(KEY_ARRAYCOUNT, typeof(System.Int32));
+            if (count > 0)
+            {
                 errorList = new ArrayList();
-                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++)
+                {
                     errorList.Add(info.GetValue(KEY_ARRAYVALUES + i, typeof(System.String)));
                 }
             }
@@ -67,23 +79,31 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public TypedDataSetGeneratorException() : base() {
+        public TypedDataSetGeneratorException()
+            : base()
+        {
             errorList = null;
             HResult = HResults.StrongTyping;
         }
 
-        public TypedDataSetGeneratorException(string message)  : base(message) {
+        public TypedDataSetGeneratorException(string message)
+            : base(message)
+        {
             HResult = HResults.StrongTyping;
         }
 
-        public TypedDataSetGeneratorException(string message, Exception innerException)  : base(message, innerException) {
+        public TypedDataSetGeneratorException(string message, Exception innerException)
+            : base(message, innerException)
+        {
             HResult = HResults.StrongTyping;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public TypedDataSetGeneratorException(ArrayList list) : this() {
+        public TypedDataSetGeneratorException(ArrayList list)
+            : this()
+        {
             errorList = list;
             HResult = HResults.StrongTyping;
         }
@@ -91,24 +111,29 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ArrayList ErrorList {
-            get {
-                return errorList;
-            }
+        public ArrayList ErrorList
+        {
+            get { return errorList; }
         }
-        
-        [System.Security.Permissions.SecurityPermissionAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Flags=System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter)]
+
+        [System.Security.Permissions.SecurityPermissionAttribute(
+            System.Security.Permissions.SecurityAction.LinkDemand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter
+        )]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
 
-            if (errorList != null) {
+            if (errorList != null)
+            {
                 info.AddValue(KEY_ARRAYCOUNT, errorList.Count);
-                for (int i = 0; i < errorList.Count; i++) {
+                for (int i = 0; i < errorList.Count; i++)
+                {
                     info.AddValue(KEY_ARRAYVALUES + i, errorList[i].ToString());
                 }
             }
-            else {
+            else
+            {
                 info.AddValue(KEY_ARRAYCOUNT, 0);
             }
         }

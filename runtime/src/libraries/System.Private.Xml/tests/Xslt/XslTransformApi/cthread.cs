@@ -168,7 +168,7 @@ namespace System.Xml.Tests
                 switch (eResult)
                 {
                     case 1: //TEST_PASS
-                            //case TEST_SKIPPED:
+                        //case TEST_SKIPPED:
                         _output.WriteLine(eTest.Message);
                         return eResult; //were done
                 }

@@ -20,7 +20,12 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         //
         // Candidates must pass this screen before we involve the binder.
         //
-        public static bool QualifiesBasedOnParameterCount(this MethodBase methodBase, BindingFlags bindingFlags, CallingConventions callConv, Type[] argumentTypes)
+        public static bool QualifiesBasedOnParameterCount(
+            this MethodBase methodBase,
+            BindingFlags bindingFlags,
+            CallingConventions callConv,
+            Type[] argumentTypes
+        )
         {
             Debug.Assert(methodBase != null);
             Debug.Assert(argumentTypes != null);
@@ -28,10 +33,16 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             #region Check CallingConvention
             if ((callConv & CallingConventions.Any) == 0)
             {
-                if ((callConv & CallingConventions.VarArgs) != 0 && (methodBase.CallingConvention & CallingConventions.VarArgs) == 0)
+                if (
+                    (callConv & CallingConventions.VarArgs) != 0
+                    && (methodBase.CallingConvention & CallingConventions.VarArgs) == 0
+                )
                     return false;
 
-                if ((callConv & CallingConventions.Standard) != 0 && (methodBase.CallingConvention & CallingConventions.Standard) == 0)
+                if (
+                    (callConv & CallingConventions.Standard) != 0
+                    && (methodBase.CallingConvention & CallingConventions.Standard) == 0
+                )
                     return false;
             }
             #endregion
@@ -44,15 +55,25 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 #region Invoke Member, Get\Set & Create Instance specific case
                 // If the number of supplied arguments differs than the number in the signature AND
                 // we are not filtering for a dynamic call -- InvokeMethod or CreateInstance -- filter out the method.
-                if ((bindingFlags & (BindingFlags.InvokeMethod | BindingFlags.CreateInstance | BindingFlags.GetProperty | BindingFlags.SetProperty)) == 0)
+                if (
+                    (
+                        bindingFlags
+                        & (
+                            BindingFlags.InvokeMethod
+                            | BindingFlags.CreateInstance
+                            | BindingFlags.GetProperty
+                            | BindingFlags.SetProperty
+                        )
+                    ) == 0
+                )
                     return false;
 
                 throw new InvalidOperationException(SR.NoInvokeMember);
-#endregion
+                #endregion
             }
             else
             {
-#region Exact Binding
+                #region Exact Binding
                 if ((bindingFlags & BindingFlags.ExactBinding) != 0)
                 {
                     // Legacy behavior is to ignore ExactBinding when InvokeMember is specified.
@@ -65,14 +86,17 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                         for (int i = 0; i < parameterInfos.Length; i++)
                         {
                             // a null argument type implies a null arg which is always a perfect match
-                            if (!(argumentTypes[i] is null) && !argumentTypes[i].MatchesParameterTypeExactly(parameterInfos[i]))
+                            if (
+                                !(argumentTypes[i] is null)
+                                && !argumentTypes[i].MatchesParameterTypeExactly(parameterInfos[i])
+                            )
                                 return false;
                         }
                     }
                 }
-#endregion
+                #endregion
             }
-#endregion
+            #endregion
 
             return true;
         }

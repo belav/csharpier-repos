@@ -12,14 +12,15 @@ using VSLangProj80;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
 {
-    [ExportLanguageService(typeof(ICompilationOptionsChangingService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageService(typeof(ICompilationOptionsChangingService), LanguageNames.CSharp),
+        Shared
+    ]
     internal class CSharpCompilationOptionsChangingService : ICompilationOptionsChangingService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCompilationOptionsChangingService()
-        {
-        }
+        public CSharpCompilationOptionsChangingService() { }
 
         public bool CanApplyChange(CompilationOptions oldOptions, CompilationOptions newOptions)
         {
@@ -27,18 +28,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
             var newCSharpOptions = (CSharpCompilationOptions)newOptions;
 
             // Currently, only changes to AllowUnsafe and Nullable of compilation options are supported.
-            return oldCSharpOptions.WithAllowUnsafe(newCSharpOptions.AllowUnsafe).WithNullableContextOptions(newCSharpOptions.NullableContextOptions) == newOptions;
+            return oldCSharpOptions
+                    .WithAllowUnsafe(newCSharpOptions.AllowUnsafe)
+                    .WithNullableContextOptions(newCSharpOptions.NullableContextOptions)
+                == newOptions;
         }
 
-        public void Apply(CompilationOptions oldOptions, CompilationOptions newOptions, ProjectPropertyStorage storage)
+        public void Apply(
+            CompilationOptions oldOptions,
+            CompilationOptions newOptions,
+            ProjectPropertyStorage storage
+        )
         {
             var oldCSharpOptions = (CSharpCompilationOptions)oldOptions;
             var newCSharpOptions = (CSharpCompilationOptions)newOptions;
 
             if (newCSharpOptions.AllowUnsafe != oldCSharpOptions.AllowUnsafe)
             {
-                storage.SetProperty("AllowUnsafeBlocks", nameof(ProjectConfigurationProperties3.AllowUnsafeBlocks),
-                    newCSharpOptions.AllowUnsafe);
+                storage.SetProperty(
+                    "AllowUnsafeBlocks",
+                    nameof(ProjectConfigurationProperties3.AllowUnsafeBlocks),
+                    newCSharpOptions.AllowUnsafe
+                );
             }
 
             if (newCSharpOptions.NullableContextOptions != oldCSharpOptions.NullableContextOptions)

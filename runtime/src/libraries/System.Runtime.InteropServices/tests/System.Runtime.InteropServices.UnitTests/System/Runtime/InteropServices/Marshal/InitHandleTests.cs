@@ -20,7 +20,8 @@ namespace System.Runtime.InteropServices.Tests
 
         class TestSafeHandle : SafeHandle
         {
-            public TestSafeHandle() : base(IntPtr.Zero, true) { }
+            public TestSafeHandle()
+                : base(IntPtr.Zero, true) { }
 
             public override bool IsInvalid => handle == IntPtr.Zero;
 

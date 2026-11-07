@@ -8,12 +8,12 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {
@@ -26,15 +26,26 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         /// <summary>
         /// Creates a union block with SELECT (<paramref name="slotInfos"/>), FROM (<paramref name="children"/>), WHERE (true), AS (<paramref name="blockAliasNum"/>).
         /// </summary>
-        internal UnionCqlBlock(SlotInfo[] slotInfos, List<CqlBlock> children, CqlIdentifiers identifiers, int blockAliasNum)
-            : base(slotInfos, children, BoolExpression.True, identifiers, blockAliasNum)
-        { }
+        internal UnionCqlBlock(
+            SlotInfo[] slotInfos,
+            List<CqlBlock> children,
+            CqlIdentifiers identifiers,
+            int blockAliasNum
+        )
+            : base(slotInfos, children, BoolExpression.True, identifiers, blockAliasNum) { }
         #endregion
 
         #region Methods
-        internal override StringBuilder AsEsql(StringBuilder builder, bool isTopLevel, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            bool isTopLevel,
+            int indentLevel
+        )
         {
-            Debug.Assert(this.Children.Count > 0, "UnionCqlBlock: Children collection must not be empty");
+            Debug.Assert(
+                this.Children.Count > 0,
+                "UnionCqlBlock: Children collection must not be empty"
+            );
 
             // Simply get the Cql versions of the children and add the union operator between them.
             bool isFirst = true;
@@ -56,7 +67,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
         internal override DbExpression AsCqt(bool isTopLevel)
         {
-            Debug.Assert(this.Children.Count > 0, "UnionCqlBlock: Children collection must not be empty");
+            Debug.Assert(
+                this.Children.Count > 0,
+                "UnionCqlBlock: Children collection must not be empty"
+            );
             DbExpression cqt = this.Children[0].AsCqt(isTopLevel);
             for (int i = 1; i < this.Children.Count; ++i)
             {

@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.Runtime;
 using Internal.Text;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -26,7 +24,8 @@ namespace ILCompiler.DependencyAnalysis
 
         private List<HeaderItem> _items = new List<HeaderItem>();
 
-        public void Add<T>(ReadyToRunSectionType id, T node) where T : ObjectNode, ISymbolDefinitionNode
+        public void Add<T>(ReadyToRunSectionType id, T node)
+            where T : ObjectNode, ISymbolDefinitionNode
         {
             _items.Add(new HeaderItem(id, node));
         }
@@ -36,10 +35,12 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunHeader");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool StaticDependenciesAreComputed => true;
 

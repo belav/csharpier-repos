@@ -1,16 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  IObserver<T>
-** 
+**
 ** <OWNER>kimhamil</OWNER>
 **
 **
-** Purpose: Interface for exposing an Observer in the 
+** Purpose: Interface for exposing an Observer in the
 ** Observer pattern
 **
 **

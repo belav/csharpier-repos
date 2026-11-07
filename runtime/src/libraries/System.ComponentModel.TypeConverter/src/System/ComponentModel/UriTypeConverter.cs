@@ -22,22 +22,33 @@ namespace System
         /// </summary>
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(Uri) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string)
+                || sourceType == typeof(Uri)
+                || base.CanConvertFrom(context, sourceType);
         }
 
         /// <summary>
         /// Gets a value indicating whether this converter can
         /// convert an object to the given destination type using the context.
         /// </summary>
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
-            return destinationType == typeof(Uri) || destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(Uri)
+                || destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
         /// Converts the given object to the a Uri.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value
+        )
         {
             if (value is string uriString)
             {
@@ -62,7 +73,12 @@ namespace System
         /// Converts the given value object to
         /// the specified destination type using the specified context and arguments.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
@@ -70,9 +86,17 @@ namespace System
             {
                 if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? ctor = typeof(Uri).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new Type[] { typeof(string), typeof(UriKind) }, null);
+                    ConstructorInfo? ctor = typeof(Uri).GetConstructor(
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new Type[] { typeof(string), typeof(UriKind) },
+                        null
+                    );
                     Debug.Assert(ctor != null, "Couldn't find constructor");
-                    return new InstanceDescriptor(ctor, new object[] { uri.OriginalString, GetUriKind(uri) });
+                    return new InstanceDescriptor(
+                        ctor,
+                        new object[] { uri.OriginalString, GetUriKind(uri) }
+                    );
                 }
 
                 if (destinationType == typeof(string))
@@ -98,6 +122,7 @@ namespace System
             return value is Uri;
         }
 
-        private static UriKind GetUriKind(Uri uri) => uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative;
+        private static UriKind GetUriKind(Uri uri) =>
+            uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative;
     }
 }

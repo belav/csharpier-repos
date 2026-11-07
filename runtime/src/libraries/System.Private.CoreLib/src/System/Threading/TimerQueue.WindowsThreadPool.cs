@@ -18,7 +18,11 @@ namespace System.Threading
 
 #pragma warning disable IDE0060 // Remove unused parameter
         [UnmanagedCallersOnly]
-        private static unsafe void TimerCallbackWindowsThreadPool(void* instance, void* context, void* timer)
+        private static unsafe void TimerCallbackWindowsThreadPool(
+            void* instance,
+            void* context,
+            void* timer
+        )
         {
             int id = (int)context;
             var wrapper = ThreadPoolCallbackWrapper.Enter();
@@ -32,7 +36,11 @@ namespace System.Threading
         {
             if (_nativeTimer == IntPtr.Zero)
             {
-                _nativeTimer = Interop.Kernel32.CreateThreadpoolTimer(&TimerCallbackWindowsThreadPool, (IntPtr)_id, IntPtr.Zero);
+                _nativeTimer = Interop.Kernel32.CreateThreadpoolTimer(
+                    &TimerCallbackWindowsThreadPool,
+                    (IntPtr)_id,
+                    IntPtr.Zero
+                );
                 if (_nativeTimer == IntPtr.Zero)
                     throw new OutOfMemoryException();
             }

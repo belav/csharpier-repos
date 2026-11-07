@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -20,29 +19,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Collections;
 using System.ComponentModel.Design;
 using System.Web.UI.WebControls;
-using System.Collections;
 
-namespace System.Web.UI.Design {
-	[Obsolete ("Use ContainerControlDesigner instead")]
-	[MonoTODO] public class ReadWriteControlDesigner : ControlDesigner {
-		[MonoTODO] public ReadWriteControlDesigner () { throw new NotImplementedException (); }
-		[MonoTODO] protected virtual void MapPropertyToStyle (string propName, object varPropValue) { throw new NotImplementedException (); }
-		[Obsolete ("Use ControlDesigner.Tag instead")]
-		[MonoTODO] protected override void OnBehaviorAttached () { throw new NotImplementedException (); }
-		[MonoTODO] public override void OnComponentChanged (object sender, ComponentChangedEventArgs ce) { throw new NotImplementedException (); }
-		[MonoTODO]
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+namespace System.Web.UI.Design
+{
+    [Obsolete("Use ContainerControlDesigner instead")]
+    [MonoTODO]
+    public class ReadWriteControlDesigner : ControlDesigner
+    {
+        [MonoTODO]
+        public ReadWriteControlDesigner()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override void UpdateDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected virtual void MapPropertyToStyle(string propName, object varPropValue)
+        {
+            throw new NotImplementedException();
+        }
 
+        [Obsolete("Use ControlDesigner.Tag instead")]
+        [MonoTODO]
+        protected override void OnBehaviorAttached()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override void OnComponentChanged(object sender, ComponentChangedEventArgs ce)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override string GetDesignTimeHtml()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override void UpdateDesignTimeHtml()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

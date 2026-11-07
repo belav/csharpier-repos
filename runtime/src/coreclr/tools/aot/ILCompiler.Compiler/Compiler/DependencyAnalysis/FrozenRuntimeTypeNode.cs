@@ -4,7 +4,6 @@
 using Internal.IL;
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -23,12 +22,18 @@ namespace ILCompiler.DependencyAnalysis
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__RuntimeType_").Append(nameMangler.GetMangledTypeName(_type));
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__RuntimeType_")
+                .Append(nameMangler.GetMangledTypeName(_type));
         }
 
         protected override int ContentSize => ObjectType.InstanceByteCount.AsInt;
 
-        public override void EncodeContents(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeContents(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             IEETypeNode typeSymbol = _constructed
                 ? factory.ConstructedTypeSymbol(_type)
@@ -39,7 +44,8 @@ namespace ILCompiler.DependencyAnalysis
             dataBuilder.EmitZeroPointer(); // RuntimeType::_runtimeTypeInfoHandle
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => 726422757;
 
@@ -52,6 +58,7 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsKnownImmutable => false;
 
-        public override DefType ObjectType => _type.Context.SystemModule.GetKnownType("System", "RuntimeType");
+        public override DefType ObjectType =>
+            _type.Context.SystemModule.GetKnownType("System", "RuntimeType");
     }
 }

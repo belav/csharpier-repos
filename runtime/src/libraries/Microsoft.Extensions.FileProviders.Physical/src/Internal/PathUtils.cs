@@ -11,15 +11,21 @@ namespace Microsoft.Extensions.FileProviders.Physical.Internal
 {
     internal static class PathUtils
     {
-        private static char[] GetInvalidFileNameChars() => Path.GetInvalidFileNameChars()
-            .Where(c => c != Path.DirectorySeparatorChar && c != Path.AltDirectorySeparatorChar).ToArray();
+        private static char[] GetInvalidFileNameChars() =>
+            Path.GetInvalidFileNameChars()
+                .Where(c => c != Path.DirectorySeparatorChar && c != Path.AltDirectorySeparatorChar)
+                .ToArray();
 
-        private static char[] GetInvalidFilterChars() => GetInvalidFileNameChars()
-            .Where(c => c != '*' && c != '|' && c != '?').ToArray();
+        private static char[] GetInvalidFilterChars() =>
+            GetInvalidFileNameChars().Where(c => c != '*' && c != '|' && c != '?').ToArray();
 
 #if NET8_0_OR_GREATER
-        private static readonly SearchValues<char> _invalidFileNameChars = SearchValues.Create(GetInvalidFileNameChars());
-        private static readonly SearchValues<char> _invalidFilterChars = SearchValues.Create(GetInvalidFilterChars());
+        private static readonly SearchValues<char> _invalidFileNameChars = SearchValues.Create(
+            GetInvalidFileNameChars()
+        );
+        private static readonly SearchValues<char> _invalidFilterChars = SearchValues.Create(
+            GetInvalidFilterChars()
+        );
 
         internal static bool HasInvalidPathChars(string path) =>
             path.AsSpan().ContainsAny(_invalidFileNameChars);
@@ -38,12 +44,14 @@ namespace Microsoft.Extensions.FileProviders.Physical.Internal
 #endif
 
         private static readonly char[] _pathSeparators = new[]
-            {Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar};
+        {
+            Path.DirectorySeparatorChar,
+            Path.AltDirectorySeparatorChar,
+        };
 
         internal static string EnsureTrailingSlash(string path)
         {
-            if (!string.IsNullOrEmpty(path) &&
-                path[path.Length - 1] != Path.DirectorySeparatorChar)
+            if (!string.IsNullOrEmpty(path) && path[path.Length - 1] != Path.DirectorySeparatorChar)
             {
                 return path + Path.DirectorySeparatorChar;
             }

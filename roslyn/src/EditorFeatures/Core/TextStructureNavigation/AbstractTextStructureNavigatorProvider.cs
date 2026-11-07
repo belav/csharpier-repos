@@ -12,7 +12,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
 {
-    internal abstract partial class AbstractTextStructureNavigatorProvider : ITextStructureNavigatorProvider
+    internal abstract partial class AbstractTextStructureNavigatorProvider
+        : ITextStructureNavigatorProvider
     {
         private readonly ITextStructureNavigatorSelectorService _selectorService;
         private readonly IContentTypeRegistryService _contentTypeService;
@@ -21,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
         protected AbstractTextStructureNavigatorProvider(
             ITextStructureNavigatorSelectorService selectorService,
             IContentTypeRegistryService contentTypeService,
-            IUIThreadOperationExecutor uIThreadOperationExecutor)
+            IUIThreadOperationExecutor uIThreadOperationExecutor
+        )
         {
             Contract.ThrowIfNull(selectorService);
             Contract.ThrowIfNull(contentTypeService);
@@ -34,20 +36,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
         protected abstract bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia);
         protected abstract bool IsWithinNaturalLanguage(SyntaxToken token, int position);
 
-        protected virtual TextExtent GetExtentOfWordFromToken(SyntaxToken token, SnapshotPoint position)
-            => new(token.Span.ToSnapshotSpan(position.Snapshot), isSignificant: true);
+        protected virtual TextExtent GetExtentOfWordFromToken(
+            SyntaxToken token,
+            SnapshotPoint position
+        ) => new(token.Span.ToSnapshotSpan(position.Snapshot), isSignificant: true);
 
         public ITextStructureNavigator CreateTextStructureNavigator(ITextBuffer subjectBuffer)
         {
             var naturalLanguageNavigator = _selectorService.CreateTextStructureNavigator(
                 subjectBuffer,
-                _contentTypeService.GetContentType("any"));
+                _contentTypeService.GetContentType("any")
+            );
 
             return new TextStructureNavigator(
                 subjectBuffer,
                 naturalLanguageNavigator,
                 this,
-                _uiThreadOperationExecutor);
+                _uiThreadOperationExecutor
+            );
         }
     }
 }

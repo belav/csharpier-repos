@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,8 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
-using NUnit.Framework;
 
 using System;
 using System.Collections;
@@ -37,58 +35,63 @@ using System.Security.Permissions;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HttpWriterCas : AspNetHostingMinimal
+    {
+        private HttpWriter writer;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpWriterCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            HttpContext context = new HttpContext(null);
+            writer = (HttpWriter)context.Response.Output;
+        }
 
-		private HttpWriter writer;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Properties_Deny_Unrestricted()
+        {
+            Assert.IsNotNull(writer.Encoding, "Encoding");
+            Assert.IsNotNull(writer.OutputStream, "OutputStream");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			HttpContext context = new HttpContext (null);
-			writer = (HttpWriter) context.Response.Output;
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Methods_Deny_Unrestricted()
+        {
+            writer.Write(Char.MinValue);
+            writer.Write(this);
+            writer.Write(String.Empty);
+            writer.Write(new char[1], 0, 1);
+            writer.WriteLine();
+            writer.WriteString("mono", 0, 4);
+            writer.WriteBytes(new byte[1], 0, 1);
+            writer.Flush();
+            writer.Close();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Properties_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (writer.Encoding, "Encoding");
-			Assert.IsNotNull (writer.OutputStream, "OutputStream");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Methods_Deny_Unrestricted ()
-		{
-			writer.Write (Char.MinValue);
-			writer.Write (this);
-			writer.Write (String.Empty);
-			writer.Write (new char [1], 0, 1);
-			writer.WriteLine ();
-			writer.WriteString ("mono", 0, 4);
-			writer.WriteBytes (new byte[1], 0, 1);
-			writer.Flush ();
-			writer.Close ();
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            // there are no public ctor so we're taking a method that we know isn't protected
+            // (by a Demand) and call it thru reflection so any linkdemand (on the class) will
+            // be promoted to a Demand
+            MethodInfo mi = this.Type.GetProperty("OutputStream").GetGetMethod();
+            return mi.Invoke(writer, null);
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// there are no public ctor so we're taking a method that we know isn't protected
-			// (by a Demand) and call it thru reflection so any linkdemand (on the class) will
-			// be promoted to a Demand
-			MethodInfo mi = this.Type.GetProperty ("OutputStream").GetGetMethod ();
-			return mi.Invoke (writer, null);
-		}
-
-		public override Type Type {
-			get { return typeof (HttpWriter); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HttpWriter); }
+        }
+    }
 }

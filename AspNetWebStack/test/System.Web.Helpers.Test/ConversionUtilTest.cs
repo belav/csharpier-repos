@@ -73,7 +73,7 @@ namespace System.Web.Helpers.Test
         private enum TestEnum
         {
             Weekend,
-            Weekday
+            Weekday,
         }
     }
 }

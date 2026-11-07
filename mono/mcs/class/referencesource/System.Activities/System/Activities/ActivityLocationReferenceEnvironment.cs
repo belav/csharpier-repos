@@ -14,9 +14,7 @@ namespace System.Activities
         Dictionary<string, LocationReference> declarations;
         List<LocationReference> unnamedDeclarations;
 
-        public ActivityLocationReferenceEnvironment()
-        {
-        }
+        public ActivityLocationReferenceEnvironment() { }
 
         public ActivityLocationReferenceEnvironment(LocationReferenceEnvironment parent)
         {
@@ -30,17 +28,10 @@ namespace System.Activities
 
         public override Activity Root
         {
-            get
-            {
-                return this.InternalRoot;
-            }
+            get { return this.InternalRoot; }
         }
 
-        public Activity InternalRoot
-        {
-            get;
-            set;
-        }
+        public Activity InternalRoot { get; set; }
 
         Dictionary<string, LocationReference> Declarations
         {
@@ -66,13 +57,16 @@ namespace System.Activities
 
             while (currentScope != null)
             {
-                ActivityLocationReferenceEnvironment activityEnvironment = currentScope as ActivityLocationReferenceEnvironment;
+                ActivityLocationReferenceEnvironment activityEnvironment =
+                    currentScope as ActivityLocationReferenceEnvironment;
 
                 if (activityEnvironment != null)
                 {
                     if (activityEnvironment.declarations != null)
                     {
-                        foreach (LocationReference declaration in activityEnvironment.declarations.Values)
+                        foreach (
+                            LocationReference declaration in activityEnvironment.declarations.Values
+                        )
                         {
                             if (locationReference == declaration)
                             {
@@ -90,7 +84,7 @@ namespace System.Activities
                                 return true;
                             }
                         }
-                    }                   
+                    }
                 }
                 else
                 {
@@ -103,7 +97,11 @@ namespace System.Activities
             return false;
         }
 
-        public void Declare(LocationReference locationReference, Activity owner, ref IList<ValidationError> validationErrors)
+        public void Declare(
+            LocationReference locationReference,
+            Activity owner,
+            ref IList<ValidationError> validationErrors
+        )
         {
             Fx.Assert(locationReference != null, "Must not be null");
 
@@ -127,10 +125,12 @@ namespace System.Activities
                         id = owner.Id;
                     }
 
-                    ValidationError validationError = new ValidationError(SR.SymbolNamesMustBeUnique(locationReference.Name))
+                    ValidationError validationError = new ValidationError(
+                        SR.SymbolNamesMustBeUnique(locationReference.Name)
+                    )
                     {
                         Source = owner,
-                        Id = id
+                        Id = id,
                     };
 
                     ActivityUtilities.Add(ref validationErrors, validationError);
@@ -159,7 +159,10 @@ namespace System.Activities
 
                 if (currentEnvironment != null)
                 {
-                    Fx.Assert(!(currentEnvironment is ActivityLocationReferenceEnvironment), "We must be at a non-ActivityLocationReferenceEnvironment implementation.");
+                    Fx.Assert(
+                        !(currentEnvironment is ActivityLocationReferenceEnvironment),
+                        "We must be at a non-ActivityLocationReferenceEnvironment implementation."
+                    );
 
                     return currentEnvironment.TryGetLocationReference(name, out result);
                 }
@@ -176,10 +179,17 @@ namespace System.Activities
                 LocationReferenceEnvironment rootEnvironment = this;
 
                 // Loop through all of the ActivityLocationReferenceEnvironments we have chained together
-                while (currentEnvironment != null && currentEnvironment is ActivityLocationReferenceEnvironment)
+                while (
+                    currentEnvironment != null
+                    && currentEnvironment is ActivityLocationReferenceEnvironment
+                )
                 {
-                    ActivityLocationReferenceEnvironment activityEnvironment = (ActivityLocationReferenceEnvironment)currentEnvironment;
-                    if (activityEnvironment.declarations != null && activityEnvironment.declarations.TryGetValue(name, out result))
+                    ActivityLocationReferenceEnvironment activityEnvironment =
+                        (ActivityLocationReferenceEnvironment)currentEnvironment;
+                    if (
+                        activityEnvironment.declarations != null
+                        && activityEnvironment.declarations.TryGetValue(name, out result)
+                    )
                     {
                         return true;
                     }
@@ -193,7 +203,10 @@ namespace System.Activities
                     if (currentEnvironment != null)
                     {
                         // Looks like we have a non-ActivityLocationReferenceEnvironment at the root
-                        Fx.Assert(!(currentEnvironment is ActivityLocationReferenceEnvironment), "We should have some other host environment at this point.");
+                        Fx.Assert(
+                            !(currentEnvironment is ActivityLocationReferenceEnvironment),
+                            "We should have some other host environment at this point."
+                        );
                         if (currentEnvironment.TryGetLocationReference(name, out result))
                         {
                             return true;

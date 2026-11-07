@@ -1,16 +1,14 @@
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 
 class X
 {
-	readonly Func<string, Task> action = null;
+    readonly Func<string, Task> action = null;
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 
-	protected async Task TestAsync ()
-	{
-		await action ("");
-	}
+    protected async Task TestAsync()
+    {
+        await action("");
+    }
 }

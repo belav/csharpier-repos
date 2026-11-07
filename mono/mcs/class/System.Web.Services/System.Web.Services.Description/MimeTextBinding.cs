@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimeTextBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,34 +31,42 @@
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("text", "http://microsoft.com/wsdl/mime/textMatching/", typeof (InputBinding), typeof (OutputBinding), typeof (MimePart))]
-	[XmlFormatExtensionPrefix ("tm", "http://microsoft.com/wsdl/mime/textMatching/")]
-	public sealed class MimeTextBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "text",
+        "http://microsoft.com/wsdl/mime/textMatching/",
+        typeof(InputBinding),
+        typeof(OutputBinding),
+        typeof(MimePart)
+    )]
+    [XmlFormatExtensionPrefix("tm", "http://microsoft.com/wsdl/mime/textMatching/")]
+    public sealed class MimeTextBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        public const string Namespace = "http://microsoft.com/wsdl/mime/textMatching/";
+        MimeTextMatchCollection matches;
 
-		public const string Namespace = "http://microsoft.com/wsdl/mime/textMatching/";
-		MimeTextMatchCollection matches;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public MimeTextBinding ()
-		{
-			matches = new MimeTextMatchCollection ();
-		}
-		
-		#endregion // Constructors
+        public MimeTextBinding()
+        {
+            matches = new MimeTextMatchCollection();
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[XmlElement ("match", typeof (MimeTextMatch))]	
-		public MimeTextMatchCollection Matches {
-			get { return matches; }
-		}
+        #region Properties
 
-		#endregion // Properties
-	}
+        [XmlElement("match", typeof(MimeTextMatch))]
+        public MimeTextMatchCollection Matches
+        {
+            get { return matches; }
+        }
+
+        #endregion // Properties
+    }
 }

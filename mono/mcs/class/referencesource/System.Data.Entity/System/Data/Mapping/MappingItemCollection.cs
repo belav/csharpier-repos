@@ -21,9 +21,8 @@ namespace System.Data.Mapping
         /// <summary>
         /// The default constructor for ItemCollection
         /// </summary>
-        internal MappingItemCollection(DataSpace dataSpace) : base(dataSpace)
-        {
-        }
+        internal MappingItemCollection(DataSpace dataSpace)
+            : base(dataSpace) { }
 
         /// <summary>
         /// Search for a Mapping metadata with the specified type key.
@@ -81,7 +80,12 @@ namespace System.Data.Mapping
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="map"></param>
         /// <returns>Returns false if no match found.</returns>
-        internal virtual bool TryGetMap(string identity, DataSpace typeSpace, bool ignoreCase, out Map map)
+        internal virtual bool TryGetMap(
+            string identity,
+            DataSpace typeSpace,
+            bool ignoreCase,
+            out Map map
+        )
         {
             //will only be implemented by Mapping Item Collections
             throw System.Data.Entity.Error.NotSupported();
@@ -98,6 +102,5 @@ namespace System.Data.Mapping
             //will only be implemented by Mapping Item Collections
             throw System.Data.Entity.Error.NotSupported();
         }
-    }//---- ItemCollection
-
-}//---- 
+    } //---- ItemCollection
+} //---- 

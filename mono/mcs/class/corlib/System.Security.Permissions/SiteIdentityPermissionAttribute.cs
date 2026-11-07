@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,41 +30,46 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public sealed class SiteIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        // Fields
+        private string site;
 
-	[ComVisible (true)]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-			 AttributeTargets.Struct | AttributeTargets.Constructor |
-			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public sealed class SiteIdentityPermissionAttribute : CodeAccessSecurityAttribute {
+        // Constructor
+        public SiteIdentityPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-		// Fields
-		private string site;
-		
-		// Constructor
-		public SiteIdentityPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-		}
-		
-		// Properties
-		public string Site {
-			get { return site; }
-			set { site = value; }
-		}
-		
-		// Methods
-		public override IPermission CreatePermission ()
-		{
-			SiteIdentityPermission perm = null;
-			if (this.Unrestricted)
-				perm = new SiteIdentityPermission (PermissionState.Unrestricted);
-			else if (site == null)
-				perm = new SiteIdentityPermission (PermissionState.None);
-			else
-				perm = new SiteIdentityPermission (site);
-			return perm;
-		}
-	}
+        // Properties
+        public string Site
+        {
+            get { return site; }
+            set { site = value; }
+        }
+
+        // Methods
+        public override IPermission CreatePermission()
+        {
+            SiteIdentityPermission perm = null;
+            if (this.Unrestricted)
+                perm = new SiteIdentityPermission(PermissionState.Unrestricted);
+            else if (site == null)
+                perm = new SiteIdentityPermission(PermissionState.None);
+            else
+                perm = new SiteIdentityPermission(site);
+            return perm;
+        }
+    }
 }

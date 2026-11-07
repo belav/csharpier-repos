@@ -5,16 +5,25 @@
 //#define CONNECTIONDUMP
 namespace System.ServiceModel.Channels
 {
-    class NamedPipeChannelFactory<TChannel> : ConnectionOrientedTransportChannelFactory<TChannel>, IPipeTransportFactorySettings
+    class NamedPipeChannelFactory<TChannel>
+        : ConnectionOrientedTransportChannelFactory<TChannel>,
+            IPipeTransportFactorySettings
     {
-        static NamedPipeConnectionPoolRegistry connectionPoolRegistry = new NamedPipeConnectionPoolRegistry();
+        static NamedPipeConnectionPoolRegistry connectionPoolRegistry =
+            new NamedPipeConnectionPoolRegistry();
 
-        public NamedPipeChannelFactory(NamedPipeTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context,
-            GetConnectionGroupName(bindingElement),
-            bindingElement.ConnectionPoolSettings.IdleTimeout,
-            bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint,
-            false)
+        public NamedPipeChannelFactory(
+            NamedPipeTransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(
+                bindingElement,
+                context,
+                GetConnectionGroupName(bindingElement),
+                bindingElement.ConnectionPoolSettings.IdleTimeout,
+                bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint,
+                false
+            )
         {
             if (bindingElement.PipeSettings != null)
             {
@@ -27,26 +36,28 @@ namespace System.ServiceModel.Channels
             get { return Uri.UriSchemeNetPipe; }
         }
 
-
-        public NamedPipeSettings PipeSettings
-        {
-            get;
-            private set;
-        }
+        public NamedPipeSettings PipeSettings { get; private set; }
 
         static string GetConnectionGroupName(NamedPipeTransportBindingElement bindingElement)
         {
-            return bindingElement.ConnectionPoolSettings.GroupName + bindingElement.PipeSettings.ApplicationContainerSettings.GetConnectionGroupSuffix();
+            return bindingElement.ConnectionPoolSettings.GroupName
+                + bindingElement.PipeSettings.ApplicationContainerSettings.GetConnectionGroupSuffix();
         }
 
         internal override IConnectionInitiator GetConnectionInitiator()
         {
-            IConnectionInitiator pipeConnectionInitiator =
-                new PipeConnectionInitiator(ConnectionBufferSize, this);
+            IConnectionInitiator pipeConnectionInitiator = new PipeConnectionInitiator(
+                ConnectionBufferSize,
+                this
+            );
 #if CONNECTIONDUMP
             pipeConnectionInitiator = new ConnectionDumpInitiator(pipeConnectionInitiator);
 #endif
-            return new BufferedConnectionInitiator(pipeConnectionInitiator, MaxOutputDelay, ConnectionBufferSize);
+            return new BufferedConnectionInitiator(
+                pipeConnectionInitiator,
+                MaxOutputDelay,
+                ConnectionBufferSize
+            );
         }
 
         internal override ConnectionPool GetConnectionPool()

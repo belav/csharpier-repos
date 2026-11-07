@@ -12,7 +12,7 @@ public static class Tests
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int BoxIsInstUnbox1<T>(T t) => t is int n ? n : -1;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int BoxIsInstUnbox2<T>(T t) => t is string n ? n.Length : -1;
 
@@ -242,6 +242,7 @@ public struct Struct2<T>
 public class RefBase : IDisposable
 {
     public int a;
+
     public void Dispose() { }
 }
 

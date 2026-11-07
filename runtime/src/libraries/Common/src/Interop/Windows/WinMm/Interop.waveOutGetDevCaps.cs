@@ -21,17 +21,20 @@ internal static partial class Interop
             private ushort wMid;
             private ushort wPid;
             private uint vDriverVersion;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = szPnameLength)]
             internal string szPname;
             private uint dwFormats;
             private ushort wChannels;
             private ushort wReserved1;
             private ushort dwSupport;
+
 #if NET7_0_OR_GREATER
             [CustomMarshaller(typeof(WAVEOUTCAPS), MarshalMode.Default, typeof(Marshaller))]
             public static class Marshaller
             {
                 public static Native ConvertToUnmanaged(WAVEOUTCAPS managed) => new(managed);
+
                 public static WAVEOUTCAPS ConvertToManaged(Native native) => native.ToManaged();
 
                 internal unsafe struct Native
@@ -50,7 +53,10 @@ internal static partial class Interop
                         wMid = managed.wMid;
                         wPid = managed.wPid;
                         vDriverVersion = managed.vDriverVersion;
-                        Span<char> szPnameSpan = MemoryMarshal.CreateSpan(ref szPname[0], szPnameLength);
+                        Span<char> szPnameSpan = MemoryMarshal.CreateSpan(
+                            ref szPname[0],
+                            szPnameLength
+                        );
                         szPnameSpan.Clear();
                         managed.szPname?.CopyTo(szPnameSpan);
                         dwFormats = managed.dwFormats;
@@ -65,7 +71,9 @@ internal static partial class Interop
                             wMid = wMid,
                             wPid = wPid,
                             vDriverVersion = vDriverVersion,
-                            szPname = MemoryMarshal.CreateReadOnlySpan(ref szPname[0], szPnameLength).ToString(),
+                            szPname = MemoryMarshal
+                                .CreateReadOnlySpan(ref szPname[0], szPnameLength)
+                                .ToString(),
                             dwFormats = dwFormats,
                             wChannels = wChannels,
                             wReserved1 = wReserved1,
@@ -89,6 +97,10 @@ internal static partial class Interop
         /// <param name="cbwoc">Size, in bytes, of the WAVEOUTCAPS structure.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM, EntryPoint = "waveOutGetDevCapsW")]
-        internal static partial MMSYSERR waveOutGetDevCaps(IntPtr uDeviceID, ref WAVEOUTCAPS caps, int cbwoc);
+        internal static partial MMSYSERR waveOutGetDevCaps(
+            IntPtr uDeviceID,
+            ref WAVEOUTCAPS caps,
+            int cbwoc
+        );
     }
 }

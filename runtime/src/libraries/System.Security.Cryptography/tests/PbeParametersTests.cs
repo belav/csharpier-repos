@@ -13,9 +13,13 @@ namespace System.Security.Cryptography.Tests
         [InlineData(-1000)]
         public static void PositiveIterationsRequired(int iterationCount)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(iterationCount),
-                () => new PbeParameters(PbeEncryptionAlgorithm.Aes128Cbc, HashAlgorithmName.SHA256, iterationCount));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(iterationCount), () =>
+                new PbeParameters(
+                    PbeEncryptionAlgorithm.Aes128Cbc,
+                    HashAlgorithmName.SHA256,
+                    iterationCount
+                )
+            );
         }
 
         [Theory]
@@ -44,7 +48,11 @@ namespace System.Security.Cryptography.Tests
         public static void HashAlgorithm_NotVerified_DefaultValue()
         {
             // Assert.NoThrows.
-            var pbeParams = new PbeParameters(PbeEncryptionAlgorithm.Aes128Cbc, default(HashAlgorithmName), 1);
+            var pbeParams = new PbeParameters(
+                PbeEncryptionAlgorithm.Aes128Cbc,
+                default(HashAlgorithmName),
+                1
+            );
 
             Assert.Equal(default(HashAlgorithmName), pbeParams.HashAlgorithm);
         }
@@ -62,7 +70,8 @@ namespace System.Security.Cryptography.Tests
             var pbeParams = new PbeParameters(
                 PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                 hashName,
-                1);
+                1
+            );
 
             Assert.Equal(hashName, pbeParams.HashAlgorithm);
         }

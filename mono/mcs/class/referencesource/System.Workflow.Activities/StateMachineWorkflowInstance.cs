@@ -2,26 +2,28 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Xml.Serialization;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Collections;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Reflection;
+    using System.Security.Principal;
     using System.Workflow.Activities;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Security.Principal;
-    using System.Workflow.Runtime.Tracking;
-    using System.Diagnostics;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.Runtime;
+    using System.Workflow.Runtime.Tracking;
+    using System.Xml.Serialization;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class StateMachineWorkflowInstance
     {
         private Guid _instanceId;
@@ -43,7 +45,8 @@ namespace System.Workflow.Activities
             _runtime = runtime;
             _instanceId = instanceId;
             _workflowInstance = runtime.GetWorkflow(instanceId);
-            _stateMachineWorkflow = _workflowInstance.GetWorkflowDefinition() as StateMachineWorkflowActivity;
+            _stateMachineWorkflow =
+                _workflowInstance.GetWorkflowDefinition() as StateMachineWorkflowActivity;
             if (_stateMachineWorkflow == null)
                 throw new ArgumentException(SR.GetStateMachineWorkflowRequired(), "instanceId");
         }
@@ -52,18 +55,17 @@ namespace System.Workflow.Activities
         {
             get
             {
-                // we always get a new definition, in case a 
+                // we always get a new definition, in case a
                 // dynamic updated happened. The exception handling here
                 // is because after the workflow completes, we can no longer
-                // retrieve the workflow definition. In this case, we 
+                // retrieve the workflow definition. In this case, we
                 // return the last retrieved definition
                 try
                 {
-                    _stateMachineWorkflow = (StateMachineWorkflowActivity)this.WorkflowInstance.GetWorkflowDefinition();
+                    _stateMachineWorkflow = (StateMachineWorkflowActivity)
+                        this.WorkflowInstance.GetWorkflowDefinition();
                 }
-                catch (InvalidOperationException)
-                {
-                }
+                catch (InvalidOperationException) { }
 
                 return _stateMachineWorkflow;
             }
@@ -71,26 +73,17 @@ namespace System.Workflow.Activities
 
         public Guid InstanceId
         {
-            get
-            {
-                return _instanceId;
-            }
+            get { return _instanceId; }
         }
 
         public WorkflowInstance WorkflowInstance
         {
-            get
-            {
-                return _workflowInstance;
-            }
+            get { return _workflowInstance; }
         }
 
         public StateActivity CurrentState
         {
-            get
-            {
-                return GetCurrentState();
-            }
+            get { return GetCurrentState(); }
         }
 
         public string CurrentStateName
@@ -130,7 +123,6 @@ namespace System.Workflow.Activities
             return leafStates.AsReadOnly();
         }
 
-
         public ReadOnlyCollection<StateActivity> States
         {
             get
@@ -150,18 +142,12 @@ namespace System.Workflow.Activities
 
         public ReadOnlyCollection<string> PossibleStateTransitions
         {
-            get
-            {
-                return GetPossibleStateTransitions();
-            }
+            get { return GetPossibleStateTransitions(); }
         }
 
         public ReadOnlyCollection<string> StateHistory
         {
-            get
-            {
-                return GetStateHistory();
-            }
+            get { return GetStateHistory(); }
         }
 
         public void EnqueueItem(IComparable queueName, object item)
@@ -169,7 +155,12 @@ namespace System.Workflow.Activities
             EnqueueItem(queueName, item, null, null);
         }
 
-        public void EnqueueItem(IComparable queueName, object item, IPendingWork pendingWork, object workItem)
+        public void EnqueueItem(
+            IComparable queueName,
+            object item,
+            IPendingWork pendingWork,
+            object workItem
+        )
         {
             this.WorkflowInstance.EnqueueItemOnIdle(queueName, item, pendingWork, workItem);
         }
@@ -185,11 +176,17 @@ namespace System.Workflow.Activities
         {
             if (targetStateName == null)
                 throw new ArgumentNullException("targetStateName");
-            StateActivity targetState = FindActivityByQualifiedName(targetStateName) as StateActivity;
+            StateActivity targetState =
+                FindActivityByQualifiedName(targetStateName) as StateActivity;
             if (targetState == null)
                 throw new ArgumentOutOfRangeException("targetStateName");
             SetStateEventArgs eventArgs = new SetStateEventArgs(targetStateName);
-            this.WorkflowInstance.EnqueueItemOnIdle(System.Workflow.Activities.StateMachineWorkflowActivity.SetStateQueueName, eventArgs, null, null);
+            this.WorkflowInstance.EnqueueItemOnIdle(
+                System.Workflow.Activities.StateMachineWorkflowActivity.SetStateQueueName,
+                eventArgs,
+                null,
+                null
+            );
         }
 
         internal Activity FindActivityByQualifiedName(string id)
@@ -199,7 +196,8 @@ namespace System.Workflow.Activities
 
         private StateActivity GetCurrentState()
         {
-            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos = this.WorkflowInstance.GetWorkflowQueueData();
+            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos =
+                this.WorkflowInstance.GetWorkflowQueueData();
             foreach (WorkflowQueueInfo queueInfo in workflowQueuedInfos)
             {
                 if (queueInfo.QueueName.Equals(StateMachineWorkflowActivity.SetStateQueueName))
@@ -208,29 +206,37 @@ namespace System.Workflow.Activities
                         return null;
                     Debug.Assert(queueInfo.SubscribedActivityNames.Count == 1);
                     StateMachineWorkflowActivity stateMachineWorkflow = this.StateMachineWorkflow;
-                    StateActivity currentState = StateMachineHelpers.FindStateByName(stateMachineWorkflow, queueInfo.SubscribedActivityNames[0]);
+                    StateActivity currentState = StateMachineHelpers.FindStateByName(
+                        stateMachineWorkflow,
+                        queueInfo.SubscribedActivityNames[0]
+                    );
                     return currentState;
                 }
             }
             return null;
         }
 
-
         private ReadOnlyCollection<string> GetPossibleStateTransitions()
         {
             List<string> targetStates = new List<string>();
-            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos = this.WorkflowInstance.GetWorkflowQueueData();
+            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos =
+                this.WorkflowInstance.GetWorkflowQueueData();
             StateMachineWorkflowActivity stateMachineWorkflow = this.StateMachineWorkflow;
             foreach (WorkflowQueueInfo queueInfo in workflowQueuedInfos)
             {
                 foreach (string subscribedActivityName in queueInfo.SubscribedActivityNames)
                 {
-                    Activity subscribedActivity = StateMachineHelpers.FindActivityByName(stateMachineWorkflow, subscribedActivityName);
+                    Activity subscribedActivity = StateMachineHelpers.FindActivityByName(
+                        stateMachineWorkflow,
+                        subscribedActivityName
+                    );
                     IEventActivity eventActivity = subscribedActivity as IEventActivity;
                     if (eventActivity == null)
                         continue;
 
-                    EventDrivenActivity eventDriven = StateMachineHelpers.GetParentEventDriven(eventActivity);
+                    EventDrivenActivity eventDriven = StateMachineHelpers.GetParentEventDriven(
+                        eventActivity
+                    );
                     Debug.Assert(eventDriven != null);
                     Queue<Activity> activities = new Queue<Activity>();
                     activities.Enqueue(eventDriven);
@@ -247,7 +253,9 @@ namespace System.Workflow.Activities
                             CompositeActivity compositeActivity = activity as CompositeActivity;
                             if (compositeActivity != null)
                             {
-                                foreach (Activity childActivity in compositeActivity.EnabledActivities)
+                                foreach (
+                                    Activity childActivity in compositeActivity.EnabledActivities
+                                )
                                 {
                                     activities.Enqueue(childActivity);
                                 }
@@ -285,7 +293,10 @@ namespace System.Workflow.Activities
 
             if (_sqlTrackingWorkflowInstance == null)
             {
-                bool result = _sqlTrackingQuery.TryGetWorkflow(_instanceId, out _sqlTrackingWorkflowInstance);
+                bool result = _sqlTrackingQuery.TryGetWorkflow(
+                    _instanceId,
+                    out _sqlTrackingWorkflowInstance
+                );
                 if (!result)
                 {
                     // Workflow has not started yet, so we just return an
@@ -303,17 +314,26 @@ namespace System.Workflow.Activities
 
                 string stateQualifiedName = record.UserData as string;
                 if (stateQualifiedName == null)
-                    throw new InvalidOperationException(SR.GetInvalidUserDataInStateChangeTrackingRecord());
+                    throw new InvalidOperationException(
+                        SR.GetInvalidUserDataInStateChangeTrackingRecord()
+                    );
 
-                StateActivity state = StateMachineHelpers.FindStateByName(stateMachineWorkflow, record.QualifiedName);
+                StateActivity state = StateMachineHelpers.FindStateByName(
+                    stateMachineWorkflow,
+                    record.QualifiedName
+                );
                 if (state == null)
-                    throw new InvalidOperationException(SR.GetInvalidUserDataInStateChangeTrackingRecord());
+                    throw new InvalidOperationException(
+                        SR.GetInvalidUserDataInStateChangeTrackingRecord()
+                    );
 
                 if (StateMachineHelpers.IsLeafState(state))
                     stateHistory.Push(stateQualifiedName);
             }
 
-            ReadOnlyCollection<string> history = new ReadOnlyCollection<string>(stateHistory.ToArray());
+            ReadOnlyCollection<string> history = new ReadOnlyCollection<string>(
+                stateHistory.ToArray()
+            );
             return history;
         }
     }

@@ -5,14 +5,14 @@
 namespace System.Activities.Tracking
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Collections;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -23,14 +23,22 @@ namespace System.Activities.Tracking
         ActivityInfo activity;
         string state;
 
-        static ReadOnlyCollection<string> wildcardCollection = new ReadOnlyCollection<string>(new List<string>(1) { "*" });
+        static ReadOnlyCollection<string> wildcardCollection = new ReadOnlyCollection<string>(
+            new List<string>(1) { "*" }
+        );
 
-        internal ActivityStateRecord(Guid instanceId, ActivityInstance instance, ActivityInstanceState state)
-            : this(instanceId, new ActivityInfo(instance), state)
-        {
-        }
+        internal ActivityStateRecord(
+            Guid instanceId,
+            ActivityInstance instance,
+            ActivityInstanceState state
+        )
+            : this(instanceId, new ActivityInfo(instance), state) { }
 
-        internal ActivityStateRecord(Guid instanceId, ActivityInfo activity, ActivityInstanceState state)
+        internal ActivityStateRecord(
+            Guid instanceId,
+            ActivityInfo activity,
+            ActivityInstanceState state
+        )
             : base(instanceId)
         {
             this.Activity = activity;
@@ -58,7 +66,8 @@ namespace System.Activities.Tracking
             Guid instanceId,
             long recordNumber,
             ActivityInfo activity,
-            string state)
+            string state
+        )
             : base(instanceId, recordNumber)
         {
             if (activity == null)
@@ -104,29 +113,16 @@ namespace System.Activities.Tracking
             }
         }
 
-        
         public ActivityInfo Activity
         {
-            get
-            {
-                return this.activity;
-            }
-            private set
-            {
-                this.activity = value;
-            }
+            get { return this.activity; }
+            private set { this.activity = value; }
         }
-        
+
         public string State
         {
-            get
-            {
-                return this.state;
-            }
-            private set
-            {
-                this.state = value;
-            }
+            get { return this.state; }
+            private set { this.state = value; }
         }
 
         public IDictionary<string, object> Variables
@@ -136,11 +132,13 @@ namespace System.Activities.Tracking
                 if (this.variables == null)
                 {
                     this.variables = GetVariables(wildcardCollection);
-                    Fx.Assert(this.variables.IsReadOnly, "only readonly dictionary can be set for variables");
+                    Fx.Assert(
+                        this.variables.IsReadOnly,
+                        "only readonly dictionary can be set for variables"
+                    );
                 }
                 return this.variables;
             }
-
             internal set
             {
                 Fx.Assert(value.IsReadOnly, "only readonly dictionary can be set for variables");
@@ -155,11 +153,13 @@ namespace System.Activities.Tracking
                 if (this.arguments == null)
                 {
                     this.arguments = GetArguments(wildcardCollection);
-                    Fx.Assert(this.arguments.IsReadOnly, "only readonly dictionary can be set for arguments");
+                    Fx.Assert(
+                        this.arguments.IsReadOnly,
+                        "only readonly dictionary can be set for arguments"
+                    );
                 }
                 return this.arguments;
             }
-
             internal set
             {
                 Fx.Assert(value.IsReadOnly, "only readonly dictionary can be set for arguments");
@@ -200,14 +200,15 @@ namespace System.Activities.Tracking
             return new ActivityStateRecord(this);
         }
 
-
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-               "ActivityStateRecord {{ {0}, Activity {{ {1} }}, State = {2} }}",
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "ActivityStateRecord {{ {0}, Activity {{ {1} }}, State = {2} }}",
                 base.ToString(),
                 this.Activity.ToString(),
-                this.State);
+                this.State
+            );
         }
 
         internal IDictionary<string, object> GetVariables(ICollection<string> variables)
@@ -220,27 +221,40 @@ namespace System.Activities.Tracking
                 Activity currentElement = currentInstance.Activity;
                 Activity startActivity = currentInstance.Activity;
                 bool containsWildcard = variables.Contains("*");
-                //count defines how many items we can get in this lookup. It represents the maximum number of items that can be extracted, 
-                //if * is specified, any other names specified are expected to be variables defined in scope, not in the activity itself. 
-                //if a variable name in the activity is specified, the lookup continues through the variables in scope. 
-                int count = containsWildcard ? currentElement.RuntimeVariables.Count + variables.Count - 1 : variables.Count;
+                //count defines how many items we can get in this lookup. It represents the maximum number of items that can be extracted,
+                //if * is specified, any other names specified are expected to be variables defined in scope, not in the activity itself.
+                //if a variable name in the activity is specified, the lookup continues through the variables in scope.
+                int count = containsWildcard
+                    ? currentElement.RuntimeVariables.Count + variables.Count - 1
+                    : variables.Count;
 
                 IdSpace activityIdSpace = currentElement.MemberOf;
 
                 while (currentInstance != null)
                 {
-                    //* only extracts variables of the current Activity and not variables in scope. 
+                    //* only extracts variables of the current Activity and not variables in scope.
                     bool useWildCard = containsWildcard && startActivity == currentElement;
 
                     // we only track public Variables, not ImplementationVariables
                     for (int i = 0; i < currentElement.RuntimeVariables.Count; i++)
                     {
                         Variable variable = currentElement.RuntimeVariables[i];
-                        if (TrackData(variable.Name, variable.Id, currentInstance, variables, useWildCard, ref trackedVariables))
+                        if (
+                            TrackData(
+                                variable.Name,
+                                variable.Id,
+                                currentInstance,
+                                variables,
+                                useWildCard,
+                                ref trackedVariables
+                            )
+                        )
                         {
                             if (trackedVariables.Count == count)
                             {
-                                return new ReadOnlyDictionaryInternal<string, object>(trackedVariables);
+                                return new ReadOnlyDictionaryInternal<string, object>(
+                                    trackedVariables
+                                );
                             }
                         }
                     }
@@ -271,7 +285,10 @@ namespace System.Activities.Tracking
             }
             else
             {
-                Fx.Assert(trackedVariables.Count > 0, "we should only allocate the dictionary if we're putting data in it");
+                Fx.Assert(
+                    trackedVariables.Count > 0,
+                    "we should only allocate the dictionary if we're putting data in it"
+                );
                 return new ReadOnlyDictionaryInternal<string, object>(trackedVariables);
             }
         }
@@ -285,10 +302,15 @@ namespace System.Activities.Tracking
             {
                 Activity currentElement = currentInstance.Activity;
                 bool containsWildcard = arguments.Contains("*");
-                int count = containsWildcard ? currentElement.RuntimeArguments.Count : arguments.Count;
-                bool isActivityStateExecuting = ActivityStates.Executing.Equals(this.State, StringComparison.Ordinal);
+                int count = containsWildcard
+                    ? currentElement.RuntimeArguments.Count
+                    : arguments.Count;
+                bool isActivityStateExecuting = ActivityStates.Executing.Equals(
+                    this.State,
+                    StringComparison.Ordinal
+                );
 
-                //look at arguments for this element. 
+                //look at arguments for this element.
                 for (int i = 0; i < currentElement.RuntimeArguments.Count; i++)
                 {
                     RuntimeArgument argument = currentElement.RuntimeArguments[i];
@@ -299,7 +321,16 @@ namespace System.Activities.Tracking
                         continue;
                     }
 
-                    if (TrackData(argument.Name, argument.Id, currentInstance, arguments, containsWildcard, ref trackedArguments))
+                    if (
+                        TrackData(
+                            argument.Name,
+                            argument.Id,
+                            currentInstance,
+                            arguments,
+                            containsWildcard,
+                            ref trackedArguments
+                        )
+                    )
                     {
                         if (trackedArguments.Count == count)
                         {
@@ -315,13 +346,22 @@ namespace System.Activities.Tracking
             }
             else
             {
-                Fx.Assert(trackedArguments.Count > 0, "we should only allocate the dictionary if we're putting data in it");
+                Fx.Assert(
+                    trackedArguments.Count > 0,
+                    "we should only allocate the dictionary if we're putting data in it"
+                );
                 return new ReadOnlyDictionaryInternal<string, object>(trackedArguments);
             }
         }
 
-
-        bool TrackData(string name, int id, ActivityInstance currentInstance, ICollection<string> data, bool wildcard, ref Dictionary<string, object> trackedData)
+        bool TrackData(
+            string name,
+            int id,
+            ActivityInstance currentInstance,
+            ICollection<string> data,
+            bool wildcard,
+            ref Dictionary<string, object> trackedData
+        )
         {
             if (wildcard || data.Contains(name))
             {

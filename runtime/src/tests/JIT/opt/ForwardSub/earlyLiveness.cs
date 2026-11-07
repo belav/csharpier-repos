@@ -43,6 +43,10 @@ public class EarlyLiveness_ForwardSub
 
     private struct S1
     {
-        public int A, B, C, D, E;
+        public int A,
+            B,
+            C,
+            D,
+            E;
     }
 }

@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Runtime_31673
 {
-
     public class Program
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -23,7 +22,7 @@ namespace Runtime_31673
         {
             int returnVal = 100;
 
-            Vector4 v1 = new Vector4(1,2,3,4);
+            Vector4 v1 = new Vector4(1, 2, 3, 4);
             Vector4 v2 = Test(v1);
             if (!v2.Equals(Vector4.One))
             {

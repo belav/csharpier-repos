@@ -12,10 +12,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     public abstract class AbstractExternalCodeMember : AbstractExternalCodeElement
     {
-        internal AbstractExternalCodeMember(CodeModelState state, ProjectId projectId, ISymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+        internal AbstractExternalCodeMember(
+            CodeModelState state,
+            ProjectId projectId,
+            ISymbol symbol
+        )
+            : base(state, projectId, symbol) { }
 
         protected virtual bool GetCanOverride()
         {
@@ -29,33 +31,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             return symbol.IsAbstract;
         }
 
-        protected virtual EnvDTE.CodeElements GetParameters()
-            => ExternalParameterCollection.Create(this.State, this, this.ProjectId);
+        protected virtual EnvDTE.CodeElements GetParameters() =>
+            ExternalParameterCollection.Create(this.State, this, this.ProjectId);
 
         public bool CanOverride
         {
-            get
-            {
-                return GetCanOverride();
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { return GetCanOverride(); }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool MustImplement
         {
-            get
-            {
-                return GetMustImplement();
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { return GetMustImplement(); }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeElements Parameters

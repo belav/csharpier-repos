@@ -17,6 +17,7 @@ public class Test_ArrayOfStructs
         array[0].x = 3;
         return array[0].x;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -29,7 +30,6 @@ public class Test_ArrayOfStructs
             {
                 return 100;
             }
-
             else
             {
                 return 101;

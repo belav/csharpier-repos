@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,7 +11,11 @@ namespace Test
     public class AA
     {
         static AA[] m_axForward3;
-        static void GoToEnd() { throw new Exception(); }
+
+        static void GoToEnd()
+        {
+            throw new Exception();
+        }
 
         [Fact]
         public static void TestEntryPoint()
@@ -35,15 +40,10 @@ namespace Test
                     }
                 } while (local2[2]);
 
-                do
-                {
-
-                } while (true);
+                do { } while (true);
                 GC.Collect();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
     }
 }

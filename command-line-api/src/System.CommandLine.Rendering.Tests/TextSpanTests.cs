@@ -12,10 +12,7 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void Content_span_length_is_the_same_as_the_contained_string_length()
         {
-            new ContentSpan("the content")
-                .ContentLength
-                .Should()
-                .Be("the content".Length);
+            new ContentSpan("the content").ContentLength.Should().Be("the content".Length);
         }
 
         [Fact]
@@ -24,7 +21,8 @@ namespace System.CommandLine.Rendering.Tests
             var span = new ContainerSpan(
                 ForegroundColorSpan.Red(),
                 new ContentSpan("content"),
-                ForegroundColorSpan.Reset());
+                ForegroundColorSpan.Reset()
+            );
 
             span.ContentLength.Should().Be("content".Length);
         }
@@ -54,7 +52,8 @@ namespace System.CommandLine.Rendering.Tests
                 new ContentSpan("first"),
                 ForegroundColorSpan.Blue(),
                 new ContentSpan("second"),
-                ForegroundColorSpan.Reset());
+                ForegroundColorSpan.Reset()
+            );
 
             span[0].Start.Should().Be(0);
             span[1].Start.Should().Be(0);
@@ -71,11 +70,10 @@ namespace System.CommandLine.Rendering.Tests
                 new ContentSpan("second"),
                 ForegroundColorSpan.Blue(),
                 new ContentSpan("third"),
-                ForegroundColorSpan.Reset());
+                ForegroundColorSpan.Reset()
+            );
 
-            var outerContainer = new ContainerSpan(
-                new ContentSpan("first"),
-                innerContainerSpan);
+            var outerContainer = new ContainerSpan(new ContentSpan("first"), innerContainerSpan);
 
             innerContainerSpan[0].Start.Should().Be("first".Length);
             innerContainerSpan[1].Start.Should().Be("first".Length);
@@ -87,23 +85,25 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void ToString_with_non_ansi_omits_ANSI_codes()
         {
-            var span = new TextSpanFormatter()
-                .ParseToSpan($"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three");
+            var span = new TextSpanFormatter().ParseToSpan(
+                $"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three"
+            );
 
-            span.ToString(OutputMode.NonAnsi)
-                .Should()
-                .Be("onetwothree");
+            span.ToString(OutputMode.NonAnsi).Should().Be("onetwothree");
         }
 
         [Fact]
         public void ToString_with_ansi_includes_ANSI_codes()
         {
-            var span = new TextSpanFormatter()
-                .ParseToSpan($"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three");
+            var span = new TextSpanFormatter().ParseToSpan(
+                $"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three"
+            );
 
             span.ToString(OutputMode.Ansi)
                 .Should()
-                .Be($"one{Ansi.Color.Foreground.Red.EscapeSequence}two{Ansi.Color.Foreground.Default.EscapeSequence}three");
+                .Be(
+                    $"one{Ansi.Color.Foreground.Red.EscapeSequence}two{Ansi.Color.Foreground.Default.EscapeSequence}three"
+                );
         }
 
         [Fact]
@@ -113,13 +113,18 @@ namespace System.CommandLine.Rendering.Tests
 
             var formatter = new TextSpanFormatter();
 
-            var span = formatter.ParseToSpan($"{Ansi.Color.Foreground.LightGray}hello{Ansi.Text.AttributesOff}");
+            var span = formatter.ParseToSpan(
+                $"{Ansi.Color.Foreground.LightGray}hello{Ansi.Text.AttributesOff}"
+            );
 
             writer.Write(span.ToString(OutputMode.Ansi));
 
-            writer.ToString()
-                  .Should()
-                  .Be($"{Ansi.Color.Foreground.LightGray.EscapeSequence}hello{Ansi.Text.AttributesOff.EscapeSequence}");
+            writer
+                .ToString()
+                .Should()
+                .Be(
+                    $"{Ansi.Color.Foreground.LightGray.EscapeSequence}hello{Ansi.Text.AttributesOff.EscapeSequence}"
+                );
         }
     }
 }

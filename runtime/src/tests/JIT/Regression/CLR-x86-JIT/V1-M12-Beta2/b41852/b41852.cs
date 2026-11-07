@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -13,10 +14,12 @@ namespace Test
         private ulong[] m_aulField4;
 
         void Method1(ref ulong[] param2) { }
+
         static void Method1(BB param2, __arglist)
         {
             param2.Method1(ref param2.m_aulField4);
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

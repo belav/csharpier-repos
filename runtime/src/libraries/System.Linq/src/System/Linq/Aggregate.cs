@@ -7,7 +7,10 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static TSource Aggregate<TSource>(this IEnumerable<TSource> source, Func<TSource, TSource, TSource> func)
+        public static TSource Aggregate<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TSource, TSource> func
+        )
         {
             if (source == null)
             {
@@ -36,7 +39,11 @@ namespace System.Linq
             }
         }
 
-        public static TAccumulate Aggregate<TSource, TAccumulate>(this IEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func)
+        public static TAccumulate Aggregate<TSource, TAccumulate>(
+            this IEnumerable<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> func
+        )
         {
             if (source == null)
             {
@@ -57,7 +64,12 @@ namespace System.Linq
             return result;
         }
 
-        public static TResult Aggregate<TSource, TAccumulate, TResult>(this IEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func, Func<TAccumulate, TResult> resultSelector)
+        public static TResult Aggregate<TSource, TAccumulate, TResult>(
+            this IEnumerable<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> func,
+            Func<TAccumulate, TResult> resultSelector
+        )
         {
             if (source == null)
             {

@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 // we will be doing "sizeof" with arrays containing managed references.
@@ -29,7 +28,7 @@ struct MyArray<T> : IEnumerable<T>
 
     public IEnumerator<T> GetEnumerator()
     {
-        for (int i =0; i < Length; i++)
+        for (int i = 0; i < Length; i++)
         {
             yield return this[i];
         }
@@ -69,8 +68,11 @@ public unsafe class Validate
 
     // ====================== UseOnStack ==========================================================
     class One { }
+
     class Two { }
+
     class Three { }
+
     class Four { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -98,6 +100,7 @@ public unsafe class Validate
     }
 
     static object s;
+
     private static unsafe void MakeGarbage()
     {
         // make garbage
@@ -156,10 +159,14 @@ public unsafe class Validate
         public (object o, short s) element;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static ObjShortArr CreateArray(int recCount) {
-            if (recCount > 0) {
-                return CreateArray(recCount-1);
-            } else {
+        public static ObjShortArr CreateArray(int recCount)
+        {
+            if (recCount > 0)
+            {
+                return CreateArray(recCount - 1);
+            }
+            else
+            {
                 var arr = new ObjShortArr();
                 for (short i = 0; i < ObjShortArr.Length; i++)
                 {
@@ -304,7 +311,7 @@ public unsafe class Validate
 
         MyArray<MyArray<IntObj>> nestedArray = default;
 
-        for(int i = 0; i < nestedArray.Length; i++)
+        for (int i = 0; i < nestedArray.Length; i++)
         {
             for (int j = 0; j < nestedArray[i].Length; j++)
             {
@@ -322,7 +329,7 @@ public unsafe class Validate
         GC.Collect(2, GCCollectionMode.Forced, true, true);
 
         int i = 0;
-        foreach(object obj in arr)
+        foreach (object obj in arr)
         {
             Assert.Equal(i++, obj);
         }
@@ -362,13 +369,15 @@ public unsafe class Validate
         }
     }
 
-     // ====================== MonoGCDesc ==========================================================
+    // ====================== MonoGCDesc ==========================================================
 
-    class Holder {
+    class Holder
+    {
         public ObjShortArr arr;
     }
 
-    static Holder CreateArray() {
+    static Holder CreateArray()
+    {
         var arr = ObjShortArr.CreateArray(100);
         var holder = new Holder();
         holder.arr = arr;

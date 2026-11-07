@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
     /// </summary>
     internal class IndentationViewModel : AbstractOptionPreviewViewModel
     {
-        private const string BlockContentPreview = @"
+        private const string BlockContentPreview =
+            @"
 class C {
 //[
     int Method() {
@@ -28,7 +29,8 @@ class C {
 //]
 }";
 
-        private const string IndentBracePreview = @"
+        private const string IndentBracePreview =
+            @"
 class C {
 //[
     int Method() {
@@ -37,7 +39,8 @@ class C {
 //]
 }";
 
-        private const string SwitchCasePreview = @"
+        private const string SwitchCasePreview =
+            @"
 class MyClass
 {
     int Method(int goo){
@@ -50,7 +53,8 @@ class MyClass
     }
 }";
 
-        private const string SwitchCaseWhenBlockPreview = @"
+        private const string SwitchCaseWhenBlockPreview =
+            @"
 class MyClass
 {
     int Method(int goo){
@@ -65,7 +69,8 @@ class MyClass
     }
 }";
 
-        private const string GotoLabelPreview = @"
+        private const string GotoLabelPreview =
+            @"
 class MyClass
 {
     int Method(int goo){
@@ -77,19 +82,90 @@ class MyClass
     }
 }";
 
-        public IndentationViewModel(OptionStore optionStore, IServiceProvider serviceProvider) : base(optionStore, serviceProvider, LanguageNames.CSharp)
+        public IndentationViewModel(OptionStore optionStore, IServiceProvider serviceProvider)
+            : base(optionStore, serviceProvider, LanguageNames.CSharp)
         {
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.IndentBlock, CSharpVSResources.Indent_block_contents, BlockContentPreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.IndentBraces, CSharpVSResources.Indent_open_and_close_braces, IndentBracePreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.IndentSwitchCaseSection, CSharpVSResources.Indent_case_contents, SwitchCasePreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock, CSharpVSResources.Indent_case_contents_when_block, SwitchCaseWhenBlockPreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.IndentSwitchSection, CSharpVSResources.Indent_case_labels, SwitchCasePreview, this, optionStore));
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.IndentBlock,
+                    CSharpVSResources.Indent_block_contents,
+                    BlockContentPreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.IndentBraces,
+                    CSharpVSResources.Indent_open_and_close_braces,
+                    IndentBracePreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.IndentSwitchCaseSection,
+                    CSharpVSResources.Indent_case_contents,
+                    SwitchCasePreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock,
+                    CSharpVSResources.Indent_case_contents_when_block,
+                    SwitchCaseWhenBlockPreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.IndentSwitchSection,
+                    CSharpVSResources.Indent_case_labels,
+                    SwitchCasePreview,
+                    this,
+                    optionStore
+                )
+            );
 
             Items.Add(new TextBlock() { Text = CSharpVSResources.Label_Indentation });
 
-            Items.Add(new RadioButtonViewModel<LabelPositionOptions>(CSharpVSResources.Place_goto_labels_in_leftmost_column, GotoLabelPreview, "goto", LabelPositionOptions.LeftMost, CSharpFormattingOptions2.LabelPositioning, this, optionStore));
-            Items.Add(new RadioButtonViewModel<LabelPositionOptions>(CSharpVSResources.Indent_labels_normally, GotoLabelPreview, "goto", LabelPositionOptions.NoIndent, CSharpFormattingOptions2.LabelPositioning, this, optionStore));
-            Items.Add(new RadioButtonViewModel<LabelPositionOptions>(CSharpVSResources.Place_goto_labels_one_indent_less_than_current, GotoLabelPreview, "goto", LabelPositionOptions.OneLess, CSharpFormattingOptions2.LabelPositioning, this, optionStore));
+            Items.Add(
+                new RadioButtonViewModel<LabelPositionOptions>(
+                    CSharpVSResources.Place_goto_labels_in_leftmost_column,
+                    GotoLabelPreview,
+                    "goto",
+                    LabelPositionOptions.LeftMost,
+                    CSharpFormattingOptions2.LabelPositioning,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new RadioButtonViewModel<LabelPositionOptions>(
+                    CSharpVSResources.Indent_labels_normally,
+                    GotoLabelPreview,
+                    "goto",
+                    LabelPositionOptions.NoIndent,
+                    CSharpFormattingOptions2.LabelPositioning,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new RadioButtonViewModel<LabelPositionOptions>(
+                    CSharpVSResources.Place_goto_labels_one_indent_less_than_current,
+                    GotoLabelPreview,
+                    "goto",
+                    LabelPositionOptions.OneLess,
+                    CSharpFormattingOptions2.LabelPositioning,
+                    this,
+                    optionStore
+                )
+            );
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             string? verbosity,
             string? binarylog,
             string? report,
-            IConsole console);
+            IConsole console
+        );
 
         private static readonly FormatWhitespaceHandler s_formattingHandler = new();
 
@@ -34,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
         {
             var command = new CliCommand("whitespace", Resources.Run_whitespace_formatting)
             {
-                FolderOption
+                FolderOption,
             };
             command.AddCommonOptions();
             command.Validators.Add(EnsureFolderNotSpecifiedWithNoRestore);
@@ -59,22 +60,31 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             var binarylog = symbolResult.GetResult(BinarylogOption);
             if (folder && binarylog is not null && !binarylog.Implicit)
             {
-                symbolResult.AddError(Resources.Cannot_specify_the_folder_option_when_writing_a_binary_log);
+                symbolResult.AddError(
+                    Resources.Cannot_specify_the_folder_option_when_writing_a_binary_log
+                );
             }
         }
 
         private class FormatWhitespaceHandler : AsynchronousCliAction
         {
-            public override async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken)
+            public override async Task<int> InvokeAsync(
+                ParseResult parseResult,
+                CancellationToken cancellationToken
+            )
             {
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = new SystemConsole().SetupLogging(minimalLogLevel: formatOptions.LogLevel, minimalErrorLevel: LogLevel.Warning);
+                var logger = new SystemConsole().SetupLogging(
+                    minimalLogLevel: formatOptions.LogLevel,
+                    minimalErrorLevel: LogLevel.Warning
+                );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.Whitespace };
 
-                return await FormatAsync(formatOptions, logger, cancellationToken).ConfigureAwait(false);
+                return await FormatAsync(formatOptions, logger, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

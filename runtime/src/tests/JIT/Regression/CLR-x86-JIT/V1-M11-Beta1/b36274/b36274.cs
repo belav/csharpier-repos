@@ -13,14 +13,13 @@
 // </Description>
 //<Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 
 using System;
 using Xunit;
 
 public class MyClass
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -40,4 +39,4 @@ public class MyClass
         return 1;
     }
 }
-// </Code> 
+// </Code>

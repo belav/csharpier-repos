@@ -17,15 +17,15 @@ namespace System.CommandLine.Hosting.Tests
 
             var config = new CliConfiguration(
                 new MyRootCommand().UseCommandHandler<MyHandler>()
-                )
-                .UseHost(builder => {
-                    builder.ConfigureServices(services =>
-                    {
-                        services.AddTransient(_ => service);
-                    });
+            ).UseHost(builder =>
+            {
+                builder.ConfigureServices(services =>
+                {
+                    services.AddTransient(_ => service);
                 });
+            });
 
-            await config.InvokeAsync(new [] { "--int-option", "54"});
+            await config.InvokeAsync(new[] { "--int-option", "54" });
 
             service.Value.Should().Be(54);
         }
@@ -33,16 +33,17 @@ namespace System.CommandLine.Hosting.Tests
         [Fact]
         public static async Task Parameter_is_available_in_property()
         {
-            var config = new CliConfiguration(new MyRootCommand().UseCommandHandler<MyHandler>())
-                .UseHost(host =>
+            var config = new CliConfiguration(
+                new MyRootCommand().UseCommandHandler<MyHandler>()
+            ).UseHost(host =>
+            {
+                host.ConfigureServices(services =>
                 {
-                    host.ConfigureServices(services =>
-                    {
-                        services.AddTransient<MyService>();
-                    });
+                    services.AddTransient<MyService>();
                 });
+            });
 
-            var result = await config.InvokeAsync(new [] { "--int-option", "54"});
+            var result = await config.InvokeAsync(new[] { "--int-option", "54" });
 
             result.Should().Be(54);
         }
@@ -53,24 +54,26 @@ namespace System.CommandLine.Hosting.Tests
             var root = new CliRootCommand();
 
             root.Subcommands.Add(new MyCommand().UseCommandHandler<MyHandler>());
-            root.Subcommands.Add(new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyHandler>());
-            var config = new CliConfiguration(root)
-                .UseHost(host =>
+            root.Subcommands.Add(
+                new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyHandler>()
+            );
+            var config = new CliConfiguration(root).UseHost(host =>
+            {
+                host.ConfigureServices(services =>
                 {
-                    host.ConfigureServices(services =>
-                    {
-                        services.AddTransient<MyService>(_ => new MyService()
-                        {
-                            Action = () => 100
-                        });
-                    });
+                    services.AddTransient<MyService>(_ => new MyService() { Action = () => 100 });
                 });
+            });
 
-            var result = await config.InvokeAsync(new string[] { "mycommand", "--int-option", "54" });
+            var result = await config.InvokeAsync(
+                new string[] { "mycommand", "--int-option", "54" }
+            );
 
             result.Should().Be(54);
 
-            result = await config.InvokeAsync(new string[] { "myothercommand", "--int-option", "54" });
+            result = await config.InvokeAsync(
+                new string[] { "myothercommand", "--int-option", "54" }
+            );
 
             result.Should().Be(100);
         }
@@ -81,14 +84,13 @@ namespace System.CommandLine.Hosting.Tests
             var service = new MyService();
             var cmd = new CliRootCommand();
             cmd.Subcommands.Add(new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyHandler>());
-            var config = new CliConfiguration(cmd)
-                .UseHost(host =>
+            var config = new CliConfiguration(cmd).UseHost(host =>
+            {
+                host.ConfigureServices(services =>
                 {
-                    host.ConfigureServices(services =>
-                    {
-                        services.AddSingleton<MyService>(service);
-                    });
+                    services.AddSingleton<MyService>(service);
                 });
+            });
 
             var result = await config.InvokeAsync(new string[] { "myothercommand", "TEST" });
 
@@ -102,14 +104,18 @@ namespace System.CommandLine.Hosting.Tests
 
             var cmd = new CliRootCommand();
             cmd.Subcommands.Add(new MyCommand().UseCommandHandler<MyDerivedCliAction>());
-            cmd.Subcommands.Add(new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyDerivedCliAction>());
-            var config = new CliConfiguration(cmd)
-                         .UseHost((builder) => {
-                             builder.ConfigureServices(services =>
-                             {
-                                 services.AddTransient(x => service);
-                             });
-                         });
+            cmd.Subcommands.Add(
+                new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyDerivedCliAction>()
+            );
+            var config = new CliConfiguration(cmd).UseHost(
+                (builder) =>
+                {
+                    builder.ConfigureServices(services =>
+                    {
+                        services.AddTransient(x => service);
+                    });
+                }
+            );
 
             await config.InvokeAsync(new string[] { "mycommand", "--int-option", "54" });
             service.Value.Should().Be(54);
@@ -122,7 +128,10 @@ namespace System.CommandLine.Hosting.Tests
         {
             public int IntOption { get; set; } // bound from option
 
-            public override Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken)
+            public override Task<int> InvokeAsync(
+                ParseResult context,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult(Act());
             }
@@ -140,7 +149,8 @@ namespace System.CommandLine.Hosting.Tests
 
         public class MyCommand : CliCommand
         {
-            public MyCommand() : base(name: "mycommand")
+            public MyCommand()
+                : base(name: "mycommand")
             {
                 Options.Add(new CliOption<int>("--int-option")); // or nameof(Handler.IntOption).ToKebabCase() if you don't like the string literal
             }
@@ -173,7 +183,10 @@ namespace System.CommandLine.Hosting.Tests
 
             public int IntOption { get; set; } // bound from option
 
-            public override Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken)
+            public override Task<int> InvokeAsync(
+                ParseResult context,
+                CancellationToken cancellationToken
+            )
             {
                 service.Value = IntOption;
                 return Task.FromResult(IntOption);
@@ -182,10 +195,11 @@ namespace System.CommandLine.Hosting.Tests
 
         public class MyOtherCommand : CliCommand
         {
-            public MyOtherCommand() : base(name: "myothercommand")
+            public MyOtherCommand()
+                : base(name: "myothercommand")
             {
                 Options.Add(new CliOption<int>("--int-option")); // or nameof(Handler.IntOption).ToKebabCase() if you don't like the string literal
-                Arguments.Add(new CliArgument<string>("One") {  Arity = ArgumentArity.ZeroOrOne });
+                Arguments.Add(new CliArgument<string>("One") { Arity = ArgumentArity.ZeroOrOne });
             }
 
             public class MyHandler : AsynchronousCliAction
@@ -200,8 +214,11 @@ namespace System.CommandLine.Hosting.Tests
                 public int IntOption { get; set; } // bound from option
 
                 public string One { get; set; }
-                
-                public override Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken)
+
+                public override Task<int> InvokeAsync(
+                    ParseResult context,
+                    CancellationToken cancellationToken
+                )
                 {
                     service.Value = IntOption;
                     service.StringValue = One;

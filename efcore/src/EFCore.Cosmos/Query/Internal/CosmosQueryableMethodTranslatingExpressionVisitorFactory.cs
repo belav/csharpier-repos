@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CosmosQueryableMethodTranslatingExpressionVisitorFactory : IQueryableMethodTranslatingExpressionVisitorFactory
+public class CosmosQueryableMethodTranslatingExpressionVisitorFactory
+    : IQueryableMethodTranslatingExpressionVisitorFactory
 {
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IMemberTranslatorProvider _memberTranslatorProvider;
@@ -25,7 +26,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitorFactory : IQueryab
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         ISqlExpressionFactory sqlExpressionFactory,
         IMemberTranslatorProvider memberTranslatorProvider,
-        IMethodCallTranslatorProvider methodCallTranslatorProvider)
+        IMethodCallTranslatorProvider methodCallTranslatorProvider
+    )
     {
         Dependencies = dependencies;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -44,11 +46,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitorFactory : IQueryab
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryableMethodTranslatingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
-        => new CosmosQueryableMethodTranslatingExpressionVisitor(
+    public virtual QueryableMethodTranslatingExpressionVisitor Create(
+        QueryCompilationContext queryCompilationContext
+    ) =>
+        new CosmosQueryableMethodTranslatingExpressionVisitor(
             Dependencies,
             queryCompilationContext,
             _sqlExpressionFactory,
             _memberTranslatorProvider,
-            _methodCallTranslatorProvider);
+            _methodCallTranslatorProvider
+        );
 }

@@ -36,7 +36,9 @@ public class AnnotatableTest
     {
         var annotatable = new Annotatable();
 
-        annotatable.AddAnnotations(new[] { new ConventionAnnotation("Foo", "Bar", ConfigurationSource.Convention) });
+        annotatable.AddAnnotations(
+            new[] { new ConventionAnnotation("Foo", "Bar", ConfigurationSource.Convention) }
+        );
 
         Assert.Equal(typeof(Annotation), annotatable.FindAnnotation("Foo").GetType());
 
@@ -44,7 +46,10 @@ public class AnnotatableTest
 
         conventionAnnotatable.AddAnnotations(new[] { new Annotation("Foo", "Bar") });
 
-        Assert.Equal(typeof(ConventionAnnotation), conventionAnnotatable.FindAnnotation("Foo").GetType());
+        Assert.Equal(
+            typeof(ConventionAnnotation),
+            conventionAnnotatable.FindAnnotation("Foo").GetType()
+        );
     }
 
     [ConditionalFact]
@@ -56,7 +61,10 @@ public class AnnotatableTest
 
         Assert.Equal(
             CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
-            Assert.Throws<InvalidOperationException>(() => annotatable.AddAnnotation("Foo", "Bar")).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => annotatable.AddAnnotation("Foo", "Bar"))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -82,8 +90,12 @@ public class AnnotatableTest
         Assert.Empty(annotatable.GetAnnotations());
 
         Assert.Equal(
-            CoreStrings.AnnotationNotFound("Foo", "Microsoft.EntityFrameworkCore.Infrastructure.Annotatable"),
-            Assert.Throws<InvalidOperationException>(() => annotatable.GetAnnotation("Foo")).Message);
+            CoreStrings.AnnotationNotFound(
+                "Foo",
+                "Microsoft.EntityFrameworkCore.Infrastructure.Annotatable"
+            ),
+            Assert.Throws<InvalidOperationException>(() => annotatable.GetAnnotation("Foo")).Message
+        );
     }
 
     [ConditionalFact]
@@ -134,6 +146,11 @@ public class AnnotatableTest
 
         Assert.Equal(
             CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
-            Assert.Throws<InvalidOperationException>(() => annotatable.AddRuntimeAnnotation("Foo", "Bar")).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    annotatable.AddRuntimeAnnotation("Foo", "Bar")
+                )
+                .Message
+        );
     }
 }

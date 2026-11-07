@@ -11,7 +11,10 @@ namespace System.Diagnostics.Tests
     [Collection("System.Diagnostics.Debug")]
     public class DebugTestsUsingListeners : DebugTestsNoListeners
     {
-        protected override bool DebugUsesTraceListeners { get { return true; } }
+        protected override bool DebugUsesTraceListeners
+        {
+            get { return true; }
+        }
 
         [Fact]
         public void Trace_Write_TraceListenerAlwaysIndentsOnFirstCall()
@@ -19,33 +22,48 @@ namespace System.Diagnostics.Tests
             Trace.Indent();
             int expectedIndentation = Trace.IndentLevel * Trace.IndentSize;
 
-            VerifyLogged(() => Debug.Write("pizza"),    new string(' ', expectedIndentation) + "pizza");
-            VerifyLogged(() => Debug.Write("pizza"),    "pizza");
-            VerifyLogged(() => Trace.Write("pizza"),    "pizza");
+            VerifyLogged(
+                () => Debug.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
+            VerifyLogged(() => Debug.Write("pizza"), "pizza");
+            VerifyLogged(() => Trace.Write("pizza"), "pizza");
 
             Trace.Listeners.Clear();
             // New TraceListener indents on first Debug call
             Trace.Listeners.Add(new DefaultTraceListener());
-            VerifyLogged(() => Trace.Write("pizza"),    new string(' ', expectedIndentation) + "pizza");
-            VerifyLogged(() => Debug.Write("pizza"),    "pizza");
+            VerifyLogged(
+                () => Trace.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
+            VerifyLogged(() => Debug.Write("pizza"), "pizza");
 
             Trace.Listeners.Clear();
             // New TraceListener indents on first Trace call
             Trace.Listeners.Add(new DefaultTraceListener());
-            VerifyLogged(() => Debug.Write("pizza"),    new string(' ', expectedIndentation) + "pizza");
-            VerifyLogged(() => Trace.Write("pizza"),    "pizza");
+            VerifyLogged(
+                () => Debug.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
+            VerifyLogged(() => Trace.Write("pizza"), "pizza");
 
             TraceListener secondListener = new DefaultTraceListener();
             Trace.Listeners.Add(secondListener);
             // Only new TraceListener will indent on its first Trace/Debug call:
-            VerifyLogged(() => Debug.Write("pizza"),    "pizza" + new string(' ', expectedIndentation) + "pizza");
-            VerifyLogged(() => Trace.Write("pizza"),    "pizza" + "pizza");
+            VerifyLogged(
+                () => Debug.Write("pizza"),
+                "pizza" + new string(' ', expectedIndentation) + "pizza"
+            );
+            VerifyLogged(() => Trace.Write("pizza"), "pizza" + "pizza");
 
             TraceListener thirdListener = new DefaultTraceListener();
             Trace.Listeners.Add(thirdListener);
             // Only new TraceListener will indent on its first Trace/Debug call:
-            VerifyLogged(() => Trace.Write("pizza"),    "pizza" + "pizza" + new string(' ', expectedIndentation) + "pizza");
-            VerifyLogged(() => Debug.Write("pizza"),    "pizza" + "pizza" + "pizza");
+            VerifyLogged(
+                () => Trace.Write("pizza"),
+                "pizza" + "pizza" + new string(' ', expectedIndentation) + "pizza"
+            );
+            VerifyLogged(() => Debug.Write("pizza"), "pizza" + "pizza" + "pizza");
 
             Trace.Listeners.Remove(secondListener);
             Trace.Listeners.Remove(thirdListener);
@@ -58,7 +76,10 @@ namespace System.Diagnostics.Tests
         {
             // This test when run alone verifies Trace.Write indentation, even on first call, is correct.
             Trace.Indent();
-            VerifyLogged(() => Trace.Write("pizza"),        new string(' ', Trace.IndentLevel * Trace.IndentSize) +  "pizza");
+            VerifyLogged(
+                () => Trace.Write("pizza"),
+                new string(' ', Trace.IndentLevel * Trace.IndentSize) + "pizza"
+            );
             Trace.Unindent();
 
             GoToNextLine();
@@ -69,7 +90,12 @@ namespace System.Diagnostics.Tests
         {
             // This test when run alone verifies Debug.WriteLine indentation, even on first call, is correct.
             Debug.Indent();
-            VerifyLogged(() => Trace.WriteLine("pizza"),    new string(' ', Trace.IndentLevel * Trace.IndentSize) +  "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Trace.WriteLine("pizza"),
+                new string(' ', Trace.IndentLevel * Trace.IndentSize)
+                    + "pizza"
+                    + Environment.NewLine
+            );
             Debug.Unindent();
         }
 
@@ -79,17 +105,29 @@ namespace System.Diagnostics.Tests
             Trace.Indent();
             int expectedIndentation = Trace.IndentLevel * Trace.IndentSize;
 
-            VerifyLogged(() => Trace.Write("pizza"),        new string(' ', expectedIndentation) +  "pizza");
+            VerifyLogged(
+                () => Trace.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
 
             // WriteLine wont indent after Write:
-            VerifyLogged(() => Trace.WriteLine("pizza"),    "pizza" + Environment.NewLine);
+            VerifyLogged(() => Trace.WriteLine("pizza"), "pizza" + Environment.NewLine);
 
-            VerifyLogged(() => Trace.WriteLine("pizza"),    new string(' ', expectedIndentation) +  "pizza" + Environment.NewLine);
-            VerifyLogged(() => Trace.Write("pizza"),        new string(' ', expectedIndentation) +  "pizza");
+            VerifyLogged(
+                () => Trace.WriteLine("pizza"),
+                new string(' ', expectedIndentation) + "pizza" + Environment.NewLine
+            );
+            VerifyLogged(
+                () => Trace.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
 
             // WriteLine wont indent after Write:
-            VerifyLogged(() => Trace.WriteLine("pizza"),    "pizza" + Environment.NewLine);
-            VerifyLogged(() => Trace.WriteLine("pizza"),    new string(' ', expectedIndentation) +  "pizza" + Environment.NewLine);
+            VerifyLogged(() => Trace.WriteLine("pizza"), "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Trace.WriteLine("pizza"),
+                new string(' ', expectedIndentation) + "pizza" + Environment.NewLine
+            );
             Trace.Unindent();
         }
 
@@ -99,8 +137,14 @@ namespace System.Diagnostics.Tests
             Trace.Indent();
             int expected = Debug.IndentSize * Debug.IndentLevel;
 
-            VerifyLogged(() => Debug.WriteLine("pizza"), new string(' ', expected) +  "pizza" + Environment.NewLine);
-            VerifyLogged(() => Trace.WriteLine("pizza"), new string(' ', expected) +  "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                new string(' ', expected) + "pizza" + Environment.NewLine
+            );
+            VerifyLogged(
+                () => Trace.WriteLine("pizza"),
+                new string(' ', expected) + "pizza" + Environment.NewLine
+            );
 
             // reset
             Trace.Unindent();
@@ -121,8 +165,14 @@ namespace System.Diagnostics.Tests
             Trace.Indent();
             int expected = Debug.IndentSize * Debug.IndentLevel;
 
-            VerifyLogged(() => Debug.WriteLine(null), new string(' ', expected) + Environment.NewLine);
-            VerifyLogged(() => Trace.WriteLine(null), new string(' ', expected) + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine(null),
+                new string(' ', expected) + Environment.NewLine
+            );
+            VerifyLogged(
+                () => Trace.WriteLine(null),
+                new string(' ', expected) + Environment.NewLine
+            );
 
             // reset
             Trace.Unindent();
@@ -234,13 +284,19 @@ namespace System.Diagnostics.Tests
             VerifyLogged(() => Trace.WriteLineIf(true, 5), "5" + Environment.NewLine);
             VerifyLogged(() => Trace.WriteLineIf(false, 5), "");
 
-            VerifyLogged(() => Trace.WriteLineIf(true, 5, "category"), "category: 5" + Environment.NewLine);
+            VerifyLogged(
+                () => Trace.WriteLineIf(true, 5, "category"),
+                "category: 5" + Environment.NewLine
+            );
             VerifyLogged(() => Trace.WriteLineIf(false, 5, "category"), "");
 
             VerifyLogged(() => Trace.WriteLineIf(true, "logged"), "logged" + Environment.NewLine);
             VerifyLogged(() => Trace.WriteLineIf(false, "logged"), "");
 
-            VerifyLogged(() => Trace.WriteLineIf(true, "logged", "category"), "category: logged" + Environment.NewLine);
+            VerifyLogged(
+                () => Trace.WriteLineIf(true, "logged", "category"),
+                "category: logged" + Environment.NewLine
+            );
             VerifyLogged(() => Trace.WriteLineIf(false, "logged", "category"), "");
         }
 
@@ -285,10 +341,17 @@ namespace System.Diagnostics.Tests
 
         class MyTraceListener : DefaultTraceListener
         {
-            private void FailCore(string stackTrace, string message, string detailMessage, string errorSource)
+            private void FailCore(
+                string stackTrace,
+                string message,
+                string detailMessage,
+                string errorSource
+            )
             {
-                OutputString += $"Mock dialog - message: {message}, detailed message: {detailMessage}";
+                OutputString +=
+                    $"Mock dialog - message: {message}, detailed message: {detailMessage}";
             }
+
             public string OutputString { get; private set; } = string.Empty;
 
             public override void Fail(string message, string detailMessage)

@@ -21,11 +21,7 @@ namespace System.Web.Helpers
         /// generated tokens and that can validate additional data in incoming
         /// tokens.
         /// </summary>
-        public static IAntiForgeryAdditionalDataProvider AdditionalDataProvider
-        {
-            get;
-            set;
-        }
+        public static IAntiForgeryAdditionalDataProvider AdditionalDataProvider { get; set; }
 
         /// <summary>
         /// Specifies the name of the cookie that is used by the anti-forgery
@@ -45,10 +41,7 @@ namespace System.Web.Helpers
                 }
                 return _cookieName;
             }
-            set
-            {
-                _cookieName = value;
-            }
+            set { _cookieName = value; }
         }
 
         /// <summary>
@@ -56,23 +49,15 @@ namespace System.Web.Helpers
         /// to operate. If this setting is 'true' and a non-SSL request
         /// comes into the system, all anti-forgery APIs will fail.
         /// </summary>
-        public static bool RequireSsl
-        {
-            get;
-            set;
-        }
+        public static bool RequireSsl { get; set; }
 
         /// <summary>
         /// Specifies whether to suppress the generation of X-Frame-Options header
         /// which is used to prevent ClickJacking. By default, the X-Frame-Options
-        /// header is generated with the value SAMEORIGIN. If this setting is 'true', 
+        /// header is generated with the value SAMEORIGIN. If this setting is 'true',
         /// the X-Frame-Options header will not be generated for the response.
         /// </summary>
-        public static bool SuppressXFrameOptionsHeader
-        {
-            get;
-            set;
-        }
+        public static bool SuppressXFrameOptionsHeader { get; set; }
 
         /// <summary>
         /// Specifies whether the anti-forgery system should skip checking
@@ -86,11 +71,7 @@ namespace System.Web.Helpers
         /// - special-casing claims-based identities
         /// </remarks>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static bool SuppressIdentityHeuristicChecks
-        {
-            get;
-            set;
-        }
+        public static bool SuppressIdentityHeuristicChecks { get; set; }
 
         /// <summary>
         /// If claims-based authorization is in use, specifies the claim
@@ -106,14 +87,8 @@ namespace System.Web.Helpers
         /// </remarks>
         public static string UniqueClaimTypeIdentifier
         {
-            get
-            {
-                return _uniqueClaimTypeIdentifier ?? String.Empty;
-            }
-            set
-            {
-                _uniqueClaimTypeIdentifier = value;
-            }
+            get { return _uniqueClaimTypeIdentifier ?? String.Empty; }
+            set { _uniqueClaimTypeIdentifier = value; }
         }
 
         private static string GetAntiForgeryCookieName()
@@ -132,7 +107,9 @@ namespace System.Web.Helpers
             }
             else
             {
-                return AntiForgeryTokenFieldName + "_" + HttpServerUtility.UrlTokenEncode(Encoding.UTF8.GetBytes(appPath));
+                return AntiForgeryTokenFieldName
+                    + "_"
+                    + HttpServerUtility.UrlTokenEncode(Encoding.UTF8.GetBytes(appPath));
             }
         }
     }

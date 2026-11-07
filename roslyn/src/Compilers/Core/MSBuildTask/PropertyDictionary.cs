@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             get
             {
                 object? value;
-                return this.TryGetValue(name, out value)
-                    ? value : null;
+                return this.TryGetValue(name, out value) ? value : null;
             }
             set { base[name] = value; }
         }

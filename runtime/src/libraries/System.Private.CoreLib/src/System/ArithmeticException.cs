@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown for errors in an arithmetic, casting, or conversion operation.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ArithmeticException : SystemException
     {
         // Creates a new ArithmeticException with its message string set to
@@ -39,10 +41,13 @@ namespace System
             HResult = HResults.COR_E_ARITHMETIC;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected ArithmeticException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected ArithmeticException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -13,7 +13,11 @@ namespace System.Buffers.Text
         // --------------------------
         // 05/25/2017 10:30:15 -08:00
         //
-        private static bool TryParseDateTimeOffsetDefault(ReadOnlySpan<byte> source, out DateTimeOffset value, out int bytesConsumed)
+        private static bool TryParseDateTimeOffsetDefault(
+            ReadOnlySpan<byte> source,
+            out DateTimeOffset value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 26)
             {
@@ -81,7 +85,15 @@ namespace System.Buffers.Text
                 offsetMinutes = (int)(digit1 * 10 + digit2);
             }
 
-            if (!TryCreateDateTimeOffset(dateTime: dateTime, offsetNegative: sign == Utf8Constants.Minus, offsetHours: offsetHours, offsetMinutes: offsetMinutes, out value))
+            if (
+                !TryCreateDateTimeOffset(
+                    dateTime: dateTime,
+                    offsetNegative: sign == Utf8Constants.Minus,
+                    offsetHours: offsetHours,
+                    offsetMinutes: offsetMinutes,
+                    out value
+                )
+            )
             {
                 bytesConsumed = 0;
                 value = default;

@@ -33,43 +33,59 @@ using Microsoft.Build.Execution;
 
 namespace Microsoft.Build.Evaluation
 {
-	public class Toolset
-	{
-		public Toolset (string toolsVersion, string toolsPath,
-				ProjectCollection projectCollection, string msbuildOverrideTasksPath)
-			: this (toolsVersion, toolsPath, null, projectCollection, msbuildOverrideTasksPath)
-		{
-		}
+    public class Toolset
+    {
+        public Toolset(
+            string toolsVersion,
+            string toolsPath,
+            ProjectCollection projectCollection,
+            string msbuildOverrideTasksPath
+        )
+            : this(toolsVersion, toolsPath, null, projectCollection, msbuildOverrideTasksPath) { }
 
-		public Toolset (string toolsVersion, string toolsPath,
-				IDictionary<string, string> buildProperties, ProjectCollection projectCollection,
-				string msbuildOverrideTasksPath)
-			: this (toolsVersion, toolsPath, buildProperties, projectCollection, null, msbuildOverrideTasksPath)
-		{
-		}
+        public Toolset(
+            string toolsVersion,
+            string toolsPath,
+            IDictionary<string, string> buildProperties,
+            ProjectCollection projectCollection,
+            string msbuildOverrideTasksPath
+        )
+            : this(
+                toolsVersion,
+                toolsPath,
+                buildProperties,
+                projectCollection,
+                null,
+                msbuildOverrideTasksPath
+            ) { }
 
-		public
-		Toolset (string toolsVersion, string toolsPath, IDictionary<string, string> buildProperties,
-			ProjectCollection projectCollection, IDictionary<string, SubToolset> subToolsets,
-			string msbuildOverrideTasksPath)
-		{
-			ToolsVersion = toolsVersion;
-			ToolsPath = toolsPath;
-			Properties = 
-				buildProperties == null ?
-				new Dictionary<string, ProjectPropertyInstance> () :
-				buildProperties.Select (p => new ProjectPropertyInstance (p.Key, true, p.Value)).ToDictionary (e => e.Name);
-			SubToolsets = subToolsets ?? new Dictionary<string, SubToolset> ();
-		}
+        public Toolset(
+            string toolsVersion,
+            string toolsPath,
+            IDictionary<string, string> buildProperties,
+            ProjectCollection projectCollection,
+            IDictionary<string, SubToolset> subToolsets,
+            string msbuildOverrideTasksPath
+        )
+        {
+            ToolsVersion = toolsVersion;
+            ToolsPath = toolsPath;
+            Properties =
+                buildProperties == null
+                    ? new Dictionary<string, ProjectPropertyInstance>()
+                    : buildProperties
+                        .Select(p => new ProjectPropertyInstance(p.Key, true, p.Value))
+                        .ToDictionary(e => e.Name);
+            SubToolsets = subToolsets ?? new Dictionary<string, SubToolset>();
+        }
 
-		public string DefaultSubToolsetVersion { get; private set; }
-		public IDictionary<string, SubToolset> SubToolsets { get; private set; }
+        public string DefaultSubToolsetVersion { get; private set; }
+        public IDictionary<string, SubToolset> SubToolsets { get; private set; }
 
-		public IDictionary<string, ProjectPropertyInstance> Properties { get; private set; }
+        public IDictionary<string, ProjectPropertyInstance> Properties { get; private set; }
 
-		public string ToolsPath { get; private set; }
+        public string ToolsPath { get; private set; }
 
-		public string ToolsVersion { get; private set; }
-	}
+        public string ToolsVersion { get; private set; }
+    }
 }
-

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,7 +23,6 @@
 //	Jonathan Chambers	jonathan.chambers@ansys.com
 //
 
-
 // COMPLETE
 
 using System;
@@ -31,17 +30,15 @@ using System.ComponentModel.Design;
 
 namespace System.Windows.Forms.PropertyGridInternal
 {
-	public class PropertyGridCommands
-	{
-		public PropertyGridCommands()
-		{
-		}
+    public class PropertyGridCommands
+    {
+        public PropertyGridCommands() { }
 
-		public static readonly CommandID Commands;
-		public static readonly CommandID Description;
-		public static readonly CommandID Hide;
-		public static readonly CommandID Reset;
-		protected static readonly Guid wfcMenuCommand;
-		protected static readonly Guid wfcMenuGroup;
-	}
+        public static readonly CommandID Commands;
+        public static readonly CommandID Description;
+        public static readonly CommandID Hide;
+        public static readonly CommandID Reset;
+        protected static readonly Guid wfcMenuCommand;
+        protected static readonly Guid wfcMenuGroup;
+    }
 }

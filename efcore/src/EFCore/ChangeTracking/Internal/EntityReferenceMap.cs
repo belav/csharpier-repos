@@ -38,14 +38,10 @@ public class EntityReferenceMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Update(
-        InternalEntityEntry entry,
-        EntityState state,
-        EntityState? oldState)
+    public virtual void Update(InternalEntityEntry entry, EntityState state, EntityState? oldState)
     {
         var entityType = entry.EntityType;
-        if (_hasSubMap
-            && entityType.HasSharedClrType)
+        if (_hasSubMap && entityType.HasSharedClrType)
         {
             _sharedTypeReferenceMap ??= new Dictionary<IEntityType, EntityReferenceMap>();
 
@@ -66,30 +62,38 @@ public class EntityReferenceMap
                 Remove(mapKey, entityType, oldState.Value);
             }
 
-            if (!oldState.HasValue
-                || state != EntityState.Detached)
+            if (!oldState.HasValue || state != EntityState.Detached)
             {
                 switch (state)
                 {
                     case EntityState.Detached:
-                        _detachedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(ReferenceEqualityComparer.Instance);
+                        _detachedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(
+                            ReferenceEqualityComparer.Instance
+                        );
                         _detachedReferenceMap[mapKey] = entry;
                         break;
                     case EntityState.Unchanged:
-                        _unchangedReferenceMap ??=
-                            new Dictionary<object, InternalEntityEntry>(ReferenceEqualityComparer.Instance);
+                        _unchangedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(
+                            ReferenceEqualityComparer.Instance
+                        );
                         _unchangedReferenceMap[mapKey] = entry;
                         break;
                     case EntityState.Deleted:
-                        _deletedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(ReferenceEqualityComparer.Instance);
+                        _deletedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(
+                            ReferenceEqualityComparer.Instance
+                        );
                         _deletedReferenceMap[mapKey] = entry;
                         break;
                     case EntityState.Modified:
-                        _modifiedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(ReferenceEqualityComparer.Instance);
+                        _modifiedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(
+                            ReferenceEqualityComparer.Instance
+                        );
                         _modifiedReferenceMap[mapKey] = entry;
                         break;
                     case EntityState.Added:
-                        _addedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(ReferenceEqualityComparer.Instance);
+                        _addedReferenceMap ??= new Dictionary<object, InternalEntityEntry>(
+                            ReferenceEqualityComparer.Instance
+                        );
                         _addedReferenceMap[mapKey] = entry;
                         break;
                 }
@@ -107,18 +111,18 @@ public class EntityReferenceMap
         object entity,
         IEntityType? entityType,
         [NotNullWhen(true)] out InternalEntityEntry? entry,
-        bool throwOnNonUniqueness)
+        bool throwOnNonUniqueness
+    )
     {
         entry = null;
-        var found = _unchangedReferenceMap?.TryGetValue(entity, out entry) == true
+        var found =
+            _unchangedReferenceMap?.TryGetValue(entity, out entry) == true
             || _modifiedReferenceMap?.TryGetValue(entity, out entry) == true
             || _addedReferenceMap?.TryGetValue(entity, out entry) == true
             || _deletedReferenceMap?.TryGetValue(entity, out entry) == true
             || _detachedReferenceMap?.TryGetValue(entity, out entry) == true;
 
-        if (!found
-            && _hasSubMap
-            && _sharedTypeReferenceMap != null)
+        if (!found && _hasSubMap && _sharedTypeReferenceMap != null)
         {
             if (entityType != null)
             {
@@ -133,8 +137,15 @@ public class EntityReferenceMap
                 foreach (var (key, entityReferenceMap) in _sharedTypeReferenceMap)
                 {
                     // ReSharper disable once CheckForReferenceEqualityInstead.2
-                    if (key.ClrType.IsAssignableFrom(type)
-                        && entityReferenceMap.TryGet(entity, entityType, out var foundEntry, throwOnNonUniqueness))
+                    if (
+                        key.ClrType.IsAssignableFrom(type)
+                        && entityReferenceMap.TryGet(
+                            entity,
+                            entityType,
+                            out var foundEntry,
+                            throwOnNonUniqueness
+                        )
+                    )
                     {
                         if (found)
                         {
@@ -147,7 +158,12 @@ public class EntityReferenceMap
                             throw new InvalidOperationException(
                                 CoreStrings.AmbiguousDependentEntity(
                                     entity.GetType().ShortDisplayName(),
-                                    "." + nameof(EntityEntry.Reference) + "()." + nameof(ReferenceEntry.TargetEntry)));
+                                    "."
+                                        + nameof(EntityEntry.Reference)
+                                        + "()."
+                                        + nameof(ReferenceEntry.TargetEntry)
+                                )
+                            );
                         }
 
                         entry = foundEntry;
@@ -171,32 +187,29 @@ public class EntityReferenceMap
         bool modified,
         bool deleted,
         bool unchanged,
-        bool countDeletedSharedIdentity)
+        bool countDeletedSharedIdentity
+    )
     {
         var count = 0;
 
-        if (added
-            && _addedReferenceMap != null)
+        if (added && _addedReferenceMap != null)
         {
             count = _addedReferenceMap.Count;
         }
 
-        if (modified
-            && _modifiedReferenceMap != null)
+        if (modified && _modifiedReferenceMap != null)
         {
             count += _modifiedReferenceMap.Count;
         }
 
-        if (deleted
-            && _deletedReferenceMap != null)
+        if (deleted && _deletedReferenceMap != null)
         {
             count += countDeletedSharedIdentity
                 ? _deletedReferenceMap.Count
                 : _deletedReferenceMap.Count(p => p.Value.SharedIdentityEntry == null);
         }
 
-        if (unchanged
-            && _unchangedReferenceMap != null)
+        if (unchanged && _unchangedReferenceMap != null)
         {
             count += _unchangedReferenceMap.Count;
         }
@@ -205,7 +218,13 @@ public class EntityReferenceMap
         {
             foreach (var map in _sharedTypeReferenceMap)
             {
-                count += map.Value.GetCountForState(added, modified, deleted, unchanged, countDeletedSharedIdentity);
+                count += map.Value.GetCountForState(
+                    added,
+                    modified,
+                    deleted,
+                    unchanged,
+                    countDeletedSharedIdentity
+                );
             }
         }
 
@@ -223,7 +242,8 @@ public class EntityReferenceMap
         bool modified,
         bool deleted,
         bool unchanged,
-        bool returnDeletedSharedIdentity)
+        bool returnDeletedSharedIdentity
+    )
     {
         // Perf sensitive
 
@@ -235,8 +255,8 @@ public class EntityReferenceMap
 
         if (!hasSharedTypes)
         {
-            var numberOfStates
-                = (returnAdded ? 1 : 0)
+            var numberOfStates =
+                (returnAdded ? 1 : 0)
                 + (returnModified ? 1 : 0)
                 + (returnDeleted ? 1 : 0)
                 + (returnUnchanged ? 1 : 0);
@@ -257,10 +277,17 @@ public class EntityReferenceMap
         }
 
         return GetEntriesForState(
-            added, modified, deleted, unchanged,
+            added,
+            modified,
+            deleted,
+            unchanged,
             hasSharedTypes,
-            returnAdded, returnModified, returnDeleted, returnUnchanged,
-            returnDeletedSharedIdentity);
+            returnAdded,
+            returnModified,
+            returnDeleted,
+            returnUnchanged,
+            returnDeletedSharedIdentity
+        );
     }
 
     private IEnumerable<InternalEntityEntry> GetEntriesForState(
@@ -273,7 +300,8 @@ public class EntityReferenceMap
         bool returnModified,
         bool returnDeleted,
         bool returnUnchanged,
-        bool returnSharedIdentity)
+        bool returnSharedIdentity
+    )
     {
         if (returnAdded)
         {
@@ -295,8 +323,7 @@ public class EntityReferenceMap
         {
             foreach (var entry in _deletedReferenceMap!.Values)
             {
-                if (entry.SharedIdentityEntry == null
-                    || returnSharedIdentity)
+                if (entry.SharedIdentityEntry == null || returnSharedIdentity)
                 {
                     yield return entry;
                 }
@@ -315,7 +342,15 @@ public class EntityReferenceMap
         {
             foreach (var subMap in _sharedTypeReferenceMap!.Values)
             {
-                foreach (var entry in subMap.GetEntriesForState(added, modified, deleted, unchanged, returnSharedIdentity))
+                foreach (
+                    var entry in subMap.GetEntriesForState(
+                        added,
+                        modified,
+                        deleted,
+                        unchanged,
+                        returnSharedIdentity
+                    )
+                )
                 {
                     yield return entry;
                 }
@@ -323,13 +358,9 @@ public class EntityReferenceMap
         }
     }
 
-    private void Remove(
-        object entity,
-        IEntityType entityType,
-        EntityState oldState)
+    private void Remove(object entity, IEntityType entityType, EntityState oldState)
     {
-        if (_sharedTypeReferenceMap != null
-            && entityType.HasSharedClrType)
+        if (_sharedTypeReferenceMap != null && entityType.HasSharedClrType)
         {
             _sharedTypeReferenceMap[entityType].Remove(entity, entityType, oldState);
         }

@@ -22,7 +22,10 @@ namespace System.ConfigurationTests
         [Fact]
         public void DefaultOptionsIsNone()
         {
-            Assert.Equal(ConfigurationPropertyOptions.None, new ConfigurationPropertyAttribute("foo").Options);
+            Assert.Equal(
+                ConfigurationPropertyOptions.None,
+                new ConfigurationPropertyAttribute("foo").Options
+            );
         }
 
         [Fact]

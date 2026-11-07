@@ -20,12 +20,18 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("operationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "operationContext"
+                );
             }
             operationContext.OutgoingMessageProperties[suppressContextOnReply] = true;
         }
 
-        public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
+        public object AfterReceiveRequest(
+            ref Message request,
+            IClientChannel channel,
+            InstanceContext instanceContext
+        )
         {
             if (instanceContext == null)
             {
@@ -57,7 +63,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     ContextMessageProperty context = null;
 
-                    if (sessionMode == SessionMode.NotAllowed || reply.Properties.ContainsKey(suppressContextOnReply))
+                    if (
+                        sessionMode == SessionMode.NotAllowed
+                        || reply.Properties.ContainsKey(suppressContextOnReply)
+                    )
                     {
                         if (ContextMessageProperty.TryGet(reply, out context))
                         {
@@ -70,16 +79,17 @@ namespace System.ServiceModel.Dispatcher
 
                         if (newInstanceId != null)
                         {
-
                             if (!ContextMessageProperty.TryGet(reply, out context))
                             {
                                 context = new ContextMessageProperty();
-                                context.Context[WellKnownContextProperties.InstanceId] = newInstanceId;
+                                context.Context[WellKnownContextProperties.InstanceId] =
+                                    newInstanceId;
                                 context.AddOrReplaceInMessage(reply);
                             }
                             else
                             {
-                                context.Context[WellKnownContextProperties.InstanceId] = newInstanceId;
+                                context.Context[WellKnownContextProperties.InstanceId] =
+                                    newInstanceId;
                             }
                         }
                     }
@@ -87,15 +97,19 @@ namespace System.ServiceModel.Dispatcher
             }
             finally
             {
-                DurableInstance durableInstance = OperationContext.Current.InstanceContext.Extensions.Find<DurableInstance>();
+                DurableInstance durableInstance =
+                    OperationContext.Current.InstanceContext.Extensions.Find<DurableInstance>();
 
                 if (durableInstance == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new InvalidOperationException(
-                        SR2.GetString(
-                        SR2.RequiredInstanceContextExtensionNotFound,
-                        typeof(DurableInstance).Name)));
+                            SR2.GetString(
+                                SR2.RequiredInstanceContextExtensionNotFound,
+                                typeof(DurableInstance).Name
+                            )
+                        )
+                    );
                 }
                 //Decrement InstanceActivity Count
                 durableInstance.DecrementActivityCount();

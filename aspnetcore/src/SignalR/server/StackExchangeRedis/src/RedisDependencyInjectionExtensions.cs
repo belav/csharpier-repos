@@ -35,13 +35,10 @@ public static class StackExchangeRedisDependencyInjectionExtensions
         string redisConnectionString
     )
     {
-        return AddStackExchangeRedis(
-            signalrBuilder,
-            o =>
-            {
-                o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
-            }
-        );
+        return AddStackExchangeRedis(signalrBuilder, o =>
+        {
+            o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
+        });
     }
 
     /// <summary>
@@ -76,13 +73,10 @@ public static class StackExchangeRedisDependencyInjectionExtensions
         Action<RedisOptions> configure
     )
     {
-        return AddStackExchangeRedis(
-            signalrBuilder,
-            o =>
-            {
-                o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
-                configure(o);
-            }
-        );
+        return AddStackExchangeRedis(signalrBuilder, o =>
+        {
+            o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
+            configure(o);
+        });
     }
 }

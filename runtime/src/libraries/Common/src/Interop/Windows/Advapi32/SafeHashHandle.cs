@@ -13,7 +13,8 @@ namespace System.Security.Cryptography
     {
         private SafeProvHandle? _parent;
 
-        public SafeHashHandle() : base(true)
+        public SafeHashHandle()
+            : base(true)
         {
             SetHandle(IntPtr.Zero);
         }
@@ -37,7 +38,10 @@ namespace System.Security.Cryptography
 
         internal static SafeHashHandle InvalidHandle
         {
-            get { return SafeHandleCache<SafeHashHandle>.GetInvalidHandle(() => new SafeHashHandle()); }
+            get
+            {
+                return SafeHandleCache<SafeHashHandle>.GetInvalidHandle(() => new SafeHashHandle());
+            }
         }
 
         protected override void Dispose(bool disposing)

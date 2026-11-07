@@ -50,7 +50,10 @@ namespace Internal.Cryptography
             return GetDigestAlgorithm(oid.Value);
         }
 
-        internal static HashAlgorithmName GetDigestAlgorithm(string? oidValue, bool forVerification = false)
+        internal static HashAlgorithmName GetDigestAlgorithm(
+            string? oidValue,
+            bool forVerification = false
+        )
         {
             switch (oidValue)
             {
@@ -81,7 +84,10 @@ namespace Internal.Cryptography
                     return HashAlgorithmName.SHA3_512;
 #endif
                 default:
-                    throw new CryptographicException(SR.Cryptography_UnknownHashAlgorithm, oidValue);
+                    throw new CryptographicException(
+                        SR.Cryptography_UnknownHashAlgorithm,
+                        oidValue
+                    );
             }
         }
 
@@ -153,7 +159,8 @@ namespace Internal.Cryptography
 
         public static AttributeAsn[] NormalizeAttributeSet(
             AttributeAsn[] setItems,
-            Action<byte[]>? encodedValueProcessor = null)
+            Action<byte[]>? encodedValueProcessor = null
+        )
         {
             byte[] normalizedValue;
 
@@ -194,7 +201,8 @@ namespace Internal.Cryptography
         internal static byte[] EncodeContentInfo(
             ReadOnlyMemory<byte> content,
             string contentType,
-            AsnEncodingRules ruleSet = AsnEncodingRules.DER)
+            AsnEncodingRules ruleSet = AsnEncodingRules.DER
+        )
         {
             ContentInfoAsn contentInfo = new ContentInfoAsn
             {
@@ -222,7 +230,11 @@ namespace Internal.Cryptography
                 }
                 else
                 {
-                    recipientCopy = new CmsRecipient(recipient.RecipientIdentifierType, certCopy, recipient.RSAEncryptionPadding);
+                    recipientCopy = new CmsRecipient(
+                        recipient.RecipientIdentifierType,
+                        certCopy,
+                        recipient.RSAEncryptionPadding
+                    );
                 }
 
                 recipientsCopy.Add(recipientCopy);
@@ -241,7 +253,7 @@ namespace Internal.Cryptography
         public static string OctetStringToUnicode(this byte[] octets)
         {
             if (octets.Length < 2)
-                return string.Empty;   // .NET Framework compat: 0-length byte array maps to string.empty. 1-length byte array gets passed to Marshal.PtrToStringUni() with who knows what outcome.
+                return string.Empty; // .NET Framework compat: 0-length byte array maps to string.empty. 1-length byte array gets passed to Marshal.PtrToStringUni() with who knows what outcome.
 
             int end = octets.Length;
             int endMinusOne = end - 1;
@@ -260,7 +272,11 @@ namespace Internal.Cryptography
             return s;
         }
 
-        public static X509Certificate2Collection GetStoreCertificates(StoreName storeName, StoreLocation storeLocation, bool openExistingOnly)
+        public static X509Certificate2Collection GetStoreCertificates(
+            StoreName storeName,
+            StoreLocation storeLocation,
+            bool openExistingOnly
+        )
         {
             using (X509Store store = new X509Store(storeName, storeLocation))
             {
@@ -277,7 +293,10 @@ namespace Internal.Cryptography
         /// <summary>
         /// .NET Framework compat: We do not complain about multiple matches. Just take the first one and ignore the rest.
         /// </summary>
-        public static X509Certificate2? TryFindMatchingCertificate(this X509Certificate2Collection certs, SubjectIdentifier recipientIdentifier)
+        public static X509Certificate2? TryFindMatchingCertificate(
+            this X509Certificate2Collection certs,
+            SubjectIdentifier recipientIdentifier
+        )
         {
             //
             // Note: SubjectIdentifier has no public constructor so the only one that can construct this type is this assembly.
@@ -289,13 +308,18 @@ namespace Internal.Cryptography
             {
                 case SubjectIdentifierType.IssuerAndSerialNumber:
                     {
-                        X509IssuerSerial issuerSerial = (X509IssuerSerial)(recipientIdentifier.Value!);
+                        X509IssuerSerial issuerSerial = (X509IssuerSerial)(
+                            recipientIdentifier.Value!
+                        );
                         byte[] serialNumber = issuerSerial.SerialNumber.ToSerialBytes();
                         string issuer = issuerSerial.IssuerName;
                         foreach (X509Certificate2 candidate in certs)
                         {
                             byte[] candidateSerialNumber = candidate.GetSerialNumber();
-                            if (AreByteArraysEqual(candidateSerialNumber, serialNumber) && candidate.Issuer == issuer)
+                            if (
+                                AreByteArraysEqual(candidateSerialNumber, serialNumber)
+                                && candidate.Issuer == issuer
+                            )
                                 return candidate;
                         }
                     }
@@ -418,13 +442,16 @@ namespace Internal.Cryptography
                 return (byte)(c - 'A' + 10);
 
             Debug.Fail($"Invalid hex character: {c}");
-            throw new CryptographicException();  // This just keeps the compiler happy. We don't expect to reach this.
+            throw new CryptographicException(); // This just keeps the compiler happy. We don't expect to reach this.
         }
 
         /// <summary>
         /// Useful helper for "upgrading" well-known CMS attributes to type-specific objects such as Pkcs9DocumentName, Pkcs9DocumentDescription, etc.
         /// </summary>
-        public static Pkcs9AttributeObject CreateBestPkcs9AttributeObjectAvailable(Oid oid, ReadOnlySpan<byte> encodedAttribute)
+        public static Pkcs9AttributeObject CreateBestPkcs9AttributeObjectAvailable(
+            Oid oid,
+            ReadOnlySpan<byte> encodedAttribute
+        )
         {
             return oid.Value switch
             {
@@ -445,7 +472,12 @@ namespace Internal.Cryptography
             return OneShot(transform, data, 0, data.Length);
         }
 
-        internal static byte[] OneShot(this ICryptoTransform transform, byte[] data, int offset, int length)
+        internal static byte[] OneShot(
+            this ICryptoTransform transform,
+            byte[] data,
+            int offset,
+            int length
+        )
         {
             if (transform.CanTransformMultipleBlocks)
             {
@@ -454,7 +486,13 @@ namespace Internal.Cryptography
 
             using (MemoryStream memoryStream = new MemoryStream(length))
             {
-                using (var cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Write))
+                using (
+                    var cryptoStream = new CryptoStream(
+                        memoryStream,
+                        transform,
+                        CryptoStreamMode.Write
+                    )
+                )
                 {
                     cryptoStream.Write(data, offset, length);
                 }
@@ -465,8 +503,17 @@ namespace Internal.Cryptography
 
         public static void EnsureSingleBerValue(ReadOnlySpan<byte> source)
         {
-            if (!AsnDecoder.TryReadEncodedValue(source, AsnEncodingRules.BER, out _, out _, out _, out int consumed) ||
-                consumed != source.Length)
+            if (
+                !AsnDecoder.TryReadEncodedValue(
+                    source,
+                    AsnEncodingRules.BER,
+                    out _,
+                    out _,
+                    out _,
+                    out int consumed
+                )
+                || consumed != source.Length
+            )
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
@@ -474,7 +521,16 @@ namespace Internal.Cryptography
 
         public static int FirstBerValueLength(ReadOnlySpan<byte> source)
         {
-            if (!AsnDecoder.TryReadEncodedValue(source, AsnEncodingRules.BER, out _, out _, out _, out int consumed))
+            if (
+                !AsnDecoder.TryReadEncodedValue(
+                    source,
+                    AsnEncodingRules.BER,
+                    out _,
+                    out _,
+                    out _,
+                    out int consumed
+                )
+            )
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
@@ -482,17 +538,22 @@ namespace Internal.Cryptography
             return consumed;
         }
 
-        public static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(ReadOnlyMemory<byte> encodedOctetString)
+        public static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(
+            ReadOnlyMemory<byte> encodedOctetString
+        )
         {
             try
             {
                 ReadOnlySpan<byte> input = encodedOctetString.Span;
 
-                if (AsnDecoder.TryReadPrimitiveOctetString(
-                    input,
-                    AsnEncodingRules.BER,
-                    out ReadOnlySpan<byte> primitive,
-                    out int consumed))
+                if (
+                    AsnDecoder.TryReadPrimitiveOctetString(
+                        input,
+                        AsnEncodingRules.BER,
+                        out ReadOnlySpan<byte> primitive,
+                        out int consumed
+                    )
+                )
                 {
                     if (consumed != input.Length)
                     {
@@ -504,7 +565,9 @@ namespace Internal.Cryptography
                         return encodedOctetString.Slice(offset, primitive.Length);
                     }
 
-                    Debug.Fail("input.Overlaps(primitive) failed after TryReadPrimitiveOctetString succeeded");
+                    Debug.Fail(
+                        "input.Overlaps(primitive) failed after TryReadPrimitiveOctetString succeeded"
+                    );
                 }
 
                 byte[] ret = AsnDecoder.ReadOctetString(input, AsnEncodingRules.BER, out consumed);
@@ -527,7 +590,11 @@ namespace Internal.Cryptography
             try
             {
                 // Read using BER because the CMS specification says the encoding is BER.
-                byte[] ret = AsnDecoder.ReadOctetString(encodedOctets.Span, AsnEncodingRules.BER, out int consumed);
+                byte[] ret = AsnDecoder.ReadOctetString(
+                    encodedOctets.Span,
+                    AsnEncodingRules.BER,
+                    out int consumed
+                );
 
                 if (consumed != encodedOctets.Length)
                 {
@@ -587,7 +654,8 @@ namespace Internal.Cryptography
                 DateTimeOffset value = AsnDecoder.ReadUtcTime(
                     encodedUtcTime,
                     AsnEncodingRules.BER,
-                    out int consumed);
+                    out int consumed
+                );
 
                 if (consumed != encodedUtcTime.Length)
                 {
@@ -616,7 +684,8 @@ namespace Internal.Cryptography
                 string value = AsnDecoder.ReadObjectIdentifier(
                     encodedOid,
                     AsnEncodingRules.BER,
-                    out int consumed);
+                    out int consumed
+                );
 
                 if (consumed != encodedOid.Length)
                 {
@@ -634,7 +703,8 @@ namespace Internal.Cryptography
         public static bool TryGetRsaOaepEncryptionPadding(
             ReadOnlyMemory<byte>? parameters,
             [NotNullWhen(true)] out RSAEncryptionPadding? rsaEncryptionPadding,
-            [NotNullWhen(false)] out Exception? exception)
+            [NotNullWhen(false)] out Exception? exception
+        )
         {
             exception = null;
             rsaEncryptionPadding = null;
@@ -647,18 +717,25 @@ namespace Internal.Cryptography
 
             try
             {
-                OaepParamsAsn oaepParameters = OaepParamsAsn.Decode(parameters.Value, AsnEncodingRules.DER);
+                OaepParamsAsn oaepParameters = OaepParamsAsn.Decode(
+                    parameters.Value,
+                    AsnEncodingRules.DER
+                );
 
-                if (oaepParameters.MaskGenFunc.Algorithm != Oids.Mgf1 ||
-                    oaepParameters.MaskGenFunc.Parameters == null ||
-                    oaepParameters.PSourceFunc.Algorithm != Oids.PSpecified
-                    )
+                if (
+                    oaepParameters.MaskGenFunc.Algorithm != Oids.Mgf1
+                    || oaepParameters.MaskGenFunc.Parameters == null
+                    || oaepParameters.PSourceFunc.Algorithm != Oids.PSpecified
+                )
                 {
                     exception = new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                     return false;
                 }
 
-                AlgorithmIdentifierAsn mgf1AlgorithmIdentifier = AlgorithmIdentifierAsn.Decode(oaepParameters.MaskGenFunc.Parameters.Value, AsnEncodingRules.DER);
+                AlgorithmIdentifierAsn mgf1AlgorithmIdentifier = AlgorithmIdentifierAsn.Decode(
+                    oaepParameters.MaskGenFunc.Parameters.Value,
+                    AsnEncodingRules.DER
+                );
 
                 if (mgf1AlgorithmIdentifier.Algorithm != oaepParameters.HashFunc.Algorithm)
                 {
@@ -668,8 +745,12 @@ namespace Internal.Cryptography
 
                 ReadOnlySpan<byte> pSpecifiedDefaultParameters = [0x04, 0x00];
 
-                if (oaepParameters.PSourceFunc.Parameters != null &&
-                    !oaepParameters.PSourceFunc.Parameters.Value.Span.SequenceEqual(pSpecifiedDefaultParameters))
+                if (
+                    oaepParameters.PSourceFunc.Parameters != null
+                    && !oaepParameters.PSourceFunc.Parameters.Value.Span.SequenceEqual(
+                        pSpecifiedDefaultParameters
+                    )
+                )
                 {
                     exception = new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                     return false;
@@ -692,7 +773,8 @@ namespace Internal.Cryptography
                     default:
                         exception = new CryptographicException(
                             SR.Cryptography_Cms_UnknownAlgorithm,
-                            oaepParameters.HashFunc.Algorithm);
+                            oaepParameters.HashFunc.Algorithm
+                        );
                         return false;
                 }
             }

@@ -42,8 +42,8 @@ namespace System.Diagnostics.Metrics
 
         public bool Equals(ObjectSequence2 other)
         {
-            return (Value1 is null ? other.Value1 is null : Value1.Equals(other.Value1)) &&
-                   (Value2 is null ? other.Value2 is null : Value2.Equals(other.Value2));
+            return (Value1 is null ? other.Value1 is null : Value1.Equals(other.Value1))
+                && (Value2 is null ? other.Value2 is null : Value2.Equals(other.Value2));
         }
 
         //GetHashCode() is in the platform specific files
@@ -68,9 +68,9 @@ namespace System.Diagnostics.Metrics
 
         public bool Equals(ObjectSequence3 other)
         {
-            return (Value1 is null ? other.Value1 is null : Value1.Equals(other.Value1)) &&
-                   (Value2 is null ? other.Value2 is null : Value2.Equals(other.Value2)) &&
-                   (Value3 is null ? other.Value3 is null : Value3.Equals(other.Value3));
+            return (Value1 is null ? other.Value1 is null : Value1.Equals(other.Value1))
+                && (Value2 is null ? other.Value2 is null : Value2.Equals(other.Value2))
+                && (Value3 is null ? other.Value3 is null : Value3.Equals(other.Value3));
         }
 
         //GetHashCode() is in the platform specific files
@@ -97,7 +97,8 @@ namespace System.Diagnostics.Metrics
             }
             for (int i = 0; i < _values.Length; i++)
             {
-                object? value = _values[i], otherValue = other._values[i];
+                object? value = _values[i],
+                    otherValue = other._values[i];
                 if (value is null)
                 {
                     if (otherValue is not null)

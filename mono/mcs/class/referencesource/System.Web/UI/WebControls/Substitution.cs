@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -13,111 +13,107 @@ namespace System.Web.UI.WebControls {
     using System.Web;
     using System.Web.UI;
 
-
     /// <devdoc>
     /// <para></para>
     /// </devdoc>
     [
-    DefaultProperty("MethodName"),
-    Designer("System.Web.UI.Design.WebControls.SubstitutionDesigner, " + AssemblyRef.SystemDesign),
-    ParseChildren(true),
-    PersistChildren(false),
+        DefaultProperty("MethodName"),
+        Designer(
+            "System.Web.UI.Design.WebControls.SubstitutionDesigner, " + AssemblyRef.SystemDesign
+        ),
+        ParseChildren(true),
+        PersistChildren(false),
     ]
-    public class Substitution : Control {
-
-
+    public class Substitution : Control
+    {
         /// <devdoc>
         /// <para></para>
         /// </devdoc>
-        public Substitution() {
-        }
-
+        public Substitution() { }
 
         /// <devdoc>
         /// <para></para>
         /// </devdoc>
         [
-        DefaultValue(""),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.Substitution_MethodNameDescr)
+            DefaultValue(""),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.Substitution_MethodNameDescr)
         ]
-        public virtual string MethodName {
-            get {
+        public virtual string MethodName
+        {
+            get
+            {
                 string s = ViewState["MethodName"] as string;
-                return s == null? String.Empty : s;
+                return s == null ? String.Empty : s;
             }
-            set {
-                ViewState["MethodName"] = value;
-            }
+            set { ViewState["MethodName"] = value; }
         }
 
-
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new EmptyControlCollection(this);
         }
 
-        // SECURITY CODE 
-
-
-
-
-
-
-
-
-
-
-
-
+        // SECURITY CODE
 
         // VSWhidbey 253188: Permission assert to support page running below full trust
-        [ReflectionPermission(SecurityAction.Assert, Flags=ReflectionPermissionFlag.MemberAccess)]
-        private HttpResponseSubstitutionCallback GetDelegate(Type targetType, string methodName) {
-            return (HttpResponseSubstitutionCallback)Delegate.CreateDelegate(
-                        typeof(HttpResponseSubstitutionCallback), targetType, methodName);
+        [ReflectionPermission(SecurityAction.Assert, Flags = ReflectionPermissionFlag.MemberAccess)]
+        private HttpResponseSubstitutionCallback GetDelegate(Type targetType, string methodName)
+        {
+            return (HttpResponseSubstitutionCallback)
+                Delegate.CreateDelegate(
+                    typeof(HttpResponseSubstitutionCallback),
+                    targetType,
+                    methodName
+                );
         }
 
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             // VSWhidbey 84748: Temp fix, throw if we are within a cached control
             Control parent = Parent;
-            while (parent != null) {
-                if (parent is BasePartialCachingControl) {
-                    throw new HttpException(
-                        SR.GetString(SR.Substitution_CannotBeInCachedControl));
+            while (parent != null)
+            {
+                if (parent is BasePartialCachingControl)
+                {
+                    throw new HttpException(SR.GetString(SR.Substitution_CannotBeInCachedControl));
                 }
                 parent = parent.Parent;
             }
         }
 
-
-        protected internal override void Render(HtmlTextWriter writer) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
             RenderMarkup(writer);
         }
 
-        internal void RenderMarkup(HtmlTextWriter writer) {
-            if (MethodName.Length == 0) {
+        internal void RenderMarkup(HtmlTextWriter writer)
+        {
+            if (MethodName.Length == 0)
+            {
                 return;
             }
 
             TemplateControl target = TemplateControl;
-            if (target == null) {
+            if (target == null)
+            {
                 return;
             }
 
             // get the delegate to the method
             HttpResponseSubstitutionCallback callback = null;
 
-            try {
-                 callback = GetDelegate(target.GetType(), MethodName);
+            try
+            {
+                callback = GetDelegate(target.GetType(), MethodName);
             }
-            catch {
-            }
+            catch { }
 
-            if (callback == null) {
-                throw new HttpException(
-                    SR.GetString(SR.Substitution_BadMethodName, MethodName));
+            if (callback == null)
+            {
+                throw new HttpException(SR.GetString(SR.Substitution_BadMethodName, MethodName));
             }
 
             // add the substitution to the response

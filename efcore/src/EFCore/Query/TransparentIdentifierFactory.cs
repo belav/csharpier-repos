@@ -31,8 +31,8 @@ public static class TransparentIdentifierFactory
     /// <returns>The created transparent identifier type.</returns>
     [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(TransparentIdentifier<,>))]
-    public static Type Create(Type outerType, Type innerType)
-        => typeof(TransparentIdentifier<,>).MakeGenericType(outerType, innerType);
+    public static Type Create(Type outerType, Type innerType) =>
+        typeof(TransparentIdentifier<,>).MakeGenericType(outerType, innerType);
 
     private readonly struct TransparentIdentifier<TOuter, TInner>
     {

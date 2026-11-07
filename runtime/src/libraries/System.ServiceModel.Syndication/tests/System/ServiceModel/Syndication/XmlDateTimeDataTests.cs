@@ -26,7 +26,10 @@ namespace System.ServiceModel.Syndication.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_String_XmlQualifiedName_TestData))]
-        public void Ctor_String_XmlQualifiedName(string dateTimeString, XmlQualifiedName elementQualifiedName)
+        public void Ctor_String_XmlQualifiedName(
+            string dateTimeString,
+            XmlQualifiedName elementQualifiedName
+        )
         {
             var data = new XmlDateTimeData(dateTimeString, elementQualifiedName);
             Assert.Equal(dateTimeString, data.DateTimeString);

@@ -4,14 +4,14 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Xml;
-    using System.Runtime.Serialization;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Net.Security;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
+    using System.Xml;
 
     [DebuggerDisplay("Action={action}, Direction={direction}, MessageType={messageType}")]
     public class MessageDescription
@@ -26,11 +26,19 @@ namespace System.ServiceModel.Description
         ProtectionLevel protectionLevel;
         bool hasProtectionLevel;
 
-        public MessageDescription(string action, MessageDirection direction) : this(action, direction, null) { }
-        internal MessageDescription(string action, MessageDirection direction, MessageDescriptionItems items)
+        public MessageDescription(string action, MessageDirection direction)
+            : this(action, direction, null) { }
+
+        internal MessageDescription(
+            string action,
+            MessageDirection direction,
+            MessageDescriptionItems items
+        )
         {
             if (!MessageDirectionHelper.IsDefined(direction))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("direction"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("direction")
+                );
 
             this.action = action;
             this.direction = direction;
@@ -67,7 +75,7 @@ namespace System.ServiceModel.Description
             get { return action; }
             internal set { action = value; }
         }
-        
+
         public MessageBodyDescription Body
         {
             get { return Items.Body; }
@@ -104,7 +112,9 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -131,7 +141,7 @@ namespace System.ServiceModel.Description
                 return typeOfUntypedMessage;
             }
         }
-        
+
         internal XmlName MessageName
         {
             get { return messageName; }
@@ -149,18 +159,23 @@ namespace System.ServiceModel.Description
 
         internal bool IsTypedMessage
         {
-            get
-            {
-                return messageType != null;
-            }
+            get { return messageType != null; }
         }
 
         internal bool IsUntypedMessage
         {
             get
             {
-                return (Body.ReturnValue != null && Body.Parts.Count == 0 && Body.ReturnValue.Type == TypeOfUntypedMessage) ||
-                     (Body.ReturnValue == null && Body.Parts.Count == 1 && Body.Parts[0].Type == TypeOfUntypedMessage);
+                return (
+                        Body.ReturnValue != null
+                        && Body.Parts.Count == 0
+                        && Body.ReturnValue.Type == TypeOfUntypedMessage
+                    )
+                    || (
+                        Body.ReturnValue == null
+                        && Body.Parts.Count == 1
+                        && Body.Parts[0].Type == TypeOfUntypedMessage
+                    );
             }
         }
 
@@ -168,7 +183,9 @@ namespace System.ServiceModel.Description
         {
             get
             {
-                return !IsTypedMessage && Body.Parts.Count == 0 && (Body.ReturnValue == null || Body.ReturnValue.Type == typeof(void));
+                return !IsTypedMessage
+                    && Body.Parts.Count == 0
+                    && (Body.ReturnValue == null || Body.ReturnValue.Type == typeof(void));
             }
         }
 
@@ -199,10 +216,7 @@ namespace System.ServiceModel.Description
                     body = new MessageBodyDescription();
                 return body;
             }
-            set
-            {
-                this.body = value;
-            }
+            set { this.body = value; }
         }
 
         internal MessageHeaderDescriptionCollection Headers

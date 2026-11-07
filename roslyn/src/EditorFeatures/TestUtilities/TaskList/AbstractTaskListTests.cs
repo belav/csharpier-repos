@@ -18,20 +18,31 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TaskList
 {
     public abstract class AbstractTaskListTests
     {
-        private static readonly TestComposition s_inProcessComposition = EditorTestCompositions.EditorFeatures;
-        private static readonly TestComposition s_outOffProcessComposition = s_inProcessComposition.WithTestHostParts(TestHost.OutOfProcess);
+        private static readonly TestComposition s_inProcessComposition =
+            EditorTestCompositions.EditorFeatures;
+        private static readonly TestComposition s_outOffProcessComposition =
+            s_inProcessComposition.WithTestHostParts(TestHost.OutOfProcess);
 
-        protected TestWorkspace CreateWorkspace(string codeWithMarker, TestHost host)
-            => CreateWorkspace(codeWithMarker, host == TestHost.OutOfProcess ? s_outOffProcessComposition : s_inProcessComposition);
+        protected TestWorkspace CreateWorkspace(string codeWithMarker, TestHost host) =>
+            CreateWorkspace(
+                codeWithMarker,
+                host == TestHost.OutOfProcess ? s_outOffProcessComposition : s_inProcessComposition
+            );
 
-        protected abstract TestWorkspace CreateWorkspace(string codeWithMarker, TestComposition testComposition);
+        protected abstract TestWorkspace CreateWorkspace(
+            string codeWithMarker,
+            TestComposition testComposition
+        );
 
         protected async Task TestAsync(string codeWithMarker, TestHost host)
         {
             using var workspace = CreateWorkspace(codeWithMarker, host);
 
             var descriptors = TaskListOptions.Default.Descriptors;
-            workspace.GlobalOptions.SetGlobalOption(TaskListOptionsStorage.Descriptors, descriptors);
+            workspace.GlobalOptions.SetGlobalOption(
+                TaskListOptionsStorage.Descriptors,
+                descriptors
+            );
 
             var hostDocument = workspace.Documents.First();
             var initialTextSnapshot = hostDocument.GetTextBuffer().CurrentSnapshot;
@@ -39,7 +50,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TaskList
 
             var document = workspace.CurrentSolution.GetRequiredDocument(documentId);
             var service = document.GetRequiredLanguageService<ITaskListService>();
-            var items = await service.GetTaskListItemsAsync(document, TaskListItemDescriptor.Parse(descriptors), CancellationToken.None);
+            var items = await service.GetTaskListItemsAsync(
+                document,
+                TaskListItemDescriptor.Parse(descriptors),
+                CancellationToken.None
+            );
 
             var expectedLists = hostDocument.SelectedSpans;
             Assert.Equal(items.Length, expectedLists.Count);

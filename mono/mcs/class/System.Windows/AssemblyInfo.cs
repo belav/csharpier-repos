@@ -28,14 +28,14 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle ("System.Windows.dll")]
-[assembly: AssemblyDescription ("System.Windows.dll")]
-[assembly: AssemblyDefaultAlias ("System.Windows.dll")]
+[assembly: AssemblyTitle("System.Windows.dll")]
+[assembly: AssemblyDescription("System.Windows.dll")]
+[assembly: AssemblyDefaultAlias("System.Windows.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: AssemblyDelaySign(true)]

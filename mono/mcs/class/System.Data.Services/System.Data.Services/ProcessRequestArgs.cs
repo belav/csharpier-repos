@@ -28,17 +28,11 @@
 
 namespace System.Data.Services
 {
-	public sealed class ProcessRequestArgs
-	{
-		public DataServiceOperationContext OperationContext {
-			get; private set;
-		}
-		public bool IsBatchOperation {
-			get; private set;
-		}
+    public sealed class ProcessRequestArgs
+    {
+        public DataServiceOperationContext OperationContext { get; private set; }
+        public bool IsBatchOperation { get; private set; }
 
-		public Uri RequestUri {
-			get; private set;
-		}
-	}
+        public Uri RequestUri { get; private set; }
+    }
 }

@@ -16,8 +16,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int HighlightMatchingPortionsOfCompletionListItems
         {
-            get { return GetBooleanOption(CompletionViewOptionsStorage.HighlightMatchingPortionsOfCompletionListItems); }
-            set { SetBooleanOption(CompletionViewOptionsStorage.HighlightMatchingPortionsOfCompletionListItems, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CompletionViewOptionsStorage.HighlightMatchingPortionsOfCompletionListItems
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CompletionViewOptionsStorage.HighlightMatchingPortionsOfCompletionListItems,
+                    value
+                );
+            }
         }
 
         public int ShowCompletionItemFilters
@@ -28,8 +39,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int ShowItemsFromUnimportedNamespaces
         {
-            get { return GetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces); }
-            set { SetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, value); }
+            get
+            {
+                return GetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces);
+            }
+            set
+            {
+                SetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, value);
+            }
         }
 
         public int InsertNewlineOnEnterWithWholeWord
@@ -58,8 +75,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int EnableArgumentCompletionSnippets
         {
-            get { return GetBooleanOption(CompletionViewOptionsStorage.EnableArgumentCompletionSnippets); }
-            set { SetBooleanOption(CompletionViewOptionsStorage.EnableArgumentCompletionSnippets, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CompletionViewOptionsStorage.EnableArgumentCompletionSnippets
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CompletionViewOptionsStorage.EnableArgumentCompletionSnippets,
+                    value
+                );
+            }
         }
     }
 }
